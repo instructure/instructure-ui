@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { Component, ReactNode, SyntheticEvent } from 'react'
 import PropTypes from 'prop-types'
 
 import keycode from 'keycode'
@@ -33,17 +33,115 @@ import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 
 type Props = {
+  /**
+   * The id of the trigger element. Set automatically if not provided
+   */
   id?: string
-  highlightedOptionId?: string
-  selectedOptionId?: string | any[]
+  /**
+   * The id of the option in the list that should be considered highlighted
+   */
+  highlightedOptionId?: string | null
+  /**
+   * The id of the option(s) in the list that should be considered selected
+   */
+  selectedOptionId?: string | string[] | null
+  /**
+   * Whether or not the options should be visible
+   */
   isShowingOptions?: boolean
-  onRequestShowOptions?: (...args: any[]) => any
-  onRequestHideOptions?: (...args: any[]) => any
-  onRequestHighlightOption?: (...args: any[]) => any
-  onRequestHighlightFirstOption?: (...args: any[]) => any
-  onRequestHighlightLastOption?: (...args: any[]) => any
-  onRequestSelectOption?: (...args: any[]) => any
-  render?: (...args: any[]) => any
+  /**
+   * Callback fired when the options want to become visible
+   */
+  onRequestShowOptions?: (event: Event) => void
+  /**
+   * Callback fired when the options no longer want to be visible
+   */
+  onRequestHideOptions?: (event: Event) => void
+  /**
+   * Callback fired when option is hovered or highlighted via keyboard
+   */
+  onRequestHighlightOption?: (
+    event: Event,
+    data: { id?: string; direction?: number }
+  ) => void
+  /**
+   * Callback fired when first option should be highlighted
+   */
+  onRequestHighlightFirstOption?: (event: Event) => void
+  /**
+   * Callback fired when last option should be highlighted
+   */
+  onRequestHighlightLastOption?: (event: Event) => void
+  /**
+   * Callback fired when option clicked or selected via keyboard
+   */
+  onRequestSelectOption?: (event: Event, data: { id?: string }) => void
+  /**
+   * A function with prop getters
+   */
+  render?: (propGetters: SelectableRender) => ReactNode
+  /**
+   * A function with prop getters
+   */
+  children: (propGetters: SelectableRender) => ReactNode
+}
+
+type MouseEventFunction = (event: MouseEvent) => void
+
+export type SelectableRender = {
+  /**
+   * Prop getter for root element
+   */
+  getRootProps: (methods?: {
+    onMouseDown?: MouseEventFunction
+    onClick?: MouseEventFunction
+    [restProps: string]: any
+  }) => Record<string, any>
+  /**
+   * Prop getter for label element
+   */
+  getLabelProps: (props?: Record<string, any>) => Record<string, any>
+  /**
+   * Prop getter for trigger element
+   */
+  getTriggerProps: (methods?: {
+    ref?: (...args: any) => void
+    onKeyDown?: (event: KeyboardEvent) => void
+    onKeyUp?: (event: KeyboardEvent) => void
+    [restProps: string]: any
+  }) => Record<string, any>
+  /**
+   * Prop getter for input element
+   */
+  getInputProps: (methods?: {
+    readOnly?: boolean
+    [restProps: string]: any
+  }) => Record<string, any>
+  /**
+   * Prop getter for list element
+   */
+  getListProps: (methods?: {
+    onMouseDown?: MouseEventFunction
+    onClick?: MouseEventFunction
+    [restProps: string]: any
+  }) => Record<string, any>
+  /**
+   * Prop getter for option elements
+   */
+  getOptionProps: (methods?: {
+    id?: string // TODO this is not optional
+    onMouseOver?: MouseEventFunction
+    onClick?: MouseEventFunction
+    [restProps: string]: any
+  }) => Record<string, any>
+  /**
+   * Prop getter for disabled option elements
+   */
+  getDisabledOptionProps: (props?: Record<string, any>) => Record<string, any>
+  /**
+   * Prop getter for screenreader description element
+   */
+  getDescriptionProps: (props?: Record<string, any>) => Record<string, any>
 }
 
 /**
@@ -54,61 +152,17 @@ tags: autocomplete, typeahead, combobox, dropdown, search
 **/
 class Selectable extends Component<Props> {
   static propTypes = {
-    /**
-     * The id of the trigger element. Set automatically if not provided
-     */
     id: PropTypes.string,
-    /**
-     * The id of the option in the list that should be considered highlighted
-     */
     highlightedOptionId: PropTypes.string,
-    /**
-     * The id of the option(s) in the list that should be considered selected
-     */
     selectedOptionId: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    /**
-     * Whether or not the options should be visible
-     */
     isShowingOptions: PropTypes.bool,
-    /**
-     * Callback fired when the options want to become visible
-     */
     onRequestShowOptions: PropTypes.func,
-    /**
-     * Callback fired when the options no longer want to be visible
-     */
     onRequestHideOptions: PropTypes.func,
-    /**
-     * Callback fired when option is hovered or highlighted via keyboard
-     */
     onRequestHighlightOption: PropTypes.func,
-    /**
-     * Callback fired when first option should be highlighted
-     */
     onRequestHighlightFirstOption: PropTypes.func,
-    /**
-     * Callback fired when last option should be highlighted
-     */
     onRequestHighlightLastOption: PropTypes.func,
-    /**
-     * Callback fired when option clicked or selected via keyboard
-     */
     onRequestSelectOption: PropTypes.func,
-    /**
-     * @param {Object} renderProps
-     * @param {Function} renderProps.getRootProps - Prop getter for root element
-     * @param {Function} renderProps.getLabelProps - Prop getter for label element
-     * @param {Function} renderProps.getTriggerProps - Prop getter for trigger element
-     * @param {Function} renderProps.getInputProps - Prop getter for input element
-     * @param {Function} renderProps.getListProps - Prop getter for list element
-     * @param {Function} renderProps.getOptionProps - Prop getter for option elements
-     * @param {Function} renderProps.getDisabledOptionProps - Prop getter for disabled option elements
-     * @param {Function} renderProps.getDescriptionProps - Prop getter for screenreader description element
-     */
     children: PropTypes.func,
-    /**
-     * Identical to children
-     */
     render: PropTypes.func
   }
 
@@ -117,18 +171,18 @@ class Selectable extends Component<Props> {
     highlightedOptionId: null,
     selectedOptionId: null,
     isShowingOptions: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestShowOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestHideOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestHighlightOption: (event, data) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestHighlightFirstOption: (event, data) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestHighlightLastOption: (event, data) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestSelectOption: (event, data) => {},
+    onRequestShowOptions: (_event: Event) => {},
+    onRequestHideOptions: (_event: Event) => {},
+    onRequestHighlightOption: (
+      _event: Event,
+      _data: Record<string, unknown>
+    ) => {},
+    onRequestHighlightFirstOption: (_event: Event) => {},
+    onRequestHighlightLastOption: (_event: Event) => {},
+    onRequestSelectOption: (
+      _event: Event,
+      _data: Record<string, unknown>
+    ) => {},
     children: null,
     render: undefined
   }
@@ -136,9 +190,9 @@ class Selectable extends Component<Props> {
   _id = this.props.id || uid('Selectable')
   _listId = `${this._id}-list`
   _descriptionId = `${this._id}-description`
+  private _trigger?: HTMLElement
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'id' implicitly has an 'any' type.
-  isSelectedOption = (id) => {
+  isSelectedOption = (id: string) => {
     const { selectedOptionId } = this.props
 
     if (Array.isArray(selectedOptionId)) {
@@ -147,29 +201,26 @@ class Selectable extends Component<Props> {
     return selectedOptionId === id
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleOpenClose = (event) => {
-    const { isShowingOptions, onRequestShowOptions, onRequestHideOptions } =
-      this.props
+  handleOpenClose = (event: KeyboardEvent) => {
+    const {
+      isShowingOptions,
+      onRequestShowOptions,
+      onRequestHideOptions
+    } = this.props
 
     event.preventDefault()
 
     if (isShowingOptions) {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      onRequestHideOptions(event)
+      onRequestHideOptions!(event)
     } else {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_trigger' does not exist on type 'Select... Remove this comment to see the full error message
       if (!isActiveElement(this._trigger)) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_trigger' does not exist on type 'Select... Remove this comment to see the full error message
-        this._trigger.focus()
+        this._trigger!.focus()
       }
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      onRequestShowOptions(event)
+      onRequestShowOptions!(event)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleKeyDown = (event) => {
+  handleKeyDown = (event: KeyboardEvent) => {
     const {
       isShowingOptions,
       highlightedOptionId,
@@ -192,16 +243,14 @@ class Selectable extends Component<Props> {
         if (highlightedOptionId) {
           // select highlighted option
           event.preventDefault()
-          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-          onRequestSelectOption(event, { id: highlightedOptionId })
+          onRequestSelectOption!(event, { id: highlightedOptionId })
         }
         break
       case 'down':
         event.preventDefault()
         if (isShowingOptions) {
           // if options showing, change highlight
-          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-          onRequestHighlightOption(event, { direction: 1 })
+          onRequestHighlightOption!(event, { direction: 1 })
         } else {
           // otherwise, show options
           this.handleOpenClose(event)
@@ -211,8 +260,7 @@ class Selectable extends Component<Props> {
         event.preventDefault()
         if (isShowingOptions) {
           // if options showing, change highlight
-          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-          onRequestHighlightOption(event, { direction: -1 })
+          onRequestHighlightOption!(event, { direction: -1 })
         } else {
           // otherwise, show options
           this.handleOpenClose(event)
@@ -222,23 +270,20 @@ class Selectable extends Component<Props> {
         if (isShowingOptions) {
           // if options showing, highlight first option
           event.preventDefault()
-          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-          onRequestHighlightFirstOption(event)
+          onRequestHighlightFirstOption!(event)
         }
         break
       case 'end':
         if (isShowingOptions) {
           // if options showing, highlight last option
           event.preventDefault()
-          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-          onRequestHighlightLastOption(event)
+          onRequestHighlightLastOption!(event)
         }
         break
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleKeyUp = (event) => {
+  handleKeyUp = (event: KeyboardEvent) => {
     const { isShowingOptions } = this.props
     const key = keycode.names[event.keyCode]
 
@@ -262,12 +307,10 @@ class Selectable extends Component<Props> {
 
     if (typeof render === 'function') {
       return render({
-        // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getRootProps: ({ onMouseDown, onClick, ...rest } = {}) => {
           return {
             onClick: createChainedFunction(this.handleOpenClose, onClick),
-            onMouseDown: createChainedFunction((event) => {
-              // @ts-expect-error ts-migrate(2339) FIXME: Property '_trigger' does not exist on type 'Select... Remove this comment to see the full error message
+            onMouseDown: createChainedFunction((event: Event) => {
               if (event.target !== this._trigger) {
                 event.preventDefault() // prevent trigger from losing focus
               }
@@ -276,7 +319,6 @@ class Selectable extends Component<Props> {
           }
         },
 
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
         getLabelProps: (props) => {
           return {
             htmlFor: this._id,
@@ -284,11 +326,9 @@ class Selectable extends Component<Props> {
           }
         },
 
-        // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getTriggerProps: ({ ref, onKeyDown, onKeyUp, ...rest } = {}) => {
           return {
             id: this._id,
-            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
             ref: createChainedFunction(ref, (el) => (this._trigger = el)),
             'aria-haspopup': 'listbox',
             'aria-expanded': isShowingOptions,
@@ -304,7 +344,6 @@ class Selectable extends Component<Props> {
           }
         },
 
-        // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getInputProps: ({ readOnly, ...rest } = {}) => {
           return {
             role: 'combobox',
@@ -315,15 +354,14 @@ class Selectable extends Component<Props> {
           }
         },
 
-        // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getListProps: ({ onMouseDown, onClick, ...rest } = {}) => {
           return {
             id: this._listId,
             role: 'listbox',
-            onMouseDown: createChainedFunction((event) => {
+            onMouseDown: createChainedFunction((event: Event) => {
               event.preventDefault() // prevent trigger from losing focus
             }, onMouseDown),
-            onClick: createChainedFunction((event) => {
+            onClick: createChainedFunction((event: SyntheticEvent) => {
               // prevent synthetic event from firing on the document
               // this event could inadvertently close a parent dialog
               event.stopPropagation()
@@ -333,29 +371,25 @@ class Selectable extends Component<Props> {
           }
         },
 
-        // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getOptionProps: ({ id, onMouseOver, onClick, ...rest } = {}) => {
           error(
-            id,
+            Boolean(id),
             `[Selectable] Must provide id for each option via \`getOptionProps\`.`
           )
           return {
             id,
             role: 'option',
-            'aria-selected': this.isSelectedOption(id) ? 'true' : 'false',
+            'aria-selected': this.isSelectedOption(id!) ? 'true' : 'false',
             onClick: createChainedFunction((event) => {
-              // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-              onRequestSelectOption(event, { id })
+              onRequestSelectOption!(event, { id })
             }, onClick),
             onMouseOver: createChainedFunction((event) => {
-              // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-              onRequestHighlightOption(event, { id })
+              onRequestHighlightOption!(event, { id })
             }, onMouseOver),
             ...rest
           }
         },
 
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
         getDisabledOptionProps: (props) => {
           return {
             'aria-disabled': 'true',
@@ -363,7 +397,6 @@ class Selectable extends Component<Props> {
           }
         },
 
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
         getDescriptionProps: (props) => {
           return {
             id: this._descriptionId,

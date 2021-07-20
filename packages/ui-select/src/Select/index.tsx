@@ -505,8 +505,10 @@ class Select extends Component<Props> {
             // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
             onRequestHideOptions(event)
           },
-          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-          onRequestHighlightOption: (event, { id, direction }) => {
+          onRequestHighlightOption: (
+            event: Event,
+            { id, direction }: { id?: string; direction?: number }
+          ) => {
             if (!isShowingOptions) return
             // if id exists, use that
             // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
@@ -520,7 +522,7 @@ class Select extends Component<Props> {
                 // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'null' is not assignable to param... Remove this comment to see the full error message
                 const index = this._optionIds.indexOf(highlightedOptionId)
                 highlightId =
-                  index > -1 ? this._optionIds[index + direction] : null
+                  index > -1 ? this._optionIds[index + direction!] : null
               }
             }
             if (highlightId) {
@@ -539,8 +541,7 @@ class Select extends Component<Props> {
               this._optionIds[this._optionIds.length - 1]
             )
           },
-          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-          onRequestSelectOption: (event, { id }) => {
+          onRequestSelectOption: (event: Event, { id }: { id?: string }) => {
             // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
             if (id && this._optionIds.indexOf(id) !== -1) {
               // only select if id exists as a valid option
@@ -656,8 +657,12 @@ class Select extends Component<Props> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'data' implicitly has an 'any' type.
   renderList(data) {
     const { getListProps, getOptionProps, getDisabledOptionProps } = data
-    const { isShowingOptions, optionsMaxWidth, visibleOptionsCount, children } =
-      this.props
+    const {
+      isShowingOptions,
+      optionsMaxWidth,
+      visibleOptionsCount,
+      children
+    } = this.props
 
     let lastWasGroup = false
     const viewProps = isShowingOptions
@@ -815,26 +820,18 @@ class Select extends Component<Props> {
 
     return (
       <Selectable
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         highlightedOptionId={highlightedOptionId}
         isShowingOptions={isShowingOptions}
         selectedOptionId={selectedOptionId ? selectedOptionId : null}
         {...this.getEventHandlers()}
       >
         {({
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getRootProps' implicitly has an '... Remove this comment to see the full error message
           getRootProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getInputProps' implicitly has an ... Remove this comment to see the full error message
           getInputProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getTriggerProps' implicitly has a... Remove this comment to see the full error message
           getTriggerProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getListProps' implicitly has an '... Remove this comment to see the full error message
           getListProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getOptionProps' implicitly has an... Remove this comment to see the full error message
           getOptionProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getDisabledOptionProps' implicitl... Remove this comment to see the full error message
           getDisabledOptionProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getDescriptionProps' implicitly h... Remove this comment to see the full error message
           getDescriptionProps
         }) => (
           <span {...getRootProps({ css: styles.select })}>
