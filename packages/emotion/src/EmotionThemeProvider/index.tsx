@@ -87,6 +87,7 @@ type ThemeProviderProps = {
  * ```
  *
  * @param {object} theme - A full theme or an override object
+ * @module EmotionThemeProvider
  */
 function EmotionThemeProvider({
   children,
@@ -105,6 +106,7 @@ function EmotionThemeProvider({
  *
  * @param {object} themeOrOverride - A full theme or an override object
  * @returns {function} A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
+ * @module getTheme
  */
 const getTheme = (themeOrOverride: ThemeOrOverride) => (
   ancestorTheme: BaseTheme = canvas
