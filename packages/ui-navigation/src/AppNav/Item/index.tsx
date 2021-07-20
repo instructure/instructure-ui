@@ -30,7 +30,8 @@ import {
   callRenderProp,
   getElementType,
   matchComponentTypes,
-  passthroughProps
+  passthroughProps,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -51,7 +52,7 @@ type Props = {
   onClick?: (...args: any[]) => any
   isSelected?: boolean
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: AsElementType
   cursor?: string
   isDisabled?: boolean
 }

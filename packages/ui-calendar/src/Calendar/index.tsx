@@ -30,7 +30,8 @@ import { View } from '@instructure/ui-view'
 import {
   safeCloneElement,
   callRenderProp,
-  omitProps
+  omitProps,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
@@ -55,7 +56,7 @@ type Props = {
   renderWeekdayLabels: (React.ReactNode | ((...args: any[]) => any))[]
   onRequestRenderNextMonth?: (...args: any[]) => any
   onRequestRenderPrevMonth?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: AsElementType
   role?: 'table' | 'listbox'
 }
 

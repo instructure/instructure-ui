@@ -29,7 +29,11 @@ import PropTypes from 'prop-types'
 import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
-import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
+import {
+  getInteraction,
+  passthroughProps,
+  AsElementType
+} from '@instructure/ui-react-utils'
 
 import {
   withStyle,
@@ -55,7 +59,7 @@ type Props = {
   placement?: 'start' | 'end' | 'static'
   offset?: 'none' | 'x-small' | 'small' | 'medium'
   type?: 'button' | 'submit' | 'reset'
-  as?: React.ReactElement
+  as?: AsElementType
   href?: string
   cursor?: string
   tabIndex?: number | string

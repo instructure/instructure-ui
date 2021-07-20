@@ -35,7 +35,7 @@ import {
   Stacking
 } from '@instructure/emotion'
 import { PositionPropTypes, mirrorPlacement } from '@instructure/ui-position'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, AsElementType } from '@instructure/ui-react-utils'
 
 import { View } from '../View'
 import generateStyle from './styles'
@@ -43,7 +43,7 @@ import generateComponentTheme from './theme'
 import { OtherHTMLAttributes } from '@instructure/ui-prop-types'
 
 type Props = {
-  as?: React.ReactElement
+  as?: AsElementType
   elementRef?: (...args: any[]) => any
   height?: string | number
   width?: string | number

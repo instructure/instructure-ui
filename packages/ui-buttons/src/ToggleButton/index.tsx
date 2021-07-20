@@ -33,7 +33,11 @@ import {
   PositionPropTypes
 } from '@instructure/ui-position'
 
-import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import {
+  callRenderProp,
+  passthroughProps,
+  AsElementType
+} from '@instructure/ui-react-utils'
 
 import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '../IconButton'
@@ -42,7 +46,7 @@ type Props = {
   renderTooltipContent: React.ReactNode | ((...args: any[]) => any)
   renderIcon: React.ReactNode | ((...args: any[]) => any)
   status: 'pressed' | 'unpressed'
-  as?: React.ReactElement
+  as?: AsElementType
   interaction?: 'enabled' | 'disabled' | 'readonly'
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any

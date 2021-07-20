@@ -143,7 +143,6 @@ describe('<IconButton/>', async () => {
 
   it('should pass the `as` prop', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <IconButton screenReaderLabel="some action" renderIcon={icon} as="li" />
     )
     const button = await IconButtonLocator.find()

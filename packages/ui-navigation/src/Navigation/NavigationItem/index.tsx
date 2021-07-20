@@ -26,7 +26,11 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  getElementType,
+  AsElementType
+} from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -39,7 +43,7 @@ type Props = {
   styles?: any
   icon: React.ReactNode
   label: React.ReactNode
-  as?: React.ReactElement
+  as?: AsElementType
   href?: string
   onClick?: (...args: any[]) => any
   selected?: boolean

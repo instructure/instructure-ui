@@ -27,7 +27,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { passthroughProps, AsElementType } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import {
@@ -67,7 +67,7 @@ type Props = {
   display?: 'inline-block' | 'block'
   margin?: Spacing
   onImageLoaded?: (...args: any[]) => any
-  as?: React.ReactElement | string
+  as?: AsElementType
   elementRef?: (...args: any[]) => any
 }
 

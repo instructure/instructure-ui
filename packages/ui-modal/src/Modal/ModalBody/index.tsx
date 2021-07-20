@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, AsElementType } from '@instructure/ui-react-utils'
 
 import {
   withStyle,
@@ -42,7 +42,7 @@ import generateComponentTheme from './theme'
 type Props = {
   padding?: Spacing
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: AsElementType
   variant?: 'default' | 'inverse'
   overflow?: 'scroll' | 'fit'
   makeStyles?: (...args: any[]) => any

@@ -36,12 +36,13 @@ import {
   Shadow,
   Stacking
 } from '@instructure/emotion'
+import { AsElementType } from '@instructure/ui-react-utils'
 
 export type ViewOwnProps = {
   /**
    * The element to render as the component root, `span` by default
    */
-  as?: React.ReactElement | string
+  as?: AsElementType
   /**
    * provides a reference to the underlying html element
    */

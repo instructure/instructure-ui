@@ -30,7 +30,8 @@ import {
   safeCloneElement,
   passthroughProps,
   matchComponentTypes,
-  callRenderProp
+  callRenderProp,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 import {
@@ -46,7 +47,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 export type Props = {
-  as?: React.ReactElement
+  as?: AsElementType
   elementRef?: (...args: any[]) => any
   height?: string | number
   width?: string | number
