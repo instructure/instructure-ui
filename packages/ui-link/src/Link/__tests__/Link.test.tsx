@@ -259,7 +259,6 @@ describe('<Link />', async () => {
 
     describe('without `onClick`', async () => {
       it('should render designated tag', async () => {
-        // @ts-expect-error FIXME remove this line to see the error
         await mount(<Link as="a">Hello World</Link>)
         const componentRoot = await LinkLocator.find()
         const link = await componentRoot.findWithText('Hello World')
@@ -267,7 +266,6 @@ describe('<Link />', async () => {
       })
 
       it('should not set role="button"', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(<Link as="span">Hello World</Link>)
         expect(
           await LinkLocator.find('[role="button"]', {
@@ -277,7 +275,6 @@ describe('<Link />', async () => {
       })
 
       it('should not set type="button"', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(<Link as="span">Hello World</Link>)
         expect(
           await LinkLocator.find('[type="button"]', {
@@ -287,7 +284,6 @@ describe('<Link />', async () => {
       })
 
       it('should not set tabIndex="0"', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(<Link as="span">Hello World</Link>)
         expect(
           await LinkLocator.find('[tabIndex="0"]', {

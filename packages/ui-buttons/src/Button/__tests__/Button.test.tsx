@@ -116,7 +116,6 @@ describe('<Button/>', async () => {
   })
 
   it('should pass the `as` prop', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Button as="li">Hello</Button>)
 
     const button = await ButtonLocator.find()
@@ -202,7 +201,6 @@ describe('<Button/>', async () => {
   })
 
   it('should render designated tag if `as` prop is specified', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Button as="span">Hello World</Button>)
     const span = await ButtonLocator.find()
     expect(span.getTagName()).to.equal('span')

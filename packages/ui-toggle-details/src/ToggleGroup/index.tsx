@@ -28,7 +28,8 @@ import PropTypes from 'prop-types'
 import {
   omitProps,
   pickProps,
-  getElementType
+  getElementType,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { IconButton } from '@instructure/ui-buttons'
 import { Transition } from '@instructure/ui-motion'
@@ -46,7 +47,7 @@ import { testable } from '@instructure/ui-testable'
 type Props = {
   summary: React.ReactNode
   toggleLabel: React.ReactNode | ((...args: any[]) => any)
-  as?: React.ReactElement
+  as?: AsElementType
   elementRef?: (...args: any[]) => any
   size?: 'small' | 'medium' | 'large'
   expanded?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')

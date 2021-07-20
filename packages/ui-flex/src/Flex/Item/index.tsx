@@ -26,7 +26,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, AsElementType } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 import {
   withStyle,
@@ -40,7 +40,7 @@ import generateStyle from './styles'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  as?: React.ReactElement
+  as?: AsElementType
   elementRef?: (...args: any[]) => any
   margin?: Spacing
   padding?: Spacing

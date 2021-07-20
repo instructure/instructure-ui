@@ -84,7 +84,6 @@ describe('<Badge />', () => {
 
   it('should not render a wrapper for a standalone Badge', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'undefined... Remove this comment to see the full error message
       <Badge count={100} as="li" standalone={true}>
         <button type="button">Inbox</button>
       </Badge>

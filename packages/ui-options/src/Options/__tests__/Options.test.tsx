@@ -60,7 +60,6 @@ describe('<Options />', async () => {
   it('should provide elementRef', async () => {
     const elementRef = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options elementRef={elementRef} as="ul">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
@@ -74,7 +73,6 @@ describe('<Options />', async () => {
 
   it('should render designated tag if `as` prop is specified', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options as="ol">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
@@ -88,7 +86,6 @@ describe('<Options />', async () => {
 
   it('should render children as listitems when appropriate', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options as="ul">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
@@ -104,7 +101,6 @@ describe('<Options />', async () => {
 
   it('should pass props through to list', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options as="ul" role="listbox" data-custom-attr="true">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>

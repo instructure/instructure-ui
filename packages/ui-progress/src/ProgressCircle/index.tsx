@@ -28,7 +28,11 @@ import PropTypes from 'prop-types'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { View } from '@instructure/ui-view'
-import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import {
+  callRenderProp,
+  passthroughProps,
+  AsElementType
+} from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import {
@@ -56,7 +60,7 @@ type Props = {
     | ('info' | 'warning' | 'danger' | 'alert' | 'success' | 'brand')
   margin?: Spacing
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: AsElementType
   shouldAnimateOnMount?: boolean
   animationDelay?: number
 }

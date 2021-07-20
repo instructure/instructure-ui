@@ -628,8 +628,8 @@ class Select extends Component<Props> {
     // a wrapping listitem will be created by Options
     groupChildren.push(
       <Options
-        id={id}
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
+        id={id}
         as="ul"
         role="group"
         renderLabel={renderLabel}

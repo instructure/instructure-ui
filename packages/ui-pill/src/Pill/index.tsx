@@ -29,7 +29,7 @@ import PropTypes from 'prop-types'
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { TruncateText } from '@instructure/ui-truncate-text'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { passthroughProps, AsElementType } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import {
@@ -45,7 +45,7 @@ import generateComponentTheme from './theme'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  as?: React.ReactElement
+  as?: AsElementType
   color?: 'primary' | 'success' | 'danger' | 'info' | 'warning' | 'alert'
   elementRef?: (...args: any[]) => any
   margin?: Spacing

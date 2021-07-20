@@ -26,7 +26,11 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
+import {
+  callRenderProp,
+  omitProps,
+  AsElementType
+} from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { logError as error } from '@instructure/console'
@@ -49,7 +53,7 @@ type Props = {
   variant?: 'default' | 'inverse'
   margin?: Spacing
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: AsElementType
 }
 
 /**

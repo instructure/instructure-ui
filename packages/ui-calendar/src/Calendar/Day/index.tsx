@@ -31,7 +31,8 @@ import { AccessibleContent } from '@instructure/ui-a11y-content'
 import {
   omitProps,
   callRenderProp,
-  getElementType
+  getElementType,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { I18nPropTypes } from '@instructure/ui-i18n'
 
@@ -54,7 +55,7 @@ type Props = {
   onClick?: (...args: any[]) => any
   onKeyDown?: (...args: any[]) => any
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: AsElementType
 }
 
 /**

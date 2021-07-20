@@ -180,7 +180,6 @@ describe('<ToggleButton />', async () => {
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
         renderTooltipContent="This is tooltip content"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'ReactElem... Remove this comment to see the full error message
         as="li"
         status="pressed"
       />

@@ -36,7 +36,6 @@ describe('<FormFieldLabel />', async () => {
   })
 
   it('should render as specified via the `as` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldLabel as="li">Foo</FormFieldLabel>)
 
     const formFieldLabel = within(subject.getDOMNode())

@@ -26,7 +26,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
+import {
+  getInteraction,
+  passthroughProps,
+  AsElementType
+} from '@instructure/ui-react-utils'
 
 import { withStyle, ThemeablePropTypes, Spacing } from '@instructure/emotion'
 
@@ -37,7 +41,7 @@ type Props = {
   type?: 'button' | 'submit' | 'reset'
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: AsElementType
   interaction?: 'enabled' | 'disabled' | 'readonly'
   color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
   focusColor?: 'info' | 'inverse'
