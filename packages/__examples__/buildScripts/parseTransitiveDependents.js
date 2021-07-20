@@ -21,26 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+const { getCommand } = require('@instructure/command-utils')
+const execa = require('execa')
+const { getTransitiveDependents } = require('./getTransitiveDependents')
 /**
- * @param {string[]} packages - packages that are changed
- * @returns {string[]} the packages with their transitive dependents included
+ *  Returns the raw output from `lerna ls --scope @instructure/ui-view  --include-dependents`
+ *  for all of the changed packages.
+ *
+ * @param {string[]} packages - packages to parse transitive dependents
+ * @returns {Promise<[{name: string, version: string, private: boolean, location: string}]>}
  */
-function getTransitiveDependents(packages) {
-  const parsedOutput = packages.map((parsed) => {
-    const [, packageName] = parsed.name.split('/')
+async function parseTransitiveDependents(packages = []) {
+  const command = getCommand('lerna')
 
-    return packageName
-  })
+  try {
+    const rawPackages = await Promise.all(
+      packages.map((pckg) => {
+        return execa(command.toString(), [
+          'ls',
+          '--scope',
+          `@instructure/${pckg}`,
+          '--include-dependents',
+          '--json',
+          '--loglevel',
+          'silent'
+        ])
+      })
+    )
 
-  const uiPackages = parsedOutput
-    .filter(Boolean)
-    .filter((key) => key.startsWith('ui-'))
-
-  // remove duplicates
-  return Array.from(new Set(uiPackages))
+    return rawPackages.map((output) => JSON.parse(output.stdout)).flat()
+  } catch (error) {
+    console.error('Possible undifned package given as input!')
+    process.exit(error.exitCode)
+  }
 }
 
 module.exports = {
-  getTransitiveDependents
+  parseTransitiveDependents
 }
