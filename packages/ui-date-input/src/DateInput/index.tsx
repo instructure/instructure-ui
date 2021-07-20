@@ -382,8 +382,10 @@ class DateInput extends Component<Props> {
     onRequestHideCalendar(event)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleHighlightOption = (event, { direction }) => {
+  handleHighlightOption = (
+    event: Event,
+    { direction }: { direction?: number }
+  ) => {
     const { onRequestSelectNextDay, onRequestSelectPrevDay } = this.props
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     if (direction === -1) onRequestSelectPrevDay(event)
@@ -516,17 +518,11 @@ class DateInput extends Component<Props> {
         highlightedOptionId={selectedDateId}
       >
         {({
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getRootProps' implicitly has an '... Remove this comment to see the full error message
           getRootProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getInputProps' implicitly has an ... Remove this comment to see the full error message
           getInputProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getTriggerProps' implicitly has a... Remove this comment to see the full error message
           getTriggerProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getListProps' implicitly has an '... Remove this comment to see the full error message
           getListProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getOptionProps' implicitly has an... Remove this comment to see the full error message
           getOptionProps,
-          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getDescriptionProps' implicitly h... Remove this comment to see the full error message
           getDescriptionProps
         }) => (
           <span {...getRootProps({ css: styles.dateInput })}>

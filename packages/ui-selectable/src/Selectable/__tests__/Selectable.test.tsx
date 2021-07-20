@@ -35,15 +35,13 @@ import {
   findWithText
 } from '@instructure/ui-test-utils'
 
-import { Selectable } from '../index'
+import { Selectable, SelectableRender } from '../index'
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 describe('<Selectable />', async () => {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'spy' implicitly has an 'any' type.
-  const lastCall = (spy) => spy.lastCall.args
+  const lastCall = (spy: any) => spy.lastCall.args
   const defaultOptions = ['foo', 'bar', 'baz']
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message
-  const getSelectable = (selectable) => (
+  const getSelectable = (selectable: SelectableRender) => (
     <span {...selectable.getRootProps()}>
       <label {...selectable.getLabelProps()}>Selectable</label>
       <input
@@ -64,7 +62,6 @@ describe('<Selectable />', async () => {
   it('should focus trigger when root is clicked', async () => {
     const subject = await mount(
       <Selectable>
-        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
         {(selectable) => (
           <span {...selectable.getRootProps()}>
             <label {...selectable.getLabelProps()}>Selectable</label>
@@ -100,7 +97,6 @@ describe('<Selectable />', async () => {
 
     const subject = await mount(
       <Selectable>
-        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
         {(selectable) => (
           <span {...selectable.getRootProps()}>
             <label {...selectable.getLabelProps()}>Selectable</label>
@@ -146,7 +142,6 @@ describe('<Selectable />', async () => {
         isShowingOptions={true}
         onRequestHideOptions={onRequestHideOptions}
       >
-        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
         {(selectable) => (
           <span {...selectable.getRootProps()}>
             <label {...selectable.getLabelProps()}>Selectable</label>
@@ -190,7 +185,6 @@ describe('<Selectable />', async () => {
         isShowingOptions={true}
         onRequestHideOptions={onRequestHideOptions}
       >
-        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
         {(selectable) => (
           <span {...selectable.getRootProps()}>
             <label {...selectable.getLabelProps()}>Selectable</label>
@@ -238,7 +232,6 @@ describe('<Selectable />', async () => {
     const onKeyDown = stub()
     await mount(
       <Selectable>
-        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
         {(selectable) => (
           <span {...selectable.getRootProps()}>
             <label {...selectable.getLabelProps()}>Selectable</label>
@@ -286,7 +279,6 @@ describe('<Selectable />', async () => {
             isShowingOptions={false}
             onRequestShowOptions={onRequestShowOptions}
           >
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -309,7 +301,6 @@ describe('<Selectable />', async () => {
             isShowingOptions={false}
             onRequestShowOptions={onRequestShowOptions}
           >
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -332,7 +323,6 @@ describe('<Selectable />', async () => {
             isShowingOptions={false}
             onRequestShowOptions={onRequestShowOptions}
           >
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -350,7 +340,6 @@ describe('<Selectable />', async () => {
 
         const subject = await mount(
           <Selectable onRequestShowOptions={onRequestShowOptions}>
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -373,7 +362,6 @@ describe('<Selectable />', async () => {
             isShowingOptions={true}
             onRequestHideOptions={onRequestHideOptions}
           >
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -396,7 +384,6 @@ describe('<Selectable />', async () => {
             isShowingOptions={true}
             onRequestHideOptions={onRequestHideOptions}
           >
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -426,7 +413,6 @@ describe('<Selectable />', async () => {
               isShowingOptions={true}
               onRequestHideOptions={onRequestHideOptions}
             >
-              {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
               {(selectable) => getSelectable(selectable)}
             </Selectable>
           </div>
@@ -445,7 +431,6 @@ describe('<Selectable />', async () => {
 
         await mount(
           <Selectable onRequestHighlightOption={onRequestHighlightOption}>
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -475,7 +460,6 @@ describe('<Selectable />', async () => {
             onRequestShowOptions={onRequestShowOptions}
             onRequestHighlightOption={onRequestHighlightOption}
           >
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -518,7 +502,6 @@ describe('<Selectable />', async () => {
             onRequestHighlightFirstOption={onRequestHighlightFirstOption}
             onRequestHighlightLastOption={onRequestHighlightLastOption}
           >
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -543,7 +526,6 @@ describe('<Selectable />', async () => {
             highlightedOptionId={defaultOptions[1]}
             onRequestSelectOption={onRequestSelectOption}
           >
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -563,7 +545,6 @@ describe('<Selectable />', async () => {
             isShowingOptions={true}
             onRequestSelectOption={onRequestSelectOption}
           >
-            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -583,7 +564,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -596,7 +576,6 @@ describe('<Selectable />', async () => {
     it('should allow custom props to pass through', async () => {
       const subject = await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span
               {...selectable.getRootProps({
@@ -629,7 +608,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable onRequestShowOptions={onRequestShowOptions}>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps({ onClick })}>
               <input
@@ -659,7 +637,6 @@ describe('<Selectable />', async () => {
           highlightedOptionId={defaultOptions[1]}
           onRequestHighlightOption={onRequestHighlightOption}
         >
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps({ onKeyDown })}>
               <input
@@ -687,7 +664,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -700,7 +676,6 @@ describe('<Selectable />', async () => {
     it('should set htmlFor prop', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <label {...selectable.getLabelProps()}>Selectable</label>
@@ -724,7 +699,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable id={id}>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <label {...selectable.getLabelProps()}>Selectable</label>
@@ -747,7 +721,6 @@ describe('<Selectable />', async () => {
     it('should allow custom props to pass through', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <label
@@ -782,7 +755,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -795,7 +767,6 @@ describe('<Selectable />', async () => {
     it('should set appropriate prop defaults', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -817,7 +788,6 @@ describe('<Selectable />', async () => {
     it('should set appropriate props based on isShowingOptions', async () => {
       const subject = await mount(
         <Selectable isShowingOptions={false}>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -844,7 +814,6 @@ describe('<Selectable />', async () => {
     it('should set appropriate props based on highlightedOptionId', async () => {
       const subject = await mount(
         <Selectable isShowingOptions={true}>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -879,7 +848,6 @@ describe('<Selectable />', async () => {
     it('should allow custom props to pass through', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -903,7 +871,6 @@ describe('<Selectable />', async () => {
     it('should allow props to be overridden', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -927,7 +894,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -947,7 +913,6 @@ describe('<Selectable />', async () => {
     it('should allow custom props to pass through', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -973,7 +938,6 @@ describe('<Selectable />', async () => {
     it('should allow props to be overridden', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -999,7 +963,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable onRequestShowOptions={onRequestShowOptions}>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps()}>
               <input
@@ -1029,7 +992,6 @@ describe('<Selectable />', async () => {
           highlightedOptionId={defaultOptions[1]}
           onRequestHighlightOption={onRequestHighlightOption}
         >
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps()}>
               <input
@@ -1058,7 +1020,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -1071,7 +1032,6 @@ describe('<Selectable />', async () => {
     it('should set appropriate prop defaults', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getInputProps()} />
@@ -1089,7 +1049,6 @@ describe('<Selectable />', async () => {
     it('should set appropriate props when readOnly', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -1110,7 +1069,6 @@ describe('<Selectable />', async () => {
     it('should allow props to be overridden', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -1132,7 +1090,6 @@ describe('<Selectable />', async () => {
     it('should allow custom props to pass through', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -1162,7 +1119,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -1175,7 +1131,6 @@ describe('<Selectable />', async () => {
     it('should set appropriate prop defaults', async () => {
       await mount(
         <Selectable isShowingOptions={true}>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps()}>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -1193,7 +1148,6 @@ describe('<Selectable />', async () => {
     it('should allow custom props to pass through', async () => {
       await mount(
         <Selectable isShowingOptions={true}>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps()}>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -1222,7 +1176,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -1235,7 +1188,6 @@ describe('<Selectable />', async () => {
     it('should set appropriate prop defaults', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -1259,7 +1211,6 @@ describe('<Selectable />', async () => {
     it('should set aria-selected based on selectedOptionId', async () => {
       const subject = await mount(
         <Selectable selectedOptionId={defaultOptions[1]}>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -1292,7 +1243,6 @@ describe('<Selectable />', async () => {
     it('should allow custom props to pass through', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -1332,7 +1282,6 @@ describe('<Selectable />', async () => {
           isShowingOptions={true}
           onRequestHighlightOption={onRequestHighlightOption}
         >
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getInputProps()} />
@@ -1369,7 +1318,6 @@ describe('<Selectable />', async () => {
           isShowingOptions={true}
           onRequestSelectOption={onRequestSelectOption}
         >
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getInputProps()} />
@@ -1403,7 +1351,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -1416,7 +1363,6 @@ describe('<Selectable />', async () => {
     it('should set aria-disabled prop', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -1450,7 +1396,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -1463,7 +1408,6 @@ describe('<Selectable />', async () => {
     it('should set aria-disabled prop', async () => {
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -1497,7 +1441,6 @@ describe('<Selectable />', async () => {
 
       await mount(
         <Selectable>
-          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
