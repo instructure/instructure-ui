@@ -63,6 +63,7 @@ type Props = {
 ---
 category: components
 ---
+test
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
