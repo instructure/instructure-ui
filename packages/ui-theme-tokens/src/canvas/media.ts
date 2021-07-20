@@ -28,7 +28,7 @@ const media = Object.freeze({
   mediumMin: `min-width: ${breakpoints.medium}`,
   largeMin: `min-width: ${breakpoints.large}`,
   xLargeMin: `min-width: ${breakpoints.xLarge}`
-})
+} as const)
 
 export default media
 export { media }

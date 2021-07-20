@@ -23,7 +23,6 @@
  */
 
 // use for consistent box shadows
-
 const values = [
   '0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1)',
   '0 0.1875rem 0.375rem rgba(0, 0, 0, 0.1), 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.16)',
@@ -38,7 +37,7 @@ const shadows = Object.freeze({
   resting: values[0],
   above: values[1],
   topmost: values[2]
-})
+} as const)
 
 export default shadows
 export { shadows }

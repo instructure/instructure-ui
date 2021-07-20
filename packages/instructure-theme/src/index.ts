@@ -23,6 +23,7 @@
  */
 
 import { instructure } from '@instructure/ui-theme-tokens'
+import { BaseTheme } from '@instructure/types'
 
 const {
   borders,
@@ -39,7 +40,7 @@ const {
 
 const key = 'instructure'
 
-const theme = {
+const theme: BaseTheme = {
   key,
   ...instructure
 }

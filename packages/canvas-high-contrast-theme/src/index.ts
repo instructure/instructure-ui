@@ -23,6 +23,7 @@
  */
 
 import { canvasHighContrast } from '@instructure/ui-theme-tokens'
+import { BaseTheme } from '@instructure/types'
 
 const {
   borders,
@@ -39,7 +40,7 @@ const {
 
 const key = 'canvas-high-contrast'
 
-const theme = {
+const theme: BaseTheme = {
   key,
   description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
   ...canvasHighContrast

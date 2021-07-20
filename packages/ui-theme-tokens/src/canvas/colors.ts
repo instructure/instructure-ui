@@ -42,6 +42,5 @@ const baseColors = {
 }
 
 const colors = Object.freeze(functionalColors(baseColors))
-
 export default colors
 export { colors }

@@ -26,7 +26,7 @@ const forms = Object.freeze({
   inputHeightSmall: '2rem',
   inputHeightMedium: '2.75rem',
   inputHeightLarge: '3.375rem'
-})
+} as const)
 
 export default forms
 export { forms }

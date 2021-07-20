@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-const stacking = Object.freeze({
-  topmost: 9999,
-  above: 1,
-  below: -1,
-  deepest: -9999
-} as const)
-export default stacking
-export { stacking }
+export * from './BaseTheme'
+export * from './Colors'
+export * from './ComponentThemeMap'
+export * from './ComponentThemeVariables'
+export * from './DeepPartial'

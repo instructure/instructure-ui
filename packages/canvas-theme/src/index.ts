@@ -24,6 +24,8 @@
 
 import { canvas, functionalColors } from '@instructure/ui-theme-tokens'
 
+import { BaseTheme } from '@instructure/types'
+
 const {
   borders,
   breakpoints,
@@ -59,13 +61,13 @@ const brandVariables = {
   'ic-brand-global-nav-menu-item__text-color': colors.textLightest,
   'ic-brand-global-nav-menu-item__text-color--active': colors.textBrand
 }
+type CanvasTheme = BaseTheme & typeof brandVariables
 
-const theme = {
+const theme: CanvasTheme = {
   key,
   ...canvas,
   ...brandVariables
 }
-
 export default theme
 export {
   theme,

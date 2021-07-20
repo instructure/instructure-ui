@@ -31,7 +31,7 @@ const spacing = Object.freeze({
   large: '2.25rem', // 36px
   xLarge: '3rem', // 48px
   xxLarge: '3.75rem' // 60px
-})
+} as const)
 
 export default spacing
 export { spacing }

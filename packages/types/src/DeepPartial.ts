@@ -21,21 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-type baseColorsType = {
-  brand: string
-  link: string
-  electric: string
-  shamrock: string
-  barney: string
-  crimson: string
-  fire: string
-  licorice: string
-  oxford: string
-  ash: string
-  slate: string
-  tiara: string
-  porcelain: string
-  white: string
-}
 
-export default baseColorsType
+/** Recursively makes every property in T optional */
+export type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>
+}
