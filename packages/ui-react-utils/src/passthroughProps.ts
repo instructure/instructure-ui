@@ -24,6 +24,8 @@
 import isPropValid from '@emotion/is-prop-valid'
 // list of "valid" props https://github.com/emotion-js/emotion/blob/master/packages/is-prop-valid/src/props.js
 
+type PropTypesOrAllowedPropList = Record<string, any> | string[]
+
 const hasOwnProperty = Object.prototype.hasOwnProperty
 const omit = (originalObject: Record<string, unknown>, keys: string[]) => {
   // code based on babel's _objectWithoutProperties
@@ -48,13 +50,16 @@ const omit = (originalObject: Record<string, unknown>, keys: string[]) => {
   return newObject
 }
 
-function omitProps(
-  props: Record<string, any>,
-  propTypes: Record<string, any>,
+function omitProps<T extends Record<string, any>>(
+  props: T,
+  propTypesOrAllowedPropList: PropTypesOrAllowedPropList,
   exclude?: string[]
 ) {
-  const keys = Object.keys(propTypes || {})
-  const combined = exclude ? keys.concat(exclude) : keys
+  const propKeys = Array.isArray(propTypesOrAllowedPropList)
+    ? propTypesOrAllowedPropList
+    : Object.keys(propTypesOrAllowedPropList || {})
+  const combined = exclude ? propKeys.concat(exclude) : propKeys
+
   return omit(props, combined)
 }
 
@@ -74,13 +79,16 @@ function pick(obj: Record<string, unknown>, keys: string[]) {
   return res
 }
 
-function pickProps(
-  props: Record<string, any>,
-  propTypes: Record<string, any>,
+function pickProps<T extends Record<string, any>>(
+  props: T,
+  propTypesOrAllowedPropList: PropTypesOrAllowedPropList,
   include?: string[]
 ) {
-  const keys = Object.keys(propTypes || {})
-  const combined = include ? keys.concat(include) : keys
+  const propKeys = Array.isArray(propTypesOrAllowedPropList)
+    ? propTypesOrAllowedPropList
+    : Object.keys(propTypesOrAllowedPropList || {})
+  const combined = include ? propKeys.concat(include) : propKeys
+
   return pick(props, combined)
 }
 

@@ -84,7 +84,6 @@ const ThemeablePropValues = {
     xxLarge: 'xx-large'
   }
 } as const
-
 // SPACING
 type SpacingKeys = keyof typeof ThemeablePropValues.SPACING
 type SpacingValues = typeof ThemeablePropValues.SPACING[SpacingKeys]

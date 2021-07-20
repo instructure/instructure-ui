@@ -154,8 +154,15 @@ class Table extends Component<Props> {
   }
 
   render() {
-    const { margin, elementRef, layout, caption, children, hover, styles } =
-      this.props
+    const {
+      margin,
+      elementRef,
+      layout,
+      caption,
+      children,
+      hover,
+      styles
+    } = this.props
     const isStacked = layout === 'stacked'
     const headers = isStacked ? this.getHeaders() : null
 

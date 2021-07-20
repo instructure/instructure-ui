@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React, { forwardRef, useState } from 'react'
 import { decorator } from '@instructure/ui-decorator'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
@@ -30,6 +31,12 @@ import { useTextDirectionContext } from '@instructure/ui-i18n'
 import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
+import { CSSObject } from '@emotion/react'
+
+export type WithStyleProps = Partial<{
+  styles: CSSObject
+  makeStyles: (...extraArgs: unknown[]) => void
+}>
 
 /**
  * ---

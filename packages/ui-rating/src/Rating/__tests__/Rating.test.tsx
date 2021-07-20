@@ -23,9 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
-
-import { View } from '@instructure/ui-view'
+import { expect, mount } from '@instructure/ui-test-utils'
 
 import { Rating } from '../index'
 import { RatingLocator } from '../RatingLocator'
@@ -98,47 +96,5 @@ describe('<Rating />', async () => {
     await mount(<Rating label="Course rating" iconCount={5} />)
     const rating = await RatingLocator.find()
     expect(await rating.accessible()).to.be.true()
-  })
-
-  describe('when passing down props to View', async () => {
-    const allowedProps = {
-      margin: 'small'
-    }
-
-    Object.keys(View.propTypes)
-      .filter(
-        (prop) =>
-          prop !== 'theme' &&
-          prop !== 'children' &&
-          prop !== 'makeStyles' &&
-          prop !== 'styles'
-      )
-      .forEach((prop) => {
-        if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, async () => {
-            const consoleError = stub(console, 'error')
-            const warning = `Warning: [Rating] prop '${prop}' is not allowed.`
-            const props = {
-              [prop]: 'foo'
-            }
-
-            await mount(
-              <Rating label="Course rating" iconCount={5} {...props} />
-            )
-            expect(consoleError).to.be.calledWith(warning)
-          })
-        } else {
-          it(`should allow the '${prop}' prop`, async () => {
-            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-            const props = { [prop]: allowedProps[prop] }
-            const consoleError = stub(console, 'error')
-
-            await mount(
-              <Rating label="Course rating" iconCount={5} {...props} />
-            )
-            expect(consoleError).to.not.be.called()
-          })
-        }
-      })
   })
 })

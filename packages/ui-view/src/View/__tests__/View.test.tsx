@@ -90,7 +90,6 @@ describe('<View />', async () => {
       </View>
     )
 
-    // debugger
     const styles = getComputedStyle(subject.getDOMNode())
 
     expect(styles['flexBasis']).to.equal('200px')
