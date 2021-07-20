@@ -26,9 +26,37 @@ import { expect } from '@instructure/ui-test-utils'
 import { getTransitiveDependents } from '../getTransitiveDependents'
 
 describe('getTransitiveDependents', () => {
-  it('should generate the list of transitive dependents for a given package', async () => {
-    //arrange
-    const packages = ['ui-badge']
+  it('should generate the list of transitive dependents for a given package', () => {
+    // this is all of the transitive dependents of the package `ui-badge`
+    const badgeTransitiveDependents = [
+      {
+        name: '@instructure/ui-badge'
+      },
+      {
+        name: '@instructure/ui-navigation'
+      },
+      {
+        name: '@instructure/ui-text-input'
+      },
+      {
+        name: '@instructure/ui'
+      },
+      {
+        name: '@instructure/ui-date-input'
+      },
+      {
+        name: '@instructure/ui-select'
+      },
+      {
+        name: '@instructure/ui-simple-select'
+      },
+      {
+        name: '@instructure/ui-time-select'
+      },
+      {
+        name: '@instructure/ui-table'
+      }
+    ]
 
     const expectedResult = [
       'ui-badge',
@@ -41,11 +69,8 @@ describe('getTransitiveDependents', () => {
       'ui-table'
     ]
 
-    //act
-    const actualResult = await getTransitiveDependents(packages)
+    const actualResult = getTransitiveDependents(badgeTransitiveDependents)
 
-    //assert
-
-    expect(actualResult).to.be.equal(expectedResult)
+    expect(actualResult).to.be.eql(expectedResult)
   })
 })
