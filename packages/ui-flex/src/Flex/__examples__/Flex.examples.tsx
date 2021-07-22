@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { Flex } from '../index'
+import { Flex, Props } from '../index'
 
 const regular = [
   <Flex.Item key="0">One</Flex.Item>,
@@ -64,13 +64,14 @@ export default {
   propValues: {
     children: [regular, shrink, grow]
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: Props) => {
     return (
       props.withVisualDebug ||
-      props.display ||
       props.direction === 'row-reverse' ||
-      props.direction === 'column-reverse'
+      props.direction === 'column-reverse' ||
+      props.wrap === 'wrap-reverse' ||
+      props.display === 'inline-flex' ||
+      props.textAlign === 'center'
     )
   }
 }
