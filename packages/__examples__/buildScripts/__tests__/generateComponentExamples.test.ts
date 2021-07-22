@@ -30,34 +30,41 @@ import { expect } from '@instructure/ui-test-utils'
 // folders that start with "." for some reason
 import generateComponentExamples from '../../.storybook/stories/generateComponentExamples'
 
+type Props = {
+  variant: 'circle' | 'rectangle'
+  show: boolean
+  message: string | null
+  children: null
+}
+
 class TestComponent extends Component {
+  static propTypes = {
+    variant: PropTypes.oneOf(['circle', 'rectangle']),
+    show: PropTypes.bool,
+    message: PropTypes.object,
+    children: PropTypes.node
+  }
+
+  static defaultProps = {
+    variant: 'circle',
+    show: true,
+    message: null,
+    children: null
+  }
+
   render() {
     return React.createElement('span')
   }
-}
-
-TestComponent.propTypes = {
-  variant: PropTypes.oneOf(['circle', 'rectangle']),
-  show: PropTypes.bool,
-  message: PropTypes.object,
-  children: PropTypes.node
-}
-
-TestComponent.defaultProps = {
-  variant: 'circle',
-  show: true,
-  message: null,
-  children: null
 }
 
 describe('generateComponentExamples', () => {
   it('should work with no propValues defined', () => {
     const config = {
       sectionProp: 'variant',
-      getComponentProps: (props) => {
+      getComponentProps: (_props: Props) => {
         return { variant: 'circle', show: true }
       },
-      getParameters: (page) => {
+      getParameters: (_page: unknown) => {
         return { delay: 200 }
       },
       maxExamples: 500
@@ -93,7 +100,7 @@ describe('generateComponentExamples', () => {
         variant: ['circle', 'rectangle'],
         show: [true, false]
       },
-      getParameters: (page) => {
+      getParameters: (_page: unknown) => {
         return { delay: 200 }
       },
       maxExamples: 500
@@ -157,7 +164,8 @@ describe('generateComponentExamples', () => {
         variant: ['circle', 'rectangle'],
         show: [true, false]
       },
-      filter: (props) => props.show === false && props.variant === 'circle'
+      maxExamples: 100,
+      filter: (props: Props) => !props.show && props.variant === 'circle'
     }
     expect(generateComponentExamples(TestComponent, config))
       .excludingEvery(['key'])
