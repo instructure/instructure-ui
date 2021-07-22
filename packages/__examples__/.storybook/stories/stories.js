@@ -54,40 +54,45 @@ Object.entries(propJSONData).map(
     const requirePath = `./${exampleFilePath}`
 
     const exampleDir = requirePath.split('/').slice(0, -2).join('/')
-    const Component = componentsContext(exampleDir + '/index.tsx').default
-    const ExamplesModule = examplesContext(requirePath).default // xy.example.jsx
-    // merge in generated prop values:
-    ExamplesModule.propValues = Object.assign(
-      generatedPropValues,
-      ExamplesModule.propValues || {}
-    )
-    ExamplesModule.maxExamples = ExamplesModule.maxExamples
-      ? ExamplesModule.maxExamples
-      : 500
+    try {
+      const Component = componentsContext(exampleDir + '/index.tsx').default
+      const ExamplesModule = examplesContext(requirePath).default // xy.example.jsx
+      // merge in generated prop values:
+      ExamplesModule.propValues = Object.assign(
+        generatedPropValues,
+        ExamplesModule.propValues || {}
+      )
+      ExamplesModule.maxExamples = ExamplesModule.maxExamples
+        ? ExamplesModule.maxExamples
+        : 500
 
-    const sections = generateComponentExamples(Component, ExamplesModule)
-
-    if (sections && sections.length > 0) {
-      const stories = storiesOf(componentName, module)
-      sections.forEach(({ pages, sectionName }) => {
-        pages.forEach((page, i) => {
-          // eslint-disable-next-line no-param-reassign
-          page.renderExample = renderExample
-          numStories++
-          stories.add(
-            `${sectionName}${pages.length > 1 ? ` (page ${i + 1})` : ''}`,
-            renderPage.bind(null, page),
-            {
-              chromatic: {
-                viewports: [1200],
-                pauseAnimationAtEnd: true,
-                delay: 700,
-                ...page.parameters
+      const sections = generateComponentExamples(Component, ExamplesModule)
+      if (sections && sections.length > 0) {
+        const stories = storiesOf(componentName, module)
+        sections.forEach(({ pages, sectionName }) => {
+          pages.forEach((page, i) => {
+            // eslint-disable-next-line no-param-reassign
+            page.renderExample = renderExample
+            numStories++
+            stories.add(
+              `${sectionName}${pages.length > 1 ? ` (page ${i + 1})` : ''}`,
+              renderPage.bind(null, page),
+              {
+                chromatic: {
+                  viewports: [1200],
+                  pauseAnimationAtEnd: true,
+                  delay: 700,
+                  ...page.parameters
+                }
               }
-            }
-          )
+            )
+          })
         })
-      })
+      }
+    } catch (e) {
+      console.error(
+        `Error during story generation for ${exampleFilePath}: ${e}\n${e?.stack}`
+      )
     }
   }
 )

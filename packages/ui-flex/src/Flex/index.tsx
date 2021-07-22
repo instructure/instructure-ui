@@ -45,7 +45,7 @@ import { Item } from './Item'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-type Props = {
+export type Props = {
   as?: React.ReactElement
   elementRef?: (...args: any[]) => any
   height?: string | number

@@ -72,13 +72,13 @@ export default {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
-      (props.layout === 'inline' &&
-        props.display === 'inline-block' &&
-        !props.width) ||
+      (props.display === 'inline-block' && !props.width) ||
       (props.renderBeforeInput && props.width) ||
       (props.renderAfterInput && props.width) ||
       props.interaction === 'readonly' ||
-      (props.placeholder && props.width)
+      (props.placeholder && props.width) ||
+      (props.size !== 'medium' && props.width) ||
+      (props.size !== 'medium' && props.wrap)
     )
   }
 }

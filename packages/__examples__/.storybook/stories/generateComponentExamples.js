@@ -24,30 +24,12 @@
 const { uid } = require('@instructure/uid')
 const generatePropCombinations = require('./generatePropCombinations')
 
-module.exports = function generateComponentExamples(
-  Component,
-  config = {
-    sectionProp: null,
-    maxExamplesPerPage: null,
-    propValues: {},
-    excludeProps: [],
-    getComponentProps: (props, index) => {
-      return {}
-    },
-    getExampleProps: (props, index) => {
-      return {}
-    },
-    getParameters: (examples, pageIndex) => {
-      return {}
-    },
-    filter: (props) => false
-  }
-) {
+module.exports = function generateComponentExamples(Component, config) {
   const { sectionProp, excludeProps, filter } = config
 
   const PROPS_CACHE = []
   const sections = []
-  const maxExamples = config.maxExamples | 500
+  const maxExamples = config.maxExamples
   let exampleCount = 0
   let propValues = {}
 
@@ -61,16 +43,18 @@ module.exports = function generateComponentExamples(
     return parameters
   }
 
+  /**
+   * Merges the auto-generated props with ones in the examples files,
+   * a prop returned by getComponentProps() takes priority
+   */
   const getComponentProps = (props) => {
     let componentProps = props
-
     if (typeof config.getComponentProps === 'function') {
       componentProps = {
         ...componentProps,
         ...config.getComponentProps(props)
       }
     }
-
     return componentProps
   }
 
@@ -132,12 +116,14 @@ module.exports = function generateComponentExamples(
 
   const maybeAddExample = (props) => {
     const componentProps = getComponentProps(props)
-    const exampleProps = getExampleProps(props)
-    const key = uid()
-    const propsString = JSON.stringify(componentProps)
     const ignore = typeof filter === 'function' ? filter(componentProps) : false
-
-    if (!ignore && !PROPS_CACHE.includes(propsString)) {
+    if (ignore) {
+      return
+    }
+    const propsString = Object.entries(componentProps).sort().toString() //JSON.stringify(componentProps)
+    if (!PROPS_CACHE.includes(propsString)) {
+      const key = uid()
+      const exampleProps = getExampleProps(props)
       exampleCount++
       if (exampleCount < maxExamples) {
         PROPS_CACHE.push(propsString)
