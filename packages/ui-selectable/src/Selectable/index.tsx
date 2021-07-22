@@ -36,7 +36,7 @@ type Props = {
   /**
    * The id of the trigger element. Set automatically if not provided
    */
-  id?: string
+  id?: string | null
   /**
    * The id of the option in the list that should be considered highlighted
    */
@@ -52,30 +52,30 @@ type Props = {
   /**
    * Callback fired when the options want to become visible
    */
-  onRequestShowOptions?: (event: Event) => void
+  onRequestShowOptions: (event: Event) => void
   /**
    * Callback fired when the options no longer want to be visible
    */
-  onRequestHideOptions?: (event: Event) => void
+  onRequestHideOptions: (event: Event) => void
   /**
    * Callback fired when option is hovered or highlighted via keyboard
    */
-  onRequestHighlightOption?: (
+  onRequestHighlightOption: (
     event: Event,
     data: { id?: string; direction?: number }
   ) => void
   /**
    * Callback fired when first option should be highlighted
    */
-  onRequestHighlightFirstOption?: (event: Event) => void
+  onRequestHighlightFirstOption: (event: Event) => void
   /**
    * Callback fired when last option should be highlighted
    */
-  onRequestHighlightLastOption?: (event: Event) => void
+  onRequestHighlightLastOption: (event: Event) => void
   /**
    * Callback fired when option clicked or selected via keyboard
    */
-  onRequestSelectOption?: (event: Event, data: { id?: string }) => void
+  onRequestSelectOption: (event: Event, data: { id?: string }) => void
   /**
    * A function with prop getters
    */
@@ -211,12 +211,12 @@ class Selectable extends Component<Props> {
     event.preventDefault()
 
     if (isShowingOptions) {
-      onRequestHideOptions!(event)
+      onRequestHideOptions(event)
     } else {
       if (!isActiveElement(this._trigger)) {
         this._trigger!.focus()
       }
-      onRequestShowOptions!(event)
+      onRequestShowOptions(event)
     }
   }
 
@@ -243,14 +243,14 @@ class Selectable extends Component<Props> {
         if (highlightedOptionId) {
           // select highlighted option
           event.preventDefault()
-          onRequestSelectOption!(event, { id: highlightedOptionId })
+          onRequestSelectOption(event, { id: highlightedOptionId })
         }
         break
       case 'down':
         event.preventDefault()
         if (isShowingOptions) {
           // if options showing, change highlight
-          onRequestHighlightOption!(event, { direction: 1 })
+          onRequestHighlightOption(event, { direction: 1 })
         } else {
           // otherwise, show options
           this.handleOpenClose(event)
@@ -260,7 +260,7 @@ class Selectable extends Component<Props> {
         event.preventDefault()
         if (isShowingOptions) {
           // if options showing, change highlight
-          onRequestHighlightOption!(event, { direction: -1 })
+          onRequestHighlightOption(event, { direction: -1 })
         } else {
           // otherwise, show options
           this.handleOpenClose(event)
@@ -270,14 +270,14 @@ class Selectable extends Component<Props> {
         if (isShowingOptions) {
           // if options showing, highlight first option
           event.preventDefault()
-          onRequestHighlightFirstOption!(event)
+          onRequestHighlightFirstOption(event)
         }
         break
       case 'end':
         if (isShowingOptions) {
           // if options showing, highlight last option
           event.preventDefault()
-          onRequestHighlightLastOption!(event)
+          onRequestHighlightLastOption(event)
         }
         break
     }
@@ -381,10 +381,10 @@ class Selectable extends Component<Props> {
             role: 'option',
             'aria-selected': this.isSelectedOption(id!) ? 'true' : 'false',
             onClick: createChainedFunction((event) => {
-              onRequestSelectOption!(event, { id })
+              onRequestSelectOption(event, { id })
             }, onClick),
             onMouseOver: createChainedFunction((event) => {
-              onRequestHighlightOption!(event, { id })
+              onRequestHighlightOption(event, { id })
             }, onMouseOver),
             ...rest
           }
