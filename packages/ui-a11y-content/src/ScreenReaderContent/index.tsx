@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -39,7 +39,14 @@ import generateStyle from './styles'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  as?: AsElementType
+  /**
+   * the element type to render as
+   */
+  as: AsElementType
+  /**
+   * content meant for screen readers only
+   */
+  children: ReactNode
 }
 
 /**
@@ -47,6 +54,7 @@ type Props = {
 category: components/utilities
 ---
 @module ScreenReaderContent
+@tsProps
 **/
 @withStyle(generateStyle, null)
 class ScreenReaderContent extends Component<Props> {
@@ -57,13 +65,7 @@ class ScreenReaderContent extends Component<Props> {
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
-    /**
-     * the element type to render as
-     */
     as: PropTypes.elementType,
-    /**
-     * content meant for screen readers only
-     */
     children: PropTypes.node
   }
 
@@ -77,8 +79,7 @@ class ScreenReaderContent extends Component<Props> {
     this.props.makeStyles()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }

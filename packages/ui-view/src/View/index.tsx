@@ -34,8 +34,7 @@ import {
   getElementType,
   omitProps,
   pickProps,
-  passthroughProps,
-  AsElementType
+  passthroughProps
 } from '@instructure/ui-react-utils'
 
 import { jsx, withStyle } from '@instructure/emotion'
