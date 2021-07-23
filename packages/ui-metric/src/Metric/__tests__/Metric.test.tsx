@@ -77,4 +77,11 @@ describe('<Metric />', async () => {
       await label.find('[role="rowheader"]', { expectEmpty: true })
     ).to.not.exist()
   })
+
+  it('should allow methods and ReactNodes as labels and values', async () => {
+    await mount(<Metric renderLabel={<div>hello</div>} />)
+    const metric = await MetricLocator.find()
+    const label = await metric.findWithText('hello')
+    expect(label).to.exist()
+  })
 })

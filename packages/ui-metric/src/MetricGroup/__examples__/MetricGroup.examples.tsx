@@ -25,8 +25,7 @@
 import React from 'react'
 import { Metric } from '../../Metric'
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'textAlign' implicitly has an 'any' type... Remove this comment to see the full error message
-const getMetric = (textAlign) => {
+const getMetric = (textAlign: any) => {
   return [
     <Metric
       key="grade"

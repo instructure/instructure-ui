@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
@@ -36,8 +36,8 @@ type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   textAlign?: 'start' | 'center' | 'end'
-  renderLabel?: ((...args: any[]) => any) | React.ReactNode
-  renderValue?: ((...args: any[]) => any) | React.ReactNode
+  renderLabel?: ((props: any) => ReactNode) | ReactNode
+  renderValue?: ((props: any) => ReactNode) | ReactNode
   isGroupChild?: boolean
 }
 
@@ -94,20 +94,17 @@ class Metric extends Component<Props> {
     return (
       <div
         {...passthroughProps(rest)}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
-        role={isGroupChild === true ? 'row' : null}
+        role={isGroupChild ? 'row' : undefined}
         css={this.props.styles.metric}
       >
         <div
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
-          role={isGroupChild === true ? 'rowheader' : null}
+          role={isGroupChild ? 'rowheader' : undefined}
           css={this.props.styles.label}
         >
           {callRenderProp(renderLabel)}
         </div>
         <div
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
-          role={isGroupChild === true ? 'gridcell' : null}
+          role={isGroupChild ? 'gridcell' : undefined}
           css={this.props.styles.value}
         >
           {callRenderProp(renderValue)}
