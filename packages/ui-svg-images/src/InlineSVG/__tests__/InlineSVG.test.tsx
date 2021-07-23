@@ -114,7 +114,7 @@ describe('<InlineSVG />', async () => {
       />
     )
     const svg = await InlineSVGLocator.find()
-    const ids = svg.getAttribute('aria-labelledby').split(' ')
+    const ids = svg.getAttribute('aria-labelledby')!.split(' ')
 
     expect(ids).to.have.length(2)
   })

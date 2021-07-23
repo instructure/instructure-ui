@@ -28,7 +28,7 @@ import { InlineListItem } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const InlineListItemLocator = locator(InlineListItem.selector, {
-  findNestedOptions: (...args) => {
+  findNestedOptions: (...args: any[]): any => {
     return InlineListLocator.find(...args)
   }
 })

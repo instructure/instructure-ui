@@ -243,7 +243,7 @@ describe('<DateInput />', async () => {
       const dateInput = await DateInputLocator.find()
       const input = await dateInput.findInput()
 
-      expect(input.getDOMNode().required).to.be.true()
+      expect((input.getDOMNode() as HTMLInputElement).required).to.be.true()
     })
 
     it('should provide inputRef', async () => {

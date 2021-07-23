@@ -173,17 +173,15 @@ describe('<CheckboxGroup />', async () => {
 
     const checkboxGroup = await CheckboxGroupLocator.find()
     const inputs = await checkboxGroup.findAll('input')
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'input' implicitly has an 'any' type.
     inputs.forEach((input) => {
-      expect(input.getDOMNode().checked).to.be.false()
+      expect((input.getDOMNode() as HTMLInputElement).checked).to.be.false()
     })
 
     const input = await checkboxGroup.find('input[value="football"]')
     await input.click()
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'input' implicitly has an 'any' type.
     inputs.forEach((input) => {
-      expect(input.getDOMNode().checked).to.be.false()
+      expect((input.getDOMNode() as HTMLInputElement).checked).to.be.false()
     })
   })
 
@@ -227,12 +225,11 @@ describe('<CheckboxGroup />', async () => {
     const checkboxGroup = await CheckboxGroupLocator.find()
     const inputs = await checkboxGroup.findAll('input')
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'input' implicitly has an 'any' type.
     inputs.forEach((input) => {
-      if (defaultValue.includes(input.getAttribute('value'))) {
-        expect(input.getDOMNode().checked).to.be.true()
+      if (defaultValue.includes(input.getAttribute('value')!)) {
+        expect((input.getDOMNode() as HTMLInputElement).checked).to.be.true()
       } else {
-        expect(input.getDOMNode().checked).to.be.false()
+        expect((input.getDOMNode() as HTMLInputElement).checked).to.be.false()
       }
     })
   })

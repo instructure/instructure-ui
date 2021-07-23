@@ -30,11 +30,11 @@ export { NavigationItemLocator }
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const NavigationLocator = locator(Navigation.selector, {
-  findAllItems: (...args) => {
+  findAllItems: (...args: any[]) => {
     return NavigationItemLocator.findAll(...args)
   },
 
-  findItem: (...args) => {
+  findItem: (...args: any[]) => {
     return NavigationItemLocator.find(...args)
   }
 })

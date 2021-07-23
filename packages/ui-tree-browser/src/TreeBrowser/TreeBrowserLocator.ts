@@ -30,10 +30,10 @@ const TreeBrowserItemLocator = locator('[role="treeitem"]')
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const TreeBrowserLocator = locator(TreeBrowser.selector, {
-  findAllItems: (...args) => {
+  findAllItems: (...args: any[]) => {
     return TreeBrowserItemLocator.findAll(...args)
   },
-  findItem: (...args) => {
+  findItem: (...args: any[]) => {
     return TreeBrowserItemLocator.find(...args)
   }
 })

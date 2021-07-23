@@ -28,7 +28,7 @@ import { NumberInput } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const NumberInputLocator = locator(NumberInput.selector, {
-  findInput: (...args) => locator('input').find(...args),
+  findInput: (...args: any[]) => locator('input').find(...args),
 
-  findArrowButtons: (...args) => locator('button').findAll(...args)
+  findArrowButtons: (...args: any[]) => locator('button').findAll(...args)
 })

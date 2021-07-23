@@ -78,8 +78,10 @@ describe('<Position />', async () => {
     )
 
     const position = await PositionLocator.find()
-    const content = await position.findContent(':contains(Content)')
-    expect(content.getDOMNode().style.position).to.equal('absolute')
+    const content = ((await position.findContent(
+      ':contains(Content)'
+    )) as unknown) as HTMLElement
+    expect(content.style.position).to.equal('absolute')
   })
 
   it('should render right of target', async () => {

@@ -28,10 +28,10 @@ import { OptionsItemLocator } from './Item/OptionsItemLocator'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const OptionsLocator = locator(Options.selector, {
-  findAllItems: (...args) => {
+  findAllItems: (...args: any[]) => {
     return OptionsItemLocator.findAll(...args)
   },
-  findItem: (...args) => {
+  findItem: (...args: any[]) => {
     return OptionsItemLocator.find(...args)
   }
 })

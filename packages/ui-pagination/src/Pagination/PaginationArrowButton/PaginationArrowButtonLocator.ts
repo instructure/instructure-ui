@@ -34,9 +34,9 @@ export const PaginationArrowButtonLocator = locator(
   // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
   PaginationArrowButton.selector,
   {
-    findTooltipContent: (...args) => TooltipLocator.findContent(...args),
+    findTooltipContent: (...args: any[]) => TooltipLocator.findContent(...args),
 
-    click: async (element, ...args) => {
+    click: async (element: any, ...args: any[]) => {
       return (await find(element, 'a,button,[role="button"]')).click(...args)
     }
   }

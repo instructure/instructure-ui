@@ -56,8 +56,8 @@ describe('<ModalBody />', async () => {
 
     const body = await ModalBodyLocator.find()
 
-    expect(body.getDOMNode().style.width).to.equal('100%')
-    expect(body.getDOMNode().style.height).to.equal('100%')
+    expect((body.getDOMNode() as HTMLElement).style.width).to.equal('100%')
+    expect((body.getDOMNode() as HTMLElement).style.height).to.equal('100%')
   })
 
   describe('when passing down props to View', async () => {

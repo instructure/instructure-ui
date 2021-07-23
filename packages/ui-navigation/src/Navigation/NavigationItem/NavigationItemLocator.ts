@@ -30,5 +30,5 @@ import { NavigationItem } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const NavigationItemLocator = locator(NavigationItem.selector, {
-  findTooltipContent: (...args) => TooltipLocator.findContent(...args)
+  findTooltipContent: (...args: any[]) => TooltipLocator.findContent(...args)
 })

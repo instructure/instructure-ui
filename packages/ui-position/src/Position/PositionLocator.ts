@@ -28,27 +28,23 @@ import { PositionContentLocator } from './PositionContentLocator'
 import { PositionTargetLocator } from './PositionTargetLocator'
 
 export const customMethods = {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  findTarget: (element, ...args) => {
+  findTarget: (element: Element, ...args: any) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(Position.locatorAttribute)
       return locator(`[${Position.targetLocatorAttribute}="${id}"]`).find(
         ...args
       )
-    } else {
-      return null
     }
+    throw new Error('Element ' + element + ' not found')
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  findContent: (element, ...args) => {
+  findContent: (element: Element, ...args: any) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(Position.locatorAttribute)
       return locator(`[${Position.contentLocatorAttribute}="${id}"]`).find(
         ...args
       )
-    } else {
-      return null
     }
+    throw new Error('Element ' + element + ' not found')
   }
 }
 
