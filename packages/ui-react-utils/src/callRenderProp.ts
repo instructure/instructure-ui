@@ -22,7 +22,14 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, {
+  ClassType,
+  ComponentClass,
+  FunctionComponent,
+  ReactHTML,
+  ReactInstance,
+  ReactSVG
+} from 'react'
 
 /**
  * ---
@@ -35,7 +42,14 @@ import React from 'react'
  * @return {ReactElement} A renderable React element
  */
 function callRenderProp(
-  value: any, // TODO type this better
+  value:
+    | string
+    | keyof ReactHTML
+    | keyof ReactSVG
+    | FunctionComponent
+    | ComponentClass
+    | ClassType<any, any, any>
+    | ((...args: any) => ReactInstance),
   props = {}
 ) {
   if (typeof value === 'function') {
@@ -50,9 +64,9 @@ function callRenderProp(
         value.prototype.isReactComponent
       )
     ) {
-      return value(props)
+      return (value as any)(props)
     }
-    return React.createElement(value, props)
+    return React.createElement(value as any, props)
   }
   return value
 }
