@@ -30,10 +30,10 @@ export { DayLocator }
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const CalendarLocator = locator(Calendar.selector, {
-  findAllDays: (...args) => {
+  findAllDays: (...args: any[]) => {
     return DayLocator.findAll(...args)
   },
-  findDay: (...args) => {
+  findDay: (...args: any[]) => {
     return DayLocator.find(...args)
   }
 })

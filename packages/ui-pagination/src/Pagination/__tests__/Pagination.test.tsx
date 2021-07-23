@@ -52,7 +52,6 @@ describe('<Pagination />', async () => {
     expect(buttons.length).to.equal(5)
 
     const buttonsText = buttons.reduce(
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'acc' implicitly has an 'any' type.
       (acc, button) => acc + button.getTextContent(),
       ''
     )
@@ -125,7 +124,6 @@ describe('<Pagination />', async () => {
 
     expect(buttons.length).to.equal(5)
     expect(
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'acc' implicitly has an 'any' type.
       buttons.reduce((acc, button) => acc + button.getTextContent(), '')
     ).to.equal('#0#1#2#3#4')
   })
@@ -224,7 +222,6 @@ describe('<Pagination />', async () => {
     expect(ellipses.length).to.equal(0)
 
     expect(
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'acc' implicitly has an 'any' type.
       allButtons.reduce((acc, button) => acc + button.getTextContent(), '')
     ).to.equal('Prev#0#1#2#3#4#5#6Next')
   })

@@ -29,7 +29,7 @@ import { Link } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const LinkLocator = locator(Link.selector, {
-  click: async (element, ...args) => {
+  click: async (element: any, ...args: any[]) => {
     return (await find(element, 'a,button,[role="button"]')).click(...args)
   }
 })

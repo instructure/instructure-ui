@@ -43,7 +43,7 @@ describe('<Checkbox />', async () => {
     const checkbox = await CheckboxLocator.find()
     const input = await checkbox.find('input')
 
-    expect(input.getDOMNode().type).to.equal('checkbox')
+    expect((input.getDOMNode() as HTMLInputElement).type).to.equal('checkbox')
   })
 
   it('`simple` variant only displays a checkmark when checked', async () => {

@@ -61,7 +61,7 @@ describe('<ToggleDetails />', async () => {
     const content = await toggleDetails.findContent({ visible: false })
 
     expect(toggle.getAttribute('aria-controls')).to.equal(
-      content.getAttribute('id')
+      content!.getAttribute('id')
     )
   })
 
@@ -118,7 +118,7 @@ describe('<ToggleDetails />', async () => {
     const content = await toggleDetails.findContent()
 
     expect(toggle.getAttribute('aria-expanded')).to.exist()
-    expect(content.getTextContent()).to.equal('Content')
+    expect(content!.getTextContent()).to.equal('Content')
   })
 
   it('should meet a11y standards', async () => {

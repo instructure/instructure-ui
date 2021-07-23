@@ -33,9 +33,9 @@ export { DrawerContentLocator, DrawerTrayLocator }
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const DrawerLayoutLocator = locator(DrawerLayout.selector, {
-  findContent: (...args) => DrawerContentLocator.find(...args),
+  findContent: (...args: any[]) => DrawerContentLocator.find(...args),
 
-  findTray: (element, ...args) => {
+  findTray: (element: any, ...args: any[]) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(DrawerLayout.locatorAttribute)
       return locator(`[${DrawerLayout.Tray.locatorAttribute}="${id}"]`).find(

@@ -31,7 +31,6 @@ import {
   querySelectorParents,
   SelectorOptions
 } from './selectors'
-import { QueryOrHelperType } from './bindElementToUtilities'
 
 export type QueryFunction = (
   element: Element,
@@ -78,10 +77,7 @@ function findAllFrames(...args: QueryArguments) {
   return findAllByQuery(querySelectorFrames, ...args)
 }
 
-function findAllByQuery(
-  queryFn: QueryFunction,
-  ...args: QueryArguments
-): Promise<QueryOrHelperType[]> {
+function findAllByQuery(queryFn: QueryFunction, ...args: QueryArguments) {
   return getQueryResult(queryFn, ...args)
 }
 

@@ -256,7 +256,6 @@ describe('<Calendar />', async () => {
         expect(row.getAttribute('role')).to.equal('presentation')
 
         const tds = await row.findAll('td')
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'td' implicitly has an 'any' type.
         tds.forEach((td) => {
           expect(td.getAttribute('role')).to.equal('presentation')
         })
@@ -274,7 +273,6 @@ describe('<Calendar />', async () => {
       const days = await calendar.findAllDays()
       const headers = await calendar.findAll('th')
 
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'day' implicitly has an 'any' type.
       days.forEach((day, i) => {
         const index = i % 7
         expect(day.getAttribute('aria-describedby')).to.equal(

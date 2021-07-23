@@ -685,7 +685,7 @@ function testShowFlyoutOnEvent(event) {
     )
 
     const menu = await MenuLocator.find(':label(Parent)')
-    const trigger = await menu.findItem(':label(Flyout)')
+    const trigger = (await menu.findItem(':label(Flyout)')) as any
 
     await trigger[event.type](event.which)
 
@@ -712,7 +712,7 @@ function testFocusFlyoutOnEvent(event) {
     )
 
     const menu = await MenuLocator.find(':label(Parent)')
-    const trigger = await menu.findItem(':label(Flyout)')
+    const trigger = (await menu.findItem(':label(Flyout)')) as any
 
     await trigger[event.type](event.which)
 

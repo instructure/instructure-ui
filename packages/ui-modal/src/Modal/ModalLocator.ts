@@ -35,13 +35,13 @@ const ModalFooterLocator = locator(Modal.Footer.selector)
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const ModalLocator = locator(Modal.selector, {
-  findHeader: (...args) => {
+  findHeader: (...args: any[]) => {
     return ModalHeaderLocator.find(...args)
   },
-  findBody: (...args) => {
+  findBody: (...args: any[]) => {
     return ModalBodyLocator.find(...args)
   },
-  findFooter: (...args) => {
+  findFooter: (...args: any[]) => {
     return ModalFooterLocator.find(...args)
   }
 })

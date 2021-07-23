@@ -34,9 +34,9 @@ import { DateInput } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const DateInputLocator = locator(DateInput.selector, {
-  findInput: (...args) => locator('input').find(...args),
+  findInput: (...args: any[]) => locator('input').find(...args),
 
-  findCalendar: async (element, ...args) => {
+  findCalendar: async (element: any, ...args: any[]) => {
     const content = await PopoverLocator.findContent(element, ...args)
     return content ? CalendarLocator.find(content.getDOMNode()) : null
   }

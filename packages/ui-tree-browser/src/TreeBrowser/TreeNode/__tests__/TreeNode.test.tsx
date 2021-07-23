@@ -90,7 +90,10 @@ describe('<TreeNode />', async () => {
       const item = await TreeNodeLocator.find()
       expect(item).to.exist()
       await wait(() => {
-        expect(item.getComputedStyle(item, ':after').opacity).to.equal('1')
+        // TODO check why this needs a type cast
+        expect((item as any).getComputedStyle(item, ':after').opacity).to.equal(
+          '1'
+        )
       })
     })
   })

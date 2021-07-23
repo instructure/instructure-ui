@@ -31,19 +31,19 @@ const SelectedTabLocator = locator('[role="tab"][aria-selected="true"]')
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const TabsLocator = locator(Tabs.selector, {
-  findTab: (...args) => {
+  findTab: (...args: any[]) => {
     return TabLocator.find(...args)
   },
-  findAllTabs: (...args) => {
+  findAllTabs: (...args: any[]) => {
     return TabLocator.findAll(...args)
   },
-  findSelectedTab: (...args) => {
+  findSelectedTab: (...args: any[]) => {
     return SelectedTabLocator.find(...args)
   },
-  findTabPanel: (...args) => {
+  findTabPanel: (...args: any[]) => {
     return PanelLocator.find(...args)
   },
-  findAllTabPanels: (...args) => {
+  findAllTabPanels: (...args: any[]) => {
     return PanelLocator.findAll(...args)
   }
 })

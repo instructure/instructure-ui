@@ -41,27 +41,27 @@ describe('<FileDrop />', async () => {
       await mount(<FileDrop renderLabel="Some label" interaction="disabled" />)
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
-      expect(input.getDOMNode().disabled).to.be.true()
+      expect((input.getDOMNode() as HTMLInputElement).disabled).to.be.true()
     })
     it('should functionally disable the input if `disabled` is set', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<FileDrop renderLabel="Some label" disabled />)
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
-      expect(input.getDOMNode().disabled).to.be.true()
+      expect((input.getDOMNode() as HTMLInputElement).disabled).to.be.true()
     })
     it('should functionally disable the input if `interaction` is set to readonly', async () => {
       await mount(<FileDrop renderLabel="Some label" interaction="readonly" />)
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
-      expect(input.getDOMNode().disabled).to.be.true()
+      expect((input.getDOMNode() as HTMLInputElement).disabled).to.be.true()
     })
     it('should functionally disable the input if `readOnly` is set', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<FileDrop renderLabel="Some label" readOnly />)
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
-      expect(input.getDOMNode().disabled).to.be.true()
+      expect((input.getDOMNode() as HTMLInputElement).disabled).to.be.true()
     })
   })
   describe('file-type checking when onDrop', async () => {

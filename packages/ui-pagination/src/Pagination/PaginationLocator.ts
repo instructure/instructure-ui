@@ -31,10 +31,12 @@ const PaginationButtonLocator = locator(Pagination.Page.selector)
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const PaginationLocator = locator(Pagination.selector, {
-  findAllPageButtons: async (...args) =>
+  findAllPageButtons: async (...args: any[]) =>
     PaginationButtonLocator.findAll(...args),
 
-  findPageButton: async (...args) => PaginationButtonLocator.find(...args),
+  findPageButton: async (...args: any[]) =>
+    PaginationButtonLocator.find(...args),
 
-  findArrowButton: async (...args) => PaginationArrowButtonLocator.find(...args)
+  findArrowButton: async (...args: any[]) =>
+    PaginationArrowButtonLocator.find(...args)
 })

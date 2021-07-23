@@ -30,11 +30,18 @@ import {
 } from '@instructure/ui-test-queries'
 import { SelectorOptions } from '@instructure/ui-test-queries/src/utils/selectors'
 import { QueryArguments } from '@instructure/ui-test-queries/src/utils/parseQueryArguments'
-import { GenericFunction } from '@instructure/ui-test-queries/src/utils/bindElementToMethods'
+import { QueryOrHelperType } from '@instructure/ui-test-queries/src/utils/bindElementToUtilities'
 
-export function locator(
+// Cut the first argument of function thats an object's value
+type ObjWithCutFirstArg<T> = {
+  [K in keyof T]: T[K] extends (_: any, ...tail: infer TT) => infer R // if a function
+    ? (...args: TT) => R // cut first argument
+    : T[K] // or use the original value
+}
+
+export function locator<T>(
   containerSelector: string,
-  customMethods: Record<string, GenericFunction> = {}
+  customMethods: T = {} as any
 ) {
   const queryAll = (
     element: Element,
@@ -46,25 +53,26 @@ export function locator(
   queryAll.displayName = containerSelector
 
   const query = (...args: any[]) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-expect-error TODO fix typing of ...args
     return firstOrNull(queryAll(...args))
   }
 
   const findAll = (...args: QueryArguments) => {
     const { element, selector, options } = parseQueryArguments(...args)
+    // this could be typed better. findAllByQuery should be generic, accepting
+    // customMethods as a generic param.
     return findAllByQuery(queryAll, element, selector, {
       ...options,
       customMethods: {
         ...customMethods,
         ...options.customMethods
       }
-    })
+    }) as Promise<QueryOrHelperType[] & ObjWithCutFirstArg<T>[]>
   }
 
   const find = async (...args: QueryArguments) => {
-    // TODO remove "as any". This will result in lots of ts typing errors
-    return firstOrNull(await findAll(...args)) as any
+    return firstOrNull(await findAll(...args)) as QueryOrHelperType &
+      ObjWithCutFirstArg<T>
   }
 
   const findWithText = (...args: QueryArguments) => {
@@ -84,6 +92,7 @@ export function locator(
     methods[methodKey] = async (...args: QueryArguments) => {
       const { element, selector, options } = parseQueryArguments(...args)
       const container = await find(element)
+      // @ts-expect-error TODO fix typing of container[methodKey]
       return container ? container[methodKey](selector, options) : null
     }
   })
