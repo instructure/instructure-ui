@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Component, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -32,7 +32,11 @@ import {
 } from '@instructure/ui-react-utils'
 
 type Props = {
-  as?: AsElementType
+  /**
+   * the element type to render as
+   */
+  as: AsElementType
+  children: ReactNode
 }
 
 /**
@@ -40,12 +44,10 @@ type Props = {
 category: components/utilities
 ---
 @module PresentationContent
+@tsProps
 **/
 class PresentationContent extends Component<Props> {
   static propTypes = {
-    /**
-     * the element type to render as
-     */
     as: PropTypes.elementType,
     children: PropTypes.node
   }

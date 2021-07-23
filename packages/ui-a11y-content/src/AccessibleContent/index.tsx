@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Component, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -36,7 +36,11 @@ import { ScreenReaderContent } from '../ScreenReaderContent'
 
 type Props = {
   alt?: string
-  as?: AsElementType
+  /**
+   * the element type to render the screen reader content as
+   */
+  as: AsElementType
+  children: ReactNode
 }
 
 /**
@@ -44,13 +48,11 @@ type Props = {
 category: components/utilities
 ---
 @module AccessibleContent
+@tsProps
 **/
 class AccessibleContent extends Component<Props> {
   static propTypes = {
     alt: PropTypes.string,
-    /**
-     * the element type to render the screen reader content as
-     */
     as: PropTypes.elementType,
     children: PropTypes.node
   }
