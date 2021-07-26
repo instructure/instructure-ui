@@ -25,7 +25,7 @@
 import { storiesOf } from '@storybook/react'
 import { renderExample } from './renderExample.js'
 import { renderPage } from './renderPage.js'
-import generateComponentExamples from './generateComponentExamples.js'
+import { generateComponentExamples } from '@instructure/ui-test-utils'
 // must be imported with Webpack because this file cannot contain async calls
 import propJSONData from '../../prop-data.json'
 

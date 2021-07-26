@@ -66,8 +66,7 @@ describe('<Alert />', async () => {
   })
 
   describe('with generated examples', async () => {
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ sectionProp: string; propValue... Remove this comment to see the full error message
-    generateA11yTests(AlertExamples)
+    generateA11yTests(Alert, AlertExamples)
   })
 
   it('should not render the Close button when `renderCloseButtonLabel` is not provided', async () => {
