@@ -29,8 +29,11 @@
  *
  * @param {Object} propValues an object with the shape {propName: arrayOfPossibleValues}
  * @returns {Array} an array of all prop combinations [{propAName: propAValue, propBName: propBValue}]
+ *
+ * @module generatePropCombinations
+ * @private
  */
-module.exports = function generatePropCombinations(propValues = {}) {
+export function generatePropCombinations(propValues = {}) {
   const propNames = Object.keys(propValues)
   let combos = []
 
@@ -73,3 +76,5 @@ module.exports = function generatePropCombinations(propValues = {}) {
   }
   return combos
 }
+
+export default generatePropCombinations

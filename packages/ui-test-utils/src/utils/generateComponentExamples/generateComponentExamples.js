@@ -22,26 +22,61 @@
  * SOFTWARE.
  */
 
-const { uid } = require('@instructure/uid')
-const generatePropCombinations = require('./generatePropCombinations')
+import { nanoid } from 'nanoid'
+
+import generatePropCombinations from './generatePropCombinations'
+
 /**
- * Generates examples for the given component based on the given configuration.
- * @param Component A React component
- * @param {{
- *   ?sectionProp: string,
- *   ?maxExamplesPerPage: number|Function,
- *   maxExamples: number
- *   propValues: {},
- *   ?excludeProps: [],
- *   ?getComponentProps: Function,
- *   ?getExampleProps: Function,
- *   ?getParameters: Function,
- *   ?filter: Function
- * }} config.
- * A configuration object (stored in xy.examples.jsx files in InstUI)
- * @returns [] Array of examples broken into sections and pages if configured to do so.
+ * @typedef {Object} ComponentExample
+ * @property {React.ElementType} Component
+ * @property {any} componentProps
+ * @property {any} exampleProps
+ * @property {string} key
  */
-module.exports = function generateComponentExamples(Component, config) {
+
+/**
+ * @typedef {Object} Page
+ * @property {number} index
+ * @property {ComponentExample[]} examples
+ */
+/**
+ *
+ * @typedef {Object} ExampleSection
+ * @property {string} sectionName
+ * @property {string} propName
+ * @property {string} propValue
+ * @property {Page[]} pages
+ *
+ *
+ */
+
+/** Generates Component prop examples based on an example generator definition.
+ * @param {React.ComponentType} Component
+ * @param {Object} config - the definition
+ * @returns {ExampleSection[]}
+ * @module generateComponentExamples
+ * @private
+ *
+ */
+export function generateComponentExamples(
+  Component,
+  config = {
+    sectionProp: null,
+    maxExamplesPerPage: null,
+    propValues: {},
+    excludeProps: [],
+    getComponentProps: (props, index) => {
+      return {}
+    },
+    getExampleProps: (props, index) => {
+      return {}
+    },
+    getParameters: (examples, pageIndex) => {
+      return {}
+    },
+    filter: (props) => false
+  }
+) {
   const { sectionProp, excludeProps, filter } = config
 
   const PROPS_CACHE = []
@@ -133,6 +168,9 @@ module.exports = function generateComponentExamples(Component, config) {
 
   const maybeAddExample = (props) => {
     const componentProps = getComponentProps(props)
+    const exampleProps = getExampleProps(props)
+    const key = nanoid()
+    const propsString = JSON.stringify(componentProps)
     const ignore = typeof filter === 'function' ? filter(componentProps) : false
     if (ignore) {
       return
@@ -214,3 +252,5 @@ function isEmpty(obj) {
   }
   return true
 }
+
+export default generateComponentExamples

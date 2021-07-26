@@ -22,7 +22,11 @@
  * SOFTWARE.
  */
 
-import { ElementType } from 'react'
+import React, { ElementType } from 'react'
+import { mount } from '@instructure/ui-test-sandbox'
+import { expect } from './expect'
+import { within } from '../index'
+import { generateComponentExamples } from './generateComponentExamples/generateComponentExamples'
 
 type ComponentExample = {
   Component: ElementType
@@ -31,35 +35,28 @@ type ComponentExample = {
   key: string
 }
 
-type ExampleSection = {
-  sectionName: string
-  propName: string
-  propValue: string
-  pages: {
-    examples: ComponentExample[]
-    index: number
-  }[]
-}
+const renderExample = ({
+  Component,
+  componentProps,
+  key
+}: ComponentExample) => <Component key={key} {...componentProps} />
 
-//const renderExample = ({
-//  Component,
-//  componentProps,
-//  key
-//}: ComponentExample) => <Component key={key} {...componentProps} />
-
-// this is coming from generateComponentExamples.js in __examples__
-// TODO This is broken. It was using the examples-loader to preprocess the data.
+/**
+ *
+ * @param Component
+ * @param componentExample
+ * @param only
+ *
+ * @module generateA11yTests
+ * @private
+ */
 export function generateA11yTests(
-  // @ts-expect-error this is not used now
-  {
-    componentName,
-    sections
-  }: { componentName: string; sections: ExampleSection[] },
-  // @ts-expect-error this is not used now
+  Component: React.ComponentType,
+  componentExample: any,
   only: any[] = []
 ) {
-  /*
-  describe(`${componentName} should meet accessibility standards`, async () => {
+  const sections = generateComponentExamples(Component, componentExample)
+  describe(`${Component.displayName} should meet accessibility standards`, async () => {
     sections.forEach(({ pages, propName, propValue }, i) => {
       if (only[0] && i === only[0]) return
       const description = propName
@@ -81,8 +78,9 @@ export function generateA11yTests(
                 )} [${i},${j}]`
               : `${j}`
             it(description, async () => {
-              await mount(<Example />)
-              expect(await accessible()).to.be.true()
+              const subject = await mount(<Example />)
+              const element = within(subject.getDOMNode())
+              expect(await element.accessible()).to.be.true()
             })
             j++
           })
@@ -90,5 +88,5 @@ export function generateA11yTests(
         })
       })
     })
-  })*/
+  })
 }
