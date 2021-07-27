@@ -133,11 +133,11 @@ class Badge extends Component<Props> {
     formatOverflowText: (_count: number, countUntil: number) =>
       `${countUntil - 1} +`
   }
+  _defaultId: string
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Badg... Remove this comment to see the full error message
     this._defaultId = uid('Badge')
   }
 
@@ -196,7 +196,6 @@ class Badge extends Component<Props> {
         css={styles.badge}
         //@ts-expect-error has to be string
         title={type === 'count' && this.countOverflow() ? count : null}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Badg... Remove this comment to see the full error message
         id={!standalone ? this._defaultId : null}
         display={standalone ? 'inline-block' : 'block'}
       >
@@ -208,7 +207,6 @@ class Badge extends Component<Props> {
   renderChildren() {
     return Children.map(this.props.children, (child) => {
       return safeCloneElement(child as ReactElement, {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Badg... Remove this comment to see the full error message
         'aria-describedby': this._defaultId
       })
     })

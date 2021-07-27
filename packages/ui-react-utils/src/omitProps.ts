@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { omitProps } from './passthroughProps'
+
 /**
  * ---
  * category: utilities/react
@@ -31,9 +31,48 @@ import { omitProps } from './passthroughProps'
  * Automatically excludes the following props: 'theme', 'children', 'className', 'style', 'styles', 'makeStyles', 'themeOverride'
  * @module omitProps
  * @param {Object} props React component props
- * @param {Object} propTypes React component propTypes
+ * @param {Object|Array<string>} propTypes React component propTypes or the list of allowed prop keys
  * @param {Array} exclude an optional array of prop names to exclude
  * @returns {Object} props object without the excluded props
+ * @module omitProps
  */
+function omitProps<T extends Record<string, any>>(
+  props: T,
+  propTypesOrAllowedPropList: Record<string, any> | string[],
+  exclude?: string[]
+) {
+  const propKeys = Array.isArray(propTypesOrAllowedPropList)
+    ? propTypesOrAllowedPropList
+    : Object.keys(propTypesOrAllowedPropList || {})
+  const combined = exclude ? propKeys.concat(exclude) : propKeys
+
+  return omit(props, combined)
+}
+
+const hasOwnProperty = Object.prototype.hasOwnProperty
+
+const omit = (originalObject: Record<string, unknown>, keys: string[]) => {
+  // code based on babel's _objectWithoutProperties
+  const newObject: Record<string, unknown> = {}
+  for (const key in originalObject) {
+    // special case because we always want to omit these and === is faster than concat'ing them in
+    if (
+      key === 'theme' ||
+      key === 'children' ||
+      key === 'className' ||
+      key === 'style' ||
+      key === 'styles' ||
+      key === 'makeStyles' ||
+      key === 'themeOverride'
+    )
+      continue
+
+    if (keys.includes(key) || !hasOwnProperty.call(originalObject, key))
+      continue
+    newObject[key] = originalObject[key]
+  }
+
+  return newObject
+}
 export default omitProps
 export { omitProps }

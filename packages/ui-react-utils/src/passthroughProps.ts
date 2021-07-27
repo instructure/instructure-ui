@@ -21,77 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import isPropValid from '@emotion/is-prop-valid'
 // list of "valid" props https://github.com/emotion-js/emotion/blob/master/packages/is-prop-valid/src/props.js
-
-type PropTypesOrAllowedPropList = Record<string, any> | string[]
-
-const hasOwnProperty = Object.prototype.hasOwnProperty
-const omit = (originalObject: Record<string, unknown>, keys: string[]) => {
-  // code based on babel's _objectWithoutProperties
-  const newObject: Record<string, unknown> = {}
-  for (const key in originalObject) {
-    // special case because we always want to omit these and === is faster than concat'ing them in
-    if (
-      key === 'theme' ||
-      key === 'children' ||
-      key === 'className' ||
-      key === 'style' ||
-      key === 'styles' ||
-      key === 'makeStyles' ||
-      key === 'themeOverride'
-    )
-      continue
-
-    if (keys.includes(key) || !hasOwnProperty.call(originalObject, key))
-      continue
-    newObject[key] = originalObject[key]
-  }
-  return newObject
-}
-
-function omitProps<T extends Record<string, any>>(
-  props: T,
-  propTypesOrAllowedPropList: PropTypesOrAllowedPropList,
-  exclude?: string[]
-) {
-  const propKeys = Array.isArray(propTypesOrAllowedPropList)
-    ? propTypesOrAllowedPropList
-    : Object.keys(propTypesOrAllowedPropList || {})
-  const combined = exclude ? propKeys.concat(exclude) : propKeys
-
-  return omit(props, combined)
-}
-
-// this was the fastest implementation from testing: https://jsperf.com/pick-props
-function pick(obj: Record<string, unknown>, keys: string[]) {
-  const res: Record<string, unknown> = {}
-  const len = keys.length
-  let idx = -1
-  let key
-
-  while (++idx < len) {
-    key = keys[idx]
-    if (key in obj) {
-      res[key] = obj[key]
-    }
-  }
-  return res
-}
-
-function pickProps<T extends Record<string, any>>(
-  props: T,
-  propTypesOrAllowedPropList: PropTypesOrAllowedPropList,
-  include?: string[]
-) {
-  const propKeys = Array.isArray(propTypesOrAllowedPropList)
-    ? propTypesOrAllowedPropList
-    : Object.keys(propTypesOrAllowedPropList || {})
-  const combined = include ? propKeys.concat(include) : propKeys
-
-  return pick(props, combined)
-}
-
+import isPropValid from '@emotion/is-prop-valid'
 function passthroughProps(props: Record<string, any>) {
   const validProps: Record<string, unknown> = {}
 
@@ -114,4 +45,5 @@ function passthroughProps(props: Record<string, any>) {
   return validProps
 }
 
-export { pickProps, omitProps, passthroughProps }
+export { passthroughProps }
+export default passthroughProps

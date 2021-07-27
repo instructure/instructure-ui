@@ -24,8 +24,9 @@
 
 import React from 'react'
 
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 import { Byline } from '../index'
+import { View } from '@instructure/ui-view'
 
 describe('<Byline />', async () => {
   // eslint-disable-next-line max-len
@@ -80,5 +81,54 @@ describe('<Byline />', async () => {
 
     // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'find'.
     expect(await find('figure')).to.exist()
+  })
+
+  it(`should not allow the 'as' prop`, async () => {
+    const consoleError = stub(console, 'error')
+    // @ts-expect-error FIXME remove this line to see the error
+    await mount(<Byline as="foo">{image}</Byline>)
+    expect(consoleError).to.be.calledWith(
+      "Warning: [Byline] prop 'as' is not allowed."
+    )
+  })
+
+  describe('when passing down props to View', async () => {
+    const allowedProps = {
+      margin: 'small'
+    }
+
+    const ignoreProps = [
+      'theme',
+      'children',
+      'styles',
+      'makeStyles',
+      'elementRef'
+    ]
+
+    View.allowedProps
+      .filter((prop) => !ignoreProps.includes(prop))
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const consoleError = stub(console, 'error')
+            const warning = `Warning: [Byline] prop '${prop}' is not allowed.`
+            const props = {
+              [prop]: 'foo'
+            }
+
+            await mount(<Byline {...props}>{image}</Byline>)
+            expect(consoleError).to.be.calledWith(warning)
+          })
+        } else {
+          it(`should allow the '${prop}' prop`, async () => {
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+            const props = { [prop]: allowedProps[prop] }
+            const consoleError = stub(console, 'error')
+
+            await mount(<Byline {...props}>{image}</Byline>)
+            expect(consoleError).to.not.be.called()
+          })
+        }
+      })
   })
 })

@@ -257,6 +257,9 @@ export const propTypes = {
   dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 
+//This variable will be attached as static property on the `View` component
+//so we don't rely on the `PropTypes` validators for our internal logic.
+//This means on prod builds the consuming applications can safely delete propTypes.
 export const allowedProps: AllowedPropKeys = [
   'as',
   'background',
