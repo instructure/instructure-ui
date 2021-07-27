@@ -37,7 +37,7 @@
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/types": "8.7.0",
+    "@instructure/shared-types": "8.7.0",
     "@instructure/ui-babel-preset": "8.7.0",
     "@instructure/ui-test-utils": "8.7.0",
     "@types/lodash": "^4.14.171",

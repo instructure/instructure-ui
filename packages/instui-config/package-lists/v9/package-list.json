@@ -14,6 +14,7 @@
   "@instructure/instui-cli",
   "@instructure/instui-config",
   "@instructure/pkg-utils",
+  "@instructure/shared-types",
   "@instructure/template-app",
   "@instructure/template-component",
   "@instructure/template-package",
