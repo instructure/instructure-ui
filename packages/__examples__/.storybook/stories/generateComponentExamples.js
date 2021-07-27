@@ -21,9 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 const { uid } = require('@instructure/uid')
 const generatePropCombinations = require('./generatePropCombinations')
-
+/**
+ * Generates examples for the given component based on the given configuration.
+ * @param Component A React component
+ * @param {{
+ *   ?sectionProp: string,
+ *   ?maxExamplesPerPage: number|Function,
+ *   maxExamples: number
+ *   propValues: {},
+ *   ?excludeProps: [],
+ *   ?getComponentProps: Function,
+ *   ?getExampleProps: Function,
+ *   ?getParameters: Function,
+ *   ?filter: Function
+ * }} config.
+ * A configuration object (stored in xy.examples.jsx files in InstUI)
+ * @returns [] Array of examples broken into sections and pages if configured to do so.
+ */
 module.exports = function generateComponentExamples(Component, config) {
   const { sectionProp, excludeProps, filter } = config
 
