@@ -105,7 +105,8 @@ type Props = {
 category: components
 tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
-**/
+@tsProps
+ **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Select extends Component<Props> {
