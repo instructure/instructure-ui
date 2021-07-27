@@ -58,11 +58,12 @@ type Props = {
    */
   onRequestHideOptions: (event: Event) => void
   /**
-   * Callback fired when option is hovered or highlighted via keyboard
+   * Callback fired when option is hovered or highlighted via keyboard.
+   * Either the `id` or the `direction` parameter is supplied
    */
   onRequestHighlightOption: (
     event: Event,
-    data: { id?: string; direction?: number }
+    data: { id?: string; direction?: 1 | -1 }
   ) => void
   /**
    * Callback fired when first option should be highlighted
@@ -175,7 +176,7 @@ class Selectable extends Component<Props> {
     onRequestHideOptions: (_event: Event) => {},
     onRequestHighlightOption: (
       _event: Event,
-      _data: Record<string, unknown>
+      _data: { id?: string; direction?: 1 | -1 }
     ) => {},
     onRequestHighlightFirstOption: (_event: Event) => {},
     onRequestHighlightLastOption: (_event: Event) => {},
