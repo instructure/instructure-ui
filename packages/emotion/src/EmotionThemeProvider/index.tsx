@@ -31,7 +31,7 @@ type PartialTheme = DeepPartial<Omit<BaseTheme, 'key'>>
 type ComponentOverride =
   | DeepPartial<ComponentThemeMap>
   // this is needed for user defined components which we can't possibly type
-  | { [otherComponent: string]: any }
+  | { [otherComponent: string]: Record<string, unknown> }
 
 type ThemeOverride =
   | PartialTheme
@@ -122,7 +122,7 @@ const getTheme = (themeOrOverride: ThemeOrOverride) => (
 
   // we pick the overrides for the current theme from the override object
   const currentThemeOverrides =
-    //@ts-expect-error fix this
+    //@ts-expect-error TODO: fix this code, this way it is really hard to type
     themeOrOverride?.themeOverrides?.[themeName] || {}
 
   return merge(
@@ -132,6 +132,8 @@ const getTheme = (themeOrOverride: ThemeOrOverride) => (
   )
 }
 
+// themeable themes have a 'key' property (= name of the theme),
+// so without it it's just an overrides objects
 const isBaseTheme = (theme: ThemeOrOverride): theme is BaseTheme => {
   return 'key' in (theme as BaseTheme)
 }

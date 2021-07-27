@@ -667,18 +667,19 @@ class Select extends Component<Props> {
     let lastWasGroup = false
     const viewProps = isShowingOptions
       ? {
-          display: 'block' as const,
-          overflowY: 'auto' as const,
+          display: 'block',
+          overflowY: 'auto',
           // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
           maxHeight: this._optionHeight * visibleOptionsCount,
           maxWidth: optionsMaxWidth || this.width,
-          background: 'primary' as const,
+          background: 'primary',
           // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
           elementRef: (node) => (this._listView = node)
         }
       : { maxHeight: 0 }
 
     return (
+      //@ts-expect-error TODO: fix this
       <View {...viewProps}>
         <Options
           {...getListProps({ as: 'ul', elementRef: this.handleListRef })}
