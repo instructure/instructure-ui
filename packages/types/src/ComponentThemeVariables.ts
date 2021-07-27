@@ -1257,15 +1257,21 @@ export interface ThemeVariables {
   Billboard: Billboard
   Breadcrumb: Breadcrumb
   BaseButton: BaseButton
+  Button: BaseButton
   CloseButton: CloseButton
+  CondensedButton: BaseButton
+  IconButton: BaseButton
   Byline: Byline
   CalendarDay: CalendarDay
+  'Calendar.Day': CalendarDay
   Calendar: Calendar
   CheckboxFacade: CheckboxFacade
   ToggleFacade: ToggleFacade
   CodeEditor: CodeEditor
   DrawerLayoutContent: DrawerLayoutContent
+  'DrawerLayout.Content': DrawerLayoutContent
   DrawerLayoutTray: DrawerLayoutTray
+  'DrawerLayout.Tray': DrawerLayoutTray
   FileDrop: FileDrop
   Flex: Flex
   FormFieldGroup: FormFieldGroup
@@ -1273,28 +1279,42 @@ export interface ThemeVariables {
   FormFieldMessage: FormFieldMessage
   FormFieldMessages: FormFieldMessages
   Grid: Grid
+  GridCol: Grid
+  GridRow: Grid
   Heading: Heading
   Link: Link
   InlineListItem: InlineListItem
+  'InlineList.Item': InlineListItem
   ListItem: ListItem
+  'List.Item': ListItem
   List: List
   MenuItem: MenuItem
+  'Menu.Item': MenuItem
   MenuGroup: MenuGroup
+  'Menu.Group': MenuGroup
   MenuSeparator: MenuSeparator
+  'Menu.Separator': MenuSeparator
   Metric: Metric
   MetricGroup: MetricGroup
   ModalBody: ModalBody
+  'Modal.Body': ModalBody
   ModalFooter: ModalFooter
+  'Modal.Footer': ModalFooter
   ModalHeader: ModalHeader
+  'Modal.Header': ModalHeader
   Modal: Modal
   Transition: Transition
   AppNavItem: AppNavItem
+  'AppNav.Item': AppNavItem
   AppNav: AppNav
   NavigationItem: NavigationItem
+  'Navigation.Item': NavigationItem
   Navigation: Navigation
   NumberInput: NumberInput
   OptionsItem: OptionsItem
+  'Options.Item': OptionsItem
   OptionsSeparator: OptionsSeparator
+  'Options.Separator': OptionsSeparator
   Options: Options
   Mask: Mask
   Pages: Pages
@@ -1305,17 +1325,26 @@ export interface ThemeVariables {
   RangeInput: RangeInput
   RadioInput: RadioInput
   RatingIcon: RatingIcon
+  'Rating.Icon': RatingIcon
   Select: Select
   Spinner: Spinner
   InlineSVG: InlineSVG
   TableBody: TableBody
+  'Table.Body': TableBody
   TableCell: TableCell
+  'Table.Cell': TableCell
   TableColHeader: TableColHeader
+  'Table.ColHeader': TableColHeader
   TableHead: TableHead
+  'Table.Head': TableHead
   TableRow: TableRow
+  'Table.Row': TableRow
   TableRowHeader: TableRowHeader
+  'Table.RowHeader': TableRowHeader
   TabsPanel: TabsPanel
+  'Tabs.Panel': TabsPanel
   TabsTab: TabsTab
+  'Tabs.Tab': TabsTab
   Table: Table
   Tabs: Tabs
   Tag: Tag
@@ -1325,7 +1354,9 @@ export interface ThemeVariables {
   Tooltip: Tooltip
   Tray: Tray
   TreeBrowserButton: TreeBrowserButton
+  'TreeBrowser.Button': TreeBrowserButton
   TreeBrowserCollection: TreeBrowserCollection
+  'TreeBrowser.Collection': TreeBrowserCollection
   TreeBrowser: TreeBrowser
   TruncateText: TruncateText
   ContextView: ContextView
