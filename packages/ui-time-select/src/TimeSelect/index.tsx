@@ -93,7 +93,7 @@ category: components
 
 @testable()
 class TimeSelect extends Component<Props> {
-  static componentId = 'TimeSelect'
+  static readonly componentId = 'TimeSelect'
 
   static propTypes = {
     /**

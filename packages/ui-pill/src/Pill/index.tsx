@@ -59,7 +59,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Pill extends Component<Props> {
-  static componentId = 'Pill'
+  static readonly componentId = 'Pill'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

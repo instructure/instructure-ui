@@ -75,7 +75,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Tooltip extends Component<Props> {
-  static componentId = 'Tooltip'
+  static readonly componentId = 'Tooltip'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

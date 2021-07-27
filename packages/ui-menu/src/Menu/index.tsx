@@ -97,7 +97,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Menu extends Component<Props> {
-  static componentId = 'Menu'
+  static readonly componentId = 'Menu'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

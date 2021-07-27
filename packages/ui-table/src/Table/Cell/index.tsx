@@ -50,7 +50,7 @@ id: Table.Cell
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Cell extends Component<Props> {
-  static componentId = 'Table.Cell'
+  static readonly componentId = 'Table.Cell'
 
   /* eslint-disable react/require-default-props */
   static propTypes = {

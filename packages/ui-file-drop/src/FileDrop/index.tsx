@@ -101,7 +101,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class FileDrop extends Component<Props, State> {
-  static componentId = 'FileDrop'
+  static readonly componentId = 'FileDrop'
 
   static propTypes = {
     /**
@@ -359,8 +359,12 @@ class FileDrop extends Component<Props, State> {
     return [accepted, rejected]
   }
   handleChange = (e: any) => {
-    const { onDrop, onDropAccepted, onDropRejected, shouldEnablePreview } =
-      this.props
+    const {
+      onDrop,
+      onDropAccepted,
+      onDropRejected,
+      shouldEnablePreview
+    } = this.props
     const fileList = this.getDataTransferItems(e, shouldEnablePreview)
     const [accepted, rejected] = this.parseFiles(fileList)
     e.preventDefault()

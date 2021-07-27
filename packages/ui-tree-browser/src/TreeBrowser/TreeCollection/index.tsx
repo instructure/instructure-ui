@@ -79,7 +79,7 @@ id: TreeBrowser.Collection
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class TreeCollection extends Component<Props> {
-  static componentId = 'TreeBrowser.Collection'
+  static readonly componentId = 'TreeBrowser.Collection'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

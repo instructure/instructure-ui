@@ -69,7 +69,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class AppNav extends Component<Props> {
-  static componentId = 'AppNav'
+  static readonly componentId = 'AppNav'
 
   static propTypes = {
     /**

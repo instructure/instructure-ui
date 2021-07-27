@@ -54,7 +54,7 @@ id: Rating.Icon
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class RatingIcon extends Component<Props> {
-  static componentId = 'Rating.Icon'
+  static readonly componentId = 'Rating.Icon'
 
   static propTypes = {
     animationDelay: PropTypes.number,

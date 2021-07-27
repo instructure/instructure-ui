@@ -64,7 +64,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ToggleDetails extends Component<Props> {
-  static componentId = 'ToggleDetails'
+  static readonly componentId = 'ToggleDetails'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

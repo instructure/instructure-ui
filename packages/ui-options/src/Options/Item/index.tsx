@@ -57,7 +57,7 @@ id: Options.Item
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class Item extends Component<Props> {
-  static componentId = 'Options.Item'
+  static readonly componentId = 'Options.Item'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
@@ -135,8 +135,14 @@ class Item extends Component<Props> {
   }
 
   render() {
-    const { as, role, styles, renderBeforeLabel, renderAfterLabel, children } =
-      this.props
+    const {
+      as,
+      role,
+      styles,
+      renderBeforeLabel,
+      renderAfterLabel,
+      children
+    } = this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
     const passthroughProps = omitProps(this.props, Item.propTypes)

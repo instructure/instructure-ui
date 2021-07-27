@@ -66,7 +66,7 @@ category: components
 
 @testable()
 class CheckboxGroup extends Component<Props> {
-  static componentId = 'CheckboxGroup'
+  static readonly componentId = 'CheckboxGroup'
 
   static propTypes = {
     name: PropTypes.string.isRequired,

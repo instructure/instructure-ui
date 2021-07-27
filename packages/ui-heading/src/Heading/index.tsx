@@ -66,7 +66,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Heading extends Component<Props> {
-  static componentId = 'Heading'
+  static readonly componentId = 'Heading'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

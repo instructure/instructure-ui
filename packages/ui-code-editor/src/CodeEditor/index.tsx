@@ -70,7 +70,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class CodeEditor extends Component<Props> {
-  static componentId = 'CodeEditor'
+  static readonly componentId = 'CodeEditor'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

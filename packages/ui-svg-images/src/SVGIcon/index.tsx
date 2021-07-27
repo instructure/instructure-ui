@@ -52,7 +52,7 @@ category: components/utilities
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class SVGIcon extends Component<Props> {
-  static componentId = 'SVGIcon'
+  static readonly componentId = 'SVGIcon'
 
   static propTypes = {
     // @ts-expect-error ts-migrate(2783) FIXME: 'makeStyles' is specified more than once, so this ... Remove this comment to see the full error message

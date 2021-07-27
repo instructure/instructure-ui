@@ -68,7 +68,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Badge extends Component<Props> {
-  static componentId = 'Badge'
+  static readonly componentId = 'Badge'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

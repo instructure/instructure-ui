@@ -62,7 +62,7 @@ category: components
 @withStyle(null, generateComponentTheme)
 @testable()
 class IconButton extends Component<Props> {
-  static componentId = 'IconButton'
+  static readonly componentId = 'IconButton'
 
   static propTypes = {
     /**

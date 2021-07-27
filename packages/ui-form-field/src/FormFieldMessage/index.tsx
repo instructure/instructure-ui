@@ -57,7 +57,7 @@ example: true
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class FormFieldMessage extends Component<Props> {
-  static componentId = 'FormFieldMessage'
+  static readonly componentId = 'FormFieldMessage'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

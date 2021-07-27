@@ -67,7 +67,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Calendar extends Component<Props> {
-  static componentId = 'Calendar'
+  static readonly componentId = 'Calendar'
 
   static Day = Day
   static DAY_COUNT = 42 // 6 weeks visible

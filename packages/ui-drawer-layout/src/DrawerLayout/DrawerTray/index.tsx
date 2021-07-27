@@ -83,7 +83,7 @@ id: DrawerLayout.Tray
 @bidirectional()
 @testable()
 class DrawerTray extends Component<Props & BidirectionalProps> {
-  static componentId = 'DrawerLayout.Tray'
+  static readonly componentId = 'DrawerLayout.Tray' as const
 
   static locatorAttribute = 'data-drawer-tray'
   static propTypes = {

@@ -60,7 +60,7 @@ category: components
 @withStyle(generateStyle)
 @testable()
 class Rating extends Component<Props> {
-  static componentId = 'Rating'
+  static readonly componentId = 'Rating'
 
   static propTypes = {
     /**

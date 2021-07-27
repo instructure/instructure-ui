@@ -83,7 +83,7 @@ category: components
 @bidirectional()
 @testable()
 class Tabs extends Component<Props & BidirectionalProps> {
-  static componentId = 'Tabs'
+  static readonly componentId = 'Tabs'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

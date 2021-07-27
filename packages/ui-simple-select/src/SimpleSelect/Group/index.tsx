@@ -39,7 +39,7 @@ id: SimpleSelect.Group
 ---
 **/
 class Group extends Component<Props> {
-  static componentId = 'SimpleSelect.Group'
+  static readonly componentId = 'SimpleSelect.Group'
 
   static propTypes = {
     /**

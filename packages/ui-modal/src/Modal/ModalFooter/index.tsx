@@ -47,7 +47,7 @@ id: Modal.Footer
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ModalFooter extends Component<Props> {
-  static componentId = 'Modal.Footer'
+  static readonly componentId = 'Modal.Footer'
 
   static propTypes = {
     children: PropTypes.node,

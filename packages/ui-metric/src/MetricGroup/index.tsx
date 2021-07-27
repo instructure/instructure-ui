@@ -46,7 +46,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MetricGroup extends Component<Props> {
-  static componentId = 'MetricGroup'
+  static readonly componentId = 'MetricGroup'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

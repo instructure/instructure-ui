@@ -69,7 +69,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Billboard extends Component<Props> {
-  static componentId = 'Billboard'
+  static readonly componentId = 'Billboard'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

@@ -60,7 +60,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Spinner extends Component<Props> {
-  static componentId = 'Spinner'
+  static readonly componentId = 'Spinner'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
