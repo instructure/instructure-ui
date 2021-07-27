@@ -23,10 +23,11 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { Spinner } from '../index'
 import { SpinnerLocator } from '../SpinnerLocator'
+import { View } from '@instructure/ui-view'
 
 describe('<Spinner />', async () => {
   it('should render', async () => {
@@ -58,5 +59,39 @@ describe('<Spinner />', async () => {
       await SpinnerLocator.find(':contains(I have translated Loading)')
     ).to.exist()
     expect(await spinner.accessible()).to.be.true()
+  })
+
+  describe('when passing down props to View', async () => {
+    const allowedProps = {
+      margin: 'small',
+      elementRef: () => {},
+      as: 'div'
+    }
+
+    View.allowedProps
+      .filter((prop) => prop !== 'styles' && prop !== 'makeStyles')
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const consoleError = stub(console, 'error')
+            const props = {
+              [prop]: 'foo'
+            }
+            const warning = `Warning: [Spinner] prop '${prop}' is not allowed.`
+
+            await mount(<Spinner renderTitle="Loading" {...props} />)
+            expect(consoleError).to.be.calledWith(warning)
+          })
+        } else {
+          it(`should allow the '${prop}' prop`, async () => {
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+            const props = { [prop]: allowedProps[prop] }
+            const consoleError = stub(console, 'error')
+
+            await mount(<Spinner renderTitle="Loading" {...props} />)
+            expect(consoleError).to.not.be.called()
+          })
+        }
+      })
   })
 })

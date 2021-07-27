@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { pickProps } from './passthroughProps'
 
 /**
  * ---
@@ -30,9 +29,38 @@ import { pickProps } from './passthroughProps'
  * Return a props object with only specified propTypes.
  * @module pickProps
  * @param {Object} props React component props
- * @param {Object} propTypes React component propTypes
+ * @param {Object|Array<string>} propTypes React component propTypes or the list of allowed prop keys
  * @param {Array} include an optional array of prop names to include
  * @returns {Object} props object with only the included props
+ * @module pickProps
  */
+function pickProps<T extends Record<string, any>>(
+  props: T,
+  propTypesOrAllowedPropList: Record<string, any> | string[],
+  include?: string[]
+) {
+  const propKeys = Array.isArray(propTypesOrAllowedPropList)
+    ? propTypesOrAllowedPropList
+    : Object.keys(propTypesOrAllowedPropList || {})
+  const combined = include ? propKeys.concat(include) : propKeys
+
+  return pick(props, combined)
+}
+
+// this was the fastest implementation from testing: https://jsperf.com/pick-props
+function pick(obj: Record<string, unknown>, keys: string[]) {
+  const res: Record<string, unknown> = {}
+  const len = keys.length
+  let idx = -1
+  let key
+
+  while (++idx < len) {
+    key = keys[idx]
+    if (key in obj) {
+      res[key] = obj[key]
+    }
+  }
+  return res
+}
 export default pickProps
 export { pickProps }

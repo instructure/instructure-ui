@@ -29,6 +29,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { Pagination, PaginationButton } from '../index'
 import { PaginationLocator } from '../PaginationLocator'
+import { View } from '@instructure/ui-view'
 
 const buildPages = (count = 4, current = 0) => {
   // @ts-expect-error ts-migrate(6133) FIXME: 'v' is declared but its value is never read.
@@ -405,6 +406,60 @@ describe('<Pagination />', async () => {
       })
 
       expect(nextButton).to.not.exist()
+    })
+
+    describe('when passing down props to View', async () => {
+      const allowedProps = {
+        margin: 'small',
+        as: 'section'
+      }
+
+      View.allowedProps
+        .filter(
+          (prop) =>
+            prop !== 'elementRef' && prop !== 'makeStyles' && prop !== 'styles'
+        )
+        .forEach((prop) => {
+          if (Object.keys(allowedProps).indexOf(prop) < 0) {
+            it(`should NOT allow the '${prop}' prop`, async () => {
+              const consoleError = stub(console, 'error')
+              const warning = `Warning: [Pagination] prop '${prop}' is not allowed.`
+              const props = { [prop]: 'foo' }
+
+              await mount(
+                <Pagination
+                  variant="compact"
+                  labelNext="Next"
+                  labelPrev="Previous"
+                  {...props}
+                >
+                  {buildPages(6)}
+                </Pagination>
+              )
+              await wait(() => {
+                expect(consoleError).to.be.calledWith(warning)
+              })
+            })
+          } else {
+            it(`should allow the '${prop}' prop`, async () => {
+              // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+              const props = { [prop]: allowedProps[prop] }
+              const consoleError = stub(console, 'error')
+
+              await mount(
+                <Pagination
+                  variant="compact"
+                  labelNext="Next"
+                  labelPrev="Previous"
+                  {...props}
+                >
+                  {buildPages(6)}
+                </Pagination>
+              )
+              expect(consoleError).to.not.be.called()
+            })
+          }
+        })
     })
 
     it(`should pass down the elementRef prop`, async () => {
