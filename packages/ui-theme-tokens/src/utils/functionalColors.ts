@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { BaseColors, Colors } from '@instructure/types'
+import { BaseColors, Colors } from '@instructure/shared-types'
 
 function functionalColors(colors: BaseColors): Colors {
   const text = {

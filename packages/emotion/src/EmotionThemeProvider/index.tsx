@@ -24,7 +24,11 @@
 import React from 'react'
 import { ThemeProvider } from '@emotion/react'
 import { merge, cloneDeep } from 'lodash'
-import { ComponentThemeMap, DeepPartial, BaseTheme } from '@instructure/types'
+import {
+  ComponentThemeMap,
+  DeepPartial,
+  BaseTheme
+} from '@instructure/shared-types'
 import { canvas } from '@instructure/ui-themes'
 
 type PartialTheme = DeepPartial<Omit<BaseTheme, 'key'>>

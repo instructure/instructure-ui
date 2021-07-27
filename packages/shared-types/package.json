@@ -1,9 +1,9 @@
 {
-  "name": "@instructure/types",
+  "name": "@instructure/shared-types",
   "version": "8.7.0",
   "description": "Shared TypeScript typings for Instructure UI packages.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "homepage": "https://instructure.design/#types",
+  "homepage": "https://instructure.design/#shared-types",
   "license": "MIT",
   "main": "src/index.ts",
   "types": "types/index.d.ts",
@@ -18,5 +18,8 @@
   },
   "bugs": {
     "url": "https://github.com/instructure/instructure-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

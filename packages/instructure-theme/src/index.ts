@@ -23,7 +23,7 @@
  */
 
 import { instructure } from '@instructure/ui-theme-tokens'
-import { BaseTheme } from '@instructure/types'
+import { BaseTheme } from '@instructure/shared-types'
 
 const {
   borders,
