@@ -69,7 +69,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Table extends Component<Props> {
-  static componentId = 'Table'
+  static readonly componentId = 'Table'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

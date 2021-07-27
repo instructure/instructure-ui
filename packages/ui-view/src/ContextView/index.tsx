@@ -71,7 +71,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 class ContextView extends Component<Props & OtherHTMLAttributes<Props>> {
-  static componentId = 'ContextView'
+  static readonly componentId = 'ContextView'
 
   static propTypes = {
     /**

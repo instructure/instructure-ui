@@ -62,7 +62,7 @@ category: components
 
 @testable()
 class ToggleButton extends Component<Props> {
-  static componentId = 'ToggleButton'
+  static readonly componentId = 'ToggleButton'
 
   static propTypes = {
     /**

@@ -62,7 +62,7 @@ id: Grid.Row
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class GridRow extends Component<Props> {
-  static componentId = 'Grid.Row'
+  static readonly componentId = 'Grid.Row'
 
   /* eslint-disable react/require-default-props */
   static propTypes = {

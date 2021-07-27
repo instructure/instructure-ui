@@ -72,7 +72,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Flex extends Component<Props> {
-  static componentId = 'Flex'
+  static readonly componentId = 'Flex'
 
   constructor(props: Props) {
     super(props)

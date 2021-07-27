@@ -58,7 +58,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class FormFieldGroup extends Component<Props> {
-  static componentId = 'FormFieldGroup'
+  static readonly componentId = 'FormFieldGroup'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

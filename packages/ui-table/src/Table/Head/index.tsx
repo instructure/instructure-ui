@@ -60,7 +60,7 @@ id: Table.Head
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Head extends Component<Props> {
-  static componentId = 'Table.Head'
+  static readonly componentId = 'Table.Head'
 
   /* eslint-disable react/require-default-props */
   static propTypes = {
@@ -131,8 +131,12 @@ class Head extends Component<Props> {
     Children.forEach(row.props.children, (colHeader) => {
       count += 1
       if (matchComponentTypes(colHeader, [ColHeader])) {
-        const { id, stackedSortByLabel, sortDirection, onRequestSort } =
-          colHeader.props
+        const {
+          id,
+          stackedSortByLabel,
+          sortDirection,
+          onRequestSort
+        } = colHeader.props
 
         const label = stackedSortByLabel || id
 

@@ -49,7 +49,7 @@ id: Table.RowHeader
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class RowHeader extends Component<Props> {
-  static componentId = 'Table.RowHeader'
+  static readonly componentId = 'Table.RowHeader'
 
   /* eslint-disable react/require-default-props */
   static propTypes = {

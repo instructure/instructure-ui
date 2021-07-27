@@ -47,7 +47,7 @@ id: Breadcrumb.Link
 
 @testable()
 class BreadcrumbLink extends Component<Props> {
-  static componentId = 'Breadcrumb.Link'
+  static readonly componentId = 'Breadcrumb.Link'
 
   static propTypes = {
     /**

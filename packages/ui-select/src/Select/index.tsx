@@ -109,7 +109,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search, form
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Select extends Component<Props> {
-  static componentId = 'Select'
+  static readonly componentId = 'Select'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

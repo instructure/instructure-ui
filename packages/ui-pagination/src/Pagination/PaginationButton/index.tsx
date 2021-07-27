@@ -41,7 +41,7 @@ id: Pagination.Page
 
 @testable()
 class PaginationButton extends Component<Props> {
-  static componentId = 'Pagination.Page'
+  static readonly componentId = 'Pagination.Page'
 
   static propTypes = {
     /**

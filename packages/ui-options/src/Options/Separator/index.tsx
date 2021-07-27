@@ -48,7 +48,7 @@ id: Options.Separator
 **/
 @withStyle(generateStyles, generateComponentTheme)
 class Separator extends Component<Props> {
-  static componentId = 'Options.Separator'
+  static readonly componentId = 'Options.Separator'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

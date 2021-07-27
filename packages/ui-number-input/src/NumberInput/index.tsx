@@ -82,7 +82,7 @@ id: NumberInput
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class NumberInput extends Component<Props> {
-  static componentId = 'NumberInput'
+  static readonly componentId = 'NumberInput'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

@@ -64,7 +64,7 @@ category: components/utilities
 **/
 
 class Dialog extends Component<Props & OtherHTMLAttributes<Props>> {
-  static componentId = 'Dialog'
+  static readonly componentId = 'Dialog'
 
   static propTypes = {
     /**

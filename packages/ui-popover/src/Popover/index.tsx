@@ -109,7 +109,7 @@ tags: overlay, portal, dialog
 @bidirectional()
 @testable()
 class Popover extends Component<Props & BidirectionalProps> {
-  static componentId = 'Popover'
+  static readonly componentId = 'Popover'
 
   static propTypes = {
     /**

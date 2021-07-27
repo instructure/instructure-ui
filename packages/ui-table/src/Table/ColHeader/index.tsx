@@ -57,7 +57,7 @@ id: Table.ColHeader
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColHeader extends Component<Props> {
-  static componentId = 'Table.ColHeader'
+  static readonly componentId = 'Table.ColHeader'
 
   /* eslint-disable react/require-default-props */
   static propTypes = {
@@ -146,8 +146,14 @@ class ColHeader extends Component<Props> {
   }
 
   render() {
-    const { onRequestSort, width, children, sortDirection, scope, styles } =
-      this.props
+    const {
+      onRequestSort,
+      width,
+      children,
+      sortDirection,
+      scope,
+      styles
+    } = this.props
 
     return (
       <th

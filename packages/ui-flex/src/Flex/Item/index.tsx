@@ -63,7 +63,7 @@ id: Flex.Item
 **/
 @withStyle(generateStyle)
 class Item extends Component<Props> {
-  static componentId = 'Flex.Item'
+  static readonly componentId = 'Flex.Item'
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message

@@ -61,7 +61,7 @@ category: components
 @bidirectional()
 @testable()
 class DrawerLayout extends Component<Props & BidirectionalProps> {
-  static componentId = 'DrawerLayout'
+  static readonly componentId = 'DrawerLayout'
 
   static locatorAttribute = 'data-drawer-layout'
   static propTypes = {

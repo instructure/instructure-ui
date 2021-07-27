@@ -76,7 +76,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Alert extends Component<Props> {
-  static componentId = 'Alert'
+  static readonly componentId = 'Alert'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

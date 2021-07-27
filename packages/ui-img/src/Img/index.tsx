@@ -67,7 +67,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Img extends Component<Props> {
-  static componentId = 'Img'
+  static readonly componentId = 'Img'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

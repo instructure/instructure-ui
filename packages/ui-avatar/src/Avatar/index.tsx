@@ -80,7 +80,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Avatar extends Component<Props> {
-  static componentId = 'Avatar'
+  static readonly componentId = 'Avatar'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

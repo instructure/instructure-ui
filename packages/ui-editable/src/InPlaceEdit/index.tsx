@@ -60,7 +60,7 @@ category: components
 **/
 @withStyle(generateStyle, null)
 class InPlaceEdit extends Component<Props> {
-  static componentId = 'InPlaceEdit'
+  static readonly componentId = 'InPlaceEdit'
   static propTypes = {
     /**
      * Function to render the view mode component.

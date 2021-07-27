@@ -74,7 +74,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Link extends Component<Props> {
-  static componentId = 'Link'
+  static readonly componentId = 'Link'
 
   static propTypes = {
     /**

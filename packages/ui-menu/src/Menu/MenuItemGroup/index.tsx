@@ -71,7 +71,7 @@ id: Menu.Group
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MenuItemGroup extends Component<Props> {
-  static componentId = 'Menu.Group'
+  static readonly componentId = 'Menu.Group'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

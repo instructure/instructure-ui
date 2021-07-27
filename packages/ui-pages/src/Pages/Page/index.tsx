@@ -44,7 +44,7 @@ id: Pages.Page
 ---
 **/
 class Page extends Component<Props> {
-  static componentId = 'Pages.Page'
+  static readonly componentId = 'Pages.Page'
 
   static propTypes = {
     /**

@@ -50,7 +50,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Mask extends Component<Props> {
-  static componentId = 'Mask'
+  static readonly componentId = 'Mask'
 
   static propTypes = {
     onDismiss: PropTypes.func,

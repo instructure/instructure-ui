@@ -64,7 +64,7 @@ id: Tabs.Panel
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Panel extends Component<Props> {
-  static componentId = 'Tabs.Panel'
+  static readonly componentId = 'Tabs.Panel'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

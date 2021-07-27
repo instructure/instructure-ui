@@ -69,7 +69,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class CloseButton extends Component<Props> {
-  static componentId = 'CloseButton'
+  static readonly componentId = 'CloseButton'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

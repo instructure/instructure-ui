@@ -69,7 +69,7 @@ id: List.Item
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ListItem extends Component<Props> {
-  static componentId = 'List.Item'
+  static readonly componentId = 'List.Item'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

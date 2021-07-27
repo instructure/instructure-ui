@@ -68,7 +68,7 @@ id: TreeBrowser.Button
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class TreeButton extends Component<Props> {
-  static componentId = 'TreeBrowser.Button'
+  static readonly componentId = 'TreeBrowser.Button'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
@@ -159,8 +159,12 @@ class TreeButton extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderCollectionIcon() {
-    const { expanded, collectionIcon, collectionIconExpanded, styles } =
-      this.props
+    const {
+      expanded,
+      collectionIcon,
+      collectionIconExpanded,
+      styles
+    } = this.props
 
     if (collectionIcon || collectionIconExpanded) {
       return (

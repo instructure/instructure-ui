@@ -67,7 +67,7 @@ parent: FormField
 **/
 @withStyle(generateStyle)
 class FormFieldLayout extends Component<Props> {
-  static componentId = 'FormFieldLayout'
+  static readonly componentId = 'FormFieldLayout'
 
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
