@@ -150,6 +150,7 @@ export type SelectableRender = {
 category: components
 tags: autocomplete, typeahead, combobox, dropdown, search
 ---
+@tsProps
 **/
 class Selectable extends Component<Props> {
   static propTypes = {
