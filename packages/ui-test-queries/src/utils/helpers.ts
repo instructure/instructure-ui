@@ -88,24 +88,11 @@ function typeIn(element: Element, text: string) {
             },
             ...eventInit
           }
-          // not nice, but this is a very weird code :/
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           fireEvent.keyDown(element, keyEventData)
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           fireEvent.keyPress(element, keyEventData)
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           fireEvent.beforeInput(element, inputEventData)
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           fireEvent.input(element, inputEventData)
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           fireEvent.change(element, inputEventData)
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           fireEvent.keyUp(element, keyEventData)
         }
         resolve()

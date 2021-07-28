@@ -26,27 +26,50 @@ import keycode from 'keycode'
 
 import { isElement } from './isElement'
 import { find } from './queries'
-import { GenericFunction } from './bindElementToMethods'
-import { FireEvent, FireEventMethod } from './events'
+import { eventMap, FireEvent, FireEventInit, FireEventMethod } from './events'
+
+export type EventMapTypes = {
+  // every fireXYEvent looks the same except keyboard and blur ones.
+  [K in Extract<
+    keyof Omit<typeof eventMap, 'keyDown' | 'keyPress' | 'keyUp' | 'blur'>,
+    string
+  >]: (
+    init?: FireEventInit,
+    options?: Record<string, unknown>
+  ) => Promise<Event>
+} &
+  {
+    // blur event triggers handled by fireBlurEvent are a bit different
+    [K in 'blur']: (
+      init?: FireEventInit,
+      options?: Record<string, unknown>
+    ) => Promise<Event | void>
+  } &
+  {
+    // keyboard event triggers handled by fireKeyboardEvent are a bit different
+    [K in 'keyDown' | 'keyPress' | 'keyUp']: (
+      whichKey?: string | number,
+      init?: FireEventInit,
+      options?: Record<string, unknown>
+    ) => Promise<Event>
+  } // TODO refactor this to make it more uniform
 
 export function bindElementToEvents(element: Element, events: FireEvent) {
   return Object.entries(events).reduce(
-    (
-      bound: Record<string, GenericFunction>,
-      [key, fn]: [string, FireEventMethod]
-    ) => {
+    (bound, [keyStr, fn]: [string, FireEventMethod]) => {
+      const key = keyStr as keyof typeof events
       if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
-        bound[key] = fireKeyboardEvent.bind(null, element, fn)
+        bound[key as 'keyDown'] = fireKeyboardEvent.bind(null, element, fn)
       } else if (['focus'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
-        bound[key] = fireFocusEvent.bind(null, element, fn)
+        bound[key as 'focus'] = fireFocusEvent.bind(null, element, fn)
       } else if (['blur'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
-        bound[key] = fireBlurEvent.bind(null, element, fn)
+        bound[key as 'blur'] = fireBlurEvent.bind(null, element, fn)
       } else if (['click'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
-        bound[key] = fireClickEvent.bind(null, element, fn)
+        bound[key as 'click'] = fireClickEvent.bind(null, element, fn)
       } else if (
         ['dblClick'].includes(key) ||
         key.startsWith('mouse') ||
@@ -54,14 +77,14 @@ export function bindElementToEvents(element: Element, events: FireEvent) {
         key.startsWith('touch')
       ) {
         // eslint-disable-next-line no-param-reassign
-        bound[key] = firePointerEvent.bind(null, element, fn)
+        bound[key as 'dblClick'] = firePointerEvent.bind(null, element, fn)
       } else {
         // eslint-disable-next-line no-param-reassign
-        bound[key] = fireDOMEvent.bind(null, element, fn)
+        bound[key as 'cut'] = fireDOMEvent.bind(null, element, fn)
       }
       return bound
     },
-    {}
+    {} as EventMapTypes
   )
 }
 
@@ -71,7 +94,7 @@ function fireDOMEvent(
   init?: Record<string, unknown>
 ) {
   const fireEvent = fn.bind(null, element)
-  return new Promise((resolve, reject) => {
+  return new Promise<Event>((resolve, reject) => {
     setTimeout(() => {
       try {
         resolve(fireEvent(init))
@@ -86,7 +109,7 @@ async function firePointerEvent(
   element: Element,
   fn: FireEventMethod,
   init?: Record<string, unknown>,
-  options = { clickable: true }
+  options: { clickable?: boolean } = { clickable: true }
 ) {
   let clickable = element as any // TODO remove these casts
 
@@ -98,7 +121,7 @@ async function firePointerEvent(
     clickable = clickable.getDOMNode()
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise<Event>((resolve, reject) => {
     setTimeout(() => {
       try {
         if (isElement(clickable)) {
@@ -123,7 +146,10 @@ async function fireClickEvent(
   element: Element,
   fn: FireEventMethod,
   init?: Record<string, unknown>,
-  options = { clickable: true, simulate: false }
+  options: { clickable?: boolean; simulate?: boolean } = {
+    clickable: true,
+    simulate: false
+  }
 ) {
   let clickable = element as any
 
@@ -135,7 +161,7 @@ async function fireClickEvent(
     clickable = clickable.getDOMNode()
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise<Event>((resolve, reject) => {
     setTimeout(() => {
       try {
         if (isElement(clickable)) {
@@ -164,7 +190,10 @@ async function fireBlurEvent(
   element: Element,
   fn: FireEventMethod,
   init?: Record<string, unknown>,
-  options = { focusable: true, simulate: false }
+  options: { focusable?: boolean; simulate?: boolean } = {
+    focusable: true,
+    simulate: false
+  }
 ) {
   let focusable = element as any
 
@@ -176,7 +205,7 @@ async function fireBlurEvent(
     focusable = focusable.getDOMNode()
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise<Event | void>((resolve, reject) => {
     setTimeout(() => {
       try {
         if (isElement(focusable)) {
@@ -190,7 +219,7 @@ async function fireBlurEvent(
             resolve(fireEvent(init))
           } else {
             // We need to call Element.blur here because firing the FocusEvent doesn't actually move focus.
-            resolve((focusable as HTMLElement).blur())
+            resolve((focusable as HTMLInputElement).blur())
           }
         } else {
           reject(
@@ -211,7 +240,10 @@ async function fireFocusEvent(
   element: Element,
   fn: FireEventMethod,
   init?: Record<string, unknown>,
-  options = { focusable: true, simulate: false }
+  options: { focusable?: boolean; simulate?: boolean } = {
+    focusable: true,
+    simulate: false
+  }
 ) {
   let focusable = element as any
 
@@ -223,7 +255,7 @@ async function fireFocusEvent(
     focusable = focusable.getDOMNode()
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise<Event>((resolve, reject) => {
     setTimeout(() => {
       try {
         if (isElement(focusable)) {
@@ -257,9 +289,11 @@ async function fireFocusEvent(
 async function fireKeyboardEvent(
   element: Element,
   fn: FireEventMethod,
-  whichKey: string | number,
+  whichKey?: string | number, // this can be really undefined
   init?: Record<string, unknown>,
-  options = { focusable: true }
+  options: { focusable?: boolean; whichKey?: string | number } = {
+    focusable: true
+  }
 ) {
   let focusable = element as any
 
@@ -274,7 +308,7 @@ async function fireKeyboardEvent(
   const keyCode = typeof whichKey === 'string' ? keycode(whichKey) : whichKey
   const key = typeof whichKey === 'number' ? keycode(whichKey) : whichKey
 
-  return new Promise((resolve, reject) => {
+  return new Promise<Event>((resolve, reject) => {
     setTimeout(() => {
       try {
         if (isElement(focusable)) {

@@ -26,10 +26,12 @@
 
 import { spy } from '@instructure/ui-test-sandbox'
 
-export type FireEventMethod = (
-  node: Element,
-  init?: { [key: string]: unknown; target?: Record<string, unknown> }
-) => Event | void
+export type FireEventInit = {
+  [key: string]: unknown
+  target?: Record<string, any>
+}
+
+export type FireEventMethod = (element: Element, init?: FireEventInit) => Event
 
 export type FireEvent = { (element: EventTarget, event: Event): Event } & {
   [key in keyof typeof eventMap]: FireEventMethod
@@ -418,7 +420,7 @@ fireEvent.select = (node, init) => {
   // - keyDown
   // so we can use any here
   // @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/SelectEventPlugin.js#L203-L224
-  fireEvent.keyUp(node, init)
+  return fireEvent.keyUp(node, init)
 }
 
 Object.entries(eventAliasMap).forEach(([aliasKey, key]) => {

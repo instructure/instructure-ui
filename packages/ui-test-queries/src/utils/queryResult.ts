@@ -27,7 +27,7 @@ import { QueryResult, waitForQueryResult } from './waitForQueryResult'
 import { elementToString } from './elementToString'
 import {
   bindElementToUtilities,
-  QueryOrHelperType
+  QueriesHelpersEventsType
 } from './bindElementToUtilities'
 import { SelectorOptions } from './selectors'
 import { GenericFunction } from './bindElementToMethods'
@@ -82,7 +82,7 @@ async function _getQueryResult(
 function wrapQueryResult<T extends Element | Element[]>(
   results: T,
   customMethods?: Record<string, GenericFunction>
-): T extends Element[] ? QueryOrHelperType[] : QueryOrHelperType {
+): T extends Element[] ? QueriesHelpersEventsType[] : QueriesHelpersEventsType {
   return bindElementToUtilities(results, customMethods)
 }
 

@@ -30,16 +30,16 @@ import {
 } from '@instructure/ui-test-queries'
 import { SelectorOptions } from '@instructure/ui-test-queries/src/utils/selectors'
 import { QueryArguments } from '@instructure/ui-test-queries/src/utils/parseQueryArguments'
-import { QueryOrHelperType } from '@instructure/ui-test-queries/src/utils/bindElementToUtilities'
+import { QueriesHelpersEventsType } from '@instructure/ui-test-queries/src/utils/bindElementToUtilities'
 
-// Cut the first argument of function thats an object's value
+// Cut the first argument of function that's an object's value
 type ObjWithCutFirstArg<T> = {
   [K in keyof T]: T[K] extends (_: any, ...tail: infer TT) => infer R // if a function
     ? (...args: TT) => R // cut first argument
-    : T[K] // or use the original value
+    : never // or use the original value
 }
 
-export function locator<T>(
+export function locator<K, T extends Record<string, K>>(
   containerSelector: string,
   customMethods: T = {} as any
 ) {
@@ -52,8 +52,8 @@ export function locator<T>(
   }
   queryAll.displayName = containerSelector
 
-  const query = (...args: any[]) => {
-    // @ts-expect-error TODO fix typing of ...args
+  const query = (...args: QueryArguments) => {
+    // @ts-expect-error ...args should be refactored for better typing
     return firstOrNull(queryAll(...args))
   }
 
@@ -67,11 +67,16 @@ export function locator<T>(
         ...customMethods,
         ...options.customMethods
       }
-    }) as Promise<QueryOrHelperType[] & ObjWithCutFirstArg<T>[]>
+      // Adding here the generic T argument makes TS able to autocomplete custom
+      // methods (if they are a compile time constant)
+      // Typing this properly would require to make QueryArguments generic,
+      // which would introduce a tons of complexity, so a refactor of this
+      // library would be preferred.
+    }) as Promise<QueriesHelpersEventsType[] & ObjWithCutFirstArg<T>>
   }
 
   const find = async (...args: QueryArguments) => {
-    return firstOrNull(await findAll(...args)) as QueryOrHelperType &
+    return firstOrNull(await findAll(...args)) as QueriesHelpersEventsType &
       ObjWithCutFirstArg<T>
   }
 
@@ -85,15 +90,17 @@ export function locator<T>(
     return find(element, `:withLabel("${selector}")`, options)
   }
 
-  const methods: {
-    [key: string]: (...args: QueryArguments) => Promise<any>
-  } = {}
-  Object.keys(customMethods).forEach((methodKey) => {
+  const methods: Record<
+    keyof T,
+    (...args: QueryArguments) => Promise<K>
+  > = {} as any
+  Object.keys(customMethods).forEach((methodKey: keyof T) => {
     methods[methodKey] = async (...args: QueryArguments) => {
       const { element, selector, options } = parseQueryArguments(...args)
       const container = await find(element)
-      // @ts-expect-error TODO fix typing of container[methodKey]
-      return container ? container[methodKey](selector, options) : null
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      return container ? (container[methodKey] as any)(selector, options) : null
     }
   })
 

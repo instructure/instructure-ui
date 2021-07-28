@@ -51,9 +51,7 @@ describe('<Popover />', async () => {
     expect(content).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
   testShowContent('click', 'click')
-  // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
   testShowContent('focus', 'focus')
   testShowContent('hover', 'mouseOver', {
     relatedTarget: document.documentElement
@@ -276,10 +274,13 @@ describe('<Popover />', async () => {
   })
 })
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'on' implicitly has an 'any' type.
-function testShowContent(on, eventType, eventInit) {
+function testShowContent(
+  on: string,
+  eventType: 'click' | 'focus' | 'mouseOver',
+  eventInit?: Record<string, any>
+) {
   it(`should show content on ${on}`, async () => {
-    const onValue = [on, on === 'hover' ? 'focus' : null]
+    const onValue = [on, on === 'hover' ? 'focus' : null] as any
     await mount(
       <Popover on={onValue} renderTrigger={<button>Click me</button>}>
         <h2>Foo Bar Baz</h2>
@@ -297,8 +298,10 @@ function testShowContent(on, eventType, eventInit) {
   })
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'handler' implicitly has an 'any' type.
-function testEventHandler(handler, ...eventType) {
+function testEventHandler(
+  handler: 'onClick' | 'onFocus' | 'onBlur',
+  ...eventType: ('focusOut' | 'blur' | 'click' | 'focus')[]
+) {
   it(`should fire ${handler} handler`, async () => {
     const handlerSpy = spy()
     const props = {

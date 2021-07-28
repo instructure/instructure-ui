@@ -127,7 +127,7 @@ describe('<MenuItem />', async () => {
 
     const item = await MenuItemLocator.find(':label(Hello)')
 
-    await item.click(null, { clickable: false })
+    await item.click(undefined, { clickable: false })
     await item.keyUp('enter')
     await item.keyUp('space')
 

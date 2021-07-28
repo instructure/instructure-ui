@@ -127,7 +127,7 @@ describe('<CheckboxGroup />', async () => {
 
     const checkboxGroup = await CheckboxGroupLocator.find()
     const input = await checkboxGroup.find('input[value="football"]')
-    await input.click(null, { clickable: false })
+    await input.click(undefined, { clickable: false })
 
     expect(onChange).to.not.have.been.called()
   })

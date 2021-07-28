@@ -32,6 +32,8 @@ import { SimpleSelect } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const SimpleSelectLocator = locator(SimpleSelect.selector, {
-  findInput: SelectLocator.findInput,
-  findOptionsList: SelectLocator.findOptionsList
+  findInput: SelectLocator.findInput as (...args: any) => Promise<any>, // TODO these dont work because TS doesnt find its type declarations,
+  findOptionsList: SelectLocator.findOptionsList as (
+    ...args: any
+  ) => Promise<any>
 })

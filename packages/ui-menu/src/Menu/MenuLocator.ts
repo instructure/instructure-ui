@@ -34,28 +34,22 @@ import { MenuItemLocator } from './MenuItem/MenuItemLocator'
 import { MenuItemGroupLocator } from './MenuItemGroup/MenuItemGroupLocator'
 
 const customMethods = {
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-  findAllItems: (...args) => {
+  findAllItems: (...args: any[]) => {
     return MenuItemLocator.findAll(...args)
   },
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-  findItem: (...args) => {
+  findItem: (...args: any[]) => {
     return MenuItemLocator.find(...args)
   },
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-  findAllGroups: (...args) => {
+  findAllGroups: (...args: any[]) => {
     return MenuItemGroupLocator.findAll(...args)
   },
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-  findGroup: (...args) => {
+  findGroup: (...args: any[]) => {
     return MenuItemGroupLocator.find(...args)
   },
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-  findPopoverTrigger: (...args) => {
+  findPopoverTrigger: (...args: any[]) => {
     return PopoverLocator.findTrigger(...args)
   },
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-  findPopoverContent: (...args) => {
+  findPopoverContent: (...args: any[]) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return PopoverLocator.findContent(element, selector, {
       ...options,

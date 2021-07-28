@@ -24,9 +24,26 @@
 
 export type GenericFunction = (...args: any) => unknown | any
 
-export function bindElementToMethods<K>(element: Element, methods: K) {
+// In an object where keys are functions remove their first argument
+type ObjWithCutFirstArg<T> = {
+  [K in keyof T]: T[K] extends (_: unknown, ...tail: infer TT) => infer R // if a function
+    ? (...args: TT) => R // cut first argument
+    : never // do not allow it, the method will throw an error
+}
+
+/**
+ * Returns a new object that contains all the given methods (the method names
+ * are the keys) with their first parameter automatically give the value of `element`,
+ * and this parameter removed.
+ * @param element This will be used as the first parameter of every method
+ * @param methods Object with methods, e.g. {f1: (p1: Element, p2: string) => 4}
+ */
+export function bindElementToMethods<K extends Record<string, T>, T>(
+  element: Element,
+  methods: K
+) {
   return Object.entries(methods).reduce(
-    (bound: Record<string, K>, [key, fn]: [string, K]) => {
+    (bound: ObjWithCutFirstArg<K>, [key, fn]: [keyof K, T]) => {
       if (typeof fn === 'function') {
         bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
         return bound
@@ -36,6 +53,6 @@ export function bindElementToMethods<K>(element: Element, methods: K) {
         )
       }
     },
-    {}
+    {} as ObjWithCutFirstArg<K>
   )
 }

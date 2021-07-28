@@ -110,7 +110,7 @@ describe('<Menu />', async () => {
       const menu = await MenuLocator.find(':label(Settings)')
       const item = await menu.findItem(':label(Account)')
 
-      await item.click(null, { clickable: false })
+      await item.click(undefined, { clickable: false })
 
       expect(onSelect).to.not.have.been.called()
     })
@@ -471,7 +471,7 @@ describe('<Menu />', async () => {
       const menu = await MenuLocator.find(':label(Parent)')
       const trigger = await menu.findItem(':label(Flyout)')
 
-      await trigger.click(null, { clickable: false })
+      await trigger.click(undefined, { clickable: false })
 
       const subMenu = await MenuLocator.find(':label(Flyout)')
       const popover = await subMenu.findPopoverContent({ expectEmpty: true })
@@ -635,9 +635,7 @@ describe('<Menu />', async () => {
         expect(popover.containsFocus()).to.be.true()
       })
 
-      await (wrapQueryResult(
-        trigger.getOwnerDocument().documentElement
-      ) as any).click()
+      await wrapQueryResult(trigger.getOwnerDocument().documentElement).click()
 
       expect(onToggle).to.have.been.calledTwice()
       expect(onToggle.getCall(1).args[0]).to.equal(false)

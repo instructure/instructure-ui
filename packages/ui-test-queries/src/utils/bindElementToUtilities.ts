@@ -21,19 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { fireEvent, eventMap } from './events'
+import { eventMap, fireEvent, FireEventInit } from './events'
 
 import * as helpers from './helpers'
 import * as queries from './queries'
-import { bindElementToMethods, GenericFunction } from './bindElementToMethods'
+import { bindElementToMethods } from './bindElementToMethods'
 import { bindElementToEvents } from './bindElementToEvents'
 import { isElement } from './isElement'
-
-type EventMapTypes = {
-  [K in Extract<keyof typeof eventMap, string>]: (
-    ...args: any
-  ) => Promise<Event>
-}
 
 // Cuts off the first element of a Function's parameter, e.g.
 // hasClass(elem, className) will be hasClass(className)
@@ -50,15 +44,42 @@ type QueryTypes = {
 type HelperTypes = {
   [K in Extract<keyof typeof helpers, string>]: CutFirstArg<typeof helpers[K]>
 }
+export type EventMapTypes = {
+  // every fireXYEvent looks the same except keyboard and blur ones.
+  [K in Extract<
+    keyof Omit<typeof eventMap, 'keyDown' | 'keyPress' | 'keyUp' | 'blur'>,
+    string
+  >]: (
+    init?: FireEventInit,
+    options?: Record<string, unknown>
+  ) => Promise<Event>
+} &
+  {
+    // blur event triggers handled by fireBlurEvent are a bit different
+    [K in 'blur']: (
+      init?: FireEventInit,
+      options?: Record<string, unknown>
+    ) => Promise<Event | void>
+  } &
+  {
+    // keyboard event triggers handled by fireKeyboardEvent are a bit different
+    [K in 'keyDown' | 'keyPress' | 'keyUp']: (
+      whichKey?: string | number,
+      init?: FireEventInit,
+      options?: Record<string, unknown>
+    ) => Promise<Event>
+  } // TODO refactor this to make it more uniform
 
-export type QueryOrHelperType = QueryTypes & HelperTypes & EventMapTypes
+export type QueriesHelpersEventsType = QueryTypes & HelperTypes & EventMapTypes
 
+// TODO this is too complex, it should be split into 2 functions, one binds
+// to a single element, the other to an array.
 function bindElementToUtilities<T extends Element | Element[]>(
   element: T,
-  customMethods: Record<string, GenericFunction> = {}
-): T extends Element[] ? QueryOrHelperType[] : QueryOrHelperType {
+  customMethods: Record<string, unknown> = {}
+): T extends Element[] ? QueriesHelpersEventsType[] : QueriesHelpersEventsType {
   if (!element) {
-    return null as any // just seems to happen deep in the recursion
+    return null as never // just seems to happen deep in the recursion
   } else if (Array.isArray(element)) {
     const boundElements = (element as Element[]).map((el) =>
       bindElementToUtilities(el, customMethods)
@@ -74,12 +95,18 @@ function bindElementToUtilities<T extends Element | Element[]>(
         element
     )
   }
+  // Note: typing this correctly so that autocomplete works is very hard.
+  // The root difficulty is that its a recursive type:
+  // queries.ts/findAllByQuery -> queryResults.ts/getQueryResult ->
+  // wrapQueryResult -> bindElementToUtilities
+  // Since TS cannot figure out the correct type by itself, we have to cheat
+  // and give the return type here manually.
   return {
     ...bindElementToMethods(element as Element, queries),
-    ...(bindElementToEvents(element as Element, fireEvent) as any), // could not type this :/
+    ...bindElementToEvents(element as Element, fireEvent),
     ...bindElementToMethods(element as Element, helpers),
     ...bindElementToMethods(element as Element, customMethods)
-  }
+  } as any
 }
 
 export { bindElementToUtilities }

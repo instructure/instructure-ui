@@ -29,12 +29,11 @@ import { PositionLocator } from '@instructure/ui-position/es/Position/PositionLo
 
 import { Popover } from './index'
 import { PopoverTriggerLocator } from './PopoverTriggerLocator'
-import { GenericFunction } from '@instructure/ui-test-queries/src/utils/bindElementToMethods'
 
-export const customMethods: Record<string, GenericFunction> = {
-  findContent: (...args) => PositionLocator.findContent(...args),
-  findPositionTarget: (...args) => PositionLocator.findTarget(...args),
-  findTrigger: (...args) => PopoverTriggerLocator.find(...args)
+export const customMethods = {
+  findContent: (...args: any[]) => PositionLocator.findContent(...args),
+  findPositionTarget: (...args: any[]) => PositionLocator.findTarget(...args),
+  findTrigger: (...args: any[]) => PopoverTriggerLocator.find(...args)
 }
 
 export { PopoverTriggerLocator }

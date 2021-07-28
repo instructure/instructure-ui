@@ -156,9 +156,7 @@ describe('<Tray />', async () => {
       expect(tray.containsFocus()).to.be.true()
     })
 
-    await (
-      wrapQueryResult(tray.getOwnerDocument().documentElement) as any
-    ).keyUp(
+    await wrapQueryResult(tray.getOwnerDocument().documentElement).keyUp(
       'escape',
       {
         defaultPrevented: false,

@@ -24,18 +24,17 @@
 import { locator } from '@instructure/ui-test-locator'
 
 import { ToggleGroup } from './index'
-import { GenericFunction } from '@instructure/ui-test-queries/src/utils/bindElementToMethods'
 
 const ToggleLocator = locator('[aria-expanded][aria-controls]')
 
-export const customMethods: Record<string, GenericFunction> = {
-  clickToggle: async (element, ...args) => {
+export const customMethods = {
+  clickToggle: async (element: any, ...args: any[]) => {
     return (await ToggleLocator.find(element)).click(...args)
   },
-  findToggle: async (...args) => {
+  findToggle: async (...args: any[]) => {
     return ToggleLocator.find(...args)
   },
-  findContent: async (element, ...args) => {
+  findContent: async (element: any, ...args: any[]) => {
     const toggle = await ToggleLocator.find(element)
     if (toggle) {
       return locator(`#${toggle.getAttribute('aria-controls')}`).find(...args)

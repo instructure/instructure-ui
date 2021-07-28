@@ -81,14 +81,7 @@ function findAllByQuery(queryFn: QueryFunction, ...args: QueryArguments) {
   return getQueryResult(queryFn, ...args)
 }
 
-async function findByQuery(
-  queryFn: (
-    element: Element,
-    selector: string | undefined,
-    options: SelectorOptions
-  ) => Element[],
-  ...args: QueryArguments
-) {
+async function findByQuery(queryFn: QueryFunction, ...args: QueryArguments) {
   return firstOrNull(await findAllByQuery(queryFn, ...args))
 }
 

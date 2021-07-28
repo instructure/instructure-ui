@@ -129,8 +129,7 @@ describe('<Checkbox />', async () => {
 
       const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
-
-      await input.click(null, { clickable: false })
+      await input.click(undefined, { clickable: false })
 
       expect(onClick).to.not.have.been.called()
       expect(onChange).to.not.have.been.called()

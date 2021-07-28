@@ -87,7 +87,7 @@ describe('<ToggleGroup />', () => {
     const content = await toggleGroup.findContent()
 
     expect(toggle.getAttribute('aria-controls')).to.equal(
-      content.getAttribute('id')
+      content!.getAttribute('id')
     )
   })
 
