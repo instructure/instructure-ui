@@ -26,7 +26,7 @@ import React, { ElementType } from 'react'
 import { mount } from '@instructure/ui-test-sandbox'
 import { expect } from './expect'
 import { within } from '../index'
-import { generateComponentExamples } from './generateComponentExamples/generateComponentExamples'
+import { generateComponentExamples } from './generateComponentExamples'
 
 type ComponentExample = {
   Component: ElementType
