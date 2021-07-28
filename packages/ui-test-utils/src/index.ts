@@ -59,8 +59,8 @@ import { waitForExpect } from './utils/waitForExpect'
 import { expect } from './utils/expect'
 
 import { generateA11yTests } from './utils/generateA11yTests'
-import { generateComponentExamples } from './utils/generateComponentExamples/generateComponentExamples'
-import { generatePropCombinations } from './utils/generateComponentExamples/generatePropCombinations'
+import { generateComponentExamples } from './utils/generateComponentExamples'
+import { generatePropCombinations } from './utils/generatePropCombinations'
 
 // these are defined in assertions.ts
 declare global {

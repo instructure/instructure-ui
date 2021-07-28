@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import { expect } from '../'
 
 // Note: This test should be in the .storybook folder, but our test runner ignores
 // folders that start with "." for some reason
-import generatePropCombinations from '../../.storybook/stories/generatePropCombinations'
+import { generatePropCombinations } from '../utils/generatePropCombinations'
 
 describe('generatePropCombinations', () => {
   it('should return [] when passed empty prop values', () => {

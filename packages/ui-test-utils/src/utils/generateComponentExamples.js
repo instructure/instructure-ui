@@ -24,7 +24,7 @@
 
 import { nanoid } from 'nanoid'
 
-import generatePropCombinations from './generatePropCombinations'
+import { generatePropCombinations } from './generatePropCombinations'
 
 /**
  * @typedef {Object} ComponentExample
