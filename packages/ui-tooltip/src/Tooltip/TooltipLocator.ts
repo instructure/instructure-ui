@@ -28,14 +28,13 @@ import { parseQueryArguments } from '@instructure/ui-test-queries'
 // eslint-disable-next-line no-restricted-imports
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 import { Tooltip } from './index'
-import { GenericFunction } from '@instructure/ui-test-queries/src/utils/bindElementToMethods'
 
-export const customMethods: Record<string, GenericFunction> = {
-  findTrigger: (...args) => {
+export const customMethods = {
+  findTrigger: (...args: any[]) => {
     const { element, options } = parseQueryArguments(...args)
     return PopoverLocator.findTrigger(element, '[aria-describedby]', options)
   },
-  findContent: (...args) => {
+  findContent: (...args: any[]) => {
     const { element, options } = parseQueryArguments(...args)
     return PopoverLocator.findContent(element, '[role="tooltip"]', options)
   }

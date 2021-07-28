@@ -519,10 +519,10 @@ describe('<DateInput />', async () => {
         await dateInput.click()
 
         const input = await dateInput.findInput()
-        await input.click(null, { clickable: false })
-        await input.keyDown('up', null, { focusable: false })
-        await input.keyDown('down', null, { focusable: false })
-        await input.keyDown('space', null, { focusable: false })
+        await input.click(undefined, { clickable: false })
+        await input.keyDown('up', undefined, { focusable: false })
+        await input.keyDown('down', undefined, { focusable: false })
+        await input.keyDown('space', undefined, { focusable: false })
         await input.change({ target: { value: 'January 5' } })
 
         expect(onRequestShowCalendar).to.not.have.been.called()

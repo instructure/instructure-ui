@@ -28,13 +28,11 @@ import { ToggleDetails } from './index'
 const ToggleLocator = locator('[aria-expanded][aria-controls]')
 
 export const customMethods = {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  clickToggle: async (element, ...args) =>
+  clickToggle: async (element: any, ...args: any[]) =>
     (await ToggleLocator.find(element)).click(...args),
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-  findToggle: (...args) => ToggleLocator.find(...args),
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  findContent: async (element, ...args) => {
+  findToggle: (element: any, ...args: any[]) =>
+    ToggleLocator.find(element, ...args),
+  findContent: async (element: any, ...args: any[]) => {
     const toggle = await ToggleLocator.find(element)
     if (toggle) {
       return locator(`#${toggle.getAttribute('aria-controls')}`).find(...args)

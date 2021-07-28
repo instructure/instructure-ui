@@ -101,7 +101,7 @@ describe('<RadioInputGroup />', async () => {
     const group = await RadioInputGroupLocator.find()
     const input = await group.find('input')
 
-    await input.click(null, { clickable: false })
+    await input.click(undefined, { clickable: false })
 
     await wait(() => {
       expect(onChange).to.not.have.been.called()

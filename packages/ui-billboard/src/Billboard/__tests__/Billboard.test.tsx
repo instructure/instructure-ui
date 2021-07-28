@@ -114,7 +114,7 @@ describe('<Billboard />', async () => {
 
       const subject = await mount(<Billboard onClick={onClick} disabled />)
       const billboard = within(subject.getDOMNode())
-      await billboard.click(null, { clickable: false })
+      await billboard.click(undefined, { clickable: false })
 
       expect(onClick).to.not.have.been.called()
     })
@@ -136,7 +136,7 @@ describe('<Billboard />', async () => {
 
       const subject = await mount(<Billboard onClick={onClick} readOnly />)
       const billboard = within(subject.getDOMNode())
-      await billboard.click(null, { clickable: false })
+      await billboard.click(undefined, { clickable: false })
 
       expect(onClick).to.not.have.been.called()
     })

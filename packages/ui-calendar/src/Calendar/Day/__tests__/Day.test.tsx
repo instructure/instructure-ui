@@ -176,7 +176,7 @@ describe('Day', async () => {
 
     expect(day).to.exist()
 
-    await day.click(null, { clickable: false })
+    await day.click(undefined, { clickable: false })
 
     expect(onClick).to.not.have.been.called()
   })

@@ -32,10 +32,10 @@ import {
   matches
 } from '@instructure/ui-test-queries'
 import { WrappedRef } from '@instructure/ui-test-sandbox/src/utils/reactComponentWrapper'
-import { QueryOrHelperType } from '@instructure/ui-test-queries/src/utils/bindElementToUtilities'
+import { QueriesHelpersEventsType } from '@instructure/ui-test-queries/src/utils/bindElementToUtilities'
 
 type AssertionParams = {
-  wrapper?: QueryOrHelperType
+  wrapper?: QueriesHelpersEventsType
   markup: () => string
   flag?: any
   arg1?: any
@@ -55,7 +55,7 @@ export default function assertions(
 
   function wrapObj(obj: ReactInstance | undefined | Element | WrappedRef) {
     if (obj && typeof (obj as WrappedRef).getDOMNode === 'function') {
-      return obj as unknown as QueryOrHelperType
+      return (obj as unknown) as QueriesHelpersEventsType
     }
 
     let node
@@ -307,7 +307,7 @@ export default function assertions(
 }
 
 function getActual(
-  wrapper: QueryOrHelperType | undefined,
+  wrapper: QueriesHelpersEventsType | undefined,
   assertion: string,
   ...args: unknown[]
 ) {

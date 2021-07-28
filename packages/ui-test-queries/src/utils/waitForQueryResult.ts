@@ -24,10 +24,10 @@
 
 import { elementToString } from './elementToString'
 import debounce from '@instructure/debounce'
-import { QueryOrHelperType } from './bindElementToUtilities'
+import { QueriesHelpersEventsType } from './bindElementToUtilities'
 
 export interface QueryResult {
-  results: QueryOrHelperType[]
+  results: QueriesHelpersEventsType[]
   selector: string
 }
 
