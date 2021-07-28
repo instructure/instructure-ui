@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { eventMap, fireEvent, FireEventInit } from './events'
+import { fireEvent } from './events'
 
 import * as helpers from './helpers'
 import * as queries from './queries'
 import { bindElementToMethods } from './bindElementToMethods'
-import { bindElementToEvents } from './bindElementToEvents'
+import { bindElementToEvents, EventMapTypes } from './bindElementToEvents'
 import { isElement } from './isElement'
 
 // Cuts off the first element of a Function's parameter, e.g.
@@ -44,31 +44,6 @@ type QueryTypes = {
 type HelperTypes = {
   [K in Extract<keyof typeof helpers, string>]: CutFirstArg<typeof helpers[K]>
 }
-export type EventMapTypes = {
-  // every fireXYEvent looks the same except keyboard and blur ones.
-  [K in Extract<
-    keyof Omit<typeof eventMap, 'keyDown' | 'keyPress' | 'keyUp' | 'blur'>,
-    string
-  >]: (
-    init?: FireEventInit,
-    options?: Record<string, unknown>
-  ) => Promise<Event>
-} &
-  {
-    // blur event triggers handled by fireBlurEvent are a bit different
-    [K in 'blur']: (
-      init?: FireEventInit,
-      options?: Record<string, unknown>
-    ) => Promise<Event | void>
-  } &
-  {
-    // keyboard event triggers handled by fireKeyboardEvent are a bit different
-    [K in 'keyDown' | 'keyPress' | 'keyUp']: (
-      whichKey?: string | number,
-      init?: FireEventInit,
-      options?: Record<string, unknown>
-    ) => Promise<Event>
-  } // TODO refactor this to make it more uniform
 
 export type QueriesHelpersEventsType = QueryTypes & HelperTypes & EventMapTypes
 
