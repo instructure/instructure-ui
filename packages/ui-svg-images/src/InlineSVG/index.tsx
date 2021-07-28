@@ -64,7 +64,7 @@ type Props = {
 category: components/utilities
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['inline', 'color'])
 @testable()
 class InlineSVG extends Component<Props> {
   static componentId = 'InlineSVG'
@@ -246,8 +246,7 @@ class InlineSVG extends Component<Props> {
 function parseAttributes(src) {
   const attributes = {}
   const SVGAttributesRegExp = /<svg\s+([^>]*)\s*>/
-  const namesAndValuesRegExp =
-    /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
+  const namesAndValuesRegExp = /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
 
   if (typeof src === 'string') {
     const attributesMatches = SVGAttributesRegExp.exec(src)

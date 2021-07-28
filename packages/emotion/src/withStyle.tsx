@@ -23,14 +23,74 @@
  */
 import React, { forwardRef, useState } from 'react'
 import { decorator } from '@instructure/ui-decorator'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
-import { isEqual } from 'lodash'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { useTextDirectionContext } from '@instructure/ui-i18n'
 import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
 import memoized from './memoize'
+
+const filterProps = <Props extends Record<string, any>>(
+  props: Props,
+  filterBy?: Array<keyof Props>
+) => {
+  const filter = new Set(filterBy)
+
+  // these props are always removed
+  const blacklist = new Set(['children', 'styles', 'makeStyles', 'className'])
+
+  const object: Partial<Props> = {}
+
+  const hash = Object.entries(props)
+    .filter(([key, value]) => {
+      // we always have to pass the `themeOverride` prop
+      if (key === 'themeOverride') {
+        return true
+      }
+
+      // remove blacklisted props
+      if (blacklist.has(key)) {
+        return false
+      }
+
+      // if filterBy array is passed, we remove everything not on the list
+      if (filter.size && !filter.has(key)) {
+        return false
+      }
+
+      // also remove empty values, functions, React elements and DOM elements
+      if (
+        value === null ||
+        typeof value === 'undefined' ||
+        typeof value === 'function' ||
+        typeof value.props !== 'undefined' ||
+        value instanceof EventTarget
+      ) {
+        return false
+      }
+
+      object[key as keyof Props] = value
+
+      return true
+    })
+    .sort()
+    .toString()
+
+  return { object, hash }
+}
+
+const makeHash = (
+  displayName: string,
+  propsHash: string,
+  extraArgs?: Record<string, any>
+) => {
+  const extraArgsHash = extraArgs
+    ? Object.entries(extraArgs).sort().toString()
+    : ''
+
+  return `${displayName}__${propsHash}__${extraArgsHash}`
+}
+
 /**
  * ---
  * category: utilities/themes
@@ -97,6 +157,7 @@ import memoized from './memoize'
  *
  * @param {function} generateStyle - The function that returns the component's style object
  * @param {function} generateComponentTheme - The function that returns the component's theme variables object
+ * @param {Array} propsToListen - An Array of the names of props used in the style generator. Used for checking if the styles object needs recalculating and onyle these props are passed to the generator. If `[]` (empty Array) is passed, no props will be passed to the generator. If not provided, all props will be passed and checked.
  * @returns {ReactElement} The decorated WithStyle Component
  */
 const withStyle = decorator(
@@ -104,7 +165,7 @@ const withStyle = decorator(
     ComposedComponent: any,
     generateStyle: any,
     generateComponentTheme: any,
-    propsToListen: any
+    propsToListen?: Array<string>
   ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
@@ -115,54 +176,65 @@ const withStyle = decorator(
         ...ComposedComponent.defaultProps,
         ...props
       }
+
       const themeOverride = getComponentThemeOverride(
         theme,
         [displayName, ComposedComponent.componentId],
         componentProps
       )
+
       const componentTheme =
         typeof generateComponentTheme === 'function'
           ? { ...generateComponentTheme(theme), ...themeOverride }
           : {}
+
+      const initialProps = filterProps(componentProps, propsToListen)
+
+      const initialHash = makeHash(displayName, initialProps.hash)
+
+      const [currentHash, setCurrentHash] = useState(initialHash)
+
       const [styles, setStyles] = useState(
-        generateStyle
-          ? bidirectionalPolyfill(
-              generateStyle(componentTheme, componentProps, {}),
-              dir
-            )
-          : {}
+        memoized(
+          initialHash,
+          initialProps.object,
+          {},
+          componentTheme,
+          generateStyle,
+          bidirectionalPolyfill,
+          dir
+        )
       )
 
-      //Clear cache if it grows too big. This should be replaced with better cache management later
+      // Clear cache if it grows too big.
+      // This should be replaced with better cache management later
+      // @ts-expect-error TODO: remove comment for more info
       if (memoized.cache.size >= 5000) {
-        memoized.cache.clear()
+        // @ts-expect-error TODO: remove comment for more info
+        memoized?.cache?.clear()
       }
-      const makeStyleHandler = (extraArgs: any[]) => {
-        const calculatedStyles = propsToListen
-          ? memoized(
-              displayName,
-              propsToListen.reduce(
-                (acc: any, prop: any) => ({
-                  ...acc,
-                  [prop]: componentProps[prop]
-                }),
-                {}
-              ),
-              extraArgs,
-              componentTheme,
-              generateStyle,
-              bidirectionalPolyfill,
-              dir
-            )
-          : bidirectionalPolyfill(
-              generateStyle(componentTheme, componentProps, extraArgs),
-              dir
-            )
 
-        if (!isEqual(calculatedStyles, styles)) {
-          setStyles(calculatedStyles)
-        }
+      const makeStyleHandler = (extraArgs: Record<string, any> = {}) => {
+        const filteredProps = filterProps(componentProps, propsToListen)
+
+        const newHash = makeHash(displayName, filteredProps.hash, extraArgs)
+
+        if (newHash === currentHash) return
+
+        const calculatedStyles = memoized(
+          newHash,
+          filteredProps.object,
+          extraArgs,
+          componentTheme,
+          generateStyle,
+          bidirectionalPolyfill,
+          dir
+        )
+
+        setStyles(calculatedStyles)
+        setCurrentHash(newHash)
       }
+
       return (
         <ComposedComponent
           ref={ref}
@@ -172,6 +244,7 @@ const withStyle = decorator(
         />
       )
     })
+
     hoistNonReactStatics(WithStyle, ComposedComponent)
     // we have to pass these on, because sometimes we need to
     // access propTypes of the component in other components

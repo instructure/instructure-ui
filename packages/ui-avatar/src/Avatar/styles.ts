@@ -22,6 +22,11 @@
  * SOFTWARE.
  */
 
+// TODO: this is a POC for using the same array for `styles.js` and passing to the withStyle decorator to avoid not adding new props to both places
+// Maybe we can solve it globally when we type the emotion package
+export const usedProps = ['size', 'color', 'shape', 'src'] as const
+export type UsedProps = typeof usedProps[number]
+
 /**
  * ---
  * private: true
@@ -32,8 +37,11 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, state) => {
+const generateStyle = (
+  componentTheme: any,
+  props: Record<UsedProps, any>,
+  state: any
+) => {
   const { size, color, shape, src } = props
   const { loaded } = state
 

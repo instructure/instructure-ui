@@ -21,27 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { memoize } from 'lodash'
 
 const fnToMemoize = (
-  _displayName: any,
-  componentProps: any,
-  extraArgs: any,
-  componentTheme: any,
+  _initialHash: string,
+  componentProps: Record<string, any>,
+  extraArgs: Record<string, any>,
+  componentTheme: Record<string, any>,
   generateStyle: any,
   bidirectionalPolyfill: any,
   dir: any
 ) => {
-  return bidirectionalPolyfill(
-    generateStyle(componentTheme, componentProps, extraArgs),
-    dir
-  )
+  return generateStyle
+    ? bidirectionalPolyfill(
+        generateStyle(componentTheme, componentProps, extraArgs),
+        dir
+      )
+    : {}
 }
-const memoized = memoize(
-  fnToMemoize,
-  (displayName: any, componentProps: any, extraArgs: any) =>
-    displayName + JSON.stringify(componentProps) + JSON.stringify(extraArgs)
-)
+const memoized = memoize(fnToMemoize, (initialHash: string) => initialHash)
+
+export const emotionCache = new WeakMap()
 
 export default memoized

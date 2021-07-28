@@ -66,7 +66,11 @@ parent: List
 id: List.Item
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'size',
+  'delimiter',
+  'spacing'
+])
 @testable()
 class ListItem extends Component<Props> {
   static componentId = 'List.Item'

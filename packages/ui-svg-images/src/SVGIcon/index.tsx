@@ -49,7 +49,11 @@ type Props = {
 category: components/utilities
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'rotate',
+  'size',
+  'bidirectional'
+])
 @testable()
 class SVGIcon extends Component<Props> {
   static componentId = 'SVGIcon'

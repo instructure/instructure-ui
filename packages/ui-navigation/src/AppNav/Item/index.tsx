@@ -63,7 +63,7 @@ id: AppNav.Item
 ---
 @module Item
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['isSelected', 'isDisabled'])
 @testable()
 class Item extends Component<Props> {
   static componentId = 'AppNav.Item'

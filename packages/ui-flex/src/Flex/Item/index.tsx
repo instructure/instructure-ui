@@ -61,7 +61,7 @@ parent: Flex
 id: Flex.Item
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, null, ['shouldGrow', 'shouldShrink', 'align', 'size'])
 class Item extends Component<Props> {
   static componentId = 'Flex.Item'
 

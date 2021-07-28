@@ -52,7 +52,7 @@ parent: Navigation
 id: Navigation.Item
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['selected'])
 @testable()
 class NavigationItem extends Component<Props> {
   static componentId = 'Navigation.Item'

@@ -63,7 +63,7 @@ const navMinimized = ({ minimized }) => ({ minimized: !minimized })
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['minimized'])
 @testable()
 class Navigation extends Component<Props> {
   static componentId = 'Navigation'

@@ -44,7 +44,7 @@ category: components/utilities
 ---
 @module ScreenReaderContent
 **/
-@withStyle(generateStyle, null)
+@withStyle(generateStyle, null, [])
 class ScreenReaderContent extends Component<Props> {
   static componentId = 'ScreenReaderContent'
 

@@ -23,7 +23,6 @@
  */
 import React from 'react'
 import { ThemeProvider } from '@emotion/react'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { merge, cloneDeep } from 'lodash'
 
 /**
@@ -94,6 +93,7 @@ const getTheme = (theme: any) => (ancestorTheme = {}) => {
   // we need to clone the ancestor theme not to override it
   const currentTheme = cloneDeep(ancestorTheme)
 
+  // @ts-expect-error solved in another ticket
   const themeName = currentTheme.key
 
   // we pick the overrides for the current theme from the override object

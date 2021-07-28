@@ -65,7 +65,11 @@ parent: InlineList
 id: InlineList.Item
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'size',
+  'delimiter',
+  'spacing'
+])
 @testable()
 class InlineListItem extends Component<Props> {
   static componentId = 'InlineList.Item'

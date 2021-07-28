@@ -37,7 +37,7 @@ import {
   Spacing
 } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyle, { usedProps } from './styles'
 import generateComponentTheme from './theme'
 
 type Props = {
@@ -77,7 +77,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme, ['size', 'shape', 'src'])
+@withStyle(generateStyle, generateComponentTheme, usedProps)
 @testable()
 class Avatar extends Component<Props> {
   static componentId = 'Avatar'

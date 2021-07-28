@@ -54,7 +54,12 @@ parent: Options
 id: Options.Item
 ---
 **/
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme, [
+  'variant',
+  'children',
+  'renderBeforeLabel',
+  'renderAfterLabel'
+])
 @testable()
 class Item extends Component<Props> {
   static componentId = 'Options.Item'
@@ -135,8 +140,14 @@ class Item extends Component<Props> {
   }
 
   render() {
-    const { as, role, styles, renderBeforeLabel, renderAfterLabel, children } =
-      this.props
+    const {
+      as,
+      role,
+      styles,
+      renderBeforeLabel,
+      renderAfterLabel,
+      children
+    } = this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
     const passthroughProps = omitProps(this.props, Item.propTypes)

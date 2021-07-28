@@ -69,7 +69,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['placement', 'background'])
 class ContextView extends Component<Props & OtherHTMLAttributes<Props>> {
   static componentId = 'ContextView'
 
