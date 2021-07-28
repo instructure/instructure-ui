@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /** @jsx jsx */
 import { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
@@ -42,6 +43,7 @@ type Props = {
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

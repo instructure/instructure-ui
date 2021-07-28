@@ -35,16 +35,21 @@ import generateComponentTheme from './theme'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  textAlign?: 'start' | 'center' | 'end'
-  renderLabel?: ((props: any) => ReactNode) | ReactNode
-  renderValue?: ((props: any) => ReactNode) | ReactNode
-  isGroupChild?: boolean
+  textAlign: 'start' | 'center' | 'end'
+  renderLabel?: ((props?: any) => ReactNode) | ReactNode
+  renderValue?: ((props?: any) => ReactNode) | ReactNode
+  /**
+   * Set to true when a child of MetricGroup so the appropriate
+   * aria labels get set
+   */
+  isGroupChild: boolean
 }
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -59,9 +64,6 @@ class Metric extends Component<Props> {
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    /** Set to true when a child of MetricGroup so the appropriate
-     * aria labels get set
-     */
     isGroupChild: PropTypes.bool
   }
 

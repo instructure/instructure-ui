@@ -31,12 +31,10 @@ import { createChainedFunction } from '@instructure/ui-utils'
  * ---
  * category: utilities/react
  * ---
- * Clone a React element without overwriting refs.
- * @module safeCloneElement
- * @param {ReactElement} element
- * @param {object} props
+ * Clones a React element without overwriting refs.
+ * @param element The element to clone
+ * @param props Props of the element
  * @param children
- * @return {ReactElement}
  */
 function safeCloneElement<
   P extends Record<string, any> & { style?: any } & ClassAttributes<P>
