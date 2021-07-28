@@ -23,11 +23,14 @@
  */
 
 import React, {
+  ClassicComponent,
+  ClassicComponentClass,
   ClassType,
   ComponentClass,
+  ComponentState,
   FunctionComponent,
   ReactHTML,
-  ReactInstance,
+  ReactNode,
   ReactSVG
 } from 'react'
 
@@ -37,20 +40,22 @@ import React, {
  * ---
  * Evaluate a provided value to create a renderable React element.
  * @module callRenderProp
- * @param {ReactElement|ReactClass|function} value
- * @param {object} props
- * @return {ReactElement} A renderable React element
+ * @param value
+ * @param props
  */
-function callRenderProp(
+function callRenderProp<P>(
   value:
-    | string
     | keyof ReactHTML
     | keyof ReactSVG
-    | FunctionComponent
-    | ComponentClass
-    | ClassType<any, any, any>
-    | ((...args: any) => ReactInstance),
-  props = {}
+    | FunctionComponent<P>
+    | ClassType<
+        P,
+        ClassicComponent<P, ComponentState>,
+        ClassicComponentClass<P>
+      >
+    | ComponentClass<P>
+    | ReactNode,
+  props: P = {} as P
 ) {
   if (typeof value === 'function') {
     // note: this part is needed for React 16
@@ -58,15 +63,12 @@ function callRenderProp(
     // In react 16, `createElement` accepts a function. In react 15 we get an
     // error on rendering the result. Evaluate the function here if it is not a
     // react component.
-    if (
-      !(
-        value.prototype && // fat arrow functions don't have a prototype
-        value.prototype.isReactComponent
-      )
-    ) {
+    // fat arrow functions don't have a prototype
+    if (!(value.prototype && value.prototype.isReactComponent)) {
       return (value as any)(props)
     }
-    return React.createElement(value as any, props)
+    // TODO type 'value' properly
+    return React.createElement<P>(value as any, props)
   }
   return value
 }
