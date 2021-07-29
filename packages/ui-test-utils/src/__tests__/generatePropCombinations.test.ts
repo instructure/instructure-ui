@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from '../'
+import { expect } from '..'
 
 // Note: This test should be in the .storybook folder, but our test runner ignores
 // folders that start with "." for some reason
@@ -52,6 +52,7 @@ describe('generatePropCombinations', () => {
       foo: [1, 2],
       bar: ['a', 'b']
     })
+
     expect(result).to.deep.equal([
       { foo: 1, bar: 'a' },
       { foo: 2, bar: 'a' },

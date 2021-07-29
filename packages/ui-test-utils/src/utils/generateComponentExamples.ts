@@ -26,14 +26,17 @@ import { nanoid } from 'nanoid'
 
 import { generatePropCombinations } from './generatePropCombinations'
 
-/**
- * @typedef {Object} ComponentExample
- * @property {React.ElementType} Component
- * @property {any} componentProps
- * @property {any} exampleProps
- * @property {string} key
- */
-
+type Config = {
+  sectionProp?: string
+  maxExamplesPerPage?: number | ((...args: any[]) => number)
+  maxExamples: number
+  propValues?: Record<string, unknown>
+  excludeProps?: string[]
+  getComponentProps?: (...args: any[]) => Record<string, unknown>
+  getExampleProps?: (...args: any[]) => Record<string, unknown>
+  getParameters?: (...args: any[]) => Record<string, unknown>
+  filter?: (...args: any[]) => boolean
+}
 /**
  * @typedef {Object} Page
  * @property {number} index
@@ -59,33 +62,23 @@ import { generatePropCombinations } from './generatePropCombinations'
  *
  */
 export function generateComponentExamples(
-  Component,
-  config = {
-    sectionProp: null,
-    maxExamplesPerPage: null,
-    propValues: {},
-    excludeProps: [],
-    getComponentProps: (props, index) => {
-      return {}
-    },
-    getExampleProps: (props, index) => {
-      return {}
-    },
-    getParameters: (examples, pageIndex) => {
-      return {}
-    },
-    filter: (props) => false
-  }
+  Component: React.ComponentType,
+  config: Config
 ) {
-  const { sectionProp, excludeProps, filter } = config
+  const { sectionProp, excludeProps, filter, maxExamples } = config
 
-  const PROPS_CACHE = []
-  const sections = []
-  const maxExamples = config.maxExamples
+  const PROPS_CACHE: string[] = []
+  const sections: any[] = []
   let exampleCount = 0
   let propValues = {}
 
-  const getParameters = ({ examples, index }) => {
+  const getParameters = ({
+    examples,
+    index
+  }: {
+    examples: any[]
+    index: number
+  }) => {
     let parameters = {}
     if (typeof config.getParameters === 'function') {
       parameters = {
@@ -99,7 +92,7 @@ export function generateComponentExamples(
    * Merges the auto-generated props with ones in the examples files,
    * a prop returned by getComponentProps() takes priority
    */
-  const getComponentProps = (props) => {
+  const getComponentProps = (props: Record<string, any>) => {
     let componentProps = props
     if (typeof config.getComponentProps === 'function') {
       componentProps = {
@@ -110,7 +103,7 @@ export function generateComponentExamples(
     return componentProps
   }
 
-  const getExampleProps = (props) => {
+  const getExampleProps = (props: Record<string, any>) => {
     let exampleProps = {}
 
     if (typeof config.getExampleProps === 'function') {
@@ -122,7 +115,7 @@ export function generateComponentExamples(
     return exampleProps
   }
 
-  const addPage = (section) => {
+  const addPage = (section: Record<string, any>) => {
     const page = {
       examples: [],
       index: section.pages.length
@@ -131,7 +124,7 @@ export function generateComponentExamples(
     return page
   }
 
-  const addExample = (sectionName = 'Examples', example) => {
+  const addExample = (sectionName = 'Examples', example: unknown) => {
     let section = sections.find(
       (section) => section.sectionName === sectionName
     )
@@ -166,23 +159,20 @@ export function generateComponentExamples(
     page.examples.push(example)
   }
 
-  const maybeAddExample = (props) => {
+  const maybeAddExample = (props: Record<string, any>) => {
     const componentProps = getComponentProps(props)
-    const exampleProps = getExampleProps(props)
-    const key = nanoid()
-    const propsString = JSON.stringify(componentProps)
     const ignore = typeof filter === 'function' ? filter(componentProps) : false
     if (ignore) {
       return
     }
     const propsString = Object.entries(componentProps).sort().toString() //JSON.stringify(componentProps)
     if (!PROPS_CACHE.includes(propsString)) {
-      const key = uid()
+      const key = nanoid()
       const exampleProps = getExampleProps(props)
       exampleCount++
       if (exampleCount < maxExamples) {
         PROPS_CACHE.push(propsString)
-        addExample(componentProps[sectionProp], {
+        addExample(componentProps[sectionProp!], {
           Component,
           componentProps,
           exampleProps,
@@ -193,22 +183,22 @@ export function generateComponentExamples(
   }
 
   if (isEmpty(config.propValues)) {
-    maybeAddExample(config.propValues)
+    maybeAddExample({})
   } else {
     if (Array.isArray(excludeProps)) {
-      Object.keys(config.propValues).forEach((propName) => {
+      Object.keys(config.propValues!).forEach((propName) => {
         if (!excludeProps.includes(propName)) {
+          //@ts-expect-error TODO: fix
           propValues[propName] = config.propValues[propName]
         }
       })
     } else {
-      propValues = config.propValues
+      propValues = config.propValues!
     }
 
     // eslint-disable-next-line no-console
     console.info(
-      `Generating examples for ${Component.displayName} (${
-        Object.keys(propValues).length
+      `Generating examples for ${Component.displayName} (${Object.keys(propValues).length
       } props):`,
       propValues
     )
@@ -236,7 +226,7 @@ export function generateComponentExamples(
   )
 
   sections.forEach(({ pages }) => {
-    pages.forEach((page, index) => {
+    pages.forEach((page: any) => {
       // eslint-disable-next-line no-param-reassign
       page.parameters = getParameters(page)
     })
@@ -245,10 +235,10 @@ export function generateComponentExamples(
   return sections
 }
 
-function isEmpty(obj) {
+function isEmpty(obj: unknown) {
   if (typeof obj !== 'object') return true
-  for (let key in obj) {
-    if (hasOwnProperty.call(obj, key)) return false
+  for (const key in obj) {
+    if (Object.hasOwnProperty.call(obj, key)) return false
   }
   return true
 }
