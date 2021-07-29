@@ -51,7 +51,7 @@ const renderExample = ({
  * @private
  */
 export function generateA11yTests(
-  Component: React.ComponentType,
+  Component: React.ComponentType<any>,
   componentExample: any,
   only: any[] = []
 ) {
