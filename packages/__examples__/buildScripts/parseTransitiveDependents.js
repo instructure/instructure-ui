@@ -51,7 +51,8 @@ async function parseTransitiveDependents(packages = []) {
 
     return rawPackages.map((output) => JSON.parse(output.stdout)).flat()
   } catch (error) {
-    console.error('Possible undifned package given as input!')
+    console.error(error)
+    console.error('Possible undefined package given as input!')
     process.exit(error.exitCode)
   }
 }
