@@ -169,7 +169,6 @@ describe('<Options />', async () => {
   })
 
   describe('with generated examples', async () => {
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ maxExamplesPerPage: number; pr... Remove this comment to see the full error message
-    generateA11yTests(OptionsExamples)
+    generateA11yTests(Options, OptionsExamples)
   })
 })

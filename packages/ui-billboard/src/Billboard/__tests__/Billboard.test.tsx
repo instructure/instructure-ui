@@ -42,8 +42,7 @@ describe('<Billboard />', async () => {
   })
 
   describe('with generated examples', async () => {
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ sectionProp: string; maxExampl... Remove this comment to see the full error message
-    generateA11yTests(BillboardExamples)
+    generateA11yTests(Billboard, BillboardExamples)
   })
 
   it('should render a heading with the correct tag', async () => {

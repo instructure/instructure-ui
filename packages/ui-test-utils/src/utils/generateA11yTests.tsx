@@ -65,7 +65,7 @@ export function generateA11yTests(
       describe(`${description}`, async () => {
         let rendered = 0
         let j = 0
-        pages.forEach(({ examples }) => {
+        pages.forEach(({ examples }: { examples: any[] }) => {
           examples.forEach((example) => {
             const index = j + rendered
             if (only[1] && index !== only[1]) return
