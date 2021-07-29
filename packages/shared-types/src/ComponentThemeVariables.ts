@@ -39,13 +39,20 @@ import {
 import { Colors } from './Colors'
 
 export type Avatar = {
-  color: Colors['textBrand']
   background: Colors['backgroundLightest']
   borderWidthSmall: Border['widthSmall']
   borderWidthMedium: Border['widthMedium']
   borderColor: Colors['borderMedium']
+  boxShadowColor: Colors['backgroundDarkest']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightBold']
+  color: Colors['brand']
+  colorShamrock: Colors['shamrock']
+  colorBarney: Colors['barney']
+  colorCrimson: Colors['crimson']
+  colorFire: Colors['fire']
+  colorLicorice: Colors['licorice']
+  colorAsh: Colors['ash']
 }
 
 export type Alert = {
