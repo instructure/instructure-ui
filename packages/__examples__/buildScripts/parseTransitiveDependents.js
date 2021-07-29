@@ -24,6 +24,11 @@
 const { getCommand } = require('@instructure/command-utils')
 const execa = require('execa')
 const { getTransitiveDependents } = require('./getTransitiveDependents')
+
+// `ui-config` package seem to always throw an error when calling
+// lerna ls on it, so we just ignore it since it is only a config package
+// without any storybook related stuff in it
+const BLACKLISTED_PACKAGES = ['ui-config']
 /**
  *  Returns the raw output from `lerna ls --scope @instructure/ui-view  --include-dependents`
  *  for all of the changed packages.
@@ -36,17 +41,19 @@ async function parseTransitiveDependents(packages = []) {
 
   try {
     const rawPackages = await Promise.all(
-      packages.map((pckg) => {
-        return execa(command.toString(), [
-          'ls',
-          '--scope',
-          `@instructure/${pckg}`,
-          '--include-dependents',
-          '--json',
-          '--loglevel',
-          'silent'
-        ])
-      })
+      packages
+        .filter((pckg) => !BLACKLISTED_PACKAGES.includes(pckg))
+        .map((pckg) => {
+          return execa(command.toString(), [
+            'ls',
+            '--scope',
+            `@instructure/${pckg}`,
+            '--include-dependents',
+            '--json',
+            '--loglevel',
+            'silent'
+          ])
+        })
     )
 
     return rawPackages.map((output) => JSON.parse(output.stdout)).flat()
