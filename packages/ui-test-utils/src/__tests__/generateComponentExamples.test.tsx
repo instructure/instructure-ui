@@ -211,4 +211,87 @@ describe('generateComponentExamples', () => {
         }
       ])
   })
+
+  it('should handle object type config props', () => {
+    const config = {
+      sectionProp: 'variant',
+      propValues: {
+        children: [
+          <span key={1}>child 1</span>,
+          <div key={2}>child 2</div>,
+          <h1 key={3}>child 3</h1>
+        ]
+      },
+      maxExamples: 100
+    }
+    expect(generateComponentExamples(TestComponent, config))
+      .excludingEvery([
+        'key',
+        '$$typeof',
+        '_owner',
+        'ref',
+        'defaultProps',
+        'propTypes'
+      ])
+      .to.deep.equal([
+        {
+          pages: [
+            {
+              examples: [
+                {
+                  Component: {
+                    displayName: 'TestComponent'
+                  },
+                  componentProps: {
+                    children: {
+                      _store: {},
+                      props: {
+                        children: 'child 1'
+                      },
+                      type: 'span'
+                    }
+                  },
+                  exampleProps: {}
+                },
+                {
+                  Component: {
+                    displayName: 'TestComponent'
+                  },
+                  componentProps: {
+                    children: {
+                      _store: {},
+                      props: {
+                        children: 'child 2'
+                      },
+                      type: 'div'
+                    }
+                  },
+                  exampleProps: {}
+                },
+                {
+                  Component: {
+                    displayName: 'TestComponent'
+                  },
+                  componentProps: {
+                    children: {
+                      _store: {},
+                      props: {
+                        children: 'child 3'
+                      },
+                      type: 'h1'
+                    }
+                  },
+                  exampleProps: {}
+                }
+              ],
+              index: 0,
+              parameters: {}
+            }
+          ],
+          propName: 'variant',
+          propValue: 'Examples',
+          sectionName: 'Examples'
+        }
+      ])
+  })
 })
