@@ -63,7 +63,6 @@ describe('<SVGIcon />', async () => {
   })
 
   describe('with generated examples', async () => {
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ sectionProp: string; getCompon... Remove this comment to see the full error message
-    generateA11yTests(SVGIconExamples)
+    generateA11yTests(SVGIcon, SVGIconExamples)
   })
 })
