@@ -23,12 +23,17 @@
  */
 
 /**
- * @param {string[]} packages - packages that are changed
+ * @typedef {Object} Package
+ * @property {string} package.name - name of the package
+ *
+ * @param {Package[]} packages - packages that are changed
  * @returns {string[]} the packages with their transitive dependents included
+ * @module getTransitiveDependents
+ * @private
  */
 function getTransitiveDependents(packages) {
-  const parsedOutput = packages.map((parsed) => {
-    const [, packageName] = parsed.name.split('/')
+  const parsedOutput = packages.map((pckg) => {
+    const [, packageName] = pckg.name.split('/')
 
     return packageName
   })
