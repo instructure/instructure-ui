@@ -28,6 +28,7 @@
     "@instructure/console": "8.7.0",
     "@instructure/emotion": "8.7.0",
     "@instructure/ui-dom-utils": "8.7.0",
+    "@instructure/ui-prop-types": "8.7.0",
     "@instructure/ui-react-utils": "8.7.0",
     "@instructure/ui-utils": "8.7.0",
     "@instructure/uid": "8.7.0",
