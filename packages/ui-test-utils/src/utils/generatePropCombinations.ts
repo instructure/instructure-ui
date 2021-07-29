@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+type Props<T> = T extends Record<string, infer V> ? Record<keyof T, V> : T
+type ArrayElement<A> = A extends readonly (infer T)[] ? T : never
+
 /**
  * Given possible values for each prop, returns all combinations of those prop values.
  * To generate the prop names and values from the component source see the `parsePropValues` utility
@@ -33,16 +36,17 @@
  * @module generatePropCombinations
  * @private
  */
-export function generatePropCombinations(propValues = {}) {
+export function generatePropCombinations<T>(propValues: Props<T>) {
+  type PropValueType = ArrayElement<Props<T>[keyof Props<T>]>
   const propNames = Object.keys(propValues)
-  let combos = []
+  const combos: Array<Record<keyof Props<T>, PropValueType>> = []
 
   if (!propNames.length) return combos
 
   const numProps = propNames.length
   for (let i = 0; i < numProps; i++) {
     const propName = propNames[i]
-    const valuesForProp = propValues[propName]
+    const valuesForProp = propValues[propName as keyof Props<T>]
 
     if (!Array.isArray(valuesForProp) || !valuesForProp.length) {
       throw new Error(
@@ -58,19 +62,20 @@ export function generatePropCombinations(propValues = {}) {
       const propValue = valuesForProp[j]
       if (numCombos > 0) {
         for (let k = 0; k < numCombos; k++) {
-          let combo = combos[k]
+          const combo = combos[k]
 
           // Check against the keys of the object here. `combo[propName]` could
           // evaluate to a boolean value which will mess up this logic.
           if (!Object.keys(combo).includes(propName)) {
             // eslint-disable-next-line no-param-reassign
-            combo[propName] = propValue
+            combo[propName as keyof Props<T>] = propValue
           } else {
             combos.push({ ...combo, [propName]: propValue })
           }
         }
       } else {
-        combos.push({ [propName]: propValue })
+        //@ts-expect-error TODO: fix this
+        combos.push({ [propName]: propValue as PropValueType })
       }
     }
   }
