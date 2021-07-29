@@ -30,11 +30,12 @@ import {
   getElementType,
   AsElementType
 } from '@instructure/ui-react-utils'
+import { OtherHTMLAttributes } from '@instructure/ui-prop-types'
 
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
 
-type Props = {
+type OwnProps = {
   alt?: string
   /**
    * the element type to render the screen reader content as
@@ -42,6 +43,8 @@ type Props = {
   as: AsElementType
   children: ReactNode
 }
+
+type Props = OwnProps & OtherHTMLAttributes<OwnProps>
 
 /**
 ---

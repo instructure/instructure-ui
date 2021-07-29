@@ -33,7 +33,6 @@ describe('<ScreenReaderContent />', async () => {
   })
 
   it('accepts "passthrough" props', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ScreenReaderContent hidden />)
     expect(subject.getDOMNode()).to.have.attribute('hidden')
   })

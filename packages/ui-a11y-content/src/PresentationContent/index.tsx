@@ -30,14 +30,17 @@ import {
   getElementType,
   AsElementType
 } from '@instructure/ui-react-utils'
+import { OtherHTMLAttributes } from '@instructure/ui-prop-types'
 
-type Props = {
+type OwnProps = {
   /**
    * the element type to render as
    */
   as: AsElementType
   children: ReactNode
 }
+
+type Props = OwnProps & OtherHTMLAttributes<OwnProps>
 
 /**
 ---

@@ -31,12 +31,13 @@ import {
   getElementType,
   AsElementType
 } from '@instructure/ui-react-utils'
+import { OtherHTMLAttributes } from '@instructure/ui-prop-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
-type Props = {
+type OwnProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   /**
@@ -48,6 +49,8 @@ type Props = {
    */
   children: ReactNode
 }
+
+type Props = OwnProps & OtherHTMLAttributes<OwnProps>
 
 /**
 ---
