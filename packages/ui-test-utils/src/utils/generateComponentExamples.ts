@@ -25,74 +25,84 @@
 import { nanoid } from 'nanoid'
 
 import { generatePropCombinations } from './generatePropCombinations'
+import { ComponentType, ReactNode } from 'react'
 
-type Config = {
+export type StoryConfig<Props> = {
+  // actually lots of props are Partial<Props>
   sectionProp?: string
-  maxExamplesPerPage?: number | ((...args: any[]) => number)
-  maxExamples: number
-  propValues?: Record<string, unknown>
+  maxExamplesPerPage?: number | ((sectionName: string) => number)
+  maxExamples?: number
+  propValues?: Record<string, any[]>
   excludeProps?: string[]
-  getComponentProps?: (...args: any[]) => Record<string, unknown>
-  getExampleProps?: (...args: any[]) => Record<string, unknown>
-  getParameters?: (...args: any[]) => Record<string, unknown>
-  filter?: (...args: any[]) => boolean
+  getComponentProps?: (props: Props) => Record<string, any>
+  getExampleProps?: (props: Props) => Record<string, any>
+  getParameters?: (params: {
+    examples: any
+    index: number
+  }) => { [key: string]: any; delay?: number; disable?: boolean }
+  filter?: (props: Props) => boolean
 }
-/**
- * @typedef {Object} Page
- * @property {number} index
- * @property {ComponentExample[]} examples
- */
-/**
- *
- * @typedef {Object} ExampleSection
- * @property {string} sectionName
- * @property {string} propName
- * @property {string} propValue
- * @property {Page[]} pages
- *
- *
- */
 
-/** Generates Component prop examples based on an example generator definition.
- * @param {React.ComponentType} Component
- * @param {Object} config - the definition
- * @returns {ExampleSection[]}
+type ExampleSection = {
+  sectionName: string
+  propName: string
+  propValue: string
+  pages: ExamplesPage[]
+}
+
+type ExamplesPage = {
+  examples: Example[]
+  index: number
+  renderExample?: (...args: any) => ReactNode
+  parameters?: any
+}
+
+type Example = {
+  Component: ComponentType
+  componentProps: Record<string, any>
+  exampleProps: Record<string, any>
+  key: string
+}
+
+/**
+ * Generates examples for the given component based on the given configuration.
+ * @param Component A React component
+ * @param config A configuration object (stored in xy.examples.jsx files in InstUI)
+ * @returns Array of examples broken into sections and pages if configured to do so.
  * @module generateComponentExamples
  * @private
  *
  */
-export function generateComponentExamples(
-  Component: React.ComponentType,
-  config: Config
+export function generateComponentExamples<Props>(
+  Component: ComponentType,
+  config: StoryConfig<Props>
 ) {
-  const { sectionProp, excludeProps, filter, maxExamples } = config
+  const { sectionProp, excludeProps, filter } = config
 
   const PROPS_CACHE: string[] = []
-  const sections: any[] = []
+  const sections: ExampleSection[] = []
+  const maxExamples = config.maxExamples!
   let exampleCount = 0
-  let propValues = {}
+  let propValues: Record<string, any[]> = {}
 
-  const getParameters = ({
-    examples,
-    index
-  }: {
-    examples: any[]
-    index: number
-  }) => {
+  const getParameters = (page: ExamplesPage) => {
+    const examples = page.examples
+    const index = page.index
     let parameters = {}
     if (typeof config.getParameters === 'function') {
       parameters = {
-        ...config.getParameters(examples, index)
+        ...config.getParameters({ examples, index })
       }
     }
     return parameters
   }
 
   /**
-   * Merges the auto-generated props with ones in the examples files,
-   * a prop returned by getComponentProps() takes priority
+   * Merges the auto-generated props with ones in the examples files specified
+   * by the `getComponentProps()` method; props from the example files have
+   * priority
    */
-  const getComponentProps = (props: Record<string, any>) => {
+  const mergeComponentPropsFromConfig = (props: Props) => {
     let componentProps = props
     if (typeof config.getComponentProps === 'function') {
       componentProps = {
@@ -103,7 +113,7 @@ export function generateComponentExamples(
     return componentProps
   }
 
-  const getExampleProps = (props: Record<string, any>) => {
+  const getExampleProps = (props: Props) => {
     let exampleProps = {}
 
     if (typeof config.getExampleProps === 'function') {
@@ -115,7 +125,7 @@ export function generateComponentExamples(
     return exampleProps
   }
 
-  const addPage = (section: Record<string, any>) => {
+  const addPage = (section: ExampleSection) => {
     const page = {
       examples: [],
       index: section.pages.length
@@ -124,14 +134,14 @@ export function generateComponentExamples(
     return page
   }
 
-  const addExample = (sectionName = 'Examples', example: unknown) => {
+  const addExample = (sectionName = 'Examples', example: Example) => {
     let section = sections.find(
       (section) => section.sectionName === sectionName
     )
     if (!section) {
       section = {
         sectionName: sectionName,
-        propName: sectionProp,
+        propName: sectionProp!, // TODO this should not be undefined
         propValue: sectionName,
         pages: []
       }
@@ -159,20 +169,22 @@ export function generateComponentExamples(
     page.examples.push(example)
   }
 
-  const maybeAddExample = (props: Record<string, any>) => {
-    const componentProps = getComponentProps(props)
+  const maybeAddExample = (props: Props) => {
+    const componentProps = mergeComponentPropsFromConfig(props)
     const ignore = typeof filter === 'function' ? filter(componentProps) : false
     if (ignore) {
       return
     }
-    const propsString = Object.entries(componentProps).sort().toString() //JSON.stringify(componentProps)
+    // TODO this is wrong, it thinks that objects with object children are the same
+    const propsString = Object.entries(componentProps).sort().toString()
+    //const propsString = JSON.stringify(componentProps)
     if (!PROPS_CACHE.includes(propsString)) {
       const key = nanoid()
       const exampleProps = getExampleProps(props)
       exampleCount++
       if (exampleCount < maxExamples) {
         PROPS_CACHE.push(propsString)
-        addExample(componentProps[sectionProp!], {
+        addExample((componentProps as any)[sectionProp!], {
           Component,
           componentProps,
           exampleProps,
@@ -183,13 +195,12 @@ export function generateComponentExamples(
   }
 
   if (isEmpty(config.propValues)) {
-    maybeAddExample({})
+    maybeAddExample((config.propValues as unknown) as Props) // actually can be undefined
   } else {
     if (Array.isArray(excludeProps)) {
       Object.keys(config.propValues!).forEach((propName) => {
         if (!excludeProps.includes(propName)) {
-          //@ts-expect-error TODO: fix
-          propValues[propName] = config.propValues[propName]
+          propValues[propName] = config.propValues![propName]
         }
       })
     } else {
@@ -208,7 +219,8 @@ export function generateComponentExamples(
     while (index < combos.length && exampleCount < maxExamples) {
       const combo = combos[index]
       if (combo) {
-        maybeAddExample(combo)
+        // TODO reconcile the differences between these files
+        maybeAddExample(combo as any)
         index++
       }
     }
