@@ -29,7 +29,6 @@ import {
   DeepPartial,
   BaseTheme
 } from '@instructure/shared-types'
-import { canvas } from '@instructure/ui-themes'
 
 type PartialTheme = DeepPartial<Omit<BaseTheme, 'key'>>
 type ComponentOverride =
@@ -113,7 +112,7 @@ function EmotionThemeProvider({
  * @module getTheme
  */
 const getTheme = (themeOrOverride: ThemeOrOverride) => (
-  ancestorTheme: BaseTheme = canvas
+  ancestorTheme = {} as BaseTheme
 ) => {
   if (isBaseTheme(themeOrOverride)) {
     return themeOrOverride
