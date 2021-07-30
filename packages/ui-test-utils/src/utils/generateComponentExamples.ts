@@ -50,14 +50,14 @@ type ExampleSection = {
   pages: ExamplesPage[]
 }
 
-type ExamplesPage = {
+export type ExamplesPage = {
   examples: Example[]
   index: number
-  renderExample?: (...args: any) => ReactNode
+  renderExample?: (exampleProps: Example) => ReactNode
   parameters?: any
 }
 
-type Example = {
+export type Example = {
   Component: ComponentType
   componentProps: Record<string, any>
   exampleProps: Record<string, any>
@@ -209,7 +209,8 @@ export function generateComponentExamples<Props>(
 
     // eslint-disable-next-line no-console
     console.info(
-      `Generating examples for ${Component.displayName} (${Object.keys(propValues).length
+      `Generating examples for ${Component.displayName} (${
+        Object.keys(propValues).length
       } props):`,
       propValues
     )
