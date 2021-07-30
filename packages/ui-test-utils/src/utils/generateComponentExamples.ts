@@ -33,7 +33,7 @@ export type StoryConfig<Props> = {
   maxExamplesPerPage?: number | ((sectionName: string) => number)
   maxExamples?: number
   propValues?: Record<string, any[]>
-  excludeProps?: string[]
+  excludeProps?: keyof Props[]
   getComponentProps?: (props: Props) => Record<string, any>
   getExampleProps?: (props: Props) => Record<string, any>
   getParameters?: (params: {
