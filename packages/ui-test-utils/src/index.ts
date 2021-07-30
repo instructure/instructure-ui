@@ -59,7 +59,12 @@ import { waitForExpect } from './utils/waitForExpect'
 import { expect } from './utils/expect'
 
 import { generateA11yTests } from './utils/generateA11yTests'
-import { generateComponentExamples } from './utils/generateComponentExamples'
+import {
+  generateComponentExamples,
+  StoryConfig,
+  Example,
+  ExamplesPage
+} from './utils/generateComponentExamples'
 import { generatePropCombinations } from './utils/generatePropCombinations'
 
 // these are defined in assertions.ts
@@ -105,6 +110,8 @@ declare global {
     }
   }
 }
+
+export type { StoryConfig, Example, ExamplesPage }
 
 // aliases for backwards compat:
 const within = wrapQueryResult

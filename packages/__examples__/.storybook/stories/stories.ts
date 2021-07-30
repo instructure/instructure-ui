@@ -23,10 +23,15 @@
  */
 
 import { storiesOf } from '@storybook/react'
-import { renderExample } from './renderExample.js'
-import { renderPage } from './renderPage.js'
-import { generateComponentExamples } from '@instructure/ui-test-utils'
+import { renderExample } from './renderExample'
+import { renderPage } from './renderPage'
+import {
+  generateComponentExamples,
+  StoryConfig
+} from '@instructure/ui-test-utils'
+import { ComponentType } from 'react'
 // must be imported with Webpack because this file cannot contain async calls
+// @ts-ignore TODO figure out why this is an error
 import propJSONData from '../../prop-data.json'
 
 const examplesContext = require.context(
@@ -48,15 +53,21 @@ let numStories = 0
 console.log(
   `Creating stories for ${Object.keys(propJSONData).length} components..`
 )
-
-Object.entries(propJSONData).map(
-  ([componentName, { exampleFilePath, generatedPropValues }]) => {
+;(Object.entries(propJSONData) as any).map(
+  ([componentName, { exampleFilePath, generatedPropValues }]: [
+    string,
+    { exampleFilePath: string; generatedPropValues: Record<string, any> }
+  ]) => {
     const requirePath = `./${exampleFilePath}`
 
     const exampleDir = requirePath.split('/').slice(0, -2).join('/')
     try {
-      const Component = componentsContext(exampleDir + '/index.tsx').default
-      const ExamplesModule = examplesContext(requirePath).default // xy.example.jsx
+      const Component: ComponentType = componentsContext(
+        exampleDir + '/index.tsx'
+      ).default
+      const ExamplesModule: StoryConfig<any> = examplesContext(requirePath)
+        .default // xy.example.jsx
+
       // merge in generated prop values:
       ExamplesModule.propValues = Object.assign(
         generatedPropValues,

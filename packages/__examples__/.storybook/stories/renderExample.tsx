@@ -27,13 +27,14 @@ import { View } from '@instructure/ui-view'
 import { Modal } from '@instructure/ui-modal'
 import { IconButton, CloseButton } from '@instructure/ui-buttons'
 import { IconInfoLine } from '@instructure/ui-icons'
+import { Example } from '@instructure/ui-test-utils'
 
 export function renderExample({
   Component,
   componentProps,
   exampleProps,
   key
-}) {
+}: Example) {
   const [isInfoOpen, setIsInfoOpen] = useState(false)
 
   const toggleInfoModal = () => {
@@ -57,6 +58,7 @@ export function renderExample({
         size="small"
         renderIcon={IconInfoLine}
         screenReaderLabel="props"
+        // @ts-ignore FIXME when IconButton is typed
         onClick={toggleInfoModal}
       />
       <Modal
