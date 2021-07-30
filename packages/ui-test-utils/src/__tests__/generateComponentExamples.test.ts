@@ -24,7 +24,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { expect } from '../'
+import { expect } from '..'
 
 import { generateComponentExamples } from '../utils/generateComponentExamples'
 
