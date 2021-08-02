@@ -28,7 +28,7 @@ const { getTransitiveDependents } = require('./getTransitiveDependents')
 // `ui-config` package seem to always throw an error when calling
 // lerna ls on it, so we just ignore it since it is only a config package
 // without any storybook related stuff in it
-const BLACKLISTED_PACKAGES = ['ui-config']
+const BLACKLISTED_PACKAGES = ['ui-config', 'ui-cli']
 /**
  *  Returns the raw output from `lerna ls --scope @instructure/ui-view  --include-dependents`
  *  for all of the changed packages.
