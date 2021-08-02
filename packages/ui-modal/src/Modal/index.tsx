@@ -34,9 +34,9 @@ import {
 import {
   passthroughProps,
   safeCloneElement,
-  matchComponentTypes,
-  AsElementType
+  matchComponentTypes
 } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { Transition, TransitionType } from '@instructure/ui-motion'
 import { Portal, PortalNode } from '@instructure/ui-portal'

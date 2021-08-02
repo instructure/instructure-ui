@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
+import { ComponentType } from 'react'
 import { logWarn as warn } from '@instructure/console'
-import { ComponentType, ReactElement } from 'react'
-
-type AsElementType = keyof JSX.IntrinsicElements | ReactElement | ComponentType
+import { AsElementType } from '@instructure/shared-types'
 
 interface ComponentWithAsProp {
   as?: AsElementType
@@ -86,4 +85,3 @@ function getElementType<T extends ComponentWithAsProp>(
 
 export default getElementType
 export { getElementType }
-export type { AsElementType }

@@ -35,12 +35,13 @@ import {
   Stacking
 } from '@instructure/emotion'
 import { PositionPropTypes, mirrorPlacement } from '@instructure/ui-position'
-import { omitProps, AsElementType } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
+import { OtherHTMLAttributes } from '@instructure/ui-prop-types'
+import { AsElementType } from '@instructure/shared-types'
 
 import { View } from '../View'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { OtherHTMLAttributes } from '@instructure/ui-prop-types'
 
 type Props = {
   as?: AsElementType

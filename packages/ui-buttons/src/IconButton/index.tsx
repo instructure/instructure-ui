@@ -26,8 +26,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import { passthroughProps, AsElementType } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { AsElementType } from '@instructure/shared-types'
 
 import { withStyle, ThemeablePropTypes, Spacing } from '@instructure/emotion'
 

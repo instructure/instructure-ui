@@ -33,10 +33,10 @@ import { logError as error } from '@instructure/console'
 import {
   omitProps,
   pickProps,
-  getElementType,
-  AsElementType
+  getElementType
 } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
+import { AsElementType } from '@instructure/shared-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 

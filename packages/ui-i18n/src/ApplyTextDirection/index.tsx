@@ -23,7 +23,8 @@
  */
 
 import React, { useContext } from 'react'
-import { getElementType, AsElementType } from '@instructure/ui-react-utils'
+import { getElementType } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 
 import { DIRECTION, TextDirectionContext } from '../TextDirectionContext'
 

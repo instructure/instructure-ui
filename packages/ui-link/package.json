@@ -38,6 +38,7 @@
     "prop-types": "^15"
   },
   "devDependencies": {
+    "@instructure/shared-types": "8.7.0",
     "@instructure/ui-babel-preset": "8.7.0",
     "@instructure/ui-test-locator": "8.7.0",
     "@instructure/ui-test-queries": "8.7.0",

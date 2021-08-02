@@ -29,11 +29,8 @@ import PropTypes from 'prop-types'
 import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
-import {
-  getInteraction,
-  passthroughProps,
-  AsElementType
-} from '@instructure/ui-react-utils'
+import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 
 import {
   withStyle,

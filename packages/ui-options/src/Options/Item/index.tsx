@@ -29,10 +29,10 @@ import PropTypes from 'prop-types'
 import {
   omitProps,
   getElementType,
-  callRenderProp,
-  AsElementType
+  callRenderProp
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+import { AsElementType } from '@instructure/shared-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 

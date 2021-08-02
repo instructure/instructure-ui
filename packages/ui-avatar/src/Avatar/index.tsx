@@ -27,8 +27,9 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { passthroughProps, AsElementType } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+import { AsElementType } from '@instructure/shared-types'
 
 import {
   withStyle,

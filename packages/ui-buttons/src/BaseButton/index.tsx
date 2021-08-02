@@ -33,12 +33,12 @@ import {
   getInteraction,
   passthroughProps,
   callRenderProp,
-  InteractionType,
-  AsElementType
+  InteractionType
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
+import { AsElementType } from '@instructure/shared-types'
 
 import {
   withStyle,

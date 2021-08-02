@@ -31,9 +31,9 @@ import { View } from '@instructure/ui-view'
 import {
   omitProps,
   callRenderProp,
-  getElementType,
-  AsElementType
+  getElementType
 } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 
 import {
   withStyle,

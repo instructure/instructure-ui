@@ -31,9 +31,9 @@ import {
   omitProps,
   ensureSingleChild,
   passthroughProps,
-  callRenderProp,
-  AsElementType
+  callRenderProp
 } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import {
   PositionConstaint,
   PositionMountNode,
