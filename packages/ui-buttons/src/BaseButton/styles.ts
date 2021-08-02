@@ -272,8 +272,8 @@ const generateStyle = (componentTheme, props, state) => {
   }
 
   return {
-    baseButton: {
-      label: 'baseButton',
+    baseButtonStatic: {
+      label: 'baseButton--static',
       appearance: 'none',
       textDecoration: 'none' /* for links styled as buttons */,
       touchAction: 'manipulation',
@@ -284,22 +284,29 @@ const generateStyle = (componentTheme, props, state) => {
       '*': {
         pointerEvents:
           'none' /* Ensures that button or link is always the event target */
-      },
+      }
+    },
 
+    baseButton: {
+      label: 'baseButton',
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       '&:active > [class$=-baseButton__content]': colorVariants[color].active,
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       '&:hover > [class$=-baseButton__content]': colorVariants[color].hover
     },
 
-    content: {
-      label: 'baseButton__content',
+    contentStatic: {
+      label: 'baseButton__content--static',
       boxSizing: 'border-box',
       width: '100%',
       display: 'block',
       direction: 'inherit',
       userSelect: 'none',
-      transition: 'background 0.2s, transform 0.2s',
+      transition: 'background 0.2s, transform 0.2s'
+    },
+
+    content: {
+      label: 'baseButton__content',
       transform: componentTheme.transform,
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
@@ -336,9 +343,13 @@ const generateStyle = (componentTheme, props, state) => {
       })
     },
 
+    childrenStatic: {
+      label: 'baseButton__children--static',
+      display: 'block'
+    },
+
     children: {
       label: 'baseButton__children',
-      display: 'block',
 
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].children,
@@ -349,22 +360,23 @@ const generateStyle = (componentTheme, props, state) => {
       })
     },
 
+    iconSVGStatic: {
+      label: 'baseButton__iconSVG--static',
+      display: 'flex',
+      alignItems: 'center'
+    },
+
     iconSVG: {
       label: 'baseButton__iconSVG',
-      display: 'flex',
-      alignItems: 'center',
-
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].iconSVG
     },
 
-    childrenLayout: {
-      label: 'baseButton__childrenLayout',
+    childrenLayoutStatic: {
+      label: 'baseButton__childrenLayout--static',
       display: 'flex',
       height: '100%',
       width: '100%',
-      justifyContent:
-        hasOnlyIconVisible || textAlign === 'center' ? 'center' : 'flex-start',
       boxSizing: 'border-box',
       alignItems: 'center',
       flexDirection: 'row',
@@ -374,8 +386,25 @@ const generateStyle = (componentTheme, props, state) => {
       unicodeBidi: 'isolate'
     },
 
-    iconOnly: {
-      label: 'baseButton__iconOnly',
+    childrenLayout: {
+      label: 'baseButton__childrenLayout',
+      justifyContent:
+        hasOnlyIconVisible || textAlign === 'center' ? 'center' : 'flex-start'
+    },
+
+    iconOnlyStatic: {
+      label: 'baseButton__iconOnly--static',
+      boxSizing: 'border-box',
+      minWidth: '0.0625rem',
+      flexShrink: 0,
+      maxWidth: '100%',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      unicodeBidi: 'isolate'
+    },
+
+    iconWrapperStatic: {
+      label: 'baseButton__iconWrapper--static',
       boxSizing: 'border-box',
       minWidth: '0.0625rem',
       flexShrink: 0,
@@ -387,20 +416,13 @@ const generateStyle = (componentTheme, props, state) => {
 
     iconWrapper: {
       label: 'baseButton__iconWrapper',
-      boxSizing: 'border-box',
-      minWidth: '0.0625rem',
       paddingInlineEnd: isCondensed
         ? componentTheme.iconTextGapCondensed
-        : componentTheme.iconTextGap,
-      flexShrink: 0,
-      maxWidth: '100%',
-      overflowX: 'visible',
-      overflowY: 'visible',
-      unicodeBidi: 'isolate'
+        : componentTheme.iconTextGap
     },
 
-    childrenWrapper: {
-      label: 'baseButton__childrenWrapper',
+    childrenWrapperStatic: {
+      label: 'baseButton__childrenWrapper--static',
       boxSizing: 'border-box',
       minWidth: '0.0625rem',
       flexShrink: 1,

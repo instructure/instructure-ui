@@ -1,0 +1,76 @@
+
+.baseButtonStatic {
+  appearance: none;
+  text-decoration: none; /* for links styled as buttons */
+  touch-action: manipulation;
+}
+
+.baseButtonStatic::-moz-focus-inner {
+  border: 0; /* removes default dotted focus outline in Firefox */
+}
+
+/* stylelint-disable-next-line */
+.baseButtonStatic * {
+  pointer-events: none; /* Ensures that button or link is always the event target */
+}
+
+.contentStatic {
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+  direction: inherit;
+  user-select: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.childrenStatic {
+  display: block;
+}
+
+.iconSVGStatic {
+  display: flex;
+  align-items: center;
+}
+
+.childrenLayoutStatic {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: row;
+  max-width: 100%;
+  overflow-x: visible;
+  overflow-y: visible;
+  unicode-bidi: isolate;
+}
+
+.iconOnlyStatic {
+  box-sizing: border-box;
+  min-width: 0.0625rem;
+  flex-shrink: 0;
+  max-width: 100%;
+  overflow-x: visible;
+  overflow-y: visible;
+  unicode-bidi: isolate;
+}
+
+.iconWrapperStatic {
+  box-sizing: border-box;
+  min-width: 0.0625rem;
+  flex-shrink: 0;
+  max-width: 100%;
+  overflow-x: visible;
+  overflow-y: visible;
+  unicode-bidi: isolate;
+}
+
+.childrenWrapperStatic {
+  box-sizing: border-box;
+  min-width: 0.0625rem;
+  flex-shrink: 1;
+  max-width: 100%;
+  overflow-x: visible;
+  overflow-y: visible;
+  unicode-bidi: isolate;
+}

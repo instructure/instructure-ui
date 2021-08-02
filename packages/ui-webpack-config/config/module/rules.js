@@ -58,8 +58,25 @@ const rules = [
   {
     test: /\.css$/,
     include: [/ui-icons/],
+    // exclude: [/\.module\.css$/],
     use: ['style-loader', 'css-loader']
   },
+  // {
+  //   test: /\.module\.css$/,
+  //   exclude: [/ui-icons/],
+  //   use: [
+  //     'css-modules-typescript-loader',
+  //     {
+  //       loader: 'style-loader'
+  //     },
+  //     {
+  //       loader: 'css-loader',
+  //       options: {
+  //         modules: true
+  //       }
+  //     }
+  //   ]
+  // },
   {
     // eslint-disable-next-line no-useless-escape
     test: /\.(eot|woff2?|otf|svg|ttf)([\?]?.*)$/,

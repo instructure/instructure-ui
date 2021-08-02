@@ -27,7 +27,6 @@ import {
   mirrorShorthandEdges,
   mirrorShorthandCorners
 } from '@instructure/emotion'
-import { pickProps } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 
 // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderRadius' implicitly has an '... Remove this comment to see the full error message
@@ -69,71 +68,6 @@ const getSpacingStyle = ({ margin, padding, dir, theme }) => {
       'padding'
     )
   }
-}
-
-const getOffsetStyle = ({
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'insetBlockStart' implicitly has a... Remove this comment to see the full error message
-  insetBlockStart,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'insetBlockEnd' implicitly has an ... Remove this comment to see the full error message
-  insetBlockEnd,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'insetInlineStart' implicitly has ... Remove this comment to see the full error message
-  insetInlineStart,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'insetInlineEnd' implicitly has an... Remove this comment to see the full error message
-  insetInlineEnd,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'dir' implicitly has an 'any' type... Remove this comment to see the full error message
-  dir
-}) => {
-  const isRtlDirection = dir === DIRECTION.rtl
-
-  const blockStart = {
-    top: insetBlockStart,
-    insetBlockStart
-  }
-
-  const blockEnd = {
-    bottom: insetBlockEnd,
-    insetBlockEnd
-  }
-
-  const horizontalOffsets = {
-    left: isRtlDirection ? insetInlineEnd : insetInlineStart,
-    right: isRtlDirection ? insetInlineStart : insetInlineEnd
-  }
-
-  return {
-    ...blockStart,
-    ...blockEnd,
-    ...horizontalOffsets
-  }
-}
-
-// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'cursor' implicitly has an 'any' t... Remove this comment to see the full error message
-const getStyleProps = ({ cursor, style }) => {
-  const whitelisted = pickProps(style || {}, {}, [
-    // Position/calculateElementPosition:
-    'top',
-    'left',
-    'position',
-    'display',
-    'transform',
-    'overflow',
-    'minWidth',
-    'minHeight',
-    // Img:
-    'filter',
-    // Flex.Item:
-    'flexBasis',
-    // Avatar:
-    'backgroundImage',
-    // Popover:
-    'pointerEvents'
-  ])
-
-  if (cursor) {
-    whitelisted.cursor = cursor
-  }
-
-  return whitelisted
 }
 
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'initialValue' implicitly has an 'any' t... Remove this comment to see the full error message
@@ -351,23 +285,10 @@ const generateStyle = (componentTheme, props, extraArgs = {}) => {
     position,
     display,
     focusPosition,
-    textAlign,
     borderColor,
     background,
     stacking,
     shadow,
-    overflowY,
-    overflowX,
-    insetBlockEnd,
-    insetBlockStart,
-    insetInlineEnd,
-    insetInlineStart,
-    width,
-    height,
-    minWidth,
-    minHeight,
-    maxWidth,
-    maxHeight,
     withVisualDebug,
     dir
   } = props
@@ -385,47 +306,11 @@ const generateStyle = (componentTheme, props, extraArgs = {}) => {
     theme: componentTheme,
     dir
   })
-  const offsetStyle = getOffsetStyle({
-    dir,
-    insetBlockEnd,
-    insetBlockStart,
-    insetInlineEnd,
-    insetInlineStart
-  })
 
   const shouldUseFocusStyles =
     position === 'relative' ||
     (display === 'inline' && focusPosition === 'inset')
 
-  const displayVariants = {
-    inline: {
-      label: 'view--inline',
-      display: 'inline'
-    },
-    block: {
-      label: 'view--block',
-      display: 'block'
-    },
-    'inline-block': {
-      label: 'view--inlineBlock',
-      display: 'inline-block',
-      verticalAlign: 'middle'
-    },
-    flex: {
-      label: 'view--flex',
-      display: 'flex'
-    },
-    'inline-flex': {
-      label: 'view--inlineFlex',
-      display: 'inline-flex',
-      verticalAlign: 'middle'
-    }
-  }
-  const textAlignVariants = {
-    start: { textAlign: 'start' },
-    center: { textAlign: 'center' },
-    end: { textAlign: 'end' }
-  }
   const borderColorVariants = {
     transparent: {
       borderColor: componentTheme.borderColorTransparent
@@ -529,23 +414,13 @@ const generateStyle = (componentTheme, props, extraArgs = {}) => {
   return {
     view: {
       label: 'view',
-      boxSizing: 'border-box',
       fontFamily: componentTheme.fontFamily,
-      maxWidth: '100%',
-      overflow: 'visible',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...displayVariants[display],
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...backgroundColorVariants[background],
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...stackingVariants[stacking],
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...shadowVariants[shadow],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...textAlignVariants[textAlign],
-      overflowX: overflowX && overflowX !== 'visible' ? overflowX : '',
-      overflowY: overflowY && overflowY !== 'visible' ? overflowY : '',
-      position: position !== 'static' ? position : '',
       ...(withVisualDebug
         ? {
             outline: `0.0625rem dashed ${componentTheme.debugOutlineColor}`
@@ -562,15 +437,7 @@ const generateStyle = (componentTheme, props, extraArgs = {}) => {
     },
     inlineStyles: {
       ...spacingStyle,
-      ...borderStyle,
-      ...offsetStyle,
-      width,
-      height,
-      minWidth,
-      minHeight,
-      maxWidth,
-      maxHeight,
-      ...getStyleProps(props)
+      ...borderStyle
     }
   }
 }

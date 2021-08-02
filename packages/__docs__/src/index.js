@@ -29,10 +29,25 @@ import { App } from './App'
 import { canvas } from '@instructure/ui-themes'
 import { EmotionThemeProvider } from '@instructure/emotion'
 import '../globals'
+import { Button } from '@instructure/ui-buttons/src/Button'
+
+const items = new Array(500).fill('item')
 
 ReactDOM.render(
   <EmotionThemeProvider theme={canvas}>
-    <App />
+    {/*<App />*/}
+    <div>
+      {items.map((item, idx) => (
+        <Button key={idx}>{item}</Button>
+      ))}
+    </div>
+    <div>
+      {items.map((item, idx) => (
+        <Button key={idx} color="danger">
+          {item}
+        </Button>
+      ))}
+    </div>
   </EmotionThemeProvider>,
   document.getElementById('app')
 )

@@ -18,6 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "css-loader": "^3.2.0",
+    "css-modules-typescript-loader": "^4.0.1",
     "dotenv": "^8.1.0",
     "eslint-loader": "^3.0.0",
     "file-loader": "^4.2.0",

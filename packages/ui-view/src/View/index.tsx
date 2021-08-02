@@ -40,6 +40,8 @@ import {
 import { jsx, withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
+// @ts-expect-error asd
+import { staticStyles, getOffsetStyle, getStyleProps } from './staticStyles'
 import generateComponentTheme from './theme'
 import { allowedProps, ViewProps, propTypes } from './types'
 
@@ -170,17 +172,58 @@ class View extends Component<ViewProps> {
       className,
       styles,
       makeStyles,
+      cursor,
+      style,
+      dir,
+      insetBlockEnd,
+      insetBlockStart,
+      insetInlineEnd,
+      insetInlineStart,
       ...props
     } = this.props
 
     const ElementType = getElementType(View, this.props)
 
+    const css = [
+      styles?.view,
+      staticStyles.view,
+      // @ts-expect-error asd
+      staticStyles.display[display],
+      // @ts-expect-error asd
+      staticStyles.textAlign[textAlign],
+      // @ts-expect-error asd
+      staticStyles.overFlowX[overflowX],
+      // @ts-expect-error asd
+      staticStyles.overFlowY[overflowY],
+      // @ts-expect-error asd
+      staticStyles.position[position]
+    ]
+
+    const inlineStyles = {
+      // @ts-expect-error asd
+      ...styles?.inlineStyles,
+      ...getOffsetStyle({
+        dir,
+        insetBlockEnd,
+        insetBlockStart,
+        insetInlineEnd,
+        insetInlineStart
+      }),
+      width,
+      height,
+      minWidth,
+      minHeight,
+      maxWidth,
+      maxHeight,
+      ...getStyleProps({ cursor, style })
+    }
+
     return (
       <ElementType
         {...passthroughProps(props)}
         className={className}
-        css={styles?.view}
-        style={styles?.inlineStyles}
+        css={css}
+        style={inlineStyles}
         ref={this.handleElementRef}
       >
         {children}

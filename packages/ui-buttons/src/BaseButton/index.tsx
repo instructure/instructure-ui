@@ -49,6 +49,8 @@ import {
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
+// import css from './BaseButton.module.css'
+import css from './staticStyles'
 
 type Props = {
   makeStyles?: (...args: any[]) => any
@@ -344,7 +346,9 @@ class BaseButton extends Component<Props> {
   renderChildren() {
     const { renderIcon, children, styles } = this.props
 
-    const wrappedChildren = <span css={styles.children}>{children}</span>
+    const wrappedChildren = (
+      <span css={[styles.children, css.children]}>{children}</span>
+    )
 
     if (!renderIcon) {
       return wrappedChildren
@@ -352,25 +356,34 @@ class BaseButton extends Component<Props> {
 
     const { hasOnlyIconVisible } = this
     const wrappedIcon = (
-      <span css={styles.iconSVG}>{callRenderProp(renderIcon)}</span>
+      <span css={[styles.iconSVG, css.iconSVG]}>
+        {callRenderProp(renderIcon)}
+      </span>
     )
 
     const flexChildren = hasOnlyIconVisible ? (
-      <span css={styles.iconOnly}>
+      <span css={[styles.iconOnly, css.iconOnly]}>
         {wrappedIcon}
         {children}
       </span>
     ) : (
       [
-        <span key="icon" css={styles.iconWrapper}>
+        <span key="icon" css={[styles.iconWrapper, css.iconWrapper]}>
           {wrappedIcon}
         </span>,
-        <span key="children" css={styles.childrenWrapper}>
+        <span
+          key="children"
+          css={[styles.childrenWrapper, css.childrenWrapper]}
+        >
           {wrappedChildren}
         </span>
       ]
     )
-    return <span css={styles.childrenLayout}>{flexChildren}</span>
+    return (
+      <span css={[styles.childrenLayout, css.childrenLayout]}>
+        {flexChildren}
+      </span>
+    )
   }
 
   render() {
@@ -423,9 +436,9 @@ class BaseButton extends Component<Props> {
         //@ts-expect-error fix this later to be number
         tabIndex={onClick && as ? tabIndex || '0' : tabIndex}
         disabled={isDisabled || isReadOnly}
-        css={isEnabled ? styles.baseButton : null}
+        css={isEnabled ? [styles.baseButton, css.baseButton] : null}
       >
-        <span css={styles.content}>{this.renderChildren()}</span>
+        <span css={[styles.content, css.content]}>{this.renderChildren()}</span>
       </View>
     )
   }
