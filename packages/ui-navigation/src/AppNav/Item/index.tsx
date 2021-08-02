@@ -30,9 +30,9 @@ import {
   callRenderProp,
   getElementType,
   matchComponentTypes,
-  passthroughProps,
-  AsElementType
+  passthroughProps
 } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'

@@ -36,7 +36,7 @@ import {
   Shadow,
   Stacking
 } from '@instructure/emotion'
-import { AsElementType } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 
 export type ViewOwnProps = {
   /**

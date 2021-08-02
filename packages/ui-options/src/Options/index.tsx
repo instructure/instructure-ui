@@ -31,9 +31,9 @@ import {
   omitProps,
   matchComponentTypes,
   callRenderProp,
-  safeCloneElement,
-  AsElementType
+  safeCloneElement
 } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { testable } from '@instructure/ui-testable'
 import { uid } from '@instructure/uid'
 

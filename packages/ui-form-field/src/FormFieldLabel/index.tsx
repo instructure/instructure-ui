@@ -26,11 +26,8 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  omitProps,
-  getElementType,
-  AsElementType
-} from '@instructure/ui-react-utils'
+import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'

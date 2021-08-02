@@ -30,9 +30,9 @@ import {
   safeCloneElement,
   passthroughProps,
   matchComponentTypes,
-  callRenderProp,
-  AsElementType
+  callRenderProp
 } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { View } from '@instructure/ui-view'
 import {
   withStyle,

@@ -30,9 +30,9 @@ import { View } from '@instructure/ui-view'
 import {
   safeCloneElement,
   callRenderProp,
-  omitProps,
-  AsElementType
+  omitProps
 } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'

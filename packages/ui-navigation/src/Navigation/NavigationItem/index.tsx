@@ -26,11 +26,8 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import {
-  omitProps,
-  getElementType,
-  AsElementType
-} from '@instructure/ui-react-utils'
+import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { withStyle, jsx } from '@instructure/emotion'

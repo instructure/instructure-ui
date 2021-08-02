@@ -29,11 +29,8 @@ import keycode from 'keycode'
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { uid } from '@instructure/uid'
 import { controllable } from '@instructure/ui-prop-types'
-import {
-  omitProps,
-  getElementType,
-  AsElementType
-} from '@instructure/ui-react-utils'
+import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'

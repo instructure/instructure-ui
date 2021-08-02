@@ -33,14 +33,12 @@ import {
   PositionPropTypes
 } from '@instructure/ui-position'
 
-import {
-  callRenderProp,
-  passthroughProps,
-  AsElementType
-} from '@instructure/ui-react-utils'
+import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 
 import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '../IconButton'
+
 type Props = {
   screenReaderLabel: string
   renderTooltipContent: React.ReactNode | ((...args: any[]) => any)

@@ -26,11 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import {
-  getInteraction,
-  passthroughProps,
-  AsElementType
-} from '@instructure/ui-react-utils'
+import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 
 import { withStyle, ThemeablePropTypes, Spacing } from '@instructure/emotion'
 

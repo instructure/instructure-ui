@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-export * from './BaseTheme'
-export * from './Colors'
-export * from './ComponentThemeMap'
-export * from './ComponentThemeVariables'
-export * from './DeepPartial'
-export * from './CommonProps'
+import { ComponentType, ReactElement } from 'react'
+
+type AsElementType = keyof JSX.IntrinsicElements | ReactElement | ComponentType
+
+export type { AsElementType }

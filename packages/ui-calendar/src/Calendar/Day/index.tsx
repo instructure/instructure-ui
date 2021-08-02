@@ -31,10 +31,10 @@ import { AccessibleContent } from '@instructure/ui-a11y-content'
 import {
   omitProps,
   callRenderProp,
-  getElementType,
-  AsElementType
+  getElementType
 } from '@instructure/ui-react-utils'
 import { I18nPropTypes } from '@instructure/ui-i18n'
+import { AsElementType } from '@instructure/shared-types'
 
 import testable from '@instructure/ui-testable'
 

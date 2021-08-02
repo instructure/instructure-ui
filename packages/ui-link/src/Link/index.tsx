@@ -34,9 +34,9 @@ import {
   getInteraction,
   matchComponentTypes,
   passthroughProps,
-  callRenderProp,
-  AsElementType
+  callRenderProp
 } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { logWarn as warn } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 

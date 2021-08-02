@@ -29,7 +29,8 @@ import PropTypes from 'prop-types'
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { TruncateText } from '@instructure/ui-truncate-text'
-import { passthroughProps, AsElementType } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { testable } from '@instructure/ui-testable'
 
 import {

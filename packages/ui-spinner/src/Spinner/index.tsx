@@ -26,11 +26,8 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import {
-  callRenderProp,
-  omitProps,
-  AsElementType
-} from '@instructure/ui-react-utils'
+import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { logError as error } from '@instructure/console'

@@ -26,11 +26,8 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import {
-  callRenderProp,
-  passthroughProps,
-  AsElementType
-} from '@instructure/ui-react-utils'
+import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { testable } from '@instructure/ui-testable'
 
 import {

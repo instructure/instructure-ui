@@ -27,11 +27,8 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { childrenOrValue } from '@instructure/ui-prop-types'
-import {
-  getElementType,
-  passthroughProps,
-  AsElementType
-} from '@instructure/ui-react-utils'
+import { getElementType, passthroughProps } from '@instructure/ui-react-utils'
+import { AsElementType } from '@instructure/shared-types'
 import { testable } from '@instructure/ui-testable'
 
 type HeadingLevel<U extends keyof JSX.IntrinsicElements> = U
