@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.8.0](https://github.com/instructure/instructure-ui/compare/v8.7.0...v8.8.0) (2021-08-02)
+
+### Bug Fixes
+
+- **ui-billboard:** fix heading margin when `size` is `small` ([36505bb](https://github.com/instructure/instructure-ui/commit/36505bb58e027753a61efc9a1137d2917fa70718))
+
+### Features
+
+- **ui-icons:** add `button-and-icon-maker` icon ([6764ecd](https://github.com/instructure/instructure-ui/commit/6764ecd92375fc8e5e8854333b6530de95a0dbe2))
+- **ui-karma-config:** tests can be run from the IDE ([fafddf9](https://github.com/instructure/instructure-ui/commit/fafddf9dbf0a4a6575968eef73d0ba833daf670c))
+
 # [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
 
 ### Bug Fixes

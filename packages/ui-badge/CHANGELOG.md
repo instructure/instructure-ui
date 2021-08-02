@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.8.0](https://github.com/instructure/instructure-ui/compare/v8.7.0...v8.8.0) (2021-08-02)
+
+### Reverts
+
+- **ui-badge:** revert test comment ([cd37bc4](https://github.com/instructure/instructure-ui/commit/cd37bc4897c2042b79560e0e655ea85acfa9e976))
+
 # [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
 
 ### Features
