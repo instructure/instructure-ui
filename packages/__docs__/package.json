@@ -124,7 +124,7 @@
     "html-webpack-plugin": "^4",
     "jsdoc-api": "^6.0.0",
     "mkdirp": "^1",
-    "react-docgen": "^5",
+    "react-docgen": "^6.0.0-alpha.0",
     "svg-inline-loader": "^0.8.0",
     "webpack-bundle-analyzer": "^4"
   }

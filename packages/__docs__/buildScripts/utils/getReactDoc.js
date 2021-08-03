@@ -35,7 +35,8 @@ module.exports = function getReactDoc(source, fileName, error) {
       reactDocgen.resolver.findAllExportedComponentDefinitions,
       null,
       {
-        filename: fileName
+        filename: fileName,
+        importer: reactDocgen.importers.makeFsImporter()
       }
     )
     if (Array.isArray(doc)) {
