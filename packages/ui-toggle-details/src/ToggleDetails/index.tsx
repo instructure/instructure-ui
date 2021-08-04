@@ -246,7 +246,6 @@ class ToggleDetails extends Component<Props> {
         {...pickProps(this.props, Expandable.propTypes)}
         onToggle={this.handleToggle}
       >
-        {/* @ts-expect-error ts-migrate(7031) FIXME: Binding element 'expanded' implicitly has an 'any'... Remove this comment to see the full error message */}
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
             <div css={this.props.styles.toggleDetails}>
