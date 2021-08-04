@@ -115,7 +115,11 @@ class Alert extends Component {
      * if open transitions from truthy to falsey, it's a signal to close and unmount the alert.
      * This is necessary to close the alert from the outside and still run the transition.
      */
-    open: PropTypes.bool
+    open: PropTypes.bool,
+    /**
+     * If the alert should have a shadow.
+     */
+    hasShadow: PropTypes.bool
   }
 
   static defaultProps = {
@@ -131,7 +135,8 @@ class Alert extends Component {
     liveRegion: undefined,
     renderCloseButtonLabel: undefined,
     closeButtonLabel: undefined,
-    children: null
+    children: null,
+    hasShadow: true
   }
 
   constructor(props) {
@@ -148,19 +153,19 @@ class Alert extends Component {
     return {
       error: {
         Icon: IconNoSolid,
-        classNames: classNames(styles.alert, styles.error)
+        className: styles.error
       },
       info: {
         Icon: IconInfoBorderlessSolid,
-        classNames: classNames(styles.alert, styles.info)
+        className: styles.info
       },
       success: {
         Icon: IconCheckMarkSolid,
-        classNames: classNames(styles.alert, styles.success)
+        className: styles.success
       },
       warning: {
         Icon: IconWarningBorderlessSolid,
-        classNames: classNames(styles.alert, styles.warning)
+        className: styles.warning
       }
     }[this.props.variant]
   }
@@ -337,12 +342,18 @@ class Alert extends Component {
   }
 
   renderAlert() {
-    const { classNames } = this.variantUI()
+    const { className } = this.variantUI()
+    const classes = classNames({
+      [styles.alert]: true,
+      [className]: true,
+      [styles.hasShadow]: this.props.hasShadow
+    })
+
     return (
       <View
         as="div"
         margin={this.props.margin}
-        className={classNames}
+        className={classes}
         onKeyUp={this.handleKeyUp}
       >
         {this.renderIcon()}

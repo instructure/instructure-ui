@@ -2,12 +2,15 @@
   color: var(--color);
   background: var(--background);
   box-sizing: border-box;
-  box-shadow: var(--boxShadow);
   display: flex;
   min-width: 12rem;
   border-width: var(--borderWidth);
   border-style: var(--borderStyle);
   border-radius: var(--borderRadius);
+}
+
+.hasShadow {
+  box-shadow: var(--boxShadow);
 }
 
 .content {
