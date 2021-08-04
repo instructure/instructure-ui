@@ -66,7 +66,7 @@ example: true
 
 Given a `liveRegion` property, Alerts will guarantee a screenreader will announce their text.
 Use `liveRegionPoliteness` to choose an `aria-live` politeness setting of either `polite`
-or `assertive` (default). Use `isLiveRegionAtomic` to choose an `aria-atomic` setting 
+or `assertive` (default). Use `isLiveRegionAtomic` to choose an `aria-atomic` setting
 of either `true` or `false` (default).
 
 Due to a bug in some screen readers, the live region element should be static, either through
@@ -195,6 +195,44 @@ class Example extends React.Component {
 }
 
 render(<Example />)
+```
+
+When Alerts are used inline, the shadow can be removed with the `hasShadow` property.
+
+```js
+---
+example: true
+---
+<View as="div" background="primary" padding="large">
+  <View
+    as="div"
+    background="primary"
+    padding="small medium"
+    borderWidth="small"
+    borderRadius="small"
+    margin="x-small 0"
+  >
+    {lorem.paragraph()}
+  </View>
+  <Alert
+    variant="info"
+    margin="x-small 0"
+    renderCloseButtonLabel="Close"
+    hasShadow={false}
+  >
+    This is an inline Alert, so it shouldn't have a shadow.
+  </Alert>
+  <View
+    as="div"
+    background="primary"
+    padding="small medium"
+    borderWidth="small"
+    borderRadius="small"
+    margin="x-small 0"
+  >
+    {lorem.paragraph()}
+  </View>
+</View>
 ```
 
 ### Guidelines

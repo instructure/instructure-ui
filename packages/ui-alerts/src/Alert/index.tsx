@@ -67,6 +67,7 @@ type Props = {
   onDismiss?: (...args: any[]) => any
   transition?: 'none' | 'fade'
   open?: boolean
+  hasShadow: boolean
 }
 
 /**
@@ -136,7 +137,11 @@ class Alert extends Component<Props> {
      * if open transitions from truthy to falsey, it's a signal to close and unmount the alert.
      * This is necessary to close the alert from the outside and still run the transition.
      */
-    open: PropTypes.bool
+    open: PropTypes.bool,
+    /**
+     * If the alert should have a shadow.
+     */
+    hasShadow: PropTypes.bool
   }
 
   static defaultProps = {
@@ -151,7 +156,8 @@ class Alert extends Component<Props> {
     onDismiss: undefined,
     liveRegion: undefined,
     renderCloseButtonLabel: undefined,
-    children: null
+    children: null,
+    hasShadow: true
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.

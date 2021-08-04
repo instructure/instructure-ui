@@ -34,7 +34,7 @@
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props) => {
-  const { variant } = props
+  const { variant, hasShadow } = props
 
   const variantStyles = {
     error: {
@@ -73,14 +73,14 @@ const generateStyle = (componentTheme, props) => {
       color: componentTheme.color,
       background: componentTheme.background,
       boxSizing: 'border-box',
-      boxShadow: componentTheme.boxShadow,
       display: 'flex',
       minWidth: '12rem',
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variantStyles[variant].alert
+      ...variantStyles[variant].alert,
+      ...(hasShadow && { boxShadow: componentTheme.boxShadow })
     },
     icon: {
       color: componentTheme.iconColor,

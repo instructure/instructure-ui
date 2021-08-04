@@ -245,4 +245,32 @@ describe('<Alert />', async () => {
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     expect(liver.children.length).to.equal(0)
   })
+
+  it('should have shadow by default', async () => {
+    const subject = await mount(
+      <Alert variant="info" transition="none">
+        Success: Sample alert text.
+      </Alert>
+    )
+
+    const alert = within(subject.getDOMNode()).getDOMNode()
+    const computedStyle = getComputedStyle(alert)
+
+    expect(computedStyle.boxShadow).to.equal(
+      'rgba(0, 0, 0, 0.1) 0px 3px 6px 0px, rgba(0, 0, 0, 0.16) 0px 3px 6px 0px'
+    )
+  })
+
+  it("shouldn't have shadow, when `hasShadow` is set to false", async () => {
+    const subject = await mount(
+      <Alert variant="info" transition="none" hasShadow={false}>
+        Success: Sample alert text.
+      </Alert>
+    )
+
+    const alert = within(subject.getDOMNode()).getDOMNode()
+    const computedStyle = getComputedStyle(alert)
+
+    expect(computedStyle.boxShadow).to.equal('none')
+  })
 })
