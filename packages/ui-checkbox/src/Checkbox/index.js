@@ -46,6 +46,7 @@ import theme from './theme.js'
 /**
 ---
 category: components
+tags: toggle, switch
 ---
 **/
 
