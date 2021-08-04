@@ -209,7 +209,6 @@ class ToggleGroup extends Component<Props> {
 
     return (
       <Expandable {...pickProps(this.props, Expandable.propTypes)}>
-        {/* @ts-expect-error ts-migrate(7031) FIXME: Binding element 'expanded' implicitly has an 'any'... Remove this comment to see the full error message */}
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
             <View

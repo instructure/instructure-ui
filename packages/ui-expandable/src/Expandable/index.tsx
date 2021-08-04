@@ -26,69 +26,112 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
 import { createChainedFunction } from '@instructure/ui-utils'
-const toggleExpanded = ({ expanded }: any) => ({ expanded: !expanded })
-type ExpandableProps = {
-  expanded?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
-  defaultExpanded?: boolean
-  onToggle?: (...args: any[]) => any
-  render?: (...args: any[]) => any
+
+const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
+  expanded: !expanded
+})
+
+// TODO: try to type it so that the return object contains the prop object
+type GetToggleProps = (
+  props?: Record<string, any> & { onClick?: (...args: any[]) => any }
+) => {
+  'aria-controls': string
+  'aria-expanded': boolean
+  onClick?: (...args: any[]) => any
+  [p: string]: any
 }
-type ExpandableState = any
+
+type RenderProps = {
+  expanded: boolean
+  /**
+   * Props to be spread onto the trigger element
+   */
+  getToggleProps: GetToggleProps
+  /**
+   * Props to be spread onto the details element
+   */
+  getDetailsProps: () => { id: string }
+}
+
+type RenderExpandable = (props: RenderProps) => JSX.Element
+
+type ExpandableProps = {
+  /**
+   * Whether the content is expanded or hidden. Makes the component controlled, so if provided, the `onToggle` handler has to be provided too.
+   */
+  expanded?: boolean
+
+  /**
+   * Whether the content is initially expanded or hidden (uncontrolled)
+   */
+  defaultExpanded: boolean
+
+  onToggle: (event: Event, expanded: boolean) => void
+
+  /**
+   * @param {Object} renderProps
+   * @param {Boolean} renderProps.expanded
+   * @param {Function} renderProps.getToggleProps - Props to be spread onto the trigger element
+   * @param {Function} renderProps.getDetailsProps - Props to be spread onto the details element
+   */
+  children?: RenderExpandable
+
+  /**
+   * Identical to children
+   */
+  render?: RenderExpandable
+}
+type ExpandableState = { expanded: boolean }
 
 /**
 ---
 category: components/utilities
 ---
+@tsProps
 */
 class Expandable extends Component<ExpandableProps, ExpandableState> {
   static propTypes = {
-    /**
-     * Whether the content is expanded or hidden
-     */
     expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
-    /**
-     * Whether the content is initially expanded or hidden (uncontrolled)
-     */
     defaultExpanded: PropTypes.bool,
     onToggle: PropTypes.func,
-    /**
-     * @param {Object} renderProps
-     * @param {Boolean} expanded
-     * @param {Function} renderProps.getToggleProps - Props to be spread onto the trigger element
-     * @param {Function} renderProps.getDetailsProps - Props to be spread onto the details element
-     */
     children: PropTypes.func,
-    /**
-     * Identical to children
-     */
     render: PropTypes.func
   }
+
   static defaultProps = {
     defaultExpanded: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onToggle: function (event: any, expanded: any) {},
+    onToggle: function () {},
     expanded: undefined,
     children: null,
     render: undefined
   }
-  _contentId: any
+
+  _contentId: string
+
   constructor(props: ExpandableProps) {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
-    super()
+    super(props)
     this.state = {
       expanded: this.isControlled(props)
-        ? props.expanded
-        : !!props.defaultExpanded
+        ? (props.expanded as boolean)
+        : props.defaultExpanded
     }
     this._contentId = uid('Expandable__content')
   }
+
   get expanded() {
-    return this.isControlled() ? this.props.expanded : this.state.expanded
+    return this.isControlled()
+      ? (this.props.expanded as boolean)
+      : this.state.expanded
   }
+
   isControlled(props = this.props) {
     return typeof props.expanded === 'boolean'
   }
-  static getDerivedStateFromProps(nextProps: any, state: any) {
+
+  static getDerivedStateFromProps(
+    nextProps: ExpandableProps,
+    state: ExpandableState
+  ) {
     if (
       // if component is controlled, keep internal state up to date
       // with the `expanded` prop value
@@ -102,15 +145,17 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
       return null
     }
   }
-  handleToggle = (event: any) => {
+
+  handleToggle = (event: Event) => {
     if (!this.isControlled()) {
       this.setState(toggleExpanded)
     }
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
     this.props.onToggle(event, !this.expanded)
   }
+
   render() {
     const { children, render = children } = this.props
+
     if (typeof render === 'function') {
       return render({
         expanded: this.expanded,
@@ -118,15 +163,11 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
           return {
             'aria-controls': this._contentId,
             'aria-expanded': this.expanded,
-            onClick: createChainedFunction(
-              this.handleToggle,
-              (props as any).onClick
-            ),
+            onClick: createChainedFunction(this.handleToggle, props.onClick),
             ...props
           }
         },
-        // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-        getDetailsProps: (props: any) => {
+        getDetailsProps: () => {
           return {
             id: this._contentId
           }
@@ -137,5 +178,6 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
     }
   }
 }
+
 export default Expandable
 export { Expandable }
