@@ -76,6 +76,7 @@ type Props = {
 /**
 ---
 category: components
+tags: toggle, switch
 ---
 **/
 
