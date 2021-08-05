@@ -25,7 +25,7 @@
 import React, { ElementType } from 'react'
 import { mount } from '@instructure/ui-test-sandbox'
 import { expect } from './expect'
-import { StoryConfig, within } from '../index'
+import { within } from '../index'
 import { generateComponentExamples } from './generateComponentExamples'
 
 type ComponentExample = {
@@ -63,7 +63,7 @@ const renderExample = ({
  */
 export function generateA11yTests(
   Component: React.ComponentType<any>,
-  componentExample: StoryConfig<Record<string, unknown>>
+  componentExample: Record<string, any>
 ) {
   const sections = generateComponentExamples(Component, componentExample)
   describe(`${Component.displayName} should meet accessibility standards`, async () => {
