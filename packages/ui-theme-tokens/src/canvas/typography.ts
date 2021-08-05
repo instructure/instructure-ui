@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
-const typography = Object.freeze({
+import { Typography } from '@instructure/shared-types'
+
+const typography: Typography = Object.freeze({
   fontFamily: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
   fontFamilyMonospace: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
 

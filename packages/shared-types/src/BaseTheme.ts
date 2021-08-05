@@ -25,14 +25,15 @@
 import { Colors } from './Colors'
 
 type Border = {
-  radiusSmall: string
-  radiusMedium: string
-  radiusLarge: string
-  widthSmall: string
-  widthMedium: string
-  widthLarge: string
+  radiusSmall: string | 0
+  radiusMedium: string | 0
+  radiusLarge: string | 0
+  widthSmall: string | 0
+  widthMedium: string | 0
+  widthLarge: string | 0
   style: string
 }
+
 type Breakpoints = {
   xxSmall: string
   xSmall: string
@@ -54,6 +55,7 @@ type Media = {
   largeMin: string
   xLargeMin: string
 }
+
 type Shadows = {
   depth1: string
   depth2: string
@@ -64,14 +66,14 @@ type Shadows = {
 }
 
 type Spacing = {
-  xxxSmall: string
-  xxSmall: string
-  xSmall: string
-  small: string
-  medium: string
-  large: string
-  xLarge: string
-  xxLarge: string
+  xxxSmall: string | 0
+  xxSmall: string | 0
+  xSmall: string | 0
+  small: string | 0
+  medium: string | 0
+  large: string | 0
+  xLarge: string | 0
+  xxLarge: string | 0
 }
 
 type Stacking = {
@@ -82,30 +84,30 @@ type Stacking = {
 }
 
 type Transitions = {
-  duration: string
+  duration: string | 0
   timing: string
 }
 
 type Typography = {
   fontFamily: string
   fontFamilyMonospace: string
-  fontFamilyHeading?: string
-  fontSizeXSmall: string
-  fontSizeSmall: string
-  fontSizeMedium: string
-  fontSizeLarge: string
-  fontSizeXLarge: string
-  fontSizeXXLarge: string
+  fontFamilyHeading?: string // only in instructure theme
+  fontSizeXSmall: string | 0
+  fontSizeSmall: string | 0
+  fontSizeMedium: string | 0
+  fontSizeLarge: string | 0
+  fontSizeXLarge: string | 0
+  fontSizeXXLarge: string | 0
   fontWeightLight: number
   fontWeightNormal: number
   fontWeightBold: number
-  lineHeight: number
-  lineHeightFit: number
-  lineHeightCondensed: number
-  lineHeightDouble: number
-  letterSpacingNormal: number
-  letterSpacingCondensed: string
-  letterSpacingExpanded: string
+  lineHeight: number | string
+  lineHeightFit: number | string
+  lineHeightCondensed: number | string
+  lineHeightDouble: number | string
+  letterSpacingNormal: number | 0
+  letterSpacingCondensed: string | 0
+  letterSpacingExpanded: string | 0
 }
 
 type Size = {

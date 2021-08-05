@@ -23,8 +23,9 @@
  */
 
 import { breakpoints } from './breakpoints'
+import { Media } from '@instructure/shared-types'
 
-const media = Object.freeze({
+const media: Media = Object.freeze({
   mediumMin: `min-width: ${breakpoints.medium}`,
   largeMin: `min-width: ${breakpoints.large}`,
   xLargeMin: `min-width: ${breakpoints.xLarge}`

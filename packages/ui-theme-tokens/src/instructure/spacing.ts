@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
-const spacing = Object.freeze({
+import { Spacing } from '@instructure/shared-types'
+
+const spacing: Spacing = Object.freeze({
   xxxSmall: '0.125rem',
   xxSmall: '0.375rem',
   xSmall: '0.75rem',

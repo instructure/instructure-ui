@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
-const forms = Object.freeze({
+import { Forms } from '@instructure/shared-types'
+
+const forms: Forms = Object.freeze({
   inputHeightSmall: '2rem',
   inputHeightMedium: '2.75rem',
   inputHeightLarge: '3.375rem'

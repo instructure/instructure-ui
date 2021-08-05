@@ -61,7 +61,12 @@ const brandVariables = {
   'ic-brand-global-nav-menu-item__text-color': colors.textLightest,
   'ic-brand-global-nav-menu-item__text-color--active': colors.textBrand
 }
-type CanvasTheme = BaseTheme & typeof brandVariables
+
+export type CanvasBrandVariables = typeof brandVariables
+
+export type CanvasTheme = BaseTheme & {
+  key: 'canvas'
+} & CanvasBrandVariables
 
 const theme: CanvasTheme = {
   key,

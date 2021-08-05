@@ -40,7 +40,9 @@ const {
 
 const key = 'instructure'
 
-const theme: BaseTheme = {
+export type InstructureTheme = BaseTheme & { key: 'instructure' }
+
+const theme: InstructureTheme = {
   key,
   ...instructure
 }

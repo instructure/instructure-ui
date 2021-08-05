@@ -23,8 +23,9 @@
  */
 
 import { functionalColors } from '../utils/functionalColors'
+import { BaseColors, Colors } from '@instructure/shared-types'
 
-const baseColors = {
+const baseColors: BaseColors = {
   brand: '#0770A3',
   link: '#0770A3',
   electric: '#0770A3',
@@ -41,7 +42,7 @@ const baseColors = {
   white: '#FFFFFF'
 }
 
-const colors = Object.freeze(functionalColors(baseColors))
+const colors: Colors = Object.freeze(functionalColors(baseColors))
 
 export default colors
 export { colors }

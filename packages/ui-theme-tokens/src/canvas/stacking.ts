@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
-const stacking = Object.freeze({
+import { Stacking } from '@instructure/shared-types'
+
+const stacking: Stacking = Object.freeze({
   topmost: 9999,
   above: 1,
   below: -1,

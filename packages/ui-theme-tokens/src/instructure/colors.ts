@@ -23,8 +23,9 @@
  */
 
 import { functionalColors } from '../utils/functionalColors'
+import { BaseColors, Colors } from '@instructure/shared-types'
 
-const values = {
+const values: BaseColors = {
   brand: '#287A9F',
   link: '#287A9F',
   electric: '#287A9F',
@@ -41,15 +42,25 @@ const values = {
   white: '#FFFFFF'
 }
 
+/**
+ * Two Inst colors are not accessible, so adding them for display purposes only in decorative elements
+ */
+type InaccessibleColors = {
+  inaccessibleAlert: string
+  inaccessibleWarning: string
+}
+
 // Two Inst colors are not accessible, so adding them for display purposes only
 // in decorative elements
-const appendInaccessibleColors = {
+const appendInaccessibleColors: Colors & InaccessibleColors = {
   ...functionalColors(values),
   inaccessibleAlert: '#fccb0e',
   inaccessibleWarning: '#f68e1f'
 }
 
-const colors = Object.freeze(appendInaccessibleColors)
+const colors: Colors & InaccessibleColors = Object.freeze(
+  appendInaccessibleColors
+)
 
 export default colors
 export { colors }
