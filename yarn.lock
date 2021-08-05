@@ -19374,6 +19374,23 @@ react-docgen@^5, react-docgen@^5.0.0:
     node-dir "^0.1.10"
     strip-indent "^3.0.0"
 
+react-docgen@^6.0.0-alpha.0:
+  version "6.0.0-alpha.0"
+  resolved "https://registry.npmjs.org/react-docgen/-/react-docgen-6.0.0-alpha.0.tgz#62bbedb63e5cf43e13957dc84cd9d7c3a4acb2ed"
+  integrity sha512-x04mIC8H6sLypv0bA87WW5hKmJXXM48aHaw5XD44LHcb+IqF3eL1Ev0YtXzxb7BXCoXV/WzpzCTuaqjUA39dyw==
+  dependencies:
+    "@babel/core" "^7.7.5"
+    "@babel/generator" "^7.12.11"
+    "@babel/runtime" "^7.7.6"
+    ast-types "^0.14.2"
+    commander "^2.19.0"
+    doctrine "^3.0.0"
+    estree-to-babel "^3.1.0"
+    neo-async "^2.6.1"
+    node-dir "^0.1.10"
+    resolve "^1.17.0"
+    strip-indent "^3.0.0"
+
 react-dom@^17.0.0:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
