@@ -40,7 +40,11 @@ const {
 
 const key = 'canvas-high-contrast'
 
-const theme: BaseTheme = {
+export type CanvasHighContrastTheme = BaseTheme & {
+  key: 'canvas-high-contrast'
+}
+
+const theme: CanvasHighContrastTheme = {
   key,
   description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
   ...canvasHighContrast

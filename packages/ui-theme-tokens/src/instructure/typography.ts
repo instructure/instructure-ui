@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
-const typography = Object.freeze({
+import { Typography } from '@instructure/shared-types'
+
+const typography: Typography = Object.freeze({
   fontFamily: `"Proxima Nova", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
   "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
   "Helvetica Neue", sans-serif`,

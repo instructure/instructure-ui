@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { Breakpoints } from '@instructure/shared-types'
+
 const onePixel = 0.0625
 
 // base = 16px
@@ -34,7 +36,7 @@ const values = {
   xLarge: 75 // 1200px
 }
 
-const breakpoints = Object.freeze({
+const breakpoints: Breakpoints = Object.freeze({
   xxSmall: `${values.xxSmall}em`,
   xSmall: `${values.xSmall}em`,
   small: `${values.small}em`,

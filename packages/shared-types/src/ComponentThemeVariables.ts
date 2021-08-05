@@ -38,7 +38,9 @@ import {
 } from './BaseTheme'
 import { Colors } from './Colors'
 
-export type Avatar = {
+type SpacingValue = string | 0
+
+export type AvatarTheme = {
   background: Colors['backgroundLightest']
   borderWidthSmall: Border['widthSmall']
   borderWidthMedium: Border['widthMedium']
@@ -55,14 +57,14 @@ export type Avatar = {
   colorAsh: Colors['ash']
 }
 
-export type Alert = {
+export type AlertTheme = {
   background: Colors['backgroundLightest']
   color: Colors['textDarkest']
   marginTop: Spacing['small']
   borderRadius: Border['radiusMedium']
   borderWidth: Border['widthMedium']
   borderStyle: Border['style']
-  contentPadding: `${Spacing['small']} ${Spacing['medium']}`
+  contentPadding: SpacingValue
   contentFontSize: Typography['fontSizeMedium']
   contentFontFamily: Typography['fontFamily']
   contentFontWeight: Typography['fontWeightNormal']
@@ -81,7 +83,7 @@ export type Alert = {
   boxShadow: Shadows['depth2']
 }
 
-export type Badge = {
+export type BadgeTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   color: Colors['textLightest']
@@ -95,7 +97,7 @@ export type Badge = {
   pulseBorderThickness: Border['widthMedium']
 }
 
-export type Billboard = {
+export type BillboardTheme = {
   fontFamily: Typography['fontFamily']
   paddingSmall: Spacing['small']
   paddingMedium: Spacing['medium']
@@ -119,7 +121,7 @@ export type Billboard = {
   buttonBorderStyle: Border['style']
 }
 
-export type Breadcrumb = {
+export type BreadcrumbTheme = {
   fontFamily: Typography['fontFamily']
   separatorColor: Colors['borderDark']
   smallFontSize: Typography['fontSizeSmall']
@@ -127,7 +129,7 @@ export type Breadcrumb = {
   largeFontSize: Typography['fontSizeLarge']
 }
 
-export type BaseButton = {
+export type BaseButtonTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   borderRadius: Border['radiusMedium']
@@ -208,14 +210,14 @@ export type BaseButton = {
   primaryInverseGhostActiveBoxShadow: string
 }
 
-export type CloseButton = {
+export type CloseButtonTheme = {
   offsetMedium: Spacing['medium']
   offsetSmall: Spacing['small']
   offsetXSmall: Spacing['xSmall']
   zIndex: Stacking['above']
 }
 
-export type Byline = {
+export type BylineTheme = {
   fontFamily: Typography['fontFamily']
   background: Colors['backgroundLightest']
   color: Colors['textDarkest']
@@ -232,7 +234,7 @@ export type Byline = {
   large: Breakpoints['large']
 }
 
-export type CalendarDay = {
+export type CalendarDayTheme = {
   color: Colors['textDarkest']
   background: Colors['backgroundLightest']
   fontSize: Typography['fontSizeMedium']
@@ -248,7 +250,7 @@ export type CalendarDay = {
   todayBorderRadius: Forms['inputHeightSmall']
 }
 
-export type Calendar = {
+export type CalendarTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -257,7 +259,7 @@ export type Calendar = {
   navMargin: Spacing['small']
   maxHeaderWidth: Spacing['medium']
 }
-export type CheckboxFacade = {
+export type CheckboxFacadeTheme = {
   color: Colors['textLightest']
   borderWidth: Border['widthSmall']
   borderColor: Colors['borderDark']
@@ -281,7 +283,7 @@ export type CheckboxFacade = {
   labelFontSizeLarge: Typography['fontSizeLarge']
 }
 
-export type ToggleFacade = {
+export type ToggleFacadeTheme = {
   color: Colors['textLightest']
   background: Colors['backgroundLight']
   borderColor: Colors['borderMedium']
@@ -307,7 +309,7 @@ export type ToggleFacade = {
   labelFontSizeLarge: Typography['fontSizeLarge']
 }
 
-export type CodeEditor = {
+export type CodeEditorTheme = {
   fontFamily: Typography['fontFamilyMonospace']
   fontSize: Typography['fontSizeSmall']
   background: Colors['backgroundLight']
@@ -360,10 +362,10 @@ export type CodeEditor = {
   operatorColor: Colors['textDarkest']
 }
 
-export type DrawerLayoutContent = {
+export type DrawerLayoutContentTheme = {
   duration: Transitions['duration']
 }
-export type DrawerLayoutTray = {
+export type DrawerLayoutTrayTheme = {
   background: Colors['backgroundLightest']
   borderColor: Colors['borderMedium']
   borderWidth: Border['widthSmall']
@@ -372,7 +374,7 @@ export type DrawerLayoutTray = {
   boxShadow: Shadows['depth3']
 }
 
-export type FileDrop = {
+export type FileDropTheme = {
   backgroundColor: Colors['backgroundLightest']
   borderRadius: Border['radiusLarge']
   borderWidth: Border['widthMedium']
@@ -382,11 +384,11 @@ export type FileDrop = {
   rejectedColor: Colors['textDanger']
 }
 
-export type Flex = {
+export type FlexTheme = {
   fontFamily: Typography['fontFamily']
 }
 
-export type FormFieldGroup = {
+export type FormFieldGroupTheme = {
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
   borderRadius: Border['radiusMedium']
@@ -394,7 +396,7 @@ export type FormFieldGroup = {
   errorFieldsPadding: Spacing['xSmall']
 }
 
-export type FormFieldLabel = {
+export type FormFieldLabelTheme = {
   color: Colors['textDarkest']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightBold']
@@ -402,7 +404,7 @@ export type FormFieldLabel = {
   lineHeight: Typography['lineHeightFit']
 }
 
-export type FormFieldMessage = {
+export type FormFieldMessageTheme = {
   colorHint: Colors['textDarkest']
   colorError: Colors['textDanger']
   colorSuccess: Colors['textSuccess']
@@ -412,11 +414,11 @@ export type FormFieldMessage = {
   lineHeight: Typography['lineHeight']
 }
 
-export type FormFieldMessages = {
+export type FormFieldMessagesTheme = {
   topMargin: Spacing['xxSmall']
 }
 
-export type Grid = {
+export type GridTheme = {
   spacingSmall: Spacing['small']
   spacingMedium: Spacing['medium']
   spacingLarge: Spacing['large']
@@ -424,7 +426,7 @@ export type Grid = {
   largeMin: Media['largeMin']
   xLargeMin: Media['xLargeMin']
 }
-export type Heading = {
+export type HeadingTheme = {
   lineHeight: Typography['lineHeightFit']
   h1FontSize: Typography['fontSizeXXLarge']
   h1FontWeight: Typography['fontWeightLight']
@@ -451,7 +453,7 @@ export type Heading = {
   borderStyle: Border['style']
 }
 
-export type Link = {
+export type LinkTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   color: Colors['textLink']
@@ -465,7 +467,7 @@ export type Link = {
   iconPlusTextMargin: Spacing['xxSmall']
 }
 
-export type InlineListItem = {
+export type InlineListItemTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   fontSizeSmall: Typography['fontSizeSmall']
@@ -488,7 +490,7 @@ export type InlineListItem = {
   spacingXXLarge: Spacing['xxLarge']
 }
 
-export type ListItem = {
+export type ListItemTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   lineHeight: Typography['lineHeight']
@@ -508,13 +510,13 @@ export type ListItem = {
   delimiterSolidBorder: `${Border['widthSmall']} ${string}C{'lors']['borderMedium']}`
 }
 
-export type List = {
+export type ListTheme = {
   listPadding: Spacing['large']
   orderedNumberFontWeight: Typography['fontWeightBold']
   orderedNumberMargin: Spacing['xSmall']
 }
 
-export type MenuItem = {
+export type MenuItemTheme = {
   padding: `${Spacing['xSmall']} ${Spacing['small']}`
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -530,7 +532,7 @@ export type MenuItem = {
   activeIconColor: Colors['textLightest']
 }
 
-export type MenuGroup = {
+export type MenuGroupTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightBold']
@@ -538,12 +540,12 @@ export type MenuGroup = {
   color: Colors['textDarkest']
   background: Colors['backgroundLightest']
 }
-export type MenuSeparator = {
+export type MenuSeparatorTheme = {
   background: Colors['backgroundMedium']
   height: Border['widthSmall']
   margin: `${string} ${Spacing['small']}`
 }
-export type Metric = {
+export type MetricTheme = {
   padding: `${string} ${Spacing['xSmall']}`
   fontFamily: Typography['fontFamily']
   valueColor: Colors['textDarkest']
@@ -552,14 +554,14 @@ export type Metric = {
   labelColor: Colors['textDarkest']
   labelFontSize: Typography['fontSizeXSmall']
 }
-export type MetricGroup = {
+export type MetricGroupTheme = {
   lineHeight: Typography['lineHeightCondensed']
 }
 
-export type ModalBody = {
+export type ModalBodyTheme = {
   inverseBackground: Colors['backgroundBrandSecondary']
 }
-export type ModalFooter = {
+export type ModalFooterTheme = {
   background: Colors['backgroundLight']
   borderColor: Colors['borderMedium']
   borderWidth: Border['widthSmall']
@@ -569,7 +571,7 @@ export type ModalFooter = {
   inverseBorderColor: Colors['borderDarkest']
 }
 
-export type ModalHeader = {
+export type ModalHeaderTheme = {
   background: Colors['backgroundLightest']
   borderColor: Colors['borderMedium']
   padding: Spacing['medium']
@@ -577,7 +579,7 @@ export type ModalHeader = {
   inverseBorderColor: Colors['backgroundDarkest']
 }
 
-export type Modal = {
+export type ModalTheme = {
   fontFamily: Typography['fontFamily']
   textColor: Colors['textDarkest']
   background: Colors['backgroundLightest']
@@ -593,12 +595,12 @@ export type Modal = {
   zIndex: Stacking['topmost']
 }
 
-export type Transition = {
+export type TransitionTheme = {
   duration: Transitions['duration']
   timing: Transitions['timing']
 }
 
-export type AppNavItem = {
+export type AppNavItemTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightBold']
   textColor: Colors['textLink']
@@ -607,7 +609,7 @@ export type AppNavItem = {
   backgroundColor: Colors['backgroundLightest']
 }
 
-export type AppNav = {
+export type AppNavTheme = {
   fontFamily: Typography['fontFamily']
   borderColor: Colors['borderMedium']
   borderStyle: Border['style']
@@ -615,7 +617,7 @@ export type AppNav = {
   horizontalMargin: Spacing['xxSmall']
 }
 
-export type NavigationItem = {
+export type NavigationItemTheme = {
   fontSize: Typography['fontSizeSmall']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightLight']
@@ -633,7 +635,7 @@ export type NavigationItem = {
   contentPadding: Spacing['xxSmall']
 }
 
-export type Navigation = {
+export type NavigationTheme = {
   fontColor: Colors['textLightest']
   backgroundColor: Colors['backgroundBrandSecondary']
   fill: Colors['textLightest']
@@ -645,7 +647,7 @@ export type Navigation = {
   toggleTransition: Transitions['duration']
 }
 
-export type NumberInput = {
+export type NumberInputTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   borderWidth: Border['widthSmall']
@@ -672,7 +674,7 @@ export type NumberInput = {
   largeHeight: Forms['inputHeightLarge']
 }
 
-export type OptionsItem = {
+export type OptionsItemTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -688,13 +690,13 @@ export type OptionsItem = {
   nestedPadding: Spacing['medium']
 }
 
-export type OptionsSeparator = {
+export type OptionsSeparatorTheme = {
   background: Colors['backgroundMedium']
   height: Border['widthSmall']
   margin: `${string} ${Spacing['small']}`
 }
 
-export type Options = {
+export type OptionsTheme = {
   labelFontWeight: Typography['fontWeightBold']
   background: Colors['backgroundLightest']
   labelColor: Colors['textDarkest']
@@ -702,14 +704,14 @@ export type Options = {
   nestedLabelPadding: `${Spacing['xSmall']} ${Spacing['small']}`
 }
 
-export type Mask = {
+export type MaskTheme = {
   zIndex: Stacking['topmost']
   focusBorderColor: Colors['borderBrand']
   borderRadius: Border['radiusMedium']
   borderWidth: Border['widthSmall']
 }
 
-export type Pages = {
+export type PagesTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -717,7 +719,7 @@ export type Pages = {
   background: Colors['backgroundLightest']
 }
 
-export type Pill = {
+export type PillTheme = {
   fontFamily: Typography['fontFamily']
   padding: `${string} ${Spacing['xSmall']}`
   background: Colors['backgroundLightest']
@@ -733,11 +735,11 @@ export type Pill = {
   borderStyle: Border['style']
 }
 
-export type Position = {
+export type PositionTheme = {
   zIndex: Stacking['topmost']
 }
 
-export type ProgressBar = {
+export type ProgressBarTheme = {
   color: Colors['textDarkest']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -760,7 +762,7 @@ export type ProgressBar = {
   meterColorDangerInverse: Colors['backgroundDanger']
 }
 
-export type ProgressCircle = {
+export type ProgressCircleTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   lineHeight: Typography['lineHeightCondensed']
@@ -807,7 +809,7 @@ export type ProgressCircle = {
   meterColorWarningInverse: Colors['backgroundWarning']
 }
 
-export type RangeInput = {
+export type RangeInputTheme = {
   handleBackground: Colors['backgroundBrand']
   handleShadowColor: Colors['borderBrand']
   handleHoverBackground: Colors['backgroundBrand']
@@ -828,7 +830,7 @@ export type RangeInput = {
   valueLargeLineHeight: Forms['inputHeightLarge']
 }
 
-export type RadioInput = {
+export type RadioInputTheme = {
   labelColor: Colors['textDarkest']
   labelFontFamily: Typography['fontFamily']
   labelFontWeight: Typography['fontWeightNormal']
@@ -859,7 +861,7 @@ export type RadioInput = {
   toggleLargeFontSize: Typography['fontSizeMedium']
 }
 
-export type RatingIcon = {
+export type RatingIconTheme = {
   iconMargin: Spacing['xxxSmall']
   iconEmptyColor: Colors['textBrand']
   iconFilledColor: Colors['textBrand']
@@ -868,7 +870,7 @@ export type RatingIcon = {
   largeIconFontSize: Typography['fontSizeXXLarge']
 }
 
-export type Select = {
+export type SelectTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -879,13 +881,13 @@ export type Select = {
   background: Colors['backgroundLightest']
 }
 
-export type Spinner = {
+export type SpinnerTheme = {
   trackColor: Colors['backgroundLight']
   color: Colors['backgroundBrand']
   inverseColor: Colors['backgroundBrand']
 }
 
-export type InlineSVG = {
+export type InlineSVGTheme = {
   primaryInverseColor: Colors['textLightest']
   primaryColor: Colors['textDarkest']
   secondaryColor: Colors['textDark']
@@ -897,7 +899,7 @@ export type InlineSVG = {
   successColor: Colors['textSuccess']
 }
 
-export type TableBody = {
+export type TableBodyTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -905,7 +907,7 @@ export type TableBody = {
   background: Colors['backgroundLightest']
 }
 
-export type TableCell = {
+export type TableCellTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -916,7 +918,7 @@ export type TableCell = {
   padding: `${Spacing['xSmall']} ${Spacing['small']}`
 }
 
-export type TableColHeader = {
+export type TableColHeaderTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -930,7 +932,7 @@ export type TableColHeader = {
   focusOutlineStyle: Border['style']
 }
 
-export type TableHead = {
+export type TableHeadTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -938,7 +940,7 @@ export type TableHead = {
   background: Colors['backgroundLightest']
 }
 
-export type TableRow = {
+export type TableRowTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -949,7 +951,7 @@ export type TableRow = {
   padding: `${Spacing['xSmall']} ${string}`
 }
 
-export type TableRowHeader = {
+export type TableRowHeaderTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -960,7 +962,7 @@ export type TableRowHeader = {
   padding: `${Spacing['xSmall']} ${Spacing['small']}`
 }
 
-export type TabsPanel = {
+export type TabsPanelTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -972,7 +974,7 @@ export type TabsPanel = {
   borderStyle: Border['style']
 }
 
-export type TabsTab = {
+export type TabsTabTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   lineHeight: Typography['lineHeightCondensed']
@@ -986,7 +988,7 @@ export type TabsTab = {
   zIndex: Stacking['above']
 }
 
-export type Table = {
+export type TableTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -994,14 +996,14 @@ export type Table = {
   background: Colors['backgroundLightest']
 }
 
-export type Tabs = {
+export type TabsTheme = {
   defaultBackground: Colors['backgroundLightest']
   scrollFadeColor: Colors['backgroundLightest']
   tabVerticalOffset: Border['widthSmall']
   zIndex: Stacking['above']
 }
 
-export type Tag = {
+export type TagTheme = {
   fontFamily: Typography['fontFamily']
   heightMedium: Forms['inputHeightSmall']
   heightLarge: Forms['inputHeightMedium']
@@ -1034,7 +1036,7 @@ export type Tag = {
   inlineIconHoverColor: string
 }
 
-export type Text = {
+export type TextTheme = {
   fontFamily: string
   fontFamilyMonospace: string
   fontFamilyHeading?: string
@@ -1066,7 +1068,7 @@ export type Text = {
   paragraphMargin: `${Spacing['medium']} ${string}`
 }
 
-export type TextArea = {
+export type TextAreaTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   color: Colors['textDarkest']
@@ -1093,7 +1095,7 @@ export type TextArea = {
   largeHeight: Forms['inputHeightLarge']
 }
 
-export type ToggleDetails = {
+export type ToggleDetailsTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   lineHeight: Typography['lineHeight']
@@ -1116,14 +1118,14 @@ export type ToggleDetails = {
   filledPadding: Spacing['small']
 }
 
-export type Tooltip = {
+export type TooltipTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   fontSize: Typography['fontSizeSmall']
   padding: Spacing['small']
 }
 
-export type Tray = {
+export type TrayTheme = {
   background: Colors['backgroundLightest']
   borderColor: Colors['borderMedium']
   borderWidth: Border['widthSmall']
@@ -1136,7 +1138,7 @@ export type Tray = {
   zIndex: Stacking['topmost']
 }
 
-export type TreeBrowserButton = {
+export type TreeBrowserButtonTheme = {
   hoverBackgroundColor: Colors['backgroundBrand']
   hoverTextColor: Colors['textLightest']
   focusOutlineWidth: Border['widthMedium']
@@ -1164,7 +1166,7 @@ export type TreeBrowserButton = {
   selectedOutlineWidth: Border['widthLarge']
 }
 
-export type TreeBrowserCollection = {
+export type TreeBrowserCollectionTheme = {
   fontFamily: Typography['fontFamily']
   baseSpacingSmall: Spacing['xSmall']
   baseSpacingMedium: Spacing['small']
@@ -1172,25 +1174,25 @@ export type TreeBrowserCollection = {
   borderColor: Colors['borderDark']
 }
 
-export type TreeBrowser = {
+export type TreeBrowserTheme = {
   borderRadius: Border['radiusMedium']
   focusOutlineWidth: Border['widthMedium']
   focusOutlineColor: Colors['borderBrand']
   focusOutlineStyle: Border['style']
 }
-export type TruncateText = {
+export type TruncateTextTheme = {
   fontFamily: Typography['fontFamily']
   lineHeight: Typography['lineHeight']
 }
 
-export type ContextView = {
+export type ContextViewTheme = {
   arrowBorderWidth: Border['widthSmall']
   arrowBackgroundColor: Colors['white']
   arrowBorderColor: Colors['tiara']
   arrowBackgroundColorInverse: Colors['licorice']
 }
 
-export type View = {
+export type ViewTheme = {
   fontFamily: Typography['fontFamily']
   color: Colors['textDarkest']
   colorPrimaryInverse: Colors['textLightest']
@@ -1258,114 +1260,114 @@ export type View = {
 }
 
 export interface ThemeVariables {
-  Avatar: Avatar
-  Alert: Alert
-  Badge: Badge
-  Billboard: Billboard
-  Breadcrumb: Breadcrumb
-  BaseButton: BaseButton
-  Button: BaseButton
-  CloseButton: CloseButton
-  CondensedButton: BaseButton
-  IconButton: BaseButton
-  Byline: Byline
-  CalendarDay: CalendarDay
-  'Calendar.Day': CalendarDay
-  Calendar: Calendar
-  CheckboxFacade: CheckboxFacade
-  ToggleFacade: ToggleFacade
-  CodeEditor: CodeEditor
-  DrawerLayoutContent: DrawerLayoutContent
-  'DrawerLayout.Content': DrawerLayoutContent
-  DrawerLayoutTray: DrawerLayoutTray
-  'DrawerLayout.Tray': DrawerLayoutTray
-  FileDrop: FileDrop
-  Flex: Flex
-  FormFieldGroup: FormFieldGroup
-  FormFieldLabel: FormFieldLabel
-  FormFieldMessage: FormFieldMessage
-  FormFieldMessages: FormFieldMessages
-  Grid: Grid
-  GridCol: Grid
-  GridRow: Grid
-  Heading: Heading
-  Link: Link
-  InlineListItem: InlineListItem
-  'InlineList.Item': InlineListItem
-  ListItem: ListItem
-  'List.Item': ListItem
-  List: List
-  MenuItem: MenuItem
-  'Menu.Item': MenuItem
-  MenuGroup: MenuGroup
-  'Menu.Group': MenuGroup
-  MenuSeparator: MenuSeparator
-  'Menu.Separator': MenuSeparator
-  Metric: Metric
-  MetricGroup: MetricGroup
-  ModalBody: ModalBody
-  'Modal.Body': ModalBody
-  ModalFooter: ModalFooter
-  'Modal.Footer': ModalFooter
-  ModalHeader: ModalHeader
-  'Modal.Header': ModalHeader
-  Modal: Modal
-  Transition: Transition
-  AppNavItem: AppNavItem
-  'AppNav.Item': AppNavItem
-  AppNav: AppNav
-  NavigationItem: NavigationItem
-  'Navigation.Item': NavigationItem
-  Navigation: Navigation
-  NumberInput: NumberInput
-  OptionsItem: OptionsItem
-  'Options.Item': OptionsItem
-  OptionsSeparator: OptionsSeparator
-  'Options.Separator': OptionsSeparator
-  Options: Options
-  Mask: Mask
-  Pages: Pages
-  Position: Position
-  Pill: Pill
-  ProgressBar: ProgressBar
-  ProgressCircle: ProgressCircle
-  RangeInput: RangeInput
-  RadioInput: RadioInput
-  RatingIcon: RatingIcon
-  'Rating.Icon': RatingIcon
-  Select: Select
-  Spinner: Spinner
-  InlineSVG: InlineSVG
-  TableBody: TableBody
-  'Table.Body': TableBody
-  TableCell: TableCell
-  'Table.Cell': TableCell
-  TableColHeader: TableColHeader
-  'Table.ColHeader': TableColHeader
-  TableHead: TableHead
-  'Table.Head': TableHead
-  TableRow: TableRow
-  'Table.Row': TableRow
-  TableRowHeader: TableRowHeader
-  'Table.RowHeader': TableRowHeader
-  TabsPanel: TabsPanel
-  'Tabs.Panel': TabsPanel
-  TabsTab: TabsTab
-  'Tabs.Tab': TabsTab
-  Table: Table
-  Tabs: Tabs
-  Tag: Tag
-  Text: Text
-  ToggleDetails: ToggleDetails
-  TextArea: TextArea
-  Tooltip: Tooltip
-  Tray: Tray
-  TreeBrowserButton: TreeBrowserButton
-  'TreeBrowser.Button': TreeBrowserButton
-  TreeBrowserCollection: TreeBrowserCollection
-  'TreeBrowser.Collection': TreeBrowserCollection
-  TreeBrowser: TreeBrowser
-  TruncateText: TruncateText
-  ContextView: ContextView
-  View: View
+  Avatar: AvatarTheme
+  Alert: AlertTheme
+  Badge: BadgeTheme
+  Billboard: BillboardTheme
+  Breadcrumb: BreadcrumbTheme
+  BaseButton: BaseButtonTheme
+  Button: BaseButtonTheme
+  CloseButton: CloseButtonTheme
+  CondensedButton: BaseButtonTheme
+  IconButton: BaseButtonTheme
+  Byline: BylineTheme
+  CalendarDay: CalendarDayTheme
+  'Calendar.Day': CalendarDayTheme
+  Calendar: CalendarTheme
+  CheckboxFacade: CheckboxFacadeTheme
+  ToggleFacade: ToggleFacadeTheme
+  CodeEditor: CodeEditorTheme
+  DrawerLayoutContent: DrawerLayoutContentTheme
+  'DrawerLayout.Content': DrawerLayoutContentTheme
+  DrawerLayoutTray: DrawerLayoutTrayTheme
+  'DrawerLayout.Tray': DrawerLayoutTrayTheme
+  FileDrop: FileDropTheme
+  Flex: FlexTheme
+  FormFieldGroup: FormFieldGroupTheme
+  FormFieldLabel: FormFieldLabelTheme
+  FormFieldMessage: FormFieldMessageTheme
+  FormFieldMessages: FormFieldMessagesTheme
+  Grid: GridTheme
+  GridCol: GridTheme
+  GridRow: GridTheme
+  Heading: HeadingTheme
+  Link: LinkTheme
+  InlineListItem: InlineListItemTheme
+  'InlineList.Item': InlineListItemTheme
+  ListItem: ListItemTheme
+  'List.Item': ListItemTheme
+  List: ListTheme
+  MenuItem: MenuItemTheme
+  'Menu.Item': MenuItemTheme
+  MenuGroup: MenuGroupTheme
+  'Menu.Group': MenuGroupTheme
+  MenuSeparator: MenuSeparatorTheme
+  'Menu.Separator': MenuSeparatorTheme
+  Metric: MetricTheme
+  MetricGroup: MetricGroupTheme
+  ModalBody: ModalBodyTheme
+  'Modal.Body': ModalBodyTheme
+  ModalFooter: ModalFooterTheme
+  'Modal.Footer': ModalFooterTheme
+  ModalHeader: ModalHeaderTheme
+  'Modal.Header': ModalHeaderTheme
+  Modal: ModalTheme
+  Transition: TransitionTheme
+  AppNavItem: AppNavItemTheme
+  'AppNav.Item': AppNavItemTheme
+  AppNav: AppNavTheme
+  NavigationItem: NavigationItemTheme
+  'Navigation.Item': NavigationItemTheme
+  Navigation: NavigationTheme
+  NumberInput: NumberInputTheme
+  OptionsItem: OptionsItemTheme
+  'Options.Item': OptionsItemTheme
+  OptionsSeparator: OptionsSeparatorTheme
+  'Options.Separator': OptionsSeparatorTheme
+  Options: OptionsTheme
+  Mask: MaskTheme
+  Pages: PagesTheme
+  Position: PositionTheme
+  Pill: PillTheme
+  ProgressBar: ProgressBarTheme
+  ProgressCircle: ProgressCircleTheme
+  RangeInput: RangeInputTheme
+  RadioInput: RadioInputTheme
+  RatingIcon: RatingIconTheme
+  'Rating.Icon': RatingIconTheme
+  Select: SelectTheme
+  Spinner: SpinnerTheme
+  InlineSVG: InlineSVGTheme
+  TableBody: TableBodyTheme
+  'Table.Body': TableBodyTheme
+  TableCell: TableCellTheme
+  'Table.Cell': TableCellTheme
+  TableColHeader: TableColHeaderTheme
+  'Table.ColHeader': TableColHeaderTheme
+  TableHead: TableHeadTheme
+  'Table.Head': TableHeadTheme
+  TableRow: TableRowTheme
+  'Table.Row': TableRowTheme
+  TableRowHeader: TableRowHeaderTheme
+  'Table.RowHeader': TableRowHeaderTheme
+  TabsPanel: TabsPanelTheme
+  'Tabs.Panel': TabsPanelTheme
+  TabsTab: TabsTabTheme
+  'Tabs.Tab': TabsTabTheme
+  Table: TableTheme
+  Tabs: TabsTheme
+  Tag: TagTheme
+  Text: TextTheme
+  ToggleDetails: ToggleDetailsTheme
+  TextArea: TextAreaTheme
+  Tooltip: TooltipTheme
+  Tray: TrayTheme
+  TreeBrowserButton: TreeBrowserButtonTheme
+  'TreeBrowser.Button': TreeBrowserButtonTheme
+  TreeBrowserCollection: TreeBrowserCollectionTheme
+  'TreeBrowser.Collection': TreeBrowserCollectionTheme
+  TreeBrowser: TreeBrowserTheme
+  TruncateText: TruncateTextTheme
+  ContextView: ContextViewTheme
+  View: ViewTheme
 }

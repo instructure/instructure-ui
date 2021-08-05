@@ -26,3 +26,10 @@
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>
 }
+
+/** Makes all possible combination for a CSS prop to accept 1 to 4 values */
+export type CSSShorthandValue<Value extends string> =
+  | `${Value}`
+  | `${Value} ${Value}`
+  | `${Value} ${Value} ${Value}`
+  | `${Value} ${Value} ${Value} ${Value}`

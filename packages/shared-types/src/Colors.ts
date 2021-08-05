@@ -38,6 +38,7 @@ type BaseColors = {
   porcelain: string
   white: string
 }
+
 type TextColors = {
   textDarkest: BaseColors['licorice']
   textDark: BaseColors['ash']

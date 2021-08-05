@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { CSSShorthandValue } from '@instructure/shared-types'
+
 const ThemeablePropValues = {
   SHADOW_TYPES: {
     resting: 'resting',
@@ -84,14 +86,11 @@ const ThemeablePropValues = {
     xxLarge: 'xx-large'
   }
 } as const
+
 // SPACING
 type SpacingKeys = keyof typeof ThemeablePropValues.SPACING
 type SpacingValues = typeof ThemeablePropValues.SPACING[SpacingKeys]
-type Spacing =
-  | `${SpacingValues}`
-  | `${SpacingValues} ${SpacingValues}`
-  | `${SpacingValues} ${SpacingValues} ${SpacingValues}`
-  | `${SpacingValues} ${SpacingValues} ${SpacingValues} ${SpacingValues}`
+type Spacing = CSSShorthandValue<SpacingValues>
 
 // SHADOW_TYPES
 type ShadowKeys = keyof typeof ThemeablePropValues.SHADOW_TYPES
@@ -108,20 +107,12 @@ type Background = typeof ThemeablePropValues.BACKGROUNDS[BackgroundKeys]
 // BORDER_RADII
 type BorderRadiiKeys = keyof typeof ThemeablePropValues.BORDER_RADII
 type BorderRadiiValues = typeof ThemeablePropValues.BORDER_RADII[BorderRadiiKeys]
-type BorderRadii =
-  | `${BorderRadiiValues}`
-  | `${BorderRadiiValues} ${BorderRadiiValues}`
-  | `${BorderRadiiValues} ${BorderRadiiValues} ${BorderRadiiValues}`
-  | `${BorderRadiiValues} ${BorderRadiiValues} ${BorderRadiiValues} ${BorderRadiiValues}`
+type BorderRadii = CSSShorthandValue<BorderRadiiValues>
 
 // BORDER_WIDTHS
 type BorderWidthKeys = keyof typeof ThemeablePropValues.BORDER_WIDTHS
 type BorderWidthValues = typeof ThemeablePropValues.BORDER_WIDTHS[BorderWidthKeys]
-type BorderWidth =
-  | `${BorderWidthValues}`
-  | `${BorderWidthValues} ${BorderWidthValues}`
-  | `${BorderWidthValues} ${BorderWidthValues} ${BorderWidthValues}`
-  | `${BorderWidthValues} ${BorderWidthValues} ${BorderWidthValues} ${BorderWidthValues}`
+type BorderWidth = CSSShorthandValue<BorderWidthValues>
 
 export default ThemeablePropValues
 export { ThemeablePropValues }

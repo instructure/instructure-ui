@@ -22,11 +22,53 @@
  * SOFTWARE.
  */
 
-import { theme as canvasHighContrast } from '@instructure/canvas-high-contrast-theme'
-import { theme as canvas } from '@instructure/canvas-theme'
-import { theme as instructure } from '@instructure/instructure-theme'
+import {
+  theme as canvasHighContrast,
+  CanvasHighContrastTheme
+} from '@instructure/canvas-high-contrast-theme'
+
+import {
+  theme as canvas,
+  CanvasTheme,
+  CanvasBrandVariables
+} from '@instructure/canvas-theme'
+
+import {
+  theme as instructure,
+  InstructureTheme
+} from '@instructure/instructure-theme'
+
 import { BaseTheme } from '@instructure/shared-types'
+
+type ThemeMap = {
+  canvas: CanvasTheme
+  'canvas-high-contrast': CanvasHighContrastTheme
+  instructure: InstructureTheme
+
+  // needed for custom theme support
+  [k: string]: BaseTheme
+}
+
+type ThemeKeys = keyof ThemeMap
+
+type Theme = BaseTheme & {
+  key: ThemeKeys
+} & Partial<CanvasBrandVariables>
+
+type ThemeSpecificStyle<ComponentTheme> = {
+  [themeKey in ThemeKeys]?: Partial<ComponentTheme>
+}
 
 export { canvas, canvasHighContrast, instructure }
 export default canvas
-export type { BaseTheme }
+export type {
+  ThemeMap,
+  BaseTheme,
+  Theme,
+  ThemeKeys,
+  ThemeSpecificStyle,
+  CanvasTheme,
+  CanvasBrandVariables,
+  CanvasHighContrastTheme,
+  InstructureTheme
+}
