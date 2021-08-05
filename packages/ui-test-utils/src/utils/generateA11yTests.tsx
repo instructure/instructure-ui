@@ -25,7 +25,7 @@
 import React, { ElementType } from 'react'
 import { mount } from '@instructure/ui-test-sandbox'
 import { expect } from './expect'
-import { within } from '../index'
+import { StoryConfig, within } from '../index'
 import { generateComponentExamples } from './generateComponentExamples'
 
 type ComponentExample = {
@@ -43,32 +43,39 @@ const renderExample = ({
 
 /**
  *
- * @param Component
- * @param componentExample
- * @param only
+ * This function will generate a11y tests based on the component and the component
+ * example definition json.
+ * It will enumerate over the generated component examples and will call the
+ * `.accessible()` function on it.
+ *
+ * ```js
+ *  const subject = await mount(<Example />)
+    const element = within(subject.getDOMNode())
+
+    expect(await element.accessible()).to.be.true()
+ * ```
+ * @param Component - The base Component
+ * @param componentExample - The example definition json, this will be the basis for the prop
+ * combination generation.
  *
  * @module generateA11yTests
  * @private
  */
 export function generateA11yTests(
   Component: React.ComponentType<any>,
-  componentExample: any,
-  only: any[] = []
+  componentExample: StoryConfig<Record<string, unknown>>
 ) {
   const sections = generateComponentExamples(Component, componentExample)
   describe(`${Component.displayName} should meet accessibility standards`, async () => {
     sections.forEach(({ pages, propName, propValue }, i) => {
-      if (only[0] && i === only[0]) return
       const description = propName
         ? `rendered with prop '${propName}' = '${propValue}'`
         : 'rendered'
       describe(`${description}`, async () => {
         let rendered = 0
         let j = 0
-        pages.forEach(({ examples }: { examples: any[] }) => {
+        pages.forEach(({ examples }) => {
           examples.forEach((example) => {
-            const index = j + rendered
-            if (only[1] && index !== only[1]) return
             const Example = renderExample.bind(null, example)
             const description = process.env.DEBUG
               ? `with prop combination: ${JSON.stringify(
@@ -80,6 +87,7 @@ export function generateA11yTests(
             it(description, async () => {
               const subject = await mount(<Example />)
               const element = within(subject.getDOMNode())
+
               expect(await element.accessible()).to.be.true()
             })
             j++
