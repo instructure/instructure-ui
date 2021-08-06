@@ -23,6 +23,7 @@
  */
 
 import { keyframes } from '@instructure/emotion'
+import { BadgeTheme } from '@instructure/shared-types'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -43,7 +44,7 @@ const pulseAnimation = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, state) => {
+const generateStyle = (componentTheme: BadgeTheme, props, state) => {
   const { type, variant, placement, standalone, pulse } = props
 
   const top = placement.indexOf('top') > -1

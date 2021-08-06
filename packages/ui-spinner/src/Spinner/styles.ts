@@ -23,6 +23,7 @@
  */
 
 import { keyframes } from '@instructure/emotion'
+import { SpinnerTheme } from '@instructure/shared-types'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -56,8 +57,8 @@ const morph = keyframes`
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, state) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme: SpinnerTheme, props) => {
   const { size, variant } = props
 
   const spinnerSizes = {

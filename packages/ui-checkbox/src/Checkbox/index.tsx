@@ -47,7 +47,6 @@ import { CheckboxFacade } from './CheckboxFacade'
 import { ToggleFacade } from './ToggleFacade'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 type Props = {
   makeStyles?: (...args: any[]) => any
@@ -80,7 +79,7 @@ tags: toggle, switch
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, null)
 @testable()
 class Checkbox extends Component<Props> {
   static readonly componentId = 'Checkbox'

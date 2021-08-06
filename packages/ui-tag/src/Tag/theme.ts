@@ -23,52 +23,70 @@
  */
 
 import { darken } from '@instructure/ui-color-utils'
+import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { TagTheme } from '@instructure/shared-types'
+
+type Variants = 'default' | 'inline'
+
+type VariantValues =
+  | 'BackgroundHover'
+  | 'Background'
+  | 'BorderColor'
+  | 'BorderRadius'
+  | 'BorderStyle'
+  | 'BorderWidth'
+  | 'Color'
+  | 'IconColor'
+  | 'IconHoverColor'
+
+type VariantMap<Variant extends Variants> = Record<
+  `${Variant}${VariantValues}`,
+  string
+>
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
-const generateComponentTheme = (theme) => {
+const generateComponentTheme = (theme: Theme): TagTheme => {
   const { borders, colors, forms, spacing, typography, key: themeName } = theme
 
-  const themeSpecificStyle = {
+  const themeSpecificStyle: ThemeSpecificStyle<TagTheme> = {
     'canvas-high-contrast': {
       defaultBackground: colors.backgroundLightest,
       defaultBorderColor: colors.borderDarkest
     },
     canvas: {
       focusOutlineColor: theme['ic-brand-primary'],
-      textColor: theme['ic-brand-font-color-dark'],
       defaultIconColor: theme['ic-brand-font-color-dark'],
       defaultIconHoverColor: theme['ic-brand-primary'],
       defaultColor: theme['ic-brand-font-color-dark']
     }
   }
 
-  const tagVariant = function (
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'style' implicitly has an 'any' type.
-    style,
+  const tagVariant = function <Variant extends Variants>(
+    style: Variant,
     {
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderColor' implicitly has an 'a... Remove this comment to see the full error message
       borderColor,
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderRadius' implicitly has an '... Remove this comment to see the full error message
       borderRadius,
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderStyle' implicitly has an 'a... Remove this comment to see the full error message
       borderStyle,
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderWidth' implicitly has an 'a... Remove this comment to see the full error message
       borderWidth,
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'hoverColor' implicitly has an 'an... Remove this comment to see the full error message
       hoverColor,
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'iconColor' implicitly has an 'any... Remove this comment to see the full error message
       iconColor,
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'iconHoverColor' implicitly has an... Remove this comment to see the full error message
       iconHoverColor,
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'mainColor' implicitly has an 'any... Remove this comment to see the full error message
       mainColor,
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'textColor' implicitly has an 'any... Remove this comment to see the full error message
       textColor
+    }: {
+      borderColor: string
+      mainColor: string
+      textColor: string
+      borderRadius?: string | 0
+      borderStyle?: string
+      borderWidth?: string | 0
+      hoverColor?: string
+      iconColor?: string
+      iconHoverColor?: string
     }
   ) {
     return {
@@ -83,10 +101,10 @@ const generateComponentTheme = (theme) => {
       [`${style}Color`]: textColor,
       [`${style}IconColor`]: iconColor || textColor,
       [`${style}IconHoverColor`]: iconHoverColor || iconColor || textColor
-    }
+    } as VariantMap<Variant>
   }
 
-  const componentVariables = {
+  const componentVariables: TagTheme = {
     fontFamily: typography.fontFamily,
     heightSmall: '1.3125rem', // matches Pill component height
     heightMedium: forms.inputHeightSmall,
@@ -103,7 +121,6 @@ const generateComponentTheme = (theme) => {
     iconMargin: spacing.small,
     transitionTiming: '0.2s',
 
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ borderColor: any; iconColor: a... Remove this comment to see the full error message
     ...tagVariant('default', {
       borderColor: colors.borderMedium,
       iconColor: colors.textDarkest,
@@ -112,7 +129,6 @@ const generateComponentTheme = (theme) => {
       textColor: colors.textDarkest
     }),
 
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ borderColor: any; borderRadius... Remove this comment to see the full error message
     ...tagVariant('inline', {
       borderColor: colors.borderDark,
       borderRadius: borders.radiusMedium,
@@ -125,7 +141,6 @@ const generateComponentTheme = (theme) => {
 
   return {
     ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

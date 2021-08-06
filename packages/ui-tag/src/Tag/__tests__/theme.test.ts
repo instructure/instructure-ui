@@ -28,8 +28,11 @@ import { contrast } from '@instructure/ui-color-utils'
 import generateComponentTheme from '../theme'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 
+type Background = 'defaultBackground' | 'inlineBackground'
+type TextColor = 'defaultColor' | 'inlineColor'
+
 describe('Tag.theme', () => {
-  const variants = ['default', 'inline']
+  const variants = ['default', 'inline'] as const
 
   context('with the default theme', () => {
     const variables = generateComponentTheme(canvas)
@@ -39,8 +42,8 @@ describe('Tag.theme', () => {
         it('should have a background and text colors that meet 3:1 contrast', () => {
           expect(
             contrast(
-              variables[`${variant}Background`],
-              variables[`${variant}TextColor`]
+              variables[`${variant}Background` as Background],
+              variables[`${variant}Color` as TextColor]
             )
           ).to.be.above(3)
         })
@@ -56,8 +59,8 @@ describe('Tag.theme', () => {
         it('should have a background and text colors that meet 4.5:1 contrast', () => {
           expect(
             contrast(
-              variables[`${variant}Background`],
-              variables[`${variant}TextColor`]
+              variables[`${variant}Background` as Background],
+              variables[`${variant}TextColor` as TextColor]
             )
           ).to.be.above(4.5)
         })

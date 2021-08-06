@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { ProgressCircleTheme } from '@instructure/shared-types'
+
 const radius = {
   xSmall: 1,
   small: 1.8,
@@ -69,11 +72,10 @@ const transform = function (s) {
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
-const generateComponentTheme = (theme) => {
+const generateComponentTheme = (theme: Theme): ProgressCircleTheme => {
   const { colors, typography, key: themeName } = theme
 
-  const themeSpecificStyle = {
+  const themeSpecificStyle: ThemeSpecificStyle<ProgressCircleTheme> = {
     canvas: {
       color: theme['ic-brand-font-color-dark'],
       meterColorBrand: theme['ic-brand-primary']
@@ -88,7 +90,7 @@ const generateComponentTheme = (theme) => {
     }
   }
 
-  const componentVariables = {
+  const componentVariables: ProgressCircleTheme = {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
     lineHeight: typography?.lineHeightCondensed,
@@ -131,7 +133,7 @@ const generateComponentTheme = (theme) => {
     trackBorderColorInverse: colors?.borderLightest,
 
     // variables are split out for inverse to allow
-    // color value changes for inverse-high-constrast
+    // color value changes for inverse-high-contrast
     meterColorBrand: colors?.backgroundBrand,
     meterColorBrandInverse: colors?.backgroundBrand,
 
@@ -153,7 +155,6 @@ const generateComponentTheme = (theme) => {
 
   return {
     ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

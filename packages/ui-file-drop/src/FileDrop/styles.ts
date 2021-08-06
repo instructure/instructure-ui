@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { FileDropTheme } from '@instructure/shared-types'
+
 /**
  * ---
  * private: true
@@ -32,7 +34,13 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: any, props: any, state: any) => {
+const generateStyle = (
+  componentTheme: FileDropTheme,
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+  props,
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+  state
+) => {
   const { height } = props
   const {
     functionallyDisabled,

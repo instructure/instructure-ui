@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { NavigationTheme } from '@instructure/shared-types'
+
 /**
  * ---
  * private: true
@@ -32,8 +34,8 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, state) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme: NavigationTheme, props, state) => {
   const { minimized } = state
 
   return {
@@ -44,7 +46,6 @@ const generateStyle = (componentTheme, props, state) => {
       boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column',
-      // @ts-expect-error ts-migrate(2783) FIXME: 'width' is specified more than once, so this usage... Remove this comment to see the full error message
       width: componentTheme.width,
       height: '100%',
       overflowY: 'auto',

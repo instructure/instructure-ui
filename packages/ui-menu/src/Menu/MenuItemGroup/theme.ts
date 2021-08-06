@@ -22,21 +22,23 @@
  * SOFTWARE.
  */
 
+import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { MenuGroupTheme } from '@instructure/shared-types'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
-const generateComponentTheme = (theme) => {
+const generateComponentTheme = (theme: Theme): MenuGroupTheme => {
   const { colors, spacing, typography, key: themeName } = theme
 
-  const themeSpecificStyle = {
+  const themeSpecificStyle: ThemeSpecificStyle<MenuGroupTheme> = {
     canvas: {
       color: theme['ic-brand-font-color-dark']
     }
   }
-  const componentVariables = {
+  const componentVariables: MenuGroupTheme = {
     fontSize: typography?.fontSizeMedium,
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightBold,
@@ -47,7 +49,6 @@ const generateComponentTheme = (theme) => {
 
   return {
     ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

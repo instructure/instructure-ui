@@ -33,7 +33,9 @@ describe('TextInput.theme', () => {
 
     describe('default', () => {
       it('should ensure focus color and background color meet 3:1 contrast', () => {
-        expect(contrast(variables.background, variables.focus)).to.be.above(3)
+        expect(
+          contrast(variables.background, variables.focusOutlineColor)
+        ).to.be.above(3)
       })
 
       it('should ensure text color and background color meet 3:1 contrast', () => {
@@ -47,7 +49,9 @@ describe('TextInput.theme', () => {
 
     describe('default', () => {
       it('should ensure focus color and background color meet 4.5:1 contrast', () => {
-        expect(contrast(variables.background, variables.focus)).to.be.above(4.5)
+        expect(
+          contrast(variables.background, variables.focusOutlineColor)
+        ).to.be.above(4.5)
       })
 
       it('should ensure text color and background color meet 3:1 contrast', () => {

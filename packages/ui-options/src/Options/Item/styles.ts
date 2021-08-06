@@ -23,6 +23,7 @@
  */
 
 import { matchComponentTypes } from '@instructure/ui-react-utils'
+import { OptionsItemTheme } from '@instructure/shared-types'
 
 /**
  * ---
@@ -34,8 +35,8 @@ import { matchComponentTypes } from '@instructure/ui-react-utils'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, state) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme: OptionsItemTheme, props) => {
   const {
     variant,
     children,
@@ -65,7 +66,7 @@ const generateStyle = (componentTheme, props, state) => {
       color: componentTheme.color,
       cursor: 'pointer',
       display: 'block',
-      fontSize: componentTheme.mediumFontSize,
+      fontSize: componentTheme.fontSize,
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
       lineHeight: componentTheme.lineHeight,
@@ -113,7 +114,6 @@ const generateStyle = (componentTheme, props, state) => {
       label: 'optionItem__content',
       alignItems: 'center',
       display: 'flex',
-      fill: componentTheme.iconColor,
       height: '100%',
       pointerEvents: 'none',
       position: 'absolute',

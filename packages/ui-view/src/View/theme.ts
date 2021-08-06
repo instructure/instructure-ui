@@ -25,17 +25,27 @@
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
 import { makeThemeVars } from '@instructure/emotion'
+import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { ViewTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
-const generateComponentTheme = (theme) => {
-  const { key: themeName } = theme
+const generateComponentTheme = (theme: Theme): ViewTheme => {
+  const {
+    colors,
+    typography,
+    borders,
+    breakpoints,
+    spacing,
+    shadows,
+    stacking,
+    key: themeName
+  } = theme
 
-  const themeSpecificStyle = {
+  const themeSpecificStyle: ThemeSpecificStyle<ViewTheme> = {
     canvas: {
       color: theme['ic-brand-font-color-dark'],
       focusColorInfo: theme['ic-brand-primary'],
@@ -46,67 +56,60 @@ const generateComponentTheme = (theme) => {
     }
   }
 
-  const componentVariables = {
-    fontFamily: theme?.typography?.fontFamily,
+  const componentVariables: ViewTheme = {
+    fontFamily: typography?.fontFamily,
 
-    color: theme?.colors?.textDarkest,
-    colorPrimaryInverse: theme?.colors?.textLightest,
+    color: colors?.textDarkest,
+    colorPrimaryInverse: colors?.textLightest,
 
-    borderStyle: theme?.borders?.style,
-
-    borderColorPrimary: theme?.colors?.borderMedium,
-    borderColorSecondary: theme?.colors?.borderDark,
-    borderColorSuccess: theme?.colors?.borderSuccess,
-    borderColorBrand: theme?.colors?.borderBrand,
-    borderColorInfo: theme?.colors?.borderInfo,
-    borderColorAlert: theme?.colors?.borderAlert,
-    borderColorWarning: theme?.colors?.borderWarning,
-    borderColorDanger: theme?.colors?.borderDanger,
+    borderColorPrimary: colors?.borderMedium,
+    borderColorSecondary: colors?.borderDark,
+    borderColorSuccess: colors?.borderSuccess,
+    borderColorBrand: colors?.borderBrand,
+    borderColorInfo: colors?.borderInfo,
+    borderColorAlert: colors?.borderAlert,
+    borderColorWarning: colors?.borderWarning,
+    borderColorDanger: colors?.borderDanger,
     borderColorTransparent: 'transparent',
 
-    borderRadiusSmall: theme?.borders?.radiusSmall,
-    borderRadiusMedium: theme?.borders?.radiusMedium,
-    borderRadiusLarge: theme?.borders?.radiusLarge,
+    debugOutlineColor: colors?.borderDebug,
 
-    debugOutlineColor: theme?.colors?.borderDebug,
-
-    backgroundPrimary: theme?.colors?.backgroundLightest,
-    backgroundSecondary: theme?.colors?.backgroundLight,
-    backgroundPrimaryInverse: theme?.colors?.backgroundDarkest,
-    backgroundBrand: theme?.colors?.backgroundBrand,
-    backgroundInfo: theme?.colors?.backgroundInfo,
-    backgroundAlert: theme?.colors?.backgroundAlert,
-    backgroundSuccess: theme?.colors?.backgroundSuccess,
-    backgroundDanger: theme?.colors?.backgroundDanger,
-    backgroundWarning: theme?.colors?.backgroundWarning,
+    backgroundPrimary: colors?.backgroundLightest,
+    backgroundSecondary: colors?.backgroundLight,
+    backgroundPrimaryInverse: colors?.backgroundDarkest,
+    backgroundBrand: colors?.backgroundBrand,
+    backgroundInfo: colors?.backgroundInfo,
+    backgroundAlert: colors?.backgroundAlert,
+    backgroundSuccess: colors?.backgroundSuccess,
+    backgroundDanger: colors?.backgroundDanger,
+    backgroundWarning: colors?.backgroundWarning,
 
     arrowSize: '0.5rem',
 
-    focusOutlineStyle: theme?.borders?.style,
-    focusOutlineWidth: theme?.borders?.widthMedium,
+    focusOutlineStyle: borders?.style,
+    focusOutlineWidth: borders?.widthMedium,
     focusOutlineOffset: '0.3125rem',
     focusOutlineInset: '0rem', // do not use unitless zero (for CSS calc())
 
-    focusColorInfo: theme?.colors?.borderInfo,
-    focusColorDanger: theme?.colors?.borderDanger,
-    focusColorSuccess: theme?.colors?.borderSuccess,
-    focusColorInverse: theme?.colors?.borderLightest,
+    focusColorInfo: colors?.borderInfo,
+    focusColorDanger: colors?.borderDanger,
+    focusColorSuccess: colors?.borderSuccess,
+    focusColorInverse: colors?.borderLightest,
 
-    xSmallMaxWidth: theme?.breakpoints?.xSmall,
-    smallMaxWidth: theme?.breakpoints?.small,
-    mediumMaxWidth: theme?.breakpoints?.medium,
-    largeMaxWidth: theme?.breakpoints?.large,
+    xSmallMaxWidth: breakpoints?.xSmall,
+    smallMaxWidth: breakpoints?.small,
+    mediumMaxWidth: breakpoints?.medium,
+    largeMaxWidth: breakpoints?.large,
 
-    ...makeThemeVars('margin', theme?.spacing ?? {}),
-    ...makeThemeVars('padding', theme?.spacing ?? {}),
-    ...makeThemeVars('shadow', theme?.shadows ?? {}),
-    ...makeThemeVars('stacking', theme?.stacking ?? {}),
-    ...makeThemeVars('border', theme?.borders ?? {})
+    ...makeThemeVars('margin', spacing),
+    ...makeThemeVars('padding', spacing),
+    ...makeThemeVars('shadow', shadows),
+    ...makeThemeVars('stacking', stacking),
+    ...makeThemeVars('border', borders)
   }
 
   return {
     ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

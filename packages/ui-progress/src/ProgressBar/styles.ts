@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { ProgressBarTheme } from '@instructure/shared-types'
+
 /**
  * ---
  * private: true
@@ -32,8 +34,8 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, state) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme: ProgressBarTheme, props) => {
   const { valueNow, valueMax, size, color, meterColor } = props
 
   const meterColorClassName =
@@ -47,7 +49,7 @@ const generateStyle = (componentTheme, props, state) => {
       value: { fontSize: componentTheme.xSmallValueFontSize }
     },
     small: {
-      track: { height: '1.125rem' }, // product design wants = 18px
+      track: { height: componentTheme.smallHeight }, // product design wants = 18px
       value: { fontSize: componentTheme.smallValueFontSize }
     },
     medium: {

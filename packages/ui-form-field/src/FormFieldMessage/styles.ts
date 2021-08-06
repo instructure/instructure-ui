@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { FormFieldMessageTheme } from '@instructure/shared-types'
+
 /**
  * ---
  * private: true
@@ -33,7 +35,7 @@
  * @return {Object} The final style object, which will be used in the component
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, state) => {
+const generateStyle = (componentTheme: FormFieldMessageTheme, props) => {
   const { variant } = props
 
   const variants = {

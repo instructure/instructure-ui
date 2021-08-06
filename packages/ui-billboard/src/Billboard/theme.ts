@@ -24,16 +24,18 @@
 
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
+import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { BillboardTheme } from '@instructure/shared-types'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
-const generateComponentTheme = (theme) => {
+const generateComponentTheme = (theme: Theme): BillboardTheme => {
   const { borders, colors, spacing, typography, key: themeName } = theme
 
-  const themeSpecificStyle = {
+  const themeSpecificStyle: ThemeSpecificStyle<BillboardTheme> = {
     canvas: {
       iconHoverColor: theme['ic-link-color'],
       messageColorClickable: theme['ic-link-color'],
@@ -41,7 +43,7 @@ const generateComponentTheme = (theme) => {
     }
   }
 
-  const componentVariables = {
+  const componentVariables: BillboardTheme = {
     fontFamily: typography?.fontFamily,
     paddingSmall: spacing?.small,
     paddingMedium: spacing?.medium,
@@ -68,7 +70,6 @@ const generateComponentTheme = (theme) => {
 
   return {
     ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { ProgressCircleTheme } from '@instructure/shared-types'
+
 /**
  * ---
  * private: true
@@ -32,8 +34,8 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, state) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
   const { size, color, meterColor, valueNow, valueMax } = props
   const { shouldAnimateOnMount } = state
 
@@ -45,13 +47,16 @@ const generateStyle = (componentTheme, props, state) => {
   const getCircumference = () => {
     const camelSize = size === 'x-small' ? 'xSmall' : size
     // get the circumference of the meter circle
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     return parseFloat(componentTheme[`${camelSize}Circumference`])
   }
 
   const getRadii = () => {
     const camelSize = size === 'x-small' ? 'xSmall' : size
     return {
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       radius: componentTheme[`${camelSize}Radius`],
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       borderOffsetRadius: componentTheme[`${camelSize}BorderOffset`]
     }
   }

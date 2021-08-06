@@ -22,24 +22,23 @@
  * SOFTWARE.
  */
 
+import { Theme } from '@instructure/ui-themes'
+import { FlexTheme } from '@instructure/shared-types'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: any) => {
-  const { typography, key: themeName } = theme
+const generateComponentTheme = (theme: Theme): FlexTheme => {
+  const { typography } = theme
 
-  const themeSpecificStyle = {}
-
-  const componentVariables = {
+  const componentVariables: FlexTheme = {
     fontFamily: typography?.fontFamily
   }
 
   return {
-    ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    ...themeSpecificStyle[themeName]
+    ...componentVariables
   }
 }
 

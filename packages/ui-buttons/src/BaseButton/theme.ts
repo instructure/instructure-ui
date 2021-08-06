@@ -23,65 +23,95 @@
  */
 
 import { alpha, darken } from '@instructure/ui-color-utils'
+import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { BaseButtonTheme } from '@instructure/shared-types'
 
 const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'
 
-const generateButtonThemeVars = ({
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'style' implicitly has an 'any' ty... Remove this comment to see the full error message
+type Variants =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'primaryInverse'
+
+type VariantValues =
+  | 'Color'
+  | 'BorderColor'
+  | 'Background'
+  | 'HoverBackground'
+  | 'ActiveBackground'
+  | 'ActiveBoxShadow'
+  | 'GhostColor'
+  | 'GhostBorderColor'
+  | 'GhostBackground'
+  | 'GhostHoverBackground'
+  | 'GhostActiveBackground'
+  | 'GhostActiveBoxShadow'
+
+type VariantMap<Variant extends Variants> = Record<
+  `${Variant}${VariantValues}`,
+  string
+>
+
+const generateButtonThemeVars = <Variant extends Variants>({
   style,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'textColor' implicitly has an 'any... Remove this comment to see the full error message
   textColor,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'ghostTextColor' implicitly has an... Remove this comment to see the full error message
   ghostTextColor,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'backgroundColor' implicitly has a... Remove this comment to see the full error message
   backgroundColor,
-  // @ts-expect-error ts-migrate(7022) FIXME: 'borderColor' implicitly has type 'any' because it... Remove this comment to see the full error message
   borderColor,
   ghostBorderColor = borderColor
-}) => ({
-  [`${style}Color`]: textColor,
-  [`${style}BorderColor`]: darken(borderColor, 10),
-  [`${style}Background`]: backgroundColor,
-  [`${style}HoverBackground`]: darken(backgroundColor, 10),
-  [`${style}ActiveBackground`]: darken(backgroundColor, 10),
-  [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(
-    borderColor,
-    20,
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 3.
-    0.45
-  )}`,
+}: {
+  style: Variant
+  textColor: string
+  ghostTextColor: string
+  backgroundColor: string
+  borderColor: string
+  ghostBorderColor?: string
+}) =>
+  ({
+    [`${style}Color`]: textColor,
+    [`${style}BorderColor`]: darken(borderColor, 10),
+    [`${style}Background`]: backgroundColor,
+    [`${style}HoverBackground`]: darken(backgroundColor, 10),
+    [`${style}ActiveBackground`]: darken(backgroundColor, 10),
+    [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(
+      borderColor,
+      20,
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 3.
+      0.45
+    )}`,
 
-  [`${style}GhostColor`]: ghostTextColor,
-  [`${style}GhostBorderColor`]: ghostBorderColor,
-  [`${style}GhostBackground`]: 'transparent',
-  [`${style}GhostHoverBackground`]: alpha(ghostTextColor, 10),
-  [`${style}GhostActiveBackground`]: 'transparent',
-  [`${style}GhostActiveBoxShadow`]: `${activeShadow} ${alpha(
-    ghostBorderColor,
-    28
-  )}`
-})
+    [`${style}GhostColor`]: ghostTextColor,
+    [`${style}GhostBorderColor`]: ghostBorderColor,
+    [`${style}GhostBackground`]: 'transparent',
+    [`${style}GhostHoverBackground`]: alpha(ghostTextColor, 10),
+    [`${style}GhostActiveBackground`]: 'transparent',
+    [`${style}GhostActiveBoxShadow`]: `${activeShadow} ${alpha(
+      ghostBorderColor,
+      28
+    )}`
+  } as VariantMap<Variant>)
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
-const generateComponentTheme = (theme) => {
+const generateComponentTheme = (theme: Theme): BaseButtonTheme => {
   const { borders, colors, forms, spacing, typography, key: themeName } = theme
 
-  const themeSpecificStyle = {
+  const themeSpecificStyle: ThemeSpecificStyle<BaseButtonTheme> = {
     canvas: {
       ...generateButtonThemeVars({
         style: 'primary',
-        backgroundColor: theme['ic-brand-button--primary-bgd'],
-        borderColor: theme['ic-brand-button--primary-bgd'],
-        textColor: theme['ic-brand-button--primary-text'],
-        ghostTextColor: theme['ic-brand-button--primary-bgd']
+        backgroundColor: theme['ic-brand-button--primary-bgd']!,
+        borderColor: theme['ic-brand-button--primary-bgd']!,
+        textColor: theme['ic-brand-button--primary-text']!,
+        ghostTextColor: theme['ic-brand-button--primary-bgd']!
       }),
       primaryGhostHoverBackground: alpha(
-        theme['ic-brand-button--primary-bgd'],
+        theme['ic-brand-button--primary-bgd']!,
         10
       )
     },
@@ -101,7 +131,7 @@ const generateComponentTheme = (theme) => {
     }
   }
 
-  const componentVariables = {
+  const componentVariables: BaseButtonTheme = {
     transform: 'none',
     hoverTransform: 'none',
     fontFamily: typography?.fontFamily,
@@ -194,7 +224,6 @@ const generateComponentTheme = (theme) => {
 
   return {
     ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

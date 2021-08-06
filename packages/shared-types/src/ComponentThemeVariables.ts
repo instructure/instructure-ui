@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { Colors } from './Colors'
 import {
   Border,
   Breakpoints,
@@ -31,31 +32,8 @@ import {
   Spacing,
   Stacking,
   Transitions,
-  Typography,
-  Size,
-  Radius,
-  StrokeWidth
+  Typography
 } from './BaseTheme'
-import { Colors } from './Colors'
-
-type SpacingValue = string | 0
-
-export type AvatarTheme = {
-  background: Colors['backgroundLightest']
-  borderWidthSmall: Border['widthSmall']
-  borderWidthMedium: Border['widthMedium']
-  borderColor: Colors['borderMedium']
-  boxShadowColor: Colors['backgroundDarkest']
-  fontFamily: Typography['fontFamily']
-  fontWeight: Typography['fontWeightBold']
-  color: Colors['brand']
-  colorShamrock: Colors['shamrock']
-  colorBarney: Colors['barney']
-  colorCrimson: Colors['crimson']
-  colorFire: Colors['fire']
-  colorLicorice: Colors['licorice']
-  colorAsh: Colors['ash']
-}
 
 export type AlertTheme = {
   background: Colors['backgroundLightest']
@@ -64,7 +42,7 @@ export type AlertTheme = {
   borderRadius: Border['radiusMedium']
   borderWidth: Border['widthMedium']
   borderStyle: Border['style']
-  contentPadding: SpacingValue
+  contentPadding: string | 0
   contentFontSize: Typography['fontSizeMedium']
   contentFontFamily: Typography['fontFamily']
   contentFontWeight: Typography['fontWeightNormal']
@@ -83,6 +61,24 @@ export type AlertTheme = {
   boxShadow: Shadows['depth2']
 }
 
+export type AvatarTheme = {
+  background: Colors['backgroundLightest']
+  borderWidthSmall: Border['widthSmall']
+  borderWidthMedium: Border['widthMedium']
+  borderColor: Colors['borderMedium']
+  boxShadowColor: Colors['backgroundDarkest']
+  boxShadowBlur: string
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightBold']
+  color: Colors['brand']
+  colorShamrock: Colors['shamrock']
+  colorBarney: Colors['barney']
+  colorCrimson: Colors['crimson']
+  colorFire: Colors['fire']
+  colorLicorice: Colors['licorice']
+  colorAsh: Colors['ash']
+}
+
 export type BadgeTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -91,8 +87,12 @@ export type BadgeTheme = {
   colorDanger: Colors['textDanger']
   colorSuccess: Colors['textSuccess']
   colorPrimary: Colors['textBrand']
+  size: string
+  countOffset: string | 0
+  notificationOffset: string | 0
   notificationZIndex: Stacking['above']
   sizeNotification: Spacing['small']
+  borderRadius: string | 0
   padding: Spacing['xxSmall']
   pulseBorderThickness: Border['widthMedium']
 }
@@ -119,32 +119,49 @@ export type BillboardTheme = {
   clickableActiveBg: Colors['backgroundBrand']
   clickableActiveText: Colors['textLightest']
   buttonBorderStyle: Border['style']
+  buttonHoverBorderStyle: string
 }
 
 export type BreadcrumbTheme = {
   fontFamily: Typography['fontFamily']
   separatorColor: Colors['borderDark']
+  smallSeparatorFontSize: string
   smallFontSize: Typography['fontSizeSmall']
+  mediumSeparatorFontSize: string
   mediumFontSize: Typography['fontSizeMedium']
+  largeSeparatorFontSize: string
   largeFontSize: Typography['fontSizeLarge']
 }
 
 export type BaseButtonTheme = {
+  transform: string
+  hoverTransform: string
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
+  textTransform: string
+  letterSpacing: string
   borderRadius: Border['radiusMedium']
   borderStyle: Border['style']
   borderWidth: Border['widthSmall']
   smallHeight: Forms['inputHeightSmall']
   smallFontSize: Typography['fontSizeSmall']
   smallPaddingHorizontal: Spacing['xSmall']
+  smallPaddingTop: string
+  smallPaddingBottom: string
   mediumHeight: Forms['inputHeightMedium']
   mediumFontSize: Typography['fontSizeMedium']
   mediumPaddingHorizontal: Spacing['small']
+  mediumPaddingTop: string
+  mediumPaddingBottom: string
   largeHeight: Forms['inputHeightLarge']
   largeFontSize: Typography['fontSizeLarge']
   largePaddingHorizontal: Spacing['medium']
+  largePaddingTop: string
+  largePaddingBottom: string
   lineHeight: Typography['lineHeightFit']
+  iconSizeSmall: string
+  iconSizeMedium: string
+  iconSizeLarge: string
   iconTextGap: Spacing['xSmall']
   iconTextGapCondensed: Spacing['xxSmall']
 
@@ -161,6 +178,7 @@ export type BaseButtonTheme = {
   primaryGhostActiveBackground: string
   primaryGhostActiveBoxShadow: string
 
+  secondaryColor: string
   secondaryBorderColor: string
   secondaryBackground: string
   secondaryHoverBackground: string
@@ -173,6 +191,7 @@ export type BaseButtonTheme = {
   secondaryGhostActiveBackground: string
   secondaryGhostActiveBoxShadow: string
 
+  successColor: string
   successBorderColor: string
   successBackground: string
   successHoverBackground: string
@@ -185,6 +204,7 @@ export type BaseButtonTheme = {
   successGhostActiveBackground: string
   successGhostActiveBoxShadow: string
 
+  dangerColor: string
   dangerBorderColor: string
   dangerBackground: string
   dangerHoverBackground: string
@@ -197,6 +217,7 @@ export type BaseButtonTheme = {
   dangerGhostActiveBackground: string
   dangerGhostActiveBoxShadow: string
 
+  primaryInverseColor: string
   primaryInverseBorderColor: string
   primaryInverseBackground: string
   primaryInverseHoverBackground: string
@@ -259,6 +280,7 @@ export type CalendarTheme = {
   navMargin: Spacing['small']
   maxHeaderWidth: Spacing['medium']
 }
+
 export type CheckboxFacadeTheme = {
   color: Colors['textLightest']
   borderWidth: Border['widthSmall']
@@ -278,9 +300,15 @@ export type CheckboxFacadeTheme = {
   labelFontFamily: Typography['fontFamily']
   labelFontWeight: Typography['fontWeightNormal']
   labelLineHeight: Typography['lineHeightCondensed']
+  facadeSizeSmall: string
+  facadeSizeMedium: string
+  facadeSizeLarge: string
   labelFontSizeSmall: Typography['fontSizeSmall']
   labelFontSizeMedium: Typography['fontSizeMedium']
   labelFontSizeLarge: Typography['fontSizeLarge']
+  iconSizeSmall: string
+  iconSizeMedium: string
+  iconSizeLarge: string
 }
 
 export type ToggleFacadeTheme = {
@@ -288,6 +316,7 @@ export type ToggleFacadeTheme = {
   background: Colors['backgroundLight']
   borderColor: Colors['borderMedium']
   borderWidth: Border['widthMedium']
+  borderRadius: string
   marginEnd: Spacing['small']
   marginStart: Spacing['small']
   marginVertical: Spacing['xSmall']
@@ -313,7 +342,7 @@ export type CodeEditorTheme = {
   fontFamily: Typography['fontFamilyMonospace']
   fontSize: Typography['fontSizeSmall']
   background: Colors['backgroundLight']
-  border: `${Border['widthSmall']} ${string}C{'lors']['borderLight']}`
+  border: string | 0
   borderRadius: Border['radiusMedium']
   focusBorderColor: Colors['borderBrand']
   focusBoxShadow: Colors['borderLightest']
@@ -330,9 +359,12 @@ export type CodeEditorTheme = {
   rulerColor: Colors['borderDark']
   matchingBracketOutline: Colors['textDark']
   nonMatchingBracketColor: Colors['textDanger']
+  matchingTagBackground: string
   activeLineBackground: Colors['backgroundLight']
   selectedBackground: Colors['backgroundLight']
   fatCursorBackground: Colors['backgroundSuccess']
+  fatCursorMarkBackground: string
+  searchingBackground: string
   zIndex: Stacking['above']
   quoteColor: Colors['textSuccess']
   headerColor: Colors['textWarning']
@@ -365,6 +397,7 @@ export type CodeEditorTheme = {
 export type DrawerLayoutContentTheme = {
   duration: Transitions['duration']
 }
+
 export type DrawerLayoutTrayTheme = {
   background: Colors['backgroundLightest']
   borderColor: Colors['borderMedium']
@@ -378,6 +411,7 @@ export type FileDropTheme = {
   backgroundColor: Colors['backgroundLightest']
   borderRadius: Border['radiusLarge']
   borderWidth: Border['widthMedium']
+  borderStyle: string
   borderColor: Colors['borderMedium']
   hoverBorderColor: Colors['borderBrand']
   acceptedColor: Colors['textBrand']
@@ -391,6 +425,7 @@ export type FlexTheme = {
 export type FormFieldGroupTheme = {
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
+  borderColor: string
   borderRadius: Border['radiusMedium']
   errorBorderColor: Colors['borderDanger']
   errorFieldsPadding: Spacing['xSmall']
@@ -422,10 +457,8 @@ export type GridTheme = {
   spacingSmall: Spacing['small']
   spacingMedium: Spacing['medium']
   spacingLarge: Spacing['large']
-  mediumMin: Media['mediumMin']
-  largeMin: Media['largeMin']
-  xLargeMin: Media['xLargeMin']
-}
+} & Media
+
 export type HeadingTheme = {
   lineHeight: Typography['lineHeightFit']
   h1FontSize: Typography['fontSizeXXLarge']
@@ -453,10 +486,19 @@ export type HeadingTheme = {
   borderStyle: Border['style']
 }
 
+export type ImgTheme = {
+  effectTransitionDuration: string
+  imageBlurAmount: string | 0
+}
+
 export type LinkTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   color: Colors['textLink']
+  textDecorationWithinText: string
+  hoverTextDecorationWithinText: string
+  textDecorationOutsideText: string
+  hoverTextDecorationOutsideText: string
   focusOutlineWidth: Border['widthMedium']
   focusOutlineColor: Colors['borderBrand']
   focusOutlineStyle: Border['style']
@@ -464,6 +506,7 @@ export type LinkTheme = {
   colorInverse: Colors['textLight']
   focusInverseOutlineColor: Colors['borderLightest']
   focusInverseIconOutlineColor: Colors['borderLightest']
+  iconSize: string
   iconPlusTextMargin: Spacing['xxSmall']
 }
 
@@ -506,8 +549,8 @@ export type ListItemTheme = {
   spacingLarge: Spacing['large']
   spacingXLarge: Spacing['xLarge']
   spacingXXLarge: Spacing['xxLarge']
-  delimiterDashedBorder: `${Border['widthSmall']} ${string}C{'lors']['borderMedium']}`
-  delimiterSolidBorder: `${Border['widthSmall']} ${string}C{'lors']['borderMedium']}`
+  delimiterDashedBorder: string
+  delimiterSolidBorder: string
 }
 
 export type ListTheme = {
@@ -517,7 +560,7 @@ export type ListTheme = {
 }
 
 export type MenuItemTheme = {
-  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+  padding: string | 0
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   lineHeight: Typography['lineHeightCondensed']
@@ -536,17 +579,29 @@ export type MenuGroupTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightBold']
-  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+  padding: string | 0
   color: Colors['textDarkest']
   background: Colors['backgroundLightest']
 }
+
 export type MenuSeparatorTheme = {
   background: Colors['backgroundMedium']
   height: Border['widthSmall']
-  margin: `${string} ${Spacing['small']}`
+  margin: string | 0
 }
+
+export type MenuTheme = {
+  minWidth: Breakpoints['xxSmall']
+  maxWidth: Breakpoints['xSmall']
+  background: Colors['backgroundLightest']
+  focusBorderStyle: Border['style']
+  focusBorderWidth: Border['widthMedium']
+  focusBorderColor: Colors['borderBrand']
+  focusBorderRadius: Border['radiusMedium']
+}
+
 export type MetricTheme = {
-  padding: `${string} ${Spacing['xSmall']}`
+  padding: string | 0
   fontFamily: Typography['fontFamily']
   valueColor: Colors['textDarkest']
   valueFontSize: Typography['fontSizeXLarge']
@@ -554,6 +609,7 @@ export type MetricTheme = {
   labelColor: Colors['textDarkest']
   labelFontSize: Typography['fontSizeXSmall']
 }
+
 export type MetricGroupTheme = {
   lineHeight: Typography['lineHeightCondensed']
 }
@@ -561,6 +617,7 @@ export type MetricGroupTheme = {
 export type ModalBodyTheme = {
   inverseBackground: Colors['backgroundBrandSecondary']
 }
+
 export type ModalFooterTheme = {
   background: Colors['backgroundLight']
   borderColor: Colors['borderMedium']
@@ -602,19 +659,23 @@ export type TransitionTheme = {
 
 export type AppNavItemTheme = {
   fontFamily: Typography['fontFamily']
+  fontSize: string | 0
   fontWeight: Typography['fontWeightBold']
   textColor: Colors['textLink']
   textColorSelected: Colors['textDarkest']
+  height: string | 0
   padding: Spacing['small']
   backgroundColor: Colors['backgroundLightest']
 }
 
 export type AppNavTheme = {
   fontFamily: Typography['fontFamily']
+  height: string | 0
   borderColor: Colors['borderMedium']
   borderStyle: Border['style']
   borderWidth: Border['widthSmall']
   horizontalMargin: Spacing['xxSmall']
+  menuTriggerWidth: string | 0
 }
 
 export type NavigationItemTheme = {
@@ -622,22 +683,27 @@ export type NavigationItemTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightLight']
   fontColor: Colors['textLightest']
+  iconSize: string | 0
   iconColor: Colors['textLightest']
   lineHeight: Typography['lineHeight']
+  backgroundColor: string
+  linkTextDecoration: string
   hoverBackgroundColor: Colors['backgroundDarkest']
-  outerFocusOutline: `${string} ${string} ${string} ${string} ${string}C{'lors']['borderDarkest']}`
-  innerFocusOutline: `${string} ${string} ${string} ${string} ${string}C{'lors']['borderLightest']}`
+  outerFocusOutline: string
+  innerFocusOutline: string
   selectedFontColor: Colors['textBrand']
   selectedIconColor: Colors['textBrand']
   selectedBackgroundColor: Colors['backgroundLightest']
-  selectedOuterFocusOutline: `${string} ${string} ${string} ${string} ${string}C{'lors']['borderLightest']}`
-  selectedInnerFocusOutline: `${string} ${string} ${string} ${string} ${string}C{'lors']['borderBrand']}`
+  selectedOuterFocusOutline: string
+  selectedInnerFocusOutline: string
   contentPadding: Spacing['xxSmall']
 }
 
 export type NavigationTheme = {
   fontColor: Colors['textLightest']
   backgroundColor: Colors['backgroundBrandSecondary']
+  width: string
+  minimizedWidth: string
   fill: Colors['textLightest']
   focusOutlineInnerWidth: Border['widthMedium']
   focusOutlineOuterWidth: Border['widthSmall']
@@ -656,12 +722,13 @@ export type NumberInputTheme = {
   borderRadius: Border['radiusMedium']
   color: Colors['textDarkest']
   background: Colors['backgroundLightest']
-  padding: `${string} ${Spacing['small']}`
+  padding: string | 0
+  arrowsContainerWidth: string | 0
   arrowsColor: Colors['textDarkest']
   arrowsBackgroundColor: Colors['backgroundLight']
   arrowsHoverBackgroundColor: Colors['backgroundMedium']
   arrowsBorderColor: Colors['borderMedium']
-  arrowsActiveBoxShadow: `${string} ${string} ${string} ${string} ${string}C{'lors']['borderMedium']}`
+  arrowsActiveBoxShadow: string
   focusOutlineWidth: Border['widthMedium']
   focusOutlineStyle: Border['style']
   focusOutlineColor: Colors['borderBrand']
@@ -685,7 +752,7 @@ export type OptionsItemTheme = {
   highlightedBackground: Colors['backgroundBrand']
   selectedLabelColor: Colors['textLightest']
   selectedBackground: Colors['backgroundDark']
-  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+  padding: string | 0
   iconPadding: Spacing['small']
   nestedPadding: Spacing['medium']
 }
@@ -693,19 +760,21 @@ export type OptionsItemTheme = {
 export type OptionsSeparatorTheme = {
   background: Colors['backgroundMedium']
   height: Border['widthSmall']
-  margin: `${string} ${Spacing['small']}`
+  margin: string | 0
 }
 
 export type OptionsTheme = {
   labelFontWeight: Typography['fontWeightBold']
   background: Colors['backgroundLightest']
   labelColor: Colors['textDarkest']
-  labelPadding: `${Spacing['xSmall']} ${string}`
-  nestedLabelPadding: `${Spacing['xSmall']} ${Spacing['small']}`
+  labelPadding: string | 0
+  nestedLabelPadding: string | 0
 }
 
 export type MaskTheme = {
   zIndex: Stacking['topmost']
+  background: string
+  borderColor: string
   focusBorderColor: Colors['borderBrand']
   borderRadius: Border['radiusMedium']
   borderWidth: Border['widthSmall']
@@ -721,10 +790,13 @@ export type PagesTheme = {
 
 export type PillTheme = {
   fontFamily: Typography['fontFamily']
-  padding: `${string} ${Spacing['xSmall']}`
+  padding: string | 0
+  height: string | 0
   background: Colors['backgroundLightest']
+  textTransformStyle: string
   textFontSize: Typography['fontSizeXSmall']
   textFontWeight: Typography['fontWeightBold']
+  maxWidth: string | 0
   primaryColor: Colors['textDark']
   infoColor: Colors['textInfo']
   dangerColor: Colors['textDanger']
@@ -733,6 +805,7 @@ export type PillTheme = {
   alertColor: Colors['textAlert']
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
+  borderRadius: string | 0
 }
 
 export type PositionTheme = {
@@ -740,59 +813,72 @@ export type PositionTheme = {
 }
 
 export type ProgressBarTheme = {
-  color: Colors['textDarkest']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   lineHeight: Typography['lineHeightCondensed']
   fontSize: Typography['fontSizeMedium']
   xSmallHeight: Spacing['xSmall']
   xSmallValueFontSize: Typography['fontSizeXSmall']
-  smallHeight: Spacing['small']
+  smallHeight: string
   smallValueFontSize: Typography['fontSizeXSmall']
   mediumHeight: Spacing['medium']
   mediumValueFontSize: Typography['fontSizeSmall']
   largeHeight: Spacing['large']
   largeValueFontSize: Typography['fontSizeMedium']
-  valuePadding: `${Spacing['xxSmall']}`
+  valuePadding: string | 0
   meterColorBrand: Colors['backgroundBrand']
   meterColorBrandInverse: Colors['backgroundBrand']
   meterColorInfo: Colors['backgroundInfo']
   meterColorInfoInverse: Colors['backgroundInfo']
+  meterColorSuccess: Colors['backgroundSuccess']
   meterColorSuccessInverse: Colors['backgroundSuccess']
+  meterColorDanger: Colors['backgroundDanger']
   meterColorDangerInverse: Colors['backgroundDanger']
+  meterColorAlert: Colors['backgroundAlert']
+  meterColorAlertInverse: Colors['backgroundAlert']
+  meterColorWarning: Colors['backgroundWarning']
+  meterColorWarningInverse: Colors['backgroundWarning']
+  meterBorderWidthInverse: Border['widthSmall']
+  meterBorderColorInverse: 'transparent'
+  trackColor: Colors['backgroundLightest']
+  trackColorInverse: string
+  trackBottomBorderWidth: Border['widthSmall']
+  trackBottomBorderColor: Colors['borderMedium']
+  trackBottomBorderColorInverse: Colors['borderLightest']
 }
 
 export type ProgressCircleTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   lineHeight: Typography['lineHeightCondensed']
-  xSmallSize: `${Size['xSmall']}em`
-  xSmallRadius: `${Radius['xSmall']}em`
-  xSmallCircumference: `${Radius['xSmall']}em`
-  xSmallTransform: `${Size['xSmall']}em`
-  xSmallStrokeWidth: `${StrokeWidth['xSmall']}em`
-  xSmallBorderOffset: `${Radius['xSmall']}em`
-  smallSize: `${Size['small']} em`
-  smallRadius: `${Radius['small']}em`
-  smallCircumference: `${Radius['small']}em`
-  smallTransform: `${Size['small']}em`
-  smallStrokeWidth: `${StrokeWidth['small']}em`
-  smallBorderOffset: `${Radius['small']}em`
-  mediumSize: `${Size['medium']}em`
-  mediumRadius: `${Radius['medium']}em`
-  mediumCircumference: `${Radius['medium']}em`
-  mediumTransform: `${Size['medium']}em`
-  mediumStrokeWidth: `${StrokeWidth['medium']}em`
-  mediumBorderOffset: `${Radius['medium']}em`
-  largeSize: `${Size['large']} em`
-  largeRadius: `${Radius['large']}em`
-  largeCircumference: `${Radius['large']} em`
-  largeTransform: `${Size['large']}em`
-  largeStrokeWidth: `${StrokeWidth['large']}em`
-  largeBorderOffset: `${Radius['large']}em`
+  xSmallSize: string
+  xSmallRadius: string
+  xSmallCircumference: string
+  xSmallTransform: string
+  xSmallStrokeWidth: string
+  xSmallBorderOffset: string
+  smallSize: string
+  smallRadius: string
+  smallCircumference: string
+  smallTransform: string
+  smallStrokeWidth: string
+  smallBorderOffset: string
+  mediumSize: string
+  mediumRadius: string
+  mediumCircumference: string
+  mediumTransform: string
+  mediumStrokeWidth: string
+  mediumBorderOffset: string
+  largeSize: string
+  largeRadius: string
+  largeCircumference: string
+  largeTransform: string
+  largeStrokeWidth: string
+  largeBorderOffset: string
   color: Colors['textDarkest']
   colorInverse: Colors['textLightest']
   trackColor: Colors['backgroundLightest']
+  trackColorInverse: string
   trackBorderColor: Colors['borderMedium']
   trackBorderColorInverse: Colors['borderLightest']
   meterColorBrand: Colors['backgroundBrand']
@@ -809,27 +895,6 @@ export type ProgressCircleTheme = {
   meterColorWarningInverse: Colors['backgroundWarning']
 }
 
-export type RangeInputTheme = {
-  handleBackground: Colors['backgroundBrand']
-  handleShadowColor: Colors['borderBrand']
-  handleHoverBackground: Colors['backgroundBrand']
-  handleFocusBackground: Colors['backgroundBrand']
-  handleFocusOutlineColor: Colors['borderBrand']
-  trackBackground: Colors['backgroundDark']
-  valueColor: Colors['textLightest']
-  valueFontFamily: Typography['fontFamily']
-  valueFontWeight: Typography['fontWeightNormal']
-  valueSmallFontSize: Typography['fontSizeSmall']
-  valueSmallPadding: `${string} ${Spacing['xSmall']}`
-  valueSmallLineHeight: Forms['inputHeightSmall']
-  valueMediumFontSize: Typography['fontSizeMedium']
-  valueMediumPadding: `${string} ${Spacing['small']}`
-  valueMediumLineHeight: Forms['inputHeightMedium']
-  valueLargeFontSize: Typography['fontSizeLarge']
-  valueLargePadding: `${string} ${Spacing['medium']}`
-  valueLargeLineHeight: Forms['inputHeightLarge']
-}
-
 export type RadioInputTheme = {
   labelColor: Colors['textDarkest']
   labelFontFamily: Typography['fontFamily']
@@ -838,9 +903,16 @@ export type RadioInputTheme = {
   background: Colors['backgroundLightest']
   borderColor: Colors['borderDarkest']
   hoverBorderColor: Colors['borderDarkest']
+  controlSize: string | 0
   focusBorderColor: Colors['borderBrand']
   focusBorderWidth: Border['widthMedium']
   focusBorderStyle: Border['style']
+  simpleFacadeSmallSize: string | 0
+  simpleFacadeMediumSize: string | 0
+  simpleFacadeLargeSize: string | 0
+  simpleCheckedInsetSmall: string | 0
+  simpleCheckedInsetMedium: string | 0
+  simpleCheckedInsetLarge: string | 0
   simpleFontSizeSmall: Typography['fontSizeSmall']
   simpleFontSizeMedium: Typography['fontSizeMedium']
   simpleFontSizeLarge: Typography['fontSizeLarge']
@@ -859,6 +931,30 @@ export type RadioInputTheme = {
   toggleSmallFontSize: Typography['fontSizeXSmall']
   toggleMediumFontSize: Typography['fontSizeSmall']
   toggleLargeFontSize: Typography['fontSizeMedium']
+}
+
+export type RangeInputTheme = {
+  minWidth: string | 0
+  handleSize: string | 0
+  handleBackground: Colors['backgroundBrand']
+  handleShadowColor: Colors['borderBrand']
+  handleHoverBackground: Colors['backgroundBrand']
+  handleFocusBackground: Colors['backgroundBrand']
+  handleFocusOutlineColor: Colors['borderBrand']
+  handleFocusOutlineWidth: string | 0
+  trackBackground: Colors['backgroundDark']
+  valueColor: Colors['textLightest']
+  valueFontFamily: Typography['fontFamily']
+  valueFontWeight: Typography['fontWeightNormal']
+  valueSmallFontSize: Typography['fontSizeSmall']
+  valueSmallPadding: string | 0
+  valueSmallLineHeight: Forms['inputHeightSmall']
+  valueMediumFontSize: Typography['fontSizeMedium']
+  valueMediumPadding: string | 0
+  valueMediumLineHeight: Forms['inputHeightMedium']
+  valueLargeFontSize: Typography['fontSizeLarge']
+  valueLargePadding: string | 0
+  valueLargeLineHeight: Forms['inputHeightLarge']
 }
 
 export type RatingIconTheme = {
@@ -884,6 +980,14 @@ export type SelectTheme = {
 export type SpinnerTheme = {
   trackColor: Colors['backgroundLight']
   color: Colors['backgroundBrand']
+  xSmallSize: string | 0
+  xSmallBorderWidth: string | 0
+  smallSize: string | 0
+  smallBorderWidth: string | 0
+  mediumSize: string | 0
+  mediumBorderWidth: string | 0
+  largeSize: string | 0
+  largeBorderWidth: string | 0
   inverseColor: Colors['backgroundBrand']
 }
 
@@ -897,6 +1001,14 @@ export type InlineSVGTheme = {
   errorColor: Colors['textDanger']
   alertColor: Colors['textAlert']
   successColor: Colors['textSuccess']
+}
+
+export type SVGIconTheme = {
+  sizeXSmall: string | 0
+  sizeSmall: string | 0
+  sizeMedium: string | 0
+  sizeLarge: string | 0
+  sizeXLarge: string | 0
 }
 
 export type TableBodyTheme = {
@@ -915,18 +1027,17 @@ export type TableCellTheme = {
   background: Colors['backgroundLightest']
   borderColor: Colors['borderMedium']
   lineHeight: Typography['lineHeightCondensed']
-  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+  padding: string | 0
 }
 
 export type TableColHeaderTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
-  fontWeight: Typography['fontWeightNormal']
   color: Colors['textDarkest']
   background: Colors['backgroundLightest']
   borderColor: Colors['borderMedium']
   lineHeight: Typography['lineHeightCondensed']
-  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+  padding: string | 0
   focusOutlineColor: Colors['borderBrand']
   focusOutlineWidth: Border['widthMedium']
   focusOutlineStyle: Border['style']
@@ -948,7 +1059,7 @@ export type TableRowTheme = {
   background: Colors['backgroundLightest']
   borderColor: Colors['borderMedium']
   hoverBorderColor: Colors['borderBrand']
-  padding: `${Spacing['xSmall']} ${string}`
+  padding: string | 0
 }
 
 export type TableRowHeaderTheme = {
@@ -959,7 +1070,15 @@ export type TableRowHeaderTheme = {
   background: Colors['backgroundLightest']
   borderColor: Colors['borderMedium']
   lineHeight: Typography['lineHeightCondensed']
-  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+  padding: string | 0
+}
+
+export type TableTheme = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: Colors['textDarkest']
+  background: Colors['backgroundLightest']
 }
 
 export type TabsPanelTheme = {
@@ -988,34 +1107,31 @@ export type TabsTabTheme = {
   zIndex: Stacking['above']
 }
 
-export type TableTheme = {
-  fontSize: Typography['fontSizeMedium']
-  fontFamily: Typography['fontFamily']
-  fontWeight: Typography['fontWeightNormal']
-  color: Colors['textDarkest']
-  background: Colors['backgroundLightest']
-}
-
 export type TabsTheme = {
   defaultBackground: Colors['backgroundLightest']
   scrollFadeColor: Colors['backgroundLightest']
   tabVerticalOffset: Border['widthSmall']
   zIndex: Stacking['above']
+  scrollOverlayWidthDefault: string
+  scrollOverlayWidthSecondary: string
 }
 
 export type TagTheme = {
   fontFamily: Typography['fontFamily']
+  heightSmall: string | 0
   heightMedium: Forms['inputHeightSmall']
   heightLarge: Forms['inputHeightMedium']
   fontSizeSmall: Typography['fontSizeXSmall']
   fontSizeMedium: Typography['fontSizeSmall']
   fontSizeLarge: Typography['fontSizeMedium']
-  padding: `${string} ${Spacing['xSmall']}`
-  paddingSmall: `${string} ${Spacing['xSmall']}`
+  padding: string | 0
+  paddingSmall: string | 0
   focusOutlineColor: Colors['borderBrand']
   focusOutlineWidth: Border['widthMedium']
   focusOutlineStyle: Border['style']
+  maxWidth: string | 0
   iconMargin: Spacing['small']
+  transitionTiming: string
   defaultBackgroundHover: string
   defaultBackground: string
   defaultBorderColor: string
@@ -1036,26 +1152,7 @@ export type TagTheme = {
   inlineIconHoverColor: string
 }
 
-export type TextTheme = {
-  fontFamily: string
-  fontFamilyMonospace: string
-  fontFamilyHeading?: string
-  fontSizeXSmall: string
-  fontSizeSmall: string
-  fontSizeMedium: string
-  fontSizeLarge: string
-  fontSizeXLarge: string
-  fontSizeXXLarge: string
-  fontWeightLight: number
-  fontWeightNormal: number
-  fontWeightBold: number
-  lineHeight: number
-  lineHeightFit: number
-  lineHeightCondensed: number
-  lineHeightDouble: number
-  letterSpacingNormal: number
-  letterSpacingCondensed: string
-  letterSpacingExpanded: string
+export type TextTheme = Typography & {
   primaryInverseColor: Colors['textLightest']
   primaryColor: Colors['textDarkest']
   secondaryColor: Colors['textDark']
@@ -1065,7 +1162,7 @@ export type TextTheme = {
   dangerColor: Colors['textDanger']
   successColor: Colors['textSuccess']
   alertColor: Colors['textAlert']
-  paragraphMargin: `${Spacing['medium']} ${string}`
+  paragraphMargin: string | 0
 }
 
 export type TextAreaTheme = {
@@ -1095,6 +1192,30 @@ export type TextAreaTheme = {
   largeHeight: Forms['inputHeightLarge']
 }
 
+export type TextInputTheme = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  borderWidth: Border['widthSmall']
+  borderStyle: Border['style']
+  borderColor: Colors['borderMedium']
+  borderRadius: Border['radiusMedium']
+  color: Colors['textDarkest']
+  background: Colors['backgroundLightest']
+  padding: Spacing['small']
+  focusOutlineWidth: Border['widthMedium']
+  focusOutlineStyle: Border['style']
+  focusOutlineColor: Colors['borderBrand']
+  errorBorderColor: Colors['borderDanger']
+  errorOutlineColor: Colors['borderDanger']
+  placeholderColor: Colors['textDark']
+  smallFontSize: Typography['fontSizeSmall']
+  smallHeight: Forms['inputHeightSmall']
+  mediumFontSize: Typography['fontSizeMedium']
+  mediumHeight: Forms['inputHeightMedium']
+  largeFontSize: Typography['fontSizeLarge']
+  largeHeight: Forms['inputHeightLarge']
+}
+
 export type ToggleDetailsTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
@@ -1103,6 +1224,9 @@ export type ToggleDetailsTheme = {
   fontSizeSmall: Typography['fontSizeSmall']
   fontSizeMedium: Typography['fontSizeMedium']
   fontSizeLarge: Typography['fontSizeLarge']
+  smallIconSize: string | 0
+  mediumIconSize: string | 0
+  largeIconSize: string | 0
   iconMargin: Spacing['xxSmall']
   iconColor: Colors['textDarkest']
   togglePadding: Spacing['xxSmall']
@@ -1132,6 +1256,7 @@ export type TrayTheme = {
   borderStyle: Border['style']
   boxShadow: Shadows['depth3']
   xSmallWidth: Breakpoints['xSmall']
+  smallWidth: string | 0
   regularWidth: Breakpoints['small']
   mediumWidth: Breakpoints['medium']
   largeWidth: Breakpoints['large']
@@ -1157,6 +1282,7 @@ export type TreeBrowserButtonTheme = {
   nameFontSizeLarge: Typography['fontSizeMedium']
   baseSpacingSmall: Spacing['xSmall']
   baseSpacingMedium: Spacing['small']
+  baseSpacingLarge: string | 0
   borderWidth: Border['widthSmall']
   borderRadius: Border['radiusMedium']
   borderColor: Colors['borderDark']
@@ -1170,6 +1296,7 @@ export type TreeBrowserCollectionTheme = {
   fontFamily: Typography['fontFamily']
   baseSpacingSmall: Spacing['xSmall']
   baseSpacingMedium: Spacing['small']
+  baseSpacingLarge: string | 0
   borderWidth: Border['widthSmall']
   borderColor: Colors['borderDark']
 }
@@ -1180,16 +1307,19 @@ export type TreeBrowserTheme = {
   focusOutlineColor: Colors['borderBrand']
   focusOutlineStyle: Border['style']
 }
+
 export type TruncateTextTheme = {
   fontFamily: Typography['fontFamily']
   lineHeight: Typography['lineHeight']
 }
 
 export type ContextViewTheme = {
+  arrowSize: string | 0
   arrowBorderWidth: Border['widthSmall']
   arrowBackgroundColor: Colors['white']
   arrowBorderColor: Colors['tiara']
   arrowBackgroundColorInverse: Colors['licorice']
+  arrowBorderColorInverse: string
 }
 
 export type ViewTheme = {
@@ -1204,6 +1334,7 @@ export type ViewTheme = {
   borderColorAlert: Colors['borderAlert']
   borderColorWarning: Colors['borderWarning']
   borderColorDanger: Colors['borderDanger']
+  borderColorTransparent: string
   debugOutlineColor: Colors['borderDebug']
   backgroundPrimary: Colors['backgroundLightest']
   backgroundSecondary: Colors['backgroundLight']
@@ -1214,8 +1345,11 @@ export type ViewTheme = {
   backgroundSuccess: Colors['backgroundSuccess']
   backgroundDanger: Colors['backgroundDanger']
   backgroundWarning: Colors['backgroundWarning']
+  arrowSize: string | 0
   focusOutlineStyle: Border['style']
   focusOutlineWidth: Border['widthMedium']
+  focusOutlineOffset: string | 0
+  focusOutlineInset: string | 0
   focusColorInfo: Colors['borderInfo']
   focusColorDanger: Colors['borderDanger']
   focusColorSuccess: Colors['borderSuccess']
@@ -1291,6 +1425,7 @@ export interface ThemeVariables {
   GridCol: GridTheme
   GridRow: GridTheme
   Heading: HeadingTheme
+  Img: ImgTheme
   Link: LinkTheme
   InlineListItem: InlineListItemTheme
   'InlineList.Item': InlineListItemTheme
@@ -1303,6 +1438,7 @@ export interface ThemeVariables {
   'Menu.Group': MenuGroupTheme
   MenuSeparator: MenuSeparatorTheme
   'Menu.Separator': MenuSeparatorTheme
+  Menu: MenuTheme
   Metric: MetricTheme
   MetricGroup: MetricGroupTheme
   ModalBody: ModalBodyTheme
@@ -1338,6 +1474,7 @@ export interface ThemeVariables {
   Select: SelectTheme
   Spinner: SpinnerTheme
   InlineSVG: InlineSVGTheme
+  SVGIcon: SVGIconTheme
   TableBody: TableBodyTheme
   'Table.Body': TableBodyTheme
   TableCell: TableCellTheme
@@ -1358,8 +1495,9 @@ export interface ThemeVariables {
   Tabs: TabsTheme
   Tag: TagTheme
   Text: TextTheme
-  ToggleDetails: ToggleDetailsTheme
   TextArea: TextAreaTheme
+  TextInput: TextInputTheme
+  ToggleDetails: ToggleDetailsTheme
   Tooltip: TooltipTheme
   Tray: TrayTheme
   TreeBrowserButton: TreeBrowserButtonTheme

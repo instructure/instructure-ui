@@ -22,22 +22,22 @@
  * SOFTWARE.
  */
 
+import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { ProgressBarTheme } from '@instructure/shared-types'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
-const generateComponentTheme = (theme) => {
+const generateComponentTheme = (theme: Theme): ProgressBarTheme => {
   const { borders, colors, spacing, typography, key: themeName } = theme
 
-  const themeSpecificStyle = {
+  const themeSpecificStyle: ThemeSpecificStyle<ProgressBarTheme> = {
     canvas: {
-      color: theme['ic-brand-font-color-dark'],
       meterColorBrand: theme['ic-brand-primary']
     },
     'canvas-high-contrast': {
-      meterBorderColorInverse: colors?.borderLightest,
       meterColorBrandInverse: colors?.backgroundLightest,
       meterColorSuccessInverse: colors?.backgroundLightest,
       meterColorInfoInverse: colors?.backgroundLightest,
@@ -47,9 +47,7 @@ const generateComponentTheme = (theme) => {
     }
   }
 
-  const componentVariables = {
-    color: colors?.textDarkest,
-
+  const componentVariables: ProgressBarTheme = {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
     lineHeight: typography?.lineHeightCondensed,
@@ -58,7 +56,7 @@ const generateComponentTheme = (theme) => {
     xSmallHeight: spacing?.xSmall,
     xSmallValueFontSize: typography?.fontSizeXSmall,
 
-    smallHeight: spacing?.small,
+    smallHeight: '1.125rem', // product design wants = 18px
     smallValueFontSize: typography?.fontSizeXSmall,
 
     mediumHeight: spacing?.medium,
@@ -101,7 +99,6 @@ const generateComponentTheme = (theme) => {
 
   return {
     ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }
