@@ -136,10 +136,13 @@ class App extends Component {
             }
           }
         }
-        this.setState({
-          docsData,
-          themeKey: Object.keys(docsData.themes)[0]
-        })
+        this.setState(
+          {
+            docsData,
+            themeKey: Object.keys(docsData.themes)[0]
+          },
+          this.scrollToElement
+        )
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
@@ -150,6 +153,20 @@ class App extends Component {
   fetchVersionData = async () => {
     const versionsData = await fetchVersionData()
     return this.setState({ versionsData })
+  }
+
+  scrollToElement() {
+    const [page, id] = this.getPathInfo()
+
+    if (id) {
+      // If we have an id and it corresponds to an element
+      // that exists, scroll it into view
+      const linkedSection = document.getElementById(id)
+      linkedSection && linkedSection.scrollIntoView()
+    } else if (this._content) {
+      // If we don't have an id, scroll the content back to the top
+      this._content.scrollTop = 0
+    }
   }
 
   /**
@@ -264,18 +281,7 @@ class App extends Component {
           key: page || 'index',
           showMenu: this.handleShowTrayOnURLChange(key, showMenu)
         }),
-        () => {
-          this.trackPage(page || 'index')
-          if (id) {
-            // After setting state, if we have an id and it corresponds to an element
-            // that exists, scroll it into view
-            const linkedSection = document.getElementById(id)
-            linkedSection && linkedSection.scrollIntoView()
-          } else if (this._content) {
-            // If we don't have an id, scroll the content back to the top
-            this._content.scrollTop = 0
-          }
-        }
+        this.scrollToElement
       )
     } else {
       this.trackPage('index')
