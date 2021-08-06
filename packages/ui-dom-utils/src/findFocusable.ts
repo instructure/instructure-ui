@@ -128,7 +128,7 @@ export {
    * Given an element, finds and returns all visible, focusable children.
    * Focusable elements include input, select, textarea, button, and object.
    * Anchor tags are also focusable if they include an href or
-   * tabindex attribute (including tabindeces less than zero).
+   * tabindex attribute (including tabindices less than zero).
    * @module findFocusable
    * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
    * @param { function } filter - a function to filter the matching nodes
