@@ -22,16 +22,18 @@
  * SOFTWARE.
  */
 
+import { Theme } from '@instructure/ui-themes'
+import { AppNavItemTheme } from '@instructure/shared-types'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
-const generateComponentTheme = (theme) => {
+const generateComponentTheme = (theme: Theme): AppNavItemTheme => {
   const { colors, spacing, typography } = theme
 
-  const componentVariables = {
+  const componentVariables: AppNavItemTheme = {
     fontFamily: typography?.fontFamily,
     fontSize: '1.125rem',
     fontWeight: typography?.fontWeightBold,

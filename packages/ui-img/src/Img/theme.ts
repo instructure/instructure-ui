@@ -22,14 +22,15 @@
  * SOFTWARE.
  */
 
+import { ImgTheme } from '@instructure/shared-types'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-// @ts-expect-error ts-migrate(6133) FIXME: 'theme' is declared but its value is never read.
-const generateComponentTheme = (theme) => {
-  const componentVariables = {
+const generateComponentTheme = (): ImgTheme => {
+  const componentVariables: ImgTheme = {
     effectTransitionDuration: '1s',
     imageBlurAmount: '0.25em'
   }

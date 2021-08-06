@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { CalendarTheme } from '@instructure/shared-types'
+
 /**
  * ---
  * private: true
@@ -32,7 +34,7 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: any): any => {
+const generateStyle = (componentTheme: CalendarTheme): any => {
   return {
     navigation: {
       label: 'calendar__navigation',

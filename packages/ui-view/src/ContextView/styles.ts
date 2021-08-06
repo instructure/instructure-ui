@@ -23,6 +23,7 @@
  */
 
 import { mirrorPlacement } from '@instructure/ui-position'
+import { ContextViewTheme } from '@instructure/shared-types'
 
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
 const getPlacementStyle = (placement, theme) => {
@@ -235,8 +236,8 @@ const getArrowPlacementVariant = (placement, background, theme) => {
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, state) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme: ContextViewTheme, props) => {
   const { placement, background } = props
   const transformedPlacement = placement.replace(' ', '-')
 

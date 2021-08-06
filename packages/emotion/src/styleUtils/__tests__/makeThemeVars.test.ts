@@ -34,8 +34,11 @@ describe('makeThemeVars', () => {
     }
 
     const result = makeThemeVars('margin', vars)
+    // @ts-expect-error we expect it to throw error
     expect(result['xSmall']).to.not.exist()
+    // @ts-expect-error we expect it to throw error
     expect(result['medium']).to.not.exist()
+    // @ts-expect-error we expect it to throw error
     expect(result['xxLarge']).to.not.exist()
 
     expect(result['marginXSmall']).to.equal('foo')

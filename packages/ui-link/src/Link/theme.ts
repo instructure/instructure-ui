@@ -23,19 +23,20 @@
  */
 
 import { darken } from '@instructure/ui-color-utils'
+import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { LinkTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
-const generateComponentTheme = (theme) => {
+const generateComponentTheme = (theme: Theme): LinkTheme => {
   const { colors, borders, typography, spacing, key: themeName } = theme
 
   // if any styling should depend on the theme itself,
   // this object should specify it
-  const themeSpecificStyle = {
+  const themeSpecificStyle: ThemeSpecificStyle<LinkTheme> = {
     canvas: {
       color: theme['ic-link-color'],
       focusOutlineColor: theme['ic-brand-primary'],
@@ -48,7 +49,7 @@ const generateComponentTheme = (theme) => {
   }
 
   // maps the theme variables to component specific style variables
-  const componentVariables = {
+  const componentVariables: LinkTheme = {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
     color: colors?.textLink,
@@ -74,7 +75,6 @@ const generateComponentTheme = (theme) => {
 
   return {
     ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

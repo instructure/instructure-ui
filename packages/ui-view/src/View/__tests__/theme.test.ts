@@ -101,7 +101,10 @@ describe('View.theme', () => {
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
       expect(
-        contrast(variables.backgroundInverse, variables.colorPrimaryInverse)
+        contrast(
+          variables.backgroundPrimaryInverse,
+          variables.colorPrimaryInverse
+        )
       ).to.be.above(4.5)
     })
 

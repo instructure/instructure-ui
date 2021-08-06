@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { AlertTheme } from '@instructure/shared-types'
+
 /**
  * ---
  * private: true
@@ -32,8 +34,8 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme: AlertTheme, props) => {
   const { variant, hasShadow } = props
 
   const variantStyles = {

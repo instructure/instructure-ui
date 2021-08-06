@@ -22,22 +22,25 @@
  * SOFTWARE.
  */
 
+import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import { FileDropTheme } from '@instructure/shared-types'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: any) => {
+const generateComponentTheme = (theme: Theme): FileDropTheme => {
   const { colors, borders, key: themeName } = theme
 
-  const themeSpecificStyle = {
+  const themeSpecificStyle: ThemeSpecificStyle<FileDropTheme> = {
     canvas: {
       hoverBorderColor: theme['ic-brand-primary'],
       acceptedColor: theme['ic-brand-primary']
     }
   }
 
-  const componentVariables = {
+  const componentVariables: FileDropTheme = {
     backgroundColor: colors?.backgroundLightest, // needed for testing
     borderRadius: borders?.radiusLarge,
     borderWidth: borders?.widthMedium,
@@ -50,7 +53,6 @@ const generateComponentTheme = (theme: any) => {
 
   return {
     ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

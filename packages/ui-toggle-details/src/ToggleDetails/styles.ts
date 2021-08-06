@@ -23,6 +23,7 @@
  */
 
 import { keyframes } from '@instructure/emotion'
+import { ToggleDetailsTheme } from '@instructure/shared-types'
 const contentAnimation = keyframes`
   to {
     opacity: 1;
@@ -38,7 +39,13 @@ const contentAnimation = keyframes`
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: any, props: any, state: any): any => {
+const generateStyle = (
+  componentTheme: ToggleDetailsTheme,
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+  props,
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'state' implicitly has an 'any'... Remove this comment to see the full error message
+  state
+): any => {
   const { fluidWidth, iconPosition, size, variant } = props
   const { animate } = state
 

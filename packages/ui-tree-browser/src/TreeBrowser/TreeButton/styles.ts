@@ -23,6 +23,7 @@
  */
 
 import { keyframes } from '@instructure/emotion'
+import { TreeBrowserButtonTheme } from '@instructure/shared-types'
 
 const transform = keyframes`
   50% {
@@ -44,8 +45,8 @@ const transform = keyframes`
  * @param  {Object} props the props of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyles = (componentTheme, props) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyles = (componentTheme: TreeBrowserButtonTheme, props) => {
   const { size, variant, selected, focused, level } = props
 
   const isRootButton = level && level === 1

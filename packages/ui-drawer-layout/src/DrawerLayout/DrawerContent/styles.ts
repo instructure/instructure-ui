@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { DrawerLayoutContentTheme } from '@instructure/shared-types'
+
 /**
  * ---
  * private: true
@@ -32,8 +34,13 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-const generateStyle = (componentTheme: any, props: any, state: any) => {
+const generateStyle = (
+  componentTheme: DrawerLayoutContentTheme,
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+  props,
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'state' implicitly has an 'any'... Remove this comment to see the full error message
+  state
+) => {
   const { shouldTransition } = state
 
   const transitionState = shouldTransition

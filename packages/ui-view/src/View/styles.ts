@@ -29,6 +29,7 @@ import {
 } from '@instructure/emotion'
 import { pickProps } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
+import { ViewTheme } from '@instructure/shared-types'
 
 // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderRadius' implicitly has an '... Remove this comment to see the full error message
 const getBorderStyle = ({ borderRadius, borderWidth, dir, theme }) => {
@@ -341,8 +342,8 @@ const getFocusStyles = (props, componentTheme) => {
  * @param  {Object} extraArgs
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, extraArgs = {}) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme: ViewTheme, props) => {
   const {
     borderRadius,
     borderWidth,
