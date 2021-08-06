@@ -85,11 +85,11 @@ class MenuItemGroup extends Component<Props> {
      */
     children: ChildrenPropTypes.oneOf([MenuItem, MenuItemSeparator]),
     /**
-     * an array of the values (or indeces by default) for the selected items
+     * an array of the values (or indices by default) for the selected items
      */
     selected: controllable(PropTypes.array, 'onSelect', 'defaultSelected'),
     /**
-     * an array of the values (or indeces by default) for the selected items on initial render
+     * an array of the values (or indices by default) for the selected items on initial render
      */
     defaultSelected: PropTypes.array,
     /**
