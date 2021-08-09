@@ -22,7 +22,7 @@ Our components are [tested in VoiceOver for Mac, and NVDA/JAWS for Windows](http
 
 ### Web Content Accessibility Guidelines (WCAG)
 
-Instructure-UI targets WCAG 2.1 Level A and Level AA success criteria, and seeks to provide a highly usable experience for everyone.
+Instructure UI targets WCAG 2.1 Level A and Level AA success criteria, and seeks to provide a highly usable experience for everyone.
 
 For more information, see the following resources:
 
