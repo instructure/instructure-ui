@@ -31,15 +31,13 @@ const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
   expanded: !expanded
 })
 
-// TODO: try to type it so that the return object contains the prop object
-type GetToggleProps = (
-  props?: Record<string, any> & { onClick?: (...args: any[]) => any }
+type GetToggleProps = <P extends Record<string, any>>(
+  props?: P & { onClick?: (event: Event) => void }
 ) => {
   'aria-controls': string
   'aria-expanded': boolean
-  onClick?: (...args: any[]) => any
-  [p: string]: any
-}
+  onClick: (event: Event) => void
+} & P
 
 type RenderProps = {
   expanded: boolean
@@ -159,11 +157,14 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
     if (typeof render === 'function') {
       return render({
         expanded: this.expanded,
-        getToggleProps: (props = {}) => {
+        getToggleProps: (props = {} as any) => {
           return {
             'aria-controls': this._contentId,
             'aria-expanded': this.expanded,
-            onClick: createChainedFunction(this.handleToggle, props.onClick),
+            onClick: createChainedFunction(
+              this.handleToggle,
+              props.onClick
+            ) as (event: Event) => void,
             ...props
           }
         },
