@@ -16,7 +16,7 @@ Before contributing please read our [code of conduct](https://instructure.design
 
 ## React Support
 
-Instructure-UI currently supports 16.8.0 and higher.
+Instructure UI currently supports 16.8.0 and higher.
 
 ## Browser Support
 

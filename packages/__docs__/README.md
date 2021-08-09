@@ -1,6 +1,6 @@
-## Instructure-UI showcase and documentation app
+## Instructure UI showcase and documentation app
 
-Generates documentation for the packages in this repo.
+This folder contains the source code for the app that runs at [instructure.design](https://instructure.design/).
 
 ### Usage
 

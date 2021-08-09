@@ -83,6 +83,7 @@
     "@instructure/ui-text": "8.7.0",
     "@instructure/ui-text-area": "8.7.0",
     "@instructure/ui-text-input": "8.7.0",
+    "@instructure/ui-themes": "8.7.0",
     "@instructure/ui-time-select": "8.7.0",
     "@instructure/ui-toggle-details": "8.7.0",
     "@instructure/ui-tooltip": "8.7.0",
