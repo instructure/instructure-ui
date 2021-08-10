@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
+import { CutFirstArg } from './bindElementToUtilities'
+
 export type GenericFunction = (...args: any) => unknown | any
 
 // In an object where keys are functions remove their first argument
-type ObjWithCutFirstArg<T> = {
-  [K in keyof T]: T[K] extends (_: unknown, ...tail: infer TT) => infer R // if a function
-    ? (...args: TT) => R // cut first argument
-    : never // do not allow it, the method will throw an error
+export type ObjWithCutFirstArg<T> = {
+  [K in keyof T]: CutFirstArg<T[K]>
 }
 
 /**

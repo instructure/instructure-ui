@@ -34,7 +34,7 @@ import { isElement } from './isElement'
 // This is needed, because the first parameter in helpers is added via a
 // bind() call in bindElementToMethods(). See
 // https://www.freecodecamp.org/news/typescript-curry-ramda-types-f747e99744ab/
-type CutFirstArg<F> = F extends (_: any, ...tail: infer TT) => infer R
+export type CutFirstArg<F> = F extends (_: any, ...tail: infer TT) => infer R
   ? (...args: TT) => R
   : never
 
