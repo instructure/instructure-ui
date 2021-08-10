@@ -31,13 +31,7 @@ import {
 import { SelectorOptions } from '@instructure/ui-test-queries/src/utils/selectors'
 import { QueryArguments } from '@instructure/ui-test-queries/src/utils/parseQueryArguments'
 import { QueriesHelpersEventsType } from '@instructure/ui-test-queries/src/utils/bindElementToUtilities'
-
-// Cut the first argument of function that's an object's value
-type ObjWithCutFirstArg<T> = {
-  [K in keyof T]: T[K] extends (_: any, ...tail: infer TT) => infer R // if a function
-    ? (...args: TT) => R // cut first argument
-    : never // or use the original value
-}
+import { ObjWithCutFirstArg } from '@instructure/ui-test-queries/src/utils/bindElementToMethods'
 
 export function locator<K, T extends Record<string, K>>(
   containerSelector: string,
@@ -72,7 +66,7 @@ export function locator<K, T extends Record<string, K>>(
       // Typing this properly would require to make QueryArguments generic,
       // which would introduce a tons of complexity, so a refactor of this
       // library would be preferred.
-    }) as Promise<QueriesHelpersEventsType[] & ObjWithCutFirstArg<T>>
+    }) as Promise<(QueriesHelpersEventsType & ObjWithCutFirstArg<T>)[]>
   }
 
   const find = async (...args: QueryArguments) => {
