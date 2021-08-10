@@ -50,9 +50,7 @@ module.exports = async ({
   }
   const devDependencies = formatDependencies(pkgDependencies)
 
-  const peerDependencies = formatDependencies({
-    dependencies: pkg.peerDependencies
-  })
+  const peerDependencies = formatDependencies(pkg.peerDependencies)
 
   const template = path.join(path.dirname(pkgPath), 'template')
 
