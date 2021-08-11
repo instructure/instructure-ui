@@ -38,6 +38,8 @@ global.window.Date =
 global.MutationObserver = window.MutationObserver || MutationObserverShim
 global.setImmediate =
   window.setImmediate ||
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   function setImmediate(fn) {
     return setTimeout(fn, 0)
   }

@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import sinon, { SinonStub, SinonStubbedInstance } from 'sinon'
+// eslint-disable-next-line import/named
+import sinon from 'sinon'
 import { ReactComponentWrapper } from './reactComponentWrapper'
 import initConsole from './initConsole'
 import React from 'react'
@@ -77,7 +78,8 @@ class Sandbox {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const timeoutId = originalSetTimeout(...args)
-
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         this._timeoutIds.push(timeoutId)
         return timeoutId
       }
@@ -189,7 +191,7 @@ class Sandbox {
     obj?: T,
     method?: K,
     fn?: (...args: unknown[]) => unknown
-  ): SinonStub | SinonStubbedInstance<T> {
+  ): sinon.SinonStub | sinon.SinonStubbedInstance<T> {
     if (!this._sandbox) {
       throw new Error(
         '[ui-test-sandbox] a stub cannot be created outside an `it`, `before`, or `beforeEach` block.'
@@ -231,17 +233,25 @@ class Sandbox {
   }
 
   viewport() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     if (!global.viewport) {
       console.error(
         '[ui-test-sandbox] the `viewport` global has not been configured. See https://github.com/squidfunk/karma-viewport.'
       )
     }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return global.viewport
   }
 }
 
 function resetViewport() {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   if (global.viewport && typeof global.viewport.reset === 'function') {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     global.viewport.reset()
   }
 }
@@ -259,6 +269,8 @@ function setAttributes(element: HTMLElement, attributes: Attr[] = []) {
 }
 
 // only allow one Sandbox instance
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const sandbox: Sandbox = (global.sandbox = global.sandbox || new Sandbox())
 
 const viewport = sandbox.viewport
@@ -278,9 +290,10 @@ const stub = <T, K>(
   fn?: (...args: unknown[]) => unknown
 ): T extends Record<string, any>
   ? K extends string
-    ? SinonStub
-    : SinonStubbedInstance<T>
-  : SinonStub => sandbox.stub(obj, (method as unknown) as keyof T, fn) as any
+    ? sinon.SinonStub
+    : sinon.SinonStubbedInstance<T>
+  : sinon.SinonStub =>
+  sandbox.stub(obj, (method as unknown) as keyof T, fn) as any
 
 const spy = <T, K extends keyof T>(obj?: T, method?: K) =>
   sandbox.spy(obj, method)
