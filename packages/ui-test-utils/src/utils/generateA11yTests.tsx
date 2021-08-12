@@ -22,24 +22,15 @@
  * SOFTWARE.
  */
 
-import React, { ElementType } from 'react'
+import React from 'react'
 import { mount } from '@instructure/ui-test-sandbox'
 import { expect } from './expect'
-import { within } from '../index'
+import { Example, StoryConfig, within } from '../index'
 import { generateComponentExamples } from './generateComponentExamples'
 
-type ComponentExample = {
-  Component: ElementType
-  componentProps: any
-  exampleProps: any
-  key: string
-}
-
-const renderExample = ({
-  Component,
-  componentProps,
-  key
-}: ComponentExample) => <Component key={key} {...componentProps} />
+const renderExample = ({ Component, componentProps, key }: Example<any>) => (
+  <Component key={key} {...componentProps} />
+)
 
 /**
  *
@@ -61,9 +52,9 @@ const renderExample = ({
  * @module generateA11yTests
  * @private
  */
-export function generateA11yTests(
+export function generateA11yTests<Props>(
   Component: React.ComponentType<any>,
-  componentExample: Record<string, any>
+  componentExample: StoryConfig<Props>
 ) {
   const sections = generateComponentExamples(Component, componentExample)
   describe(`${Component.displayName} should meet accessibility standards`, async () => {

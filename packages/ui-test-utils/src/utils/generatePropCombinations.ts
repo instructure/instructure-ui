@@ -28,7 +28,6 @@ type ArrayElement<A> = A extends readonly (infer T)[] ? T : never
 /**
  * Given possible values for each prop, returns all combinations of those prop values.
  * To generate the prop names and values from the component source see the `parsePropValues` utility
- * and the `component-examples-loader`
  *
  * @param {Object} propValues an object with the shape {propName: arrayOfPossibleValues}
  * @returns {Array} an array of all prop combinations [{propAName: propAValue, propBName: propBValue}]

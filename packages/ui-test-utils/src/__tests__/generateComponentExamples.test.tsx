@@ -24,7 +24,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { expect } from '..'
+import { expect, StoryConfig } from '..'
 
 import { generateComponentExamples } from '../utils/generateComponentExamples'
 
@@ -35,7 +35,7 @@ type Props = {
   children: null
 }
 
-class TestComponent extends Component {
+class TestComponent extends Component<Props> {
   static propTypes = {
     variant: PropTypes.oneOf(['circle', 'rectangle']),
     show: PropTypes.bool,
@@ -57,12 +57,12 @@ class TestComponent extends Component {
 
 describe('generateComponentExamples', () => {
   it('should work with no propValues defined', () => {
-    const config = {
+    const config: StoryConfig<Props> = {
       sectionProp: 'variant',
-      getComponentProps: (_props: Props) => {
+      getComponentProps: (_props) => {
         return { variant: 'circle', show: true }
       },
-      getParameters: (_page: unknown) => {
+      getParameters: (_page) => {
         return { delay: 200 }
       },
       maxExamples: 500
@@ -91,14 +91,15 @@ describe('generateComponentExamples', () => {
         }
       ])
   })
+
   it('should work with propValues defined', () => {
-    const config = {
+    const config: StoryConfig<Props> = {
       sectionProp: 'variant',
       propValues: {
         variant: ['circle', 'rectangle'],
         show: [true, false]
       },
-      getParameters: (_page: unknown) => {
+      getParameters: (_page) => {
         return { delay: 200 }
       },
       maxExamples: 500
@@ -156,7 +157,7 @@ describe('generateComponentExamples', () => {
   })
 
   it('should filter', () => {
-    const config = {
+    const config: StoryConfig<Props> = {
       sectionProp: 'variant',
       propValues: {
         variant: ['circle', 'rectangle'],
@@ -213,7 +214,7 @@ describe('generateComponentExamples', () => {
   })
 
   it('should handle object type config props', () => {
-    const config = {
+    const config: StoryConfig<Props> = {
       sectionProp: 'variant',
       propValues: {
         children: [
@@ -231,7 +232,8 @@ describe('generateComponentExamples', () => {
         '_owner',
         'ref',
         'defaultProps',
-        'propTypes'
+        'propTypes',
+        '_store'
       ])
       .to.deep.equal([
         {
@@ -244,7 +246,6 @@ describe('generateComponentExamples', () => {
                   },
                   componentProps: {
                     children: {
-                      _store: {},
                       props: {
                         children: 'child 1'
                       },
@@ -259,7 +260,6 @@ describe('generateComponentExamples', () => {
                   },
                   componentProps: {
                     children: {
-                      _store: {},
                       props: {
                         children: 'child 2'
                       },
@@ -274,7 +274,6 @@ describe('generateComponentExamples', () => {
                   },
                   componentProps: {
                     children: {
-                      _store: {},
                       props: {
                         children: 'child 3'
                       },
@@ -291,6 +290,174 @@ describe('generateComponentExamples', () => {
           propName: 'variant',
           propValue: 'Examples',
           sectionName: 'Examples'
+        }
+      ])
+  })
+
+  it('should handle excluded props', () => {
+    const config: StoryConfig<Props> = {
+      sectionProp: 'variant',
+      propValues: {
+        variant: ['circle', 'rectangle'],
+        show: [true, false]
+      },
+      excludeProps: ['show'],
+      maxExamples: 100
+    }
+    expect(generateComponentExamples(TestComponent, config))
+      .excludingEvery([
+        'key',
+        '$$typeof',
+        '_owner',
+        'ref',
+        'defaultProps',
+        'propTypes',
+        '_store'
+      ])
+      .to.deep.equal([
+        {
+          pages: [
+            {
+              examples: [
+                {
+                  Component: {
+                    displayName: 'TestComponent'
+                  },
+                  componentProps: {
+                    variant: 'circle'
+                  },
+                  exampleProps: {}
+                }
+              ],
+              index: 0,
+              parameters: {}
+            }
+          ],
+          propName: 'variant',
+          propValue: 'circle',
+          sectionName: 'circle'
+        },
+        {
+          pages: [
+            {
+              examples: [
+                {
+                  Component: {
+                    displayName: 'TestComponent'
+                  },
+                  componentProps: {
+                    variant: 'rectangle'
+                  },
+                  exampleProps: {}
+                }
+              ],
+              index: 0,
+              parameters: {}
+            }
+          ],
+          propName: 'variant',
+          propValue: 'rectangle',
+          sectionName: 'rectangle'
+        }
+      ])
+  })
+
+  it('should handle example props', () => {
+    const config: StoryConfig<Props> = {
+      sectionProp: 'variant',
+      propValues: {
+        variant: ['circle', 'rectangle'],
+        show: [true, false]
+      },
+      getExampleProps: (_props) => {
+        return { message: 'hello' }
+      },
+      maxExamples: 100
+    }
+    expect(generateComponentExamples(TestComponent, config))
+      .excludingEvery([
+        'key',
+        '$$typeof',
+        '_owner',
+        'ref',
+        'defaultProps',
+        'propTypes',
+        '_store'
+      ])
+      .to.deep.equal([
+        {
+          pages: [
+            {
+              examples: [
+                {
+                  Component: {
+                    displayName: 'TestComponent'
+                  },
+                  componentProps: {
+                    show: true,
+                    variant: 'circle'
+                  },
+                  exampleProps: {
+                    message: 'hello'
+                  }
+                },
+                {
+                  Component: {
+                    displayName: 'TestComponent'
+                  },
+                  componentProps: {
+                    show: false,
+                    variant: 'circle'
+                  },
+                  exampleProps: {
+                    message: 'hello'
+                  }
+                }
+              ],
+              index: 0,
+              parameters: {}
+            }
+          ],
+          propName: 'variant',
+          propValue: 'circle',
+          sectionName: 'circle'
+        },
+        {
+          pages: [
+            {
+              examples: [
+                {
+                  Component: {
+                    displayName: 'TestComponent'
+                  },
+                  componentProps: {
+                    show: true,
+                    variant: 'rectangle'
+                  },
+                  exampleProps: {
+                    message: 'hello'
+                  }
+                },
+                {
+                  Component: {
+                    displayName: 'TestComponent'
+                  },
+                  componentProps: {
+                    show: false,
+                    variant: 'rectangle'
+                  },
+                  exampleProps: {
+                    message: 'hello'
+                  }
+                }
+              ],
+              index: 0,
+              parameters: {}
+            }
+          ],
+          propName: 'variant',
+          propValue: 'rectangle',
+          sectionName: 'rectangle'
         }
       ])
   })

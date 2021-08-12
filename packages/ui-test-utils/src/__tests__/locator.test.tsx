@@ -62,7 +62,7 @@ class Component extends React.Component<{ hide: boolean }> {
 }
 
 const ComponentLocator = locator(Component.selector, {
-  findAllInputs: (...args) => locator('input').findAll(...args)
+  findAllInputs: (...args: any[]) => locator('input').findAll(...args)
 })
 
 describe('locator', async () => {
