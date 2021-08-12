@@ -51,7 +51,7 @@ import generateComponentTheme from './theme'
 
 import { calculateElementPosition } from '../calculateElementPosition'
 import {
-  PositionConstaint,
+  PositionConstraint,
   PositionMountNode,
   PositionPlacement,
   PositionPropTypes
@@ -65,7 +65,7 @@ type Props = {
   placement?: PositionPlacement
   mountNode?: PositionMountNode
   insertAt?: 'bottom' | 'top'
-  constrain?: PositionConstaint
+  constrain?: PositionConstraint
   offsetX?: string | number
   offsetY?: string | number
   id?: string
@@ -313,8 +313,7 @@ class Position extends Component<Props> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  calculatePosition(props) {
+  calculatePosition(props: Props) {
     // @ts-expect-error ts-migrate(2551) FIXME: Property '_content' does not exist on type 'Positi... Remove this comment to see the full error message
     return calculateElementPosition(this._content, this._target, {
       placement: props.placement,

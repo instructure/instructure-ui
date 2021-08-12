@@ -36,7 +36,13 @@ import React from 'react'
  * @returns { Document } the owner document
  */
 function ownerDocument(
-  el?: Node | Window | React.ReactElement | ((...args: any[]) => any) | null
+  el?:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+    | null
 ) {
   const node = el && findDOMNode(el)
   let ownerDocument

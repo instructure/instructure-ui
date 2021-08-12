@@ -33,7 +33,7 @@ import {
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
 import {
-  PositionConstaint,
+  PositionConstraint,
   PositionMountNode,
   PositionPlacement,
   PositionPropTypes
@@ -75,7 +75,7 @@ type Props = {
   menuRef?: (...args: any[]) => any
   popoverRef?: (...args: any[]) => any
   mountNode?: PositionMountNode
-  constrain?: PositionConstaint
+  constrain?: PositionConstraint
   liveRegion?:
     | React.ReactElement[]
     | React.ReactElement

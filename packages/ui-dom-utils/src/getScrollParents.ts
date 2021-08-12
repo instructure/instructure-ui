@@ -42,7 +42,7 @@ import React from 'react'
  * @returns {Array} scroll parents
  */
 function getScrollParents(
-  el:
+  el?:
     | Node
     | Window
     | React.ReactElement

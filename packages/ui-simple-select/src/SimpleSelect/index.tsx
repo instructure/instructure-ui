@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
 import {
-  PositionConstaint,
+  PositionConstraint,
   PositionMountNode,
   PositionPlacement,
   PositionPropTypes
@@ -62,7 +62,7 @@ type Props = {
   visibleOptionsCount?: number
   messages?: FormMessage[]
   placement?: PositionPlacement
-  constrain?: PositionConstaint
+  constrain?: PositionConstraint
   mountNode?: PositionMountNode
   onChange?: (...args: any[]) => any
   onFocus?: (...args: any[]) => any

@@ -45,7 +45,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
 import {
-  PositionConstaint,
+  PositionConstraint,
   PositionPlacement,
   PositionPropTypes
 } from '@instructure/ui-position'
@@ -70,7 +70,7 @@ type Props = {
   visibleOptionsCount?: number
   messages?: FormMessage[]
   placement?: PositionPlacement
-  constrain?: PositionConstaint
+  constrain?: PositionConstraint
   onChange?: (...args: any[]) => any
   onFocus?: (...args: any[]) => any
   onBlur?: (...args: any[]) => any

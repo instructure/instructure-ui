@@ -175,6 +175,7 @@ class ContextView extends Component<Props & OtherHTMLAttributes<Props>> {
     this.props.makeStyles?.()
   }
   get mirroredPlacement() {
+    // @ts-expect-error FIXME: type placement
     return mirrorPlacement(this.props.placement, '-')
   }
 

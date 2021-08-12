@@ -41,7 +41,7 @@ import {
 } from '@instructure/ui-dom-utils'
 
 import {
-  PositionConstaint,
+  PositionConstraint,
   PositionMountNode,
   PositionPlacement,
   PositionPropTypes
@@ -84,7 +84,7 @@ type Props = {
   visibleOptionsCount?: number
   messages?: FormMessage[]
   placement?: PositionPlacement
-  constrain?: PositionConstaint
+  constrain?: PositionConstraint
   mountNode?: PositionMountNode
   onFocus?: (...args: any[]) => any
   onBlur?: (...args: any[]) => any

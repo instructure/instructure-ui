@@ -22,7 +22,18 @@
  * SOFTWARE.
  */
 
-const mirror = {
+import {
+  PositionPermutations,
+  PositionPlacement,
+  PositionValues
+} from './PositionPropTypes'
+
+type PlacementStringValues =
+  | PositionValues
+  | `${PositionValues} ${PositionValues}`
+type PlacementArrayValues = PositionPermutations
+
+const mirror: Record<PositionValues, PositionValues> = {
   center: 'center',
   start: 'end',
   end: 'start',
@@ -32,13 +43,17 @@ const mirror = {
   offscreen: 'offscreen'
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
-function mirrorPlacement(placement, delimiter) {
+function mirrorPlacement<D extends string | undefined = undefined>(
+  placement: PlacementArrayValues,
+  delimiter?: D
+): D extends string
+  ? D extends ' '
+    ? PositionPlacement
+    : string
+  : PlacementArrayValues {
   return executeMirrorFunction(
     placement,
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'first' implicitly has an 'any' type.
     (first, second) => {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       return [mirror[first], second]
     },
     delimiter
@@ -63,29 +78,42 @@ function mirrorPlacement(placement, delimiter) {
  * @returns {string|Array} - an array of values or, if the delimiter was supplied, a string of
  *  delimiter separated values
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
-function mirrorHorizontalPlacement(placement, delimiter) {
+function mirrorHorizontalPlacement<D extends string | undefined = undefined>(
+  placement: PlacementArrayValues | PlacementStringValues,
+  delimiter?: D
+): D extends string
+  ? D extends ' '
+    ? PositionPlacement
+    : string
+  : PlacementArrayValues {
   return executeMirrorFunction(
     placement,
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'first' implicitly has an 'any' type.
     (first, second) => {
       return [first, second].map((value) => {
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         return value === 'start' || value === 'end' ? mirror[value] : value
-      })
+      }) as PlacementArrayValues
     },
     delimiter
   )
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
-function executeMirrorFunction(placement, mirrorFunction, delimiter) {
+function executeMirrorFunction<D extends string | undefined = undefined>(
+  placement: PlacementArrayValues | PlacementStringValues,
+  mirrorFunction: (
+    first: PositionValues,
+    second: PositionValues
+  ) => PlacementArrayValues,
+  delimiter?: D
+): D extends string
+  ? D extends ' '
+    ? PositionPlacement
+    : string
+  : PlacementArrayValues {
   const [first, second] = Array.isArray(placement)
-    ? placement
-    : placement.split(' ')
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'value' implicitly has an 'any' type.
+    ? (placement as PlacementArrayValues)
+    : ((placement as PlacementStringValues).split(' ') as PlacementArrayValues)
   const result = mirrorFunction(first, second).filter((value) => value)
-  return delimiter ? result.join(delimiter) : result
+  return delimiter ? (result.join(delimiter) as any) : result
 }
 
 export default mirrorPlacement
