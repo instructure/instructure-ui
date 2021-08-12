@@ -2,7 +2,7 @@
 describes: Avatar
 ---
 
-When an image src is not supplied the user's initials will display. The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
+The avatar component can be used to display a user's avatar. When an image src is not supplied the user's initials will display. The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
 
 ```js
 ---
