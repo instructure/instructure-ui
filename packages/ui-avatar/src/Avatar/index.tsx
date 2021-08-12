@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, SyntheticEvent } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
@@ -44,10 +44,19 @@ import generateComponentTheme from './theme'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
+  /**
+   * The name to display. It will be automatically converted to initials.
+   */
   name: string
+  /**
+   * URL of the image to display as the background image
+   */
   src?: string
+  /**
+   * Accessible label
+   */
   alt?: string
-  size?:
+  size:
     | 'auto'
     | 'xx-small'
     | 'x-small'
@@ -56,7 +65,7 @@ type Props = {
     | 'large'
     | 'x-large'
     | 'xx-large'
-  color?:
+  color:
     | 'default' // = brand
     | 'shamrock'
     | 'barney'
@@ -64,20 +73,34 @@ type Props = {
     | 'fire'
     | 'licorice'
     | 'ash'
-  shape?: 'circle' | 'rectangle'
-  display?: 'inline-block' | 'block'
+  shape: 'circle' | 'rectangle'
+  display: 'inline-block' | 'block'
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
-  onImageLoaded?: (...args: any[]) => any
+  /**
+   * Callback fired when the avatar image has loaded
+   */
+  onImageLoaded: (event: SyntheticEvent) => void
+  /**
+   * The element type to render as
+   */
   as?: AsElementType
+  /**
+   * Provides a reference to the underlying html element
+   */
   elementRef?: (...args: any[]) => any
 }
 
 /**
 ---
 category: components
+@tsProps
 ---
 **/
-
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Avatar extends Component<Props> {
@@ -89,13 +112,7 @@ class Avatar extends Component<Props> {
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     name: PropTypes.string.isRequired,
-    /*
-     * URL of the image to display as the background image
-     */
     src: PropTypes.string,
-    /*
-     * Accessible label
-     */
     alt: PropTypes.string,
     size: PropTypes.oneOf([
       'auto',
@@ -117,24 +134,10 @@ class Avatar extends Component<Props> {
       'ash'
     ]),
     shape: PropTypes.oneOf(['circle', 'rectangle']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
     margin: ThemeablePropTypes.spacing,
     display: PropTypes.oneOf(['inline-block', 'block']),
-    /**
-     * Callback fired when the avatar image has loaded
-     */
     onImageLoaded: PropTypes.func,
-    /**
-     * the element type to render as
-     */
     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-    /**
-     * provides a reference to the underlying html element
-     */
     elementRef: PropTypes.func
   }
 
@@ -147,7 +150,7 @@ class Avatar extends Component<Props> {
     color: 'default',
     shape: 'circle',
     display: 'inline-block',
-    onImageLoaded: () => {}
+    onImageLoaded: (_event: SyntheticEvent) => {}
   }
 
   state = { loaded: false }
@@ -181,24 +184,9 @@ class Avatar extends Component<Props> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleImageLoaded = (event) => {
+  handleImageLoaded = (event: SyntheticEvent) => {
     this.setState({ loaded: true })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onImageLoaded(event)
-  }
-
-  renderLoadImage() {
-    // This image element is visually hidden and is here for loading purposes only
-    return (
-      <img
-        src={this.props.src}
-        css={this.props.styles.loadImage}
-        alt={this.props.alt}
-        onLoad={this.handleImageLoaded}
-        aria-hidden="true"
-      />
-    )
   }
 
   renderInitials() {
@@ -223,11 +211,18 @@ class Avatar extends Component<Props> {
         css={styles.avatar}
         display={this.props.display}
       >
-        {this.renderLoadImage()}
+        <img // This is visually hidden and is here for loading purposes only
+          src={this.props.src}
+          css={this.props.styles.loadImage}
+          alt={this.props.alt}
+          onLoad={this.handleImageLoaded}
+          aria-hidden="true"
+        />
         {!this.state.loaded && this.renderInitials()}
       </View>
     )
   }
 }
+
 export default Avatar
 export { Avatar }
