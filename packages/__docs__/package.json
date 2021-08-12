@@ -13,7 +13,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "prestart": "node buildScripts/build-docs.js",
-    "start": "ui-scripts --server -p 8001",
+    "start": "ui-build --bundle && ui-scripts --server -p 8001",
     "start:watch": "node buildScripts/build-docs.js && ui-build --bundle --watch -p 8080",
     "bundle": "node buildScripts/build-docs.js && ui-build --bundle",
     "lint": "ui-test --lint",
