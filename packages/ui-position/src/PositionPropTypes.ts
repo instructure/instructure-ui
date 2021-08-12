@@ -26,6 +26,7 @@ import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
 import { RectType } from '@instructure/ui-dom-utils'
+import React from 'react'
 
 const PositionPropTypes = {
   /**
@@ -118,6 +119,28 @@ export type PositionConstraint =
   | 'scroll-parent'
   | 'parent'
   | 'none'
+
+export type ElementPosition = {
+  placement?: PositionPlacement
+  style: {
+    top?: 0
+    left?: '-9999em' | 0
+    overflow?: 'hidden'
+    position?: 'absolute'
+    display?: 'none' | null
+    minWidth?: number | null
+    minHeight?: number | null
+    transform?: string
+  }
+}
+
+export type PosElement =
+  | Node
+  | Window
+  | React.ReactElement
+  | React.Component
+  | ((...args: any[]) => Node | Window | null | undefined)
+  | null
 
 export default PositionPropTypes
 export {

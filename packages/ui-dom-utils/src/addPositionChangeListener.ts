@@ -44,13 +44,14 @@ type PositionChangeListenerType = { remove: () => void }
  * @returns {function} remove - cancel the listener and no longer execute the handler function
  */
 function addPositionChangeListener(
-  el:
+  el?:
     | Node
     | Window
     | React.ReactElement
     | React.Component
-    | ((...args: any[]) => any),
-  handler: (...args: any[]) => any
+    | ((...args: any[]) => Node | Window | null | undefined)
+    | null,
+  handler?: (...args: any[]) => any
 ): PositionChangeListenerType {
   const node = findDOMNode(el)
   const raf: RequestAnimationFrameType[] = []

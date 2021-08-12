@@ -43,6 +43,7 @@ function findDOMNode(
     | React.ReactElement
     | React.Component
     | ((...args: any[]) => Node | Window | null | undefined)
+    | null
 ) {
   const node = typeof el === 'function' ? el() : el
 

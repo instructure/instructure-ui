@@ -42,21 +42,15 @@ import {
   Size,
   Offset,
   PositionConstraint,
-  PositionMountNode
+  PositionMountNode,
+  ElementPosition,
+  PosElement
 } from './PositionPropTypes'
 
 type Placement = Exclude<PositionValues, 'offscreen'>
 type PositionPlacementWithoutOffscreen = Exclude<PositionPlacement, 'offscreen'>
 type PlacementPermutations = [Placement, Placement]
 type Overflow = Pick<RectType, 'top' | 'bottom' | 'left' | 'right'>
-
-type PosElement =
-  | Node
-  | Window
-  | React.ReactElement
-  | React.Component
-  | ((...args: any[]) => Node | Window | null | undefined)
-  | null
 
 type Options = {
   placement?: PositionPlacement
@@ -67,23 +61,9 @@ type Options = {
   over?: boolean
 }
 
-type ElementPosition = {
-  placement?: PositionPlacement
-  style: {
-    top?: 0
-    left?: '-9999em' | 0
-    overflow?: 'hidden'
-    position?: 'absolute'
-    display?: 'none' | null
-    minWidth?: number | null
-    minHeight?: number | null
-    transform?: string
-  }
-}
-
 function calculateElementPosition(
-  element: PosElement,
-  target: PosElement,
+  element?: PosElement,
+  target?: PosElement,
   options: Options = {}
 ): ElementPosition {
   if (!element || options.placement === 'offscreen') {
@@ -288,7 +268,7 @@ class PositionedElement {
 }
 
 class PositionData {
-  constructor(element: PosElement, target: PosElement, options?: Options) {
+  constructor(element?: PosElement, target?: PosElement, options?: Options) {
     this.options = options || {}
 
     const { container, constrain, placement, over } = this.options
