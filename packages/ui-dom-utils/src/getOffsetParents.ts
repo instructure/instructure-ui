@@ -42,7 +42,7 @@ import React from 'react'
  * @returns {Array} offset parents
  */
 function getOffsetParents(
-  el:
+  el?:
     | Node
     | Window
     | React.ReactElement

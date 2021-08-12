@@ -32,7 +32,7 @@ import {
   parsePlacement,
   mirrorHorizontalPlacement,
   PositionPlacement,
-  PositionConstaint,
+  PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
 import { ContextView, View } from '@instructure/ui-view'
@@ -68,8 +68,8 @@ type Props = {
   screenReaderLabel?: string
   offsetX?: string | number
   offsetY?: string | number
-  placement?: PositionPlacement
-  constrain?: PositionConstaint
+  placement: PositionPlacement
+  constrain?: PositionConstraint
   mountNode?: PositionMountNode
   positionTarget?: PositionMountNode
   insertAt?: 'bottom' | 'top'

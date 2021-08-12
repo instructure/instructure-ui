@@ -35,7 +35,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { AsElementType } from '@instructure/shared-types'
 import {
-  PositionConstaint,
+  PositionConstraint,
   PositionMountNode,
   PositionPlacement,
   PositionPropTypes
@@ -60,7 +60,7 @@ type Props = {
   color?: 'primary' | 'primary-inverse'
   placement?: PositionPlacement
   mountNode?: PositionMountNode
-  constrain?: PositionConstaint
+  constrain?: PositionConstraint
   positionTarget?: PositionMountNode
   offsetX?: string | number
   offsetY?: string | number

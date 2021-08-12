@@ -25,6 +25,7 @@
 import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
+import { RectType } from '@instructure/ui-dom-utils'
 
 const PositionPropTypes = {
   /**
@@ -69,34 +70,49 @@ const PositionPropTypes = {
   ])
 }
 
-export type PositionPlacement =
+export type PositionValues =
   | 'top'
+  | 'start'
   | 'end'
   | 'bottom'
+  | 'center'
+  | 'stretch'
+  | 'offscreen'
+
+export type PositionPermutations = [PositionValues, PositionValues]
+
+export type Offset<Type = number> = { top: Type; left: Type }
+
+export type Size = Pick<RectType, 'width' | 'height'>
+
+export type PositionPlacement =
+  | 'top'
+  | 'bottom'
   | 'start'
+  | 'end'
   | 'top start'
-  | 'start top'
-  | 'start center'
-  | 'start bottom'
+  | 'top center'
+  | 'top end'
+  | 'top stretch'
   | 'bottom start'
   | 'bottom center'
   | 'bottom end'
-  | 'end bottom'
-  | 'end center'
-  | 'end top'
-  | 'top end'
-  | 'top center'
-  | 'center end'
-  | 'center start'
-  | 'top stretch'
   | 'bottom stretch'
-  | 'end stretch'
+  | 'start top'
+  | 'start center'
+  | 'start bottom'
   | 'start stretch'
+  | 'end top'
+  | 'end center'
+  | 'end bottom'
+  | 'end stretch'
+  | 'center start'
+  | 'center end'
   | 'offscreen'
 
 export type PositionMountNode = Element | (() => Element)
 
-export type PositionConstaint =
+export type PositionConstraint =
   | PositionMountNode
   | 'window'
   | 'scroll-parent'

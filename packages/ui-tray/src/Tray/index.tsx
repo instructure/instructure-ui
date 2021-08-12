@@ -42,7 +42,7 @@ import generateComponentTheme from './theme'
 type Props = {
   label: string
   size?: 'x-small' | 'small' | 'regular' | 'medium' | 'large'
-  placement?: 'top' | 'bottom' | 'start' | 'end' | 'center'
+  placement: 'top' | 'bottom' | 'start' | 'end' | 'center'
   open?: boolean
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
   contentRef?: (...args: any[]) => any

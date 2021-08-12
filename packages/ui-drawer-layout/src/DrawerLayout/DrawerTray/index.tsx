@@ -44,7 +44,7 @@ import { DrawerLayoutContext } from '../index'
 type Props = {
   label: string
   render?: (...args: any[]) => any
-  placement?: 'start' | 'end'
+  placement: 'start' | 'end'
   open?: boolean
   onOpen?: (...args: any[]) => any
   onClose?: (...args: any[]) => any
