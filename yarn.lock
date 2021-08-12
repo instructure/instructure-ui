@@ -11597,6 +11597,20 @@ fn.name@1.x.x:
   resolved "https://registry.npmjs.org/fn.name/-/fn.name-1.1.0.tgz#26cad8017967aea8731bc42961d04a3d5988accc"
   integrity sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==
 
+focus-trap-react@^8.7.0:
+  version "8.7.0"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/focus-trap-react/-/focus-trap-react-8.7.0.tgz#5cf7fceb14561ccbb54208958e63422e1116266d"
+  integrity sha1-XPf86xRWHMu1QgiVjmNCLhEWJm0=
+  dependencies:
+    focus-trap "^6.6.0"
+
+focus-trap@^6.6.0:
+  version "6.6.0"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/focus-trap/-/focus-trap-6.6.0.tgz#7fb37679926ec1bd762d0748b056c68a64a9e8cf"
+  integrity sha1-f7N2eZJuwb12LQdIsFbGimSp6M8=
+  dependencies:
+    tabbable "^5.2.0"
+
 folder-walker@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/folder-walker/-/folder-walker-3.2.0.tgz#98e00e59773f43416a6dcf0926d4c9436f65121d"
@@ -22808,6 +22822,11 @@ symbol.prototype.description@^1.0.0:
     es-abstract "^1.18.0-next.2"
     has-symbols "^1.0.1"
     object.getownpropertydescriptors "^2.1.2"
+
+tabbable@^5.2.0:
+  version "5.2.0"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/tabbable/-/tabbable-5.2.0.tgz#4fba60991d8bb89d06e5d9455c92b453acf88fb2"
+  integrity sha1-T7pgmR2LuJ0G5dlFXJK0U6z4j7I=
 
 table@^5.2.3:
   version "5.4.6"

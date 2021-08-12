@@ -29,6 +29,7 @@
     "@instructure/ui-dom-utils": "8.8.0",
     "@instructure/ui-react-utils": "8.8.0",
     "@instructure/ui-testable": "8.8.0",
+    "@instructure/ui-focus-manager": "8.7.0",
     "prop-types": "^15"
   },
   "devDependencies": {

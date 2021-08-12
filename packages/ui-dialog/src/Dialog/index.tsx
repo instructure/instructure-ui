@@ -24,7 +24,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import { FocusManager } from '@instructure/ui-focus-manager'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
@@ -71,6 +71,8 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
     onBlur: PropTypes.func,
 
     onDismiss: PropTypes.func,
+
+    onClose: PropTypes.func,
 
     /**
      * An element or a function returning an element to focus by default
@@ -120,7 +122,8 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onBlur: (event) => {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDismiss: (event) => {}
+    onDismiss: (event) => {},
+    onClose: () => {}
   }
 
   _timeouts: ReturnType<typeof setTimeout>[] = []
@@ -170,38 +173,13 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
         // get focused on open, and browsers scroll to the focused element.
         // If the css is not fully applied, the element may not be in their
         // final position, making the page jump.
-        this._timeouts.push(
-          setTimeout(() => {
-            // @ts-expect-error ts-migrate(2322) FIXME: Type 'FocusRegion' is not assignable to type 'null... Remove this comment to see the full error message
-            this._focusRegion = FocusRegionManager.activateRegion(
-              this.contentElement,
-              {
-                ...options
-              }
-            )
-          }, 0)
-        )
       })
     )
   }
 
   close() {
-    if (this._focusRegion) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      FocusRegionManager.blurRegion(this.contentElement, this._focusRegion.id)
-    }
-  }
-
-  focus() {
-    if (!this.props.open || !this.contentElement) {
-      error(false, "[Dialog] Can't focus a Dialog that isn't open.")
-      return
-    }
-
-    if (this._focusRegion) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      FocusRegionManager.focusRegion(this.contentElement, this._focusRegion.id)
-    }
+    //@ts-expect-error ts-migration
+    this.props.onclose()
   }
 
   blur() {
@@ -230,28 +208,21 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
     return contentElement
   }
 
-  get focused() {
-    return (
-      this.contentElement &&
-      this._focusRegion &&
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      FocusRegionManager.isFocused(this.contentElement, this._focusRegion.id)
-    )
-  }
-
   render() {
     const ElementType = getElementType(Dialog, this.props)
 
     return this.props.open ? (
-      <ElementType
-        {...omitProps(this.props, Dialog.propTypes)}
-        ref={this.getRef}
-        role={this.props.label ? 'dialog' : null}
-        aria-label={this.props.label}
-        className={this.props.className} // eslint-disable-line react/prop-types
-      >
-        {this.props.children}
-      </ElementType>
+      <FocusManager>
+        <ElementType
+          {...omitProps(this.props, Dialog.propTypes)}
+          ref={this.getRef}
+          role={this.props.label ? 'dialog' : null}
+          aria-label={this.props.label}
+          className={this.props.className} // eslint-disable-line react/prop-types
+        >
+          {this.props.children}
+        </ElementType>
+      </FocusManager>
     ) : null
   }
 }

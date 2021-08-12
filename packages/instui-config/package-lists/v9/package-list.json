@@ -44,6 +44,7 @@
   "@instructure/ui-expandable",
   "@instructure/ui-file-drop",
   "@instructure/ui-flex",
+  "@instructure/ui-focus-manager",
   "@instructure/ui-focusable",
   "@instructure/ui-form-field",
   "@instructure/ui-grid",

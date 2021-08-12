@@ -1,0 +1,47 @@
+{
+  "name": "@instructure/ui-focus-manager",
+  "version": "8.7.0",
+  "description": "A UI component library made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
+  "module": "./es/index.js",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build --modules es,cjs",
+    "build:watch": "ui-build --watch",
+    "build:types": "ui-scripts --types"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.13.10",
+    "@instructure/emotion": "8.7.0",
+    "@instructure/ui-react-utils": "8.7.0",
+    "@instructure/ui-testable": "8.7.0",
+    "focus-trap-react": "^8.7.0",
+    "prop-types": "^15",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "8.7.0",
+    "@instructure/ui-color-utils": "8.7.0",
+    "@instructure/ui-test-locator": "8.7.0",
+    "@instructure/ui-test-utils": "8.7.0",
+    "@instructure/ui-themes": "8.7.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false
+}
