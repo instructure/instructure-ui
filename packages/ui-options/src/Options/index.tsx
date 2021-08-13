@@ -181,8 +181,7 @@ class Options extends Component<Props> {
           margin="none"
           padding="none"
           background="primary"
-          // TODO renderLabel is returned is renderLabel is a function, this is likely a bug
-          aria-labelledby={(renderLabel as string) && this._labelId}
+          aria-labelledby={renderLabel ? this._labelId : undefined}
         >
           {this.renderChildren()}
         </View>
