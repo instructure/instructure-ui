@@ -82,6 +82,14 @@ describe('<Avatar />', async () => {
         'rgb(0, 142, 226)'
       )
     })
+
+    it('should return the underlying component', async () => {
+      const elementRef = stub()
+      const subject = await mount(
+        <Avatar name="Jessica Jones" elementRef={elementRef} />
+      )
+      expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+    })
   })
 
   describe('when an image src url is provided', async () => {
