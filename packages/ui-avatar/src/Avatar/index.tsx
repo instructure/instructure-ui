@@ -98,8 +98,8 @@ type Props = {
 /**
 ---
 category: components
-@tsProps
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
