@@ -165,7 +165,6 @@ class Rating extends Component<Props> {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     const valueText = label + ' ' + formatValueText(this.filled, iconCount)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Rating.propTypes),
       Rating

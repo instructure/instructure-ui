@@ -168,14 +168,13 @@ class Table extends Component<Props> {
 
     return (
       <View
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
         {...View.omitViewProps(omitProps(this.props, Table.propTypes), Table)}
         as={isStacked ? 'div' : 'table'}
         margin={margin}
         elementRef={elementRef}
         css={styles.table}
         role={isStacked ? 'table' : null}
-        aria-label={isStacked ? caption : null}
+        aria-label={isStacked ? (caption as string) : null}
       >
         {!isStacked && (
           <caption>

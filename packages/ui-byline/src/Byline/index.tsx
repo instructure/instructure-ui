@@ -111,7 +111,6 @@ class Byline extends Component<Props> {
   }
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Byline.propTypes),
       Byline

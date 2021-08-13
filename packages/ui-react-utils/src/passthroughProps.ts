@@ -23,9 +23,17 @@
  */
 // list of "valid" props https://github.com/emotion-js/emotion/blob/master/packages/is-prop-valid/src/props.js
 import isPropValid from '@emotion/is-prop-valid'
-function passthroughProps(props: Record<string, any>) {
-  const validProps: Record<string, unknown> = {}
 
+/**
+ * Removes disallowed keys from the given object. Allowed keys: Valid props for
+ * HTML or SVG elements (see https://github.com/emotion-js/emotion/tree/main/packages/is-prop-valid)
+ *
+ * Disallowed is anything else and 'style', 'styles', 'className', 'children',
+ * 'makeStyles'
+ * @param props The props to process
+ */
+function passthroughProps<P>(props: P) {
+  const validProps: Partial<P> = {}
   Object.keys(props)
     // style and className need to be explicitly passed through
     // styles and makeStyle can not pass through
@@ -39,10 +47,9 @@ function passthroughProps(props: Record<string, any>) {
         propName !== 'makeStyles'
     )
     .forEach((propName) => {
-      validProps[propName] = props[propName]
+      validProps[propName as keyof P] = props[propName as keyof P]
     })
-
-  return validProps
+  return validProps as Record<string, any>
 }
 
 export { passthroughProps }

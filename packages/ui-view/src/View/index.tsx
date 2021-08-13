@@ -23,20 +23,16 @@
  */
 
 /** @jsx jsx */
-
-import { Component } from 'react'
-
+import { Component, ComponentType } from 'react'
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { logError as error } from '@instructure/console'
-
 import {
   getElementType,
   omitProps,
   pickProps,
   passthroughProps
 } from '@instructure/ui-react-utils'
-
 import { jsx, withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -71,9 +67,39 @@ class View extends Component<ViewProps> {
     shouldAnimateFocus: true
   }
 
+  // TODO: Remove this code once all components are using passthroughProps in place
+  // of omitProps and have removed this function
+
+  // omitViewProps needs to be called on the composed View component so that the
+  // View.allowedProps in the method matches the View.allowedProps that will be called in
+  // the consumers. Otherwise the discrepancy could cause unexpected props being
+  // allowed through.
+
+  /**
+   * Removes View's own props from the given object. Automatically excludes the
+   * following props: 'theme', 'children', 'className', 'style', 'styles',
+   * 'makeStyles', 'themeOverride'
+   * @param props the object to process
+   * @param Component The component whose props are processed.
+   *       Only needed for debug logging in non-production builds.
+   */
+  static omitViewProps = (
+    props: Record<string, any>,
+    Component: ComponentType<any>
+  ) => {
+    if (process.env.NODE_ENV !== 'production') {
+      Object.keys(pickProps(props, View.allowedProps)).forEach((prop) => {
+        error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
+      })
+    }
+    return omitProps(props, View.allowedProps)
+  }
+
+  private spanMarginVerified: boolean
+  private _element?: HTMLElement | null
+
   constructor(props: ViewProps) {
     super(props)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'spanMarginVerified' does not exist on ty... Remove this comment to see the full error message
     this.spanMarginVerified = false
   }
 
@@ -85,12 +111,10 @@ class View extends Component<ViewProps> {
     this.props.makeStyles?.()
 
     // Not calling getComputedStyle can save hundreds of ms in tests and production
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'spanMarginVerified' does not exist on ty... Remove this comment to see the full error message
     if (process.env.NODE_ENV === 'development' && !this.spanMarginVerified) {
       // We have to verify margins in the first 'componentDidUpdate',
       // because that is when all styles are calculated,
       // but we only want to check once, using a flag
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'spanMarginVerified' does not exist on ty... Remove this comment to see the full error message
       this.spanMarginVerified = true
 
       error(
@@ -129,20 +153,16 @@ class View extends Component<ViewProps> {
           }
 
           return verticalMargin
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_element' does not exist on type 'View'.
         })(this._element, this.props.margin),
         `[View] display style is set to 'inline' and will allow for horizontal margins only.`
       )
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleElementRef = (el) => {
+  handleElementRef = (el: HTMLElement | null) => {
     if (typeof this.props.elementRef === 'function') {
       this.props.elementRef(el)
     }
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_element' does not exist on type 'View'.
     this._element = el
   }
   render() {
@@ -187,24 +207,6 @@ class View extends Component<ViewProps> {
       </ElementType>
     )
   }
-}
-
-// TODO: Remove this code once all components are using passthroughProps in place
-// of omitProps and have removed this function
-
-// omitViewProps needs to be called on the composed View component so that the
-// View.allowedProps in the method matches the View.allowedProps that will be called in
-// the consumers. Otherwise the discrepency could cause unexpected props being
-// allowed through.
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
-View.omitViewProps = (props, Component) => {
-  if (process.env.NODE_ENV !== 'production') {
-    Object.keys(pickProps(props, View.allowedProps)).forEach((prop) => {
-      error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
-    })
-  }
-
-  return omitProps(props, View.allowedProps)
 }
 
 export default View

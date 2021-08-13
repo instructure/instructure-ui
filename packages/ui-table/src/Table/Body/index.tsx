@@ -95,7 +95,6 @@ class Body extends Component<Props> {
 
     return (
       <View
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
         {...View.omitViewProps(omitProps(this.props, Body.propTypes), Body)}
         as={isStacked ? 'div' : 'tbody'}
         css={styles.body}

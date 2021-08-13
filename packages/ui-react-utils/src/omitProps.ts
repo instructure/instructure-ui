@@ -26,34 +26,35 @@
  * ---
  * category: utilities/react
  * ---
- * Return an object with the remaining props after propTypes (and additionally specified props) omitted.
+ * Return an object with the remaining props after the given props are omitted.
  *
- * Automatically excludes the following props: 'theme', 'children', 'className', 'style', 'styles', 'makeStyles', 'themeOverride'
+ * Automatically excludes the following props:
+ * 'theme', 'children', 'className', 'style', 'styles', 'makeStyles', 'themeOverride'
  * @module omitProps
- * @param {Object} props React component props
- * @param {Object|Array<string>} propTypes React component propTypes or the list of allowed prop keys
- * @param {Array} exclude an optional array of prop names to exclude
- * @returns {Object} props object without the excluded props
+ * @param props The object to process
+ * @param propsToOmit list disallowed prop keys or an object whose
+ *        keys will be omitted.
+ * @param exclude an optional array of disallowed prop names to omit
+ * @returns props object without the excluded props
  * @module omitProps
  */
 function omitProps<T extends Record<string, any>>(
   props: T,
-  propTypesOrAllowedPropList: Record<string, any> | string[],
+  propsToOmit: Record<string, any> | string[],
   exclude?: string[]
 ) {
-  const propKeys = Array.isArray(propTypesOrAllowedPropList)
-    ? propTypesOrAllowedPropList
-    : Object.keys(propTypesOrAllowedPropList || {})
-  const combined = exclude ? propKeys.concat(exclude) : propKeys
-
-  return omit(props, combined)
+  const propKeys = Array.isArray(propsToOmit)
+    ? propsToOmit
+    : Object.keys(propsToOmit || {})
+  const keysToOmit = exclude ? propKeys.concat(exclude) : propKeys
+  return omit(props, keysToOmit) as Record<string, any>
 }
 
 const hasOwnProperty = Object.prototype.hasOwnProperty
 
-const omit = (originalObject: Record<string, unknown>, keys: string[]) => {
+const omit = <T>(originalObject: T, keysToOmit: string[]) => {
   // code based on babel's _objectWithoutProperties
-  const newObject: Record<string, unknown> = {}
+  const newObject: Partial<T> = {}
   for (const key in originalObject) {
     // special case because we always want to omit these and === is faster than concat'ing them in
     if (
@@ -64,15 +65,16 @@ const omit = (originalObject: Record<string, unknown>, keys: string[]) => {
       key === 'styles' ||
       key === 'makeStyles' ||
       key === 'themeOverride'
-    )
+    ) {
       continue
-
-    if (keys.includes(key) || !hasOwnProperty.call(originalObject, key))
+    }
+    if (keysToOmit.includes(key) || !hasOwnProperty.call(originalObject, key)) {
       continue
+    }
     newObject[key] = originalObject[key]
   }
-
   return newObject
 }
+
 export default omitProps
 export { omitProps }
