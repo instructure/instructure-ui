@@ -103,7 +103,7 @@ export type PlacementPropValues =
 /**
  * An element or a function returning an element to use as the mount node
  */
-export type PositionMountNode = Element | (() => Element | null)
+export type PositionMountNode = Element | (() => Element | null) | null
 
 /**
  * The parent in which to constrain a placement

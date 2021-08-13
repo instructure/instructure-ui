@@ -53,7 +53,7 @@ type Props = {
    * An element or a function returning an element to use as the mount node
    * for the `<Position />` (defaults to `document.body`)
    */
-  mountNode?: PositionMountNode
+  mountNode: PositionMountNode
 
   /**
    * Insert the element at the 'top' of the mountNode or at the 'bottom'
