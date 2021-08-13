@@ -31,7 +31,7 @@ import {
   PositionPropTypes,
   parsePlacement,
   mirrorHorizontalPlacement,
-  PositionPlacement,
+  PlacementPropValues,
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
@@ -68,7 +68,7 @@ type Props = {
   screenReaderLabel?: string
   offsetX?: string | number
   offsetY?: string | number
-  placement: PositionPlacement
+  placement: PlacementPropValues
   constrain?: PositionConstraint
   mountNode?: PositionMountNode
   positionTarget?: PositionMountNode

@@ -37,7 +37,7 @@ import { AsElementType } from '@instructure/shared-types'
 import {
   PositionConstraint,
   PositionMountNode,
-  PositionPlacement,
+  PlacementPropValues,
   PositionPropTypes
 } from '@instructure/ui-position'
 import { uid } from '@instructure/uid'
@@ -58,7 +58,7 @@ type Props = {
   as?: AsElementType
   on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]
   color?: 'primary' | 'primary-inverse'
-  placement?: PositionPlacement
+  placement?: PlacementPropValues
   mountNode?: PositionMountNode
   constrain?: PositionConstraint
   positionTarget?: PositionMountNode

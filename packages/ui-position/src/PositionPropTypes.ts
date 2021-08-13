@@ -28,35 +28,44 @@ import { element } from '@instructure/ui-prop-types'
 import { RectType } from '@instructure/ui-dom-utils'
 import React from 'react'
 
+const placementPropValues = [
+  'top',
+  'end',
+  'bottom',
+  'start',
+  'top start',
+  'start top',
+  'start center',
+  'start bottom',
+  'bottom start',
+  'bottom center',
+  'bottom end',
+  'end bottom',
+  'end center',
+  'end top',
+  'top end',
+  'top center',
+  'center end',
+  'center start',
+  'top stretch',
+  'bottom stretch',
+  'end stretch',
+  'start stretch',
+  'offscreen'
+] as const
+
+const constraintPropValues = [
+  'window',
+  'scroll-parent',
+  'parent',
+  'none'
+] as const
+
 const PositionPropTypes = {
   /**
    * The placement of the content in relation to the trigger
    */
-  placement: PropTypes.oneOf([
-    'top',
-    'end',
-    'bottom',
-    'start',
-    'top start',
-    'start top',
-    'start center',
-    'start bottom',
-    'bottom start',
-    'bottom center',
-    'bottom end',
-    'end bottom',
-    'end center',
-    'end top',
-    'top end',
-    'top center',
-    'center end',
-    'center start',
-    'top stretch',
-    'bottom stretch',
-    'end stretch',
-    'start stretch',
-    'offscreen'
-  ]),
+  placement: PropTypes.oneOf(placementPropValues),
   /**
    * An element or a function returning an element to use as the mount node
    */
@@ -67,11 +76,28 @@ const PositionPropTypes = {
   constrain: PropTypes.oneOfType([
     element,
     PropTypes.func,
-    PropTypes.oneOf(['window', 'scroll-parent', 'parent', 'none'])
+    PropTypes.oneOf(constraintPropValues)
   ])
 }
 
-export type PositionValues =
+/**
+ * The placement of the content in relation to the trigger
+ */
+export type PlacementPropValues = typeof placementPropValues[number]
+
+/**
+ * An element or a function returning an element to use as the mount node
+ */
+export type PositionMountNode = Element | (() => Element)
+
+/**
+ * The parent in which to constrain a placement
+ */
+export type PositionConstraint =
+  | PositionMountNode
+  | typeof constraintPropValues[number]
+
+export type PlacementValues =
   | 'top'
   | 'start'
   | 'end'
@@ -80,48 +106,10 @@ export type PositionValues =
   | 'stretch'
   | 'offscreen'
 
-export type PositionPermutations = [PositionValues, PositionValues]
-
-export type Offset<Type = number> = { top: Type; left: Type }
-
-export type Size = Pick<RectType, 'width' | 'height'>
-
-export type PositionPlacement =
-  | 'top'
-  | 'bottom'
-  | 'start'
-  | 'end'
-  | 'top start'
-  | 'top center'
-  | 'top end'
-  | 'top stretch'
-  | 'bottom start'
-  | 'bottom center'
-  | 'bottom end'
-  | 'bottom stretch'
-  | 'start top'
-  | 'start center'
-  | 'start bottom'
-  | 'start stretch'
-  | 'end top'
-  | 'end center'
-  | 'end bottom'
-  | 'end stretch'
-  | 'center start'
-  | 'center end'
-  | 'offscreen'
-
-export type PositionMountNode = Element | (() => Element)
-
-export type PositionConstraint =
-  | PositionMountNode
-  | 'window'
-  | 'scroll-parent'
-  | 'parent'
-  | 'none'
+export type PlacementValueArray = [PlacementValues, PlacementValues]
 
 export type ElementPosition = {
-  placement?: PositionPlacement
+  placement?: PlacementPropValues
   style: {
     top?: 0
     left?: '-9999em' | 0
@@ -134,13 +122,21 @@ export type ElementPosition = {
   }
 }
 
-export type PosElement =
+export type PositionElement =
   | Node
   | Window
   | React.ReactElement
   | React.Component
   | ((...args: any[]) => Node | Window | null | undefined)
   | null
+
+export type Offset<Type extends number | string = number> = {
+  top: Type
+  left: Type
+}
+
+export type Size = Pick<RectType, 'width' | 'height'>
+export type Overflow = Pick<RectType, 'top' | 'bottom' | 'left' | 'right'>
 
 export default PositionPropTypes
 export {

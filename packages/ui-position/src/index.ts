@@ -27,7 +27,7 @@ export { calculateElementPosition } from './calculateElementPosition'
 export { executeMirrorFunction } from './executeMirrorFunction'
 export { PositionPropTypes } from './PositionPropTypes'
 export type {
-  PositionPlacement,
+  PlacementPropValues,
   PositionMountNode,
   PositionConstraint
 } from './PositionPropTypes'

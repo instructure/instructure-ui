@@ -35,7 +35,7 @@ import {
 import {
   PositionConstraint,
   PositionMountNode,
-  PositionPlacement,
+  PlacementPropValues,
   PositionPropTypes
 } from '@instructure/ui-position'
 import {
@@ -61,7 +61,7 @@ type Props = {
   label?: string
   disabled?: boolean
   trigger?: React.ReactNode
-  placement?: PositionPlacement
+  placement?: PlacementPropValues
   defaultShow?: boolean
   show?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultShow')
   onToggle?: (...args: any[]) => any
