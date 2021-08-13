@@ -88,7 +88,7 @@ export type PlacementPropValues = typeof placementPropValues[number]
 /**
  * An element or a function returning an element to use as the mount node
  */
-export type PositionMountNode = Element | (() => Element)
+export type PositionMountNode = Element | (() => Element | null)
 
 /**
  * The parent in which to constrain a placement

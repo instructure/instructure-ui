@@ -56,7 +56,7 @@ type OwnProps = {
    * An element or a function returning an element to use as the mount node
    * for the `<Portal />` (defaults to `document.body`)
    */
-  mountNode?: Element | (() => Element) | null
+  mountNode?: Element | (() => Element | null) | null
 
   /**
    * Insert the element at the 'top' of the mountNode or at the 'bottom'
@@ -225,7 +225,7 @@ class Portal extends Component<Props, State> {
   }
 
   findMountNode(props: Props) {
-    let mountNode: Element | undefined
+    let mountNode: Element | undefined | null
 
     if (typeof props.mountNode === 'function') {
       mountNode = props.mountNode()

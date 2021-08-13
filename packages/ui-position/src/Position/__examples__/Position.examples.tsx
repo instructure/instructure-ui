@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
+import { Props } from '../types'
 
 export default {
   propValues: {
@@ -50,8 +51,7 @@ export default {
       'start stretch'
     ]
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getComponentProps: (props) => {
+  getComponentProps: (props: Props) => {
     const targetSize = '3px'
     const contentSize = '48px'
     const xStretch =
@@ -90,10 +90,8 @@ export default {
         xStretch || yStretch ? (
           <div
             style={{
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
-              width: xStretch ? null : contentSize,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
-              height: xStretch ? contentSize : null,
+              width: xStretch ? undefined : contentSize,
+              height: xStretch ? contentSize : undefined,
               border: '0.0625rem solid #ccc',
               textAlign: 'center',
               background: '#eee'
@@ -116,8 +114,7 @@ export default {
         )
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getExampleProps: (props) => {
+  getExampleProps: (props: Props) => {
     const xStretch =
       props.placement == 'top stretch' || props.placement === 'bottom stretch'
     const yStretch =

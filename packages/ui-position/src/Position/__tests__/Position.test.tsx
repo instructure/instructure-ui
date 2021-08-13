@@ -28,13 +28,14 @@ import { within } from '@instructure/ui-utils'
 
 import { Position } from '../index'
 import { PositionLocator } from '../PositionLocator'
+import { PlacementPropValues } from '../../PositionPropTypes'
 
 describe('<Position />', async () => {
   const parentDefaults = {
-    parentWidth: 500,
-    parentHeight: 150,
-    parentPadding: 100,
-    paddingOverflow: 'auto'
+    width: 500,
+    height: 150,
+    padding: 100,
+    overflow: 'auto'
   }
 
   beforeEach(async () => {
@@ -44,7 +45,6 @@ describe('<Position />', async () => {
   it('should render', async () => {
     await mount(
       <div style={{ padding: '50px' }}>
-        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position constrain="window" renderTarget={<button>Target</button>}>
             <div id="content">
@@ -66,7 +66,6 @@ describe('<Position />', async () => {
   it('should absolutely position content', async () => {
     await mount(
       <div style={{ padding: '50px' }}>
-        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position constrain="window" renderTarget={<button>Target</button>}>
             <div id="content">
@@ -88,7 +87,6 @@ describe('<Position />', async () => {
     const onPositionChanged = stub()
     await mount(
       <div style={{ padding: '50px' }}>
-        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="end"
@@ -123,7 +121,6 @@ describe('<Position />', async () => {
     const onPositionChanged = stub()
     await mount(
       <div style={{ padding: '50px' }}>
-        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="top stretch"
@@ -162,7 +159,6 @@ describe('<Position />', async () => {
     const onPositionChanged = stub()
     await mount(
       <div style={{ padding: '50px' }}>
-        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="bottom"
@@ -197,7 +193,6 @@ describe('<Position />', async () => {
     const onPositionChanged = stub()
     await mount(
       <div style={{ padding: '50px' }}>
-        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="start"
@@ -232,7 +227,6 @@ describe('<Position />', async () => {
     const onPositionChanged = stub()
     await mount(
       <div style={{ padding: '50px' }}>
-        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="top"
@@ -265,7 +259,6 @@ describe('<Position />', async () => {
     const onPositionChanged = stub()
     await mount(
       <div style={{ padding: '50px' }}>
-        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="end"
@@ -303,7 +296,6 @@ describe('<Position />', async () => {
     const onPositionChanged = stub()
     await mount(
       <div style={{ padding: '50px' }}>
-        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="bottom"
@@ -338,8 +330,11 @@ describe('<Position />', async () => {
   })
 
   describe('with offset props', () => {
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
-    function assertOffset(placement, offset, assertion) {
+    function assertOffset(
+      placement: PlacementPropValues,
+      offset: number | string,
+      assertion: (newContentRect: DOMRect, top: number, left: number) => void
+    ) {
       it(`should render offset for ${placement}`, async () => {
         const onPositionChanged = stub()
 
@@ -378,25 +373,21 @@ describe('<Position />', async () => {
       })
     }
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'contentRect' implicitly has an 'any' ty... Remove this comment to see the full error message
     assertOffset('top', 10, (contentRect, top, left) => {
       expect(within(contentRect.top, top - 10, 1)).to.be.true()
       expect(within(contentRect.left, left - 10, 1)).to.be.true()
     })
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'contentRect' implicitly has an 'any' ty... Remove this comment to see the full error message
     assertOffset('start', '10px', (contentRect, top, left) => {
       expect(within(contentRect.top, top - 10, 1)).to.be.true()
       expect(within(contentRect.left, left - 10, 1)).to.be.true()
     })
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'contentRect' implicitly has an 'any' ty... Remove this comment to see the full error message
     assertOffset('end', 10, (contentRect, top, left) => {
       expect(within(contentRect.top, top - 10, 1)).to.be.true()
       expect(within(contentRect.left, left + 10, 1)).to.be.true()
     })
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'contentRect' implicitly has an 'any' ty... Remove this comment to see the full error message
     assertOffset('bottom', 10, (contentRect, top, left) => {
       expect(within(contentRect.top, top + 10, 1)).to.be.true()
       expect(within(contentRect.left, left - 10, 1)).to.be.true()
@@ -421,8 +412,7 @@ describe('<Position />', async () => {
             <Position
               placement="top"
               constrain="scroll-parent"
-              // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-              mountNode={(el) => document.getElementById('mountNode')}
+              mountNode={() => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
             >
@@ -467,8 +457,7 @@ describe('<Position />', async () => {
             <Position
               placement="bottom"
               constrain="scroll-parent"
-              // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-              mountNode={(el) => document.getElementById('mountNode')}
+              mountNode={() => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
             >
@@ -513,8 +502,7 @@ describe('<Position />', async () => {
             <Position
               placement="start"
               constrain="scroll-parent"
-              // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-              mountNode={(el) => document.getElementById('mountNode')}
+              mountNode={() => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
             >
@@ -559,8 +547,7 @@ describe('<Position />', async () => {
             <Position
               placement="end"
               constrain="scroll-parent"
-              // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-              mountNode={(el) => document.getElementById('mountNode')}
+              mountNode={() => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
             >
@@ -632,8 +619,7 @@ describe('<Position />', async () => {
             <Position
               placement="bottom"
               constrain="scroll-parent"
-              // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-              mountNode={(el) => document.getElementById('mountNode')}
+              mountNode={() => document.getElementById('mountNode')}
               renderTarget={<button>Target</button>}
             >
               <div id="content">
