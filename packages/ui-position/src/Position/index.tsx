@@ -89,7 +89,7 @@ class Position extends Component<Props, State> {
     renderTarget: undefined,
     target: undefined,
     placement: 'bottom center',
-    mountNode: undefined,
+    mountNode: null,
     insertAt: 'bottom',
     constrain: 'window',
     offsetX: 0,
