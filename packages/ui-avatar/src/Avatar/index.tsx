@@ -92,7 +92,7 @@ type Props = {
   /**
    * Provides a reference to the underlying html element
    */
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: HTMLElement | null) => void
 }
 
 /**
