@@ -162,14 +162,12 @@ class Options extends Component<Props> {
   }
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Options.propTypes),
       Options
     )
 
     const { as, role, elementRef, renderLabel, styles } = this.props
-
     return (
       <div css={styles.options} role="presentation">
         {renderLabel && this.renderLabel()}
@@ -183,7 +181,8 @@ class Options extends Component<Props> {
           margin="none"
           padding="none"
           background="primary"
-          aria-labelledby={renderLabel && this._labelId}
+          // TODO renderLabel is returned is renderLabel is a function, this is likely a bug
+          aria-labelledby={(renderLabel as string) && this._labelId}
         >
           {this.renderChildren()}
         </View>

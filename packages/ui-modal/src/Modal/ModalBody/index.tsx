@@ -106,7 +106,6 @@ class ModalBody extends Component<Props> {
       ...rest
     } = this.props
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
       omitProps(rest, ModalBody.propTypes),
       ModalBody
@@ -117,13 +116,13 @@ class ModalBody extends Component<Props> {
       <View
         {...passthroughProps}
         display="block"
-        width={isFit ? '100%' : null}
-        height={isFit ? '100%' : null}
+        width={isFit ? '100%' : undefined}
+        height={isFit ? '100%' : undefined}
         elementRef={elementRef}
         as={as}
         css={this.props.styles.modalBody}
         padding={padding}
-        tabIndex="-1" // prevent FF from focusing view when scrollable
+        tabIndex={-1} // prevent FF from focusing view when scrollable
       >
         {children}
       </View>

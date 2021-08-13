@@ -167,7 +167,6 @@ class Tag extends Component<Props> {
       styles
     } = this.props
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Tag.propTypes),
       Tag
@@ -185,7 +184,7 @@ class Tag extends Component<Props> {
         type={onClick ? 'button' : null}
         onClick={onClick ? this.handleClick : null}
         disabled={disabled || readOnly}
-        display={null}
+        display={undefined}
         title={title || (typeof text === 'string' ? text : null)}
       >
         <span css={styles.text}>{text}</span>

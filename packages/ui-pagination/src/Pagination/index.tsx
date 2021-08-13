@@ -345,7 +345,6 @@ class Pagination extends Component<Props> {
       (p) => p && p.props && p.props.current
     )
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Pagination.propTypes),
       Pagination
