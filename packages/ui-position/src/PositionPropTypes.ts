@@ -28,44 +28,35 @@ import { element } from '@instructure/ui-prop-types'
 import { RectType } from '@instructure/ui-dom-utils'
 import React from 'react'
 
-const placementPropValues = [
-  'top',
-  'end',
-  'bottom',
-  'start',
-  'top start',
-  'start top',
-  'start center',
-  'start bottom',
-  'bottom start',
-  'bottom center',
-  'bottom end',
-  'end bottom',
-  'end center',
-  'end top',
-  'top end',
-  'top center',
-  'center end',
-  'center start',
-  'top stretch',
-  'bottom stretch',
-  'end stretch',
-  'start stretch',
-  'offscreen'
-] as const
-
-const constraintPropValues = [
-  'window',
-  'scroll-parent',
-  'parent',
-  'none'
-] as const
-
 const PositionPropTypes = {
   /**
    * The placement of the content in relation to the trigger
    */
-  placement: PropTypes.oneOf(placementPropValues),
+  placement: PropTypes.oneOf([
+    'top',
+    'end',
+    'bottom',
+    'start',
+    'top start',
+    'start top',
+    'start center',
+    'start bottom',
+    'bottom start',
+    'bottom center',
+    'bottom end',
+    'end bottom',
+    'end center',
+    'end top',
+    'top end',
+    'top center',
+    'center end',
+    'center start',
+    'top stretch',
+    'bottom stretch',
+    'end stretch',
+    'start stretch',
+    'offscreen'
+  ]),
   /**
    * An element or a function returning an element to use as the mount node
    */
@@ -76,14 +67,38 @@ const PositionPropTypes = {
   constrain: PropTypes.oneOfType([
     element,
     PropTypes.func,
-    PropTypes.oneOf(constraintPropValues)
+    PropTypes.oneOf(['window', 'scroll-parent', 'parent', 'none'])
   ])
 }
 
 /**
  * The placement of the content in relation to the trigger
  */
-export type PlacementPropValues = typeof placementPropValues[number]
+export type PlacementPropValues =
+  // TODO: merge with PropTypes once react-docgen can parse `typeof array[number]`
+  | 'top'
+  | 'end'
+  | 'bottom'
+  | 'start'
+  | 'top start'
+  | 'start top'
+  | 'start center'
+  | 'start bottom'
+  | 'bottom start'
+  | 'bottom center'
+  | 'bottom end'
+  | 'end bottom'
+  | 'end center'
+  | 'end top'
+  | 'top end'
+  | 'top center'
+  | 'center end'
+  | 'center start'
+  | 'top stretch'
+  | 'bottom stretch'
+  | 'end stretch'
+  | 'start stretch'
+  | 'offscreen'
 
 /**
  * An element or a function returning an element to use as the mount node
@@ -95,7 +110,11 @@ export type PositionMountNode = Element | (() => Element | null)
  */
 export type PositionConstraint =
   | PositionMountNode
-  | typeof constraintPropValues[number]
+  // TODO: merge with PropTypes once react-docgen can parse `typeof array[number]`
+  | 'window'
+  | 'scroll-parent'
+  | 'parent'
+  | 'none'
 
 export type PlacementValues =
   | 'top'
