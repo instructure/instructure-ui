@@ -29,7 +29,7 @@ import { testable } from '@instructure/ui-testable'
 import {
   PositionConstraint,
   PositionMountNode,
-  PositionPlacement,
+  PlacementPropValues,
   PositionPropTypes
 } from '@instructure/ui-position'
 
@@ -52,7 +52,7 @@ type Props = {
   color?: string
   isShowingTooltip?: boolean
   mountNode?: PositionMountNode
-  placement?: PositionPlacement
+  placement?: PlacementPropValues
   constrain?: PositionConstraint
 }
 

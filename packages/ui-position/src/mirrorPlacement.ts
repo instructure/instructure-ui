@@ -23,17 +23,16 @@
  */
 
 import {
-  PositionPermutations,
-  PositionPlacement,
-  PositionValues
+  PlacementValueArray,
+  PlacementPropValues,
+  PlacementValues
 } from './PositionPropTypes'
 
 type PlacementStringValues =
-  | PositionValues
-  | `${PositionValues} ${PositionValues}`
-type PlacementArrayValues = PositionPermutations
+  | PlacementValues
+  | `${PlacementValues} ${PlacementValues}`
 
-const mirror: Record<PositionValues, PositionValues> = {
+const mirror: Record<PlacementValues, PlacementValues> = {
   center: 'center',
   start: 'end',
   end: 'start',
@@ -44,13 +43,13 @@ const mirror: Record<PositionValues, PositionValues> = {
 }
 
 function mirrorPlacement<D extends string | undefined = undefined>(
-  placement: PlacementArrayValues,
+  placement: PlacementValueArray,
   delimiter?: D
 ): D extends string
   ? D extends ' '
-    ? PositionPlacement
+    ? PlacementPropValues
     : string
-  : PlacementArrayValues {
+  : PlacementValueArray {
   return executeMirrorFunction(
     placement,
     (first, second) => {
@@ -79,39 +78,39 @@ function mirrorPlacement<D extends string | undefined = undefined>(
  *  delimiter separated values
  */
 function mirrorHorizontalPlacement<D extends string | undefined = undefined>(
-  placement: PlacementArrayValues | PlacementStringValues,
+  placement: PlacementValueArray | PlacementStringValues,
   delimiter?: D
 ): D extends string
   ? D extends ' '
-    ? PositionPlacement
+    ? PlacementPropValues
     : string
-  : PlacementArrayValues {
+  : PlacementValueArray {
   return executeMirrorFunction(
     placement,
     (first, second) => {
       return [first, second].map((value) => {
         return value === 'start' || value === 'end' ? mirror[value] : value
-      }) as PlacementArrayValues
+      }) as PlacementValueArray
     },
     delimiter
   )
 }
 
 function executeMirrorFunction<D extends string | undefined = undefined>(
-  placement: PlacementArrayValues | PlacementStringValues,
+  placement: PlacementValueArray | PlacementStringValues,
   mirrorFunction: (
-    first: PositionValues,
-    second: PositionValues
-  ) => PlacementArrayValues,
+    first: PlacementValues,
+    second: PlacementValues
+  ) => PlacementValueArray,
   delimiter?: D
 ): D extends string
   ? D extends ' '
-    ? PositionPlacement
+    ? PlacementPropValues
     : string
-  : PlacementArrayValues {
+  : PlacementValueArray {
   const [first, second] = Array.isArray(placement)
-    ? (placement as PlacementArrayValues)
-    : ((placement as PlacementStringValues).split(' ') as PlacementArrayValues)
+    ? (placement as PlacementValueArray)
+    : ((placement as PlacementStringValues).split(' ') as PlacementValueArray)
   const result = mirrorFunction(first, second).filter((value) => value)
   return delimiter ? (result.join(delimiter) as any) : result
 }

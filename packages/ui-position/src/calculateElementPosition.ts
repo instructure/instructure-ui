@@ -37,23 +37,30 @@ import {
 import { mirrorPlacement } from './mirrorPlacement'
 
 import {
-  PositionPlacement,
-  PositionValues,
-  Size,
-  Offset,
+  PlacementPropValues,
+  PlacementValues,
   PositionConstraint,
   PositionMountNode,
   ElementPosition,
-  PosElement
+  PositionElement,
+  Size,
+  Overflow,
+  Offset
 } from './PositionPropTypes'
 
-type Placement = Exclude<PositionValues, 'offscreen'>
-type PositionPlacementWithoutOffscreen = Exclude<PositionPlacement, 'offscreen'>
-type PlacementPermutations = [Placement, Placement]
-type Overflow = Pick<RectType, 'top' | 'bottom' | 'left' | 'right'>
+type PlacementValuesWithoutOffscreen = Exclude<PlacementValues, 'offscreen'>
+
+type PlacementPropValuesWithoutOffscreen = Exclude<
+  PlacementPropValues,
+  'offscreen'
+>
+type PlacementValuesWithoutOffscreenArray = [
+  PlacementValuesWithoutOffscreen,
+  PlacementValuesWithoutOffscreen
+]
 
 type Options = {
-  placement?: PositionPlacement
+  placement?: PlacementPropValues
   offsetX?: string | number
   offsetY?: string | number
   constrain?: PositionConstraint
@@ -62,8 +69,8 @@ type Options = {
 }
 
 function calculateElementPosition(
-  element?: PosElement,
-  target?: PosElement,
+  element?: PositionElement,
+  target?: PositionElement,
   options: Options = {}
 ): ElementPosition {
   if (!element || options.placement === 'offscreen') {
@@ -98,7 +105,9 @@ class PositionedElement {
       | React.ReactElement
       | React.Component
       | ((...args: any[]) => Node | Window | null | undefined),
-    placement?: PositionPlacementWithoutOffscreen | PlacementPermutations,
+    placement?:
+      | PlacementPropValuesWithoutOffscreen
+      | PlacementValuesWithoutOffscreenArray,
     offset: Offset<string | number> = { top: 0, left: 0 }
   ) {
     this.node = findDOMNode(element)
@@ -117,7 +126,7 @@ class PositionedElement {
   }
 
   node?: Node | Window | null
-  placement: PlacementPermutations
+  placement: PlacementValuesWithoutOffscreenArray
   rect: RectType
   _offset: Offset<string | number>
 
@@ -160,11 +169,13 @@ class PositionedElement {
   }
 
   get mirroredPlacement() {
-    return mirrorPlacement(this.placement) as PlacementPermutations
+    return mirrorPlacement(
+      this.placement
+    ) as PlacementValuesWithoutOffscreenArray
   }
 
-  calculateOffset(placement: PlacementPermutations) {
-    const offsetMap: Record<Placement, string | 0> = {
+  calculateOffset(placement: PlacementValuesWithoutOffscreenArray) {
+    const offsetMap: Record<PlacementValuesWithoutOffscreen, string | 0> = {
       top: 0,
       start: 0,
       center: '50%',
@@ -268,7 +279,11 @@ class PositionedElement {
 }
 
 class PositionData {
-  constructor(element?: PosElement, target?: PosElement, options?: Options) {
+  constructor(
+    element?: PositionElement,
+    target?: PositionElement,
+    options?: Options
+  ) {
     this.options = options || {}
 
     const { container, constrain, placement, over } = this.options
@@ -372,7 +387,7 @@ class PositionData {
     }
   }
 
-  overflow(element: PosElement): Overflow {
+  overflow(element: PositionElement): Overflow {
     const parentWindow = ownerWindow(element)
     const elementBounds = getBoundingClientRect(element)
     const windowBounds = getBoundingClientRect(parentWindow)
@@ -436,7 +451,7 @@ class PositionData {
     }
   }
 
-  constrainTo(element?: PosElement) {
+  constrainTo(element?: PositionElement) {
     if (!element) return
 
     const overflow = this.overflow(element)
@@ -531,7 +546,7 @@ function addOffsets(offsets: Offset[]) {
 
 function parseOffset(
   offset: Offset<number | string>,
-  placement: PlacementPermutations
+  placement: PlacementValuesWithoutOffscreenArray
 ) {
   let { top, left } = offset
 
@@ -571,27 +586,27 @@ function offsetToPx(offset: Offset<string | number>, size: Size) {
   return { top, left } as Offset<number>
 }
 
-function sortPlacement(placement: PlacementPermutations) {
+function sortPlacement(placement: PlacementValuesWithoutOffscreenArray) {
   let [first, second] = placement
 
   if (first === 'center' || first === 'stretch') {
     ;[first, second] = [second, first]
   }
-  return [first, second] as PlacementPermutations
+  return [first, second] as PlacementValuesWithoutOffscreenArray
 }
 
-function parsePlacement(placement: PositionPlacement) {
-  let parsed = placement.split(' ') as PlacementPermutations
+function parsePlacement(placement: PlacementPropValues) {
+  let parsed = placement.split(' ') as PlacementValuesWithoutOffscreenArray
 
-  if ((parsed as Partial<PlacementPermutations>).length === 1) {
-    parsed = [placement as Placement, 'center']
+  if ((parsed as Partial<PlacementValuesWithoutOffscreenArray>).length === 1) {
+    parsed = [placement as PlacementValuesWithoutOffscreen, 'center']
   }
 
   return sortPlacement(parsed)
 }
 
-function formatPlacement(placement: PlacementPermutations) {
-  return placement.join(' ') as PositionPlacementWithoutOffscreen
+function formatPlacement(placement: PlacementValuesWithoutOffscreenArray) {
+  return placement.join(' ') as PlacementPropValuesWithoutOffscreen
 }
 
 export default calculateElementPosition

@@ -27,16 +27,13 @@ import React from 'react'
 import {
   PositionConstraint,
   PositionMountNode,
-  PositionPlacement,
+  PlacementPropValues,
   ElementPosition
 } from '../PositionPropTypes'
 
 import { WithStyleProps } from '@instructure/emotion'
 
 type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-
   /**
    * The node to use as the position target
    */
@@ -50,7 +47,7 @@ type Props = {
   /**
    * The placement of the content in relation to the target
    */
-  placement: PositionPlacement
+  placement: PlacementPropValues
 
   /**
    * An element or a function returning an element to use as the mount node

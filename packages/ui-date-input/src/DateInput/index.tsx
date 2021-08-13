@@ -42,7 +42,10 @@ import {
   Children as ChildrenPropTypes,
   controllable
 } from '@instructure/ui-prop-types'
-import { PositionPlacement, PositionPropTypes } from '@instructure/ui-position'
+import {
+  PlacementPropValues,
+  PositionPropTypes
+} from '@instructure/ui-position'
 import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
 
@@ -67,7 +70,7 @@ type Props = {
   width?: string
   inputRef?: (...args: any[]) => any
   messages?: FormMessage[]
-  placement?: PositionPlacement
+  placement?: PlacementPropValues
   isShowingCalendar?: boolean
   onRequestValidateDate?: (...args: any[]) => any
   onRequestShowCalendar?: (...args: any[]) => any

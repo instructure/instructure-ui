@@ -51,7 +51,7 @@ import generateComponentTheme from './theme'
 import { Props, State } from './types'
 
 import { calculateElementPosition } from '../calculateElementPosition'
-import { PosElement, PositionPropTypes } from '../PositionPropTypes'
+import { PositionElement, PositionPropTypes } from '../PositionPropTypes'
 
 /**
 ---
@@ -124,8 +124,8 @@ class Position extends Component<Props, State> {
   _id: string
   _timeouts: NodeJS.Timeout[] = []
   _listener: PositionChangeListenerType | null = null
-  _content?: PosElement
-  _target?: PosElement
+  _content?: PositionElement
+  _target?: PositionElement
 
   shouldComponentUpdate(nextProps: Props, nextState: State, nextContext: any) {
     return (
@@ -271,11 +271,12 @@ class Position extends Component<Props, State> {
 
     if (content) {
       content = safeCloneElement(content, {
-        ref: (el: PosElement) => {
+        ref: (el: PositionElement) => {
           this._content = el
         },
         style: {
           boxSizing: 'border-box',
+          // @ts-expect-error TODO: type withStyle props
           zIndex: this.props.styles.zIndex,
           ...content.props.style,
           ...this.state.style
@@ -305,7 +306,7 @@ class Position extends Component<Props, State> {
     if (target) {
       return safeCloneElement(target, {
         ref: (el) => {
-          this._target = el as PosElement
+          this._target = el as PositionElement
         },
         [Position.targetLocatorAttribute]: this._id
       })

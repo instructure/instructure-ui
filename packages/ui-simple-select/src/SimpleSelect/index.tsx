@@ -30,7 +30,7 @@ import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
 import {
   PositionConstraint,
   PositionMountNode,
-  PositionPlacement,
+  PlacementPropValues,
   PositionPropTypes
 } from '@instructure/ui-position'
 import { testable } from '@instructure/ui-testable'
@@ -61,7 +61,7 @@ type Props = {
   optionsMaxWidth?: string
   visibleOptionsCount?: number
   messages?: FormMessage[]
-  placement?: PositionPlacement
+  placement?: PlacementPropValues
   constrain?: PositionConstraint
   mountNode?: PositionMountNode
   onChange?: (...args: any[]) => any

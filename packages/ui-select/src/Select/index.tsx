@@ -43,7 +43,7 @@ import {
 import {
   PositionConstraint,
   PositionMountNode,
-  PositionPlacement,
+  PlacementPropValues,
   PositionPropTypes
 } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
@@ -83,7 +83,7 @@ type Props = {
   optionsMaxWidth?: string
   visibleOptionsCount?: number
   messages?: FormMessage[]
-  placement?: PositionPlacement
+  placement?: PlacementPropValues
   constrain?: PositionConstraint
   mountNode?: PositionMountNode
   onFocus?: (...args: any[]) => any
