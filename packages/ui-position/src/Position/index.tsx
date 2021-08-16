@@ -39,7 +39,7 @@ import {
 } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
 import { shallowEqual, deepEqual } from '@instructure/ui-utils'
-import { debounce } from '@instructure/debounce'
+import { debounce, Debounced } from '@instructure/debounce'
 import { testable } from '@instructure/ui-testable'
 
 import { Portal } from '@instructure/ui-portal'
@@ -172,8 +172,7 @@ class Position extends Component<Props, State> {
   }
 
   componentWillUnmount() {
-    // @ts-expect-error TODO: figure out if this is valid
-    this.position.cancel()
+    ;(this.position as Debounced).cancel()
     this.stopTracking()
     this._timeouts.forEach((timeout) => clearTimeout(timeout))
 

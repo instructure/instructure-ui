@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { debounce } from './debounce'
+import { debounce, Debounced } from './debounce'
 export default debounce
 export { debounce }
+export type { Debounced }
