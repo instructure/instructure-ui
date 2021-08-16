@@ -33,16 +33,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  checked?: boolean
-  focused?: boolean
-  hovered?: boolean
-  size?: 'small' | 'medium' | 'large'
-  indeterminate?: boolean
-}
+import { CheckboxFacadeProps } from './types'
 
 /**
 ---
@@ -50,7 +41,7 @@ parent: Checkbox
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class CheckboxFacade extends Component<Props> {
+class CheckboxFacade extends Component<CheckboxFacadeProps> {
   static readonly componentId = 'CheckboxFacade'
 
   static propTypes = {

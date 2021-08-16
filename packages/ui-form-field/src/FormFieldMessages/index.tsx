@@ -30,17 +30,12 @@ import { omitProps } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import { FormPropTypes, FormMessage } from '../FormPropTypes'
+import { FormPropTypes } from '../FormPropTypes'
 import { FormFieldMessage } from '../FormFieldMessage'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  messages?: FormMessage[]
-}
+import { FormFieldMessagesProps } from './types'
 
 /**
 ---
@@ -61,7 +56,7 @@ example: true
 ```
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class FormFieldMessages extends Component<Props> {
+class FormFieldMessages extends Component<FormFieldMessagesProps> {
   static readonly componentId = 'FormFieldMessages'
 
   static propTypes = {

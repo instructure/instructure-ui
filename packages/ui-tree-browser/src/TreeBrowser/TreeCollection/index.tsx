@@ -38,36 +38,7 @@ import { TreeNode } from '../TreeNode'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  id?: string | number
-  name?: string
-  descriptor?: string
-  items?: any[]
-  collections?: any[]
-  expanded?: boolean
-  selection?: string
-  size?: 'small' | 'medium' | 'large'
-  variant?: 'folderTree' | 'indent'
-  collectionIcon?: React.ReactNode | ((...args: any[]) => any)
-  collectionIconExpanded?: React.ReactNode | ((...args: any[]) => any)
-  itemIcon?: React.ReactNode | ((...args: any[]) => any)
-  getItemProps?: (...args: any[]) => any
-  getCollectionProps?: (...args: any[]) => any
-  onItemClick?: (...args: any[]) => any
-  onCollectionClick?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  numChildren?: number
-  level?: number
-  position?: number
-  renderBeforeItems?: any // TODO: Children.oneOf([TreeNode])
-  renderAfterItems?: any // TODO: Children.oneOf([TreeNode])
-  containerRef?: (...args: any[]) => any
-  isCollectionFlattened?: boolean
-  renderContent?: (...args: any[]) => any
-}
+import { TreeBrowserCollectionProps } from './types'
 
 /**
 ---
@@ -78,7 +49,7 @@ id: TreeBrowser.Collection
 
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class TreeCollection extends Component<Props> {
+class TreeCollection extends Component<TreeBrowserCollectionProps> {
   static readonly componentId = 'TreeBrowser.Collection'
 
   static propTypes = {

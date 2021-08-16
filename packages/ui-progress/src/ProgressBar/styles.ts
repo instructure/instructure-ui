@@ -23,6 +23,7 @@
  */
 
 import { ProgressBarTheme } from '@instructure/shared-types'
+import { ProgressBarProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,10 @@ import { ProgressBarTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: ProgressBarTheme, props) => {
+const generateStyle = (
+  componentTheme: ProgressBarTheme,
+  props: ProgressBarProps
+) => {
   const { valueNow, valueMax, size, color, meterColor } = props
 
   const meterColorClassName =
@@ -89,6 +92,7 @@ const generateStyle = (componentTheme: ProgressBarTheme, props) => {
     'primary-inverse': {
       brand: { background: componentTheme.meterColorBrandInverse },
       info: { background: componentTheme.meterColorSuccessInverse },
+      success: {},
       danger: { background: componentTheme.meterColorDangerInverse },
       warning: { background: componentTheme.meterColorWarningInverse },
       alert: { background: componentTheme.meterColorAlertInverse }
@@ -111,8 +115,7 @@ const generateStyle = (componentTheme: ProgressBarTheme, props) => {
       position: 'relative',
       flex: 1,
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...colorVariants[color].trackLayout
+      ...colorVariants[color!].trackLayout
     },
 
     trackBorder: {
@@ -127,8 +130,7 @@ const generateStyle = (componentTheme: ProgressBarTheme, props) => {
       borderBottomWidth: componentTheme.trackBottomBorderWidth,
       borderBottomStyle: 'solid',
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...colorVariants[color].trackBorder
+      ...colorVariants[color!].trackBorder
     },
 
     track: {
@@ -142,25 +144,22 @@ const generateStyle = (componentTheme: ProgressBarTheme, props) => {
         width: '100%',
         border: 'none',
 
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        ...sizeVariants[size].track,
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        ...colorVariants[color].track,
+        ...sizeVariants[size!].track,
 
         '&::-webkit-progress-bar': { background: 'transparent' },
 
         '&::-webkit-progress-value': {
-          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-          ...trackBackgroundVariants[color][meterColorClassName]
+          ...(meterColorClassName &&
+            trackBackgroundVariants[color!][meterColorClassName])
         },
         '&::-moz-progress-bar': {
-          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-          ...trackBackgroundVariants[color][meterColorClassName]
+          ...(meterColorClassName &&
+            trackBackgroundVariants[color!][meterColorClassName])
         },
         '&::-ms-fill': {
           border: 'none',
-          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-          ...trackBackgroundVariants[color][meterColorClassName]
+          ...(meterColorClassName &&
+            trackBackgroundVariants[color!][meterColorClassName])
         }
       }
     },
@@ -172,8 +171,7 @@ const generateStyle = (componentTheme: ProgressBarTheme, props) => {
       paddingInlineStart: componentTheme.valuePadding,
       flex: '0 0 5.625rem',
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].value
+      ...sizeVariants[size!].value
     }
   }
 }

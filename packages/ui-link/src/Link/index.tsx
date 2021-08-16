@@ -36,36 +36,13 @@ import {
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { logWarn as warn } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  href?: string
-  color?: 'link' | 'link-inverse'
-  elementRef?: (...args: any[]) => any
-  as?: AsElementType
-  interaction?: 'enabled' | 'disabled'
-  margin?: Spacing
-  renderIcon?: ((...args: any[]) => any) | React.ReactNode
-  iconPlacement?: 'start' | 'end'
-  display?: 'auto' | 'block' | 'inline-block' | 'flex' | 'inline-flex'
-  isWithinText?: boolean
-  onClick?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { LinkProps, LinkStyleProps } from './types'
 
 /**
 ---
@@ -74,7 +51,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Link extends Component<Props> {
+class Link extends Component<LinkProps> {
   static readonly componentId = 'Link'
 
   static propTypes = {
@@ -180,7 +157,7 @@ class Link extends Component<Props> {
     this.props.makeStyles(this.makeStyleProps())
   }
 
-  makeStyleProps = () => {
+  makeStyleProps = (): LinkStyleProps => {
     return {
       containsTruncateText: this.containsTruncateText,
       hasVisibleChildren: this.hasVisibleChildren

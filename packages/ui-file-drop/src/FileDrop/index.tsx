@@ -25,11 +25,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
-import {
-  FormPropTypes,
-  FormFieldMessages,
-  FormMessage
-} from '@instructure/ui-form-field'
+import { FormPropTypes, FormFieldMessages } from '@instructure/ui-form-field'
 import { View } from '@instructure/ui-view'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
@@ -41,17 +37,15 @@ import {
 import { isEdge } from '@instructure/ui-utils'
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { FileDropProps, FileDropState, FileDropStyleProps } from './types'
+
 function keyEventIsClickButton(e: any) {
   return e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter
 }
+
 // Used try-catch due to missing document/navigator references in Jenkins
 function isBrowserMS() {
   let result = false
@@ -61,37 +55,8 @@ function isBrowserMS() {
   } catch (e) {} // eslint-disable-line no-empty
   return result
 }
+
 const IS_MS = isBrowserMS()
-
-type Props = {
-  id?: string
-  renderLabel: ((...args: any[]) => any) | React.ReactNode
-  accept?: string | string[]
-  messages?: FormMessage[]
-  onClick?: (...args: any[]) => any
-  onDrop?: (...args: any[]) => any
-  onDropAccepted?: (...args: any[]) => any
-  onDropRejected?: (...args: any[]) => any
-  onDragEnter?: (...args: any[]) => any
-  onDragOver?: (...args: any[]) => any
-  onDragLeave?: (...args: any[]) => any
-  shouldEnablePreview?: boolean
-  shouldAllowMultiple?: boolean
-  shouldAllowRepeats?: boolean
-  maxSize?: number
-  minSize?: number
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  display?: 'block' | 'inline-block'
-  height?: string | number
-  width?: string | number
-  maxWidth?: string | number
-  minWidth?: string | number
-  margin?: Spacing
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
-
-type State = any
 
 /**
 ---
@@ -100,7 +65,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class FileDrop extends Component<Props, State> {
+class FileDrop extends Component<FileDropProps, FileDropState> {
   static readonly componentId = 'FileDrop'
 
   static propTypes = {
@@ -212,6 +177,7 @@ class FileDrop extends Component<Props, State> {
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object
   }
+
   static defaultProps = {
     // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
     onClick: function (e: any) {},
@@ -244,7 +210,7 @@ class FileDrop extends Component<Props, State> {
     maxWidth: undefined,
     margin: undefined
   }
-  constructor(props: Props) {
+  constructor(props: FileDropProps) {
     super(props)
     // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'null'.
     this.defaultId = uid('FileDrop')
@@ -253,11 +219,10 @@ class FileDrop extends Component<Props, State> {
   componentDidMount() {
     ;(this.props as any).makeStyles(this.makeStyleProps())
   }
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps: Props, prevState: State, snapshot: any) {
+  componentDidUpdate() {
     ;(this.props as any).makeStyles(this.makeStyleProps())
   }
-  makeStyleProps = () => {
+  makeStyleProps = (): FileDropStyleProps => {
     return {
       functionallyDisabled: this.functionallyDisabled,
       visuallyDisabled: this.interaction === 'disabled',
@@ -265,7 +230,7 @@ class FileDrop extends Component<Props, State> {
       dragAccepted: this.state.isDragAccepted
     }
   }
-  state = {
+  state: FileDropState = {
     isDragAccepted: false,
     isDragRejected: false,
     isFocused: false,

@@ -23,6 +23,7 @@
  */
 
 import { PillTheme } from '@instructure/shared-types'
+import { PillProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,7 @@ import { PillTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: PillTheme, props) => {
+const generateStyle = (componentTheme: PillTheme, props: PillProps) => {
   const { color } = props
 
   const pillColorVariants = {
@@ -78,8 +78,7 @@ const generateStyle = (componentTheme: PillTheme, props) => {
       borderRadius: componentTheme.borderRadius,
       /* line-height does not account for top/bottom border width */
       lineHeight: `calc(${componentTheme.height} - (${componentTheme.borderWidth} * 2))`,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...pillColorVariants[color]
+      ...pillColorVariants[color!]
     },
     text: {
       label: 'pill__text',

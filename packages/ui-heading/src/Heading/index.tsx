@@ -28,36 +28,13 @@ import PropTypes from 'prop-types'
 import { View } from '@instructure/ui-view'
 import { childrenOrValue } from '@instructure/ui-prop-types'
 import { getElementType, passthroughProps } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { testable } from '@instructure/ui-testable'
 
-type HeadingLevel<U extends keyof JSX.IntrinsicElements> = U
-
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  border?: 'none' | 'top' | 'bottom'
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'primary-inverse'
-    | 'secondary-inverse'
-    | 'inherit'
-  level?: HeadingLevel<'h1' | 'h2' | 'h3' | 'h4' | 'h5'> | 'reset'
-  as?: AsElementType
-  margin?: Spacing
-  elementRef?: (...args: any[]) => any
-}
+import { HeadingProps } from './types'
 
 /**
 ---
@@ -66,7 +43,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Heading extends Component<Props> {
+class Heading extends Component<HeadingProps> {
   static readonly componentId = 'Heading'
 
   static propTypes = {

@@ -44,13 +44,7 @@ import { DrawerTray } from './DrawerTray'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
-
-type Props = {
-  minWidth?: string
-  onOverlayTrayChange?: (...args: any[]) => any
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { DrawerLayoutProps } from './types'
 
 /**
 ---
@@ -60,7 +54,7 @@ category: components
 @withStyle(generateStyle, null)
 @bidirectional()
 @testable()
-class DrawerLayout extends Component<Props & BidirectionalProps> {
+class DrawerLayout extends Component<DrawerLayoutProps & BidirectionalProps> {
   static readonly componentId = 'DrawerLayout'
 
   static locatorAttribute = 'data-drawer-layout'

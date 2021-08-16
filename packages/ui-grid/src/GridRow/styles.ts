@@ -23,6 +23,8 @@
  */
 
 import { GridTheme } from '@instructure/shared-types'
+import { GridBreakpoints } from '../GridTypes'
+import { GridRowProps } from './types'
 
 /**
  * ---
@@ -34,8 +36,7 @@ import { GridTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: GridTheme, props) => {
+const generateStyle = (componentTheme: GridTheme, props: GridRowProps) => {
   const {
     hAlign,
     vAlign,
@@ -78,20 +79,15 @@ const generateStyle = (componentTheme: GridTheme, props) => {
     return {
       display: 'flex',
       flexFlow: 'row nowrap',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...hAlignVariants[hAlign],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...vAlignVariants[vAlign],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...colSpacingVariants[colSpacing],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...rowSpacingVariants[rowSpacing],
+      ...(hAlign && hAlignVariants[hAlign]),
+      ...(vAlign && vAlignVariants[vAlign]),
+      ...(colSpacing && colSpacingVariants[colSpacing]),
+      ...(rowSpacing && rowSpacingVariants[rowSpacing]),
       ...(isLastRow && { marginBottom: 0 })
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
-  const getStartAtVariants = (breakpoint) =>
+  const getStartAtVariants = (breakpoint: GridBreakpoints) =>
     !!startAt && startAt === breakpoint ? { ...getGridRowStyle() } : {}
 
   return {

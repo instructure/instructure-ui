@@ -37,29 +37,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import CodeMirror from './codemirror'
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  label: string
-  language?:
-    | 'sh'
-    | 'js'
-    | 'json'
-    | 'javascript'
-    | 'jsx'
-    | 'shell'
-    | 'css'
-    | 'html'
-    | 'markdown'
-    | 'yaml'
-    | 'yml'
-    | 'bash'
-  readOnly?: boolean
-  onChange?: (...args: any[]) => any
-  options?: any
-  attachment?: 'bottom' | 'top'
-  value?: string
-}
+import { CodeEditorProps } from './types'
 
 /**
 ---
@@ -69,7 +47,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class CodeEditor extends Component<Props> {
+class CodeEditor extends Component<CodeEditorProps> {
   static readonly componentId = 'CodeEditor'
 
   static propTypes = {

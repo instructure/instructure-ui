@@ -27,25 +27,13 @@ import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  icon: React.ReactNode
-  label: React.ReactNode
-  as?: AsElementType
-  href?: string
-  onClick?: (...args: any[]) => any
-  selected?: boolean
-  minimized?: boolean
-}
+import { NavigationItemProps } from './types'
 
 /**
 ---
@@ -55,7 +43,7 @@ id: Navigation.Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class NavigationItem extends Component<Props> {
+class NavigationItem extends Component<NavigationItemProps> {
   static readonly componentId = 'Navigation.Item'
 
   static propTypes = {

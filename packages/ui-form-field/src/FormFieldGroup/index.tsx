@@ -28,29 +28,14 @@ import PropTypes from 'prop-types'
 
 import { Grid } from '@instructure/ui-grid'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { FormFieldLayout } from '../FormFieldLayout'
-import { FormPropTypes, FormMessage } from '../FormPropTypes'
+import { FormPropTypes } from '../FormPropTypes'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  description: React.ReactNode
-  as?: AsElementType
-  messages?: FormMessage[]
-  messagesId?: string
-  disabled?: boolean
-  layout?: 'stacked' | 'columns' | 'inline'
-  rowSpacing?: 'none' | 'small' | 'medium' | 'large'
-  colSpacing?: 'none' | 'small' | 'medium' | 'large'
-  vAlign?: 'top' | 'middle' | 'bottom'
-  startAt?: any // TODO: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
-}
+import { FormFieldGroupProps, FormFieldGroupStyleProps } from './types'
 
 /**
 ---
@@ -58,7 +43,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class FormFieldGroup extends Component<Props> {
+class FormFieldGroup extends Component<FormFieldGroupProps> {
   static readonly componentId = 'FormFieldGroup'
 
   static propTypes = {
@@ -115,13 +100,13 @@ class FormFieldGroup extends Component<Props> {
     this.props.makeStyles(this.makeStylesVariables)
   }
 
-  get makeStylesVariables() {
+  get makeStylesVariables(): FormFieldGroupStyleProps {
     return { invalid: this.invalid }
   }
 
   get invalid() {
     return (
-      this.props.messages &&
+      !!this.props.messages &&
       this.props.messages.findIndex((message) => {
         return message.type === 'error'
       }) >= 0

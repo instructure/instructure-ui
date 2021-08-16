@@ -23,6 +23,8 @@
  */
 
 import { FormFieldMessageTheme } from '@instructure/shared-types'
+import { FormFieldMessageProps } from './types'
+import { FormMessageType } from '../FormPropTypes'
 
 /**
  * ---
@@ -34,14 +36,17 @@ import { FormFieldMessageTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: FormFieldMessageTheme, props) => {
+const generateStyle = (
+  componentTheme: FormFieldMessageTheme,
+  props: FormFieldMessageProps
+) => {
   const { variant } = props
 
-  const variants = {
+  const variants: Record<FormMessageType, { color?: string }> = {
     hint: { color: componentTheme.colorHint },
     error: { color: componentTheme.colorError },
-    success: { color: componentTheme.colorSuccess }
+    success: { color: componentTheme.colorSuccess },
+    'screenreader-only': {}
   }
 
   return {
@@ -52,8 +57,7 @@ const generateStyle = (componentTheme: FormFieldMessageTheme, props) => {
       fontSize: componentTheme.fontSize,
       lineHeight: componentTheme.lineHeight,
       display: 'block',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variants[variant]
+      ...variants[variant!]
     }
   }
 }

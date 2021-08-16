@@ -42,14 +42,7 @@ import generateComponentTheme from './theme'
 import { ColHeader } from '../ColHeader'
 import { RowHeader } from '../RowHeader'
 import { Cell } from '../Cell'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  hover?: boolean
-  isStacked?: boolean
-  headers?: (React.ReactNode | ((...args: any[]) => any))[]
-}
+import { TableRowProps } from './types'
 
 /**
 ---
@@ -58,7 +51,7 @@ id: Table.Row
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Row extends Component<Props> {
+class Row extends Component<TableRowProps> {
   static readonly componentId = 'Table.Row'
 
   /* eslint-disable react/require-default-props */

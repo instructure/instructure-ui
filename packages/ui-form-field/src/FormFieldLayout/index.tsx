@@ -36,30 +36,15 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
-import { AsElementType } from '@instructure/shared-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { FormFieldLabel } from '../FormFieldLabel'
 import { FormFieldMessages } from '../FormFieldMessages'
-import { FormPropTypes, FormMessage } from '../FormPropTypes'
+import { FormPropTypes } from '../FormPropTypes'
 
 import generateStyle from './styles'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  label: React.ReactNode
-  id?: string
-  as?: AsElementType
-  messages?: FormMessage[]
-  messagesId?: string
-  inline?: boolean
-  layout?: 'stacked' | 'inline'
-  labelAlign?: 'start' | 'end'
-  width?: string
-  inputContainerRef?: (...args: any[]) => any
-}
+import { FormFieldLayoutProps } from './types'
 
 /**
 ---
@@ -67,7 +52,7 @@ parent: FormField
 ---
 **/
 @withStyle(generateStyle)
-class FormFieldLayout extends Component<Props> {
+class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static readonly componentId = 'FormFieldLayout'
 
   static propTypes = {

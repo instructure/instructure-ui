@@ -36,18 +36,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  id: string
-  stackedSortByLabel: string
-  width?: string | number
-  textAlign?: 'start' | 'center' | 'end'
-  sortDirection?: 'none' | 'ascending' | 'descending'
-  onRequestSort?: (...args: any[]) => any
-  scope?: 'row' | 'col' | 'rowgroup' | 'colgroup' | 'auto'
-}
+import { TableColHeaderProps } from './types'
 
 /**
 ---
@@ -56,7 +45,7 @@ id: Table.ColHeader
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class ColHeader extends Component<Props> {
+class ColHeader extends Component<TableColHeaderProps> {
   static readonly componentId = 'Table.ColHeader'
 
   /* eslint-disable react/require-default-props */

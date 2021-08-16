@@ -32,40 +32,10 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { GridColProps } from './types'
 
 // TODO: get numcols from theme config
 const COL_WIDTHS = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  colSpacing?: 'none' | 'small' | 'medium' | 'large'
-  rowSpacing?: 'none' | 'small' | 'medium' | 'large'
-  textAlign?: 'start' | 'end' | 'center' | 'inherit'
-  hAlign?: 'start' | 'center' | 'end' | 'space-around' | 'space-between'
-  vAlign?: 'top' | 'middle' | 'bottom'
-  startAt?: any // TODO: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
-  visualDebug?: boolean
-  width?:
-    | any
-    | {
-        small?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        medium?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        large?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        xLarge?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-      }
-  offset?:
-    | any
-    | {
-        small?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        medium?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        large?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        xLarge?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-      }
-  isLastRow?: boolean
-  isLastCol?: boolean
-  elementRef?: (...args: any[]) => any
-}
 
 /**
 ---
@@ -74,7 +44,7 @@ id: Grid.Col
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class GridCol extends Component<Props> {
+class GridCol extends Component<GridColProps> {
   static readonly componentId = 'Grid.Col'
 
   /* eslint-disable react/require-default-props */

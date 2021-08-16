@@ -28,11 +28,7 @@ import PropTypes from 'prop-types'
 
 import { ContextView } from '@instructure/ui-view'
 import { controllable } from '@instructure/ui-prop-types'
-import {
-  FormField,
-  FormMessage,
-  FormPropTypes
-} from '@instructure/ui-form-field'
+import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -41,27 +37,7 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  min: number
-  max: number
-  defaultValue?: number
-  value?: any // TODO: controllable(PropTypes.number)
-  onChange?: (...args: any[]) => any
-  messages?: FormMessage[]
-  size?: 'small' | 'medium' | 'large'
-  layout?: 'stacked' | 'inline'
-  id?: string
-  label: React.ReactNode
-  displayValue?: boolean
-  step?: number
-  formatValue?: (...args: any[]) => any
-  inline?: boolean
-  disabled?: boolean
-  readOnly?: boolean
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { RangeInputProps } from './types'
 
 /**
 ---
@@ -70,7 +46,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class RangeInput extends Component<Props> {
+class RangeInput extends Component<RangeInputProps> {
   static readonly componentId = 'RangeInput'
 
   static propTypes = {

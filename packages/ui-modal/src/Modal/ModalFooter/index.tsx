@@ -31,12 +31,7 @@ import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  variant?: 'default' | 'inverse'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { ModalFooterProps } from './types'
 
 /**
 ---
@@ -46,7 +41,7 @@ id: Modal.Footer
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ModalFooter extends Component<Props> {
+class ModalFooter extends Component<ModalFooterProps> {
   static readonly componentId = 'Modal.Footer'
 
   static propTypes = {

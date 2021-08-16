@@ -27,34 +27,11 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { omitProps } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { View } from '@instructure/ui-view'
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  as?: AsElementType
-  elementRef?: (...args: any[]) => any
-  margin?: Spacing
-  padding?: Spacing
-  align?: 'center' | 'start' | 'end' | 'stretch'
-  direction?: 'row' | 'column'
-  textAlign?: 'start' | 'center' | 'end'
-  overflowX?: 'auto' | 'hidden' | 'visible'
-  overflowY?: 'auto' | 'hidden' | 'visible'
-  shouldGrow?: boolean
-  shouldShrink?: boolean
-  size?: string
-  withVisualDebug?: boolean
-}
+import { FlexItemProps } from './types'
 
 /**
 ---
@@ -63,7 +40,7 @@ id: Flex.Item
 ---
 **/
 @withStyle(generateStyle)
-class Item extends Component<Props> {
+class Item extends Component<FlexItemProps> {
   static readonly componentId = 'Flex.Item'
 
   componentDidMount() {

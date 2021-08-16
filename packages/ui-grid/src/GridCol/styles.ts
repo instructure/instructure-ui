@@ -23,6 +23,8 @@
  */
 
 import { GridTheme } from '@instructure/shared-types'
+import { GridBreakpoints } from '../GridTypes'
+import { GridColProps } from './types'
 
 /**
  * ---
@@ -34,8 +36,7 @@ import { GridTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: GridTheme, props) => {
+const generateStyle = (componentTheme: GridTheme, props: GridColProps) => {
   const {
     vAlign,
     textAlign,
@@ -67,7 +68,8 @@ const generateStyle = (componentTheme: GridTheme, props) => {
       large: {
         paddingLeft: `calc(${componentTheme.spacingLarge} / 2)`,
         paddingRight: `calc(${componentTheme.spacingLarge} / 2)`
-      }
+      },
+      none: {}
     }
 
     const vAlignVariants = {
@@ -89,45 +91,47 @@ const generateStyle = (componentTheme: GridTheme, props) => {
       flexBasis: '0%',
       marginBottom: 0,
       boxSizing: 'border-box',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...colSpacingVariants[colSpacing],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...vAlignVariants[vAlign],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...textAlignVariants[textAlign]
+      ...(colSpacing && colSpacingVariants[colSpacing]),
+      ...(vAlign && vAlignVariants[vAlign]),
+      ...(textAlign && textAlignVariants[textAlign])
     }
   }
 
   const enabledBreakpoints = () => {
-    const breakpoints = ['small', 'medium', 'large', 'x-large', null]
-    return breakpoints.slice(breakpoints.indexOf(startAt))
+    const breakpoints: GridBreakpoints[] = [
+      'small',
+      'medium',
+      'large',
+      'x-large',
+      null
+    ]
+    return breakpoints.slice(breakpoints.indexOf(startAt!))
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
-  const breakpointIsEnabled = (breakpoint) => {
+  const breakpointIsEnabled = (breakpoint: GridBreakpoints) => {
     return enabledBreakpoints().includes(breakpoint)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
-  const getColSize = (breakpoint) => {
+  const getColSize = (breakpoint: GridBreakpoints) => {
     let { width } = props
 
     if (!width) return
 
     if (width && typeof width === 'object') {
+      // @ts-expect-error TODO: type when typing component
       width = width[breakpoint]
     }
 
     return width
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
-  const getColOffset = (breakpoint) => {
+  const getColOffset = (breakpoint: GridBreakpoints) => {
     let { offset } = props
 
     if (!offset) return
 
     if (offset && typeof offset === 'object') {
+      // @ts-expect-error TODO: type when typing component
       offset = offset[breakpoint]
     }
 
@@ -163,12 +167,10 @@ const generateStyle = (componentTheme: GridTheme, props) => {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
-  const getStartAtVariants = (breakpoint) =>
+  const getStartAtVariants = (breakpoint: GridBreakpoints) =>
     !!startAt && startAt === breakpoint ? { ...getStartGridColumnStyle() } : {}
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
-  const getGridColumnsForBreakpoint = (breakpoint) => {
+  const getGridColumnsForBreakpoint = (breakpoint: GridBreakpoints) => {
     const size = getColSize(breakpoint)
     const offset = getColOffset(breakpoint)
 
@@ -180,8 +182,7 @@ const generateStyle = (componentTheme: GridTheme, props) => {
       : {}
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
-  const getBreakpointStyles = (breakpoint) => ({
+  const getBreakpointStyles = (breakpoint: GridBreakpoints) => ({
     ...getStartAtVariants(breakpoint),
     ...getGridColumnsForBreakpoint(breakpoint)
   })
@@ -193,8 +194,7 @@ const generateStyle = (componentTheme: GridTheme, props) => {
       boxSizing: 'border-box',
       textAlign: 'inherit',
       minWidth: '0.0625rem',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...rowSpacingVariants[rowSpacing],
+      ...(rowSpacing && rowSpacingVariants[rowSpacing]),
       ...(isLastRow && isLastCol && { marginBottom: 0 }),
 
       ...getBreakpointStyles('small'),

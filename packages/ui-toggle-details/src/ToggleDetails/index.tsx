@@ -40,21 +40,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  variant?: 'default' | 'filled'
-  summary: React.ReactNode
-  expanded?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
-  defaultExpanded?: boolean
-  onToggle?: (...args: any[]) => any
-  icon?: (...args: any[]) => any
-  iconExpanded?: (...args: any[]) => any
-  iconPosition?: 'start' | 'end'
-  fluidWidth?: boolean
-  size?: 'small' | 'medium' | 'large'
-}
+import { ToggleDetailsProps, ToggleDetailsStyleProps } from './types'
 
 /**
 ---
@@ -63,7 +49,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ToggleDetails extends Component<Props> {
+class ToggleDetails extends Component<ToggleDetailsProps> {
   static readonly componentId = 'ToggleDetails'
 
   static propTypes = {
@@ -137,12 +123,12 @@ class ToggleDetails extends Component<Props> {
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles({ animate: false })
+    this.props.makeStyles({ animate: false } as ToggleDetailsStyleProps)
   }
 
   componentDidUpdate() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles({ animate: true })
+    this.props.makeStyles({ animate: true } as ToggleDetailsStyleProps)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.

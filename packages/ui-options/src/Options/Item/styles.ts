@@ -24,6 +24,7 @@
 
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 import { OptionsItemTheme } from '@instructure/shared-types'
+import { OptionsItemProps } from './types'
 
 /**
  * ---
@@ -35,8 +36,10 @@ import { OptionsItemTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: OptionsItemTheme, props) => {
+const generateStyle = (
+  componentTheme: OptionsItemTheme,
+  props: OptionsItemProps
+) => {
   const {
     variant,
     children,
@@ -74,8 +77,7 @@ const generateStyle = (componentTheme: OptionsItemTheme, props) => {
       position: 'relative',
       transition: 'background 200ms',
       userSelect: 'none',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variantVariants[variant],
+      ...variantVariants[variant!],
       ...(containsList && { cursor: 'default' }),
 
       // for nested items

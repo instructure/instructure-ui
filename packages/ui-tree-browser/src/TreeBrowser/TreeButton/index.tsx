@@ -33,28 +33,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  id?: string | number
-  name?: string
-  descriptor?: string
-  type?: string
-  size?: 'small' | 'medium' | 'large'
-  variant?: 'folderTree' | 'indent'
-  collectionIcon?: React.ReactNode | ((...args: any[]) => any)
-  collectionIconExpanded?: React.ReactNode | ((...args: any[]) => any)
-  itemIcon?: React.ReactNode | ((...args: any[]) => any)
-  thumbnail?: string
-  onClick?: (...args: any[]) => any
-  expanded?: boolean
-  selected?: boolean
-  focused?: boolean
-  level?: number
-  containerRef?: (...args: any[]) => any // TODO: function () {}
-  renderContent?: (...args: any[]) => any // TODO: function () {}
-}
+import { TreeBrowserButtonProps } from './types'
 
 /**
 ---
@@ -67,7 +46,7 @@ id: TreeBrowser.Button
 
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class TreeButton extends Component<Props> {
+class TreeButton extends Component<TreeBrowserButtonProps> {
   static readonly componentId = 'TreeBrowser.Button'
 
   static propTypes = {

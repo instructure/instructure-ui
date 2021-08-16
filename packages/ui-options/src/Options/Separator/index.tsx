@@ -27,18 +27,12 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { getElementType } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  as?: AsElementType
-}
+import { OptionsSeparatorProps } from './types'
 
 /**
 ---
@@ -48,7 +42,7 @@ id: Options.Separator
 @module Separator
 **/
 @withStyle(generateStyles, generateComponentTheme)
-class Separator extends Component<Props> {
+class Separator extends Component<OptionsSeparatorProps> {
   static readonly componentId = 'Options.Separator'
 
   static propTypes = {

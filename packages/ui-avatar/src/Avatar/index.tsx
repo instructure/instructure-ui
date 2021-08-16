@@ -29,71 +29,12 @@ import PropTypes from 'prop-types'
 import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { AsElementType } from '@instructure/shared-types'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  /**
-   * The name to display. It will be automatically converted to initials.
-   */
-  name: string
-  /**
-   * URL of the image to display as the background image
-   */
-  src?: string
-  /**
-   * Accessible label
-   */
-  alt?: string
-  size:
-    | 'auto'
-    | 'xx-small'
-    | 'x-small'
-    | 'small'
-    | 'medium'
-    | 'large'
-    | 'x-large'
-    | 'xx-large'
-  color:
-    | 'default' // = brand
-    | 'shamrock'
-    | 'barney'
-    | 'crimson'
-    | 'fire'
-    | 'licorice'
-    | 'ash'
-  shape: 'circle' | 'rectangle'
-  display: 'inline-block' | 'block'
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
-  margin?: Spacing
-  /**
-   * Callback fired when the avatar image has loaded
-   */
-  onImageLoaded: (event: SyntheticEvent) => void
-  /**
-   * The element type to render as
-   */
-  as?: AsElementType
-  /**
-   * Provides a reference to the underlying html element
-   */
-  elementRef?: (element: HTMLElement | null) => void
-}
+import { AvatarProps, AvatarState } from './types'
 
 /**
 ---
@@ -103,7 +44,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Avatar extends Component<Props> {
+class Avatar extends Component<AvatarProps, AvatarState> {
   static readonly componentId = 'Avatar'
 
   static propTypes = {

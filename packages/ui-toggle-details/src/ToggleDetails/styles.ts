@@ -24,6 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { ToggleDetailsTheme } from '@instructure/shared-types'
+import { ToggleDetailsProps, ToggleDetailsStyleProps } from './types'
 const contentAnimation = keyframes`
   to {
     opacity: 1;
@@ -41,10 +42,8 @@ const contentAnimation = keyframes`
  */
 const generateStyle = (
   componentTheme: ToggleDetailsTheme,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-  props,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'state' implicitly has an 'any'... Remove this comment to see the full error message
-  state
+  props: ToggleDetailsProps,
+  state: ToggleDetailsStyleProps
 ): any => {
   const { fluidWidth, iconPosition, size, variant } = props
   const { animate } = state
@@ -155,28 +154,23 @@ const generateStyle = (
       },
       textDecoration: 'none',
       ...fluidWidthStyles,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...fontSizeStyles[size]
+      ...fontSizeStyles[size!]
     },
     icon: {
       label: 'toggleDetails__icon',
       '& > svg': {
         display: 'block' /* fix vertical alignment of icon */
       },
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...iconPositionStyles[iconPosition],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...iconSizeStyles[size]
+      ...iconPositionStyles[iconPosition!],
+      ...iconSizeStyles[size!]
     },
     details: {
       label: 'toggleDetails__details',
       boxSizing: 'border-box',
       paddingTop: componentTheme.togglePadding,
       color: componentTheme.textColor,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...fontSizeStyles[size],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...indentDetailsStyles[size]
+      ...fontSizeStyles[size!],
+      ...indentDetailsStyles[size!]
     },
     content: animate
       ? {

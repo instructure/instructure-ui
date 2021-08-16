@@ -27,11 +27,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
-import {
-  FormField,
-  FormMessage,
-  FormPropTypes
-} from '@instructure/ui-form-field'
+import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import {
   addEventListener,
   isActiveElement,
@@ -45,32 +41,10 @@ import { uid } from '@instructure/uid'
 import { px } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
+
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  label: React.ReactNode
-  id?: string
-  size?: 'small' | 'medium' | 'large'
-  layout?: 'stacked' | 'inline'
-  autoGrow?: boolean
-  resize?: 'none' | 'both' | 'horizontal' | 'vertical'
-  width?: string
-  height?: string
-  maxHeight?: number | string
-  messages?: FormMessage[]
-  inline?: boolean
-  placeholder?: string
-  disabled?: boolean
-  readOnly?: boolean
-  required?: boolean
-  textareaRef?: (...args: any[]) => any
-  defaultValue?: string
-  value?: any // TODO: controllable(PropTypes.string)
-  onChange?: (...args: any[]) => any
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { TextAreaProps } from './types'
 
 /**
 ---
@@ -79,7 +53,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class TextArea extends Component<Props> {
+class TextArea extends Component<TextAreaProps> {
   static readonly componentId = 'TextArea'
 
   static propTypes = {

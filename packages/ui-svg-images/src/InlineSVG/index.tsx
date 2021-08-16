@@ -34,30 +34,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  src?: string
-  title?: string
-  description?: string
-  focusable?: boolean
-  width?: string | number
-  height?: string | number
-  inline?: boolean
-  color?:
-    | 'inherit'
-    | 'primary'
-    | 'secondary'
-    | 'primary-inverse'
-    | 'secondary-inverse'
-    | 'success'
-    | 'error'
-    | 'alert'
-    | 'warning'
-    | 'brand'
-    | 'auto'
-}
+import { InlineSVGProps } from './types'
 
 /**
 ---
@@ -66,7 +43,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class InlineSVG extends Component<Props> {
+class InlineSVG extends Component<InlineSVGProps> {
   static readonly componentId = 'InlineSVG'
 
   static propTypes = {

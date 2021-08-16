@@ -23,6 +23,7 @@
  */
 
 import { DrawerLayoutTrayTheme } from '@instructure/shared-types'
+import { DrawerLayoutTrayProps, DrawerLayoutTrayStyleProps } from './types'
 
 /**
  * ---
@@ -36,10 +37,8 @@ import { DrawerLayoutTrayTheme } from '@instructure/shared-types'
  */
 const generateStyle = (
   componentTheme: DrawerLayoutTrayTheme,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-  props,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'state' implicitly has an 'any'... Remove this comment to see the full error message
-  state
+  props: DrawerLayoutTrayProps,
+  state: DrawerLayoutTrayStyleProps
 ) => {
   const { border } = props
   const { placement } = state
@@ -55,7 +54,6 @@ const generateStyle = (
         borderColor: componentTheme.borderColor,
         borderStyle: componentTheme.borderStyle,
         boxSizing: 'border-box',
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         ...borderPlacementStyle[placement]
       }
     : {
@@ -76,7 +74,6 @@ const generateStyle = (
     ...borderStyles,
     top: 0,
     bottom: 0,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...placementStyleMap[placement]
   }
 

@@ -23,6 +23,7 @@
  */
 
 import { FileDropTheme } from '@instructure/shared-types'
+import { FileDropProps, FileDropStyleProps } from './types'
 
 /**
  * ---
@@ -36,10 +37,8 @@ import { FileDropTheme } from '@instructure/shared-types'
  */
 const generateStyle = (
   componentTheme: FileDropTheme,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-  props,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-  state
+  props: FileDropProps,
+  state: FileDropStyleProps
 ) => {
   const { height } = props
   const {

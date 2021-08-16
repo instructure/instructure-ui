@@ -23,6 +23,7 @@
  */
 
 import { CloseButtonTheme } from '@instructure/shared-types'
+import { CloseButtonProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,10 @@ import { CloseButtonTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: CloseButtonTheme, props, state) => {
+const generateStyle = (
+  componentTheme: CloseButtonTheme,
+  props: CloseButtonProps
+) => {
   const { placement, offset } = props
 
   const offsetValueMap = {
@@ -46,8 +49,7 @@ const generateStyle = (componentTheme: CloseButtonTheme, props, state) => {
   }
 
   const getOffsetStyle = () => {
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    const offsetValue = offsetValueMap[offset]
+    const offsetValue = offsetValueMap[offset!]
 
     return {
       ...(offsetValue !== 0 && {

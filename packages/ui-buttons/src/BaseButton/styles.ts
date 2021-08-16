@@ -23,6 +23,7 @@
  */
 
 import { BaseButtonTheme } from '@instructure/shared-types'
+import { BaseButtonProps, BaseButtonStyleProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,11 @@ import { BaseButtonTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: BaseButtonTheme, props, state) => {
+const generateStyle = (
+  componentTheme: BaseButtonTheme,
+  props: BaseButtonProps,
+  state: BaseButtonStyleProps
+) => {
   const {
     size,
     color,
@@ -49,7 +53,8 @@ const generateStyle = (componentTheme: BaseButtonTheme, props, state) => {
   const { isDisabled, hasOnlyIconVisible } = state
 
   const shapeVariants = {
-    circle: { borderRadius: '50%' }
+    circle: { borderRadius: '50%' },
+    rectangle: {}
   }
 
   const sizeVariants = {
@@ -288,10 +293,8 @@ const generateStyle = (componentTheme: BaseButtonTheme, props, state) => {
           'none' /* Ensures that button or link is always the event target */
       },
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      '&:active > [class$=-baseButton__content]': colorVariants[color].active,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      '&:hover > [class$=-baseButton__content]': colorVariants[color].hover
+      '&:active > [class$=-baseButton__content]': colorVariants[color!].active,
+      '&:hover > [class$=-baseButton__content]': colorVariants[color!].hover
     },
 
     content: {
@@ -316,12 +319,9 @@ const generateStyle = (componentTheme: BaseButtonTheme, props, state) => {
 
       '&:hover': { transform: componentTheme.hoverTransform },
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].content,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...colorVariants[color].default,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...shapeVariants[shape],
+      ...sizeVariants[size!].content,
+      ...colorVariants[color!].default,
+      ...shapeVariants[shape!],
 
       ...(isCondensed && {
         paddingLeft: 0,
@@ -342,8 +342,7 @@ const generateStyle = (componentTheme: BaseButtonTheme, props, state) => {
       label: 'baseButton__children',
       display: 'block',
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].children,
+      ...sizeVariants[size!].children,
 
       ...(isCondensed && {
         paddingTop: 0,
@@ -356,8 +355,7 @@ const generateStyle = (componentTheme: BaseButtonTheme, props, state) => {
       display: 'flex',
       alignItems: 'center',
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].iconSVG
+      ...sizeVariants[size!].iconSVG
     },
 
     childrenLayout: {

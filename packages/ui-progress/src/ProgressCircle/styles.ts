@@ -23,6 +23,7 @@
  */
 
 import { ProgressCircleTheme } from '@instructure/shared-types'
+import { ProgressCircleProps, ProgressCircleState } from './types'
 
 /**
  * ---
@@ -34,8 +35,11 @@ import { ProgressCircleTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
+const generateStyle = (
+  componentTheme: ProgressCircleTheme,
+  props: ProgressCircleProps,
+  state: ProgressCircleState
+) => {
   const { size, color, meterColor, valueNow, valueMax } = props
   const { shouldAnimateOnMount } = state
 
@@ -45,29 +49,26 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
       : meterColor
 
   const getCircumference = () => {
-    const camelSize = size === 'x-small' ? 'xSmall' : size
+    const camelSize = size === 'x-small' ? 'xSmall' : size!
     // get the circumference of the meter circle
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    return parseFloat(componentTheme[`${camelSize}Circumference`])
+    return parseFloat(componentTheme[`${camelSize}Circumference` as const])
   }
 
   const getRadii = () => {
-    const camelSize = size === 'x-small' ? 'xSmall' : size
+    const camelSize = size === 'x-small' ? 'xSmall' : size!
     return {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      radius: componentTheme[`${camelSize}Radius`],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      borderOffsetRadius: componentTheme[`${camelSize}BorderOffset`]
+      radius: componentTheme[`${camelSize}Radius` as const],
+      borderOffsetRadius: componentTheme[`${camelSize}BorderOffset` as const]
     }
   }
 
   const getDashOffset = () => {
     // send the stroke-dashoffset to the meter circle, checking
     // to make sure current value doesn't exceed max value
-    if (valueNow < valueMax) {
+    if (valueNow! < valueMax!) {
       const circumference = getCircumference()
       // figure out how much offset to give the stroke to show the % complete
-      return circumference - (valueNow / valueMax) * circumference
+      return circumference - (valueNow! / valueMax!) * circumference
     } else {
       return 0
     }
@@ -111,11 +112,11 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
         width: componentTheme.smallSize,
         height: componentTheme.smallSize
       },
-
       circle: {
         width: componentTheme.smallSize,
         height: componentTheme.smallSize
       },
+      value: {},
       border: {
         transformOrigin: `${componentTheme.smallTransform} ${componentTheme.smallTransform}`
       },
@@ -140,6 +141,7 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
         width: componentTheme.mediumSize,
         height: componentTheme.mediumSize
       },
+      value: {},
       border: {
         transformOrigin: `${componentTheme.mediumTransform} ${componentTheme.mediumTransform}`
       },
@@ -164,6 +166,7 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
         width: componentTheme.largeSize,
         height: componentTheme.largeSize
       },
+      value: {},
       border: {
         transformOrigin: `${componentTheme.largeTransform} ${componentTheme.largeTransform}`
       },
@@ -231,8 +234,7 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
       fontWeight: componentTheme.fontWeight,
       lineHeight: componentTheme.lineHeight,
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].progressCircle
+      ...sizeVariants[size!].progressCircle
     },
 
     center: {
@@ -248,8 +250,6 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
       width: '100%',
       borderRadius: '50%',
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].center,
       ...(shouldAnimateOnMount && {
         opacity: 0,
         transform: 'translate3d(0, 10%, 0)'
@@ -270,10 +270,8 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
       height: '100%',
       lineHeight: 1,
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].value,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...colorVariants[color].value
+      ...sizeVariants[size!].value,
+      ...colorVariants[color!].value
     },
 
     circle: {
@@ -284,8 +282,7 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
       top: 0,
       left: 0,
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].circle
+      ...sizeVariants[size!].circle
     },
 
     track: {
@@ -296,10 +293,8 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
       transitionDelay: '0.2s',
       transform: 'translate3d(0, 0, 0)',
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].track,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...colorVariants[color].track,
+      ...sizeVariants[size!].track,
+      ...colorVariants[color!].track,
       ...(shouldAnimateOnMount && {
         opacity: 0,
         transform: 'translate3d(0, 0, 0)'
@@ -313,10 +308,8 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
       transition: 'all 0.5s',
       transform: 'translate3d(0, 0, 0) scale(1)',
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].border,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...colorVariants[color].border,
+      ...sizeVariants[size!].border,
+      ...colorVariants[color!].border,
       ...(shouldAnimateOnMount && {
         opacity: 0,
         transform: 'translate3d(0, 0, 0) scale(0.75)'
@@ -329,10 +322,9 @@ const generateStyle = (componentTheme: ProgressCircleTheme, props, state) => {
       transition: 'stroke-dashoffset 1s',
       transform: 'translate3d(0, 0, 0)',
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].meter,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...meterColorVariants[color][getMeterColorClassName],
+      ...sizeVariants[size!].meter,
+      ...(getMeterColorClassName &&
+        meterColorVariants[color!][getMeterColorClassName]),
       ...(shouldAnimateOnMount && {
         opacity: 0
       })

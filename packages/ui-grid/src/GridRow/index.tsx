@@ -41,18 +41,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  rowSpacing?: 'none' | 'small' | 'medium' | 'large'
-  colSpacing?: 'none' | 'small' | 'medium' | 'large'
-  hAlign?: 'start' | 'center' | 'end' | 'space-around' | 'space-between'
-  vAlign?: 'top' | 'middle' | 'bottom'
-  startAt?: any // TODO: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
-  visualDebug?: boolean
-  isLastRow?: boolean
-}
+import { GridRowProps } from './types'
 
 /**
 ---
@@ -61,7 +50,7 @@ id: Grid.Row
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class GridRow extends Component<Props> {
+class GridRow extends Component<GridRowProps> {
   static readonly componentId = 'Grid.Row'
 
   /* eslint-disable react/require-default-props */

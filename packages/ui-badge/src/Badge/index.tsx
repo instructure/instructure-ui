@@ -26,42 +26,17 @@
 import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  PlacementPropValues,
-  PositionPropTypes
-} from '@instructure/ui-position'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
-import { AsElementType } from '@instructure/shared-types'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  count?: number
-  countUntil?: number
-  type?: 'count' | 'notification'
-  standalone?: boolean
-  pulse?: boolean
-  variant?: 'primary' | 'success' | 'danger'
-  elementRef?: (...args: any[]) => any
-  formatOverflowText?: (...args: any[]) => any
-  formatOutput?: (...args: any[]) => any
-  as?: AsElementType
-  margin: Spacing
-  placement: PlacementPropValues
-}
+import { BadgeProps } from './types'
 
 /**
 ---
@@ -71,7 +46,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Badge extends Component<Props> {
+class Badge extends Component<BadgeProps> {
   static readonly componentId = 'Badge'
 
   static propTypes = {

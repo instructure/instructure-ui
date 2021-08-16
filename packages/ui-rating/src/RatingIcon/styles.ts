@@ -23,6 +23,7 @@
  */
 
 import { RatingIconTheme } from '@instructure/shared-types'
+import { RatingIconProps, RatingIconState } from './types'
 
 /**
  * ---
@@ -34,9 +35,13 @@ import { RatingIconTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: RatingIconTheme, props, state) => {
+const generateStyle = (
+  componentTheme: RatingIconTheme,
+  props: RatingIconProps,
+  state: RatingIconState
+) => {
   const { size } = props
+  const { filled } = state
 
   const sizeVariants = {
     small: { fontSize: componentTheme.smallIconFontSize },
@@ -61,9 +66,8 @@ const generateStyle = (componentTheme: RatingIconTheme, props, state) => {
       label: 'ratingIcon__icon',
       display: 'inline-block',
       verticalAlign: 'bottom',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size],
-      color: state.filled
+      ...sizeVariants[size!],
+      color: filled
         ? componentTheme.iconFilledColor
         : componentTheme.iconEmptyColor
     }

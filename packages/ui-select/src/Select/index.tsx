@@ -27,7 +27,7 @@ import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
+import { FormPropTypes } from '@instructure/ui-form-field'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import {
@@ -40,12 +40,7 @@ import {
   isActiveElement
 } from '@instructure/ui-dom-utils'
 
-import {
-  PositionConstraint,
-  PositionMountNode,
-  PlacementPropValues,
-  PositionPropTypes
-} from '@instructure/ui-position'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
 import { Selectable } from '@instructure/ui-selectable'
 import { Popover } from '@instructure/ui-popover'
@@ -64,41 +59,7 @@ import generateComponentTheme from './theme'
 
 import { Group } from './Group'
 import { Option } from './Option'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
-  inputValue?: string
-  isShowingOptions?: boolean
-  id?: string
-  size?: 'small' | 'medium' | 'large'
-  assistiveText?: string
-  placeholder?: string
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  isRequired?: boolean
-  isInline?: boolean
-  width?: string
-  htmlSize?: string | number
-  optionsMaxWidth?: string
-  visibleOptionsCount?: number
-  messages?: FormMessage[]
-  placement?: PlacementPropValues
-  constrain?: PositionConstraint
-  mountNode?: PositionMountNode
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onInputChange?: (...args: any[]) => any
-  onRequestShowOptions?: (...args: any[]) => any
-  onRequestHideOptions?: (...args: any[]) => any
-  onRequestHighlightOption?: (...args: any[]) => any
-  onRequestSelectOption?: (...args: any[]) => any
-  inputRef?: (...args: any[]) => any
-  listRef?: (...args: any[]) => any
-  renderBeforeInput?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterInput?: React.ReactNode | ((...args: any[]) => any)
-  shouldNotWrap?: boolean
-}
+import { SelectProps } from './types'
 
 /**
 ---
@@ -108,7 +69,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search, form
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Select extends Component<Props> {
+class Select extends Component<SelectProps> {
   static readonly componentId = 'Select'
 
   static propTypes = {

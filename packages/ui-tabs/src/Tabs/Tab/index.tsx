@@ -33,19 +33,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  variant?: 'default' | 'secondary'
-  id: string
-  index: number
-  controls: string
-  isDisabled?: boolean
-  isSelected?: boolean
-  onClick?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-}
+import { TabsTabProps } from './types'
 
 /**
 ---
@@ -54,7 +42,7 @@ id: Tabs.Tab
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Tab extends Component<Props> {
+class Tab extends Component<TabsTabProps> {
   static readonly componentId = 'Tabs.Tab'
 
   static propTypes = {

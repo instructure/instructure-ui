@@ -23,6 +23,7 @@
  */
 
 import { TabsTheme } from '@instructure/shared-types'
+import { TabsProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,7 @@ import { TabsTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: TabsTheme, props) => {
+const generateStyle = (componentTheme: TabsTheme, props: TabsProps) => {
   const { variant, tabOverflow } = props
 
   const variants = {
@@ -46,6 +46,8 @@ const generateStyle = (componentTheme: TabsTheme, props) => {
       scrollSpacer: { flexBasis: componentTheme.scrollOverlayWidthDefault }
     },
     secondary: {
+      container: {},
+      tabs: {},
       scrollOverlay: { width: componentTheme.scrollOverlayWidthSecondary },
       scrollSpacer: {
         flexBasis: componentTheme.scrollOverlayWidthSecondary
@@ -77,22 +79,19 @@ const generateStyle = (componentTheme: TabsTheme, props) => {
   return {
     tabs: {
       label: 'tabs',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variants[variant].tabs
+      ...variants[variant!].tabs
     },
 
     container: {
       label: 'tabs__container',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variants[variant].container
+      ...variants[variant!].container
     },
 
     tabList: {
       label: 'tabs__tabList',
       display: 'flex',
       width: '100%',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...tabOverflowVariants[tabOverflow]
+      ...tabOverflowVariants[tabOverflow!]
     },
 
     scrollOverlay: {
@@ -104,8 +103,7 @@ const generateStyle = (componentTheme: TabsTheme, props) => {
       insetInlineEnd: '0',
       background: `linear-gradient(to left, ${componentTheme.scrollFadeColor} 0%, rgba(255, 255, 255, 0) 100%)`,
       pointerEvents: 'none',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variants[variant].scrollOverlay,
+      ...variants[variant!].scrollOverlay,
 
       '[dir="rtl"] &': {
         background: `linear-gradient(to right, ${componentTheme.scrollFadeColor} 0%, rgba(255, 255, 255, 0) 100%)`
@@ -115,8 +113,7 @@ const generateStyle = (componentTheme: TabsTheme, props) => {
     scrollSpacer: {
       label: 'tabs__scrollSpacer',
       flexShrink: 0,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variants[variant].scrollSpacer
+      ...variants[variant!].scrollSpacer
     },
 
     scrollOverlayWidthDefault: componentTheme.scrollOverlayWidthDefault,

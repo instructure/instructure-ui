@@ -36,12 +36,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  variant?: 'default' | 'inverse'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { ModalHeaderProps, ModalHeaderStyleProps } from './types'
 
 /**
 ---
@@ -51,7 +46,7 @@ id: Modal.Header
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ModalHeader extends Component<Props> {
+class ModalHeader extends Component<ModalHeaderProps> {
   static readonly componentId = 'Modal.Header'
 
   static propTypes = {
@@ -80,7 +75,7 @@ class ModalHeader extends Component<Props> {
     this.props.makeStyles(this.makeStyleProps())
   }
 
-  makeStyleProps = () => {
+  makeStyleProps = (): ModalHeaderStyleProps => {
     return {
       withCloseButton: this.usesCloseButton
     }

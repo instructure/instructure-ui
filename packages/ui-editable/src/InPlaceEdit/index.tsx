@@ -36,22 +36,7 @@ import { View } from '@instructure/ui-view'
 
 import { Editable } from '../Editable'
 import generateStyle from './styles'
-
-type Props = {
-  renderViewer: (...args: any[]) => any
-  renderEditor: (...args: any[]) => any
-  renderEditButton: (...args: any[]) => any
-  mode: 'view' | 'edit'
-  onChangeMode: (...args: any[]) => any
-  value?: any
-  onChange?: (...args: any[]) => any
-  readOnly?: boolean
-  showFocusRing?: boolean
-  editButtonPlacement?: 'start' | 'end'
-  inline?: boolean
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { InPlaceEditProps } from './types'
 
 /**
 ---
@@ -59,7 +44,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, null)
-class InPlaceEdit extends Component<Props> {
+class InPlaceEdit extends Component<InPlaceEditProps> {
   static readonly componentId = 'InPlaceEdit'
   static propTypes = {
     /**

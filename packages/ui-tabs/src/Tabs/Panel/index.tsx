@@ -30,31 +30,11 @@ import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  renderTitle: React.ReactNode | ((...args: any[]) => any)
-  variant?: 'default' | 'secondary'
-  isSelected?: boolean
-  isDisabled?: boolean
-  maxHeight?: string | number
-  minHeight?: string | number
-  id?: string
-  labelledBy?: string
-  padding?: Spacing
-  textAlign?: 'start' | 'center' | 'end'
-  elementRef?: (...args: any[]) => any
-}
+import { TabsPanelProps } from './types'
 
 /**
 ---
@@ -63,7 +43,7 @@ id: Tabs.Panel
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Panel extends Component<Props> {
+class Panel extends Component<TabsPanelProps> {
   static readonly componentId = 'Tabs.Panel'
 
   static propTypes = {

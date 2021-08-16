@@ -27,37 +27,11 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  //TODO: probably have to make a new type instead of this generic `string` which
-  //will only allow the valid html tags
-  as?: AsElementType
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'brand'
-    | 'success'
-    | 'warning'
-    | 'danger'
-    | 'alert'
-    | 'primary-inverse'
-    | 'secondary-inverse'
-  elementRef?: (...args: any[]) => any
-  fontStyle?: 'italic' | 'normal'
-  letterSpacing?: 'normal' | 'condensed' | 'expanded'
-  lineHeight?: 'default' | 'fit' | 'condensed' | 'double'
-  size?: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large'
-  transform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase'
-  weight?: 'normal' | 'light' | 'bold'
-  wrap?: 'normal' | 'break-word'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { TextProps } from './types'
 
 /**
 ---
@@ -65,7 +39,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Text extends Component<Props> {
+class Text extends Component<TextProps> {
   static readonly componentId = 'Text'
 
   static propTypes = {

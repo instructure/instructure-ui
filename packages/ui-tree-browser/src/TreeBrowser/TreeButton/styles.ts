@@ -24,6 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { TreeBrowserButtonTheme } from '@instructure/shared-types'
+import { TreeBrowserButtonProps } from './types'
 
 const transform = keyframes`
   50% {
@@ -45,8 +46,10 @@ const transform = keyframes`
  * @param  {Object} props the props of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyles = (componentTheme: TreeBrowserButtonTheme, props) => {
+const generateStyles = (
+  componentTheme: TreeBrowserButtonTheme,
+  props: TreeBrowserButtonProps
+): any => {
   const { size, variant, selected, focused, level } = props
 
   const isRootButton = level && level === 1
@@ -176,8 +179,7 @@ const generateStyles = (componentTheme: TreeBrowserButtonTheme, props) => {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    ...sizeMap[size].textName
+    ...sizeMap[size!].textName
   }
 
   const layoutPadding = {
@@ -244,8 +246,7 @@ const generateStyles = (componentTheme: TreeBrowserButtonTheme, props) => {
             insetInlineEnd: 'auto',
             top: '50%',
             ...(selected && { visibility: 'hidden' }),
-            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-            ...sizeMap[size][variant].before
+            ...sizeMap[size!][variant!].before
           },
           '&:hover::before': {
             visibility: 'hidden'
@@ -290,8 +291,7 @@ const generateStyles = (componentTheme: TreeBrowserButtonTheme, props) => {
       alignItems: 'center',
       lineHeight: 1,
       minHeight: '2rem',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...layoutPadding[size][variant]
+      ...layoutPadding[size!][variant!]
     },
     text: {
       label: 'treeButton__text',
@@ -314,8 +314,7 @@ const generateStyles = (componentTheme: TreeBrowserButtonTheme, props) => {
       color: selected
         ? componentTheme.selectedTextColor
         : componentTheme.descriptorTextColor,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeMap[size].textDescriptor
+      ...sizeMap[size!].textDescriptor
     },
     icon: {
       label: 'treeButton__icon',
@@ -328,13 +327,11 @@ const generateStyles = (componentTheme: TreeBrowserButtonTheme, props) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeMap[size][variant].icon
+      ...sizeMap[size!][variant!].icon
     },
     thumbnail: {
       label: 'treeButton__thumbnail',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeMap[size][variant].thumbnail
+      ...sizeMap[size!][variant!].thumbnail
     },
     node: {
       label: 'treeButton__node',

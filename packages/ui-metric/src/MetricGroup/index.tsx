@@ -34,11 +34,7 @@ import { Metric } from '../Metric'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { MetricGroupProps } from './types'
 
 /**
 ---
@@ -48,7 +44,9 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class MetricGroup extends Component<Props & OtherHTMLAttributes<Props>> {
+class MetricGroup extends Component<
+  MetricGroupProps & OtherHTMLAttributes<MetricGroupProps>
+> {
   static readonly componentId = 'MetricGroup'
 
   static propTypes = {

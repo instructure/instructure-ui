@@ -33,13 +33,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  isStacked?: boolean
-  textAlign?: 'start' | 'center' | 'end'
-}
+import { TableRowHeaderProps } from './types'
 
 /**
 ---
@@ -48,7 +42,7 @@ id: Table.RowHeader
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class RowHeader extends Component<Props> {
+class RowHeader extends Component<TableRowHeaderProps> {
   static readonly componentId = 'Table.RowHeader'
 
   /* eslint-disable react/require-default-props */

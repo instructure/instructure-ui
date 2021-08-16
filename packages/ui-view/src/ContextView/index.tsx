@@ -25,43 +25,15 @@
 
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-import {
-  jsx,
-  withStyle,
-  ThemeablePropTypes,
-  CSSObject,
-  Shadow,
-  Spacing,
-  Stacking
-} from '@instructure/emotion'
-import { PositionPropTypes, mirrorPlacement } from '@instructure/ui-position'
+import { jsx, withStyle, ThemeablePropTypes } from '@instructure/emotion'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { omitProps } from '@instructure/ui-react-utils'
-import { OtherHTMLAttributes, AsElementType } from '@instructure/shared-types'
+import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import { View } from '../View'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  as?: AsElementType
-  elementRef?: (...args: any[]) => any
-  height?: string | number
-  width?: string | number
-  maxHeight?: string | number
-  maxWidth?: string | number
-  minHeight?: string | number
-  minWidth?: string | number
-  textAlign?: 'start' | 'center' | 'end'
-  background?: 'default' | 'inverse'
-  debug?: boolean
-  makeStyles?: (...args: any[]) => any
-  styles?: CSSObject
-  margin: Spacing
-  padding: Spacing
-  shadow: Shadow
-  stacking: Stacking
-  placement: unknown //TODO: fix this
-}
+import { ContextViewProps } from './types'
 
 /**
 ---
@@ -70,7 +42,9 @@ category: components
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
-class ContextView extends Component<Props & OtherHTMLAttributes<Props>> {
+class ContextView extends Component<
+  ContextViewProps & OtherHTMLAttributes<ContextViewProps>
+> {
   static readonly componentId = 'ContextView'
 
   static propTypes = {
@@ -170,12 +144,9 @@ class ContextView extends Component<Props & OtherHTMLAttributes<Props>> {
   componentDidMount() {
     this.props.makeStyles?.()
   }
+
   componentDidUpdate() {
     this.props.makeStyles?.()
-  }
-  get mirroredPlacement() {
-    // @ts-expect-error FIXME: type placement
-    return mirrorPlacement(this.props.placement, '-')
   }
 
   render() {

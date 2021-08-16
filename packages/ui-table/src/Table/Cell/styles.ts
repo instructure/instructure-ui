@@ -23,6 +23,7 @@
  */
 
 import { TableCellTheme } from '@instructure/shared-types'
+import { TableCellProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,10 @@ import { TableCellTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: TableCellTheme, props) => {
+const generateStyle = (
+  componentTheme: TableCellTheme,
+  props: TableCellProps
+) => {
   const { textAlign } = props
 
   return {

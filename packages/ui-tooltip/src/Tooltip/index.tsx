@@ -33,13 +33,7 @@ import {
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
-import {
-  PositionConstraint,
-  PositionMountNode,
-  PlacementPropValues,
-  PositionPropTypes
-} from '@instructure/ui-position'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
@@ -48,25 +42,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  renderTip: React.ReactNode | ((...args: any[]) => any)
-  isShowingContent?: boolean
-  defaultIsShowingContent?: boolean
-  as?: AsElementType
-  on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]
-  color?: 'primary' | 'primary-inverse'
-  placement?: PlacementPropValues
-  mountNode?: PositionMountNode
-  constrain?: PositionConstraint
-  positionTarget?: PositionMountNode
-  offsetX?: string | number
-  offsetY?: string | number
-  onShowContent?: (...args: any[]) => any
-  onHideContent?: (...args: any[]) => any
-}
+import { TooltipProps } from './types'
 
 /**
 ---
@@ -75,7 +51,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Tooltip extends Component<Props> {
+class Tooltip extends Component<TooltipProps> {
   static readonly componentId = 'Tooltip'
 
   static propTypes = {

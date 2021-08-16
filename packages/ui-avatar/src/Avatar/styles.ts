@@ -23,6 +23,7 @@
  */
 
 import { AvatarTheme } from '@instructure/shared-types'
+import { AvatarProps, AvatarState } from './types'
 
 /**
  * ---
@@ -34,8 +35,11 @@ import { AvatarTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: AvatarTheme, props, state) => {
+const generateStyle = (
+  componentTheme: AvatarTheme,
+  props: AvatarProps,
+  state: AvatarState
+) => {
   const { size, color, shape, src } = props
   const { loaded } = state
 
@@ -109,9 +113,7 @@ const generateStyle = (componentTheme: AvatarTheme, props, state) => {
       overflow: 'hidden',
       lineHeight: 0,
       textAlign: 'center',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeStyles[size],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...variantStyles[shape],
       ...(loaded
         ? {
@@ -127,7 +129,6 @@ const generateStyle = (componentTheme: AvatarTheme, props, state) => {
     },
     initials: {
       label: 'avatar__initials',
-      // @ts-expect-error TS7053: FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       color: initialsColor[color],
       lineHeight: '2.375em',
       fontFamily: componentTheme.fontFamily,

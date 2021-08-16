@@ -26,11 +26,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import {
-  FormField,
-  FormMessage,
-  FormPropTypes
-} from '@instructure/ui-form-field'
+import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import {
   IconArrowOpenDownLine,
   IconArrowOpenUpLine
@@ -48,30 +44,11 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
-  id?: string
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  messages?: FormMessage[]
-  placeholder?: string
-  isRequired?: boolean
-  showArrows?: boolean
-  size?: 'medium' | 'large'
-  value?: string | number
-  width?: string
-  display?: 'inline-block' | 'block'
-  inputRef?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onChange?: (...args: any[]) => any
-  onDecrement?: (...args: any[]) => any
-  onIncrement?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  inputMode?: 'numeric' | 'decimal' | 'tel'
-}
+import {
+  NumberInputProps,
+  NumberInputState,
+  NumberInputStyleProps
+} from './types'
 
 /**
 ---
@@ -81,7 +58,7 @@ id: NumberInput
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class NumberInput extends Component<Props> {
+class NumberInput extends Component<NumberInputProps, NumberInputState> {
   static readonly componentId = 'NumberInput'
 
   static propTypes = {
@@ -210,7 +187,7 @@ class NumberInput extends Component<Props> {
     inputMode: 'numeric'
   }
 
-  state = { hasFocus: false }
+  state: NumberInputState = { hasFocus: false }
   _input = null
 
   get id() {
@@ -228,7 +205,7 @@ class NumberInput extends Component<Props> {
 
   get invalid() {
     return (
-      this.props.messages &&
+      !!this.props.messages &&
       this.props.messages.some((message) => message.type === 'error')
     )
   }
@@ -247,7 +224,7 @@ class NumberInput extends Component<Props> {
     this.props.makeStyles(this.makeStyleVariables)
   }
 
-  get makeStyleVariables() {
+  get makeStyleVariables(): NumberInputStyleProps {
     return {
       interaction: this.interaction,
       hasFocus: this.state.hasFocus,

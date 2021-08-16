@@ -23,6 +23,7 @@
  */
 
 import { BreadcrumbTheme } from '@instructure/shared-types'
+import { BreadcrumbProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,10 @@ import { BreadcrumbTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: BreadcrumbTheme, props) => {
+const generateStyle = (
+  componentTheme: BreadcrumbTheme,
+  props: BreadcrumbProps
+) => {
   const { size } = props
 
   const crumbSizeVariants = {
@@ -92,8 +95,7 @@ const generateStyle = (componentTheme: BreadcrumbTheme, props) => {
       label: 'breadcrumb__crumb',
       boxSizing: 'border-box',
       position: 'relative',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...crumbSizeVariants[size],
+      ...crumbSizeVariants[size!],
 
       '&:last-child': {
         paddingInlineEnd: 0
@@ -106,8 +108,7 @@ const generateStyle = (componentTheme: BreadcrumbTheme, props) => {
       position: 'absolute',
       top: '50%',
       color: componentTheme.separatorColor,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...separatorSizeVariants[size]
+      ...separatorSizeVariants[size!]
     }
   }
 }

@@ -35,12 +35,7 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -51,16 +46,7 @@ import { Row } from './Row'
 import { ColHeader } from './ColHeader'
 import { RowHeader } from './RowHeader'
 import { Cell } from './Cell'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  caption: React.ReactNode
-  margin?: Spacing
-  elementRef?: (...args: any[]) => any
-  hover?: boolean
-  layout?: 'auto' | 'fixed' | 'stacked'
-}
+import { TableProps } from './types'
 
 /**
 ---
@@ -68,7 +54,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Table extends Component<Props> {
+class Table extends Component<TableProps> {
   static readonly componentId = 'Table'
 
   static propTypes = {

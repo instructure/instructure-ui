@@ -24,6 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { TabsTabTheme } from '@instructure/shared-types'
+import { TabsTabProps } from './types'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -43,8 +44,10 @@ const selectedTab = keyframes`
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: TabsTabTheme, props) => {
+const generateStyle = (
+  componentTheme: TabsTabTheme,
+  props: TabsTabProps
+): any => {
   const { variant, isSelected, isDisabled } = props
 
   const variants = {
@@ -127,8 +130,7 @@ const generateStyle = (componentTheme: TabsTabTheme, props) => {
 
       '&:focus': { outline: 'none' },
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variants[variant]
+      ...variants[variant!]
     }
   }
 }

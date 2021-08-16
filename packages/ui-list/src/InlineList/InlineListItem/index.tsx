@@ -29,35 +29,11 @@ import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  delimiter?: 'none' | 'pipe' | 'slash' | 'arrow'
-  size?: 'small' | 'medium' | 'large'
-  margin?: Spacing
-  padding?: Spacing
-  spacing?:
-    | 'none'
-    | 'xxx-small'
-    | 'xx-small'
-    | 'x-small'
-    | 'small'
-    | 'medium'
-    | 'large'
-    | 'x-large'
-    | 'xx-large'
-  elementRef?: (...args: any[]) => any
-}
+import { InlineListItemProps } from './types'
 
 /**
 ---
@@ -67,7 +43,7 @@ id: InlineList.Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class InlineListItem extends Component<Props> {
+class InlineListItem extends Component<InlineListItemProps> {
   static readonly componentId = 'InlineList.Item'
 
   static propTypes = {

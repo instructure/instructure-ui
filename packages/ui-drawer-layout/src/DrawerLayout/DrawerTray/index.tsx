@@ -33,45 +33,16 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import { Dialog } from '@instructure/ui-dialog'
 import { Portal, PortalNode } from '@instructure/ui-portal'
-import {
-  mirrorHorizontalPlacement,
-  PositionMountNode
-} from '@instructure/ui-position'
+import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { DrawerLayoutContext } from '../index'
-
-type Props = {
-  label: string
-  render?: (...args: any[]) => any
-  placement: 'start' | 'end'
-  open?: boolean
-  onOpen?: (...args: any[]) => any
-  onClose?: (...args: any[]) => any
-  border?: boolean
-  shadow?: boolean
-  onTransition?: (...args: any[]) => any
-  onEnter?: (...args: any[]) => any
-  onEntering?: (...args: any[]) => any
-  onEntered?: (...args: any[]) => any
-  onExit?: (...args: any[]) => any
-  onExiting?: (...args: any[]) => any
-  onExited?: (...args: any[]) => any
-  contentRef?: (...args: any[]) => any
-  mountNode?: PositionMountNode
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
-  onDismiss?: (...args: any[]) => any
-  shouldContainFocus?: boolean
-  shouldReturnFocus?: boolean
-  shouldCloseOnDocumentClick?: boolean
-  shouldCloseOnEscape?: boolean
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import {
+  DrawerLayoutTrayProps,
+  DrawerLayoutTrayState,
+  DrawerLayoutTrayStyleProps,
+  DrawerTrayPlacement
+} from './types'
 
 /**
 ---
@@ -82,7 +53,10 @@ id: DrawerLayout.Tray
 @withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
 @testable()
-class DrawerTray extends Component<Props & BidirectionalProps> {
+class DrawerTray extends Component<
+  DrawerLayoutTrayProps & BidirectionalProps,
+  DrawerLayoutTrayState
+> {
   static readonly componentId = 'DrawerLayout.Tray' as const
 
   static locatorAttribute = 'data-drawer-tray'
@@ -206,7 +180,7 @@ class DrawerTray extends Component<Props & BidirectionalProps> {
     liveRegion: undefined,
     onTransition: undefined
   }
-  state = {
+  state: DrawerLayoutTrayState = {
     transitioning: false,
     portalOpen: false
   }
@@ -223,7 +197,7 @@ class DrawerTray extends Component<Props & BidirectionalProps> {
     }
     ;(this.props as any).makeStyles(this.makeStyleProps())
   }
-  makeStyleProps = () => {
+  makeStyleProps = (): DrawerLayoutTrayStyleProps => {
     return {
       placement: this.placement
     }
@@ -231,7 +205,9 @@ class DrawerTray extends Component<Props & BidirectionalProps> {
   get placement() {
     const { placement, dir } = this.props
     const isRtl = dir === bidirectional.DIRECTION.rtl
-    return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
+    return (
+      isRtl ? mirrorHorizontalPlacement(placement!, ' ') : placement!
+    ) as DrawerTrayPlacement
   }
   get direction() {
     return this.placement === 'end' ? 'right' : 'left'

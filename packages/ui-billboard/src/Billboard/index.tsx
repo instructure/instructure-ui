@@ -33,35 +33,12 @@ import {
   callRenderProp,
   getElementType
 } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  hero?: React.ReactElement | ((...args: any[]) => any)
-  size?: 'small' | 'medium' | 'large'
-  as?: AsElementType
-  elementRef?: (...args: any[]) => any
-  heading?: string
-  headingAs?: 'h1' | 'h2' | 'h3' | 'span'
-  headingLevel?: 'h1' | 'h2' | 'h3' | 'h4'
-  message?: React.ReactNode | ((...args: any[]) => any)
-  onClick?: (...args: any[]) => any
-  href?: string
-  disabled?: boolean
-  readOnly?: boolean
-  margin?: Spacing
-}
+import { BillboardProps } from './types'
 
 /**
 ---
@@ -69,7 +46,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Billboard extends Component<Props> {
+class Billboard extends Component<BillboardProps> {
   static readonly componentId = 'Billboard'
 
   static propTypes = {

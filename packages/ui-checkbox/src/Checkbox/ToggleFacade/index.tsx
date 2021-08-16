@@ -32,17 +32,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  checked?: boolean
-  disabled?: boolean
-  readOnly?: boolean
-  focused?: boolean
-  size?: 'small' | 'medium' | 'large'
-  labelPlacement?: 'top' | 'start' | 'end'
-}
+import { ToggleFacadeProps } from './types'
 
 /**
 ---
@@ -50,7 +40,7 @@ parent: Checkbox
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class ToggleFacade extends Component<Props> {
+class ToggleFacade extends Component<ToggleFacadeProps> {
   static readonly componentId = 'ToggleFacade'
 
   static propTypes = {

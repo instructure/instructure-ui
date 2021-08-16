@@ -33,7 +33,6 @@ import {
   callRenderProp,
   safeCloneElement
 } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { testable } from '@instructure/ui-testable'
 import { uid } from '@instructure/uid'
 
@@ -46,15 +45,7 @@ import generateComponentTheme from './theme'
 
 import { Item } from './Item'
 import { Separator } from './Separator'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  as?: AsElementType
-  role?: string
-  elementRef?: (...args: any[]) => any
-  renderLabel?: React.ReactNode | ((...args: any[]) => any)
-}
+import { OptionsProps } from './types'
 
 /**
 ---
@@ -63,7 +54,7 @@ category: components
 **/
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class Options extends Component<Props> {
+class Options extends Component<OptionsProps> {
   static readonly componentId = 'Options'
 
   static propTypes = {

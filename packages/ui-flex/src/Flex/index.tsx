@@ -32,38 +32,14 @@ import {
   matchComponentTypes,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { View } from '@instructure/ui-view'
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import { Item } from './Item'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-export type Props = {
-  as?: AsElementType
-  elementRef?: (...args: any[]) => any
-  height?: string | number
-  width?: string | number
-  margin?: Spacing
-  padding?: Spacing
-  display?: 'flex' | 'inline-flex'
-  textAlign?: 'start' | 'center' | 'end'
-  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse'
-  alignItems?: 'center' | 'start' | 'end' | 'stretch'
-  justifyItems?: 'center' | 'start' | 'end' | 'space-around' | 'space-between'
-  wrap?: 'wrap' | 'no-wrap' | 'wrap-reverse'
-  withVisualDebug?: boolean
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  children: any
-}
+import { FlexProps } from './types'
 
 /**
 ---
@@ -72,10 +48,10 @@ category: components
 @module Flex
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Flex extends Component<Props> {
+class Flex extends Component<FlexProps> {
   static readonly componentId = 'Flex'
 
-  constructor(props: Props) {
+  constructor(props: FlexProps) {
     super(props)
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     props.makeStyles()

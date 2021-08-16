@@ -23,6 +23,7 @@
  */
 
 import { BylineTheme } from '@instructure/shared-types'
+import { BylineProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,7 @@ import { BylineTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: BylineTheme, props, state) => {
+const generateStyle = (componentTheme: BylineTheme, props: BylineProps) => {
   const { alignContent, size } = props
 
   const alignContentVariants = {
@@ -49,8 +49,7 @@ const generateStyle = (componentTheme: BylineTheme, props, state) => {
     margin: 0,
     padding: 0,
     fontFamily: componentTheme.fontFamily,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    ...alignContentVariants[alignContent]
+    ...alignContentVariants[alignContent!]
   }
 
   const captionStyles = {
@@ -98,8 +97,7 @@ const generateStyle = (componentTheme: BylineTheme, props, state) => {
       lineHeight: componentTheme.descriptionLineHeight,
       fontWeight: componentTheme.descriptionFontWeight
     },
-    // @ts-expect-error TODO: type size (and other props)
-    maxWidth: componentTheme[size]
+    maxWidth: size && componentTheme[size]
   }
 }
 

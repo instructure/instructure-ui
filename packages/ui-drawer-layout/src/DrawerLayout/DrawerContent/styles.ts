@@ -23,6 +23,7 @@
  */
 
 import { DrawerLayoutContentTheme } from '@instructure/shared-types'
+import { DrawerLayoutContentProps, DrawerLayoutContentState } from './types'
 
 /**
  * ---
@@ -36,10 +37,9 @@ import { DrawerLayoutContentTheme } from '@instructure/shared-types'
  */
 const generateStyle = (
   componentTheme: DrawerLayoutContentTheme,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-  props,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'state' implicitly has an 'any'... Remove this comment to see the full error message
-  state
+  // @ts-expect-error no props used here
+  props: DrawerLayoutContentProps,
+  state: DrawerLayoutContentState
 ) => {
   const { shouldTransition } = state
 

@@ -28,22 +28,17 @@ import PropTypes from 'prop-types'
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { uid } from '@instructure/uid'
 import { Children } from '@instructure/ui-prop-types'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
 
 import generateStyle from './styles'
+import { PaginationProps } from './types'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'arr' implicitly has an 'any' type.
@@ -67,20 +62,6 @@ function shouldShowNextButton(props, currentPageIndex) {
   )
 }
 
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  disabled?: boolean
-  label?: React.ReactNode
-  labelNext?: string
-  labelPrev?: string
-  variant?: 'full' | 'compact'
-  margin?: Spacing
-  as?: AsElementType
-  elementRef?: (...args: any[]) => any
-  shouldHandleFocus?: boolean
-}
-
 /**
 ---
 category: components
@@ -89,7 +70,7 @@ category: components
 
 @withStyle(generateStyle, null)
 @testable()
-class Pagination extends Component<Props> {
+class Pagination extends Component<PaginationProps> {
   static readonly componentId = 'Pagination'
 
   static propTypes = {

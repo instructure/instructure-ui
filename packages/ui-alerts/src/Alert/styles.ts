@@ -23,6 +23,7 @@
  */
 
 import { AlertTheme } from '@instructure/shared-types'
+import { AlertProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,7 @@ import { AlertTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: AlertTheme, props) => {
+const generateStyle = (componentTheme: AlertTheme, props: AlertProps) => {
   const { variant, hasShadow } = props
 
   const variantStyles = {
@@ -80,8 +80,7 @@ const generateStyle = (componentTheme: AlertTheme, props) => {
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variantStyles[variant].alert,
+      ...variantStyles[variant!].alert,
       ...(hasShadow && { boxShadow: componentTheme.boxShadow })
     },
     icon: {
@@ -93,8 +92,7 @@ const generateStyle = (componentTheme: AlertTheme, props) => {
       justifyContent: 'center',
       fontSize: '1.125rem',
       borderRight: `${componentTheme.borderWidth} ${componentTheme.borderStyle}`,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variantStyles[variant].icon
+      ...variantStyles[variant!].icon
     },
     closeButton: {
       boxSizing: 'border-box',

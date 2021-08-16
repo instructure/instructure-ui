@@ -32,7 +32,6 @@ import {
   callRenderProp,
   omitProps
 } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
@@ -46,19 +45,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { Day } from './Day'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  renderNextMonthButton?: React.ReactNode | ((...args: any[]) => any)
-  renderPrevMonthButton?: React.ReactNode | ((...args: any[]) => any)
-  renderNavigationLabel?: React.ReactNode | ((...args: any[]) => any)
-  renderWeekdayLabels: (React.ReactNode | ((...args: any[]) => any))[]
-  onRequestRenderNextMonth?: (...args: any[]) => any
-  onRequestRenderPrevMonth?: (...args: any[]) => any
-  as?: AsElementType
-  role?: 'table' | 'listbox'
-}
+import { CalendarProps } from './types'
 
 /**
 ---
@@ -67,7 +54,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Calendar extends Component<Props> {
+class Calendar extends Component<CalendarProps> {
   static readonly componentId = 'Calendar'
 
   static Day = Day

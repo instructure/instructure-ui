@@ -24,6 +24,7 @@
 
 import { logError as error } from '@instructure/console'
 import { ListItemTheme } from '@instructure/shared-types'
+import { ListItemProps } from './types'
 
 /**
  * ---
@@ -37,8 +38,7 @@ import { ListItemTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: ListItemTheme, props) => {
+const generateStyle = (componentTheme: ListItemTheme, props: ListItemProps) => {
   const { size, delimiter, spacing } = props
 
   const withDelimiter = delimiter !== 'none'
@@ -87,7 +87,8 @@ const generateStyle = (componentTheme: ListItemTheme, props) => {
     'xx-large': {
       marginTop: componentTheme.spacingXXLarge,
       marginBottom: componentTheme.spacingXXLarge
-    }
+    },
+    none: {}
   }
 
   const delimiterVariants = {
@@ -102,7 +103,8 @@ const generateStyle = (componentTheme: ListItemTheme, props) => {
       '&:not(:first-of-type)': {
         borderTop: componentTheme.delimiterSolidBorder
       }
-    }
+    },
+    none: {}
   }
 
   return {
@@ -113,12 +115,9 @@ const generateStyle = (componentTheme: ListItemTheme, props) => {
       lineHeight: componentTheme.lineHeight,
       color: componentTheme.color,
       padding: 0,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...(withSpacing && !withDelimiter && spacingVariants[spacing]),
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...(withDelimiter && delimiterVariants[delimiter]),
+      ...sizeVariants[size!],
+      ...(withSpacing && !withDelimiter && spacingVariants[spacing!]),
+      ...(withDelimiter && delimiterVariants[delimiter!]),
 
       '&:first-of-type': { marginTop: '0' },
       '&:last-of-type': { marginBottom: '0' }

@@ -33,14 +33,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  isStacked?: boolean
-  header?: React.ReactNode | ((...args: any[]) => any)
-  textAlign?: 'start' | 'center' | 'end'
-}
+import { TableCellProps } from './types'
 
 /**
 ---
@@ -49,7 +42,7 @@ id: Table.Cell
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Cell extends Component<Props> {
+class Cell extends Component<TableCellProps> {
   static readonly componentId = 'Table.Cell'
 
   /* eslint-disable react/require-default-props */

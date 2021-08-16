@@ -27,17 +27,11 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  as?: AsElementType
-}
+import { FormFieldLabelProps } from './types'
 
 /**
 ---
@@ -56,7 +50,7 @@ example: true
 
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class FormFieldLabel extends Component<Props> {
+class FormFieldLabel extends Component<FormFieldLabelProps> {
   static readonly componentId = 'FormFieldLabel'
 
   static propTypes = {
