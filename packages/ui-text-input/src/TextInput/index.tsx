@@ -23,57 +23,24 @@
  */
 
 /** @jsx jsx */
-import React, { Component, InputHTMLAttributes } from 'react'
+import { Component, InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import { OtherHTMLAttributes } from '@instructure/shared-types'
 import { controllable } from '@instructure/ui-prop-types'
 import {
   callRenderProp,
   getInteraction,
-  passthroughProps,
-  InteractionType
+  passthroughProps
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import {
-  FormField,
-  FormMessage,
-  FormPropTypes
-} from '@instructure/ui-form-field'
+import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
+
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type OwnProps = {
-  renderLabel?: React.ReactNode | ((...args: any[]) => any)
-  type?: 'text' | 'email' | 'url' | 'tel' | 'search' | 'password'
-  id?: string
-  value?: any // TODO: controllable(PropTypes.string)
-  defaultValue?: string
-  interaction?: InteractionType
-  messages?: FormMessage[]
-  size?: 'small' | 'medium' | 'large'
-  textAlign?: 'start' | 'center'
-  width?: string
-  htmlSize?: string | number
-  display?: 'inline-block' | 'block'
-  shouldNotWrap?: boolean
-  placeholder?: string
-  isRequired?: boolean
-  inputRef?: (...args: any[]) => any
-  inputContainerRef?: (...args: any[]) => any
-  renderBeforeInput?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterInput?: React.ReactNode | ((...args: any[]) => any)
-  onChange?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
-
-type Props = OwnProps &
-  OtherHTMLAttributes<OwnProps, InputHTMLAttributes<OwnProps>>
+import { TextInputProps, TextInputState, TextInputStyleProps } from './types'
 
 /**
 ---
@@ -83,7 +50,11 @@ tags: form, field
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class TextInput extends Component<Props> {
+class TextInput extends Component<
+  TextInputProps &
+    OtherHTMLAttributes<TextInputProps, InputHTMLAttributes<TextInputProps>>,
+  TextInputState
+> {
   static readonly componentId = 'TextInput'
 
   static propTypes = {
@@ -253,12 +224,11 @@ class TextInput extends Component<Props> {
     this.props.makeStyles(this.makeStyleProps())
   }
 
-  makeStyleProps = () => {
+  makeStyleProps = (): TextInputStyleProps => {
     const { interaction } = this
     return {
       disabled: interaction === 'disabled',
       invalid: this.invalid,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'hasFocus' does not exist on type 'Readon... Remove this comment to see the full error message
       focused: this.state.hasFocus
     }
   }
@@ -278,7 +248,7 @@ class TextInput extends Component<Props> {
 
   get invalid() {
     return (
-      this.props.messages &&
+      !!this.props.messages &&
       this.props.messages.findIndex((message) => {
         return message.type === 'error'
       }) >= 0

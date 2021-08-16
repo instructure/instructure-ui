@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { FormFieldLayoutProps } from './types'
+
 /**
  * ---
  * private: true
@@ -32,8 +34,11 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(6133) FIXME: 'componentTheme' is declared but its value is neve... Remove this comment to see the full error message
-const generateStyle = (componentTheme, props, state) => {
+const generateStyle = (
+  // @ts-expect-error no theme used here
+  componentTheme,
+  props: FormFieldLayoutProps
+) => {
   const { inline } = props
 
   return {

@@ -24,6 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { BadgeTheme } from '@instructure/shared-types'
+import { BadgeProps } from './types'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -43,8 +44,7 @@ const pulseAnimation = keyframes`
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: BadgeTheme, props, state) => {
+const generateStyle = (componentTheme: BadgeTheme, props: BadgeProps): any => {
   const { type, variant, placement, standalone, pulse } = props
 
   const top = placement.indexOf('top') > -1
@@ -148,8 +148,7 @@ const generateStyle = (componentTheme: BadgeTheme, props, state) => {
       whiteSpace: 'nowrap',
       borderRadius: componentTheme.borderRadius,
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variantVariants[variant],
+      ...variantVariants[variant!],
 
       ...(pulse && {
         position: 'relative',
@@ -171,19 +170,16 @@ const generateStyle = (componentTheme: BadgeTheme, props, state) => {
           animationDuration: '1s',
           animationIterationCount: '4',
           animationDirection: 'alternate',
-          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-          ...pulseBorderVariants[variant]
+          ...pulseBorderVariants[variant!]
         }
       }),
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...typeVariant[type],
+      ...typeVariant[type!],
 
       ...(!standalone && {
         position: 'absolute',
         zIndex: componentTheme.notificationZIndex,
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        ...notStandaloneTypeVariant[type]
+        ...notStandaloneTypeVariant[type!]
       })
     },
     wrapper: {

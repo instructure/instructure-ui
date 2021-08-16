@@ -31,24 +31,12 @@ import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { Children } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  label: string
-  size?: 'small' | 'medium' | 'large'
-  margin?: Spacing
-}
+import { BreadcrumbProps } from './types'
 
 /**
 ---
@@ -58,7 +46,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Breadcrumb extends Component<Props> {
+class Breadcrumb extends Component<BreadcrumbProps> {
   static readonly componentId = 'Breadcrumb'
 
   static propTypes = {

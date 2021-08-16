@@ -23,6 +23,7 @@
  */
 
 import { CheckboxFacadeTheme } from '@instructure/shared-types'
+import { CheckboxFacadeProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,10 @@ import { CheckboxFacadeTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: CheckboxFacadeTheme, props, state) => {
+const generateStyle = (
+  componentTheme: CheckboxFacadeTheme,
+  props: CheckboxFacadeProps
+) => {
   const { size, checked, focused, hovered, indeterminate } = props
 
   const isChecked = checked || indeterminate
@@ -89,8 +92,7 @@ const generateStyle = (componentTheme: CheckboxFacadeTheme, props, state) => {
       marginInlineEnd: componentTheme.marginRight,
       marginInlineStart: '0',
       padding: componentTheme.padding,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].facade,
+      ...sizeVariants[size!].facade,
 
       '&::before': {
         content: '""',
@@ -128,8 +130,7 @@ const generateStyle = (componentTheme: CheckboxFacadeTheme, props, state) => {
       fontFamily: componentTheme.labelFontFamily,
       fontWeight: componentTheme.labelFontWeight,
       lineHeight: componentTheme.labelLineHeight,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].label,
+      ...sizeVariants[size!].label,
 
       ...(isChecked && {
         color: componentTheme.checkedLabelColor

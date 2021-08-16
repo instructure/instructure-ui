@@ -32,12 +32,7 @@ import {
   controllable,
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
-import {
-  PositionConstraint,
-  PositionMountNode,
-  PlacementPropValues,
-  PositionPropTypes
-} from '@instructure/ui-position'
+import { PositionPropTypes } from '@instructure/ui-position'
 import {
   safeCloneElement,
   matchComponentTypes
@@ -54,40 +49,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  label?: string
-  disabled?: boolean
-  trigger?: React.ReactNode
-  placement?: PlacementPropValues
-  defaultShow?: boolean
-  show?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultShow')
-  onToggle?: (...args: any[]) => any
-  onSelect?: (...args: any[]) => any
-  onDismiss?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onMouseOver?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  onKeyUp?: (...args: any[]) => any
-  menuRef?: (...args: any[]) => any
-  popoverRef?: (...args: any[]) => any
-  mountNode?: PositionMountNode
-  constrain?: PositionConstraint
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
-  shouldHideOnSelect?: boolean
-  shouldFocusTriggerOnClose?: boolean
-  type?: 'flyout'
-  id?: string
-  withArrow?: boolean
-  offsetX?: string | number
-  offsetY?: string | number
-}
+import { MenuProps } from './types'
 
 /**
 ---
@@ -96,7 +58,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Menu extends Component<Props> {
+class Menu extends Component<MenuProps> {
   static readonly componentId = 'Menu'
 
   static propTypes = {

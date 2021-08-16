@@ -27,6 +27,11 @@ export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>
 }
 
+/** Uses a union as optional keys for a Record */
+export type PartialRecord<K extends keyof any, T> = {
+  [P in K]?: T
+}
+
 /**
  * Make all properties in T nullable
  */

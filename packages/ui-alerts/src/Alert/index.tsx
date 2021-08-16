@@ -46,29 +46,12 @@ import {
   withStyle,
   jsx,
   ThemeablePropTypes,
-  EmotionThemeProvider,
-  Spacing
+  EmotionThemeProvider
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  variant?: 'info' | 'success' | 'warning' | 'error'
-  liveRegion?: (...args: any[]) => any
-  liveRegionPoliteness?: 'polite' | 'assertive'
-  isLiveRegionAtomic?: boolean
-  screenReaderOnly?: boolean
-  timeout?: number
-  margin?: Spacing
-  renderCloseButtonLabel?: ((...args: any[]) => any) | React.ReactNode
-  onDismiss?: (...args: any[]) => any
-  transition?: 'none' | 'fade'
-  open?: boolean
-  hasShadow: boolean
-}
+import { AlertProps } from './types'
 
 /**
 ---
@@ -76,7 +59,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Alert extends Component<Props> {
+class Alert extends Component<AlertProps> {
   static readonly componentId = 'Alert'
 
   static propTypes = {

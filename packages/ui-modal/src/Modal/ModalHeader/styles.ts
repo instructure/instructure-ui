@@ -23,6 +23,7 @@
  */
 
 import { ModalHeaderTheme } from '@instructure/shared-types'
+import { ModalHeaderProps, ModalHeaderStyleProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,11 @@ import { ModalHeaderTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: ModalHeaderTheme, props, state) => {
+const generateStyle = (
+  componentTheme: ModalHeaderTheme,
+  props: ModalHeaderProps,
+  state: ModalHeaderStyleProps
+) => {
   const { variant } = props
   const { withCloseButton } = state
 

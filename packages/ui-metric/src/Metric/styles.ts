@@ -23,6 +23,7 @@
  */
 
 import { MetricTheme } from '@instructure/shared-types'
+import { MetricProps } from './types'
 
 /**
  * ---
@@ -33,8 +34,7 @@ import { MetricTheme } from '@instructure/shared-types'
  * @param  {Object} props the props of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: MetricTheme, props) => {
+const generateStyle = (componentTheme: MetricTheme, props: MetricProps) => {
   const { textAlign } = props
 
   return {

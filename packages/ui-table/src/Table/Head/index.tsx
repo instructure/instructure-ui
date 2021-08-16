@@ -44,13 +44,7 @@ import generateComponentTheme from './theme'
 
 import { Row } from '../Row'
 import { ColHeader } from '../ColHeader'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  isStacked?: boolean
-  renderSortLabel?: React.ReactNode | ((...args: any[]) => any)
-}
+import { TableHeadProps } from './types'
 
 /**
 ---
@@ -59,7 +53,7 @@ id: Table.Head
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Head extends Component<Props> {
+class Head extends Component<TableHeadProps> {
   static readonly componentId = 'Table.Head'
 
   /* eslint-disable react/require-default-props */

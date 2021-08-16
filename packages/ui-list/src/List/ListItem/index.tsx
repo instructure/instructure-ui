@@ -30,35 +30,11 @@ import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  delimiter?: 'none' | 'dashed' | 'solid'
-  size?: 'small' | 'medium' | 'large'
-  margin?: Spacing
-  padding?: Spacing
-  spacing?:
-    | 'none'
-    | 'xxx-small'
-    | 'xx-small'
-    | 'x-small'
-    | 'small'
-    | 'medium'
-    | 'large'
-    | 'x-large'
-    | 'xx-large'
-  elementRef?: (...args: any[]) => any
-}
+import { ListItemProps } from './types'
 
 /**
 ---
@@ -68,7 +44,7 @@ id: List.Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ListItem extends Component<Props> {
+class ListItem extends Component<ListItemProps> {
   static readonly componentId = 'List.Item'
 
   static propTypes = {

@@ -22,84 +22,114 @@
  * SOFTWARE.
  */
 
-import { mirrorPlacement } from '@instructure/ui-position'
+import { mirrorPlacement, PlacementPropValues } from '@instructure/ui-position'
 import { ContextViewTheme } from '@instructure/shared-types'
+import { ContextViewProps } from './types'
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
-const getPlacementStyle = (placement, theme) => {
-  if (
-    ['end-center', 'end-top', 'end-bottom', 'center-end', 'end'].includes(
-      placement
-    )
-  ) {
+type PlacementArray = PlacementPropValues[]
+
+const endPlacements: PlacementArray = [
+  'end center',
+  'end top',
+  'end bottom',
+  'center end',
+  'end'
+]
+const startPlacements: PlacementArray = [
+  'start center',
+  'start top',
+  'start bottom',
+  'center start',
+  'start'
+]
+const bottomPlacements: PlacementArray = [
+  'bottom',
+  'bottom end',
+  'bottom start',
+  'bottom center'
+]
+const topPlacements: PlacementArray = [
+  'top',
+  'top start',
+  'top end',
+  'top center'
+]
+
+const getPlacementStyle = (
+  placement: PlacementPropValues,
+  theme: ContextViewTheme
+) => {
+  if (endPlacements.includes(placement)) {
     return { paddingInlineStart: theme?.arrowSize, paddingInlineEnd: '0' }
   }
-  if (
-    [
-      'start-center',
-      'start-top',
-      'start-bottom',
-      'center-start',
-      'start'
-    ].includes(placement)
-  ) {
+  if (startPlacements.includes(placement)) {
     return { paddingInlineEnd: theme?.arrowSize, paddingInlineStart: '0' }
   }
-  if (
-    ['bottom', 'bottom-end', 'bottom-start', 'bottom-center'].includes(
-      placement
-    )
-  ) {
+  if (bottomPlacements.includes(placement)) {
     return { paddingTop: theme?.arrowSize }
   }
-  if (['top', 'top-start', 'top-end', 'top-center'].includes(placement)) {
+  if (topPlacements.includes(placement)) {
     return { paddingBottom: theme?.arrowSize }
   }
 
   return { position: 'absolute', left: '-999em' }
 }
 
-// @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
-const getArrowCorrections = (placement, theme) => {
-  if (['top', 'bottom', 'top-center', 'bottom-center'].includes(placement)) {
+const getArrowCorrections = (
+  placement: PlacementPropValues,
+  theme: ContextViewTheme
+) => {
+  const center: PlacementArray = [
+    'top',
+    'bottom',
+    'top center',
+    'bottom center'
+  ]
+  const start: PlacementArray = ['top start', 'bottom start']
+  const end: PlacementArray = ['top end', 'bottom end']
+  const top: PlacementArray = ['start top', 'end top']
+  const bottom: PlacementArray = ['start bottom', 'end bottom']
+
+  if (center.includes(placement)) {
     return {
       insetInlineStart: '50%'
     }
   }
-  if (['top-start', 'bottom-start'].includes(placement)) {
+  if (start.includes(placement)) {
     return {
       insetInlineStart: `calc((${theme?.arrowSize} + ${theme?.arrowBorderWidth}) * 2)`,
       insetInlineEnd: 'auto'
     }
   }
-  if (['top-end', 'bottom-end'].includes(placement)) {
+  if (end.includes(placement)) {
     return {
       insetInlineStart: `calc(100% - (${theme?.arrowSize} + ${theme?.arrowBorderWidth}) * 2)`,
       insetInlineEnd: 'auto'
     }
   }
-  if (['start-top', 'end-top'].includes(placement)) {
+  if (top.includes(placement)) {
     return {
       top: `calc((${theme?.arrowSize} + ${theme?.arrowBorderWidth}) * 2)`
     }
   }
-  if (['start-bottom', 'end-bottom'].includes(placement)) {
+  if (bottom.includes(placement)) {
     return {
       top: `calc(100% - (${theme?.arrowSize} + ${theme?.arrowBorderWidth}) * 2)`
     }
   }
+
+  return {}
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
-const getArrowPlacementVariant = (placement, background, theme) => {
-  const transformedPlacement = mirrorPlacement(placement, '-')
+const getArrowPlacementVariant = (
+  placement: PlacementPropValues,
+  background: ContextViewProps['background'],
+  theme: ContextViewTheme
+) => {
+  const transformedPlacement = mirrorPlacement(placement, ' ')
   const isInversed = background === 'inverse'
 
-  if (
-    ['end-center', 'end-top', 'end-bottom', 'center-end', 'end'].includes(
-      transformedPlacement
-    )
-  ) {
+  if (endPlacements.includes(transformedPlacement)) {
     return {
       main: {
         top: '50%',
@@ -131,15 +161,8 @@ const getArrowPlacementVariant = (placement, background, theme) => {
       }
     }
   }
-  if (
-    [
-      'start-center',
-      'start-top',
-      'start-bottom',
-      'center-start',
-      'start'
-    ].includes(transformedPlacement)
-  ) {
+
+  if (startPlacements.includes(transformedPlacement)) {
     return {
       main: {
         top: '50%',
@@ -171,11 +194,7 @@ const getArrowPlacementVariant = (placement, background, theme) => {
     }
   }
 
-  if (
-    ['bottom', 'bottom-end', 'bottom-start', 'bottom-center'].includes(
-      transformedPlacement
-    )
-  ) {
+  if (bottomPlacements.includes(transformedPlacement)) {
     return {
       main: {
         top: '100%',
@@ -236,10 +255,11 @@ const getArrowPlacementVariant = (placement, background, theme) => {
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: ContextViewTheme, props) => {
+const generateStyle = (
+  componentTheme: ContextViewTheme,
+  props: ContextViewProps
+) => {
   const { placement, background } = props
-  const transformedPlacement = placement.replace(' ', '-')
 
   const arrowBaseStyles = {
     content: '""',
@@ -268,7 +288,7 @@ const generateStyle = (componentTheme: ContextViewTheme, props) => {
       label: 'contextView',
       boxSizing: 'border-box',
       minHeight: `calc(${componentTheme?.arrowSize} * 2)`,
-      ...getPlacementStyle(transformedPlacement, componentTheme)
+      ...getPlacementStyle(placement, componentTheme)
     },
     contextView__content: {
       label: 'contextView__content',
@@ -279,14 +299,12 @@ const generateStyle = (componentTheme: ContextViewTheme, props) => {
       ...arrowBaseStyles,
       display: 'block',
       borderWidth: `calc(${componentTheme?.arrowSize} + ${componentTheme?.arrowBorderWidth})`,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      borderColor: arrowBackGroundVariants[background],
+      borderColor: arrowBackGroundVariants[background!],
       ...arrowPlacementVariant.main,
-      ...getArrowCorrections(transformedPlacement, componentTheme),
+      ...getArrowCorrections(placement, componentTheme),
       '&::after': {
         borderWidth: componentTheme?.arrowSize,
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        borderColor: arrowBackGroundVariants[background],
+        borderColor: arrowBackGroundVariants[background!],
         ...arrowPlacementVariant.__after,
         ...arrowBaseStyles
       }

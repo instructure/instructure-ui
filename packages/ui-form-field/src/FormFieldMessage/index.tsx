@@ -32,13 +32,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FormMessageType } from '../FormPropTypes'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  variant?: FormMessageType
-}
+import { FormFieldMessageProps } from './types'
 
 /**
 ---
@@ -56,7 +50,7 @@ example: true
 ```
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class FormFieldMessage extends Component<Props> {
+class FormFieldMessage extends Component<FormFieldMessageProps> {
   static readonly componentId = 'FormFieldMessage'
 
   static propTypes = {

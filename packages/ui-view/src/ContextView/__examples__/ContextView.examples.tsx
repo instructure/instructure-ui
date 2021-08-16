@@ -28,8 +28,7 @@ export default {
   propValues: {
     placement: ['top', 'end', 'bottom', 'start']
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       children: <span key="0">Hello World</span>,
       padding: 'small',

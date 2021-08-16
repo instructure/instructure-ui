@@ -23,6 +23,7 @@
  */
 
 import { ToggleFacadeTheme } from '@instructure/shared-types'
+import { ToggleFacadeProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,10 @@ import { ToggleFacadeTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: ToggleFacadeTheme, props, state) => {
+const generateStyle = (
+  componentTheme: ToggleFacadeTheme,
+  props: ToggleFacadeProps
+) => {
   const { size, checked, focused, labelPlacement } = props
 
   const labelPlacementVariants = {
@@ -92,8 +95,7 @@ const generateStyle = (componentTheme: ToggleFacadeTheme, props, state) => {
       boxShadow: `inset 0 0 0 ${componentTheme.borderWidth} ${componentTheme.borderColor}`,
       height: componentTheme.toggleSize,
       width: `calc(${componentTheme.toggleSize} * 1.5)`,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...labelPlacementVariants[labelPlacement].facade,
+      ...labelPlacementVariants[labelPlacement!].facade,
 
       ...(checked && {
         background: componentTheme.checkedBackground,
@@ -183,10 +185,8 @@ const generateStyle = (componentTheme: ToggleFacadeTheme, props, state) => {
       fontFamily: componentTheme.labelFontFamily,
       fontWeight: componentTheme.labelFontWeight,
       lineHeight: componentTheme.labelLineHeight,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...labelSizeVariants[size],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...labelPlacementVariants[labelPlacement].label
+      ...labelSizeVariants[size!],
+      ...labelPlacementVariants[labelPlacement!].label
     }
   }
 }

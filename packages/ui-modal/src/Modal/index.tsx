@@ -36,13 +36,11 @@ import {
   safeCloneElement,
   matchComponentTypes
 } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { Transition, TransitionType } from '@instructure/ui-motion'
+import { Transition } from '@instructure/ui-motion'
 import { Portal, PortalNode } from '@instructure/ui-portal'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
-import { PositionMountNode } from '@instructure/ui-position'
 import { Mask } from '@instructure/ui-overlays'
 import { ModalHeader } from './ModalHeader'
 import { ModalBody } from './ModalBody'
@@ -50,38 +48,7 @@ import { ModalFooter } from './ModalFooter'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  label: string
-  as?: AsElementType
-  size?: 'auto' | 'small' | 'medium' | 'large' | 'fullscreen'
-  variant?: 'default' | 'inverse'
-  open?: boolean
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  shouldReturnFocus?: boolean
-  shouldCloseOnDocumentClick?: boolean
-  onOpen?: (DOMNode: PortalNode) => any
-  onClose?: (...args: any[]) => any
-  onDismiss?: (...args: any[]) => any
-  contentRef?: (...args: any[]) => any
-  mountNode?: PositionMountNode
-  insertAt?: 'bottom' | 'top'
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
-  transition?: TransitionType
-  onEnter?: (...args: any[]) => any
-  onEntering?: (...args: any[]) => any
-  onEntered?: (...args: any[]) => any
-  onExit?: (...args: any[]) => any
-  onExiting?: (...args: any[]) => any
-  onExited?: (...args: any[]) => any
-  constrain?: 'window' | 'parent'
-  overflow?: 'scroll' | 'fit'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { ModalProps } from './types'
 
 /**
 ---
@@ -91,7 +58,7 @@ tags: overlay, portal, dialog
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Modal extends Component<Props> {
+class Modal extends Component<ModalProps> {
   static readonly componentId = 'Modal'
 
   static propTypes = {

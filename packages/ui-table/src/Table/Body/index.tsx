@@ -38,14 +38,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { Row } from '../Row'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  hover?: boolean
-  isStacked?: boolean
-  headers?: (React.ReactNode | ((...args: any[]) => any))[]
-}
+import { TableBodyProps } from './types'
 
 /**
 ---
@@ -54,7 +47,7 @@ id: Table.Body
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Body extends Component<Props> {
+class Body extends Component<TableBodyProps> {
   static readonly componentId = 'Table.Body'
 
   /* eslint-disable react/require-default-props */

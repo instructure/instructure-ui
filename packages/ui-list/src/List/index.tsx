@@ -33,36 +33,11 @@ import { testable } from '@instructure/ui-testable'
 
 import { ListItem } from './ListItem'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  as?: 'ul' | 'ol'
-  delimiter?: 'none' | 'dashed' | 'solid'
-  isUnstyled?: boolean
-  margin?: Spacing
-  size?: 'small' | 'medium' | 'large'
-  itemSpacing?:
-    | 'none'
-    | 'xxx-small'
-    | 'xx-small'
-    | 'x-small'
-    | 'small'
-    | 'medium'
-    | 'large'
-    | 'x-large'
-    | 'xx-large'
-  elementRef?: (...args: any[]) => any
-}
+import { ListProps } from './types'
 
 /**
 ---
@@ -71,7 +46,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class List extends Component<Props> {
+class List extends Component<ListProps> {
   static readonly componentId = 'List'
 
   static propTypes = {

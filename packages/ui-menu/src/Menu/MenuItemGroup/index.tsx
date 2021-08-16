@@ -45,22 +45,7 @@ import { MenuItemSeparator } from '../MenuItemSeparator'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  label: React.ReactNode
-  allowMultiple?: boolean
-  selected?: any // TODO: controllable(PropTypes.array, 'onSelect', 'defaultSelected')
-  defaultSelected?: any[]
-  onSelect?: (...args: any[]) => any
-  onMouseOver?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  controls?: string
-  itemRef?: (...args: any[]) => any
-  disabled?: boolean
-  isTabbable?: boolean
-}
+import { MenuGroupProps } from './types'
 
 /**
 ---
@@ -70,7 +55,7 @@ id: Menu.Group
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class MenuItemGroup extends Component<Props> {
+class MenuItemGroup extends Component<MenuGroupProps> {
   static readonly componentId = 'Menu.Group'
 
   static propTypes = {

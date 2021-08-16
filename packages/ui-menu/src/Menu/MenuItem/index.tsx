@@ -30,7 +30,6 @@ import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { uid } from '@instructure/uid'
 import { controllable } from '@instructure/ui-prop-types'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
@@ -40,24 +39,7 @@ import { MenuContext } from '../../MenuContext'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  defaultSelected?: boolean
-  selected?: any // TODO: controllable(PropTypes.bool, 'onSelect', 'defaultSelected')
-  onSelect?: (...args: any[]) => any
-  onClick?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  onKeyUp?: (...args: any[]) => any
-  onMouseOver?: (...args: any[]) => any
-  controls?: string
-  disabled?: boolean
-  as?: AsElementType
-  type?: 'button' | 'checkbox' | 'radio' | 'flyout'
-  value?: string | number
-  href?: string
-}
+import { MenuItemProps } from './types'
 
 /**
 ---
@@ -67,7 +49,7 @@ id: Menu.Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class MenuItem extends Component<Props> {
+class MenuItem extends Component<MenuItemProps> {
   static readonly componentId = 'Menu.Item'
 
   static propTypes = {

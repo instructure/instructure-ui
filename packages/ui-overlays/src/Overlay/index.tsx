@@ -32,40 +32,8 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
 
 import { Portal, PortalNode } from '@instructure/ui-portal'
-import { Transition, TransitionType } from '@instructure/ui-motion'
-import { PositionMountNode } from '@instructure/ui-position'
-
-type Props = {
-  open?: boolean
-  onOpen?: (DOMNode: PortalNode) => any
-  onClose?: (...args: any[]) => any
-  mountNode?: PositionMountNode
-  insertAt?: 'bottom' | 'top'
-  label: string
-  onDismiss?: (...args: any[]) => any
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  applicationElement?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
-  contentElement?: React.ReactElement | ((...args: any[]) => any)
-  shouldContainFocus?: boolean
-  shouldReturnFocus?: boolean
-  shouldCloseOnDocumentClick?: boolean
-  shouldCloseOnEscape?: boolean
-  transition?: TransitionType
-  in?: boolean
-  unmountOnExit?: boolean
-  transitionOnMount?: boolean
-  transitionEnter?: boolean
-  transitionExit?: boolean
-  onEnter?: (...args: any[]) => any
-  onEntering?: (...args: any[]) => any
-  onEntered?: (...args: any[]) => any
-  onExit?: (...args: any[]) => any
-  onExiting?: (...args: any[]) => any
-  onExited?: (...args: any[]) => any
-}
+import { Transition } from '@instructure/ui-motion'
+import { OverlayProps } from './types'
 
 /**
 ---
@@ -73,7 +41,7 @@ category: components
 ---
 **/
 @testable()
-class Overlay extends Component<Props> {
+class Overlay extends Component<OverlayProps> {
   static propTypes = {
     children: PropTypes.node,
     /**

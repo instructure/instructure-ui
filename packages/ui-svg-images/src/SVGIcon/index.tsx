@@ -34,15 +34,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  // TODO: ...InlineSVG.propTypes,
-  rotate?: '0' | '90' | '180' | '270'
-  size?: 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
-  bidirectional?: boolean
-}
+import { SVGIconProps } from './types'
 
 /**
 ---
@@ -51,7 +43,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class SVGIcon extends Component<Props> {
+class SVGIcon extends Component<SVGIconProps> {
   static readonly componentId = 'SVGIcon'
 
   static propTypes = {

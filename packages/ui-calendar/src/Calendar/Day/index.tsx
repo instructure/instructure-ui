@@ -34,7 +34,6 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 import { I18nPropTypes } from '@instructure/ui-i18n'
-import { AsElementType } from '@instructure/shared-types'
 
 import testable from '@instructure/ui-testable'
 
@@ -42,21 +41,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  date: string
-  label: string
-  interaction?: 'enabled' | 'disabled'
-  isSelected?: boolean
-  isToday?: boolean
-  isOutsideMonth?: boolean
-  onClick?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  elementRef?: (...args: any[]) => any
-  as?: AsElementType
-}
+import { CalendarDayProps, CalendarDayStyleProps } from './types'
 
 /**
 ---
@@ -66,7 +51,7 @@ id: Calendar.Day
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Day extends Component<Props> {
+class Day extends Component<CalendarDayProps> {
   static readonly componentId = 'Calendar.Day'
 
   static propTypes = {
@@ -153,7 +138,7 @@ class Day extends Component<Props> {
     this.props.makeStyles(this.makeStylesVariables)
   }
 
-  get makeStylesVariables() {
+  get makeStylesVariables(): CalendarDayStyleProps {
     return { isDisabled: this.isDisabled }
   }
 

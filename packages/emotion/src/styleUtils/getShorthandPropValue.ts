@@ -42,8 +42,8 @@ import { logError as error } from '@instructure/console'
  */
 function getShorthandPropValue(
   componentName: string,
-  componentTheme: any,
-  propValue: string,
+  componentTheme: Record<string, string | number>,
+  propValue: string | undefined,
   propName: string
 ) {
   if (typeof propValue !== 'string' || isEmpty(componentTheme)) {
@@ -73,7 +73,7 @@ function getShorthandPropValue(
       const themeVariableValue = componentTheme[themeVariableName]
 
       error(
-        themeVariableValue,
+        typeof themeVariableValue !== 'undefined',
         `[${componentName}] '${themeVariableName}' is an invalid '${propName}' value.`
       )
 

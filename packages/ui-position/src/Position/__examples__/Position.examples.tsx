@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { Props } from '../types'
+import { PositionProps } from '../types'
 
 export default {
   propValues: {
@@ -51,7 +51,7 @@ export default {
       'start stretch'
     ]
   },
-  getComponentProps: (props: Props) => {
+  getComponentProps: (props: PositionProps) => {
     const targetSize = '3px'
     const contentSize = '48px'
     const xStretch =
@@ -114,7 +114,7 @@ export default {
         )
     }
   },
-  getExampleProps: (props: Props) => {
+  getExampleProps: (props: PositionProps) => {
     const xStretch =
       props.placement == 'top stretch' || props.placement === 'bottom stretch'
     const yStretch =

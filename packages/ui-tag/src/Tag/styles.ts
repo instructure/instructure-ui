@@ -23,6 +23,7 @@
  */
 
 import { TagTheme } from '@instructure/shared-types'
+import { TagProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,7 @@ import { TagTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: TagTheme, props) => {
+const generateStyle = (componentTheme: TagTheme, props: TagProps) => {
   const { variant, size, dismissible, onClick, disabled } = props
 
   const isButton = !!onClick
@@ -192,16 +192,13 @@ const generateStyle = (componentTheme: TagTheme, props) => {
       textAlign: 'center',
       verticalAlign: 'middle',
       userSelect: 'none',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].tag,
+      ...sizeVariants[size!].tag,
       ...buttonVariant.tag,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...tagVariantVariants[variant].tag,
+      ...tagVariantVariants[variant!].tag,
 
       '&::before': {
         ...buttonVariant.tagBefore,
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        ...tagVariantVariants[variant].tagBefore
+        ...tagVariantVariants[variant!].tagBefore
       }
     },
     text: {
@@ -210,8 +207,7 @@ const generateStyle = (componentTheme: TagTheme, props) => {
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       maxWidth: componentTheme.maxWidth,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].text
+      ...sizeVariants[size!].text
     },
     icon: {
       label: 'tag__icon',
@@ -220,10 +216,8 @@ const generateStyle = (componentTheme: TagTheme, props) => {
       transform: 'translateY(0.0625rem)',
       transition: `all ${componentTheme.transitionTiming}`,
       cursor: 'pointer',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size].icon,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...iconVariantVariants[variant]
+      ...sizeVariants[size!].icon,
+      ...iconVariantVariants[variant!]
     }
   }
 }

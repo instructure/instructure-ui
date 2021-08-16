@@ -32,16 +32,7 @@ import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  onDismiss?: (...args: any[]) => any
-  placement?: 'top' | 'center' | 'bottom' | 'stretch'
-  fullscreen?: boolean
-  onClick?: (...args: any[]) => any
-  elementRef?: (...args: any[]) => any
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { MaskProps } from './types'
 
 /**
 ---
@@ -49,7 +40,7 @@ category: components/utilities
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Mask extends Component<Props> {
+class Mask extends Component<MaskProps> {
   static readonly componentId = 'Mask'
 
   static propTypes = {

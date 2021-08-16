@@ -28,11 +28,7 @@ import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import { controllable } from '@instructure/ui-prop-types'
-import {
-  FormPropTypes,
-  FormFieldMessages,
-  FormMessage
-} from '@instructure/ui-form-field'
+import { FormPropTypes, FormFieldMessages } from '@instructure/ui-form-field'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
@@ -47,30 +43,7 @@ import { CheckboxFacade } from './CheckboxFacade'
 import { ToggleFacade } from './ToggleFacade'
 
 import generateStyle from './styles'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  label: React.ReactNode
-  id?: string
-  value?: string | number
-  messages?: FormMessage[]
-  defaultChecked?: boolean
-  checked?: any // TODO: controllable(PropTypes.bool, 'onChange', 'defaultChecked')
-  onChange?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onMouseOver?: (...args: any[]) => any
-  onMouseOut?: (...args: any[]) => any
-  disabled?: boolean
-  readOnly?: boolean
-  indeterminate?: boolean
-  size?: 'small' | 'medium' | 'large'
-  variant?: 'simple' | 'toggle'
-  inline?: boolean
-  labelPlacement?: 'top' | 'start' | 'end'
-}
+import { CheckboxProps } from './types'
 
 /**
 ---
@@ -81,7 +54,7 @@ tags: toggle, switch
 
 @withStyle(generateStyle, null)
 @testable()
-class Checkbox extends Component<Props> {
+class Checkbox extends Component<CheckboxProps> {
   static readonly componentId = 'Checkbox'
 
   static propTypes = {

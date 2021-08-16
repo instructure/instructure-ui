@@ -35,24 +35,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { RadioInputProps } from './types'
 
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  label: React.ReactNode
-  value?: string | number
-  id?: string
-  name?: string
-  checked?: boolean
-  disabled?: boolean
-  readOnly?: boolean
-  variant?: 'simple' | 'toggle'
-  size?: 'small' | 'medium' | 'large'
-  context?: 'success' | 'warning' | 'danger' | 'off'
-  inline?: boolean
-  onClick?: (...args: any[]) => any
-  onChange?: (...args: any[]) => any
-}
 /**
 ---
 category: components
@@ -60,7 +44,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class RadioInput extends Component<Props> {
+class RadioInput extends Component<RadioInputProps> {
   static readonly componentId = 'RadioInput'
 
   static propTypes = {

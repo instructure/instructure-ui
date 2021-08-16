@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Component, ReactNode } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
@@ -32,19 +32,7 @@ import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { OtherHTMLAttributes } from '@instructure/shared-types'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  textAlign: 'start' | 'center' | 'end'
-  renderLabel?: ((props?: any) => ReactNode) | ReactNode
-  renderValue?: ((props?: any) => ReactNode) | ReactNode
-  /**
-   * Set to true when a child of MetricGroup so the appropriate
-   * aria labels get set
-   */
-  isGroupChild: boolean
-}
+import { MetricProps } from './types'
 
 /**
 ---
@@ -54,7 +42,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Metric extends Component<Props & OtherHTMLAttributes<Props>> {
+class Metric extends Component<MetricProps & OtherHTMLAttributes<MetricProps>> {
   static readonly componentId = 'Metric'
 
   static propTypes = {
@@ -86,13 +74,8 @@ class Metric extends Component<Props & OtherHTMLAttributes<Props>> {
   }
 
   render() {
-    const {
-      textAlign,
-      renderLabel,
-      renderValue,
-      isGroupChild,
-      ...rest
-    } = this.props
+    const { textAlign, renderLabel, renderValue, isGroupChild, ...rest } =
+      this.props
 
     return (
       <div

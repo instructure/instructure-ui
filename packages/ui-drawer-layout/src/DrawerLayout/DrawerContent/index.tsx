@@ -34,15 +34,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  label: string
-  contentRef?: (...args: any[]) => any
-  onSizeChange?: (...args: any[]) => any
-  role?: string
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { DrawerLayoutContentProps, DrawerLayoutContentState } from './types'
 
 /**
 ---
@@ -52,7 +44,10 @@ id: DrawerLayout.Content
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class DrawerContent extends Component<Props> {
+class DrawerContent extends Component<
+  DrawerLayoutContentProps,
+  DrawerLayoutContentState
+> {
   static readonly componentId = 'DrawerLayout.Content'
 
   static locatorAttribute = 'data-drawer-content'
@@ -81,7 +76,7 @@ class DrawerContent extends Component<Props> {
     role: 'region'
   }
 
-  state = {
+  state: DrawerLayoutContentState = {
     shouldTransition: false
   }
 

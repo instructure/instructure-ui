@@ -38,38 +38,8 @@ import { Transition } from '@instructure/ui-motion'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { TrayProps } from './types'
 
-type Props = {
-  label: string
-  size?: 'x-small' | 'small' | 'regular' | 'medium' | 'large'
-  placement: 'top' | 'bottom' | 'start' | 'end' | 'center'
-  open?: boolean
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  contentRef?: (...args: any[]) => any
-  shouldContainFocus?: boolean
-  shouldReturnFocus?: boolean
-  shouldCloseOnDocumentClick?: boolean
-  onOpen?: (...args: any[]) => any
-  onClose?: (...args: any[]) => any
-  onDismiss?: (...args: any[]) => any
-  mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func])
-  insertAt?: 'bottom' | 'top'
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
-  onTransition?: (...args: any[]) => any
-  onEnter?: (...args: any[]) => any
-  onEntering?: (...args: any[]) => any
-  onEntered?: (...args: any[]) => any
-  onExit?: (...args: any[]) => any
-  onExiting?: (...args: any[]) => any
-  onExited?: (...args: any[]) => any
-  border?: boolean
-  shadow?: boolean
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
 /**
 ---
 category: components
@@ -78,7 +48,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
 @testable()
-class Tray extends Component<Props & BidirectionalProps> {
+class Tray extends Component<TrayProps & BidirectionalProps> {
   static readonly componentId = 'Tray'
 
   static propTypes = {

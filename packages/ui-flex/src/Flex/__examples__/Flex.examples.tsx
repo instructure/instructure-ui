@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { Flex, Props } from '../index'
+import { Flex } from '../index'
+import { FlexProps } from '../types'
 
 const regular = [
   <Flex.Item key="0">One</Flex.Item>,
@@ -64,7 +65,7 @@ export default {
   propValues: {
     children: [regular, shrink, grow]
   },
-  filter: (props: Props) => {
+  filter: (props: FlexProps) => {
     return (
       props.withVisualDebug ||
       props.direction === 'row-reverse' ||

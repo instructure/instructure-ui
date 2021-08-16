@@ -26,10 +26,11 @@ import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { FormFieldMessages } from '../index'
+import { FormMessage } from '../../FormPropTypes'
 
 describe('<FormFieldMessages />', () => {
   it('should render', async () => {
-    const messages = [
+    const messages: FormMessage[] = [
       { text: 'Invalid name', type: 'error' },
       { text: 'Good job!', type: 'success' },
       { text: 'Full name, first and last', type: 'hint' }
@@ -45,7 +46,7 @@ describe('<FormFieldMessages />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    const messages = [
+    const messages: FormMessage[] = [
       { text: 'Invalid name', type: 'error' },
       { text: 'Good job!', type: 'success' },
       { text: 'Full name, first and last', type: 'hint' }

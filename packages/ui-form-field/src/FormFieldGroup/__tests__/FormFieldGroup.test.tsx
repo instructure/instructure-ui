@@ -26,6 +26,7 @@ import React from 'react'
 import { expect, mount, within, find } from '@instructure/ui-test-utils'
 
 import { FormFieldGroup } from '../index'
+import { FormMessage } from '../../FormPropTypes'
 
 describe('<FormFieldGroup />', async () => {
   it('should render', async () => {
@@ -66,7 +67,7 @@ describe('<FormFieldGroup />', async () => {
   })
 
   it('links the messages to the fieldset via aria-describedby', async () => {
-    const messages = [{ text: 'Invalid name', type: 'error' }]
+    const messages: FormMessage[] = [{ text: 'Invalid name', type: 'error' }]
 
     const subject = await mount(
       <FormFieldGroup

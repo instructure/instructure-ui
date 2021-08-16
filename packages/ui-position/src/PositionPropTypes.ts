@@ -77,7 +77,6 @@ const PositionPropTypes = {
  * The placement of the content in relation to the trigger
  */
 export type PlacementPropValues =
-  // TODO: merge with PropTypes once react-docgen can parse `typeof array[number]`
   | 'top'
   | 'bottom'
   | 'start'
@@ -101,6 +100,7 @@ export type PlacementPropValues =
   | 'center start'
   | 'center end'
   | 'offscreen'
+// TODO: merge with PropTypes once react-docgen can parse `typeof array[number]`
 
 /**
  * An element or a function returning an element to use as the mount node
@@ -112,11 +112,11 @@ export type PositionMountNode = Element | (() => Element | null) | null
  */
 export type PositionConstraint =
   | PositionMountNode
-  // TODO: merge with PropTypes once react-docgen can parse `typeof array[number]`
   | 'window'
   | 'scroll-parent'
   | 'parent'
   | 'none'
+// TODO: merge with PropTypes once react-docgen can parse `typeof array[number]`
 
 export type PlacementValues =
   | 'top'

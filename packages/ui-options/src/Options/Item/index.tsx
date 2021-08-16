@@ -32,22 +32,12 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { AsElementType } from '@instructure/shared-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  as?: AsElementType
-  variant?: 'default' | 'highlighted' | 'selected' | 'disabled'
-  role?: string
-  renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
-}
+import { OptionsItemProps } from './types'
 
 /**
 ---
@@ -57,7 +47,7 @@ id: Options.Item
 **/
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class Item extends Component<Props> {
+class Item extends Component<OptionsItemProps> {
   static readonly componentId = 'Options.Item'
 
   static propTypes = {

@@ -26,12 +26,7 @@
 import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
@@ -46,20 +41,7 @@ import { Item } from './Item'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  screenReaderLabel: string
-  debounce?: number
-  renderBeforeItems?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterItems?: React.ReactNode | ((...args: any[]) => any)
-  margin?: Spacing
-  elementRef?: (...args: any[]) => any
-  renderTruncateLabel?: React.ReactNode | ((...args: any[]) => any)
-  onUpdate?: (...args: any[]) => any
-  visibleItemsCount?: number
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { AppNavProps } from './types'
 
 /**
 ---
@@ -68,7 +50,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class AppNav extends Component<Props> {
+class AppNav extends Component<AppNavProps> {
   static readonly componentId = 'AppNav'
 
   static propTypes = {

@@ -32,48 +32,17 @@ import {
   getElementType,
   getInteraction,
   passthroughProps,
-  callRenderProp,
-  InteractionType
+  callRenderProp
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
-import { AsElementType } from '@instructure/shared-types'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  type?: 'button' | 'submit' | 'reset'
-  size?: 'small' | 'medium' | 'large'
-  elementRef?: (...args: any[]) => any
-  as?: AsElementType
-  interaction?: InteractionType
-  color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
-  focusColor?: 'info' | 'inverse'
-  display?: 'inline-block' | 'block'
-  textAlign?: 'start' | 'center'
-  shape?: 'rectangle' | 'circle'
-  withBackground?: boolean
-  withBorder?: boolean
-  isCondensed?: boolean
-  margin?: Spacing
-  cursor?: string
-  href?: string
-  onClick?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  renderIcon?: React.ReactNode | ((...args: any[]) => any)
-  tabIndex?: number | string
-}
+import { BaseButtonProps, BaseButtonStyleProps } from './types'
 
 /**
 ---
@@ -83,7 +52,7 @@ category: components/utilities
 
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class BaseButton extends Component<Props> {
+class BaseButton extends Component<BaseButtonProps> {
   static readonly componentId = 'BaseButton'
 
   static propTypes = {
@@ -228,7 +197,7 @@ class BaseButton extends Component<Props> {
     this.props.makeStyles(this.makeStylesVariables)
   }
 
-  get makeStylesVariables() {
+  get makeStylesVariables(): BaseButtonStyleProps {
     return {
       isDisabled: this.isDisabled,
       hasOnlyIconVisible: this.hasOnlyIconVisible
@@ -237,7 +206,7 @@ class BaseButton extends Component<Props> {
 
   get hasOnlyIconVisible() {
     const { children, renderIcon } = this.props
-    return renderIcon && !hasVisibleChildren(children)
+    return !!(renderIcon && !hasVisibleChildren(children))
   }
 
   get elementType() {

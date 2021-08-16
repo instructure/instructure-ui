@@ -42,17 +42,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  colSpacing?: 'none' | 'small' | 'medium' | 'large'
-  rowSpacing?: 'none' | 'small' | 'medium' | 'large'
-  hAlign?: 'start' | 'center' | 'end' | 'space-around' | 'space-between'
-  vAlign?: 'top' | 'middle' | 'bottom'
-  startAt?: any // TODO: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
-  visualDebug?: boolean
-}
+import { GridProps } from './types'
 
 /**
 ---
@@ -60,7 +50,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Grid extends Component<Props> {
+class Grid extends Component<GridProps> {
   static readonly componentId = 'Grid'
 
   static propTypes = {

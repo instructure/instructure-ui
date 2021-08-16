@@ -33,7 +33,7 @@ import {
 
 import { WithStyleProps } from '@instructure/emotion'
 
-type Props = {
+type PositionProps = {
   /**
    * The node to use as the position target
    */
@@ -108,7 +108,7 @@ type Props = {
   children: React.ReactNode
 } & WithStyleProps
 
-type State = {
+type PositionState = {
   positioned: boolean
 } & ElementPosition
 
@@ -116,4 +116,4 @@ type Position = ElementPosition['style'] & {
   placement: ElementPosition['placement']
 }
 
-export type { Props, State }
+export type { PositionProps, PositionState }

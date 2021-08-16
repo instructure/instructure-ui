@@ -36,15 +36,7 @@ import { Transition } from '@instructure/ui-motion'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  animationDelay?: number
-  animateFill?: boolean
-  filled?: boolean
-  size?: 'small' | 'medium' | 'large'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { RatingIconProps, RatingIconState } from './types'
 
 /**
 ---
@@ -53,7 +45,7 @@ id: Rating.Icon
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class RatingIcon extends Component<Props> {
+class RatingIcon extends Component<RatingIconProps, RatingIconState> {
   static readonly componentId = 'Rating.Icon'
 
   static propTypes = {
@@ -115,7 +107,6 @@ class RatingIcon extends Component<Props> {
   }
 
   makeStyleProps = () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'filled' does not exist on type 'Readonly... Remove this comment to see the full error message
     return { filled: this.state.filled }
   }
 
@@ -129,13 +120,11 @@ class RatingIcon extends Component<Props> {
 
   render() {
     const { animateFill } = this.props
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'filled' does not exist on type 'Readonly... Remove this comment to see the full error message
     const Icon = this.state.filled ? IconStarSolid : IconStarLightSolid
 
     return (
       <span css={this.props.styles.ratingIcon}>
         <span>
-          {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'filled' does not exist on type 'Readonly... Remove this comment to see the full error message */}
           {this.state.filled && animateFill ? (
             <Transition in transitionOnMount type="scale">
               <Icon css={this.props.styles.icon} />

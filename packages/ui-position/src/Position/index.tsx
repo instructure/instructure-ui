@@ -48,7 +48,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { Props, State } from './types'
+import { PositionProps, PositionState } from './types'
 
 import { calculateElementPosition } from '../calculateElementPosition'
 import { PositionElement, PositionPropTypes } from '../PositionPropTypes'
@@ -61,7 +61,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Position extends Component<Props, State> {
+class Position extends Component<PositionProps, PositionState> {
   static readonly componentId = 'Position'
 
   static propTypes = {
@@ -85,7 +85,7 @@ class Position extends Component<Props, State> {
     children: PropTypes.node
   }
 
-  static defaultProps: Props = {
+  static defaultProps: PositionProps = {
     renderTarget: undefined,
     target: undefined,
     placement: 'bottom center',
@@ -106,7 +106,7 @@ class Position extends Component<Props, State> {
   static targetLocatorAttribute = 'data-position-target'
   static contentLocatorAttribute = 'data-position-content'
 
-  constructor(props: Props) {
+  constructor(props: PositionProps) {
     super(props)
 
     this.state = {
@@ -127,7 +127,11 @@ class Position extends Component<Props, State> {
   _content?: PositionElement
   _target?: PositionElement
 
-  shouldComponentUpdate(nextProps: Props, nextState: State, nextContext: any) {
+  shouldComponentUpdate(
+    nextProps: PositionProps,
+    nextState: PositionState,
+    nextContext: any
+  ) {
     return (
       !deepEqual(this.state, nextState) ||
       !shallowEqual(this.props, nextProps) ||
@@ -141,7 +145,7 @@ class Position extends Component<Props, State> {
     this.props.makeStyles()
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(prevProps: PositionProps, prevState: PositionState) {
     this.position()
     this.toggleLocatorAttributes(true)
 
@@ -235,7 +239,7 @@ class Position extends Component<Props, State> {
     )
   }
 
-  calculatePosition(props: Props) {
+  calculatePosition(props: PositionProps) {
     return calculateElementPosition(this._content, this._target, {
       placement: props.placement,
       offsetX: props.offsetX,

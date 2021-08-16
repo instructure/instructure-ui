@@ -31,26 +31,9 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { RatingIcon } from '../RatingIcon'
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
-
-type Props = {
-  label: string
-  formatValueText?: (...args: any[]) => any
-  iconCount?: 3 | 5
-  size?: 'small' | 'medium' | 'large'
-  valueMax?: number
-  valueNow?: number
-  animateFill?: boolean
-  margin?: Spacing
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { RatingProps } from './types'
 
 /**
 ---
@@ -59,7 +42,7 @@ category: components
 **/
 @withStyle(generateStyle)
 @testable()
-class Rating extends Component<Props> {
+class Rating extends Component<RatingProps> {
   static readonly componentId = 'Rating'
 
   static propTypes = {

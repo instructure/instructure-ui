@@ -30,27 +30,13 @@ import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { TruncateText } from '@instructure/ui-truncate-text'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { testable } from '@instructure/ui-testable'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  as?: AsElementType
-  color?: 'primary' | 'success' | 'danger' | 'info' | 'warning' | 'alert'
-  elementRef?: (...args: any[]) => any
-  margin?: Spacing
-}
+import { PillProps } from './types'
 
 /**
 ---
@@ -59,7 +45,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Pill extends Component<Props> {
+class Pill extends Component<PillProps> {
   static readonly componentId = 'Pill'
 
   static propTypes = {

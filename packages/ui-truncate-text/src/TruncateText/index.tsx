@@ -40,19 +40,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import truncate from './utils/truncate'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  maxLines?: string | number
-  position?: 'end' | 'middle'
-  truncate?: 'character' | 'word'
-  ellipsis?: string
-  ignore?: string[]
-  debounce?: number
-  onUpdate?: (...args: any[]) => any
-  shouldTruncateWhenInvisible?: boolean
-}
+import { TruncateTextProps } from './types'
 
 /**
 ---
@@ -62,7 +50,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 @hack(['shouldTruncateWhenInvisible'])
-class TruncateText extends Component<Props> {
+class TruncateText extends Component<TruncateTextProps> {
   static readonly componentId = 'TruncateText'
 
   static propTypes = {

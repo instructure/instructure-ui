@@ -44,35 +44,14 @@ import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { Tab } from './Tab'
 import { Panel } from './Panel'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  variant?: 'default' | 'secondary'
-  screenReaderLabel?: string
-  onRequestTabChange?: (...args: any[]) => any
-  maxWidth?: string | number
-  maxHeight?: string | number
-  minHeight?: string | number
-  margin?: Spacing
-  padding?: Spacing
-  textAlign?: 'start' | 'center' | 'end'
-  elementRef?: (...args: any[]) => any
-  tabOverflow?: 'stack' | 'scroll'
-  shouldFocusOnRender?: boolean
-}
+import { TabsProps } from './types'
 
 /**
 ---
@@ -82,7 +61,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
 @testable()
-class Tabs extends Component<Props & BidirectionalProps> {
+class Tabs extends Component<TabsProps & BidirectionalProps> {
   static readonly componentId = 'Tabs'
 
   static propTypes = {

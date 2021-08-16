@@ -29,26 +29,12 @@ import PropTypes from 'prop-types'
 import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { BylineProps } from './types'
 
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  title?: React.ReactNode
-  description?: string | React.ReactNode
-  alignContent?: 'top' | 'center'
-  margin?: Spacing
-  size?: 'small' | 'medium' | 'large'
-  elementRef?: (...args: any[]) => any
-}
 /**
 ---
 category: components
@@ -56,7 +42,7 @@ category: components
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
-class Byline extends Component<Props> {
+class Byline extends Component<BylineProps> {
   static readonly componentId = 'Byline'
 
   static propTypes = {

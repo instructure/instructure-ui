@@ -42,48 +42,14 @@ import {
   Children as ChildrenPropTypes,
   controllable
 } from '@instructure/ui-prop-types'
-import {
-  PlacementPropValues,
-  PositionPropTypes
-} from '@instructure/ui-position'
-import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
+import { PositionPropTypes } from '@instructure/ui-position'
+import { FormPropTypes } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
-  value?: any // TODO: controllable(PropTypes.string)
-  size?: 'small' | 'medium' | 'large'
-  placeholder?: string
-  onChange?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  isRequired?: boolean
-  isInline?: boolean
-  assistiveText?: string
-  layout?: 'stacked' | 'inline'
-  width?: string
-  inputRef?: (...args: any[]) => any
-  messages?: FormMessage[]
-  placement?: PlacementPropValues
-  isShowingCalendar?: boolean
-  onRequestValidateDate?: (...args: any[]) => any
-  onRequestShowCalendar?: (...args: any[]) => any
-  onRequestHideCalendar?: (...args: any[]) => any
-  onRequestSelectNextDay?: (...args: any[]) => any
-  onRequestSelectPrevDay?: (...args: any[]) => any
-  onRequestRenderNextMonth?: (...args: any[]) => any
-  onRequestRenderPrevMonth?: (...args: any[]) => any
-  renderNavigationLabel?: ((...args: any[]) => any) | React.ReactNode
-  renderWeekdayLabels: (((...args: any[]) => any) | React.ReactNode)[]
-  renderNextMonthButton?: ((...args: any[]) => any) | React.ReactNode
-  renderPrevMonthButton?: ((...args: any[]) => any) | React.ReactNode
-}
+import { DateInputProps } from './types'
 
 /**
 ---
@@ -92,7 +58,7 @@ category: components
 **/
 @withStyle(generateStyle, null)
 @testable()
-class DateInput extends Component<Props> {
+class DateInput extends Component<DateInputProps> {
   static readonly componentId = 'DateInput'
 
   static Day = Calendar.Day

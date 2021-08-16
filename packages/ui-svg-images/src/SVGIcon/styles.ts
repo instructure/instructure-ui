@@ -23,6 +23,7 @@
  */
 
 import { SVGIconTheme } from '@instructure/shared-types'
+import { SVGIconProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,7 @@ import { SVGIconTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: SVGIconTheme, props) => {
+const generateStyle = (componentTheme: SVGIconTheme, props: SVGIconProps) => {
   const { rotate, size, bidirectional } = props
 
   const rotateVariants = {
@@ -67,14 +67,11 @@ const generateStyle = (componentTheme: SVGIconTheme, props) => {
       lineHeight: 1,
       width: '1em',
       height: '1em',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...rotateVariants[rotate],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size],
+      ...rotateVariants[rotate!],
+      ...(size && sizeVariants[size]),
 
       ...(bidirectional && {
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        '[dir="rtl"] &': bidirectionalRotateVariants[rotate]
+        '[dir="rtl"] &': bidirectionalRotateVariants[rotate!]
       })
     }
   }

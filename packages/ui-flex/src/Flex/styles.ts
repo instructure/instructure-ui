@@ -23,6 +23,7 @@
  */
 
 import { FlexTheme } from '@instructure/shared-types'
+import { FlexProps } from './types'
 
 /**
  * ---
@@ -39,8 +40,7 @@ import { FlexTheme } from '@instructure/shared-types'
  * @return {Object} The final style object, which will be used in the component
  */
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: FlexTheme, props) => {
+const generateStyle = (componentTheme: FlexTheme, props: FlexProps) => {
   const { justifyItems, wrap, direction } = props
 
   // align-items css prop
@@ -70,7 +70,8 @@ const generateStyle = (componentTheme: FlexTheme, props) => {
   // wrap css prop
   const wrapValues = {
     wrap: 'wrap',
-    'wrap-reverse': 'wrap-reverse'
+    'wrap-reverse': 'wrap-reverse',
+    'no-wrap': undefined
   }
 
   // flex-direction css props
@@ -86,14 +87,10 @@ const generateStyle = (componentTheme: FlexTheme, props) => {
       label: 'flex',
       fontFamily: componentTheme.fontFamily,
       boxSizing: 'border-box',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       alignItems: alignItemsValues[alignItems],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      justifyContent: justifyItemsValues[justifyItems],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      flexWrap: wrapValues[wrap],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      flexDirection: flexDirectionValues[direction]
+      justifyContent: justifyItemsValues[justifyItems!],
+      flexWrap: wrapValues[wrap!],
+      flexDirection: flexDirectionValues[direction!]
     }
   }
 }

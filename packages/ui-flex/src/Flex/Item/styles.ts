@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { FlexItemProps } from './types'
+
 /**
  * ---
  * private: true
@@ -32,8 +34,11 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(6133) FIXME: 'componentTheme' is declared but its value is neve... Remove this comment to see the full error message
-const generateStyle = (componentTheme: any, props: any, state: any) => {
+const generateStyle = (
+  // @ts-expect-error no theme is used here
+  componentTheme,
+  props: FlexItemProps
+) => {
   const { shouldGrow, shouldShrink, align, size } = props
 
   const alignSelfValues = {
@@ -53,7 +58,6 @@ const generateStyle = (componentTheme: any, props: any, state: any) => {
       // so users can opt in to shrink like they do grow
       flexShrink: shouldShrink ? 1 : 0,
       ...(shouldGrow && { flexGrow: 1 }),
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...(align && { alignSelf: alignSelfValues[align] })
     }
   }

@@ -23,6 +23,7 @@
  */
 
 import { HeadingTheme } from '@instructure/shared-types'
+import { HeadingProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,7 @@ import { HeadingTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: HeadingTheme, props) => {
+const generateStyle = (componentTheme: HeadingTheme, props: HeadingProps) => {
   const { level, color, border } = props
 
   const levelStyles = {
@@ -122,12 +122,9 @@ const generateStyle = (componentTheme: HeadingTheme, props) => {
       '&:is(input)[type]': inputStyles,
       '&:-webkit-any(input)[type]': inputStyles,
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...levelStyles[level],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...colorStyles[color],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...borderStyles[border]
+      ...levelStyles[level!],
+      ...colorStyles[color!],
+      ...borderStyles[border!]
     }
   }
 }

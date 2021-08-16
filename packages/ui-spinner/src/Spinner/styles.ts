@@ -24,6 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { SpinnerTheme } from '@instructure/shared-types'
+import { SpinnerProps } from './types'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -57,8 +58,10 @@ const morph = keyframes`
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: SpinnerTheme, props) => {
+const generateStyle = (
+  componentTheme: SpinnerTheme,
+  props: SpinnerProps
+): any => {
   const { size, variant } = props
 
   const spinnerSizes = {
@@ -150,8 +153,7 @@ const generateStyle = (componentTheme: SpinnerTheme, props) => {
       position: 'relative',
       boxSizing: 'border-box',
       overflow: 'hidden',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...spinnerSizes[size]
+      ...spinnerSizes[size!]
     },
     circle: {
       label: 'spinner__circle',
@@ -163,15 +165,13 @@ const generateStyle = (componentTheme: SpinnerTheme, props) => {
       animationDuration: '2.25s',
       animationIterationCount: 'infinite',
       animationTimingFunction: 'linear',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...circleSizes[size]
+      ...circleSizes[size!]
     },
     circleTrack: {
       label: 'spinner__circleTrack',
       stroke: componentTheme.trackColor,
       fill: 'none',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...circleTrackSizes[size]
+      ...circleTrackSizes[size!]
     },
     circleSpin: {
       label: 'spinner__circleSpin',
@@ -181,10 +181,8 @@ const generateStyle = (componentTheme: SpinnerTheme, props) => {
       animationDuration: '1.75s',
       animationIterationCount: 'infinite',
       animationTimingFunction: 'ease',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...circleSpinSizes[size],
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...circleSpinVariant[variant]
+      ...circleSpinSizes[size!],
+      ...circleSpinVariant[variant!]
     }
   }
 }

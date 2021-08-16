@@ -35,28 +35,15 @@ import { logError as error } from '@instructure/console'
 
 import { Page } from './Page'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { PagesProps } from './types'
 
 export const PagesContext = createContext({
   history: [],
   navigateToPreviousPage: () => {}
 })
-
-type Props = {
-  defaultPageIndex?: number
-  activePageIndex?: any // TODO: controllable( PropTypes.number, 'onPageIndexChange', 'defaultPageIndex' )
-  onPageIndexChange?: (...args: any[]) => any
-  margin?: Spacing
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
 
 /**
 ---
@@ -64,7 +51,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Pages extends Component<Props> {
+class Pages extends Component<PagesProps> {
   static readonly componentId = 'Pages'
 
   static propTypes = {

@@ -23,6 +23,7 @@
  */
 
 import { RadioInputTheme } from '@instructure/shared-types'
+import { RadioInputProps } from './types'
 
 /**
  * ---
@@ -34,12 +35,13 @@ import { RadioInputTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: RadioInputTheme, props) => {
+const generateStyle = (
+  componentTheme: RadioInputTheme,
+  props: RadioInputProps
+) => {
   const { disabled, variant, context, size, inline } = props
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-  const getInputStateSelector = (state) =>
+  const getInputStateSelector = (state: 'hover' | 'focus' | 'checked') =>
     `[class$=-radioInput__input]:${state} + [class$=-radioInput__control] &`
 
   const toggleFacadeContextVariants = {
@@ -129,8 +131,7 @@ const generateStyle = (componentTheme: RadioInputTheme, props) => {
         height: '100%',
         boxShadow: componentTheme.toggleShadow,
         borderRadius: componentTheme.toggleBorderRadius,
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        ...toggleFacadeContextVariants[context],
+        ...toggleFacadeContextVariants[context!],
 
         '&::before': {
           content: '""',
@@ -283,20 +284,17 @@ const generateStyle = (componentTheme: RadioInputTheme, props) => {
     control: {
       label: 'radioInput__control',
       all: 'initial',
+      // @ts-expect-error defaulting to block
       display: 'block',
       direction: 'inherit',
       textAlign: 'start',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...controlVariants[variant].base,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...controlVariants[variant][size]
+      ...controlVariants[variant!].base,
+      ...controlVariants[variant!][size!]
     },
     facade: {
       label: 'radioInput__facade',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...facadeVariants[variant].base,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...facadeVariants[variant][size]
+      ...facadeVariants[variant!].base,
+      ...facadeVariants[variant!][size!]
     },
     label: {
       label: 'radioInput__label',
@@ -305,10 +303,8 @@ const generateStyle = (componentTheme: RadioInputTheme, props) => {
       fontFamily: componentTheme.labelFontFamily,
       fontWeight: componentTheme.labelFontWeight,
       lineHeight: componentTheme.labelLineHeight,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...labelVariants[variant].base,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...labelVariants[variant][size]
+      ...labelVariants[variant!].base,
+      ...labelVariants[variant!][size!]
     }
   }
 }

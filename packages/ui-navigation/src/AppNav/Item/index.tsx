@@ -32,7 +32,6 @@ import {
   matchComponentTypes,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
@@ -41,21 +40,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
-  renderAfter?: React.ReactNode | ((...args: any[]) => any)
-  renderIcon?: React.ReactNode | ((...args: any[]) => any)
-  href?: string
-  onClick?: (...args: any[]) => any
-  isSelected?: boolean
-  elementRef?: (...args: any[]) => any
-  as?: AsElementType
-  cursor?: string
-  isDisabled?: boolean
-}
+import { AppNavItemProps } from './types'
 
 /**
 ---
@@ -66,7 +51,7 @@ id: AppNav.Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Item extends Component<Props> {
+class Item extends Component<AppNavItemProps> {
   static readonly componentId = 'AppNav.Item'
 
   static propTypes = {

@@ -29,38 +29,14 @@ import PropTypes from 'prop-types'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { testable } from '@instructure/ui-testable'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { ProgressCircleProps, ProgressCircleState } from './types'
 
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  screenReaderLabel: string
-  size?: 'x-small' | 'small' | 'medium' | 'large'
-  valueMax?: number
-  valueNow?: number
-  formatScreenReaderValue?: ((...args: any[]) => any) | React.ReactNode
-  renderValue?: ((...args: any[]) => any) | React.ReactNode
-  color?: 'primary' | 'primary-inverse'
-  meterColor?:
-    | ((...args: any[]) => any)
-    | ('info' | 'warning' | 'danger' | 'alert' | 'success' | 'brand')
-  margin?: Spacing
-  elementRef?: (...args: any[]) => any
-  as?: AsElementType
-  shouldAnimateOnMount?: boolean
-  animationDelay?: number
-}
 /**
 ---
 category: components
@@ -68,7 +44,10 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ProgressCircle extends Component<Props> {
+class ProgressCircle extends Component<
+  ProgressCircleProps,
+  ProgressCircleState
+> {
   static readonly componentId = 'ProgressCircle'
 
   static propTypes = {
@@ -178,12 +157,10 @@ class ProgressCircle extends Component<Props> {
   }
 
   get makeStylesVariables() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldAnimateOnMount' does not exist on ... Remove this comment to see the full error message
     return { shouldAnimateOnMount: this.state.shouldAnimateOnMount }
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldAnimateOnMount' does not exist on ... Remove this comment to see the full error message
     if (this.state.shouldAnimateOnMount) {
       this._timeouts.push(
         // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message

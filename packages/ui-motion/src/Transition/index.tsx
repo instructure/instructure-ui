@@ -38,31 +38,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { BaseTransition } from './BaseTransition'
-
-export type TransitionType =
-  | 'fade'
-  | 'scale'
-  | 'slide-down'
-  | 'slide-up'
-  | 'slide-left'
-  | 'slide-right'
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  type?: TransitionType
-  in?: boolean
-  unmountOnExit?: boolean
-  transitionOnMount?: boolean
-  transitionEnter?: boolean
-  transitionExit?: boolean
-  onTransition?: (...args: any[]) => any
-  onEnter?: (...args: any[]) => any
-  onEntering?: (...args: any[]) => any
-  onEntered?: (...args: any[]) => any
-  onExit?: (...args: any[]) => any
-  onExiting?: (...args: any[]) => any
-  onExited?: (...args: any[]) => any
-}
+import { TransitionProps } from './types'
 
 /**
 ---
@@ -72,7 +48,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Transition extends Component<Props> {
+class Transition extends Component<TransitionProps> {
   static readonly componentId = 'Transition'
 
   static propTypes = {

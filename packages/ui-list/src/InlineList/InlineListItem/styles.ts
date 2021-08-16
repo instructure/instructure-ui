@@ -24,6 +24,7 @@
 
 import { logError as error } from '@instructure/console'
 import { InlineListItemTheme } from '@instructure/shared-types'
+import { InlineListItemProps } from './types'
 
 /**
  * ---
@@ -37,8 +38,10 @@ import { InlineListItemTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: InlineListItemTheme, props) => {
+const generateStyle = (
+  componentTheme: InlineListItemTheme,
+  props: InlineListItemProps
+) => {
   const { size, delimiter, spacing } = props
 
   const withDelimiter = delimiter !== 'none'
@@ -87,7 +90,8 @@ const generateStyle = (componentTheme: InlineListItemTheme, props) => {
     'xx-large': {
       marginInlineStart: componentTheme.spacingXXLarge,
       marginInlineEnd: componentTheme.spacingXXLarge
-    }
+    },
+    none: {}
   }
 
   const delimiterVariants = {
@@ -121,17 +125,14 @@ const generateStyle = (componentTheme: InlineListItemTheme, props) => {
       boxSizing: 'border-box',
       lineHeight: componentTheme.lineHeight,
       color: componentTheme.color,
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...(withSpacing && !withDelimiter && spacingVariants[spacing]),
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...sizeVariants[size],
+      ...(withSpacing && !withDelimiter && spacingVariants[spacing!]),
+      ...sizeVariants[size!],
       '&:first-of-type': { marginInlineStart: 0 },
       '&:last-of-type': { marginInlineEnd: 0 }
     },
     delimiter: {
       label: 'inlineListItem__delimiter',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...delimiterVariants[delimiter],
+      ...delimiterVariants[delimiter!],
       '[class$=-inlineListItem]:last-of-type > &:last-child::after': {
         content: 'none'
       }

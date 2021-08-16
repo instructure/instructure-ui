@@ -23,6 +23,7 @@
  */
 
 import { RangeInputTheme } from '@instructure/shared-types'
+import { RangeInputProps } from './types'
 
 /**
  * ---
@@ -34,8 +35,10 @@ import { RangeInputTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme: RangeInputTheme, props) => {
+const generateStyle = (
+  componentTheme: RangeInputTheme,
+  props: RangeInputProps
+) => {
   const { size } = props
   const valueSizeVariants = {
     small: {
@@ -126,8 +129,7 @@ const generateStyle = (componentTheme: RangeInputTheme, props) => {
       fontFamily: componentTheme.valueFontFamily,
       fontWeight: componentTheme.valueFontWeight,
       textAlign: 'center',
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...valueSizeVariants[size]
+      ...valueSizeVariants[size!]
     }
   }
 }

@@ -29,26 +29,11 @@ import PropTypes from 'prop-types'
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
-type Props = {
-  padding?: Spacing
-  elementRef?: (...args: any[]) => any
-  as?: AsElementType
-  variant?: 'default' | 'inverse'
-  overflow?: 'scroll' | 'fit'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import { ModalBodyProps } from './types'
 
 /**
 ---
@@ -58,7 +43,7 @@ id: Modal.Body
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ModalBody extends Component<Props> {
+class ModalBody extends Component<ModalBodyProps> {
   static readonly componentId = 'Modal.Body'
 
   static propTypes = {
