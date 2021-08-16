@@ -28,6 +28,12 @@ interface DebounceOptions {
   trailing?: boolean
 }
 
+export type Debounced = {
+  (...args: unknown[]): unknown
+  cancel: () => void
+  flush: () => void
+}
+
 /**
  * ---
  * category: utilities
@@ -62,7 +68,7 @@ function debounce(
   func: (...args: any[]) => unknown,
   wait = 0,
   options: DebounceOptions = {}
-) {
+): Debounced {
   let lastArgs: unknown[] | undefined
   let lastThis: unknown
   let result: unknown
