@@ -28,35 +28,37 @@ import { element } from '@instructure/ui-prop-types'
 import { RectType } from '@instructure/ui-dom-utils'
 import { UIElement } from '@instructure/shared-types'
 
+const placementPropValues = [
+  'top',
+  'bottom',
+  'start',
+  'end',
+  'top start',
+  'top center',
+  'top end',
+  'top stretch',
+  'bottom start',
+  'bottom center',
+  'bottom end',
+  'bottom stretch',
+  'start top',
+  'start center',
+  'start bottom',
+  'start stretch',
+  'end top',
+  'end center',
+  'end bottom',
+  'end stretch',
+  'center start',
+  'center end',
+  'offscreen'
+]
+
 const PositionPropTypes = {
   /**
    * The placement of the content in relation to the trigger
    */
-  placement: PropTypes.oneOf([
-    'top',
-    'end',
-    'bottom',
-    'start',
-    'top start',
-    'start top',
-    'start center',
-    'start bottom',
-    'bottom start',
-    'bottom center',
-    'bottom end',
-    'end bottom',
-    'end center',
-    'end top',
-    'top end',
-    'top center',
-    'center end',
-    'center start',
-    'top stretch',
-    'bottom stretch',
-    'end stretch',
-    'start stretch',
-    'offscreen'
-  ]),
+  placement: PropTypes.oneOf(placementPropValues),
   /**
    * An element or a function returning an element to use as the mount node
    */
@@ -77,27 +79,27 @@ const PositionPropTypes = {
 export type PlacementPropValues =
   // TODO: merge with PropTypes once react-docgen can parse `typeof array[number]`
   | 'top'
-  | 'end'
   | 'bottom'
   | 'start'
+  | 'end'
   | 'top start'
-  | 'start top'
-  | 'start center'
-  | 'start bottom'
+  | 'top center'
+  | 'top end'
+  | 'top stretch'
   | 'bottom start'
   | 'bottom center'
   | 'bottom end'
-  | 'end bottom'
-  | 'end center'
-  | 'end top'
-  | 'top end'
-  | 'top center'
-  | 'center end'
-  | 'center start'
-  | 'top stretch'
   | 'bottom stretch'
-  | 'end stretch'
+  | 'start top'
+  | 'start center'
+  | 'start bottom'
   | 'start stretch'
+  | 'end top'
+  | 'end center'
+  | 'end bottom'
+  | 'end stretch'
+  | 'center start'
+  | 'center end'
   | 'offscreen'
 
 /**
@@ -125,7 +127,21 @@ export type PlacementValues =
   | 'stretch'
   | 'offscreen'
 
+const mirrorMap: Record<PlacementValues, PlacementValues> = {
+  center: 'center',
+  start: 'end',
+  end: 'start',
+  top: 'bottom',
+  bottom: 'top',
+  stretch: 'stretch',
+  offscreen: 'offscreen'
+}
+
 export type PlacementValueArray = [PlacementValues, PlacementValues]
+
+export type PlacementStringValues =
+  | PlacementValues
+  | `${PlacementValues} ${PlacementValues}`
 
 export type ElementPosition = {
   placement?: PlacementPropValues
@@ -160,5 +176,7 @@ export {
    * Custom prop types for `ui-position` components.
    * @module PositionPropTypes
    */
-  PositionPropTypes
+  PositionPropTypes,
+  placementPropValues,
+  mirrorMap
 }

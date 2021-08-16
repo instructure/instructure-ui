@@ -21,4 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { executeMirrorFunction } from './mirrorPlacement'
+
+import {
+  PlacementPropValues,
+  PlacementValueArray,
+  PlacementValues,
+  PlacementStringValues
+} from './PositionPropTypes'
+
+function executeMirrorFunction<D extends string | undefined = undefined>(
+  placement: PlacementValueArray | PlacementStringValues,
+  mirrorFunction: (
+    first: PlacementValues,
+    second: PlacementValues
+  ) => PlacementValueArray,
+  delimiter?: D
+): D extends string
+  ? D extends ' '
+    ? PlacementPropValues
+    : string
+  : PlacementValueArray {
+  const [first, second] = Array.isArray(placement)
+    ? (placement as PlacementValueArray)
+    : ((placement as PlacementStringValues).split(' ') as PlacementValueArray)
+  const result = mirrorFunction(first, second).filter((value) => value)
+  return delimiter ? (result.join(delimiter) as any) : result
+}
+
+export default executeMirrorFunction
+export { executeMirrorFunction }

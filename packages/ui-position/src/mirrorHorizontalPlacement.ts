@@ -21,4 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { mirrorHorizontalPlacement } from './mirrorPlacement'
+
+import {
+  PlacementPropValues,
+  PlacementValueArray,
+  PlacementStringValues,
+  mirrorMap
+} from './PositionPropTypes'
+import executeMirrorFunction from './executeMirrorFunction'
+
+/**
+ * Given a string or array of one or two placement values, mirrors the placement
+ * horizontally.
+ *
+ * Examples
+ * ```js
+ * mirrorHorizontalPlacement('top start') // input
+ * ['top', 'end'] // output
+ *
+ * mirrorPlacement('top start', ' ') // input
+ * 'top end' //output
+ * ```
+ *
+ * @param {string|Array} placement - a string of the form '`<value>` `<value>`' or array [`<value>`, `<value>`]
+ * @param {string} delimiter - when provided, a value with which the result array will be joined
+ * @returns {string|Array} - an array of values or, if the delimiter was supplied, a string of
+ *  delimiter separated values
+ */
+function mirrorHorizontalPlacement<D extends string | undefined = undefined>(
+  placement: PlacementValueArray | PlacementStringValues,
+  delimiter?: D
+): D extends string
+  ? D extends ' '
+    ? PlacementPropValues
+    : string
+  : PlacementValueArray {
+  return executeMirrorFunction(
+    placement,
+    (first, second) => {
+      return [first, second].map((value) => {
+        return value === 'start' || value === 'end' ? mirrorMap[value] : value
+      }) as PlacementValueArray
+    },
+    delimiter
+  )
+}
+
+export default mirrorHorizontalPlacement
+export { mirrorHorizontalPlacement }
