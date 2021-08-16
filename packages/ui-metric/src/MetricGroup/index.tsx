@@ -64,10 +64,6 @@ class MetricGroup extends Component<Props & OtherHTMLAttributes<Props>> {
     children: ChildrenPropTypes.oneOf([Metric])
   }
 
-  static defaultProps = {
-    children: null
-  }
-
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()

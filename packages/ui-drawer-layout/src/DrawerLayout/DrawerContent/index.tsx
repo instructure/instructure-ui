@@ -73,11 +73,6 @@ class DrawerContent extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    contentRef: (el: any) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    onSizeChange: (node: any) => {},
     role: 'region'
   }
 
@@ -97,14 +92,16 @@ class DrawerContent extends Component<Props> {
       width: rect.width
     }
     // set initial size
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
-    this.props.onSizeChange({ width: rect.width, height: rect.height })
-    // listen for changes to size
-    // @ts-expect-error ts-migrate(2322) FIXME: Type 'Function' is not assignable to type 'null'.
-    this._debounced = debounce(this.props.onSizeChange, 100, {
-      leading: false,
-      trailing: true
-    })
+    if (this.props.onSizeChange) {
+      this.props.onSizeChange({ width: rect.width, height: rect.height })
+      // listen for changes to size
+      // @ts-expect-error ts-migrate(2322) FIXME: Type 'Function' is not assignable to type 'null'.
+      this._debounced = debounce(this.props.onSizeChange, 100, {
+        leading: false,
+        trailing: true
+      })
+    }
+
     // @ts-expect-error ts-migrate(2322) FIXME: Type 'ResizeObserver' is not assignable to type 'n... Remove this comment to see the full error message
     this._resizeListener = new ResizeObserver((entries) => {
       for (const entry of entries) {

@@ -114,19 +114,10 @@ class MenuItemGroup extends Component<Props> {
   }
 
   static defaultProps = {
-    onMouseOver: undefined,
     disabled: false,
-    controls: undefined,
-    onKeyDown: undefined,
-    selected: undefined,
-    children: null,
     isTabbable: false,
     allowMultiple: false,
-    defaultSelected: [],
-    // @ts-expect-error ts-migrate(6133) FIXME: 'item' is declared but its value is never read.
-    itemRef: function (item) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onSelect: function (e, value, selected, item) {}
+    defaultSelected: []
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.

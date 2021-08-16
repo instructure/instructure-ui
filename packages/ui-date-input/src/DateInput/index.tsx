@@ -62,6 +62,7 @@ type Props = {
   placeholder?: string
   onChange?: (...args: any[]) => any
   onBlur?: (...args: any[]) => any
+  // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
   interaction?: 'enabled' | 'disabled' | 'readonly'
   isRequired?: boolean
   isInline?: boolean
@@ -266,39 +267,13 @@ class DateInput extends Component<Props> {
     size: 'medium',
     placeholder: null,
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onChange: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
+    onBlur: (event) => {}, // TODO check if its OK if this line is removed
     isRequired: false,
     isInline: false,
-    assistiveText: undefined,
     layout: 'stacked',
     width: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    inputRef: (el) => {},
-    messages: undefined,
     placement: 'bottom center',
-    isShowingCalendar: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestValidateDate: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestShowCalendar: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestHideCalendar: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestSelectNextDay: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestSelectPrevDay: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestRenderNextMonth: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestRenderPrevMonth: (event) => {},
-    renderNavigationLabel: null,
-    renderNextMonthButton: null,
-    renderPrevMonthButton: null,
-    children: null
+    isShowingCalendar: false
   }
 
   componentDidMount() {
@@ -353,15 +328,13 @@ class DateInput extends Component<Props> {
     }
 
     this._input = el
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    inputRef(el)
+    inputRef?.(el)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleInputChange = (event, value) => {
     const { onChange } = this.props
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onChange(event, { value })
+    onChange?.(event, { value })
     this.handleShowCalendar(event)
   }
 
@@ -371,18 +344,15 @@ class DateInput extends Component<Props> {
     const { interaction } = this
 
     if (interaction === 'enabled') {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      onRequestShowCalendar(event)
+      onRequestShowCalendar?.(event)
     }
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleHideCalendar = (event) => {
     const { onRequestHideCalendar, onRequestValidateDate } = this.props
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onRequestValidateDate(event)
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onRequestHideCalendar(event)
+    onRequestValidateDate?.(event)
+    onRequestHideCalendar?.(event)
   }
 
   handleHighlightOption = (
@@ -390,10 +360,8 @@ class DateInput extends Component<Props> {
     { direction }: { direction?: number }
   ) => {
     const { onRequestSelectNextDay, onRequestSelectPrevDay } = this.props
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    if (direction === -1) onRequestSelectPrevDay(event)
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    if (direction === 1) onRequestSelectNextDay(event)
+    if (direction === -1) onRequestSelectPrevDay?.(event)
+    if (direction === 1) onRequestSelectNextDay?.(event)
   }
 
   renderMonthNavigationButton(type = 'prev') {

@@ -88,10 +88,7 @@ class DrawerLayout extends Component<Props & BidirectionalProps> {
   }
 
   static defaultProps = {
-    children: null,
-    minWidth: '30rem',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'shouldOverlayTray' is declared but its value is n... Remove this comment to see the full error message
-    onOverlayTrayChange: (shouldOverlayTray) => {}
+    minWidth: '30rem'
   }
 
   static Content = DrawerContent

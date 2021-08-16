@@ -89,8 +89,7 @@ class Grid extends Component<Props> {
     hAlign: 'start',
     startAt: 'small',
     vAlign: 'top',
-    visualDebug: false,
-    children: null
+    visualDebug: false
   }
 
   static Row = GridRow

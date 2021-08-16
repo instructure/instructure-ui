@@ -33,12 +33,12 @@ import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
 
 type OwnProps = {
-  alt?: string
+  alt: string
   /**
    * the element type to render the screen reader content as
    */
   as: AsElementType
-  children: ReactNode
+  children?: ReactNode
 }
 
 type Props = OwnProps & OtherHTMLAttributes<OwnProps>
@@ -52,15 +52,13 @@ category: components/utilities
 **/
 class AccessibleContent extends Component<Props> {
   static propTypes = {
-    alt: PropTypes.string,
+    alt: PropTypes.string.isRequired,
     as: PropTypes.elementType,
     children: PropTypes.node
   }
 
   static defaultProps = {
-    alt: undefined,
-    as: 'span',
-    children: null
+    as: 'span'
   }
 
   render() {

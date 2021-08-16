@@ -147,8 +147,6 @@ class Item extends Component<Props> {
 
   static defaultProps = {
     as: 'span',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el: any) => {},
     shouldGrow: false,
     shouldShrink: false
   }

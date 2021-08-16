@@ -80,6 +80,7 @@ type Props = {
   shouldAllowRepeats?: boolean
   maxSize?: number
   minSize?: number
+  // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
   interaction?: 'enabled' | 'disabled' | 'readonly'
   display?: 'block' | 'inline-block'
   height?: string | number
@@ -212,38 +213,16 @@ class FileDrop extends Component<Props, State> {
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object
   }
+
   static defaultProps = {
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onClick: function (e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'accepted' is declared but its value is never read... Remove this comment to see the full error message
-    onDrop: function (accepted: any, rejected: any, e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'accepted' is declared but its value is never read... Remove this comment to see the full error message
-    onDropAccepted: function (accepted: any, e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'rejected' is declared but its value is never read... Remove this comment to see the full error message
-    onDropRejected: function (rejected: any, e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onDragEnter: function (e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onDragOver: function (e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onDragLeave: function (e: any) {},
     shouldEnablePreview: false,
     shouldAllowMultiple: false,
     shouldAllowRepeats: true,
     maxSize: Infinity,
     minSize: 0,
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
-    messages: [],
-    id: undefined,
-    accept: undefined,
-    display: 'block',
-    height: undefined,
-    width: undefined,
-    minWidth: undefined,
-    maxWidth: undefined,
-    margin: undefined
+    display: 'block'
   }
+
   constructor(props: Props) {
     super(props)
     // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'null'.
@@ -265,30 +244,32 @@ class FileDrop extends Component<Props, State> {
       dragAccepted: this.state.isDragAccepted
     }
   }
+
   state = {
     isDragAccepted: false,
     isDragRejected: false,
     isFocused: false,
     isFileBrowserDisplayed: false
   }
+
   enterCounter = 0
   fileInputEl = null
   defaultId = null
   get functionallyDisabled() {
     return this.interaction === 'disabled' || this.interaction === 'readonly'
   }
+
   get hasMessages() {
-    return (
-      (this.props as any).messages && (this.props as any).messages.length > 0
-    )
+    return this.props.messages && this.props.messages.length > 0
   }
+
   get interaction() {
     return getInteraction({ props: this.props })
   }
   get invalid() {
     return (
       this.hasMessages &&
-      (this.props as any).messages.findIndex((message: any) => {
+      this.props.messages!.findIndex((message: any) => {
         return message.type === 'error'
       }) >= 0
     )
@@ -319,7 +300,7 @@ class FileDrop extends Component<Props, State> {
       isDragAccepted: allFilesAccepted,
       isDragRejected: !allFilesAccepted
     })
-    ;(this.props as any).onDragEnter(e)
+    this.props.onDragEnter?.(e)
   }
   handleDragOver = (e: any) => {
     e.preventDefault()
@@ -330,7 +311,7 @@ class FileDrop extends Component<Props, State> {
     } catch (err) {
       // continue regardless of error
     }
-    ;(this.props as any).onDragOver(e)
+    this.props.onDragOver?.(e)
     return false
   }
   handleDragLeave = (e: any) => {
@@ -344,7 +325,7 @@ class FileDrop extends Component<Props, State> {
       isDragAccepted: false,
       isDragRejected: false
     })
-    ;(this.props as any).onDragLeave(e)
+    this.props.onDragLeave?.(e)
   }
   parseFiles(fileList: any) {
     const accepted: any = []
@@ -369,15 +350,12 @@ class FileDrop extends Component<Props, State> {
     const [accepted, rejected] = this.parseFiles(fileList)
     e.preventDefault()
     this.enterCounter = 0
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
-    onDrop(accepted, rejected, e)
+    onDrop?.(accepted, rejected, e)
     if (rejected.length > 0) {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
-      onDropRejected(rejected, e)
+      onDropRejected?.(rejected, e)
     }
     if (accepted.length > 0) {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
-      onDropAccepted(accepted, e)
+      onDropAccepted?.(accepted, e)
     }
     this.setState({
       isDragAccepted: false,
@@ -433,7 +411,7 @@ class FileDrop extends Component<Props, State> {
     // focus the input (because FF won't)
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     this.fileInputEl.focus()
-    ;(this.props as any).onClick(e)
+    this.props.onClick?.(e)
     this.setState({
       isFileBrowserDisplayed: true
     })
@@ -536,7 +514,7 @@ class FileDrop extends Component<Props, State> {
             <FormFieldMessages
               // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
               id={(this as any).messagesId}
-              messages={(this.props as any).messages}
+              messages={this.props.messages}
             />
           </View>
         ) : null}

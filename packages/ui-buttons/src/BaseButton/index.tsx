@@ -57,6 +57,7 @@ type Props = {
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any
   as?: AsElementType
+  // interaction is by default undefined so that `disabled` and `readOnly` can also be supplied
   interaction?: InteractionType
   color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
   focusColor?: 'info' | 'inverse'
@@ -189,16 +190,12 @@ class BaseButton extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
     type: 'button',
     size: 'medium',
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     as: 'button',
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
     color: 'secondary',
-    focusColor: undefined,
     shape: 'rectangle',
     display: 'inline-block',
     textAlign: 'start',
@@ -206,13 +203,7 @@ class BaseButton extends Component<Props> {
     withBorder: true,
     isCondensed: false,
     margin: '0',
-    cursor: 'pointer',
-    href: undefined,
-    onClick: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyDown: (event) => {},
-    renderIcon: undefined,
-    tabIndex: undefined
+    cursor: 'pointer'
   }
 
   _rootElement = null
@@ -317,8 +308,7 @@ class BaseButton extends Component<Props> {
     const { onClick, onKeyDown, href } = this.props
     const { interaction } = this
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onKeyDown(event)
+    onKeyDown?.(event)
 
     // behave like a button when space key is pressed
     const { space, enter } = keycode.codes

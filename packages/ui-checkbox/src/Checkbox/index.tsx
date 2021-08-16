@@ -139,17 +139,6 @@ class Checkbox extends Component<Props> {
     inline: false,
     indeterminate: false,
     readOnly: false,
-    onChange: undefined,
-    onKeyDown: undefined,
-    onFocus: undefined,
-    onBlur: undefined,
-    onMouseOut: undefined,
-    onMouseOver: undefined,
-    checked: undefined,
-    defaultChecked: undefined,
-    messages: undefined,
-    id: undefined,
-    value: undefined,
     labelPlacement: 'end'
   }
 

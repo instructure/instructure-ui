@@ -53,7 +53,7 @@ describe('<AccessibleContent />', async () => {
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
-    const subject = await mount(<AccessibleContent as="div" />)
+    const subject = await mount(<AccessibleContent as="div" alt="abc" />)
     const accessibleContent = within(subject.getDOMNode())
 
     expect(accessibleContent).to.have.tagName('div')

@@ -107,18 +107,7 @@ class MenuItem extends Component<Props> {
 
   static defaultProps = {
     type: 'button',
-    disabled: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onSelect: function (e, value, selected, item) {},
-    defaultSelected: undefined,
-    selected: undefined,
-    onClick: undefined,
-    onKeyDown: undefined,
-    onKeyUp: undefined,
-    onMouseOver: undefined,
-    controls: undefined,
-    value: undefined,
-    href: undefined
+    disabled: false
   }
 
   static contextType = MenuContext

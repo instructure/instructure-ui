@@ -228,40 +228,12 @@ class Menu extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    label: null,
     disabled: false,
-    trigger: null,
     placement: 'bottom center',
     defaultShow: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'shown' is declared but its value is never read.
-    onToggle: (shown, menu) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onSelect: (event, value, selected, item) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDismiss: (event, documentClick) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onMouseOver: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyDown: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyUp: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    menuRef: (el) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    popoverRef: (el) => {},
-    mountNode: null,
     constrain: 'window',
-    liveRegion: null,
     shouldHideOnSelect: true,
     shouldFocusTriggerOnClose: true,
-    show: undefined,
-    id: undefined,
-    type: undefined,
     withArrow: true,
     offsetX: 0,
     offsetY: 0
@@ -679,8 +651,7 @@ class Menu extends Component<Props> {
         isShowingContent={show}
         defaultIsShowingContent={defaultShow}
         onHideContent={(event, { documentClick }) => {
-          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-          onDismiss(event, documentClick)
+          onDismiss?.(event, documentClick)
           this.handleToggle(false)
         }}
         onShowContent={() => this.handleToggle(true)}

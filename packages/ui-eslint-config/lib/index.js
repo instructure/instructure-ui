@@ -50,7 +50,6 @@ module.exports = {
     'react/no-deprecated': 0,
     'react/no-find-dom-node': 0,
     'react/prop-types': ['error', { skipUndeclared: true }],
-    'react/require-default-props': 'error',
     'react/no-typos': 'error',
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-unused-vars': [

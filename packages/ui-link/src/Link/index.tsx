@@ -151,20 +151,9 @@ class Link extends Component<Props> {
   }
 
   static defaultProps = {
-    href: undefined,
-    elementRef: undefined,
-    // Leave interaction default undefined so that `disabled` can also be supplied
-    interaction: undefined,
-    margin: undefined,
-    renderIcon: undefined,
-    display: undefined,
     color: 'link',
-    as: undefined,
     iconPlacement: 'start',
-    isWithinText: true,
-    onClick: undefined,
-    onFocus: undefined,
-    onBlur: undefined
+    isWithinText: true
   }
 
   state = { hasFocus: false }

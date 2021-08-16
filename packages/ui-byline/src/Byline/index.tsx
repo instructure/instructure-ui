@@ -91,12 +91,7 @@ class Byline extends Component<Props> {
   }
 
   static defaultProps = {
-    alignContent: 'center',
-    elementRef: undefined,
-    margin: undefined,
-    title: undefined,
-    size: undefined,
-    description: undefined
+    alignContent: 'center'
   }
 
   componentDidMount() {

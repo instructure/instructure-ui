@@ -142,23 +142,15 @@ class IconButton extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    renderIcon: undefined,
     type: 'button',
     size: 'medium',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
     as: 'button',
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
     color: 'secondary',
-    focusColor: undefined,
     shape: 'rectangle',
     withBackground: true,
     withBorder: true,
     margin: '0',
-    cursor: 'pointer',
-    href: undefined
+    cursor: 'pointer'
   }
 
   _baseButton = null
@@ -203,7 +195,6 @@ class IconButton extends Component<Props> {
         {...passthroughProps(props)}
         type={type}
         size={size}
-        elementRef={elementRef}
         as={as}
         interaction={interaction}
         color={color}

@@ -107,13 +107,6 @@ class Img extends Component<Props> {
   }
 
   static defaultProps = {
-    margin: undefined,
-    overlay: undefined,
-    constrain: undefined,
-    elementRef: undefined,
-    height: undefined,
-    width: undefined,
-    alt: '',
     display: 'inline-block',
     withGrayscale: false,
     withBlur: false

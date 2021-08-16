@@ -117,15 +117,11 @@ class List extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
     as: 'ul',
     delimiter: 'none',
     isUnstyled: false,
-    margin: undefined,
     size: 'medium',
-    itemSpacing: 'none',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {}
+    itemSpacing: 'none'
   }
 
   static Item = ListItem

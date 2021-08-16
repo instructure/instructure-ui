@@ -171,21 +171,12 @@ class Flex extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
     as: 'span',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el: any) => {},
     direction: 'row',
     justifyItems: 'start',
     display: 'flex',
     withVisualDebug: false,
-    wrap: 'no-wrap',
-    width: undefined,
-    height: undefined,
-    padding: undefined,
-    margin: undefined,
-    alignItems: undefined,
-    textAlign: undefined
+    wrap: 'no-wrap'
   }
 
   renderChildren(children: any) {

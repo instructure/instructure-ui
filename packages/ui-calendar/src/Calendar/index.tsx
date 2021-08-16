@@ -145,12 +145,8 @@ class Calendar extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    renderNextMonthButton: undefined,
-    renderPrevMonthButton: undefined,
-    renderNavigationLabel: undefined,
-    onRequestRenderNextMonth: () => {},
-    onRequestRenderPrevMonth: () => {},
+    onRequestRenderNextMonth: () => {}, // TODO check if its OK if this is removed
+    onRequestRenderPrevMonth: () => {}, // TODO check if its OK if this is removed
     as: 'span',
     role: 'table'
   }

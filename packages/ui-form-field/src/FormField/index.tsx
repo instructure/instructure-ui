@@ -78,12 +78,7 @@ class FormField extends Component<Props> {
     inline: false,
     layout: 'stacked',
     labelAlign: 'end',
-    vAlign: 'middle',
-    messages: undefined,
-    messagesId: undefined,
-    children: null,
-    width: undefined,
-    inputContainerRef: undefined
+    vAlign: 'middle'
   }
 
   render() {

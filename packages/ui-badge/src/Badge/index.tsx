@@ -59,8 +59,8 @@ type Props = {
   formatOverflowText?: (...args: any[]) => any
   formatOutput?: (...args: any[]) => any
   as?: AsElementType
-  margin: Spacing
-  placement: PlacementPropValues
+  margin?: Spacing
+  placement?: PlacementPropValues
 }
 
 /**
@@ -68,7 +68,6 @@ type Props = {
 category: components
 ---
 **/
-
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Badge extends Component<Props> {
@@ -123,17 +122,11 @@ class Badge extends Component<Props> {
   }
 
   static defaultProps = {
-    count: undefined,
-    children: null,
-    countUntil: undefined,
-    margin: undefined,
-    formatOutput: undefined,
     standalone: false,
     type: 'count',
     variant: 'primary',
     pulse: false,
     placement: 'top end',
-    elementRef: () => {},
     formatOverflowText: (_count: number, countUntil: number) =>
       `${countUntil - 1} +`
   }

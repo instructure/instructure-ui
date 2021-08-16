@@ -57,11 +57,6 @@ class Focusable extends Component<Props> {
     render: PropTypes.func
   }
 
-  static defaultProps = {
-    children: null,
-    render: undefined
-  }
-
   static inputTypes = {
     text: true,
     search: true,
@@ -80,8 +75,10 @@ class Focusable extends Component<Props> {
 
   _focusListener: { remove(): void } | null = null
   _blurListener: { remove(): void } | null = null
-  _inputModeListener: { isKeyboardMode(): boolean; remove(): void } | null =
-    null
+  _inputModeListener: {
+    isKeyboardMode(): boolean
+    remove(): void
+  } | null = null
 
   state = {
     focused: false,

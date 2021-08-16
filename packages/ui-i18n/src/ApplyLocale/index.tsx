@@ -47,10 +47,4 @@ export const ApplyLocale = ({ children, locale, timezone }: Props) => {
   )
 }
 
-ApplyLocale.defaultProps = {
-  locale: undefined,
-  timezone: undefined,
-  children: undefined
-}
-
 export default ApplyLocale

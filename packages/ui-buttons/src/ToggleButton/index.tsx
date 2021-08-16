@@ -132,15 +132,9 @@ class ToggleButton extends Component<Props> {
   static defaultProps = {
     size: 'medium',
     as: 'button',
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
-    renderIcon: () => {},
-    onClick: () => {},
-    mountNode: null,
+    renderIcon: () => {}, // TODO check if its OK if this line is removed
+    onClick: () => {}, // TODO check if its OK if this line is removed
     color: 'secondary',
-    isShowingTooltip: undefined,
     placement: 'top center',
     constrain: 'window'
   }

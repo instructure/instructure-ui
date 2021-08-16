@@ -138,19 +138,12 @@ class Billboard extends Component<Props> {
   }
 
   static defaultProps = {
-    margin: undefined,
     disabled: false,
     readOnly: false,
-    href: undefined,
-    message: undefined,
-    onClick: undefined,
-    heading: undefined,
-    hero: undefined,
     size: 'medium',
     headingAs: 'span',
     headingLevel: 'h1',
-    as: 'span',
-    elementRef: () => {}
+    as: 'span'
   }
 
   componentDidMount() {

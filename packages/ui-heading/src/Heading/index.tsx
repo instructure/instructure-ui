@@ -114,9 +114,6 @@ class Heading extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    margin: undefined,
-    elementRef: undefined,
     border: 'none',
     color: 'inherit',
     level: 'h2'

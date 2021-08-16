@@ -142,24 +142,13 @@ class CloseButton extends Component<Props> {
   }
 
   static defaultProps = {
-    screenReaderLabel: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClick: (event) => {},
-    elementRef: undefined,
-    color: undefined,
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
-    disabled: undefined,
-    readOnly: undefined,
     type: 'button',
     placement: 'static',
     offset: 'x-small',
     size: 'small',
     margin: '0',
     as: 'button',
-    href: undefined,
-    cursor: 'pointer',
-    tabIndex: undefined
+    cursor: 'pointer'
   }
 
   componentDidMount() {

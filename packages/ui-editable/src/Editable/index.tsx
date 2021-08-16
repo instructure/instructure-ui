@@ -87,11 +87,7 @@ class Editable extends Component<Props> {
   }
 
   static defaultProps = {
-    readOnly: false,
-    onChange: undefined,
-    value: undefined,
-    render: undefined,
-    children: null
+    readOnly: false
   }
 
   state = {

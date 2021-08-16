@@ -128,22 +128,12 @@ class Dialog extends Component<Props & OtherHTMLAttributes<Props>> {
   }
 
   static defaultProps = {
-    children: null,
-    display: undefined,
-    label: undefined,
     open: false,
     shouldFocusOnOpen: true,
     shouldContainFocus: false,
     shouldReturnFocus: false,
     shouldCloseOnDocumentClick: true,
-    shouldCloseOnEscape: true,
-    defaultFocusElement: null,
-    contentElement: null,
-    liveRegion: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDismiss: (event) => {}
+    shouldCloseOnEscape: true
   }
 
   _timeouts: ReturnType<typeof setTimeout>[] = []

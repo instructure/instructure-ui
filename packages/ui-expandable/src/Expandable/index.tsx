@@ -64,7 +64,7 @@ type ExpandableProps = {
    */
   defaultExpanded: boolean
 
-  onToggle: (event: Event, expanded: boolean) => void
+  onToggle?: (event: Event, expanded: boolean) => void
 
   /**
    * @param {Object} renderProps
@@ -97,11 +97,7 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
   }
 
   static defaultProps = {
-    defaultExpanded: false,
-    onToggle: function () {},
-    expanded: undefined,
-    children: null,
-    render: undefined
+    defaultExpanded: false
   }
 
   _contentId: string
@@ -148,7 +144,7 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
     if (!this.isControlled()) {
       this.setState(toggleExpanded)
     }
-    this.props.onToggle(event, !this.expanded)
+    this.props.onToggle?.(event, !this.expanded)
   }
 
   render() {

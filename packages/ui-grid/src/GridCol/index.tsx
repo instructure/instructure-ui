@@ -123,10 +123,8 @@ class GridCol extends Component<Props> {
 
   static defaultProps = {
     textAlign: 'inherit',
-    children: null,
     isLastCol: false,
-    isLastRow: false,
-    elementRef: undefined
+    isLastRow: false
   }
 
   componentDidMount() {

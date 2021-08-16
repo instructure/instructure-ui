@@ -144,9 +144,7 @@ class InPlaceEdit extends Component<Props> {
     readOnly: false,
     showFocusRing: true,
     inline: true,
-    value: undefined,
-    editButtonPlacement: 'end',
-    onChange: undefined
+    editButtonPlacement: 'end'
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.

@@ -92,11 +92,6 @@ class FormFieldGroup extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    layout: undefined,
-    startAt: undefined,
-    messages: undefined,
-    messagesId: undefined,
     as: 'fieldset',
     disabled: false,
     rowSpacing: 'medium',

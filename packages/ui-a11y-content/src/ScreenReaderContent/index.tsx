@@ -44,7 +44,7 @@ type OwnProps = {
   /**
    * content meant for screen readers only
    */
-  children: ReactNode
+  children?: ReactNode
 }
 
 type Props = OwnProps & OtherHTMLAttributes<OwnProps>
@@ -70,8 +70,7 @@ class ScreenReaderContent extends Component<Props> {
   }
 
   static defaultProps = {
-    as: 'span',
-    children: null
+    as: 'span'
   }
 
   componentDidMount() {

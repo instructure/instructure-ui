@@ -36,14 +36,14 @@ import { OtherHTMLAttributes } from '@instructure/ui-prop-types'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  textAlign: 'start' | 'center' | 'end'
+  textAlign?: 'start' | 'center' | 'end'
   renderLabel?: ((props?: any) => ReactNode) | ReactNode
   renderValue?: ((props?: any) => ReactNode) | ReactNode
   /**
    * Set to true when a child of MetricGroup so the appropriate
    * aria labels get set
    */
-  isGroupChild: boolean
+  isGroupChild?: boolean
 }
 
 /**
@@ -70,8 +70,6 @@ class Metric extends Component<Props & OtherHTMLAttributes<Props>> {
 
   static defaultProps = {
     textAlign: 'center',
-    renderLabel: undefined,
-    renderValue: undefined,
     isGroupChild: false
   }
 

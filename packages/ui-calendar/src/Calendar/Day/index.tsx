@@ -134,12 +134,7 @@ class Day extends Component<Props> {
     interaction: 'enabled',
     isSelected: false,
     isToday: false,
-    isOutsideMonth: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
-    onClick: undefined,
-    onKeyDown: undefined,
-    children: null
+    isOutsideMonth: false
   }
 
   componentDidMount() {
@@ -192,8 +187,7 @@ class Day extends Component<Props> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
     const { elementRef } = this.props
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    elementRef(el)
+    elementRef?.(el)
   }
 
   render() {

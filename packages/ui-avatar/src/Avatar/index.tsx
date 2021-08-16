@@ -56,7 +56,7 @@ type Props = {
    * Accessible label
    */
   alt?: string
-  size:
+  size?:
     | 'auto'
     | 'xx-small'
     | 'x-small'
@@ -65,7 +65,7 @@ type Props = {
     | 'large'
     | 'x-large'
     | 'xx-large'
-  color:
+  color?:
     | 'default' // = brand
     | 'shamrock'
     | 'barney'
@@ -73,8 +73,8 @@ type Props = {
     | 'fire'
     | 'licorice'
     | 'ash'
-  shape: 'circle' | 'rectangle'
-  display: 'inline-block' | 'block'
+  shape?: 'circle' | 'rectangle'
+  display?: 'inline-block' | 'block'
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -84,7 +84,7 @@ type Props = {
   /**
    * Callback fired when the avatar image has loaded
    */
-  onImageLoaded: (event: SyntheticEvent) => void
+  onImageLoaded?: (event: SyntheticEvent) => void
   /**
    * The element type to render as
    */
@@ -142,15 +142,10 @@ class Avatar extends Component<Props> {
   }
 
   static defaultProps = {
-    src: undefined,
-    alt: undefined,
-    margin: undefined,
-    elementRef: undefined,
     size: 'medium',
     color: 'default',
     shape: 'circle',
-    display: 'inline-block',
-    onImageLoaded: (_event: SyntheticEvent) => {}
+    display: 'inline-block'
   }
 
   state = { loaded: false }
@@ -186,7 +181,7 @@ class Avatar extends Component<Props> {
 
   handleImageLoaded = (event: SyntheticEvent) => {
     this.setState({ loaded: true })
-    this.props.onImageLoaded(event)
+    this.props.onImageLoaded?.(event)
   }
 
   renderInitials() {
@@ -198,7 +193,7 @@ class Avatar extends Component<Props> {
   }
 
   render() {
-    const { onImageLoaded, styles, ...props } = this.props
+    const { styles, ...props } = this.props
 
     return (
       <View

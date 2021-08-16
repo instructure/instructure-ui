@@ -69,8 +69,7 @@ class FormFieldMessage extends Component<Props> {
   }
 
   static defaultProps = {
-    variant: 'hint',
-    children: null
+    variant: 'hint'
   }
 
   componentDidMount() {

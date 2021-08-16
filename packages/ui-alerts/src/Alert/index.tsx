@@ -153,10 +153,6 @@ class Alert extends Component<Props> {
     screenReaderOnly: false,
     liveRegionPoliteness: 'assertive',
     isLiveRegionAtomic: false,
-    onDismiss: undefined,
-    liveRegion: undefined,
-    renderCloseButtonLabel: undefined,
-    children: null,
     hasShadow: true
   }
 

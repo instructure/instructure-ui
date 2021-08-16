@@ -107,10 +107,7 @@ class CodeEditor extends Component<Props> {
     readOnly: false,
     options: {
       styleActiveLine: true
-    },
-    onChange: () => {},
-    attachment: undefined,
-    value: undefined
+    }
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
@@ -190,8 +187,7 @@ class CodeEditor extends Component<Props> {
             value={value}
             // @ts-expect-error ts-migrate(6133) FIXME: 'editor' is declared but its value is never read.
             onBeforeChange={(editor, data, value) => {
-              // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-              onChange(value)
+              onChange?.(value)
             }}
             ref={(el) => {
               // @ts-expect-error ts-migrate(2339) FIXME: Property 'codeMirror' does not exist on type 'Code... Remove this comment to see the full error message

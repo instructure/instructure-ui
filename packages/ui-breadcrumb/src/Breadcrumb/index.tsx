@@ -87,9 +87,7 @@ class Breadcrumb extends Component<Props> {
   }
 
   static defaultProps = {
-    size: 'medium',
-    children: null,
-    margin: undefined
+    size: 'medium'
   }
 
   componentDidMount() {

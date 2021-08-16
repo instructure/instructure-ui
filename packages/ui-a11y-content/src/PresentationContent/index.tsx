@@ -34,7 +34,7 @@ type OwnProps = {
    * the element type to render as
    */
   as: AsElementType
-  children: ReactNode
+  children?: ReactNode
 }
 
 type Props = OwnProps & OtherHTMLAttributes<OwnProps>
@@ -53,8 +53,7 @@ class PresentationContent extends Component<Props> {
   }
 
   static defaultProps = {
-    as: 'span',
-    children: null
+    as: 'span'
   }
 
   render() {

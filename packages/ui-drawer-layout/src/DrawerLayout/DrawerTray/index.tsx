@@ -180,37 +180,26 @@ class DrawerTray extends Component<Props & BidirectionalProps> {
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
   static defaultProps = {
-    children: null,
-    render: undefined,
     shouldContainFocus: true,
     shouldCloseOnEscape: true,
     shouldCloseOnDocumentClick: true,
     shouldReturnFocus: true,
     open: false,
-    onOpen: () => {},
+    onOpen: () => {}, // TODO check if its OK if this line is removed
     shadow: true,
     border: true,
     placement: 'start',
-    mountNode: null,
-    onEnter: () => {},
-    onEntering: () => {},
-    onEntered: () => {},
-    onExit: () => {},
-    onExiting: () => {},
-    onExited: () => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    contentRef: (node: any) => {},
-    onClose: undefined,
-    onDismiss: undefined,
-    defaultFocusElement: undefined,
-    liveRegion: undefined,
-    onTransition: undefined
+    onEntered: () => {}, // TODO check if its OK if this line is removed
+    onExited: () => {} // TODO check if its OK if this line is removed
   }
+
   state = {
     transitioning: false,
     portalOpen: false
   }
+
   _DOMNode?: PortalNode = null
+
   componentDidMount() {
     ;(this.props as any).makeStyles(this.makeStyleProps())
   }

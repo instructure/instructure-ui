@@ -104,16 +104,10 @@ class FormFieldLayout extends Component<Props> {
   }
 
   static defaultProps = {
-    id: undefined,
-    width: undefined,
-    messages: undefined,
-    messagesId: undefined,
-    children: null,
     inline: false,
     layout: 'stacked',
     as: 'label',
-    labelAlign: 'end',
-    inputContainerRef: undefined
+    labelAlign: 'end'
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.

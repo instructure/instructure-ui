@@ -88,7 +88,6 @@ class GridRow extends Component<Props> {
   /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    children: null,
     isLastRow: false
   }
 
