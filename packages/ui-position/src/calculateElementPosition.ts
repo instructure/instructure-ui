@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import {
   getBoundingClientRect,
   getScrollParents,
@@ -47,6 +46,7 @@ import {
   Overflow,
   Offset
 } from './PositionPropTypes'
+import { UIElement } from '@instructure/shared-types'
 
 type PlacementValuesWithoutOffscreen = Exclude<PlacementValues, 'offscreen'>
 
@@ -99,12 +99,7 @@ function calculateElementPosition(
 
 class PositionedElement {
   constructor(
-    element:
-      | Node
-      | Window
-      | React.ReactElement
-      | React.Component
-      | ((...args: any[]) => Node | Window | null | undefined),
+    element: UIElement,
     placement?:
       | PlacementPropValuesWithoutOffscreen
       | PlacementValuesWithoutOffscreenArray,

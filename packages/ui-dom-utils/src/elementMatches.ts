@@ -23,7 +23,7 @@
  */
 
 import { findDOMNode } from './findDOMNode'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
@@ -36,10 +36,7 @@ import React from 'react'
  * @param { string } selectorString - a string representing the selector to test
  * @returns { boolean } if the element would be selected by the specified selector string
  */
-function elementMatches(
-  el: Node | Window | React.ReactElement | ((...args: any[]) => any),
-  selectorString: string
-) {
+function elementMatches(el: UIElement, selectorString: string) {
   const node = el && findDOMNode(el)
   if (!node) return false
   return (node as Element).matches(selectorString)

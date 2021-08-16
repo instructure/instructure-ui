@@ -24,7 +24,7 @@
 
 import { findDOMNode } from './findDOMNode'
 import { ownerDocument } from './ownerDocument'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
@@ -36,15 +36,7 @@ import React from 'react'
  * @param { Node | Window | React.ReactElement | function | null } el
  * @returns { Window | null } the owner window
  */
-function ownerWindow(
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any)
-    | null
-) {
+function ownerWindow(el?: UIElement) {
   const node = el && findDOMNode(el)
   const doc = ownerDocument(node)
   return doc && doc.defaultView

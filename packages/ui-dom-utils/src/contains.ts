@@ -25,6 +25,7 @@
 import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
 import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
@@ -37,15 +38,7 @@ import React from 'react'
  * @param { Node | Window | React.ReactElement | function | null } el - component or DOM node which we want to determine if contained within the context
  * @returns { boolean } if the element is contained within the context
  */
-function containsWithDOM(
-  context:
-    | Node
-    | Window
-    | React.ReactElement
-    | ((...args: any[]) => any)
-    | null,
-  el: Node | Window | React.ReactElement | ((...args: any[]) => any) | null
-) {
+function containsWithDOM(context: UIElement, el: UIElement) {
   const container = context && findDOMNode(context)
   const node = el && findDOMNode(el)
 

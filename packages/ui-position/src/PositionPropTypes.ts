@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
 import { RectType } from '@instructure/ui-dom-utils'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 const PositionPropTypes = {
   /**
@@ -141,13 +141,7 @@ export type ElementPosition = {
   }
 }
 
-export type PositionElement =
-  | Node
-  | Window
-  | React.ReactElement
-  | React.Component
-  | ((...args: any[]) => Node | Window | null | undefined)
-  | null
+export type PositionElement = UIElement
 
 export type Offset<Type extends number | string = number> = {
   top: Type

@@ -25,7 +25,7 @@
 import { canUseDOM } from './canUseDOM'
 import { findDOMNode } from './findDOMNode'
 import { ownerWindow } from './ownerWindow'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
@@ -40,15 +40,7 @@ import React from 'react'
  * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
  * @returns {Object} a media query list object
  */
-function matchMedia(
-  query: string,
-  el:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any)
-) {
+function matchMedia(query: string, el: UIElement) {
   const node = findDOMNode(el) || document
 
   if (canUseDOM) {

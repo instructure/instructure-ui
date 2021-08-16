@@ -35,16 +35,10 @@
  **/
 
 import { getComputedStyle, findDOMNode, elementMatches } from './'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 function findFocusable(
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any)
-    | null,
+  el?: UIElement,
   filter?: (el: Element) => boolean,
   shouldSearchRootNode?: boolean
 ) {

@@ -25,7 +25,7 @@
 import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
 import { getComputedStyle } from './getComputedStyle'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
@@ -41,15 +41,7 @@ import React from 'react'
  * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
  * @returns {Array} scroll parents
  */
-function getScrollParents(
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any)
-    | null
-) {
+function getScrollParents(el?: UIElement) {
   const parents: (Node | Window | null)[] = []
 
   if (!canUseDOM) {

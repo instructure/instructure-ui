@@ -28,7 +28,7 @@ import {
   requestAnimationFrame,
   RequestAnimationFrameType
 } from './requestAnimationFrame'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 type ResizeListenerType = { remove: () => void }
 type DimensionTypes = 'width' | 'height'
@@ -70,12 +70,7 @@ type DimensionTypes = 'width' | 'height'
  * @returns {function} remove - cancel the listener and no longer execute the handler function
  */
 function addResizeListener(
-  el:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any),
+  el: UIElement,
   handler: (dimensions: Record<DimensionTypes, number>) => any,
   dimensions: DimensionTypes[] = ['width']
 ): ResizeListenerType {

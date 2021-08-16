@@ -26,7 +26,7 @@ import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
 import { contains } from './contains'
 import { ownerDocument } from './ownerDocument'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 type RectType = {
   top: number
@@ -48,15 +48,7 @@ type RectType = {
  * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component, DOM node, or function returning a DOM node
  * @return {object} rect - object with top, left coords and height and width
  */
-function getBoundingClientRect(
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any)
-    | null
-) {
+function getBoundingClientRect(el?: UIElement) {
   const rect: RectType = {
     top: 0,
     bottom: 0,

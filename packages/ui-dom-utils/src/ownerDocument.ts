@@ -23,7 +23,7 @@
  */
 
 import { findDOMNode } from './findDOMNode'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
@@ -35,15 +35,7 @@ import React from 'react'
  * @param { Node | Window | React.ReactElement | function | null } el
  * @returns { Document } the owner document
  */
-function ownerDocument(
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any)
-    | null
-) {
+function ownerDocument(el?: UIElement) {
   const node = el && findDOMNode(el)
   let ownerDocument
 
