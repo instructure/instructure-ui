@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * Valid keys for the Query object
@@ -81,15 +82,7 @@ type QueryMatchListener = (
         ...args: any[]
       ) => Node | Window | React.ReactElement | React.Component),
   cb: UpdateMatches,
-  matchMedia?: (
-    query: string,
-    el:
-      | Node
-      | Window
-      | React.ReactElement
-      | React.Component
-      | ((...args: any[]) => any)
-  ) => MediaQueryList | null
+  matchMedia?: (query: string, el: UIElement) => MediaQueryList | null
 ) => { remove: () => void }
 
 export type {

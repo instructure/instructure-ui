@@ -24,7 +24,7 @@
 
 import { findDOMNode } from './findDOMNode'
 import { getActiveElement } from './getActiveElement'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
@@ -36,15 +36,7 @@ import React from 'react'
  * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
  * @returns {boolean} if the element is the active element
  */
-function isActiveElement(
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any)
-    | null
-): boolean {
+function isActiveElement(el?: UIElement): boolean {
   const node = el && findDOMNode(el)
   return node ? getActiveElement() === node : false
 }

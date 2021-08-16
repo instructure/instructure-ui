@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-
 import { parseQuery, Size } from './parseQuery'
 
 import { findDOMNode, getBoundingClientRect } from '@instructure/ui-dom-utils'
@@ -33,6 +31,7 @@ import {
   QueriesMatching,
   QueryMatchListener
 } from './QueryType'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
@@ -138,12 +137,7 @@ const addElementQueryMatchListener: QueryMatchListener = (
 
 function updateElementMatches(
   query: BreakpointQueries,
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any),
+  el?: UIElement,
   matches: string[] = [],
   size?: Size
 ): QueriesMatching | null {

@@ -23,7 +23,7 @@
  */
 
 import { findDOMNode } from './findDOMNode'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 type ClassListApi = {
   toArray: () => string[]
@@ -53,14 +53,7 @@ const apiForEmptyNode: ClassListApi = {
  * @param { Node | Window | React.ReactElement | React.Component | function } element - component or DOM node
  * @return {Object} object containing classList functions 'contains', 'add', and 'remove'
  */
-function getClassList(
-  element:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any)
-) {
+function getClassList(element: UIElement) {
   const node = findDOMNode(element)
 
   if (!node) return apiForEmptyNode

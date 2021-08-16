@@ -23,18 +23,9 @@
  */
 
 import { findFocusable } from './findFocusable'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
-function findTabbable(
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any)
-    | null,
-  shouldSearchRootNode?: boolean
-) {
+function findTabbable(el?: UIElement, shouldSearchRootNode?: boolean) {
   return findFocusable(
     el,
     (element) => {

@@ -24,7 +24,7 @@
 
 import { findDOMNode } from './findDOMNode'
 import { getComputedStyle } from './getComputedStyle'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
@@ -40,16 +40,7 @@ import React from 'react'
  * will determine visibility based only on the styles of the given node.
  * @returns {boolean} if the element is visible
  */
-function isVisible(
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => any)
-    | null,
-  recursive = true
-): boolean {
+function isVisible(el?: UIElement, recursive = true): boolean {
   const node = el && findDOMNode(el)
   // skip document or window nodes
   if (node === window || node === document || node === document.body) {

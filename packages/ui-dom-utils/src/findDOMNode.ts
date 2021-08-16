@@ -24,6 +24,7 @@
 
 import ReactDOM from 'react-dom'
 import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
@@ -36,15 +37,7 @@ import React from 'react'
  * @param { Node | Window | React.ReactElement | React.Component | function } el - component, DOM node, or function returning a DOM node
  * @returns { Node | Window | null | undefined } The root node of this element
  */
-function findDOMNode(
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => Node | Window | null | undefined)
-    | null
-) {
+function findDOMNode(el?: UIElement) {
   const node = typeof el === 'function' ? el() : el
 
   if (node === document) {

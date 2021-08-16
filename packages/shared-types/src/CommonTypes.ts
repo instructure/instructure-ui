@@ -22,34 +22,13 @@
  * SOFTWARE.
  */
 
-import { findDOMNode } from './findDOMNode'
-import { ownerWindow } from './ownerWindow'
-import { canUseDOM } from './canUseDOM'
-import { UIElement } from '@instructure/shared-types'
+import React from 'react'
 
-/**
- * ---
- * category: utilities/DOM
- * ---
- *
- * Get the associated CSS properties and values for a
- * specified element
- * @module getComputedStyle
- *
- * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
- * @returns { Object } object containing css properties and values for the element
- */
-function getComputedStyle(el: UIElement) {
-  let style = {}
-  if (canUseDOM) {
-    const node = el && findDOMNode(el)
-    if (node) {
-      const window = ownerWindow(el)
-      style = window !== null ? window.getComputedStyle(node as Element) : {}
-    }
-  }
-  return style as CSSStyleDeclaration
-}
-
-export default getComputedStyle
-export { getComputedStyle }
+/** Element func parameter, mainly for the `findDOMNode` util */
+export type UIElement =
+  | Node
+  | Window
+  | React.ReactElement
+  | React.Component
+  | (() => Node | Window | null | undefined)
+  | null

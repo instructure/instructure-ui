@@ -28,7 +28,7 @@ import {
   requestAnimationFrame,
   RequestAnimationFrameType
 } from './requestAnimationFrame'
-import React from 'react'
+import { UIElement } from '@instructure/shared-types'
 
 type PositionChangeListenerType = { remove: () => void }
 
@@ -44,13 +44,7 @@ type PositionChangeListenerType = { remove: () => void }
  * @returns {function} remove - cancel the listener and no longer execute the handler function
  */
 function addPositionChangeListener(
-  el?:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((...args: any[]) => Node | Window | null | undefined)
-    | null,
+  el?: UIElement,
   handler?: (...args: any[]) => any
 ): PositionChangeListenerType {
   const node = findDOMNode(el)
