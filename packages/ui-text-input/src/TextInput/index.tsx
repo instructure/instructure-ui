@@ -25,8 +25,8 @@
 /** @jsx jsx */
 import React, { Component, InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
-
-import { controllable, OtherHTMLAttributes } from '@instructure/ui-prop-types'
+import { OtherHTMLAttributes } from '@instructure/shared-types'
+import { controllable } from '@instructure/ui-prop-types'
 import {
   callRenderProp,
   getInteraction,

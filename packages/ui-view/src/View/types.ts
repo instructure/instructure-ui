@@ -22,10 +22,7 @@
  * SOFTWARE.
  */
 import PropTypes from 'prop-types'
-import {
-  cursor as cursorPropTypes,
-  OtherHTMLAttributes
-} from '@instructure/ui-prop-types'
+import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
 import {
   ThemeablePropTypes,
@@ -36,7 +33,7 @@ import {
   Shadow,
   Stacking
 } from '@instructure/emotion'
-import { AsElementType } from '@instructure/shared-types'
+import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
 
 export type ViewOwnProps = {
   /**

@@ -26,7 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import { element, OtherHTMLAttributes } from '@instructure/ui-prop-types'
+import { element } from '@instructure/ui-prop-types'
+import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
