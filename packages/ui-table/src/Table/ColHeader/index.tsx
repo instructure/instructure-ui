@@ -41,7 +41,7 @@ type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   id: string
-  stackedSortByLabel: string
+  stackedSortByLabel?: string
   width?: string | number
   textAlign?: 'start' | 'center' | 'end'
   sortDirection?: 'none' | 'ascending' | 'descending'
@@ -103,8 +103,6 @@ class ColHeader extends Component<Props> {
   static defaultProps = {
     textAlign: 'start',
     sortDirection: 'none',
-    stackedSortByLabel: undefined,
-    children: null,
     scope: 'col'
   }
 

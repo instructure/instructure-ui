@@ -98,10 +98,7 @@ class Responsive extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    render: undefined,
-    match: 'element',
-    props: null
+    match: 'element'
   }
 
   _matchListener: { remove(): void } | null = null

@@ -146,16 +146,9 @@ class Pagination extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    label: undefined,
-    labelNext: undefined,
-    labelPrev: undefined,
-    margin: undefined,
     disabled: false,
     variant: 'full',
     as: 'div',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
     shouldHandleFocus: true
   }
 

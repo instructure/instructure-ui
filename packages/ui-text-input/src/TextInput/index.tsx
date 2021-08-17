@@ -202,34 +202,13 @@ class TextInput extends Component<Props> {
   }
 
   static defaultProps = {
-    renderLabel: undefined,
     type: 'text',
-    id: undefined,
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
     isRequired: false,
-    value: undefined,
-    defaultValue: undefined,
     display: 'block',
     shouldNotWrap: false,
-    placeholder: undefined,
-    width: undefined,
     size: 'medium',
-    htmlSize: undefined,
     textAlign: 'start',
-    messages: [],
-    // @ts-expect-error ts-migrate(6133) FIXME: 'input' is declared but its value is never read.
-    inputRef: function (input) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'container' is declared but its value is never rea... Remove this comment to see the full error message
-    inputContainerRef: function (container) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onChange: function (event, value) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: function (event) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: function (event) {},
-    renderBeforeInput: undefined,
-    renderAfterInput: undefined
+    messages: []
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -304,20 +283,17 @@ class TextInput extends Component<Props> {
   handleInputRef = (node) => {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
     this._input = node
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.inputRef(node)
+    this.props.inputRef?.(node)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleChange = (event) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onChange(event, event.target.value)
+    this.props.onChange?.(event, event.target.value)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleBlur = (event) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onBlur(event)
+    this.props.onBlur?.(event)
     this.setState({
       hasFocus: false
     })
@@ -325,8 +301,7 @@ class TextInput extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleFocus = (event) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onFocus(event)
+    this.props.onFocus?.(event)
     this.setState({
       hasFocus: true
     })

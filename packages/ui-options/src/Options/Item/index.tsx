@@ -98,10 +98,7 @@ class Item extends Component<Props> {
   static defaultProps = {
     as: 'span',
     variant: 'default',
-    role: 'listitem',
-    renderBeforeLabel: null,
-    renderAfterLabel: null,
-    children: null
+    role: 'listitem'
   }
 
   componentDidMount() {

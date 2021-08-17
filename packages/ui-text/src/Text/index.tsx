@@ -118,14 +118,7 @@ class Text extends Component<Props> {
     as: 'span',
     wrap: 'normal',
     size: 'medium',
-    letterSpacing: 'normal',
-    children: null,
-    elementRef: undefined,
-    color: undefined,
-    transform: undefined,
-    lineHeight: undefined,
-    fontStyle: undefined,
-    weight: undefined
+    letterSpacing: 'normal'
   }
 
   componentDidMount() {

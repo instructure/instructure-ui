@@ -100,11 +100,7 @@ class Pages extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    defaultPageIndex: null,
-    activePageIndex: 0,
-    onPageIndexChange: function () {},
-    margin: undefined
+    activePageIndex: 0
   }
 
   static Page = Page
@@ -136,8 +132,7 @@ class Pages extends Component<Props> {
     const oldPageIndex = this._history.pop()
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
     const newPageIndex = this._history[this._history.length - 1]
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onPageIndexChange(newPageIndex || 0, oldPageIndex)
+    this.props.onPageIndexChange?.(newPageIndex || 0, oldPageIndex)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nextProps' implicitly has an 'any' type... Remove this comment to see the full error message

@@ -237,27 +237,11 @@ class Modal extends Component<Props> {
     variant: 'default',
     transition: 'fade',
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onOpen: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClose: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDismiss: (event) => {},
-    onEnter: () => {},
-    onEntering: () => {},
-    onEntered: () => {},
-    onExit: () => {},
-    onExiting: () => {},
-    onExited: () => {},
-    as: undefined,
-    mountNode: null,
+    onOpen: (_event) => {}, // TODO check if its OK if this line is removed
+    onExited: () => {}, // TODO check if its OK if this line is removed
     insertAt: 'bottom',
-    liveRegion: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    contentRef: (el) => {},
     shouldCloseOnDocumentClick: true,
     shouldReturnFocus: true,
-    defaultFocusElement: null,
-    children: null,
     constrain: 'window',
     overflow: 'scroll'
   }

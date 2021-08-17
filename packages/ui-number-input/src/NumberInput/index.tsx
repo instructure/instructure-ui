@@ -180,33 +180,11 @@ class NumberInput extends Component<Props> {
   }
 
   static defaultProps = {
-    id: null,
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
     messages: [],
-    placeholder: null,
     isRequired: false,
     showArrows: true,
     size: 'medium',
-    value: undefined,
-    width: undefined,
     display: 'block',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    inputRef: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onChange: (event, value) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDecrement: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onIncrement: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyDown: (event) => {},
-    disabled: undefined,
-    readOnly: undefined,
     inputMode: 'numeric'
   }
 
@@ -258,43 +236,36 @@ class NumberInput extends Component<Props> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   handleRef = (element) => {
     this._input = element
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.inputRef(element)
+    this.props.inputRef?.(element)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleFocus = (event) => {
     this.setState({ hasFocus: true })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onFocus(event)
+    this.props.onFocus?.(event)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleBlur = (event) => {
     this.setState({ hasFocus: false })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onBlur(event)
+    this.props.onBlur?.(event)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleChange = (event) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onChange(event, event.target.value)
+    this.props.onChange?.(event, event.target.value)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleKeyDown = (event) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onKeyDown(event)
+    this.props.onKeyDown?.(event)
 
     if (event.keyCode === keycode.codes.down) {
       event.preventDefault()
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      this.props.onDecrement(event)
+      this.props.onDecrement?.(event)
     } else if (event.keyCode === keycode.codes.up) {
       event.preventDefault()
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      this.props.onIncrement(event)
+      this.props.onIncrement?.(event)
     }
   }
 
@@ -316,7 +287,7 @@ class NumberInput extends Component<Props> {
     if (interaction === 'enabled') {
       // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._input.focus()
-      callback(event)
+      callback?.(event)
     }
   }
 

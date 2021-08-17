@@ -141,11 +141,7 @@ class ProgressBar extends Component<Props> {
     valueMax: 100,
     valueNow: 0,
     as: 'div',
-    renderValue: undefined,
-    margin: undefined,
-    elementRef: undefined,
     color: 'primary',
-
     // default to showing `success` color on completion
     // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
     meterColor: ({ valueNow, valueMax }) =>

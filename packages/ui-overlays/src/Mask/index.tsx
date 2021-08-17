@@ -67,12 +67,7 @@ class Mask extends Component<Props> {
 
   static defaultProps = {
     placement: 'center',
-    fullscreen: false,
-    onDismiss: undefined,
-    children: null,
-    onClick: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {}
+    fullscreen: false
   }
 
   componentDidMount() {
@@ -97,8 +92,7 @@ class Mask extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.elementRef(el)
+    this.props.elementRef?.(el)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.

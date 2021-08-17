@@ -70,10 +70,7 @@ class Option extends Component<Props> {
   }
 
   static defaultProps = {
-    isDisabled: false,
-    renderBeforeLabel: undefined,
-    renderAfterLabel: undefined,
-    children: null
+    isDisabled: false
   }
 
   /* istanbul ignore next */

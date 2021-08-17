@@ -126,12 +126,7 @@ class RangeInput extends Component<Props> {
     layout: 'stacked',
     displayValue: true,
     disabled: false,
-    readOnly: false,
-    id: undefined,
-    defaultValue: undefined,
-    value: undefined,
-    onChange: undefined,
-    messages: undefined
+    readOnly: false
   }
 
   _input: HTMLInputElement | null = null

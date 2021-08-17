@@ -56,12 +56,6 @@ class PaginationArrowButton extends Component<Props> {
     buttonRef: PropTypes.func
   }
 
-  static defaultProps = {
-    direction: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    buttonRef: (el) => {}
-  }
-
   render() {
     const { label, direction, buttonRef, ...props } = this.props
     const Icon =

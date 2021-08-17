@@ -123,17 +123,12 @@ class ToggleGroup extends Component<Props> {
   }
 
   static defaultProps = {
-    expanded: undefined,
     size: 'medium',
     icon: IconArrowOpenEndSolid,
     iconExpanded: IconArrowOpenDownSolid,
     defaultExpanded: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onToggle: function (event, expanded) {},
     transition: true,
     as: 'span',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
     border: true
   }
 

@@ -69,10 +69,8 @@ class Page extends Component<Props> {
   }
 
   static defaultProps = {
-    defaultFocusElement: null,
     padding: 'small',
-    textAlign: 'start',
-    children: null
+    textAlign: 'start'
   }
 
   static contextTypes = {

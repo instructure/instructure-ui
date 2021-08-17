@@ -225,40 +225,13 @@ class SimpleSelect extends Component<Props> {
   }
 
   static defaultProps = {
-    value: undefined,
-    defaultValue: undefined,
-    id: undefined,
     size: 'medium',
-    assistiveText: undefined,
-    placeholder: null,
-    interaction: undefined,
     isRequired: false,
     isInline: false,
-    width: undefined,
-    optionsMaxWidth: undefined,
     visibleOptionsCount: 8,
-    messages: undefined,
     placement: 'bottom stretch',
-    mountNode: undefined,
     constrain: 'window',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onChange: (event, data) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onShowOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onHideOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    inputRef: (node) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    listRef: (node) => {},
-    renderEmptyOption: '---',
-    renderBeforeInput: null,
-    renderAfterInput: null,
-    children: null
+    renderEmptyOption: '---'
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -398,15 +371,13 @@ class SimpleSelect extends Component<Props> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleBlur = (event) => {
     this.setState({ highlightedOptionId: null })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onBlur(event)
+    this.props.onBlur?.(event)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleShowOptions = (event) => {
     this.setState({ isShowingOptions: true })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onShowOptions(event)
+    this.props.onShowOptions?.(event)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
@@ -421,8 +392,7 @@ class SimpleSelect extends Component<Props> {
         inputValue: option ? option.props.children : ''
       }
     })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onHideOptions(event)
+    this.props.onHideOptions?.(event)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
@@ -464,11 +434,9 @@ class SimpleSelect extends Component<Props> {
       }))
     }
     // fire onChange if selected option changed
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    option && this.props.onChange(event, { value, id })
+    option && this.props.onChange?.(event, { value, id })
     // hide options list whenever selection is made
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onHideOptions(event)
+    this.props.onHideOptions?.(event)
   }
 
   renderChildren() {

@@ -64,11 +64,9 @@ class RowHeader extends Component<Props> {
      */
     textAlign: PropTypes.oneOf(['start', 'center', 'end'])
   }
-  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    textAlign: 'start',
-    children: null
+    textAlign: 'start'
   }
 
   componentDidMount() {

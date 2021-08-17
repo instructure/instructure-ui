@@ -132,17 +132,6 @@ class Tabs extends Component<Props & BidirectionalProps> {
 
   static defaultProps = {
     variant: 'default',
-    padding: undefined,
-    textAlign: undefined,
-    maxWidth: undefined,
-    maxHeight: undefined,
-    minHeight: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestTabChange: (event, { index, id }) => {},
-    margin: undefined,
-    children: null,
-    elementRef: () => {},
-    screenReaderLabel: undefined,
     shouldFocusOnRender: false,
     tabOverflow: 'stack'
   }

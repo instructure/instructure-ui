@@ -74,14 +74,9 @@ class Tab extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
     variant: 'default',
     isDisabled: false,
-    isSelected: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClick: (event, { index, id }) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyDown: (event, { index, id }) => {}
+    isSelected: false
   }
 
   componentDidMount() {
@@ -98,25 +93,19 @@ class Tab extends Component<Props> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleClick = (event) => {
     const { onClick, index, id, isDisabled } = this.props
-
     if (isDisabled) {
       return
     }
-
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onClick(event, { index, id })
+    onClick?.(event, { index, id })
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleKeyDown = (event) => {
     const { onKeyDown, index, id, isDisabled } = this.props
-
     if (isDisabled) {
       return
     }
-
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onKeyDown(event, { index, id })
+    onKeyDown?.(event, { index, id })
   }
 
   render() {

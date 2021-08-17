@@ -60,8 +60,7 @@ class ModalFooter extends Component<Props> {
   }
 
   static defaultProps = {
-    variant: 'default',
-    children: null
+    variant: 'default'
   }
 
   componentDidMount() {

@@ -263,42 +263,14 @@ class Select extends Component<Props> {
   static defaultProps = {
     inputValue: '',
     isShowingOptions: false,
-    id: undefined,
     size: 'medium',
-    assistiveText: undefined,
-    placeholder: null,
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
     isRequired: false,
     isInline: false,
-    width: undefined,
-    htmlSize: undefined,
-    optionsMaxWidth: undefined,
     visibleOptionsCount: 8,
-    messages: undefined,
     placement: 'bottom stretch',
     constrain: 'window',
-    mountNode: undefined,
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    onInputChange: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestShowOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestHideOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestHighlightOption: (event, data) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestSelectOption: (event, data) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    inputRef: (node) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    listRef: (node) => {},
-    renderBeforeInput: null,
-    renderAfterInput: null,
-    children: null,
+    onBlur: (event) => {}, // TODO check if this line can be removed
     shouldNotWrap: false
   }
 
@@ -422,15 +394,13 @@ class Select extends Component<Props> {
     }
 
     this._input = node
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.inputRef(node)
+    this.props.inputRef?.(node)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleListRef = (node) => {
     this._list = node
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.listRef(node)
+    this.props.listRef?.(node)
 
     // store option height to calculate list maxHeight
     if (node && node.querySelector('[role="option"]')) {
@@ -473,8 +443,7 @@ class Select extends Component<Props> {
   highlightOption(event, id) {
     const { onRequestHighlightOption } = this.props
     if (id) {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      onRequestHighlightOption(event, { id })
+      onRequestHighlightOption?.(event, { id })
     }
   }
 
@@ -493,8 +462,7 @@ class Select extends Component<Props> {
       ? {
           // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
           onRequestShowOptions: (event) => {
-            // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-            onRequestShowOptions(event)
+            onRequestShowOptions?.(event)
             if (selectedOptionId && !Array.isArray(selectedOptionId)) {
               // highlight selected option on show
               this.highlightOption(event, selectedOptionId)
@@ -502,8 +470,7 @@ class Select extends Component<Props> {
           },
           // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
           onRequestHideOptions: (event) => {
-            // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-            onRequestHideOptions(event)
+            onRequestHideOptions?.(event)
           },
           onRequestHighlightOption: (
             event: Event,
@@ -545,8 +512,7 @@ class Select extends Component<Props> {
             // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
             if (id && this._optionIds.indexOf(id) !== -1) {
               // only select if id exists as a valid option
-              // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-              onRequestSelectOption(event, { id })
+              onRequestSelectOption?.(event, { id })
             }
           }
         }

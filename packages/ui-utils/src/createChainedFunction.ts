@@ -34,10 +34,9 @@ type GenericFunction = (...args: any[]) => any
  *
  * Forked from: https://github.com/react-bootstrap/react-overlays/blob/master/src/utils/createChainedFunction.js
  * @module createChainedFunction
- * @param {function} funcs to chain
- * @returns {function|null}
+ * @param funcs to chain
+ * @returns A single function that executes every input function.
  */
-
 function createChainedFunction(
   ...funcs: (null | undefined | GenericFunction)[]
 ) {
@@ -56,11 +55,11 @@ function createChainedFunction(
           'Invalid Argument Type, must only provide functions, undefined, or null.'
         )
       }
-      if (acc === null) {
+      if (acc == null) {
         return f
       }
-      return function chainedFunction(this: any, ...args) {
-        acc!.apply(this, args)
+      return function chainedFunction(this: unknown, ...args) {
+        acc.apply(this, args)
         f.apply(this, args)
       }
       // TODO I think it can return null too
@@ -70,9 +69,9 @@ function createChainedFunction(
 /**
  * Find all indexes for a value in an Array
  *
- * @param {array} arr The Array to search for val
- * @param {*} val The value to find indexes for
- * @return {array} All the indexes of the Array matching val
+ * @param arr The Array to search for val
+ * @param val The value to find indexes for
+ * @returns All the indexes of the Array matching val
  */
 function getAllIndexes(arr: unknown[], val: unknown): number[] {
   const indexes: number[] = []

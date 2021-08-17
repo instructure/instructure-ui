@@ -75,11 +75,6 @@ class Head extends Component<Props> {
     isStacked: PropTypes.bool,
     renderSortLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
   }
-  /* eslint-enable react/require-default-props */
-
-  static defaultProps = {
-    children: null
-  }
 
   get isSortable() {
     const [row] = Children.toArray(this.props.children)

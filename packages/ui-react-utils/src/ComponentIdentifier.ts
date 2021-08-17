@@ -76,10 +76,6 @@ class ComponentIdentifier<P> extends Component<P> {
     children: PropTypes.node
   }
 
-  static defaultProps = {
-    children: null
-  }
-
   static pick = (component: ComponentType, children: ReactNode) => {
     let result
 

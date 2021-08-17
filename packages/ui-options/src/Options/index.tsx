@@ -92,11 +92,7 @@ class Options extends Component<Props> {
 
   static defaultProps = {
     as: 'span',
-    role: 'list',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    elementRef: (node) => {},
-    renderLabel: null,
-    children: null
+    role: 'list'
   }
 
   static Item = Item

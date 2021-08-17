@@ -85,21 +85,14 @@ class Position extends Component<Props, State> {
     children: PropTypes.node
   }
 
-  static defaultProps: Props = {
-    renderTarget: undefined,
-    target: undefined,
+  static defaultProps = {
     placement: 'bottom center',
-    mountNode: null,
     insertAt: 'bottom',
     constrain: 'window',
     offsetX: 0,
     offsetY: 0,
-    id: undefined,
     shouldTrackPosition: true,
-    shouldPositionOverTarget: false,
-    onPositioned: () => {},
-    onPositionChanged: () => {},
-    children: null
+    shouldPositionOverTarget: false
   }
 
   static locatorAttribute = 'data-position'
@@ -160,7 +153,7 @@ class Position extends Component<Props, State> {
         style.top !== prevState.style.top ||
         style.left !== prevState.style.left)
     ) {
-      this.props.onPositionChanged({
+      this.props.onPositionChanged?.({
         top: style.top,
         left: style.left,
         placement

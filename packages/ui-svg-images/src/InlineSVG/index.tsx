@@ -109,7 +109,6 @@ class InlineSVG extends Component<Props> {
     title: '',
     description: '',
     inline: true,
-    children: null,
     width: '1em',
     height: '1em',
     color: 'inherit'

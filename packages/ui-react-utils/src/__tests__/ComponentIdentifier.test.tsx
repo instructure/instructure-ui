@@ -37,10 +37,6 @@ describe('ComponentIdentifier', async () => {
       children: PropTypes.node
     }
 
-    static defaultProps = {
-      children: null
-    }
-
     render() {
       const trigger = ComponentIdentifier.pick(Trigger, this.props.children)
 

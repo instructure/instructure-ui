@@ -106,13 +106,8 @@ class Tag extends Component<Props> {
     size: 'medium',
     dismissible: false,
     variant: 'default',
-    elementRef: undefined,
-    className: undefined,
-    title: undefined,
     disabled: false,
-    readOnly: false,
-    margin: undefined,
-    onClick: undefined
+    readOnly: false
   }
 
   componentDidMount() {

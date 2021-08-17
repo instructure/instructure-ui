@@ -91,18 +91,11 @@ class Panel extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    id: undefined,
     isDisabled: false,
-    maxHeight: undefined,
-    minHeight: undefined,
     textAlign: 'start',
     variant: 'default',
-    labelledBy: null,
     isSelected: false,
-    padding: 'small',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {}
+    padding: 'small'
   }
 
   componentDidMount() {

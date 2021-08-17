@@ -220,6 +220,7 @@ class FileDrop extends Component<Props, State> {
     shouldAllowRepeats: true,
     maxSize: Infinity,
     minSize: 0,
+    messages: [],
     display: 'block'
   }
 

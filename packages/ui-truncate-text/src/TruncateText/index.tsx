@@ -116,9 +116,7 @@ class TruncateText extends Component<Props> {
     truncate: 'character',
     position: 'end',
     ignore: [' ', '.', ','],
-    debounce: 0,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'truncated' is declared but its value is never rea... Remove this comment to see the full error message
-    onUpdate: (truncated, text) => {}
+    debounce: 0
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -218,8 +216,7 @@ class TruncateText extends Component<Props> {
 
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_wasTruncated' does not exist on type 'T... Remove this comment to see the full error message
       if (!needsSecondRender && (isTruncated || this._wasTruncated)) {
-        // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-        onUpdate(isTruncated, truncatedText)
+        onUpdate?.(isTruncated, truncatedText)
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_wasTruncated' does not exist on type 'T... Remove this comment to see the full error message
         this._wasTruncated = isTruncated
       } else {

@@ -101,12 +101,7 @@ class Portal extends Component<Props, State> {
 
   static defaultProps = {
     open: false,
-    insertAt: 'bottom',
-    onOpen: () => {},
-    onClose: () => {},
-    mountNode: null,
-    children: null,
-    elementRef: () => {}
+    insertAt: 'bottom'
   }
 
   constructor(props: Props) {

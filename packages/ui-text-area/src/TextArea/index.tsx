@@ -168,18 +168,8 @@ class TextArea extends Component<Props> {
     messages: [],
     disabled: false,
     readOnly: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'textarea' is declared but its value is never read... Remove this comment to see the full error message
-    textareaRef: function (textarea) {},
     layout: 'stacked',
-    id: undefined,
-    value: undefined,
-    defaultValue: undefined,
-    onChange: undefined,
-    required: false,
-    placeholder: undefined,
-    width: undefined,
-    height: undefined,
-    maxHeight: undefined
+    required: false
   }
 
   _listener: { remove(): void } | null = null
@@ -435,8 +425,7 @@ class TextArea extends Component<Props> {
         ref={(textarea, ...args) => {
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_textarea' does not exist on type 'TextA... Remove this comment to see the full error message
           this._textarea = textarea
-          // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-          textareaRef.apply(this, [textarea].concat(args))
+          textareaRef?.apply(this, [textarea].concat(args))
         }}
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ width: string | undefined; resize: "none" ... Remove this comment to see the full error message
         style={style}

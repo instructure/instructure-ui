@@ -95,11 +95,8 @@ class NavigationItem extends Component<Props> {
 
   static defaultProps = {
     as: 'a',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onClick: function (e, selected) {},
     selected: false,
-    minimized: false,
-    href: undefined
+    minimized: false
   }
 
   componentDidMount() {

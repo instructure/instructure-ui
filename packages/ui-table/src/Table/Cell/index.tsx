@@ -69,8 +69,7 @@ class Cell extends Component<Props> {
   /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    textAlign: 'start',
-    children: null
+    textAlign: 'start'
   }
 
   componentDidMount() {

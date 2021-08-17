@@ -195,6 +195,7 @@ class IconButton extends Component<Props> {
         {...passthroughProps(props)}
         type={type}
         size={size}
+        elementRef={elementRef}
         as={as}
         interaction={interaction}
         color={color}

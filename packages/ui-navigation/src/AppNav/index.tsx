@@ -126,15 +126,9 @@ class AppNav extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
     debounce: 300,
     margin: '0',
-    renderBeforeItems: undefined,
-    renderAfterItems: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
     renderTruncateLabel: () => 'More',
-    onUpdate: () => {},
     visibleItemsCount: 0
   }
 
@@ -228,9 +222,7 @@ class AppNav extends Component<Props> {
   handleResize = () => {
     this.setState({ isMeasuring: true }, () => {
       const { visibleItemsCount } = this.measureItems()
-
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      this.props.onUpdate({ visibleItemsCount })
+      this.props.onUpdate?.({ visibleItemsCount })
       this.setState({ isMeasuring: false })
     })
   }

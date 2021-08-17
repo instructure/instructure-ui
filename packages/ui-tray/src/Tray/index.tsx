@@ -213,33 +213,14 @@ class Tray extends Component<Props & BidirectionalProps> {
 
   static defaultProps = {
     open: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onOpen: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClose: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDismiss: (event) => {},
-    onEnter: () => {},
-    onEntering: () => {},
-    onEntered: () => {},
-    onExit: () => {},
-    onExiting: () => {},
-    onExited: () => {},
-    mountNode: null,
     insertAt: 'bottom',
-    liveRegion: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    contentRef: (el) => {},
     shouldCloseOnDocumentClick: false,
     shouldContainFocus: true,
     shouldReturnFocus: true,
-    defaultFocusElement: null,
     size: 'small',
     placement: 'start',
     shadow: true,
-    border: false,
-    children: null,
-    onTransition: undefined
+    border: false
   }
 
   state = {

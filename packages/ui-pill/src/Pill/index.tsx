@@ -87,9 +87,6 @@ class Pill extends Component<Props> {
   }
 
   static defaultProps = {
-    children: undefined,
-    margin: undefined,
-    elementRef: undefined,
     color: 'primary'
   }
 

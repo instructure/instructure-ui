@@ -52,31 +52,31 @@ type Props = {
   /**
    * Callback fired when the options want to become visible
    */
-  onRequestShowOptions: (event: Event) => void
+  onRequestShowOptions?: (event: Event) => void
   /**
    * Callback fired when the options no longer want to be visible
    */
-  onRequestHideOptions: (event: Event) => void
+  onRequestHideOptions?: (event: Event) => void
   /**
    * Callback fired when option is hovered or highlighted via keyboard.
    * Either the `id` or the `direction` parameter is supplied
    */
-  onRequestHighlightOption: (
+  onRequestHighlightOption?: (
     event: Event,
     data: { id?: string; direction?: 1 | -1 }
   ) => void
   /**
    * Callback fired when first option should be highlighted
    */
-  onRequestHighlightFirstOption: (event: Event) => void
+  onRequestHighlightFirstOption?: (event: Event) => void
   /**
    * Callback fired when last option should be highlighted
    */
-  onRequestHighlightLastOption: (event: Event) => void
+  onRequestHighlightLastOption?: (event: Event) => void
   /**
    * Callback fired when option clicked or selected via keyboard
    */
-  onRequestSelectOption: (event: Event, data: { id?: string }) => void
+  onRequestSelectOption?: (event: Event, data: { id?: string }) => void
   /**
    * A function with prop getters
    */
@@ -84,7 +84,7 @@ type Props = {
   /**
    * A function with prop getters
    */
-  children: (propGetters: SelectableRender) => ReactNode
+  children?: (propGetters: SelectableRender) => ReactNode
 }
 
 type MouseEventFunction = (event: MouseEvent) => void
@@ -169,24 +169,7 @@ class Selectable extends Component<Props> {
   }
 
   static defaultProps = {
-    id: null,
-    highlightedOptionId: null,
-    selectedOptionId: null,
-    isShowingOptions: false,
-    onRequestShowOptions: (_event: Event) => {},
-    onRequestHideOptions: (_event: Event) => {},
-    onRequestHighlightOption: (
-      _event: Event,
-      _data: { id?: string; direction?: 1 | -1 }
-    ) => {},
-    onRequestHighlightFirstOption: (_event: Event) => {},
-    onRequestHighlightLastOption: (_event: Event) => {},
-    onRequestSelectOption: (
-      _event: Event,
-      _data: Record<string, unknown>
-    ) => {},
-    children: null,
-    render: undefined
+    isShowingOptions: false
   }
 
   _id = this.props.id || uid('Selectable')
@@ -213,12 +196,12 @@ class Selectable extends Component<Props> {
     event.preventDefault()
 
     if (isShowingOptions) {
-      onRequestHideOptions(event)
+      onRequestHideOptions?.(event)
     } else {
       if (!isActiveElement(this._trigger)) {
         this._trigger!.focus()
       }
-      onRequestShowOptions(event)
+      onRequestShowOptions?.(event)
     }
   }
 
@@ -245,14 +228,14 @@ class Selectable extends Component<Props> {
         if (highlightedOptionId) {
           // select highlighted option
           event.preventDefault()
-          onRequestSelectOption(event, { id: highlightedOptionId })
+          onRequestSelectOption?.(event, { id: highlightedOptionId })
         }
         break
       case 'down':
         event.preventDefault()
         if (isShowingOptions) {
           // if options showing, change highlight
-          onRequestHighlightOption(event, { direction: 1 })
+          onRequestHighlightOption?.(event, { direction: 1 })
         } else {
           // otherwise, show options
           this.handleOpenClose(event)
@@ -262,7 +245,7 @@ class Selectable extends Component<Props> {
         event.preventDefault()
         if (isShowingOptions) {
           // if options showing, change highlight
-          onRequestHighlightOption(event, { direction: -1 })
+          onRequestHighlightOption?.(event, { direction: -1 })
         } else {
           // otherwise, show options
           this.handleOpenClose(event)
@@ -272,14 +255,14 @@ class Selectable extends Component<Props> {
         if (isShowingOptions) {
           // if options showing, highlight first option
           event.preventDefault()
-          onRequestHighlightFirstOption(event)
+          onRequestHighlightFirstOption?.(event)
         }
         break
       case 'end':
         if (isShowingOptions) {
           // if options showing, highlight last option
           event.preventDefault()
-          onRequestHighlightLastOption(event)
+          onRequestHighlightLastOption?.(event)
         }
         break
     }
@@ -383,10 +366,10 @@ class Selectable extends Component<Props> {
             role: 'option',
             'aria-selected': this.isSelectedOption(id!) ? 'true' : 'false',
             onClick: createChainedFunction((event) => {
-              onRequestSelectOption(event, { id })
+              onRequestSelectOption?.(event, { id })
             }, onClick),
             onMouseOver: createChainedFunction((event) => {
-              onRequestHighlightOption(event, { id })
+              onRequestHighlightOption?.(event, { id })
             }, onMouseOver),
             ...rest
           }

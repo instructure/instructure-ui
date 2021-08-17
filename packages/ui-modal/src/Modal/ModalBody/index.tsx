@@ -78,10 +78,7 @@ class ModalBody extends Component<Props> {
   static defaultProps = {
     padding: 'medium',
     as: 'div',
-    variant: 'default',
-    children: null,
-    elementRef: undefined,
-    overflow: undefined
+    variant: 'default'
   }
 
   componentDidMount() {

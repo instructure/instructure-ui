@@ -120,15 +120,7 @@ class Item extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClick: function (event) {},
     isSelected: false,
-    href: undefined,
-    elementRef: undefined,
-    renderIcon: undefined,
-    renderAfter: undefined,
-    as: undefined,
     cursor: 'pointer',
     isDisabled: false
   }

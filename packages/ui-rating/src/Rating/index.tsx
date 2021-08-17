@@ -110,9 +110,7 @@ class Rating extends Component<Props> {
     formatValueText: (filled, iconCount) => `${filled} / ${iconCount}`,
     iconCount: 3,
     size: 'medium',
-    valueNow: 0,
-    margin: undefined,
-    valueMax: undefined
+    valueNow: 0
   }
 
   static Icon = RatingIcon

@@ -90,20 +90,12 @@ class RadioInput extends Component<Props> {
   }
 
   static defaultProps = {
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClick: function (event) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onChange: function (event) {},
     variant: 'simple',
     size: 'medium',
     disabled: false,
     inline: false,
     context: 'success',
-    readOnly: false,
-    checked: undefined,
-    id: undefined,
-    name: undefined,
-    value: undefined
+    readOnly: false
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -139,8 +131,7 @@ class RadioInput extends Component<Props> {
       return
     }
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onClick(e)
+    this.props.onClick?.(e)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
@@ -149,14 +140,11 @@ class RadioInput extends Component<Props> {
       e.preventDefault()
       return
     }
-
     if (typeof this.props.checked === 'undefined') {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
       this.setState({ checked: !this.state.checked })
     }
-
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onChange(e)
+    this.props.onChange?.(e)
   }
 
   focus() {

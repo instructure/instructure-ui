@@ -57,10 +57,10 @@ type Props = {
   debug?: boolean
   makeStyles?: (...args: any[]) => any
   styles?: CSSObject
-  margin: Spacing
-  padding: Spacing
-  shadow: Shadow
-  stacking: Stacking
+  margin?: Spacing
+  padding?: Spacing
+  shadow?: Shadow
+  stacking?: Stacking
   placement: unknown //TODO: fix this
 }
 
@@ -150,22 +150,13 @@ class ContextView extends Component<Props & OtherHTMLAttributes<Props>> {
 
   static defaultProps = {
     as: 'span',
-    elementRef: () => {},
     debug: false,
     width: 'auto',
     height: 'auto',
-    children: null,
     textAlign: 'start',
     background: 'default',
     shadow: 'resting',
-    placement: 'center end',
-    margin: undefined,
-    padding: undefined,
-    stacking: undefined,
-    maxWidth: undefined,
-    minWidth: undefined,
-    maxHeight: undefined,
-    minHeight: undefined
+    placement: 'center end'
   }
 
   componentDidMount() {

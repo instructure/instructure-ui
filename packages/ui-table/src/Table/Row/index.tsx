@@ -77,11 +77,6 @@ class Row extends Component<Props> {
       PropTypes.oneOfType([PropTypes.node, PropTypes.func])
     )
   }
-  /* eslint-enable react/require-default-props */
-
-  static defaultProps = {
-    children: null
-  }
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message

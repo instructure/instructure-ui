@@ -181,32 +181,19 @@ class Overlay extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
     open: false,
     insertAt: 'bottom',
-    onOpen: () => {},
-    onClose: () => {},
-    mountNode: null,
+    onOpen: () => {}, // TODO check if this line can be deleted
     shouldContainFocus: false,
     shouldReturnFocus: false,
     shouldCloseOnDocumentClick: false,
     shouldCloseOnEscape: true,
-    applicationElement: null,
-    defaultFocusElement: null,
-    contentElement: null,
-    onDismiss: () => {},
-    transition: null,
     in: false,
     unmountOnExit: false,
     transitionOnMount: false,
     transitionEnter: true,
     transitionExit: true,
-    onEnter: function () {},
-    onEntering: function () {},
-    onEntered: function () {},
-    onExit: function () {},
-    onExiting: function () {},
-    onExited: function () {}
+    onExited: function () {} // TODO check if this line can be deleted
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -232,7 +219,7 @@ class Overlay extends Component<Props> {
     if (prevProps.open && !this.props.open) {
       // closing
       this.setState({
-        transitioning: prevProps.transition !== null
+        transitioning: !!prevProps.transition
       })
     }
   }

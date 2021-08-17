@@ -55,10 +55,6 @@ class Group extends Component<Props> {
     children: ChildrenPropTypes.oneOf([Option])
   }
 
-  static defaultProps = {
-    children: null
-  }
-
   /* istanbul ignore next */
   render() {
     // this component is only used for prop validation. Select.Group children

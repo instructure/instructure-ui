@@ -172,17 +172,7 @@ class TreeBrowser extends Component<Props> {
     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
     getCollectionProps: (props) => props,
     defaultExpanded: [],
-    selectionType: 'none',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'item' is declared but its value is never read.
-    onItemClick: function (item) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'id' is declared but its value is never read.
-    onCollectionClick: function (id, collection) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'collection' is declared but its value is never re... Remove this comment to see the full error message
-    onCollectionToggle: function (collection) {},
-    rootId: undefined,
-    expanded: undefined,
-    treeLabel: undefined,
-    renderContent: undefined
+    selectionType: 'none'
   }
 
   static Node = TreeNode
@@ -215,8 +205,7 @@ class TreeBrowser extends Component<Props> {
     const { onCollectionClick } = this.props
 
     if (expand) this.expandOrCollapseNode(collection)
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onCollectionClick(collection.id, collection) // TODO: this should pass the event as the first arg
+    onCollectionClick?.(collection.id, collection) // TODO: this should pass the event as the first arg
     this.handleSelection(collection.id, 'collection')
   }
 
@@ -224,8 +213,7 @@ class TreeBrowser extends Component<Props> {
   handleItemClick = (e, item) => {
     e.stopPropagation()
     const { onItemClick } = this.props
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onItemClick(item)
+    onItemClick?.(item)
     this.handleSelection(item.id, 'item') // TODO: this should pass the event as the first arg
   }
 
@@ -284,8 +272,7 @@ class TreeBrowser extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'collection' implicitly has an 'any' typ... Remove this comment to see the full error message
   expandOrCollapseNode(collection) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onCollectionToggle(collection)
+    this.props.onCollectionToggle?.(collection)
     if (typeof this.props.expanded === 'undefined') {
       this.setState((state, props) => {
         const expanded = [].concat(this.getExpanded(state, props))

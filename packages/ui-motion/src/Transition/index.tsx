@@ -149,17 +149,7 @@ class Transition extends Component<Props> {
     unmountOnExit: false,
     transitionOnMount: false,
     transitionEnter: true,
-    transitionExit: true,
-
-    onEnter: function () {},
-    onEntering: function () {},
-    onEntered: function () {},
-    onExit: function () {},
-    onExiting: function () {},
-    onExited: function () {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'toState' is declared but its value is never read.
-    onTransition: function (toState, fromState) {},
-    children: null
+    transitionExit: true
   }
 
   static states = BaseTransition.states

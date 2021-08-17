@@ -103,18 +103,7 @@ class TreeButton extends Component<Props> {
     variant: 'folderTree',
     selected: false,
     focused: false,
-    onClick: function () {},
-    id: undefined,
-    name: undefined,
-    collectionIcon: undefined,
-    collectionIconExpanded: undefined,
-    itemIcon: undefined,
-    thumbnail: undefined,
-    expanded: false,
-    descriptor: undefined,
-    level: undefined,
-    containerRef: function () {},
-    renderContent: undefined
+    expanded: false
   }
 
   componentDidMount() {
@@ -194,8 +183,7 @@ class TreeButton extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleRef = (el) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    el && this.props.containerRef(el.parentElement)
+    el && this.props.containerRef?.(el.parentElement)
   }
 
   render() {

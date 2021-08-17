@@ -159,20 +159,12 @@ class Tooltip extends Component<Props> {
   }
 
   static defaultProps = {
-    isShowingContent: undefined,
     defaultIsShowingContent: false,
-    on: undefined,
     color: 'primary',
     placement: 'top',
-    mountNode: null,
     constrain: 'window',
     offsetX: 0,
-    offsetY: 0,
-    positionTarget: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onShowContent: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onHideContent: (event, { documentClick }) => {}
+    offsetY: 0
   }
 
   _id = uid('Tooltip')

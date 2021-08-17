@@ -106,12 +106,7 @@ class RadioInputGroup extends Component<Props> {
     variant: 'simple',
     size: 'medium',
     layout: 'stacked',
-    readOnly: false,
-    defaultValue: undefined,
-    value: undefined,
-    children: null,
-    messages: undefined,
-    onChange: undefined
+    readOnly: false
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.

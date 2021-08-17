@@ -108,14 +108,7 @@ class Navigation extends Component<Props> {
   }
 
   static defaultProps = {
-    children: null,
-    defaultMinimized: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onMinimized: function (event, minimized) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onClick: function (e) {},
-    href: undefined,
-    minimized: undefined
+    defaultMinimized: false
   }
 
   static Item = NavigationItem
@@ -159,9 +152,7 @@ class Navigation extends Component<Props> {
     if (!this.isControlled()) {
       this.setState(navMinimized)
     }
-
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onMinimized(event, !this.minimized)
+    this.props.onMinimized?.(event, !this.minimized)
   }
 
   renderChildren() {

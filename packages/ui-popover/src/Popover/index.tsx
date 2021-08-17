@@ -296,7 +296,6 @@ class Popover extends Component<Props & BidirectionalProps> {
   }
 
   static defaultProps = {
-    isShowingContent: undefined,
     defaultIsShowingContent: false,
     placement: 'bottom center',
     stacking: 'topmost',
@@ -305,17 +304,9 @@ class Popover extends Component<Props & BidirectionalProps> {
     offsetY: 0,
     color: 'primary',
     on: ['hover', 'focus'],
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    contentRef: (el) => {},
     withArrow: true,
     constrain: 'window',
-    defaultFocusElement: undefined,
-    screenReaderLabel: undefined,
-    mountNode: undefined,
     insertAt: 'bottom',
-    liveRegion: undefined,
-    positionTarget: undefined,
-    id: undefined,
     shouldAlignArrow: false,
     shouldTrackPosition: true,
     shouldRenderOffscreen: false,
@@ -324,10 +315,6 @@ class Popover extends Component<Props & BidirectionalProps> {
     shouldCloseOnDocumentClick: true,
     shouldFocusContentOnTriggerBlur: false,
     shouldCloseOnEscape: true,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onShowContent: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onHideContent: (event, { documentClick }) => {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onClick: (event) => {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
@@ -341,13 +328,7 @@ class Popover extends Component<Props & BidirectionalProps> {
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onKeyDown: (event) => {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyUp: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'position' is declared but its value is never read... Remove this comment to see the full error message
-    onPositioned: (position) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'position' is declared but its value is never read... Remove this comment to see the full error message
-    onPositionChanged: (position) => {},
-    renderTrigger: null,
-    children: null
+    onKeyUp: (event) => {}
   }
 
   _handleMouseOver: (...args: any[]) => any | undefined
@@ -559,8 +540,7 @@ class Popover extends Component<Props & BidirectionalProps> {
     if (typeof this.props.isShowingContent === 'undefined') {
       this.setState({ isShowingContent: true })
     }
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onShowContent(event)
+    this.props.onShowContent?.(event)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
@@ -572,15 +552,13 @@ class Popover extends Component<Props & BidirectionalProps> {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingContent' does not exist on type... Remove this comment to see the full error message
       this.setState(({ isShowingContent }) => {
         if (isShowingContent) {
-          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-          onHideContent(event, { documentClick })
+          onHideContent?.(event, { documentClick })
         }
         return { isShowingContent: false }
       })
     } else if (isShowingContent) {
       // controlled, fire callback
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      onHideContent(event, { documentClick })
+      onHideContent?.(event, { documentClick })
     }
   }
 
@@ -671,8 +649,7 @@ class Popover extends Component<Props & BidirectionalProps> {
       placement,
       ...this.computeOffsets(placement)
     })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onPositioned(position)
+    this.props.onPositioned?.(position)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'position' implicitly has an 'any' type.
@@ -682,8 +659,7 @@ class Popover extends Component<Props & BidirectionalProps> {
       placement,
       ...this.computeOffsets(placement)
     })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onPositionChanged(position)
+    this.props.onPositionChanged?.(position)
   }
 
   renderTrigger() {
@@ -798,8 +774,7 @@ class Popover extends Component<Props & BidirectionalProps> {
         elementRef: (el) => {
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_contentElement' does not exist on type ... Remove this comment to see the full error message
           this._contentElement = el
-          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-          this.props.contentRef(el)
+          this.props.contentRef?.(el)
         },
         background: color,
         stacking: this.props.stacking,

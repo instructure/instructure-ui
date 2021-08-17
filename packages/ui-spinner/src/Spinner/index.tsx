@@ -91,12 +91,9 @@ class Spinner extends Component<Props> {
   }
 
   static defaultProps = {
-    renderTitle: undefined,
     as: 'div',
     size: 'medium',
-    variant: 'default',
-    margin: undefined,
-    elementRef: undefined
+    variant: 'default'
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
