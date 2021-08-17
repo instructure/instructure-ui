@@ -27,9 +27,28 @@ export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>
 }
 
+/**
+ * Make all properties in T nullable
+ */
+export type Nullable<T> = {
+  [P in keyof T]: T[P] | null
+}
+
 /** Makes all possible combination for a CSS prop to accept 1 to 4 values */
 export type CSSShorthandValue<Value extends string> =
   | `${Value}`
   | `${Value} ${Value}`
   | `${Value} ${Value} ${Value}`
   | `${Value} ${Value} ${Value} ${Value}`
+
+/**
+ * Generates a type which contains HTML attributes for the given element
+ * excluding attributes which are defined in Props.
+ *
+ * @example
+ * class Button extends React.Component<ButtonProps & OtherHTMLAttributes<ButtonProps, React.ButtonHTMLAttributes<ButtonProps>>> {}
+ */
+export type OtherHTMLAttributes<
+  Props,
+  Attributes extends React.HTMLAttributes<Props> = React.AllHTMLAttributes<Props>
+> = Nullable<Omit<Attributes, keyof Props>>

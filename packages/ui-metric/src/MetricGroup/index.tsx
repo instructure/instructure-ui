@@ -25,10 +25,8 @@
 /** @jsx jsx */
 import { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
-import {
-  Children as ChildrenPropTypes,
-  OtherHTMLAttributes
-} from '@instructure/ui-prop-types'
+import { OtherHTMLAttributes } from '@instructure/shared-types'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { withStyle, jsx } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'

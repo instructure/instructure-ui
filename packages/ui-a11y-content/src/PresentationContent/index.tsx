@@ -26,8 +26,7 @@ import React, { Component, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
-import { OtherHTMLAttributes } from '@instructure/ui-prop-types'
-import { AsElementType } from '@instructure/shared-types'
+import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
 
 type OwnProps = {
   /**
