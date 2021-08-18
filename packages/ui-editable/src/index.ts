@@ -24,3 +24,6 @@
 
 export { Editable } from './Editable'
 export { InPlaceEdit } from './InPlaceEdit'
+
+export * from './Editable/types'
+export * from './InPlaceEdit/types'

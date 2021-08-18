@@ -24,3 +24,6 @@
 
 export { ProgressBar } from './ProgressBar'
 export { ProgressCircle } from './ProgressCircle'
+
+export * from './ProgressBar/types'
+export * from './ProgressCircle/types'

@@ -22,3 +22,4 @@
  * SOFTWARE.
  */
 export { Focusable } from './Focusable'
+export * from './Focusable/types'

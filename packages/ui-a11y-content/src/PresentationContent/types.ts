@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
+import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
 import { PropsWithChildren } from 'react'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 export type PresentationContentOwnProps = PropsWithChildren<{
   /**

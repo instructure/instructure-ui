@@ -23,3 +23,4 @@
  */
 
 export { RangeInput } from './RangeInput'
+export * from './RangeInput/types'

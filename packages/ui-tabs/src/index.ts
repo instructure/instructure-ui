@@ -23,3 +23,7 @@
  */
 
 export { Tabs } from './Tabs'
+
+export * from './Tabs/types'
+export * from './Tabs/Panel/types'
+export * from './Tabs/Tab/types'

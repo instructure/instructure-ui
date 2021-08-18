@@ -22,3 +22,6 @@
  * SOFTWARE.
  */
 export { Pages } from './Pages'
+
+export * from './Pages/types'
+export * from './Pages/Page/types'

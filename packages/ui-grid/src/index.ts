@@ -22,4 +22,9 @@
  * SOFTWARE.
  */
 export { Grid, GridRow, GridCol } from './Grid'
+
 export * from './GridTypes'
+
+export * from './Grid/types'
+export * from './GridRow/types'
+export * from './GridCol/types'

@@ -23,3 +23,7 @@
  */
 
 export { SimpleSelect } from './SimpleSelect'
+
+export * from './SimpleSelect/types'
+export * from './SimpleSelect/Group/types'
+export * from './SimpleSelect/Option/types'

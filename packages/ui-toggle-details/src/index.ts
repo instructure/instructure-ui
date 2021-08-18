@@ -24,3 +24,6 @@
 
 export { ToggleDetails } from './ToggleDetails'
 export { ToggleGroup } from './ToggleGroup'
+
+export * from './ToggleDetails/types'
+export * from './ToggleGroup/types'

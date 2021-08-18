@@ -23,3 +23,4 @@
  */
 
 export { FileDrop } from './FileDrop'
+export * from './FileDrop/types'

@@ -23,3 +23,6 @@
  */
 export { RadioInput } from './RadioInput'
 export { RadioInputGroup } from './RadioInputGroup'
+
+export * from './RadioInput/types'
+export * from './RadioInputGroup/types'

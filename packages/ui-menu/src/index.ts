@@ -22,3 +22,8 @@
  * SOFTWARE.
  */
 export { Menu, MenuItem, MenuItemGroup, MenuItemSeparator } from './Menu'
+
+export * from './Menu/types'
+export * from './Menu/MenuItem/types'
+export * from './Menu/MenuItemGroup/types'
+export * from './Menu/MenuItemSeparator/types'

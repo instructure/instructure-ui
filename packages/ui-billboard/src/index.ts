@@ -22,3 +22,4 @@
  * SOFTWARE.
  */
 export { Billboard } from './Billboard'
+export * from './Billboard/types'

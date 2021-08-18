@@ -24,3 +24,8 @@
 
 export { AppNav } from './AppNav'
 export { Navigation, NavigationItem } from './Navigation'
+
+export * from './AppNav/types'
+export * from './AppNav/Item/types'
+export * from './Navigation/types'
+export * from './Navigation/NavigationItem/types'

@@ -22,3 +22,4 @@
  * SOFTWARE.
  */
 export { CodeEditor } from './CodeEditor'
+export * from './CodeEditor/types'
