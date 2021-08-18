@@ -22,3 +22,8 @@
  * SOFTWARE.
  */
 export { Modal } from './Modal'
+
+export * from './Modal/types'
+export * from './Modal/ModalBody/types'
+export * from './Modal/ModalFooter/types'
+export * from './Modal/ModalHeader/types'

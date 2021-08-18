@@ -23,3 +23,8 @@
  */
 export { Checkbox, CheckboxFacade, ToggleFacade } from './Checkbox'
 export { CheckboxGroup } from './CheckboxGroup'
+
+export * from './Checkbox/types'
+export * from './Checkbox/CheckboxFacade/types'
+export * from './Checkbox/ToggleFacade/types'
+export * from './CheckboxGroup/types'

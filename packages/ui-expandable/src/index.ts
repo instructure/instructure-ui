@@ -22,3 +22,4 @@
  * SOFTWARE.
  */
 export { Expandable } from './Expandable'
+export * from './Expandable/types'

@@ -23,3 +23,6 @@
  */
 export { Mask } from './Mask'
 export { Overlay } from './Overlay'
+
+export * from './Mask/types'
+export * from './Overlay/types'

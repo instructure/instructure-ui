@@ -23,3 +23,5 @@
  */
 
 export { Flex, FlexItem } from './Flex'
+export * from './Flex/types'
+export * from './Flex/Item/types'

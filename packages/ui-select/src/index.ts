@@ -23,3 +23,7 @@
  */
 
 export { Select } from './Select'
+
+export * from './Select/types'
+export * from './Select/Group/types'
+export * from './Select/Option/types'

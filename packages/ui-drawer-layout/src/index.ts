@@ -23,3 +23,7 @@
  */
 
 export { DrawerLayout, DrawerContent } from './DrawerLayout'
+
+export * from './DrawerLayout/types'
+export * from './DrawerLayout/DrawerContent/types'
+export * from './DrawerLayout/DrawerTray/types'

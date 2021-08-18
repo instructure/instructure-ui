@@ -23,3 +23,4 @@
  */
 
 export { TimeSelect } from './TimeSelect'
+export * from './TimeSelect/types'

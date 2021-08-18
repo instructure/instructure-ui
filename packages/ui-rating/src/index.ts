@@ -22,3 +22,6 @@
  * SOFTWARE.
  */
 export { Rating } from './Rating'
+
+export * from './Rating/types'
+export * from './RatingIcon/types'

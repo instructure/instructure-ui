@@ -22,3 +22,4 @@
  * SOFTWARE.
  */
 export { Selectable } from './Selectable'
+export * from './Selectable/types'

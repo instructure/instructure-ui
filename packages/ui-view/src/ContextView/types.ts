@@ -23,9 +23,8 @@
  */
 
 import { CSSObject, Shadow, Spacing, Stacking } from '@instructure/emotion'
-import { AsElementType } from '@instructure/shared-types'
+import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
 import { PlacementPropValues } from '@instructure/ui-position'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 export type ContextViewOwnProps = {
   as?: AsElementType

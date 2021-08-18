@@ -23,3 +23,4 @@
  */
 
 export { Tray } from './Tray'
+export * from './Tray/types'

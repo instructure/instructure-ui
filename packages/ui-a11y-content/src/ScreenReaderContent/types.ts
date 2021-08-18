@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
+import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
 import { PropsWithChildren, ReactNode } from 'react'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 export type ScreenReaderContentOwnProps = PropsWithChildren<{
   makeStyles?: (...args: any[]) => any

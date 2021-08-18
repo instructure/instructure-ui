@@ -22,3 +22,11 @@
  * SOFTWARE.
  */
 export { Table } from './Table'
+
+export * from './Table/types'
+export * from './Table/Body/types'
+export * from './Table/Cell/types'
+export * from './Table/ColHeader/types'
+export * from './Table/Head/types'
+export * from './Table/Row/types'
+export * from './Table/RowHeader/types'

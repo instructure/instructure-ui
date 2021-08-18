@@ -22,3 +22,8 @@
  * SOFTWARE.
  */
 export { TreeBrowser } from './TreeBrowser'
+
+export * from './TreeBrowser/types'
+export * from './TreeBrowser/TreeButton/types'
+export * from './TreeBrowser/TreeCollection/types'
+export * from './TreeBrowser/TreeNode/types'

@@ -28,4 +28,12 @@ export { FormFieldMessage } from './FormFieldMessage'
 export { FormFieldMessages } from './FormFieldMessages'
 export { FormFieldLayout } from './FormFieldLayout'
 export { FormFieldGroup } from './FormFieldGroup'
+
 export * from './FormPropTypes'
+
+export * from './FormField/types'
+export * from './FormFieldLabel/types'
+export * from './FormFieldMessage/types'
+export * from './FormFieldMessages/types'
+export * from './FormFieldLayout/types'
+export * from './FormFieldGroup/types'

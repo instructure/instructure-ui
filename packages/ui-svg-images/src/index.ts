@@ -24,3 +24,6 @@
 
 export { InlineSVG } from './InlineSVG'
 export { SVGIcon } from './SVGIcon'
+
+export * from './InlineSVG/types'
+export * from './SVGIcon/types'

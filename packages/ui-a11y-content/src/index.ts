@@ -25,3 +25,7 @@
 export { AccessibleContent } from './AccessibleContent'
 export { PresentationContent } from './PresentationContent'
 export { ScreenReaderContent } from './ScreenReaderContent'
+
+export * from './AccessibleContent/types'
+export * from './PresentationContent/types'
+export * from './ScreenReaderContent/types'

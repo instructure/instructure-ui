@@ -23,3 +23,7 @@
  */
 
 export { Pagination, PaginationButton } from './Pagination'
+
+export * from './Pagination/types'
+export * from './Pagination/PaginationButton/types'
+export * from './Pagination/PaginationArrowButton/types'

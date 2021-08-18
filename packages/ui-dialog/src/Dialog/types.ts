@@ -23,8 +23,7 @@
  */
 
 import React from 'react'
-import { AsElementType } from '@instructure/shared-types'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
+import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
 
 export type DialogOwnProps = {
   as?: AsElementType
