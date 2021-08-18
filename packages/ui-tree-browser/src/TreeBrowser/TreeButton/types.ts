@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+
 export type TreeBrowserButtonProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any

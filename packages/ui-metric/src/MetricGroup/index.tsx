@@ -25,7 +25,6 @@
 /** @jsx jsx */
 import { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { withStyle, jsx } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
@@ -44,9 +43,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class MetricGroup extends Component<
-  MetricGroupProps & OtherHTMLAttributes<MetricGroupProps>
-> {
+class MetricGroup extends Component<MetricGroupProps> {
   static readonly componentId = 'MetricGroup'
 
   static propTypes = {

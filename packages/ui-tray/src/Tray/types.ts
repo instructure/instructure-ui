@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
-export type TrayProps = {
+import { BidirectionalProps } from '@instructure/ui-i18n'
+
+export type TrayOwnProps = {
   label: string
   size?: 'x-small' | 'small' | 'regular' | 'medium' | 'large'
   placement: 'top' | 'bottom' | 'start' | 'end' | 'center'
@@ -53,3 +55,5 @@ export type TrayProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
 }
+
+export type TrayProps = TrayOwnProps & BidirectionalProps

@@ -26,35 +26,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import {
-  PositionConstraint,
-  PositionMountNode,
-  PlacementPropValues,
-  PositionPropTypes
-} from '@instructure/ui-position'
+import { PositionPropTypes } from '@instructure/ui-position'
 
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 
 import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '../IconButton'
-
-type Props = {
-  screenReaderLabel: string
-  renderTooltipContent: React.ReactNode | ((...args: any[]) => any)
-  renderIcon: React.ReactNode | ((...args: any[]) => any)
-  status: 'pressed' | 'unpressed'
-  as?: AsElementType
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  size?: 'small' | 'medium' | 'large'
-  elementRef?: (...args: any[]) => any
-  onClick?: (...args: any[]) => any
-  color?: string
-  isShowingTooltip?: boolean
-  mountNode?: PositionMountNode
-  placement?: PlacementPropValues
-  constrain?: PositionConstraint
-}
+import { ToggleButtonProps } from './types'
 
 /**
 ---
@@ -63,7 +41,7 @@ category: components
 **/
 
 @testable()
-class ToggleButton extends Component<Props> {
+class ToggleButton extends Component<ToggleButtonProps> {
   static readonly componentId = 'ToggleButton'
 
   static propTypes = {

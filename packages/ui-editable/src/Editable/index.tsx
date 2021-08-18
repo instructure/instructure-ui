@@ -24,18 +24,10 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-type Props = {
-  mode: 'view' | 'edit'
-  onChangeMode: (...args: any[]) => any
-  render?: (...args: any[]) => any
-  value?: any
-  onChange?: (...args: any[]) => any
-  readOnly?: boolean
-}
-
 import { deepEqual } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
+import { EditableProps } from './types'
 
 /**
 ---
@@ -43,7 +35,7 @@ category: components
 experimental: true
 ---
 **/
-class Editable extends Component<Props> {
+class Editable extends Component<EditableProps> {
   static propTypes = {
     /**
      * If `'view'`: the view component is rendered,

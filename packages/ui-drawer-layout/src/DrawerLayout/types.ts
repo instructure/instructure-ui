@@ -22,9 +22,13 @@
  * SOFTWARE.
  */
 
-export type DrawerLayoutProps = {
+import { BidirectionalProps } from '@instructure/ui-i18n'
+
+export type DrawerLayoutOwnProps = {
   minWidth?: string
   onOverlayTrayChange?: (...args: any[]) => any
   makeStyles?: (...args: any[]) => any
   styles?: any
 }
+
+export type DrawerLayoutProps = DrawerLayoutOwnProps & BidirectionalProps

@@ -42,7 +42,7 @@ import { Focusable } from '@instructure/ui-focusable'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
-import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
+import { bidirectional } from '@instructure/ui-i18n'
 
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
@@ -61,7 +61,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
 @testable()
-class Tabs extends Component<TabsProps & BidirectionalProps> {
+class Tabs extends Component<TabsProps> {
   static readonly componentId = 'Tabs'
 
   static propTypes = {

@@ -30,7 +30,7 @@ import { Dialog } from '@instructure/ui-dialog'
 import { omitProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
+import { bidirectional } from '@instructure/ui-i18n'
 import { testable } from '@instructure/ui-testable'
 import { Portal, PortalNode } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
@@ -48,7 +48,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
 @testable()
-class Tray extends Component<TrayProps & BidirectionalProps> {
+class Tray extends Component<TrayProps> {
   static readonly componentId = 'Tray'
 
   static propTypes = {

@@ -25,30 +25,13 @@ import React, { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { Spacing, ThemeablePropTypes } from '@instructure/emotion'
+import { ThemeablePropTypes } from '@instructure/emotion'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
 import { InlineListItem } from './InlineListItem'
-
-type Props = {
-  as?: 'ul' | 'ol'
-  margin?: Spacing
-  size?: 'small' | 'medium' | 'large'
-  delimiter?: 'none' | 'pipe' | 'slash' | 'arrow'
-  itemSpacing?:
-    | 'none'
-    | 'xxx-small'
-    | 'xx-small'
-    | 'x-small'
-    | 'small'
-    | 'medium'
-    | 'large'
-    | 'x-large'
-    | 'xx-large'
-  elementRef?: (...args: any[]) => any
-}
+import { InlineListProps } from './types'
 
 /**
 ---
@@ -56,7 +39,7 @@ category: components
 ---
 **/
 @testable()
-class InlineList extends Component<Props> {
+class InlineList extends Component<InlineListProps> {
   static propTypes = {
     /**
      * Only accepts `<InlineList.Item>` as a child

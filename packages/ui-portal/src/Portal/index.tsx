@@ -27,54 +27,10 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { element } from '@instructure/ui-prop-types'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
-
-/**
- * The DOM Node of the Portal. It is created as a `span` element.
- */
-type PortalNode = HTMLSpanElement | null | undefined
-
-type OwnProps = {
-  /**
-   * Whether or not the `<Portal />` is open
-   */
-  open?: boolean
-
-  /**
-   * Callback fired when `<Portal />` content has been mounted in the DOM. Ha the Portal DOMNode as parameter.
-   */
-  onOpen?: (DOMNode?: PortalNode) => void
-
-  /**
-   * Callback fired when `<Portal />` has been unmounted from the DOM
-   */
-  onClose?: () => void
-
-  /**
-   * An element or a function returning an element to use as the mount node
-   * for the `<Portal />` (defaults to `document.body`)
-   */
-  mountNode?: Element | (() => Element | null) | null
-
-  /**
-   * Insert the element at the 'top' of the mountNode or at the 'bottom'
-   */
-  insertAt?: 'bottom' | 'top'
-
-  /**
-   * Provides a reference to the underlying html element. Ha the Portal DOMNode as parameter.
-   */
-  elementRef?: (el?: PortalNode) => void
-}
-
-type Props = OwnProps & OtherHTMLAttributes<OwnProps> & BidirectionalProps
-
-type State = {
-  mountNode: Element
-}
+import { bidirectional } from '@instructure/ui-i18n'
+import { PortalNode, PortalProps, PortalState } from './types'
 
 /**
 ---
@@ -84,16 +40,13 @@ category: components/utilities
 @tsProps
 **/
 @bidirectional()
-class Portal extends Component<Props, State> {
+class Portal extends Component<PortalProps, PortalState> {
   static propTypes = {
     open: PropTypes.bool,
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
     mountNode: PropTypes.oneOfType([element, PropTypes.func]),
     insertAt: PropTypes.oneOf(['bottom', 'top']),
-    /**
-     * The children to be rendered within the `<Portal />`
-     */
     children: PropTypes.node,
     elementRef: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
@@ -110,7 +63,7 @@ class Portal extends Component<Props, State> {
     elementRef: () => {}
   }
 
-  constructor(props: Props) {
+  constructor(props: PortalProps) {
     super(props)
 
     this.state = {
@@ -127,7 +80,7 @@ class Portal extends Component<Props, State> {
     }
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: PortalProps) {
     const mountNode = this.findMountNode(this.props)
 
     if (mountNode !== this.state.mountNode) {
@@ -194,12 +147,12 @@ class Portal extends Component<Props, State> {
     // Create node if it doesn't already exist
     if (!this.DOMNode) {
       const node = document.createElement('span')
-      const attributes: Partial<Props> = {
-        ...passthroughProps(props as Partial<Props>),
+      const attributes: Partial<PortalProps> = {
+        ...passthroughProps(props as Partial<PortalProps>),
         dir
       }
 
-      ;(Object.keys(attributes) as Array<keyof Props>).forEach((name) => {
+      ;(Object.keys(attributes) as Array<keyof PortalProps>).forEach((name) => {
         node.setAttribute(name, attributes[name] as string)
       })
 
@@ -225,7 +178,7 @@ class Portal extends Component<Props, State> {
     return this.DOMNode
   }
 
-  findMountNode(props: Props) {
+  findMountNode(props: PortalProps) {
     let mountNode: Element | undefined | null
 
     if (typeof props.mountNode === 'function') {
@@ -256,4 +209,3 @@ class Portal extends Component<Props, State> {
 
 export default Portal
 export { Portal }
-export type { PortalNode }

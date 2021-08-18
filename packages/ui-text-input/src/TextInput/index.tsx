@@ -23,9 +23,9 @@
  */
 
 /** @jsx jsx */
-import { Component, InputHTMLAttributes } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
+
 import { controllable } from '@instructure/ui-prop-types'
 import {
   callRenderProp,
@@ -50,11 +50,7 @@ tags: form, field
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class TextInput extends Component<
-  TextInputProps &
-    OtherHTMLAttributes<TextInputProps, InputHTMLAttributes<TextInputProps>>,
-  TextInputState
-> {
+class TextInput extends Component<TextInputProps, TextInputState> {
   static readonly componentId = 'TextInput'
 
   static propTypes = {

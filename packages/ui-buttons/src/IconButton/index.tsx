@@ -28,30 +28,12 @@ import PropTypes from 'prop-types'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { AsElementType } from '@instructure/shared-types'
 
-import { withStyle, ThemeablePropTypes, Spacing } from '@instructure/emotion'
+import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
-
-type Props = {
-  renderIcon?: React.ReactNode | ((...args: any[]) => any)
-  screenReaderLabel: string
-  type?: 'button' | 'submit' | 'reset'
-  size?: 'small' | 'medium' | 'large'
-  elementRef?: (...args: any[]) => any
-  as?: AsElementType
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
-  focusColor?: 'info' | 'inverse'
-  shape?: 'rectangle' | 'circle'
-  withBackground?: boolean
-  withBorder?: boolean
-  margin?: Spacing
-  cursor?: string
-  href?: string
-}
+import { IconButtonProps } from './types'
 
 /**
 ---
@@ -62,7 +44,7 @@ category: components
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
 @testable()
-class IconButton extends Component<Props> {
+class IconButton extends Component<IconButtonProps> {
   static readonly componentId = 'IconButton'
 
   static propTypes = {

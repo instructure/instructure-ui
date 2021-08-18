@@ -31,7 +31,6 @@ import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 import { MetricProps } from './types'
 
 /**
@@ -42,7 +41,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Metric extends Component<MetricProps & OtherHTMLAttributes<MetricProps>> {
+class Metric extends Component<MetricProps> {
   static readonly componentId = 'Metric'
 
   static propTypes = {

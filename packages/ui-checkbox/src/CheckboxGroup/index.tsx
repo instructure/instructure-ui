@@ -29,11 +29,7 @@ import {
   controllable,
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
-import {
-  FormPropTypes,
-  FormFieldGroup,
-  FormMessage
-} from '@instructure/ui-form-field'
+import { FormPropTypes, FormFieldGroup } from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
 import {
   matchComponentTypes,
@@ -44,19 +40,7 @@ import {
 import { testable } from '@instructure/ui-testable'
 
 import { Checkbox } from '../Checkbox'
-
-type Props = {
-  name: string
-  description: React.ReactNode
-  defaultValue?: any[]
-  value?: any // TODO: controllable(PropTypes.array)
-  onChange?: (...args: any[]) => any
-  disabled?: boolean
-  readOnly?: boolean
-  messages?: FormMessage[]
-  size?: 'small' | 'medium' | 'large'
-  layout?: 'stacked' | 'columns' | 'inline'
-}
+import { CheckboxGroupProps } from './types'
 
 /**
 ---
@@ -65,7 +49,7 @@ category: components
 **/
 
 @testable()
-class CheckboxGroup extends Component<Props> {
+class CheckboxGroup extends Component<CheckboxGroupProps> {
   static readonly componentId = 'CheckboxGroup'
 
   static propTypes = {

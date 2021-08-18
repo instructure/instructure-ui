@@ -24,14 +24,7 @@
 
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-
-type Props = {
-  id: string
-  value: string | number
-  isDisabled?: boolean
-  renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
-}
+import { SimpleSelectOptionProps } from './types'
 
 /**
 ---
@@ -39,7 +32,7 @@ parent: SimpleSelect
 id: SimpleSelect.Option
 ---
 **/
-class Option extends Component<Props> {
+class Option extends Component<SimpleSelectOptionProps> {
   static readonly componentId = 'SimpleSelect.Option'
 
   static propTypes = {

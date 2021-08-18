@@ -27,10 +27,7 @@ import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { Option } from '../Option'
-
-type Props = {
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
-}
+import { SimpleSelectGroupProps } from './types'
 
 /**
 ---
@@ -38,7 +35,7 @@ parent: SimpleSelect
 id: SimpleSelect.Group
 ---
 **/
-class Group extends Component<Props> {
+class Group extends Component<SimpleSelectGroupProps> {
   static readonly componentId = 'SimpleSelect.Group'
 
   static propTypes = {

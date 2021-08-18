@@ -22,25 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component, ReactNode } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
-import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
 
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
-
-type OwnProps = {
-  alt?: string
-  /**
-   * the element type to render the screen reader content as
-   */
-  as: AsElementType
-  children: ReactNode
-}
-
-type Props = OwnProps & OtherHTMLAttributes<OwnProps>
+import { AccessibleContentProps } from './types'
 
 /**
 ---
@@ -49,7 +38,7 @@ category: components/utilities
 @module AccessibleContent
 @tsProps
 **/
-class AccessibleContent extends Component<Props> {
+class AccessibleContent extends Component<AccessibleContentProps> {
   static propTypes = {
     alt: PropTypes.string,
     as: PropTypes.elementType,

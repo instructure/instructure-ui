@@ -26,60 +26,11 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
 import { createChainedFunction } from '@instructure/ui-utils'
+import { ExpandableProps, ExpandableState } from './types'
 
 const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
   expanded: !expanded
 })
-
-type GetToggleProps = <P extends Record<string, any>>(
-  props?: P & { onClick?: (event: Event) => void }
-) => {
-  'aria-controls': string
-  'aria-expanded': boolean
-  onClick: (event: Event) => void
-} & P
-
-type RenderProps = {
-  expanded: boolean
-  /**
-   * Props to be spread onto the trigger element
-   */
-  getToggleProps: GetToggleProps
-  /**
-   * Props to be spread onto the details element
-   */
-  getDetailsProps: () => { id: string }
-}
-
-type RenderExpandable = (props: RenderProps) => JSX.Element
-
-type ExpandableProps = {
-  /**
-   * Whether the content is expanded or hidden. Makes the component controlled, so if provided, the `onToggle` handler has to be provided too.
-   */
-  expanded?: boolean
-
-  /**
-   * Whether the content is initially expanded or hidden (uncontrolled)
-   */
-  defaultExpanded: boolean
-
-  onToggle: (event: Event, expanded: boolean) => void
-
-  /**
-   * @param {Object} renderProps
-   * @param {Boolean} renderProps.expanded
-   * @param {Function} renderProps.getToggleProps - Props to be spread onto the trigger element
-   * @param {Function} renderProps.getDetailsProps - Props to be spread onto the details element
-   */
-  children?: RenderExpandable
-
-  /**
-   * Identical to children
-   */
-  render?: RenderExpandable
-}
-type ExpandableState = { expanded: boolean }
 
 /**
 ---

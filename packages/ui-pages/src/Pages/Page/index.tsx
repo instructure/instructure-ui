@@ -25,17 +25,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Spacing, ThemeablePropTypes } from '@instructure/emotion'
+import { ThemeablePropTypes } from '@instructure/emotion'
 import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
 import { View } from '@instructure/ui-view'
 import { PagesContext } from '..'
-
-type Props = {
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  padding?: Spacing
-  textAlign?: 'start' | 'center' | 'end'
-}
+import { PagesPageProps } from './types'
 
 /**
 ---
@@ -43,7 +38,7 @@ parent: Pages
 id: Pages.Page
 ---
 **/
-class Page extends Component<Props> {
+class Page extends Component<PagesPageProps> {
   static readonly componentId = 'Pages.Page'
 
   static propTypes = {

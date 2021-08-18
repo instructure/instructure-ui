@@ -28,7 +28,6 @@ import PropTypes from 'prop-types'
 import { jsx, withStyle, ThemeablePropTypes } from '@instructure/emotion'
 import { PositionPropTypes } from '@instructure/ui-position'
 import { omitProps } from '@instructure/ui-react-utils'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import { View } from '../View'
 import generateStyle from './styles'
@@ -42,9 +41,7 @@ category: components
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
-class ContextView extends Component<
-  ContextViewProps & OtherHTMLAttributes<ContextViewProps>
-> {
+class ContextView extends Component<ContextViewProps> {
   static readonly componentId = 'ContextView'
 
   static propTypes = {

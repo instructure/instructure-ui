@@ -22,7 +22,12 @@
  * SOFTWARE.
  */
 
-export type MetricGroupProps = {
+import { OtherHTMLAttributes } from '@instructure/shared-types'
+
+export type MetricGroupOwnProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
 }
+
+export type MetricGroupProps = MetricGroupOwnProps &
+  OtherHTMLAttributes<MetricGroupOwnProps>

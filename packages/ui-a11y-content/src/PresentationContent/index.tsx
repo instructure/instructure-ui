@@ -22,21 +22,11 @@
  * SOFTWARE.
  */
 
-import React, { Component, ReactNode } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
-import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
-
-type OwnProps = {
-  /**
-   * the element type to render as
-   */
-  as: AsElementType
-  children: ReactNode
-}
-
-type Props = OwnProps & OtherHTMLAttributes<OwnProps>
+import { PresentationContentProps } from './types'
 
 /**
 ---
@@ -45,7 +35,7 @@ category: components/utilities
 @module PresentationContent
 @tsProps
 **/
-class PresentationContent extends Component<Props> {
+class PresentationContent extends Component<PresentationContentProps> {
   static propTypes = {
     as: PropTypes.elementType,
     children: PropTypes.node

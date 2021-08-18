@@ -31,6 +31,7 @@ import { testable } from '../index'
 
 type Props = {
   hide?: boolean
+  children?: React.ReactNode
 }
 
 class Component extends React.Component<Props> {

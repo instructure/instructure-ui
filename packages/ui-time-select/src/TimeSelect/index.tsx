@@ -43,47 +43,12 @@ import {
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
-import {
-  PositionConstraint,
-  PlacementPropValues,
-  PositionPropTypes
-} from '@instructure/ui-position'
+import { FormPropTypes } from '@instructure/ui-form-field'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
 import { uid } from '@instructure/uid'
-
-type Props = {
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
-  defaultToFirstOption?: boolean
-  value?: any // TODO: controllable(I18nPropTypes.iso8601, 'onChange'),
-  defaultValue?: string
-  id?: string
-  format?: string
-  step?: 5 | 10 | 15 | 20 | 30 | 60
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  placeholder?: string
-  isRequired?: boolean
-  isInline?: boolean
-  width?: string
-  optionsMaxWidth?: string
-  visibleOptionsCount?: number
-  messages?: FormMessage[]
-  placement?: PlacementPropValues
-  constrain?: PositionConstraint
-  onChange?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onShowOptions?: (...args: any[]) => any
-  onHideOptions?: (...args: any[]) => any
-  inputRef?: (...args: any[]) => any
-  listRef?: (...args: any[]) => any
-  renderEmptyOption?: React.ReactNode | ((...args: any[]) => any)
-  renderBeforeInput?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterInput?: React.ReactNode | ((...args: any[]) => any)
-  locale?: string
-  timezone?: string
-}
+import { TimeSelectProps } from './types'
 
 /**
 ---
@@ -92,7 +57,7 @@ category: components
 **/
 
 @testable()
-class TimeSelect extends Component<Props> {
+class TimeSelect extends Component<TimeSelectProps> {
   static readonly componentId = 'TimeSelect'
 
   static propTypes = {

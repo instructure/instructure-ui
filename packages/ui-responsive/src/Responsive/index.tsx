@@ -36,51 +36,11 @@ import { addMediaQueryMatchListener } from '../addMediaQueryMatchListener'
 import { ResponsivePropTypes } from '../ResponsivePropTypes'
 import { BreakpointQueries, QueriesMatching, UpdateMatches } from '../QueryType'
 import { findDOMNode } from '@instructure/ui-dom-utils'
-
-interface PropsObject {
-  [propName: string]: any
-}
-
-/**
- * Consists of an object where the keys match the breakpoint names used in the query. The values are objects with keys representing prop names and values representing prop values Ex. `{small: { myProp: 'fillscreen' }, large: { myProp: 'fillcontainer' }}`
- */
-type ByBreakpointProps = {
-  [breakpointName: string]: PropsObject
-}
-
-type Props = {
-  /**
-   * Consists of an object where the keys define the names of breakpoints. The values are query objects
-   * with keys representing the breakpoint condition and values representing a breakpoint value as a
-   * string or number. Ex. `{small: { maxWidth: 400 }, large: { minWidth: '600em'}}`
-   */
-  query: BreakpointQueries
-
-  /**
-   * Specifies if the `<Responsive />` component should use element or media queries
-   */
-  match?: 'element' | 'media'
-
-  /**
-   * Consists of an object where the keys match the breakpoint names used in the query. The values
-   * are objects with keys representing prop names and values representing prop values Ex.
-   * `{small: { myProp: 'fillscreen' }, large: { myProp: 'fillcontainer' }}`
-   */
-  props?: ByBreakpointProps
-
-  /**
-   * Function called on render with the following form `(props, matches) => {...}` where the props
-   * are the current props to be applied and matches is an array of current matches from the query
-   * prop. Either this or a `children` prop function must be supplied.
-   */
-  render?: (props?: PropsObject | null, matches?: QueriesMatching) => any
-
-  /**
-   * Function that takes the same form and arguments as the render prop. Either this or a `render`
-   * prop function must be supplied.
-   */
-  children?: (props?: PropsObject | null, matches?: QueriesMatching) => any
-}
+import {
+  ResponsiveByBreakpointProps,
+  ResponsiveProps,
+  ResponsivePropsObject
+} from './types'
 
 /**
 ---
@@ -88,7 +48,7 @@ category: components
 ---
 @tsProps
 **/
-class Responsive extends Component<Props> {
+class Responsive extends Component<ResponsiveProps> {
   static propTypes = {
     match: PropTypes.oneOf(['element', 'media']),
     query: PropTypes.objectOf(ResponsivePropTypes.validQuery).isRequired,
@@ -141,7 +101,7 @@ class Responsive extends Component<Props> {
     this.removeMatchListener()
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: ResponsiveProps) {
     const { match, query } = this.props
 
     if (match !== prevProps.match || !deepEqual(query, prevProps.query)) {
@@ -180,12 +140,12 @@ class Responsive extends Component<Props> {
     })
   }
 
-  mergeProps(matches: QueriesMatching, props?: ByBreakpointProps) {
+  mergeProps(matches: QueriesMatching, props?: ResponsiveByBreakpointProps) {
     if (!props) {
       return null
     }
 
-    const mergedProps: PropsObject = {}
+    const mergedProps: ResponsivePropsObject = {}
 
     matches.forEach((match) => {
       const matchProps = props[match]

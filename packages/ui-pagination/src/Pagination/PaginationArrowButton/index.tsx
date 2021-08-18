@@ -33,12 +33,7 @@ import {
   IconArrowOpenEndSolid
 } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
-
-type Props = {
-  direction?: 'next' | 'prev'
-  label: string | React.ReactNode
-  buttonRef?: (...args: any[]) => any
-}
+import { PaginationNavigationProps } from './types'
 
 /**
 ---
@@ -47,7 +42,7 @@ id: Pagination.Navigation
 ---
 **/
 @testable()
-class PaginationArrowButton extends Component<Props> {
+class PaginationArrowButton extends Component<PaginationNavigationProps> {
   static readonly componentId = 'Pagination.Navigation'
 
   static propTypes = {

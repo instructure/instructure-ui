@@ -24,7 +24,7 @@
 
 /** @jsx jsx */
 // eslint-disable-next-line no-unused-vars
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Img } from '@instructure/ui-img'
@@ -34,22 +34,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from '../TreeButton/styles'
 import generateComponentTheme from '../TreeButton/theme'
-
-type Props = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  id?: string | number
-  size?: 'small' | 'medium' | 'large'
-  variant?: 'folderTree' | 'indent'
-  selected?: boolean
-  focused?: boolean
-  itemIcon?: React.ReactNode | ((...args: any[]) => any)
-  thumbnail?: string
-  level?: number
-  containerRef?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  onClick?: (...args: any[]) => any
-}
+import { TreeBrowserNodeProps } from './types'
 
 /**
 ---
@@ -64,7 +49,7 @@ in the TreeBrowser.
 
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class TreeNode extends Component<Props> {
+class TreeNode extends Component<TreeBrowserNodeProps> {
   static readonly componentId = 'TreeBrowser.Node'
 
   static propTypes = {

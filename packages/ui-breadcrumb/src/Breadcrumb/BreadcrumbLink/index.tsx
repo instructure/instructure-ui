@@ -29,14 +29,7 @@ import { TruncateText } from '@instructure/ui-truncate-text'
 import { Link } from '@instructure/ui-link'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-
-type Props = {
-  href?: string
-  onClick?: (...args: any[]) => any
-  size?: 'small' | 'medium' | 'large'
-  renderIcon?: React.ReactNode | ((...args: any[]) => any)
-  iconPlacement?: 'start' | 'end'
-}
+import { BreadcrumbLinkProps } from './types'
 
 /**
 ---
@@ -46,7 +39,7 @@ id: Breadcrumb.Link
 **/
 
 @testable()
-class BreadcrumbLink extends Component<Props> {
+class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
   static readonly componentId = 'Breadcrumb.Link'
 
   static propTypes = {

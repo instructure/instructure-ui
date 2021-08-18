@@ -23,4 +23,4 @@
  */
 
 export { Portal } from './Portal'
-export type { PortalNode } from './Portal'
+export * from './Portal/types'
