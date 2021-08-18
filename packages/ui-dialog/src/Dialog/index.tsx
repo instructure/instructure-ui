@@ -26,7 +26,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
 import {
   findDOMNode,
   requestAnimationFrame,
@@ -35,26 +34,7 @@ import {
 import { logError as error } from '@instructure/console'
 
 import { FocusRegionManager } from '@instructure/ui-a11y-utils'
-
-type Props = {
-  as?: AsElementType
-  display?: 'auto' | 'block' | 'inline-block'
-  label?: string
-  open?: boolean
-  onBlur?: (...args: any[]) => any
-  onDismiss?: (...args: any[]) => any
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  contentElement?: React.ReactElement | ((...args: any[]) => any)
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
-  shouldContainFocus?: boolean | ('keyboard' | 'screenreader')
-  shouldReturnFocus?: boolean
-  shouldCloseOnDocumentClick?: boolean
-  shouldCloseOnEscape?: boolean
-  shouldFocusOnOpen?: boolean
-}
+import { DialogProps } from './types'
 
 /**
 ---
@@ -63,7 +43,7 @@ category: components/utilities
 @module Dialog
 **/
 
-class Dialog extends Component<Props & OtherHTMLAttributes<Props>> {
+class Dialog extends Component<DialogProps> {
   static readonly componentId = 'Dialog'
 
   static propTypes = {

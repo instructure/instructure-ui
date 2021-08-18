@@ -32,17 +32,14 @@ import {
   findFocusable
 } from '@instructure/ui-dom-utils'
 import { logWarn as warn } from '@instructure/console'
-
-type Props = {
-  render?: (...args: any[]) => any
-}
+import { FocusableProps } from './types'
 
 /**
 ---
 category: components/utilities
 ---
 **/
-class Focusable extends Component<Props> {
+class Focusable extends Component<FocusableProps> {
   static propTypes = {
     /**
      * @param {Object} renderProps
@@ -80,8 +77,10 @@ class Focusable extends Component<Props> {
 
   _focusListener: { remove(): void } | null = null
   _blurListener: { remove(): void } | null = null
-  _inputModeListener: { isKeyboardMode(): boolean; remove(): void } | null =
-    null
+  _inputModeListener: {
+    isKeyboardMode(): boolean
+    remove(): void
+  } | null = null
 
   state = {
     focused: false,

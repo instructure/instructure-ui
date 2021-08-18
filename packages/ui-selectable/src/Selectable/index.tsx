@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, ReactNode, SyntheticEvent } from 'react'
+import { Component, SyntheticEvent } from 'react'
 import PropTypes from 'prop-types'
 
 import keycode from 'keycode'
@@ -31,119 +31,7 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
-
-type Props = {
-  /**
-   * The id of the trigger element. Set automatically if not provided
-   */
-  id?: string | null
-  /**
-   * The id of the option in the list that should be considered highlighted
-   */
-  highlightedOptionId?: string | null
-  /**
-   * The id of the option(s) in the list that should be considered selected
-   */
-  selectedOptionId?: string | string[] | null
-  /**
-   * Whether or not the options should be visible
-   */
-  isShowingOptions?: boolean
-  /**
-   * Callback fired when the options want to become visible
-   */
-  onRequestShowOptions: (event: Event) => void
-  /**
-   * Callback fired when the options no longer want to be visible
-   */
-  onRequestHideOptions: (event: Event) => void
-  /**
-   * Callback fired when option is hovered or highlighted via keyboard.
-   * Either the `id` or the `direction` parameter is supplied
-   */
-  onRequestHighlightOption: (
-    event: Event,
-    data: { id?: string; direction?: 1 | -1 }
-  ) => void
-  /**
-   * Callback fired when first option should be highlighted
-   */
-  onRequestHighlightFirstOption: (event: Event) => void
-  /**
-   * Callback fired when last option should be highlighted
-   */
-  onRequestHighlightLastOption: (event: Event) => void
-  /**
-   * Callback fired when option clicked or selected via keyboard
-   */
-  onRequestSelectOption: (event: Event, data: { id?: string }) => void
-  /**
-   * A function with prop getters
-   */
-  render?: (propGetters: SelectableRender) => ReactNode
-  /**
-   * A function with prop getters
-   */
-  children: (propGetters: SelectableRender) => ReactNode
-}
-
-type MouseEventFunction = (event: MouseEvent) => void
-
-export type SelectableRender = {
-  /**
-   * Prop getter for root element
-   */
-  getRootProps: (methods?: {
-    onMouseDown?: MouseEventFunction
-    onClick?: MouseEventFunction
-    [restProps: string]: any
-  }) => Record<string, any>
-  /**
-   * Prop getter for label element
-   */
-  getLabelProps: (props?: Record<string, any>) => Record<string, any>
-  /**
-   * Prop getter for trigger element
-   */
-  getTriggerProps: (methods?: {
-    ref?: (...args: any) => void
-    onKeyDown?: (event: KeyboardEvent) => void
-    onKeyUp?: (event: KeyboardEvent) => void
-    [restProps: string]: any
-  }) => Record<string, any>
-  /**
-   * Prop getter for input element
-   */
-  getInputProps: (methods?: {
-    readOnly?: boolean
-    [restProps: string]: any
-  }) => Record<string, any>
-  /**
-   * Prop getter for list element
-   */
-  getListProps: (methods?: {
-    onMouseDown?: MouseEventFunction
-    onClick?: MouseEventFunction
-    [restProps: string]: any
-  }) => Record<string, any>
-  /**
-   * Prop getter for option elements
-   */
-  getOptionProps: (methods?: {
-    id?: string // TODO this is not optional
-    onMouseOver?: MouseEventFunction
-    onClick?: MouseEventFunction
-    [restProps: string]: any
-  }) => Record<string, any>
-  /**
-   * Prop getter for disabled option elements
-   */
-  getDisabledOptionProps: (props?: Record<string, any>) => Record<string, any>
-  /**
-   * Prop getter for screenreader description element
-   */
-  getDescriptionProps: (props?: Record<string, any>) => Record<string, any>
-}
+import { SelectableProps } from './types'
 
 /**
 ---
@@ -152,7 +40,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search
 ---
 @tsProps
 **/
-class Selectable extends Component<Props> {
+class Selectable extends Component<SelectableProps> {
   static propTypes = {
     id: PropTypes.string,
     highlightedOptionId: PropTypes.string,

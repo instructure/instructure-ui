@@ -23,30 +23,15 @@
  */
 
 /** @jsx jsx */
-import { Component, ReactNode } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
-import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
-
-type OwnProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  /**
-   * the element type to render as
-   */
-  as: AsElementType
-  /**
-   * content meant for screen readers only
-   */
-  children: ReactNode
-}
-
-type Props = OwnProps & OtherHTMLAttributes<OwnProps>
+import { ScreenReaderContentProps } from './types'
 
 /**
 ---
@@ -56,7 +41,7 @@ category: components/utilities
 @tsProps
 **/
 @withStyle(generateStyle, null)
-class ScreenReaderContent extends Component<Props> {
+class ScreenReaderContent extends Component<ScreenReaderContentProps> {
   static readonly componentId = 'ScreenReaderContent'
 
   static propTypes = {

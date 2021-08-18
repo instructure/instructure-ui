@@ -23,10 +23,11 @@
  */
 
 import { PositionMountNode } from '@instructure/ui-position'
+import { BidirectionalProps } from '@instructure/ui-i18n'
 
 export type DrawerTrayPlacement = 'start' | 'end'
 
-export type DrawerLayoutTrayProps = {
+export type DrawerLayoutTrayOwnProps = {
   label: string
   render?: (...args: any[]) => any
   placement?: DrawerTrayPlacement
@@ -57,6 +58,9 @@ export type DrawerLayoutTrayProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
 }
+
+export type DrawerLayoutTrayProps = DrawerLayoutTrayOwnProps &
+  BidirectionalProps
 
 export type DrawerLayoutTrayState = {
   transitioning: boolean

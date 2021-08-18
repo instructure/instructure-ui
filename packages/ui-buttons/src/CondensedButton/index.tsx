@@ -27,25 +27,12 @@ import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 
-import { withStyle, ThemeablePropTypes, Spacing } from '@instructure/emotion'
+import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
-
-type Props = {
-  type?: 'button' | 'submit' | 'reset'
-  size?: 'small' | 'medium' | 'large'
-  elementRef?: (...args: any[]) => any
-  as?: AsElementType
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  color?: 'primary' | 'primary-inverse'
-  margin?: Spacing
-  cursor?: string
-  href?: string
-  renderIcon?: React.ReactNode | ((...args: any[]) => any)
-}
+import { CondensedButtonProps } from './types'
 
 /**
 ---
@@ -55,7 +42,7 @@ category: components
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
 @testable()
-class CondensedButton extends Component<Props> {
+class CondensedButton extends Component<CondensedButtonProps> {
   static readonly componentId = 'CondensedButton'
 
   static propTypes = {

@@ -23,8 +23,9 @@
  */
 
 import { Spacing } from '@instructure/emotion'
+import { BidirectionalProps } from '@instructure/ui-i18n'
 
-export type TabsProps = {
+export type TabsOwnProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   variant?: 'default' | 'secondary'
@@ -40,3 +41,5 @@ export type TabsProps = {
   tabOverflow?: 'stack' | 'scroll'
   shouldFocusOnRender?: boolean
 }
+
+export type TabsProps = TabsOwnProps & BidirectionalProps

@@ -35,7 +35,8 @@ import {
   findWithText
 } from '@instructure/ui-test-utils'
 
-import { Selectable, SelectableRender } from '../index'
+import { Selectable } from '../index'
+import { SelectableRender } from '../types'
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 describe('<Selectable />', async () => {

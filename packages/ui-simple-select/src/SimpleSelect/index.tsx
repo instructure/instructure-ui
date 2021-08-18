@@ -26,13 +26,8 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
-import {
-  PositionConstraint,
-  PositionMountNode,
-  PlacementPropValues,
-  PositionPropTypes
-} from '@instructure/ui-position'
+import { FormPropTypes } from '@instructure/ui-form-field'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { testable } from '@instructure/ui-testable'
 import {
   matchComponentTypes,
@@ -45,36 +40,7 @@ import { Select } from '@instructure/ui-select'
 
 import { Option } from './Option'
 import { Group } from './Group'
-
-type Props = {
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
-  value?: string | number // TODO: it was using the "controllable" util, in the TS migration mimic that behaviour
-  defaultValue?: string
-  id?: string
-  size?: 'small' | 'medium' | 'large'
-  assistiveText?: string
-  placeholder?: string
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  isRequired?: boolean
-  isInline?: boolean
-  width?: string
-  optionsMaxWidth?: string
-  visibleOptionsCount?: number
-  messages?: FormMessage[]
-  placement?: PlacementPropValues
-  constrain?: PositionConstraint
-  mountNode?: PositionMountNode
-  onChange?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onShowOptions?: (...args: any[]) => any
-  onHideOptions?: (...args: any[]) => any
-  inputRef?: (...args: any[]) => any
-  listRef?: (...args: any[]) => any
-  renderEmptyOption?: React.ReactNode | ((...args: any[]) => any)
-  renderBeforeInput?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterInput?: React.ReactNode | ((...args: any[]) => any)
-}
+import { SimpleSelectProps } from './types'
 
 /**
 ---
@@ -83,7 +49,7 @@ tags: form, field, dropdown
 ---
 **/
 @testable()
-class SimpleSelect extends Component<Props> {
+class SimpleSelect extends Component<SimpleSelectProps> {
   static readonly componentId = 'SimpleSelect'
 
   static Option = Option

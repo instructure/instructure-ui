@@ -25,7 +25,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyle, jsx } from '@instructure/emotion'
-import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
+import { bidirectional } from '@instructure/ui-i18n'
 import { Transition } from '@instructure/ui-motion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
@@ -54,7 +54,7 @@ id: DrawerLayout.Tray
 @bidirectional()
 @testable()
 class DrawerTray extends Component<
-  DrawerLayoutTrayProps & BidirectionalProps,
+  DrawerLayoutTrayProps,
   DrawerLayoutTrayState
 > {
   static readonly componentId = 'DrawerLayout.Tray' as const
@@ -205,9 +205,9 @@ class DrawerTray extends Component<
   get placement() {
     const { placement, dir } = this.props
     const isRtl = dir === bidirectional.DIRECTION.rtl
-    return (
-      isRtl ? mirrorHorizontalPlacement(placement!, ' ') : placement!
-    ) as DrawerTrayPlacement
+    return (isRtl
+      ? mirrorHorizontalPlacement(placement!, ' ')
+      : placement!) as DrawerTrayPlacement
   }
   get direction() {
     return this.placement === 'end' ? 'right' : 'left'

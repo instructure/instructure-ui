@@ -26,12 +26,7 @@ import React from 'react'
 
 import { ensureSingleChild } from '@instructure/ui-react-utils'
 import { ApplyLocaleContext } from './ApplyLocaleContext'
-
-type Props = {
-  locale?: string
-  timezone?: string
-  children?: React.ReactNode
-}
+import { ApplyLocaleProps } from './types'
 
 /**
 ---
@@ -39,7 +34,11 @@ category: components/utilities
 ---
 @tsProps
 **/
-export const ApplyLocale = ({ children, locale, timezone }: Props) => {
+export const ApplyLocale = ({
+  children,
+  locale,
+  timezone
+}: ApplyLocaleProps) => {
   return (
     <ApplyLocaleContext.Provider value={{ locale, timezone }}>
       {ensureSingleChild(children)}

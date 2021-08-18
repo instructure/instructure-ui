@@ -30,14 +30,11 @@ import {
   Position,
   PositionPropTypes,
   parsePlacement,
-  mirrorHorizontalPlacement,
-  PlacementPropValues,
-  PositionConstraint,
-  PositionMountNode
+  mirrorHorizontalPlacement
 } from '@instructure/ui-position'
 import { ContextView, View } from '@instructure/ui-view'
 import { Dialog } from '@instructure/ui-dialog'
-import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
+import { bidirectional } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
 import {
   findDOMNode,
@@ -50,55 +47,11 @@ import { safeCloneElement, callRenderProp } from '@instructure/ui-react-utils'
 import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
-import { Shadow, Stacking, ThemeablePropTypes } from '@instructure/emotion'
+import { ThemeablePropTypes } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 
 import { FocusRegion } from '@instructure/ui-a11y-utils'
-
-type Props = {
-  isShowingContent?: boolean
-  defaultIsShowingContent?: boolean
-  on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]
-  withArrow?: boolean
-  color?: 'primary' | 'primary-inverse'
-  shadow?: Shadow
-  stacking?: Stacking
-  contentRef?: (...args: any[]) => any
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  screenReaderLabel?: string
-  offsetX?: string | number
-  offsetY?: string | number
-  placement: PlacementPropValues
-  constrain?: PositionConstraint
-  mountNode?: PositionMountNode
-  positionTarget?: PositionMountNode
-  insertAt?: 'bottom' | 'top'
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
-  id?: string
-  shouldAlignArrow?: boolean
-  shouldTrackPosition?: boolean
-  shouldRenderOffscreen?: boolean
-  shouldContainFocus?: boolean
-  shouldReturnFocus?: boolean
-  shouldCloseOnDocumentClick?: boolean
-  shouldCloseOnEscape?: boolean
-  shouldFocusContentOnTriggerBlur?: boolean
-  onShowContent?: (...args: any[]) => any
-  onHideContent?: (...args: any[]) => any
-  onPositioned?: (...args: any[]) => any
-  onPositionChanged?: (...args: any[]) => any
-  onClick?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  onKeyUp?: (...args: any[]) => any
-  onMouseOver?: (...args: any[]) => any
-  onMouseOut?: (...args: any[]) => any
-  renderTrigger?: React.ReactNode | ((...args: any[]) => any)
-}
+import { PopoverProps } from './types'
 
 /**
 ---
@@ -108,7 +61,7 @@ tags: overlay, portal, dialog
 **/
 @bidirectional()
 @testable()
-class Popover extends Component<Props & BidirectionalProps> {
+class Popover extends Component<PopoverProps> {
   static readonly componentId = 'Popover'
 
   static propTypes = {

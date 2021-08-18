@@ -27,28 +27,16 @@ import PropTypes from 'prop-types'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
-import { FormPropTypes, FormMessage } from '../FormPropTypes'
+import { FormPropTypes } from '../FormPropTypes'
 import { FormFieldLayout } from '../FormFieldLayout'
-
-type Props = {
-  label: React.ReactNode
-  id: string
-  messages?: FormMessage[]
-  messagesId?: string
-  inline?: boolean
-  layout?: 'stacked' | 'inline'
-  labelAlign?: 'start' | 'end'
-  vAlign?: 'top' | 'middle' | 'bottom'
-  width?: string
-  inputContainerRef?: (...args: any[]) => any
-}
+import { FormFieldProps } from './types'
 
 /**
 ---
 category: components
 ---
 **/
-class FormField extends Component<Props> {
+class FormField extends Component<FormFieldProps> {
   static readonly componentId = 'FormField'
 
   static propTypes = {

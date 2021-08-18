@@ -26,7 +26,7 @@
 import { Children, Component, createContext } from 'react'
 import PropTypes from 'prop-types'
 
-import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
+import { bidirectional } from '@instructure/ui-i18n'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import {
   matchComponentTypes,
@@ -54,7 +54,7 @@ category: components
 @withStyle(generateStyle, null)
 @bidirectional()
 @testable()
-class DrawerLayout extends Component<DrawerLayoutProps & BidirectionalProps> {
+class DrawerLayout extends Component<DrawerLayoutProps> {
   static readonly componentId = 'DrawerLayout'
 
   static locatorAttribute = 'data-drawer-layout'

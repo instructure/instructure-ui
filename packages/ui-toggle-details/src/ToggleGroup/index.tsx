@@ -30,7 +30,6 @@ import {
   pickProps,
   getElementType
 } from '@instructure/ui-react-utils'
-import { AsElementType } from '@instructure/shared-types'
 import { IconButton } from '@instructure/ui-buttons'
 import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
@@ -43,21 +42,7 @@ import {
   IconArrowOpenDownSolid
 } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
-
-type Props = {
-  summary: React.ReactNode
-  toggleLabel: React.ReactNode | ((...args: any[]) => any)
-  as?: AsElementType
-  elementRef?: (...args: any[]) => any
-  size?: 'small' | 'medium' | 'large'
-  expanded?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
-  defaultExpanded?: boolean
-  onToggle?: (...args: any[]) => any
-  icon?: React.ReactNode | ((...args: any[]) => any)
-  iconExpanded?: React.ReactNode | ((...args: any[]) => any)
-  transition?: boolean
-  border?: boolean
-}
+import { ToggleGroupProps } from './types'
 
 /**
 ---
@@ -65,7 +50,7 @@ category: components
 ---
 **/
 @testable()
-class ToggleGroup extends Component<Props> {
+class ToggleGroup extends Component<ToggleGroupProps> {
   static readonly componentId = 'ToggleGroup'
 
   static propTypes = {
