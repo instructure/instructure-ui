@@ -159,7 +159,7 @@ export type ElementPosition = {
 
 export type PositionElement = UIElement
 
-export type Offset<Type extends number | string = number> = {
+export type Offset<Type extends number | string | undefined = number> = {
   top: Type
   left: Type
 }
