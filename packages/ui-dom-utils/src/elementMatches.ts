@@ -31,15 +31,18 @@ import { UIElement } from '@instructure/shared-types'
  * ---
  *
  * Polyfill for Element.matches (https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)
+ * DEPRECATED This polyfill is only needed for old browsers and will be removed in InstUI v9
  * @module elementMatches
- * @param { Node | Window | React.ReactElement | function } el - component or DOM node
- * @param { string } selectorString - a string representing the selector to test
- * @returns { boolean } if the element would be selected by the specified selector string
+ * @param el - component or DOM node
+ * @param selectorString - a string representing the selector to test
+ * @returns if the element would be selected by the specified selector string
  */
 function elementMatches(el: UIElement, selectorString: string) {
   const node = el && findDOMNode(el)
   if (!node) return false
-  return (node as Element).matches(selectorString)
+  // this cast is in a separate line to circumvent a react-docgen bug
+  const elem: Element = node as Element
+  return elem.matches(selectorString)
 }
 
 export default elementMatches

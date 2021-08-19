@@ -23,12 +23,12 @@
  */
 
 const reactDocgen = require('react-docgen')
+const path = require('path')
 
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found.'
 
 module.exports = function getReactDoc(source, fileName, error) {
   let doc = {}
-
   try {
     doc = reactDocgen.parse(
       source,
@@ -40,13 +40,24 @@ module.exports = function getReactDoc(source, fileName, error) {
       }
     )
     if (Array.isArray(doc)) {
-      doc = doc.pop()
+      if (doc.length > 1) {
+        // If a file has multiple exports this will choose the one that has the
+        // same name in its path.
+        for (const docExport of doc) {
+          const filePathArray = fileName.split(path.sep)
+          if (filePathArray.includes(docExport.displayName)) {
+            doc = docExport
+            break
+          }
+        }
+      } else {
+        doc = doc.pop()
+      }
     }
   } catch (err) {
     if (err.message !== ERROR_MISSING_DEFINITION) {
       error(err)
     }
   }
-
   return doc
 }
