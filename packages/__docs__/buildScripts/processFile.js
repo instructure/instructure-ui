@@ -42,7 +42,8 @@ module.exports = function processFile(fullPath, loaderOptions) {
     console.warn(
       '\x1b[33m%s\x1b[0m',
       '[docgen-loader]: Error when parsing ',
-      this.request
+      this.request,
+      fullPath
     )
     console.warn(err.toString())
   })
@@ -50,7 +51,6 @@ module.exports = function processFile(fullPath, loaderOptions) {
     ...doc,
     ...pathInfo
   }
-
   doc.id = getDocId(doc, context, fullPath)
   if (!doc.title && doc.id) {
     doc.title = doc.id
@@ -65,7 +65,6 @@ module.exports = function processFile(fullPath, loaderOptions) {
 function getDocId(docData, context, fullPath) {
   const { relativePath, id, describes } = docData
   let docId
-
   const lowerPath = relativePath.toLowerCase()
   if (id) {
     // exist if it was in the description at the top
@@ -81,13 +80,13 @@ function getDocId(docData, context, fullPath) {
   } else {
     docId = path.parse(fullPath).name // filename without extension
   }
-
   if (DOCS[docId] && DOCS[docId] !== docData.relativePath) {
     console.warn(
       '\x1b[33m%s\x1b[0m',
       `[${docId}] is a duplicate id: ${docData.relativePath}, ${DOCS[docId]}`
     )
   }
+
   DOCS[docId] = docData.relativePath
   return docId
 }
