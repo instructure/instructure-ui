@@ -267,10 +267,18 @@ class App extends Component {
 
   renderDocument(doc) {
     const { descriptions, docs, parents } = this.props
+    const { versionsData } = this.state
+    const { olderVersionsGitBranchMap } = versionsData || {}
+
     let children = []
+    let legacyGitBranch
 
     if (parents[doc.id]) {
       children = parents[doc.id].children.map((childId) => docs[childId])
+    }
+
+    if (olderVersionsGitBranchMap) {
+      legacyGitBranch = olderVersionsGitBranchMap[versionInPath]
     }
 
     const description = descriptions[doc.id]
@@ -291,6 +299,7 @@ class App extends Component {
             doc={{
               ...doc,
               children,
+              legacyGitBranch
             }}
             description={description || doc.description}
             themeKey={this.state.themeKey}
