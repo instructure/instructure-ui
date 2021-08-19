@@ -117,13 +117,18 @@ class Document extends Component {
   }
 
   renderSrcLink () {
-    const { srcUrl, srcPath } = this.props.doc
+    const { srcUrl, srcPath, legacyGitBranch } = this.props.doc
+    let legacySrcUrl
 
     if (!srcUrl) return
 
+    if (legacyGitBranch) {
+      legacySrcUrl = srcUrl.replace('/master/', `/${legacyGitBranch}/`)
+    }
+
     return (
       <View as="div" margin="0 0 x-large 0">
-        <Link href={srcUrl}>
+        <Link href={legacySrcUrl || srcUrl}>
           {srcPath}
         </Link>
       </View>
