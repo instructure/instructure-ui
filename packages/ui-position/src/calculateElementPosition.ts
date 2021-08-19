@@ -103,7 +103,7 @@ class PositionedElement {
     placement?:
       | PlacementPropValuesWithoutOffscreen
       | PlacementValuesWithoutOffscreenArray,
-    offset: Offset<string | number> = { top: 0, left: 0 }
+    offset: Offset<string | number | undefined> = { top: 0, left: 0 }
   ) {
     this.node = findDOMNode(element)
 
@@ -287,15 +287,10 @@ class PositionData {
 
     this.container = container || ownerDocument(element).body
 
-    const offset =
-      this.options.offsetY && this.options.offsetX
-        ? ({
-            top: this.options.offsetY,
-            left: this.options.offsetX
-          } as Offset<string | number>)
-        : undefined
-
-    this.element = new PositionedElement(element, placement, offset)
+    this.element = new PositionedElement(element, placement, {
+      top: this.options.offsetY,
+      left: this.options.offsetX
+    })
 
     this.target = new PositionedElement(
       target || this.container,
@@ -567,7 +562,7 @@ function parseOffset(
   } as Offset
 }
 
-function offsetToPx(offset: Offset<string | number>, size: Size) {
+function offsetToPx(offset: Offset<string | number | undefined>, size: Size) {
   let { left, top } = offset
 
   if (typeof left === 'string' && left.indexOf('%') !== -1) {
