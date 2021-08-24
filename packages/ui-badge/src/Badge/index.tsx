@@ -42,6 +42,7 @@ import { BadgeProps } from './types'
 ---
 category: components
 ---
+@tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
@@ -55,42 +56,14 @@ class Badge extends Component<BadgeProps> {
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     count: PropTypes.number,
-    /**
-     * The number at which the count gets truncated by
-     * formatOverflowText. For example, a countUntil of 100
-     * would stop the count at 99.
-     */
     countUntil: PropTypes.number,
     children: PropTypes.element,
-    /**
-     * Render Badge as a counter (`count`) or as a smaller dot (`notification`) with
-     * no count number displayed.
-     */
     type: PropTypes.oneOf(['count', 'notification']),
-    /**
-     * Render Badge as an inline html element that is not positioned relative
-     * to a child.
-     */
     standalone: PropTypes.bool,
-    /**
-     * Make the Badge slowly pulse twice to get the user's attention.
-     */
     pulse: PropTypes.bool,
     variant: PropTypes.oneOf(['primary', 'success', 'danger']),
-    /**
-     * Supported values are `top start`, `top end`, `end center`, `bottom end`,
-     * `bottom start`, and `start center`
-     */
     placement: PositionPropTypes.placement,
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
     margin: ThemeablePropTypes.spacing,
-    /**
-     * provides a reference to the underlying html root element
-     */
     elementRef: PropTypes.func,
     formatOverflowText: PropTypes.func,
     formatOutput: PropTypes.func,
@@ -114,32 +87,22 @@ class Badge extends Component<BadgeProps> {
   }
   _defaultId: string
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: BadgeProps) {
     super(props)
     this._defaultId = uid('Badge')
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
-
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   countOverflow() {
     const { count, countUntil } = this.props
 
-    //@ts-expect-error FIXME: possibly undefined
-    if (countUntil > 1 && count >= countUntil) {
-      return true
-    } else {
-      return false
-    }
+    return countUntil && count && countUntil > 1 && count >= countUntil
   }
 
   renderOutput() {
@@ -153,11 +116,16 @@ class Badge extends Component<BadgeProps> {
 
     // If the badge count is >= than the countUntil limit, format the badge text
     // via the formatOverflowText function prop
-    const formattedCount =
-      type === 'count' && this.countOverflow()
-        ? //@ts-expect-error FIXME: possibly undefined call
-          formatOverflowText(count, countUntil)
-        : count
+    let formattedCount = (count || '').toString()
+    if (
+      count &&
+      countUntil &&
+      formatOverflowText &&
+      type === 'count' &&
+      this.countOverflow()
+    ) {
+      formattedCount = formatOverflowText(count, countUntil)
+    }
 
     if (typeof formatOutput === 'function') {
       return formatOutput(formattedCount)
@@ -173,8 +141,9 @@ class Badge extends Component<BadgeProps> {
       <View
         margin={standalone ? margin : 'none'}
         css={styles.badge}
-        //@ts-expect-error has to be string
-        title={type === 'count' && this.countOverflow() ? count : null}
+        title={
+          type === 'count' && this.countOverflow() ? count?.toString() : ''
+        }
         id={!standalone ? this._defaultId : null}
         display={standalone ? 'inline-block' : 'block'}
       >
