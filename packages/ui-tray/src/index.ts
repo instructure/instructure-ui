@@ -23,4 +23,4 @@
  */
 
 export { Tray } from './Tray'
-export * from './Tray/types'
+export type { TrayProps } from './Tray/types'

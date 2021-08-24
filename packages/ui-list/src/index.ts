@@ -25,7 +25,7 @@
 export { InlineList } from './InlineList'
 export { List, ListItem } from './List'
 
-export * from './InlineList/types'
-export * from './InlineList/InlineListItem/types'
-export * from './List/types'
-export * from './List/ListItem/types'
+export type { InlineListProps } from './InlineList/types'
+export type { InlineListItemProps } from './InlineList/InlineListItem/types'
+export type { ListProps } from './List/types'
+export type { ListItemProps } from './List/ListItem/types'

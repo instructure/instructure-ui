@@ -30,5 +30,10 @@ export { mirrorHorizontalPlacement } from './mirrorHorizontalPlacement'
 export { mirrorPlacement } from './mirrorPlacement'
 export { parsePlacement } from './parsePlacement'
 
-export * from './PositionPropTypes'
-export * from './Position/types'
+export type {
+  PlacementPropValues,
+  PositionMountNode,
+  PositionConstraint
+} from './PositionPropTypes'
+
+export type { PositionProps } from './Position/types'

@@ -23,4 +23,4 @@
  */
 
 export { FileDrop } from './FileDrop'
-export * from './FileDrop/types'
+export type { FileDropProps } from './FileDrop/types'

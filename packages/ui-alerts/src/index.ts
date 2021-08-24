@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Alert } from './Alert'
-export * from './Alert/types'
+export type { AlertProps } from './Alert/types'

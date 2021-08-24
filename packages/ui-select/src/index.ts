@@ -24,6 +24,6 @@
 
 export { Select } from './Select'
 
-export * from './Select/types'
-export * from './Select/Group/types'
-export * from './Select/Option/types'
+export type { SelectProps } from './Select/types'
+export type { SelectGroupProps } from './Select/Group/types'
+export type { SelectOptionProps } from './Select/Option/types'

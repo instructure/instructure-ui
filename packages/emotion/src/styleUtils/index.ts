@@ -22,9 +22,21 @@
  * SOFTWARE.
  */
 
-export * from './ThemeablePropValues'
+export { ThemeablePropValues } from './ThemeablePropValues'
 export { ThemeablePropTypes } from './ThemeablePropTypes'
 export { makeThemeVars } from './makeThemeVars'
 export { getShorthandPropValue } from './getShorthandPropValue'
 export { mirrorShorthandCorners } from './mirrorShorthandCorners'
 export { mirrorShorthandEdges } from './mirrorShorthandEdges'
+
+export type {
+  SpacingValues,
+  Spacing,
+  Shadow,
+  Stacking,
+  Background,
+  BorderRadiiValues,
+  BorderRadii,
+  BorderWidthValues,
+  BorderWidth
+} from './ThemeablePropValues'

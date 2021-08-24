@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { NumberInput } from './NumberInput'
-export * from './NumberInput/types'
+export type { NumberInputProps } from './NumberInput/types'

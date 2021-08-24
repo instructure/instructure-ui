@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Avatar } from './Avatar'
-export * from './Avatar/types'
+export type { AvatarProps } from './Avatar/types'

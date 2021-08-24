@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { TextInput } from './TextInput'
-export * from './TextInput/types'
+export type { TextInputProps } from './TextInput/types'

@@ -23,5 +23,5 @@
  */
 export { Pages } from './Pages'
 
-export * from './Pages/types'
-export * from './Pages/Page/types'
+export type { PagesProps } from './Pages/types'
+export type { PagesPageProps } from './Pages/Page/types'

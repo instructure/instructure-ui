@@ -23,4 +23,4 @@
  */
 
 export { Pill } from './Pill'
-export * from './Pill/types'
+export type { PillProps } from './Pill/types'

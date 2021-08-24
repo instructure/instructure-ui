@@ -24,5 +24,5 @@
 export { Mask } from './Mask'
 export { Overlay } from './Overlay'
 
-export * from './Mask/types'
-export * from './Overlay/types'
+export type { MaskProps } from './Mask/types'
+export type { OverlayProps } from './Overlay/types'

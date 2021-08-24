@@ -25,5 +25,5 @@
 export { ToggleDetails } from './ToggleDetails'
 export { ToggleGroup } from './ToggleGroup'
 
-export * from './ToggleDetails/types'
-export * from './ToggleGroup/types'
+export type { ToggleDetailsProps } from './ToggleDetails/types'
+export type { ToggleGroupProps } from './ToggleGroup/types'

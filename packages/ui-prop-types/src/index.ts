@@ -30,8 +30,15 @@ import { xor } from './xor'
 import { makeRequirable } from './makeRequirable'
 import { element } from './element'
 
-export * from './element'
-export { Children, childrenOrValue, controllable, cursor, makeRequirable, xor }
+export {
+  Children,
+  childrenOrValue,
+  controllable,
+  cursor,
+  makeRequirable,
+  xor,
+  element
+}
 
 // Provide everything as a default export as well. That way we can easily
 // codemod users that have `import CustomPropTypes from '@instructure/ui-utils/...'
