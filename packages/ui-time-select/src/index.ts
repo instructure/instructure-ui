@@ -23,4 +23,4 @@
  */
 
 export { TimeSelect } from './TimeSelect'
-export * from './TimeSelect/types'
+export type { TimeSelectProps } from './TimeSelect/types'

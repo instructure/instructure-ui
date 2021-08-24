@@ -23,4 +23,4 @@
  */
 
 export { Badge } from './Badge'
-export * from './Badge/types'
+export type { BadgeProps } from './Badge/types'

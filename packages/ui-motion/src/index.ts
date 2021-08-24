@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export * from './Transition'
-export * from './Transition/types'
+export { Transition } from './Transition'
+export type { TransitionProps, TransitionType } from './Transition/types'

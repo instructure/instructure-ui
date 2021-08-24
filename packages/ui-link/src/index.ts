@@ -23,4 +23,4 @@
  */
 
 export { Link } from './Link'
-export * from './Link/types'
+export type { LinkProps } from './Link/types'

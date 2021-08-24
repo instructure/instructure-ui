@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Selectable } from './Selectable'
-export * from './Selectable/types'
+export type { SelectableProps, SelectableRender } from './Selectable/types'

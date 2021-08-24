@@ -24,5 +24,5 @@
 export { RadioInput } from './RadioInput'
 export { RadioInputGroup } from './RadioInputGroup'
 
-export * from './RadioInput/types'
-export * from './RadioInputGroup/types'
+export type { RadioInputProps } from './RadioInput/types'
+export type { RadioInputGroupProps } from './RadioInputGroup/types'

@@ -27,6 +27,17 @@ export { addElementQueryMatchListener } from './addElementQueryMatchListener'
 export { addMediaQueryMatchListener } from './addMediaQueryMatchListener'
 export { parseQuery } from './parseQuery'
 export { jsonToMediaQuery } from './jsonToMediaQuery'
+export { ResponsivePropTypes } from './ResponsivePropTypes'
 
-export * from './ResponsivePropTypes'
-export * from './Responsive/types'
+export type {
+  ResponsiveProps,
+  ResponsivePropsObject,
+  ResponsiveByBreakpointProps
+} from './Responsive/types'
+
+export type {
+  BreakpointQueries,
+  Query,
+  ValidQueryKey,
+  QueriesMatching
+} from './QueryType'

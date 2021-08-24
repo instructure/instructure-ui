@@ -23,4 +23,4 @@
  */
 
 export { Tag } from './Tag'
-export * from './Tag/types'
+export type { TagProps } from './Tag/types'

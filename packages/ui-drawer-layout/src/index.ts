@@ -24,6 +24,6 @@
 
 export { DrawerLayout, DrawerContent } from './DrawerLayout'
 
-export * from './DrawerLayout/types'
-export * from './DrawerLayout/DrawerContent/types'
-export * from './DrawerLayout/DrawerTray/types'
+export type { DrawerLayoutProps } from './DrawerLayout/types'
+export type { DrawerLayoutContentProps } from './DrawerLayout/DrawerContent/types'
+export type { DrawerLayoutTrayProps } from './DrawerLayout/DrawerTray/types'

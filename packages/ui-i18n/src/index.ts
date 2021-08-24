@@ -37,5 +37,5 @@ export {
 } from './ApplyTextDirection'
 
 export type { BidirectionalProps } from './bidirectional'
-export * from './ApplyLocale/types'
-export * from './ApplyTextDirection/types'
+export type { ApplyLocaleProps } from './ApplyLocale/types'
+export type { ApplyTextDirectionProps } from './ApplyTextDirection/types'

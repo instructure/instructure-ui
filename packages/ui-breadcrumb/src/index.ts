@@ -22,5 +22,6 @@
  * SOFTWARE.
  */
 export { Breadcrumb, BreadcrumbLink } from './Breadcrumb'
-export * from './Breadcrumb/types'
-export * from './Breadcrumb/BreadcrumbLink/types'
+
+export type { BreadcrumbProps } from './Breadcrumb/types'
+export type { BreadcrumbLinkProps } from './Breadcrumb/BreadcrumbLink/types'

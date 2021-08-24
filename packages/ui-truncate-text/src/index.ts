@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { TruncateText } from './TruncateText'
-export * from './TruncateText/types'
+export type { TruncateTextProps } from './TruncateText/types'

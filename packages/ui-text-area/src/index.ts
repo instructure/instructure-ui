@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { TextArea } from './TextArea'
-export * from './TextArea/types'
+export type { TextAreaProps } from './TextArea/types'

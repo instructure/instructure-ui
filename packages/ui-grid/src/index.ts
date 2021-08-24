@@ -23,8 +23,8 @@
  */
 export { Grid, GridRow, GridCol } from './Grid'
 
-export * from './GridTypes'
+export type { GridBreakpoints } from './GridTypes'
 
-export * from './Grid/types'
-export * from './GridRow/types'
-export * from './GridCol/types'
+export type { GridProps } from './Grid/types'
+export type { GridRowProps } from './GridRow/types'
+export type { GridColProps } from './GridCol/types'

@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Tooltip } from './Tooltip'
-export * from './Tooltip/types'
+export type { TooltipProps } from './Tooltip/types'

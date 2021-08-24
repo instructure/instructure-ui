@@ -25,7 +25,7 @@
 export { AppNav } from './AppNav'
 export { Navigation, NavigationItem } from './Navigation'
 
-export * from './AppNav/types'
-export * from './AppNav/Item/types'
-export * from './Navigation/types'
-export * from './Navigation/NavigationItem/types'
+export type { AppNavProps } from './AppNav/types'
+export type { AppNavItemProps } from './AppNav/Item/types'
+export type { NavigationProps } from './Navigation/types'
+export type { NavigationItemProps } from './Navigation/NavigationItem/types'

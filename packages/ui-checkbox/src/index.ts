@@ -24,7 +24,7 @@
 export { Checkbox, CheckboxFacade, ToggleFacade } from './Checkbox'
 export { CheckboxGroup } from './CheckboxGroup'
 
-export * from './Checkbox/types'
-export * from './Checkbox/CheckboxFacade/types'
-export * from './Checkbox/ToggleFacade/types'
-export * from './CheckboxGroup/types'
+export type { CheckboxProps } from './Checkbox/types'
+export type { CheckboxFacadeProps } from './Checkbox/CheckboxFacade/types'
+export type { ToggleFacadeProps } from './Checkbox/ToggleFacade/types'
+export type { CheckboxGroupProps } from './CheckboxGroup/types'

@@ -23,7 +23,7 @@
  */
 export { Menu, MenuItem, MenuItemGroup, MenuItemSeparator } from './Menu'
 
-export * from './Menu/types'
-export * from './Menu/MenuItem/types'
-export * from './Menu/MenuItemGroup/types'
-export * from './Menu/MenuItemSeparator/types'
+export type { MenuProps } from './Menu/types'
+export type { MenuItemProps } from './Menu/MenuItem/types'
+export type { MenuGroupProps } from './Menu/MenuItemGroup/types'
+export type { MenuSeparatorProps } from './Menu/MenuItemSeparator/types'

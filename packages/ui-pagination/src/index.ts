@@ -24,6 +24,6 @@
 
 export { Pagination, PaginationButton } from './Pagination'
 
-export * from './Pagination/types'
-export * from './Pagination/PaginationButton/types'
-export * from './Pagination/PaginationArrowButton/types'
+export type { PaginationProps } from './Pagination/types'
+export type { PaginationPageProps } from './Pagination/PaginationButton/types'
+export type { PaginationNavigationProps } from './Pagination/PaginationArrowButton/types'

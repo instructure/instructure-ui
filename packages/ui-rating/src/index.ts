@@ -23,5 +23,5 @@
  */
 export { Rating } from './Rating'
 
-export * from './Rating/types'
-export * from './RatingIcon/types'
+export type { RatingProps } from './Rating/types'
+export type { RatingIconProps } from './RatingIcon/types'

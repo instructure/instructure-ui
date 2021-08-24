@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Byline } from './Byline'
-export * from './Byline/types'
+export type { BylineProps } from './Byline/types'

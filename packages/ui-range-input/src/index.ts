@@ -23,4 +23,4 @@
  */
 
 export { RangeInput } from './RangeInput'
-export * from './RangeInput/types'
+export type { RangeInputProps } from './RangeInput/types'
