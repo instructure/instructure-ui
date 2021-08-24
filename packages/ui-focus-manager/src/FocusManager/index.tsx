@@ -30,15 +30,22 @@ import FocusTrap from 'focus-trap-react'
 import references from './referenceMap'
 
 // @ts-expect-error ts-migration
-const FocusManager = ({ children }) => {
+const FocusManager = ({ children, onDismiss }) => {
   const [selfId] = useState(uuidv4())
+
+  const onEscPress = (event: KeyboardEvent) => {
+    // if (false) {
+    //   onDismiss()
+    // }
+  }
 
   useEffect(() => {
     // @ts-expect-error ts-migration
     if (!references.find((ref) => ref.parent === document.activeElement)) {
       references.push({ parent: document.activeElement, child: selfId })
     }
-  }, [selfId])
+    document.addEventListener('keydown', onEscPress, false)
+  }, [selfId, onDismiss])
 
   useEffect(() => {
     return () => {

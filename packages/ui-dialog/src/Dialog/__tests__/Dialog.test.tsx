@@ -68,7 +68,7 @@ describe('<Dialog />', async () => {
     expect(await dialog.find('[aria-label="Dialog Example"]')).to.exist()
   })
 
-  it('should call onDismiss prop when Esc key pressed', async () => {
+  it.only('should call onDismiss prop when Esc key pressed', async () => {
     const onDismiss = stub()
 
     const subject = await mount(
@@ -90,7 +90,7 @@ describe('<Dialog />', async () => {
     })
   })
 
-  it('should call onDismiss prop when the document is clicked', async () => {
+  it.only('should call onDismiss prop when the document is clicked', async () => {
     const onDismiss = stub()
 
     const subject = await mount(

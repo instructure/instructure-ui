@@ -106,7 +106,8 @@ const Example = () => {
         onDismiss={() => setIsModalOpen(false)}
         size="medium"
         label="Modal Dialog: Hello World"
-        shouldCloseOnDocumentClick
+        shouldCloseOnDocumentClick={!isPopoverOpen}
+        shouldCloseOnEscape={!isPopoverOpen}
       >
         <Modal.Header>
           <Heading>Hello from the modal</Heading>

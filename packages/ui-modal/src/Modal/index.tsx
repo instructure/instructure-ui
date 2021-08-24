@@ -344,13 +344,14 @@ class Modal extends Component<ModalProps> {
         label={label}
         defaultFocusElement={this.defaultFocusElement}
         shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
-        shouldCloseOnEscape
+        shouldCloseOnEscape={this.props.shouldCloseOnEscape}
         shouldContainFocus
         shouldReturnFocus={shouldReturnFocus}
         liveRegion={liveRegion}
         onDismiss={onDismiss}
         css={styles.modal}
         ref={this.contentRef}
+        test="Ima modal"
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >
         {this.renderChildren()}
