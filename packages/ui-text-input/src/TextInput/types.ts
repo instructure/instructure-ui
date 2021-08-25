@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-import React, { InputHTMLAttributes } from 'react'
+import React from 'react'
 import { InteractionType } from '@instructure/ui-react-utils'
 import { FormMessage } from '@instructure/ui-form-field'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 
-export type TextInputOwnProps = {
+export type TextInputProps = {
   renderLabel?: React.ReactNode | ((...args: any[]) => any)
   type?: 'text' | 'email' | 'url' | 'tel' | 'search' | 'password'
   id?: string
@@ -53,9 +52,6 @@ export type TextInputOwnProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
 }
-
-export type TextInputProps = TextInputOwnProps &
-  OtherHTMLAttributes<TextInputOwnProps, InputHTMLAttributes<TextInputOwnProps>>
 
 export type TextInputState = {
   hasFocus: boolean

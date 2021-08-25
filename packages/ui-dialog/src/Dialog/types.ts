@@ -23,9 +23,9 @@
  */
 
 import React from 'react'
-import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
+import { AsElementType } from '@instructure/shared-types'
 
-export type DialogOwnProps = {
+export type DialogProps = {
   as?: AsElementType
   display?: 'auto' | 'block' | 'inline-block'
   label?: string
@@ -44,5 +44,3 @@ export type DialogOwnProps = {
   shouldCloseOnEscape?: boolean
   shouldFocusOnOpen?: boolean
 }
-
-export type DialogProps = DialogOwnProps & OtherHTMLAttributes<DialogOwnProps>

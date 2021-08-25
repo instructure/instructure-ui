@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
+import { AsElementType } from '@instructure/shared-types'
 import { PropsWithChildren, ReactNode } from 'react'
 
-export type ScreenReaderContentOwnProps = PropsWithChildren<{
+export type ScreenReaderContentProps = PropsWithChildren<{
   makeStyles?: (...args: any[]) => any
   styles?: any
   /**
@@ -37,6 +37,3 @@ export type ScreenReaderContentOwnProps = PropsWithChildren<{
    */
   children: ReactNode
 }>
-
-export type ScreenReaderContentProps = ScreenReaderContentOwnProps &
-  OtherHTMLAttributes<ScreenReaderContentOwnProps>

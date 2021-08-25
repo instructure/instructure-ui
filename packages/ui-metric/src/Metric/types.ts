@@ -23,9 +23,8 @@
  */
 
 import { ReactNode } from 'react'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 
-export type MetricOwnProps = {
+export type MetricProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   textAlign: 'start' | 'center' | 'end'
@@ -37,5 +36,3 @@ export type MetricOwnProps = {
    */
   isGroupChild: boolean
 }
-
-export type MetricProps = MetricOwnProps & OtherHTMLAttributes<MetricOwnProps>

@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
+import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
@@ -38,7 +39,9 @@ category: components/utilities
 @module AccessibleContent
 @tsProps
 **/
-class AccessibleContent extends Component<AccessibleContentProps> {
+class AccessibleContent extends Component<
+  AccessibleContentProps & OtherHTMLAttributes<AccessibleContentProps>
+> {
   static propTypes = {
     alt: PropTypes.string,
     as: PropTypes.elementType,

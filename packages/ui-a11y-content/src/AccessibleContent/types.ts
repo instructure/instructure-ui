@@ -24,9 +24,9 @@
 
 import { PropsWithChildren } from 'react'
 
-import { OtherHTMLAttributes, AsElementType } from '@instructure/shared-types'
+import { AsElementType } from '@instructure/shared-types'
 
-export type AccessibleContentOwnProps = PropsWithChildren<{
+export type AccessibleContentProps = PropsWithChildren<{
   alt?: string
 
   /**
@@ -34,6 +34,3 @@ export type AccessibleContentOwnProps = PropsWithChildren<{
    */
   as: AsElementType
 }>
-
-export type AccessibleContentProps = AccessibleContentOwnProps &
-  OtherHTMLAttributes<AccessibleContentOwnProps>
