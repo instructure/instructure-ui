@@ -29,7 +29,11 @@ import {
 } from '@instructure/emotion'
 import { pickProps } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
-import { PartialRecord, ViewTheme } from '@instructure/shared-types'
+import {
+  OtherHTMLAttributes,
+  PartialRecord,
+  ViewTheme
+} from '@instructure/shared-types'
 import { ViewProps } from './types'
 
 const getBorderStyle = ({
@@ -128,7 +132,10 @@ const getOffsetStyle = ({
   }
 }
 
-const getStyleProps = ({ cursor, style }: ViewProps) => {
+const getStyleProps = ({
+  cursor,
+  style
+}: ViewProps & OtherHTMLAttributes<ViewProps>) => {
   const whitelisted = pickProps(style || {}, {}, [
     // Position/calculateElementPosition:
     'top',

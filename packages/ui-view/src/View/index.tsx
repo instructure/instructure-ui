@@ -24,6 +24,7 @@
 
 /** @jsx jsx */
 import { Component, ComponentType } from 'react'
+
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { logError as error } from '@instructure/console'
@@ -34,6 +35,7 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 import { jsx, withStyle } from '@instructure/emotion'
+import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -51,7 +53,7 @@ API:
 **/
 @bidirectional()
 @withStyle(generateStyle, generateComponentTheme)
-class View extends Component<ViewProps> {
+class View extends Component<ViewProps & OtherHTMLAttributes<ViewProps>> {
   static componentId = 'View'
   static allowedProps = allowedProps
   static propTypes = propTypes

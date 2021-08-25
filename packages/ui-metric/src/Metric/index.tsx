@@ -28,6 +28,7 @@ import PropTypes from 'prop-types'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -41,7 +42,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Metric extends Component<MetricProps> {
+class Metric extends Component<MetricProps & OtherHTMLAttributes<MetricProps>> {
   static readonly componentId = 'Metric'
 
   static propTypes = {
@@ -73,8 +74,13 @@ class Metric extends Component<MetricProps> {
   }
 
   render() {
-    const { textAlign, renderLabel, renderValue, isGroupChild, ...rest } =
-      this.props
+    const {
+      textAlign,
+      renderLabel,
+      renderValue,
+      isGroupChild,
+      ...rest
+    } = this.props
 
     return (
       <div

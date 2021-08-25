@@ -26,6 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
+import { OtherHTMLAttributes } from '@instructure/shared-types'
+
 import { PresentationContentProps } from './types'
 
 /**
@@ -35,7 +37,9 @@ category: components/utilities
 @module PresentationContent
 @tsProps
 **/
-class PresentationContent extends Component<PresentationContentProps> {
+class PresentationContent extends Component<
+  PresentationContentProps & OtherHTMLAttributes<PresentationContentProps>
+> {
   static propTypes = {
     as: PropTypes.elementType,
     children: PropTypes.node

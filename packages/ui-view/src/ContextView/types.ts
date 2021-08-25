@@ -23,10 +23,10 @@
  */
 
 import { CSSObject, Shadow, Spacing, Stacking } from '@instructure/emotion'
-import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
+import { AsElementType } from '@instructure/shared-types'
 import { PlacementPropValues } from '@instructure/ui-position'
 
-export type ContextViewOwnProps = {
+export type ContextViewProps = {
   as?: AsElementType
   elementRef?: (...args: any[]) => any
   height?: string | number
@@ -46,6 +46,3 @@ export type ContextViewOwnProps = {
   stacking: Stacking
   placement: PlacementPropValues
 }
-
-export type ContextViewProps = ContextViewOwnProps &
-  OtherHTMLAttributes<ContextViewOwnProps>

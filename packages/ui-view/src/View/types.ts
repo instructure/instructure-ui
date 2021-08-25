@@ -33,7 +33,7 @@ import {
   Shadow,
   Stacking
 } from '@instructure/emotion'
-import { AsElementType, OtherHTMLAttributes } from '@instructure/shared-types'
+import { AsElementType } from '@instructure/shared-types'
 
 export type ViewOwnProps = {
   /**
@@ -170,9 +170,8 @@ export type ViewOwnProps = {
   cursor?: any
 }
 
-export type ViewProps = ViewOwnProps &
-  WithStyleProps &
-  OtherHTMLAttributes<ViewOwnProps>
+export type ViewProps = ViewOwnProps & WithStyleProps
+
 export type AllowedPropKeys = Readonly<
   Array<keyof (ViewOwnProps & WithStyleProps)>
 >

@@ -27,9 +27,10 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { element } from '@instructure/ui-prop-types'
-
+import { OtherHTMLAttributes } from '@instructure/shared-types'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional } from '@instructure/ui-i18n'
+
 import { PortalNode, PortalProps, PortalState } from './types'
 
 /**
@@ -40,7 +41,10 @@ category: components/utilities
 @tsProps
 **/
 @bidirectional()
-class Portal extends Component<PortalProps, PortalState> {
+class Portal extends Component<
+  PortalProps & OtherHTMLAttributes<PortalProps>,
+  PortalState
+> {
   static propTypes = {
     open: PropTypes.bool,
     onOpen: PropTypes.func,

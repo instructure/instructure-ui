@@ -23,7 +23,6 @@
  */
 
 import React from 'react'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 import { BidirectionalProps } from '@instructure/ui-i18n'
 
 /**
@@ -69,9 +68,7 @@ export type PortalOwnProps = {
   elementRef?: (el?: PortalNode) => void
 }
 
-export type PortalProps = PortalOwnProps &
-  OtherHTMLAttributes<PortalOwnProps> &
-  BidirectionalProps
+export type PortalProps = PortalOwnProps & BidirectionalProps
 
 export type PortalState = {
   mountNode: Element
