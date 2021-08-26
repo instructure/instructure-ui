@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import { consoleLog as log } from '@instructure/console'
 import { isObject } from 'lodash'
+import { consoleLog as log } from '@instructure/console'
+
+import type { StyleObject } from '../EmotionTypes'
+
+type Direction = 'ltr' | 'rtl'
 
 /**
  * ---
@@ -68,8 +72,11 @@ const SUPPORT_PROPS = [
 ]
 
 function processProps(
-  { originalProp, originalValue }: any,
-  textDirection: any
+  {
+    originalProp,
+    originalValue
+  }: { originalProp: string; originalValue: string | number },
+  textDirection: Direction
 ) {
   const isLtr = textDirection === 'ltr'
 
@@ -82,7 +89,7 @@ function processProps(
     case 'float':
     case 'clear':
     case 'textAlign':
-      if (['start', 'end'].indexOf(value) !== -1) {
+      if (['start', 'end'].indexOf(value as string) !== -1) {
         if (value === 'start') {
           value = start.toLowerCase()
         } else {
@@ -155,12 +162,15 @@ function processProps(
   return { prop, value }
 }
 
-const isSupportedProps = (prop: any) => SUPPORT_PROPS.indexOf(prop) > -1
+const isSupportedProps = (prop: string) => SUPPORT_PROPS.indexOf(prop) > -1
 
-const processStyleProps = (propsObj: any, dir: any): any =>
+const processStyleProps = (
+  propsObj: StyleObject | string | number | undefined,
+  dir: Direction
+): StyleObject | string | number | undefined =>
   isObject(propsObj)
     ? Object.entries(propsObj).reduce(
-        (accumulator: any, [originalProp, originalValue]) => {
+        (accumulator, [originalProp, originalValue]) => {
           if (isObject(originalValue)) {
             return {
               ...accumulator,
@@ -168,7 +178,10 @@ const processStyleProps = (propsObj: any, dir: any): any =>
             }
           }
 
-          if (isSupportedProps(originalProp) && originalValue !== 'undefined') {
+          if (
+            isSupportedProps(originalProp) &&
+            typeof originalValue !== 'undefined'
+          ) {
             const { prop, value } = processProps(
               { originalProp, originalValue },
 
@@ -184,11 +197,17 @@ const processStyleProps = (propsObj: any, dir: any): any =>
       )
     : propsObj
 
-export const bidirectionalPolyfill = (styles: any, dir: any) =>
+const bidirectionalPolyfill = <S extends StyleObject>(
+  styles: S,
+  dir: Direction
+) =>
   Object.entries(styles).reduce(
     (accumulator, [style, props]) => ({
       ...accumulator,
       [style]: processStyleProps(props, dir)
     }),
     {}
-  )
+  ) as S
+
+export default bidirectionalPolyfill
+export { bidirectionalPolyfill }

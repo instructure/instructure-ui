@@ -60,7 +60,6 @@ describe('<Tray />', async () => {
         open
         size="small"
         placement="start"
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         themeOverride={{ smallWidth: '10em' }}
       >
         <div>Hello</div>

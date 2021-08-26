@@ -27,12 +27,34 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 
-import { withStyle, jsx, EmotionThemeProvider } from '../../index'
+import {
+  withStyle,
+  jsx,
+  EmotionThemeProvider,
+  WithStyleProps
+} from '../../index'
+
+type Props = {
+  inverse?: boolean
+} & WithStyleProps<ComponentTheme>
+
+type Theme = {
+  key: string
+  colors: {
+    textBrand: string
+    backgroundLight: string
+  }
+}
+
+type ComponentTheme = {
+  textColor: string
+  backgroundColor: string
+}
 
 describe('EmotionThemeProvider', async () => {
   const textBrand = 'rgb(0, 128, 0)'
   const backgroundLight = 'rgb(255, 255, 0)'
-  const exampleTheme = {
+  const exampleTheme: Theme = {
     key: 'exampleTheme',
     colors: {
       textBrand,
@@ -40,8 +62,7 @@ describe('EmotionThemeProvider', async () => {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006)
-  const generateComponentTheme = function (theme) {
+  const generateComponentTheme = function (theme: Theme) {
     const { colors } = theme
     return {
       textColor: colors.textBrand,
@@ -49,8 +70,7 @@ describe('EmotionThemeProvider', async () => {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006)
-  const generateStyle = function (componentTheme) {
+  const generateStyle = function (componentTheme: ComponentTheme) {
     return {
       exampleComponent: {
         label: 'exampleComponent',
@@ -61,12 +81,8 @@ describe('EmotionThemeProvider', async () => {
   }
 
   @withStyle(generateStyle, generateComponentTheme)
-  class ThemeableComponent extends Component {
+  class ThemeableComponent extends Component<Props> {
     static propTypes = {
-      // eslint-disable-next-line react/require-default-props
-      makeStyles: PropTypes.func,
-      // eslint-disable-next-line react/require-default-props
-      styles: PropTypes.object,
       inverse: PropTypes.bool
     }
 
@@ -75,20 +91,16 @@ describe('EmotionThemeProvider', async () => {
     }
 
     componentDidMount() {
-      // @ts-expect-error ts-migrate(2339)
-      this.props.makeStyles()
+      this.props.makeStyles!()
     }
 
-    // @ts-expect-error ts-migrate(6133)
-    componentDidUpdate(prevProps, prevState, snapshot) {
-      // @ts-expect-error ts-migrate(2339)
-      this.props.makeStyles()
+    componentDidUpdate() {
+      this.props.makeStyles!()
     }
 
     render() {
-      // @ts-expect-error ts-migrate(2339)
       const { styles } = this.props
-      return <div css={styles.exampleComponent}>Hello World</div>
+      return <div css={styles!.exampleComponent}>Hello World</div>
     }
   }
 

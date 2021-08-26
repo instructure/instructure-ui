@@ -26,5 +26,26 @@
 export * from '@emotion/react'
 
 export { EmotionThemeProvider } from './EmotionThemeProvider'
-export * from './styleUtils'
-export * from './withStyle'
+export { withStyle } from './withStyle'
+export {
+  ThemeablePropValues,
+  ThemeablePropTypes,
+  makeThemeVars,
+  getShorthandPropValue,
+  mirrorShorthandCorners,
+  mirrorShorthandEdges
+} from './styleUtils'
+
+export type { ComponentStyle } from './EmotionTypes'
+export type { WithStyleProps } from './withStyle'
+export type {
+  SpacingValues,
+  Spacing,
+  Shadow,
+  Stacking,
+  Background,
+  BorderRadiiValues,
+  BorderRadii,
+  BorderWidthValues,
+  BorderWidth
+} from './styleUtils'

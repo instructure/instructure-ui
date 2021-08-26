@@ -55,7 +55,6 @@ export default {
         <DrawerLayout.Content
           key="1"
           label="Drawer content example"
-          // @ts-expect-error ts-migrate(6133) FIXME: themeOverride is missing from type
           themeOverride={{ duration: 0 }}
         >
           <div style={{ background: 'white', height: '100%' }}>

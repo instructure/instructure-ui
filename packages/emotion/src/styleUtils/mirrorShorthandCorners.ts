@@ -22,5 +22,6 @@
  * SOFTWARE.
  */
 import { mirrorShorthandCorners } from './mirrorShorthand'
+
 export default mirrorShorthandCorners
 export { mirrorShorthandCorners }

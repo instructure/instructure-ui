@@ -30,7 +30,7 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type ScreenReaderContentOwnProps = {
   /**
@@ -50,7 +50,9 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ScreenReaderContentProps = ScreenReaderContentOwnProps &
   OtherHTMLAttributes<ScreenReaderContentOwnProps> &
-  WithStyleProps
+  WithStyleProps<null, ScreenReaderContentStyle>
+
+type ScreenReaderContentStyle = ComponentStyle<'screenReaderContent'>
 
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
@@ -59,5 +61,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['as', 'children']
 
-export type { ScreenReaderContentProps }
+export type { ScreenReaderContentProps, ScreenReaderContentStyle }
 export { propTypes, allowedProps }

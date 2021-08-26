@@ -25,16 +25,38 @@
 /** @jsx jsx */
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 import { ApplyTextDirection } from '@instructure/ui-i18n'
 
-import { withStyle, jsx, EmotionThemeProvider } from '../index'
+import { withStyle, jsx, EmotionThemeProvider, WithStyleProps } from '../index'
+
+type Props = {
+  inverse?: boolean
+} & WithStyleProps<ComponentTheme>
+
+type State = { clearBackground?: boolean }
+
+type Theme = {
+  key: string
+  colors: {
+    textBrand: string
+    textDark: string
+    backgroundLight: string
+  }
+}
+
+type ComponentTheme = {
+  textColor: string
+  textColorInverse: string
+  backgroundColor: string
+}
 
 describe('@withStyle', async () => {
   const textBrand = 'rgb(0, 128, 0)'
   const textDark = 'rgb(10, 10, 10)'
   const backgroundLight = 'rgb(255, 255, 0)'
-  const exampleTheme = {
+  const exampleTheme: Theme = {
     key: 'exampleTheme',
     colors: {
       textBrand,
@@ -43,8 +65,7 @@ describe('@withStyle', async () => {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006)
-  const generateComponentTheme = function (theme) {
+  const generateComponentTheme = function (theme: Theme): ComponentTheme {
     const { colors } = theme
     return {
       textColor: colors.textBrand,
@@ -53,8 +74,11 @@ describe('@withStyle', async () => {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006)
-  const generateStyle = function (componentTheme, props, state) {
+  const generateStyle = function (
+    componentTheme: ComponentTheme,
+    props: Props,
+    state: State
+  ) {
     const { inverse } = props
     const { clearBackground } = state
 
@@ -71,12 +95,8 @@ describe('@withStyle', async () => {
   }
 
   @withStyle(generateStyle, generateComponentTheme)
-  class ThemeableComponent extends React.Component {
+  class ThemeableComponent extends React.Component<Props, State> {
     static propTypes = {
-      // eslint-disable-next-line react/require-default-props
-      makeStyles: PropTypes.func,
-      // eslint-disable-next-line react/require-default-props
-      styles: PropTypes.object,
       inverse: PropTypes.bool
     }
 
@@ -89,14 +109,11 @@ describe('@withStyle', async () => {
     }
 
     componentDidMount() {
-      // @ts-expect-error ts-migrate(2339) FIXME
-      this.props.makeStyles({ clearBackground: this.state.clearBackground })
+      this.props.makeStyles!({ clearBackground: this.state.clearBackground })
     }
 
-    // @ts-expect-error ts-migrate(6133) FIXME
-    componentDidUpdate(prevProps, prevState, snapshot) {
-      // @ts-expect-error ts-migrate(2339) FIXME
-      this.props.makeStyles({ clearBackground: this.state.clearBackground })
+    componentDidUpdate() {
+      this.props.makeStyles!({ clearBackground: this.state.clearBackground })
     }
 
     handleClick = () => {
@@ -106,10 +123,9 @@ describe('@withStyle', async () => {
     }
 
     render() {
-      // @ts-expect-error ts-migrate(2554) FIXME
       const { styles } = this.props
       return (
-        <div css={styles.exampleComponent}>
+        <div css={styles!.exampleComponent}>
           <p>Hello World</p>
           <button onClick={this.handleClick}>Button</button>
         </div>
@@ -146,7 +162,6 @@ describe('@withStyle', async () => {
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent
-            // @ts-expect-error ts-migrate(2769) FIXME
             themeOverride={{
               textColor: 'rgb(128, 0, 128)'
             }}
@@ -163,7 +178,6 @@ describe('@withStyle', async () => {
     it('should ignore empty themeOverride props', async () => {
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
-          {/* @ts-expect-error ts-migrate(2769) FIXME */}
           <ThemeableComponent themeOverride={{}} />
         </EmotionThemeProvider>
       )
@@ -184,7 +198,6 @@ describe('@withStyle', async () => {
       const subject = await mount(
         <ThemeableComponent
           inverse={false}
-          // @ts-expect-error ts-migrate(2769) FIXME
           themeOverride={{
             textColor: textBrand,
             textColorInverse: textDark,
@@ -249,8 +262,7 @@ describe('@withStyle', async () => {
       const component = subject
         .getDOMNode()
         .querySelector('[class$=-exampleComponent]')
-      // @ts-expect-error ts-migrate(2345) FIXME
-      const computedStyle = getComputedStyle(component)
+      const computedStyle = getComputedStyle(component!)
 
       // `inset-inline-start` should be transformed to 'right' in 'rtl' mode
       expect(computedStyle.left).to.equal('auto')

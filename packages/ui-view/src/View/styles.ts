@@ -34,7 +34,7 @@ import {
   PartialRecord,
   ViewTheme
 } from '@instructure/shared-types'
-import { ViewProps } from './props'
+import { ViewProps, ViewStyle } from './props'
 
 const getBorderStyle = ({
   borderRadius,
@@ -374,7 +374,10 @@ const getFocusStyles = (props: ViewProps, componentTheme: ViewTheme) => {
  * @param  {Object} extraArgs
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: ViewTheme, props: ViewProps): any => {
+const generateStyle = (
+  componentTheme: ViewTheme,
+  props: ViewProps
+): ViewStyle => {
   const {
     borderRadius,
     borderWidth,

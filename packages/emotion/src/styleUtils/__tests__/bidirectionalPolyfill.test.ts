@@ -108,7 +108,6 @@ describe('bidirectionalPolyfill', async () => {
           },
           dir
         )
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type '{}'.
         const value = convertedStyle.style[prop]
         expect(value).to.equal('left')
       })
@@ -124,7 +123,6 @@ describe('bidirectionalPolyfill', async () => {
           },
           dir
         )
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type '{}'.
         const value = convertedStyle.style[prop]
         expect(value).to.equal('right')
       })
@@ -140,7 +138,6 @@ describe('bidirectionalPolyfill', async () => {
           },
           dir
         )
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type '{}'.
         const propName = Object.keys(convertedStyle.style)[0].toLowerCase()
         expect(propName).to.contain('left')
       })
@@ -156,7 +153,6 @@ describe('bidirectionalPolyfill', async () => {
           },
           dir
         )
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type '{}'.
         const propName = Object.keys(convertedStyle.style)[0].toLowerCase()
         expect(propName).to.contain('right')
       })
@@ -209,7 +205,6 @@ describe('bidirectionalPolyfill', async () => {
           },
           dir
         )
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type '{}'.
         const value = convertedStyle.style[prop]
         expect(value).to.equal('right')
       })
@@ -225,7 +220,6 @@ describe('bidirectionalPolyfill', async () => {
           },
           dir
         )
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type '{}'.
         const value = convertedStyle.style[prop]
         expect(value).to.equal('left')
       })
@@ -241,7 +235,6 @@ describe('bidirectionalPolyfill', async () => {
           },
           dir
         )
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type '{}'.
         const propName = Object.keys(convertedStyle.style)[0].toLowerCase()
         expect(propName).to.contain('right')
       })
@@ -257,7 +250,6 @@ describe('bidirectionalPolyfill', async () => {
           },
           dir
         )
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type '{}'.
         const propName = Object.keys(convertedStyle.style)[0].toLowerCase()
         expect(propName).to.contain('left')
       })

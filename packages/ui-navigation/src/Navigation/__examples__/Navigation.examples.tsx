@@ -47,7 +47,6 @@ export default {
           icon={<IconAdminLine />}
           label="Admin"
           href="#"
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           themeOverride={{
             backgroundColor: 'red',
             hoverBackgroundColor: 'blue'

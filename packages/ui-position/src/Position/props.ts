@@ -29,8 +29,8 @@ import { element } from '@instructure/ui-prop-types'
 
 import { PositionPropTypes } from '../PositionPropTypes'
 
-import type { WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { PropValidators, PositionTheme } from '@instructure/shared-types'
 import type {
   PositionConstraint,
   PositionMountNode,
@@ -117,6 +117,8 @@ type PositionState = {
   positioned: boolean
 } & ElementPosition
 
+type PositionStyle = ComponentStyle<'zIndex'>
+
 type Position = ElementPosition['style'] & {
   placement: ElementPosition['placement']
 }
@@ -125,7 +127,7 @@ type PropKeys = keyof PositionOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PositionProps = PositionOwnProps & WithStyleProps
+type PositionProps = PositionOwnProps & WithStyleProps<PositionTheme, PositionStyle>
 
 const propTypes: PropValidators<PropKeys> = {
   renderTarget: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -161,5 +163,5 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { PositionProps, PositionState }
+export type { PositionProps, PositionState, PositionStyle }
 export { propTypes, allowedProps }

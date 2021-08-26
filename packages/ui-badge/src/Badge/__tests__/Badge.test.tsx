@@ -69,7 +69,6 @@ describe('<Badge />', () => {
   it('should change postion based on the placement prop', async () => {
     const countOffset = '5px'
     await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'undefined... Remove this comment to see the full error message
       <Badge count={3} placement="bottom start" themeOverride={{ countOffset }}>
         <button type="button">Inbox</button>
       </Badge>

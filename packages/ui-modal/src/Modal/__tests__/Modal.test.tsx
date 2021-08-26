@@ -56,7 +56,6 @@ describe('<Modal />', async () => {
         size="small"
         label="Modal Dialog"
         shouldReturnFocus={false}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; open: true; size: "smal... Remove this comment to see the full error message
         themeOverride={{ smallMaxWidth: '10em' }}
       >
         <Modal.Body>Foo Bar Baz</Modal.Body>
@@ -97,7 +96,6 @@ describe('<Modal />', async () => {
           label="Modal Dialog"
           shouldReturnFocus={false}
           constrain="parent"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; open: true; label: stri... Remove this comment to see the full error message
           themeOverride={{ textColor: 'rgb(0, 0, 0)' }}
         >
           <Modal.Body>Foo Bar Baz</Modal.Body>
@@ -449,9 +447,11 @@ describe('<Modal />', async () => {
         expect(modal.containsFocus()).to.be.true()
       })
 
-      await (within(
-        modal.getOwnerDocument().documentElement
-      ) as any).keyUp('escape', null, { focusable: false })
+      await (within(modal.getOwnerDocument().documentElement) as any).keyUp(
+        'escape',
+        null,
+        { focusable: false }
+      )
 
       await wait(() => {
         expect(onDismiss).to.have.been.called()

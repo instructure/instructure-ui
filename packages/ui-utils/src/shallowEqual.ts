@@ -38,10 +38,7 @@ const hasOwnProperty = Object.prototype.hasOwnProperty
  * @param {Object} objB
  * @returns {Boolean} Returns true when the values of all keys are strictly equal
  */
-function shallowEqual(
-  objA: Record<string, unknown>,
-  objB: Record<string, unknown>
-) {
+function shallowEqual(objA: Record<string, any>, objB: Record<string, any>) {
   if (is(objA, objB)) {
     return true
   }

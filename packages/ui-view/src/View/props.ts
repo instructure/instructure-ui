@@ -29,14 +29,15 @@ import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { AsElementType, PropValidators, ViewTheme } from '@instructure/shared-types'
 import type {
   WithStyleProps,
   Spacing,
   BorderWidth,
   BorderRadii,
   Shadow,
-  Stacking
+  Stacking,
+  ComponentStyle
 } from '@instructure/emotion'
 
 type ViewOwnProps = {
@@ -180,9 +181,11 @@ type ViewOwnProps = {
 
 type PropKeys = keyof ViewOwnProps
 
-type ViewProps = ViewOwnProps & WithStyleProps
+type ViewProps = ViewOwnProps & WithStyleProps<ViewTheme, ViewStyle>
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ViewStyle = ComponentStyle<'view' | 'inlineStyles'>
 
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
@@ -294,4 +297,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export { propTypes, allowedProps }
-export type { ViewProps }
+export type { ViewProps, ViewStyle }
