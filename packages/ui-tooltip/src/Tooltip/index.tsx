@@ -110,12 +110,10 @@ class Tooltip extends Component<TooltipProps> {
       // @ts-expect-error FIXME: React children types are badly calculated
       return children({
         focused: hasFocus,
-        getTriggerProps: (props) => {
-          return {
-            ...triggerProps,
-            ...props
-          }
-        }
+        getTriggerProps: (props) => ({
+          ...triggerProps,
+          ...props
+        })
       })
     } else {
       return ensureSingleChild(this.props.children, triggerProps)
