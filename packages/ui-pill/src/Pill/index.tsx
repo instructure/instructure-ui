@@ -26,7 +26,7 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { Tooltip } from '@instructure/ui-tooltip'
+import { Tooltip, TooltipChildrenArgs } from '@instructure/ui-tooltip'
 import { TruncateText } from '@instructure/ui-truncate-text'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
@@ -35,7 +35,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { PillProps } from './props'
+
+import type { PillProps, PillState } from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -45,7 +46,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Pill extends Component<PillProps> {
+class Pill extends Component<PillProps, PillState> {
   static readonly componentId = 'Pill'
 
   static allowedProps = allowedProps
@@ -55,8 +56,7 @@ class Pill extends Component<PillProps> {
     color: 'primary'
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: PillProps) {
     super(props)
 
     this.state = {
@@ -72,9 +72,7 @@ class Pill extends Component<PillProps> {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'truncated' implicitly has an 'any' type... Remove this comment to see the full error message
-  handleTruncation(truncated) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'truncated' does not exist on type 'Reado... Remove this comment to see the full error message
+  handleTruncation(truncated: boolean) {
     if (truncated !== this.state.truncated) {
       this.setState({
         truncated: truncated
@@ -82,8 +80,10 @@ class Pill extends Component<PillProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'focused' implicitly has an 'any' type.
-  renderPill(focused, getTriggerProps) {
+  renderPill(
+    focused?: TooltipChildrenArgs['focused'],
+    getTriggerProps?: TooltipChildrenArgs['getTriggerProps']
+  ) {
     const {
       margin,
       children,
@@ -134,7 +134,6 @@ class Pill extends Component<PillProps> {
   }
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'truncated' does not exist on type 'Reado... Remove this comment to see the full error message
     if (this.state.truncated) {
       return (
         <Tooltip renderTip={this.props.children}>
@@ -144,7 +143,6 @@ class Pill extends Component<PillProps> {
         </Tooltip>
       )
     } else {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       return this.renderPill()
     }
   }

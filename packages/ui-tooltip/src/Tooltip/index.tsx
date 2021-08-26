@@ -110,7 +110,6 @@ class Tooltip extends Component<TooltipProps> {
       // @ts-expect-error FIXME: React children types are badly calculated
       return children({
         focused: hasFocus,
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
         getTriggerProps: (props) => {
           return {
             ...triggerProps,
