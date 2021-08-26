@@ -44,7 +44,7 @@ type TooltipChildrenArgs = {
   focused: boolean
   getTriggerProps: <P extends Record<string, unknown>>(
     props: P
-  ) => P & { 'aria-describedby': string }
+  ) => { 'aria-describedby': string } & P
 }
 
 type TooltipOwnProps = {
