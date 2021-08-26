@@ -33,7 +33,13 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TextOwnProps = {
+  /**
+   * the element type to render as
+   */
   as?: AsElementType
+  /**
+   * Color of the text
+   */
   color?:
     | 'primary'
     | 'secondary'
@@ -44,7 +50,10 @@ type TextOwnProps = {
     | 'alert'
     | 'primary-inverse'
     | 'secondary-inverse'
-  elementRef?: (...args: any[]) => any
+  /**
+   * Provides a reference to the underlying HTML element
+   */
+  elementRef?: (element: HTMLElement | null) => void
   fontStyle?: 'italic' | 'normal'
   letterSpacing?: 'normal' | 'condensed' | 'expanded'
   lineHeight?: 'default' | 'fit' | 'condensed' | 'double'
@@ -64,14 +73,8 @@ type TextProps = TextOwnProps & WithStyleProps<TextTheme, TextStyle>
 type TextStyle = ComponentStyle<'text'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * the element type to render as
-   */
   as: PropTypes.elementType,
   children: PropTypes.node,
-  /**
-   * Color of the text
-   */
   color: PropTypes.oneOf([
     'primary',
     'secondary',

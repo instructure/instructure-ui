@@ -57,8 +57,7 @@ class Text extends Component<TextProps> {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     this.props.makeStyles?.()
   }
 
