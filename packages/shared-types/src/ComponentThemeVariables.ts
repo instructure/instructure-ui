@@ -35,6 +35,10 @@ import {
   Typography
 } from './BaseTheme'
 
+export interface ComponentTheme {
+  [variableName: string]: string | number | undefined
+}
+
 export type AlertTheme = {
   background: Colors['backgroundLightest']
   color: Colors['textDarkest']

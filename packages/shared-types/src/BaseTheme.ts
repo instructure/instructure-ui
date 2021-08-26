@@ -120,9 +120,7 @@ type Size = {
 type Radius = Size
 type StrokeWidth = Size
 
-type BaseTheme = {
-  key: string
-  description?: string
+type BaseThemeVariables = {
   borders: Border
   breakpoints: Breakpoints
   colors: Colors
@@ -135,8 +133,14 @@ type BaseTheme = {
   typography: Typography
 }
 
+type BaseTheme = {
+  key: string
+  description?: string
+} & BaseThemeVariables
+
 export type {
   BaseTheme,
+  BaseThemeVariables,
   Shadows,
   Border,
   Breakpoints,

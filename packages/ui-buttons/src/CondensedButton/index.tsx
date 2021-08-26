@@ -109,7 +109,6 @@ class CondensedButton extends Component<CondensedButtonProps> {
         cursor={cursor}
         href={href}
         renderIcon={renderIcon}
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         themeOverride={themeOverride}
         ref={(component) => {
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'BaseButton | null' is not assignable to type... Remove this comment to see the full error message

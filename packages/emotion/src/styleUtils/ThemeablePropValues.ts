@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { CSSShorthandValue } from '@instructure/shared-types'
+import type { CSSShorthandValue } from '@instructure/shared-types'
 
 const ThemeablePropValues = {
   SHADOW_TYPES: {

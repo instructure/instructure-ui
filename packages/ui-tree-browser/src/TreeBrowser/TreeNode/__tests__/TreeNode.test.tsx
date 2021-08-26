@@ -70,7 +70,6 @@ describe('<TreeNode />', async () => {
         <TreeNode
           id="1"
           selected={true}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           themeOverride={{ selectedBackgroundColor: pink }}
         >
           <div> Hello!</div>

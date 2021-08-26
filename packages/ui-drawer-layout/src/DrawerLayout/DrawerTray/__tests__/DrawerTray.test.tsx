@@ -103,7 +103,6 @@ describe('<DrawerTray />', async () => {
       <DrawerTray
         label="DrawerTray Example"
         open={true}
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         themeOverride={{ zIndex: '333' }}
         render={() => {
           return 'Hello from layout tray'

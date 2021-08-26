@@ -223,7 +223,6 @@ class Modal extends Component<ModalProps> {
       <Mask
         placement={this.maskPlacement}
         fullscreen={constrain === 'window'}
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         themeOverride={
           isFullScreen ? { borderRadius: '0em', borderWidth: '0em' } : {}
         }

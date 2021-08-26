@@ -23,13 +23,13 @@
  */
 
 import { camelize } from '@instructure/ui-utils'
-import { BaseTheme } from '@instructure/shared-types'
 
-type ThemeVars = Omit<BaseTheme, 'key' | 'description'>
-type Vars = ThemeVars[keyof ThemeVars]
+import type { BaseTheme, BaseThemeVariables } from '@instructure/shared-types'
+
+type ThemeVarGroup = BaseThemeVariables[keyof BaseThemeVariables]
 type PrefixedThemeVars<
   P extends string,
-  Variables extends Partial<Vars>
+  Variables extends Partial<ThemeVarGroup>
 > = Variables extends Record<infer R, any>
   ? Record<
       `${P}${R extends string ? Capitalize<R> : string}`,
@@ -48,7 +48,7 @@ type PrefixedThemeVars<
  * @param {Object} vars - an object
  * @returns {Object} a modified object with prefixed keys
  */
-function makeThemeVars<P extends string, V extends Partial<Vars>>(
+function makeThemeVars<P extends string, V extends Partial<ThemeVarGroup>>(
   prefix: P,
   vars: V
 ) {

@@ -25,6 +25,14 @@
 import PropTypes from 'prop-types'
 
 import { ThemeablePropValues } from './ThemeablePropValues'
+import type {
+  BorderRadiiValues,
+  BorderRadii,
+  BorderWidthValues,
+  BorderWidth,
+  SpacingValues,
+  Spacing
+} from './ThemeablePropValues'
 
 const {
   SHADOW_TYPES,
@@ -53,24 +61,38 @@ const ThemeablePropTypes = {
   spacing: shorthandPropType(Object.values(SPACING))
 }
 
-function shorthandPropType(validValues: any) {
+type ValueKeys =
+  | BorderWidthValues[]
+  | BorderRadiiValues[]
+  | SpacingValues[]
+  | string[]
+
+function shorthandPropType<V extends ValueKeys>(
+  validValues: V
+): PropTypes.Validator<
+  V extends BorderWidthValues[]
+    ? BorderWidth
+    : V extends BorderRadiiValues[]
+    ? BorderRadii
+    : V extends SpacingValues[]
+    ? Spacing
+    : string[]
+> {
   return function (
-    props: any,
-    propName: any,
-    componentName: any,
-    location: any
-  ): any {
+    props: Record<string, unknown>,
+    propName: string,
+    componentName: string,
+    location: string
+  ) {
     const propValue = props[propName]
 
     if (typeof propValue === 'undefined') {
-      return
+      return null
     }
 
-    const propValueType = typeof propValue
-
-    if (propValueType !== 'string') {
+    if (typeof propValue !== 'string') {
       return new Error(
-        `Invalid ${location} \`${propName}\` of type \`${propValueType}\` supplied to \`${componentName}\`, expected ` +
+        `Invalid ${location} \`${propName}\` of type \`${typeof propValue}\` supplied to \`${componentName}\`, expected ` +
           `a string.`
       )
     }
@@ -79,7 +101,7 @@ function shorthandPropType(validValues: any) {
     const valuesLength = propValues.length
     if (valuesLength > 0 && valuesLength < 5) {
       for (let i = 0; i < valuesLength; i++) {
-        const valueIndex = validValues.indexOf(propValues[i])
+        const valueIndex = (validValues as string[]).indexOf(propValues[i])
         if (valueIndex === -1) {
           return new Error(
             `Invalid ${location} \`${propName}\` \`${propValues[i]}\` supplied to \`${componentName}\`, expected ` +
@@ -95,6 +117,8 @@ function shorthandPropType(validValues: any) {
           )}\`.`
       )
     }
+
+    return null
   }
 }
 

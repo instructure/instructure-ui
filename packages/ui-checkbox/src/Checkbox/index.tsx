@@ -199,7 +199,6 @@ class Checkbox extends Component<CheckboxProps> {
       readOnly,
       indeterminate,
       labelPlacement,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'themeOverride' does not exist on type 'R... Remove this comment to see the full error message
       // eslint-disable-next-line react/prop-types
       themeOverride
     } = this.props
@@ -236,7 +235,6 @@ class Checkbox extends Component<CheckboxProps> {
           focused={focused}
           checked={this.checked}
           indeterminate={indeterminate}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           themeOverride={themeOverride}
         >
           {label}
