@@ -40,7 +40,15 @@ import type {
 type PillOwnProps = {
   as?: AsElementType
   color?: 'primary' | 'success' | 'danger' | 'info' | 'warning' | 'alert'
-  elementRef?: (...args: any[]) => any
+  /**
+   * Provides a reference to the underlying HTML element
+   */
+  elementRef?: (element: HTMLElement | null) => void
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
   children: React.ReactNode
 }
@@ -64,11 +72,6 @@ const propTypes: PropValidators<PropKeys> = {
     'alert'
   ]),
   elementRef: PropTypes.func,
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing
 }
 
@@ -80,5 +83,9 @@ const allowedProps: AllowedPropKeys = [
   'margin'
 ]
 
-export type { PillProps, PillStyle }
+type PillState = {
+  truncated: boolean
+}
+
+export type { PillProps, PillStyle, PillState }
 export { propTypes, allowedProps }
