@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.10.0](https://github.com/instructure/instructure-ui/compare/v7.9.0...v7.10.0) (2021-08-27)
+
+### Features
+
+- **ui-icons:** add `button-and-icon-maker` icon ([4132357](https://github.com/instructure/instructure-ui/commit/4132357))
+- **ui-icons:** add `important-dates` icon ([5553e6a](https://github.com/instructure/instructure-ui/commit/5553e6a))
+- **ui-icons:** add `subtitles` icon ([f853143](https://github.com/instructure/instructure-ui/commit/f853143))
+
 # [7.9.0](https://github.com/instructure/instructure-ui/compare/v7.8.0...v7.9.0) (2021-07-16)
 
 **Note:** Version bump only for package @instructure/ui-icons

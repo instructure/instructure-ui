@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.10.0](https://github.com/instructure/instructure-ui/compare/v7.9.0...v7.10.0) (2021-08-27)
+
+### Features
+
+- **ui-icons-build:** update `gulp-svgmin` dependency to v4 ([815ddbe](https://github.com/instructure/instructure-ui/commit/815ddbe))
+
 # [7.9.0](https://github.com/instructure/instructure-ui/compare/v7.8.0...v7.9.0) (2021-07-16)
 
 **Note:** Version bump only for package @instructure/ui-icons-build
