@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.10.0](https://github.com/instructure/instructure-ui/compare/v7.9.0...v7.10.0) (2021-08-27)
+
+### Bug Fixes
+
+- **ui-docs-client:** fix: link correct source code on docs page for legacy versions ([8010aed](https://github.com/instructure/instructure-ui/commit/8010aed))
+
+### Features
+
+- **ui-alerts:** add `hasShadow` property to Alerts ([11c5d0f](https://github.com/instructure/instructure-ui/commit/11c5d0f))
+- **ui-icons:** add `button-and-icon-maker` icon ([4132357](https://github.com/instructure/instructure-ui/commit/4132357))
+- **ui-icons:** add `important-dates` icon ([5553e6a](https://github.com/instructure/instructure-ui/commit/5553e6a))
+- **ui-icons:** add `subtitles` icon ([f853143](https://github.com/instructure/instructure-ui/commit/f853143))
+- **ui-icons-build:** update `gulp-svgmin` dependency to v4 ([815ddbe](https://github.com/instructure/instructure-ui/commit/815ddbe))
+
 # [7.9.0](https://github.com/instructure/instructure-ui/compare/v7.8.0...v7.9.0) (2021-07-16)
 
 ### Bug Fixes

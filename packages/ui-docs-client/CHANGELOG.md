@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.10.0](https://github.com/instructure/instructure-ui/compare/v7.9.0...v7.10.0) (2021-08-27)
+
+### Bug Fixes
+
+- **ui-docs-client:** fix: link correct source code on docs page for legacy versions ([8010aed](https://github.com/instructure/instructure-ui/commit/8010aed))
+
 # [7.9.0](https://github.com/instructure/instructure-ui/compare/v7.8.0...v7.9.0) (2021-07-16)
 
 **Note:** Version bump only for package @instructure/ui-docs-client
