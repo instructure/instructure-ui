@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.8.0](https://github.com/instructure/instructure-ui/compare/v8.7.0...v8.8.0) (2021-08-27)
+
+### Bug Fixes
+
+- **ui-billboard:** fix heading margin when `size` is `small` ([36505bb](https://github.com/instructure/instructure-ui/commit/36505bb58e027753a61efc9a1137d2917fa70718))
+
+### Features
+
+- **ui-test-locator,ui-test-queries,ui-test-utils:** better TS types ([c7cb908](https://github.com/instructure/instructure-ui/commit/c7cb90874769129a6d30a8a36249a5c08b4821fc))
+
 # [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
 
 ### Features

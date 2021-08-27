@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.8.0](https://github.com/instructure/instructure-ui/compare/v8.7.0...v8.8.0) (2021-08-27)
+
+### Bug Fixes
+
+- link correct source code on docs page for legacy versions ([82dbb18](https://github.com/instructure/instructure-ui/commit/82dbb184f669557af7a84555300888d4d947e931))
+
 # [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
 
 ### Bug Fixes

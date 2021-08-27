@@ -15,7 +15,7 @@ This package contains shared types for the Instructure UI packages.
 ## Usage
 
 ```ts
-import { BaseTheme, ... } from '@instructure/shared-types'
+import { BaseTheme } from '@instructure/shared-types'
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/shared-types.svg
