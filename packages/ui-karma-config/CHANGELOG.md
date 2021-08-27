@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.8.0](https://github.com/instructure/instructure-ui/compare/v8.7.0...v8.8.0) (2021-08-27)
+
+### Features
+
+- **ui-karma-config:** tests can be run from the IDE ([fafddf9](https://github.com/instructure/instructure-ui/commit/fafddf9dbf0a4a6575968eef73d0ba833daf670c))
+
 # [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
 
 **Note:** Version bump only for package @instructure/ui-karma-config

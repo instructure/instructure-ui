@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.8.0](https://github.com/instructure/instructure-ui/compare/v8.7.0...v8.8.0) (2021-08-27)
+
+### Features
+
+- **ui-alerts:** add `hasShadow` property to Alerts ([7c0bca0](https://github.com/instructure/instructure-ui/commit/7c0bca0b3d6f480d1a3f2f4617e3ccfa5c617625))
+
 # [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
 
 ### Features

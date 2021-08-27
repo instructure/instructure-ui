@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.8.0](https://github.com/instructure/instructure-ui/compare/v8.7.0...v8.8.0) (2021-08-27)
+
+### Bug Fixes
+
+- link correct source code on docs page for legacy versions ([82dbb18](https://github.com/instructure/instructure-ui/commit/82dbb184f669557af7a84555300888d4d947e931))
+- **ui-billboard:** fix heading margin when `size` is `small` ([36505bb](https://github.com/instructure/instructure-ui/commit/36505bb58e027753a61efc9a1137d2917fa70718))
+
+### Features
+
+- **ui-alerts:** add `hasShadow` property to Alerts ([7c0bca0](https://github.com/instructure/instructure-ui/commit/7c0bca0b3d6f480d1a3f2f4617e3ccfa5c617625))
+- **ui-icons:** add `button-and-icon-maker` icon ([6764ecd](https://github.com/instructure/instructure-ui/commit/6764ecd92375fc8e5e8854333b6530de95a0dbe2))
+- **ui-icons:** add `subtitles` icon ([1470957](https://github.com/instructure/instructure-ui/commit/14709575f6b463318a3c490ad8bc0637aca08a67))
+- **ui-karma-config:** tests can be run from the IDE ([fafddf9](https://github.com/instructure/instructure-ui/commit/fafddf9dbf0a4a6575968eef73d0ba833daf670c))
+- add better TypeScript types for multiple packages
+
 # [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
 
 ### Bug Fixes
