@@ -23,14 +23,19 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
+
+import { element } from '@instructure/ui-prop-types'
+import { bidirectional } from '@instructure/ui-i18n'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { PropValidators } from '@instructure/shared-types'
 
 /**
  * The DOM Node of the Portal. It is created as a `span` element.
  */
-export type PortalNode = HTMLSpanElement | null | undefined
+type PortalNode = HTMLSpanElement | null | undefined
 
-export type PortalOwnProps = {
+type PortalOwnProps = {
   /**
    * Whether or not the `<Portal />` is open
    */
@@ -66,10 +71,40 @@ export type PortalOwnProps = {
    * Provides a reference to the underlying html element. Ha the Portal DOMNode as parameter.
    */
   elementRef?: (el?: PortalNode) => void
-}
+} & BidirectionalProps
 
-export type PortalProps = PortalOwnProps & BidirectionalProps
+type PropKeys = keyof PortalOwnProps
 
-export type PortalState = {
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type PortalProps = PortalOwnProps
+
+type PortalState = {
   mountNode: Element
 }
+
+const propTypes: PropValidators<PropKeys> = {
+  open: PropTypes.bool,
+  onOpen: PropTypes.func,
+  onClose: PropTypes.func,
+  mountNode: PropTypes.oneOfType([element, PropTypes.func]),
+  insertAt: PropTypes.oneOf(['bottom', 'top']),
+  children: PropTypes.node,
+  elementRef: PropTypes.func,
+  // eslint-disable-next-line react/require-default-props
+  dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+}
+
+const allowedProps: AllowedPropKeys = [
+  'open',
+  'onOpen',
+  'onClose',
+  'mountNode',
+  'insertAt',
+  'children',
+  'elementRef',
+  'dir'
+]
+
+export type { PortalProps, PortalState, PortalNode }
+export { propTypes, allowedProps }

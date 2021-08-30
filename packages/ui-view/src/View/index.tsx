@@ -35,11 +35,12 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 import { jsx, withStyle } from '@instructure/emotion'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { allowedProps, ViewProps, propTypes } from './types'
+import { allowedProps, propTypes } from './types'
+import type { ViewProps } from './types'
 
 /**
 ---
