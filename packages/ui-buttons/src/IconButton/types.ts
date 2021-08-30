@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { AsElementType } from '@instructure/shared-types'
-import { Spacing } from '@instructure/emotion'
+import type { Spacing } from '@instructure/emotion'
 
 export type IconButtonProps = {
   renderIcon?: React.ReactNode | ((...args: any[]) => any)

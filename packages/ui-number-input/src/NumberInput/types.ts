@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { FormMessage } from '@instructure/ui-form-field'
-import { InteractionType } from '@instructure/ui-react-utils'
+import type { FormMessage } from '@instructure/ui-form-field'
+import type { InteractionType } from '@instructure/ui-react-utils'
 
 export type NumberInputProps = {
   makeStyles?: (...args: any[]) => any

@@ -23,7 +23,7 @@
  */
 
 import { alpha, darken } from '@instructure/ui-color-utils'
-import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
 import { BaseButtonTheme } from '@instructure/shared-types'
 
 const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'

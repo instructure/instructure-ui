@@ -31,9 +31,10 @@ import {
   addEventListener,
   ownerDocument,
   containsActiveElement,
-  requestAnimationFrame,
-  RequestAnimationFrameType
+  requestAnimationFrame
 } from '@instructure/ui-dom-utils'
+
+import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 
 import { logError as error } from '@instructure/console'
 

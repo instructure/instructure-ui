@@ -25,7 +25,7 @@
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
 import { makeThemeVars } from '@instructure/emotion'
-import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
 import { ViewTheme } from '@instructure/shared-types'
 
 /**

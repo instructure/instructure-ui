@@ -25,11 +25,11 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "sinon": "^7.4.2"
+    "sinon": "^11.1.2"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.8.0",
-    "@types/sinon": "^7.4.2",
+    "@types/sinon": "^10.0.2",
     "prop-types": "^15.6.2"
   },
   "peerDependencies": {

@@ -34,7 +34,6 @@
     "@lerna/project": "^4",
     "commitizen": "^4.0.3",
     "dotenv": "^8.1.0",
-    "eslint": "^7",
     "esm": "^3.2.25",
     "find-up": "^5",
     "gerritbot": "^1.0.3",
@@ -67,6 +66,7 @@
   },
   "peerDependencies": {
     "react": ">=16.8 <=17",
+    "eslint": "^7",
     "webpack": "^4"
   },
   "publishConfig": {

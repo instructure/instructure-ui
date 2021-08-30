@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { BidirectionalProps } from '@instructure/ui-i18n'
+import type { BidirectionalProps } from '@instructure/ui-i18n'
 
 /**
  * The DOM Node of the Portal. It is created as a `span` element.

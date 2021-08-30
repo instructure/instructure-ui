@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field'
 
 export type CheckboxProps = {
   makeStyles?: (...args: any[]) => any

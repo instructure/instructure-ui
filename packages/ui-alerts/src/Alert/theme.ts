@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { AlertTheme } from '@instructure/shared-types'
-import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import type { AlertTheme } from '@instructure/shared-types'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information

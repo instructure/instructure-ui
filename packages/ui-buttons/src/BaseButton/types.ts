@@ -23,8 +23,8 @@
  */
 
 import { AsElementType } from '@instructure/shared-types'
-import { InteractionType } from '@instructure/ui-react-utils'
-import { Spacing } from '@instructure/emotion'
+import type { InteractionType } from '@instructure/ui-react-utils'
+import type { Spacing } from '@instructure/emotion'
 
 export type BaseButtonProps = {
   makeStyles?: (...args: any[]) => any

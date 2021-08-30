@@ -23,7 +23,7 @@
  */
 
 import { alpha } from '@instructure/ui-color-utils'
-import { Theme } from '@instructure/ui-themes'
+import type { Theme } from '@instructure/ui-themes'
 import { AvatarTheme } from '@instructure/shared-types'
 
 /**

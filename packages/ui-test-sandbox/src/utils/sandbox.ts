@@ -22,24 +22,18 @@
  * SOFTWARE.
  */
 
-import sinon, { SinonStub, SinonStubbedInstance } from 'sinon'
+import sinon from 'sinon'
 import { ReactComponentWrapper } from './reactComponentWrapper'
 import initConsole from './initConsole'
 import React from 'react'
 
 // Add "sandbox" to the global interface, so TS does not complain about
-// global.sandbox
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace NodeJS {
-    interface Global {
-      sandbox: Sandbox
-      // this should not be needed, but the solutions in
-      // https://github.com/squidfunk/karma-viewport/issues/35 dont seem to work
-      viewport: any
-    }
-  }
-}
+// global.sandbox this should not be needed, but the solutions in
+// https://github.com/squidfunk/karma-viewport/issues/35 dont seem to work
+declare const global: {
+  viewport: any
+  sandbox: Sandbox
+} & Window
 
 /* istanbul ignore next */
 class Sandbox {
@@ -76,7 +70,7 @@ class Sandbox {
       global.setTimeout = (...args) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        const timeoutId = originalSetTimeout(...args)
+        const timeoutId: number = originalSetTimeout(...args)
 
         this._timeoutIds.push(timeoutId)
         return timeoutId
@@ -189,7 +183,7 @@ class Sandbox {
     obj?: T,
     method?: K,
     fn?: (...args: unknown[]) => unknown
-  ): SinonStub | SinonStubbedInstance<T> {
+  ): sinon.SinonStub | sinon.SinonStubbedInstance<T> {
     if (!this._sandbox) {
       throw new Error(
         '[ui-test-sandbox] a stub cannot be created outside an `it`, `before`, or `beforeEach` block.'
@@ -278,9 +272,10 @@ const stub = <T, K>(
   fn?: (...args: unknown[]) => unknown
 ): T extends Record<string, any>
   ? K extends string
-    ? SinonStub
-    : SinonStubbedInstance<T>
-  : SinonStub => sandbox.stub(obj, (method as unknown) as keyof T, fn) as any
+    ? sinon.SinonStub
+    : sinon.SinonStubbedInstance<T>
+  : sinon.SinonStub =>
+  sandbox.stub(obj, (method as unknown) as keyof T, fn) as any
 
 const spy = <T, K extends keyof T>(obj?: T, method?: K) =>
   sandbox.spy(obj, method)

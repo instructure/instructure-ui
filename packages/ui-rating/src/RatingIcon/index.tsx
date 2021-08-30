@@ -27,10 +27,8 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { IconStarSolid, IconStarLightSolid } from '@instructure/ui-icons'
-import {
-  requestAnimationFrame,
-  RequestAnimationFrameType
-} from '@instructure/ui-dom-utils'
+import { requestAnimationFrame } from '@instructure/ui-dom-utils'
+import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { Transition } from '@instructure/ui-motion'
 
 import { withStyle, jsx } from '@instructure/emotion'

@@ -35,7 +35,6 @@ module.exports = {
   sideEffects: true,
   minimizer: [
     new TerserWebpackPlugin({
-      cache: true,
       parallel: true,
       // sourceMap: true, // this breaks storybook in production env
       terserOptions: {

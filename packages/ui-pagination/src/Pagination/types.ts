@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { Spacing } from '@instructure/emotion'
+import type { Spacing } from '@instructure/emotion'
 import { AsElementType } from '@instructure/shared-types'
 
 export type PaginationProps = {

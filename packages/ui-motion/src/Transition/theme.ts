@@ -23,7 +23,7 @@
  */
 
 import { TransitionTheme } from '@instructure/shared-types'
-import { Theme } from '@instructure/ui-themes'
+import type { Theme } from '@instructure/ui-themes'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information

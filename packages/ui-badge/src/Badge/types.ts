@@ -23,8 +23,8 @@
  */
 
 import { AsElementType } from '@instructure/shared-types'
-import { Spacing } from '@instructure/emotion'
-import { PlacementPropValues } from '@instructure/ui-position'
+import type { Spacing } from '@instructure/emotion'
+import type { PlacementPropValues } from '@instructure/ui-position'
 
 export type BadgeProps = {
   makeStyles?: (...args: any[]) => any

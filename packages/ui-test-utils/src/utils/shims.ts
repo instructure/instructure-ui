@@ -38,6 +38,6 @@ global.window.Date =
 global.MutationObserver = window.MutationObserver || MutationObserverShim
 global.setImmediate =
   window.setImmediate ||
-  function setImmediate(fn) {
+  function setImmediate(fn: any) {
     return setTimeout(fn, 0)
   }

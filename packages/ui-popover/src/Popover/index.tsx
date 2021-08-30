@@ -40,9 +40,10 @@ import {
   findDOMNode,
   containsActiveElement,
   requestAnimationFrame,
-  RequestAnimationFrameType,
   handleMouseOverOut
 } from '@instructure/ui-dom-utils'
+import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
+
 import { safeCloneElement, callRenderProp } from '@instructure/ui-react-utils'
 import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'

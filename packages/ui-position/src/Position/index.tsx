@@ -34,12 +34,13 @@ import {
 } from '@instructure/ui-react-utils'
 import {
   addPositionChangeListener,
-  PositionChangeListenerType,
   findDOMNode
 } from '@instructure/ui-dom-utils'
+import type { PositionChangeListenerType } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
 import { shallowEqual, deepEqual } from '@instructure/ui-utils'
-import { debounce, Debounced } from '@instructure/debounce'
+import { debounce } from '@instructure/debounce'
+import type { Debounced } from '@instructure/debounce'
 import { testable } from '@instructure/ui-testable'
 
 import { Portal } from '@instructure/ui-portal'

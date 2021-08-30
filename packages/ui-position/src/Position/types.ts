@@ -31,7 +31,7 @@ import {
   ElementPosition
 } from '../PositionPropTypes'
 
-import { WithStyleProps } from '@instructure/emotion'
+import type { WithStyleProps } from '@instructure/emotion'
 
 type PositionProps = {
   /**

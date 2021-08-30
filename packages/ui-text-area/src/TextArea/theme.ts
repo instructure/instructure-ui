@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
 import { TextAreaTheme } from '@instructure/shared-types'
 
 /**
