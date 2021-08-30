@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Theme } from '@instructure/ui-themes'
+import type { Theme } from '@instructure/ui-themes'
 import { FormFieldMessagesTheme } from '@instructure/shared-types'
 
 /**

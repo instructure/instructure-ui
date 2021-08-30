@@ -32,9 +32,9 @@ import {
   addEventListener,
   isActiveElement,
   requestAnimationFrame,
-  RequestAnimationFrameType,
   getBoundingClientRect
 } from '@instructure/ui-dom-utils'
+import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import { withStyle, jsx } from '@instructure/emotion'
 import { uid } from '@instructure/uid'

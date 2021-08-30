@@ -29,10 +29,9 @@ import {
   canUseDOM,
   findDOMNode,
   ownerDocument,
-  ownerWindow,
-  RectType
+  ownerWindow
 } from '@instructure/ui-dom-utils'
-
+import type { RectType } from '@instructure/ui-dom-utils'
 import { mirrorPlacement } from './mirrorPlacement'
 
 import {

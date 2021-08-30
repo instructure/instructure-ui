@@ -23,7 +23,7 @@
  */
 
 import { alpha, darken } from '@instructure/ui-color-utils'
-import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
 import { RangeInputTheme } from '@instructure/shared-types'
 
 /**

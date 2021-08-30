@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { FormMessage } from '@instructure/ui-form-field'
-import {
+import type { FormMessage } from '@instructure/ui-form-field'
+import type {
   PlacementPropValues,
   PositionConstraint,
   PositionMountNode

@@ -23,7 +23,7 @@
  */
 
 import { AsElementType } from '@instructure/shared-types'
-import { Spacing } from '@instructure/emotion'
+import type { Spacing } from '@instructure/emotion'
 import React from 'react'
 
 export type CondensedButtonProps = {

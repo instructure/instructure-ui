@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { FormMessage } from '@instructure/ui-form-field'
-import { Spacing } from '@instructure/emotion'
+import type { FormMessage } from '@instructure/ui-form-field'
+import type { Spacing } from '@instructure/emotion'
 
 export type FileDropProps = {
   id?: string

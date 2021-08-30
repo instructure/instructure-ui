@@ -25,7 +25,7 @@
 import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
-import { RectType } from '@instructure/ui-dom-utils'
+import type { RectType } from '@instructure/ui-dom-utils'
 import { UIElement } from '@instructure/shared-types'
 
 const placementPropValues = [

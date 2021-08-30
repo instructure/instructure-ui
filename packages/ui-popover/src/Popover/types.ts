@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-import { Shadow, Stacking } from '@instructure/emotion'
+import type { Shadow, Stacking } from '@instructure/emotion'
 import React from 'react'
-import {
+import type {
   PlacementPropValues,
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
-import { BidirectionalProps } from '@instructure/ui-i18n'
+import type { BidirectionalProps } from '@instructure/ui-i18n'
 
 export type PopoverOwnProps = {
   isShowingContent?: boolean

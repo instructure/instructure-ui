@@ -31,7 +31,8 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
 
-import { Portal, PortalNode } from '@instructure/ui-portal'
+import { Portal } from '@instructure/ui-portal'
+import type { PortalNode } from '@instructure/ui-portal'
 import { Transition } from '@instructure/ui-motion'
 import { OverlayProps } from './types'
 

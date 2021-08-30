@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field'
 
 export type CheckboxGroupProps = {
   name: string

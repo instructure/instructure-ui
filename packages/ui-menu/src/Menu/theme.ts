@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Theme } from '@instructure/ui-themes'
+import type { Theme } from '@instructure/ui-themes'
 import { MenuTheme } from '@instructure/shared-types'
 
 /**

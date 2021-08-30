@@ -23,7 +23,7 @@
  */
 
 import { AsElementType } from '@instructure/shared-types'
-import { Spacing } from '@instructure/emotion'
+import type { Spacing } from '@instructure/emotion'
 
 export type FlexItemProps = {
   makeStyles?: (...args: any[]) => any

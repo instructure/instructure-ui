@@ -23,9 +23,9 @@
  */
 
 import { AsElementType } from '@instructure/shared-types'
-import { PortalNode } from '@instructure/ui-portal'
-import { PositionMountNode } from '@instructure/ui-position'
-import { TransitionType } from '@instructure/ui-motion'
+import type { PortalNode } from '@instructure/ui-portal'
+import type { PositionMountNode } from '@instructure/ui-position'
+import type { TransitionType } from '@instructure/ui-motion'
 
 export type ModalProps = {
   label: string

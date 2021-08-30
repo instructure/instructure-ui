@@ -23,7 +23,7 @@
  */
 
 import { darken } from '@instructure/ui-color-utils'
-import { Theme } from '@instructure/ui-themes'
+import type { Theme } from '@instructure/ui-themes'
 import { CodeEditorTheme } from '@instructure/shared-types'
 
 /**

@@ -22,23 +22,17 @@
  * SOFTWARE.
  */
 
-import {
-  theme as canvasHighContrast,
-  CanvasHighContrastTheme
-} from '@instructure/canvas-high-contrast-theme'
-
-import {
-  theme as canvas,
+import type { CanvasHighContrastTheme } from '@instructure/canvas-high-contrast-theme'
+import type {
   CanvasTheme,
   CanvasBrandVariables
 } from '@instructure/canvas-theme'
+import type { InstructureTheme } from '@instructure/instructure-theme'
+import type { BaseTheme } from '@instructure/shared-types'
 
-import {
-  theme as instructure,
-  InstructureTheme
-} from '@instructure/instructure-theme'
-
-import { BaseTheme } from '@instructure/shared-types'
+import { theme as canvasHighContrast } from '@instructure/canvas-high-contrast-theme'
+import { theme as canvas } from '@instructure/canvas-theme'
+import { theme as instructure } from '@instructure/instructure-theme'
 
 type ThemeMap = {
   canvas: CanvasTheme

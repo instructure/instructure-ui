@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Spacing } from '@instructure/emotion'
+import type { Spacing } from '@instructure/emotion'
 
 export type ListProps = {
   makeStyles?: (...args: any[]) => any

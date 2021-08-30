@@ -23,8 +23,8 @@
  */
 
 import React from 'react'
-import { InteractionType } from '@instructure/ui-react-utils'
-import { FormMessage } from '@instructure/ui-form-field'
+import type { InteractionType } from '@instructure/ui-react-utils'
+import type { FormMessage } from '@instructure/ui-form-field'
 
 export type TextInputProps = {
   renderLabel?: React.ReactNode | ((...args: any[]) => any)

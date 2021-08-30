@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { AsElementType } from '@instructure/shared-types'
-import {
+import type {
   PlacementPropValues,
   PositionConstraint,
   PositionMountNode

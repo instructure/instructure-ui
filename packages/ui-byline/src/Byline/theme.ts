@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
-import { BylineTheme } from '@instructure/shared-types'
+import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import type { BylineTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information

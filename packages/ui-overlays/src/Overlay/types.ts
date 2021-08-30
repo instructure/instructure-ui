@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import { PortalNode } from '@instructure/ui-portal'
-import { PositionMountNode } from '@instructure/ui-position'
+import type { PortalNode } from '@instructure/ui-portal'
+import type { PositionMountNode } from '@instructure/ui-position'
 import React from 'react'
-import { TransitionType } from '@instructure/ui-motion'
+import type { TransitionType } from '@instructure/ui-motion'
 
 export type OverlayProps = {
   open?: boolean

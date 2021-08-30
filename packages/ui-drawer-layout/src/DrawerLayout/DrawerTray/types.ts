@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { PositionMountNode } from '@instructure/ui-position'
-import { BidirectionalProps } from '@instructure/ui-i18n'
+import type { PositionMountNode } from '@instructure/ui-position'
+import type { BidirectionalProps } from '@instructure/ui-i18n'
 
 export type DrawerTrayPlacement = 'start' | 'end'
 

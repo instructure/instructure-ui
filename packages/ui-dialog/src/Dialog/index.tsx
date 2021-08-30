@@ -26,13 +26,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import {
-  findDOMNode,
-  requestAnimationFrame,
-  RequestAnimationFrameType
-} from '@instructure/ui-dom-utils'
+import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
+import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import { FocusRegionManager } from '@instructure/ui-a11y-utils'
 
 import { DialogProps } from './types'

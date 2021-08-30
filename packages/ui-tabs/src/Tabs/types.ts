@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { Spacing } from '@instructure/emotion'
-import { BidirectionalProps } from '@instructure/ui-i18n'
+import type { Spacing } from '@instructure/emotion'
+import type { BidirectionalProps } from '@instructure/ui-i18n'
 
 export type TabsOwnProps = {
   makeStyles?: (...args: any[]) => any

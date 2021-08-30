@@ -23,7 +23,7 @@
  */
 
 import { AsElementType } from '@instructure/shared-types'
-import { Spacing } from '@instructure/emotion'
+import type { Spacing } from '@instructure/emotion'
 
 type HeadingLevel<U extends keyof JSX.IntrinsicElements> = U
 

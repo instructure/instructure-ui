@@ -76,6 +76,7 @@ class Variant extends Component {
       )
     } else {
       // React components
+      // eslint-disable-next-line import/namespace
       icon = React.createElement(reactIcons[glyph.name], {
         title: `${name} (${variant})`
       })

@@ -24,8 +24,8 @@
 import PropTypes from 'prop-types'
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
-import {
-  ThemeablePropTypes,
+import { ThemeablePropTypes } from '@instructure/emotion'
+import type {
   WithStyleProps,
   Spacing,
   BorderWidth,
@@ -33,7 +33,7 @@ import {
   Shadow,
   Stacking
 } from '@instructure/emotion'
-import { AsElementType } from '@instructure/shared-types'
+import type { AsElementType } from '@instructure/shared-types'
 
 export type ViewOwnProps = {
   /**

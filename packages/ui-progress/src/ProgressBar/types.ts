@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Spacing } from '@instructure/emotion'
+import type { Spacing } from '@instructure/emotion'
 import { AsElementType } from '@instructure/shared-types'
 
 export type ProgressBarMeterColor =

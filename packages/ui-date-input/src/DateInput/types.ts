@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { FormMessage } from '@instructure/ui-form-field'
-import { PlacementPropValues } from '@instructure/ui-position'
+import type { FormMessage } from '@instructure/ui-form-field'
+import type { PlacementPropValues } from '@instructure/ui-position'
 
 export type DateInputProps = {
   makeStyles?: (...args: any[]) => any

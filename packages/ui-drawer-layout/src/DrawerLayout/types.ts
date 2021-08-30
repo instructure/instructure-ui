@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { BidirectionalProps } from '@instructure/ui-i18n'
+import type { BidirectionalProps } from '@instructure/ui-i18n'
 
 export type DrawerLayoutOwnProps = {
   minWidth?: string

@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { mirrorPlacement, PlacementPropValues } from '@instructure/ui-position'
+import { mirrorPlacement } from '@instructure/ui-position'
+import type { PlacementPropValues } from '@instructure/ui-position'
 import { ContextViewTheme } from '@instructure/shared-types'
 import { ContextViewProps } from './types'
 
