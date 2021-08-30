@@ -21,21 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { TextProps } from '../props'
 
 export default {
   sectionProp: 'weight',
   maxExamplesPerPage: 50,
   maxExamples: 1000,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getComponentProps: (props) => {
+  getComponentProps: (props: TextProps) => {
     return {
-      children: ['x-small', 'small', 'medium', 'large'].includes(props.size)
-        ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ullamco'
-        : 'Lorem ipsum dolor sit amet, consectetur'
+      children:
+        props.size &&
+        ['x-small', 'small', 'medium', 'large'].includes(props.size)
+          ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ullamco'
+          : 'Lorem ipsum dolor sit amet, consectetur'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getExampleProps: (props) => {
+  getExampleProps: (props: TextProps) => {
     return {
       background: props?.color?.includes('inverse')
         ? 'primary-inverse'
@@ -43,8 +44,7 @@ export default {
       maxWidth: '25rem'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: TextProps) => {
     return (
       // Only generate a 1 variation for non-'primary' color
       (props.color !== 'primary' &&
