@@ -22,18 +22,42 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
 import { ReactNode } from 'react'
+import PropTypes from 'prop-types'
 
-export type ScreenReaderContentProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type {
+  AsElementType,
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type ScreenReaderContentOwnProps = {
   /**
    * the element type to render as
    */
-  as: AsElementType
+  as?: AsElementType
+
   /**
    * content meant for screen readers only
    */
-  children: ReactNode
+  children?: ReactNode
 }
+
+type PropKeys = keyof ScreenReaderContentOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ScreenReaderContentProps = ScreenReaderContentOwnProps &
+  OtherHTMLAttributes<ScreenReaderContentOwnProps> &
+  WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  as: PropTypes.elementType,
+  children: PropTypes.node
+}
+
+const allowedProps: AllowedPropKeys = ['as', 'children']
+
+export type { ScreenReaderContentProps }
+export { propTypes, allowedProps }

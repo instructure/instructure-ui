@@ -28,4 +28,11 @@ export * from './ComponentThemeMap'
 export * from './ComponentThemeVariables'
 export * from './CommonProps'
 export * from './CommonTypes'
-export * from './UtilityTypes'
+export type {
+  DeepPartial,
+  PartialRecord,
+  Nullable,
+  CSSShorthandValue,
+  OtherHTMLAttributes,
+  PropValidators
+} from './UtilityTypes'

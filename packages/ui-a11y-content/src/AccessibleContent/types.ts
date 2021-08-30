@@ -22,14 +22,34 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
+import PropTypes from 'prop-types'
 
-export type AccessibleContentProps = {
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+
+type AccessibleContentOwnProps = {
   alt?: string
 
   /**
    * the element type to render the screen reader content as
    */
   as: AsElementType
+
   children?: React.ReactNode
 }
+
+type PropKeys = keyof AccessibleContentOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type AccessibleContentProps = AccessibleContentOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  alt: PropTypes.string,
+  as: PropTypes.elementType,
+  children: PropTypes.node
+}
+
+const allowedProps: AllowedPropKeys = ['alt', 'as', 'children']
+
+export type { AccessibleContentProps }
+export { propTypes, allowedProps }

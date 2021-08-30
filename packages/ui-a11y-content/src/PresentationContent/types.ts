@@ -22,13 +22,32 @@
  * SOFTWARE.
  */
 
-import type { ReactNode } from 'react'
-import type { AsElementType } from '@instructure/shared-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type PresentationContentProps = {
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+
+type PresentationContentOwnProps = {
   /**
    * the element type to render as
    */
   as: AsElementType
-  children?: ReactNode
+
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof PresentationContentOwnProps
+
+type AllowedPropKeys = Readonly<PropKeys[]>
+
+type PresentationContentProps = PresentationContentOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  as: PropTypes.elementType,
+  children: PropTypes.node
+}
+
+const allowedProps: AllowedPropKeys = ['as', 'children']
+
+export type { PresentationContentProps }
+export { propTypes, allowedProps }

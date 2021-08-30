@@ -34,7 +34,7 @@ import type {
   Shadow,
   Stacking
 } from '@instructure/emotion'
-import type { AsElementType } from '@instructure/shared-types'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
 
 type ViewOwnProps = PropsWithChildren<{
   /**
@@ -171,13 +171,13 @@ type ViewOwnProps = PropsWithChildren<{
   cursor?: any
 }>
 
-type ViewPropKeys = keyof ViewOwnProps
+type PropKeys = keyof ViewOwnProps
 
 type ViewProps = ViewOwnProps & WithStyleProps
 
-type AllowedPropKeys = Readonly<Array<ViewPropKeys>>
+type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-const propTypes: Record<ViewPropKeys, unknown> = {
+const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
   elementRef: PropTypes.func,
   display: PropTypes.oneOf([

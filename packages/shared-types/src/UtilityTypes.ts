@@ -22,25 +22,27 @@
  * SOFTWARE.
  */
 
+import PropTypes from 'prop-types'
+
 /** Recursively makes every property in T optional */
-export type DeepPartial<T> = {
+type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>
 }
 
 /** Uses a union as optional keys for a Record */
-export type PartialRecord<K extends keyof any, T> = {
+type PartialRecord<K extends keyof any, T> = {
   [P in K]?: T
 }
 
 /**
  * Make all properties in T nullable
  */
-export type Nullable<T> = {
+type Nullable<T> = {
   [P in keyof T]: T[P] | null
 }
 
 /** Makes all possible combination for a CSS prop to accept 1 to 4 values */
-export type CSSShorthandValue<Value extends string> =
+type CSSShorthandValue<Value extends string> =
   | `${Value}`
   | `${Value} ${Value}`
   | `${Value} ${Value} ${Value}`
@@ -53,7 +55,21 @@ export type CSSShorthandValue<Value extends string> =
  * @example
  * class Button extends React.Component<ButtonProps & OtherHTMLAttributes<ButtonProps, React.ButtonHTMLAttributes<ButtonProps>>> {}
  */
-export type OtherHTMLAttributes<
+type OtherHTMLAttributes<
   Props,
   Attributes extends React.HTMLAttributes<Props> = React.AllHTMLAttributes<Props>
 > = Omit<Attributes, keyof Props>
+
+type PropValidators<PropKeys extends string> = Record<
+  PropKeys,
+  PropTypes.Validator<unknown>
+>
+
+export type {
+  DeepPartial,
+  PartialRecord,
+  Nullable,
+  CSSShorthandValue,
+  OtherHTMLAttributes,
+  PropValidators
+}

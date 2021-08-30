@@ -23,14 +23,15 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
-import { AccessibleContentProps } from './types'
+
+import { propTypes, allowedProps } from './types'
+import type { AccessibleContentProps } from './types'
 
 /**
 ---
@@ -42,11 +43,9 @@ category: components/utilities
 class AccessibleContent extends Component<
   AccessibleContentProps & OtherHTMLAttributes<AccessibleContentProps>
 > {
-  static propTypes = {
-    alt: PropTypes.string,
-    children: PropTypes.node,
-    as: PropTypes.elementType
-  } as const
+  static propTypes = propTypes
+
+  static allowedProps = allowedProps
 
   static defaultProps = {
     alt: undefined,

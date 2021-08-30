@@ -23,15 +23,14 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import { element } from '@instructure/ui-prop-types'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional } from '@instructure/ui-i18n'
+import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
-import { PortalNode, PortalProps, PortalState } from './types'
+import { propTypes, allowedProps } from './types'
+import type { PortalNode, PortalProps, PortalState } from './types'
 
 /**
 ---
@@ -42,20 +41,15 @@ category: components/utilities
 **/
 @bidirectional()
 class Portal extends Component<
+  // For some (yet) unknown reason, adding OtherHTMLAttributes in the `types.ts`
+  // breaks the docs generation for Portal
+  // TODO: try to figure out why (and fix, if possible)
   PortalProps & OtherHTMLAttributes<PortalProps>,
   PortalState
 > {
-  static propTypes = {
-    open: PropTypes.bool,
-    onOpen: PropTypes.func,
-    onClose: PropTypes.func,
-    mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-    insertAt: PropTypes.oneOf(['bottom', 'top']),
-    children: PropTypes.node,
-    elementRef: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
-  }
+  static propTypes = propTypes
+
+  static allowedProps = allowedProps
 
   static defaultProps = {
     open: false,
