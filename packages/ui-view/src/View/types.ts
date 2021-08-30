@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import type { PropsWithChildren } from 'react'
 import PropTypes from 'prop-types'
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
@@ -35,7 +36,7 @@ import type {
 } from '@instructure/emotion'
 import type { AsElementType } from '@instructure/shared-types'
 
-export type ViewOwnProps = {
+type ViewOwnProps = PropsWithChildren<{
   /**
    * The element to render as the component root, `span` by default
    */
@@ -168,15 +169,15 @@ export type ViewOwnProps = {
    * Specify a mouse cursor to use when hovering over the `<View />`
    */
   cursor?: any
-}
+}>
 
-export type ViewProps = ViewOwnProps & WithStyleProps
+type ViewPropKeys = keyof ViewOwnProps
 
-export type AllowedPropKeys = Readonly<
-  Array<keyof (ViewOwnProps & WithStyleProps)>
->
+type ViewProps = ViewOwnProps & WithStyleProps
 
-export const propTypes = {
+type AllowedPropKeys = Readonly<Array<ViewPropKeys>>
+
+const propTypes: Record<ViewPropKeys, unknown> = {
   as: PropTypes.elementType,
   elementRef: PropTypes.func,
   display: PropTypes.oneOf([
@@ -243,20 +244,19 @@ export const propTypes = {
   focusColor: PropTypes.oneOf(['info', 'inverse', 'success', 'danger']),
   shouldAnimateFocus: PropTypes.bool,
   withVisualDebug: PropTypes.bool,
-  makeStyles: PropTypes.func,
-  styles: PropTypes.object,
   dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 
-//This variable will be attached as static property on the `View` component
-//so we don't rely on the `PropTypes` validators for our internal logic.
-//This means on prod builds the consuming applications can safely delete propTypes.
-export const allowedProps: AllowedPropKeys = [
+// This variable will be attached as static property on the `View` component
+// so we don't rely on the `PropTypes` validators for our internal logic.
+// This means on prod builds the consuming applications can safely delete propTypes.
+const allowedProps: AllowedPropKeys = [
   'as',
   'background',
   'borderColor',
   'borderRadius',
   'borderWidth',
+  'children',
   'cursor',
   'dir',
   'display',
@@ -268,7 +268,6 @@ export const allowedProps: AllowedPropKeys = [
   'insetBlockStart',
   'insetInlineEnd',
   'insetInlineStart',
-  'makeStyles',
   'margin',
   'maxHeight',
   'maxWidth',
@@ -281,9 +280,11 @@ export const allowedProps: AllowedPropKeys = [
   'shadow',
   'shouldAnimateFocus',
   'stacking',
-  'styles',
   'textAlign',
   'width',
   'withFocusOutline',
   'withVisualDebug'
 ]
+
+export { propTypes, allowedProps }
+export type { ViewProps }

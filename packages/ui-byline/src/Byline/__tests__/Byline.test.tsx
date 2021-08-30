@@ -97,13 +97,7 @@ describe('<Byline />', async () => {
       margin: 'small'
     }
 
-    const ignoreProps = [
-      'theme',
-      'children',
-      'styles',
-      'makeStyles',
-      'elementRef'
-    ]
+    const ignoreProps = ['elementRef', 'children']
 
     View.allowedProps
       .filter((prop) => !ignoreProps.includes(prop))

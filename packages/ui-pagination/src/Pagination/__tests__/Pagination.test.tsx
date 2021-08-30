@@ -412,10 +412,7 @@ describe('<Pagination />', async () => {
       }
 
       View.allowedProps
-        .filter(
-          (prop) =>
-            prop !== 'elementRef' && prop !== 'makeStyles' && prop !== 'styles'
-        )
+        .filter((prop) => prop !== 'elementRef' && prop !== 'children')
         .forEach((prop) => {
           if (Object.keys(allowedProps).indexOf(prop) < 0) {
             it(`should NOT allow the '${prop}' prop`, async () => {
