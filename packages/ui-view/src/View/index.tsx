@@ -89,12 +89,21 @@ class View extends Component<ViewProps & OtherHTMLAttributes<ViewProps>> {
     props: Record<string, any>,
     Component: ComponentType<any>
   ) => {
+    // We don't want the theming and styling props to pass
+    // (these are added and handled by the `@withStyle` decorator)
+    const propsToOmit = [
+      ...View.allowedProps,
+      'styles',
+      'makeStyles',
+      'themeOverride'
+    ]
+
     if (process.env.NODE_ENV !== 'production') {
-      Object.keys(pickProps(props, View.allowedProps)).forEach((prop) => {
+      Object.keys(pickProps(props, propsToOmit)).forEach((prop) => {
         error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
       })
     }
-    return omitProps(props, View.allowedProps)
+    return omitProps(props, propsToOmit)
   }
 
   private spanMarginVerified: boolean
