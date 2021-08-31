@@ -22,13 +22,15 @@
  * SOFTWARE.
  */
 
-import type { Spacing } from '@instructure/emotion'
 import { SyntheticEvent } from 'react'
-import { AsElementType } from '@instructure/shared-types'
+import PropTypes from 'prop-types'
 
-export type AvatarProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+
+type AvatarOwnProps = {
   /**
    * The name to display. It will be automatically converted to initials.
    */
@@ -83,3 +85,57 @@ export type AvatarProps = {
 export type AvatarState = {
   loaded: boolean
 }
+
+type PropKeys = keyof AvatarOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type AvatarProps = AvatarOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  name: PropTypes.string.isRequired,
+  src: PropTypes.string,
+  alt: PropTypes.string,
+  size: PropTypes.oneOf([
+    'auto',
+    'xx-small',
+    'x-small',
+    'small',
+    'medium',
+    'large',
+    'x-large',
+    'xx-large'
+  ]),
+  color: PropTypes.oneOf([
+    'default',
+    'shamrock',
+    'barney',
+    'crimson',
+    'fire',
+    'licorice',
+    'ash'
+  ]),
+  shape: PropTypes.oneOf(['circle', 'rectangle']),
+  margin: ThemeablePropTypes.spacing,
+  display: PropTypes.oneOf(['inline-block', 'block']),
+  onImageLoaded: PropTypes.func,
+  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  elementRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'name',
+  'src',
+  'alt',
+  'size',
+  'color',
+  'shape',
+  'margin',
+  'display',
+  'onImageLoaded',
+  'as',
+  'elementRef'
+]
+
+export type { AvatarProps }
+export { propTypes, allowedProps }

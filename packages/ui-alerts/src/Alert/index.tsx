@@ -24,8 +24,6 @@
 /** @jsx jsx */
 import { Component } from 'react'
 import ReactDOM from 'react-dom'
-
-import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import { callRenderProp } from '@instructure/ui-react-utils'
@@ -42,16 +40,13 @@ import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 import { canvas } from '@instructure/ui-themes'
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  EmotionThemeProvider
-} from '@instructure/emotion'
+import { withStyle, jsx, EmotionThemeProvider } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { AlertProps } from './types'
+
+import { propTypes, allowedProps } from './types'
+import type { AlertProps } from './types'
 
 /**
 ---
@@ -62,70 +57,9 @@ category: components
 class Alert extends Component<AlertProps> {
   static readonly componentId = 'Alert'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * content to be rendered within Alert
-     */
-    children: PropTypes.node,
-    /**
-     * Determines color and icon
-     */
-    variant: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Function that returns the DIV where screenreader alerts will be placed.
-     */
-    liveRegion: PropTypes.func,
-    /**
-     * Choose the politeness level of screenreader alerts.
-     */
-    liveRegionPoliteness: PropTypes.oneOf(['polite', 'assertive']),
-    /**
-     * If the screenreader alert should be atomic
-     */
-    isLiveRegionAtomic: PropTypes.bool,
-    /**
-     * If the alert should only be visible to screen readers
-     */
-    screenReaderOnly: PropTypes.bool,
-    /**
-     * Milliseconds until the Alert is dismissed automatically
-     */
-    timeout: PropTypes.number,
-    /**
-     * Close button label. Can be a React component
-     */
-    renderCloseButtonLabel: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.node
-    ]),
-    /**
-     * Callback after the alert is closed
-     */
-    onDismiss: PropTypes.func,
-    /**
-     * Transition used to make the alert appear and disappear
-     */
-    transition: PropTypes.oneOf(['none', 'fade']),
-    /**
-     * if open transitions from truthy to falsey, it's a signal to close and unmount the alert.
-     * This is necessary to close the alert from the outside and still run the transition.
-     */
-    open: PropTypes.bool,
-    /**
-     * If the alert should have a shadow.
-     */
-    hasShadow: PropTypes.bool
-  }
+  static propTypes = propTypes
+
+  static allowedProps = allowedProps
 
   static defaultProps = {
     variant: 'info',
@@ -336,7 +270,7 @@ class Alert extends Component<AlertProps> {
     // @ts-expect-error ts-migrate(2538) FIXME: Type 'undefined' cannot be used as an index type.
     const Icon = this.variantUI[this.props.variant]
     return (
-      <div css={this.props.styles.icon}>
+      <div css={this.props.styles?.icon}>
         <Icon />
       </div>
     )
@@ -348,7 +282,7 @@ class Alert extends Component<AlertProps> {
       callRenderProp(this.props.renderCloseButtonLabel)
 
     return closeButtonLabel ? (
-      <div css={this.props.styles.closeButton} key="closeButton">
+      <div css={this.props.styles?.closeButton} key="closeButton">
         <CloseButton
           onClick={this.close}
           size="small"
@@ -363,11 +297,11 @@ class Alert extends Component<AlertProps> {
       <View
         as="div"
         margin={this.props.margin}
-        css={this.props.styles.alert}
+        css={this.props.styles?.alert}
         onKeyUp={this.handleKeyUp}
       >
         {this.renderIcon()}
-        <div css={this.props.styles.content}>{this.props.children}</div>
+        <div css={this.props.styles?.content}>{this.props.children}</div>
         {this.renderCloseButton()}
       </View>
     )
