@@ -24,17 +24,18 @@
 
 /** @jsx jsx */
 import { Component, SyntheticEvent } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { AvatarProps, AvatarState } from './types'
+
+import { propTypes, allowedProps } from './types'
+import type { AvatarProps, AvatarState } from './types'
 
 /**
 ---
@@ -47,40 +48,9 @@ category: components
 class Avatar extends Component<AvatarProps, AvatarState> {
   static readonly componentId = 'Avatar'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    name: PropTypes.string.isRequired,
-    src: PropTypes.string,
-    alt: PropTypes.string,
-    size: PropTypes.oneOf([
-      'auto',
-      'xx-small',
-      'x-small',
-      'small',
-      'medium',
-      'large',
-      'x-large',
-      'xx-large'
-    ]),
-    color: PropTypes.oneOf([
-      'default',
-      'shamrock',
-      'barney',
-      'crimson',
-      'fire',
-      'licorice',
-      'ash'
-    ]),
-    shape: PropTypes.oneOf(['circle', 'rectangle']),
-    margin: ThemeablePropTypes.spacing,
-    display: PropTypes.oneOf(['inline-block', 'block']),
-    onImageLoaded: PropTypes.func,
-    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-    elementRef: PropTypes.func
-  }
+  static propTypes = propTypes
+
+  static allowedProps = allowedProps
 
   static defaultProps = {
     src: undefined,
@@ -132,7 +102,7 @@ class Avatar extends Component<AvatarProps, AvatarState> {
 
   renderInitials() {
     return (
-      <span css={this.props.styles.initials} aria-hidden="true">
+      <span css={this.props.styles?.initials} aria-hidden="true">
         {this.makeInitialsFromName()}
       </span>
     )
@@ -149,12 +119,12 @@ class Avatar extends Component<AvatarProps, AvatarState> {
         as={this.props.as}
         elementRef={this.props.elementRef}
         margin={this.props.margin}
-        css={styles.avatar}
+        css={styles?.avatar}
         display={this.props.display}
       >
         <img // This is visually hidden and is here for loading purposes only
           src={this.props.src}
-          css={this.props.styles.loadImage}
+          css={this.props.styles?.loadImage}
           alt={this.props.alt}
           onLoad={this.handleImageLoaded}
           aria-hidden="true"
