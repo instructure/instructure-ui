@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type { DefaultProps, PropValidators } from '@instructure/shared-types'
 
 type AlertOwnProps = {
   children?: ReactNode
@@ -126,5 +126,18 @@ const allowedProps: AllowedPropKeys = [
   'hasShadow'
 ]
 
+const defaultProps: DefaultProps<AlertOwnProps> = {
+  variant: 'info',
+  margin: 'x-small 0',
+  timeout: 0,
+  transition: 'fade',
+  open: true,
+  screenReaderOnly: false,
+  liveRegionPoliteness: 'assertive',
+  isLiveRegionAtomic: false,
+  children: null,
+  hasShadow: true
+}
+
 export type { AlertProps }
-export { propTypes, allowedProps }
+export { propTypes, defaultProps, allowedProps }

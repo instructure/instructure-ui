@@ -34,7 +34,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { propTypes, defaultProps, allowedProps } from './props'
 import type { AvatarProps, AvatarState } from './props'
 
 /**
@@ -49,20 +49,8 @@ class Avatar extends Component<AvatarProps, AvatarState> {
   static readonly componentId = 'Avatar'
 
   static propTypes = propTypes
-
   static allowedProps = allowedProps
-
-  static defaultProps = {
-    src: undefined,
-    alt: undefined,
-    margin: undefined,
-    elementRef: undefined,
-    size: 'medium',
-    color: 'default',
-    shape: 'circle',
-    display: 'inline-block',
-    onImageLoaded: (_event: SyntheticEvent) => {}
-  }
+  static defaultProps = defaultProps
 
   state = { loaded: false }
 

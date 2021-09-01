@@ -27,7 +27,7 @@ import React, { Component } from 'react'
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
-import { propTypes, allowedProps } from './props'
+import { propTypes, defaultProps, allowedProps } from './props'
 import type { PresentationContentProps } from './props'
 
 /**
@@ -41,13 +41,8 @@ class PresentationContent extends Component<
   PresentationContentProps & OtherHTMLAttributes<PresentationContentProps>
 > {
   static propTypes = propTypes
-
   static allowedProps = allowedProps
-
-  static defaultProps = {
-    as: 'span',
-    children: null
-  } as const
+  static defaultProps = defaultProps
 
   render() {
     const { children, ...props } = this.props

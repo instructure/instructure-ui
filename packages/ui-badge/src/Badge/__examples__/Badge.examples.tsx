@@ -23,7 +23,7 @@
  */
 import React from 'react'
 import { View } from '@instructure/ui-view'
-import { BadgeProps } from '../types'
+import { BadgeProps } from '../props'
 
 export default {
   sectionProp: 'variant',

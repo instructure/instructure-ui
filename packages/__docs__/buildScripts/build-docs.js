@@ -93,7 +93,7 @@ const options = {
     '**/locales/**',
     '**/styles.{js,ts}',
     '**/theme.{js,ts}',
-    '**/types.ts',
+    '**/props.ts',
     '**/locator.{js,ts}',
     '**/*Locator.{js,ts}',
 

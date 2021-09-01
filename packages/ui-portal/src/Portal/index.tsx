@@ -29,7 +29,7 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
-import { propTypes, allowedProps } from './props'
+import { propTypes, defaultProps, allowedProps } from './props'
 import type { PortalNode, PortalProps, PortalState } from './props'
 
 /**
@@ -48,18 +48,8 @@ class Portal extends Component<
   PortalState
 > {
   static propTypes = propTypes
-
   static allowedProps = allowedProps
-
-  static defaultProps = {
-    open: false,
-    insertAt: 'bottom',
-    onOpen: () => {},
-    onClose: () => {},
-    mountNode: null,
-    children: null,
-    elementRef: () => {}
-  }
+  static defaultProps = defaultProps
 
   constructor(props: PortalProps) {
     super(props)

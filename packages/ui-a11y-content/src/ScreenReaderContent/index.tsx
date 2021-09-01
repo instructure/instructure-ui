@@ -30,7 +30,8 @@ import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import { propTypes, allowedProps } from './props'
+
+import { propTypes, defaultProps, allowedProps } from './props'
 import type { ScreenReaderContentProps } from './props'
 
 /**
@@ -48,10 +49,7 @@ class ScreenReaderContent extends Component<ScreenReaderContentProps> {
 
   static allowedProps = allowedProps
 
-  static defaultProps = {
-    as: 'span',
-    children: null
-  } as const
+  static defaultProps = defaultProps
 
   componentDidMount() {
     this.props.makeStyles?.()
