@@ -34,6 +34,5 @@ export type {
   Nullable,
   CSSShorthandValue,
   OtherHTMLAttributes,
-  PropValidators,
-  DefaultProps
+  PropValidators
 } from './UtilityTypes'

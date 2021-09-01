@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 
 import type {
   AsElementType,
-  DefaultProps,
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
@@ -60,7 +59,7 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['as', 'children']
 
-const defaultProps: DefaultProps<ScreenReaderContentOwnProps> = {
+const defaultProps = {
   as: 'span',
   children: null
 }

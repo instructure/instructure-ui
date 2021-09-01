@@ -34,11 +34,7 @@ import type {
   Shadow,
   Stacking
 } from '@instructure/emotion'
-import type {
-  AsElementType,
-  DefaultProps,
-  PropValidators
-} from '@instructure/shared-types'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
 
 type ViewOwnProps = PropsWithChildren<{
   /**
@@ -290,7 +286,7 @@ const allowedProps: AllowedPropKeys = [
   'withVisualDebug'
 ]
 
-const defaultProps: DefaultProps<ViewOwnProps> = {
+const defaultProps = {
   display: 'auto',
   overflowX: 'visible',
   overflowY: 'visible',

@@ -24,16 +24,17 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { BylineProps } from './props'
+
+import { propTypes, defaultProps, allowedProps } from './props'
+import type { BylineProps } from './props'
 
 /**
 ---
@@ -45,45 +46,9 @@ category: components
 class Byline extends Component<BylineProps> {
   static readonly componentId = 'Byline'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * the Byline visual/object
-     */
-    children: PropTypes.node.isRequired,
-    /**
-     * the Byline title
-     */
-    title: PropTypes.node,
-    /**
-     * the Byline description
-     */
-    description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    /**
-     * how should the title and description align
-     */
-    alignContent: PropTypes.oneOf(['top', 'center']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    elementRef: PropTypes.func
-  }
-
-  static defaultProps = {
-    alignContent: 'center',
-    elementRef: undefined,
-    margin: undefined,
-    title: undefined,
-    size: undefined,
-    description: undefined
-  }
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static defaultProps = defaultProps
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -106,18 +71,19 @@ class Byline extends Component<BylineProps> {
       <View
         {...passthroughProps}
         elementRef={this.props.elementRef}
-        css={this.props.styles.byline}
+        css={this.props.styles?.byline}
         as="figure"
         margin={this.props.margin}
-        maxWidth={this.props.styles.maxWidth}
+        // @ts-expect-error TODO: fix
+        maxWidth={this.props.styles?.maxWidth}
       >
-        <div css={this.props.styles.figure}>{this.props.children}</div>
-        <figcaption css={this.props.styles.caption}>
+        <div css={this.props.styles?.figure}>{this.props.children}</div>
+        <figcaption css={this.props.styles?.caption}>
           {this.props.title && (
-            <span css={this.props.styles.title}>{this.props.title}</span>
+            <span css={this.props.styles?.title}>{this.props.title}</span>
           )}
           {this.props.description && (
-            <div css={this.props.styles.description}>
+            <div css={this.props.styles?.description}>
               {this.props.description}
             </div>
           )}

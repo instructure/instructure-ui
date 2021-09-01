@@ -22,11 +22,16 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
-import type { Spacing } from '@instructure/emotion'
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export type ButtonProps = {
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { Spacing } from '@instructure/emotion'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+
+type ButtonOwnProps = {
+  children?: React.ReactNode
   type?: 'button' | 'submit' | 'reset'
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any
@@ -42,3 +47,119 @@ export type ButtonProps = {
   href?: string
   renderIcon?: React.ReactNode | ((...args: any[]) => any)
 }
+
+type PropKeys = keyof ButtonOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ButtonProps = ButtonOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Specifies the `Button` children.
+   */
+  children: PropTypes.node,
+  /**
+   * Specifies the type of the `Button`'s underlying html element.
+   */
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
+  /**
+   * The size of the `Button`
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Provides a reference to the `Button`'s underlying html element.
+   */
+  elementRef: PropTypes.func,
+  /**
+   * The element to render as the component root, `Button` by default.
+   */
+  as: PropTypes.elementType,
+  /**
+   * Specifies if interaction with the `Button` is enabled, disabled, or readonly.
+   */
+  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
+  /**
+   * Specifies the color for the `Button`.
+   */
+  color: PropTypes.oneOf([
+    'primary',
+    'primary-inverse',
+    'secondary',
+    'success',
+    'danger'
+  ]),
+  /**
+   * Override the `Button`'s default focus outline color.
+   */
+  focusColor: PropTypes.oneOf(['info', 'inverse']),
+  /**
+   * The `Button` display property. When set to `inline-block`, the `Button` displays inline with other elements.
+   * When set to block, the `Button` expands to fill the width of the container.
+   */
+  display: PropTypes.oneOf(['inline-block', 'block']),
+  /**
+   * Sets the alignment of the `Button` children and/or icon.
+   */
+  textAlign: PropTypes.oneOf(['start', 'center']),
+  /**
+   * Specifies if the `Button` should render with a solid background. When false, the background is transparent.
+   */
+  withBackground: PropTypes.bool,
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Specify a mouse cursor to use when hovering over the button.
+   * The `pointer` cursor is used by default.
+   */
+  cursor: PropTypes.string,
+  /**
+   * Specifies an href attribute for the `Button`'s underlying html element.
+   */
+  href: PropTypes.string,
+  /**
+   * An icon, or function that returns an icon.
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'as',
+  'children',
+  'color',
+  'cursor',
+  'display',
+  'elementRef',
+  'focusColor',
+  'href',
+  'interaction',
+  'margin',
+  'renderIcon',
+  'size',
+  'textAlign',
+  'type',
+  'withBackground'
+]
+
+const defaultProps = {
+  children: null,
+  type: 'button',
+  size: 'medium',
+  // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
+  elementRef: (el) => {},
+  as: 'button',
+  // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+  color: 'secondary',
+  display: 'inline-block',
+  textAlign: 'center',
+  withBackground: true,
+  margin: '0',
+  cursor: 'pointer'
+}
+
+export type { ButtonProps }
+export { propTypes, defaultProps, allowedProps }

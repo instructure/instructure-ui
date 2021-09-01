@@ -28,11 +28,7 @@ import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type {
-  AsElementType,
-  DefaultProps,
-  PropValidators
-} from '@instructure/shared-types'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
 
 type AvatarOwnProps = {
   /**
@@ -141,7 +137,7 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-const defaultProps: DefaultProps<AvatarOwnProps> = {
+const defaultProps = {
   size: 'medium',
   color: 'default',
   shape: 'circle',

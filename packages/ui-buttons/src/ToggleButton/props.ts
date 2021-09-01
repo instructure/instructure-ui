@@ -23,14 +23,18 @@
  */
 
 import React from 'react'
-import { AsElementType } from '@instructure/shared-types'
+import PropTypes from 'prop-types'
+
+import { PositionPropTypes } from '@instructure/ui-position'
+
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
 import type {
   PlacementPropValues,
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
 
-export type ToggleButtonProps = {
+type ToggleButtonOwnProps = {
   screenReaderLabel: string
   renderTooltipContent: React.ReactNode | ((...args: any[]) => any)
   renderIcon: React.ReactNode | ((...args: any[]) => any)
@@ -46,3 +50,105 @@ export type ToggleButtonProps = {
   placement?: PlacementPropValues
   constrain?: PositionConstraint
 }
+
+type PropKeys = keyof ToggleButtonOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ToggleButtonProps = ToggleButtonOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Text to output only to screen readers
+   */
+  screenReaderLabel: PropTypes.string.isRequired,
+  /**
+   * Text to render in the tooltip shown on hover/focus
+   */
+  renderTooltipContent: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+    .isRequired,
+  /**
+   * An icon or function that returns an icon
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  /**
+   * Toggles the `aria-pressed` attribute on the button (`true` if `pressed`; `false` if `unpressed`)
+   */
+  status: PropTypes.oneOf(['pressed', 'unpressed']).isRequired,
+  /**
+   * The element to render as the component root; `button` by default
+   */
+  as: PropTypes.elementType,
+  /**
+   * Specifies if interaction with `ToggleButton` is `enabled`, `disabled`, or `readonly`
+   */
+  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
+  /**
+   * The size of the `ToggleButton`
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Provides a reference to `ToggleButton`'s underlying HTML element
+   */
+  elementRef: PropTypes.func,
+  /**
+   * Callback fired when the `ToggleButton` is clicked
+   */
+  onClick: PropTypes.func,
+  /**
+   * The color in which to display the icon
+   */
+  color: PropTypes.string,
+  /**
+   * By default, the tooltip will show on hover/focus. Use this prop if you need to override that behavior.
+   */
+  isShowingTooltip: PropTypes.bool,
+  /**
+   * An element or a function returning an element to use as the mount node
+   */
+  mountNode: PositionPropTypes.mountNode,
+  /**
+   * The placement of the tooltip in relation to the button
+   */
+  placement: PositionPropTypes.placement,
+  /**
+   * The parent in which to constrain the tooltip.
+   * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
+   * or a function returning an element.
+   */
+  constrain: PositionPropTypes.constrain
+}
+
+const allowedProps: AllowedPropKeys = [
+  'as',
+  'color',
+  'constrain',
+  'elementRef',
+  'interaction',
+  'isShowingTooltip',
+  'mountNode',
+  'onClick',
+  'placement',
+  'renderIcon',
+  'renderTooltipContent',
+  'screenReaderLabel',
+  'size',
+  'status'
+]
+
+const defaultProps = {
+  size: 'medium',
+  as: 'button',
+  // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+  // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
+  elementRef: (el) => {},
+  renderIcon: () => {},
+  onClick: () => {},
+  mountNode: null,
+  color: 'secondary',
+  placement: 'top center',
+  constrain: 'window'
+}
+
+export type { ToggleButtonProps }
+export { propTypes, defaultProps, allowedProps }

@@ -22,11 +22,16 @@
  * SOFTWARE.
  */
 
-import type { Spacing } from '@instructure/emotion'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type BylineProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+
+type BylineOwnProps = {
+  children: React.ReactNode
   title?: React.ReactNode
   description?: string | React.ReactNode
   alignContent?: 'top' | 'center'
@@ -34,3 +39,53 @@ export type BylineProps = {
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any
 }
+
+type PropKeys = keyof BylineOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type BylineProps = BylineOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * the Byline visual/object
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * the Byline title
+   */
+  title: PropTypes.node,
+  /**
+   * the Byline description
+   */
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  /**
+   * how should the title and description align
+   */
+  alignContent: PropTypes.oneOf(['top', 'center']),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  elementRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'alignContent',
+  'children',
+  'description',
+  'elementRef',
+  'margin',
+  'size',
+  'title'
+]
+
+const defaultProps = {
+  alignContent: 'center'
+}
+
+export type { BylineProps }
+export { propTypes, defaultProps, allowedProps }
