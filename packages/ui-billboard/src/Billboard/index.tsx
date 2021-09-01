@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
@@ -34,11 +33,13 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { BillboardProps } from './props'
+
+import { propTypes, defaultProps, allowedProps } from './props'
+import type { BillboardProps } from './props'
 
 /**
 ---
@@ -49,86 +50,9 @@ category: components
 class Billboard extends Component<BillboardProps> {
   static readonly componentId = 'Billboard'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * Provide an <Img> component or Instructure Icon for the hero image
-     */
-    hero: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    /**
-     * If you're using an icon, this prop will size it. Also sets the font-size
-     * of the headline and message.
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * the element type to render as
-     */
-    as: PropTypes.elementType,
-    /**
-     * provides a reference to the underlying html root element
-     */
-    elementRef: PropTypes.func,
-    /**
-     * The headline for the Billboard. Is styled as an h1 element by default
-     */
-    heading: PropTypes.string,
-    /**
-     * Choose the appropriately semantic tag for the heading
-     */
-    headingAs: PropTypes.oneOf(['h1', 'h2', 'h3', 'span']),
-    /**
-     * Choose the font-size for the heading (see the Heading component)
-     */
-    headingLevel: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4']),
-    /**
-     * Instructions or information for the Billboard. Note: you should not pass
-     * interactive content to this prop if you are also providing an `href` or
-     * `onClick`. That would cause the Billboard to render as a button or link
-     * and would result in nested interactive content.
-     */
-    message: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * If you add an onClick prop, the Billboard renders as a clickable button
-     */
-    onClick: PropTypes.func,
-    /**
-     * If `href` is provided, Billboard will render as a link
-     */
-    href: PropTypes.string,
-    /**
-     * Whether or not to disable the billboard
-     */
-    disabled: PropTypes.bool,
-    /**
-     * Works just like disabled but keeps the same styles as if it were active
-     */
-    readOnly: PropTypes.bool,
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing
-  } as const
-
-  static defaultProps = {
-    margin: undefined,
-    disabled: false,
-    readOnly: false,
-    href: undefined,
-    message: undefined,
-    onClick: undefined,
-    heading: undefined,
-    hero: undefined,
-    size: 'medium',
-    headingAs: 'span',
-    headingLevel: 'h1',
-    as: 'span',
-    elementRef: () => {}
-  } as const
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static defaultProps = defaultProps
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -145,7 +69,7 @@ class Billboard extends Component<BillboardProps> {
     const { headingLevel, headingAs, heading, styles } = this.props
 
     return (
-      <span css={styles.heading}>
+      <span css={styles?.heading}>
         <Heading level={headingLevel} as={headingAs} color="primary">
           {heading}
         </Heading>
@@ -183,10 +107,12 @@ class Billboard extends Component<BillboardProps> {
     const { heading, message, hero, styles } = this.props
 
     return (
-      <span css={styles.content}>
-        {hero && <span css={styles.hero}>{this.renderHero()}</span>}
+      <span css={styles?.content}>
+        {hero && <span css={styles?.hero}>{this.renderHero()}</span>}
         {heading && this.renderHeading()}
-        {message && <span css={styles.message}>{callRenderProp(message)}</span>}
+        {message && (
+          <span css={styles?.message}>{callRenderProp(message)}</span>
+        )}
       </span>
     )
   }
@@ -218,7 +144,7 @@ class Billboard extends Component<BillboardProps> {
           type={Element === 'button' ? 'button' : undefined}
           as={Element}
           elementRef={elementRef}
-          css={styles.billboard}
+          css={styles?.billboard}
           href={href}
           onClick={this.handleClick}
           disabled={disabled}

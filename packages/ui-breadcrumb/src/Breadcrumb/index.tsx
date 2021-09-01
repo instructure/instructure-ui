@@ -24,19 +24,19 @@
 
 /** @jsx jsx */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
-import { Children } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { BreadcrumbProps } from './props'
+
+import { propTypes, defaultProps, allowedProps } from './props'
+import type { BreadcrumbProps } from './props'
 
 /**
 ---
@@ -49,36 +49,9 @@ category: components
 class Breadcrumb extends Component<BreadcrumbProps> {
   static readonly componentId = 'Breadcrumb'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * children of type Breadcrumb.Link
-     */
-    children: Children.oneOf([BreadcrumbLink]),
-    /**
-     * An accessible label for the navigation
-     */
-    label: PropTypes.string.isRequired,
-    /**
-     * Sets the font-size of the breadcrumb text
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing
-  }
-
-  static defaultProps = {
-    size: 'medium',
-    children: null,
-    margin: undefined
-  }
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static defaultProps = defaultProps
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -102,10 +75,10 @@ class Breadcrumb extends Component<BreadcrumbProps> {
     }
     return React.Children.map(children, (child, index) => {
       return (
-        <li css={styles.crumb} style={inlineStyle}>
+        <li css={styles?.crumb} style={inlineStyle}>
           {child}
           {index < numChildren - 1 && (
-            <IconArrowOpenEndSolid color="auto" css={styles.separator} />
+            <IconArrowOpenEndSolid color="auto" css={styles?.separator} />
           )}
         </li>
       )
@@ -122,7 +95,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
         margin={this.props.margin}
         aria-label={this.props.label}
       >
-        <ol css={styles.breadcrumb}>{this.renderChildren()}</ol>
+        <ol css={styles?.breadcrumb}>{this.renderChildren()}</ol>
       </View>
     )
   }
