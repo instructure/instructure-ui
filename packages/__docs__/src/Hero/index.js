@@ -222,7 +222,7 @@ class Hero extends Component {
             <Flex>
               <Flex.Item padding="none small none none">{checkmark}</Flex.Item>
               <Flex.Item>
-                Leading screen readers: VoiceOver, NVDA, and JAWS (Firefox only)
+                Leading screen readers: VoiceOver, NVDA, and JAWS
               </Flex.Item>
             </Flex>
           </List.Item>
