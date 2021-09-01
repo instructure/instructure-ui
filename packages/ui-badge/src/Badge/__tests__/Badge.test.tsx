@@ -95,8 +95,7 @@ describe('<Badge />', () => {
   })
 
   it('should change its output via the formatOutput prop', async () => {
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'formattedCount' implicitly has an 'any'... Remove this comment to see the full error message
-    const formatOutput = (formattedCount) => {
+    const formatOutput = (formattedCount: string) => {
       return `${formattedCount}!`
     }
 

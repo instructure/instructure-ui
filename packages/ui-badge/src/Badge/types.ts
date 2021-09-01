@@ -56,7 +56,7 @@ export type BadgeProps = {
    */
   elementRef?: (element: HTMLElement | null) => void
   formatOverflowText?: (count: number, countUntil: number) => string
-  formatOutput?: (formattedCount: string) => string
+  formatOutput?: (formattedCount: string) => JSX.Element | string | number
   as?: AsElementType
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
