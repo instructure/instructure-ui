@@ -23,7 +23,7 @@
  */
 
 import { RangeInputTheme } from '@instructure/shared-types'
-import { RangeInputProps } from './types'
+import { RangeInputProps } from './props'
 
 /**
  * ---

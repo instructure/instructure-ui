@@ -45,7 +45,7 @@ import generateComponentTheme from './theme'
 
 import { Item } from './Item'
 import { Separator } from './Separator'
-import { OptionsProps } from './types'
+import { OptionsProps } from './props'
 
 /**
 ---

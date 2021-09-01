@@ -24,7 +24,7 @@
 
 import { logError as error } from '@instructure/console'
 import { InlineListItemTheme } from '@instructure/shared-types'
-import { InlineListItemProps } from './types'
+import { InlineListItemProps } from './props'
 
 /**
  * ---

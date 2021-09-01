@@ -23,7 +23,7 @@
  */
 
 import { RadioInputTheme } from '@instructure/shared-types'
-import { RadioInputProps } from './types'
+import { RadioInputProps } from './props'
 
 /**
  * ---

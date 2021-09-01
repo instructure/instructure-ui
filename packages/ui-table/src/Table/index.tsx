@@ -46,7 +46,7 @@ import { Row } from './Row'
 import { ColHeader } from './ColHeader'
 import { RowHeader } from './RowHeader'
 import { Cell } from './Cell'
-import { TableProps } from './types'
+import { TableProps } from './props'
 
 /**
 ---

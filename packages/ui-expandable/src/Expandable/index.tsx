@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { ExpandableProps, ExpandableState } from './types'
+import { ExpandableProps, ExpandableState } from './props'
 
 const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
   expanded: !expanded

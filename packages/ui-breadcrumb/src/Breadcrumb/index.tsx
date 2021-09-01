@@ -36,7 +36,7 @@ import { BreadcrumbLink } from './BreadcrumbLink'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { BreadcrumbProps } from './types'
+import { BreadcrumbProps } from './props'
 
 /**
 ---

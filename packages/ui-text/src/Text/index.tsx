@@ -31,7 +31,7 @@ import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TextProps } from './types'
+import { TextProps } from './props'
 
 /**
 ---

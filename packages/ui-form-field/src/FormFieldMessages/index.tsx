@@ -35,7 +35,7 @@ import { FormFieldMessage } from '../FormFieldMessage'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FormFieldMessagesProps } from './types'
+import { FormFieldMessagesProps } from './props'
 
 /**
 ---

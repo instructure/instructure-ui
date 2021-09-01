@@ -39,7 +39,7 @@ import { Item } from './Item'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FlexProps } from './types'
+import { FlexProps } from './props'
 
 /**
 ---

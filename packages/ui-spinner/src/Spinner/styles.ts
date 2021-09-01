@@ -24,7 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { SpinnerTheme } from '@instructure/shared-types'
-import { SpinnerProps } from './types'
+import { SpinnerProps } from './props'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation

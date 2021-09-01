@@ -29,7 +29,7 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
 import { FormPropTypes } from '../FormPropTypes'
 import { FormFieldLayout } from '../FormFieldLayout'
-import { FormFieldProps } from './types'
+import { FormFieldProps } from './props'
 
 /**
 ---

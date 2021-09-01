@@ -23,7 +23,7 @@
  */
 
 import { ListTheme } from '@instructure/shared-types'
-import { ListProps } from './types'
+import { ListProps } from './props'
 
 /**
  * ---

@@ -39,8 +39,8 @@ import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { allowedProps, propTypes } from './types'
-import type { ViewProps } from './types'
+import { allowedProps, propTypes } from './props'
+import type { ViewProps } from './props'
 
 /**
 ---

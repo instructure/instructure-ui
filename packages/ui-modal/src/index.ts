@@ -23,7 +23,7 @@
  */
 export { Modal } from './Modal'
 
-export type { ModalProps } from './Modal/types'
-export type { ModalBodyProps } from './Modal/ModalBody/types'
-export type { ModalFooterProps } from './Modal/ModalFooter/types'
-export type { ModalHeaderProps } from './Modal/ModalHeader/types'
+export type { ModalProps } from './Modal/props'
+export type { ModalBodyProps } from './Modal/ModalBody/props'
+export type { ModalFooterProps } from './Modal/ModalFooter/props'
+export type { ModalHeaderProps } from './Modal/ModalHeader/props'

@@ -31,7 +31,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FormFieldLabelProps } from './types'
+import { FormFieldLabelProps } from './props'
 
 /**
 ---

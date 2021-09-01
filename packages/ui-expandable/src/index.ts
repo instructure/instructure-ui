@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Expandable } from './Expandable'
-export type { ExpandableProps, RenderExpandable } from './Expandable/types'
+export type { ExpandableProps, RenderExpandable } from './Expandable/props'

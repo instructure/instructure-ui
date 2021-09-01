@@ -31,7 +31,7 @@ import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ModalFooterProps } from './types'
+import { ModalFooterProps } from './props'
 
 /**
 ---

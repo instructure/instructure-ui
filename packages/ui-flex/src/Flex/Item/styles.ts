@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { FlexItemProps } from './types'
+import { FlexItemProps } from './props'
 
 /**
  * ---

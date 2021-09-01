@@ -23,7 +23,7 @@
  */
 
 import { CloseButtonTheme } from '@instructure/shared-types'
-import { CloseButtonProps } from './types'
+import { CloseButtonProps } from './props'
 
 /**
  * ---

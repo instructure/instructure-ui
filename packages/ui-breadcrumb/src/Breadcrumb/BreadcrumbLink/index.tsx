@@ -29,7 +29,7 @@ import { TruncateText } from '@instructure/ui-truncate-text'
 import { Link } from '@instructure/ui-link'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { BreadcrumbLinkProps } from './types'
+import { BreadcrumbLinkProps } from './props'
 
 /**
 ---

@@ -30,8 +30,8 @@ import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import { propTypes, allowedProps } from './types'
-import type { ScreenReaderContentProps } from './types'
+import { propTypes, allowedProps } from './props'
+import type { ScreenReaderContentProps } from './props'
 
 /**
 ---

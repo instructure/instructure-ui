@@ -36,4 +36,4 @@ export type {
   PositionConstraint
 } from './PositionPropTypes'
 
-export type { PositionProps } from './Position/types'
+export type { PositionProps } from './Position/props'

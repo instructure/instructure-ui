@@ -23,7 +23,7 @@
  */
 
 import { DrawerLayoutTrayTheme } from '@instructure/shared-types'
-import { DrawerLayoutTrayProps, DrawerLayoutTrayStyleProps } from './types'
+import { DrawerLayoutTrayProps, DrawerLayoutTrayStyleProps } from './props'
 
 /**
  * ---

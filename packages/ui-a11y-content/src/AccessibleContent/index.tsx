@@ -30,8 +30,8 @@ import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
 
-import { propTypes, allowedProps } from './types'
-import type { AccessibleContentProps } from './types'
+import { propTypes, allowedProps } from './props'
+import type { AccessibleContentProps } from './props'
 
 /**
 ---

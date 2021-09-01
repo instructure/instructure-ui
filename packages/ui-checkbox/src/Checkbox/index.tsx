@@ -43,7 +43,7 @@ import { CheckboxFacade } from './CheckboxFacade'
 import { ToggleFacade } from './ToggleFacade'
 
 import generateStyle from './styles'
-import { CheckboxProps } from './types'
+import { CheckboxProps } from './props'
 
 /**
 ---

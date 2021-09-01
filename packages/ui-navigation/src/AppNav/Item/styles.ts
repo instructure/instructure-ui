@@ -23,7 +23,7 @@
  */
 
 import { AppNavItemTheme } from '@instructure/shared-types'
-import { AppNavItemProps } from './types'
+import { AppNavItemProps } from './props'
 
 /**
  * ---

@@ -23,7 +23,7 @@
  */
 
 import { ModalTheme } from '@instructure/shared-types'
-import { ModalProps } from './types'
+import { ModalProps } from './props'
 
 /**
  * ---

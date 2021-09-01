@@ -41,7 +41,7 @@ import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TextInputProps, TextInputState, TextInputStyleProps } from './types'
+import { TextInputProps, TextInputState, TextInputStyleProps } from './props'
 
 /**
 ---

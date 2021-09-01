@@ -25,5 +25,5 @@
 export { Editable } from './Editable'
 export { InPlaceEdit } from './InPlaceEdit'
 
-export type { EditableProps } from './Editable/types'
-export type { InPlaceEditProps } from './InPlaceEdit/types'
+export type { EditableProps } from './Editable/props'
+export type { InPlaceEditProps } from './InPlaceEdit/props'

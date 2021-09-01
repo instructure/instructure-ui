@@ -32,7 +32,7 @@ import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MaskProps } from './types'
+import { MaskProps } from './props'
 
 /**
 ---

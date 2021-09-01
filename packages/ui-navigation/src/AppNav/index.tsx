@@ -41,7 +41,7 @@ import { Item } from './Item'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { AppNavProps } from './types'
+import { AppNavProps } from './props'
 
 /**
 ---

@@ -44,7 +44,7 @@ import { DrawerTray } from './DrawerTray'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
-import { DrawerLayoutProps } from './types'
+import { DrawerLayoutProps } from './props'
 
 /**
 ---

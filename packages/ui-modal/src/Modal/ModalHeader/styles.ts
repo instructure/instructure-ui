@@ -23,7 +23,7 @@
  */
 
 import { ModalHeaderTheme } from '@instructure/shared-types'
-import { ModalHeaderProps, ModalHeaderStyleProps } from './types'
+import { ModalHeaderProps, ModalHeaderStyleProps } from './props'
 
 /**
  * ---

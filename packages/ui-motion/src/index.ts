@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Transition } from './Transition'
-export type { TransitionProps, TransitionType } from './Transition/types'
+export type { TransitionProps, TransitionType } from './Transition/props'

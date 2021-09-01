@@ -32,7 +32,7 @@ import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '../IconButton'
-import { ToggleButtonProps } from './types'
+import { ToggleButtonProps } from './props'
 
 /**
 ---

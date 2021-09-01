@@ -23,7 +23,7 @@
  */
 
 import { TextAreaTheme } from '@instructure/shared-types'
-import { TextAreaProps } from './types'
+import { TextAreaProps } from './props'
 
 /**
  * ---

@@ -23,7 +23,7 @@
  */
 
 import { TabsTheme } from '@instructure/shared-types'
-import { TabsProps } from './types'
+import { TabsProps } from './props'
 
 /**
  * ---

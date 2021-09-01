@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Dialog } from './Dialog'
-export type { DialogProps } from './Dialog/types'
+export type { DialogProps } from './Dialog/props'

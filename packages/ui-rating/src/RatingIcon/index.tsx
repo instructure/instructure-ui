@@ -34,7 +34,7 @@ import { Transition } from '@instructure/ui-motion'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { RatingIconProps, RatingIconState } from './types'
+import { RatingIconProps, RatingIconState } from './props'
 
 /**
 ---

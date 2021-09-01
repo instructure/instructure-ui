@@ -44,7 +44,7 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TextAreaProps } from './types'
+import { TextAreaProps } from './props'
 
 /**
 ---

@@ -24,7 +24,7 @@
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { FormFieldLabelTheme } from '@instructure/shared-types'
-import { FormFieldLabelProps } from './types'
+import { FormFieldLabelProps } from './props'
 
 /**
  * ---

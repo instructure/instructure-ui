@@ -23,7 +23,7 @@
  */
 
 import { TransitionTheme } from '@instructure/shared-types'
-import { TransitionProps } from './types'
+import { TransitionProps } from './props'
 
 /**
  * ---

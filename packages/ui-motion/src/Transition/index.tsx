@@ -38,7 +38,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { BaseTransition } from './BaseTransition'
-import { TransitionProps } from './types'
+import { TransitionProps } from './props'
 
 /**
 ---

@@ -24,6 +24,6 @@
 
 export { Options } from './Options'
 
-export type { OptionsProps } from './Options/types'
-export type { OptionsItemProps } from './Options/Item/types'
-export type { OptionsSeparatorProps } from './Options/Separator/types'
+export type { OptionsProps } from './Options/props'
+export type { OptionsItemProps } from './Options/Item/props'
+export type { OptionsSeparatorProps } from './Options/Separator/props'

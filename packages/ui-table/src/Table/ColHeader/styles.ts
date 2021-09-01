@@ -23,7 +23,7 @@
  */
 
 import { TableColHeaderTheme } from '@instructure/shared-types'
-import { TableColHeaderProps } from './types'
+import { TableColHeaderProps } from './props'
 
 /**
  * ---

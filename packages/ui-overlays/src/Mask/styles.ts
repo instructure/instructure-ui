@@ -23,7 +23,7 @@
  */
 
 import { MaskTheme } from '@instructure/shared-types'
-import { MaskProps } from './types'
+import { MaskProps } from './props'
 
 /**
  * ---

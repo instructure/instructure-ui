@@ -48,7 +48,7 @@ import { PositionPropTypes } from '@instructure/ui-position'
 import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
 import { uid } from '@instructure/uid'
-import { TimeSelectProps } from './types'
+import { TimeSelectProps } from './props'
 
 /**
 ---

@@ -38,7 +38,7 @@ import { Page } from './Page'
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { PagesProps } from './types'
+import { PagesProps } from './props'
 
 export const PagesContext = createContext({
   history: [],

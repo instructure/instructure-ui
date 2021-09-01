@@ -42,7 +42,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TooltipProps } from './types'
+import { TooltipProps } from './props'
 
 /**
 ---

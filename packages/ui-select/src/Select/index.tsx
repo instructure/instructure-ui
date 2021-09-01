@@ -59,7 +59,7 @@ import generateComponentTheme from './theme'
 
 import { Group } from './Group'
 import { Option } from './Option'
-import { SelectProps } from './types'
+import { SelectProps } from './props'
 
 /**
 ---

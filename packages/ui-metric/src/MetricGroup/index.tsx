@@ -36,7 +36,7 @@ import { Metric } from '../Metric'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MetricGroupProps } from './types'
+import { MetricGroupProps } from './props'
 
 /**
 ---

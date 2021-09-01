@@ -40,7 +40,7 @@ import {
 import { testable } from '@instructure/ui-testable'
 
 import { Checkbox } from '../Checkbox'
-import { CheckboxGroupProps } from './types'
+import { CheckboxGroupProps } from './props'
 
 /**
 ---

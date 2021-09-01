@@ -23,7 +23,7 @@
  */
 
 import { RatingIconTheme } from '@instructure/shared-types'
-import { RatingIconProps, RatingIconState } from './types'
+import { RatingIconProps, RatingIconState } from './props'
 
 /**
  * ---

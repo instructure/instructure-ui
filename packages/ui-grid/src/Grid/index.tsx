@@ -42,7 +42,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { GridProps } from './types'
+import { GridProps } from './props'
 
 /**
 ---

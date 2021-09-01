@@ -45,7 +45,7 @@ import { MenuItemSeparator } from '../MenuItemSeparator'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MenuGroupProps } from './types'
+import { MenuGroupProps } from './props'
 
 /**
 ---

@@ -24,7 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { TabsTabTheme } from '@instructure/shared-types'
-import { TabsTabProps } from './types'
+import { TabsTabProps } from './props'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation

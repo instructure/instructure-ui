@@ -40,7 +40,7 @@ import {
   ResponsiveByBreakpointProps,
   ResponsiveProps,
   ResponsivePropsObject
-} from './types'
+} from './props'
 
 /**
 ---

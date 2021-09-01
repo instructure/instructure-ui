@@ -34,8 +34,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './types'
-import type { AvatarProps, AvatarState } from './types'
+import { propTypes, allowedProps } from './props'
+import type { AvatarProps, AvatarState } from './props'
 
 /**
 ---

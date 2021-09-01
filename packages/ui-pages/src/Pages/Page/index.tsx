@@ -30,7 +30,7 @@ import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
 import { View } from '@instructure/ui-view'
 import { PagesContext } from '..'
-import { PagesPageProps } from './types'
+import { PagesPageProps } from './props'
 
 /**
 ---

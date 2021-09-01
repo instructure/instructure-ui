@@ -34,7 +34,7 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { HeadingProps } from './types'
+import { HeadingProps } from './props'
 
 /**
 ---

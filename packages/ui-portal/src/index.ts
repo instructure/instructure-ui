@@ -23,4 +23,4 @@
  */
 
 export { Portal } from './Portal'
-export type { PortalProps, PortalNode } from './Portal/types'
+export type { PortalProps, PortalNode } from './Portal/props'

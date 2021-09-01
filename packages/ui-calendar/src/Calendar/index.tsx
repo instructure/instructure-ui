@@ -45,7 +45,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { Day } from './Day'
-import { CalendarProps } from './types'
+import { CalendarProps } from './props'
 
 /**
 ---

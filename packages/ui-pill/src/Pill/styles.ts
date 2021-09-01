@@ -23,7 +23,7 @@
  */
 
 import { PillTheme } from '@instructure/shared-types'
-import { PillProps } from './types'
+import { PillProps } from './props'
 
 /**
  * ---

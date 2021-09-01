@@ -24,7 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { ToggleDetailsTheme } from '@instructure/shared-types'
-import { ToggleDetailsProps, ToggleDetailsStyleProps } from './types'
+import { ToggleDetailsProps, ToggleDetailsStyleProps } from './props'
 const contentAnimation = keyframes`
   to {
     opacity: 1;

@@ -33,7 +33,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { TreeBrowserButtonProps } from './types'
+import { TreeBrowserButtonProps } from './props'
 
 /**
 ---

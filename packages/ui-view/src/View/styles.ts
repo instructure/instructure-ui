@@ -34,7 +34,7 @@ import {
   PartialRecord,
   ViewTheme
 } from '@instructure/shared-types'
-import { ViewProps } from './types'
+import { ViewProps } from './props'
 
 const getBorderStyle = ({
   borderRadius,

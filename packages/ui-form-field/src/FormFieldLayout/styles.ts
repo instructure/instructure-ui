@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { FormFieldLayoutProps } from './types'
+import { FormFieldLayoutProps } from './props'
 
 /**
  * ---

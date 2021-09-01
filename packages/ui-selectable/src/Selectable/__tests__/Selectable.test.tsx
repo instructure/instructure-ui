@@ -36,7 +36,7 @@ import {
 } from '@instructure/ui-test-utils'
 
 import { Selectable } from '../index'
-import { SelectableRender } from '../types'
+import { SelectableRender } from '../props'
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 describe('<Selectable />', async () => {

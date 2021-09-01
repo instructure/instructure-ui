@@ -23,7 +23,7 @@
  */
 
 import { NumberInputTheme } from '@instructure/shared-types'
-import { NumberInputProps, NumberInputStyleProps } from './types'
+import { NumberInputProps, NumberInputStyleProps } from './props'
 
 /**
  * ---

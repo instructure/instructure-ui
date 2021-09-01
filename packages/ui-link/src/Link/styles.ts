@@ -23,7 +23,7 @@
  */
 
 import { LinkTheme } from '@instructure/shared-types'
-import { LinkProps, LinkStyleProps } from './types'
+import { LinkProps, LinkStyleProps } from './props'
 
 /**
  * ---

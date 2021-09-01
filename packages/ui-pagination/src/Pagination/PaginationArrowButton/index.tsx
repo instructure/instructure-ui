@@ -33,7 +33,7 @@ import {
   IconArrowOpenEndSolid
 } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
-import { PaginationNavigationProps } from './types'
+import { PaginationNavigationProps } from './props'
 
 /**
 ---

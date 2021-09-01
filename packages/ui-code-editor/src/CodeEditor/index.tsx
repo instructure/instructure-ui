@@ -37,7 +37,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import CodeMirror from './codemirror'
-import { CodeEditorProps } from './types'
+import { CodeEditorProps } from './props'
 
 /**
 ---

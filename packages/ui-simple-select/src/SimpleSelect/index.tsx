@@ -40,7 +40,7 @@ import { Select } from '@instructure/ui-select'
 
 import { Option } from './Option'
 import { Group } from './Group'
-import { SimpleSelectProps } from './types'
+import { SimpleSelectProps } from './props'
 
 /**
 ---

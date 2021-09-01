@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import { deepEqual } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
-import { EditableProps } from './types'
+import { EditableProps } from './props'
 
 /**
 ---

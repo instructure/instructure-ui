@@ -23,7 +23,7 @@
  */
 import { keyframes } from '@instructure/emotion'
 import { TreeBrowserCollectionTheme } from '@instructure/shared-types'
-import { TreeBrowserCollectionProps } from './types'
+import { TreeBrowserCollectionProps } from './props'
 
 const list = keyframes`
   to {

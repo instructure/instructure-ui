@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { ThemeablePropValues } from '@instructure/emotion'
-import { ViewProps } from '../types'
+import { ViewProps } from '../props'
 
 const { SHADOW_TYPES, BORDER_WIDTHS, BORDER_RADII } = ThemeablePropValues
 

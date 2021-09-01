@@ -23,7 +23,7 @@
  */
 
 import { BreadcrumbTheme } from '@instructure/shared-types'
-import { BreadcrumbProps } from './types'
+import { BreadcrumbProps } from './props'
 
 /**
  * ---

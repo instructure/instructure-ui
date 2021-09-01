@@ -23,7 +23,7 @@
  */
 
 import { TagTheme } from '@instructure/shared-types'
-import { TagProps } from './types'
+import { TagProps } from './props'
 
 /**
  * ---

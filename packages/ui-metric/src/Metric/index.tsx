@@ -32,7 +32,7 @@ import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MetricProps } from './types'
+import { MetricProps } from './props'
 
 /**
 ---

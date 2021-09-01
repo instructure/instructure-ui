@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Text } from './Text'
-export type { TextProps } from './Text/types'
+export type { TextProps } from './Text/props'

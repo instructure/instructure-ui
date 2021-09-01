@@ -35,7 +35,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { RadioInputProps } from './types'
+import { RadioInputProps } from './props'
 
 /**
 ---

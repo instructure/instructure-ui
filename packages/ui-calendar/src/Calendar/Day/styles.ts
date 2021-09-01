@@ -23,7 +23,7 @@
  */
 
 import { CalendarDayTheme } from '@instructure/shared-types'
-import { CalendarDayProps, CalendarDayStyleProps } from './types'
+import { CalendarDayProps, CalendarDayStyleProps } from './props'
 
 /**
  * ---

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { PositionProps } from '../types'
+import { PositionProps } from '../props'
 
 export default {
   propValues: {

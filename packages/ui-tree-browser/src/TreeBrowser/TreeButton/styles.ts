@@ -24,7 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { TreeBrowserButtonTheme } from '@instructure/shared-types'
-import { TreeBrowserButtonProps } from './types'
+import { TreeBrowserButtonProps } from './props'
 
 const transform = keyframes`
   50% {

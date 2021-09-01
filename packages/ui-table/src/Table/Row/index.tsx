@@ -42,7 +42,7 @@ import generateComponentTheme from './theme'
 import { ColHeader } from '../ColHeader'
 import { RowHeader } from '../RowHeader'
 import { Cell } from '../Cell'
-import { TableRowProps } from './types'
+import { TableRowProps } from './props'
 
 /**
 ---

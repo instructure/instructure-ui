@@ -32,7 +32,7 @@ import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
-import { CondensedButtonProps } from './types'
+import { CondensedButtonProps } from './props'
 
 /**
 ---

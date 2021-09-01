@@ -23,7 +23,7 @@
  */
 
 import { InlineSVGTheme } from '@instructure/shared-types'
-import { InlineSVGProps } from './types'
+import { InlineSVGProps } from './props'
 
 /**
  * ---

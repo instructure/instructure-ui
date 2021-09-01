@@ -48,7 +48,7 @@ import {
   NumberInputProps,
   NumberInputState,
   NumberInputStyleProps
-} from './types'
+} from './props'
 
 /**
 ---

@@ -36,7 +36,7 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
-import { CloseButtonProps } from './types'
+import { CloseButtonProps } from './props'
 
 /**
 ---

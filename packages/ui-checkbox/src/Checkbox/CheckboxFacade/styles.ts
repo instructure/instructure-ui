@@ -23,7 +23,7 @@
  */
 
 import { CheckboxFacadeTheme } from '@instructure/shared-types'
-import { CheckboxFacadeProps } from './types'
+import { CheckboxFacadeProps } from './props'
 
 /**
  * ---

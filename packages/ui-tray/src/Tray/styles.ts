@@ -23,7 +23,7 @@
  */
 
 import { TrayTheme } from '@instructure/shared-types'
-import { TrayProps } from './types'
+import { TrayProps } from './props'
 
 /**
  * ---

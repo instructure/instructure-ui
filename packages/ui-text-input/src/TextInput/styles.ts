@@ -23,7 +23,7 @@
  */
 
 import { TextInputTheme } from '@instructure/shared-types'
-import { TextInputProps, TextInputStyleProps } from './types'
+import { TextInputProps, TextInputStyleProps } from './props'
 
 /**
  * ---

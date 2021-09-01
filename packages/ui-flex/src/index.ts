@@ -24,5 +24,5 @@
 
 export { Flex, FlexItem } from './Flex'
 
-export type { FlexProps } from './Flex/types'
-export type { FlexItemProps } from './Flex/Item/types'
+export type { FlexProps } from './Flex/props'
+export type { FlexItemProps } from './Flex/Item/props'

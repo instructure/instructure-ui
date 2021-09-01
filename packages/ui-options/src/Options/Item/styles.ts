@@ -24,7 +24,7 @@
 
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 import { OptionsItemTheme } from '@instructure/shared-types'
-import { OptionsItemProps } from './types'
+import { OptionsItemProps } from './props'
 
 /**
  * ---
