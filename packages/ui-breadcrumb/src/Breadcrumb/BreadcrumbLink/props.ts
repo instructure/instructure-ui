@@ -25,7 +25,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { DefaultProps, PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 
 type BreadcrumbLinkOwnProps = {
   children: React.ReactNode
@@ -78,7 +78,7 @@ const allowedProps: AllowedPropKeys = [
   'size'
 ]
 
-const defaultProps: DefaultProps<BreadcrumbLinkOwnProps> = {}
+const defaultProps = {}
 
 export type { BreadcrumbLinkProps }
 export { propTypes, defaultProps, allowedProps }

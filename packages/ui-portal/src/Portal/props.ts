@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { element } from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
-import type { DefaultProps, PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 
 /**
  * The DOM Node of the Portal. It is created as a `span` element.
@@ -106,7 +106,7 @@ const allowedProps: AllowedPropKeys = [
   'dir'
 ]
 
-const defaultProps: DefaultProps<PortalOwnProps> = {
+const defaultProps = {
   open: false,
   insertAt: 'bottom',
   onOpen: () => {},

@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import { testable } from '@instructure/ui-testable'
@@ -38,11 +37,13 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { BaseButtonProps, BaseButtonStyleProps } from './props'
+
+import { propTypes, defaultProps, allowedProps } from './props'
+import type { BaseButtonProps, BaseButtonStyleProps } from './props'
 
 /**
 ---
@@ -55,134 +56,9 @@ category: components/utilities
 class BaseButton extends Component<BaseButtonProps> {
   static readonly componentId = 'BaseButton'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * Specifies the `Button` children.
-     */
-    children: PropTypes.node,
-    /**
-     * Specifies the type of the `Button`'s underlying html element.
-     */
-    type: PropTypes.oneOf(['button', 'submit', 'reset']),
-    /**
-     * The size of the `Button`
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Provides a reference to the `Button`'s underlying html element.
-     */
-    elementRef: PropTypes.func,
-    /**
-     * The element to render as the component root, `Button` by default.
-     */
-    as: PropTypes.elementType,
-    /**
-     * Specifies if interaction with the `Button` is enabled, disabled, or readonly.
-     */
-    interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-    /**
-     * Specifies the color for the `Button`.
-     */
-    color: PropTypes.oneOf([
-      'primary',
-      'primary-inverse',
-      'secondary',
-      'success',
-      'danger'
-    ]),
-    /**
-     * Override the `Button`'s default focus outline color.
-     */
-    focusColor: PropTypes.oneOf(['info', 'inverse']),
-    /**
-     * The `Button` display property. When set to `inline-block`, the `Button` displays inline with other elements.
-     * When set to block, the `Button` expands to fill the width of the container.
-     */
-    display: PropTypes.oneOf(['inline-block', 'block']),
-    /**
-     * Sets the alignment of the `Button` children and/or icon.
-     */
-    textAlign: PropTypes.oneOf(['start', 'center']),
-    /**
-     * Specifies if the `Button` shape should be a circle or rectangle.
-     */
-    shape: PropTypes.oneOf(['rectangle', 'circle']),
-    /**
-     * Specifies if the `Button` should render with a solid background. When false, the background is transparent.
-     */
-    withBackground: PropTypes.bool,
-    /**
-     * Specifies if the `Button` should render with a border.
-     */
-    withBorder: PropTypes.bool,
-    /**
-     * Designates if the `Button` should render without padding. This option should only be set when `withBorder` and
-     * `withBackground` are also set to false.
-     */
-    isCondensed: PropTypes.bool,
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Specify a mouse cursor to use when hovering over the button.
-     * The `pointer` cursor is used by default.
-     */
-    cursor: PropTypes.string,
-    /**
-     * Specifies an href attribute for the `Button`'s underlying html element.
-     */
-    href: PropTypes.string,
-    /**
-     * Callback fired when the `Button` is clicked.
-     */
-    onClick: PropTypes.func,
-    /**
-     * Callback fired when the `Button` receives a keydown event.
-     */
-    onKeyDown: PropTypes.func,
-    /**
-     * An icon, or function that returns an icon.
-     */
-    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Specifies the tabindex of the `Button`.
-     */
-    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  } as const
-
-  static defaultProps = {
-    children: null,
-    type: 'button',
-    size: 'medium',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
-    as: 'button',
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
-    color: 'secondary',
-    focusColor: undefined,
-    shape: 'rectangle',
-    display: 'inline-block',
-    textAlign: 'start',
-    withBackground: true,
-    withBorder: true,
-    isCondensed: false,
-    margin: '0',
-    cursor: 'pointer',
-    href: undefined,
-    onClick: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyDown: (event) => {},
-    renderIcon: undefined,
-    tabIndex: undefined
-  } as const
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static defaultProps = defaultProps
 
   _rootElement = null
 
@@ -313,7 +189,7 @@ class BaseButton extends Component<BaseButtonProps> {
   renderChildren() {
     const { renderIcon, children, styles } = this.props
 
-    const wrappedChildren = <span css={styles.children}>{children}</span>
+    const wrappedChildren = <span css={styles?.children}>{children}</span>
 
     if (!renderIcon) {
       return wrappedChildren
@@ -321,25 +197,25 @@ class BaseButton extends Component<BaseButtonProps> {
 
     const { hasOnlyIconVisible } = this
     const wrappedIcon = (
-      <span css={styles.iconSVG}>{callRenderProp(renderIcon)}</span>
+      <span css={styles?.iconSVG}>{callRenderProp(renderIcon)}</span>
     )
 
     const flexChildren = hasOnlyIconVisible ? (
-      <span css={styles.iconOnly}>
+      <span css={styles?.iconOnly}>
         {wrappedIcon}
         {children}
       </span>
     ) : (
       [
-        <span key="icon" css={styles.iconWrapper}>
+        <span key="icon" css={styles?.iconWrapper}>
           {wrappedIcon}
         </span>,
-        <span key="children" css={styles.childrenWrapper}>
+        <span key="children" css={styles?.childrenWrapper}>
           {wrappedChildren}
         </span>
       ]
     )
-    return <span css={styles.childrenLayout}>{flexChildren}</span>
+    return <span css={styles?.childrenLayout}>{flexChildren}</span>
   }
 
   render() {
@@ -392,9 +268,9 @@ class BaseButton extends Component<BaseButtonProps> {
         //@ts-expect-error fix this later to be number
         tabIndex={onClick && as ? tabIndex || '0' : tabIndex}
         disabled={isDisabled || isReadOnly}
-        css={isEnabled ? styles.baseButton : null}
+        css={isEnabled ? styles?.baseButton : null}
       >
-        <span css={styles.content}>{this.renderChildren()}</span>
+        <span css={styles?.content}>{this.renderChildren()}</span>
       </View>
     )
   }

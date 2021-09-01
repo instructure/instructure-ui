@@ -30,7 +30,7 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { DefaultProps, PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 
 type BreadcrumbOwnProps = {
   children?: React.ReactNode // TODO: oneOf BreadcrumbLink
@@ -68,7 +68,7 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['children', 'label', 'margin', 'size']
 
-const defaultProps: DefaultProps<BreadcrumbOwnProps> = {
+const defaultProps = {
   size: 'medium',
   children: null
 }

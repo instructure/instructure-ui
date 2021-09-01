@@ -23,16 +23,17 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
-import { CondensedButtonProps } from './props'
+
+import { propTypes, defaultProps, allowedProps } from './props'
+import type { CondensedButtonProps } from './props'
 
 /**
 ---
@@ -45,71 +46,9 @@ category: components
 class CondensedButton extends Component<CondensedButtonProps> {
   static readonly componentId = 'CondensedButton'
 
-  static propTypes = {
-    /**
-     * Specifies the `CondensedButton` children.
-     */
-    children: PropTypes.node,
-    /**
-     * Specifies the type of the `CondensedButton`'s underlying html element.
-     */
-    type: PropTypes.oneOf(['button', 'submit', 'reset']),
-    /**
-     * The size of the `CondensedButton`
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Provides a reference to the `CondensedButton`'s underlying html element.
-     */
-    elementRef: PropTypes.func,
-    /**
-     * The element to render as the component root, `button` by default.
-     */
-    as: PropTypes.elementType,
-    /**
-     * Specifies if interaction with the `CondensedButton` is enabled, disabled, or readonly.
-     */
-    interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-    /**
-     * Specifies the color for the `CondensedButton`.
-     */
-    color: PropTypes.oneOf(['primary', 'primary-inverse']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Specify a mouse cursor to use when hovering over the button.
-     * The `pointer` cursor is used by default.
-     */
-    cursor: PropTypes.string,
-    /**
-     * Specifies an href attribute for the `CondensedButton`'s underlying html element.
-     */
-    href: PropTypes.string,
-    /**
-     * An icon, or function that returns an icon.
-     */
-    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-  }
-
-  static defaultProps = {
-    children: null,
-    type: 'button',
-    size: 'medium',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
-    as: 'button',
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
-    color: 'primary',
-    margin: '0',
-    cursor: 'pointer',
-    href: undefined,
-    renderIcon: undefined
-  }
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static defaultProps = defaultProps
 
   _baseButton = null
 

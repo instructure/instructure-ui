@@ -22,12 +22,13 @@
  * SOFTWARE.
  */
 
-import type { Spacing } from '@instructure/emotion'
-import { AsElementType } from '@instructure/shared-types'
+import PropTypes from 'prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
-export type CloseButtonProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+
+type CloseButtonOwnProps = {
   screenReaderLabel: string | React.ReactNode
   color?: 'primary' | 'primary-inverse'
   interaction?: 'enabled' | 'disabled' | 'readonly'
@@ -43,3 +44,107 @@ export type CloseButtonProps = {
   cursor?: string
   tabIndex?: number | string
 }
+
+type PropKeys = keyof CloseButtonOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type CloseButtonProps = CloseButtonOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * An accessible label for the `CloseButton` (required)
+   */
+  screenReaderLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+    .isRequired,
+  /**
+   * Specifies the color for the `CloseButton`.
+   */
+  color: PropTypes.oneOf(['primary', 'primary-inverse']),
+  /**
+   * Specifies if interaction with the `CloseButton` is enabled, disabled, or readonly.
+   */
+  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
+  /**
+   * Provides a reference to the `CloseButton`'s underlying html element.
+   */
+  elementRef: PropTypes.func,
+  /**
+   * The size of the `CloseButton`
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Callback fired when the `CloseButton` is clicked.
+   */
+  onClick: PropTypes.func,
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Specifies the placement of the `CloseButton`
+   */
+  placement: PropTypes.oneOf(['start', 'end', 'static']),
+  /**
+   * Specifies the offset distance for the `CloseButton` with respect to both the top and start/end of the container.
+   * Note that for this property to have an effect, the `placement` prop must be set to either `start` or `end`. The
+   * offset will also be created with respect to a positioned parent. If it does not appear to be working, try setting
+   * the `position` of the parent container to `relative`.
+   */
+  offset: PropTypes.oneOf(['none', 'x-small', 'small', 'medium']),
+  /**
+   * Specifies the type of the `Button`'s underlying html element.
+   */
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
+  /**
+   * The element to render as the component root, `CloseButton` by default.
+   */
+  as: PropTypes.elementType,
+  /**
+   * Specifies an href attribute for the `CloseButton`'s underlying html element.
+   */
+  href: PropTypes.string,
+  /**
+   * Specify a mouse cursor to use when hovering over the `CloseButton`.
+   */
+  cursor: PropTypes.string,
+  /**
+   * Specifies the tabindex of the `CloseButton`.
+   */
+  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'as',
+  'color',
+  'cursor',
+  'elementRef',
+  'href',
+  'interaction',
+  'margin',
+  'offset',
+  'onClick',
+  'placement',
+  'screenReaderLabel',
+  'size',
+  'tabIndex',
+  'type'
+]
+
+const defaultProps = {
+  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
+  onClick: (event) => {},
+  // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+  type: 'button',
+  placement: 'static',
+  offset: 'x-small',
+  size: 'small',
+  margin: '0',
+  as: 'button',
+  cursor: 'pointer'
+}
+
+export type { CloseButtonProps }
+export { propTypes, defaultProps, allowedProps }

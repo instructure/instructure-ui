@@ -27,11 +27,7 @@ import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type {
-  AsElementType,
-  DefaultProps,
-  PropValidators
-} from '@instructure/shared-types'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
 
 type BillboardOwnProps = {
   hero?: React.ReactElement | ((...args: any[]) => any)
@@ -132,7 +128,7 @@ const allowedProps: AllowedPropKeys = [
   'size'
 ]
 
-const defaultProps: DefaultProps<BillboardOwnProps> = {
+const defaultProps = {
   disabled: false,
   readOnly: false,
   size: 'medium',

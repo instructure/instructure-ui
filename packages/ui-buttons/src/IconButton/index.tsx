@@ -23,17 +23,18 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
-import { IconButtonProps } from './props'
+
+import { propTypes, defaultProps, allowedProps } from './props'
+import type { IconButtonProps } from './props'
 
 /**
 ---
@@ -47,101 +48,9 @@ category: components
 class IconButton extends Component<IconButtonProps> {
   static readonly componentId = 'IconButton'
 
-  static propTypes = {
-    /**
-     * An icon, or function returning an icon (identical to the `renderIcon` prop).
-     */
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * An icon, or function that returns an icon (identical to the `children` prop).
-     */
-    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * An accessible label for the `IconButton`.
-     */
-    screenReaderLabel: PropTypes.string.isRequired,
-    /**
-     * Specifies the type of the `IconButton`'s underlying html element.
-     */
-    type: PropTypes.oneOf(['button', 'submit', 'reset']),
-    /**
-     * The size of the `IconButton`
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Provides a reference to the `IconButton`'s underlying html element.
-     */
-    elementRef: PropTypes.func,
-    /**
-     * The element to render as the component root, `button` by default.
-     */
-    as: PropTypes.elementType,
-    /**
-     * Specifies if interaction with the `IconButton` is enabled, disabled, or readonly.
-     */
-    interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-    /**
-     * Specifies the color for the `IconButton`.
-     */
-    color: PropTypes.oneOf([
-      'primary',
-      'primary-inverse',
-      'secondary',
-      'success',
-      'danger'
-    ]),
-    /**
-     * Override the `Button`'s default focus outline color.
-     */
-    focusColor: PropTypes.oneOf(['info', 'inverse']),
-    /**
-     * Specifies if the `IconButton` shape should be a circle or rectangle.
-     */
-    shape: PropTypes.oneOf(['rectangle', 'circle']),
-    /**
-     * Specifies if the `IconButton` should render with a solid background. When false, the background is transparent.
-     */
-    withBackground: PropTypes.bool,
-    /**
-     * Specifies if the `IconButton` should render with a border.
-     */
-    withBorder: PropTypes.bool,
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Specify a mouse cursor to use when hovering over the button.
-     * The `pointer` cursor is used by default.
-     */
-    cursor: PropTypes.string,
-    /**
-     * Specifies an href attribute for the `IconButton`'s underlying html element.
-     */
-    href: PropTypes.string
-  }
-
-  static defaultProps = {
-    children: null,
-    renderIcon: undefined,
-    type: 'button',
-    size: 'medium',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
-    as: 'button',
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    interaction: undefined,
-    color: 'secondary',
-    focusColor: undefined,
-    shape: 'rectangle',
-    withBackground: true,
-    withBorder: true,
-    margin: '0',
-    cursor: 'pointer',
-    href: undefined
-  }
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static defaultProps = defaultProps
 
   _baseButton = null
 
