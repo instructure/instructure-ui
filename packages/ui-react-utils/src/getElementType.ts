@@ -47,13 +47,11 @@ interface ComponentWithAsProp {
  * @returns {String} the element type
  */
 function getElementType<T extends ComponentWithAsProp>(
-  // TODO: remove |any and as any casts when propTypes are removed
-  Component: ComponentType<T> | any,
+  Component: Omit<ComponentType<T>, 'propTypes'>,
   props: T,
   getDefault?: () => AsElementType
-  // TODO: add better typing to the return value
-): any {
-  if (props.as && props.as !== Component.defaultProps.as) {
+) {
+  if (props.as && props.as !== Component.defaultProps?.as) {
     return props.as
   }
 
@@ -69,9 +67,7 @@ function getElementType<T extends ComponentWithAsProp>(
     warn(
       // if to prop is used without as
       !props.as,
-      `[${
-        Component.displayName || Component.name
-      }] \`as\` prop should be provided when using \`to\``
+      `[${Component.displayName}] \`as\` prop should be provided when using \`to\``
     )
     return 'a'
   }
@@ -80,7 +76,7 @@ function getElementType<T extends ComponentWithAsProp>(
     return 'button'
   }
 
-  return Component.defaultProps.as || 'span'
+  return Component.defaultProps?.as || 'span'
 }
 
 export default getElementType
