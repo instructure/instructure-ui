@@ -23,5 +23,5 @@
  */
 export { Calendar } from './Calendar'
 
-export type { CalendarProps } from './Calendar/types'
-export type { CalendarDayProps } from './Calendar/Day/types'
+export type { CalendarProps } from './Calendar/props'
+export type { CalendarDayProps } from './Calendar/Day/props'

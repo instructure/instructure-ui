@@ -25,5 +25,5 @@
 export { ProgressBar } from './ProgressBar'
 export { ProgressCircle } from './ProgressCircle'
 
-export type { ProgressBarProps } from './ProgressBar/types'
-export type { ProgressCircleProps } from './ProgressCircle/types'
+export type { ProgressBarProps } from './ProgressBar/props'
+export type { ProgressCircleProps } from './ProgressCircle/props'

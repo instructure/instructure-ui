@@ -24,7 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { BadgeTheme } from '@instructure/shared-types'
-import { BadgeProps } from './types'
+import { BadgeProps } from './props'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation

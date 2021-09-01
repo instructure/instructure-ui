@@ -33,7 +33,7 @@ import { testable } from '@instructure/ui-testable'
 import { RatingIcon } from '../RatingIcon'
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
-import { RatingProps } from './types'
+import { RatingProps } from './props'
 
 /**
 ---

@@ -37,7 +37,7 @@ import {
 } from '@instructure/ui-react-utils'
 
 import { RadioInput } from '../RadioInput'
-import { RadioInputGroupProps } from './types'
+import { RadioInputGroupProps } from './props'
 
 /**
 ---

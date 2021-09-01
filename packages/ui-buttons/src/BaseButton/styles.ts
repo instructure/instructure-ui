@@ -23,7 +23,7 @@
  */
 
 import { BaseButtonTheme } from '@instructure/shared-types'
-import { BaseButtonProps, BaseButtonStyleProps } from './types'
+import { BaseButtonProps, BaseButtonStyleProps } from './props'
 
 /**
  * ---

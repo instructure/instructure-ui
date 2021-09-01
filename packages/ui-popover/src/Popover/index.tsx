@@ -52,7 +52,7 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 
 import { FocusRegion } from '@instructure/ui-a11y-utils'
-import { PopoverProps } from './types'
+import { PopoverProps } from './props'
 
 /**
 ---

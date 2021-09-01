@@ -33,7 +33,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { NavigationItemProps } from './types'
+import { NavigationItemProps } from './props'
 
 /**
 ---

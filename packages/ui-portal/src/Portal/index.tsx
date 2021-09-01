@@ -29,8 +29,8 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
-import { propTypes, allowedProps } from './types'
-import type { PortalNode, PortalProps, PortalState } from './types'
+import { propTypes, allowedProps } from './props'
+import type { PortalNode, PortalProps, PortalState } from './props'
 
 /**
 ---

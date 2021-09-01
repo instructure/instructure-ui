@@ -33,7 +33,7 @@ import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
-import { IconButtonProps } from './types'
+import { IconButtonProps } from './props'
 
 /**
 ---

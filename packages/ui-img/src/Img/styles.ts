@@ -23,7 +23,7 @@
  */
 
 import { ImgTheme } from '@instructure/shared-types'
-import { ImgProps } from './types'
+import { ImgProps } from './props'
 
 /**
  * ---

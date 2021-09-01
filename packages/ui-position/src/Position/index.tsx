@@ -49,7 +49,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { PositionProps, PositionState } from './types'
+import { PositionProps, PositionState } from './props'
 
 import { calculateElementPosition } from '../calculateElementPosition'
 import { PositionElement, PositionPropTypes } from '../PositionPropTypes'

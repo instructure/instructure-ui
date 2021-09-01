@@ -23,7 +23,7 @@
  */
 
 import { TableRowTheme } from '@instructure/shared-types'
-import { TableRowProps } from './types'
+import { TableRowProps } from './props'
 
 /**
  * ---

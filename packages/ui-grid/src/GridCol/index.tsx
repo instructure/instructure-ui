@@ -32,7 +32,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { GridColProps } from './types'
+import { GridColProps } from './props'
 
 // TODO: get numcols from theme config
 const COL_WIDTHS = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]

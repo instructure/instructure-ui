@@ -23,7 +23,7 @@
  */
 import React from 'react'
 import { Flex } from '../index'
-import { FlexProps } from '../types'
+import { FlexProps } from '../props'
 
 const regular = [
   <Flex.Item key="0">One</Flex.Item>,

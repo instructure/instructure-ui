@@ -42,7 +42,7 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { BaseButtonProps, BaseButtonStyleProps } from './types'
+import { BaseButtonProps, BaseButtonStyleProps } from './props'
 
 /**
 ---

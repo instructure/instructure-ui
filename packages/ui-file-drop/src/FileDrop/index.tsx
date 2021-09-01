@@ -40,7 +40,7 @@ import { getEventFiles } from './utils/getEventFiles'
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FileDropProps, FileDropState, FileDropStyleProps } from './types'
+import { FileDropProps, FileDropState, FileDropStyleProps } from './props'
 
 function keyEventIsClickButton(e: any) {
   return e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter

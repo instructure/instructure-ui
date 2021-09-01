@@ -38,7 +38,7 @@ import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
 
 import generateStyle from './styles'
-import { PaginationProps } from './types'
+import { PaginationProps } from './props'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'arr' implicitly has an 'any' type.

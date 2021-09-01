@@ -23,7 +23,7 @@
  */
 
 import { ProgressBarTheme } from '@instructure/shared-types'
-import { ProgressBarProps } from './types'
+import { ProgressBarProps } from './props'
 
 /**
  * ---

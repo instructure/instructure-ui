@@ -42,7 +42,7 @@ import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { LinkProps, LinkStyleProps } from './types'
+import { LinkProps, LinkStyleProps } from './props'
 
 /**
 ---

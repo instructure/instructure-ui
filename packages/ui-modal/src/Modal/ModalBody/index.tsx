@@ -33,7 +33,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ModalBodyProps } from './types'
+import { ModalBodyProps } from './props'
 
 /**
 ---

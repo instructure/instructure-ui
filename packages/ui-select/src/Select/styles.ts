@@ -23,7 +23,7 @@
  */
 
 import { SelectTheme } from '@instructure/shared-types'
-import { SelectProps } from './types'
+import { SelectProps } from './props'
 
 /**
  * Generates the style object from the theme and provided additional information

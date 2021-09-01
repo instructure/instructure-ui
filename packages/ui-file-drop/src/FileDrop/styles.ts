@@ -23,7 +23,7 @@
  */
 
 import { FileDropTheme } from '@instructure/shared-types'
-import { FileDropProps, FileDropStyleProps } from './types'
+import { FileDropProps, FileDropStyleProps } from './props'
 
 /**
  * ---

@@ -23,7 +23,7 @@
  */
 
 import { TextTheme } from '@instructure/shared-types'
-import { TextProps } from './types'
+import { TextProps } from './props'
 
 /**
  * ---

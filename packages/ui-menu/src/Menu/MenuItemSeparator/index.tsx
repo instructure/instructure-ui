@@ -32,7 +32,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MenuSeparatorProps } from './types'
+import { MenuSeparatorProps } from './props'
 
 /**
 ---

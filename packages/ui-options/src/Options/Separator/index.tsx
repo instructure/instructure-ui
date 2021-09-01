@@ -32,7 +32,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { OptionsSeparatorProps } from './types'
+import { OptionsSeparatorProps } from './props'
 
 /**
 ---

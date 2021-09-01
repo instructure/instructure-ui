@@ -31,7 +31,7 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
 import { InlineListItem } from './InlineListItem'
-import { InlineListProps } from './types'
+import { InlineListProps } from './props'
 
 /**
 ---

@@ -23,7 +23,7 @@
  */
 
 import { AvatarTheme } from '@instructure/shared-types'
-import { AvatarProps, AvatarState } from './types'
+import { AvatarProps, AvatarState } from './props'
 
 /**
  * ---

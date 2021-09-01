@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { Option } from '../Option'
-import { SimpleSelectGroupProps } from './types'
+import { SimpleSelectGroupProps } from './props'
 
 /**
 ---

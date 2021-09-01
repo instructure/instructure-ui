@@ -36,7 +36,7 @@ import { View } from '@instructure/ui-view'
 
 import { Editable } from '../Editable'
 import generateStyle from './styles'
-import { InPlaceEditProps } from './types'
+import { InPlaceEditProps } from './props'
 
 /**
 ---

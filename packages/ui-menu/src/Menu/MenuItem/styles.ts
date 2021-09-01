@@ -23,7 +23,7 @@
  */
 
 import { MenuItemTheme } from '@instructure/shared-types'
-import { MenuItemProps } from './types'
+import { MenuItemProps } from './props'
 
 /**
  * ---

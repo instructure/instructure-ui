@@ -49,7 +49,7 @@ import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import { DateInputProps } from './types'
+import { DateInputProps } from './props'
 
 /**
 ---

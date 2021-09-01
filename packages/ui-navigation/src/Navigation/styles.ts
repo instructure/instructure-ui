@@ -23,7 +23,7 @@
  */
 
 import { NavigationTheme } from '@instructure/shared-types'
-import { NavigationProps, NavigationState } from './types'
+import { NavigationProps, NavigationState } from './props'
 
 /**
  * ---

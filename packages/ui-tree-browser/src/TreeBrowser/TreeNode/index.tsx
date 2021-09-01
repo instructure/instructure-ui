@@ -34,7 +34,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from '../TreeButton/styles'
 import generateComponentTheme from '../TreeButton/theme'
-import { TreeBrowserNodeProps } from './types'
+import { TreeBrowserNodeProps } from './props'
 
 /**
 ---

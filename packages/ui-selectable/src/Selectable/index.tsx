@@ -31,7 +31,7 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
-import { SelectableProps } from './types'
+import { SelectableProps } from './props'
 
 /**
 ---

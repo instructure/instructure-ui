@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { CheckboxProps } from './types'
+import { CheckboxProps } from './props'
 
 /**
  * ---

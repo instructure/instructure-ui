@@ -33,7 +33,7 @@ export type {
   ResponsiveProps,
   ResponsivePropsObject,
   ResponsiveByBreakpointProps
-} from './Responsive/types'
+} from './Responsive/props'
 
 export type {
   BreakpointQueries,

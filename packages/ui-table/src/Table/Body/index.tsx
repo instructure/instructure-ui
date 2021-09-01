@@ -38,7 +38,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { Row } from '../Row'
-import { TableBodyProps } from './types'
+import { TableBodyProps } from './props'
 
 /**
 ---

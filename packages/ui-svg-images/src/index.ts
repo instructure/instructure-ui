@@ -25,5 +25,5 @@
 export { InlineSVG } from './InlineSVG'
 export { SVGIcon } from './SVGIcon'
 
-export type { InlineSVGProps } from './InlineSVG/types'
-export type { SVGIconProps } from './SVGIcon/types'
+export type { InlineSVGProps } from './InlineSVG/props'
+export type { SVGIconProps } from './SVGIcon/props'

@@ -23,7 +23,7 @@
  */
 export { TreeBrowser } from './TreeBrowser'
 
-export type { TreeBrowserProps } from './TreeBrowser/types'
-export type { TreeBrowserButtonProps } from './TreeBrowser/TreeButton/types'
-export type { TreeBrowserCollectionProps } from './TreeBrowser/TreeCollection/types'
-export type { TreeBrowserNodeProps } from './TreeBrowser/TreeNode/types'
+export type { TreeBrowserProps } from './TreeBrowser/props'
+export type { TreeBrowserButtonProps } from './TreeBrowser/TreeButton/props'
+export type { TreeBrowserCollectionProps } from './TreeBrowser/TreeCollection/props'
+export type { TreeBrowserNodeProps } from './TreeBrowser/TreeNode/props'

@@ -34,7 +34,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { InlineSVGProps } from './types'
+import { InlineSVGProps } from './props'
 
 /**
 ---

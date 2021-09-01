@@ -43,7 +43,7 @@ import {
   DrawerLayoutTrayState,
   DrawerLayoutTrayStyleProps,
   DrawerTrayPlacement
-} from './types'
+} from './props'
 
 /**
 ---

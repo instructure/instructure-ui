@@ -33,7 +33,7 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ImgProps } from './types'
+import { ImgProps } from './props'
 
 /**
 ---

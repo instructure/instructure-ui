@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Focusable } from './Focusable'
-export type { FocusableProps } from './Focusable/types'
+export type { FocusableProps } from './Focusable/props'

@@ -24,7 +24,7 @@
 
 import { GridTheme } from '@instructure/shared-types'
 import { GridBreakpoints } from '../GridTypes'
-import { GridColProps } from './types'
+import { GridColProps } from './props'
 
 /**
  * ---

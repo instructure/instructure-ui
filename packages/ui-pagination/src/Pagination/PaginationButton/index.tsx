@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { BaseButton } from '@instructure/ui-buttons'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { PaginationPageProps } from './types'
+import { PaginationPageProps } from './props'
 
 /**
 ---

@@ -23,7 +23,7 @@
  */
 
 import { BillboardTheme } from '@instructure/shared-types'
-import { BillboardProps } from './types'
+import { BillboardProps } from './props'
 
 /**
  * ---

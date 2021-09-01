@@ -23,7 +23,7 @@
  */
 
 import { FormFieldGroupTheme } from '@instructure/shared-types'
-import { FormFieldGroupProps, FormFieldGroupStyleProps } from './types'
+import { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
 
 /**
  * ---

@@ -23,7 +23,7 @@
  */
 
 import { ProgressCircleTheme } from '@instructure/shared-types'
-import { ProgressCircleProps, ProgressCircleState } from './types'
+import { ProgressCircleProps, ProgressCircleState } from './props'
 
 /**
  * ---

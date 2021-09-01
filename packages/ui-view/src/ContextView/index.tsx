@@ -35,7 +35,7 @@ import { View } from '../View'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ContextViewProps } from './types'
+import { ContextViewProps } from './props'
 
 /**
 ---

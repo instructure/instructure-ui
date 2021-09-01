@@ -37,7 +37,7 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { RangeInputProps } from './types'
+import { RangeInputProps } from './props'
 
 /**
 ---

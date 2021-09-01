@@ -23,7 +23,7 @@
  */
 
 import { ToggleFacadeTheme } from '@instructure/shared-types'
-import { ToggleFacadeProps } from './types'
+import { ToggleFacadeProps } from './props'
 
 /**
  * ---

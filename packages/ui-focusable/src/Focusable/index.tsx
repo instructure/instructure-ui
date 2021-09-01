@@ -32,7 +32,7 @@ import {
   findFocusable
 } from '@instructure/ui-dom-utils'
 import { logWarn as warn } from '@instructure/console'
-import { FocusableProps } from './types'
+import { FocusableProps } from './props'
 
 /**
 ---

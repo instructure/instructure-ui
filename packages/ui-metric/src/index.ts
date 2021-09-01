@@ -25,5 +25,5 @@
 export { Metric } from './Metric'
 export { MetricGroup } from './MetricGroup'
 
-export type { MetricProps } from './Metric/types'
-export type { MetricGroupProps } from './MetricGroup/types'
+export type { MetricProps } from './Metric/props'
+export type { MetricGroupProps } from './MetricGroup/props'

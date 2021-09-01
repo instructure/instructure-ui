@@ -23,7 +23,7 @@
  */
 
 import { BylineTheme } from '@instructure/shared-types'
-import { BylineProps } from './types'
+import { BylineProps } from './props'
 
 /**
  * ---

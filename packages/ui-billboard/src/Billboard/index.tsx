@@ -38,7 +38,7 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { BillboardProps } from './types'
+import { BillboardProps } from './props'
 
 /**
 ---

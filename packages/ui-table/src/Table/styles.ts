@@ -23,7 +23,7 @@
  */
 
 import { TableTheme } from '@instructure/shared-types'
-import { TableProps } from './types'
+import { TableProps } from './props'
 
 /**
  * ---

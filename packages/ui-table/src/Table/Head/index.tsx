@@ -44,7 +44,7 @@ import generateComponentTheme from './theme'
 
 import { Row } from '../Row'
 import { ColHeader } from '../ColHeader'
-import { TableHeadProps } from './types'
+import { TableHeadProps } from './props'
 
 /**
 ---

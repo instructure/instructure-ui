@@ -49,7 +49,7 @@ import { ModalFooter } from './ModalFooter'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ModalProps } from './types'
+import { ModalProps } from './props'
 
 /**
 ---

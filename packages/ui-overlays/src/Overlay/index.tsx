@@ -34,7 +34,7 @@ import { element } from '@instructure/ui-prop-types'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { Transition } from '@instructure/ui-motion'
-import { OverlayProps } from './types'
+import { OverlayProps } from './props'
 
 /**
 ---

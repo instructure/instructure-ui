@@ -23,7 +23,7 @@
  */
 
 import { FlexTheme } from '@instructure/shared-types'
-import { FlexProps } from './types'
+import { FlexProps } from './props'
 
 /**
  * ---

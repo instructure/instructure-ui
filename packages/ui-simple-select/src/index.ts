@@ -24,6 +24,6 @@
 
 export { SimpleSelect } from './SimpleSelect'
 
-export type { SimpleSelectProps } from './SimpleSelect/types'
-export type { SimpleSelectGroupProps } from './SimpleSelect/Group/types'
-export type { SimpleSelectOptionProps } from './SimpleSelect/Option/types'
+export type { SimpleSelectProps } from './SimpleSelect/props'
+export type { SimpleSelectGroupProps } from './SimpleSelect/Group/props'
+export type { SimpleSelectOptionProps } from './SimpleSelect/Option/props'

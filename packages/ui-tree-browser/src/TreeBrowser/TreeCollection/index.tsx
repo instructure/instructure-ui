@@ -38,7 +38,7 @@ import { TreeNode } from '../TreeNode'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { TreeBrowserCollectionProps } from './types'
+import { TreeBrowserCollectionProps } from './props'
 
 /**
 ---

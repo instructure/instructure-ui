@@ -45,8 +45,8 @@ import { withStyle, jsx, EmotionThemeProvider } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './types'
-import type { AlertProps } from './types'
+import { propTypes, allowedProps } from './props'
+import type { AlertProps } from './props'
 
 /**
 ---

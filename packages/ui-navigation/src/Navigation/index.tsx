@@ -39,7 +39,7 @@ import { NavigationItem } from './NavigationItem'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { NavigationProps, NavigationState } from './types'
+import { NavigationProps, NavigationState } from './props'
 
 // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'minimized' implicitly has an 'any... Remove this comment to see the full error message
 const navMinimized = ({ minimized }) => ({ minimized: !minimized })

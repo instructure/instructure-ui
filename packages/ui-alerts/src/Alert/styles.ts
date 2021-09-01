@@ -23,7 +23,7 @@
  */
 
 import { AlertTheme } from '@instructure/shared-types'
-import { AlertProps } from './types'
+import { AlertProps } from './props'
 
 /**
  * ---

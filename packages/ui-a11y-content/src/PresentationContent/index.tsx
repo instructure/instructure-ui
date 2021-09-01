@@ -27,8 +27,8 @@ import React, { Component } from 'react'
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
-import { propTypes, allowedProps } from './types'
-import type { PresentationContentProps } from './types'
+import { propTypes, allowedProps } from './props'
+import type { PresentationContentProps } from './props'
 
 /**
 ---

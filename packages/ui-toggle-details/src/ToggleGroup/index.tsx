@@ -42,7 +42,7 @@ import {
   IconArrowOpenDownSolid
 } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
-import { ToggleGroupProps } from './types'
+import { ToggleGroupProps } from './props'
 
 /**
 ---

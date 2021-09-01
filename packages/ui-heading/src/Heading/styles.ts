@@ -23,7 +23,7 @@
  */
 
 import { HeadingTheme } from '@instructure/shared-types'
-import { HeadingProps } from './types'
+import { HeadingProps } from './props'
 
 /**
  * ---

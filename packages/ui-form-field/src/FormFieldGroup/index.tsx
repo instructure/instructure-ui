@@ -35,7 +35,7 @@ import { FormPropTypes } from '../FormPropTypes'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FormFieldGroupProps, FormFieldGroupStyleProps } from './types'
+import { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
 
 /**
 ---

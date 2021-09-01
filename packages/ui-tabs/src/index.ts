@@ -24,6 +24,6 @@
 
 export { Tabs } from './Tabs'
 
-export type { TabsProps } from './Tabs/types'
-export type { TabsPanelProps } from './Tabs/Panel/types'
-export type { TabsTabProps } from './Tabs/Tab/types'
+export type { TabsProps } from './Tabs/props'
+export type { TabsPanelProps } from './Tabs/Panel/props'
+export type { TabsTabProps } from './Tabs/Tab/props'

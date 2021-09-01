@@ -23,7 +23,7 @@
  */
 
 import { FormFieldMessageTheme } from '@instructure/shared-types'
-import { FormFieldMessageProps } from './types'
+import { FormFieldMessageProps } from './props'
 import { FormMessageType } from '../FormPropTypes'
 
 /**

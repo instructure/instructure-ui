@@ -32,7 +32,7 @@ import { logError as error } from '@instructure/console'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import { FocusRegionManager } from '@instructure/ui-a11y-utils'
 
-import { DialogProps } from './types'
+import { DialogProps } from './props'
 
 /**
 ---

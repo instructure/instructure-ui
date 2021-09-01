@@ -44,7 +44,7 @@ import { FormFieldMessages } from '../FormFieldMessages'
 import { FormPropTypes } from '../FormPropTypes'
 
 import generateStyle from './styles'
-import { FormFieldLayoutProps } from './types'
+import { FormFieldLayoutProps } from './props'
 
 /**
 ---

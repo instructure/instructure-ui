@@ -31,7 +31,7 @@ import { View } from '@instructure/ui-view'
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
-import { FlexItemProps } from './types'
+import { FlexItemProps } from './props'
 
 /**
 ---

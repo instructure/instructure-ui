@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { TreeBrowserButtonProps } from '../TreeButton/types'
+import { TreeBrowserButtonProps } from '../TreeButton/props'
 
 export type TreeBrowserNodeProps = Pick<
   TreeBrowserButtonProps,

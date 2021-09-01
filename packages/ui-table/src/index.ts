@@ -23,10 +23,10 @@
  */
 export { Table } from './Table'
 
-export type { TableProps } from './Table/types'
-export type { TableBodyProps } from './Table/Body/types'
-export type { TableCellProps } from './Table/Cell/types'
-export type { TableColHeaderProps } from './Table/ColHeader/types'
-export type { TableHeadProps } from './Table/Head/types'
-export type { TableRowProps } from './Table/Row/types'
-export type { TableRowHeaderProps } from './Table/RowHeader/types'
+export type { TableProps } from './Table/props'
+export type { TableBodyProps } from './Table/Body/props'
+export type { TableCellProps } from './Table/Cell/props'
+export type { TableColHeaderProps } from './Table/ColHeader/props'
+export type { TableHeadProps } from './Table/Head/props'
+export type { TableRowProps } from './Table/Row/props'
+export type { TableRowHeaderProps } from './Table/RowHeader/props'

@@ -24,7 +24,7 @@
 
 import { keyframes } from '@instructure/emotion'
 import { CodeEditorTheme } from '@instructure/shared-types'
-import { CodeEditorProps } from './types'
+import { CodeEditorProps } from './props'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation

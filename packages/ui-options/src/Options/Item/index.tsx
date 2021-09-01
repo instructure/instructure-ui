@@ -37,7 +37,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { OptionsItemProps } from './types'
+import { OptionsItemProps } from './props'
 
 /**
 ---

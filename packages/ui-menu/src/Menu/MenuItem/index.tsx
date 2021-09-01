@@ -39,7 +39,7 @@ import { MenuContext } from '../../MenuContext'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MenuItemProps } from './types'
+import { MenuItemProps } from './props'
 
 /**
 ---

@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-import { SelectOptionProps } from './types'
+import { SelectOptionProps } from './props'
 
 /**
 ---

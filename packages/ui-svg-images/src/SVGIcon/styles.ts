@@ -23,7 +23,7 @@
  */
 
 import { SVGIconTheme } from '@instructure/shared-types'
-import { SVGIconProps } from './types'
+import { SVGIconProps } from './props'
 
 /**
  * ---

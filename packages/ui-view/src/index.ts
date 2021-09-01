@@ -25,5 +25,5 @@
 export { ContextView } from './ContextView'
 export { View } from './View'
 
-export type { ContextViewProps } from './ContextView/types'
-export type { ViewProps } from './View/types'
+export type { ContextViewProps } from './ContextView/props'
+export type { ViewProps } from './View/props'

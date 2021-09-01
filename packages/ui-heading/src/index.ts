@@ -23,4 +23,4 @@
  */
 
 export { Heading } from './Heading'
-export type { HeadingProps } from './Heading/types'
+export type { HeadingProps } from './Heading/props'

@@ -23,7 +23,7 @@
  */
 
 import { MetricTheme } from '@instructure/shared-types'
-import { MetricProps } from './types'
+import { MetricProps } from './props'
 
 /**
  * ---

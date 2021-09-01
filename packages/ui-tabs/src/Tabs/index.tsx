@@ -51,7 +51,7 @@ import generateComponentTheme from './theme'
 
 import { Tab } from './Tab'
 import { Panel } from './Panel'
-import { TabsProps } from './types'
+import { TabsProps } from './props'
 
 /**
 ---
