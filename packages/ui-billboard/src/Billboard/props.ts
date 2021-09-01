@@ -22,12 +22,18 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
-import type { Spacing } from '@instructure/emotion'
+import PropTypes from 'prop-types'
 
-export type BillboardProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  DefaultProps,
+  PropValidators
+} from '@instructure/shared-types'
+
+type BillboardOwnProps = {
   hero?: React.ReactElement | ((...args: any[]) => any)
   size?: 'small' | 'medium' | 'large'
   as?: AsElementType
@@ -42,3 +48,99 @@ export type BillboardProps = {
   readOnly?: boolean
   margin?: Spacing
 }
+
+type PropKeys = keyof BillboardOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type BillboardProps = BillboardOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Provide an <Img> component or Instructure Icon for the hero image
+   */
+  hero: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  /**
+   * If you're using an icon, this prop will size it. Also sets the font-size
+   * of the headline and message.
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * the element type to render as
+   */
+  as: PropTypes.elementType,
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef: PropTypes.func,
+  /**
+   * The headline for the Billboard. Is styled as an h1 element by default
+   */
+  heading: PropTypes.string,
+  /**
+   * Choose the appropriately semantic tag for the heading
+   */
+  headingAs: PropTypes.oneOf(['h1', 'h2', 'h3', 'span']),
+  /**
+   * Choose the font-size for the heading (see the Heading component)
+   */
+  headingLevel: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4']),
+  /**
+   * Instructions or information for the Billboard. Note: you should not pass
+   * interactive content to this prop if you are also providing an `href` or
+   * `onClick`. That would cause the Billboard to render as a button or link
+   * and would result in nested interactive content.
+   */
+  message: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * If you add an onClick prop, the Billboard renders as a clickable button
+   */
+  onClick: PropTypes.func,
+  /**
+   * If `href` is provided, Billboard will render as a link
+   */
+  href: PropTypes.string,
+  /**
+   * Whether or not to disable the billboard
+   */
+  disabled: PropTypes.bool,
+  /**
+   * Works just like disabled but keeps the same styles as if it were active
+   */
+  readOnly: PropTypes.bool,
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing
+}
+
+const allowedProps: AllowedPropKeys = [
+  'as',
+  'disabled',
+  'elementRef',
+  'heading',
+  'headingAs',
+  'headingLevel',
+  'hero',
+  'href',
+  'margin',
+  'message',
+  'onClick',
+  'readOnly',
+  'size'
+]
+
+const defaultProps: DefaultProps<BillboardOwnProps> = {
+  disabled: false,
+  readOnly: false,
+  size: 'medium',
+  headingAs: 'span',
+  headingLevel: 'h1',
+  as: 'span',
+  elementRef: () => {}
+}
+
+export type { BillboardProps }
+export { propTypes, defaultProps, allowedProps }

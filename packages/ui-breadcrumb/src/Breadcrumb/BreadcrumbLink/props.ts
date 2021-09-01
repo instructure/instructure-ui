@@ -23,11 +23,62 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export type BreadcrumbLinkProps = {
+import type { DefaultProps, PropValidators } from '@instructure/shared-types'
+
+type BreadcrumbLinkOwnProps = {
+  children: React.ReactNode
   href?: string
   onClick?: (...args: any[]) => any
   size?: 'small' | 'medium' | 'large'
   renderIcon?: React.ReactNode | ((...args: any[]) => any)
   iconPlacement?: 'start' | 'end'
 }
+
+type PropKeys = keyof BreadcrumbLinkOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type BreadcrumbLinkProps = BreadcrumbLinkOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Content to render as the crumb, generally should be text.
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * Link the crumb should direct to; if an href is provided, the crumb will render as a link
+   */
+  href: PropTypes.string,
+  /**
+   * If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button
+   */
+  onClick: PropTypes.func,
+  /**
+   * Sets the font-size of the breadcrumb text
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Add an icon to the Breadcrumb.Link
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Place the icon before or after the text in the Breadcrumb.Link
+   */
+  iconPlacement: PropTypes.oneOf(['start', 'end'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'href',
+  'iconPlacement',
+  'onClick',
+  'renderIcon',
+  'size'
+]
+
+const defaultProps: DefaultProps<BreadcrumbLinkOwnProps> = {}
+
+export type { BreadcrumbLinkProps }
+export { propTypes, defaultProps, allowedProps }

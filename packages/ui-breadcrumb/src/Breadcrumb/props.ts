@@ -22,12 +22,56 @@
  * SOFTWARE.
  */
 
-import type { Spacing } from '@instructure/emotion'
+import PropTypes from 'prop-types'
 
-export type BreadcrumbProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { Children } from '@instructure/ui-prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import { BreadcrumbLink } from './BreadcrumbLink'
+
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { DefaultProps, PropValidators } from '@instructure/shared-types'
+
+type BreadcrumbOwnProps = {
+  children?: React.ReactNode // TODO: oneOf BreadcrumbLink
   label: string
   size?: 'small' | 'medium' | 'large'
   margin?: Spacing
 }
+
+type PropKeys = keyof BreadcrumbOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type BreadcrumbProps = BreadcrumbOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * children of type Breadcrumb.Link
+   */
+  children: Children.oneOf([BreadcrumbLink]),
+  /**
+   * An accessible label for the navigation
+   */
+  label: PropTypes.string.isRequired,
+  /**
+   * Sets the font-size of the breadcrumb text
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing
+}
+
+const allowedProps: AllowedPropKeys = ['children', 'label', 'margin', 'size']
+
+const defaultProps: DefaultProps<BreadcrumbOwnProps> = {
+  size: 'medium',
+  children: null
+}
+
+export type { BreadcrumbProps }
+export { propTypes, defaultProps, allowedProps }
