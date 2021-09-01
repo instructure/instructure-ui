@@ -23,6 +23,7 @@
  */
 import React from 'react'
 import { View } from '@instructure/ui-view'
+import { BadgeProps } from '../types'
 
 export default {
   sectionProp: 'variant',
@@ -30,8 +31,7 @@ export default {
     placement: ['start top', 'end top', 'start bottom', 'end bottom'],
     countUntil: [null, 100]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       count: 100,
       children: (
@@ -39,8 +39,7 @@ export default {
       )
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: BadgeProps) => {
     return (
       (props.type === 'notification' && props.countUntil) ||
       (props.standalone && props.placement !== 'start top')
