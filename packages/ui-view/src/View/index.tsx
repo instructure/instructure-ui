@@ -39,7 +39,8 @@ import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { allowedProps, propTypes } from './props'
+
+import { propTypes, defaultProps, allowedProps } from './props'
 import type { ViewProps } from './props'
 
 /**
@@ -58,17 +59,7 @@ class View extends Component<ViewProps & OtherHTMLAttributes<ViewProps>> {
   static componentId = 'View'
   static allowedProps = allowedProps
   static propTypes = propTypes
-  static defaultProps = {
-    display: 'auto',
-    overflowX: 'visible',
-    overflowY: 'visible',
-    withVisualDebug: false,
-    borderColor: 'primary',
-    position: 'static',
-    focusPosition: 'offset',
-    focusColor: 'info',
-    shouldAnimateFocus: true
-  } as const
+  static defaultProps = defaultProps
 
   // TODO: Remove this code once all components are using passthroughProps in place
   // of omitProps and have removed this function

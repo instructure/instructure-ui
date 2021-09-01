@@ -65,11 +65,14 @@ type PropValidators<PropKeys extends string> = Record<
   PropTypes.Validator<unknown>
 >
 
+type DefaultProps<Props extends Record<string, any>> = Partial<Props>
+
 export type {
   DeepPartial,
   PartialRecord,
   Nullable,
   CSSShorthandValue,
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  DefaultProps
 }
