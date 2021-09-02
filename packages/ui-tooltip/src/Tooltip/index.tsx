@@ -39,7 +39,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { TooltipProps } from './props'
+
+import type { TooltipProps, TooltipRenderChildren } from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -107,8 +108,8 @@ class Tooltip extends Component<TooltipProps> {
         </Trigger>
       )
     } else if (typeof children === 'function') {
-      // @ts-expect-error FIXME: React children types are badly calculated
-      return children({
+      // TODO: try to remove cast when typing Tooltip (React children types are badly calculated)
+      return (children as TooltipRenderChildren)({
         focused: hasFocus,
         getTriggerProps: (props) => ({
           ...triggerProps,
