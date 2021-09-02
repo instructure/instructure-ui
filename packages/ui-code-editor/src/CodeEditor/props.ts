@@ -22,9 +22,12 @@
  * SOFTWARE.
  */
 
-export type CodeEditorProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import PropTypes from 'prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type CodeEditorOwnProps = {
   label: string
   language?:
     | 'sh'
@@ -45,3 +48,48 @@ export type CodeEditorProps = {
   attachment?: 'bottom' | 'top'
   value?: string
 }
+
+type PropKeys = keyof CodeEditorOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type CodeEditorProps = CodeEditorOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  label: PropTypes.string.isRequired,
+  language: PropTypes.oneOf([
+    'sh',
+    'js',
+    'json',
+    'javascript',
+    'jsx',
+    'shell',
+    'css',
+    'html',
+    'markdown',
+    'yaml',
+    'yml',
+    'bash'
+  ]),
+  readOnly: PropTypes.bool,
+  onChange: PropTypes.func,
+  options: PropTypes.object,
+  attachment: PropTypes.oneOf(['bottom', 'top']),
+  /**
+   * the selected value (when controlled via the `onChange` prop)
+   */
+  value: PropTypes.string
+}
+
+const allowedProps: AllowedPropKeys = [
+  'label',
+  'language',
+  'readOnly',
+  'onChange',
+  'options',
+  'attachment',
+  'value'
+]
+
+export type { CodeEditorProps }
+export { propTypes, allowedProps }
