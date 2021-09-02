@@ -22,9 +22,13 @@
  * SOFTWARE.
  */
 
-export type ToggleFacadeProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import PropTypes from 'prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type ToggleFacadeOwnProps = {
+  children: React.ReactNode
   checked?: boolean
   disabled?: boolean
   readOnly?: boolean
@@ -32,3 +36,32 @@ export type ToggleFacadeProps = {
   size?: 'small' | 'medium' | 'large'
   labelPlacement?: 'top' | 'start' | 'end'
 }
+
+type PropKeys = keyof ToggleFacadeOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ToggleFacadeProps = ToggleFacadeOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.node.isRequired,
+  checked: PropTypes.bool,
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  focused: PropTypes.bool,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'checked',
+  'disabled',
+  'readOnly',
+  'focused',
+  'size',
+  'labelPlacement'
+]
+
+export type { ToggleFacadeProps }
+export { propTypes, allowedProps }

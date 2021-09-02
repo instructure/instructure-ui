@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Children, Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import {
@@ -34,7 +33,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 // @ts-expect-error ts-migrate(6133) FIXME: 'uid' is declared but its value is never read.
 import { uid } from '@instructure/uid'
 
@@ -44,8 +42,11 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
 import { Day } from './Day'
-import { CalendarProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { CalendarProps } from './props'
 
 /**
 ---
@@ -60,82 +61,10 @@ class Calendar extends Component<CalendarProps> {
   static Day = Day
   static DAY_COUNT = 42 // 6 weeks visible
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * children of type `<Calendar.Day />` There should be exactly 42 provided (6
-     * weeks).
-     */
-    children: ChildrenPropTypes.oneOf([Day]),
-    /**
-     * A button to render in the navigation header. The recommendation is to
-     * compose it with the [IconButton](#IconButton) component by setting the `size`
-     * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-     * `renderIcon` to [IconArrowOpenEnd](#iconography).
-     */
-    renderNextMonthButton: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.func
-    ]),
-    /**
-     * A button to render in the navigation header. The recommendation is to
-     * compose it with the [IconButton](#Button) component by setting the `size`
-     * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-     * `renderIcon` to [IconArrowOpenStart](#iconography).
-     */
-    renderPrevMonthButton: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.func
-    ]),
-    /**
-     * Content to render in the navigation header. The recommendation is to include
-     * the name of the current rendered month along with the year.
-     */
-    renderNavigationLabel: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.func
-    ]),
-    /**
-     * An array of labels containing the name of each day of the week. The visible
-     * portion of the label should be abbreviated (no longer than three characters).
-     * Note that screen readers will read this content preceding each date as the
-     * `<Calendar />` is navigated. Consider using
-     * [AccessibleContent](#AccessibleContent) with the `alt` prop containing the
-     * full day name for assistive technologies and the children containing the
-     * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
-     */
-    renderWeekdayLabels: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-    ).isRequired,
-    /**
-     * Callback fired when the next month button is clicked in the navigation
-     * header, requesting to render the next month.
-     */
-    onRequestRenderNextMonth: PropTypes.func,
-    /**
-     * Callback fired when the previous month button is clicked in the navigation
-     * header, requesting to render the previous month.
-     */
-    onRequestRenderPrevMonth: PropTypes.func,
-    /**
-     * The element to render as the `Calendar` root, `span` by default
-     */
-    as: PropTypes.elementType,
-    /**
-     * The role of the underlying table. This can be set to 'listbox' when
-     * assistive technologies need to read the `<Calendar.Day />` children as a list.
-     */
-    role: PropTypes.oneOf(['table', 'listbox'])
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
-    renderNextMonthButton: undefined,
-    renderPrevMonthButton: undefined,
-    renderNavigationLabel: undefined,
     onRequestRenderNextMonth: () => {},
     onRequestRenderPrevMonth: () => {},
     as: 'span',
@@ -184,8 +113,8 @@ class Calendar extends Component<CalendarProps> {
       })
 
     const style = [
-      styles.navigation,
-      ...(prevButton || nextButton ? [styles.navigationWithButtons] : [])
+      styles?.navigation,
+      ...(prevButton || nextButton ? [styles?.navigationWithButtons] : [])
     ]
 
     return (
@@ -223,7 +152,7 @@ class Calendar extends Component<CalendarProps> {
             <th
               key={i}
               scope="col"
-              css={styles.weekdayHeader}
+              css={styles?.weekdayHeader}
               // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
               id={this._weekdayHeaderIds[i]}
             >

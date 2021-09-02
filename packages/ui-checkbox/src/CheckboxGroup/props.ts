@@ -23,9 +23,21 @@
  */
 
 import React from 'react'
-import type { FormMessage } from '@instructure/ui-form-field'
+import PropTypes from 'prop-types'
 
-export type CheckboxGroupProps = {
+import { FormPropTypes } from '@instructure/ui-form-field'
+import {
+  controllable,
+  Children as ChildrenPropTypes
+} from '@instructure/ui-prop-types'
+
+import type { FormMessage } from '@instructure/ui-form-field'
+import type { PropValidators } from '@instructure/shared-types'
+
+import { Checkbox } from '../Checkbox'
+
+type CheckboxGroupOwnProps = {
+  children?: React.ReactNode // TODO: oneOf([Checkbox])
   name: string
   description: React.ReactNode
   defaultValue?: any[]
@@ -37,3 +49,58 @@ export type CheckboxGroupProps = {
   size?: 'small' | 'medium' | 'large'
   layout?: 'stacked' | 'columns' | 'inline'
 }
+
+type PropKeys = keyof CheckboxGroupOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type CheckboxGroupProps = CheckboxGroupOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.node.isRequired,
+  /**
+   * value to set on initial render
+   */
+  defaultValue: PropTypes.array,
+  /**
+   * the selected values (must be accompanied by an `onChange` prop)
+   */
+  value: controllable(PropTypes.array),
+  /**
+   * when used with the `value` prop, the component will not control its own state
+   */
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  /**
+   * object with shape: `{
+    text: PropTypes.string,
+    type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+      }`
+   */
+  messages: PropTypes.arrayOf(FormPropTypes.message),
+  /**
+   * children of type `Checkbox`
+   */
+  children: ChildrenPropTypes.oneOf([Checkbox]),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  layout: PropTypes.oneOf(['stacked', 'columns', 'inline'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'name',
+  'description',
+  'defaultValue',
+  'value',
+  'onChange',
+  'disabled',
+  'readOnly',
+  'messages',
+  'children',
+  'size',
+  'layout'
+]
+
+export type { CheckboxGroupProps }
+export { propTypes, allowedProps }

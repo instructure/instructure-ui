@@ -23,13 +23,8 @@
  */
 
 import React, { Children, Component, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
-import {
-  controllable,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
-import { FormPropTypes, FormFieldGroup } from '@instructure/ui-form-field'
+import { FormFieldGroup } from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
 import {
   matchComponentTypes,
@@ -40,7 +35,9 @@ import {
 import { testable } from '@instructure/ui-testable'
 
 import { Checkbox } from '../Checkbox'
-import { CheckboxGroupProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { CheckboxGroupProps } from './props'
 
 /**
 ---
@@ -52,47 +49,13 @@ category: components
 class CheckboxGroup extends Component<CheckboxGroupProps> {
   static readonly componentId = 'CheckboxGroup'
 
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    description: PropTypes.node.isRequired,
-    /**
-     * value to set on initial render
-     */
-    defaultValue: PropTypes.array,
-    /**
-     * the selected values (must be accompanied by an `onChange` prop)
-     */
-    value: controllable(PropTypes.array),
-    /**
-     * when used with the `value` prop, the component will not control its own state
-     */
-    onChange: PropTypes.func,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    /**
-    * object with shape: `{
-    text: PropTypes.string,
-    type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-      }`
-    */
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    /**
-     * children of type `Checkbox`
-     */
-    children: ChildrenPropTypes.oneOf([Checkbox]),
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    layout: PropTypes.oneOf(['stacked', 'columns', 'inline'])
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,
     readOnly: false,
     size: 'medium',
     layout: 'stacked',
-    defaultValue: undefined,
-    messages: undefined,
-    value: undefined,
-    onChange: undefined,
     children: null
   }
 
