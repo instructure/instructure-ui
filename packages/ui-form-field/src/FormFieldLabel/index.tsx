@@ -60,11 +60,11 @@ class FormFieldLabel extends Component<FormFieldLabelProps> {
     styles: PropTypes.object,
     as: PropTypes.elementType,
     children: PropTypes.node.isRequired
-  }
+  } as const
 
   static defaultProps = {
     as: 'span'
-  }
+  } as const
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message

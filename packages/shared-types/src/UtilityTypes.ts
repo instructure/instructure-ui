@@ -56,4 +56,4 @@ export type CSSShorthandValue<Value extends string> =
 export type OtherHTMLAttributes<
   Props,
   Attributes extends React.HTMLAttributes<Props> = React.AllHTMLAttributes<Props>
-> = Nullable<Omit<Attributes, keyof Props>>
+> = Omit<Attributes, keyof Props>

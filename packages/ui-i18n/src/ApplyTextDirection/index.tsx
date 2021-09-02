@@ -56,7 +56,7 @@ ApplyTextDirection.defaultProps = {
   dir: undefined,
   as: 'span',
   children: null
-}
+} as const
 
 ApplyTextDirection.DIRECTION = DIRECTION
 

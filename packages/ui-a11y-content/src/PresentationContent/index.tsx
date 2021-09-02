@@ -43,12 +43,12 @@ class PresentationContent extends Component<
   static propTypes = {
     as: PropTypes.elementType,
     children: PropTypes.node
-  }
+  } as const
 
   static defaultProps = {
     as: 'span',
     children: null
-  }
+  } as const
 
   render() {
     const { children, ...props } = this.props

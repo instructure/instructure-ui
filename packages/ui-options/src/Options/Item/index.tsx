@@ -83,7 +83,7 @@ class Item extends Component<OptionsItemProps> {
      */
     renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-  }
+  } as const
 
   static defaultProps = {
     as: 'span',
@@ -92,7 +92,7 @@ class Item extends Component<OptionsItemProps> {
     renderBeforeLabel: null,
     renderAfterLabel: null,
     children: null
-  }
+  } as const
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message

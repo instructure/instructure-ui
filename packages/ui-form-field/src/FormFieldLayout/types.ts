@@ -23,9 +23,10 @@
  */
 
 import { AsElementType } from '@instructure/shared-types'
+import React from 'react'
 import { FormMessage } from '../FormPropTypes'
 
-export type FormFieldLayoutProps = {
+export type FormFieldLayoutProps = React.PropsWithChildren<{
   makeStyles?: (...args: any[]) => any
   styles?: any
   label: React.ReactNode
@@ -38,4 +39,4 @@ export type FormFieldLayoutProps = {
   labelAlign?: 'start' | 'end'
   width?: string
   inputContainerRef?: (...args: any[]) => any
-}
+}>

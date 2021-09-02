@@ -106,13 +106,8 @@ class Badge extends Component<BadgeProps> {
   }
 
   renderOutput() {
-    const {
-      count,
-      countUntil,
-      formatOverflowText,
-      formatOutput,
-      type
-    } = this.props
+    const { count, countUntil, formatOverflowText, formatOutput, type } =
+      this.props
 
     // If the badge count is >= than the countUntil limit, format the badge text
     // via the formatOverflowText function prop
@@ -144,7 +139,7 @@ class Badge extends Component<BadgeProps> {
         title={
           type === 'count' && this.countOverflow() ? count?.toString() : ''
         }
-        id={!standalone ? this._defaultId : null}
+        id={!standalone ? this._defaultId : undefined}
         display={standalone ? 'inline-block' : 'block'}
       >
         {this.renderOutput()}

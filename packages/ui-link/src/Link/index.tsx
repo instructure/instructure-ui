@@ -125,7 +125,7 @@ class Link extends Component<LinkProps> {
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object
-  }
+  } as const
 
   static defaultProps = {
     href: undefined,
@@ -142,7 +142,7 @@ class Link extends Component<LinkProps> {
     onClick: undefined,
     onFocus: undefined,
     onBlur: undefined
-  }
+  } as const
 
   state = { hasFocus: false }
 
@@ -290,10 +290,12 @@ class Link extends Component<LinkProps> {
     const { interaction } = this
 
     const isDisabled = interaction === 'disabled'
-    const role = onClick && this.element !== 'button' ? 'button' : null
+    const role = onClick && this.element !== 'button' ? 'button' : undefined
     const type =
-      this.element === 'button' || this.element === 'input' ? 'button' : null
-    const tabIndex = role === 'button' && !isDisabled ? '0' : null
+      this.element === 'button' || this.element === 'input'
+        ? 'button'
+        : undefined
+    const tabIndex = role === 'button' && !isDisabled ? '0' : undefined
 
     return (
       <View
@@ -306,7 +308,7 @@ class Link extends Component<LinkProps> {
         onClick={this.handleClick}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        aria-disabled={isDisabled ? 'true' : null}
+        aria-disabled={isDisabled ? 'true' : undefined}
         role={role}
         type={type}
         //@ts-expect-error fix to be number

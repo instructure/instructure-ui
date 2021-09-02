@@ -155,7 +155,7 @@ class BaseButton extends Component<BaseButtonProps> {
      * Specifies the tabindex of the `Button`.
      */
     tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  }
+  } as const
 
   static defaultProps = {
     children: null,
@@ -182,7 +182,7 @@ class BaseButton extends Component<BaseButtonProps> {
     onKeyDown: (event) => {},
     renderIcon: undefined,
     tabIndex: undefined
-  }
+  } as const
 
   _rootElement = null
 
@@ -384,11 +384,11 @@ class BaseButton extends Component<BaseButtonProps> {
         margin={margin}
         cursor={isDisabled ? 'not-allowed' : cursor}
         href={href}
-        type={href ? null : type}
+        type={href ? undefined : type}
         elementRef={this.handleElementRef}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        role={onClick && as !== 'button' ? 'button' : null}
+        role={onClick && as !== 'button' ? 'button' : undefined}
         //@ts-expect-error fix this later to be number
         tabIndex={onClick && as ? tabIndex || '0' : tabIndex}
         disabled={isDisabled || isReadOnly}

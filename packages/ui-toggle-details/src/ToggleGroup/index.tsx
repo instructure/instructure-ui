@@ -105,7 +105,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
      * Toggle the border around the component
      */
     border: PropTypes.bool
-  }
+  } as const
 
   static defaultProps = {
     expanded: undefined,
@@ -120,7 +120,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     border: true
-  }
+  } as const
 
   _button = null
   _shouldTransition = false

@@ -144,8 +144,8 @@ class Avatar extends Component<AvatarProps, AvatarState> {
     return (
       <View
         {...passthroughProps(props)}
-        aria-label={this.props.alt ? this.props.alt : null}
-        role={this.props.alt ? 'img' : null}
+        aria-label={this.props.alt ? this.props.alt : undefined}
+        role={this.props.alt ? 'img' : undefined}
         as={this.props.as}
         elementRef={this.props.elementRef}
         margin={this.props.margin}

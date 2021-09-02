@@ -88,7 +88,7 @@ class Heading extends Component<HeadingProps> {
      * Provides a ref to the underlying HTML element
      */
     elementRef: PropTypes.func
-  }
+  } as const
 
   static defaultProps = {
     children: null,
@@ -97,7 +97,7 @@ class Heading extends Component<HeadingProps> {
     border: 'none',
     color: 'inherit',
     level: 'h2'
-  }
+  } as const
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message

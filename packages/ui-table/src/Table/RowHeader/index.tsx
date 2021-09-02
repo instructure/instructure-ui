@@ -88,7 +88,7 @@ class RowHeader extends Component<TableRowHeaderProps> {
         as={isStacked ? 'div' : 'th'}
         css={styles.rowHeader}
         scope="row"
-        role={isStacked ? 'rowheader' : null}
+        role={isStacked ? 'rowheader' : undefined}
       >
         {callRenderProp(children)}
       </View>

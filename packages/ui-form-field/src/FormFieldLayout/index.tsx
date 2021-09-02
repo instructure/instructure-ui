@@ -86,7 +86,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     labelAlign: PropTypes.oneOf(['start', 'end']),
     width: PropTypes.string,
     inputContainerRef: PropTypes.func
-  }
+  } as const
 
   static defaultProps = {
     id: undefined,
@@ -99,7 +99,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     as: 'label',
     labelAlign: 'end',
     inputContainerRef: undefined
-  }
+  } as const
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {

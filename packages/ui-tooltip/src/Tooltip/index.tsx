@@ -132,7 +132,7 @@ class Tooltip extends Component<TooltipProps> {
      * fired when the tooltip expects to be hidden
      */
     onHideContent: PropTypes.func
-  }
+  } as const
 
   static defaultProps = {
     isShowingContent: undefined,
@@ -149,7 +149,7 @@ class Tooltip extends Component<TooltipProps> {
     onShowContent: (event) => {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onHideContent: (event, { documentClick }) => {}
-  }
+  } as const
 
   _id = uid('Tooltip')
   state = { hasFocus: false }

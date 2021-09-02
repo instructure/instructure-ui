@@ -102,7 +102,7 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
     shouldCloseOnDocumentClick: PropTypes.bool,
     shouldCloseOnEscape: PropTypes.bool,
     shouldFocusOnOpen: PropTypes.bool
-  }
+  } as const
 
   static defaultProps = {
     children: null,
@@ -114,19 +114,18 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
     shouldReturnFocus: false,
     shouldCloseOnDocumentClick: true,
     shouldCloseOnEscape: true,
-    defaultFocusElement: null,
-    contentElement: null,
-    liveRegion: null,
+    defaultFocusElement: undefined,
+    contentElement: undefined,
+    liveRegion: undefined,
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onBlur: (event) => {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onDismiss: (event) => {}
-  }
+  } as const
 
   _timeouts: ReturnType<typeof setTimeout>[] = []
   _raf: RequestAnimationFrameType[] = []
   _focusRegion = null
-
   componentDidMount() {
     if (this.props.open) {
       this.open()
@@ -213,9 +212,9 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
     this.close()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
+  //@ts-expect-error TODO:
   getRef = (el) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'Dialog'.
+    //@ts-expect-error TODO:
     this._root = el
   }
 
@@ -223,7 +222,7 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
     let contentElement = findDOMNode(this.props.contentElement)
 
     if (!contentElement) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'Dialog'.
+      //@ts-expect-error TODO:
       contentElement = findDOMNode(this._root)
     }
 
@@ -240,15 +239,16 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
   }
 
   render() {
-    const ElementType = getElementType(Dialog, this.props)
+    const ElementType = getElementType<DialogProps>(Dialog, this.props)
 
     return this.props.open ? (
       <ElementType
+        //@ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...omitProps(this.props, Dialog.propTypes)}
-        ref={this.getRef}
-        role={this.props.label ? 'dialog' : null}
+        role={this.props.label ? 'dialog' : undefined}
         aria-label={this.props.label}
         className={this.props.className} // eslint-disable-line react/prop-types
+        ref={this.getRef}
       >
         {this.props.children}
       </ElementType>
