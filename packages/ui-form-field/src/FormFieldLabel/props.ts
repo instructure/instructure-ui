@@ -22,12 +22,28 @@
  * SOFTWARE.
  */
 
-import type { ReactNode } from 'react'
-import { AsElementType } from '@instructure/shared-types'
+import PropTypes from 'prop-types'
 
-export type FormFieldLabelProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type FormFieldLabelOwnProps = {
   as?: AsElementType
-  children?: ReactNode
+  children: React.ReactNode
 }
+
+type PropKeys = keyof FormFieldLabelOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type FormFieldLabelProps = FormFieldLabelOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  as: PropTypes.elementType,
+  children: PropTypes.node.isRequired
+}
+
+const allowedProps: AllowedPropKeys = ['as', 'children']
+
+export type { FormFieldLabelProps }
+export { propTypes, allowedProps }

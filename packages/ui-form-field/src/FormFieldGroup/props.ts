@@ -22,17 +22,21 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
-import { FormMessage } from '../FormPropTypes'
+import PropTypes from 'prop-types'
 
-export type FormFieldGroupProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { FormPropTypes } from '../FormPropTypes'
+
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+import type { FormMessage } from '../FormPropTypes'
+
+type FormFieldGroupOwnProps = {
   description: React.ReactNode
   as?: AsElementType
   messages?: FormMessage[]
   messagesId?: string
   disabled?: boolean
+  children?: React.ReactNode
   layout?: 'stacked' | 'columns' | 'inline'
   rowSpacing?: 'none' | 'small' | 'medium' | 'large'
   colSpacing?: 'none' | 'small' | 'medium' | 'large'
@@ -40,6 +44,55 @@ export type FormFieldGroupProps = {
   startAt?: any // TODO: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
 }
 
-export type FormFieldGroupStyleProps = {
+type FormFieldGroupStyleProps = {
   invalid: boolean
 }
+
+type PropKeys = keyof FormFieldGroupOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type FormFieldGroupProps = FormFieldGroupOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  description: PropTypes.node.isRequired,
+  /**
+   * the element type to render as
+   */
+  as: PropTypes.elementType,
+  /**
+   * object with shape: `{
+   * text: PropTypes.string,
+   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *   }`
+   */
+  messages: PropTypes.arrayOf(FormPropTypes.message),
+  /**
+   * id for the form field messages
+   */
+  messagesId: PropTypes.string,
+  disabled: PropTypes.bool,
+  children: PropTypes.node,
+  layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
+  rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+  colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
+  startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'description',
+  'as',
+  'messages',
+  'messagesId',
+  'disabled',
+  'children',
+  'layout',
+  'rowSpacing',
+  'colSpacing',
+  'vAlign',
+  'startAt'
+]
+
+export type { FormFieldGroupProps, FormFieldGroupStyleProps }
+export { propTypes, allowedProps }

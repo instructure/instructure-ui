@@ -23,13 +23,13 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
-import { FormPropTypes } from '../FormPropTypes'
 import { FormFieldLayout } from '../FormFieldLayout'
-import { FormFieldProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { FormFieldProps } from './props'
 
 /**
 ---
@@ -39,39 +39,14 @@ category: components
 class FormField extends Component<FormFieldProps> {
   static readonly componentId = 'FormField'
 
-  static propTypes = {
-    label: PropTypes.node.isRequired,
-    /**
-     * the id of the input (to link it to its label for a11y)
-     */
-    id: PropTypes.string.isRequired,
-    /**
-     * object with shape: `{
-     *   text: PropTypes.string,
-     *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     * }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    messagesId: PropTypes.string,
-    children: PropTypes.node,
-    inline: PropTypes.bool,
-    layout: PropTypes.oneOf(['stacked', 'inline']),
-    labelAlign: PropTypes.oneOf(['start', 'end']),
-    vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-    width: PropTypes.string,
-    inputContainerRef: PropTypes.func
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     inline: false,
     layout: 'stacked',
     labelAlign: 'end',
     vAlign: 'middle',
-    messages: undefined,
-    messagesId: undefined,
-    children: null,
-    width: undefined,
-    inputContainerRef: undefined
+    children: null
   }
 
   render() {

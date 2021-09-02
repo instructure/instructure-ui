@@ -23,7 +23,6 @@
  */
 
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import {
   addInputModeListener,
@@ -32,7 +31,9 @@ import {
   findFocusable
 } from '@instructure/ui-dom-utils'
 import { logWarn as warn } from '@instructure/console'
-import { FocusableProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { FocusableProps } from './props'
 
 /**
 ---
@@ -40,23 +41,10 @@ category: components/utilities
 ---
 **/
 class Focusable extends Component<FocusableProps> {
-  static propTypes = {
-    /**
-     * @param {Object} renderProps
-     * @param {Boolean} renderProps.focused - Is the element focused (via keyboard only)?
-     * @param {HTMLElement} renderProps.focusable - The focusable element
-     * @param {Boolean} renderProps.focusVisible - Whether the focus state should be visible or not
-     */
-    children: PropTypes.func,
-    /**
-     * Identical to children
-     */
-    render: PropTypes.func
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
-    render: undefined
+    children: null
   }
 
   static inputTypes = {

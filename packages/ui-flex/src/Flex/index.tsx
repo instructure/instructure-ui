@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Children, Component } from 'react'
-import PropTypes from 'prop-types'
 
 import {
   safeCloneElement,
@@ -33,13 +32,15 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { Item } from './Item'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FlexProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { FlexProps } from './props'
 
 /**
 ---
@@ -64,88 +65,8 @@ class Flex extends Component<FlexProps> {
 
   static Item = Item
 
-  static propTypes = {
-    /**
-     * It's recommended that you use `Flex.Item` for children, but you can also pass any markup or a function
-     * returning markup. Note that if you do not use `Flex.Item`, the `withVisualDebug` and `direction` props
-     * will not automatically be set on the children.
-     */
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * the element type to render as
-     */
-    as: PropTypes.elementType,
-    /**
-     * provides a reference to the underlying html root element
-     */
-    elementRef: PropTypes.func,
-    /**
-     * Sets the height of the component's container (optional)
-     */
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * Sets the width of the component's container (optional)
-     */
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-     */
-    padding: ThemeablePropTypes.spacing,
-    /**
-     * Sets the CSS display rule for the component's container
-     */
-    display: PropTypes.oneOf(['flex', 'inline-flex']),
-    /**
-     * Designates the text alignment
-     */
-    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-    /**
-     * Sets the flex-direction to row (horizontal) or column (vertical)
-     */
-    direction: PropTypes.oneOf([
-      'row',
-      'column',
-      'row-reverse',
-      'column-reverse'
-    ]),
-    /**
-     * Aligns Flex.Items on the vertical axis (horizontal if direction is column)
-     */
-    alignItems: PropTypes.oneOf(['center', 'start', 'end', 'stretch']),
-    /**
-     * Aligns Flex.Items on the horizontal axis (vertical if direction is column)
-     */
-    justifyItems: PropTypes.oneOf([
-      'center',
-      'start',
-      'end',
-      'space-around',
-      'space-between'
-    ]),
-    /**
-     * Determines if the Flex.Items should wrap when they exceed their container's width
-     */
-    wrap: PropTypes.oneOf(['wrap', 'no-wrap', 'wrap-reverse']),
-    /**
-     * Activate a dotted outline around the component to make building your
-     * layout easier
-     */
-    withVisualDebug: PropTypes.bool,
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
     as: 'span',
@@ -155,13 +76,7 @@ class Flex extends Component<FlexProps> {
     justifyItems: 'start',
     display: 'flex',
     withVisualDebug: false,
-    wrap: 'no-wrap',
-    width: undefined,
-    height: undefined,
-    padding: undefined,
-    margin: undefined,
-    alignItems: undefined,
-    textAlign: undefined
+    wrap: 'no-wrap'
   }
 
   renderChildren(children: any) {
@@ -201,7 +116,7 @@ class Flex extends Component<FlexProps> {
       return (
         <View
           {...passthroughProps(this.props)}
-          css={styles.flex}
+          css={styles?.flex}
           elementRef={elementRef}
           as={as}
           display={display}

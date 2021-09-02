@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -41,10 +40,11 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import { FormFieldLabel } from '../FormFieldLabel'
 import { FormFieldMessages } from '../FormFieldMessages'
-import { FormPropTypes } from '../FormPropTypes'
 
 import generateStyle from './styles'
-import { FormFieldLayoutProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { FormFieldLayoutProps } from './props'
 
 /**
 ---
@@ -55,50 +55,14 @@ parent: FormField
 class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static readonly componentId = 'FormFieldLayout'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    label: PropTypes.node.isRequired,
-    /**
-     * the id of the input (to link it to its label for a11y)
-     */
-    id: PropTypes.string,
-    /**
-     * the element type to render as
-     */
-    as: PropTypes.elementType,
-    /**
-     * object with shape: `{
-     * text: PropTypes.string,
-     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     *   }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    /**
-     * id for the form field messages
-     */
-    messagesId: PropTypes.string,
-    children: PropTypes.node,
-    inline: PropTypes.bool,
-    layout: PropTypes.oneOf(['stacked', 'inline']),
-    labelAlign: PropTypes.oneOf(['start', 'end']),
-    width: PropTypes.string,
-    inputContainerRef: PropTypes.func
-  } as const
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
-    id: undefined,
-    width: undefined,
-    messages: undefined,
-    messagesId: undefined,
     children: null,
     inline: false,
     layout: 'stacked',
     as: 'label',
-    labelAlign: 'end',
-    inputContainerRef: undefined
+    labelAlign: 'end'
   } as const
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -218,7 +182,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
           ...FormFieldLayout.propTypes,
           ...Grid.propTypes
         })}
-        css={styles.formFieldLayout}
+        css={styles?.formFieldLayout}
         style={{ width }}
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'For... Remove this comment to see the full error message
         aria-describedby={this.hasMessages ? this._messagesId : null}

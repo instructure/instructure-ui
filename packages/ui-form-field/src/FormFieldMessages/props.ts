@@ -22,10 +22,35 @@
  * SOFTWARE.
  */
 
-import { FormMessage } from '../FormPropTypes'
+import PropTypes from 'prop-types'
 
-export type FormFieldMessagesProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { FormPropTypes } from '../FormPropTypes'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+import type { FormMessage } from '../FormPropTypes'
+
+type FormFieldMessagesOwnProps = {
   messages?: FormMessage[]
 }
+
+type PropKeys = keyof FormFieldMessagesOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type FormFieldMessagesProps = FormFieldMessagesOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * object with shape: `{
+   * text: PropTypes.string,
+   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *   }`
+   */
+  messages: PropTypes.arrayOf(FormPropTypes.message)
+}
+
+const allowedProps: AllowedPropKeys = ['messages']
+
+export type { FormFieldMessagesProps }
+export { propTypes, allowedProps }

@@ -521,7 +521,6 @@ class Tabs extends Component<TabsProps> {
         css={styles.container}
       >
         <Focusable ref={this.handleFocusableRef}>
-          {/* @ts-expect-error ts-migrate(7031) FIXME: Binding element 'focusVisible' implicitly has an '... Remove this comment to see the full error message */}
           {({ focusVisible }) => (
             <View
               as="div"

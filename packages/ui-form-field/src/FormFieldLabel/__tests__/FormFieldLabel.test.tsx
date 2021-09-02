@@ -45,6 +45,7 @@ describe('<FormFieldLabel />', async () => {
   it('should require children', async () => {
     const consoleError = stub(console, 'error')
 
+    // @ts-expect-error We are expecting it to break
     await mount(<FormFieldLabel />)
 
     expect(consoleError).to.have.been.calledWith(

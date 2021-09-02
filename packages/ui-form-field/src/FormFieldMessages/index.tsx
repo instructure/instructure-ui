@@ -24,18 +24,18 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import { FormPropTypes } from '../FormPropTypes'
 import { FormFieldMessage } from '../FormFieldMessage'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FormFieldMessagesProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { FormFieldMessagesProps } from './props'
 
 /**
 ---
@@ -59,23 +59,9 @@ example: true
 class FormFieldMessages extends Component<FormFieldMessagesProps> {
   static readonly componentId = 'FormFieldMessages'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * object with shape: `{
-     * text: PropTypes.string,
-     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     *   }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message)
-  }
-
-  static defaultProps = {
-    messages: undefined
-  }
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static defaultProps = {}
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -93,12 +79,12 @@ class FormFieldMessages extends Component<FormFieldMessagesProps> {
 
     return messages && messages.length > 0 ? (
       <span
-        css={styles.formFieldMessages}
+        css={styles?.formFieldMessages}
         {...omitProps(this.props, FormFieldMessages.propTypes)}
       >
         {messages.map((msg, i) => {
           return (
-            <span key={`error${i}`} css={styles.message}>
+            <span key={`error${i}`} css={styles?.message}>
               <FormFieldMessage variant={msg.type}>{msg.text}</FormFieldMessage>
             </span>
           )
