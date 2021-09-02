@@ -23,7 +23,6 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
@@ -32,7 +31,8 @@ import { logError as error } from '@instructure/console'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import { FocusRegionManager } from '@instructure/ui-a11y-utils'
 
-import { DialogProps } from './props'
+import { propTypes, allowedProps } from './props'
+import type { DialogProps } from './props'
 
 /**
 ---
@@ -44,70 +44,10 @@ category: components/utilities
 class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
   static readonly componentId = 'Dialog'
 
-  static propTypes = {
-    /**
-     * The children to be rendered within the `<Dialog />`
-     */
-    children: PropTypes.node,
-
-    /**
-     * The element to render as the component root, `span` by default
-     */
-    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-
-    display: PropTypes.oneOf(['auto', 'block', 'inline-block']),
-
-    label: PropTypes.string,
-
-    /**
-     * Whether or not the `<Dialog />` is open
-     */
-    open: PropTypes.bool,
-
-    /**
-     * Function called when tab focus leaves the `<Dialog />` focusable content. This only
-     * occurs when `shouldContainFocus` is set to false.
-     */
-    onBlur: PropTypes.func,
-
-    onDismiss: PropTypes.func,
-
-    /**
-     * An element or a function returning an element to focus by default
-     */
-    defaultFocusElement: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
-
-    /**
-     * An element or a function returning an element that wraps the content of the `<Dialog />`
-     */
-    contentElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-
-    /**
-     * An element, function returning an element, or array of elements that will not be hidden from
-     * the screen reader when the `<Dialog />` is open
-     */
-    liveRegion: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-      PropTypes.func
-    ]),
-    shouldContainFocus: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.oneOf(['keyboard', 'screenreader'])
-    ]),
-    shouldReturnFocus: PropTypes.bool,
-    shouldCloseOnDocumentClick: PropTypes.bool,
-    shouldCloseOnEscape: PropTypes.bool,
-    shouldFocusOnOpen: PropTypes.bool
-  } as const
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
-    display: undefined,
-    label: undefined,
     open: false,
     shouldFocusOnOpen: true,
     shouldContainFocus: false,
@@ -243,7 +183,7 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
 
     return this.props.open ? (
       <ElementType
-        //@ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
+        // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...omitProps(this.props, Dialog.propTypes)}
         role={this.props.label ? 'dialog' : undefined}
         aria-label={this.props.label}

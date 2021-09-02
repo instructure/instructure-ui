@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -37,7 +36,9 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import CodeMirror from './codemirror'
-import { CodeEditorProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { CodeEditorProps } from './props'
 
 /**
 ---
@@ -50,45 +51,15 @@ category: components
 class CodeEditor extends Component<CodeEditorProps> {
   static readonly componentId = 'CodeEditor'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    label: PropTypes.string.isRequired,
-    language: PropTypes.oneOf([
-      'sh',
-      'js',
-      'json',
-      'javascript',
-      'jsx',
-      'shell',
-      'css',
-      'html',
-      'markdown',
-      'yaml',
-      'yml',
-      'bash'
-    ]),
-    readOnly: PropTypes.bool,
-    onChange: PropTypes.func,
-    options: PropTypes.object,
-    attachment: PropTypes.oneOf(['bottom', 'top']),
-    /**
-     * the selected value (when controlled via the `onChange` prop)
-     */
-    value: PropTypes.string
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     language: 'jsx',
     readOnly: false,
     options: {
       styleActiveLine: true
     },
-    onChange: () => {},
-    attachment: undefined,
-    value: undefined
+    onChange: () => {}
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
@@ -154,8 +125,8 @@ class CodeEditor extends Component<CodeEditorProps> {
     } = this.props
 
     return (
-      <div css={styles.codeEditor}>
-        <Global styles={styles.globalStyles} />
+      <div css={styles?.codeEditor}>
+        <Global styles={styles?.globalStyles} />
         {/* @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'CodeEditor'... Remove this comment to see the full error message */}
         <label htmlFor={this._id}>
           <ScreenReaderContent>{label}</ScreenReaderContent>

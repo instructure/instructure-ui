@@ -22,10 +22,13 @@
  * SOFTWARE.
  */
 
-import type { ReactNode } from 'react'
-import { AsElementType } from '@instructure/shared-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type DialogProps = {
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+
+type DialogOwnProps = {
+  children?: React.ReactNode
   as?: AsElementType
   display?: 'auto' | 'block' | 'inline-block'
   label?: string
@@ -43,5 +46,88 @@ export type DialogProps = {
   shouldCloseOnDocumentClick?: boolean
   shouldCloseOnEscape?: boolean
   shouldFocusOnOpen?: boolean
-  children?: ReactNode
 }
+
+type PropKeys = keyof DialogOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type DialogProps = DialogOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The children to be rendered within the `<Dialog />`
+   */
+  children: PropTypes.node,
+
+  /**
+   * The element to render as the component root, `span` by default
+   */
+  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+
+  display: PropTypes.oneOf(['auto', 'block', 'inline-block']),
+
+  label: PropTypes.string,
+
+  /**
+   * Whether or not the `<Dialog />` is open
+   */
+  open: PropTypes.bool,
+
+  /**
+   * Function called when tab focus leaves the `<Dialog />` focusable content. This only
+   * occurs when `shouldContainFocus` is set to false.
+   */
+  onBlur: PropTypes.func,
+
+  onDismiss: PropTypes.func,
+
+  /**
+   * An element or a function returning an element to focus by default
+   */
+  defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+
+  /**
+   * An element or a function returning an element that wraps the content of the `<Dialog />`
+   */
+  contentElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+
+  /**
+   * An element, function returning an element, or array of elements that will not be hidden from
+   * the screen reader when the `<Dialog />` is open
+   */
+  liveRegion: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+    PropTypes.func
+  ]),
+  shouldContainFocus: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.oneOf(['keyboard', 'screenreader'])
+  ]),
+  shouldReturnFocus: PropTypes.bool,
+  shouldCloseOnDocumentClick: PropTypes.bool,
+  shouldCloseOnEscape: PropTypes.bool,
+  shouldFocusOnOpen: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'as',
+  'display',
+  'label',
+  'open',
+  'onBlur',
+  'onDismiss',
+  'defaultFocusElement',
+  'contentElement',
+  'liveRegion',
+  'shouldContainFocus',
+  'shouldReturnFocus',
+  'shouldCloseOnDocumentClick',
+  'shouldCloseOnEscape',
+  'shouldFocusOnOpen'
+]
+
+export type { DialogProps }
+export { propTypes, allowedProps }
