@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { IconCheckMarkSolid } from '@instructure/ui-icons'
@@ -33,7 +32,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { CheckboxFacadeProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { CheckboxFacadeProps } from './props'
 
 /**
 ---
@@ -44,22 +45,8 @@ parent: Checkbox
 class CheckboxFacade extends Component<CheckboxFacadeProps> {
   static readonly componentId = 'CheckboxFacade'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: PropTypes.node.isRequired,
-    checked: PropTypes.bool,
-    focused: PropTypes.bool,
-    hovered: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Visual state showing that child checkboxes are a combination of checked and unchecked
-     */
-    indeterminate: PropTypes.bool
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     checked: false,
     focused: false,
@@ -98,11 +85,11 @@ class CheckboxFacade extends Component<CheckboxFacadeProps> {
     const { children, styles } = this.props
 
     return (
-      <span css={styles.checkboxFacade}>
-        <span css={styles.facade} aria-hidden="true">
+      <span css={styles?.checkboxFacade}>
+        <span css={styles?.facade} aria-hidden="true">
           {this.renderIcon()}
         </span>
-        <span css={styles.label}>{children}</span>
+        <span css={styles?.label}>{children}</span>
       </span>
     )
   }

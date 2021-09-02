@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { IconCheckSolid, IconXSolid } from '@instructure/ui-icons'
 
@@ -32,7 +31,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ToggleFacadeProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { ToggleFacadeProps } from './props'
 
 /**
 ---
@@ -43,20 +44,8 @@ parent: Checkbox
 class ToggleFacade extends Component<ToggleFacadeProps> {
   static readonly componentId = 'ToggleFacade'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: PropTypes.node.isRequired,
-    checked: PropTypes.bool,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    focused: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     checked: false,
     focused: false,
@@ -81,28 +70,28 @@ class ToggleFacade extends Component<ToggleFacadeProps> {
     const { styles, checked } = this.props
 
     if (checked) {
-      return <IconCheckSolid css={styles.iconSVG} />
+      return <IconCheckSolid css={styles?.iconSVG} />
     } else {
-      return <IconXSolid css={styles.iconSVG} />
+      return <IconXSolid css={styles?.iconSVG} />
     }
   }
 
   renderLabel() {
     const { children, styles } = this.props
 
-    return <span css={styles.label}>{children}</span>
+    return <span css={styles?.label}>{children}</span>
   }
 
   render() {
     const { labelPlacement, styles } = this.props
 
     return (
-      <span css={styles.toggleFacade}>
+      <span css={styles?.toggleFacade}>
         {(labelPlacement === 'top' || labelPlacement === 'start') &&
           this.renderLabel()}
-        <span css={styles.facade} aria-hidden="true">
-          <span css={styles.icon}>
-            <span css={styles.iconToggle}>{this.renderIcon()}</span>
+        <span css={styles?.facade} aria-hidden="true">
+          <span css={styles?.icon}>
+            <span css={styles?.iconToggle}>{this.renderIcon()}</span>
           </span>
         </span>
         {labelPlacement === 'end' && this.renderLabel()}

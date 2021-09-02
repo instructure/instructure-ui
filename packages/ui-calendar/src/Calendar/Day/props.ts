@@ -22,12 +22,14 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
-import type { ReactNode } from 'react'
+import PropTypes from 'prop-types'
+import { I18nPropTypes } from '@instructure/ui-i18n'
 
-export type CalendarDayProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type CalendarDayOwnProps = {
+  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
   date: string
   label: string
   interaction?: 'enabled' | 'disabled'
@@ -38,9 +40,88 @@ export type CalendarDayProps = {
   onKeyDown?: (...args: any[]) => any
   elementRef?: (...args: any[]) => any
   as?: AsElementType
-  children?: ReactNode
 }
 
-export type CalendarDayStyleProps = {
+type CalendarDayStyleProps = {
   isDisabled: boolean
 }
+
+type PropKeys = keyof CalendarDayOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type CalendarDayProps = CalendarDayOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The rendered representation of the corresponding date.
+   */
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * An ISO 8601 formatted string representing the date corresponding to
+   * this `<Calendar.Day />`
+   */
+  date: I18nPropTypes.iso8601.isRequired,
+  /**
+   * Accessible label to provide more context for the date to assistive
+   * technologies. This should consist of more than just a numerical date value.
+   * It should also include the month and the year. Ex. instead of just `1`,
+   * provide `1 August 2019`.
+   */
+  label: PropTypes.string.isRequired,
+  /**
+   * Is the `<Calendar.Day />` disabled
+   */
+  interaction: PropTypes.oneOf(['enabled', 'disabled']),
+  /**
+   * Is the `<Calendar.Day />` selected
+   */
+  isSelected: PropTypes.bool,
+  /**
+   * Is the `<Calendar.Day />` today
+   */
+  isToday: PropTypes.bool,
+  /**
+   * Is the `<Calendar.Day />` located outside the current rendered month
+   */
+  isOutsideMonth: PropTypes.bool,
+  /**
+   * Callback fired on click.
+   * @param {Object} event - the click event
+   * @param {Object} data - additional data
+   * @param data.date - the date of the corresponding `<Calendar.Day />`
+   */
+  onClick: PropTypes.func,
+  /**
+   * Callback fired on key down.
+   * @param {Object} event - the key down event
+   * @param {Object} data - additional data
+   * @param data.date - the date of the corresponding `<Calendar.Day />`
+   */
+  onKeyDown: PropTypes.func,
+  /**
+   * A ref function for the underlying DOM element.
+   */
+  elementRef: PropTypes.func,
+  /**
+   * the element type to render as
+   */
+  as: PropTypes.elementType // eslint-disable-line react/require-default-props
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'date',
+  'label',
+  'interaction',
+  'isSelected',
+  'isToday',
+  'isOutsideMonth',
+  'onClick',
+  'onKeyDown',
+  'elementRef',
+  'as'
+]
+
+export type { CalendarDayProps, CalendarDayStyleProps }
+export { propTypes, allowedProps }

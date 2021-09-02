@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
@@ -33,7 +32,6 @@ import {
   callRenderProp,
   getElementType
 } from '@instructure/ui-react-utils'
-import { I18nPropTypes } from '@instructure/ui-i18n'
 
 import testable from '@instructure/ui-testable'
 
@@ -41,7 +39,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { CalendarDayProps, CalendarDayStyleProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { CalendarDayProps, CalendarDayStyleProps } from './props'
 
 /**
 ---
@@ -54,67 +54,8 @@ id: Calendar.Day
 class Day extends Component<CalendarDayProps> {
   static readonly componentId = 'Calendar.Day'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * The rendered representation of the corresponding date.
-     */
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * An ISO 8601 formatted string representing the date corresponding to
-     * this `<Calendar.Day />`
-     */
-    date: I18nPropTypes.iso8601.isRequired,
-    /**
-     * Accessible label to provide more context for the date to assistive
-     * technologies. This should consist of more than just a numerical date value.
-     * It should also include the month and the year. Ex. instead of just `1`,
-     * provide `1 August 2019`.
-     */
-    label: PropTypes.string.isRequired,
-    /**
-     * Is the `<Calendar.Day />` disabled
-     */
-    interaction: PropTypes.oneOf(['enabled', 'disabled']),
-    /**
-     * Is the `<Calendar.Day />` selected
-     */
-    isSelected: PropTypes.bool,
-    /**
-     * Is the `<Calendar.Day />` today
-     */
-    isToday: PropTypes.bool,
-    /**
-     * Is the `<Calendar.Day />` located outside the current rendered month
-     */
-    isOutsideMonth: PropTypes.bool,
-    /**
-     * Callback fired on click.
-     * @param {Object} event - the click event
-     * @param {Object} data - additional data
-     * @param data.date - the date of the corresponding `<Calendar.Day />`
-     */
-    onClick: PropTypes.func,
-    /**
-     * Callback fired on key down.
-     * @param {Object} event - the key down event
-     * @param {Object} data - additional data
-     * @param data.date - the date of the corresponding `<Calendar.Day />`
-     */
-    onKeyDown: PropTypes.func,
-    /**
-     * A ref function for the underlying DOM element.
-     */
-    elementRef: PropTypes.func,
-    /**
-     * the element type to render as
-     */
-    as: PropTypes.elementType // eslint-disable-line react/require-default-props
-  } as const
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     interaction: 'enabled',
     isSelected: false,
@@ -122,8 +63,6 @@ class Day extends Component<CalendarDayProps> {
     isOutsideMonth: false,
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
-    onClick: undefined,
-    onKeyDown: undefined,
     children: null
   } as const
 
@@ -207,7 +146,7 @@ class Day extends Component<CalendarDayProps> {
       <View
         {...passthroughProps}
         as={elementType}
-        css={styles.calendarDay}
+        css={styles?.calendarDay}
         display="inline-block"
         margin="xxx-small"
         borderWidth="none"
@@ -233,7 +172,7 @@ class Day extends Component<CalendarDayProps> {
         onKeyDown={onKeyDown && this.handleKeyDown}
         elementRef={this.handleElementRef}
       >
-        <span css={styles.day}>
+        <span css={styles?.day}>
           <AccessibleContent alt={label}>
             {callRenderProp(children)}
           </AccessibleContent>

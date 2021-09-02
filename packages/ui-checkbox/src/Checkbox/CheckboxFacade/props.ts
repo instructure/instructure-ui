@@ -22,12 +22,46 @@
  * SOFTWARE.
  */
 
-export type CheckboxFacadeProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import PropTypes from 'prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type CheckboxFacadeOwnProps = {
+  children: React.ReactNode
   checked?: boolean
   focused?: boolean
   hovered?: boolean
   size?: 'small' | 'medium' | 'large'
   indeterminate?: boolean
 }
+
+type PropKeys = keyof CheckboxFacadeOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type CheckboxFacadeProps = CheckboxFacadeOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.node.isRequired,
+  checked: PropTypes.bool,
+  focused: PropTypes.bool,
+  hovered: PropTypes.bool,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Visual state showing that child checkboxes are a combination of checked and unchecked
+   */
+  indeterminate: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'checked',
+  'focused',
+  'hovered',
+  'size',
+  'indeterminate'
+]
+
+export type { CheckboxFacadeProps }
+export { propTypes, allowedProps }

@@ -24,11 +24,9 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes, FormFieldMessages } from '@instructure/ui-form-field'
+import { FormFieldMessages } from '@instructure/ui-form-field'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
@@ -43,7 +41,9 @@ import { CheckboxFacade } from './CheckboxFacade'
 import { ToggleFacade } from './ToggleFacade'
 
 import generateStyle from './styles'
-import { CheckboxProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { CheckboxProps } from './props'
 
 /**
 ---
@@ -57,54 +57,8 @@ tags: toggle, switch
 class Checkbox extends Component<CheckboxProps> {
   static readonly componentId = 'Checkbox'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    label: PropTypes.node.isRequired,
-    id: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * object with shape: `{
-     * text: PropTypes.string,
-     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     *   }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    /* whether to set the input to checked or not on initial render */
-    defaultChecked: PropTypes.bool,
-    /**
-     * whether the input is checked or not (must be accompanied by an `onChange` prop)
-     */
-    checked: controllable(PropTypes.bool, 'onChange', 'defaultChecked'),
-    /**
-     * when used with the `checked` prop, the component will not control its own state
-     */
-    onChange: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onMouseOver: PropTypes.func,
-    onMouseOut: PropTypes.func,
-    /**
-     * Whether or not to disable the checkbox
-     */
-    disabled: PropTypes.bool,
-    /**
-     * Works just like disabled but keeps the same styles as if it were active
-     */
-    readOnly: PropTypes.bool,
-    /**
-     * Visual state showing that child checkboxes are a combination of checked and unchecked
-     */
-    indeterminate: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    variant: PropTypes.oneOf(['simple', 'toggle']),
-    inline: PropTypes.bool,
-    labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     size: 'medium',
     variant: 'simple',
@@ -112,17 +66,6 @@ class Checkbox extends Component<CheckboxProps> {
     inline: false,
     indeterminate: false,
     readOnly: false,
-    onChange: undefined,
-    onKeyDown: undefined,
-    onFocus: undefined,
-    onBlur: undefined,
-    onMouseOut: undefined,
-    onMouseOver: undefined,
-    checked: undefined,
-    defaultChecked: undefined,
-    messages: undefined,
-    id: undefined,
-    value: undefined,
     labelPlacement: 'end'
   }
 
@@ -338,7 +281,7 @@ class Checkbox extends Component<CheckboxProps> {
 
     return (
       <div
-        css={styles.checkbox}
+        css={styles?.checkbox}
         onMouseOver={createChainedFunction(onMouseOver, this.handleMouseOver)}
         onMouseOut={createChainedFunction(onMouseOut, this.handleMouseOut)}
       >
@@ -353,14 +296,14 @@ class Checkbox extends Component<CheckboxProps> {
           }}
           disabled={disabled || readOnly}
           aria-checked={indeterminate ? 'mixed' : undefined}
-          css={styles.input}
+          css={styles?.input}
           onChange={this.handleChange}
           onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
           onFocus={createChainedFunction(onFocus, this.handleFocus)}
           onBlur={createChainedFunction(onBlur, this.handleBlur)}
           checked={this.checked}
         />
-        <label htmlFor={this.id} css={styles.control}>
+        <label htmlFor={this.id} css={styles?.control}>
           {this.renderFacade()}
           {this.renderMessages()}
         </label>
