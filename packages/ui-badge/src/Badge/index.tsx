@@ -24,19 +24,19 @@
 
 /** @jsx jsx */
 import { Component, Children, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
-import { PositionPropTypes } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { BadgeProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { BadgeProps } from './props'
 
 /**
 ---
@@ -50,26 +50,8 @@ category: components
 class Badge extends Component<BadgeProps> {
   static readonly componentId = 'Badge'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    count: PropTypes.number,
-    countUntil: PropTypes.number,
-    children: PropTypes.element,
-    type: PropTypes.oneOf(['count', 'notification']),
-    standalone: PropTypes.bool,
-    pulse: PropTypes.bool,
-    variant: PropTypes.oneOf(['primary', 'success', 'danger']),
-    placement: PositionPropTypes.placement,
-    margin: ThemeablePropTypes.spacing,
-    elementRef: PropTypes.func,
-    formatOverflowText: PropTypes.func,
-    formatOutput: PropTypes.func,
-    as: PropTypes.elementType // eslint-disable-line react/require-default-props
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     count: undefined,
     children: null,
@@ -135,7 +117,7 @@ class Badge extends Component<BadgeProps> {
     return (
       <View
         margin={standalone ? margin : 'none'}
-        css={styles.badge}
+        css={styles?.badge}
         title={
           type === 'count' && this.countOverflow() ? count?.toString() : ''
         }
@@ -166,7 +148,7 @@ class Badge extends Component<BadgeProps> {
           as={as}
           margin={margin}
           elementRef={elementRef}
-          css={styles.wrapper}
+          css={styles?.wrapper}
           display="inline-block"
         >
           {this.renderChildren()}
