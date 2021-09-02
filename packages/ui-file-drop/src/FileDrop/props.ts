@@ -22,10 +22,16 @@
  * SOFTWARE.
  */
 
-import type { FormMessage } from '@instructure/ui-form-field'
-import type { Spacing } from '@instructure/emotion'
+import PropTypes from 'prop-types'
 
-export type FileDropProps = {
+import { FormPropTypes } from '@instructure/ui-form-field'
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { FormMessage } from '@instructure/ui-form-field'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+
+type FileDropOwnProps = {
   id?: string
   renderLabel: ((...args: any[]) => any) | React.ReactNode
   accept?: string | string[]
@@ -49,20 +55,158 @@ export type FileDropProps = {
   maxWidth?: string | number
   minWidth?: string | number
   margin?: Spacing
-  makeStyles?: (...args: any[]) => any
-  styles?: any
 }
 
-export type FileDropState = {
+type FileDropState = {
   isDragAccepted: boolean
   isDragRejected: boolean
   isFocused: boolean
   isFileBrowserDisplayed: boolean
 }
 
-export type FileDropStyleProps = {
+type FileDropStyleProps = {
   functionallyDisabled: boolean
   visuallyDisabled: boolean
   dragRejected: boolean
   dragAccepted: boolean
 }
+
+type PropKeys = keyof FileDropOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type FileDropProps = FileDropOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The id of the input (to link it to its label for a11y)
+   */
+  id: PropTypes.string,
+  /**
+   * The content of FileDrop; can be a component or React node.
+   * Components receive `isDragAccepted` and `isDragRejected` as props.
+   */
+  renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
+  /**
+   * The mime media type/s or file extension/s allowed to be dropped inside
+   */
+  accept: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ]),
+  /**
+   * object with shape: `{
+   * text: PropTypes.string,
+   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *   }`
+   */
+  messages: PropTypes.arrayOf(FormPropTypes.message),
+  /**
+   * Called when clicking on drop area to select files to upload
+   */
+  onClick: PropTypes.func,
+  /**
+   * Called when dropping files or when file dialog window exits successfully
+   */
+  onDrop: PropTypes.func,
+  /**
+   * Called when dropping allowed files
+   */
+  onDropAccepted: PropTypes.func,
+  /**
+   * Called when dropping rejected files
+   */
+  onDropRejected: PropTypes.func,
+  /**
+   * Called when dragging files
+   * and passing through FileDrop's content for the first time
+   */
+  onDragEnter: PropTypes.func,
+  /**
+   * Called when dragging files and passing through FileDrop's content
+   */
+  onDragOver: PropTypes.func,
+  /**
+   * Called when dragging files and leaving FileDrop's content
+   */
+  onDragLeave: PropTypes.func,
+  /**
+   * Flag to use window.URL.createObjectURL for each dropped file and pass it through file.preview
+   */
+  shouldEnablePreview: PropTypes.bool,
+  /**
+   * Flag to allow multiple files to drop at once
+   */
+  shouldAllowMultiple: PropTypes.bool,
+  /**
+   * Flag to allow upload of the same file more than once
+   */
+  shouldAllowRepeats: PropTypes.bool,
+  /**
+   * the maximum file size allowed
+   */
+  maxSize: PropTypes.number,
+  /**
+   * the minimum file size allowed
+   */
+  minSize: PropTypes.number,
+  /**
+   * Specifies if interaction with the input is enabled, disabled, or readonly.
+   */
+  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
+  /**
+   * Set the CSS `display` property on FileInput's outermost element
+   */
+  display: PropTypes.oneOf(['block', 'inline-block']),
+  /**
+   * Set the CSS `height` property on FileInput's outermost element
+   */
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Set the CSS `width` property on FileInput's outermost element
+   */
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Set the CSS `maxWidth` property on FileInput's outermost element
+   */
+  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Set the CSS `minWidth` property on FileInput's outermost element
+   */
+  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Valid values are 0, none, auto, xxx-small, xx-small, x-small, small,
+   * medium, large, x-large, xx-large. Apply these values via familiar
+   * CSS-like shorthand. For example: margin="small auto large".
+   */
+  margin: ThemeablePropTypes.spacing
+}
+
+const allowedProps: AllowedPropKeys = [
+  'id',
+  'renderLabel',
+  'accept',
+  'messages',
+  'onClick',
+  'onDrop',
+  'onDropAccepted',
+  'onDropRejected',
+  'onDragEnter',
+  'onDragOver',
+  'onDragLeave',
+  'shouldEnablePreview',
+  'shouldAllowMultiple',
+  'shouldAllowRepeats',
+  'maxSize',
+  'minSize',
+  'interaction',
+  'display',
+  'height',
+  'width',
+  'maxWidth',
+  'minWidth',
+  'margin'
+]
+
+export type { FileDropProps, FileDropState, FileDropStyleProps }
+export { propTypes, allowedProps }

@@ -22,6 +22,12 @@
  * SOFTWARE.
  */
 
+import PropTypes from 'prop-types'
+
+import { controllable } from '@instructure/ui-prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+
 type GetToggleProps = <P extends Record<string, any>>(
   props?: P & { onClick?: (event: Event) => void }
 ) => {
@@ -44,9 +50,9 @@ type RenderProps = {
   getDetailsProps: () => { id: string }
 }
 
-export type RenderExpandable = (props: RenderProps) => JSX.Element
+type RenderExpandable = (props: RenderProps) => JSX.Element
 
-export type ExpandableProps = {
+type ExpandableOwnProps = {
   /**
    * Whether the content is expanded or hidden. Makes the component controlled, so if provided, the `onToggle` handler has to be provided too.
    */
@@ -73,4 +79,29 @@ export type ExpandableProps = {
   render?: RenderExpandable
 }
 
-export type ExpandableState = { expanded: boolean }
+type ExpandableState = { expanded: boolean }
+
+type PropKeys = keyof ExpandableOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ExpandableProps = ExpandableOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
+  defaultExpanded: PropTypes.bool,
+  onToggle: PropTypes.func,
+  children: PropTypes.func,
+  render: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'expanded',
+  'defaultExpanded',
+  'onToggle',
+  'children',
+  'render'
+]
+
+export type { ExpandableProps, ExpandableState, RenderExpandable }
+export { propTypes, allowedProps }

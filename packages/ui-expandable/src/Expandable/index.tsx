@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
-import { controllable } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { ExpandableProps, ExpandableState } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { ExpandableProps, ExpandableState } from './props'
 
 const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
   expanded: !expanded
@@ -39,20 +39,12 @@ category: components/utilities
 @tsProps
 */
 class Expandable extends Component<ExpandableProps, ExpandableState> {
-  static propTypes = {
-    expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
-    defaultExpanded: PropTypes.bool,
-    onToggle: PropTypes.func,
-    children: PropTypes.func,
-    render: PropTypes.func
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     defaultExpanded: false,
     onToggle: function () {},
-    expanded: undefined,
-    children: null,
-    render: undefined
+    children: null
   }
 
   _contentId: string

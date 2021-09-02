@@ -22,15 +22,48 @@
  * SOFTWARE.
  */
 
-export type DrawerLayoutContentProps = {
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type DrawerLayoutContentOwnProps = {
   label: string
+  children?: React.ReactNode
   contentRef?: (...args: any[]) => any
   onSizeChange?: (...args: any[]) => any
   role?: string
-  makeStyles?: (...args: any[]) => any
-  styles?: any
 }
 
-export type DrawerLayoutContentState = {
+type DrawerLayoutContentState = {
   shouldTransition: boolean
 }
+
+type PropKeys = keyof DrawerLayoutContentOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type DrawerLayoutContentProps = DrawerLayoutContentOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  label: PropTypes.string.isRequired,
+  children: PropTypes.node,
+  contentRef: PropTypes.func,
+  /**
+   * Callback fired whenever the `<DrawerLayout.Content />` changes size
+   */
+  onSizeChange: PropTypes.func,
+  role: PropTypes.string
+}
+
+const allowedProps: AllowedPropKeys = [
+  'label',
+  'children',
+  'contentRef',
+  'onSizeChange',
+  'role'
+]
+
+export type { DrawerLayoutContentProps, DrawerLayoutContentState }
+export { propTypes, allowedProps }

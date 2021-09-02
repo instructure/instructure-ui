@@ -22,13 +22,22 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import { element } from '@instructure/ui-prop-types'
+import { bidirectional } from '@instructure/ui-i18n'
+
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
 
-export type DrawerTrayPlacement = 'start' | 'end'
+type DrawerTrayPlacement = 'start' | 'end'
 
-export type DrawerLayoutTrayOwnProps = {
+type DrawerLayoutTrayOwnProps = {
   label: string
+  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
   render?: (...args: any[]) => any
   placement?: DrawerTrayPlacement
   open?: boolean
@@ -55,18 +64,142 @@ export type DrawerLayoutTrayOwnProps = {
   shouldReturnFocus?: boolean
   shouldCloseOnDocumentClick?: boolean
   shouldCloseOnEscape?: boolean
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+} & BidirectionalProps
 
-export type DrawerLayoutTrayProps = DrawerLayoutTrayOwnProps &
-  BidirectionalProps
-
-export type DrawerLayoutTrayState = {
+type DrawerLayoutTrayState = {
   transitioning: boolean
   portalOpen: boolean
 }
 
-export type DrawerLayoutTrayStyleProps = {
+type DrawerLayoutTrayStyleProps = {
   placement: DrawerTrayPlacement
 }
+
+type PropKeys = keyof DrawerLayoutTrayOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type DrawerLayoutTrayProps = DrawerLayoutTrayOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  label: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  render: PropTypes.func,
+  /**
+   * Placement of the `<DrawerLayout.Tray />`
+   */
+  placement: PropTypes.oneOf(['start', 'end']),
+  /**
+   * If the tray is open or closed.
+   */
+  open: PropTypes.bool,
+  /**
+   * Called when the `<DrawerLayout.Tray />` is opened
+   */
+  onOpen: PropTypes.func,
+  /**
+   * Called when the `<DrawerLayout.Tray />` is closed
+   */
+  onClose: PropTypes.func,
+  /**
+   * Should the `<DrawerLayout.Tray />` have a border
+   */
+  border: PropTypes.bool,
+  /**
+   * Should the `<DrawerLayout.Tray />` have a shadow
+   */
+  shadow: PropTypes.bool,
+  /**
+   * Callback fired when the `<DrawerLayout.Tray />` transitions in/out
+   */
+  onTransition: PropTypes.func,
+  /**
+   * Callback fired before the `<DrawerLayout.Tray />` transitions in
+   */
+  onEnter: PropTypes.func,
+  /**
+   * Callback fired as the `<DrawerLayout.Tray />` begins to transition in
+   */
+  onEntering: PropTypes.func,
+  /**
+   * Callback fired after the `<DrawerLayout.Tray />` finishes transitioning in
+   */
+  onEntered: PropTypes.func,
+  /**
+   * Callback fired right before the `<DrawerLayout.Tray />` transitions out
+   */
+  onExit: PropTypes.func,
+  /**
+   * Callback fired as the `<DrawerLayout.Tray />` begins to transition out
+   */
+  onExiting: PropTypes.func,
+  /**
+   * Callback fired after the `<DrawerLayout.Tray />` finishes transitioning out
+   */
+  onExited: PropTypes.func,
+  /**
+   * Ref function for the `<DrawerLayout.Tray />` content
+   */
+  contentRef: PropTypes.func,
+  /**
+   * An element or a function returning an element to use as the mount node
+   * for the `<DrawerLayout.Tray />` when tray is overlaying content
+   */
+  mountNode: PropTypes.oneOfType([element, PropTypes.func]),
+  /**
+   * An element or a function returning an element to focus by default
+   */
+  defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  /**
+   * An element, function returning an element, or array of elements that will not be hidden from
+   * the screen reader when the `<DrawerLayout.Tray />` is open
+   */
+  liveRegion: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+    PropTypes.func
+  ]),
+  onDismiss: PropTypes.func,
+  shouldContainFocus: PropTypes.bool,
+  shouldReturnFocus: PropTypes.bool,
+  shouldCloseOnDocumentClick: PropTypes.bool,
+  shouldCloseOnEscape: PropTypes.bool,
+  dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+}
+
+const allowedProps: AllowedPropKeys = [
+  'label',
+  'children',
+  'render',
+  'placement',
+  'open',
+  'onOpen',
+  'onClose',
+  'border',
+  'shadow',
+  'onTransition',
+  'onEnter',
+  'onEntering',
+  'onEntered',
+  'onExit',
+  'onExiting',
+  'onExited',
+  'contentRef',
+  'mountNode',
+  'defaultFocusElement',
+  'liveRegion',
+  'onDismiss',
+  'shouldContainFocus',
+  'shouldReturnFocus',
+  'shouldCloseOnDocumentClick',
+  'shouldCloseOnEscape',
+  'dir'
+]
+
+export type {
+  DrawerLayoutTrayProps,
+  DrawerLayoutTrayState,
+  DrawerLayoutTrayStyleProps,
+  DrawerTrayPlacement
+}
+export { propTypes, allowedProps }
