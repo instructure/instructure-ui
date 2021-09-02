@@ -36,7 +36,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
 
-import { propTypes, defaultProps, allowedProps } from './props'
+import { propTypes, allowedProps } from './props'
 import type { CloseButtonProps } from './props'
 
 /**
@@ -51,7 +51,18 @@ class CloseButton extends Component<CloseButtonProps> {
 
   static propTypes = propTypes
   static allowedProps = allowedProps
-  static defaultProps = defaultProps
+  static defaultProps = {
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
+    onClick: (event) => {},
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    type: 'button',
+    placement: 'static',
+    offset: 'x-small',
+    size: 'small',
+    margin: '0',
+    as: 'button',
+    cursor: 'pointer'
+  }
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message

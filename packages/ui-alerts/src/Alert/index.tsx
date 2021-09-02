@@ -45,7 +45,7 @@ import { withStyle, jsx, EmotionThemeProvider } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, defaultProps, allowedProps } from './props'
+import { propTypes, allowedProps } from './props'
 import type { AlertProps } from './props'
 
 /**
@@ -59,7 +59,18 @@ class Alert extends Component<AlertProps> {
 
   static propTypes = propTypes
   static allowedProps = allowedProps
-  static defaultProps = defaultProps
+  static defaultProps = {
+    variant: 'info',
+    margin: 'x-small 0',
+    timeout: 0,
+    transition: 'fade',
+    open: true,
+    screenReaderOnly: false,
+    liveRegionPoliteness: 'assertive',
+    isLiveRegionAtomic: false,
+    children: null,
+    hasShadow: true
+  }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {

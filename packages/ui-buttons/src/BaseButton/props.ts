@@ -188,26 +188,5 @@ const allowedProps: AllowedPropKeys = [
   'withBorder'
 ]
 
-const defaultProps = {
-  children: null,
-  type: 'button',
-  size: 'medium',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-  elementRef: (el) => {},
-  as: 'button',
-  // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-  color: 'secondary',
-  shape: 'rectangle',
-  display: 'inline-block',
-  textAlign: 'start',
-  withBackground: true,
-  withBorder: true,
-  isCondensed: false,
-  margin: '0',
-  cursor: 'pointer',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  onKeyDown: (event) => {}
-}
-
 export type { BaseButtonProps, BaseButtonStyleProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

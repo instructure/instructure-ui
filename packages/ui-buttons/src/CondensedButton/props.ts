@@ -114,18 +114,5 @@ const allowedProps: AllowedPropKeys = [
   'type'
 ]
 
-const defaultProps = {
-  children: null,
-  type: 'button',
-  size: 'medium',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-  elementRef: (el) => {},
-  as: 'button',
-  // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-  color: 'primary',
-  margin: '0',
-  cursor: 'pointer'
-}
-
 export type { CondensedButtonProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

@@ -106,15 +106,5 @@ const allowedProps: AllowedPropKeys = [
   'dir'
 ]
 
-const defaultProps = {
-  open: false,
-  insertAt: 'bottom',
-  onOpen: () => {},
-  onClose: () => {},
-  mountNode: null,
-  children: null,
-  elementRef: () => {}
-}
-
 export type { PortalProps, PortalState, PortalNode }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

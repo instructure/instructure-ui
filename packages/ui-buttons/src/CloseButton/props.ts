@@ -133,18 +133,5 @@ const allowedProps: AllowedPropKeys = [
   'type'
 ]
 
-const defaultProps = {
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  onClick: (event) => {},
-  // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-  type: 'button',
-  placement: 'static',
-  offset: 'x-small',
-  size: 'small',
-  margin: '0',
-  as: 'button',
-  cursor: 'pointer'
-}
-
 export type { CloseButtonProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

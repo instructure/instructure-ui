@@ -128,15 +128,5 @@ const allowedProps: AllowedPropKeys = [
   'size'
 ]
 
-const defaultProps = {
-  disabled: false,
-  readOnly: false,
-  size: 'medium',
-  headingAs: 'span',
-  headingLevel: 'h1',
-  as: 'span',
-  elementRef: () => {}
-}
-
 export type { BillboardProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

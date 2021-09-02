@@ -126,18 +126,5 @@ const allowedProps: AllowedPropKeys = [
   'hasShadow'
 ]
 
-const defaultProps = {
-  variant: 'info',
-  margin: 'x-small 0',
-  timeout: 0,
-  transition: 'fade',
-  open: true,
-  screenReaderOnly: false,
-  liveRegionPoliteness: 'assertive',
-  isLiveRegionAtomic: false,
-  children: null,
-  hasShadow: true
-}
-
 export type { AlertProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

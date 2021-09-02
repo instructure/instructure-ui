@@ -31,7 +31,7 @@ import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '../IconButton'
 
-import { propTypes, defaultProps, allowedProps } from './props'
+import { propTypes, allowedProps } from './props'
 import type { ToggleButtonProps } from './props'
 
 /**
@@ -46,7 +46,19 @@ class ToggleButton extends Component<ToggleButtonProps> {
 
   static propTypes = propTypes
   static allowedProps = allowedProps
-  static defaultProps = defaultProps
+  static defaultProps = {
+    size: 'medium',
+    as: 'button',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
+    elementRef: (el) => {},
+    renderIcon: () => {},
+    onClick: () => {},
+    mountNode: null,
+    color: 'secondary',
+    placement: 'top center',
+    constrain: 'window'
+  }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {

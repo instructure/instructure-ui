@@ -286,17 +286,5 @@ const allowedProps: AllowedPropKeys = [
   'withVisualDebug'
 ]
 
-const defaultProps = {
-  display: 'auto',
-  overflowX: 'visible',
-  overflowY: 'visible',
-  withVisualDebug: false,
-  borderColor: 'primary',
-  position: 'static',
-  focusPosition: 'offset',
-  focusColor: 'info',
-  shouldAnimateFocus: true
-}
-
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }
 export type { ViewProps }
