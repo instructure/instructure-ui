@@ -40,16 +40,20 @@ import type {
 } from '@instructure/ui-position'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
-type TooltipChildrenArgs = {
+type TooltipRenderChildrenArgs = {
   focused: boolean
-  getTriggerProps: <P extends Record<string, unknown>>(
+  getTriggerProps: <P extends Record<string, any>>(
     props: P
   ) => { 'aria-describedby': string } & P
 }
 
+type TooltipRenderChildren = (
+  args: TooltipRenderChildrenArgs
+) => React.ReactNode
+
 type TooltipOwnProps = {
   renderTip: React.ReactNode | ((...args: any[]) => any)
-  children: React.ReactNode | ((args: TooltipChildrenArgs) => React.ReactNode)
+  children: React.ReactNode | TooltipRenderChildren
   isShowingContent?: boolean
   defaultIsShowingContent?: boolean
   as?: AsElementType
@@ -167,5 +171,10 @@ const allowedProps: AllowedPropKeys = [
   'onHideContent'
 ]
 
-export type { TooltipProps, TooltipStyle, TooltipChildrenArgs }
+export type {
+  TooltipProps,
+  TooltipStyle,
+  TooltipRenderChildren,
+  TooltipRenderChildrenArgs
+}
 export { propTypes, allowedProps }

@@ -26,10 +26,11 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { Tooltip, TooltipChildrenArgs } from '@instructure/ui-tooltip'
 import { TruncateText } from '@instructure/ui-truncate-text'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+import { Tooltip } from '@instructure/ui-tooltip'
+import type { TooltipRenderChildrenArgs } from '@instructure/ui-tooltip'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -82,8 +83,8 @@ class Pill extends Component<PillProps, PillState> {
   }
 
   renderPill(
-    focused?: TooltipChildrenArgs['focused'],
-    getTriggerProps?: TooltipChildrenArgs['getTriggerProps']
+    focused?: TooltipRenderChildrenArgs['focused'],
+    getTriggerProps?: TooltipRenderChildrenArgs['getTriggerProps']
   ) {
     const {
       margin,
@@ -110,7 +111,7 @@ class Pill extends Component<PillProps, PillState> {
         elementRef={elementRef}
         margin={margin}
         padding="0"
-        maxWidth={styles?.maxWidth}
+        maxWidth={styles?.maxWidth as string}
         background="transparent"
         borderRadius="pill"
         borderWidth="0"

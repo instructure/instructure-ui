@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 export { Tooltip } from './Tooltip'
-export type { TooltipProps, TooltipChildrenArgs } from './Tooltip/props'
+export type { TooltipProps, TooltipRenderChildrenArgs } from './Tooltip/props'
