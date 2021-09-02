@@ -83,9 +83,5 @@ const allowedProps: AllowedPropKeys = [
   'title'
 ]
 
-const defaultProps = {
-  alignContent: 'center'
-}
-
 export type { BylineProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

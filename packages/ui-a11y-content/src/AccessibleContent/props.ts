@@ -51,10 +51,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['alt', 'as', 'children']
 
-const defaultProps = {
-  as: 'span',
-  children: null
-}
-
 export type { AccessibleContentProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

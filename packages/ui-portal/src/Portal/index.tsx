@@ -29,7 +29,7 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
-import { propTypes, defaultProps, allowedProps } from './props'
+import { propTypes, allowedProps } from './props'
 import type { PortalNode, PortalProps, PortalState } from './props'
 
 /**
@@ -41,7 +41,7 @@ category: components/utilities
 **/
 @bidirectional()
 class Portal extends Component<
-  // For some (yet) unknown reason, adding OtherHTMLAttributes in the `types.ts`
+  // For some (yet) unknown reason, adding OtherHTMLAttributes in the `props.ts`
   // breaks the docs generation for Portal
   // TODO: try to figure out why (and fix, if possible)
   PortalProps & OtherHTMLAttributes<PortalProps>,
@@ -49,7 +49,15 @@ class Portal extends Component<
 > {
   static propTypes = propTypes
   static allowedProps = allowedProps
-  static defaultProps = defaultProps
+  static defaultProps = {
+    open: false,
+    insertAt: 'bottom',
+    onOpen: () => {},
+    onClose: () => {},
+    mountNode: null,
+    children: null,
+    elementRef: () => {}
+  }
 
   constructor(props: PortalProps) {
     super(props)

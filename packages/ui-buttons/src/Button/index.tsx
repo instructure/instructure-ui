@@ -32,7 +32,7 @@ import { withStyle } from '@instructure/emotion'
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
 
-import { propTypes, defaultProps, allowedProps } from './props'
+import { propTypes, allowedProps } from './props'
 import type { ButtonProps } from './props'
 
 /**
@@ -48,7 +48,21 @@ class Button extends Component<ButtonProps> {
 
   static propTypes = propTypes
   static allowedProps = allowedProps
-  static defaultProps = defaultProps
+  static defaultProps = {
+    children: null,
+    type: 'button',
+    size: 'medium',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
+    elementRef: (el) => {},
+    as: 'button',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    color: 'secondary',
+    display: 'inline-block',
+    textAlign: 'center',
+    withBackground: true,
+    margin: '0',
+    cursor: 'pointer'
+  }
 
   _buttonComponent = null
 

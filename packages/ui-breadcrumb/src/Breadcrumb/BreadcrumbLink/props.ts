@@ -78,7 +78,5 @@ const allowedProps: AllowedPropKeys = [
   'size'
 ]
 
-const defaultProps = {}
-
 export type { BreadcrumbLinkProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

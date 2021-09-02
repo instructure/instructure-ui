@@ -68,10 +68,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['children', 'label', 'margin', 'size']
 
-const defaultProps = {
-  size: 'medium',
-  children: null
-}
-
 export type { BreadcrumbProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

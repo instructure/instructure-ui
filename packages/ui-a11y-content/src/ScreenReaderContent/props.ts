@@ -59,10 +59,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['as', 'children']
 
-const defaultProps = {
-  as: 'span',
-  children: null
-}
-
 export type { ScreenReaderContentProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

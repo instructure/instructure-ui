@@ -136,19 +136,5 @@ const allowedProps: AllowedPropKeys = [
   'status'
 ]
 
-const defaultProps = {
-  size: 'medium',
-  as: 'button',
-  // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-  // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-  elementRef: (el) => {},
-  renderIcon: () => {},
-  onClick: () => {},
-  mountNode: null,
-  color: 'secondary',
-  placement: 'top center',
-  constrain: 'window'
-}
-
 export type { ToggleButtonProps }
-export { propTypes, defaultProps, allowedProps }
+export { propTypes, allowedProps }

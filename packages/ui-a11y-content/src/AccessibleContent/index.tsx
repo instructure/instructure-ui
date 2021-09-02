@@ -30,7 +30,7 @@ import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
 
-import { propTypes, defaultProps, allowedProps } from './props'
+import { propTypes, allowedProps } from './props'
 import type { AccessibleContentProps } from './props'
 
 /**
@@ -45,7 +45,10 @@ class AccessibleContent extends Component<
 > {
   static propTypes = propTypes
   static allowedProps = allowedProps
-  static defaultProps = defaultProps
+  static defaultProps = {
+    as: 'span',
+    children: null
+  } as const
 
   render() {
     const { alt, children, ...props } = this.props
