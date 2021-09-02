@@ -28,7 +28,7 @@ import { ScreenReaderContent } from '../index'
 
 describe('<ScreenReaderContent />', async () => {
   it('should render the specified tag when `as` prop is set', async () => {
-    const subject = await mount(<ScreenReaderContent />)
+    const subject = await mount(<ScreenReaderContent as="div" />)
     expect(subject.getDOMNode()).to.have.tagName('div')
   })
 
