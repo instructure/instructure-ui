@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { debounce } from '@instructure/debounce'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
@@ -34,7 +33,12 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { DrawerLayoutContentProps, DrawerLayoutContentState } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type {
+  DrawerLayoutContentProps,
+  DrawerLayoutContentState
+} from './props'
 
 /**
 ---
@@ -51,22 +55,8 @@ class DrawerContent extends Component<
   static readonly componentId = 'DrawerLayout.Content'
 
   static locatorAttribute = 'data-drawer-content'
-  static propTypes = {
-    label: PropTypes.string.isRequired,
-    children: PropTypes.node,
-    contentRef: PropTypes.func,
-    /**
-     * Callback fired whenever the `<DrawerLayout.Content />` changes size
-     */
-    onSizeChange: PropTypes.func,
-    role: PropTypes.string,
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
@@ -165,7 +155,7 @@ class DrawerContent extends Component<
         style={style}
         ref={this.handleContentRef}
         aria-label={label}
-        css={this.props.styles.drawerContent}
+        css={this.props.styles?.drawerContent}
       >
         {this.props.children}
       </div>

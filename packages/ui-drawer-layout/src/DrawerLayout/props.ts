@@ -22,13 +22,54 @@
  * SOFTWARE.
  */
 
-import type { BidirectionalProps } from '@instructure/ui-i18n'
+import PropTypes from 'prop-types'
 
-export type DrawerLayoutOwnProps = {
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { bidirectional } from '@instructure/ui-i18n'
+
+import { DrawerContent } from './DrawerContent'
+import { DrawerTray } from './DrawerTray'
+
+import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+
+type DrawerLayoutOwnProps = {
+  children?: React.ReactNode // TODO: oneOfEach([DrawerContent, DrawerTray])
   minWidth?: string
   onOverlayTrayChange?: (...args: any[]) => any
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+} & BidirectionalProps
+
+type PropKeys = keyof DrawerLayoutOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type DrawerLayoutProps = DrawerLayoutOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Exactly one of each of the following child types: `DrawerLayout.Content`, `DrawerLayout.Tray`
+   */
+  children: ChildrenPropTypes.oneOfEach([DrawerContent, DrawerTray]),
+  /**
+   * Min width for the `<DrawerLayout.Content />`
+   */
+  minWidth: PropTypes.string,
+  /**
+   * Function called when the `<DrawerLayout.Content />` is resized and hits the `minWidth` breakpoint
+   * Called with a boolean value, `true` if the tray is now overlaying the content or `false` if
+   * it is side by side
+   */
+  onOverlayTrayChange: PropTypes.func,
+  dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 
-export type DrawerLayoutProps = DrawerLayoutOwnProps & BidirectionalProps
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'minWidth',
+  'onOverlayTrayChange',
+  'dir'
+]
+
+export type { DrawerLayoutProps }
+export { propTypes, allowedProps }

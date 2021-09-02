@@ -22,11 +22,77 @@
  * SOFTWARE.
  */
 
-export type EditableProps = {
+import PropTypes from 'prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+
+type EditableOwnProps = {
   mode: 'view' | 'edit'
   onChangeMode: (...args: any[]) => any
+  children?: (...args: any[]) => any
   render?: (...args: any[]) => any
   value?: any
   onChange?: (...args: any[]) => any
   readOnly?: boolean
 }
+
+type PropKeys = keyof EditableOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type EditableProps = EditableOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * If `'view'`: the view component is rendered,
+   * if `'edit'`: the edit component is rendered
+   */
+  mode: PropTypes.oneOf(['view', 'edit']).isRequired,
+  /**
+   * Called when the component's mode changes
+   * @param {string} new_mode
+   */
+  onChangeMode: PropTypes.func.isRequired,
+
+  /**
+   * @param {Object} renderProps
+   * @param {Boolean} mode
+   * @param {Function} renderProps.getContainerProps - Props to be spread onto the container element
+   * @param {Function} renderProps.getEditorProps - Props to be spread onto the editor element
+   * @param {Function} renderProps.getEditButtonProps - Props to be spread onto the edit button element
+   */
+  children: PropTypes.func,
+  /**
+   * Identical to children
+   */
+  render: PropTypes.func,
+
+  /**
+   * The current value.
+   * The value is managed by the consuming app, but we need to tell Editable
+   * it's changed or it won't re-render
+   */
+  value: PropTypes.any,
+  /**
+   * Called when Editable switches from edit to view mode and the value has changed.
+   * @param {any} value
+   */
+  onChange: PropTypes.func,
+  /**
+   * The mode is fixed as 'view'
+   */
+  readOnly: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = [
+  'mode',
+  'onChangeMode',
+  'children',
+  'render',
+  'value',
+  'onChange',
+  'readOnly'
+]
+
+export type { EditableProps }
+export { propTypes, allowedProps }

@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Flex } from '@instructure/ui-flex'
 import { IconButton } from '@instructure/ui-buttons'
@@ -36,7 +35,9 @@ import { View } from '@instructure/ui-view'
 
 import { Editable } from '../Editable'
 import generateStyle from './styles'
-import { InPlaceEditProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { InPlaceEditProps } from './props'
 
 /**
 ---
@@ -46,92 +47,13 @@ category: components
 @withStyle(generateStyle, null)
 class InPlaceEdit extends Component<InPlaceEditProps> {
   static readonly componentId = 'InPlaceEdit'
-  static propTypes = {
-    /**
-     * Function to render the view mode component.
-     * It is the consumer's responsibility to provide the
-     * current value or children.
-     *
-     * @returns {element} the viewer DOM sub-tree.
-     */
-    renderViewer: PropTypes.func.isRequired,
-    /**
-     * Function to render the edit mode component
-     * It is the consumer's responsibility to provide the
-     * current value, and to attach the appropriate onChange
-     * event handler needed to capture the updated value. This
-     * new value must then be forwarded to the view mode component.
-     *
-     * @returns {element} the editor DOM sub-tree.
-     */
-    renderEditor: PropTypes.func.isRequired,
-    /**
-     * Function to render the edit button.
-     *
-     * @param {Object} { isVisible, onClick, onFocus, onBlur, buttonRef }
-     * @returns {element} the edit button DOM sub-tree
-     *
-     * If you choose to use the default edit button, add `label` to the
-     * incoming `props` parameter and call `InPlaceEdit.renderDefaultEditButton(props)`
-     *
-     * If you choose to render a custom button, attach the on* event handlers
-     * and set `buttonRef` as a `ref` type property on the `button` element.
-     *
-     * `isVisible` is a hint as to whether the button is _typically_ shown,
-     * but you're free to ignore it for your use-case.
-     */
-    renderEditButton: PropTypes.func.isRequired,
-    /**
-     * If `'view'`: the view component is rendered,
-     * if `'edit'`: the edit component is rendered
-     */
-    mode: PropTypes.oneOf(['view', 'edit']).isRequired,
-    /**
-     * Called when the component's mode changes
-     * @param {string} newMode
-     */
-    onChangeMode: PropTypes.func.isRequired,
-    /**
-     * The current value.
-     * The value is managed by the consuming app, but we need to tell InPlaceEdit
-     * it's changed or it won't re-render
-     */
-    value: PropTypes.any,
-    /**
-     * Called when Editable switches from edit to view mode and the value has changed.
-     * @param {any} value
-     */
-    onChange: PropTypes.func,
-    /**
-     * The mode is fixed as 'view'
-     */
-    readOnly: PropTypes.bool,
-    /**
-     * Show a focus outline when the input is focused
-     */
-    showFocusRing: PropTypes.bool,
-    /**
-     * Put the edit button before or after the view
-     */
-    editButtonPlacement: PropTypes.oneOf(['start', 'end']),
-    /**
-     * Render outermost element inline v. block
-     */
-    inline: PropTypes.bool,
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     readOnly: false,
     showFocusRing: true,
     inline: true,
-    value: undefined,
-    editButtonPlacement: 'end',
-    onChange: undefined
+    editButtonPlacement: 'end'
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -172,7 +94,7 @@ class InPlaceEdit extends Component<InPlaceEditProps> {
         display="block"
         withFocusOutline={showFocusRing}
         position="relative"
-        css={this.props.styles.inPlaceEdit}
+        css={this.props.styles?.inPlaceEdit}
         borderRadius="medium"
         margin="auto"
       >

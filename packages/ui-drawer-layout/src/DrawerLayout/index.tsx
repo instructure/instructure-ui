@@ -24,10 +24,8 @@
 
 /** @jsx jsx */
 import { Children, Component, createContext } from 'react'
-import PropTypes from 'prop-types'
 
 import { bidirectional } from '@instructure/ui-i18n'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import {
   matchComponentTypes,
   safeCloneElement
@@ -44,7 +42,9 @@ import { DrawerTray } from './DrawerTray'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
-import { DrawerLayoutProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { DrawerLayoutProps } from './props'
 
 /**
 ---
@@ -58,29 +58,8 @@ class DrawerLayout extends Component<DrawerLayoutProps> {
   static readonly componentId = 'DrawerLayout'
 
   static locatorAttribute = 'data-drawer-layout'
-  static propTypes = {
-    /**
-     * Exactly one of each of the following child types: `DrawerLayout.Content`, `DrawerLayout.Tray`
-     */
-    children: ChildrenPropTypes.oneOfEach([DrawerContent, DrawerTray]),
-    /**
-     * Min width for the `<DrawerLayout.Content />`
-     */
-    minWidth: PropTypes.string,
-    /**
-     * Function called when the `<DrawerLayout.Content />` is resized and hits the `minWidth` breakpoint
-     * Called with a boolean value, `true` if the tray is now overlaying the content or `false` if
-     * it is side by side
-     */
-    onOverlayTrayChange: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    // eslint-disable-next-line react/require-default-props
-    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
     minWidth: '30rem',
@@ -346,7 +325,7 @@ class DrawerLayout extends Component<DrawerLayoutProps> {
     return (
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldOverlayTray' does not exist on typ... Remove this comment to see the full error message
       <DrawerLayoutContext.Provider value={this.state.shouldOverlayTray}>
-        <div {...props} css={this.props.styles.drawerLayout}>
+        <div {...props} css={this.props.styles?.drawerLayout}>
           {this.renderChildren()}
         </div>
       </DrawerLayoutContext.Provider>

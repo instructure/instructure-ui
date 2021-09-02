@@ -22,12 +22,13 @@
  * SOFTWARE.
  */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { deepEqual } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
-import { EditableProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { EditableProps } from './props'
 
 /**
 ---
@@ -36,53 +37,10 @@ experimental: true
 ---
 **/
 class Editable extends Component<EditableProps> {
-  static propTypes = {
-    /**
-     * If `'view'`: the view component is rendered,
-     * if `'edit'`: the edit component is rendered
-     */
-    mode: PropTypes.oneOf(['view', 'edit']).isRequired,
-    /**
-     * Called when the component's mode changes
-     * @param {string} new_mode
-     */
-    onChangeMode: PropTypes.func.isRequired,
-
-    /**
-     * @param {Object} renderProps
-     * @param {Boolean} mode
-     * @param {Function} renderProps.getContainerProps - Props to be spread onto the container element
-     * @param {Function} renderProps.getEditorProps - Props to be spread onto the editor element
-     * @param {Function} renderProps.getEditButtonProps - Props to be spread onto the edit button element
-     */
-    children: PropTypes.func,
-    /**
-     * Identical to children
-     */
-    render: PropTypes.func,
-
-    /**
-     * The current value.
-     * The value is managed by the consuming app, but we need to tell Editable
-     * it's changed or it won't re-render
-     */
-    value: PropTypes.any,
-    /**
-     * Called when Editable switches from edit to view mode and the value has changed.
-     * @param {any} value
-     */
-    onChange: PropTypes.func,
-    /**
-     * The mode is fixed as 'view'
-     */
-    readOnly: PropTypes.bool
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     readOnly: false,
-    onChange: undefined,
-    value: undefined,
-    render: undefined,
     children: null
   }
 
