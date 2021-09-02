@@ -24,11 +24,14 @@
 import React from 'react'
 
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
-import { DrawerTray } from '../index'
-import { DrawerTrayLocator } from '../DrawerTrayLocator'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { DrawerTray } from '@instructure/ui-drawer-layout/src/DrawerLayout/DrawerTray'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { DrawerTrayLocator } from '@instructure/ui-drawer-layout/src/DrawerLayout/DrawerTray/DrawerTrayLocator'
 import { EmotionThemeProvider } from '@instructure/emotion'
 import { canvas } from '@instructure/ui-themes'
-import { DrawerLayoutContext } from '../../index'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { DrawerLayoutContext } from '@instructure/ui-drawer-layout/src/DrawerLayout'
 
 describe('<DrawerTray />', async () => {
   it(`should place the tray correctly with placement=start`, async () => {

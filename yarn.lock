@@ -4901,6 +4901,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-outside-click-handler@^1.3.0":
+  version "1.3.0"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/@types/react-outside-click-handler/-/react-outside-click-handler-1.3.0.tgz#ccf0014032fc6ec286210f8a05d26a5c1f94cc96"
+  integrity sha1-zPABQDL8bsKGIQ+KBdJqXB+UzJY=
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-syntax-highlighter@11.0.4":
   version "11.0.4"
   resolved "https://registry.npmjs.org/@types/react-syntax-highlighter/-/react-syntax-highlighter-11.0.4.tgz#d86d17697db62f98046874f62fdb3e53a0bbc4cd"

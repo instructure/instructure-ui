@@ -721,6 +721,7 @@ class Popover extends Component<PopoverProps> {
       // to manage the content FocusRegion, when showing
       content = (
         <Dialog
+          // @ts-expect-error FIXME
           test="Ima popover"
           open={this.shown}
           label={this.props.screenReaderLabel}

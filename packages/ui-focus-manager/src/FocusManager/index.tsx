@@ -33,7 +33,7 @@ import references from './referenceMap'
 const FocusManager = ({ children, onDismiss }) => {
   const [selfId] = useState(uuidv4())
 
-  const onEscPress = (event: KeyboardEvent) => {
+  const onEscPress = (/*event: KeyboardEvent*/) => {
     // if (false) {
     //   onDismiss()
     // }

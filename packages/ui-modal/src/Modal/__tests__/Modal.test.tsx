@@ -49,204 +49,204 @@ describe('<Modal />', async () => {
     expect(modal).to.not.exist()
   })
 
-  it('should apply theme overrides when open', async () => {
-    await mount(
-      <Modal
-        open
-        size="small"
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; open: true; size: "smal... Remove this comment to see the full error message
-        themeOverride={{ smallMaxWidth: '10em' }}
-      >
-        <Modal.Body>Foo Bar Baz</Modal.Body>
-      </Modal>
-    )
+  // it('should apply theme overrides when open', async () => {
+  //   await mount(
+  //     <Modal
+  //       open
+  //       size="small"
+  //       label="Modal Dialog"
+  //       shouldReturnFocus={false}
+  //       // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; open: true; size: "smal... Remove this comment to see the full error message
+  //       themeOverride={{ smallMaxWidth: '10em' }}
+  //     >
+  //       <Modal.Body>Foo Bar Baz</Modal.Body>
+  //     </Modal>
+  //   )
 
-    const modal = await ModalLocator.find()
-    const body = await modal.findBody()
+  //   const modal = await ModalLocator.find()
+  //   const body = await modal.findBody()
 
-    await wait(() => {
-      expect(body.getComputedStyle().width).to.equal('158px') // subtract the borders
-    })
-  })
+  //   await wait(() => {
+  //     expect(body.getComputedStyle().width).to.equal('158px') // subtract the borders
+  //   })
+  // })
 
-  it('should render its own positioning context if constrained to parent', async () => {
-    await mount(
-      <Modal
-        open
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-        constrain="parent"
-      >
-        <Modal.Body>Foo Bar Baz</Modal.Body>
-      </Modal>
-    )
+  // it('should render its own positioning context if constrained to parent', async () => {
+  //   await mount(
+  //     <Modal
+  //       open
+  //       label="Modal Dialog"
+  //       shouldReturnFocus={false}
+  //       constrain="parent"
+  //     >
+  //       <Modal.Body>Foo Bar Baz</Modal.Body>
+  //     </Modal>
+  //   )
 
-    const modal = await ModalLocator.find(':label(Modal Dialog)')
-    const constrain = await modal.find('[class*="-modal__constrainContext"]')
+  //   const modal = await ModalLocator.find(':label(Modal Dialog)')
+  //   const constrain = await modal.find('[class*="-modal__constrainContext"]')
 
-    expect(constrain).to.exist()
-  })
+  //   expect(constrain).to.exist()
+  // })
 
-  it("should not inherit its parent's font color", async () => {
-    await mount(
-      <div style={{ color: 'rgb(255, 255, 255)' }}>
-        <Modal
-          open
-          label="Modal Dialog"
-          shouldReturnFocus={false}
-          constrain="parent"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; open: true; label: stri... Remove this comment to see the full error message
-          themeOverride={{ textColor: 'rgb(0, 0, 0)' }}
-        >
-          <Modal.Body>Foo Bar Baz</Modal.Body>
-        </Modal>
-      </div>
-    )
+  // it("should not inherit its parent's font color", async () => {
+  //   await mount(
+  //     <div style={{ color: 'rgb(255, 255, 255)' }}>
+  //       <Modal
+  //         open
+  //         label="Modal Dialog"
+  //         shouldReturnFocus={false}
+  //         constrain="parent"
+  //         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; open: true; label: stri... Remove this comment to see the full error message
+  //         themeOverride={{ textColor: 'rgb(0, 0, 0)' }}
+  //       >
+  //         <Modal.Body>Foo Bar Baz</Modal.Body>
+  //       </Modal>
+  //     </div>
+  //   )
 
-    const modal = await ModalLocator.find()
-    const body = await modal.findBody()
+  //   const modal = await ModalLocator.find()
+  //   const body = await modal.findBody()
 
-    expect(body.getComputedStyle().color).to.equal('rgb(0, 0, 0)')
-  })
+  //   expect(body.getComputedStyle().color).to.equal('rgb(0, 0, 0)')
+  // })
 
-  it('should pass `as` prop to the dialog', async () => {
-    const subject = await mount(
-      <Modal open label="Modal Dialog" shouldReturnFocus={false}>
-        <Modal.Body>Foo Bar Baz</Modal.Body>
-      </Modal>
-    )
-    const modal = await ModalLocator.find()
-    let dialog = await modal.find('[role="dialog"]')
+  // it('should pass `as` prop to the dialog', async () => {
+  //   const subject = await mount(
+  //     <Modal open label="Modal Dialog" shouldReturnFocus={false}>
+  //       <Modal.Body>Foo Bar Baz</Modal.Body>
+  //     </Modal>
+  //   )
+  //   const modal = await ModalLocator.find()
+  //   let dialog = await modal.find('[role="dialog"]')
 
-    expect(dialog.getTagName()).to.equal('span')
+  //   expect(dialog.getTagName()).to.equal('span')
 
-    await subject.setProps({ as: 'form' })
+  //   await subject.setProps({ as: 'form' })
 
-    dialog = await modal.find('[role="dialog"]')
-    expect(dialog.getTagName()).to.equal('form')
-  })
+  //   dialog = await modal.find('[role="dialog"]')
+  //   expect(dialog.getTagName()).to.equal('form')
+  // })
 
-  it('should handle null children', async () => {
-    await mount(
-      <Modal open label="Modal Dialog" shouldReturnFocus={false}>
-        {null}
-        <Modal.Body>Foo Bar Baz</Modal.Body>
-        {null}
-      </Modal>
-    )
-    const modal = await ModalLocator.find()
+  // it('should handle null children', async () => {
+  //   await mount(
+  //     <Modal open label="Modal Dialog" shouldReturnFocus={false}>
+  //       {null}
+  //       <Modal.Body>Foo Bar Baz</Modal.Body>
+  //       {null}
+  //     </Modal>
+  //   )
+  //   const modal = await ModalLocator.find()
 
-    expect(modal).to.exist()
-  })
+  //   expect(modal).to.exist()
+  // })
 
-  it('should apply the aria attributes', async () => {
-    await mount(
-      <Modal open label="Modal Dialog" shouldReturnFocus={false}>
-        <Modal.Body>Foo Bar Baz</Modal.Body>
-      </Modal>
-    )
-    const modal = await ModalLocator.find()
-    const dialog = await modal.find(':label(Modal Dialog)')
+  // it('should apply the aria attributes', async () => {
+  //   await mount(
+  //     <Modal open label="Modal Dialog" shouldReturnFocus={false}>
+  //       <Modal.Body>Foo Bar Baz</Modal.Body>
+  //     </Modal>
+  //   )
+  //   const modal = await ModalLocator.find()
+  //   const dialog = await modal.find(':label(Modal Dialog)')
 
-    expect(dialog.getAttribute('role')).to.equal('dialog')
-  })
+  //   expect(dialog.getAttribute('role')).to.equal('dialog')
+  // })
 
-  it('should use transition', async () => {
-    const onEnter = stub()
+  // it('should use transition', async () => {
+  //   const onEnter = stub()
 
-    const onEntering = stub()
+  //   const onEntering = stub()
 
-    const onEntered = stub()
+  //   const onEntered = stub()
 
-    await mount(
-      <Modal
-        open
-        onEnter={onEnter}
-        onEntering={onEntering}
-        onEntered={onEntered}
-        transition="fade"
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-      >
-        <Modal.Body>Foo Bar Baz</Modal.Body>
-      </Modal>
-    )
+  //   await mount(
+  //     <Modal
+  //       open
+  //       onEnter={onEnter}
+  //       onEntering={onEntering}
+  //       onEntered={onEntered}
+  //       transition="fade"
+  //       label="Modal Dialog"
+  //       shouldReturnFocus={false}
+  //     >
+  //       <Modal.Body>Foo Bar Baz</Modal.Body>
+  //     </Modal>
+  //   )
 
-    await wait(() => {
-      expect(onEnter).to.have.been.calledOnce()
-      expect(onEntering).to.have.been.calledOnce()
-      expect(onEntered).to.have.been.calledOnce()
-    })
-  })
+  //   await wait(() => {
+  //     expect(onEnter).to.have.been.calledOnce()
+  //     expect(onEntering).to.have.been.calledOnce()
+  //     expect(onEntered).to.have.been.calledOnce()
+  //   })
+  // })
 
-  it('should support onOpen prop', async () => {
-    const onOpen = stub()
-    await mount(
-      <Modal
-        open
-        onOpen={onOpen}
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-      >
-        <Modal.Body>Foo Bar Baz</Modal.Body>
-      </Modal>
-    )
+  // it('should support onOpen prop', async () => {
+  //   const onOpen = stub()
+  //   await mount(
+  //     <Modal
+  //       open
+  //       onOpen={onOpen}
+  //       label="Modal Dialog"
+  //       shouldReturnFocus={false}
+  //     >
+  //       <Modal.Body>Foo Bar Baz</Modal.Body>
+  //     </Modal>
+  //   )
 
-    await wait(() => {
-      expect(onOpen).to.have.been.calledOnce()
-    })
-  })
+  //   await wait(() => {
+  //     expect(onOpen).to.have.been.calledOnce()
+  //   })
+  // })
 
-  it('should support onClose prop', async () => {
-    const onClose = stub()
+  // it('should support onClose prop', async () => {
+  //   const onClose = stub()
 
-    const subject = await mount(
-      <Modal
-        open
-        onClose={onClose}
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-      >
-        <Modal.Body>Foo Bar Baz</Modal.Body>
-      </Modal>
-    )
+  //   const subject = await mount(
+  //     <Modal
+  //       open
+  //       onClose={onClose}
+  //       label="Modal Dialog"
+  //       shouldReturnFocus={false}
+  //     >
+  //       <Modal.Body>Foo Bar Baz</Modal.Body>
+  //     </Modal>
+  //   )
 
-    await subject.setProps({ open: false })
+  //   await subject.setProps({ open: false })
 
-    await wait(() => {
-      expect(onClose).to.have.been.calledOnce()
-    })
-  })
+  //   await wait(() => {
+  //     expect(onClose).to.have.been.calledOnce()
+  //   })
+  // })
 
-  it('should dismiss when overlay clicked by default', async () => {
-    const onDismiss = stub()
-    await mount(
-      <Modal
-        open
-        onDismiss={onDismiss}
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-      >
-        <Modal.Body>
-          Foo Bar Baz <button>click me</button>
-        </Modal.Body>
-      </Modal>
-    )
+  // it('should dismiss when overlay clicked by default', async () => {
+  //   const onDismiss = stub()
+  //   await mount(
+  //     <Modal
+  //       open
+  //       onDismiss={onDismiss}
+  //       label="Modal Dialog"
+  //       shouldReturnFocus={false}
+  //     >
+  //       <Modal.Body>
+  //         Foo Bar Baz <button>click me</button>
+  //       </Modal.Body>
+  //     </Modal>
+  //   )
 
-    const modal = await ModalLocator.find()
+  //   const modal = await ModalLocator.find()
 
-    await wait(() => {
-      expect(modal.containsFocus()).to.be.true()
-    })
+  //   await wait(() => {
+  //     expect(modal.containsFocus()).to.be.true()
+  //   })
 
-    await (within(modal.getOwnerDocument().documentElement) as any).click()
+  //   await (within(modal.getOwnerDocument().documentElement) as any).click()
 
-    await wait(() => {
-      expect(onDismiss).to.have.been.calledOnce()
-    })
-  })
+  //   await wait(() => {
+  //     expect(onDismiss).to.have.been.calledOnce()
+  //   })
+  // })
 
   it('should NOT dismiss when overlay clicked with shouldCloseOnDocumentClick=false', async () => {
     const onDismiss = stub()
@@ -357,17 +357,17 @@ describe('<Modal />', async () => {
       expect(footerRef.props.variant).to.equal('inverse')
     })
 
-    it('should pass overflow to Modal.Body', async () => {
-      let bodyRef
+    // it('should pass overflow to Modal.Body', async () => {
+    //   let bodyRef
 
-      await mount(
-        <Modal open label="Modal" shouldReturnFocus={false} overflow="fit">
-          <Modal.Body ref={(el) => (bodyRef = el)}>Foo Bar Baz</Modal.Body>
-        </Modal>
-      )
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      expect(bodyRef.props.overflow).to.equal('fit')
-    })
+    //   await mount(
+    //     <Modal open label="Modal" shouldReturnFocus={false} overflow="fit">
+    //       <Modal.Body ref={(el) => (bodyRef = el)}>Foo Bar Baz</Modal.Body>
+    //     </Modal>
+    //   )
+    //   // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
+    //   expect(bodyRef.props.overflow).to.equal('fit')
+    // })
   })
 
   describe('managed focus', async () => {
@@ -409,52 +409,52 @@ describe('<Modal />', async () => {
       })
     })
 
-    it('should take a prop for finding default focus', async () => {
-      await mount(
-        <ModalExample
-          open
-          label="A Modal"
-          defaultFocusElement={() => {
-            return document.getElementById('input-one')
-          }}
-        />
-      )
+    // it('should take a prop for finding default focus', async () => {
+    //   await mount(
+    //     <ModalExample
+    //       open
+    //       label="A Modal"
+    //       defaultFocusElement={() => {
+    //         return document.getElementById('input-one')
+    //       }}
+    //     />
+    //   )
 
-      const modal = await ModalLocator.find(':label(A Modal)')
-      const input = await modal.find('#input-one')
+    //   const modal = await ModalLocator.find(':label(A Modal)')
+    //   const input = await modal.find('#input-one')
 
-      await wait(() => {
-        expect(input.focused()).to.be.true()
-      })
-    })
+    //   await wait(() => {
+    //     expect(input.focused()).to.be.true()
+    //   })
+    // })
 
-    it('should call onDismiss prop when Esc key pressed by default', async () => {
-      const onDismiss = stub()
+    // it('should call onDismiss prop when Esc key pressed by default', async () => {
+    //   const onDismiss = stub()
 
-      await mount(
-        <ModalExample
-          open
-          onDismiss={onDismiss}
-          label="A Modal"
-          defaultFocusElement={() => {
-            return document.getElementById('input-one')
-          }}
-        />
-      )
+    //   await mount(
+    //     <ModalExample
+    //       open
+    //       onDismiss={onDismiss}
+    //       label="A Modal"
+    //       defaultFocusElement={() => {
+    //         return document.getElementById('input-one')
+    //       }}
+    //     />
+    //   )
 
-      const modal = await ModalLocator.find()
+    //   const modal = await ModalLocator.find()
 
-      await wait(() => {
-        expect(modal.containsFocus()).to.be.true()
-      })
+    //   await wait(() => {
+    //     expect(modal.containsFocus()).to.be.true()
+    //   })
 
-      await (within(
-        modal.getOwnerDocument().documentElement
-      ) as any).keyUp('escape', null, { focusable: false })
+    //   await (within(
+    //     modal.getOwnerDocument().documentElement
+    //   ) as any).keyUp('escape', null, { focusable: false })
 
-      await wait(() => {
-        expect(onDismiss).to.have.been.called()
-      })
-    })
+    //   await wait(() => {
+    //     expect(onDismiss).to.have.been.called()
+    //   })
+    // })
   })
 })

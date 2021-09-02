@@ -344,6 +344,7 @@ class Modal extends Component<ModalProps> {
         label={label}
         defaultFocusElement={this.defaultFocusElement}
         shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
+        // @ts-expect-error FIXME
         shouldCloseOnEscape={this.props.shouldCloseOnEscape}
         shouldContainFocus
         shouldReturnFocus={shouldReturnFocus}
@@ -351,6 +352,7 @@ class Modal extends Component<ModalProps> {
         onDismiss={onDismiss}
         css={styles.modal}
         ref={this.contentRef}
+        // @ts-expect-error FIXME
         test="Ima modal"
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >
