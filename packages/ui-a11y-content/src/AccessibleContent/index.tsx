@@ -44,15 +44,15 @@ class AccessibleContent extends Component<
 > {
   static propTypes = {
     alt: PropTypes.string,
-    as: PropTypes.elementType,
-    children: PropTypes.node
-  }
+    children: PropTypes.node,
+    as: PropTypes.elementType
+  } as const
 
   static defaultProps = {
     alt: undefined,
     as: 'span',
     children: null
-  }
+  } as const
 
   render() {
     const { alt, children, ...props } = this.props

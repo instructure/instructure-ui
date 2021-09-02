@@ -113,7 +113,7 @@ class Day extends Component<CalendarDayProps> {
      * the element type to render as
      */
     as: PropTypes.elementType // eslint-disable-line react/require-default-props
-  }
+  } as const
 
   static defaultProps = {
     interaction: 'enabled',
@@ -125,7 +125,7 @@ class Day extends Component<CalendarDayProps> {
     onClick: undefined,
     onKeyDown: undefined,
     children: null
-  }
+  } as const
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -221,13 +221,13 @@ class Day extends Component<CalendarDayProps> {
             : 'auto'
         }
         disabled={isDisabled}
-        aria-current={isToday ? 'date' : null}
+        aria-current={isToday ? 'date' : undefined}
         aria-selected={
           this.shouldApplyAriaSelected()
             ? isSelected
               ? 'true'
               : 'false'
-            : null
+            : undefined
         }
         onClick={onClick && this.handleClick}
         onKeyDown={onKeyDown && this.handleKeyDown}

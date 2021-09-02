@@ -161,11 +161,11 @@ class Tag extends Component<TagProps> {
         className={className}
         as={onClick ? 'button' : 'span'}
         margin={margin}
-        type={onClick ? 'button' : null}
-        onClick={onClick ? this.handleClick : null}
+        type={onClick ? 'button' : undefined}
+        onClick={onClick ?? this.handleClick}
         disabled={disabled || readOnly}
         display={undefined}
-        title={title || (typeof text === 'string' ? text : null)}
+        title={title || (typeof text === 'string' ? text : undefined)}
       >
         <span css={styles.text}>{text}</span>
         {onClick && dismissible ? <IconXSolid css={styles.icon} /> : null}

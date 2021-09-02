@@ -249,7 +249,7 @@ class AppNav extends Component<AppNavProps> {
         {items.map((item, index) => {
           return (
             <Menu.Item
-              href={item.props.href ? item.props.href : null}
+              href={item.props.href ? item.props.href : undefined}
               onClick={
                 item.props.onClick && !item.props.href
                   ? item.props.onClick

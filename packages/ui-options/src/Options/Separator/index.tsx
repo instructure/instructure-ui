@@ -54,11 +54,11 @@ class Separator extends Component<OptionsSeparatorProps> {
      * Element type to render as
      */
     as: PropTypes.elementType
-  }
+  } as const
 
   static defaultProps = {
     as: 'span'
-  }
+  } as const
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message

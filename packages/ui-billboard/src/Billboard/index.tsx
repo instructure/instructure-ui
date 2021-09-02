@@ -112,7 +112,7 @@ class Billboard extends Component<BillboardProps> {
      * familiar CSS-like shorthand. For example: `margin="small auto large"`.
      */
     margin: ThemeablePropTypes.spacing
-  }
+  } as const
 
   static defaultProps = {
     margin: undefined,
@@ -128,7 +128,7 @@ class Billboard extends Component<BillboardProps> {
     headingLevel: 'h1',
     as: 'span',
     elementRef: () => {}
-  }
+  } as const
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -215,14 +215,14 @@ class Billboard extends Component<BillboardProps> {
             ...Billboard.propTypes,
             ...View.allowedProps
           })}
-          type={Element === 'button' ? 'button' : null}
+          type={Element === 'button' ? 'button' : undefined}
           as={Element}
           elementRef={elementRef}
           css={styles.billboard}
           href={href}
           onClick={this.handleClick}
           disabled={disabled}
-          aria-disabled={disabled || readOnly ? 'true' : null}
+          aria-disabled={disabled || readOnly ? 'true' : undefined}
         >
           {this.renderContent()}
         </View>

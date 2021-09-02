@@ -121,8 +121,7 @@ class Panel extends Component<TabsPanelProps> {
         role="tabpanel"
         id={id}
         aria-labelledby={labelledBy}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
-        aria-hidden={isHidden ? 'true' : null}
+        aria-hidden={isHidden ? 'true' : undefined}
         ref={elementRef}
       >
         <Transition

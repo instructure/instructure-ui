@@ -85,7 +85,7 @@ class MenuItem extends Component<MenuItemProps> {
     type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     href: PropTypes.string
-  }
+  } as const
 
   static defaultProps = {
     type: 'button',
@@ -101,7 +101,7 @@ class MenuItem extends Component<MenuItemProps> {
     controls: undefined,
     value: undefined,
     href: undefined
-  }
+  } as const
 
   static contextType = MenuContext
 
@@ -274,20 +274,20 @@ class MenuItem extends Component<MenuItemProps> {
 
     return (
       <ElementType // eslint-disable-line jsx-a11y/mouse-events-have-key-events
-        tabIndex="-1" // note: tabIndex can be overridden by Menu or MenuItemGroup components
+        tabIndex={-1} // note: tabIndex can be overridden by Menu or MenuItemGroup components
         {...props}
         href={href}
         role={this.role}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'labelId' does not exist on type 'MenuIte... Remove this comment to see the full error message
         aria-labelledby={this.labelId}
-        aria-disabled={disabled ? 'true' : null}
+        aria-disabled={disabled ? 'true' : undefined}
         aria-controls={controls}
         aria-checked={
           type === 'checkbox' || type === 'radio'
             ? this.selected
               ? 'true'
               : 'false'
-            : null
+            : undefined
         }
         onClick={this.handleClick}
         onKeyUp={createChainedFunction(onKeyUp, this.handleKeyUp)}

@@ -23,9 +23,9 @@
  */
 
 import { AsElementType } from '@instructure/shared-types'
-import { PropsWithChildren, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
-export type ScreenReaderContentProps = PropsWithChildren<{
+export type ScreenReaderContentProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   /**
@@ -36,4 +36,4 @@ export type ScreenReaderContentProps = PropsWithChildren<{
    * content meant for screen readers only
    */
   children: ReactNode
-}>
+}

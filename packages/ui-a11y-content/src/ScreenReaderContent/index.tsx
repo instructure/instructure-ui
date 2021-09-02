@@ -48,18 +48,16 @@ class ScreenReaderContent extends Component<
   static readonly componentId = 'ScreenReaderContent'
 
   static propTypes = {
-    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     as: PropTypes.elementType,
     children: PropTypes.node
-  }
+  } as const
 
   static defaultProps = {
     as: 'span',
     children: null
-  }
+  } as const
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message

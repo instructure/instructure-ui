@@ -159,8 +159,8 @@ class Table extends Component<TableProps> {
         margin={margin}
         elementRef={elementRef}
         css={styles.table}
-        role={isStacked ? 'table' : null}
-        aria-label={isStacked ? (caption as string) : null}
+        role={isStacked ? 'table' : undefined}
+        aria-label={isStacked ? (caption as string) : undefined}
       >
         {!isStacked && (
           <caption>

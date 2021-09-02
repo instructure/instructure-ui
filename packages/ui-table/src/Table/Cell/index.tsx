@@ -85,7 +85,7 @@ class Cell extends Component<TableCellProps> {
         {...View.omitViewProps(omitProps(this.props, Cell.propTypes), Cell)}
         as={isStacked ? 'div' : 'td'}
         css={styles.cell}
-        role={isStacked ? 'cell' : null}
+        role={isStacked ? 'cell' : undefined}
       >
         {header && callRenderProp(header)}
         {header && ': '}

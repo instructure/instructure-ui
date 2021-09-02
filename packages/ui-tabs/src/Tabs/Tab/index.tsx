@@ -128,11 +128,11 @@ class Tab extends Component<TabsTabProps> {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         css={styles.tab}
-        aria-selected={isSelected ? 'true' : null}
-        aria-disabled={isDisabled ? 'true' : null}
+        aria-selected={isSelected ? 'true' : undefined}
+        aria-disabled={isDisabled ? 'true' : undefined}
         aria-controls={controls}
         //@ts-expect-error fix this to be number
-        tabIndex={isSelected && !isDisabled ? '0' : null}
+        tabIndex={isSelected && !isDisabled ? '0' : undefined}
       >
         {callRenderProp(children)}
       </View>

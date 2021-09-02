@@ -31,7 +31,6 @@ interface ComponentWithAsProp {
   to?: any | null
   href?: string | null
   onClick?: ((...args: any) => any) | null
-  defaultProps?: Record<string, any> & { as?: AsElementType }
 }
 
 /**
@@ -50,7 +49,7 @@ function getElementType<T extends ComponentWithAsProp>(
   Component: Omit<ComponentType<T>, 'propTypes'>,
   props: T,
   getDefault?: () => AsElementType
-) {
+): AsElementType {
   if (props.as && props.as !== Component.defaultProps?.as) {
     return props.as
   }
@@ -76,7 +75,7 @@ function getElementType<T extends ComponentWithAsProp>(
     return 'button'
   }
 
-  return Component.defaultProps?.as || 'span'
+  return Component.defaultProps?.as ?? 'span'
 }
 
 export default getElementType

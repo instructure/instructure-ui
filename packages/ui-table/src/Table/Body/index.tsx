@@ -91,7 +91,7 @@ class Body extends Component<TableBodyProps> {
         {...View.omitViewProps(omitProps(this.props, Body.propTypes), Body)}
         as={isStacked ? 'div' : 'tbody'}
         css={styles.body}
-        role={isStacked ? 'rowgroup' : null}
+        role={isStacked ? 'rowgroup' : undefined}
       >
         {Children.map(children, (child) =>
           matchComponentTypes(child, [Row])

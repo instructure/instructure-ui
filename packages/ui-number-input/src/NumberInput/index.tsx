@@ -346,8 +346,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       >
         <span
           css={this.props.styles.inputWidth}
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ width: string; } | null' is not assignable... Remove this comment to see the full error message
-          style={width ? { width } : null}
+          style={width ? { width } : undefined}
         >
           <span css={this.props.styles.inputContainer}>
             <input
@@ -356,8 +355,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
                 ...NumberInput.propTypes
               })}
               css={this.props.styles.input}
-              // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
-              aria-invalid={this.invalid ? 'true' : null}
+              aria-invalid={this.invalid ? 'true' : undefined}
               id={this.id}
               type="text"
               inputMode={this.props.inputMode}

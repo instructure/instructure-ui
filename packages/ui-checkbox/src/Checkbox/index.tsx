@@ -352,8 +352,7 @@ class Checkbox extends Component<CheckboxProps> {
             this._input = c
           }}
           disabled={disabled || readOnly}
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '"mixed" | null' is not assignable to type 'b... Remove this comment to see the full error message
-          aria-checked={indeterminate ? 'mixed' : null}
+          aria-checked={indeterminate ? 'mixed' : undefined}
           css={styles.input}
           onChange={this.handleChange}
           onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}

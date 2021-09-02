@@ -79,7 +79,7 @@ class NavigationItem extends Component<NavigationItemProps> {
      * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
      */
     minimized: PropTypes.bool
-  }
+  } as const
 
   static defaultProps = {
     as: 'a',
@@ -88,7 +88,7 @@ class NavigationItem extends Component<NavigationItemProps> {
     selected: false,
     minimized: false,
     href: undefined
-  }
+  } as const
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -113,7 +113,8 @@ class NavigationItem extends Component<NavigationItemProps> {
         href={href}
         onClick={onClick}
         css={this.props.styles.navigationItem}
-        aria-label={this.props.minimized ? label : null}
+        //@ts-expect-error TODO: INSTUI-3245
+        aria-label={this.props.minimized ? label : undefined}
       >
         <div css={this.props.styles.icon} aria-hidden="true">
           {icon}

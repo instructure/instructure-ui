@@ -290,8 +290,7 @@ class MenuItemGroup extends Component<MenuGroupProps> {
         <ul
           role="menu"
           css={this.props.styles.items}
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
-          aria-disabled={this.props.disabled ? 'true' : null}
+          aria-disabled={this.props.disabled ? 'true' : undefined}
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'MenuIt... Remove this comment to see the full error message
           aria-labelledby={this._labelId}
         >

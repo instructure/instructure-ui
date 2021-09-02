@@ -25,7 +25,7 @@
 import React from 'react'
 import { AsElementType } from '@instructure/shared-types'
 
-export type DialogProps = {
+export type DialogProps = React.PropsWithChildren<{
   as?: AsElementType
   display?: 'auto' | 'block' | 'inline-block'
   label?: string
@@ -43,4 +43,4 @@ export type DialogProps = {
   shouldCloseOnDocumentClick?: boolean
   shouldCloseOnEscape?: boolean
   shouldFocusOnOpen?: boolean
-}
+}>

@@ -95,7 +95,7 @@ class Row extends Component<TableRowProps> {
         {...View.omitViewProps(omitProps(this.props, Row.propTypes), Row)}
         as={isStacked ? 'div' : 'tr'}
         css={styles.row}
-        role={isStacked ? 'row' : null}
+        role={isStacked ? 'row' : undefined}
       >
         {Children.toArray(children)
           .filter(Boolean)

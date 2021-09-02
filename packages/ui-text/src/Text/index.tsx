@@ -86,7 +86,7 @@ class Text extends Component<TextProps> {
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object
-  }
+  } as const
 
   static defaultProps = {
     as: 'span',
@@ -100,7 +100,7 @@ class Text extends Component<TextProps> {
     lineHeight: undefined,
     fontStyle: undefined,
     weight: undefined
-  }
+  } as const
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -120,6 +120,7 @@ class Text extends Component<TextProps> {
 
     return (
       <ElementType
+        //@ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...passthroughProps(this.props)}
         css={this.props.styles.text}
         ref={this.props.elementRef}

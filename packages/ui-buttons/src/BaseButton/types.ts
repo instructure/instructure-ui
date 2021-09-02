@@ -25,8 +25,9 @@
 import { AsElementType } from '@instructure/shared-types'
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { Spacing } from '@instructure/emotion'
+import React from 'react'
 
-export type BaseButtonProps = {
+export type BaseButtonProps = React.PropsWithChildren<{
   makeStyles?: (...args: any[]) => any
   styles?: any
   type?: 'button' | 'submit' | 'reset'
@@ -49,8 +50,7 @@ export type BaseButtonProps = {
   onKeyDown?: (...args: any[]) => any
   renderIcon?: React.ReactNode | ((...args: any[]) => any)
   tabIndex?: number | string
-}
-
+}>
 export type BaseButtonStyleProps = {
   isDisabled: boolean
   hasOnlyIconVisible: boolean
