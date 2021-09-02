@@ -24,14 +24,15 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FormFieldLabelProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { FormFieldLabelProps } from './props'
 
 /**
 ---
@@ -53,15 +54,8 @@ example: true
 class FormFieldLabel extends Component<FormFieldLabelProps> {
   static readonly componentId = 'FormFieldLabel'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    as: PropTypes.elementType,
-    children: PropTypes.node.isRequired
-  } as const
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     as: 'span'
   } as const
@@ -85,7 +79,7 @@ class FormFieldLabel extends Component<FormFieldLabelProps> {
     return (
       <ElementType
         {...omitProps(this.props, FormFieldLabel.propTypes)}
-        css={styles.formFieldLabel}
+        css={styles?.formFieldLabel}
       >
         {children}
       </ElementType>

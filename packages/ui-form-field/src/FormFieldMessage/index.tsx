@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
@@ -32,7 +31,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FormFieldMessageProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { FormFieldMessageProps } from './props'
 
 /**
 ---
@@ -53,15 +54,8 @@ example: true
 class FormFieldMessage extends Component<FormFieldMessageProps> {
   static readonly componentId = 'FormFieldMessage'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    variant: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']),
-    children: PropTypes.node
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     variant: 'hint',
     children: null
@@ -82,7 +76,7 @@ class FormFieldMessage extends Component<FormFieldMessageProps> {
     const { children, styles } = this.props
 
     return this.props.variant !== 'screenreader-only' ? (
-      <span css={styles.formFieldMessage}>{children}</span>
+      <span css={styles?.formFieldMessage}>{children}</span>
     ) : (
       <ScreenReaderContent>{children}</ScreenReaderContent>
     )

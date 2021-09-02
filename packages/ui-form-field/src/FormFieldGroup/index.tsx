@@ -24,18 +24,18 @@
 
 /** @jsx jsx */
 import { Component, Children } from 'react'
-import PropTypes from 'prop-types'
 
 import { Grid } from '@instructure/ui-grid'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { FormFieldLayout } from '../FormFieldLayout'
-import { FormPropTypes } from '../FormPropTypes'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
 
 /**
 ---
@@ -46,42 +46,10 @@ category: components
 class FormFieldGroup extends Component<FormFieldGroupProps> {
   static readonly componentId = 'FormFieldGroup'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    description: PropTypes.node.isRequired,
-    /**
-     * the element type to render as
-     */
-    as: PropTypes.elementType,
-    /**
-     * object with shape: `{
-     * text: PropTypes.string,
-     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     *   }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    /**
-     * id for the form field messages
-     */
-    messagesId: PropTypes.string,
-    disabled: PropTypes.bool,
-    children: PropTypes.node,
-    layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
-    rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-    startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
-    layout: undefined,
-    startAt: undefined,
-    messages: undefined,
-    messagesId: undefined,
     as: 'fieldset',
     disabled: false,
     rowSpacing: 'medium',
@@ -147,7 +115,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     const { styles } = this.props
 
     return (
-      <span key="fields" css={styles.formFieldGroup}>
+      <span key="fields" css={styles?.formFieldGroup}>
         {this.renderChildren()}
       </span>
     )

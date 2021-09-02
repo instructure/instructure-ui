@@ -22,12 +22,16 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
-import type { Spacing } from '@instructure/emotion'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type FlexItemProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+
+type FlexItemOwnProps = {
+  children?: React.ReactNode
   as?: AsElementType
   elementRef?: (...args: any[]) => any
   margin?: Spacing
@@ -42,3 +46,92 @@ export type FlexItemProps = {
   size?: string
   withVisualDebug?: boolean
 }
+
+type PropKeys = keyof FlexItemOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type FlexItemProps = FlexItemOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The children to render inside the Item`
+   */
+  children: PropTypes.node,
+  /**
+   * the element type to render as
+   */
+  as: PropTypes.elementType,
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef: PropTypes.func,
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+   */
+  padding: ThemeablePropTypes.spacing,
+  /**
+   * overrides the parent Flex's alignItems prop, if needed
+   */
+  align: PropTypes.oneOf(['center', 'start', 'end', 'stretch']),
+  /**
+   * Inherits from the parent Flex component
+   */
+  direction: PropTypes.oneOf(['row', 'column']),
+  /**
+   * Designates the text alignment inside the Item
+   */
+  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
+   * Handles horizontal overflow
+   */
+  overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+  /**
+   * Handles vertical overflow
+   */
+  overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+  /**
+   * Should the FlexItem grow to fill any available space?
+   */
+  shouldGrow: PropTypes.bool,
+  /**
+   * Should the FlexItem shrink (stopping at its `size`)?
+   */
+  shouldShrink: PropTypes.bool,
+  /**
+   * Sets the base size of the FlexItem (width if direction is `row`; height if direction is `column`)
+   */
+  size: PropTypes.string,
+  /**
+   * Places dashed lines around the component's borders to help debug your layout
+   */
+  withVisualDebug: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'as',
+  'elementRef',
+  'margin',
+  'padding',
+  'align',
+  'direction',
+  'textAlign',
+  'overflowX',
+  'overflowY',
+  'shouldGrow',
+  'shouldShrink',
+  'size',
+  'withVisualDebug'
+]
+
+export type { FlexItemProps }
+export { propTypes, allowedProps }

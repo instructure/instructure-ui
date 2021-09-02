@@ -23,13 +23,19 @@
  */
 
 import React from 'react'
-import { FormMessage } from '../FormPropTypes'
+import PropTypes from 'prop-types'
 
-export type FormFieldProps = {
+import { FormPropTypes } from '../FormPropTypes'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { FormMessage } from '../FormPropTypes'
+
+type FormFieldOwnProps = {
   label: React.ReactNode
   id: string
   messages?: FormMessage[]
   messagesId?: string
+  children?: React.ReactNode
   inline?: boolean
   layout?: 'stacked' | 'inline'
   labelAlign?: 'start' | 'end'
@@ -37,3 +43,49 @@ export type FormFieldProps = {
   width?: string
   inputContainerRef?: (...args: any[]) => any
 }
+
+type PropKeys = keyof FormFieldOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type FormFieldProps = FormFieldOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  label: PropTypes.node.isRequired,
+  /**
+   * the id of the input (to link it to its label for a11y)
+   */
+  id: PropTypes.string.isRequired,
+  /**
+   * object with shape: `{
+   *   text: PropTypes.string,
+   *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   * }`
+   */
+  messages: PropTypes.arrayOf(FormPropTypes.message),
+  messagesId: PropTypes.string,
+  children: PropTypes.node,
+  inline: PropTypes.bool,
+  layout: PropTypes.oneOf(['stacked', 'inline']),
+  labelAlign: PropTypes.oneOf(['start', 'end']),
+  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
+  width: PropTypes.string,
+  inputContainerRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'label',
+  'id',
+  'messages',
+  'messagesId',
+  'children',
+  'inline',
+  'layout',
+  'labelAlign',
+  'vAlign',
+  'width',
+  'inputContainerRef'
+]
+
+export type { FormFieldProps }
+export { propTypes, allowedProps }

@@ -22,6 +22,35 @@
  * SOFTWARE.
  */
 
-export type FocusableProps = {
+import type { PropValidators } from '@instructure/shared-types'
+import PropTypes from 'prop-types'
+
+type FocusableOwnProps = {
+  children?: (...args: any[]) => any
   render?: (...args: any[]) => any
 }
+
+type PropKeys = keyof FocusableOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type FocusableProps = FocusableOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * @param {Object} renderProps
+   * @param {Boolean} renderProps.focused - Is the element focused (via keyboard only)?
+   * @param {HTMLElement} renderProps.focusable - The focusable element
+   * @param {Boolean} renderProps.focusVisible - Whether the focus state should be visible or not
+   */
+  children: PropTypes.func,
+  /**
+   * Identical to children
+   */
+  render: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = ['children', 'render']
+
+export type { FocusableProps }
+export { propTypes, allowedProps }

@@ -52,7 +52,6 @@ describe('<Focusable />', async () => {
 
     await mount(
       <Focusable>
-        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'args' implicitly has an 'any' type. */}
         {(args) => {
           renderSpy(args)
           return <button type="button">foo</button>
@@ -94,7 +93,6 @@ describe('<Focusable />', async () => {
 
     await mount(
       <Focusable>
-        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'args' implicitly has an 'any' type. */}
         {(args) => {
           renderSpy(args)
           return <button>foo</button>
@@ -222,7 +220,6 @@ describe('<Focusable />', async () => {
 
     const subject = await mount(
       <Focusable>
-        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'args' implicitly has an 'any' type. */}
         {(args) => {
           renderSpy(args)
           return <button>foo</button>
@@ -308,7 +305,6 @@ describe('<Focusable />', async () => {
 
     await mount(
       <Focusable>
-        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'args' implicitly has an 'any' type. */}
         {(args) => {
           renderSpy(args)
           return (
@@ -387,7 +383,6 @@ describe('<Focusable />', async () => {
 
         return (
           <Focusable>
-            {/* @ts-expect-error ts-migrate(7031) FIXME: Binding element 'focusVisible' implicitly has an '... Remove this comment to see the full error message */}
             {({ focusVisible }) => {
               return (
                 <input

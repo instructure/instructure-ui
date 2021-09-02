@@ -22,22 +22,76 @@
  * SOFTWARE.
  */
 
-import type { ReactNode } from 'react'
-import { AsElementType } from '@instructure/shared-types'
-import { FormMessage } from '../FormPropTypes'
+import PropTypes from 'prop-types'
 
-export type FormFieldLayoutProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { FormPropTypes } from '../FormPropTypes'
+
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+import type { FormMessage } from '../FormPropTypes'
+
+type FormFieldLayoutOwnProps = {
   label: React.ReactNode
   id?: string
   as?: AsElementType
   messages?: FormMessage[]
   messagesId?: string
+  children?: React.ReactNode
   inline?: boolean
   layout?: 'stacked' | 'inline'
   labelAlign?: 'start' | 'end'
   width?: string
   inputContainerRef?: (...args: any[]) => any
-  children?: ReactNode
 }
+
+type PropKeys = keyof FormFieldLayoutOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type FormFieldLayoutProps = FormFieldLayoutOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  label: PropTypes.node.isRequired,
+  /**
+   * the id of the input (to link it to its label for a11y)
+   */
+  id: PropTypes.string,
+  /**
+   * the element type to render as
+   */
+  as: PropTypes.elementType,
+  /**
+   * object with shape: `{
+   * text: PropTypes.string,
+   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *   }`
+   */
+  messages: PropTypes.arrayOf(FormPropTypes.message),
+  /**
+   * id for the form field messages
+   */
+  messagesId: PropTypes.string,
+  children: PropTypes.node,
+  inline: PropTypes.bool,
+  layout: PropTypes.oneOf(['stacked', 'inline']),
+  labelAlign: PropTypes.oneOf(['start', 'end']),
+  width: PropTypes.string,
+  inputContainerRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'label',
+  'id',
+  'as',
+  'messages',
+  'messagesId',
+  'children',
+  'inline',
+  'layout',
+  'labelAlign',
+  'width',
+  'inputContainerRef'
+]
+
+export type { FormFieldLayoutProps }
+export { propTypes, allowedProps }
