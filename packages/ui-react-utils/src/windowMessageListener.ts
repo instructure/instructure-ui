@@ -23,7 +23,6 @@
  */
 import { decorator } from '@instructure/ui-decorator'
 import { ownerWindow } from '@instructure/ui-dom-utils'
-import { ComponentClass } from 'react'
 
 /**
  * ---
@@ -34,13 +33,13 @@ import { ComponentClass } from 'react'
  *
  * see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
  * @module windowMessageListener
- * @param {Function} messageHandler a handler for messages recieved by the component
- * @param {Function} validSource an optional function that would restrict message handling to a specified source.
- * @returns {Function} a function that decorates a React component with the behavior
+ * @param messageHandler a handler for messages receieved by the component
+ * @param validSource an optional function that would restrict message handling to a specified source.
+ * @returns a function that decorates a React component with the behavior
  */
 const windowMessageListener = decorator(
   (
-    ComposedComponent: ComponentClass,
+    ComposedComponent,
     messageHandler: (data: any) => void,
     validSource: string | (() => string)
   ) => {

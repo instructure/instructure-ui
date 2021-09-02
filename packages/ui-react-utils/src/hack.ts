@@ -49,45 +49,39 @@ import { logWarn as warn } from '@instructure/console'
 const hack =
   process.env.NODE_ENV == 'production'
     ? () => (Component: React.ComponentClass<any>) => Component
-    : decorator(
-        (
-          ComposedComponent: React.ComponentClass<any, any>,
-          hackProps: string[],
-          message: string
-        ) => {
-          return class HackComponent<P, S, SS> extends ComposedComponent {
-            componentDidMount() {
-              if (hackProps) {
-                warnHackProps(
-                  ComposedComponent.name,
-                  this.props,
-                  hackProps,
-                  message
-                )
-              }
-
-              if (super.componentDidMount) {
-                super.componentDidMount()
-              }
+    : decorator((ComposedComponent, hackProps: string[], message: string) => {
+        return class HackComponent<P, S, SS> extends ComposedComponent {
+          componentDidMount() {
+            if (hackProps) {
+              warnHackProps(
+                ComposedComponent.name,
+                this.props,
+                hackProps,
+                message
+              )
             }
 
-            componentDidUpdate(prevProps: P, prevState: S, prevContext: SS) {
-              if (hackProps) {
-                warnHackProps(
-                  ComposedComponent.name,
-                  this.props,
-                  hackProps,
-                  message
-                )
-              }
+            if (super.componentDidMount) {
+              super.componentDidMount()
+            }
+          }
 
-              if (super.componentDidUpdate) {
-                super.componentDidUpdate(prevProps, prevState, prevContext)
-              }
+          componentDidUpdate(prevProps: P, prevState: S, prevContext: SS) {
+            if (hackProps) {
+              warnHackProps(
+                ComposedComponent.name,
+                this.props,
+                hackProps,
+                message
+              )
+            }
+
+            if (super.componentDidUpdate) {
+              super.componentDidUpdate(prevProps, prevState, prevContext)
             }
           }
         }
-      )
+      })
 
 function warnHackProps(
   name: string,

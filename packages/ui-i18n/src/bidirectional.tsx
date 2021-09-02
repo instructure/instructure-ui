@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { ComponentClass, ForwardedRef, forwardRef } from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import { decorator } from '@instructure/ui-decorator'
 import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
 import hoistNonReactStatics from 'hoist-non-react-statics'
@@ -72,35 +72,32 @@ type BidirectionalType = {
  * @module bidirectional
  * @return The decorator that composes the bidirectional component.
  */
-const bidirectional: BidirectionalType = decorator(
-  (ComposedComponent: ComponentClass<any>) => {
-    class BidirectionalComponent extends React.Component<BidirectionalInternalProps> {
-      render() {
-        const { forwardedRef, ...rest } = this.props
-        return (
-          <TextDirectionContext.Consumer>
-            {(dir) => (
-              <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
-            )}
-          </TextDirectionContext.Consumer>
-        )
-      }
+const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
+  class BidirectionalComponent extends React.Component<BidirectionalInternalProps> {
+    render() {
+      const { forwardedRef, ...rest } = this.props
+      return (
+        <TextDirectionContext.Consumer>
+          {(dir) => (
+            <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
+          )}
+        </TextDirectionContext.Consumer>
+      )
     }
-
-    const BidirectionalForwardingRef = forwardRef<any, BidirectionalProps>(
-      (props, ref) => <BidirectionalComponent {...props} forwardedRef={ref} />
-    )
-    if (process.env.NODE_ENV !== 'production') {
-      const displayName =
-        ComposedComponent.displayName || ComposedComponent.name
-      BidirectionalForwardingRef.displayName = `BidirectionalForwardingRef(${displayName})`
-    }
-    hoistNonReactStatics(BidirectionalForwardingRef, ComposedComponent)
-    BidirectionalForwardingRef.defaultProps = ComposedComponent.defaultProps
-    BidirectionalForwardingRef.propTypes = ComposedComponent.propTypes
-    return BidirectionalForwardingRef
   }
-) as BidirectionalType
+
+  const BidirectionalForwardingRef = forwardRef<any, BidirectionalProps>(
+    (props, ref) => <BidirectionalComponent {...props} forwardedRef={ref} />
+  )
+  if (process.env.NODE_ENV !== 'production') {
+    const displayName = ComposedComponent.displayName || ComposedComponent.name
+    BidirectionalForwardingRef.displayName = `BidirectionalForwardingRef(${displayName})`
+  }
+  hoistNonReactStatics(BidirectionalForwardingRef, ComposedComponent)
+  BidirectionalForwardingRef.defaultProps = ComposedComponent.defaultProps
+  BidirectionalForwardingRef.propTypes = ComposedComponent.propTypes
+  return BidirectionalForwardingRef
+}) as BidirectionalType
 
 bidirectional.DIRECTION = DIRECTION
 export default bidirectional

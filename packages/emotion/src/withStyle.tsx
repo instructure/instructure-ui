@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { forwardRef, useState } from 'react'
+import React, { ForwardedRef, forwardRef, useState } from 'react'
 import { decorator } from '@instructure/ui-decorator'
 import { isEqual } from 'lodash'
 import hoistNonReactStatics from 'hoist-non-react-statics'
@@ -101,15 +101,15 @@ export type WithStyleProps = Partial<{
  *
  * @module withStyle
  *
- * @param {function} generateStyle - The function that returns the component's style object
- * @param {function} generateComponentTheme - The function that returns the component's theme variables object
- * @returns {ReactElement} The decorated WithStyle Component
+ * @param generateStyle - The function that returns the component's style object
+ * @param generateComponentTheme - The function that returns the component's theme variables object
+ * @returns The decorated WithStyle Component
  */
 const withStyle = decorator(
-  (ComposedComponent: any, generateStyle: any, generateComponentTheme: any) => {
+  (ComposedComponent, generateStyle: any, generateComponentTheme: any) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
 
-    const WithStyle = forwardRef((props, ref) => {
+    const WithStyle = forwardRef((props, ref: ForwardedRef<any>) => {
       const theme = useTheme()
       const dir = useTextDirectionContext()
       const componentProps = {
@@ -118,7 +118,7 @@ const withStyle = decorator(
       }
       const themeOverride = getComponentThemeOverride(
         theme,
-        [displayName, ComposedComponent.componentId],
+        [displayName, (ComposedComponent as any).componentId],
         componentProps
       )
       const componentTheme =
@@ -142,6 +142,7 @@ const withStyle = decorator(
           setStyles(calculatedStyles)
         }
       }
+
       return (
         <ComposedComponent
           ref={ref}
