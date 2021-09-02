@@ -22,13 +22,16 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
-import type { Spacing } from '@instructure/emotion'
+import PropTypes from 'prop-types'
+
+import { PositionPropTypes } from '@instructure/ui-position'
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type { PlacementPropValues } from '@instructure/ui-position'
 
-export type BadgeProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type BadgeOwnProps = {
   count?: number
   /**
    * The number at which the count gets truncated by
@@ -36,6 +39,7 @@ export type BadgeProps = {
    * would stop the count at 99.
    */
   countUntil?: number
+  children?: React.ReactNode
   /**
    * Render Badge as a counter (`count`) or as a smaller dot (`notification`) with
    * no count number displayed.
@@ -70,3 +74,44 @@ export type BadgeProps = {
    */
   placement: PlacementPropValues
 }
+
+type PropKeys = keyof BadgeOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type BadgeProps = BadgeOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  count: PropTypes.number,
+  countUntil: PropTypes.number,
+  children: PropTypes.element,
+  type: PropTypes.oneOf(['count', 'notification']),
+  standalone: PropTypes.bool,
+  pulse: PropTypes.bool,
+  variant: PropTypes.oneOf(['primary', 'success', 'danger']),
+  placement: PositionPropTypes.placement,
+  margin: ThemeablePropTypes.spacing,
+  elementRef: PropTypes.func,
+  formatOverflowText: PropTypes.func,
+  formatOutput: PropTypes.func,
+  as: PropTypes.elementType // eslint-disable-line react/require-default-props
+}
+
+const allowedProps: AllowedPropKeys = [
+  'count',
+  'countUntil',
+  'children',
+  'type',
+  'standalone',
+  'pulse',
+  'variant',
+  'placement',
+  'margin',
+  'elementRef',
+  'formatOverflowText',
+  'formatOutput',
+  'as'
+]
+
+export type { BadgeProps }
+export { propTypes, allowedProps }
