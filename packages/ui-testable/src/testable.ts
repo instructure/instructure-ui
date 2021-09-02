@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { ComponentState, ComponentClass } from 'react'
+import { ComponentClass, ComponentState } from 'react'
 import { findDOMNode } from 'react-dom'
 
 import { decorator } from '@instructure/ui-decorator'
@@ -41,7 +41,7 @@ const testable =
   // We do this because adding those `data-cid` locators slows things down.
   !process.env.ALWAYS_APPEND_UI_TESTABLE_LOCATORS
     ? () => (Component: ComponentClass<any>) => Component
-    : decorator((ComposedComponent: ComponentClass<any>) => {
+    : decorator((ComposedComponent) => {
         const displayName =
           ComposedComponent.displayName || ComposedComponent.name
         const locator = {

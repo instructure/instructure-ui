@@ -29,11 +29,7 @@ const experimental =
   process.env.NODE_ENV == 'production'
     ? () => (ReactComponent: ComponentClass<any>) => ReactComponent
     : decorator(
-        (
-          ComposedComponent: ComponentClass<any>,
-          experimentalProps: string[],
-          message: string
-        ) => {
+        (ComposedComponent, experimentalProps: string[], message: string) => {
           return class ExperimentalComponent<
             P,
             S,

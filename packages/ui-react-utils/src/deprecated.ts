@@ -48,7 +48,7 @@ const deprecated = (() => {
   }
   const deprecated = decorator(
     (
-      ComposedComponent: ComponentClass,
+      ComposedComponent,
       version: string,
       oldProps?: Record<string, any>,
       message = ''
@@ -216,8 +216,7 @@ const deprecated = (() => {
    * @param {String} componentName the name of the component or Function.name of the utility function
    * @param {String} message a message to display as a console error in DEV env when condition is false
    */
-  ;(deprecated as DeprecatedDecorator).warnDeprecatedComponent =
-    warnDeprecatedComponent
+  ;(deprecated as DeprecatedDecorator).warnDeprecatedComponent = warnDeprecatedComponent
 
   /**
    * ---

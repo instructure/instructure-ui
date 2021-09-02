@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import type { ComponentClass } from 'react'
+
 /**
  * ---
  * category: utilities
@@ -29,12 +31,15 @@
  * Wraps (decorates) a React component to add additional functionality
  *
  * @module decorator
- * @param {Function} decorator a function that returns a decorated component
- * @returns {Class} a decorated component class
+ * @param decorate a function that returns a decorated component
+ * @returns A decorated component class
  */
-function decorator(decorate: any) {
-  return (...args: any[]) => {
-    return (ComposedComponent: any) => {
+function decorator(
+  decorate: (toDecorate: ComponentClass<any>, ...args: any[]) => any
+) {
+  return (...args: unknown[]) => {
+    // parameters when the decorator is used
+    return (ComposedComponent: ComponentClass<any>) => {
       if (typeof decorate === 'function') {
         const displayName =
           ComposedComponent.displayName || ComposedComponent.name
