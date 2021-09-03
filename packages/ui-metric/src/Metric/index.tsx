@@ -23,7 +23,6 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -32,7 +31,9 @@ import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MetricProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { MetricProps } from './props'
 
 /**
 ---
@@ -45,21 +46,10 @@ category: components
 class Metric extends Component<MetricProps & OtherHTMLAttributes<MetricProps>> {
   static readonly componentId = 'Metric'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-    renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    isGroupChild: PropTypes.bool
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     textAlign: 'center',
-    renderLabel: undefined,
-    renderValue: undefined,
     isGroupChild: false
   }
 
@@ -86,17 +76,17 @@ class Metric extends Component<MetricProps & OtherHTMLAttributes<MetricProps>> {
       <div
         {...passthroughProps(rest)}
         role={isGroupChild ? 'row' : undefined}
-        css={this.props.styles.metric}
+        css={this.props.styles?.metric}
       >
         <div
           role={isGroupChild ? 'rowheader' : undefined}
-          css={this.props.styles.label}
+          css={this.props.styles?.label}
         >
           {callRenderProp(renderLabel)}
         </div>
         <div
           role={isGroupChild ? 'gridcell' : undefined}
-          css={this.props.styles.value}
+          css={this.props.styles?.value}
         >
           {callRenderProp(renderValue)}
         </div>

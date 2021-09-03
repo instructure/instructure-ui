@@ -23,10 +23,12 @@
  */
 
 import { ReactNode } from 'react'
+import PropTypes from 'prop-types'
 
-export type MetricProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type MetricOwnProps = {
   textAlign: 'start' | 'center' | 'end'
   renderLabel?: ((props?: any) => ReactNode) | ReactNode
   renderValue?: ((props?: any) => ReactNode) | ReactNode
@@ -36,3 +38,26 @@ export type MetricProps = {
    */
   isGroupChild: boolean
 }
+
+type PropKeys = keyof MetricOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type MetricProps = MetricOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  isGroupChild: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = [
+  'textAlign',
+  'renderLabel',
+  'renderValue',
+  'isGroupChild'
+]
+
+export type { MetricProps }
+export { propTypes, allowedProps }

@@ -24,13 +24,8 @@
 
 /** @jsx jsx */
 import { Children, Component, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
 import { Dialog } from '@instructure/ui-dialog'
-import {
-  element,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
 import {
   passthroughProps,
   safeCloneElement,
@@ -49,7 +44,9 @@ import { ModalFooter } from './ModalFooter'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ModalProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { ModalProps } from './props'
 
 /**
 ---
@@ -62,143 +59,8 @@ tags: overlay, portal, dialog
 class Modal extends Component<ModalProps> {
   static readonly componentId = 'Modal'
 
-  static propTypes = {
-    /**
-     * An accessible label for the `<Modal />` content
-     */
-    label: PropTypes.string.isRequired,
-
-    /**
-     * The children to be rendered within the `<Modal />`
-     */
-    children: ChildrenPropTypes.enforceOrder(
-      [ModalHeader, ModalBody, ModalFooter],
-      [ModalHeader, ModalBody],
-      [ModalBody, ModalFooter],
-      [ModalBody]
-    ),
-
-    /**
-     * The element to render the dialog as, `span` by default
-     */
-    as: PropTypes.elementType,
-
-    /**
-     * The size of the `<Modal />` content
-     */
-    size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
-
-    /**
-     * Designates the background style of the `<Modal />`
-     */
-    variant: PropTypes.oneOf(['default', 'inverse']),
-
-    /**
-     * Whether or not the `<Modal />` is open
-     */
-    open: PropTypes.bool,
-
-    /**
-     * An element or a function returning an element to focus by default
-     */
-    defaultFocusElement: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
-
-    /**
-     * Whether focus should be returned to the trigger when the `<Modal/>` is closed
-     */
-    shouldReturnFocus: PropTypes.bool,
-
-    /**
-     * Whether the `<Modal/>` should request close when the document is clicked
-     */
-    shouldCloseOnDocumentClick: PropTypes.bool,
-
-    /**
-     * Callback fired when `<Modal />` content has been mounted in the DOM
-     */
-    onOpen: PropTypes.func,
-
-    /**
-     * Callback fired when `<Modal />` has been unmounted from the DOM
-     */
-    onClose: PropTypes.func,
-
-    /**
-     * Callback fired when the `<Modal />` is requesting to be closed
-     */
-    onDismiss: PropTypes.func,
-
-    /**
-     *
-     * A function that returns a reference to the content element
-     */
-    contentRef: PropTypes.func,
-
-    /**
-     * An element or a function returning an element to use as the mount node
-     * for the `<Modal />` (defaults to `document.body`)
-     */
-    mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-    /**
-     * Insert the element at the 'top' of the mountNode or at the 'bottom'
-     */
-    insertAt: PropTypes.oneOf(['bottom', 'top']),
-
-    /**
-     * An element, function returning an element, or array of elements that will not be hidden from
-     * the screen reader when the `<Modal />` is open
-     */
-    liveRegion: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-      PropTypes.func
-    ]),
-
-    transition: Transition.propTypes.type,
-
-    /**
-     * Callback fired before the <Modal /> transitions in
-     */
-    onEnter: PropTypes.func,
-    /**
-     * Callback fired as the <Modal /> begins to transition in
-     */
-    onEntering: PropTypes.func,
-    /**
-     * Callback fired after the <Modal /> finishes transitioning in
-     */
-    onEntered: PropTypes.func,
-    /**
-     * Callback fired right before the <Modal /> transitions out
-     */
-    onExit: PropTypes.func,
-    /**
-     * Callback fired as the <Modal /> begins to transition out
-     */
-    onExiting: PropTypes.func,
-    /**
-     * Callback fired after the <Modal /> finishes transitioning out
-     */
-    onExited: PropTypes.func,
-    /**
-     * Constrain the Modal to the document window or its closest positioned parent
-     */
-    constrain: PropTypes.oneOf(['window', 'parent']),
-    /**
-     * Should ModalBody handle overflow with scrollbars, or fit its
-     * content within its own height?
-     */
-    overflow: PropTypes.oneOf(['scroll', 'fit']),
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     open: false,
     size: 'auto',
@@ -349,7 +211,7 @@ class Modal extends Component<ModalProps> {
         shouldReturnFocus={shouldReturnFocus}
         liveRegion={liveRegion}
         onDismiss={onDismiss}
-        css={styles.modal}
+        css={styles?.modal}
         ref={this.contentRef}
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >
@@ -418,7 +280,7 @@ class Modal extends Component<ModalProps> {
             )}
           >
             {constrain === 'parent' ? (
-              <span css={this.props.styles.constrainContext}>
+              <span css={this.props.styles?.constrainContext}>
                 {this.renderDialog(passthroughProps)}
               </span>
             ) : (
