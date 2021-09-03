@@ -23,18 +23,18 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { childrenOrValue } from '@instructure/ui-prop-types'
 import { getElementType, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { HeadingProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { HeadingProps } from './props'
 
 /**
 ---
@@ -46,54 +46,10 @@ category: components
 class Heading extends Component<HeadingProps> {
   static readonly componentId = 'Heading'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * Add a top- or bottom-border to the Heading
-     */
-    border: PropTypes.oneOf(['none', 'top', 'bottom']),
-    /**
-     * The text content of the Heading
-     */
-    children: childrenOrValue,
-    /**
-     * The font color to render
-     */
-    color: PropTypes.oneOf([
-      'primary',
-      'secondary',
-      'primary-inverse',
-      'secondary-inverse',
-      'inherit'
-    ]),
-    /**
-     * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
-     */
-    level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
-    /**
-     * Choose the element Heading should render as. Will default to the `level` prop
-     * if not specified.
-     */
-    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Provides a ref to the underlying HTML element
-     */
-    elementRef: PropTypes.func
-  } as const
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
-    margin: undefined,
-    elementRef: undefined,
     border: 'none',
     color: 'inherit',
     level: 'h2'
@@ -132,7 +88,7 @@ class Heading extends Component<HeadingProps> {
     return (
       <View
         {...passthroughProps(props)}
-        css={this.props.styles.heading}
+        css={this.props.styles?.heading}
         as={ElementType}
         elementRef={elementRef}
         margin={margin}

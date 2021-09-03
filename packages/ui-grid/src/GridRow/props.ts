@@ -22,11 +22,19 @@
  * SOFTWARE.
  */
 
-import { GridBreakpoints } from '../GridTypes'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type GridRowProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { GridCol } from '../GridCol'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+import type { GridBreakpoints } from '../GridTypes'
+
+type GridRowOwnProps = {
+  children?: React.ReactNode // TODO: oneOf([GridCol, ScreenReaderContent])
   rowSpacing?: 'none' | 'small' | 'medium' | 'large'
   colSpacing?: 'none' | 'small' | 'medium' | 'large'
   hAlign?: 'start' | 'center' | 'end' | 'space-around' | 'space-between'
@@ -35,3 +43,40 @@ export type GridRowProps = {
   visualDebug?: boolean
   isLastRow?: boolean
 }
+
+type PropKeys = keyof GridRowOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type GridRowProps = GridRowOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: ChildrenPropTypes.oneOf([GridCol, ScreenReaderContent]),
+  rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+  colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+  hAlign: PropTypes.oneOf([
+    'start',
+    'center',
+    'end',
+    'space-around',
+    'space-between'
+  ]),
+  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
+  startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
+  visualDebug: PropTypes.bool,
+  isLastRow: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'rowSpacing',
+  'colSpacing',
+  'hAlign',
+  'vAlign',
+  'startAt',
+  'visualDebug',
+  'isLastRow'
+]
+
+export type { GridRowProps }
+export { propTypes, allowedProps }

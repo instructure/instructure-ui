@@ -24,16 +24,13 @@
 
 /** @jsx jsx */
 import { Component, Children, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import {
   safeCloneElement,
   matchComponentTypes,
   omitProps,
   pickProps
 } from '@instructure/ui-react-utils'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { GridRow } from '../GridRow'
 import { GridCol } from '../GridCol'
@@ -42,7 +39,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { GridProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { GridProps } from './props'
 
 /**
 ---
@@ -53,26 +52,8 @@ category: components
 class Grid extends Component<GridProps> {
   static readonly componentId = 'Grid'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: ChildrenPropTypes.oneOf([GridRow, ScreenReaderContent]),
-    colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    hAlign: PropTypes.oneOf([
-      'start',
-      'center',
-      'end',
-      'space-around',
-      'space-between'
-    ]),
-    vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-    startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
-    visualDebug: PropTypes.bool
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     colSpacing: 'medium',
     rowSpacing: 'medium',
@@ -121,7 +102,7 @@ class Grid extends Component<GridProps> {
     const props = omitProps(restProps, Grid.propTypes)
 
     return (
-      <span {...props} css={styles.grid}>
+      <span {...props} css={styles?.grid}>
         {this.renderChildren()}
       </span>
     )

@@ -22,11 +22,12 @@
  * SOFTWARE.
  */
 
-import type { Spacing } from '@instructure/emotion'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import { PropValidators } from '@instructure/shared-types'
+import PropTypes from 'prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
-export type ImgProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type ImgOwnProps = {
   src: string
   alt?: string
   display?: 'inline-block' | 'block'
@@ -43,3 +44,59 @@ export type ImgProps = {
   height?: string | number
   width?: string | number
 }
+
+type PropKeys = keyof ImgOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ImgProps = ImgOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string,
+  display: PropTypes.oneOf(['inline-block', 'block']),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Valid values for `opacity` are `0` - `10`. Valid values for `blend` are
+   * `normal` (default), `multiply`, `screen`, `overlay`, and `color-burn`.
+   */
+  overlay: PropTypes.shape({
+    color: PropTypes.string.isRequired,
+    opacity: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).isRequired,
+    blend: PropTypes.oneOf([
+      'normal',
+      'multiply',
+      'screen',
+      'overlay',
+      'color-burn'
+    ])
+  }),
+  withGrayscale: PropTypes.bool,
+  withBlur: PropTypes.bool,
+  constrain: PropTypes.oneOf(['cover', 'contain']),
+  elementRef: PropTypes.func,
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'src',
+  'alt',
+  'display',
+  'margin',
+  'overlay',
+  'withGrayscale',
+  'withBlur',
+  'constrain',
+  'elementRef',
+  'height',
+  'width'
+]
+
+export type { ImgProps }
+export { propTypes, allowedProps }
