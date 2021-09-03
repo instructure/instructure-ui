@@ -23,12 +23,10 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { uid } from '@instructure/uid'
-import { controllable } from '@instructure/ui-prop-types'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
@@ -39,7 +37,9 @@ import { MenuContext } from '../../MenuContext'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MenuItemProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { MenuItemProps } from './props'
 
 /**
 ---
@@ -52,55 +52,13 @@ id: Menu.Item
 class MenuItem extends Component<MenuItemProps> {
   static readonly componentId = 'Menu.Item'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /* the menu item label */
-    children: PropTypes.node.isRequired,
-    /* whether to set the menu item state to selected or not on initial render */
-    defaultSelected: PropTypes.bool,
-    /**
-     * whether the menu item is selected or not (must be accompanied by an `onSelect` prop)
-     */
-    selected: controllable(PropTypes.bool, 'onSelect', 'defaultSelected'),
-    /**
-     * when used with the `selected` prop, the component will not control its own state
-     */
-    onSelect: PropTypes.func,
-    onClick: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    onKeyUp: PropTypes.func,
-    onMouseOver: PropTypes.func,
-    /**
-     * the id of the element that the menu item will act upon
-     */
-    controls: PropTypes.string,
-    disabled: PropTypes.bool,
-    /**
-     * the element type to render as (will default to `<a>` if href is provided)
-     */
-    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-    type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    href: PropTypes.string
-  } as const
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     type: 'button',
     disabled: false,
     // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onSelect: function (e, value, selected, item) {},
-    defaultSelected: undefined,
-    selected: undefined,
-    onClick: undefined,
-    onKeyDown: undefined,
-    onKeyUp: undefined,
-    onMouseOver: undefined,
-    controls: undefined,
-    value: undefined,
-    href: undefined
+    onSelect: function (e, value, selected, item) {}
   } as const
 
   static contextType = MenuContext
@@ -249,16 +207,16 @@ class MenuItem extends Component<MenuItemProps> {
     return (
       <span>
         {(type === 'checkbox' || type === 'radio') && (
-          <span css={this.props.styles.icon}>
+          <span css={this.props.styles?.icon}>
             {this.selected && <IconCheckSolid />}
           </span>
         )}
         {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'labelId' does not exist on type 'MenuIte... Remove this comment to see the full error message */}
-        <span css={this.props.styles.label} id={this.labelId}>
+        <span css={this.props.styles?.label} id={this.labelId}>
           {children}
         </span>
         {type === 'flyout' && (
-          <span css={this.props.styles.icon}>
+          <span css={this.props.styles?.icon}>
             <IconArrowOpenEndSolid />
           </span>
         )}
@@ -297,7 +255,7 @@ class MenuItem extends Component<MenuItemProps> {
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_node' does not exist on type 'MenuItem'... Remove this comment to see the full error message
           this._node = c
         }}
-        css={this.props.styles.menuItem}
+        css={this.props.styles?.menuItem}
         onMouseOver={this.handleMouseOver}
       >
         {this.renderContent()}

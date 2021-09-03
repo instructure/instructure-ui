@@ -22,11 +22,16 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type MenuItemProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { controllable } from '@instructure/ui-prop-types'
+
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type MenuItemOwnProps = {
+  children: React.ReactNode
   defaultSelected?: boolean
   selected?: any // TODO: controllable(PropTypes.bool, 'onSelect', 'defaultSelected')
   onSelect?: (...args: any[]) => any
@@ -41,3 +46,64 @@ export type MenuItemProps = {
   value?: string | number
   href?: string
 }
+
+type PropKeys = keyof MenuItemOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type MenuItemProps = MenuItemOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * the menu item label
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * whether to set the menu item state to selected or not on initial render
+   */
+  defaultSelected: PropTypes.bool,
+  /**
+   * whether the menu item is selected or not (must be accompanied by an `onSelect` prop)
+   */
+  selected: controllable(PropTypes.bool, 'onSelect', 'defaultSelected'),
+  /**
+   * when used with the `selected` prop, the component will not control its own state
+   */
+  onSelect: PropTypes.func,
+  onClick: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  onMouseOver: PropTypes.func,
+  /**
+   * the id of the element that the menu item will act upon
+   */
+  controls: PropTypes.string,
+  disabled: PropTypes.bool,
+  /**
+   * the element type to render as (will default to `<a>` if href is provided)
+   */
+  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  href: PropTypes.string
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'defaultSelected',
+  'selected',
+  'onSelect',
+  'onClick',
+  'onKeyDown',
+  'onKeyUp',
+  'onMouseOver',
+  'controls',
+  'disabled',
+  'as',
+  'type',
+  'value',
+  'href'
+]
+
+export type { MenuItemProps }
+export { propTypes, allowedProps }

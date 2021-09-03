@@ -23,17 +23,18 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { InlineListItemProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { InlineListItemProps } from './props'
 
 /**
 ---
@@ -46,49 +47,10 @@ id: InlineList.Item
 class InlineListItem extends Component<InlineListItemProps> {
   static readonly componentId = 'InlineList.Item'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    /**
-     * Inherits delimiter from the parent InlineList component
-     */
-    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-     */
-    padding: ThemeablePropTypes.spacing,
-    /**
-     * Inherits itemSpacing from the parent InlineList component
-     */
-    spacing: PropTypes.oneOf([
-      'none',
-      'xxx-small',
-      'xx-small',
-      'x-small',
-      'small',
-      'medium',
-      'large',
-      'x-large',
-      'xx-large'
-    ]),
-    elementRef: PropTypes.func
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     padding: 'none',
-    margin: undefined,
     spacing: 'none',
     delimiter: 'none',
     size: 'medium',
@@ -123,7 +85,7 @@ class InlineListItem extends Component<InlineListItemProps> {
     return (
       <View
         {...passthroughProps(rest)}
-        css={styles.inlineListItem}
+        css={styles?.inlineListItem}
         as="li"
         margin={margin}
         padding={padding}
@@ -132,7 +94,7 @@ class InlineListItem extends Component<InlineListItemProps> {
         elementRef={elementRef}
       >
         {children}
-        <span css={styles.delimiter} aria-hidden="true" />
+        <span css={styles?.delimiter} aria-hidden="true" />
       </View>
     )
   }
