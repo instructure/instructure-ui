@@ -279,7 +279,7 @@ const generateStyle = (
   }
 
   const arrowPlacementVariant = getArrowPlacementVariant(
-    placement,
+    placement!,
     background,
     componentTheme
   )
@@ -289,7 +289,7 @@ const generateStyle = (
       label: 'contextView',
       boxSizing: 'border-box',
       minHeight: `calc(${componentTheme?.arrowSize} * 2)`,
-      ...getPlacementStyle(placement, componentTheme)
+      ...getPlacementStyle(placement!, componentTheme)
     },
     contextView__content: {
       label: 'contextView__content',
@@ -302,7 +302,7 @@ const generateStyle = (
       borderWidth: `calc(${componentTheme?.arrowSize} + ${componentTheme?.arrowBorderWidth})`,
       borderColor: arrowBackGroundVariants[background!],
       ...arrowPlacementVariant.main,
-      ...getArrowCorrections(placement, componentTheme),
+      ...getArrowCorrections(placement!, componentTheme),
       '&::after': {
         borderWidth: componentTheme?.arrowSize,
         borderColor: arrowBackGroundVariants[background!],
