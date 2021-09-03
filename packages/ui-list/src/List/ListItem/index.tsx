@@ -24,17 +24,18 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ListItemProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { ListItemProps } from './props'
 
 /**
 ---
@@ -47,49 +48,10 @@ id: List.Item
 class ListItem extends Component<ListItemProps> {
   static readonly componentId = 'List.Item'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    /**
-     * Inherits delimiter from the parent List component.
-     */
-    delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-     */
-    padding: ThemeablePropTypes.spacing,
-    /**
-     * Inherits itemSpacing from the parent List component
-     */
-    spacing: PropTypes.oneOf([
-      'none',
-      'xxx-small',
-      'xx-small',
-      'x-small',
-      'small',
-      'medium',
-      'large',
-      'x-large',
-      'xx-large'
-    ]),
-    elementRef: PropTypes.func
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     padding: 'none',
-    margin: undefined,
     spacing: 'none',
     delimiter: 'none',
     size: 'medium',
@@ -124,7 +86,7 @@ class ListItem extends Component<ListItemProps> {
     return (
       <View
         {...passthroughProps(rest)}
-        css={styles.listItem}
+        css={styles?.listItem}
         as="li"
         margin={margin}
         padding={padding}

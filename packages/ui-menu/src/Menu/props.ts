@@ -22,15 +22,24 @@
  * SOFTWARE.
  */
 
+import PropTypes from 'prop-types'
+
+import { PositionPropTypes } from '@instructure/ui-position'
+import {
+  controllable,
+  Children as ChildrenPropTypes
+} from '@instructure/ui-prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
 import type {
   PlacementPropValues,
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
 
-export type MenuProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type MenuOwnProps = {
+  children?: React.ReactNode // TODO: oneOf(['MenuItem', 'MenuItemGroup', 'MenuItemSeparator', 'Menu'])
   label?: string
   disabled?: boolean
   trigger?: React.ReactNode
@@ -61,3 +70,166 @@ export type MenuProps = {
   offsetX?: string | number
   offsetY?: string | number
 }
+
+type PropKeys = keyof MenuOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type MenuProps = MenuOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Children of type `Menu.Item`, `Menu.Group`, `Menu.Separator`, or `Menu`
+   */
+  children: ChildrenPropTypes.oneOf([
+    'MenuItem',
+    'MenuItemGroup',
+    'MenuItemSeparator',
+    'Menu'
+  ]),
+  /**
+   * Description of the `<Menu />`
+   */
+  label: PropTypes.string,
+  /**
+   * Is the `<Menu />` disabled
+   */
+  disabled: PropTypes.bool,
+  /**
+   * The trigger element, if the `<Menu />` is to render as a popover
+   */
+  trigger: PropTypes.node,
+  /**
+   * If a trigger is supplied, where should the `<Menu />` be placed (relative to the trigger)
+   */
+  placement: PositionPropTypes.placement,
+  /**
+   * Should the `<Menu />` be open for the initial render
+   */
+  defaultShow: PropTypes.bool,
+  /**
+   * Is the `<Menu />` open (should be accompanied by `onToggle`)
+   */
+  show: controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
+  /**
+   * Callback fired when the `<Menu />` is toggled open/closed. When used with `show`,
+   * the component will not control its own state.
+   */
+  onToggle: PropTypes.func,
+  /**
+   * Callback fired when an item within the `<Menu />` is selected
+   */
+  onSelect: PropTypes.func,
+  /**
+   * If a trigger is supplied, callback fired when the `<Menu />` is closed
+   */
+  onDismiss: PropTypes.func,
+  /**
+   * If a trigger is supplied, callback fired when the `<Menu />` trigger is blurred
+   */
+  onBlur: PropTypes.func,
+  /**
+   * If a trigger is supplied, callback fired when the `<Menu />` trigger is focused
+   */
+  onFocus: PropTypes.func,
+  /**
+   * If a trigger is supplied, callback fired onMouseOver for the `<Menu />` trigger
+   */
+  onMouseOver: PropTypes.func,
+  /**
+   * Callback fired on the onKeyDown of the `<Menu />`
+   */
+  onKeyDown: PropTypes.func,
+  /**
+   * Callback fired on the onKeyUp of the `<Menu />`
+   */
+  onKeyUp: PropTypes.func,
+  /**
+   * A function that returns a reference to the `<Menu />`
+   */
+  menuRef: PropTypes.func,
+  /**
+   * A function that returns a reference to the `<Popover />`
+   */
+  popoverRef: PropTypes.func,
+  /**
+   * If a trigger is supplied, an element or a function returning an element to use as the mount node
+   * for the `<Menu />` (defaults to `document.body`)
+   */
+  mountNode: PositionPropTypes.mountNode,
+  /**
+   * The parent in which to constrain the menu.
+   * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
+   * or a function returning an element
+   */
+  constrain: PositionPropTypes.constrain,
+  /**
+   * If a trigger is supplied, an element, function returning an element, or array of elements that will not
+   * be hidden from the screen reader when the `<Menu />` is open
+   */
+  liveRegion: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+    PropTypes.func
+  ]),
+  /**
+   * If a trigger is supplied, should the `<Menu />` hide when an item is selected
+   */
+  shouldHideOnSelect: PropTypes.bool,
+  /**
+   * If a trigger is supplied, should the `<Menu />` focus the trigger on after closing
+   */
+  shouldFocusTriggerOnClose: PropTypes.bool,
+  /**
+   * The type of `<Menu />`
+   */
+  type: PropTypes.oneOf(['flyout']),
+  id: PropTypes.string,
+  /**
+   * Whether or not an arrow pointing to the trigger should be rendered
+   */
+  withArrow: PropTypes.bool,
+  /**
+   * The horizontal offset for the positioned content.
+   * Works only if `trigger` is provided.
+   */
+  offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * The vertical offset for the positioned content.
+   * Works only if `trigger` is provided.
+   */
+  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'label',
+  'disabled',
+  'trigger',
+  'placement',
+  'defaultShow',
+  'show',
+  'onToggle',
+  'onSelect',
+  'onDismiss',
+  'onBlur',
+  'onFocus',
+  'onMouseOver',
+  'onKeyDown',
+  'onKeyUp',
+  'menuRef',
+  'popoverRef',
+  'mountNode',
+  'constrain',
+  'liveRegion',
+  'shouldHideOnSelect',
+  'shouldFocusTriggerOnClose',
+  'type',
+  'id',
+  'withArrow',
+  'offsetX',
+  'offsetY'
+]
+
+export type { MenuProps }
+export { propTypes, allowedProps }

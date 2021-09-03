@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
@@ -32,7 +31,9 @@ import { omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MenuSeparatorProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { MenuSeparatorProps } from './props'
 
 /**
 ---
@@ -46,12 +47,8 @@ id: Menu.Separator
 class MenuItemSeparator extends Component<MenuSeparatorProps> {
   static readonly componentId = 'Menu.Separator'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+  static propTypes = propTypes
+  static allowedProps = allowedProps
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -69,7 +66,7 @@ class MenuItemSeparator extends Component<MenuSeparatorProps> {
       <div
         {...props}
         role="presentation"
-        css={this.props.styles.menuItemSeparator}
+        css={this.props.styles?.menuItemSeparator}
       />
     )
   }

@@ -22,7 +22,22 @@
  * SOFTWARE.
  */
 
-export type MenuSeparatorProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-}
+import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+
+// keeping here to keep the structure of props.ts
+// eslint-disable-next-line
+type MenuSeparatorOwnProps = {}
+
+type PropKeys = keyof MenuSeparatorOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type MenuSeparatorProps = MenuSeparatorOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {}
+
+const allowedProps: AllowedPropKeys = []
+
+export type { MenuSeparatorProps }
+export { propTypes, allowedProps }

@@ -22,11 +22,22 @@
  * SOFTWARE.
  */
 
-export type MenuGroupProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import PropTypes from 'prop-types'
+
+import {
+  controllable,
+  Children as ChildrenPropTypes
+} from '@instructure/ui-prop-types'
+import { MenuItem } from '../MenuItem'
+import { MenuItemSeparator } from '../MenuItemSeparator'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+export type MenuGroupOwnProps = {
   label: React.ReactNode
   allowMultiple?: boolean
+  children?: React.ReactNode // TODO: oneOf([MenuItem, MenuItemSeparator])
   selected?: any // TODO: controllable(PropTypes.array, 'onSelect', 'defaultSelected')
   defaultSelected?: any[]
   onSelect?: (...args: any[]) => any
@@ -37,3 +48,63 @@ export type MenuGroupProps = {
   disabled?: boolean
   isTabbable?: boolean
 }
+
+type PropKeys = keyof MenuGroupOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type MenuGroupProps = MenuGroupOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  label: PropTypes.node.isRequired,
+  allowMultiple: PropTypes.bool,
+  /**
+   * children of type `Menu.Item`, `Menu.Separator`
+   */
+  children: ChildrenPropTypes.oneOf([MenuItem, MenuItemSeparator]),
+  /**
+   * an array of the values (or indices by default) for the selected items
+   */
+  selected: controllable(PropTypes.array, 'onSelect', 'defaultSelected'),
+  /**
+   * an array of the values (or indices by default) for the selected items on initial render
+   */
+  defaultSelected: PropTypes.array,
+  /**
+   * call this function when a menu item is selected
+   */
+  onSelect: PropTypes.func,
+  onMouseOver: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  /**
+   * the id of the element that the menu items will act upon
+   */
+  controls: PropTypes.string,
+  /**
+   * returns a reference to the `MenuItem`
+   */
+  itemRef: PropTypes.func,
+  disabled: PropTypes.bool,
+  /**
+   * should the group appear in the tab order (the first item will have a tabIndex of 0)
+   */
+  isTabbable: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = [
+  'label',
+  'allowMultiple',
+  'children',
+  'selected',
+  'defaultSelected',
+  'onSelect',
+  'onMouseOver',
+  'onKeyDown',
+  'controls',
+  'itemRef',
+  'disabled',
+  'isTabbable'
+]
+
+export type { MenuGroupProps }
+export { propTypes, allowedProps }

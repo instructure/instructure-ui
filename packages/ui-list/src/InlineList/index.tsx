@@ -22,16 +22,15 @@
  * SOFTWARE.
  */
 import React, { Children, Component, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { ThemeablePropTypes } from '@instructure/emotion'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
 import { InlineListItem } from './InlineListItem'
-import { InlineListProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { InlineListProps } from './props'
 
 /**
 ---
@@ -40,37 +39,8 @@ category: components
 **/
 @testable()
 class InlineList extends Component<InlineListProps> {
-  static propTypes = {
-    /**
-     * Only accepts `<InlineList.Item>` as a child
-     */
-    children: ChildrenPropTypes.oneOf([InlineListItem]),
-    as: PropTypes.oneOf(['ul', 'ol']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
-    /**
-     * Sets the margin separating each ListItem.
-     */
-    itemSpacing: PropTypes.oneOf([
-      'none',
-      'xxx-small',
-      'xx-small',
-      'x-small',
-      'small',
-      'medium',
-      'large',
-      'x-large',
-      'xx-large'
-    ]),
-    elementRef: PropTypes.func
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
     itemSpacing: 'none',

@@ -24,13 +24,8 @@
 
 /** @jsx jsx */
 import { Children, Component, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
-import {
-  controllable,
-  Children as ChildrenPropTypes
-} from '@instructure/ui-prop-types'
 import {
   omitProps,
   safeCloneElement,
@@ -41,11 +36,12 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { MenuItem } from '../MenuItem'
-import { MenuItemSeparator } from '../MenuItemSeparator'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MenuGroupProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { MenuGroupProps } from './props'
 
 /**
 ---
@@ -58,52 +54,10 @@ id: Menu.Group
 class MenuItemGroup extends Component<MenuGroupProps> {
   static readonly componentId = 'Menu.Group'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    label: PropTypes.node.isRequired,
-    allowMultiple: PropTypes.bool,
-    /**
-     * children of type `Menu.Item`, `Menu.Separator`
-     */
-    children: ChildrenPropTypes.oneOf([MenuItem, MenuItemSeparator]),
-    /**
-     * an array of the values (or indices by default) for the selected items
-     */
-    selected: controllable(PropTypes.array, 'onSelect', 'defaultSelected'),
-    /**
-     * an array of the values (or indices by default) for the selected items on initial render
-     */
-    defaultSelected: PropTypes.array,
-    /**
-     * call this function when a menu item is selected
-     */
-    onSelect: PropTypes.func,
-    onMouseOver: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    /**
-     * the id of the element that the menu items will act upon
-     */
-    controls: PropTypes.string,
-    /**
-     * returns a reference to the `MenuItem`
-     */
-    itemRef: PropTypes.func,
-    disabled: PropTypes.bool,
-    /**
-     * should the group appear in the tab order (the first item will have a tabIndex of 0)
-     */
-    isTabbable: PropTypes.bool
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
-    onMouseOver: undefined,
     disabled: false,
-    controls: undefined,
-    onKeyDown: undefined,
-    selected: undefined,
     children: null,
     isTabbable: false,
     allowMultiple: false,
@@ -230,7 +184,7 @@ class MenuItemGroup extends Component<MenuGroupProps> {
     const { label } = this.props
 
     return hasVisibleChildren(label) ? (
-      <span css={this.props.styles.label}>{label}</span>
+      <span css={this.props.styles?.label}>{label}</span>
     ) : (
       label
     )
@@ -282,14 +236,14 @@ class MenuItemGroup extends Component<MenuGroupProps> {
     return (
       <span
         {...props}
-        css={this.props.styles.menuItemGroup}
+        css={this.props.styles?.menuItemGroup}
         role="presentation"
       >
         {/* @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'MenuIt... Remove this comment to see the full error message */}
         <span id={this._labelId}>{this.renderLabel()}</span>
         <ul
           role="menu"
-          css={this.props.styles.items}
+          css={this.props.styles?.items}
           aria-disabled={this.props.disabled ? 'true' : undefined}
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'MenuIt... Remove this comment to see the full error message
           aria-labelledby={this._labelId}

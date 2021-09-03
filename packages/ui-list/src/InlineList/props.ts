@@ -22,9 +22,18 @@
  * SOFTWARE.
  */
 
-import type { Spacing } from '@instructure/emotion'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type InlineListProps = {
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
+import { InlineListItem } from './InlineListItem'
+
+import type { Spacing } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+
+type InlineListOwnProps = {
+  children?: React.ReactNode // TODO: oneOf([InlineListItem])
   as?: 'ul' | 'ol'
   margin?: Spacing
   size?: 'small' | 'medium' | 'large'
@@ -41,3 +50,45 @@ export type InlineListProps = {
     | 'xx-large'
   elementRef?: (...args: any[]) => any
 }
+
+type PropKeys = keyof InlineListOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type InlineListProps = InlineListOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Only accepts `<InlineList.Item>` as a child
+   */
+  children: ChildrenPropTypes.oneOf([InlineListItem]),
+  as: PropTypes.oneOf(['ul', 'ol']),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
+  /**
+   * Sets the margin separating each ListItem.
+   */
+  itemSpacing: PropTypes.oneOf([
+    'none',
+    'xxx-small',
+    'xx-small',
+    'x-small',
+    'small',
+    'medium',
+    'large',
+    'x-large',
+    'xx-large'
+  ]),
+  elementRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = []
+
+export type { InlineListProps }
+export { propTypes, allowedProps }

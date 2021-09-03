@@ -24,20 +24,20 @@
 
 /** @jsx jsx */
 import { Children, Component, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
 import { ListItem } from './ListItem'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ListProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { ListProps } from './props'
 
 /**
 ---
@@ -49,54 +49,13 @@ category: components
 class List extends Component<ListProps> {
   static readonly componentId = 'List'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * Only accepts `<List.Item>` as a child
-     */
-    children: ChildrenPropTypes.oneOf([ListItem]),
-    as: PropTypes.oneOf(['ul', 'ol']),
-    /**
-     * One of: none, dashed, solid
-     */
-    delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
-    /**
-     * When set, renders the List Items without a list style type.
-     */
-    isUnstyled: PropTypes.bool,
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Sets the margin separating each ListItem.
-     */
-    itemSpacing: PropTypes.oneOf([
-      'none',
-      'xxx-small',
-      'xx-small',
-      'x-small',
-      'small',
-      'medium',
-      'large',
-      'x-large',
-      'xx-large'
-    ]),
-    elementRef: PropTypes.func
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
     as: 'ul',
     delimiter: 'none',
     isUnstyled: false,
-    margin: undefined,
     size: 'medium',
     itemSpacing: 'none',
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
@@ -135,7 +94,7 @@ class List extends Component<ListProps> {
     return (
       <View
         {...passthroughProps(rest)}
-        css={styles.list}
+        css={styles?.list}
         as={as}
         margin={margin}
         elementRef={elementRef}

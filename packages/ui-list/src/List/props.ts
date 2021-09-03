@@ -22,11 +22,18 @@
  * SOFTWARE.
  */
 
-import type { Spacing } from '@instructure/emotion'
+import PropTypes from 'prop-types'
 
-export type ListProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
+import { ListItem } from './ListItem'
+
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+import React from 'react'
+
+type ListOwnProps = {
+  children?: React.ReactNode // TODO: oneOf([ListItem])
   as?: 'ul' | 'ol'
   delimiter?: 'none' | 'dashed' | 'solid'
   isUnstyled?: boolean
@@ -44,3 +51,61 @@ export type ListProps = {
     | 'xx-large'
   elementRef?: (...args: any[]) => any
 }
+
+type PropKeys = keyof ListOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ListProps = ListOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Only accepts `<List.Item>` as a child
+   */
+  children: ChildrenPropTypes.oneOf([ListItem]),
+  as: PropTypes.oneOf(['ul', 'ol']),
+  /**
+   * One of: none, dashed, solid
+   */
+  delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
+  /**
+   * When set, renders the List Items without a list style type.
+   */
+  isUnstyled: PropTypes.bool,
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Sets the margin separating each ListItem.
+   */
+  itemSpacing: PropTypes.oneOf([
+    'none',
+    'xxx-small',
+    'xx-small',
+    'x-small',
+    'small',
+    'medium',
+    'large',
+    'x-large',
+    'xx-large'
+  ]),
+  elementRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'as',
+  'delimiter',
+  'isUnstyled',
+  'margin',
+  'size',
+  'itemSpacing',
+  'elementRef'
+]
+
+export type { ListProps }
+export { propTypes, allowedProps }

@@ -22,11 +22,16 @@
  * SOFTWARE.
  */
 
-import type { Spacing } from '@instructure/emotion'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type ListItemProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+
+type ListItemOwnProps = {
+  children: React.ReactNode | ((...args: any[]) => React.ReactNode)
   delimiter?: 'none' | 'dashed' | 'solid'
   size?: 'small' | 'medium' | 'large'
   margin?: Spacing
@@ -43,3 +48,58 @@ export type ListItemProps = {
     | 'xx-large'
   elementRef?: (...args: any[]) => any
 }
+
+type PropKeys = keyof ListItemOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ListItemProps = ListItemOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  /**
+   * Inherits delimiter from the parent List component.
+   */
+  delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+   */
+  padding: ThemeablePropTypes.spacing,
+  /**
+   * Inherits itemSpacing from the parent List component
+   */
+  spacing: PropTypes.oneOf([
+    'none',
+    'xxx-small',
+    'xx-small',
+    'x-small',
+    'small',
+    'medium',
+    'large',
+    'x-large',
+    'xx-large'
+  ]),
+  elementRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'delimiter',
+  'size',
+  'margin',
+  'padding',
+  'spacing',
+  'elementRef'
+]
+
+export type { ListItemProps }
+export { propTypes, allowedProps }
