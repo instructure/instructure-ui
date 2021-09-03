@@ -24,16 +24,17 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ModalBodyProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { ModalBodyProps } from './props'
 
 /**
 ---
@@ -46,27 +47,13 @@ id: Modal.Body
 class ModalBody extends Component<ModalBodyProps> {
   static readonly componentId = 'Modal.Body'
 
-  static propTypes = {
-    children: PropTypes.node,
-    padding: ThemeablePropTypes.spacing,
-    elementRef: PropTypes.func,
-    as: PropTypes.elementType,
-    variant: PropTypes.oneOf(['default', 'inverse']),
-    overflow: PropTypes.oneOf(['scroll', 'fit']),
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     padding: 'medium',
     as: 'div',
     variant: 'default',
-    children: null,
-    elementRef: undefined,
-    overflow: undefined
+    children: null
   }
 
   componentDidMount() {
@@ -105,7 +92,7 @@ class ModalBody extends Component<ModalBodyProps> {
         height={isFit ? '100%' : undefined}
         elementRef={elementRef}
         as={as}
-        css={this.props.styles.modalBody}
+        css={this.props.styles?.modalBody}
         padding={padding}
         tabIndex={-1} // prevent FF from focusing view when scrollable
       >

@@ -24,19 +24,17 @@
 
 /** @jsx jsx */
 import { Children, Component, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { withStyle, jsx } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { OtherHTMLAttributes } from '@instructure/shared-types'
 
-import { Metric } from '../Metric'
-
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MetricGroupProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { MetricGroupProps } from './props'
 
 /**
 ---
@@ -51,17 +49,8 @@ class MetricGroup extends Component<
 > {
   static readonly componentId = 'MetricGroup'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * children of type `Metric`
-     */
-    children: ChildrenPropTypes.oneOf([Metric])
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null
   }
@@ -88,7 +77,7 @@ class MetricGroup extends Component<
     return (
       <div
         {...passthroughProps(this.props)}
-        css={this.props.styles.metricGroup}
+        css={this.props.styles?.metricGroup}
         role="grid"
         aria-readonly="true"
       >

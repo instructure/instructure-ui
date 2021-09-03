@@ -22,7 +22,30 @@
  * SOFTWARE.
  */
 
-export type MetricGroupProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { Metric } from '../Metric'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type MetricGroupOwnProps = {
+  /**
+   * children of type `Metric`
+   */
+  children?: React.ReactNode // TODO: oneOf([Metric])
 }
+
+type PropKeys = keyof MetricGroupOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type MetricGroupProps = MetricGroupOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: ChildrenPropTypes.oneOf([Metric])
+}
+
+const allowedProps: AllowedPropKeys = ['children']
+
+export type { MetricGroupProps }
+export { propTypes, allowedProps }

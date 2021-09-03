@@ -22,8 +22,29 @@
  * SOFTWARE.
  */
 
-export type ModalFooterProps = {
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type ModalFooterOwnProps = {
+  children?: React.ReactNode
   variant?: 'default' | 'inverse'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
 }
+
+type PropKeys = keyof ModalFooterOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ModalFooterProps = ModalFooterOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.node,
+  variant: PropTypes.oneOf(['default', 'inverse'])
+}
+
+const allowedProps: AllowedPropKeys = ['children', 'variant']
+
+export type { ModalFooterProps }
+export { propTypes, allowedProps }

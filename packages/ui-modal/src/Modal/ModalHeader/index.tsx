@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import {
   matchComponentTypes,
@@ -36,7 +35,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ModalHeaderProps, ModalHeaderStyleProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { ModalHeaderProps, ModalHeaderStyleProps } from './props'
 
 /**
 ---
@@ -49,16 +50,8 @@ id: Modal.Header
 class ModalHeader extends Component<ModalHeaderProps> {
   static readonly componentId = 'Modal.Header'
 
-  static propTypes = {
-    children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'inverse']),
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
     variant: 'default'
@@ -95,7 +88,7 @@ class ModalHeader extends Component<ModalHeaderProps> {
     const { children, ...rest } = this.props
 
     return (
-      <div css={this.props.styles.modalHeader} {...passthroughProps(rest)}>
+      <div css={this.props.styles?.modalHeader} {...passthroughProps(rest)}>
         {children}
       </div>
     )

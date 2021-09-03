@@ -22,15 +22,46 @@
  * SOFTWARE.
  */
 
-import type { Spacing } from '@instructure/emotion'
-import { AsElementType } from '@instructure/shared-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type ModalBodyProps = {
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+
+type ModalBodyOwnProps = {
+  children?: React.ReactNode
   padding?: Spacing
   elementRef?: (...args: any[]) => any
   as?: AsElementType
   variant?: 'default' | 'inverse'
   overflow?: 'scroll' | 'fit'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
 }
+
+type PropKeys = keyof ModalBodyOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ModalBodyProps = ModalBodyOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.node,
+  padding: ThemeablePropTypes.spacing,
+  elementRef: PropTypes.func,
+  as: PropTypes.elementType,
+  variant: PropTypes.oneOf(['default', 'inverse']),
+  overflow: PropTypes.oneOf(['scroll', 'fit'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'padding',
+  'elementRef',
+  'as',
+  'variant',
+  'overflow'
+]
+
+export type { ModalBodyProps }
+export { propTypes, allowedProps }

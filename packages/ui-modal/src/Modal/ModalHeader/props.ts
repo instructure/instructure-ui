@@ -22,12 +22,33 @@
  * SOFTWARE.
  */
 
-export type ModalHeaderProps = {
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type ModalHeaderOwnProps = {
+  children?: React.ReactNode
   variant?: 'default' | 'inverse'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
 }
 
-export type ModalHeaderStyleProps = {
+type ModalHeaderStyleProps = {
   withCloseButton: boolean
 }
+
+type PropKeys = keyof ModalHeaderOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ModalHeaderProps = ModalHeaderOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.node,
+  variant: PropTypes.oneOf(['default', 'inverse'])
+}
+
+const allowedProps: AllowedPropKeys = []
+
+export type { ModalHeaderProps, ModalHeaderStyleProps }
+export { propTypes, allowedProps }

@@ -24,14 +24,15 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ModalFooterProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { ModalFooterProps } from './props'
 
 /**
 ---
@@ -44,16 +45,8 @@ id: Modal.Footer
 class ModalFooter extends Component<ModalFooterProps> {
   static readonly componentId = 'Modal.Footer'
 
-  static propTypes = {
-    children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'inverse']),
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     variant: 'default',
     children: null
@@ -74,7 +67,7 @@ class ModalFooter extends Component<ModalFooterProps> {
     const { children, ...rest } = this.props
 
     return (
-      <div css={this.props.styles.modalFooter} {...passthroughProps(rest)}>
+      <div css={this.props.styles?.modalFooter} {...passthroughProps(rest)}>
         {children}
       </div>
     )
