@@ -22,11 +22,17 @@
  * SOFTWARE.
  */
 
-import { GridBreakpoints } from '../GridTypes'
+import PropTypes from 'prop-types'
 
-export type GridColProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+import type { GridBreakpoints } from '../GridTypes'
+
+// TODO: get numcols from theme config
+const COL_WIDTHS = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+type GridColOwnProps = {
+  children?: React.ReactNode
   colSpacing?: 'none' | 'small' | 'medium' | 'large'
   rowSpacing?: 'none' | 'small' | 'medium' | 'large'
   textAlign?: 'start' | 'end' | 'center' | 'inherit'
@@ -54,3 +60,66 @@ export type GridColProps = {
   isLastCol?: boolean
   elementRef?: (...args: any[]) => any
 }
+
+type PropKeys = keyof GridColOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type GridColProps = GridColOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.node,
+  colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+  rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+  textAlign: PropTypes.oneOf(['start', 'end', 'center', 'inherit']),
+  hAlign: PropTypes.oneOf([
+    'start',
+    'center',
+    'end',
+    'space-around',
+    'space-between'
+  ]),
+  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
+  startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
+  visualDebug: PropTypes.bool,
+  width: PropTypes.oneOfType([
+    PropTypes.oneOf(COL_WIDTHS),
+    PropTypes.shape({
+      small: PropTypes.oneOf(COL_WIDTHS),
+      medium: PropTypes.oneOf(COL_WIDTHS),
+      large: PropTypes.oneOf(COL_WIDTHS),
+      xLarge: PropTypes.oneOf(COL_WIDTHS)
+    })
+  ]),
+  offset: PropTypes.oneOfType([
+    PropTypes.oneOf(COL_WIDTHS),
+    PropTypes.shape({
+      small: PropTypes.oneOf(COL_WIDTHS),
+      medium: PropTypes.oneOf(COL_WIDTHS),
+      large: PropTypes.oneOf(COL_WIDTHS),
+      xLarge: PropTypes.oneOf(COL_WIDTHS)
+    })
+  ]),
+  isLastRow: PropTypes.bool,
+  isLastCol: PropTypes.bool,
+  elementRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'colSpacing',
+  'rowSpacing',
+  'textAlign',
+  'hAlign',
+  'vAlign',
+  'startAt',
+  'visualDebug',
+  'width',
+  'offset',
+  'isLastRow',
+  'isLastCol',
+  'elementRef'
+]
+
+export type { GridColProps }
+export { propTypes, allowedProps }

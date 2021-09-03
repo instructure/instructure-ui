@@ -23,17 +23,18 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ImgProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { ImgProps } from './props'
 
 /**
 ---
@@ -45,50 +46,9 @@ category: components
 class Img extends Component<ImgProps> {
   static readonly componentId = 'Img'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string,
-    display: PropTypes.oneOf(['inline-block', 'block']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Valid values for `opacity` are `0` - `10`. Valid values for `blend` are
-     * `normal` (default), `multiply`, `screen`, `overlay`, and `color-burn`.
-     */
-    overlay: PropTypes.shape({
-      color: PropTypes.string.isRequired,
-      opacity: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).isRequired,
-      blend: PropTypes.oneOf([
-        'normal',
-        'multiply',
-        'screen',
-        'overlay',
-        'color-burn'
-      ])
-    }),
-    withGrayscale: PropTypes.bool,
-    withBlur: PropTypes.bool,
-    constrain: PropTypes.oneOf(['cover', 'contain']),
-    elementRef: PropTypes.func,
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
-    margin: undefined,
-    overlay: undefined,
-    constrain: undefined,
-    elementRef: undefined,
-    height: undefined,
-    width: undefined,
     alt: '',
     display: 'inline-block',
     withGrayscale: false,
@@ -127,7 +87,7 @@ class Img extends Component<ImgProps> {
     }
 
     const imageProps = {
-      css: styles.img,
+      css: styles?.img,
       src
     }
 
@@ -147,11 +107,11 @@ class Img extends Component<ImgProps> {
       }
 
       return (
-        <View {...rootProps} as="span" css={styles.container}>
+        <View {...rootProps} as="span" css={styles?.container}>
           {
             <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
           }
-          {overlay && <span css={styles.overlay} />}
+          {overlay && <span css={styles?.overlay} />}
         </View>
       )
     } else {

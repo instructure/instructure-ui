@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { omitProps } from '@instructure/ui-react-utils'
 
@@ -32,10 +31,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { GridColProps } from './props'
 
-// TODO: get numcols from theme config
-const COL_WIDTHS = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+import { propTypes, allowedProps } from './props'
+import type { GridColProps } from './props'
 
 /**
 ---
@@ -47,56 +45,13 @@ id: Grid.Col
 class GridCol extends Component<GridColProps> {
   static readonly componentId = 'Grid.Col'
 
-  /* eslint-disable react/require-default-props */
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: PropTypes.node,
-    colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    textAlign: PropTypes.oneOf(['start', 'end', 'center', 'inherit']),
-    hAlign: PropTypes.oneOf([
-      'start',
-      'center',
-      'end',
-      'space-around',
-      'space-between'
-    ]),
-    vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-    startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
-    visualDebug: PropTypes.bool,
-    width: PropTypes.oneOfType([
-      PropTypes.oneOf(COL_WIDTHS),
-      PropTypes.shape({
-        small: PropTypes.oneOf(COL_WIDTHS),
-        medium: PropTypes.oneOf(COL_WIDTHS),
-        large: PropTypes.oneOf(COL_WIDTHS),
-        xLarge: PropTypes.oneOf(COL_WIDTHS)
-      })
-    ]),
-    offset: PropTypes.oneOfType([
-      PropTypes.oneOf(COL_WIDTHS),
-      PropTypes.shape({
-        small: PropTypes.oneOf(COL_WIDTHS),
-        medium: PropTypes.oneOf(COL_WIDTHS),
-        large: PropTypes.oneOf(COL_WIDTHS),
-        xLarge: PropTypes.oneOf(COL_WIDTHS)
-      })
-    ]),
-    isLastRow: PropTypes.bool,
-    isLastCol: PropTypes.bool,
-    elementRef: PropTypes.func
-  }
-  /* eslint-enable react/require-default-props */
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     textAlign: 'inherit',
     children: null,
     isLastCol: false,
-    isLastRow: false,
-    elementRef: undefined
+    isLastRow: false
   }
 
   componentDidMount() {
@@ -116,7 +71,7 @@ class GridCol extends Component<GridColProps> {
     const props = omitProps(this.props, GridCol.propTypes)
 
     return (
-      <span {...props} ref={this.props.elementRef} css={styles.gridCol}>
+      <span {...props} ref={this.props.elementRef} css={styles?.gridCol}>
         {children}
       </span>
     )

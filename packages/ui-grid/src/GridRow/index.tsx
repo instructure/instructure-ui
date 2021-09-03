@@ -24,16 +24,13 @@
 
 /** @jsx jsx */
 import { Component, Children, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import {
   safeCloneElement,
   matchComponentTypes,
   omitProps,
   pickProps
 } from '@instructure/ui-react-utils'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { GridCol } from '../GridCol'
 
@@ -41,7 +38,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { GridRowProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { GridRowProps } from './props'
 
 /**
 ---
@@ -53,29 +52,8 @@ id: Grid.Row
 class GridRow extends Component<GridRowProps> {
   static readonly componentId = 'Grid.Row'
 
-  /* eslint-disable react/require-default-props */
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: ChildrenPropTypes.oneOf([GridCol, ScreenReaderContent]),
-    rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    hAlign: PropTypes.oneOf([
-      'start',
-      'center',
-      'end',
-      'space-around',
-      'space-between'
-    ]),
-    vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-    startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
-    visualDebug: PropTypes.bool,
-    isLastRow: PropTypes.bool
-  }
-  /* eslint-enable react/require-default-props */
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
     isLastRow: false
@@ -116,7 +94,7 @@ class GridRow extends Component<GridRowProps> {
     const props = omitProps(restProps, GridRow.propTypes)
 
     return (
-      <span {...props} css={styles.gridRow}>
+      <span {...props} css={styles?.gridRow}>
         {this.renderChildren()}
       </span>
     )
