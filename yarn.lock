@@ -5815,6 +5815,13 @@ argparse@^2.0.1:
   resolved "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
   integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
 
+aria-hidden@^1.1.2:
+  version "1.1.3"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/aria-hidden/-/aria-hidden-1.1.3.tgz#bb48de18dc84787a3c6eee113709c473c64ec254"
+  integrity sha1-u0jeGNyEeHo8bu4RNwnEc8ZOwlQ=
+  dependencies:
+    tslib "^1.0.0"
+
 aria-query@^4.2.2:
   version "4.2.2"
   resolved "https://registry.npmjs.org/aria-query/-/aria-query-4.2.2.tgz#0d2ca6c9aceb56b8977e9fed6aed7e15bbd2f83b"
@@ -9648,6 +9655,11 @@ detect-newline@^2.1.0:
   resolved "https://registry.npmjs.org/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
   integrity sha1-9B8cEL5LAOh7XxPaaAdZ8sW/0+I=
 
+detect-node-es@^1.1.0:
+  version "1.1.0"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/detect-node-es/-/detect-node-es-1.1.0.tgz#163acdf643330caa0b4cd7c21e7ee7755d6fa493"
+  integrity sha1-FjrN9kMzDKoLTNfCHn7ndV1vpJM=
+
 detect-node@^2.0.4:
   version "2.1.0"
   resolved "https://registry.npmjs.org/detect-node/-/detect-node-2.1.0.tgz#c9c70775a49c3d03bc2c06d9a73be550f978f8b1"
@@ -11639,6 +11651,13 @@ fn.name@1.x.x:
   resolved "https://registry.npmjs.org/fn.name/-/fn.name-1.1.0.tgz#26cad8017967aea8731bc42961d04a3d5988accc"
   integrity sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==
 
+focus-lock@^0.9.1:
+  version "0.9.2"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/focus-lock/-/focus-lock-0.9.2.tgz#9d30918aaa99b1b97677731053d017f82a540d5b"
+  integrity sha1-nTCRiqqZsbl2d3MQU9AX+CpUDVs=
+  dependencies:
+    tslib "^2.0.3"
+
 focus-trap-react@^8.7.0:
   version "8.7.0"
   resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/focus-trap-react/-/focus-trap-react-8.7.0.tgz#5cf7fceb14561ccbb54208958e63422e1116266d"
@@ -12020,6 +12039,11 @@ get-intrinsic@^1.0.2, get-intrinsic@^1.1.0, get-intrinsic@^1.1.1:
     function-bind "^1.1.1"
     has "^1.0.3"
     has-symbols "^1.0.1"
+
+get-nonce@^1.0.0:
+  version "1.0.1"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/get-nonce/-/get-nonce-1.0.1.tgz#fdf3f0278073820d2ce9426c18f07481b1e0cdf3"
+  integrity sha1-/fPwJ4Bzgg0s6UJsGPB0gbHgzfM=
 
 get-own-enumerable-property-symbols@^3.0.0:
   version "3.0.2"
@@ -20097,6 +20121,30 @@ react-fast-compare@^3.0.1, react-fast-compare@^3.2.0:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
+react-focus-lock@^2.5.0, react-focus-lock@^2.5.2:
+  version "2.5.2"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/react-focus-lock/-/react-focus-lock-2.5.2.tgz#f1e4db5e25cd8789351f2bd5ebe91e9dcb9c2922"
+  integrity sha1-8eTbXiXNh4k1HyvV6+kencucKSI=
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    focus-lock "^0.9.1"
+    prop-types "^15.6.2"
+    react-clientside-effect "^1.2.5"
+    use-callback-ref "^1.2.5"
+    use-sidecar "^1.0.5"
+
+react-focus-on@^3.5.2:
+  version "3.5.2"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/react-focus-on/-/react-focus-on-3.5.2.tgz#65cd20e05d8b38248ddc95998780037aff6b4b2b"
+  integrity sha1-Zc0g4F2LOCSN3JWZh4ADev9rSys=
+  dependencies:
+    aria-hidden "^1.1.2"
+    react-focus-lock "^2.5.0"
+    react-remove-scroll "^2.4.1"
+    react-style-singleton "^2.1.1"
+    use-callback-ref "^1.2.5"
+    use-sidecar "^1.0.5"
+
 react-github-corner@^2.1.0:
   version "2.5.0"
   resolved "https://registry.npmjs.org/react-github-corner/-/react-github-corner-2.5.0.tgz#e350d0c69f69c075bc0f1d2a6f1df6ee91da31f2"
@@ -20187,6 +20235,25 @@ react-refresh@^0.8.3:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
 
+react-remove-scroll-bar@^2.1.0:
+  version "2.2.0"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/react-remove-scroll-bar/-/react-remove-scroll-bar-2.2.0.tgz#d4d545a7df024f75d67e151499a6ab5ac97c8cdd"
+  integrity sha1-1NVFp98CT3XWfhUUmaarWsl8jN0=
+  dependencies:
+    react-style-singleton "^2.1.0"
+    tslib "^1.0.0"
+
+react-remove-scroll@^2.4.1:
+  version "2.4.3"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/react-remove-scroll/-/react-remove-scroll-2.4.3.tgz#83d19b02503b04bd8141ed6e0b9e6691a2e935a6"
+  integrity sha1-g9GbAlA7BL2BQe1uC55mkaLpNaY=
+  dependencies:
+    react-remove-scroll-bar "^2.1.0"
+    react-style-singleton "^2.1.0"
+    tslib "^1.0.0"
+    use-callback-ref "^1.2.3"
+    use-sidecar "^1.0.1"
+
 react-router-dom@^4.3.1:
   version "4.3.1"
   resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-4.3.1.tgz#4c2619fc24c4fa87c9fd18f4fb4a43fe63fbd5c6"
@@ -20239,6 +20306,15 @@ react-spring@^8.0.25:
   dependencies:
     "@babel/runtime" "^7.3.1"
     prop-types "^15.5.8"
+
+react-style-singleton@^2.1.0, react-style-singleton@^2.1.1:
+  version "2.1.1"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/react-style-singleton/-/react-style-singleton-2.1.1.tgz#ce7f90b67618be2b6b94902a30aaea152ce52e66"
+  integrity sha1-zn+QtnYYvitrlJAqMKrqFSzlLmY=
+  dependencies:
+    get-nonce "^1.0.0"
+    invariant "^2.2.4"
+    tslib "^1.0.0"
 
 react-syntax-highlighter@^13.5.0, react-syntax-highlighter@^13.5.3:
   version "13.5.3"
@@ -23571,7 +23647,7 @@ tsconfig-paths@^3.11.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
-tslib@^1, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
+tslib@^1, tslib@^1.0.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.14.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
@@ -24244,6 +24320,11 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
+use-callback-ref@^1.2.3, use-callback-ref@^1.2.5:
+  version "1.2.5"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/use-callback-ref/-/use-callback-ref-1.2.5.tgz#6115ed242cfbaed5915499c0a9842ca2912f38a5"
+  integrity sha1-YRXtJCz7rtWRVJnAqYQsopEvOKU=
+
 use-composed-ref@^1.0.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/use-composed-ref/-/use-composed-ref-1.1.0.tgz#9220e4e94a97b7b02d7d27eaeab0b37034438bbc"
@@ -24262,6 +24343,14 @@ use-latest@^1.0.0:
   integrity sha512-d2TEuG6nSLKQLAfW3By8mKr8HurOlTkul0sOpxbClIv4SQ4iOd7BYr7VIzdbktUCnv7dua/60xzd8igMU6jmyw==
   dependencies:
     use-isomorphic-layout-effect "^1.0.0"
+
+use-sidecar@^1.0.1, use-sidecar@^1.0.5:
+  version "1.0.5"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/use-sidecar/-/use-sidecar-1.0.5.tgz#ffff2a17c1df42e348624b699ba6e5c220527f2b"
+  integrity sha1-//8qF8HfQuNIYktpm6blwiBSfys=
+  dependencies:
+    detect-node-es "^1.1.0"
+    tslib "^1.9.3"
 
 use@^3.1.0:
   version "3.1.1"

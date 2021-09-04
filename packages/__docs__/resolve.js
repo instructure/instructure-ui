@@ -199,6 +199,10 @@ module.exports = {
       '../ui-file-drop/src/'
     ),
     '@instructure/ui-heading$': path.resolve(__dirname, '../ui-heading/src/'),
-    '@instructure/emotion$': path.resolve(__dirname, '../emotion/src/')
+    '@instructure/emotion$': path.resolve(__dirname, '../emotion/src/'),
+    '@instructure/ui-focus-manager$': path.resolve(
+      __dirname,
+      '../ui-focus-manager/src/'
+    )
   }
 }

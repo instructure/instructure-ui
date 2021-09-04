@@ -25,7 +25,7 @@
 import React, { useEffect, useState } from 'react'
 // @ts-expect-error ts-migration
 import { v4 as uuidv4 } from 'uuid'
-import FocusTrap from 'focus-trap-react'
+import { FocusOn } from 'react-focus-on'
 // @ts-expect-error ts-migration
 import references from './referenceMap'
 
@@ -65,9 +65,9 @@ const FocusManager = ({ children, onDismiss }) => {
   }, [selfId])
 
   return (
-    <FocusTrap>
+    <FocusOn>
       <div>{children}</div>
-    </FocusTrap>
+    </FocusOn>
   )
 }
 
