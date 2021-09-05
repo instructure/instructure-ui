@@ -35,6 +35,7 @@ import {
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+//@ts-expect-error dunno why it needs this
 import { uid } from '@instructure/uid'
 
 import testable from '@instructure/ui-testable'

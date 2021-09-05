@@ -339,6 +339,7 @@ class Modal extends Component<ModalProps> {
     const dialog = (
       <Dialog
         {...passthroughProps(props)}
+        //@ts-expect-error asd
         as={as}
         open
         label={label}
@@ -352,7 +353,6 @@ class Modal extends Component<ModalProps> {
         onDismiss={onDismiss}
         css={styles.modal}
         ref={this.contentRef}
-        // @ts-expect-error FIXME
         test="Ima modal"
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >
