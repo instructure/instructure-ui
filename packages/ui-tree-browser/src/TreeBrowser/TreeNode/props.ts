@@ -22,9 +22,14 @@
  * SOFTWARE.
  */
 
-import { TreeBrowserButtonProps } from '../TreeButton/props'
+import PropTypes from 'prop-types'
 
-export type TreeBrowserNodeProps = Pick<
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+import type { TreeBrowserButtonProps } from '../TreeButton/props'
+import React from 'react'
+
+export type TreeBrowserNodeOwnProps = Pick<
   TreeBrowserButtonProps,
   | 'id'
   | 'size'
@@ -37,7 +42,51 @@ export type TreeBrowserNodeProps = Pick<
   | 'containerRef'
   | 'onClick'
 > & {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
   onKeyDown?: (...args: any[]) => any
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof TreeBrowserNodeOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TreeBrowserNodeProps = TreeBrowserNodeOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  variant: PropTypes.oneOf(['folderTree', 'indent']),
+  selected: PropTypes.bool,
+  focused: PropTypes.bool,
+  itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  thumbnail: PropTypes.string,
+  level: PropTypes.number,
+  /**
+   * The children to be rendered within the `<TreeNode />`
+   */
+  children: PropTypes.node,
+  /**
+   * A function that returns a reference to the parent li element
+   */
+  containerRef: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onClick: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'id',
+  'size',
+  'variant',
+  'selected',
+  'focused',
+  'itemIcon',
+  'thumbnail',
+  'level',
+  'children',
+  'containerRef',
+  'onKeyDown',
+  'onClick'
+]
+
+export type { TreeBrowserNodeProps }
+export { propTypes, allowedProps }

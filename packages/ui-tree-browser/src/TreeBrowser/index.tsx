@@ -25,13 +25,11 @@
 /** @jsx jsx */
 
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
 
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
-import { controllable } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -41,7 +39,8 @@ import { TreeNode } from './TreeNode'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { TreeBrowserProps } from './props'
+import type { TreeBrowserProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -53,89 +52,8 @@ category: components
 class TreeBrowser extends Component<TreeBrowserProps> {
   static readonly componentId = 'TreeBrowser'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * a normalized hash of collections, keyed by id, that contain an
-     * :id, :name, :items (an array of item ids), :collections (an array of
-     * collection ids), optional :descriptor text, optional :containerRef function,
-     * an optional :renderBeforeItems TreeNode, and an optional :renderAfterItems TreeNode.
-     * Each collection must have a unique id.
-     */
-    collections: PropTypes.object.isRequired,
-    /**
-     * a hash of items, keyed by id, that contain an :id, :name,
-     * optional :descriptor text, and optional :thumbnail url
-     */
-    items: PropTypes.object.isRequired,
-    /**
-     * specifies the id of the root level collection, if present.
-     * if no root is specified, all collections will be rendered
-     * at the top level
-     **/
-    rootId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * an array of expanded collection ids, must be accompanied by an 'onCollectionToggle' prop
-     */
-    expanded: controllable(
-      PropTypes.arrayOf(
-        PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-      ),
-      'onCollectionToggle'
-    ),
-    /**
-     * an array of collection ids to expand by default
-     */
-    defaultExpanded: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    ),
-    // There are 2 types of tree selection:  single and multi.
-    // This is set up to allow for "multi" in the future without having to deprecate the old API.
-    selectionType: PropTypes.oneOf(['none', 'single']),
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    variant: PropTypes.oneOf(['folderTree', 'indent']),
-    collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    collectionIconExpanded: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.func
-    ]),
-    itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * A function called with each item's props as an argument. The return value of this function is a
-     * props object which will be passed to the item when it is rendered. This is useful for situations where
-     * you need to render the item differently depending on it's props. For example, if you would like to
-     * display a different icon for items with a certain name.
-     */
-    getItemProps: PropTypes.func,
-    /**
-     * A function called with each collection's props as an argument. The return value of this function is a
-     * props object which will be passed to the collection when it is rendered. This is useful for situations where
-     * you need to render the collection differently depending on it's props. For example, if you would like to
-     * display a different icon for collections with a certain name.
-     */
-    getCollectionProps: PropTypes.func,
-    /**
-     * whether or not to show the root collection specified in rootId prop or
-     * to begin with its immediate subcollections and items instead
-     */
-    showRootCollection: PropTypes.bool,
-    onCollectionClick: PropTypes.func,
-    onCollectionToggle: PropTypes.func,
-    onItemClick: PropTypes.func,
-    /**
-     * An optional label to assist visually impaired users
-     */
-    treeLabel: PropTypes.string,
-    /**
-     * A function that can be used to customize content in TreeNodes. It gets called for every node
-     * on every render if not null. It should accept 1 parameter that contains the props passed to this node
-     * and return the JSX that should be rendered.
-     */
-    renderContent: PropTypes.func
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     size: 'medium',
@@ -155,11 +73,7 @@ class TreeBrowser extends Component<TreeBrowserProps> {
     // @ts-expect-error ts-migrate(6133) FIXME: 'id' is declared but its value is never read.
     onCollectionClick: function (id, collection) {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'collection' is declared but its value is never re... Remove this comment to see the full error message
-    onCollectionToggle: function (collection) {},
-    rootId: undefined,
-    expanded: undefined,
-    treeLabel: undefined,
-    renderContent: undefined
+    onCollectionToggle: function (collection) {}
   }
 
   static Node = TreeNode
@@ -178,12 +92,10 @@ class TreeBrowser extends Component<TreeBrowserProps> {
     }
   }
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
@@ -466,7 +378,7 @@ class TreeBrowser extends Component<TreeBrowserProps> {
 
     return (
       <ul
-        css={styles.treeBrowser}
+        css={styles?.treeBrowser}
         tabIndex={0}
         role="tree"
         // @ts-expect-error ts-migrate(2322) FIXME: Type '(event: any, node: any) => void' is not assi... Remove this comment to see the full error message
