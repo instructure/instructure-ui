@@ -23,7 +23,6 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Button } from '@instructure/ui-buttons'
 import {
@@ -31,7 +30,6 @@ import {
   IconArrowOpenDownSolid
 } from '@instructure/ui-icons'
 import { Expandable } from '@instructure/ui-expandable'
-import { controllable } from '@instructure/ui-prop-types'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
@@ -40,7 +38,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ToggleDetailsProps, ToggleDetailsStyleProps } from './props'
+import type { ToggleDetailsProps, ToggleDetailsStyleProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -51,51 +50,8 @@ category: components
 @testable()
 class ToggleDetails extends Component<ToggleDetailsProps> {
   static readonly componentId = 'ToggleDetails'
-
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    variant: PropTypes.oneOf(['default', 'filled']),
-    /**
-     * The summary that displays and can be interacted with
-     */
-    summary: PropTypes.node.isRequired,
-    /**
-     * Whether the content is expanded or hidden
-     */
-    expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
-    /**
-     * Whether the content is initially expanded or hidden (uncontrolled)
-     */
-    defaultExpanded: PropTypes.bool,
-    onToggle: PropTypes.func,
-    /**
-     * The icon to display next to the summary text when content is hidden
-     */
-    icon: PropTypes.func,
-    /**
-     * The icon to display when content is expanded
-     */
-    iconExpanded: PropTypes.func,
-    /**
-     * Icon position at the start or end of the summary text
-     */
-    iconPosition: PropTypes.oneOf(['start', 'end']),
-    /**
-     * should the summary fill the width of its container
-     */
-    fluidWidth: PropTypes.bool,
-    /**
-     * The toggleable content passed inside the ToggleDetails component
-     */
-    children: PropTypes.node,
-    /**
-     * Choose a size for the expand/collapse icon
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large'])
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     variant: 'default',
@@ -107,8 +63,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     defaultExpanded: false,
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onToggle: function (event, expanded) {},
-    children: null,
-    expanded: undefined
+    children: null
   }
 
   get focused() {
@@ -122,13 +77,11 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles({ animate: false } as ToggleDetailsStyleProps)
+    this.props.makeStyles?.({ animate: false } as ToggleDetailsStyleProps)
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles({ animate: true } as ToggleDetailsStyleProps)
+    this.props.makeStyles?.({ animate: true } as ToggleDetailsStyleProps)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
@@ -139,9 +92,9 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     const { summary, iconPosition } = this.props
 
     return (
-      <span css={this.props.styles.summary}>
+      <span css={this.props.styles?.summary}>
         {iconPosition === 'start' && this.renderIcon(expanded)}
-        <span css={this.props.styles.summaryText}>{summary}</span>
+        <span css={this.props.styles?.summaryText}>{summary}</span>
         {iconPosition === 'end' && this.renderIcon(expanded)}
       </span>
     )
@@ -173,7 +126,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
       )
     } else if (props.href) {
       return (
-        <a {...props} css={this.props.styles.toggle} ref={this.getButtonRef}>
+        <a {...props} css={this.props.styles?.toggle} ref={this.getButtonRef}>
           {summary}
         </a>
       )
@@ -182,7 +135,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
         <button
           {...props}
           type="button"
-          css={this.props.styles.toggle}
+          css={this.props.styles?.toggle}
           ref={this.getButtonRef}
         >
           {summary}
@@ -196,7 +149,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
 
     return this.props.children ? (
-      <span css={this.props.styles.icon}>
+      <span css={this.props.styles?.icon}>
         {/* @ts-expect-error ts-migrate(2604) FIXME: JSX element type 'Icon' does not have any construc... Remove this comment to see the full error message */}
         <Icon />
       </span>
@@ -208,22 +161,21 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     const { children } = this.props
     const expandedStyles = expanded ? { display: 'block' } : { display: 'none' }
     return (
-      <div {...detailsProps} css={[this.props.styles.details, expandedStyles]}>
+      <div {...detailsProps} css={[this.props.styles?.details, expandedStyles]}>
         {children && expanded && this.renderContent()}
       </div>
     )
   }
 
   renderContent() {
-    return <div css={this.props.styles.content}>{this.props.children}</div>
+    return <div css={this.props.styles?.content}>{this.props.children}</div>
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleToggle = (event, expanded) => {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onToggle(event, expanded)
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles({ animate: true })
+    this.props.makeStyles?.({ animate: true })
   }
 
   render() {
@@ -234,7 +186,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
       >
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
-            <div css={this.props.styles.toggleDetails}>
+            <div css={this.props.styles?.toggleDetails}>
               {this.renderToggle(getToggleProps(), expanded)}
               {this.renderDetails(expanded, getDetailsProps())}
             </div>
