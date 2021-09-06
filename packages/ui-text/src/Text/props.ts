@@ -21,11 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import type { ReactNode } from 'react'
-import { AsElementType } from '@instructure/shared-types'
+import type { PropValidators, AsElementType } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
 
-export type TextProps = {
+type TextOwnProps = {
   as?: AsElementType
   color?:
     | 'primary'
@@ -45,7 +47,65 @@ export type TextProps = {
   transform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase'
   weight?: 'normal' | 'light' | 'bold'
   wrap?: 'normal' | 'break-word'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
-  children?: ReactNode
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof TextOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TextProps = TextOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * the element type to render as
+   */
+  as: PropTypes.elementType,
+  children: PropTypes.node,
+  /**
+   * Color of the text
+   */
+  color: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'brand',
+    'success',
+    'warning',
+    'danger',
+    'alert',
+    'primary-inverse',
+    'secondary-inverse'
+  ]),
+  elementRef: PropTypes.func,
+  fontStyle: PropTypes.oneOf(['italic', 'normal']),
+  letterSpacing: PropTypes.oneOf(['normal', 'condensed', 'expanded']),
+  lineHeight: PropTypes.oneOf(['default', 'fit', 'condensed', 'double']),
+  size: PropTypes.oneOf([
+    'x-small',
+    'small',
+    'medium',
+    'large',
+    'x-large',
+    'xx-large'
+  ]),
+  transform: PropTypes.oneOf(['none', 'capitalize', 'uppercase', 'lowercase']),
+  weight: PropTypes.oneOf(['normal', 'light', 'bold']),
+  wrap: PropTypes.oneOf(['normal', 'break-word'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'as',
+  'children',
+  'color',
+  'elementRef',
+  'fontStyle',
+  'letterSpacing',
+  'lineHeight',
+  'size',
+  'transform',
+  'weight',
+  'wrap'
+]
+
+export type { TextProps }
+export { propTypes, allowedProps }

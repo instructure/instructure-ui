@@ -24,14 +24,14 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TextProps } from './props'
+import type { TextProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -42,75 +42,24 @@ category: components
 class Text extends Component<TextProps> {
   static readonly componentId = 'Text'
 
-  static propTypes = {
-    /**
-     * the element type to render as
-     */
-    as: PropTypes.elementType,
-    children: PropTypes.node,
-    /**
-     * Color of the text
-     */
-    color: PropTypes.oneOf([
-      'primary',
-      'secondary',
-      'brand',
-      'success',
-      'warning',
-      'danger',
-      'alert',
-      'primary-inverse',
-      'secondary-inverse'
-    ]),
-    elementRef: PropTypes.func,
-    fontStyle: PropTypes.oneOf(['italic', 'normal']),
-    letterSpacing: PropTypes.oneOf(['normal', 'condensed', 'expanded']),
-    lineHeight: PropTypes.oneOf(['default', 'fit', 'condensed', 'double']),
-    size: PropTypes.oneOf([
-      'x-small',
-      'small',
-      'medium',
-      'large',
-      'x-large',
-      'xx-large'
-    ]),
-    transform: PropTypes.oneOf([
-      'none',
-      'capitalize',
-      'uppercase',
-      'lowercase'
-    ]),
-    weight: PropTypes.oneOf(['normal', 'light', 'bold']),
-    wrap: PropTypes.oneOf(['normal', 'break-word']),
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  } as const
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span',
     wrap: 'normal',
     size: 'medium',
     letterSpacing: 'normal',
-    children: null,
-    elementRef: undefined,
-    color: undefined,
-    transform: undefined,
-    lineHeight: undefined,
-    fontStyle: undefined,
-    weight: undefined
+    children: null
   } as const
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   render() {
@@ -122,7 +71,7 @@ class Text extends Component<TextProps> {
       <ElementType
         //@ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...passthroughProps(this.props)}
-        css={this.props.styles.text}
+        css={this.props.styles?.text}
         ref={this.props.elementRef}
       >
         {children}
