@@ -24,14 +24,12 @@
 
 /** @jsx jsx */
 import { Component, Children } from 'react'
-import PropTypes from 'prop-types'
 
 import {
   omitProps,
   matchComponentTypes,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { SimpleSelect } from '@instructure/ui-simple-select'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { IconCheckLine } from '@instructure/ui-icons'
@@ -44,7 +42,8 @@ import generateComponentTheme from './theme'
 
 import { Row } from '../Row'
 import { ColHeader } from '../ColHeader'
-import { TableHeadProps } from './props'
+import type { TableHeadProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -56,20 +55,8 @@ id: Table.Head
 class Head extends Component<TableHeadProps> {
   static readonly componentId = 'Table.Head'
 
-  /* eslint-disable react/require-default-props */
-  static propTypes = {
-    /**
-     * `Table.Row`
-     */
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: ChildrenPropTypes.oneOf([Row]),
-    isStacked: PropTypes.bool,
-    renderSortLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-  }
-  /* eslint-enable react/require-default-props */
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null
@@ -92,8 +79,7 @@ class Head extends Component<TableHeadProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
@@ -103,8 +89,7 @@ class Head extends Component<TableHeadProps> {
         '[Table.Head] The `renderSortLabel` prop should be provided when Table is sortable.'
       )
     }
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   renderSelect() {
@@ -198,7 +183,7 @@ class Head extends Component<TableHeadProps> {
     return isStacked ? (
       this.renderSelect()
     ) : (
-      <thead {...omitProps(this.props, Head.propTypes)} css={styles.head}>
+      <thead {...omitProps(this.props, Head.propTypes)} css={styles?.head}>
         {Children.map(children, (child) =>
           matchComponentTypes(child, [Row]) ? child : null
         )}

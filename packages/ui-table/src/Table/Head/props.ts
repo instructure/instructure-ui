@@ -22,9 +22,40 @@
  * SOFTWARE.
  */
 
-export type TableHeadProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+
+import { Row } from '../Row'
+
+import { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type TableHeadOwnProps = {
   isStacked?: boolean
   renderSortLabel?: React.ReactNode | ((...args: any[]) => any)
+  children?: React.ReactNode
 }
+type PropKeys = keyof TableHeadOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TableHeadProps = TableHeadOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * `Table.Row`
+   */
+  children: ChildrenPropTypes.oneOf([Row]),
+  isStacked: PropTypes.bool,
+  renderSortLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'isStacked',
+  'renderSortLabel'
+]
+
+export type { TableHeadProps }
+export { propTypes, allowedProps }

@@ -469,7 +469,7 @@ class Tabs extends Component<TabsProps> {
         css={styles?.container}
       >
         <Focusable ref={this.handleFocusableRef}>
-          {({ focusVisible: any }) => (
+          {({ focusVisible }) => (
             <View
               as="div"
               position="relative"

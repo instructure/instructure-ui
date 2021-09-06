@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -33,7 +32,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TableCellProps } from './props'
+import type { TableCellProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -45,21 +45,8 @@ id: Table.Cell
 class Cell extends Component<TableCellProps> {
   static readonly componentId = 'Table.Cell'
 
-  /* eslint-disable react/require-default-props */
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    isStacked: PropTypes.bool,
-    header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Control the text alignment in cell
-     */
-    textAlign: PropTypes.oneOf(['start', 'center', 'end'])
-  }
-  /* eslint-enable react/require-default-props */
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     textAlign: 'start',
@@ -67,14 +54,11 @@ class Cell extends Component<TableCellProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   render() {
@@ -84,7 +68,7 @@ class Cell extends Component<TableCellProps> {
       <View
         {...View.omitViewProps(omitProps(this.props, Cell.propTypes), Cell)}
         as={isStacked ? 'div' : 'td'}
-        css={styles.cell}
+        css={styles?.cell}
         role={isStacked ? 'cell' : undefined}
       >
         {header && callRenderProp(header)}

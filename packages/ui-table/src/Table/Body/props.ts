@@ -21,11 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { Row } from '../Row'
 
-export type TableBodyProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type TableBodyOwnProps = {
   hover?: boolean
   isStacked?: boolean
   headers?: (React.ReactNode | ((...args: any[]) => any))[]
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof TableBodyOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TableBodyProps = TableBodyOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * `Table.Row`
+   */
+  children: ChildrenPropTypes.oneOf([Row]),
+  hover: PropTypes.bool,
+  isStacked: PropTypes.bool,
+  headers: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  )
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'hover',
+  'isStacked',
+  'headers'
+]
+
+export type { TableBodyProps }
+export { propTypes, allowedProps }

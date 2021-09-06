@@ -21,15 +21,74 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type TableColHeaderProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type TableColHeaderOwnProps = {
   id: string
-  stackedSortByLabel: string
+  stackedSortByLabel?: string
   width?: string | number
   textAlign?: 'start' | 'center' | 'end'
   sortDirection?: 'none' | 'ascending' | 'descending'
   onRequestSort?: (...args: any[]) => any
   scope?: 'row' | 'col' | 'rowgroup' | 'colgroup' | 'auto'
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof TableColHeaderOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TableColHeaderProps = TableColHeaderOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * A unique id for this column. The `id` is also used as option in combobox,
+   * when sortable table is in stacked layout,
+   * and no `stackedSortByLabel` is provided.
+   */
+  id: PropTypes.string.isRequired,
+  /**
+   * A custom string to display as option text in the combobox (instead of
+   * using the `id` prop), when sortable table is in stacked layout.
+   */
+  stackedSortByLabel: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Control the width of column.
+   */
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Control the text alignment in column header
+   */
+  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
+   * The string of sorting direction
+   */
+  sortDirection: PropTypes.oneOf(['none', 'ascending', 'descending']),
+  /**
+   * Callback fired when column header is clicked. Parameters: `(event, { id })`
+   */
+  onRequestSort: PropTypes.func,
+  /**
+   * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
+   */
+  scope: PropTypes.oneOf(['row', 'col', 'rowgroup', 'colgroup', 'auto'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'id',
+  'stackedSortByLabel',
+  'children',
+  'width',
+  'textAlign',
+  'sortDirection',
+  'onRequestSort',
+  'scope'
+]
+
+export type { TableColHeaderProps }
+export { propTypes, allowedProps }
