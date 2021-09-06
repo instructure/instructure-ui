@@ -24,18 +24,16 @@
 
 /** @jsx jsx */
 import { Component, Children, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
 import {
   matchComponentTypes,
   safeCloneElement,
   omitProps
 } from '@instructure/ui-react-utils'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -46,7 +44,8 @@ import { Row } from './Row'
 import { ColHeader } from './ColHeader'
 import { RowHeader } from './RowHeader'
 import { Cell } from './Cell'
-import { TableProps } from './props'
+import type { TableProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -57,48 +56,13 @@ category: components
 class Table extends Component<TableProps> {
   static readonly componentId = 'Table'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * Provide a screen reader friendly description. Anything passed to this
-     * prop will be wrapped by `<ScreenReaderContent>` when it is rendered.
-     */
-    caption: PropTypes.node.isRequired,
-    /**
-     * Build table via `Table.Head` and `Table.Body`
-     */
-    children: ChildrenPropTypes.oneOf([Head, Body]),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Provide a reference to the underlying html element
-     */
-    elementRef: PropTypes.func,
-    /**
-     * Highlight each row on hover
-     */
-    hover: PropTypes.bool,
-    /**
-     * `auto` lets the browser determine table column widths based on cell content,
-     * while `fixed` forces columns of equal width. `stacked` renders table in one
-     * column to be more readable on narrow screens
-     */
-    layout: PropTypes.oneOf(['auto', 'fixed', 'stacked'])
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
     hover: false,
-    layout: 'auto',
-    margin: undefined,
-    elementRef: undefined
+    layout: 'auto'
   }
 
   static Head = Head
@@ -109,14 +73,11 @@ class Table extends Component<TableProps> {
   static Cell = Cell
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   getHeaders() {
@@ -158,7 +119,7 @@ class Table extends Component<TableProps> {
         as={isStacked ? 'div' : 'table'}
         margin={margin}
         elementRef={elementRef}
-        css={styles.table}
+        css={styles?.table}
         role={isStacked ? 'table' : undefined}
         aria-label={isStacked ? (caption as string) : undefined}
       >

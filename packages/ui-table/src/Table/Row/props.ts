@@ -22,10 +22,48 @@
  * SOFTWARE.
  */
 
-export type TableRowProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+import { ColHeader } from '../ColHeader'
+import { RowHeader } from '../RowHeader'
+import { Cell } from '../Cell'
+
+type TableRowOwnProps = {
   hover?: boolean
   isStacked?: boolean
   headers?: (React.ReactNode | ((...args: any[]) => any))[]
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof TableRowOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TableRowProps = TableRowOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * `Table.ColHeader`, `Table.RowHeader` or `Table.Cell`
+   */
+  children: ChildrenPropTypes.oneOf([ColHeader, RowHeader, Cell]),
+  hover: PropTypes.bool,
+  isStacked: PropTypes.bool,
+  headers: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  )
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'hover',
+  'isStacked',
+  'headers'
+]
+
+export type { TableRowProps }
+export { propTypes, allowedProps }

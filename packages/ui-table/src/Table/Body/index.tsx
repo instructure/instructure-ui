@@ -24,21 +24,20 @@
 
 /** @jsx jsx */
 import { Component, Children, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
 import {
   matchComponentTypes,
   safeCloneElement,
   omitProps
 } from '@instructure/ui-react-utils'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { Row } from '../Row'
-import { TableBodyProps } from './props'
+import type { TableBodyProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -50,37 +49,20 @@ id: Table.Body
 class Body extends Component<TableBodyProps> {
   static readonly componentId = 'Table.Body'
 
-  /* eslint-disable react/require-default-props */
-  static propTypes = {
-    /**
-     * `Table.Row`
-     */
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: ChildrenPropTypes.oneOf([Row]),
-    hover: PropTypes.bool,
-    isStacked: PropTypes.bool,
-    headers: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-    )
-  }
-  /* eslint-enable react/require-default-props */
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   render() {
@@ -90,7 +72,7 @@ class Body extends Component<TableBodyProps> {
       <View
         {...View.omitViewProps(omitProps(this.props, Body.propTypes), Body)}
         as={isStacked ? 'div' : 'tbody'}
-        css={styles.body}
+        css={styles?.body}
         role={isStacked ? 'rowgroup' : undefined}
       >
         {Children.map(children, (child) =>

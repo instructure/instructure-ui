@@ -22,9 +22,34 @@
  * SOFTWARE.
  */
 
-export type TableRowHeaderProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type TableRowHeaderOwnProps = {
   isStacked?: boolean
   textAlign?: 'start' | 'center' | 'end'
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof TableRowHeaderOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TableRowHeaderProps = TableRowHeaderOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  isStacked: PropTypes.bool,
+  /**
+   * Control the text alignment in row header
+   */
+  textAlign: PropTypes.oneOf(['start', 'center', 'end'])
+}
+
+const allowedProps: AllowedPropKeys = ['children', 'isStacked', 'textAlign']
+
+export type { TableRowHeaderProps }
+export { propTypes, allowedProps }

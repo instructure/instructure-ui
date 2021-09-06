@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import {
@@ -36,7 +35,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TableColHeaderProps } from './props'
+import type { TableColHeaderProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -48,64 +48,22 @@ id: Table.ColHeader
 class ColHeader extends Component<TableColHeaderProps> {
   static readonly componentId = 'Table.ColHeader'
 
-  /* eslint-disable react/require-default-props */
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * A unique id for this column. The `id` is also used as option in combobox,
-     * when sortable table is in stacked layout,
-     * and no `stackedSortByLabel` is provided.
-     */
-    id: PropTypes.string.isRequired,
-    /**
-     * A custom string to display as option text in the combobox (instead of
-     * using the `id` prop), when sortable table is in stacked layout.
-     */
-    stackedSortByLabel: PropTypes.string,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Control the width of column.
-     */
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * Control the text alignment in column header
-     */
-    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-    /**
-     * The string of sorting direction
-     */
-    sortDirection: PropTypes.oneOf(['none', 'ascending', 'descending']),
-    /**
-     * Callback fired when column header is clicked. Parameters: `(event, { id })`
-     */
-    onRequestSort: PropTypes.func,
-    /**
-     * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
-     */
-    scope: PropTypes.oneOf(['row', 'col', 'rowgroup', 'colgroup', 'auto'])
-  }
-  /* eslint-enable react/require-default-props */
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     textAlign: 'start',
     sortDirection: 'none',
-    stackedSortByLabel: undefined,
     children: null,
     scope: 'col'
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
@@ -147,7 +105,7 @@ class ColHeader extends Component<TableColHeaderProps> {
     return (
       <th
         {...omitProps(this.props, ColHeader.propTypes)}
-        css={styles.colHeader}
+        css={styles?.colHeader}
         style={{
           width
         }}
@@ -155,7 +113,7 @@ class ColHeader extends Component<TableColHeaderProps> {
         aria-sort={sortDirection}
       >
         {onRequestSort && (
-          <button onClick={this.handleClick} css={styles.button}>
+          <button onClick={this.handleClick} css={styles?.button}>
             <div>
               {callRenderProp(children)}
               {this.renderSortArrow()}

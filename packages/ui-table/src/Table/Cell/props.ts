@@ -22,10 +22,40 @@
  * SOFTWARE.
  */
 
-export type TableCellProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import type { WithStyleProps } from '@instructure/emotion'
+import { PropValidators } from '@instructure/shared-types'
+
+type TableCellOwnProps = {
   isStacked?: boolean
   header?: React.ReactNode | ((...args: any[]) => any)
   textAlign?: 'start' | 'center' | 'end'
+  children?: React.ReactNode
 }
+type PropKeys = keyof TableCellOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TableCellProps = TableCellOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  isStacked: PropTypes.bool,
+  header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Control the text alignment in cell
+   */
+  textAlign: PropTypes.oneOf(['start', 'center', 'end'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'isStacked',
+  'header',
+  'textAlign'
+]
+
+export type { TableCellProps }
+export { propTypes, allowedProps }

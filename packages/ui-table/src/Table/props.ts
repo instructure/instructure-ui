@@ -21,15 +21,65 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
 
-import type { Spacing } from '@instructure/emotion'
+import PropTypes from 'prop-types'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
-export type TableProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+
+import { Head } from './Head'
+import { Body } from './Body'
+type TableOwnProps = {
   caption: React.ReactNode
   margin?: Spacing
   elementRef?: (...args: any[]) => any
   hover?: boolean
   layout?: 'auto' | 'fixed' | 'stacked'
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof TableOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TableProps = TableOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Provide a screen reader friendly description. Anything passed to this
+   * prop will be wrapped by `<ScreenReaderContent>` when it is rendered.
+   */
+  caption: PropTypes.node.isRequired,
+  /**
+   * Build table via `Table.Head` and `Table.Body`
+   */
+  children: ChildrenPropTypes.oneOf([Head, Body]),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Provide a reference to the underlying html element
+   */
+  elementRef: PropTypes.func,
+  /**
+   * Highlight each row on hover
+   */
+  hover: PropTypes.bool,
+  /**
+   * `auto` lets the browser determine table column widths based on cell content,
+   * while `fixed` forces columns of equal width. `stacked` renders table in one
+   * column to be more readable on narrow screens
+   */
+  layout: PropTypes.oneOf(['auto', 'fixed', 'stacked'])
+}
+
+const allowedProps: AllowedPropKeys = []
+
+export type { TableProps }
+export { propTypes, allowedProps }
