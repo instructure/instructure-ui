@@ -23,7 +23,6 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import {
   omitProps,
@@ -33,7 +32,6 @@ import {
 import { IconButton } from '@instructure/ui-buttons'
 import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
-import { controllable } from '@instructure/ui-prop-types'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
@@ -42,7 +40,8 @@ import {
   IconArrowOpenDownSolid
 } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
-import { ToggleGroupProps } from './props'
+import type { ToggleGroupProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -53,62 +52,10 @@ category: components
 class ToggleGroup extends Component<ToggleGroupProps> {
   static readonly componentId = 'ToggleGroup'
 
-  static propTypes = {
-    /**
-     * the content to show and hide
-     */
-    children: PropTypes.node.isRequired,
-    /**
-     * the content area next to the toggle button
-     */
-    summary: PropTypes.node.isRequired,
-    /**
-     * provides a screenreader label for the toggle button
-     * (takes `expanded` as an argument if a function)
-     */
-    toggleLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-      .isRequired,
-    /**
-     * the element type to render as
-     */
-    as: PropTypes.elementType,
-    /**
-     * provides a reference to the underlying html root element
-     */
-    elementRef: PropTypes.func,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Whether the content is expanded or hidden
-     */
-    expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
-    /**
-     * Whether the content is initially expanded or hidden (uncontrolled)
-     */
-    defaultExpanded: PropTypes.bool,
-    /**
-     * Fired when the content display is toggled
-     */
-    onToggle: PropTypes.func,
-    /**
-     * The icon displayed in the toggle button when the content is hidden
-     */
-    icon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * The icon displayed in the toggle button when the content is showing
-     */
-    iconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Transition content into view
-     */
-    transition: PropTypes.bool,
-    /**
-     * Toggle the border around the component
-     */
-    border: PropTypes.bool
-  } as const
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
-    expanded: undefined,
     size: 'medium',
     icon: IconArrowOpenEndSolid,
     iconExpanded: IconArrowOpenDownSolid,
@@ -160,7 +107,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
         withBackground={false}
         withBorder={false}
         size={size === 'large' ? 'medium' : 'small'}
-        elementRef={(el) => {
+        elementRef={(el: any) => {
           this._button = el
         }}
         screenReaderLabel={label}
