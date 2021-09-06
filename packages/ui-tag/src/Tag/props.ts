@@ -21,12 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import PropTypes from 'prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing } from '@instructure/emotion'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
 
-export type TagProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type TagOwnProps = {
   className?: string
   text: string | React.ReactNode
   title?: string
@@ -39,3 +40,57 @@ export type TagProps = {
   size?: 'small' | 'medium' | 'large'
   variant?: 'default' | 'inline'
 }
+
+type PropKeys = keyof TagOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TagProps = TagOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  className: PropTypes.string,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  title: PropTypes.string,
+  /**
+   * Whether or not to disable the tag
+   */
+  disabled: PropTypes.bool,
+  /**
+   * Works just like disabled but keeps the same styles as if it were active
+   */
+  readOnly: PropTypes.bool,
+  dismissible: PropTypes.bool,
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * If you add an onClick prop, Tag renders as a clickable button
+   */
+  onClick: PropTypes.func,
+  /**
+   * Provides a reference to the underlying html root element
+   */
+  elementRef: PropTypes.func,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  variant: PropTypes.oneOf(['default', 'inline'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'className',
+  'text',
+  'title',
+  'disabled',
+  'readOnly',
+  'dismissible',
+  'margin',
+  'onClick',
+  'elementRef',
+  'size',
+  'variant'
+]
+
+export type { TagProps }
+export { propTypes, allowedProps }
