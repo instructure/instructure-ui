@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { Img } from '@instructure/ui-img'
@@ -33,7 +32,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { TreeBrowserButtonProps } from './props'
+import type { TreeBrowserButtonProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -49,33 +49,8 @@ id: TreeBrowser.Button
 class TreeButton extends Component<TreeBrowserButtonProps> {
   static readonly componentId = 'TreeBrowser.Button'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    name: PropTypes.string,
-    descriptor: PropTypes.string,
-    type: PropTypes.string,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    variant: PropTypes.oneOf(['folderTree', 'indent']),
-    collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    collectionIconExpanded: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.func
-    ]),
-    itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    thumbnail: PropTypes.string,
-    onClick: PropTypes.func,
-    expanded: PropTypes.bool,
-    selected: PropTypes.bool,
-    focused: PropTypes.bool,
-    level: PropTypes.number,
-    containerRef: PropTypes.func,
-    renderContent: PropTypes.func
-  }
-
+  static allowedProps = allowedProps
+  static propTypes = propTypes
   static defaultProps = {
     type: 'treeButton',
     size: 'medium',
@@ -97,12 +72,10 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -147,7 +120,7 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
 
     if (collectionIcon || collectionIconExpanded) {
       return (
-        <div css={styles.icon}>
+        <div css={styles?.icon}>
           {callRenderProp(expanded ? collectionIconExpanded : collectionIcon)}
         </div>
       )
@@ -160,14 +133,14 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
 
     if (thumbnail) {
       return (
-        <div css={styles.thumbnail}>
+        <div css={styles?.thumbnail}>
           <Img src={thumbnail} constrain="cover" alt="" />
         </div>
       )
     }
 
     if (itemIcon) {
-      return <div css={styles.icon}>{callRenderProp(itemIcon)}</div>
+      return <div css={styles?.icon}>{callRenderProp(itemIcon)}</div>
     }
   }
 
@@ -188,7 +161,7 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
         ref={this.handleRef}
         tabIndex={-1}
         type="button"
-        css={styles.treeButton}
+        css={styles?.treeButton}
       >
         {buttonContent}
       </button>

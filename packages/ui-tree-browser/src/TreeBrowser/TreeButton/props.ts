@@ -23,10 +23,12 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export type TreeBrowserButtonProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { WithStyleProps } from '@instructure/emotion'
+import { PropValidators } from '@instructure/shared-types'
+
+export type TreeBrowserButtonOwnProps = {
   id?: string | number
   name?: string
   descriptor?: string
@@ -45,3 +47,52 @@ export type TreeBrowserButtonProps = {
   containerRef?: (...args: any[]) => any // TODO: function () {}
   renderContent?: (...args: any[]) => any // TODO: function () {}
 }
+
+type PropKeys = keyof TreeBrowserButtonOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TreeBrowserButtonProps = TreeBrowserButtonOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  name: PropTypes.string,
+  descriptor: PropTypes.string,
+  type: PropTypes.string,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  variant: PropTypes.oneOf(['folderTree', 'indent']),
+  collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  collectionIconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  thumbnail: PropTypes.string,
+  onClick: PropTypes.func,
+  expanded: PropTypes.bool,
+  selected: PropTypes.bool,
+  focused: PropTypes.bool,
+  level: PropTypes.number,
+  containerRef: PropTypes.func,
+  renderContent: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'id',
+  'name',
+  'descriptor',
+  'type',
+  'size',
+  'variant',
+  'collectionIcon',
+  'collectionIconExpanded',
+  'itemIcon',
+  'thumbnail',
+  'onClick',
+  'expanded',
+  'selected',
+  'focused',
+  'level',
+  'containerRef',
+  'renderContent'
+]
+
+export type { TreeBrowserButtonProps }
+export { propTypes, allowedProps }

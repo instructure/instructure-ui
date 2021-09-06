@@ -26,19 +26,17 @@
 /** @jsxFrag React.Fragment */
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import { safeCloneElement } from '@instructure/ui-react-utils'
-import { Children } from '@instructure/ui-prop-types'
 
 import { TreeButton } from '../TreeButton'
-import { TreeNode } from '../TreeNode'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { TreeBrowserCollectionProps } from './props'
+import type { TreeBrowserCollectionProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -52,46 +50,8 @@ id: TreeBrowser.Collection
 class TreeCollection extends Component<TreeBrowserCollectionProps> {
   static readonly componentId = 'TreeBrowser.Collection'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    name: PropTypes.string,
-    descriptor: PropTypes.string,
-    items: PropTypes.array,
-    collections: PropTypes.array,
-    expanded: PropTypes.bool,
-    selection: PropTypes.string,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    variant: PropTypes.oneOf(['folderTree', 'indent']),
-    collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    collectionIconExpanded: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.func
-    ]),
-    itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    getItemProps: PropTypes.func,
-    getCollectionProps: PropTypes.func,
-    onItemClick: PropTypes.func,
-    onCollectionClick: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    numChildren: PropTypes.number,
-    level: PropTypes.number,
-    position: PropTypes.number,
-    /**
-     * children of type TreeNode
-     */
-    renderBeforeItems: Children.oneOf([TreeNode]),
-    /**
-     * children of type TreeNode
-     */
-    renderAfterItems: Children.oneOf([TreeNode]),
-    containerRef: PropTypes.func,
-    isCollectionFlattened: PropTypes.bool,
-    renderContent: PropTypes.func
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     collections: [],
@@ -131,12 +91,10 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   get itemsLevel() {
@@ -267,7 +225,7 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
       <li
         id={key}
         role="treeitem"
-        css={styles.item}
+        css={styles?.item}
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
         tabIndex="-1"
         key={key}
@@ -364,7 +322,7 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
         tabIndex="-1"
         role="treeitem"
         aria-label={item.name}
-        css={styles.item}
+        css={styles?.item}
         aria-level={this.itemsLevel}
         aria-posinset={position}
         aria-setsize={this.childCount}
@@ -434,7 +392,7 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
       this.renderChildren()
     ) : (
       <li
-        css={styles.treeCollection}
+        css={styles?.treeCollection}
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
         tabIndex="-1"
         role="treeitem"
@@ -453,7 +411,7 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
       >
         <TreeButton {...collectionProps} />
         {expanded && this.childCount > 0 && (
-          <ul aria-label={name} css={styles.list} role="group">
+          <ul aria-label={name} css={styles?.list} role="group">
             {this.renderChildren()}
           </ul>
         )}
