@@ -24,17 +24,17 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TabsPanelProps } from './props'
+import type { TabsPanelProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -46,36 +46,12 @@ id: Tabs.Panel
 class Panel extends Component<TabsPanelProps> {
   static readonly componentId = 'Tabs.Panel'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * The content that will be rendered in the corresponding <Tab /> and will label
-     * this `<Tabs.Panel />` for screen readers
-     */
-    renderTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-      .isRequired,
-    children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'secondary']),
-    isSelected: PropTypes.bool,
-    isDisabled: PropTypes.bool,
-    maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    id: PropTypes.string,
-    labelledBy: PropTypes.string,
-    padding: ThemeablePropTypes.spacing,
-    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-    elementRef: PropTypes.func
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
-    id: undefined,
     isDisabled: false,
-    maxHeight: undefined,
-    minHeight: undefined,
     textAlign: 'start',
     variant: 'default',
     labelledBy: null,
@@ -86,14 +62,12 @@ class Panel extends Component<TabsPanelProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   render() {
@@ -117,7 +91,7 @@ class Panel extends Component<TabsPanelProps> {
     return (
       <div
         {...passthroughProps(props)}
-        css={styles.panel}
+        css={styles?.panel}
         role="tabpanel"
         id={id}
         aria-labelledby={labelledBy}
@@ -131,7 +105,7 @@ class Panel extends Component<TabsPanelProps> {
           transitionExit={false}
         >
           <View
-            css={styles.content}
+            css={styles?.content}
             maxHeight={maxHeight}
             minHeight={minHeight}
             as="div"

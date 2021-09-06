@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
@@ -33,7 +32,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TabsTabProps } from './props'
+import type { TabsTabProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -45,21 +45,8 @@ id: Tabs.Tab
 class Tab extends Component<TabsTabProps> {
   static readonly componentId = 'Tabs.Tab'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    variant: PropTypes.oneOf(['default', 'secondary']),
-    id: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
-    controls: PropTypes.string.isRequired,
-    isDisabled: PropTypes.bool,
-    isSelected: PropTypes.bool,
-    onClick: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
@@ -73,14 +60,12 @@ class Tab extends Component<TabsTabProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
@@ -127,7 +112,7 @@ class Tab extends Component<TabsTabProps> {
         id={id}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        css={styles.tab}
+        css={styles?.tab}
         aria-selected={isSelected ? 'true' : undefined}
         aria-disabled={isDisabled ? 'true' : undefined}
         aria-controls={controls}

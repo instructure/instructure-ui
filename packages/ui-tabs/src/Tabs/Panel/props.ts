@@ -22,11 +22,15 @@
  * SOFTWARE.
  */
 
-import type { Spacing } from '@instructure/emotion'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type TabsPanelProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import { PropValidators } from '@instructure/shared-types'
+
+type TabsPanelOwnProps = {
   renderTitle: React.ReactNode | ((...args: any[]) => any)
   variant?: 'default' | 'secondary'
   isSelected?: boolean
@@ -38,4 +42,48 @@ export type TabsPanelProps = {
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
   elementRef?: (...args: any[]) => any
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof TabsPanelOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TabsPanelProps = TabsPanelOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The content that will be rendered in the corresponding <Tab /> and will label
+   * this `<Tabs.Panel />` for screen readers
+   */
+  renderTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  children: PropTypes.node,
+  variant: PropTypes.oneOf(['default', 'secondary']),
+  isSelected: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.string,
+  labelledBy: PropTypes.string,
+  padding: ThemeablePropTypes.spacing,
+  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  elementRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'renderTitle',
+  'children',
+  'variant',
+  'isSelected',
+  'isDisabled',
+  'maxHeight',
+  'minHeight',
+  'id',
+  'labelledBy',
+  'padding',
+  'textAlign',
+  'elementRef'
+]
+
+export type { TabsPanelProps }
+export { propTypes, allowedProps }

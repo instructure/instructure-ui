@@ -21,10 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type TabsTabProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type TabsTabOwnProps = {
   variant?: 'default' | 'secondary'
   id: string
   index: number
@@ -33,4 +36,38 @@ export type TabsTabProps = {
   isSelected?: boolean
   onClick?: (...args: any[]) => any
   onKeyDown?: (...args: any[]) => any
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof TabsTabOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TabsTabProps = TabsTabOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  variant: PropTypes.oneOf(['default', 'secondary']),
+  id: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  controls: PropTypes.string.isRequired,
+  isDisabled: PropTypes.bool,
+  isSelected: PropTypes.bool,
+  onClick: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'variant',
+  'id',
+  'index',
+  'controls',
+  'isDisabled',
+  'isSelected',
+  'onClick',
+  'onKeyDown',
+  'children'
+]
+
+export type { TabsTabProps }
+export { propTypes, allowedProps }
