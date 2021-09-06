@@ -21,13 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Children } from '@instructure/ui-prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
+import { Panel } from './Panel'
 
-import type { Spacing } from '@instructure/emotion'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 
-export type TabsOwnProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type TabsOwnProps = {
   variant?: 'default' | 'secondary'
   screenReaderLabel?: string
   onRequestTabChange?: (...args: any[]) => any
@@ -40,6 +44,68 @@ export type TabsOwnProps = {
   elementRef?: (...args: any[]) => any
   tabOverflow?: 'stack' | 'scroll'
   shouldFocusOnRender?: boolean
+  children?: React.ReactNode
+}
+type TabsProps = TabsOwnProps & BidirectionalProps & WithStyleProps
+
+type PropKeys = keyof TabsOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * children of type `Tabs.Panel`
+   */
+  children: Children.oneOf([Panel, null]),
+  variant: PropTypes.oneOf(['default', 'secondary']),
+  /**
+   * A screen ready only label for the list of tabs
+   */
+  screenReaderLabel: PropTypes.string,
+  /**
+   * Called when the selected tab should change
+   */
+  onRequestTabChange: PropTypes.func,
+  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+   */
+  padding: ThemeablePropTypes.spacing,
+  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  elementRef: PropTypes.func,
+  /**
+   * Choose whether Tabs should stack or scroll when they exceed the width of their
+   * container.
+   */
+  tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
+  shouldFocusOnRender: PropTypes.bool
 }
 
-export type TabsProps = TabsOwnProps & BidirectionalProps
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'variant',
+  'screenReaderLabel',
+  'onRequestTabChange',
+  'maxWidth',
+  'maxHeight',
+  'minHeight',
+  'margin',
+  'padding',
+  'textAlign',
+  'elementRef',
+  'tabOverflow',
+  'shouldFocusOnRender'
+]
+
+export type { TabsProps }
+export { propTypes, allowedProps }

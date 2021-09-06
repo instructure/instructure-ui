@@ -24,12 +24,10 @@
 
 /** @jsx jsx */
 import React, { Component, createElement } from 'react'
-import PropTypes from 'prop-types'
 
 import keycode from 'keycode'
 
 import { View } from '@instructure/ui-view'
-import { Children } from '@instructure/ui-prop-types'
 import {
   matchComponentTypes,
   safeCloneElement,
@@ -44,14 +42,15 @@ import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { Tab } from './Tab'
 import { Panel } from './Panel'
-import { TabsProps } from './props'
+import type { TabsProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -64,64 +63,15 @@ category: components
 class Tabs extends Component<TabsProps> {
   static readonly componentId = 'Tabs'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * children of type `Tabs.Panel`
-     */
-    children: Children.oneOf([Panel, null]),
-    variant: PropTypes.oneOf(['default', 'secondary']),
-    /**
-     * A screen ready only label for the list of tabs
-     */
-    screenReaderLabel: PropTypes.string,
-    /**
-     * Called when the selected tab should change
-     */
-    onRequestTabChange: PropTypes.func,
-    maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-     */
-    padding: ThemeablePropTypes.spacing,
-    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-    elementRef: PropTypes.func,
-    /**
-     * Choose whether Tabs should stack or scroll when they exceed the width of their
-     * container.
-     */
-    tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
-    shouldFocusOnRender: PropTypes.bool,
-    // eslint-disable-next-line react/require-default-props
-    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     variant: 'default',
-    padding: undefined,
-    textAlign: undefined,
-    maxWidth: undefined,
-    maxHeight: undefined,
-    minHeight: undefined,
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestTabChange: (event, { index, id }) => {},
-    margin: undefined,
     children: null,
     elementRef: () => {},
-    screenReaderLabel: undefined,
     shouldFocusOnRender: false,
     tabOverflow: 'stack'
   }
@@ -153,8 +103,7 @@ class Tabs extends Component<TabsProps> {
       this.focus()
     }
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
@@ -202,8 +151,7 @@ class Tabs extends Component<TabsProps> {
       this.showActiveTabIfOverlayed(activeTabEl)
     }
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentWillUnmount() {
@@ -257,9 +205,9 @@ class Tabs extends Component<TabsProps> {
 
     if (tabOverflow === 'scroll') {
       if (variant === 'default') {
-        return px(styles.scrollOverlayWidthDefault)
+        return px(styles?.scrollOverlayWidthDefault as number)
       } else {
-        return px(styles.scrollOverlayWidthSecondary)
+        return px(styles?.scrollOverlayWidthSecondary as number)
       }
     }
   }
@@ -502,12 +450,12 @@ class Tabs extends Component<TabsProps> {
     // suppress overlay whenever final Tab is active, or Firefox will cover it
     const scrollOverlay =
       selectedIndex !== React.Children.count(children) - 1 ? (
-        <span key="overlay" css={styles.scrollOverlay} />
+        <span key="overlay" css={styles?.scrollOverlay} />
       ) : null
 
     const scrollFadeEls = [
       // spacer element prevents final Tab from being obscured by scroll overflow gradient
-      <span key="spacer" css={styles.scrollSpacer} />,
+      <span key="spacer" css={styles?.scrollSpacer} />,
       scrollOverlay
     ]
 
@@ -518,22 +466,22 @@ class Tabs extends Component<TabsProps> {
         maxWidth={maxWidth}
         margin={margin}
         as="div"
-        css={styles.container}
+        css={styles?.container}
       >
         <Focusable ref={this.handleFocusableRef}>
-          {({ focusVisible }) => (
+          {({ focusVisible: any }) => (
             <View
               as="div"
               position="relative"
               borderRadius="medium"
               withFocusOutline={focusVisible}
               shouldAnimateFocus={false}
-              css={styles.tabs}
+              css={styles?.tabs}
             >
               <View
                 as="div"
                 role="tablist"
-                css={styles.tabList}
+                css={styles?.tabList}
                 aria-label={screenReaderLabel}
                 elementRef={this.handleTabListRef}
               >
