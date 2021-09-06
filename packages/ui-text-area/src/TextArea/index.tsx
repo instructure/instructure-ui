@@ -24,10 +24,7 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import { controllable } from '@instructure/ui-prop-types'
-import { FormField, FormPropTypes } from '@instructure/ui-form-field'
+import { FormField } from '@instructure/ui-form-field'
 import {
   addEventListener,
   isActiveElement,
@@ -44,7 +41,8 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TextAreaProps } from './props'
+import type { TextAreaProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -56,83 +54,8 @@ category: components
 class TextArea extends Component<TextAreaProps> {
   static readonly componentId = 'TextArea'
 
-  static propTypes = {
-    label: PropTypes.node.isRequired,
-    id: PropTypes.string,
-    /**
-     * sets the font-size for the textarea
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    layout: PropTypes.oneOf(['stacked', 'inline']),
-    /**
-     * the textarea will expand vertically to fit the height of the content,
-     * unless its content exceeds `maxHeight`
-     */
-    autoGrow: PropTypes.bool,
-    /**
-     * is the textarea resizable (in supported browsers)
-     */
-    resize: PropTypes.oneOf(['none', 'both', 'horizontal', 'vertical']),
-    /**
-     * a fixed width for the textarea
-     */
-    width: PropTypes.string,
-    /**
-     * Initial height for the textarea (if autoGrow is true it will grow vertically)
-     * Accepts CSS units, e.g. '55px'
-     */
-    height: PropTypes.string,
-    /**
-     * when autoGrow is true, the textarea will never grow beyond this value
-     */
-    maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    /**
-     * object with shape: `{
-     * text: PropTypes.string,
-     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     *   }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    inline: PropTypes.bool,
-    /**
-     * Html placeholder text to display when the input has no value. This should be hint text, not a label
-     * replacement.
-     */
-    placeholder: PropTypes.string,
-    /**
-     * Whether or not to disable the textarea
-     */
-    disabled: PropTypes.bool,
-    /**
-     * Works just like disabled but keeps the same styles as if it were active
-     */
-    readOnly: PropTypes.bool,
-    /**
-     * Sets the required property on the underlying native textArea
-     */
-    required: PropTypes.bool,
-    /**
-     * a function that provides a reference to the actual textarea element
-     */
-    textareaRef: PropTypes.func,
-    /**
-     * value to set on initial render
-     */
-    defaultValue: PropTypes.string,
-    /**
-     * the selected value (must be accompanied by an `onChange` prop)
-     */
-    value: controllable(PropTypes.string),
-    /**
-     * when used with the `value` prop, the component will not control its own state
-     */
-    onChange: PropTypes.func,
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     size: 'medium',
@@ -145,15 +68,7 @@ class TextArea extends Component<TextAreaProps> {
     // @ts-expect-error ts-migrate(6133) FIXME: 'textarea' is declared but its value is never read... Remove this comment to see the full error message
     textareaRef: function (textarea) {},
     layout: 'stacked',
-    id: undefined,
-    value: undefined,
-    defaultValue: undefined,
-    onChange: undefined,
-    required: false,
-    placeholder: undefined,
-    width: undefined,
-    height: undefined,
-    maxHeight: undefined
+    required: false
   }
 
   _listener: { remove(): void } | null = null
@@ -169,15 +84,13 @@ class TextArea extends Component<TextAreaProps> {
 
   componentDidMount() {
     this.autoGrow()
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
     this.autoGrow()
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentWillUnmount() {
@@ -420,7 +333,7 @@ class TextArea extends Component<TextAreaProps> {
         // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
         aria-invalid={this.invalid ? 'true' : null}
         disabled={disabled || readOnly}
-        css={this.props.styles.textArea}
+        css={this.props.styles?.textArea}
         onChange={this.handleChange}
       />
     )
@@ -437,7 +350,7 @@ class TextArea extends Component<TextAreaProps> {
         }}
       >
         <div
-          css={this.props.styles.textAreaLayout}
+          css={this.props.styles?.textAreaLayout}
           style={{
             width,
             maxHeight
@@ -446,7 +359,7 @@ class TextArea extends Component<TextAreaProps> {
         >
           {textarea}
           {!disabled && !readOnly ? (
-            <span css={this.props.styles.textAreaOutline} aria-hidden="true" />
+            <span css={this.props.styles?.textAreaOutline} aria-hidden="true" />
           ) : null}
         </div>
       </FormField>
