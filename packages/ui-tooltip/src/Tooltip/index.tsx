@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import {
   getElementType,
@@ -33,16 +32,15 @@ import {
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { PositionPropTypes } from '@instructure/ui-position'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
-import { element } from '@instructure/ui-prop-types'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TooltipProps } from './props'
+import type { TooltipProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -54,97 +52,17 @@ category: components
 class Tooltip extends Component<TooltipProps> {
   static readonly componentId = 'Tooltip'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * @param {Object} renderProps
-     * @param {Boolean} renderProps.focused - Is the Tooltip trigger focused?
-     * @param {Function} renderProps.getTriggerProps - Props to be spread onto the trigger element
-     */
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    /**
-     * The content to render in the tooltip
-     */
-    renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    /**
-     * Whether or not the tooltip content is shown, when controlled
-     */
-    isShowingContent: PropTypes.bool,
-    /**
-     * Whether or not to show the content by default, when uncontrolled
-     */
-    defaultIsShowingContent: PropTypes.bool,
-    /**
-     * the element type to render as (assumes a single child if 'as' is undefined)
-     */
-    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-    /**
-     * The action that causes the Content to display (`click`, `hover`, `focus`)
-     */
-    on: PropTypes.oneOfType([
-      PropTypes.oneOf(['click', 'hover', 'focus']),
-      PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus']))
-    ]),
-    /**
-     * The color of the tooltip content
-     */
-    color: PropTypes.oneOf(['primary', 'primary-inverse']),
-    /**
-     * Specifies where the Tooltip will be placed in relation to the target element.
-     * Ex. placement="bottom" will render the Tooltip below the triggering element
-     * (Note: if there is not room, it will position opposite. Ex. "top" will
-     * automatically switch to "bottom")
-     */
-    placement: PositionPropTypes.placement,
-    /**
-     * An element or a function returning an element to use as the mount node
-     * for the `<Tooltip />` (defaults to `document.body`)
-     */
-    mountNode: PositionPropTypes.mountNode,
-    /**
-     * The parent in which to constrain the tooltip.
-     * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
-     * or a function returning an element
-     */
-    constrain: PositionPropTypes.constrain,
-    /**
-     * The horizontal offset for the positioned content
-     */
-    offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * The vertical offset for the positioned content
-     */
-    offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * Target element for positioning the Tooltip (if it differs from children/trigger)
-     */
-    positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
-    /**
-     * Callback fired when content is shown. When controlled, this callback is
-     * fired when the tooltip expects to be shown
-     */
-    onShowContent: PropTypes.func,
-    /**
-     * Callback fired when content is hidden. When controlled, this callback is
-     * fired when the tooltip expects to be hidden
-     */
-    onHideContent: PropTypes.func
-  } as const
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
-    isShowingContent: undefined,
     defaultIsShowingContent: false,
-    on: undefined,
     color: 'primary',
     placement: 'top',
     mountNode: null,
     constrain: 'window',
     offsetX: 0,
     offsetY: 0,
-    positionTarget: undefined,
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onShowContent: (event) => {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
@@ -155,14 +73,12 @@ class Tooltip extends Component<TooltipProps> {
   state = { hasFocus: false }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
@@ -247,7 +163,7 @@ class Tooltip extends Component<TooltipProps> {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >
-        <span id={this._id} css={styles.tooltip} role="tooltip">
+        <span id={this._id} css={styles?.tooltip} role="tooltip">
           {callRenderProp(renderTip)}
         </span>
       </Popover>
