@@ -23,9 +23,8 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
-import { I18nPropTypes, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
+import { ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
 
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
@@ -37,18 +36,17 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.extend(localizedFormat)
 
-import { controllable } from '@instructure/ui-prop-types'
 import {
   getInteraction,
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { FormPropTypes } from '@instructure/ui-form-field'
-import { PositionPropTypes } from '@instructure/ui-position'
+
 import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
 import { uid } from '@instructure/uid'
-import { TimeSelectProps } from './props'
+import type { TimeSelectProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -60,179 +58,16 @@ category: components
 class TimeSelect extends Component<TimeSelectProps> {
   static readonly componentId = 'TimeSelect'
 
-  static propTypes = {
-    /**
-     * The form field label.
-     */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-      .isRequired,
-    /**
-     * Whether to default to the first option when `defaultValue` hasn't been specified.
-     */
-    defaultToFirstOption: PropTypes.bool,
-    /**
-     * An ISO 8601 formatted date string representing the current selected value. If defined,
-     * the component will act controlled and will not manage its own state.
-     */
-    value: controllable(I18nPropTypes.iso8601, 'onChange'),
-    /**
-     * An ISO 8601 formatted date string to use if `value` isn't provided.
-     */
-    defaultValue: I18nPropTypes.iso8601,
-    /**
-     * The id of the text input. One is generated if not supplied.
-     */
-    id: PropTypes.string,
-    /**
-     * The format to use when displaying the possible and currently selected options.
-     *
-     * See [moment.js formats](https://momentjs.com/docs/#/displaying/format/) for the list of available formats.
-     */
-    format: PropTypes.string,
-    /**
-     * The number of minutes to increment by when generating the allowable options.
-     */
-    step: PropTypes.oneOf([5, 10, 15, 20, 30, 60]),
-    /**
-     * Specifies if interaction with the input is enabled, disabled, or readonly.
-     * When "disabled", the input changes visibly to indicate that it cannot
-     * receive user interactions. When "readonly" the input still cannot receive
-     * user interactions but it keeps the same styles as if it were enabled.
-     */
-    interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-    /**
-     * Html placeholder text to display when the input has no value. This should
-     * be hint text, not a label replacement.
-     */
-    placeholder: PropTypes.string,
-    /**
-     * Whether or not the text input is required.
-     */
-    isRequired: PropTypes.bool,
-    /**
-     * Whether the input is rendered inline with other elements or if it
-     * is rendered as a block level element.
-     */
-    isInline: PropTypes.bool,
-    /**
-     * The width of the text input.
-     */
-    width: PropTypes.string,
-    /**
-     * The max width the options list can be before option text wraps. If not
-     * set, the list will only display as wide as the text input.
-     */
-    optionsMaxWidth: PropTypes.string,
-    /**
-     * The number of options that should be visible before having to scroll.
-     */
-    visibleOptionsCount: PropTypes.number,
-    /**
-     * Displays messages and validation for the input. It should be an object
-     * with the following shape:
-     * `{
-     *   text: PropTypes.string,
-     *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     * }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    /**
-     * The placement of the options list.
-     */
-    placement: PositionPropTypes.placement,
-    /**
-     * The parent in which to constrain the placement.
-     */
-    constrain: PositionPropTypes.constrain,
-    /**
-     * Callback fired when a new option is selected.
-     * @param {Object} event - the event object
-     * @param {Object} data - additional data
-     * @param data.value - the value of selected option
-     */
-    onChange: PropTypes.func,
-    /**
-     * Callback fired when text input receives focus.
-     */
-    onFocus: PropTypes.func,
-    /**
-     * Callback fired when text input loses focus.
-     */
-    onBlur: PropTypes.func,
-    /**
-     * Callback fired when the options list is shown.
-     */
-    onShowOptions: PropTypes.func,
-    /**
-     * Callback fired when the options list is hidden.
-     */
-    onHideOptions: PropTypes.func,
-    /**
-     * A ref to the html `input` element.
-     */
-    inputRef: PropTypes.func,
-    /**
-     * A ref to the html `ul` element.
-     */
-    listRef: PropTypes.func,
-    /**
-     * Content to display in the list when no options are available.
-     */
-    renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Content to display before the text input. This will commonly be an icon.
-     */
-    renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Content to display after the text input. This content will replace the
-     * default arrow icons.
-     */
-    renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-
-    /* eslint-disable react/require-default-props */
-    /**
-     * A standard language identifier.
-     *
-     * See [moment.js i18n](https://momentjs.com/docs/#/i18n/) for more details.
-     *
-     * This property can also be set via a context property and if both are set then the component property takes
-     * precedence over the context property.
-     *
-     * The web browser's locale will be used if no value is set via a component property or a context
-     * property.
-     */
-    locale: PropTypes.string,
-    /**
-     * A timezone identifier in the format: Area/Location
-     *
-     * See [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the list
-     * of possible options.
-     *
-     * This property can also be set via a context property and if both are set then the component property takes
-     * precedence over the context property.
-     *
-     * The web browser's timezone will be used if no value is set via a component property or a context
-     * property.
-     */
-    timezone: PropTypes.string
-    /* eslint-enable react/require-default-props */
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
-    value: undefined,
-    defaultValue: undefined,
     defaultToFirstOption: false,
-    id: undefined,
     format: 'LT',
     step: 30,
-    interaction: undefined,
-    placeholder: undefined,
     isRequired: false,
     isInline: false,
-    width: undefined,
-    optionsMaxWidth: undefined,
     visibleOptionsCount: 8,
-    messages: undefined,
     placement: 'bottom stretch',
     constrain: 'window',
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
