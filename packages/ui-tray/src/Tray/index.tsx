@@ -24,11 +24,9 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Dialog } from '@instructure/ui-dialog'
 import { omitProps } from '@instructure/ui-react-utils'
-import { element } from '@instructure/ui-prop-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { testable } from '@instructure/ui-testable'
@@ -39,7 +37,8 @@ import { Transition } from '@instructure/ui-motion'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TrayProps } from './props'
+import { propTypes, allowedProps } from './props'
+import type { TrayProps } from './props'
 
 /**
 ---
@@ -52,135 +51,8 @@ category: components
 class Tray extends Component<TrayProps> {
   static readonly componentId = 'Tray'
 
-  static propTypes = {
-    label: PropTypes.string.isRequired,
-    children: PropTypes.node,
-
-    /*
-     * The size (width) of the `<Tray />` when placement is `start` or `end`
-     */
-    size: PropTypes.oneOf(['x-small', 'small', 'regular', 'medium', 'large']),
-
-    /**
-     * Placement to determine where the `<Tray />` should display in the viewport
-     */
-    placement: PropTypes.oneOf(['top', 'bottom', 'start', 'end', 'center']),
-
-    /**
-     * Whether or not the `<Tray />` is open
-     */
-    open: PropTypes.bool,
-
-    /**
-     * An element or a function returning an element to focus by default
-     */
-    defaultFocusElement: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
-
-    /**
-     *
-     * A function that returns a reference to the content element
-     */
-    contentRef: PropTypes.func,
-
-    /**
-     * Whether focus should be contained within the `<Tray/>` when it is open
-     */
-    shouldContainFocus: PropTypes.bool,
-
-    /**
-     * Whether focus should be restored when the `<Tray/>` is closed
-     */
-    shouldReturnFocus: PropTypes.bool,
-
-    /**
-     * Should the `<Tray />` hide when clicks occur outside the content
-     */
-    shouldCloseOnDocumentClick: PropTypes.bool,
-
-    /**
-     * Callback fired when `<Tray />` content has been mounted in the DOM
-     */
-    onOpen: PropTypes.func,
-
-    /**
-     * Callback fired when `<Tray />` has been unmounted from the DOM
-     */
-    onClose: PropTypes.func,
-
-    /**
-     * Callback fired when the `<Tray />` is requesting to be closed
-     */
-    onDismiss: PropTypes.func,
-
-    /**
-     * An element or a function returning an element to use as the mount node
-     * for the `<Tray />` (defaults to `document.body`)
-     */
-    mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-
-    /**
-     * Insert the element at the 'top' of the mountNode or at the 'bottom'
-     */
-    insertAt: PropTypes.oneOf(['bottom', 'top']),
-
-    /**
-     * An element, function returning an element, or array of elements that will not be hidden from
-     * the screen reader when the `<Tray />` is open
-     */
-    liveRegion: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-      PropTypes.func
-    ]),
-
-    /**
-     * Callback fired when the <Tray /> transitions in/out
-     */
-    onTransition: PropTypes.func,
-    /**
-     * Callback fired before the <Tray /> transitions in
-     */
-    onEnter: PropTypes.func,
-    /**
-     * Callback fired as the <Tray /> begins to transition in
-     */
-    onEntering: PropTypes.func,
-    /**
-     * Callback fired after the <Tray /> finishes transitioning in
-     */
-    onEntered: PropTypes.func,
-    /**
-     * Callback fired right before the <Tray /> transitions out
-     */
-    onExit: PropTypes.func,
-    /**
-     * Callback fired as the <Tray /> begins to transition out
-     */
-    onExiting: PropTypes.func,
-    /**
-     * Callback fired after the <Tray /> finishes transitioning out
-     */
-    onExited: PropTypes.func,
-
-    /**
-     * Should the `<Tray />` have a border
-     */
-    border: PropTypes.bool,
-
-    /**
-     * Should the `<Tray />` have a box shadow
-     */
-    shadow: PropTypes.bool,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    // eslint-disable-next-line react/require-default-props
-    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     open: false,
@@ -209,8 +81,7 @@ class Tray extends Component<TrayProps> {
     placement: 'start',
     shadow: true,
     border: false,
-    children: null,
-    onTransition: undefined
+    children: null
   }
 
   state = {
@@ -220,8 +91,7 @@ class Tray extends Component<TrayProps> {
   _DOMNode: PortalNode = null
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
@@ -229,8 +99,7 @@ class Tray extends Component<TrayProps> {
     if (this.props.open !== prevProps.open) {
       this.setState({ transitioning: true })
     }
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   get placement() {
@@ -343,7 +212,7 @@ class Tray extends Component<TrayProps> {
           >
             <span
               {...omitProps(props, Tray.propTypes)}
-              css={this.props.styles.tray}
+              css={this.props.styles?.tray}
               ref={contentRef}
             >
               {this.state.transitioning ? (
@@ -361,7 +230,7 @@ class Tray extends Component<TrayProps> {
                   liveRegion={liveRegion}
                   onDismiss={onDismiss}
                 >
-                  <div css={this.props.styles.content}>{children}</div>
+                  <div css={this.props.styles?.content}>{children}</div>
                 </Dialog>
               )}
             </span>
