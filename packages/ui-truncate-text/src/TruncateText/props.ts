@@ -21,10 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type TruncateTextProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+export type TruncateTextOwnProps = {
   maxLines?: string | number
   position?: 'end' | 'middle'
   truncate?: 'character' | 'word'
@@ -33,4 +36,67 @@ export type TruncateTextProps = {
   debounce?: number
   onUpdate?: (...args: any[]) => any
   shouldTruncateWhenInvisible?: boolean
+  children: React.ReactNode
 }
+
+type PropKeys = keyof TruncateTextOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TruncateTextProps = TruncateTextOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The content to be truncated.
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * Number of lines to allow before truncating. `auto` will fit to parent
+   */
+  maxLines: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Where to place the ellipsis within the string
+   */
+  position: PropTypes.oneOf(['end', 'middle']),
+  /**
+   * Add ellipsis after words or after any character
+   */
+  truncate: PropTypes.oneOf(['character', 'word']),
+  /**
+   * A string to use as the ellipsis
+   */
+  ellipsis: PropTypes.string,
+  /**
+   * Characters to ignore at truncated end of string
+   */
+  ignore: PropTypes.arrayOf(PropTypes.string),
+  /**
+   * Debounce delay in milliseconds
+   */
+  debounce: PropTypes.number,
+  /**
+   * Callback when truncated text has changed
+   */
+  onUpdate: PropTypes.func,
+  /**
+   * Force truncation of invisible elements (hack; will be removed in favor
+   * of a better fix)
+   */
+  // eslint-disable-next-line react/require-default-props
+  shouldTruncateWhenInvisible: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'maxLines',
+  'position',
+  'truncate',
+  'ellipsis',
+  'ignore',
+  'debounce',
+  'onUpdate',
+  'shouldTruncateWhenInvisible'
+]
+
+export type { TruncateTextProps }
+export { propTypes, allowedProps }

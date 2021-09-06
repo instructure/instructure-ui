@@ -23,7 +23,6 @@
  */
 /** @jsx jsx */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { debounce } from '@instructure/debounce'
 import { canUseDOM, getBoundingClientRect } from '@instructure/ui-dom-utils'
@@ -40,7 +39,8 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import truncate from './utils/truncate'
-import { TruncateTextProps } from './props'
+import { propTypes, allowedProps } from './props'
+import type { TruncateTextProps } from './props'
 
 /**
 ---
@@ -53,50 +53,8 @@ category: components
 class TruncateText extends Component<TruncateTextProps> {
   static readonly componentId = 'TruncateText'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * The content to be truncated.
-     */
-    children: PropTypes.node.isRequired,
-    /**
-     * Number of lines to allow before truncating. `auto` will fit to parent
-     */
-    maxLines: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * Where to place the ellipsis within the string
-     */
-    position: PropTypes.oneOf(['end', 'middle']),
-    /**
-     * Add ellipsis after words or after any character
-     */
-    truncate: PropTypes.oneOf(['character', 'word']),
-    /**
-     * A string to use as the ellipsis
-     */
-    ellipsis: PropTypes.string,
-    /**
-     * Characters to ignore at truncated end of string
-     */
-    ignore: PropTypes.arrayOf(PropTypes.string),
-    /**
-     * Debounce delay in milliseconds
-     */
-    debounce: PropTypes.number,
-    /**
-     * Callback when truncated text has changed
-     */
-    onUpdate: PropTypes.func,
-    /**
-     * Force truncation of invisible elements (hack; will be removed in favor
-     * of a better fix)
-     */
-    // eslint-disable-next-line react/require-default-props
-    shouldTruncateWhenInvisible: PropTypes.bool
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     maxLines: 1,
@@ -257,7 +215,7 @@ class TruncateText extends Component<TruncateTextProps> {
         ...this.props,
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_ref' does not exist on type 'TruncateTe... Remove this comment to see the full error message
         parent: this._ref,
-        lineHeight: this.props.styles.lineHeight
+        lineHeight: this.props.styles?.lineHeight
       })
       if (result) {
         const element = this.renderChildren(
@@ -310,7 +268,7 @@ class TruncateText extends Component<TruncateTextProps> {
     // this spacer element is set to the max width the full text could potentially be
     // without this, text in `width: auto` elements won't expand to accomodate more text, once truncated
     childElements.push(
-      <span css={this.props.styles.spacer} style={{ width: width || null }} />
+      <span css={this.props.styles?.spacer} style={{ width: width || null }} />
     )
 
     const children = React.Children.map(childElements, (child) => child)
@@ -328,7 +286,7 @@ class TruncateText extends Component<TruncateTextProps> {
 
     return (
       <span
-        css={this.props.styles.truncateText}
+        css={this.props.styles?.truncateText}
         ref={(el) => {
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_ref' does not exist on type 'TruncateTe... Remove this comment to see the full error message
           this._ref = el
