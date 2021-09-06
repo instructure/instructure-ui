@@ -24,16 +24,14 @@
 
 /** @jsx jsx */
 import { Component, InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
 
-import { controllable } from '@instructure/ui-prop-types'
 import {
   callRenderProp,
   getInteraction,
   passthroughProps
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { FormField, FormPropTypes } from '@instructure/ui-form-field'
+import { FormField } from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -41,7 +39,12 @@ import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { TextInputProps, TextInputState, TextInputStyleProps } from './props'
+import type {
+  TextInputProps,
+  TextInputState,
+  TextInputStyleProps
+} from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -58,136 +61,17 @@ class TextInput extends Component<
 > {
   static readonly componentId = 'TextInput'
 
-  static propTypes = {
-    /**
-     * The form field label.
-     */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Determines the underlying native HTML `<input>` element's `type`.
-     * For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url
-     */
-    type: PropTypes.oneOf([
-      'text',
-      'email',
-      'url',
-      'tel',
-      'search',
-      'password'
-    ]),
-    /**
-     * The id of the text input. One is generated if not supplied.
-     */
-    id: PropTypes.string,
-    /**
-     * the selected value (must be accompanied by an `onChange` prop)
-     */
-    value: controllable(PropTypes.string),
-    /**
-     * value to set on initial render
-     */
-    defaultValue: PropTypes.string,
-    /**
-     * Specifies if interaction with the input is enabled, disabled, or readonly.
-     * When "disabled", the input changes visibly to indicate that it cannot
-     * receive user interactions. When "readonly" the input still cannot receive
-     * user interactions but it keeps the same styles as if it were enabled.
-     */
-    interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-    /**
-     * object with shape: `{
-     * text: PropTypes.string,
-     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     *   }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    /**
-     * The size of the text input.
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * The text alignment of the input.
-     */
-    textAlign: PropTypes.oneOf(['start', 'center']),
-    /**
-     * The width of the input.
-     */
-    width: PropTypes.string,
-    /**
-     * The width of the input, in characters, if a width is not explicitly
-     * provided via the `width` prop. Only applicable if `isInline={true}`.
-     */
-    htmlSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * The display of the root element.
-     */
-    display: PropTypes.oneOf(['inline-block', 'block']),
-    /**
-     * Prevents the default behavior of wrapping the input and rendered content
-     * when available space is exceeded.
-     */
-    shouldNotWrap: PropTypes.bool,
-    /**
-     * Html placeholder text to display when the input has no value. This should be hint text, not a label
-     * replacement.
-     */
-    placeholder: PropTypes.string,
-    /**
-     * Whether or not the text input is required.
-     */
-    isRequired: PropTypes.bool,
-    /**
-     * a function that provides a reference to the actual input element
-     */
-    inputRef: PropTypes.func,
-    /**
-     * a function that provides a reference a parent of the input element
-     */
-    inputContainerRef: PropTypes.func,
-    /**
-     * Content to display before the input text, such as an icon
-     */
-    renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Content to display after the input text, such as an icon
-     */
-    renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Callback executed when the input fires a change event.
-     * @param {Object} event - the event object
-     * @param {Object} value - the string value of the input
-     */
-    onChange: PropTypes.func,
-    /**
-     * Callback fired when input loses focus.
-     */
-    onBlur: PropTypes.func,
-    /**
-     * Callback fired when input receives focus.
-     */
-    onFocus: PropTypes.func,
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
-    renderLabel: undefined,
     type: 'text',
-    id: undefined,
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
     isRequired: false,
-    value: undefined,
-    defaultValue: undefined,
     display: 'block',
     shouldNotWrap: false,
-    placeholder: undefined,
-    width: undefined,
     size: 'medium',
-    htmlSize: undefined,
     textAlign: 'start',
     messages: [],
     // @ts-expect-error ts-migrate(6133) FIXME: 'input' is declared but its value is never read.
@@ -199,9 +83,7 @@ class TextInput extends Component<
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onBlur: function (event) {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: function (event) {},
-    renderBeforeInput: undefined,
-    renderAfterInput: undefined
+    onFocus: function (event) {}
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -215,14 +97,12 @@ class TextInput extends Component<
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   makeStyleProps = (): TextInputStyleProps => {
@@ -338,7 +218,7 @@ class TextInput extends Component<
     return (
       <input
         {...props}
-        css={this.props.styles.textInput}
+        css={this.props.styles?.textInput}
         defaultValue={defaultValue}
         value={value}
         placeholder={placeholder}
@@ -392,24 +272,24 @@ class TextInput extends Component<
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'layout' does not exist on type 'Readonly... Remove this comment to see the full error message
         layout={this.props.layout} // eslint-disable-line react/prop-types
       >
-        <span css={styles.facade}>
+        <span css={styles?.facade}>
           {renderBeforeOrAfter ? (
             <div>
-              <span css={styles.layout}>
+              <span css={styles?.layout}>
                 {hasBeforeElement && (
-                  <span css={styles.beforeElement}>
+                  <span css={styles?.beforeElement}>
                     {callRenderProp(renderBeforeInput)}
                   </span>
                 )}
-                <span css={styles.innerWrapper}>
+                <span css={styles?.innerWrapper}>
                   {/*
                     The input and content after input should not wrap,
                     so they're in their own flex container
                   */}
-                  <span css={styles.inputLayout}>
-                    <span css={styles.innerWrapper}>{this.renderInput()}</span>
+                  <span css={styles?.inputLayout}>
+                    <span css={styles?.innerWrapper}>{this.renderInput()}</span>
                     {hasAfterElement && (
-                      <span css={styles.afterElement}>
+                      <span css={styles?.afterElement}>
                         {callRenderProp(renderAfterInput)}
                       </span>
                     )}
