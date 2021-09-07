@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
@@ -32,11 +31,12 @@ import { TruncateText } from '@instructure/ui-truncate-text'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { PillProps } from './props'
+import type { PillProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -48,34 +48,10 @@ category: components
 class Pill extends Component<PillProps> {
   static readonly componentId = 'Pill'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-    children: PropTypes.node.isRequired,
-    color: PropTypes.oneOf([
-      'primary',
-      'success',
-      'danger',
-      'info',
-      'warning',
-      'alert'
-    ]),
-    elementRef: PropTypes.func,
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
-    children: undefined,
-    margin: undefined,
-    elementRef: undefined,
     color: 'primary'
   }
 
@@ -89,14 +65,11 @@ class Pill extends Component<PillProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'truncated' implicitly has an 'any' type... Remove this comment to see the full error message
@@ -136,7 +109,7 @@ class Pill extends Component<PillProps> {
         elementRef={elementRef}
         margin={margin}
         padding="0"
-        maxWidth={styles.maxWidth}
+        maxWidth={styles?.maxWidth}
         background="transparent"
         borderRadius="pill"
         borderWidth="0"
@@ -145,8 +118,8 @@ class Pill extends Component<PillProps> {
         withFocusOutline={focused}
         focusColor="info"
       >
-        <span css={styles.pill}>
-          <span css={styles.text}>
+        <span css={styles?.pill}>
+          <span css={styles?.text}>
             <TruncateText
               onUpdate={(truncated) => {
                 this.handleTruncation(truncated)
