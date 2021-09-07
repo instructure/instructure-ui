@@ -23,10 +23,8 @@
  */
 
 import React, { Children, Component, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
-import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes, FormFieldGroup } from '@instructure/ui-form-field'
+import { FormFieldGroup } from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import {
@@ -37,7 +35,8 @@ import {
 } from '@instructure/ui-react-utils'
 
 import { RadioInput } from '../RadioInput'
-import { RadioInputGroupProps } from './props'
+import type { RadioInputGroupProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -48,41 +47,8 @@ category: components
 class RadioInputGroup extends Component<RadioInputGroupProps> {
   static readonly componentId = 'RadioInputGroup'
 
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    description: PropTypes.node.isRequired,
-    /**
-     * value to set on initial render
-     */
-    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * the selected value (must be accompanied by an `onChange` prop)
-     */
-    value: controllable(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    ),
-    /**
-     * when used with the `value` prop, the component will not control its own state
-     */
-    onChange: PropTypes.func,
-    disabled: PropTypes.bool,
-    /** works just like disabled but keeps the same styles as if it were active */
-    readOnly: PropTypes.bool,
-    /**
-     * object with shape: `{
-     * text: PropTypes.string,
-     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     *   }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    /**
-     * any children (ones that aren't `RadioInput` are passed through)
-     */
-    children: PropTypes.node,
-    variant: PropTypes.oneOf(['simple', 'toggle']), // TODO: split toggle out to its own component
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    layout: PropTypes.oneOf(['stacked', 'columns', 'inline'])
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     disabled: false,
@@ -90,11 +56,7 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
     size: 'medium',
     layout: 'stacked',
     readOnly: false,
-    defaultValue: undefined,
-    value: undefined,
-    children: null,
-    messages: undefined,
-    onChange: undefined
+    children: null
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
