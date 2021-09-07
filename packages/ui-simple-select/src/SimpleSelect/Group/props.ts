@@ -21,7 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { Option } from '../Option'
 
-export type SimpleSelectGroupProps = {
+import type { PropValidators } from '@instructure/shared-types'
+
+export type SimpleSelectGroupOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
+  children?: React.ReactNode
 }
+type PropKeys = keyof SimpleSelectGroupOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type SimpleSelectGroupProps = SimpleSelectGroupOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The label associated with the group options.
+   */
+  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  /**
+   * Children of type `<SimpleSelect.Option />` that will be considered part of the group.
+   */
+  children: ChildrenPropTypes.oneOf([Option])
+}
+
+const allowedProps: AllowedPropKeys = ['renderLabel', 'children']
+
+export type { SimpleSelectGroupProps }
+export { propTypes, allowedProps }

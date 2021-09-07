@@ -23,8 +23,8 @@
  */
 
 import { Component } from 'react'
-import PropTypes from 'prop-types'
-import { SimpleSelectOptionProps } from './props'
+import type { SimpleSelectOptionProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -35,37 +35,10 @@ id: SimpleSelect.Option
 class Option extends Component<SimpleSelectOptionProps> {
   static readonly componentId = 'SimpleSelect.Option'
 
-  static propTypes = {
-    /**
-     * The id for the option.
-     */
-    id: PropTypes.string.isRequired,
-    /**
-     * The value for the option.
-     */
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    /**
-     * Whether or not this option is disabled.
-     */
-    isDisabled: PropTypes.bool,
-    /**
-     * Content to display before the option label, such as an icon.
-     */
-    renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Content to display after the option label, such as an icon.
-     */
-    renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Content to display as the option label.
-     */
-    children: PropTypes.string
-  }
-
+  static allowedProps = allowedProps
+  static propTypes = propTypes
   static defaultProps = {
     isDisabled: false,
-    renderBeforeLabel: undefined,
-    renderAfterLabel: undefined,
     children: null
   }
 
