@@ -21,16 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import PropTypes from 'prop-types'
 
-export type RatingIconProps = {
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+export type RatingIconOwnProps = {
   animationDelay?: number
   animateFill?: boolean
   filled?: boolean
   size?: 'small' | 'medium' | 'large'
-  makeStyles?: (...args: any[]) => any
-  styles?: any
 }
 
 export type RatingIconState = {
   filled: boolean
 }
+
+type PropKeys = keyof RatingIconOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type RatingIconProps = RatingIconOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  animationDelay: PropTypes.number,
+  animateFill: PropTypes.bool,
+  filled: PropTypes.bool,
+  size: PropTypes.oneOf(['small', 'medium', 'large'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'animationDelay',
+  'animateFill',
+  'filled',
+  'size'
+]
+
+export type { RatingIconProps }
+export { propTypes, allowedProps }

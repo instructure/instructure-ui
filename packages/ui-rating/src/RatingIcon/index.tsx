@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { IconStarSolid, IconStarLightSolid } from '@instructure/ui-icons'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
@@ -34,7 +33,8 @@ import { Transition } from '@instructure/ui-motion'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { RatingIconProps, RatingIconState } from './props'
+import type { RatingIconProps, RatingIconState } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -46,16 +46,8 @@ id: Rating.Icon
 class RatingIcon extends Component<RatingIconProps, RatingIconState> {
   static readonly componentId = 'Rating.Icon'
 
-  static propTypes = {
-    animationDelay: PropTypes.number,
-    animateFill: PropTypes.bool,
-    filled: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     animationDelay: 200,
@@ -78,16 +70,14 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
   _animation: RequestAnimationFrameType | undefined
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles?.(this.makeStyleProps())
     if (this.props.animateFill) {
       // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       this._timeouts.push(setTimeout(this.fill, this.props.animationDelay))
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: RatingIconProps) {
     if (
       this.props.animateFill &&
       this.props.filled &&
@@ -95,8 +85,7 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
     ) {
       this.fill()
     }
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   componentWillUnmount() {
@@ -121,14 +110,14 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
     const Icon = this.state.filled ? IconStarSolid : IconStarLightSolid
 
     return (
-      <span css={this.props.styles.ratingIcon}>
+      <span css={this.props.styles?.ratingIcon}>
         <span>
           {this.state.filled && animateFill ? (
             <Transition in transitionOnMount type="scale">
-              <Icon css={this.props.styles.icon} />
+              <Icon css={this.props.styles?.icon} />
             </Transition>
           ) : (
-            <Icon css={this.props.styles.icon} />
+            <Icon css={this.props.styles?.icon} />
           )}
         </span>
       </span>
