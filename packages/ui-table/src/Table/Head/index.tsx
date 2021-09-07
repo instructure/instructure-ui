@@ -103,7 +103,7 @@ class Head extends Component<TableHeadProps> {
     const options = []
     const clickHandlers = {}
     // @ts-expect-error ts-migrate(7034) FIXME: Variable 'selectedOption' implicitly has type 'any... Remove this comment to see the full error message
-    let selectedOption = null
+    let selectedOption = undefined
     let count = 0
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
@@ -150,7 +150,6 @@ class Head extends Component<TableHeadProps> {
                 )
               }
               renderBeforeInput={selectedOption && IconCheckLine}
-              // @ts-expect-error FIXME: Type 'null' is not assignable to type 'string | number | undefined'.ts(2322)
               value={selectedOption}
               onChange={handleSelect}
             >

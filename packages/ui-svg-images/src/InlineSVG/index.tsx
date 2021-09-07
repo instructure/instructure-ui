@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { uid } from '@instructure/uid'
 import { omitProps } from '@instructure/ui-react-utils'
@@ -34,7 +33,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { InlineSVGProps } from './props'
+import type { InlineSVGProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -46,39 +46,8 @@ category: components/utilities
 class InlineSVG extends Component<InlineSVGProps> {
   static readonly componentId = 'InlineSVG'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    children: PropTypes.node,
-    src: PropTypes.string,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    focusable: PropTypes.bool,
-    /**
-     * To let the SVG expand to fill its container, use `auto`
-     */
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * To let the SVG expand to fill its container, use `auto`
-     */
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    inline: PropTypes.bool,
-    color: PropTypes.oneOf([
-      'inherit',
-      'primary',
-      'secondary',
-      'primary-inverse',
-      'secondary-inverse',
-      'success',
-      'error',
-      'alert',
-      'warning',
-      'brand',
-      'auto'
-    ])
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     focusable: false,
@@ -103,14 +72,11 @@ class InlineSVG extends Component<InlineSVGProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'src' implicitly has an 'any' type.
@@ -207,7 +173,7 @@ class InlineSVG extends Component<InlineSVGProps> {
         aria-labelledby={this.labelledBy}
         role={this.role}
         focusable={focusable ? 'true' : 'false'}
-        css={styles.inlineSVG}
+        css={styles?.inlineSVG}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'className' does not exist on type '{ mak... Remove this comment to see the full error message
         className={props.className}
       >

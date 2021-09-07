@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 
@@ -34,7 +33,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { SVGIconProps } from './props'
+import type { SVGIconProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -46,34 +46,20 @@ category: components/utilities
 class SVGIcon extends Component<SVGIconProps> {
   static readonly componentId = 'SVGIcon'
 
-  static propTypes = {
-    // @ts-expect-error ts-migrate(2783) FIXME: 'makeStyles' is specified more than once, so this ... Remove this comment to see the full error message
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // @ts-expect-error ts-migrate(2783) FIXME: 'styles' is specified more than once, so this usag... Remove this comment to see the full error message
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    ...InlineSVG.propTypes,
-    rotate: PropTypes.oneOf(['0', '90', '180', '270']),
-    size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large']),
-    bidirectional: PropTypes.bool
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     rotate: '0',
-    bidirectional: false,
-    size: undefined
+    bidirectional: false
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   render() {
@@ -95,7 +81,7 @@ class SVGIcon extends Component<SVGIconProps> {
         {...props}
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ rotate: "0" | "90" | "180" | "270" | undef... Remove this comment to see the full error message
         rotate={rotate}
-        css={styles.svgIcon}
+        css={styles?.svgIcon}
         className={className}
       />
     )
