@@ -23,7 +23,6 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { deepEqual } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
@@ -33,14 +32,14 @@ import {
   updateElementMatches
 } from '../addElementQueryMatchListener'
 import { addMediaQueryMatchListener } from '../addMediaQueryMatchListener'
-import { ResponsivePropTypes } from '../ResponsivePropTypes'
 import { BreakpointQueries, QueriesMatching, UpdateMatches } from '../QueryType'
 import { findDOMNode } from '@instructure/ui-dom-utils'
-import {
+import type {
   ResponsiveByBreakpointProps,
   ResponsiveProps,
   ResponsivePropsObject
 } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -49,17 +48,11 @@ category: components
 @tsProps
 **/
 class Responsive extends Component<ResponsiveProps> {
-  static propTypes = {
-    match: PropTypes.oneOf(['element', 'media']),
-    query: PropTypes.objectOf(ResponsivePropTypes.validQuery).isRequired,
-    props: PropTypes.objectOf(PropTypes.object),
-    render: PropTypes.func,
-    children: PropTypes.func
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
-    render: undefined,
     match: 'element',
     props: null
   }
