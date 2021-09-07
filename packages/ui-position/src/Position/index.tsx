@@ -24,9 +24,7 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
-import { element } from '@instructure/ui-prop-types'
 import {
   safeCloneElement,
   callRenderProp,
@@ -49,10 +47,11 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { PositionProps, PositionState } from './props'
+import type { PositionProps, PositionState } from './props'
+import { allowedProps, propTypes } from './props'
 
 import { calculateElementPosition } from '../calculateElementPosition'
-import { PositionElement, PositionPropTypes } from '../PositionPropTypes'
+import { PositionElement } from '../PositionPropTypes'
 
 /**
 ---
@@ -65,37 +64,16 @@ category: components/utilities
 class Position extends Component<PositionProps, PositionState> {
   static readonly componentId = 'Position'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    renderTarget: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    target: PropTypes.oneOfType([element, PropTypes.func]),
-    placement: PositionPropTypes.placement,
-    mountNode: PositionPropTypes.mountNode,
-    insertAt: PropTypes.oneOf(['bottom', 'top']),
-    constrain: PositionPropTypes.constrain,
-    offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    id: PropTypes.string,
-    shouldTrackPosition: PropTypes.bool,
-    shouldPositionOverTarget: PropTypes.bool,
-    onPositionChanged: PropTypes.func,
-    onPositioned: PropTypes.func,
-    children: PropTypes.node
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps: PositionProps = {
-    renderTarget: undefined,
-    target: undefined,
     placement: 'bottom center',
     mountNode: null,
     insertAt: 'bottom',
     constrain: 'window',
     offsetX: 0,
     offsetY: 0,
-    id: undefined,
     shouldTrackPosition: true,
     shouldPositionOverTarget: false,
     onPositioned: () => {},
@@ -142,8 +120,7 @@ class Position extends Component<PositionProps, PositionState> {
 
   componentDidMount() {
     this.toggleLocatorAttributes(true)
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate(prevProps: PositionProps, prevState: PositionState) {
@@ -172,8 +149,7 @@ class Position extends Component<PositionProps, PositionState> {
       })
     }
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentWillUnmount() {
@@ -280,8 +256,7 @@ class Position extends Component<PositionProps, PositionState> {
         },
         style: {
           boxSizing: 'border-box',
-          // @ts-expect-error TODO: type withStyle props
-          zIndex: this.props.styles.zIndex,
+          zIndex: this.props.styles?.zIndex,
           ...content.props.style,
           ...this.state.style
         },
