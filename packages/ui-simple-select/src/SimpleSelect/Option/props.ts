@@ -21,11 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type SimpleSelectOptionProps = {
+import type { PropValidators } from '@instructure/shared-types'
+
+type SimpleSelectOptionOwnProps = {
   id: string
   value: string | number
   isDisabled?: boolean
   renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
   renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
+  children?: React.ReactNode
 }
+type PropKeys = keyof SimpleSelectOptionOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type SimpleSelectOptionProps = SimpleSelectOptionOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The id for the option.
+   */
+  id: PropTypes.string.isRequired,
+  /**
+   * The value for the option.
+   */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /**
+   * Whether or not this option is disabled.
+   */
+  isDisabled: PropTypes.bool,
+  /**
+   * Content to display before the option label, such as an icon.
+   */
+  renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Content to display after the option label, such as an icon.
+   */
+  renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Content to display as the option label.
+   */
+  children: PropTypes.string
+}
+
+const allowedProps: AllowedPropKeys = [
+  'id',
+  'value',
+  'isDisabled',
+  'renderBeforeLabel',
+  'renderAfterLabel',
+  'children'
+]
+
+export type { SimpleSelectOptionProps }
+export { propTypes, allowedProps }

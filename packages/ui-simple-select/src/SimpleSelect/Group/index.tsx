@@ -23,11 +23,9 @@
  */
 
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { Option } from '../Option'
-import { SimpleSelectGroupProps } from './props'
+import type { SimpleSelectGroupProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -37,18 +35,8 @@ id: SimpleSelect.Group
 **/
 class Group extends Component<SimpleSelectGroupProps> {
   static readonly componentId = 'SimpleSelect.Group'
-
-  static propTypes = {
-    /**
-     * The label associated with the group options.
-     */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-      .isRequired,
-    /**
-     * Children of type `<SimpleSelect.Option />` that will be considered part of the group.
-     */
-    children: ChildrenPropTypes.oneOf([Option])
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null
