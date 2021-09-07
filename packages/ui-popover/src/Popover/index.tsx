@@ -23,19 +23,16 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import {
   Position,
-  PositionPropTypes,
   parsePlacement,
   mirrorHorizontalPlacement
 } from '@instructure/ui-position'
 import { ContextView, View } from '@instructure/ui-view'
 import { Dialog } from '@instructure/ui-dialog'
 import { bidirectional } from '@instructure/ui-i18n'
-import { element } from '@instructure/ui-prop-types'
 import {
   findDOMNode,
   containsActiveElement,
@@ -48,11 +45,11 @@ import { safeCloneElement, callRenderProp } from '@instructure/ui-react-utils'
 import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
-import { ThemeablePropTypes } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 
 import { FocusRegion } from '@instructure/ui-a11y-utils'
-import { PopoverProps } from './props'
+import type { PopoverProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -65,192 +62,10 @@ tags: overlay, portal, dialog
 class Popover extends Component<PopoverProps> {
   static readonly componentId = 'Popover'
 
-  static propTypes = {
-    /**
-     * Whether or not the `<Popover />` content is shown
-     */
-    isShowingContent: PropTypes.bool,
-    /**
-     * Whether or not to show the content by default, when uncontrolled
-     */
-    defaultIsShowingContent: PropTypes.bool,
-    /**
-     * The action that causes the content to display (`click`, `hover`, `focus`)
-     */
-    on: PropTypes.oneOfType([
-      PropTypes.oneOf(['click', 'hover', 'focus']),
-      PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus']))
-    ]),
-    /**
-     * Whether or not an arrow pointing to the trigger should be rendered
-     */
-    withArrow: PropTypes.bool,
-    /**
-     * Color variant of the popover content
-     */
-    color: PropTypes.oneOf(['primary', 'primary-inverse']),
-    /**
-     * The placement of the content in relation to the trigger
-     */
-    placement: PositionPropTypes.placement,
-    /**
-     * Controls the shadow depth for the `<Popover />`
-     */
-    shadow: ThemeablePropTypes.shadow,
-    /**
-     * Controls the z-index depth for the `<Popover />` content
-     */
-    stacking: ThemeablePropTypes.stacking,
-    /**
-     * A function that returns a reference to the content element
-     */
-    contentRef: PropTypes.func,
-    /**
-     * An element or a function returning an element to focus by default
-     */
-    defaultFocusElement: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
-    /**
-     * An accessible label for the `<Popover />` content
-     */
-    screenReaderLabel: PropTypes.string,
-    /**
-     * The horizontal offset for the positioned content
-     */
-    offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * The vertical offset for the positioned content
-     */
-    offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * The parent in which to constrain the popover.
-     * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
-     * or a function returning an element
-     */
-    constrain: PositionPropTypes.constrain,
-    /**
-     * Target element for positioning the Popover (if it differs from the trigger)
-     */
-    positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
-    /**
-     * An element or a function returning an element to use as the mount node
-     * for the `<Popover />` (defaults to `document.body`)
-     */
-    mountNode: PositionPropTypes.mountNode,
-    /**
-     * Insert the element at the 'top' of the mountNode or at the 'bottom'
-     */
-    insertAt: PropTypes.oneOf(['bottom', 'top']),
-    /**
-     * An element, function returning an element, or array of elements that will
-     * not be hidden from the screen reader when the `<Popover />` is open
-     */
-    liveRegion: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-      PropTypes.func
-    ]),
-    /**
-     * An id is generated if not supplied.
-     */
-    id: PropTypes.string,
-    /**
-     * Whether or not the content should offset to align by its arrow
-     */
-    shouldAlignArrow: PropTypes.bool,
-    /**
-     * Whether or not position should be tracked or just set on initial render
-     */
-    shouldTrackPosition: PropTypes.bool,
-    /**
-     * Should the `<Popover />` render offscreen when visually hidden
-     */
-    shouldRenderOffscreen: PropTypes.bool,
-    /**
-     * Whether focus should contained within the `<Popover/>` when it is open
-     */
-    shouldContainFocus: PropTypes.bool,
-    /**
-     * Whether focus should be returned to the trigger when the `<Popover/>` is closed
-     */
-    shouldReturnFocus: PropTypes.bool,
-    /**
-     * Should the `<Popover />` hide when clicks occur outside the content
-     */
-    shouldCloseOnDocumentClick: PropTypes.bool,
-    /**
-     * Should the `<Popover />` hide when the escape key is pressed
-     */
-    shouldCloseOnEscape: PropTypes.bool,
-    /**
-     * Should the content become focused when the trigger is blurred
-     */
-    shouldFocusContentOnTriggerBlur: PropTypes.bool,
-    /**
-     * Callback fired when content is shown. When controlled, this callback is
-     * fired when the Popover expects to be shown
-     */
-    onShowContent: PropTypes.func,
-    /**
-     * Callback fired when content is hidden. When controlled, this callback is
-     * fired when the Popover expects to be hidden
-     */
-    onHideContent: PropTypes.func,
-    /**
-     * Callback fired when content has been is initially positioned.
-     * If `shouldRenderOffscreen` is true, it will only fire once, the first
-     * time the content is shown
-     */
-    onPositioned: PropTypes.func,
-    /**
-     * Callback fired when the position changes
-     */
-    onPositionChanged: PropTypes.func,
-    /**
-     * Callback fired when component is clicked
-     */
-    onClick: PropTypes.func,
-    /**
-     * Callback fired when trigger is focused
-     */
-    onFocus: PropTypes.func,
-    /**
-     * Callback fired when component is blurred
-     */
-    onBlur: PropTypes.func,
-    /**
-     * Callback fired on keydown
-     */
-    onKeyDown: PropTypes.func,
-    /**
-     * Callback fired on keyup
-     */
-    onKeyUp: PropTypes.func,
-    /**
-    /**
-     * Callback fired when mouse is over trigger
-     */
-    onMouseOver: PropTypes.func,
-    /**
-     * Callback fired when mouse leaves trigger
-     */
-    onMouseOut: PropTypes.func,
-    /**
-     * The element that triggers the popover
-     */
-    renderTrigger: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * The content to be shown by the popover
-     */
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    // eslint-disable-next-line react/require-default-props
-    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
-    isShowingContent: undefined,
     defaultIsShowingContent: false,
     placement: 'bottom center',
     stacking: 'topmost',
@@ -263,13 +78,7 @@ class Popover extends Component<PopoverProps> {
     contentRef: (el) => {},
     withArrow: true,
     constrain: 'window',
-    defaultFocusElement: undefined,
-    screenReaderLabel: undefined,
-    mountNode: undefined,
     insertAt: 'bottom',
-    liveRegion: undefined,
-    positionTarget: undefined,
-    id: undefined,
     shouldAlignArrow: false,
     shouldTrackPosition: true,
     shouldRenderOffscreen: false,
