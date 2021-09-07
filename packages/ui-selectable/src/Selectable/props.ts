@@ -21,10 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import { ReactNode } from 'react'
+import PropTypes from 'prop-types'
 
-export type SelectableProps = {
+import type { PropValidators } from '@instructure/shared-types'
+
+type SelectableOwnProps = {
   /**
    * The id of the trigger element. Set automatically if not provided
    */
@@ -92,7 +94,7 @@ export type SelectableProps = {
 
 type MouseEventFunction = (event: MouseEvent) => void
 
-export type SelectableRender = {
+type SelectableRender = {
   /**
    * Prop getter for root element
    */
@@ -154,3 +156,42 @@ export type SelectableRender = {
    */
   getDescriptionProps: (props?: Record<string, any>) => Record<string, any>
 }
+
+type PropKeys = keyof SelectableOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type SelectableProps = SelectableOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  id: PropTypes.string,
+  highlightedOptionId: PropTypes.string,
+  selectedOptionId: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  isShowingOptions: PropTypes.bool,
+  onRequestShowOptions: PropTypes.func,
+  onRequestHideOptions: PropTypes.func,
+  onRequestHighlightOption: PropTypes.func,
+  onRequestHighlightFirstOption: PropTypes.func,
+  onRequestHighlightLastOption: PropTypes.func,
+  onRequestSelectOption: PropTypes.func,
+  children: PropTypes.func,
+  render: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'id',
+  'highlightedOptionId',
+  'selectedOptionId',
+  'isShowingOptions',
+  'onRequestShowOptions',
+  'onRequestHideOptions',
+  'onRequestHighlightOption',
+  'onRequestHighlightFirstOption',
+  'onRequestHighlightLastOption',
+  'onRequestSelectOption',
+  'children',
+  'render'
+]
+
+export type { SelectableProps, SelectableRender }
+export { propTypes, allowedProps }

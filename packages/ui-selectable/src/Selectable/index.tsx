@@ -23,7 +23,6 @@
  */
 
 import { Component, SyntheticEvent } from 'react'
-import PropTypes from 'prop-types'
 
 import keycode from 'keycode'
 
@@ -31,7 +30,8 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
-import { SelectableProps } from './props'
+import type { SelectableProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -41,20 +41,8 @@ tags: autocomplete, typeahead, combobox, dropdown, search
 @tsProps
 **/
 class Selectable extends Component<SelectableProps> {
-  static propTypes = {
-    id: PropTypes.string,
-    highlightedOptionId: PropTypes.string,
-    selectedOptionId: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    isShowingOptions: PropTypes.bool,
-    onRequestShowOptions: PropTypes.func,
-    onRequestHideOptions: PropTypes.func,
-    onRequestHighlightOption: PropTypes.func,
-    onRequestHighlightFirstOption: PropTypes.func,
-    onRequestHighlightLastOption: PropTypes.func,
-    onRequestSelectOption: PropTypes.func,
-    children: PropTypes.func,
-    render: PropTypes.func
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     id: null,
