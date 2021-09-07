@@ -21,10 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type InlineSVGProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type InlineSVGOwnProps = {
   src?: string
   title?: string
   description?: string
@@ -44,4 +47,56 @@ export type InlineSVGProps = {
     | 'warning'
     | 'brand'
     | 'auto'
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof InlineSVGOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type InlineSVGProps = InlineSVGOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.node,
+  src: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  focusable: PropTypes.bool,
+  /**
+   * To let the SVG expand to fill its container, use `auto`
+   */
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * To let the SVG expand to fill its container, use `auto`
+   */
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  inline: PropTypes.bool,
+  color: PropTypes.oneOf([
+    'inherit',
+    'primary',
+    'secondary',
+    'primary-inverse',
+    'secondary-inverse',
+    'success',
+    'error',
+    'alert',
+    'warning',
+    'brand',
+    'auto'
+  ])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'src',
+  'title',
+  'description',
+  'focusable',
+  'width',
+  'height',
+  'inline',
+  'color'
+]
+
+export type { InlineSVGProps, InlineSVGOwnProps }
+export { propTypes, allowedProps }
