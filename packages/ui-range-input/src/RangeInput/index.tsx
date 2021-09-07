@@ -24,11 +24,9 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { ContextView } from '@instructure/ui-view'
-import { controllable } from '@instructure/ui-prop-types'
-import { FormField, FormPropTypes } from '@instructure/ui-form-field'
+import { FormField } from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -37,7 +35,8 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { RangeInputProps } from './props'
+import type { RangeInputProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -49,47 +48,8 @@ category: components
 class RangeInput extends Component<RangeInputProps> {
   static readonly componentId = 'RangeInput'
 
-  static propTypes = {
-    min: PropTypes.number.isRequired,
-    max: PropTypes.number.isRequired,
-    /**
-     * value to set on initial render
-     */
-    defaultValue: PropTypes.number,
-    /**
-     * the selected value (must be accompanied by an `onChange` prop)
-     */
-    value: controllable(PropTypes.number),
-    /**
-     * when used with the `value` prop, the component will not control its own state
-     */
-    onChange: PropTypes.func,
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    /**
-     * The size of the value label
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    layout: PropTypes.oneOf(['stacked', 'inline']),
-    id: PropTypes.string,
-    label: PropTypes.node.isRequired,
-    /**
-     * whether to display the current value
-     */
-    displayValue: PropTypes.bool,
-    step: PropTypes.number,
-    /**
-     * A function to format the displayed value
-     */
-    formatValue: PropTypes.func,
-    inline: PropTypes.bool,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     step: 1,
@@ -102,12 +62,7 @@ class RangeInput extends Component<RangeInputProps> {
     layout: 'stacked',
     displayValue: true,
     disabled: false,
-    readOnly: false,
-    id: undefined,
-    defaultValue: undefined,
-    value: undefined,
-    onChange: undefined,
-    messages: undefined
+    readOnly: false
   }
 
   _input: HTMLInputElement | null = null
@@ -131,8 +86,7 @@ class RangeInput extends Component<RangeInputProps> {
 
   /* workaround for https://github.com/facebook/react/issues/554 */
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
 
     if (this._input !== null) {
       // https://connect.microsoft.com/IE/Feedback/Details/856998
@@ -160,10 +114,8 @@ class RangeInput extends Component<RangeInputProps> {
   }
   /* end workaround */
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
@@ -210,7 +162,7 @@ class RangeInput extends Component<RangeInputProps> {
         <ContextView background="inverse" placement="end center">
           <output
             htmlFor={this.id}
-            css={this.props.styles.rangeInputInputValue}
+            css={this.props.styles?.rangeInputInputValue}
           >
             {/* @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message */}
             {this.props.formatValue(this.value)}
@@ -229,9 +181,9 @@ class RangeInput extends Component<RangeInputProps> {
     return (
       // @ts-expect-error ts-migrate(2554) FIXME: no overload..
       <FormField {...pickProps(this.props, FormField.propTypes)} id={this.id}>
-        <div css={this.props.styles.rangeInput}>
+        <div css={this.props.styles?.rangeInput}>
           <input
-            css={this.props.styles.rangeInputInput}
+            css={this.props.styles?.rangeInputInput}
             ref={(c) => {
               this._input = c
             }}
