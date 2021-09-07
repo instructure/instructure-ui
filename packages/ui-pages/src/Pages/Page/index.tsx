@@ -25,12 +25,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
 import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
 import { View } from '@instructure/ui-view'
 import { PagesContext } from '..'
-import { PagesPageProps } from './props'
+import type { PagesPageProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -41,27 +41,8 @@ id: Pages.Page
 class Page extends Component<PagesPageProps> {
   static readonly componentId = 'Pages.Page'
 
-  static propTypes = {
-    /**
-     * The children to be rendered
-     */
-    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-
-    /**
-     * An element or a function returning an element to focus by default
-     */
-    defaultFocusElement: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
-
-    /**
-     * Set the padding using familiar CSS shorthand
-     */
-    padding: ThemeablePropTypes.spacing,
-
-    textAlign: PropTypes.oneOf(['start', 'center', 'end'])
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     defaultFocusElement: null,
