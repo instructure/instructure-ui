@@ -23,8 +23,8 @@
  */
 
 import { Component } from 'react'
-import PropTypes from 'prop-types'
-import { SelectOptionProps } from './props'
+import type { SelectOptionProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -36,43 +36,13 @@ id: Select.Option
 class Option extends Component<SelectOptionProps> {
   static readonly componentId = 'Select.Option'
 
-  static propTypes = {
-    /**
-     * The id for the option.
-     */
-    id: PropTypes.string.isRequired,
-    /**
-     * Whether or not this option is highlighted.
-     */
-    isHighlighted: PropTypes.bool,
-    /**
-     * Whether or not this option is selected.
-     */
-    isSelected: PropTypes.bool,
-    /**
-     * Whether or not this option is disabled.
-     */
-    isDisabled: PropTypes.bool,
-    /**
-     * Content to display before the option label, such as an icon.
-     */
-    renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Content to display after the option label, such as an icon.
-     */
-    renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Content to display as the option label.
-     */
-    children: PropTypes.node
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     isHighlighted: false,
     isSelected: false,
     isDisabled: false,
-    renderBeforeLabel: undefined,
-    renderAfterLabel: undefined,
     children: null
   }
 

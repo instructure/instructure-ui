@@ -23,12 +23,8 @@
  */
 
 import { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-
-import { Option } from '../Option'
-import { SelectGroupProps } from './props'
+import type { SelectGroupProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -40,17 +36,8 @@ id: Select.Group
 class Group extends Component<SelectGroupProps> {
   static readonly componentId = 'Select.Group'
 
-  static propTypes = {
-    /**
-     * The label associated with the group options.
-     */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-      .isRequired,
-    /**
-     * Children of type `<Select.Option />` that will be considered part of the group.
-     */
-    children: ChildrenPropTypes.oneOf([Option])
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null
