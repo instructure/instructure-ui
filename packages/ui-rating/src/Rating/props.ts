@@ -21,10 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import PropTypes from 'prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing } from '@instructure/emotion'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import { PropValidators } from '@instructure/shared-types'
 
-export type RatingProps = {
+type RatingOwnProps = {
   label: string
   formatValueText?: (...args: any[]) => any
   iconCount?: 3 | 5
@@ -33,6 +36,60 @@ export type RatingProps = {
   valueNow?: number
   animateFill?: boolean
   margin?: Spacing
-  makeStyles?: (...args: any[]) => any
-  styles?: any
 }
+type PropKeys = keyof RatingOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type RatingProps = RatingOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * A label is required for accessibility
+   */
+  label: PropTypes.string.isRequired,
+  /**
+   * A function that returns the current value formatted for screen readers
+   */
+  formatValueText: PropTypes.func,
+  /**
+   * Choose from a 0-3 or 0-5 rating system
+   */
+  iconCount: PropTypes.oneOf([3, 5]),
+  /**
+   * Choose from different rating icon sizes
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * The maximum rating (defaults to iconCount)
+   */
+  valueMax: PropTypes.number,
+  /**
+   * The current rating
+   */
+  valueNow: PropTypes.number,
+  /**
+   * Set to make the icons animate when they become filled
+   */
+  animateFill: PropTypes.bool,
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing
+}
+
+const allowedProps: AllowedPropKeys = [
+  'label',
+  'formatValueText',
+  'iconCount',
+  'size',
+  'valueMax',
+  'valueNow',
+  'animateFill',
+  'margin'
+]
+
+export type { RatingProps }
+export { propTypes, allowedProps }

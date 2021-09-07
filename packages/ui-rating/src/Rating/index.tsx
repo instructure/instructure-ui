@@ -24,16 +24,16 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { RatingIcon } from '../RatingIcon'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
-import { RatingProps } from './props'
+import type { RatingProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -45,47 +45,8 @@ category: components
 class Rating extends Component<RatingProps> {
   static readonly componentId = 'Rating'
 
-  static propTypes = {
-    /**
-     * A label is required for accessibility
-     */
-    label: PropTypes.string.isRequired,
-    /**
-     * A function that returns the current value formatted for screen readers
-     */
-    formatValueText: PropTypes.func,
-    /**
-     * Choose from a 0-3 or 0-5 rating system
-     */
-    iconCount: PropTypes.oneOf([3, 5]),
-    /**
-     * Choose from different rating icon sizes
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * The maximum rating (defaults to iconCount)
-     */
-    valueMax: PropTypes.number,
-    /**
-     * The current rating
-     */
-    valueNow: PropTypes.number,
-    /**
-     * Set to make the icons animate when they become filled
-     */
-    animateFill: PropTypes.bool,
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     animateFill: false,
@@ -93,22 +54,17 @@ class Rating extends Component<RatingProps> {
     formatValueText: (filled, iconCount) => `${filled} / ${iconCount}`,
     iconCount: 3,
     size: 'medium',
-    valueNow: 0,
-    margin: undefined,
-    valueMax: undefined
+    valueNow: 0
   }
 
   static Icon = RatingIcon
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   get filled() {
@@ -156,7 +112,7 @@ class Rating extends Component<RatingProps> {
     return (
       <View
         {...passthroughProps}
-        css={this.props.styles.rating}
+        css={this.props.styles?.rating}
         margin={margin}
         display="inline-block"
       >
