@@ -23,7 +23,6 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
@@ -31,11 +30,12 @@ import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { logError as error } from '@instructure/console'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { SpinnerProps } from './props'
+import type { SpinnerProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -46,41 +46,12 @@ category: components
 @testable()
 class Spinner extends Component<SpinnerProps> {
   static readonly componentId = 'Spinner'
-
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * Give the spinner a title to be read by screenreaders
-     */
-    renderTitle: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    /**
-     * Different-sized spinners
-     */
-    size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
-    /**
-     * Different color schemes for use with light or dark backgrounds
-     */
-    variant: PropTypes.oneOf(['default', 'inverse']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    elementRef: PropTypes.func,
-    as: PropTypes.elementType
-  }
-
+  static allowedProps = allowedProps
+  static propTypes = propTypes
   static defaultProps = {
-    renderTitle: undefined,
     as: 'div',
     size: 'medium',
-    variant: 'default',
-    margin: undefined,
-    elementRef: undefined
+    variant: 'default'
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -92,14 +63,11 @@ class Spinner extends Component<SpinnerProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   radius() {
@@ -133,11 +101,11 @@ class Spinner extends Component<SpinnerProps> {
         {...passthroughProps}
         as={this.props.as}
         elementRef={this.props.elementRef}
-        css={this.props.styles.spinner}
+        css={this.props.styles?.spinner}
         margin={this.props.margin}
       >
         <svg
-          css={this.props.styles.circle}
+          css={this.props.styles?.circle}
           role="img"
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'Spinner... Remove this comment to see the full error message
           aria-labelledby={this.titleId}
@@ -150,14 +118,14 @@ class Spinner extends Component<SpinnerProps> {
           <g role="presentation">
             {this.props.variant !== 'inverse' && (
               <circle
-                css={this.props.styles.circleTrack}
+                css={this.props.styles?.circleTrack}
                 cx="50%"
                 cy="50%"
                 r={this.radius()}
               />
             )}
             <circle
-              css={this.props.styles.circleSpin}
+              css={this.props.styles?.circleSpin}
               cx="50%"
               cy="50%"
               r={this.radius()}
