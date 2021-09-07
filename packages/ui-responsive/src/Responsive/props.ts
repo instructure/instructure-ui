@@ -22,6 +22,10 @@
  * SOFTWARE.
  */
 
+import PropTypes from 'prop-types'
+import { ResponsivePropTypes } from '../ResponsivePropTypes'
+
+import type { PropValidators } from '@instructure/shared-types'
 import { BreakpointQueries, QueriesMatching } from '../QueryType'
 
 export interface ResponsivePropsObject {
@@ -35,7 +39,7 @@ export type ResponsiveByBreakpointProps = {
   [breakpointName: string]: ResponsivePropsObject
 }
 
-export type ResponsiveProps = {
+export type ResponsiveOwnProps = {
   /**
    * Consists of an object where the keys define the names of breakpoints. The values are query objects
    * with keys representing the breakpoint condition and values representing a breakpoint value as a
@@ -74,3 +78,27 @@ export type ResponsiveProps = {
     matches?: QueriesMatching
   ) => any
 }
+type PropKeys = keyof ResponsiveOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ResponsiveProps = ResponsiveOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  match: PropTypes.oneOf(['element', 'media']),
+  query: PropTypes.objectOf(ResponsivePropTypes.validQuery).isRequired,
+  props: PropTypes.objectOf(PropTypes.object),
+  render: PropTypes.func,
+  children: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'match',
+  'query',
+  'props',
+  'render',
+  'children'
+]
+
+export type { ResponsiveProps }
+export { propTypes, allowedProps }
