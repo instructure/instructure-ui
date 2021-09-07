@@ -21,14 +21,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Children, controllable } from '@instructure/ui-prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing } from '@instructure/emotion'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+import { Page } from './Page'
 
-export type PagesProps = {
+export type PagesOwnProps = {
   defaultPageIndex?: number
   activePageIndex?: any // TODO: controllable( PropTypes.number, 'onPageIndexChange', 'defaultPageIndex' )
   onPageIndexChange?: (...args: any[]) => any
   margin?: Spacing
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof PagesOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type PagesProps = PagesOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: Children.oneOf([Page]),
+
+  defaultPageIndex: PropTypes.number,
+
+  /**
+   * The currently active page index
+   */
+  activePageIndex: controllable(
+    PropTypes.number,
+    'onPageIndexChange',
+    'defaultPageIndex'
+  ),
+
+  /**
+   * Event handler fired anytime page index has changed due to back button being clicked
+   */
+  onPageIndexChange: PropTypes.func,
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'defaultPageIndex',
+  'activePageIndex',
+  'onPageIndexChange',
+  'margin'
+]
+
+export type { PagesProps }
+export { propTypes, allowedProps }

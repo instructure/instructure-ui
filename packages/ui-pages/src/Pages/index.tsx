@@ -24,21 +24,20 @@
 
 /** @jsx jsx */
 import React, { Component, createContext, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { containsActiveElement, findTabbable } from '@instructure/ui-dom-utils'
 import { safeCloneElement } from '@instructure/ui-react-utils'
-import { Children, controllable } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
 import { logError as error } from '@instructure/console'
 
 import { Page } from './Page'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { PagesProps } from './props'
+import type { PagesProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 export const PagesContext = createContext({
   history: [],
@@ -54,44 +53,14 @@ category: components
 class Pages extends Component<PagesProps> {
   static readonly componentId = 'Pages'
 
-  static propTypes = {
-    children: Children.oneOf([Page]),
-
-    defaultPageIndex: PropTypes.number,
-
-    /**
-     * The currently active page index
-     */
-    activePageIndex: controllable(
-      PropTypes.number,
-      'onPageIndexChange',
-      'defaultPageIndex'
-    ),
-
-    /**
-     * Event handler fired anytime page index has changed due to back button being clicked
-     */
-    onPageIndexChange: PropTypes.func,
-
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
     defaultPageIndex: null,
     activePageIndex: 0,
-    onPageIndexChange: function () {},
-    margin: undefined
+    onPageIndexChange: function () {}
   }
 
   static Page = Page
@@ -114,8 +83,7 @@ class Pages extends Component<PagesProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   handleBackButtonClick = () => {
@@ -142,16 +110,14 @@ class Pages extends Component<PagesProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     this._timeouts.push(
       // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       setTimeout(() => {
         !this.focused && this.focus()
       }, 0)
     )
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentWillUnmount() {
@@ -221,7 +187,7 @@ class Pages extends Component<PagesProps> {
           as="div"
           // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: any; as: string; id: any; css: a... Remove this comment to see the full error message
           id={this._contentId}
-          css={this.props.styles.pages}
+          css={this.props.styles?.pages}
           margin={this.props.margin}
           role="region"
           elementRef={(el) => {

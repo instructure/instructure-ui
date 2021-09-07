@@ -23,10 +23,49 @@
  */
 
 import React from 'react'
-import type { Spacing } from '@instructure/emotion'
+import PropTypes from 'prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
-export type PagesPageProps = {
+import type { Spacing } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+
+export type PagesPageOwnProps = {
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
+  children?: React.ReactNode
 }
+type PropKeys = keyof PagesPageOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type PagesPageProps = PagesPageOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The children to be rendered
+   */
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+
+  /**
+   * An element or a function returning an element to focus by default
+   */
+  defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+
+  /**
+   * Set the padding using familiar CSS shorthand
+   */
+  padding: ThemeablePropTypes.spacing,
+
+  textAlign: PropTypes.oneOf(['start', 'center', 'end'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'defaultFocusElement',
+  'padding',
+  'textAlign'
+]
+
+export type { PagesPageProps }
+export { propTypes, allowedProps }
