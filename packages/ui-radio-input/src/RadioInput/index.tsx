@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
@@ -35,7 +34,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { RadioInputProps } from './props'
+import type { RadioInputProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -47,31 +47,8 @@ category: components
 class RadioInput extends Component<RadioInputProps> {
   static readonly componentId = 'RadioInput'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    label: PropTypes.node.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    id: PropTypes.string,
-    name: PropTypes.string,
-    checked: PropTypes.bool,
-    /**
-     * Whether or not to disable the input
-     */
-    disabled: PropTypes.bool,
-    /**
-     * Works just like disabled but keeps the same styles as if it were active
-     */
-    readOnly: PropTypes.bool,
-    variant: PropTypes.oneOf(['simple', 'toggle']),
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    context: PropTypes.oneOf(['success', 'warning', 'danger', 'off']),
-    inline: PropTypes.bool,
-    onClick: PropTypes.func,
-    onChange: PropTypes.func
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
@@ -83,11 +60,7 @@ class RadioInput extends Component<RadioInputProps> {
     disabled: false,
     inline: false,
     context: 'success',
-    readOnly: false,
-    checked: undefined,
-    id: undefined,
-    name: undefined,
-    value: undefined
+    readOnly: false
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
@@ -106,14 +79,11 @@ class RadioInput extends Component<RadioInputProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
@@ -171,7 +141,7 @@ class RadioInput extends Component<RadioInputProps> {
     const props = omitProps(this.props, RadioInput.propTypes)
 
     return (
-      <div css={styles.radioInput}>
+      <div css={styles?.radioInput}>
         <input
           {...props}
           id={this.id}
@@ -183,16 +153,16 @@ class RadioInput extends Component<RadioInputProps> {
           name={name}
           checked={this.checked}
           type="radio"
-          css={styles.input}
+          css={styles?.input}
           disabled={disabled || readOnly}
           // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
           aria-disabled={disabled || readOnly ? 'true' : null}
           onChange={this.handleChange}
           onClick={this.handleClick}
         />
-        <label css={styles.control} htmlFor={this.id}>
-          <span css={styles.facade} aria-hidden="true" />
-          <span css={styles.label}>{label}</span>
+        <label css={styles?.control} htmlFor={this.id}>
+          <span css={styles?.facade} aria-hidden="true" />
+          <span css={styles?.label}>{label}</span>
         </label>
       </div>
     )

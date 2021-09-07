@@ -21,10 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import PropTypes from 'prop-types'
 
-export type RadioInputProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type RadioInputOwnProps = {
   label: React.ReactNode
   value?: string | number
   id?: string
@@ -39,3 +41,50 @@ export type RadioInputProps = {
   onClick?: (...args: any[]) => any
   onChange?: (...args: any[]) => any
 }
+
+type PropKeys = keyof RadioInputOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type RadioInputProps = RadioInputOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  label: PropTypes.node.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.string,
+  name: PropTypes.string,
+  checked: PropTypes.bool,
+  /**
+   * Whether or not to disable the input
+   */
+  disabled: PropTypes.bool,
+  /**
+   * Works just like disabled but keeps the same styles as if it were active
+   */
+  readOnly: PropTypes.bool,
+  variant: PropTypes.oneOf(['simple', 'toggle']),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  context: PropTypes.oneOf(['success', 'warning', 'danger', 'off']),
+  inline: PropTypes.bool,
+  onClick: PropTypes.func,
+  onChange: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'label',
+  'value',
+  'id',
+  'name',
+  'checked',
+  'disabled',
+  'readOnly',
+  'variant',
+  'size',
+  'context',
+  'inline',
+  'onClick',
+  'onChange'
+]
+
+export type { RadioInputProps }
+export { propTypes, allowedProps }

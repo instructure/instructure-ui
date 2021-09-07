@@ -23,9 +23,14 @@
  */
 
 import React from 'react'
-import type { FormMessage } from '@instructure/ui-form-field'
+import PropTypes from 'prop-types'
+import { controllable } from '@instructure/ui-prop-types'
+import { FormPropTypes } from '@instructure/ui-form-field'
 
-export type RadioInputGroupProps = {
+import type { FormMessage } from '@instructure/ui-form-field'
+import { PropValidators } from '@instructure/shared-types'
+
+type RadioInputGroupOwnProps = {
   name: string
   description: React.ReactNode
   defaultValue?: string | number
@@ -37,4 +42,64 @@ export type RadioInputGroupProps = {
   variant?: 'simple' | 'toggle'
   size?: 'small' | 'medium' | 'large'
   layout?: 'stacked' | 'columns' | 'inline'
+  children?: React.ReactNode
 }
+type PropKeys = keyof RadioInputGroupOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type RadioInputGroupProps = RadioInputGroupOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.node.isRequired,
+  /**
+   * value to set on initial render
+   */
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * the selected value (must be accompanied by an `onChange` prop)
+   */
+  value: controllable(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+  /**
+   * when used with the `value` prop, the component will not control its own state
+   */
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  /** works just like disabled but keeps the same styles as if it were active */
+  readOnly: PropTypes.bool,
+  /**
+   * object with shape: `{
+   * text: PropTypes.string,
+   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *   }`
+   */
+  messages: PropTypes.arrayOf(FormPropTypes.message),
+  /**
+   * any children (ones that aren't `RadioInput` are passed through)
+   */
+  children: PropTypes.node,
+  variant: PropTypes.oneOf(['simple', 'toggle']), // TODO: split toggle out to its own component
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  layout: PropTypes.oneOf(['stacked', 'columns', 'inline'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'name',
+  'description',
+  'defaultValue',
+  'value',
+  'onChange',
+  'disabled',
+  'readOnly',
+  'messages',
+  'children',
+  'variant',
+  'size',
+  'layout'
+]
+
+export type { RadioInputGroupProps }
+export { propTypes, allowedProps }
