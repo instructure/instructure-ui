@@ -23,8 +23,10 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
+import { element } from '@instructure/ui-prop-types'
 
-import {
+import PositionPropTypes, {
   PositionConstraint,
   PositionMountNode,
   PlacementPropValues,
@@ -32,8 +34,9 @@ import {
 } from '../PositionPropTypes'
 
 import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
 
-type PositionProps = {
+type PositionOwnProps = {
   /**
    * The node to use as the position target
    */
@@ -106,7 +109,7 @@ type PositionProps = {
    * The content to be positioned
    */
   children: React.ReactNode
-} & WithStyleProps
+}
 
 type PositionState = {
   positioned: boolean
@@ -116,4 +119,45 @@ type Position = ElementPosition['style'] & {
   placement: ElementPosition['placement']
 }
 
+type PropKeys = keyof PositionOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type PositionProps = PositionOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  renderTarget: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  target: PropTypes.oneOfType([element, PropTypes.func]),
+  placement: PositionPropTypes.placement,
+  mountNode: PositionPropTypes.mountNode,
+  insertAt: PropTypes.oneOf(['bottom', 'top']),
+  constrain: PositionPropTypes.constrain,
+  offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.string,
+  shouldTrackPosition: PropTypes.bool,
+  shouldPositionOverTarget: PropTypes.bool,
+  onPositionChanged: PropTypes.func,
+  onPositioned: PropTypes.func,
+  children: PropTypes.node
+}
+
+const allowedProps: AllowedPropKeys = [
+  'renderTarget',
+  'target',
+  'placement',
+  'mountNode',
+  'insertAt',
+  'constrain',
+  'offsetX',
+  'offsetY',
+  'id',
+  'shouldTrackPosition',
+  'shouldPositionOverTarget',
+  'onPositionChanged',
+  'onPositioned',
+  'children'
+]
+
 export type { PositionProps, PositionState }
+export { propTypes, allowedProps }
