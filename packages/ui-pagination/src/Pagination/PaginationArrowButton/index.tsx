@@ -23,7 +23,6 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { IconButton } from '@instructure/ui-buttons'
 import { PresentationContent } from '@instructure/ui-a11y-content'
@@ -33,7 +32,8 @@ import {
   IconArrowOpenEndSolid
 } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
-import { PaginationNavigationProps } from './props'
+import type { PaginationNavigationProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -45,14 +45,10 @@ id: Pagination.Navigation
 class PaginationArrowButton extends Component<PaginationNavigationProps> {
   static readonly componentId = 'Pagination.Navigation'
 
-  static propTypes = {
-    direction: PropTypes.oneOf(['next', 'prev']),
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-    buttonRef: PropTypes.func
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
-    direction: undefined,
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     buttonRef: (el) => {}
   }

@@ -23,9 +23,29 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export type PaginationNavigationProps = {
+import type { PropValidators } from '@instructure/shared-types'
+
+type PaginationNavigationOwnProps = {
   direction?: 'next' | 'prev'
   label: string | React.ReactNode
   buttonRef?: (...args: any[]) => any
 }
+
+type PropKeys = keyof PaginationNavigationOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type PaginationNavigationProps = PaginationNavigationOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  direction: PropTypes.oneOf(['next', 'prev']),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  buttonRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = ['direction', 'label', 'buttonRef']
+
+export type { PaginationNavigationProps }
+export { propTypes, allowedProps }
