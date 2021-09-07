@@ -21,12 +21,67 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type SelectOptionProps = {
+import { PropValidators } from '@instructure/shared-types'
+
+type SelectOptionOwnProps = {
   id: string
   isHighlighted?: boolean
   isSelected?: boolean
   isDisabled?: boolean
   renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
   renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof SelectOptionOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type SelectOptionProps = SelectOptionOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The id for the option.
+   */
+  id: PropTypes.string.isRequired,
+  /**
+   * Whether or not this option is highlighted.
+   */
+  isHighlighted: PropTypes.bool,
+  /**
+   * Whether or not this option is selected.
+   */
+  isSelected: PropTypes.bool,
+  /**
+   * Whether or not this option is disabled.
+   */
+  isDisabled: PropTypes.bool,
+  /**
+   * Content to display before the option label, such as an icon.
+   */
+  renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Content to display after the option label, such as an icon.
+   */
+  renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Content to display as the option label.
+   */
+  children: PropTypes.node
+}
+
+const allowedProps: AllowedPropKeys = [
+  'id',
+  'isHighlighted',
+  'isSelected',
+  'isDisabled',
+  'renderBeforeLabel',
+  'renderAfterLabel',
+  'children'
+]
+
+export type { SelectOptionProps }
+export { propTypes, allowedProps }
