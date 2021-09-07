@@ -21,15 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
-import { AsElementType } from '@instructure/shared-types'
-import type { Spacing } from '@instructure/emotion'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, AsElementType } from '@instructure/shared-types'
 
-export type PillProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type PillOwnProps = {
   as?: AsElementType
   color?: 'primary' | 'success' | 'danger' | 'info' | 'warning' | 'alert'
   elementRef?: (...args: any[]) => any
   margin?: Spacing
+  children: React.ReactNode
 }
+type PropKeys = keyof PillOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type PillProps = PillOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  children: PropTypes.node.isRequired,
+  color: PropTypes.oneOf([
+    'primary',
+    'success',
+    'danger',
+    'info',
+    'warning',
+    'alert'
+  ]),
+  elementRef: PropTypes.func,
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing
+}
+
+const allowedProps: AllowedPropKeys = [
+  'as',
+  'children',
+  'color',
+  'elementRef',
+  'margin'
+]
+
+export type { PillProps }
+export { propTypes, allowedProps }
