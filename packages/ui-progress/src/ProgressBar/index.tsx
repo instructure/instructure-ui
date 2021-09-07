@@ -23,17 +23,17 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ProgressBarProps } from './props'
+import type { ProgressBarProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -45,70 +45,8 @@ category: components
 class ProgressBar extends Component<ProgressBarProps> {
   static readonly componentId = 'ProgressBar'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * A label is required for accessibility
-     */
-    screenReaderLabel: PropTypes.string.isRequired,
-    /**
-     * Control the height of the progress bar
-     */
-    size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
-    /**
-     * Maximum value (defaults to 100)
-     */
-    valueMax: PropTypes.number,
-    /**
-     * Receives the progress of the event
-     */
-    valueNow: PropTypes.number,
-    /**
-     * A function for formatting the text provided to screen readers via `aria-valuenow`
-     */
-    formatScreenReaderValue: PropTypes.func,
-    /**
-     * A function to format the displayed value. If null the value will not display.
-     * Takes `valueNow` and `valueMax` as parameters.
-     */
-    renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    /**
-     * Controls the overall color scheme of the component
-     */
-    color: PropTypes.oneOf(['primary', 'primary-inverse']),
-    /**
-     * Control the color of the progress meter. Defaults to showing theme success
-     * color on completion, based on `valueNow` and `valueMax`.
-     */
-    meterColor: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.oneOf([
-        'info',
-        'warning',
-        'danger',
-        'alert',
-        'success',
-        'brand'
-      ])
-    ]),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Provides a reference to the component's root HTML element
-     */
-    elementRef: PropTypes.func,
-    /**
-     * Set the element type of the component's root
-     */
-    as: PropTypes.elementType
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
@@ -118,9 +56,6 @@ class ProgressBar extends Component<ProgressBarProps> {
     valueMax: 100,
     valueNow: 0,
     as: 'div',
-    renderValue: undefined,
-    margin: undefined,
-    elementRef: undefined,
     color: 'primary',
 
     // default to showing `success` color on completion
@@ -130,14 +65,11 @@ class ProgressBar extends Component<ProgressBarProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   render() {
@@ -169,16 +101,16 @@ class ProgressBar extends Component<ProgressBarProps> {
       <View
         {...passthroughProps(props)}
         as={this.props.as}
-        css={styles.progressBar}
+        css={styles?.progressBar}
         margin={this.props.margin}
         elementRef={this.props.elementRef}
       >
-        <span css={styles.trackLayout}>
+        <span css={styles?.trackLayout}>
           {/* creates bottom border effect - <progress /> hard to style x-browser */}
-          <span css={styles.trackBorder}></span>
+          <span css={styles?.trackBorder}></span>
 
           <progress
-            css={styles.track}
+            css={styles?.track}
             max={valueMax}
             value={valueNow}
             role="progressbar"
@@ -190,7 +122,7 @@ class ProgressBar extends Component<ProgressBarProps> {
         </span>
 
         {value && (
-          <span css={styles.value} aria-hidden="true">
+          <span css={styles?.value} aria-hidden="true">
             {value}
           </span>
         )}

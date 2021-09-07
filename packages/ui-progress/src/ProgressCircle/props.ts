@@ -21,9 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import PropTypes from 'prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing } from '@instructure/emotion'
-import { AsElementType } from '@instructure/shared-types'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, AsElementType } from '@instructure/shared-types'
 
 export type ProgressCircleMeterColor =
   | 'info'
@@ -33,9 +35,7 @@ export type ProgressCircleMeterColor =
   | 'success'
   | 'brand'
 
-export type ProgressCircleProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type ProgressCircleOwnProps = {
   screenReaderLabel: string
   size?: 'x-small' | 'small' | 'medium' | 'large'
   valueMax?: number
@@ -56,3 +56,87 @@ export type ProgressCircleProps = {
 export type ProgressCircleState = {
   shouldAnimateOnMount: boolean
 }
+
+type PropKeys = keyof ProgressCircleOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ProgressCircleProps = ProgressCircleOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * A label is required for accessibility
+   */
+  screenReaderLabel: PropTypes.string.isRequired,
+  /**
+   * Control the size of the progress circle
+   */
+  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+  /**
+   * Maximum value (defaults to 100)
+   */
+  valueMax: PropTypes.number,
+  /**
+   * Receives the progress of the event
+   */
+  valueNow: PropTypes.number,
+  /**
+   * A function for formatting the text provided to screen readers via `aria-valuenow`
+   */
+  formatScreenReaderValue: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.node
+  ]),
+  /**
+   * A function to format the displayed value. If null the value will not display.
+   * Takes `valueNow` and `valueMax` as parameters.
+   */
+  renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  /**
+   * Controls the overall color scheme of the component
+   */
+  color: PropTypes.oneOf(['primary', 'primary-inverse']),
+  /**
+   * Control the color of the progress meter. Defaults to showing theme success
+   * color on completion, based on `valueNow` and `valueMax`.
+   */
+  meterColor: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.oneOf(['info', 'warning', 'danger', 'alert', 'success', 'brand'])
+  ]),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Provides a reference to the component's root HTML element
+   */
+  elementRef: PropTypes.func,
+  /**
+   * Set the element type of the component's root
+   */
+  as: PropTypes.elementType,
+  shouldAnimateOnMount: PropTypes.bool,
+  animationDelay: PropTypes.number
+}
+
+const allowedProps: AllowedPropKeys = [
+  'screenReaderLabel',
+  'size',
+  'valueMax',
+  'valueNow',
+  'formatScreenReaderValue',
+  'renderValue',
+  'color',
+  'meterColor',
+  'margin',
+  'elementRef',
+  'as',
+  'shouldAnimateOnMount',
+  'animationDelay'
+]
+
+export type { ProgressCircleProps }
+export { propTypes, allowedProps }

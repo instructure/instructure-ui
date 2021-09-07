@@ -24,18 +24,18 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { ProgressCircleProps, ProgressCircleState } from './props'
+import type { ProgressCircleProps, ProgressCircleState } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -50,79 +50,8 @@ class ProgressCircle extends Component<
 > {
   static readonly componentId = 'ProgressCircle'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * A label is required for accessibility
-     */
-    screenReaderLabel: PropTypes.string.isRequired,
-    /**
-     * Control the size of the progress circle
-     */
-    size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
-    /**
-     * Maximum value (defaults to 100)
-     */
-    valueMax: PropTypes.number,
-    /**
-     * Receives the progress of the event
-     */
-    valueNow: PropTypes.number,
-    /**
-     * A function for formatting the text provided to screen readers via `aria-valuenow`
-     */
-    formatScreenReaderValue: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.node
-    ]),
-    /**
-     * A function to format the displayed value. If null the value will not display.
-     * Takes `valueNow` and `valueMax` as parameters.
-     */
-    renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    /**
-     * Controls the overall color scheme of the component
-     */
-    color: PropTypes.oneOf(['primary', 'primary-inverse']),
-    /**
-     * Control the color of the progress meter. Defaults to showing theme success
-     * color on completion, based on `valueNow` and `valueMax`.
-     */
-    meterColor: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.oneOf([
-        'info',
-        'warning',
-        'danger',
-        'alert',
-        'success',
-        'brand'
-      ])
-    ]),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Provides a reference to the component's root HTML element
-     */
-    elementRef: PropTypes.func,
-    /**
-     * Set the element type of the component's root
-     */
-    as: PropTypes.elementType,
-    /**
-     * Animate the progress meter to the current value when the component
-     * has mounted
-     */
-    shouldAnimateOnMount: PropTypes.bool,
-    animationDelay: PropTypes.number
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
@@ -132,12 +61,8 @@ class ProgressCircle extends Component<
     valueMax: 100,
     valueNow: 0,
     as: 'div',
-    renderValue: undefined,
-    margin: undefined,
-    elementRef: undefined,
     color: 'primary',
     shouldAnimateOnMount: false,
-    animationDelay: undefined,
 
     // default to showing `success` color on completion
     // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
@@ -172,14 +97,11 @@ class ProgressCircle extends Component<
       )
     }
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles?.(this.makeStylesVariables)
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+  componentDidUpdate() {
+    this.props.makeStyles?.(this.makeStylesVariables)
   }
 
   componentWillUnmount() {
@@ -214,7 +136,7 @@ class ProgressCircle extends Component<
     const style = this.state.animateOnMount
       ? null
       : {
-          strokeDashoffset: `${styles.dashOffset}em`
+          strokeDashoffset: `${styles?.dashOffset}em`
         }
 
     return (
@@ -222,7 +144,7 @@ class ProgressCircle extends Component<
         {...passthroughProps(props)}
         as={this.props.as}
         elementRef={this.props.elementRef}
-        css={styles.progressCircle}
+        css={styles?.progressCircle}
         margin={this.props.margin}
       >
         <ScreenReaderContent>
@@ -236,33 +158,36 @@ class ProgressCircle extends Component<
           />
         </ScreenReaderContent>
         {value && (
-          <span css={styles.center} aria-hidden="true">
-            <span css={styles.value}>{value}</span>
+          <span css={styles?.center} aria-hidden="true">
+            <span css={styles?.value}>{value}</span>
           </span>
         )}
-        <svg css={styles.circle} role="presentation" focusable="false">
+        <svg css={styles?.circle} role="presentation" focusable="false">
           <circle
-            css={styles.track}
+            css={styles?.track}
             role="presentation"
             cx="50%"
             cy="50%"
-            r={styles.radii.radius}
+            //@ts-expect-error TODO:
+            r={styles?.radii?.radius}
           />
           <circle
-            css={styles.border}
+            css={styles?.border}
             role="presentation"
             cx="50%"
             cy="50%"
-            r={styles.radii.borderOffsetRadius}
+            //@ts-expect-error TODO:
+            r={styles?.radii?.borderOffsetRadius}
           />
           <circle
-            css={styles.meter}
+            css={styles?.meter}
             role="presentation"
             // @ts-expect-error ts-migrate(2322) FIXME: Type '{ strokeDashoffset: string; } | null' is not... Remove this comment to see the full error message
             style={style}
             cx="50%"
             cy="50%"
-            r={styles.radii.radius}
+            //@ts-expect-error TODO:
+            r={styles?.radii?.radius}
           />
         </svg>
       </View>

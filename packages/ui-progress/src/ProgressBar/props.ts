@@ -21,9 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import PropTypes from 'prop-types'
 
-import type { Spacing } from '@instructure/emotion'
-import { AsElementType } from '@instructure/shared-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+import type { AsElementType } from '@instructure/shared-types'
 
 export type ProgressBarMeterColor =
   | 'info'
@@ -33,9 +37,7 @@ export type ProgressBarMeterColor =
   | 'success'
   | 'brand'
 
-export type ProgressBarProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type ProgressBarOwnProps = {
   screenReaderLabel: string
   size?: 'x-small' | 'small' | 'medium' | 'large'
   valueMax?: number
@@ -50,3 +52,80 @@ export type ProgressBarProps = {
   elementRef?: (...args: any[]) => any
   as?: AsElementType
 }
+
+type PropKeys = keyof ProgressBarOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ProgressBarProps = ProgressBarOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * A label is required for accessibility
+   */
+  screenReaderLabel: PropTypes.string.isRequired,
+  /**
+   * Control the height of the progress bar
+   */
+  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+  /**
+   * Maximum value (defaults to 100)
+   */
+  valueMax: PropTypes.number,
+  /**
+   * Receives the progress of the event
+   */
+  valueNow: PropTypes.number,
+  /**
+   * A function for formatting the text provided to screen readers via `aria-valuenow`
+   */
+  formatScreenReaderValue: PropTypes.func,
+  /**
+   * A function to format the displayed value. If null the value will not display.
+   * Takes `valueNow` and `valueMax` as parameters.
+   */
+  renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  /**
+   * Controls the overall color scheme of the component
+   */
+  color: PropTypes.oneOf(['primary', 'primary-inverse']),
+  /**
+   * Control the color of the progress meter. Defaults to showing theme success
+   * color on completion, based on `valueNow` and `valueMax`.
+   */
+  meterColor: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.oneOf(['info', 'warning', 'danger', 'alert', 'success', 'brand'])
+  ]),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Provides a reference to the component's root HTML element
+   */
+  elementRef: PropTypes.func,
+  /**
+   * Set the element type of the component's root
+   */
+  as: PropTypes.elementType
+}
+
+const allowedProps: AllowedPropKeys = [
+  'screenReaderLabel',
+  'size',
+  'valueMax',
+  'valueNow',
+  'formatScreenReaderValue',
+  'renderValue',
+  'color',
+  'meterColor',
+  'margin',
+  'elementRef',
+  'as'
+]
+
+export type { ProgressBarProps }
+export { propTypes, allowedProps }
