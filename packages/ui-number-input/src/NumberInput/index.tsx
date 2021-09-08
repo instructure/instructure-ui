@@ -23,10 +23,9 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import { FormField, FormPropTypes } from '@instructure/ui-form-field'
+import { FormField } from '@instructure/ui-form-field'
 import {
   IconArrowOpenDownLine,
   IconArrowOpenUpLine
@@ -44,11 +43,12 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import {
+import type {
   NumberInputProps,
   NumberInputState,
   NumberInputStyleProps
 } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -60,102 +60,8 @@ id: NumberInput
 @testable()
 class NumberInput extends Component<NumberInputProps, NumberInputState> {
   static readonly componentId = 'NumberInput'
-
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * The form field label.
-     */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-      .isRequired,
-    /**
-     * The id of the input. One is generated if not supplied.
-     */
-    id: PropTypes.string,
-    /**
-     * Specifies if interaction with the input is enabled, disabled, or readonly.
-     * When "disabled", the input changes visibly to indicate that it cannot
-     * receive user interactions. When "readonly" the input still cannot receive
-     * user interactions but it keeps the same styles as if it were enabled.
-     */
-    interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-    /**
-     * Object with shape: `{
-     *   text: PropTypes.string,
-     *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     * }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message),
-    /**
-     * Html placeholder text to display when the input has no value. This
-     * should be hint text, not a label replacement.
-     */
-    placeholder: PropTypes.string,
-    /**
-     * Whether or not the text input is required.
-     */
-    isRequired: PropTypes.bool,
-    /**
-     * Whether or not to display the up/down arrow buttons.
-     */
-    showArrows: PropTypes.bool,
-    /**
-     * The size of the input.
-     */
-    size: PropTypes.oneOf(['medium', 'large']),
-    /**
-     * The value of the input (should be accompanied by an `onChange` prop).
-     */
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /**
-     * The width of the input.
-     */
-    width: PropTypes.string,
-    /**
-     * The display of the root element.
-     */
-    display: PropTypes.oneOf(['inline-block', 'block']),
-    /**
-     * A function that provides a reference to the actual input element.
-     */
-    inputRef: PropTypes.func,
-    /**
-     * Callback fired when input receives focus.
-     */
-    onFocus: PropTypes.func,
-    /**
-     * Callback fired when the input loses focus.
-     */
-    onBlur: PropTypes.func,
-    /**
-     * Callback executed when the input fires a change event.
-     * @param {Object} event - the event object
-     * @param {Object} value - the string value of the input
-     */
-    onChange: PropTypes.func,
-    /**
-     * Called when the down arrow button is clicked, or the down arrow key is
-     * pressed.
-     */
-    onDecrement: PropTypes.func,
-    /**
-     * Called when the up arrow button is clicked, or the up arrow key is
-     * pressed.
-     */
-    onIncrement: PropTypes.func,
-    /**
-     * Callback fired when a key is pressed.
-     */
-    onKeyDown: PropTypes.func,
-    /**
-     * The inputMode attribute of the underlying `input` element can be one of ['numeric', 'decimal', 'tel']
-     */
-    inputMode: PropTypes.oneOf(['numeric', 'decimal', 'tel'])
-  }
-
+  static allowedProps = allowedProps
+  static propTypes = propTypes
   static defaultProps = {
     id: null,
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
@@ -165,8 +71,6 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     isRequired: false,
     showArrows: true,
     size: 'medium',
-    value: undefined,
-    width: undefined,
     display: 'block',
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     inputRef: (event) => {},
@@ -182,8 +86,6 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     onIncrement: (event) => {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onKeyDown: (event) => {},
-    disabled: undefined,
-    readOnly: undefined,
     inputMode: 'numeric'
   }
 
@@ -215,13 +117,11 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleVariables)
+    this.props.makeStyles?.(this.makeStyleVariables)
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleVariables)
+    this.props.makeStyles?.(this.makeStyleVariables)
   }
 
   get makeStyleVariables(): NumberInputStyleProps {
@@ -299,10 +199,10 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
 
   renderArrows() {
     return (
-      <span css={this.props.styles.arrowContainer}>
+      <span css={this.props.styles?.arrowContainer}>
         <button
           aria-hidden
-          css={this.props.styles.arrow}
+          css={this.props.styles?.arrow}
           onMouseDown={this.handleClickUpArrow}
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
           tabIndex="-1"
@@ -312,7 +212,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
         </button>
         <button
           aria-hidden
-          css={this.props.styles.arrow}
+          css={this.props.styles?.arrow}
           onMouseDown={this.handleClickDownArrow}
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
           tabIndex="-1"
@@ -345,16 +245,16 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
         id={this.id}
       >
         <span
-          css={this.props.styles.inputWidth}
+          css={this.props.styles?.inputWidth}
           style={width ? { width } : undefined}
         >
-          <span css={this.props.styles.inputContainer}>
+          <span css={this.props.styles?.inputContainer}>
             <input
               {...omitProps(this.props, {
                 ...FormField.propTypes,
                 ...NumberInput.propTypes
               })}
-              css={this.props.styles.input}
+              css={this.props.styles?.input}
               aria-invalid={this.invalid ? 'true' : undefined}
               id={this.id}
               type="text"
