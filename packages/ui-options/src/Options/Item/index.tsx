@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import {
   omitProps,
@@ -37,7 +36,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { OptionsItemProps } from './props'
+import type { OptionsItemProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -50,40 +50,8 @@ id: Options.Item
 class Item extends Component<OptionsItemProps> {
   static readonly componentId = 'Options.Item'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * Element type to render as
-     */
-    as: PropTypes.elementType,
-    /**
-     * The style variant of the item
-     */
-    variant: PropTypes.oneOf([
-      'default',
-      'highlighted',
-      'selected',
-      'disabled'
-    ]),
-    /**
-     * The aria role of the element
-     */
-    role: PropTypes.string,
-    /**
-     * Content to render before the label
-     * (if you pass a function, it has the `props` as its parameter)
-     */
-    renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Content to render after the label
-     * (if you pass a function, it has the `props` as its parameter)
-     */
-    renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-  } as const
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span',
@@ -95,14 +63,11 @@ class Item extends Component<OptionsItemProps> {
   } as const
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'renderLabel' implicitly has an 'any' ty... Remove this comment to see the full error message
@@ -111,7 +76,7 @@ class Item extends Component<OptionsItemProps> {
 
     return (
       <span
-        css={[styles.content, contentVariant]}
+        css={[styles?.content, contentVariant]}
         role="presentation"
         aria-hidden="true"
       >
@@ -139,14 +104,14 @@ class Item extends Component<OptionsItemProps> {
     const passthroughProps = omitProps(this.props, Item.propTypes)
 
     return (
-      <ElementType role="none" css={styles.item}>
-        <span {...passthroughProps} css={styles.container} role={role}>
+      <ElementType role="none" css={styles?.item}>
+        <span {...passthroughProps} css={styles?.container} role={role}>
           {children}
         </span>
         {renderBeforeLabel &&
-          this.renderContent(renderBeforeLabel, styles.contentBefore)}
+          this.renderContent(renderBeforeLabel, styles?.contentBefore)}
         {renderAfterLabel &&
-          this.renderContent(renderAfterLabel, styles.contentAfter)}
+          this.renderContent(renderAfterLabel, styles?.contentAfter)}
       </ElementType>
     )
   }

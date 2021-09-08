@@ -21,14 +21,54 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
-import { AsElementType } from '@instructure/shared-types'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
 
-export type OptionsProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+export type OptionsOwnProps = {
   as?: AsElementType
   role?: string
   elementRef?: (...args: any[]) => any
   renderLabel?: React.ReactNode | ((...args: any[]) => any)
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof OptionsOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type OptionsProps = OptionsOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Element type to render as
+   */
+  as: PropTypes.elementType,
+  /**
+   * The aria role of the element
+   */
+  role: PropTypes.string,
+  /**
+   * The the actual list element
+   */
+  elementRef: PropTypes.func,
+  /**
+   * Content to render as a label. Mostly for when the component is nested
+   */
+  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  children: ChildrenPropTypes.oneOf(['Options', 'Item', 'Separator'])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'as',
+  'role',
+  'elementRef',
+  'renderLabel',
+  'children'
+]
+
+export type { OptionsProps }
+export { propTypes, allowedProps }
