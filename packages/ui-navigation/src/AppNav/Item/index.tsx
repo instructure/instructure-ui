@@ -23,7 +23,6 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { logError as error } from '@instructure/console'
 import {
@@ -40,7 +39,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { AppNavItemProps } from './props'
+import type { AppNavItemProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -54,78 +54,24 @@ id: AppNav.Item
 class Item extends Component<AppNavItemProps> {
   static readonly componentId = 'AppNav.Item'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * The text to display. If the `icon` prop is used, label text must be wrapped
-     * in `ScreenReaderContent`.
-     */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-      .isRequired,
-    /**
-     * Content to display after the renderLabel text, such as a badge
-     */
-    renderAfter: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * The visual to display (ex. an Image, Logo, Avatar, or Icon)
-     */
-    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * If the item goes to a new page, pass an href
-     */
-    href: PropTypes.string,
-    /**
-     * If the item does not go to a new page, pass an onClick
-     */
-    onClick: PropTypes.func,
-    /**
-     * Denotes which item is currently selected
-     */
-    isSelected: PropTypes.bool,
-    /**
-     * provides a reference to the underlying focusable (`button` or `a`) element
-     */
-    elementRef: PropTypes.func,
-    /**
-     * The element type to render as (will default to `<a>` if href is provided)
-     */
-    as: PropTypes.elementType,
-    /**
-     * Specify the mouse cursor to use on :hover.
-     * The `pointer` cursor is used by default.
-     */
-    cursor: PropTypes.string,
-    /**
-     * Disables the link or button visually and functionally
-     */
-    isDisabled: PropTypes.bool
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onClick: function (event) {},
     isSelected: false,
-    href: undefined,
-    elementRef: undefined,
-    renderIcon: undefined,
-    renderAfter: undefined,
-    as: undefined,
     cursor: 'pointer',
     isDisabled: false
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
@@ -183,13 +129,13 @@ class Item extends Component<AppNavItemProps> {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'handleBlur' does not exist on type 'Item... Remove this comment to see the full error message
         onBlur={this.handleBlur}
         cursor={isDisabled ? 'not-allowed' : cursor}
-        css={this.props.styles.item}
+        css={this.props.styles?.item}
       >
         {icon}
         {labelIsForScreenReaders ? (
           label
         ) : (
-          <span css={this.props.styles.label}>{label}</span>
+          <span css={this.props.styles?.label}>{label}</span>
         )}
         {renderAfter && callRenderProp(renderAfter)}
       </View>

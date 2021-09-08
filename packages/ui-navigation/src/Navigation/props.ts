@@ -21,10 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
+import {
+  controllable,
+  Children as ChildrenPropTypes
+} from '@instructure/ui-prop-types'
+import type { PropValidators } from '@instructure/shared-types'
+import { NavigationItem } from './NavigationItem'
+import type { WithStyleProps } from '@instructure/emotion'
 
-export type NavigationProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type NavigationOwnProps = {
   minimized?: any // TODO: controllable(PropTypes.bool, 'onMinimized', 'defaultMinimized')
   defaultMinimized?: boolean
   onMinimized?: (...args: any[]) => any
@@ -35,8 +42,64 @@ export type NavigationProps = {
   }
   href?: string
   onClick?: (...args: any[]) => any
+  children?: React.ReactNode
 }
 
-export type NavigationState = {
+type NavigationState = {
   minimized: boolean
 }
+
+type PropKeys = keyof NavigationOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type NavigationProps = NavigationOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * children of type Navigation.Item
+   */
+  children: ChildrenPropTypes.oneOf([NavigationItem]),
+  /**
+   * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
+   */
+  minimized: controllable(PropTypes.bool, 'onMinimized', 'defaultMinimized'),
+  /**
+   * Whether the `<Navigation />` is initially minimized (uncontrolled)
+   */
+  defaultMinimized: PropTypes.bool,
+  onMinimized: PropTypes.func,
+  /**
+   * Screen reader label for the main Navigation
+   */
+  label: PropTypes.string.isRequired,
+  /**
+   * Screen reader label for the toggle button expanded/minimized state
+   */
+  toggleLabel: PropTypes.shape({
+    expandedLabel: PropTypes.string,
+    minimizedLabel: PropTypes.string
+  }).isRequired,
+  /**
+   * If the `<Navigation.Item>` goes to a new page, pass an href
+   */
+  href: PropTypes.string,
+  /**
+   * If the `<Navigation.Item>` does not go to a new page pass an onClick
+   */
+  onClick: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'minimized',
+  'defaultMinimized',
+  'onMinimized',
+  'label',
+  'toggleLabel',
+  'href',
+  'onClick'
+]
+
+export type { NavigationProps, NavigationState }
+export { propTypes, allowedProps }

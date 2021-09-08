@@ -21,10 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing } from '@instructure/emotion'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+import { Item } from './Item'
 
-export type AppNavProps = {
+type AppNavOwnProps = {
   screenReaderLabel: string
   debounce?: number
   renderBeforeItems?: React.ReactNode | ((...args: any[]) => any)
@@ -34,6 +40,77 @@ export type AppNavProps = {
   renderTruncateLabel?: React.ReactNode | ((...args: any[]) => any)
   onUpdate?: (...args: any[]) => any
   visibleItemsCount?: number
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof AppNavOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type AppNavProps = AppNavOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Screenreader label for the overall navigation
+   */
+  screenReaderLabel: PropTypes.string.isRequired,
+  /**
+   * Only accepts `AppNav.Item` as children
+   */
+  children: ChildrenPropTypes.oneOf([Item]),
+  /**
+   * The rate (in ms) the component responds to container resizing or
+   * an update to one of its child items
+   */
+  debounce: PropTypes.number,
+  /**
+   * Content to display before the navigation items, such as a logo
+   */
+  renderBeforeItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Content to display after the navigation items, aligned to the far end
+   * of the navigation
+   */
+  renderAfterItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Provides a reference to the underlying nav element
+   */
+  elementRef: PropTypes.func,
+  /**
+   * Customize the text displayed in the menu trigger when links overflow
+   * the overall nav width.
+   */
+  renderTruncateLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Called whenever the navigation items are updated or the size of
+   * the navigation changes. Passes in the `visibleItemsCount` as
+   * a parameter.
+   */
+  onUpdate: PropTypes.func,
+  /**
+   * Sets the number of navigation items that are visible.
+   */
+  visibleItemsCount: PropTypes.number
+}
+
+const allowedProps: AllowedPropKeys = [
+  'screenReaderLabel',
+  'children',
+  'debounce',
+  'renderBeforeItems',
+  'renderAfterItems',
+  'margin',
+  'elementRef',
+  'renderTruncateLabel',
+  'onUpdate',
+  'visibleItemsCount'
+]
+
+export type { AppNavProps }
+export { propTypes, allowedProps }
