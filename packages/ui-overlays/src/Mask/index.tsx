@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'no-s... Remove this comment to see the full error message
 import noScroll from 'no-scroll'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -32,7 +31,8 @@ import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MaskProps } from './props'
+import type { MaskProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -43,41 +43,26 @@ category: components/utilities
 class Mask extends Component<MaskProps> {
   static readonly componentId = 'Mask'
 
-  static propTypes = {
-    onDismiss: PropTypes.func,
-    placement: PropTypes.oneOf(['top', 'center', 'bottom', 'stretch']),
-    fullscreen: PropTypes.bool,
-    children: PropTypes.node,
-    onClick: PropTypes.func,
-    elementRef: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     placement: 'center',
     fullscreen: false,
-    onDismiss: undefined,
     children: null,
-    onClick: undefined,
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {}
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
     if (this.props.fullscreen) {
       noScroll.on()
     }
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   componentWillUnmount() {
@@ -105,7 +90,7 @@ class Mask extends Component<MaskProps> {
 
     const props = {
       ...omitProps(this.props, Mask.propTypes),
-      css: this.props.styles.mask,
+      css: this.props.styles?.mask,
       ref: this.handleElementRef
     }
 

@@ -21,13 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type MaskProps = {
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type MaskOwnProps = {
   onDismiss?: (...args: any[]) => any
   placement?: 'top' | 'center' | 'bottom' | 'stretch'
   fullscreen?: boolean
   onClick?: (...args: any[]) => any
   elementRef?: (...args: any[]) => any
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof MaskOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type MaskProps = MaskOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  onDismiss: PropTypes.func,
+  placement: PropTypes.oneOf(['top', 'center', 'bottom', 'stretch']),
+  fullscreen: PropTypes.bool,
+  children: PropTypes.node,
+  onClick: PropTypes.func,
+  elementRef: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = [
+  'onDismiss',
+  'placement',
+  'fullscreen',
+  'children',
+  'onClick',
+  'elementRef'
+]
+
+export type { MaskProps }
+export { propTypes, allowedProps }
