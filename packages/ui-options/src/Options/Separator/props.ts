@@ -21,11 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import PropTypes from 'prop-types'
 
-import { AsElementType } from '@instructure/shared-types'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
 
-export type OptionsSeparatorProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type OptionsSeparatorOwnProps = {
   as?: AsElementType
 }
+
+type PropKeys = keyof OptionsSeparatorOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type OptionsSeparatorProps = OptionsSeparatorOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Element type to render as
+   */
+  as: PropTypes.elementType
+}
+
+const allowedProps: AllowedPropKeys = ['as']
+
+export type { OptionsSeparatorProps }
+export { propTypes, allowedProps }

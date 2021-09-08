@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { getElementType } from '@instructure/ui-react-utils'
 
@@ -32,7 +31,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { OptionsSeparatorProps } from './props'
+import type { OptionsSeparatorProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -45,30 +45,19 @@ id: Options.Separator
 class Separator extends Component<OptionsSeparatorProps> {
   static readonly componentId = 'Options.Separator'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * Element type to render as
-     */
-    as: PropTypes.elementType
-  } as const
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span'
   } as const
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   render() {
@@ -77,7 +66,7 @@ class Separator extends Component<OptionsSeparatorProps> {
 
     return (
       <ElementType role="none">
-        <div {...rest} css={styles.separator} role="presentation" />
+        <div {...rest} css={styles?.separator} role="presentation" />
       </ElementType>
     )
   }

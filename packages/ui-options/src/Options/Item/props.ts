@@ -22,16 +22,61 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
-import { ReactNode } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export type OptionsItemProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+type OptionsItemOwnProps = {
   as?: AsElementType
   variant?: 'default' | 'highlighted' | 'selected' | 'disabled'
   role?: string
   renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
   renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
-  children?: ReactNode
+  children?: React.ReactNode
 }
+
+type PropKeys = keyof OptionsItemOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type OptionsItemProps = OptionsItemOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Element type to render as
+   */
+  as: PropTypes.elementType,
+  /**
+   * The style variant of the item
+   */
+  variant: PropTypes.oneOf(['default', 'highlighted', 'selected', 'disabled']),
+  /**
+   * The aria role of the element
+   */
+  role: PropTypes.string,
+  /**
+   * Content to render before the label
+   * (if you pass a function, it has the `props` as its parameter)
+   */
+  renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * Content to render after the label
+   * (if you pass a function, it has the `props` as its parameter)
+   */
+  renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+}
+
+const allowedProps: AllowedPropKeys = [
+  'as',
+  'variant',
+  'role',
+  'renderBeforeLabel',
+  'renderAfterLabel',
+  'children'
+]
+
+export type { OptionsItemProps }
+export { propTypes, allowedProps }

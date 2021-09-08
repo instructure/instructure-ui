@@ -24,9 +24,7 @@
 
 /** @jsx jsx */
 import { Component, Children, ReactElement } from 'react'
-import PropTypes from 'prop-types'
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import {
   omitProps,
   matchComponentTypes,
@@ -45,7 +43,8 @@ import generateComponentTheme from './theme'
 
 import { Item } from './Item'
 import { Separator } from './Separator'
-import { OptionsProps } from './props'
+import type { OptionsProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -57,29 +56,8 @@ category: components
 class Options extends Component<OptionsProps> {
   static readonly componentId = 'Options'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * Element type to render as
-     */
-    as: PropTypes.elementType,
-    /**
-     * The aria role of the element
-     */
-    role: PropTypes.string,
-    /**
-     * The the actual list element
-     */
-    elementRef: PropTypes.func,
-    /**
-     * Content to render as a label. Mostly for when the component is nested
-     */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    children: ChildrenPropTypes.oneOf(['Options', 'Item', 'Separator'])
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     as: 'span',
@@ -94,14 +72,11 @@ class Options extends Component<OptionsProps> {
   static Separator = Separator
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   _labelId = uid('Options-label')
@@ -121,7 +96,7 @@ class Options extends Component<OptionsProps> {
         id={this._labelId}
         role="presentation"
         aria-hidden="true"
-        css={styles.label}
+        css={styles?.label}
       >
         {callRenderProp(renderLabel)}
       </span>
@@ -132,7 +107,7 @@ class Options extends Component<OptionsProps> {
   renderSubList(children) {
     const { styles } = this.props
     return (
-      <Item as={this.childAs} role="presentation" css={styles.label}>
+      <Item as={this.childAs} role="presentation" css={styles?.label}>
         {children}
       </Item>
     )
@@ -160,12 +135,12 @@ class Options extends Component<OptionsProps> {
 
     const { as, role, elementRef, renderLabel, styles } = this.props
     return (
-      <div css={styles.options} role="presentation">
+      <div css={styles?.options} role="presentation">
         {renderLabel && this.renderLabel()}
         <View
           {...passthroughProps}
           elementRef={elementRef}
-          css={styles.list}
+          css={styles?.list}
           as={as}
           role={role}
           display="block"
