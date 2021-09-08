@@ -23,7 +23,6 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
@@ -33,7 +32,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { NavigationItemProps } from './props'
+import type { NavigationItemProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -46,58 +46,23 @@ id: Navigation.Item
 class NavigationItem extends Component<NavigationItemProps> {
   static readonly componentId = 'Navigation.Item'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * The visual to display (ex. an Image, Logo, Avatar, or Icon)
-     */
-    icon: PropTypes.node.isRequired,
-    /**
-     * The text to display  for the Navigation Link
-     */
-    label: PropTypes.node.isRequired,
-    /**
-     * The element type to render as (will default to `<a>` if href is provided)
-     */
-    as: PropTypes.elementType,
-    /**
-     * If the NavigationItem goes to a new page, pass an href
-     */
-    href: PropTypes.string,
-    /**
-     * If the NavigationItem does not go to a new page pass an onClick
-     */
-    onClick: PropTypes.func,
-    /**
-     * Denotes which NavigationItem is currently selected
-     */
-    selected: PropTypes.bool,
-    /**
-     * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
-     */
-    minimized: PropTypes.bool
-  } as const
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     as: 'a',
     // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
     onClick: function (e, selected) {},
     selected: false,
-    minimized: false,
-    href: undefined
+    minimized: false
   } as const
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles({ minimized: this.minimized })
+    this.props.makeStyles?.({ minimized: this.props.minimized })
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles({ minimized: this.minimized })
+    this.props.makeStyles?.({ minimized: this.props.minimized })
   }
 
   renderLink() {
@@ -112,15 +77,15 @@ class NavigationItem extends Component<NavigationItemProps> {
         {...props}
         href={href}
         onClick={onClick}
-        css={this.props.styles.navigationItem}
+        css={this.props.styles?.navigationItem}
         //@ts-expect-error TODO: INSTUI-3245
         aria-label={this.props.minimized ? label : undefined}
       >
-        <div css={this.props.styles.icon} aria-hidden="true">
+        <div css={this.props.styles?.icon} aria-hidden="true">
           {icon}
         </div>
         {!this.props.minimized ? (
-          <div css={this.props.styles.label}>{label}</div>
+          <div css={this.props.styles?.label}>{label}</div>
         ) : null}
       </ElementType>
     )

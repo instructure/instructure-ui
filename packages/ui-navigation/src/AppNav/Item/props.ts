@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import PropTypes from 'prop-types'
 
-import { AsElementType } from '@instructure/shared-types'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
 
-export type AppNavItemProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type AppNavItemOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
   renderAfter?: React.ReactNode | ((...args: any[]) => any)
   renderIcon?: React.ReactNode | ((...args: any[]) => any)
@@ -38,3 +38,70 @@ export type AppNavItemProps = {
   cursor?: string
   isDisabled?: boolean
 }
+
+type PropKeys = keyof AppNavItemOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type AppNavItemProps = AppNavItemOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The text to display. If the `icon` prop is used, label text must be wrapped
+   * in `ScreenReaderContent`.
+   */
+  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  /**
+   * Content to display after the renderLabel text, such as a badge
+   */
+  renderAfter: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * The visual to display (ex. an Image, Logo, Avatar, or Icon)
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * If the item goes to a new page, pass an href
+   */
+  href: PropTypes.string,
+  /**
+   * If the item does not go to a new page, pass an onClick
+   */
+  onClick: PropTypes.func,
+  /**
+   * Denotes which item is currently selected
+   */
+  isSelected: PropTypes.bool,
+  /**
+   * provides a reference to the underlying focusable (`button` or `a`) element
+   */
+  elementRef: PropTypes.func,
+  /**
+   * The element type to render as (will default to `<a>` if href is provided)
+   */
+  as: PropTypes.elementType,
+  /**
+   * Specify the mouse cursor to use on :hover.
+   * The `pointer` cursor is used by default.
+   */
+  cursor: PropTypes.string,
+  /**
+   * Disables the link or button visually and functionally
+   */
+  isDisabled: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = [
+  'renderLabel',
+  'renderAfter',
+  'renderIcon',
+  'href',
+  'onClick',
+  'isSelected',
+  'elementRef',
+  'as',
+  'cursor',
+  'isDisabled'
+]
+
+export type { AppNavItemProps }
+export { propTypes, allowedProps }

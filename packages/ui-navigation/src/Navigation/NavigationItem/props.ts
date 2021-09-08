@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import PropTypes from 'prop-types'
 
-import { AsElementType } from '@instructure/shared-types'
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
 
-export type NavigationItemProps = {
-  makeStyles?: (...args: any[]) => any
-  styles?: any
+type NavigationItemOwnProps = {
   icon: React.ReactNode
   label: React.ReactNode
   as?: AsElementType
@@ -35,3 +35,53 @@ export type NavigationItemProps = {
   selected?: boolean
   minimized?: boolean
 }
+
+type PropKeys = keyof NavigationItemOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type NavigationItemProps = NavigationItemOwnProps & WithStyleProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The visual to display (ex. an Image, Logo, Avatar, or Icon)
+   */
+  icon: PropTypes.node.isRequired,
+  /**
+   * The text to display  for the Navigation Link
+   */
+  label: PropTypes.node.isRequired,
+  /**
+   * The element type to render as (will default to `<a>` if href is provided)
+   */
+  as: PropTypes.elementType,
+  /**
+   * If the NavigationItem goes to a new page, pass an href
+   */
+  href: PropTypes.string,
+  /**
+   * If the NavigationItem does not go to a new page pass an onClick
+   */
+  onClick: PropTypes.func,
+  /**
+   * Denotes which NavigationItem is currently selected
+   */
+  selected: PropTypes.bool,
+  /**
+   * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
+   */
+  minimized: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = [
+  'icon',
+  'label',
+  'as',
+  'href',
+  'onClick',
+  'selected',
+  'minimized'
+]
+
+export type { NavigationItemProps }
+export { propTypes, allowedProps }

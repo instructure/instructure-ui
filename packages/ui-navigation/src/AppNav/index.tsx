@@ -24,10 +24,8 @@
 
 /** @jsx jsx */
 import { Children, Component } from 'react'
-import PropTypes from 'prop-types'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
@@ -41,7 +39,8 @@ import { Item } from './Item'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { AppNavProps } from './props'
+import type { AppNavProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -53,66 +52,13 @@ category: components
 class AppNav extends Component<AppNavProps> {
   static readonly componentId = 'AppNav'
 
-  static propTypes = {
-    /**
-     * Screenreader label for the overall navigation
-     */
-    screenReaderLabel: PropTypes.string.isRequired,
-    /**
-     * Only accepts `AppNav.Item` as children
-     */
-    children: ChildrenPropTypes.oneOf([Item]),
-    /**
-     * The rate (in ms) the component responds to container resizing or
-     * an update to one of its child items
-     */
-    debounce: PropTypes.number,
-    /**
-     * Content to display before the navigation items, such as a logo
-     */
-    renderBeforeItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Content to display after the navigation items, aligned to the far end
-     * of the navigation
-     */
-    renderAfterItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Provides a reference to the underlying nav element
-     */
-    elementRef: PropTypes.func,
-    /**
-     * Customize the text displayed in the menu trigger when links overflow
-     * the overall nav width.
-     */
-    renderTruncateLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Called whenever the navigation items are updated or the size of
-     * the navigation changes. Passes in the `visibleItemsCount` as
-     * a parameter.
-     */
-    onUpdate: PropTypes.func,
-    /**
-     * Sets the number of navigation items that are visible.
-     */
-    visibleItemsCount: PropTypes.number,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     children: null,
     debounce: 300,
     margin: '0',
-    renderBeforeItems: undefined,
-    renderAfterItems: undefined,
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     renderTruncateLabel: () => 'More',
@@ -129,8 +75,7 @@ class AppNav extends Component<AppNavProps> {
   _list = null
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
     const { width: origWidth } = getBoundingClientRect(this._list)
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_debounced' does not exist on type 'AppN... Remove this comment to see the full error message
@@ -157,8 +102,7 @@ class AppNav extends Component<AppNavProps> {
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentWillUnmount() {
@@ -176,7 +120,7 @@ class AppNav extends Component<AppNavProps> {
   }
 
   measureItems = () => {
-    const menuTriggerWidth = px(this.props.styles.menuTriggerWidth)
+    const menuTriggerWidth = px(this.props.styles?.menuTriggerWidth as number)
     let visibleItemsCount = 0
 
     if (this._list) {
@@ -224,8 +168,8 @@ class AppNav extends Component<AppNavProps> {
         key={key}
         css={
           isMenuTrigger
-            ? this.props.styles.listItemWithMenuTrigger
-            : this.props.styles.listItem
+            ? this.props.styles?.listItemWithMenuTrigger
+            : this.props.styles?.listItem
         }
       >
         {item}
@@ -296,8 +240,8 @@ class AppNav extends Component<AppNavProps> {
         {...passthroughProps}
         as="nav"
         css={[
-          this.props.styles.appNav,
-          hasRenderedContent ? this.props.styles.alignCenter : ''
+          this.props.styles?.appNav,
+          hasRenderedContent ? this.props.styles?.alignCenter : ''
         ]}
         margin={margin}
         display={hasRenderedContent ? 'flex' : 'block'}
@@ -307,7 +251,7 @@ class AppNav extends Component<AppNavProps> {
         <ul
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'HTMLUListElement | null' is not assignable t... Remove this comment to see the full error message
           ref={(el) => (this._list = el)}
-          css={this.props.styles.list}
+          css={this.props.styles?.list}
           aria-label={callRenderProp(screenReaderLabel)}
         >
           {visibleChildren.map((child, index) => {
