@@ -27,7 +27,6 @@
 // test is breaking without importing React here
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { ms } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
@@ -38,7 +37,8 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { BaseTransition } from './BaseTransition'
-import { TransitionProps } from './props'
+import type { TransitionProps } from './props'
+import { allowedProps, propTypes } from './props'
 
 /**
 ---
@@ -51,73 +51,8 @@ category: components/utilities
 class Transition extends Component<TransitionProps> {
   static readonly componentId = 'Transition'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    type: PropTypes.oneOf([
-      'fade',
-      'scale',
-      'slide-down',
-      'slide-up',
-      'slide-left',
-      'slide-right'
-    ]),
-    /**
-     * A single element to animate in and out
-     */
-    children: PropTypes.element,
-    /**
-     * Show the component; triggers the enter or exit animation
-     */
-    in: PropTypes.bool,
-    /**
-     * Unmount the component (remove it from the DOM) when it is not shown
-     */
-    unmountOnExit: PropTypes.bool,
-    /**
-     * Run the enter animation when the component mounts, if it is initially
-     * shown
-     */
-    transitionOnMount: PropTypes.bool,
-    /**
-     * Run the enter animation
-     */
-    transitionEnter: PropTypes.bool,
-    /**
-     * Run the exit animation
-     */
-    transitionExit: PropTypes.bool,
-    /**
-     * Callback fired when transitioning to the next state
-     */
-    onTransition: PropTypes.func,
-    /**
-     * Callback fired before the "entering" classes are applied
-     */
-    onEnter: PropTypes.func,
-    /**
-     * Callback fired after the "entering" classes are applied
-     */
-    onEntering: PropTypes.func,
-    /**
-     * Callback fired after the "enter" classes are applied
-     */
-    onEntered: PropTypes.func,
-    /**
-     * Callback fired before the "exiting" classes are applied
-     */
-    onExit: PropTypes.func,
-    /**
-     * Callback fired after the "exiting" classes are applied
-     */
-    onExiting: PropTypes.func,
-    /**
-     * Callback fired after the "exited" classes are applied
-     */
-    onExited: PropTypes.func
-  }
+  static allowedProps = allowedProps
+  static propTypes = propTypes
 
   static defaultProps = {
     type: 'fade',
@@ -141,14 +76,11 @@ class Transition extends Component<TransitionProps> {
   static states = BaseTransition.states
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   handleExited = () => {
@@ -174,13 +106,13 @@ class Transition extends Component<TransitionProps> {
   renderTransitionHelper = () => {
     const { styles } = this.props
 
-    return <Global styles={styles.globalStyles} />
+    return <Global styles={styles?.globalStyles} />
   }
 
   render() {
     const { type, children, styles, ...props } = this.props
 
-    const duration = ms(styles?.duration)
+    const duration = ms(styles?.duration as number)
 
     return (
       <>
@@ -189,10 +121,15 @@ class Transition extends Component<TransitionProps> {
           {...props}
           enterDelay={duration}
           exitDelay={duration}
+          //@ts-expect-error TODO:
           transitionClassName={styles?.classNames?.transitioning}
+          //@ts-expect-error TODO:
           exitedClassName={styles?.classNames?.exited}
+          //@ts-expect-error TODO:
           exitingClassName={styles?.classNames?.exiting}
+          //@ts-expect-error TODO:
           enteredClassName={styles?.classNames?.entered}
+          //@ts-expect-error TODO:
           enteringClassName={styles?.classNames?.entering}
           onEntered={this.handleEntered}
           onExited={this.handleExited}
