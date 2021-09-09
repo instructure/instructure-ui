@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
+import type { ReactNode } from 'react'
 import { AsElementType } from '@instructure/shared-types'
-import React from 'react'
 
-export type TextProps = React.PropsWithChildren<{
+export type TextProps = {
   as?: AsElementType
   color?:
     | 'primary'
@@ -47,4 +47,5 @@ export type TextProps = React.PropsWithChildren<{
   wrap?: 'normal' | 'break-word'
   makeStyles?: (...args: any[]) => any
   styles?: any
-}>
+  children?: ReactNode
+}

@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-import { PropsWithChildren } from 'react'
-
 import { AsElementType } from '@instructure/shared-types'
 
-export type AccessibleContentProps = PropsWithChildren<{
+export type AccessibleContentProps = {
   alt?: string
 
   /**
    * the element type to render the screen reader content as
    */
   as: AsElementType
-}>
+  children?: React.ReactNode
+}

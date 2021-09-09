@@ -239,7 +239,7 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
   }
 
   render() {
-    const ElementType = getElementType<DialogProps>(Dialog, this.props)
+    const ElementType = getElementType(Dialog, this.props)
 
     return this.props.open ? (
       <ElementType

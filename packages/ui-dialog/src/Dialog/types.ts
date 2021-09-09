@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import type { ReactNode } from 'react'
 import { AsElementType } from '@instructure/shared-types'
 
-export type DialogProps = React.PropsWithChildren<{
+export type DialogProps = {
   as?: AsElementType
   display?: 'auto' | 'block' | 'inline-block'
   label?: string
@@ -43,4 +43,5 @@ export type DialogProps = React.PropsWithChildren<{
   shouldCloseOnDocumentClick?: boolean
   shouldCloseOnEscape?: boolean
   shouldFocusOnOpen?: boolean
-}>
+  children?: ReactNode
+}

@@ -23,9 +23,9 @@
  */
 
 import { AsElementType } from '@instructure/shared-types'
-import React from 'react'
+import type { ReactNode } from 'react'
 
-export type CalendarDayProps = React.PropsWithChildren<{
+export type CalendarDayProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   date: string
@@ -38,7 +38,8 @@ export type CalendarDayProps = React.PropsWithChildren<{
   onKeyDown?: (...args: any[]) => any
   elementRef?: (...args: any[]) => any
   as?: AsElementType
-}>
+  children?: ReactNode
+}
 
 export type CalendarDayStyleProps = {
   isDisabled: boolean

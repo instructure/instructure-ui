@@ -23,9 +23,9 @@
  */
 
 import { AsElementType } from '@instructure/shared-types'
-import { PropsWithChildren } from 'react'
+import { ReactNode } from 'react'
 
-export type OptionsItemProps = PropsWithChildren<{
+export type OptionsItemProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   as?: AsElementType
@@ -33,4 +33,5 @@ export type OptionsItemProps = PropsWithChildren<{
   role?: string
   renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
   renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
-}>
+  children?: ReactNode
+}
