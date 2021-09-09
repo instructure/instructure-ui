@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
+import type { ReactNode } from 'react'
 import { AsElementType } from '@instructure/shared-types'
 import type { Spacing } from '@instructure/emotion'
-import React from 'react'
 
 type HeadingLevel<U extends keyof JSX.IntrinsicElements> = U
 
-export type HeadingProps = React.PropsWithChildren<{
+export type HeadingProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   border?: 'none' | 'top' | 'bottom'
@@ -42,4 +42,5 @@ export type HeadingProps = React.PropsWithChildren<{
   as?: AsElementType
   margin?: Spacing
   elementRef?: (...args: any[]) => any
-}>
+  children?: ReactNode
+}

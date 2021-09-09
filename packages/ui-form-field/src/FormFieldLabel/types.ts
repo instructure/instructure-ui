@@ -22,11 +22,12 @@
  * SOFTWARE.
  */
 
-import { PropsWithChildren } from 'react'
+import type { ReactNode } from 'react'
 import { AsElementType } from '@instructure/shared-types'
 
-export type FormFieldLabelProps = PropsWithChildren<{
+export type FormFieldLabelProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   as?: AsElementType
-}>
+  children?: ReactNode
+}

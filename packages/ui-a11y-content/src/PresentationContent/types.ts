@@ -22,12 +22,13 @@
  * SOFTWARE.
  */
 
-import { AsElementType } from '@instructure/shared-types'
-import { PropsWithChildren } from 'react'
+import type { ReactNode } from 'react'
+import type { AsElementType } from '@instructure/shared-types'
 
-export type PresentationContentProps = PropsWithChildren<{
+export type PresentationContentProps = {
   /**
    * the element type to render as
    */
   as: AsElementType
-}>
+  children?: ReactNode
+}

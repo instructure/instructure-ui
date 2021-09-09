@@ -75,7 +75,7 @@ function getElementType<T extends ComponentWithAsProp>(
     return 'button'
   }
 
-  return Component.defaultProps?.as ?? 'span'
+  return (Component.defaultProps?.as || 'span') as AsElementType
 }
 
 export default getElementType
