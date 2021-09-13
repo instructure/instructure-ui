@@ -34,7 +34,7 @@ import type {
 import React from 'react'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type TooltipOwnProps = {
+type TooltipOwnProps = {
   renderTip: React.ReactNode | ((...args: any[]) => any)
   isShowingContent?: boolean
   defaultIsShowingContent?: boolean

@@ -27,7 +27,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type TreeBrowserOwnProps = {
+type TreeBrowserOwnProps = {
   collections: any
   items: any
   rootId?: string | number

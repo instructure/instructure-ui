@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import type { WithStyleProps } from '@instructure/emotion'
 import { PropValidators } from '@instructure/shared-types'
 
-export type TreeBrowserButtonOwnProps = {
+type TreeBrowserButtonOwnProps = {
   id?: string | number
   name?: string
   descriptor?: string

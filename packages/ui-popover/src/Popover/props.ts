@@ -37,7 +37,7 @@ import type {
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 import type { PropValidators } from '@instructure/shared-types'
 
-export type PopoverOwnProps = {
+type PopoverOwnProps = {
   isShowingContent?: boolean
   defaultIsShowingContent?: boolean
   on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]

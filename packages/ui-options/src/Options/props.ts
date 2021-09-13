@@ -28,7 +28,7 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import type { AsElementType, PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type OptionsOwnProps = {
+type OptionsOwnProps = {
   as?: AsElementType
   role?: string
   elementRef?: (...args: any[]) => any

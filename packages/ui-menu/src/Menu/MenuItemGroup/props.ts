@@ -34,7 +34,7 @@ import { MenuItemSeparator } from '../MenuItemSeparator'
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type MenuGroupOwnProps = {
+type MenuGroupOwnProps = {
   label: React.ReactNode
   allowMultiple?: boolean
   children?: React.ReactNode // TODO: oneOf([MenuItem, MenuItemSeparator])

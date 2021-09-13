@@ -30,7 +30,7 @@ import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
 import { Page } from './Page'
 
-export type PagesOwnProps = {
+type PagesOwnProps = {
   defaultPageIndex?: number
   activePageIndex?: any // TODO: controllable( PropTypes.number, 'onPageIndexChange', 'defaultPageIndex' )
   onPageIndexChange?: (...args: any[]) => any

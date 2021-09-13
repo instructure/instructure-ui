@@ -28,7 +28,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type ToggleDetailsOwnProps = {
+type ToggleDetailsOwnProps = {
   variant?: 'default' | 'filled'
   summary: React.ReactNode
   expanded?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
