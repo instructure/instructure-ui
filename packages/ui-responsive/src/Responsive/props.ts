@@ -39,7 +39,7 @@ export type ResponsiveByBreakpointProps = {
   [breakpointName: string]: ResponsivePropsObject
 }
 
-export type ResponsiveOwnProps = {
+type ResponsiveOwnProps = {
   /**
    * Consists of an object where the keys define the names of breakpoints. The values are query objects
    * with keys representing the breakpoint condition and values representing a breakpoint value as a

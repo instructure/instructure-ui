@@ -29,7 +29,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import { AsElementType } from '@instructure/shared-types'
 import { PropValidators } from '@instructure/shared-types'
 
-export type ToggleGroupOwnProps = {
+type ToggleGroupOwnProps = {
   summary: React.ReactNode
   toggleLabel: React.ReactNode | ((...args: any[]) => any)
   as?: AsElementType

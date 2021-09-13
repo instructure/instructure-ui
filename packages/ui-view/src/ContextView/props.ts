@@ -35,7 +35,7 @@ import type {
 import type { AsElementType, PropValidators } from '@instructure/shared-types'
 import type { PlacementPropValues } from '@instructure/ui-position'
 
-export type ContextViewOwnProps = React.PropsWithChildren<{
+type ContextViewOwnProps = React.PropsWithChildren<{
   as?: AsElementType
   elementRef?: (...args: any[]) => any
   height?: string | number

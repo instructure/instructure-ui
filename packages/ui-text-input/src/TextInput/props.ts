@@ -32,7 +32,7 @@ import type { FormMessage } from '@instructure/ui-form-field'
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type TextInputOwnProps = {
+type TextInputOwnProps = {
   renderLabel?: React.ReactNode | ((...args: any[]) => any)
   type?: 'text' | 'email' | 'url' | 'tel' | 'search' | 'password'
   id?: string

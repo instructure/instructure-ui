@@ -29,7 +29,7 @@ import type { WithStyleProps } from '@instructure/emotion'
 import type { TreeBrowserButtonProps } from '../TreeButton/props'
 import React from 'react'
 
-export type TreeBrowserNodeOwnProps = Pick<
+type TreeBrowserNodeOwnProps = Pick<
   TreeBrowserButtonProps,
   | 'id'
   | 'size'

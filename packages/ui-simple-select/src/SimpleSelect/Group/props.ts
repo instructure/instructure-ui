@@ -28,7 +28,7 @@ import { Option } from '../Option'
 
 import type { PropValidators } from '@instructure/shared-types'
 
-export type SimpleSelectGroupOwnProps = {
+type SimpleSelectGroupOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
   children?: React.ReactNode
 }

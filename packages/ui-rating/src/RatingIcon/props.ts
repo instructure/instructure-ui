@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type RatingIconOwnProps = {
+type RatingIconOwnProps = {
   animationDelay?: number
   animateFill?: boolean
   filled?: boolean

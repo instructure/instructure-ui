@@ -30,7 +30,7 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type TextAreaOwnProps = {
+type TextAreaOwnProps = {
   label: React.ReactNode
   id?: string
   size?: 'small' | 'medium' | 'large'

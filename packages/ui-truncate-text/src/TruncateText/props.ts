@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type TruncateTextOwnProps = {
+type TruncateTextOwnProps = {
   maxLines?: string | number
   position?: 'end' | 'middle'
   truncate?: 'character' | 'word'

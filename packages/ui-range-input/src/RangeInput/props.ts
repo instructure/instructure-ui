@@ -29,7 +29,7 @@ import { PropValidators } from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type RangeInputOwnProps = {
+type RangeInputOwnProps = {
   min: number
   max: number
   defaultValue?: number

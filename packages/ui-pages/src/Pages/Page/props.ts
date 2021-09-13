@@ -29,7 +29,7 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 import type { Spacing } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
 
-export type PagesPageOwnProps = {
+type PagesPageOwnProps = {
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'

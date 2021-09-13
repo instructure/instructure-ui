@@ -31,7 +31,7 @@ import type { PropValidators } from '@instructure/shared-types'
 import { TreeNode } from '../TreeNode'
 import type { WithStyleProps } from '@instructure/emotion'
 
-export type TreeBrowserCollectionOwnProps = {
+type TreeBrowserCollectionOwnProps = {
   id?: string | number
   name?: string
   descriptor?: string

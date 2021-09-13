@@ -39,7 +39,7 @@ import type { WithStyleProps } from '@instructure/emotion'
 import { Group } from './Group'
 import { Option } from './Option'
 
-export type SelectOwnProps = {
+type SelectOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
   inputValue?: string
   isShowingOptions?: boolean
