@@ -23,13 +23,15 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { getClassList } from '@instructure/ui-dom-utils'
 import {
   ensureSingleChild,
   safeCloneElement
 } from '@instructure/ui-react-utils'
+
+import { allowedProps, propTypes } from './props'
+import type { BaseTransitionProps } from './props'
 
 const STATES = {
   EXITED: -2,
@@ -45,109 +47,9 @@ private: true
   Note: this is forked from https://github.com/react-bootstrap/react-overlays/blob/master/src/Transition.js
   so that it works with css modules. The internals are pretty different now, but it has roughly the same api.
 **/
-class BaseTransition extends React.Component {
-  static propTypes = {
-    /**
-     * Show the component? Triggers the enter or exit animation.
-     */
-    in: PropTypes.bool,
-
-    /**
-     * Unmount the component (remove it from the DOM) when it is not shown.
-     */
-    unmountOnExit: PropTypes.bool,
-
-    /**
-     * Run the enter animation when the component mounts, if it is initially
-     * shown
-     */
-    transitionOnMount: PropTypes.bool,
-    /**
-     * Run the enter animation
-     */
-    transitionEnter: PropTypes.bool,
-    /**
-     * Run the exit animation
-     */
-    transitionExit: PropTypes.bool,
-
-    /**
-     * A Timeout for the animation, in milliseconds, to ensure that a node doesn't
-     * transition indefinately if the browser transitionEnd events are
-     * canceled or interrupted.
-     *
-     * By default this is set to a high number (5 seconds) as a failsafe. You should consider
-     * setting this to the duration of your animation (or a bit above it).
-     */
-    enterDelay: PropTypes.number,
-
-    /**
-     * A Timeout for the animation, in milliseconds, to ensure that a node doesn't
-     * transition indefinately if the browser transitionEnd events are
-     * canceled or interrupted.
-     *
-     * By default this is set to a high number (5 seconds) as a failsafe. You should consider
-     * setting this to the duration of your animation (or a bit above it).
-     */
-    exitDelay: PropTypes.number,
-
-    /**
-     * the base CSS class for the transition (transitions go here)
-     */
-    transitionClassName: PropTypes.string,
-
-    /**
-     * CSS class or classes applied when the component is exited
-     */
-    exitedClassName: PropTypes.string,
-    /**
-     * CSS class or classes applied while the component is exiting
-     */
-    exitingClassName: PropTypes.string,
-    /**
-     * CSS class or classes applied when the component is entered
-     */
-    enteredClassName: PropTypes.string,
-    /**
-     * CSS class or classes applied while the component is entering
-     */
-    enteringClassName: PropTypes.string,
-
-    /**
-     * Callback fired when transitioning to the next state
-     */
-    onTransition: PropTypes.func,
-
-    /**
-     * Callback fired before the "entering" classes are applied
-     */
-    onEnter: PropTypes.func,
-    /**
-     * Callback fired after the "entering" classes are applied
-     */
-    onEntering: PropTypes.func,
-    /**
-     * Callback fired after the "enter" classes are applied
-     */
-    onEntered: PropTypes.func,
-    /**
-     * Callback fired before the "exiting" classes are applied
-     */
-    onExit: PropTypes.func,
-    /**
-     * Callback fired after the "exiting" classes are applied
-     */
-    onExiting: PropTypes.func,
-    /**
-     * Callback fired after the "exited" classes are applied
-     */
-    onExited: PropTypes.func,
-
-    children: PropTypes.node,
-
-    className: PropTypes.string
-  }
-
+class BaseTransition extends React.Component<BaseTransitionProps> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     in: false,
     component: 'div',
@@ -166,16 +68,9 @@ class BaseTransition extends React.Component {
     onExit: function () {},
     onExiting: function () {},
     onExited: function () {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'toState' is declared but its value is never read.
-    onTransition: function (toState, fromState) {},
+    onTransition: function () {},
 
-    className: undefined,
-    children: null,
-    transitionClassName: undefined,
-    exitedClassName: undefined,
-    exitingClassName: undefined,
-    enteredClassName: undefined,
-    enteringClassName: undefined
+    children: null
   }
 
   static states = STATES
@@ -187,13 +82,11 @@ class BaseTransition extends React.Component {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'in' does not exist on type 'Readonly<{}>... Remove this comment to see the full error message
     this.startTransition(this.props.in, this.props.transitionOnMount)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'in' does not exist on type 'Readonly<{}>... Remove this comment to see the full error message
     if (this.props.in !== prevProps.in && prevState.transitioning) {
       // direction changed before previous transition finished
       return true
@@ -207,14 +100,11 @@ class BaseTransition extends React.Component {
       this.clearTransition(prevProps.transitionClassName)
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitionClassName' does not exist on t... Remove this comment to see the full error message
     if (this.props.transitionClassName !== prevProps.transitionClassName) {
       this.clearTransition(prevProps.transitionClassName)
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'in' does not exist on type 'Readonly<{}>... Remove this comment to see the full error message
     if (prevProps.in !== this.props.in) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'in' does not exist on type 'Readonly<{}>... Remove this comment to see the full error message
       this.startTransition(this.props.in, true)
     }
   }
@@ -229,7 +119,6 @@ class BaseTransition extends React.Component {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'transitionIn' implicitly has an 'any' t... Remove this comment to see the full error message
   startTransition = (transitionIn, transitionOnStart) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitionEnter' does not exist on type ... Remove this comment to see the full error message
     const { transitionEnter, transitionExit } = this.props
     if (transitionIn) {
       this.enter(transitionEnter && transitionOnStart ? STATES.EXITED : null)
@@ -254,13 +143,12 @@ class BaseTransition extends React.Component {
 
     const transitionClassName = this.getTransitionClassName(toState)
     const prevTransitionClassName = this.getTransitionClassName(fromState)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitionClassName' does not exist on t... Remove this comment to see the full error message
     const baseTransitionClassName = this.props.transitionClassName
 
     if (fromState && transitionDuration && this.transitionEnabled(toState)) {
-      classList.add(baseTransitionClassName)
+      baseTransitionClassName && classList.add(baseTransitionClassName)
     } else {
-      classList.remove(baseTransitionClassName)
+      baseTransitionClassName && classList.remove(baseTransitionClassName)
     }
 
     if (prevTransitionClassName) {
@@ -301,6 +189,7 @@ class BaseTransition extends React.Component {
       const classList = getClassList(this)
 
       Object.keys(STATES).forEach((state) => {
+        // @ts-expect-error FIXME: type
         classList.remove(this.getTransitionClassName(state))
       })
 
@@ -317,7 +206,6 @@ class BaseTransition extends React.Component {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'onEnter' does not exist on type 'Readonl... Remove this comment to see the full error message
     props.onEnter()
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitionEnter' does not exist on type ... Remove this comment to see the full error message
     if (props.transitionEnter) {
       this.setState({ transitioning: true }, () => {
         const enter = () => {
@@ -336,7 +224,6 @@ class BaseTransition extends React.Component {
               STATES.ENTERING,
               initialState,
               enter,
-              // @ts-expect-error ts-migrate(2339) FIXME: Property 'enterDelay' does not exist on type 'Read... Remove this comment to see the full error message
               props.enterDelay
             )
           })
@@ -362,7 +249,6 @@ class BaseTransition extends React.Component {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'onExit' does not exist on type 'Readonly... Remove this comment to see the full error message
     props.onExit()
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitionExit' does not exist on type '... Remove this comment to see the full error message
     if (props.transitionExit) {
       this.setState({ transitioning: true }, () => {
         const exit = () => {
@@ -377,7 +263,6 @@ class BaseTransition extends React.Component {
         }
         if (initialState) {
           this.transition(initialState, null, () => {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'exitDelay' does not exist on type 'Reado... Remove this comment to see the full error message
             this.transition(STATES.EXITING, initialState, exit, props.exitDelay)
           })
         } else {
@@ -401,11 +286,9 @@ class BaseTransition extends React.Component {
     switch (toState) {
       case STATES.EXITED:
       case STATES.EXITING:
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitionExit' does not exist on type '... Remove this comment to see the full error message
         return props.transitionExit
       case STATES.ENTERED:
       case STATES.ENTERING:
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitionEnter' does not exist on type ... Remove this comment to see the full error message
         return props.transitionEnter
       default:
         return false
@@ -417,16 +300,12 @@ class BaseTransition extends React.Component {
     const { props } = this
     switch (transitionState) {
       case STATES.EXITED:
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'exitedClassName' does not exist on type ... Remove this comment to see the full error message
         return props.exitedClassName
       case STATES.ENTERING:
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'enteringClassName' does not exist on typ... Remove this comment to see the full error message
         return props.enteringClassName
       case STATES.ENTERED:
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'enteredClassName' does not exist on type... Remove this comment to see the full error message
         return props.enteredClassName
       case STATES.EXITING:
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'exitingClassName' does not exist on type... Remove this comment to see the full error message
         return props.exitingClassName
       default:
         return null
@@ -435,16 +314,13 @@ class BaseTransition extends React.Component {
 
   renderChildren() {
     return safeCloneElement(ensureSingleChild(this.props.children)!, {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'in' does not exist on type 'Readonly<{}>... Remove this comment to see the full error message
       'aria-hidden': !this.props.in ? true : null
     })
   }
 
   render() {
     if (
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'in' does not exist on type 'Readonly<{}>... Remove this comment to see the full error message
       !this.props.in &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'unmountOnExit' does not exist on type 'R... Remove this comment to see the full error message
       this.props.unmountOnExit &&
       !this.state.transitioning
     ) {
