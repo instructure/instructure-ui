@@ -81,7 +81,7 @@ type PopoverOwnProps = {
   onMouseOver?: (...args: any[]) => any
   onMouseOut?: (...args: any[]) => any
   renderTrigger?: React.ReactNode | ((...args: any[]) => any)
-  children?: React.ReactNode
+  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
 }
 
 type PopoverProps = PopoverOwnProps & BidirectionalProps

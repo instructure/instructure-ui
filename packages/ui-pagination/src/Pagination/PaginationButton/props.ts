@@ -22,6 +22,34 @@
  * SOFTWARE.
  */
 
-export type PaginationPageProps = {
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import type { PropValidators } from '@instructure/shared-types'
+
+type PaginationPageOwnProps = {
+  children: React.ReactNode
   current?: boolean
 }
+
+type PropKeys = keyof PaginationPageOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type PaginationPageProps = PaginationPageOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  /**
+   * Content to render as page selection
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * Whether the page is currently displayed
+   */
+  current: PropTypes.bool
+}
+
+const allowedProps: AllowedPropKeys = ['children', 'current']
+
+export type { PaginationPageProps }
+export { propTypes, allowedProps }

@@ -35,7 +35,7 @@ type TableColHeaderOwnProps = {
   sortDirection?: 'none' | 'ascending' | 'descending'
   onRequestSort?: (...args: any[]) => any
   scope?: 'row' | 'col' | 'rowgroup' | 'colgroup' | 'auto'
-  children?: React.ReactNode
+  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
 }
 
 type PropKeys = keyof TableColHeaderOwnProps

@@ -88,7 +88,15 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = []
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'as',
+  'margin',
+  'size',
+  'delimiter',
+  'itemSpacing',
+  'elementRef'
+]
 
 export type { InlineListProps }
 export { propTypes, allowedProps }

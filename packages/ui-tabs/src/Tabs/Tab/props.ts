@@ -36,7 +36,7 @@ type TabsTabOwnProps = {
   isSelected?: boolean
   onClick?: (...args: any[]) => any
   onKeyDown?: (...args: any[]) => any
-  children?: React.ReactNode
+  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
 }
 
 type PropKeys = keyof TabsTabOwnProps

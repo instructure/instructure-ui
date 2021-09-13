@@ -31,7 +31,7 @@ import type { WithStyleProps } from '@instructure/emotion'
 type TableRowHeaderOwnProps = {
   isStacked?: boolean
   textAlign?: 'start' | 'center' | 'end'
-  children?: React.ReactNode
+  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
 }
 
 type PropKeys = keyof TableRowHeaderOwnProps
