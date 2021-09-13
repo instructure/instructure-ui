@@ -26,7 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import type { WithStyleProps } from '@instructure/emotion'
-import { PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 
 type TableCellOwnProps = {
   isStacked?: boolean
@@ -34,6 +34,7 @@ type TableCellOwnProps = {
   textAlign?: 'start' | 'center' | 'end'
   children?: React.ReactNode
 }
+
 type PropKeys = keyof TableCellOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>

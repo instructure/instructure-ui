@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import PropTypes from 'prop-types'
+
 import { FormPropTypes } from '@instructure/ui-form-field'
 
 import type { PropValidators } from '@instructure/shared-types'

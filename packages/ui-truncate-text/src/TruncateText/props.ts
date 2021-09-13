@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -28,6 +29,7 @@ import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
 type TruncateTextOwnProps = {
+  children: React.ReactNode
   maxLines?: string | number
   position?: 'end' | 'middle'
   truncate?: 'character' | 'word'
@@ -36,7 +38,6 @@ type TruncateTextOwnProps = {
   debounce?: number
   onUpdate?: (...args: any[]) => any
   shouldTruncateWhenInvisible?: boolean
-  children: React.ReactNode
 }
 
 type PropKeys = keyof TruncateTextOwnProps
@@ -82,7 +83,6 @@ const propTypes: PropValidators<PropKeys> = {
    * Force truncation of invisible elements (hack; will be removed in favor
    * of a better fix)
    */
-  // eslint-disable-next-line react/require-default-props
   shouldTruncateWhenInvisible: PropTypes.bool
 }
 

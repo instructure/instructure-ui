@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
+
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 import type { PropValidators } from '@instructure/shared-types'
 
@@ -91,7 +92,6 @@ const propTypes: PropValidators<PropKeys> = {
   insertAt: PropTypes.oneOf(['bottom', 'top']),
   children: PropTypes.node,
   elementRef: PropTypes.func,
-  // eslint-disable-next-line react/require-default-props
   dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 

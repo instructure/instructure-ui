@@ -24,20 +24,21 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { PositionPropTypes } from '@instructure/ui-position'
 
+import { Group } from './Group'
+import { Option } from './Option'
+
 import type { FormMessage } from '@instructure/ui-form-field'
+import type { PropValidators } from '@instructure/shared-types'
 import type {
   PlacementPropValues,
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
-
-import type { PropValidators } from '@instructure/shared-types'
-import { Group } from './Group'
-import { Option } from './Option'
 
 type SimpleSelectOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)

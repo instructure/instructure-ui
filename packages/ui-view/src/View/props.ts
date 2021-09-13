@@ -21,11 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { PropsWithChildren } from 'react'
+
+import React from 'react'
 import PropTypes from 'prop-types'
+
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
 import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
 import type {
   WithStyleProps,
   Spacing,
@@ -34,9 +38,8 @@ import type {
   Shadow,
   Stacking
 } from '@instructure/emotion'
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
 
-type ViewOwnProps = PropsWithChildren<{
+type ViewOwnProps = {
   /**
    * The element to render as the component root, `span` by default
    */
@@ -58,6 +61,10 @@ type ViewOwnProps = PropsWithChildren<{
   maxWidth?: string | number
   minHeight?: string | number
   minWidth?: string | number
+  /**
+   * The children to render inside the <View />
+   */
+  children?: React.ReactNode
   /**
    * Designates the text alignment within the `<View />`
    */
@@ -169,7 +176,7 @@ type ViewOwnProps = PropsWithChildren<{
    * Specify a mouse cursor to use when hovering over the `<View />`
    */
   cursor?: any
-}>
+}
 
 type PropKeys = keyof ViewOwnProps
 

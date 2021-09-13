@@ -23,12 +23,14 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { Children, controllable } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
+import { Page } from './Page'
+
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
-import { Page } from './Page'
 
 type PagesOwnProps = {
   defaultPageIndex?: number

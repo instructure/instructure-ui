@@ -24,10 +24,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { Shadow, Stacking } from '@instructure/emotion'
 import { element } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 import { PositionPropTypes } from '@instructure/ui-position'
+
+import type { Shadow, Stacking } from '@instructure/emotion'
 
 import type {
   PlacementPropValues,

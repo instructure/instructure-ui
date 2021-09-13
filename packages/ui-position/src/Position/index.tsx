@@ -142,7 +142,7 @@ class Position extends Component<PositionProps, PositionState> {
         style.top !== prevState.style.top ||
         style.left !== prevState.style.left)
     ) {
-      this.props.onPositionChanged({
+      this.props.onPositionChanged?.({
         top: style.top,
         left: style.left,
         placement

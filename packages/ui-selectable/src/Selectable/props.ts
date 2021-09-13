@@ -50,18 +50,18 @@ type SelectableOwnProps = {
   /**
    * Callback fired when the options want to become visible
    */
-  onRequestShowOptions: (event: Event) => void
+  onRequestShowOptions?: (event: Event) => void
 
   /**
    * Callback fired when the options no longer want to be visible
    */
-  onRequestHideOptions: (event: Event) => void
+  onRequestHideOptions?: (event: Event) => void
 
   /**
    * Callback fired when option is hovered or highlighted via keyboard.
    * Either the `id` or the `direction` parameter is supplied
    */
-  onRequestHighlightOption: (
+  onRequestHighlightOption?: (
     event: Event,
     data: { id?: string; direction?: 1 | -1 }
   ) => void
@@ -69,17 +69,17 @@ type SelectableOwnProps = {
   /**
    * Callback fired when first option should be highlighted
    */
-  onRequestHighlightFirstOption: (event: Event) => void
+  onRequestHighlightFirstOption?: (event: Event) => void
 
   /**
    * Callback fired when last option should be highlighted
    */
-  onRequestHighlightLastOption: (event: Event) => void
+  onRequestHighlightLastOption?: (event: Event) => void
 
   /**
    * Callback fired when option clicked or selected via keyboard
    */
-  onRequestSelectOption: (event: Event, data: { id?: string }) => void
+  onRequestSelectOption?: (event: Event, data: { id?: string }) => void
 
   /**
    * A function with prop getters
@@ -89,7 +89,7 @@ type SelectableOwnProps = {
   /**
    * A function with prop getters
    */
-  children: (propGetters: SelectableRender) => ReactNode
+  children?: (propGetters: SelectableRender) => ReactNode
 }
 
 type MouseEventFunction = (event: MouseEvent) => void

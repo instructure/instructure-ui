@@ -23,6 +23,7 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { element } from '@instructure/ui-prop-types'
 
 import type { WithStyleProps } from '@instructure/emotion'
@@ -32,7 +33,7 @@ import type { BidirectionalProps } from '@instructure/ui-i18n'
 type TrayOwnProps = {
   label: string
   size?: 'x-small' | 'small' | 'regular' | 'medium' | 'large'
-  placement: 'top' | 'bottom' | 'start' | 'end' | 'center'
+  placement?: 'top' | 'bottom' | 'start' | 'end' | 'center'
   open?: boolean
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
   contentRef?: (...args: any[]) => any
@@ -69,7 +70,7 @@ const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
   children: PropTypes.node,
 
-  /*
+  /**
    * The size (width) of the `<Tray />` when placement is `start` or `end`
    */
   size: PropTypes.oneOf(['x-small', 'small', 'regular', 'medium', 'large']),

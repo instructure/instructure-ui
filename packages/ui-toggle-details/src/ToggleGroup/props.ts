@@ -24,12 +24,13 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { controllable } from '@instructure/ui-prop-types'
 
-import { AsElementType } from '@instructure/shared-types'
-import { PropValidators } from '@instructure/shared-types'
+import { AsElementType, PropValidators } from '@instructure/shared-types'
 
 type ToggleGroupOwnProps = {
+  children: React.ReactNode
   summary: React.ReactNode
   toggleLabel: React.ReactNode | ((...args: any[]) => any)
   as?: AsElementType
@@ -42,7 +43,6 @@ type ToggleGroupOwnProps = {
   iconExpanded?: React.ReactNode | ((...args: any[]) => any)
   transition?: boolean
   border?: boolean
-  children?: React.ReactNode
 }
 
 type PropKeys = keyof ToggleGroupOwnProps

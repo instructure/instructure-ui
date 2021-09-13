@@ -22,16 +22,17 @@
  * SOFTWARE.
  */
 import React from 'react'
-
 import PropTypes from 'prop-types'
+
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
+
+import { Head } from './Head'
+import { Body } from './Body'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
 
-import { Head } from './Head'
-import { Body } from './Body'
 type TableOwnProps = {
   caption: React.ReactNode
   margin?: Spacing
@@ -79,7 +80,14 @@ const propTypes: PropValidators<PropKeys> = {
   layout: PropTypes.oneOf(['auto', 'fixed', 'stacked'])
 }
 
-const allowedProps: AllowedPropKeys = []
+const allowedProps: AllowedPropKeys = [
+  'caption',
+  'children',
+  'margin',
+  'elementRef',
+  'hover',
+  'layout'
+]
 
 export type { TableProps }
 export { propTypes, allowedProps }

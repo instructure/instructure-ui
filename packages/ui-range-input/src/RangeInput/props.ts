@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 import PropTypes from 'prop-types'
+
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
-import { PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { WithStyleProps } from '@instructure/emotion'
 
@@ -47,6 +48,7 @@ type RangeInputOwnProps = {
   disabled?: boolean
   readOnly?: boolean
 }
+
 type PropKeys = keyof RangeInputOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>

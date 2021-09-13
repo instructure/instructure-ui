@@ -23,8 +23,10 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { Children } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
+
 import { Panel } from './Panel'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
@@ -46,6 +48,7 @@ type TabsOwnProps = {
   shouldFocusOnRender?: boolean
   children?: React.ReactNode
 }
+
 type TabsProps = TabsOwnProps & BidirectionalProps & WithStyleProps
 
 type PropKeys = keyof TabsOwnProps

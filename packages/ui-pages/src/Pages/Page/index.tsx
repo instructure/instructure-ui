@@ -113,7 +113,8 @@ class Page extends Component<PagesPageProps> {
             }}
           >
             {children && typeof children === 'function'
-              ? children(history, navigateToPreviousPage)
+              ? // @ts-expect-error FIXME: React children types are badly calculated
+                children(history, navigateToPreviousPage)
               : children}
           </View>
         )}

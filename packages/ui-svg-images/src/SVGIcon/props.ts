@@ -27,19 +27,20 @@ import { InlineSVG } from '../InlineSVG'
 
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
+
 import type { InlineSVGOwnProps } from '../InlineSVG/props'
 
-type SVGIconOwnProps = {
+type SVGIconOwnProps = InlineSVGOwnProps & {
   rotate?: '0' | '90' | '180' | '270'
   size?: 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
   bidirectional?: boolean
 }
 
-type PropKeys = keyof (SVGIconOwnProps & InlineSVGOwnProps)
+type PropKeys = keyof SVGIconOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SVGIconProps = SVGIconOwnProps & WithStyleProps & InlineSVGOwnProps
+type SVGIconProps = SVGIconOwnProps & WithStyleProps
 
 const propTypes: PropValidators<PropKeys> = {
   ...InlineSVG.propTypes,

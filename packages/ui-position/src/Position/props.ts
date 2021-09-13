@@ -24,17 +24,19 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { element } from '@instructure/ui-prop-types'
 
-import PositionPropTypes, {
+import { PositionPropTypes } from '../PositionPropTypes'
+
+import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+import type {
   PositionConstraint,
   PositionMountNode,
   PlacementPropValues,
   ElementPosition
 } from '../PositionPropTypes'
-
-import type { WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
 
 type PositionOwnProps = {
   /**
@@ -50,35 +52,35 @@ type PositionOwnProps = {
   /**
    * The placement of the content in relation to the target
    */
-  placement: PlacementPropValues
+  placement?: PlacementPropValues
 
   /**
    * An element or a function returning an element to use as the mount node
    * for the `<Position />` (defaults to `document.body`)
    */
-  mountNode: PositionMountNode
+  mountNode?: PositionMountNode
 
   /**
    * Insert the element at the 'top' of the mountNode or at the 'bottom'
    */
-  insertAt: 'bottom' | 'top'
+  insertAt?: 'bottom' | 'top'
 
   /**
    * The parent in which to constrain the placement.
-   * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
+   * One of?: 'window', 'scroll-parent', 'parent', 'none', an element,
    * or a function returning an element
    */
-  constrain: PositionConstraint
+  constrain?: PositionConstraint
 
   /**
    * The horizontal offset for the positioned content
    */
-  offsetX: string | number
+  offsetX?: string | number
 
   /**
    * The vertical offset for the positioned content
    */
-  offsetY: string | number
+  offsetY?: string | number
 
   /**
    * An id will be generated if not provided
@@ -88,27 +90,27 @@ type PositionOwnProps = {
   /**
    * Whether or not position of the target should be tracked or just set statically on render
    */
-  shouldTrackPosition: boolean
+  shouldTrackPosition?: boolean
 
   /**
    * Whether or not you want the content to position over the target
    */
-  shouldPositionOverTarget: boolean
+  shouldPositionOverTarget?: boolean
 
   /**
    * Callback fired when the position changes
    */
-  onPositionChanged: (position: Position) => any
+  onPositionChanged?: (position: Position) => any
 
   /**
    * Callback fired when `<Position />` content has been mounted and is initially positioned
    */
-  onPositioned: (position: Position) => any
+  onPositioned?: (position: Position) => any
 
   /**
    * The content to be positioned
    */
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 type PositionState = {

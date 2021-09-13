@@ -26,8 +26,7 @@ import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
-import type { AsElementType } from '@instructure/shared-types'
+import type { PropValidators, AsElementType } from '@instructure/shared-types'
 
 export type ProgressBarMeterColor =
   | 'info'

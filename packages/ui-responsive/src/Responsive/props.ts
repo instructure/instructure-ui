@@ -26,16 +26,16 @@ import PropTypes from 'prop-types'
 import { ResponsivePropTypes } from '../ResponsivePropTypes'
 
 import type { PropValidators } from '@instructure/shared-types'
-import { BreakpointQueries, QueriesMatching } from '../QueryType'
+import type { BreakpointQueries, QueriesMatching } from '../QueryType'
 
-export interface ResponsivePropsObject {
+interface ResponsivePropsObject {
   [propName: string]: any
 }
 
 /**
  * Consists of an object where the keys match the breakpoint names used in the query. The values are objects with keys representing prop names and values representing prop values Ex. `{small: { myProp: 'fillscreen' }, large: { myProp: 'fillcontainer' }}`
  */
-export type ResponsiveByBreakpointProps = {
+type ResponsiveByBreakpointProps = {
   [breakpointName: string]: ResponsivePropsObject
 }
 
@@ -78,6 +78,7 @@ type ResponsiveOwnProps = {
     matches?: QueriesMatching
   ) => any
 }
+
 type PropKeys = keyof ResponsiveOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
@@ -100,5 +101,9 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { ResponsiveProps }
+export type {
+  ResponsiveProps,
+  ResponsivePropsObject,
+  ResponsiveByBreakpointProps
+}
 export { propTypes, allowedProps }

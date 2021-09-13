@@ -134,7 +134,7 @@ const generateStyle = (componentTheme: TrayTheme, props: TrayProps) => {
       maxWidth: '100vw',
       maxHeight: '100vh',
       ...shadowStyle,
-      ...placementStyles[placement],
+      ...placementStyles[placement!],
       ...(border && borderStyle),
       ...(border && borderPlacementStyle[placement!]),
       ...sizeStyle
