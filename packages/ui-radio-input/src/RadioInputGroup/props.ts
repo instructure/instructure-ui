@@ -24,11 +24,12 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
 import type { FormMessage } from '@instructure/ui-form-field'
-import { PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 
 type RadioInputGroupOwnProps = {
   name: string
@@ -44,6 +45,7 @@ type RadioInputGroupOwnProps = {
   layout?: 'stacked' | 'columns' | 'inline'
   children?: React.ReactNode
 }
+
 type PropKeys = keyof RadioInputGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>

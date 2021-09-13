@@ -24,6 +24,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing } from '@instructure/emotion'
@@ -33,7 +34,7 @@ type PagesPageOwnProps = {
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
-  children?: React.ReactNode
+  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
 }
 type PropKeys = keyof PagesPageOwnProps
 

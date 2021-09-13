@@ -89,12 +89,12 @@ class Selectable extends Component<SelectableProps> {
     event.preventDefault()
 
     if (isShowingOptions) {
-      onRequestHideOptions(event)
+      onRequestHideOptions?.(event)
     } else {
       if (!isActiveElement(this._trigger)) {
         this._trigger!.focus()
       }
-      onRequestShowOptions(event)
+      onRequestShowOptions?.(event)
     }
   }
 
@@ -121,14 +121,14 @@ class Selectable extends Component<SelectableProps> {
         if (highlightedOptionId) {
           // select highlighted option
           event.preventDefault()
-          onRequestSelectOption(event, { id: highlightedOptionId })
+          onRequestSelectOption?.(event, { id: highlightedOptionId })
         }
         break
       case 'down':
         event.preventDefault()
         if (isShowingOptions) {
           // if options showing, change highlight
-          onRequestHighlightOption(event, { direction: 1 })
+          onRequestHighlightOption?.(event, { direction: 1 })
         } else {
           // otherwise, show options
           this.handleOpenClose(event)
@@ -138,7 +138,7 @@ class Selectable extends Component<SelectableProps> {
         event.preventDefault()
         if (isShowingOptions) {
           // if options showing, change highlight
-          onRequestHighlightOption(event, { direction: -1 })
+          onRequestHighlightOption?.(event, { direction: -1 })
         } else {
           // otherwise, show options
           this.handleOpenClose(event)
@@ -148,14 +148,14 @@ class Selectable extends Component<SelectableProps> {
         if (isShowingOptions) {
           // if options showing, highlight first option
           event.preventDefault()
-          onRequestHighlightFirstOption(event)
+          onRequestHighlightFirstOption?.(event)
         }
         break
       case 'end':
         if (isShowingOptions) {
           // if options showing, highlight last option
           event.preventDefault()
-          onRequestHighlightLastOption(event)
+          onRequestHighlightLastOption?.(event)
         }
         break
     }
@@ -259,10 +259,10 @@ class Selectable extends Component<SelectableProps> {
             role: 'option',
             'aria-selected': this.isSelectedOption(id!) ? 'true' : 'false',
             onClick: createChainedFunction((event) => {
-              onRequestSelectOption(event, { id })
+              onRequestSelectOption?.(event, { id })
             }, onClick),
             onMouseOver: createChainedFunction((event) => {
-              onRequestHighlightOption(event, { id })
+              onRequestHighlightOption?.(event, { id })
             }, onMouseOver),
             ...rest
           }

@@ -23,12 +23,15 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import {
   controllable,
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
-import type { PropValidators } from '@instructure/shared-types'
+
 import { NavigationItem } from './NavigationItem'
+
+import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
 type NavigationOwnProps = {

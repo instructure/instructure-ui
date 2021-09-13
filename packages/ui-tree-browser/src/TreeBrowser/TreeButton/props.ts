@@ -26,7 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import type { WithStyleProps } from '@instructure/emotion'
-import { PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 
 type TreeBrowserButtonOwnProps = {
   id?: string | number

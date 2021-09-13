@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import PropTypes from 'prop-types'
+
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'

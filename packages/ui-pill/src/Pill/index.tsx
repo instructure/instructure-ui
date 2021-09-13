@@ -138,7 +138,6 @@ class Pill extends Component<PillProps> {
     if (this.state.truncated) {
       return (
         <Tooltip renderTip={this.props.children}>
-          {/* @ts-expect-error ts-migrate(7031) FIXME: Binding element 'focused' implicitly has an 'any' ... Remove this comment to see the full error message */}
           {({ focused, getTriggerProps }) => {
             return this.renderPill(focused, getTriggerProps)
           }}

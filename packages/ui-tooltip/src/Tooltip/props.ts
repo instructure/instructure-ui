@@ -36,6 +36,7 @@ import type { WithStyleProps } from '@instructure/emotion'
 
 type TooltipOwnProps = {
   renderTip: React.ReactNode | ((...args: any[]) => any)
+  children: React.ReactNode | ((...args: any[]) => React.ReactNode)
   isShowingContent?: boolean
   defaultIsShowingContent?: boolean
   as?: AsElementType
@@ -49,7 +50,6 @@ type TooltipOwnProps = {
   offsetY?: string | number
   onShowContent?: (...args: any[]) => any
   onHideContent?: (...args: any[]) => any
-  children: React.ReactNode
 }
 
 type PropKeys = keyof TooltipOwnProps
@@ -133,6 +133,7 @@ const propTypes: PropValidators<PropKeys> = {
    */
   onHideContent: PropTypes.func
 }
+
 const allowedProps: AllowedPropKeys = [
   'children',
   'renderTip',

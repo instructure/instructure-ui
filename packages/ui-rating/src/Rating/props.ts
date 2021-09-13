@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 import PropTypes from 'prop-types'
+
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import { PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 
 type RatingOwnProps = {
   label: string
@@ -37,6 +38,7 @@ type RatingOwnProps = {
   animateFill?: boolean
   margin?: Spacing
 }
+
 type PropKeys = keyof RatingOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>

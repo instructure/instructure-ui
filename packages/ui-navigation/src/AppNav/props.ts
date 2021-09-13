@@ -23,12 +23,14 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
+import { Item } from './Item'
+
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
-import { Item } from './Item'
 
 type AppNavOwnProps = {
   screenReaderLabel: string

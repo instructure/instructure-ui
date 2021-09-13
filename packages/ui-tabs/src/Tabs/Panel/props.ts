@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import { PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 
 type TabsPanelOwnProps = {
   renderTitle: React.ReactNode | ((...args: any[]) => any)

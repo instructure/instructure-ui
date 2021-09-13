@@ -24,11 +24,12 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { Children } from '@instructure/ui-prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-
 import { TreeNode } from '../TreeNode'
+
+import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
 type TreeBrowserCollectionOwnProps = {

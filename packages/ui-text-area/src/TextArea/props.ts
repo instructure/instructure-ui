@@ -22,11 +22,12 @@
  * SOFTWARE.
  */
 
-import { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
+
+import type { PropValidators } from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { WithStyleProps } from '@instructure/emotion'
 

@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { controllable } from '@instructure/ui-prop-types'
+
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { PropValidators } from '@instructure/shared-types'

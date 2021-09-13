@@ -22,12 +22,13 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
+
 import type { TreeBrowserButtonProps } from '../TreeButton/props'
-import React from 'react'
 
 type TreeBrowserNodeOwnProps = Pick<
   TreeBrowserButtonProps,

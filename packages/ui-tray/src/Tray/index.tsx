@@ -105,7 +105,7 @@ class Tray extends Component<TrayProps> {
   get placement() {
     const { placement, dir } = this.props
     const isRtl = dir === bidirectional.DIRECTION.rtl
-    return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
+    return isRtl ? mirrorHorizontalPlacement(placement!, ' ') : placement
   }
 
   get direction() {

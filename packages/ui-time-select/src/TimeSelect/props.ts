@@ -24,17 +24,18 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { controllable } from '@instructure/ui-prop-types'
 import { I18nPropTypes } from '@instructure/ui-i18n'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { PositionPropTypes } from '@instructure/ui-position'
 
 import type { FormMessage } from '@instructure/ui-form-field'
+import type { PropValidators } from '@instructure/shared-types'
 import type {
   PlacementPropValues,
   PositionConstraint
 } from '@instructure/ui-position'
-import type { PropValidators } from '@instructure/shared-types'
 
 type TimeSelectOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)

@@ -24,6 +24,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { element } from '@instructure/ui-prop-types'
 import { Transition } from '@instructure/ui-motion'
 

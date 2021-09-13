@@ -24,14 +24,15 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { ColHeader } from '../ColHeader'
 import { RowHeader } from '../RowHeader'
 import { Cell } from '../Cell'
+
+import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
 
 type TableRowOwnProps = {
   hover?: boolean

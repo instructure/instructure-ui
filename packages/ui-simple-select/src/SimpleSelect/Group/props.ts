@@ -23,7 +23,9 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+
 import { Option } from '../Option'
 
 import type { PropValidators } from '@instructure/shared-types'

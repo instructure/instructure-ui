@@ -21,21 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 import { PositionPropTypes } from '@instructure/ui-position'
+
+import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { PlacementPropValues } from '@instructure/ui-position'
 import type {
   Shadow,
   Spacing,
   Stacking,
   WithStyleProps
 } from '@instructure/emotion'
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { PlacementPropValues } from '@instructure/ui-position'
 
-type ContextViewOwnProps = React.PropsWithChildren<{
+type ContextViewOwnProps = {
   as?: AsElementType
   elementRef?: (...args: any[]) => any
   height?: string | number
@@ -44,6 +46,7 @@ type ContextViewOwnProps = React.PropsWithChildren<{
   maxWidth?: string | number
   minHeight?: string | number
   minWidth?: string | number
+  children?: React.ReactNode
   textAlign?: 'start' | 'center' | 'end'
   background?: 'default' | 'inverse'
   debug?: boolean
@@ -52,7 +55,7 @@ type ContextViewOwnProps = React.PropsWithChildren<{
   shadow?: Shadow
   stacking?: Stacking
   placement?: PlacementPropValues
-}>
+}
 
 type PropKeys = keyof ContextViewOwnProps
 
