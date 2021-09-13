@@ -35,6 +35,7 @@ type TransitionType =
   | 'slide-left'
   | 'slide-right'
 
+// TODO: use common props from BaseTransition
 type TransitionOwnProps = {
   type?: TransitionType
   in?: boolean
