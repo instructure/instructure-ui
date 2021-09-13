@@ -33,7 +33,7 @@ import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
 
 type BreadcrumbOwnProps = {
-  children?: React.ReactNode // TODO: oneOf BreadcrumbLink
+  children?: React.ReactNode // TODO: oneOf([BreadcrumbLink])
   label: string
   size?: 'small' | 'medium' | 'large'
   margin?: Spacing

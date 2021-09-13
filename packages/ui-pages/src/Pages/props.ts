@@ -37,7 +37,7 @@ type PagesOwnProps = {
   activePageIndex?: any // TODO: controllable( PropTypes.number, 'onPageIndexChange', 'defaultPageIndex' )
   onPageIndexChange?: (...args: any[]) => any
   margin?: Spacing
-  children?: React.ReactNode
+  children?: React.ReactNode // TODO: oneOf([Page])
 }
 
 type PropKeys = keyof PagesOwnProps

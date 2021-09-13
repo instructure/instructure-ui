@@ -23,22 +23,22 @@
  */
 /** @jsx jsx */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
-import { Children } from '@instructure/ui-prop-types'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
 
 import generateStyle from './styles'
-import { PaginationProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { PaginationProps } from './props'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'arr' implicitly has an 'any' type.
@@ -73,65 +73,10 @@ category: components
 class Pagination extends Component<PaginationProps> {
   static readonly componentId = 'Pagination'
 
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    /**
-     * children of type Pagination.Page
-     */
-    children: Children.oneOf([PaginationButton]),
-    /**
-     * Disables interaction with all pages
-     */
-    disabled: PropTypes.bool,
-    /**
-     * Visible label for component
-     */
-    label: PropTypes.node,
-    /**
-     * Accessible label for next button
-     */
-    labelNext: PropTypes.string,
-    /**
-     * Accessible label for previous button
-     */
-    labelPrev: PropTypes.string,
-    /**
-     * The compact variant truncates the page navigation to show only the first,
-     * last, and pages immediately surrounding the current page. Fewer than 5 pages,
-     * no next/previous arrow buttons will be shown, and all pages will be listed
-     */
-    variant: PropTypes.oneOf(['full', 'compact']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * the element type to render as
-     */
-    as: PropTypes.elementType,
-    /**
-     * provides a reference to the underlying html root element
-     */
-    elementRef: PropTypes.func,
-    /**
-     * For accessibility, Pagination sets focus on the first or last Pagination.Pages,
-     * respectively, when the Previous or Next arrow buttons are removed from the DOM.
-     * Set this property to `false` to prevent this behavior.
-     */
-    shouldHandleFocus: PropTypes.bool
-  }
-
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
-    label: undefined,
-    labelNext: undefined,
-    labelPrev: undefined,
-    margin: undefined,
     disabled: false,
     variant: 'full',
     as: 'div',
@@ -338,12 +283,12 @@ class Pagination extends Component<PaginationProps> {
         as={this.props.as}
         elementRef={this.handleElementRef}
         margin={this.props.margin}
-        css={this.props.styles.pagination}
+        css={this.props.styles?.pagination}
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'Pagina... Remove this comment to see the full error message
         aria-labelledby={this.props.label && this._labelId}
       >
         {this.props.label && this.renderLabel()}
-        <View display="inline-block" css={this.props.styles.pages}>
+        <View display="inline-block" css={this.props.styles?.pages}>
           {shouldShowPrevButton(this.props, currentPageIndex) &&
             this.renderArrowButton(this.props.labelPrev, -1, currentPageIndex)}
           {this.renderPages(currentPageIndex)}

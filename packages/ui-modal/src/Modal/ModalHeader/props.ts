@@ -48,7 +48,7 @@ const propTypes: PropValidators<PropKeys> = {
   variant: PropTypes.oneOf(['default', 'inverse'])
 }
 
-const allowedProps: AllowedPropKeys = []
+const allowedProps: AllowedPropKeys = ['children', 'variant']
 
 export type { ModalHeaderProps, ModalHeaderStyleProps }
 export { propTypes, allowedProps }

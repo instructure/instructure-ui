@@ -46,7 +46,7 @@ type TabsOwnProps = {
   elementRef?: (...args: any[]) => any
   tabOverflow?: 'stack' | 'scroll'
   shouldFocusOnRender?: boolean
-  children?: React.ReactNode
+  children?: React.ReactNode // TODO: oneOf([Panel, null])
 }
 
 type TabsProps = TabsOwnProps & BidirectionalProps & WithStyleProps

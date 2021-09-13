@@ -34,7 +34,7 @@ type OptionsItemOwnProps = {
   role?: string
   renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
   renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
-  children?: React.ReactNode
+  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
 }
 
 type PropKeys = keyof OptionsItemOwnProps

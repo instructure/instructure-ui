@@ -32,7 +32,7 @@ type TableCellOwnProps = {
   isStacked?: boolean
   header?: React.ReactNode | ((...args: any[]) => any)
   textAlign?: 'start' | 'center' | 'end'
-  children?: React.ReactNode
+  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
 }
 
 type PropKeys = keyof TableCellOwnProps
