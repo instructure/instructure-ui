@@ -5,7 +5,6 @@ category: packages
 ## ui-simple-select
 
 [![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
 [![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
