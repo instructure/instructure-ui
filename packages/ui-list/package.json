@@ -27,6 +27,7 @@
     "@babel/runtime": "^7.13.10",
     "@instructure/console": "8.8.0",
     "@instructure/emotion": "8.8.0",
+    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-prop-types": "8.8.0",
     "@instructure/ui-react-utils": "8.8.0",
     "@instructure/ui-testable": "8.8.0",
@@ -34,7 +35,6 @@
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-babel-preset": "8.8.0",
     "@instructure/ui-color-utils": "8.8.0",
     "@instructure/ui-test-locator": "8.8.0",

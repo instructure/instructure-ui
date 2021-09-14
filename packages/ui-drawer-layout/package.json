@@ -28,6 +28,7 @@
     "@instructure/console": "8.8.0",
     "@instructure/debounce": "8.8.0",
     "@instructure/emotion": "8.8.0",
+    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-dialog": "8.8.0",
     "@instructure/ui-dom-utils": "8.8.0",
     "@instructure/ui-i18n": "8.8.0",
@@ -44,7 +45,6 @@
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-babel-preset": "8.8.0",
     "@instructure/ui-test-locator": "8.8.0",
     "@instructure/ui-themes": "8.8.0"
