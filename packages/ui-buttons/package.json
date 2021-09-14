@@ -24,7 +24,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-babel-preset": "8.8.0",
     "@instructure/ui-test-locator": "8.8.0",
     "@instructure/ui-test-queries": "8.8.0",
@@ -42,6 +41,7 @@
     "@instructure/ui-icons": "8.8.0",
     "@instructure/ui-position": "8.8.0",
     "@instructure/ui-react-utils": "8.8.0",
+    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-testable": "8.8.0",
     "@instructure/ui-tooltip": "8.8.0",
     "@instructure/ui-utils": "8.8.0",

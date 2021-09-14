@@ -24,7 +24,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-babel-preset": "8.8.0",
     "@instructure/ui-test-locator": "8.8.0",
     "@instructure/ui-test-queries": "8.8.0",
@@ -35,6 +34,7 @@
     "@babel/runtime": "^7.13.10",
     "@instructure/console": "8.8.0",
     "@instructure/emotion": "8.8.0",
+    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-buttons": "8.8.0",
     "@instructure/ui-dialog": "8.8.0",
     "@instructure/ui-dom-utils": "8.8.0",

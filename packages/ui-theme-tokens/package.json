@@ -23,12 +23,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-babel-preset": "8.8.0",
     "@instructure/ui-color-utils": "8.8.0",
     "@instructure/ui-test-utils": "8.8.0"
   },
   "dependencies": {
+    "@instructure/shared-types": "8.8.0",
     "@babel/runtime": "^7.13.10"
   },
   "publishConfig": {

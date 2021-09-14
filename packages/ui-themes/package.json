@@ -23,14 +23,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-babel-preset": "8.8.0",
     "@instructure/ui-theme-tokens": "8.8.0"
   },
   "dependencies": {
     "@instructure/canvas-high-contrast-theme": "8.8.0",
     "@instructure/canvas-theme": "8.8.0",
-    "@instructure/instructure-theme": "8.8.0"
+    "@instructure/instructure-theme": "8.8.0",
+    "@instructure/shared-types": "8.8.0"
   },
   "publishConfig": {
     "access": "public"

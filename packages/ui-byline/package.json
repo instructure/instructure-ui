@@ -26,13 +26,13 @@
   "dependencies": {
     "@babel/runtime": "^7.13.10",
     "@instructure/emotion": "8.8.0",
+    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-react-utils": "8.8.0",
     "@instructure/ui-testable": "8.8.0",
     "@instructure/ui-view": "8.8.0",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/shared-types": "8.8.0",
     "@instructure/ui-babel-preset": "8.8.0",
     "@instructure/ui-color-utils": "8.8.0",
     "@instructure/ui-test-utils": "8.8.0",
