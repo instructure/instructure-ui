@@ -22,7 +22,6 @@ import Text from '@instructure/ui-elements/lib/Text'
 ```
 
 [![npm][npm]][npm-url]&nbsp;
-[![build-status][build-status]][build-status-url]&nbsp;
 [![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
