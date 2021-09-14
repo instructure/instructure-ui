@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { resolver, parse } = require('react-docgen')
+const { resolver, parse, importers } = require('react-docgen')
 
 /**
  * Given a relative path and the React component source, returns an object of all
@@ -64,7 +64,10 @@ module.exports = function parsePropValues(fileSource, fileName) {
       fileSource,
       resolver.findAllExportedComponentDefinitions,
       null,
-      { filename: fileName }
+      {
+        filename: fileName,
+        importer: importers.makeFsImporter()
+      }
     )
     if (Array.isArray(parsedSrc)) {
       parsedSrc = parsedSrc.pop()

@@ -49,6 +49,6 @@
     "@instructure/ui-test-utils": "8.8.0",
     "globby": "^11",
     "prop-types": "^15",
-    "react-docgen": "^5"
+    "react-docgen": "^6.0.0-alpha.0"
   }
 }
