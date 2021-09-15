@@ -31,8 +31,8 @@ import type { ComponentClass } from 'react'
  * Wraps (decorates) a React component to add additional functionality
  *
  * @module decorator
- * @param decorate a function that returns a decorated component
- * @returns A decorated component class
+ * @param {Function} decorate a function that returns a decorated component
+ * @returns {Class} A decorated component class
  */
 function decorator(
   decorate: (toDecorate: ComponentClass<any>, ...args: any[]) => any
