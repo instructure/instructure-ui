@@ -101,9 +101,9 @@ export type WithStyleProps = Partial<{
  *
  * @module withStyle
  *
- * @param generateStyle - The function that returns the component's style object
- * @param generateComponentTheme - The function that returns the component's theme variables object
- * @returns The decorated WithStyle Component
+ * @param {function} generateStyle - The function that returns the component's style object
+ * @param {function} generateComponentTheme - The function that returns the component's theme variables object
+ * @returns {ReactElement} The decorated WithStyle Component
  */
 const withStyle = decorator(
   (ComposedComponent, generateStyle: any, generateComponentTheme: any) => {
