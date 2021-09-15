@@ -4,6 +4,7 @@ category: packages
 
 ## ui-text-input
 
+[![npm][npm]][npm-url]&nbsp;
 [![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
