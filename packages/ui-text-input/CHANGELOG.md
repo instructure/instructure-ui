@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.9.0](https://github.com/instructure/instructure-ui/compare/v8.8.0...v8.9.0) (2021-09-15)
+
+### Bug Fixes
+
+- fix shared-types TS errors ([7b83164](https://github.com/instructure/instructure-ui/commit/7b83164f4c5872f3a217e010563f59bf584ae4fc))
+
 # [8.8.0](https://github.com/instructure/instructure-ui/compare/v8.7.0...v8.8.0) (2021-08-27)
 
 **Note:** Version bump only for package @instructure/ui-text-input
