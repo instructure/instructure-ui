@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.9.0](https://github.com/instructure/instructure-ui/compare/v8.8.0...v8.9.0) (2021-09-15)
+
+### Features
+
+- **ui-icons:** add `immersive-reader` icon ([d5d6d4c](https://github.com/instructure/instructure-ui/commit/d5d6d4cd8f300e8635c69248f5d794c002269e08))
+
 # [8.8.0](https://github.com/instructure/instructure-ui/compare/v8.7.0...v8.8.0) (2021-08-27)
 
 ### Features
