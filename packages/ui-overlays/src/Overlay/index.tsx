@@ -143,7 +143,7 @@ class Overlay extends Component<OverlayProps> {
   renderTransition(content) {
     return (
       <Transition
-        {...pickProps(this.props, Transition.propTypes)}
+        {...pickProps(this.props, Transition.allowedProps)}
         in={this.props.open}
         transitionOnMount
         unmountOnExit
@@ -161,8 +161,8 @@ class Overlay extends Component<OverlayProps> {
   render() {
     let content = (
       <Dialog
-        {...omitProps(this.props, Overlay.propTypes)}
-        {...pickProps(this.props, Dialog.propTypes)}
+        {...omitProps(this.props, Overlay.allowedProps)}
+        {...pickProps(this.props, Dialog.allowedProps)}
         defaultFocusElement={this.props.defaultFocusElement}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
         open={this.state.open}
@@ -177,7 +177,7 @@ class Overlay extends Component<OverlayProps> {
 
     return (
       <Portal
-        {...pickProps(this.props, Portal.propTypes)}
+        {...pickProps(this.props, Portal.allowedProps)}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitioning' does not exist on type 'R... Remove this comment to see the full error message
         open={this.props.open || this.state.transitioning}
         onOpen={createChainedFunction(this.handlePortalOpen, this.props.onOpen)}

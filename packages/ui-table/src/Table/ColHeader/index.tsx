@@ -104,7 +104,7 @@ class ColHeader extends Component<TableColHeaderProps> {
 
     return (
       <th
-        {...omitProps(this.props, ColHeader.propTypes)}
+        {...omitProps(this.props, ColHeader.allowedProps)}
         css={styles?.colHeader}
         style={{
           width

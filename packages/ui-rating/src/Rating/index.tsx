@@ -105,7 +105,7 @@ class Rating extends Component<RatingProps> {
     const valueText = label + ' ' + formatValueText(this.filled, iconCount)
 
     const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Rating.propTypes),
+      omitProps(this.props, Rating.allowedProps),
       Rating
     )
 

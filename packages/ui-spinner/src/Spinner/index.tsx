@@ -85,7 +85,7 @@ class Spinner extends Component<SpinnerProps> {
 
   render() {
     const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Spinner.propTypes),
+      omitProps(this.props, Spinner.allowedProps),
       Spinner
     )
 

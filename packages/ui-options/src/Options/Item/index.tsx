@@ -101,7 +101,7 @@ class Item extends Component<OptionsItemProps> {
     } = this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
-    const passthroughProps = omitProps(this.props, Item.propTypes)
+    const passthroughProps = omitProps(this.props, Item.allowedProps)
 
     return (
       <ElementType role="none" css={styles?.item}>

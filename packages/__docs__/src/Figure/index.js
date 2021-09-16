@@ -77,6 +77,17 @@ class Figure extends Component {
     children: Children.oneOf(['FigureItem'])
   }
 
+  static allowedProps = [
+    'makeStyles',
+    'styles',
+    'title',
+    'caption',
+    'recommendation',
+    'iconTitle',
+    'float',
+    'children'
+  ]
+
   static defaultProps = {
     recommendation: 'none',
     float: 'none',
@@ -116,7 +127,7 @@ class Figure extends Component {
 
     return (
       <View
-        {...omitProps(mergedProps, Figure.propTypes, ['padding'])}
+        {...omitProps(mergedProps, Figure.allowedProps, ['padding'])}
         as="figure"
         css={styles.figure}
       >

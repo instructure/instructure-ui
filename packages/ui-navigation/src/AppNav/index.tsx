@@ -221,7 +221,7 @@ class AppNav extends Component<AppNavProps> {
     } = this.props
 
     const passthroughProps = View.omitViewProps(
-      omitProps(this.props, AppNav.propTypes),
+      omitProps(this.props, AppNav.allowedProps),
       AppNav
     )
 

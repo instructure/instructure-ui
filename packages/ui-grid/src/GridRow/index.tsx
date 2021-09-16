@@ -76,7 +76,7 @@ class GridRow extends Component<GridRowProps> {
     return Children.map(this.props.children, (child, index) => {
       if (matchComponentTypes(child, [GridCol])) {
         return safeCloneElement(child as ReactElement, {
-          ...pickProps(props, GridRow.propTypes),
+          ...pickProps(props, GridRow.allowedProps),
           // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           ...child.props /* child props should override parent */,
           isLastRow: props.isLastRow,
@@ -91,7 +91,7 @@ class GridRow extends Component<GridRowProps> {
   render() {
     const { styles, ...restProps } = this.props
 
-    const props = omitProps(restProps, GridRow.propTypes)
+    const props = omitProps(restProps, GridRow.allowedProps)
 
     return (
       <span {...props} css={styles?.gridRow}>

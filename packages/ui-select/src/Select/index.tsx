@@ -381,10 +381,10 @@ class Select extends Component<SelectProps> {
 
     let optionProps = {
       // passthrough props
-      ...omitProps(option.props, {
-        ...Option.propTypes,
-        ...Options.Item.propTypes
-      }),
+      ...omitProps(option.props, [
+        ...Option.allowedProps,
+        ...Options.Item.allowedProps
+      ]),
       // props from selectable
       ...getOptionProps({ id }),
       // Options.Item props
@@ -434,10 +434,7 @@ class Select extends Component<SelectProps> {
         as="ul"
         role="group"
         renderLabel={renderLabel}
-        {...omitProps(rest, {
-          ...Options.propTypes,
-          ...Group.propTypes
-        })}
+        {...omitProps(rest, [...Options.allowedProps, ...Group.allowedProps])}
       >
         {Children.map(children, (child) => {
           return this.renderOption(child, {
@@ -554,7 +551,7 @@ class Select extends Component<SelectProps> {
     } = this.props
 
     const { interaction } = this
-    const passthroughProps = omitProps(rest, Select.propTypes)
+    const passthroughProps = omitProps(rest, Select.allowedProps)
     const { ref, ...triggerProps } = getTriggerProps({ ...passthroughProps })
     const isEditable = typeof onInputChange !== 'undefined'
     // props to ensure screen readers treat uneditable selects as accessible

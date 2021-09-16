@@ -232,7 +232,7 @@ class MenuItemGroup extends Component<MenuGroupProps> {
   }
 
   render() {
-    const props = omitProps(this.props, MenuItemGroup.propTypes)
+    const props = omitProps(this.props, MenuItemGroup.allowedProps)
     return (
       <span
         {...props}

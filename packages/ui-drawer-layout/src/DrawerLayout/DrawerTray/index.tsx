@@ -246,7 +246,7 @@ class DrawerTray extends Component<
               unmountOnExit
             >
               <div
-                {...omitProps(props, DrawerTray.propTypes)}
+                {...omitProps(props, DrawerTray.allowedProps)}
                 ref={this.handleContentRef}
                 css={trayStyles}
               >

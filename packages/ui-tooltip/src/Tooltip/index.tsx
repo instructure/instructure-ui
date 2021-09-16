@@ -100,7 +100,7 @@ class Tooltip extends Component<TooltipProps> {
 
     if (as) {
       const Trigger = getElementType(Tooltip, this.props)
-      const props = omitProps(this.props, Tooltip.propTypes)
+      const props = omitProps(this.props, Tooltip.allowedProps)
       return (
         <Trigger {...props} {...triggerProps}>
           {children}

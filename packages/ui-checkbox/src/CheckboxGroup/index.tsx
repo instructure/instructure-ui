@@ -150,8 +150,8 @@ class CheckboxGroup extends Component<CheckboxGroupProps> {
     return (
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormFieldGroup
-        {...omitProps(this.props, CheckboxGroup.propTypes)}
-        {...pickProps(this.props, FormFieldGroup.propTypes)}
+        {...omitProps(this.props, CheckboxGroup.allowedProps)}
+        {...pickProps(this.props, FormFieldGroup.allowedProps)}
         rowSpacing="small"
         vAlign="top"
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message

@@ -70,7 +70,7 @@ class NavigationItem extends Component<NavigationItemProps> {
 
     const { href, onClick, icon, label } = this.props
 
-    const props = omitProps(this.props, NavigationItem.propTypes)
+    const props = omitProps(this.props, NavigationItem.allowedProps)
 
     return (
       <ElementType

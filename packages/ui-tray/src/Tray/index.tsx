@@ -211,7 +211,7 @@ class Tray extends Component<TrayProps> {
             transitionExit
           >
             <span
-              {...omitProps(props, Tray.propTypes)}
+              {...omitProps(props, Tray.allowedProps)}
               css={this.props.styles?.tray}
               ref={contentRef}
             >

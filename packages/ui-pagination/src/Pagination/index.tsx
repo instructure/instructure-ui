@@ -272,7 +272,7 @@ class Pagination extends Component<PaginationProps> {
     )
 
     const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Pagination.propTypes),
+      omitProps(this.props, Pagination.allowedProps),
       Pagination
     )
 

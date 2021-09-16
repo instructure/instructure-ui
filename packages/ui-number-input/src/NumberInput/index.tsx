@@ -239,7 +239,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
 
     return (
       <FormField
-        {...pickProps(this.props, FormField.propTypes)}
+        {...pickProps(this.props, FormField.allowedProps)}
         label={callRenderProp(renderLabel)}
         inline={display === 'inline-block'}
         id={this.id}
@@ -250,10 +250,10 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
         >
           <span css={this.props.styles?.inputContainer}>
             <input
-              {...omitProps(this.props, {
-                ...FormField.propTypes,
-                ...NumberInput.propTypes
-              })}
+              {...omitProps(this.props, [
+                ...FormField.allowedProps,
+                ...NumberInput.allowedProps
+              ])}
               css={this.props.styles?.input}
               aria-invalid={this.invalid ? 'true' : undefined}
               id={this.id}

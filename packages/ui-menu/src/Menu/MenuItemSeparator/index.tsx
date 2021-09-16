@@ -61,7 +61,7 @@ class MenuItemSeparator extends Component<MenuSeparatorProps> {
   }
 
   render() {
-    const props = omitProps(this.props, MenuItemSeparator.propTypes)
+    const props = omitProps(this.props, MenuItemSeparator.allowedProps)
     return (
       <div
         {...props}

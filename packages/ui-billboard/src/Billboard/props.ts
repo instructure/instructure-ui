@@ -113,19 +113,19 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
+  'hero',
+  'size',
   'as',
-  'disabled',
   'elementRef',
   'heading',
   'headingAs',
   'headingLevel',
-  'hero',
-  'href',
-  'margin',
   'message',
   'onClick',
+  'href',
+  'disabled',
   'readOnly',
-  'size'
+  'margin'
 ]
 
 export type { BillboardProps }

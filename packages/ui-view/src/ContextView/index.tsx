@@ -94,7 +94,7 @@ class ContextView extends Component<
 
     return (
       <View
-        {...omitProps(this.props, ContextView.propTypes)}
+        {...omitProps(this.props, ContextView.allowedProps)}
         css={styles?.contextView}
         style={style}
         borderWidth="none"

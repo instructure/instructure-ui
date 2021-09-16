@@ -182,7 +182,7 @@ class Head extends Component<TableHeadProps> {
     return isStacked ? (
       this.renderSelect()
     ) : (
-      <thead {...omitProps(this.props, Head.propTypes)} css={styles?.head}>
+      <thead {...omitProps(this.props, Head.allowedProps)} css={styles?.head}>
         {Children.map(children, (child) =>
           matchComponentTypes(child, [Row]) ? child : null
         )}

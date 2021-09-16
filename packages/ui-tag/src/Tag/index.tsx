@@ -108,7 +108,7 @@ class Tag extends Component<TagProps> {
     } = this.props
 
     const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Tag.propTypes),
+      omitProps(this.props, Tag.allowedProps),
       Tag
     )
 

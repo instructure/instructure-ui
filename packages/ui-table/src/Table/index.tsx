@@ -115,7 +115,10 @@ class Table extends Component<TableProps> {
 
     return (
       <View
-        {...View.omitViewProps(omitProps(this.props, Table.propTypes), Table)}
+        {...View.omitViewProps(
+          omitProps(this.props, Table.allowedProps),
+          Table
+        )}
         as={isStacked ? 'div' : 'table'}
         margin={margin}
         elementRef={elementRef}

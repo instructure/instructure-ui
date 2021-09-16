@@ -52,8 +52,8 @@ class FormField extends Component<FormFieldProps> {
   render() {
     return (
       <FormFieldLayout
-        {...omitProps(this.props, FormField.propTypes)}
-        {...pickProps(this.props, FormFieldLayout.propTypes)}
+        {...omitProps(this.props, FormField.allowedProps)}
+        {...pickProps(this.props, FormFieldLayout.allowedProps)}
         // @ts-expect-error ts-migrate(2322) FIXME: Remove this comment to see the full error message
         vAlign={this.props.vAlign}
         as="label"

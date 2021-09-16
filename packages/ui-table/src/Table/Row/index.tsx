@@ -73,7 +73,7 @@ class Row extends Component<TableRowProps> {
 
     return (
       <View
-        {...View.omitViewProps(omitProps(this.props, Row.propTypes), Row)}
+        {...View.omitViewProps(omitProps(this.props, Row.allowedProps), Row)}
         as={isStacked ? 'div' : 'tr'}
         css={styles?.row}
         role={isStacked ? 'row' : undefined}

@@ -145,10 +145,10 @@ class Billboard extends Component<BillboardProps> {
     return (
       <View as="div" margin={margin}>
         <View
-          {...omitProps(this.props, {
-            ...Billboard.propTypes,
+          {...omitProps(this.props, [
+            ...Billboard.allowedProps,
             ...View.allowedProps
-          })}
+          ])}
           type={Element === 'button' ? 'button' : undefined}
           as={Element}
           elementRef={elementRef}

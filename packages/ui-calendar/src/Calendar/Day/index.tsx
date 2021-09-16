@@ -138,7 +138,7 @@ class Day extends Component<CalendarDayProps> {
     const { elementType, isDisabled } = this
 
     const passthroughProps = View.omitViewProps(
-      omitProps(props, Day.propTypes),
+      omitProps(props, Day.allowedProps),
       Day
     )
 

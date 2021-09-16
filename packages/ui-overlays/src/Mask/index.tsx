@@ -89,7 +89,7 @@ class Mask extends Component<MaskProps> {
     })
 
     const props = {
-      ...omitProps(this.props, Mask.propTypes),
+      ...omitProps(this.props, Mask.allowedProps),
       css: this.props.styles?.mask,
       ref: this.handleElementRef
     }

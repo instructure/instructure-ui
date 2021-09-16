@@ -140,11 +140,11 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     const Element = getElementType(ToggleGroup, this.props)
 
     return (
-      <Expandable {...pickProps(this.props, Expandable.propTypes)}>
+      <Expandable {...pickProps(this.props, Expandable.allowedProps)}>
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
             <View
-              {...omitProps(this.props, ToggleGroup.propTypes)}
+              {...omitProps(this.props, ToggleGroup.allowedProps)}
               borderWidth={this.props.border ? 'small' : 'none'}
               as={Element}
               elementRef={this.props.elementRef}

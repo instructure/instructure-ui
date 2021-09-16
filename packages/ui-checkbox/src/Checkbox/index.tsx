@@ -270,7 +270,7 @@ class Checkbox extends Component<CheckboxProps> {
       styles
     } = this.props
 
-    const props = omitProps(this.props, Checkbox.propTypes)
+    const props = omitProps(this.props, Checkbox.allowedProps)
 
     error(
       !(variant === 'toggle' && indeterminate),

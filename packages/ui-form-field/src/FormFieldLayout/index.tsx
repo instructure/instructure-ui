@@ -175,13 +175,12 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     const { makeStyles, styles, ...props } = this.props
 
     const { width, layout, children } = props
-
     return (
       <ElementType
-        {...omitProps(props, {
-          ...FormFieldLayout.propTypes,
-          ...Grid.propTypes
-        })}
+        {...omitProps(props, [
+          ...FormFieldLayout.allowedProps,
+          ...Grid.allowedProps
+        ])}
         css={styles?.formFieldLayout}
         style={{ width }}
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'For... Remove this comment to see the full error message
@@ -194,7 +193,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
           startAt={
             layout === 'inline' && this.hasVisibleLabel ? 'medium' : null
           }
-          {...pickProps(props, Grid.propTypes)}
+          {...pickProps(props, Grid.allowedProps)}
         >
           <Grid.Row>
             {this.renderLabel()}

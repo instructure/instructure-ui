@@ -175,12 +175,15 @@ class RangeInput extends Component<RangeInputProps> {
   render() {
     const { formatValue, disabled, readOnly } = this.props
 
-    const props = omitProps(this.props, RangeInput.propTypes)
+    const props = omitProps(this.props, RangeInput.allowedProps)
 
     /* eslint-disable jsx-a11y/no-redundant-roles */
     return (
       // @ts-expect-error ts-migrate(2554) FIXME: no overload..
-      <FormField {...pickProps(this.props, FormField.propTypes)} id={this.id}>
+      <FormField
+        {...pickProps(this.props, FormField.allowedProps)}
+        id={this.id}
+      >
         <div css={this.props.styles?.rangeInput}>
           <input
             css={this.props.styles?.rangeInputInput}

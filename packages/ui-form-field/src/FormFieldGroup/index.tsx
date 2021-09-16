@@ -126,8 +126,8 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
 
     return (
       <FormFieldLayout
-        {...omitProps(props, FormFieldGroup.propTypes)}
-        {...pickProps(props, FormFieldLayout.propTypes)}
+        {...omitProps(props, FormFieldGroup.allowedProps)}
+        {...pickProps(props, FormFieldLayout.allowedProps)}
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; vAlign: "top" | "middle... Remove this comment to see the full error message
         vAlign={props.vAlign}
         layout={props.layout === 'inline' ? 'inline' : 'stacked'}
