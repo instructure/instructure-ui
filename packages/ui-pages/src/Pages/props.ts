@@ -29,8 +29,12 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 
 import { Page } from './Page'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type { PropValidators, PagesTheme } from '@instructure/shared-types'
 
 type PagesOwnProps = {
   defaultPageIndex?: number
@@ -44,7 +48,9 @@ type PropKeys = keyof PagesOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PagesProps = PagesOwnProps & WithStyleProps
+type PagesProps = PagesOwnProps & WithStyleProps<PagesTheme, PagesStyle>
+
+type PagesStyle = ComponentStyle<'pages'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: Children.oneOf([Page]),
@@ -81,5 +87,5 @@ const allowedProps: AllowedPropKeys = [
   'margin'
 ]
 
-export type { PagesProps }
+export type { PagesProps, PagesStyle }
 export { propTypes, allowedProps }

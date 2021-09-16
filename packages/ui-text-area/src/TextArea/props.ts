@@ -27,9 +27,9 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
-import type { PropValidators } from '@instructure/shared-types'
+import type { PropValidators, TextAreaTheme } from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TextAreaOwnProps = {
   label: React.ReactNode
@@ -57,7 +57,12 @@ type PropKeys = keyof TextAreaOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TextAreaProps = TextAreaOwnProps & WithStyleProps
+type TextAreaProps = TextAreaOwnProps &
+  WithStyleProps<TextAreaTheme, TextAreaStyle>
+
+type TextAreaStyle = ComponentStyle<
+  'textArea' | 'textAreaLayout' | 'textAreaOutline'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
@@ -154,5 +159,5 @@ const allowedProps: AllowedPropKeys = [
   'onChange'
 ]
 
-export type { TextAreaProps }
+export type { TextAreaProps, TextAreaStyle }
 export { propTypes, allowedProps }

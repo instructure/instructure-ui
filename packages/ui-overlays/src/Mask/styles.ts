@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { MaskTheme } from '@instructure/shared-types'
-import { MaskProps } from './props'
+import type { MaskTheme } from '@instructure/shared-types'
+import type { MaskProps, MaskStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { MaskProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: MaskTheme, props: MaskProps) => {
+const generateStyle = (
+  componentTheme: MaskTheme,
+  props: MaskProps
+): MaskStyle => {
   const { placement, fullscreen } = props
 
   const positionStyles = fullscreen

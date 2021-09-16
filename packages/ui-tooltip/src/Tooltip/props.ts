@@ -21,18 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import React from 'react'
 import PropTypes from 'prop-types'
+
 import { PositionPropTypes } from '@instructure/ui-position'
 import { element } from '@instructure/ui-prop-types'
 
-import type { PropValidators, AsElementType } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  AsElementType,
+  TooltipTheme
+} from '@instructure/shared-types'
 import type {
   PlacementPropValues,
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
-import React from 'react'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TooltipOwnProps = {
   renderTip: React.ReactNode | ((...args: any[]) => any)
@@ -56,7 +62,9 @@ type PropKeys = keyof TooltipOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TooltipProps = TooltipOwnProps & WithStyleProps
+type TooltipProps = TooltipOwnProps & WithStyleProps<TooltipTheme, TooltipStyle>
+
+type TooltipStyle = ComponentStyle<'tooltip'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -152,5 +160,5 @@ const allowedProps: AllowedPropKeys = [
   'onHideContent'
 ]
 
-export type { TooltipProps }
+export type { TooltipProps, TooltipStyle }
 export { propTypes, allowedProps }

@@ -30,8 +30,8 @@ import {
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, MenuTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   PlacementPropValues,
   PositionConstraint,
@@ -75,7 +75,9 @@ type PropKeys = keyof MenuOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type MenuProps = MenuOwnProps & WithStyleProps
+type MenuProps = MenuOwnProps & WithStyleProps<MenuTheme, MenuStyle>
+
+type MenuStyle = ComponentStyle<'menu'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -231,5 +233,5 @@ const allowedProps: AllowedPropKeys = [
   'offsetY'
 ]
 
-export type { MenuProps }
+export type { MenuProps, MenuStyle }
 export { propTypes, allowedProps }

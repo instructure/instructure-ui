@@ -24,8 +24,11 @@
 
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  ToggleFacadeTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type ToggleFacadeOwnProps = {
   children: React.ReactNode
@@ -41,7 +44,12 @@ type PropKeys = keyof ToggleFacadeOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ToggleFacadeProps = ToggleFacadeOwnProps & WithStyleProps
+type ToggleFacadeProps = ToggleFacadeOwnProps &
+  WithStyleProps<ToggleFacadeTheme, ToggleFacadeStyle>
+
+type ToggleFacadeStyle = ComponentStyle<
+  'toggleFacade' | 'facade' | 'icon' | 'iconToggle' | 'iconSVG' | 'label'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node.isRequired,
@@ -63,5 +71,5 @@ const allowedProps: AllowedPropKeys = [
   'labelPlacement'
 ]
 
-export type { ToggleFacadeProps }
+export type { ToggleFacadeProps, ToggleFacadeStyle }
 export { propTypes, allowedProps }

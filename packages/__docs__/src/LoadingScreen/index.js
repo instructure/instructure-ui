@@ -28,7 +28,7 @@ import generateStyle from './styles'
 import PropTypes from 'prop-types'
 import { withStyle, jsx } from '@instructure/emotion'
 
-@withStyle(generateStyle)
+@withStyle(generateStyle, null)
 class LoadingScreen extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

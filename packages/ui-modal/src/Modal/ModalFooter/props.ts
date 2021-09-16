@@ -25,8 +25,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  ModalFooterTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type ModalFooterOwnProps = {
   children?: React.ReactNode
@@ -37,7 +40,10 @@ type PropKeys = keyof ModalFooterOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ModalFooterProps = ModalFooterOwnProps & WithStyleProps
+type ModalFooterProps = ModalFooterOwnProps &
+  WithStyleProps<ModalFooterTheme, ModalFooterStyle>
+
+type ModalFooterStyle = ComponentStyle<'modalFooter'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
@@ -46,5 +52,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['children', 'variant']
 
-export type { ModalFooterProps }
+export type { ModalFooterProps, ModalFooterStyle }
 export { propTypes, allowedProps }

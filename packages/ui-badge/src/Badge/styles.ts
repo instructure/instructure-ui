@@ -23,8 +23,9 @@
  */
 
 import { keyframes } from '@instructure/emotion'
-import { BadgeTheme } from '@instructure/shared-types'
-import { BadgeProps } from './props'
+
+import type { BadgeTheme } from '@instructure/shared-types'
+import type { BadgeProps, BadgeStyle } from './props'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -44,7 +45,10 @@ const pulseAnimation = keyframes`
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: BadgeTheme, props: BadgeProps): any => {
+const generateStyle = (
+  componentTheme: BadgeTheme,
+  props: BadgeProps
+): BadgeStyle => {
   const { type, variant, placement, standalone, pulse } = props
 
   const top = placement.indexOf('top') > -1

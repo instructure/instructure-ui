@@ -25,8 +25,12 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type { PropValidators, TagTheme } from '@instructure/shared-types'
 
 type TagOwnProps = {
   className?: string
@@ -46,7 +50,9 @@ type PropKeys = keyof TagOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TagProps = TagOwnProps & WithStyleProps
+type TagProps = TagOwnProps & WithStyleProps<TagTheme, TagStyle>
+
+type TagStyle = ComponentStyle<'tag' | 'text' | 'icon'>
 
 const propTypes: PropValidators<PropKeys> = {
   className: PropTypes.string,
@@ -93,5 +99,5 @@ const allowedProps: AllowedPropKeys = [
   'variant'
 ]
 
-export type { TagProps }
+export type { TagProps, TagStyle }
 export { propTypes, allowedProps }

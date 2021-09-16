@@ -28,8 +28,12 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type { PropValidators, FileDropTheme } from '@instructure/shared-types'
 
 type FileDropOwnProps = {
   id?: string
@@ -75,7 +79,12 @@ type PropKeys = keyof FileDropOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FileDropProps = FileDropOwnProps & WithStyleProps
+type FileDropProps = FileDropOwnProps &
+  WithStyleProps<FileDropTheme, FileDropStyle>
+
+type FileDropStyle = ComponentStyle<
+  'fileDropLabel' | 'fileDropInput' | 'fileDropLabelContent' | 'fileDropLayout'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -208,5 +217,5 @@ const allowedProps: AllowedPropKeys = [
   'margin'
 ]
 
-export type { FileDropProps, FileDropState, FileDropStyleProps }
+export type { FileDropProps, FileDropState, FileDropStyleProps, FileDropStyle }
 export { propTypes, allowedProps }

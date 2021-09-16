@@ -28,7 +28,11 @@ import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
 
 type FlexItemOwnProps = {
   children?: React.ReactNode
@@ -51,7 +55,9 @@ type PropKeys = keyof FlexItemOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FlexItemProps = FlexItemOwnProps & WithStyleProps
+type FlexItemProps = FlexItemOwnProps & WithStyleProps<null, FlexItemStyle>
+
+type FlexItemStyle = ComponentStyle<'flexItem'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -133,5 +139,5 @@ const allowedProps: AllowedPropKeys = [
   'withVisualDebug'
 ]
 
-export type { FlexItemProps }
+export type { FlexItemProps, FlexItemStyle }
 export { propTypes, allowedProps }

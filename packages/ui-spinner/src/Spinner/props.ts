@@ -25,8 +25,16 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  SpinnerTheme
+} from '@instructure/shared-types'
 
 type SpinnerOwnProps = {
   renderTitle?: ((...args: any[]) => any) | React.ReactNode
@@ -41,7 +49,11 @@ type PropKeys = keyof SpinnerOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SpinnerProps = SpinnerOwnProps & WithStyleProps
+type SpinnerProps = SpinnerOwnProps & WithStyleProps<SpinnerTheme, SpinnerStyle>
+
+type SpinnerStyle = ComponentStyle<
+  'spinner' | 'circle' | 'circleTrack' | 'circleSpin'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -75,5 +87,5 @@ const allowedProps: AllowedPropKeys = [
   'as'
 ]
 
-export type { SpinnerProps }
+export type { SpinnerProps, SpinnerStyle }
 export { propTypes, allowedProps }

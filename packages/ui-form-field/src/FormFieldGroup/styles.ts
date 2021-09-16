@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import { FormFieldGroupTheme } from '@instructure/shared-types'
-import { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
+import type { FormFieldGroupTheme } from '@instructure/shared-types'
+import type {
+  FormFieldGroupProps,
+  FormFieldGroupStyleProps,
+  FormFieldGroupStyle
+} from './props'
 
 /**
  * ---
@@ -39,7 +43,7 @@ const generateStyle = (
   componentTheme: FormFieldGroupTheme,
   props: FormFieldGroupProps,
   state: FormFieldGroupStyleProps
-) => {
+): FormFieldGroupStyle => {
   const { disabled } = props
   const { invalid } = state
 

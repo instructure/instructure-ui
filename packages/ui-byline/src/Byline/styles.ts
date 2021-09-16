@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { BylineTheme } from '@instructure/shared-types'
-import { BylineProps } from './props'
+import type { BylineTheme } from '@instructure/shared-types'
+import type { BylineProps, BylineStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { BylineProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: BylineTheme, props: BylineProps) => {
+const generateStyle = (
+  componentTheme: BylineTheme,
+  props: BylineProps
+): BylineStyle => {
   const { alignContent, size } = props
 
   const alignContentVariants = {

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { SelectTheme } from '@instructure/shared-types'
-import { SelectProps } from './props'
+import type { SelectTheme } from '@instructure/shared-types'
+import type { SelectProps, SelectStyle } from './props'
 
 /**
  * Generates the style object from the theme and provided additional information
@@ -32,7 +32,10 @@ import { SelectProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: SelectTheme, props: SelectProps) => {
+const generateStyle = (
+  componentTheme: SelectTheme,
+  props: SelectProps
+): SelectStyle => {
   const { size } = props
 
   const iconSizeVariants = {

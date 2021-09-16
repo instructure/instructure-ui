@@ -28,8 +28,8 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { Row } from '../Row'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, TableBodyTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableBodyOwnProps = {
   hover?: boolean
@@ -42,7 +42,10 @@ type PropKeys = keyof TableBodyOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TableBodyProps = TableBodyOwnProps & WithStyleProps
+type TableBodyProps = TableBodyOwnProps &
+  WithStyleProps<TableBodyTheme, TableBodyStyle>
+
+type TableBodyStyle = ComponentStyle<'body'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -63,5 +66,5 @@ const allowedProps: AllowedPropKeys = [
   'headers'
 ]
 
-export type { TableBodyProps }
+export type { TableBodyProps, TableBodyStyle }
 export { propTypes, allowedProps }

@@ -26,8 +26,11 @@ import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '../FormPropTypes'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  FormFieldMessagesTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '../FormPropTypes'
 
 type FormFieldMessagesOwnProps = {
@@ -38,7 +41,10 @@ type PropKeys = keyof FormFieldMessagesOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldMessagesProps = FormFieldMessagesOwnProps & WithStyleProps
+type FormFieldMessagesProps = FormFieldMessagesOwnProps &
+  WithStyleProps<FormFieldMessagesTheme, FormFieldMessagesStyle>
+
+type FormFieldMessagesStyle = ComponentStyle<'formFieldMessages' | 'message'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -52,5 +58,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['messages']
 
-export type { FormFieldMessagesProps }
+export type { FormFieldMessagesProps, FormFieldMessagesStyle }
 export { propTypes, allowedProps }

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { ModalBodyTheme } from '@instructure/shared-types'
-import { ModalBodyProps } from './props'
+import type { ModalBodyTheme } from '@instructure/shared-types'
+import type { ModalBodyProps, ModalBodyStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { ModalBodyProps } from './props'
 const generateStyle = (
   componentTheme: ModalBodyTheme,
   props: ModalBodyProps
-) => {
+): ModalBodyStyle => {
   const { variant } = props
 
   const backgroundStyle =

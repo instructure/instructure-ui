@@ -23,8 +23,9 @@
  */
 
 import { keyframes } from '@instructure/emotion'
-import { TreeBrowserButtonTheme } from '@instructure/shared-types'
-import { TreeBrowserButtonProps } from './props'
+
+import type { TreeBrowserButtonTheme } from '@instructure/shared-types'
+import type { TreeBrowserButtonProps, TreeBrowserButtonStyle } from './props'
 
 const transform = keyframes`
   50% {
@@ -49,7 +50,7 @@ const transform = keyframes`
 const generateStyles = (
   componentTheme: TreeBrowserButtonTheme,
   props: TreeBrowserButtonProps
-): any => {
+): TreeBrowserButtonStyle => {
   const { size, variant, selected, focused, level } = props
 
   const isRootButton = level && level === 1

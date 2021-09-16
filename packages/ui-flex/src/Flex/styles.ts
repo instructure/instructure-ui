@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { FlexTheme } from '@instructure/shared-types'
-import { FlexProps } from './props'
+import type { FlexTheme } from '@instructure/shared-types'
+import type { FlexProps, FlexStyle } from './props'
 
 /**
  * ---
@@ -40,7 +40,10 @@ import { FlexProps } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 
-const generateStyle = (componentTheme: FlexTheme, props: FlexProps) => {
+const generateStyle = (
+  componentTheme: FlexTheme,
+  props: FlexProps
+): FlexStyle => {
   const { justifyItems, wrap, direction } = props
 
   // align-items css prop

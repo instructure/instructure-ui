@@ -23,8 +23,9 @@
  */
 
 import { matchComponentTypes } from '@instructure/ui-react-utils'
-import { OptionsItemTheme } from '@instructure/shared-types'
-import { OptionsItemProps } from './props'
+
+import type { OptionsItemTheme } from '@instructure/shared-types'
+import type { OptionsItemProps, OptionsItemStyle } from './props'
 
 /**
  * ---
@@ -39,7 +40,7 @@ import { OptionsItemProps } from './props'
 const generateStyle = (
   componentTheme: OptionsItemTheme,
   props: OptionsItemProps
-) => {
+): OptionsItemStyle => {
   const {
     variant,
     children,

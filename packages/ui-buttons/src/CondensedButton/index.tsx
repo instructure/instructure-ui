@@ -89,8 +89,6 @@ class CondensedButton extends Component<CondensedButtonProps> {
       ...props
     } = this.props
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'themeOverride' does not exist on type 'R... Remove this comment to see the full error message
-    // eslint-disable-next-line react/prop-types
     const themeOverride = this.props.themeOverride
 
     return (

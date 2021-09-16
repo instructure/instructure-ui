@@ -24,8 +24,8 @@
 
 import PropTypes from 'prop-types'
 
-import type { WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { PropValidators, GridTheme } from '@instructure/shared-types'
 import type { GridBreakpoints } from '../GridTypes'
 
 // TODO: get numcols from theme config
@@ -65,7 +65,9 @@ type PropKeys = keyof GridColOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type GridColProps = GridColOwnProps & WithStyleProps
+type GridColProps = GridColOwnProps & WithStyleProps<GridTheme, GridColStyle>
+
+type GridColStyle = ComponentStyle<'gridCol'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
@@ -121,5 +123,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type { GridColProps }
+export type { GridColProps, GridColStyle }
 export { propTypes, allowedProps }

@@ -26,8 +26,11 @@ import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  TreeBrowserTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TreeBrowserOwnProps = {
   collections: any
@@ -55,7 +58,10 @@ type PropKeys = keyof TreeBrowserOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TreeBrowserProps = TreeBrowserOwnProps & WithStyleProps
+type TreeBrowserProps = TreeBrowserOwnProps &
+  WithStyleProps<TreeBrowserTheme, TreeBrowserStyle>
+
+type TreeBrowserStyle = ComponentStyle<'treeBrowser'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -151,5 +157,5 @@ const allowedProps: AllowedPropKeys = [
   'renderContent'
 ]
 
-export type { TreeBrowserProps }
+export type { TreeBrowserProps, TreeBrowserStyle }
 export { propTypes, allowedProps }

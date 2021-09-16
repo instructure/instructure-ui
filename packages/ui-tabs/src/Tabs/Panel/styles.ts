@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TabsPanelTheme } from '@instructure/shared-types'
-import { TabsPanelProps } from './props'
+import type { TabsPanelTheme } from '@instructure/shared-types'
+import type { TabsPanelProps, TabsPanelStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { TabsPanelProps } from './props'
 const generateStyle = (
   componentTheme: TabsPanelTheme,
   props: TabsPanelProps
-) => {
+): TabsPanelStyle => {
   const { maxHeight } = props
 
   return {

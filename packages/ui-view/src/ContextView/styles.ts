@@ -23,9 +23,10 @@
  */
 
 import { mirrorPlacement } from '@instructure/ui-position'
+
 import type { PlacementPropValues } from '@instructure/ui-position'
-import { ContextViewTheme } from '@instructure/shared-types'
-import { ContextViewProps } from './props'
+import type { ContextViewTheme } from '@instructure/shared-types'
+import type { ContextViewProps, ContextViewStyle } from './props'
 
 type PlacementArray = PlacementPropValues[]
 
@@ -259,7 +260,7 @@ const getArrowPlacementVariant = (
 const generateStyle = (
   componentTheme: ContextViewTheme,
   props: ContextViewProps
-) => {
+): ContextViewStyle => {
   const { placement, background } = props
 
   const arrowBaseStyles = {

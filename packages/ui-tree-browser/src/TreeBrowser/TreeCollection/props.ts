@@ -29,8 +29,11 @@ import { Children } from '@instructure/ui-prop-types'
 
 import { TreeNode } from '../TreeNode'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  TreeBrowserCollectionTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TreeBrowserCollectionOwnProps = {
   id?: string | number
@@ -64,7 +67,12 @@ type PropKeys = keyof TreeBrowserCollectionOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TreeBrowserCollectionProps = TreeBrowserCollectionOwnProps & WithStyleProps
+type TreeBrowserCollectionProps = TreeBrowserCollectionOwnProps &
+  WithStyleProps<TreeBrowserCollectionTheme, TreeBrowserCollectionStyle>
+
+type TreeBrowserCollectionStyle = ComponentStyle<
+  'treeCollection' | 'list' | 'item'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -128,5 +136,5 @@ const allowedProps: AllowedPropKeys = [
   'renderContent'
 ]
 
-export type { TreeBrowserCollectionProps }
+export type { TreeBrowserCollectionProps, TreeBrowserCollectionStyle }
 export { propTypes, allowedProps }

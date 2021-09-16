@@ -51,7 +51,7 @@ import type { FormFieldLayoutProps } from './props'
 parent: FormField
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, null)
 class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static readonly componentId = 'FormFieldLayout'
 

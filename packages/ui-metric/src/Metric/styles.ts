@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { MetricTheme } from '@instructure/shared-types'
-import { MetricProps } from './props'
+import type { MetricTheme } from '@instructure/shared-types'
+import type { MetricProps, MetricStyle } from './props'
 
 /**
  * ---
@@ -34,7 +34,10 @@ import { MetricProps } from './props'
  * @param  {Object} props the props of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: MetricTheme, props: MetricProps) => {
+const generateStyle = (
+  componentTheme: MetricTheme,
+  props: MetricProps
+): MetricStyle => {
   const { textAlign } = props
 
   return {

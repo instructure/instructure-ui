@@ -28,8 +28,8 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { GridRow } from '../GridRow'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, GridTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { GridBreakpoints } from '../GridTypes'
 
 type GridOwnProps = {
@@ -46,7 +46,9 @@ type PropKeys = keyof GridOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type GridProps = GridOwnProps & WithStyleProps
+type GridProps = GridOwnProps & WithStyleProps<GridTheme, GridStyle>
+
+type GridStyle = ComponentStyle<'grid'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: ChildrenPropTypes.oneOf([GridRow, ScreenReaderContent]),
@@ -74,5 +76,5 @@ const allowedProps: AllowedPropKeys = [
   'visualDebug'
 ]
 
-export type { GridProps }
+export type { GridProps, GridStyle }
 export { propTypes, allowedProps }

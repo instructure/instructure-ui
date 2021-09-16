@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { MenuItemTheme } from '@instructure/shared-types'
-import { MenuItemProps } from './props'
+import type { MenuItemTheme } from '@instructure/shared-types'
+import type { MenuItemProps, MenuItemStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { MenuItemProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: MenuItemTheme, props: MenuItemProps) => {
+const generateStyle = (
+  componentTheme: MenuItemTheme,
+  props: MenuItemProps
+): MenuItemStyle => {
   const { type, disabled } = props
 
   const isRadioOrCheckbox = type === 'checkbox' || type === 'radio'

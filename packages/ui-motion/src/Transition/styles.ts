@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TransitionTheme } from '@instructure/shared-types'
-import { TransitionProps } from './props'
+import type { TransitionTheme } from '@instructure/shared-types'
+import type { TransitionProps, TransitionStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { TransitionProps } from './props'
 const generateStyle = (
   componentTheme: TransitionTheme,
   props: TransitionProps
-) => {
+): TransitionStyle => {
   const { type } = props
 
   /**

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TabsTheme } from '@instructure/shared-types'
-import { TabsProps } from './props'
+import type { TabsTheme } from '@instructure/shared-types'
+import type { TabsProps, TabsStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { TabsProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TabsTheme, props: TabsProps) => {
+const generateStyle = (
+  componentTheme: TabsTheme,
+  props: TabsProps
+): TabsStyle => {
   const { variant, tabOverflow } = props
 
   const variants = {

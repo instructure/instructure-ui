@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { RangeInputTheme } from '@instructure/shared-types'
-import { RangeInputProps } from './props'
+import type { RangeInputTheme } from '@instructure/shared-types'
+import type { RangeInputProps, RangeInputStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { RangeInputProps } from './props'
 const generateStyle = (
   componentTheme: RangeInputTheme,
   props: RangeInputProps
-) => {
+): RangeInputStyle => {
   const { size } = props
   const valueSizeVariants = {
     small: {

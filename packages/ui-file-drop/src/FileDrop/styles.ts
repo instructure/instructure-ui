@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { FileDropTheme } from '@instructure/shared-types'
-import { FileDropProps, FileDropStyleProps } from './props'
+import type { FileDropTheme } from '@instructure/shared-types'
+import type { FileDropProps, FileDropStyleProps, FileDropStyle } from './props'
 
 /**
  * ---
@@ -39,7 +39,7 @@ const generateStyle = (
   componentTheme: FileDropTheme,
   props: FileDropProps,
   state: FileDropStyleProps
-) => {
+): FileDropStyle => {
   const { height } = props
   const {
     functionallyDisabled,

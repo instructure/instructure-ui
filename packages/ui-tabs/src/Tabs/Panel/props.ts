@@ -27,8 +27,12 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type { PropValidators, TabsPanelTheme } from '@instructure/shared-types'
 
 type TabsPanelOwnProps = {
   renderTitle: React.ReactNode | ((...args: any[]) => any)
@@ -49,7 +53,10 @@ type PropKeys = keyof TabsPanelOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TabsPanelProps = TabsPanelOwnProps & WithStyleProps
+type TabsPanelProps = TabsPanelOwnProps &
+  WithStyleProps<TabsPanelTheme, TabsPanelStyle>
+
+type TabsPanelStyle = ComponentStyle<'panel' | 'content'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -85,5 +92,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type { TabsPanelProps }
+export type { TabsPanelProps, TabsPanelStyle }
 export { propTypes, allowedProps }

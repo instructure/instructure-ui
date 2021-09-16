@@ -25,8 +25,16 @@
 import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type {
+  AsElementType,
+  CloseButtonTheme,
+  PropValidators
+} from '@instructure/shared-types'
 
 type CloseButtonOwnProps = {
   screenReaderLabel: string | React.ReactNode
@@ -49,7 +57,10 @@ type PropKeys = keyof CloseButtonOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type CloseButtonProps = CloseButtonOwnProps & WithStyleProps
+type CloseButtonProps = CloseButtonOwnProps &
+  WithStyleProps<CloseButtonTheme, CloseButtonStyle>
+
+type CloseButtonStyle = ComponentStyle<'closeButton'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -133,5 +144,5 @@ const allowedProps: AllowedPropKeys = [
   'type'
 ]
 
-export type { CloseButtonProps }
+export type { CloseButtonProps, CloseButtonStyle }
 export { propTypes, allowedProps }

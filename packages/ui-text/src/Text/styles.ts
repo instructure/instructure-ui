@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TextTheme } from '@instructure/shared-types'
-import { TextProps } from './props'
+import type { TextTheme } from '@instructure/shared-types'
+import type { TextProps, TextStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { TextProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TextTheme, props: TextProps) => {
+const generateStyle = (
+  componentTheme: TextTheme,
+  props: TextProps
+): TextStyle => {
   const {
     size,
     wrap,

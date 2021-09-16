@@ -23,8 +23,9 @@
  */
 
 import { keyframes } from '@instructure/emotion'
-import { CodeEditorTheme } from '@instructure/shared-types'
-import { CodeEditorProps } from './props'
+
+import type { CodeEditorTheme } from '@instructure/shared-types'
+import type { CodeEditorProps, CodeEditorStyle } from './props'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -46,7 +47,7 @@ const blink = keyframes`
 const generateStyle = (
   componentTheme: CodeEditorTheme,
   props: CodeEditorProps
-) => {
+): CodeEditorStyle => {
   const { attachment } = props
 
   const attachmentVariants = {

@@ -25,8 +25,12 @@
 import PropTypes from 'prop-types'
 import { I18nPropTypes } from '@instructure/ui-i18n'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  CalendarDayTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type CalendarDayOwnProps = {
   children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
@@ -50,7 +54,10 @@ type PropKeys = keyof CalendarDayOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type CalendarDayProps = CalendarDayOwnProps & WithStyleProps
+type CalendarDayProps = CalendarDayOwnProps &
+  WithStyleProps<CalendarDayTheme, CalendarDayStyle>
+
+type CalendarDayStyle = ComponentStyle<'calendarDay' | 'day'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -123,5 +130,5 @@ const allowedProps: AllowedPropKeys = [
   'as'
 ]
 
-export type { CalendarDayProps, CalendarDayStyleProps }
+export type { CalendarDayProps, CalendarDayStyleProps, CalendarDayStyle }
 export { propTypes, allowedProps }

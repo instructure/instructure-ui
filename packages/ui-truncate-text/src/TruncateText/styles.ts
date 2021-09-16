@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { TruncateTextTheme } from '@instructure/shared-types'
+import type { TruncateTextTheme } from '@instructure/shared-types'
+import type { TruncateTextStyle } from './props'
 
 /**
  * ---
@@ -34,7 +35,9 @@ import { TruncateTextTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TruncateTextTheme) => {
+const generateStyle = (
+  componentTheme: TruncateTextTheme
+): TruncateTextStyle => {
   return {
     truncateText: {
       label: 'truncateText',

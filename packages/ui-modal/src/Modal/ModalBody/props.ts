@@ -27,8 +27,16 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  ModalBodyTheme
+} from '@instructure/shared-types'
 
 type ModalBodyOwnProps = {
   children?: React.ReactNode
@@ -43,7 +51,10 @@ type PropKeys = keyof ModalBodyOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ModalBodyProps = ModalBodyOwnProps & WithStyleProps
+type ModalBodyProps = ModalBodyOwnProps &
+  WithStyleProps<ModalBodyTheme, ModalBodyStyle>
+
+type ModalBodyStyle = ComponentStyle<'modalBody'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
@@ -63,5 +74,5 @@ const allowedProps: AllowedPropKeys = [
   'overflow'
 ]
 
-export type { ModalBodyProps }
+export type { ModalBodyProps, ModalBodyStyle }
 export { propTypes, allowedProps }

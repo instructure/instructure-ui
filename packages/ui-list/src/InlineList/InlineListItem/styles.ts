@@ -23,8 +23,9 @@
  */
 
 import { logError as error } from '@instructure/console'
-import { InlineListItemTheme } from '@instructure/shared-types'
-import { InlineListItemProps } from './props'
+
+import type { InlineListItemTheme } from '@instructure/shared-types'
+import type { InlineListItemProps, InlineListItemStyle } from './props'
 
 /**
  * ---
@@ -41,7 +42,7 @@ import { InlineListItemProps } from './props'
 const generateStyle = (
   componentTheme: InlineListItemTheme,
   props: InlineListItemProps
-) => {
+): InlineListItemStyle => {
   const { size, delimiter, spacing } = props
 
   const withDelimiter = delimiter !== 'none'

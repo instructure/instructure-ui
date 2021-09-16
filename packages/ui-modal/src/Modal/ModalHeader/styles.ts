@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import { ModalHeaderTheme } from '@instructure/shared-types'
-import { ModalHeaderProps, ModalHeaderStyleProps } from './props'
+import type { ModalHeaderTheme } from '@instructure/shared-types'
+import type {
+  ModalHeaderProps,
+  ModalHeaderStyleProps,
+  ModalHeaderStyle
+} from './props'
 
 /**
  * ---
@@ -39,7 +43,7 @@ const generateStyle = (
   componentTheme: ModalHeaderTheme,
   props: ModalHeaderProps,
   state: ModalHeaderStyleProps
-) => {
+): ModalHeaderStyle => {
   const { variant } = props
   const { withCloseButton } = state
 

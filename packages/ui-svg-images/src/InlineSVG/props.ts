@@ -24,8 +24,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, InlineSVGTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type InlineSVGOwnProps = {
   src?: string
@@ -54,7 +54,10 @@ type PropKeys = keyof InlineSVGOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type InlineSVGProps = InlineSVGOwnProps & WithStyleProps
+type InlineSVGProps = InlineSVGOwnProps &
+  WithStyleProps<InlineSVGTheme, InlineSVGStyle>
+
+type InlineSVGStyle = ComponentStyle<'inlineSVG'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
@@ -98,5 +101,5 @@ const allowedProps: AllowedPropKeys = [
   'color'
 ]
 
-export type { InlineSVGProps, InlineSVGOwnProps }
+export type { InlineSVGProps, InlineSVGOwnProps, InlineSVGStyle }
 export { propTypes, allowedProps }

@@ -26,8 +26,16 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators, AsElementType } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type {
+  PropValidators,
+  AsElementType,
+  PillTheme
+} from '@instructure/shared-types'
 
 type PillOwnProps = {
   as?: AsElementType
@@ -40,7 +48,9 @@ type PropKeys = keyof PillOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PillProps = PillOwnProps & WithStyleProps
+type PillProps = PillOwnProps & WithStyleProps<PillTheme, PillStyle>
+
+type PillStyle = ComponentStyle<'pill' | 'text' | 'maxWidth'>
 
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType, // eslint-disable-line react/require-default-props
@@ -70,5 +80,5 @@ const allowedProps: AllowedPropKeys = [
   'margin'
 ]
 
-export type { PillProps }
+export type { PillProps, PillStyle }
 export { propTypes, allowedProps }

@@ -45,6 +45,11 @@ import generateStyle from './styles'
 import { propTypes, allowedProps } from './props'
 import type { CheckboxProps } from './props'
 
+import type {
+  CheckboxFacadeTheme,
+  ToggleFacadeTheme
+} from '@instructure/shared-types'
+
 /**
 ---
 category: components
@@ -199,7 +204,6 @@ class Checkbox extends Component<CheckboxProps> {
       readOnly,
       indeterminate,
       labelPlacement,
-      // eslint-disable-next-line react/prop-types
       themeOverride
     } = this.props
 
@@ -222,7 +226,7 @@ class Checkbox extends Component<CheckboxProps> {
           checked={this.checked}
           readOnly={readOnly}
           labelPlacement={labelPlacement}
-          themeOverride={themeOverride}
+          themeOverride={themeOverride as Partial<ToggleFacadeTheme>}
         >
           {label}
         </ToggleFacade>
@@ -235,7 +239,7 @@ class Checkbox extends Component<CheckboxProps> {
           focused={focused}
           checked={this.checked}
           indeterminate={indeterminate}
-          themeOverride={themeOverride}
+          themeOverride={themeOverride as Partial<CheckboxFacadeTheme>}
         >
           {label}
         </CheckboxFacade>

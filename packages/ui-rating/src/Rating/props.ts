@@ -25,7 +25,11 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
 
 type RatingOwnProps = {
@@ -43,7 +47,9 @@ type PropKeys = keyof RatingOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type RatingProps = RatingOwnProps & WithStyleProps
+type RatingProps = RatingOwnProps & WithStyleProps<null, RatingStyle>
+
+type RatingStyle = ComponentStyle<'rating'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -93,5 +99,5 @@ const allowedProps: AllowedPropKeys = [
   'margin'
 ]
 
-export type { RatingProps }
+export type { RatingProps, RatingStyle }
 export { propTypes, allowedProps }

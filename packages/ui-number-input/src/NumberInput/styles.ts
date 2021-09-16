@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import { NumberInputTheme } from '@instructure/shared-types'
-import { NumberInputProps, NumberInputStyleProps } from './props'
+import type { NumberInputTheme } from '@instructure/shared-types'
+import type {
+  NumberInputProps,
+  NumberInputStyleProps,
+  NumberInputStyle
+} from './props'
 
 /**
  * ---
@@ -39,7 +43,7 @@ const generateStyle = (
   componentTheme: NumberInputTheme,
   props: NumberInputProps,
   state: NumberInputStyleProps
-) => {
+): NumberInputStyle => {
   const { size } = props
   const { interaction, hasFocus, invalid } = state
 
@@ -64,11 +68,13 @@ const generateStyle = (
         borderColor: componentTheme.errorOutlineColor
       }
     : {}
+
   const invalidContainerStyles = invalid
     ? {
         borderColor: componentTheme.errorBorderColor
       }
     : {}
+
   return {
     numberInput: {
       label: 'numberInput'

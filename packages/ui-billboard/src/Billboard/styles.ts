@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { BillboardTheme } from '@instructure/shared-types'
-import { BillboardProps } from './props'
+import type { BillboardTheme } from '@instructure/shared-types'
+import type { BillboardProps, BillboardStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { BillboardProps } from './props'
 const generateStyle = (
   componentTheme: BillboardTheme,
   props: BillboardProps
-) => {
+): BillboardStyle => {
   const { size, href, onClick, disabled, hero, heading } = props
 
   const clickable = href || onClick

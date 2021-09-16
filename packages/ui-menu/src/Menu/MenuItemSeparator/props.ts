@@ -22,8 +22,11 @@
  * SOFTWARE.
  */
 
-import type { WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  PropValidators,
+  MenuSeparatorTheme
+} from '@instructure/shared-types'
 
 // keeping here to keep the structure of props.ts
 // eslint-disable-next-line
@@ -33,11 +36,14 @@ type PropKeys = keyof MenuSeparatorOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type MenuSeparatorProps = MenuSeparatorOwnProps & WithStyleProps
+type MenuSeparatorProps = MenuSeparatorOwnProps &
+  WithStyleProps<MenuSeparatorTheme, MenuSeparatorStyle>
+
+type MenuSeparatorStyle = ComponentStyle<'menuItemSeparator'>
 
 const propTypes: PropValidators<PropKeys> = {}
 
 const allowedProps: AllowedPropKeys = []
 
-export type { MenuSeparatorProps }
+export type { MenuSeparatorProps, MenuSeparatorStyle }
 export { propTypes, allowedProps }

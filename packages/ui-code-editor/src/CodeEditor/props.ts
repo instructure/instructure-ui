@@ -24,8 +24,8 @@
 
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, CodeEditorTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type CodeEditorOwnProps = {
   label: string
@@ -53,7 +53,10 @@ type PropKeys = keyof CodeEditorOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type CodeEditorProps = CodeEditorOwnProps & WithStyleProps
+type CodeEditorProps = CodeEditorOwnProps &
+  WithStyleProps<CodeEditorTheme, CodeEditorStyle>
+
+type CodeEditorStyle = ComponentStyle<'codeEditor' | 'globalStyles'>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
@@ -91,5 +94,5 @@ const allowedProps: AllowedPropKeys = [
   'value'
 ]
 
-export type { CodeEditorProps }
+export type { CodeEditorProps, CodeEditorStyle }
 export { propTypes, allowedProps }

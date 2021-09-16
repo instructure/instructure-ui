@@ -27,8 +27,16 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type {
+  AsElementType,
+  AvatarTheme,
+  PropValidators
+} from '@instructure/shared-types'
 
 type AvatarOwnProps = {
   /**
@@ -90,7 +98,9 @@ type PropKeys = keyof AvatarOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AvatarProps = AvatarOwnProps & WithStyleProps
+type AvatarProps = AvatarOwnProps & WithStyleProps<AvatarTheme, AvatarStyle>
+
+type AvatarStyle = ComponentStyle<'avatar' | 'initials' | 'loadImage'>
 
 const propTypes: PropValidators<PropKeys> = {
   name: PropTypes.string.isRequired,
@@ -137,5 +147,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type { AvatarProps }
+export type { AvatarProps, AvatarStyle }
 export { propTypes, allowedProps }

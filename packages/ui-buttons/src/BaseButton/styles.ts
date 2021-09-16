@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import { BaseButtonTheme } from '@instructure/shared-types'
-import { BaseButtonProps, BaseButtonStyleProps } from './props'
+import type { BaseButtonTheme } from '@instructure/shared-types'
+import type {
+  BaseButtonProps,
+  BaseButtonStyleProps,
+  BaseButtonStyle
+} from './props'
 
 /**
  * ---
@@ -39,7 +43,7 @@ const generateStyle = (
   componentTheme: BaseButtonTheme,
   props: BaseButtonProps,
   state: BaseButtonStyleProps
-) => {
+): BaseButtonStyle => {
   const {
     size,
     color,

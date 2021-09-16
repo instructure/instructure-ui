@@ -23,8 +23,9 @@
  */
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { FormFieldLabelTheme } from '@instructure/shared-types'
-import { FormFieldLabelProps } from './props'
+
+import type { FormFieldLabelTheme } from '@instructure/shared-types'
+import type { FormFieldLabelProps, FormFieldLabelStyle } from './props'
 
 /**
  * ---
@@ -39,7 +40,7 @@ import { FormFieldLabelProps } from './props'
 const generateStyle = (
   componentTheme: FormFieldLabelTheme,
   props: FormFieldLabelProps
-) => {
+): FormFieldLabelStyle => {
   const { children } = props
 
   const hasContent = hasVisibleChildren(children)

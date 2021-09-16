@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { CloseButtonTheme } from '@instructure/shared-types'
-import { CloseButtonProps } from './props'
+import type { CloseButtonTheme } from '@instructure/shared-types'
+import type { CloseButtonProps, CloseButtonStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { CloseButtonProps } from './props'
 const generateStyle = (
   componentTheme: CloseButtonTheme,
   props: CloseButtonProps
-) => {
+): CloseButtonStyle => {
   const { placement, offset } = props
 
   const offsetValueMap = {

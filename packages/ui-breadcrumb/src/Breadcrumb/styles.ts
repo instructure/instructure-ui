@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { BreadcrumbTheme } from '@instructure/shared-types'
-import { BreadcrumbProps } from './props'
+import type { BreadcrumbTheme } from '@instructure/shared-types'
+import type { BreadcrumbProps, BreadcrumbStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { BreadcrumbProps } from './props'
 const generateStyle = (
   componentTheme: BreadcrumbTheme,
   props: BreadcrumbProps
-) => {
+): BreadcrumbStyle => {
   const { size } = props
 
   const crumbSizeVariants = {

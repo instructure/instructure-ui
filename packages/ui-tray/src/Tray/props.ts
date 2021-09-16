@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
 
-import type { WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { PropValidators, TrayTheme } from '@instructure/shared-types'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 
 type TrayOwnProps = {
@@ -64,7 +65,12 @@ type TrayOwnProps = {
 type PropKeys = keyof TrayOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
-type TrayProps = TrayOwnProps & BidirectionalProps & WithStyleProps
+
+type TrayProps = TrayOwnProps &
+  BidirectionalProps &
+  WithStyleProps<TrayTheme, TrayStyle>
+
+type TrayStyle = ComponentStyle<'tray' | 'content'>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
@@ -215,5 +221,5 @@ const allowedProps: AllowedPropKeys = [
   'shadow'
 ]
 
-export type { TrayProps }
+export type { TrayProps, TrayStyle }
 export { propTypes, allowedProps }

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TableColHeaderTheme } from '@instructure/shared-types'
-import { TableColHeaderProps } from './props'
+import type { TableColHeaderTheme } from '@instructure/shared-types'
+import type { TableColHeaderProps, TableColHeaderStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { TableColHeaderProps } from './props'
 const generateStyle = (
   componentTheme: TableColHeaderTheme,
   props: TableColHeaderProps
-) => {
+): TableColHeaderStyle => {
   const { onRequestSort, textAlign } = props
 
   const headerStyle = {

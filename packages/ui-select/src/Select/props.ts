@@ -32,9 +32,9 @@ import { PositionPropTypes } from '@instructure/ui-position'
 import { Group } from './Group'
 import { Option } from './Option'
 
-import type { PropValidators } from '@instructure/shared-types'
+import type { PropValidators, SelectTheme } from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   PlacementPropValues,
   PositionConstraint,
@@ -79,7 +79,9 @@ type PropKeys = keyof SelectOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SelectProps = SelectOwnProps & WithStyleProps
+type SelectProps = SelectOwnProps & WithStyleProps<SelectTheme, SelectStyle>
+
+type SelectStyle = ComponentStyle<'select' | 'icon' | 'assistiveText'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -259,5 +261,5 @@ const allowedProps: AllowedPropKeys = [
   'shouldNotWrap'
 ]
 
-export type { SelectProps }
+export type { SelectProps, SelectStyle }
 export { propTypes, allowedProps }

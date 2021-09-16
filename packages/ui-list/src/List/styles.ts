@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { ListTheme } from '@instructure/shared-types'
-import { ListProps } from './props'
+import type { ListTheme } from '@instructure/shared-types'
+import type { ListProps, ListStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { ListProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: ListTheme, props: ListProps) => {
+const generateStyle = (
+  componentTheme: ListTheme,
+  props: ListProps
+): ListStyle => {
   const { isUnstyled, as } = props
 
   const ordered = as === 'ol'

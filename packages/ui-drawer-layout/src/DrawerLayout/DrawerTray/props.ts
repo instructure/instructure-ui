@@ -30,8 +30,11 @@ import { bidirectional } from '@instructure/ui-i18n'
 
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
-import type { WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type {
+  PropValidators,
+  DrawerLayoutTrayTheme
+} from '@instructure/shared-types'
 
 type DrawerTrayPlacement = 'start' | 'end'
 
@@ -79,7 +82,12 @@ type PropKeys = keyof DrawerLayoutTrayOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type DrawerLayoutTrayProps = DrawerLayoutTrayOwnProps & WithStyleProps
+type DrawerLayoutTrayProps = DrawerLayoutTrayOwnProps &
+  WithStyleProps<DrawerLayoutTrayTheme, DrawerLayoutTrayStyle>
+
+type DrawerLayoutTrayStyle = ComponentStyle<
+  'drawerTray' | 'drawerTrayWithShadow' | 'drawerTrayContent'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
@@ -200,6 +208,7 @@ export type {
   DrawerLayoutTrayProps,
   DrawerLayoutTrayState,
   DrawerLayoutTrayStyleProps,
-  DrawerTrayPlacement
+  DrawerTrayPlacement,
+  DrawerLayoutTrayStyle
 }
 export { propTypes, allowedProps }

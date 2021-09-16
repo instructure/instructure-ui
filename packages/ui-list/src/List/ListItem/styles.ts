@@ -23,8 +23,9 @@
  */
 
 import { logError as error } from '@instructure/console'
-import { ListItemTheme } from '@instructure/shared-types'
-import { ListItemProps } from './props'
+
+import type { ListItemTheme } from '@instructure/shared-types'
+import type { ListItemProps, ListItemStyle } from './props'
 
 /**
  * ---
@@ -38,7 +39,10 @@ import { ListItemProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: ListItemTheme, props: ListItemProps) => {
+const generateStyle = (
+  componentTheme: ListItemTheme,
+  props: ListItemProps
+): ListItemStyle => {
   const { size, delimiter, spacing } = props
 
   const withDelimiter = delimiter !== 'none'

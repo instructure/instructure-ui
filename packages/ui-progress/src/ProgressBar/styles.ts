@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { ProgressBarTheme } from '@instructure/shared-types'
-import { ProgressBarProps } from './props'
+import type { ProgressBarTheme } from '@instructure/shared-types'
+import type { ProgressBarProps, ProgressBarStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { ProgressBarProps } from './props'
 const generateStyle = (
   componentTheme: ProgressBarTheme,
   props: ProgressBarProps
-) => {
+): ProgressBarStyle => {
   const { valueNow, valueMax, size, color, meterColor } = props
 
   const meterColorClassName =

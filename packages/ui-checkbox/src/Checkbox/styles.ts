@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { CheckboxProps } from './props'
+import type { CheckboxProps, CheckboxStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ const generateStyle = (
   // @ts-expect-error no theme variables used here
   componentTheme: any,
   props: CheckboxProps
-) => {
+): CheckboxStyle => {
   const { inline, disabled } = props
 
   return {

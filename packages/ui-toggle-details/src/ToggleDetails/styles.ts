@@ -23,8 +23,14 @@
  */
 
 import { keyframes } from '@instructure/emotion'
-import { ToggleDetailsTheme } from '@instructure/shared-types'
-import { ToggleDetailsProps, ToggleDetailsStyleProps } from './props'
+
+import type { ToggleDetailsTheme } from '@instructure/shared-types'
+import type {
+  ToggleDetailsProps,
+  ToggleDetailsStyleProps,
+  ToggleDetailsStyle
+} from './props'
+
 const contentAnimation = keyframes`
   to {
     opacity: 1;
@@ -44,7 +50,7 @@ const generateStyle = (
   componentTheme: ToggleDetailsTheme,
   props: ToggleDetailsProps,
   state: ToggleDetailsStyleProps
-): any => {
+): ToggleDetailsStyle => {
   const { fluidWidth, iconPosition, size, variant } = props
   const { animate } = state
 

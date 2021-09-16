@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TableTheme } from '@instructure/shared-types'
-import { TableProps } from './props'
+import type { TableTheme } from '@instructure/shared-types'
+import type { TableProps, TableStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { TableProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TableTheme, props: TableProps) => {
+const generateStyle = (
+  componentTheme: TableTheme,
+  props: TableProps
+): TableStyle => {
   const { layout } = props
 
   return {
