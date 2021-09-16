@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.9.1](https://github.com/instructure/instructure-ui/compare/v8.9.0...v8.9.1) (2021-09-16)
+
+**Note:** Version bump only for package @instructure/canvas-theme
+
 # [8.9.0](https://github.com/instructure/instructure-ui/compare/v8.8.0...v8.9.0) (2021-09-15)
 
 **Note:** Version bump only for package @instructure/canvas-theme
