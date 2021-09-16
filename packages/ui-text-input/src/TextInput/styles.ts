@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import { TextInputTheme } from '@instructure/shared-types'
-import { TextInputProps, TextInputStyleProps } from './props'
+import type { TextInputTheme } from '@instructure/shared-types'
+import type {
+  TextInputProps,
+  TextInputStyleProps,
+  TextInputStyle
+} from './props'
 
 /**
  * ---
@@ -39,7 +43,7 @@ const generateStyle = (
   componentTheme: TextInputTheme,
   props: TextInputProps,
   state: TextInputStyleProps
-) => {
+): TextInputStyle => {
   const { size, textAlign, shouldNotWrap } = props
   const { disabled, invalid, focused } = state
 

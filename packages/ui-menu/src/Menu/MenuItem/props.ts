@@ -27,8 +27,12 @@ import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  MenuItemTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MenuItemOwnProps = {
   children: React.ReactNode
@@ -51,7 +55,10 @@ type PropKeys = keyof MenuItemOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type MenuItemProps = MenuItemOwnProps & WithStyleProps
+type MenuItemProps = MenuItemOwnProps &
+  WithStyleProps<MenuItemTheme, MenuItemStyle>
+
+type MenuItemStyle = ComponentStyle<'menuItem' | 'icon' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -105,5 +112,5 @@ const allowedProps: AllowedPropKeys = [
   'href'
 ]
 
-export type { MenuItemProps }
+export type { MenuItemProps, MenuItemStyle }
 export { propTypes, allowedProps }

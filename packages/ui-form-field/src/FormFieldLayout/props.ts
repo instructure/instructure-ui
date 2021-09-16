@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import { FormPropTypes } from '../FormPropTypes'
 
 import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '../FormPropTypes'
 
 type FormFieldLayoutOwnProps = {
@@ -48,7 +48,10 @@ type PropKeys = keyof FormFieldLayoutOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldLayoutProps = FormFieldLayoutOwnProps & WithStyleProps
+type FormFieldLayoutProps = FormFieldLayoutOwnProps &
+  WithStyleProps<null, FormFieldLayoutStyle>
+
+type FormFieldLayoutStyle = ComponentStyle<'formFieldLayout'>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
@@ -93,5 +96,5 @@ const allowedProps: AllowedPropKeys = [
   'inputContainerRef'
 ]
 
-export type { FormFieldLayoutProps }
+export type { FormFieldLayoutProps, FormFieldLayoutStyle }
 export { propTypes, allowedProps }

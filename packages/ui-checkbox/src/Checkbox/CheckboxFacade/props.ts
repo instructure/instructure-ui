@@ -24,8 +24,11 @@
 
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  CheckboxFacadeTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type CheckboxFacadeOwnProps = {
   children: React.ReactNode
@@ -40,7 +43,10 @@ type PropKeys = keyof CheckboxFacadeOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type CheckboxFacadeProps = CheckboxFacadeOwnProps & WithStyleProps
+type CheckboxFacadeProps = CheckboxFacadeOwnProps &
+  WithStyleProps<CheckboxFacadeTheme, CheckboxFacadeStyle>
+
+type CheckboxFacadeStyle = ComponentStyle<'checkboxFacade' | 'facade' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node.isRequired,
@@ -63,5 +69,5 @@ const allowedProps: AllowedPropKeys = [
   'indeterminate'
 ]
 
-export type { CheckboxFacadeProps }
+export type { CheckboxFacadeProps, CheckboxFacadeStyle }
 export { propTypes, allowedProps }

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { PillTheme } from '@instructure/shared-types'
-import { PillProps } from './props'
+import type { PillTheme } from '@instructure/shared-types'
+import type { PillProps, PillStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { PillProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: PillTheme, props: PillProps) => {
+const generateStyle = (
+  componentTheme: PillTheme,
+  props: PillProps
+): PillStyle => {
   const { color } = props
 
   const pillColorVariants = {

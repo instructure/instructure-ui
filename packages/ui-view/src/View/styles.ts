@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { DIRECTION } from '@instructure/ui-i18n'
 import {
   getShorthandPropValue,
@@ -29,12 +30,13 @@ import {
 } from '@instructure/emotion'
 import { pickProps } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
-import {
+
+import type {
   OtherHTMLAttributes,
   PartialRecord,
   ViewTheme
 } from '@instructure/shared-types'
-import { ViewProps, ViewStyle } from './props'
+import type { ViewProps, ViewStyle } from './props'
 
 const getBorderStyle = ({
   borderRadius,

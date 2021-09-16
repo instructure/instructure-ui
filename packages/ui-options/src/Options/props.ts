@@ -26,8 +26,12 @@ import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  OptionsTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type OptionsOwnProps = {
   as?: AsElementType
@@ -41,7 +45,9 @@ type PropKeys = keyof OptionsOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type OptionsProps = OptionsOwnProps & WithStyleProps
+type OptionsProps = OptionsOwnProps & WithStyleProps<OptionsTheme, OptionsStyle>
+
+type OptionsStyle = ComponentStyle<'options' | 'list' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -71,5 +77,5 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { OptionsProps }
+export type { OptionsProps, OptionsStyle }
 export { propTypes, allowedProps }

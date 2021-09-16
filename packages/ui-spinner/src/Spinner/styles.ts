@@ -23,8 +23,9 @@
  */
 
 import { keyframes } from '@instructure/emotion'
-import { SpinnerTheme } from '@instructure/shared-types'
-import { SpinnerProps } from './props'
+
+import type { SpinnerTheme } from '@instructure/shared-types'
+import type { SpinnerProps, SpinnerStyle } from './props'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -61,7 +62,7 @@ const morph = keyframes`
 const generateStyle = (
   componentTheme: SpinnerTheme,
   props: SpinnerProps
-): any => {
+): SpinnerStyle => {
   const { size, variant } = props
 
   const spinnerSizes = {

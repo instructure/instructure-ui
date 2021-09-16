@@ -25,10 +25,13 @@ import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '@instructure/ui-form-field'
 
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  NumberInputTheme
+} from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type NumberInputOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
@@ -65,7 +68,17 @@ type PropKeys = keyof NumberInputOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type NumberInputProps = NumberInputOwnProps & WithStyleProps
+type NumberInputProps = NumberInputOwnProps &
+  WithStyleProps<NumberInputTheme, NumberInputStyle>
+
+type NumberInputStyle = ComponentStyle<
+  | 'numberInput'
+  | 'arrowContainer'
+  | 'arrow'
+  | 'inputWidth'
+  | 'inputContainer'
+  | 'input'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -179,5 +192,10 @@ const allowedProps: AllowedPropKeys = [
   'inputMode'
 ]
 
-export type { NumberInputProps, NumberInputState, NumberInputStyleProps }
+export type {
+  NumberInputProps,
+  NumberInputState,
+  NumberInputStyleProps,
+  NumberInputStyle
+}
 export { propTypes, allowedProps }

@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { TooltipTheme } from '@instructure/shared-types'
+import type { TooltipTheme } from '@instructure/shared-types'
+import type { TooltipStyle } from './props'
 
 /**
  * ---
@@ -34,7 +35,7 @@ import { TooltipTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TooltipTheme) => {
+const generateStyle = (componentTheme: TooltipTheme): TooltipStyle => {
   return {
     tooltip: {
       label: 'tooltip',

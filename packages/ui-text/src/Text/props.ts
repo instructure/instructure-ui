@@ -21,11 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators, AsElementType } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  AsElementType,
+  TextTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TextOwnProps = {
   as?: AsElementType
@@ -54,7 +59,9 @@ type PropKeys = keyof TextOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TextProps = TextOwnProps & WithStyleProps
+type TextProps = TextOwnProps & WithStyleProps<TextTheme, TextStyle>
+
+type TextStyle = ComponentStyle<'text'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -107,5 +114,5 @@ const allowedProps: AllowedPropKeys = [
   'wrap'
 ]
 
-export type { TextProps }
+export type { TextProps, TextStyle }
 export { propTypes, allowedProps }

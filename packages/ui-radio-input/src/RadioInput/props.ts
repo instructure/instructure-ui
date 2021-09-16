@@ -23,8 +23,8 @@
  */
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, RadioInputTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type RadioInputOwnProps = {
   label: React.ReactNode
@@ -46,7 +46,12 @@ type PropKeys = keyof RadioInputOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type RadioInputProps = RadioInputOwnProps & WithStyleProps
+type RadioInputProps = RadioInputOwnProps &
+  WithStyleProps<RadioInputTheme, RadioInputStyle>
+
+type RadioInputStyle = ComponentStyle<
+  'radioInput' | 'input' | 'control' | 'facade' | 'label'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
@@ -86,5 +91,5 @@ const allowedProps: AllowedPropKeys = [
   'onChange'
 ]
 
-export type { RadioInputProps }
+export type { RadioInputProps, RadioInputStyle }
 export { propTypes, allowedProps }

@@ -25,8 +25,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  TableRowHeaderTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableRowHeaderOwnProps = {
   isStacked?: boolean
@@ -38,7 +41,10 @@ type PropKeys = keyof TableRowHeaderOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TableRowHeaderProps = TableRowHeaderOwnProps & WithStyleProps
+type TableRowHeaderProps = TableRowHeaderOwnProps &
+  WithStyleProps<TableRowHeaderTheme, TableRowHeaderStyle>
+
+type TableRowHeaderStyle = ComponentStyle<'rowHeader'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -51,5 +57,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['children', 'isStacked', 'textAlign']
 
-export type { TableRowHeaderProps }
+export type { TableRowHeaderProps, TableRowHeaderStyle }
 export { propTypes, allowedProps }

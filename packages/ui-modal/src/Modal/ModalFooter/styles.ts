@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { ModalFooterTheme } from '@instructure/shared-types'
-import { ModalFooterProps } from './props'
+import type { ModalFooterTheme } from '@instructure/shared-types'
+import type { ModalFooterProps, ModalFooterStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { ModalFooterProps } from './props'
 const generateStyle = (
   componentTheme: ModalFooterTheme,
   props: ModalFooterProps
-) => {
+): ModalFooterStyle => {
   const { variant } = props
 
   const backgroundStyle =

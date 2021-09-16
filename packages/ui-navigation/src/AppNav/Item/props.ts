@@ -23,8 +23,12 @@
  */
 import PropTypes from 'prop-types'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  AppNavItemTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type AppNavItemOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
@@ -43,7 +47,10 @@ type PropKeys = keyof AppNavItemOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AppNavItemProps = AppNavItemOwnProps & WithStyleProps
+type AppNavItemProps = AppNavItemOwnProps &
+  WithStyleProps<AppNavItemTheme, AppNavItemStyle>
+
+type AppNavItemStyle = ComponentStyle<'item' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -103,5 +110,5 @@ const allowedProps: AllowedPropKeys = [
   'isDisabled'
 ]
 
-export type { AppNavItemProps }
+export type { AppNavItemProps, AppNavItemStyle }
 export { propTypes, allowedProps }

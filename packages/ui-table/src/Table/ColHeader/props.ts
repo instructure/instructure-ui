@@ -24,8 +24,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  TableColHeaderTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableColHeaderOwnProps = {
   id: string
@@ -42,7 +45,10 @@ type PropKeys = keyof TableColHeaderOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TableColHeaderProps = TableColHeaderOwnProps & WithStyleProps
+type TableColHeaderProps = TableColHeaderOwnProps &
+  WithStyleProps<TableColHeaderTheme, TableColHeaderStyle>
+
+type TableColHeaderStyle = ComponentStyle<'colHeader' | 'button'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -90,5 +96,5 @@ const allowedProps: AllowedPropKeys = [
   'scope'
 ]
 
-export type { TableColHeaderProps }
+export type { TableColHeaderProps, TableColHeaderStyle }
 export { propTypes, allowedProps }

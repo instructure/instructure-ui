@@ -30,8 +30,12 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 import { Head } from './Head'
 import { Body } from './Body'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type { PropValidators, TableTheme } from '@instructure/shared-types'
 
 type TableOwnProps = {
   caption: React.ReactNode
@@ -46,7 +50,9 @@ type PropKeys = keyof TableOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TableProps = TableOwnProps & WithStyleProps
+type TableProps = TableOwnProps & WithStyleProps<TableTheme, TableStyle>
+
+type TableStyle = ComponentStyle<'table'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -89,5 +95,5 @@ const allowedProps: AllowedPropKeys = [
   'layout'
 ]
 
-export type { TableProps }
+export type { TableProps, TableStyle }
 export { propTypes, allowedProps }

@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { FormFieldMessageTheme } from '@instructure/shared-types'
-import { FormFieldMessageProps } from './props'
-import { FormMessageType } from '../FormPropTypes'
+import type { FormFieldMessageTheme } from '@instructure/shared-types'
+import type { FormFieldMessageProps, FormFieldMessageStyle } from './props'
+import type { FormMessageType } from '../FormPropTypes'
 
 /**
  * ---
@@ -39,7 +39,7 @@ import { FormMessageType } from '../FormPropTypes'
 const generateStyle = (
   componentTheme: FormFieldMessageTheme,
   props: FormFieldMessageProps
-) => {
+): FormFieldMessageStyle => {
   const { variant } = props
 
   const variants: Record<FormMessageType, { color?: string }> = {

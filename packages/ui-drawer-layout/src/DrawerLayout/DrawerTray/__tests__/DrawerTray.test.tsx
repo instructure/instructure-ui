@@ -103,7 +103,7 @@ describe('<DrawerTray />', async () => {
       <DrawerTray
         label="DrawerTray Example"
         open={true}
-        themeOverride={{ zIndex: '333' }}
+        themeOverride={{ zIndex: 333 }}
         render={() => {
           return 'Hello from layout tray'
         }}

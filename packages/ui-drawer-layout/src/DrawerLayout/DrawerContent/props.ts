@@ -25,8 +25,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  DrawerLayoutContentTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type DrawerLayoutContentOwnProps = {
   label: string
@@ -44,7 +47,10 @@ type PropKeys = keyof DrawerLayoutContentOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type DrawerLayoutContentProps = DrawerLayoutContentOwnProps & WithStyleProps
+type DrawerLayoutContentProps = DrawerLayoutContentOwnProps &
+  WithStyleProps<DrawerLayoutContentTheme, DrawerLayoutContentStyle>
+
+type DrawerLayoutContentStyle = ComponentStyle<'drawerContent'>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
@@ -65,5 +71,9 @@ const allowedProps: AllowedPropKeys = [
   'role'
 ]
 
-export type { DrawerLayoutContentProps, DrawerLayoutContentState }
+export type {
+  DrawerLayoutContentProps,
+  DrawerLayoutContentState,
+  DrawerLayoutContentStyle
+}
 export { propTypes, allowedProps }

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { RatingIconTheme } from '@instructure/shared-types'
-import { RatingIconProps, RatingIconState } from './props'
+import type { RatingIconTheme } from '@instructure/shared-types'
+import type { RatingIconProps, RatingIconState, RatingIconStyle } from './props'
 
 /**
  * ---
@@ -39,7 +39,7 @@ const generateStyle = (
   componentTheme: RatingIconTheme,
   props: RatingIconProps,
   state: RatingIconState
-) => {
+): RatingIconStyle => {
   const { size } = props
   const { filled } = state
 
@@ -48,6 +48,7 @@ const generateStyle = (
     medium: { fontSize: componentTheme.mediumIconFontSize },
     large: { fontSize: componentTheme.largeIconFontSize }
   }
+
   return {
     ratingIcon: {
       label: 'ratingIcon',

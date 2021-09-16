@@ -27,8 +27,16 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  LinkTheme
+} from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
 
 type LinkOwnProps = {
   children: React.ReactNode
@@ -56,7 +64,9 @@ type PropKeys = keyof LinkOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type LinkProps = LinkOwnProps & WithStyleProps
+type LinkProps = LinkOwnProps & WithStyleProps<LinkTheme, LinkStyle>
+
+type LinkStyle = ComponentStyle<'link' | 'icon'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -143,5 +153,5 @@ const allowedProps: AllowedPropKeys = [
   'onBlur'
 ]
 
-export type { LinkProps }
+export type { LinkProps, LinkStyle }
 export { propTypes, allowedProps }

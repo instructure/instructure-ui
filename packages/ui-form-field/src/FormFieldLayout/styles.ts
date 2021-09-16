@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { FormFieldLayoutProps } from './props'
+import type { FormFieldLayoutProps, FormFieldLayoutStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ const generateStyle = (
   // @ts-expect-error no theme used here
   componentTheme,
   props: FormFieldLayoutProps
-) => {
+): FormFieldLayoutStyle => {
   const { inline } = props
 
   return {

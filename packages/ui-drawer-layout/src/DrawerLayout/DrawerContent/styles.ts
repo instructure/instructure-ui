@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import { DrawerLayoutContentTheme } from '@instructure/shared-types'
-import { DrawerLayoutContentProps, DrawerLayoutContentState } from './props'
+import type { DrawerLayoutContentTheme } from '@instructure/shared-types'
+import type {
+  DrawerLayoutContentProps,
+  DrawerLayoutContentState,
+  DrawerLayoutContentStyle
+} from './props'
 
 /**
  * ---
@@ -40,7 +44,7 @@ const generateStyle = (
   // @ts-expect-error no props used here
   props: DrawerLayoutContentProps,
   state: DrawerLayoutContentState
-) => {
+): DrawerLayoutContentStyle => {
   const { shouldTransition } = state
 
   const transitionState = shouldTransition

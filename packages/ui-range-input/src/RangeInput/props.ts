@@ -26,9 +26,9 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
-import type { PropValidators } from '@instructure/shared-types'
+import type { PropValidators, RangeInputTheme } from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type RangeInputOwnProps = {
   min: number
@@ -53,7 +53,12 @@ type PropKeys = keyof RangeInputOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type RangeInputProps = RangeInputOwnProps & WithStyleProps
+type RangeInputProps = RangeInputOwnProps &
+  WithStyleProps<RangeInputTheme, RangeInputStyle>
+
+type RangeInputStyle = ComponentStyle<
+  'rangeInput' | 'rangeInputInput' | 'rangeInputInputValue'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   min: PropTypes.number.isRequired,
@@ -111,5 +116,5 @@ const allowedProps: AllowedPropKeys = [
   'readOnly'
 ]
 
-export type { RangeInputProps }
+export type { RangeInputProps, RangeInputStyle }
 export { propTypes, allowedProps }

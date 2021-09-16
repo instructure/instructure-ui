@@ -27,8 +27,12 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing } from '@instructure/emotion'
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  BaseButtonTheme,
+  PropValidators
+} from '@instructure/shared-types'
 
 type CondensedButtonOwnProps = {
   children?: React.ReactNode
@@ -48,7 +52,8 @@ type PropKeys = keyof CondensedButtonOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type CondensedButtonProps = CondensedButtonOwnProps
+type CondensedButtonProps = CondensedButtonOwnProps &
+  WithStyleProps<BaseButtonTheme, null>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

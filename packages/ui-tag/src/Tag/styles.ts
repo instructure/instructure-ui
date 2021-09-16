@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TagTheme } from '@instructure/shared-types'
-import { TagProps } from './props'
+import type { TagTheme } from '@instructure/shared-types'
+import type { TagProps, TagStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,7 @@ import { TagProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TagTheme, props: TagProps) => {
+const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
   const { variant, size, dismissible, onClick, disabled } = props
 
   const isButton = !!onClick

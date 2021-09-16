@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { InlineSVGTheme } from '@instructure/shared-types'
-import { InlineSVGProps } from './props'
+import type { InlineSVGTheme } from '@instructure/shared-types'
+import type { InlineSVGProps, InlineSVGStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { InlineSVGProps } from './props'
 const generateStyle = (
   componentTheme: InlineSVGTheme,
   props: InlineSVGProps
-) => {
+): InlineSVGStyle => {
   const { inline, color } = props
 
   const colorVariants = {

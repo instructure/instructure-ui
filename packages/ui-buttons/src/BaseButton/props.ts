@@ -28,8 +28,16 @@ import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { InteractionType } from '@instructure/ui-react-utils'
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type {
+  AsElementType,
+  BaseButtonTheme,
+  PropValidators
+} from '@instructure/shared-types'
 
 type BaseButtonOwnProps = {
   children?: React.ReactNode
@@ -64,7 +72,19 @@ type PropKeys = keyof BaseButtonOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type BaseButtonProps = BaseButtonOwnProps & WithStyleProps
+type BaseButtonProps = BaseButtonOwnProps &
+  WithStyleProps<BaseButtonTheme, BaseButtonStyle>
+
+type BaseButtonStyle = ComponentStyle<
+  | 'baseButton'
+  | 'content'
+  | 'children'
+  | 'iconSVG'
+  | 'childrenLayout'
+  | 'iconOnly'
+  | 'iconWrapper'
+  | 'childrenWrapper'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -188,5 +208,5 @@ const allowedProps: AllowedPropKeys = [
   'withBorder'
 ]
 
-export type { BaseButtonProps, BaseButtonStyleProps }
+export type { BaseButtonProps, BaseButtonStyleProps, BaseButtonStyle }
 export { propTypes, allowedProps }

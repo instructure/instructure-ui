@@ -23,8 +23,8 @@
  */
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, RatingIconTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type RatingIconOwnProps = {
   animationDelay?: number
@@ -41,7 +41,10 @@ type PropKeys = keyof RatingIconOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type RatingIconProps = RatingIconOwnProps & WithStyleProps
+type RatingIconProps = RatingIconOwnProps &
+  WithStyleProps<RatingIconTheme, RatingIconStyle>
+
+type RatingIconStyle = ComponentStyle<'ratingIcon' | 'icon'>
 
 const propTypes: PropValidators<PropKeys> = {
   animationDelay: PropTypes.number,
@@ -57,5 +60,5 @@ const allowedProps: AllowedPropKeys = [
   'size'
 ]
 
-export type { RatingIconProps }
+export type { RatingIconProps, RatingIconStyle }
 export { propTypes, allowedProps }

@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
 import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
 
 type BaseTransitionOwnProps = {
   /**
@@ -133,7 +133,7 @@ type PropKeys = keyof BaseTransitionOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type BaseTransitionProps = BaseTransitionOwnProps & WithStyleProps
+type BaseTransitionProps = BaseTransitionOwnProps
 
 const propTypes: PropValidators<PropKeys> = {
   in: PropTypes.bool,

@@ -23,8 +23,12 @@
  */
 import PropTypes from 'prop-types'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  OptionsSeparatorTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type OptionsSeparatorOwnProps = {
   as?: AsElementType
@@ -34,7 +38,10 @@ type PropKeys = keyof OptionsSeparatorOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type OptionsSeparatorProps = OptionsSeparatorOwnProps & WithStyleProps
+type OptionsSeparatorProps = OptionsSeparatorOwnProps &
+  WithStyleProps<OptionsSeparatorTheme, OptionsSeparatorStyle>
+
+type OptionsSeparatorStyle = ComponentStyle<'separator'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -45,5 +52,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['as']
 
-export type { OptionsSeparatorProps }
+export type { OptionsSeparatorProps, OptionsSeparatorStyle }
 export { propTypes, allowedProps }

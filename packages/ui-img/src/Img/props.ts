@@ -22,10 +22,15 @@
  * SOFTWARE.
  */
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
+
+import type { PropValidators, ImgTheme } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
 
 type ImgOwnProps = {
   src: string
@@ -49,7 +54,9 @@ type PropKeys = keyof ImgOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ImgProps = ImgOwnProps & WithStyleProps
+type ImgProps = ImgOwnProps & WithStyleProps<ImgTheme, ImgStyle>
+
+type ImgStyle = ComponentStyle<'overlay' | 'container' | 'img'>
 
 const propTypes: PropValidators<PropKeys> = {
   src: PropTypes.string.isRequired,
@@ -98,5 +105,5 @@ const allowedProps: AllowedPropKeys = [
   'width'
 ]
 
-export type { ImgProps }
+export type { ImgProps, ImgStyle }
 export { propTypes, allowedProps }

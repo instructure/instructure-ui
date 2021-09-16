@@ -29,8 +29,12 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 
 import { Panel } from './Panel'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type { PropValidators, TabsTheme } from '@instructure/shared-types'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 
 type TabsOwnProps = {
@@ -49,11 +53,23 @@ type TabsOwnProps = {
   children?: React.ReactNode // TODO: oneOf([Panel, null])
 }
 
-type TabsProps = TabsOwnProps & BidirectionalProps & WithStyleProps
-
 type PropKeys = keyof TabsOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type TabsProps = TabsOwnProps &
+  BidirectionalProps &
+  WithStyleProps<TabsTheme, TabsStyle>
+
+type TabsStyle = ComponentStyle<
+  | 'tabs'
+  | 'container'
+  | 'tabList'
+  | 'scrollOverlay'
+  | 'scrollSpacer'
+  | 'scrollOverlayWidthDefault'
+  | 'scrollOverlayWidthSecondary'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -110,5 +126,5 @@ const allowedProps: AllowedPropKeys = [
   'shouldFocusOnRender'
 ]
 
-export type { TabsProps }
+export type { TabsProps, TabsStyle }
 export { propTypes, allowedProps }

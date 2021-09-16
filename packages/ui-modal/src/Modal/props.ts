@@ -34,11 +34,15 @@ import { ModalHeader } from './ModalHeader'
 import { ModalBody } from './ModalBody'
 import { ModalFooter } from './ModalFooter'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  AsElementType,
+  PropValidators,
+  ModalTheme
+} from '@instructure/shared-types'
 import type { PortalNode } from '@instructure/ui-portal'
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { TransitionType } from '@instructure/ui-motion'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type ModalOwnProps = {
   label: string
@@ -75,7 +79,9 @@ type PropKeys = keyof ModalOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ModalProps = ModalOwnProps & WithStyleProps
+type ModalProps = ModalOwnProps & WithStyleProps<ModalTheme, ModalStyle>
+
+type ModalStyle = ComponentStyle<'modal' | 'constrainContext'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -234,5 +240,5 @@ const allowedProps: AllowedPropKeys = [
   'overflow'
 ]
 
-export type { ModalProps }
+export type { ModalProps, ModalStyle }
 export { propTypes, allowedProps }

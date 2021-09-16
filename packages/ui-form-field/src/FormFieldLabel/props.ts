@@ -24,8 +24,12 @@
 
 import PropTypes from 'prop-types'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  FormFieldLabelTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type FormFieldLabelOwnProps = {
   as?: AsElementType
@@ -36,7 +40,10 @@ type PropKeys = keyof FormFieldLabelOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldLabelProps = FormFieldLabelOwnProps & WithStyleProps
+type FormFieldLabelProps = FormFieldLabelOwnProps &
+  WithStyleProps<FormFieldLabelTheme, FormFieldLabelStyle>
+
+type FormFieldLabelStyle = ComponentStyle<'formFieldLabel'>
 
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
@@ -45,5 +52,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['as', 'children']
 
-export type { FormFieldLabelProps }
+export type { FormFieldLabelProps, FormFieldLabelStyle }
 export { propTypes, allowedProps }

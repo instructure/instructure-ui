@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TextAreaTheme } from '@instructure/shared-types'
-import { TextAreaProps } from './props'
+import type { TextAreaTheme } from '@instructure/shared-types'
+import type { TextAreaProps, TextAreaStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { TextAreaProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TextAreaTheme, props: TextAreaProps) => {
+const generateStyle = (
+  componentTheme: TextAreaTheme,
+  props: TextAreaProps
+): TextAreaStyle => {
   const { disabled, size } = props
 
   const fontSizeVariants = {

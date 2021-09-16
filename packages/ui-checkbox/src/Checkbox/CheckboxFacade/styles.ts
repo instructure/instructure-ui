@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { CheckboxFacadeTheme } from '@instructure/shared-types'
-import { CheckboxFacadeProps } from './props'
+import type { CheckboxFacadeTheme } from '@instructure/shared-types'
+import type { CheckboxFacadeProps, CheckboxFacadeStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { CheckboxFacadeProps } from './props'
 const generateStyle = (
   componentTheme: CheckboxFacadeTheme,
   props: CheckboxFacadeProps
-) => {
+): CheckboxFacadeStyle => {
   const { size, checked, focused, hovered, indeterminate } = props
 
   const isChecked = checked || indeterminate

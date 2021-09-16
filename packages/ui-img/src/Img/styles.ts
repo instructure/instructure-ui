@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { ImgTheme } from '@instructure/shared-types'
-import { ImgProps } from './props'
+import type { ImgTheme } from '@instructure/shared-types'
+import type { ImgProps, ImgStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,7 @@ import { ImgProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: ImgTheme, props: ImgProps) => {
+const generateStyle = (componentTheme: ImgTheme, props: ImgProps): ImgStyle => {
   const { overlay, withBlur, withGrayscale, constrain } = props
 
   const isCover = constrain === 'cover'
@@ -96,7 +96,7 @@ const generateStyle = (componentTheme: ImgTheme, props: ImgProps) => {
       ...(overlay && {
         backgroundColor: overlay.color,
         opacity: overlay.opacity * 0.1,
-        mixBlendMode: overlay.blend ? overlay.blend : null
+        mixBlendMode: overlay.blend ? overlay.blend : undefined
       })
     },
 

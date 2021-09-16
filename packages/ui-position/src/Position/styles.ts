@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { PositionTheme } from '@instructure/shared-types'
-import { PositionStyle } from './props'
+import type { PositionTheme } from '@instructure/shared-types'
+import type { PositionStyle } from './props'
 
 /**
  * ---

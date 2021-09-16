@@ -21,13 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  ToggleDetailsTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type ToggleDetailsOwnProps = {
   variant?: 'default' | 'filled'
@@ -47,7 +51,22 @@ type PropKeys = keyof ToggleDetailsOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ToggleDetailsProps = ToggleDetailsOwnProps & WithStyleProps
+type ToggleDetailsProps = ToggleDetailsOwnProps &
+  WithStyleProps<ToggleDetailsTheme, ToggleDetailsStyle>
+
+type ToggleDetailsStyle = ComponentStyle<
+  | 'toggleDetails'
+  | 'summary'
+  | 'summaryText'
+  | 'toggle'
+  | 'icon'
+  | 'details'
+  | 'content'
+>
+
+type ToggleDetailsStyleProps = {
+  animate: boolean
+}
 
 const propTypes: PropValidators<PropKeys> = {
   variant: PropTypes.oneOf(['default', 'filled']),
@@ -104,9 +123,5 @@ const allowedProps: AllowedPropKeys = [
   'size'
 ]
 
-export type { ToggleDetailsProps }
+export type { ToggleDetailsProps, ToggleDetailsStyleProps, ToggleDetailsStyle }
 export { propTypes, allowedProps }
-
-export type ToggleDetailsStyleProps = {
-  animate: boolean
-}

@@ -27,8 +27,16 @@ import PropTypes from 'prop-types'
 import { PositionPropTypes } from '@instructure/ui-position'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  BadgeTheme,
+  PropValidators
+} from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
 import type { PlacementPropValues } from '@instructure/ui-position'
 
 type BadgeOwnProps = {
@@ -79,7 +87,9 @@ type PropKeys = keyof BadgeOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type BadgeProps = BadgeOwnProps & WithStyleProps
+type BadgeProps = BadgeOwnProps & WithStyleProps<BadgeTheme, BadgeStyle>
+
+type BadgeStyle = ComponentStyle<'badge' | 'wrapper'>
 
 const propTypes: PropValidators<PropKeys> = {
   count: PropTypes.number,
@@ -113,5 +123,5 @@ const allowedProps: AllowedPropKeys = [
   'as'
 ]
 
-export type { BadgeProps }
+export type { BadgeProps, BadgeStyle }
 export { propTypes, allowedProps }

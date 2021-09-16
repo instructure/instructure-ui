@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TableCellTheme } from '@instructure/shared-types'
-import { TableCellProps } from './props'
+import type { TableCellTheme } from '@instructure/shared-types'
+import type { TableCellProps, TableCellStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { TableCellProps } from './props'
 const generateStyle = (
   componentTheme: TableCellTheme,
   props: TableCellProps
-) => {
+): TableCellStyle => {
   const { textAlign } = props
 
   return {

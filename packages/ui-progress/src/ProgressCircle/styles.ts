@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import { ProgressCircleTheme } from '@instructure/shared-types'
-import { ProgressCircleProps, ProgressCircleState } from './props'
+import type { ProgressCircleTheme } from '@instructure/shared-types'
+import type {
+  ProgressCircleProps,
+  ProgressCircleState,
+  ProgressCircleStyle
+} from './props'
 
 /**
  * ---
@@ -39,7 +43,7 @@ const generateStyle = (
   componentTheme: ProgressCircleTheme,
   props: ProgressCircleProps,
   state: ProgressCircleState
-) => {
+): ProgressCircleStyle => {
   const { size, color, meterColor, valueNow, valueMax } = props
   const { shouldAnimateOnMount } = state
 

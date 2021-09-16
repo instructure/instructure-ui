@@ -21,9 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { keyframes } from '@instructure/emotion'
-import { TreeBrowserCollectionTheme } from '@instructure/shared-types'
-import { TreeBrowserCollectionProps } from './props'
+
+import type { TreeBrowserCollectionTheme } from '@instructure/shared-types'
+import type {
+  TreeBrowserCollectionProps,
+  TreeBrowserCollectionStyle
+} from './props'
 
 const list = keyframes`
   to {
@@ -44,7 +49,7 @@ const list = keyframes`
 const generateStyles = (
   componentTheme: TreeBrowserCollectionTheme,
   props: TreeBrowserCollectionProps
-): any => {
+): TreeBrowserCollectionStyle => {
   const { size, variant } = props
   const sizeMap = {
     small: {

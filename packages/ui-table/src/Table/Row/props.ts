@@ -31,8 +31,8 @@ import { ColHeader } from '../ColHeader'
 import { RowHeader } from '../RowHeader'
 import { Cell } from '../Cell'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, TableRowTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableRowOwnProps = {
   hover?: boolean
@@ -45,7 +45,10 @@ type PropKeys = keyof TableRowOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TableRowProps = TableRowOwnProps & WithStyleProps
+type TableRowProps = TableRowOwnProps &
+  WithStyleProps<TableRowTheme, TableRowStyle>
+
+type TableRowStyle = ComponentStyle<'row'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -66,5 +69,5 @@ const allowedProps: AllowedPropKeys = [
   'headers'
 ]
 
-export type { TableRowProps }
+export type { TableRowProps, TableRowStyle }
 export { propTypes, allowedProps }

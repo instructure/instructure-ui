@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { SVGIconTheme } from '@instructure/shared-types'
-import { SVGIconProps } from './props'
+import type { SVGIconTheme } from '@instructure/shared-types'
+import type { SVGIconProps, SVGIconStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { SVGIconProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: SVGIconTheme, props: SVGIconProps) => {
+const generateStyle = (
+  componentTheme: SVGIconTheme,
+  props: SVGIconProps
+): SVGIconStyle => {
   const { rotate, size, bidirectional } = props
 
   const rotateVariants = {

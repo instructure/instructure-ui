@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { ScreenReaderContentStyle } from './props'
+import type { ScreenReaderContentStyle } from './props'
 
 /**
  * ---

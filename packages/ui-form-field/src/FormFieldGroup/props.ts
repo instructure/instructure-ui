@@ -26,8 +26,12 @@ import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '../FormPropTypes'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  FormFieldGroupTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '../FormPropTypes'
 
 type FormFieldGroupOwnProps = {
@@ -52,7 +56,10 @@ type PropKeys = keyof FormFieldGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldGroupProps = FormFieldGroupOwnProps & WithStyleProps
+type FormFieldGroupProps = FormFieldGroupOwnProps &
+  WithStyleProps<FormFieldGroupTheme, FormFieldGroupStyle>
+
+type FormFieldGroupStyle = ComponentStyle<'formFieldGroup'>
 
 const propTypes: PropValidators<PropKeys> = {
   description: PropTypes.node.isRequired,
@@ -94,5 +101,9 @@ const allowedProps: AllowedPropKeys = [
   'startAt'
 ]
 
-export type { FormFieldGroupProps, FormFieldGroupStyleProps }
+export type {
+  FormFieldGroupProps,
+  FormFieldGroupStyleProps,
+  FormFieldGroupStyle
+}
 export { propTypes, allowedProps }

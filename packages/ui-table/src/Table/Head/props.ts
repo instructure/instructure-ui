@@ -29,8 +29,8 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { Row } from '../Row'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, TableHeadTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableHeadOwnProps = {
   isStacked?: boolean
@@ -41,7 +41,10 @@ type PropKeys = keyof TableHeadOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TableHeadProps = TableHeadOwnProps & WithStyleProps
+type TableHeadProps = TableHeadOwnProps &
+  WithStyleProps<TableHeadTheme, TableHeadStyle>
+
+type TableHeadStyle = ComponentStyle<'head'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -58,5 +61,5 @@ const allowedProps: AllowedPropKeys = [
   'renderSortLabel'
 ]
 
-export type { TableHeadProps }
+export type { TableHeadProps, TableHeadStyle }
 export { propTypes, allowedProps }

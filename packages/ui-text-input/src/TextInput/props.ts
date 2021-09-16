@@ -30,8 +30,8 @@ import { controllable } from '@instructure/ui-prop-types'
 
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, TextInputTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TextInputOwnProps = {
   renderLabel?: React.ReactNode | ((...args: any[]) => any)
@@ -62,7 +62,18 @@ type PropKeys = keyof TextInputOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TextInputProps = TextInputOwnProps & WithStyleProps
+type TextInputProps = TextInputOwnProps &
+  WithStyleProps<TextInputTheme, TextInputStyle>
+
+type TextInputStyle = ComponentStyle<
+  | 'textInput'
+  | 'facade'
+  | 'layout'
+  | 'beforeElement'
+  | 'innerWrapper'
+  | 'inputLayout'
+  | 'afterElement'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -202,5 +213,10 @@ type TextInputStyleProps = {
   focused: TextInputState['hasFocus']
 }
 
-export type { TextInputProps, TextInputState, TextInputStyleProps }
+export type {
+  TextInputProps,
+  TextInputState,
+  TextInputStyleProps,
+  TextInputStyle
+}
 export { propTypes, allowedProps }

@@ -27,8 +27,12 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing } from '@instructure/emotion'
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  BaseButtonTheme
+} from '@instructure/shared-types'
 
 type IconButtonOwnProps = {
   children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
@@ -53,7 +57,8 @@ type PropKeys = keyof IconButtonOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type IconButtonProps = IconButtonOwnProps
+type IconButtonProps = IconButtonOwnProps &
+  WithStyleProps<BaseButtonTheme, null>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

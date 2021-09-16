@@ -40,7 +40,7 @@ import { allowedProps, propTypes } from './props'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, null)
 @testable()
 class Rating extends Component<RatingProps> {
   static readonly componentId = 'Rating'

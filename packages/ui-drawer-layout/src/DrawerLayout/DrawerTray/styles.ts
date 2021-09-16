@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import { DrawerLayoutTrayTheme } from '@instructure/shared-types'
-import { DrawerLayoutTrayProps, DrawerLayoutTrayStyleProps } from './props'
+import type { DrawerLayoutTrayTheme } from '@instructure/shared-types'
+import type {
+  DrawerLayoutTrayProps,
+  DrawerLayoutTrayStyleProps,
+  DrawerLayoutTrayStyle
+} from './props'
 
 /**
  * ---
@@ -39,7 +43,7 @@ const generateStyle = (
   componentTheme: DrawerLayoutTrayTheme,
   props: DrawerLayoutTrayProps,
   state: DrawerLayoutTrayStyleProps
-) => {
+): DrawerLayoutTrayStyle => {
   const { border } = props
   const { placement } = state
 

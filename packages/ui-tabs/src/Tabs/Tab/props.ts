@@ -21,11 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, TabsTabTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TabsTabOwnProps = {
   variant?: 'default' | 'secondary'
@@ -43,7 +44,9 @@ type PropKeys = keyof TabsTabOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TabsTabProps = TabsTabOwnProps & WithStyleProps
+type TabsTabProps = TabsTabOwnProps & WithStyleProps<TabsTabTheme, TabsTabStyle>
+
+type TabsTabStyle = ComponentStyle<'tab'>
 
 const propTypes: PropValidators<PropKeys> = {
   variant: PropTypes.oneOf(['default', 'secondary']),
@@ -69,5 +72,5 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { TabsTabProps }
+export type { TabsTabProps, TabsTabStyle }
 export { propTypes, allowedProps }

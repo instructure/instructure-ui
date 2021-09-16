@@ -28,11 +28,12 @@ import {
   controllable,
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
+
 import { MenuItem } from '../MenuItem'
 import { MenuItemSeparator } from '../MenuItemSeparator'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, MenuGroupTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MenuGroupOwnProps = {
   label: React.ReactNode
@@ -53,7 +54,10 @@ type PropKeys = keyof MenuGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type MenuGroupProps = MenuGroupOwnProps & WithStyleProps
+type MenuGroupProps = MenuGroupOwnProps &
+  WithStyleProps<MenuGroupTheme, MenuGroupStyle>
+
+type MenuGroupStyle = ComponentStyle<'menuItemGroup' | 'label' | 'items'>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
@@ -106,5 +110,5 @@ const allowedProps: AllowedPropKeys = [
   'isTabbable'
 ]
 
-export type { MenuGroupProps }
+export type { MenuGroupProps, MenuGroupStyle }
 export { propTypes, allowedProps }

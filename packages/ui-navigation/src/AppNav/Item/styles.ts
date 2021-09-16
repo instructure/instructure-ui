@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { AppNavItemTheme } from '@instructure/shared-types'
-import { AppNavItemProps } from './props'
+import type { AppNavItemTheme } from '@instructure/shared-types'
+import type { AppNavItemProps, AppNavItemStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { AppNavItemProps } from './props'
 const generateStyle = (
   componentTheme: AppNavItemTheme,
   props: AppNavItemProps
-) => {
+): AppNavItemStyle => {
   const { isSelected, isDisabled } = props
 
   const itemStyles = {

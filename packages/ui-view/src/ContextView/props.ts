@@ -28,13 +28,18 @@ import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 import { PositionPropTypes } from '@instructure/ui-position'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  AsElementType,
+  PropValidators,
+  ContextViewTheme
+} from '@instructure/shared-types'
 import type { PlacementPropValues } from '@instructure/ui-position'
 import type {
   Shadow,
   Spacing,
   Stacking,
-  WithStyleProps
+  WithStyleProps,
+  ComponentStyle
 } from '@instructure/emotion'
 
 type ContextViewOwnProps = {
@@ -61,7 +66,16 @@ type PropKeys = keyof ContextViewOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ContextViewProps = ContextViewOwnProps & WithStyleProps
+type ContextViewProps = ContextViewOwnProps &
+  WithStyleProps<ContextViewTheme, ContextViewStyle>
+
+type ContextViewStyle = ComponentStyle<
+  | 'contextView'
+  | 'contextView__content'
+  | 'contextView__arrow'
+  | 'arrowSize'
+  | 'arrowBorderWidth'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -152,5 +166,5 @@ const allowedProps: AllowedPropKeys = [
   'debug'
 ]
 
-export type { ContextViewProps }
+export type { ContextViewProps, ContextViewStyle }
 export { propTypes, allowedProps }

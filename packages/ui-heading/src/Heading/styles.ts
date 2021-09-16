@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { HeadingTheme } from '@instructure/shared-types'
-import { HeadingProps } from './props'
+import type { HeadingTheme } from '@instructure/shared-types'
+import type { HeadingProps, HeadingStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { HeadingProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: HeadingTheme, props: HeadingProps) => {
+const generateStyle = (
+  componentTheme: HeadingTheme,
+  props: HeadingProps
+): HeadingStyle => {
   const { level, color, border } = props
 
   const levelStyles = {

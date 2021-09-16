@@ -23,8 +23,9 @@
  */
 
 import { keyframes } from '@instructure/emotion'
-import { TabsTabTheme } from '@instructure/shared-types'
-import { TabsTabProps } from './props'
+
+import type { TabsTabTheme } from '@instructure/shared-types'
+import type { TabsTabProps, TabsTabStyle } from './props'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -47,7 +48,7 @@ const selectedTab = keyframes`
 const generateStyle = (
   componentTheme: TabsTabTheme,
   props: TabsTabProps
-): any => {
+): TabsTabStyle => {
   const { variant, isSelected, isDisabled } = props
 
   const variants = {

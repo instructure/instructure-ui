@@ -24,8 +24,16 @@
 import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators, AsElementType } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type {
+  PropValidators,
+  AsElementType,
+  ProgressCircleTheme
+} from '@instructure/shared-types'
 
 export type ProgressCircleMeterColor =
   | 'info'
@@ -61,7 +69,20 @@ type PropKeys = keyof ProgressCircleOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ProgressCircleProps = ProgressCircleOwnProps & WithStyleProps
+type ProgressCircleProps = ProgressCircleOwnProps &
+  WithStyleProps<ProgressCircleTheme, ProgressCircleStyle>
+
+type ProgressCircleStyle = ComponentStyle<
+  | 'progressCircle'
+  | 'center'
+  | 'value'
+  | 'circle'
+  | 'track'
+  | 'border'
+  | 'meter'
+  | 'radii'
+  | 'dashOffset'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -138,5 +159,5 @@ const allowedProps: AllowedPropKeys = [
   'animationDelay'
 ]
 
-export type { ProgressCircleProps }
+export type { ProgressCircleProps, ProgressCircleStyle }
 export { propTypes, allowedProps }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { FlexItemProps } from './props'
+import type { FlexItemProps, FlexItemStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ const generateStyle = (
   // @ts-expect-error no theme is used here
   componentTheme,
   props: FlexItemProps
-) => {
+): FlexItemStyle => {
   const { shouldGrow, shouldShrink, align, size } = props
 
   const alignSelfValues = {

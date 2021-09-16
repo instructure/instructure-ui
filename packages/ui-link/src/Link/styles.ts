@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { LinkTheme } from '@instructure/shared-types'
-import { LinkProps, LinkStyleProps } from './props'
+import type { LinkTheme } from '@instructure/shared-types'
+import type { LinkProps, LinkStyleProps, LinkStyle } from './props'
 
 /**
  * ---
@@ -39,7 +39,7 @@ const generateStyle = (
   componentTheme: LinkTheme,
   props: LinkProps,
   state: LinkStyleProps
-) => {
+): LinkStyle => {
   const { isWithinText, renderIcon, iconPlacement, color } = props
   const { containsTruncateText, hasVisibleChildren } = state
   const inverseStyle = color === 'link-inverse'

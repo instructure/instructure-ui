@@ -24,8 +24,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, TransitionTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TransitionType =
   | 'fade'
@@ -57,7 +57,12 @@ type PropKeys = keyof TransitionOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TransitionProps = TransitionOwnProps & WithStyleProps
+type TransitionProps = TransitionOwnProps &
+  WithStyleProps<TransitionTheme, TransitionStyle>
+
+type TransitionStyle = ComponentStyle<
+  'duration' | 'classNames' | 'globalStyles'
+>
 
 const transitionTypePropType = PropTypes.oneOf([
   'fade',
@@ -142,5 +147,5 @@ const allowedProps: AllowedPropKeys = [
   'onExited'
 ]
 
-export type { TransitionProps, TransitionType }
+export type { TransitionProps, TransitionType, TransitionStyle }
 export { propTypes, allowedProps, transitionTypePropType }

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TableRowHeaderTheme } from '@instructure/shared-types'
-import { TableRowHeaderProps } from './props'
+import type { TableRowHeaderTheme } from '@instructure/shared-types'
+import type { TableRowHeaderProps, TableRowHeaderStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { TableRowHeaderProps } from './props'
 const generateStyle = (
   componentTheme: TableRowHeaderTheme,
   props: TableRowHeaderProps
-) => {
+): TableRowHeaderStyle => {
   const { textAlign } = props
 
   return {

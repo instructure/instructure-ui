@@ -27,8 +27,16 @@ import PropTypes from 'prop-types'
 import { childrenOrValue } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  HeadingTheme
+} from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
 
 type HeadingLevel<U extends keyof JSX.IntrinsicElements> = U
 
@@ -51,7 +59,9 @@ type PropKeys = keyof HeadingOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type HeadingProps = HeadingOwnProps & WithStyleProps
+type HeadingProps = HeadingOwnProps & WithStyleProps<HeadingTheme, HeadingStyle>
+
+type HeadingStyle = ComponentStyle<'heading'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -103,5 +113,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type { HeadingProps }
+export type { HeadingProps, HeadingStyle }
 export { propTypes, allowedProps }

@@ -25,8 +25,8 @@ import PropTypes from 'prop-types'
 
 import { InlineSVG } from '../InlineSVG'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, SVGIconTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 import type { InlineSVGOwnProps } from '../InlineSVG/props'
 
@@ -40,7 +40,9 @@ type PropKeys = keyof SVGIconOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SVGIconProps = SVGIconOwnProps & WithStyleProps
+type SVGIconProps = SVGIconOwnProps & WithStyleProps<SVGIconTheme, SVGIconStyle>
+
+type SVGIconStyle = ComponentStyle<'svgIcon'>
 
 const propTypes: PropValidators<PropKeys> = {
   // eslint-disable-next-line react/forbid-foreign-prop-types
@@ -65,5 +67,5 @@ const allowedProps: AllowedPropKeys = [
   'bidirectional'
 ]
 
-export type { SVGIconProps }
+export type { SVGIconProps, SVGIconStyle }
 export { propTypes, allowedProps }

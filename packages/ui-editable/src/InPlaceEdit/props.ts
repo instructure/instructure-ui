@@ -25,7 +25,7 @@
 import PropTypes from 'prop-types'
 
 import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type InPlaceEditOwnProps = {
   renderViewer: (...args: any[]) => any
@@ -45,7 +45,10 @@ type PropKeys = keyof InPlaceEditOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type InPlaceEditProps = InPlaceEditOwnProps & WithStyleProps
+type InPlaceEditProps = InPlaceEditOwnProps &
+  WithStyleProps<null, InPlaceEditStyle>
+
+type InPlaceEditStyle = ComponentStyle<'inPlaceEdit'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -135,5 +138,5 @@ const allowedProps: AllowedPropKeys = [
   'inline'
 ]
 
-export type { InPlaceEditProps }
+export type { InPlaceEditProps, InPlaceEditStyle }
 export { propTypes, allowedProps }

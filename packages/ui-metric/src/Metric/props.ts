@@ -25,8 +25,8 @@
 import { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, MetricTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MetricOwnProps = {
   textAlign: 'start' | 'center' | 'end'
@@ -43,7 +43,9 @@ type PropKeys = keyof MetricOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type MetricProps = MetricOwnProps & WithStyleProps
+type MetricProps = MetricOwnProps & WithStyleProps<MetricTheme, MetricStyle>
+
+type MetricStyle = ComponentStyle<'metric' | 'label' | 'value'>
 
 const propTypes: PropValidators<PropKeys> = {
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
@@ -59,5 +61,5 @@ const allowedProps: AllowedPropKeys = [
   'isGroupChild'
 ]
 
-export type { MetricProps }
+export type { MetricProps, MetricStyle }
 export { propTypes, allowedProps }

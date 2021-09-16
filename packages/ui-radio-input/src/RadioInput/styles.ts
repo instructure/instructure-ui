@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { RadioInputTheme } from '@instructure/shared-types'
-import { RadioInputProps } from './props'
+import type { RadioInputTheme } from '@instructure/shared-types'
+import type { RadioInputProps, RadioInputStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { RadioInputProps } from './props'
 const generateStyle = (
   componentTheme: RadioInputTheme,
   props: RadioInputProps
-) => {
+): RadioInputStyle => {
   const { disabled, variant, context, size, inline } = props
 
   const getInputStateSelector = (state: 'hover' | 'focus' | 'checked') =>

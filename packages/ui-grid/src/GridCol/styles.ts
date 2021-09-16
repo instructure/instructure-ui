@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { GridTheme } from '@instructure/shared-types'
-import { GridBreakpoints } from '../GridTypes'
-import { GridColProps } from './props'
+import type { GridTheme } from '@instructure/shared-types'
+import type { GridBreakpoints } from '../GridTypes'
+import type { GridColProps, GridColStyle } from './props'
 
 /**
  * ---
@@ -36,7 +36,10 @@ import { GridColProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: GridTheme, props: GridColProps) => {
+const generateStyle = (
+  componentTheme: GridTheme,
+  props: GridColProps
+): GridColStyle => {
   const {
     vAlign,
     textAlign,

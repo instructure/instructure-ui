@@ -25,8 +25,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  OptionsItemTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type OptionsItemOwnProps = {
   as?: AsElementType
@@ -41,7 +45,12 @@ type PropKeys = keyof OptionsItemOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type OptionsItemProps = OptionsItemOwnProps & WithStyleProps
+type OptionsItemProps = OptionsItemOwnProps &
+  WithStyleProps<OptionsItemTheme, OptionsItemStyle>
+
+type OptionsItemStyle = ComponentStyle<
+  'item' | 'container' | 'content' | 'contentBefore' | 'contentAfter'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -78,5 +87,5 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { OptionsItemProps }
+export type { OptionsItemProps, OptionsItemStyle }
 export { propTypes, allowedProps }

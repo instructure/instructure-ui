@@ -25,8 +25,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  TruncateTextTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TruncateTextOwnProps = {
   children: React.ReactNode
@@ -44,7 +47,12 @@ type PropKeys = keyof TruncateTextOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TruncateTextProps = TruncateTextOwnProps & WithStyleProps
+type TruncateTextProps = TruncateTextOwnProps &
+  WithStyleProps<TruncateTextTheme, TruncateTextStyle>
+
+type TruncateTextStyle = ComponentStyle<
+  'truncateText' | 'auto' | 'spacer' | 'lineHeight'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -98,5 +106,5 @@ const allowedProps: AllowedPropKeys = [
   'shouldTruncateWhenInvisible'
 ]
 
-export type { TruncateTextProps }
+export type { TruncateTextProps, TruncateTextStyle }
 export { propTypes, allowedProps }

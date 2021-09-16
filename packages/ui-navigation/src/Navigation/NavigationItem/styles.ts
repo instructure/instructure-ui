@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { NavigationItemTheme } from '@instructure/shared-types'
-import { NavigationItemProps } from './props'
+import type { NavigationItemTheme } from '@instructure/shared-types'
+import type { NavigationItemProps, NavigationItemStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { NavigationItemProps } from './props'
 const generateStyle = (
   componentTheme: NavigationItemTheme,
   props: NavigationItemProps
-) => {
+): NavigationItemStyle => {
   const { selected } = props
 
   return {

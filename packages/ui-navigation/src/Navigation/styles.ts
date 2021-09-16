@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { NavigationTheme } from '@instructure/shared-types'
-import { NavigationProps, NavigationState } from './props'
+import type { NavigationTheme } from '@instructure/shared-types'
+import type { NavigationProps, NavigationState, NavigationStyle } from './props'
 
 /**
  * ---
@@ -40,7 +40,7 @@ const generateStyle = (
   // @ts-expect-error no props used here
   props: NavigationProps,
   state: NavigationState
-) => {
+): NavigationStyle => {
   const { minimized } = state
 
   return {

@@ -28,8 +28,12 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 import { controllable } from '@instructure/ui-prop-types'
 
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  CheckboxFacadeTheme,
+  PropValidators,
+  ToggleFacadeTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type CheckboxOwnProps = {
   label: React.ReactNode
@@ -57,7 +61,10 @@ type PropKeys = keyof CheckboxOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type CheckboxProps = CheckboxOwnProps & WithStyleProps
+type CheckboxProps = CheckboxOwnProps &
+  WithStyleProps<CheckboxFacadeTheme | ToggleFacadeTheme, CheckboxStyle>
+
+type CheckboxStyle = ComponentStyle<'checkbox' | 'input' | 'control'>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
@@ -125,5 +132,5 @@ const allowedProps: AllowedPropKeys = [
   'labelPlacement'
 ]
 
-export type { CheckboxProps }
+export type { CheckboxProps, CheckboxStyle }
 export { propTypes, allowedProps }

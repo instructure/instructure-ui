@@ -24,8 +24,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type { PropValidators, MaskTheme } from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MaskOwnProps = {
   onDismiss?: (...args: any[]) => any
@@ -40,7 +40,9 @@ type PropKeys = keyof MaskOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type MaskProps = MaskOwnProps & WithStyleProps
+type MaskProps = MaskOwnProps & WithStyleProps<MaskTheme, MaskStyle>
+
+type MaskStyle = ComponentStyle<'mask'>
 
 const propTypes: PropValidators<PropKeys> = {
   onDismiss: PropTypes.func,
@@ -60,5 +62,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type { MaskProps }
+export type { MaskProps, MaskStyle }
 export { propTypes, allowedProps }

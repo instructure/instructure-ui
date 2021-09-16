@@ -22,15 +22,20 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
+
 import { ListItem } from './ListItem'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
-import React from 'react'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type { PropValidators, ListTheme } from '@instructure/shared-types'
 
 type ListOwnProps = {
   children?: React.ReactNode // TODO: oneOf([ListItem])
@@ -56,7 +61,9 @@ type PropKeys = keyof ListOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ListProps = ListOwnProps & WithStyleProps
+type ListProps = ListOwnProps & WithStyleProps<ListTheme, ListStyle>
+
+type ListStyle = ComponentStyle<'list'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -107,5 +114,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type { ListProps }
+export type { ListProps, ListStyle }
 export { propTypes, allowedProps }

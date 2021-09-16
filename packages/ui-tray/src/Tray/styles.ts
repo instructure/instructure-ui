@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { TrayTheme } from '@instructure/shared-types'
-import { TrayProps } from './props'
+import type { TrayTheme } from '@instructure/shared-types'
+import type { TrayProps, TrayStyle } from './props'
 
 /**
  * ---
@@ -35,7 +35,10 @@ import { TrayProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: TrayTheme, props: TrayProps) => {
+const generateStyle = (
+  componentTheme: TrayTheme,
+  props: TrayProps
+): TrayStyle => {
   const { border, shadow, size, placement } = props
 
   const borderStyle = {

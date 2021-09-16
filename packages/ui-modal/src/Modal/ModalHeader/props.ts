@@ -25,8 +25,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  ModalHeaderTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type ModalHeaderOwnProps = {
   children?: React.ReactNode
@@ -41,7 +44,10 @@ type PropKeys = keyof ModalHeaderOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ModalHeaderProps = ModalHeaderOwnProps & WithStyleProps
+type ModalHeaderProps = ModalHeaderOwnProps &
+  WithStyleProps<ModalHeaderTheme, ModalHeaderStyle>
+
+type ModalHeaderStyle = ComponentStyle<'modalHeader'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
@@ -50,5 +56,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['children', 'variant']
 
-export type { ModalHeaderProps, ModalHeaderStyleProps }
+export type { ModalHeaderProps, ModalHeaderStyleProps, ModalHeaderStyle }
 export { propTypes, allowedProps }

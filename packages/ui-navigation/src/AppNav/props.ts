@@ -29,8 +29,12 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 
 import { Item } from './Item'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
+import type { PropValidators, AppNavTheme } from '@instructure/shared-types'
 
 type AppNavOwnProps = {
   screenReaderLabel: string
@@ -49,7 +53,16 @@ type PropKeys = keyof AppNavOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AppNavProps = AppNavOwnProps & WithStyleProps
+type AppNavProps = AppNavOwnProps & WithStyleProps<AppNavTheme, AppNavStyle>
+
+type AppNavStyle = ComponentStyle<
+  | 'appNav'
+  | 'alignCenter'
+  | 'listItemWithMenuTrigger'
+  | 'listItem'
+  | 'list'
+  | 'menuTriggerWidth'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -114,5 +127,5 @@ const allowedProps: AllowedPropKeys = [
   'visibleItemsCount'
 ]
 
-export type { AppNavProps }
+export type { AppNavProps, AppNavStyle }
 export { propTypes, allowedProps }

@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { TreeBrowserTheme } from '@instructure/shared-types'
+import type { TreeBrowserTheme } from '@instructure/shared-types'
+import type { TreeBrowserStyle } from './props'
 
 /**
  * ---
@@ -35,7 +36,7 @@ import { TreeBrowserTheme } from '@instructure/shared-types'
  * @return {Object} The final style object, which will be used in the component
  */
 
-const generateStyles = (componentTheme: TreeBrowserTheme) => {
+const generateStyles = (componentTheme: TreeBrowserTheme): TreeBrowserStyle => {
   return {
     treeBrowser: {
       label: 'treeBrowser',

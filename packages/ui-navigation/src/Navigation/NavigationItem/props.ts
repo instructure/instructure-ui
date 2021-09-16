@@ -23,8 +23,12 @@
  */
 import PropTypes from 'prop-types'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  AsElementType,
+  PropValidators,
+  NavigationItemTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type NavigationItemOwnProps = {
   icon: React.ReactNode
@@ -40,7 +44,10 @@ type PropKeys = keyof NavigationItemOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type NavigationItemProps = NavigationItemOwnProps & WithStyleProps
+type NavigationItemProps = NavigationItemOwnProps &
+  WithStyleProps<NavigationItemTheme, NavigationItemStyle>
+
+type NavigationItemStyle = ComponentStyle<'navigationItem' | 'icon' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -83,5 +90,5 @@ const allowedProps: AllowedPropKeys = [
   'minimized'
 ]
 
-export type { NavigationItemProps }
+export type { NavigationItemProps, NavigationItemStyle }
 export { propTypes, allowedProps }

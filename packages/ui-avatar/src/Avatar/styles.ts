@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { AvatarTheme } from '@instructure/shared-types'
-import { AvatarProps, AvatarState } from './props'
+import type { AvatarTheme } from '@instructure/shared-types'
+import type { AvatarProps, AvatarState, AvatarStyle } from './props'
 
 /**
  * ---
@@ -39,7 +39,7 @@ const generateStyle = (
   componentTheme: AvatarTheme,
   props: AvatarProps,
   state: AvatarState
-) => {
+): AvatarStyle => {
   const { size, color, shape, src } = props
   const { loaded } = state
 

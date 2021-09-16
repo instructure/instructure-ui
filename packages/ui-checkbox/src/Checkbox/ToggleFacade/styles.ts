@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { ToggleFacadeTheme } from '@instructure/shared-types'
-import { ToggleFacadeProps } from './props'
+import type { ToggleFacadeTheme } from '@instructure/shared-types'
+import type { ToggleFacadeProps, ToggleFacadeStyle } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import { ToggleFacadeProps } from './props'
 const generateStyle = (
   componentTheme: ToggleFacadeTheme,
   props: ToggleFacadeProps
-) => {
+): ToggleFacadeStyle => {
   const { size, checked, focused, labelPlacement } = props
 
   const labelPlacementVariants = {

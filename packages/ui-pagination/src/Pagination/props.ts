@@ -30,7 +30,11 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 
-import type { Spacing, WithStyleProps } from '@instructure/emotion'
+import type {
+  Spacing,
+  WithStyleProps,
+  ComponentStyle
+} from '@instructure/emotion'
 import type { AsElementType, PropValidators } from '@instructure/shared-types'
 
 type PaginationOwnProps = {
@@ -50,7 +54,10 @@ type PropKeys = keyof PaginationOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PaginationProps = PaginationOwnProps & WithStyleProps
+type PaginationProps = PaginationOwnProps &
+  WithStyleProps<null, PaginationStyle>
+
+type PaginationStyle = ComponentStyle<'pagination' | 'pages'>
 
 const propTypes: PropValidators<PropKeys> = {
   /**
@@ -114,5 +121,5 @@ const allowedProps: AllowedPropKeys = [
   'shouldHandleFocus'
 ]
 
-export type { PaginationProps }
+export type { PaginationProps, PaginationStyle }
 export { propTypes, allowedProps }

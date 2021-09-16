@@ -24,8 +24,11 @@
 
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  FormFieldMessageTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessageType } from '../FormPropTypes'
 
 type FormFieldMessageOwnProps = {
@@ -37,7 +40,10 @@ type PropKeys = keyof FormFieldMessageOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldMessageProps = FormFieldMessageOwnProps & WithStyleProps
+type FormFieldMessageProps = FormFieldMessageOwnProps &
+  WithStyleProps<FormFieldMessageTheme, FormFieldMessageStyle>
+
+type FormFieldMessageStyle = ComponentStyle<'formFieldMessage'>
 
 const propTypes: PropValidators<PropKeys> = {
   variant: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']),
@@ -46,5 +52,5 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['variant', 'children']
 
-export type { FormFieldMessageProps }
+export type { FormFieldMessageProps, FormFieldMessageStyle }
 export { propTypes, allowedProps }
