@@ -227,7 +227,7 @@ class MenuItem extends Component<MenuItemProps> {
   render() {
     const { disabled, controls, onKeyDown, onKeyUp, type, href } = this.props
 
-    const props = omitProps(this.props, MenuItem.propTypes)
+    const props = omitProps(this.props, MenuItem.allowedProps)
     const ElementType = this.elementType
 
     return (

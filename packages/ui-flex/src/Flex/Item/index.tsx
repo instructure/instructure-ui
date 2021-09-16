@@ -65,7 +65,7 @@ class Item extends Component<FlexItemProps> {
   }
 
   render() {
-    const props = omitProps(this.props, Item.propTypes)
+    const props = omitProps(this.props, Item.allowedProps)
 
     const {
       as,

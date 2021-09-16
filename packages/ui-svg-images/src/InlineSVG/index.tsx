@@ -157,7 +157,7 @@ class InlineSVG extends Component<InlineSVGProps> {
     return (
       <svg
         {...parseAttributes(this.props.src)}
-        {...omitProps(this.props, InlineSVG.propTypes, ['inline'])}
+        {...omitProps(this.props, InlineSVG.allowedProps, ['inline'])}
         style={{
           ...style,
           width,

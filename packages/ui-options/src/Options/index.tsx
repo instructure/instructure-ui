@@ -129,7 +129,7 @@ class Options extends Component<OptionsProps> {
 
   render() {
     const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Options.propTypes),
+      omitProps(this.props, Options.allowedProps),
       Options
     )
 

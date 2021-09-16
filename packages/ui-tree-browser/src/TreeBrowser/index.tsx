@@ -358,7 +358,7 @@ class TreeBrowser extends Component<TreeBrowserProps> {
       <TreeCollection
         key={i}
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
-        {...pickProps(omitProps(this.props), TreeCollection.propTypes)}
+        {...pickProps(omitProps(this.props), TreeCollection.allowedProps)}
         {...this.getCollectionProps(collection)}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         selection={this.state.selection}

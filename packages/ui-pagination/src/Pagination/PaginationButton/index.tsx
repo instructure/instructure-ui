@@ -50,7 +50,7 @@ class PaginationButton extends Component<PaginationPageProps> {
 
   render() {
     const exclude = this.props.current ? ['onClick', 'href'] : []
-    const props = omitProps(this.props, PaginationButton.propTypes, exclude)
+    const props = omitProps(this.props, PaginationButton.allowedProps, exclude)
     return (
       <BaseButton
         color="primary"

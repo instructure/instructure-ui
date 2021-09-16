@@ -124,7 +124,7 @@ class Navigation extends Component<NavigationProps, NavigationState> {
   render() {
     const { label } = this.props
 
-    const props = omitProps(this.props, Navigation.propTypes, ['minimized'])
+    const props = omitProps(this.props, Navigation.allowedProps, ['minimized'])
 
     return (
       <nav {...props} css={this.props.styles?.navigation} aria-label={label}>

@@ -304,7 +304,7 @@ class TextArea extends Component<TextAreaProps> {
       resize
     } = this.props
 
-    const props = omitProps(this.props, TextArea.propTypes)
+    const props = omitProps(this.props, TextArea.allowedProps)
 
     const style = {
       width,
@@ -341,7 +341,7 @@ class TextArea extends Component<TextAreaProps> {
     return (
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormField
-        {...pickProps(this.props, FormField.propTypes)}
+        {...pickProps(this.props, FormField.allowedProps)}
         vAlign="top"
         id={this.id}
         ref={(el) => {

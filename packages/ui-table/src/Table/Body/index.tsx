@@ -70,7 +70,7 @@ class Body extends Component<TableBodyProps> {
 
     return (
       <View
-        {...View.omitViewProps(omitProps(this.props, Body.propTypes), Body)}
+        {...View.omitViewProps(omitProps(this.props, Body.allowedProps), Body)}
         as={isStacked ? 'div' : 'tbody'}
         css={styles?.body}
         role={isStacked ? 'rowgroup' : undefined}

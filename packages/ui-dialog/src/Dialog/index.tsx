@@ -184,7 +184,7 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
     return this.props.open ? (
       <ElementType
         // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
-        {...omitProps(this.props, Dialog.propTypes)}
+        {...omitProps(this.props, Dialog.allowedProps)}
         role={this.props.label ? 'dialog' : undefined}
         aria-label={this.props.label}
         className={this.props.className} // eslint-disable-line react/prop-types

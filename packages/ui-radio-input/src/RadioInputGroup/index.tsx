@@ -144,8 +144,8 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
     return (
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormFieldGroup
-        {...omitProps(this.props, RadioInputGroup.propTypes)}
-        {...pickProps(this.props, FormFieldGroup.propTypes)}
+        {...omitProps(this.props, RadioInputGroup.allowedProps)}
+        {...pickProps(this.props, FormFieldGroup.allowedProps)}
         // TODO: split out toggle variant into its own component
         layout={
           layout === 'columns' && variant === 'toggle' ? 'stacked' : layout

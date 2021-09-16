@@ -105,7 +105,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     const { variant } = this.props
 
     const props = {
-      ...omitProps(this.props, ToggleDetails.propTypes),
+      ...omitProps(this.props, ToggleDetails.allowedProps),
       ...toggleProps,
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
       children: this.renderSummary()
@@ -181,7 +181,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
   render() {
     return (
       <Expandable
-        {...pickProps(this.props, Expandable.propTypes)}
+        {...pickProps(this.props, Expandable.allowedProps)}
         onToggle={this.handleToggle}
       >
         {({ expanded, getToggleProps, getDetailsProps }) => {

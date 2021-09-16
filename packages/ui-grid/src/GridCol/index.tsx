@@ -68,7 +68,7 @@ class GridCol extends Component<GridColProps> {
   render() {
     const { children, styles } = this.props
 
-    const props = omitProps(this.props, GridCol.propTypes)
+    const props = omitProps(this.props, GridCol.allowedProps)
 
     return (
       <span {...props} ref={this.props.elementRef} css={styles?.gridCol}>

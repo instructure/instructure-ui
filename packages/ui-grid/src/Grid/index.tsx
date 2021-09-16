@@ -85,7 +85,7 @@ class Grid extends Component<GridProps> {
     return children.map((child, index) => {
       if (matchComponentTypes(child, [GridRow])) {
         return safeCloneElement(child as ReactElement, {
-          ...pickProps(props, Grid.propTypes),
+          ...pickProps(props, Grid.allowedProps),
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
           ...child.props /* child props should override parent */,
           isLastRow: index + 1 === children.length
@@ -99,7 +99,7 @@ class Grid extends Component<GridProps> {
   render() {
     const { styles, ...restProps } = this.props
 
-    const props = omitProps(restProps, Grid.propTypes)
+    const props = omitProps(restProps, Grid.allowedProps)
 
     return (
       <span {...props} css={styles?.grid}>

@@ -79,7 +79,7 @@ class ModalBody extends Component<ModalBodyProps> {
     } = this.props
 
     const passthroughProps = View.omitViewProps(
-      omitProps(rest, ModalBody.propTypes),
+      omitProps(rest, ModalBody.allowedProps),
       ModalBody
     )
     const isFit = overflow === 'fit'

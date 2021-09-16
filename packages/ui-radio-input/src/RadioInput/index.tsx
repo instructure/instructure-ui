@@ -138,7 +138,7 @@ class RadioInput extends Component<RadioInputProps> {
   render() {
     const { disabled, readOnly, label, value, name, styles } = this.props
 
-    const props = omitProps(this.props, RadioInput.propTypes)
+    const props = omitProps(this.props, RadioInput.allowedProps)
 
     return (
       <div css={styles?.radioInput}>

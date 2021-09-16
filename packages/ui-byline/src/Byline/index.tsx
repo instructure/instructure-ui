@@ -65,7 +65,7 @@ class Byline extends Component<BylineProps> {
 
   render() {
     const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Byline.propTypes),
+      omitProps(this.props, Byline.allowedProps),
       Byline
     )
 

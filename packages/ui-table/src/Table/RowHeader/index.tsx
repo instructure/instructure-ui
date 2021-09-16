@@ -67,7 +67,7 @@ class RowHeader extends Component<TableRowHeaderProps> {
     return (
       <View
         {...View.omitViewProps(
-          omitProps(this.props, RowHeader.propTypes),
+          omitProps(this.props, RowHeader.allowedProps),
           RowHeader
         )}
         as={isStacked ? 'div' : 'th'}

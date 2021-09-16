@@ -148,7 +148,7 @@ class DrawerContent extends Component<
 
     return (
       <div
-        {...omitProps(this.props, DrawerContent.propTypes, [
+        {...omitProps(this.props, DrawerContent.allowedProps, [
           'shouldTransition'
         ])}
         role={role}

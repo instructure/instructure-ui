@@ -209,7 +209,7 @@ class Calendar extends Component<CalendarProps> {
 
   render() {
     const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Calendar.propTypes),
+      omitProps(this.props, Calendar.allowedProps),
       Calendar
     )
 

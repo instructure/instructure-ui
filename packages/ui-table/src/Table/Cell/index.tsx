@@ -66,7 +66,7 @@ class Cell extends Component<TableCellProps> {
 
     return (
       <View
-        {...View.omitViewProps(omitProps(this.props, Cell.propTypes), Cell)}
+        {...View.omitViewProps(omitProps(this.props, Cell.allowedProps), Cell)}
         as={isStacked ? 'div' : 'td'}
         css={styles?.cell}
         role={isStacked ? 'cell' : undefined}

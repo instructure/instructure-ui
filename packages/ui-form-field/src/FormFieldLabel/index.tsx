@@ -78,7 +78,7 @@ class FormFieldLabel extends Component<FormFieldLabelProps> {
 
     return (
       <ElementType
-        {...omitProps(this.props, FormFieldLabel.propTypes)}
+        {...omitProps(this.props, FormFieldLabel.allowedProps)}
         css={styles?.formFieldLabel}
       >
         {children}
