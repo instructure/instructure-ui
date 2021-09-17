@@ -4,8 +4,6 @@ describes: Tabs
 
 `<Tabs />` is an accessible tabbed navigation component. Use the TAB key to focus the component and arrow keys to navigate between panels of content. To set a default panel that should be selected on initial render, set the `selected` prop on that `<Tabs.Panel>`.
 
-To restrict the width of `<Tabs />`, use the `maxWidth` prop. Add space around the entire component using the `margin` prop. Adjust the padding around the panel content via `padding` (default is `small`) on each `<Tabs.Panel>`. Restrict the height of the panel using `minHeight` or `maxHeight`. Finally, switch the text alignment of the panel content with `textAlign`.
-
 ```js
 ---
 example: true
@@ -151,6 +149,106 @@ class Example extends React.Component {
           {lorem.sentence()}
         </Tabs.Panel>
       </Tabs>
+    )
+  }
+}
+
+render(<Example />)
+```
+
+### Controlling the size and the spacing
+
+To restrict the width of `<Tabs />`, use the `maxWidth` prop. Add space around the entire component using the `margin` prop. Adjust the padding around the panel content via `padding` (default is `small`) on each `<Tabs.Panel>`.
+
+Set the height of the Tabs component with the `fixHeight` property (set to '100%' to fill out it's parent element). You can also restrict the height of the **panels** using the `minHeight` and `maxHeight` properties (they don't work if you set `fixHeight` on the whole Tabs component).
+
+Finally, switch the text alignment of the panel content with `textAlign`.
+
+```js
+---
+example: true
+render: false
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      selectedIndex: 0,
+      heightOption: 'fixHeight: 100%'
+    }
+
+    this.heightOptions = {
+      ['fixHeight: 100%']: { fixHeight: '100%' },
+      ['fixHeight: 15rem']: { fixHeight: '15rem' },
+      ['minHeight: 17rem']: { minHeight: '17rem' },
+      ['maxHeight: 10rem']: { maxHeight: '10rem' }
+    }
+  }
+
+  handleTabChange = (event, { index, id }) => {
+    this.setState({
+      selectedIndex: index
+    })
+  }
+
+  handleHeightOptionSelect = (e, heightOption) => {
+    this.setState({ heightOption })
+  }
+
+  render () {
+    const { selectedIndex, heightOption } = this.state
+    const { heightOptions } = this
+
+    const containerProps = {
+      as: 'div',
+      ...(heightOption.includes('fixHeight') && {
+        height: "22rem",
+        withVisualDebug: true
+      })
+    }
+
+    return (
+      <>
+        <View display="block" margin="none none medium">
+          <RadioInputGroup
+            name="tabsHeightOptions"
+            defaultValue="fixHeight: 100%"
+            description={<ScreenReaderContent>Tabs height selector</ScreenReaderContent>}
+            variant="toggle"
+            onChange={this.handleHeightOptionSelect}
+          >
+            {Object.keys(heightOptions).map((heightOption) => <RadioInput key={heightOption} label={heightOption} value={heightOption} />)}
+          </RadioInputGroup>
+        </View>
+
+        <View {...containerProps}>
+          <Tabs
+            margin="large auto"
+            padding="medium"
+            onRequestTabChange={this.handleTabChange}
+            {...heightOptions[heightOption]}
+          >
+            <Tabs.Panel
+              id="tabA"
+              renderTitle="Tab A"
+              textAlign="center"
+              padding="large"
+              iSelected={selectedIndex === 0}
+            >
+              <Button>Focus Me</Button>
+            </Tabs.Panel>
+            <Tabs.Panel id="tabB" renderTitle="Disabled Tab" isDisabled>
+              {lorem.paragraphs()}
+            </Tabs.Panel>
+            <Tabs.Panel id="tabC" renderTitle="Tab C" isSelected={selectedIndex === 2}>
+              {lorem.paragraphs()}
+            </Tabs.Panel>
+            <Tabs.Panel id="tabD" renderTitle="Tab D" isSelected={selectedIndex === 3}>
+              {lorem.paragraphs()}
+            </Tabs.Panel>
+          </Tabs>
+        </View>
+      </>
     )
   }
 }
