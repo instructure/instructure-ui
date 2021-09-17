@@ -365,6 +365,9 @@ class Tabs extends Component<TabsProps> {
   clonePanel(index, generatedId, selected, panel) {
     const id = panel.props.id || generatedId
 
+    // fixHeight can be 0, so simply `fixheight` could return falsy value
+    const hasFixedHeight = typeof this.props.fixHeight !== 'undefined'
+
     return safeCloneElement(panel, {
       id: panel.props.id || `panel-${id}`,
       labelledBy: `tab-${id}`,
@@ -373,8 +376,10 @@ class Tabs extends Component<TabsProps> {
       variant: this.props.variant,
       padding: panel.props.padding || this.props.padding,
       textAlign: panel.props.textAlign || this.props.textAlign,
-      maxHeight: panel.maxHeight || this.props.maxHeight,
-      minHeight: panel.minHeight || this.props.minHeight
+      maxHeight:
+        panel.maxHeight || (!hasFixedHeight ? this.props.maxHeight : undefined),
+      minHeight:
+        panel.minHeight || (!hasFixedHeight ? this.props.minHeight : '100%')
     })
   }
 
@@ -492,8 +497,11 @@ class Tabs extends Component<TabsProps> {
             </View>
           )}
         </Focusable>
-        {/* @ts-expect-error ts-migrate(7005) FIXME: Variable 'panels' implicitly has an 'any[]' type. */}
-        {panels}
+
+        <div css={styles?.panelsContainer}>
+          {/* @ts-expect-error ts-migrate(7005) FIXME: Variable 'panels' implicitly has an 'any[]' type. */}
+          {panels}
+        </div>
       </View>
     )
   }

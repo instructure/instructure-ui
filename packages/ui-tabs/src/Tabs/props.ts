@@ -44,6 +44,7 @@ type TabsOwnProps = {
   maxWidth?: string | number
   maxHeight?: string | number
   minHeight?: string | number
+  fixHeight?: string | number
   margin?: Spacing
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
@@ -65,6 +66,7 @@ type TabsStyle = ComponentStyle<
   | 'tabs'
   | 'container'
   | 'tabList'
+  | 'panelsContainer'
   | 'scrollOverlay'
   | 'scrollSpacer'
   | 'scrollOverlayWidthDefault'
@@ -88,6 +90,7 @@ const propTypes: PropValidators<PropKeys> = {
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fixHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -118,6 +121,7 @@ const allowedProps: AllowedPropKeys = [
   'maxWidth',
   'maxHeight',
   'minHeight',
+  'fixHeight',
   'margin',
   'padding',
   'textAlign',

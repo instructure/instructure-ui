@@ -39,21 +39,28 @@ const generateStyle = (
   componentTheme: TabsPanelTheme,
   props: TabsPanelProps
 ): TabsPanelStyle => {
-  const { maxHeight } = props
+  const { maxHeight, isSelected } = props
 
   return {
     panel: {
       label: 'panel',
       boxSizing: 'border-box',
+      flexShrink: 0,
+      flexGrow: 0,
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
       lineHeight: componentTheme.lineHeight,
-      fontSize: componentTheme.fontSize
+      fontSize: componentTheme.fontSize,
+      ...(isSelected && {
+        flexGrow: 1,
+        height: '100%'
+      })
     },
     content: {
       label: 'panel__content',
       boxSizing: 'border-box',
       width: '100%',
+      height: '100%',
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
       background: componentTheme.background,
@@ -62,6 +69,7 @@ const generateStyle = (
       borderLeft: 'none',
       borderRight: 'none',
       borderBottom: 'none',
+      overflowY: 'auto',
       ...(maxHeight && { overflow: 'auto' })
     }
   }

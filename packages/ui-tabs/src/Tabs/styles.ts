@@ -39,7 +39,10 @@ const generateStyle = (
   componentTheme: TabsTheme,
   props: TabsProps
 ): TabsStyle => {
-  const { variant, tabOverflow } = props
+  const { variant, tabOverflow, fixHeight } = props
+
+  // fixHeight can be 0, so simply `fixheight` could return falsy value
+  const hasFixedHeight = typeof fixHeight !== 'undefined'
 
   const variants = {
     default: {
@@ -82,11 +85,16 @@ const generateStyle = (
   return {
     tabs: {
       label: 'tabs',
+      flexShrink: 0,
+      flexGrow: 0,
       ...variants[variant!].tabs
     },
 
     container: {
       label: 'tabs__container',
+      display: 'flex',
+      flexDirection: 'column',
+      height: fixHeight,
       ...variants[variant!].container
     },
 
@@ -95,6 +103,17 @@ const generateStyle = (
       display: 'flex',
       width: '100%',
       ...tabOverflowVariants[tabOverflow!]
+    },
+
+    panelsContainer: {
+      label: 'tabs__panelsContainer',
+      flexShrink: 1,
+      flexGrow: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      ...(hasFixedHeight && {
+        overflowY: 'hidden'
+      })
     },
 
     scrollOverlay: {
