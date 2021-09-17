@@ -70,13 +70,19 @@ class ContextView extends Component<
     this.props.makeStyles?.()
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   render() {
     const {
       as,
       background,
       children,
       debug,
-      elementRef,
       height,
       width,
       maxHeight,
@@ -101,7 +107,7 @@ class ContextView extends Component<
         display="inline-block"
         as={as}
         withVisualDebug={debug}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         margin={margin}
         stacking={stacking}
       >

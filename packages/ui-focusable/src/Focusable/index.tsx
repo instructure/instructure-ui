@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import { cloneElement, Component, createRef } from 'react'
 
 import {
   addInputModeListener,
@@ -225,6 +225,12 @@ class Focusable extends Component<FocusableProps> {
     }
   }
 
+  ref = createRef()
+  attachRef = (el: Element) => {
+    // debugger
+    this.ref.current = el
+  }
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'focusable' implicitly has an 'any' type... Remove this comment to see the full error message
   isFocusVisible(focusable, focused) {
     if (!focusable || !focused) return false
@@ -251,16 +257,27 @@ class Focusable extends Component<FocusableProps> {
     return false
   }
 
+  //
+  attachRefToFirstDOMNode = (root: any, depth = 0, tree = root): any => {
+    if (typeof root.type === 'string') {
+      return [cloneElement(root, { ref: this.ref }), depth, tree]
+    }
+
+    return this.attachRefToFirstDOMNode(root.props.children[0], depth + 1, tree)
+  }
   render() {
     const { children, render = children } = this.props
     const { focusable, focused } = this.state
 
     if (typeof render === 'function') {
-      return render({
+      const rendered = render({
         focused,
         focusable,
-        focusVisible: this.isFocusVisible(focusable, focused)
+        focusVisible: this.isFocusVisible(focusable, focused),
+        attachRef: this.attachRef
       })
+
+      return rendered
     } else {
       return null
     }

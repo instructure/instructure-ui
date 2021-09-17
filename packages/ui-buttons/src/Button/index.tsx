@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
+import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
@@ -75,10 +76,12 @@ class Button extends Component<ButtonProps> {
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     this._buttonComponent && this._buttonComponent.focus()
   }
+  ref = createRef()
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
     const { elementRef } = this.props
+    this.ref.current = el
 
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     elementRef(el)
@@ -86,6 +89,7 @@ class Button extends Component<ButtonProps> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'component' implicitly has an 'any' type... Remove this comment to see the full error message
   handleButtonRef = (component) => {
+    // this.elementRef.current = component
     this._buttonComponent = component
   }
 

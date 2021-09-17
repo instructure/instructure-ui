@@ -54,7 +54,11 @@ describe('<Focusable />', async () => {
       <Focusable>
         {(args) => {
           renderSpy(args)
-          return <button type="button">foo</button>
+          return (
+            <button ref={args.attachRef} type="button">
+              foo
+            </button>
+          )
         }}
       </Focusable>
     )
@@ -95,7 +99,7 @@ describe('<Focusable />', async () => {
       <Focusable>
         {(args) => {
           renderSpy(args)
-          return <button>foo</button>
+          return <button ref={args.attachRef}>foo</button>
         }}
       </Focusable>
     )
@@ -116,9 +120,9 @@ describe('<Focusable />', async () => {
       /* eslint-disable react/display-name */
       /* eslint-disable react/prop-types */
       // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'focused' implicitly has an 'any' ... Remove this comment to see the full error message
-      render: ({ focused }) => {
+      render: ({ focused, attachRef }) => {
         return (
-          <div>
+          <div ref={attachRef}>
             {focused ? (
               <input type="text" />
             ) : (
@@ -175,8 +179,12 @@ describe('<Focusable />', async () => {
   it('should maintain focus when the focus element changes', async () => {
     const props = {
       /* eslint-disable react/display-name */
-      render: () => {
-        return <a href="http://focus.net">Click</a>
+      render: ({ attachRef }) => {
+        return (
+          <a ref={attachRef} href="http://focus.net">
+            Click
+          </a>
+        )
       }
       /* eslint-enable react/display-name */
     }
@@ -197,7 +205,9 @@ describe('<Focusable />', async () => {
     })
 
     /* eslint-disable react/display-name */
-    const nextProps = { render: () => <button>Click</button> }
+    const nextProps = {
+      render: ({ attachRef }) => <button ref={attachRef}>Click</button>
+    }
     /* eslint-enable react/display-name */
 
     const nextRenderSpy = spy(nextProps, 'render')
@@ -222,7 +232,7 @@ describe('<Focusable />', async () => {
       <Focusable>
         {(args) => {
           renderSpy(args)
-          return <button>foo</button>
+          return <button ref={args.attachRef}>foo</button>
         }}
       </Focusable>
     )
@@ -247,7 +257,7 @@ describe('<Focusable />', async () => {
       children: (args) => {
         renderSpy(args)
         return (
-          <span>
+          <span ref={args.attachRef}>
             some content text<button>bar</button>
           </span>
         )
@@ -272,7 +282,7 @@ describe('<Focusable />', async () => {
         {/* @ts-expect-error ts-migrate(6133) FIXME: 'args' is declared but its value is never read. */}
         {(args) => {
           return (
-            <span>
+            <span ref={args.attachRef}>
               <button>foo</button>
               <span>
                 <button>bar</button>
@@ -293,7 +303,7 @@ describe('<Focusable />', async () => {
       <Focusable>
         {/* @ts-expect-error ts-migrate(6133) FIXME: 'args' is declared but its value is never read. */}
         {(args) => {
-          return <span>hello!</span>
+          return <span ref={args.attachRef}>hello!</span>
         }}
       </Focusable>
     )
@@ -308,7 +318,7 @@ describe('<Focusable />', async () => {
         {(args) => {
           renderSpy(args)
           return (
-            <span>
+            <span ref={args.attachRef}>
               <h1>hello world</h1>
               <p>some content</p>
               <span>
@@ -339,7 +349,7 @@ describe('<Focusable />', async () => {
           focusable = el
         }}
       >
-        {() => <button>hello world</button>}
+        {({ attachRef }) => <button ref={attachRef}>hello world</button>}
       </Focusable>
     )
 
@@ -361,7 +371,7 @@ describe('<Focusable />', async () => {
           focusable = el
         }}
       >
-        {() => <button>hello world</button>}
+        {({ attachRef }) => <button ref={attachRef}>hello world</button>}
       </Focusable>
     )
 
@@ -383,12 +393,13 @@ describe('<Focusable />', async () => {
 
         return (
           <Focusable>
-            {({ focusVisible }) => {
+            {({ focusVisible, attachRef }) => {
               return (
                 <input
                   readOnly
                   ref={(el) => {
                     inputRef = el
+                    attachRef(el)
                   }}
                   value={`${focusVisible}_${changeValue}`}
                 />
@@ -439,11 +450,12 @@ describe('<Focusable />', async () => {
                 focusableRef = el
               }}
             >
-              {() => {
+              {({ attachRef }) => {
                 return (
                   <label
                     ref={(el) => {
                       labelRef = el
+                      attachRef(el)
                     }}
                   >
                     <input
