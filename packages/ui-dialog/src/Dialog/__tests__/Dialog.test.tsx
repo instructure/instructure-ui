@@ -115,6 +115,7 @@ describe('<Dialog />', async () => {
   describe('managed focus', async () => {
     class DialogExample extends React.Component {
       static propTypes = {
+        // eslint-disable-next-line react/forbid-foreign-prop-types
         ...Dialog.propTypes
       }
 
@@ -475,6 +476,7 @@ describe('<Dialog />', async () => {
       describe('when launching a dialog w/out focusable content from another dialog', () => {
         class NestedDialogExample extends React.Component {
           static propTypes = {
+            // eslint-disable-next-line react/forbid-foreign-prop-types
             ...Dialog.propTypes
           }
 

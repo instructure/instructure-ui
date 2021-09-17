@@ -49,6 +49,7 @@ module.exports = {
   rules: {
     'react/no-deprecated': 0,
     'react/no-find-dom-node': 0,
+    'react/forbid-foreign-prop-types': 'error',
     'react/prop-types': ['error', { skipUndeclared: true }],
     'react/require-default-props': 'error',
     'react/no-typos': 'error',

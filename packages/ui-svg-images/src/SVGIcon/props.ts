@@ -43,6 +43,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type SVGIconProps = SVGIconOwnProps & WithStyleProps
 
 const propTypes: PropValidators<PropKeys> = {
+  // eslint-disable-next-line react/forbid-foreign-prop-types
   ...InlineSVG.propTypes,
   rotate: PropTypes.oneOf(['0', '90', '180', '270']),
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large']),
