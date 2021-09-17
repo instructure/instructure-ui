@@ -155,6 +155,7 @@ const withStyle = decorator(
     hoistNonReactStatics(WithStyle, ComposedComponent)
     // we have to pass these on, because sometimes users
     // access propTypes of the component in other components
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     WithStyle.propTypes = ComposedComponent.propTypes
     WithStyle.defaultProps = ComposedComponent.defaultProps
     // @ts-expect-error These static fields exist on InstUI components

@@ -64,8 +64,3 @@ Just add the `@instructure/ui` dependency as shown above and wrap the part of yo
 - To use a different theme or customize one read about [EmotionThemeProvider](#EmotionThemeProvider)
 - Make sure you read about [Accessibility](#accessibility) with InstUI.
 - [How to make your own component that uses InstUI's theming engine](#emotion)
-
-> Note: Do not use tools with Instructure UI that remove `PropTypes` (for example
-> [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types)).
-> Instructure UI uses `PropTypes` for its internal functionality (e.g. in
-> `ui-react-utils/src/passtroughProps.js`), thus removing them will cause issues.

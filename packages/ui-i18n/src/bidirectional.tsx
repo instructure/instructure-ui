@@ -95,6 +95,7 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
   }
   hoistNonReactStatics(BidirectionalForwardingRef, ComposedComponent)
   BidirectionalForwardingRef.defaultProps = ComposedComponent.defaultProps
+  // eslint-disable-next-line react/forbid-foreign-prop-types
   BidirectionalForwardingRef.propTypes = ComposedComponent.propTypes
   // @ts-expect-error These static fields exist on InstUI components
   BidirectionalForwardingRef.allowedProps = ComposedComponent.allowedProps
