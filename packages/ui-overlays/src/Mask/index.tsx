@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, createRef } from 'react'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'no-s... Remove this comment to see the full error message
 import noScroll from 'no-scroll'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -71,10 +71,12 @@ class Mask extends Component<MaskProps> {
     }
   }
 
+  ref = createRef()
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.elementRef(el)
+    this.ref.current = el
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.

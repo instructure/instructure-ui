@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { createRef } from 'react'
 
 import { getClassList } from '@instructure/ui-dom-utils'
 import {
@@ -311,10 +311,11 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
         return null
     }
   }
-
+  ref = createRef()
   renderChildren() {
     return safeCloneElement(ensureSingleChild(this.props.children)!, {
-      'aria-hidden': !this.props.in ? true : null
+      'aria-hidden': !this.props.in ? true : null,
+      ref: this.ref
     })
   }
 

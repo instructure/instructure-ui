@@ -22,10 +22,16 @@
  * SOFTWARE.
  */
 
-import ReactDOM from 'react-dom'
-import React from 'react'
+import { ReactInstance, RefObject } from 'react'
 import { UIElement } from '@instructure/shared-types'
+type ReactNodeWithRef = ReactInstance & {
+  ref: RefObject<Element | ReactInstance>
+}
+type CustomRefNode = ReactNodeWithRef | RefObject<Element>
 
+const isReactNodeWithRef = (el: unknown): el is ReactNodeWithRef => {
+  return (el as ReactNodeWithRef).ref !== undefined
+}
 /**
  * ---
  * category: utilities/DOM
@@ -37,7 +43,7 @@ import { UIElement } from '@instructure/shared-types'
  * @param { Node | Window | React.ReactElement | React.Component | function } el - component, DOM node, or function returning a DOM node
  * @returns { Node | Window | null | undefined } The root node of this element
  */
-function findDOMNode(el?: UIElement) {
+function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
   const node = typeof el === 'function' ? el() : el
 
   if (node === document) {
@@ -49,9 +55,17 @@ function findDOMNode(el?: UIElement) {
   ) {
     return node as Node | Window
   } else if (node) {
-    return ReactDOM.findDOMNode(node as React.ReactInstance) // eslint-disable-line react/no-find-dom-node
+    const reactNode = node as CustomRefNode
+
+    if (isReactNodeWithRef(reactNode)) {
+      if (!(reactNode.ref.current instanceof HTMLElement)) {
+        return findDOMNode(reactNode.ref.current)
+      }
+      return reactNode.ref.current
+    } else {
+      return reactNode.current!
+    }
   }
-  return undefined
 }
 
 export default findDOMNode

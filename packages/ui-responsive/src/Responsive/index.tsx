@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 
 import { deepEqual } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
@@ -116,6 +116,7 @@ class Responsive extends Component<ResponsiveProps> {
       match === 'element'
         ? addElementQueryMatchListener
         : addMediaQueryMatchListener
+
     return matchListener(query, () => findDOMNode(this) as Node, updateMatches)
   }
 
@@ -165,6 +166,8 @@ class Responsive extends Component<ResponsiveProps> {
     return mergedProps
   }
 
+  ref = createRef()
+
   render() {
     const { matches, hasRendered } = this.state
     const { props, render, children } = this.props
@@ -177,8 +180,9 @@ class Responsive extends Component<ResponsiveProps> {
       // both are supplied, give preference to children.
       renderFunc = children || render
     }
+
     return (
-      <div>
+      <div ref={this.ref}>
         {renderFunc && renderFunc(this.mergeProps(matches, props), matches)}
       </div>
     )
