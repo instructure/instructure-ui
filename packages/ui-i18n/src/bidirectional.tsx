@@ -96,6 +96,8 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
   hoistNonReactStatics(BidirectionalForwardingRef, ComposedComponent)
   BidirectionalForwardingRef.defaultProps = ComposedComponent.defaultProps
   BidirectionalForwardingRef.propTypes = ComposedComponent.propTypes
+  // @ts-expect-error These static fields exist on InstUI components
+  BidirectionalForwardingRef.allowedProps = ComposedComponent.allowedProps
   return BidirectionalForwardingRef
 }) as BidirectionalType
 
