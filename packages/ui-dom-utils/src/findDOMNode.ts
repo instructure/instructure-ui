@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import ReactDOM from 'react-dom'
 import { ReactInstance, RefObject } from 'react'
 import { UIElement } from '@instructure/shared-types'
 type ReactNodeWithRef = ReactInstance & {
@@ -72,6 +73,12 @@ function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
         return findDOMNode(refElement)
       }
       return refElement
+    } else {
+      console.warn(
+        'Warning: ReactDOM.findDOMNode is deprecated in Strict mode, consider using refs instead.\n See more here: https://instructure.design/#focus-management'
+      )
+
+      return ReactDOM.findDOMNode(node as ReactInstance)!
     }
   }
   return undefined
