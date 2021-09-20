@@ -227,7 +227,7 @@ class Focusable extends Component<FocusableProps> {
 
   ref = createRef()
   attachRef = (el: Element) => {
-    // debugger
+    //@ts-expect-error this is needed for backwards compatibily reasons
     this.ref.current = el
   }
 
@@ -257,14 +257,6 @@ class Focusable extends Component<FocusableProps> {
     return false
   }
 
-  //
-  attachRefToFirstDOMNode = (root: any, depth = 0, tree = root): any => {
-    if (typeof root.type === 'string') {
-      return [cloneElement(root, { ref: this.ref }), depth, tree]
-    }
-
-    return this.attachRefToFirstDOMNode(root.props.children[0], depth + 1, tree)
-  }
   render() {
     const { children, render = children } = this.props
     const { focusable, focused } = this.state
@@ -277,7 +269,12 @@ class Focusable extends Component<FocusableProps> {
         attachRef: this.attachRef
       })
 
-      return rendered
+      if (rendered.ref) {
+        this.attachRef(rendered.ref.current)
+
+        return rendered
+      }
+      return cloneElement(rendered, { ref: this.ref })
     } else {
       return null
     }

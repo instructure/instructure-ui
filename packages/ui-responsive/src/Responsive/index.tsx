@@ -56,7 +56,7 @@ class Responsive extends Component<ResponsiveProps> {
     match: 'element',
     props: null
   }
-
+  ref = createRef<HTMLDivElement>()
   _matchListener: { remove(): void } | null = null
 
   state: { matches: QueriesMatching; hasRendered: boolean } = {
@@ -165,8 +165,6 @@ class Responsive extends Component<ResponsiveProps> {
 
     return mergedProps
   }
-
-  ref = createRef()
 
   render() {
     const { matches, hasRendered } = this.state
