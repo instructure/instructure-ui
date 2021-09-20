@@ -31,7 +31,7 @@ class Example extends React.Component {
           renderTitle="Tab A"
           textAlign="center"
           padding="large"
-          iSelected={selectedIndex === 0}
+          isSelected={selectedIndex === 0}
         >
           <Button>Focus Me</Button>
         </Tabs.Panel>
