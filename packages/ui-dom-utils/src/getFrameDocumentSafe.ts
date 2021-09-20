@@ -23,7 +23,7 @@
  */
 
 function getFrameDocumentSafe(el: HTMLIFrameElement) {
-  return el.contentDocument || el.contentWindow?.document || null
+  return el.contentDocument || null
 }
 
 export default getFrameDocumentSafe
