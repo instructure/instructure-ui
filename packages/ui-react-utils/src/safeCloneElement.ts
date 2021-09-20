@@ -46,6 +46,7 @@ function safeCloneElement<
   const cloneRef = props.ref
   const originalRef = element.ref
   const originalRefIsAFunction = typeof originalRef === 'function'
+  const cloneRefIsFunction = typeof cloneRef === 'function'
 
   const mergedProps = { ...props }
 
@@ -92,7 +93,12 @@ Ignoring ref: ${originalRef}`
     {
       ...mergedProps,
       ref(component: any) {
-        ;(cloneRef as (instance: any) => void)(component)
+        if (cloneRefIsFunction) {
+          ;(cloneRef as (instance: any) => void)(component)
+        } else {
+          //@ts-expect-error needed for backwards compat
+          cloneRef.current = component
+        }
         originalRef(component)
       }
     },

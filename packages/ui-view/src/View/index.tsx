@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, ComponentType, createRef } from 'react'
+import { Component, ComponentType } from 'react'
 
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { bidirectional } from '@instructure/ui-i18n'
@@ -172,12 +172,12 @@ class View extends Component<ViewProps & OtherHTMLAttributes<ViewProps>> {
     }
   }
 
-  ref = createRef()
+  ref: HTMLElement | null = null
   handleElementRef = (el: HTMLElement | null) => {
     if (typeof this.props.elementRef === 'function') {
       this.props.elementRef(el)
     }
-    this.ref.current = el
+    this.ref = el
     this._element = el
   }
   render() {

@@ -139,7 +139,7 @@ type ViewOwnProps = {
    * Activate a dotted outline around the component to make building your
    * layout easier
    */
-  withVisualDebug: boolean
+  withVisualDebug?: boolean
 
   dir?: 'ltr' | 'rtl'
   /**

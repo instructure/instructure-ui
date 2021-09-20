@@ -25,12 +25,19 @@
 import { ReactInstance, RefObject } from 'react'
 import { UIElement } from '@instructure/shared-types'
 type ReactNodeWithRef = ReactInstance & {
-  ref: RefObject<Element | ReactInstance>
+  ref: RefObject<Element | ReactInstance> | Element | ReactInstance
 }
-type CustomRefNode = ReactNodeWithRef | RefObject<Element>
+type CustomRefNode =
+  | ReactNodeWithRef
+  | RefObject<Element>
+  | Element
+  | ReactInstance
 
 const isReactNodeWithRef = (el: unknown): el is ReactNodeWithRef => {
   return (el as ReactNodeWithRef).ref !== undefined
+}
+const isRefObject = (obj: unknown): obj is RefObject<unknown> => {
+  return (obj as RefObject<unknown>).current !== undefined
 }
 /**
  * ---
@@ -58,14 +65,16 @@ function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
     const reactNode = node as CustomRefNode
 
     if (isReactNodeWithRef(reactNode)) {
-      if (!(reactNode.ref.current instanceof HTMLElement)) {
-        return findDOMNode(reactNode.ref.current)
+      const refElement = isRefObject(reactNode.ref)
+        ? reactNode.ref.current
+        : reactNode.ref
+      if (!(refElement instanceof HTMLElement)) {
+        return findDOMNode(refElement)
       }
-      return reactNode.ref.current
-    } else {
-      return reactNode.current!
+      return refElement
     }
   }
+  return undefined
 }
 
 export default findDOMNode
