@@ -9,26 +9,65 @@ Popovers hide or show content as a result of user interaction, such as clicking,
 ```js
 ---
 example: true
+render : false
 ---
-<Popover
-  renderTrigger={
-    <Link aria-describedby="tip">
-      Hover or focus me
-    </Link>
-  }
-  shouldRenderOffscreen
-  shouldReturnFocus={false}
-  placement="top center"
-  mountNode={() => document.getElementById('main')}
-  onPositioned={() => console.log('positioned')}
-  onShowContent={() => console.log('showing')}
-  onHideContent={() => console.log('hidden')}
->
-  <View padding="x-small" display="block" as="div" id="tip">
-    Hello World
-  </View>
-</Popover>
+class Example extends React.Component {
+    state = {
+        withArrow: true,
+        color : "primary"
+    }
+    toggleWithArrow = (event) => this.setState({ withArrow: !this.state.withArrow })
+    changeColor = (event,color) =>  {this.setState({color})}
+    render() {
+        return (
+            <>
+                <FormFieldGroup description="Uncontrolled Popover Example">
+                    <Checkbox
+                        checked={this.state.withArrow}
+                        label="With Arrow"
+                        onChange={this.toggleWithArrow}
+                    />
+                </FormFieldGroup>
+                <View display="block" margin="small none">
+                    <RadioInputGroup
+                        name="color"
+                        defaultValue="primary"
+                        description=""
+                        variant="toggle"
+                        size="small"
+                        onChange={this.changeColor} >
+                        <RadioInput label="Primary" value="primary"/>
+                        <RadioInput label="Primary inverse" value="primary-inverse" />
 
+                    </RadioInputGroup>
+                </View>
+                <View display="block" as="div" margin="small">
+                    <Popover
+                        renderTrigger={
+                            <Link aria-describedby="tip">
+                                Hover or focus me
+                            </Link>
+                        }
+                        shouldRenderOffscreen
+                        shouldReturnFocus={false}
+                        withArrow={this.state.withArrow}
+                        color = {this.state.color}
+                        placement = "top center"
+                        mountNode={() => document.getElementById('main')}
+                        onPositioned={() => console.log('positioned')}
+                        onShowContent={() => console.log('showing')}
+                        onHideContent={() => console.log('hidden')}
+                    >
+                        <View padding="x-small" display="block" as="div" id="tip">
+                            Hello World
+                        </View>
+                    </Popover>
+                </View>
+            </>
+        )
+    }
+}
+render(<Example />)
 ```
 
 #### Controlled Popover
