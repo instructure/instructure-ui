@@ -9,14 +9,16 @@ Popovers hide or show content as a result of user interaction, such as clicking,
 ```js
 ---
 example: true
-render : false
+render: false
 ---
 class Example extends React.Component {
     state = {
         withArrow: true,
+        shouldAlignArrow: true,
         color : "primary"
     }
     toggleWithArrow = (event) => this.setState({ withArrow: !this.state.withArrow })
+    toggleAlignArrow = (event) => this.setState({ shouldAlignArrow: !this.state.shouldAlignArrow })
     changeColor = (event,color) =>  {this.setState({color})}
     render() {
         return (
@@ -27,18 +29,22 @@ class Example extends React.Component {
                         label="With Arrow"
                         onChange={this.toggleWithArrow}
                     />
+                    <Checkbox
+                        checked={this.state.shouldAlignArrow}
+                        label="Align Arrow"
+                        onChange={this.toggleAlignArrow}
+                    />
                 </FormFieldGroup>
                 <View display="block" margin="small none">
                     <RadioInputGroup
                         name="color"
                         defaultValue="primary"
-                        description=""
+                        description="Color:"
                         variant="toggle"
                         size="small"
                         onChange={this.changeColor} >
                         <RadioInput label="Primary" value="primary"/>
                         <RadioInput label="Primary inverse" value="primary-inverse" />
-
                     </RadioInputGroup>
                 </View>
                 <View display="block" as="div" margin="small">
@@ -51,8 +57,9 @@ class Example extends React.Component {
                         shouldRenderOffscreen
                         shouldReturnFocus={false}
                         withArrow={this.state.withArrow}
+                        shouldAlignArrow={this.state.shouldAlignArrow}
                         color = {this.state.color}
-                        placement = "top center"
+                        placement = "top end"
                         mountNode={() => document.getElementById('main')}
                         onPositioned={() => console.log('positioned')}
                         onShowContent={() => console.log('showing')}
@@ -68,6 +75,7 @@ class Example extends React.Component {
     }
 }
 render(<Example />)
+
 ```
 
 #### Controlled Popover
