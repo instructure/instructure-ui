@@ -14,7 +14,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
+    "lint-fix": "ui-test --lint --fix",
     "build": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",

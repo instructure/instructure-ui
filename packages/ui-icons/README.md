@@ -33,7 +33,7 @@ const MyComponent = () => {
 
 - Copy the new icon files in the `/svg/Solid` and `/svg/Line` directories.
 
-- Run `yarn export:icons` from the repository root directory to generate the SVG files.
+- Run `yarn export-icons` from the repository root directory to generate the SVG files.
 
 - Run `yarn && yarn bootstrap`.
 

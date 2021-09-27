@@ -15,22 +15,22 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
+    "lint-fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
-    "build:watch": "ui-build --watch",
-    "build:types": "tsc -p tsconfig.build.json"
+    "build-watch": "ui-build --watch",
+    "build-ts-types": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.9.1",
-    "@instructure/ui-test-utils": "8.9.1",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-test-utils": "workspace:*",
     "@types/json-stable-stringify": "^1.0.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.9.1",
-    "@instructure/ui-dom-utils": "8.9.1",
+    "@instructure/console": "workspace:*",
+    "@instructure/ui-dom-utils": "workspace:*",
     "bowser": "^1.9.4",
     "fast-deep-equal": "^2",
     "json-stable-stringify": "^1.0.1",

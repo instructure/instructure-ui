@@ -18,14 +18,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@instructure/canvas-theme": "8.9.1",
-    "@instructure/emotion": "8.9.1",
-    "@instructure/ui-heading": "8.9.1",
-    "@instructure/ui-icons": "8.9.1",
-    "@instructure/ui-svg-images": "8.9.1",
-    "@instructure/ui-text": "8.9.1",
-    "@instructure/ui-themes": "8.9.1",
-    "@instructure/ui-view": "8.9.1",
+    "@instructure/canvas-theme": "workspace:*",
+    "@instructure/emotion": "workspace:*",
+    "@instructure/ui-heading": "workspace:*",
+    "@instructure/ui-icons": "workspace:*",
+    "@instructure/ui-svg-images": "workspace:*",
+    "@instructure/ui-text": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
+    "@instructure/ui-view": "workspace:*",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },

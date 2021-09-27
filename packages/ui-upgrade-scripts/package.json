@@ -11,17 +11,15 @@
   },
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
-  "bin": {
-    "ui-upgrade-scripts": "./lib/index.js"
-  },
+  "bin": "./lib/index.js",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix"
+    "lint-fix": "ui-test --lint --fix"
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/command-utils": "8.9.1",
-    "@instructure/pkg-utils": "8.9.1",
+    "@instructure/command-utils": "workspace:*",
+    "@instructure/pkg-utils": "workspace:*",
     "depcheck": "^1",
     "fs-extra": "^9",
     "jscodeshift": "^0.7.0",

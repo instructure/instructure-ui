@@ -24,20 +24,17 @@
 
 const fse = require('fs-extra')
 const path = require('path')
-const { info, error, runCommandSync } = require('@instructure/command-utils')
+const { info, error } = require('@instructure/command-utils')
+const { getPackages } = require('@instructure/pkg-utils')
 
 module.exports = ({ outputDir, name = 'package-list.json' }) => {
   try {
-    const { stdout } = runCommandSync('lerna', ['list', '--json'], [], {
-      stdio: 'pipe'
+    const packages = getPackages()
+    const packageList = packages.map((packages) => {
+      return packages.name // package name
     })
-    const packages = JSON.parse(stdout)
-    const packageList = packages.map((pkg) => pkg.name)
-
     const outputPath = path.join(outputDir, name)
-
     fse.outputFileSync(outputPath, JSON.stringify(packageList, null, 1))
-
     info(`Successfully generated package list at ${outputPath}`)
   } catch (err) {
     error(err)

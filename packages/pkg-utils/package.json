@@ -14,12 +14,12 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
+    "lint-fix": "ui-test --lint --fix",
     "build": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/command-utils": "8.9.1",
+    "@instructure/command-utils": "workspace:*",
     "@lerna/package": "^4",
     "read-pkg-up": "^7"
   },

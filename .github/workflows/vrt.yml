@@ -41,8 +41,8 @@ jobs:
       - name: Build Storybook examples
         run: |
           cd ./packages/__examples__/
-          yarn build:examples ${{ steps.changed_packages.outputs.changed_packages }}
-          yarn build:storybook
+          yarn build-examples ${{ steps.changed_packages.outputs.changed_packages }}
+          yarn build-storybook
       - name: Publish to Chromatic
         continue-on-error: true
         uses: chromaui/action@v1

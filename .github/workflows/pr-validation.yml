@@ -16,9 +16,9 @@ jobs:
       - name: Bootstrap project
         run: yarn bootstrap
       - name: Run test for the patchset
-        run: yarn test:patchset
+        run: yarn test-patchset
       - name: Build docs-app
-        run: yarn build:docs
+        run: yarn build-docs
       - name: Deploy preview docs
         # only run this step if the PR is not from a fork since repository
         # secrets are not passed to forks and we need the repo secrets for the below steps

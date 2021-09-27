@@ -8,7 +8,7 @@ category: packages
 [![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-Prompts for conventional changelog standard in a lerna environment.
+Prompts for conventional changelog.
 
 ### Installation
 

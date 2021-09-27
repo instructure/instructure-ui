@@ -16,7 +16,13 @@ __build__
 .env
 .env.test
 .tmp/
-
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
 
 # Local Netlify folder
 .netlify

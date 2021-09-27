@@ -18,7 +18,7 @@ jobs:
       - name: Set up project.
         run: yarn bootstrap
       - name: Run tests.
-        run: yarn test:patchset
+        run: yarn test-patchset
       - name: Release to NPM
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
@@ -55,7 +55,7 @@ jobs:
       - name: Set up project.
         run: yarn bootstrap
       - name: Build docs-app.
-        run: yarn build:docs
+        run: yarn build-docs
       - name: Copy redirects config file to the __build__ directory.
         run: cp ./packages/__docs__/_redirects ./packages/__docs__/__build__
       - name: Deploy built docs-app to Netlify.

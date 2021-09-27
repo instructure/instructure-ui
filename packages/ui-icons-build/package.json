@@ -14,12 +14,12 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
-    "build:types": "tsc -p tsconfig.build.json"
+    "lint-fix": "ui-test --lint --fix",
+    "build-ts-types": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/config-loader": "8.9.1",
+    "@instructure/config-loader": "workspace:*",
     "del": "^6",
     "glob": "^7.1.4",
     "gulp": "^4",

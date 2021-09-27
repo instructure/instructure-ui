@@ -13,7 +13,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix"
+    "lint-fix": "ui-test --lint --fix"
   },
   "license": "MIT",
   "dependencies": {
@@ -31,8 +31,8 @@
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.13.0",
     "@babel/runtime": "^7.13.10",
-    "@instructure/babel-plugin-transform-imports": "8.9.1",
-    "@instructure/browserslist-config-instui": "8.9.1",
+    "@instructure/babel-plugin-transform-imports": "workspace:*",
+    "@instructure/browserslist-config-instui": "workspace:*",
     "babel-loader": "^8.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-plugin-istanbul": "^6.0.0",

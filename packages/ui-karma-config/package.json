@@ -13,15 +13,15 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix"
+    "lint-fix": "ui-test --lint --fix"
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/config-loader": "8.9.1",
-    "@instructure/ui-webpack-config": "8.9.1",
+    "@instructure/config-loader": "workspace:*",
+    "@instructure/ui-webpack-config": "workspace:*",
     "@jsdevtools/coverage-istanbul-loader": "3.0.5",
     "choma": "^1",
-    "globby": "^10.0.1",
+    "globby": "^11",
     "karma": "^6",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "3.0.3",

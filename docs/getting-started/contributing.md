@@ -42,9 +42,9 @@ Run `yarn run` to list the available commands.
 
 ### Development
 
-1. Run `yarn build:watch` to build all of the packages for a development environment and watch for changes.
+1. Run `yarn build-watch` to build all of the packages for a development environment and watch for changes.
 1. Run `yarn dev` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code you should see the page auto-reload.
-1. Run `yarn test:watch --scope @instructure/[package name]` to run the tests for 'package name' and watch for changes.
+1. Run `yarn test-watch --scope @instructure/[package name]` to run the tests for 'package name' and watch for changes.
 1. Run `yarn test` to run all the tests for every package.
 
 ## Code guidelines
@@ -80,14 +80,14 @@ Please update the documentation and examples with any changes.
 
 ### Adding a package
 
-1. Run `yarn generate:package` and choose a name for your package (use "kebab" case (dashes), e.g. 'my-package').
+1. Run `yarn generate-package` and choose a name for your package (use "kebab" case (dashes), e.g. 'my-package').
 1. Add an alias for your package in `packages/__docs__/resolve.js`.
 1. Stop the dev server (if you have it running), and run `yarn dev` to pick up the new package.
 1. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your package listed in the docs.
 
 ### Adding a component
 
-1. Run `yarn generate:component` and choose a name for your component (use Pascal case: e.g., 'MyComponent').
+1. Run `yarn generate-component` and choose a name for your component (use Pascal case: e.g., 'MyComponent').
 1. Choose to create a new package for your component, add it to an existing package, or create the component with no package.
 1. If you created a new package for your component, an export for the component will automatically be added to `packages/[package]/src/components/index.js`. If you're adding your component to an existing package, you will need to add the export manually.
 1. Run `yarn bootstrap` to generate the `es` and `lib` directories for your component.

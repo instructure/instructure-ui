@@ -98,7 +98,7 @@ export function commit() {
   }
 
   try {
-    runCommandSync('yarn', ['husky:pre-commit'])
+    runCommandSync('yarn', ['husky-pre-commit'])
   } catch (err) {
     error(err.stdout)
     process.exit(1)

@@ -16,17 +16,17 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/emotion": "8.9.1",
-    "@instructure/ui-react-utils": "8.9.1",
-    "@instructure/ui-testable": "8.9.1",
+    "@instructure/emotion": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-testable": "workspace:*",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.9.1",
-    "@instructure/ui-color-utils": "8.9.1",
-    "@instructure/ui-test-locator": "8.9.1",
-    "@instructure/ui-test-utils": "8.9.1",
-    "@instructure/ui-themes": "8.9.1"
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
+    "@instructure/ui-test-locator": "workspace:*",
+    "@instructure/ui-test-utils": "workspace:*",
+    "@instructure/ui-themes": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=16.8 <=17"

@@ -15,31 +15,31 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
+    "lint-fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
-    "build:watch": "yarn ts:check --watch & ui-build --watch",
-    "build:types": "tsc -p tsconfig.build.json && cpy './global.d.ts' './types'",
-    "ts:check": "tsc -p tsconfig.build.json"
+    "build-watch": "yarn ts-check --watch & ui-build --watch",
+    "build-ts-types": "tsc -p tsconfig.build.json && cpy './global.d.ts' './types'",
+    "ts-check": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
     "@emotion/react": "^11.4.1",
-    "@instructure/console": "8.9.1",
-    "@instructure/shared-types": "8.9.1",
-    "@instructure/ui-decorator": "8.9.1",
-    "@instructure/ui-i18n": "8.9.1",
-    "@instructure/ui-themes": "8.9.1",
-    "@instructure/ui-utils": "8.9.1",
+    "@instructure/console": "workspace:*",
+    "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-decorator": "workspace:*",
+    "@instructure/ui-i18n": "workspace:*",
+    "@instructure/ui-themes": "workspace:*",
+    "@instructure/ui-utils": "workspace:*",
     "emotion-theming": "^10.0.27",
     "hoist-non-react-statics": "^3.3.2",
     "lodash": "^4",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.9.1",
-    "@instructure/ui-test-utils": "8.9.1",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-test-utils": "workspace:*",
     "@types/lodash": "^4.14.171",
     "cpy-cli": "^3.1.1"
   },

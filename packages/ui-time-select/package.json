@@ -15,32 +15,32 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
+    "lint-fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
-    "build:watch": "yarn ts:check --watch & ui-build --watch",
-    "build:types": "tsc -p tsconfig.build.json",
-    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+    "build-watch": "yarn ts-check --watch & ui-build --watch",
+    "build-ts-types": "tsc -p tsconfig.build.json",
+    "ts-check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.9.1",
-    "@instructure/ui-form-field": "8.9.1",
-    "@instructure/ui-i18n": "8.9.1",
-    "@instructure/ui-position": "8.9.1",
-    "@instructure/ui-prop-types": "8.9.1",
-    "@instructure/ui-react-utils": "8.9.1",
-    "@instructure/ui-select": "8.9.1",
-    "@instructure/ui-test-locator": "8.9.1",
-    "@instructure/ui-testable": "8.9.1",
-    "@instructure/uid": "8.9.1",
+    "@instructure/console": "workspace:*",
+    "@instructure/ui-form-field": "workspace:*",
+    "@instructure/ui-i18n": "workspace:*",
+    "@instructure/ui-position": "workspace:*",
+    "@instructure/ui-prop-types": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-select": "workspace:*",
+    "@instructure/ui-test-locator": "workspace:*",
+    "@instructure/ui-testable": "workspace:*",
+    "@instructure/uid": "workspace:*",
     "dayjs": "^1.10.6",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.9.1",
-    "@instructure/ui-test-utils": "8.9.1",
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-test-utils": "workspace:*",
     "moment-timezone": "^0.5.33"
   },
   "peerDependencies": {

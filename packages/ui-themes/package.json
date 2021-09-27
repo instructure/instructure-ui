@@ -15,22 +15,22 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
+    "lint-fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
-    "build:watch": "ui-build --watch",
-    "build:types": "tsc -p tsconfig.build.json"
+    "build-watch": "ui-build --watch",
+    "build-ts-types": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.9.1",
-    "@instructure/ui-theme-tokens": "8.9.1"
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-theme-tokens": "workspace:*"
   },
   "dependencies": {
-    "@instructure/canvas-high-contrast-theme": "8.9.1",
-    "@instructure/canvas-theme": "8.9.1",
-    "@instructure/instructure-theme": "8.9.1",
-    "@instructure/shared-types": "8.9.1"
+    "@instructure/canvas-high-contrast-theme": "workspace:*",
+    "@instructure/canvas-theme": "workspace:*",
+    "@instructure/instructure-theme": "workspace:*",
+    "@instructure/shared-types": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

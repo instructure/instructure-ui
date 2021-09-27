@@ -33,6 +33,8 @@ import {
 } from '@instructure/command-utils'
 //@ts-expect-error FIXME: add typings
 import { Project } from '@lerna/project'
+//import standardVersion from 'standard-version'
+//import {Cache, Configuration, Project, ThrowReport, structUtils, LocatorHash, Package} from '@yarnpkg/core'
 
 export const publishPackages = async (
   packageName: string,
@@ -130,6 +132,7 @@ export async function bumpPackages(packageName: string, requestedVersion: any) {
   let releaseVersion
 
   try {
+    /*
     await runCommandAsync('lerna', [
       'version',
       ...args,
@@ -142,13 +145,26 @@ export async function bumpPackages(packageName: string, requestedVersion: any) {
     ])
 
     releaseVersion = await syncRootPackageVersion(true)
-
+*/
+    // iterate over each workspace and call standardversion
+    //console.log("cwd:",process.cwd())
+    // yarn workspaces foreach exec standard-version --skip.tag --skip.commit gitOpts.path $pwd
+    await runCommandAsync('yarn', [
+      'workspaces',
+      'foreach',
+      'exec',
+      'standard-version',
+      '--skip.tag',
+      '--skip.commit', // TODO remove when it looks good
+      'gitOpts.path',
+      '$pwd' //https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/git-raw-commits
+      // https://github.com/snebjorn/akita/blob/master/libs/akita-ng-entity-service/.versionrc
+    ])
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
   } catch (err) {
     error(err)
     process.exit(1)
   }
-
   return releaseVersion
 }
 

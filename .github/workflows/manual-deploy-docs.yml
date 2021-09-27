@@ -20,7 +20,7 @@ jobs:
       - name: Build docs-app.
         env:
           COPY_VERSIONS_JSON: 0
-        run: yarn build:docs
+        run: yarn build-docs
       - name: Deploy docs-app to netlify
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

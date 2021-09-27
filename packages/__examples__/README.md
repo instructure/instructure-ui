@@ -10,7 +10,7 @@ As you develop, you can run an application that displays component examples, doc
 From the root of the `instructure-ui` repo:
 
 1. Run `yarn`
-1. Run `yarn dev:examples`
+1. Run `yarn dev-examples`
 1. [http://localhost:9090](http://localhost:9090) should open automatically in your browser
 
 ### Sketch Asset Generation
@@ -24,8 +24,8 @@ downloading [html-sketchapp](https://github.com/brainly/html-sketchapp/archive/m
 
 Then to generate the Sketch assets:
 
-1. Run `yarn start:examples` to spin up the examples app on [localhost:9001](http://localhost:9001)
-1. Run `yarn generate:sketch` to generate a `stories.asketch.json` file.
+1. Run `yarn start-examples` to spin up the examples app on [localhost:9001](http://localhost:9001)
+1. Run `yarn generate-sketch` to generate a `stories.asketch.json` file.
 1. Once in Sketch, open the "Plugins" menu, select "From _Almost_ Sketch to Sketch", and select the
    `packages/__examples__/stories.asketch.json` file.
 

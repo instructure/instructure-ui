@@ -35,14 +35,14 @@ import { ComponentType } from 'react'
 import propJSONData from '../../prop-data.json'
 
 const examplesContext = require.context(
-  '../../../', // bug: This causes start:watch to recompile endlessly in SB 6.2+
+  '../../../', // bug: This causes start-watch to recompile endlessly in SB 6.2+
   true,
   /^.*\/src\/.*\.examples\.tsx?$/,
   'sync'
 )
 
 const componentsContext = require.context(
-  '../../../', // bug: This causes start:watch to recompile endlessly in SB 6.2+
+  '../../../', // bug: This causes start-watch to recompile endlessly in SB 6.2+
   true,
   /ui-.*\/src\/.*\/index\.tsx$/,
   'sync'
@@ -65,8 +65,8 @@ console.log(
       const Component: ComponentType = componentsContext(
         exampleDir + '/index.tsx'
       ).default
-      const ExamplesModule: StoryConfig<any> = examplesContext(requirePath)
-        .default // xy.example.jsx
+      const ExamplesModule: StoryConfig<any> =
+        examplesContext(requirePath).default // xy.example.jsx
 
       // merge in generated prop values:
       ExamplesModule.propValues = Object.assign(

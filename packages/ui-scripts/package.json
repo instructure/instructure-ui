@@ -12,25 +12,25 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "bin": {
+    "ui-build": "./lib/build/index.js",
     "ui-scripts": "./lib/index.js",
-    "ui-test": "./lib/test/index.js",
-    "ui-build": "./lib/build/index.js"
+    "ui-test": "./lib/test/index.js"
   },
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
+    "lint-fix": "ui-test --lint --fix",
     "build": "tsc -p tsconfig.build.json",
-    "build:watch": "tsc -w -p tsconfig.build.json"
+    "build-watch": "tsc -w -p tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.8.4",
     "@codesandbox/common": "^1.0.8",
-    "@instructure/command-utils": "8.9.1",
-    "@instructure/cz-lerna-changelog": "8.9.1",
-    "@instructure/pkg-utils": "8.9.1",
-    "@instructure/ui-template-scripts": "8.9.1",
-    "@instructure/ui-upgrade-scripts": "8.9.1",
+    "@instructure/command-utils": "workspace:*",
+    "@instructure/cz-lerna-changelog": "workspace:*",
+    "@instructure/pkg-utils": "workspace:*",
+    "@instructure/ui-template-scripts": "workspace:*",
+    "@instructure/ui-upgrade-scripts": "workspace:*",
     "@lerna/project": "^4",
     "commitizen": "^4.0.3",
     "dotenv": "^8.1.0",
@@ -50,6 +50,7 @@
     "prettier": "^2.1.2",
     "rimraf": "^3.0.0",
     "semver": "^7",
+    "standard-version": "^9",
     "stylelint": "^10",
     "validate-commit-msg": "^2.14.0",
     "webpack-cli": "^3.3.9",
@@ -59,7 +60,8 @@
   "devDependencies": {
     "@types/git-url-parse": "^9.0.0",
     "@types/mocha": "^8.2.2",
-    "@types/semver": "^7.3.5"
+    "@types/semver": "^7.3.5",
+    "@types/standard-version": "^7"
   },
   "optionalDependencies": {
     "@storybook/react": "^6"

@@ -13,19 +13,16 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix"
+    "lint-fix": "ui-test --lint --fix"
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/pkg-utils": "8.9.1",
+    "@instructure/pkg-utils": "workspace:*",
     "@semantic-release/commit-analyzer": "^8",
     "chalk": "^4",
     "cz-customizable": "^6.2.0",
     "inquirer": "^8",
     "inquirer-autocomplete-prompt": "^1.0.1"
-  },
-  "peerDependencies": {
-    "lerna": "^4"
   },
   "publishConfig": {
     "access": "public"

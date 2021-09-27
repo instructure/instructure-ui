@@ -11,16 +11,16 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "generate:package:list": "./scripts/generate-package-list.js"
+    "generate-package-list": "./scripts/generate-package-list.js"
   },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@instructure/command-utils": "8.9.1",
-    "@instructure/pkg-utils": "8.9.1",
-    "@instructure/ui-upgrade-scripts": "8.9.1",
+    "@instructure/command-utils": "workspace:*",
+    "@instructure/pkg-utils": "workspace:*",
+    "@instructure/ui-upgrade-scripts": "workspace:*",
     "semver": "^7"
   }
 }

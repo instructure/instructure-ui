@@ -15,24 +15,24 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
+    "lint-fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
-    "build:watch": "yarn ts:check --watch & ui-build --watch",
-    "build:types": "tsc -p tsconfig.build.json",
-    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+    "build-watch": "yarn ts-check --watch & ui-build --watch",
+    "build-ts-types": "tsc -p tsconfig.build.json",
+    "ts-check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.9.1",
-    "@instructure/ui-test-utils": "8.9.1"
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-test-utils": "workspace:*"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/shared-types": "8.9.1",
-    "@instructure/ui-i18n": "8.9.1",
-    "@instructure/ui-prop-types": "8.9.1",
-    "@instructure/ui-react-utils": "8.9.1",
+    "@instructure/shared-types": "workspace:*",
+    "@instructure/ui-i18n": "workspace:*",
+    "@instructure/ui-prop-types": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
     "prop-types": "^15"
   },
   "peerDependencies": {

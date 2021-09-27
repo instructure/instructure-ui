@@ -15,28 +15,28 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
+    "lint-fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
-    "build:watch": "ui-build --watch",
-    "build:types": "tsc -p tsconfig.build.json"
+    "build-watch": "ui-build --watch",
+    "build-ts-types": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.9.1",
-    "@instructure/ui-a11y-content": "8.9.1",
-    "@instructure/ui-dom-utils": "8.9.1",
-    "@instructure/ui-react-utils": "8.9.1",
-    "@instructure/ui-testable": "8.9.1",
-    "@instructure/uid": "8.9.1",
+    "@instructure/console": "workspace:*",
+    "@instructure/ui-a11y-content": "workspace:*",
+    "@instructure/ui-dom-utils": "workspace:*",
+    "@instructure/ui-react-utils": "workspace:*",
+    "@instructure/ui-testable": "workspace:*",
+    "@instructure/uid": "workspace:*",
     "keycode": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.9.1",
-    "@instructure/ui-color-utils": "8.9.1",
-    "@instructure/ui-test-utils": "8.9.1"
+    "@instructure/ui-babel-preset": "workspace:*",
+    "@instructure/ui-color-utils": "workspace:*",
+    "@instructure/ui-test-utils": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=16.8 <=17"
