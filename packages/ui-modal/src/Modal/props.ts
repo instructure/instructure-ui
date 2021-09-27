@@ -29,7 +29,7 @@ import {
   element,
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
-import { transitionTypes } from '@instructure/ui-motion'
+import { transitionTypePropType } from '@instructure/ui-motion'
 import { ModalHeader } from './ModalHeader'
 import { ModalBody } from './ModalBody'
 import { ModalFooter } from './ModalFooter'
@@ -169,7 +169,7 @@ const propTypes: PropValidators<PropKeys> = {
     PropTypes.func
   ]),
 
-  transition: transitionTypes,
+  transition: transitionTypePropType,
 
   /**
    * Callback fired before the <Modal /> transitions in

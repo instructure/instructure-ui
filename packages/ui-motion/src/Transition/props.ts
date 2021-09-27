@@ -59,7 +59,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TransitionProps = TransitionOwnProps & WithStyleProps
 
-const transitionTypes = PropTypes.oneOf([
+const transitionTypePropType = PropTypes.oneOf([
   'fade',
   'scale',
   'slide-down',
@@ -69,7 +69,7 @@ const transitionTypes = PropTypes.oneOf([
 ])
 
 const propTypes: PropValidators<PropKeys> = {
-  type: transitionTypes,
+  type: transitionTypePropType,
   /**
    * A single element to animate in and out
    */
@@ -143,4 +143,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type { TransitionProps, TransitionType }
-export { propTypes, allowedProps, transitionTypes }
+export { propTypes, allowedProps, transitionTypePropType }

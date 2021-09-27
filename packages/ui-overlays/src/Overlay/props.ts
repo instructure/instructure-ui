@@ -26,7 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
-import { transitionTypes } from '@instructure/ui-motion'
+import { transitionTypePropType } from '@instructure/ui-motion'
 
 import type { PortalNode } from '@instructure/ui-portal'
 import type { PositionMountNode } from '@instructure/ui-position'
@@ -127,7 +127,7 @@ const propTypes: PropValidators<PropKeys> = {
   /**
    * The type of `<Transition />` to use for animating in/out
    */
-  transition: transitionTypes,
+  transition: transitionTypePropType,
   /**
    * Show the component; triggers the enter or exit animation
    */
