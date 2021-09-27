@@ -29,21 +29,19 @@ import { bumpPackages } from './utils/npm'
 
 try {
   const pkgJSON = getPackageJSON(undefined)
-  // optional release type/version argument: major, minor, patch, [version]
-  // e.g. ui-scripts --bump major
-  bump(pkgJSON.name, process.argv[3])
+  bump(pkgJSON.name)
 } catch (err) {
   error(err)
   process.exit(1)
 }
 
-async function bump(packageName: any, requestedVersion: any) {
+async function bump(packageName: string) {
   checkWorkingDirectory()
 
   let releaseVersion
 
   try {
-    releaseVersion = await bumpPackages(packageName, requestedVersion)
+    releaseVersion = await bumpPackages(packageName)
   } catch (err) {
     error(err)
     process.exit(1)

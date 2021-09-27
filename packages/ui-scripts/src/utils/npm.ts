@@ -23,7 +23,6 @@
  */
 import fs from 'fs'
 import path from 'path'
-import semver from 'semver'
 import { getPackage, getChangedPackages } from '@instructure/pkg-utils'
 import {
   runCommandAsync,
@@ -104,27 +103,9 @@ const syncRootPackageVersion = async (useProjectVersion?: any) => {
   return projectVersion
 }
 
-export async function bumpPackages(
-  packageName: string,
-  requestedVersion: string | null
-) {
-  let bumpVersion = requestedVersion
-
-  if (bumpVersion) {
-    if (!['major', 'minor', 'patch'].includes(bumpVersion)) {
-      bumpVersion = semver.valid(bumpVersion)
-
-      if (!bumpVersion) {
-        error(`${requestedVersion} is not a valid semantic version!`)
-        process.exit(1)
-      }
-    }
-  }
-
+export async function bumpPackages(packageName: string) {
   info(`📦  Bumping ${packageName} packages and generating changelogs...`)
-
   let releaseVersion
-
   try {
     await runCommandAsync('yarn', [
       'workspaces',
@@ -132,7 +113,6 @@ export async function bumpPackages(
       'exec',
       'standard-version',
       '--release-as',
-      bumpVersion,
       '--skip.tag',
       '--skip.commit', // TODO remove when it looks good
       '--path', // only look for changes in the package's folder
