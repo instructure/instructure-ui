@@ -33,8 +33,6 @@ import {
 } from '@instructure/command-utils'
 //@ts-expect-error FIXME: add typings
 import { Project } from '@lerna/project'
-//import standardVersion from 'standard-version'
-//import {Cache, Configuration, Project, ThrowReport, structUtils, LocatorHash, Package} from '@yarnpkg/core'
 
 export const publishPackages = async (
   packageName: string,
@@ -106,8 +104,10 @@ const syncRootPackageVersion = async (useProjectVersion?: any) => {
   return projectVersion
 }
 
-export async function bumpPackages(packageName: string, requestedVersion: any) {
-  const args = []
+export async function bumpPackages(
+  packageName: string,
+  requestedVersion: string | null
+) {
   let bumpVersion = requestedVersion
 
   if (bumpVersion) {
@@ -119,12 +119,6 @@ export async function bumpPackages(packageName: string, requestedVersion: any) {
         process.exit(1)
       }
     }
-
-    args.push(bumpVersion)
-  }
-
-  if (process.env.CI) {
-    args.push('--yes')
   }
 
   info(`📦  Bumping ${packageName} packages and generating changelogs...`)
@@ -132,34 +126,19 @@ export async function bumpPackages(packageName: string, requestedVersion: any) {
   let releaseVersion
 
   try {
-    /*
-    await runCommandAsync('lerna', [
-      'version',
-      ...args,
-      '--exact',
-      '--include-merged-tags',
-      '--no-push',
-      '--no-git-tag-version',
-      '--force-publish=*',
-      '--conventional-commits'
-    ])
-
-    releaseVersion = await syncRootPackageVersion(true)
-*/
-    // iterate over each workspace and call standardversion
-    //console.log("cwd:",process.cwd())
-    // yarn workspaces foreach exec standard-version --skip.tag --skip.commit gitOpts.path $pwd
     await runCommandAsync('yarn', [
       'workspaces',
       'foreach',
       'exec',
       'standard-version',
+      '--release-as',
+      bumpVersion,
       '--skip.tag',
       '--skip.commit', // TODO remove when it looks good
-      'gitOpts.path',
-      '$pwd' //https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/git-raw-commits
-      // https://github.com/snebjorn/akita/blob/master/libs/akita-ng-entity-service/.versionrc
+      '--path', // only look for changes in the package's folder
+      '.'
     ])
+    releaseVersion = await syncRootPackageVersion(true)
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
   } catch (err) {
     error(err)

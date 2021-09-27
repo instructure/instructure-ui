@@ -24,7 +24,7 @@
 import { getPackageJSON } from '@instructure/pkg-utils'
 import { error, info } from '@instructure/command-utils'
 
-//import { commitVersionBump, checkWorkingDirectory } from './utils/git'
+import { /*commitVersionBump,*/ checkWorkingDirectory } from './utils/git'
 import { bumpPackages } from './utils/npm'
 
 try {
@@ -38,7 +38,7 @@ try {
 }
 
 async function bump(packageName: any, requestedVersion: any) {
-  //checkWorkingDirectory()
+  checkWorkingDirectory()
 
   let releaseVersion
 
