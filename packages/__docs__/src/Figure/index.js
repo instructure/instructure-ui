@@ -78,8 +78,6 @@ class Figure extends Component {
   }
 
   static allowedProps = [
-    'makeStyles',
-    'styles',
     'title',
     'caption',
     'recommendation',
