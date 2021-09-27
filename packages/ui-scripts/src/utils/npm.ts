@@ -112,7 +112,6 @@ export async function bumpPackages(packageName: string) {
       'foreach',
       'exec',
       'standard-version',
-      '--release-as',
       '--skip.tag',
       '--skip.commit', // TODO remove when it looks good
       '--path', // only look for changes in the package's folder
