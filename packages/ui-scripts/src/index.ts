@@ -43,7 +43,6 @@ const commands = [
   '--lint',
   '--lint-commit',
   '--clean',
-  '--install-react',
   '--server',
   '--tag',
   '--deprecate',
@@ -99,8 +98,6 @@ if (process.argv.includes('create-component')) {
   require('./test/lint')
 } else if (process.argv.includes('--clean')) {
   require('./build/clean')
-} else if (process.argv.includes('--install-react')) {
-  require('./install-react')
 } else if (process.argv.includes('--server')) {
   require('./server')
 } else if (process.argv.includes('--tag')) {

@@ -38,7 +38,6 @@
     "generate-component": "instui create component",
     "generate-package": "instui create package",
     "commit": "ui-scripts --commit",
-    "install-react": "ui-scripts --install-react",
     "bootstrap": "npm-run-all clean-modules clean build build-tokens build-ts-types",
     "bootstrap-docs": "npm-run-all clean-modules clean build",
     "build": "yarn workspaces foreach --topological-dev --verbose run build",

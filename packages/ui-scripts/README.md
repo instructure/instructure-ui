@@ -66,13 +66,6 @@ To write a correctly formatted commit message and commit the staged changes:
 
 `yarn ui-scripts --commit`
 
-#### `install-react`
-
-To install a specific version of React and ReactDOM without updating `package.json`
-(defaults to the versions specified in the resolutions field):
-
-`yarn ui-scripts --install-react [version]`
-
 #### `bump`
 
 To update all package versions
