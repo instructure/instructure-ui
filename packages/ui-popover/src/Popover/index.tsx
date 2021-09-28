@@ -237,7 +237,9 @@ class Popover extends Component<PopoverProps> {
     if (
       this.props.offsetX !== prevProps.offsetX ||
       this.props.offsetY !== prevProps.offsetY ||
-      this.props.placement !== prevProps.placement
+      this.props.placement !== prevProps.placement ||
+      this.props.shouldAlignArrow !== prevProps.shouldAlignArrow ||
+      this.props.withArrow !== prevProps.withArrow
     ) {
       this.setState({
         ...this.computeOffsets(this.placement)
@@ -256,7 +258,7 @@ class Popover extends Component<PopoverProps> {
       // arrowSize and arrowBorderWidth are component theme variables
       // declared in ContextView's styles.js
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_view' does not exist on type 'Popover'.
-      const { arrowSize, arrowBorderWidth } = this._view.props.styles
+      const { arrowSize = 0, arrowBorderWidth = 0 } = this._view.props.styles
 
       const offsetAmount = (px(arrowSize) + px(arrowBorderWidth)) * 2
 
