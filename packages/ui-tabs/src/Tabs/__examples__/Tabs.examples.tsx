@@ -31,14 +31,30 @@ const contentLong =
 
 export default {
   propValues: {
-    dir: ['ltr']
+    dir: ['ltr'],
+    minHeight: [undefined, 400],
+    fixHeight: [undefined, 200],
+    maxHeight: [undefined, 200],
+    maxWidth: [undefined, 200]
   },
   sectionProp: 'variant',
-  excludeProps: ['focus'],
+  excludeProps: [
+    // TODO: textAlign doesn't seem to do anything when passed on Tabs
+    'textAlign'
+  ],
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
-    if (props.tabOverflow === 'scroll' && props.variant === 'secondary')
+    if (props.tabOverflow === 'scroll' && props.variant === 'secondary') {
       return true
+    }
+
+    if (
+      props.shouldFocusOnRender &&
+      (props.maxWidth || props.maxHeight || props.fixHeight || props.minHeight)
+    ) {
+      return true
+    }
+
     return false
   },
   // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
