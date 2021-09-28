@@ -29,6 +29,7 @@ const path = require('path')
 module.exports = function getPackages() {
   // This Prolog black magic was made by a Yarn developer:
   // yarn constraints query "workspace(Cwd), \+ workspace_field(Cwd, 'private', true), workspace_ident(Cwd, Ident)" --json
+  // it will list add the public workspaces
   const result = runCommandSync(
     'yarn',
     [

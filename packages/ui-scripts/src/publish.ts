@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { getPackageJSON, getPackages } from '@instructure/pkg-utils'
 import {
   error,
@@ -30,8 +31,13 @@ import {
 } from '@instructure/command-utils'
 
 import { getConfig } from './utils/config'
-import { checkWorkingDirectory, isReleaseCommit, setupGit } from './utils/git'
-import { publishPackages, createNPMRCFile } from './utils/npm'
+import {
+  checkWorkingDirectory,
+  isReleaseCommit,
+  setupGit,
+  resetToCommit
+} from './utils/git'
+import { createNPMRCFile, bumpPackages } from './utils/npm'
 
 try {
   const pkgJSON = getPackageJSON(undefined)
@@ -68,67 +74,67 @@ async function publish({
   createNPMRCFile(config)
 
   checkWorkingDirectory()
-
-  // lerna usually fails in releasing, but releasing snapshots is too complicated
-  // without it. Npm-cli figures out versions from the package.json so if we'd like to
+  // Npm-cli figures out versions from the package.json so if we'd like to
   // release a snapshot version, like: 8.3.5-snapshot.19, we'd need to set this exact version
   // to package.json and set it back to the current released version after the release.
-  // We use lerna for snapshot and native npm-cli commands for releases
-
   if (isRelease) {
     // If on legacy branch, and it is a release, its tag should say vx_maintenance
     const tag = isMaintenance
       ? `v${version.split('.')[0]}_maintenance`
       : 'latest'
-
     info(`📦  Version: ${version}, Tag: ${tag}`)
-
-    return Promise.all(
-      getPackages().map(async (pkg: any) => {
-        if (pkg.private) {
-          info(`${pkg.name} is private.`)
-        } else {
-          let packageInfo: { versions: string[] } = { versions: [] }
-
-          try {
-            const { stdout } = runCommandSync(
-              'npm',
-              ['info', pkg.name, '--json'],
-              [],
-              { stdio: 'pipe' }
-            )
-            packageInfo = JSON.parse(stdout)
-          } catch (e) {
-            error(e)
-          }
-
-          if (packageInfo.versions.includes(version)) {
-            info(`📦  v${version} of ${pkg.name} is already published!`)
-          } else {
-            try {
-              await runCommandAsync('npm', [
-                'publish',
-                pkg.location,
-                '--tag',
-                tag
-              ])
-              info(
-                `📦  Version ${version} of ${packageName} was successfully published!`
-              )
-            } catch (err) {
-              error(err)
-            }
-          }
-        }
-      })
-    )
+    await releaseAllPackagesToNpm(tag, version)
   } else {
     try {
-      info(`📦  Version: ${version}, Tag: snapshot`)
-      return await publishPackages(packageName, 'prerelease', 'snapshot')
+      info(`📦 SNAPSHOT release. Version: ${version}, Tag: snapshot`)
+      // bump package versions to x.y.[z+1]-snapshot.[#of commits since last tag]
+      await bumpPackages(packageName, true)
+      // call npm publish on every package
+      const pkgJSON = getPackageJSON(undefined)
+      await releaseAllPackagesToNpm('snapshot', pkgJSON.version)
+      // reset all changes with Git
+      resetToCommit()
     } catch (e) {
       error(e)
       process.exit(1)
     }
   }
+}
+
+function releaseAllPackagesToNpm(tag: string, version: string) {
+  return Promise.all(
+    getPackages().map(async (pkg: any) => {
+      if (pkg.private) {
+        info(`${pkg.name} is private.`)
+      } else {
+        let packageInfo: { versions: string[] } = { versions: [] }
+        try {
+          const { stdout } = runCommandSync(
+            'npm',
+            ['info', pkg.name, '--json'],
+            [],
+            { stdio: 'pipe' }
+          )
+          packageInfo = JSON.parse(stdout)
+        } catch (e) {
+          error(e)
+        }
+        if (packageInfo.versions.includes(version)) {
+          info(`📦  v${version} of ${pkg.name} is already published!`)
+        } else {
+          try {
+            await runCommandAsync('npm', [
+              'publish',
+              pkg.location,
+              '--tag',
+              tag
+            ])
+            info(`📦  Version ${version} was successfully published!`)
+          } catch (err) {
+            error(err)
+          }
+        }
+      }
+    })
+  )
 }

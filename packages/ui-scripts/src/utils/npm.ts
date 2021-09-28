@@ -32,7 +32,7 @@ import {
 } from '@instructure/command-utils'
 //@ts-expect-error FIXME: add typings
 import { Project } from '@lerna/project'
-
+/*
 export const publishPackages = async (
   packageName: string,
   releaseVersion: string,
@@ -79,7 +79,7 @@ export const publishPackages = async (
 
   return publishedVersion
 }
-
+*/
 const syncRootPackageVersion = async (useProjectVersion?: any) => {
   const project = new Project(process.cwd())
   const rootPkg = getPackage(undefined)
@@ -103,20 +103,26 @@ const syncRootPackageVersion = async (useProjectVersion?: any) => {
   return projectVersion
 }
 
-export async function bumpPackages(packageName: string) {
+export async function bumpPackages(packageName: string, isPrerelease: boolean) {
   info(`📦  Bumping ${packageName} packages and generating changelogs...`)
+  const args = [
+    'workspaces',
+    'foreach',
+    'exec',
+    'standard-version',
+    '--skip.tag',
+    '--skip.commit',
+    '--path', // only look for changes in the package's folder
+    '.'
+  ]
+  if (isPrerelease) {
+    // bump package versions to x.y.z+1-snapshot.[#of commits since last tag]
+    // it would be better to use Github actions build number
+    args.push('--prerelease', 'snapshot')
+  }
   let releaseVersion
   try {
-    await runCommandAsync('yarn', [
-      'workspaces',
-      'foreach',
-      'exec',
-      'standard-version',
-      '--skip.tag',
-      '--skip.commit', // TODO remove when it looks good
-      '--path', // only look for changes in the package's folder
-      '.'
-    ])
+    await runCommandAsync('yarn', args)
     releaseVersion = await syncRootPackageVersion(true)
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
   } catch (err) {
