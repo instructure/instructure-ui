@@ -21,65 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import fs from 'fs'
 import path from 'path'
-import { getPackage, getChangedPackages } from '@instructure/pkg-utils'
+import { getPackageJSON } from '@instructure/pkg-utils'
 import {
   runCommandAsync,
   runCommandSync,
   error,
   info
 } from '@instructure/command-utils'
-//@ts-expect-error FIXME: add typings
-import { Project } from '@lerna/project'
-/*
-export const publishPackages = async (
-  packageName: string,
-  releaseVersion: string,
-  preidAndTag: string
-) => {
-  const args =
-    releaseVersion === 'prerelease'
-      ? [
-          '--canary',
-          '--preid',
-          preidAndTag,
-          '--dist-tag',
-          preidAndTag,
-          '--exact',
-          '--include-merged-tags',
-          '--conventional-commits',
-          '--conventional-prerelease=*',
-          '--no-git-reset'
-        ]
-      : ['from-package', '--dist-tag', preidAndTag]
 
-  info(`📦  Publishing ${releaseVersion} of ${packageName}...`)
-
-  let publishedVersion
-  try {
-    runCommandSync('lerna', [
-      'publish',
-      ...args,
-      '--yes',
-      '--no-push',
-      '--no-git-tag-version',
-      '--force-publish=*'
-    ])
-
-    publishedVersion = await syncRootPackageVersion()
-
-    info(
-      `📦  ${publishedVersion} of ${packageName} was successfully published!`
-    )
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
-
-  return publishedVersion
-}
-*/
 export async function bumpPackages(packageName: string, isPrerelease: boolean) {
   info(`📦  Bumping ${packageName} packages and generating changelogs...`)
   const args = [
@@ -101,8 +53,8 @@ export async function bumpPackages(packageName: string, isPrerelease: boolean) {
   let releaseVersion
   try {
     await runCommandAsync('yarn', args)
-    const rootPkg = getPackage(undefined)
-    releaseVersion = rootPkg.get('version')
+    const rootPkg = getPackageJSON(undefined)
+    releaseVersion = rootPkg.version
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
   } catch (err) {
     error(err)
@@ -127,55 +79,4 @@ export function createNPMRCFile(config: any = {}) {
   } catch (e) {
     error(`Could not determine if NPM auth was successful: ${e}`)
   }
-}
-
-export async function updateCrossPackageDependencies(
-  packageName: string,
-  releaseVersion: string,
-  dependencyVersion: string
-) {
-  const changedPackages: any[] = getChangedPackages(undefined, undefined)
-  const changedPackageNames = changedPackages.map((pkg) => pkg.name)
-
-  info(
-    `📦  Updating cross-package dependencies for ${packageName} to ${dependencyVersion}...`
-  )
-  await Promise.all(
-    changedPackages.map((changedPackage) => {
-      const pkg = changedPackage.toJSON()
-      let packageChanged = false
-
-      const depCollections = [
-        'dependencies',
-        'devDependencies',
-        'optionalDependencies',
-        'peerDependencies'
-      ]
-
-      depCollections.forEach((depCollection) => {
-        if (!pkg[depCollection]) return
-
-        const newDependencies = Object.keys(pkg[depCollection])
-          .filter((dep) => {
-            return (
-              changedPackageNames.includes(dep) &&
-              pkg[depCollection][dep] === `^${releaseVersion}`
-            )
-          })
-          .reduce((obj, dep) => ({ ...obj, [dep]: dependencyVersion }), {})
-
-        if (Object.entries(newDependencies).length > 0) {
-          changedPackage.set(
-            depCollection,
-            Object.assign(pkg[depCollection], newDependencies)
-          )
-          packageChanged = true
-        }
-      })
-
-      if (packageChanged) {
-        return changedPackage.serialize()
-      }
-    })
-  )
 }
