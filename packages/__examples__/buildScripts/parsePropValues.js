@@ -70,7 +70,7 @@ module.exports = function parsePropValues(fileSource, fileName) {
       }
     )
     if (Array.isArray(parsedSrc)) {
-      parsedSrc = parsedSrc.pop()
+      parsedSrc = parsedSrc.shift()
     }
   } catch (error) {
     throw new Error(
