@@ -80,34 +80,12 @@ export const publishPackages = async (
   return publishedVersion
 }
 */
-const syncRootPackageVersion = async (useProjectVersion?: any) => {
-  const project = new Project(process.cwd())
-  const rootPkg = getPackage(undefined)
-
-  let projectVersion
-
-  if (project.isIndependent() || useProjectVersion) {
-    projectVersion = project.version
-  } else {
-    // unfortunately lerna doesn't update lerna.json for canary releases,
-    // so we have to do this:
-    const pkgs = getChangedPackages(undefined, undefined)
-    projectVersion = pkgs[0].get('version')
-  }
-
-  if (projectVersion !== rootPkg.get('version')) {
-    rootPkg.set('version', projectVersion)
-    await rootPkg.serialize()
-  }
-
-  return projectVersion
-}
-
 export async function bumpPackages(packageName: string, isPrerelease: boolean) {
   info(`📦  Bumping ${packageName} packages and generating changelogs...`)
   const args = [
     'workspaces',
     'foreach',
+    '--verbose',
     'exec',
     'standard-version',
     '--skip.tag',
@@ -123,7 +101,8 @@ export async function bumpPackages(packageName: string, isPrerelease: boolean) {
   let releaseVersion
   try {
     await runCommandAsync('yarn', args)
-    releaseVersion = await syncRootPackageVersion(true)
+    const rootPkg = getPackage(undefined)
+    releaseVersion = rootPkg.get('version')
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
   } catch (err) {
     error(err)
