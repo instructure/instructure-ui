@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.10.0](https://github.com/instructure/instructure-ui/compare/v8.9.1...v8.10.0) (2021-09-28)
+
+### Bug Fixes
+
+- **emotion,ui-i18n:** decorator adds allowedProps property ([ddc7880](https://github.com/instructure/instructure-ui/commit/ddc7880d5a2f7d4d0596332e8d49cb9b1de68024))
+- **ui-dom-utils:** remove el.contentWindow.document from getFrameDocumentSafe ([bf1e82e](https://github.com/instructure/instructure-ui/commit/bf1e82efccb682510708448efd369eddaa24f74b))
+- **ui-tabs:** Fix small typo in ui-tabs readme ([6a2a770](https://github.com/instructure/instructure-ui/commit/6a2a7703791c742cbc3ea00dc66ccec21f2810d6))
+
+### Features
+
+- **ui-tabs:** add 'fixHeight' prop to Tabs ([b63e6e7](https://github.com/instructure/instructure-ui/commit/b63e6e71705efa7880195ea1e40b3eac67db06b9))
+
 ## [8.9.1](https://github.com/instructure/instructure-ui/compare/v8.9.0...v8.9.1) (2021-09-16)
 
 ### Bug Fixes

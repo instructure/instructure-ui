@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.10.0](https://github.com/instructure/instructure-ui/compare/v8.9.1...v8.10.0) (2021-09-28)
+
+### Features
+
+- **ui-tabs:** add 'fixHeight' prop to Tabs ([b63e6e7](https://github.com/instructure/instructure-ui/commit/b63e6e71705efa7880195ea1e40b3eac67db06b9))
+
 ## [8.9.1](https://github.com/instructure/instructure-ui/compare/v8.9.0...v8.9.1) (2021-09-16)
 
 **Note:** Version bump only for package @instructure/instui-config

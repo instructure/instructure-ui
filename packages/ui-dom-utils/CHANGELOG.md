@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.10.0](https://github.com/instructure/instructure-ui/compare/v8.9.1...v8.10.0) (2021-09-28)
+
+### Bug Fixes
+
+- **ui-dom-utils:** remove el.contentWindow.document from getFrameDocumentSafe ([bf1e82e](https://github.com/instructure/instructure-ui/commit/bf1e82efccb682510708448efd369eddaa24f74b))
+
 ## [8.9.1](https://github.com/instructure/instructure-ui/compare/v8.9.0...v8.9.1) (2021-09-16)
 
 **Note:** Version bump only for package @instructure/ui-dom-utils
