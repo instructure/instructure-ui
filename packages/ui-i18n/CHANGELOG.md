@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.10.0](https://github.com/instructure/instructure-ui/compare/v8.9.1...v8.10.0) (2021-09-28)
+
+### Bug Fixes
+
+- **emotion,ui-i18n:** decorator adds allowedProps property ([ddc7880](https://github.com/instructure/instructure-ui/commit/ddc7880d5a2f7d4d0596332e8d49cb9b1de68024))
+
 ## [8.9.1](https://github.com/instructure/instructure-ui/compare/v8.9.0...v8.9.1) (2021-09-16)
 
 **Note:** Version bump only for package @instructure/ui-i18n
