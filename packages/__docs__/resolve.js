@@ -149,6 +149,7 @@ module.exports = {
     '@instructure/ui-table$': path.resolve(__dirname, '../ui-table/src/'),
     '@instructure/ui-tabs$': path.resolve(__dirname, '../ui-tabs/src/'),
     '@instructure/ui-tag$': path.resolve(__dirname, '../ui-tag/src/'),
+    '@instructure/ui-testable$': path.resolve(__dirname, '../ui-testable/src/'),
     '@instructure/ui-text$': path.resolve(__dirname, '../ui-text/src/'),
     '@instructure/ui-time-select$': path.resolve(
       __dirname,
