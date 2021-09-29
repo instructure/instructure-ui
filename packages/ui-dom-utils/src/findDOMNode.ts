@@ -74,10 +74,16 @@ function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
       }
       return refElement
     } else {
-      console.warn(
-        'Warning: ReactDOM.findDOMNode is deprecated in Strict mode, consider using refs instead.\n See more here: https://instructure.design/#focus-management'
+      const elName = (reactNode as any).constructor.componentId
+        ? (reactNode as any).constructor.componentId
+        : (reactNode as any).constructor.name
+      // eslint-disable-next-line no-console
+      console.log(
+        'Warning: ReactDOM.findDOMNode is deprecated in Strict mode, consider using refs instead.' +
+          '\nElement: ' +
+          elName +
+          '\nSee more here: https://en.reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage'
       )
-
       return ReactDOM.findDOMNode(node as ReactInstance)!
     }
   }

@@ -90,6 +90,7 @@
     "@instructure/ui-table": "8.10.1",
     "@instructure/ui-tabs": "8.10.1",
     "@instructure/ui-tag": "8.10.1",
+    "@instructure/ui-testable": "8.10.1",
     "@instructure/ui-text": "8.10.1",
     "@instructure/ui-text-area": "8.10.1",
     "@instructure/ui-text-input": "8.10.1",
