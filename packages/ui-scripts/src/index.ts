@@ -90,8 +90,6 @@ if (process.argv.includes('create-component')) {
   require('./commit')
 } else if (process.argv.includes('--generate-package-list')) {
   require('./generate-package-list')
-} else if (process.argv.includes('--link-packages')) {
-  require('./link-packages')
 } else if (process.argv.includes('--lint-commit')) {
   require('./lint-commit')
 } else if (process.argv.includes('--lint')) {

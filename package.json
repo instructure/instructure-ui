@@ -51,7 +51,6 @@
     "clean-modules": "yarn cache clean --all",
     "export-icons": "yarn workspace @instructure/ui-icons run export",
     "bump": "ui-scripts --bump",
-    "link-packages": "ui-scripts --link-packages",
     "release": "ui-scripts --publish",
     "dev-examples": "yarn workspace docs-examples run start-watch",
     "prestart-examples": "yarn bootstrap",
