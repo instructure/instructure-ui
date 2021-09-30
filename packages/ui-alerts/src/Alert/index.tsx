@@ -90,6 +90,12 @@ class Alert extends Component<AlertProps> {
     warning: IconWarningBorderlessSolid
   }
 
+  ref: HTMLElement | null = null
+
+  handleRef = (el: HTMLElement | null) => {
+    this.ref = el
+  }
+
   handleTimeout = () => {
     // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     if (this.props.timeout > 0) {
@@ -294,6 +300,7 @@ class Alert extends Component<AlertProps> {
         margin={this.props.margin}
         css={this.props.styles?.alert}
         onKeyUp={this.handleKeyUp}
+        elementRef={this.handleRef}
       >
         {this.renderIcon()}
         <div css={this.props.styles?.content}>{this.props.children}</div>

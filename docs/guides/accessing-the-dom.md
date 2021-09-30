@@ -6,8 +6,11 @@ order: 5
 
 ## Accessing the DOM
 
-Accessing the DOM directly in React is discouraged, because it pierces the DOM abstraction. Still there are some cases when InstUI is required to do so (for example for focus management or positioning), this happens with the [findDOMNode](#findDOMNode) utility function.
-For custom React components this method first tries to access a `ref` property; if this does not exist, it will use React's deprecated [`findDOMNode` utility](https://reactjs.org/docs/react-dom.html#finddomnode). This will result in warnings about its usage on the console, to get rid of them please add a `ref` property that returns the underlying DOM node:
+Accessing the DOM directly in React is discouraged, because it pierces the DOM abstraction. Still there are some cases when InstUI is required to do so (for example for focus management or positioning). This happens with the [findDOMNode](#findDOMNode) utility function.
+
+For custom React components this method first tries to access a `ref` property. If this does not exist, it will use React's deprecated [`findDOMNode` utility](https://reactjs.org/docs/react-dom.html#finddomnode) as a fallback. This will result in warnings about its usage on the console. (Read more about this [here](https://en.reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage).)
+
+To get rid of this warning, please add a `ref` property to the component that returns the underlying DOM node:
 
 ```javascript
 class MyComponent extends React.Component {
@@ -16,12 +19,12 @@ class MyComponent extends React.Component {
     this.ref = React.createRef()
   }
   render() {
-    return <div ref={this.ref} />
+    return <div ref={this.ref}>Content</div>
   }
 }
 ```
 
-Example usage on how you should do it:
+Good Usage Example with `ref`:
 
 ```js
 ---
@@ -29,21 +32,25 @@ render: false
 example: true
 ---
 
-class MyComponent extends React.Component {
+class GoodComponent extends React.Component {
   constructor(props) {
     super(props)
     this.ref = React.createRef()
   }
   render() {
-    return (<div ref={this.ref}>Position target</div>)
+    return (<span ref={this.ref}>Good Position target component</span>)
   }
 }
 
 const Example = () => {
   return (
     <View as="div" padding={'large'}>
-      <Position renderTarget={<MyComponent />}>
-        <span>Some other text</span>
+      <Position
+        renderTarget={<GoodComponent />}
+        placement='end center'
+        offsetX='20px'
+      >
+        <span style={{ padding: '8px', background: 'white' }}>Positioned content</span>
       </Position>
     </View>
   )
@@ -52,7 +59,7 @@ const Example = () => {
 render(<Example />)
 ```
 
-Bad usage that will result in InstUI calling `React.findDOMNode()` and warnings:
+Bad Usage Example without `ref`, that will result in InstUI calling `ReactDOM.findDOMNode()` and throw warnings:
 
 ```js
 ---
@@ -64,15 +71,19 @@ class BadComponent extends React.Component {
     super(props)
   }
   render() {
-    return (<div>not good, no ref()</div>)
+    return (<span>Bad Position target component</span>)
   }
 }
 
 const Example = () => {
   return (
     <View as="div" padding={'large'}>
-      <Position renderTarget={<BadComponent />}>
-        <span>Some other text</span>
+      <Position
+        renderTarget={<BadComponent />}
+        placement='end center'
+        offsetX='20px'
+      >
+        <span style={{ padding: '8px', background: 'white' }}>Positioned content</span>
       </Position>
     </View>
   )

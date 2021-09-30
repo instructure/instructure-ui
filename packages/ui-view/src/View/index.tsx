@@ -173,6 +173,7 @@ class View extends Component<ViewProps & OtherHTMLAttributes<ViewProps>> {
   }
 
   ref: HTMLElement | null = null
+
   handleElementRef = (el: HTMLElement | null) => {
     if (typeof this.props.elementRef === 'function') {
       this.props.elementRef(el)
@@ -180,6 +181,7 @@ class View extends Component<ViewProps & OtherHTMLAttributes<ViewProps>> {
     this.ref = el
     this._element = el
   }
+
   render() {
     const {
       children,

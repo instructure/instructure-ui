@@ -50,12 +50,23 @@ class AccessibleContent extends Component<
     children: null
   } as const
 
+  ref: HTMLElement | null = null
+
+  handleRef = (el: HTMLElement | null) => {
+    this.ref = el
+  }
+
   render() {
     const { alt, children, ...props } = this.props
     const ElementType = getElementType(AccessibleContent, this.props)
 
     return (
-      <ElementType {...passthroughProps(props)}>
+      // @ts-expect-error TODO: AsElementType is not compatible for ref
+      <ElementType
+        // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
+        {...passthroughProps(props as AccessibleContentProps)}
+        ref={this.handleRef}
+      >
         <ScreenReaderContent>{alt}</ScreenReaderContent>
         <PresentationContent>{children}</PresentationContent>
       </ElementType>
