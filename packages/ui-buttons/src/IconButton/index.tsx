@@ -68,6 +68,13 @@ class IconButton extends Component<IconButtonProps> {
 
   _baseButton = null
 
+  ref: HTMLElement | null = null
+
+  handleRef = (el: HTMLElement | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   get focused() {
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     return this._baseButton && this._baseButton.focused
@@ -106,7 +113,7 @@ class IconButton extends Component<IconButtonProps> {
         {...passthroughProps(props)}
         type={type}
         size={size}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         as={as}
         interaction={interaction}
         color={color}

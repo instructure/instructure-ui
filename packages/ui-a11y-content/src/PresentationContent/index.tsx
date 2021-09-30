@@ -47,12 +47,23 @@ class PresentationContent extends Component<
     children: null
   } as const
 
+  ref: HTMLElement | null = null
+
+  handleRef = (el: HTMLElement | null) => {
+    this.ref = el
+  }
+
   render() {
     const { children, ...props } = this.props
     const ElementType = getElementType(PresentationContent, this.props)
 
     return (
-      <ElementType {...passthroughProps(props)} aria-hidden="true">
+      // @ts-expect-error TODO: AsElementType is not compatible for ref
+      <ElementType
+        {...passthroughProps(props)}
+        aria-hidden="true"
+        ref={this.handleRef}
+      >
         {children}
       </ElementType>
     )
