@@ -50,6 +50,12 @@ class MenuItemSeparator extends Component<MenuSeparatorProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -67,6 +73,7 @@ class MenuItemSeparator extends Component<MenuSeparatorProps> {
         {...props}
         role="presentation"
         css={this.props.styles?.menuItemSeparator}
+        ref={this.handleRef}
       />
     )
   }

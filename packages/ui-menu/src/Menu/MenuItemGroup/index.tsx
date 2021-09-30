@@ -83,6 +83,12 @@ class MenuItemGroup extends Component<MenuGroupProps> {
     this._labelId = uid('MenuItemGroup')
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -238,6 +244,7 @@ class MenuItemGroup extends Component<MenuGroupProps> {
         {...props}
         css={this.props.styles?.menuItemGroup}
         role="presentation"
+        ref={this.handleRef}
       >
         {/* @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'MenuIt... Remove this comment to see the full error message */}
         <span id={this._labelId}>{this.renderLabel()}</span>

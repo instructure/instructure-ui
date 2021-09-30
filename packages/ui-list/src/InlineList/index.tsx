@@ -54,6 +54,13 @@ class InlineList extends Component<InlineListProps> {
 
   static Item = InlineListItem
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   renderChildren() {
     return Children.map(this.props.children, (child) => {
       if (!child) return // ignore null, falsy children
@@ -75,7 +82,7 @@ class InlineList extends Component<InlineListProps> {
         as={as}
         margin={margin}
         padding="0"
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         display="block"
       >
         {this.renderChildren()}
