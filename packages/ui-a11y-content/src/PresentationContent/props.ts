@@ -34,6 +34,7 @@ type PresentationContentOwnProps = {
   as: AsElementType
 
   children?: React.ReactNode
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof PresentationContentOwnProps
@@ -44,10 +45,11 @@ type PresentationContentProps = PresentationContentOwnProps
 
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
-  children: PropTypes.node
+  children: PropTypes.node,
+  elementRef: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = ['as', 'children']
+const allowedProps: AllowedPropKeys = ['as', 'children', 'elementRef']
 
 export type { PresentationContentProps }
 export { propTypes, allowedProps }

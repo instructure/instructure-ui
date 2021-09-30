@@ -53,6 +53,8 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
     buttonRef: (el) => {}
   }
 
+  ref: Element | null = null
+
   render() {
     const { label, direction, buttonRef, ...props } = this.props
     const Icon =
@@ -60,7 +62,15 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
     return (
       <Tooltip
         on={['hover', 'focus']}
-        renderTip={<PresentationContent>{label}</PresentationContent>}
+        renderTip={
+          <PresentationContent
+            elementRef={(element) => {
+              this.ref = element
+            }}
+          >
+            {label}
+          </PresentationContent>
+        }
       >
         <IconButton
           {...props}

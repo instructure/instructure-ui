@@ -64,12 +64,19 @@ class ProgressBar extends Component<ProgressBarProps> {
       valueNow / valueMax >= 1 ? 'success' : 'brand'
   }
 
+  ref: Element | null = null
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+  }
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
   }
 
   render() {
@@ -103,7 +110,7 @@ class ProgressBar extends Component<ProgressBarProps> {
         as={this.props.as}
         css={styles?.progressBar}
         margin={this.props.margin}
-        elementRef={this.props.elementRef}
+        elementRef={this.handleRef}
       >
         <span css={styles?.trackLayout}>
           {/* creates bottom border effect - <progress /> hard to style x-browser */}

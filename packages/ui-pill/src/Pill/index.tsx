@@ -58,6 +58,8 @@ class Pill extends Component<PillProps, PillState> {
     color: 'primary'
   }
 
+  ref: Element | null = null
+
   constructor(props: PillProps) {
     super(props)
 
@@ -80,6 +82,11 @@ class Pill extends Component<PillProps, PillState> {
         truncated: truncated
       })
     }
+  }
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
   }
 
   renderPill(
@@ -108,7 +115,7 @@ class Pill extends Component<PillProps, PillState> {
       <View
         {...containerProps}
         as={as}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         margin={margin}
         padding="0"
         maxWidth={styles?.maxWidth as string}

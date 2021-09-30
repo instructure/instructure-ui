@@ -66,12 +66,19 @@ class Item extends Component<AppNavItemProps> {
     isDisabled: false
   }
 
+  ref: Element | null = null
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+  }
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.

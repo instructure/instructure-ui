@@ -59,6 +59,8 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
     children: null
   }
 
+  ref: Element | null = null
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
@@ -144,6 +146,9 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
     return (
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormFieldGroup
+        elementRef={(el) => {
+          this.ref = el
+        }}
         {...omitProps(this.props, RadioInputGroup.allowedProps)}
         {...pickProps(this.props, FormFieldGroup.allowedProps)}
         // TODO: split out toggle variant into its own component

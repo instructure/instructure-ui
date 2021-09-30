@@ -62,6 +62,8 @@ class Item extends Component<OptionsItemProps> {
     children: null
   } as const
 
+  ref: Element | null = null
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -104,7 +106,14 @@ class Item extends Component<OptionsItemProps> {
     const passthroughProps = omitProps(this.props, Item.allowedProps)
 
     return (
-      <ElementType role="none" css={styles?.item}>
+      <ElementType
+        role="none"
+        css={styles?.item}
+        // @ts-expect-error TODO fix produces an union that is too complex to represent
+        ref={(element: unknown) => {
+          this.ref = element
+        }}
+      >
         <span {...passthroughProps} css={styles?.container} role={role}>
           {children}
         </span>

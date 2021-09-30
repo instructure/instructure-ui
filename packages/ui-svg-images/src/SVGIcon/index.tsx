@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, ReactInstance } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 
@@ -54,6 +54,8 @@ class SVGIcon extends Component<SVGIconProps> {
     bidirectional: false
   }
 
+  ref: ReactInstance | null = null
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -83,6 +85,9 @@ class SVGIcon extends Component<SVGIconProps> {
         rotate={rotate}
         css={styles?.svgIcon}
         className={className}
+        ref={(element) => {
+          this.ref = element
+        }}
       />
     )
   }

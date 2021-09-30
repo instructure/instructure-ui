@@ -65,6 +65,8 @@ class Navigation extends Component<NavigationProps, NavigationState> {
 
   static Item = NavigationItem
 
+  ref: Element | null = null
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
@@ -127,7 +129,14 @@ class Navigation extends Component<NavigationProps, NavigationState> {
     const props = omitProps(this.props, Navigation.allowedProps, ['minimized'])
 
     return (
-      <nav {...props} css={this.props.styles?.navigation} aria-label={label}>
+      <nav
+        {...props}
+        css={this.props.styles?.navigation}
+        aria-label={label}
+        ref={(element) => {
+          this.ref = element
+        }}
+      >
         <ul css={this.props.styles?.content}>{this.renderChildren()}</ul>
         <div css={this.props.styles?.toggle}>
           <NavigationItem

@@ -83,6 +83,8 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     children: null
   }
 
+  ref: Element | null = null
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
@@ -214,7 +216,8 @@ class SimpleSelect extends Component<SimpleSelectProps> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleRef = (node) => {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_select' does not exist on type 'SimpleS... Remove this comment to see the full error message
-    this._select = node
+    this._select = node // TODO remove this in v9 and keep only "ref"
+    this.ref = node
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.

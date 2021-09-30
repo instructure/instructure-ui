@@ -71,6 +71,7 @@ class ProgressCircle extends Component<
   }
 
   _timeouts = []
+  ref: Element | null = null
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
@@ -79,6 +80,11 @@ class ProgressCircle extends Component<
     this.state = {
       shouldAnimateOnMount: props.shouldAnimateOnMount
     }
+  }
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
   }
 
   get makeStylesVariables() {
@@ -143,7 +149,7 @@ class ProgressCircle extends Component<
       <View
         {...passthroughProps(props)}
         as={this.props.as}
-        elementRef={this.props.elementRef}
+        elementRef={this.handleRef}
         css={styles?.progressCircle}
         margin={this.props.margin}
       >

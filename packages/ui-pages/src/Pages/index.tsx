@@ -66,6 +66,7 @@ class Pages extends Component<PagesProps> {
   static Page = Page
 
   _timeouts = []
+  ref: Element | null = null
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
@@ -192,7 +193,8 @@ class Pages extends Component<PagesProps> {
           role="region"
           elementRef={(el) => {
             // @ts-expect-error ts-migrate(2339) FIXME: Property '_contentElement' does not exist on type ... Remove this comment to see the full error message
-            this._contentElement = el
+            this._contentElement = el // TODO remove with v9 and keep ref
+            this.ref = el
           }}
         >
           {this.activePage}

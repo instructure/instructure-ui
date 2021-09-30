@@ -48,6 +48,8 @@ class PaginationButton extends Component<PaginationPageProps> {
     current: false
   }
 
+  ref: Element | null = null
+
   render() {
     const exclude = this.props.current ? ['onClick', 'href'] : []
     const props = omitProps(this.props, PaginationButton.allowedProps, exclude)
@@ -58,6 +60,9 @@ class PaginationButton extends Component<PaginationPageProps> {
         withBorder={this.props.current ? true : false}
         {...props}
         aria-current={this.props.current ? 'page' : null}
+        elementRef={(element) => {
+          this.ref = element
+        }}
       >
         {this.props.children}
       </BaseButton>
