@@ -46,6 +46,7 @@ type DialogOwnProps = {
   shouldCloseOnDocumentClick?: boolean
   shouldCloseOnEscape?: boolean
   shouldFocusOnOpen?: boolean
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof DialogOwnProps
@@ -108,7 +109,8 @@ const propTypes: PropValidators<PropKeys> = {
   shouldReturnFocus: PropTypes.bool,
   shouldCloseOnDocumentClick: PropTypes.bool,
   shouldCloseOnEscape: PropTypes.bool,
-  shouldFocusOnOpen: PropTypes.bool
+  shouldFocusOnOpen: PropTypes.bool,
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -126,7 +128,8 @@ const allowedProps: AllowedPropKeys = [
   'shouldReturnFocus',
   'shouldCloseOnDocumentClick',
   'shouldCloseOnEscape',
-  'shouldFocusOnOpen'
+  'shouldFocusOnOpen',
+  'elementRef'
 ]
 
 export type { DialogProps }

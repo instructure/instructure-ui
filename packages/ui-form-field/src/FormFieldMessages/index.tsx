@@ -63,6 +63,12 @@ class FormFieldMessages extends Component<FormFieldMessagesProps> {
   static allowedProps = allowedProps
   static defaultProps = {}
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -81,6 +87,7 @@ class FormFieldMessages extends Component<FormFieldMessagesProps> {
       <span
         css={styles?.formFieldMessages}
         {...omitProps(this.props, FormFieldMessages.allowedProps)}
+        ref={this.handleRef}
       >
         {messages.map((msg, i) => {
           return (

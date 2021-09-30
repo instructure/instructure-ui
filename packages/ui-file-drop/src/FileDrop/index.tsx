@@ -134,6 +134,12 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   fileInputEl = null
   defaultId = null
 
+  ref: Element | null = null
+
+  handleElementRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   get functionallyDisabled() {
     return this.interaction === 'disabled' || this.interaction === 'readonly'
   }
@@ -372,6 +378,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
         maxWidth={maxWidth}
         margin={margin}
         height={height}
+        elementRef={this.handleElementRef}
       >
         <label
           css={(this.props as any).styles.fileDropLabel}

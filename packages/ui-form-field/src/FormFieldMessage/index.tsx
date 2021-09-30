@@ -61,6 +61,12 @@ class FormFieldMessage extends Component<FormFieldMessageProps> {
     children: null
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -76,9 +82,13 @@ class FormFieldMessage extends Component<FormFieldMessageProps> {
     const { children, styles } = this.props
 
     return this.props.variant !== 'screenreader-only' ? (
-      <span css={styles?.formFieldMessage}>{children}</span>
+      <span css={styles?.formFieldMessage} ref={this.handleRef}>
+        {children}
+      </span>
     ) : (
-      <ScreenReaderContent>{children}</ScreenReaderContent>
+      <ScreenReaderContent elementRef={this.handleRef}>
+        {children}
+      </ScreenReaderContent>
     )
   }
 }

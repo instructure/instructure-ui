@@ -55,6 +55,13 @@ class Heading extends Component<HeadingProps> {
     level: 'h2'
   } as const
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -90,7 +97,7 @@ class Heading extends Component<HeadingProps> {
         {...passthroughProps(props)}
         css={this.props.styles?.heading}
         as={ElementType}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         margin={margin}
       >
         {children}

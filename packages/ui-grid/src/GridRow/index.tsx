@@ -59,6 +59,12 @@ class GridRow extends Component<GridRowProps> {
     isLastRow: false
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -94,7 +100,7 @@ class GridRow extends Component<GridRowProps> {
     const props = omitProps(restProps, GridRow.allowedProps)
 
     return (
-      <span {...props} css={styles?.gridRow}>
+      <span {...props} css={styles?.gridRow} ref={this.handleRef}>
         {this.renderChildren()}
       </span>
     )

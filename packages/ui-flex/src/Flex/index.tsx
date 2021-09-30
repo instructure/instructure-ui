@@ -79,6 +79,13 @@ class Flex extends Component<FlexProps> {
     wrap: 'no-wrap'
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   renderChildren(children: any) {
     return Children.map(children, (child) => {
       if (!child) {
@@ -99,7 +106,6 @@ class Flex extends Component<FlexProps> {
   render() {
     const {
       as,
-      elementRef,
       withVisualDebug,
       height,
       display,
@@ -117,7 +123,7 @@ class Flex extends Component<FlexProps> {
         <View
           {...passthroughProps(this.props)}
           css={styles?.flex}
-          elementRef={elementRef}
+          elementRef={this.handleRef}
           as={as}
           display={display}
           width={width}

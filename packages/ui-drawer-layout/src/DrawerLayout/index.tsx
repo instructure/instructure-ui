@@ -86,6 +86,12 @@ class DrawerLayout extends Component<DrawerLayoutProps> {
 
   _content = null
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -323,9 +329,15 @@ class DrawerLayout extends Component<DrawerLayoutProps> {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'DrawerLayou... Remove this comment to see the full error message
     const props = { [DrawerLayout.locatorAttribute]: this._id }
     return (
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldOverlayTray' does not exist on typ... Remove this comment to see the full error message
-      <DrawerLayoutContext.Provider value={this.state.shouldOverlayTray}>
-        <div {...props} css={this.props.styles?.drawerLayout}>
+      <DrawerLayoutContext.Provider
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldOverlayTray' does not exist on typ... Remove this comment to see the full error message
+        value={this.state.shouldOverlayTray}
+      >
+        <div
+          {...props}
+          css={this.props.styles?.drawerLayout}
+          ref={this.handleRef}
+        >
           {this.renderChildren()}
         </div>
       </DrawerLayoutContext.Provider>

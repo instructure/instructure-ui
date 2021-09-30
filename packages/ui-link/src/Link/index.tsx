@@ -67,6 +67,9 @@ class Link extends Component<LinkProps> {
 
   state = { hasFocus: false }
 
+  _link: Element | null = null
+  ref: Element | null = null
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStyleProps())
@@ -89,8 +92,9 @@ class Link extends Component<LinkProps> {
   handleElementRef = (el) => {
     const { elementRef } = this.props
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_link' does not exist on type 'Link'.
+    // TODO: deprecate _link? ref should be enough
     this._link = el
+    this.ref = el
     if (typeof elementRef === 'function') elementRef(el)
   }
 
@@ -164,12 +168,10 @@ class Link extends Component<LinkProps> {
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_link' does not exist on type 'Link'.
     return isActiveElement(this._link)
   }
 
   get focusable() {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1.
     return findFocusable(this._link)
   }
 

@@ -94,6 +94,8 @@ class DrawerTray extends Component<
   }
 
   _DOMNode?: PortalNode = null
+  ref: Element | null = null
+  _content: Element | null = null
 
   componentDidMount() {
     ;(this.props as any).makeStyles(this.makeStyleProps())
@@ -131,12 +133,11 @@ class DrawerTray extends Component<
     return `slide-${this.direction}`
   }
 
-  handleContentRef = (node: any) => {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_content' does not exist on type 'Drawer... Remove this comment to see the full error message
+  handleContentRef = (node: Element | null) => {
+    this.ref = node
+    // TODO: deprecate _content? ref should be enough
     this._content = node
-    if (typeof (this.props as any).contentRef === 'function') {
-      ;(this.props as any).contentRef(node)
-    }
+    this.props.contentRef?.(node)
   }
 
   handleTransitionEntered = () => {

@@ -66,6 +66,9 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
   _timeouts: ReturnType<typeof setTimeout>[] = []
   _raf: RequestAnimationFrameType[] = []
   _focusRegion = null
+  ref: Element | null = null
+  _root: Element | null = null
+
   componentDidMount() {
     if (this.props.open) {
       this.open()
@@ -152,17 +155,17 @@ class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
     this.close()
   }
 
-  //@ts-expect-error TODO:
-  getRef = (el) => {
-    //@ts-expect-error TODO:
+  getRef = (el: Element | null) => {
+    // TODO: deprecate _root? ref should be enough
     this._root = el
+    this.ref = el
+    this.props.elementRef?.(el)
   }
 
   get contentElement() {
     let contentElement = findDOMNode(this.props.contentElement)
 
     if (!contentElement) {
-      //@ts-expect-error TODO:
       contentElement = findDOMNode(this._root)
     }
 
