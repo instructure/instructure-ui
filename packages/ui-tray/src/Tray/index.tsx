@@ -88,6 +88,7 @@ class Tray extends Component<TrayProps> {
     transitioning: false
   }
 
+  ref: Element | null = null
   _DOMNode: PortalNode = null
 
   componentDidMount() {
@@ -140,7 +141,8 @@ class Tray extends Component<TrayProps> {
   }
 
   set DOMNode(el) {
-    this._DOMNode = el
+    this._DOMNode = el // TODO remove this in v9 and keep this.ref
+    this.ref = el ? el : null
   }
 
   handlePortalOpen = (DOMNode: PortalNode) => {

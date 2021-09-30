@@ -139,7 +139,8 @@ class Tooltip extends Component<TooltipProps> {
       styles,
       ...rest
     } = this.props
-
+    // TODO figure out how to add a ref to this
+    const TooltipContent = callRenderProp(renderTip)
     return (
       <Popover
         {...passthroughProps(rest)}
@@ -163,7 +164,7 @@ class Tooltip extends Component<TooltipProps> {
         onBlur={this.handleBlur}
       >
         <span id={this._id} css={styles?.tooltip} role="tooltip">
-          {callRenderProp(renderTip)}
+          <TooltipContent />
         </span>
       </Popover>
     )

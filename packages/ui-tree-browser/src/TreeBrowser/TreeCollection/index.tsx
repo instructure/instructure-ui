@@ -82,6 +82,7 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
     isCollectionFlattened: false,
     renderContent: undefined
   }
+  ref: Element | null = null
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
@@ -392,6 +393,9 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
       this.renderChildren()
     ) : (
       <li
+        ref={(el) => {
+          this.ref = el
+        }}
         css={styles?.treeCollection}
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
         tabIndex="-1"
