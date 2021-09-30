@@ -55,6 +55,13 @@ class Img extends Component<ImgProps> {
     withBlur: false
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -97,7 +104,7 @@ class Img extends Component<ImgProps> {
       height,
       margin,
       display,
-      elementRef
+      elementRef: this.handleRef
     }
 
     if (overlay) {

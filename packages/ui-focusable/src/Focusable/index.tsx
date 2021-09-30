@@ -226,8 +226,9 @@ class Focusable extends Component<FocusableProps> {
   }
 
   ref = createRef()
+
   attachRef = (el: Element) => {
-    //@ts-expect-error this is needed for backwards compatibily reasons
+    // @ts-expect-error this is needed for backwards compatibily reasons
     this.ref.current = el
   }
 

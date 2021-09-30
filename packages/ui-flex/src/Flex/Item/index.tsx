@@ -64,12 +64,18 @@ class Item extends Component<FlexItemProps> {
     shouldShrink: false
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   render() {
     const props = omitProps(this.props, Item.allowedProps)
 
     const {
       as,
-      elementRef,
       children,
       withVisualDebug,
       textAlign,
@@ -89,7 +95,7 @@ class Item extends Component<FlexItemProps> {
       <View
         {...props}
         css={styles?.flexItem}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         as={as}
         minHeight={dirColumn ? size : undefined}
         minWidth={dirRow ? size : undefined}

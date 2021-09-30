@@ -42,6 +42,11 @@ type ScreenReaderContentOwnProps = {
    * content meant for screen readers only
    */
   children?: ReactNode
+
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof ScreenReaderContentOwnProps
@@ -56,10 +61,11 @@ type ScreenReaderContentStyle = ComponentStyle<'screenReaderContent'>
 
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
-  children: PropTypes.node
+  children: PropTypes.node,
+  elementRef: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = ['as', 'children']
+const allowedProps: AllowedPropKeys = ['as', 'children', 'elementRef']
 
 export type { ScreenReaderContentProps, ScreenReaderContentStyle }
 export { propTypes, allowedProps }

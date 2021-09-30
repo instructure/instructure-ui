@@ -70,7 +70,8 @@ class DrawerContent extends Component<
     shouldTransition: false
   }
 
-  _content = null
+  ref: Element | null = null
+  _content: Element | null = null
   _resizeListener = null
 
   _debounced = null
@@ -131,11 +132,11 @@ class DrawerContent extends Component<
     })
   }
 
-  handleContentRef = (node: any) => {
-    if (typeof this.props.contentRef === 'function') {
-      this._content = node
-      this.props.contentRef(node)
-    }
+  handleContentRef = (node: Element | null) => {
+    this.ref = node
+    // TODO: deprecate _content? ref should be enough
+    this._content = node
+    this.props.contentRef?.(node)
   }
 
   render() {
