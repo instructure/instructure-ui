@@ -81,6 +81,13 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     )
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -177,6 +184,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     const { width, layout, children } = props
     return (
       <ElementType
+        // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...omitProps(props, [
           ...FormFieldLayout.allowedProps,
           ...Grid.allowedProps
@@ -185,6 +193,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
         style={{ width }}
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'For... Remove this comment to see the full error message
         aria-describedby={this.hasMessages ? this._messagesId : null}
+        ref={this.handleRef}
       >
         {this.elementType === 'fieldset' && this.renderLegend()}
         <Grid

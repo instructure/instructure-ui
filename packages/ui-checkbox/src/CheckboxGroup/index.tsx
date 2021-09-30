@@ -74,6 +74,12 @@ class CheckboxGroup extends Component<CheckboxGroupProps> {
     this._messagesId = uid('CheckboxGroup-messages')
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   get hasMessages() {
     return this.props.messages && this.props.messages.length > 0
   }
@@ -156,6 +162,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps> {
         vAlign="top"
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
         messagesId={this._messagesId}
+        elementRef={this.handleRef}
       >
         {this.renderChildren()}
       </FormFieldGroup>

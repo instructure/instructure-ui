@@ -66,6 +66,8 @@ class Day extends Component<CalendarDayProps> {
     children: null
   } as const
 
+  ref: Element | null = null
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
@@ -113,11 +115,10 @@ class Day extends Component<CalendarDayProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleElementRef = (el) => {
+  handleElementRef = (el: Element | null) => {
     const { elementRef } = this.props
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    elementRef(el)
+    elementRef?.(el)
+    this.ref = el
   }
 
   render() {

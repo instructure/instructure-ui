@@ -49,6 +49,13 @@ class FormField extends Component<FormFieldProps> {
     children: null
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   render() {
     return (
       <FormFieldLayout
@@ -58,6 +65,7 @@ class FormField extends Component<FormFieldProps> {
         vAlign={this.props.vAlign}
         as="label"
         htmlFor={this.props.id}
+        elementRef={this.handleRef}
       />
     )
   }

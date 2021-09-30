@@ -42,6 +42,7 @@ type FormFieldOwnProps = {
   vAlign?: 'top' | 'middle' | 'bottom'
   width?: string
   inputContainerRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof FormFieldOwnProps
@@ -70,7 +71,8 @@ const propTypes: PropValidators<PropKeys> = {
   labelAlign: PropTypes.oneOf(['start', 'end']),
   vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
   width: PropTypes.string,
-  inputContainerRef: PropTypes.func
+  inputContainerRef: PropTypes.func,
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -84,7 +86,8 @@ const allowedProps: AllowedPropKeys = [
   'labelAlign',
   'vAlign',
   'width',
-  'inputContainerRef'
+  'inputContainerRef',
+  'elementRef'
 ]
 
 export type { FormFieldProps }
