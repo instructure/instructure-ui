@@ -53,7 +53,7 @@ type TextOwnProps = {
   /**
    * Provides a reference to the underlying HTML element
    */
-  elementRef?: (element: HTMLElement | null) => void
+  elementRef?: (element: Element | null) => void
   fontStyle?: 'italic' | 'normal'
   letterSpacing?: 'normal' | 'condensed' | 'expanded'
   lineHeight?: 'default' | 'fit' | 'condensed' | 'double'

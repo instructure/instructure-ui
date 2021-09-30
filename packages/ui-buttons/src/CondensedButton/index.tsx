@@ -63,6 +63,13 @@ class CondensedButton extends Component<CondensedButtonProps> {
 
   _baseButton = null
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   get focused() {
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     return this._baseButton && this._baseButton.focused
@@ -99,7 +106,7 @@ class CondensedButton extends Component<CondensedButtonProps> {
         withBorder={false}
         type={type}
         size={size}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         as={as}
         interaction={interaction}
         color={color}

@@ -45,7 +45,7 @@ type ImgOwnProps = {
   withGrayscale?: boolean
   withBlur?: boolean
   constrain?: 'cover' | 'contain'
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   height?: string | number
   width?: string | number
 }

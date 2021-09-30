@@ -41,7 +41,7 @@ type SpinnerOwnProps = {
   size?: 'x-small' | 'small' | 'medium' | 'large'
   variant?: 'default' | 'inverse'
   margin?: Spacing
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   as?: AsElementType
 }
 

@@ -66,6 +66,8 @@ class Button extends Component<ButtonProps> {
 
   _buttonComponent = null
 
+  ref: Element | null = null
+
   get focused() {
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     return this._buttonComponent && this._buttonComponent.focused
@@ -75,14 +77,11 @@ class Button extends Component<ButtonProps> {
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     this._buttonComponent && this._buttonComponent.focus()
   }
-  ref: Element | undefined
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleElementRef = (el) => {
+  handleElementRef = (el: Element | null) => {
     const { elementRef } = this.props
     this.ref = el
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    elementRef(el)
+    elementRef?.(el)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'component' implicitly has an 'any' type... Remove this comment to see the full error message

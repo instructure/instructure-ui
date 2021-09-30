@@ -41,7 +41,7 @@ type TagOwnProps = {
   dismissible?: boolean
   margin?: Spacing
   onClick?: (...args: any[]) => any
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   size?: 'small' | 'medium' | 'large'
   variant?: 'default' | 'inline'
 }

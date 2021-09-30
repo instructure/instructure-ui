@@ -37,7 +37,7 @@ import type {
 type FlexItemOwnProps = {
   children?: React.ReactNode
   as?: AsElementType
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   margin?: Spacing
   padding?: Spacing
   align?: 'center' | 'start' | 'end' | 'stretch'

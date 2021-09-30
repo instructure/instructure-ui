@@ -43,7 +43,7 @@ type PillOwnProps = {
   /**
    * Provides a reference to the underlying HTML element
    */
-  elementRef?: (element: HTMLElement | null) => void
+  elementRef?: (element: Element | null) => void
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via

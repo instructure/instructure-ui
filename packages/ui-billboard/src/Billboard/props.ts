@@ -41,7 +41,7 @@ type BillboardOwnProps = {
   hero?: React.ReactElement | ((...args: any[]) => any)
   size?: 'small' | 'medium' | 'large'
   as?: AsElementType
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   heading?: string
   headingAs?: 'h1' | 'h2' | 'h3' | 'span'
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4'

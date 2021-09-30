@@ -34,7 +34,7 @@ type ToggleGroupOwnProps = {
   summary: React.ReactNode
   toggleLabel: React.ReactNode | ((...args: any[]) => any)
   as?: AsElementType
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   size?: 'small' | 'medium' | 'large'
   expanded?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
   defaultExpanded?: boolean

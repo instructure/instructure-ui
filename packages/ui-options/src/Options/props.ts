@@ -36,7 +36,7 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 type OptionsOwnProps = {
   as?: AsElementType
   role?: string
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   renderLabel?: React.ReactNode | ((...args: any[]) => any)
   children?: React.ReactNode
 }

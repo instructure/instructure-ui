@@ -50,7 +50,7 @@ type ListItemOwnProps = {
     | 'large'
     | 'x-large'
     | 'xx-large'
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof ListItemOwnProps

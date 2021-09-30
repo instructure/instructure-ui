@@ -48,7 +48,7 @@ type TabsOwnProps = {
   margin?: Spacing
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   tabOverflow?: 'stack' | 'scroll'
   shouldFocusOnRender?: boolean
   children?: React.ReactNode // TODO: oneOf([Panel, null])

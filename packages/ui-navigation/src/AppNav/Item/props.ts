@@ -37,7 +37,7 @@ type AppNavItemOwnProps = {
   href?: string
   onClick?: (...args: any[]) => any
   isSelected?: boolean
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   as?: AsElementType
   cursor?: string
   isDisabled?: boolean

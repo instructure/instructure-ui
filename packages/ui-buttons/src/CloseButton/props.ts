@@ -40,7 +40,7 @@ type CloseButtonOwnProps = {
   screenReaderLabel: string | React.ReactNode
   color?: 'primary' | 'primary-inverse'
   interaction?: 'enabled' | 'disabled' | 'readonly'
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   size?: 'small' | 'medium' | 'large'
   onClick?: (...args: any[]) => any
   margin?: Spacing

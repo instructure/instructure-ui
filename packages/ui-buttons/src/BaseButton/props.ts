@@ -43,7 +43,7 @@ type BaseButtonOwnProps = {
   children?: React.ReactNode
   type?: 'button' | 'submit' | 'reset'
   size?: 'small' | 'medium' | 'large'
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   as?: AsElementType
   interaction?: InteractionType
   color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'

@@ -47,6 +47,12 @@ class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
   static allowedProps = allowedProps
   static defaultProps = {}
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   render() {
     const { children, href, renderIcon, iconPlacement, onClick } = this.props
 
@@ -62,6 +68,7 @@ class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
         iconPlacement={iconPlacement}
         onClick={onClick}
         isWithinText={false}
+        elementRef={this.handleRef}
       >
         <TruncateText>{children}</TruncateText>
       </Link>

@@ -55,7 +55,7 @@ type ProgressCircleOwnProps = {
     | ((...args: any[]) => ProgressCircleMeterColor)
     | ProgressCircleMeterColor
   margin?: Spacing
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   as?: AsElementType
   shouldAnimateOnMount?: boolean
   animationDelay?: number

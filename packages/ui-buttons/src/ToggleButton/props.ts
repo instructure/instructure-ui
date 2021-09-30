@@ -42,7 +42,7 @@ type ToggleButtonOwnProps = {
   as?: AsElementType
   interaction?: 'enabled' | 'disabled' | 'readonly'
   size?: 'small' | 'medium' | 'large'
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   onClick?: (...args: any[]) => any
   color?: string
   isShowingTooltip?: boolean

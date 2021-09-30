@@ -41,7 +41,7 @@ import type {
 type ModalBodyOwnProps = {
   children?: React.ReactNode
   padding?: Spacing
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   as?: AsElementType
   variant?: 'default' | 'inverse'
   overflow?: 'scroll' | 'fit'

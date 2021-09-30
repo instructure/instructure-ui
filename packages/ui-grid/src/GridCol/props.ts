@@ -58,7 +58,7 @@ type GridColOwnProps = {
       }
   isLastRow?: boolean
   isLastCol?: boolean
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof GridColOwnProps

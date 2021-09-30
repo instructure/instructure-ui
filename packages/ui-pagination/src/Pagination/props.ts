@@ -46,7 +46,7 @@ type PaginationOwnProps = {
   variant?: 'full' | 'compact'
   margin?: Spacing
   as?: AsElementType
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   shouldHandleFocus?: boolean
 }
 

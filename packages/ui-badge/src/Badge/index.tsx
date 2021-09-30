@@ -67,11 +67,19 @@ class Badge extends Component<BadgeProps> {
     formatOverflowText: (_count: number, countUntil: number) =>
       `${countUntil - 1} +`
   }
-  _defaultId: string
 
   constructor(props: BadgeProps) {
     super(props)
     this._defaultId = uid('Badge')
+  }
+
+  _defaultId: string
+
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
   }
 
   componentDidMount() {
@@ -88,8 +96,13 @@ class Badge extends Component<BadgeProps> {
   }
 
   renderOutput() {
-    const { count, countUntil, formatOverflowText, formatOutput, type } =
-      this.props
+    const {
+      count,
+      countUntil,
+      formatOverflowText,
+      formatOutput,
+      type
+    } = this.props
 
     // If the badge count is >= than the countUntil limit, format the badge text
     // via the formatOverflowText function prop
@@ -123,6 +136,7 @@ class Badge extends Component<BadgeProps> {
         }
         id={!standalone ? this._defaultId : undefined}
         display={standalone ? 'inline-block' : 'block'}
+        {...(standalone && { elementRef: this.handleRef })}
       >
         {this.renderOutput()}
       </View>
@@ -138,7 +152,7 @@ class Badge extends Component<BadgeProps> {
   }
 
   render() {
-    const { margin, elementRef, standalone, as, styles } = this.props
+    const { margin, standalone, as, styles } = this.props
 
     if (standalone) {
       return this.renderBadge()
@@ -147,7 +161,7 @@ class Badge extends Component<BadgeProps> {
         <View
           as={as}
           margin={margin}
-          elementRef={elementRef}
+          elementRef={this.handleRef}
           css={styles?.wrapper}
           display="inline-block"
         >

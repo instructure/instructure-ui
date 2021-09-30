@@ -45,7 +45,7 @@ type TabsPanelOwnProps = {
   labelledBy?: string
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   children?: React.ReactNode
 }
 
