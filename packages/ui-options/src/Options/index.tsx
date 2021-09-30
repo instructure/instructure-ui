@@ -70,6 +70,7 @@ class Options extends Component<OptionsProps> {
 
   static Item = Item
   static Separator = Separator
+  ref: Element | null = null
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -127,19 +128,24 @@ class Options extends Component<OptionsProps> {
     })
   }
 
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   render() {
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Options.allowedProps),
       Options
     )
 
-    const { as, role, elementRef, renderLabel, styles } = this.props
+    const { as, role, renderLabel, styles } = this.props
     return (
       <div css={styles?.options} role="presentation">
         {renderLabel && this.renderLabel()}
         <View
           {...passthroughProps}
-          elementRef={elementRef}
+          elementRef={this.handleRef}
           css={styles?.list}
           as={as}
           role={role}

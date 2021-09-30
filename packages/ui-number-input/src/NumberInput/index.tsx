@@ -91,6 +91,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
 
   state: NumberInputState = { hasFocus: false }
   _input = null
+  ref: Element | null = null
 
   get id() {
     if (this.props.id) {
@@ -243,6 +244,9 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
         label={callRenderProp(renderLabel)}
         inline={display === 'inline-block'}
         id={this.id}
+        elementRef={(element) => {
+          this.ref = element
+        }}
       >
         <span
           css={this.props.styles?.inputWidth}

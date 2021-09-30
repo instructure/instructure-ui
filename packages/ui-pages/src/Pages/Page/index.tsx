@@ -56,6 +56,8 @@ class Page extends Component<PagesPageProps> {
     navigateToPreviousPage: PropTypes.func
   }
 
+  ref: Element | null = null
+
   get defaultFocusElement() {
     let { defaultFocusElement } = this.props
 
@@ -109,7 +111,8 @@ class Page extends Component<PagesPageProps> {
             textAlign={props.textAlign}
             elementRef={(el) => {
               // @ts-expect-error ts-migrate(2551) FIXME: Property '_content' does not exist on type 'Page'.... Remove this comment to see the full error message
-              this._content = el
+              this._content = el // TODO remove and keep 'ref' in v9
+              this.ref = el
             }}
           >
             {children && typeof children === 'function'

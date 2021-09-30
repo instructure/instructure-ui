@@ -51,6 +51,7 @@ class PresentationContent extends Component<
 
   handleRef = (el: Element | null) => {
     this.ref = el
+    this.props.elementRef?.(el)
   }
 
   render() {

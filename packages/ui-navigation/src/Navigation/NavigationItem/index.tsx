@@ -57,6 +57,8 @@ class NavigationItem extends Component<NavigationItemProps> {
     minimized: false
   } as const
 
+  ref: Element | null = null
+
   componentDidMount() {
     this.props.makeStyles?.({ minimized: this.props.minimized })
   }
@@ -80,6 +82,10 @@ class NavigationItem extends Component<NavigationItemProps> {
         css={this.props.styles?.navigationItem}
         //@ts-expect-error TODO: INSTUI-3245
         aria-label={this.props.minimized ? label : undefined}
+        // @ts-expect-error TODO fix TS2590: Expression produces a union type that is too complex to represent.
+        ref={(element) => {
+          this.ref = element
+        }}
       >
         <div css={this.props.styles?.icon} aria-hidden="true">
           {icon}

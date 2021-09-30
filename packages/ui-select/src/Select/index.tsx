@@ -109,6 +109,8 @@ class Select extends Component<SelectProps> {
   static Option = Option
   static Group = Group
 
+  ref: Element | null = null
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -222,7 +224,8 @@ class Select extends Component<SelectProps> {
       this.setState({ hasInputRef: true })
     }
 
-    this._input = node
+    this._input = node // TODO remove this in v9 and keep just 'ref'
+    this.ref = node
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.inputRef(node)
   }

@@ -63,6 +63,8 @@ class RadioInput extends Component<RadioInputProps> {
     readOnly: false
   }
 
+  ref: Element | null = null
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
@@ -141,7 +143,12 @@ class RadioInput extends Component<RadioInputProps> {
     const props = omitProps(this.props, RadioInput.allowedProps)
 
     return (
-      <div css={styles?.radioInput}>
+      <div
+        css={styles?.radioInput}
+        ref={(el) => {
+          this.ref = el
+        }}
+      >
         <input
           {...props}
           id={this.id}

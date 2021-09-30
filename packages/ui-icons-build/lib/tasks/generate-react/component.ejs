@@ -8,9 +8,13 @@ class <%= name %><%= variant %> extends Component {
   <% if (deprecated) { %>
   static deprecated = true;
   <% } %>
-
+  ref = null
   static propTypes = {
     ...SVGIcon.propTypes
+  }
+
+  handleRef = (el) => {
+    this.ref = el
   }
 
   render () {
@@ -27,6 +31,7 @@ class <%= name %><%= variant %> extends Component {
         <% if (bidirectional) { %>
         bidirectional
         <% } %>
+        ref={this.handleRef}
       >
         <%= source %>
       </SVGIcon>

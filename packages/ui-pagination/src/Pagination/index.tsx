@@ -88,6 +88,8 @@ class Pagination extends Component<PaginationProps> {
   static Page = PaginationButton
   static Navigation = PaginationArrowButton
 
+  ref: Element | null = null
+
   // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   constructor(...args) {
     // @ts-expect-error ts-migrate(2556) FIXME: Expected 1-2 arguments, but got 0 or more.
@@ -155,6 +157,7 @@ class Pagination extends Component<PaginationProps> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
+    this.ref = el
     if (el) {
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'Paginatio... Remove this comment to see the full error message
       this._root = el

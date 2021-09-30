@@ -100,6 +100,7 @@ class Position extends Component<PositionProps, PositionState> {
     this._id = this.props.id || uid('Position')
   }
 
+  ref: Element | null = null
   _id: string
   _timeouts: NodeJS.Timeout[] = []
   _listener: PositionChangeListenerType | null = null
@@ -246,6 +247,7 @@ class Position extends Component<PositionProps, PositionState> {
     }
   }
 
+  // content that needs to be positioned relative to the target
   renderContent() {
     let content = ensureSingleChild(this.props.children)
 
@@ -253,6 +255,7 @@ class Position extends Component<PositionProps, PositionState> {
       content = safeCloneElement(content, {
         ref: (el: PositionElement) => {
           this._content = el
+          this.ref = el as Element
         },
         style: {
           boxSizing: 'border-box',

@@ -56,6 +56,8 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
     size: 'medium'
   }
 
+  ref: Element | null = null
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
@@ -110,7 +112,12 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
     const Icon = this.state.filled ? IconStarSolid : IconStarLightSolid
 
     return (
-      <span css={this.props.styles?.ratingIcon}>
+      <span
+        css={this.props.styles?.ratingIcon}
+        ref={(el) => {
+          this.ref = el
+        }}
+      >
         <span>
           {this.state.filled && animateFill ? (
             <Transition in transitionOnMount type="scale">

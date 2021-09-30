@@ -115,6 +115,7 @@ class Popover extends Component<PopoverProps> {
 
   _handleMouseOver: (...args: any[]) => any | undefined
   _handleMouseOut: (...args: any[]) => any | undefined
+  ref: Element | null = null
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
@@ -546,6 +547,9 @@ class Popover extends Component<PopoverProps> {
           shouldFocusOnOpen={!this.props.shouldFocusContentOnTriggerBlur}
           shouldCloseOnDocumentClick={this.props.shouldCloseOnDocumentClick}
           shouldCloseOnEscape={this.props.shouldCloseOnEscape}
+          elementRef={(element) => {
+            this.ref = element
+          }}
         >
           {content}
         </Dialog>

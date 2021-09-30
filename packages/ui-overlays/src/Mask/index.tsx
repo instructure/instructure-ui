@@ -71,7 +71,7 @@ class Mask extends Component<MaskProps> {
     }
   }
 
-  ref: Element | undefined
+  ref: Element | null = null
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {

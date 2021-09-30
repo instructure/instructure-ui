@@ -86,6 +86,7 @@ class Overlay extends Component<OverlayProps> {
 
   _timeouts = []
   _DOMNode: PortalNode = null
+  ref: Element | null = null
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_isMounted' does not exist on type 'Over... Remove this comment to see the full error message
@@ -166,6 +167,9 @@ class Overlay extends Component<OverlayProps> {
         defaultFocusElement={this.props.defaultFocusElement}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
         open={this.state.open}
+        elementRef={(element) => {
+          this.ref = element
+        }}
       >
         {this.props.children}
       </Dialog>

@@ -72,6 +72,7 @@ class AppNav extends Component<AppNavProps> {
     isMeasuring: false
   }
 
+  ref: Element | null = null
   _list = null
 
   componentDidMount() {
@@ -161,6 +162,11 @@ class AppNav extends Component<AppNavProps> {
     })
   }
 
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.
   renderListItem(item, isMenuTrigger, key) {
     return (
@@ -216,8 +222,7 @@ class AppNav extends Component<AppNavProps> {
       children,
       visibleItemsCount,
       screenReaderLabel,
-      margin,
-      elementRef
+      margin
     } = this.props
 
     const passthroughProps = View.omitViewProps(
@@ -245,7 +250,7 @@ class AppNav extends Component<AppNavProps> {
         ]}
         margin={margin}
         display={hasRenderedContent ? 'flex' : 'block'}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
       >
         {renderBeforeItems && <span>{renderBeforeItems}</span>}
         <ul

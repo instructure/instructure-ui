@@ -65,6 +65,7 @@ class RangeInput extends Component<RangeInputProps> {
     readOnly: false
   }
 
+  ref: Element | null = null
   _input: HTMLInputElement | null = null
   _inputListener: { remove(): void } | null = null
   _changeListener: { remove(): void } | null = null
@@ -183,6 +184,9 @@ class RangeInput extends Component<RangeInputProps> {
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
         id={this.id}
+        elementRef={(el) => {
+          this.ref = el
+        }}
       >
         <div css={this.props.styles?.rangeInput}>
           <input
