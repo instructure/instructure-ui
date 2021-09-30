@@ -57,6 +57,13 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     vAlign: 'middle'
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
@@ -134,6 +141,7 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
         label={props.description}
         aria-disabled={props.disabled ? 'true' : null}
         aria-invalid={this.invalid ? 'true' : null}
+        elementRef={this.handleRef}
       >
         {this.renderFields()}
       </FormFieldLayout>

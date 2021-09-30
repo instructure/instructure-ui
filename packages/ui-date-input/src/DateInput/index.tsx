@@ -114,6 +114,12 @@ class DateInput extends Component<DateInputProps> {
 
   _input = undefined
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   get selectedDateId() {
     let selectedDateId
 
@@ -297,6 +303,7 @@ class DateInput extends Component<DateInputProps> {
           display: isInline ? 'inline-block' : 'block',
           renderAfterInput: <IconCalendarMonthLine inline={false} />
         })}
+        elementRef={this.handleRef}
       />
     )
   }

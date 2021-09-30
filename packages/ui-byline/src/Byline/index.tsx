@@ -52,6 +52,13 @@ class Byline extends Component<BylineProps> {
     alignContent: 'center'
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -72,7 +79,7 @@ class Byline extends Component<BylineProps> {
     return (
       <View
         {...passthroughProps}
-        elementRef={this.props.elementRef}
+        elementRef={this.handleRef}
         css={this.props.styles?.byline}
         as="figure"
         margin={this.props.margin}

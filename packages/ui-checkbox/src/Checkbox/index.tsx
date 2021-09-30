@@ -92,6 +92,12 @@ class Checkbox extends Component<CheckboxProps> {
     this._defaultId = uid('Checkbox')
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     // see https://github.com/facebook/react/issues/1798
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
@@ -286,6 +292,7 @@ class Checkbox extends Component<CheckboxProps> {
         css={styles?.checkbox}
         onMouseOver={createChainedFunction(onMouseOver, this.handleMouseOver)}
         onMouseOut={createChainedFunction(onMouseOut, this.handleMouseOut)}
+        ref={this.handleRef}
       >
         <input
           {...props}

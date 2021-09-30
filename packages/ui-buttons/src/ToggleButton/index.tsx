@@ -69,6 +69,13 @@ class ToggleButton extends Component<ToggleButtonProps> {
     }
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   get isShowingTooltip() {
     return typeof this.props.isShowingTooltip === 'undefined'
       ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingTooltip' does not exist on type... Remove this comment to see the full error message
@@ -118,7 +125,7 @@ class ToggleButton extends Component<ToggleButtonProps> {
           // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           color={color}
           size={size}
-          elementRef={elementRef}
+          elementRef={this.handleRef}
           as={as}
           onClick={onClick}
           interaction={interaction}

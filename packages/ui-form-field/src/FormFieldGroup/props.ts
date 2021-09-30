@@ -46,6 +46,7 @@ type FormFieldGroupOwnProps = {
   colSpacing?: 'none' | 'small' | 'medium' | 'large'
   vAlign?: 'top' | 'middle' | 'bottom'
   startAt?: any // TODO: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
+  elementRef?: (element: Element | null) => void
 }
 
 type FormFieldGroupStyleProps = {
@@ -84,7 +85,8 @@ const propTypes: PropValidators<PropKeys> = {
   rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
   colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
   vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-  startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
+  startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -98,7 +100,8 @@ const allowedProps: AllowedPropKeys = [
   'rowSpacing',
   'colSpacing',
   'vAlign',
-  'startAt'
+  'startAt',
+  'elementRef'
 ]
 
 export type {

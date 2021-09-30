@@ -42,6 +42,7 @@ type FormFieldLayoutOwnProps = {
   labelAlign?: 'start' | 'end'
   width?: string
   inputContainerRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof FormFieldLayoutOwnProps
@@ -79,7 +80,8 @@ const propTypes: PropValidators<PropKeys> = {
   layout: PropTypes.oneOf(['stacked', 'inline']),
   labelAlign: PropTypes.oneOf(['start', 'end']),
   width: PropTypes.string,
-  inputContainerRef: PropTypes.func
+  inputContainerRef: PropTypes.func,
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -93,7 +95,8 @@ const allowedProps: AllowedPropKeys = [
   'layout',
   'labelAlign',
   'width',
-  'inputContainerRef'
+  'inputContainerRef',
+  'elementRef'
 ]
 
 export type { FormFieldLayoutProps, FormFieldLayoutStyle }

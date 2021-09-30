@@ -49,6 +49,7 @@ type TextInputOwnProps = {
   shouldNotWrap?: boolean
   placeholder?: string
   isRequired?: boolean
+  elementRef?: (element: Element | null) => void
   inputRef?: (...args: any[]) => any
   inputContainerRef?: (...args: any[]) => any
   renderBeforeInput?: React.ReactNode | ((...args: any[]) => any)
@@ -146,6 +147,7 @@ const propTypes: PropValidators<PropKeys> = {
    * Whether or not the text input is required.
    */
   isRequired: PropTypes.bool,
+  elementRef: PropTypes.func,
   /**
    * a function that provides a reference to the actual input element
    */
@@ -194,6 +196,7 @@ const allowedProps: AllowedPropKeys = [
   'shouldNotWrap',
   'placeholder',
   'isRequired',
+  'elementRef',
   'inputRef',
   'inputContainerRef',
   'renderBeforeInput',

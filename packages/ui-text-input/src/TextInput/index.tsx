@@ -96,6 +96,12 @@ class TextInput extends Component<
     this._messagesId = uid('TextInput-messages')
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
   componentDidMount() {
     this.props.makeStyles?.(this.makeStyleProps())
   }
@@ -271,6 +277,7 @@ class TextInput extends Component<
         inputContainerRef={inputContainerRef}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'layout' does not exist on type 'Readonly... Remove this comment to see the full error message
         layout={this.props.layout} // eslint-disable-line react/prop-types
+        elementRef={this.handleRef}
       >
         <span css={styles?.facade}>
           {renderBeforeOrAfter ? (
