@@ -40,7 +40,7 @@ import type { PropValidators, TableTheme } from '@instructure/shared-types'
 type TableOwnProps = {
   caption: React.ReactNode
   margin?: Spacing
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   hover?: boolean
   layout?: 'auto' | 'fixed' | 'stacked'
   children?: React.ReactNode

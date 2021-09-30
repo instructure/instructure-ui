@@ -40,7 +40,7 @@ type IconButtonOwnProps = {
   screenReaderLabel: string
   type?: 'button' | 'submit' | 'reset'
   size?: 'small' | 'medium' | 'large'
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   as?: AsElementType
   interaction?: 'enabled' | 'disabled' | 'readonly'
   color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'

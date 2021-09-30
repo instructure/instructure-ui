@@ -79,7 +79,9 @@ class BaseButton extends Component<BaseButtonProps> {
     onKeyDown: (event) => {}
   } as const
 
-  _rootElement = null
+  _rootElement: Element | null = null
+
+  ref: Element | null = null
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -153,11 +155,10 @@ class BaseButton extends Component<BaseButtonProps> {
     this._rootElement && this._rootElement.focus()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleElementRef = (el) => {
+  handleElementRef = (el: Element | null) => {
     this._rootElement = el
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.elementRef(el)
+    this.ref = el
+    this.props.elementRef?.(el)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.

@@ -42,7 +42,7 @@ type CalendarDayOwnProps = {
   isOutsideMonth?: boolean
   onClick?: (...args: any[]) => any
   onKeyDown?: (...args: any[]) => any
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   as?: AsElementType
 }
 

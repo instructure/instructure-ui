@@ -41,7 +41,7 @@ type BylineOwnProps = {
   alignContent?: 'top' | 'center'
   margin?: Spacing
   size?: 'small' | 'medium' | 'large'
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof BylineOwnProps

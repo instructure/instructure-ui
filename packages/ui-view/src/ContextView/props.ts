@@ -44,7 +44,7 @@ import type {
 
 type ContextViewOwnProps = {
   as?: AsElementType
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   height?: string | number
   width?: string | number
   maxHeight?: string | number

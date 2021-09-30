@@ -56,6 +56,12 @@ class Breadcrumb extends Component<BreadcrumbProps> {
     children: null
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -97,6 +103,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
         as="div"
         margin={this.props.margin}
         aria-label={this.props.label}
+        elementRef={this.handleRef}
       >
         <ol css={styles?.breadcrumb}>{this.renderChildren()}</ol>
       </View>

@@ -52,7 +52,7 @@ type HeadingOwnProps = {
   level?: HeadingLevel<'h1' | 'h2' | 'h3' | 'h4' | 'h5'> | 'reset'
   as?: AsElementType
   margin?: Spacing
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof HeadingOwnProps

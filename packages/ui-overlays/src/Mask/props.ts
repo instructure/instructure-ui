@@ -32,7 +32,7 @@ type MaskOwnProps = {
   placement?: 'top' | 'center' | 'bottom' | 'stretch'
   fullscreen?: boolean
   onClick?: (...args: any[]) => any
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   children?: React.ReactNode
 }
 

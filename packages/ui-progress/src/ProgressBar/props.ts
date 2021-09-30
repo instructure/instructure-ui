@@ -56,7 +56,7 @@ type ProgressBarOwnProps = {
     | ((...args: any[]) => ProgressBarMeterColor)
     | ProgressBarMeterColor
   margin?: Spacing
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   as?: AsElementType
 }
 

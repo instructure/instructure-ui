@@ -62,6 +62,13 @@ class Billboard extends Component<BillboardProps> {
     elementRef: () => {}
   } as const
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -138,7 +145,7 @@ class Billboard extends Component<BillboardProps> {
   }
 
   render() {
-    const { href, disabled, readOnly, margin, styles, elementRef } = this.props
+    const { href, disabled, readOnly, margin, styles } = this.props
 
     const Element = getElementType(Billboard, this.props)
 
@@ -151,7 +158,7 @@ class Billboard extends Component<BillboardProps> {
           ])}
           type={Element === 'button' ? 'button' : undefined}
           as={Element}
-          elementRef={elementRef}
+          elementRef={this.handleRef}
           css={styles?.billboard}
           href={href}
           onClick={this.handleClick}

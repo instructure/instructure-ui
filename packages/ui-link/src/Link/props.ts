@@ -42,7 +42,7 @@ type LinkOwnProps = {
   children: React.ReactNode
   href?: string
   color?: 'link' | 'link-inverse'
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   as?: AsElementType
   interaction?: 'enabled' | 'disabled'
   margin?: Spacing

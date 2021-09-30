@@ -40,7 +40,7 @@ import type {
 type FlexOwnProps = {
   children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
   as?: AsElementType
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   height?: string | number
   width?: string | number
   margin?: Spacing

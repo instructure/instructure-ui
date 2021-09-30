@@ -42,7 +42,7 @@ type AppNavOwnProps = {
   renderBeforeItems?: React.ReactNode | ((...args: any[]) => any)
   renderAfterItems?: React.ReactNode | ((...args: any[]) => any)
   margin?: Spacing
-  elementRef?: (...args: any[]) => any
+  elementRef?: (element: Element | null) => void
   renderTruncateLabel?: React.ReactNode | ((...args: any[]) => any)
   onUpdate?: (...args: any[]) => any
   visibleItemsCount?: number
