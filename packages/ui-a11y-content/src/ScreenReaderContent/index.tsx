@@ -54,9 +54,9 @@ class ScreenReaderContent extends Component<ScreenReaderContentProps> {
     children: null
   } as const
 
-  ref: HTMLElement | null = null
+  ref: Element | null = null
 
-  handleRef = (el: HTMLElement | null) => {
+  handleRef = (el: Element | null) => {
     this.ref = el
   }
 
@@ -73,7 +73,6 @@ class ScreenReaderContent extends Component<ScreenReaderContentProps> {
     const ElementType = getElementType(ScreenReaderContent, props)
 
     return (
-      // @ts-expect-error TODO: AsElementType is not compatible for ref
       <ElementType
         {...passthroughProps(props)}
         css={styles?.screenReaderContent}

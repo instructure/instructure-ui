@@ -90,9 +90,9 @@ class Alert extends Component<AlertProps> {
     warning: IconWarningBorderlessSolid
   }
 
-  ref: HTMLElement | null = null
+  ref: Element | null = null
 
-  handleRef = (el: HTMLElement | null) => {
+  handleRef = (el: Element | null) => {
     this.ref = el
   }
 

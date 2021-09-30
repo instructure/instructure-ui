@@ -68,9 +68,9 @@ class IconButton extends Component<IconButtonProps> {
 
   _baseButton = null
 
-  ref: HTMLElement | null = null
+  ref: Element | null = null
 
-  handleRef = (el: HTMLElement | null) => {
+  handleRef = (el: Element | null) => {
     this.ref = el
     this.props.elementRef?.(el)
   }
