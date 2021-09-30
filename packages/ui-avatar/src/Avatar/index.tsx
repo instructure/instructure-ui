@@ -60,6 +60,13 @@ class Avatar extends Component<AvatarProps, AvatarState> {
 
   state = { loaded: false }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.state)
@@ -111,7 +118,7 @@ class Avatar extends Component<AvatarProps, AvatarState> {
         aria-label={this.props.alt ? this.props.alt : undefined}
         role={this.props.alt ? 'img' : undefined}
         as={this.props.as}
-        elementRef={this.props.elementRef}
+        elementRef={this.handleRef}
         margin={this.props.margin}
         css={styles?.avatar}
         display={this.props.display}

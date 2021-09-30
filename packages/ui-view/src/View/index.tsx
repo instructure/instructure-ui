@@ -109,7 +109,7 @@ class View extends Component<ViewProps & OtherHTMLAttributes<ViewProps>> {
   }
 
   private spanMarginVerified: boolean
-  private _element?: HTMLElement | null
+  private _element?: Element | null
 
   constructor(props: ViewProps) {
     super(props)
@@ -172,9 +172,9 @@ class View extends Component<ViewProps & OtherHTMLAttributes<ViewProps>> {
     }
   }
 
-  ref: HTMLElement | null = null
+  ref: Element | null = null
 
-  handleElementRef = (el: HTMLElement | null) => {
+  handleElementRef = (el: Element | null) => {
     if (typeof this.props.elementRef === 'function') {
       this.props.elementRef(el)
     }

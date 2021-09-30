@@ -29,7 +29,11 @@ import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { AsElementType, PropValidators, ViewTheme } from '@instructure/shared-types'
+import type {
+  AsElementType,
+  PropValidators,
+  ViewTheme
+} from '@instructure/shared-types'
 import type {
   WithStyleProps,
   Spacing,
@@ -48,7 +52,7 @@ type ViewOwnProps = {
   /**
    * provides a reference to the underlying html element
    */
-  elementRef?: (element: HTMLElement | null) => void
+  elementRef?: (element: Element | null) => void
   /**
    * By default the display prop is 'auto', meaning it takes on the
    * display rules of the html element it's rendered as (see `as` prop).

@@ -66,7 +66,7 @@ type BadgeOwnProps = {
   /**
    * provides a reference to the underlying html root element
    */
-  elementRef?: (element: HTMLElement | null) => void
+  elementRef?: (element: Element | null) => void
   formatOverflowText?: (count: number, countUntil: number) => string
   formatOutput?: (formattedCount: string) => JSX.Element | string | number
   as?: AsElementType
