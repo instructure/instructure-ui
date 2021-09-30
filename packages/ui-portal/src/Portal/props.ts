@@ -34,7 +34,7 @@ import type { PropValidators } from '@instructure/shared-types'
 /**
  * The DOM Node of the Portal. It is created as a `span` element.
  */
-type PortalNode = HTMLSpanElement | null | undefined
+type PortalNode = HTMLSpanElement | null
 
 type PortalOwnProps = {
   /**
@@ -45,7 +45,7 @@ type PortalOwnProps = {
   /**
    * Callback fired when `<Portal />` content has been mounted in the DOM. Ha the Portal DOMNode as parameter.
    */
-  onOpen?: (DOMNode?: PortalNode) => void
+  onOpen?: (DOMNode: PortalNode) => void
 
   /**
    * Callback fired when `<Portal />` has been unmounted from the DOM

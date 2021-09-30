@@ -105,9 +105,21 @@ class Menu extends Component<MenuProps> {
   _menuItems = []
   _popover = null
   _trigger = null
-  _menu = null
+  _menu: HTMLUListElement | null = null
   _labelId = uid('Menu__label')
   _activeSubMenu = null
+
+  ref: HTMLUListElement | null = null
+
+  handleRef = (el: HTMLUListElement | null) => {
+    const { menuRef } = this.props
+
+    this.ref = el
+    this._menu = el
+    if (typeof menuRef === 'function') {
+      menuRef(el)
+    }
+  }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
@@ -433,15 +445,7 @@ class Menu extends Component<MenuProps> {
   }
 
   renderMenu() {
-    const {
-      menuRef,
-      disabled,
-      label,
-      trigger,
-      onKeyUp,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'contentRef' does not exist on type 'Read... Remove this comment to see the full error message
-      contentRef // eslint-disable-line react/prop-types
-    } = this.props
+    const { disabled, label, trigger, onKeyUp } = this.props
 
     // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     const labelledBy = this.props['aria-labelledby'] // eslint-disable-line react/prop-types
@@ -469,16 +473,7 @@ class Menu extends Component<MenuProps> {
           aria-disabled={disabled ? 'true' : null}
           onKeyDown={this.handleMenuKeyDown}
           onKeyUp={onKeyUp}
-          ref={(el) => {
-            // @ts-expect-error ts-migrate(2322) FIXME: Type 'HTMLUListElement | null' is not assignable t... Remove this comment to see the full error message
-            this._menu = el
-            if (typeof menuRef === 'function') {
-              menuRef(el)
-            }
-            if (typeof contentRef === 'function') {
-              contentRef(el)
-            }
-          }}
+          ref={this.handleRef}
         >
           {this.renderChildren()}
         </ul>

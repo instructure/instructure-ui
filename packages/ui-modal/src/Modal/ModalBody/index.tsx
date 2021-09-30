@@ -56,6 +56,13 @@ class ModalBody extends Component<ModalBodyProps> {
     children: null
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -90,7 +97,7 @@ class ModalBody extends Component<ModalBodyProps> {
         display="block"
         width={isFit ? '100%' : undefined}
         height={isFit ? '100%' : undefined}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         as={as}
         css={this.props.styles?.modalBody}
         padding={padding}

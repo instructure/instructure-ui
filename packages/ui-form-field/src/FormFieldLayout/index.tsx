@@ -184,7 +184,6 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     const { width, layout, children } = props
     return (
       <ElementType
-        // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...omitProps(props, [
           ...FormFieldLayout.allowedProps,
           ...Grid.allowedProps

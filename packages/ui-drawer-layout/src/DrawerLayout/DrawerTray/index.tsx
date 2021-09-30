@@ -93,7 +93,7 @@ class DrawerTray extends Component<
     portalOpen: false
   }
 
-  _DOMNode?: PortalNode = null
+  _DOMNode: PortalNode = null
   ref: Element | null = null
   _content: Element | null = null
 
@@ -150,7 +150,7 @@ class DrawerTray extends Component<
     })
   }
 
-  handlePortalOpen = (DOMNode?: PortalNode) => {
+  handlePortalOpen = (DOMNode: PortalNode) => {
     this.DOMNode = DOMNode
     this.setState({
       portalOpen: true

@@ -53,6 +53,12 @@ class Metric extends Component<MetricProps & OtherHTMLAttributes<MetricProps>> {
     isGroupChild: false
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -77,6 +83,7 @@ class Metric extends Component<MetricProps & OtherHTMLAttributes<MetricProps>> {
         {...passthroughProps(rest)}
         role={isGroupChild ? 'row' : undefined}
         css={this.props.styles?.metric}
+        ref={this.handleRef}
       >
         <div
           role={isGroupChild ? 'rowheader' : undefined}

@@ -78,6 +78,14 @@ class MenuItem extends Component<MenuItemProps> {
     this.labelId = uid('MenuItem__label')
   }
 
+  ref: Element | null = null
+  _node: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this._node = el
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -192,7 +200,6 @@ class MenuItem extends Component<MenuItemProps> {
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_node' does not exist on type 'MenuItem'... Remove this comment to see the full error message
     return isActiveElement(this._node)
   }
 
@@ -232,6 +239,7 @@ class MenuItem extends Component<MenuItemProps> {
 
     return (
       <ElementType // eslint-disable-line jsx-a11y/mouse-events-have-key-events
+        // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         tabIndex={-1} // note: tabIndex can be overridden by Menu or MenuItemGroup components
         {...props}
         href={href}
@@ -250,11 +258,7 @@ class MenuItem extends Component<MenuItemProps> {
         onClick={this.handleClick}
         onKeyUp={createChainedFunction(onKeyUp, this.handleKeyUp)}
         onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'c' implicitly has an 'any' type.
-        ref={(c) => {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_node' does not exist on type 'MenuItem'... Remove this comment to see the full error message
-          this._node = c
-        }}
+        ref={this.handleRef}
         css={this.props.styles?.menuItem}
         onMouseOver={this.handleMouseOver}
       >

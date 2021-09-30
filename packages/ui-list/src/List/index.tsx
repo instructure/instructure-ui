@@ -64,6 +64,13 @@ class List extends Component<ListProps> {
 
   static Item = ListItem
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -97,7 +104,7 @@ class List extends Component<ListProps> {
         css={styles?.list}
         as={as}
         margin={margin}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         display="block"
       >
         {this.renderChildren()}
