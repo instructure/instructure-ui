@@ -96,7 +96,7 @@ class TimeSelect extends Component<TimeSelectProps> {
     super(props)
     this.state = this.getInitialState()
   }
-
+  ref: Element | null = null
   _emptyOptionId = uid('Select-EmptyOption')
 
   focus() {
@@ -311,7 +311,8 @@ class TimeSelect extends Component<TimeSelectProps> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleRef = (node) => {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_select' does not exist on type 'TimeSel... Remove this comment to see the full error message
-    this._select = node
+    this._select = node // TODO remove this and keep this.ref
+    this.ref = node
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.

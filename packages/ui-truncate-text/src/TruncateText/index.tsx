@@ -67,6 +67,8 @@ class TruncateText extends Component<TruncateTextProps> {
     onUpdate: (truncated, text) => {}
   }
 
+  ref: Element | null = null
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
@@ -289,7 +291,8 @@ class TruncateText extends Component<TruncateTextProps> {
         css={this.props.styles?.truncateText}
         ref={(el) => {
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_ref' does not exist on type 'TruncateTe... Remove this comment to see the full error message
-          this._ref = el
+          this._ref = el // TODO remove this and keep only 'ref' in V9
+          this.ref = el
         }}
       >
         {children &&

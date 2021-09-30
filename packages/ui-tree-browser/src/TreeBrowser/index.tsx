@@ -79,6 +79,7 @@ class TreeBrowser extends Component<TreeBrowserProps> {
   static Node = TreeNode
   static Collection = TreeCollection
   static Button = TreeButton
+  ref: Element | null = null
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
@@ -385,7 +386,8 @@ class TreeBrowser extends Component<TreeBrowserProps> {
         onKeyDown={this.handleKeyDown}
         ref={(el) => {
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'TreeBrows... Remove this comment to see the full error message
-          this._root = el
+          this._root = el // TODO remove this and keep only 'ref' in V9
+          this.ref = el
         }}
         aria-label={this.props.treeLabel}
       >

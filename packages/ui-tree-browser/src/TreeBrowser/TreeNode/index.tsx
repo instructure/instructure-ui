@@ -71,6 +71,8 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
     onClick: undefined
   }
 
+  ref: Element | null = null
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -82,6 +84,7 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
   handleRef = (el) => {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     el && this.props.containerRef(el.parentElement)
+    this.ref = el
   }
 
   // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.

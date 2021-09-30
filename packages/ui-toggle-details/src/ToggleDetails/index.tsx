@@ -66,6 +66,8 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     children: null
   }
 
+  ref: Element | null = null
+
   get focused() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_button' does not exist on type 'ToggleD... Remove this comment to see the full error message
     return isActiveElement(this._button)
@@ -186,7 +188,12 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
       >
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
-            <div css={this.props.styles?.toggleDetails}>
+            <div
+              css={this.props.styles?.toggleDetails}
+              ref={(el) => {
+                this.ref = el
+              }}
+            >
               {this.renderToggle(getToggleProps(), expanded)}
               {this.renderDetails(expanded, getDetailsProps())}
             </div>

@@ -42,6 +42,7 @@ import {
 import { testable } from '@instructure/ui-testable'
 import type { ToggleGroupProps } from './props'
 import { allowedProps, propTypes } from './props'
+import { createChainedFunction } from '@instructure/ui-utils'
 
 /**
 ---
@@ -69,6 +70,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     border: true
   } as const
 
+  ref: Element | null = null
   _button = null
   _shouldTransition = false
 
@@ -147,7 +149,9 @@ class ToggleGroup extends Component<ToggleGroupProps> {
               {...omitProps(this.props, ToggleGroup.allowedProps)}
               borderWidth={this.props.border ? 'small' : 'none'}
               as={Element}
-              elementRef={this.props.elementRef}
+              elementRef={createChainedFunction(this.props.elementRef, (el) => {
+                this.ref = el
+              })}
               display="block"
               borderRadius="medium"
               background="primary"
