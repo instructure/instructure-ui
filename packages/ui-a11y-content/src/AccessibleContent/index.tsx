@@ -50,9 +50,9 @@ class AccessibleContent extends Component<
     children: null
   } as const
 
-  ref: HTMLElement | null = null
+  ref: Element | null = null
 
-  handleRef = (el: HTMLElement | null) => {
+  handleRef = (el: Element | null) => {
     this.ref = el
   }
 
@@ -61,9 +61,7 @@ class AccessibleContent extends Component<
     const ElementType = getElementType(AccessibleContent, this.props)
 
     return (
-      // @ts-expect-error TODO: AsElementType is not compatible for ref
       <ElementType
-        // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...passthroughProps(props as AccessibleContentProps)}
         ref={this.handleRef}
       >

@@ -47,9 +47,9 @@ class PresentationContent extends Component<
     children: null
   } as const
 
-  ref: HTMLElement | null = null
+  ref: Element | null = null
 
-  handleRef = (el: HTMLElement | null) => {
+  handleRef = (el: Element | null) => {
     this.ref = el
   }
 
@@ -58,8 +58,8 @@ class PresentationContent extends Component<
     const ElementType = getElementType(PresentationContent, this.props)
 
     return (
-      // @ts-expect-error TODO: AsElementType is not compatible for ref
       <ElementType
+        // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...passthroughProps(props)}
         aria-hidden="true"
         ref={this.handleRef}
