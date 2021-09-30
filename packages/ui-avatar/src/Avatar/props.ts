@@ -87,7 +87,7 @@ type AvatarOwnProps = {
   /**
    * Provides a reference to the underlying html element
    */
-  elementRef?: (element: HTMLElement | null) => void
+  elementRef?: (element: Element | null) => void
 }
 
 export type AvatarState = {
