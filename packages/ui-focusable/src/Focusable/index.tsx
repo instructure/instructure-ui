@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { cloneElement, Component, createRef } from 'react'
+import { cloneElement, Component } from 'react'
 
 import {
   addInputModeListener,
@@ -34,6 +34,7 @@ import { logWarn as warn } from '@instructure/console'
 
 import { propTypes, allowedProps } from './props'
 import type { FocusableProps } from './props'
+import { createChainedFunction } from '@instructure/ui-utils'
 
 /**
 ---
@@ -225,11 +226,10 @@ class Focusable extends Component<FocusableProps> {
     }
   }
 
-  ref = createRef()
+  ref: Element | null = null
 
   attachRef = (el: Element) => {
-    // @ts-expect-error this is needed for backwards compatibily reasons
-    this.ref.current = el
+    this.ref = el
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'focusable' implicitly has an 'any' type... Remove this comment to see the full error message
@@ -270,12 +270,11 @@ class Focusable extends Component<FocusableProps> {
         attachRef: this.attachRef
       })
 
-      if (rendered.ref) {
-        this.attachRef(rendered.ref.current)
-
-        return rendered
-      }
-      return cloneElement(rendered, { ref: this.ref })
+      return cloneElement(rendered, {
+        ref: rendered.ref
+          ? createChainedFunction(rendered.ref, this.attachRef)
+          : this.attachRef
+      })
     } else {
       return null
     }
