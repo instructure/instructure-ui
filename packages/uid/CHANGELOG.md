@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.10.1](https://github.com/instructure/instructure-ui/compare/v8.10.0...v8.10.1) (2021-10-01)
+
+**Note:** Version bump only for package @instructure/uid
+
 # [8.10.0](https://github.com/instructure/instructure-ui/compare/v8.9.1...v8.10.0) (2021-09-28)
 
 **Note:** Version bump only for package @instructure/uid
