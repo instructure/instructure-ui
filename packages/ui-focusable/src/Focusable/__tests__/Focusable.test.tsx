@@ -383,13 +383,12 @@ describe('<Focusable />', async () => {
 
         return (
           <Focusable>
-            {({ focusVisible, attachRef }) => {
+            {({ focusVisible }) => {
               return (
                 <input
                   readOnly
                   ref={(el) => {
                     inputRef = el
-                    attachRef(el)
                   }}
                   value={`${focusVisible}_${changeValue}`}
                 />
@@ -440,12 +439,11 @@ describe('<Focusable />', async () => {
                 focusableRef = el
               }}
             >
-              {({ attachRef }) => {
+              {() => {
                 return (
                   <label
                     ref={(el) => {
                       labelRef = el
-                      attachRef(el)
                     }}
                   >
                     <input
