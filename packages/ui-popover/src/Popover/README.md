@@ -152,21 +152,136 @@ render: false
 example: true
 ---
 class Example extends React.Component {
-render () {
-  return (
-      <div style={{ paddingBottom: 25, display: 'flex', justifyContent: 'center' }}>
-        <Popover
-          renderTrigger={<div style={{display: 'inline-block', height: '3px', width: '3px', background: 'blue'}}/>}
-          isShowingContent={true}
-          placement="end top"
-          shouldAlignArrow
-          mountNode={() => document.getElementById('main')}
-        >
-          <Heading>Small<br/>Target</Heading>
-        </Popover>
-      </div>
-  )
-}
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            shouldAlignArrow: true,
+            isShowingContent: true,
+            withArrow: true,
+            placement: 'top',
+            shadow: 'topmost',
+            placementsValues: [
+                'top',
+                'end',
+                'bottom',
+                'start',
+                'top start',
+                'start top',
+                'start center',
+                'start bottom',
+                'bottom start',
+                'bottom center',
+                'bottom end',
+                'end bottom',
+                'end center',
+                'end top',
+                'top end',
+                'top center',
+                'center end',
+                'center start'
+            ],
+            shadowValues: [
+                'none',
+                'resting',
+                'above',
+                'topmost'
+            ],
+        }
+    }
+    changePlacement = (e, { id, placement }) => this.setState({ placement: this.state.placementsValues[id] })
+    changeShadow = (e, { id, shadow }) => this.setState({ shadow: this.state.shadowValues[id] })
+    toggleWithArrow = (event) => {
+
+        this.setState({ withArrow: !this.state.withArrow })
+     }
+    toggleAlignArrow = (event) => this.setState({ shouldAlignArrow: !this.state.shouldAlignArrow })
+    toggleShowContent = (event) => this.setState({ isShowingContent: !this.state.isShowingContent })
+    render() {
+        return (
+            <>
+                <FormFieldGroup description="Popover Example">
+                    <Checkbox
+                        checked={this.state.isShowingContent}
+                        label="Show Content"
+                        onChange={this.toggleShowContent}
+                    />
+                    <Checkbox
+                        checked={this.state.withArrow}
+                        label="With Arrow"
+                        onChange={this.toggleWithArrow}
+                    />
+                    <Checkbox
+                        checked={this.state.shouldAlignArrow}
+                        label="Align Arrow"
+                        onChange={this.toggleAlignArrow}
+                    />
+                </FormFieldGroup>
+                <View
+                    as="div"
+                    margin="large none"
+                    maxWidth="15rem"
+                >
+                    <SimpleSelect
+                        renderLabel="Placement"
+                        value={this.state.placement}
+                        onChange={this.changePlacement}
+                    >
+                        {this.state.placementsValues.map((placement, index) => (
+                            <SimpleSelect.Option
+                                key={index}
+                                id={`${index}`}
+                                value={placement}
+                            >
+                                {placement}
+                            </SimpleSelect.Option>
+                        ))}
+
+                    </SimpleSelect>
+                </View>
+                <View
+                    as="div"
+                    margin="large none"
+                    maxWidth="15rem"
+                >
+                    <SimpleSelect
+                        renderLabel="Shadow"
+                        value={this.state.shadow}
+                        onChange={this.changeShadow}
+                    >
+                        {
+                            this.state.shadowValues.map((shadow, index) => (
+                                <SimpleSelect.Option
+                                    key={index}
+                                    id={`${index}`}
+                                    value={shadow}
+                                >
+                                    {shadow}
+                                </SimpleSelect.Option>
+                            ))
+                        }
+                    </SimpleSelect>
+                </View>
+                <View
+                    as="div"
+                    display="block"
+                    padding="large"
+                    textAlign="center">
+                    <Popover
+                        renderTrigger={<div style={{ display: 'inline-block', height: '3px', width: '3px', background: 'blue' }} />}
+                        isShowingContent={this.state.isShowingContent}
+                        placement={this.state.placement}
+                        withArrow={this.state.withArrow}
+                        shouldAlignArrow={this.state.shouldAlignArrow}
+                        shadow={this.state.shadow}
+                        mountNode={() => document.getElementById('main')}
+                    >
+                        <Heading>Small<br />Target</Heading>
+                    </Popover>
+                </View>
+            </>
+        )
+    }
 }
 
 render(<Example />)
