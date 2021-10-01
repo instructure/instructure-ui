@@ -68,7 +68,6 @@ class Text extends Component<TextProps> {
     const ElementType = getElementType(Text, this.props)
 
     return (
-      // @ts-expect-error TODO: AsElementType is not compatible for ref
       <ElementType
         // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...passthroughProps(this.props)}
