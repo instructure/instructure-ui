@@ -113,8 +113,6 @@ class Menu extends Component<MenuProps> {
 
   handleRef = (el: HTMLUListElement | null) => {
     const { menuRef } = this.props
-
-    this.ref = el
     this._menu = el
     if (typeof menuRef === 'function') {
       menuRef(el)
@@ -529,6 +527,7 @@ class Menu extends Component<MenuProps> {
           // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
           ref: (el) => {
             this._trigger = el
+            this.ref = el
           },
           'aria-haspopup': true,
           id: this._labelId,
