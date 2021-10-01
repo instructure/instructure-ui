@@ -111,6 +111,11 @@ type PositionOwnProps = {
    * The content to be positioned
    */
   children?: React.ReactNode
+
+  /**
+   * Provides a reference to the underlying HTML root element (the target)
+   */
+  elementRef?: (element: Element | null) => void
 }
 
 type PositionState = {
@@ -127,7 +132,8 @@ type PropKeys = keyof PositionOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PositionProps = PositionOwnProps & WithStyleProps<PositionTheme, PositionStyle>
+type PositionProps = PositionOwnProps &
+  WithStyleProps<PositionTheme, PositionStyle>
 
 const propTypes: PropValidators<PropKeys> = {
   renderTarget: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -143,7 +149,8 @@ const propTypes: PropValidators<PropKeys> = {
   shouldPositionOverTarget: PropTypes.bool,
   onPositionChanged: PropTypes.func,
   onPositioned: PropTypes.func,
-  children: PropTypes.node
+  children: PropTypes.node,
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -160,7 +167,8 @@ const allowedProps: AllowedPropKeys = [
   'shouldPositionOverTarget',
   'onPositionChanged',
   'onPositioned',
-  'children'
+  'children',
+  'elementRef'
 ]
 
 export type { PositionProps, PositionState, PositionStyle }

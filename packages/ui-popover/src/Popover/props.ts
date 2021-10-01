@@ -82,6 +82,7 @@ type PopoverOwnProps = {
   onMouseOut?: (...args: any[]) => any
   renderTrigger?: React.ReactNode | ((...args: any[]) => any)
   children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  elementRef?: (element: Element | null) => void
 }
 
 type PopoverProps = PopoverOwnProps & BidirectionalProps
@@ -266,7 +267,12 @@ const propTypes: PropValidators<PropKeys> = {
   /**
    * The content to be shown by the popover
    */
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+
+  /**
+   * Provides a reference to the underlying HTML root element
+   */
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -309,7 +315,8 @@ const allowedProps: AllowedPropKeys = [
   'onMouseOver',
   'onMouseOut',
   'renderTrigger',
-  'children'
+  'children',
+  'elementRef'
 ]
 
 export type { PopoverProps }

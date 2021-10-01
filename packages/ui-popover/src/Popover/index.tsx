@@ -115,7 +115,6 @@ class Popover extends Component<PopoverProps> {
 
   _handleMouseOver: (...args: any[]) => any | undefined
   _handleMouseOut: (...args: any[]) => any | undefined
-  ref: Element | null = null
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
@@ -153,6 +152,13 @@ class Popover extends Component<PopoverProps> {
   }
 
   _raf: RequestAnimationFrameType[] = []
+
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
 
   get isTooltip() {
     return (
@@ -547,9 +553,6 @@ class Popover extends Component<PopoverProps> {
           shouldFocusOnOpen={!this.props.shouldFocusContentOnTriggerBlur}
           shouldCloseOnDocumentClick={this.props.shouldCloseOnDocumentClick}
           shouldCloseOnEscape={this.props.shouldCloseOnEscape}
-          elementRef={(element) => {
-            this.ref = element
-          }}
         >
           {content}
         </Dialog>
@@ -623,14 +626,18 @@ class Popover extends Component<PopoverProps> {
 
     if (this.props.positionTarget) {
       return (
-        <span>
+        <span ref={this.handleRef}>
           {this.renderTrigger()}
           <Position {...positionProps}>{this.renderContent()}</Position>
         </span>
       )
     } else {
       return (
-        <Position {...positionProps} renderTarget={this.renderTrigger()}>
+        <Position
+          {...positionProps}
+          renderTarget={this.renderTrigger()}
+          elementRef={this.handleRef}
+        >
           {this.renderContent()}
         </Position>
       )

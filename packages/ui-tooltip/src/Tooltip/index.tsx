@@ -73,6 +73,12 @@ class Tooltip extends Component<TooltipProps> {
   _id = uid('Tooltip')
   state = { hasFocus: false }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -161,6 +167,7 @@ class Tooltip extends Component<TooltipProps> {
         onHideContent={onHideContent}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
+        elementRef={this.handleRef}
       >
         <span id={this._id} css={styles?.tooltip} role="tooltip">
           {/* TODO: figure out how to add a ref to this */}
