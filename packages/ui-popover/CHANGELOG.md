@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.10.1](https://github.com/instructure/instructure-ui/compare/v8.10.0...v8.10.1) (2021-10-01)
+
+### Bug Fixes
+
+- **ui-popover:** popover does not update on certain prop changes ([93b506f](https://github.com/instructure/instructure-ui/commit/93b506fe0860718ebe2cc2729fd023e3e7489231))
+
 # [8.10.0](https://github.com/instructure/instructure-ui/compare/v8.9.1...v8.10.0) (2021-09-28)
 
 **Note:** Version bump only for package @instructure/ui-popover
