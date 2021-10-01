@@ -48,6 +48,7 @@ type InlineSVGOwnProps = {
     | 'brand'
     | 'auto'
   children?: React.ReactNode
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof InlineSVGOwnProps
@@ -86,7 +87,8 @@ const propTypes: PropValidators<PropKeys> = {
     'warning',
     'brand',
     'auto'
-  ])
+  ]),
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -98,7 +100,8 @@ const allowedProps: AllowedPropKeys = [
   'width',
   'height',
   'inline',
-  'color'
+  'color',
+  'elementRef'
 ]
 
 export type { InlineSVGProps, InlineSVGOwnProps, InlineSVGStyle }

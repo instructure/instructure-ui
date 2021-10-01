@@ -56,6 +56,11 @@ class SVGIcon extends Component<SVGIconProps> {
 
   ref: ReactInstance | null = null
 
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -85,9 +90,7 @@ class SVGIcon extends Component<SVGIconProps> {
         rotate={rotate}
         css={styles?.svgIcon}
         className={className}
-        ref={(element) => {
-          this.ref = element
-        }}
+        elementRef={this.handleRef}
       />
     )
   }

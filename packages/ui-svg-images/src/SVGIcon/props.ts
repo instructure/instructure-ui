@@ -62,6 +62,7 @@ const allowedProps: AllowedPropKeys = [
   'height',
   'inline',
   'color',
+  'elementRef',
   'rotate',
   'size',
   'bidirectional'

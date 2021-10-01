@@ -63,6 +63,11 @@ class InlineSVG extends Component<InlineSVGProps> {
 
   ref: Element | null = null
 
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   constructor() {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
     super()
@@ -178,9 +183,7 @@ class InlineSVG extends Component<InlineSVGProps> {
         css={styles?.inlineSVG}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'className' does not exist on type '{ mak... Remove this comment to see the full error message
         className={props.className}
-        ref={(el) => {
-          this.ref = el
-        }}
+        ref={this.handleRef}
       >
         {this.renderTitle()}
         {this.renderDesc(description)}
