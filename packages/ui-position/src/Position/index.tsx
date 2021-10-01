@@ -107,6 +107,11 @@ class Position extends Component<PositionProps, PositionState> {
   _content?: PositionElement
   _target?: PositionElement
 
+  handleRef = (el: Element | null) => {
+    this.ref = el
+    this.props.elementRef?.(el)
+  }
+
   shouldComponentUpdate(
     nextProps: PositionProps,
     nextState: PositionState,
@@ -255,7 +260,6 @@ class Position extends Component<PositionProps, PositionState> {
       content = safeCloneElement(content, {
         ref: (el: PositionElement) => {
           this._content = el
-          this.ref = el as Element
         },
         style: {
           boxSizing: 'border-box',
@@ -301,7 +305,7 @@ class Position extends Component<PositionProps, PositionState> {
   render() {
     const props = { [Position.locatorAttribute]: this._id }
     return (
-      <span {...props}>
+      <span {...props} ref={this.handleRef}>
         {this.renderTarget()}
         {this.renderContent()}
       </span>
