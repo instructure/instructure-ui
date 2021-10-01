@@ -28,10 +28,10 @@ class <%= name %><%= variant %> extends Component {
         {...this.props}
         name="<%= name %>"
         viewBox="<%= viewBox %>"
+        elementRef={this.handleRef}
         <% if (bidirectional) { %>
         bidirectional
         <% } %>
-        ref={this.handleRef}
       >
         <%= source %>
       </SVGIcon>

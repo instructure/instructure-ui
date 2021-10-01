@@ -146,9 +146,6 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
     return (
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormFieldGroup
-        elementRef={(el) => {
-          this.ref = el
-        }}
         {...omitProps(this.props, RadioInputGroup.allowedProps)}
         {...pickProps(this.props, FormFieldGroup.allowedProps)}
         // TODO: split out toggle variant into its own component
@@ -161,6 +158,9 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
         startAt={variant === 'toggle' ? 'small' : undefined}
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Rad... Remove this comment to see the full error message
         messagesId={this._messagesId}
+        elementRef={(el) => {
+          this.ref = el
+        }}
       >
         {this.renderChildren()}
       </FormFieldGroup>
