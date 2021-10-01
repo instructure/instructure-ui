@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.10.2](https://github.com/instructure/instructure-ui/compare/v8.10.1...v8.10.2) (2021-10-01)
+
+### Note:
+
+This version contains no new Features or Bug Fixes. But internally we have changed how we access the DOM to be in line with React best practices.
+
+`Warning: XYZ doesn't have "ref" property. ReactDOM.findDOMNode is deprecated in Strict mode, consider using refs instead. From InstUI v9, components must have the "ref" property for findDOMNode to work.`
+
+If you see warnings like the one above, please read this article on how to update your code here: [Accessing the DOM](/#accessing-the-dom)
+
 ## [8.10.1](https://github.com/instructure/instructure-ui/compare/v8.10.0...v8.10.1) (2021-10-01)
 
 ### Bug Fixes
