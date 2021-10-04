@@ -32,6 +32,7 @@ import type {
 import { isEqual } from 'lodash'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
+import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
 import { useTextDirectionContext } from '@instructure/ui-i18n'
 import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
@@ -75,6 +76,11 @@ type WithStyleProps<
 > = Theme extends null
   ? WithStylePrivateProps<Style>
   : WithStylePrivateProps<Style> & ThemeOverrideProp<Theme>
+
+const defaultValues = {
+  styles: {},
+  makeStyles: () => {}
+}
 
 /**
  * ---
@@ -161,9 +167,25 @@ const withStyle = decorator(
       const theme = useTheme()
       const dir = useTextDirectionContext()
 
+      if (props.styles) {
+        warn(
+          false,
+          `Manually passing the "styles" property is not allowed on the ${displayName} component. Using the default styles calculated by the @withStyle decorator instead.\n`,
+          props.styles
+        )
+      }
+
+      if (props.makeStyles) {
+        warn(
+          false,
+          `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyle decorator.`
+        )
+      }
+
       const componentProps: Props = {
         ...ComposedComponent.defaultProps,
-        ...props
+        ...props,
+        ...defaultValues
       }
 
       const themeOverride = getComponentThemeOverride(
@@ -205,9 +227,9 @@ const withStyle = decorator(
       return (
         <ComposedComponent
           ref={ref}
+          {...props}
           makeStyles={makeStyleHandler}
           styles={styles}
-          {...props}
         />
       )
     })
@@ -230,8 +252,8 @@ const withStyle = decorator(
     // eslint-disable-next-line no-param-reassign
     ComposedComponent.defaultProps = {
       ...ComposedComponent.defaultProps,
-      makeStyles: () => {},
-      styles: {}
+      makeStyles: defaultValues.makeStyles,
+      styles: defaultValues.styles
     }
 
     if (process.env.NODE_ENV !== 'production') {
