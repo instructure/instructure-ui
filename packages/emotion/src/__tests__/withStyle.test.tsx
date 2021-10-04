@@ -26,7 +26,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, match, mount, stub, within } from '@instructure/ui-test-utils'
 import { ApplyTextDirection } from '@instructure/ui-i18n'
 
 import { withStyle, jsx, EmotionThemeProvider, WithStyleProps } from '../index'
@@ -267,6 +267,83 @@ describe('@withStyle', async () => {
       // `inset-inline-start` should be transformed to 'right' in 'rtl' mode
       expect(computedStyle.left).to.equal('auto')
       expect(computedStyle.right).to.equal('8px')
+    })
+  })
+
+  describe('should not allow manually passing prop', async () => {
+    it('styles', async () => {
+      stub(console, 'warn') // suppress warning
+
+      const subject = await mount(
+        <EmotionThemeProvider theme={exampleTheme}>
+          <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
+        </EmotionThemeProvider>
+      )
+      const component = subject.getDOMNode()
+      const computedStyle = getComputedStyle(component)
+
+      expect(computedStyle.color).to.equal(textBrand)
+    })
+
+    it('makeStyles', async () => {
+      stub(console, 'warn') // suppress warning
+      const consoleLog = stub(console, 'log')
+
+      const subject = await mount(
+        <EmotionThemeProvider theme={exampleTheme}>
+          <ThemeableComponent
+            makeStyles={() => {
+              // eslint-disable-next-line no-console
+              console.log('Make it!')
+              return { exampleComponent: { color: 'red' } }
+            }}
+          />
+        </EmotionThemeProvider>
+      )
+      const component = subject.getDOMNode()
+      const computedStyle = getComputedStyle(component)
+
+      expect(computedStyle.color).to.equal(textBrand)
+      expect(consoleLog).not.to.have.been.called()
+    })
+  })
+
+  describe('should throw warning when manually passing prop', async () => {
+    it('styles', async () => {
+      const consoleWarning = stub(console, 'warn')
+
+      await mount(
+        <EmotionThemeProvider theme={exampleTheme}>
+          <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
+        </EmotionThemeProvider>
+      )
+
+      expect(consoleWarning).to.have.been.calledWithMatch(
+        `Warning: Manually passing the "styles" property is not allowed on the ThemeableComponent component. Using the default styles calculated by the @withStyle decorator instead.`,
+        match.object,
+        match.string
+      )
+    })
+
+    it('makeStyles', async () => {
+      const consoleWarning = stub(console, 'warn')
+
+      await mount(
+        <EmotionThemeProvider theme={exampleTheme}>
+          <ThemeableComponent
+            makeStyles={() => {
+              // eslint-disable-next-line no-console
+              console.log('Make it!')
+              return { exampleComponent: { color: 'red' } }
+            }}
+          />
+        </EmotionThemeProvider>
+      )
+
+      expect(consoleWarning).to.have.been.calledWithMatch(
+        `Manually passing the "makeStyles" property is not allowed on the ThemeableComponent component. Styles are calculated by the @withStyle decorator.`,
+        match.string
+      )
     })
   })
 })
