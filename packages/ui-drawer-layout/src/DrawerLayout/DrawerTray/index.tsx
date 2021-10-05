@@ -170,7 +170,6 @@ class DrawerTray extends Component<
     if (typeof render === 'function') {
       return render()
     } else if (typeof children === 'function') {
-      // @ts-expect-error TODO: fix
       return children()
     } else {
       return children

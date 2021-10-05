@@ -38,7 +38,7 @@ import {
 try {
   const pkgJSON = getPackageJSON(undefined)
   postPublish(pkgJSON.name, pkgJSON.version, getConfig(pkgJSON))
-} catch (err) {
+} catch (err: any) {
   error(err)
   process.exit(1)
 }

@@ -28,8 +28,12 @@ import Jira from 'jira-client'
 
 import { info, error } from '@instructure/command-utils'
 
-const { JIRA_PEM_PATH, JIRA_TOKEN, JIRA_CONSUMER_KEY, JIRA_SECRET } =
-  process.env
+const {
+  JIRA_PEM_PATH,
+  JIRA_TOKEN,
+  JIRA_CONSUMER_KEY,
+  JIRA_SECRET
+} = process.env
 
 let JIRA: any
 
@@ -79,7 +83,7 @@ export async function findJiraVersion(
       `Looking for ${jiraVersionName} in Jira project: ${config.jira_project_key}...`
     )
     result = await jiraClient(config).getVersions(config.jira_project_key)
-  } catch (e) {
+  } catch (e: any) {
     error(`Could not get Jira versions for project: ${config.jira_project_key}`)
     error(e)
   }
@@ -118,19 +122,10 @@ export async function createJiraVersion(
       released: true,
       projectId: config.jira_project_id
     })
-  } catch (e) {
+  } catch (e: any) {
     error(`An error occured creating Jira Release version: ${jiraVersionName}!`)
     error(e)
   }
-
-  // result = {
-  //   "self":"https://instructure.atlassian.net/rest/api/2/version/46639",
-  //   "id":"46639",
-  //   "name":"instructure-ui v5.10.0",
-  //   "archived":false,
-  //   "released":true,
-  //   "projectId":17900
-  // }
 
   if (result && result.id) {
     info(`Created ${result.name}:`, JSON.stringify(result))
@@ -156,7 +151,7 @@ export async function updateJiraIssues(
             fixVersions: [{ add: { name: jiraVersionName } }]
           }
         })
-      } catch (err) {
+      } catch (err: any) {
         error(`An error occured updating Jira issue ${issueKey}!`)
         error(err)
         result = Promise.resolve()

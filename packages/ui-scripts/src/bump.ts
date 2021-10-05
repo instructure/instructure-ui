@@ -32,7 +32,7 @@ try {
   // optional release type/version argument: major, minor, patch, [version]
   // e.g. ui-scripts --bump major
   bump(pkgJSON.name, process.argv[3])
-} catch (err) {
+} catch (err: any) {
   error(err)
   process.exit(1)
 }
@@ -44,7 +44,7 @@ async function bump(packageName: any, requestedVersion: any) {
 
   try {
     releaseVersion = await bumpPackages(packageName, requestedVersion)
-  } catch (err) {
+  } catch (err: any) {
     error(err)
     process.exit(1)
   }
@@ -55,7 +55,7 @@ async function bump(packageName: any, requestedVersion: any) {
 
   try {
     commitVersionBump(releaseVersion)
-  } catch (err) {
+  } catch (err: any) {
     error(err)
     process.exit(1)
   }

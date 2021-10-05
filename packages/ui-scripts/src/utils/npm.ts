@@ -73,7 +73,7 @@ export const publishPackages = async (
     info(
       `📦  ${publishedVersion} of ${packageName} was successfully published!`
     )
-  } catch (err) {
+  } catch (err: any) {
     error(err)
     process.exit(1)
   }
@@ -144,7 +144,7 @@ export async function bumpPackages(packageName: string, requestedVersion: any) {
     releaseVersion = await syncRootPackageVersion(true)
 
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
-  } catch (err) {
+  } catch (err: any) {
     error(err)
     process.exit(1)
   }
@@ -165,7 +165,7 @@ export function createNPMRCFile(config: any = {}) {
 
   try {
     runCommandSync('npm', ['whoami'])
-  } catch (e) {
+  } catch (e: any) {
     error(`Could not determine if NPM auth was successful: ${e}`)
   }
 }

@@ -232,13 +232,11 @@ class TextInput extends Component<
         type={type}
         id={this.id}
         required={isRequired}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
         aria-invalid={this.invalid ? 'true' : null}
         disabled={interaction === 'disabled'}
         readOnly={interaction === 'readonly'}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
         aria-describedby={descriptionIds !== '' ? descriptionIds : null}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | number | undefined' is not assignab... Remove this comment to see the full error message
+        //@ts-expect-error can't be string
         size={htmlSize}
         onChange={this.handleChange}
         onBlur={this.handleBlur}

@@ -61,7 +61,7 @@ const ResponsivePropTypes = {
     try {
       jsonToMediaQuery(props[propName])
       return null
-    } catch (e) {
+    } catch (e: any) {
       return new Error(
         `Invalid query prop supplied to \`${componentName}\`. ${e.message}`
       )

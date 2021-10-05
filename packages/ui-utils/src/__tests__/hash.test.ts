@@ -31,7 +31,7 @@ describe('hash', () => {
 
     try {
       expect(hash(undefined)).to.equal('')
-    } catch (err) {
+    } catch (err: any) {
       error = true
     }
 

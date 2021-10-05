@@ -323,7 +323,6 @@ class Select extends Component<SelectProps> {
                 highlightId = this._optionIds[0]
               } else {
                 // find next id based on direction
-                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'null' is not assignable to param... Remove this comment to see the full error message
                 const index = this._optionIds.indexOf(highlightedOptionId)
                 highlightId =
                   index > -1 ? this._optionIds[index + direction!] : null

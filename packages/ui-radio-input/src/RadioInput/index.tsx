@@ -162,8 +162,7 @@ class RadioInput extends Component<RadioInputProps> {
           type="radio"
           css={styles?.input}
           disabled={disabled || readOnly}
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
-          aria-disabled={disabled || readOnly ? 'true' : null}
+          aria-disabled={disabled || readOnly ? 'true' : undefined}
           onChange={this.handleChange}
           onClick={this.handleClick}
         />

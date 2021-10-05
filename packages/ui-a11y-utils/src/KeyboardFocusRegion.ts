@@ -199,7 +199,7 @@ class KeyboardFocusRegion {
       try {
         // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
         this._focusLaterElement.focus()
-      } catch (e) {
+      } catch (e: any) {
         error(
           false,
           `

@@ -100,7 +100,7 @@ console.log(
           })
         })
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(
         `Error during story generation for ${exampleFilePath}: ${e}\n${e?.stack}`
       )

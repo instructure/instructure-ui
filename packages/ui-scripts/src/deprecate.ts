@@ -40,7 +40,7 @@ try {
   const fixVersion = process.argv[4]
 
   deprecate(versionToDeprecate, fixVersion, getConfig(pkgJSON))
-} catch (err) {
+} catch (err: any) {
   error(err)
   process.exit(1)
 }
@@ -71,7 +71,7 @@ async function deprecate(
         try {
           await runCommandAsync('npm', ['deprecate', toDeprecate, message])
           info(`📦  ${toDeprecate} was successfully deprecated!`)
-        } catch (err) {
+        } catch (err: any) {
           error(err)
         }
       }

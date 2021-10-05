@@ -98,7 +98,7 @@ function fireDOMEvent(
     setTimeout(() => {
       try {
         resolve(fireEvent(init))
-      } catch (e) {
+      } catch (e: any) {
         reject(e)
       }
     }, 0)
@@ -134,7 +134,7 @@ async function firePointerEvent(
             )
           )
         }
-      } catch (e) {
+      } catch (e: any) {
         /* istanbul ignore next */
         reject(e)
       }
@@ -178,7 +178,7 @@ async function fireClickEvent(
             )
           )
         }
-      } catch (e) {
+      } catch (e: any) {
         /* istanbul ignore next */
         reject(e)
       }
@@ -228,7 +228,7 @@ async function fireBlurEvent(
             )
           )
         }
-      } catch (e) {
+      } catch (e: any) {
         /* istanbul ignore next */
         reject(e)
       }
@@ -278,7 +278,7 @@ async function fireFocusEvent(
             )
           )
         }
-      } catch (e) {
+      } catch (e: any) {
         /* istanbul ignore next */
         reject(e)
       }
@@ -328,7 +328,7 @@ async function fireKeyboardEvent(
             )
           )
         }
-      } catch (e) {
+      } catch (e: any) {
         /* istanbul ignore next */
         reject(e)
       }

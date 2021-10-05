@@ -29,7 +29,7 @@ const { argv } = process
 
 try {
   installReact()
-} catch (err) {
+} catch (err: any) {
   error(err)
   process.exit(1)
 }
@@ -67,7 +67,7 @@ async function installReact() {
   try {
     info(`Installing React...`)
     runCommandSync('yarn', ['--pure-lockfile', '--force'])
-  } catch (err) {
+  } catch (err: any) {
     error(err)
     process.exit(1)
   }

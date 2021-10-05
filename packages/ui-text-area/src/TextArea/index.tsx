@@ -330,7 +330,6 @@ class TextArea extends Component<TextAreaProps> {
         id={this.id}
         required={required}
         aria-required={required}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
         aria-invalid={this.invalid ? 'true' : null}
         disabled={disabled || readOnly}
         css={this.props.styles?.textArea}

@@ -174,9 +174,7 @@ class InlineSVG extends Component<InlineSVGProps> {
         width={width}
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | number | null | undefined' is not a... Remove this comment to see the full error message
         height={height}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
         aria-hidden={title ? null : 'true'}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
         aria-labelledby={this.labelledBy}
         role={this.role}
         focusable={focusable ? 'true' : 'false'}

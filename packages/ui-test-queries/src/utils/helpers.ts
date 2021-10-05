@@ -96,7 +96,7 @@ function typeIn(element: Element, text: string) {
           fireEvent.keyUp(element, keyEventData)
         }
         resolve()
-      } catch (err) {
+      } catch (err: any) {
         reject(err)
       }
     }, 0)

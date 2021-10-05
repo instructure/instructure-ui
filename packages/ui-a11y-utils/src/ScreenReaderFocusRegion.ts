@@ -184,7 +184,7 @@ class ScreenReaderFocusRegion {
         let body = null
         try {
           body = iframe.contentDocument.body
-        } catch (e) {
+        } catch (e: any) {
           warn(
             false,
             `[ui-a11y] could not find a document for iframe: ${e} ${iframe}`

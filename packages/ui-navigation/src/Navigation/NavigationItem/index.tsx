@@ -75,12 +75,12 @@ class NavigationItem extends Component<NavigationItemProps> {
     const props = omitProps(this.props, NavigationItem.allowedProps)
 
     return (
+      //@ts-expect-error TODO: INSTUI-3245
       <ElementType
         {...props}
         href={href}
         onClick={onClick}
         css={this.props.styles?.navigationItem}
-        //@ts-expect-error TODO: INSTUI-3245
         aria-label={this.props.minimized ? label : undefined}
         // @ts-expect-error TODO fix TS2590: Expression produces a union type that is too complex to represent.
         ref={(element) => {

@@ -42,7 +42,7 @@ try {
   const tag = process.argv[5] || 'latest'
 
   distTag(command, versionToTag, tag, getConfig(pkgJSON))
-} catch (err) {
+} catch (err: any) {
   error(err)
   process.exit(1)
 }
@@ -70,7 +70,7 @@ async function distTag(
         info(`📦  Running 'dist-tag ${command} ${toTag} ${tag}'...`)
         try {
           await runCommandAsync('npm', ['dist-tag', command, toTag, tag])
-        } catch (err) {
+        } catch (err: any) {
           error(err)
         }
         info(`📦  ${toTag} tags were successfully updated!`)

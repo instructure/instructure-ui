@@ -31,9 +31,7 @@ function getRenderStack() {
   let renderStack = ''
   try {
     // this is so bad to use, that its not even typed :)
-    renderStack = (
-      React as any
-    ).__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
+    renderStack = (React as any).__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
   } catch (error) {
     // log happened outside a react render or couldn't figure out where in the render stack we are.
   }
@@ -58,6 +56,7 @@ function logMessage(
   if (process.env.NODE_ENV !== 'production' && !condition) {
     if (typeof console[level] === 'function') {
       const renderStack = withRenderStack ? getRenderStack() : ''
+      //@ts-expect-error level can be 'constructor' which is not callable
       console[level](`Warning: ${message}`, ...args, renderStack)
     } else {
       throw new Error(`'${level}' is not a valid console method!`)
