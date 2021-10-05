@@ -33,6 +33,7 @@ import { ComponentType } from 'react'
 // must be imported with Webpack because this file cannot contain async calls
 // @ts-ignore TODO figure out why this is an error
 import propJSONData from '../../prop-data.json'
+import TooltipPositioning from './TooltipPositioning'
 
 const examplesContext = require.context(
   '../../../', // bug: This causes start:watch to recompile endlessly in SB 6.2+
@@ -107,5 +108,11 @@ console.log(
     }
   }
 )
+
+// Stories not tied to one component
+storiesOf('Tooltip positioning', module).add('Tooltip positions', () =>
+  TooltipPositioning()
+)
+numStories++
 // eslint-disable-next-line no-console
 console.log(`Created ${numStories} stories!`)

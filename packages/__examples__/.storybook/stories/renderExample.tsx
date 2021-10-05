@@ -34,7 +34,7 @@ export function renderExample({
   componentProps,
   exampleProps,
   key
-}: Example) {
+}: Example<any>) {
   const [isInfoOpen, setIsInfoOpen] = useState(false)
 
   const toggleInfoModal = () => {
