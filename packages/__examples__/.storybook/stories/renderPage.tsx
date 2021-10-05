@@ -27,7 +27,7 @@ import { ApplyLocale } from '@instructure/ui-i18n'
 import { ExamplesPage } from '@instructure/ui-test-utils'
 
 // eslint-disable-next-line react/prop-types
-export function renderPage({ examples, renderExample }: ExamplesPage) {
+export function renderPage({ examples, renderExample }: ExamplesPage<any>) {
   return (
     <ApplyLocale locale="en-US">{examples.map(renderExample!)}</ApplyLocale>
   )
