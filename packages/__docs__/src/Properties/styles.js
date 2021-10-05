@@ -45,7 +45,14 @@ const generateStyle = (componentTheme, props, state) => {
       margin: 0,
       padding: 0,
       display: 'inline',
-      listStyleType: 'none'
+      listStyleType: 'none',
+      code: { fontSize: '0.875em' }
+    },
+
+    listSignatureItem: {
+      label: 'properties__listSignatureItem',
+      whiteSpace: 'pre-wrap',
+      '&:first-of-type': { display: 'inline' }
     },
 
     listItem: {

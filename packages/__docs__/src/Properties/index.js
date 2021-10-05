@@ -284,10 +284,16 @@ class Properties extends Component {
       return
     }
 
+    const signature = tsType.raw.split('\n').map((value, idx) => (
+      <li css={styles.listSignatureItem} key={idx}>
+        <code>{value}</code>
+      </li>
+    ))
+
     return (
       <span>
         <span css={styles.oneOf}>Type of:</span>{' '}
-        <ul css={styles.list}>{tsType.raw}</ul>
+        <ul css={styles.list}>{signature}</ul>
       </span>
     )
   }
