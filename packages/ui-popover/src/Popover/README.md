@@ -9,25 +9,72 @@ Popovers hide or show content as a result of user interaction, such as clicking,
 ```js
 ---
 example: true
+render: false
 ---
-<Popover
-  renderTrigger={
-    <Link aria-describedby="tip">
-      Hover or focus me
-    </Link>
-  }
-  shouldRenderOffscreen
-  shouldReturnFocus={false}
-  placement="top center"
-  mountNode={() => document.getElementById('main')}
-  onPositioned={() => console.log('positioned')}
-  onShowContent={() => console.log('showing')}
-  onHideContent={() => console.log('hidden')}
->
-  <View padding="x-small" display="block" as="div" id="tip">
-    Hello World
-  </View>
-</Popover>
+class Example extends React.Component {
+    state = {
+        withArrow: true,
+        shouldAlignArrow: true,
+        color : "primary"
+    }
+    toggleWithArrow = (event) => this.setState({ withArrow: !this.state.withArrow })
+    toggleAlignArrow = (event) => this.setState({ shouldAlignArrow: !this.state.shouldAlignArrow })
+    changeColor = (event,color) =>  {this.setState({color})}
+    render() {
+        return (
+            <>
+                <FormFieldGroup description="Uncontrolled Popover Example">
+                    <Checkbox
+                        checked={this.state.withArrow}
+                        label="With Arrow"
+                        onChange={this.toggleWithArrow}
+                    />
+                    <Checkbox
+                        checked={this.state.shouldAlignArrow}
+                        label="Align Arrow"
+                        onChange={this.toggleAlignArrow}
+                    />
+                </FormFieldGroup>
+                <View display="block" margin="small none">
+                    <RadioInputGroup
+                        name="color"
+                        defaultValue="primary"
+                        description="Color:"
+                        variant="toggle"
+                        size="small"
+                        onChange={this.changeColor} >
+                        <RadioInput label="Primary" value="primary"/>
+                        <RadioInput label="Primary inverse" value="primary-inverse" />
+                    </RadioInputGroup>
+                </View>
+                <View display="block" as="div" margin="small">
+                    <Popover
+                        renderTrigger={
+                            <Link aria-describedby="tip">
+                                Hover or focus me
+                            </Link>
+                        }
+                        shouldRenderOffscreen
+                        shouldReturnFocus={false}
+                        withArrow={this.state.withArrow}
+                        shouldAlignArrow={this.state.shouldAlignArrow}
+                        color = {this.state.color}
+                        placement = "top end"
+                        mountNode={() => document.getElementById('main')}
+                        onPositioned={() => console.log('positioned')}
+                        onShowContent={() => console.log('showing')}
+                        onHideContent={() => console.log('hidden')}
+                    >
+                        <View padding="x-small" display="block" as="div" id="tip">
+                            Hello World
+                        </View>
+                    </Popover>
+                </View>
+            </>
+        )
+    }
+}
+render(<Example />)
 
 ```
 
@@ -39,13 +86,11 @@ render: false
 example: true
 ---
 class Example extends React.Component {
-  constructor (props) {
-    super(props)
 
-    this.state = {
+    state = {
       isShowingContent: false
     }
-  }
+
 
   renderCloseButton () {
     return (
@@ -105,21 +150,131 @@ render: false
 example: true
 ---
 class Example extends React.Component {
-render () {
-  return (
-      <div style={{ paddingBottom: 25, display: 'flex', justifyContent: 'center' }}>
-        <Popover
-          renderTrigger={<div style={{display: 'inline-block', height: '3px', width: '3px', background: 'blue'}}/>}
-          isShowingContent={true}
-          placement="end top"
-          shouldAlignArrow
-          mountNode={() => document.getElementById('main')}
-        >
-          <Heading>Small<br/>Target</Heading>
-        </Popover>
-      </div>
-  )
-}
+
+        state = {
+            shouldAlignArrow: true,
+            isShowingContent: true,
+            withArrow: true,
+            placement: 'top',
+            shadow: 'topmost',
+            placementsValues: [
+                'top',
+                'end',
+                'bottom',
+                'start',
+                'top start',
+                'start top',
+                'start center',
+                'start bottom',
+                'bottom start',
+                'bottom center',
+                'bottom end',
+                'end bottom',
+                'end center',
+                'end top',
+                'top end',
+                'top center',
+                'center end',
+                'center start'
+            ],
+            shadowValues: [
+                'none',
+                'resting',
+                'above',
+                'topmost'
+            ],
+
+    }
+    changePlacement = (e, { value }) => this.setState({ placement: value })
+    changeShadow = (e, { value }) => this.setState({ shadow: value})
+    toggleWithArrow = (event) => this.setState({ withArrow: !this.state.withArrow })
+    toggleAlignArrow = (event) => this.setState({ shouldAlignArrow: !this.state.shouldAlignArrow })
+    toggleShowContent = (event) => this.setState({ isShowingContent: !this.state.isShowingContent })
+    render() {
+        return (
+            <>
+                <FormFieldGroup description="Popover Example">
+                    <Checkbox
+                        checked={this.state.isShowingContent}
+                        label="Show Content"
+                        onChange={this.toggleShowContent}
+                    />
+                    <Checkbox
+                        checked={this.state.withArrow}
+                        label="With Arrow"
+                        onChange={this.toggleWithArrow}
+                    />
+                    <Checkbox
+                        checked={this.state.shouldAlignArrow}
+                        label="Align Arrow"
+                        onChange={this.toggleAlignArrow}
+                    />
+                </FormFieldGroup>
+                <View
+                    as="div"
+                    margin="large none"
+                    maxWidth="15rem"
+                >
+                    <SimpleSelect
+                        renderLabel="Placement"
+                        value={this.state.placement}
+                        onChange={this.changePlacement}
+                    >
+                        {this.state.placementsValues.map((placement, index) => (
+                            <SimpleSelect.Option
+                                key={index}
+                                id={`${index}`}
+                                value={placement}
+                            >
+                                {placement}
+                            </SimpleSelect.Option>
+                        ))}
+
+                    </SimpleSelect>
+                </View>
+                <View
+                    as="div"
+                    margin="large none"
+                    maxWidth="15rem"
+                >
+                    <SimpleSelect
+                        renderLabel="Shadow"
+                        value={this.state.shadow}
+                        onChange={this.changeShadow}
+                    >
+                        {
+                            this.state.shadowValues.map((shadow, index) => (
+                                <SimpleSelect.Option
+                                    key={index}
+                                    id={`${index}`}
+                                    value={shadow}
+                                >
+                                    {shadow}
+                                </SimpleSelect.Option>
+                            ))
+                        }
+                    </SimpleSelect>
+                </View>
+                <View
+                    as="div"
+                    display="block"
+                    padding="large"
+                    textAlign="center">
+                    <Popover
+                        renderTrigger={<div style={{ display: 'inline-block', height: '3px', width: '3px', background: 'blue' }} />}
+                        isShowingContent={this.state.isShowingContent}
+                        placement={this.state.placement}
+                        withArrow={this.state.withArrow}
+                        shouldAlignArrow={this.state.shouldAlignArrow}
+                        shadow={this.state.shadow}
+                        mountNode={() => document.getElementById('main')}
+                    >
+                        <Heading>Small<br />Target</Heading>
+                    </Popover>
+                </View>
+            </>
+        )
+    }
 }
 
 render(<Example />)
@@ -133,13 +288,10 @@ render: false
 example: true
 ---
 class Example extends React.Component {
-  constructor (props) {
-    super(props)
 
-    this.state = {
+    state = {
       isShowingContent: false
     }
-  }
 
   render () {
     return (
