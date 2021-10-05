@@ -170,6 +170,29 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
+### Custom elements as renderTrigger
+
+Popover and Tooltip attach mouse and focus event listeners to their `renderTrigger` components via props. These need to be propagated to the component for the listeners to work:
+
+```js
+---
+  example: true
+---
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props)
+    this.ref = React.createRef()
+  }
+  render() {
+    //  Spread the props to the underlying DOM element
+    return <div {...this.props} ref={this.ref} style={{width:"10rem"}}>My custom component</div>
+  }
+}
+<Popover renderTrigger={<MyComponent />} >
+  This text is wrapped by a Popover
+</Popover>
+```
+
 ### Guidelines
 
 ```js
