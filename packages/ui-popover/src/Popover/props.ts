@@ -38,6 +38,32 @@ import type {
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 import type { PropValidators } from '@instructure/shared-types'
 
+const placementPropValues = [
+  'top',
+  'bottom',
+  'start',
+  'end',
+  'top start',
+  'top center',
+  'top end',
+  'top stretch',
+  'bottom start',
+  'bottom center',
+  'bottom end',
+  'bottom stretch',
+  'start top',
+  'start center',
+  'start bottom',
+  'start stretch',
+  'end top',
+  'end center',
+  'end bottom',
+  'end stretch',
+  'center start',
+  'center end',
+  'offscreen'
+]
+
 type PopoverOwnProps = {
   isShowingContent?: boolean
   defaultIsShowingContent?: boolean
@@ -118,7 +144,7 @@ const propTypes: PropValidators<PropKeys> = {
   /**
    * The placement of the content in relation to the trigger
    */
-  placement: PositionPropTypes.placement,
+  placement: PropTypes.oneOf(placementPropValues),
   /**
    * Controls the shadow depth for the `<Popover />`
    */
