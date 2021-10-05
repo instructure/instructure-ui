@@ -70,7 +70,7 @@ function getScrollParents(el?: UIElement) {
       let style
       try {
         style = getComputedStyle(parent)
-      } catch (err) {} // eslint-disable-line no-empty
+      } catch (err: any) {} // eslint-disable-line no-empty
 
       if (typeof style === 'undefined' || style === null) {
         parents.push(parent)

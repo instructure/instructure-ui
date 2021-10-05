@@ -102,7 +102,7 @@ function querySelectorFrames(
       let doc = null
       try {
         doc = (frame as HTMLIFrameElement).contentDocument!.documentElement
-      } catch (e) {
+      } catch (e: any) {
         console.warn(
           `[ui-test-queries] could not find document element for iframe: ${e}`
         )

@@ -77,7 +77,7 @@ async function getUsedPackages() {
           )
           info(stdout)
           packageIsUsed = stdout.includes(' Found')
-        } catch (err) {
+        } catch (err: any) {
           info(`${pkg.name} is not used. ${err}`)
         }
         if (packageIsUsed) return pkg

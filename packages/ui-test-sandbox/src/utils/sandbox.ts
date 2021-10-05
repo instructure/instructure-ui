@@ -53,7 +53,7 @@ class Sandbox {
       before(this.init.bind(this))
       beforeEach(this.setup.bind(this))
       afterEach(this.teardown.bind(this))
-    } catch (e) {
+    } catch (e: any) {
       console.warn(`[ui-test-sandbox] error initializing test sandbox: ${e}`)
     }
   }

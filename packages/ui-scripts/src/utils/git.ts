@@ -46,7 +46,7 @@ export const isReleaseCommit = (version: string) => {
       formattedResult &&
       formattedResult.startsWith(`chore(release): ${version}`)
     )
-  } catch (e) {
+  } catch (e: any) {
     error(e)
     process.exit(1)
   }
@@ -57,7 +57,7 @@ export function checkWorkingDirectory() {
 
   try {
     result = runGitCommand(['status', '--porcelain'])
-  } catch (e) {
+  } catch (e: any) {
     error(e)
     process.exit(1)
   }
@@ -75,7 +75,7 @@ export function checkIfGitTagExists(version: string) {
 
   try {
     result = runGitCommand(['tag', '--list', tag])
-  } catch (e) {
+  } catch (e: any) {
     error(e)
     process.exit(1)
   }
@@ -92,14 +92,14 @@ export function checkIfGitTagExists(version: string) {
 export function commit() {
   try {
     runGitCommand(['commit', '--dry-run'])
-  } catch (err) {
+  } catch (err: any) {
     error(err.stdout)
     process.exit(1)
   }
 
   try {
     runCommandSync('yarn', ['husky:pre-commit'])
-  } catch (err) {
+  } catch (err: any) {
     error(err.stdout)
     process.exit(1)
   }
@@ -120,7 +120,7 @@ export function createGitTagForRelease(version: string) {
   try {
     runGitCommand(['tag', '-am', `Version ${version}`, tag])
     runGitCommand(['push', origin, tag])
-  } catch (e) {
+  } catch (e: any) {
     error(e)
     process.exit(1)
   }
@@ -160,7 +160,7 @@ export function getIssuesInRelease(jiraProjectKey: string) {
   try {
     currentReleaseTag = getCurrentReleaseTag()
     previousReleaseTag = getPreviousReleaseTag()
-  } catch (e) {
+  } catch (e: any) {
     error(e)
     process.exit(1)
   }
@@ -174,7 +174,7 @@ export function getIssuesInRelease(jiraProjectKey: string) {
       'log',
       `${previousReleaseTag}..${currentReleaseTag}`
     ])
-  } catch (e) {
+  } catch (e: any) {
     error(e)
     process.exit(1)
   }
@@ -196,7 +196,7 @@ export function getIssuesInCommit(jiraProjectKey: any) {
 
   try {
     result = runGitCommand(['log', '-1', '--pretty=format:%B'])
-  } catch (e) {
+  } catch (e: any) {
     error(e)
     process.exit(1)
   }

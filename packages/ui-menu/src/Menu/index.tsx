@@ -464,13 +464,11 @@ class Menu extends Component<MenuProps> {
         <ul
           role="menu"
           aria-label={label}
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
-          tabIndex="0"
+          tabIndex={0}
           css={this.props.styles?.menu}
           aria-labelledby={labelledBy || (trigger && this._labelId)}
           aria-controls={controls}
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
-          aria-disabled={disabled ? 'true' : null}
+          aria-disabled={disabled ? 'true' : undefined}
           onKeyDown={this.handleMenuKeyDown}
           onKeyUp={onKeyUp}
           ref={this.handleRef}

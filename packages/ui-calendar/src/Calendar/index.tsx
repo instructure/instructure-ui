@@ -33,7 +33,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
-// @ts-expect-error ts-migrate(6133) FIXME: 'uid' is declared but its value is never read.
 import { uid } from '@instructure/uid'
 
 import testable from '@instructure/ui-testable'

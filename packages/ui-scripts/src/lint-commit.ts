@@ -28,7 +28,7 @@ import { lintCommitMessage } from './utils/git'
 
 try {
   lintCommit()
-} catch (err) {
+} catch (err: any) {
   error(err)
   process.exit(1)
 }

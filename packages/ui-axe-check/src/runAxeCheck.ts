@@ -73,7 +73,7 @@ export default async function runAxe(element, options = {}) {
       // @ts-expect-error ts-migrate(2322) FIXME: Type 'Error' is not assignable to type 'boolean'.
       result = new Error(formatError(violations))
     }
-  } catch (err) {
+  } catch (err: any) {
     result = err
   }
   return result

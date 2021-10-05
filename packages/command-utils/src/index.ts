@@ -105,7 +105,7 @@ function runCommandsConcurrently(commands: Record<string, any>) {
 
   try {
     result = runCommandSync(`${resolveBin('concurrently')}`, args)
-  } catch (err) {
+  } catch (err: any) {
     error(err)
   }
 
@@ -179,7 +179,7 @@ async function confirm(question: string): Promise<string> {
         dialog.close()
         resolve(reply)
       })
-    } catch (e) {
+    } catch (e: any) {
       reject(e)
     }
   })

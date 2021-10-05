@@ -111,7 +111,7 @@ export function waitForQueryResult(
           // Return the query result when we get what we expected:
           onDone(null, lastResult)
         }
-      } catch (e) {
+      } catch (e: any) {
         // If `query` throws an error, wait for the next mutation or timeout.
         // Save the query error to reject the promise with it.
         lastError = e

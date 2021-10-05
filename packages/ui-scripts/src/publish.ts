@@ -46,7 +46,7 @@ try {
     //TODO investigate if config is needed
     config: getConfig(pkgJSON)
   })
-} catch (err) {
+} catch (err: any) {
   error(err)
   process.exit(1)
 }
@@ -98,7 +98,7 @@ async function publish({
               { stdio: 'pipe' }
             )
             packageInfo = JSON.parse(stdout)
-          } catch (e) {
+          } catch (e: any) {
             error(e)
           }
 
@@ -115,7 +115,7 @@ async function publish({
               info(
                 `📦  Version ${version} of ${packageName} was successfully published!`
               )
-            } catch (err) {
+            } catch (err: any) {
               error(err)
             }
           }
@@ -126,7 +126,7 @@ async function publish({
     try {
       info(`📦  Version: ${version}, Tag: snapshot`)
       return await publishPackages(packageName, 'prerelease', 'snapshot')
-    } catch (e) {
+    } catch (e: any) {
       error(e)
       process.exit(1)
     }
