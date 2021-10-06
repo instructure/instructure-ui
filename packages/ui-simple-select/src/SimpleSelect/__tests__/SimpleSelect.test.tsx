@@ -370,7 +370,7 @@ describe('<SimpleSelect />', async () => {
       'rgb(252, 94, 19)'
     )
     expect(getComputedStyle(itemIcons[1].getDOMNode()).fill).to.equal(
-      'rgb(0, 142, 226)'
+      'rgb(3, 116, 181)'
     )
   })
 

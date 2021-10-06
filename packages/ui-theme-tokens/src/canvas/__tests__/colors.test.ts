@@ -26,7 +26,7 @@ import { contrast } from '@instructure/ui-color-utils'
 
 import { colors } from '../colors'
 
-describe('colors', () => {
+describe('canvas colors', () => {
   describe('textDarkest', () => {
     it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
       expect(
@@ -164,9 +164,7 @@ describe('colors', () => {
 
   describe('borderLight', () => {
     it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
-      expect(
-        contrast(colors.borderLight, colors.backgroundDarkest)
-      ).to.be.above(3)
+      expect(contrast(colors.borderLight, colors.backgroundDark)).to.be.above(3)
     })
     it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
       expect(
@@ -198,9 +196,7 @@ describe('colors', () => {
       )
     })
     it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
-      expect(
-        contrast(colors.borderBrand, colors.backgroundDarkest)
-      ).to.be.above(3)
+      expect(contrast(colors.borderBrand, colors.backgroundDark)).to.be.above(3)
     })
     it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
       expect(
@@ -230,9 +226,7 @@ describe('colors', () => {
       expect(contrast(colors.borderInfo, colors.backgroundLight)).to.be.above(3)
     })
     it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
-      expect(contrast(colors.borderInfo, colors.backgroundDarkest)).to.be.above(
-        3
-      )
+      expect(contrast(colors.borderInfo, colors.backgroundDark)).to.be.above(3)
     })
     it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
       expect(contrast(colors.borderInfo, colors.backgroundDarkest)).to.be.above(
@@ -247,9 +241,9 @@ describe('colors', () => {
       ).to.be.above(3)
     })
     it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
-      expect(
-        contrast(colors.borderSuccess, colors.backgroundDarkest)
-      ).to.be.above(3)
+      expect(contrast(colors.borderSuccess, colors.backgroundDark)).to.be.above(
+        3
+      )
     })
     it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
       expect(
@@ -264,9 +258,9 @@ describe('colors', () => {
       ).to.be.above(3)
     })
     it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
-      expect(
-        contrast(colors.borderWarning, colors.backgroundDarkest)
-      ).to.be.above(3)
+      expect(contrast(colors.borderWarning, colors.backgroundDark)).to.be.above(
+        3
+      )
     })
     it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
       expect(

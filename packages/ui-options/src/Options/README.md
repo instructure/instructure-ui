@@ -265,7 +265,7 @@ render(
       label: 'Text is green',
       extraProps: {
         renderBeforeLabel: IconCheckSolid,
-        themeOverride: { color: "#00AC18" }
+        themeOverride: { color: "#0B874B" }
       }
     },
     {

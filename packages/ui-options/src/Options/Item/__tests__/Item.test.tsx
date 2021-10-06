@@ -186,7 +186,7 @@ describe('<Item />', async () => {
     const icon = await content.find('svg[name="IconCheck"]')
     const iconStyle = getComputedStyle(icon.getDOMNode())
 
-    expect(iconStyle.fill).to.equal('rgb(0, 172, 24)')
+    expect(iconStyle.fill).to.equal('rgb(11, 135, 75)')
   })
 
   it('should render nested lists', async () => {
