@@ -34,8 +34,6 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 
 import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
-import { useTextDirectionContext } from '@instructure/ui-i18n'
-import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
 
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
@@ -165,7 +163,6 @@ const withStyle = decorator(
       allowedProps?: string[]
     } = forwardRef((props, ref) => {
       const theme = useTheme()
-      const dir = useTextDirectionContext()
 
       if (props.styles) {
         warn(
@@ -181,7 +178,6 @@ const withStyle = decorator(
           `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyle decorator.`
         )
       }
-
       const componentProps: Props = {
         ...ComposedComponent.defaultProps,
         ...props,
@@ -204,20 +200,14 @@ const withStyle = decorator(
           : {}
 
       const [styles, setStyles] = useState(
-        generateStyle
-          ? bidirectionalPolyfill(
-              generateStyle(componentTheme, componentProps, {}),
-              // @ts-expect-error TODO: this shouldn't be "auto" (INSTUI-3241)
-              dir
-            )
-          : {}
+        generateStyle ? generateStyle(componentTheme, componentProps, {}) : {}
       )
 
       const makeStyleHandler: WithStyleProps['makeStyles'] = (extraArgs) => {
-        const calculatedStyles = bidirectionalPolyfill(
-          generateStyle(componentTheme, componentProps, extraArgs),
-          // @ts-expect-error TODO: this shouldn't be "auto" (INSTUI-3241)
-          dir
+        const calculatedStyles = generateStyle(
+          componentTheme,
+          componentProps,
+          extraArgs
         )
         if (!isEqual(calculatedStyles, styles)) {
           setStyles(calculatedStyles)
