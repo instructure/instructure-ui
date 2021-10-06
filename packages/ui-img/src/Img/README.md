@@ -38,19 +38,19 @@ example: true
   <View textAlign="center" as="div">
     <Img
       src={placeholderImage(200, 200)}
-      overlay={{color: '#008ee2', opacity: 9, blend: 'overlay'}}
+      overlay={{color: '#0374B5', opacity: 9, blend: 'overlay'}}
       alt="A placeholder image"
       margin="x-small"
     />
     <Img
       src={placeholderImage(200, 200)}
-      overlay={{color: '#008ee2', opacity: 6, blend: 'multiply'}}
+      overlay={{color: '#0374B5', opacity: 6, blend: 'multiply'}}
       alt="A placeholder image"
       margin="x-small"
     />
     <Img
       src={placeholderImage(200, 200)}
-      overlay={{color: '#008ee2', opacity: 3}}
+      overlay={{color: '#0374B5', opacity: 3}}
       alt="A placeholder image"
       margin="x-small"
     />

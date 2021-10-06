@@ -274,7 +274,7 @@ describe('EmotionThemeProvider', async () => {
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal('rgb(0, 142, 226)') // canvas textBrand color
+      expect(computedStyle.color).to.equal('rgb(3, 116, 181)') // canvas textBrand color
       expect(computedStyle.backgroundColor).to.equal('rgb(245, 245, 245)') // canvas backgroundLight color
     })
   })
