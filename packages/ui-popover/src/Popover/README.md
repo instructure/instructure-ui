@@ -4,7 +4,7 @@ describes: Popover
 
 Popovers hide or show content as a result of user interaction, such as clicking, hovering, or focusing. When opened, the content remains connected to the element that triggered it. If you only need to display a small amount of text-only content, you might consider using a [Tooltip](#Tooltip). If you need to display a larger amount of content, a [Tray](#Tray) could be a better choice.
 
-#### Uncontrolled Popover
+#### Uncontrolled Popover //TODO uncontrolled popover
 
 ```js
 ---
@@ -65,10 +65,10 @@ class Example extends React.Component {
             onShowContent={() => console.log('showing')}
             onHideContent={() => console.log('hidden')}
           >
-              <View padding="x-small" display="block" as="div" id="tip">
-                Hello World
-              </View>
-            </Popover>
+            <View padding="x-small" display="block" as="div" id="tip">
+              Hello World
+            </View>
+          </Popover>
         </View>
       </>
     )
@@ -226,7 +226,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-### Custom elements as renderTrigger
+#### Custom elements as renderTrigger
 
 Popover and Tooltip attach mouse and focus event listeners to their `renderTrigger` components via props. These need to be propagated to the component for the listeners to work:
 
@@ -247,6 +247,7 @@ class MyComponent extends React.Component {
 <Popover renderTrigger={<MyComponent />} >
   This text is wrapped by a Popover
 </Popover>
+```
 
 #### Popover playground
 
@@ -263,7 +264,9 @@ class Example extends React.Component {
     withArrow: true,
     placement: 'top',
     shadow: 'topmost',
-    placementsValues: [
+    color : 'primary'
+  }
+  static placementsValues = [
       'top',
       'end',
       'bottom',
@@ -282,20 +285,19 @@ class Example extends React.Component {
       'top center',
       'center end',
       'center start'
-    ],
-    shadowValues: [
+    ];
+  static shadowValues = [
       'none',
       'resting',
       'above',
       'topmost'
-    ],
-
-  }
+    ];
   changePlacement = (e, { value }) => this.setState({ placement: value })
   changeShadow = (e, { value }) => this.setState({ shadow: value})
   toggleWithArrow = (event) => this.setState({ withArrow: !this.state.withArrow })
   toggleAlignArrow = (event) => this.setState({ shouldAlignArrow: !this.state.shouldAlignArrow })
   toggleShowContent = (event) => this.setState({ isShowingContent: !this.state.isShowingContent })
+  changeColor = (event,value) =>  this.setState({color:value})
   render() {
     return (
       <View as="div" background="primary" padding="small">
@@ -330,7 +332,7 @@ class Example extends React.Component {
                 value={this.state.placement}
                 onChange={this.changePlacement}
               >
-                {this.state.placementsValues.map((placement, index) => (
+                {Example.placementsValues.map((placement, index) => (
                   <SimpleSelect.Option
                     key={index}
                     id={`${index}`}
@@ -351,7 +353,7 @@ class Example extends React.Component {
                 renderLabel="Shadow"
               >
                 {
-                  this.state.shadowValues.map((shadow, index) => (
+                  Example.shadowValues.map((shadow, index) => (
                     <SimpleSelect.Option
                       key={index}
                       id={`${index}`}
@@ -362,6 +364,20 @@ class Example extends React.Component {
                   ))
                 }
               </SimpleSelect>
+            </View>
+          </Flex.Item>
+          <Flex.Item align="start">
+            <View as="div" margin="none">
+              <RadioInputGroup
+                name="changeColor"
+                defaultValue="primary"
+                description="Color:"
+                variant="toggle"
+                size="small"
+                onChange={this.changeColor} >
+                <RadioInput label="Primary" value="primary"/>
+                <RadioInput label="Primary inverse" value="primary-inverse" />
+              </RadioInputGroup>
             </View>
           </Flex.Item>
         </Flex>
@@ -377,6 +393,7 @@ class Example extends React.Component {
             withArrow={this.state.withArrow}
             shouldAlignArrow={this.state.shouldAlignArrow}
             shadow={this.state.shadow}
+            color={this.state.color}
             mountNode={() => document.getElementById('main')}
           >
             <Heading>Small<br />Target</Heading>
