@@ -93,6 +93,9 @@ const propTypes: PropValidators<PropKeys> = {
     'brand',
     'auto'
   ]),
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func
 }
 

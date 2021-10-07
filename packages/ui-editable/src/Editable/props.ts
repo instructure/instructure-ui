@@ -34,6 +34,7 @@ type EditableOwnProps = {
   value?: any
   onChange?: (...args: any[]) => any
   readOnly?: boolean
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof EditableOwnProps
@@ -81,7 +82,11 @@ const propTypes: PropValidators<PropKeys> = {
   /**
    * The mode is fixed as 'view'
    */
-  readOnly: PropTypes.bool
+  readOnly: PropTypes.bool,
+  /**
+   * provides a reference to the underlying html root element (container)
+   */
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -91,7 +96,8 @@ const allowedProps: AllowedPropKeys = [
   'render',
   'value',
   'onChange',
-  'readOnly'
+  'readOnly',
+  'elementRef'
 ]
 
 export type { EditableProps }

@@ -79,6 +79,18 @@ class Tabs extends Component<TabsProps> {
   static Panel = Panel
   static Tab = Tab
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
@@ -467,7 +479,7 @@ class Tabs extends Component<TabsProps> {
     return (
       <View
         {...passthroughProps(props)}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         maxWidth={maxWidth}
         margin={margin}
         as="div"

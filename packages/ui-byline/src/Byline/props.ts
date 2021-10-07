@@ -84,6 +84,9 @@ const propTypes: PropValidators<PropKeys> = {
    */
   margin: ThemeablePropTypes.spacing,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func
 }
 

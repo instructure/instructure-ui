@@ -156,9 +156,14 @@ class BaseButton extends Component<BaseButtonProps> {
   }
 
   handleElementRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
     this._rootElement = el
     this.ref = el
-    this.props.elementRef?.(el)
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.

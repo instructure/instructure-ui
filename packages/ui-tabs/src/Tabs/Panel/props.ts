@@ -79,6 +79,9 @@ const propTypes: PropValidators<PropKeys> = {
   labelledBy: PropTypes.string,
   padding: ThemeablePropTypes.spacing,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func
 }
 

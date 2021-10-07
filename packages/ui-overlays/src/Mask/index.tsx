@@ -73,11 +73,14 @@ class Mask extends Component<MaskProps> {
 
   ref: Element | null = null
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleElementRef = (el) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.elementRef(el)
+  handleElementRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
     this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.

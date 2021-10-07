@@ -163,8 +163,13 @@ class AppNav extends Component<AppNavProps> {
   }
 
   handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
     this.ref = el
-    this.props.elementRef?.(el)
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.

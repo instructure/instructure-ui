@@ -109,6 +109,9 @@ const propTypes: PropValidators<PropKeys> = {
    */
   padding: ThemeablePropTypes.spacing,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func,
   /**
    * Choose whether Tabs should stack or scroll when they exceed the width of their

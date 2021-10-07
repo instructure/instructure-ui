@@ -42,7 +42,6 @@ import {
 import { testable } from '@instructure/ui-testable'
 import type { ToggleGroupProps } from './props'
 import { allowedProps, propTypes } from './props'
-import { createChainedFunction } from '@instructure/ui-utils'
 
 /**
 ---
@@ -71,8 +70,22 @@ class ToggleGroup extends Component<ToggleGroupProps> {
   } as const
 
   ref: Element | null = null
-  _button = null
+  _button: Element | null = null
   _shouldTransition = false
+
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
+  handleButtonRef = (el: Element | null) => {
+    this._button = el
+  }
 
   get focused() {
     return isActiveElement(this._button)
@@ -109,9 +122,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
         withBackground={false}
         withBorder={false}
         size={size === 'large' ? 'medium' : 'small'}
-        elementRef={(el: any) => {
-          this._button = el
-        }}
+        elementRef={this.handleButtonRef}
         screenReaderLabel={label}
       >
         {this.renderIcon(expanded)}
@@ -149,9 +160,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
               {...omitProps(this.props, ToggleGroup.allowedProps)}
               borderWidth={this.props.border ? 'small' : 'none'}
               as={Element}
-              elementRef={createChainedFunction(this.props.elementRef, (el) => {
-                this.ref = el
-              })}
+              elementRef={this.handleRef}
               display="block"
               borderRadius="medium"
               background="primary"

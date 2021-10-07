@@ -86,7 +86,7 @@ type AvatarOwnProps = {
    */
   as?: AsElementType
   /**
-   * Provides a reference to the underlying html element
+   * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
 }

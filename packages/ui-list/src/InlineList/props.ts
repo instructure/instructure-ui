@@ -89,6 +89,9 @@ const propTypes: PropValidators<PropKeys> = {
     'x-large',
     'xx-large'
   ]),
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func
 }
 

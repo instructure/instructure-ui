@@ -92,6 +92,9 @@ const propTypes: PropValidators<PropKeys> = {
   withGrayscale: PropTypes.bool,
   withBlur: PropTypes.bool,
   constrain: PropTypes.oneOf(['cover', 'contain']),
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])

@@ -56,6 +56,16 @@ class Spinner extends Component<SpinnerProps> {
 
   ref: Element | null = null
 
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
@@ -102,10 +112,7 @@ class Spinner extends Component<SpinnerProps> {
       <View
         {...passthroughProps}
         as={this.props.as}
-        elementRef={(el: Element | null) => {
-          this.ref = el
-          this.props.elementRef?.(el)
-        }}
+        elementRef={this.handleRef}
         css={this.props.styles?.spinner}
         margin={this.props.margin}
       >

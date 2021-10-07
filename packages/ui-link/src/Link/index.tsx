@@ -95,7 +95,10 @@ class Link extends Component<LinkProps> {
     // TODO: deprecate _link? ref should be enough
     this._link = el
     this.ref = el
-    if (typeof elementRef === 'function') elementRef(el)
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.

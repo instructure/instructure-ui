@@ -155,10 +155,15 @@ class Dialog extends Component<DialogProps> {
   }
 
   getRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
     // TODO: deprecate _root? ref should be enough
     this._root = el
     this.ref = el
-    this.props.elementRef?.(el)
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   get contentElement() {

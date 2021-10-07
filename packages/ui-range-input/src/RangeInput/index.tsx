@@ -70,6 +70,10 @@ class RangeInput extends Component<RangeInputProps> {
   _inputListener: { remove(): void } | null = null
   _changeListener: { remove(): void } | null = null
 
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
@@ -184,9 +188,7 @@ class RangeInput extends Component<RangeInputProps> {
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
         id={this.id}
-        elementRef={(el) => {
-          this.ref = el
-        }}
+        elementRef={this.handleRef}
       >
         <div css={this.props.styles?.rangeInput}>
           <input

@@ -88,6 +88,9 @@ const propTypes: PropValidators<PropKeys> = {
   colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
   vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
   startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func
 }
 
