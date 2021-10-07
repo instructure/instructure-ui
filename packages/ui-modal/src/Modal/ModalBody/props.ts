@@ -61,6 +61,9 @@ type ModalBodyStyle = ComponentStyle<'modalBody'>
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
   padding: ThemeablePropTypes.spacing,
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func,
   as: PropTypes.elementType,
   variant: PropTypes.oneOf(['default', 'inverse']),

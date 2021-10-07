@@ -114,6 +114,9 @@ const propTypes: PropValidators<PropKeys> = {
   shouldCloseOnDocumentClick: PropTypes.bool,
   shouldCloseOnEscape: PropTypes.bool,
   shouldFocusOnOpen: PropTypes.bool,
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func
 }
 

@@ -70,6 +70,18 @@ class Panel extends Component<TabsPanelProps> {
     this.props.makeStyles?.()
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
   render() {
     const {
       labelledBy,
@@ -96,7 +108,7 @@ class Panel extends Component<TabsPanelProps> {
         id={id}
         aria-labelledby={labelledBy}
         aria-hidden={isHidden ? 'true' : undefined}
-        ref={elementRef}
+        ref={this.handleRef}
       >
         <Transition
           type="fade"

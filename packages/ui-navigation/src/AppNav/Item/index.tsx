@@ -77,8 +77,13 @@ class Item extends Component<AppNavItemProps> {
   }
 
   handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
     this.ref = el
-    this.props.elementRef?.(el)
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
@@ -100,7 +105,6 @@ class Item extends Component<AppNavItemProps> {
       renderIcon,
       renderLabel,
       href,
-      elementRef,
       renderAfter,
       cursor,
       isDisabled
@@ -127,7 +131,7 @@ class Item extends Component<AppNavItemProps> {
         href={href}
         onClick={this.handleClick}
         disabled={isDisabled}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         display="flex"
         position="relative"
         borderRadius="medium"

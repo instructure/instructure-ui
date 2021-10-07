@@ -171,6 +171,18 @@ class Editable extends Component<EditableProps> {
     this.enterEdit()
   }
 
+  ref: Element | null = null
+
+  handleContainerRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
   // ------- prop getters ------
   getContainerProps = (props = {}) => {
     const { mode, readOnly } = this.props
@@ -180,7 +192,8 @@ class Editable extends Component<EditableProps> {
       onMouseDown: mode !== 'edit' ? this.handleViewClick : null,
       onKeyUp: mode === 'edit' ? this.handleEditESC : null,
       readOnly,
-      ...props
+      ...props,
+      ref: this.handleContainerRef
     }
   }
 

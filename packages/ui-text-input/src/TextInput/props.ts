@@ -152,6 +152,9 @@ const propTypes: PropValidators<PropKeys> = {
    * Whether or not the text input is required.
    */
   isRequired: PropTypes.bool,
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func,
   /**
    * a function that provides a reference to the actual input element

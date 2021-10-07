@@ -80,8 +80,12 @@ class Button extends Component<ButtonProps> {
 
   handleElementRef = (el: Element | null) => {
     const { elementRef } = this.props
+
     this.ref = el
-    elementRef?.(el)
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'component' implicitly has an 'any' type... Remove this comment to see the full error message

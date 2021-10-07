@@ -77,6 +77,9 @@ const propTypes: PropValidators<PropKeys> = {
    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
    */
   margin: ThemeablePropTypes.spacing,
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func,
   as: PropTypes.elementType
 }

@@ -67,8 +67,13 @@ class List extends Component<ListProps> {
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
     this.ref = el
-    this.props.elementRef?.(el)
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   componentDidMount() {

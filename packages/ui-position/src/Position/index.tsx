@@ -108,8 +108,13 @@ class Position extends Component<PositionProps, PositionState> {
   _target?: PositionElement
 
   handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
     this.ref = el
-    this.props.elementRef?.(el)
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   shouldComponentUpdate(

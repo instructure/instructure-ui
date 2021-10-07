@@ -61,6 +61,10 @@ class Rating extends Component<RatingProps> {
 
   ref: Element | null = null
 
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -117,9 +121,7 @@ class Rating extends Component<RatingProps> {
         css={this.props.styles?.rating}
         margin={margin}
         display="inline-block"
-        elementRef={(el) => {
-          this.ref = el
-        }}
+        elementRef={this.handleRef}
       >
         <ScreenReaderContent>{valueText}</ScreenReaderContent>
         {/* @ts-expect-error ts-migrate(6133) FIXME: 'x' is declared but its value is never read. */}

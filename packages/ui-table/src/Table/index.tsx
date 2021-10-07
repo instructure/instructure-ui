@@ -72,6 +72,18 @@ class Table extends Component<TableProps> {
   static RowHeader = RowHeader
   static Cell = Cell
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -101,15 +113,7 @@ class Table extends Component<TableProps> {
   }
 
   render() {
-    const {
-      margin,
-      elementRef,
-      layout,
-      caption,
-      children,
-      hover,
-      styles
-    } = this.props
+    const { margin, layout, caption, children, hover, styles } = this.props
     const isStacked = layout === 'stacked'
     const headers = isStacked ? this.getHeaders() : null
 
@@ -121,7 +125,7 @@ class Table extends Component<TableProps> {
         )}
         as={isStacked ? 'div' : 'table'}
         margin={margin}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         css={styles?.table}
         role={isStacked ? 'table' : undefined}
         aria-label={isStacked ? (caption as string) : undefined}

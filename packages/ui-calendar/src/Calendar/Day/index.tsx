@@ -116,8 +116,12 @@ class Day extends Component<CalendarDayProps> {
 
   handleElementRef = (el: Element | null) => {
     const { elementRef } = this.props
-    elementRef?.(el)
+
     this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   render() {

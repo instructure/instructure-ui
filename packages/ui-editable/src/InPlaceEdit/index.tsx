@@ -56,6 +56,12 @@ class InPlaceEdit extends Component<InPlaceEditProps> {
     editButtonPlacement: 'end'
   }
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
@@ -189,6 +195,7 @@ class InPlaceEdit extends Component<InPlaceEditProps> {
         value={value}
         onChange={onChange}
         readOnly={readOnly}
+        elementRef={this.handleRef}
       />
     )
   }

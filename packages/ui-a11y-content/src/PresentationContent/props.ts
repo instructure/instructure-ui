@@ -38,6 +38,10 @@ type PresentationContentOwnProps = {
   as: AsElementType
 
   children?: React.ReactNode
+
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
 }
 

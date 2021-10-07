@@ -72,7 +72,7 @@ type PortalOwnProps = {
   children?: React.ReactNode
 
   /**
-   * Provides a reference to the underlying html element. Ha the Portal DOMNode as parameter.
+   * Provides a reference to the underlying html element. Has the Portal DOMNode as parameter.
    */
   elementRef?: (el?: PortalNode) => void
 } & BidirectionalProps

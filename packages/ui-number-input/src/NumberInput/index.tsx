@@ -93,6 +93,10 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
   _input = null
   ref: Element | null = null
 
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   get id() {
     if (this.props.id) {
       return this.props.id
@@ -134,7 +138,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  handleRef = (element) => {
+  handleInputRef = (element) => {
     this._input = element
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.inputRef(element)
@@ -244,9 +248,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
         label={callRenderProp(renderLabel)}
         inline={display === 'inline-block'}
         id={this.id}
-        elementRef={(element) => {
-          this.ref = element
-        }}
+        elementRef={this.handleRef}
       >
         <span
           css={this.props.styles?.inputWidth}
@@ -264,7 +266,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
               type="text"
               inputMode={this.props.inputMode}
               placeholder={placeholder}
-              ref={this.handleRef}
+              ref={this.handleInputRef}
               required={isRequired}
               value={value}
               disabled={interaction === 'disabled'}

@@ -57,7 +57,13 @@ class ScreenReaderContent extends Component<ScreenReaderContentProps> {
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
     this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   componentDidMount() {

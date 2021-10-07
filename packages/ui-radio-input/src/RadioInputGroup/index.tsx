@@ -61,6 +61,10 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
 
   ref: Element | null = null
 
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
@@ -158,9 +162,7 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
         startAt={variant === 'toggle' ? 'small' : undefined}
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Rad... Remove this comment to see the full error message
         messagesId={this._messagesId}
-        elementRef={(el) => {
-          this.ref = el
-        }}
+        elementRef={this.handleRef}
       >
         {this.renderChildren()}
       </FormFieldGroup>

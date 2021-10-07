@@ -110,6 +110,9 @@ const propTypes: PropValidators<PropKeys> = {
   ]),
   isLastRow: PropTypes.bool,
   isLastCol: PropTypes.bool,
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func
 }
 

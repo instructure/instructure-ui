@@ -75,6 +75,9 @@ const propTypes: PropValidators<PropKeys> = {
   vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
   width: PropTypes.string,
   inputContainerRef: PropTypes.func,
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func
 }
 

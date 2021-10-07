@@ -56,6 +56,9 @@ const propTypes: PropValidators<PropKeys> = {
   fullscreen: PropTypes.bool,
   children: PropTypes.node,
   onClick: PropTypes.func,
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func
 }
 

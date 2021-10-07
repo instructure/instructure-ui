@@ -86,6 +86,9 @@ const propTypes: PropValidators<PropKeys> = {
   labelAlign: PropTypes.oneOf(['start', 'end']),
   width: PropTypes.string,
   inputContainerRef: PropTypes.func,
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef: PropTypes.func
 }
 
