@@ -26,30 +26,20 @@ const outputName = 'prop-data.json'
 // eslint-disable-next-line no-console
 console.log('starting to build example prop combinations to ' + outputName)
 
-const path = require('path')
 const fs = require('fs')
+const path = require('path')
 const globby = require('globby')
 const parsePropValues = require('./parsePropValues')
-const { getTransitiveDependents } = require('./getTransitiveDependents')
-const { parseTransitiveDependents } = require('./parseTransitiveDependents')
-
 const projectRoot = path.resolve(__dirname, '../../')
-const packages = process.argv.slice(2)
 
-async function buildExamplesJSON(packagesToBuild = []) {
-  const packages = packagesToBuild.length
-    ? getTransitiveDependents(await parseTransitiveDependents(packagesToBuild))
-    : ['**']
-  const files = packages.map((package) =>
-    path.resolve(projectRoot, `${package}/src/**/*.examples.ts*`)
-  )
-
+async function buildExamplesJSON() {
+  const filesToParse = '**/src/**/*.examples.ts*'
+  const files = path.resolve(projectRoot, filesToParse)
   const ignorePaths = ['**/node_modules/**', '**/lib/**', '**/es/**']
   const ignore = ignorePaths.map(
     (file) => '!' + path.resolve(projectRoot, file)
   )
-
-  const matches = await globby([...files, ...ignore])
+  const matches = await globby([files, ...ignore])
   const componentProps = matches.reduce((result, absoluteExampleFilePath) => {
     // path to the component that is tested, e.g. /ui-tag/src/Tag/index.js
     const componentPath = path.resolve(
@@ -89,4 +79,4 @@ async function buildExamplesJSON(packagesToBuild = []) {
   console.log('finished generating example prop combinations.')
 }
 
-buildExamplesJSON(packages)
+buildExamplesJSON()
