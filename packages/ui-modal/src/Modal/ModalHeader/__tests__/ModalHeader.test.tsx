@@ -23,11 +23,14 @@
  */
 
 import React from 'react'
+
 import { expect, mount, within } from '@instructure/ui-test-utils'
-import { ModalHeader } from '../index'
-import generateComponentTheme from '../theme'
 import { canvas } from '@instructure/ui-themes'
 import { color2hex } from '@instructure/ui-color-utils'
+import { px } from '@instructure/ui-utils'
+
+import { ModalHeader } from '../index'
+import generateComponentTheme from '../theme'
 
 describe('<ModalHeader />', async () => {
   it('should render', async () => {
@@ -49,5 +52,43 @@ describe('<ModalHeader />', async () => {
     expect(variables.inverseBorderColor).to.equal(
       color2hex(cssStyleDeclaration.getPropertyValue('border-bottom-color'))
     )
+  })
+
+  describe('spacing prop', async () => {
+    it('should be correct by default', async () => {
+      const variables = generateComponentTheme(canvas)
+
+      const subject = await mount(<ModalHeader />)
+      const header = within(subject.getDOMNode())
+
+      const cssStyleDeclaration = header.getComputedStyle() // CSSStyleDeclaration type
+      expect(cssStyleDeclaration.getPropertyValue('padding')).to.equal(
+        `${px(variables.padding)}px`
+      )
+    })
+
+    it('should correctly set default spacing', async () => {
+      const variables = generateComponentTheme(canvas)
+
+      const subject = await mount(<ModalHeader spacing="default" />)
+      const header = within(subject.getDOMNode())
+
+      const cssStyleDeclaration = header.getComputedStyle() // CSSStyleDeclaration type
+      expect(cssStyleDeclaration.getPropertyValue('padding')).to.equal(
+        `${px(variables.padding)}px`
+      )
+    })
+
+    it('should correctly set compact spacing', async () => {
+      const variables = generateComponentTheme(canvas)
+
+      const subject = await mount(<ModalHeader spacing="compact" />)
+      const header = within(subject.getDOMNode())
+
+      const cssStyleDeclaration = header.getComputedStyle() // CSSStyleDeclaration type
+      expect(cssStyleDeclaration.getPropertyValue('padding')).to.equal(
+        `${px(variables.paddingCompact)}px`
+      )
+    })
   })
 })

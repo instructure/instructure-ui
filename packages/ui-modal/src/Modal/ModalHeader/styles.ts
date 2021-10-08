@@ -44,8 +44,25 @@ const generateStyle = (
   props: ModalHeaderProps,
   state: ModalHeaderStyleProps
 ): ModalHeaderStyle => {
-  const { variant } = props
+  const { variant, spacing } = props
   const { withCloseButton } = state
+
+  const sizeVariants = {
+    default: {
+      padding: componentTheme.padding,
+      paddingInlineStart: componentTheme.padding,
+      paddingInlineEnd: withCloseButton
+        ? `calc(${componentTheme.padding} * 2 + 1em)`
+        : componentTheme.padding
+    },
+    compact: {
+      padding: componentTheme.paddingCompact,
+      paddingInlineStart: componentTheme.paddingCompact,
+      paddingInlineEnd: withCloseButton
+        ? `calc(${componentTheme.paddingCompact} * 2 + 1em)`
+        : componentTheme.paddingCompact
+    }
+  }
 
   const inverseStyle =
     variant === 'inverse'
@@ -55,27 +72,17 @@ const generateStyle = (
         }
       : {}
 
-  const closeButtonStyle = withCloseButton
-    ? {
-        paddingInlineEnd: `calc(${componentTheme.padding} * 2 + 1em)`
-      }
-    : {
-        paddingInlineEnd: componentTheme.padding
-      }
-
   return {
     modalHeader: {
       label: 'modalHeader',
       boxSizing: 'border-box',
-      padding: componentTheme.padding,
-      paddingInlineStart: componentTheme.padding,
       flex: '0 0 auto',
       background: componentTheme.background,
       borderBottomWidth: '0.0625rem',
       borderBottomStyle: 'solid',
       borderBottomColor: componentTheme.borderColor,
-      ...inverseStyle,
-      ...closeButtonStyle
+      ...sizeVariants[spacing!],
+      ...inverseStyle
     }
   }
 }
