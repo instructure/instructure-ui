@@ -54,7 +54,8 @@ class ModalHeader extends Component<ModalHeaderProps> {
   static allowedProps = allowedProps
   static defaultProps = {
     children: null,
-    variant: 'default'
+    variant: 'default',
+    spacing: 'default'
   }
 
   ref: Element | null = null

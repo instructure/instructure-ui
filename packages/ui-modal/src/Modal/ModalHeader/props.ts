@@ -34,6 +34,7 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 type ModalHeaderOwnProps = {
   children?: React.ReactNode
   variant?: 'default' | 'inverse'
+  spacing?: 'default' | 'compact'
 }
 
 type ModalHeaderStyleProps = {
@@ -51,10 +52,11 @@ type ModalHeaderStyle = ComponentStyle<'modalHeader'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
-  variant: PropTypes.oneOf(['default', 'inverse'])
+  variant: PropTypes.oneOf(['default', 'inverse']),
+  spacing: PropTypes.oneOf(['default', 'compact'])
 }
 
-const allowedProps: AllowedPropKeys = ['children', 'variant']
+const allowedProps: AllowedPropKeys = ['children', 'variant', 'spacing']
 
 export type { ModalHeaderProps, ModalHeaderStyleProps, ModalHeaderStyle }
 export { propTypes, allowedProps }

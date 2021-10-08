@@ -198,9 +198,10 @@ class ModalAutoCompleteExample extends React.Component {
 
 render(<Example />)
 ```
+
 ### Media (images, etc.) inside Modals
 
-> Setting the `variant` prop to `"inverse"` will result in a dark version of Modal, useful for displaying media. *Note that the `inverse` Modal does not currently support text or form input content.*
+> Setting the `variant` prop to `"inverse"` will result in a dark version of Modal, useful for displaying media. _Note that the `inverse` Modal does not currently support text or form input content._
 
 **If you are displaying small, relatively uniform images or videos inside Modal, the default settings should work well.** Modal.Body will expand to the height of the media you're displaying. If there is overflow, scrollbars will be available.
 
@@ -402,6 +403,95 @@ class Example extends React.Component {
             <Button onClick={this.handleButtonClick} withBackground={false} color="primary-inverse" type="submit">Close</Button>
           </Modal.Footer>
         </Modal>
+      </div>
+    )
+  }
+}
+
+render(<Example />)
+```
+
+### Small viewports
+
+On smaller viewports (like mobile devices or scaled-up UI), we don't want to lose space because of padding and margins. In order to achieve that, use `size="fullscreen"` on the Modal and set the `spacing` property of Modal.Header to `compact`.
+
+```js
+---
+render: false
+example: true
+---
+const fpo = lorem.paragraphs(1)
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      open: false,
+    }
+  }
+
+  handleButtonClick = () => {
+    this.setState(function (state) {
+      return { open: !state.open }
+    })
+  }
+
+  renderCloseButton () {
+    return (
+      <CloseButton
+        placement="end"
+        offset="small"
+        onClick={this.handleButtonClick}
+        screenReaderLabel="Close"
+      />
+    )
+  }
+
+  render () {
+    return (
+      <div>
+        <Button onClick={this.handleButtonClick}>
+          {this.state.open ? 'Close' : 'Open'} the Modal
+        </Button>
+        <Modal
+          open={this.state.open}
+          onDismiss={() => { this.setState({ open: false }) }}
+          size="fullscreen"
+          label="Modal Dialog: Hello World"
+          shouldCloseOnDocumentClick
+          mountNode={() => document.getElementById('mobilePhoneExample')}
+          constrain="parent"
+        >
+          <Modal.Header spacing="compact">
+            {this.renderCloseButton()}
+            <Text size="large">This Modal is optmized for small viewport</Text>
+          </Modal.Header>
+          <Modal.Body>
+            <View as="p" margin="none none small"><Text>{fpo}</Text></View>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleButtonClick} margin="0 x-small 0 0">Close</Button>
+            <Button onClick={this.handleButtonClick} color="primary" type="submit">Submit</Button>
+          </Modal.Footer>
+        </Modal>
+        <div style={{
+          boxSizing: "border-box",
+          width: "20rem",
+          height: "37.5rem",
+          borderRadius: "16px",
+          padding: "32px 8px",
+          background: "#C7CDD1",
+          margin: "16px auto 0"
+        }}>
+          <View
+            background="primary-inverse"
+            display="block"
+            width="100%"
+            height="100%"
+            id="mobilePhoneExample"
+          >
+          </View>
+        </div>
       </div>
     )
   }

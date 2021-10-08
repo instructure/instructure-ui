@@ -636,6 +636,7 @@ export type ModalHeaderTheme = {
   background: Colors['backgroundLightest']
   borderColor: Colors['borderMedium']
   padding: Spacing['medium']
+  paddingCompact: Spacing['small']
   inverseBackground: Colors['backgroundDarkest']
   inverseBorderColor: Colors['backgroundDarkest']
 }
