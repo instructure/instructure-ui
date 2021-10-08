@@ -183,10 +183,14 @@ class BaseTransition extends React.Component<
 
       const classList = getClassList(this)
 
-      Object.keys(STATES).forEach((state) => {
-        // @ts-expect-error FIXME: type
-        classList.remove(this.getTransitionClassName(state))
-      })
+      ;(Object.values(STATES) as BaseTransitionStatesType[]).forEach(
+        (state) => {
+          const className = this.getTransitionClassName(state)
+          if (className) {
+            classList.remove(className)
+          }
+        }
+      )
 
       classList.remove(transitionClassName)
     })
