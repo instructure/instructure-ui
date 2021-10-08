@@ -26,26 +26,5 @@ const baseESLintConfigFile = require.resolve('@instructure/ui-eslint-config')
 
 module.exports = {
   root: true,
-  //TODO: when we start the migration process turn on the typed linting feature of `typescript-eslint`
-  // https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/TYPED_LINTING.md
-  extends: [baseESLintConfigFile, 'plugin:@typescript-eslint/recommended'],
-  plugins: ['@typescript-eslint'],
-  parser: '@typescript-eslint/parser',
-  rules: {
-    // TS related rules:
-    // TODO: turn these on once we start the migration process
-    '@typescript-eslint/no-var-requires': 0,
-    '@typescript-eslint/no-empty-function': 0,
-    '@typescript-eslint/adjacent-overload-signatures': 0,
-    '@typescript-eslint/explicit-module-boundary-types': 0,
-    '@typescript-eslint/no-unused-vars': 0,
-    '@typescript-eslint/no-extra-semi': 0
-  },
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx']
-      }
-    }
-  }
+  extends: [baseESLintConfigFile]
 }

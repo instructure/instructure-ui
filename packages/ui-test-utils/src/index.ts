@@ -105,8 +105,6 @@ declare global {
       title(expected: string): void
       value(expected: string): void
       label(expected: string): void
-      children(expected: string): void
-      children(expected: string): void
     }
   }
 }
