@@ -25,6 +25,7 @@
 module.exports = {
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:react/recommended',
@@ -33,20 +34,28 @@ module.exports = {
     'plugin:compat/recommended',
     'prettier'
   ],
-  plugins: ['react', 'jsx-a11y', 'mocha', 'notice', 'instructure-ui', 'ejs'],
+  plugins: [
+    '@typescript-eslint',
+    'react',
+    'jsx-a11y',
+    'eslint-plugin-no-explicit-type-exports',
+    'mocha',
+    'notice',
+    'instructure-ui',
+    'ejs'
+  ],
   env: {
     node: true,
     browser: true,
     mocha: true,
     es6: true
   },
-  parser: 'babel-eslint',
-  parserOptions: {
-    ecmaFeatures: {
-      legacyDecorators: true
-    }
-  },
+  parser: '@typescript-eslint/parser',
   rules: {
+    '@typescript-eslint/no-var-requires': 1,
+    '@typescript-eslint/no-empty-function': 1,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+    'no-explicit-type-exports/no-explicit-type-exports': 2,
     'react/no-deprecated': 0,
     'react/no-find-dom-node': 0,
     'react/forbid-foreign-prop-types': 'error',
@@ -107,6 +116,11 @@ module.exports = {
   settings: {
     react: {
       version: process.env.REACT_VERSION || '16.8.6'
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+      }
     }
   }
 }

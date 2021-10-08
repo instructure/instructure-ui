@@ -137,6 +137,9 @@ class Modal extends Component<ModalProps> {
   get DOMNode() {
     return this._DOMNode
   }
+  set DOMNode(el: PortalNode) {
+    this._DOMNode = el
+  }
 
   get maskPlacement() {
     if (this.props.overflow === 'fit') {
@@ -144,10 +147,6 @@ class Modal extends Component<ModalProps> {
     } else {
       return 'center'
     }
-  }
-
-  set DOMNode(el: PortalNode) {
-    this._DOMNode = el
   }
 
   handlePortalOpen = (DOMNode: PortalNode) => {
