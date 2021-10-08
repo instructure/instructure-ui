@@ -21,37 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import PropTypes from 'prop-types'
 
 import type { PropValidators, TransitionTheme } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
-type TransitionType =
-  | 'fade'
-  | 'scale'
-  | 'slide-down'
-  | 'slide-up'
-  | 'slide-left'
-  | 'slide-right'
+import { transitionCommonPropTypes } from './BaseTransition/props'
+import type {
+  TransitionCommonProps,
+  TransitionType
+} from './BaseTransition/props'
 
-// TODO: use common props from BaseTransition
-type TransitionOwnProps = {
+const transitionTypes: Readonly<Array<TransitionType>> = [
+  'fade',
+  'scale',
+  'slide-down',
+  'slide-up',
+  'slide-left',
+  'slide-right'
+]
+
+const transitionTypePropType = PropTypes.oneOf(transitionTypes)
+
+type OwnProps = {
   type?: TransitionType
-  in?: boolean
-  unmountOnExit?: boolean
-  transitionOnMount?: boolean
-  transitionEnter?: boolean
-  transitionExit?: boolean
-  onTransition?: (...args: any[]) => any
-  onEnter?: (...args: any[]) => any
-  onEntering?: (...args: any[]) => any
-  onEntered?: (...args: any[]) => any
-  onExit?: (...args: any[]) => any
-  onExiting?: (...args: any[]) => any
-  onExited?: (...args: any[]) => any
-  children?: React.ReactNode
 }
+
+// TransitionCommonProps get passed to BaseTransition
+type TransitionOwnProps = OwnProps & TransitionCommonProps
 
 type PropKeys = keyof TransitionOwnProps
 
@@ -60,74 +58,32 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type TransitionProps = TransitionOwnProps &
   WithStyleProps<TransitionTheme, TransitionStyle>
 
-type TransitionStyle = ComponentStyle<
-  'duration' | 'classNames' | 'globalStyles'
->
+// type TransitionStyle = {
+//   duration: TransitionTheme['duration']
+//   classNames: {
+//     transitioning: string
+//     exited: string
+//     exiting: string
+//     entered: string
+//     entering: string
+//   }
+//   globalStyles: ComponentStyle[keyof ComponentStyle]
+// }
 
-const transitionTypePropType = PropTypes.oneOf([
-  'fade',
-  'scale',
-  'slide-down',
-  'slide-up',
-  'slide-left',
-  'slide-right'
-])
+type TransitionStyle = ComponentStyle<'globalStyles'> & {
+  duration: TransitionTheme['duration']
+  classNames: {
+    transitioning: string
+    exited: string
+    exiting: string
+    entered: string
+    entering: string
+  }
+}
 
 const propTypes: PropValidators<PropKeys> = {
   type: transitionTypePropType,
-  /**
-   * A single element to animate in and out
-   */
-  children: PropTypes.element,
-  /**
-   * Show the component; triggers the enter or exit animation
-   */
-  in: PropTypes.bool,
-  /**
-   * Unmount the component (remove it from the DOM) when it is not shown
-   */
-  unmountOnExit: PropTypes.bool,
-  /**
-   * Run the enter animation when the component mounts, if it is initially
-   * shown
-   */
-  transitionOnMount: PropTypes.bool,
-  /**
-   * Run the enter animation
-   */
-  transitionEnter: PropTypes.bool,
-  /**
-   * Run the exit animation
-   */
-  transitionExit: PropTypes.bool,
-  /**
-   * Callback fired when transitioning to the next state
-   */
-  onTransition: PropTypes.func,
-  /**
-   * Callback fired before the "entering" classes are applied
-   */
-  onEnter: PropTypes.func,
-  /**
-   * Callback fired after the "entering" classes are applied
-   */
-  onEntering: PropTypes.func,
-  /**
-   * Callback fired after the "enter" classes are applied
-   */
-  onEntered: PropTypes.func,
-  /**
-   * Callback fired before the "exiting" classes are applied
-   */
-  onExit: PropTypes.func,
-  /**
-   * Callback fired after the "exiting" classes are applied
-   */
-  onExiting: PropTypes.func,
-  /**
-   * Callback fired after the "exited" classes are applied
-   */
-  onExited: PropTypes.func
+  ...transitionCommonPropTypes
 }
 
 const allowedProps: AllowedPropKeys = [

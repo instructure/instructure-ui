@@ -33,18 +33,20 @@ import {
 } from '@instructure/ui-test-utils'
 
 import { Transition } from '../index'
-import generateStyle from '../styles'
+import { getClassNames } from '../styles'
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'type' implicitly has an 'any' type.
-const getClass = (type, phase) => {
-  // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
-  const styles = generateStyle({}, { type })
-  // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-  return styles.classNames[phase]
+import type { TransitionStyle, TransitionType } from '../props'
+
+const getClass = (
+  type: TransitionType,
+  phase: keyof TransitionStyle['classNames']
+) => {
+  const classNames = getClassNames(type)
+  return classNames[phase]
 }
 
 describe('<Transition />', async () => {
-  const types = [
+  const types: TransitionType[] = [
     'fade',
     'scale',
     'slide-down',
@@ -53,8 +55,7 @@ describe('<Transition />', async () => {
     'slide-right'
   ]
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'type' implicitly has an 'any' type.
-  const expectTypeClass = function (type) {
+  const expectTypeClass = function (type: TransitionType) {
     it(`should correctly apply classes for '${type}'`, async () => {
       const subject = await mount(
         <Transition type={type} in={true}>
