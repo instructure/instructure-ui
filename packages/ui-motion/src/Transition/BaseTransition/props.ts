@@ -27,7 +27,16 @@ import PropTypes from 'prop-types'
 
 import type { PropValidators } from '@instructure/shared-types'
 
-type BaseTransitionOwnProps = {
+type TransitionType =
+  | 'fade'
+  | 'scale'
+  | 'slide-down'
+  | 'slide-up'
+  | 'slide-left'
+  | 'slide-right'
+
+// These props get passed from Transition
+type TransitionCommonProps = {
   /**
    * Show the component? Triggers the enter or exit animation.
    */
@@ -53,6 +62,46 @@ type BaseTransitionOwnProps = {
   transitionExit?: boolean
 
   /**
+   * Callback fired when transitioning to the next state
+   */
+  onTransition?: (
+    toState: BaseTransitionStatesType,
+    fromState: BaseTransitionStatesType
+  ) => void
+
+  /**
+   * Callback fired before the "entering" classes are applied
+   */
+  onEnter?: () => void
+  /**
+   * Callback fired after the "entering" classes are applied
+   */
+  onEntering?: () => void
+  /**
+   * Callback fired after the "enter" classes are applied
+   */
+  onEntered?: (type?: TransitionType) => void
+  /**
+   * Callback fired before the "exiting" classes are applied
+   */
+  onExit?: () => void
+  /**
+   * Callback fired after the "exiting" classes are applied
+   */
+  onExiting?: () => void
+  /**
+   * Callback fired after the "exited" classes are applied
+   */
+  onExited?: (type?: TransitionType) => void
+
+  /**
+   * A single element to animate in and out
+   */
+  children?: React.ReactNode
+}
+
+type OwnProps = {
+  /**
    * A Timeout for the animation, in milliseconds, to ensure that a node doesn't
    * transition indefinately if the browser transitionEnd events are
    * canceled or interrupted.
@@ -75,79 +124,46 @@ type BaseTransitionOwnProps = {
   /**
    * the base CSS class for the transition (transitions go here)
    */
-  transitionClassName?: string
+  transitionClassName: string
 
   /**
    * CSS class or classes applied when the component is exited
    */
-  exitedClassName?: string
+  exitedClassName: string
   /**
    * CSS class or classes applied while the component is exiting
    */
-  exitingClassName?: string
+  exitingClassName: string
   /**
    * CSS class or classes applied when the component is entered
    */
-  enteredClassName?: string
+  enteredClassName: string
   /**
    * CSS class or classes applied while the component is entering
    */
-  enteringClassName?: string
-
-  /**
-   * Callback fired when transitioning to the next state
-   */
-  onTransition?: (toState: number, fromState: number) => void
-
-  /**
-   * Callback fired before the "entering" classes are applied
-   */
-  onEnter?: () => void
-  /**
-   * Callback fired after the "entering" classes are applied
-   */
-  onEntering?: () => void
-  /**
-   * Callback fired after the "enter" classes are applied
-   */
-  onEntered?: () => void
-  /**
-   * Callback fired before the "exiting" classes are applied
-   */
-  onExit?: () => void
-  /**
-   * Callback fired after the "exiting" classes are applied
-   */
-  onExiting?: () => void
-  /**
-   * Callback fired after the "exited" classes are applied
-   */
-  onExited?: () => void
-
-  children?: React.ReactNode
+  enteringClassName: string
 
   className?: string
 }
 
+// This intersection is needed for calculating allowedProps
+type BaseTransitionOwnProps = TransitionCommonProps & OwnProps
+
+// this is getting exported, might be extended later,
+// that's why it is separated from BaseTransitionOwnProps
+type BaseTransitionProps = BaseTransitionOwnProps
+
+type CommonPropKeys = keyof TransitionCommonProps
 type PropKeys = keyof BaseTransitionOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type BaseTransitionProps = BaseTransitionOwnProps
-
-const propTypes: PropValidators<PropKeys> = {
+const transitionCommonPropTypes: PropValidators<CommonPropKeys> = {
   in: PropTypes.bool,
   unmountOnExit: PropTypes.bool,
   transitionOnMount: PropTypes.bool,
   transitionEnter: PropTypes.bool,
   transitionExit: PropTypes.bool,
-  enterDelay: PropTypes.number,
-  exitDelay: PropTypes.number,
-  transitionClassName: PropTypes.string,
-  exitedClassName: PropTypes.string,
-  exitingClassName: PropTypes.string,
-  enteredClassName: PropTypes.string,
-  enteringClassName: PropTypes.string,
   onTransition: PropTypes.func,
   onEnter: PropTypes.func,
   onEntering: PropTypes.func,
@@ -155,7 +171,19 @@ const propTypes: PropValidators<PropKeys> = {
   onExit: PropTypes.func,
   onExiting: PropTypes.func,
   onExited: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node
+}
+
+const propTypes: PropValidators<PropKeys> = {
+  ...transitionCommonPropTypes,
+
+  enterDelay: PropTypes.number,
+  exitDelay: PropTypes.number,
+  transitionClassName: PropTypes.string.isRequired,
+  exitedClassName: PropTypes.string.isRequired,
+  exitingClassName: PropTypes.string.isRequired,
+  enteredClassName: PropTypes.string.isRequired,
+  enteringClassName: PropTypes.string.isRequired,
   className: PropTypes.string
 }
 
@@ -183,5 +211,19 @@ const allowedProps: AllowedPropKeys = [
   'className'
 ]
 
-export type { BaseTransitionProps }
-export { propTypes, allowedProps }
+type BaseTransitionState = {
+  transitioning: boolean
+}
+
+type BaseTransitionStateValue = 'EXITED' | 'EXITING' | 'ENTERING' | 'ENTERED'
+type BaseTransitionStatesType = -2 | -1 | 1 | 2
+
+export type {
+  BaseTransitionProps,
+  TransitionCommonProps,
+  TransitionType,
+  BaseTransitionState,
+  BaseTransitionStateValue,
+  BaseTransitionStatesType
+}
+export { propTypes, allowedProps, transitionCommonPropTypes }

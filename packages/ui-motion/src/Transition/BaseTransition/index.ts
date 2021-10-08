@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { createRef } from 'react'
+import React, { createRef, ReactElement } from 'react'
 
 import { getClassList } from '@instructure/ui-dom-utils'
 import {
@@ -31,9 +31,14 @@ import {
 } from '@instructure/ui-react-utils'
 
 import { allowedProps, propTypes } from './props'
-import type { BaseTransitionProps } from './props'
+import type {
+  BaseTransitionProps,
+  BaseTransitionState,
+  BaseTransitionStateValue,
+  BaseTransitionStatesType
+} from './props'
 
-const STATES = {
+const STATES: Record<BaseTransitionStateValue, BaseTransitionStatesType> = {
   EXITED: -2,
   EXITING: -1,
   ENTERING: 1,
@@ -47,35 +52,27 @@ private: true
   Note: this is forked from https://github.com/react-bootstrap/react-overlays/blob/master/src/Transition.js
   so that it works with css modules. The internals are pretty different now, but it has roughly the same api.
 **/
-class BaseTransition extends React.Component<BaseTransitionProps> {
+class BaseTransition extends React.Component<
+  BaseTransitionProps,
+  BaseTransitionState
+> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     in: false,
-    component: 'div',
     unmountOnExit: false,
     transitionOnMount: false,
     transitionEnter: true,
     transitionExit: true,
-
     enterDelay: 300,
     exitDelay: 300,
-
-    onEnter: function () {},
-    onEntering: function () {},
-    onEntered: function () {},
-
-    onExit: function () {},
-    onExiting: function () {},
-    onExited: function () {},
-    onTransition: function () {},
-
     children: null
   }
 
   static states = STATES
 
-  _timeouts = []
+  _timeouts: ReturnType<typeof setTimeout>[] = []
+  _unmounted = false
 
   state = {
     transitioning: false
@@ -85,8 +82,10 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
     this.startTransition(this.props.in, this.props.transitionOnMount)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  getSnapshotBeforeUpdate(prevProps, prevState) {
+  getSnapshotBeforeUpdate(
+    prevProps: BaseTransitionProps,
+    prevState: BaseTransitionState
+  ) {
     if (this.props.in !== prevProps.in && prevState.transitioning) {
       // direction changed before previous transition finished
       return true
@@ -94,8 +93,11 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
     return null
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, cancelPrematurely) {
+  componentDidUpdate(
+    prevProps: BaseTransitionProps,
+    _prevState: BaseTransitionState,
+    cancelPrematurely: boolean
+  ) {
     if (cancelPrematurely) {
       this.clearTransition(prevProps.transitionClassName)
     }
@@ -113,12 +115,13 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
     this._timeouts.forEach((timeout) => {
       clearTimeout(timeout)
     })
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_unmounted' does not exist on type 'Base... Remove this comment to see the full error message
     this._unmounted = true
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'transitionIn' implicitly has an 'any' t... Remove this comment to see the full error message
-  startTransition = (transitionIn, transitionOnStart) => {
+  startTransition = (
+    transitionIn: BaseTransitionProps['in'],
+    transitionOnStart: BaseTransitionProps['transitionOnMount']
+  ) => {
     const { transitionEnter, transitionExit } = this.props
     if (transitionIn) {
       this.enter(transitionEnter && transitionOnStart ? STATES.EXITED : null)
@@ -128,16 +131,14 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
   }
 
   transition = (
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'toState' implicitly has an 'any' type.
-    toState,
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'fromState' implicitly has an 'any' type... Remove this comment to see the full error message
-    fromState,
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'transitionCallback' implicitly has an '... Remove this comment to see the full error message
-    transitionCallback,
+    toState: BaseTransitionStatesType | null,
+    fromState: BaseTransitionStatesType | null,
+    transitionCallback?: () => void,
     transitionDuration = 0
   ) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_unmounted' does not exist on type 'Base... Remove this comment to see the full error message
     if (this._unmounted) return
+
+    const { onTransition } = this.props
 
     const classList = getClassList(this)
 
@@ -159,15 +160,12 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
       classList.add(transitionClassName)
     }
 
-    if (toState && fromState) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onTransition' does not exist on type 'Re... Remove this comment to see the full error message
-      this.props.onTransition(toState, fromState)
+    if (toState && fromState && typeof onTransition === 'function') {
+      onTransition(toState, fromState)
     }
 
     this._timeouts.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       setTimeout(() => {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_unmounted' does not exist on type 'Base... Remove this comment to see the full error message
         if (this._unmounted) return
 
         if (typeof transitionCallback === 'function') {
@@ -177,13 +175,10 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'transitionClassName' implicitly has an ... Remove this comment to see the full error message
-  clearTransition(transitionClassName) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_unmounted' does not exist on type 'Base... Remove this comment to see the full error message
+  clearTransition(transitionClassName: string) {
     if (this._unmounted) return
 
     this.setState({ transitioning: false }, () => {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_unmounted' does not exist on type 'Base... Remove this comment to see the full error message
       if (this._unmounted) return
 
       const classList = getClassList(this)
@@ -197,24 +192,26 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
     })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'initialState' implicitly has an 'any' t... Remove this comment to see the full error message
-  enter = (initialState) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_unmounted' does not exist on type 'Base... Remove this comment to see the full error message
+  enter = (initialState: BaseTransitionStatesType | null) => {
     if (this.state.transitioning || this._unmounted) return
 
     const { props } = this
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'onEnter' does not exist on type 'Readonl... Remove this comment to see the full error message
-    props.onEnter()
+
+    if (typeof props.onEnter === 'function') {
+      props.onEnter()
+    }
 
     if (props.transitionEnter) {
       this.setState({ transitioning: true }, () => {
         const enter = () => {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'onEntering' does not exist on type 'Read... Remove this comment to see the full error message
-          props.onEntering()
+          if (typeof props.onEntering === 'function') {
+            props.onEntering()
+          }
           this.transition(STATES.ENTERED, STATES.ENTERING, () => {
             this.setState({ transitioning: false }, () => {
-              // @ts-expect-error ts-migrate(2339) FIXME: Property 'onEntered' does not exist on type 'Reado... Remove this comment to see the full error message
-              props.onEntered()
+              if (typeof props.onEntered === 'function') {
+                props.onEntered()
+              }
             })
           })
         }
@@ -233,31 +230,34 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
       })
     } else {
       this.setState({ transitioning: false }, () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3-4 arguments, but got 2.
         this.transition(STATES.ENTERED, STATES.EXITED)
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'onEntered' does not exist on type 'Reado... Remove this comment to see the full error message
-        props.onEntered()
+        if (typeof props.onEntered === 'function') {
+          props.onEntered()
+        }
       })
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'initialState' implicitly has an 'any' t... Remove this comment to see the full error message
-  exit = (initialState) => {
+  exit = (initialState: BaseTransitionStatesType | null) => {
     if (this.state.transitioning) return
 
     const { props } = this
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'onExit' does not exist on type 'Readonly... Remove this comment to see the full error message
-    props.onExit()
+
+    if (typeof props.onExit === 'function') {
+      props.onExit()
+    }
 
     if (props.transitionExit) {
       this.setState({ transitioning: true }, () => {
         const exit = () => {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'onExiting' does not exist on type 'Reado... Remove this comment to see the full error message
-          props.onExiting()
+          if (typeof props.onExiting === 'function') {
+            props.onExiting()
+          }
           this.transition(STATES.EXITED, STATES.EXITING, () => {
             this.setState({ transitioning: false }, () => {
-              // @ts-expect-error ts-migrate(2339) FIXME: Property 'onExited' does not exist on type 'Readon... Remove this comment to see the full error message
-              props.onExited()
+              if (typeof props.onExited === 'function') {
+                props.onExited()
+              }
             })
           })
         }
@@ -271,16 +271,15 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
       })
     } else {
       this.setState({ transitioning: false }, () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3-4 arguments, but got 2.
         this.transition(STATES.EXITED, STATES.ENTERED)
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'onExited' does not exist on type 'Readon... Remove this comment to see the full error message
-        props.onExited()
+        if (typeof props.onExited === 'function') {
+          props.onExited()
+        }
       })
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'toState' implicitly has an 'any' type.
-  transitionEnabled(toState) {
+  transitionEnabled(toState: BaseTransitionStatesType | null) {
     const { props } = this
 
     switch (toState) {
@@ -295,9 +294,9 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'transitionState' implicitly has an 'any... Remove this comment to see the full error message
-  getTransitionClassName(transitionState) {
+  getTransitionClassName(transitionState: BaseTransitionStatesType | null) {
     const { props } = this
+
     switch (transitionState) {
       case STATES.EXITED:
         return props.exitedClassName
@@ -308,15 +307,22 @@ class BaseTransition extends React.Component<BaseTransitionProps> {
       case STATES.EXITING:
         return props.exitingClassName
       default:
-        return null
+        return undefined
     }
   }
+
   ref = createRef()
+
   renderChildren() {
-    return safeCloneElement(ensureSingleChild(this.props.children)!, {
-      'aria-hidden': !this.props.in ? true : null,
-      ref: this.ref
-    })
+    return this.props.children
+      ? safeCloneElement(
+          ensureSingleChild(this.props.children) as ReactElement,
+          {
+            'aria-hidden': !this.props.in ? true : null,
+            ref: this.ref
+          }
+        )
+      : null
   }
 
   render() {

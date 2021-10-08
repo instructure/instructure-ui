@@ -25,6 +25,14 @@
 import type { TransitionTheme } from '@instructure/shared-types'
 import type { TransitionProps, TransitionStyle } from './props'
 
+const getClassNames = (type: TransitionProps['type']) => ({
+  transitioning: `transition--${type}-transitioning`,
+  exited: `transition--${type}-exited`,
+  exiting: `transition--${type}-exiting`,
+  entered: `transition--${type}-entered`,
+  entering: `transition--${type}-entering`
+})
+
 /**
  * ---
  * private: true
@@ -140,15 +148,7 @@ const generateStyle = (
 
   return {
     duration: componentTheme.duration,
-    classNames: type
-      ? {
-          transitioning: `transition--${type}-transitioning`,
-          exited: `transition--${type}-exited`,
-          exiting: `transition--${type}-exiting`,
-          entered: `transition--${type}-entered`,
-          entering: `transition--${type}-entering`
-        }
-      : {},
+    classNames: getClassNames(type),
     globalStyles: {
       ...fadeAnimation,
       ...scaleAnimation,
@@ -157,4 +157,5 @@ const generateStyle = (
   }
 }
 
+export { generateStyle, getClassNames }
 export default generateStyle

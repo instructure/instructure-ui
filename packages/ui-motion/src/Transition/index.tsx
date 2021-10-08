@@ -46,6 +46,7 @@ import type { TransitionProps } from './props'
 category: components/utilities
 ---
 @module Transition
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -62,15 +63,6 @@ class Transition extends Component<TransitionProps> {
     transitionOnMount: false,
     transitionEnter: true,
     transitionExit: true,
-
-    onEnter: function () {},
-    onEntering: function () {},
-    onEntered: function () {},
-    onExit: function () {},
-    onExiting: function () {},
-    onExited: function () {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'toState' is declared but its value is never read.
-    onTransition: function (toState, fromState) {},
     children: null
   }
 
@@ -86,24 +78,21 @@ class Transition extends Component<TransitionProps> {
 
   handleExited = () => {
     if (typeof this.props.onExited === 'function') {
-      this.props.onExited(this.props.type)
+      this.props.onExited(this.props.type!)
     }
   }
 
   handleEntered = () => {
     if (typeof this.props.onEntered === 'function') {
-      this.props.onEntered(this.props.type)
+      this.props.onEntered(this.props.type!)
     }
   }
 
-  /**
-   * Transition helper:
-   * After emotion migration the only way to keep
-   * the old BaseTransition functionality with adding and removing
-   * classes was to add the `Global` helper of `emotion`
-   *
-   * Todo: try to refactor or replace Transition/BaseTransition component in v9.0.0. so that it is not class based
-   */
+  // Transition helper:
+  // After emotion migration the only way to keep
+  // the old BaseTransition functionality with adding and removing
+  // classes was to add the `Global` helper of `emotion`
+  // Todo: try to refactor or replace Transition/BaseTransition component in v9.0.0. so that it is not class based
   renderTransitionHelper = () => {
     const { styles } = this.props
 
@@ -113,7 +102,7 @@ class Transition extends Component<TransitionProps> {
   render() {
     const { type, children, styles, ...props } = this.props
 
-    const duration = ms(styles?.duration as number)
+    const duration = ms(styles!.duration)
 
     return (
       <>
@@ -122,16 +111,11 @@ class Transition extends Component<TransitionProps> {
           {...props}
           enterDelay={duration}
           exitDelay={duration}
-          //@ts-expect-error TODO:
-          transitionClassName={styles?.classNames?.transitioning}
-          //@ts-expect-error TODO:
-          exitedClassName={styles?.classNames?.exited}
-          //@ts-expect-error TODO:
-          exitingClassName={styles?.classNames?.exiting}
-          //@ts-expect-error TODO:
-          enteredClassName={styles?.classNames?.entered}
-          //@ts-expect-error TODO:
-          enteringClassName={styles?.classNames?.entering}
+          transitionClassName={styles!.classNames.transitioning}
+          exitedClassName={styles!.classNames.exited}
+          exitingClassName={styles!.classNames.exiting}
+          enteredClassName={styles!.classNames.entered}
+          enteringClassName={styles!.classNames.entering}
           onEntered={this.handleEntered}
           onExited={this.handleExited}
         >
