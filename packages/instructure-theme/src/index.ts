@@ -40,7 +40,9 @@ const {
 
 const key = 'instructure'
 
-export type InstructureTheme = BaseTheme & { key: 'instructure' }
+export type InstructureTheme = BaseTheme & {
+  key: 'instructure'
+} & typeof instructure
 
 const theme: InstructureTheme = {
   key,

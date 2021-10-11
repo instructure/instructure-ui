@@ -42,7 +42,7 @@ const key = 'canvas-high-contrast'
 
 export type CanvasHighContrastTheme = BaseTheme & {
   key: 'canvas-high-contrast'
-}
+} & typeof canvasHighContrast
 
 const theme: CanvasHighContrastTheme = {
   key,
