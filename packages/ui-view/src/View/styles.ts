@@ -571,7 +571,7 @@ const generateStyle = (
 
   const focusStyles = getFocusStyles(props, componentTheme)
 
-  const important = (styles: any) =>
+  const important = (styles: Record<string, string | number | undefined>) =>
     Object.entries(styles).reduce(
       (acc, entry) =>
         entry[1] === undefined
