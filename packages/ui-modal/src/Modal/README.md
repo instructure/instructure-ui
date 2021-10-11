@@ -427,12 +427,19 @@ class Example extends React.Component {
 
     this.state = {
       open: false,
+      smallViewport: true
     }
   }
 
-  handleButtonClick = () => {
+  toggleOpen = () => {
     this.setState(function (state) {
       return { open: !state.open }
+    })
+  }
+
+  toggleViewport = async () => {
+    await this.setState(function (state) {
+      return { smallViewport: !state.smallViewport }
     })
   }
 
@@ -441,7 +448,7 @@ class Example extends React.Component {
       <CloseButton
         placement="end"
         offset="small"
-        onClick={this.handleButtonClick}
+        onClick={this.toggleOpen}
         screenReaderLabel="Close"
       />
     )
@@ -450,21 +457,35 @@ class Example extends React.Component {
   render () {
     return (
       <div>
-        <Button onClick={this.handleButtonClick}>
+        <Button onClick={this.toggleOpen}>
           {this.state.open ? 'Close' : 'Open'} the Modal
+        </Button>
+        <Button
+          onClick={this.toggleViewport}
+          margin='0 0 0 small'
+          id="toggleViewportButton"
+        >
+          Toggle viewport
         </Button>
         <Modal
           open={this.state.open}
-          onDismiss={() => { this.setState({ open: false }) }}
-          size="fullscreen"
+          size={this.state.smallViewport ? 'fullscreen' : 'small'}
+          onDismiss={(event) => {
+            if (event.target.id !== 'toggleViewportButton') {
+              this.setState({ open: false })
+            }
+          }}
           label="Modal Dialog: Hello World"
           shouldCloseOnDocumentClick
-          mountNode={() => document.getElementById('mobilePhoneExample')}
+          mountNode={() => document.getElementById('viewportExample')}
           constrain="parent"
         >
-          <Modal.Header spacing="compact">
+          <Modal.Header spacing={this.state.smallViewport ? 'compact' : 'default'}>
             {this.renderCloseButton()}
-            <Text size="large">This Modal is optmized for small viewport</Text>
+            {this.state.smallViewport
+              ? <Text size="large">This Modal is optimized for small viewport</Text>
+              : <Heading>This is a deafult size Modal</Heading>
+            }
           </Modal.Header>
           <Modal.Body>
             <View as="p" margin="none none small"><Text>{fpo}</Text></View>
@@ -474,24 +495,17 @@ class Example extends React.Component {
             <Button onClick={this.handleButtonClick} color="primary" type="submit">Submit</Button>
           </Modal.Footer>
         </Modal>
-        <div style={{
-          boxSizing: "border-box",
-          width: "20rem",
-          height: "37.5rem",
-          borderRadius: "16px",
-          padding: "32px 8px",
-          background: "#C7CDD1",
-          margin: "16px auto 0"
-        }}>
-          <View
-            background="primary-inverse"
-            display="block"
-            width="100%"
-            height="100%"
-            id="mobilePhoneExample"
-          >
-          </View>
-        </div>
+
+        <View
+          background="primary-inverse"
+          margin="medium auto none"
+          display="block"
+          width={this.state.smallViewport ? '20rem' : '50rem'}
+          height="37.5rem"
+          borderWidth="large"
+          id="viewportExample"
+        >
+        </View>
       </div>
     )
   }
