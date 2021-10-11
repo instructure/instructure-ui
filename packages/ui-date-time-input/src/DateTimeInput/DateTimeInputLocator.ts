@@ -22,21 +22,19 @@
  * SOFTWARE.
  */
 
-export { ApplyLocale } from './ApplyLocale'
-export { ApplyLocaleContext } from './ApplyLocale/ApplyLocaleContext'
+import { locator } from '@instructure/ui-test-locator'
 
-export { bidirectional } from './bidirectional'
-export { TimeUtils, DateTime as DateTimeLuxon } from './TimeUtils'
-export { DateTime } from './DateTime'
-export { getTextDirection } from './getTextDirection'
-export { I18nPropTypes } from './I18nPropTypes'
-export { Locale } from './Locale'
-export { DIRECTION, TextDirectionContext } from './TextDirectionContext'
-export {
-  useTextDirectionContext,
-  ApplyTextDirection
-} from './ApplyTextDirection'
+import { DateTimeInput } from './index'
 
-export type { BidirectionalProps } from './bidirectional'
-export type { ApplyLocaleProps } from './ApplyLocale/props'
-export type { ApplyTextDirectionProps } from './ApplyTextDirection/props'
+/* eslint-disable no-restricted-imports */
+// @ts-expect-error bypass no type definition found error
+import { DateInputLocator } from '@instructure/ui-date-input/es/DateInput/DateInputLocator'
+// @ts-expect-error bypass no type definition found error
+import { TimeSelectLocator } from '@instructure/ui-time-select/es/TimeSelect/TimeSelectLocator'
+/* eslint-enable no-restricted-imports */
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const DateTimeInputLocator = locator(DateTimeInput.selector, {
+  findDateInput: (...args: any[]) => DateInputLocator.find(...args),
+  findTimeInput: (...args: any[]) => TimeSelectLocator.find(...args)
+})

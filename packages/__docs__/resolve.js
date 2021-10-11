@@ -55,6 +55,10 @@ module.exports = {
       __dirname,
       '../ui-date-input/src/'
     ),
+    '@instructure/ui-date-time-input$': path.resolve(
+      __dirname,
+      '../ui-date-time-input/src/'
+    ),
     '@instructure/ui-dialog$': path.resolve(__dirname, '../ui-dialog/src/'),
     '@instructure/ui-docs-client$': path.resolve(
       __dirname,

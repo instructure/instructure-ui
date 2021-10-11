@@ -1,0 +1,54 @@
+---
+category: packages
+---
+
+## ui-date-time-input
+
+[![npm][npm]][npm-url]&nbsp;
+[![MIT License][license-badge]][license]&nbsp;
+[![Code of Conduct][coc-badge]][coc]
+
+A component that can be used to enter date and time.
+
+### Components
+
+The `ui-date-time-input` package contains the following:
+
+- [DateTimeInput](#DateTimeInput)
+
+### Installation
+
+```sh
+yarn add @instructure/ui-date-time-input
+```
+
+### Usage
+
+```jsx
+---
+example: false
+---
+import React from 'react'
+import { DateTimeInput } from '@instructure/ui-date-time-input'
+
+const MyDateTimeInput = () => {
+  return (
+    <DateTimeInput
+      description="Pick a date and time"
+      datePlaceholder="Choose a date"
+      dateLabel="Date"
+      invalidDateTimeMessage="Invalid date!"
+      timeLabel="Time"
+      prevMonthLabel='Previous month'
+      nextMonthLabel='Next month'
+    />
+  )
+}
+```
+
+[npm]: https://img.shields.io/npm/v/@instructure/ui-date-time-input.svg
+[npm-url]: https://npmjs.com/package/@instructure/ui-date-time-input
+[license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
+[license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE
+[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
+[coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md

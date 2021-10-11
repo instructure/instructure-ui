@@ -38,6 +38,7 @@
     "@instructure/ui-checkbox": "8.11.1",
     "@instructure/ui-code-editor": "8.11.1",
     "@instructure/ui-date-input": "8.11.1",
+    "@instructure/ui-date-time-input": "8.11.1",
     "@instructure/ui-dialog": "8.11.1",
     "@instructure/ui-drawer-layout": "8.11.1",
     "@instructure/ui-editable": "8.11.1",

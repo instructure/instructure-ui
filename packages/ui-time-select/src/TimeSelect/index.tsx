@@ -22,20 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { BaseSyntheticEvent, Component, SyntheticEvent } from 'react'
 
-import { ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
-
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
-import timezone from 'dayjs/plugin/timezone'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
-import './locales'
-
-dayjs.extend(utc)
-dayjs.extend(timezone)
-dayjs.extend(localizedFormat)
-
+import {
+  ApplyLocaleContext,
+  Locale,
+  TimeUtils,
+  DateTimeLuxon
+} from '@instructure/ui-i18n'
 import {
   getInteraction,
   passthroughProps,
@@ -54,8 +48,23 @@ category: components
 ---
 **/
 
+type TimeSelectOptions = {
+  id: string
+  value: string
+  label: string
+}
+
+type TimeSelectState = {
+  inputValue: string
+  options: TimeSelectOptions[]
+  filteredOptions: TimeSelectOptions[]
+  isShowingOptions: boolean
+  highlightedOptionId?: string
+  selectedOptionId?: string
+}
+
 @testable()
-class TimeSelect extends Component<TimeSelectProps> {
+class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   static readonly componentId = 'TimeSelect'
 
   static allowedProps = allowedProps
@@ -63,7 +72,8 @@ class TimeSelect extends Component<TimeSelectProps> {
 
   static defaultProps = {
     defaultToFirstOption: false,
-    format: 'LT',
+    id: undefined,
+    format: 't', // see https://moment.github.io/luxon/#/formatting?id=table-of-tokens
     step: 30,
     isRequired: false,
     isInline: false,
@@ -91,11 +101,17 @@ class TimeSelect extends Component<TimeSelectProps> {
 
   static contextType = ApplyLocaleContext
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: TimeSelectProps) {
     super(props)
     this.state = this.getInitialState()
   }
+
+  componentDidMount() {
+    // we'll need to recalculate the state because the context value is
+    // set at this point (and it might change locale & timezone)
+    this.setState(this.getInitialState())
+  }
+
   ref: Element | null = null
   _emptyOptionId = uid('Select-EmptyOption')
 
@@ -143,11 +159,10 @@ class TimeSelect extends Component<TimeSelectProps> {
     } else if (this.context && this.context.timezone) {
       return this.context.timezone
     }
-    return dayjs.tz.guess()
+    return TimeUtils.browserTimeZone()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: TimeSelectProps) {
     if (
       this.props.step !== prevProps.step ||
       this.props.format !== prevProps.format
@@ -167,7 +182,7 @@ class TimeSelect extends Component<TimeSelectProps> {
       }
       this.setState({
         inputValue: option ? option.label : '',
-        selectedOptionId: option ? option.id : null
+        selectedOptionId: option ? option.id : undefined
       })
     }
   }
@@ -175,19 +190,21 @@ class TimeSelect extends Component<TimeSelectProps> {
   getInitialState() {
     const initialOptions = this.generateOptions()
     const initialSelection = this.getInitialOption(initialOptions)
-
     return {
       inputValue: initialSelection ? initialSelection.label : '',
       options: initialOptions,
       filteredOptions: initialOptions,
       isShowingOptions: false,
-      highlightedOptionId: initialSelection ? initialSelection.id : null,
-      selectedOptionId: initialSelection ? initialSelection.id : null
+      highlightedOptionId: initialSelection
+        ? (initialSelection as any).id
+        : undefined,
+      selectedOptionId: initialSelection
+        ? (initialSelection as any).id
+        : undefined
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'options' implicitly has an 'any' type.
-  getInitialOption(options) {
+  getInitialOption(options: TimeSelectOptions[]) {
     const { value, defaultValue, defaultToFirstOption, format } = this.props
     const initialValue = value || defaultValue
 
@@ -199,44 +216,36 @@ class TimeSelect extends Component<TimeSelectProps> {
         return option
       }
       // value does not match an existing option
-      const date = dayjs(initialValue)
-        .tz(this.timezone(), true)
-        .locale(this.locale())
-      return { label: date.format(format) }
+      const date = TimeUtils.parse(initialValue, this.locale(), this.timezone())
+      return { label: format ? date.toFormat(format) : date.toISO() }
     }
     // otherwise return first option, if desired
     if (defaultToFirstOption) {
       return options[0]
     }
-
-    return null
+    return undefined
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'field' implicitly has an 'any' type.
-  getOption(field, value, options = this.state.options) {
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'option' implicitly has an 'any' type.
-    return options.find((option) => option[field] === value)
+  getOption(field: string, value: unknown, options = this.state.options) {
+    return options.find((option: any) => option[field] === value)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'date' implicitly has an 'any' type.
-  getFormattedId(date) {
+  getFormattedId(date: DateTimeLuxon) {
     // ISO8601 strings may contain a space. Remove any spaces before using the
     // date as the id.
-    const dateStr = date.toISOString()
-    return dateStr ? dateStr.replace(/\s/g, '') : null
+    const dateStr = date.toISO()
+    return dateStr.replace(/\s/g, '')
   }
 
   getBaseDate() {
     let baseDate
     const baseValue = this.props.value || this.props.defaultValue
     if (baseValue) {
-      baseDate = dayjs(baseValue)
-        .tz(this.timezone(), true)
-        .locale(this.locale())
+      baseDate = TimeUtils.parse(baseValue, this.locale(), this.timezone())
     } else {
-      baseDate = dayjs().tz(this.timezone(), true).locale(this.locale())
+      baseDate = TimeUtils.now(this.locale(), this.timezone())
     }
-    return baseDate.second(0).millisecond(0)
+    return baseDate.set({ second: 0, millisecond: 0 })
   }
 
   generateOptions() {
@@ -248,36 +257,31 @@ class TimeSelect extends Component<TimeSelectProps> {
       for (let minute = 0; minute < 60 / this.props.step; minute++) {
         // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
         const minutes = minute * this.props.step
-        const newDate = date.hour(hour).minute(minutes)
+        const newDate = date.set({ hour: hour, minute: minutes })
         // store time options
         options.push({
           id: this.getFormattedId(newDate), // iso no spaces
-          value: newDate.toISOString(), // iso
-          label: newDate.format(this.props.format) // formatted string
+          value: newDate.toISO(),
+          label: this.props.format
+            ? newDate.toFormat(this.props.format)
+            : newDate.toISO() // formatted string
         })
       }
     }
     return options
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'inputValue' implicitly has an 'any' typ... Remove this comment to see the full error message
-  filterOptions(inputValue) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'options' does not exist on type 'Readonl... Remove this comment to see the full error message
-    return this.state.options.filter((option) =>
+  filterOptions(inputValue: string) {
+    return this.state?.options.filter((option: TimeSelectOptions) =>
       option.label.toLowerCase().startsWith(inputValue.toLowerCase())
     )
   }
 
-  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   matchValue() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputValue' does not exist on type 'Read... Remove this comment to see the full error message
       inputValue,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'filteredOptions' does not exist on type ... Remove this comment to see the full error message
       filteredOptions,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'highlightedOptionId' does not exist on t... Remove this comment to see the full error message
       highlightedOptionId,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOptionId' does not exist on type... Remove this comment to see the full error message
       selectedOptionId
     } = this.state
 
@@ -300,7 +304,7 @@ class TimeSelect extends Component<TimeSelectProps> {
     }
     // input value is from highlighted option, not user input
     if (highlightedOptionId) {
-      if (inputValue === this.getOption('id', highlightedOptionId).label) {
+      if (inputValue === this.getOption('id', highlightedOptionId)!.label) {
         return {
           inputValue: '',
           filteredOptions: this.filterOptions('')
@@ -312,128 +316,115 @@ class TimeSelect extends Component<TimeSelectProps> {
     if (inputValue === '') {
       return { inputValue: '' }
     }
+    return undefined
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
-  handleRef = (node) => {
+  handleRef = (node: any) => {
     this.ref = node
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleBlur = (event) => {
-    this.setState({ highlightedOptionId: null })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onBlur(event)
+  handleBlur = (event: SyntheticEvent) => {
+    this.setState({ highlightedOptionId: undefined })
+    this.props.onBlur?.(event)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleInputChange = (event) => {
+  handleInputChange = (event: BaseSyntheticEvent) => {
     const value = event.target.value
     const newOptions = this.filterOptions(value)
 
-    // @ts-expect-error ts-migrate(6133) FIXME: 'state' is declared but its value is never read.
-    this.setState((state) => ({
+    this.setState((_state: TimeSelectState) => ({
       inputValue: value,
       filteredOptions: newOptions,
-      highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : null,
+      highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : undefined,
       isShowingOptions: true
     }))
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingOptions' does not exist on type... Remove this comment to see the full error message
     if (!this.state.isShowingOptions) {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      this.props.onShowOptions(event)
+      this.props.onShowOptions?.(event)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleShowOptions = (event) => {
+  handleShowOptions = (event: SyntheticEvent) => {
     this.setState({ isShowingOptions: true })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onShowOptions(event)
+    this.props.onShowOptions?.(event)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleHideOptions = (event) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOptionId' does not exist on type... Remove this comment to see the full error message
+  handleHideOptions = (event: SyntheticEvent) => {
     const { selectedOptionId } = this.state
     const option = this.getOption('id', selectedOptionId)
     let prevValue = ''
 
     if (this.props.defaultValue) {
-      const date = dayjs(this.props.defaultValue)
-        .tz(this.timezone(), true)
-        .locale(this.locale())
-
-      prevValue = date.format(this.props.format)
+      const date = TimeUtils.parse(
+        this.props.defaultValue,
+        this.locale(),
+        this.timezone()
+      )
+      prevValue = this.props.format
+        ? date.toFormat(this.props.format)
+        : date.toISO()
     }
 
-    // @ts-expect-error ts-migrate(6133) FIXME: 'inputValue' is declared but its value is never re... Remove this comment to see the full error message
-    this.setState(({ inputValue }) => ({
+    this.setState((_state: TimeSelectState) => ({
       isShowingOptions: false,
-      highlightedOptionId: null,
-      inputValue: selectedOptionId ? option.label : prevValue,
+      highlightedOptionId: undefined,
+      inputValue: selectedOptionId ? option!.label : prevValue,
       filteredOptions: this.filterOptions(''),
       ...this.matchValue()
     }))
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onHideOptions(event)
+    this.props.onHideOptions?.(event)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleHighlightOption = (event, { id }) => {
+  handleHighlightOption = (event: SyntheticEvent, { id }: { id: string }) => {
     if (id === this._emptyOptionId) return
     const { type } = event
-    const option = this.getOption('id', id).label
+    const option = this.getOption('id', id)!.label
 
     this.setState((state) => ({
       highlightedOptionId: id,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputValue' does not exist on type 'Read... Remove this comment to see the full error message
       inputValue: type === 'keydown' ? option : state.inputValue
     }))
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleSelectOption = (event, { id }) => {
+  handleSelectOption = (event: SyntheticEvent, { id }: { id: string }) => {
     if (id === this._emptyOptionId) {
       this.setState({ isShowingOptions: false })
       return
     }
     const option = this.getOption('id', id)
 
+    let newInputValue: string
     if (this.isControlled) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOptionId' does not exist on type... Remove this comment to see the full error message
       const prev = this.getOption('id', this.state.selectedOptionId)
+      newInputValue = prev ? prev.label : ''
       this.setState({
         isShowingOptions: false,
-        inputValue: prev ? prev.label : '',
+        inputValue: newInputValue,
         filteredOptions: this.filterOptions('')
       })
     } else {
+      newInputValue = option!.label
       this.setState({
         isShowingOptions: false,
         selectedOptionId: id,
-        inputValue: option.label,
+        inputValue: newInputValue,
         filteredOptions: this.filterOptions('')
       })
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOptionId' does not exist on type... Remove this comment to see the full error message
     if (id !== this.state.selectedOptionId) {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      this.props.onChange(event, { value: option.value })
+      this.props.onChange?.(event, {
+        value: option!.value,
+        inputText: newInputValue
+      })
     }
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onHideOptions(event)
+    this.props.onHideOptions?.(event)
   }
 
   renderOptions() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'filteredOptions' does not exist on type ... Remove this comment to see the full error message
       filteredOptions,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'highlightedOptionId' does not exist on t... Remove this comment to see the full error message
       highlightedOptionId,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOptionId' does not exist on type... Remove this comment to see the full error message
       selectedOptionId
     } = this.state
 
@@ -441,8 +432,7 @@ class TimeSelect extends Component<TimeSelectProps> {
       return this.renderEmptyOption()
     }
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'option' implicitly has an 'any' type.
-    return filteredOptions.map((option) => {
+    return filteredOptions.map((option: any) => {
       const { id, label } = option
       return (
         <Select.Option
@@ -496,7 +486,6 @@ class TimeSelect extends Component<TimeSelectProps> {
       ...rest
     } = this.props
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputValue' does not exist on type 'Read... Remove this comment to see the full error message
     const { inputValue, isShowingOptions } = this.state
 
     return (

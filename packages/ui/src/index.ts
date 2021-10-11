@@ -52,6 +52,7 @@ export {
 } from '@instructure/ui-checkbox'
 export { CodeEditor } from '@instructure/ui-code-editor'
 export { DateInput } from '@instructure/ui-date-input'
+export { DateTimeInput } from '@instructure/ui-date-time-input'
 export { Dialog } from '@instructure/ui-dialog'
 export { DrawerLayout, DrawerContent } from '@instructure/ui-drawer-layout'
 export { Editable, InPlaceEdit } from '@instructure/ui-editable'

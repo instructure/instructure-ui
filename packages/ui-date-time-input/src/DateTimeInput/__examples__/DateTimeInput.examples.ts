@@ -22,21 +22,34 @@
  * SOFTWARE.
  */
 
-export { ApplyLocale } from './ApplyLocale'
-export { ApplyLocaleContext } from './ApplyLocale/ApplyLocaleContext'
+import { DateTimeInputProps } from '../props'
 
-export { bidirectional } from './bidirectional'
-export { TimeUtils, DateTime as DateTimeLuxon } from './TimeUtils'
-export { DateTime } from './DateTime'
-export { getTextDirection } from './getTextDirection'
-export { I18nPropTypes } from './I18nPropTypes'
-export { Locale } from './Locale'
-export { DIRECTION, TextDirectionContext } from './TextDirectionContext'
-export {
-  useTextDirectionContext,
-  ApplyTextDirection
-} from './ApplyTextDirection'
-
-export type { BidirectionalProps } from './bidirectional'
-export type { ApplyLocaleProps } from './ApplyLocale/props'
-export type { ApplyTextDirectionProps } from './ApplyTextDirection/props'
+export default {
+  sectionProp: 'layout',
+  propValues: {
+    datePlaceholder: [undefined, 'date placeholder'],
+    defaultValue: [undefined, '2018-01-18T16:00', 'intentionally wrong'],
+    invalidDateTimeMessage: ['invalid date'],
+    messages: [
+      undefined,
+      [
+        { text: 'error message', type: 'error' },
+        { text: 'success message', type: 'success' }
+      ]
+    ],
+    interaction: ['enabled', 'disabled']
+  },
+  getComponentProps: (_props: DateTimeInputProps) => {
+    return {
+      description: 'desc',
+      dateLabel: 'date label',
+      isRequired: false,
+      prevMonthLabel: 'prev month',
+      nextMonthLabel: 'next month',
+      timeLabel: 'time label',
+      timeStep: 10,
+      timezone: 'America/Tijuana',
+      locale: 'de-AT'
+    }
+  }
+}

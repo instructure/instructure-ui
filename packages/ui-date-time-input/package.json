@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/ui-time-select",
-  "version": "8.11.1",
-  "description": "A component for selecting time values.",
+  "name": "@instructure/ui-date-time-input",
+  "version": "8.10.2",
+  "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
   "module": "./es/index.js",
@@ -23,24 +23,28 @@
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "8.10.2",
+    "@instructure/ui-test-locator": "8.10.2",
+    "@instructure/ui-test-utils": "8.10.2"
+  },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.11.1",
-    "@instructure/ui-form-field": "8.11.1",
-    "@instructure/ui-i18n": "8.11.1",
-    "@instructure/ui-position": "8.11.1",
-    "@instructure/ui-prop-types": "8.11.1",
-    "@instructure/ui-react-utils": "8.11.1",
-    "@instructure/ui-select": "8.11.1",
-    "@instructure/ui-test-locator": "8.11.1",
-    "@instructure/ui-testable": "8.11.1",
-    "@instructure/uid": "8.11.1",
+    "@instructure/debounce": "8.10.2",
+    "@instructure/emotion": "8.10.2",
+    "@instructure/ui-buttons": "8.10.2",
+    "@instructure/ui-calendar": "8.10.2",
+    "@instructure/ui-date-input": "8.10.2",
+    "@instructure/ui-form-field": "8.10.2",
+    "@instructure/ui-i18n": "8.10.2",
+    "@instructure/ui-icons": "8.10.2",
+    "@instructure/ui-a11y-content": "8.10.2",
+    "@instructure/ui-prop-types": "8.10.2",
+    "@instructure/ui-react-utils": "8.10.2",
+    "@instructure/ui-testable": "8.10.2",
+    "@instructure/ui-time-select": "8.10.2",
+    "@instructure/ui-utils": "8.10.2",
     "prop-types": "^15"
-  },
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "8.11.1",
-    "@instructure/ui-test-utils": "8.11.1",
-    "moment-timezone": "^0.5.33"
   },
   "peerDependencies": {
     "react": ">=16.8 <=17"
