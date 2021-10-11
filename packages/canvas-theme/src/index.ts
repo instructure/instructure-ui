@@ -66,7 +66,8 @@ export type CanvasBrandVariables = typeof brandVariables
 
 export type CanvasTheme = BaseTheme & {
   key: 'canvas'
-} & CanvasBrandVariables
+} & typeof canvas &
+  CanvasBrandVariables
 
 const theme: CanvasTheme = {
   key,
