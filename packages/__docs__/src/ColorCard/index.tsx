@@ -28,20 +28,17 @@ import PropTypes from 'prop-types'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { ColorName } from '../ColorName'
-
-class ColorCard extends Component {
-  static propTypes = {
-    hex: PropTypes.string.isRequired,
-    name: PropTypes.string,
-    minimal: PropTypes.bool
-  }
+import type { ColorCardProps } from './props'
+import { propTypes } from './props'
+class ColorCard extends Component<ColorCardProps> {
+  static propTypes = propTypes
 
   static defaultProps = {
     minimal: false,
     name: undefined
   }
 
-  hexToRgb(hex) {
+  hexToRgb(hex: string) {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
     if (!result) {
       return
