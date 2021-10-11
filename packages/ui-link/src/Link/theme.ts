@@ -40,7 +40,10 @@ const generateComponentTheme = (theme: Theme): LinkTheme => {
     canvas: {
       color: theme['ic-link-color'],
       focusOutlineColor: theme['ic-brand-primary'],
-      hoverColor: darken(theme['ic-link-color'], 10)
+      // "Velence" blue, introduced in INSTUI-3268,
+      // needed for better color contrast on hover,
+      // might be moved to the theme once it is used somewhere else too
+      hoverColor: '#054E72'
     },
     'canvas-high-contrast': {
       textDecorationOutsideText: 'underline',
