@@ -50,7 +50,7 @@ describe('<FormFieldLayout />', async () => {
 
     const formFieldLayout = within(subject.getDOMNode())
     const label = await formFieldLayout.findWithText('Username')
-    expect(label.getComputedStyle().textAlign).to.equal('right')
+    expect(label.getComputedStyle().textAlign).to.equal('end')
   })
 
   it('should align label to left', async () => {
@@ -62,7 +62,7 @@ describe('<FormFieldLayout />', async () => {
 
     const formFieldLayout = within(subject.getDOMNode())
     const label = await formFieldLayout.findWithText('Username')
-    expect(label.getComputedStyle().textAlign).to.equal('left')
+    expect(label.getComputedStyle().textAlign).to.equal('start')
   })
 
   it('should provide a ref to the input container', async () => {
