@@ -608,18 +608,18 @@ const generateStyle = (
         : {}),
       ...(shouldUseFocusStyles ? focusStyles : {})
     },
-    inlineStyles: {
-      ...important(spacingStyle),
-      ...important(borderStyle),
-      ...important(offsetStyle),
-      width: `${width} !important`,
-      height: `${height} !important`,
-      minWidth: `${minWidth} !important`,
-      minHeight: `${minHeight} !important`,
-      maxWidth: `${maxWidth} !important`,
-      maxHeight: `${maxHeight} !important`,
-      ...important(getStyleProps(props))
-    }
+    inlineStyles: important({
+      ...spacingStyle,
+      ...borderStyle,
+      ...offsetStyle,
+      width,
+      height,
+      minWidth,
+      minHeight,
+      maxWidth,
+      maxHeight,
+      ...getStyleProps(props)
+    })
   }
 }
 export default generateStyle
