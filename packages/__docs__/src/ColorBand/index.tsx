@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
@@ -32,22 +31,18 @@ import { View } from '@instructure/ui-view'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { propTypes } from './props'
+import type { ColorBandProps } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
-class ColorBand extends Component {
-  static propTypes = {
-    height: PropTypes.string,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+class ColorBand extends Component<ColorBandProps> {
+  static propTypes = propTypes
 
   componentDidMount() {
     this.props.makeStyles()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(_prevProps: ColorBandProps) {
     this.props.makeStyles()
   }
 
