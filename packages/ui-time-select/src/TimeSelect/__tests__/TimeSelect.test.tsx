@@ -35,6 +35,7 @@ import moment from 'moment-timezone'
 import { TimeSelect } from '../index'
 import { TimeSelectLocator } from '../TimeSelectLocator'
 import TimeSelectExamples from '../__examples__/TimeSelect.examples'
+import { TimeUtils, ApplyLocale } from '@instructure/ui-i18n'
 
 describe('<TimeSelect />', async () => {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'spy' implicitly has an 'any' type.
@@ -288,6 +289,23 @@ describe('<TimeSelect />', async () => {
         value.hour(0).minute(15).format('LT')
       )
     })
+  })
+
+  it('should read locale and timezone from context', async () => {
+    const dateTime = TimeUtils.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
+    await mount(
+      // Africa/Nairobi is GMT +3
+      <ApplyLocale locale="fr" timezone="Africa/Nairobi">
+        <TimeSelect
+          renderLabel="Choose a time"
+          step={15}
+          value={dateTime.toISO()}
+        />
+      </ApplyLocale>
+    )
+    const timeInput = await TimeSelectLocator.find()
+    const input = await timeInput.findInput()
+    expect(input.getAttribute('value')).to.equal('20:30')
   })
 
   describe('input', async () => {

@@ -49,6 +49,7 @@ export { Focusable } from '@instructure/ui-focusable'
 export { Img } from '@instructure/ui-img'
 export { NumberInput } from '@instructure/ui-number-input'
 export { DateInput } from '@instructure/ui-date-input'
+export { DateTimeInput } from '@instructure/ui-date-time-input'
 export { Pill } from '@instructure/ui-pill'
 export { TextInput } from '@instructure/ui-text-input'
 export {

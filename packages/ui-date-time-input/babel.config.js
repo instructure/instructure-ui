@@ -22,38 +22,16 @@
  * SOFTWARE.
  */
 
-import 'dayjs/locale/ar'
-import 'dayjs/locale/hy-am'
-import 'dayjs/locale/ca'
-import 'dayjs/locale/da'
-import 'dayjs/locale/nl'
-import 'dayjs/locale/en-au'
-import 'dayjs/locale/en-ca'
-import 'dayjs/locale/en-gb'
-import 'dayjs/locale/fi'
-import 'dayjs/locale/fr'
-import 'dayjs/locale/fr-ca'
-import 'dayjs/locale/de'
-import 'dayjs/locale/el'
-import 'dayjs/locale/ht'
-import 'dayjs/locale/he'
-import 'dayjs/locale/hu'
-import 'dayjs/locale/is'
-import 'dayjs/locale/it'
-import 'dayjs/locale/ja'
-import 'dayjs/locale/ko'
-import 'dayjs/locale/mi'
-import 'dayjs/locale/nb'
-import 'dayjs/locale/fa'
-import 'dayjs/locale/pl'
-import 'dayjs/locale/pt'
-import 'dayjs/locale/pt-br'
-import 'dayjs/locale/ru'
-import 'dayjs/locale/zh'
-import 'dayjs/locale/sl'
-import 'dayjs/locale/es'
-import 'dayjs/locale/sv'
-import 'dayjs/locale/zh-cn'
-import 'dayjs/locale/tr'
-import 'dayjs/locale/uk'
-import 'dayjs/locale/cy'
+module.exports = {
+  presets: [
+    [
+      require('@instructure/ui-babel-preset'),
+      {
+        coverage: Boolean(process.env.COVERAGE),
+        esModules: Boolean(process.env.ES_MODULES),
+        removeConsole: process.env.NODE_ENV === 'production',
+        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+      }
+    ]
+  ]
+}
