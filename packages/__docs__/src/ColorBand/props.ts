@@ -22,36 +22,31 @@
  * SOFTWARE.
  */
 
-/**
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (componentTheme, props, state) => {
-  const commonStyles = {
-    display: 'block',
-    height: '100%'
-  }
-
-  return {
-    band1: {
-      label: 'colorBand__1',
-      ...commonStyles,
-      background: componentTheme.colorAlert
-    },
-    band2: {
-      label: 'colorBand__2',
-      ...commonStyles,
-      background: componentTheme.colorWarning
-    },
-    band3: {
-      label: 'colorBand__3',
-      ...commonStyles,
-      background: componentTheme.colorDanger
-    }
-  }
+import PropTypes from 'prop-types'
+import { PropValidators } from '@instructure/shared-types'
+import type { ComponentStyle } from '@instructure/emotion'
+type ColorBandOwnProps = {
+  height: string
+  makeStyles: (...args: any[]) => any
+  styles: any
 }
+type PropKeys = keyof ColorBandOwnProps
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+type ColorBandProps = ColorBandOwnProps
+const propTypes: PropValidators<PropKeys> = {
+  height: PropTypes.string,
+  // eslint-disable-next-line react/require-default-props
+  makeStyles: PropTypes.func,
+  // eslint-disable-next-line react/require-default-props
+  styles: PropTypes.object
+}
+const allowedProps: AllowedPropKeys = ['height', 'makeStyles', 'styles']
 
-export default generateStyle
+export type ColorBandStyle = ComponentStyle<'band1' | 'band2' | 'band3'>
+export type ColorBandTheme = {
+  colorAlert: string
+  colorWarning: string
+  colorDanger: string
+}
+export type { ColorBandProps }
+export { propTypes, allowedProps }
