@@ -60,7 +60,9 @@ console.log(
     { exampleFilePath: string; generatedPropValues: Record<string, any> }
   ]) => {
     const requirePath = `./${exampleFilePath}`
-
+    if (numStories > 30) {
+      return
+    }
     const exampleDir = requirePath.split('/').slice(0, -2).join('/')
     try {
       const Component: ComponentType = componentsContext(
