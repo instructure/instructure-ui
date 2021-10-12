@@ -27,7 +27,7 @@ import { PropValidators } from '@instructure/shared-types'
 import type { ComponentStyle } from '@instructure/emotion'
 type ColorBandOwnProps = {
   height: string
-  makeStyles: (...args: any[]) => any
+  makeStyles: (...args: any[]) => ColorBandStyle
   styles: any
 }
 type PropKeys = keyof ColorBandOwnProps
