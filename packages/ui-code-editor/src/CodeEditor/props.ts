@@ -24,7 +24,11 @@
 
 import PropTypes from 'prop-types'
 
-import type { PropValidators, CodeEditorTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  CodeEditorTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type CodeEditorOwnProps = {
@@ -54,7 +58,8 @@ type PropKeys = keyof CodeEditorOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CodeEditorProps = CodeEditorOwnProps &
-  WithStyleProps<CodeEditorTheme, CodeEditorStyle>
+  WithStyleProps<CodeEditorTheme, CodeEditorStyle> &
+  OtherHTMLAttributes<CodeEditorOwnProps>
 
 type CodeEditorStyle = ComponentStyle<'codeEditor' | 'globalStyles'>
 

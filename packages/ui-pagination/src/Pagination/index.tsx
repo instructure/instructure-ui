@@ -257,7 +257,6 @@ class Pagination extends Component<PaginationProps> {
       <PaginationArrowButton
         direction={direction === -1 ? 'prev' : 'next'}
         label={label}
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         onClick={onClick}
         disabled={disabled}
         buttonRef={handleButtonRef}

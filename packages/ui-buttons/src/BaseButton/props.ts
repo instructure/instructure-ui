@@ -36,6 +36,7 @@ import type {
 import type {
   AsElementType,
   BaseButtonTheme,
+  OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
 
@@ -73,7 +74,8 @@ type PropKeys = keyof BaseButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type BaseButtonProps = BaseButtonOwnProps &
-  WithStyleProps<BaseButtonTheme, BaseButtonStyle>
+  WithStyleProps<BaseButtonTheme, BaseButtonStyle> &
+  OtherHTMLAttributes<BaseButtonOwnProps>
 
 type BaseButtonStyle = ComponentStyle<
   | 'baseButton'

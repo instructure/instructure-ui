@@ -30,7 +30,8 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 import type {
   AsElementType,
   PropValidators,
-  HeadingTheme
+  HeadingTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type {
   Spacing,
@@ -59,7 +60,9 @@ type PropKeys = keyof HeadingOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type HeadingProps = HeadingOwnProps & WithStyleProps<HeadingTheme, HeadingStyle>
+type HeadingProps = HeadingOwnProps &
+  WithStyleProps<HeadingTheme, HeadingStyle> &
+  OtherHTMLAttributes<HeadingOwnProps>
 
 type HeadingStyle = ComponentStyle<'heading'>
 

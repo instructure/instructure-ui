@@ -99,7 +99,6 @@ describe('Day', async () => {
 
   it('should set aria-selected="true/false" when `isSelected` and `role` is `option` or `gridcell`', async () => {
     const subject = await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Day date="2019-08-02" label="1 August 2019 Friday" role="option">
         8
       </Day>

@@ -28,6 +28,7 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 
 import type {
+  OtherHTMLAttributes,
   PropValidators,
   ToggleDetailsTheme
 } from '@instructure/shared-types'
@@ -52,7 +53,8 @@ type PropKeys = keyof ToggleDetailsOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ToggleDetailsProps = ToggleDetailsOwnProps &
-  WithStyleProps<ToggleDetailsTheme, ToggleDetailsStyle>
+  WithStyleProps<ToggleDetailsTheme, ToggleDetailsStyle> &
+  OtherHTMLAttributes<ToggleDetailsOwnProps>
 
 type ToggleDetailsStyle = ComponentStyle<
   | 'toggleDetails'

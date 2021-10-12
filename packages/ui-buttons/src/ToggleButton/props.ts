@@ -27,7 +27,11 @@ import PropTypes from 'prop-types'
 
 import { PositionPropTypes } from '@instructure/ui-position'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  AsElementType,
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 import type {
   PlacementPropValues,
   PositionConstraint,
@@ -55,7 +59,8 @@ type PropKeys = keyof ToggleButtonOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ToggleButtonProps = ToggleButtonOwnProps
+type ToggleButtonProps = ToggleButtonOwnProps &
+  OtherHTMLAttributes<ToggleButtonOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

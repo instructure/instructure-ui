@@ -149,7 +149,6 @@ describe('<BaseButton/>', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <BaseButton disabled onClick={onClick}>
           Hello World
         </BaseButton>
@@ -178,7 +177,6 @@ describe('<BaseButton/>', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <BaseButton readOnly onClick={onClick}>
           Hello World
         </BaseButton>

@@ -25,7 +25,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators, TabsTabTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  TabsTabTheme
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TabsTabOwnProps = {
@@ -44,7 +48,9 @@ type PropKeys = keyof TabsTabOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TabsTabProps = TabsTabOwnProps & WithStyleProps<TabsTabTheme, TabsTabStyle>
+type TabsTabProps = TabsTabOwnProps &
+  WithStyleProps<TabsTabTheme, TabsTabStyle> &
+  OtherHTMLAttributes<TabsTabOwnProps>
 
 type TabsTabStyle = ComponentStyle<'tab'>
 

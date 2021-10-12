@@ -31,7 +31,11 @@ import { ColHeader } from '../ColHeader'
 import { RowHeader } from '../RowHeader'
 import { Cell } from '../Cell'
 
-import type { PropValidators, TableRowTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  TableRowTheme
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableRowOwnProps = {
@@ -46,7 +50,8 @@ type PropKeys = keyof TableRowOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableRowProps = TableRowOwnProps &
-  WithStyleProps<TableRowTheme, TableRowStyle>
+  WithStyleProps<TableRowTheme, TableRowStyle> &
+  OtherHTMLAttributes<TableRowOwnProps>
 
 type TableRowStyle = ComponentStyle<'row'>
 

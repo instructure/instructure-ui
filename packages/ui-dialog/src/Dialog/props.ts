@@ -25,7 +25,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  AsElementType,
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type DialogOwnProps = {
   children?: React.ReactNode
@@ -53,7 +57,7 @@ type PropKeys = keyof DialogOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type DialogProps = DialogOwnProps
+type DialogProps = DialogOwnProps & OtherHTMLAttributes<DialogOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

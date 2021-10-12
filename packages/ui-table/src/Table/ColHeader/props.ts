@@ -21,10 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import React, { ThHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import type {
+  OtherHTMLAttributes,
   PropValidators,
   TableColHeaderTheme
 } from '@instructure/shared-types'
@@ -46,7 +47,11 @@ type PropKeys = keyof TableColHeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableColHeaderProps = TableColHeaderOwnProps &
-  WithStyleProps<TableColHeaderTheme, TableColHeaderStyle>
+  WithStyleProps<TableColHeaderTheme, TableColHeaderStyle> &
+  OtherHTMLAttributes<
+    TableColHeaderOwnProps,
+    ThHTMLAttributes<TableColHeaderOwnProps>
+  >
 
 type TableColHeaderStyle = ComponentStyle<'colHeader' | 'button'>
 

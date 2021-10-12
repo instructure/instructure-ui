@@ -190,7 +190,6 @@ describe('<NumberInput />', () => {
   it('does not call onIncrement when `readOnly` is set', async () => {
     const onIncrement = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <NumberInput renderLabel="Label" readOnly onIncrement={onIncrement} />
     )
 
@@ -235,7 +234,6 @@ describe('<NumberInput />', () => {
   it('does not call onDecrement when `readOnly` is set', async () => {
     const onDecrement = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <NumberInput renderLabel="Label" readOnly onDecrement={onDecrement} />
     )
 

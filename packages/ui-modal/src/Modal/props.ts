@@ -37,7 +37,8 @@ import { ModalFooter } from './ModalFooter'
 import type {
   AsElementType,
   PropValidators,
-  ModalTheme
+  ModalTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { PortalNode } from '@instructure/ui-portal'
 import type { PositionMountNode } from '@instructure/ui-position'
@@ -79,7 +80,9 @@ type PropKeys = keyof ModalOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ModalProps = ModalOwnProps & WithStyleProps<ModalTheme, ModalStyle>
+type ModalProps = ModalOwnProps &
+  WithStyleProps<ModalTheme, ModalStyle> &
+  OtherHTMLAttributes<ModalOwnProps>
 
 type ModalStyle = ComponentStyle<'modal' | 'constrainContext'>
 

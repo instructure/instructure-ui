@@ -34,7 +34,8 @@ import type {
 } from '@instructure/emotion'
 import type {
   PropValidators,
-  InlineListItemTheme
+  InlineListItemTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 
 type InlineListItemOwnProps = {
@@ -61,7 +62,8 @@ type PropKeys = keyof InlineListItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type InlineListItemProps = InlineListItemOwnProps &
-  WithStyleProps<InlineListItemTheme, InlineListItemStyle>
+  WithStyleProps<InlineListItemTheme, InlineListItemStyle> &
+  OtherHTMLAttributes<InlineListItemOwnProps>
 
 type InlineListItemStyle = ComponentStyle<'inlineListItem' | 'delimiter'>
 

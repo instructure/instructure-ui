@@ -28,7 +28,6 @@ import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
-import type { OtherHTMLAttributes } from '@instructure/shared-types'
 import { FocusRegionManager } from '@instructure/ui-a11y-utils'
 
 import { propTypes, allowedProps } from './props'
@@ -41,7 +40,7 @@ category: components/utilities
 @module Dialog
 **/
 
-class Dialog extends Component<DialogProps & OtherHTMLAttributes<DialogProps>> {
+class Dialog extends Component<DialogProps> {
   static readonly componentId = 'Dialog'
 
   static propTypes = propTypes

@@ -25,7 +25,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type BreadcrumbLinkOwnProps = {
   children: React.ReactNode
@@ -40,7 +43,8 @@ type PropKeys = keyof BreadcrumbLinkOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type BreadcrumbLinkProps = BreadcrumbLinkOwnProps
+type BreadcrumbLinkProps = BreadcrumbLinkOwnProps &
+  OtherHTMLAttributes<BreadcrumbLinkOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

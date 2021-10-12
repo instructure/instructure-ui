@@ -33,7 +33,8 @@ import type {
 import type {
   PropValidators,
   AsElementType,
-  ProgressBarTheme
+  ProgressBarTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 
 export type ProgressBarMeterColor =
@@ -65,7 +66,8 @@ type PropKeys = keyof ProgressBarOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ProgressBarProps = ProgressBarOwnProps &
-  WithStyleProps<ProgressBarTheme, ProgressBarStyle>
+  WithStyleProps<ProgressBarTheme, ProgressBarStyle> &
+  OtherHTMLAttributes<ProgressBarOwnProps>
 
 type ProgressBarStyle = ComponentStyle<
   'progressBar' | 'trackLayout' | 'trackBorder' | 'track' | 'value'

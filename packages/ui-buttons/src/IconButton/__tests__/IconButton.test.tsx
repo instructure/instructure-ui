@@ -163,7 +163,6 @@ describe('<IconButton/>', async () => {
 
   it('should set the disabled attribute when `disabled` is set', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <IconButton screenReaderLabel="some action" renderIcon={icon} disabled />
     )
     const button = await IconButtonLocator.find()
@@ -184,7 +183,6 @@ describe('<IconButton/>', async () => {
 
   it('should set the disabled attribute when `readOnly` is set', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <IconButton screenReaderLabel="some action" renderIcon={icon} readOnly />
     )
     const button = await IconButtonLocator.find()
@@ -198,7 +196,6 @@ describe('<IconButton/>', async () => {
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         onClick={onClick}
       />
     )

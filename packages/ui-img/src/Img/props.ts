@@ -25,7 +25,11 @@
 import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import type { PropValidators, ImgTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  ImgTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 import type {
   Spacing,
   WithStyleProps,
@@ -63,7 +67,9 @@ type PropKeys = keyof ImgOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ImgProps = ImgOwnProps & WithStyleProps<ImgTheme, ImgStyle>
+type ImgProps = ImgOwnProps &
+  WithStyleProps<ImgTheme, ImgStyle> &
+  OtherHTMLAttributes<ImgOwnProps>
 
 type ImgStyle = ComponentStyle<'overlay' | 'container' | 'img'>
 

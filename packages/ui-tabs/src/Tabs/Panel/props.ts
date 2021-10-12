@@ -32,7 +32,11 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { PropValidators, TabsPanelTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  TabsPanelTheme
+} from '@instructure/shared-types'
 
 type TabsPanelOwnProps = {
   renderTitle: React.ReactNode | ((...args: any[]) => any)
@@ -54,7 +58,8 @@ type PropKeys = keyof TabsPanelOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TabsPanelProps = TabsPanelOwnProps &
-  WithStyleProps<TabsPanelTheme, TabsPanelStyle>
+  WithStyleProps<TabsPanelTheme, TabsPanelStyle> &
+  OtherHTMLAttributes<TabsPanelOwnProps>
 
 type TabsPanelStyle = ComponentStyle<'panel' | 'content'>
 

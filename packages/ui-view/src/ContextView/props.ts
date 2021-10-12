@@ -31,7 +31,8 @@ import { PositionPropTypes } from '@instructure/ui-position'
 import type {
   AsElementType,
   PropValidators,
-  ContextViewTheme
+  ContextViewTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { PlacementPropValues } from '@instructure/ui-position'
 import type {
@@ -67,7 +68,8 @@ type PropKeys = keyof ContextViewOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ContextViewProps = ContextViewOwnProps &
-  WithStyleProps<ContextViewTheme, ContextViewStyle>
+  WithStyleProps<ContextViewTheme, ContextViewStyle> &
+  OtherHTMLAttributes<ContextViewOwnProps>
 
 type ContextViewStyle = ComponentStyle<
   | 'contextView'

@@ -82,7 +82,7 @@ class NavigationItem extends Component<NavigationItemProps> {
         onClick={onClick}
         css={this.props.styles?.navigationItem}
         aria-label={this.props.minimized ? label : undefined}
-        // @ts-expect-error TODO fix TS2590: Expression produces a union type that is too complex to represent.
+        // @ts-expect-error TODO: fix TS2590: Expression produces a union type that is too complex to represent.
         ref={(element) => {
           this.ref = element
         }}

@@ -21,10 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import React, { SVGAttributes } from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators, InlineSVGTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  InlineSVGTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type InlineSVGOwnProps = {
@@ -56,7 +60,8 @@ type PropKeys = keyof InlineSVGOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type InlineSVGProps = InlineSVGOwnProps &
-  WithStyleProps<InlineSVGTheme, InlineSVGStyle>
+  WithStyleProps<InlineSVGTheme, InlineSVGStyle> &
+  OtherHTMLAttributes<InlineSVGOwnProps, SVGAttributes<InlineSVGOwnProps>>
 
 type InlineSVGStyle = ComponentStyle<'inlineSVG'>
 

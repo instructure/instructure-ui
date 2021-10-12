@@ -35,7 +35,6 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 import { jsx, withStyle } from '@instructure/emotion'
-import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -55,7 +54,7 @@ API:
 **/
 @bidirectional()
 @withStyle(generateStyle, generateComponentTheme)
-class View extends Component<ViewProps & OtherHTMLAttributes<ViewProps>> {
+class View extends Component<ViewProps> {
   static componentId = 'View'
   static allowedProps = allowedProps
   static propTypes = propTypes
@@ -79,14 +78,12 @@ class View extends Component<ViewProps & OtherHTMLAttributes<ViewProps>> {
   // the consumers. Otherwise the discrepancy could cause unexpected props being
   // allowed through.
 
-  /**
-   * Removes View's own props from the given object. Automatically excludes the
-   * following props: 'theme', 'children', 'className', 'style', 'styles',
-   * 'makeStyles', 'themeOverride'
-   * @param props the object to process
-   * @param Component The component whose props are processed.
-   *       Only needed for debug logging in non-production builds.
-   */
+  // Removes View's own props from the given object. Automatically excludes the
+  // following props: 'theme', 'children', 'className', 'style', 'styles',
+  // 'makeStyles', 'themeOverride'
+  // @param props the object to process
+  // @param Component The component whose props are processed.
+  // Only needed for debug logging in non-production builds.
   static omitViewProps = (
     props: Record<string, any>,
     Component: ComponentType<any>

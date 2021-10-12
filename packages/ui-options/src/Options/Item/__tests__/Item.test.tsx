@@ -95,7 +95,6 @@ describe('<Item />', async () => {
 
   it('should pass event handlers through to label', async () => {
     const onClick = stub()
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Item onClick={onClick}>Hello World</Item>)
     const item = await ItemLocator.find()
     const label = await item.findWithText('Hello World')

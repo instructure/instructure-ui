@@ -26,7 +26,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { PropValidators, TableCellTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  TableCellTheme
+} from '@instructure/shared-types'
 
 type TableCellOwnProps = {
   isStacked?: boolean
@@ -40,7 +44,8 @@ type PropKeys = keyof TableCellOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableCellProps = TableCellOwnProps &
-  WithStyleProps<TableCellTheme, TableCellStyle>
+  WithStyleProps<TableCellTheme, TableCellStyle> &
+  OtherHTMLAttributes<TableCellOwnProps>
 
 type TableCellStyle = ComponentStyle<'cell'>
 

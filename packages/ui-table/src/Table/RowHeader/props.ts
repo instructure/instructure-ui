@@ -26,6 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import type {
+  OtherHTMLAttributes,
   PropValidators,
   TableRowHeaderTheme
 } from '@instructure/shared-types'
@@ -42,7 +43,8 @@ type PropKeys = keyof TableRowHeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableRowHeaderProps = TableRowHeaderOwnProps &
-  WithStyleProps<TableRowHeaderTheme, TableRowHeaderStyle>
+  WithStyleProps<TableRowHeaderTheme, TableRowHeaderStyle> &
+  OtherHTMLAttributes<TableRowHeaderOwnProps>
 
 type TableRowHeaderStyle = ComponentStyle<'rowHeader'>
 

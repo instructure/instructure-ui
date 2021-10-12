@@ -30,7 +30,10 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 import { InlineListItem } from './InlineListItem'
 
 import type { Spacing } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type InlineListOwnProps = {
   children?: React.ReactNode // TODO: oneOf([InlineListItem])
@@ -55,7 +58,8 @@ type PropKeys = keyof InlineListOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type InlineListProps = InlineListOwnProps
+type InlineListProps = InlineListOwnProps &
+  OtherHTMLAttributes<InlineListOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

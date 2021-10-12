@@ -359,7 +359,6 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     return (
       <Select.Option
         id={id}
-        // @ts-expect-error FIXME:
         value={value}
         key={option.key || id}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'highlightedOptionId' does not exist on t... Remove this comment to see the full error message

@@ -34,6 +34,7 @@ import type {
 import type {
   AsElementType,
   BillboardTheme,
+  OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
 
@@ -58,7 +59,8 @@ type PropKeys = keyof BillboardOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type BillboardProps = BillboardOwnProps &
-  WithStyleProps<BillboardTheme, BillboardStyle>
+  WithStyleProps<BillboardTheme, BillboardStyle> &
+  OtherHTMLAttributes<BillboardOwnProps>
 
 type BillboardStyle = ComponentStyle<
   'billboard' | 'content' | 'hero' | 'heading' | 'message'

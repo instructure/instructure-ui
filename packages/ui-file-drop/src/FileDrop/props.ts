@@ -33,7 +33,11 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { PropValidators, FileDropTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  FileDropTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 
 type FileDropOwnProps = {
   id?: string
@@ -80,7 +84,8 @@ type PropKeys = keyof FileDropOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FileDropProps = FileDropOwnProps &
-  WithStyleProps<FileDropTheme, FileDropStyle>
+  WithStyleProps<FileDropTheme, FileDropStyle> &
+  OtherHTMLAttributes<FileDropOwnProps>
 
 type FileDropStyle = ComponentStyle<
   'fileDropLabel' | 'fileDropInput' | 'fileDropLabelContent' | 'fileDropLayout'

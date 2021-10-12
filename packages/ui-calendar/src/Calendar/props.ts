@@ -30,7 +30,8 @@ import { Day } from './Day'
 import type {
   AsElementType,
   PropValidators,
-  CalendarTheme
+  CalendarTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -51,7 +52,8 @@ type PropKeys = keyof CalendarOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CalendarProps = CalendarOwnProps &
-  WithStyleProps<CalendarTheme, CalendarStyle>
+  WithStyleProps<CalendarTheme, CalendarStyle> &
+  OtherHTMLAttributes<CalendarOwnProps>
 
 type CalendarStyle = ComponentStyle<
   'navigation' | 'navigationWithButtons' | 'weekdayHeader'

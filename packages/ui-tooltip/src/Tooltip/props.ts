@@ -73,6 +73,8 @@ type PropKeys = keyof TooltipOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
+// For now it doesn't need the OtherHTMLAttributes, because the extra props
+// get passed to Popover and it doesn't handle them
 type TooltipProps = TooltipOwnProps & WithStyleProps<TooltipTheme, TooltipStyle>
 
 type TooltipStyle = ComponentStyle<'tooltip'>

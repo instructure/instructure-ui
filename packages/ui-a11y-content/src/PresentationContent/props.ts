@@ -25,7 +25,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  AsElementType,
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type PresentationContentOwnProps = {
   /**
@@ -41,7 +45,8 @@ type PropKeys = keyof PresentationContentOwnProps
 
 type AllowedPropKeys = Readonly<PropKeys[]>
 
-type PresentationContentProps = PresentationContentOwnProps
+type PresentationContentProps = PresentationContentOwnProps &
+  OtherHTMLAttributes<PresentationContentOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,

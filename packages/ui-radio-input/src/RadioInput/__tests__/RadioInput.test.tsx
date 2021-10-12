@@ -185,7 +185,6 @@ describe('<RadioInput />', async () => {
           label="fake label"
           value="someValue"
           name="someName"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; value: string; name: string... Remove this comment to see the full error message
           onBlur={onBlur}
         />
       )
@@ -208,7 +207,6 @@ describe('<RadioInput />', async () => {
           label="fake label"
           value="someValue"
           name="someName"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; value: string; name: string... Remove this comment to see the full error message
           onFocus={onFocus}
         />
       )

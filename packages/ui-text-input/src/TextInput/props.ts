@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '@instructure/ui-form-field'
@@ -30,7 +30,11 @@ import { controllable } from '@instructure/ui-prop-types'
 
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { PropValidators, TextInputTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  TextInputTheme
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TextInputOwnProps = {
@@ -64,7 +68,8 @@ type PropKeys = keyof TextInputOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TextInputProps = TextInputOwnProps &
-  WithStyleProps<TextInputTheme, TextInputStyle>
+  WithStyleProps<TextInputTheme, TextInputStyle> &
+  OtherHTMLAttributes<TextInputOwnProps, InputHTMLAttributes<TextInputOwnProps>>
 
 type TextInputStyle = ComponentStyle<
   | 'textInput'

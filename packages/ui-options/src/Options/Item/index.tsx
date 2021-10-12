@@ -109,7 +109,7 @@ class Item extends Component<OptionsItemProps> {
       <ElementType
         role="none"
         css={styles?.item}
-        // @ts-expect-error TODO fix produces an union that is too complex to represent
+        // @ts-expect-error TODO: fix produces an union that is too complex to represent
         ref={(element: any) => {
           this.ref = element
         }}

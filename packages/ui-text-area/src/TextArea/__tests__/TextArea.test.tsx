@@ -244,7 +244,6 @@ describe('TextArea', async () => {
     it('responds to onBlur event', async () => {
       const onBlur = stub()
 
-      // @ts-expect-error FIXME remove this line to see the error
       await mount(<TextArea label="Name" autoGrow={false} onBlur={onBlur} />)
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()
@@ -256,7 +255,6 @@ describe('TextArea', async () => {
 
     it('responds to onFocus event', async () => {
       const onFocus = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TextArea label="Name" autoGrow={false} onFocus={onFocus} />)
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()

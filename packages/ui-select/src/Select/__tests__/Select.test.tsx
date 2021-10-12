@@ -905,7 +905,6 @@ describe('<Select />', async () => {
             isShowingOptions
             renderLabel="Choose an option"
             onRequestHighlightOption={onRequestHighlightOption}
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             onKeyDown={onKeyDown}
           >
             {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1. */}

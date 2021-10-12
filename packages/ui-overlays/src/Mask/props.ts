@@ -24,7 +24,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators, MaskTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  MaskTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MaskOwnProps = {
@@ -40,7 +44,9 @@ type PropKeys = keyof MaskOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type MaskProps = MaskOwnProps & WithStyleProps<MaskTheme, MaskStyle>
+type MaskProps = MaskOwnProps &
+  WithStyleProps<MaskTheme, MaskStyle> &
+  OtherHTMLAttributes<MaskOwnProps>
 
 type MaskStyle = ComponentStyle<'mask'>
 

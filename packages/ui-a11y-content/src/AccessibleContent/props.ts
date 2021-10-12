@@ -24,7 +24,11 @@
 
 import PropTypes from 'prop-types'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  AsElementType,
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type AccessibleContentOwnProps = {
   alt?: string
@@ -41,7 +45,8 @@ type PropKeys = keyof AccessibleContentOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AccessibleContentProps = AccessibleContentOwnProps
+type AccessibleContentProps = AccessibleContentOwnProps &
+  OtherHTMLAttributes<AccessibleContentOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   alt: PropTypes.string,

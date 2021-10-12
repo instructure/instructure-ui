@@ -29,7 +29,11 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { GridCol } from '../GridCol'
 
-import type { PropValidators, GridTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  GridTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { GridBreakpoints } from '../GridTypes'
 
@@ -48,7 +52,9 @@ type PropKeys = keyof GridRowOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type GridRowProps = GridRowOwnProps & WithStyleProps<GridTheme, GridRowStyle>
+type GridRowProps = GridRowOwnProps &
+  WithStyleProps<GridTheme, GridRowStyle> &
+  OtherHTMLAttributes<GridRowOwnProps>
 
 type GridRowStyle = ComponentStyle<'gridRow'>
 

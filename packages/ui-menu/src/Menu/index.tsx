@@ -424,7 +424,6 @@ class Menu extends Component<MenuProps> {
               trigger: (
                 <MenuItem
                   onMouseOver={this.handleMenuItemMouseOver}
-                  // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: any; onMouseOver: (event: any, m... Remove this comment to see the full error message
                   onFocus={this.handleMenuItemFocus}
                   onBlur={this.handleMenuItemBlur}
                   tabIndex={isTabbable ? 0 : -1}

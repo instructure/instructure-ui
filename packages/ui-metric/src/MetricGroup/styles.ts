@@ -23,7 +23,7 @@
  */
 
 import type { MetricGroupTheme } from '@instructure/shared-types'
-import type { MetricGrouStyle } from './props'
+import type { MetricGroupStyle } from './props'
 
 /**
  * ---
@@ -33,7 +33,7 @@ import type { MetricGrouStyle } from './props'
  * @param  {Object} componentTheme The theme variable object.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: MetricGroupTheme): MetricGrouStyle => {
+const generateStyle = (componentTheme: MetricGroupTheme): MetricGroupStyle => {
   return {
     metricGroup: {
       label: 'metricGroup',

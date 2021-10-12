@@ -35,7 +35,8 @@ import type {
 import type {
   AsElementType,
   PropValidators,
-  ModalBodyTheme
+  ModalBodyTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 
 type ModalBodyOwnProps = {
@@ -52,7 +53,8 @@ type PropKeys = keyof ModalBodyOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ModalBodyProps = ModalBodyOwnProps &
-  WithStyleProps<ModalBodyTheme, ModalBodyStyle>
+  WithStyleProps<ModalBodyTheme, ModalBodyStyle> &
+  OtherHTMLAttributes<ModalBodyOwnProps>
 
 type ModalBodyStyle = ComponentStyle<'modalBody'>
 

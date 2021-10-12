@@ -28,7 +28,8 @@ import PropTypes from 'prop-types'
 import type {
   AsElementType,
   PropValidators,
-  OptionsItemTheme
+  OptionsItemTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -46,7 +47,8 @@ type PropKeys = keyof OptionsItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type OptionsItemProps = OptionsItemOwnProps &
-  WithStyleProps<OptionsItemTheme, OptionsItemStyle>
+  WithStyleProps<OptionsItemTheme, OptionsItemStyle> &
+  OtherHTMLAttributes<OptionsItemOwnProps>
 
 type OptionsItemStyle = ComponentStyle<
   'item' | 'container' | 'content' | 'contentBefore' | 'contentAfter'

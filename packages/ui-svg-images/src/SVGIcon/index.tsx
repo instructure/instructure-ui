@@ -72,7 +72,6 @@ class SVGIcon extends Component<SVGIconProps> {
   render() {
     const {
       rotate,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'className' does not exist on type 'Reado... Remove this comment to see the full error message
       className,
       size,
       bidirectional,
@@ -80,13 +79,14 @@ class SVGIcon extends Component<SVGIconProps> {
       // so it won't be passed to InlineSVG via '...props'
       makeStyles,
       styles,
+      themeOverride,
       ...props
     } = this.props
 
     return (
       <InlineSVG
         {...props}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ rotate: "0" | "90" | "180" | "270" | undef... Remove this comment to see the full error message
+        themeOverride={themeOverride}
         rotate={rotate}
         css={styles?.svgIcon}
         className={className}

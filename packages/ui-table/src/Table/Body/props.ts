@@ -28,7 +28,11 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { Row } from '../Row'
 
-import type { PropValidators, TableBodyTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  TableBodyTheme
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableBodyOwnProps = {
@@ -43,7 +47,8 @@ type PropKeys = keyof TableBodyOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TableBodyProps = TableBodyOwnProps &
-  WithStyleProps<TableBodyTheme, TableBodyStyle>
+  WithStyleProps<TableBodyTheme, TableBodyStyle> &
+  OtherHTMLAttributes<TableBodyOwnProps>
 
 type TableBodyStyle = ComponentStyle<'body'>
 

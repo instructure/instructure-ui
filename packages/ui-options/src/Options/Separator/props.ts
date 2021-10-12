@@ -26,9 +26,11 @@ import PropTypes from 'prop-types'
 import type {
   AsElementType,
   PropValidators,
-  OptionsSeparatorTheme
+  OptionsSeparatorTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { AllHTMLAttributes } from 'react'
 
 type OptionsSeparatorOwnProps = {
   as?: AsElementType
@@ -39,7 +41,8 @@ type PropKeys = keyof OptionsSeparatorOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type OptionsSeparatorProps = OptionsSeparatorOwnProps &
-  WithStyleProps<OptionsSeparatorTheme, OptionsSeparatorStyle>
+  WithStyleProps<OptionsSeparatorTheme, OptionsSeparatorStyle> &
+  OtherHTMLAttributes<OptionsSeparatorOwnProps, AllHTMLAttributes<any>>
 
 type OptionsSeparatorStyle = ComponentStyle<'separator'>
 

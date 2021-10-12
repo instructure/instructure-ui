@@ -141,7 +141,6 @@ class DrawerContent extends Component<
 
   render() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Readonly<... Remove this comment to see the full error message
       style, // eslint-disable-line react/prop-types
       label,
       role

@@ -27,7 +27,8 @@ import PropTypes from 'prop-types'
 
 import type {
   PropValidators,
-  ModalFooterTheme
+  ModalFooterTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -41,7 +42,8 @@ type PropKeys = keyof ModalFooterOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ModalFooterProps = ModalFooterOwnProps &
-  WithStyleProps<ModalFooterTheme, ModalFooterStyle>
+  WithStyleProps<ModalFooterTheme, ModalFooterStyle> &
+  OtherHTMLAttributes<ModalFooterOwnProps>
 
 type ModalFooterStyle = ComponentStyle<'modalFooter'>
 

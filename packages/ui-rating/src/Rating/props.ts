@@ -30,7 +30,10 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type RatingOwnProps = {
   label: string
@@ -47,7 +50,9 @@ type PropKeys = keyof RatingOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type RatingProps = RatingOwnProps & WithStyleProps<null, RatingStyle>
+type RatingProps = RatingOwnProps &
+  WithStyleProps<null, RatingStyle> &
+  OtherHTMLAttributes<RatingOwnProps>
 
 type RatingStyle = ComponentStyle<'rating'>
 

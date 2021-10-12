@@ -31,6 +31,7 @@ import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
   AsElementType,
   BaseButtonTheme,
+  OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
 
@@ -53,7 +54,8 @@ type PropKeys = keyof CondensedButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CondensedButtonProps = CondensedButtonOwnProps &
-  WithStyleProps<BaseButtonTheme, null>
+  WithStyleProps<BaseButtonTheme, null> &
+  OtherHTMLAttributes<CondensedButtonOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

@@ -59,7 +59,7 @@ class PaginationButton extends Component<PaginationPageProps> {
         withBackground={this.props.current ? true : false}
         withBorder={this.props.current ? true : false}
         {...props}
-        aria-current={this.props.current ? 'page' : null}
+        aria-current={this.props.current ? 'page' : undefined}
         elementRef={(element) => {
           this.ref = element
         }}

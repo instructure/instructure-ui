@@ -33,6 +33,7 @@ import type {
 import type {
   AsElementType,
   CloseButtonTheme,
+  OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
 
@@ -58,7 +59,8 @@ type PropKeys = keyof CloseButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CloseButtonProps = CloseButtonOwnProps &
-  WithStyleProps<CloseButtonTheme, CloseButtonStyle>
+  WithStyleProps<CloseButtonTheme, CloseButtonStyle> &
+  OtherHTMLAttributes<CloseButtonOwnProps>
 
 type CloseButtonStyle = ComponentStyle<'closeButton'>
 

@@ -34,7 +34,11 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { PropValidators, AppNavTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  AppNavTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 
 type AppNavOwnProps = {
   screenReaderLabel: string
@@ -53,7 +57,9 @@ type PropKeys = keyof AppNavOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AppNavProps = AppNavOwnProps & WithStyleProps<AppNavTheme, AppNavStyle>
+type AppNavProps = AppNavOwnProps &
+  WithStyleProps<AppNavTheme, AppNavStyle> &
+  OtherHTMLAttributes<AppNavOwnProps>
 
 type AppNavStyle = ComponentStyle<
   | 'appNav'

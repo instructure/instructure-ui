@@ -35,7 +35,11 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  AsElementType,
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type PaginationOwnProps = {
   children?: React.ReactNode // TODO: oneof([PaginationButton])
@@ -55,7 +59,8 @@ type PropKeys = keyof PaginationOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PaginationProps = PaginationOwnProps &
-  WithStyleProps<null, PaginationStyle>
+  WithStyleProps<null, PaginationStyle> &
+  OtherHTMLAttributes<PaginationOwnProps>
 
 type PaginationStyle = ComponentStyle<'pagination' | 'pages'>
 

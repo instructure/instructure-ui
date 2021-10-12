@@ -129,7 +129,6 @@ describe('<Button/>', async () => {
   })
 
   it('should set the disabled attribute when `disabled` is set', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Button disabled>Hello</Button>)
 
     expect(await ButtonLocator.find('[disabled]')).to.exist()
@@ -142,7 +141,6 @@ describe('<Button/>', async () => {
   })
 
   it('should set the disabled attribute when `readOnly` is set', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Button readOnly>Hello</Button>)
 
     expect(await ButtonLocator.find('[disabled]')).to.exist()
@@ -162,7 +160,6 @@ describe('<Button/>', async () => {
 
   it('should pass the `onClick` prop', async () => {
     const onClick = stub()
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Button onClick={onClick}>Hello</Button>)
     const button = await ButtonLocator.find()
 
@@ -209,7 +206,6 @@ describe('<Button/>', async () => {
   it('should set role="button"', async () => {
     const onClick = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Button as="span" onClick={onClick}>
         Hello World
       </Button>
@@ -220,7 +216,6 @@ describe('<Button/>', async () => {
   it('should set tabIndex="0"', async () => {
     const onClick = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Button as="span" onClick={onClick}>
         Hello World
       </Button>
@@ -231,7 +226,6 @@ describe('<Button/>', async () => {
   it('should pass down the type prop to the button element', async () => {
     const onClick = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Button type="submit" onClick={onClick}>
         Hello World
       </Button>
@@ -241,7 +235,6 @@ describe('<Button/>', async () => {
 
   it('focuses with the focus helper', async () => {
     const onFocus = stub()
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Button onFocus={onFocus}>Hello World</Button>)
     const button = await ButtonLocator.find()
     await button.focus()
@@ -251,7 +244,6 @@ describe('<Button/>', async () => {
   describe('onClick', async () => {
     it('should call onClick when clicked', async () => {
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Button onClick={onClick}>Hello World</Button>)
       const button = await ButtonLocator.find()
       await button.click()
@@ -262,7 +254,6 @@ describe('<Button/>', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Button disabled onClick={onClick}>
           Hello World
         </Button>
@@ -277,7 +268,6 @@ describe('<Button/>', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Button readOnly onClick={onClick}>
           Hello World
         </Button>
@@ -301,7 +291,6 @@ describe('<Button/>', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Button readOnly onClick={onClick} href="#">
           Hello World
         </Button>
@@ -317,7 +306,6 @@ describe('<Button/>', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Button onClick={onClick} href="#">
           Hello World
         </Button>
@@ -331,7 +319,6 @@ describe('<Button/>', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Button as="span" onClick={onClick}>
           Hello World
         </Button>
@@ -345,7 +332,6 @@ describe('<Button/>', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Button disabled onClick={onClick} href="#">
           Hello World
         </Button>
@@ -359,7 +345,6 @@ describe('<Button/>', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Button readOnly onClick={onClick} href="#">
           Hello World
         </Button>
@@ -373,7 +358,6 @@ describe('<Button/>', async () => {
   describe('for a11y', async () => {
     it('should meet standards when onClick is given', async () => {
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Button onClick={onClick}>Hello World</Button>)
       const button = await ButtonLocator.find()
       await button.click()
@@ -382,7 +366,6 @@ describe('<Button/>', async () => {
 
     describe('when disabled', async () => {
       it('sets the disabled attribute so that the button is not in tab order', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(<Button disabled>Hello World</Button>)
         const button = await ButtonLocator.find()
         expect(button.getAttribute('disabled')).to.exist()
@@ -391,7 +374,6 @@ describe('<Button/>', async () => {
 
     describe('when readOnly', () => {
       it('sets the disabled attribute so that the button is not in tab order', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(<Button readOnly>Hello World</Button>)
         const button = await ButtonLocator.find()
         expect(button.getAttribute('disabled')).to.exist()

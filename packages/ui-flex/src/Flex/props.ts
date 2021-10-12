@@ -29,7 +29,8 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 import type {
   AsElementType,
   PropValidators,
-  FlexTheme
+  FlexTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type {
   Spacing,
@@ -58,7 +59,9 @@ type PropKeys = keyof FlexOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FlexProps = FlexOwnProps & WithStyleProps<FlexTheme, FlexStyle>
+type FlexProps = FlexOwnProps &
+  WithStyleProps<FlexTheme, FlexStyle> &
+  OtherHTMLAttributes<FlexOwnProps>
 
 type FlexStyle = ComponentStyle<'flex'>
 

@@ -30,7 +30,6 @@ import { RangeInputLocator } from '../RangeInputLocator'
 
 describe('<RangeInput />', async () => {
   it('renders an input with type "range"', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<RangeInput label="Opacity" name="opacity" max={100} min={0} />)
     const rangeInput = await RangeInputLocator.find()
     const input = await rangeInput.findInput()
@@ -42,7 +41,6 @@ describe('<RangeInput />', async () => {
     await mount(
       <RangeInput
         label="Opacity"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
         name="opacity"
         max={100}
         min={0}
@@ -59,7 +57,6 @@ describe('<RangeInput />', async () => {
     await mount(
       <RangeInput
         label="Opacity"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
         name="opacity"
         max={100}
         min={0}
@@ -76,7 +73,6 @@ describe('<RangeInput />', async () => {
     await mount(
       <RangeInput
         label="Opacity"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
         name="opacity"
         max={100}
         min={0}
@@ -92,7 +88,6 @@ describe('<RangeInput />', async () => {
 
   it('sets min value', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
       <RangeInput label="Opacity" name="opacity" max={100} min={25} />
     )
     const rangeInput = await RangeInputLocator.find()
@@ -102,7 +97,6 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets max value', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<RangeInput label="Opacity" name="opacity" max={75} min={0} />)
     const rangeInput = await RangeInputLocator.find()
     const input = await rangeInput.findInput()
@@ -112,7 +106,6 @@ describe('<RangeInput />', async () => {
 
   it('sets step value', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
       <RangeInput label="Opacity" name="opacity" max={100} min={0} step={5} />
     )
     const rangeInput = await RangeInputLocator.find()
@@ -124,7 +117,6 @@ describe('<RangeInput />', async () => {
   it('requires an `onChange` prop with a `value` prop', async () => {
     const consoleError = stub(console, 'error')
     await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
       <RangeInput label="Opacity" name="opacity" max={100} min={0} value={50} />
     )
 
@@ -139,7 +131,6 @@ describe('<RangeInput />', async () => {
     await mount(
       <RangeInput
         label="Opacity"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
         name="opacity"
         max={100}
         min={0}
@@ -159,7 +150,6 @@ describe('<RangeInput />', async () => {
     await mount(
       <RangeInput
         label="Opacity"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
         name="opacity"
         max={100}
         min={0}
@@ -177,7 +167,6 @@ describe('<RangeInput />', async () => {
     await mount(
       <RangeInput
         label="Opacity"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
         name="opacity"
         max={100}
         min={0}
@@ -196,7 +185,6 @@ describe('<RangeInput />', async () => {
       await mount(
         <RangeInput
           label="Opacity"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
           name="opacity"
           max={100}
           min={0}
@@ -211,7 +199,6 @@ describe('<RangeInput />', async () => {
       await mount(
         <RangeInput
           label="Opacity"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
           name="opacity"
           max={100}
           min={0}
@@ -228,7 +215,6 @@ describe('<RangeInput />', async () => {
       await mount(
         <RangeInput
           label="Opacity"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
           name="opacity"
           max={100}
           min={0}
@@ -243,7 +229,6 @@ describe('<RangeInput />', async () => {
 
     it('sets the aria-valuemin attribute', async () => {
       await mount(
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
         <RangeInput label="Opacity" name="opacity" max={100} min={20} />
       )
       const rangeInput = await RangeInputLocator.find()
@@ -254,7 +239,6 @@ describe('<RangeInput />', async () => {
 
     it('sets the aria-valuemax attribute', async () => {
       await mount(
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
         <RangeInput label="Opacity" name="opacity" max={80} min={0} />
       )
       const rangeInput = await RangeInputLocator.find()
@@ -267,7 +251,6 @@ describe('<RangeInput />', async () => {
       await mount(
         <RangeInput
           label="Opacity"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
           name="opacity"
           max={100}
           min={0}
@@ -289,7 +272,6 @@ describe('<RangeInput />', async () => {
       await mount(
         <RangeInput
           label="Opacity"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
           name="opacity"
           max={100}
           min={0}
@@ -312,7 +294,6 @@ describe('<RangeInput />', async () => {
       await mount(
         <RangeInput
           label="Opacity"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
           name="opacity"
           max={100}
           min={0}
@@ -332,7 +313,6 @@ describe('<RangeInput />', async () => {
       await mount(
         <RangeInput
           label="Opacity"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
           name="opacity"
           max={100}
           min={0}

@@ -34,7 +34,8 @@ import type {
 import type {
   PropValidators,
   AsElementType,
-  PillTheme
+  PillTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 
 type PillOwnProps = {
@@ -56,7 +57,9 @@ type PropKeys = keyof PillOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PillProps = PillOwnProps & WithStyleProps<PillTheme, PillStyle>
+type PillProps = PillOwnProps &
+  WithStyleProps<PillTheme, PillStyle> &
+  OtherHTMLAttributes<PillOwnProps>
 
 type PillStyle = ComponentStyle<'pill' | 'text' | 'maxWidth'>
 

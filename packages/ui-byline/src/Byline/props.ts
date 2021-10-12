@@ -32,7 +32,11 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { PropValidators, BylineTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  BylineTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 
 type BylineOwnProps = {
   children: React.ReactNode
@@ -48,7 +52,9 @@ type PropKeys = keyof BylineOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type BylineProps = BylineOwnProps & WithStyleProps<BylineTheme, BylineStyle>
+type BylineProps = BylineOwnProps &
+  WithStyleProps<BylineTheme, BylineStyle> &
+  OtherHTMLAttributes<BylineOwnProps>
 
 type BylineStyle = ComponentStyle<
   'byline' | 'figure' | 'caption' | 'title' | 'description' | 'maxWidth'

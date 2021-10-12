@@ -34,8 +34,12 @@ import { Calendar } from '@instructure/ui-calendar'
 
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { PlacementPropValues } from '@instructure/ui-position'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { InputHTMLAttributes } from 'react'
 
 type DateInputOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
@@ -72,7 +76,9 @@ type PropKeys = keyof DateInputOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type DateInputProps = DateInputOwnProps & WithStyleProps<null, DateInputStyle>
+type DateInputProps = DateInputOwnProps &
+  WithStyleProps<null, DateInputStyle> &
+  OtherHTMLAttributes<DateInputOwnProps, InputHTMLAttributes<DateInputOwnProps>>
 
 type DateInputStyle = ComponentStyle<'dateInput' | 'assistiveText'>
 

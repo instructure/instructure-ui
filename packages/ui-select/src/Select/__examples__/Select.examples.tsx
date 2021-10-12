@@ -79,13 +79,11 @@ export default {
         <Select.Option id="0" key="0">
           Item not in a group
         </Select.Option>,
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Select.Group id="1" renderLabel="Group one" key="1">
           <Select.Option id="2" key="2">
             Grouped item one
           </Select.Option>
         </Select.Group>,
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Select.Group id="3" renderLabel="Group two" key="3">
           <Select.Option id="4" key="4">
             Grouped item two

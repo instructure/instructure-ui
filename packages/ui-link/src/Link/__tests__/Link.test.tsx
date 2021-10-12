@@ -149,7 +149,6 @@ describe('<Link />', async () => {
 
     it('should apply aria-disabled when `disabled` is set', async () => {
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Link href="example.html" disabled>
           Hello World
         </Link>
@@ -176,7 +175,6 @@ describe('<Link />', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Link onClick={onClick} disabled>
           Hello World
         </Link>

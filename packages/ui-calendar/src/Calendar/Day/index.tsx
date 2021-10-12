@@ -94,9 +94,8 @@ class Day extends Component<CalendarDayProps> {
   }
 
   shouldApplyAriaSelected() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'role' does not exist on type 'Readonly<P... Remove this comment to see the full error message
     const { role } = this.props // eslint-disable-line react/prop-types
-    return ['option', 'gridcell'].indexOf(role) > -1
+    return !!role && ['option', 'gridcell'].indexOf(role) > -1
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.

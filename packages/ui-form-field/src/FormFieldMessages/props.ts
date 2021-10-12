@@ -28,7 +28,8 @@ import { FormPropTypes } from '../FormPropTypes'
 
 import type {
   PropValidators,
-  FormFieldMessagesTheme
+  FormFieldMessagesTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '../FormPropTypes'
@@ -42,7 +43,8 @@ type PropKeys = keyof FormFieldMessagesOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FormFieldMessagesProps = FormFieldMessagesOwnProps &
-  WithStyleProps<FormFieldMessagesTheme, FormFieldMessagesStyle>
+  WithStyleProps<FormFieldMessagesTheme, FormFieldMessagesStyle> &
+  OtherHTMLAttributes<FormFieldMessagesOwnProps>
 
 type FormFieldMessagesStyle = ComponentStyle<'formFieldMessages' | 'message'>
 

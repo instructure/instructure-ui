@@ -31,6 +31,7 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type {
   AsElementType,
+  OtherHTMLAttributes,
   PropValidators,
   ViewTheme
 } from '@instructure/shared-types'
@@ -185,7 +186,9 @@ type ViewOwnProps = {
 
 type PropKeys = keyof ViewOwnProps
 
-type ViewProps = ViewOwnProps & WithStyleProps<ViewTheme, ViewStyle>
+type ViewProps = ViewOwnProps &
+  WithStyleProps<ViewTheme, ViewStyle> &
+  OtherHTMLAttributes<ViewOwnProps>
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 

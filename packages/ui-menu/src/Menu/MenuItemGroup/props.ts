@@ -32,7 +32,11 @@ import {
 import { MenuItem } from '../MenuItem'
 import { MenuItemSeparator } from '../MenuItemSeparator'
 
-import type { PropValidators, MenuGroupTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  MenuGroupTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MenuGroupOwnProps = {
@@ -55,7 +59,8 @@ type PropKeys = keyof MenuGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MenuGroupProps = MenuGroupOwnProps &
-  WithStyleProps<MenuGroupTheme, MenuGroupStyle>
+  WithStyleProps<MenuGroupTheme, MenuGroupStyle> &
+  OtherHTMLAttributes<MenuGroupOwnProps>
 
 type MenuGroupStyle = ComponentStyle<'menuItemGroup' | 'label' | 'items'>
 

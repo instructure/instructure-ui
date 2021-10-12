@@ -23,8 +23,13 @@
  */
 import PropTypes from 'prop-types'
 
-import type { PropValidators, RadioInputTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  RadioInputTheme
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { InputHTMLAttributes } from 'react'
 
 type RadioInputOwnProps = {
   label: React.ReactNode
@@ -47,7 +52,11 @@ type PropKeys = keyof RadioInputOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RadioInputProps = RadioInputOwnProps &
-  WithStyleProps<RadioInputTheme, RadioInputStyle>
+  WithStyleProps<RadioInputTheme, RadioInputStyle> &
+  OtherHTMLAttributes<
+    RadioInputOwnProps,
+    InputHTMLAttributes<RadioInputOwnProps>
+  >
 
 type RadioInputStyle = ComponentStyle<
   'radioInput' | 'input' | 'control' | 'facade' | 'label'

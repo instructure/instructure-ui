@@ -32,7 +32,11 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { PropValidators, ListItemTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  ListItemTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 
 type ListItemOwnProps = {
   children: React.ReactNode | ((...args: any[]) => React.ReactNode)
@@ -58,7 +62,8 @@ type PropKeys = keyof ListItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ListItemProps = ListItemOwnProps &
-  WithStyleProps<ListItemTheme, ListItemStyle>
+  WithStyleProps<ListItemTheme, ListItemStyle> &
+  OtherHTMLAttributes<ListItemOwnProps>
 
 type ListItemStyle = ComponentStyle<'listItem'>
 

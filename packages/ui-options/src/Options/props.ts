@@ -29,7 +29,8 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import type {
   AsElementType,
   PropValidators,
-  OptionsTheme
+  OptionsTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -45,7 +46,9 @@ type PropKeys = keyof OptionsOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type OptionsProps = OptionsOwnProps & WithStyleProps<OptionsTheme, OptionsStyle>
+type OptionsProps = OptionsOwnProps &
+  WithStyleProps<OptionsTheme, OptionsStyle> &
+  OtherHTMLAttributes<OptionsOwnProps>
 
 type OptionsStyle = ComponentStyle<'options' | 'list' | 'label'>
 
