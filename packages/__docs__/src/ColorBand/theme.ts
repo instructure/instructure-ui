@@ -22,19 +22,19 @@
  * SOFTWARE.
  */
 import type { Theme } from '@instructure/ui-themes'
+import type { InstructureTheme } from '@instructure/instructure-theme'
 import { ColorBandTheme } from './props'
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: Theme): ColorBandTheme => {
+const generateComponentTheme = (theme: InstructureTheme): ColorBandTheme => {
   const { colors } = theme
 
   const componentVariables = {
-    colorAlert: (colors as any)?.inaccessibleAlert || colors?.backgroundAlert,
-    colorWarning:
-      (colors as any)?.inaccessibleWarning || colors?.backgroundWarning,
+    colorAlert: colors?.inaccessibleAlert || colors?.backgroundAlert,
+    colorWarning: colors?.inaccessibleWarning || colors?.backgroundWarning,
     colorDanger: colors?.backgroundDanger
   }
 
