@@ -27,7 +27,11 @@ import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
 
-import { AsElementType, PropValidators } from '@instructure/shared-types'
+import {
+  AsElementType,
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type ToggleGroupOwnProps = {
   children: React.ReactNode
@@ -49,7 +53,8 @@ type PropKeys = keyof ToggleGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ToggleGroupProps = ToggleGroupOwnProps
+type ToggleGroupProps = ToggleGroupOwnProps &
+  OtherHTMLAttributes<ToggleGroupOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

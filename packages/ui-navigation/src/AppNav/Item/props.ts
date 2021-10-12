@@ -26,7 +26,8 @@ import PropTypes from 'prop-types'
 import type {
   AsElementType,
   PropValidators,
-  AppNavItemTheme
+  AppNavItemTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -48,7 +49,8 @@ type PropKeys = keyof AppNavItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type AppNavItemProps = AppNavItemOwnProps &
-  WithStyleProps<AppNavItemTheme, AppNavItemStyle>
+  WithStyleProps<AppNavItemTheme, AppNavItemStyle> &
+  OtherHTMLAttributes<AppNavItemOwnProps>
 
 type AppNavItemStyle = ComponentStyle<'item' | 'label'>
 

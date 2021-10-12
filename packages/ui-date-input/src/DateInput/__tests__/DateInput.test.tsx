@@ -181,7 +181,6 @@ describe('<DateInput />', async () => {
         <DateInput
           renderLabel="Choose a date"
           renderWeekdayLabels={weekdayLabels}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           disabled
         >
           {generateDays()}
@@ -198,7 +197,6 @@ describe('<DateInput />', async () => {
         <DateInput
           renderLabel="Choose a date"
           renderWeekdayLabels={weekdayLabels}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           readOnly
         >
           {generateDays()}
@@ -292,7 +290,6 @@ describe('<DateInput />', async () => {
           renderLabel="Choose a date"
           renderWeekdayLabels={weekdayLabels}
           data-custom-attr="true"
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           name="my name"
         >
           {generateDays()}
@@ -815,7 +812,6 @@ describe('<DateInput />', async () => {
     it('should render days with the correct role', async () => {
       const days = generateDays()
       days[5] = (
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Calendar.Day key="5" label="5" date="2019-09-28" id="5" isOutsideMonth>
           outside
         </Calendar.Day>
@@ -848,7 +844,6 @@ describe('<DateInput />', async () => {
     it('should assign aria-selected to the selected date and link it to the input', async () => {
       const days = generateDays()
       days[7] = (
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Calendar.Day key="7" label="7" date="2019-09-28" id="7" isSelected>
           selected
         </Calendar.Day>

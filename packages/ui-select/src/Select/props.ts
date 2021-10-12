@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
@@ -32,7 +32,11 @@ import { PositionPropTypes } from '@instructure/ui-position'
 import { Group } from './Group'
 import { Option } from './Option'
 
-import type { PropValidators, SelectTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  SelectTheme
+} from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
@@ -79,7 +83,9 @@ type PropKeys = keyof SelectOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SelectProps = SelectOwnProps & WithStyleProps<SelectTheme, SelectStyle>
+type SelectProps = SelectOwnProps &
+  WithStyleProps<SelectTheme, SelectStyle> &
+  OtherHTMLAttributes<SelectOwnProps, InputHTMLAttributes<SelectOwnProps>>
 
 type SelectStyle = ComponentStyle<'select' | 'icon' | 'assistiveText'>
 

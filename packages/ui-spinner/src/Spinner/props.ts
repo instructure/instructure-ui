@@ -32,6 +32,7 @@ import type {
 } from '@instructure/emotion'
 import type {
   AsElementType,
+  OtherHTMLAttributes,
   PropValidators,
   SpinnerTheme
 } from '@instructure/shared-types'
@@ -49,7 +50,9 @@ type PropKeys = keyof SpinnerOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SpinnerProps = SpinnerOwnProps & WithStyleProps<SpinnerTheme, SpinnerStyle>
+type SpinnerProps = SpinnerOwnProps &
+  WithStyleProps<SpinnerTheme, SpinnerStyle> &
+  OtherHTMLAttributes<SpinnerOwnProps>
 
 type SpinnerStyle = ComponentStyle<
   'spinner' | 'circle' | 'circleTrack' | 'circleSpin'

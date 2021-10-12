@@ -131,7 +131,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
           width={this.inlineContainerAndLabel ? 'auto' : 3}
         >
           <FormFieldLabel
-            aria-hidden={this.elementType === 'fieldset' ? 'true' : null}
+            aria-hidden={this.elementType === 'fieldset' ? 'true' : undefined}
           >
             {this.props.label}
           </FormFieldLabel>

@@ -30,7 +30,8 @@ import { controllable } from '@instructure/ui-prop-types'
 import type {
   AsElementType,
   PropValidators,
-  MenuItemTheme
+  MenuItemTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -56,7 +57,8 @@ type PropKeys = keyof MenuItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MenuItemProps = MenuItemOwnProps &
-  WithStyleProps<MenuItemTheme, MenuItemStyle>
+  WithStyleProps<MenuItemTheme, MenuItemStyle> &
+  OtherHTMLAttributes<MenuItemOwnProps>
 
 type MenuItemStyle = ComponentStyle<'menuItem' | 'icon' | 'label'>
 

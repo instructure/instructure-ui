@@ -27,7 +27,8 @@ import PropTypes from 'prop-types'
 
 import type {
   PropValidators,
-  DrawerLayoutContentTheme
+  DrawerLayoutContentTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -48,7 +49,8 @@ type PropKeys = keyof DrawerLayoutContentOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrawerLayoutContentProps = DrawerLayoutContentOwnProps &
-  WithStyleProps<DrawerLayoutContentTheme, DrawerLayoutContentStyle>
+  WithStyleProps<DrawerLayoutContentTheme, DrawerLayoutContentStyle> &
+  OtherHTMLAttributes<DrawerLayoutContentOwnProps>
 
 type DrawerLayoutContentStyle = ComponentStyle<'drawerContent'>
 

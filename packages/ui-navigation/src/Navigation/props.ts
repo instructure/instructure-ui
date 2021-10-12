@@ -31,7 +31,11 @@ import {
 
 import { NavigationItem } from './NavigationItem'
 
-import type { PropValidators, NavigationTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  NavigationTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type NavigationOwnProps = {
@@ -57,7 +61,8 @@ type PropKeys = keyof NavigationOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type NavigationProps = NavigationOwnProps &
-  WithStyleProps<NavigationTheme, NavigationStyle>
+  WithStyleProps<NavigationTheme, NavigationStyle> &
+  OtherHTMLAttributes<NavigationOwnProps>
 
 type NavigationStyle = ComponentStyle<
   'navigation' | 'list' | 'content' | 'toggle' | 'toggleIcon'

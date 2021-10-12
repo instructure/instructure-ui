@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
@@ -33,7 +33,10 @@ import { Group } from './Group'
 import { Option } from './Option'
 
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 import type {
   PlacementPropValues,
   PositionConstraint,
@@ -75,7 +78,11 @@ type PropKeys = keyof SimpleSelectOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SimpleSelectProps = SimpleSelectOwnProps
+type SimpleSelectProps = SimpleSelectOwnProps &
+  OtherHTMLAttributes<
+    SimpleSelectOwnProps,
+    InputHTMLAttributes<SimpleSelectOwnProps>
+  >
 
 const propTypes: PropValidators<PropKeys> = {
   /**

@@ -27,7 +27,8 @@ import PropTypes from 'prop-types'
 import type {
   AsElementType,
   PropValidators,
-  FormFieldLabelTheme
+  FormFieldLabelTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -41,7 +42,8 @@ type PropKeys = keyof FormFieldLabelOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FormFieldLabelProps = FormFieldLabelOwnProps &
-  WithStyleProps<FormFieldLabelTheme, FormFieldLabelStyle>
+  WithStyleProps<FormFieldLabelTheme, FormFieldLabelStyle> &
+  OtherHTMLAttributes<FormFieldLabelOwnProps>
 
 type FormFieldLabelStyle = ComponentStyle<'formFieldLabel'>
 

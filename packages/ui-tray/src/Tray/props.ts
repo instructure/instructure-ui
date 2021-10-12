@@ -28,7 +28,11 @@ import PropTypes from 'prop-types'
 import { element } from '@instructure/ui-prop-types'
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { PropValidators, TrayTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  TrayTheme
+} from '@instructure/shared-types'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 
 type TrayOwnProps = {
@@ -68,7 +72,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TrayProps = TrayOwnProps &
   BidirectionalProps &
-  WithStyleProps<TrayTheme, TrayStyle>
+  WithStyleProps<TrayTheme, TrayStyle> &
+  OtherHTMLAttributes<TrayOwnProps>
 
 type TrayStyle = ComponentStyle<'tray' | 'content'>
 

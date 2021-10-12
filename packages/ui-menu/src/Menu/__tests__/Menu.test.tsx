@@ -185,12 +185,10 @@ describe('<Menu />', async () => {
         <Menu trigger={<button>Settings</button>} defaultShow>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
-          {/* @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: string; type: "radio"; defaultCh... Remove this comment to see the full error message */}
           <MenuItem type="radio" defaultChecked>
             Default (Grid view)
           </MenuItem>
           <MenuItem type="radio">Individual (List view)</MenuItem>
-          {/* @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: string; type: "checkbox"; defaul... Remove this comment to see the full error message */}
           <MenuItem type="checkbox" defaultChecked>
             Include Anchor Standards
           </MenuItem>

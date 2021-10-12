@@ -29,7 +29,8 @@ import { FormPropTypes } from '../FormPropTypes'
 import type {
   AsElementType,
   PropValidators,
-  FormFieldGroupTheme
+  FormFieldGroupTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '../FormPropTypes'
@@ -58,7 +59,8 @@ type PropKeys = keyof FormFieldGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FormFieldGroupProps = FormFieldGroupOwnProps &
-  WithStyleProps<FormFieldGroupTheme, FormFieldGroupStyle>
+  WithStyleProps<FormFieldGroupTheme, FormFieldGroupStyle> &
+  OtherHTMLAttributes<FormFieldGroupOwnProps>
 
 type FormFieldGroupStyle = ComponentStyle<'formFieldGroup'>
 

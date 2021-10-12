@@ -80,7 +80,7 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
           // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           screenReaderLabel={label}
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'href' does not exist on type '{ children... Remove this comment to see the full error message
-          rel={props.href || props.to ? direction : null}
+          rel={props.href || props.to ? direction : undefined}
           elementRef={buttonRef}
         >
           {Icon}

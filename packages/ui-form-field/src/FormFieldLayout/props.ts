@@ -26,7 +26,11 @@ import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '../FormPropTypes'
 
-import type { AsElementType, PropValidators } from '@instructure/shared-types'
+import type {
+  AsElementType,
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '../FormPropTypes'
 
@@ -50,7 +54,8 @@ type PropKeys = keyof FormFieldLayoutOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FormFieldLayoutProps = FormFieldLayoutOwnProps &
-  WithStyleProps<null, FormFieldLayoutStyle>
+  WithStyleProps<null, FormFieldLayoutStyle> &
+  OtherHTMLAttributes<FormFieldLayoutOwnProps>
 
 type FormFieldLayoutStyle = ComponentStyle<'formFieldLayout'>
 

@@ -37,6 +37,7 @@ import type {
 } from '@instructure/ui-position'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 import type { PropValidators } from '@instructure/shared-types'
+
 // Copied list from "PositionPropTypes.placement" so that it appears as options in the properties table.
 // TODO: try to use "PositionPropTypes.placement" again once Popover is fully typed and uses @tsProps
 const placementPropValues = [

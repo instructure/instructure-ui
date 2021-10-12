@@ -26,7 +26,8 @@ import PropTypes from 'prop-types'
 import type {
   AsElementType,
   PropValidators,
-  NavigationItemTheme
+  NavigationItemTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -45,7 +46,8 @@ type PropKeys = keyof NavigationItemOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type NavigationItemProps = NavigationItemOwnProps &
-  WithStyleProps<NavigationItemTheme, NavigationItemStyle>
+  WithStyleProps<NavigationItemTheme, NavigationItemStyle> &
+  OtherHTMLAttributes<NavigationItemOwnProps>
 
 type NavigationItemStyle = ComponentStyle<'navigationItem' | 'icon' | 'label'>
 

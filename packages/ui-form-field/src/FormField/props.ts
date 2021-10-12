@@ -27,7 +27,10 @@ import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '../FormPropTypes'
 
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 import type { FormMessage } from '../FormPropTypes'
 
 type FormFieldOwnProps = {
@@ -49,7 +52,7 @@ type PropKeys = keyof FormFieldOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type FormFieldProps = FormFieldOwnProps
+type FormFieldProps = FormFieldOwnProps & OtherHTMLAttributes<FormFieldOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,

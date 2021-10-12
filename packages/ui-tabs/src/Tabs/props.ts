@@ -34,7 +34,11 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { PropValidators, TabsTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  TabsTheme
+} from '@instructure/shared-types'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 
 type TabsOwnProps = {
@@ -60,7 +64,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TabsProps = TabsOwnProps &
   BidirectionalProps &
-  WithStyleProps<TabsTheme, TabsStyle>
+  WithStyleProps<TabsTheme, TabsStyle> &
+  OtherHTMLAttributes<TabsOwnProps>
 
 type TabsStyle = ComponentStyle<
   | 'tabs'

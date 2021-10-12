@@ -25,7 +25,8 @@
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   PropValidators,
-  MenuSeparatorTheme
+  MenuSeparatorTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 
 // keeping here to keep the structure of props.ts
@@ -37,7 +38,8 @@ type PropKeys = keyof MenuSeparatorOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MenuSeparatorProps = MenuSeparatorOwnProps &
-  WithStyleProps<MenuSeparatorTheme, MenuSeparatorStyle>
+  WithStyleProps<MenuSeparatorTheme, MenuSeparatorStyle> &
+  OtherHTMLAttributes<MenuSeparatorOwnProps>
 
 type MenuSeparatorStyle = ComponentStyle<'menuItemSeparator'>
 

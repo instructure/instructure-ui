@@ -208,7 +208,6 @@ describe('<ToggleButton />', async () => {
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
         renderTooltipContent="This is tooltip content"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ screenReaderLabel: string; renderIcon: Ele... Remove this comment to see the full error message
         disabled
         status="pressed"
       />
@@ -237,7 +236,6 @@ describe('<ToggleButton />', async () => {
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
         renderTooltipContent="This is tooltip content"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ screenReaderLabel: string; renderIcon: Ele... Remove this comment to see the full error message
         readOnly
         status="pressed"
       />

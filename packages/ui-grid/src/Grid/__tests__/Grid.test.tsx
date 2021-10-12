@@ -45,11 +45,8 @@ describe('<Grid />', async () => {
 
   it('should pass aria and role attributes to underlying DOM elements', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Grid role="grid" aria-hidden="true">
-        {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
         <Grid.Row aria-live="polite" role="presentation">
-          {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
           <Grid.Col role="presentation">Foo</Grid.Col>
         </Grid.Row>
       </Grid>

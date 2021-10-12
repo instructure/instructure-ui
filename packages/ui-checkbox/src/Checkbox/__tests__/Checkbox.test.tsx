@@ -35,7 +35,6 @@ describe('<Checkbox />', async () => {
         label="fake label"
         defaultChecked
         value="someValue"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
         name="someName"
       />
     )
@@ -53,7 +52,6 @@ describe('<Checkbox />', async () => {
         variant="simple"
         defaultChecked={false}
         value="someValue"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; variant: "simple"; defaultC... Remove this comment to see the full error message
         name="someName"
       />
     )
@@ -71,7 +69,6 @@ describe('<Checkbox />', async () => {
         defaultChecked
         indeterminate
         value="someValue"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; variant: "simple"; defaultC... Remove this comment to see the full error message
         name="someName"
       />
     )
@@ -92,7 +89,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           onClick={onClick}
           onChange={onChange}
@@ -119,7 +115,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           onClick={onClick}
           onChange={onChange}
@@ -144,7 +139,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           onClick={onClick}
           onChange={onChange}
@@ -171,7 +165,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           variant="toggle"
           onChange={onChange}
@@ -196,7 +189,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           onBlur={onBlur}
         />
@@ -220,7 +212,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           onFocus={onFocus}
         />
@@ -244,7 +235,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
           componentRef={(el) => {
@@ -280,7 +270,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           onMouseOver={onMouseOver}
         />
@@ -306,7 +295,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           onMouseOut={onMouseOut}
         />
@@ -330,7 +318,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           variant="simple"
         />
@@ -347,7 +334,6 @@ describe('<Checkbox />', async () => {
           label="fake label"
           defaultChecked
           value="someValue"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; defaultChecked: true; value... Remove this comment to see the full error message
           name="someName"
           variant="toggle"
         />

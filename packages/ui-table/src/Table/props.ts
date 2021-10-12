@@ -35,7 +35,11 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { PropValidators, TableTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  TableTheme
+} from '@instructure/shared-types'
 
 type TableOwnProps = {
   caption: React.ReactNode
@@ -50,7 +54,9 @@ type PropKeys = keyof TableOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TableProps = TableOwnProps & WithStyleProps<TableTheme, TableStyle>
+type TableProps = TableOwnProps &
+  WithStyleProps<TableTheme, TableStyle> &
+  OtherHTMLAttributes<TableOwnProps>
 
 type TableStyle = ComponentStyle<'table'>
 

@@ -75,7 +75,6 @@ class CheckboxFacade extends Component<CheckboxFacadeProps> {
   renderIcon() {
     if (this.props.indeterminate) {
       return (
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <SVGIcon viewBox="0 0 1920 1920" inline={false}>
           <rect x="140" y="820" width="1640" height="280" />
         </SVGIcon>

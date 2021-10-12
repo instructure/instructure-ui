@@ -127,7 +127,7 @@ class InlineSVG extends Component<InlineSVGProps> {
       ids.push(this.descId)
     }
 
-    return ids.length > 0 ? ids.join(' ') : null
+    return ids.length > 0 ? ids.join(' ') : undefined
   }
 
   renderContent() {
@@ -146,7 +146,6 @@ class InlineSVG extends Component<InlineSVGProps> {
 
   render() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Readonly<... Remove this comment to see the full error message
       style, // eslint-disable-line react/prop-types
       title,
       description,
@@ -158,8 +157,8 @@ class InlineSVG extends Component<InlineSVGProps> {
     } = this.props
 
     // if width or height are 'auto', don't supply anything to the SVG
-    const width = this.props.width === 'auto' ? null : this.props.width
-    const height = this.props.height === 'auto' ? null : this.props.height
+    const width = this.props.width === 'auto' ? undefined : this.props.width
+    const height = this.props.height === 'auto' ? undefined : this.props.height
 
     return (
       <svg
@@ -170,16 +169,13 @@ class InlineSVG extends Component<InlineSVGProps> {
           width,
           height
         }}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | number | null | undefined' is not a... Remove this comment to see the full error message
         width={width}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | number | null | undefined' is not a... Remove this comment to see the full error message
         height={height}
-        aria-hidden={title ? null : 'true'}
+        aria-hidden={title ? undefined : 'true'}
         aria-labelledby={this.labelledBy}
         role={this.role}
         focusable={focusable ? 'true' : 'false'}
         css={styles?.inlineSVG}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'className' does not exist on type '{ mak... Remove this comment to see the full error message
         className={props.className}
         ref={this.handleRef}
       >

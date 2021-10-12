@@ -27,11 +27,13 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 
 import type {
   PropValidators,
-  NumberInputTheme
+  NumberInputTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { InputHTMLAttributes } from 'react'
 
 type NumberInputOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
@@ -69,7 +71,11 @@ type PropKeys = keyof NumberInputOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type NumberInputProps = NumberInputOwnProps &
-  WithStyleProps<NumberInputTheme, NumberInputStyle>
+  WithStyleProps<NumberInputTheme, NumberInputStyle> &
+  OtherHTMLAttributes<
+    NumberInputOwnProps,
+    InputHTMLAttributes<NumberInputOwnProps>
+  >
 
 type NumberInputStyle = ComponentStyle<
   | 'numberInput'

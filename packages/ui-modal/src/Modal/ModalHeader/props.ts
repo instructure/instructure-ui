@@ -27,7 +27,8 @@ import PropTypes from 'prop-types'
 
 import type {
   PropValidators,
-  ModalHeaderTheme
+  ModalHeaderTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -45,7 +46,8 @@ type PropKeys = keyof ModalHeaderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ModalHeaderProps = ModalHeaderOwnProps &
-  WithStyleProps<ModalHeaderTheme, ModalHeaderStyle>
+  WithStyleProps<ModalHeaderTheme, ModalHeaderStyle> &
+  OtherHTMLAttributes<ModalHeaderOwnProps>
 
 type ModalHeaderStyle = ComponentStyle<'modalHeader'>
 

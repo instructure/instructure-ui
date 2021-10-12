@@ -25,7 +25,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type PaginationNavigationOwnProps = {
   direction?: 'next' | 'prev'
@@ -37,7 +40,8 @@ type PropKeys = keyof PaginationNavigationOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PaginationNavigationProps = PaginationNavigationOwnProps
+type PaginationNavigationProps = PaginationNavigationOwnProps &
+  OtherHTMLAttributes<PaginationNavigationOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   direction: PropTypes.oneOf(['next', 'prev']),

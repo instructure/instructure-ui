@@ -24,7 +24,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type SelectOptionOwnProps = {
   id: string
@@ -40,7 +43,8 @@ type PropKeys = keyof SelectOptionOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SelectOptionProps = SelectOptionOwnProps
+type SelectOptionProps = SelectOptionOwnProps &
+  OtherHTMLAttributes<SelectOptionOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

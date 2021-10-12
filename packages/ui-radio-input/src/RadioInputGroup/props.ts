@@ -29,7 +29,10 @@ import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type RadioInputGroupOwnProps = {
   name: string
@@ -50,7 +53,8 @@ type PropKeys = keyof RadioInputGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type RadioInputGroupProps = RadioInputGroupOwnProps
+type RadioInputGroupProps = RadioInputGroupOwnProps &
+  OtherHTMLAttributes<RadioInputGroupOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   name: PropTypes.string.isRequired,

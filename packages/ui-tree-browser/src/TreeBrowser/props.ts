@@ -58,6 +58,8 @@ type PropKeys = keyof TreeBrowserOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
+// For now it doesn't need the OtherHTMLAttributes, because the extra props
+// get passed to TreeCollection and it doesn't handle them
 type TreeBrowserProps = TreeBrowserOwnProps &
   WithStyleProps<TreeBrowserTheme, TreeBrowserStyle>
 

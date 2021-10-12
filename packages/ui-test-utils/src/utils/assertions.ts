@@ -126,7 +126,7 @@ export default function assertions(
       const wrapper = wrapObj(flag(this, 'object'))
 
       if (!wrapper) {
-        // @ts-expect-error TODO this needs new syntax
+        // @ts-expect-error TODO: this needs new syntax
         // eslint-disable-next-line prefer-rest-params
         return _super.apply(this, arguments)
       }

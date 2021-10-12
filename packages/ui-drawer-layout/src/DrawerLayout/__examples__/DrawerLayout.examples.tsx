@@ -36,7 +36,6 @@ export default {
       children: [
         <DrawerLayout.Tray
           key="0"
-          // @ts-expect-error ts-migrate(6133) FIXME: id is missing from type
           id="DrawerLayoutTrayExample1"
           open={true}
           placement="start"

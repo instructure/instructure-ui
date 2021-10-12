@@ -32,7 +32,8 @@ import type {
 import type {
   PropValidators,
   AsElementType,
-  ProgressCircleTheme
+  ProgressCircleTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 
 export type ProgressCircleMeterColor =
@@ -70,7 +71,8 @@ type PropKeys = keyof ProgressCircleOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ProgressCircleProps = ProgressCircleOwnProps &
-  WithStyleProps<ProgressCircleTheme, ProgressCircleStyle>
+  WithStyleProps<ProgressCircleTheme, ProgressCircleStyle> &
+  OtherHTMLAttributes<ProgressCircleOwnProps>
 
 type ProgressCircleStyle = ComponentStyle<
   | 'progressCircle'

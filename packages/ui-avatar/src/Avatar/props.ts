@@ -35,6 +35,7 @@ import type {
 import type {
   AsElementType,
   AvatarTheme,
+  OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
 
@@ -98,7 +99,9 @@ type PropKeys = keyof AvatarOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AvatarProps = AvatarOwnProps & WithStyleProps<AvatarTheme, AvatarStyle>
+type AvatarProps = AvatarOwnProps &
+  WithStyleProps<AvatarTheme, AvatarStyle> &
+  OtherHTMLAttributes<AvatarOwnProps>
 
 type AvatarStyle = ComponentStyle<'avatar' | 'initials' | 'loadImage'>
 

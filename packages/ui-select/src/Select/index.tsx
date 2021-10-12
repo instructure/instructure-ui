@@ -431,7 +431,6 @@ class Select extends Component<SelectProps> {
     // a wrapping listitem will be created by Options
     groupChildren.push(
       <Options
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         id={id}
         as="ul"
         role="group"

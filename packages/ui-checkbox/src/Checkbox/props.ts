@@ -30,6 +30,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   CheckboxFacadeTheme,
+  OtherHTMLAttributes,
   PropValidators,
   ToggleFacadeTheme
 } from '@instructure/shared-types'
@@ -62,7 +63,8 @@ type PropKeys = keyof CheckboxOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CheckboxProps = CheckboxOwnProps &
-  WithStyleProps<CheckboxFacadeTheme | ToggleFacadeTheme, CheckboxStyle>
+  WithStyleProps<CheckboxFacadeTheme | ToggleFacadeTheme, CheckboxStyle> &
+  OtherHTMLAttributes<CheckboxOwnProps>
 
 type CheckboxStyle = ComponentStyle<'checkbox' | 'input' | 'control'>
 

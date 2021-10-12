@@ -481,7 +481,6 @@ describe('<Pagination />', async () => {
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
           {[
             ...buildPages(6, 5),
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             <PaginationButton key="last" onClick={onClick}>
               Last
             </PaginationButton>

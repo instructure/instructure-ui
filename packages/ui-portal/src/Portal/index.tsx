@@ -27,7 +27,6 @@ import ReactDOM from 'react-dom'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional } from '@instructure/ui-i18n'
-import type { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import { propTypes, allowedProps } from './props'
 import type { PortalNode, PortalProps, PortalState } from './props'
@@ -40,13 +39,7 @@ category: components/utilities
 @tsProps
 **/
 @bidirectional()
-class Portal extends Component<
-  // For some (yet) unknown reason, adding OtherHTMLAttributes in the `props.ts`
-  // breaks the docs generation for Portal
-  // TODO: try to figure out why (and fix, if possible)
-  PortalProps & OtherHTMLAttributes<PortalProps>,
-  PortalState
-> {
+class Portal extends Component<PortalProps, PortalState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {

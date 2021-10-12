@@ -40,7 +40,6 @@ describe('<PaginationButton />', async () => {
 
   it('should navigate using button when onClick provided', async () => {
     const onClick = stub()
-    //@ts-expect-error fix this
     await mount(<PaginationButton onClick={onClick}>1</PaginationButton>)
     const button = await PaginationButtonLocator.find(':label(1)')
     await button.click()
@@ -50,7 +49,6 @@ describe('<PaginationButton />', async () => {
   it('should disable navigation to current page', async () => {
     const onClick = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <PaginationButton onClick={onClick} current>
         1
       </PaginationButton>
@@ -65,7 +63,6 @@ describe('<PaginationButton />', async () => {
 
   it('should navigate using link when href provided', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <PaginationButton href="https://instructure.design/">1</PaginationButton>
     )
     const button = await PaginationButtonLocator.find(':label(1)')

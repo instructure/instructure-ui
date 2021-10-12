@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -31,7 +31,10 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 import { PositionPropTypes } from '@instructure/ui-position'
 
 import type { FormMessage } from '@instructure/ui-form-field'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 import type {
   PlacementPropValues,
   PositionConstraint
@@ -73,7 +76,11 @@ type PropKeys = keyof TimeSelectOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TimeSelectProps = TimeSelectOwnProps
+type TimeSelectProps = TimeSelectOwnProps &
+  OtherHTMLAttributes<
+    TimeSelectOwnProps,
+    InputHTMLAttributes<TimeSelectOwnProps>
+  >
 
 const propTypes: PropValidators<PropKeys> = {
   /**

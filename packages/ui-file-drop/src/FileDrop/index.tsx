@@ -423,7 +423,6 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
         {this.hasMessages ? (
           <View display="block" margin="small 0 0">
             <FormFieldMessages
-              // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
               id={(this as any).messagesId}
               messages={(this.props as any).messages}
             />

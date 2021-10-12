@@ -25,7 +25,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type PaginationPageOwnProps = {
   children: React.ReactNode
@@ -36,7 +39,8 @@ type PropKeys = keyof PaginationPageOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PaginationPageProps = PaginationPageOwnProps
+type PaginationPageProps = PaginationPageOwnProps &
+  OtherHTMLAttributes<PaginationPageOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

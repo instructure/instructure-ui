@@ -31,7 +31,10 @@ import { transitionTypePropType } from '@instructure/ui-motion'
 import type { PortalNode } from '@instructure/ui-portal'
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { TransitionType } from '@instructure/ui-motion'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type OverlayOwnProps = {
   open?: boolean
@@ -70,7 +73,7 @@ type PropKeys = keyof OverlayOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type OverlayProps = OverlayOwnProps
+type OverlayProps = OverlayOwnProps & OtherHTMLAttributes<OverlayOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,

@@ -199,7 +199,7 @@ class Tabs extends Component<TabsProps> {
     }
   }
 
-  // @ts-expect-error TODO not all codepaths return a value!
+  // @ts-expect-error TODO: not all codepaths return a value!
   getOverlayWidth() {
     const { variant, tabOverflow, styles } = this.props
 

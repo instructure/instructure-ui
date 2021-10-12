@@ -29,7 +29,10 @@ import { element } from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
 
 import type { BidirectionalProps } from '@instructure/ui-i18n'
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 /**
  * The DOM Node of the Portal. It is created as a `span` element.
@@ -78,7 +81,7 @@ type PropKeys = keyof PortalOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PortalProps = PortalOwnProps
+type PortalProps = PortalOwnProps & OtherHTMLAttributes<PortalOwnProps>
 
 type PortalState = {
   mountNode: Element

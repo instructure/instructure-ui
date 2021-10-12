@@ -28,7 +28,8 @@ import { I18nPropTypes } from '@instructure/ui-i18n'
 import type {
   AsElementType,
   PropValidators,
-  CalendarDayTheme
+  CalendarDayTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -55,7 +56,8 @@ type PropKeys = keyof CalendarDayOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CalendarDayProps = CalendarDayOwnProps &
-  WithStyleProps<CalendarDayTheme, CalendarDayStyle>
+  WithStyleProps<CalendarDayTheme, CalendarDayStyle> &
+  OtherHTMLAttributes<CalendarDayOwnProps>
 
 type CalendarDayStyle = ComponentStyle<'calendarDay' | 'day'>
 

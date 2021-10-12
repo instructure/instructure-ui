@@ -28,7 +28,8 @@ import PropTypes from 'prop-types'
 import type {
   PropValidators,
   AsElementType,
-  TextTheme
+  TextTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
@@ -68,7 +69,9 @@ type PropKeys = keyof TextOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TextProps = TextOwnProps & WithStyleProps<TextTheme, TextStyle>
+type TextProps = TextOwnProps &
+  WithStyleProps<TextTheme, TextStyle> &
+  OtherHTMLAttributes<TextOwnProps>
 
 type TextStyle = ComponentStyle<'text'>
 

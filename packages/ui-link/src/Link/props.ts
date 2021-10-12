@@ -30,7 +30,8 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 import type {
   AsElementType,
   PropValidators,
-  LinkTheme
+  LinkTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type {
   Spacing,
@@ -64,7 +65,9 @@ type PropKeys = keyof LinkOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type LinkProps = LinkOwnProps & WithStyleProps<LinkTheme, LinkStyle>
+type LinkProps = LinkOwnProps &
+  WithStyleProps<LinkTheme, LinkStyle> &
+  OtherHTMLAttributes<LinkOwnProps>
 
 type LinkStyle = ComponentStyle<'link' | 'icon'>
 

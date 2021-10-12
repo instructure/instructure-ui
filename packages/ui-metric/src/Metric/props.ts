@@ -25,7 +25,11 @@
 import { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
-import type { PropValidators, MetricTheme } from '@instructure/shared-types'
+import type {
+  PropValidators,
+  MetricTheme,
+  OtherHTMLAttributes
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MetricOwnProps = {
@@ -43,7 +47,9 @@ type PropKeys = keyof MetricOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type MetricProps = MetricOwnProps & WithStyleProps<MetricTheme, MetricStyle>
+type MetricProps = MetricOwnProps &
+  WithStyleProps<MetricTheme, MetricStyle> &
+  OtherHTMLAttributes<MetricOwnProps>
 
 type MetricStyle = ComponentStyle<'metric' | 'label' | 'value'>
 

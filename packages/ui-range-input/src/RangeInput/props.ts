@@ -26,9 +26,14 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
-import type { PropValidators, RangeInputTheme } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators,
+  RangeInputTheme
+} from '@instructure/shared-types'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { InputHTMLAttributes } from 'react'
 
 type RangeInputOwnProps = {
   min: number
@@ -54,7 +59,11 @@ type PropKeys = keyof RangeInputOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RangeInputProps = RangeInputOwnProps &
-  WithStyleProps<RangeInputTheme, RangeInputStyle>
+  WithStyleProps<RangeInputTheme, RangeInputStyle> &
+  OtherHTMLAttributes<
+    RangeInputOwnProps,
+    InputHTMLAttributes<RangeInputOwnProps>
+  >
 
 type RangeInputStyle = ComponentStyle<
   'rangeInput' | 'rangeInputInput' | 'rangeInputInputValue'

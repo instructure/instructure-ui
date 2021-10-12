@@ -33,7 +33,8 @@ import type { BidirectionalProps } from '@instructure/ui-i18n'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   PropValidators,
-  DrawerLayoutTrayTheme
+  DrawerLayoutTrayTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 
 type DrawerTrayPlacement = 'start' | 'end'
@@ -83,7 +84,8 @@ type PropKeys = keyof DrawerLayoutTrayOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrawerLayoutTrayProps = DrawerLayoutTrayOwnProps &
-  WithStyleProps<DrawerLayoutTrayTheme, DrawerLayoutTrayStyle>
+  WithStyleProps<DrawerLayoutTrayTheme, DrawerLayoutTrayStyle> &
+  OtherHTMLAttributes<DrawerLayoutTrayOwnProps>
 
 type DrawerLayoutTrayStyle = ComponentStyle<
   'drawerTray' | 'drawerTrayWithShadow' | 'drawerTrayContent'

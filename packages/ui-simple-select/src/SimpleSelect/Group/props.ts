@@ -28,7 +28,10 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { Option } from '../Option'
 
-import type { PropValidators } from '@instructure/shared-types'
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
 
 type SimpleSelectGroupOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
@@ -38,7 +41,8 @@ type PropKeys = keyof SimpleSelectGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SimpleSelectGroupProps = SimpleSelectGroupOwnProps
+type SimpleSelectGroupProps = SimpleSelectGroupOwnProps &
+  OtherHTMLAttributes<SimpleSelectGroupOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   /**

@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, InputHTMLAttributes } from 'react'
+import { Component } from 'react'
 
 import {
   callRenderProp,
@@ -35,7 +35,6 @@ import { FormField } from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
-import { OtherHTMLAttributes } from '@instructure/shared-types'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -54,11 +53,7 @@ tags: form, field
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class TextInput extends Component<
-  TextInputProps &
-    OtherHTMLAttributes<TextInputProps, InputHTMLAttributes<TextInputProps>>,
-  TextInputState
-> {
+class TextInput extends Component<TextInputProps, TextInputState> {
   static readonly componentId = 'TextInput'
 
   static allowedProps = allowedProps

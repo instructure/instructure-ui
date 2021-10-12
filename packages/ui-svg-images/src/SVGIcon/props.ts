@@ -25,10 +25,16 @@ import PropTypes from 'prop-types'
 
 import { InlineSVG } from '../InlineSVG'
 
-import type { PropValidators, SVGIconTheme } from '@instructure/shared-types'
+import type {
+  InlineSVGTheme,
+  OtherHTMLAttributes,
+  PropValidators,
+  SVGIconTheme
+} from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 import type { InlineSVGOwnProps } from '../InlineSVG/props'
+import { SVGAttributes } from 'react'
 
 type SVGIconOwnProps = InlineSVGOwnProps & {
   rotate?: '0' | '90' | '180' | '270'
@@ -40,7 +46,9 @@ type PropKeys = keyof SVGIconOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SVGIconProps = SVGIconOwnProps & WithStyleProps<SVGIconTheme, SVGIconStyle>
+type SVGIconProps = SVGIconOwnProps &
+  WithStyleProps<SVGIconTheme & InlineSVGTheme, SVGIconStyle> &
+  OtherHTMLAttributes<SVGIconOwnProps, SVGAttributes<SVGIconOwnProps>>
 
 type SVGIconStyle = ComponentStyle<'svgIcon'>
 
