@@ -62,8 +62,7 @@ class Transition extends Component<TransitionProps> {
     unmountOnExit: false,
     transitionOnMount: false,
     transitionEnter: true,
-    transitionExit: true,
-    children: null
+    transitionExit: true
   }
 
   static states = BaseTransition.states
