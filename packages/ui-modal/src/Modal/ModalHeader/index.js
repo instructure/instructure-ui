@@ -48,16 +48,18 @@ id: Modal.Header
 class ModalHeader extends Component {
   static propTypes = {
     children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'inverse'])
+    variant: PropTypes.oneOf(['default', 'inverse']),
+    spacing: PropTypes.oneOf(['default', 'compact'])
   }
 
   static defaultProps = {
     children: null,
-    variant: 'default'
+    variant: 'default',
+    spacing: 'default'
   }
 
   render() {
-    const { children, variant, ...rest } = this.props
+    const { children, variant, spacing, ...rest } = this.props
     let usesCloseButton = false
 
     React.Children.forEach(children, (child) => {
@@ -68,6 +70,7 @@ class ModalHeader extends Component {
 
     const classes = {
       [styles.root]: true,
+      [styles[`${spacing}Spacing`]]: true,
       [styles.inverse]: variant === 'inverse',
       [styles.withCloseButton]: usesCloseButton === true
     }

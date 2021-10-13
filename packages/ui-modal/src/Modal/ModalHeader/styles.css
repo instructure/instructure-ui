@@ -1,8 +1,5 @@
 .root {
   box-sizing: border-box;
-  padding: var(--padding);
-  padding-inline-end: var(--padding);
-  padding-inline-start: var(--padding);
   flex: 0 0 auto;
   background: var(--background);
   border-bottom-width: 0.0625rem;
@@ -15,6 +12,22 @@
   border-bottom-color: var(--inverseBorderColor);
 }
 
-.withCloseButton {
-  padding-inline-end: calc(var(--padding) * 2 + 1em);
+.defaultSpacing {
+  padding: var(--padding);
+  padding-inline-end: var(--padding);
+  padding-inline-start: var(--padding);
+
+  &.withCloseButton {
+    padding-inline-end: calc(var(--padding) * 2 + 1em);
+  }
+}
+
+.compactSpacing {
+  padding: var(--paddingCompact);
+  padding-inline-end: var(--paddingCompact);
+  padding-inline-start: var(--paddingCompact);
+
+  &.withCloseButton {
+    padding-inline-end: calc(var(--paddingCompact) * 2 + 1em);
+  }
 }
