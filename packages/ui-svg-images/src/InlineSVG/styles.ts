@@ -60,6 +60,7 @@ const generateStyle = (
       label: 'inlineSVG',
       fill: 'currentColor',
       display: inline ? 'inline-block' : 'block',
+      overflow: 'visible',
       ...colorVariants[color!]
     }
   }
