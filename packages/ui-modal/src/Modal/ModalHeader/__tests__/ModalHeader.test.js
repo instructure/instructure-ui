@@ -43,4 +43,27 @@ describe('<ModalHeader />', async () => {
     const header = within(subject.getDOMNode())
     expect(header).to.have.className(styles['inverse'])
   })
+
+  describe('spacing prop', async () => {
+    it('should be correct by default', async () => {
+      const subject = await mount(<ModalHeader />)
+
+      const header = within(subject.getDOMNode())
+      expect(header).to.have.className(styles['defaultSpacing'])
+    })
+
+    it('should correctly set default spacing', async () => {
+      const subject = await mount(<ModalHeader spacing="default" />)
+
+      const header = within(subject.getDOMNode())
+      expect(header).to.have.className(styles['defaultSpacing'])
+    })
+
+    it('should correctly set compact spacing', async () => {
+      const subject = await mount(<ModalHeader spacing="compact" />)
+
+      const header = within(subject.getDOMNode())
+      expect(header).to.have.className(styles['compactSpacing'])
+    })
+  })
 })

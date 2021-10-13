@@ -198,9 +198,10 @@ class ModalAutoCompleteExample extends React.Component {
 
 render(<Example />)
 ```
+
 ### Media (images, etc.) inside Modals
 
-> Setting the `variant` prop to `"inverse"` will result in a dark version of Modal, useful for displaying media. *Note that the `inverse` Modal does not currently support text or form input content.*
+> Setting the `variant` prop to `"inverse"` will result in a dark version of Modal, useful for displaying media. _Note that the `inverse` Modal does not currently support text or form input content._
 
 **If you are displaying small, relatively uniform images or videos inside Modal, the default settings should work well.** Modal.Body will expand to the height of the media you're displaying. If there is overflow, scrollbars will be available.
 
@@ -407,6 +408,102 @@ class Example extends React.Component {
   }
 }
 
+render(<Example />)
+```
+
+### Small viewports
+
+On smaller viewports (like mobile devices or scaled-up UI), we don't want to lose space because of padding and margins. In order to achieve that, use `size="fullscreen"` on the Modal and set the `spacing` property of Modal.Header to `compact`.
+
+```js
+---
+render: false
+example: true
+---
+const fpo = lorem.paragraphs(1)
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      open: false,
+      smallViewport: true
+    }
+  }
+  toggleOpen = () => {
+    this.setState(function (state) {
+      return { open: !state.open }
+    })
+  }
+  toggleViewport = async () => {
+    await this.setState(function (state) {
+      return { smallViewport: !state.smallViewport }
+    })
+  }
+  renderCloseButton () {
+    return (
+      <CloseButton
+        placement="end"
+        offset="small"
+        onClick={this.toggleOpen}
+        screenReaderLabel="Close"
+      />
+    )
+  }
+  render () {
+    return (
+      <div>
+        <Button onClick={this.toggleOpen}>
+          {this.state.open ? 'Close' : 'Open'} the Modal
+        </Button>
+        <Button
+          onClick={this.toggleViewport}
+          margin='0 0 0 small'
+          id="toggleViewportButton"
+        >
+          Toggle viewport
+        </Button>
+        <Modal
+          open={this.state.open}
+          size={this.state.smallViewport ? 'fullscreen' : 'small'}
+          onDismiss={(event) => {
+            if (event.target.id !== 'toggleViewportButton') {
+              this.setState({ open: false })
+            }
+          }}
+          label="Modal Dialog: Hello World"
+          shouldCloseOnDocumentClick
+          mountNode={() => document.getElementById('viewportExample')}
+          constrain="parent"
+        >
+          <Modal.Header spacing={this.state.smallViewport ? 'compact' : 'default'}>
+            {this.renderCloseButton()}
+            {this.state.smallViewport
+              ? <Text size="large">This Modal is optimized for small viewport</Text>
+              : <Heading>This is a deafult size Modal</Heading>
+            }
+          </Modal.Header>
+          <Modal.Body>
+            <View as="p" margin="none none small"><Text>{fpo}</Text></View>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleButtonClick} margin="0 x-small 0 0">Close</Button>
+            <Button onClick={this.handleButtonClick} color="primary" type="submit">Submit</Button>
+          </Modal.Footer>
+        </Modal>
+        <View
+          background="primary-inverse"
+          margin="medium auto none"
+          display="block"
+          width={this.state.smallViewport ? '20rem' : '50rem'}
+          height="37.5rem"
+          borderWidth="large"
+          id="viewportExample"
+        >
+        </View>
+      </div>
+    )
+  }
+}
 render(<Example />)
 ```
 
