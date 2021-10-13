@@ -65,8 +65,7 @@ class BaseTransition extends React.Component<
     transitionEnter: true,
     transitionExit: true,
     enterDelay: 300,
-    exitDelay: 300,
-    children: null
+    exitDelay: 300
   }
 
   static states = STATES
@@ -322,7 +321,7 @@ class BaseTransition extends React.Component<
       ? safeCloneElement(
           ensureSingleChild(this.props.children) as ReactElement,
           {
-            'aria-hidden': !this.props.in ? true : null,
+            'aria-hidden': !this.props.in ? true : undefined,
             ref: this.ref
           }
         )

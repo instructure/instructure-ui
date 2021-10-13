@@ -58,18 +58,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type TransitionProps = TransitionOwnProps &
   WithStyleProps<TransitionTheme, TransitionStyle>
 
-// type TransitionStyle = {
-//   duration: TransitionTheme['duration']
-//   classNames: {
-//     transitioning: string
-//     exited: string
-//     exiting: string
-//     entered: string
-//     entering: string
-//   }
-//   globalStyles: ComponentStyle[keyof ComponentStyle]
-// }
-
 type TransitionStyle = ComponentStyle<'globalStyles'> & {
   duration: TransitionTheme['duration']
   classNames: {
