@@ -29,6 +29,7 @@ import PropTypes from 'prop-types'
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { withStyle, jsx } from '@instructure/emotion'
+import { omitProps } from '@instructure/ui-react-utils'
 import * as reactIcons from '@instructure/ui-icons'
 import { Heading } from '../Heading'
 import generateStyle from './styles'
@@ -123,7 +124,7 @@ class Glyph extends Component {
         <div css={styles.variants} dir={this.props.rtl ? 'rtl' : null}>
           {Object.keys(variants).map((variant) => (
             <Variant
-              {...this.props}
+              {...omitProps(this.props, ['styles', 'makeStyles'])}
               key={`${name}-${variant}`}
               variant={variant}
               glyph={variants[variant]}
