@@ -24,12 +24,7 @@
 
 import React, { BaseSyntheticEvent, Component, SyntheticEvent } from 'react'
 
-import {
-  ApplyLocaleContext,
-  Locale,
-  TimeUtils,
-  DateTimeLuxon
-} from '@instructure/ui-i18n'
+import { ApplyLocaleContext, Locale, DateTime } from '@instructure/ui-i18n'
 import {
   getInteraction,
   passthroughProps,
@@ -41,6 +36,7 @@ import { Select } from '@instructure/ui-select'
 import { uid } from '@instructure/uid'
 import type { TimeSelectProps } from './props'
 import { allowedProps, propTypes } from './props'
+import { Moment } from 'moment-timezone'
 
 /**
 ---
@@ -73,7 +69,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   static defaultProps = {
     defaultToFirstOption: false,
     id: undefined,
-    format: 't', // see https://moment.github.io/luxon/#/formatting?id=table-of-tokens
+    format: 'LT', // see https://momentjs.com/docs/#/displaying/
     step: 30,
     isRequired: false,
     isInline: false,
@@ -159,7 +155,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     } else if (this.context && this.context.timezone) {
       return this.context.timezone
     }
-    return TimeUtils.browserTimeZone()
+    return DateTime.browserTimeZone()
   }
 
   componentDidUpdate(prevProps: TimeSelectProps) {
@@ -216,8 +212,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         return option
       }
       // value does not match an existing option
-      const date = TimeUtils.parse(initialValue, this.locale(), this.timezone())
-      return { label: format ? date.toFormat(format) : date.toISO() }
+      const date = DateTime.parse(initialValue, this.locale(), this.timezone())
+      return { label: format ? date.format(format) : date.toISOString() }
     }
     // otherwise return first option, if desired
     if (defaultToFirstOption) {
@@ -230,10 +226,10 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     return options.find((option: any) => option[field] === value)
   }
 
-  getFormattedId(date: DateTimeLuxon) {
+  getFormattedId(date: Moment) {
     // ISO8601 strings may contain a space. Remove any spaces before using the
     // date as the id.
-    const dateStr = date.toISO()
+    const dateStr = date.toISOString()
     return dateStr.replace(/\s/g, '')
   }
 
@@ -241,11 +237,11 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     let baseDate
     const baseValue = this.props.value || this.props.defaultValue
     if (baseValue) {
-      baseDate = TimeUtils.parse(baseValue, this.locale(), this.timezone())
+      baseDate = DateTime.parse(baseValue, this.locale(), this.timezone())
     } else {
-      baseDate = TimeUtils.now(this.locale(), this.timezone())
+      baseDate = DateTime.now(this.locale(), this.timezone())
     }
-    return baseDate.set({ second: 0, millisecond: 0 })
+    return baseDate.set({ second: 0, millisecond: 0 }).clone()
   }
 
   generateOptions() {
@@ -261,10 +257,10 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         // store time options
         options.push({
           id: this.getFormattedId(newDate), // iso no spaces
-          value: newDate.toISO(),
+          value: newDate.toISOString(),
           label: this.props.format
-            ? newDate.toFormat(this.props.format)
-            : newDate.toISO() // formatted string
+            ? newDate.format(this.props.format)
+            : newDate.toISOString()
         })
       }
     }
@@ -355,14 +351,14 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     let prevValue = ''
 
     if (this.props.defaultValue) {
-      const date = TimeUtils.parse(
+      const date = DateTime.parse(
         this.props.defaultValue,
         this.locale(),
         this.timezone()
       )
       prevValue = this.props.format
-        ? date.toFormat(this.props.format)
-        : date.toISO()
+        ? date.format(this.props.format)
+        : date.toISOString()
     }
 
     this.setState((_state: TimeSelectState) => ({

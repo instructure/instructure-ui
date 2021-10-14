@@ -107,7 +107,8 @@ const propTypes: PropValidators<PropKeys> = {
   /**
    * The format to use when displaying the possible and currently selected options.
    *
-   * See [Luxon formats](https://moment.github.io/luxon/#/formatting?id=table-of-tokens) for the list of available formats.
+   * See [moment](https://momentjs.com/docs/#/displaying/format/) for the list
+   * of available formats.
    */
   format: PropTypes.string,
   /**

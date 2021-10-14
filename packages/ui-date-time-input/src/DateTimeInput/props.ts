@@ -26,7 +26,8 @@ import React, { SyntheticEvent } from 'react'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'
-import { DateTimeLuxon, I18nPropTypes } from '@instructure/ui-i18n'
+import { I18nPropTypes } from '@instructure/ui-i18n'
+import type { Moment } from '@instructure/ui-i18n'
 import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types/src/controllable'
 import type { PropValidators } from '@instructure/shared-types'
@@ -58,7 +59,7 @@ type DateTimeInputProps = {
   /**
    * The format of the date shown in the `DateInput` when a date is selected.
    * Valid formats are compatible with
-   * [Luxon formats](https://moment.github.io/luxon/#/formatting?id=table-of-tokens),
+   * [Moment formats](https://momentjs.com/docs/#/displaying/format/),
    * including localized formats.
    *
    * If omitted, it will use 'DDD' which is a localized date with full month,
@@ -76,7 +77,7 @@ type DateTimeInputProps = {
   /**
    * The format of the time shown in the `TimeSelect` when a time is selected.
    * Valid formats are compatible with
-   * [Luxon formats](https://moment.github.io/luxon/#/formatting?id=table-of-tokens),
+   * [Moment formats](https://momentjs.com/docs/#/displaying/format/),
    * including localized formats.
    *
    * If omitted, defers to the underlying `TimeSelect`'s default.
@@ -85,7 +86,7 @@ type DateTimeInputProps = {
   /**
    * A standard language identifier.
    *
-   * See [Luxon](https://moment.github.io/luxon/#/intl?id=how-locales-work) for
+   * See [Moment.js](https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/) for
    * more details.
    *
    * This property can also be set via a context property and if both are set
@@ -127,7 +128,7 @@ type DateTimeInputProps = {
   /**
    * This format of the composite date-time when displayed in messages.
    * Valid formats are defined in the
-   * [Luxon docs](https://moment.github.io/luxon/#/formatting?id=table-of-tokens)
+   * [Moment docs](https://momentjs.com/docs/#/displaying/format/)
    **/
   messageFormat?: string
   /**
@@ -200,15 +201,15 @@ type DateTimeInputProps = {
 
 type DateTimeInputState = {
   // the time and date currently selected
-  iso?: DateTimeLuxon
+  iso?: Moment
   // set when the user types text into the DateInput
   dateInputTextChanged: boolean
   // The currently selected dateTime in the calendar. Will be final when
   // the calendar closes.
-  calendarSelectedDate?: DateTimeLuxon
+  calendarSelectedDate?: Moment
   // the date rendered by the opened calendar. Not selected just determines
   // which month/year to show
-  renderedDate: DateTimeLuxon
+  renderedDate: Moment
   // The value currently displayed in the dateTime component.
   // Just the time part is visible
   dateInputText: string

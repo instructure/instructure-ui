@@ -23,12 +23,8 @@
  */
 
 import React, { Component, SyntheticEvent } from 'react'
-import {
-  TimeUtils,
-  Locale,
-  DateTimeLuxon,
-  ApplyLocaleContext
-} from '@instructure/ui-i18n'
+import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
+import type { Moment } from '@instructure/ui-i18n'
 import { FormFieldGroup } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
 
@@ -54,14 +50,16 @@ category: components
 **/
 @testable()
 class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
+  // extra verbose localized date and time
+  private static readonly DEFAULT_MESSAGE_FORMAT = 'LLLL'
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     layout: 'inline',
     timeStep: 30,
-    messageFormat: 'ffff', // extra verbose localized date and time
+    messageFormat: DateTimeInput.DEFAULT_MESSAGE_FORMAT,
     isRequired: false,
-    dateFormat: 'DDD' // Localized date with full month, e.g. "August 6, 2014"
+    dateFormat: 'LL' // Localized date with full month, e.g. "August 6, 2014"
   } as const
 
   static contextType = ApplyLocaleContext
@@ -117,42 +115,43 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   ): DateTimeInputState {
     let errorMsg: FormMessage | undefined
     if (dateStr) {
-      let parsed = TimeUtils.parse(dateStr, this.locale(), this.timezone())
-      if (parsed.isValid) {
+      const parsed = DateTime.parse(dateStr, this.locale(), this.timezone())
+      if (parsed.isValid()) {
         if (doNotChangeTime && this.state.timeSelectValue) {
           // There is a selected time, adjust the parsed date to its value
-          const timeParsed = TimeUtils.parse(
+          const timeParsed = DateTime.parse(
             this.state.timeSelectValue,
             this.locale(),
             this.timezone()
           )
-          parsed = parsed.set({ hour: timeParsed.hour })
-          parsed = parsed.set({ minute: timeParsed.minute })
+          parsed.hour(timeParsed.hour()).minute(timeParsed.minute())
         }
         if (doNotChangeDate && this.state.iso) {
-          parsed = parsed.set({ day: this.state.iso.day })
-          parsed = parsed.set({ month: this.state.iso.month })
-          parsed = parsed.set({ year: this.state.iso.year })
+          parsed
+            .date(this.state.iso.date())
+            .month(this.state.iso.month())
+            .year(this.state.iso.year())
         }
         const newTimeSelectValue = this.state?.timeSelectValue
           ? this.state.timeSelectValue
           : this._timeInput
               ?.getBaseDate()
-              .set({ minute: parsed.minute, hour: parsed.hour })
-              .toISO()
+              .minute(parsed.minute())
+              .hour(parsed.hour())
+              .toISOString()
         return {
-          iso: parsed,
-          calendarSelectedDate: parsed,
+          iso: parsed.clone(),
+          calendarSelectedDate: parsed.clone(),
           dateInputTextChanged: false,
-          dateInputText: parsed.toFormat(this.dateFormat),
+          dateInputText: parsed.format(this.dateFormat),
           message: {
             type: 'success',
             text: this.props.messageFormat
-              ? parsed.toFormat(this.props.messageFormat)
-              : parsed.toFormat('ffff')
+              ? parsed.format(this.props.messageFormat)
+              : parsed.format(DateTimeInput.DEFAULT_MESSAGE_FORMAT)
           },
           timeSelectValue: newTimeSelectValue,
-          renderedDate: parsed
+          renderedDate: parsed.clone()
         }
       }
       if (dateStr.length > 0 || this.props.isRequired) {
@@ -168,7 +167,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       calendarSelectedDate: undefined,
       dateInputText: dateStr ? dateStr : '',
       message: errorMsg,
-      renderedDate: TimeUtils.now(this.locale(), this.timezone()),
+      renderedDate: DateTime.now(this.locale(), this.timezone()),
       dateInputTextChanged: false
     }
   }
@@ -188,11 +187,11 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     } else if (this.context && this.context.timezone) {
       return this.context.timezone
     }
-    return TimeUtils.browserTimeZone()
+    return DateTime.browserTimeZone()
   }
 
   get dateFormat() {
-    return this.props.dateFormat ? this.props.dateFormat : 'DDD'
+    return this.props.dateFormat ? this.props.dateFormat : 'LL'
   }
 
   // Called when the user enters text into dateInput
@@ -203,38 +202,19 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       dateInputTextChanged: true,
       calendarSelectedDate: dateParsed ? dateParsed : undefined,
       renderedDate: dateParsed
-        ? dateParsed
-        : TimeUtils.now(this.locale(), this.timezone())
+        ? dateParsed.clone()
+        : DateTime.now(this.locale(), this.timezone())
     })
   }
 
   tryParseDate(val: string) {
-    const formats = [
-      this.dateFormat,
-      'D',
-      'DD',
-      'DDD',
-      'd',
-      'kkkk',
-      'kk',
-      'MMM',
-      'MMMM'
-    ]
-    for (const format of formats) {
-      const parsed = DateTimeLuxon.fromFormat(val, format, {
-        locale: this.locale(),
-        zone: this.timezone()
-      })
-      if (parsed.isValid) {
-        return parsed
-      }
-    }
-    return null
+    const parsed = DateTime.parse(val, this.locale(), this.timezone())
+    return parsed.isValid() ? parsed : null
   }
 
   // date is returned es a ISO string, like 2021-09-14T22:00:00.000Z
   handleDayClick = (event: SyntheticEvent, { date }: { date: string }) => {
-    const dateParsed = TimeUtils.parse(date, this.locale(), this.timezone())
+    const dateParsed = DateTime.parse(date, this.locale(), this.timezone())
     this.updateStateBasedOnDateInput(dateParsed, event)
   }
 
@@ -250,7 +230,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       // user clicked outside or tabbed away or pressed esc, reset text
       this.setState({
         dateInputText: this.state.iso
-          ? this.state.iso.toFormat(this.dateFormat)
+          ? this.state.iso.format(this.dateFormat)
           : ''
       })
     }
@@ -258,7 +238,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   }
 
   updateStateBasedOnDateInput(
-    dateParsed: DateTimeLuxon | null,
+    dateParsed: Moment | null,
     event: SyntheticEvent
   ) {
     let newState
@@ -268,21 +248,25 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       (!this.state.dateInputText || this.state.dateInputText == '')
     ) {
       // There is already a selected time, but no date. Adjust the time too
-      const timeParsed = TimeUtils.parse(
+      const timeParsed = DateTime.parse(
         this.state.timeSelectValue,
         this.locale(),
         this.timezone()
       )
       const dateParsedAdjusted = dateParsed.set({
-        hour: timeParsed.hour,
-        minute: timeParsed.minute
+        hour: timeParsed.hour(),
+        minute: timeParsed.minute()
       })
-      newState = this.recalculateState(dateParsedAdjusted.toISO(), false, false)
+      newState = this.recalculateState(
+        dateParsedAdjusted.toISOString(),
+        false,
+        false
+      )
     } else if (!dateParsed) {
       // if the text in the dateInput is not readable display error
       newState = this.recalculateState(this.state.dateInputText, false, true)
     } else {
-      newState = this.recalculateState(dateParsed?.toISO(), false, true)
+      newState = this.recalculateState(dateParsed?.toISOString(), false, true)
     }
     this.changeStateIfNeeded(newState, event)
   }
@@ -299,6 +283,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       newValue = option.inputText
     }
     const newState = this.recalculateState(newValue, true, false)
+
     this.changeStateIfNeeded(newState, event)
     this.setState({ timeSelectValue: option.value })
   }
@@ -311,11 +296,11 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     if (
       !this.state.iso ||
       !newState.iso ||
-      !this.state.iso.equals(newState.iso)
+      !this.state.iso.isSame(newState.iso)
     ) {
       this.setState(newState)
       if (this.props.onChange) {
-        this.props.onChange(e, newState.iso?.toISO())
+        this.props.onChange(e, newState.iso?.toISOString())
       }
     }
   }
@@ -342,46 +327,46 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   handleSelectNextDay = (_event: SyntheticEvent) => {
     let toAlter
     if (this.state.calendarSelectedDate) {
-      toAlter = this.state.calendarSelectedDate
+      toAlter = this.state.calendarSelectedDate.clone()
     } else if (this.state.iso) {
-      toAlter = this.state.iso
+      toAlter = this.state.iso.clone()
     } else {
-      toAlter = TimeUtils.now(this.locale(), this.timezone())
+      toAlter = DateTime.now(this.locale(), this.timezone())
     }
-    toAlter = toAlter.plus({ days: 1 })
+    toAlter.add({ days: 1 })
     this.setState({
       calendarSelectedDate: toAlter,
-      renderedDate: toAlter,
-      dateInputText: toAlter.toFormat(this.dateFormat)
+      renderedDate: toAlter.clone(),
+      dateInputText: toAlter.format(this.dateFormat)
     })
   }
 
   handleSelectPrevDay = (_event: SyntheticEvent) => {
     let toAlter
     if (this.state.calendarSelectedDate) {
-      toAlter = this.state.calendarSelectedDate
+      toAlter = this.state.calendarSelectedDate.clone()
     } else if (this.state.iso) {
-      toAlter = this.state.iso
+      toAlter = this.state.iso.clone()
     } else {
-      toAlter = TimeUtils.now(this.locale(), this.timezone())
+      toAlter = DateTime.now(this.locale(), this.timezone())
     }
-    toAlter = toAlter.minus({ days: 1 })
+    toAlter.subtract({ days: 1 })
     this.setState({
       calendarSelectedDate: toAlter,
-      renderedDate: toAlter,
-      dateInputText: toAlter.toFormat(this.dateFormat)
+      renderedDate: toAlter.clone(),
+      dateInputText: toAlter.format(this.dateFormat)
     })
   }
 
   handleRenderNextMonth = (_event: SyntheticEvent) => {
     this.setState({
-      renderedDate: this.state.renderedDate.plus({ months: 1 })
+      renderedDate: this.state.renderedDate.clone().add({ months: 1 })
     })
   }
 
   handleRenderPrevMonth = (_event: SyntheticEvent) => {
     this.setState({
-      renderedDate: this.state.renderedDate.minus({ months: 1 })
+      renderedDate: this.state.renderedDate.clone().subtract({ months: 1 })
     })
   }
 
@@ -394,35 +379,32 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     // Sets it to the first local day of the week counting back from the start of the month.
     // Note that first day depends on the locale, e.g. it's Sunday in the US and
     // Monday in most of the EU.
-    let currDate = TimeUtils.getFirstDayOfWeek(
-      renderedDate.startOf('month'),
-      this.locale()
-    )
-    const arr: DateTimeLuxon[] = []
+    const currDate = DateTime.getFirstDayOfWeek(renderedDate.startOf('month'))
+    const arr: Moment[] = []
     for (let i = 0; i < Calendar.DAY_COUNT; i++) {
-      arr.push(currDate)
-      currDate = currDate.plus({ days: 1 })
+      arr.push(currDate.clone())
+      currDate.add({ days: 1 })
     }
     return arr.map((date) => {
-      const dateStr = date.toISO()
+      const dateStr = date.toISOString()
       return (
         <DateInput.Day
           key={dateStr}
           date={dateStr}
           isSelected={
             this.state.calendarSelectedDate
-              ? date.hasSame(this.state.calendarSelectedDate, 'day')
+              ? date.isSame(this.state.calendarSelectedDate, 'day')
               : false
           }
-          isToday={date.hasSame(
-            TimeUtils.now(this.locale(), this.timezone()),
+          isToday={date.isSame(
+            DateTime.now(this.locale(), this.timezone()),
             'day'
           )}
-          isOutsideMonth={!date.hasSame(renderedDate, 'month')}
-          label={date.toFormat('dd')}
+          isOutsideMonth={!date.isSame(renderedDate, 'month')}
+          label={date.format('DD')} // day of the month, padded to 2
           onClick={this.handleDayClick}
         >
-          {date.toFormat('dd')}
+          {date.format('DD')}
         </DateInput.Day>
       )
     })
@@ -434,11 +416,11 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       // this is an expensive function, only execute if the calendar is open
       return []
     }
-    const shortDayNames = TimeUtils.getLocalDayNamesOfTheWeek(
+    const shortDayNames = DateTime.getLocalDayNamesOfTheWeek(
       this.locale(),
       'short'
     )
-    const longDayNames = TimeUtils.getLocalDayNamesOfTheWeek(
+    const longDayNames = DateTime.getLocalDayNamesOfTheWeek(
       this.locale(),
       'long'
     )
@@ -548,8 +530,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           interaction={interaction}
           renderNavigationLabel={
             <span>
-              <div>{this.state.renderedDate.toFormat('MMMM')}</div>
-              <div>{this.state.renderedDate.toFormat('y')}</div>
+              <div>{this.state.renderedDate.format('MMMM')}</div>
+              <div>{this.state.renderedDate.format('y')}</div>
             </span>
           }
         >
