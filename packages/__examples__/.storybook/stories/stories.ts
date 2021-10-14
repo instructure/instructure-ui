@@ -50,6 +50,7 @@ const componentsContext = require.context(
 )
 
 let numStories = 0
+console.time('storybook-build-examples')
 // eslint-disable-next-line no-console
 console.log(
   `Creating stories for ${Object.keys(propJSONData).length} components..`
@@ -115,3 +116,4 @@ storiesOf('Tooltip positioning', module).add('Tooltip positions', () =>
 numStories++
 // eslint-disable-next-line no-console
 console.log(`Created ${numStories} stories!`)
+console.timeEnd('storybook-build-examples')

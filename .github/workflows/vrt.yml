@@ -23,7 +23,6 @@ jobs:
       - name: Build Storybook examples
         run: yarn build-storybook
       - name: Publish to Chromatic
-        continue-on-error: true
         uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
