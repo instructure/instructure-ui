@@ -67,8 +67,12 @@ class Link extends Component<LinkProps> {
 
   state = { hasFocus: false }
 
-  _link: Element | null = null
-  ref: Element | null = null
+  get _link() {
+    console.warn('_link property is deprecated, please use ref instead')
+
+    return this.ref
+  }
+  ref: HTMLElement | null = null
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -92,8 +96,6 @@ class Link extends Component<LinkProps> {
   handleElementRef = (el) => {
     const { elementRef } = this.props
 
-    // TODO: deprecate _link? ref should be enough
-    this._link = el
     this.ref = el
 
     if (typeof elementRef === 'function') {
@@ -171,11 +173,11 @@ class Link extends Component<LinkProps> {
   }
 
   get focused() {
-    return isActiveElement(this._link)
+    return isActiveElement(this.ref)
   }
 
   get focusable() {
-    return findFocusable(this._link)
+    return findFocusable(this.ref)
   }
 
   get hasVisibleChildren() {
@@ -183,8 +185,7 @@ class Link extends Component<LinkProps> {
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_link' does not exist on type 'Link'.
-    this._link && this._link.focus()
+    this.ref && this.ref.focus()
   }
 
   renderIcon() {
@@ -212,7 +213,6 @@ class Link extends Component<LinkProps> {
       isWithinText,
       ...props
     } = this.props
-
     const { interaction } = this
 
     const isDisabled = interaction === 'disabled'

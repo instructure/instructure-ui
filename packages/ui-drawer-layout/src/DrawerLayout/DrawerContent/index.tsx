@@ -71,14 +71,18 @@ class DrawerContent extends Component<
   }
 
   ref: Element | null = null
-  _content: Element | null = null
+  get _content() {
+    console.warn('_content property is deprecated, please use ref instead')
+
+    return this.ref
+  }
   _resizeListener = null
 
   _debounced = null
   _timeouts = []
 
   componentDidMount() {
-    const rect = getBoundingClientRect(this._content)
+    const rect = getBoundingClientRect(this.ref)
     const origSize = {
       width: rect.width
     }
@@ -105,7 +109,7 @@ class DrawerContent extends Component<
     })
 
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    this._resizeListener.observe(this._content)
+    this._resizeListener.observe(this.ref)
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles({ shouldTransition: false })
   }
@@ -134,8 +138,6 @@ class DrawerContent extends Component<
 
   handleContentRef = (node: Element | null) => {
     this.ref = node
-    // TODO: deprecate _content? ref should be enough
-    this._content = node
     this.props.contentRef?.(node)
   }
 

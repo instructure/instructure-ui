@@ -95,7 +95,11 @@ class DrawerTray extends Component<
 
   _DOMNode: PortalNode = null
   ref: Element | null = null
-  _content: Element | null = null
+  get _content() {
+    console.warn('_content property is deprecated, please use ref instead')
+
+    return this.ref
+  }
 
   componentDidMount() {
     ;(this.props as any).makeStyles(this.makeStyleProps())
@@ -135,8 +139,6 @@ class DrawerTray extends Component<
 
   handleContentRef = (node: Element | null) => {
     this.ref = node
-    // TODO: deprecate _content? ref should be enough
-    this._content = node
     this.props.contentRef?.(node)
   }
 
