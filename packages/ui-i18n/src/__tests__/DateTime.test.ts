@@ -24,7 +24,15 @@
 import { expect } from '@instructure/ui-test-utils'
 import { DateTime } from '../DateTime'
 
-const { now, isValid, browserTimeZone, parse, toLocaleString } = DateTime
+const {
+  now,
+  isValid,
+  browserTimeZone,
+  parse,
+  toLocaleString,
+  getFirstDayOfWeek,
+  getLocalDayNamesOfTheWeek
+} = DateTime
 
 describe('DateTime', () => {
   const timezone = 'America/Halifax' // -3
@@ -147,5 +155,69 @@ describe('DateTime', () => {
     // iso8601 in given timezone
     result = toLocaleString('2018-04-15T13:00Z', 'fr', 'America/Halifax') // -3
     expect(result).to.equal('2018-04-15T10:00:00.000-03:00')
+  })
+
+  it('calculates the first day of the week', () => {
+    // normal case
+    const d11 = DateTime.parse('2021-09-15T20:30:00Z', 'hu-hu', 'UTC')
+    expect(getFirstDayOfWeek(d11).date()).to.equal(13)
+    const d12 = DateTime.parse('2021-09-15T20:30:00Z', 'en-us', 'UTC')
+    expect(getFirstDayOfWeek(d12).date()).to.equal(12)
+    // date wraps month/year
+    const d21 = DateTime.parse('2022-01-01T20:30:00Z', 'hu-hu', 'UTC')
+    expect(getFirstDayOfWeek(d21).date()).to.equal(27)
+    const d22 = DateTime.parse('2022-01-01T20:30:00Z', 'en-us', 'UTC')
+    expect(getFirstDayOfWeek(d22).date()).to.equal(26)
+
+    // Monday
+    const d31 = DateTime.parse('2021-12-05T20:30:00Z', 'hu-hu', 'UTC')
+    expect(getFirstDayOfWeek(d31).date()).to.equal(29)
+    // Sunday
+    const d32 = DateTime.parse('2021-12-05T20:30:00Z', 'en-us', 'UTC')
+    expect(getFirstDayOfWeek(d32).date()).to.equal(5)
+    // Sunday (but in other systems Friday)
+    const d33 = DateTime.parse('2021-12-05T20:30:00Z', 'bn-bd', 'UTC')
+    expect(getFirstDayOfWeek(d33).date()).to.equal(5)
+  })
+
+  it('calculates the local day names of the week', () => {
+    // short names
+    expect(getLocalDayNamesOfTheWeek('hu-hu', 'short')).to.eql([
+      'h',
+      'k',
+      'sze',
+      'cs',
+      'p',
+      'szo',
+      'v'
+    ])
+    expect(getLocalDayNamesOfTheWeek('en-us', 'short')).to.eql([
+      'Su',
+      'Mo',
+      'Tu',
+      'We',
+      'Th',
+      'Fr',
+      'Sa'
+    ])
+    // long
+    expect(getLocalDayNamesOfTheWeek('en-us', 'long')).to.eql([
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ])
+    expect(getLocalDayNamesOfTheWeek('es-mx', 'long')).to.eql([
+      'domingo',
+      'lunes',
+      'martes',
+      'miércoles',
+      'jueves',
+      'viernes',
+      'sábado'
+    ])
   })
 })

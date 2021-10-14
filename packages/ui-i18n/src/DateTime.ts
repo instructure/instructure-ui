@@ -22,14 +22,15 @@
  * SOFTWARE.
  */
 
-import moment from 'moment-timezone'
+import moment, { Moment } from 'moment-timezone'
 
 /**
  * ---
  * category: utilities/i18n
  * ---
  * @deprecated
- * ##### DEPRECATION WARNING: Will be removed in v9 since it provides no further benefit over using dayjs
+ * #### DEPRECATION WARNING: Will be removed in v9, which wil include a
+ * time library agnostic API.
  * A wrapper for [moment](https://momentjs.com/) utils.
  * @module DateTime
  */
@@ -82,6 +83,34 @@ function browserTimeZone() {
 }
 
 /**
+ * Returns the days of the week in the given locale,
+ * for example ["Monday", "Tuesday",..]. It always begins with Monday.
+ * @param locale A locale accepted by the browser, e.g. America/New_York
+ * @param format If set to 'short' it will be maximum 3 letters long,
+ *               if set to 'long' it will be the full word.
+ */
+function getLocalDayNamesOfTheWeek(locale: string, format: 'short' | 'long') {
+  const ret: string[] = []
+  const toFormat = format === 'short' ? 'dd' : 'dddd'
+  let currentDay = getFirstDayOfWeek(now(locale, browserTimeZone()))
+  for (let i = 0; i < 7; i++) {
+    ret.push(currentDay.format(toFormat))
+    currentDay = currentDay.add(1, 'day') // TODO this is mutable
+  }
+  return ret
+}
+
+/**
+ * Returns the first day of the week in the given locale.
+ * The locale decides what is the first day, e.g. Sunday in the US, Monday in
+ * the EU.
+ * @param date A Moment Datetime object
+ */
+function getFirstDayOfWeek(date: Moment) {
+  return date.clone().weekday(0)
+}
+
+/**
  * Return a localized date + time with timezone as a ISO 8601 string
  * @param {String} dateString
  * @param {String} locale
@@ -110,8 +139,11 @@ const DateTime = {
   parse,
   browserTimeZone,
   isValid,
-  toLocaleString
+  toLocaleString,
+  getFirstDayOfWeek,
+  getLocalDayNamesOfTheWeek
 }
 
 export default DateTime
 export { DateTime }
+export type { Moment }

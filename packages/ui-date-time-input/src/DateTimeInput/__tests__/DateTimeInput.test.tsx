@@ -28,13 +28,13 @@ import { expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
 import { DateTimeInput } from '../index'
 
 import { DateTimeInputLocator } from '../DateTimeInputLocator'
-import { ApplyLocale, DateTimeLuxon, TimeUtils } from '@instructure/ui-i18n'
+import { ApplyLocale, DateTime } from '@instructure/ui-i18n'
 
 describe('<DateTimeInput />', async () => {
   it('should use the default value', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const dateTime = TimeUtils.parse('2017-05-01T17:30Z', locale, timezone)
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
 
     await mount(
       <DateTimeInput
@@ -46,7 +46,7 @@ describe('<DateTimeInput />', async () => {
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
-        defaultValue={dateTime.toISO()}
+        defaultValue={dateTime.toISOString()}
       />
     )
 
@@ -57,11 +57,9 @@ describe('<DateTimeInput />', async () => {
     const dateInput = await dateLocator.findInput()
     const timeInput = await timeLocator.findInput()
 
-    expect(dateInput).to.have.value(
-      dateTime.toLocaleString(DateTimeLuxon.DATE_FULL)
-    )
+    expect(dateInput).to.have.value(dateTime.format('LL'))
     expect(timeInput).to.have.value(
-      dateTime.toLocaleString(DateTimeLuxon.TIME_SIMPLE)
+      dateTime.format('LT') // e.g. 18:30
     )
   })
 
@@ -69,7 +67,7 @@ describe('<DateTimeInput />', async () => {
     const onChange = stub()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const dateTime = TimeUtils.parse('2017-05-01T23:30Z', locale, timezone)
+    const dateTime = DateTime.parse('2017-05-01T23:30Z', locale, timezone)
 
     await mount(
       <DateTimeInput
@@ -81,7 +79,7 @@ describe('<DateTimeInput />', async () => {
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
-        value={dateTime.toISO()}
+        value={dateTime.toISOString()}
         onChange={onChange}
       />
     )
@@ -93,19 +91,15 @@ describe('<DateTimeInput />', async () => {
     const dateInput = await dateLocator.findInput()
     const timeInput = await timeLocator.findInput()
 
-    expect(dateInput).to.have.value(
-      dateTime.toLocaleString(DateTimeLuxon.DATE_FULL)
-    )
-    expect(timeInput).to.have.value(
-      dateTime.toLocaleString(DateTimeLuxon.TIME_SIMPLE)
-    )
+    expect(dateInput).to.have.value(dateTime.format('LL'))
+    expect(timeInput).to.have.value(dateTime.format('LT'))
   })
 
   it('should prefer value to defaultValue', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const value = TimeUtils.parse('2017-05-01T17:30Z', locale, timezone)
-    const defaultValue = TimeUtils.parse('2016-04-01T17:00Z', locale, timezone)
+    const value = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+    const defaultValue = DateTime.parse('2016-04-01T17:00Z', locale, timezone)
     const onChange = stub()
 
     await mount(
@@ -118,8 +112,8 @@ describe('<DateTimeInput />', async () => {
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
-        value={value.toISO()}
-        defaultValue={defaultValue.toISO()}
+        value={value.toISOString()}
+        defaultValue={defaultValue.toISOString()}
         onChange={onChange}
       />
     )
@@ -131,19 +125,15 @@ describe('<DateTimeInput />', async () => {
     const dateInput = await dateLocator.findInput()
     const timeInput = await timeLocator.findInput()
 
-    expect(dateInput).to.have.value(
-      value.toLocaleString(DateTimeLuxon.DATE_FULL)
-    )
-    expect(timeInput).to.have.value(
-      value.toLocaleString(DateTimeLuxon.TIME_SIMPLE)
-    )
+    expect(dateInput).to.have.value(value.format('LL'))
+    expect(timeInput).to.have.value(value.format('LT'))
   })
 
   it('should set time to local midnight when only date is set', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const dateObj = TimeUtils.parse('2017-04-01T18:30Z', locale, timezone)
-    const date = dateObj.toISO().split('T')[0]
+    const dateObj = DateTime.parse('2017-04-01T18:30Z', locale, timezone)
+    const date = dateObj.toISOString().split('T')[0]
     await mount(
       <DateTimeInput
         description="date time"
@@ -165,9 +155,7 @@ describe('<DateTimeInput />', async () => {
     const dateInput = await dateLocator.findInput()
     const timeInput = await timeLocator.findInput()
 
-    expect(dateInput).to.have.value(
-      dateObj.toLocaleString(DateTimeLuxon.DATE_FULL)
-    )
+    expect(dateInput).to.have.value(dateObj.format('LL'))
     expect(timeInput).to.have.value('12:00 AM')
   })
 
@@ -277,7 +265,7 @@ describe('<DateTimeInput />', async () => {
 
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const defaultValue = TimeUtils.parse('2017-05-01T17:00', locale, timezone)
+    const defaultValue = DateTime.parse('2017-05-01T17:00', locale, timezone)
 
     await mount(
       <DateTimeInput
@@ -290,13 +278,12 @@ describe('<DateTimeInput />', async () => {
         locale={locale}
         timezone={timezone}
         onChange={onChange}
-        defaultValue={defaultValue.toISO()}
+        defaultValue={defaultValue.toISOString()}
       />
     )
 
     const dateTimeInput = await DateTimeInputLocator.find()
     const timeLocator = await dateTimeInput.findTimeInput()
-
     const timeInput = await timeLocator.findInput()
 
     await timeInput.change({ target: { value: '3:00 AM' } })
@@ -305,7 +292,7 @@ describe('<DateTimeInput />', async () => {
     await wait(() => {
       // get expected 3AM string in UTC, which is how it comes out of TimeInput
       const newValue = new Date(
-        TimeUtils.parse('2017-05-01T03:00', locale, timezone).toISO()
+        DateTime.parse('2017-05-01T03:00', locale, timezone).toISOString()
       ).valueOf()
 
       expect(onChange).to.have.been.called()
@@ -338,14 +325,14 @@ describe('<DateTimeInput />', async () => {
     await timeInput.keyDown('enter')
 
     expect(
-      await dateTimeInput.find(':contains(January 18, 2018, 5:00 PM)')
+      await dateTimeInput.find(':contains(January 18, 2018 5:00 PM)')
     ).to.exist()
   })
 
   it('should show the formatted date-time message', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const defaultValue = TimeUtils.parse('2017-05-01T17:30Z', locale, timezone)
+    const defaultValue = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
     await mount(
       <DateTimeInput
         description="date time"
@@ -356,19 +343,19 @@ describe('<DateTimeInput />', async () => {
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
-        defaultValue={defaultValue.toISO()}
+        defaultValue={defaultValue.toISOString()}
       />
     )
     const dateTimeInput = await DateTimeInputLocator.find()
     expect(
-      await dateTimeInput.find(':contains(May 1, 2017, 1:30 PM)')
+      await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')
     ).to.exist()
   })
 
   it('should show the formatted date-time message in the proper locale', async () => {
     const timezone = 'US/Eastern'
     const locale = 'fr'
-    const defaultValue = TimeUtils.parse('2017-05-01T17:30Z', locale, timezone)
+    const defaultValue = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
 
     await mount(
       <DateTimeInput
@@ -380,12 +367,12 @@ describe('<DateTimeInput />', async () => {
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
-        defaultValue={defaultValue.toISO()}
+        defaultValue={defaultValue.toISOString()}
       />
     )
 
     const dateTimeInput = await DateTimeInputLocator.find()
-    expect(await dateTimeInput.find(':contains(1 mai 2017, 13:30)')).to.exist()
+    expect(await dateTimeInput.find(':contains(1 mai 2017 13:30)')).to.exist()
   })
 
   it('should provide the html elements for date and time input', async () => {
@@ -427,7 +414,7 @@ describe('<DateTimeInput />', async () => {
 
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const dateTime = TimeUtils.parse('2017-05-01T17:30Z', locale, timezone)
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
 
     const subject = await mount(
       <DateTimeInput
@@ -439,20 +426,20 @@ describe('<DateTimeInput />', async () => {
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
-        value={dateTime.toISO()}
+        value={dateTime.toISOString()}
         onChange={onChange}
       />
     )
 
     const dateTimeInput = await DateTimeInputLocator.find()
     expect(
-      await dateTimeInput.find(':contains(May 1, 2017, 1:30 PM)')
+      await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')
     ).to.exist()
 
     await subject.setProps({ value: '2018-03-29T16:30Z' })
 
     expect(
-      await dateTimeInput.find(':contains(March 29, 2018, 12:30 PM)')
+      await dateTimeInput.find(':contains(March 29, 2018 12:30 PM)')
     ).to.exist()
   })
 
@@ -460,7 +447,7 @@ describe('<DateTimeInput />', async () => {
     const onChange = stub()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const dateTime = TimeUtils.parse('2017-05-01T17:30Z', locale, timezone)
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
 
     const subject = await mount(
       <DateTimeInput
@@ -473,27 +460,27 @@ describe('<DateTimeInput />', async () => {
         locale={locale}
         timezone={timezone}
         onChange={onChange}
-        value={dateTime.toISO()}
+        value={dateTime.toISOString()}
       />
     )
 
     const dateTimeInput = await DateTimeInputLocator.find()
     expect(
-      await dateTimeInput.find(':contains(May 1, 2017, 1:30 PM)')
+      await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')
     ).to.exist()
 
     await subject.setProps({
       locale: 'fr'
     })
 
-    expect(await dateTimeInput.find(':contains(1 mai 2017, 13:30)')).to.exist()
+    expect(await dateTimeInput.find(':contains(1 mai 2017 13:30)')).to.exist()
   })
 
   it('should update message when timezone changed', async () => {
     const onChange = stub()
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const dateTime = TimeUtils.parse('2017-05-01T17:30Z', locale, timezone)
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
 
     const subject = await mount(
       <DateTimeInput
@@ -505,7 +492,7 @@ describe('<DateTimeInput />', async () => {
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
-        value={dateTime.toISO()}
+        value={dateTime.toISOString()}
         onChange={onChange}
       />
     )
@@ -513,7 +500,7 @@ describe('<DateTimeInput />', async () => {
     const dateTimeInput = await DateTimeInputLocator.find()
 
     expect(
-      await dateTimeInput.find(':contains(May 1, 2017, 1:30 PM)')
+      await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')
     ).to.exist()
 
     await subject.setProps({
@@ -521,7 +508,7 @@ describe('<DateTimeInput />', async () => {
     })
 
     expect(
-      await dateTimeInput.find(':contains(May 1, 2017, 7:30 PM)')
+      await dateTimeInput.find(':contains(May 1, 2017 7:30 PM)')
     ).to.exist()
   })
 
@@ -560,7 +547,7 @@ describe('<DateTimeInput />', async () => {
   it('should update error message when value is invalid', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const dateTime = TimeUtils.parse('2017-05-01T17:30Z', locale, timezone)
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
 
     const subject = await mount(
       <DateTimeInput
@@ -572,14 +559,14 @@ describe('<DateTimeInput />', async () => {
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
-        value={dateTime.toISO()}
+        value={dateTime.toISOString()}
       />
     )
 
     const dateTimeInput = await DateTimeInputLocator.find()
 
     expect(
-      await dateTimeInput.find(':contains(May 1, 2017, 1:30 PM)')
+      await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')
     ).to.exist()
     await subject.setProps({ value: 'A very invalid date' })
     expect(await dateTimeInput.find(':contains(whoops)')).to.exist()
@@ -588,7 +575,7 @@ describe('<DateTimeInput />', async () => {
   it('should show supplied message', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
-    const dateTime = TimeUtils.parse('2017-05-01T17:30Z', locale, timezone)
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
     const subject = await mount(
       <DateTimeInput
         description="date time"
@@ -599,14 +586,14 @@ describe('<DateTimeInput />', async () => {
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
-        value={dateTime.toISO()}
+        value={dateTime.toISOString()}
       />
     )
 
     const dateTimeInput = await DateTimeInputLocator.find()
 
     expect(
-      await dateTimeInput.find(':contains(May 1, 2017, 1:30 PM)')
+      await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')
     ).to.exist()
 
     await subject.setProps({
@@ -614,14 +601,14 @@ describe('<DateTimeInput />', async () => {
     })
 
     expect(
-      await dateTimeInput.find(':contains(May 1, 2017, 1:30 PM)')
+      await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')
     ).to.exist()
     expect(await dateTimeInput.find(':contains(hello world)')).to.exist()
   })
 
   it('should read locale and timezone from context', async () => {
     const onChange = stub()
-    const dateTime = TimeUtils.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
     await mount(
       // Africa/Nairobi is GMT +3
       <ApplyLocale locale="fr" timezone="Africa/Nairobi">
@@ -632,22 +619,20 @@ describe('<DateTimeInput />', async () => {
           nextMonthLabel="Next month"
           timeLabel="time"
           invalidDateTimeMessage="whoops"
-          value={dateTime.toISO()}
+          value={dateTime.toISOString()}
           onChange={onChange}
         />
       </ApplyLocale>
     )
     const dateTimeInput = await DateTimeInputLocator.find()
     expect(
-      await dateTimeInput.find(
-        ':contains(lundi 1 mai 2017, 20:30 heure normale d’Afrique de l’Est)'
-      )
+      await dateTimeInput.find(':contains(lundi 1 mai 2017 20:30)')
     ).to.exist()
   })
 
   it('should format date according to dateFormat', async () => {
     const onChange = stub()
-    const dateTime = TimeUtils.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
     const subject = await mount(
       <DateTimeInput
         description="date time"
@@ -656,8 +641,8 @@ describe('<DateTimeInput />', async () => {
         nextMonthLabel="Next month"
         timeLabel="time"
         invalidDateTimeMessage="whoops"
-        dateFormat="D" // should look like 9/4/2017
-        value={dateTime.toISO()}
+        dateFormat="l" // localized numeric date like 9/4/2017
+        value={dateTime.toISOString()}
         onChange={onChange}
       />
     )
@@ -668,14 +653,14 @@ describe('<DateTimeInput />', async () => {
     expect(dateInput).to.have.value('5/1/2017')
 
     await subject.setProps({
-      dateFormat: 'yyyy LLLL'
+      dateFormat: 'yyyy MMMM'
     })
     expect(dateInput).to.have.value('2017 May')
   })
 
   it('should format bottom message according to messageFormat', async () => {
     const onChange = stub()
-    const dateTime = TimeUtils.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
     const subject = await mount(
       <DateTimeInput
         description="date time"
@@ -684,22 +669,19 @@ describe('<DateTimeInput />', async () => {
         nextMonthLabel="Next month"
         timeLabel="time"
         invalidDateTimeMessage="whoops"
-        value={dateTime.toISO()}
+        value={dateTime.toISOString()}
         onChange={onChange}
         locale="en-US"
         timezone="US/Eastern"
       />
     )
     const dateTimeInput = await DateTimeInputLocator.find()
-
     expect(
-      await dateTimeInput.find(
-        ':contains(Monday, May 1, 2017, 1:30 PM Eastern Daylight Time)'
-      )
+      await dateTimeInput.find(':contains(Monday, May 1, 2017 1:30 PM)')
     ).to.exist()
 
     await subject.setProps({
-      messageFormat: 'f'
+      messageFormat: 'l, LT'
     })
     expect(await dateTimeInput.find(':contains(5/1/2017, 1:30 PM)')).to.exist()
   })
