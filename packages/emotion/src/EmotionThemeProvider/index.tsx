@@ -24,10 +24,14 @@
 
 import React from 'react'
 import { merge, cloneDeep } from 'lodash'
-
 import { ThemeProvider } from '@emotion/react'
 
-import type { BaseTheme } from '@instructure/shared-types'
+import { canvas } from '@instructure/ui-themes'
+
+import type {
+  BaseTheme,
+  BaseThemeVariableKeys
+} from '@instructure/shared-types'
 import type {
   Overrides,
   ThemeOrOverride,
@@ -35,8 +39,21 @@ import type {
 } from '../EmotionTypes'
 
 type ThemeProviderProps = {
-  theme: ThemeOrOverride
+  theme?: ThemeOrOverride
 }
+
+const baseThemeProps: BaseThemeVariableKeys = [
+  'borders',
+  'breakpoints',
+  'colors',
+  'forms',
+  'media',
+  'shadows',
+  'spacing',
+  'stacking',
+  'transitions',
+  'typography'
+]
 
 /**
  * ---
@@ -77,20 +94,22 @@ type ThemeProviderProps = {
  * </EmotionThemeProvider>
  * ```
  *
+ * @param {object} children
  * @param {object} theme - A full theme or an override object
  * @module EmotionThemeProvider
  */
 function EmotionThemeProvider({
   children,
-  theme
+  theme = {}
 }: React.PropsWithChildren<ThemeProviderProps>) {
   return <ThemeProvider theme={getTheme(theme)}>{children}</ThemeProvider>
 }
+EmotionThemeProvider.defaultProps = { theme: {} }
 
 /**
  * Gives back the theme object for the the provider.
  *
- * If a full theme is given (has `key` prop), it just returns the theme.
+ * If a valid InstUI theme is given, it just returns the theme.
  *
  * If an override object is given, it returns the ancestor theme and
  * the overrides merged together.
@@ -102,12 +121,38 @@ function EmotionThemeProvider({
 const getTheme = (themeOrOverride: ThemeOrOverride) => (
   ancestorTheme = {} as BaseTheme
 ) => {
-  if (isBaseTheme(themeOrOverride)) {
-    return themeOrOverride
+  try {
+    // If a valid InstUI theme is given, it just returns the theme.
+    if (isBaseTheme(themeOrOverride)) {
+      return themeOrOverride
+    }
+  } catch {
+    // If the prop passed is not an Object, it will throw an error.
+    // We are using this fail-safe here for the non-TS users,
+    // because the whole page can break without a theme.
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(
+        'The `theme` property provided to EmotionThemeProvider is not a valid InstUI theme object.\ntheme: ',
+        themeOrOverride
+      )
+    }
+    // eslint-disable-next-line no-param-reassign
+    themeOrOverride = {}
   }
 
   // we need to clone the ancestor theme not to override it
-  const currentTheme = cloneDeep(ancestorTheme)
+  let currentTheme
+
+  if (Object.keys(ancestorTheme).length === 0) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(
+        'No theme provided for [EmotionThemeProvider], using default `canvas` theme.'
+      )
+    }
+    currentTheme = cloneDeep(canvas)
+  } else {
+    currentTheme = cloneDeep(ancestorTheme)
+  }
 
   const themeName = currentTheme.key
 
@@ -124,10 +169,19 @@ const getTheme = (themeOrOverride: ThemeOrOverride) => (
   )
 }
 
-// themeable themes have a 'key' property (= name of the theme),
-// so without it it's just an overrides objects
 const isBaseTheme = (theme: ThemeOrOverride): theme is BaseTheme => {
-  return 'key' in (theme as BaseTheme)
+  if (Array.isArray(theme) || typeof theme === 'function') {
+    throw new Error()
+  }
+
+  try {
+    return (
+      'key' in (theme as BaseTheme) &&
+      baseThemeProps.every((prop) => prop in theme)
+    )
+  } catch {
+    throw new Error()
+  }
 }
 
 export default EmotionThemeProvider

@@ -133,6 +133,19 @@ type BaseThemeVariables = {
   typography: Typography
 }
 
+type BaseThemeVariableKeys = [
+  'borders',
+  'breakpoints',
+  'colors',
+  'forms',
+  'media',
+  'shadows',
+  'spacing',
+  'stacking',
+  'transitions',
+  'typography'
+]
+
 type BaseTheme = {
   key: string
   description?: string
@@ -140,6 +153,7 @@ type BaseTheme = {
 
 export type {
   BaseTheme,
+  BaseThemeVariableKeys,
   BaseThemeVariables,
   Shadows,
   Border,
