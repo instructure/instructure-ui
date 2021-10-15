@@ -23,27 +23,26 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Text } from '@instructure/ui-text'
 import { TruncateText } from '@instructure/ui-truncate-text'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-
-class ColorName extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired
-  }
-
+import type { ColorNameProps, ColorNameState } from './props'
+import { propTypes, allowedProps } from './props'
+class ColorName extends Component<ColorNameProps, ColorNameState> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
-    name: undefined
+    name: undefined,
+    as: 'span'
   }
 
   state = {
     isTruncated: false
   }
 
-  handleUpdate = (isTruncated) => {
+  handleUpdate = (isTruncated: boolean) => {
     if (this.state.isTruncated !== isTruncated) {
       this.setState({ isTruncated })
     }
