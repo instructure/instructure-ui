@@ -43,4 +43,4 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['hex', 'name', 'minimal']
 export type { ColorCardProps }
-export { propTypes }
+export { propTypes, allowedProps }
