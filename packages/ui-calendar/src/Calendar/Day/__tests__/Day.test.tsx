@@ -182,12 +182,9 @@ describe('Day', async () => {
 
   it('should provide an elementRef', async () => {
     let element
-
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-    const elementRef = (el) => {
+    const elementRef = (el: Element | null) => {
       element = el
     }
-
     const subject = await mount(
       <Day
         date="2019-08-02"

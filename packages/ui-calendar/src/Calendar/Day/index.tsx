@@ -23,9 +23,10 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, MouseEvent, KeyboardEvent } from 'react'
 
 import { View } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import {
   omitProps,
@@ -33,7 +34,7 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 
-import testable from '@instructure/ui-testable'
+import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -48,7 +49,8 @@ import type { CalendarDayProps, CalendarDayStyleProps } from './props'
 parent: Calendar
 id: Calendar.Day
 ---
-**/
+@tsProps
+ **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Day extends Component<CalendarDayProps> {
@@ -60,23 +62,17 @@ class Day extends Component<CalendarDayProps> {
     interaction: 'enabled',
     isSelected: false,
     isToday: false,
-    isOutsideMonth: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
-    children: null
+    isOutsideMonth: false
   } as const
 
   ref: Element | null = null
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles?.(this.makeStylesVariables)
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+  componentDidUpdate() {
+    this.props.makeStyles?.(this.makeStylesVariables)
   }
 
   get makeStylesVariables(): CalendarDayStyleProps {
@@ -98,16 +94,14 @@ class Day extends Component<CalendarDayProps> {
     return !!role && ['option', 'gridcell'].indexOf(role) > -1
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleClick = (event) => {
+  handleClick = (event: MouseEvent<ViewProps>) => {
     const { onClick, date } = this.props
     if (typeof onClick === 'function') {
       onClick(event, { date })
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleKeyDown = (event) => {
+  handleKeyDown = (event: KeyboardEvent<ViewProps>) => {
     const { onKeyDown, date } = this.props
     if (typeof onKeyDown === 'function') {
       onKeyDown(event, { date })
@@ -116,9 +110,7 @@ class Day extends Component<CalendarDayProps> {
 
   handleElementRef = (el: Element | null) => {
     const { elementRef } = this.props
-
     this.ref = el
-
     if (typeof elementRef === 'function') {
       elementRef(el)
     }

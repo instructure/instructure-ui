@@ -32,18 +32,66 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { KeyboardEvent, MouseEvent } from 'react'
+import type { ViewProps } from '@instructure/ui-view'
 
 type CalendarDayOwnProps = {
+  /**
+   * The rendered representation of the corresponding date.
+   */
   children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  /**
+   * An ISO 8601 formatted string representing the date corresponding to
+   * this `<Calendar.Day />`
+   */
   date: string
+  /**
+   * Accessible label to provide more context for the date to assistive
+   * technologies. This should consist of more than just a numerical date value.
+   * It should also include the month and the year. Ex. instead of just `1`,
+   * provide `1 August 2019`.
+   */
   label: string
+  /**
+   * Is the `<Calendar.Day />` disabled
+   */
   interaction?: 'enabled' | 'disabled'
+  /**
+   * Is the `<Calendar.Day />` selected
+   */
   isSelected?: boolean
+  /**
+   * Is the `<Calendar.Day />` today
+   */
   isToday?: boolean
+  /**
+   * Is the `<Calendar.Day />` located outside the current rendered month
+   */
   isOutsideMonth?: boolean
-  onClick?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
+  /**
+   * Callback fired on click.
+   * @param {Object} event - the click event
+   * @param {Object} data - additional data
+   * @param data.date - the date of the corresponding `<Calendar.Day />`
+   */
+  onClick?: (event: MouseEvent<ViewProps>, { date }: { date: string }) => void
+  /**
+   * Callback fired on key down.
+   * @param {Object} event - the key down event
+   * @param {Object} data - additional data
+   * @param data.date - the date of the corresponding `<Calendar.Day />`
+   */
+  onKeyDown?: (
+    event: KeyboardEvent<ViewProps>,
+    { date }: { date: string }
+  ) => void
+  /**
+   * A ref function for the underlying DOM element.
+   */
   elementRef?: (element: Element | null) => void
+  /**
+   * the element type to render as
+   */
   as?: AsElementType
 }
 
@@ -62,59 +110,16 @@ type CalendarDayProps = CalendarDayOwnProps &
 type CalendarDayStyle = ComponentStyle<'calendarDay' | 'day'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The rendered representation of the corresponding date.
-   */
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * An ISO 8601 formatted string representing the date corresponding to
-   * this `<Calendar.Day />`
-   */
   date: I18nPropTypes.iso8601.isRequired,
-  /**
-   * Accessible label to provide more context for the date to assistive
-   * technologies. This should consist of more than just a numerical date value.
-   * It should also include the month and the year. Ex. instead of just `1`,
-   * provide `1 August 2019`.
-   */
   label: PropTypes.string.isRequired,
-  /**
-   * Is the `<Calendar.Day />` disabled
-   */
   interaction: PropTypes.oneOf(['enabled', 'disabled']),
-  /**
-   * Is the `<Calendar.Day />` selected
-   */
   isSelected: PropTypes.bool,
-  /**
-   * Is the `<Calendar.Day />` today
-   */
   isToday: PropTypes.bool,
-  /**
-   * Is the `<Calendar.Day />` located outside the current rendered month
-   */
   isOutsideMonth: PropTypes.bool,
-  /**
-   * Callback fired on click.
-   * @param {Object} event - the click event
-   * @param {Object} data - additional data
-   * @param data.date - the date of the corresponding `<Calendar.Day />`
-   */
   onClick: PropTypes.func,
-  /**
-   * Callback fired on key down.
-   * @param {Object} event - the key down event
-   * @param {Object} data - additional data
-   * @param data.date - the date of the corresponding `<Calendar.Day />`
-   */
   onKeyDown: PropTypes.func,
-  /**
-   * A ref function for the underlying DOM element.
-   */
   elementRef: PropTypes.func,
-  /**
-   * the element type to render as
-   */
   as: PropTypes.elementType // eslint-disable-line react/require-default-props
 }
 

@@ -34,16 +34,62 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { ReactElement } from 'react'
+import type { CalendarDayProps } from './Day/props'
 
 type CalendarOwnProps = {
-  children?: React.ReactNode // TODO: oneOf([Day])
+  /**
+   * children of type `<Calendar.Day />` There should be exactly 42 provided (6
+   * weeks).
+   */
+  children?: ReactElement<CalendarDayProps>[]
+  /**
+   * A button to render in the navigation header. The recommendation is to
+   * compose it with the [IconButton](#IconButton) component by setting the `size`
+   * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
+   * `renderIcon` to [IconArrowOpenEnd](#iconography).
+   */
   renderNextMonthButton?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * A button to render in the navigation header. The recommendation is to
+   * compose it with the [IconButton](#Button) component by setting the `size`
+   * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
+   * `renderIcon` to [IconArrowOpenStart](#iconography).
+   */
   renderPrevMonthButton?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * Content to render in the navigation header. The recommendation is to include
+   * the name of the current rendered month along with the year.
+   */
   renderNavigationLabel?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * An array of labels containing the name of each day of the week. The visible
+   * portion of the label should be abbreviated (no longer than three characters).
+   * Note that screen readers will read this content preceding each date as the
+   * `<Calendar />` is navigated. Consider using
+   * [AccessibleContent](#AccessibleContent) with the `alt` prop containing the
+   * full day name for assistive technologies and the children containing the
+   * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
+   */
   renderWeekdayLabels: (React.ReactNode | ((...args: any[]) => any))[]
-  onRequestRenderNextMonth?: (...args: any[]) => any
-  onRequestRenderPrevMonth?: (...args: any[]) => any
+  /**
+   * Callback fired when the next month button is clicked in the navigation
+   * header, requesting to render the next month.
+   */
+  onRequestRenderNextMonth?: (e?: Event) => void
+  /**
+   * Callback fired when the previous month button is clicked in the navigation
+   * header, requesting to render the previous month.
+   */
+  onRequestRenderPrevMonth?: (e?: Event) => void
+  /**
+   * The element to render as the `Calendar` root, `span` by default
+   */
   as?: AsElementType
+  /**
+   * The role of the underlying table. This can be set to 'listbox' when
+   * assistive technologies need to read the `<Calendar.Day />` children as a list.
+   */
   role?: 'table' | 'listbox'
 }
 
@@ -60,60 +106,16 @@ type CalendarStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * children of type `<Calendar.Day />` There should be exactly 42 provided (6
-   * weeks).
-   */
   children: ChildrenPropTypes.oneOf([Day]),
-  /**
-   * A button to render in the navigation header. The recommendation is to
-   * compose it with the [IconButton](#IconButton) component by setting the `size`
-   * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-   * `renderIcon` to [IconArrowOpenEnd](#iconography).
-   */
   renderNextMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * A button to render in the navigation header. The recommendation is to
-   * compose it with the [IconButton](#Button) component by setting the `size`
-   * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-   * `renderIcon` to [IconArrowOpenStart](#iconography).
-   */
   renderPrevMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Content to render in the navigation header. The recommendation is to include
-   * the name of the current rendered month along with the year.
-   */
   renderNavigationLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * An array of labels containing the name of each day of the week. The visible
-   * portion of the label should be abbreviated (no longer than three characters).
-   * Note that screen readers will read this content preceding each date as the
-   * `<Calendar />` is navigated. Consider using
-   * [AccessibleContent](#AccessibleContent) with the `alt` prop containing the
-   * full day name for assistive technologies and the children containing the
-   * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
-   */
   renderWeekdayLabels: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.node, PropTypes.func])
   ).isRequired,
-  /**
-   * Callback fired when the next month button is clicked in the navigation
-   * header, requesting to render the next month.
-   */
   onRequestRenderNextMonth: PropTypes.func,
-  /**
-   * Callback fired when the previous month button is clicked in the navigation
-   * header, requesting to render the previous month.
-   */
   onRequestRenderPrevMonth: PropTypes.func,
-  /**
-   * The element to render as the `Calendar` root, `span` by default
-   */
   as: PropTypes.elementType,
-  /**
-   * The role of the underlying table. This can be set to 'listbox' when
-   * assistive technologies need to read the `<Calendar.Day />` children as a list.
-   */
   role: PropTypes.oneOf(['table', 'listbox'])
 }
 

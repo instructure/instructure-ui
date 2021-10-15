@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 import {
   expect,
   mount,
@@ -33,14 +33,14 @@ import {
 import { Calendar } from '../index'
 import { CalendarLocator } from '../CalendarLocator'
 import CalendarExamples from '../__examples__/Calendar.examples'
+import type { CalendarDayProps } from '../Day/props'
 
 describe('<Calendar />', async () => {
   const weekdayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
   const generateDays = (count = Calendar.DAY_COUNT) => {
-    const days = []
+    const days: ReactElement<CalendarDayProps>[] = []
     const date = new Date('2019-07-28')
-
     while (days.length < count) {
       days.push(
         <Calendar.Day
@@ -54,7 +54,6 @@ describe('<Calendar />', async () => {
       )
       date.setDate(date.getDate() + 1)
     }
-
     return days
   }
 

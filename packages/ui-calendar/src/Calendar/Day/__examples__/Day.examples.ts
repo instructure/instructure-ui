@@ -22,17 +22,18 @@
  * SOFTWARE.
  */
 
+import type { CalendarDayProps } from '../props'
+import type { StoryConfig } from '@instructure/ui-test-utils'
+
 export default {
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       date: '2019-08-07',
       label: '2019-08-07',
       children: 8
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return props.isSelected && props.isToday
   }
-}
+} as StoryConfig<CalendarDayProps>
