@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.11.0](https://github.com/instructure/instructure-ui/compare/v8.10.2...v8.11.0) (2021-10-15)
+
+### Bug Fixes
+
+- **ui-svg-images:** fix icons getting cropped in zoomed windows ([732ac88](https://github.com/instructure/instructure-ui/commit/732ac885d8fdad2ae1cbccb81faebcd96ee9c2f3))
+
 ## [8.10.2](https://github.com/instructure/instructure-ui/compare/v8.10.1...v8.10.2) (2021-10-01)
 
 **Note:** Version bump only for package @instructure/ui-svg-images

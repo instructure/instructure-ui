@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.11.0](https://github.com/instructure/instructure-ui/compare/v8.10.2...v8.11.0) (2021-10-15)
+
+### Note:
+
+The `bidirectionalPolyfill` util [has been deleted](https://github.com/instructure/instructure-ui/pull/736). With the release of Safari 15 (Sep 20, 2021) all of our supported browsers (last 2 major versions) can handle [CSS Logical Properties](https://caniuse.com/css-logical-props) without any polyfills and prefixes, so this util was no longer needed.
+
 ## [8.10.2](https://github.com/instructure/instructure-ui/compare/v8.10.1...v8.10.2) (2021-10-01)
 
 **Note:** Version bump only for package @instructure/emotion

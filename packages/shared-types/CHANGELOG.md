@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.11.0](https://github.com/instructure/instructure-ui/compare/v8.10.2...v8.11.0) (2021-10-15)
+
+### Features
+
+- **ui-modal:** add `spacing` prop to `Modal.Header` ([3887f80](https://github.com/instructure/instructure-ui/commit/3887f809f87137e161587a56dc23f134f3e2e64e))
+
 ## [8.10.2](https://github.com/instructure/instructure-ui/compare/v8.10.1...v8.10.2) (2021-10-01)
 
 **Note:** Version bump only for package @instructure/shared-types
