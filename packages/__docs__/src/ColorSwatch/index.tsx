@@ -42,7 +42,7 @@ class ColorSwatch extends Component<ColorSwatchProps> {
     this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps: ColorSwatchProps) {
+  componentDidUpdate() {
     this.props.makeStyles?.()
   }
 
