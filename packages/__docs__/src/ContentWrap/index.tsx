@@ -23,18 +23,14 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { ThemeablePropTypes } from '@instructure/emotion'
+import { propTypes, allowedProps } from './props'
+import type { ContentWrapProps } from './props'
 
-class ContentWrap extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    maxWidth: PropTypes.string,
-    padding: ThemeablePropTypes.spacing
-  }
-
+class ContentWrap extends Component<ContentWrapProps> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     children: null,
     maxWidth: '64rem',
