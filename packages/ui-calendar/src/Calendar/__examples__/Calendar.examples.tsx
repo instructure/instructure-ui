@@ -25,16 +25,18 @@
 import React from 'react'
 
 import { Calendar } from '../index'
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { CalendarProps } from '../props'
 
-const generateDays = (getDateProps = () => ({})) => {
+const generateDays = (
+  getDateProps?: (date: Date) => Record<string, string | boolean | undefined>
+) => {
   const days = []
   const date = new Date('2019-07-28')
-
   while (days.length < Calendar.DAY_COUNT) {
     days.push(
       <Calendar.Day
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 0 arguments, but got 1.
-        {...getDateProps(date)}
+        {...getDateProps?.(date)}
         date={date.toISOString()}
         label={date.toISOString()}
         isOutsideMonth={date.getMonth() !== 7}
@@ -44,60 +46,50 @@ const generateDays = (getDateProps = () => ({})) => {
     )
     date.setDate(date.getDate() + 1)
   }
-
   return days
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'dateStr' implicitly has an 'any' type.
-const isSameDay = (dateStr, date) => {
+const isSameDay = (dateStr: string, date: Date) => {
   return new Date(dateStr).toISOString() === date.toISOString()
 }
 
 const defaultDays = generateDays()
 
-// @ts-expect-error ts-migrate(2345) FIXME: Argument of type '(date: any) => { interaction: st... Remove this comment to see the full error message
-const outsideMonthStates = generateDays((date) => {
+const outsideMonthStates = generateDays((date: Date) => {
   if (isSameDay('2019-07-28', date)) {
     return {
       interaction: 'disabled'
     }
   }
-
   if (isSameDay('2019-07-29', date)) {
     return {
       isSelected: true
     }
   }
-
   if (isSameDay('2019-07-30', date)) {
     return {
       isToday: true
     }
   }
-
   return {}
 })
 
-// @ts-expect-error ts-migrate(2345) FIXME: Argument of type '(date: any) => { interaction: st... Remove this comment to see the full error message
-const insideMonthStates = generateDays((date) => {
+const insideMonthStates = generateDays((date: Date) => {
   if (isSameDay('2019-08-05', date)) {
     return {
       interaction: 'disabled'
     }
   }
-
   if (isSameDay('2019-08-06', date)) {
     return {
       isSelected: true
     }
   }
-
   if (isSameDay('2019-08-07', date)) {
     return {
       isToday: true
     }
   }
-
   return {}
 })
 
@@ -107,8 +99,7 @@ export default {
     renderPrevMonthButton: [null, <button key="prev">{'<'}</button>],
     renderNextMonthButton: [null, <button key="next">{'>'}</button>]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       renderNavigationLabel: (
         <div>
@@ -119,7 +110,6 @@ export default {
       renderWeekdayLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     const { renderPrevMonthButton, renderNextMonthButton } = props
 
@@ -128,4 +118,4 @@ export default {
       (!renderNextMonthButton && renderPrevMonthButton)
     )
   }
-}
+} as StoryConfig<CalendarProps>
