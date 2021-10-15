@@ -22,41 +22,28 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import { Component } from 'react'
 import PropTypes from 'prop-types'
-
-import { isValid } from '@instructure/ui-color-utils'
-import { withStyle, jsx } from '@instructure/emotion'
-
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
-
-@withStyle(generateStyle, generateComponentTheme)
-class ColorSwatch extends Component {
-  static propTypes = {
-    color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
-  componentDidMount() {
-    this.props.makeStyles()
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
-  }
-
-  render() {
-    const { color } = this.props
-    return isValid(color) ? (
-      <div css={this.props.styles.colorSwatch} style={{ background: color }} />
-    ) : null
-  }
+import { PropValidators } from '@instructure/shared-types'
+import type { ComponentStyle } from '@instructure/emotion'
+type ColorSwatchOwnProps = {
+  color: string | number
+  styles?: ColorSwatchStyle
+  makeStyles?: (...args: any[]) => ColorSwatchStyle
 }
-
-export default ColorSwatch
-export { ColorSwatch }
+type PropKeys = keyof ColorSwatchOwnProps
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+type ColorSwatchProps = ColorSwatchOwnProps
+const propTypes: PropValidators<PropKeys> = {
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  // eslint-disable-next-line react/require-default-props
+  makeStyles: PropTypes.func,
+  // eslint-disable-next-line react/require-default-props
+  styles: PropTypes.object
+}
+const allowedProps: AllowedPropKeys = ['color', 'makeStyles', 'styles']
+export type ColorSwatchTheme = {
+  borderColor: string
+}
+export type ColorSwatchStyle = ComponentStyle<'colorSwatch'>
+export type { ColorSwatchProps }
+export { propTypes, allowedProps }

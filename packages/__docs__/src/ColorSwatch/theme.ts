@@ -22,18 +22,20 @@
  * SOFTWARE.
  */
 
+import type { Theme } from '@instructure/ui-themes'
+import { ColorSwatchTheme } from './props'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme) => {
+const generateComponentTheme = (theme: Theme): ColorSwatchTheme => {
   const { colors } = theme
 
   const componentVariables = {
     borderColor: colors?.borderMedium
   }
-
   return {
     ...componentVariables
   }
