@@ -22,31 +22,42 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-import { PropValidators } from '@instructure/shared-types'
-import type { ComponentStyle } from '@instructure/emotion'
-type ColorBandOwnProps = {
-  height: string
-  makeStyles: (...args: any[]) => ColorBandStyle
-  styles: ColorBandStyle
-}
-type PropKeys = keyof ColorBandOwnProps
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-type ColorBandProps = ColorBandOwnProps
-const propTypes: PropValidators<PropKeys> = {
-  height: PropTypes.string,
-  // eslint-disable-next-line react/require-default-props
-  makeStyles: PropTypes.func,
-  // eslint-disable-next-line react/require-default-props
-  styles: PropTypes.object
-}
-const allowedProps: AllowedPropKeys = ['height', 'makeStyles', 'styles']
+import { Component } from 'react'
+import PropTypes, { number } from 'prop-types'
 
-export type ColorBandStyle = ComponentStyle<'band1' | 'band2' | 'band3'>
-export type ColorBandTheme = {
-  colorAlert: string
-  colorWarning: string
-  colorDanger: string
+import { isValid } from '@instructure/ui-color-utils'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+import { propTypes, allowedProps } from './props'
+import type { ColorSwatchProps } from './props'
+import React from 'react'
+
+@withStyle(generateStyle, generateComponentTheme)
+class ColorSwatch extends Component<ColorSwatchProps> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  componentDidMount() {
+    this.props.makeStyles?.()
+  }
+
+  componentDidUpdate(prevProps: ColorSwatchProps) {
+    this.props.makeStyles?.()
+  }
+
+  render() {
+    const { color } = this.props
+    if (typeof color == 'string')
+      return isValid(color) ? (
+        <div
+          css={this.props.styles?.colorSwatch}
+          style={{ background: color }}
+        />
+      ) : null
+    return null
+  }
 }
-export type { ColorBandProps }
-export { propTypes, allowedProps }
+
+export default ColorSwatch
+export { ColorSwatch }
