@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 import React from 'react'
+import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { SVGIconProps } from '../props'
 
 export default {
-  sectionProp: 'size' as const,
+  sectionProp: 'size',
   filter: (props: SVGIconProps) => {
     return (
       props.color !== 'primary' &&
@@ -50,4 +51,4 @@ export default {
       )
     }
   }
-}
+} as StoryConfig<SVGIconProps>

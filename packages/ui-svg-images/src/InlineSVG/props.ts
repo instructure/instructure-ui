@@ -32,11 +32,18 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type InlineSVGOwnProps = {
+  children?: React.ReactNode
   src?: string
   title?: string
   description?: string
   focusable?: boolean
+  /**
+   * To let the SVG expand to fill its container, use "`auto`"
+   */
   width?: string | number
+  /**
+   * To let the SVG expand to fill its container, use "`auto`"
+   */
   height?: string | number
   inline?: boolean
   color?:
@@ -51,7 +58,9 @@ type InlineSVGOwnProps = {
     | 'warning'
     | 'brand'
     | 'auto'
-  children?: React.ReactNode
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
 }
 
@@ -71,13 +80,7 @@ const propTypes: PropValidators<PropKeys> = {
   title: PropTypes.string,
   description: PropTypes.string,
   focusable: PropTypes.bool,
-  /**
-   * To let the SVG expand to fill its container, use `auto`
-   */
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * To let the SVG expand to fill its container, use `auto`
-   */
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   inline: PropTypes.bool,
   color: PropTypes.oneOf([
@@ -93,9 +96,6 @@ const propTypes: PropValidators<PropKeys> = {
     'brand',
     'auto'
   ]),
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 
