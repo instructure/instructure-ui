@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.11.0](https://github.com/instructure/instructure-ui/compare/v8.10.2...v8.11.0) (2021-10-15)
+
+### Note:
+
+The `bidirectionalPolyfill` util [has been deleted](https://github.com/instructure/instructure-ui/pull/736). With the release of Safari 15 (Sep 20, 2021) all of our supported browsers (last 2 major versions) can handle [CSS Logical Properties](https://caniuse.com/css-logical-props) without any polyfills and prefixes, so this util was no longer needed.
+
+### Bug Fixes
+
+- **ui-menu:** fix menu tooltip position ([e60a4a9](https://github.com/instructure/instructure-ui/commit/e60a4a9f63b02052a6eb83aafb5ba9338213057b))
+- **ui-svg-images:** fix icons getting cropped in zoomed windows ([732ac88](https://github.com/instructure/instructure-ui/commit/732ac885d8fdad2ae1cbccb81faebcd96ee9c2f3))
+
+### Features
+
+- **ui-modal:** add `spacing` prop to `Modal.Header` ([3887f80](https://github.com/instructure/instructure-ui/commit/3887f809f87137e161587a56dc23f134f3e2e64e))
+
 ## [8.10.2](https://github.com/instructure/instructure-ui/compare/v8.10.1...v8.10.2) (2021-10-01)
 
 ### Note:

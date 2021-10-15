@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-form-field",
-  "version": "8.10.2",
+  "version": "8.11.0",
   "description": "Form layout components.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -24,22 +24,22 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.10.2",
-    "@instructure/ui-test-utils": "8.10.2",
-    "@instructure/ui-themes": "8.10.2"
+    "@instructure/ui-babel-preset": "8.11.0",
+    "@instructure/ui-test-utils": "8.11.0",
+    "@instructure/ui-themes": "8.11.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.10.2",
-    "@instructure/emotion": "8.10.2",
-    "@instructure/shared-types": "8.10.2",
-    "@instructure/ui-a11y-content": "8.10.2",
-    "@instructure/ui-a11y-utils": "8.10.2",
-    "@instructure/ui-grid": "8.10.2",
-    "@instructure/ui-icons": "8.10.2",
-    "@instructure/ui-react-utils": "8.10.2",
-    "@instructure/ui-utils": "8.10.2",
-    "@instructure/uid": "8.10.2",
+    "@instructure/console": "8.11.0",
+    "@instructure/emotion": "8.11.0",
+    "@instructure/shared-types": "8.11.0",
+    "@instructure/ui-a11y-content": "8.11.0",
+    "@instructure/ui-a11y-utils": "8.11.0",
+    "@instructure/ui-grid": "8.11.0",
+    "@instructure/ui-icons": "8.11.0",
+    "@instructure/ui-react-utils": "8.11.0",
+    "@instructure/ui-utils": "8.11.0",
+    "@instructure/uid": "8.11.0",
     "prop-types": "^15"
   },
   "peerDependencies": {
