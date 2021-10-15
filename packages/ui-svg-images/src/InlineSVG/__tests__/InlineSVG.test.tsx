@@ -29,6 +29,8 @@ import { InlineSVG } from '../index'
 import { InlineSVGLocator } from '../InlineSVGLocator'
 import InlineSVGExamples from '../__examples__/InlineSVG.examples'
 
+import type { InlineSVGProps } from '../props'
+
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
 describe('<InlineSVG />', async () => {
@@ -185,6 +187,6 @@ describe('<InlineSVG />', async () => {
   })
 
   describe('with generated examples', async () => {
-    generateA11yTests(InlineSVG, InlineSVGExamples)
+    generateA11yTests<InlineSVGProps>(InlineSVG, InlineSVGExamples)
   })
 })

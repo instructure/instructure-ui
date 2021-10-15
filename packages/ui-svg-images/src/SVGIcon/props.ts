@@ -25,6 +25,7 @@ import PropTypes from 'prop-types'
 
 import { InlineSVG } from '../InlineSVG'
 
+import type { SVGAttributes } from 'react'
 import type {
   InlineSVGTheme,
   OtherHTMLAttributes,
@@ -34,7 +35,6 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 import type { InlineSVGOwnProps } from '../InlineSVG/props'
-import { SVGAttributes } from 'react'
 
 type SVGIconOwnProps = InlineSVGOwnProps & {
   rotate?: '0' | '90' | '180' | '270'

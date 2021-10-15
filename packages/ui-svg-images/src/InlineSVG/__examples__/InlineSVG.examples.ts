@@ -22,10 +22,12 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { InlineSVGProps } from '../props'
+
 export default {
   sectionProp: 'color',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       width: '100px',
       height: '100px',
@@ -35,4 +37,4 @@ export default {
             </svg>`
     }
   }
-}
+} as StoryConfig<InlineSVGProps>

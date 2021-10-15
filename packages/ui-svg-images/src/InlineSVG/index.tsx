@@ -33,13 +33,15 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { InlineSVGProps } from './props'
+
 import { allowedProps, propTypes } from './props'
+import type { InlineSVGProps } from './props'
 
 /**
 ---
 category: components/utilities
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -55,11 +57,13 @@ class InlineSVG extends Component<InlineSVGProps> {
     title: '',
     description: '',
     inline: true,
-    children: null,
     width: '1em',
     height: '1em',
     color: 'inherit'
   }
+
+  titleId?: string
+  descId?: string
 
   ref: Element | null = null
 
@@ -73,13 +77,10 @@ class InlineSVG extends Component<InlineSVGProps> {
     }
   }
 
-  constructor() {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
-    super()
+  constructor(props: InlineSVGProps) {
+    super(props)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'InlineS... Remove this comment to see the full error message
     this.titleId = uid('InlineSVG-title')
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'descId' does not exist on type 'InlineSV... Remove this comment to see the full error message
     this.descId = uid('InlineSVG-desc')
   }
 
@@ -91,8 +92,7 @@ class InlineSVG extends Component<InlineSVGProps> {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'src' implicitly has an 'any' type.
-  static prepareSrc = (src) => {
+  static prepareSrc = (src: string) => {
     const pattern = /<svg[^>]*>((.|[\n\r])*)<\/svg>/
     const matches = pattern.exec(src)
 
@@ -109,13 +109,10 @@ class InlineSVG extends Component<InlineSVGProps> {
 
   renderTitle() {
     const { title } = this.props
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'InlineS... Remove this comment to see the full error message
     return title ? <title id={this.titleId}>{title}</title> : null
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'desc' implicitly has an 'any' type.
-  renderDesc(desc) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'descId' does not exist on type 'InlineSV... Remove this comment to see the full error message
+  renderDesc(desc: InlineSVGProps['description']) {
     return desc ? <desc id={this.descId}>{desc}</desc> : null
   }
 
@@ -123,12 +120,10 @@ class InlineSVG extends Component<InlineSVGProps> {
     const ids = []
 
     if (this.props.title) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'InlineS... Remove this comment to see the full error message
       ids.push(this.titleId)
     }
 
     if (this.props.description) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'descId' does not exist on type 'InlineSV... Remove this comment to see the full error message
       ids.push(this.descId)
     }
 
@@ -141,7 +136,8 @@ class InlineSVG extends Component<InlineSVGProps> {
       return (
         <g
           role="presentation"
-          dangerouslySetInnerHTML={{ __html: src }} // eslint-disable-line react/no-danger
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: src }}
         />
       )
     } else {
@@ -151,7 +147,7 @@ class InlineSVG extends Component<InlineSVGProps> {
 
   render() {
     const {
-      style, // eslint-disable-line react/prop-types
+      style,
       title,
       description,
       focusable,
@@ -167,7 +163,7 @@ class InlineSVG extends Component<InlineSVGProps> {
 
     return (
       <svg
-        {...parseAttributes(this.props.src)}
+        {...parseAttributes(src)}
         {...omitProps(this.props, InlineSVG.allowedProps, ['inline'])}
         style={{
           ...style,
@@ -192,9 +188,8 @@ class InlineSVG extends Component<InlineSVGProps> {
   }
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'src' implicitly has an 'any' type.
-function parseAttributes(src) {
-  const attributes = {}
+function parseAttributes(src: InlineSVGProps['src']) {
+  const attributes: Record<string, string> = {}
   const SVGAttributesRegExp = /<svg\s+([^>]*)\s*>/
   const namesAndValuesRegExp = /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
 
@@ -207,7 +202,6 @@ function parseAttributes(src) {
 
     while (match != null) {
       if (excludes.indexOf(match[1]) === -1) {
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         attributes[match[1]] =
           match[2] ||
           (match[3] ? match[3] : match[4] ? match[4] : match[5]) ||

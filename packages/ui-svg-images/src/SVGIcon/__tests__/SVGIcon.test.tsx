@@ -29,6 +29,8 @@ import { SVGIcon } from '../index'
 import { SVGIconLocator } from '../SVGIconLocator'
 import SVGIconExamples from '../__examples__/SVGIcon.examples'
 
+import type { SVGIconProps } from '../props'
+
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
 describe('<SVGIcon />', async () => {
@@ -63,6 +65,6 @@ describe('<SVGIcon />', async () => {
   })
 
   describe('with generated examples', async () => {
-    generateA11yTests(SVGIcon, SVGIconExamples)
+    generateA11yTests<SVGIconProps>(SVGIcon, SVGIconExamples)
   })
 })

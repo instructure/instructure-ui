@@ -26,20 +26,21 @@
 import { Component, ReactInstance } from 'react'
 
 import { testable } from '@instructure/ui-testable'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { InlineSVG } from '../InlineSVG'
 
-import { withStyle, jsx } from '@instructure/emotion'
-
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { SVGIconProps } from './props'
+
 import { allowedProps, propTypes } from './props'
+import type { SVGIconProps } from './props'
 
 /**
 ---
 category: components/utilities
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -78,13 +79,15 @@ class SVGIcon extends Component<SVGIconProps> {
     const {
       rotate,
       className,
+      themeOverride,
+
+      // 'size', 'bidirectional', 'makeStyles' and 'styles' need to be added here,
+      // so it won't be passed to InlineSVG via '...props'
       size,
       bidirectional,
-      // 'makeStyles' and 'styles' need to be added here,
-      // so it won't be passed to InlineSVG via '...props'
       makeStyles,
       styles,
-      themeOverride,
+
       ...props
     } = this.props
 
