@@ -117,6 +117,7 @@ class Properties extends Component {
       - custom
       - boolean
       - array
+      - ReactReactNode
     */
     // TODO: currently custom imported types are just showing the name of the can somehow link to these custom types
     switch (name) {
@@ -140,6 +141,8 @@ class Properties extends Component {
         return 'bool'
       case 'Array':
         return 'array'
+      case 'ReactReactNode':
+        return 'ReactNode'
       default:
         return name
     }
@@ -254,7 +257,7 @@ class Properties extends Component {
 
     // react-docgen doesn't recognise functions if they are in parentheses,
     // so we have to parse the raw data
-    const elements = tsType.raw.split('|')
+    const elements = tsType.raw.split('|').filter((item) => item !== '')
 
     const values = elements.map((rawValue) => {
       let value = rawValue.trim()
