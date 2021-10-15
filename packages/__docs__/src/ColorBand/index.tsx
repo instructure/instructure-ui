@@ -31,19 +31,19 @@ import { View } from '@instructure/ui-view'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { propTypes } from './props'
+import { propTypes, allowedProps } from './props'
 import type { ColorBandProps } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
 class ColorBand extends Component<ColorBandProps> {
   static propTypes = propTypes
-
+  static allowedProps = allowedProps
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate(_prevProps: ColorBandProps) {
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   static defaultProps = {
@@ -60,13 +60,13 @@ class ColorBand extends Component<ColorBandProps> {
       >
         <Flex height="100%" alignItems="stretch" justifyItems="end">
           <Flex.Item size="7%">
-            <span css={this.props.styles.band1} />
+            <span css={this.props.styles?.band1} />
           </Flex.Item>
           <Flex.Item size="10%">
-            <span css={this.props.styles.band2} />
+            <span css={this.props.styles?.band2} />
           </Flex.Item>
           <Flex.Item size="15%">
-            <span css={this.props.styles.band3} />
+            <span css={this.props.styles?.band3} />
           </Flex.Item>
         </Flex>
       </View>

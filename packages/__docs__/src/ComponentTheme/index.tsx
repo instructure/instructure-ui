@@ -24,8 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
-
 import { Table } from '@instructure/ui-table'
 import { View } from '@instructure/ui-view'
 
@@ -33,20 +31,13 @@ import { ColorSwatch } from '../ColorSwatch'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
-
+import type { ComponentThemeProps } from './props'
+import { propTypes } from './props'
 @withStyle(generateStyle, null)
-class ComponentTheme extends Component {
-  static propTypes = {
-    componentTheme: PropTypes.object.isRequired,
-    themeVariables: PropTypes.object.isRequired,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
-  mapColors(colorKey) {
-    const map = {}
+class ComponentTheme extends Component<ComponentThemeProps> {
+  static propTypes = propTypes
+  mapColors(colorKey: any) {
+    const map: Record<string, any> = {}
     Object.keys(colorKey).forEach((color) => {
       const hex = colorKey[color]
       if (typeof map[hex] === 'undefined') {
@@ -100,7 +91,7 @@ class ComponentTheme extends Component {
     const { componentTheme, styles } = this.props
 
     return componentTheme && Object.keys(componentTheme).length > 0 ? (
-      <div css={styles.componentTheme}>
+      <div css={styles?.componentTheme}>
         <Table caption="Component theme">
           <Table.Head>
             <Table.Row>
