@@ -15,9 +15,10 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "clean": "gulp clean && ui-build --clean",
-    "build": "gulp && ui-build __build__ --copy-files --modules es,cjs && yarn buildTypes",
-    "export": "gulp clean && gulp && yarn buildTypes",
-    "buildTypes": "tsc -p tsconfig.build.json"
+    "build": "gulp && ui-build __build__ --copy-files --modules es,cjs",
+    "export": "gulp clean && gulp && yarn build:types",
+    "build:types": "tsc -p tsconfig.build.json",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "devDependencies": {

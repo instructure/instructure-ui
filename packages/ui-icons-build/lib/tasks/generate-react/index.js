@@ -62,7 +62,7 @@ const createMainIndexTask = function () {
   return gulp
     .src(require.resolve('./main.ejs'))
     .pipe(consolidate('lodash', { glyphs }))
-    .pipe(rename({ basename: 'index', extname: '.js' }))
+    .pipe(rename({ basename: 'index', extname: '.ts' }))
     .on('error', handleErrors)
     .pipe(gulp.dest(destination))
 }
@@ -119,7 +119,7 @@ gulp.task('generate-react-components', () => {
             .src(require.resolve('./component.ejs'))
             .pipe(consolidate('lodash', data))
             .pipe(
-              rename({ basename: data.name + data.variant, extname: '.js' })
+              rename({ basename: data.name + data.variant, extname: '.tsx' })
             )
             .on('error', handleErrors)
             .pipe(gulp.dest(config.react.destination))
