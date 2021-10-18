@@ -29,7 +29,7 @@ type CodePenButtonOwnProps = {
   title: string
   language: string
   render?: boolean
-  options?: typeof PropTypes.object
+  options?: Record<string, any>
 }
 
 type PropKeys = keyof CodePenButtonOwnProps
