@@ -26,6 +26,9 @@ import React, { CSSProperties } from 'react'
 
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import { View } from '../../index'
+import generateStyle from '../styles'
+import generateComponentTheme from '../theme'
+import { canvas } from '@instructure/ui-themes'
 
 describe('<View />', async () => {
   it('should render', async () => {
@@ -217,6 +220,28 @@ describe('<View />', async () => {
     await subject.setProps({ maxWidth: '200px' })
 
     expect(view.getComputedStyle().maxWidth).to.equal('200px')
+  })
+
+  describe('generateStyle', () => {
+    it('decoreates inlineStyle props with !important', () => {
+      const styles = generateStyle(generateComponentTheme(canvas), {
+        width: 'fit-content',
+        padding: 'xxx-small',
+        display: 'auto',
+        overflowX: 'auto',
+        overflowY: 'auto',
+        borderColor: 'primary',
+        position: 'absolute',
+        focusPosition: 'offset',
+        focusColor: 'info',
+        shouldAnimateFocus: false
+      }) as Record<string, string>
+
+      Object.entries(styles?.inlineStyles).forEach((style) => {
+        const css = style[1].split(' ')
+        return expect(css[css.length - 1]).to.equal('!important')
+      })
+    })
   })
 
   describe('withFocusOutline', async () => {
