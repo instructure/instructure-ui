@@ -23,5 +23,9 @@
  */
 
 module.exports = {
-  stories: ['./stories/stories.ts']
+  stories: ['./stories/stories.ts'],
+  typescript: {
+    check: false,
+    reactDocgen: false
+  }
 }
