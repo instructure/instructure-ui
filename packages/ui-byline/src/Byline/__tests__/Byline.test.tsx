@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, find, mount, stub, within } from '@instructure/ui-test-utils'
 import { Byline } from '../index'
 import { View } from '@instructure/ui-view'
 
@@ -78,8 +78,6 @@ describe('<Byline />', async () => {
 
   it(`should render a figure by default`, async () => {
     expect(await mount(<Byline>{image}</Byline>))
-
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'find'.
     expect(await find('figure')).to.exist()
   })
 
@@ -92,7 +90,7 @@ describe('<Byline />', async () => {
   })
 
   describe('when passing down props to View', async () => {
-    const allowedProps = {
+    const allowedProps: Record<string, string> = {
       margin: 'small'
     }
 
@@ -114,7 +112,6 @@ describe('<Byline />', async () => {
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
-            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
 

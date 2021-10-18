@@ -39,12 +39,35 @@ import type {
 } from '@instructure/shared-types'
 
 type BylineOwnProps = {
+  /**
+   * the Byline visual/object
+   */
   children: React.ReactNode
+  /**
+   * the Byline title
+   */
   title?: React.ReactNode
+  /**
+   * the Byline description
+   */
   description?: string | React.ReactNode
+  /**
+   * how should the title and description align
+   */
   alignContent?: 'top' | 'center'
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+  /*
+   * Determines the `max-width` of this element.
+   */
   size?: 'small' | 'medium' | 'large'
+  /**
+   * Provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
 }
 
@@ -61,32 +84,12 @@ type BylineStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * the Byline visual/object
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * the Byline title
-   */
   title: PropTypes.node,
-  /**
-   * the Byline description
-   */
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  /**
-   * how should the title and description align
-   */
   alignContent: PropTypes.oneOf(['top', 'center']),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 
