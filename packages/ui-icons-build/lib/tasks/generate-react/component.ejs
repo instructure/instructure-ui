@@ -1,20 +1,29 @@
 import React, { Component } from 'react'
 import { SVGIcon } from '@instructure/ui-svg-images'
+import type { SVGIconProps } from '@instructure/ui-svg-images'
 
-class <%= name %><%= variant %> extends Component {
+class <%= name %><%= variant %> extends Component<SVGIconProps> {
   static glyphName = '<%= glyphName %>';
   static variant = '<%= variant %>';
   static displayName = '<%= name %><%= variant %>';
   <% if (deprecated) { %>
   static deprecated = true;
   <% } %>
-  ref = null
-  static propTypes = {
-    ...SVGIcon.propTypes
-  }
 
-  handleRef = (el) => {
+  // eslint-disable-next-line react/forbid-foreign-prop-types
+  static propTypes = { ...SVGIcon.propTypes }
+  static allowedProps = [ ...SVGIcon.allowedProps ]
+
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
     this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   render () {
