@@ -40,6 +40,7 @@ import type { BylineProps } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
@@ -65,14 +66,11 @@ class Byline extends Component<BylineProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   render() {
@@ -88,8 +86,8 @@ class Byline extends Component<BylineProps> {
         css={this.props.styles?.byline}
         as="figure"
         margin={this.props.margin}
-        // @ts-expect-error TODO: fix
-        maxWidth={this.props.styles?.maxWidth}
+        // This cast is needed because style props are usually can be objects
+        maxWidth={this.props.styles?.maxWidth as string}
       >
         <div css={this.props.styles?.figure}>{this.props.children}</div>
         <figcaption css={this.props.styles?.caption}>
