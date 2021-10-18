@@ -71,7 +71,6 @@ class CodePenButton extends Component<CodePenButtonProps> {
             withBorder={false}
             withBackground={false}
             renderIcon={
-              // @ts-expect-error property 'viewBox'does not exist on type 'IntrinsicAttributes & IntrinsicClassAttributes<SVGIcon> & Pick<Pick<Readonly<SVGIconProps> & Readonly<...>, "styles" | ... 5 more ... | "bidirectional"> & Pick<...> & Pick<...>, "styles" | ... 3 more ... | keyof InlineSVGOwnProps> & Partial<...> & Partial<...>'
               <SVGIcon viewBox="0 0 1792 1792" title="Codepen">
                 <path
                   d="M216 1169l603 402v-359l-334-223zm-62-144l193-129-193-129v258zm819 546l603-402-269-180-334
