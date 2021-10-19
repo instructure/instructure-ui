@@ -23,19 +23,20 @@
  */
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (componentTheme, props, state) => {
+
+import type { DocumentTheme } from './props'
+const generateComponentTheme = (): DocumentTheme => {
+  const componentVariables = {
+    githubCornerColor: '#333'
+  }
+
   return {
-    githubCornerColor: componentTheme.githubCornerColor
+    ...componentVariables
   }
 }
 
-export default generateStyle
+export default generateComponentTheme
