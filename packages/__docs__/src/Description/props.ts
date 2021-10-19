@@ -21,25 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
-import { compileMarkdown } from '../compileMarkdown'
-
-class Description extends Component {
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
-  }
-
-  render() {
-    const { id, title, content } = this.props
-
-    return <div id={id}>{compileMarkdown(content, { title })}</div>
-  }
+import type { PropValidators } from '@instructure/shared-types'
+type DescriptionOwnProps = {
+  id: string
+  content: string
+  title: string
 }
 
-export default Description
-export { Description }
+type PropKeys = keyof DescriptionOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type DescriptionProps = DescriptionOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  id: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
+}
+
+const allowedPropKeys: AllowedPropKeys = ['content', 'id', 'title']
+
+export type { DescriptionProps }
+export { propTypes, allowedPropKeys }
