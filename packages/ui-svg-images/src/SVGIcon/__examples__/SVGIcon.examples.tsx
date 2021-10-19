@@ -28,13 +28,13 @@ export default {
   sectionProp: 'size' as const,
   filter: (props: SVGIconProps) => {
     return (
-      props.color === 'secondary-inverse' ||
-      props.color === 'primary-inverse' ||
-      props.color === 'auto' ||
-      props.color === 'alert' ||
-      props.color === 'warning' ||
-      props.color === 'error' ||
-      props.color === 'inherit'
+      props.color !== 'primary' &&
+      !(
+        props.bidirectional &&
+        props.rotate === '0' &&
+        props.inline &&
+        props.focusable
+      )
     )
   },
   getComponentProps: () => {
