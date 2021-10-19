@@ -89,7 +89,7 @@ const generateStyle = (
             paddingInlineStart: componentTheme.nestedPadding
           },
           '[class$=-optionItem__content--before]': {
-            offsetInlineStart: componentTheme.nestedPadding
+            insetInlineStart: componentTheme.nestedPadding
           }
         })
       }
@@ -124,13 +124,13 @@ const generateStyle = (
     },
     contentBefore: {
       label: 'optionItem__content--before',
-      offsetInlineEnd: 'auto',
-      offsetInlineStart: componentTheme.iconPadding
+      insetInlineEnd: 'auto',
+      insetInlineStart: componentTheme.iconPadding
     },
     contentAfter: {
       label: 'optionItem__content--after',
-      offsetInlineEnd: componentTheme.iconPadding,
-      offsetInlineStart: 'auto'
+      insetInlineEnd: componentTheme.iconPadding,
+      insetInlineStart: 'auto'
     }
   }
 }
