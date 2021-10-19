@@ -23,30 +23,25 @@
  */
 
 import PropTypes from 'prop-types'
-import { PropValidators } from '@instructure/shared-types'
-import type { ComponentStyle } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 type ColorBandOwnProps = {
   height?: string
-  makeStyles?: (...args: any[]) => ColorBandStyle
-  styles?: ColorBandStyle
 }
 type PropKeys = keyof ColorBandOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
-type ColorBandProps = ColorBandOwnProps
+type ColorBandProps = ColorBandOwnProps &
+  WithStyleProps<ColorBandTheme, ColorBandStyle>
 const propTypes: PropValidators<PropKeys> = {
-  height: PropTypes.string,
-  // eslint-disable-next-line react/require-default-props
-  makeStyles: PropTypes.func,
-  // eslint-disable-next-line react/require-default-props
-  styles: PropTypes.object
+  height: PropTypes.string
 }
-const allowedProps: AllowedPropKeys = ['height', 'makeStyles', 'styles']
+const allowedProps: AllowedPropKeys = ['height']
 
-export type ColorBandStyle = ComponentStyle<'band1' | 'band2' | 'band3'>
-export type ColorBandTheme = {
+type ColorBandStyle = ComponentStyle<'band1' | 'band2' | 'band3'>
+type ColorBandTheme = {
   colorAlert: string
   colorWarning: string
   colorDanger: string
 }
-export type { ColorBandProps }
+export type { ColorBandProps, ColorBandStyle, ColorBandTheme }
 export { propTypes, allowedProps }

@@ -28,9 +28,9 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 import type { Spacing } from '@instructure/emotion'
 
 type ContentWrapOwnProps = {
-  children?: typeof PropTypes.node
-  maxWidth?: string | number | undefined
-  padding?: Spacing | undefined
+  children?: React.ReactNode
+  maxWidth?: string | number
+  padding?: Spacing
 }
 
 type PropKeys = keyof ContentWrapOwnProps

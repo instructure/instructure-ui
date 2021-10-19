@@ -42,10 +42,6 @@ class ColorBand extends Component<ColorBandProps> {
     this.props.makeStyles?.()
   }
 
-  componentDidUpdate(_prevProps: ColorBandProps) {
-    this.props.makeStyles?.()
-  }
-
   static defaultProps = {
     height: '1.25rem'
   }
