@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 import GithubCorner from 'react-github-corner'
 import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
@@ -43,22 +42,22 @@ import { Returns } from '../Returns'
 import { Methods } from '../Methods'
 import { ComponentTheme } from '../ComponentTheme'
 import { Heading } from '../Heading'
-
-import { DocPropType } from '../propTypes'
-
+import { propTypes } from './props'
+import type { DocumentProps, DocType } from './props'
 @withStyle(generateStyle, generateComponentTheme)
-class Document extends Component {
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    doc: DocPropType.isRequired,
-    description: PropTypes.string,
-    themeVariables: PropTypes.object,
-    repository: PropTypes.string,
-    layout: PropTypes.string
-  }
+class Document extends Component<DocumentProps> {
+  // static propTypes = {
+  //   // eslint-disable-next-line react/require-default-props
+  //   makeStyles: PropTypes.func,
+  //   // eslint-disable-next-line react/require-default-props
+  //   styles: PropTypes.object,
+  //   doc: DocPropType.isRequired,
+  //   description: PropTypes.string,
+  //   themeVariables: PropTypes.object,
+  //   repository: PropTypes.string,
+  //   layout: PropTypes.string
+  // }
+  static propTypes = propTypes
 
   static defaultProps = {
     description: undefined,
@@ -72,20 +71,20 @@ class Document extends Component {
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
-  handleDetailsTabChange = (event, { index }) => {
+  handleDetailsTabChange = (event: any, { index }: any) => {
     this.setState({
       selectedDetailsTabIndex: index
     })
   }
 
-  renderProps(doc) {
+  renderProps(doc: DocType) {
     const { id, props, description } = doc
     const hasTsProps =
       typeof description === 'string' && description.includes('@tsProps')
@@ -104,7 +103,7 @@ class Document extends Component {
     ) : null
   }
 
-  renderTheme(doc) {
+  renderTheme(doc: DocType) {
     const { themeVariables } = this.props
     const generateComponentTheme =
       doc?.componentInstance?.generateComponentTheme
@@ -127,7 +126,7 @@ class Document extends Component {
     ) : null
   }
 
-  renderDescription(doc, description) {
+  renderDescription(doc: DocType, description: string) {
     const { id, title } = doc
 
     return this.props.description ? (
@@ -160,7 +159,7 @@ class Document extends Component {
     const { esPath, id, displayName, packageName, title } = this.props.doc
     const importName = displayName || id
 
-    let example = []
+    const example = []
 
     if (packageName) {
       example.push(`\
@@ -201,7 +200,7 @@ import { ${importName} } from '${esPath}'
     )
   }
 
-  renderParams(doc) {
+  renderParams(doc: DocType) {
     const { id, params } = doc
 
     return params ? (
@@ -214,7 +213,7 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderReturns(doc) {
+  renderReturns(doc: DocType) {
     const { id, returns } = doc
 
     return returns ? (
@@ -227,7 +226,7 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderMethods(doc) {
+  renderMethods(doc: DocType) {
     const { id, methods } = doc
 
     return methods && methods.length > 0 ? (
@@ -240,7 +239,7 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderDetails(doc) {
+  renderDetails(doc: DocType) {
     return this.hasDetails(doc) ? (
       <div>
         {this.renderParams(doc)}
@@ -252,7 +251,7 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  hasDetails(doc) {
+  hasDetails(doc: DocType) {
     return doc.params || doc.returns || doc.methods || doc.props
   }
 
@@ -324,7 +323,7 @@ import { ${importName} } from '${esPath}'
         {repository && layout !== 'small' && (
           <GithubCorner
             href={repository}
-            bannerColor={this.props.styles.githubCornerColor}
+            bannerColor={this.props.styles?.githubCornerColor as string}
           />
         )}
       </div>
