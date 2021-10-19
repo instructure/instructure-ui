@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.11.1](https://github.com/instructure/instructure-ui/compare/v8.11.0...v8.11.1) (2021-10-19)
+
+### Bug Fixes
+
+- **ui-options,ui-select,ui-simple-select:** fix icon positioning ([8536a1c](https://github.com/instructure/instructure-ui/commit/8536a1c9badcd8c1d2ce55dfb462d1899e3ca500))
+
 # [8.11.0](https://github.com/instructure/instructure-ui/compare/v8.10.2...v8.11.0) (2021-10-15)
 
 ### Note:
