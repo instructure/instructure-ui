@@ -61,8 +61,7 @@ const grow = [
 ]
 
 export default {
-  maxExamplesPerPage: 20,
-  maxExamples: 100,
+  maxExamplesPerPage: 50,
   propValues: {
     children: [regular, shrink, grow]
   },
