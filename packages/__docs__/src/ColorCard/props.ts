@@ -37,7 +37,7 @@ type ColorCardProps = ColorCardOwnProps
 
 const propTypes: PropValidators<PropKeys> = {
   hex: PropTypes.string.isRequired,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   minimal: PropTypes.bool
 }
 
