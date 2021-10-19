@@ -36,7 +36,6 @@ import {
   CloseButton,
   CondensedButton,
   ContextView,
-  Editable,
   Flex,
   FormField,
   Heading,
@@ -98,12 +97,6 @@ function TooltipPositioning() {
     >
       ContextView
     </ContextView>,
-    <Editable
-      mode="view"
-      onChangeMode={() => {}}
-      render={() => <span>Editable</span>}
-      value="Editable"
-    />,
     <Flex withVisualDebug margin="none none small">
       <Flex.Item>Flex One</Flex.Item>
       <Flex.Item>Flex Two</Flex.Item>
@@ -189,8 +182,11 @@ function TooltipPositioning() {
 function wrapComponent(component: string | JSX.Element, key: string) {
   return (
     <View key={key} display="flex" padding="large">
+      <View as="div" padding="0 large 0 0" minWidth="8rem">
+        Example {key}:
+      </View>
       <Tooltip
-        renderTip="hello world"
+        renderTip={`Tooltip ${key}`}
         isShowingContent={true}
         defaultIsShowingContent={true}
         placement="top center"
