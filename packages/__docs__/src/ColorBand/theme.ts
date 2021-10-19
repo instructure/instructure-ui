@@ -29,12 +29,16 @@ import { ColorBandTheme } from './props'
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: InstructureTheme): ColorBandTheme => {
+const generateComponentTheme = (theme: Theme): ColorBandTheme => {
   const { colors } = theme
 
   const componentVariables = {
-    colorAlert: colors?.inaccessibleAlert || colors?.backgroundAlert,
-    colorWarning: colors?.inaccessibleWarning || colors?.backgroundWarning,
+    colorAlert:
+      (colors as InstructureTheme['colors'])?.inaccessibleAlert ||
+      colors?.backgroundAlert,
+    colorWarning:
+      (colors as InstructureTheme['colors'])?.inaccessibleWarning ||
+      colors?.backgroundWarning,
     colorDanger: colors?.backgroundDanger
   }
 

@@ -23,7 +23,7 @@
  */
 
 import PropTypes from 'prop-types'
-import { PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 type CodePenButtonOwnProps = {
   code: string
   title: string

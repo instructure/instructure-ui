@@ -33,12 +33,13 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import type { ComponentThemeProps } from './props'
 import { propTypes } from './props'
+import type { BaseColors } from '@instructure/shared-types'
 @withStyle(generateStyle, null)
 class ComponentTheme extends Component<ComponentThemeProps> {
   static propTypes = propTypes
-  mapColors(colorKey: any) {
+  mapColors(colorKey: BaseColors) {
     const map: Record<string, any> = {}
-    Object.keys(colorKey).forEach((color) => {
+    ;(Object.keys(colorKey) as Array<keyof BaseColors>).forEach((color) => {
       const hex = colorKey[color]
       if (typeof map[hex] === 'undefined') {
         map[hex] = color

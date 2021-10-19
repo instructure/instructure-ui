@@ -34,7 +34,6 @@ class ColorName extends Component<ColorNameProps, ColorNameState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    name: undefined,
     as: 'span'
   }
 

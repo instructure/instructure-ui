@@ -23,27 +23,23 @@
  */
 
 import PropTypes from 'prop-types'
-import { PropValidators } from '@instructure/shared-types'
-import type { ComponentStyle } from '@instructure/emotion'
+import type { PropValidators } from '@instructure/shared-types'
+import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 type ColorSwatchOwnProps = {
+  // TODO: once all the docs components are typed, check again whether the number type is needed.
   color: string | number
-  styles?: ColorSwatchStyle
-  makeStyles?: (...args: any[]) => ColorSwatchStyle
 }
 type PropKeys = keyof ColorSwatchOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
-type ColorSwatchProps = ColorSwatchOwnProps
+type ColorSwatchProps = ColorSwatchOwnProps &
+  WithStyleProps<ColorSwatchTheme, ColorSwatchStyle>
 const propTypes: PropValidators<PropKeys> = {
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  // eslint-disable-next-line react/require-default-props
-  makeStyles: PropTypes.func,
-  // eslint-disable-next-line react/require-default-props
-  styles: PropTypes.object
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 }
-const allowedProps: AllowedPropKeys = ['color', 'makeStyles', 'styles']
-export type ColorSwatchTheme = {
+const allowedProps: AllowedPropKeys = ['color']
+type ColorSwatchTheme = {
   borderColor: string
 }
 export type ColorSwatchStyle = ComponentStyle<'colorSwatch'>
-export type { ColorSwatchProps }
+export type { ColorSwatchProps, ColorSwatchTheme }
 export { propTypes, allowedProps }

@@ -23,38 +23,32 @@
  */
 
 import PropTypes from 'prop-types'
-import type { ComponentStyle } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import type {
+  PropValidators,
+  ComponentTheme,
+  BaseThemeVariables
+} from '@instructure/shared-types'
 
 type ComponentThemeOwnProps = {
-  componentTheme: Record<string, any>
-  themeVariables: Record<string, any>
-  makeStyles?: (...args: any[]) => ComponentThemeStyle
-  styles?: ComponentThemeStyle
+  componentTheme: ComponentTheme
+  themeVariables: BaseThemeVariables
 }
 type PropKeys = keyof ComponentThemeOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ComponentThemeProps = ComponentThemeOwnProps
+type ComponentThemeProps = ComponentThemeOwnProps &
+  WithStyleProps<null, ComponentThemeStyle>
 
 type ComponentThemeStyle = ComponentStyle<'componentTheme'>
 
 const propTypes: PropValidators<PropKeys> = {
   componentTheme: PropTypes.object.isRequired,
-  themeVariables: PropTypes.object.isRequired,
-  // eslint-disable-next-line react/require-default-props
-  makeStyles: PropTypes.func,
-  // eslint-disable-next-line react/require-default-props
-  styles: PropTypes.object
+  themeVariables: PropTypes.object.isRequired
 }
 
-const allowedProps: AllowedPropKeys = [
-  'componentTheme',
-  'themeVariables',
-  'makeStyles',
-  'styles'
-]
+const allowedProps: AllowedPropKeys = ['componentTheme', 'themeVariables']
 
 export { propTypes, allowedProps }
 export type { ComponentThemeProps, ComponentThemeStyle }

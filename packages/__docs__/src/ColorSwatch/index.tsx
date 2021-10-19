@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import { Component } from 'react'
-import PropTypes, { number } from 'prop-types'
 
 import { isValid } from '@instructure/ui-color-utils'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -32,7 +32,6 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
 import type { ColorSwatchProps } from './props'
-import React from 'react'
 
 @withStyle(generateStyle, generateComponentTheme)
 class ColorSwatch extends Component<ColorSwatchProps> {

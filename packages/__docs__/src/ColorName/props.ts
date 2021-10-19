@@ -23,7 +23,7 @@
  */
 
 import PropTypes from 'prop-types'
-import { PropValidators, AsElementType } from '@instructure/shared-types'
+import type { PropValidators, AsElementType } from '@instructure/shared-types'
 type ColorNameOwnProps = {
   name: string
   as?: AsElementType
@@ -32,14 +32,14 @@ type ColorNameOwnProps = {
 type PropKeys = keyof ColorNameOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 type ColorNameProps = ColorNameOwnProps
-export type { ColorNameProps }
 const propTypes: PropValidators<PropKeys> = {
   name: PropTypes.string.isRequired,
   as: PropTypes.elementType,
   lineHeight: PropTypes.oneOf(['default', 'fit', 'condensed', 'double'])
 }
 const allowedProps: AllowedPropKeys = ['name', 'as', 'lineHeight']
-export type ColorNameState = {
+type ColorNameState = {
   isTruncated: boolean
 }
 export { propTypes, allowedProps }
+export type { ColorNameState, ColorNameProps }

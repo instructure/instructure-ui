@@ -33,8 +33,7 @@ class ColorCard extends Component<ColorCardProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    minimal: false,
-    name: undefined
+    minimal: false
   }
 
   hexToRgb(hex: string) {

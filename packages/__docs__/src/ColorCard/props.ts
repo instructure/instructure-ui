@@ -23,10 +23,10 @@
  */
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
-export type ColorCardOwnProps = {
+type ColorCardOwnProps = {
   hex: string
   name: string
-  minimal: boolean
+  minimal?: boolean
 }
 
 type PropKeys = keyof ColorCardOwnProps
