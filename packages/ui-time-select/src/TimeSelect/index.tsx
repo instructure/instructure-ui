@@ -100,10 +100,15 @@ class TimeSelect extends Component<TimeSelectProps> {
   _emptyOptionId = uid('Select-EmptyOption')
 
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_select' does not exist on type 'TimeSel... Remove this comment to see the full error message
-    this._select && this._select.focus()
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'TimeSel... Remove this comment to see the full error message
+    this.ref && this.ref.focus()
   }
 
+  get _select() {
+    console.warn('_select property is deprecated, please use ref instead')
+
+    return this.ref
+  }
   get isControlled() {
     return typeof this.props.value !== 'undefined'
   }
@@ -113,13 +118,12 @@ class TimeSelect extends Component<TimeSelectProps> {
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_select' does not exist on type 'TimeSel... Remove this comment to see the full error message
-    return this._select && this._select.focused
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'TimeSel... Remove this comment to see the full error message
+    return this.ref && this.ref.focused
   }
 
   get id() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_select' does not exist on type 'TimeSel... Remove this comment to see the full error message
-    return this._select && this._select.id
+    return this.ref && this.ref.id
   }
 
   locale() {
@@ -310,8 +314,6 @@ class TimeSelect extends Component<TimeSelectProps> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleRef = (node) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_select' does not exist on type 'TimeSel... Remove this comment to see the full error message
-    this._select = node // TODO remove this and keep this.ref
     this.ref = node
   }
 

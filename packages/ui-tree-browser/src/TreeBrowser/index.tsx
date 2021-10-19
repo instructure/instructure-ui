@@ -98,6 +98,11 @@ class TreeBrowser extends Component<TreeBrowserProps> {
   componentDidUpdate() {
     this.props.makeStyles?.()
   }
+  get _root() {
+    console.warn('_root property is deprecated, please use ref instead')
+
+    return this.ref
+  }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleCollectionClick = (e, collection, expand = true) => {
@@ -210,8 +215,7 @@ class TreeBrowser extends Component<TreeBrowserProps> {
   }
 
   getNavigableNodes() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'TreeBrows... Remove this comment to see the full error message
-    return Array.from(this._root.querySelectorAll('[role="treeitem"]'))
+    return Array.from(this.ref!.querySelectorAll('[role="treeitem"]'))
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'delta' implicitly has an 'any' type.
@@ -219,7 +223,7 @@ class TreeBrowser extends Component<TreeBrowserProps> {
     const nodes = this.getNavigableNodes()
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     const closest = window.document.activeElement.closest('[role="treeitem"]')
-    const active = nodes.indexOf(closest)
+    const active = nodes.indexOf(closest!)
     let next = active + delta
     if (next < 0) {
       next = 0
@@ -227,10 +231,8 @@ class TreeBrowser extends Component<TreeBrowserProps> {
       next = nodes.length - 1
     }
     nodes.forEach((n) => {
-      // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
       n.setAttribute('tabindex', '-1')
     })
-    // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
     nodes[next].setAttribute('tabindex', '0')
     // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
     nodes[next].focus()
@@ -249,8 +251,8 @@ class TreeBrowser extends Component<TreeBrowserProps> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'keyCode' implicitly has an 'any' type.
   handleLeftOrRightArrow(keyCode, node) {
     const ltr = !(
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'TreeBrows... Remove this comment to see the full error message
-      (this._root.parentElement.dir === 'rtl' || document.dir === 'rtl')
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' is possibly null
+      (this.ref.parentElement.dir === 'rtl' || document.dir === 'rtl')
     )
     if (
       (ltr && keyCode === keycode.codes.left) ||
@@ -385,8 +387,6 @@ class TreeBrowser extends Component<TreeBrowserProps> {
         // @ts-expect-error ts-migrate(2322) FIXME: Type '(event: any, node: any) => void' is not assi... Remove this comment to see the full error message
         onKeyDown={this.handleKeyDown}
         ref={(el) => {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'TreeBrows... Remove this comment to see the full error message
-          this._root = el // TODO remove this and keep only 'ref' in V9
           this.ref = el
         }}
         aria-label={this.props.treeLabel}

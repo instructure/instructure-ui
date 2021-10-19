@@ -79,8 +79,6 @@ class BaseButton extends Component<BaseButtonProps> {
     onKeyDown: (event) => {}
   } as const
 
-  _rootElement: Element | null = null
-
   ref: Element | null = null
 
   componentDidMount() {
@@ -92,6 +90,11 @@ class BaseButton extends Component<BaseButtonProps> {
   componentDidUpdate(prevProps, prevState, snapshot) {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
+  }
+  get _rootElement() {
+    console.warn('_rootElement property is deprecated, please use ref instead')
+
+    return this.ref
   }
 
   get makeStylesVariables(): BaseButtonStyleProps {
@@ -147,18 +150,17 @@ class BaseButton extends Component<BaseButtonProps> {
   }
 
   get focused() {
-    return isActiveElement(this._rootElement)
+    return isActiveElement(this.ref)
   }
 
   focus() {
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    this._rootElement && this._rootElement.focus()
+    this.ref && this.ref.focus()
   }
 
   handleElementRef = (el: Element | null) => {
     const { elementRef } = this.props
 
-    this._rootElement = el
     this.ref = el
 
     if (typeof elementRef === 'function') {
@@ -206,7 +208,7 @@ class BaseButton extends Component<BaseButtonProps> {
 
       if (href) {
         // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-        this._rootElement && this._rootElement.click()
+        this.ref && this.ref.click()
       }
     }
   }

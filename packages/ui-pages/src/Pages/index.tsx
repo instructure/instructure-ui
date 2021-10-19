@@ -66,12 +66,16 @@ class Pages extends Component<PagesProps> {
   static Page = Page
 
   _timeouts = []
+  get _contentElement() {
+    console.warn(
+      '_contentElement property is deprecated, please use ref instead'
+    )
+
+    return this.ref
+  }
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_contentElement' does not exist on type ... Remove this comment to see the full error message
-    this._contentElement = el // TODO remove with v9 and keep ref
-
     this.ref = el
   }
 
@@ -133,8 +137,7 @@ class Pages extends Component<PagesProps> {
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_contentElement' does not exist on type ... Remove this comment to see the full error message
-    return containsActiveElement(this._contentElement)
+    return containsActiveElement(this.ref)
   }
 
   focus() {
@@ -149,8 +152,7 @@ class Pages extends Component<PagesProps> {
           activePage.focus()
         } else {
           // Use first tabbable as last ditch effort
-          // @ts-expect-error ts-migrate(2339) FIXME:
-          const tabbable = findTabbable(this._contentElement)
+          const tabbable = findTabbable(this.ref)
           const element = tabbable && tabbable[0]
 
           // @ts-expect-error ts-migrate(2554) FIXME:

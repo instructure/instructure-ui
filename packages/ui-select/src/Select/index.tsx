@@ -128,7 +128,6 @@ class Select extends Component<SelectProps> {
 
   _defaultId = uid('Select')
   _assistId = uid('Select-assistiveText')
-  _input = null
   _inputContainer = undefined
   _list = null
   // temporarily stores actionable options
@@ -138,11 +137,16 @@ class Select extends Component<SelectProps> {
 
   focus() {
     // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    this._input && this._input.focus()
+    this.ref && this.ref.focus()
+  }
+  get _input() {
+    console.warn('_input property is deprecated, please use ref instead')
+
+    return this.ref
   }
 
   get focused() {
-    return this._input && isActiveElement(this._input)
+    return this.ref && isActiveElement(this.ref)
   }
 
   get id() {
@@ -224,7 +228,6 @@ class Select extends Component<SelectProps> {
       this.setState({ hasInputRef: true })
     }
 
-    this._input = node // TODO remove this in v9 and keep just 'ref'
     this.ref = node
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.inputRef(node)

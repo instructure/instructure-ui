@@ -103,6 +103,11 @@ class Pagination extends Component<PaginationProps> {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_nextButton' does not exist on type 'Pag... Remove this comment to see the full error message
     this._nextButton = null
   }
+  get _root() {
+    console.warn('_root property is deprecated, please use ref instead')
+
+    return this.ref
+  }
 
   getSnapshotBeforeUpdate() {
     const activeElement = getActiveElement()
@@ -134,8 +139,7 @@ class Pagination extends Component<PaginationProps> {
     const { prevButtonFocused, nextButtonFocused } = snapshot || {}
 
     if (prevButtonFocused || nextButtonFocused) {
-      // @ts-expect-error ts-migrate(2339) FIXME:
-      const focusable = findTabbable(this._root)
+      const focusable = findTabbable(this.ref)
       const focusIndex = prevButtonFocused ? 0 : focusable.length - 1
       // @ts-expect-error ts-migrate(2554) FIXME:
       focusable[focusIndex].focus()
@@ -159,8 +163,6 @@ class Pagination extends Component<PaginationProps> {
   handleElementRef = (el) => {
     this.ref = el
     if (el) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'Paginatio... Remove this comment to see the full error message
-      this._root = el
       if (typeof this.props.elementRef === 'function') {
         this.props.elementRef(el)
       }
