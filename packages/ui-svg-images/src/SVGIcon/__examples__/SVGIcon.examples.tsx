@@ -22,11 +22,22 @@
  * SOFTWARE.
  */
 import React from 'react'
+import type { SVGIconProps } from '../props'
 
 export default {
-  sectionProp: 'size',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  sectionProp: 'size' as const,
+  filter: (props: SVGIconProps) => {
+    return (
+      props.color === 'secondary-inverse' ||
+      props.color === 'primary-inverse' ||
+      props.color === 'auto' ||
+      props.color === 'alert' ||
+      props.color === 'warning' ||
+      props.color === 'error' ||
+      props.color === 'inherit'
+    )
+  },
+  getComponentProps: () => {
     return {
       viewBox: '0 0 2000 2000',
       children: (
