@@ -89,7 +89,6 @@ class Tray extends Component<TrayProps> {
   }
 
   ref: Element | null = null
-  _DOMNode: PortalNode = null
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -137,11 +136,12 @@ class Tray extends Component<TrayProps> {
   }
 
   get DOMNode() {
-    return this._DOMNode
+    console.warn('DOMNode property is deprecated, please use ref instead')
+
+    return this.ref
   }
 
   set DOMNode(el) {
-    this._DOMNode = el // TODO remove this in v9 and keep this.ref
     this.ref = el ? el : null
   }
 

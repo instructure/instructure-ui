@@ -74,6 +74,11 @@ class TruncateText extends Component<TruncateTextProps> {
     super(props)
     this.state = this.initialState
   }
+  get _ref() {
+    console.warn('_ref property is deprecated, please use ref instead')
+
+    return this.ref
+  }
 
   get initialState() {
     return {
@@ -103,8 +108,7 @@ class TruncateText extends Component<TruncateTextProps> {
         trailing: true
       })
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'width' does not exist on type '{}'.
-      const { width: origWidth } = getBoundingClientRect(this._ref)
+      const { width: origWidth } = getBoundingClientRect(this.ref)
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_resizeListener' does not exist on type ... Remove this comment to see the full error message
       this._resizeListener = new ResizeObserver((entries) => {
         // requestAnimationFrame call is needed becuase some truncatetext test cases
@@ -123,7 +127,7 @@ class TruncateText extends Component<TruncateTextProps> {
       })
 
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_resizeListener' does not exist on type ... Remove this comment to see the full error message
-      this._resizeListener.observe(this._ref)
+      this._resizeListener.observe(this.ref)
     }
   }
 
@@ -199,8 +203,7 @@ class TruncateText extends Component<TruncateTextProps> {
   }
 
   update = () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_ref' does not exist on type 'TruncateTe... Remove this comment to see the full error message
-    if (this._ref) {
+    if (this.ref) {
       this.setState(this.initialState)
     }
   }
@@ -215,8 +218,7 @@ class TruncateText extends Component<TruncateTextProps> {
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncate... Remove this comment to see the full error message
       const result = truncate(this._stage, {
         ...this.props,
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_ref' does not exist on type 'TruncateTe... Remove this comment to see the full error message
-        parent: this._ref,
+        parent: this.ref,
         lineHeight: this.props.styles?.lineHeight
       })
       if (result) {
@@ -239,8 +241,7 @@ class TruncateText extends Component<TruncateTextProps> {
         isTruncated: false,
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_text' does not exist on type 'TruncateT... Remove this comment to see the full error message
         truncatedElement: this._text,
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_ref' does not exist on type 'TruncateTe... Remove this comment to see the full error message
-        truncatedText: this._ref.textContent
+        truncatedText: this.ref?.textContent
       })
     }
   }
@@ -290,8 +291,6 @@ class TruncateText extends Component<TruncateTextProps> {
       <span
         css={this.props.styles?.truncateText}
         ref={(el) => {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_ref' does not exist on type 'TruncateTe... Remove this comment to see the full error message
-          this._ref = el // TODO remove this and keep only 'ref' in V9
           this.ref = el
         }}
       >

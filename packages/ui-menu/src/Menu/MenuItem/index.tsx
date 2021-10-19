@@ -78,12 +78,14 @@ class MenuItem extends Component<MenuItemProps> {
     this.labelId = uid('MenuItem__label')
   }
 
-  ref: Element | null = null
-  _node: Element | null = null
+  get _node() {
+    console.warn('_node property is deprecated, please use ref instead')
 
+    return this.ref
+  }
+  ref: Element | null = null
   handleRef = (el: Element | null) => {
     this.ref = el
-    this._node = el
   }
 
   componentDidMount() {
@@ -144,8 +146,8 @@ class MenuItem extends Component<MenuItemProps> {
 
       if (enterKey) {
         // handle space key on keyUp for FF
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_node' does not exist on type 'MenuItem'... Remove this comment to see the full error message
-        findDOMNode(this._node).click() // eslint-disable-line react/no-find-dom-node
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'MenuItem'... Remove this comment to see the full error message
+        findDOMNode(this.ref).click() // eslint-disable-line react/no-find-dom-node
       }
     }
   }
@@ -160,8 +162,8 @@ class MenuItem extends Component<MenuItemProps> {
       e.stopPropagation()
 
       if (spaceKey) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_node' does not exist on type 'MenuItem'... Remove this comment to see the full error message
-        findDOMNode(this._node).click() // eslint-disable-line react/no-find-dom-node
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'MenuItem'... Remove this comment to see the full error message
+        findDOMNode(this.ref).click() // eslint-disable-line react/no-find-dom-node
       }
     }
   }
@@ -200,12 +202,12 @@ class MenuItem extends Component<MenuItemProps> {
   }
 
   get focused() {
-    return isActiveElement(this._node)
+    return isActiveElement(this.ref)
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_node' does not exist on type 'MenuItem'... Remove this comment to see the full error message
-    findDOMNode(this._node).focus() // eslint-disable-line react/no-find-dom-node
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'MenuItem'... Remove this comment to see the full error message
+    findDOMNode(this.ref).focus() // eslint-disable-line react/no-find-dom-node
   }
 
   renderContent() {

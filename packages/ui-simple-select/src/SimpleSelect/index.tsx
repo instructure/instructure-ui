@@ -103,19 +103,24 @@ class SimpleSelect extends Component<SimpleSelectProps> {
 
   _emptyOptionId = uid('Select-EmptyOption')
 
+  get _select() {
+    console.warn('_select property is deprecated, please use ref instead')
+
+    return this.ref
+  }
+
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_select' does not exist on type 'SimpleS... Remove this comment to see the full error message
-    this._select && this._select.focus()
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'SimpleS... Remove this comment to see the full error message
+    this.ref && this.ref.focus()
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_select' does not exist on type 'SimpleS... Remove this comment to see the full error message
-    return this._select && this._select.focused
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'SimpleS... Remove this comment to see the full error message
+    return this.ref && this.ref.focused
   }
 
   get id() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_select' does not exist on type 'SimpleS... Remove this comment to see the full error message
-    return this._select && this._select.id
+    return this.ref && this.ref.id
   }
 
   get isControlled() {
@@ -215,8 +220,6 @@ class SimpleSelect extends Component<SimpleSelectProps> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleRef = (node) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_select' does not exist on type 'SimpleS... Remove this comment to see the full error message
-    this._select = node // TODO remove this in v9 and keep only "ref"
     this.ref = node
   }
 

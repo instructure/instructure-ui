@@ -525,7 +525,6 @@ class Menu extends Component<MenuProps> {
         renderTrigger={safeCloneElement(trigger as ReactElement, {
           // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
           ref: (el) => {
-            this._trigger = el
             this.ref = el
           },
           'aria-haspopup': true,

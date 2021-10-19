@@ -56,12 +56,15 @@ class Page extends Component<PagesPageProps> {
     navigateToPreviousPage: PropTypes.func
   }
 
+  get _content() {
+    console.warn('_content deprecated, please use ref instead')
+
+    return this.ref
+  }
+
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_content' does not exist on type 'Page'.... Remove this comment to see the full error message
-    this._content = el // TODO remove and keep 'ref' in v9
-
     this.ref = el
   }
 
@@ -77,8 +80,7 @@ class Page extends Component<PagesPageProps> {
     }
 
     if (!defaultFocusElement) {
-      // @ts-expect-error ts-migrate(2551) FIXME:
-      const tabbable = findTabbable(this._content)
+      const tabbable = findTabbable(this.ref)
       // @ts-expect-error ts-migrate(2554) FIXME:
       defaultFocusElement = tabbable && tabbable[0]
     }

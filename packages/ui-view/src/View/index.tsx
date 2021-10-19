@@ -106,7 +106,11 @@ class View extends Component<ViewProps> {
   }
 
   private spanMarginVerified: boolean
-  private _element?: Element | null
+  get _element() {
+    console.warn('_element property is deprecated, please use ref instead')
+
+    return this.ref
+  }
 
   constructor(props: ViewProps) {
     super(props)
@@ -163,7 +167,7 @@ class View extends Component<ViewProps> {
           }
 
           return verticalMargin
-        })(this._element, this.props.margin),
+        })(this.ref, this.props.margin),
         `[View] display style is set to 'inline' and will allow for horizontal margins only.`
       )
     }
@@ -176,7 +180,6 @@ class View extends Component<ViewProps> {
       this.props.elementRef(el)
     }
     this.ref = el
-    this._element = el
   }
 
   render() {
