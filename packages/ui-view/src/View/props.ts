@@ -26,6 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
+import type { Cursor } from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
@@ -181,7 +182,7 @@ type ViewOwnProps = {
   /**
    * Specify a mouse cursor to use when hovering over the `<View />`
    */
-  cursor?: any
+  cursor?: Cursor
 }
 
 type PropKeys = keyof ViewOwnProps

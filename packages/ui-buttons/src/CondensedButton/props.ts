@@ -34,6 +34,7 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
+import type { Cursor } from '@instructure/ui-prop-types'
 
 type CondensedButtonOwnProps = {
   children?: React.ReactNode
@@ -44,7 +45,7 @@ type CondensedButtonOwnProps = {
   interaction?: 'enabled' | 'disabled' | 'readonly'
   color?: 'primary' | 'primary-inverse'
   margin?: Spacing
-  cursor?: string
+  cursor?: Cursor
   href?: string
   renderIcon?: React.ReactNode | ((...args: any[]) => any)
 }

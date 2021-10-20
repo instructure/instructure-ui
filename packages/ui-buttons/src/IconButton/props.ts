@@ -34,6 +34,7 @@ import type {
   BaseButtonTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
+import type { Cursor } from '@instructure/ui-prop-types'
 
 type IconButtonOwnProps = {
   children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
@@ -50,7 +51,7 @@ type IconButtonOwnProps = {
   withBackground?: boolean
   withBorder?: boolean
   margin?: Spacing
-  cursor?: string
+  cursor?: Cursor
   href?: string
 }
 

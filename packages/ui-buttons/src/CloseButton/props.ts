@@ -36,6 +36,7 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
+import type { Cursor } from '@instructure/ui-prop-types'
 
 type CloseButtonOwnProps = {
   screenReaderLabel: string | React.ReactNode
@@ -50,7 +51,7 @@ type CloseButtonOwnProps = {
   type?: 'button' | 'submit' | 'reset'
   as?: AsElementType
   href?: string
-  cursor?: string
+  cursor?: Cursor
   tabIndex?: number | string
 }
 
