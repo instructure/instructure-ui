@@ -104,7 +104,7 @@ class Calendar extends Component<CalendarProps> {
 
     const nextButton: ReactElement = callRenderProp(renderNextMonthButton)
     const prevButton: ReactElement = callRenderProp(renderPrevMonthButton)
-    const cloneButton = (button: ReactElement, onClick?: (e?: Event) => void) =>
+    const cloneButton = (button: ReactElement, onClick?: (e: Event) => void) =>
       safeCloneElement(button, {
         onClick: createChainedFunction(button.props.onClick, onClick)
       })
