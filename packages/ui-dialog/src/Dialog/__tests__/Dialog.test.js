@@ -68,6 +68,19 @@ describe('<Dialog />', async () => {
     expect(await dialog.find('[aria-label="Dialog Example"]')).to.exist()
   })
 
+  it('should apply the role attributes, if explicitly passed', async () => {
+    const subject = await mount(
+      <Dialog open label="Dialog Example" role="region">
+        <button>Hello World</button>
+      </Dialog>
+    )
+
+    const dialog = within(subject.getDOMNode())
+
+    expect(await dialog.find('[role="region"]')).to.exist()
+    expect(await dialog.find('[aria-label="Dialog Example"]')).to.exist()
+  })
+
   it('should call onDismiss prop when Esc key pressed', async () => {
     const onDismiss = stub()
     const subject = await mount(

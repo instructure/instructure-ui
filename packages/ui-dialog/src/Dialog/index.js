@@ -220,11 +220,15 @@ class Dialog extends Component {
 
   render() {
     const ElementType = getElementType(Dialog, this.props)
+
+    // In case the HTML role attribute is explicitly passed, use props.role
+    const role = this.props.role || (this.props.label ? 'dialog' : undefined) // eslint-disable-line react/prop-types
+
     return this.props.open ? (
       <ElementType
         {...omitProps(this.props, Dialog.propTypes)}
         ref={this.getRef}
-        role={this.props.label ? 'dialog' : null}
+        role={role}
         aria-label={this.props.label}
         className={this.props.className} // eslint-disable-line react/prop-types
       >
