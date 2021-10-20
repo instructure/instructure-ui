@@ -224,20 +224,43 @@ describe('<DrawerTray />', async () => {
     )
   })
 
-  it('should apply the a11y attributes', async () => {
-    await mount(
-      <DrawerTray
-        label="a tray test"
-        open={true}
-        render={() => {
-          return 'Hello from layout tray'
-        }}
-      />
-    )
-    const drawerTray = await DrawerTrayLocator.find()
-    const dialog = await drawerTray.find(':label(a tray test)')
+  describe('should apply the a11y attributes', async () => {
+    it("when it doesn't overlay the content", async () => {
+      await mount(
+        <DrawerLayoutContext.Provider value={false}>
+          <DrawerTray
+            label="a tray test"
+            open={true}
+            render={() => {
+              return 'Hello from layout tray'
+            }}
+          />
+        </DrawerLayoutContext.Provider>
+      )
+      const drawerTray = await DrawerTrayLocator.find()
+      const dialog = await drawerTray.find(':label(a tray test)')
 
-    expect(dialog).to.exist()
-    expect(dialog.getAttribute('role')).to.equal('dialog')
+      expect(dialog).to.exist()
+      expect(dialog.getAttribute('role')).to.equal('region')
+    })
+
+    it('when it overlays the content', async () => {
+      await mount(
+        <DrawerLayoutContext.Provider value={true}>
+          <DrawerTray
+            label="a tray test"
+            open={true}
+            render={() => {
+              return 'Hello from layout tray'
+            }}
+          />
+        </DrawerLayoutContext.Provider>
+      )
+      const drawerTray = await DrawerTrayLocator.find()
+      const dialog = await drawerTray.find(':label(a tray test)')
+
+      expect(dialog).to.exist()
+      expect(dialog.getAttribute('role')).to.equal('dialog')
+    })
   })
 })
