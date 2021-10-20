@@ -51,13 +51,17 @@ describe('<ModalBody />', async () => {
     )
   })
 
-  it('should set 100% width and height when overflow is set to fit', async () => {
-    await mount(<ModalBody overflow="fit" />)
+  it('should set the same width and height as the parent when overflow is set to fit', async () => {
+    await mount(
+      <div style={{ width: '500px', height: '600px' }}>
+        <ModalBody overflow="fit" />
+      </div>
+    )
 
     const body = await ModalBodyLocator.find()
 
-    expect((body.getDOMNode() as HTMLElement).style.width).to.equal('100%')
-    expect((body.getDOMNode() as HTMLElement).style.height).to.equal('100%')
+    expect(window.getComputedStyle(body.getDOMNode()).width).to.equal('500px')
+    expect(window.getComputedStyle(body.getDOMNode()).height).to.equal('600px')
   })
 
   describe('when passing down props to View', async () => {
