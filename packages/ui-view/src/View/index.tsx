@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, ComponentType } from 'react'
+import { Component, ComponentType, CSSProperties } from 'react'
 
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { bidirectional } from '@instructure/ui-i18n'
@@ -45,12 +45,11 @@ import type { ViewProps } from './props'
 /**
 ---
 category: components
-
 ---
 API:
   - [View](https://instructure.design/#View)
 @module View
-
+@tsProps
 **/
 @bidirectional()
 @withStyle(generateStyle, generateComponentTheme)
@@ -220,8 +219,7 @@ class View extends Component<ViewProps> {
         {...passthroughProps(props)}
         className={className}
         css={styles?.view}
-        //@ts-expect-error TODO: null not assignable
-        style={styles?.inlineStyles}
+        style={styles?.inlineStyles as CSSProperties}
         ref={this.handleElementRef}
       >
         {children}

@@ -34,6 +34,7 @@ import type {
   BaseButtonTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
+import type { Cursor } from '@instructure/ui-prop-types'
 
 type ButtonOwnProps = {
   children?: React.ReactNode
@@ -48,7 +49,7 @@ type ButtonOwnProps = {
   textAlign?: 'start' | 'center'
   withBackground?: boolean
   margin?: Spacing
-  cursor?: string
+  cursor?: Cursor
   href?: string
   renderIcon?: React.ReactNode | ((...args: any[]) => any)
 }

@@ -39,6 +39,7 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
+import type { Cursor } from '@instructure/ui-prop-types'
 
 type BaseButtonOwnProps = {
   children?: React.ReactNode
@@ -56,7 +57,7 @@ type BaseButtonOwnProps = {
   withBorder?: boolean
   isCondensed?: boolean
   margin?: Spacing
-  cursor?: string
+  cursor?: Cursor
   href?: string
   onClick?: (...args: any[]) => any
   onKeyDown?: (...args: any[]) => any

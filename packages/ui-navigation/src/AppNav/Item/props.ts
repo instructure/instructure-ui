@@ -30,6 +30,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { Cursor } from '@instructure/ui-prop-types'
 
 type AppNavItemOwnProps = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
@@ -40,7 +41,7 @@ type AppNavItemOwnProps = {
   isSelected?: boolean
   elementRef?: (element: Element | null) => void
   as?: AsElementType
-  cursor?: string
+  cursor?: Cursor
   isDisabled?: boolean
 }
 

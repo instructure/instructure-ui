@@ -39,6 +39,7 @@ import type { ContextViewProps } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)

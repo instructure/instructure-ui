@@ -64,7 +64,7 @@ class Item extends Component<AppNavItemProps> {
     isSelected: false,
     cursor: 'pointer',
     isDisabled: false
-  }
+  } as const
 
   ref: Element | null = null
 

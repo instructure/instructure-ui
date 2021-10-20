@@ -51,3 +51,4 @@ export default {
   makeRequirable,
   xor
 }
+export type { Cursor } from './cursor'
