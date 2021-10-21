@@ -136,7 +136,9 @@ class Tray extends Component<TrayProps> {
   }
 
   get DOMNode() {
-    console.warn('DOMNode property is deprecated, please use ref instead')
+    console.warn(
+      'DOMNode property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }

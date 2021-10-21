@@ -68,7 +68,7 @@ class Pages extends Component<PagesProps> {
   _timeouts = []
   get _contentElement() {
     console.warn(
-      '_contentElement property is deprecated, please use ref instead'
+      '_contentElement property is deprecated and will be removed in v9, please use ref instead'
     )
 
     return this.ref

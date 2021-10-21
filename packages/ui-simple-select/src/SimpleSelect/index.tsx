@@ -104,7 +104,9 @@ class SimpleSelect extends Component<SimpleSelectProps> {
   _emptyOptionId = uid('Select-EmptyOption')
 
   get _select() {
-    console.warn('_select property is deprecated, please use ref instead')
+    console.warn(
+      '_select property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }

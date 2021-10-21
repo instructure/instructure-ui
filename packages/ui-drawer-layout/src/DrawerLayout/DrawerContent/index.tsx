@@ -72,7 +72,9 @@ class DrawerContent extends Component<
 
   ref: Element | null = null
   get _content() {
-    console.warn('_content property is deprecated, please use ref instead')
+    console.warn(
+      '_content property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }

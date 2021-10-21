@@ -140,7 +140,9 @@ class Select extends Component<SelectProps> {
     this.ref && this.ref.focus()
   }
   get _input() {
-    console.warn('_input property is deprecated, please use ref instead')
+    console.warn(
+      '_input property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }

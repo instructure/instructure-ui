@@ -75,7 +75,9 @@ class TruncateText extends Component<TruncateTextProps> {
     this.state = this.initialState
   }
   get _ref() {
-    console.warn('_ref property is deprecated, please use ref instead')
+    console.warn(
+      '_ref property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }

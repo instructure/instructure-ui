@@ -104,7 +104,9 @@ class Pagination extends Component<PaginationProps> {
     this._nextButton = null
   }
   get _root() {
-    console.warn('_root property is deprecated, please use ref instead')
+    console.warn(
+      '_root property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }

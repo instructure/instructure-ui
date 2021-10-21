@@ -68,7 +68,9 @@ class Link extends Component<LinkProps> {
   state = { hasFocus: false }
 
   get _link() {
-    console.warn('_link property is deprecated, please use ref instead')
+    console.warn(
+      '_link property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }
