@@ -26,9 +26,6 @@ import React, { CSSProperties } from 'react'
 
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import { View } from '../../index'
-import generateStyle from '../styles'
-import generateComponentTheme from '../theme'
-import { canvas } from '@instructure/ui-themes'
 
 describe('<View />', async () => {
   it('should render', async () => {
