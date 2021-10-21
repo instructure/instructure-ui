@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { expect, mount, wait, within } from '@instructure/ui-test-utils'
 
 import { ApplyTextDirection } from '../index'
 import { bidirectional, BidirectionalProps } from '../../bidirectional'
@@ -90,5 +90,36 @@ describe('<ApplyTextDirection />', async () => {
     const text = await component.findWithText('Hello world')
 
     expect(text.getAttribute('data-dir')).to.equal('ltr')
+  })
+
+  it('should use the "auto" dir value correctly', async () => {
+    const subject = await mount(
+      <ApplyTextDirection dir="auto">
+        <span>
+          هذه الفقرة باللغة العربية ، لذا يجب الانتقال من اليمين إلى اليسار.
+        </span>
+      </ApplyTextDirection>
+    )
+    expect(
+      getComputedStyle(subject.getDOMNode().childNodes[0] as Element).direction
+    ).to.equal('rtl')
+  })
+
+  it('allows a function as child', async () => {
+    let dirValue: string
+    let rtl: boolean
+    await mount(
+      <ApplyTextDirection dir="rtl">
+        {(dir, isRtl) => {
+          dirValue = dir
+          rtl = isRtl
+          return <span>Hello world!</span>
+        }}
+      </ApplyTextDirection>
+    )
+    await wait(() => {
+      expect(dirValue).to.equal('rtl')
+      expect(rtl).to.equal(true)
+    })
   })
 })

@@ -29,7 +29,8 @@ const TextDirectionContext = createContext(getTextDirection() || 'ltr')
 
 const DIRECTION = {
   ltr: 'ltr',
-  rtl: 'rtl'
+  rtl: 'rtl',
+  auto: 'auto'
 }
 
 export default TextDirectionContext

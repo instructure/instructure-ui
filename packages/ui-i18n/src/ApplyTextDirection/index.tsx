@@ -38,7 +38,6 @@ const ApplyTextDirection = (props: ApplyTextDirectionProps) => {
   const context = useTextDirectionContext()
   const dir = props.dir || context
   const ElementType = getElementType(ApplyTextDirection, props)
-
   return (
     <TextDirectionContext.Provider value={dir}>
       {
@@ -57,8 +56,6 @@ ApplyTextDirection.defaultProps = {
   as: 'span',
   children: null
 } as const
-
-ApplyTextDirection.DIRECTION = DIRECTION
 
 const useTextDirectionContext = () => {
   return useContext(TextDirectionContext)

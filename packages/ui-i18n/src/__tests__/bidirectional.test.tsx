@@ -31,7 +31,7 @@ import { ApplyTextDirection } from '../ApplyTextDirection'
 @bidirectional()
 class BidirectionalComponent extends React.Component<BidirectionalProps> {
   render() {
-    return <div data-dir={this.props.dir}>Hello World</div>
+    return <div data-dir={this.props.dir}>{this.props.children}</div>
   }
 }
 
@@ -44,6 +44,21 @@ describe('@bidirectional', async () => {
   it('should set the text direction via props', async () => {
     const subject = await mount(<BidirectionalComponent dir="rtl" />)
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
+  })
+
+  it.only('setting "auto" from context figures out text direction from the text', async () => {
+    const subject = await mount(
+      <ApplyTextDirection dir="auto">
+        <BidirectionalComponent>
+          <span>
+            هذه الفقرة باللغة العربية ، لذا يجب الانتقال من اليمين إلى اليسار.
+          </span>
+        </BidirectionalComponent>
+      </ApplyTextDirection>
+    )
+    expect(
+      getComputedStyle(subject.getDOMNode().childNodes[0] as Element).direction
+    ).to.equal('rtl')
   })
 
   it('should give props preference when context and context are present', async () => {

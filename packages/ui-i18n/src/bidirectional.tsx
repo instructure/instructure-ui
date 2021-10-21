@@ -31,7 +31,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 // that uses the bidirectional decorator.
 // see https://github.com/microsoft/TypeScript/issues/4881
 export type BidirectionalProps = {
-  dir?: 'ltr' | 'rtl'
+  dir?: 'ltr' | 'rtl' | 'auto'
 }
 
 type BidirectionalInternalProps = {
@@ -78,9 +78,9 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
       const { forwardedRef, ...rest } = this.props
       return (
         <TextDirectionContext.Consumer>
-          {(dir) => (
-            <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
-          )}
+          {(dir) => {
+            return <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
+          }}
         </TextDirectionContext.Consumer>
       )
     }
