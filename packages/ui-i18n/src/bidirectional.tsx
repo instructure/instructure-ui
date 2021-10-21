@@ -76,6 +76,12 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
   class BidirectionalComponent extends React.Component<BidirectionalInternalProps> {
     render() {
       const { forwardedRef, ...rest } = this.props
+      // quite a complex code:
+      // If there is a <TextDirectionContext.Provider> (or <ApplyTextDirection>
+      // which uses it) above the @bidirectional, use its value.
+      // If not, and there is a 'dir' prop is added via ...rest
+      // Lastly TextDirectionContext calls getTextDirection() which returns
+      // the 'dir' prop of the HTML document element.
       return (
         <TextDirectionContext.Consumer>
           {(dir) => {
