@@ -129,7 +129,33 @@ const generateStyle = (
       ...((isSelected || isDisabled) && { cursor: 'default' }),
       ...(isDisabled && { opacity: 0.5 }),
 
-      '&:focus': { outline: 'none' },
+      // test
+      '&::before': {
+        pointerEvents: 'none',
+        content: '""',
+        position: 'absolute',
+        borderStyle: 'solid',
+        borderWidth: '0.125rem',
+        borderColor: '#0374B5',
+        opacity: 0,
+        borderRadius: 'calc(0.25rem + (0.3125rem - 0.125rem))',
+        top: '0.125rem',
+        left: '0.125rem',
+        right: '0.125rem',
+        bottom: '0.3125rem',
+        transition: 'all 0.2s',
+        transform: 'scale(0.85)'
+      },
+
+      '&:focus': {
+        outline: 'none',
+
+        // test
+        '&:before': {
+          opacity: 1,
+          transform: 'scale(1)'
+        }
+      },
 
       ...variants[variant!]
     }

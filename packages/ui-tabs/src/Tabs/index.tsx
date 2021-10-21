@@ -486,12 +486,12 @@ class Tabs extends Component<TabsProps> {
         css={styles?.container}
       >
         <Focusable ref={this.handleFocusableRef}>
-          {({ focusVisible }) => (
+          {() => (
             <View
               as="div"
               position="relative"
               borderRadius="medium"
-              withFocusOutline={focusVisible}
+              // withFocusOutline={focusVisible}
               shouldAnimateFocus={false}
               css={styles?.tabs}
             >
