@@ -27,9 +27,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import { transform } from '@babel/standalone'
-
-import { ApplyTextDirection } from '@instructure/ui-i18n'
+import { ApplyTextDirection, DIRECTION } from '@instructure/ui-i18n'
 import { EmotionThemeProvider, withStyle, jsx } from '@instructure/emotion'
 import { canvas } from '@instructure/ui-themes'
 
@@ -129,11 +127,7 @@ class Preview extends Component {
       let elToRender = (
         <EmotionThemeProvider theme={theme}>
           <ApplyTextDirection
-            dir={
-              this.props.rtl
-                ? ApplyTextDirection.DIRECTION.rtl
-                : ApplyTextDirection.DIRECTION.ltr
-            }
+            dir={this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr}
             as="div"
           >
             {el}

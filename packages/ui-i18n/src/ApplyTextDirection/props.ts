@@ -25,8 +25,21 @@
 import React from 'react'
 import { AsElementType } from '@instructure/shared-types'
 
+type DirValues = 'ltr' | 'rtl' | 'auto'
+
 export type ApplyTextDirectionProps = {
-  dir?: 'ltr' | 'rtl'
-  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  /**
+   * The direction value to use. For values and their effects see
+   * https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir
+   */
+  dir?: DirValues
+  /**
+   * The children of this component. Either a React node or a function
+   * that receives 2 parameters (text direction, is rtl direction?) and
+   * returns a React node
+   */
+  children?:
+    | React.ReactNode
+    | ((dir: DirValues, isRtl: boolean) => React.ReactNode)
   as?: AsElementType
 }
