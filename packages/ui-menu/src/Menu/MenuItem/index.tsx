@@ -79,7 +79,9 @@ class MenuItem extends Component<MenuItemProps> {
   }
 
   get _node() {
-    console.warn('_node property is deprecated, please use ref instead')
+    console.warn(
+      '_node property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }

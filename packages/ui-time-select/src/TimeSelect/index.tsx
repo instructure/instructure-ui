@@ -105,7 +105,9 @@ class TimeSelect extends Component<TimeSelectProps> {
   }
 
   get _select() {
-    console.warn('_select property is deprecated, please use ref instead')
+    console.warn(
+      '_select property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }

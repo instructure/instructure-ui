@@ -92,7 +92,9 @@ class BaseButton extends Component<BaseButtonProps> {
     this.props.makeStyles(this.makeStylesVariables)
   }
   get _rootElement() {
-    console.warn('_rootElement property is deprecated, please use ref instead')
+    console.warn(
+      '_rootElement property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }

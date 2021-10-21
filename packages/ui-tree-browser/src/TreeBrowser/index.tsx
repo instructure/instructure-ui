@@ -99,7 +99,9 @@ class TreeBrowser extends Component<TreeBrowserProps> {
     this.props.makeStyles?.()
   }
   get _root() {
-    console.warn('_root property is deprecated, please use ref instead')
+    console.warn(
+      '_root property is deprecated and will be removed in v9, please use ref instead'
+    )
 
     return this.ref
   }
