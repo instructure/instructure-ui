@@ -571,15 +571,6 @@ const generateStyle = (
 
   const focusStyles = getFocusStyles(props, componentTheme)
 
-  const important = (styles: Record<string, string | number | undefined>) =>
-    Object.entries(styles).reduce(
-      (acc, entry) =>
-        entry[1] === undefined
-          ? acc
-          : { ...acc, [entry[0]]: `${entry[1]} !important` },
-      {}
-    )
-
   return {
     view: {
       label: 'view',
@@ -608,18 +599,20 @@ const generateStyle = (
         : {}),
       ...(shouldUseFocusStyles ? focusStyles : {})
     },
-    inlineStyles: important({
-      ...spacingStyle,
-      ...borderStyle,
-      ...offsetStyle,
-      width,
-      height,
-      minWidth,
-      minHeight,
-      maxWidth,
-      maxHeight,
-      ...getStyleProps(props)
-    })
+    inlineStyles: {
+      '&&&&&&&&&&': {
+        ...spacingStyle,
+        ...borderStyle,
+        ...offsetStyle,
+        width,
+        height,
+        minWidth,
+        minHeight,
+        maxWidth,
+        maxHeight,
+        ...getStyleProps(props)
+      }
+    }
   }
 }
 export default generateStyle

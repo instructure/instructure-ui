@@ -222,28 +222,6 @@ describe('<View />', async () => {
     expect(view.getComputedStyle().maxWidth).to.equal('200px')
   })
 
-  describe('generateStyle', () => {
-    it('decoreates inlineStyle props with !important', () => {
-      const styles = generateStyle(generateComponentTheme(canvas), {
-        width: 'fit-content',
-        padding: 'xxx-small',
-        display: 'auto',
-        overflowX: 'auto',
-        overflowY: 'auto',
-        borderColor: 'primary',
-        position: 'absolute',
-        focusPosition: 'offset',
-        focusColor: 'info',
-        shouldAnimateFocus: false
-      }) as Record<string, string>
-
-      Object.entries(styles?.inlineStyles).forEach((style) => {
-        const css = style[1].split(' ')
-        return expect(css[css.length - 1]).to.equal('!important')
-      })
-    })
-  })
-
   describe('withFocusOutline', async () => {
     it('should warn when withFocusOutline is true without position=relative', async () => {
       const consoleError = stub(console, 'error')
