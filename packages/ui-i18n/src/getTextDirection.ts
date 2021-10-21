@@ -64,7 +64,8 @@ const getDefaultDir = () => {
  * category: utilities/i18n
  * ---
  *
- * Return the direction ('ltr' or 'rtl' or 'auto') of an element
+ * Return the direction ('ltr' or 'rtl' or 'auto') of an element. If no element
+ * is given, it returns the document's 'dir' value.
  * @module getTextDirection
  * @param {Element} element will use the <html> element by default
  * @returns {String} 'ltr' or 'rtl' or 'auto' (or `undefined` if no DOM is present)
