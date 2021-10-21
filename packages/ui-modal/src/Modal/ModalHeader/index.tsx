@@ -82,13 +82,15 @@ class ModalHeader extends Component<ModalHeaderProps> {
   }
 
   get usesCloseButton() {
-    // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
+    let hasCloseButton = false
+
     React.Children.forEach(this.props.children, (child) => {
       if (child && matchComponentTypes(child, [CloseButton])) {
-        return true
+        hasCloseButton = true
       }
     })
-    return false
+
+    return hasCloseButton
   }
 
   render() {
