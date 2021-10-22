@@ -86,8 +86,7 @@ class Byline extends Component<BylineProps> {
         css={this.props.styles?.byline}
         as="figure"
         margin={this.props.margin}
-        // This cast is needed because style props are usually can be objects
-        maxWidth={this.props.styles?.maxWidth as string}
+        maxWidth={this.props.styles?.maxWidth}
       >
         <div css={this.props.styles?.figure}>{this.props.children}</div>
         <figcaption css={this.props.styles?.caption}>
