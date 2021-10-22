@@ -26,7 +26,7 @@
 import { Component, ComponentType } from 'react'
 
 import { getComputedStyle } from '@instructure/ui-dom-utils'
-import { bidirectional } from '@instructure/ui-i18n'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { logError as error } from '@instructure/console'
 import {
   getElementType,
@@ -51,7 +51,7 @@ API:
 @module View
 @tsProps
 **/
-@bidirectional()
+@textDirectionContextConsumer()
 @withStyle(generateStyle, generateComponentTheme)
 class View extends Component<ViewProps> {
   static componentId = 'View'

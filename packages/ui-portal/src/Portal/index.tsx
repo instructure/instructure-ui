@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { bidirectional } from '@instructure/ui-i18n'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import { propTypes, allowedProps } from './props'
 import type { PortalNode, PortalProps, PortalState } from './props'
@@ -38,7 +38,7 @@ category: components/utilities
 @module Portal
 @tsProps
 **/
-@bidirectional()
+@textDirectionContextConsumer()
 class Portal extends Component<PortalProps, PortalState> {
   static propTypes = propTypes
   static allowedProps = allowedProps

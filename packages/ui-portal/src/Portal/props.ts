@@ -26,7 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
-import { bidirectional } from '@instructure/ui-i18n'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 import type {
@@ -95,7 +95,7 @@ const propTypes: PropValidators<PropKeys> = {
   insertAt: PropTypes.oneOf(['bottom', 'top']),
   children: PropTypes.node,
   elementRef: PropTypes.func,
-  dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+  dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION))
 }
 
 const allowedProps: AllowedPropKeys = [

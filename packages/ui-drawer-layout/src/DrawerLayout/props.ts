@@ -25,7 +25,7 @@
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { bidirectional } from '@instructure/ui-i18n'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import { DrawerContent } from './DrawerContent'
 import { DrawerTray } from './DrawerTray'
@@ -64,7 +64,7 @@ const propTypes: PropValidators<PropKeys> = {
    * it is side by side
    */
   onOverlayTrayChange: PropTypes.func,
-  dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+  dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION))
 }
 
 const allowedProps: AllowedPropKeys = [
