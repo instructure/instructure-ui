@@ -81,7 +81,9 @@ type BylineProps = BylineOwnProps &
 
 type BylineStyle = ComponentStyle<
   'byline' | 'figure' | 'caption' | 'title' | 'description' | 'maxWidth'
->
+> & {
+  maxWidth?: string
+}
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node.isRequired,
