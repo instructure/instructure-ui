@@ -62,7 +62,11 @@ export {
 } from '@instructure/ui-form-field'
 export { Table } from '@instructure/ui-table'
 export { TruncateText } from '@instructure/ui-truncate-text'
-export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
+export {
+  ApplyLocale,
+  ApplyTextDirection,
+  TextDirectionContext
+} from '@instructure/ui-i18n'
 export { MetricGroup, Metric } from '@instructure/ui-metric'
 export { Modal } from '@instructure/ui-modal'
 export { Transition } from '@instructure/ui-motion'

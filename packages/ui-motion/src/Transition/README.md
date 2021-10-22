@@ -98,7 +98,7 @@ render(<Example />)
 
 `slide` transitions the horizontal or vertical position of the element. The slide direction can be
 internationalized for right to left (rtl) languages. The following example uses the
-[ApplyTextDirection](#ApplyTextDirection) util to mirror the slide direction for rtl.
+[TextDirectionContext](#TextDirectionContext) util to mirror the slide direction for rtl.
 
 ```js
 ---
@@ -106,6 +106,9 @@ render: false
 example: true
 ---
 class Example extends React.Component {
+
+  static contextType = TextDirectionContext
+
   constructor (props) {
     super(props)
     this.state = {
@@ -136,57 +139,51 @@ class Example extends React.Component {
       up: 'up',
       down: 'down'
     }
-
     return mirror[direction]
   };
 
   render () {
+    const rtl = this.context === 'rtl'
+    const direction = rtl ? this.mirrorDirection(this.state.direction) : this.state.direction
+    const directionVariants = [
+      {value: 'left', label: 'Start'},
+      {value: 'right', label: 'End'},
+      {value: 'down', label: 'Down'},
+      {value: 'up', label: 'Up'}
+    ]
     return (
-      <ApplyTextDirection>
-        {(dir, rtl) => {
-          const direction = rtl ? this.mirrorDirection(this.state.direction) : this.state.direction
-          const directionVariants = [
-            {value: 'left', label: 'Start'},
-            {value: 'right', label: 'End'},
-            {value: 'down', label: 'Down'},
-            {value: 'up', label: 'Up'}
-          ]
-          return (
-            <div>
-              <div>
-                <RadioInputGroup
-                  onChange={this.handleDirectionChange}
-                  name="slideExample"
-                  description={<ScreenReaderContent>Select a direction</ScreenReaderContent>}
-                  value={direction}
-                  variant="toggle"
-                >
-                  {directionVariants.map(dir => <RadioInput key={dir.value} value={dir.value} label={dir.label} />)}
-                </RadioInputGroup>
-                <Button size="small" margin="medium none small" onClick={this.handleButtonClick}>
-                  Slide {this.state.in ? 'Out' : 'In'}
-                </Button>
-              </div>
-              <div style={{
-                position: 'relative',
-                overflow: 'hidden',
-                height: '15rem',
-                display: 'flex',
-                justifyContent: (this.state.direction === 'right') ? 'flex-end' : 'flex-start'
-              }}>
-                <Transition
-                  transitionOnMount
-                  unmountOnExit
-                  in={this.state.in}
-                  type={`slide-${direction}`}
-                >
-                  <Avatar name="Slide" />
-                </Transition>
-              </div>
-            </div>
-          )
-        }}
-      </ApplyTextDirection>
+      <div>
+        <div>
+          <RadioInputGroup
+            onChange={this.handleDirectionChange}
+            name="slideExample"
+            description={<ScreenReaderContent>Select a direction</ScreenReaderContent>}
+            value={direction}
+            variant="toggle"
+          >
+            {directionVariants.map(dir => <RadioInput key={dir.value} value={dir.value} label={dir.label} />)}
+          </RadioInputGroup>
+          <Button size="small" margin="medium none small" onClick={this.handleButtonClick}>
+            Slide {this.state.in ? 'Out' : 'In'}
+          </Button>
+        </div>
+        <div style={{
+          position: 'relative',
+          overflow: 'hidden',
+          height: '15rem',
+          display: 'flex',
+          justifyContent: (this.state.direction === 'right') ? 'flex-end' : 'flex-start'
+        }}>
+          <Transition
+            transitionOnMount
+            unmountOnExit
+            in={this.state.in}
+            type={`slide-${direction}`}
+          >
+            <Avatar name="Slide" />
+          </Transition>
+        </div>
+      </div>
     )
   }
 }

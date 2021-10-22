@@ -2,6 +2,10 @@
 describes: ApplyTextDirection
 ---
 
+#### DEPRECATED
+
+Please use [TextDirectionContext](#TextDirectionContext) instead.
+
 A utility component used to manage text direction. In addition to appending the `dir` attribute to
 its underlying DOM node, `<ApplyTextDirection />` also creates a direction context which can be
 consumed by child components that have implemented [bidirectional](#bidirectional).

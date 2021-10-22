@@ -25,6 +25,20 @@
 import { createContext } from 'react'
 import { getTextDirection } from './getTextDirection'
 
+/**
+ * ---
+ * category: utilities/i18n
+ * ---
+ *
+ * This React context the text direction. I can have 3 values:
+ * `ltr`, `rtl`, `auto`. Its default value is the document's `dir` value, if
+ * this is not given then `ltr`. For more info on the values see
+ * [mdn](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir).
+ * If its set to `ltr` or `rtl` then some InstUI components (e.g.
+ * [DrawerLayout](#DrawerLayout) will automatically orient based on its value.
+ *
+ * @module TextDirectionContext
+ */
 const TextDirectionContext = createContext(getTextDirection() || 'ltr')
 
 const DIRECTION = {
