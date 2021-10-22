@@ -32,10 +32,11 @@ import { ApplyTextDirectionProps } from './props'
 ---
 category: components/utilities
 ---
+DEPRECATED. Please use TextDirectionContext instead.
 @tsProps
 **/
 const ApplyTextDirection = (props: ApplyTextDirectionProps) => {
-  const context = useTextDirectionContext()
+  const context = useContext(TextDirectionContext)
   const dir = props.dir || context
   const ElementType = getElementType(ApplyTextDirection, props)
   return (
@@ -57,8 +58,4 @@ ApplyTextDirection.defaultProps = {
   children: null
 } as const
 
-const useTextDirectionContext = () => {
-  return useContext(TextDirectionContext)
-}
-
-export { ApplyTextDirection, useTextDirectionContext }
+export { ApplyTextDirection }

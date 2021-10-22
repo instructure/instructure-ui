@@ -31,10 +31,7 @@ export { getTextDirection } from './getTextDirection'
 export { I18nPropTypes } from './I18nPropTypes'
 export { Locale } from './Locale'
 export { DIRECTION, TextDirectionContext } from './TextDirectionContext'
-export {
-  useTextDirectionContext,
-  ApplyTextDirection
-} from './ApplyTextDirection'
+export { ApplyTextDirection } from './ApplyTextDirection'
 
 export type { Moment } from './DateTime'
 export type { BidirectionalProps } from './bidirectional'

@@ -27,8 +27,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { expect, match, mount, stub, within } from '@instructure/ui-test-utils'
-import { ApplyTextDirection } from '@instructure/ui-i18n'
-
 import { withStyle, jsx, EmotionThemeProvider, WithStyleProps } from '../index'
 
 type Props = {
@@ -253,11 +251,11 @@ describe('@withStyle', async () => {
 
     it('in "rtl" mode', async () => {
       const subject = await mount(
-        <ApplyTextDirection dir="rtl">
+        <div dir="rtl">
           <EmotionThemeProvider theme={exampleTheme}>
             <ThemeableComponent />
           </EmotionThemeProvider>
-        </ApplyTextDirection>
+        </div>
       )
       const component = subject
         .getDOMNode()

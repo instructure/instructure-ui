@@ -77,11 +77,17 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
     render() {
       const { forwardedRef, ...rest } = this.props
       // quite a complex code:
-      // If there is a <TextDirectionContext.Provider> (or <ApplyTextDirection>
-      // which uses it) above the @bidirectional, use its value.
-      // If not, and there is a 'dir' prop is added via ...rest
-      // Lastly TextDirectionContext calls getTextDirection() which returns
-      // the 'dir' prop of the HTML document element.
+      // - If there is a <TextDirectionContext.Provider> (or <ApplyTextDirection>
+      //   which uses it) above the @bidirectional in the DOM, use its value.
+      //   TextDirectionContext calls getTextDirection() which returns
+      //   the 'dir' prop of the HTML document element.
+      // - If not, and there is a 'dir' prop is added via ...rest
+
+      // HOW TO FIX THIS:
+      // 1. deprecate ApplyTextDirection, just use the provider. (It must be kept
+      // because its used by Canvas) text direction can be provided via 'dir'
+      // prop or TextDirectionContext
+      // 2. this code is merged in @withStyle ??
       return (
         <TextDirectionContext.Consumer>
           {(dir) => {

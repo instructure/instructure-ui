@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import { bidirectional, BidirectionalProps } from '../bidirectional'
-import { ApplyTextDirection } from '../ApplyTextDirection'
+import { TextDirectionContext } from '../TextDirectionContext'
 
 @bidirectional()
 class BidirectionalComponent extends React.Component<BidirectionalProps> {
@@ -63,14 +63,12 @@ describe('@bidirectional', async () => {
     ).to.equal('rtl')
   })
 
-  it('should give props preference when context and context are present', async () => {
+  it.only('should give props preference when context and context are present', async () => {
     const subject = await mount(
-      <ApplyTextDirection dir="ltr">
+      <TextDirectionContext.Provider value="ltr">
         <BidirectionalComponent dir="rtl" />
-      </ApplyTextDirection>
+      </TextDirectionContext.Provider>
     )
-    expect(
-      (subject.getDOMNode().childNodes[0] as Element).getAttribute('data-dir')
-    ).to.equal('rtl')
+    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })
 })
