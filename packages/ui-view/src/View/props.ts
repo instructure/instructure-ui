@@ -26,8 +26,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import type { Cursor } from '@instructure/ui-prop-types'
-import { bidirectional } from '@instructure/ui-i18n'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type {
@@ -265,7 +265,7 @@ const propTypes: PropValidators<PropKeys> = {
   focusColor: PropTypes.oneOf(['info', 'inverse', 'success', 'danger']),
   shouldAnimateFocus: PropTypes.bool,
   withVisualDebug: PropTypes.bool,
-  dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+  dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION))
 }
 
 // This variable will be attached as static property on the `View` component

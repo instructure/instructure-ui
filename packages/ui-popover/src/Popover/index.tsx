@@ -32,7 +32,7 @@ import {
 } from '@instructure/ui-position'
 import { ContextView, View } from '@instructure/ui-view'
 import { Dialog } from '@instructure/ui-dialog'
-import { bidirectional } from '@instructure/ui-i18n'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import {
   findDOMNode,
   containsActiveElement,
@@ -57,7 +57,7 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
-@bidirectional()
+@textDirectionContextConsumer()
 @testable()
 class Popover extends Component<PopoverProps> {
   static readonly componentId = 'Popover'
@@ -291,7 +291,7 @@ class Popover extends Component<PopoverProps> {
   get placement() {
     let { placement } = this.props
     const { dir } = this.props
-    const isRtl = dir === bidirectional.DIRECTION.rtl
+    const isRtl = dir === textDirectionContextConsumer.DIRECTION.rtl
     if (isRtl) {
       placement = mirrorHorizontalPlacement(placement, ' ')
     }
@@ -595,7 +595,7 @@ class Popover extends Component<PopoverProps> {
           // @ts-expect-error ts-migrate(2322) FIXME: Type '"default" | "inverse"' is not assignable to ... Remove this comment to see the full error message
           background: color === 'primary' ? 'default' : 'inverse',
           placement:
-            this.props.dir === bidirectional.DIRECTION.rtl
+            this.props.dir === textDirectionContextConsumer.DIRECTION.rtl
               ? mirrorHorizontalPlacement(placement, ' ')
               : placement
         }

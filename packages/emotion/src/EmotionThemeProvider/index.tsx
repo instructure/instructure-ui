@@ -59,6 +59,10 @@ const baseThemeProps: BaseThemeVariableKeys = [
  * ---
  * category: components/utilities
  * ---
+ *
+ * #### DEPRECATED Please use [InstUISettingsProvider](#InstUISettingsProvider)
+ * instead. It has the same functionality and adds a text direction context.
+ *
  * Wrapper for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype) of emotion js.
  *
  * Applies the given theme. It handles either a full theme, or an overrides object.
@@ -185,4 +189,4 @@ const isBaseTheme = (theme: ThemeOrOverride): theme is BaseTheme => {
 }
 
 export default EmotionThemeProvider
-export { EmotionThemeProvider }
+export { EmotionThemeProvider, getTheme }

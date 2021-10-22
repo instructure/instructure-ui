@@ -22,30 +22,40 @@
  * SOFTWARE.
  */
 
-import { createContext } from 'react'
-import { getTextDirection } from './getTextDirection'
+import { bidirectional } from './bidirectional'
 
 /**
  * ---
  * category: utilities/i18n
  * ---
  *
- * This React context the text direction. I can have 2 values:
- * `ltr`, `rtl`. Its default value is the document's `dir` value, if
- * this is not given then `ltr`. For more info on the values see
- * [mdn](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir).
- * If its set to `ltr` or `rtl` then some InstUI components (e.g.
- * [DrawerLayout](#DrawerLayout) will automatically orient based on its value.
+ * A decorator or higher order component that supplies the text direction to
+ * components.
  *
- * @module TextDirectionContext
+ * As a HOC:
+ *
+ * ```js
+ * import { textDirectionContextConsumer } from '@instructure/ui-i18n'
+ *
+ * class Example extends React.Component {
+ *   render () {
+ *     return this.props.dir === textDirectionContextConsumer.DIRECTION.rtl ? <div>rtl</div> : <div>ltr</div>
+ *   }
+ * }
+ *
+ * export default textDirectionContextConsumer()(Example)
+ * ```
+ *
+ * When used as a child of [InstUISettingsProvider](#InstUISettingsProvider), bidirectional components use
+ * the direction provided in `TextDirectionContext`. When used without [InstUISettingsProvider](#InstUISettingsProvider),
+ * the direction can be supplied explicitly via the `dir` prop. If no `dir` prop is provided,
+ * bidirectional components query the documentElement for the `dir` attribute, defaulting to `ltr`
+ * if it is not present.
+ *
+ * @module textDirectionContextConsumer
+ * @return The decorator that composes the bidirectional component.
  */
-const TextDirectionContext = createContext(getTextDirection() || 'ltr')
+const textDirectionContextConsumer = bidirectional
 
-const DIRECTION = {
-  ltr: 'ltr',
-  rtl: 'rtl'
-  //TODO add auto: 'auto' in the future
-}
-
-export default TextDirectionContext
-export { TextDirectionContext, DIRECTION }
+export default textDirectionContextConsumer
+export { textDirectionContextConsumer }

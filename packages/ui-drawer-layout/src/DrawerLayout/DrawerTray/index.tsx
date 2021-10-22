@@ -25,7 +25,7 @@
 import { Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
-import { bidirectional } from '@instructure/ui-i18n'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { Transition } from '@instructure/ui-motion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
@@ -54,7 +54,7 @@ id: DrawerLayout.Tray
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@bidirectional()
+@textDirectionContextConsumer()
 @testable()
 class DrawerTray extends Component<
   DrawerLayoutTrayProps,
@@ -125,7 +125,7 @@ class DrawerTray extends Component<
 
   get placement() {
     const { placement, dir } = this.props
-    const isRtl = dir === bidirectional.DIRECTION.rtl
+    const isRtl = dir === textDirectionContextConsumer.DIRECTION.rtl
     return (isRtl
       ? mirrorHorizontalPlacement(placement!, ' ')
       : placement!) as DrawerTrayPlacement

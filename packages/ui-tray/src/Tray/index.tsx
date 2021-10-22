@@ -28,7 +28,7 @@ import { Component } from 'react'
 import { Dialog } from '@instructure/ui-dialog'
 import { omitProps } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { bidirectional } from '@instructure/ui-i18n'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { testable } from '@instructure/ui-testable'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
@@ -46,7 +46,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@bidirectional()
+@textDirectionContextConsumer()
 @testable()
 class Tray extends Component<TrayProps> {
   static readonly componentId = 'Tray'
@@ -104,7 +104,7 @@ class Tray extends Component<TrayProps> {
 
   get placement() {
     const { placement, dir } = this.props
-    const isRtl = dir === bidirectional.DIRECTION.rtl
+    const isRtl = dir === textDirectionContextConsumer.DIRECTION.rtl
     return isRtl ? mirrorHorizontalPlacement(placement!, ' ') : placement
   }
 

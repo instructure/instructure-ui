@@ -27,12 +27,12 @@ import ReactDOM from 'react-dom'
 
 import { App } from './App'
 import { canvas } from '@instructure/ui-themes'
-import { EmotionThemeProvider } from '@instructure/emotion'
+import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
 
 ReactDOM.render(
-  <EmotionThemeProvider theme={canvas}>
+  <InstUISettingsProvider theme={canvas}>
     <App />
-  </EmotionThemeProvider>,
+  </InstUISettingsProvider>,
   document.getElementById('app')
 )

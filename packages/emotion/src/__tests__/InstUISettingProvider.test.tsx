@@ -21,32 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/// <reference types="@emotion/react/types/css-prop" />
 
-export * from '@emotion/react'
+/** @jsx jsx */
+import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
+import { canvas } from '@instructure/ui-themes'
+import { InstUISettingsProvider } from '../InstUISettingsProvider'
+import { jsx } from '../index'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
+import type { BidirectionalProps } from '@instructure/ui-i18n'
 
-export { EmotionThemeProvider } from './EmotionThemeProvider'
-export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyle } from './withStyle'
-export {
-  ThemeablePropValues,
-  ThemeablePropTypes,
-  makeThemeVars,
-  getShorthandPropValue,
-  mirrorShorthandCorners,
-  mirrorShorthandEdges
-} from './styleUtils'
+@textDirectionContextConsumer()
+class TextDirAwareComponent extends React.Component<BidirectionalProps> {
+  render() {
+    return <div data-dir={this.props.dir}>hello world</div>
+  }
+}
 
-export type { ComponentStyle, StyleObject } from './EmotionTypes'
-export type { WithStyleProps } from './withStyle'
-export type {
-  SpacingValues,
-  Spacing,
-  Shadow,
-  Stacking,
-  Background,
-  BorderRadiiValues,
-  BorderRadii,
-  BorderWidthValues,
-  BorderWidth
-} from './styleUtils'
+describe('InstUISettingsProvider', async () => {
+  it('can handle nested text direction settings', async () => {
+    const subject = await mount(
+      <InstUISettingsProvider theme={canvas} dir="rtl">
+        <InstUISettingsProvider>
+          <TextDirAwareComponent />
+        </InstUISettingsProvider>
+      </InstUISettingsProvider>
+    )
+    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
+    await subject.setProps({ dir: 'ltr' })
+    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('ltr')
+  })
+})

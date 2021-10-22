@@ -40,7 +40,7 @@ import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 import { canvas } from '@instructure/ui-themes'
-import { withStyle, jsx, EmotionThemeProvider } from '@instructure/emotion'
+import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -197,7 +197,7 @@ class Alert extends Component<AlertProps> {
       // since ScreenReaderContent gets rendered outside the app,
       // and uses the withStyle decorator, we need to provide a theme for it,
       // otherwise throws warning (any theme, doesn't use any theme variables)
-      <EmotionThemeProvider theme={canvas}>{content}</EmotionThemeProvider>,
+      <InstUISettingsProvider theme={canvas}>{content}</InstUISettingsProvider>,
       div
     )
   }

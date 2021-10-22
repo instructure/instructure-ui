@@ -31,7 +31,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 // that uses the bidirectional decorator.
 // see https://github.com/microsoft/TypeScript/issues/4881
 export type BidirectionalProps = {
-  dir?: 'ltr' | 'rtl' | 'auto'
+  dir?: 'ltr' | 'rtl' // TODO add | 'auto' in the future
 }
 
 type BidirectionalInternalProps = {
@@ -47,6 +47,9 @@ type BidirectionalType = {
  * ---
  * category: utilities/i18n
  * ---
+ *
+ * #### DEPRECATED: This has been renamed to `textDirectionContextConsumer`, its functionality remains similar.
+ *
  * A decorator or higher order component that makes a component `bidirectional`.
  *
  * As a HOC:
@@ -63,8 +66,8 @@ type BidirectionalType = {
  * export default bidirectional()(Example)
  * ```
  *
- * When used as a child of [ApplyTextDirection](#ApplyTextDirection), bidirectional components use
- * the direction provided in the context. When used without [ApplyTextDirection](#ApplyTextDirection),
+ * When used as a child of [InstUISettingsProvider](#InstUISettingsProvider), bidirectional components use
+ * the direction provided in `TextDirectionContext`. When used without [InstUISettingsProvider](#InstUISettingsProvider),
  * the direction can be supplied explicitly via the `dir` prop. If no `dir` prop is provided,
  * bidirectional components query the documentElement for the `dir` attribute, defaulting to `ltr`
  * if it is not present.
@@ -76,18 +79,13 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
   class BidirectionalComponent extends React.Component<BidirectionalInternalProps> {
     render() {
       const { forwardedRef, ...rest } = this.props
-      // quite a complex code:
+      // Quite complex code:
       // - If there is a <TextDirectionContext.Provider> (or <ApplyTextDirection>
       //   which uses it) above the @bidirectional in the DOM, use its value.
+      //   If TextDirectionContext.Provider was called without params
       //   TextDirectionContext calls getTextDirection() which returns
       //   the 'dir' prop of the HTML document element.
       // - If not, and there is a 'dir' prop is added via ...rest
-
-      // HOW TO FIX THIS:
-      // 1. deprecate ApplyTextDirection, just use the provider. (It must be kept
-      // because its used by Canvas) text direction can be provided via 'dir'
-      // prop or TextDirectionContext
-      // 2. this code is merged in @withStyle ??
       return (
         <TextDirectionContext.Consumer>
           {(dir) => {
@@ -115,5 +113,6 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
 }) as BidirectionalType
 
 bidirectional.DIRECTION = DIRECTION
+
 export default bidirectional
 export { bidirectional }

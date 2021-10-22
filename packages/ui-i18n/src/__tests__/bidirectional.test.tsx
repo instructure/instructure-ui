@@ -49,7 +49,7 @@ describe('@bidirectional', async () => {
     const subject = await mount(<BidirectionalComponent dir="rtl" />)
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })
-
+  /* TODO re-enable this test when we allow 'auto' text direction
   it('setting "auto" from context figures out text direction from the text', async () => {
     const subject = await mount(
       <BidirectionalComponent dir="auto">
@@ -62,8 +62,8 @@ describe('@bidirectional', async () => {
       getComputedStyle(subject.getDOMNode().childNodes[0] as Element).direction
     ).to.equal('rtl')
   })
-
-  it.only('should give props preference when context and context are present', async () => {
+*/
+  it('should give props preference when context and context are present', async () => {
     const subject = await mount(
       <TextDirectionContext.Provider value="ltr">
         <BidirectionalComponent dir="rtl" />

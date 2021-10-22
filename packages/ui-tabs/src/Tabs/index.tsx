@@ -46,7 +46,7 @@ import { Focusable } from '@instructure/ui-focusable'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
-import { bidirectional } from '@instructure/ui-i18n'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -70,7 +70,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@bidirectional()
+@textDirectionContextConsumer()
 @testable()
 class Tabs extends Component<TabsProps> {
   static readonly componentId = 'Tabs'
@@ -247,7 +247,7 @@ class Tabs extends Component<TabsProps> {
       typeof this._tabList.scrollTo === 'function' // test for scrollTo support
     ) {
       const { dir } = this.props
-      const isRtl = dir === bidirectional.DIRECTION.rtl
+      const isRtl = dir === textDirectionContextConsumer.DIRECTION.rtl
 
       const tabPosition = getBoundingClientRect(activeTabEl)
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabListPosition' does not exist on type... Remove this comment to see the full error message

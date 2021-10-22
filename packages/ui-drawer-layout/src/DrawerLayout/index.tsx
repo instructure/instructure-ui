@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import { Children, Component, createContext } from 'react'
 
-import { bidirectional } from '@instructure/ui-i18n'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import {
   matchComponentTypes,
   safeCloneElement
@@ -52,7 +52,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, null)
-@bidirectional()
+@textDirectionContextConsumer()
 @testable()
 class DrawerLayout extends Component<DrawerLayoutProps> {
   static readonly componentId = 'DrawerLayout'
@@ -113,7 +113,7 @@ class DrawerLayout extends Component<DrawerLayoutProps> {
 
   get trayPlacement() {
     const { placement, dir } = this.trayProps
-    const isRtl = dir === bidirectional.DIRECTION.rtl
+    const isRtl = dir === textDirectionContextConsumer.DIRECTION.rtl
     return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 

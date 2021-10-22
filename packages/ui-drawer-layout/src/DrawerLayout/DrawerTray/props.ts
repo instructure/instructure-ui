@@ -26,7 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
-import { bidirectional } from '@instructure/ui-i18n'
+import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
@@ -174,7 +174,7 @@ const propTypes: PropValidators<PropKeys> = {
   shouldReturnFocus: PropTypes.bool,
   shouldCloseOnDocumentClick: PropTypes.bool,
   shouldCloseOnEscape: PropTypes.bool,
-  dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+  dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION))
 }
 
 const allowedProps: AllowedPropKeys = [
