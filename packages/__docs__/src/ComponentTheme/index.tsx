@@ -38,7 +38,7 @@ import type { BaseColors } from '@instructure/shared-types'
 class ComponentTheme extends Component<ComponentThemeProps> {
   static propTypes = propTypes
   mapColors(colorKey: BaseColors) {
-    const map: Record<string, any> = {}
+    const map: Record<string, string> = {}
     ;(Object.keys(colorKey) as Array<keyof BaseColors>).forEach((color) => {
       const hex = colorKey[color]
       if (typeof map[hex] === 'undefined') {
