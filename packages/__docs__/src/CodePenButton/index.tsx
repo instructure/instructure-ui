@@ -23,7 +23,6 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Tooltip } from '@instructure/ui-tooltip'
 import { SVGIcon } from '@instructure/ui-svg-images'
