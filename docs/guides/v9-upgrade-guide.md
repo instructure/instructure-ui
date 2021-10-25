@@ -16,6 +16,9 @@ We recommend upgrading your application for each major version gradually, e.g. i
 
 The following deprecated components are removed in v9:
 
+- [EmotionThemeProvider](#EmotionThemeProvider) has been renamed to [InstUISettingsProvider](#InstUISettingsProvider) and can configure text direction.
+- [ApplyTextDirection](#ApplyTextDirection) has been removed, you can use [InstUISettingsProvider](#InstUISettingsProvider) or [TextDirectionContext](#TextDirectionContext) to configure text direction
+- [bidirectional](#bidirectional) has been renamed to [textDirectionContextConsumer](#textDirectionContextConsumer), functionality remains the same.
 - [ComponentIdentifier](#ComponentIdentifier), [DateTime](#DateTime): These components have been removed because they are not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.
 - [elementMatches](#elementMatches) This polyfill is only needed for old, unsupported browsers.
 - InstUI-CLI's `create-app`, `create-component` and `create-package` commands: Just follow the instructions in the [usage](#usage) docs. Also, the `template-component`, `template-app` and `template-app` packages have been removed.

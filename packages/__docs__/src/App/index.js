@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 
 import { Alert } from '@instructure/ui-alerts'
 import {
-  EmotionThemeProvider,
+  InstUISettingsProvider,
   withStyle,
   jsx,
   Global
@@ -484,7 +484,7 @@ class App extends Component {
       }
     })
     return (
-      <EmotionThemeProvider theme={instructure}>
+      <InstUISettingsProvider theme={instructure}>
         <Hero
           name={library.name}
           docs={{ ...docs, ...themeDocs }}
@@ -493,7 +493,7 @@ class App extends Component {
           version={library.version}
           layout={layout}
         />
-      </EmotionThemeProvider>
+      </InstUISettingsProvider>
     )
   }
 
@@ -611,7 +611,7 @@ class App extends Component {
         width="18.75rem"
       >
         <View display="block" textAlign="end" margin="xx-small x-small none">
-          <EmotionThemeProvider theme={instructure}>
+          <InstUISettingsProvider theme={instructure}>
             <IconButton
               renderIcon={IconXSolid}
               screenReaderLabel="Close Navigation"
@@ -622,7 +622,7 @@ class App extends Component {
               color="secondary"
               size="medium"
             />
-          </EmotionThemeProvider>
+          </InstUISettingsProvider>
         </View>
 
         <Header
@@ -660,7 +660,7 @@ class App extends Component {
     // tf there is a version in the path, e.g. "/v6", then it is a legacy page
     return versionInPath ? (
       <div css={this.props.styles.legacyVersionAlert}>
-        <EmotionThemeProvider
+        <InstUISettingsProvider
           theme={{
             componentOverrides: {
               BaseButton: {
@@ -690,7 +690,7 @@ class App extends Component {
             </Link>
             .
           </Alert>
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       </div>
     ) : null
   }
@@ -724,7 +724,7 @@ class App extends Component {
           >
             {!showMenu && (
               <div css={this.props.styles.hamburger}>
-                <EmotionThemeProvider theme={instructure}>
+                <InstUISettingsProvider theme={instructure}>
                   <IconButton
                     onClick={this.handleMenuOpen}
                     elementRef={this.handleMenuTriggerRef}
@@ -732,7 +732,7 @@ class App extends Component {
                     screenReaderLabel="Open Navigation"
                     shape="circle"
                   />
-                </EmotionThemeProvider>
+                </InstUISettingsProvider>
               </div>
             )}
             {this.renderContent(key)}

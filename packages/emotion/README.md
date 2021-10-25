@@ -83,28 +83,28 @@ export default Button
 
 Themeable components inject their themed styles into the document when they are mounted.
 
-A themeable component’s theme can be configured by wrapping it in an [EmotionThemeProvider](#EmotionThemeProvider) component, and/or set explicitly via its `themeOverride` prop (see [withStyle](#withStyle/#applying-themes) documentation).
+A themeable component’s theme can be configured by wrapping it in an [InstUISettingsProvider](#InstUISettingsProvider) component, and/or set explicitly via its `themeOverride` prop (see [withStyle](#withStyle/#applying-themes) documentation).
 
-#### EmotionThemeProvider
+#### InstUISettingsProvider
 
-`EmotionThemeProvider` is a React component, which wraps Emotion's own `ThemeProvider`.
+`InstUISettingsProvider` is a React component, which wraps Emotion's own `ThemeProvider`.
 
 It accepts a `theme` prop, which should be an Instructure UI theme.
 
 It can be used in two ways. On the top level, you can provide the theme for the whole application or nested anywhere inside it. You can also provide an object with theme or component theme overrides.
 
-**For detailed usage info and examples, see the [EmotionThemeProvider](#EmotionThemeProvider) documentation page.**
+**For detailed usage info and examples, see the [InstUISettingsProvider](#InstUISettingsProvider) documentation page.**
 
 ```jsx
 import Button from './Button'
-import { EmotionThemeProvider } from '@instructure/emotion'
+import { InstUISettingsProvider } from '@instructure/emotion'
 import { canvasHighContrast } from '@instructure/ui-themes'
 
 const RenderApp = () => {
   return (
-    <EmotionThemeProvider theme={canvasHighContrast}>
+    <InstUISettingsProvider theme={canvasHighContrast}>
       <Button />
-    </EmotionThemeProvider>
+    </InstUISettingsProvider>
   )
 }
 ```

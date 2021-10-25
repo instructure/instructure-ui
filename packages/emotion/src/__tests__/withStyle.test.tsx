@@ -27,7 +27,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { expect, match, mount, stub, within } from '@instructure/ui-test-utils'
-import { withStyle, jsx, EmotionThemeProvider, WithStyleProps } from '../index'
+import {
+  withStyle,
+  jsx,
+  InstUISettingsProvider,
+  WithStyleProps
+} from '../index'
 
 type Props = {
   inverse?: boolean
@@ -131,12 +136,12 @@ describe('@withStyle', async () => {
     }
   }
 
-  describe('with theme provided by EmotionThemeProvider', async () => {
+  describe('with theme provided by InstUISettingsProvider', async () => {
     it('should add css class suffixed with label', async () => {
       const subject = await mount(
-        <EmotionThemeProvider theme={exampleTheme}>
+        <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
       const emotionClassRegex = new RegExp(/^css-.+-exampleComponent$/)
 
@@ -145,9 +150,9 @@ describe('@withStyle', async () => {
 
     it('should apply correct css props', async () => {
       const subject = await mount(
-        <EmotionThemeProvider theme={exampleTheme}>
+        <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
@@ -158,13 +163,13 @@ describe('@withStyle', async () => {
 
     it('should allow configuration through props', async () => {
       const subject = await mount(
-        <EmotionThemeProvider theme={exampleTheme}>
+        <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent
             themeOverride={{
               textColor: 'rgb(128, 0, 128)'
             }}
           />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
@@ -175,9 +180,9 @@ describe('@withStyle', async () => {
 
     it('should ignore empty themeOverride props', async () => {
       const subject = await mount(
-        <EmotionThemeProvider theme={exampleTheme}>
+        <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent themeOverride={{}} />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
@@ -214,9 +219,9 @@ describe('@withStyle', async () => {
 
     it('when state is updated', async () => {
       const subject = await mount(
-        <EmotionThemeProvider theme={exampleTheme}>
+        <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
       const main = within(subject.getDOMNode())
       const clearBackgroundButton = await main.find('button')
@@ -237,9 +242,9 @@ describe('@withStyle', async () => {
   describe('should apply bi-directional polyfill on styles object', async () => {
     it('in default "ltr" mode', async () => {
       const subject = await mount(
-        <EmotionThemeProvider theme={exampleTheme}>
+        <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
@@ -252,9 +257,9 @@ describe('@withStyle', async () => {
     it('in "rtl" mode', async () => {
       const subject = await mount(
         <div dir="rtl">
-          <EmotionThemeProvider theme={exampleTheme}>
+          <InstUISettingsProvider theme={exampleTheme}>
             <ThemeableComponent />
-          </EmotionThemeProvider>
+          </InstUISettingsProvider>
         </div>
       )
       const component = subject
@@ -273,9 +278,9 @@ describe('@withStyle', async () => {
       stub(console, 'warn') // suppress warning
 
       const subject = await mount(
-        <EmotionThemeProvider theme={exampleTheme}>
+        <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
@@ -288,7 +293,7 @@ describe('@withStyle', async () => {
       const consoleLog = stub(console, 'log')
 
       const subject = await mount(
-        <EmotionThemeProvider theme={exampleTheme}>
+        <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent
             makeStyles={() => {
               // eslint-disable-next-line no-console
@@ -296,7 +301,7 @@ describe('@withStyle', async () => {
               return { exampleComponent: { color: 'red' } }
             }}
           />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
@@ -311,9 +316,9 @@ describe('@withStyle', async () => {
       const consoleWarning = stub(console, 'warn')
 
       await mount(
-        <EmotionThemeProvider theme={exampleTheme}>
+        <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
 
       expect(consoleWarning).to.have.been.calledWithMatch(
@@ -327,7 +332,7 @@ describe('@withStyle', async () => {
       const consoleWarning = stub(console, 'warn')
 
       await mount(
-        <EmotionThemeProvider theme={exampleTheme}>
+        <InstUISettingsProvider theme={exampleTheme}>
           <ThemeableComponent
             makeStyles={() => {
               // eslint-disable-next-line no-console
@@ -335,7 +340,7 @@ describe('@withStyle', async () => {
               return { exampleComponent: { color: 'red' } }
             }}
           />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
 
       expect(consoleWarning).to.have.been.calledWithMatch(

@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { DIRECTION, TextDirectionContext } from '@instructure/ui-i18n'
-import { EmotionThemeProvider, withStyle, jsx } from '@instructure/emotion'
+import { InstUISettingsProvider, withStyle, jsx } from '@instructure/emotion'
 import { canvas } from '@instructure/ui-themes'
 
 import generateStyle from './styles'
@@ -125,11 +125,11 @@ class Preview extends Component {
       const theme = themes?.[themeKey]?.resource || canvas
       const dir = this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr
       let elToRender = (
-        <EmotionThemeProvider theme={theme}>
+        <InstUISettingsProvider theme={theme}>
           <TextDirectionContext.Provider value={dir}>
             <div dir={dir}>{el}</div>
           </TextDirectionContext.Provider>
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       )
       ReactDOM.render(elToRender, mountNode)
     }

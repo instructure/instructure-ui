@@ -28,7 +28,7 @@ import grayMatter from 'gray-matter'
 
 import { logWarn as warn } from '@instructure/console'
 
-import { EmotionThemeProvider } from '@instructure/emotion'
+import { InstUISettingsProvider } from '@instructure/emotion'
 import { canvas, canvasHighContrast, instructure } from '@instructure/ui-themes'
 
 import { View } from '@instructure/ui-view'
@@ -281,7 +281,9 @@ function createRenderer() {
             code: matter.content,
             render: (_el) => {
               el = theme ? (
-                <EmotionThemeProvider theme={theme}>{_el}</EmotionThemeProvider>
+                <InstUISettingsProvider theme={theme}>
+                  {_el}
+                </InstUISettingsProvider>
               ) : (
                 _el
               )

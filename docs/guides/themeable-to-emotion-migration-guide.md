@@ -14,7 +14,7 @@ This is why we decided to replace our custom-made theming library (ui-themeable)
 
 In the v8.0. release we removed `ui-themeable` and its supporting packages from InstUI (see more in [Upgrade Guide for Version 8.0](#v8-upgrade-guide)). We also migrated all our components to use `emotion`, because it was not compatible with the former `ui-themeable`. This is why you'll have to make some changes in your app to adopt the new theming solution:
 
-- replace `ApplyTheme` with `EmotionThemeProvider` and import themes directly instead of registering them
+- replace `ApplyTheme` with `InstUISettingsProvider` and import themes directly instead of registering them
 - if you have your own themeable components, refactor them to use `emotion`
 
 ##### Table of Contents
@@ -69,11 +69,11 @@ embed: true
 
 We made changes in how we apply themes too. You no longer need to register themes and use `ApplyTheme.generateTheme`. Instead, you can directly import them from `@instructure/ui-themes` (or your own themes) and pass them to the theme provider.
 
-#### ApplyTheme to EmotionThemeProvider
+#### ApplyTheme to Emotion
 
-The new theme provider is called `EmotionThemeProvider`, which is our own wrapper component for Emotion's [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype).
+The new theme provider is called `InstUISettingsProvider`, which is our own wrapper component for Emotion's [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype).
 
-**You can find detailed information about how it works and how to add theme overrides on the [EmotionThemeProvider](#EmotionThemeProvider) page.**
+**You can find detailed information about how it works and how to add theme overrides on the [InstUISettingsProvider](#InstUISettingsProvider) page.**
 
 #### Using the built-in themes
 
@@ -90,9 +90,9 @@ ReactDOM.render(
 import { instructure } from '@instructure/ui-themes'
 
 ReactDOM.render(
-  <EmotionThemeProvider theme={instructure}>
+  <InstUISettingsProvider theme={instructure}>
     <App />
-  </EmotionThemeProvider>,
+  </InstUISettingsProvider>,
   element
 )
 ```
@@ -117,7 +117,7 @@ If you are using global theme overrides for some components, change the structur
 
 
 // after
-<EmotionThemeProvider theme={{
+<InstUISettingsProvider theme={{
   componentOverrides: {
     Button: {
       smallHeight: '23px'
@@ -128,7 +128,7 @@ If you are using global theme overrides for some components, change the structur
   }
 }}>
   ...
-</EmotionThemeProvider>
+</InstUISettingsProvider>
 
 ```
 
@@ -137,7 +137,7 @@ If you are using global theme overrides for some components, change the structur
 If you need to, and your app is using multiply themes, you can specify overrides for just one specific theme.
 
 ```jsx
-<EmotionThemeProvider
+<InstUISettingsProvider
   theme={{
     themeOverrides: {
       canvas: {
@@ -150,7 +150,7 @@ If you need to, and your app is using multiply themes, you can specify overrides
   }}
 >
   ...
-</EmotionThemeProvider>
+</InstUISettingsProvider>
 ```
 
 #### Mixed and nested overrides
@@ -158,7 +158,7 @@ If you need to, and your app is using multiply themes, you can specify overrides
 The `componentOverrides` can also be nested inside `themeOverrides`. This method is helpful if you want to override e.g. the `Alert` component "**only** in canvas theme".
 
 ```jsx
-<EmotionThemeProvider
+<InstUISettingsProvider
   theme={{
     themeOverrides: {
       canvas: {
@@ -175,7 +175,7 @@ The `componentOverrides` can also be nested inside `themeOverrides`. This method
   <Alert variant="warning">
     My border and icon background should be "deeppink" in "canvas" theme.
   </Alert>
-</EmotionThemeProvider>
+</InstUISettingsProvider>
 ```
 
 #### Local theme variable overrides of components
@@ -215,7 +215,7 @@ To learn more about the available options and defaults simply run:
 
 #### theme.use() is deprecated
 
-Applying themes with the former `.use()` method of themes (added by ui-themeable) is now deprecated. Wrap your app in `EmotionThemeProvider` instead.
+Applying themes with the former `.use()` method of themes (added by ui-themeable) is now deprecated. Wrap your app in `InstUISettingsProvider` instead.
 
 ```js
 // before
@@ -230,7 +230,7 @@ if (localStorage.getItem('mode') === 'highContrast') {
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 
 ReactDOM.render(
-  <EmotionThemeProvider
+  <InstUISettingsProvider
     theme={
       localStorage.getItem('mode') === 'highContrast'
         ? canvasHighContrast
@@ -238,7 +238,7 @@ ReactDOM.render(
     }
   >
     <App />
-  </EmotionThemeProvider>,
+  </InstUISettingsProvider>,
   element
 )
 ```
@@ -255,9 +255,9 @@ import { theme } from '@instructure/canvas-theme'
 const themeOverrides = { transitions: { duration: '0ms' } }
 
 ReactDOM.render(
-  <EmotionThemeProvider theme={{ ...theme, ...themeOverrides }}>
+  <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
     <App />
-  </EmotionThemeProvider>,
+  </InstUISettingsProvider>,
   element
 )
 ```

@@ -279,9 +279,9 @@ class Theme extends Component {
             const themeOverrides = { colors: { brand: 'red' } }
 
             ReactDOM.render(
-              <EmotionThemeProvider theme={{ ...theme, ...themeOverrides }}>
+              <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
                 <App />
-              </EmotionThemeProvider>,
+              </InstUISettingsProvider>,
               element
             )
             ${'```'}

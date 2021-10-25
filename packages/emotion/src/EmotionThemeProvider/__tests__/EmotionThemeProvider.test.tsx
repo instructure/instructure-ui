@@ -263,7 +263,7 @@ describe('EmotionThemeProvider', async () => {
     it('should throw warning', async () => {
       const consoleWarning = spy(console, 'warn')
       const warning =
-        'No theme provided for [EmotionThemeProvider], using default <canvas> theme.'
+        'No theme provided for [InstUISettingsProvider], using default <canvas> theme.'
       await mount(<ThemeableComponent />)
 
       await expect(consoleWarning).to.have.been.calledWith(warning)
