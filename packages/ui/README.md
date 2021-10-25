@@ -37,6 +37,7 @@ The `ui` package contains the following:
 - Dialog
 - DrawerLayout
 - Editable
+- EmotionThemeProvider
 - FileDrop
 - Flex
 - Focusable
@@ -53,6 +54,7 @@ The `ui` package contains the following:
 - InlineList
 - InlineSVG
 - InPlaceEdit
+- InstUISettingsProvider
 - Link
 - List
 - Mask
@@ -88,6 +90,7 @@ The `ui` package contains the following:
 - Tag
 - Text
 - TextArea
+- TextDirectionContext
 - TextInput
 - TimeSelect
 - ToggleButton
