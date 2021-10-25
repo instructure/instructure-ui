@@ -23,11 +23,10 @@
  */
 
 /** @jsx jsx */
-import React, { Component, ReactElement } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { omitProps, ensureSingleChild } from '@instructure/ui-react-utils'
-import { Children } from '@instructure/ui-prop-types'
 import {
   IconCheckMarkSolid,
   IconNoSolid,
@@ -43,6 +42,8 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { Heading } from '../Heading'
+import type { FigureProps } from './props'
+import { propTypes, allowedProps } from './props'
 
 class FigureItem extends Component {
   static displayName = 'FigureItem'
@@ -63,28 +64,10 @@ class FigureItem extends Component {
 }
 
 @withStyle(generateStyle, generateComponentTheme)
-class Figure extends Component {
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    title: PropTypes.node,
-    caption: PropTypes.node,
-    recommendation: PropTypes.oneOf(['yes', 'no', 'a11y', 'none']),
-    iconTitle: PropTypes.string,
-    float: PropTypes.oneOf(['start', 'end', 'none']),
-    children: Children.oneOf(['FigureItem'])
-  }
+class Figure extends Component<FigureProps> {
+  static propTypes = propTypes
 
-  static allowedProps = [
-    'title',
-    'caption',
-    'recommendation',
-    'iconTitle',
-    'float',
-    'children'
-  ]
+  static allowedProps = allowedProps
 
   static defaultProps = {
     recommendation: 'none',
@@ -96,11 +79,11 @@ class Figure extends Component {
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   static Item = FigureItem
@@ -112,12 +95,11 @@ class Figure extends Component {
       return IconNoSolid
     } else if (this.props.recommendation === 'a11y') {
       return IconA11ySolid
-    } else {
-      return null
     }
+    return IconNoSolid
   }
 
-  renderFigure(props) {
+  renderFigure(props?: FigureProps) {
     const { styles } = this.props
     const mergedProps = { ...this.props, ...props }
     const { title, caption, recommendation, iconTitle, children } = mergedProps
@@ -127,19 +109,18 @@ class Figure extends Component {
       <View
         {...omitProps(mergedProps, Figure.allowedProps, ['padding'])}
         as="figure"
-        css={styles.figure}
+        css={styles?.figure}
       >
         {caption != null ? (
-          <figcaption css={styles.caption}>{caption}</figcaption>
+          <figcaption css={styles?.caption}>{caption}</figcaption>
         ) : null}
-        <span css={styles.content}>
+        <span css={styles?.content}>
           {recommendation !== 'none' ? (
-            <span css={styles.iconContainer}>
+            <span css={styles?.iconContainer}>
               <RecommendationIcon
                 title={iconTitle}
                 size="x-small"
                 inline={false}
-                className={styles.icon}
               />
             </span>
           ) : null}
@@ -168,8 +149,8 @@ class Figure extends Component {
             large: { float: float }
           }}
           match="media"
-          render={(props, matches) => {
-            return this.renderFigure(props)
+          render={(props) => {
+            return this.renderFigure(props as FigureProps)
           }}
         />
       )
