@@ -23,13 +23,15 @@
  */
 
 import { alpha } from '@instructure/ui-color-utils'
+import type { Theme } from '@instructure/ui-themes'
+import type { GlyphTheme } from './props'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme) => {
+const generateComponentTheme = (theme: Theme): GlyphTheme => {
   const { borders, colors, spacing, breakpoints } = theme
 
   const colorCheckerboard = '#eee'
