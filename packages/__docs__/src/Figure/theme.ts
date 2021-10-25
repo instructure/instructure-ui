@@ -22,12 +22,15 @@
  * SOFTWARE.
  */
 
+import type { Theme } from '@instructure/ui-themes'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme) => {
+import { FigureTheme } from './props'
+const generateComponentTheme = (theme: Theme): FigureTheme => {
   const {
     borders,
     colors,
@@ -38,7 +41,7 @@ const generateComponentTheme = (theme) => {
     key: themeName
   } = theme
 
-  const themeSpecificStyles = {}
+  const themeSpecificStyles: Record<string, any> = {}
 
   const componentVariables = {
     shadow: shadows?.depth2,
