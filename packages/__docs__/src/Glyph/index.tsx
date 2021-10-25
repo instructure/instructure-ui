@@ -34,9 +34,11 @@ import * as reactIcons from '@instructure/ui-icons'
 import { Heading } from '../Heading'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import type { GlyphProps, VariantProps } from './props'
+import { propTypes } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
-class Variant extends Component {
+class Variant extends Component<VariantProps> {
   static propTypes = {
     name: PropTypes.string.isRequired,
     variant: PropTypes.string.isRequired,
@@ -48,7 +50,7 @@ class Variant extends Component {
     styles: PropTypes.object
   }
 
-  handleClick = (event) => {
+  handleClick = (event: React.SyntheticEvent) => {
     const { name, onClick, variant, glyph } = this.props
     onClick(event, name, variant, glyph)
   }
@@ -70,7 +72,7 @@ class Variant extends Component {
       //  "bidirectional": false,
       //  "deprecated": false}
       icon = (
-        <span css={styles.iconFontWrapper}>
+        <span css={styles?.iconFontWrapper}>
           <i className={`${glyph.classes.join(' ')}`} aria-hidden="true" />
           <ScreenReaderContent>{`${name} (${variant})`}</ScreenReaderContent>
         </span>
@@ -78,12 +80,12 @@ class Variant extends Component {
     } else {
       // React components
       // eslint-disable-next-line import/namespace
-      icon = React.createElement(reactIcons[glyph.name], {
+      icon = React.createElement((reactIcons as any)[glyph.name], {
         title: `${name} (${variant})`
       })
     }
     return (
-      <button css={styles.button} onClick={this.handleClick}>
+      <button css={styles?.button} onClick={this.handleClick}>
         {icon}
         <ScreenReaderContent>View Usage</ScreenReaderContent>
       </button>
@@ -92,26 +94,18 @@ class Variant extends Component {
 }
 
 @withStyle(generateStyle, generateComponentTheme)
-class Glyph extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    variants: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired,
-    rtl: PropTypes.bool,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+class Glyph extends Component<GlyphProps> {
+  static propTypes = propTypes
 
   static defaultProps = {
     rtl: false
   }
 
-  renderGlyphInfo(glyph) {
+  renderGlyphInfo(glyph: any) {
     if (glyph.codepoint) {
       return `\\${glyph.codepoint}`
     }
+    return undefined
   }
 
   render() {
@@ -120,18 +114,20 @@ class Glyph extends Component {
     const info = this.renderGlyphInfo(firstVariant)
 
     return (
-      <div css={styles.glyph}>
-        <div css={styles.variants} dir={this.props.rtl ? 'rtl' : null}>
+      <div css={styles?.glyph}>
+        <div css={styles?.variants} dir={this.props.rtl ? 'rtl' : undefined}>
           {Object.keys(variants).map((variant) => (
             <Variant
               {...omitProps(this.props, ['styles', 'makeStyles'])}
               key={`${name}-${variant}`}
               variant={variant}
+              onClick={this.props.onClick}
               glyph={variants[variant]}
+              name={name}
             />
           ))}
         </div>
-        {info && <div css={styles.info}>{info}</div>}
+        {info && <div css={styles?.info}>{info}</div>}
         <Heading level="h4" as="h3">
           {firstVariant.glyphName.toLowerCase()}
         </Heading>
