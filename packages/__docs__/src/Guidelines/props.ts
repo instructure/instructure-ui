@@ -21,33 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
+import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 
-import { Flex } from '@instructure/ui-flex'
-
-class Guidelines extends Component {
-  static propTypes = {
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    children: null
-  }
-
-  render() {
-    return (
-      <Flex wrap="wrap" justifyItems="end" alignItems="stretch">
-        {React.Children.map(this.props.children, (child) => (
-          <Flex.Item shouldGrow shouldShrink size="14rem" margin="xx-small">
-            {child}
-          </Flex.Item>
-        ))}
-      </Flex>
-    )
-  }
+type GuidelinesOwnProps = {
+  children: React.ReactNode
 }
 
-export default Guidelines
-export { Guidelines }
+type PropKeys = keyof GuidelinesOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type GuidelinesProps = GuidelinesOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.node
+}
+
+const allowedProps: AllowedPropKeys = ['children']
+
+export type { GuidelinesProps }
+export { propTypes, allowedProps }
