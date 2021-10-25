@@ -46,17 +46,6 @@ import { propTypes } from './props'
 import type { DocumentProps, DocType } from './props'
 @withStyle(generateStyle, generateComponentTheme)
 class Document extends Component<DocumentProps> {
-  // static propTypes = {
-  //   // eslint-disable-next-line react/require-default-props
-  //   makeStyles: PropTypes.func,
-  //   // eslint-disable-next-line react/require-default-props
-  //   styles: PropTypes.object,
-  //   doc: DocPropType.isRequired,
-  //   description: PropTypes.string,
-  //   themeVariables: PropTypes.object,
-  //   repository: PropTypes.string,
-  //   layout: PropTypes.string
-  // }
   static propTypes = propTypes
 
   static defaultProps = {
@@ -78,7 +67,7 @@ class Document extends Component<DocumentProps> {
     this.props.makeStyles?.()
   }
 
-  handleDetailsTabChange = (event: any, { index }: any) => {
+  handleDetailsTabChange = ({ index }: any) => {
     this.setState({
       selectedDetailsTabIndex: index
     })
