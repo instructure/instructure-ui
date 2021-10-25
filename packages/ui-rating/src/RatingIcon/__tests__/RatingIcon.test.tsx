@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
-import { EmotionThemeProvider } from '@instructure/emotion'
+import { InstUISettingsProvider } from '@instructure/emotion'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 // eslint-disable-next-line no-restricted-imports
 import { TransitionLocator } from '@instructure/ui-motion/es/Transition/TransitionLocator'
@@ -35,7 +35,7 @@ import { RatingIcon } from '../index'
 describe('<RatingIcon />', async () => {
   it('transitions when filled on render and animateFill is true', async () => {
     await mount(
-      <EmotionThemeProvider
+      <InstUISettingsProvider
         theme={{
           componentOverrides: {
             Transition: {
@@ -45,14 +45,14 @@ describe('<RatingIcon />', async () => {
         }}
       >
         <RatingIcon filled animateFill />
-      </EmotionThemeProvider>
+      </InstUISettingsProvider>
     )
     expect(await TransitionLocator.find()).to.exist()
   })
 
   it('transitions when filled after render and animateFill is true', async () => {
     const subject = await mount(
-      <EmotionThemeProvider
+      <InstUISettingsProvider
         theme={{
           componentOverrides: {
             Transition: {
@@ -62,7 +62,7 @@ describe('<RatingIcon />', async () => {
         }}
       >
         <RatingIcon filled={false} animateFill={true} />
-      </EmotionThemeProvider>
+      </InstUISettingsProvider>
     )
 
     expect(await TransitionLocator.find({ expectEmpty: true })).to.not.exist()

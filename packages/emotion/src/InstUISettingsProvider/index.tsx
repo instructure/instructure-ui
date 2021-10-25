@@ -25,8 +25,8 @@
 import React, { useContext } from 'react'
 import { TextDirectionContext } from '@instructure/ui-i18n'
 import { ThemeProvider } from '@emotion/react'
-import { ThemeOrOverride } from './EmotionTypes'
-import { getTheme } from './EmotionThemeProvider'
+import { ThemeOrOverride } from '../EmotionTypes'
+import { getTheme } from '../EmotionThemeProvider'
 
 type InstUIProviderProps = {
   theme?: ThemeOrOverride
@@ -67,7 +67,7 @@ type InstUIProviderProps = {
  *   </InstUISettingsProvider>
  *
  *   <InstUISettingsProvider theme={instructure} dir="rtl">
- *     <div>Instructure themed part</div>
+ *     <div>Instructure themed part with RTL text</div>
  *   </InstUISettingsProvider>
  * </InstUISettingsProvider>
  * ```

@@ -106,10 +106,10 @@ const defaultValues = {
  * ### Applying themes
  *
  * A themeable component’s theme can be configured via wrapping it in an
- * [EmotionThemeProvider](#EmotionThemeProvider) component, and/or set
+ * [InstUISettingsProvider](#InstUISettingsProvider) component, and/or set
  * explicitly via its `themeOverride` prop.
  *
- * EmotionThemeProvider provides a theme object with [global theme variables](#canvas).
+ * InstUISettingsProvider provides a theme object with [global theme variables](#canvas).
  * These variables are mapped to the component's own variables in `theme.js` (see [@instructure/emotion](#emotion) package documentation for more info).
  *
  * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js.
@@ -134,12 +134,12 @@ const defaultValues = {
  *
  * ```jsx
  * {// global theme override}
- * <EmotionThemeProvider theme={{
+ * <InstUISettingsProvider theme={{
  *   colors: { backgroundMedium: '#888' }
  * }}>
  *  {// component theme override}
  *   <ExampleComponent themeOverride={{ hoverColor: '#eee' }} />
- * </EmotionThemeProvider>
+ * </InstUISettingsProvider>
  * ```
  *
  * @module withStyle

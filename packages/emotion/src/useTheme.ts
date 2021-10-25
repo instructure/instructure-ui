@@ -41,7 +41,7 @@ const useTheme = () => {
   if (isEmpty(theme)) {
     if (process.env.NODE_ENV !== 'production') {
       console.warn(
-        `No theme provided for [EmotionThemeProvider], using default <canvas> theme.`
+        `No theme provided for [InstUISettingsProvider], using default <canvas> theme.`
       )
     }
     theme = canvas

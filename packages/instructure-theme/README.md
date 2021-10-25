@@ -26,9 +26,9 @@ Before mounting (rendering) your React application:
 import { theme } from '@instructure/instructure-theme'
 
 ReactDOM.render(
-  <EmotionThemeProvider theme={theme}>
+  <InstUISettingsProvider theme={theme}>
     <App />
-  </EmotionThemeProvider>,
+  </InstUISettingsProvider>,
   element
 )
 ```
@@ -40,9 +40,9 @@ import { theme } from '@instructure/instructure-theme'
 const themeOverrides = { colors: { brand: 'red' } }
 
 ReactDOM.render(
-  <EmotionThemeProvider theme={{ ...theme, ...themeOverrides }}>
+  <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
     <App />
-  </EmotionThemeProvider>,
+  </InstUISettingsProvider>,
   element
 )
 ```

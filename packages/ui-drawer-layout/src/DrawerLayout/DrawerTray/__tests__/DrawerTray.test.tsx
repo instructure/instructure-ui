@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { DrawerTray } from '../index'
 import { DrawerTrayLocator } from '../DrawerTrayLocator'
-import { EmotionThemeProvider } from '@instructure/emotion'
+import { InstUISettingsProvider } from '@instructure/emotion'
 import { canvas } from '@instructure/ui-themes'
 import { DrawerLayoutContext } from '../../index'
 
@@ -204,7 +204,7 @@ describe('<DrawerTray />', async () => {
     const onEntered = stub()
     await mount(
       <DrawerLayoutContext.Provider value={true}>
-        <EmotionThemeProvider theme={canvas}>
+        <InstUISettingsProvider theme={canvas}>
           <DrawerTray
             label="DrawerTray Example"
             open={true}
@@ -214,7 +214,7 @@ describe('<DrawerTray />', async () => {
               return 'Hello from layout tray'
             }}
           />
-        </EmotionThemeProvider>
+        </InstUISettingsProvider>
       </DrawerLayoutContext.Provider>
     )
     const drawerTray = await DrawerTrayLocator.find()

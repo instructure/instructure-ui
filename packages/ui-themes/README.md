@@ -22,9 +22,9 @@ Before mounting (rendering) your React application:
 import { canvas } from '@instructure/ui-themes'
 
 ReactDOM.render(
-  <EmotionThemeProvider theme={canvas}>
+  <InstUISettingsProvider theme={canvas}>
     <App />
-  </EmotionThemeProvider>,
+  </InstUISettingsProvider>,
   element
 )
 ```
@@ -36,9 +36,9 @@ import { canvas } from '@instructure/ui-themes'
 const themeOverrides = { colors: { brand: 'red' } }
 
 ReactDOM.render(
-  <EmotionThemeProvider theme={{ ...canvas, ...themeOverrides }}>
+  <InstUISettingsProvider theme={{ ...canvas, ...themeOverrides }}>
     <App />
-  </EmotionThemeProvider>,
+  </InstUISettingsProvider>,
   element
 )
 ```
@@ -49,9 +49,9 @@ To use the high contrast theme:
 import { canvasHighContrast } from '@instructure/ui-themes'
 
 ReactDOM.render(
-  <EmotionThemeProvider theme={canvasHighContrast}>
+  <InstUISettingsProvider theme={canvasHighContrast}>
     <App />
-  </EmotionThemeProvider>,
+  </InstUISettingsProvider>,
   element
 )
 ```

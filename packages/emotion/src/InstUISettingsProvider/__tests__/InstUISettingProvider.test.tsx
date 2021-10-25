@@ -26,8 +26,8 @@
 import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 import { canvas } from '@instructure/ui-themes'
-import { InstUISettingsProvider } from '../InstUISettingsProvider'
-import { jsx } from '../index'
+import { InstUISettingsProvider } from '../index'
+import { jsx } from '../../index'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 
@@ -39,7 +39,7 @@ class TextDirAwareComponent extends React.Component<BidirectionalProps> {
 }
 
 describe('InstUISettingsProvider', async () => {
-  it('can handle nested text direction settings', async () => {
+  it('can handle nested text direction setting changes', async () => {
     const subject = await mount(
       <InstUISettingsProvider theme={canvas} dir="rtl">
         <InstUISettingsProvider>
