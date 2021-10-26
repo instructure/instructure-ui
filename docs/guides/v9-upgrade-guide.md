@@ -19,3 +19,9 @@ The following deprecated components are removed in v9:
 - [ComponentIdentifier](#ComponentIdentifier), [DateTime](#DateTime): These components have been removed because they are not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.
 - [elementMatches](#elementMatches) This polyfill is only needed for old, unsupported browsers.
 - InstUI-CLI's `create-app`, `create-component` and `create-package` commands: Just follow the instructions in the [usage](#usage) docs. Also, the `template-component`, `template-app` and `template-app` packages have been removed.
+
+### Removal of deprecated legacy reference attributes from components
+
+Some of our components had reference properties to the underlying html elements which were ment to be used internally within the component itself. These properties will now warn about this usage and will be deleted in v9.
+
+If you wish to get access to the html elements please refer [this](https://instructure.design/#accessing-the-dom) page which will explain how to do it with examples.
