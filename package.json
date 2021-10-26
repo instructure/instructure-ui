@@ -77,6 +77,8 @@
   },
   "devDependencies": {
     "@types/react-dom": "^17.0.0",
+    "danger": "^10.7.0",
+    "esbuild": "^0.13.9",
     "eslint": "^7",
     "husky": "^6.0.0",
     "lerna": "^4",
