@@ -25,7 +25,7 @@
 const { danger, markdown } = require('danger')
 const { exec } = require('child_process')
 const path = require('path')
-const { esBuild, gzip } = require('./scripts/calulateBundleSize')
+const { esBuild, gzip } = require('./scripts/calculateBundleSize')
 
 const META_FILE = path.resolve('./packages/ui/src/index.ts')
 const git = async (command: string) => {
