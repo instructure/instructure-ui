@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, ComponentType, CSSProperties } from 'react'
+import { Component, ComponentType } from 'react'
 
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { bidirectional } from '@instructure/ui-i18n'
@@ -219,7 +219,7 @@ class View extends Component<ViewProps> {
         {...passthroughProps(props)}
         className={className}
         css={styles?.view}
-        style={styles?.inlineStyles as CSSProperties}
+        style={styles?.inlineStyles}
         ref={this.handleElementRef}
       >
         {children}
