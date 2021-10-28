@@ -43,7 +43,8 @@ import type {
   BorderRadii,
   Shadow,
   Stacking,
-  ComponentStyle
+  ComponentStyle,
+  StyleObject
 } from '@instructure/emotion'
 
 type ViewOwnProps = {
@@ -193,7 +194,9 @@ type ViewProps = ViewOwnProps &
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ViewStyle = ComponentStyle<'view' | 'inlineStyles'>
+type ViewStyle = ComponentStyle<'view'> & {
+  inlineStyles: StyleObject
+}
 
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,

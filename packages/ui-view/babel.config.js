@@ -23,6 +23,11 @@
  */
 
 module.exports = {
+  shouldPrintComment(value) {
+    const isTsRelatedComment = /@ts-expect-error|FIXME/.test(value)
+
+    return !isTsRelatedComment
+  },
   presets: [
     [
       require('@instructure/ui-babel-preset'),
