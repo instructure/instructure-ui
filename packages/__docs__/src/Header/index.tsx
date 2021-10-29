@@ -23,7 +23,6 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Link } from '@instructure/ui-link'
 import { InlineSVG } from '@instructure/ui-svg-images'
@@ -37,23 +36,18 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { versionInPath } from '../versionData'
 
 import { Heading } from '../Heading'
+import type { HeaderProps } from './props'
+import { propTypes } from './props'
 
-class Header extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    version: PropTypes.string.isRequired,
-    versionsData: PropTypes.shape({
-      latestVersion: PropTypes.string.isRequired,
-      previousVersions: PropTypes.arrayOf(PropTypes.string).isRequired
-    })
-  }
+class Header extends Component<HeaderProps> {
+  static propTypes = propTypes
 
   static defaultProps = {
     version: undefined,
     versionsData: undefined
   }
 
-  handleSelect = (e, [selectedVersion]) => {
+  handleSelect = ([selectedVersion]: string) => {
     const { versionsData } = this.props
     const { latestVersion } = versionsData
     const isSelectedLatestVersion = selectedVersion === latestVersion
@@ -93,7 +87,7 @@ class Header extends Component {
           onSelect={this.handleSelect}
           themeOverride={{ minWidth: '12rem' }}
           trigger={
-            <CondensedButton padding="0.25rem">
+            <CondensedButton>
               <Text size="large">
                 {(
                   <span>
