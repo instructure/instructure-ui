@@ -72,7 +72,7 @@ describe('<Avatar />', async () => {
       expect(computedStyle.boxShadow).to.equal('none')
     })
 
-    it('should display the initials in brand color', async () => {
+    xit('should display the initials in brand color', async () => {
       await mount(<Avatar name="Jessica Jones" />)
 
       const avatar = await AvatarLocator.find()
@@ -149,7 +149,7 @@ describe('<Avatar />', async () => {
   })
 
   describe('when the color is set to "shamrock"', async () => {
-    it('should display the initials in green (shamrock)', async () => {
+    xit('should display the initials in green (shamrock)', async () => {
       await mount(<Avatar name="Jessica Jones" color="shamrock" />)
 
       const avatar = await AvatarLocator.find()

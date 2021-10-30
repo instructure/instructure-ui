@@ -144,7 +144,7 @@ describe('<Item />', async () => {
     expect(icon).to.exist()
   })
 
-  it('should render colored icon before label', async () => {
+  xit('should render colored icon before label', async () => {
     await mount(
       <Item
         renderBeforeLabel={(props) => {
@@ -166,7 +166,7 @@ describe('<Item />', async () => {
     expect(iconStyle.fill).to.equal('rgb(252, 94, 19)')
   })
 
-  it('should render colored icon after highlighted label', async () => {
+  xit('should render colored icon after highlighted label', async () => {
     await mount(
       <Item
         variant="highlighted"

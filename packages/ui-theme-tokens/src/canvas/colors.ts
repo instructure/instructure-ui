@@ -26,20 +26,20 @@ import { functionalColors } from '../utils/functionalColors'
 import { BaseColors, Colors } from '@instructure/shared-types'
 
 const baseColors: BaseColors = {
-  brand: '#008EE2',
-  link: '#008EE2',
-  electric: '#008EE2',
-  shamrock: '#00AC18',
-  barney: '#BF32A4',
-  crimson: '#EE0612',
-  fire: '#FC5E13',
-  licorice: '#2D3B45',
-  oxford: '#394B58',
-  ash: '#8B969E',
+  brand: '#0390E2',
+  link: '#0390E2',
+  electric: '#0390E2',
+  shamrock: '#009E15',
+  barney: '#CF44B6',
+  crimson: '#FA4242',
+  fire: '#FC7C40',
+  licorice: '#F5F5F5',
+  oxford: '#C7CDD1',
+  ash: '#6B7780',
   slate: '#8B969E',
-  tiara: '#C7CDD1',
-  porcelain: '#F5F5F5',
-  white: '#FFFFFF'
+  tiara: '#2D3B45',
+  porcelain: '#232D34',
+  white: '#212121'
 }
 
 const colors: Colors = Object.freeze(functionalColors(baseColors))

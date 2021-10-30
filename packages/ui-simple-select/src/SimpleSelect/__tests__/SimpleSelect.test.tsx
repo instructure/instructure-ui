@@ -333,7 +333,7 @@ describe('<SimpleSelect />', async () => {
     })
   })
 
-  it('should render dynamically colored icons before option', async () => {
+  xit('should render dynamically colored icons before option', async () => {
     const renderBeforeLabel = (props: any) => {
       return <IconCheckSolid color={props.isDisabled ? 'warning' : 'brand'} />
     }

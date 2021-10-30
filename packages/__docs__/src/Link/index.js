@@ -25,10 +25,10 @@
 import React from 'react'
 import { Link as UILink } from '@instructure/ui-link'
 import { EmotionThemeProvider } from '@instructure/emotion'
-import { instructure } from '@instructure/ui-themes'
+import { canvas } from '@instructure/ui-themes'
 
 const Link = (props) => (
-  <EmotionThemeProvider theme={instructure}>
+  <EmotionThemeProvider theme={canvas}>
     <UILink {...props} />
   </EmotionThemeProvider>
 )

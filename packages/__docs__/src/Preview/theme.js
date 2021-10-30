@@ -30,8 +30,8 @@
 const generateComponentTheme = (theme) => {
   const { colors, typography, spacing, borders, key: themeName } = theme
 
-  const colorCheckerboard = '#eee'
-  const colorCheckerboardInverse = '#444'
+  const colorCheckerboard = colors?.backgroundLight
+  const colorCheckerboardInverse = colors?.backgroundDarkest
 
   const themeSpecificStyles = {}
 
@@ -41,7 +41,7 @@ const generateComponentTheme = (theme) => {
     backgroundColorLight: colors?.backgroundLightest,
     backgroundColorInverse: colors?.backgroundDarkest,
     borderWidth: borders?.widthSmall,
-    borderColor: '#eee',
+    borderColor: colors?.backgroundLightest,
     gradientCheckerboardSize: '1rem',
     gradientCheckerboard: `
       45deg,

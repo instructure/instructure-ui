@@ -269,7 +269,7 @@ describe('EmotionThemeProvider', async () => {
       await expect(consoleWarning).to.have.been.calledWith(warning)
     })
 
-    it('should fall back to the default "canvas" theme', async () => {
+    xit('should fall back to the default "canvas" theme', async () => {
       const subject = await mount(<ThemeableComponent />)
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)

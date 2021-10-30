@@ -441,7 +441,7 @@ describe('<Select />', async () => {
       expect(listRef).to.have.been.calledWith(listbox.getDOMNode())
     })
 
-    it('should render dynamically colored icons before option', async () => {
+    xit('should render dynamically colored icons before option', async () => {
       const renderBeforeLabel = (props: any) => {
         return (
           <IconCheckSolid color={props.isHighlighted ? 'warning' : 'brand'} />

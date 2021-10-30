@@ -24,11 +24,11 @@
 
 import React from 'react'
 import { Heading as UIHeading } from '@instructure/ui-heading'
-import { instructure } from '@instructure/ui-themes'
+import { canvas } from '@instructure/ui-themes'
 import { EmotionThemeProvider } from '@instructure/emotion'
 
 const Heading = (props) => (
-  <EmotionThemeProvider theme={instructure}>
+  <EmotionThemeProvider theme={canvas}>
     <UIHeading {...props} />
   </EmotionThemeProvider>
 )

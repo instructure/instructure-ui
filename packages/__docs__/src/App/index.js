@@ -36,7 +36,7 @@ import {
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
-import { instructure } from '@instructure/ui-themes'
+import { canvas } from '@instructure/ui-themes'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Pill } from '@instructure/ui-pill'
@@ -484,7 +484,7 @@ class App extends Component {
       }
     })
     return (
-      <EmotionThemeProvider theme={instructure}>
+      <EmotionThemeProvider theme={canvas}>
         <Hero
           name={library.name}
           docs={{ ...docs, ...themeDocs }}
@@ -611,7 +611,7 @@ class App extends Component {
         width="18.75rem"
       >
         <View display="block" textAlign="end" margin="xx-small x-small none">
-          <EmotionThemeProvider theme={instructure}>
+          <EmotionThemeProvider theme={canvas}>
             <IconButton
               renderIcon={IconXSolid}
               screenReaderLabel="Close Navigation"
@@ -724,7 +724,7 @@ class App extends Component {
           >
             {!showMenu && (
               <div css={this.props.styles.hamburger}>
-                <EmotionThemeProvider theme={instructure}>
+                <EmotionThemeProvider theme={canvas}>
                   <IconButton
                     onClick={this.handleMenuOpen}
                     elementRef={this.handleMenuTriggerRef}
