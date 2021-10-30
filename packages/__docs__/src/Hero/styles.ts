@@ -21,25 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+import type { HeroStyle, HeroTheme } from './props'
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme) => {
-  const { colors, key: themeName } = theme
-
-  const themeSpecificStyle = {}
-
-  const componentVariables = {
-    backgroundColor: colors?.backgroundBrand
-  }
-
+const generateStyle = (componentTheme: HeroTheme): HeroStyle => {
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
+    backgroundColor: componentTheme.backgroundColor,
+
+    overlayLayout: {
+      label: 'hero__overlayLayout',
+      position: 'absolute',
+      top: 0,
+      insetInlineStart: 0,
+      width: '100%',
+      height: '100%'
+    },
+
+    contentLayout: {
+      label: 'hero__contentLayout',
+      display: 'grid',
+      gridTemplateRows: 'auto 1fr auto'
+    },
+
+    content: {
+      label: 'hero__content',
+      alignSelf: 'center'
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle
