@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Button, IconButton } from '@instructure/ui-buttons'
 import { Flex } from '@instructure/ui-flex'
@@ -51,20 +50,12 @@ import { ContentWrap } from '../ContentWrap'
 import { Search } from '../Search'
 import { Heading } from '../Heading'
 
+import type { HeroProps } from './props'
+import { propTypes } from './props'
+
 @withStyle(generateStyle, generateComponentTheme)
-class Hero extends Component {
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    name: PropTypes.string.isRequired,
-    repository: PropTypes.string.isRequired,
-    version: PropTypes.string.isRequired,
-    layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large']).isRequired,
-    description: PropTypes.string,
-    docs: PropTypes.object
-  }
+class Hero extends Component<HeroProps> {
+  static propTypes = propTypes
 
   static defaultProps = {
     description: undefined,
@@ -72,11 +63,11 @@ class Hero extends Component {
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   render() {
@@ -351,16 +342,16 @@ class Hero extends Component {
       <View as="section">
         <View
           as="div"
-          minHeight={layout === 'small' ? null : '100vh'}
+          minHeight={layout === 'small' ? undefined : '100vh'}
           position="relative"
         >
-          <div css={styles.overlayLayout}>
+          <div css={styles?.overlayLayout}>
             <Img
               src="https://instui-docs.s3.us-east-2.amazonaws.com/hero2.jpg"
               display="block"
               constrain="cover"
               overlay={{
-                color: styles.backgroundColor,
+                color: styles?.backgroundColor as string,
                 opacity: 10,
                 blend: 'multiply'
               }}
@@ -369,8 +360,8 @@ class Hero extends Component {
           <View
             as="div"
             position="relative"
-            css={styles.contentLayout}
-            minHeight={layout === 'small' ? null : '100vh'}
+            css={styles?.contentLayout}
+            minHeight={layout === 'small' ? undefined : '100vh'}
           >
             <View
               as="header"
@@ -386,7 +377,7 @@ class Hero extends Component {
                 <Flex.Item
                   shouldShrink={!bigScreen}
                   shouldGrow={!bigScreen}
-                  size={bigScreen ? '36%' : null}
+                  size={bigScreen ? '36%' : undefined}
                   padding={bigScreen ? 'none' : 'none x-small none none'}
                 >
                   <Search options={this.props.docs} />
@@ -411,7 +402,7 @@ class Hero extends Component {
                 </Flex.Item>
               </Flex>
             </View>
-            <View display="block" css={styles.content}>
+            <View display="block" css={styles?.content}>
               <ContentWrap
                 padding={
                   layout === 'small' ? 'xx-large large' : 'x-large xx-large'
@@ -420,7 +411,7 @@ class Hero extends Component {
               >
                 <View
                   as="div"
-                  maxWidth={bigScreen ? '66%' : null}
+                  maxWidth={bigScreen ? '66%' : undefined}
                   padding={bigScreen ? 'none x-large none none' : 'none'}
                 >
                   <Flex margin="0 0 large">
@@ -484,7 +475,6 @@ class Hero extends Component {
                       Github
                     </Button>
                     <Button
-                      withBorder={false}
                       focusColor="inverse"
                       color="success"
                       href="#v8-upgrade-guide"
