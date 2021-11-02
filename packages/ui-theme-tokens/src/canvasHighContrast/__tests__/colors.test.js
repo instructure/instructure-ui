@@ -26,7 +26,7 @@ import { contrast } from '@instructure/ui-color-utils'
 
 import { colors } from '../colors'
 
-describe('colors', () => {
+describe('canvasHighContrast colors', () => {
   describe('textDarkest', () => {
     it('should meet 4.5:1 contrast as a text color with `backgroundLightest` background', () => {
       expect(
