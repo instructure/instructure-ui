@@ -25,16 +25,16 @@
 import { functionalColors } from '../utils/functionalColors'
 
 const baseColors = {
-  brand: '#008EE2',
-  link: '#008EE2',
-  electric: '#008EE2',
-  shamrock: '#00AC18',
+  brand: '#0374B5',
+  link: '#0374B5',
+  electric: '#0374B5',
+  shamrock: '#0B874B',
   barney: '#BF32A4',
-  crimson: '#EE0612',
+  crimson: '#E0061F',
   fire: '#FC5E13',
   licorice: '#2D3B45',
   oxford: '#394B58',
-  ash: '#8B969E',
+  ash: '#6B7780',
   slate: '#8B969E',
   tiara: '#C7CDD1',
   porcelain: '#F5F5F5',
