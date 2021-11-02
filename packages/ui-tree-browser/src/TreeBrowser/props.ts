@@ -52,6 +52,7 @@ type TreeBrowserOwnProps = {
   onItemClick?: (...args: any[]) => any
   treeLabel?: string
   renderContent?: (...args: any[]) => any
+  sortOrder?: (arg1: any, arg2: any) => number
 }
 
 type PropKeys = keyof TreeBrowserOwnProps
@@ -134,7 +135,11 @@ const propTypes: PropValidators<PropKeys> = {
    * An optional label to assist visually impaired users
    */
   treeLabel: PropTypes.string,
-  renderContent: PropTypes.func
+  renderContent: PropTypes.func,
+  /**
+   * An optional compare function to specify order of the collections and the items
+   */
+  sortOrder: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -156,7 +161,8 @@ const allowedProps: AllowedPropKeys = [
   'onCollectionToggle',
   'onItemClick',
   'treeLabel',
-  'renderContent'
+  'renderContent',
+  'sortOrder'
 ]
 
 export type { TreeBrowserProps, TreeBrowserStyle }
