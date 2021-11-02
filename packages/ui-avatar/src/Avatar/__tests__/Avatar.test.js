@@ -82,7 +82,7 @@ describe('<Avatar />', async () => {
       const initials = await avatar.findWithText('JJ')
 
       expect(getComputedStyle(initials.getDOMNode()).color).to.equal(
-        'rgb(0, 142, 226)'
+        'rgb(3, 116, 181)'
       )
     })
   })
@@ -203,7 +203,7 @@ describe('<Avatar />', async () => {
       const initials = await avatar.findWithText('JJ')
 
       expect(getComputedStyle(initials.getDOMNode()).color).to.equal(
-        'rgb(0, 172, 24)'
+        'rgb(11, 135, 75)'
       )
     })
 

@@ -58,19 +58,19 @@ example: true
   <View textAlign="center" as="div">
     <Img
       src={placeholderImage(200, 200)}
-      overlay={{color: '#008ee2', opacity: 9, blend: 'overlay'}}
+      overlay={{color: '#0374B5', opacity: 9, blend: 'overlay'}}
       alt="A placeholder image"
       margin="x-small"
     />
     <Img
       src={placeholderImage(200, 200)}
-      overlay={{color: '#008ee2', opacity: 6, blend: 'multiply'}}
+      overlay={{color: '#0374B5', opacity: 6, blend: 'multiply'}}
       alt="A placeholder image"
       margin="x-small"
     />
     <Img
       src={placeholderImage(200, 200)}
-      overlay={{color: '#008ee2', opacity: 3}}
+      overlay={{color: '#0374B5', opacity: 3}}
       alt="A placeholder image"
       margin="x-small"
     />
@@ -79,7 +79,7 @@ example: true
 
 ### Cover
 
-When the `constrain` prop is set to `cover` the image fills the *full* width and height of its
+When the `constrain` prop is set to `cover` the image fills the _full_ width and height of its
 containing element, while maintaining the aspect ratio of the source image.
 
 ```js

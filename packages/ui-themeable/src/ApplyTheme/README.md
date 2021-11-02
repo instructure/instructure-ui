@@ -41,8 +41,8 @@ to override a 'registered' theme and passing in the variables as the second argu
 example: true
 ---
 <ApplyTheme theme={ApplyTheme.generateTheme('canvas', {
-      'ic-brand-primary': '#008EE2',
-      'ic-brand-button--primary-bgd': '#008EE2',
+      'ic-brand-primary': '#0374B5',
+      'ic-brand-button--primary-bgd': '#0374B5',
       'ic-brand-button--primary-text': '#FFFFFF',
       'ic-link-color': 'red'
     }
