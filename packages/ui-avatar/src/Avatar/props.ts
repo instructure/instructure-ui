@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { SyntheticEvent } from 'react'
+import React, { SyntheticEvent } from 'react'
 import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
@@ -89,6 +89,10 @@ type AvatarOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+  /**
+   * An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority.
+   */
+  renderIcon?: React.ReactNode | (() => React.ReactNode)
 }
 
 export type AvatarState = {
@@ -103,7 +107,9 @@ type AvatarProps = AvatarOwnProps &
   WithStyleProps<AvatarTheme, AvatarStyle> &
   OtherHTMLAttributes<AvatarOwnProps>
 
-type AvatarStyle = ComponentStyle<'avatar' | 'initials' | 'loadImage'>
+type AvatarStyle = ComponentStyle<
+  'avatar' | 'initials' | 'loadImage' | 'iconSVG'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   name: PropTypes.string.isRequired,
@@ -133,7 +139,8 @@ const propTypes: PropValidators<PropKeys> = {
   display: PropTypes.oneOf(['inline-block', 'block']),
   onImageLoaded: PropTypes.func,
   as: PropTypes.elementType,
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -147,7 +154,8 @@ const allowedProps: AllowedPropKeys = [
   'display',
   'onImageLoaded',
   'as',
-  'elementRef'
+  'elementRef',
+  'renderIcon'
 ]
 
 export type { AvatarProps, AvatarStyle }

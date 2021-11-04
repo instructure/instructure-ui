@@ -138,6 +138,20 @@ const generateStyle = (
     loadImage: {
       label: 'avatar__loadImage',
       display: 'none'
+    },
+    iconSVG: {
+      label: 'avatar__iconSVG',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100%',
+      width: '100%',
+
+      svg: {
+        fill: initialsColor[color],
+        height: '1em',
+        width: '1em'
+      }
     }
   }
 }

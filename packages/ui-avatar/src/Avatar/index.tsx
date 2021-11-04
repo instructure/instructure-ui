@@ -26,7 +26,7 @@
 import { Component, SyntheticEvent } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -73,13 +73,11 @@ class Avatar extends Component<AvatarProps, AvatarState> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.state)
+    this.props.makeStyles?.(this.state)
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.state)
+    this.props.makeStyles?.(this.state)
   }
 
   makeInitialsFromName() {
@@ -114,6 +112,16 @@ class Avatar extends Component<AvatarProps, AvatarState> {
     )
   }
 
+  renderContent() {
+    const { renderIcon, styles } = this.props
+
+    if (!renderIcon) {
+      return this.renderInitials()
+    }
+
+    return <span css={styles?.iconSVG}>{callRenderProp(renderIcon)}</span>
+  }
+
   render() {
     const { onImageLoaded, styles, ...props } = this.props
 
@@ -135,7 +143,7 @@ class Avatar extends Component<AvatarProps, AvatarState> {
           onLoad={this.handleImageLoaded}
           aria-hidden="true"
         />
-        {!this.state.loaded && this.renderInitials()}
+        {!this.state.loaded && this.renderContent()}
       </View>
     )
   }

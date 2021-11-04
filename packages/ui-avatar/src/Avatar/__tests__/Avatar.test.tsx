@@ -25,6 +25,8 @@
 import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
+import { IconGroupLine } from '@instructure/ui-icons'
+
 import { Avatar } from '../index'
 import { AvatarLocator } from '../AvatarLocator'
 
@@ -92,6 +94,44 @@ describe('<Avatar />', async () => {
     })
   })
 
+  describe('when the renderIcon prop is provided', async () => {
+    it('should display an svg passed', async () => {
+      const SomeIcon = () => (
+        <svg>
+          <circle cx="25" cy="75" r="20" />
+        </svg>
+      )
+
+      await mount(
+        <Avatar name="Jessica Jones" renderIcon={SomeIcon}>
+          Hello World
+        </Avatar>
+      )
+      const avatar = await AvatarLocator.find()
+      expect(await avatar.find('svg')).to.exist()
+    })
+
+    it('should display an InstUI icon passed', async () => {
+      await mount(
+        <Avatar name="Jessica Jones" renderIcon={<IconGroupLine />}>
+          Hello World
+        </Avatar>
+      )
+      const avatar = await AvatarLocator.find()
+      expect(await avatar.find('svg')).to.exist()
+    })
+
+    it('should display correctly when an icon renderer is passed', async () => {
+      await mount(
+        <Avatar name="Jessica Jones" renderIcon={() => <IconGroupLine />}>
+          Hello World
+        </Avatar>
+      )
+      const avatar = await AvatarLocator.find()
+      expect(await avatar.find('svg')).to.exist()
+    })
+  })
+
   describe('when an image src url is provided', async () => {
     // eslint-disable-next-line max-len
     const src =
@@ -99,6 +139,19 @@ describe('<Avatar />', async () => {
 
     it('should display the image url provided', async () => {
       await mount(<Avatar name="Foo bar" src={src} />)
+
+      const avatar = await AvatarLocator.find()
+      const image = await avatar.find('img')
+
+      await image.load()
+
+      expect(avatar.getAttribute('src')).to.contain(src)
+    })
+
+    it('should display the image even if an icon is provided', async () => {
+      await mount(
+        <Avatar name="Foo bar" src={src} renderIcon={<IconGroupLine />} />
+      )
 
       const avatar = await AvatarLocator.find()
       const image = await avatar.find('img')
