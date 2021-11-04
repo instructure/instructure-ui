@@ -44,7 +44,6 @@ const generateComponentTheme = (theme: Theme): RadioInputTheme => {
   const themeSpecificStyle: ThemeSpecificStyle<RadioInputTheme> = {
     canvas: {
       focusBorderColor: theme['ic-brand-primary'],
-      borderColor: theme['ic-brand-font-color-dark'],
       hoverBorderColor: theme['ic-brand-font-color-dark'],
       labelColor: theme['ic-brand-font-color-dark']
     },
@@ -60,7 +59,8 @@ const generateComponentTheme = (theme: Theme): RadioInputTheme => {
     labelLineHeight: typography?.lineHeightCondensed,
 
     background: colors?.backgroundLightest,
-    borderColor: colors?.borderDarkest,
+    borderWidth: borders?.widthSmall,
+    borderColor: colors?.borderMedium,
     hoverBorderColor: colors?.borderDarkest,
     controlSize: '0.1875rem',
 

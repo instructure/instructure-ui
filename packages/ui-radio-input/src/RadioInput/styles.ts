@@ -63,7 +63,7 @@ const generateStyle = (
         minWidth: '1rem',
         transition: 'all 0.2s ease-out',
         borderRadius: '100%',
-        border: `0.125rem solid ${componentTheme.borderColor}`,
+        border: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`,
         background: componentTheme.background,
 
         '&::before': {
