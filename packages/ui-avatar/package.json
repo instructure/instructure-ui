@@ -28,6 +28,7 @@
     "@instructure/console": "8.11.1",
     "@instructure/emotion": "8.11.1",
     "@instructure/shared-types": "8.11.1",
+    "@instructure/ui-icons": "8.11.1",
     "@instructure/ui-react-utils": "8.11.1",
     "@instructure/ui-testable": "8.11.1",
     "@instructure/ui-view": "8.11.1",

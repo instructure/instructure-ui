@@ -2,7 +2,7 @@
 describes: Avatar
 ---
 
-The avatar component can be used to display a user's avatar. When an image src is not supplied the user's initials will display. The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
+The avatar component can be used to display a user's avatar. When an image src is not supplied the user's initials will display. Instead of the initials, and icon can be displayed as well with the `renderIcon` property. The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
 
 ```js
 ---
@@ -11,8 +11,10 @@ example: true
 <div>
   <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" />
   <Avatar name="Sarah Robinson" margin="0 small 0 0" />
+  <Avatar name="Sarah Robinson" renderIcon={<IconGroupLine />} margin="0 small 0 0" />
   <Avatar name="Kyle Montgomery" src={avatarSquare} shape="rectangle" margin="0 small 0 0" />
-  <Avatar name="Kyle Montgomery" shape="rectangle" />
+  <Avatar name="Kyle Montgomery" shape="rectangle" margin="0 small 0 0" />
+  <Avatar name="Kyle Montgomery" renderIcon={<IconGroupLine />} shape="rectangle" />
 </div>
 ```
 
@@ -44,25 +46,45 @@ example: true
     <Avatar name="David Herbert" size="x-large" margin="0 small 0 0"  src={avatarSquare} />
     <Avatar name="Isaac Asimov" size="xx-large"  src={avatarSquare} />
   </View>
+  <View display="block" padding="small medium">
+    <Avatar name="Arthur C. Clarke" renderIcon={<IconGroupLine />} size="xx-small" margin="0 small 0 0" />
+    <Avatar name="James Arias" renderIcon={<IconGroupLine />} size="x-small" margin="0 small 0 0" />
+    <Avatar name="Charles Kimball" renderIcon={<IconGroupLine />} size="small" margin="0 small 0 0" />
+    <Avatar name="Melissa Reed" renderIcon={<IconGroupLine />} size="medium" margin="0 small 0 0" />
+    <Avatar name="Heather Wheeler" renderIcon={<IconGroupLine />} size="large" margin="0 small 0 0" />
+    <Avatar name="David Herbert" renderIcon={<IconGroupLine />} size="x-large" margin="0 small 0 0" />
+    <Avatar name="Isaac Asimov" renderIcon={<IconGroupLine />} size="xx-large" />
+  </View>
 </div>
 ```
 
-### Color of the initials
+### Colors
 
-The color of the initials can be set with the `color` prop, and it allows you to select from `default`, `shamrock`, `barney`, `crimson`, `fire`, `licorice` and `ash`.
+The color of the initials and icons can be set with the `color` prop, and it allows you to select from `default`, `shamrock`, `barney`, `crimson`, `fire`, `licorice` and `ash`.
 
 ```js
 ---
 example: true
 ---
 <div>
-  <Avatar name="Arthur C. Clarke" margin="0 small 0 0" />
-  <Avatar name="James Arias" color="shamrock" margin="0 small 0 0" />
-  <Avatar name="Charles Kimball" color="barney" margin="0 small 0 0" />
-  <Avatar name="Melissa Reed" color="crimson" margin="0 small 0 0" />
-  <Avatar name="Heather Wheeler" color="fire" margin="0 small 0 0" />
-  <Avatar name="David Herbert" color="licorice" margin="0 small 0 0" />
-  <Avatar name="Isaac Asimov" color="ash" />
+  <View display="block" padding="small medium">
+    <Avatar name="Arthur C. Clarke" margin="0 small 0 0" />
+    <Avatar name="James Arias" color="shamrock" margin="0 small 0 0" />
+    <Avatar name="Charles Kimball" color="barney" margin="0 small 0 0" />
+    <Avatar name="Melissa Reed" color="crimson" margin="0 small 0 0" />
+    <Avatar name="Heather Wheeler" color="fire" margin="0 small 0 0" />
+    <Avatar name="David Herbert" color="licorice" margin="0 small 0 0" />
+    <Avatar name="Isaac Asimov" color="ash" />
+  </View>
+  <View display="block" padding="small medium">
+    <Avatar renderIcon={<IconGroupLine />} name="Arthur C. Clarke" margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="James Arias" color="shamrock" margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="Charles Kimball" color="barney" margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="Melissa Reed" color="crimson" margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="Heather Wheeler" color="fire" margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="David Herbert" color="licorice" margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="Isaac Asimov" color="ash" />
+  </View>
 </div>
 ```
 

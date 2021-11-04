@@ -32,9 +32,57 @@ describe('Avatar.theme', () => {
   describe('with the default theme', () => {
     const variables = generateComponentTheme(canvas)
 
-    describe('default', () => {
+    describe('default color', () => {
       it('should ensure background color and text color meet 3:1 contrast', () => {
         expect(contrast(variables.background, variables.color)).to.be.above(3)
+      })
+    })
+
+    describe('colorShamrock', () => {
+      it('should ensure background color and text color meet 3:1 contrast', () => {
+        expect(
+          contrast(variables.background, variables.colorShamrock)
+        ).to.be.above(3)
+      })
+    })
+
+    describe('colorBarney', () => {
+      it('should ensure background color and text color meet 3:1 contrast', () => {
+        expect(
+          contrast(variables.background, variables.colorBarney)
+        ).to.be.above(3)
+      })
+    })
+
+    describe('colorCrimson', () => {
+      it('should ensure background color and text color meet 3:1 contrast', () => {
+        expect(
+          contrast(variables.background, variables.colorCrimson)
+        ).to.be.above(3)
+      })
+    })
+
+    describe('colorFire', () => {
+      it('should ensure background color and text color meet 3:1 contrast', () => {
+        expect(contrast(variables.background, variables.colorFire)).to.be.above(
+          3
+        )
+      })
+    })
+
+    describe('colorLicorice', () => {
+      it('should ensure background color and text color meet 3:1 contrast', () => {
+        expect(
+          contrast(variables.background, variables.colorLicorice)
+        ).to.be.above(3)
+      })
+    })
+
+    describe('colorAsh', () => {
+      it('should ensure background color and text color meet 3:1 contrast', () => {
+        expect(contrast(variables.background, variables.colorAsh)).to.be.above(
+          3
+        )
       })
     })
   })
@@ -42,9 +90,57 @@ describe('Avatar.theme', () => {
   describe('with the "canvas-high-contrast" theme', () => {
     const variables = generateComponentTheme(canvasHighContrast)
 
-    describe('default', () => {
+    describe('default color', () => {
       it('should ensure background color and text color meet 4.5:1 contrast', () => {
         expect(contrast(variables.background, variables.color)).to.be.above(4.5)
+      })
+    })
+
+    describe('colorShamrock', () => {
+      it('should ensure background color and text color meet 4.5:1 contrast', () => {
+        expect(
+          contrast(variables.background, variables.colorShamrock)
+        ).to.be.above(4.5)
+      })
+    })
+
+    describe('colorBarney', () => {
+      it('should ensure background color and text color meet 4.5:1 contrast', () => {
+        expect(
+          contrast(variables.background, variables.colorBarney)
+        ).to.be.above(4.5)
+      })
+    })
+
+    describe('colorCrimson', () => {
+      it('should ensure background color and text color meet 4.5:1 contrast', () => {
+        expect(
+          contrast(variables.background, variables.colorCrimson)
+        ).to.be.above(4.5)
+      })
+    })
+
+    describe('colorFire', () => {
+      it('should ensure background color and text color meet 4.5:1 contrast', () => {
+        expect(contrast(variables.background, variables.colorFire)).to.be.above(
+          4.5
+        )
+      })
+    })
+
+    describe('colorLicorice', () => {
+      it('should ensure background color and text color meet 4.5:1 contrast', () => {
+        expect(
+          contrast(variables.background, variables.colorLicorice)
+        ).to.be.above(4.5)
+      })
+    })
+
+    describe('colorAsh', () => {
+      it('should ensure background color and text color meet 4.5:1 contrast', () => {
+        expect(contrast(variables.background, variables.colorAsh)).to.be.above(
+          4.5
+        )
       })
     })
   })
