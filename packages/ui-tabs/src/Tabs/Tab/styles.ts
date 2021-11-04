@@ -115,6 +115,20 @@ const generateStyle = (
     }
   }
 
+  // overrides for View default focus ring
+  const focusRingStyles = {
+    '&:before': {
+      inset: '0.5rem',
+      borderRadius: '0.25rem'
+    },
+
+    '&:focus': {
+      '&:before': {
+        inset: '0.375rem'
+      }
+    }
+  }
+
   return {
     tab: {
       label: 'tab',
@@ -129,7 +143,7 @@ const generateStyle = (
       ...((isSelected || isDisabled) && { cursor: 'default' }),
       ...(isDisabled && { opacity: 0.5 }),
 
-      '&:focus': { outline: 'none' },
+      ...focusRingStyles,
 
       ...variants[variant!]
     }

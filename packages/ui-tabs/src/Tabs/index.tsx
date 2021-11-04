@@ -23,7 +23,13 @@
  */
 
 /** @jsx jsx */
-import React, { Component, createElement } from 'react'
+import React, {
+  Component,
+  ComponentClass,
+  ComponentElement,
+  createElement,
+  ReactElement
+} from 'react'
 
 import keycode from 'keycode'
 
@@ -49,8 +55,14 @@ import generateComponentTheme from './theme'
 
 import { Tab } from './Tab'
 import { Panel } from './Panel'
-import type { TabsProps } from './props'
+
 import { allowedProps, propTypes } from './props'
+import type { TabsProps } from './props'
+import type { TabsTabProps } from './Tab/props'
+import type { TabsPanelProps } from './Panel/props'
+
+type TabChild = ReactElement & ComponentElement<TabsTabProps, any>
+type PanelChild = ReactElement & ComponentElement<TabsPanelProps, any>
 
 /**
 ---
@@ -354,12 +366,15 @@ class Tabs extends Component<TabsProps> {
       this.showActiveTabIfOverlayed(this._tabList.querySelector(`#tab-${id}`))
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'index' implicitly has an 'any' type.
-  createTab(index, generatedId, selected, panel) {
+  createTab(
+    index: number,
+    generatedId: string,
+    selected: boolean,
+    panel: PanelChild
+  ): TabChild {
     const id = panel.props.id || generatedId
 
-    // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-    return createElement(Tab, {
+    return createElement(Tab as ComponentClass<TabsTabProps>, {
       variant: this.props.variant,
       key: `tab-${id}`,
       id: `tab-${id}`,
@@ -373,8 +388,12 @@ class Tabs extends Component<TabsProps> {
     })
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'index' is declared but its value is never read.
-  clonePanel(index, generatedId, selected, panel) {
+  clonePanel(
+    _index: number,
+    generatedId: string,
+    selected: boolean,
+    panel: PanelChild
+  ) {
     const id = panel.props.id || generatedId
 
     // fixHeight can be 0, so simply `fixheight` could return falsy value
@@ -388,10 +407,8 @@ class Tabs extends Component<TabsProps> {
       variant: this.props.variant,
       padding: panel.props.padding || this.props.padding,
       textAlign: panel.props.textAlign || this.props.textAlign,
-      maxHeight:
-        panel.maxHeight || (!hasFixedHeight ? this.props.maxHeight : undefined),
-      minHeight:
-        panel.minHeight || (!hasFixedHeight ? this.props.minHeight : '100%')
+      maxHeight: !hasFixedHeight ? this.props.maxHeight : undefined,
+      minHeight: !hasFixedHeight ? this.props.minHeight : '100%'
     })
   }
 
@@ -419,8 +436,7 @@ class Tabs extends Component<TabsProps> {
   render() {
     // @ts-expect-error ts-migrate(7034) FIXME: Variable 'panels' implicitly has type 'any[]' in s... Remove this comment to see the full error message
     const panels = []
-    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'tabs' implicitly has type 'any[]' in som... Remove this comment to see the full error message
-    const tabs = []
+    const tabs: TabChild[] = []
     const {
       children,
       elementRef,
@@ -445,14 +461,12 @@ class Tabs extends Component<TabsProps> {
     React.Children.forEach(children, (child) => {
       if (matchComponentTypes(child, [Panel])) {
         const selected =
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          !child.props.isDisabled &&
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          (child.props.isSelected || selectedIndex === index)
+          !(child as PanelChild).props.isDisabled &&
+          ((child as PanelChild).props.isSelected || selectedIndex === index)
         const id = uid()
 
-        tabs.push(this.createTab(index, id, selected, child))
-        panels.push(this.clonePanel(index, id, selected, child))
+        tabs.push(this.createTab(index, id, selected, child as PanelChild))
+        panels.push(this.clonePanel(index, id, selected, child as PanelChild))
 
         index++
       } else {
@@ -486,12 +500,11 @@ class Tabs extends Component<TabsProps> {
         css={styles?.container}
       >
         <Focusable ref={this.handleFocusableRef}>
-          {({ focusVisible }) => (
+          {() => (
             <View
               as="div"
               position="relative"
               borderRadius="medium"
-              withFocusOutline={focusVisible}
               shouldAnimateFocus={false}
               css={styles?.tabs}
             >
@@ -502,7 +515,6 @@ class Tabs extends Component<TabsProps> {
                 aria-label={screenReaderLabel}
                 elementRef={this.handleTabListRef}
               >
-                {/* @ts-expect-error ts-migrate(7005) FIXME: Variable 'tabs' implicitly has an 'any[]' type. */}
                 {tabs}
                 {withScrollFade && scrollFadeEls}
               </View>

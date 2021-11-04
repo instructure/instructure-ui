@@ -118,6 +118,8 @@ class Tab extends Component<TabsTabProps> {
         aria-controls={controls}
         //@ts-expect-error fix this to be number
         tabIndex={isSelected && !isDisabled ? '0' : undefined}
+        position="relative"
+        focusPosition="inset"
       >
         {callRenderProp(children)}
       </View>
