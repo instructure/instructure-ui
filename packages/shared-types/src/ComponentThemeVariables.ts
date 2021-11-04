@@ -906,6 +906,7 @@ export type RadioInputTheme = {
   labelFontWeight: Typography['fontWeightNormal']
   labelLineHeight: Typography['lineHeightCondensed']
   background: Colors['backgroundLightest']
+  borderWidth: Border['widthSmall']
   borderColor: Colors['borderDarkest']
   hoverBorderColor: Colors['borderDarkest']
   controlSize: string | 0

@@ -47,7 +47,7 @@ const generateComponentTheme = (theme: Theme): CheckboxFacadeTheme => {
   const componentVariables: CheckboxFacadeTheme = {
     color: colors?.textLightest,
     borderWidth: borders?.widthSmall,
-    borderColor: colors?.borderDark,
+    borderColor: colors?.borderMedium,
     borderRadius: borders?.radiusMedium,
     background: colors?.backgroundLightest,
     marginRight: spacing?.xSmall,
