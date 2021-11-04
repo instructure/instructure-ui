@@ -478,8 +478,8 @@ class Example extends React.Component {
           <Modal.Header spacing={this.state.smallViewport ? 'compact' : 'default'}>
             {this.renderCloseButton()}
             {this.state.smallViewport
-              ? <Text size="large">This Modal is optimized for small viewport</Text>
-              : <Heading>This is a deafult size Modal</Heading>
+              ? <Heading as="h2" level="h3" theme={{ h3FontWeight: 400 }}>This Modal is optimized for small viewport</Heading>
+              : <Heading as="h2">This is a deafult size Modal</Heading>
             }
           </Modal.Header>
           <Modal.Body>
