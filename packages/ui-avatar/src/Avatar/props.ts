@@ -69,6 +69,10 @@ type AvatarOwnProps = {
     | 'fire'
     | 'licorice'
     | 'ash'
+  /**
+   * In inverse color mode the background and text/icon colors are inverted
+   */
+  hasInverseColor?: boolean
   shape: 'circle' | 'rectangle'
   display: 'inline-block' | 'block'
   /**
@@ -134,6 +138,7 @@ const propTypes: PropValidators<PropKeys> = {
     'licorice',
     'ash'
   ]),
+  hasInverseColor: PropTypes.bool,
   shape: PropTypes.oneOf(['circle', 'rectangle']),
   margin: ThemeablePropTypes.spacing,
   display: PropTypes.oneOf(['inline-block', 'block']),
@@ -149,6 +154,7 @@ const allowedProps: AllowedPropKeys = [
   'alt',
   'size',
   'color',
+  'hasInverseColor',
   'shape',
   'margin',
   'display',

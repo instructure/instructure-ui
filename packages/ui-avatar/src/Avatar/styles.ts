@@ -40,7 +40,7 @@ const generateStyle = (
   props: AvatarProps,
   state: AvatarState
 ): AvatarStyle => {
-  const { size, color, shape, src } = props
+  const { size, color, hasInverseColor, shape, src } = props
   const { loaded } = state
 
   const sizeStyles = {
@@ -90,7 +90,7 @@ const generateStyle = (
     }
   }
 
-  const initialsColor = {
+  const colorVariants = {
     default: componentTheme.color, // = brand
     shamrock: componentTheme.colorShamrock,
     barney: componentTheme.colorBarney,
@@ -100,12 +100,20 @@ const generateStyle = (
     ash: componentTheme.colorAsh
   }
 
+  const backgroundColor = hasInverseColor
+    ? colorVariants[color]
+    : componentTheme.background
+
+  const contentColor = hasInverseColor
+    ? componentTheme.background
+    : colorVariants[color]
+
   return {
     avatar: {
       label: 'avatar',
       height: '2.5em',
       boxSizing: 'border-box',
-      backgroundColor: componentTheme.background,
+      backgroundColor: backgroundColor,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundClip: 'content-box',
@@ -124,12 +132,17 @@ const generateStyle = (
         : {
             backgroundImage: undefined,
             borderStyle: 'solid',
-            borderColor: componentTheme.borderColor
+            borderColor: componentTheme.borderColor,
+            ...(hasInverseColor && {
+              border: 0,
+              padding: sizeStyles[size].borderWidth,
+              backgroundClip: 'border-box'
+            })
           })
     },
     initials: {
       label: 'avatar__initials',
-      color: initialsColor[color],
+      color: contentColor,
       lineHeight: '2.375em',
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
@@ -148,7 +161,7 @@ const generateStyle = (
       width: '100%',
 
       svg: {
-        fill: initialsColor[color],
+        fill: contentColor,
         height: '1em',
         width: '1em'
       }

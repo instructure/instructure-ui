@@ -53,6 +53,7 @@ class Avatar extends Component<AvatarProps, AvatarState> {
   static defaultProps = {
     size: 'medium',
     color: 'default',
+    hasInverseColor: false,
     shape: 'circle',
     display: 'inline-block',
     onImageLoaded: (_event: SyntheticEvent) => {}

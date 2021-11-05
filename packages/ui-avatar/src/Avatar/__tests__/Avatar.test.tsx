@@ -212,6 +212,91 @@ describe('<Avatar />', async () => {
         'rgb(0, 172, 24)'
       )
     })
+
+    it('should display the icon in green (shamrock)', async () => {
+      await mount(
+        <Avatar
+          name="Jessica Jones"
+          renderIcon={<IconGroupLine />}
+          color="shamrock"
+        >
+          Hello World
+        </Avatar>
+      )
+
+      const avatar = await AvatarLocator.find()
+      const svg = await avatar.find('svg')
+
+      expect(getComputedStyle(svg.getDOMNode()).fill).to.equal(
+        'rgb(0, 172, 24)'
+      )
+    })
+  })
+
+  describe('when "hasInverseColor" is set', async () => {
+    describe('with initials', async () => {
+      it('should display the background in the color', async () => {
+        await mount(
+          <Avatar name="Jessica Jones" color="shamrock" hasInverseColor />
+        )
+
+        const avatar = await AvatarLocator.find()
+
+        expect(getComputedStyle(avatar.getDOMNode()).backgroundColor).to.equal(
+          'rgb(0, 172, 24)'
+        )
+      })
+
+      it('should display the initials in white', async () => {
+        await mount(
+          <Avatar name="Jessica Jones" color="shamrock" hasInverseColor />
+        )
+
+        const avatar = await AvatarLocator.find()
+        const initials = await avatar.findWithText('JJ')
+
+        expect(getComputedStyle(initials.getDOMNode()).color).to.equal(
+          'rgb(255, 255, 255)'
+        )
+      })
+    })
+
+    describe('with icon', async () => {
+      it('should display the background in the color', async () => {
+        await mount(
+          <Avatar
+            name="Jessica Jones"
+            color="shamrock"
+            hasInverseColor
+            renderIcon={<IconGroupLine />}
+          />
+        )
+
+        const avatar = await AvatarLocator.find()
+
+        expect(getComputedStyle(avatar.getDOMNode()).backgroundColor).to.equal(
+          'rgb(0, 172, 24)'
+        )
+      })
+
+      it('should display the icon in white', async () => {
+        await mount(
+          <Avatar
+            name="Jessica Jones"
+            color="shamrock"
+            hasInverseColor
+            renderIcon={<IconGroupLine />}
+          />
+        )
+
+        const avatar = await AvatarLocator.find()
+        const svg = await avatar.find('svg')
+
+        expect(getComputedStyle(svg.getDOMNode()).fill).to.equal(
+          'rgb(255, 255, 255)'
+        )
+      })
+    })
   })
 
   describe('when the user name has no spaces', async () => {
