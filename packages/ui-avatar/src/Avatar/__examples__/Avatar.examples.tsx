@@ -52,6 +52,13 @@ export default {
       return true
     }
 
+    if (
+      props.hasInverseColor &&
+      (props.size !== 'medium' || props.display !== 'block')
+    ) {
+      return true
+    }
+
     return false
   },
   getComponentProps: () => {

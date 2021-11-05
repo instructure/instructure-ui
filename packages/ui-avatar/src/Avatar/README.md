@@ -2,7 +2,11 @@
 describes: Avatar
 ---
 
-The avatar component can be used to display a user's avatar. When an image src is not supplied the user's initials will display. Instead of the initials, and icon can be displayed as well with the `renderIcon` property. The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
+The avatar component can be used to display a user's avatar. When an image src is not supplied the user's initials will display.
+
+Instead of the initials, an SVG icon can be displayed with the `renderIcon` property.
+
+The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
 
 ```js
 ---
@@ -88,6 +92,36 @@ example: true
 </div>
 ```
 
+The `hasInverseColor` prop inverts the background color and the text/icon color.
+
+Inverted Avatars have **no border**.
+
+```js
+---
+example: true
+---
+<div>
+  <View display="block" padding="small medium" background="primary">
+    <Avatar name="Arthur C. Clarke" hasInverseColor margin="0 small 0 0" />
+    <Avatar name="James Arias" color="shamrock" hasInverseColor margin="0 small 0 0" />
+    <Avatar name="Charles Kimball" color="barney" hasInverseColor margin="0 small 0 0" />
+    <Avatar name="Melissa Reed" color="crimson" hasInverseColor margin="0 small 0 0" />
+    <Avatar name="Heather Wheeler" color="fire" hasInverseColor margin="0 small 0 0" />
+    <Avatar name="David Herbert" color="licorice" hasInverseColor margin="0 small 0 0" />
+    <Avatar name="Isaac Asimov" color="ash" hasInverseColor />
+  </View>
+  <View display="block" padding="small medium" background="primary">
+    <Avatar renderIcon={<IconGroupLine />} name="Arthur C. Clarke" hasInverseColor margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="James Arias" color="shamrock" hasInverseColor margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="Charles Kimball" color="barney" hasInverseColor margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="Melissa Reed" color="crimson" hasInverseColor margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="Heather Wheeler" color="fire" hasInverseColor margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="David Herbert" color="licorice" hasInverseColor margin="0 small 0 0" />
+    <Avatar renderIcon={<IconGroupLine />} name="Isaac Asimov" color="ash" hasInverseColor />
+  </View>
+</div>
+```
+
 In case you need more control over the color, feel free to use the `themeOverride` prop, and override the default theme variables.
 
 ```js
@@ -95,8 +129,10 @@ In case you need more control over the color, feel free to use the `themeOverrid
 example: true
 ---
 <div>
-  <Avatar name="Isaac Asimov" themeOverride={{ color: '#efb410' }} margin="0 small 0 0" />
-  <Avatar name="Heather Wheeler" color="fire" themeOverride={{ colorFire: 'magenta' }} />
+  <Avatar name="Isaac Asimov" renderIcon={<IconGroupLine />} themeOverride={{ color: '#efb410' }} margin="0 small 0 0" />
+  <Avatar name="Heather Wheeler" color="fire" themeOverride={{ colorFire: 'magenta' }} margin="0 small 0 0" />
+  <Avatar name="Charles Kimball" renderIcon={<IconGroupLine />} hasInverseColor themeOverride={{ color: 'lightblue', background: 'black' }} margin="0 small 0 0" />
+  <Avatar name="David Herbert" hasInverseColor color="fire" themeOverride={{ colorFire: '#efb410' }} />
 </div>
 ```
 
