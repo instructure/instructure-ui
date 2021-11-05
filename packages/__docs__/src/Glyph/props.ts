@@ -35,12 +35,7 @@ import PropTypes from 'prop-types'
 type VariantOwnProps = {
   name: string
   variant: string
-  glyph: {
-    classes: string[]
-    name: any
-    src: string
-    glyphName: string
-  }
+  glyph: GlyphData
   onClick: (...args: any[]) => any
 }
 
@@ -48,7 +43,7 @@ type VariantProps = VariantOwnProps & WithStyleProps<GlyphTheme, GlyphStyle>
 
 type GlyphOwnProps = {
   name: string
-  variants: Record<string, VariantOwnProps['glyph']>
+  variants: Record<string, GlyphData>
   onClick: (...args: any[]) => any
   rtl: boolean
 }
@@ -83,6 +78,14 @@ const propTypes: PropValidators<PropKeys> = {
   variants: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   rtl: PropTypes.bool
+}
+
+export type GlyphData = {
+  classes?: string[]
+  name: string
+  src?: string
+  glyphName: string
+  codepoint: string
 }
 
 const allowedProps: AllowedPropKeys = ['name', 'onClick', 'rtl', 'variants']

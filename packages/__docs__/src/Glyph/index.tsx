@@ -34,7 +34,7 @@ import * as reactIcons from '@instructure/ui-icons'
 import { Heading } from '../Heading'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { GlyphProps, VariantProps } from './props'
+import type { GlyphProps, VariantProps, GlyphData } from './props'
 import { propTypes } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
@@ -101,7 +101,7 @@ class Glyph extends Component<GlyphProps> {
     rtl: false
   }
 
-  renderGlyphInfo(glyph: any) {
+  renderGlyphInfo(glyph: GlyphData) {
     if (glyph.codepoint) {
       return `\\${glyph.codepoint}`
     }
