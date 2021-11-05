@@ -29,26 +29,51 @@ import type {
   PropValidators,
   BaseThemeVariables
 } from '@instructure/shared-types'
+import React from 'react'
+
+type docType = {
+  id: React.Key
+  title: string
+  description: string
+}
 
 type DocType = {
-  id: string
-  description: string
   srcUrl: string
   srcPath: string
   esPath: string
   displayName: string
   packageName: string
-  children: any[]
-  sections: any[]
-  legacyGitBranch: any
-  params: any
-  returns: any
-  methods: any
-  props: any
-  title: string
+  children: docType[]
+  sections: (docType & { name: string; kind: string })[]
+  legacyGitBranch: string
+  params: {
+    name: string
+    type: {
+      name: string
+    }
+    defaultvalue: string
+    description: string
+  }[]
+  returns: {
+    type: {
+      name: string
+    }
+    description: string
+  }[]
+  methods: {
+    name: string
+    params: { name: string }[]
+    returns: {
+      type: {
+        name: string[]
+      }
+    }[]
+    docblock: string
+  }[]
+  props: Record<string, any>
   extension: string
   componentInstance?: any
-}
+} & docType
 
 type DocumentOwnProps = {
   doc: DocType
@@ -85,4 +110,4 @@ const allowedProps: AllowedPropKeys = [
   'themeVariables'
 ]
 export { propTypes, allowedProps }
-export type { DocumentProps, DocType, DocumentStyle, DocumentTheme }
+export type { DocumentProps, DocType, DocumentStyle, DocumentTheme, docType }

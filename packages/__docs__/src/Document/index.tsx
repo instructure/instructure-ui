@@ -43,9 +43,12 @@ import { Methods } from '../Methods'
 import { ComponentTheme } from '../ComponentTheme'
 import { Heading } from '../Heading'
 import { propTypes } from './props'
-import type { DocumentProps, DocType } from './props'
+import type { DocumentProps, DocType, docType } from './props'
 @withStyle(generateStyle, generateComponentTheme)
-class Document extends Component<DocumentProps> {
+class Document extends Component<
+  DocumentProps,
+  { selectedDetailsTabIndex: number }
+> {
   static propTypes = propTypes
 
   static defaultProps = {
@@ -115,7 +118,7 @@ class Document extends Component<DocumentProps> {
     ) : null
   }
 
-  renderDescription(doc: DocType, description: string) {
+  renderDescription(doc: docType, description: string) {
     const { id, title } = doc
 
     return this.props.description ? (
@@ -228,7 +231,7 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderDetails(doc: DocType) {
+  renderDetails(doc: any) {
     return this.hasDetails(doc) ? (
       <div>
         {this.renderParams(doc)}
