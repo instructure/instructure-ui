@@ -21,44 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-/** @jsx jsx */
-import { Component } from 'react'
-import generateStyle from './styles'
-import PropTypes from 'prop-types'
-import { withStyle, jsx } from '@instructure/emotion'
-
-@withStyle(generateStyle, null)
-class LoadingScreen extends Component {
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
-
-  componentDidMount() {
-    this.props.makeStyles()
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
-  }
-
-  render() {
-    return (
-      <div css={this.props.styles.loadingScreen}>
-        <span
-          css={this.props.styles.loadingScreen__spinner}
-          aria-hidden="true"
-        />
-        <span css={this.props.styles.loadingScreen__text}>
-          Loading application data&hellip;
-        </span>
-      </div>
-    )
-  }
-}
-
-export default LoadingScreen
-export { LoadingScreen }
+import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+type LoadingScreenStyle = ComponentStyle<
+  'loadingScreen' | 'loadingScreen__spinner' | 'loadingScreen__text'
+>
+type LoadingScreenProps = WithStyleProps<null, LoadingScreenStyle>
+export type { LoadingScreenStyle, LoadingScreenProps }
