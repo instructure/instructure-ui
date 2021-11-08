@@ -23,6 +23,7 @@
  */
 
 import { keyframes } from '@instructure/emotion'
+import type { LoadingScreenStyle } from './props'
 
 const docsLoadingAnimation = keyframes`
   to {
@@ -38,7 +39,7 @@ const docsLoadingAnimation = keyframes`
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme, props, state) => {
+const generateStyle = (): LoadingScreenStyle => {
   const spinnerBeforeAfterStyles = {
     content: '""',
     display: 'block',
