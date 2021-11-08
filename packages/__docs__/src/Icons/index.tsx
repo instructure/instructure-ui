@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, SyntheticEvent } from 'react'
 import PropTypes from 'prop-types'
 
 import { Flex } from '@instructure/ui-flex'
@@ -47,20 +47,14 @@ import { Heading } from '../Heading'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
+import type { IconsProps, IconsState } from './props'
+import {propTypes} from './props'
 @withStyle(generateStyle, generateComponentTheme)
-class Icons extends Component {
-  static propTypes = {
-    selectedFormat: PropTypes.string.isRequired,
-    formats: PropTypes.object.isRequired,
-    packageName: PropTypes.string.isRequired,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+class Icons extends Component<IconsProps, IconsState> {
+  static propTypes = propTypes
+  searchTimeout: any
 
-  constructor(props) {
+  constructor(props: any) {
     super(props)
 
     this.state = {
@@ -74,11 +68,11 @@ class Icons extends Component {
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   get selectedFormatKey() {
@@ -100,7 +94,7 @@ class Icons extends Component {
   }
 
   get selectedGlyphs() {
-    const glyphs = {}
+    const glyphs: Record<string, any> = {}
 
     Object.keys(this.selectedFormat.glyphs).forEach((glyphName) => {
       const glyph = this.selectedFormat.glyphs[glyphName]
@@ -112,8 +106,8 @@ class Icons extends Component {
     return glyphs
   }
 
-  handleSearchChange = (e) => {
-    const query = e.target.value
+  handleSearchChange = (e: SyntheticEvent) => {
+    const query = (e.target as HTMLInputElement).value
 
     clearTimeout(this.searchTimeout)
     this.searchTimeout = setTimeout(() => {
@@ -121,15 +115,19 @@ class Icons extends Component {
     }, 500)
   }
 
-  handleFormatChange = (e, o) => {
+  handleFormatChange = (o: Record<string, any>) => {
     window.location.hash = `#${o.value}`
   }
 
-  handleVariantClick = (e, name, variant, glyph) => {
+  handleVariantClick = (
+    name: string,
+    variant: string,
+    glyph: Record<string, any>
+  ) => {
     this.setState({ name, variant, glyph })
   }
 
-  handleModalDismiss = (e) => {
+  handleModalDismiss = () => {
     this.setState({ name: null, variant: null, glyph: null })
   }
 
@@ -142,12 +140,11 @@ class Icons extends Component {
   renderHeader() {
     const { formats, styles } = this.props
     return (
-      <div css={styles.header}>
+      <div css={styles?.header}>
         <FormFieldGroup
           layout="columns"
           colSpacing="small"
           description={<ScreenReaderContent>Filter Icons</ScreenReaderContent>}
-          hAlign="end"
         >
           <TextInput
             placeholder="Filter icons..."
@@ -205,7 +202,7 @@ class Icons extends Component {
     )
   }
 
-  renderUsage(name, variant, glyph) {
+  renderUsage(name: string, variant: string, glyph: Record<string, any>) {
     const { requirePath, packageName } = this.selectedFormat
 
     let example
@@ -261,7 +258,7 @@ class MyIcon extends React.Component {
     )
   }
 
-  renderGlyph(name, variants) {
+  renderGlyph(name: string, variants: any) {
     const firstVariant = variants[Object.keys(variants)[0]]
     return firstVariant.deprecated ? null : (
       <Glyph
@@ -280,7 +277,7 @@ class MyIcon extends React.Component {
     return (
       <div>
         {this.renderHeader()}
-        <div css={this.props.styles.glyphs}>
+        <div css={this.props.styles?.glyphs}>
           {Object.keys(this.selectedGlyphs)
             .filter((name) =>
               new RegExp(
