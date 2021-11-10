@@ -1,8 +1,21 @@
 {
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "outDir": "./types"
+    "outDir": "./types",
+    "composite": true,
+    "rootDir": "./src"
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/**/__tests__/**/*"]
+  "include": ["src"],
+  "exclude": ["src/**/__tests__/**/*"],
+  "references": [
+    { "path": "../console/tsconfig.build.json" },
+    { "path": "../ui-a11y-content/tsconfig.build.json" },
+    { "path": "../ui-dom-utils/tsconfig.build.json" },
+    { "path": "../ui-react-utils/tsconfig.build.json" },
+    { "path": "../ui-testable/tsconfig.build.json" },
+    { "path": "../uid/tsconfig.build.json" },
+    { "path": "../ui-babel-preset/tsconfig.build.json" },
+    { "path": "../ui-color-utils/tsconfig.build.json" },
+    { "path": "../ui-test-utils/tsconfig.build.json" }
+  ]
 }

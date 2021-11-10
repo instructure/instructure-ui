@@ -1,7 +1,29 @@
 {
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "outDir": "./types"
+    "outDir": "./types",
+    "rootDir": "./src",
+    "composite": true
   },
-  "include": ["src/**/*"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    },
+    {
+      "path": "../canvas-high-contrast-theme/tsconfig.build.json"
+    },
+    {
+      "path": "../canvas-theme/tsconfig.build.json"
+    },
+    {
+      "path": "../instructure-theme/tsconfig.build.json"
+    },
+    {
+      "path": "../shared-types/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-theme-tokens/tsconfig.build.json"
+    }
+  ]
 }

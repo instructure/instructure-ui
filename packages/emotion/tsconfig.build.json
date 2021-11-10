@@ -1,7 +1,36 @@
 {
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "outDir": "./types"
+    "outDir": "./types",
+    "rootDir": "./src",
+    "composite": true
   },
-  "include": ["src/**/*"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../console/tsconfig.build.json"
+    },
+    {
+      "path": "../shared-types/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-decorator/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-i18n/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-themes/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    },
+
+    {
+      "path": "../ui-test-utils/tsconfig.build.json"
+    }
+  ]
 }

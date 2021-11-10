@@ -1,7 +1,15 @@
 {
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "module": "CommonJS"
+    "module": "CommonJS",
+    "rootDir": "./lib",
+    "composite": true,
+    "outDir": "./types"
   },
-  "include": ["lib/**/*"]
+  "include": ["lib"],
+  "references": [
+    {
+      "path": "../babel-plugin-transform-imports/tsconfig.build.json"
+    }
+  ]
 }
