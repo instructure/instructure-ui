@@ -1,7 +1,23 @@
 {
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "outDir": "./types"
+    "outDir": "./types",
+    "composite": true,
+    "rootDir": "./src"
   },
-  "include": ["src/**/*"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../debounce/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-axe-check/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-test-sandbox/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-babel-preset/tsconfig.build.json"
+    }
+  ]
 }

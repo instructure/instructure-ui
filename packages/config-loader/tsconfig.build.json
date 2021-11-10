@@ -2,7 +2,9 @@
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
     "outDir": "./types",
-    "module": "CommonJS"
+    "module": "CommonJS",
+    "composite": true,
+    "rootDir": "./lib"
   },
-  "include": ["lib/**/*"]
+  "include": ["lib"]
 }

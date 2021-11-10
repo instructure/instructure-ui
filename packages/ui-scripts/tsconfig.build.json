@@ -4,5 +4,16 @@
     "declarationDir": "./types",
     "outDir": "./lib"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "references": [
+    {
+      "path": "../command-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../pkg-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-template-scripts/tsconfig.build.json"
+    }
+  ]
 }

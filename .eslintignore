@@ -5,3 +5,4 @@ postcss.config.js
 stylelint.config.js
 tests.bundle.js
 babel.config.js
+/types/**

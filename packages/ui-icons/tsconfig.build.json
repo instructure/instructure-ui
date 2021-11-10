@@ -1,8 +1,15 @@
 {
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "outDir": "./types"
+    "outDir": "./types",
+    "composite": true,
+    "rootDir": "./__build__"
   },
-  "include": ["__build__/**/*"],
-  "exclude": ["/font/Line/**/*", "/font/Solid/**/*"]
+  "include": ["__build__"],
+  "exclude": ["/font/Line/**/*", "/font/Solid/**/*"],
+  "references": [
+    { "path": "../ui-babel-preset/tsconfig.build.json" },
+    { "path": "../ui-icons-build/tsconfig.build.json" },
+    { "path": "../ui-svg-images/tsconfig.build.json" }
+  ]
 }

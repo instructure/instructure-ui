@@ -2,7 +2,13 @@
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
     "outDir": "./types",
-    "module": "CommonJS"
+    "module": "CommonJS",
+    "rootDir": "./lib",
+    "composite": true
   },
-  "include": ["lib/**/*"]
+  "include": ["lib"],
+  "references": [
+    { "path": "../config-loader/tsconfig.build.json" },
+    { "path": "../ui-webpack-config/tsconfig.build.json" }
+  ]
 }
