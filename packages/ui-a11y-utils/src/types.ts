@@ -21,49 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import type { StoryConfig } from '@instructure/ui-test-utils'
 
-import { Pagination } from '../index'
-import type { PaginationProps } from '../props'
+type FocusRegionElement = Node | Window
 
-const buildPages = (count = 4, current = 0) => {
-  return Array.from(Array(count)).map((_v, i) => {
-    return (
-      <Pagination.Page key={i} current={i === current}>
-        {i}
-      </Pagination.Page>
-    )
-  })
+type FocusRegionOptions = {
+  shouldContainFocus: boolean
+  liveRegion:
+    | FocusRegionElement
+    | FocusRegionElement[]
+    | (() => FocusRegionElement)
+    | (() => FocusRegionElement[])
 }
 
-export default {
-  sectionProp: 'variant',
-  propValues: {
-    variant: ['full', 'compact'],
-    children: [
-      buildPages(5),
-      buildPages(1),
-      buildPages(10, 1),
-      buildPages(10, 9)
-    ],
-    label: [null, 'Example Pagination']
-  },
-  excludeProps: ['shouldHandleFocus'],
-  filter: (props) => {
-    return (
-      props.label === 'Example Pagination' &&
-      (!props.withFirstAndLastButton ||
-        !props.showDisabledButtons ||
-        props.disabled)
-    )
-  },
-  getComponentProps: () => {
-    return {
-      labelNext: 'Next',
-      labelPrev: 'Previous',
-      labelFirst: 'First',
-      labelLast: 'Last'
-    }
-  }
-} as StoryConfig<PaginationProps>
+export type { FocusRegionElement, FocusRegionOptions }

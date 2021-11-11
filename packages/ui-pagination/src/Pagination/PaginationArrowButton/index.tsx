@@ -29,9 +29,12 @@ import { PresentationContent } from '@instructure/ui-a11y-content'
 import { Tooltip } from '@instructure/ui-tooltip'
 import {
   IconArrowOpenStartSolid,
-  IconArrowOpenEndSolid
+  IconArrowOpenEndSolid,
+  IconArrowDoubleStartSolid,
+  IconArrowDoubleEndSolid
 } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
+
 import type { PaginationNavigationProps } from './props'
 import { allowedProps, propTypes } from './props'
 
@@ -59,10 +62,34 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
     this.ref = el
   }
 
+  get margin() {
+    switch (this.props.direction) {
+      case 'first':
+        return '0 xx-small 0 0'
+      case 'last':
+        return '0 0 0 xx-small'
+      default:
+        return undefined
+    }
+  }
+
+  get Icon() {
+    switch (this.props.direction) {
+      case 'first':
+        return IconArrowDoubleStartSolid
+      case 'prev':
+        return IconArrowOpenStartSolid
+      case 'next':
+        return IconArrowOpenEndSolid
+      case 'last':
+        return IconArrowDoubleEndSolid
+      default:
+        return null
+    }
+  }
+
   render() {
     const { label, direction, buttonRef, ...props } = this.props
-    const Icon =
-      direction === 'prev' ? IconArrowOpenStartSolid : IconArrowOpenEndSolid
     return (
       <Tooltip
         on={['hover', 'focus']}
@@ -82,8 +109,9 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'href' does not exist on type '{ children... Remove this comment to see the full error message
           rel={props.href || props.to ? direction : undefined}
           elementRef={buttonRef}
+          margin={this.margin}
         >
-          {Icon}
+          {this.Icon}
         </IconButton>
       </Tooltip>
     )

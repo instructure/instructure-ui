@@ -40,13 +40,23 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
+import type { PaginationPageProps } from './PaginationButton/props'
 
 type PaginationOwnProps = {
-  children?: React.ReactNode // TODO: oneof([PaginationButton])
+  // this won't filter the children completely well,
+  // it will allow simple elements (e.g. `<div>`) and components with compatible props
+  // TODO: find a better way to type Children.oneOf([PaginationButton])
+  children?:
+    | React.ReactElement<PaginationPageProps>
+    | React.ReactElement<PaginationPageProps>[]
   disabled?: boolean
+  withFirstAndLastButton?: boolean
+  showDisabledButtons?: boolean
   label?: React.ReactNode
   labelNext?: string
   labelPrev?: string
+  labelFirst?: string
+  labelLast?: string
   variant?: 'full' | 'compact'
   margin?: Spacing
   as?: AsElementType
@@ -74,6 +84,14 @@ const propTypes: PropValidators<PropKeys> = {
    */
   disabled: PropTypes.bool,
   /**
+   * Displays "jump to first" and "jump to last" buttons
+   */
+  withFirstAndLastButton: PropTypes.bool,
+  /**
+   * Displays the unavailable navigation buttons as disabled instead of hiding them
+   */
+  showDisabledButtons: PropTypes.bool,
+  /**
    * Visible label for component
    */
   label: PropTypes.node,
@@ -85,6 +103,14 @@ const propTypes: PropValidators<PropKeys> = {
    * Accessible label for previous button
    */
   labelPrev: PropTypes.string,
+  /**
+   * Accessible label for "jump to first" button
+   */
+  labelFirst: PropTypes.string,
+  /**
+   * Accessible label for "jump to last" button
+   */
+  labelLast: PropTypes.string,
   /**
    * The compact variant truncates the page navigation to show only the first,
    * last, and pages immediately surrounding the current page. Fewer than 5 pages,
@@ -116,9 +142,13 @@ const propTypes: PropValidators<PropKeys> = {
 const allowedProps: AllowedPropKeys = [
   'children',
   'disabled',
+  'withFirstAndLastButton',
+  'showDisabledButtons',
   'label',
   'labelNext',
   'labelPrev',
+  'labelFirst',
+  'labelLast',
   'variant',
   'margin',
   'as',
@@ -126,5 +156,9 @@ const allowedProps: AllowedPropKeys = [
   'shouldHandleFocus'
 ]
 
-export type { PaginationProps, PaginationStyle }
+type PaginationSnapshot = {
+  lastFocusedButton?: HTMLButtonElement
+}
+
+export type { PaginationProps, PaginationStyle, PaginationSnapshot }
 export { propTypes, allowedProps }

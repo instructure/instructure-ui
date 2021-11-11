@@ -119,6 +119,78 @@ example: true
   <Pagination.Page href="/pages/3">R-Z</Pagination.Page>
 </Pagination>
 ```
+
+The `withFirstAndLastButton` prop makes the "Jump to first" and "Jump to last" buttons appear. The `labelFirst` and `labelLast` props set the labels for these buttons.
+
+The `showDisabledButtons` prop displays the unavailable navigation buttons as disabled instead of hiding them.
+
+```js
+---
+example: true
+render: false
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      currentPage: 0,
+      withFirstAndLastButton: true,
+      showDisabledButtons: true
+    }
+  }
+
+  setPage (page) {
+    this.setState({ currentPage: page })
+  }
+
+  render () {
+    const pages = Array.from(Array(9)).map((v, i) => <Pagination.Page
+      key={i}
+      onClick={this.setPage.bind(this, i)}
+      current={i === this.state.currentPage}>
+        {i + 1}
+    </Pagination.Page>)
+
+    return (
+      <div>
+        <FormFieldGroup description="Pagination Settings">
+          <Checkbox
+            checked={this.state.withFirstAndLastButton}
+            label="With First and Last buttons"
+            onChange={() => {
+              this.setState({ withFirstAndLastButton: !this.state.withFirstAndLastButton })
+            }}
+          />
+          <Checkbox
+            checked={this.state.showDisabledButtons}
+            label="Show disabled buttons"
+            onChange={() => {
+              this.setState({ showDisabledButtons: !this.state.showDisabledButtons })
+            }}
+          />
+        </FormFieldGroup>
+
+        <Pagination
+          as="nav"
+          margin="large small small"
+          variant="compact"
+          labelNext="Next Page"
+          labelPrev="Previous Page"
+          labelFirst="First Page"
+          labelLast="Last Page"
+          withFirstAndLastButton={ this.state.withFirstAndLastButton }
+          showDisabledButtons={ this.state.showDisabledButtons }
+        >
+          {pages}
+        </Pagination>
+      </div>
+    )
+  }
+}
+
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js
