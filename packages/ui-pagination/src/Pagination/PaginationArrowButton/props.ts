@@ -30,9 +30,11 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 
+type PaginationArrowDirections = 'first' | 'prev' | 'next' | 'last'
+
 type PaginationNavigationOwnProps = {
-  direction?: 'next' | 'prev'
-  label: string | React.ReactNode
+  direction?: PaginationArrowDirections
+  label: string | React.ReactChild | React.ReactFragment
   buttonRef?: (...args: any[]) => any
 }
 
@@ -44,12 +46,12 @@ type PaginationNavigationProps = PaginationNavigationOwnProps &
   OtherHTMLAttributes<PaginationNavigationOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
-  direction: PropTypes.oneOf(['next', 'prev']),
+  direction: PropTypes.oneOf(['first', 'prev', 'next', 'last']),
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   buttonRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = ['direction', 'label', 'buttonRef']
 
-export type { PaginationNavigationProps }
+export type { PaginationNavigationProps, PaginationArrowDirections }
 export { propTypes, allowedProps }

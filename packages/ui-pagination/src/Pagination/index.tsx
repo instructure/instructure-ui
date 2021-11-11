@@ -37,29 +37,41 @@ import { PaginationArrowButton } from './PaginationArrowButton'
 
 import generateStyle from './styles'
 
+import type { PaginationPageProps } from './PaginationButton/props'
+import type {
+  PaginationNavigationProps,
+  PaginationArrowDirections
+} from './PaginationArrowButton/props'
+
 import { propTypes, allowedProps } from './props'
-import type { PaginationProps } from './props'
+import type { PaginationProps, PaginationSnapshot } from './props'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'arr' implicitly has an 'any' type.
 const fastFindIndex = (arr, fn) =>
   Number(Object.keys(arr).find((k) => fn(arr[Number(k)])))
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-function propsHaveCompactView(props) {
-  return props.variant === 'compact' && props?.children?.length > 5
+const childrenArray = (props: PaginationProps) => {
+  const { children } = props
+
+  if (!children) {
+    return []
+  }
+
+  return Array.isArray(children)
+    ? (children as React.ReactElement<PaginationPageProps>[])
+    : ([children] as React.ReactElement<PaginationPageProps>[])
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-function shouldShowPrevButton(props, currentPageIndex) {
-  return propsHaveCompactView(props) && currentPageIndex > 0
+function propsHaveCompactView(props: PaginationProps) {
+  return props.variant === 'compact' && childrenArray(props).length > 5
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-function shouldShowNextButton(props, currentPageIndex) {
-  return (
-    propsHaveCompactView(props) && currentPageIndex < props.children.length - 1
-  )
+type ArrowConfig = {
+  pageIndex: number
+  label: string
+  shouldEnableIcon: boolean
+  handleButtonRef: (el: HTMLButtonElement) => void
 }
 
 /**
@@ -78,6 +90,8 @@ class Pagination extends Component<PaginationProps> {
   static defaultProps = {
     children: null,
     disabled: false,
+    withFirstAndLastButton: false,
+    showDisabledButtons: false,
     variant: 'full',
     as: 'div',
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
@@ -88,21 +102,23 @@ class Pagination extends Component<PaginationProps> {
   static Page = PaginationButton
   static Navigation = PaginationArrowButton
 
+  _labelId: string
+
   ref: Element | null = null
+
+  _firstButton: HTMLButtonElement | null = null
+  _prevButton: HTMLButtonElement | null = null
+  _nextButton: HTMLButtonElement | null = null
+  _lastButton: HTMLButtonElement | null = null
 
   // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   constructor(...args) {
     // @ts-expect-error ts-migrate(2556) FIXME: Expected 1-2 arguments, but got 0 or more.
     super(...args)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'Pagina... Remove this comment to see the full error message
     this._labelId = uid('Pagination')
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_prevButton' does not exist on type 'Pag... Remove this comment to see the full error message
-    this._prevButton = null
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_nextButton' does not exist on type 'Pag... Remove this comment to see the full error message
-    this._nextButton = null
   }
+
   get _root() {
     console.warn(
       '_root property is deprecated and will be removed in v9, please use ref instead'
@@ -111,26 +127,36 @@ class Pagination extends Component<PaginationProps> {
     return this.ref
   }
 
-  getSnapshotBeforeUpdate() {
+  get childPages() {
+    return childrenArray(this.props)
+  }
+
+  getSnapshotBeforeUpdate(): PaginationSnapshot {
     const activeElement = getActiveElement()
 
-    return {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_prevButton' does not exist on type 'Pag... Remove this comment to see the full error message
-      prevButtonFocused: this._prevButton === activeElement,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_nextButton' does not exist on type 'Pag... Remove this comment to see the full error message
-      nextButtonFocused: this._nextButton === activeElement
+    if (
+      activeElement === this._firstButton ||
+      activeElement === this._prevButton ||
+      activeElement === this._nextButton ||
+      activeElement === this._lastButton
+    ) {
+      return { lastFocusedButton: activeElement as HTMLButtonElement }
+    } else {
+      return { lastFocusedButton: undefined }
     }
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate(
+    prevProps: PaginationProps,
+    _prevState: unknown,
+    snapshot: PaginationSnapshot
+  ) {
+    this.props.makeStyles?.()
+
     if (
       !this.props.shouldHandleFocus ||
       (!propsHaveCompactView(prevProps) && !propsHaveCompactView(this.props))
@@ -138,13 +164,31 @@ class Pagination extends Component<PaginationProps> {
       return
     }
 
-    const { prevButtonFocused, nextButtonFocused } = snapshot || {}
+    this.focusElementAfterUpdate(snapshot)
+  }
 
-    if (prevButtonFocused || nextButtonFocused) {
+  focusElementAfterUpdate(snapshot: PaginationSnapshot) {
+    const { lastFocusedButton } = snapshot
+
+    if (lastFocusedButton) {
       const focusable = findTabbable(this.ref)
-      const focusIndex = prevButtonFocused ? 0 : focusable.length - 1
-      // @ts-expect-error ts-migrate(2554) FIXME:
-      focusable[focusIndex].focus()
+      const direction = lastFocusedButton.dataset.direction
+
+      // By default we want to focus the previously focused button
+      let nextFocusElement: Element = lastFocusedButton
+
+      // In case the button is not focusable anymore
+      // (disabled or not in the DOM), we focus to the next available page
+      if (!focusable.includes(nextFocusElement)) {
+        if (direction === 'first' || direction === 'prev') {
+          nextFocusElement = focusable[0]
+        }
+        if (direction === 'next' || direction === 'last') {
+          nextFocusElement = focusable[focusable.length - 1]
+        }
+      }
+
+      ;(nextFocusElement as HTMLElement).focus()
     }
   }
 
@@ -152,17 +196,15 @@ class Pagination extends Component<PaginationProps> {
     return propsHaveCompactView(this.props)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'children' implicitly has an 'any' type.
-  transferDisabledPropToChildren(children) {
-    return this.props.disabled
+  transferDisabledPropToChildren(children: PaginationProps['children']) {
+    return children && this.props.disabled
       ? React.Children.map(children, (page) =>
           React.cloneElement(page, { disabled: this.props.disabled })
         )
       : children
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleElementRef = (el) => {
+  handleElementRef = (el: Element | null) => {
     this.ref = el
     if (el) {
       if (typeof this.props.elementRef === 'function') {
@@ -180,7 +222,6 @@ class Pagination extends Component<PaginationProps> {
         as="span"
         padding={visibleLabel ? 'small' : '0'}
         display={visibleLabel ? display : 'auto'}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'Pagina... Remove this comment to see the full error message
         id={this._labelId}
       >
         {this.props.label}
@@ -188,14 +229,12 @@ class Pagination extends Component<PaginationProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'currentPageIndex' implicitly has an 'an... Remove this comment to see the full error message
-  renderPages(currentPageIndex) {
-    const allPages = this.props.children
+  renderPages(currentPageIndex: number) {
+    const allPages = this.childPages
     let visiblePages = allPages
 
     if (this.compactView) {
       const firstIndex = 0
-      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       const lastIndex = allPages.length - 1
 
       const sliceStart = Math.min(
@@ -204,31 +243,24 @@ class Pagination extends Component<PaginationProps> {
       )
       const sliceEnd = Math.min(currentPageIndex + 4, lastIndex)
 
-      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       visiblePages = allPages.slice(sliceStart, sliceEnd)
 
-      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       const firstPage = allPages[firstIndex]
-      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       const lastPage = allPages[lastIndex]
 
       if (sliceStart - firstIndex > 1)
-        // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
         visiblePages.unshift(
           <span key="first" aria-hidden="true">
             &hellip;
           </span>
         )
-      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       if (sliceStart - firstIndex > 0) visiblePages.unshift(firstPage)
       if (lastIndex - sliceEnd + 1 > 1)
-        // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
         visiblePages.push(
           <span key="last" aria-hidden="true">
             &hellip;
           </span>
         )
-      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       if (lastIndex - sliceEnd + 1 > 0) visiblePages.push(lastPage)
     }
 
@@ -239,33 +271,92 @@ class Pagination extends Component<PaginationProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'label' implicitly has an 'any' type.
-  renderArrowButton(label, direction, currentPageIndex) {
-    // eslint-disable-next-line react/prop-types
-    const { onClick, disabled } =
-      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-      this.props.children[currentPageIndex + direction].props
+  getArrowVariant(
+    direction: PaginationArrowDirections,
+    currentPageIndex: number,
+    pagesCount: number
+  ): ArrowConfig {
+    switch (direction) {
+      case 'first':
+        return {
+          pageIndex: 0,
+          label: this.props.labelFirst || 'First Page',
+          shouldEnableIcon: currentPageIndex > 1,
+          handleButtonRef: (el) => {
+            this._firstButton = el
+          }
+        }
+      case 'prev':
+        return {
+          pageIndex: currentPageIndex - 1,
+          label: this.props.labelPrev || 'Previous Page',
+          shouldEnableIcon: currentPageIndex > 0,
+          handleButtonRef: (el) => {
+            this._prevButton = el
+          }
+        }
+      case 'next':
+        return {
+          pageIndex: currentPageIndex + 1,
+          label: this.props.labelNext || 'Next Page',
+          shouldEnableIcon: currentPageIndex < pagesCount - 1,
+          handleButtonRef: (el) => {
+            this._nextButton = el
+          }
+        }
+      case 'last':
+        return {
+          pageIndex: pagesCount - 1,
+          label: this.props.labelLast || 'Last Page',
+          shouldEnableIcon: currentPageIndex < pagesCount - 2,
+          handleButtonRef: (el) => {
+            this._lastButton = el
+          }
+        }
+    }
+  }
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-    const handleButtonRef = (el) => {
-      if (direction < 0) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_prevButton' does not exist on type 'Pag... Remove this comment to see the full error message
-        this._prevButton = el
-      } else {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_nextButton' does not exist on type 'Pag... Remove this comment to see the full error message
-        this._nextButton = el
-      }
+  renderArrowButton(
+    direction: PaginationArrowDirections,
+    currentPageIndex: number
+  ) {
+    const { childPages } = this
+
+    // We don't display the arrows in "full" variant and under 6 items
+    if (!propsHaveCompactView(this.props)) {
+      return null
     }
 
-    return (
+    if (
+      !this.props.withFirstAndLastButton &&
+      (direction === 'first' || direction === 'last')
+    ) {
+      return null
+    }
+
+    const {
+      pageIndex,
+      label,
+      shouldEnableIcon,
+      handleButtonRef
+    } = this.getArrowVariant(direction, currentPageIndex, childPages.length)
+
+    const page = childPages[pageIndex]
+
+    const disabled = page?.props?.disabled || !shouldEnableIcon
+    const onClick = page?.props
+      ?.onClick as React.MouseEventHandler<PaginationNavigationProps>
+
+    return shouldEnableIcon || this.props.showDisabledButtons ? (
       <PaginationArrowButton
-        direction={direction === -1 ? 'prev' : 'next'}
+        direction={direction}
+        data-direction={direction}
         label={label}
         onClick={onClick}
         disabled={disabled}
         buttonRef={handleButtonRef}
       />
-    )
+    ) : null
   }
 
   render() {
@@ -290,16 +381,17 @@ class Pagination extends Component<PaginationProps> {
         elementRef={this.handleElementRef}
         margin={this.props.margin}
         css={this.props.styles?.pagination}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'Pagina... Remove this comment to see the full error message
-        aria-labelledby={this.props.label && this._labelId}
+        aria-labelledby={this.props.label ? this._labelId : undefined}
       >
         {this.props.label && this.renderLabel()}
         <View display="inline-block" css={this.props.styles?.pages}>
-          {shouldShowPrevButton(this.props, currentPageIndex) &&
-            this.renderArrowButton(this.props.labelPrev, -1, currentPageIndex)}
+          {this.renderArrowButton('first', currentPageIndex)}
+          {this.renderArrowButton('prev', currentPageIndex)}
+
           {this.renderPages(currentPageIndex)}
-          {shouldShowNextButton(this.props, currentPageIndex) &&
-            this.renderArrowButton(this.props.labelNext, 1, currentPageIndex)}
+
+          {this.renderArrowButton('next', currentPageIndex)}
+          {this.renderArrowButton('last', currentPageIndex)}
         </View>
       </View>
     )
