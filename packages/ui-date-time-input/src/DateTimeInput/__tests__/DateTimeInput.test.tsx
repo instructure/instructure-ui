@@ -41,8 +41,8 @@ describe('<DateTimeInput />', async () => {
         description="date time"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        dateLabel="date"
-        timeLabel="time"
+        dateRenderLabel="date"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -74,8 +74,8 @@ describe('<DateTimeInput />', async () => {
         description="date time"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        dateLabel="date"
-        timeLabel="time"
+        dateRenderLabel="date"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -107,8 +107,8 @@ describe('<DateTimeInput />', async () => {
         description="date time"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        dateLabel="date"
-        timeLabel="time"
+        dateRenderLabel="date"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -137,10 +137,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -168,10 +168,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         locale="en-US"
         timezone="US/Eastern"
         {...props}
@@ -199,10 +199,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale="en-US"
         timezone="US/Eastern"
@@ -229,10 +229,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale="en-US"
         timezone="US/Eastern"
@@ -270,10 +270,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -305,10 +305,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale="en-US"
         timezone="US/Eastern"
@@ -336,10 +336,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -360,10 +360,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -382,10 +382,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale="en-US"
         timezone="US/Eastern"
@@ -419,10 +419,10 @@ describe('<DateTimeInput />', async () => {
     const subject = await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -452,10 +452,10 @@ describe('<DateTimeInput />', async () => {
     const subject = await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -485,10 +485,10 @@ describe('<DateTimeInput />', async () => {
     const subject = await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -516,10 +516,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         value="totally not a date"
       />
@@ -532,10 +532,10 @@ describe('<DateTimeInput />', async () => {
     await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         defaultValue="totally not a date"
       />
@@ -552,10 +552,10 @@ describe('<DateTimeInput />', async () => {
     const subject = await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -579,10 +579,10 @@ describe('<DateTimeInput />', async () => {
     const subject = await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         locale={locale}
         timezone={timezone}
@@ -614,10 +614,10 @@ describe('<DateTimeInput />', async () => {
       <ApplyLocale locale="fr" timezone="Africa/Nairobi">
         <DateTimeInput
           description="date time"
-          dateLabel="date"
+          dateRenderLabel="date"
           prevMonthLabel="Previous month"
           nextMonthLabel="Next month"
-          timeLabel="time"
+          timeRenderLabel="time"
           invalidDateTimeMessage="whoops"
           value={dateTime.toISOString()}
           onChange={onChange}
@@ -636,10 +636,10 @@ describe('<DateTimeInput />', async () => {
     const subject = await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         dateFormat="l" // localized numeric date like 9/4/2017
         value={dateTime.toISOString()}
@@ -664,10 +664,10 @@ describe('<DateTimeInput />', async () => {
     const subject = await mount(
       <DateTimeInput
         description="date time"
-        dateLabel="date"
+        dateRenderLabel="date"
         prevMonthLabel="Previous month"
         nextMonthLabel="Next month"
-        timeLabel="time"
+        timeRenderLabel="time"
         invalidDateTimeMessage="whoops"
         value={dateTime.toISOString()}
         onChange={onChange}

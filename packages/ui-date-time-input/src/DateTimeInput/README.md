@@ -5,7 +5,13 @@ describes: DateTimeInput
 A DateTimeInput component is used to enter a date-time value. It is built as a composition
 of the [DateInput](#DateInput) and [TimeSelect](#TimeSelect) components.
 
-A DateTimeInput with `column` layout and a default value:
+#### Localization
+
+The component is localized via its `locale` and `timezone` parameters. Both are read from `props`, `context` and from the browser's locale in this priority order. `locale` determines the language and format dates and time are displayed in (e.g. month names, AM/PM or 24-hour format) and the beginning of the week (e.g. Monday in Germany, Sunday in the U.S.) in the dropdown calendar.
+
+#### Examples
+
+A DateTimeInput with `columns` layout and a default value:
 
 ```js
 ---
@@ -19,13 +25,13 @@ class Example extends React.Component {
         <DateTimeInput
           description="Pick a date and time"
           datePlaceholder="Choose a date"
-          dateLabel="Date"
+          dateRenderLabel="Date"
+          timeRenderLabel="Time"
           invalidDateTimeMessage="Invalid date!"
-          timeLabel="Time"
           prevMonthLabel='Previous month'
           nextMonthLabel='Next month'
-          layout="columns"
           defaultValue="2018-01-18T13:30"
+          layout="columns"
         />
     </div>)
   }
@@ -69,8 +75,8 @@ class Example extends React.Component {
           <DateTimeInput
             description={<ScreenReaderContent>Pick a date and time</ScreenReaderContent>}
             datePlaceholder="Choose"
-            dateLabel="Date"
-            timeLabel="Time"
+            dateRenderLabel="Date"
+            timeRenderLabel="Time"
             prevMonthLabel='Previous month'
             nextMonthLabel='Next month'
             onChange={this.onChange}
@@ -98,8 +104,8 @@ render: true
 <DateTimeInput
   description="Pick a date and time"
   datePlaceholder="Choose a date"
-  dateLabel="Date"
-  timeLabel="Time"
+  dateRenderLabel="Date"
+  timeRenderLabel="Time"
   prevMonthLabel='Previous month'
   nextMonthLabel='Next month'
   invalidDateTimeMessage={(dvalue) => { return `'${dvalue} is not valid.` }}
@@ -109,7 +115,7 @@ render: true
 />
 ```
 
-A DateTimeInput in a different locale:
+A DateTimeInput in a different locale and timezone where these are set from the React `context`:
 
 ```js
 ---
@@ -117,25 +123,25 @@ example: true
 render: false
 ---
 class Example extends React.Component {
-
   render() {
     return (
-      <div style={{ height: 350, width: '40em' }}>
-        <DateTimeInput
-          description="Pick a date and time"
-          datePlaceholder="Choose a date"
-          dateLabel="Date"
-          timeLabel="Time"
-          prevMonthLabel='Previous month'
-          nextMonthLabel='Next month'
-          invalidDateTimeMessage={(dvalue) => {
-            return `'${dvalue} is not valid.`
-          }}
-          layout="columns"
-          defaultValue="2018-01-18T16:00"
-          locale="fr"
-        />
-      </div>)
+      <ApplyLocale locale="fr" timezone="Africa/Nairobi">
+        <div style={{ height: 350, width: '40em' }}>
+          <DateTimeInput
+            description="Pick a date and time"
+            datePlaceholder="Choose a date"
+            dateRenderLabel="Date"
+            timeRenderLabel="Time"
+            prevMonthLabel='Previous month'
+            nextMonthLabel='Next month'
+            invalidDateTimeMessage={(dvalue) => {
+              return `'${dvalue} is not valid.`
+            }}
+            layout="columns"
+            defaultValue="2018-01-18T16:00"
+          />
+        </div>
+      </ApplyLocale>)
   }
 }
 render(<Example />)

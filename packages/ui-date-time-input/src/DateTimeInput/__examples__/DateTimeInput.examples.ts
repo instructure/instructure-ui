@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import { DateTimeInputProps } from '../props'
-
 export default {
   sectionProp: 'layout',
   propValues: {
@@ -39,7 +37,7 @@ export default {
     ],
     interaction: ['enabled', 'disabled']
   },
-  getComponentProps: (_props: DateTimeInputProps) => {
+  getComponentProps: () => {
     return {
       description: 'desc',
       dateLabel: 'date label',
