@@ -340,7 +340,10 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   handleShowOptions = (event: SyntheticEvent) => {
-    this.setState({ isShowingOptions: true })
+    this.setState({
+      isShowingOptions: true,
+      highlightedOptionId: this.state.selectedOptionId
+    })
     this.props.onShowOptions?.(event)
   }
 
@@ -417,11 +420,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   renderOptions() {
-    const {
-      filteredOptions,
-      highlightedOptionId,
-      selectedOptionId
-    } = this.state
+    const { filteredOptions, highlightedOptionId, selectedOptionId } =
+      this.state
 
     if (filteredOptions.length < 1) {
       return this.renderEmptyOption()
