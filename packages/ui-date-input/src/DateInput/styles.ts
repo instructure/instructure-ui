@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { DateInputStyle } from './props'
+import type { DateInputProps, DateInputStyle } from './props'
 
 /**
  * ---
@@ -34,11 +34,14 @@ import type { DateInputStyle } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (): DateInputStyle => {
+const generateStyle = (
+  _componentTheme: null,
+  props: DateInputProps
+): DateInputStyle => {
   return {
     dateInput: {
       label: 'dateInput',
-      display: 'inline-block'
+      display: props.display
     },
     assistiveText: {
       label: 'dateInput__assistiveText',

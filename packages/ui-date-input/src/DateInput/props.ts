@@ -54,6 +54,7 @@ type DateInputOwnProps = {
   assistiveText?: string
   layout?: 'stacked' | 'inline'
   width?: string
+  display?: 'inline-block' | 'block'
   inputRef?: (...args: any[]) => any
   messages?: FormMessage[]
   placement?: PlacementPropValues
@@ -141,6 +142,10 @@ const propTypes: PropValidators<PropKeys> = {
    * Specifies the width of the input.
    */
   width: PropTypes.string,
+  /**
+   * Specifies the display property of the container.
+   */
+  display: PropTypes.oneOf(['inline-block', 'block']),
   /**
    * Provides a ref to the underlying input element.
    */
@@ -245,6 +250,7 @@ const allowedProps: AllowedPropKeys = [
   'assistiveText',
   'layout',
   'width',
+  'display',
   'inputRef',
   'messages',
   'placement',
