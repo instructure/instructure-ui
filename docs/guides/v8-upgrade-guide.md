@@ -94,6 +94,10 @@ We have removed the following packages:
 **Note:** In case you need them, the 7.x versions are still on npm, but they will not receive further feature updates.
 You can still file bugs, and we will likely fix them or submit pull requests if you want to see a new feature in them.
 
+### Added `DateTimeInput` (from v8.12.0)
+
+We have (re)added a [DateTimeInput](https://instructure.design/#DateTimeInput) component. It should be used when one needs to enter a date and a time value, this component existed in V6 but was removed in V7, its API is slightly different from the V6 version, e.g. it has now default values for all non-text properties.
+
 ### TypeScript
 
 InstUI has been converted to TypeScript. This will result in much better autocomplete for most cases, and you might see new errors when you are using something incorrectly (e.g. you set an enum to a non-permitted value). Note that this is a work-in-progress, so you might not get warned if you do something wrong.

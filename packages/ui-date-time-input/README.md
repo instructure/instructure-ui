@@ -22,30 +22,6 @@ The `ui-date-time-input` package contains the following:
 yarn add @instructure/ui-date-time-input
 ```
 
-### Usage
-
-```jsx
----
-example: false
----
-import React from 'react'
-import { DateTimeInput } from '@instructure/ui-date-time-input'
-
-const MyDateTimeInput = () => {
-  return (
-    <DateTimeInput
-      description="Pick a date and time"
-      datePlaceholder="Choose a date"
-      dateLabel="Date"
-      invalidDateTimeMessage="Invalid date!"
-      timeLabel="Time"
-      prevMonthLabel='Previous month'
-      nextMonthLabel='Next month'
-    />
-  )
-}
-```
-
 [npm]: https://img.shields.io/npm/v/@instructure/ui-date-time-input.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-date-time-input
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square

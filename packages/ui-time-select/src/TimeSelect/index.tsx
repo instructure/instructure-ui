@@ -38,12 +38,6 @@ import type { TimeSelectProps } from './props'
 import { allowedProps, propTypes } from './props'
 import { Moment } from 'moment-timezone'
 
-/**
----
-category: components
----
-**/
-
 type TimeSelectOptions = {
   id: string
   value: string
@@ -59,6 +53,11 @@ type TimeSelectState = {
   selectedOptionId?: string
 }
 
+/**
+---
+category: components
+---
+ **/
 @testable()
 class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   static readonly componentId = 'TimeSelect'

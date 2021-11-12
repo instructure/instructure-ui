@@ -29,7 +29,7 @@ import type { InteractionType } from '@instructure/ui-react-utils'
 import { I18nPropTypes } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
 import PropTypes from 'prop-types'
-import { controllable } from '@instructure/ui-prop-types/src/controllable'
+import { controllable } from '@instructure/ui-prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 
 type DateTimeInputProps = {
@@ -40,7 +40,7 @@ type DateTimeInputProps = {
   /**
    * The label over the DateInput
    **/
-  dateLabel: string
+  dateRenderLabel: React.ReactNode | ((...args: any[]) => React.ReactNode)
   /**
    * The screen reader label for the calendar navigation header's prev month
    * button
@@ -62,14 +62,29 @@ type DateTimeInputProps = {
    * [Moment formats](https://momentjs.com/docs/#/displaying/format/),
    * including localized formats.
    *
-   * If omitted, it will use 'DDD' which is a localized date with full month,
+   * If omitted, it will use 'LL' which is a localized date with full month,
    * e.g. "August 6, 2014"
    **/
   dateFormat?: string
   /**
    * The label over the time input
    **/
-  timeLabel: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  timeRenderLabel:
+    | React.ReactNode
+    | (({
+        id,
+        isDisabled,
+        isSelected,
+        isHighlighted,
+        children
+      }: // TODO type this better when Select is typed
+      {
+        id: any
+        isDisabled: any
+        isSelected: any
+        isHighlighted: any
+        children: any
+      }) => React.ReactNode)
   /**
    * The number of minutes to increment by when generating the allowable time options.
    */
@@ -120,7 +135,7 @@ type DateTimeInputProps = {
    * Though `invalidDateTimeMessage()` will be called if the user selects a time without
    * setting the date.
    **/
-  invalidDateTimeMessage: string | ((rawDateValue?: string) => string)
+  invalidDateTimeMessage: string | ((rawDateValue: string) => string)
   /**
    * Messages to be displayed
    */
@@ -132,8 +147,8 @@ type DateTimeInputProps = {
    **/
   messageFormat?: string
   /**
-   * The layout of this component
-   * Vertically stacked, horizontally arranged in 2 columns, or inline.
+   * The layout of this component.
+   * Vertically stacked, horizontally arranged in 2 columns, or inline (default).
    * See [FormFieldGroup](#FormFieldGroup) for details.
    **/
   layout?: 'stacked' | 'columns' | 'inline'
@@ -141,7 +156,7 @@ type DateTimeInputProps = {
    * An ISO 8601 formatted date string representing the current date-time
    * (must be accompanied by an onChange prop).
    **/
-  value?: string
+  value?: string // TODO: controllable(I18nPropTypes.iso8601, 'onChange')
   /**
    * An ISO 8601 formatted date string to use if `value` isn't provided.
    **/
@@ -162,7 +177,10 @@ type DateTimeInputProps = {
    * By default it will render accessible, localized, abbreviated weekdays
    * with week starts according to the current locale.
    */
-  renderWeekdayLabels?: (((...args: any[]) => any) | React.ReactNode)[]
+  renderWeekdayLabels?: (
+    | React.ReactNode
+    | ((...args: any[]) => React.ReactNode)
+  )[]
   /**
    * Specifies if the input is required (its passed down to the native DOM
    * elements).
@@ -186,11 +204,11 @@ type DateTimeInputProps = {
   /**
    * The HTML `input` element where the date is entered.
    **/
-  dateInputRef?: (...args: any[]) => any
+  dateInputRef?: (el: HTMLInputElement | null) => void
   /**
    * The HTML `input` element where the time is entered.
    **/
-  timeInputRef?: (...args: any[]) => any
+  timeInputRef?: (el: HTMLInputElement | null) => void
   /**
    * onBlur event handler for when focus leaves DateTimeInput.
    * Does not fire when focus moves between DateInput and TimeSelect within the
@@ -226,13 +244,15 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 const propTypes: PropValidators<PropKeys> = {
   description: PropTypes.node.isRequired,
-  dateLabel: PropTypes.string.isRequired,
+  dateRenderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node])
+    .isRequired,
   prevMonthLabel: PropTypes.string.isRequired,
   nextMonthLabel: PropTypes.string.isRequired,
   datePlaceholder: PropTypes.string,
   dateFormat: PropTypes.string,
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  timeLabel: PropTypes.string.isRequired,
+  timeRenderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node])
+    .isRequired,
   timeStep: PropTypes.oneOf([5, 10, 15, 20, 30, 60]),
   timeFormat: PropTypes.string,
   locale: PropTypes.string,
@@ -258,13 +278,13 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = [
   'description',
-  'dateLabel',
+  'dateRenderLabel',
   'prevMonthLabel',
   'nextMonthLabel',
   'datePlaceholder',
   'dateFormat',
   'interaction',
-  'timeLabel',
+  'timeRenderLabel',
   'timeStep',
   'timeFormat',
   'locale',

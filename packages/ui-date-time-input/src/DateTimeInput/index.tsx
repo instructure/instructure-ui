@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component, SyntheticEvent } from 'react'
+import React, { Component, SyntheticEvent, MouseEvent } from 'react'
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
 import { FormFieldGroup } from '@instructure/ui-form-field'
@@ -61,6 +61,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     isRequired: false,
     dateFormat: 'LL' // Localized date with full month, e.g. "August 6, 2014"
   } as const
+
+  context!: React.ContextType<typeof ApplyLocaleContext>
 
   static contextType = ApplyLocaleContext
 
@@ -146,9 +148,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           dateInputText: parsed.format(this.dateFormat),
           message: {
             type: 'success',
-            text: this.props.messageFormat
-              ? parsed.format(this.props.messageFormat)
-              : parsed.format(DateTimeInput.DEFAULT_MESSAGE_FORMAT)
+            text: parsed.format(this.props.messageFormat)
           },
           timeSelectValue: newTimeSelectValue,
           renderedDate: parsed.clone()
@@ -181,7 +181,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     return Locale.browserLocale()
   }
 
-  timezone(): string {
+  timezone() {
     if (this.props.timezone) {
       return this.props.timezone
     } else if (this.context && this.context.timezone) {
@@ -191,7 +191,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   }
 
   get dateFormat() {
-    return this.props.dateFormat ? this.props.dateFormat : 'LL'
+    return this.props.dateFormat
   }
 
   // Called when the user enters text into dateInput
@@ -213,7 +213,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   }
 
   // date is returned es a ISO string, like 2021-09-14T22:00:00.000Z
-  handleDayClick = (event: SyntheticEvent, { date }: { date: string }) => {
+  handleDayClick = (event: MouseEvent<any>, { date }: { date: string }) => {
     const dateParsed = DateTime.parse(date, this.locale(), this.timezone())
     this.updateStateBasedOnDateInput(dateParsed, event)
   }
@@ -231,7 +231,10 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       this.setState({
         dateInputText: this.state.iso
           ? this.state.iso.format(this.dateFormat)
-          : ''
+          : '',
+        calendarSelectedDate: this.state.iso
+          ? this.state.iso.clone()
+          : undefined
       })
     }
     this.setState({ isShowingCalendar: false, dateInputTextChanged: false })
@@ -401,7 +404,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
             'day'
           )}
           isOutsideMonth={!date.isSame(renderedDate, 'month')}
-          label={date.format('DD')} // day of the month, padded to 2
+          label={date.format('D MMMM YYYY')} // used by screen readers
           onClick={this.handleDayClick}
         >
           {date.format('DD')}
@@ -478,9 +481,9 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     const {
       description,
       datePlaceholder,
-      dateLabel,
+      dateRenderLabel,
       dateInputRef,
-      timeLabel,
+      timeRenderLabel,
       timeFormat,
       timeStep,
       timeInputRef,
@@ -511,7 +514,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           onBlur={this.handleBlur}
           inputRef={dateInputRef}
           placeholder={datePlaceholder}
-          renderLabel={dateLabel}
+          renderLabel={dateRenderLabel}
           renderWeekdayLabels={
             renderWeekdayLabels ? renderWeekdayLabels : this.defaultWeekdays
           }
@@ -542,7 +545,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           onChange={this.handleTimeChange}
           onBlur={this.handleBlur}
           ref={this.timeInputComponentRef}
-          renderLabel={timeLabel}
+          renderLabel={timeRenderLabel}
           locale={locale}
           format={timeFormat}
           step={timeStep}
