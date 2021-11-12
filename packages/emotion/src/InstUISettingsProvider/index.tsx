@@ -32,20 +32,40 @@ type InstUIProviderProps = {
   theme?: ThemeOrOverride
   dir?: 'ltr' | 'rtl' // TODO allow "auto" too
 }
+
+/**
+ * @typedef InstUISettingsProviderSettings
+ * @type {object}
+ * @property {string} theme - A full theme or an override object
+ * @property {string} dir - The text direction to use in the descendants. If not
+ * given it uses the following in this priority order:
+ *   - The value given in a parent `TextDirectionContext`
+ *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
+ *   - `ltr`
+ */
+
 /**
  * ---
  * category: components/utilities
  * ---
+ *
  * Wrapper for emotion js's [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype).
  *
  * Applies the given theme. It handles either a full theme, or an overrides object.
- * You can also specify the requested text direction for its descendants
+ * You can also specify the requested text direction for its descendants.
+ *
+ * It accepts the following props:
+ * - theme - A full theme or an override object.
+ * - dir - The text direction to use in the descendants. If not
+ * given it uses the following in this priority order:
+ *   - The value given in a parent `TextDirectionContext`
+ *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
+ *   - `ltr`
  *
  * ```js
  * import { canvas, instructure } from '@instructure/ui-themes'
  * import { InstUISettingsProvider } from '@instructure/emotion'
  *
- * @example
  * <InstUISettingsProvider theme={canvas}>
  *   <div>Canvas themed part</div>
  *
@@ -72,14 +92,10 @@ type InstUIProviderProps = {
  * </InstUISettingsProvider>
  * ```
  *
- * @param {object} children
- * @param {object} theme - A full theme or an override object
- * @param {string} dir - The text direction to use in the descendants. If not
- * given it uses the following in this priority order:
- *   - The value given in a parent `TextDirectionContext`
- *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
- *   - `ltr`
  * @module InstUISettingsProvider
+ *
+ * @param {InstUISettingsProviderSettings} settings - A settings object
+ * @returns {ReactElement} The settings provider
  */
 function InstUISettingsProvider({
   children,
