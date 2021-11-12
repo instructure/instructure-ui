@@ -25,6 +25,9 @@
 import React from 'react'
 import { Calendar } from '@instructure/ui-calendar'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { DateInputProps } from '../props'
+
 const generateDays = () => {
   const days = []
   const date = new Date('2019-07-28')
@@ -49,6 +52,7 @@ const generateDays = () => {
 }
 
 export default {
+  sectionProp: 'size',
   propValues: {
     placement: [
       undefined, // eslint-disable-line no-undefined
@@ -58,8 +62,7 @@ export default {
       'top center'
     ]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       children: generateDays(),
       renderLabel: 'Choose a date',
@@ -72,7 +75,6 @@ export default {
       renderWeekdayLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return props.isShowingCalendar
       ? {
@@ -85,15 +87,15 @@ export default {
         }
       : {}
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     if (props.interaction === 'readonly') return true
     if (props.isRequired) return true
     if (props.isInline && props.layout === 'inline') return true
     if (props.isShowingCalendar && props.interaction === 'disabled') return true
     if (props.isShowingCalendar && props.size !== 'medium') return true
+    if (props.isShowingCalendar && props.display !== 'inline-block') return true
     if (!props.isShowingCalendar && props.placement) return true
 
     return false
   }
-}
+} as StoryConfig<DateInputProps>
