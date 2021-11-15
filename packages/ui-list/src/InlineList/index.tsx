@@ -44,8 +44,7 @@ class InlineList extends Component<InlineListProps> {
   static defaultProps = {
     children: null,
     itemSpacing: 'none',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
+    elementRef: () => {},
     as: 'ul',
     margin: 'none',
     delimiter: 'none',

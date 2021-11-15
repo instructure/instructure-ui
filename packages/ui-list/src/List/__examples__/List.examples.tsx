@@ -23,11 +23,11 @@
  */
 import React from 'react'
 import { List } from '../index'
+import { ListProps } from '../props'
 
 export default {
   sectionProp: 'size',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       children: [
         <List.Item key="1">Oranges</List.Item>,
@@ -36,10 +36,9 @@ export default {
       ]
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: ListProps) => {
     return (
-      (['dashed', 'solid'].includes(props.delimiter) && props.as === 'ol') ||
+      (['dashed', 'solid'].includes(props.delimiter!) && props.as === 'ol') ||
       (props.delimiter !== 'none' && props.itemSpacing !== 'none')
     )
   }
