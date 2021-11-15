@@ -600,6 +600,8 @@ const generateStyle = (
       ...(shouldUseFocusStyles ? focusStyles : {})
     },
     inlineStyles: {
+      //every '&' symbol will add another class to the rule, so it will be stronger
+      //making an accidental override less likely
       '&&&&&&&&&&': {
         ...spacingStyle,
         ...borderStyle,
