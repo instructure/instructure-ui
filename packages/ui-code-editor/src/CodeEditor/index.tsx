@@ -45,6 +45,7 @@ import type { EditorConfiguration } from 'codemirror'
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

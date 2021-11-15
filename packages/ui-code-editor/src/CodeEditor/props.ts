@@ -60,7 +60,7 @@ type CodeEditorOwnProps = {
    * If the special option "nocursor" is given (instead of simply true),
    * focusing of the editor is also disallowed.
    */
-  readOnly?: boolean
+  readOnly?: boolean | 'nocursor'
   /**
    * Called when the value of the component changes.
    */
