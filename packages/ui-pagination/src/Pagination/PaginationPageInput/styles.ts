@@ -21,49 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import type { StoryConfig } from '@instructure/ui-test-utils'
 
-import { Pagination } from '../index'
-import type { PaginationProps } from '../props'
+import type { PaginationPageInputTheme } from '@instructure/shared-types'
+import type { PaginationPageInputStyle } from './props'
 
-const buildPages = (count = 4, current = 0) => {
-  return Array.from(Array(count)).map((_v, i) => {
-    return (
-      <Pagination.Page key={i} current={i === current}>
-        {i}
-      </Pagination.Page>
-    )
-  })
-}
-
-export default {
-  sectionProp: 'variant',
-  propValues: {
-    variant: ['full', 'compact', 'input'],
-    children: [
-      buildPages(5),
-      buildPages(1),
-      buildPages(10, 1),
-      buildPages(10, 9)
-    ],
-    label: [null, 'Example Pagination']
-  },
-  excludeProps: ['shouldHandleFocus'],
-  filter: (props) => {
-    return (
-      props.label === 'Example Pagination' &&
-      (!props.withFirstAndLastButton ||
-        !props.showDisabledButtons ||
-        props.disabled)
-    )
-  },
-  getComponentProps: () => {
-    return {
-      labelNext: 'Next',
-      labelPrev: 'Previous',
-      labelFirst: 'First',
-      labelLast: 'Last'
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (
+  componentTheme: PaginationPageInputTheme
+): PaginationPageInputStyle => {
+  return {
+    paginationPageInput: {
+      label: 'paginationPageInput',
+      display: 'inline-flex',
+      alignItems: 'center',
+      margin: `0 ${componentTheme.inputSpacing}`
+    },
+    numberInput: {
+      label: 'paginationPageInput__input',
+      width: componentTheme.inputWidth
+    },
+    inputLabel: {
+      label: 'paginationPageInput__inputLabel',
+      marginInlineStart: componentTheme.inputSpacing,
+      whiteSpace: 'nowrap'
     }
   }
-} as StoryConfig<PaginationProps>
+}
+
+export default generateStyle

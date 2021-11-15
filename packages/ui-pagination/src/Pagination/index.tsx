@@ -34,6 +34,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
+import { PaginationPageInput } from './PaginationPageInput'
 
 import generateStyle from './styles'
 
@@ -96,6 +97,11 @@ class Pagination extends Component<PaginationProps> {
     as: 'div',
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
+    labelNumberInput: (numberOfPages: number) => `of ${numberOfPages}`,
+    screenReaderLabelNumberInput: (
+      currentPage: number,
+      numberOfPages: number
+    ) => `Select page (${currentPage} of ${numberOfPages})`,
     shouldHandleFocus: true
   }
 
@@ -105,6 +111,7 @@ class Pagination extends Component<PaginationProps> {
   _labelId: string
 
   ref: Element | null = null
+  _inputRef: Element | null = null
 
   _firstButton: HTMLButtonElement | null = null
   _prevButton: HTMLButtonElement | null = null
@@ -127,8 +134,20 @@ class Pagination extends Component<PaginationProps> {
     return this.ref
   }
 
+  get inputMode() {
+    return this.props.variant === 'input'
+  }
+
   get childPages() {
     return childrenArray(this.props)
+  }
+
+  get withFirstAndLastButton() {
+    return this.inputMode || this.props.withFirstAndLastButton
+  }
+
+  get showDisabledButtons() {
+    return this.inputMode || this.props.showDisabledButtons
   }
 
   getSnapshotBeforeUpdate(): PaginationSnapshot {
@@ -162,9 +181,9 @@ class Pagination extends Component<PaginationProps> {
       (!propsHaveCompactView(prevProps) && !propsHaveCompactView(this.props))
     ) {
       return
+    } else {
+      this.focusElementAfterUpdate(snapshot)
     }
-
-    this.focusElementAfterUpdate(snapshot)
   }
 
   focusElementAfterUpdate(snapshot: PaginationSnapshot) {
@@ -213,8 +232,12 @@ class Pagination extends Component<PaginationProps> {
     }
   }
 
+  handleInputRef = (el: Element | null) => {
+    this._inputRef = el
+  }
+
   renderLabel() {
-    const display = this.props.variant === 'compact' ? 'block' : 'inline-block'
+    const display = this.props.variant === 'full' ? 'inline-block' : 'block'
     const visibleLabel = hasVisibleChildren(this.props.label)
 
     return (
@@ -227,6 +250,24 @@ class Pagination extends Component<PaginationProps> {
         {this.props.label}
       </View>
     )
+  }
+
+  renderPageInput(currentPageIndex: number) {
+    return (
+      <PaginationPageInput
+        numberOfPages={this.childPages.length}
+        currentPageIndex={currentPageIndex}
+        onChange={this.handleInputChange.bind(this)}
+        screenReaderLabel={this.props.screenReaderLabelNumberInput!}
+        label={this.props.labelNumberInput}
+        disabled={this.props.disabled}
+        inputRef={this.handleInputRef}
+      />
+    )
+  }
+
+  handleInputChange(event: Event, pageIndex: number) {
+    this.childPages[pageIndex].props.onClick?.(event as any)
   }
 
   renderPages(currentPageIndex: number) {
@@ -322,13 +363,13 @@ class Pagination extends Component<PaginationProps> {
   ) {
     const { childPages } = this
 
-    // We don't display the arrows in "full" variant and under 6 items
-    if (!propsHaveCompactView(this.props)) {
+    // We don't display the arrows in "compact" variant under 6 items
+    if (!(propsHaveCompactView(this.props) || this.inputMode)) {
       return null
     }
 
     if (
-      !this.props.withFirstAndLastButton &&
+      !this.withFirstAndLastButton &&
       (direction === 'first' || direction === 'last')
     ) {
       return null
@@ -343,11 +384,12 @@ class Pagination extends Component<PaginationProps> {
 
     const page = childPages[pageIndex]
 
-    const disabled = page?.props?.disabled || !shouldEnableIcon
+    const disabled =
+      page?.props?.disabled || this.props.disabled || !shouldEnableIcon
     const onClick = page?.props
       ?.onClick as React.MouseEventHandler<PaginationNavigationProps>
 
-    return shouldEnableIcon || this.props.showDisabledButtons ? (
+    return shouldEnableIcon || this.showDisabledButtons ? (
       <PaginationArrowButton
         direction={direction}
         data-direction={direction}
@@ -388,7 +430,9 @@ class Pagination extends Component<PaginationProps> {
           {this.renderArrowButton('first', currentPageIndex)}
           {this.renderArrowButton('prev', currentPageIndex)}
 
-          {this.renderPages(currentPageIndex)}
+          {this.inputMode
+            ? this.renderPageInput(currentPageIndex)
+            : this.renderPages(currentPageIndex)}
 
           {this.renderArrowButton('next', currentPageIndex)}
           {this.renderArrowButton('last', currentPageIndex)}

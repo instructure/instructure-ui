@@ -21,49 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import type { StoryConfig } from '@instructure/ui-test-utils'
 
-import { Pagination } from '../index'
-import type { PaginationProps } from '../props'
+import { locator } from '@instructure/ui-test-locator'
 
-const buildPages = (count = 4, current = 0) => {
-  return Array.from(Array(count)).map((_v, i) => {
-    return (
-      <Pagination.Page key={i} current={i === current}>
-        {i}
-      </Pagination.Page>
-    )
-  })
-}
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
+import { NumberInputLocator } from '@instructure/ui-number-input/es/NumberInput/NumberInputLocator' // eslint-disable-line no-restricted-imports
 
-export default {
-  sectionProp: 'variant',
-  propValues: {
-    variant: ['full', 'compact', 'input'],
-    children: [
-      buildPages(5),
-      buildPages(1),
-      buildPages(10, 1),
-      buildPages(10, 9)
-    ],
-    label: [null, 'Example Pagination']
-  },
-  excludeProps: ['shouldHandleFocus'],
-  filter: (props) => {
-    return (
-      props.label === 'Example Pagination' &&
-      (!props.withFirstAndLastButton ||
-        !props.showDisabledButtons ||
-        props.disabled)
-    )
-  },
-  getComponentProps: () => {
-    return {
-      labelNext: 'Next',
-      labelPrev: 'Previous',
-      labelFirst: 'First',
-      labelLast: 'Last'
-    }
+import { PaginationPageInput } from './index'
+
+export const PaginationPageInputLocator = locator(
+  // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+  PaginationPageInput.selector,
+
+  {
+    findInput: (...args: any[]) => NumberInputLocator.findInput(...args),
+
+    findNumberInputArrows: (...args: any[]) =>
+      NumberInputLocator.findArrowButtons(...args)
   }
-} as StoryConfig<PaginationProps>
+)

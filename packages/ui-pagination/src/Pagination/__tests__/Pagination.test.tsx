@@ -809,4 +809,128 @@ describe('<Pagination />', async () => {
       })
     })
   })
+
+  describe('input variant', async () => {
+    it('should display number input', async () => {
+      await mount(
+        <Pagination
+          variant="input"
+          labelNext="Next"
+          labelPrev="Previous"
+          labelFirst="First"
+          labelLast="Last"
+        >
+          {[...buildPages(6, 2)]}
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const numberInput = await pagination.find('input')
+
+      expect(numberInput).to.exist()
+      expect((numberInput.getDOMNode() as HTMLInputElement).value).to.equal('3')
+    })
+
+    it('should display all arrow buttons', async () => {
+      await mount(
+        <Pagination
+          variant="input"
+          labelNext="Next"
+          labelPrev="Prev"
+          labelFirst="First"
+          labelLast="Last"
+        >
+          {[...buildPages(6, 2)]}
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+
+      const nextButton = await pagination.findArrowButton(':label(Next)')
+      const prevButton = await pagination.findArrowButton(':label(Prev)')
+      const firstButton = await pagination.findArrowButton(':label(First)')
+      const lastButton = await pagination.findArrowButton(':label(Last)')
+
+      expect(nextButton).to.be.visible()
+      expect(prevButton).to.be.visible()
+      expect(firstButton).to.be.visible()
+      expect(lastButton).to.be.visible()
+    })
+
+    it('should pass label', async () => {
+      await mount(
+        <Pagination
+          variant="input"
+          labelNext="Next"
+          labelPrev="Previous"
+          labelFirst="First"
+          labelLast="Last"
+          labelNumberInput={(numberOfPages) => `pages: ${numberOfPages}`}
+        >
+          {[...buildPages(6, 2)]}
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const numberInput = await pagination.find('input')
+
+      expect(numberInput.find(':contains(pages: 6)')).to.exist()
+    })
+
+    it('should pass ScreenReaderLabel', async () => {
+      await mount(
+        <Pagination
+          variant="input"
+          labelNext="Next"
+          labelPrev="Previous"
+          labelFirst="First"
+          labelLast="Last"
+          screenReaderLabelNumberInput={(currentPage, numberOfPages) =>
+            `number: ${numberOfPages}, current: ${currentPage}`
+          }
+        >
+          {[...buildPages(6, 2)]}
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const numberInput = await pagination.find('input')
+
+      expect(numberInput.find(':contains(number: 6, current: 3)')).to.exist()
+    })
+
+    it('should change pages on input change', async () => {
+      const onClick1 = stub()
+      const onClick2 = stub()
+
+      await mount(
+        <Pagination
+          variant="input"
+          labelNext="Next"
+          labelPrev="Previous"
+          labelFirst="First"
+          labelLast="Last"
+          screenReaderLabelNumberInput={(currentPage, numberOfPages) =>
+            `number: ${numberOfPages}, current: ${currentPage}`
+          }
+        >
+          <PaginationButton key={1} onClick={onClick1} current>
+            1
+          </PaginationButton>
+          <PaginationButton key={2} onClick={onClick2}>
+            2
+          </PaginationButton>
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const pageInput = await pagination.findPageInput()
+      const numberInput = await pageInput.find('input')
+
+      await numberInput.change({ target: { value: '2' } })
+      await numberInput.keyDown('enter')
+
+      expect(onClick2).to.have.been.called()
+    })
+  })
 })

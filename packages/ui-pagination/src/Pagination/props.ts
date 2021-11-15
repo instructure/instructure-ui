@@ -57,7 +57,12 @@ type PaginationOwnProps = {
   labelPrev?: string
   labelFirst?: string
   labelLast?: string
-  variant?: 'full' | 'compact'
+  labelNumberInput?: (numberOfPages: number) => React.ReactNode
+  screenReaderLabelNumberInput?: (
+    currentPage: number,
+    numberOfPages: number
+  ) => string
+  variant?: 'full' | 'compact' | 'input'
   margin?: Spacing
   as?: AsElementType
   elementRef?: (element: Element | null) => void
@@ -84,11 +89,11 @@ const propTypes: PropValidators<PropKeys> = {
    */
   disabled: PropTypes.bool,
   /**
-   * Displays "jump to first" and "jump to last" buttons
+   * Displays "jump to first" and "jump to last" buttons. Always turned on with `input` variant.
    */
   withFirstAndLastButton: PropTypes.bool,
   /**
-   * Displays the unavailable navigation buttons as disabled instead of hiding them
+   * Displays the unavailable navigation buttons as disabled instead of hiding them.  Always turned on with `input` variant.
    */
   showDisabledButtons: PropTypes.bool,
   /**
@@ -112,11 +117,19 @@ const propTypes: PropValidators<PropKeys> = {
    */
   labelLast: PropTypes.string,
   /**
+   * Label for number input (for `input` variant)
+   */
+  labelNumberInput: PropTypes.func,
+  /**
+   * ScreenReaderLabel for number input (for `input` variant)
+   */
+  screenReaderLabelNumberInput: PropTypes.func,
+  /**
    * The compact variant truncates the page navigation to show only the first,
    * last, and pages immediately surrounding the current page. Fewer than 5 pages,
    * no next/previous arrow buttons will be shown, and all pages will be listed
    */
-  variant: PropTypes.oneOf(['full', 'compact']),
+  variant: PropTypes.oneOf(['full', 'compact', 'input']),
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -149,6 +162,8 @@ const allowedProps: AllowedPropKeys = [
   'labelPrev',
   'labelFirst',
   'labelLast',
+  'labelNumberInput',
+  'screenReaderLabelNumberInput',
   'variant',
   'margin',
   'as',

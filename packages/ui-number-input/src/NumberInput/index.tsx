@@ -72,6 +72,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     showArrows: true,
     size: 'medium',
     display: 'block',
+    textAlign: 'start',
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     inputRef: (event) => {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.

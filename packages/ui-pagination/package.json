@@ -38,6 +38,7 @@
     "@instructure/ui-buttons": "8.13.0",
     "@instructure/ui-dom-utils": "8.13.0",
     "@instructure/ui-icons": "8.13.0",
+    "@instructure/ui-number-input": "8.13.0",
     "@instructure/ui-portal": "8.13.0",
     "@instructure/ui-prop-types": "8.13.0",
     "@instructure/ui-react-utils": "8.13.0",
@@ -46,6 +47,7 @@
     "@instructure/ui-utils": "8.13.0",
     "@instructure/ui-view": "8.13.0",
     "@instructure/uid": "8.13.0",
+    "keycode": "^2",
     "prop-types": "^15"
   },
   "peerDependencies": {

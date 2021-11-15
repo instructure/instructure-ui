@@ -23,6 +23,7 @@
  */
 import { locator } from '@instructure/ui-test-locator'
 
+import { PaginationPageInputLocator } from './PaginationPageInput/PaginationPageInputLocator'
 import { PaginationArrowButtonLocator } from './PaginationArrowButton/PaginationArrowButtonLocator'
 import { Pagination } from './index'
 
@@ -38,5 +39,8 @@ export const PaginationLocator = locator(Pagination.selector, {
     PaginationButtonLocator.find(...args),
 
   findArrowButton: async (...args: any[]) =>
-    PaginationArrowButtonLocator.find(...args)
+    PaginationArrowButtonLocator.find(...args),
+
+  findPageInput: async (...args: any[]) =>
+    PaginationPageInputLocator.find(...args)
 })

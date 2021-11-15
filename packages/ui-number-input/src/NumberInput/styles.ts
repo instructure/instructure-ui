@@ -44,7 +44,7 @@ const generateStyle = (
   props: NumberInputProps,
   state: NumberInputStyleProps
 ): NumberInputStyle => {
-  const { size } = props
+  const { size, textAlign } = props
   const { interaction, hasFocus, invalid } = state
 
   const disabledStyles =
@@ -153,7 +153,7 @@ const generateStyle = (
     input: {
       label: 'numberInput_input',
       all: 'initial',
-      textAlign: 'start',
+      textAlign: textAlign,
       direction: 'inherit',
       WebkitFontSmoothing: 'antialiased',
       MozOsxFontSmoothing: 'grayscale',
@@ -169,6 +169,7 @@ const generateStyle = (
       color: componentTheme.color,
       background: componentTheme.background,
       padding: componentTheme.padding,
+      textyAlign: textAlign,
       '&::placeholder': { color: componentTheme.placeholderColor }
     }
   }

@@ -120,6 +120,50 @@ example: true
 </Pagination>
 ```
 
+The `variant="input"` prop will render Pagination with a NumberInput and all the arrow buttons.
+
+```js
+---
+example: true
+render: false
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { currentPage: 0 }
+  }
+
+  setPage (page) {
+    this.setState({ currentPage: page })
+  }
+
+  render () {
+    const pages = Array.from(Array(9)).map((v, i) => <Pagination.Page
+      key={i}
+      onClick={this.setPage.bind(this, i)}
+      current={i === this.state.currentPage}>
+        {i + 1}
+    </Pagination.Page>)
+
+    return (
+      <Pagination
+        as="nav"
+        margin="small"
+        variant="input"
+        labelFirst="First Page"
+        labelPrev="Previous Page"
+        labelNext="Next Page"
+        labelLast="Last Page"
+      >
+        {pages}
+      </Pagination>
+    )
+  }
+}
+
+render(<Example />)
+```
+
 The `withFirstAndLastButton` prop makes the "Jump to first" and "Jump to last" buttons appear. The `labelFirst` and `labelLast` props set the labels for these buttons.
 
 The `showDisabledButtons` prop displays the unavailable navigation buttons as disabled instead of hiding them.
