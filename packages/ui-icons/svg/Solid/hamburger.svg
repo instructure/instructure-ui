@@ -1,3 +1,3 @@
-<svg viewBox="0 0 1920 1920" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1920,1411.41176 L1920,1637.29412 L0,1637.29412 L0,1411.41176 L1920,1411.41176 Z M1920,846.705882 L1920,1072.58824 L0,1072.58824 L0,846.705882 L1920,846.705882 Z M1920,282 L1920,507.882353 L0,507.882353 L0,282 L1920,282 Z" stroke="none" stroke-width="1" fill-rule="evenodd"/>
+<svg viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1920 1411.412v225.882H0v-225.882h1920Zm0-564.706v225.882H0V846.706h1920ZM1920 282v225.882H0V282h1920Z" fill-rule="evenodd"/>
 </svg>
