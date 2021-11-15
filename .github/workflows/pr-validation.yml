@@ -32,7 +32,7 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         # set <preview_url> variable to be available for the following steps
-        run: echo "::set-output name=preview_url::$(npx netlify deploy --dir ./packages/__docs__/__build__ | grep "Website Draft URL" | awk '{print $4}')"
+        run: echo "::set-output name=preview_url::$(npx netlify deploy --dir ./packages/__docs__/__build__ --alias ${{ github.event.pull_request.number }} | grep "Website Draft URL" | awk '{print $4}')"
       - name: Add Comment to PR with the preview URL
         # only run this step if the previous step has not failed
         # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#steps-context
