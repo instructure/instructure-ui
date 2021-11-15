@@ -30,9 +30,18 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { EditorConfiguration } from 'codemirror'
 
 type CodeEditorOwnProps = {
+  /**
+   * The label text that screen readers will read when this component gets
+   * focus.
+   */
   label: string
+  /**
+   * The language to use. When not given, this will default to the first
+   * language that was loaded.
+   */
   language?:
     | 'sh'
     | 'js'
@@ -46,10 +55,28 @@ type CodeEditorOwnProps = {
     | 'yaml'
     | 'yml'
     | 'bash'
+  /**
+   * This disables editing of the editor content by the user.
+   * If the special option "nocursor" is given (instead of simply true),
+   * focusing of the editor is also disallowed.
+   */
   readOnly?: boolean
-  onChange?: (...args: any[]) => any
-  options?: any
+  /**
+   * Called when the value of the component changes.
+   */
+  onChange?: (value: string) => void
+  /**
+   * Options that are passed to the underlying Codemirror instance. See
+   * https://codemirror.net/doc/manual.html#config
+   */
+  options?: EditorConfiguration
+  /**
+   * Sets minor visual styles  (border radius & top/bottom margin)
+   */
   attachment?: 'bottom' | 'top'
+  /**
+   * The selected value (when controlled via the `onChange` prop)
+   */
   value?: string
 }
 
@@ -83,9 +110,6 @@ const propTypes: PropValidators<PropKeys> = {
   onChange: PropTypes.func,
   options: PropTypes.object,
   attachment: PropTypes.oneOf(['bottom', 'top']),
-  /**
-   * the selected value (when controlled via the `onChange` prop)
-   */
   value: PropTypes.string
 }
 

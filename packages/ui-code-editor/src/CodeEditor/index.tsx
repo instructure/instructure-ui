@@ -39,18 +39,17 @@ import CodeMirror from './codemirror'
 
 import { propTypes, allowedProps } from './props'
 import type { CodeEditorProps } from './props'
+import type { EditorConfiguration } from 'codemirror'
 
 /**
 ---
 category: components
 ---
 **/
-
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class CodeEditor extends Component<CodeEditorProps> {
   static readonly componentId = 'CodeEditor'
-
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
@@ -58,15 +57,13 @@ class CodeEditor extends Component<CodeEditorProps> {
     readOnly: false,
     options: {
       styleActiveLine: true
-    },
-    onChange: () => {}
+    }
   }
+  private readonly _id: string
+  private codeMirror?: CodeMirror
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  constructor(props) {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
-    super()
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'CodeEditor'... Remove this comment to see the full error message
+  constructor(props: CodeEditorProps) {
+    super(props)
     this._id = uid('CodeEditor')
   }
 
@@ -77,27 +74,21 @@ class CodeEditor extends Component<CodeEditorProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'codeMirror' does not exist on type 'Code... Remove this comment to see the full error message
     if (this.codeMirror) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'codeMirror' does not exist on type 'Code... Remove this comment to see the full error message
-      this.codeMirror.focus()
+      ;((this.codeMirror as unknown) as HTMLElement).focus()
     }
   }
 
   get mode() {
     const { language } = this.props
-
     if (language === 'json' || language === 'js') {
       return 'jsx'
     } else if (language === 'sh') {
@@ -111,7 +102,7 @@ class CodeEditor extends Component<CodeEditorProps> {
     }
   }
 
-  get options() {
+  get options(): EditorConfiguration {
     return {
       ...this.props.options,
       readOnly: this.props.readOnly,
@@ -129,28 +120,22 @@ class CodeEditor extends Component<CodeEditorProps> {
       styles,
       ...rest
     } = this.props
-
     return (
       <div css={styles?.codeEditor} ref={this.handleRef}>
         <Global styles={styles?.globalStyles} />
-        {/* @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'CodeEditor'... Remove this comment to see the full error message */}
         <label htmlFor={this._id}>
           <ScreenReaderContent>{label}</ScreenReaderContent>
           <CodeMirror
             {...passthroughProps(rest)}
-            // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'CodeEditor'... Remove this comment to see the full error message
+            // @ts-expect-error we should delete this..
             id={this._id}
             options={this.options}
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-            value={value}
-            // @ts-expect-error ts-migrate(6133) FIXME: 'editor' is declared but its value is never read.
-            onBeforeChange={(editor, data, value) => {
-              // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-              onChange(value)
+            value={value!}
+            onBeforeChange={(_editor, _data, value) => {
+              onChange?.(value)
             }}
             ref={(el) => {
-              // @ts-expect-error ts-migrate(2339) FIXME: Property 'codeMirror' does not exist on type 'Code... Remove this comment to see the full error message
-              this.codeMirror = el
+              this.codeMirror = el ? el : undefined
             }}
           />
         </label>
