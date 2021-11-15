@@ -26,7 +26,8 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.12.0",
     "@instructure/ui-test-utils": "8.12.0",
-    "@instructure/ui-themes": "8.12.0"
+    "@instructure/ui-themes": "8.12.0",
+    "@types/codemirror": "5.x"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
