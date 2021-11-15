@@ -62,8 +62,7 @@ class Options extends Component<OptionsProps> {
   static defaultProps = {
     as: 'span',
     role: 'list',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    elementRef: (node) => {},
+    elementRef: () => {},
     renderLabel: null,
     children: null
   }
@@ -109,8 +108,7 @@ class Options extends Component<OptionsProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'children' implicitly has an 'any' type.
-  renderSubList(children) {
+  renderSubList(children: React.ReactNode) {
     const { styles } = this.props
     return (
       <Item as={this.childAs} role="presentation" css={styles?.label}>

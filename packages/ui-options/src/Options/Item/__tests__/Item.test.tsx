@@ -79,8 +79,7 @@ describe('<Item />', async () => {
 
   it('should pass props through to label', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-      <Item role="option" tabIndex="-1" data-custom-attr="true">
+      <Item role="option" tabIndex={-1} data-custom-attr="true">
         Hello World
       </Item>
     )
@@ -109,8 +108,7 @@ describe('<Item />', async () => {
   it('should allow label to recieve focus', async () => {
     const onFocus = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-      <Item tabIndex="-1" onFocus={onFocus}>
+      <Item tabIndex={-1} onFocus={onFocus}>
         Hello World
       </Item>
     )
