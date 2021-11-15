@@ -21,49 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import type { StoryConfig } from '@instructure/ui-test-utils'
 
-import { Pagination } from '../index'
-import type { PaginationProps } from '../props'
+import type { Theme } from '@instructure/ui-themes'
+import type { PaginationPageInputTheme } from '@instructure/shared-types'
 
-const buildPages = (count = 4, current = 0) => {
-  return Array.from(Array(count)).map((_v, i) => {
-    return (
-      <Pagination.Page key={i} current={i === current}>
-        {i}
-      </Pagination.Page>
-    )
-  })
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: Theme): PaginationPageInputTheme => {
+  const { spacing } = theme
+
+  const componentVariables: PaginationPageInputTheme = {
+    inputSpacing: spacing.xSmall,
+    inputWidth: '4.5rem'
+  }
+
+  return {
+    ...componentVariables
+  }
 }
 
-export default {
-  sectionProp: 'variant',
-  propValues: {
-    variant: ['full', 'compact', 'input'],
-    children: [
-      buildPages(5),
-      buildPages(1),
-      buildPages(10, 1),
-      buildPages(10, 9)
-    ],
-    label: [null, 'Example Pagination']
-  },
-  excludeProps: ['shouldHandleFocus'],
-  filter: (props) => {
-    return (
-      props.label === 'Example Pagination' &&
-      (!props.withFirstAndLastButton ||
-        !props.showDisabledButtons ||
-        props.disabled)
-    )
-  },
-  getComponentProps: () => {
-    return {
-      labelNext: 'Next',
-      labelPrev: 'Previous',
-      labelFirst: 'First',
-      labelLast: 'Last'
-    }
-  }
-} as StoryConfig<PaginationProps>
+export default generateComponentTheme

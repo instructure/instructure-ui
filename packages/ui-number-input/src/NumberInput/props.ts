@@ -55,6 +55,7 @@ type NumberInputOwnProps = {
   onIncrement?: (...args: any[]) => any
   onKeyDown?: (...args: any[]) => any
   inputMode?: 'numeric' | 'decimal' | 'tel'
+  textAlign?: 'start' | 'center'
 }
 
 type NumberInputState = {
@@ -173,7 +174,11 @@ const propTypes: PropValidators<PropKeys> = {
   /**
    * The inputMode attribute of the underlying `input` element can be one of ['numeric', 'decimal', 'tel']
    */
-  inputMode: PropTypes.oneOf(['numeric', 'decimal', 'tel'])
+  inputMode: PropTypes.oneOf(['numeric', 'decimal', 'tel']),
+  /**
+   * The text alignment of the input.
+   */
+  textAlign: PropTypes.oneOf(['start', 'center'])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -195,7 +200,8 @@ const allowedProps: AllowedPropKeys = [
   'onDecrement',
   'onIncrement',
   'onKeyDown',
-  'inputMode'
+  'inputMode',
+  'textAlign'
 ]
 
 export type {

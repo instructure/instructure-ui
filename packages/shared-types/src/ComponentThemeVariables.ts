@@ -794,6 +794,11 @@ export type PagesTheme = {
   background: Colors['backgroundLightest']
 }
 
+export type PaginationPageInputTheme = {
+  inputSpacing: Spacing['xSmall']
+  inputWidth: string
+}
+
 export type PillTheme = {
   fontFamily: Typography['fontFamily']
   padding: string | 0
@@ -1470,6 +1475,8 @@ export interface ThemeVariables {
   Options: OptionsTheme
   Mask: MaskTheme
   Pages: PagesTheme
+  PaginationPageInput: PaginationPageInputTheme
+  'Pagination.PageInput': PaginationPageInputTheme
   Position: PositionTheme
   Pill: PillTheme
   ProgressBar: ProgressBarTheme
