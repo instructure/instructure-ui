@@ -34,22 +34,20 @@ import {
 } from '@instructure/ui-test-utils'
 
 import { Focusable } from '../index'
+import type { FocusableRenderOptions } from '../props'
 
 describe('<Focusable />', async () => {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'spy' implicitly has an 'any' type.
-  const lastCall = (spy) => spy.lastCall.args[0]
+  const lastCall = (spy: any) => spy.lastCall.args[0]
 
   it('should render', async () => {
     const subject = await mount(
       <Focusable>{() => <button>hello world</button>}</Focusable>
     )
-
     expect(subject.getDOMNode()).to.exist()
   })
 
   it('should call children function with focused when element receives focus', async () => {
     const renderSpy = spy()
-
     await mount(
       <Focusable>
         {(args) => {
@@ -115,8 +113,7 @@ describe('<Focusable />', async () => {
     const props = {
       /* eslint-disable react/display-name */
       /* eslint-disable react/prop-types */
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'focused' implicitly has an 'any' ... Remove this comment to see the full error message
-      render: ({ focused }) => {
+      render: ({ focused }: { focused: boolean }) => {
         return (
           <div>
             {focused ? (
@@ -244,9 +241,8 @@ describe('<Focusable />', async () => {
     })
 
     await subject.setProps({
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
       // eslint-disable-next-line react/display-name
-      children: (args) => {
+      children: (args: FocusableRenderOptions) => {
         renderSpy(args)
         return (
           <span>
@@ -331,11 +327,11 @@ describe('<Focusable />', async () => {
   })
 
   it('should provide a focus method', async () => {
-    let focusable
+    let focusable: Focusable
     await mount(
       <Focusable
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        componentRef={(el) => {
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
+        componentRef={(el: Focusable) => {
           focusable = el
         }}
       >
@@ -343,8 +339,7 @@ describe('<Focusable />', async () => {
       </Focusable>
     )
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    await focusable.focus()
+    await focusable!.focus()
 
     const button = await find('button:label(hello world)')
 
@@ -352,11 +347,11 @@ describe('<Focusable />', async () => {
   })
 
   it('should provide a focused getter', async () => {
-    let focusable
+    let focusable: Focusable
 
     await mount(
       <Focusable
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
         componentRef={(el) => {
           focusable = el
         }}
@@ -365,20 +360,16 @@ describe('<Focusable />', async () => {
       </Focusable>
     )
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    await focusable.focus()
+    await focusable!.focus()
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(focusable.focused).to.equal(true)
+    expect(focusable!.focused).to.equal(true)
   })
 
   it('should properly restore the event handlers', async () => {
-    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'inputRef' implicitly has type 'any' in s... Remove this comment to see the full error message
-    let inputRef
+    let inputRef: HTMLInputElement | null
 
-    class TestComponent extends Component {
+    class TestComponent extends Component<{ changeValue: string }> {
       render() {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'changeValue' does not exist on type 'Rea... Remove this comment to see the full error message
         const { changeValue } = this.props
 
         return (
@@ -399,29 +390,26 @@ describe('<Focusable />', async () => {
       }
     }
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<TestComponent changeValue="A" />)
     await wait(() => {
-      // @ts-expect-error ts-migrate(7005) FIXME: Variable 'inputRef' implicitly has an 'any' type.
-      expect(inputRef.value).to.equal('false_A')
+      expect(inputRef!.value).to.equal('false_A')
     })
 
     await subject.setProps({
       changeValue: 'B'
     })
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    await inputRef.focus()
+    await inputRef!.focus()
 
     await wait(() => {
-      // @ts-expect-error ts-migrate(7005) FIXME: Variable 'inputRef' implicitly has an 'any' type.
-      expect(inputRef.value).to.equal('true_B')
+      expect(inputRef!.value).to.equal('true_B')
     })
   })
 
   it('should properly clear the focusable / focused state when focus is unexpectedly lost', async () => {
-    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'focusableRef' implicitly has type 'any' ... Remove this comment to see the full error message
-    let buttonRef, focusableRef, labelRef
+    let buttonRef: HTMLButtonElement | null
+    let focusableRef: Focusable | null
+    let labelRef: HTMLLabelElement | null
 
     class TestComponent extends Component {
       state = {
@@ -475,20 +463,17 @@ describe('<Focusable />', async () => {
 
     await mount(<TestComponent />)
     await wait(() => {
-      // @ts-expect-error ts-migrate(7005) FIXME: Variable 'focusableRef' implicitly has an 'any' ty... Remove this comment to see the full error message
-      expect(focusableRef.focused).to.equal(false)
+      expect(focusableRef!.focused).to.equal(false)
     })
 
     const input = await find('input[type="checkbox"]')
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    await labelRef.click()
+    await labelRef!.click()
     await wait(() => {
       expect(input.focused()).to.equal(true)
     })
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    await buttonRef.click()
+    await buttonRef!.click()
     await wait(() => {
       expect(input.focused()).to.equal(false)
     })
