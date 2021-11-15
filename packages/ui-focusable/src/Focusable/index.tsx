@@ -36,12 +36,22 @@ import { propTypes, allowedProps } from './props'
 import type { FocusableProps } from './props'
 import { createChainedFunction } from '@instructure/ui-utils'
 
+type FocusableState = {
+  focused: boolean
+  focusable?: HTMLElement
+}
+
+type HTMLElementWithType = HTMLElement & {
+  type?: keyof typeof Focusable.inputTypes
+}
+
 /**
 ---
 category: components/utilities
 ---
+@tsProps
 **/
-class Focusable extends Component<FocusableProps> {
+class Focusable extends Component<FocusableProps, FocusableState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
@@ -73,12 +83,12 @@ class Focusable extends Component<FocusableProps> {
 
   state = {
     focused: false,
-    focusable: false
-  }
+    focusable: undefined
+  } as FocusableState
 
   componentDidMount() {
     const { focusable, focused } = this
-    this.addFocusableListeners(focusable, focused)
+    this.addFocusableListeners(focused, focusable)
     this._inputModeListener = addInputModeListener({
       onInputModeChange: this.handleInputModeChange
     })
@@ -88,8 +98,7 @@ class Focusable extends Component<FocusableProps> {
     })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  getSnapshotBeforeUpdate(prevProps, prevState) {
+  getSnapshotBeforeUpdate(prevProps: FocusableProps) {
     const { render, children } = this.props
     // prevent blur from firing when focusable element is replaced
     if (prevProps.children !== children || prevProps.render !== render) {
@@ -98,30 +107,24 @@ class Focusable extends Component<FocusableProps> {
     return null
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState) {
-    const { focusable } = this
-
+  componentDidUpdate() {
+    const focusable = this.focusable
     if (!focusable && this.state.focusable) {
       this.removeFocusableListeners()
 
       this.setState({
-        focusable: false,
+        focusable: undefined,
         focused: false
       })
     } else if (focusable !== this.state.focusable) {
       this.removeFocusableListeners()
-
       if (this.state.focused) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'false | u... Remove this comment to see the full error message
-        focusable.focus()
+        ;(focusable as HTMLElement).focus()
       }
-
-      this.addFocusableListeners(focusable, this.state.focused)
-
+      this.addFocusableListeners(this.state.focused, focusable)
       this.setState({ focusable })
     } else {
-      this.addFocusableListeners(focusable, this.state.focused)
+      this.addFocusableListeners(this.state.focused, focusable)
     }
   }
 
@@ -133,8 +136,7 @@ class Focusable extends Component<FocusableProps> {
     this.removeFocusableListeners()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'focusable' implicitly has an 'any' type... Remove this comment to see the full error message
-  addFocusableListeners(focusable, focused) {
+  addFocusableListeners(focused: boolean, focusable?: HTMLElement) {
     if (!focusable) return
 
     if (focused && !this._blurListener) {
@@ -177,14 +179,12 @@ class Focusable extends Component<FocusableProps> {
     this.forceUpdate()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleFocus = (event) => {
+  handleFocus = () => {
     this.removeFocusListener()
     this.setState({ focused: true })
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleBlur = (event) => {
+  handleBlur = () => {
     this.removeBlurListener()
     this.setState({ focused: false })
   }
@@ -194,34 +194,31 @@ class Focusable extends Component<FocusableProps> {
   }
 
   get focusable() {
-    let focusable = findFocusable(this, () => true, true) || []
-    const focusableCount = (focusable && focusable.length) || 0
+    const focusableArr = findFocusable(this, () => true, true) || []
+    const focusableCount = (focusableArr && focusableArr.length) || 0
 
     warn(
       focusableCount === 1,
       `[Focusable] Exactly one focusable child is required (${focusableCount} found).`
     )
 
-    // @ts-expect-error ts-migrate(2322) FIXME: Type 'unknown' is not assignable to type 'unknown[... Remove this comment to see the full error message
-    focusable = focusable ? focusable[0] : false
+    const focusable = focusableArr ? focusableArr[0] : false
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'unknown[]... Remove this comment to see the full error message
-    if (focusable && typeof focusable.focus === 'function') {
-      return focusable
+    if (focusable && typeof (focusable as HTMLElement).focus === 'function') {
+      return focusable as HTMLElement
     } else {
-      return false
+      return undefined
     }
   }
 
   get focusVisible() {
     const { focusable, focused } = this.state
-    return this.isFocusVisible(focusable, focused)
+    return this.isFocusVisible(focused, focusable)
   }
 
   focus() {
     const { focusable } = this
     if (focusable) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'unknown[]... Remove this comment to see the full error message
       focusable.focus()
     }
   }
@@ -232,29 +229,24 @@ class Focusable extends Component<FocusableProps> {
     this.ref = el
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'focusable' implicitly has an 'any' type... Remove this comment to see the full error message
-  isFocusVisible(focusable, focused) {
+  isFocusVisible(focused: boolean, focusable?: HTMLElementWithType) {
     if (!focusable || !focused) return false
 
     // always show focus for keyboard input mode
     if (this._inputModeListener && this._inputModeListener.isKeyboardMode())
       return true
-
+    // note: the type property exist on input fields like HtmlInputElement
     const { tagName, type, isContentEditable } = focusable
 
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    if (tagName == 'INPUT' && Focusable.inputTypes[type]) {
+    if (tagName == 'INPUT' && Focusable.inputTypes[type!]) {
       return true
     }
-
     if (tagName == 'TEXTAREA') {
       return true
     }
-
     if (isContentEditable) {
       return true
     }
-
     return false
   }
 
@@ -266,13 +258,16 @@ class Focusable extends Component<FocusableProps> {
       const rendered = render({
         focused,
         focusable,
-        focusVisible: this.isFocusVisible(focusable, focused),
+        focusVisible: this.isFocusVisible(focused, focusable),
         attachRef: this.attachRef
       })
 
       return cloneElement(rendered, {
-        ref: rendered.ref
-          ? createChainedFunction(rendered.ref, this.attachRef)
+        ref: (rendered as { ref: any }).ref
+          ? createChainedFunction(
+              (rendered as { ref: any }).ref,
+              this.attachRef
+            )
           : this.attachRef
       })
     } else {
