@@ -79,6 +79,11 @@ class Avatar extends Component<AvatarProps, AvatarState> {
 
   componentDidUpdate() {
     this.props.makeStyles?.(this.state)
+
+    // in case the image is unset in an update, show icons/initials again
+    if (this.state.loaded && !this.props.src) {
+      this.setState({ loaded: false })
+    }
   }
 
   makeInitialsFromName() {
