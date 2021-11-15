@@ -36,7 +36,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import type { OptionsItemProps } from './props'
+import type { OptionsItemProps, OptionsItemStyle } from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -72,8 +72,12 @@ class Item extends Component<OptionsItemProps> {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'renderLabel' implicitly has an 'any' ty... Remove this comment to see the full error message
-  renderContent(renderLabel, contentVariant) {
+  renderContent(
+    renderLabel: OptionsItemProps['renderBeforeLabel'],
+    contentVariant:
+      | OptionsItemStyle['contentBefore']
+      | OptionsItemStyle['contentAfter']
+  ) {
     const { styles, variant, as, role, children } = this.props
 
     return (
@@ -93,14 +97,8 @@ class Item extends Component<OptionsItemProps> {
   }
 
   render() {
-    const {
-      as,
-      role,
-      styles,
-      renderBeforeLabel,
-      renderAfterLabel,
-      children
-    } = this.props
+    const { as, role, styles, renderBeforeLabel, renderAfterLabel, children } =
+      this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
     const passthroughProps = omitProps(this.props, Item.allowedProps)
