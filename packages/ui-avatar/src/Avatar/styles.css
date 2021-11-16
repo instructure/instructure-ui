@@ -79,44 +79,118 @@
     box-shadow: inset 0 0 var(--boxShadowBlur) 0 var(--boxShadowColor);
   }
 
+  /* stylelint-disable max-nesting-depth, selector-max-class */
+
   &:not(.loaded) {
     border-style: solid;
     border-color: var(--borderColor);
+
+    &.hasInverseColor {
+      border: 0;
+      padding: 0;
+      background-clip: border-box;
+
+      &.auto {
+        padding: var(--borderWidthSmall);
+      }
+
+      &.xx-small {
+        padding: var(--borderWidthSmall);
+      }
+
+      &.x-small {
+        padding: var(--borderWidthSmall);
+      }
+
+      &.small {
+        padding: var(--borderWidthSmall);
+      }
+
+      &.medium {
+        padding: var(--borderWidthMedium);
+      }
+
+      &.large {
+        padding: var(--borderWidthMedium);
+      }
+
+      &.x-large {
+        padding: var(--borderWidthMedium);
+      }
+
+      &.xx-large {
+        padding: var(--borderWidthMedium);
+      }
+    }
   }
 }
+
+/* stylelint-enable max-nesting-depth, selector-max-class */
 
 .initials {
   line-height: 2.375em;
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   letter-spacing: 0.0313em;
+}
 
-  .default & {
-    color: var(--color);
+.default {
+  color: var(--color);
+}
+
+.shamrock {
+  color: var(--colorShamrock);
+}
+
+.barney {
+  color: var(--colorBarney);
+}
+
+.crimson {
+  color: var(--colorCrimson);
+}
+
+.fire {
+  color: var(--colorFire);
+}
+
+.licorice {
+  color: var(--colorLicorice);
+}
+
+.ash {
+  color: var(--colorAsh);
+}
+
+.hasInverseColor {
+  color: var(--background);
+
+  &.default {
+    background-color: var(--color);
   }
 
-  .shamrock & {
-    color: var(--colorShamrock);
+  &.shamrock {
+    background-color: var(--colorShamrock);
   }
 
-  .barney & {
-    color: var(--colorBarney);
+  &.barney {
+    background-color: var(--colorBarney);
   }
 
-  .crimson & {
-    color: var(--colorCrimson);
+  &.crimson {
+    background-color: var(--colorCrimson);
   }
 
-  .fire & {
-    color: var(--colorFire);
+  &.fire {
+    background-color: var(--colorFire);
   }
 
-  .licorice & {
-    color: var(--colorLicorice);
+  &.licorice {
+    background-color: var(--colorLicorice);
   }
 
-  .ash & {
-    color: var(--colorAsh);
+  &.ash {
+    background-color: var(--colorAsh);
   }
 }
 
@@ -133,4 +207,19 @@
 
 .rectangle {
   width: 3em;
+}
+
+.iconSVG {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  /* stylelint-disable-next-line selector-max-type */
+  svg {
+    fill: currentColor;
+    height: 1em;
+    width: 1em;
+  }
 }

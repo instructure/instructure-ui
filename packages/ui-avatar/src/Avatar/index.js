@@ -27,7 +27,11 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import {
+  passthroughProps,
+  deprecated,
+  callRenderProp
+} from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -75,6 +79,10 @@ class Avatar extends Component {
       'licorice',
       'ash'
     ]),
+    /**
+     * In inverse color mode the background and text/icon colors are inverted
+     */
+    hasInverseColor: PropTypes.bool,
     shape: PropTypes.oneOf(['circle', 'rectangle']),
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -95,6 +103,11 @@ class Avatar extends Component {
      * provides a reference to the underlying html element
      */
     elementRef: PropTypes.func,
+    /**
+     * An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority.
+     */
+    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+
     /* eslint-disable react/require-default-props */
     /**
      * __Deprecated - use `display`__
@@ -114,12 +127,21 @@ class Avatar extends Component {
     elementRef: undefined,
     size: 'medium',
     color: 'default',
+    hasInverseColor: false,
     shape: 'circle',
     display: 'inline-block',
-    onImageLoaded: (event) => {}
+    onImageLoaded: (event) => {},
+    renderIcon: null
   }
 
   state = { loaded: false }
+
+  componentDidUpdate() {
+    // in case the image is unset in an update, show icons/initials again
+    if (this.state.loaded && !this.props.src) {
+      this.setState({ loaded: false })
+    }
+  }
 
   makeInitialsFromName() {
     let name = this.props.name
@@ -166,6 +188,16 @@ class Avatar extends Component {
     )
   }
 
+  renderContent() {
+    const { renderIcon } = this.props
+
+    if (!renderIcon) {
+      return this.renderInitials()
+    }
+
+    return <span className={styles.iconSVG}>{callRenderProp(renderIcon)}</span>
+  }
+
   render() {
     const { onImageLoaded, ...props } = this.props
     const { loaded } = this.state
@@ -181,7 +213,8 @@ class Avatar extends Component {
           [styles[this.props.size]]: true,
           [styles[this.props.variant || this.props.shape]]: true,
           [styles[this.props.color]]: true,
-          [styles.loaded]: loaded
+          [styles.loaded]: loaded,
+          [styles.hasInverseColor]: this.props.hasInverseColor
         })}
         aria-label={this.props.alt ? this.props.alt : null}
         role={this.props.alt ? 'img' : null}
@@ -195,7 +228,7 @@ class Avatar extends Component {
         }
       >
         {this.renderLoadImage()}
-        {!loaded && this.renderInitials()}
+        {!loaded && this.renderContent()}
       </View>
     )
   }
