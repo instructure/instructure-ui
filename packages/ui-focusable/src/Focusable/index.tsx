@@ -261,11 +261,11 @@ class Focusable extends Component<FocusableProps, FocusableState> {
         focusVisible: this.isFocusVisible(focused, focusable),
         attachRef: this.attachRef
       })
-
+      type ElementWithRef = { ref?: () => unknown }
       return cloneElement(rendered, {
-        ref: (rendered as { ref: any }).ref
+        ref: (rendered as ElementWithRef).ref
           ? createChainedFunction(
-              (rendered as { ref: any }).ref,
+              (rendered as ElementWithRef).ref,
               this.attachRef
             )
           : this.attachRef

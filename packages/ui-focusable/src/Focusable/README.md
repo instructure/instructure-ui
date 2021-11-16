@@ -11,26 +11,27 @@ a `render` or `children` method that returns content which must have exactly one
 example: true
 ---
 <Focusable>
-{({ focused }) => (
-  <span>
-    <div>
-      <Button>Focus me!</Button>
-    </div>
-    {focused && (
-      <ContextView
-        margin="small 0"
-        placement="bottom"
-        as="div"
-        background="primary"
-        padding="small"
-        borderWidth="small"
-        display="block"
-      >
-        I&#39;m focused!
-      </ContextView>
-    )}
-  </span>
-)}
+  {(options) => {
+    console.log(options)
+    return <span>
+      <div>
+        <Button>Focus me!</Button>
+      </div>
+      {options.focused && (
+        <ContextView
+          margin="small 0"
+          placement="bottom"
+          as="div"
+          background="inverse"
+          padding="small"
+          borderWidth="small"
+          display="block"
+        >
+          I&#39;m focused!
+        </ContextView>
+      )}
+    </span>
+  }}
 </Focusable>
 ```
 
