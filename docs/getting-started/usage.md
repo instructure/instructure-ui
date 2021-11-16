@@ -48,7 +48,7 @@ export default App
 
 What does this code do?
 
-- [InstUISettingsProvider](#InstUISettingsProvider) adds a theme to your application. InstUI components require a theme to work, all components are themeable, and themes control their look and feel. There are 3 built-in themes: [`canvas`](#canvas), [`canvasHighContrast`](#canvas-high-contrast), [`instructure`](#instructure). The component examples seen throughout the documentation use the [canvas theme](#canvas) by default.
+- [InstUISettingsProvider](#InstUISettingsProvider) allows to specify the text direction (default is the direction that the user's browser supplies) and the theme to your application. InstUI components require a theme to work, all components are themeable, and themes control their look and feel. There are 3 built-in themes: [`canvas`](#canvas), [`canvasHighContrast`](#canvas-high-contrast), [`instructure`](#instructure). The component examples seen throughout the documentation use the [canvas theme](#canvas) by default.
 - [Button](#Button) is an Instructure UI button component
 
 Finally, run `yarn start` to start up a basic development server.
