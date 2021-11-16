@@ -34,7 +34,7 @@ export default function generator({
     color: colors.textLightest,
     background: colors.backgroundLight,
     borderColor: colors.borderMedium,
-    borderWidth: borders.widthMedium,
+    borderWidth: borders.widthSmall,
     borderRadius: '4rem',
     marginEnd: spacing.small,
     marginStart: spacing.small,

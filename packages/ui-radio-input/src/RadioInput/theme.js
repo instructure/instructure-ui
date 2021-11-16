@@ -37,7 +37,8 @@ export default function generator({
     labelLineHeight: typography.lineHeightCondensed,
 
     background: colors.backgroundLightest,
-    borderColor: colors.borderDarkest,
+    borderWidth: borders.widthSmall,
+    borderColor: colors.borderMedium,
     hoverBorderColor: colors.borderDarkest,
     controlSize: '0.1875rem',
 
@@ -86,7 +87,6 @@ generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
 generator.canvas = function (variables) {
   return {
     focusBorderColor: variables['ic-brand-primary'],
-    borderColor: variables['ic-brand-font-color-dark'],
     hoverBorderColor: variables['ic-brand-font-color-dark'],
     labelColor: variables['ic-brand-font-color-dark']
   }
