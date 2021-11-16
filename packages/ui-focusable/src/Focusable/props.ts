@@ -57,11 +57,11 @@ type FocusableRenderFunction = (
 
 type FocusableOwnProps = {
   /**
-   * The function called on each render(). Identical to render()
+   * The function called on each render. Identical to `render()`
    */
   children?: FocusableRenderFunction
   /**
-   * The function called on each render(). identical to children()
+   * The function called on each render. Identical to `children()`
    */
   render?: FocusableRenderFunction
 }
