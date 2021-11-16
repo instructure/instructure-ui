@@ -1,4 +1,4 @@
-/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-descending-specificity, declaration-no-important, comment-empty-line-before */
 
 .root {
   font-family: var(--fontFamily);
@@ -17,9 +17,20 @@
     opacity: 0.5;
   }
 
-  &:focus {
-    outline: none;
+  /* START hacky override for focus state
+   * backporting INSTUI-3317, it is done correctly in V8
+   */
+  &::before {
+    inset: 0.5rem !important;
+    border-radius: 0.25rem !important;
   }
+
+  &:focus {
+    &::before {
+      inset: 0.375rem !important;
+    }
+  }
+  /* END hacky override for focus state */
 }
 
 .default,
@@ -113,4 +124,4 @@
   }
 }
 
-/* stylelint-enable no-descending-specificity */
+/* stylelint-enable no-descending-specificity, declaration-no-important, comment-empty-line-before */
