@@ -21,13 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import React from 'react'
+
+import { IconGroupLine } from '@instructure/ui-icons'
+
 export default {
   excludeProps: ['inline', 'variant'],
   sectionProp: 'shape',
   propValues: {
-    src: [null, require('./testImage.jpg')]
+    src: [null, require('./testImage.jpg')],
+    renderIcon: [undefined, <IconGroupLine key="icon" />]
   },
-  getComponentProps: (props) => {
+  filter: (props) => {
+    if (props.color !== 'default' && props.size !== 'medium') {
+      return true
+    }
+
+    if (props.renderIcon && props.src) {
+      return true
+    }
+
+    if (props.src && props.color !== 'default') {
+      return true
+    }
+
+    if (
+      props.hasInverseColor &&
+      (props.size !== 'medium' || props.display !== 'block')
+    ) {
+      return true
+    }
+
+    return false
+  },
+  getComponentProps: () => {
     return {
       name: 'Kyle Montgomery'
     }
