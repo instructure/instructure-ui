@@ -71,7 +71,7 @@ input.input[type="radio"] {
     min-width: 1rem;
     transition: all 0.2s ease-out;
     border-radius: 100%;
-    border: 0.125rem solid var(--borderColor);
+    border: var(--borderWidth) solid var(--borderColor);
     background: var(--background);
 
     &::before {
