@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
+import { OptionsItemProps } from '../props'
 
 export default {
   maxExamplesPerPage: 50,
@@ -29,8 +30,10 @@ export default {
     renderAfterLabel: [null, IconArrowOpenEndSolid],
     renderBeforeLabel: [null, IconCheckSolid]
   },
-  getComponentProps: () => {
+  getComponentProps: (props: OptionsItemProps) => {
     return {
+      renderAfterLabel: props.renderAfterLabel,
+      renderBeforeLabel: props.renderBeforeLabel,
       children: 'Lorem ipsum dolor sit amet',
       role: 'none'
     }
