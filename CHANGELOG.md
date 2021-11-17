@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
+
+### Bug Fixes
+
+- **emotion:** fix EmotionThemeProvider falling back to using Canvas theme ([cc5ce19](https://github.com/instructure/instructure-ui/commit/cc5ce19b934d6d6f54117e75432a6fb7e65c80ea))
+- **ui-avatar:** add unset logic for image loaded state ([e6665c1](https://github.com/instructure/instructure-ui/commit/e6665c159832d0020d7da263be0e959c41589135))
+- **ui-dialog,ui-drawer-layout:** fix Dialog role attribute ([2681e14](https://github.com/instructure/instructure-ui/commit/2681e145ad469e1396536d3e9eed75a19995eb8a))
+- **ui-modal:** fix Modal.Header padding when it has CloseButton ([82b8314](https://github.com/instructure/instructure-ui/commit/82b8314a5ce13ef30c3f03125b1e2104ba81c889))
+- **ui-motion:** fix interrupted transition not removing transition classes ([db3fd4f](https://github.com/instructure/instructure-ui/commit/db3fd4f6ad76471dce61cc91f8267c1eb3094020))
+- **ui-scripts:** resolve webpack 5 commonjs build issue ([d51a85e](https://github.com/instructure/instructure-ui/commit/d51a85e4ec89d499dd5466623fc2efc85e3bddcf)), closes [#778](https://github.com/instructure/instructure-ui/issues/778)
+- **ui-time-select:** fix timeselect highlight behaviour ([9653a89](https://github.com/instructure/instructure-ui/commit/9653a896e80ba4d73335225e80807746a232d96d))
+
+### Features
+
+- **shared-types,ui-checkbox,ui-radio-input:** make checkbox and radio borders consistent ([a6aaef2](https://github.com/instructure/instructure-ui/commit/a6aaef20508325ae9e5bfbbb29317174edebce9c))
+- **ui-avatar:** add `hasInverseColor` prop to Avatars ([feef554](https://github.com/instructure/instructure-ui/commit/feef5549628027c176009575463e187f95a0affd))
+- **ui-avatar:** add `renderIcon` prop to Avatar ([d7233d8](https://github.com/instructure/instructure-ui/commit/d7233d876cf2a6a968f764ad05e6dd1544b62f5f))
+- **ui-date-input:** add display prop to DateInput for fluid width ([10d1551](https://github.com/instructure/instructure-ui/commit/10d1551b961c568d88c9c5f3393815f637662995))
+- **ui-date-time-input,ui-i18n,ui-time-select:** add DateTimeInput ([1054ae9](https://github.com/instructure/instructure-ui/commit/1054ae96aa246cc77547d114d0afc47236996bdb))
+- **ui-icons:** add `arrow-double-start, arrow-double-end` icons ([e3249d2](https://github.com/instructure/instructure-ui/commit/e3249d228eabac5bb98ff5d22e5881f2fe042606))
+- **ui-tabs:** update Tabs focus styles to inset focus ring ([3a59c3f](https://github.com/instructure/instructure-ui/commit/3a59c3f0443db81631c4f4d5dafe5778389e8dbc))
+
 ## [8.11.1](https://github.com/instructure/instructure-ui/compare/v8.11.0...v8.11.1) (2021-10-19)
 
 ### Bug Fixes

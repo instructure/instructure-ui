@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
+
+### Bug Fixes
+
+- **ui-time-select:** fix timeselect highlight behaviour ([9653a89](https://github.com/instructure/instructure-ui/commit/9653a896e80ba4d73335225e80807746a232d96d))
+
+### Features
+
+- **ui-date-time-input,ui-i18n,ui-time-select:** add DateTimeInput ([1054ae9](https://github.com/instructure/instructure-ui/commit/1054ae96aa246cc77547d114d0afc47236996bdb))
+
 ## [8.11.1](https://github.com/instructure/instructure-ui/compare/v8.11.0...v8.11.1) (2021-10-19)
 
 **Note:** Version bump only for package @instructure/ui-time-select

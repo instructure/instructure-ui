@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
+
+### Bug Fixes
+
+- **ui-dialog,ui-drawer-layout:** fix Dialog role attribute ([2681e14](https://github.com/instructure/instructure-ui/commit/2681e145ad469e1396536d3e9eed75a19995eb8a))
+
 ## [8.11.1](https://github.com/instructure/instructure-ui/compare/v8.11.0...v8.11.1) (2021-10-19)
 
 **Note:** Version bump only for package @instructure/ui-drawer-layout
