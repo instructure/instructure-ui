@@ -67,7 +67,7 @@ class Document extends Component<DocumentProps> {
     this.props.makeStyles?.()
   }
 
-  handleDetailsTabChange = ({ index }: any) => {
+  handleDetailsTabChange = (_event: Event, { index }: any) => {
     this.setState({
       selectedDetailsTabIndex: index
     })
