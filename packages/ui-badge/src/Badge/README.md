@@ -3,6 +3,7 @@ describes: Badge
 ---
 
 ### Making badges accessible
+
 Badge counts are automatically fed to screenreaders through the `aria-describedby`
 attribute. Often a stand alone number doesn't give a screenreader user enough context (_"3" vs. "You have 3 unread emails"_).
 The examples below use the `formatOutput` prop to make the badge more screenreader-friendly.
@@ -78,40 +79,57 @@ Setting `type="notification"` will render small circles that should not contain 
 example: true
 ---
 <div>
-  <Badge standalone count={6} margin="0 small 0 0" />
-  <Badge standalone variant="success" count={12} margin="0 small 0 0"  />
-  <Badge standalone variant="danger" count={18} countUntil={10} margin="0 small 0 0" />
-  <Badge
-    type="notification"
-    standalone
-    formatOutput={function () {
-      return <ScreenReaderContent>This is a notification</ScreenReaderContent>
-    }}
-    margin="0 small 0 0"
-  />
-  <Badge
-    variant="success"
-    type="notification"
-    standalone
-    formatOutput={function () {
-      return <ScreenReaderContent>This is a success notification</ScreenReaderContent>
-    }}
-    margin="0 small 0 0"
-  />
-  <Badge
-    variant="danger"
-    type="notification"
-    standalone
-    formatOutput={function () {
-      return <ScreenReaderContent>This is a danger notification</ScreenReaderContent>
-    }}
-  />
+  <Flex padding='small' display='inline-flex' alignItems="center">
+    <Badge standalone count={6} margin='0 small 0 0' />
+    <Badge
+      type="notification"
+      standalone
+      formatOutput={function () {
+        return <ScreenReaderContent>This is a notification</ScreenReaderContent>
+      }}
+    />
+  </Flex>
+  <Flex padding='small' display='inline-flex' alignItems="center">
+    <Badge standalone variant="success" count={12} margin='0 small 0 0' />
+    <Badge
+      variant="success"
+      type="notification"
+      standalone
+      formatOutput={function () {
+        return <ScreenReaderContent>This is a success notification</ScreenReaderContent>
+      }}
+    />
+  </Flex>
+  <Flex padding='small' display='inline-flex' alignItems="center">
+    <Badge standalone variant="danger" count={18} countUntil={10} margin='0 small 0 0' />
+    <Badge
+      variant="danger"
+      type="notification"
+      standalone
+      formatOutput={function () {
+        return <ScreenReaderContent>This is a danger notification</ScreenReaderContent>
+      }}
+    />
+  </Flex>
+  <View display='inline-flex' background='primary-inverse'>
+    <Flex padding='small' display='inline-flex' alignItems="center" background='primary-inverse'>
+      <Badge standalone variant="inverse" count={8} margin='0 small 0 0' />
+      <Badge
+        variant="inverse"
+        type="notification"
+        standalone
+        formatOutput={function () {
+          return <ScreenReaderContent>This is a danger notification</ScreenReaderContent>
+        }}
+      />
+    </Flex>
+  </View>
 </div>
 ```
 
 ### Placement
 
-Default is `top end`. __Note that standalone badges can't be placed.__
+Default is `top end`. **Note that standalone badges can't be placed.**
 
 ```js
 ---
@@ -214,6 +232,7 @@ const Example = () => (
 
 render(<Example />)
 ```
+
 ### Guidelines
 
 ```js

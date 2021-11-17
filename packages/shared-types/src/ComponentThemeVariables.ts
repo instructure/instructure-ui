@@ -91,6 +91,7 @@ export type BadgeTheme = {
   colorDanger: Colors['textDanger']
   colorSuccess: Colors['textSuccess']
   colorPrimary: Colors['textBrand']
+  colorInverse: Colors['textDarkest']
   size: string
   countOffset: string | 0
   notificationOffset: string | 0

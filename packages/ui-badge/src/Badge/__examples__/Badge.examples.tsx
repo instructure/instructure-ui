@@ -23,7 +23,8 @@
  */
 import React from 'react'
 import { View } from '@instructure/ui-view'
-import { BadgeProps } from '../props'
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { BadgeProps } from '../props'
 
 export default {
   sectionProp: 'variant',
@@ -44,5 +45,12 @@ export default {
       (props.type === 'notification' && props.countUntil) ||
       (props.standalone && props.placement !== 'start top')
     )
+  },
+  getExampleProps: (props) => {
+    return props.variant === 'inverse'
+      ? {
+          background: 'primary-inverse'
+        }
+      : {}
   }
-}
+} as StoryConfig<BadgeProps>

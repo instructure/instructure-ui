@@ -57,16 +57,44 @@ const generateStyle = (
   const end = placement.indexOf('end') > -1
   const center = placement.indexOf('center') > -1
 
-  const variantVariants = {
-    danger: { backgroundColor: componentTheme.colorDanger },
-    success: { backgroundColor: componentTheme.colorSuccess },
-    primary: { backgroundColor: componentTheme.colorPrimary }
-  }
-
-  const pulseBorderVariants = {
-    danger: { borderColor: componentTheme.colorDanger },
-    success: { borderColor: componentTheme.colorSuccess },
-    primary: { borderColor: componentTheme.colorPrimary }
+  const variants = {
+    danger: {
+      badge: {
+        color: componentTheme.color,
+        backgroundColor: componentTheme.colorDanger
+      },
+      pulseBorder: {
+        borderColor: componentTheme.colorDanger
+      }
+    },
+    success: {
+      badge: {
+        color: componentTheme.color,
+        backgroundColor: componentTheme.colorSuccess
+      },
+      pulseBorder: {
+        borderColor: componentTheme.colorSuccess
+      }
+    },
+    primary: {
+      badge: {
+        color: componentTheme.color,
+        backgroundColor: componentTheme.colorPrimary
+      },
+      pulseBorder: {
+        borderColor: componentTheme.colorPrimary
+      }
+    },
+    inverse: {
+      // text and background colors are swapped
+      badge: {
+        color: componentTheme.colorInverse,
+        backgroundColor: componentTheme.color
+      },
+      pulseBorder: {
+        borderColor: componentTheme.color
+      }
+    }
   }
 
   const countPositions = {
@@ -147,12 +175,11 @@ const generateStyle = (
       boxSizing: 'border-box',
       pointerEvents: 'none',
       textAlign: 'center',
-      color: componentTheme.color,
       fontSize: componentTheme.fontSize,
       whiteSpace: 'nowrap',
       borderRadius: componentTheme.borderRadius,
 
-      ...variantVariants[variant!],
+      ...variants[variant!].badge,
 
       ...(pulse && {
         position: 'relative',
@@ -174,7 +201,7 @@ const generateStyle = (
           animationDuration: '1s',
           animationIterationCount: '4',
           animationDirection: 'alternate',
-          ...pulseBorderVariants[variant!]
+          ...variants[variant!].pulseBorder
         }
       }),
 
