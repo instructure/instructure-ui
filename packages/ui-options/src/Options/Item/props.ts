@@ -34,10 +34,27 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type OptionsItemOwnProps = {
+  /**
+   * Element type to render as
+   */
   as?: AsElementType
+  /**
+   * The style variant of the item
+   */
   variant?: 'default' | 'highlighted' | 'selected' | 'disabled'
+  /**
+   * The aria role of the element
+   */
   role?: string
+  /**
+   * Content to render before the label
+   * (if you pass a function, it has the `props` as its parameter)
+   */
   renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * Content to render after the label
+   * (if you pass a function, it has the `props` as its parameter)
+   */
   renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
   children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
 }
@@ -55,27 +72,10 @@ type OptionsItemStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Element type to render as
-   */
   as: PropTypes.elementType,
-  /**
-   * The style variant of the item
-   */
   variant: PropTypes.oneOf(['default', 'highlighted', 'selected', 'disabled']),
-  /**
-   * The aria role of the element
-   */
   role: PropTypes.string,
-  /**
-   * Content to render before the label
-   * (if you pass a function, it has the `props` as its parameter)
-   */
   renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Content to render after the label
-   * (if you pass a function, it has the `props` as its parameter)
-   */
   renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }

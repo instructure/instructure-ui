@@ -35,9 +35,21 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type OptionsOwnProps = {
+  /**
+   * Element type to render as
+   */
   as?: AsElementType
+  /**
+   * The aria role of the element
+   */
   role?: string
+  /**
+   * The the actual list element
+   */
   elementRef?: (element: Element | null) => void
+  /**
+   * Content to render as a label. Mostly for when the component is nested
+   */
   renderLabel?: React.ReactNode | ((...args: any[]) => any)
   children?: React.ReactNode
 }
@@ -53,21 +65,9 @@ type OptionsProps = OptionsOwnProps &
 type OptionsStyle = ComponentStyle<'options' | 'list' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Element type to render as
-   */
   as: PropTypes.elementType,
-  /**
-   * The aria role of the element
-   */
   role: PropTypes.string,
-  /**
-   * The the actual list element
-   */
   elementRef: PropTypes.func,
-  /**
-   * Content to render as a label. Mostly for when the component is nested
-   */
   renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   children: ChildrenPropTypes.oneOf(['Options', 'Item', 'Separator'])
 }

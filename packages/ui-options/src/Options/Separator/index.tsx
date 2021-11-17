@@ -40,6 +40,7 @@ parent: Options
 id: Options.Separator
 ---
 @module Separator
+@tsProps
 **/
 @withStyle(generateStyles, generateComponentTheme)
 class Separator extends Component<OptionsSeparatorProps> {

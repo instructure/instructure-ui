@@ -44,6 +44,7 @@ import { allowedProps, propTypes } from './props'
 parent: Options
 id: Options.Item
 ---
+@tsProps
 **/
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
@@ -97,8 +98,14 @@ class Item extends Component<OptionsItemProps> {
   }
 
   render() {
-    const { as, role, styles, renderBeforeLabel, renderAfterLabel, children } =
-      this.props
+    const {
+      as,
+      role,
+      styles,
+      renderBeforeLabel,
+      renderAfterLabel,
+      children
+    } = this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
     const passthroughProps = omitProps(this.props, Item.allowedProps)

@@ -33,6 +33,9 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import { AllHTMLAttributes } from 'react'
 
 type OptionsSeparatorOwnProps = {
+  /**
+   * Element type to render as
+   */
   as?: AsElementType
 }
 
@@ -47,9 +50,6 @@ type OptionsSeparatorProps = OptionsSeparatorOwnProps &
 type OptionsSeparatorStyle = ComponentStyle<'separator'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Element type to render as
-   */
   as: PropTypes.elementType
 }
 
