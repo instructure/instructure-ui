@@ -42,12 +42,29 @@ import type {
 } from '@instructure/shared-types'
 
 type ListOwnProps = {
+  /**
+   * Only accepts `<List.Item>` as a child
+   */
   children?: React.ReactNode // TODO: oneOf([ListItem])
   as?: 'ul' | 'ol'
+  /**
+   * One of: none, dashed, solid
+   */
   delimiter?: 'none' | 'dashed' | 'solid'
+  /**
+   * When set, renders the List Items without a list style type.
+   */
   isUnstyled?: boolean
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
   size?: 'small' | 'medium' | 'large'
+  /**
+   * Sets the margin separating each ListItem.
+   */
   itemSpacing?:
     | 'none'
     | 'xxx-small'
@@ -58,6 +75,9 @@ type ListOwnProps = {
     | 'large'
     | 'x-large'
     | 'xx-large'
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
 }
 
