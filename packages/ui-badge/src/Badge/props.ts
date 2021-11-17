@@ -62,7 +62,7 @@ type BadgeOwnProps = {
    * Make the Badge slowly pulse twice to get the user's attention.
    */
   pulse?: boolean
-  variant?: 'primary' | 'success' | 'danger'
+  variant?: 'primary' | 'success' | 'danger' | 'inverse'
   /**
    * provides a reference to the underlying html root element
    */
@@ -98,7 +98,7 @@ const propTypes: PropValidators<PropKeys> = {
   type: PropTypes.oneOf(['count', 'notification']),
   standalone: PropTypes.bool,
   pulse: PropTypes.bool,
-  variant: PropTypes.oneOf(['primary', 'success', 'danger']),
+  variant: PropTypes.oneOf(['primary', 'success', 'danger', 'inverse']),
   placement: PositionPropTypes.placement,
   margin: ThemeablePropTypes.spacing,
   elementRef: PropTypes.func,
