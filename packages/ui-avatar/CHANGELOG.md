@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
+
+### Bug Fixes
+
+- **ui-avatar:** add unset logic for image loaded state ([e6665c1](https://github.com/instructure/instructure-ui/commit/e6665c159832d0020d7da263be0e959c41589135))
+
+### Features
+
+- **ui-avatar:** add `hasInverseColor` prop to Avatars ([feef554](https://github.com/instructure/instructure-ui/commit/feef5549628027c176009575463e187f95a0affd))
+- **ui-avatar:** add `renderIcon` prop to Avatar ([d7233d8](https://github.com/instructure/instructure-ui/commit/d7233d876cf2a6a968f764ad05e6dd1544b62f5f))
+
 ## [8.11.1](https://github.com/instructure/instructure-ui/compare/v8.11.0...v8.11.1) (2021-10-19)
 
 **Note:** Version bump only for package @instructure/ui-avatar

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
+
+### Bug Fixes
+
+- **ui-motion:** fix interrupted transition not removing transition classes ([db3fd4f](https://github.com/instructure/instructure-ui/commit/db3fd4f6ad76471dce61cc91f8267c1eb3094020))
+
 ## [8.11.1](https://github.com/instructure/instructure-ui/compare/v8.11.0...v8.11.1) (2021-10-19)
 
 **Note:** Version bump only for package @instructure/ui-motion

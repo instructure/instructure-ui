@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
+
+### Features
+
+- **shared-types,ui-checkbox,ui-radio-input:** make checkbox and radio borders consistent ([a6aaef2](https://github.com/instructure/instructure-ui/commit/a6aaef20508325ae9e5bfbbb29317174edebce9c))
+
 ## [8.11.1](https://github.com/instructure/instructure-ui/compare/v8.11.0...v8.11.1) (2021-10-19)
 
 **Note:** Version bump only for package @instructure/ui-checkbox

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
+
+### Features
+
+- **ui-tabs:** update Tabs focus styles to inset focus ring ([3a59c3f](https://github.com/instructure/instructure-ui/commit/3a59c3f0443db81631c4f4d5dafe5778389e8dbc))
+
 ## [8.11.1](https://github.com/instructure/instructure-ui/compare/v8.11.0...v8.11.1) (2021-10-19)
 
 **Note:** Version bump only for package @instructure/ui-tabs

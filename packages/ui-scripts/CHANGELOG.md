@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
+
+### Bug Fixes
+
+- **ui-scripts:** resolve webpack 5 commonjs build issue ([d51a85e](https://github.com/instructure/instructure-ui/commit/d51a85e4ec89d499dd5466623fc2efc85e3bddcf)), closes [#778](https://github.com/instructure/instructure-ui/issues/778)
+
 ## [8.11.1](https://github.com/instructure/instructure-ui/compare/v8.11.0...v8.11.1) (2021-10-19)
 
 **Note:** Version bump only for package @instructure/ui-scripts
