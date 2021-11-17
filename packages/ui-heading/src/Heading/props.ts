@@ -42,17 +42,41 @@ import type {
 type HeadingLevel<U extends keyof JSX.IntrinsicElements> = U
 
 type HeadingOwnProps = {
+  /**
+   * The text content of the Heading
+   */
   children?: React.ReactNode // TODO: childrenOrValue or is it even needed?
+  /**
+   * Add a top- or bottom-border to the Heading
+   */
   border?: 'none' | 'top' | 'bottom'
+  /**
+   * The font color to render
+   */
   color?:
     | 'primary'
     | 'secondary'
     | 'primary-inverse'
     | 'secondary-inverse'
     | 'inherit'
+  /**
+   * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
+   */
   level?: HeadingLevel<'h1' | 'h2' | 'h3' | 'h4' | 'h5'> | 'reset'
+  /**
+   * Choose the element Heading should render as. Will default to the `level` prop
+   * if not specified.
+   */
   as?: AsElementType
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+  /**
+   * Provides a ref to the underlying HTML element
+   */
   elementRef?: (element: Element | null) => void
 }
 
@@ -67,17 +91,8 @@ type HeadingProps = HeadingOwnProps &
 type HeadingStyle = ComponentStyle<'heading'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Add a top- or bottom-border to the Heading
-   */
   border: PropTypes.oneOf(['none', 'top', 'bottom']),
-  /**
-   * The text content of the Heading
-   */
   children: childrenOrValue,
-  /**
-   * The font color to render
-   */
   color: PropTypes.oneOf([
     'primary',
     'secondary',
@@ -85,24 +100,9 @@ const propTypes: PropValidators<PropKeys> = {
     'secondary-inverse',
     'inherit'
   ]),
-  /**
-   * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
-   */
   level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
-  /**
-   * Choose the element Heading should render as. Will default to the `level` prop
-   * if not specified.
-   */
   as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Provides a ref to the underlying HTML element
-   */
   elementRef: PropTypes.func
 }
 
