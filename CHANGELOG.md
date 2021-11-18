@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.13.0](https://github.com/instructure/instructure-ui/compare/v7.12.0...v7.13.0) (2021-11-18)
+
+### Bug Fixes
+
+- **ui-dialog,ui-drawer-layout:** fix Dialog role attribute ([f568377](https://github.com/instructure/instructure-ui/commit/f568377)), backports [#765](https://github.com/instructure/instructure-ui/issues/765)
+
+### Features
+
+- **ui-avatar:** add `renderIcon` and `hasInverseColor` props to Avatar ([bb492d7](https://github.com/instructure/instructure-ui/commit/bb492d7)), backports [#781](https://github.com/instructure/instructure-ui/issues/781)
+- **ui-checkbox,ui-radio-input:** make checkbox and radio borders consistent ([9e2fa16](https://github.com/instructure/instructure-ui/commit/9e2fa16)), backports [#780](https://github.com/instructure/instructure-ui/issues/780)
+- **ui-tabs:** update Tabs focus styles to inset focus ring ([d5abac4](https://github.com/instructure/instructure-ui/commit/d5abac4)), backports [#782](https://github.com/instructure/instructure-ui/issues/782)
+
 # [7.12.0](https://github.com/instructure/instructure-ui/compare/v7.11.0...v7.12.0) (2021-10-15)
 
 ### Bug Fixes

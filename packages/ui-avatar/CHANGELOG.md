@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.13.0](https://github.com/instructure/instructure-ui/compare/v7.12.0...v7.13.0) (2021-11-18)
+
+### Features
+
+- **ui-avatar:** add `renderIcon` and `hasInverseColor` props to Avatar ([bb492d7](https://github.com/instructure/instructure-ui/commit/bb492d7)), backports [#781](https://github.com/instructure/instructure-ui/issues/781)
+
 # [7.12.0](https://github.com/instructure/instructure-ui/compare/v7.11.0...v7.12.0) (2021-10-15)
 
 **Note:** Version bump only for package @instructure/ui-avatar

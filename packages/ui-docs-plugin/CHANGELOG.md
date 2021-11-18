@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.13.0](https://github.com/instructure/instructure-ui/compare/v7.12.0...v7.13.0) (2021-11-18)
+
+**Note:** Version bump only for package @instructure/ui-docs-plugin
+
 # [7.12.0](https://github.com/instructure/instructure-ui/compare/v7.11.0...v7.12.0) (2021-10-15)
 
 **Note:** Version bump only for package @instructure/ui-docs-plugin
