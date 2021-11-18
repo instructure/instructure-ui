@@ -32,6 +32,7 @@ import {
   find
 } from '@instructure/ui-test-utils'
 import { Dialog } from '../index'
+import type { DialogProps } from '../props'
 
 describe('<Dialog />', async () => {
   it('should render nothing when closed', async () => {
@@ -126,27 +127,26 @@ describe('<Dialog />', async () => {
   })
 
   describe('managed focus', async () => {
-    class DialogExample extends React.Component {
+    class DialogExample extends React.Component<DialogProps> {
       static propTypes = {
         // eslint-disable-next-line react/forbid-foreign-prop-types
         ...Dialog.propTypes
       }
 
+      private _dialog?: Dialog | null
+      private _input?: HTMLInputElement | null
+
       componentDidMount() {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
         if (!this.props.open) {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'DialogEx... Remove this comment to see the full error message
-          this._input.focus()
+          this._input!.focus()
         }
       }
 
       focusDialog() {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_dialog' does not exist on type 'DialogE... Remove this comment to see the full error message
         this._dialog && this._dialog.focus()
       }
 
       blurDialog() {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_dialog' does not exist on type 'DialogE... Remove this comment to see the full error message
         this._dialog && this._dialog.blur()
       }
 
@@ -157,7 +157,6 @@ describe('<Dialog />', async () => {
               id="input-trigger"
               type="text"
               ref={(c) => {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'DialogEx... Remove this comment to see the full error message
                 this._input = c
               }}
             />
@@ -166,7 +165,6 @@ describe('<Dialog />', async () => {
               shouldReturnFocus
               label="A Modal"
               {...this.props}
-              // @ts-expect-error ts-migrate(2339) FIXME: Property '_dialog' does not exist on type 'DialogE... Remove this comment to see the full error message
               ref={(el) => (this._dialog = el)}
             >
               {this.props.children || (
@@ -182,8 +180,7 @@ describe('<Dialog />', async () => {
     }
 
     it('should provide focus method', async () => {
-      let ref
-
+      let ref: DialogExample | null
       await mount(
         <div>
           <DialogExample
@@ -193,16 +190,12 @@ describe('<Dialog />', async () => {
           >
             some content
           </DialogExample>
-          {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message */}
-          <div id="container" tabIndex="-1">
+          <div id="container" tabIndex={-1}>
             some more content
           </div>
         </div>
       )
-
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      ref.focusDialog()
-
+      ref!.focusDialog()
       const container = await find('#container')
       await wait(() => {
         expect(container.focused()).to.be.true()
@@ -211,7 +204,7 @@ describe('<Dialog />', async () => {
 
     it('should warn when trying to focus or blur a closed dialog', async () => {
       const consoleError = stub(console, 'error')
-      let ref
+      let ref: DialogExample | null
 
       await mount(
         <div>
@@ -222,25 +215,18 @@ describe('<Dialog />', async () => {
           >
             some content
           </DialogExample>
-          {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message */}
-          <div id="container" tabIndex="-1">
+          <div id="container" tabIndex={-1}>
             some more content
           </div>
         </div>
       )
-
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      ref.focusDialog()
-
+      ref!.focusDialog()
       await wait(() => {
         expect(consoleError).to.have.been.calledWithMatch(
           "[Dialog] Can't focus a Dialog that isn't open."
         )
       })
-
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      ref.blurDialog()
-
+      ref!.blurDialog()
       await wait(() => {
         expect(consoleError).to.have.been.calledWithMatch(
           "[Dialog] Can't blur a Dialog that isn't open."
@@ -291,8 +277,7 @@ describe('<Dialog />', async () => {
           open
           defaultFocusElement={() => document.getElementById('non-tabbable')}
         >
-          {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message */}
-          <div tabIndex="-1" id="non-tabbable">
+          <div tabIndex={-1} id="non-tabbable">
             hello world
           </div>
         </DialogExample>
@@ -313,8 +298,7 @@ describe('<Dialog />', async () => {
           >
             some content
           </DialogExample>
-          {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message */}
-          <div id="container" tabIndex="-1">
+          <div id="container" tabIndex={-1}>
             some more content
           </div>
         </div>
@@ -497,8 +481,7 @@ describe('<Dialog />', async () => {
             open: false
           }
 
-          // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-          handleTriggerClick = (e) => {
+          handleTriggerClick = () => {
             this.setState({ open: true })
           }
 

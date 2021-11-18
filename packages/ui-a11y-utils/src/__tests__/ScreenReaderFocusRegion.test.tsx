@@ -73,7 +73,6 @@ describe('ScreenReaderFocusRegion', async () => {
     const ignore = (await main.find('[data-test-ignore]')).getDOMNode()
     const content = (await main.find('[data-test-content]')).getDOMNode()
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(content, {
-      // @ts-expect-error ts-migrate(2740) FIXME: Type '() => any' is missing the following properti... Remove this comment to see the full error message
       liveRegion: () => ignore,
       shouldContainFocus: true
     })
@@ -90,7 +89,6 @@ describe('ScreenReaderFocusRegion', async () => {
     const content = (await main.find('[data-test-content]')).getDOMNode()
     const children = await main.findAll('[data-test-child]')
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(content, {
-      // @ts-expect-error FIXME remove this line to see the error
       liveRegion: ignore,
       shouldContainFocus: true
     })
@@ -146,7 +144,7 @@ describe('ScreenReaderFocusRegion', async () => {
     content.appendChild(desc)
 
     screenReaderFocusRegion.handleDOMMutation([
-      { addedNodes: [desc], removedNodes: [] }
+      ({ addedNodes: [desc], removedNodes: [] } as unknown) as MutationRecord
     ])
 
     Array.from(content.childNodes).forEach((node) => {
@@ -273,7 +271,6 @@ describe('ScreenReaderFocusRegion', async () => {
     alwaysHidden.setAttribute('aria-hidden', 'true')
 
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(content, {
-      // @ts-expect-error FIXME remove this line to see the error
       liveRegion: ignore,
       shouldContainFocus: true
     })

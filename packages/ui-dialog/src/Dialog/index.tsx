@@ -28,7 +28,7 @@ import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
-import { FocusRegionManager } from '@instructure/ui-a11y-utils'
+import { FocusRegion, FocusRegionManager } from '@instructure/ui-a11y-utils'
 
 import { propTypes, allowedProps } from './props'
 import type { DialogProps } from './props'
@@ -39,58 +39,46 @@ category: components/utilities
 ---
 @module Dialog
 **/
-
 class Dialog extends Component<DialogProps> {
   static readonly componentId = 'Dialog'
 
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     open: false,
     shouldFocusOnOpen: true,
     shouldContainFocus: false,
     shouldReturnFocus: false,
     shouldCloseOnDocumentClick: true,
-    shouldCloseOnEscape: true,
-    defaultFocusElement: undefined,
-    contentElement: undefined,
-    liveRegion: undefined,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDismiss: (event) => {}
+    shouldCloseOnEscape: true
   } as const
 
   _timeouts: ReturnType<typeof setTimeout>[] = []
   _raf: RequestAnimationFrameType[] = []
-  _focusRegion = null
+  private _focusRegion: FocusRegion | null = null
   ref: Element | null = null
+
   get _root() {
     console.warn(
       '_root property is deprecated and will be removed in v9, please use ref instead'
     )
-
     return this.ref
   }
+
   componentDidMount() {
     if (this.props.open) {
       this.open()
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: DialogProps) {
     const { open } = this.props
-
     if (open && !prevProps.open) {
       this.open()
     } else if (!open && prevProps.open) {
       this.close()
     }
-
     if (this._focusRegion) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._focusRegion.updateElement(this.contentElement)
     }
   }
@@ -99,7 +87,6 @@ class Dialog extends Component<DialogProps> {
     if (this.props.open) {
       this.close()
     }
-
     this._timeouts.forEach((timeout) => clearTimeout(timeout))
     this._timeouts = []
     this._raf.forEach((request) => request.cancel())
@@ -118,9 +105,8 @@ class Dialog extends Component<DialogProps> {
         // final position, making the page jump.
         this._timeouts.push(
           setTimeout(() => {
-            // @ts-expect-error ts-migrate(2322) FIXME: Type 'FocusRegion' is not assignable to type 'null... Remove this comment to see the full error message
             this._focusRegion = FocusRegionManager.activateRegion(
-              this.contentElement,
+              this.contentElement as Element,
               {
                 ...options
               }
@@ -133,7 +119,6 @@ class Dialog extends Component<DialogProps> {
 
   close() {
     if (this._focusRegion) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       FocusRegionManager.blurRegion(this.contentElement, this._focusRegion.id)
     }
   }
@@ -145,7 +130,6 @@ class Dialog extends Component<DialogProps> {
     }
 
     if (this._focusRegion) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       FocusRegionManager.focusRegion(this.contentElement, this._focusRegion.id)
     }
   }
@@ -155,7 +139,6 @@ class Dialog extends Component<DialogProps> {
       error(false, "[Dialog] Can't blur a Dialog that isn't open.")
       return
     }
-
     this.close()
   }
 
@@ -171,19 +154,16 @@ class Dialog extends Component<DialogProps> {
 
   get contentElement() {
     let contentElement = findDOMNode(this.props.contentElement)
-
     if (!contentElement) {
       contentElement = findDOMNode(this.ref)
     }
-
-    return contentElement
+    return contentElement as Element | Node
   }
 
   get focused() {
     return (
       this.contentElement &&
       this._focusRegion &&
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       FocusRegionManager.isFocused(this.contentElement, this._focusRegion.id)
     )
   }

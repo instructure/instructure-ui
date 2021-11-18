@@ -24,7 +24,6 @@
 
 import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
-import React from 'react'
 import { UIElement } from '@instructure/shared-types'
 
 /**
@@ -41,7 +40,6 @@ import { UIElement } from '@instructure/shared-types'
 function containsWithDOM(context: UIElement, el: UIElement) {
   const container = context && findDOMNode(context)
   const node = el && findDOMNode(el)
-
   if (!container || !node) {
     return false
   } else if (!(container instanceof Window) && !(node instanceof Window)) {
@@ -52,15 +50,7 @@ function containsWithDOM(context: UIElement, el: UIElement) {
 }
 
 /* istanbul ignore next  */
-function containsFallback(
-  context:
-    | Node
-    | Window
-    | React.ReactElement
-    | ((...args: any[]) => any)
-    | null,
-  el: Node | Window | React.ReactElement | ((...args: any[]) => any) | null
-) {
+function containsFallback(context: UIElement, el: UIElement) {
   let node = el
 
   while (node) {
@@ -69,7 +59,6 @@ function containsFallback(
     }
     node = (node as Node).parentNode
   }
-
   return false
 }
 

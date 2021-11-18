@@ -22,21 +22,18 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'children' implicitly has an 'any' type.
-function hasVisibleChildren(children) {
+function hasVisibleChildren(children: ReactNode) {
   let visible = false
-
   React.Children.forEach(children, (child) => {
     if (child && !matchComponentTypes(child, [ScreenReaderContent])) {
       visible = true
     }
   })
-
   return visible
 }
 

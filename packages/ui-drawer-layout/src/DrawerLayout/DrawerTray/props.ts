@@ -59,10 +59,7 @@ type DrawerLayoutTrayOwnProps = {
   contentRef?: (...args: any[]) => any
   mountNode?: PositionMountNode
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
+  liveRegion?: (() => Element) | Element[] | Element
   onDismiss?: (...args: any[]) => any
   shouldContainFocus?: boolean
   shouldReturnFocus?: boolean

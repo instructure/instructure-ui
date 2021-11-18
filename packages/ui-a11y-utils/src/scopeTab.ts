@@ -29,9 +29,13 @@ import {
   containsActiveElement,
   getActiveElement
 } from '@instructure/ui-dom-utils'
+import type { UIElement } from '@instructure/shared-types'
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-function scopeTab(element, event, onLeavingFinalTabbable) {
+function scopeTab(
+  element: UIElement | undefined,
+  event: KeyboardEvent,
+  onLeavingFinalTabbable?: () => void
+) {
   const node = findDOMNode(element)
   const tabbable = findTabbable(node)
 
@@ -66,8 +70,7 @@ function scopeTab(element, event, onLeavingFinalTabbable) {
 
   event.preventDefault()
   const target = tabbable[event.shiftKey ? tabbable.length - 1 : 0]
-  // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
-  target.focus()
+  ;(target as HTMLElement).focus()
 }
 
 export default scopeTab

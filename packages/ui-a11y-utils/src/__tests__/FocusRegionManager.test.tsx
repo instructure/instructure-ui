@@ -75,13 +75,14 @@ describe('FocusRegionManager', async () => {
     )
 
     const main = within(subject.getDOMNode())
-    const button = (await main.find('[data-test-button]')).getDOMNode()
+    const button = (
+      await main.find('[data-test-button]')
+    ).getDOMNode() as HTMLButtonElement
     const content = (await main.find('[data-test-content]')).getDOMNode()
     const firstTabbable = (
       await main.find('[data-test-first-tabbable]')
     ).getDOMNode()
 
-    // @ts-expect-error FIXME remove this line to see the error
     await button.focus()
 
     expect(document.activeElement).to.equal(button)
@@ -138,16 +139,16 @@ describe('FocusRegionManager', async () => {
     )
 
     const main = within(subject.getDOMNode())
-    const button = (await main.find('[data-test-button]')).getDOMNode()
+    const button = (
+      await main.find('[data-test-button]')
+    ).getDOMNode() as HTMLButtonElement
     const content = (await main.find('[data-test-content]')).getDOMNode()
 
-    // @ts-expect-error FIXME remove this line to see the error
     await button.focus()
 
     expect(document.activeElement).to.equal(button)
 
     FocusRegionManager.focusRegion(content)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     FocusRegionManager.blurRegion(content)
 
     expect(document.activeElement).to.equal(button)

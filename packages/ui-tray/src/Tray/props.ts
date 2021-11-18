@@ -50,10 +50,7 @@ type TrayOwnProps = {
   onDismiss?: (...args: any[]) => any
   mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func])
   insertAt?: 'bottom' | 'top'
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
+  liveRegion?: (() => Element) | Element[] | Element
   onTransition?: (...args: any[]) => any
   onEnter?: (...args: any[]) => any
   onEntering?: (...args: any[]) => any

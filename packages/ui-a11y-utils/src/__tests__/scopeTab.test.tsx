@@ -26,10 +26,8 @@ import React from 'react'
 import { expect, mount, within, stub, wait } from '@instructure/ui-test-utils'
 import { scopeTab } from '../scopeTab'
 
-const MOCK_EVENT = {
-  shiftKey: false,
-  preventDefault: () => {}
-}
+const MOCK_EVENT = new KeyboardEvent('mockEvent', { shiftKey: false })
+MOCK_EVENT.preventDefault = () => {}
 
 describe('scopeTab', async () => {
   it('should scope tab within container', async () => {
@@ -54,7 +52,6 @@ describe('scopeTab', async () => {
       expect(second.focused()).to.be.true()
     })
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     scopeTab(container.getDOMNode(), MOCK_EVENT)
 
     await wait(() => {
@@ -77,7 +74,6 @@ describe('scopeTab', async () => {
 
     await input.focus()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     scopeTab(container.getDOMNode(), MOCK_EVENT)
 
     await wait(() => {

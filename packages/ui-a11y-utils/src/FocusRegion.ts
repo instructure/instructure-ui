@@ -36,66 +36,54 @@ import { logError as error } from '@instructure/console'
 
 import { ScreenReaderFocusRegion } from './ScreenReaderFocusRegion'
 import { KeyboardFocusRegion } from './KeyboardFocusRegion'
+import { FocusRegionOptions } from './FocusRegionOptions'
 
 class FocusRegion {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  constructor(element, options) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'FocusR... Remove this comment to see the full error message
+  private _contextElement: Node | Element | null = null
+  private _preventCloseOnDocumentClick = false
+  private _options: FocusRegionOptions
+  private readonly _screenReaderFocusRegion: ScreenReaderFocusRegion
+  private readonly _keyboardFocusRegion: KeyboardFocusRegion
+  private readonly _id: string
+  private _listeners: ReturnType<typeof addEventListener>[] = []
+  private _active = false
+
+  constructor(element: Element | Node, options: FocusRegionOptions) {
     this._options = options || {
       shouldCloseOnDocumentClick: true,
-      shouldCloseOnEscape: true,
-      // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-      onDismiss: (event) => {}
+      shouldCloseOnEscape: true
     }
     this._contextElement = element
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_screenReaderFocusRegion' does not exist... Remove this comment to see the full error message
     this._screenReaderFocusRegion = new ScreenReaderFocusRegion(
       element,
       options
     )
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_keyboardFocusRegion' does not exist on ... Remove this comment to see the full error message
     this._keyboardFocusRegion = new KeyboardFocusRegion(element, options)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'FocusRegion... Remove this comment to see the full error message
     this._id = uid()
   }
 
-  _contextElement = null
-  _preventCloseOnDocumentClick = false
-  _listeners = []
-  _active = false
-
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  updateElement(element) {
+  updateElement(element: Element | Node) {
     this._contextElement = element
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_keyboardFocusRegion' does not exist on ... Remove this comment to see the full error message
     if (this._keyboardFocusRegion) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_keyboardFocusRegion' does not exist on ... Remove this comment to see the full error message
       this._keyboardFocusRegion.updateElement(element)
     }
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_screenReaderFocusRegion' does not exist... Remove this comment to see the full error message
     if (this._screenReaderFocusRegion) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_screenReaderFocusRegion' does not exist... Remove this comment to see the full error message
       this._screenReaderFocusRegion.updateElement(element)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleDismiss = (event, documentClick) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'FocusR... Remove this comment to see the full error message
-    this._options.onDismiss(event, documentClick)
+  handleDismiss = (event: Event, documentClick?: boolean) => {
+    this._options.onDismiss?.(event, documentClick)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  captureDocumentClick = (event) => {
+  captureDocumentClick = (event: MouseEvent) => {
     const { target } = event
     this._preventCloseOnDocumentClick =
-      event.button !== 0 || contains(this._contextElement, target)
+      event.button !== 0 || contains(this._contextElement, target as Node)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleDocumentClick = (event) => {
+  handleDocumentClick = (event: MouseEvent) => {
     if (
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'FocusR... Remove this comment to see the full error message
       this._options.shouldCloseOnDocumentClick &&
       !this._preventCloseOnDocumentClick
     ) {
@@ -103,30 +91,24 @@ class FocusRegion {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleFrameClick = (event, frame) => {
+  handleFrameClick = (event: MouseEvent, frame: HTMLIFrameElement) => {
     if (!contains(this._contextElement, frame)) {
       // dismiss if frame is not within the region
       this.handleDismiss(event, true)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleKeyUp = (event) => {
+  handleKeyUp = (event: KeyboardEvent) => {
     if (
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'FocusR... Remove this comment to see the full error message
       this._options.shouldCloseOnEscape &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'escape' does not exist on type 'CodesMap... Remove this comment to see the full error message
-      event.keyCode === keycode.codes.escape &&
+      event.keyCode === keycode.codes.esc &&
       !event.defaultPrevented
     ) {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       this.handleDismiss(event)
     }
   }
 
   get id() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'FocusRegion... Remove this comment to see the full error message
     return this._id
   }
 
@@ -144,20 +126,24 @@ class FocusRegion {
     if (!this._active) {
       const doc = ownerDocument(this._contextElement)
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_keyboardFocusRegion' does not exist on ... Remove this comment to see the full error message
       this._keyboardFocusRegion.activate()
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_screenReaderFocusRegion' does not exist... Remove this comment to see the full error message
       this._screenReaderFocusRegion.activate()
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'FocusR... Remove this comment to see the full error message
       if (this._options.shouldCloseOnDocumentClick) {
         this._listeners.push(
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
-          addEventListener(doc, 'click', this.captureDocumentClick, true)
+          addEventListener(
+            doc,
+            'click',
+            this.captureDocumentClick as EventListener,
+            true
+          )
         )
         this._listeners.push(
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
-          addEventListener(doc, 'click', this.handleDocumentClick)
+          addEventListener(
+            doc,
+            'click',
+            this.handleDocumentClick as EventListener
+          )
         )
 
         Array.from(doc.getElementsByTagName('iframe')).forEach((el) => {
@@ -166,41 +152,34 @@ class FocusRegion {
 
           if (frameDoc) {
             this._listeners.push(
-              // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
               addEventListener(frameDoc, 'mouseup', (event) => {
-                this.handleFrameClick(event, el)
+                this.handleFrameClick(event as MouseEvent, el)
               })
             )
           }
         })
       }
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'FocusR... Remove this comment to see the full error message
       if (this._options.shouldCloseOnEscape) {
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
-        this._listeners.push(addEventListener(doc, 'keyup', this.handleKeyUp))
+        this._listeners.push(
+          addEventListener(doc, 'keyup', this.handleKeyUp as EventListener)
+        )
       }
 
       this._active = true
     }
   }
 
-  deactivate({ keyboard = true } = {}) {
+  deactivate({ keyboard = true }: { keyboard?: boolean } = {}) {
     if (this._active) {
       this._listeners.forEach((listener) => {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'remove' does not exist on type 'never'.
         listener.remove()
       })
       this._listeners = []
-
       if (keyboard) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_keyboardFocusRegion' does not exist on ... Remove this comment to see the full error message
         this._keyboardFocusRegion.deactivate()
       }
-
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_screenReaderFocusRegion' does not exist... Remove this comment to see the full error message
       this._screenReaderFocusRegion.deactivate()
-
       this._active = false
     }
   }
@@ -210,7 +189,6 @@ class FocusRegion {
       this._active,
       `[FocusRegion] Cannot call '.focus()' on a region that is not currently active.`
     )
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_keyboardFocusRegion' does not exist on ... Remove this comment to see the full error message
     this._keyboardFocusRegion.focus()
   }
 
@@ -219,7 +197,6 @@ class FocusRegion {
       !this._active,
       `[FocusRegion] Cannot call '.blur()' on a region that is currently active.`
     )
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_keyboardFocusRegion' does not exist on ... Remove this comment to see the full error message
     this._keyboardFocusRegion.blur()
   }
 }

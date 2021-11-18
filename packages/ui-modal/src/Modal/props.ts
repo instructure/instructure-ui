@@ -61,10 +61,7 @@ type ModalOwnProps = {
   contentRef?: (...args: any[]) => any
   mountNode?: PositionMountNode
   insertAt?: 'bottom' | 'top'
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
+  liveRegion?: (() => Element) | Element[] | Element
   transition?: TransitionType
   onEnter?: (...args: any[]) => any
   onEntering?: (...args: any[]) => any

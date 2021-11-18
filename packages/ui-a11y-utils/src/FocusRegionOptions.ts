@@ -22,10 +22,31 @@
  * SOFTWARE.
  */
 
-export { FocusRegion } from './FocusRegion'
-export { FocusRegionManager } from './FocusRegionManager'
-export { hasVisibleChildren } from './hasVisibleChildren'
-export { KeyboardFocusRegion } from './KeyboardFocusRegion'
-export { scopeTab } from './scopeTab'
-export { ScreenReaderFocusRegion } from './ScreenReaderFocusRegion'
-export type { FocusRegionOptions } from './FocusRegionOptions'
+import type { UIElement } from '@instructure/shared-types'
+
+export type FocusRegionOptions = {
+  /**
+   * Function called when tab focus leaves the focusable content. This only
+   * occurs when `shouldContainFocus` is set to false.
+   */
+  onBlur?: (event: Event) => void
+  onDismiss?: (event: Event, documentClick?: boolean) => void
+  /**
+   * An element or a function returning an element to focus by default
+   */
+  defaultFocusElement?: UIElement
+  /**
+   * An element, function returning an element, or array of elements that will not be hidden from
+   * the screen reader when the focus region is active
+   */
+  liveRegion?: (() => Element) | Element[] | Element
+  shouldContainFocus?: boolean | ('keyboard' | 'screenreader')[]
+  shouldReturnFocus?: boolean
+  shouldCloseOnDocumentClick?: boolean
+  shouldCloseOnEscape?: boolean
+  shouldFocusOnOpen?: boolean
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef?: (element: Element | null) => void
+}

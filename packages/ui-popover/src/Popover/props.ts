@@ -84,10 +84,7 @@ type PopoverOwnProps = {
   mountNode?: PositionMountNode
   positionTarget?: PositionMountNode
   insertAt?: 'bottom' | 'top'
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
+  liveRegion?: (() => Element) | Element[] | Element
   id?: string
   shouldAlignArrow?: boolean
   shouldTrackPosition?: boolean
