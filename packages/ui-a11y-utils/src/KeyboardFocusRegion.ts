@@ -41,55 +41,49 @@ import { logError as error } from '@instructure/console'
 import keycode from 'keycode'
 
 import { scopeTab } from './scopeTab'
+import type { UIElement } from '@instructure/shared-types'
+import { FocusRegionOptions } from './FocusRegionOptions'
 
 class KeyboardFocusRegion {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  constructor(element, options) {
-    this._contextElement = findDOMNode(element)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
+  private readonly _options: FocusRegionOptions
+  private _focusLaterElement: Element | null = null
+  private _needToFocus = false
+  private _listeners: ReturnType<typeof addEventListener>[] = []
+  private _raf: RequestAnimationFrameType[] = []
+  private _active = false
+  private _wasDocumentClick?: boolean
+  public _contextElement?: Node
+
+  constructor(element: UIElement, options: FocusRegionOptions) {
+    this._contextElement = findDOMNode(element) as Node
     this._options = options || {
       shouldContainFocus: true,
       shouldReturnFocus: true,
-      // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-      onBlur: (event) => {},
-      // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-      onDismiss: (event) => {},
       defaultFocusElement: null
     }
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
     if (this._options.shouldReturnFocus) {
-      this._focusLaterElement = this.activeElement
+      this._focusLaterElement = getActiveElement(this.doc)
     }
   }
-
-  public _contextElement: null | undefined | Node | Window = null
-  _focusLaterElement: Element | null = null
-  _needToFocus = false
-  _listeners = []
-  _raf: RequestAnimationFrameType[] = []
-  _active = false
 
   get focused() {
     return containsActiveElement(this._contextElement)
   }
 
   get shouldContainFocus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
     const { shouldContainFocus } = this._options
     return (
       shouldContainFocus === true ||
       (Array.isArray(shouldContainFocus) &&
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        shouldContainFocus.includes['keyboard'])
+        shouldContainFocus.includes('keyboard'))
     )
   }
 
-  get focusable() {
+  get focusable(): Element[] {
     return findFocusable(this._contextElement, () => true, true) || []
   }
 
-  get tabbable() {
+  get tabbable(): Element[] {
     return findTabbable(this._contextElement) || []
   }
 
@@ -117,59 +111,45 @@ class KeyboardFocusRegion {
     return ownerWindow(this._contextElement)
   }
 
-  get activeElement() {
-    return getActiveElement(this.doc)
-  }
-
-  get defaultFocusElement(): any {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
+  get defaultFocusElement() {
     const { defaultFocusElement } = this._options
-
-    const element = findDOMNode(
+    const element: Node | undefined = findDOMNode(
       typeof defaultFocusElement === 'function'
         ? defaultFocusElement()
         : defaultFocusElement
-    )
-
+    ) as Node
     if (
       element &&
       this._contextElement &&
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._contextElement.contains(element)
     ) {
       return element
     }
-
     const { firstTabbable } = this
     if (firstTabbable) {
       return firstTabbable
     }
-
     if (
       this._contextElement &&
       this.focusable.includes(this._contextElement as Element)
     ) {
       return this._contextElement
     }
-
     return null
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  updateElement(element) {
-    this._contextElement = findDOMNode(element)
+  updateElement(element: UIElement) {
+    this._contextElement = findDOMNode(element) as Node
   }
 
   focusDefaultElement() {
-    const { defaultFocusElement, shouldContainFocus, activeElement } = this
-
-    if (defaultFocusElement) {
-      defaultFocusElement.focus()
+    if (this.defaultFocusElement) {
+      ;(this.defaultFocusElement as HTMLElement).focus()
     } else {
-      if (shouldContainFocus) {
+      if (this.shouldContainFocus) {
         // Blur the active element to place focus on the document body
-        activeElement && (activeElement as HTMLElement).blur()
-
+        getActiveElement(this.doc) &&
+          (getActiveElement(this.doc) as HTMLElement).blur()
         error(
           true,
           `
@@ -194,12 +174,10 @@ class KeyboardFocusRegion {
   }
 
   blur() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
     if (this._options.shouldReturnFocus && this._focusLaterElement) {
       try {
-        // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-        this._focusLaterElement.focus()
-      } catch (e: any) {
+        ;(this._focusLaterElement as HTMLElement).focus()
+      } catch (e: unknown) {
         error(
           false,
           `
@@ -212,46 +190,35 @@ class KeyboardFocusRegion {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleDismiss = (event) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
-    this._options.onDismiss(event)
+  handleDismiss = (event: Event) => {
+    this._options.onDismiss?.(event)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleKeyDown = (event) => {
+  handleKeyDown = (event: KeyboardEvent) => {
     if (event.keyCode === keycode.codes.tab) {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       scopeTab(this._contextElement, event)
     }
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleClick = (event) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_wasDocumentClick' does not exist on typ... Remove this comment to see the full error message
+  handleClick = () => {
     this._wasDocumentClick = true
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleWindowBlur = (event) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_wasDocumentClick' does not exist on typ... Remove this comment to see the full error message
+  handleWindowBlur = () => {
     if (this._wasDocumentClick) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_wasDocumentClick' does not exist on typ... Remove this comment to see the full error message
       this._wasDocumentClick = false
       return
     }
     this._needToFocus = true
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleFocus = (event) => {
+  handleFocus = () => {
     if (this._needToFocus) {
       this._needToFocus = false
 
       if (!this._contextElement) {
         return
       }
-
       // need to see how jQuery shims document.on('focusin') so we don't need the
       // setTimeout, firefox doesn't support focusin, if it did, we could focus
       // the element outside of a setTimeout. Side-effect of this implementation
@@ -268,62 +235,55 @@ class KeyboardFocusRegion {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleFirstTabbableKeyDown = (event) => {
+  handleFirstTabbableKeyDown = (event: KeyboardEvent) => {
     if (event.keyCode === keycode.codes.tab && event.shiftKey) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
-      this._options.onBlur(event)
+      this._options.onBlur?.(event)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleLastTabbableKeyDown = (event) => {
+  handleLastTabbableKeyDown = (event: KeyboardEvent) => {
     if (event.keyCode === keycode.codes.tab && !event.shiftKey) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
-      this._options.onBlur(event)
+      this._options.onBlur?.(event)
     }
   }
 
   activate() {
     const { defaultFocusElement, shouldContainFocus } = this
-
     if (!this._active) {
       if (defaultFocusElement || shouldContainFocus) {
         if (shouldContainFocus) {
           this._listeners.push(
-            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
-            addEventListener(this.doc, 'keydown', this.handleKeyDown)
+            addEventListener(
+              this.doc,
+              'keydown',
+              this.handleKeyDown as EventListener
+            )
           )
         } else {
           this._listeners.push(
-            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
             addEventListener(
               this.firstTabbable || defaultFocusElement,
               'keydown',
-              this.handleFirstTabbableKeyDown
+              this.handleFirstTabbableKeyDown as EventListener
             )
           )
           this._listeners.push(
-            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
             addEventListener(
-              this.lastTabbable || defaultFocusElement,
+              this.lastTabbable || defaultFocusElement!,
               'keydown',
-              this.handleLastTabbableKeyDown
+              this.handleLastTabbableKeyDown as EventListener
             )
           )
         }
 
         this._listeners.push(
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
           addEventListener(this.doc, 'click', this.handleClick, true)
         )
 
         this._listeners.push(
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
-          addEventListener(this.win, 'blur', this.handleWindowBlur, false)
+          addEventListener(this.win!, 'blur', this.handleWindowBlur, false)
         )
         this._listeners.push(
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
           addEventListener(this.doc, 'focus', this.handleFocus, true)
         )
 
@@ -335,17 +295,11 @@ class KeyboardFocusRegion {
   deactivate() {
     if (this._active) {
       this._listeners.forEach((listener) => {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'remove' does not exist on type 'never'.
         listener.remove()
       })
       this._listeners = []
-
       this._raf.forEach((request) => request.cancel())
       this._raf = []
-
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_preventCloseOnDocumentClick' does not e... Remove this comment to see the full error message
-      this._preventCloseOnDocumentClick = false
-
       this._active = false
     }
   }

@@ -38,7 +38,7 @@ import { findDOMNode } from './findDOMNode'
  */
 function addEventListener(
   el: Node | Window,
-  event: string,
+  event: keyof WindowEventMap,
   handler: EventListenerOrEventListenerObject,
   capture?: boolean
 ) {

@@ -58,10 +58,8 @@ type MenuOwnProps = {
   popoverRef?: (...args: any[]) => any
   mountNode?: PositionMountNode
   constrain?: PositionConstraint
-  liveRegion?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | ((...args: any[]) => any)
+  liveRegion?: // TODO check whether this is used
+  React.ReactElement[] | React.ReactElement | ((...args: any[]) => any)
   shouldHideOnSelect?: boolean
   shouldFocusTriggerOnClose?: boolean
   type?: 'flyout'
