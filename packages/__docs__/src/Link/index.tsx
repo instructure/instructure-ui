@@ -26,8 +26,9 @@ import React from 'react'
 import { Link as UILink } from '@instructure/ui-link'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import { instructure } from '@instructure/ui-themes'
+import type { LinkProps } from '@instructure/ui-link'
 
-const Link = (props) => (
+const Link = (props: LinkProps) => (
   <InstUISettingsProvider theme={instructure}>
     <UILink {...props} />
   </InstUISettingsProvider>

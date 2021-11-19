@@ -25,9 +25,10 @@
 import React from 'react'
 import { Heading as UIHeading } from '@instructure/ui-heading'
 import { instructure } from '@instructure/ui-themes'
+import type { HeadingProps } from '@instructure/ui-heading'
 import { InstUISettingsProvider } from '@instructure/emotion'
 
-const Heading = (props) => (
+const Heading = (props: HeadingProps) => (
   <InstUISettingsProvider theme={instructure}>
     <UIHeading {...props} />
   </InstUISettingsProvider>
