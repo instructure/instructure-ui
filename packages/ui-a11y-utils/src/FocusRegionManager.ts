@@ -58,7 +58,10 @@ class FocusRegionManager {
     return
   }
 
-  static activateRegion = (element: Element, options: FocusRegionOptions) => {
+  static activateRegion = (
+    element: Element | Node,
+    options: FocusRegionOptions
+  ) => {
     const { region } = FocusRegionManager.addEntry(element, options)
     return region
   }
@@ -174,11 +177,12 @@ export {
    * ---
    * category: utilities/a11y
    * ---
-   * @module FocusManager
-   * Class for focus operations.
+   *
+   * Class for focus operations, manages multiple [FocusRegion](#FocusRegion)s.
    * - Scoping focus within a given context,
    * - Mark active element for focus later
    * - Return focus to the marked element
+   * @module FocusManager
    */
   FocusRegionManager
 }

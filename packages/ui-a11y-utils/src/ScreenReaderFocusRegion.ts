@@ -213,10 +213,11 @@ export {
    * ---
    * category: utilities/a11y
    * ---
-   * @module ScreenReaderFocusRegion
+   *
    * Utility that hides all DOM elements outside of a specified node. Used,
    * for example, in overlay components where we want to restrict the screen
-   * readers to the overlay content
+   * readers to the overlay content.
+   * @module ScreenReaderFocusRegion
    */
   ScreenReaderFocusRegion
 }

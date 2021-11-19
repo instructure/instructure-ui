@@ -34,7 +34,8 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   PropValidators,
   DrawerLayoutTrayTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  LiveRegion
 } from '@instructure/shared-types'
 
 type DrawerTrayPlacement = 'start' | 'end'
@@ -59,7 +60,7 @@ type DrawerLayoutTrayOwnProps = {
   contentRef?: (...args: any[]) => any
   mountNode?: PositionMountNode
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  liveRegion?: (() => Element) | Element[] | Element
+  liveRegion?: LiveRegion
   onDismiss?: (...args: any[]) => any
   shouldContainFocus?: boolean
   shouldReturnFocus?: boolean

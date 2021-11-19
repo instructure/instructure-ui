@@ -43,6 +43,9 @@ type DialogOwnProps = {
    */
   as?: AsElementType
   display?: 'auto' | 'block' | 'inline-block'
+  /**
+   * The aria-label to read for screen reader.
+   */
   label?: string
   /**
    * Whether or not the `<Dialog />` is open

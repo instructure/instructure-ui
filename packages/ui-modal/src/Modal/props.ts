@@ -38,7 +38,8 @@ import type {
   AsElementType,
   PropValidators,
   ModalTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  LiveRegion
 } from '@instructure/shared-types'
 import type { PortalNode } from '@instructure/ui-portal'
 import type { PositionMountNode } from '@instructure/ui-position'
@@ -61,7 +62,7 @@ type ModalOwnProps = {
   contentRef?: (...args: any[]) => any
   mountNode?: PositionMountNode
   insertAt?: 'bottom' | 'top'
-  liveRegion?: (() => Element) | Element[] | Element
+  liveRegion?: LiveRegion
   transition?: TransitionType
   onEnter?: (...args: any[]) => any
   onEntering?: (...args: any[]) => any
