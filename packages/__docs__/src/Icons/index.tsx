@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component, SyntheticEvent } from 'react'
-import PropTypes from 'prop-types'
 
 import { Flex } from '@instructure/ui-flex'
 import { Link } from '@instructure/ui-link'
@@ -48,13 +47,14 @@ import { Heading } from '../Heading'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { IconsProps, IconsState } from './props'
-import {propTypes} from './props'
+import { propTypes } from './props'
+import type { GlyphData } from '../Glyph/props'
 @withStyle(generateStyle, generateComponentTheme)
 class Icons extends Component<IconsProps, IconsState> {
   static propTypes = propTypes
   searchTimeout: any
 
-  constructor(props: any) {
+  constructor(props: IconsProps) {
     super(props)
 
     this.state = {
@@ -119,11 +119,7 @@ class Icons extends Component<IconsProps, IconsState> {
     window.location.hash = `#${o.value}`
   }
 
-  handleVariantClick = (
-    name: string,
-    variant: string,
-    glyph: Record<string, any>
-  ) => {
+  handleVariantClick = (name: string, variant: string, glyph: GlyphData) => {
     this.setState({ name, variant, glyph })
   }
 
