@@ -39,6 +39,7 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -49,9 +50,13 @@ class ProgressBar extends Component<ProgressBarProps> {
   static propTypes = propTypes
 
   static defaultProps = {
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
-    formatScreenReaderValue: ({ valueNow, valueMax }) =>
-      `${valueNow} / ${valueMax}`,
+    formatScreenReaderValue: ({
+      valueNow,
+      valueMax
+    }: {
+      valueNow: ProgressBarProps['valueNow']
+      valueMax: ProgressBarProps['valueMax']
+    }) => `${valueNow} / ${valueMax}`,
     size: 'medium',
     valueMax: 100,
     valueNow: 0,
@@ -59,9 +64,13 @@ class ProgressBar extends Component<ProgressBarProps> {
     color: 'primary',
 
     // default to showing `success` color on completion
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
-    meterColor: ({ valueNow, valueMax }) =>
-      valueNow / valueMax >= 1 ? 'success' : 'brand'
+    meterColor: ({
+      valueNow,
+      valueMax
+    }: {
+      valueNow: ProgressBarProps['valueNow']
+      valueMax: ProgressBarProps['valueMax']
+    }) => (valueNow! / valueMax! >= 1 ? 'success' : 'brand')
   }
 
   ref: Element | null = null

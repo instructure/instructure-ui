@@ -41,6 +41,7 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -54,7 +55,6 @@ class ProgressCircle extends Component<
   static propTypes = propTypes
 
   static defaultProps = {
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
     formatScreenReaderValue: ({ valueNow, valueMax }) =>
       `${valueNow} / ${valueMax}`,
     size: 'medium',
@@ -65,7 +65,6 @@ class ProgressCircle extends Component<
     shouldAnimateOnMount: false,
 
     // default to showing `success` color on completion
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
     meterColor: ({ valueNow, valueMax }) =>
       valueNow / valueMax >= 1 ? 'success' : 'brand'
   }
@@ -135,7 +134,7 @@ class ProgressCircle extends Component<
 
     const valueText =
       typeof formatScreenReaderValue === 'function' &&
-      formatScreenReaderValue({ valueNow, valueMax })
+      formatScreenReaderValue({ valueNow: valueNow!, valueMax: valueMax! })
     // consolidating the label and aria-valuetext to put in aria-label because
     // NVDA does not read aria-valuetext: https://github.com/nvaccess/nvda/issues/913
     // But leaving aria-valuetext because JAWS ignores aria-label
