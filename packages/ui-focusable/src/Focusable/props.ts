@@ -28,6 +28,7 @@ import {
   CElement,
   DOMElement,
   FunctionComponentElement,
+  ReactComponentElement,
   ReactElement
 } from 'react'
 
@@ -49,11 +50,13 @@ export type FocusableRenderOptions = {
 
 type FocusableRenderFunction = (
   opts: FocusableRenderOptions
-) =>
+) => (
   | ReactElement
+  | ReactComponentElement<any>
   | DOMElement<any, any>
   | CElement<any, any>
   | FunctionComponentElement<any>
+) & { ref?: (args: any[]) => unknown }
 
 type FocusableOwnProps = {
   /**
@@ -79,5 +82,10 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = ['children', 'render']
 
-export type { FocusableProps }
+type FocusableState = {
+  focused: boolean
+  focusable?: HTMLElement
+}
+
+export type { FocusableProps, FocusableState }
 export { propTypes, allowedProps }
