@@ -61,10 +61,20 @@ type FocusableRenderFunction = (
 type FocusableOwnProps = {
   /**
    * The function called on each render. Identical to `render()`
+   * @param {Object} opts - Render options
+   * @param {boolean} opts.focused - Is the element focused (via keyboard only)?
+   * @param {HTMLElement} opts.focusable - The focusable element.
+   * @param {boolean} opts.focusVisible - Whether the focus state should be visible or not.
+   * @param {function} opts.attachRef - Used internally to get a reference to the object.
    */
   children?: FocusableRenderFunction
   /**
-   * The function called on each render. Identical to `children()`
+   * The function called on each render. Identical to `children()`.
+   * @param {Object} opts - Render options
+   * @param {boolean} opts.focused - Is the element focused (via keyboard only)?
+   * @param {HTMLElement} opts.focusable - The focusable element.
+   * @param {boolean} opts.focusVisible - Whether the focus state should be visible or not.
+   * @param {function} opts.attachRef - Used internally to get a reference to the object.
    */
   render?: FocusableRenderFunction
 }
