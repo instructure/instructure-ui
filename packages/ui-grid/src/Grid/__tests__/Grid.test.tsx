@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { Grid } from '../index'
 
@@ -44,19 +44,20 @@ describe('<Grid />', async () => {
   })
 
   it('should pass aria and role attributes to underlying DOM elements', async () => {
-    await mount(
+    const subject = await mount(
       <Grid role="grid" aria-hidden="true">
         <Grid.Row aria-live="polite" role="presentation">
-          <Grid.Col role="presentation">Foo</Grid.Col>
+          <Grid.Col aria-disabled="true">Foo</Grid.Col>
         </Grid.Row>
       </Grid>
     )
 
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'find'.
-    expect(await find('[role="grid"][aria-hidden]')).to.exist()
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'find'.
-    expect(await find('[role="presentation"][aria-live="polite"]')).to.exist()
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'find'.
-    expect(await find('[role="presentation"][aria-disabled]')).to.exist()
+    const grid = within(subject.getDOMNode())
+
+    expect(await grid.find('[role="grid"][aria-hidden]')).to.exist()
+    expect(
+      await grid.find('[role="presentation"][aria-live="polite"]')
+    ).to.exist()
+    expect(await grid.find('[aria-disabled]')).to.exist()
   })
 })

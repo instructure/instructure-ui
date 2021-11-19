@@ -26,6 +26,8 @@ import type { GridTheme } from '@instructure/shared-types'
 import type { GridBreakpoints } from '../GridTypes'
 import type { GridColProps, GridColStyle } from './props'
 
+type BreakPoints = NonNullable<GridBreakpoints>
+
 /**
  * ---
  * private: true
@@ -111,31 +113,29 @@ const generateStyle = (
     return breakpoints.slice(breakpoints.indexOf(startAt!))
   }
 
-  const breakpointIsEnabled = (breakpoint: GridBreakpoints) => {
+  const breakpointIsEnabled = (breakpoint: BreakPoints) => {
     return enabledBreakpoints().includes(breakpoint)
   }
 
-  const getColSize = (breakpoint: GridBreakpoints) => {
+  const getColSize = (breakpoint: BreakPoints) => {
     let { width } = props
 
     if (!width) return
 
     if (width && typeof width === 'object') {
-      // @ts-expect-error TODO: type when typing component
-      width = width[breakpoint]
+      width = width[breakpoint === 'x-large' ? 'xLarge' : breakpoint]
     }
 
     return width
   }
 
-  const getColOffset = (breakpoint: GridBreakpoints) => {
+  const getColOffset = (breakpoint: BreakPoints) => {
     let { offset } = props
 
     if (!offset) return
 
     if (offset && typeof offset === 'object') {
-      // @ts-expect-error TODO: type when typing component
-      offset = offset[breakpoint]
+      offset = offset[breakpoint === 'x-large' ? 'xLarge' : breakpoint]
     }
 
     return offset
@@ -170,10 +170,10 @@ const generateStyle = (
     }
   }
 
-  const getStartAtVariants = (breakpoint: GridBreakpoints) =>
+  const getStartAtVariants = (breakpoint: BreakPoints) =>
     !!startAt && startAt === breakpoint ? { ...getStartGridColumnStyle() } : {}
 
-  const getGridColumnsForBreakpoint = (breakpoint: GridBreakpoints) => {
+  const getGridColumnsForBreakpoint = (breakpoint: BreakPoints) => {
     const size = getColSize(breakpoint)
     const offset = getColOffset(breakpoint)
 
@@ -185,7 +185,7 @@ const generateStyle = (
       : {}
   }
 
-  const getBreakpointStyles = (breakpoint: GridBreakpoints) => ({
+  const getBreakpointStyles = (breakpoint: BreakPoints) => ({
     ...getStartAtVariants(breakpoint),
     ...getGridColumnsForBreakpoint(breakpoint)
   })

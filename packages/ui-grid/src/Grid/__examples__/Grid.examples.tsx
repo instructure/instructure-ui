@@ -24,6 +24,9 @@
 import React from 'react'
 import { Grid } from '../index'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { GridProps } from '../props'
+
 const text1 =
   'Occaecat quis qui anim quis cillum eu. Exercitation consectetur aute dolore adipisicing consectetur consectetur aliquip.'
 const text2 =
@@ -51,8 +54,7 @@ export default {
     hAlign: ['start', 'center', 'end', 'space-around', 'space-between'],
     vAlign: ['top', 'middle', 'bottom']
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: GridProps) => {
     return (
       props.startAt ||
       props.visualDebug ||
@@ -60,4 +62,4 @@ export default {
       (props.colSpacing && props.colSpacing !== 'small')
     )
   }
-}
+} as StoryConfig<GridProps>

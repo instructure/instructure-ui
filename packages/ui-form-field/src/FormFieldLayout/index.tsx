@@ -167,9 +167,8 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     return this.hasMessages ? (
       <Grid.Row>
         <Grid.Col
-          offset={this.inlineContainerAndLabel ? null : 3}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-          textAlign={this.inlineContainerAndLabel ? 'end' : null}
+          offset={this.inlineContainerAndLabel ? undefined : 3}
+          textAlign={this.inlineContainerAndLabel ? 'end' : undefined}
         >
           <FormFieldMessages
             // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
@@ -211,7 +210,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
           <Grid.Row>
             {this.renderLabel()}
             <Grid.Col
-              width={this.inlineContainerAndLabel ? 'auto' : null}
+              width={this.inlineContainerAndLabel ? 'auto' : undefined}
               elementRef={this.handleInputContainerRef}
             >
               {children}

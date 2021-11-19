@@ -47,6 +47,7 @@ import type { GridRowProps } from './props'
 parent: Grid
 id: Grid.Row
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class GridRow extends Component<GridRowProps> {
@@ -66,14 +67,11 @@ class GridRow extends Component<GridRowProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   renderChildren() {
@@ -83,8 +81,8 @@ class GridRow extends Component<GridRowProps> {
       if (matchComponentTypes(child, [GridCol])) {
         return safeCloneElement(child as ReactElement, {
           ...pickProps(props, GridRow.allowedProps),
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          ...child.props /* child props should override parent */,
+          ...(child as ReactElement)
+            .props /* child props should override parent */,
           isLastRow: props.isLastRow,
           isLastCol: index + 1 === Children.count(this.props.children)
         })
