@@ -40,10 +40,26 @@ import type {
 
 type InlineListItemOwnProps = {
   children: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  /**
+   * Inherits delimiter from the parent InlineList component
+   */
   delimiter?: 'none' | 'pipe' | 'slash' | 'arrow'
   size?: 'small' | 'medium' | 'large'
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+  /**
+   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+   */
   padding?: Spacing
+  /**
+   * Inherits itemSpacing from the parent InlineList component
+   */
   spacing?:
     | 'none'
     | 'xxx-small'
@@ -54,6 +70,9 @@ type InlineListItemOwnProps = {
     | 'large'
     | 'x-large'
     | 'xx-large'
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
 }
 
@@ -69,26 +88,10 @@ type InlineListItemStyle = ComponentStyle<'inlineListItem' | 'delimiter'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  /**
-   * Inherits delimiter from the parent InlineList component
-   */
   delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-   */
   padding: ThemeablePropTypes.spacing,
-  /**
-   * Inherits itemSpacing from the parent InlineList component
-   */
   spacing: PropTypes.oneOf([
     'none',
     'xxx-small',
@@ -100,9 +103,6 @@ const propTypes: PropValidators<PropKeys> = {
     'x-large',
     'xx-large'
   ]),
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 
