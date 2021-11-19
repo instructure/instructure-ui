@@ -75,7 +75,7 @@ class TreeBrowser extends Component<TreeBrowserProps> {
     // @ts-expect-error ts-migrate(6133) FIXME: 'collection' is declared but its value is never re... Remove this comment to see the full error message
     onCollectionToggle: function (collection) {},
     // @ts-expect-error ts-migrate(6133) FIXME: 'foo' and 'bar' are declared but their values are never read.
-    sortOrder: function (foo: any, bar: any) {
+    sortOrder: function (obj1, obj2) {
       return 0
     }
   }
