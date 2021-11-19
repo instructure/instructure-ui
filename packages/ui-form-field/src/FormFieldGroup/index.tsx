@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 
 import { Grid } from '@instructure/ui-grid'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
@@ -97,8 +97,11 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
     return Children.map(this.props.children, (child, index) => {
       return child ? (
         <Grid.Col
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-          width={child.props && child.props.width ? 'auto' : null}
+          width={
+            (child as ReactElement).props && (child as ReactElement).props.width
+              ? 'auto'
+              : undefined
+          }
           key={index}
         >
           {child}

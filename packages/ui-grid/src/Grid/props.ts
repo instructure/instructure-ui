@@ -37,6 +37,9 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { GridBreakpoints } from '../GridTypes'
 
 type GridOwnProps = {
+  /**
+   * One of: `Grid.Row`, `ScreenReaderContent`
+   */
   children?: React.ReactNode // TODO: oneOf([GridRow, ScreenReaderContent])
   colSpacing?: 'none' | 'small' | 'medium' | 'large'
   rowSpacing?: 'none' | 'small' | 'medium' | 'large'

@@ -33,7 +33,8 @@ import type {
 import type { GridBreakpoints } from '../GridTypes'
 
 // TODO: get numcols from theme config
-const COL_WIDTHS = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+const COL_WIDTHS: ColWidths[] = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+type ColWidths = 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 
 type GridColOwnProps = {
   children?: React.ReactNode
@@ -45,23 +46,26 @@ type GridColOwnProps = {
   startAt?: GridBreakpoints
   visualDebug?: boolean
   width?:
-    | any
+    | ColWidths
     | {
-        small?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        medium?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        large?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        xLarge?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
+        small?: ColWidths
+        medium?: ColWidths
+        large?: ColWidths
+        xLarge?: ColWidths
       }
   offset?:
-    | any
+    | ColWidths
     | {
-        small?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        medium?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        large?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
-        xLarge?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
+        small?: ColWidths
+        medium?: ColWidths
+        large?: ColWidths
+        xLarge?: ColWidths
       }
   isLastRow?: boolean
   isLastCol?: boolean
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
 }
 
@@ -110,9 +114,6 @@ const propTypes: PropValidators<PropKeys> = {
   ]),
   isLastRow: PropTypes.bool,
   isLastCol: PropTypes.bool,
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 

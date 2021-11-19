@@ -47,6 +47,7 @@ import type { GridProps } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Grid extends Component<GridProps> {
@@ -74,14 +75,11 @@ class Grid extends Component<GridProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   renderChildren() {
@@ -92,8 +90,8 @@ class Grid extends Component<GridProps> {
       if (matchComponentTypes(child, [GridRow])) {
         return safeCloneElement(child as ReactElement, {
           ...pickProps(props, Grid.allowedProps),
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-          ...child.props /* child props should override parent */,
+          ...(child as ReactElement)
+            .props /* child props should override parent */,
           isLastRow: index + 1 === children.length
         })
       } else {
