@@ -61,14 +61,13 @@ class CodeEditor extends Component<CodeEditorProps> {
     }
   }
   private readonly _id: string
-  private codeMirror?: CodeMirror
+  private codeMirror: CodeMirror | null = null
+  ref: Element | null = null
 
   constructor(props: CodeEditorProps) {
     super(props)
     this._id = uid('CodeEditor')
   }
-
-  ref: Element | null = null
 
   handleRef = (el: Element | null) => {
     this.ref = el
@@ -136,7 +135,7 @@ class CodeEditor extends Component<CodeEditorProps> {
               onChange?.(value)
             }}
             ref={(el) => {
-              this.codeMirror = el ? el : undefined
+              this.codeMirror = el ? el : null
             }}
           />
         </label>
