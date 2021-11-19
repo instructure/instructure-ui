@@ -32,14 +32,9 @@ import {
 } from '@instructure/ui-dom-utils'
 import { logWarn as warn } from '@instructure/console'
 
-import { propTypes, allowedProps } from './props'
+import { propTypes, allowedProps, FocusableState } from './props'
 import type { FocusableProps } from './props'
 import { createChainedFunction } from '@instructure/ui-utils'
-
-type FocusableState = {
-  focused: boolean
-  focusable?: HTMLElement
-}
 
 type HTMLElementWithType = HTMLElement & {
   type?: keyof typeof Focusable.inputTypes
@@ -81,10 +76,10 @@ class Focusable extends Component<FocusableProps, FocusableState> {
     remove(): void
   } | null = null
 
-  state = {
+  state: FocusableState = {
     focused: false,
     focusable: undefined
-  } as FocusableState
+  }
 
   componentDidMount() {
     const { focusable, focused } = this
@@ -261,13 +256,9 @@ class Focusable extends Component<FocusableProps, FocusableState> {
         focusVisible: this.isFocusVisible(focused, focusable),
         attachRef: this.attachRef
       })
-      type ElementWithRef = { ref?: () => unknown }
       return cloneElement(rendered, {
-        ref: (rendered as ElementWithRef).ref
-          ? createChainedFunction(
-              (rendered as ElementWithRef).ref,
-              this.attachRef
-            )
+        ref: rendered.ref
+          ? createChainedFunction(rendered.ref, this.attachRef)
           : this.attachRef
       })
     } else {
