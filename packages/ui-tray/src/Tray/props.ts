@@ -31,7 +31,8 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
   PropValidators,
-  TrayTheme
+  TrayTheme,
+  LiveRegion
 } from '@instructure/shared-types'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 
@@ -50,7 +51,7 @@ type TrayOwnProps = {
   onDismiss?: (...args: any[]) => any
   mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func])
   insertAt?: 'bottom' | 'top'
-  liveRegion?: (() => Element) | Element[] | Element
+  liveRegion?: LiveRegion
   onTransition?: (...args: any[]) => any
   onEnter?: (...args: any[]) => any
   onEntering?: (...args: any[]) => any

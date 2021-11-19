@@ -32,3 +32,10 @@ export type UIElement =
   | React.Component
   | (() => Node | Window | null | undefined)
   | null
+
+/**
+ * A DOM element or an array of DOM elements or a method that returns a DOM
+ * element, that represents the part of the DOM that is not hidden from the
+ * screen reader
+ */
+export type LiveRegion = (() => Element) | Element[] | Element

@@ -125,9 +125,8 @@ class KeyboardFocusRegion {
     ) {
       return element
     }
-    const { firstTabbable } = this
-    if (firstTabbable) {
-      return firstTabbable
+    if (this.firstTabbable) {
+      return this.firstTabbable
     }
     if (
       this._contextElement &&
@@ -153,9 +152,9 @@ class KeyboardFocusRegion {
         error(
           true,
           `
-          [KeyboardFocusRegion] No \`defaultFocusElement\` was provided and \`shouldContainFocus\`
-          was set to \`true\`. Focus has been moved to the document body instead.
-          `
+          [KeyboardFocusRegion] No \`defaultFocusElement\` was provided and
+          \`shouldContainFocus\` was set to \`true\` or \`keyboard\`. Focus has
+          been moved to the document body instead.`
         )
       }
     }
@@ -188,10 +187,6 @@ class KeyboardFocusRegion {
       }
       this._focusLaterElement = null
     }
-  }
-
-  handleDismiss = (event: Event) => {
-    this._options.onDismiss?.(event)
   }
 
   handleKeyDown = (event: KeyboardEvent) => {
@@ -311,11 +306,12 @@ export {
    * ---
    * category: utilities/a11y
    * ---
-   * @module KeyboardFocusRegion
+   *
    * Class for focus operations.
    * - Scoping focus within a given context (DOM node),
    * - Mark active element for focus later
    * - Return focus to the marked element
+   * @module KeyboardFocusRegion
    */
   KeyboardFocusRegion
 }

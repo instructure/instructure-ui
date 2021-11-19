@@ -27,7 +27,6 @@ import keycode from 'keycode'
 import {
   contains,
   addEventListener,
-  getFrameDocumentSafe,
   ownerDocument,
   findTabbable
 } from '@instructure/ui-dom-utils'
@@ -148,8 +147,7 @@ class FocusRegion {
 
         Array.from(doc.getElementsByTagName('iframe')).forEach((el) => {
           // listen for mouseup events on any iframes in the document
-          const frameDoc = getFrameDocumentSafe(el)
-
+          const frameDoc = el.contentDocument
           if (frameDoc) {
             this._listeners.push(
               addEventListener(frameDoc, 'mouseup', (event) => {
@@ -207,11 +205,13 @@ export {
    * ---
    * category: utilities/a11y
    * ---
-   * @module FocusRegion
-   * Class for focus operations.
+   *
+   * Class for focus operations, manages [ScreenReaderFocusRegion](#ScreenReaderFocusRegion)
+   * and [KeyboardFocusRegion](#KeyboardFocusRegion) for the given DOM element.
    * - Scoping focus within a given context (DOM node),
    * - Mark active element for focus later
    * - Return focus to the marked element
+   * @module FocusRegion
    */
   FocusRegion
 }
