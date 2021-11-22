@@ -27,14 +27,12 @@ import { expect, mount, within } from '@instructure/ui-test-utils'
 import { Page } from '../index'
 
 describe('<Page />', async () => {
-  // @ts-expect-error ts-migrate(7034) FIXME: Variable '_input' implicitly has type 'any' in som... Remove this comment to see the full error message
-  let _input
+  let _input: HTMLInputElement | null
 
   it('should render with a function as child', async () => {
     const subject = await mount(
       <Page
         defaultFocusElement={() => {
-          // @ts-expect-error ts-migrate(7005) FIXME: Variable '_input' implicitly has an 'any' type.
           return _input
         }}
       >
@@ -61,7 +59,6 @@ describe('<Page />', async () => {
     const subject = await mount(
       <Page
         defaultFocusElement={() => {
-          // @ts-expect-error ts-migrate(7005) FIXME: Variable '_input' implicitly has an 'any' type.
           return _input
         }}
       >

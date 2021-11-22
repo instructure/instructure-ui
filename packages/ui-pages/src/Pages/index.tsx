@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component, createContext, ReactElement } from 'react'
+import React, { Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { containsActiveElement, findTabbable } from '@instructure/ui-dom-utils'
@@ -36,18 +36,18 @@ import { Page } from './Page'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { PagesProps } from './props'
-import { allowedProps, propTypes } from './props'
 
-export const PagesContext = createContext({
-  history: [],
-  navigateToPreviousPage: () => {}
-})
+import { PagesContext } from './PagesContext'
+import type { PagesContextType } from './PagesContext'
+
+import { allowedProps, propTypes } from './props'
+import type { PagesProps } from './props'
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Pages extends Component<PagesProps> {
@@ -57,15 +57,22 @@ class Pages extends Component<PagesProps> {
   static propTypes = propTypes
 
   static defaultProps = {
-    children: null,
-    defaultPageIndex: null,
-    activePageIndex: 0,
-    onPageIndexChange: function () {}
+    activePageIndex: 0
   }
 
   static Page = Page
 
-  _timeouts = []
+  _timeouts: ReturnType<typeof setTimeout>[] = []
+  _history: PagesContextType['history']
+  _activePage: Page | null = null
+  _contentId: string
+
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    this.ref = el
+  }
+
   get _contentElement() {
     console.warn(
       '_contentElement property is deprecated and will be removed in v9, please use ref instead'
@@ -73,24 +80,16 @@ class Pages extends Component<PagesProps> {
 
     return this.ref
   }
-  ref: Element | null = null
 
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
-
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: PagesProps) {
     super(props)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
     this._history = [
       typeof props.defaultPageIndex === 'number'
         ? props.defaultPageIndex
-        : props.activePageIndex
+        : props.activePageIndex!
     ]
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_contentId' does not exist on type 'Page... Remove this comment to see the full error message
     this._contentId = uid('Pages')
   }
 
@@ -99,32 +98,26 @@ class Pages extends Component<PagesProps> {
   }
 
   handleBackButtonClick = () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
     const oldPageIndex = this._history.pop()
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
     const newPageIndex = this._history[this._history.length - 1]
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onPageIndexChange(newPageIndex || 0, oldPageIndex)
+
+    this.props.onPageIndexChange?.(newPageIndex || 0, oldPageIndex)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nextProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentWillReceiveProps(nextProps, nextContext) {
+  // TODO: componentWillReceiveProps has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+  componentWillReceiveProps(nextProps: PagesProps) {
     if (
       nextProps &&
       typeof nextProps.activePageIndex === 'number' &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
       (this._history.length === 0 ||
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
         nextProps.activePageIndex !== this._history[this._history.length - 1])
     ) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
       this._history.push(nextProps.activePageIndex)
     }
   }
 
   componentDidUpdate() {
     this._timeouts.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       setTimeout(() => {
         !this.focused && this.focus()
       }, 0)
@@ -142,9 +135,7 @@ class Pages extends Component<PagesProps> {
 
   focus() {
     this._timeouts.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       setTimeout(() => {
-        // @ts-expect-error ts-migrate(2551) FIXME: Property '_activePage' does not exist on type 'Pag... Remove this comment to see the full error message
         const activePage = this._activePage
 
         // Attempt to focus active page
@@ -155,8 +146,7 @@ class Pages extends Component<PagesProps> {
           const tabbable = findTabbable(this.ref)
           const element = tabbable && tabbable[0]
 
-          // @ts-expect-error ts-migrate(2554) FIXME:
-          element && element.focus()
+          element && (element as HTMLElement).focus()
         }
       })
     )
@@ -166,16 +156,13 @@ class Pages extends Component<PagesProps> {
     const { activePageIndex, children } = this.props
     const pages = React.Children.toArray(children)
     const activePage =
-      activePageIndex < pages.length ? pages[activePageIndex] : null
+      activePageIndex! < pages.length ? pages[activePageIndex!] : null
 
-    // @ts-expect-error ts-migrate(2555) FIXME
-    error(activePage, '[Pages] Invalid `activePageIndex`.')
+    error(!!activePage, '[Pages] Invalid `activePageIndex`.')
 
     return activePage
       ? safeCloneElement(activePage as ReactElement, {
-          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-          ref: (el) => {
-            // @ts-expect-error ts-migrate(2551) FIXME: Property '_activePage' does not exist on type 'Pag... Remove this comment to see the full error message
+          ref: (el: Page | null) => {
             this._activePage = el
           }
         })
@@ -186,7 +173,6 @@ class Pages extends Component<PagesProps> {
     return this.activePage ? (
       <PagesContext.Provider
         value={{
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
           history: this._history,
           navigateToPreviousPage: () => {
             this.handleBackButtonClick()
@@ -195,7 +181,6 @@ class Pages extends Component<PagesProps> {
       >
         <View
           as="div"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: any; as: string; id: any; css: a... Remove this comment to see the full error message
           id={this._contentId}
           css={this.props.styles?.pages}
           margin={this.props.margin}

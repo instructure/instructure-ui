@@ -28,13 +28,32 @@ import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type { PropValidators, UIElement } from '@instructure/shared-types'
+
+import type { PagesContextType } from '../PagesContext'
 
 type PagesPageOwnProps = {
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
+  /**
+   * The children to be rendered
+   */
+  children?:
+    | React.ReactNode
+    | ((
+        history: PagesContextType['history'],
+        navigateToPreviousPage: PagesContextType['navigateToPreviousPage']
+      ) => React.ReactNode)
+
+  /**
+   * An element or a function returning an element to focus by default
+   */
+  defaultFocusElement?: UIElement | (() => UIElement)
+
+  /**
+   * Set the padding using familiar CSS shorthand
+   */
   padding?: Spacing
+
   textAlign?: 'start' | 'center' | 'end'
-  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
 }
 type PropKeys = keyof PagesPageOwnProps
 
@@ -43,21 +62,9 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type PagesPageProps = PagesPageOwnProps
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The children to be rendered
-   */
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-
-  /**
-   * An element or a function returning an element to focus by default
-   */
   defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-
-  /**
-   * Set the padding using familiar CSS shorthand
-   */
   padding: ThemeablePropTypes.spacing,
-
   textAlign: PropTypes.oneOf(['start', 'center', 'end'])
 }
 

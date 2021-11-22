@@ -89,8 +89,7 @@ describe('<Pages />', async () => {
       <Pages activePageIndex={0} onPageIndexChange={onPageIndexChange}>
         <Page key={0}>{() => 'Foo'}</Page>
         <Page key={1}>
-          {/* @ts-expect-error ts-migrate(6133) FIXME: 'history' is declared but its value is never read. */}
-          {(history, navigate) => <button onClick={navigate}>Back</button>}
+          {(_history, navigate) => <button onClick={navigate}>Back</button>}
         </Page>
       </Pages>
     )
