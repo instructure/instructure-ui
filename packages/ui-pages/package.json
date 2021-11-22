@@ -34,11 +34,9 @@
     "@instructure/console": "8.12.0",
     "@instructure/emotion": "8.12.0",
     "@instructure/shared-types": "8.12.0",
-    "@instructure/ui-a11y-utils": "8.12.0",
     "@instructure/ui-dom-utils": "8.12.0",
     "@instructure/ui-prop-types": "8.12.0",
     "@instructure/ui-react-utils": "8.12.0",
-    "@instructure/ui-utils": "8.12.0",
     "@instructure/ui-view": "8.12.0",
     "@instructure/uid": "8.12.0",
     "prop-types": "^15"

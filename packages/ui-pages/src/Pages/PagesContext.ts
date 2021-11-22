@@ -22,16 +22,18 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  presets: [
-    [
-      require('@instructure/ui-babel-preset'),
-      {
-        coverage: Boolean(process.env.COVERAGE),
-        esModules: Boolean(process.env.ES_MODULES),
-        removeConsole: process.env.NODE_ENV === 'production',
-        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
-      }
-    ]
-  ]
+import { createContext } from 'react'
+
+type PagesContextType = {
+  history: (number | undefined)[]
+  navigateToPreviousPage: () => void
 }
+
+const PagesContext = createContext<PagesContextType>({
+  history: [],
+  navigateToPreviousPage: () => {}
+})
+
+export default PagesContext
+export { PagesContext }
+export type { PagesContextType }

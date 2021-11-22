@@ -37,11 +37,29 @@ import type {
 import type { PropValidators, PagesTheme } from '@instructure/shared-types'
 
 type PagesOwnProps = {
-  defaultPageIndex?: number
-  activePageIndex?: any // TODO: controllable( PropTypes.number, 'onPageIndexChange', 'defaultPageIndex' )
-  onPageIndexChange?: (...args: any[]) => any
-  margin?: Spacing
+  /**
+   * Children are type of `<Pages.Page>`
+   */
   children?: React.ReactNode // TODO: oneOf([Page])
+
+  defaultPageIndex?: number
+
+  /**
+   * The currently active page index
+   */
+  activePageIndex?: number // TODO: controllable( PropTypes.number, 'onPageIndexChange', 'defaultPageIndex' )
+
+  /**
+   * Event handler fired anytime page index has changed due to back button being clicked
+   */
+  onPageIndexChange?: (newPageIndex: number, oldPageIndex?: number) => void
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin?: Spacing
 }
 
 type PropKeys = keyof PagesOwnProps
@@ -54,28 +72,13 @@ type PagesStyle = ComponentStyle<'pages'>
 
 const propTypes: PropValidators<PropKeys> = {
   children: Children.oneOf([Page]),
-
   defaultPageIndex: PropTypes.number,
-
-  /**
-   * The currently active page index
-   */
   activePageIndex: controllable(
     PropTypes.number,
     'onPageIndexChange',
     'defaultPageIndex'
   ),
-
-  /**
-   * Event handler fired anytime page index has changed due to back button being clicked
-   */
   onPageIndexChange: PropTypes.func,
-
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing
 }
 

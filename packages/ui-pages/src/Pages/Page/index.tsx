@@ -28,15 +28,18 @@ import PropTypes from 'prop-types'
 import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
 import { View } from '@instructure/ui-view'
-import { PagesContext } from '..'
-import type { PagesPageProps } from './props'
+
+import { PagesContext } from '../PagesContext'
+
 import { allowedProps, propTypes } from './props'
+import type { PagesPageProps } from './props'
 
 /**
 ---
 parent: Pages
 id: Pages.Page
 ---
+@tsProps
 **/
 class Page extends Component<PagesPageProps> {
   static readonly componentId = 'Pages.Page'
@@ -76,18 +79,16 @@ class Page extends Component<PagesPageProps> {
     }
 
     if (defaultFocusElement) {
-      defaultFocusElement = findDOMNode(defaultFocusElement) as any
+      defaultFocusElement = findDOMNode(defaultFocusElement)
     }
 
     if (!defaultFocusElement) {
       const tabbable = findTabbable(this.ref)
-      // @ts-expect-error ts-migrate(2554) FIXME:
       defaultFocusElement = tabbable && tabbable[0]
     }
 
     error(
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'ReactElem... Remove this comment to see the full error message
-      defaultFocusElement && defaultFocusElement.focus,
+      defaultFocusElement && !!(defaultFocusElement as HTMLElement).focus,
       '[Page] A default focusable element is required or focus will be lost.'
     )
 
@@ -97,14 +98,12 @@ class Page extends Component<PagesPageProps> {
   get focusable() {
     const element = this.defaultFocusElement
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'ReactElem... Remove this comment to see the full error message
-    return element && typeof element.focus === 'function'
+    return !!element && typeof (element as HTMLElement).focus === 'function'
   }
 
   focus() {
     if (this.focusable) {
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      this.defaultFocusElement.focus()
+      ;(this.defaultFocusElement as HTMLElement).focus()
     }
   }
 
