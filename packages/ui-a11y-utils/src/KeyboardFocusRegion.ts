@@ -87,19 +87,19 @@ class KeyboardFocusRegion {
     return findTabbable(this._contextElement) || []
   }
 
-  get firstTabbable() {
+  get firstTabbable(): Element | undefined {
     return this.tabbable[0]
   }
 
-  get lastTabbable() {
+  get lastTabbable(): Element | undefined {
     return this.tabbable.pop()
   }
 
-  get firstFocusable() {
+  get firstFocusable(): Element | undefined {
     return this.focusable[0]
   }
 
-  get lastFocusable() {
+  get lastFocusable(): Element | undefined {
     return this.focusable.pop()
   }
 
@@ -257,7 +257,7 @@ class KeyboardFocusRegion {
         } else {
           this._listeners.push(
             addEventListener(
-              this.firstTabbable || defaultFocusElement,
+              this.firstTabbable || defaultFocusElement!,
               'keydown',
               this.handleFirstTabbableKeyDown as EventListener
             )
