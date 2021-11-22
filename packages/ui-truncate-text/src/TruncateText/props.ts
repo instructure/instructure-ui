@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import type {
@@ -31,17 +31,52 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
-type TruncateTextOwnProps = {
-  children: React.ReactNode
-  maxLines?: string | number
-  position?: 'end' | 'middle'
+type CleanDataOptions = {
+  /**
+   * Add ellipsis after words or after any character. Default is 'character'
+   */
   truncate?: 'character' | 'word'
+  /**
+   * A string to use as the ellipsis
+   */
   ellipsis?: string
+  /**
+   * Characters to ignore at truncated end of string. Default is ' ', '.', ','
+   */
   ignore?: string[]
-  debounce?: number
-  onUpdate?: (...args: any[]) => any
-  shouldTruncateWhenInvisible?: boolean
 }
+
+type TruncateTextCommonProps = {
+  /**
+   * Number of lines to allow before truncating. `auto` will fit to parent.
+   * Default is 1.
+   */
+  maxLines?: 'auto' | number
+  /**
+   * Where to place the ellipsis within the string. Default is 'end'
+   */
+  position?: 'end' | 'middle'
+  /**
+   * Force truncation of invisible elements (hack; will be removed in favor
+   * of a better fix)
+   */
+  shouldTruncateWhenInvisible?: boolean
+} & CleanDataOptions
+
+type TruncateTextOwnProps = {
+  /**
+   * The content to be truncated.
+   */
+  children: React.ReactNode
+  /**
+   * Debounce delay in milliseconds
+   */
+  debounce?: number
+  /**
+   * Callback when truncated text has changed
+   */
+  onUpdate?: (isTruncated: boolean, truncatedText?: string) => void
+} & TruncateTextCommonProps
 
 type PropKeys = keyof TruncateTextOwnProps
 
@@ -54,43 +89,22 @@ type TruncateTextStyle = ComponentStyle<
   'truncateText' | 'auto' | 'spacer' | 'lineHeight'
 >
 
+type TruncateTextState = {
+  isTruncated: boolean
+  needsSecondRender: boolean
+  truncatedElement?: ReactNode
+  truncatedText?: string
+}
+
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The content to be truncated.
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * Number of lines to allow before truncating. `auto` will fit to parent
-   */
   maxLines: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Where to place the ellipsis within the string
-   */
   position: PropTypes.oneOf(['end', 'middle']),
-  /**
-   * Add ellipsis after words or after any character
-   */
   truncate: PropTypes.oneOf(['character', 'word']),
-  /**
-   * A string to use as the ellipsis
-   */
   ellipsis: PropTypes.string,
-  /**
-   * Characters to ignore at truncated end of string
-   */
   ignore: PropTypes.arrayOf(PropTypes.string),
-  /**
-   * Debounce delay in milliseconds
-   */
   debounce: PropTypes.number,
-  /**
-   * Callback when truncated text has changed
-   */
   onUpdate: PropTypes.func,
-  /**
-   * Force truncation of invisible elements (hack; will be removed in favor
-   * of a better fix)
-   */
   shouldTruncateWhenInvisible: PropTypes.bool
 }
 
@@ -106,5 +120,11 @@ const allowedProps: AllowedPropKeys = [
   'shouldTruncateWhenInvisible'
 ]
 
-export type { TruncateTextProps, TruncateTextStyle }
+export type {
+  CleanDataOptions,
+  TruncateTextCommonProps,
+  TruncateTextProps,
+  TruncateTextState,
+  TruncateTextStyle
+}
 export { propTypes, allowedProps }

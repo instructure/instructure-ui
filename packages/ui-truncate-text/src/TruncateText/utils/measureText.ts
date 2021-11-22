@@ -34,8 +34,7 @@ import { getComputedStyle } from '@instructure/ui-dom-utils'
  * @param {DOMNode[]} nodes Array of DOM nodes.
  * @param {DOMNode} parentNode The node to inherit default styles from.
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nodes' implicitly has an 'any' type.
-function measureText(nodes, parentNode) {
+function measureText(nodes: Node[], parentNode?: Node) {
   let width = 0
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i]
@@ -44,8 +43,7 @@ function measureText(nodes, parentNode) {
   return width
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'string' implicitly has an 'any' type.
-function measure(string, domNode) {
+function measure(string: string | null, domNode?: Node) {
   const style = getComputedStyle(domNode)
   // we use a canvas in a doc fragment to prevent having to render the string full width in the DOM
   const canvas = document.createElement('canvas')

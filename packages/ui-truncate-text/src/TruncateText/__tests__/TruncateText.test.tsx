@@ -46,12 +46,12 @@ describe('<TruncateText />', async () => {
   })
 
   it('should recalculate when parent width changes', async () => {
-    let container
+    let container: HTMLElement
 
     const subject = await mount(
       <div
         style={{ width: '200px' }}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
+        // @ts-expect-error this is managed by the testing framework
         componentRef={(el) => {
           container = el
         }}
@@ -63,21 +63,17 @@ describe('<TruncateText />', async () => {
     const renderedContent = within(subject.getDOMNode())
     const text1 = renderedContent.getTextContent()
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    container.style.width = '100px'
+    container!.style.width = '100px'
 
-    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'text2' implicitly has type 'any' in some... Remove this comment to see the full error message
-    let text2
+    let text2: string | null
     await wait(() => {
       text2 = renderedContent.getTextContent()
       expect(text1).to.not.equal(text2)
     })
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    container.style.width = '400px'
+    container!.style.width = '400px'
 
     await wait(() => {
-      // @ts-expect-error ts-migrate(7005) FIXME: Variable 'text2' implicitly has an 'any' type.
       expect(renderedContent.getTextContent()).to.not.equal(text2)
     })
   })
@@ -149,11 +145,11 @@ describe('<TruncateText />', async () => {
   it('should call onUpdate when text changes', async () => {
     const onUpdate = stub()
 
-    let container
+    let container: HTMLElement
     await mount(
       <div
         style={{ width: '700px' }}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
+        // @ts-expect-error this is managed by the testing framework
         componentRef={(el) => {
           container = el
         }}
@@ -164,14 +160,12 @@ describe('<TruncateText />', async () => {
 
     expect(onUpdate).to.not.have.been.called()
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    container.style.width = '100px'
+    container!.style.width = '100px'
     await wait(() => {
       expect(onUpdate).to.have.been.calledWith(true)
     })
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    container.style.width = '800px'
+    container!.style.width = '800px'
     await wait(() => {
       expect(onUpdate).to.have.been.calledWith(false)
     })
@@ -198,7 +192,7 @@ describe('<TruncateText />', async () => {
   })
 
   it('should render text at any size with no lineHeight set', async () => {
-    let stage
+    let stage: HTMLSpanElement | null
     await mount(
       <div style={{ width: '200px' }}>
         <span
@@ -228,8 +222,7 @@ describe('<TruncateText />', async () => {
       </div>
     )
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(stage.textContent).to.equal('xsmallsmallmediumlargexlargexxlarge')
+    expect(stage!.textContent).to.equal('xsmallsmallmediumlargexlargexxlarge')
   })
 
   it('should handle the empty string as a child', async () => {

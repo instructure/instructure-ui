@@ -28,19 +28,18 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import measureText from '../measureText'
 
 describe('measureText', async () => {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'root' implicitly has an 'any' type.
-  const getNodes = (root) =>
+  const getNodes = (root: Element) =>
     Array.from(root.childNodes).filter(
-      // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
-      (node) => node.nodeType === 1 || node.nodeType === 3
+      (node) =>
+        node.nodeType === Node.ELEMENT_NODE || node.nodeType === Node.TEXT_NODE
     )
 
   it('should calculate width', async () => {
-    let stage
+    let stage: HTMLElement
     await mount(
       <div
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
-        componentRef={(el) => {
+        // @ts-expect-error This is used by the testing suite
+        componentRef={(el: HTMLElement) => {
           stage = el
         }}
       >
@@ -48,18 +47,17 @@ describe('measureText', async () => {
       </div>
     )
 
-    const nodes = getNodes(stage)
+    const nodes = getNodes(stage!)
 
-    const width = measureText(nodes, stage)
+    const width = measureText(nodes, stage!)
     expect(width).to.not.equal(0)
   })
 
   it('should account for different nodes', async () => {
-    let stage
-
+    let stage: HTMLElement
     const subject = await mount(
       <div
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
+        // @ts-expect-error This is used by the testing suite
         componentRef={(el) => {
           stage = el
         }}
@@ -68,26 +66,26 @@ describe('measureText', async () => {
       </div>
     )
 
-    const nodes = getNodes(stage)
+    const nodes = getNodes(stage!)
 
-    const width = measureText(nodes, stage)
+    const width = measureText(nodes, stage!)
 
     await subject.setProps({
       children: 'Lorem ipsum DOLOR SIT AMET.'
     })
 
-    const nodes2 = getNodes(stage)
-    const width2 = measureText(nodes2, stage)
+    const nodes2 = getNodes(stage!)
+    const width2 = measureText(nodes2, stage!)
 
     expect(Math.floor(width)).to.equal(Math.floor(width2))
   })
 
   it('should account for font size styles', async () => {
-    let stage
+    let stage: HTMLElement
 
     const subject = await mount(
       <div
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
+        // @ts-expect-error This is used by the testing suite
         componentRef={(el) => {
           stage = el
         }}
@@ -96,23 +94,23 @@ describe('measureText', async () => {
       </div>
     )
 
-    const nodes = getNodes(stage)
-    const width = measureText(nodes, stage)
+    const nodes = getNodes(stage!)
+    const width = measureText(nodes, stage!)
 
     await subject.setProps({
       style: { fontSize: '24px' }
     })
 
-    const width2 = measureText(nodes, stage)
+    const width2 = measureText(nodes, stage!)
     expect(width).to.not.equal(width2)
   })
 
   it('should account for letter spacing styles', async () => {
-    let stage
+    let stage: HTMLElement
 
     const subject = await mount(
       <div
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
+        // @ts-expect-error This is used by the testing suite
         componentRef={(el) => {
           stage = el
         }}
@@ -121,14 +119,14 @@ describe('measureText', async () => {
       </div>
     )
 
-    const nodes = getNodes(stage)
-    const width = measureText(nodes, stage)
+    const nodes = getNodes(stage!)
+    const width = measureText(nodes, stage!)
 
     await subject.setProps({
       style: { letterSpacing: '5px' }
     })
 
-    const width2 = measureText(nodes, stage)
+    const width2 = measureText(nodes, stage!)
     expect(width).to.not.equal(width2)
   })
 })
