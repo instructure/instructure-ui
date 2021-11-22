@@ -35,8 +35,13 @@
  * @param {boolean} end Whether or not to clean end of string.
  * @param {boolean} repeat=false Do a thorough clean.
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'string' implicitly has an 'any' type.
-function cleanString(string, ignore, start = true, end = true, repeat = false) {
+function cleanString(
+  string: string,
+  ignore: string[],
+  start = true,
+  end = true,
+  repeat = false
+) {
   let text = string
   const firstChar = text.charAt(0)
   const lastChar = text.slice(-1)
@@ -44,15 +49,12 @@ function cleanString(string, ignore, start = true, end = true, repeat = false) {
   if (start && ignore.indexOf(firstChar) !== -1) {
     text = text.slice(1)
   }
-
   if (end && ignore.indexOf(lastChar) !== -1) {
     text = text.slice(0, -1)
   }
-
   if (repeat) {
     text = cleanString(text, ignore, start, end, false)
   }
-
   return text
 }
 

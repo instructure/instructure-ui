@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'esca... Remove this comment to see the full error message
 import escapeHtml from 'escape-html'
 
 import { cloneArray } from '@instructure/ui-utils'
@@ -36,6 +35,17 @@ import {
 import measureText from './measureText'
 import cleanString from './cleanString'
 import cleanData from './cleanData'
+import { TruncateTextCommonProps } from '../props'
+
+export type TruncatorOptions = {
+  parent?: Node
+  lineHeight?: number
+} & TruncateTextCommonProps
+
+type NodeMapData = {
+  node: Node
+  data: string[]
+}
 
 /**
  * ---
@@ -55,36 +65,39 @@ import cleanData from './cleanData'
  * @param {number} options.lineHeight=1.2 Unitless multiplier to use in case element can have
  * 'normal' lineHeight. Adjust this to better match your font if needed.
  */
-
-// @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
-function truncate(element, options) {
+function truncate(element: Element, options?: TruncatorOptions) {
   const truncator = new Truncator(element, options)
   if (truncator) {
     return truncator.truncate()
   }
+  return
 }
 
 class Truncator {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  constructor(element, options = {}) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Trunca... Remove this comment to see the full error message
+  private _options: Required<Omit<TruncatorOptions, 'parent'>> &
+    Pick<TruncatorOptions, 'parent'>
+  private _stage!: Element
+  private _parent?: Node
+  private _nodeMap!: NodeMapData[]
+  private _defaultStringData!: string[][]
+  private _nodeDataIndexes!: number[]
+  private _maxHeight!: number
+  private _maxWidth!: number
+  private _maxLines!: number
+
+  constructor(element: Element, options: TruncatorOptions = {}) {
+    const parentElement = element?.parentElement
+      ? element?.parentElement
+      : undefined
     this._options = {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'parent' does not exist on type '{}'.
-      parent: options.parent || element.parentElement,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'maxLines' does not exist on type '{}'.
+      parent: options.parent || parentElement,
       maxLines: options.maxLines || 1,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'position' does not exist on type '{}'.
       position: options.position || 'end',
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'truncate' does not exist on type '{}'.
       truncate: options.truncate || 'character',
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'ellipsis' does not exist on type '{}'.
       ellipsis: options.ellipsis || '\u2026',
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'ignore' does not exist on type '{}'.
       ignore: options.ignore || [' ', '.', ','],
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lineHeight' does not exist on type '{}'.
       lineHeight: options.lineHeight || 1.2,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldTruncateWhenInvisible' does not ex... Remove this comment to see the full error message
-      shouldTruncateWhenInvisible: options.shouldTruncateWhenInvisible
+      shouldTruncateWhenInvisible: !!options.shouldTruncateWhenInvisible
     }
 
     if (!element) {
@@ -92,63 +105,40 @@ class Truncator {
       return
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message
     this._stage = element
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'parent' does not exist on type '{}'.
     if (options.parent) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_parent' does not exist on type 'Truncat... Remove this comment to see the full error message
       this._parent = this._options.parent
     } else {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_parent' does not exist on type 'Truncat... Remove this comment to see the full error message
-      this._parent =
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Trunca... Remove this comment to see the full error message
-        this._options.maxLines === 'auto'
-          ? // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message
-            this._stage.parentElement
-          : // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message
-            this._stage
+      const parentEl = this._stage.parentElement
+        ? this._stage.parentElement
+        : undefined
+      this._parent = this._options.maxLines === 'auto' ? parentEl : this._stage
     }
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_truncatedText' does not exist on type '... Remove this comment to see the full error message
-    this._truncatedText = this._parent.textContent
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_isTruncated' does not exist on type 'Tr... Remove this comment to see the full error message
-    this._isTruncated = false
-
     this.setup()
   }
 
   setup() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message
     if (!this._stage) {
       return
     }
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Trunca... Remove this comment to see the full error message
     const { maxLines, truncate, lineHeight } = this._options
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_parent' does not exist on type 'Truncat... Remove this comment to see the full error message
     const style = getComputedStyle(this._parent)
     // if no explicit lineHeight is inherited, use lineHeight multiplier for calculations
     const actualLineHeight =
       style.lineHeight === 'normal'
         ? lineHeight * parseFloat(style.fontSize)
         : parseFloat(style.lineHeight)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message
-    const node = this._stage.firstChild.children
-      ? // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message
-        this._stage.firstChild
-      : // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message
-        this._stage
+    const node = (this._stage.firstChild as Element).children
+      ? this._stage.firstChild!
+      : this._stage
 
-    const nodeDataIndexes = []
-    const stringData = []
+    const nodeDataIndexes: number[] = []
+    const stringData: string[][] = []
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_nodeMap' does not exist on type 'Trunca... Remove this comment to see the full error message
     this._nodeMap = this.getNodeMap(node)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_nodeMap' does not exist on type 'Trunca... Remove this comment to see the full error message
     for (let i = 0; i < this._nodeMap.length; i++) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_nodeMap' does not exist on type 'Trunca... Remove this comment to see the full error message
       const item = this._nodeMap[i]
       if (truncate === 'word' && item.data[item.data.length - 1] === ' ') {
         // remove random whitespace data between nodes
@@ -161,38 +151,26 @@ class Truncator {
       }
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultStringData' does not exist on ty... Remove this comment to see the full error message
     this._defaultStringData = cloneArray(stringData)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_nodeDataIndexes' does not exist on type... Remove this comment to see the full error message
     this._nodeDataIndexes = cloneArray(nodeDataIndexes)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_maxHeight' does not exist on type 'Trun... Remove this comment to see the full error message
     this._maxHeight =
       maxLines === 'auto'
-        ? // @ts-expect-error ts-migrate(2339) FIXME: Property '_parent' does not exist on type 'Truncat... Remove this comment to see the full error message
-          getBoundingClientRect(this._parent).height
+        ? getBoundingClientRect(this._parent).height
         : maxLines * actualLineHeight
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_maxWidth' does not exist on type 'Trunc... Remove this comment to see the full error message
     this._maxWidth = measureText(
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_nodeMap' does not exist on type 'Trunca... Remove this comment to see the full error message
       this._nodeMap.map((item) => item.node),
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_parent' does not exist on type 'Truncat... Remove this comment to see the full error message
       this._parent
     )
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_maxLines' does not exist on type 'Trunc... Remove this comment to see the full error message
     this._maxLines =
       maxLines === 'auto'
-        ? // @ts-expect-error ts-migrate(2339) FIXME: Property '_maxHeight' does not exist on type 'Trun... Remove this comment to see the full error message
-          Math.round(this._maxHeight / actualLineHeight)
+        ? Math.round(this._maxHeight / actualLineHeight)
         : maxLines
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'rootNode' implicitly has an 'any' type.
-  getNodeMap(rootNode) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Trunca... Remove this comment to see the full error message
+  getNodeMap(rootNode: Node) {
     const { shouldTruncateWhenInvisible, truncate } = this._options
     const nodes: ChildNode[] = Array.from(rootNode.childNodes)
-    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'map' implicitly has type 'any[]' in some... Remove this comment to see the full error message
-    const map = []
+    const map: NodeMapData[] = []
     // parse child nodes and build a data map to associate each node with its data
     nodes.forEach((node) => {
       if (node.nodeType === 1 || node.nodeType === 3) {
@@ -206,21 +184,18 @@ class Truncator {
             truncate === 'word'
               ? shouldTruncate
                 ? // eslint-disable-next-line no-useless-escape
-                  textContent.match(/.*?[\.\s\/]+?/g)
-                : ''
+                  textContent.match(/.*?[\.\s\/]+?/g)!
+                : ['']
               : shouldTruncate
-              ? // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-                node.textContent.split('')
+              ? node.textContent!.split('')
               : []
         })
       }
     })
-    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'map' implicitly has an 'any[]' type.
     return map
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'data' implicitly has an 'any' type.
-  getNodeIndexes(data) {
+  getNodeIndexes(data: string[][]): number[][] {
     const nodeDataIndexes = []
     for (let i = 0; i < data.length; i++) {
       for (let j = 0; j < data[i].length; j++) {
@@ -230,21 +205,17 @@ class Truncator {
     return nodeDataIndexes
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'data' implicitly has an 'any' type.
-  domString(data) {
-    const keys = Object.keys(data)
+  domString(data: string[][]) {
     let html = ''
 
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i]
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_nodeMap' does not exist on type 'Trunca... Remove this comment to see the full error message
-      const mapItem = this._nodeMap[key]
-      const text = data[key].join('')
+    for (let i = 0; i < data.length; i++) {
+      const mapItem = this._nodeMap[i]
+      const text = data[i].join('')
       const safeText = escapeHtml(text)
 
-      if (mapItem.node.nodeType === 1) {
+      if (mapItem.node.nodeType === Node.ELEMENT_NODE) {
         const name = mapItem.node.nodeName
-        const attr = mapItem.node.attributes
+        const attr = (mapItem.node as Element).attributes
         let attributes = ''
         for (let j = 0; j < attr.length; j++) {
           const att = attr[j]
@@ -255,20 +226,15 @@ class Truncator {
         html += safeText
       }
     }
-
     return html
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'data' implicitly has an 'any' type.
-  checkFit(data) {
+  checkFit(data: string[][]) {
     const html = this.domString(data)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Trunca... Remove this comment to see the full error message
     const node = this._options.maxLines === 'auto' ? this._stage : this._parent
     let fits = true
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message
     this._stage.innerHTML = html
     // allow a 0.5 px margin of error for browser calculation discrepancies
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'height' does not exist on type 'object'.
     if (getBoundingClientRect(node).height - this._maxHeight > 0.5) {
       fits = false
     }
@@ -277,7 +243,6 @@ class Truncator {
   }
 
   truncate() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Trunca... Remove this comment to see the full error message
     const { ellipsis, ignore, position } = this._options
     const middle = position === 'middle'
 
@@ -286,17 +251,14 @@ class Truncator {
     let nodeIndex = 0
     let dataIndex = 0
     let truncatedText = ''
-    let stringData = null
-    let remove = null
+    let stringData: string[][] | null = null
+    let remove: number[] | null = null
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message
     if (!this._stage) {
       return
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultStringData' does not exist on ty... Remove this comment to see the full error message
     stringData = cloneArray(this._defaultStringData)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_nodeDataIndexes' does not exist on type... Remove this comment to see the full error message
     dataIndex = middle ? 0 : this._nodeDataIndexes.length - 1
 
     while (!fits) {
@@ -317,9 +279,7 @@ class Truncator {
           stringData[remove[0]].splice(remove[1], 1, ellipsis)
         }
       } else {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_nodeDataIndexes' does not exist on type... Remove this comment to see the full error message
         nodeIndex = this._nodeDataIndexes[dataIndex]
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_nodeDataIndexes' does not exist on type... Remove this comment to see the full error message
         if (dataIndex < this._nodeDataIndexes.length - 1) {
           stringData[nodeIndex] = stringData[nodeIndex].slice(0, -1)
           stringData[nodeIndex].push(ellipsis)
@@ -338,8 +298,7 @@ class Truncator {
         truncated = true
         if (middle) {
           // remove ellipsis before re-testing
-          // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-          stringData[remove[0]].splice(remove[1], 1)
+          stringData[remove![0]].splice(remove![1], 1)
           dataIndex++
         } else {
           stringData[nodeIndex] = stringData[nodeIndex].slice(0, -1)
@@ -348,7 +307,6 @@ class Truncator {
       }
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Trunca... Remove this comment to see the full error message
     stringData = cleanData(stringData, this._options, true)
 
     if (truncated && !middle) {
@@ -373,11 +331,8 @@ class Truncator {
       text: truncatedText,
       data: stringData,
       constraints: {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_maxWidth' does not exist on type 'Trunc... Remove this comment to see the full error message
         width: this._maxWidth,
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_maxHeight' does not exist on type 'Trun... Remove this comment to see the full error message
         height: this._maxHeight,
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_maxLines' does not exist on type 'Trunc... Remove this comment to see the full error message
         lines: this._maxLines
       }
     }

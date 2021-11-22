@@ -24,23 +24,23 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import cleanData from '../cleanData'
+import { CleanDataOptions } from '../../props'
 
 describe('cleanData', async () => {
   it('should remove spaces from the end of character data', async () => {
     const data = [['T', 'e', 's', 't', ' ', '...']]
-    const options = {
+    const options: Required<CleanDataOptions> = {
       truncate: 'character',
       ellipsis: '...',
       ignore: [' ']
     }
-
     const newData = cleanData(data, options)
     expect(newData[0].join('')).to.equal('Test...')
   })
 
   it('should remove spaces from the end of word data', async () => {
     const data = [['Test ', '...']]
-    const options = {
+    const options: Required<CleanDataOptions> = {
       truncate: 'word',
       ellipsis: '...',
       ignore: [' ']
@@ -54,7 +54,7 @@ describe('cleanData', async () => {
     const data = [
       ['H', 'e', 'l', 'l', 'o', ' ', '...', ' ', 'w', 'o', 'r', 'l', 'd']
     ]
-    const options = {
+    const options: Required<CleanDataOptions> = {
       truncate: 'character',
       ellipsis: '...',
       ignore: [' ']
@@ -66,7 +66,7 @@ describe('cleanData', async () => {
 
   it('should remove spaces from the middle of word data', async () => {
     const data = [['Hello ', '...', 'world']]
-    const options = {
+    const options: Required<CleanDataOptions> = {
       truncate: 'word',
       ellipsis: '...',
       ignore: [' ']
@@ -78,7 +78,7 @@ describe('cleanData', async () => {
 
   it('should do a thorough cleaning', async () => {
     const data = [['T', 'e', 's', 't', '.', ' ', '...']]
-    const options = {
+    const options: Required<CleanDataOptions> = {
       truncate: 'character',
       ellipsis: '...',
       ignore: [' ', '.']
@@ -90,7 +90,7 @@ describe('cleanData', async () => {
 
   it('should remove spaces from the end of complex character data', async () => {
     let data = [['H', 'e', 'l', 'l', 'o', ' '], ['...']]
-    const options = {
+    const options: Required<CleanDataOptions> = {
       truncate: 'character',
       ellipsis: '...',
       ignore: [' ']
@@ -112,7 +112,7 @@ describe('cleanData', async () => {
 
   it('should remove spaces from the middle of complex word data', async () => {
     let data = [['Hello ', '...'], ['world']]
-    const options = {
+    const options: Required<CleanDataOptions> = {
       truncate: 'word',
       ellipsis: '...',
       ignore: [' ']

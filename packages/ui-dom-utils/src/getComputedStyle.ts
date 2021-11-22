@@ -39,7 +39,7 @@ import { UIElement } from '@instructure/shared-types'
  * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
  * @returns { Object } object containing css properties and values for the element
  */
-function getComputedStyle(el: UIElement) {
+function getComputedStyle(el?: UIElement) {
   let style = {}
   if (canUseDOM) {
     const node = el && findDOMNode(el)

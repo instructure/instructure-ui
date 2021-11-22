@@ -32,7 +32,7 @@ describe('truncate', () => {
   const defaultText = 'Hello world! This is a long string that should truncate'
 
   it('should truncate text when no options are given', async () => {
-    let stage
+    let stage: Element | null
     await mount(
       <div style={{ width: '200px' }}>
         <span
@@ -44,18 +44,15 @@ describe('truncate', () => {
         </span>
       </div>
     )
-
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    truncate(stage)
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const text = stage.textContent
+    truncate(stage!)
+    const text = stage!.textContent!
 
     expect(text.indexOf('truncate')).to.equal(-1)
     expect(text.indexOf('\u2026')).to.not.equal(-1)
   })
 
   it('should truncate in the middle of a string', async () => {
-    let stage
+    let stage: Element | null
     await mount(
       <div style={{ width: '200px' }}>
         <span
@@ -68,9 +65,8 @@ describe('truncate', () => {
       </div>
     )
 
-    truncate(stage, { position: 'middle' })
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const text = stage.textContent
+    truncate(stage!, { position: 'middle' })
+    const text = stage!.textContent!
 
     expect(text.indexOf('long')).to.equal(-1)
     expect(text.indexOf('Hello')).to.not.equal(-1)
@@ -79,7 +75,7 @@ describe('truncate', () => {
   })
 
   it('should truncate at words', async () => {
-    let stage
+    let stage: Element | null
     await mount(
       <div style={{ width: '220px' }}>
         <span
@@ -92,10 +88,9 @@ describe('truncate', () => {
       </div>
     )
 
-    truncate(stage, { truncate: 'word' })
+    truncate(stage!, { truncate: 'word' })
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const text = stage.textContent
+    const text = stage!.textContent!
 
     expect(text.indexOf('string')).to.equal(-1)
     expect(text.indexOf('st')).to.equal(-1)
@@ -103,7 +98,7 @@ describe('truncate', () => {
   })
 
   it('should allow custom ellipsis', async () => {
-    let stage
+    let stage: Element | null
     await mount(
       <div style={{ width: '200px' }}>
         <span
@@ -116,15 +111,14 @@ describe('truncate', () => {
       </div>
     )
 
-    truncate(stage, { ellipsis: '(...)' })
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const text = stage.textContent
+    truncate(stage!, { ellipsis: '(...)' })
+    const text = stage!.textContent
 
-    expect(text.slice(-5)).to.equal('(...)')
+    expect(text!.slice(-5)).to.equal('(...)')
   })
 
   it('should preserve node structure', async () => {
-    let stage
+    let stage: Element | null
     await mount(
       <div style={{ width: '200px' }}>
         <p
@@ -139,24 +133,18 @@ describe('truncate', () => {
       </div>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    truncate(stage)
+    truncate(stage!)
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(stage.childNodes[1].nodeType).to.equal(1)
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(stage.childNodes[2].nodeType).to.equal(3)
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(stage.children.length).to.equal(2)
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(stage.nodeName).to.equal('P')
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(stage.className).to.equal('testClass')
+    expect(stage!.childNodes[1].nodeType).to.equal(1)
+    expect(stage!.childNodes[2].nodeType).to.equal(3)
+    expect(stage!.children.length).to.equal(2)
+    expect(stage!.nodeName).to.equal('P')
+    expect(stage!.className).to.equal('testClass')
   })
 
   it('should preserve attributes on nodes', async () => {
-    let stage
-    let link
+    let stage: Element | null
+    let link: HTMLAnchorElement | null
     await mount(
       <div style={{ width: '200px' }}>
         <span
@@ -179,19 +167,16 @@ describe('truncate', () => {
       </div>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    truncate(stage)
-
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(link.attributes.length).to.equal(2)
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(link.attributes.href).to.exist()
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(link.attributes.class).to.exist()
+    truncate(stage!)
+    const attr: Record<string, any> = link!.attributes!
+    expect(attr.length).to.equal(2)
+    expect(attr.href).to.exist()
+    expect(attr.class).to.exist()
   })
 
   it('should calculate max width properly', async () => {
-    let textContainer, stage
+    let textContainer: Element | null
+    let stage: Element | null
     await mount(
       <div style={{ width: 'auto' }}>
         <div>
@@ -215,19 +200,16 @@ describe('truncate', () => {
       </div>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    const result = truncate(stage)
+    const result = truncate(stage!)
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const maxWidth = result.constraints.width
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const actualMax = textContainer.getBoundingClientRect().width
+    const maxWidth = result!.constraints.width
+    const actualMax = textContainer!.getBoundingClientRect().width
 
     expect(within(maxWidth, actualMax, 1)).to.be.true()
   })
 
   it('should calculate `maxLines: auto` correctly', async () => {
-    let stage
+    let stage: Element | null
     await mount(
       <div style={{ width: '50px', height: '180px', lineHeight: 2.8 }}>
         <span
@@ -240,18 +222,17 @@ describe('truncate', () => {
       </div>
     )
 
-    const result = truncate(stage, { maxLines: 'auto' })
+    const result = truncate(stage!, { maxLines: 'auto' })
     // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     const text = stage.textContent
 
     expect(text).to.not.equal({ defaultText })
-    expect(text.length).to.not.equal(1)
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(result.constraints.lines).to.equal(4)
+    expect(text!.length).to.not.equal(1)
+    expect(result!.constraints.lines).to.equal(4)
   })
 
   it('should calculate height correctly when `maxLines` is not `auto`', async () => {
-    let stage
+    let stage: Element | null
     await mount(
       <div style={{ width: '200px', height: '200px', lineHeight: 1.4 }}>
         <span
@@ -264,13 +245,10 @@ describe('truncate', () => {
       </div>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    const result = truncate(stage)
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const text = stage.textContent
+    const result = truncate(stage!)!
+    const text = stage!.textContent!
 
     expect(text.length).to.not.equal(1)
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     expect(result.constraints.height).to.equal(22.4)
   })
 
@@ -278,7 +256,7 @@ describe('truncate', () => {
     const log = spy(console, 'log')
     const content = '"><img src=a onerror=console.log("hello world") />'
 
-    let stage
+    let stage: Element | null
     await mount(
       <div style={{ width: '1000px', height: '200px' }}>
         <span
@@ -291,16 +269,14 @@ describe('truncate', () => {
       </div>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    truncate(stage)
+    truncate(stage!)
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(stage.textContent).to.equal(content)
+    expect(stage!.textContent).to.equal(content)
     expect(log).to.not.have.been.calledWith('hello world')
   })
 
   it('should truncate when visually hidden', async () => {
-    let stage
+    let stage: Element | null
     await mount(
       <div style={{ width: '200px', opacity: 0 }}>
         <span
@@ -312,11 +288,8 @@ describe('truncate', () => {
         </span>
       </div>
     )
-
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    truncate(stage)
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const text = stage.textContent
+    truncate(stage!)
+    const text = stage!.textContent!
 
     expect(text.indexOf('truncate')).to.equal(-1)
     expect(text.indexOf('\u2026')).to.not.equal(-1)

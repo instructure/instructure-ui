@@ -26,21 +26,18 @@ export default {
   propValues: {
     maxLines: [1, 3]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       children:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation'
     }
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getExampleProps: (props) => {
+  getExampleProps: () => {
     return {
       maxWidth: '25rem'
     }
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'page' is declared but its value is never read.
-  getParameters: (page) => {
+  getParameters: () => {
     return { disable: true }
   }
 }

@@ -23,6 +23,7 @@
  */
 
 import { cloneArray } from '@instructure/ui-utils'
+import type { CleanDataOptions } from '../props'
 
 /**
  * ---
@@ -39,8 +40,11 @@ import { cloneArray } from '@instructure/ui-utils'
  * @param {string} options.ellipsis The string being used as an ellipsis.
  * @param {boolean} repeat=false Do a thorough clean.
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'stringData' implicitly has an 'any' typ... Remove this comment to see the full error message
-function cleanData(stringData, options, repeat = false) {
+function cleanData(
+  stringData: string[][],
+  options: Required<CleanDataOptions>,
+  repeat = false
+) {
   const { truncate, ignore, ellipsis } = options
 
   let newData = cloneArray(stringData)
@@ -128,19 +132,17 @@ function cleanData(stringData, options, repeat = false) {
     findEllipsis()
 
     const node = newData[ellipsisNode]
-
     if (node) {
       const before = node[ellipsisIndex - 1]
       if (before && ignore.indexOf(before.slice(-1)) !== -1) {
         if (before.length === 1) {
           // remove entire word datum
-          newData[ellipsisNode].splice([ellipsisIndex - 1], 1)
+          newData[ellipsisNode].splice(ellipsisIndex - 1, 1)
         } else {
           // remove word immediately BEFORE the ellipsis in the same node
           newData[ellipsisNode][ellipsisIndex - 1] = before.slice(0, -1)
         }
       }
-
       if (!before) {
         // word before the ellipsis is part of a different node
         // find the next node with data and remove last datum
