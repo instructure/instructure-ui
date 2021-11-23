@@ -43,7 +43,7 @@ import { Methods } from '../Methods'
 import { ComponentTheme } from '../ComponentTheme'
 import { Heading } from '../Heading'
 import { propTypes } from './props'
-import type { DocumentProps, DocType, docType } from './props'
+import type { DocumentProps, DocType, SingleChildrenType } from './props'
 @withStyle(generateStyle, generateComponentTheme)
 class Document extends Component<
   DocumentProps,
@@ -118,7 +118,7 @@ class Document extends Component<
     ) : null
   }
 
-  renderDescription(doc: docType, description: string) {
+  renderDescription(doc: SingleChildrenType, description: string) {
     const { id, title } = doc
 
     return this.props.description ? (

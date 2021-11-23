@@ -31,7 +31,7 @@ import type {
 } from '@instructure/shared-types'
 import React from 'react'
 
-type docType = {
+type SingleChildrenType = {
   id: React.Key
   title: string
   description: string
@@ -43,8 +43,8 @@ type DocType = {
   esPath: string
   displayName: string
   packageName: string
-  children: docType[]
-  sections: (docType & { name: string; kind: string })[]
+  children: SingleChildrenType[]
+  sections: (SingleChildrenType & { name: string; kind: string })[]
   legacyGitBranch: string
   params: {
     name: string
@@ -73,7 +73,7 @@ type DocType = {
   props: Record<string, any>
   extension: string
   componentInstance?: any
-} & docType
+} & SingleChildrenType
 
 type DocumentOwnProps = {
   doc: DocType
@@ -110,4 +110,10 @@ const allowedProps: AllowedPropKeys = [
   'themeVariables'
 ]
 export { propTypes, allowedProps }
-export type { DocumentProps, DocType, DocumentStyle, DocumentTheme, docType }
+export type {
+  DocumentProps,
+  DocType,
+  DocumentStyle,
+  DocumentTheme,
+  SingleChildrenType
+}
