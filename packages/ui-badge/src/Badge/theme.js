@@ -37,6 +37,7 @@ export default function generator({
     colorDanger: colors.textDanger,
     colorSuccess: colors.textSuccess,
     colorPrimary: colors.textBrand,
+    colorInverse: colors.textDarkest,
     size: '1.25rem',
     countOffset: '0.5rem',
     notificationOffset: '0.125rem',
