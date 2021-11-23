@@ -52,7 +52,7 @@ type TreeBrowserOwnProps = {
   onItemClick?: (...args: any[]) => any
   treeLabel?: string
   renderContent?: (...args: any[]) => any
-  sortOrder?: (arg1: any, arg2: any) => number
+  sortOrder?: (obj1: any, obj2: any) => number
 }
 
 type PropKeys = keyof TreeBrowserOwnProps

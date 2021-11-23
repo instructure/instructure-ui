@@ -176,9 +176,6 @@ class TreeBrowser extends Component<TreeBrowserProps> {
     return this.getExpanded(this.state, this.props)
   }
 
-  get sortOrder() {
-    return this.props.sortOrder
-  }
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
   getExpanded(state, props) {
     return typeof props.expanded === 'undefined'
@@ -316,7 +313,7 @@ class TreeBrowser extends Component<TreeBrowserProps> {
     return collections
       .map((id) => this.getCollectionProps(this.props.collections[id]))
       .filter((collection) => collection != null)
-      .sort(this.sortOrder)
+      .sort(this.props.sortOrder)
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'collection' implicitly has an 'any' typ... Remove this comment to see the full error message
@@ -329,7 +326,7 @@ class TreeBrowser extends Component<TreeBrowserProps> {
           return { ...this.props.items[id] }
         })
         .filter((item) => item != null)
-        .sort(this.sortOrder)
+        .sort(this.props.sortOrder)
     } else {
       return []
     }
@@ -368,7 +365,7 @@ class TreeBrowser extends Component<TreeBrowserProps> {
   }
 
   renderRoot() {
-    return this.collections.sort(this.sortOrder).map((collection, i) => (
+    return this.collections.sort(this.props.sortOrder).map((collection, i) => (
       <TreeCollection
         key={i}
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
