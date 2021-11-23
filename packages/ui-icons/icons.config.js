@@ -86,6 +86,8 @@ const bidirectional = [
   'announcement',
   'arrow-left',
   'arrow-start',
+  'arrow-double-end',
+  'arrow-double-start',
   'arrow-open-left',
   'arrow-open-start',
   'arrow-open-right',
