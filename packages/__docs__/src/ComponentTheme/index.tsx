@@ -32,11 +32,13 @@ import { ColorSwatch } from '../ColorSwatch'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import type { ComponentThemeProps } from './props'
-import { propTypes } from './props'
+import { propTypes, allowedProps } from './props'
 import type { BaseColors } from '@instructure/shared-types'
 @withStyle(generateStyle, null)
 class ComponentTheme extends Component<ComponentThemeProps> {
   static propTypes = propTypes
+  static allowedProps = allowedProps
+
   mapColors(colorKey: BaseColors) {
     const map: Record<string, string> = {}
     ;(Object.keys(colorKey) as Array<keyof BaseColors>).forEach((color) => {

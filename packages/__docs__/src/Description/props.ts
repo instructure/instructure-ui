@@ -41,7 +41,7 @@ const propTypes: PropValidators<PropKeys> = {
   title: PropTypes.string.isRequired
 }
 
-const allowedPropKeys: AllowedPropKeys = ['content', 'id', 'title']
+const allowedProps: AllowedPropKeys = ['content', 'id', 'title']
 
 export type { DescriptionProps }
-export { propTypes, allowedPropKeys }
+export { propTypes, allowedProps }

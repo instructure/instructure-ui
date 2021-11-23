@@ -42,7 +42,7 @@ import { Returns } from '../Returns'
 import { Methods } from '../Methods'
 import { ComponentTheme } from '../ComponentTheme'
 import { Heading } from '../Heading'
-import { propTypes } from './props'
+import { propTypes, allowedProps } from './props'
 import type { DocumentProps, DocType, SingleChildrenType } from './props'
 @withStyle(generateStyle, generateComponentTheme)
 class Document extends Component<
@@ -50,6 +50,7 @@ class Document extends Component<
   { selectedDetailsTabIndex: number }
 > {
   static propTypes = propTypes
+  static allowedProps = allowedProps
 
   static defaultProps = {
     description: undefined,
