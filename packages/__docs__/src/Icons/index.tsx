@@ -47,11 +47,12 @@ import { Heading } from '../Heading'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { IconsProps, IconsState } from './props'
-import { propTypes } from './props'
+import { propTypes, allowedProps } from './props'
 import type { GlyphData } from '../Glyph/props'
 @withStyle(generateStyle, generateComponentTheme)
 class Icons extends Component<IconsProps, IconsState> {
   static propTypes = propTypes
+  static allowedProps = allowedProps
   searchTimeout: any
 
   constructor(props: IconsProps) {

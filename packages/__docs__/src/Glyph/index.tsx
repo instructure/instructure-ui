@@ -35,7 +35,7 @@ import { Heading } from '../Heading'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { GlyphProps, VariantProps, GlyphData } from './props'
-import { propTypes } from './props'
+import { propTypes, allowedProps } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Variant extends Component<VariantProps> {
@@ -49,7 +49,6 @@ class Variant extends Component<VariantProps> {
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object
   }
-
   handleClick = (event: React.SyntheticEvent) => {
     const { name, onClick, variant, glyph } = this.props
     onClick(event, name, variant, glyph)
@@ -96,7 +95,7 @@ class Variant extends Component<VariantProps> {
 @withStyle(generateStyle, generateComponentTheme)
 class Glyph extends Component<GlyphProps> {
   static propTypes = propTypes
-
+  static allowedProps = allowedProps
   static defaultProps = {
     rtl: false
   }

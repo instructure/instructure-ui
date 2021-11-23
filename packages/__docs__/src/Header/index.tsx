@@ -37,11 +37,11 @@ import { versionInPath } from '../versionData'
 
 import { Heading } from '../Heading'
 import type { HeaderProps } from './props'
-import { propTypes } from './props'
+import { propTypes, allowedProps } from './props'
 
 class Header extends Component<HeaderProps> {
   static propTypes = propTypes
-
+  static allowedProps = allowedProps
   static defaultProps = {
     version: undefined,
     versionsData: undefined

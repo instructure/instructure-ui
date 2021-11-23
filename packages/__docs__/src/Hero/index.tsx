@@ -51,12 +51,12 @@ import { Search } from '../Search'
 import { Heading } from '../Heading'
 
 import type { HeroProps } from './props'
-import { propTypes } from './props'
+import { propTypes, allowedProps } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Hero extends Component<HeroProps> {
   static propTypes = propTypes
-
+  static allowedProps = allowedProps
   static defaultProps = {
     description: undefined,
     docs: null
