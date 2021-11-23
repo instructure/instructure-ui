@@ -47,7 +47,7 @@ class Header extends Component<HeaderProps> {
     versionsData: undefined
   }
 
-  handleSelect = ([selectedVersion]: string) => {
+  handleSelect = (_e: Event, [selectedVersion]: string) => {
     const { versionsData } = this.props
     const { latestVersion } = versionsData
     const isSelectedLatestVersion = selectedVersion === latestVersion
