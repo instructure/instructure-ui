@@ -43,5 +43,12 @@ export default {
       (props.type === 'notification' && props.countUntil) ||
       (props.standalone && props.placement !== 'start top')
     )
+  },
+  getExampleProps: (props) => {
+    return props.variant === 'inverse'
+      ? {
+          background: 'primary-inverse'
+        }
+      : {}
   }
 }

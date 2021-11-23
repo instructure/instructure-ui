@@ -139,6 +139,15 @@
   }
 }
 
+.inverse {
+  background-color: var(--color);
+  color: var(--colorInverse);
+
+  &.pulse::before {
+    border-color: var(--color);
+  }
+}
+
 @keyframes pulse {
   to {
     transform: scale(1);

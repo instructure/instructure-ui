@@ -67,7 +67,7 @@ class Badge extends Component {
      * Make the Badge slowly pulse twice to get the user's attention.
      */
     pulse: PropTypes.bool,
-    variant: PropTypes.oneOf(['primary', 'success', 'danger']),
+    variant: PropTypes.oneOf(['primary', 'success', 'danger', 'inverse']),
     /**
      * Supported values are `top start`, `top end`, `end center`, `bottom end`,
      * `bottom start`, and `start center`
