@@ -116,11 +116,16 @@ class Icons extends Component<IconsProps, IconsState> {
     }, 500)
   }
 
-  handleFormatChange = (o: Record<string, any>) => {
+  handleFormatChange = (_e: SyntheticEvent, o: Record<string, any>) => {
     window.location.hash = `#${o.value}`
   }
 
-  handleVariantClick = (name: string, variant: string, glyph: GlyphData) => {
+  handleVariantClick = (
+    _e: SyntheticEvent,
+    name: string,
+    variant: string,
+    glyph: GlyphData
+  ) => {
     this.setState({ name, variant, glyph })
   }
 
