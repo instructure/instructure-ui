@@ -23,13 +23,14 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
+import type { IconsTheme } from './props'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: Theme) => {
+const generateComponentTheme = (theme: Theme): IconsTheme => {
   const { breakpoints } = theme
 
   return {
