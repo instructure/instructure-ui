@@ -74,7 +74,9 @@ class Item extends Component<OptionsItemProps> {
   }
 
   renderContent(
-    renderLabel: OptionsItemProps['renderBeforeLabel'],
+    renderLabel:
+      | OptionsItemProps['renderBeforeLabel']
+      | OptionsItemProps['renderAfterLabel'],
     contentVariant:
       | OptionsItemStyle['contentBefore']
       | OptionsItemStyle['contentAfter']

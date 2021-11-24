@@ -33,7 +33,8 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
-type OptionsItemOwnProps = {
+type ItemProps = {
+  children?: React.ReactNode | (() => React.ReactNode)
   /**
    * Element type to render as
    */
@@ -46,17 +47,20 @@ type OptionsItemOwnProps = {
    * The aria role of the element
    */
   role?: string
+}
+
+type OptionsItemOwnProps = ItemProps & {
   /**
    * Content to render before the label
    * (if you pass a function, it has the `props` as its parameter)
    */
-  renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
+  renderBeforeLabel?: React.ReactNode | ((props: ItemProps) => React.ReactNode)
   /**
    * Content to render after the label
    * (if you pass a function, it has the `props` as its parameter)
    */
-  renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
-  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  renderAfterLabel?: React.ReactNode | ((props: ItemProps) => React.ReactNode)
+  children?: React.ReactNode | (() => React.ReactNode)
 }
 
 type PropKeys = keyof OptionsItemOwnProps
