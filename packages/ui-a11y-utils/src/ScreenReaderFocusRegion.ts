@@ -29,13 +29,13 @@ class ScreenReaderFocusRegion {
   private _parents: HTMLElement[] = []
   private _nodes: Element[] = []
   private _liveRegion: (Element | undefined)[]
-  private _contextElement?: Element | Node
+  private _contextElement: Element | Node | null
   private _options: FocusRegionOptions
   private _observer: MutationObserver | null = null
   private _attributes: [Element, string, string][] = []
 
   constructor(
-    element: Element | Node,
+    element: Element | Node | null,
     options: FocusRegionOptions = {
       shouldContainFocus: true,
       liveRegion: []

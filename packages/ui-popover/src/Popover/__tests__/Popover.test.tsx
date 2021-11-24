@@ -35,6 +35,8 @@ import { Popover } from '../index'
 
 import { PopoverLocator } from '../PopoverLocator'
 
+import type { PopoverProps } from '../props'
+
 describe('<Popover />', async () => {
   it('should not render content by default', async () => {
     await mount(
@@ -86,9 +88,7 @@ describe('<Popover />', async () => {
     await wait(() => {
       expect(content.containsFocus()).to.be.true()
     })
-    await (wrapQueryResult(
-      trigger.getOwnerDocument().documentElement
-    ) as any).click()
+    await wrapQueryResult(trigger.getOwnerDocument().documentElement).click()
 
     content = await popover.findContent({ expectEmpty: true })
 
@@ -275,12 +275,15 @@ describe('<Popover />', async () => {
 })
 
 function testShowContent(
-  on: string,
+  on: 'click' | 'hover' | 'focus',
   eventType: 'click' | 'focus' | 'mouseOver',
   eventInit?: Record<string, any>
 ) {
   it(`should show content on ${on}`, async () => {
-    const onValue = [on, on === 'hover' ? 'focus' : null] as any
+    const onValue: PopoverProps['on'] = [on]
+    if (on === 'hover') {
+      onValue.push('focus')
+    }
     await mount(
       <Popover on={onValue} renderTrigger={<button>Click me</button>}>
         <h2>Foo Bar Baz</h2>

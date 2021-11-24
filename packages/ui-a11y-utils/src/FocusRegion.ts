@@ -47,7 +47,7 @@ class FocusRegion {
   private _listeners: ReturnType<typeof addEventListener>[] = []
   private _active = false
 
-  constructor(element: Element | Node, options: FocusRegionOptions) {
+  constructor(element: Element | Node | null, options: FocusRegionOptions) {
     this._options = options || {
       shouldCloseOnDocumentClick: true,
       shouldCloseOnEscape: true

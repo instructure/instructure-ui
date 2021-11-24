@@ -85,11 +85,11 @@ class Properties extends Component {
           !propsToIgnore.includes(name)
         )
       })
-      .map((name) => {
+      .map((name, idx) => {
         const prop = props[name]
 
         return (
-          <Table.Row key={name}>
+          <Table.Row key={idx}>
             <Table.Cell>
               <code>{name}</code>
             </Table.Cell>
@@ -206,8 +206,8 @@ class Properties extends Component {
       return <span>{type.value}</span>
     }
 
-    const values = type.value.map(({ value }) => (
-      <li css={styles.listItem} key={value}>
+    const values = type.value.map(({ value }, idx) => (
+      <li css={styles.listItem} key={idx}>
         <code>{this.unquote(value)}</code>
       </li>
     ))
@@ -230,8 +230,8 @@ class Properties extends Component {
     if (!Array.isArray(type.value)) {
       return <span>{type.value}</span>
     }
-    const values = type.value.map((value) => (
-      <li css={styles.listItem} key={value.name}>
+    const values = type.value.map((value, idx) => (
+      <li css={styles.listItem} key={idx}>
         <code>{this.renderType(value)}</code>
       </li>
     ))
@@ -259,13 +259,13 @@ class Properties extends Component {
     // so we have to parse the raw data
     const elements = tsType.raw.split('|').filter((item) => item !== '')
 
-    const values = elements.map((rawValue) => {
+    const values = elements.map((rawValue, idx) => {
       let value = rawValue.trim()
       if (this.isTsGeneralFunction(value)) {
         value = 'function'
       }
       return (
-        <li css={styles.listItem} key={value}>
+        <li css={styles.listItem} key={idx}>
           <code>{value ? this.unquote(value) : value}</code>
         </li>
       )

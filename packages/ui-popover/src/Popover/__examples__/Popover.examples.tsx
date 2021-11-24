@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import type { PopoverProps } from '../props'
 
 export default {
   sectionProp: 'color',
@@ -41,8 +42,7 @@ export default {
     'defaultIsShowingContent',
     'shouldContainFocus'
   ],
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       defaultIsShowingContent: true,
       placement: 'bottom center',
@@ -50,8 +50,7 @@ export default {
       children: <h2>Hello World</h2>
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getExampleProps: (props) => {
+  getExampleProps: (props: PopoverProps) => {
     return {
       dir: props.dir,
       as: 'div',
@@ -62,8 +61,7 @@ export default {
       textAlign: 'center'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: PopoverProps) => {
     // only generate 1 example if its not showing content
     return (
       !props.isShowingContent &&

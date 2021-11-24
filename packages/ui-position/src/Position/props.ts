@@ -42,7 +42,7 @@ type PositionOwnProps = {
   /**
    * The node to use as the position target
    */
-  renderTarget?: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  renderTarget?: React.ReactNode | (() => React.ReactNode)
 
   /**
    * The target to be used when not using `renderTarget`
@@ -100,12 +100,12 @@ type PositionOwnProps = {
   /**
    * Callback fired when the position changes
    */
-  onPositionChanged?: (position: Position) => any
+  onPositionChanged?: (position: PositionObject) => void
 
   /**
    * Callback fired when `<Position />` content has been mounted and is initially positioned
    */
-  onPositioned?: (position: Position) => any
+  onPositioned?: (position: PositionObject) => void
 
   /**
    * The content to be positioned
@@ -124,7 +124,7 @@ type PositionState = {
 
 type PositionStyle = ComponentStyle<'zIndex'>
 
-type Position = ElementPosition['style'] & {
+type PositionObject = ElementPosition['style'] & {
   placement: ElementPosition['placement']
 }
 
@@ -171,5 +171,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type { PositionProps, PositionState, PositionStyle }
+export type { PositionProps, PositionState, PositionStyle, PositionObject }
 export { propTypes, allowedProps }
