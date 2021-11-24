@@ -40,7 +40,10 @@ import { contains } from './contains'
  */
 function handleMouseOverOut(
   handler: (...args: any[]) => any,
-  event: Event & { relatedTarget: EventTarget | null }
+  event: {
+    currentTarget: EventTarget | null
+    relatedTarget?: EventTarget | null
+  }
 ) {
   const target = event.currentTarget
   const related = event.relatedTarget

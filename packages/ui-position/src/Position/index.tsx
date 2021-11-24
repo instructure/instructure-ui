@@ -76,8 +76,6 @@ class Position extends Component<PositionProps, PositionState> {
     offsetY: 0,
     shouldTrackPosition: true,
     shouldPositionOverTarget: false,
-    onPositioned: () => {},
-    onPositionChanged: () => {},
     children: null
   }
 
@@ -151,9 +149,10 @@ class Position extends Component<PositionProps, PositionState> {
       prevState.style &&
       (placement !== prevState.placement ||
         style.top !== prevState.style.top ||
-        style.left !== prevState.style.left)
+        style.left !== prevState.style.left) &&
+      typeof this.props.onPositionChanged === 'function'
     ) {
-      this.props.onPositionChanged?.({
+      this.props.onPositionChanged({
         top: style.top,
         left: style.left,
         placement
