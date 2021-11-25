@@ -222,7 +222,7 @@ describe('<Avatar />', async () => {
       const svg = await avatar.find('svg')
 
       expect(getComputedStyle(svg.getDOMNode()).fill).to.equal(
-        'rgb(0, 172, 24)'
+        'rgb(11, 135, 75)'
       )
     })
   })
@@ -237,7 +237,7 @@ describe('<Avatar />', async () => {
         const avatar = await AvatarLocator.find()
 
         expect(getComputedStyle(avatar.getDOMNode()).backgroundColor).to.equal(
-          'rgb(0, 172, 24)'
+          'rgb(11, 135, 75)'
         )
       })
 
@@ -269,7 +269,7 @@ describe('<Avatar />', async () => {
         const avatar = await AvatarLocator.find()
 
         expect(getComputedStyle(avatar.getDOMNode()).backgroundColor).to.equal(
-          'rgb(0, 172, 24)'
+          'rgb(11, 135, 75)'
         )
       })
 
