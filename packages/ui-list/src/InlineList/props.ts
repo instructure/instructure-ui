@@ -39,7 +39,7 @@ type InlineListOwnProps = {
   /**
    * Only accepts `<InlineList.Item>` as a child
    */
-  children?: InlineListItem
+  children?: React.ReactNode
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
