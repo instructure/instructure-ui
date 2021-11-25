@@ -2,6 +2,8 @@
 describes: Pages
 ---
 
+The Pages component can be used to render Paginated content that does not fit into one page. Each page content should have at least one focusable element (e.g. the back button) otherwise the focus will be lost.
+
 ```js
 ---
 render: false
@@ -42,10 +44,9 @@ class Example extends React.Component {
 
   render () {
     return (
-      <Pages 
+      <Pages
         activePageIndex={this.state.activePageIndex}
         onPageIndexChange={this.handlePagesBackButtonClick}
-        backButtonLabel="Back to previous page"
       >
         <Pages.Page>
          {(history, navigateToPreviousPage) => {
@@ -90,7 +91,6 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-
 ```js
 ---
 render: false
@@ -134,7 +134,6 @@ class Example extends React.Component {
       <Pages
         activePageIndex={this.state.activePageIndex}
         onPageIndexChange={this.handlePagesBackButtonClick}
-        backButtonLabel="Back to previous page"
       >
         <Pages.Page>
         {(history, navigateToPreviousPage) => {
@@ -180,7 +179,6 @@ class Example extends React.Component {
 
 render(<Example />)
 ```
-
 
 ```js
 ---
@@ -353,7 +351,6 @@ class Example extends React.Component {
           <Pages
             activePageIndex={this.state.activePageIndex}
             onPageIndexChange={this.handlePagesBackButtonClick}
-            backButtonLabel="Back to previous page"
           >
             <Pages.Page
               defaultFocusElement={() => this._usersNav[this.state.lastPageIndex]}
