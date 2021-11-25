@@ -170,7 +170,9 @@ class Pages extends Component<PagesProps> {
   }
 
   render() {
-    return this.activePage ? (
+    const { activePage } = this
+
+    return activePage ? (
       <PagesContext.Provider
         value={{
           history: this._history,
@@ -187,7 +189,7 @@ class Pages extends Component<PagesProps> {
           role="region"
           elementRef={this.handleRef}
         >
-          {this.activePage}
+          {activePage}
         </View>
       </PagesContext.Provider>
     ) : null
