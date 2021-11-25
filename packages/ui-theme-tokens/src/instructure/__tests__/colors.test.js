@@ -104,11 +104,6 @@ describe('instructure colors', () => {
     it('should meet 3:1 contrast as a text color with `backgroundLight` background', () => {
       expect(contrast(colors.textBrand, colors.backgroundLight)).to.be.above(3)
     })
-    it('should meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
-      expect(contrast(colors.textBrand, colors.backgroundDarkest)).to.be.above(
-        3
-      )
-    })
   })
   describe('textAlert', () => {
     it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
@@ -125,9 +120,6 @@ describe('instructure colors', () => {
       expect(contrast(colors.textInfo, colors.backgroundLightest)).to.be.above(
         3
       )
-    })
-    it('should meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
-      expect(contrast(colors.textInfo, colors.backgroundDarkest)).to.be.above(3)
     })
   })
   describe('textSuccess', () => {
@@ -190,11 +182,6 @@ describe('instructure colors', () => {
         3
       )
     })
-    it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
-      expect(
-        contrast(colors.borderBrand, colors.backgroundDarkest)
-      ).to.be.above(3)
-    })
   })
   describe('borderAlert', () => {
     it('should meet 3:1 contrast as a border color with `backgroundLightest` background', () => {
@@ -216,11 +203,6 @@ describe('instructure colors', () => {
     })
     it('should meet 3:1 contrast as a border color with `backgroundLight` background', () => {
       expect(contrast(colors.borderInfo, colors.backgroundLight)).to.be.above(3)
-    })
-    it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
-      expect(contrast(colors.borderInfo, colors.backgroundDarkest)).to.be.above(
-        3
-      )
     })
   })
   describe('borderSuccess', () => {
