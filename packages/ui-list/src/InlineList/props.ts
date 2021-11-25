@@ -36,11 +36,22 @@ import type {
 } from '@instructure/shared-types'
 
 type InlineListOwnProps = {
-  children?: React.ReactNode // TODO: oneOf([InlineListItem])
+  /**
+   * Only accepts `<InlineList.Item>` as a child
+   */
+  children?: InlineListItem
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   as?: 'ul' | 'ol'
   margin?: Spacing
   size?: 'small' | 'medium' | 'large'
   delimiter?: 'none' | 'pipe' | 'slash' | 'arrow'
+  /**
+   * Sets the margin separating each ListItem.
+   */
   itemSpacing?:
     | 'none'
     | 'xxx-small'
@@ -51,6 +62,9 @@ type InlineListOwnProps = {
     | 'large'
     | 'x-large'
     | 'xx-large'
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
 }
 
@@ -62,22 +76,11 @@ type InlineListProps = InlineListOwnProps &
   OtherHTMLAttributes<InlineListOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Only accepts `<InlineList.Item>` as a child
-   */
   children: ChildrenPropTypes.oneOf([InlineListItem]),
   as: PropTypes.oneOf(['ul', 'ol']),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
-  /**
-   * Sets the margin separating each ListItem.
-   */
   itemSpacing: PropTypes.oneOf([
     'none',
     'xxx-small',
@@ -89,9 +92,6 @@ const propTypes: PropValidators<PropKeys> = {
     'x-large',
     'xx-large'
   ]),
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 
