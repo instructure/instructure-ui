@@ -140,7 +140,7 @@ class Select extends Component {
      * Displays messages and validation for the input. It should be an object
      * with the following shape:
      * `{
-     *   text: PropTypes.string,
+     *   text: PropTypes.node,
      *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
      * }`
      */

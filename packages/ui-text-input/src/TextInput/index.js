@@ -92,7 +92,7 @@ class TextInput extends Component {
     interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
      * object with shape: `{
-     * text: PropTypes.string,
+     * text: PropTypes.node,
      * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
      *   }`
      */

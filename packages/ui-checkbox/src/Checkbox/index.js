@@ -59,7 +59,7 @@ class Checkbox extends Component {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
      * object with shape: `{
-     * text: PropTypes.string,
+     * text: PropTypes.node,
      * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
      *   }`
      */

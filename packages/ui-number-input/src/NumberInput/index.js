@@ -79,7 +79,7 @@ class NumberInput extends Component {
     interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
      * Object with shape: `{
-     *   text: PropTypes.string,
+     *   text: PropTypes.node,
      *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
      * }`
      */

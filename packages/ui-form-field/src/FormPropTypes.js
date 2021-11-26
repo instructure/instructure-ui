@@ -24,6 +24,14 @@
 
 import PropTypes from 'prop-types'
 
+const formMessageChildPropType = PropTypes.node
+const formMessageTypePropType = PropTypes.oneOf([
+  'error',
+  'hint',
+  'success',
+  'screenreader-only'
+])
+
 /**
  * ---
  * category: utilities/form
@@ -33,10 +41,10 @@ import PropTypes from 'prop-types'
  */
 const FormPropTypes = {
   message: PropTypes.shape({
-    text: PropTypes.string,
-    type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+    text: formMessageChildPropType,
+    type: formMessageTypePropType
   })
 }
 
 export default FormPropTypes
-export { FormPropTypes }
+export { FormPropTypes, formMessageTypePropType, formMessageChildPropType }
