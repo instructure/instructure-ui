@@ -23,11 +23,15 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+
+import {
+  formMessageChildPropType,
+  formMessageTypePropType
+} from '../FormPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -50,8 +54,8 @@ example: true
 @themeable(theme, styles)
 class FormFieldMessage extends Component {
   static propTypes = {
-    variant: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']),
-    children: PropTypes.node
+    variant: formMessageTypePropType,
+    children: formMessageChildPropType
   }
 
   static defaultProps = {

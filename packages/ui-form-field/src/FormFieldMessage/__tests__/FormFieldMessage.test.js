@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
+import { IconWarningLine } from '@instructure/ui-icons'
 
 import { FormFieldMessage } from '../index'
 
@@ -35,6 +36,20 @@ describe('<FormFieldMessage />', async () => {
 
     const formFieldMessage = within(subject.getDOMNode())
     expect(await formFieldMessage.findWithText('hello world')).to.exist()
+  })
+
+  it('should render message if Node is passed', async () => {
+    const subject = await mount(
+      <FormFieldMessage>
+        <span>
+          <IconWarningLine /> Invalid name
+        </span>
+      </FormFieldMessage>
+    )
+
+    const formFieldMessage = within(subject.getDOMNode())
+    expect(await formFieldMessage.findWithText('Invalid name')).to.exist()
+    expect(await formFieldMessage.find('svg')).to.exist()
   })
 
   it('should meet a11y standards', async () => {
