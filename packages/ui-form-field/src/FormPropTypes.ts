@@ -22,7 +22,19 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
+
+const formMessageTypePropType = PropTypes.oneOf([
+  'error',
+  'hint',
+  'success',
+  'screenreader-only'
+])
+const formMessageChildPropType = PropTypes.node
+
+type FormMessageType = 'error' | 'hint' | 'success' | 'screenreader-only'
+type FormMessageChild = React.ReactNode
 
 /**
  * ---
@@ -33,17 +45,16 @@ import PropTypes from 'prop-types'
  */
 const FormPropTypes = {
   message: PropTypes.shape({
-    text: PropTypes.string,
-    type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+    type: formMessageTypePropType,
+    text: formMessageChildPropType
   })
 }
 
-export type FormMessageType = 'error' | 'hint' | 'success' | 'screenreader-only'
-
-export type FormMessage = {
-  text: string
+type FormMessage = {
   type: FormMessageType
+  text: FormMessageChild
 }
 
 export default FormPropTypes
-export { FormPropTypes }
+export { FormPropTypes, formMessageTypePropType, formMessageChildPropType }
+export type { FormMessage, FormMessageType, FormMessageChild }

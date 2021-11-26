@@ -105,7 +105,7 @@ const propTypes: PropValidators<PropKeys> = {
   maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /**
    * object with shape: `{
-   * text: PropTypes.string,
+   * text: PropTypes.node,
    * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
    *   }`
    */
