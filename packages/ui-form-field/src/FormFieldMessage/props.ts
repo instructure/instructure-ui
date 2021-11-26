@@ -22,18 +22,21 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
+import {
+  formMessageTypePropType,
+  formMessageChildPropType
+} from '../FormPropTypes'
 
 import type {
   PropValidators,
   FormFieldMessageTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { FormMessageType } from '../FormPropTypes'
+import type { FormMessageType, FormMessageChild } from '../FormPropTypes'
 
 type FormFieldMessageOwnProps = {
   variant?: FormMessageType
-  children?: React.ReactNode
+  children?: FormMessageChild
 }
 
 type PropKeys = keyof FormFieldMessageOwnProps
@@ -46,8 +49,8 @@ type FormFieldMessageProps = FormFieldMessageOwnProps &
 type FormFieldMessageStyle = ComponentStyle<'formFieldMessage'>
 
 const propTypes: PropValidators<PropKeys> = {
-  variant: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']),
-  children: PropTypes.node
+  variant: formMessageTypePropType,
+  children: formMessageChildPropType
 }
 
 const allowedProps: AllowedPropKeys = ['variant', 'children']

@@ -62,7 +62,7 @@ const propTypes: PropValidators<PropKeys> = {
   id: PropTypes.string.isRequired,
   /**
    * object with shape: `{
-   *   text: PropTypes.string,
+   *   text: PropTypes.node,
    *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
    * }`
    */
