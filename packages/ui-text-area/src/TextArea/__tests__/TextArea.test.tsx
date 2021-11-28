@@ -138,38 +138,35 @@ describe('TextArea', async () => {
   })
 
   it('should focus the textarea when focus is called', async () => {
-    let ref
+    let ref: TextArea
     await mount(
       <TextArea
         label="Name"
         autoGrow={false}
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; autoGrow: false; componentR... Remove this comment to see the full error message
-        componentRef={(el) => (ref = el)}
+        componentRef={(el: TextArea) => (ref = el)}
       />
     )
     const textArea = await TextAreaLocator.find()
     const input = await textArea.findInput()
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    ref.focus()
+    ref!.focus()
     expect(input.focused()).to.be.true()
   })
 
   it('provides a focused getter', async () => {
-    let ref
+    let ref: TextArea
     await mount(
       <TextArea
         label="Name"
         autoGrow={false}
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; autoGrow: false; componentR... Remove this comment to see the full error message
-        componentRef={(el) => (ref = el)}
+        componentRef={(el: TextArea) => (ref = el)}
       />
     )
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    ref.focus()
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(ref.focused).to.be.true()
+    ref!.focus()
+    expect(ref!.focused).to.be.true()
   })
 
   it('should provide an textareaRef prop', async () => {
@@ -184,19 +181,18 @@ describe('TextArea', async () => {
   })
 
   it('should provide a value getter', async () => {
-    let ref
+    let ref: TextArea
     await mount(
       <TextArea
         label="Name"
         autoGrow={false}
         defaultValue="bar"
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; autoGrow: false; defaultVal... Remove this comment to see the full error message
-        componentRef={(el) => (ref = el)}
+        componentRef={(el: TextArea) => (ref = el)}
       />
     )
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(ref.value).to.equal('bar')
+    expect(ref!.value).to.equal('bar')
   })
 
   describe('events', async () => {

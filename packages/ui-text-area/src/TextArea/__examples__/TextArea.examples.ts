@@ -33,8 +33,7 @@ export default {
     height: [undefined, '5rem']
   },
   excludeProps: ['required', 'inline'],
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       label: 'A text area',
       layout: 'stacked',
@@ -44,8 +43,7 @@ export default {
       resize: 'none'
     }
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'page' is declared but its value is never read.
-  getParameters: (page) => {
+  getParameters: () => {
     return { disable: true }
   }
 }
