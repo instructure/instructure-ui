@@ -57,13 +57,10 @@ const borderOffsetRadius = {
   large: radius.large - strokeWidth.large / 2 + borderWidth
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'r' implicitly has an 'any' type.
-const circumference = function (r) {
+const circumference = function (r: number) {
   return (2 * Math.PI * r).toFixed(3)
 }
-
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 's' implicitly has an 'any' type.
-const transform = function (s) {
+const transform = function (s: number) {
   return s / 2
 }
 

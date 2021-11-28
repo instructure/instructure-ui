@@ -58,7 +58,7 @@ const generateStyle = (
     return parseFloat(componentTheme[`${camelSize}Circumference` as const])
   }
 
-  const getRadii = () => {
+  const getRadii = (): { radius: string; borderOffsetRadius: string } => {
     const camelSize = size === 'x-small' ? 'xSmall' : size!
     return {
       radius: componentTheme[`${camelSize}Radius` as const],

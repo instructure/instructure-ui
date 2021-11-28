@@ -32,7 +32,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { ProgressBarProps } from './props'
+import type { ProgressBarProps, Values } from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -50,13 +50,8 @@ class ProgressBar extends Component<ProgressBarProps> {
   static propTypes = propTypes
 
   static defaultProps = {
-    formatScreenReaderValue: ({
-      valueNow,
-      valueMax
-    }: {
-      valueNow: ProgressBarProps['valueNow']
-      valueMax: ProgressBarProps['valueMax']
-    }) => `${valueNow} / ${valueMax}`,
+    formatScreenReaderValue: ({ valueNow, valueMax }: Values) =>
+      `${valueNow} / ${valueMax}`,
     size: 'medium',
     valueMax: 100,
     valueNow: 0,
@@ -64,13 +59,8 @@ class ProgressBar extends Component<ProgressBarProps> {
     color: 'primary',
 
     // default to showing `success` color on completion
-    meterColor: ({
-      valueNow,
-      valueMax
-    }: {
-      valueNow: ProgressBarProps['valueNow']
-      valueMax: ProgressBarProps['valueMax']
-    }) => (valueNow! / valueMax! >= 1 ? 'success' : 'brand')
+    meterColor: ({ valueNow, valueMax }: Values) =>
+      valueNow! / valueMax! >= 1 ? 'success' : 'brand'
   }
 
   ref: Element | null = null
@@ -149,7 +139,6 @@ class ProgressBar extends Component<ProgressBarProps> {
         )}
       </View>
     )
-    /* eslint-enable jsx-a11y/no-redundant-roles, jsx-a11y/no-noninteractive-element-to-interactive-role */
   }
 }
 
