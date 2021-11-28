@@ -34,7 +34,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { ProgressCircleProps, ProgressCircleState } from './props'
+import type { ProgressCircleProps, ProgressCircleState, Values } from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -55,7 +55,7 @@ class ProgressCircle extends Component<
   static propTypes = propTypes
 
   static defaultProps = {
-    formatScreenReaderValue: ({ valueNow, valueMax }) =>
+    formatScreenReaderValue: ({ valueNow, valueMax }: Values) =>
       `${valueNow} / ${valueMax}`,
     size: 'medium',
     valueMax: 100,
@@ -65,19 +65,18 @@ class ProgressCircle extends Component<
     shouldAnimateOnMount: false,
 
     // default to showing `success` color on completion
-    meterColor: ({ valueNow, valueMax }) =>
+    meterColor: ({ valueNow, valueMax }: Values) =>
       valueNow / valueMax >= 1 ? 'success' : 'brand'
   }
 
-  _timeouts = []
+  _timeouts: NodeJS.Timeout[] = []
   ref: Element | null = null
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: ProgressCircleProps) {
     super(props)
 
     this.state = {
-      shouldAnimateOnMount: props.shouldAnimateOnMount
+      shouldAnimateOnMount: props.shouldAnimateOnMount!
     }
   }
 
@@ -98,7 +97,6 @@ class ProgressCircle extends Component<
   componentDidMount() {
     if (this.state.shouldAnimateOnMount) {
       this._timeouts.push(
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
         setTimeout(() => {
           this.setState({
             shouldAnimateOnMount: false
@@ -142,12 +140,9 @@ class ProgressCircle extends Component<
 
     const value = callRenderProp(renderValue, { valueNow, valueMax })
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'animateOnMount' does not exist on type '... Remove this comment to see the full error message
-    const style = this.state.animateOnMount
-      ? null
-      : {
-          strokeDashoffset: `${styles?.dashOffset}em`
-        }
+    const style = {
+      strokeDashoffset: `${styles?.dashOffset}em`
+    }
 
     return (
       <View
@@ -178,7 +173,6 @@ class ProgressCircle extends Component<
             role="presentation"
             cx="50%"
             cy="50%"
-            //@ts-expect-error TODO:
             r={styles?.radii?.radius}
           />
           <circle
@@ -186,17 +180,14 @@ class ProgressCircle extends Component<
             role="presentation"
             cx="50%"
             cy="50%"
-            //@ts-expect-error TODO:
             r={styles?.radii?.borderOffsetRadius}
           />
           <circle
             css={styles?.meter}
             role="presentation"
-            // @ts-expect-error ts-migrate(2322) FIXME: Type '{ strokeDashoffset: string; } | null' is not... Remove this comment to see the full error message
             style={style}
             cx="50%"
             cy="50%"
-            //@ts-expect-error TODO:
             r={styles?.radii?.radius}
           />
         </svg>

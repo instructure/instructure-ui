@@ -44,6 +44,8 @@ export type ProgressCircleMeterColor =
   | 'success'
   | 'brand'
 
+export type Values = { valueNow: number; valueMax: number }
+
 type ProgressCircleOwnProps = {
   /**
    * A label is required for accessibility
@@ -56,22 +58,22 @@ type ProgressCircleOwnProps = {
   /**
    * Maximum value (defaults to 100)
    */
-  valueMax?: number
+  valueMax?: Values['valueMax']
   /**
    * Receives the progress of the event
    */
-  valueNow?: number
+  valueNow?: Values['valueNow']
   /**
    * A function for formatting the text provided to screen readers via `aria-valuenow`
    */
   formatScreenReaderValue?:
-    | ((values: { valueNow: number; valueMax: number }) => React.ReactNode)
+    | ((values: Values) => React.ReactNode)
     | React.ReactNode
   /**
    * A function to format the displayed value. If null the value will not display.
    * Takes `valueNow` and `valueMax` as parameters.
    */
-  renderValue?: ((...args: any[]) => any) | React.ReactNode
+  renderValue?: ((values: Values) => React.ReactNode) | React.ReactNode
   /**
    * Controls the overall color scheme of the component
    */
@@ -81,7 +83,7 @@ type ProgressCircleOwnProps = {
    * color on completion, based on `valueNow` and `valueMax`.
    */
   meterColor?:
-    | ((...args: any[]) => ProgressCircleMeterColor)
+    | ((values: Values) => ProgressCircleMeterColor)
     | ProgressCircleMeterColor
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -123,7 +125,7 @@ type ProgressCircleStyle = ComponentStyle<
   | 'meter'
   | 'radii'
   | 'dashOffset'
->
+> & { radii: { radius: number; borderOffsetRadius: number } }
 
 const propTypes: PropValidators<PropKeys> = {
   screenReaderLabel: PropTypes.string.isRequired,
