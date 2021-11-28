@@ -183,7 +183,7 @@ class TextArea extends Component<TextAreaProps> {
     let height = ''
 
     // Notes:
-    // 1. height has be reset to `auto` every time this method runs, or scrollHeight will not reset
+    // 1. height has to be reset to `auto` every time this method runs, or scrollHeight will not reset
     // 2. `this._textarea.scrollHeight` will not reset if assigned to a variable; it needs to be written out each time
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_textarea' does not exist on type 'TextA... Remove this comment to see the full error message
     this._textarea.style.height = 'auto'
@@ -225,8 +225,6 @@ class TextArea extends Component<TextAreaProps> {
     this._height = height
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_textarea' does not exist on type 'TextA... Remove this comment to see the full error message
     this._textarea.style.height = height
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_textarea' does not exist on type 'TextA... Remove this comment to see the full error message
-    this._textarea.scrollTop = this._textarea.scrollHeight
   }
 
   focus() {
