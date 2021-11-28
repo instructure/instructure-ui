@@ -39,23 +39,74 @@ import { TextareaHTMLAttributes } from 'react'
 type TextAreaOwnProps = {
   label: React.ReactNode
   id?: string
+  /**
+   * sets the font-size for the textarea
+   */
   size?: 'small' | 'medium' | 'large'
   layout?: 'stacked' | 'inline'
+  /**
+   * the textarea will expand vertically to fit the height of the content,
+   * unless its content exceeds `maxHeight`
+   */
   autoGrow?: boolean
+  /**
+   * is the textarea resizable (in supported browsers)
+   */
   resize?: 'none' | 'both' | 'horizontal' | 'vertical'
+  /**
+   * a fixed width for the textarea
+   */
   width?: string
+  /**
+   * Initial height for the textarea (if autoGrow is true it will grow vertically)
+   * Accepts CSS units, e.g. '55px'
+   */
   height?: string
+  /**
+   * when autoGrow is true, the textarea will never grow beyond this value
+   */
   maxHeight?: number | string
+  /**
+   * object with shape: `{
+   * text: PropTypes.node,
+   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *   }`
+   */
   messages?: FormMessage[]
   inline?: boolean
+  /**
+   * Html placeholder text to display when the input has no value. This should be hint text, not a label
+   * replacement.
+   */
   placeholder?: string
+  /**
+   * Whether or not to disable the textarea
+   */
   disabled?: boolean
+  /**
+   * Works just like disabled but keeps the same styles as if it were active
+   */
   readOnly?: boolean
+  /**
+   * Sets the required property on the underlying native textArea
+   */
   required?: boolean
-  textareaRef?: (...args: any[]) => any
+  /**
+   * a function that provides a reference to the actual textarea element
+   */
+  textareaRef?: (textarea: HTMLTextAreaElement | null, ...args: any[]) => any
+  /**
+   * value to set on initial render
+   */
   defaultValue?: string
+  /**
+   * the selected value (must be accompanied by an `onChange` prop)
+   */
   value?: any // TODO: controllable(PropTypes.string)
-  onChange?: (...args: any[]) => any
+  /**
+   * when used with the `value` prop, the component will not control its own state
+   */
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => any
 }
 
 type PropKeys = keyof TextAreaOwnProps
@@ -76,73 +127,22 @@ type TextAreaStyle = ComponentStyle<
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
   id: PropTypes.string,
-  /**
-   * sets the font-size for the textarea
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   layout: PropTypes.oneOf(['stacked', 'inline']),
-  /**
-   * the textarea will expand vertically to fit the height of the content,
-   * unless its content exceeds `maxHeight`
-   */
   autoGrow: PropTypes.bool,
-  /**
-   * is the textarea resizable (in supported browsers)
-   */
   resize: PropTypes.oneOf(['none', 'both', 'horizontal', 'vertical']),
-  /**
-   * a fixed width for the textarea
-   */
   width: PropTypes.string,
-  /**
-   * Initial height for the textarea (if autoGrow is true it will grow vertically)
-   * Accepts CSS units, e.g. '55px'
-   */
   height: PropTypes.string,
-  /**
-   * when autoGrow is true, the textarea will never grow beyond this value
-   */
   maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  /**
-   * object with shape: `{
-   * text: PropTypes.node,
-   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   *   }`
-   */
   messages: PropTypes.arrayOf(FormPropTypes.message),
   inline: PropTypes.bool,
-  /**
-   * Html placeholder text to display when the input has no value. This should be hint text, not a label
-   * replacement.
-   */
   placeholder: PropTypes.string,
-  /**
-   * Whether or not to disable the textarea
-   */
   disabled: PropTypes.bool,
-  /**
-   * Works just like disabled but keeps the same styles as if it were active
-   */
   readOnly: PropTypes.bool,
-  /**
-   * Sets the required property on the underlying native textArea
-   */
   required: PropTypes.bool,
-  /**
-   * a function that provides a reference to the actual textarea element
-   */
   textareaRef: PropTypes.func,
-  /**
-   * value to set on initial render
-   */
   defaultValue: PropTypes.string,
-  /**
-   * the selected value (must be accompanied by an `onChange` prop)
-   */
   value: controllable(PropTypes.string),
-  /**
-   * when used with the `value` prop, the component will not control its own state
-   */
   onChange: PropTypes.func
 }
 
