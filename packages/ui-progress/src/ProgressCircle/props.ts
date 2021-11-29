@@ -66,9 +66,7 @@ type ProgressCircleOwnProps = {
   /**
    * A function for formatting the text provided to screen readers via `aria-valuenow`
    */
-  formatScreenReaderValue?:
-    | ((values: Values) => React.ReactNode)
-    | React.ReactNode
+  formatScreenReaderValue?: (values: Values) => string
   /**
    * A function to format the displayed value. If null the value will not display.
    * Takes `valueNow` and `valueMax` as parameters.
@@ -123,7 +121,6 @@ type ProgressCircleStyle = ComponentStyle<
   | 'track'
   | 'border'
   | 'meter'
-  | 'radii'
   | 'dashOffset'
 > & { radii: { radius: string; borderOffsetRadius: string } }
 

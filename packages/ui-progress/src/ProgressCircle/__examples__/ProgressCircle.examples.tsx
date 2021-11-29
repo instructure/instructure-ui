@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { ProgressCircleProps } from '../props'
+import type { ProgressCircleProps, Values } from '../props'
 
 const valueMax = 100
 
@@ -32,7 +32,7 @@ export default {
     valueNow: [0, 40, 80, 100],
     renderValue: [
       null,
-      ({ valueNow, valueMax }: { valueNow: number; valueMax: number }) => (
+      ({ valueNow, valueMax }: Values) => (
         <span>{Math.round((valueNow / valueMax) * 100)}</span>
       )
     ]
@@ -45,10 +45,9 @@ export default {
   },
   getExampleProps: (props: ProgressCircleProps) => {
     return {
-      background: props?.color?.includes('inverse')
+      background: props.color!.includes('inverse')
         ? 'primary-inverse'
         : 'primary'
     }
-  },
-  filter: () => {}
+  }
 }

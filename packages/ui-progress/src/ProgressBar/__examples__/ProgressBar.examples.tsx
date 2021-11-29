@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { ProgressBarProps } from '../props'
+import type { ProgressBarProps, Values } from '../props'
 
 const valueMax = 100
 
@@ -32,13 +32,9 @@ export default {
     valueNow: [0, 40, 80, 100],
     renderValue: [
       null,
-      ({
-        valueNow,
-        valueMax
-      }: {
-        valueNow: ProgressBarProps['valueNow']
-        valueMax: ProgressBarProps['valueMax']
-      }) => <span>{Math.round((valueNow! / valueMax!) * 100)}</span>
+      ({ valueNow, valueMax }: Values) => (
+        <span>{Math.round((valueNow / valueMax) * 100)}</span>
+      )
     ]
   },
   getComponentProps: () => {
@@ -53,6 +49,5 @@ export default {
         ? 'primary-inverse'
         : 'primary'
     }
-  },
-  filter: () => {}
+  }
 }

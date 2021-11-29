@@ -60,7 +60,7 @@ class ProgressBar extends Component<ProgressBarProps> {
 
     // default to showing `success` color on completion
     meterColor: ({ valueNow, valueMax }: Values) =>
-      valueNow! / valueMax! >= 1 ? 'success' : 'brand'
+      valueNow / valueMax >= 1 ? 'success' : 'brand'
   }
 
   ref: Element | null = null
@@ -98,8 +98,9 @@ class ProgressBar extends Component<ProgressBarProps> {
     } = this.props
 
     const valueText =
-      typeof formatScreenReaderValue === 'function' &&
-      formatScreenReaderValue({ valueNow, valueMax })
+      typeof formatScreenReaderValue === 'function'
+        ? formatScreenReaderValue({ valueNow: valueNow!, valueMax: valueMax! })
+        : undefined
     // consolidating the label and aria-valuetext to put in aria-label because
     // NVDA does not read aria-valuetext: https://github.com/nvaccess/nvda/issues/913
     // But leaving aria-valuetext because JAWS ignores aria-label
