@@ -67,7 +67,7 @@ type ProgressBarOwnProps = {
   /**
    * A function for formatting the text provided to screen readers via `aria-valuenow`
    */
-  formatScreenReaderValue?: (...args: any[]) => any
+  formatScreenReaderValue?: (values: Values) => string
   /**
    * A function to format the displayed value. If null the value will not display.
    * Takes `valueNow` and `valueMax` as parameters.

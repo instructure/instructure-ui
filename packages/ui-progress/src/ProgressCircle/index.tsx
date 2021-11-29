@@ -131,8 +131,9 @@ class ProgressCircle extends Component<
     } = this.props
 
     const valueText =
-      typeof formatScreenReaderValue === 'function' &&
-      formatScreenReaderValue({ valueNow: valueNow!, valueMax: valueMax! })
+      typeof formatScreenReaderValue === 'function'
+        ? formatScreenReaderValue({ valueNow: valueNow!, valueMax: valueMax! })
+        : undefined
     // consolidating the label and aria-valuetext to put in aria-label because
     // NVDA does not read aria-valuetext: https://github.com/nvaccess/nvda/issues/913
     // But leaving aria-valuetext because JAWS ignores aria-label
