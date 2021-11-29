@@ -44,7 +44,7 @@ const generateStyle = (
   props: ProgressCircleProps,
   state: ProgressCircleState
 ): ProgressCircleStyle => {
-  const { size, color, meterColor, valueNow, valueMax } = props
+  const { size, color, meterColor, valueNow = 0, valueMax = 100 } = props
   const { shouldAnimateOnMount } = state
 
   const getMeterColorClassName =
