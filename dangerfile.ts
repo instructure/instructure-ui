@@ -28,7 +28,7 @@ const path = require('path')
 const { esBuild, gzip } = require('./scripts/calculateBundleSize')
 
 const META_FILE = path.resolve('./packages/ui/src/index.ts')
-const SIZE_DIFF_TRESHOLD = process.env.SIZE_DIFF_TRESHOLD || 3
+const SIZE_DIFF_THRESHOLD = process.env.SIZE_DIFF_THRESHOLD || 3
 
 const git = async (command: string) => {
   return new Promise((resolve, reject) => {
@@ -102,11 +102,11 @@ const calculateSizeDiff = ({ base, head }: { base: number; head: number }) => {
 
   if (diff < 0) {
     return `:white_check_mark: ${diff}% decrease in bundle size.`
-  } else if (diff >= SIZE_DIFF_TRESHOLD) {
+  } else if (diff >= SIZE_DIFF_THRESHOLD) {
     return `:warning: +${diff}% increase in bundle size.`
   }
 
-  return `Bundle size difference is lower than the specified treshold (diff=${diff}%, treshold=${SIZE_DIFF_TRESHOLD}%).`
+  return `Bundle size difference is lower than the specified threshold (diff=${diff}%, threshold=${SIZE_DIFF_THRESHOLD}%).`
 }
 
 calculateSizes()
