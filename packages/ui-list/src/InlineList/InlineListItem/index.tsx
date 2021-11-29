@@ -54,8 +54,7 @@ class InlineListItem extends Component<InlineListItemProps> {
     padding: 'none',
     spacing: 'none',
     delimiter: 'none',
-    size: 'medium',
-    elementRef: () => {}
+    size: 'medium'
   }
 
   ref: Element | null = null
