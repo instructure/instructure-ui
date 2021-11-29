@@ -55,8 +55,7 @@ class ListItem extends Component<ListItemProps> {
     padding: 'none',
     spacing: 'none',
     delimiter: 'none',
-    size: 'medium',
-    elementRef: () => {}
+    size: 'medium'
   }
 
   ref: Element | null = null

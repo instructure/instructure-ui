@@ -39,13 +39,14 @@ type InlineListOwnProps = {
   /**
    * Only accepts `<InlineList.Item>` as a child
    */
+  //TODO type children better e.g.:ChildrenPropTypes.oneOf([InlineListItem])
   children?: React.ReactNode
+  as?: 'ul' | 'ol'
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
    */
-  as?: 'ul' | 'ol'
   margin?: Spacing
   size?: 'small' | 'medium' | 'large'
   delimiter?: 'none' | 'pipe' | 'slash' | 'arrow'

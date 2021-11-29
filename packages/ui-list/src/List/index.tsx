@@ -53,13 +53,11 @@ class List extends Component<ListProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     as: 'ul',
     delimiter: 'none',
     isUnstyled: false,
     size: 'medium',
-    itemSpacing: 'none',
-    elementRef: () => {}
+    itemSpacing: 'none'
   }
 
   static Item = ListItem

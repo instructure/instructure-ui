@@ -39,7 +39,7 @@ import type {
 } from '@instructure/shared-types'
 
 type ListItemOwnProps = {
-  children: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  children: React.ReactNode | (() => React.ReactNode)
   /**
    * Inherits delimiter from the parent List component.
    */
