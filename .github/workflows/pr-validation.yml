@@ -37,8 +37,9 @@ jobs:
         # only run this step if the previous step has not failed
         # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#steps-context
         if: ${{ steps.deploy_to_netlify.outcome == 'success' }}
-        uses: actions-cool/maintain-one-comment@v2.0.0
+        uses: mshick/add-pr-comment@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login: 'github-actions[bot]'
+          message: |
             Preview URL: ${{ steps.deploy_to_netlify.outputs.preview_url }}
