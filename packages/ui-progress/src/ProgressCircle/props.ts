@@ -125,7 +125,7 @@ type ProgressCircleStyle = ComponentStyle<
   | 'meter'
   | 'radii'
   | 'dashOffset'
-> & { radii: { radius: number; borderOffsetRadius: number } }
+> & { radii: { radius: string; borderOffsetRadius: string } }
 
 const propTypes: PropValidators<PropKeys> = {
   screenReaderLabel: PropTypes.string.isRequired,
