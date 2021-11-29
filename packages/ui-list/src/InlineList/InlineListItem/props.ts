@@ -39,7 +39,6 @@ import type {
 } from '@instructure/shared-types'
 
 type InlineListItemOwnProps = {
-  //TODO type children better e.g.:PropTypes.oneOfType([PropTypes.node, PropTypes.func])
   children: React.ReactNode | (() => React.ReactNode)
   /**
    * Inherits delimiter from the parent InlineList component

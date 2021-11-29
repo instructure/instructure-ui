@@ -92,29 +92,12 @@ type ListProps = ListOwnProps &
 type ListStyle = ComponentStyle<'list'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Only accepts `<List.Item>` as a child
-   */
   children: ChildrenPropTypes.oneOf([ListItem]),
   as: PropTypes.oneOf(['ul', 'ol']),
-  /**
-   * One of: none, dashed, solid
-   */
   delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
-  /**
-   * When set, renders the List Items without a list style type.
-   */
   isUnstyled: PropTypes.bool,
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Sets the margin separating each ListItem.
-   */
   itemSpacing: PropTypes.oneOf([
     'none',
     'xxx-small',
@@ -126,9 +109,6 @@ const propTypes: PropValidators<PropKeys> = {
     'x-large',
     'xx-large'
   ]),
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 
