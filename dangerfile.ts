@@ -28,6 +28,8 @@ const path = require('path')
 const { esBuild, gzip } = require('./scripts/calculateBundleSize')
 
 const META_FILE = path.resolve('./packages/ui/src/index.ts')
+const SIZE_DIFF_TRESHOLD = process.env.SIZE_DIFF_TRESHOLD || 3
+
 const git = async (command: string) => {
   return new Promise((resolve, reject) => {
     // eslint-disable-next-line no-console
@@ -59,6 +61,11 @@ const calculateSizes = async () => {
     META_FILE,
     headCommitSha
   )
+  // instead of showing the analysis in the comment
+  // just print it inside the job's console so we won't
+  // send out huge emails with the bundle analysis in them
+  // eslint-disable-next-line no-console
+  console.log(analysis)
 
   const prHeadStats = await gzip(outFile2)
 
@@ -80,11 +87,6 @@ const calculateSizes = async () => {
     danger.github.pr.head.sha
   }) | **${formatSize(prHeadStats.size)}**
   **${calculateSizeDiff({ base: baseStats.size, head: prHeadStats.size })}**
-  <details>
-    <summary>Read more about the bundle analysis:</summary>
-    <div>Warning: these are not gizpped sizes!</div>
-      <pre>${analysis}</pre>
-  </details>
   `)
 }
 
@@ -95,13 +97,16 @@ const calculateSizeDiff = ({ base, head }: { base: number; head: number }) => {
   if (base === head) {
     return 'Same bundle size.'
   }
+  // this will give back us the diff between the packages in %
   const diff = Number((1 - base / head).toFixed(2)) * 100
 
   if (diff < 0) {
     return `:white_check_mark: ${diff}% decrease in bundle size.`
+  } else if (diff >= SIZE_DIFF_TRESHOLD) {
+    return `:warning: +${diff}% increase in bundle size.`
   }
 
-  return `:warning: +${diff}$ increase in bundle size.`
+  return `Bundle size difference is lower than the specified treshold (diff=${diff}%, treshold=${SIZE_DIFF_TRESHOLD}%).`
 }
 
 calculateSizes()

@@ -46,7 +46,7 @@ const esBuild = async (entryPoint, sha) => {
 }
 const gzip = async (fileName) => {
   const file = path.resolve(fileName)
-  await execAsync(`gzip -k ${file}`)
+  await execAsync(`gzip ${file}`)
 
   const stats = await fsp.stat(path.resolve(`${file}.gz`))
 
