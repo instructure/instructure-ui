@@ -84,22 +84,14 @@ class Select extends Component<SelectProps> {
     visibleOptionsCount: 8,
     placement: 'bottom stretch',
     constrain: 'window',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestShowOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestHideOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestHighlightOption: (event, data) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestSelectOption: (event, data) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    inputRef: (node) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    listRef: (node) => {},
+    onFocus: () => {},
+    onBlur: () => {},
+    onRequestShowOptions: () => {},
+    onRequestHideOptions: () => {},
+    onRequestHighlightOption: () => {},
+    onRequestSelectOption: () => {},
+    inputRef: () => {},
+    listRef: () => {},
     renderBeforeInput: null,
     renderAfterInput: null,
     children: null,
@@ -461,12 +453,8 @@ class Select extends Component<SelectProps> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'data' implicitly has an 'any' type.
   renderList(data) {
     const { getListProps, getOptionProps, getDisabledOptionProps } = data
-    const {
-      isShowingOptions,
-      optionsMaxWidth,
-      visibleOptionsCount,
-      children
-    } = this.props
+    const { isShowingOptions, optionsMaxWidth, visibleOptionsCount, children } =
+      this.props
 
     let lastWasGroup = false
     const viewProps = isShowingOptions
