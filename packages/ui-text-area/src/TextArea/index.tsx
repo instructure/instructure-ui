@@ -273,7 +273,7 @@ class TextArea extends Component<TextAreaProps> {
     const style = {
       width,
       resize,
-      height: !autoGrow ? height : null,
+      height: !autoGrow ? height : undefined,
       maxHeight
     }
 
@@ -287,12 +287,11 @@ class TextArea extends Component<TextAreaProps> {
           this._textarea = textarea
           textareaRef!.apply(this, [textarea, ...args])
         }}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ width: string | undefined; resize: "none" ... Remove this comment to see the full error message
         style={style}
         id={this.id}
         required={required}
         aria-required={required}
-        aria-invalid={this.invalid ? 'true' : null}
+        aria-invalid={this.invalid ? 'true' : 'false'}
         disabled={disabled || readOnly}
         css={this.props.styles?.textArea}
         onChange={this.handleChange}
