@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import {
   callRenderProp,
@@ -50,6 +50,7 @@ import { allowedProps, propTypes } from './props'
 category: components
 tags: form, field
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -68,30 +69,21 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     shouldNotWrap: false,
     size: 'medium',
     textAlign: 'start',
-    messages: [],
-    // @ts-expect-error ts-migrate(6133) FIXME: 'input' is declared but its value is never read.
-    inputRef: function (input) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'container' is declared but its value is never rea... Remove this comment to see the full error message
-    inputContainerRef: function (container) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onChange: function (event, value) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: function (event) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: function (event) {}
+    messages: []
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: TextInputProps) {
     super(props)
     this.state = { hasFocus: false }
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Text... Remove this comment to see the full error message
     this._defaultId = uid('TextInput')
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Tex... Remove this comment to see the full error message
     this._messagesId = uid('TextInput-messages')
   }
 
   ref: Element | null = null
+
+  private _input: HTMLInputElement | null = null
+  private _defaultId: string
+  private _messagesId: string
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
@@ -106,8 +98,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
@@ -121,8 +112,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
-    this._input.focus()
+    this._input?.focus()
   }
 
   get interaction() {
@@ -130,7 +120,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   }
 
   get hasMessages() {
-    return this.props.messages && this.props.messages.length > 0
+    return !!this.props.messages && this.props.messages.length > 0
   }
 
   get invalid() {
@@ -143,47 +133,44 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
     return isActiveElement(this._input)
   }
 
   get value() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
-    return this._input.value
+    return this._input?.value
   }
 
   get id() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Text... Remove this comment to see the full error message
     return this.props.id || this._defaultId
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
-  handleInputRef = (node) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
+  handleInputRef = (node: HTMLInputElement | null) => {
     this._input = node
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.inputRef(node)
+
+    if (typeof this.props.inputRef === 'function') {
+      this.props.inputRef(node)
+    }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleChange = (event) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onChange(event, event.target.value)
+  handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(event, event.target.value)
+    }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleBlur = (event) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onBlur(event)
+  handleBlur: React.FocusEventHandler<HTMLInputElement> = (event) => {
+    if (typeof this.props.onBlur === 'function') {
+      this.props.onBlur(event)
+    }
     this.setState({
       hasFocus: false
     })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleFocus = (event) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onFocus(event)
+  handleFocus: React.FocusEventHandler<HTMLInputElement> = (event) => {
+    if (typeof this.props.onFocus === 'function') {
+      this.props.onFocus(event)
+    }
     this.setState({
       hasFocus: true
     })
@@ -203,7 +190,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       ...rest
     } = this.props
 
-    const props = passthroughProps(rest)
+    const props: Partial<TextInputProps> = passthroughProps(rest)
 
     const { interaction } = this
 
@@ -215,10 +202,8 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     if (this.hasMessages) {
       descriptionIds =
         descriptionIds !== ''
-          ? // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Tex... Remove this comment to see the full error message
-            `${descriptionIds} ${this._messagesId}`
-          : // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Tex... Remove this comment to see the full error message
-            this._messagesId
+          ? `${descriptionIds} ${this._messagesId}`
+          : this._messagesId
     }
 
     return (
@@ -267,14 +252,12 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       <FormField
         id={this.id}
         label={callRenderProp(renderLabel)}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Tex... Remove this comment to see the full error message
         messagesId={this._messagesId}
         messages={messages}
         inline={display === 'inline-block'}
         width={width}
         inputContainerRef={inputContainerRef}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'layout' does not exist on type 'Readonly... Remove this comment to see the full error message
-        layout={this.props.layout} // eslint-disable-line react/prop-types
+        layout={this.props.layout}
         elementRef={this.handleRef}
       >
         <span css={styles?.facade}>

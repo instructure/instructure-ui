@@ -23,9 +23,12 @@
  */
 
 import React from 'react'
+
 import { IconSearchLine } from '@instructure/ui-icons'
 import { Badge } from '@instructure/ui-badge'
 import { Tag } from '@instructure/ui-tag'
+
+import type { TextInputProps } from '../props'
 
 const renderBeforeInput = () => {
   return (
@@ -57,8 +60,7 @@ export default {
     width: [undefined, '4em'],
     messages: [undefined, [{ type: 'hint', text: 'hint text' }]]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       renderLabel: 'A text input',
       isRequired: false,
@@ -69,16 +71,14 @@ export default {
     }
   },
   excludeProps: ['readOnly', 'disabled'],
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: TextInputProps) => {
     return (
       (props.display === 'inline-block' && !props.width) ||
       (props.renderBeforeInput && props.width) ||
       (props.renderAfterInput && props.width) ||
       props.interaction === 'readonly' ||
       (props.placeholder && props.width) ||
-      (props.size !== 'medium' && props.width) ||
-      (props.size !== 'medium' && props.wrap)
+      (props.size !== 'medium' && props.width)
     )
   }
 }

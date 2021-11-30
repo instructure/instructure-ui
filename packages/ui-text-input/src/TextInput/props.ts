@@ -29,7 +29,7 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 import { controllable } from '@instructure/ui-prop-types'
 
 import type { InteractionType } from '@instructure/ui-react-utils'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormFieldProps, FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
   PropValidators,
@@ -38,29 +38,132 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TextInputOwnProps = {
-  renderLabel?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * The form field label.
+   */
+  renderLabel?: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * Determines the underlying native HTML `<input>` element's `type`.
+   * For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url
+   */
   type?: 'text' | 'email' | 'url' | 'tel' | 'search' | 'password'
+
+  /**
+   * The id of the text input. One is generated if not supplied.
+   */
   id?: string
-  value?: any // TODO: controllable(PropTypes.string)
+
+  /**
+   * the selected value (must be accompanied by an `onChange` prop)
+   */
+  value?: string // TODO: controllable(PropTypes.string)
+
+  /**
+   * value to set on initial render
+   */
   defaultValue?: string
+
+  /**
+   * Specifies if interaction with the input is enabled, disabled, or readonly.
+   * When "disabled", the input changes visibly to indicate that it cannot
+   * receive user interactions. When "readonly" the input still cannot receive
+   * user interactions but it keeps the same styles as if it were enabled.
+   */
   interaction?: InteractionType
+
+  /**
+   * Array of objects with shape: `{
+   *   text: PropTypes.node,
+   *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   * }`
+   */
   messages?: FormMessage[]
+
+  /**
+   * The size of the text input.
+   */
   size?: 'small' | 'medium' | 'large'
+
+  /**
+   * The text alignment of the input.
+   */
   textAlign?: 'start' | 'center'
+
+  /**
+   * The width of the input.
+   */
   width?: string
+
+  /**
+   * The width of the input, in characters, if a width is not explicitly
+   * provided via the `width` prop. Only applicable if `isInline={true}`.
+   */
   htmlSize?: string | number
+
+  /**
+   * The display of the root element.
+   */
   display?: 'inline-block' | 'block'
+
+  /**
+   * Prevents the default behavior of wrapping the input and rendered content
+   * when available space is exceeded.
+   */
   shouldNotWrap?: boolean
+
+  /**
+   * Html placeholder text to display when the input has no value. This should be hint text, not a label
+   * replacement.
+   */
   placeholder?: string
+
+  /**
+   * Whether or not the text input is required.
+   */
   isRequired?: boolean
+
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
-  inputRef?: (...args: any[]) => any
-  inputContainerRef?: (...args: any[]) => any
-  renderBeforeInput?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterInput?: React.ReactNode | ((...args: any[]) => any)
-  onChange?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
+
+  /**
+   * a function that provides a reference to the actual input element
+   */
+  inputRef?: (inputElement: HTMLInputElement | null) => void
+
+  /**
+   * a function that provides a reference a parent of the input element
+   */
+  inputContainerRef?: (element: Element | null) => void
+
+  /**
+   * Content to display before the input text, such as an icon
+   */
+  renderBeforeInput?: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * Content to display after the input text, such as an icon
+   */
+  renderAfterInput?: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * Callback executed when the input fires a change event.
+   * @param {Object} event - the event object
+   * @param {Object} value - the string value of the input
+   */
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void
+
+  /**
+   * Callback fired when input loses focus.
+   */
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+
+  /**
+   * Callback fired when input receives focus.
+   */
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
 }
 
 type PropKeys = keyof TextInputOwnProps
@@ -69,7 +172,13 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TextInputProps = TextInputOwnProps &
   WithStyleProps<TextInputTheme, TextInputStyle> &
-  OtherHTMLAttributes<TextInputOwnProps, InputHTMLAttributes<TextInputOwnProps>>
+  OtherHTMLAttributes<
+    TextInputOwnProps,
+    InputHTMLAttributes<TextInputOwnProps>
+  > &
+  // The component will handle pass this prop to FormField, but it shouldn't be
+  // listed as a prop
+  Pick<FormFieldProps, 'layout'>
 
 type TextInputStyle = ComponentStyle<
   | 'textInput'
@@ -82,109 +191,28 @@ type TextInputStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The form field label.
-   */
   renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Determines the underlying native HTML `<input>` element's `type`.
-   * For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url
-   */
   type: PropTypes.oneOf(['text', 'email', 'url', 'tel', 'search', 'password']),
-  /**
-   * The id of the text input. One is generated if not supplied.
-   */
   id: PropTypes.string,
-  /**
-   * the selected value (must be accompanied by an `onChange` prop)
-   */
   value: controllable(PropTypes.string),
-  /**
-   * value to set on initial render
-   */
   defaultValue: PropTypes.string,
-  /**
-   * Specifies if interaction with the input is enabled, disabled, or readonly.
-   * When "disabled", the input changes visibly to indicate that it cannot
-   * receive user interactions. When "readonly" the input still cannot receive
-   * user interactions but it keeps the same styles as if it were enabled.
-   */
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  /**
-   * object with shape: `{
-   * text: PropTypes.node,
-   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   *   }`
-   */
   messages: PropTypes.arrayOf(FormPropTypes.message),
-  /**
-   * The size of the text input.
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * The text alignment of the input.
-   */
   textAlign: PropTypes.oneOf(['start', 'center']),
-  /**
-   * The width of the input.
-   */
   width: PropTypes.string,
-  /**
-   * The width of the input, in characters, if a width is not explicitly
-   * provided via the `width` prop. Only applicable if `isInline={true}`.
-   */
   htmlSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * The display of the root element.
-   */
   display: PropTypes.oneOf(['inline-block', 'block']),
-  /**
-   * Prevents the default behavior of wrapping the input and rendered content
-   * when available space is exceeded.
-   */
   shouldNotWrap: PropTypes.bool,
-  /**
-   * Html placeholder text to display when the input has no value. This should be hint text, not a label
-   * replacement.
-   */
   placeholder: PropTypes.string,
-  /**
-   * Whether or not the text input is required.
-   */
   isRequired: PropTypes.bool,
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func,
-  /**
-   * a function that provides a reference to the actual input element
-   */
   inputRef: PropTypes.func,
-  /**
-   * a function that provides a reference a parent of the input element
-   */
   inputContainerRef: PropTypes.func,
-  /**
-   * Content to display before the input text, such as an icon
-   */
   renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Content to display after the input text, such as an icon
-   */
   renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Callback executed when the input fires a change event.
-   * @param {Object} event - the event object
-   * @param {Object} value - the string value of the input
-   */
   onChange: PropTypes.func,
-  /**
-   * Callback fired when input loses focus.
-   */
   onBlur: PropTypes.func,
-  /**
-   * Callback fired when input receives focus.
-   */
   onFocus: PropTypes.func
 }
 
