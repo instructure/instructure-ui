@@ -122,10 +122,12 @@ class Document extends Component<
   renderDescription(doc: SingleChildrenType, description: string) {
     const { id, title } = doc
 
+    const filteredDescription = description.replace('@tsProps', '')
+
     return this.props.description ? (
       <Description
         id={`${id}Description`}
-        content={description}
+        content={filteredDescription}
         title={title}
       />
     ) : null

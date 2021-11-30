@@ -33,12 +33,25 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { FormFieldLayoutOwnProps } from '../FormFieldLayout/props'
 import type { FormMessage } from '../FormPropTypes'
 
 type FormFieldGroupOwnProps = {
   description: React.ReactNode
+  /**
+   * the element type to render as
+   */
   as?: AsElementType
+  /**
+   * Array of objects with shape: `{
+   *   text: React.ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
+   */
   messages?: FormMessage[]
+  /**
+   * id for the form field messages
+   */
   messagesId?: string
   disabled?: boolean
   children?: React.ReactNode
@@ -46,7 +59,10 @@ type FormFieldGroupOwnProps = {
   rowSpacing?: 'none' | 'small' | 'medium' | 'large'
   colSpacing?: 'none' | 'small' | 'medium' | 'large'
   vAlign?: 'top' | 'middle' | 'bottom'
-  startAt?: any // TODO: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
+  startAt?: 'small' | 'medium' | 'large' | 'x-large' | null
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
 }
 
@@ -60,26 +76,20 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FormFieldGroupProps = FormFieldGroupOwnProps &
   WithStyleProps<FormFieldGroupTheme, FormFieldGroupStyle> &
-  OtherHTMLAttributes<FormFieldGroupOwnProps>
+  OtherHTMLAttributes<FormFieldGroupOwnProps> &
+  // Adding other props that can be passed to FormFieldLayout,
+  // excluding the ones we set manually
+  Omit<
+    FormFieldLayoutOwnProps,
+    'messages' | 'messagesId' | 'vAlign' | 'layout' | 'label' | 'children'
+  >
 
 type FormFieldGroupStyle = ComponentStyle<'formFieldGroup'>
 
 const propTypes: PropValidators<PropKeys> = {
   description: PropTypes.node.isRequired,
-  /**
-   * the element type to render as
-   */
   as: PropTypes.elementType,
-  /**
-   * object with shape: `{
-   * text: PropTypes.node,
-   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   *   }`
-   */
   messages: PropTypes.arrayOf(FormPropTypes.message),
-  /**
-   * id for the form field messages
-   */
   messagesId: PropTypes.string,
   disabled: PropTypes.bool,
   children: PropTypes.node,
@@ -88,9 +98,6 @@ const propTypes: PropValidators<PropKeys> = {
   colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
   vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
   startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 

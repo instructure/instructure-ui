@@ -33,8 +33,8 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type FormFieldLabelOwnProps = {
-  as?: AsElementType
   children: React.ReactNode
+  as?: AsElementType
 }
 
 type PropKeys = keyof FormFieldLabelOwnProps
@@ -48,8 +48,8 @@ type FormFieldLabelProps = FormFieldLabelOwnProps &
 type FormFieldLabelStyle = ComponentStyle<'formFieldLabel'>
 
 const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  as: PropTypes.elementType
 }
 
 const allowedProps: AllowedPropKeys = ['as', 'children']

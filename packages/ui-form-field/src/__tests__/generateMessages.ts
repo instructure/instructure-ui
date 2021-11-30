@@ -22,11 +22,12 @@
  * SOFTWARE.
  */
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'type' implicitly has an 'any' type.
-const generateText = (type) => `${type} message`
+import type { FormMessageType } from '../FormPropTypes'
+
+const generateText = (type: FormMessageType) => `${type} message`
 
 export default function generateMessages(
-  types = ['hint', 'success', 'error'],
+  types: FormMessageType[] = ['hint', 'success', 'error'],
   withEmptyMessage = true,
   text = generateText
 ) {

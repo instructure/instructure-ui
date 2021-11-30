@@ -25,6 +25,7 @@
 import React from 'react'
 
 import generateMessages from './generateMessages'
+import type { FormFieldGroupProps } from '../props'
 
 export default {
   sectionProp: 'layout',
@@ -32,8 +33,7 @@ export default {
   propValues: {
     messages: generateMessages()
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       description: 'A form field group',
       children: [
@@ -43,13 +43,11 @@ export default {
       ]
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: FormFieldGroupProps) => {
     return (
       props.vAlign ||
       props.startAt ||
       (props.layout === 'columns' && props.rowSpacing !== 'none') ||
-      (props.layout === 'rows' && props.colSpacing !== 'none') ||
       (props.layout !== 'inline' && props.vAlign !== 'middle')
     )
   }

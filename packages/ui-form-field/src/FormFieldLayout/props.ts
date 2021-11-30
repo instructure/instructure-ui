@@ -36,16 +36,35 @@ import type { FormMessage } from '../FormPropTypes'
 
 type FormFieldLayoutOwnProps = {
   label: React.ReactNode
+  /**
+   * the id of the input (to link it to its label for a11y)
+   */
   id?: string
+  /**
+   * the element type to render as
+   */
   as?: AsElementType
+  /**
+   * Array of objects with shape: `{
+   *   text: React.ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
+   */
   messages?: FormMessage[]
+  /**
+   * id for the form field messages
+   */
   messagesId?: string
   children?: React.ReactNode
   inline?: boolean
   layout?: 'stacked' | 'inline'
   labelAlign?: 'start' | 'end'
+  vAlign?: 'top' | 'middle' | 'bottom'
   width?: string
-  inputContainerRef?: (...args: any[]) => any
+  inputContainerRef?: (element: Element | null) => void
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
 }
 
@@ -61,34 +80,17 @@ type FormFieldLayoutStyle = ComponentStyle<'formFieldLayout'>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
-  /**
-   * the id of the input (to link it to its label for a11y)
-   */
   id: PropTypes.string,
-  /**
-   * the element type to render as
-   */
   as: PropTypes.elementType,
-  /**
-   * object with shape: `{
-   * text: PropTypes.node,
-   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   *   }`
-   */
   messages: PropTypes.arrayOf(FormPropTypes.message),
-  /**
-   * id for the form field messages
-   */
   messagesId: PropTypes.string,
   children: PropTypes.node,
   inline: PropTypes.bool,
   layout: PropTypes.oneOf(['stacked', 'inline']),
   labelAlign: PropTypes.oneOf(['start', 'end']),
+  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
   width: PropTypes.string,
   inputContainerRef: PropTypes.func,
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 
@@ -105,7 +107,15 @@ const allowedProps: AllowedPropKeys = [
   'width',
   'inputContainerRef',
   'elementRef'
+
+  // added vAlign because FormField and FormFieldGroup passes it, but not adding
+  // it to allowedProps to prevent it from getting passed through accidentally
+  //'vAlign'
 ]
 
-export type { FormFieldLayoutProps, FormFieldLayoutStyle }
+export type {
+  FormFieldLayoutProps,
+  FormFieldLayoutStyle,
+  FormFieldLayoutOwnProps
+}
 export { propTypes, allowedProps }

@@ -39,6 +39,7 @@ import type { FormFieldMessageProps } from './props'
 ---
 parent: FormField
 ---
+@tsProps
 
 This is a helper component that is used by most of the custom form
 components. In most cases it shouldn't be used directly.
@@ -57,8 +58,7 @@ class FormFieldMessage extends Component<FormFieldMessageProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    variant: 'hint',
-    children: null
+    variant: 'hint'
   }
 
   ref: Element | null = null
@@ -68,14 +68,11 @@ class FormFieldMessage extends Component<FormFieldMessageProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   render() {

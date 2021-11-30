@@ -35,6 +35,7 @@ import type { FormFieldProps } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 class FormField extends Component<FormFieldProps> {
   static readonly componentId = 'FormField'
@@ -45,8 +46,7 @@ class FormField extends Component<FormFieldProps> {
     inline: false,
     layout: 'stacked',
     labelAlign: 'end',
-    vAlign: 'middle',
-    children: null
+    vAlign: 'middle'
   }
 
   ref: Element | null = null
@@ -66,7 +66,7 @@ class FormField extends Component<FormFieldProps> {
       <FormFieldLayout
         {...omitProps(this.props, FormField.allowedProps)}
         {...pickProps(this.props, FormFieldLayout.allowedProps)}
-        // @ts-expect-error ts-migrate(2322) FIXME: Remove this comment to see the full error message
+        label={this.props.label}
         vAlign={this.props.vAlign}
         as="label"
         htmlFor={this.props.id}

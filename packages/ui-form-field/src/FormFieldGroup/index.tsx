@@ -41,6 +41,7 @@ import type { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class FormFieldGroup extends Component<FormFieldGroupProps> {
@@ -49,7 +50,6 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     as: 'fieldset',
     disabled: false,
     rowSpacing: 'medium',
@@ -70,14 +70,11 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles?.(this.makeStylesVariables)
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+  componentDidUpdate() {
+    this.props.makeStyles?.(this.makeStylesVariables)
   }
 
   get makeStylesVariables(): FormFieldGroupStyleProps {
@@ -143,12 +140,11 @@ class FormFieldGroup extends Component<FormFieldGroupProps> {
       <FormFieldLayout
         {...omitProps(props, FormFieldGroup.allowedProps)}
         {...pickProps(props, FormFieldLayout.allowedProps)}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; vAlign: "top" | "middle... Remove this comment to see the full error message
         vAlign={props.vAlign}
         layout={props.layout === 'inline' ? 'inline' : 'stacked'}
         label={props.description}
-        aria-disabled={props.disabled ? 'true' : null}
-        aria-invalid={this.invalid ? 'true' : null}
+        aria-disabled={props.disabled ? 'true' : undefined}
+        aria-invalid={this.invalid ? 'true' : undefined}
         elementRef={this.handleRef}
       >
         {this.renderFields()}

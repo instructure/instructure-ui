@@ -35,8 +35,7 @@ import type { FormFieldLayoutProps, FormFieldLayoutStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  // @ts-expect-error no theme used here
-  componentTheme,
+  _componentTheme: null,
   props: FormFieldLayoutProps
 ): FormFieldLayoutStyle => {
   const { inline } = props
