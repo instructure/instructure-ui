@@ -52,11 +52,12 @@ describe('<Link />', async () => {
   })
 
   it('should focus with the focus helper', async () => {
-    let linkRef
+    let linkRef: Link | undefined
+
     await mount(
       <Link
         href="https://instructure.design"
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
         componentRef={(el) => {
           linkRef = el
         }}
@@ -65,10 +66,8 @@ describe('<Link />', async () => {
       </Link>
     )
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    linkRef.focus()
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(linkRef.focused).to.be.true()
+    linkRef?.focus()
+    expect(linkRef?.focused).to.be.true()
 
     const link = await LinkLocator.find()
     const focusable = await link.find(':focusable')
@@ -189,16 +188,10 @@ describe('<Link />', async () => {
 
   describe('with `as` prop', async () => {
     describe('with `onClick`', async () => {
-      // @ts-expect-error ts-migrate(7034) FIXME: Variable 'onClick' implicitly has type 'any' in so... Remove this comment to see the full error message
-      let onClick
-
-      before(() => {
-        onClick = Function.prototype
-      })
+      const onClick = stub()
 
       it('should render designated tag', async () => {
         await mount(
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           <Link as="a" onClick={onClick}>
             Hello World
           </Link>
@@ -210,7 +203,6 @@ describe('<Link />', async () => {
 
       it('should set role="button"', async () => {
         await mount(
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           <Link as="span" onClick={onClick}>
             Hello World
           </Link>
@@ -221,7 +213,6 @@ describe('<Link />', async () => {
       describe('should not set type="button", unless it is actually a button', async () => {
         it('should not set type="button" on other things like <span>s', async () => {
           await mount(
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             <Link as="span" onClick={onClick}>
               Hello World
             </Link>
@@ -235,7 +226,6 @@ describe('<Link />', async () => {
 
         it('should set type="button" on <button>s', async () => {
           await mount(
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             <Link as="button" onClick={onClick}>
               Hello World
             </Link>
@@ -246,7 +236,6 @@ describe('<Link />', async () => {
 
       it('should set tabIndex="0"', async () => {
         await mount(
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           <Link as="span" onClick={onClick}>
             Hello World
           </Link>
@@ -324,19 +313,16 @@ describe('<Link />', async () => {
 
   describe('when a `to` is provided', async () => {
     it('should render an anchor element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Link to="/example">Hello World</Link>)
       expect(await LinkLocator.find('a')).to.exist()
     })
 
     it('should set the to attribute', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Link to="/example">Hello World</Link>)
       expect(await LinkLocator.find('[to="/example"]')).to.exist()
     })
 
     it('should not set role="button"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Link to="/example">Hello World</Link>)
       expect(
         await LinkLocator.find('[role="button"]', {

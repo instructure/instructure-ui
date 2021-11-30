@@ -43,16 +43,19 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type { LinkProps, LinkStyleProps } from './props'
+import type { LinkProps, LinkState, LinkStyleProps } from './props'
+
+import type { ViewOwnProps } from '@instructure/ui-view'
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Link extends Component<LinkProps> {
+class Link extends Component<LinkProps, LinkState> {
   static readonly componentId = 'Link'
 
   static propTypes = propTypes
@@ -74,17 +77,14 @@ class Link extends Component<LinkProps> {
 
     return this.ref
   }
-  ref: HTMLElement | null = null
+  ref: Element | null = null
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+  componentDidUpdate() {
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   makeStyleProps = (): LinkStyleProps => {
@@ -94,8 +94,7 @@ class Link extends Component<LinkProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleElementRef = (el) => {
+  handleElementRef = (el: Element | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -105,8 +104,7 @@ class Link extends Component<LinkProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleClick = (event) => {
+  handleClick: React.MouseEventHandler<ViewOwnProps> = (event) => {
     const { onClick } = this.props
     const { interaction } = this
 
@@ -118,16 +116,14 @@ class Link extends Component<LinkProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleFocus = (event) => {
+  handleFocus: React.FocusEventHandler<ViewOwnProps> = (event) => {
     this.setState({ hasFocus: true })
     if (typeof this.props.onFocus === 'function') {
       this.props.onFocus(event)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleBlur = (event) => {
+  handleBlur: React.FocusEventHandler<ViewOwnProps> = (event) => {
     this.setState({ hasFocus: false })
     if (typeof this.props.onBlur === 'function') {
       this.props.onBlur(event)
@@ -187,7 +183,7 @@ class Link extends Component<LinkProps> {
   }
 
   focus() {
-    this.ref && this.ref.focus()
+    this.ref && (this.ref as HTMLElement).focus()
   }
 
   renderIcon() {
@@ -223,7 +219,7 @@ class Link extends Component<LinkProps> {
       this.element === 'button' || this.element === 'input'
         ? 'button'
         : undefined
-    const tabIndex = role === 'button' && !isDisabled ? '0' : undefined
+    const tabIndex = role === 'button' && !isDisabled ? 0 : undefined
 
     return (
       <View
@@ -239,7 +235,6 @@ class Link extends Component<LinkProps> {
         aria-disabled={isDisabled ? 'true' : undefined}
         role={role}
         type={type}
-        //@ts-expect-error fix to be number
         tabIndex={tabIndex}
         css={this.props.styles?.link}
       >
