@@ -50,13 +50,10 @@ const navMinimized = ({ minimized }) => ({ minimized: !minimized })
 category: components/deprecated
 ---
 **/
-@deprecated(
-  '8.12.0',
-  null,
-  'No one uses <Navigation>, so we will deprecate it.'
-)
+
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
+@deprecated('9.0.0', null, 'No one uses <Navigation>, so we will deprecate it.')
 class Navigation extends Component<NavigationProps, NavigationState> {
   static readonly componentId = 'Navigation'
 
