@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '../FormPropTypes'
@@ -35,8 +34,20 @@ import type { FormMessage } from '../FormPropTypes'
 
 type FormFieldOwnProps = {
   label: React.ReactNode
+  /**
+   * the id of the input (to link it to its label for a11y)
+   */
   id: string
+  /**
+   * Array of objects with shape: `{
+   *   text: React.ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
+   */
   messages?: FormMessage[]
+  /**
+   * id for the form field messages
+   */
   messagesId?: string
   children?: React.ReactNode
   inline?: boolean
@@ -44,7 +55,10 @@ type FormFieldOwnProps = {
   labelAlign?: 'start' | 'end'
   vAlign?: 'top' | 'middle' | 'bottom'
   width?: string
-  inputContainerRef?: (...args: any[]) => any
+  inputContainerRef?: (element: Element | null) => void
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
 }
 
@@ -56,16 +70,7 @@ type FormFieldProps = FormFieldOwnProps & OtherHTMLAttributes<FormFieldOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
-  /**
-   * the id of the input (to link it to its label for a11y)
-   */
   id: PropTypes.string.isRequired,
-  /**
-   * object with shape: `{
-   *   text: PropTypes.node,
-   *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   * }`
-   */
   messages: PropTypes.arrayOf(FormPropTypes.message),
   messagesId: PropTypes.string,
   children: PropTypes.node,
@@ -75,9 +80,6 @@ const propTypes: PropValidators<PropKeys> = {
   vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
   width: PropTypes.string,
   inputContainerRef: PropTypes.func,
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 

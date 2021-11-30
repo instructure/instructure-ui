@@ -35,6 +35,12 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '../FormPropTypes'
 
 type FormFieldMessagesOwnProps = {
+  /**
+   * Array of objects with shape: `{
+   *   text: React.ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
+   */
   messages?: FormMessage[]
 }
 
@@ -49,12 +55,6 @@ type FormFieldMessagesProps = FormFieldMessagesOwnProps &
 type FormFieldMessagesStyle = ComponentStyle<'formFieldMessages' | 'message'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * object with shape: `{
-   * text: PropTypes.node,
-   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   *   }`
-   */
   messages: PropTypes.arrayOf(FormPropTypes.message)
 }
 
