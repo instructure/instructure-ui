@@ -45,6 +45,7 @@ type TextInputOwnProps = {
 
   /**
    * Determines the underlying native HTML `<input>` element's `type`.
+   *
    * For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url
    */
   type?: 'text' | 'email' | 'url' | 'tel' | 'search' | 'password'
@@ -96,10 +97,14 @@ type TextInputOwnProps = {
   width?: string
 
   /**
-   * The width of the input, in characters, if a width is not explicitly
-   * provided via the `width` prop. Only applicable if `isInline={true}`.
+   * The width of the input (integer value 0 or higher), if a width is not explicitly
+   * provided via the `width` prop.
+   *
+   * Only applicable if `display="inline-block"`.
+   *
+   * For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/size
    */
-  htmlSize?: string | number
+  htmlSize?: number
 
   /**
    * The display of the root element.
@@ -201,7 +206,7 @@ const propTypes: PropValidators<PropKeys> = {
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   textAlign: PropTypes.oneOf(['start', 'center']),
   width: PropTypes.string,
-  htmlSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  htmlSize: PropTypes.number,
   display: PropTypes.oneOf(['inline-block', 'block']),
   shouldNotWrap: PropTypes.bool,
   placeholder: PropTypes.string,

@@ -190,7 +190,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       ...rest
     } = this.props
 
-    const props: Partial<TextInputProps> = passthroughProps(rest)
+    const props = passthroughProps(rest)
 
     const { interaction } = this
 
@@ -217,11 +217,10 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         type={type}
         id={this.id}
         required={isRequired}
-        aria-invalid={this.invalid ? 'true' : null}
+        aria-invalid={this.invalid ? 'true' : undefined}
         disabled={interaction === 'disabled'}
         readOnly={interaction === 'readonly'}
-        aria-describedby={descriptionIds !== '' ? descriptionIds : null}
-        //@ts-expect-error can't be string
+        aria-describedby={descriptionIds !== '' ? descriptionIds : undefined}
         size={htmlSize}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
