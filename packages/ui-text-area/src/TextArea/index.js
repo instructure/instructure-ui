@@ -220,7 +220,7 @@ class TextArea extends Component {
     let height = ''
 
     // Notes:
-    // 1. height has be reset to `auto` every time this method runs, or scrollHeight will not reset
+    // 1. height has to be reset to `auto` every time this method runs, or scrollHeight will not reset
     // 2. `this._textarea.scrollHeight` will not reset if assigned to a variable; it needs to be written out each time
     this._textarea.style.height = 'auto'
     this._textarea.style.overflowY = 'hidden' // hide scrollbars for autoGrow textareas
@@ -250,7 +250,6 @@ class TextArea extends Component {
 
     this._height = height
     this._textarea.style.height = height
-    this._textarea.scrollTop = this._textarea.scrollHeight
   }
 
   focus() {
