@@ -23,30 +23,31 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, within, find } from '@instructure/ui-test-utils'
 
 import { TextInput } from '../index'
 
 describe('<TextInput/>', async () => {
   it('should include a label', async () => {
     await mount(<TextInput renderLabel="Name" />)
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'find'.
     const label = await find('label')
     expect(label).to.exist()
   })
 
   it('should focus the input when focus is called', async () => {
-    let ref
+    let ref: TextInput | undefined
 
     const subject = await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ renderLabel: string; componentRef: (el: an... Remove this comment to see the full error message
-      <TextInput renderLabel="Name" componentRef={(el) => (ref = el)} />
+      <TextInput
+        renderLabel="Name"
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
+        componentRef={(el: TextInput) => (ref = el)}
+      />
     )
     const textInput = within(subject.getDOMNode())
     const input = await textInput.find('input')
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    ref.focus()
+    ref?.focus()
     expect(input.focused()).to.be.true()
   })
 
@@ -99,18 +100,18 @@ describe('<TextInput/>', async () => {
   })
 
   it('should provide a value getter', async () => {
-    let ref
+    let ref: TextInput | undefined
+
     await mount(
       <TextInput
         renderLabel="Name"
         defaultValue="bar"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ renderLabel: string; defaultValue: string;... Remove this comment to see the full error message
-        componentRef={(el) => (ref = el)}
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
+        componentRef={(el: TextInput) => (ref = el)}
       />
     )
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(ref.value).to.equal('bar')
+    expect(ref?.value).to.equal('bar')
   })
 
   it('should provide messageId to FormField', async () => {
