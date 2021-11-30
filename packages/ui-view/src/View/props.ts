@@ -308,4 +308,4 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export { propTypes, allowedProps }
-export type { ViewProps, ViewStyle }
+export type { ViewProps, ViewOwnProps, ViewStyle }

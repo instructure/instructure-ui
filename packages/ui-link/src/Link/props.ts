@@ -38,22 +38,81 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { ViewOwnProps } from '@instructure/ui-view'
 
 type LinkOwnProps = {
+  /**
+   * The text and/or icon displayed by the link
+   */
   children: React.ReactNode
+
+  /**
+   * Sets the link's `href` attribute
+   */
   href?: string
+
+  /**
+   * Designates Link's text color to accommodate light and dark backgrounds
+   */
   color?: 'link' | 'link-inverse'
+
+  /**
+   * Provides a reference to the underlying HTML element
+   */
   elementRef?: (element: Element | null) => void
+
+  /**
+   * The element type to render as (will default to `<a>` if href is provided)
+   */
   as?: AsElementType
+
+  /**
+   * Determines if the link is enabled or disabled
+   */
   interaction?: 'enabled' | 'disabled'
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
-  renderIcon?: ((...args: any[]) => any) | React.ReactNode
+
+  /**
+   * Add an SVG icon to the Link. Do not add icons directly as
+   * children.
+   */
+  renderIcon?: (() => React.ReactNode) | React.ReactNode
+
+  /**
+   * Place the icon before or after the text in the Link.
+   */
   iconPlacement?: 'start' | 'end'
+
+  /**
+   * Set the CSS display property of the Link element. 'auto' sets no display property.
+   */
   display?: 'auto' | 'block' | 'inline-block' | 'flex' | 'inline-flex'
+
+  /**
+   * Set `false` to remove default underline if Link does not appear inline with text
+   */
   isWithinText?: boolean
-  onClick?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
+
+  /**
+   * Fires when the Link is clicked
+   */
+  onClick?: (event: React.MouseEvent<ViewOwnProps>) => void
+
+  /**
+   * Fires when the Link gains focus
+   */
+  onFocus?: (event: React.FocusEvent<ViewOwnProps>) => void
+
+  /**
+   * Fires when the Link loses focus
+   */
+  onBlur?: (event: React.FocusEvent<ViewOwnProps>) => void
 }
 
 export type LinkStyleProps = {
@@ -65,55 +124,29 @@ type PropKeys = keyof LinkOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
+type LinkState = {
+  hasFocus: boolean
+}
+
 type LinkProps = LinkOwnProps &
   WithStyleProps<LinkTheme, LinkStyle> &
-  OtherHTMLAttributes<LinkOwnProps>
+  OtherHTMLAttributes<LinkOwnProps> & {
+    // React Router might add a `to` prop
+    to?: string
+  }
 
 type LinkStyle = ComponentStyle<'link' | 'icon'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The text and/or icon displayed by the link
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * Sets the link's `href` attribute
-   */
   href: PropTypes.string,
-  /**
-   * Designates Link's text color to accommodate light and dark backgrounds
-   */
   color: PropTypes.oneOf(['link', 'link-inverse']),
-  /**
-   * Provides a reference to the underlying HTML element
-   */
   elementRef: PropTypes.func,
-  /**
-   * The element type to render as (will default to `<a>` if href is provided)
-   */
   as: PropTypes.elementType,
-  /**
-   * Determines if the link is enabled or disabled
-   */
   interaction: PropTypes.oneOf(['enabled', 'disabled']),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Add an SVG icon to the Link. Do not add icons directly as
-   * children.
-   */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  /**
-   * Place the icon before or after the text in the Link.
-   */
   iconPlacement: PropTypes.oneOf(['start', 'end']),
-  /**
-   * Set the CSS display property of the Link element. 'auto' sets no display property.
-   */
   display: PropTypes.oneOf([
     'auto',
     'block',
@@ -121,21 +154,9 @@ const propTypes: PropValidators<PropKeys> = {
     'flex',
     'inline-flex'
   ]),
-  /**
-   * Set `false` to remove default underline if Link does not appear inline with text
-   */
   isWithinText: PropTypes.bool,
-  /**
-   * Fires when the Link is clicked
-   */
   onClick: PropTypes.func,
-  /**
-   * Fires when the Link gains focus
-   */
   onFocus: PropTypes.func,
-  /**
-   * Fires when the Link loses focus
-   */
   onBlur: PropTypes.func
 }
 
@@ -156,5 +177,5 @@ const allowedProps: AllowedPropKeys = [
   'onBlur'
 ]
 
-export type { LinkProps, LinkStyle }
+export type { LinkProps, LinkState, LinkStyle }
 export { propTypes, allowedProps }

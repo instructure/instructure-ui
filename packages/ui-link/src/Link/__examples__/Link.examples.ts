@@ -21,7 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { IconTrashSolid } from '@instructure/ui-icons'
+
+import type { LinkProps } from '../props'
 
 const longString =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'
@@ -34,22 +37,18 @@ export default {
     iconPlacement: [null, 'start', 'end'],
     renderIcon: [null, IconTrashSolid]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       href: 'http://instructure.design'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getExampleProps: (props) => {
+  getExampleProps: (props: LinkProps) => {
     return {
       background: props.color === 'link' ? 'primary' : 'primary-inverse'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: LinkProps) => {
     return (
-      props.ellipsis ||
       (props.iconPlacement && !props.renderIcon) ||
       (!props.iconPlacement && props.renderIcon) ||
       props.disabled
