@@ -383,7 +383,7 @@ render(<Example/>)
 
 ### Change the order of appearance of items and collection
 
-By default, the order of collections and items depends on the order of `collections` and `items` array. We can override it by add new `sortOrder` comparision function.
+By default, the order of collections and items depend on the order of `collections` and `items` array. We can override it by providing a `sortOrder` comparison function.
 
 ---
 
@@ -402,29 +402,22 @@ class Example extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      size: 'medium'
+      size: 'medium',
+      sorted: false
     }
-
-    this.sizes = ['small', 'medium', 'large']
   }
-
-  handleSizeSelect = (e, size) => {
-    this.setState({ size })
-  };
-
+  toogleSort = (event)=>{ this.setState({sorted:!this.state.sorted}) }
   render () {
     return (
       <>
         <View display="block" margin="none none medium">
-          <RadioInputGroup
-            name="treeBrowserSize"
-            defaultValue="medium"
-            description={<ScreenReaderContent>TreeBrowser size selector</ScreenReaderContent>}
-            variant="toggle"
-            onChange={this.handleSizeSelect}
-          >
-            {this.sizes.map((size) => <RadioInput key={size} label={size} value={size} />)}
-          </RadioInputGroup>
+         <FormFieldGroup description="Turn of/off sorting">
+              <Checkbox
+                checked={this.state.sorted}
+                label="Sort"
+                onChange={this.toogleSort}
+              />
+               </FormFieldGroup>
         </View>
 
         <TreeBrowser
@@ -451,9 +444,7 @@ class Example extends React.Component {
           }}
           defaultExpanded={[1, 3]}
           rootId={1}
-         sortOrder={(a, b) => {
-            return a.name.localeCompare(b.name) // sort by alphabetical order
-          }}
+         sortOrder={this.state.sorted? (a,b)=>{return(a.name).localeCompare(b.name)}: (a,b)=>{return 0} }
         />
       </>
     )
