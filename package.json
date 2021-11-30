@@ -44,7 +44,7 @@
     "commit": "ui-scripts --commit",
     "install:react": "ui-scripts --install-react",
     "install:packages": "lerna bootstrap --reject-cycles",
-    "bootstrap": "./scripts/bootstrap.sh",
+    "bootstrap": "node scripts/bootstrap.js",
     "bootstrap:docs": "npm-run-all clean:modules install:packages clean build",
     "build": "lerna run build --stream",
     "build:watch": "lerna run build:watch --stream",
