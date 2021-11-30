@@ -35,8 +35,7 @@ import type { FlexItemProps, FlexItemStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  // @ts-expect-error no theme is used here
-  componentTheme,
+  _componentTheme: null,
   props: FlexItemProps
 ): FlexItemStyle => {
   const { shouldGrow, shouldShrink, align, size } = props
