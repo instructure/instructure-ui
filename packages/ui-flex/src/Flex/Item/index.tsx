@@ -39,27 +39,24 @@ import type { FlexItemProps } from './props'
 parent: Flex
 id: Flex.Item
 ---
+@tsProps
 **/
 @withStyle(generateStyle, null)
 class Item extends Component<FlexItemProps> {
   static readonly componentId = 'Flex.Item'
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     as: 'span',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el: any) => {},
     shouldGrow: false,
     shouldShrink: false
   }

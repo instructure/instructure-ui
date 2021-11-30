@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Children, Component } from 'react'
+import React, { Children, Component } from 'react'
 
 import {
   safeCloneElement,
@@ -35,6 +35,7 @@ import { View } from '@instructure/ui-view'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { Item } from './Item'
+import type { FlexItemProps } from './Item/props'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -47,20 +48,18 @@ import type { FlexProps } from './props'
 category: components
 ---
 @module Flex
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Flex extends Component<FlexProps> {
   static readonly componentId = 'Flex'
 
-  constructor(props: FlexProps) {
-    super(props)
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    props.makeStyles()
+  componentDidMount() {
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   static Item = Item
@@ -68,10 +67,7 @@ class Flex extends Component<FlexProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     as: 'span',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el: any) => {},
     direction: 'row',
     justifyItems: 'start',
     display: 'flex',
@@ -91,18 +87,21 @@ class Flex extends Component<FlexProps> {
     }
   }
 
-  renderChildren(children: any) {
+  renderChildren(children: FlexProps['children']) {
     return Children.map(children, (child) => {
       if (!child) {
         return null
       }
 
       return matchComponentTypes(child, ['Item'])
-        ? safeCloneElement(child, {
+        ? safeCloneElement(child as React.ReactElement<FlexItemProps>, {
+            // child withVisualDebug prop should override parent
             withVisualDebug: this.props.withVisualDebug,
-            ...child.props /* child withVisualDebug prop should override parent */,
-            //@ts-expect-error FIXME:
-            direction: this.props.direction.replace(/-reverse/, '')
+            ...(child as React.ReactElement<FlexItemProps>).props,
+            direction: this.props.direction!.replace(
+              /-reverse/,
+              ''
+            ) as FlexItemProps['direction']
           })
         : child
     })

@@ -39,19 +39,78 @@ import type {
 } from '@instructure/emotion'
 
 type FlexItemOwnProps = {
+  /**
+   * The children to render inside the Item
+   */
   children?: React.ReactNode
+
+  /**
+   * the element type to render as
+   */
   as?: AsElementType
+
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+
+  /**
+   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+   */
   padding?: Spacing
+
+  /**
+   * overrides the parent Flex's alignItems prop, if needed
+   */
   align?: 'center' | 'start' | 'end' | 'stretch'
+
+  /**
+   * Inherits from the parent Flex component
+   */
   direction?: 'row' | 'column'
+
+  /**
+   * Designates the text alignment inside the Item
+   */
   textAlign?: 'start' | 'center' | 'end'
+
+  /**
+   * Handles horizontal overflow
+   */
   overflowX?: 'auto' | 'hidden' | 'visible'
+
+  /**
+   * Handles vertical overflow
+   */
   overflowY?: 'auto' | 'hidden' | 'visible'
+
+  /**
+   * Should the FlexItem grow to fill any available space?
+   */
   shouldGrow?: boolean
+
+  /**
+   * Should the FlexItem shrink (stopping at its `size`)?
+   */
   shouldShrink?: boolean
+
+  /**
+   * Sets the base size of the FlexItem (width if direction is `row`; height if direction is `column`)
+   */
   size?: string
+
+  /**
+   * Places dashed lines around the component's borders to help debug your layout
+   */
   withVisualDebug?: boolean
 }
 
@@ -66,65 +125,19 @@ type FlexItemProps = FlexItemOwnProps &
 type FlexItemStyle = ComponentStyle<'flexItem'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The children to render inside the Item`
-   */
   children: PropTypes.node,
-  /**
-   * the element type to render as
-   */
   as: PropTypes.elementType,
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func,
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-   */
   padding: ThemeablePropTypes.spacing,
-  /**
-   * overrides the parent Flex's alignItems prop, if needed
-   */
   align: PropTypes.oneOf(['center', 'start', 'end', 'stretch']),
-  /**
-   * Inherits from the parent Flex component
-   */
   direction: PropTypes.oneOf(['row', 'column']),
-  /**
-   * Designates the text alignment inside the Item
-   */
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  /**
-   * Handles horizontal overflow
-   */
   overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-  /**
-   * Handles vertical overflow
-   */
   overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-  /**
-   * Should the FlexItem grow to fill any available space?
-   */
   shouldGrow: PropTypes.bool,
-  /**
-   * Should the FlexItem shrink (stopping at its `size`)?
-   */
   shouldShrink: PropTypes.bool,
-  /**
-   * Sets the base size of the FlexItem (width if direction is `row`; height if direction is `column`)
-   */
   size: PropTypes.string,
-  /**
-   * Places dashed lines around the component's borders to help debug your layout
-   */
   withVisualDebug: PropTypes.bool
 }
 
