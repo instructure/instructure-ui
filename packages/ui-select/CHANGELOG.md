@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.14.0](https://github.com/instructure/instructure-ui/compare/v7.13.0...v7.14.0) (2021-12-01)
+
+### Features
+
+- **ui-form-field:** make FormField messages accept `node` text, not just `string` ([d9e1a7a](https://github.com/instructure/instructure-ui/commit/d9e1a7a)), closes [PR#819](https://github.com/PR/issues/819)
+
 # [7.13.0](https://github.com/instructure/instructure-ui/compare/v7.12.0...v7.13.0) (2021-11-18)
 
 **Note:** Version bump only for package @instructure/ui-select
