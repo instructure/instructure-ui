@@ -111,7 +111,11 @@ class TreeBrowser extends Component {
     /**
      * An optional label to assist visually impaired users
      */
-    treeLabel: PropTypes.string
+    treeLabel: PropTypes.string,
+    /**
+     * An optional compare function to specify order of the collections and the items
+     */
+    sortOrder: PropTypes.func
   }
 
   static defaultProps = {
@@ -127,6 +131,9 @@ class TreeBrowser extends Component {
     onItemClick: function (item) {},
     onCollectionClick: function (id, collection) {},
     onCollectionToggle: function (collection) {},
+    sortOrder: function (obj1, obj2) {
+      return 0
+    },
     rootId: undefined,
     expanded: undefined,
     treeLabel: undefined
@@ -326,6 +333,7 @@ class TreeBrowser extends Component {
     return collections
       .map((id) => this.getCollectionProps(this.props.collections[id]))
       .filter((collection) => collection != null)
+      .sort(this.props.sortOrder)
   }
 
   getItems(collection) {
@@ -337,6 +345,7 @@ class TreeBrowser extends Component {
           return { ...this.props.items[id] }
         })
         .filter((item) => item != null)
+        .sort(this.props.sortOrder)
     } else {
       return []
     }
@@ -371,20 +380,22 @@ class TreeBrowser extends Component {
   }
 
   renderRoot() {
-    return this.collections.map((collection, i) => (
-      <TreeCollection
-        key={i}
-        {...pickProps(this.props, TreeCollection.propTypes)}
-        {...this.getCollectionProps(collection)}
-        selection={this.state.selection}
-        onItemClick={this.handleItemClick}
-        onCollectionClick={this.handleCollectionClick}
-        onKeyDown={this.handleKeyDown}
-        numChildren={this.collections.length}
-        level={1}
-        position={1}
-      />
-    ))
+    return this.collections
+      .sort(this.props.sortOrder)
+      .map((collection, i) => (
+        <TreeCollection
+          key={i}
+          {...pickProps(this.props, TreeCollection.propTypes)}
+          {...this.getCollectionProps(collection)}
+          selection={this.state.selection}
+          onItemClick={this.handleItemClick}
+          onCollectionClick={this.handleCollectionClick}
+          onKeyDown={this.handleKeyDown}
+          numChildren={this.collections.length}
+          level={1}
+          position={1}
+        />
+      ))
   }
 
   render() {

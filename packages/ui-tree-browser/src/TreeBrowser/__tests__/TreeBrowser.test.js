@@ -905,4 +905,63 @@ describe('<TreeBrowser />', async () => {
       expect((await tree.findAllItems()).length).to.equal(4)
     })
   })
+
+  describe('sorting', async () => {
+    it("should present collections and items in alphabetical order, in spite of the order of 'collections' and 'items' arrays", async () => {
+      await mount(
+        <TreeBrowser
+          collections={{
+            1: {
+              id: 1,
+              name: 'Assignments',
+              collections: [5, 3, 2, 4],
+              items: [3, 5, 2, 1, 4]
+            },
+            2: {
+              id: 2,
+              name: 'English Assignments',
+              collections: [],
+              items: []
+            },
+            3: { id: 3, name: 'Math Assignments', collections: [], items: [] },
+            4: {
+              id: 4,
+              name: 'Reading Assignments',
+              collections: [],
+              items: []
+            },
+            5: { id: 5, name: 'Advanced Math Assignments', items: [] }
+          }}
+          items={{
+            1: { id: 1, name: 'Addition Worksheet' },
+            2: { id: 2, name: 'Subtraction Worksheet' },
+            3: { id: 3, name: 'General Questions' },
+            4: { id: 4, name: 'Vogon Poetry' },
+            5: { id: 5, name: 'Bistromath' }
+          }}
+          rootId={1}
+          defaultExpanded={[1]}
+          sortOrder={(a, b) => {
+            return a.name.localeCompare(b.name)
+          }}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+      const items = await tree.findAllItems()
+      const arr = items.map((item) => item.getDOMNode().textContent)
+      expect(arr.slice(1, 5)).deep.equal([
+        'Advanced Math Assignments',
+        'English Assignments',
+        'Math Assignments',
+        'Reading Assignments'
+      ])
+      expect(arr.slice(5)).deep.equal([
+        'Addition Worksheet',
+        'Bistromath',
+        'General Questions',
+        'Subtraction Worksheet',
+        'Vogon Poetry'
+      ])
+    })
+  })
 })
