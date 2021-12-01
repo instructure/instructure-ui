@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.14.0](https://github.com/instructure/instructure-ui/compare/v7.13.0...v7.14.0) (2021-12-01)
+
+### Features
+
+- **instructure-theme,ui-theme-tokens,ui-themes:** update Instructure theme colors ([bb816da](https://github.com/instructure/instructure-ui/commit/bb816da)), backports [#785](https://github.com/instructure/instructure-ui/issues/785)
+
 # [7.13.0](https://github.com/instructure/instructure-ui/compare/v7.12.0...v7.13.0) (2021-11-18)
 
 **Note:** Version bump only for package @instructure/instructure-theme

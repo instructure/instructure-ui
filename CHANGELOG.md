@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.14.0](https://github.com/instructure/instructure-ui/compare/v7.13.0...v7.14.0) (2021-12-01)
+
+### Bug Fixes
+
+- **ui-text-area:** fix jumping scroll issue ([d0eec8f](https://github.com/instructure/instructure-ui/commit/d0eec8f))
+
+### Features
+
+- **canvas-theme,ui-theme-tokens,ui-themes:** update canvas theme colors ([103c7ce](https://github.com/instructure/instructure-ui/commit/103c7ce)), backports [#767](https://github.com/instructure/instructure-ui/issues/767)
+- **instructure-theme,ui-theme-tokens,ui-themes:** update Instructure theme colors ([bb816da](https://github.com/instructure/instructure-ui/commit/bb816da)), backports [#785](https://github.com/instructure/instructure-ui/issues/785)
+- **ui-badge:** add `inverse` variant to Badge ([a5c0b6f](https://github.com/instructure/instructure-ui/commit/a5c0b6f)), backports [#801](https://github.com/instructure/instructure-ui/issues/801)
+- **ui-form-field:** make FormField messages accept `node` text, not just `string` ([d9e1a7a](https://github.com/instructure/instructure-ui/commit/d9e1a7a)), backports [PR#819](https://github.com/PR/issues/819)
+- **ui-tree-browser:** add `sortOrder` property to TreeBrowser component ([9c5d32d](https://github.com/instructure/instructure-ui/commit/9c5d32d))
+
 # [7.13.0](https://github.com/instructure/instructure-ui/compare/v7.12.0...v7.13.0) (2021-11-18)
 
 ### Bug Fixes
