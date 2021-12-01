@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.13.0](https://github.com/instructure/instructure-ui/compare/v8.12.0...v8.13.0) (2021-12-01)
+
+### Features
+
+- add 'sortOrder' property to TreeBrowser component ([e669e54](https://github.com/instructure/instructure-ui/pull/776/commits/e669e5405864b26c6f98b378e11cef6603fcca58))
+
 # [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
 
 **Note:** Version bump only for package @instructure/ui-tree-browser

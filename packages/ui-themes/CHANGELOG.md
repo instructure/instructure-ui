@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.13.0](https://github.com/instructure/instructure-ui/compare/v8.12.0...v8.13.0) (2021-12-01)
+
+### Features
+
+- **canvas-theme,ui-theme-tokens,ui-themes:** update canvas theme colors ([a72237d](https://github.com/instructure/instructure-ui/commit/a72237dc213b86aa8f18da2618559ea4c118e1dd))
+- **instructure-theme,ui-theme-tokens,ui-themes:** update Instructure theme colors ([07352f5](https://github.com/instructure/instructure-ui/commit/07352f5708a83600427460dfdbfda42e8c747d02))
+
 # [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
 
 **Note:** Version bump only for package @instructure/ui-themes

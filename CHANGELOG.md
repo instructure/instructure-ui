@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.13.0](https://github.com/instructure/instructure-ui/compare/v8.12.0...v8.13.0) (2021-12-01)
+
+### Bug Fixes
+
+- **ui-popover,ui-tooltip:** fixed Tooltip triggers being transformed to links/buttons ([07b0037](https://github.com/instructure/instructure-ui/commit/07b0037b0ddaf6d4f19cca140fc82fc9a2f1efc9))
+- **ui-text-area:** fix jumping scroll issue ([9f4d9f9](https://github.com/instructure/instructure-ui/commit/9f4d9f91f603496ac87a04d953afe7fe9004874d))
+
+### Features
+
+- **canvas-theme,ui-theme-tokens,ui-themes:** update canvas theme colors ([a72237d](https://github.com/instructure/instructure-ui/commit/a72237dc213b86aa8f18da2618559ea4c118e1dd))
+- **instructure-theme,ui-theme-tokens,ui-themes:** update Instructure theme colors ([07352f5](https://github.com/instructure/instructure-ui/commit/07352f5708a83600427460dfdbfda42e8c747d02))
+- **ui-badge:** add `inverse` variant to Badge ([036388d](https://github.com/instructure/instructure-ui/commit/036388de53addbf7a2ca8b20c48fda441057aa5e))
+- **ui-form-field:** make FormField messages accept `ReactNode` text, not just `string` ([4d36973](https://github.com/instructure/instructure-ui/commit/4d369733414715a70bae0628378e8d82214eab3e))
+- **ui-tree-browser:** add 'sortOrder' property to TreeBrowser component ([e669e54](https://github.com/instructure/instructure-ui/pull/776/commits/e669e5405864b26c6f98b378e11cef6603fcca58))
+- **ui-view:** vendor prefix all view style props ([4814652](https://github.com/instructure/instructure-ui/commit/48146521e58bef8e0f75c299278072c715448277))
+
 # [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
 
 ### Bug Fixes
