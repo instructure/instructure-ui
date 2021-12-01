@@ -129,10 +129,7 @@ const propTypes: PropValidators<PropKeys> = {
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
   valueMax: PropTypes.number,
   valueNow: PropTypes.number,
-  formatScreenReaderValue: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.node
-  ]),
+  formatScreenReaderValue: PropTypes.func,
   renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   color: PropTypes.oneOf(['primary', 'primary-inverse']),
   meterColor: PropTypes.oneOfType([
