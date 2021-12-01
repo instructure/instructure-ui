@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.13.0](https://github.com/instructure/instructure-ui/compare/v8.12.0...v8.13.0) (2021-12-01)
+
+### Features
+
+- **ui-badge:** add `inverse` variant to Badge ([036388d](https://github.com/instructure/instructure-ui/commit/036388de53addbf7a2ca8b20c48fda441057aa5e))
+
 # [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
 
 **Note:** Version bump only for package @instructure/ui-badge

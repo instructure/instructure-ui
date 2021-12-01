@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.13.0](https://github.com/instructure/instructure-ui/compare/v8.12.0...v8.13.0) (2021-12-01)
+
+### Bug Fixes
+
+- **ui-popover,ui-tooltip:** fixed Tooltip triggers being transformed to links/buttons ([07b0037](https://github.com/instructure/instructure-ui/commit/07b0037b0ddaf6d4f19cca140fc82fc9a2f1efc9))
+
 # [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
 
 **Note:** Version bump only for package @instructure/ui-popover

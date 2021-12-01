@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.13.0](https://github.com/instructure/instructure-ui/compare/v8.12.0...v8.13.0) (2021-12-01)
+
+### Bug Fixes
+
+- **ui-text-area:** fix jumping scroll issue ([9f4d9f9](https://github.com/instructure/instructure-ui/commit/9f4d9f91f603496ac87a04d953afe7fe9004874d))
+
+### Features
+
+- **ui-form-field:** make FormField messages accept `ReactNode` text, not just `string` ([4d36973](https://github.com/instructure/instructure-ui/commit/4d369733414715a70bae0628378e8d82214eab3e))
+
 # [8.12.0](https://github.com/instructure/instructure-ui/compare/v8.11.1...v8.12.0) (2021-11-17)
 
 **Note:** Version bump only for package @instructure/ui-text-area
