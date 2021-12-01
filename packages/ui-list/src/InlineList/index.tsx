@@ -43,9 +43,7 @@ class InlineList extends Component<InlineListProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     itemSpacing: 'none',
-    elementRef: () => {},
     as: 'ul',
     margin: 'none',
     delimiter: 'none',
