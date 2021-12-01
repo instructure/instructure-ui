@@ -69,7 +69,7 @@ class ProgressCircle extends Component<
       valueNow / valueMax >= 1 ? 'success' : 'brand'
   }
 
-  _timeouts: NodeJS.Timeout[] = []
+  _timeouts: Array<ReturnType<typeof setTimeout>> = []
   ref: Element | null = null
 
   constructor(props: ProgressCircleProps) {
