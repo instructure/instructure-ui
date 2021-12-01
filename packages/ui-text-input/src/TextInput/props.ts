@@ -75,8 +75,8 @@ type TextInputOwnProps = {
 
   /**
    * Array of objects with shape: `{
-   *   text: PropTypes.node,
-   *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *   text: React.ReactNode,
+   *   type: One of ['error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   messages?: FormMessage[]
@@ -118,8 +118,7 @@ type TextInputOwnProps = {
   shouldNotWrap?: boolean
 
   /**
-   * Html placeholder text to display when the input has no value. This should be hint text, not a label
-   * replacement.
+   * Html placeholder text to display when the input has no value. This should be hint text, not a label replacement.
    */
   placeholder?: string
 
@@ -156,7 +155,7 @@ type TextInputOwnProps = {
   /**
    * Callback executed when the input fires a change event.
    * @param {Object} event - the event object
-   * @param {Object} value - the string value of the input
+   * @param {string} value - the string value of the input
    */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void
 
