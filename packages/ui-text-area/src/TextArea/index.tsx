@@ -173,9 +173,7 @@ class TextArea extends Component<TextAreaProps> {
     this._textarea.style.overflowY = 'hidden' // hide scrollbars for autoGrow textareas
     height = this._textarea.scrollHeight + offset + 'px'
 
-    const maxHeight = this.props.maxHeight
-      ? px(this.props.maxHeight, this._container)
-      : 0
+    const maxHeight = px(this.props.maxHeight!, this._container)
 
     if (this.props.maxHeight && this._textarea.scrollHeight > maxHeight) {
       this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds maxHeight in pixels
@@ -300,13 +298,13 @@ class TextArea extends Component<TextAreaProps> {
 
     return (
       <FormField
+        label={null}
         {...pickProps(this.props, FormField.allowedProps)}
         vAlign="top"
         id={this.id}
         ref={(el) => {
           this._node = el
         }}
-        label=""
       >
         <div
           css={this.props.styles?.textAreaLayout}
