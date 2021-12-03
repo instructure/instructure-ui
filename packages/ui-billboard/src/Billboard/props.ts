@@ -37,20 +37,66 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
-
+import type { ViewProps } from '@instructure/ui-view'
+import { MouseEvent } from 'react'
 type BillboardOwnProps = {
-  hero?: React.ReactElement | ((...args: any[]) => any)
+  /**
+   * Provide an <Img> component or Instructure Icon for the hero image
+   */
+  hero?: React.ReactElement | ((size: 'medium' | 'x-large' | 'large') => string)
+  /**
+   * If you're using an icon, this prop will size it. Also sets the font-size
+   * of the headline and message.
+   */
   size?: 'small' | 'medium' | 'large'
+  /**
+   * the element type to render as
+   */
   as?: AsElementType
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
+  /**
+   * The headline for the Billboard. Is styled as an h1 element by default
+   */
   heading?: string
+  /**
+   * Choose the appropriately semantic tag for the heading
+   */
   headingAs?: 'h1' | 'h2' | 'h3' | 'span'
+  /**
+   * Choose the font-size for the heading (see the Heading component)
+   */
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4'
-  message?: React.ReactNode | ((...args: any[]) => any)
-  onClick?: (...args: any[]) => any
+  /**
+   * Instructions or information for the Billboard. Note: you should not pass
+   * interactive content to this prop if you are also providing an `href` or
+   * `onClick`. That would cause the Billboard to render as a button or link
+   * and would result in nested interactive content.
+   */
+  message?: React.ReactNode
+  /**
+   * If you add an onClick prop, the Billboard renders as a clickable button
+   */
+  onClick?: (e: MouseEvent<ViewProps>) => void
+  /**
+   * If `href` is provided, Billboard will render as a link
+   */
   href?: string
+  /**
+   * Whether or not to disable the billboard
+   */
   disabled?: boolean
+  /**
+   * Works just like disabled but keeps the same styles as if it were active
+   */
   readOnly?: boolean
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
 }
 
@@ -67,63 +113,18 @@ type BillboardStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Provide an <Img> component or Instructure Icon for the hero image
-   */
   hero: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  /**
-   * If you're using an icon, this prop will size it. Also sets the font-size
-   * of the headline and message.
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * the element type to render as
-   */
   as: PropTypes.elementType,
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func,
-  /**
-   * The headline for the Billboard. Is styled as an h1 element by default
-   */
   heading: PropTypes.string,
-  /**
-   * Choose the appropriately semantic tag for the heading
-   */
   headingAs: PropTypes.oneOf(['h1', 'h2', 'h3', 'span']),
-  /**
-   * Choose the font-size for the heading (see the Heading component)
-   */
   headingLevel: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4']),
-  /**
-   * Instructions or information for the Billboard. Note: you should not pass
-   * interactive content to this prop if you are also providing an `href` or
-   * `onClick`. That would cause the Billboard to render as a button or link
-   * and would result in nested interactive content.
-   */
   message: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * If you add an onClick prop, the Billboard renders as a clickable button
-   */
   onClick: PropTypes.func,
-  /**
-   * If `href` is provided, Billboard will render as a link
-   */
   href: PropTypes.string,
-  /**
-   * Whether or not to disable the billboard
-   */
   disabled: PropTypes.bool,
-  /**
-   * Works just like disabled but keeps the same styles as if it were active
-   */
   readOnly: PropTypes.bool,
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing
 }
 

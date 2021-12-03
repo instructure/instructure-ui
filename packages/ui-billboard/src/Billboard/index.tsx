@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, MouseEvent } from 'react'
 
 import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
@@ -40,6 +40,7 @@ import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
 import type { BillboardProps } from './props'
+import type { ViewProps } from '@instructure/ui-view'
 
 /**
 ---
@@ -75,14 +76,11 @@ class Billboard extends Component<BillboardProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   renderHeading() {
@@ -115,8 +113,7 @@ class Billboard extends Component<BillboardProps> {
   }
 
   renderHero() {
-    if (this.heroIsFunction) {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    if (typeof this.props.hero === 'function') {
       return this.props.hero(this.SVGIconSize)
     } else {
       return this.props.hero
@@ -137,8 +134,7 @@ class Billboard extends Component<BillboardProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleClick = (e) => {
+  handleClick = (e: MouseEvent<ViewProps>): void => {
     const { readOnly, onClick } = this.props
 
     if (readOnly) {
