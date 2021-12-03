@@ -102,7 +102,7 @@ type TextAreaOwnProps = {
   /**
    * the selected value (must be accompanied by an `onChange` prop)
    */
-  value?: any // TODO: controllable(PropTypes.string)
+  value?: string // TODO: controllable(PropTypes.string)
   /**
    * when used with the `value` prop, the component will not control its own state
    */
