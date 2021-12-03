@@ -140,7 +140,7 @@ type TextInputOwnProps = {
   /**
    * a function that provides a reference a parent of the input element
    */
-  inputContainerRef?: (element: Element | null) => void
+  inputContainerRef?: (element: HTMLSpanElement | null) => void
 
   /**
    * Content to display before the input text, such as an icon

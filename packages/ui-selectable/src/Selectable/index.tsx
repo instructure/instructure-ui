@@ -45,24 +45,7 @@ class Selectable extends Component<SelectableProps> {
   static propTypes = propTypes
 
   static defaultProps = {
-    id: null,
-    highlightedOptionId: null,
-    selectedOptionId: null,
-    isShowingOptions: false,
-    onRequestShowOptions: (_event: Event) => {},
-    onRequestHideOptions: (_event: Event) => {},
-    onRequestHighlightOption: (
-      _event: Event,
-      _data: { id?: string; direction?: 1 | -1 }
-    ) => {},
-    onRequestHighlightFirstOption: (_event: Event) => {},
-    onRequestHighlightLastOption: (_event: Event) => {},
-    onRequestSelectOption: (
-      _event: Event,
-      _data: Record<string, unknown>
-    ) => {},
-    children: null,
-    render: undefined
+    isShowingOptions: false
   }
 
   _id = this.props.id || uid('Selectable')
@@ -79,12 +62,9 @@ class Selectable extends Component<SelectableProps> {
     return selectedOptionId === id
   }
 
-  handleOpenClose = (event: KeyboardEvent) => {
-    const {
-      isShowingOptions,
-      onRequestShowOptions,
-      onRequestHideOptions
-    } = this.props
+  handleOpenClose = (event: React.KeyboardEvent) => {
+    const { isShowingOptions, onRequestShowOptions, onRequestHideOptions } =
+      this.props
 
     event.preventDefault()
 
@@ -98,7 +78,7 @@ class Selectable extends Component<SelectableProps> {
     }
   }
 
-  handleKeyDown = (event: KeyboardEvent) => {
+  handleKeyDown = (event: React.KeyboardEvent) => {
     const {
       isShowingOptions,
       highlightedOptionId,
@@ -161,7 +141,7 @@ class Selectable extends Component<SelectableProps> {
     }
   }
 
-  handleKeyUp = (event: KeyboardEvent) => {
+  handleKeyUp = (event: React.KeyboardEvent) => {
     const { isShowingOptions } = this.props
     const key = keycode.names[event.keyCode]
 
@@ -207,15 +187,15 @@ class Selectable extends Component<SelectableProps> {
         getTriggerProps: ({ ref, onKeyDown, onKeyUp, ...rest } = {}) => {
           return {
             id: this._id,
-            ref: createChainedFunction(ref, (el) => (this._trigger = el)),
+            ref: createChainedFunction(ref, (el) => (this._trigger = el))!,
             'aria-haspopup': 'listbox',
             'aria-expanded': isShowingOptions,
-            'aria-owns': isShowingOptions ? this._listId : null,
-            'aria-controls': isShowingOptions ? this._listId : null,
+            'aria-owns': isShowingOptions ? this._listId : undefined,
+            'aria-controls': isShowingOptions ? this._listId : undefined,
             'aria-describedby': this._descriptionId,
             'aria-activedescendant': isShowingOptions
               ? highlightedOptionId
-              : null,
+              : undefined,
             onKeyDown: createChainedFunction(this.handleKeyDown, onKeyDown),
             onKeyUp: createChainedFunction(this.handleKeyUp, onKeyUp),
             ...rest

@@ -32,6 +32,7 @@ parent: Select
 id: Select.Option
 ---
 @module Option
+@tsProps
 **/
 class Option extends Component<SelectOptionProps> {
   static readonly componentId = 'Select.Option'
@@ -42,8 +43,7 @@ class Option extends Component<SelectOptionProps> {
   static defaultProps = {
     isHighlighted: false,
     isSelected: false,
-    isDisabled: false,
-    children: null
+    isDisabled: false
   }
 
   /* istanbul ignore next */

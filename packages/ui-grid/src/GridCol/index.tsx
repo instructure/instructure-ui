@@ -55,9 +55,9 @@ class GridCol extends Component<GridColProps> {
     isLastRow: false
   }
 
-  ref: Element | null = null
+  ref: HTMLSpanElement | null = null
 
-  handleRef = (el: Element | null) => {
+  handleRef = (el: HTMLSpanElement | null) => {
     const { elementRef } = this.props
 
     this.ref = el

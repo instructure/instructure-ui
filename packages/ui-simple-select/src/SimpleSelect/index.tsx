@@ -34,8 +34,11 @@ import {
 import { uid } from '@instructure/uid'
 import { Select } from '@instructure/ui-select'
 
+import type { SelectProps } from '@instructure/ui-select'
+
 import { Option } from './Option'
 import { Group } from './Group'
+
 import type { SimpleSelectProps } from './props'
 import { allowedProps, propTypes } from './props'
 
@@ -232,15 +235,13 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     this.props.onBlur(event)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleShowOptions = (event) => {
+  handleShowOptions: SelectProps['onRequestShowOptions'] = (event) => {
     this.setState({ isShowingOptions: true })
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onShowOptions(event)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleHideOptions = (event) => {
+  handleHideOptions: SelectProps['onRequestHideOptions'] = (event) => {
     this.setState((state) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOptionId' does not exist on type... Remove this comment to see the full error message
       const option = this.getOption('id', state.selectedOptionId)
@@ -255,8 +256,10 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     this.props.onHideOptions(event)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleHighlightOption = (event, { id }) => {
+  handleHighlightOption: SelectProps['onRequestHighlightOption'] = (
+    event,
+    { id }
+  ) => {
     if (id === this._emptyOptionId) return
 
     const option = this.getOption('id', id)
@@ -271,8 +274,10 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleSelectOption = (event, { id }) => {
+  handleSelectOption: SelectProps['onRequestSelectOption'] = (
+    event,
+    { id }
+  ) => {
     if (id === this._emptyOptionId) {
       // selected option is the empty option
       this.setState({ isShowingOptions: false })
