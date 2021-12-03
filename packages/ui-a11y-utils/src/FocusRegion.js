@@ -69,7 +69,9 @@ class FocusRegion {
   }
 
   handleDismiss = (event, documentClick) => {
-    this._options.onDismiss(event, documentClick)
+    if (this._contextElement) {
+      this._options.onDismiss(event, documentClick)
+    }
   }
 
   captureDocumentClick = (event) => {
