@@ -60,8 +60,6 @@ class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
 
     return (
       <Link
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'element' does not exist on type 'Breadcr... Remove this comment to see the full error message
-        as={this.element}
         {...props}
         href={href}
         renderIcon={renderIcon}
