@@ -29,13 +29,32 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
+import type { ViewOwnProps } from '@instructure/ui-view'
 
 type BreadcrumbLinkOwnProps = {
+  /**
+   * Content to render as the crumb, generally should be text.
+   */
   children: React.ReactNode
+  /**
+   * Link the crumb should direct to; if an href is provided, the crumb will render as a link
+   */
   href?: string
-  onClick?: (...args: any[]) => any
+  /**
+   * If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button
+   */
+  onClick?: (event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void
+  /**
+   * Sets the font-size of the breadcrumb text
+   */
   size?: 'small' | 'medium' | 'large'
-  renderIcon?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * Add an icon to the Breadcrumb.Link
+   */
+  renderIcon?: React.ReactNode | (() => React.ReactNode)
+  /**
+   * Place the icon before or after the text in the Breadcrumb.Link
+   */
   iconPlacement?: 'start' | 'end'
 }
 
@@ -47,29 +66,11 @@ type BreadcrumbLinkProps = BreadcrumbLinkOwnProps &
   OtherHTMLAttributes<BreadcrumbLinkOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Content to render as the crumb, generally should be text.
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * Link the crumb should direct to; if an href is provided, the crumb will render as a link
-   */
   href: PropTypes.string,
-  /**
-   * If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button
-   */
   onClick: PropTypes.func,
-  /**
-   * Sets the font-size of the breadcrumb text
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Add an icon to the Breadcrumb.Link
-   */
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Place the icon before or after the text in the Breadcrumb.Link
-   */
   iconPlacement: PropTypes.oneOf(['start', 'end'])
 }
 
