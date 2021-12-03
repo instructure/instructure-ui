@@ -33,8 +33,14 @@ import type {
 } from '@instructure/shared-types'
 
 type SelectGroupOwnProps = {
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
-  children?: React.ReactNode
+  /**
+   * The label associated with the group options.
+   */
+  renderLabel: React.ReactNode | (() => React.ReactNode)
+  /**
+   * Children of type `<SimpleSelect.Option />` that will be considered part of the group.
+   */
+  children?: React.ReactNode // TODO: ChildrenPropTypes.oneOf([Option])
 }
 
 type PropKeys = keyof SelectGroupOwnProps
@@ -45,13 +51,7 @@ type SelectGroupProps = SelectGroupOwnProps &
   OtherHTMLAttributes<SelectGroupOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The label associated with the group options.
-   */
   renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  /**
-   * Children of type `<SimpleSelect.Option />` that will be considered part of the group.
-   */
   children: ChildrenPropTypes.oneOf([Option])
 }
 

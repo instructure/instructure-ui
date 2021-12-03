@@ -25,6 +25,8 @@
 import React from 'react'
 import { IconUserLine } from '@instructure/ui-icons'
 import { Select } from '../../Select'
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { SelectProps } from '../../Select/props'
 
 export default {
   sectionProp: 'size',
@@ -96,15 +98,13 @@ export default {
     ],
     renderBeforeInput: [null, <IconUserLine key="0" inline={false} />]
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
-      inputValue: !props.isEditable ? 'Option one' : '',
+      inputValue: 'Option one',
       renderLabel: 'Choose an option',
       constrain: 'scroll-parent'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return props.isShowingOptions
       ? {
@@ -114,7 +114,6 @@ export default {
         }
       : {}
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     if (props.interaction === 'readonly') return true
     if (props.isRequired) return true
@@ -123,4 +122,4 @@ export default {
 
     return false
   }
-}
+} as StoryConfig<SelectProps>

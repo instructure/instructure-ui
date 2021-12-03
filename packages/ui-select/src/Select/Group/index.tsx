@@ -32,6 +32,7 @@ parent: Select
 id: Select.Group
 ---
 @module Group
+@tsProps
 **/
 class Group extends Component<SelectGroupProps> {
   static readonly componentId = 'Select.Group'
@@ -39,9 +40,7 @@ class Group extends Component<SelectGroupProps> {
   static allowedProps = allowedProps
   static propTypes = propTypes
 
-  static defaultProps = {
-    children: null
-  }
+  static defaultProps = {}
 
   /* istanbul ignore next */
   render() {

@@ -118,7 +118,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     return this.props.inline && this.props.layout === 'inline'
   }
 
-  handleInputContainerRef = (node: Element | null) => {
+  handleInputContainerRef = (node: HTMLSpanElement | null) => {
     if (typeof this.props.inputContainerRef === 'function') {
       this.props.inputContainerRef(node)
     }

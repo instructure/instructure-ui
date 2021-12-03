@@ -66,7 +66,7 @@ type GridColOwnProps = {
   /**
    * provides a reference to the underlying html root element
    */
-  elementRef?: (element: Element | null) => void
+  elementRef?: (element: HTMLSpanElement | null) => void
 }
 
 type PropKeys = keyof GridColOwnProps

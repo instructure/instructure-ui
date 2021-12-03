@@ -55,7 +55,7 @@ type FormFieldOwnProps = {
   labelAlign?: 'start' | 'end'
   vAlign?: 'top' | 'middle' | 'bottom'
   width?: string
-  inputContainerRef?: (element: Element | null) => void
+  inputContainerRef?: (element: HTMLSpanElement | null) => void
   /**
    * provides a reference to the underlying html root element
    */

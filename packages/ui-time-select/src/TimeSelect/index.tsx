@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import React, { BaseSyntheticEvent, Component, SyntheticEvent } from 'react'
+import React, { BaseSyntheticEvent, Component } from 'react'
+import { Moment } from 'moment-timezone'
 
 import { ApplyLocaleContext, Locale, DateTime } from '@instructure/ui-i18n'
 import {
@@ -31,12 +32,14 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 
+import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
-import { uid } from '@instructure/uid'
+
+import type { SelectProps } from '@instructure/ui-select'
 import type { TimeSelectProps } from './props'
+
 import { allowedProps, propTypes } from './props'
-import { Moment } from 'moment-timezone'
 
 type TimeSelectOptions = {
   id: string
@@ -318,7 +321,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     this.ref = node
   }
 
-  handleBlur = (event: SyntheticEvent) => {
+  handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     this.setState({ highlightedOptionId: undefined })
     this.props.onBlur?.(event)
   }
@@ -339,7 +342,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     }
   }
 
-  handleShowOptions = (event: SyntheticEvent) => {
+  handleShowOptions = (event: React.SyntheticEvent) => {
     this.setState({
       isShowingOptions: true,
       highlightedOptionId: this.state.selectedOptionId
@@ -347,7 +350,9 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     this.props.onShowOptions?.(event)
   }
 
-  handleHideOptions = (event: SyntheticEvent) => {
+  handleHideOptions: SelectProps['onRequestHideOptions'] = (
+    event: React.SyntheticEvent
+  ) => {
     const { selectedOptionId } = this.state
     const option = this.getOption('id', selectedOptionId)
     let prevValue = ''
@@ -373,7 +378,10 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     this.props.onHideOptions?.(event)
   }
 
-  handleHighlightOption = (event: SyntheticEvent, { id }: { id: string }) => {
+  handleHighlightOption: SelectProps['onRequestHighlightOption'] = (
+    event: React.SyntheticEvent,
+    { id }
+  ) => {
     if (id === this._emptyOptionId) return
     const { type } = event
     const option = this.getOption('id', id)!.label
@@ -384,7 +392,10 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     }))
   }
 
-  handleSelectOption = (event: SyntheticEvent, { id }: { id: string }) => {
+  handleSelectOption: SelectProps['onRequestSelectOption'] = (
+    event: React.SyntheticEvent,
+    { id }
+  ) => {
     if (id === this._emptyOptionId) {
       this.setState({ isShowingOptions: false })
       return

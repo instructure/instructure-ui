@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -29,14 +30,42 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 
-type SelectOptionOwnProps = {
+type OptionProps = {
+  /**
+   * The id for the option.
+   */
   id: string
+  /**
+   * Whether or not this option is highlighted.
+   */
   isHighlighted?: boolean
+  /**
+   * Whether or not this option is selected.
+   */
   isSelected?: boolean
+  /**
+   * Whether or not this option is disabled.
+   */
   isDisabled?: boolean
-  renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * Content to display as the option label.
+   */
   children?: React.ReactNode
+}
+
+type RenderSelectOptionLabel =
+  | React.ReactNode
+  | ((args: OptionProps) => React.ReactNode)
+
+type SelectOptionOwnProps = OptionProps & {
+  /**
+   * Content to display before the option label, such as an icon.
+   */
+  renderBeforeLabel?: RenderSelectOptionLabel
+  /**
+   * Content to display after the option label, such as an icon.
+   */
+  renderAfterLabel?: RenderSelectOptionLabel
 }
 
 type PropKeys = keyof SelectOptionOwnProps
@@ -47,33 +76,12 @@ type SelectOptionProps = SelectOptionOwnProps &
   OtherHTMLAttributes<SelectOptionOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The id for the option.
-   */
   id: PropTypes.string.isRequired,
-  /**
-   * Whether or not this option is highlighted.
-   */
   isHighlighted: PropTypes.bool,
-  /**
-   * Whether or not this option is selected.
-   */
   isSelected: PropTypes.bool,
-  /**
-   * Whether or not this option is disabled.
-   */
   isDisabled: PropTypes.bool,
-  /**
-   * Content to display before the option label, such as an icon.
-   */
   renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Content to display after the option label, such as an icon.
-   */
   renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Content to display as the option label.
-   */
   children: PropTypes.node
 }
 
@@ -87,5 +95,5 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { SelectOptionProps }
+export type { SelectOptionProps, RenderSelectOptionLabel }
 export { propTypes, allowedProps }

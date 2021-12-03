@@ -186,7 +186,7 @@ class DateInput extends Component<DateInputProps> {
   }
 
   handleHighlightOption = (
-    event: Event,
+    event: React.SyntheticEvent,
     { direction }: { direction?: number }
   ) => {
     const { onRequestSelectNextDay, onRequestSelectPrevDay } = this.props

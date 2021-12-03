@@ -38,11 +38,13 @@ import { SelectLocator } from '../SelectLocator'
 import SelectExamples from '../__examples__/Select.examples'
 
 describe('<Select />', async () => {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'spy' implicitly has an 'any' type.
-  const lastCall = (spy) => spy.lastCall.args
+  const lastCall = (spy: ReturnType<typeof stub>) => spy.lastCall.args
   const defaultOptions = ['foo', 'bar', 'baz']
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'highlighted' implicitly has an 'any' ty... Remove this comment to see the full error message
-  const getOptions = (highlighted, selected, disabled) =>
+  const getOptions = (
+    highlighted?: string,
+    selected?: string,
+    disabled?: string
+  ) =>
     defaultOptions.map((opt) => (
       <Select.Option
         id={opt}
@@ -58,7 +60,6 @@ describe('<Select />', async () => {
   it('should render an input and a list', async () => {
     await mount(
       <Select renderLabel="Choose an option" isShowingOptions>
-        {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
         {getOptions()}
       </Select>
     )
@@ -119,53 +120,46 @@ describe('<Select />', async () => {
   })
 
   it('should provide a focus method', async () => {
-    let selectRef
+    let selectRef: Select | undefined
     await mount(
       <Select
         renderLabel="Choose an option"
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        componentRef={(el) => {
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
+        componentRef={(el: Select) => {
           selectRef = el
         }}
       >
-        {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
         {getOptions()}
       </Select>
     )
     const select = await SelectLocator.find()
     const input = await select.findInput()
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    selectRef.focus()
+    selectRef?.focus()
     await wait(() => {
       expect(input.focused()).to.be.true()
     })
   })
 
   it('should provide a focused getter', async () => {
-    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'selectRef' implicitly has type 'any' in ... Remove this comment to see the full error message
-    let selectRef
+    let selectRef: Select | undefined
     await mount(
       <Select
         renderLabel="Choose an option"
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
         componentRef={(el) => {
           selectRef = el
         }}
       >
-        {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
         {getOptions()}
       </Select>
     )
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(selectRef.focused).to.be.false()
+    expect(selectRef?.focused).to.be.false()
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    selectRef.focus()
+    selectRef?.focus()
     await wait(() => {
-      // @ts-expect-error ts-migrate(7005) FIXME: Variable 'selectRef' implicitly has an 'any' type.
-      expect(selectRef.focused).to.be.true()
+      expect(selectRef?.focused).to.be.true()
     })
   })
 
@@ -268,7 +262,6 @@ describe('<Select />', async () => {
     it('should set aria-activedescendant based on the highlighted option', async () => {
       await mount(
         <Select renderLabel="Choose an option" isShowingOptions>
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1. */}
           {getOptions(defaultOptions[1])}
         </Select>
       )
@@ -283,7 +276,6 @@ describe('<Select />', async () => {
     it('should not set aria-activedescendant when not showing options', async () => {
       await mount(
         <Select renderLabel="Choose an option">
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1. */}
           {getOptions(defaultOptions[1])}
         </Select>
       )
@@ -296,7 +288,6 @@ describe('<Select />', async () => {
     it('should set input role to "button" without onInputChange', async () => {
       await mount(
         <Select renderLabel="Choose an option">
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1. */}
           {getOptions(defaultOptions[1])}
         </Select>
       )
@@ -309,7 +300,6 @@ describe('<Select />', async () => {
     it('should set input role to "combobox" with onInputChange', async () => {
       await mount(
         <Select renderLabel="Choose an option" onInputChange={() => {}}>
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1. */}
           {getOptions(defaultOptions[1])}
         </Select>
       )
@@ -322,7 +312,6 @@ describe('<Select />', async () => {
     it('should allow assistive text', async () => {
       await mount(
         <Select renderLabel="Choose an option" assistiveText="hello world">
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
           {getOptions()}
         </Select>
       )
@@ -338,7 +327,6 @@ describe('<Select />', async () => {
     it('should allow custom props to pass through', async () => {
       await mount(
         <Select renderLabel="Choose an option" data-custom-attr="true">
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
           {getOptions()}
         </Select>
       )
@@ -350,7 +338,6 @@ describe('<Select />', async () => {
 
     it('should allow override of autoComplete prop', async () => {
       const subject = await mount(
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         <Select renderLabel="Choose an option">{getOptions()}</Select>
       )
       const select = await SelectLocator.find()
@@ -367,7 +354,6 @@ describe('<Select />', async () => {
 
       await mount(
         <Select renderLabel="Choose an option" inputRef={inputRef}>
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
           {getOptions()}
         </Select>
       )
@@ -382,8 +368,7 @@ describe('<Select />', async () => {
     it('should set aria-selected on options with isSelected={true}', async () => {
       await mount(
         <Select renderLabel="Choose an option" isShowingOptions>
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2. */}
-          {getOptions(null, defaultOptions[1])}
+          {getOptions(undefined, defaultOptions[1])}
         </Select>
       )
       const select = await SelectLocator.find()
@@ -396,7 +381,7 @@ describe('<Select />', async () => {
     it('should set aria-disabled on options when isDisabled={true}', async () => {
       await mount(
         <Select renderLabel="Choose an option" isShowingOptions>
-          {getOptions(null, null, defaultOptions[2])}
+          {getOptions(undefined, undefined, defaultOptions[2])}
         </Select>
       )
       const select = await SelectLocator.find()
@@ -410,7 +395,6 @@ describe('<Select />', async () => {
     it('should set list element role to "listbox"', async () => {
       await mount(
         <Select renderLabel="Choose an option" isShowingOptions>
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
           {getOptions()}
         </Select>
       )
@@ -430,7 +414,6 @@ describe('<Select />', async () => {
           isShowingOptions
           listRef={listRef}
         >
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
           {getOptions()}
         </Select>
       )
@@ -490,7 +473,6 @@ describe('<Select />', async () => {
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -518,7 +500,6 @@ describe('<Select />', async () => {
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -542,7 +523,6 @@ describe('<Select />', async () => {
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -564,7 +544,6 @@ describe('<Select />', async () => {
             renderLabel="Choose an option"
             onRequestShowOptions={onRequestShowOptions}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -589,7 +568,6 @@ describe('<Select />', async () => {
             isShowingOptions
             onRequestHideOptions={onRequestHideOptions}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -618,7 +596,6 @@ describe('<Select />', async () => {
             isShowingOptions
             onRequestHideOptions={onRequestHideOptions}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -643,7 +620,6 @@ describe('<Select />', async () => {
             isShowingOptions
             onRequestHideOptions={onRequestHideOptions}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -665,7 +641,6 @@ describe('<Select />', async () => {
             isShowingOptions
             onRequestHighlightOption={onRequestHighlightOption}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -695,7 +670,6 @@ describe('<Select />', async () => {
             onRequestShowOptions={onRequestShowOptions}
             onRequestHighlightOption={onRequestHighlightOption}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -714,7 +688,6 @@ describe('<Select />', async () => {
         )
 
         await subject.setProps({
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1.
           children: getOptions(defaultOptions[0])
         })
 
@@ -724,7 +697,6 @@ describe('<Select />', async () => {
         )
 
         await subject.setProps({
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1.
           children: getOptions(defaultOptions[1])
         })
 
@@ -735,7 +707,7 @@ describe('<Select />', async () => {
 
         // should skip disabled option...
         await subject.setProps({
-          children: getOptions(defaultOptions[0], null, defaultOptions[1])
+          children: getOptions(defaultOptions[0], undefined, defaultOptions[1])
         })
 
         await input.keyDown('down')
@@ -744,7 +716,7 @@ describe('<Select />', async () => {
         )
 
         await subject.setProps({
-          children: getOptions(defaultOptions[2], null, defaultOptions[1])
+          children: getOptions(defaultOptions[2], undefined, defaultOptions[1])
         })
 
         await input.keyDown('up')
@@ -762,7 +734,6 @@ describe('<Select />', async () => {
             isShowingOptions
             onRequestHighlightOption={onRequestHighlightOption}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1. */}
             {getOptions(defaultOptions[1])}
           </Select>
         )
@@ -781,7 +752,7 @@ describe('<Select />', async () => {
 
         // with a disabled option...
         await subject.setProps({
-          children: getOptions(null, null, defaultOptions[2])
+          children: getOptions(undefined, undefined, defaultOptions[2])
         })
 
         await input.keyDown('end')
@@ -798,8 +769,7 @@ describe('<Select />', async () => {
             renderLabel="Choose an option"
             onRequestHighlightOption={onRequestHighlightOption}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2. */}
-            {getOptions(null, defaultOptions[1])}
+            {getOptions(undefined, defaultOptions[1])}
           </Select>
         )
         const select = await SelectLocator.find()
@@ -822,7 +792,6 @@ describe('<Select />', async () => {
             isShowingOptions
             onRequestSelectOption={onRequestSelectOption}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1. */}
             {getOptions(defaultOptions[1])}
           </Select>
         )
@@ -844,7 +813,6 @@ describe('<Select />', async () => {
             isShowingOptions
             onRequestSelectOption={onRequestSelectOption}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -865,7 +833,6 @@ describe('<Select />', async () => {
 
         await mount(
           <Select renderLabel="Choose an option" onInputChange={onInputChange}>
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -881,7 +848,6 @@ describe('<Select />', async () => {
 
         await mount(
           <Select renderLabel="Choose an option" onFocus={onFocus}>
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
             {getOptions()}
           </Select>
         )
@@ -907,7 +873,6 @@ describe('<Select />', async () => {
             onRequestHighlightOption={onRequestHighlightOption}
             onKeyDown={onKeyDown}
           >
-            {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1. */}
             {getOptions(defaultOptions[0])}
           </Select>
         )
