@@ -33,6 +33,7 @@ import {
 } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
+import type { Debounced } from '@instructure/debounce'
 import { withStyle, jsx } from '@instructure/emotion'
 import { uid } from '@instructure/uid'
 import { px } from '@instructure/ui-utils'
@@ -66,7 +67,6 @@ class TextArea extends Component<TextAreaProps> {
     messages: [],
     disabled: false,
     readOnly: false,
-    textareaRef: () => {},
     layout: 'stacked',
     required: false
   }
@@ -74,8 +74,8 @@ class TextArea extends Component<TextAreaProps> {
   _listener: { remove(): void } | null = null
   _request: RequestAnimationFrameType | undefined
   _defaultId: string
-  _textareaResizeListener: any
-  _debounced: any
+  _textareaResizeListener?: ResizeObserver
+  _debounced?: Debounced
   _textarea?: HTMLTextAreaElement | null
   _container?: HTMLDivElement
   _height?: string
@@ -283,7 +283,9 @@ class TextArea extends Component<TextAreaProps> {
         placeholder={placeholder}
         ref={(textarea, ...args) => {
           this._textarea = textarea
-          textareaRef!.apply(this, [textarea, ...args])
+          if (typeof textareaRef === 'function') {
+            textareaRef.apply(this, [textarea, ...args])
+          }
         }}
         style={style}
         id={this.id}
