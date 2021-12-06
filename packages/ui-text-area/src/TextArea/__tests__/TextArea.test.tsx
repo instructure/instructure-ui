@@ -187,7 +187,7 @@ describe('TextArea', async () => {
         label="Name"
         autoGrow={false}
         defaultValue="bar"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; autoGrow: false; defaultVal... Remove this comment to see the full error message
+        // @ts-expect-error this is managed by the testing framework
         componentRef={(el: TextArea) => (ref = el)}
       />
     )

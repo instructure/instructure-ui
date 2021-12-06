@@ -71,16 +71,17 @@ class TextArea extends Component<TextAreaProps> {
     required: false
   }
 
-  _listener: { remove(): void } | null = null
-  _request: RequestAnimationFrameType | undefined
-  _defaultId: string
-  _textareaResizeListener?: ResizeObserver
-  _debounced?: Debounced
-  _textarea?: HTMLTextAreaElement | null
-  _container?: HTMLDivElement
-  _height?: string
-  _node?: FormField | null
-  _manuallyResized?: boolean
+  private _listener?: { remove(): void }
+  private _request?: RequestAnimationFrameType
+  private _defaultId: string
+  private _textareaResizeListener?: ResizeObserver
+  private _debounced?: Debounced
+  private _textarea: HTMLTextAreaElement | null = null
+  private _container: HTMLDivElement | null = null
+  private _height?: string
+  //TODO remove in v9 since it seems to be unused
+  private _node?: FormField | null = null
+  private _manuallyResized?: boolean
 
   constructor(props: TextAreaProps) {
     super(props)
@@ -173,9 +174,15 @@ class TextArea extends Component<TextAreaProps> {
     this._textarea.style.overflowY = 'hidden' // hide scrollbars for autoGrow textareas
     height = this._textarea.scrollHeight + offset + 'px'
 
-    const maxHeight = px(this.props.maxHeight!, this._container)
+    const maxHeight = this.props.maxHeight
+      ? px(this.props.maxHeight, this._container)
+      : undefined
 
-    if (this.props.maxHeight && this._textarea.scrollHeight > maxHeight) {
+    if (
+      this.props.maxHeight &&
+      maxHeight !== undefined &&
+      this._textarea.scrollHeight > maxHeight
+    ) {
       this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds maxHeight in pixels
     } else if (this.props.height) {
       if (this._textarea.value === '') {
@@ -190,7 +197,7 @@ class TextArea extends Component<TextAreaProps> {
 
     // preserve container height to prevent scroll jumping on long textareas,
     // but make sure container doesn't exceed maxHeight prop
-    const heightExceedsMax = px(height) > maxHeight
+    const heightExceedsMax = maxHeight !== undefined && px(height) > maxHeight
     if (!heightExceedsMax) {
       this._container!.style.minHeight = height
     }
@@ -221,7 +228,7 @@ class TextArea extends Component<TextAreaProps> {
     }
   }
 
-  handleContainerRef = (node: HTMLDivElement) => {
+  handleContainerRef = (node: HTMLDivElement | null) => {
     this._container = node
   }
 
@@ -291,7 +298,7 @@ class TextArea extends Component<TextAreaProps> {
         id={this.id}
         required={required}
         aria-required={required}
-        aria-invalid={this.invalid ? 'true' : 'false'}
+        aria-invalid={this.invalid ? 'true' : undefined}
         disabled={disabled || readOnly}
         css={this.props.styles?.textArea}
         onChange={this.handleChange}
@@ -300,8 +307,8 @@ class TextArea extends Component<TextAreaProps> {
 
     return (
       <FormField
-        label={null}
         {...pickProps(this.props, FormField.allowedProps)}
+        label={this.props.label}
         vAlign="top"
         id={this.id}
         ref={(el) => {
