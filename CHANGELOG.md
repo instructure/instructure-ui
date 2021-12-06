@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.14.1](https://github.com/instructure/instructure-ui/compare/v7.14.0...v7.14.1) (2021-12-06)
+
+### Bug Fixes
+
+- **ui-a11y-utils,ui-drawer-layout:** fix Drawer not opening on small viewport ([148ce9a](https://github.com/instructure/instructure-ui/commit/148ce9a))
+
 # [7.14.0](https://github.com/instructure/instructure-ui/compare/v7.13.0...v7.14.0) (2021-12-01)
 
 ### Bug Fixes
