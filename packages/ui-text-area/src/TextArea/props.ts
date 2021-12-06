@@ -94,7 +94,7 @@ type TextAreaOwnProps = {
   /**
    * a function that provides a reference to the actual textarea element
    */
-  textareaRef?: (textarea: HTMLTextAreaElement | null, ...args: any[]) => any
+  textareaRef?: (textarea: HTMLTextAreaElement | null, ...args: any[]) => void
   /**
    * value to set on initial render
    */
@@ -106,7 +106,7 @@ type TextAreaOwnProps = {
   /**
    * when used with the `value` prop, the component will not control its own state
    */
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => any
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 type PropKeys = keyof TextAreaOwnProps
