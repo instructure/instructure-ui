@@ -81,7 +81,7 @@ class TextArea extends Component<TextAreaProps> {
   private _height?: string
   //TODO remove in v9 since it seems to be unused
   private _node?: FormField | null = null
-  private _manuallyResized?: boolean
+  private _manuallyResized = false
 
   constructor(props: TextAreaProps) {
     super(props)
@@ -288,10 +288,10 @@ class TextArea extends Component<TextAreaProps> {
         value={value}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        ref={(textarea, ...args) => {
+        ref={(textarea) => {
           this._textarea = textarea
           if (typeof textareaRef === 'function') {
-            textareaRef.apply(this, [textarea, ...args])
+            textareaRef(textarea)
           }
         }}
         style={style}
