@@ -39,13 +39,14 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type { BillboardProps } from './props'
+import type { BillboardProps, HeroIconSize } from './props'
 import type { ViewProps } from '@instructure/ui-view'
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Billboard extends Component<BillboardProps> {
@@ -95,11 +96,7 @@ class Billboard extends Component<BillboardProps> {
     )
   }
 
-  get heroIsFunction() {
-    return typeof this.props.hero === 'function'
-  }
-
-  get SVGIconSize() {
+  get SVGIconSize(): HeroIconSize {
     const size = this.props.size
 
     // serve up appropriate SVGIcon size for each Billboard size
