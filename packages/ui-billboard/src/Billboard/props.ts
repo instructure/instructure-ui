@@ -38,12 +38,13 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 import type { ViewProps } from '@instructure/ui-view'
-import { MouseEvent } from 'react'
+import React, { MouseEvent } from 'react'
+type HeroIconSize = 'medium' | 'x-large' | 'large'
 type BillboardOwnProps = {
   /**
    * Provide an <Img> component or Instructure Icon for the hero image
    */
-  hero?: React.ReactElement | ((size: 'medium' | 'x-large' | 'large') => string)
+  hero?: React.ReactElement | ((iconSize: HeroIconSize) => React.ReactElement)
   /**
    * If you're using an icon, this prop will size it. Also sets the font-size
    * of the headline and message.
@@ -75,7 +76,7 @@ type BillboardOwnProps = {
    * `onClick`. That would cause the Billboard to render as a button or link
    * and would result in nested interactive content.
    */
-  message?: React.ReactNode
+  message?: React.ReactNode | (() => React.ReactNode)
   /**
    * If you add an onClick prop, the Billboard renders as a clickable button
    */
@@ -144,5 +145,5 @@ const allowedProps: AllowedPropKeys = [
   'margin'
 ]
 
-export type { BillboardProps, BillboardStyle }
+export type { BillboardProps, BillboardStyle, HeroIconSize }
 export { propTypes, allowedProps }
