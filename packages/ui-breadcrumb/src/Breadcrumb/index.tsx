@@ -42,6 +42,7 @@ import type { BreadcrumbProps } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
@@ -73,7 +74,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
 
   renderChildren() {
     const { styles, children } = this.props
-    const numChildren = children ? React.Children.count(children) : 0
+    const numChildren = React.Children.count(children)
     const inlineStyle = {
       maxWidth: `${Math.floor(100 / numChildren)}%`
     }
