@@ -67,10 +67,10 @@ type TextAreaOwnProps = {
    */
   maxHeight?: number | string
   /**
-   * object with shape: `{
-   * text: PropTypes.node,
-   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   *   }`
+   * Array of objects with shape: `{
+   *   text: React.ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
    */
   messages?: FormMessage[]
   inline?: boolean
