@@ -94,7 +94,7 @@ type TextAreaOwnProps = {
   /**
    * a function that provides a reference to the actual textarea element
    */
-  textareaRef?: (textarea: HTMLTextAreaElement | null, ...args: any[]) => void
+  textareaRef?: (textarea: HTMLTextAreaElement | null) => void
   /**
    * value to set on initial render
    */
