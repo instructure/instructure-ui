@@ -26,10 +26,10 @@
 import React, { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
+import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
 import generateStyle from './styles'
@@ -63,22 +63,17 @@ class Breadcrumb extends Component<BreadcrumbProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
-
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   static Link = BreadcrumbLink
 
   renderChildren() {
     const { styles, children } = this.props
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'length' does not exist on type 'string |... Remove this comment to see the full error message
-    const numChildren = children ? children.length : 0
+    const numChildren = children ? React.Children.count(children) : 0
     const inlineStyle = {
       maxWidth: `${Math.floor(100 / numChildren)}%`
     }

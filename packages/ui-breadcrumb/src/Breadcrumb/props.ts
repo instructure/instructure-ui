@@ -37,9 +37,23 @@ import type {
 import type { BreadcrumbTheme, PropValidators } from '@instructure/shared-types'
 
 type BreadcrumbOwnProps = {
+  /**
+   * children of type Breadcrumb.Link
+   */
   children?: React.ReactNode // TODO: oneOf([BreadcrumbLink])
+  /**
+   * An accessible label for the navigation
+   */
   label: string
+  /**
+   * Sets the font-size of the breadcrumb text
+   */
   size?: 'small' | 'medium' | 'large'
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
 }
 
@@ -53,23 +67,9 @@ type BreadcrumbProps = BreadcrumbOwnProps &
 type BreadcrumbStyle = ComponentStyle<'breadcrumb' | 'crumb' | 'separator'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * children of type Breadcrumb.Link
-   */
   children: Children.oneOf([BreadcrumbLink]),
-  /**
-   * An accessible label for the navigation
-   */
   label: PropTypes.string.isRequired,
-  /**
-   * Sets the font-size of the breadcrumb text
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing
 }
 
