@@ -23,11 +23,13 @@
  */
 
 import React from 'react'
+
 import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
+import { View } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view'
 
 import { Tag } from '../index'
 import { TagLocator } from '../TagLocator'
-import { View } from '@instructure/ui-view'
 
 describe('<Tag />', async () => {
   it('should display text', async () => {
@@ -64,7 +66,7 @@ describe('<Tag />', async () => {
   })
 
   describe('when passing down props to View', async () => {
-    const allowedProps = {
+    const allowedProps: Partial<ViewProps> = {
       margin: 'small',
       elementRef: () => {}
     }
@@ -85,7 +87,6 @@ describe('<Tag />', async () => {
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
-            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
 

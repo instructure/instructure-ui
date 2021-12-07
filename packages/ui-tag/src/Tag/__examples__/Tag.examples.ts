@@ -21,15 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { TagProps } from '../props'
+
 export default {
   sectionProp: 'variant',
   propValues: {
     text: ['Some tag', 'A lot of content which will truncate']
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       onClick: () => {}
     }
   }
-}
+} as StoryConfig<TagProps>

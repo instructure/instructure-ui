@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import { IconXSolid } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
@@ -40,6 +41,7 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
@@ -57,27 +59,25 @@ class Tag extends Component<TagProps> {
     readOnly: false
   }
 
+  ref: Element | null = null
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     this.props.makeStyles?.()
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_container' does not exist on type 'Tag'... Remove this comment to see the full error message
-    return isActiveElement(this._container)
+    return isActiveElement(this.ref)
   }
 
   focus = () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_container' does not exist on type 'Tag'... Remove this comment to see the full error message
-    this._container && this._container.focus()
+    this.ref && (this.ref as HTMLElement).focus()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleClick = (e) => {
+  handleClick = (e: React.MouseEvent<ViewProps>) => {
     const { disabled, readOnly, onClick } = this.props
 
     if (disabled || readOnly) {
@@ -88,10 +88,12 @@ class Tag extends Component<TagProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
-  handleRef = (node) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_container' does not exist on type 'Tag'... Remove this comment to see the full error message
-    this._container = node
+  handleRef = (element: Element | null) => {
+    this.ref = element
+
+    if (typeof this.props.elementRef === 'function') {
+      this.props.elementRef(element)
+    }
   }
 
   render() {
@@ -115,8 +117,7 @@ class Tag extends Component<TagProps> {
     return (
       <View
         {...passthroughProps}
-        ref={this.handleRef}
-        elementRef={this.props.elementRef}
+        elementRef={this.handleRef}
         css={styles?.tag}
         className={className}
         as={onClick ? 'button' : 'span'}
