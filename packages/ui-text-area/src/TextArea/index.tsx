@@ -79,8 +79,6 @@ class TextArea extends Component<TextAreaProps> {
   private _textarea: HTMLTextAreaElement | null = null
   private _container: HTMLDivElement | null = null
   private _height?: string
-  //TODO remove in v9 since it seems to be unused
-  private _node?: FormField | null = null
   private _manuallyResized = false
 
   constructor(props: TextAreaProps) {
@@ -311,9 +309,6 @@ class TextArea extends Component<TextAreaProps> {
         label={this.props.label}
         vAlign="top"
         id={this.id}
-        ref={(el) => {
-          this._node = el
-        }}
       >
         <div
           css={this.props.styles?.textAreaLayout}
