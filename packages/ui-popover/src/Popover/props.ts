@@ -195,13 +195,16 @@ type PopoverOwnProps = {
    * Callback fired when content is shown. When controlled, this callback is
    * fired when the Popover expects to be shown
    */
-  onShowContent?: (event: Event) => void
+  onShowContent?: (event: React.UIEvent | React.FocusEvent) => void
 
   /**
    * Callback fired when content is hidden. When controlled, this callback is
    * fired when the Popover expects to be hidden
    */
-  onHideContent?: (event: Event, args: { documentClick: boolean }) => void
+  onHideContent?: (
+    event: React.UIEvent | React.FocusEvent,
+    args: { documentClick: boolean }
+  ) => void
 
   /**
    * Callback fired when content has been is initially positioned.
@@ -218,37 +221,37 @@ type PopoverOwnProps = {
   /**
    * Callback fired when component is clicked
    */
-  onClick?: (event: Event) => void
+  onClick?: (event: React.MouseEvent) => void
 
   /**
    * Callback fired when trigger is focused
    */
-  onFocus?: (event: Event) => void
+  onFocus?: (event: React.FocusEvent) => void
 
   /**
    * Callback fired when component is blurred
    */
-  onBlur?: (event: Event) => void
+  onBlur?: (event: React.FocusEvent) => void
 
   /**
    * Callback fired on keydown
    */
-  onKeyDown?: (event: Event) => void
+  onKeyDown?: (event: React.KeyboardEvent) => void
 
   /**
    * Callback fired on keyup
    */
-  onKeyUp?: (event: Event) => void
+  onKeyUp?: (event: React.KeyboardEvent) => void
 
   /**
    * Callback fired when mouse is over trigger
    */
-  onMouseOver?: (event: Event) => void
+  onMouseOver?: (event: React.MouseEvent) => void
 
   /**
    * Callback fired when mouse leaves trigger
    */
-  onMouseOut?: (event: Event) => void
+  onMouseOut?: (event: React.MouseEvent) => void
 
   /**
    * The element that triggers the popover

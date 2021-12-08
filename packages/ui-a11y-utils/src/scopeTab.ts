@@ -33,7 +33,7 @@ import type { UIElement } from '@instructure/shared-types'
 
 function scopeTab(
   element: UIElement | undefined,
-  event: KeyboardEvent,
+  event: React.KeyboardEvent,
   onLeavingFinalTabbable?: () => void
 ) {
   const node = findDOMNode(element)

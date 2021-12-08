@@ -71,17 +71,20 @@ class FocusRegion {
     }
   }
 
-  handleDismiss = (event: Event, documentClick?: boolean) => {
+  handleDismiss = (
+    event: React.MouseEvent | React.KeyboardEvent,
+    documentClick?: boolean
+  ) => {
     this._options.onDismiss?.(event, documentClick)
   }
 
-  captureDocumentClick = (event: MouseEvent) => {
+  captureDocumentClick = (event: React.MouseEvent) => {
     const { target } = event
     this._preventCloseOnDocumentClick =
       event.button !== 0 || contains(this._contextElement, target as Node)
   }
 
-  handleDocumentClick = (event: MouseEvent) => {
+  handleDocumentClick = (event: React.MouseEvent) => {
     if (
       this._options.shouldCloseOnDocumentClick &&
       !this._preventCloseOnDocumentClick
@@ -90,14 +93,14 @@ class FocusRegion {
     }
   }
 
-  handleFrameClick = (event: MouseEvent, frame: HTMLIFrameElement) => {
+  handleFrameClick = (event: React.MouseEvent, frame: HTMLIFrameElement) => {
     if (!contains(this._contextElement, frame)) {
       // dismiss if frame is not within the region
       this.handleDismiss(event, true)
     }
   }
 
-  handleKeyUp = (event: KeyboardEvent) => {
+  handleKeyUp = (event: React.KeyboardEvent) => {
     if (
       this._options.shouldCloseOnEscape &&
       event.keyCode === keycode.codes.esc &&
@@ -130,19 +133,10 @@ class FocusRegion {
 
       if (this._options.shouldCloseOnDocumentClick) {
         this._listeners.push(
-          addEventListener(
-            doc,
-            'click',
-            this.captureDocumentClick as EventListener,
-            true
-          )
+          addEventListener(doc, 'click', this.captureDocumentClick, true)
         )
         this._listeners.push(
-          addEventListener(
-            doc,
-            'click',
-            this.handleDocumentClick as EventListener
-          )
+          addEventListener(doc, 'click', this.handleDocumentClick)
         )
 
         Array.from(doc.getElementsByTagName('iframe')).forEach((el) => {
@@ -151,7 +145,7 @@ class FocusRegion {
           if (frameDoc) {
             this._listeners.push(
               addEventListener(frameDoc, 'mouseup', (event) => {
-                this.handleFrameClick(event as MouseEvent, el)
+                this.handleFrameClick(event as React.MouseEvent, el)
               })
             )
           }
@@ -159,9 +153,7 @@ class FocusRegion {
       }
 
       if (this._options.shouldCloseOnEscape) {
-        this._listeners.push(
-          addEventListener(doc, 'keyup', this.handleKeyUp as EventListener)
-        )
+        this._listeners.push(addEventListener(doc, 'keyup', this.handleKeyUp))
       }
 
       this._active = true

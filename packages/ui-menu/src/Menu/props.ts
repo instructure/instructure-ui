@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { PositionPropTypes } from '@instructure/ui-position'
@@ -44,7 +45,6 @@ import type {
 } from '@instructure/ui-position'
 import type { OnMenuItemSelect } from './MenuItem/props'
 import type { Popover } from '@instructure/ui-popover'
-import React from 'react'
 
 type MenuOwnProps = {
   /**
@@ -87,19 +87,22 @@ type MenuOwnProps = {
   /**
    * If a trigger is supplied, callback fired when the `<Menu />` is closed
    */
-  onDismiss?: (event: Event, documentClick: boolean) => void
+  onDismiss?: (
+    event: React.UIEvent | React.FocusEvent,
+    documentClick: boolean
+  ) => void
   /**
    * If a trigger is supplied, callback fired when the `<Menu />` trigger is focused
    */
-  onFocus?: (event: Event) => void
+  onFocus?: (event: React.FocusEvent) => void
   /**
    * If a trigger is supplied, callback fired onMouseOver for the `<Menu />` trigger
    */
-  onMouseOver?: (event: Event) => void
+  onMouseOver?: (event: React.MouseEvent) => void
   /**
    * Callback fired on the onKeyDown of the `<Menu />`
    */
-  onKeyDown?: (event: React.KeyboardEvent) => void
+  onKeyDown?: (event: React.KeyboardEvent<HTMLUListElement>) => void
   /**
    * Callback fired on the onKeyUp of the `<Menu />`
    */
