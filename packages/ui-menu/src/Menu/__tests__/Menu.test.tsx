@@ -352,10 +352,8 @@ describe('<Menu />', async () => {
 
       // offset props influence the transform CSS prop of the Popover
       const defaultTransform = getComputedStyle(popover.getDOMNode()).transform
-      const {
-        transformX: defaultTransformX,
-        transformY: defaultTransformY
-      } = getTransforms(defaultTransform)
+      const { transformX: defaultTransformX, transformY: defaultTransformY } =
+        getTransforms(defaultTransform)
 
       await unmount()
 
@@ -375,10 +373,8 @@ describe('<Menu />', async () => {
       const popover2 = await subject2.findPopoverContent()
 
       const newTransform = getComputedStyle(popover2.getDOMNode()).transform
-      const {
-        transformX: newTransformX,
-        transformY: newTransformY
-      } = getTransforms(newTransform)
+      const { transformX: newTransformX, transformY: newTransformY } =
+        getTransforms(newTransform)
 
       expect(newTransformX).to.equal(defaultTransformX + 10)
       expect(newTransformY).to.equal(defaultTransformY + 30)
@@ -507,7 +503,9 @@ describe('<Menu />', async () => {
       })
 
       expect(
-        await (await MenuLocator.find(':label(Flyout)')).findPopoverContent({
+        await (
+          await MenuLocator.find(':label(Flyout)')
+        ).findPopoverContent({
           expectEmpty: true
         })
       ).to.not.exist()
@@ -665,8 +663,7 @@ describe('<Menu />', async () => {
   })
 })
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-function testShowFlyoutOnEvent(event) {
+const testShowFlyoutOnEvent = (event: { type: string; which?: string }) => {
   it(`should show flyout menu on ${event.type} ${
     event.which || ''
   }`, async () => {
@@ -681,6 +678,7 @@ function testShowFlyoutOnEvent(event) {
     )
 
     const menu = await MenuLocator.find(':label(Parent)')
+    //TODO remove any
     const trigger = (await menu.findItem(':label(Flyout)')) as any
 
     await trigger[event.type](event.which)
@@ -692,8 +690,7 @@ function testShowFlyoutOnEvent(event) {
   })
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-function testFocusFlyoutOnEvent(event) {
+function testFocusFlyoutOnEvent(event: { type: string; which?: string }) {
   it(`expect flyout menu to be focused on ${event.type} ${
     event.which || ''
   }`, async () => {

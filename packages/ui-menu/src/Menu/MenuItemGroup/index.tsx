@@ -41,17 +41,19 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type { MenuGroupProps } from './props'
+import type { MenuGroupProps, MenuGroupState } from './props'
+import type { OnMenuItemSelect, MenuItemProps } from '../MenuItem/props'
 
 /**
 ---
 parent: Menu
 id: Menu.Group
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class MenuItemGroup extends Component<MenuGroupProps> {
+class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   static readonly componentId = 'Menu.Group'
 
   static propTypes = propTypes
@@ -61,28 +63,22 @@ class MenuItemGroup extends Component<MenuGroupProps> {
     children: null,
     isTabbable: false,
     allowMultiple: false,
-    defaultSelected: [],
-    // @ts-expect-error ts-migrate(6133) FIXME: 'item' is declared but its value is never read.
-    itemRef: function (item) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onSelect: function (e, value, selected, item) {}
+    defaultSelected: []
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
-    super()
+  constructor(props: MenuGroupProps) {
+    super(props)
 
     if (typeof props.selected === 'undefined') {
       this.state = {
-        selected: this.selectedFromChildren(props) || props.defaultSelected
+        selected: this.selectedFromChildren(props) || props.defaultSelected!
       }
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'MenuIt... Remove this comment to see the full error message
     this._labelId = uid('MenuItemGroup')
   }
 
+  private _labelId: string
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
@@ -90,17 +86,14 @@ class MenuItemGroup extends Component<MenuGroupProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleSelect = (e, value, selected, item) => {
+  handleSelect: OnMenuItemSelect = (e, value, selected, item) => {
     if (this.props.disabled) {
       e.preventDefault()
       return
@@ -114,7 +107,6 @@ class MenuItemGroup extends Component<MenuGroupProps> {
           selected: this.updateSelected(
             e,
             value,
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'selected' does not exist on type 'Readon... Remove this comment to see the full error message
             state.selected,
             selected,
             item
@@ -124,14 +116,19 @@ class MenuItemGroup extends Component<MenuGroupProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  updateSelected = (e, value, items, selected, item) => {
+  updateSelected = (
+    e: React.MouseEvent,
+    value: MenuItemProps['value'],
+    items: MenuGroupState['selected'],
+    selected: MenuItemProps['selected'],
+    item: MenuItem
+  ) => {
     const { allowMultiple } = this.props
     let updated = allowMultiple ? [...items] : []
-    const location = updated.indexOf(value)
+    const location = updated.indexOf(value!)
 
     if (selected === true && location < 0) {
-      updated.push(value)
+      updated.push(value!)
     } else if (selected === false && location !== -1) {
       updated.splice(location, 1)
     } else if (!allowMultiple && updated.length < 1) {
@@ -146,42 +143,35 @@ class MenuItemGroup extends Component<MenuGroupProps> {
     return updated
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  selectedFromChildren(props) {
+  selectedFromChildren(props: MenuGroupProps) {
     const { children, allowMultiple } = props
-    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'selected' implicitly has type 'any[]' in... Remove this comment to see the full error message
-    const selected = []
+    const selected: MenuGroupState['selected'] = []
 
     const items = Children.toArray(children).filter((child) => {
       return matchComponentTypes(child as MenuItem, [MenuItem])
-    })
+    }) as MenuItem[]
 
     items.forEach((item, index) => {
       if (
         (selected.length === 0 || allowMultiple) &&
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
         (item.props.selected || item.props.defaultSelected)
       ) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
         selected.push(item.props.value || index)
       }
     })
 
-    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'selected' implicitly has an 'any[]' type... Remove this comment to see the full error message
     return selected.length > 0 ? selected : null
   }
 
   get selected() {
     if (
       typeof this.props.selected === 'undefined' &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'selected' does not exist on type 'Readon... Remove this comment to see the full error message
       typeof this.state.selected === 'undefined'
     ) {
       return []
     } else {
       return typeof this.props.selected === 'undefined'
-        ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'selected' does not exist on type 'Readon... Remove this comment to see the full error message
-          [...this.state.selected]
+        ? [...this.state.selected]
         : [...this.props.selected]
     }
   }
@@ -197,21 +187,14 @@ class MenuItemGroup extends Component<MenuGroupProps> {
   }
 
   renderChildren() {
-    const {
-      children,
-      disabled,
-      controls,
-      allowMultiple,
-      isTabbable,
-      onMouseOver
-    } = this.props
-
+    const { disabled, controls, allowMultiple, isTabbable, onMouseOver } =
+      this.props
+    const children = this.props.children as ReactElement[]
     let index = -1
 
     return Children.map(children, (child) => {
       if (matchComponentTypes(child, [MenuItem])) {
         ++index
-        // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
         const value = child.props.value || index
 
         return (
@@ -223,7 +206,6 @@ class MenuItemGroup extends Component<MenuGroupProps> {
               value,
               type: allowMultiple ? 'checkbox' : 'radio',
               ref: this.props.itemRef,
-              // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
               disabled: disabled || child.props.disabled,
               selected: this.selected.indexOf(value) > -1,
               onSelect: this.handleSelect,
@@ -246,13 +228,11 @@ class MenuItemGroup extends Component<MenuGroupProps> {
         role="presentation"
         ref={this.handleRef}
       >
-        {/* @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'MenuIt... Remove this comment to see the full error message */}
         <span id={this._labelId}>{this.renderLabel()}</span>
         <ul
           role="menu"
           css={this.props.styles?.items}
           aria-disabled={this.props.disabled ? 'true' : undefined}
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'MenuIt... Remove this comment to see the full error message
           aria-labelledby={this._labelId}
         >
           {this.renderChildren()}

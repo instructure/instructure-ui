@@ -39,42 +39,38 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type { MenuItemProps } from './props'
+import type { MenuItemProps, MenuItemState } from './props'
 
 /**
 ---
 parent: Menu
 id: Menu.Item
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class MenuItem extends Component<MenuItemProps> {
+class MenuItem extends Component<MenuItemProps, MenuItemState> {
   static readonly componentId = 'Menu.Item'
 
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     type: 'button',
-    disabled: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onSelect: function (e, value, selected, item) {}
+    disabled: false
   } as const
 
   static contextType = MenuContext
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
-    super()
+  constructor(props: MenuItemProps) {
+    super(props)
 
     if (typeof props.selected === 'undefined') {
       this.state = {
-        selected: props.defaultSelected
+        selected: !!props.defaultSelected
       }
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'labelId' does not exist on type 'MenuIte... Remove this comment to see the full error message
     this.labelId = uid('MenuItem__label')
   }
 
@@ -85,14 +81,16 @@ class MenuItem extends Component<MenuItemProps> {
 
     return this.ref
   }
+
+  labelId: string
   ref: Element | null = null
+
   handleRef = (el: Element | null) => {
     this.ref = el
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
     const context = this.context
 
     if (context && context.registerMenuItem) {
@@ -101,8 +99,7 @@ class MenuItem extends Component<MenuItemProps> {
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentWillUnmount() {
@@ -113,8 +110,7 @@ class MenuItem extends Component<MenuItemProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleClick = (e) => {
+  handleClick = (e: React.MouseEvent) => {
     const { onSelect, onClick, disabled, value } = this.props
     const selected = !this.selected
 
@@ -137,8 +133,7 @@ class MenuItem extends Component<MenuItemProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleKeyDown = (e) => {
+  handleKeyDown = (e: React.KeyboardEvent) => {
     const spaceKey = e.keyCode === keycode.codes.space
     const enterKey = e.keyCode === keycode.codes.enter
 
@@ -148,14 +143,13 @@ class MenuItem extends Component<MenuItemProps> {
 
       if (enterKey) {
         // handle space key on keyUp for FF
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'MenuItem'... Remove this comment to see the full error message
-        findDOMNode(this.ref).click() // eslint-disable-line react/no-find-dom-node
+        const refNode = findDOMNode(this.ref) as HTMLElement
+        refNode.click()
       }
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleKeyUp = (e) => {
+  handleKeyUp = (e: React.KeyboardEvent) => {
     const spaceKey = e.keyCode === keycode.codes.space
     const enterKey = e.keyCode === keycode.codes.enter
 
@@ -164,14 +158,13 @@ class MenuItem extends Component<MenuItemProps> {
       e.stopPropagation()
 
       if (spaceKey) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'MenuItem'... Remove this comment to see the full error message
-        findDOMNode(this.ref).click() // eslint-disable-line react/no-find-dom-node
+        const refNode = findDOMNode(this.ref) as HTMLElement
+        refNode.click()
       }
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleMouseOver = (event) => {
+  handleMouseOver = (event: React.MouseEvent) => {
     this.focus()
 
     if (typeof this.props.onMouseOver === 'function') {
@@ -198,8 +191,7 @@ class MenuItem extends Component<MenuItemProps> {
 
   get selected() {
     return typeof this.props.selected === 'undefined'
-      ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'selected' does not exist on type 'Readon... Remove this comment to see the full error message
-        this.state.selected
+      ? this.state.selected
       : this.props.selected
   }
 
@@ -208,8 +200,8 @@ class MenuItem extends Component<MenuItemProps> {
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'MenuItem'... Remove this comment to see the full error message
-    findDOMNode(this.ref).focus() // eslint-disable-line react/no-find-dom-node
+    const refNode = findDOMNode(this.ref) as HTMLElement
+    refNode.focus()
   }
 
   renderContent() {
@@ -222,7 +214,6 @@ class MenuItem extends Component<MenuItemProps> {
             {this.selected && <IconCheckSolid />}
           </span>
         )}
-        {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'labelId' does not exist on type 'MenuIte... Remove this comment to see the full error message */}
         <span css={this.props.styles?.label} id={this.labelId}>
           {children}
         </span>
@@ -242,13 +233,12 @@ class MenuItem extends Component<MenuItemProps> {
     const ElementType = this.elementType
 
     return (
-      <ElementType // eslint-disable-line jsx-a11y/mouse-events-have-key-events
+      <ElementType
         // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         tabIndex={-1} // note: tabIndex can be overridden by Menu or MenuItemGroup components
         {...props}
         href={href}
         role={this.role}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'labelId' does not exist on type 'MenuIte... Remove this comment to see the full error message
         aria-labelledby={this.labelId}
         aria-disabled={disabled ? 'true' : undefined}
         aria-controls={controls}

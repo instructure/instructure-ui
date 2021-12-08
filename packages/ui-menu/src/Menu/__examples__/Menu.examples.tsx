@@ -25,6 +25,7 @@
 import React from 'react'
 
 import { Menu, MenuItem, MenuItemSeparator, MenuItemGroup } from '../index'
+import type { MenuProps } from '../props'
 
 export default {
   sectionProp: 'placement',
@@ -55,16 +56,14 @@ export default {
     ],
     children: [getMenuChildren()]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       label: `Menu example`,
       defaultShow: true,
       constrain: 'none'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getExampleProps: (props) => {
+  getExampleProps: (props: MenuProps) => {
     return {
       dir: props.dir,
       as: 'div',
@@ -75,8 +74,7 @@ export default {
       textAlign: 'center'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: MenuProps) => {
     return !props.trigger && props.placement !== 'top start'
   }
 }
