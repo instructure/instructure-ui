@@ -21,9 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { logWarn as warn } from '@instructure/console'
 import { addEventListener } from './addEventListener'
 import { canUseDOM } from './canUseDOM'
+
+import type { MouseEvent, PointerEvent, TouchEvent } from 'react'
 
 export const MODES = {
   keyboard: 'keyboard',
@@ -42,7 +45,7 @@ class InputModeListenerImpl {
   _initialized = false
   _mode = MODES.keyboard
 
-  onInitialPointerMove = (event: Event) => {
+  onInitialPointerMove = (event: MouseEvent | PointerEvent | TouchEvent) => {
     // Work around a Safari quirk that fires a mousemove on <html> whenever the
     // window blurs, even if you're tabbing out of the page. ¯\_(ツ)_/¯
     if ((event?.target as Node)?.nodeName?.toLowerCase() === 'html') {

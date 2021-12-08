@@ -22,7 +22,11 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+
 import { findDOMNode } from './findDOMNode'
+
+type ReactEvent = <T extends Event>(event: T) => void
 
 /**
  * ---
@@ -32,22 +36,22 @@ import { findDOMNode } from './findDOMNode'
  * @module addEventListener
  * @param { Node | Window } el - DOM node which will have the event listener attached
  * @param { string } event - a string specifying the event name ('click', 'focus', etc)
- * @param { EventListenerOrEventListenerObject } handler - function to run when event occurs
+ * @param { React.EventHandler<React.SyntheticEvent> } handler - function to run when event occurs
  * @param { boolean } capture - should the event be executed in the capturing or bubbling phase
  * @returns {{ remove(): void }} a method to remove the event listener
  */
 function addEventListener(
   el: Node | Window,
   event: keyof WindowEventMap,
-  handler: EventListenerOrEventListenerObject,
+  handler: React.EventHandler<React.SyntheticEvent>,
   capture?: boolean
 ) {
   const node = el === window || el === document ? el : findDOMNode(el)
-  node?.addEventListener(event, handler, capture)
+  node?.addEventListener(event, handler as ReactEvent, capture)
 
   return {
     remove() {
-      node?.removeEventListener(event, handler, capture)
+      node?.removeEventListener(event, handler as ReactEvent, capture)
     }
   }
 }

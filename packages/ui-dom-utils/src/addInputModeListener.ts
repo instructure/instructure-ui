@@ -21,8 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { addEventListener } from './addEventListener'
 import { canUseDOM } from './canUseDOM'
+
+import type { MouseEvent, PointerEvent, TouchEvent } from 'react'
 
 const MODES = {
   keyboard: 'keyboard',
@@ -35,7 +38,9 @@ let _mode = MODES.keyboard
 let _registeredCount = 0
 const _modeChangeHandlers: Record<string, (...args: any[]) => any> = {}
 
-const handleInitialPointerMove = (event: Event) => {
+const handleInitialPointerMove = (
+  event: MouseEvent | PointerEvent | TouchEvent
+) => {
   // Work around a Safari quirk that fires a mousemove on <html> whenever the
   // window blurs, even if you're tabbing out of the page. ¯\_(ツ)_/¯
   if ((event.target as Node).nodeName.toLowerCase() === 'html') {

@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+
 import type { LiveRegion, UIElement } from '@instructure/shared-types'
 
 export type FocusRegionOptions = {
@@ -29,7 +31,7 @@ export type FocusRegionOptions = {
    * Function called when tab focus leaves the focusable content. This only
    * occurs when `shouldContainFocus` is set to false.
    */
-  onBlur?: (event: Event) => void
+  onBlur?: (event: React.UIEvent | React.FocusEvent) => void
   /**
    * Function called when a focus region is dismissed. This can happen when
    * the user presses the escape key and `shouldCloseOnEscape` is true or
@@ -38,7 +40,10 @@ export type FocusRegionOptions = {
    * @param event The event triggered the dismissal
    * @param documentClick Whether the dismissal was triggered by a mouse click.
    */
-  onDismiss?: (event: Event, documentClick?: boolean) => void
+  onDismiss?: (
+    event: React.UIEvent | React.FocusEvent,
+    documentClick?: boolean
+  ) => void
   /**
    * An element or a function returning an element to focus by default
    */

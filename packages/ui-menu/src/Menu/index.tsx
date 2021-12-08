@@ -139,13 +139,13 @@ class Menu extends Component<MenuProps> {
   handleTriggerKeyDown = (event: React.KeyboardEvent) => {
     if (this.props.type === 'flyout' && event.keyCode === keycode.codes.right) {
       event.persist()
-      this.show()
+      this.show(event)
     }
   }
 
-  handleTriggerMouseOver = () => {
+  handleTriggerMouseOver = (event: React.MouseEvent) => {
     if (this.props.type === 'flyout') {
-      this.show()
+      this.show(event)
     }
   }
 
@@ -155,7 +155,7 @@ class Menu extends Component<MenuProps> {
     }
   }
 
-  handleMenuKeyDown = (event: React.KeyboardEvent) => {
+  handleMenuKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
     const key = event && event.keyCode
     const { down, up, tab, left } = keycode.codes
     const pgdn = keycode.codes['page down']
@@ -232,14 +232,13 @@ class Menu extends Component<MenuProps> {
 
   hide = (event: React.MouseEvent | React.KeyboardEvent) => {
     if (this._popover) {
-      this._popover.hide(event as unknown as Event)
+      this._popover.hide(event)
     }
   }
 
-  show = (event?: React.MouseEvent | React.KeyboardEvent) => {
+  show = (event: React.MouseEvent | React.KeyboardEvent) => {
     if (this._popover) {
-      //TODO make events consistents
-      this._popover.show(event as unknown as Event)
+      this._popover.show(event)
     }
   }
 

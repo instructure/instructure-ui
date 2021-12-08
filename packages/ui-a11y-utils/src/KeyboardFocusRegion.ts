@@ -189,7 +189,7 @@ class KeyboardFocusRegion {
     }
   }
 
-  handleKeyDown = (event: KeyboardEvent) => {
+  handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.keyCode === keycode.codes.tab) {
       scopeTab(this._contextElement, event)
     }
@@ -230,13 +230,13 @@ class KeyboardFocusRegion {
     }
   }
 
-  handleFirstTabbableKeyDown = (event: KeyboardEvent) => {
+  handleFirstTabbableKeyDown = (event: React.KeyboardEvent) => {
     if (event.keyCode === keycode.codes.tab && event.shiftKey) {
       this._options.onBlur?.(event)
     }
   }
 
-  handleLastTabbableKeyDown = (event: KeyboardEvent) => {
+  handleLastTabbableKeyDown = (event: React.KeyboardEvent) => {
     if (event.keyCode === keycode.codes.tab && !event.shiftKey) {
       this._options.onBlur?.(event)
     }
@@ -248,25 +248,21 @@ class KeyboardFocusRegion {
       if (defaultFocusElement || shouldContainFocus) {
         if (shouldContainFocus) {
           this._listeners.push(
-            addEventListener(
-              this.doc,
-              'keydown',
-              this.handleKeyDown as EventListener
-            )
+            addEventListener(this.doc, 'keydown', this.handleKeyDown)
           )
         } else {
           this._listeners.push(
             addEventListener(
               this.firstTabbable || defaultFocusElement!,
               'keydown',
-              this.handleFirstTabbableKeyDown as EventListener
+              this.handleFirstTabbableKeyDown
             )
           )
           this._listeners.push(
             addEventListener(
               this.lastTabbable || defaultFocusElement!,
               'keydown',
-              this.handleLastTabbableKeyDown as EventListener
+              this.handleLastTabbableKeyDown
             )
           )
         }

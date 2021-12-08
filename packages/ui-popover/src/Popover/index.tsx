@@ -234,8 +234,9 @@ class Popover extends Component<PopoverProps, PopoverState> {
 
       // arrowSize and arrowBorderWidth are component theme variables
       // declared in ContextView's styles.js
-      const { arrowSize = 0, arrowBorderWidth = 0 } = (this
-        ._view as ContextView).props.styles!
+      const { arrowSize = 0, arrowBorderWidth = 0 } = (
+        this._view as ContextView
+      ).props.styles!
 
       const offsetAmount = (px(arrowSize) + px(arrowBorderWidth)) * 2
 
@@ -292,14 +293,14 @@ class Popover extends Component<PopoverProps, PopoverState> {
     return this.props.defaultFocusElement
   }
 
-  show = (event: Event) => {
+  show = (event: React.UIEvent | React.FocusEvent) => {
     if (typeof this.props.isShowingContent === 'undefined') {
       this.setState({ isShowingContent: true })
     }
     this.props.onShowContent?.(event)
   }
 
-  hide = (event: Event, documentClick = false) => {
+  hide = (event: React.UIEvent | React.FocusEvent, documentClick = false) => {
     const { onHideContent, isShowingContent } = this.props
 
     if (typeof isShowingContent === 'undefined') {
@@ -316,7 +317,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
     }
   }
 
-  toggle = (event: Event) => {
+  toggle = (event: React.MouseEvent) => {
     if (this.shown) {
       this.hide(event)
     } else {
@@ -338,10 +339,10 @@ class Popover extends Component<PopoverProps, PopoverState> {
     this.hide(event, documentClick)
   }
 
-  handleDialogBlur = (event: Event) => {
+  handleDialogBlur = (event: React.UIEvent | React.FocusEvent) => {
     if (
-      (event as KeyboardEvent).keyCode === keycode.codes.tab &&
-      (event as KeyboardEvent).shiftKey &&
+      (event as React.KeyboardEvent).keyCode === keycode.codes.tab &&
+      (event as React.KeyboardEvent).shiftKey &&
       this.props.shouldFocusContentOnTriggerBlur
     ) {
       return
@@ -364,7 +365,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
     }
   }
 
-  handleTriggerKeyUp = (event: KeyboardEvent) => {
+  handleTriggerKeyUp = (event: React.KeyboardEvent) => {
     if (event.keyCode === keycode.codes.esc && this.shown && this.isTooltip) {
       // if popover is tooltip, it is managing its own focus region so we need
       // to prevent esc keyup event from reaching FocusRegionManager
@@ -373,7 +374,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
     }
   }
 
-  handleTriggerBlur = (event: Event) => {
+  handleTriggerBlur = (event: React.FocusEvent) => {
     const { on } = this.props
 
     if (on && on.indexOf('focus') > -1) {
@@ -411,14 +412,14 @@ class Popover extends Component<PopoverProps, PopoverState> {
     if (trigger) {
       const { on, shouldContainFocus } = this.props
 
-      let onClick: ((event: Event) => void) | undefined = undefined
-      let onFocus: ((event: Event) => void) | undefined = undefined
+      let onClick: React.MouseEventHandler | undefined = undefined
+      let onFocus: React.FocusEventHandler | undefined = undefined
       let onMouseOut: React.MouseEventHandler | undefined = undefined
       let onMouseOver: React.MouseEventHandler | undefined = undefined
       let expanded: string | undefined
 
       if (on && on.indexOf('click') > -1) {
-        onClick = (event: Event) => {
+        onClick = (event: React.MouseEvent) => {
           this.toggle(event)
         }
       }
@@ -435,7 +436,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
       }
 
       if (on && on.indexOf('focus') > -1) {
-        onFocus = (event: Event) => {
+        onFocus = (event: React.FocusEvent) => {
           this.show(event)
         }
       }
