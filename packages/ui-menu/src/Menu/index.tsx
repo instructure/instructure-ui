@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Children, Component, ReactElement } from 'react'
+import React, { Children, Component, ReactElement } from 'react'
 import keycode from 'keycode'
 
 import { Popover } from '@instructure/ui-popover'
@@ -37,6 +37,7 @@ import { testable } from '@instructure/ui-testable'
 
 import { MenuContext } from '../MenuContext'
 import { MenuItem } from './MenuItem'
+import type { OnMenuItemSelect, MenuItemProps } from './MenuItem/props'
 import { MenuItemGroup } from './MenuItemGroup'
 import { MenuItemSeparator } from './MenuItemSeparator'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -51,6 +52,7 @@ import type { MenuProps } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -60,35 +62,13 @@ class Menu extends Component<MenuProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     label: null,
     disabled: false,
     trigger: null,
     placement: 'bottom center',
     defaultShow: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'shown' is declared but its value is never read.
-    onToggle: (shown, menu) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onSelect: (event, value, selected, item) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDismiss: (event, documentClick) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onMouseOver: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyDown: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyUp: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    menuRef: (el) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    popoverRef: (el) => {},
     mountNode: null,
     constrain: 'window',
-    liveRegion: null,
     shouldHideOnSelect: true,
     shouldFocusTriggerOnClose: true,
     withArrow: true,
@@ -102,14 +82,15 @@ class Menu extends Component<MenuProps> {
 
   state = { hasFocus: false }
   _rootNode = null
-  _menuItems = []
-  _popover = null
-  _trigger = null
+  _menuItems: MenuItem[] = []
+  _popover: Popover | null = null
+  _trigger: MenuItem | (ReactElement & { focus?: () => void }) | null = null
   _menu: HTMLUListElement | null = null
   _labelId = uid('Menu__label')
-  _activeSubMenu = null
+  _activeSubMenu?: Menu | null
+  _id: string
 
-  ref: HTMLUListElement | null = null
+  ref: ReactElement | null = null
 
   handleRef = (el: HTMLUListElement | null) => {
     const { menuRef } = this.props
@@ -119,34 +100,27 @@ class Menu extends Component<MenuProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: MenuProps) {
     super(props)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'Menu'.
+
     this._id = this.props.id || uid('Menu')
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   static contextType = MenuContext
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.
-  registerMenuItem = (item) => {
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
+  registerMenuItem = (item: MenuItem) => {
     this._menuItems.push(item)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.
-  removeMenuItem = (item) => {
+  removeMenuItem = (item: MenuItem) => {
     const index = this.getMenuItemIndex(item)
     error(index >= 0, '[Menu] Could not find registered menu item.')
     if (index >= 0) {
@@ -158,39 +132,34 @@ class Menu extends Component<MenuProps> {
     return this._menuItems
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.
-  getMenuItemIndex = (item) => {
+  getMenuItemIndex = (item: MenuItem) => {
     return this._menuItems.findIndex((i) => i === item)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleTriggerKeyDown = (event) => {
+  handleTriggerKeyDown = (event: React.KeyboardEvent) => {
     if (this.props.type === 'flyout' && event.keyCode === keycode.codes.right) {
       event.persist()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
       this.show()
     }
   }
 
   handleTriggerMouseOver = () => {
     if (this.props.type === 'flyout') {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
       this.show()
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'shown' implicitly has an 'any' type.
-  handleToggle = (shown) => {
+  handleToggle = (shown: boolean) => {
     if (typeof this.props.onToggle === 'function') {
       this.props.onToggle(shown, this)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleMenuKeyDown = (event) => {
+  handleMenuKeyDown = (event: React.KeyboardEvent) => {
     const key = event && event.keyCode
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'pgup' does not exist on type 'CodesMap'.
-    const { down, up, pgup, pgdn, tab, left } = keycode.codes
+    const { down, up, tab, left } = keycode.codes
+    const pgdn = keycode.codes['page down']
+    const pgup = keycode.codes['page up']
 
     if (key === down || key === pgdn) {
       event.preventDefault()
@@ -212,8 +181,7 @@ class Menu extends Component<MenuProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleMenuItemSelect = (event, value, selected, item) => {
+  handleMenuItemSelect: OnMenuItemSelect = (event, value, selected, item) => {
     if (this.props.shouldHideOnSelect) {
       this.hide(event)
     }
@@ -231,67 +199,57 @@ class Menu extends Component<MenuProps> {
     this.setState({ hasFocus: this.focusedIndex >= 0 })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleMenuItemMouseOver = (event, menuItem) => {
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
+  handleMenuItemMouseOver: MenuItemProps['onMouseOver'] = (event, menuItem) => {
     if (this._activeSubMenu && menuItem !== this._activeSubMenu._trigger) {
       this.hideActiveSubMenu(event)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  hideActiveSubMenu = (event) => {
+  hideActiveSubMenu = (event: React.MouseEvent | React.KeyboardEvent) => {
     if (this._activeSubMenu) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._activeSubMenu.hide(event)
       this._activeSubMenu = null
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'shown' implicitly has an 'any' type.
-  handleSubMenuToggle = (shown, subMenu) => {
+  handleSubMenuToggle: MenuProps['onToggle'] = (shown, subMenu) => {
     if (shown) {
       this._activeSubMenu = subMenu
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleSubMenuDismiss = (event, documentClick) => {
-    if ((event && event.keyCode === keycode.codes.tab) || documentClick) {
+  handleSubMenuDismiss = (
+    event: React.MouseEvent | React.KeyboardEvent,
+    documentClick: boolean
+  ) => {
+    if (
+      (event && (event as React.KeyboardEvent).keyCode === keycode.codes.tab) ||
+      documentClick
+    ) {
       this.hide(event)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  hide = (event) => {
+  hide = (event: React.MouseEvent | React.KeyboardEvent) => {
     if (this._popover) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      this._popover.hide(event)
+      this._popover.hide(event as unknown as Event)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  show = (event) => {
+  show = (event?: React.MouseEvent | React.KeyboardEvent) => {
     if (this._popover) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      this._popover.show(event)
+      //TODO make events consistents
+      this._popover.show(event as unknown as Event)
     }
   }
 
   focus() {
     if (this.shown) {
-      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
-      error(this._menu && this._menu.focus, '[Menu] Could not focus the menu.')
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      this._menu.focus()
+      error(!!this._menu?.focus, '[Menu] Could not focus the menu.')
+      this._menu!.focus()
     } else {
-      error(
-        // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-        this._trigger && this._trigger.focus,
-        '[Menu] Could not focus the trigger.'
-      )
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      this._trigger.focus()
+      error(!!this._trigger?.focus, '[Menu] Could not focus the trigger.')
+      this._trigger!.focus!()
     }
   }
 
@@ -305,13 +263,11 @@ class Menu extends Component<MenuProps> {
 
   get focusedIndex() {
     return this.menuItems.findIndex((item) => {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'focused' does not exist on type 'never'.
       return item && item.focused === true
     })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'step' implicitly has an 'any' type.
-  moveFocus(step) {
+  moveFocus(step: number) {
     const count = this.menuItems ? this.menuItems.length : 0
 
     if (count <= 0) {
@@ -322,15 +278,15 @@ class Menu extends Component<MenuProps> {
 
     const nextItem = this.menuItems[(current + count + step) % count]
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
-    error(nextItem && nextItem.focus, '[Menu] Could not focus next menu item.')
+    error(
+      typeof nextItem !== 'undefined' && typeof nextItem.focus !== 'undefined',
+      '[Menu] Could not focus next menu item.'
+    )
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'never'.
     nextItem.focus()
   }
 
   get shown() {
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     return this._popover ? this._popover.shown : true
   }
 
@@ -339,7 +295,6 @@ class Menu extends Component<MenuProps> {
 
     let count = 0
 
-    // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
     return Children.map(children, (child) => {
       if (
         !matchComponentTypes(child, [
@@ -359,30 +314,29 @@ class Menu extends Component<MenuProps> {
       if (matchComponentTypes(child, ['MenuItemSeparator'])) {
         return <li role="none">{child}</li>
       }
+      const menuItemChild = child as MenuItem
 
       const controls =
-        // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-        child.props['aria-controls'] ||
-        // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-        child.props.controls ||
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        this.props['aria-controls'] || // eslint-disable-line react/prop-types
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'controls' does not exist on type 'Readon... Remove this comment to see the full error message
-        this.props.controls // eslint-disable-line react/prop-types
+        menuItemChild.props['aria-controls'] ||
+        menuItemChild.props.controls ||
+        this.props['aria-controls'] ||
+        this.props.controls
 
       if (matchComponentTypes(child, ['MenuItem'])) {
         return (
           <li role="none">
-            {safeCloneElement(child as ReactElement, {
-              controls,
-              // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-              disabled: disabled || child.props.disabled,
-              onFocus: this.handleMenuItemFocus,
-              onBlur: this.handleMenuItemBlur,
-              onSelect: this.handleMenuItemSelect,
-              onMouseOver: this.handleMenuItemMouseOver,
-              tabIndex: isTabbable ? 0 : -1
-            })}
+            {safeCloneElement(
+              child as ReactElement,
+              {
+                controls,
+                disabled: disabled || (child as MenuItem).props.disabled,
+                onFocus: this.handleMenuItemFocus,
+                onBlur: this.handleMenuItemBlur,
+                onSelect: this.handleMenuItemSelect,
+                onMouseOver: this.handleMenuItemMouseOver,
+                tabIndex: isTabbable ? 0 : -1
+              } as Partial<MenuItemProps>
+            )}
           </li>
         )
       }
@@ -392,8 +346,7 @@ class Menu extends Component<MenuProps> {
           <li role="none">
             {safeCloneElement(child as ReactElement, {
               controls,
-              // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-              disabled: disabled || child.props.disabled,
+              disabled: disabled || (child as MenuItemGroup).props.disabled,
               onFocus: this.handleMenuItemFocus,
               onBlur: this.handleMenuItemBlur,
               onSelect: this.handleMenuItemSelect,
@@ -405,8 +358,7 @@ class Menu extends Component<MenuProps> {
       }
 
       if (matchComponentTypes(child, ['Menu'])) {
-        // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-        const submenuDisabled = disabled || child.props.disabled
+        const submenuDisabled = disabled || (child as Menu).props.disabled
 
         return (
           <li role="none">
@@ -430,31 +382,27 @@ class Menu extends Component<MenuProps> {
                   type="flyout"
                   disabled={submenuDisabled}
                 >
-                  {/* @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'. */}
-                  {child.props.title || child.props.label}
+                  {(child as Menu).props.title || (child as Menu).props.label}
                 </MenuItem>
               )
             })}
           </li>
         )
       }
+      return
     })
   }
 
   renderMenu() {
     const { disabled, label, trigger, onKeyUp } = this.props
 
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    const labelledBy = this.props['aria-labelledby'] // eslint-disable-line react/prop-types
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    const controls = this.props['aria-controls'] // eslint-disable-line react/prop-types
+    const labelledBy = this.props['aria-labelledby']
+    const controls = this.props['aria-controls']
 
     return (
       <MenuContext.Provider
         value={{
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '(item: any) => void' is not assignable to ty... Remove this comment to see the full error message
           removeMenuItem: this.removeMenuItem,
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '(item: any) => void' is not assignable to ty... Remove this comment to see the full error message
           registerMenuItem: this.registerMenuItem
         }}
       >
@@ -463,7 +411,7 @@ class Menu extends Component<MenuProps> {
           aria-label={label}
           tabIndex={0}
           css={this.props.styles?.menu}
-          aria-labelledby={labelledBy || (trigger && this._labelId)}
+          aria-labelledby={labelledBy || (trigger ? this._labelId : undefined)}
           aria-controls={controls}
           aria-disabled={disabled ? 'true' : undefined}
           onKeyDown={this.handleMenuKeyDown}
@@ -498,15 +446,15 @@ class Menu extends Component<MenuProps> {
         isShowingContent={show}
         defaultIsShowingContent={defaultShow}
         onHideContent={(event, { documentClick }) => {
-          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-          onDismiss(event, documentClick)
+          if (typeof onDismiss === 'function') {
+            onDismiss(event, documentClick)
+          }
           this.handleToggle(false)
         }}
         onShowContent={() => this.handleToggle(true)}
         mountNode={mountNode}
         placement={placement}
         withArrow={withArrow}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'Menu'.
         id={this._id}
         on={['click']}
         shouldContainFocus
@@ -516,23 +464,21 @@ class Menu extends Component<MenuProps> {
         offsetX={offsetX}
         offsetY={offsetY}
         ref={(el) => {
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'Popover | null' is not assignable to type 'n... Remove this comment to see the full error message
           this._popover = el
           if (typeof popoverRef === 'function') {
             popoverRef(el)
           }
         }}
         renderTrigger={safeCloneElement(trigger as ReactElement, {
-          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-          ref: (el) => {
+          ref: (el: ReactElement) => {
+            this._trigger = el
             this.ref = el
           },
           'aria-haspopup': true,
           id: this._labelId,
           onMouseOver: this.handleTriggerMouseOver,
           onKeyDown: this.handleTriggerKeyDown,
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-          disabled: trigger.props.disabled || disabled
+          disabled: (trigger as ReactElement).props.disabled || disabled
         })}
       >
         {this.renderMenu()}

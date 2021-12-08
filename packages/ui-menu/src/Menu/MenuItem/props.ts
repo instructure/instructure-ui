@@ -24,7 +24,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import MenuItem from '../MenuItem'
 import { controllable } from '@instructure/ui-prop-types'
 
 import type {
@@ -35,17 +35,42 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
+type OnMenuItemSelect = (
+  e: React.MouseEvent,
+  value: MenuItemOwnProps['value'],
+  selected: MenuItemOwnProps['selected'],
+  args: MenuItem
+) => void
+
 type MenuItemOwnProps = {
+  /**
+   * the menu item label
+   */
   children: React.ReactNode
+  /**
+   * whether to set the menu item state to selected or not on initial render
+   */
   defaultSelected?: boolean
-  selected?: any // TODO: controllable(PropTypes.bool, 'onSelect', 'defaultSelected')
-  onSelect?: (...args: any[]) => any
-  onClick?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  onKeyUp?: (...args: any[]) => any
-  onMouseOver?: (...args: any[]) => any
+  /**
+   * whether the menu item is selected or not (must be accompanied by an `onSelect` prop)
+   */
+  selected?: boolean // TODO: controllable(PropTypes.bool, 'onSelect', 'defaultSelected')
+  /**
+   * when used with the `selected` prop, the component will not control its own state
+   */
+  onSelect?: OnMenuItemSelect
+  onClick?: (e: React.MouseEvent) => void
+  onKeyDown?: (e: React.KeyboardEvent) => void
+  onKeyUp?: (e: React.KeyboardEvent) => void
+  onMouseOver?: (e: React.MouseEvent, args: MenuItem) => void
+  /**
+   * the id of the element that the menu item will act upon
+   */
   controls?: string
   disabled?: boolean
+  /**
+   * the element type to render as (will default to `<a>` if href is provided)
+   */
   as?: AsElementType
   type?: 'button' | 'checkbox' | 'radio' | 'flyout'
   value?: string | number
@@ -63,34 +88,16 @@ type MenuItemProps = MenuItemOwnProps &
 type MenuItemStyle = ComponentStyle<'menuItem' | 'icon' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * the menu item label
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * whether to set the menu item state to selected or not on initial render
-   */
   defaultSelected: PropTypes.bool,
-  /**
-   * whether the menu item is selected or not (must be accompanied by an `onSelect` prop)
-   */
   selected: controllable(PropTypes.bool, 'onSelect', 'defaultSelected'),
-  /**
-   * when used with the `selected` prop, the component will not control its own state
-   */
   onSelect: PropTypes.func,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   onKeyUp: PropTypes.func,
   onMouseOver: PropTypes.func,
-  /**
-   * the id of the element that the menu item will act upon
-   */
   controls: PropTypes.string,
   disabled: PropTypes.bool,
-  /**
-   * the element type to render as (will default to `<a>` if href is provided)
-   */
   as: PropTypes.elementType, // eslint-disable-line react/require-default-props
   type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -113,6 +120,8 @@ const allowedProps: AllowedPropKeys = [
   'value',
   'href'
 ]
-
-export type { MenuItemProps, MenuItemStyle }
+type MenuItemState = {
+  selected: boolean
+}
+export type { MenuItemProps, MenuItemStyle, MenuItemState, OnMenuItemSelect }
 export { propTypes, allowedProps }
