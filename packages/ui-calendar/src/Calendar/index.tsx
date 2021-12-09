@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Children, Component, ReactElement } from 'react'
+import React, { Children, Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import {
@@ -104,9 +104,15 @@ class Calendar extends Component<CalendarProps> {
 
     const nextButton: ReactElement = callRenderProp(renderNextMonthButton)
     const prevButton: ReactElement = callRenderProp(renderPrevMonthButton)
-    const cloneButton = (button: ReactElement, onClick?: (e: Event) => void) =>
+    const cloneButton = (
+      button: ReactElement,
+      onClick?: (e: React.MouseEvent) => void
+    ) =>
       safeCloneElement(button, {
-        onClick: createChainedFunction(button.props.onClick, onClick)
+        onClick: createChainedFunction(
+          button.props.onClick as React.MouseEventHandler,
+          onClick
+        )
       })
 
     const style = [

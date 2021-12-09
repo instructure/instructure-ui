@@ -27,7 +27,10 @@ import { expect, match, mount, stub } from '@instructure/ui-test-utils'
 import { PaginationPageInput } from '../index'
 import { PaginationPageInputLocator } from '../PaginationPageInputLocator'
 
-const defaultOnChange = (e: Event, value: number) => {
+const defaultOnChange = (
+  e: React.SyntheticEvent<HTMLInputElement>,
+  value: number
+) => {
   console.log(e, value) // eslint-disable-line no-console
 }
 const defaultSRLabel = (currentPage: number, numberOfPages: number) =>

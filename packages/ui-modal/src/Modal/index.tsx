@@ -33,6 +33,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { Transition } from '@instructure/ui-motion'
+import type { TransitionType } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { testable } from '@instructure/ui-testable'
@@ -153,7 +154,7 @@ class Modal extends Component<ModalProps> {
     this.DOMNode = DOMNode
   }
 
-  handleTransitionExited = () => {
+  handleTransitionExited = (_type?: TransitionType) => {
     this.setState({
       transitioning: false
     })

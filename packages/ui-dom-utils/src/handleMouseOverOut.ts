@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import { contains } from './contains'
 
 /**
@@ -39,11 +40,8 @@ import { contains } from './contains'
  * @param event {Event} The DOM Event that was fired
  */
 function handleMouseOverOut(
-  handler: (...args: any[]) => any,
-  event: {
-    currentTarget: EventTarget | null
-    relatedTarget?: EventTarget | null
-  }
+  handler: (event: React.MouseEvent) => void,
+  event: React.MouseEvent
 ) {
   const target = event.currentTarget
   const related = event.relatedTarget

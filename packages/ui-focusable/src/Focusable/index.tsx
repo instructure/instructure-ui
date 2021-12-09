@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { cloneElement, Component } from 'react'
+import React, { cloneElement, Component } from 'react'
 
 import {
   addInputModeListener,
@@ -218,9 +218,9 @@ class Focusable extends Component<FocusableProps, FocusableState> {
     }
   }
 
-  ref: Element | null = null
+  ref: React.ReactInstance | null = null
 
-  attachRef = (el: Element) => {
+  attachRef = (el: React.ReactInstance | null) => {
     this.ref = el
   }
 
@@ -258,7 +258,10 @@ class Focusable extends Component<FocusableProps, FocusableState> {
       })
       return cloneElement(rendered, {
         ref: rendered.ref
-          ? createChainedFunction(rendered.ref, this.attachRef)
+          ? createChainedFunction(
+              rendered.ref as (element: React.ReactInstance | null) => void,
+              this.attachRef
+            )
           : this.attachRef
       })
     } else {

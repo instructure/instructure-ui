@@ -84,13 +84,14 @@ class Menu extends Component<MenuProps> {
   _rootNode = null
   _menuItems: MenuItem[] = []
   _popover: Popover | null = null
-  _trigger: MenuItem | (ReactElement & { focus?: () => void }) | null = null
+  _trigger: MenuItem | (React.ReactInstance & { focus?: () => void }) | null =
+    null
   _menu: HTMLUListElement | null = null
   _labelId = uid('Menu__label')
   _activeSubMenu?: Menu | null
   _id: string
 
-  ref: ReactElement | null = null
+  ref: Element | null = null
 
   handleRef = (el: HTMLUListElement | null) => {
     const { menuRef } = this.props
@@ -469,9 +470,9 @@ class Menu extends Component<MenuProps> {
           }
         }}
         renderTrigger={safeCloneElement(trigger as ReactElement, {
-          ref: (el: ReactElement) => {
+          ref: (el: (React.ReactInstance & { ref?: Element }) | null) => {
             this._trigger = el
-            this.ref = el
+            this.ref = el?.ref || (el as Element)
           },
           'aria-haspopup': true,
           id: this._labelId,

@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Component } from 'react'
+
+import React, { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -117,7 +118,10 @@ class PaginationPageInput extends Component<
     }
   }
 
-  handleChange = (_event: Event, value: string) => {
+  handleChange = (
+    _event: React.ChangeEvent<HTMLInputElement>,
+    value: string
+  ) => {
     let newValue = value
 
     // if the last character was not a number, don't accept it
@@ -131,7 +135,7 @@ class PaginationPageInput extends Component<
     })
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     const { key } = event
 
     if (key.toLowerCase() === 'enter') {
@@ -147,15 +151,15 @@ class PaginationPageInput extends Component<
     }
   }
 
-  handleDecrement = (event: Event) => {
+  handleDecrement = (event: React.UIEvent<HTMLInputElement>) => {
     this.setNewPage(event, Math.floor(this.currentPage - 1))
   }
 
-  handleIncrement = (event: Event) => {
+  handleIncrement = (event: React.UIEvent<HTMLInputElement>) => {
     this.setNewPage(event, Math.floor(this.currentPage + 1))
   }
 
-  handleBlur = (event: Event) => {
+  handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     this.setNewPage(event, Math.round(this.state.number))
   }
 
@@ -165,7 +169,10 @@ class PaginationPageInput extends Component<
     return n
   }
 
-  setNewPage(event: Event, n: number) {
+  setNewPage(
+    event: React.UIEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
+    n: number
+  ) {
     const number = this.getNumberWithinRange(n)
 
     this.setState({

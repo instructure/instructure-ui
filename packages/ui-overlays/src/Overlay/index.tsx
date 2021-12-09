@@ -32,6 +32,7 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { Transition } from '@instructure/ui-motion'
+import type { TransitionType } from '@instructure/ui-motion'
 import type { OverlayProps } from './props'
 import { allowedProps, propTypes } from './props'
 
@@ -137,7 +138,7 @@ class Overlay extends Component<OverlayProps> {
     )
   }
 
-  handleTransitionExited = () => {
+  handleTransitionExited = (_type?: TransitionType) => {
     this.setState({
       open: false,
       transitioning: false

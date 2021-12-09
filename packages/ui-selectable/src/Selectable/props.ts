@@ -96,15 +96,13 @@ type SelectableOwnProps = {
   children?: (propGetters: SelectableRender) => ReactNode
 }
 
-type MouseEventFunction = (event: React.MouseEvent) => void
-
 type SelectableRender = {
   /**
    * Prop getter for root element
    */
   getRootProps: (props?: {
-    onMouseDown?: MouseEventFunction
-    onClick?: MouseEventFunction
+    onMouseDown?: React.MouseEventHandler
+    onClick?: React.MouseEventHandler
     [restProps: string]: any
   }) => Record<string, any>
 
@@ -118,8 +116,8 @@ type SelectableRender = {
    */
   getTriggerProps: (props?: {
     ref?: (element: Element | null) => void
-    onKeyDown?: (event: KeyboardEvent) => void
-    onKeyUp?: (event: KeyboardEvent) => void
+    onKeyDown?: (event: React.KeyboardEvent) => void
+    onKeyUp?: (event: React.KeyboardEvent) => void
     [restProps: string]: any
   }) => Record<string, any>
 
@@ -135,8 +133,8 @@ type SelectableRender = {
    * Prop getter for list element
    */
   getListProps: (props?: {
-    onMouseDown?: MouseEventFunction
-    onClick?: MouseEventFunction
+    onMouseDown?: React.MouseEventHandler
+    onClick?: React.MouseEventHandler
     [restProps: string]: any
   }) => Record<string, any>
 
@@ -145,8 +143,8 @@ type SelectableRender = {
    */
   getOptionProps: (props?: {
     id?: string // TODO this is not optional
-    onMouseOver?: MouseEventFunction
-    onClick?: MouseEventFunction
+    onMouseOver?: React.MouseEventHandler
+    onClick?: React.MouseEventHandler
     [restProps: string]: any
   }) => Record<string, any>
 

@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -29,11 +30,11 @@ import { controllable } from '@instructure/ui-prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 
 type GetToggleProps = <P extends Record<string, any>>(
-  props?: P & { onClick?: (event: Event) => void }
+  props?: P & { onClick?: React.MouseEventHandler }
 ) => {
   'aria-controls': string
   'aria-expanded': boolean
-  onClick: (event: Event) => void
+  onClick: (event: React.MouseEvent) => void
 } & P
 
 type RenderProps = {
@@ -63,7 +64,7 @@ type ExpandableOwnProps = {
    */
   defaultExpanded: boolean
 
-  onToggle: (event: Event, expanded: boolean) => void
+  onToggle: (event: React.MouseEvent, expanded: boolean) => void
 
   /**
    * @param {Object} renderProps

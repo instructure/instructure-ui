@@ -56,7 +56,7 @@ type ModalOwnProps = {
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
   shouldReturnFocus?: boolean
   shouldCloseOnDocumentClick?: boolean
-  onOpen?: (DOMNode: PortalNode) => any
+  onOpen?: (DOMNode: PortalNode) => void
   onClose?: (...args: any[]) => any
   onDismiss?: (...args: any[]) => any
   contentRef?: (...args: any[]) => any
@@ -69,7 +69,7 @@ type ModalOwnProps = {
   onEntered?: (...args: any[]) => any
   onExit?: (...args: any[]) => any
   onExiting?: (...args: any[]) => any
-  onExited?: (...args: any[]) => any
+  onExited?: (type?: TransitionType) => void
   constrain?: 'window' | 'parent'
   overflow?: 'scroll' | 'fit'
 }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, SyntheticEvent } from 'react'
+import React, { Component, SyntheticEvent } from 'react'
 
 import keycode from 'keycode'
 
@@ -51,7 +51,7 @@ class Selectable extends Component<SelectableProps> {
   _id = this.props.id || uid('Selectable')
   _listId = `${this._id}-list`
   _descriptionId = `${this._id}-description`
-  private _trigger?: HTMLElement
+  private _trigger: Element | null = null
 
   isSelectedOption = (id: string) => {
     const { selectedOptionId } = this.props
@@ -62,7 +62,7 @@ class Selectable extends Component<SelectableProps> {
     return selectedOptionId === id
   }
 
-  handleOpenClose = (event: React.KeyboardEvent) => {
+  handleOpenClose = (event: React.KeyboardEvent | React.MouseEvent) => {
     const { isShowingOptions, onRequestShowOptions, onRequestHideOptions } =
       this.props
 
@@ -72,7 +72,7 @@ class Selectable extends Component<SelectableProps> {
       onRequestHideOptions?.(event)
     } else {
       if (!isActiveElement(this._trigger)) {
-        this._trigger!.focus()
+        ;(this._trigger as HTMLElement)!.focus()
       }
       onRequestShowOptions?.(event)
     }
@@ -168,7 +168,7 @@ class Selectable extends Component<SelectableProps> {
         getRootProps: ({ onMouseDown, onClick, ...rest } = {}) => {
           return {
             onClick: createChainedFunction(this.handleOpenClose, onClick),
-            onMouseDown: createChainedFunction((event: Event) => {
+            onMouseDown: createChainedFunction((event: React.MouseEvent) => {
               if (event.target !== this._trigger) {
                 event.preventDefault() // prevent trigger from losing focus
               }
@@ -187,7 +187,10 @@ class Selectable extends Component<SelectableProps> {
         getTriggerProps: ({ ref, onKeyDown, onKeyUp, ...rest } = {}) => {
           return {
             id: this._id,
-            ref: createChainedFunction(ref, (el) => (this._trigger = el))!,
+            ref: createChainedFunction(
+              ref,
+              (el: Element | null) => (this._trigger = el)
+            )!,
             'aria-haspopup': 'listbox',
             'aria-expanded': isShowingOptions,
             'aria-owns': isShowingOptions ? this._listId : undefined,
@@ -216,7 +219,7 @@ class Selectable extends Component<SelectableProps> {
           return {
             id: this._listId,
             role: 'listbox',
-            onMouseDown: createChainedFunction((event: Event) => {
+            onMouseDown: createChainedFunction((event: React.MouseEvent) => {
               event.preventDefault() // prevent trigger from losing focus
             }, onMouseDown),
             onClick: createChainedFunction((event: SyntheticEvent) => {
