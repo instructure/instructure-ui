@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { uid } from '@instructure/uid'
 import { createChainedFunction } from '@instructure/ui-utils'
 
@@ -87,7 +87,7 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
     }
   }
 
-  handleToggle = (event: Event) => {
+  handleToggle = (event: React.MouseEvent) => {
     if (!this.isControlled()) {
       this.setState(toggleExpanded)
     }
@@ -107,7 +107,7 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
             onClick: createChainedFunction(
               this.handleToggle,
               props.onClick
-            ) as (event: Event) => void,
+            ) as React.MouseEventHandler,
             ...props
           }
         },

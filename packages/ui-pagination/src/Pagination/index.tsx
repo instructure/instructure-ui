@@ -266,7 +266,10 @@ class Pagination extends Component<PaginationProps> {
     )
   }
 
-  handleInputChange(event: Event, pageIndex: number) {
+  handleInputChange(
+    event: React.SyntheticEvent<HTMLInputElement>,
+    pageIndex: number
+  ) {
     this.childPages[pageIndex].props.onClick?.(event as any)
   }
 
@@ -375,12 +378,8 @@ class Pagination extends Component<PaginationProps> {
       return null
     }
 
-    const {
-      pageIndex,
-      label,
-      shouldEnableIcon,
-      handleButtonRef
-    } = this.getArrowVariant(direction, currentPageIndex, childPages.length)
+    const { pageIndex, label, shouldEnableIcon, handleButtonRef } =
+      this.getArrowVariant(direction, currentPageIndex, childPages.length)
 
     const page = childPages[pageIndex]
 

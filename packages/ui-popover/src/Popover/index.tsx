@@ -108,16 +108,22 @@ class Popover extends Component<PopoverProps, PopoverState> {
     this._id = this.props.id || uid('Popover')
     this._raf = []
 
-    this._handleMouseOver = handleMouseOverOut.bind(null, (event) => {
-      this.show(event)
-      clearTimeout(this.mouseOutTimeout!)
-    })
-    this._handleMouseOut = handleMouseOverOut.bind(null, (event) => {
-      // this is needed bc the trigger mouseOut fires before tooltip mouseOver
-      this.mouseOutTimeout = setTimeout(() => {
-        this.hide(event)
-      }, 1)
-    })
+    this._handleMouseOver = handleMouseOverOut.bind(
+      null,
+      (event: React.MouseEvent) => {
+        this.show(event)
+        clearTimeout(this.mouseOutTimeout!)
+      }
+    )
+    this._handleMouseOut = handleMouseOverOut.bind(
+      null,
+      (event: React.MouseEvent) => {
+        // this is needed bc the trigger mouseOut fires before tooltip mouseOver
+        this.mouseOutTimeout = setTimeout(() => {
+          this.hide(event)
+        }, 1)
+      }
+    )
   }
 
   private _handleMouseOver: React.MouseEventHandler
@@ -125,7 +131,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
 
   private _id: string
   private _raf: RequestAnimationFrameType[] = []
-  private _trigger?: React.ReactElement
+  private _trigger: React.ReactInstance | null = null
   private _view: View | ContextView | null = null
   private _dialog: Dialog | null = null
   private _contentElement: Element | null = null
@@ -350,7 +356,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
     this.hide(event)
   }
 
-  handleTriggerKeyDown = (event: KeyboardEvent) => {
+  handleTriggerKeyDown = (event: React.KeyboardEvent) => {
     if (!this.props.shouldFocusContentOnTriggerBlur) {
       return
     }
@@ -449,7 +455,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
       }
 
       trigger = safeCloneElement(trigger, {
-        ref: (el: React.ReactElement) => {
+        ref: (el: React.ReactInstance | null) => {
           this._trigger = el
         },
         'aria-expanded': expanded,

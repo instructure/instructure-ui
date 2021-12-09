@@ -34,6 +34,7 @@ import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { Transition } from '@instructure/ui-motion'
+import type { TransitionType } from '@instructure/ui-motion'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -131,7 +132,7 @@ class Tray extends Component<TrayProps> {
     return this.props.defaultFocusElement || (() => this._closeButton)
   }
 
-  handleTransitionComplete = () => {
+  handleTransitionComplete = (_type?: TransitionType) => {
     this.setState({ transitioning: false })
   }
 

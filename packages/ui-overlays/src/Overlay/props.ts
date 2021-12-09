@@ -65,7 +65,7 @@ type OverlayOwnProps = {
   onEntered?: (...args: any[]) => any
   onExit?: (...args: any[]) => any
   onExiting?: (...args: any[]) => any
-  onExited?: (...args: any[]) => any
+  onExited?: (type?: TransitionType) => void
   children?: React.ReactNode
 }
 

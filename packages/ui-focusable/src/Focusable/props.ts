@@ -45,7 +45,7 @@ export type FocusableRenderOptions = {
    * Whether the focus state should be visible or not
    */
   focusVisible: boolean
-  attachRef: (el: Element) => void
+  attachRef: (el: Element | null) => void
 }
 
 type FocusableRenderFunction = (

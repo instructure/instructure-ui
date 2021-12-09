@@ -38,8 +38,8 @@ type GenericFunction = (...args: any[]) => any
  * @returns {function|null}
  */
 
-function createChainedFunction(
-  ...funcs: (null | undefined | GenericFunction)[]
+function createChainedFunction<F extends GenericFunction = GenericFunction>(
+  ...funcs: (null | undefined | F)[]
 ) {
   return funcs
     .filter((f, i) => {
@@ -50,7 +50,7 @@ function createChainedFunction(
       const indexes = getAllIndexes(funcs, f)
       return indexes.length === 1 || i === indexes[0]
     })
-    .reduce((acc, f): GenericFunction => {
+    .reduce((acc, f): F => {
       if (typeof f !== 'function') {
         throw new Error(
           'Invalid Argument Type, must only provide functions, undefined, or null.'
@@ -62,9 +62,9 @@ function createChainedFunction(
       return function chainedFunction(this: any, ...args) {
         acc!.apply(this, args)
         f.apply(this, args)
-      }
+      } as F
       // TODO I think it can return null too
-    }, null) as undefined | GenericFunction
+    }, null) as undefined | F
 }
 
 /**

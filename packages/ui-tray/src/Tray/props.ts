@@ -35,6 +35,7 @@ import type {
   LiveRegion
 } from '@instructure/shared-types'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { TransitionType } from '@instructure/ui-motion'
 
 type TrayOwnProps = {
   label: string
@@ -46,8 +47,8 @@ type TrayOwnProps = {
   shouldContainFocus?: boolean
   shouldReturnFocus?: boolean
   shouldCloseOnDocumentClick?: boolean
-  onOpen?: (...args: any[]) => any
-  onClose?: (...args: any[]) => any
+  onOpen?: (type?: TransitionType) => void
+  onClose?: (type?: TransitionType) => void
   onDismiss?: (...args: any[]) => any
   mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func])
   insertAt?: 'bottom' | 'top'
@@ -55,10 +56,10 @@ type TrayOwnProps = {
   onTransition?: (...args: any[]) => any
   onEnter?: (...args: any[]) => any
   onEntering?: (...args: any[]) => any
-  onEntered?: (...args: any[]) => any
+  onEntered?: (type?: TransitionType) => void
   onExit?: (...args: any[]) => any
   onExiting?: (...args: any[]) => any
-  onExited?: (...args: any[]) => any
+  onExited?: (type?: TransitionType) => void
   border?: boolean
   shadow?: boolean
   children?: React.ReactNode

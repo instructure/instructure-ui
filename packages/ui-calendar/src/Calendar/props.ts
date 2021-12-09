@@ -34,7 +34,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import type { CalendarDayProps } from './Day/props'
 
 type CalendarOwnProps = {
@@ -85,12 +85,12 @@ type CalendarOwnProps = {
    * Callback fired when the next month button is clicked in the navigation
    * header, requesting to render the next month.
    */
-  onRequestRenderNextMonth?: (e: Event) => void
+  onRequestRenderNextMonth?: (e: React.MouseEvent) => void
   /**
    * Callback fired when the previous month button is clicked in the navigation
    * header, requesting to render the previous month.
    */
-  onRequestRenderPrevMonth?: (e: Event) => void
+  onRequestRenderPrevMonth?: (e: React.MouseEvent) => void
   /**
    * The element to render as the `Calendar` root, `span` by default
    */
