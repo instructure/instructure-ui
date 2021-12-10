@@ -26,4 +26,12 @@ import { ComponentType } from 'react'
 
 type AsElementType = keyof JSX.IntrinsicElements | ComponentType
 
-export type { AsElementType }
+type ToProp = {
+  /**
+   * Needed for React Router links
+   * @private
+   */
+  to?: string
+}
+
+export type { AsElementType, ToProp }

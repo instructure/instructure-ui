@@ -28,6 +28,7 @@ import PropTypes from 'prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type {
+  ToProp,
   AsElementType,
   PropValidators,
   LinkTheme,
@@ -130,10 +131,8 @@ type LinkState = {
 
 type LinkProps = LinkOwnProps &
   WithStyleProps<LinkTheme, LinkStyle> &
-  OtherHTMLAttributes<LinkOwnProps> & {
-    // React Router might add a `to` prop
-    to?: string
-  }
+  OtherHTMLAttributes<LinkOwnProps> &
+  ToProp
 
 type LinkStyle = ComponentStyle<'link' | 'icon'>
 

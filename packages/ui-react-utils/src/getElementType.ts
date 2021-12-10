@@ -28,7 +28,7 @@ import { AsElementType } from '@instructure/shared-types'
 
 interface ComponentWithAsProp {
   as?: AsElementType
-  to?: any | null
+  to?: string
   href?: string | null
   onClick?: ((...args: any) => any) | null
 }

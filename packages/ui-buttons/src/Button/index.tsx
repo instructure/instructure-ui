@@ -39,6 +39,7 @@ import type { ButtonProps } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
@@ -49,13 +50,11 @@ class Button extends Component<ButtonProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     type: 'button',
     size: 'medium',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     color: 'secondary',
     display: 'inline-block',
     textAlign: 'center',
@@ -64,17 +63,15 @@ class Button extends Component<ButtonProps> {
     cursor: 'pointer'
   }
 
-  _buttonComponent = null
+  _buttonComponent: BaseButton | null = null
 
   ref: Element | null = null
 
   get focused() {
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     return this._buttonComponent && this._buttonComponent.focused
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     this._buttonComponent && this._buttonComponent.focus()
   }
 
@@ -88,8 +85,7 @@ class Button extends Component<ButtonProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'component' implicitly has an 'any' type... Remove this comment to see the full error message
-  handleButtonRef = (component) => {
+  handleButtonRef = (component: BaseButton | null) => {
     this._buttonComponent = component
   }
 

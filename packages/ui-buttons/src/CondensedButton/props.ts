@@ -29,25 +29,80 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
+  ToProp,
   AsElementType,
   BaseButtonTheme,
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/ui-prop-types'
+import type { ViewProps } from '@instructure/ui-view'
 
 type CondensedButtonOwnProps = {
+  /**
+   * Specifies the `CondensedButton` children.
+   */
   children?: React.ReactNode
+
+  /**
+   * Specifies the type of the `CondensedButton`'s underlying html element.
+   */
   type?: 'button' | 'submit' | 'reset'
+
+  /**
+   * The size of the `CondensedButton`
+   */
   size?: 'small' | 'medium' | 'large'
+
+  /**
+   * Provides a reference to the `CondensedButton`'s underlying html element.
+   */
   elementRef?: (element: Element | null) => void
+
+  /**
+   * The element to render as the component root, `button` by default.
+   */
   as?: AsElementType
+
+  /**
+   * Specifies if interaction with the `CondensedButton` is enabled, disabled, or readonly.
+   */
   interaction?: 'enabled' | 'disabled' | 'readonly'
+
+  /**
+   * Specifies the color for the `CondensedButton`.
+   */
   color?: 'primary' | 'primary-inverse'
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+
+  /**
+   * Specify a mouse cursor to use when hovering over the button.
+   * The `pointer` cursor is used by default.
+   */
   cursor?: Cursor
+
+  /**
+   * Specifies an href attribute for the `CondensedButton`'s underlying html element.
+   */
   href?: string
-  renderIcon?: React.ReactNode | ((...args: any[]) => any)
+
+  /**
+   * An icon, or function that returns an icon.
+   */
+  renderIcon?: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * Callback fired when the `CondensedButton` is clicked.
+   */
+  onClick?: (
+    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
+  ) => void
 }
 
 type PropKeys = keyof CondensedButtonOwnProps
@@ -56,56 +111,22 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CondensedButtonProps = CondensedButtonOwnProps &
   WithStyleProps<BaseButtonTheme, null> &
-  OtherHTMLAttributes<CondensedButtonOwnProps>
+  OtherHTMLAttributes<CondensedButtonOwnProps> &
+  ToProp
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Specifies the `CondensedButton` children.
-   */
   children: PropTypes.node,
-  /**
-   * Specifies the type of the `CondensedButton`'s underlying html element.
-   */
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  /**
-   * The size of the `CondensedButton`
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Provides a reference to the `CondensedButton`'s underlying html element.
-   */
   elementRef: PropTypes.func,
-  /**
-   * The element to render as the component root, `button` by default.
-   */
   as: PropTypes.elementType,
-  /**
-   * Specifies if interaction with the `CondensedButton` is enabled, disabled, or readonly.
-   */
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  /**
-   * Specifies the color for the `CondensedButton`.
-   */
   color: PropTypes.oneOf(['primary', 'primary-inverse']),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Specify a mouse cursor to use when hovering over the button.
-   * The `pointer` cursor is used by default.
-   */
   cursor: PropTypes.string,
-  /**
-   * Specifies an href attribute for the `CondensedButton`'s underlying html element.
-   */
   href: PropTypes.string,
-  /**
-   * An icon, or function that returns an icon.
-   */
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  onClick: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -119,7 +140,8 @@ const allowedProps: AllowedPropKeys = [
   'margin',
   'renderIcon',
   'size',
-  'type'
+  'type',
+  'onClick'
 ]
 
 export type { CondensedButtonProps }

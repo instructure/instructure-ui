@@ -29,29 +29,101 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
+  ToProp,
   AsElementType,
   PropValidators,
   BaseButtonTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/ui-prop-types'
+import type { ViewProps } from '@instructure/ui-view'
 
 type ButtonOwnProps = {
+  /**
+   * Specifies the `Button` children.
+   */
   children?: React.ReactNode
+
+  /**
+   * Specifies the type of the `Button`'s underlying html element.
+   */
   type?: 'button' | 'submit' | 'reset'
+
+  /**
+   * The size of the `Button`
+   */
   size?: 'small' | 'medium' | 'large'
+
+  /**
+   * Provides a reference to the `Button`'s underlying html element.
+   */
   elementRef?: (element: Element | null) => void
+
+  /**
+   * The element to render as the component root, `Button` by default.
+   */
   as?: AsElementType
+
+  /**
+   * Specifies if interaction with the `Button` is enabled, disabled, or readonly.
+   */
   interaction?: 'enabled' | 'disabled' | 'readonly'
+
+  /**
+   * Specifies the color for the `Button`.
+   */
   color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
+
+  /**
+   * Override the `Button`'s default focus outline color.
+   */
   focusColor?: 'info' | 'inverse'
+
+  /**
+   * The `Button` display property. When set to `inline-block`, the `Button` displays inline with other elements.
+   * When set to block, the `Button` expands to fill the width of the container.
+   */
   display?: 'inline-block' | 'block'
+
+  /**
+   * Sets the alignment of the `Button` children and/or icon.
+   */
   textAlign?: 'start' | 'center'
+
+  /**
+   * Specifies if the `Button` should render with a solid background. When false, the background is transparent.
+   */
   withBackground?: boolean
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+
+  /**
+   * Specify a mouse cursor to use when hovering over the button.
+   * The `pointer` cursor is used by default.
+   */
   cursor?: Cursor
+
+  /**
+   * Specifies an href attribute for the `Button`'s underlying html element.
+   */
   href?: string
-  renderIcon?: React.ReactNode | ((...args: any[]) => any)
+
+  /**
+   * An icon, or function that returns an icon.
+   */
+  renderIcon?: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * Callback fired when the `Button` is clicked.
+   */
+  onClick?: (
+    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
+  ) => void
 }
 
 type PropKeys = keyof ButtonOwnProps
@@ -60,36 +132,16 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ButtonProps = ButtonOwnProps &
   WithStyleProps<BaseButtonTheme, null> &
-  OtherHTMLAttributes<ButtonOwnProps>
+  OtherHTMLAttributes<ButtonOwnProps> &
+  ToProp
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Specifies the `Button` children.
-   */
   children: PropTypes.node,
-  /**
-   * Specifies the type of the `Button`'s underlying html element.
-   */
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  /**
-   * The size of the `Button`
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Provides a reference to the `Button`'s underlying html element.
-   */
   elementRef: PropTypes.func,
-  /**
-   * The element to render as the component root, `Button` by default.
-   */
   as: PropTypes.elementType,
-  /**
-   * Specifies if interaction with the `Button` is enabled, disabled, or readonly.
-   */
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  /**
-   * Specifies the color for the `Button`.
-   */
   color: PropTypes.oneOf([
     'primary',
     'primary-inverse',
@@ -97,42 +149,15 @@ const propTypes: PropValidators<PropKeys> = {
     'success',
     'danger'
   ]),
-  /**
-   * Override the `Button`'s default focus outline color.
-   */
   focusColor: PropTypes.oneOf(['info', 'inverse']),
-  /**
-   * The `Button` display property. When set to `inline-block`, the `Button` displays inline with other elements.
-   * When set to block, the `Button` expands to fill the width of the container.
-   */
   display: PropTypes.oneOf(['inline-block', 'block']),
-  /**
-   * Sets the alignment of the `Button` children and/or icon.
-   */
   textAlign: PropTypes.oneOf(['start', 'center']),
-  /**
-   * Specifies if the `Button` should render with a solid background. When false, the background is transparent.
-   */
   withBackground: PropTypes.bool,
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Specify a mouse cursor to use when hovering over the button.
-   * The `pointer` cursor is used by default.
-   */
   cursor: PropTypes.string,
-  /**
-   * Specifies an href attribute for the `Button`'s underlying html element.
-   */
   href: PropTypes.string,
-  /**
-   * An icon, or function that returns an icon.
-   */
-  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  onClick: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -150,7 +175,8 @@ const allowedProps: AllowedPropKeys = [
   'size',
   'textAlign',
   'type',
-  'withBackground'
+  'withBackground',
+  'onClick'
 ]
 
 export type { ButtonProps }

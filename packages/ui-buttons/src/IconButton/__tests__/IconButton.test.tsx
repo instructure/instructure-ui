@@ -31,8 +31,7 @@ import { IconButtonLocator } from '../IconButtonLocator'
 describe('<IconButton/>', async () => {
   const icon = (
     <svg
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; title: string; height: ... Remove this comment to see the full error message
-      title="myIcon"
+      data-title="myIcon"
       height="1em"
       width="1em"
       style={{ fill: 'currentcolor' }}
@@ -40,7 +39,7 @@ describe('<IconButton/>', async () => {
       <circle cx="0.5em" cy="0.5em" r="0.5em" />
     </svg>
   )
-  const iconSelector = 'svg[title="myIcon"]'
+  const iconSelector = 'svg[data-title="myIcon"]'
 
   it('should render an icon when provided as the `children` prop', async () => {
     await mount(<IconButton screenReaderLabel="some action">{icon}</IconButton>)
@@ -58,21 +57,21 @@ describe('<IconButton/>', async () => {
 
   it('should fail if `screenReaderLabel` is not provided', async () => {
     const cs = spy(console, 'error')
-    // @ts-expect-error FIXME remove this line to see the error
+    // @ts-expect-error we are expecting this to fail
     await mount(<IconButton renderIcon={icon} />)
 
     expect(cs).to.have.been.called()
   })
 
   it('should provide a focused getter', async () => {
-    let componentRef = null
+    let componentRef: IconButton | undefined
 
     await mount(
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        componentRef={(component) => {
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
+        componentRef={(component: IconButton) => {
           componentRef = component
         }}
       />
@@ -81,27 +80,25 @@ describe('<IconButton/>', async () => {
 
     await button.focus()
 
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(componentRef.focused).to.be.true()
+    expect(componentRef?.focused).to.be.true()
   })
 
   it('should provide a focus function', async () => {
-    let componentRef = null
+    let componentRef: IconButton | undefined
 
     await mount(
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        componentRef={(component) => {
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
+        componentRef={(component: IconButton) => {
           componentRef = component
         }}
       />
     )
     const button = await IconButtonLocator.find()
 
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    componentRef.focus()
+    componentRef?.focus()
 
     await wait(() => {
       expect(button.focused()).to.be.true()

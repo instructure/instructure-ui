@@ -43,6 +43,7 @@ import type { CloseButtonProps } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -52,9 +53,8 @@ class CloseButton extends Component<CloseButtonProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClick: (event) => {},
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     type: 'button',
     placement: 'static',
     offset: 'x-small',
@@ -77,13 +77,11 @@ class CloseButton extends Component<CloseButtonProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   get interaction() {

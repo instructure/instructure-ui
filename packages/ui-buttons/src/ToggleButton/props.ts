@@ -37,21 +37,81 @@ import type {
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
+import type { ViewProps } from '@instructure/ui-view'
 
 type ToggleButtonOwnProps = {
+  /**
+   * Text to output only to screen readers
+   */
   screenReaderLabel: string
+
+  /**
+   * Text to render in the tooltip shown on hover/focus
+   */
   renderTooltipContent: React.ReactNode | ((...args: any[]) => any)
-  renderIcon: React.ReactNode | ((...args: any[]) => any)
+
+  /**
+   * An icon or function that returns an icon
+   */
+  renderIcon: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * Toggles the `aria-pressed` attribute on the button (`true` if `pressed`; `false` if `unpressed`)
+   */
   status: 'pressed' | 'unpressed'
+
+  /**
+   * The element to render as the component root; `button` by default
+   */
   as?: AsElementType
+
+  /**
+   * Specifies if interaction with `ToggleButton` is `enabled`, `disabled`, or `readonly`
+   */
   interaction?: 'enabled' | 'disabled' | 'readonly'
+
+  /**
+   * The size of the `ToggleButton`
+   */
   size?: 'small' | 'medium' | 'large'
+
+  /**
+   * Provides a reference to `ToggleButton`'s underlying HTML element
+   */
   elementRef?: (element: Element | null) => void
-  onClick?: (...args: any[]) => any
-  color?: string
+
+  /**
+   * Callback fired when the `ToggleButton` is clicked
+   */
+  onClick?: (
+    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
+  ) => void
+
+  /**
+   * The color in which to display the icon
+   */
+  color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
+
+  /**
+   * By default, the tooltip will show on hover/focus. Use this prop if you need to override that behavior.
+   */
   isShowingTooltip?: boolean
+
+  /**
+   * An element or a function returning an element to use as the mount node
+   */
   mountNode?: PositionMountNode
+
+  /**
+   * The placement of the tooltip in relation to the button
+   */
   placement?: PlacementPropValues
+
+  /**
+   * The parent in which to constrain the tooltip.
+   * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
+   * or a function returning an element.
+   */
   constrain?: PositionConstraint
 }
 
@@ -62,65 +122,31 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type ToggleButtonProps = ToggleButtonOwnProps &
   OtherHTMLAttributes<ToggleButtonOwnProps>
 
+type ToggleButtonState = {
+  isShowingTooltip: boolean
+}
+
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Text to output only to screen readers
-   */
   screenReaderLabel: PropTypes.string.isRequired,
-  /**
-   * Text to render in the tooltip shown on hover/focus
-   */
   renderTooltipContent: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
     .isRequired,
-  /**
-   * An icon or function that returns an icon
-   */
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  /**
-   * Toggles the `aria-pressed` attribute on the button (`true` if `pressed`; `false` if `unpressed`)
-   */
   status: PropTypes.oneOf(['pressed', 'unpressed']).isRequired,
-  /**
-   * The element to render as the component root; `button` by default
-   */
   as: PropTypes.elementType,
-  /**
-   * Specifies if interaction with `ToggleButton` is `enabled`, `disabled`, or `readonly`
-   */
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  /**
-   * The size of the `ToggleButton`
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Provides a reference to `ToggleButton`'s underlying HTML element
-   */
   elementRef: PropTypes.func,
-  /**
-   * Callback fired when the `ToggleButton` is clicked
-   */
   onClick: PropTypes.func,
-  /**
-   * The color in which to display the icon
-   */
-  color: PropTypes.string,
-  /**
-   * By default, the tooltip will show on hover/focus. Use this prop if you need to override that behavior.
-   */
+  color: PropTypes.oneOf([
+    'primary',
+    'primary-inverse',
+    'secondary',
+    'success',
+    'danger'
+  ]),
   isShowingTooltip: PropTypes.bool,
-  /**
-   * An element or a function returning an element to use as the mount node
-   */
   mountNode: PositionPropTypes.mountNode,
-  /**
-   * The placement of the tooltip in relation to the button
-   */
   placement: PositionPropTypes.placement,
-  /**
-   * The parent in which to constrain the tooltip.
-   * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
-   * or a function returning an element.
-   */
   constrain: PositionPropTypes.constrain
 }
 
@@ -141,5 +167,5 @@ const allowedProps: AllowedPropKeys = [
   'status'
 ]
 
-export type { ToggleButtonProps }
+export type { ToggleButtonProps, ToggleButtonState }
 export { propTypes, allowedProps }

@@ -23,30 +23,33 @@
  */
 
 import React from 'react'
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { IconButtonProps } from '../props'
 
 const icon = (
-  // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; title: string; height: ... Remove this comment to see the full error message
-  <svg title="myIcon" height="1em" width="1em" style={{ fill: 'currentcolor' }}>
+  <svg
+    data-title="myIcon"
+    height="1em"
+    width="1em"
+    style={{ fill: 'currentcolor' }}
+  >
     <circle cx="0.5em" cy="0.5em" r="0.5em" />
   </svg>
 )
 
 export default {
   sectionProp: 'color',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => ({
+  getComponentProps: () => ({
     screenReaderLabel: 'Example',
     renderIcon: icon
   }),
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return {
-      background: props.color.includes('inverse')
+      background: props.color!.includes('inverse')
         ? 'primary-inverse'
         : 'primary'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       (props.withBackground && !props.withBorder) ||
@@ -54,4 +57,4 @@ export default {
       props.type !== 'button'
     )
   }
-}
+} as StoryConfig<IconButtonProps>

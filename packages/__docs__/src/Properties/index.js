@@ -178,7 +178,7 @@ class Properties extends Component {
   }
 
   renderDescription(prop) {
-    const { description, tsType } = prop || {}
+    const { description } = prop || {}
 
     const isTsProp = this.isTsProp(prop)
 
