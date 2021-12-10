@@ -39,6 +39,7 @@ import type { CondensedButtonProps } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
@@ -49,19 +50,17 @@ class CondensedButton extends Component<CondensedButtonProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     type: 'button',
     size: 'medium',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     color: 'primary',
     margin: '0',
     cursor: 'pointer'
   }
 
-  _baseButton = null
+  _baseButton: BaseButton | null = null
 
   ref: Element | null = null
 
@@ -76,12 +75,10 @@ class CondensedButton extends Component<CondensedButtonProps> {
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     return this._baseButton && this._baseButton.focused
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     this._baseButton && this._baseButton.focus()
   }
 
@@ -121,7 +118,6 @@ class CondensedButton extends Component<CondensedButtonProps> {
         renderIcon={renderIcon}
         themeOverride={themeOverride}
         ref={(component) => {
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'BaseButton | null' is not assignable to type... Remove this comment to see the full error message
           this._baseButton = component
         }}
       >

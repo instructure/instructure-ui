@@ -53,7 +53,6 @@ describe('<BaseButton/>', async () => {
   })
 
   it('should render as a link when `to` prop is provided', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<BaseButton to="/example">Test</BaseButton>)
     const link = await BaseButtonLocator.find('a')
     expect(link.getAttribute('to')).to.equal('/example')

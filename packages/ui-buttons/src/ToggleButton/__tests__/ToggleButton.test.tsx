@@ -37,8 +37,7 @@ import { ToggleButtonLocator } from '../ToggleButtonLocator'
 
 describe('<ToggleButton />', async () => {
   const icon = (
-    // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; title: string; height: ... Remove this comment to see the full error message
-    <svg title="myIcon" height="1em" width="1em">
+    <svg data-title="myIcon" height="1em" width="1em">
       <circle cx="0.5em" cy="0.5em" r="0.5em" />
     </svg>
   )
@@ -171,7 +170,7 @@ describe('<ToggleButton />', async () => {
       />
     )
     const button = await ToggleButtonLocator.find()
-    expect(await button.find('svg[title="myIcon"]')).to.exist()
+    expect(await button.find('svg[data-title="myIcon"]')).to.exist()
   })
 
   it('should pass the `as` prop', async () => {

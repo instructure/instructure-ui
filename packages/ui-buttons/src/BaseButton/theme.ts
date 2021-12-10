@@ -75,12 +75,7 @@ const generateButtonThemeVars = <Variant extends Variants>({
     [`${style}Background`]: backgroundColor,
     [`${style}HoverBackground`]: darken(backgroundColor, 10),
     [`${style}ActiveBackground`]: darken(backgroundColor, 10),
-    [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(
-      borderColor,
-      20,
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 3.
-      0.45
-    )}`,
+    [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(borderColor, 20)}`,
 
     [`${style}GhostColor`]: ghostTextColor,
     [`${style}GhostBorderColor`]: ghostBorderColor,

@@ -25,6 +25,7 @@
 import React from 'react'
 import { mount, expect, stub, wait } from '@instructure/ui-test-utils'
 
+import { BaseButton } from '../../BaseButton'
 import { Button } from '../index'
 
 import { ButtonLocator } from '../ButtonLocator'
@@ -32,8 +33,7 @@ import { ButtonLocator } from '../ButtonLocator'
 describe('<Button/>', async () => {
   const icon = (
     <svg
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; title: string; height: ... Remove this comment to see the full error message
-      title="myIcon"
+      data-title="myIcon"
       height="1em"
       width="1em"
       style={{ fill: 'currentcolor' }}
@@ -41,7 +41,7 @@ describe('<Button/>', async () => {
       <circle cx="0.5em" cy="0.5em" r="0.5em" />
     </svg>
   )
-  const iconSelector = 'svg[title="myIcon"]'
+  const iconSelector = 'svg[data-title="myIcon"]'
 
   it('should render children', async () => {
     const children = 'Hello world'
@@ -57,12 +57,12 @@ describe('<Button/>', async () => {
   })
 
   it('should provide a focused getter', async () => {
-    let componentRef = null
+    let componentRef: BaseButton | undefined
 
     await mount(
       <Button
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        componentRef={(component) => {
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
+        componentRef={(component: BaseButton) => {
           componentRef = component
         }}
       >
@@ -73,17 +73,16 @@ describe('<Button/>', async () => {
 
     await button.focus()
 
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(componentRef.focused).to.be.true()
+    expect(componentRef?.focused).to.be.true()
   })
 
   it('should provide a focus function', async () => {
-    let componentRef = null
+    let componentRef: BaseButton | undefined
 
     await mount(
       <Button
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        componentRef={(component) => {
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
+        componentRef={(component: BaseButton) => {
           componentRef = component
         }}
       >
@@ -92,8 +91,7 @@ describe('<Button/>', async () => {
     )
     const button = await ButtonLocator.find()
 
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    componentRef.focus()
+    componentRef?.focus()
 
     await wait(() => {
       expect(button.focused()).to.be.true()
@@ -191,7 +189,6 @@ describe('<Button/>', async () => {
   })
 
   it('should render as a link when `to` prop is provided', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Button to="/example">Test</Button>)
     const link = await ButtonLocator.find('a')
     expect(link.getAttribute('to')).to.equal('/example')

@@ -32,16 +32,17 @@ import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '../IconButton'
 
 import { propTypes, allowedProps } from './props'
-import type { ToggleButtonProps } from './props'
+import type { ToggleButtonProps, ToggleButtonState } from './props'
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 
 @testable()
-class ToggleButton extends Component<ToggleButtonProps> {
+class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
   static readonly componentId = 'ToggleButton'
 
   static propTypes = propTypes
@@ -50,18 +51,14 @@ class ToggleButton extends Component<ToggleButtonProps> {
     size: 'medium',
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
-    renderIcon: () => {},
-    onClick: () => {},
+    interaction: undefined,
     mountNode: null,
     color: 'secondary',
     placement: 'top center',
     constrain: 'window'
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: ToggleButtonProps) {
     super(props)
 
     this.state = {
@@ -83,8 +80,7 @@ class ToggleButton extends Component<ToggleButtonProps> {
 
   get isShowingTooltip() {
     return typeof this.props.isShowingTooltip === 'undefined'
-      ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingTooltip' does not exist on type... Remove this comment to see the full error message
-        this.state.isShowingTooltip
+      ? this.state.isShowingTooltip
       : this.props.isShowingTooltip
   }
 
@@ -112,12 +108,10 @@ class ToggleButton extends Component<ToggleButtonProps> {
         placement={placement}
         color={color === 'primary-inverse' ? 'primary-inverse' : 'primary'}
         isShowingContent={this.isShowingTooltip}
-        // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-        onShowContent={(event) => {
+        onShowContent={() => {
           this.setState({ isShowingTooltip: true })
         }}
-        // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-        onHideContent={(event) => {
+        onHideContent={() => {
           this.setState({ isShowingTooltip: false })
         }}
         mountNode={mountNode}
@@ -127,7 +121,6 @@ class ToggleButton extends Component<ToggleButtonProps> {
           screenReaderLabel={screenReaderLabel}
           withBackground={false}
           withBorder={false}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           color={color}
           size={size}
           elementRef={this.handleRef}

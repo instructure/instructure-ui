@@ -23,9 +23,10 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import keycode from 'keycode'
 
+import { warn } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 import {
   getElementType,
@@ -36,6 +37,7 @@ import {
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -49,6 +51,7 @@ import type { BaseButtonProps, BaseButtonStyleProps } from './props'
 ---
 category: components/utilities
 ---
+@tsProps
 **/
 
 @withStyle(generateStyles, generateComponentTheme)
@@ -59,13 +62,11 @@ class BaseButton extends Component<BaseButtonProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     type: 'button',
     size: 'medium',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     color: 'secondary',
     shape: 'rectangle',
     display: 'inline-block',
@@ -74,23 +75,19 @@ class BaseButton extends Component<BaseButtonProps> {
     withBorder: true,
     isCondensed: false,
     margin: '0',
-    cursor: 'pointer',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyDown: (event) => {}
+    cursor: 'pointer'
   } as const
 
   ref: Element | null = null
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles?.(this.makeStylesVariables)
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+  componentDidUpdate() {
+    this.props.makeStyles?.(this.makeStylesVariables)
   }
+
   get _rootElement() {
     console.warn(
       '_rootElement property is deprecated and will be removed in v9, please use ref instead'
@@ -131,6 +128,20 @@ class BaseButton extends Component<BaseButtonProps> {
     return this.interaction === 'enabled'
   }
 
+  // TODO: delete once the type of tabIndex is changed to number only
+  get tabIndex() {
+    const { tabIndex } = this.props
+
+    if (typeof tabIndex === 'string') {
+      warn(
+        false,
+        'The `string` value for `tabIndex` is deprecated. Only `number` type will be accepted from V9.0.0.'
+      )
+      return parseInt(tabIndex)
+    }
+    return tabIndex
+  }
+
   get focusColor() {
     const { color, focusColor, withBackground } = this.props
 
@@ -147,8 +158,7 @@ class BaseButton extends Component<BaseButtonProps> {
       return 'info'
     }
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    return color.includes('inverse') ? 'inverse' : 'info'
+    return color!.includes('inverse') ? 'inverse' : 'info'
   }
 
   get focused() {
@@ -156,8 +166,7 @@ class BaseButton extends Component<BaseButtonProps> {
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    this.ref && this.ref.focus()
+    this.ref && (this.ref as HTMLElement).focus()
   }
 
   handleElementRef = (el: Element | null) => {
@@ -170,8 +179,7 @@ class BaseButton extends Component<BaseButtonProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleClick = (event) => {
+  handleClick = (event: React.MouseEvent<ViewProps>) => {
     const { onClick } = this.props
     const { interaction } = this
 
@@ -186,13 +194,13 @@ class BaseButton extends Component<BaseButtonProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleKeyDown = (event) => {
+  handleKeyDown = (event: React.KeyboardEvent<ViewProps>) => {
     const { onClick, onKeyDown, href } = this.props
     const { interaction } = this
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onKeyDown(event)
+    if (typeof onKeyDown === 'function') {
+      onKeyDown(event)
+    }
 
     // behave like a button when space key is pressed
     const { space, enter } = keycode.codes
@@ -209,8 +217,7 @@ class BaseButton extends Component<BaseButtonProps> {
       }
 
       if (href) {
-        // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-        this.ref && this.ref.click()
+        this.ref && (this.ref as HTMLElement).click()
       }
     }
   }
@@ -274,6 +281,8 @@ class BaseButton extends Component<BaseButtonProps> {
 
     const { isDisabled, isEnabled, isReadOnly } = this
 
+    const tabIndexNumber = this.tabIndex
+
     return (
       <View
         {...passthroughProps(props)}
@@ -294,8 +303,7 @@ class BaseButton extends Component<BaseButtonProps> {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         role={onClick && as !== 'button' ? 'button' : undefined}
-        //@ts-expect-error fix this later to be number
-        tabIndex={onClick && as ? tabIndex || '0' : tabIndex}
+        tabIndex={onClick && as ? tabIndexNumber || 0 : tabIndexNumber}
         disabled={isDisabled || isReadOnly}
         css={isEnabled ? styles?.baseButton : null}
       >

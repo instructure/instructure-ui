@@ -23,6 +23,8 @@
  */
 
 import React from 'react'
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { ButtonProps } from '../props'
 
 const icon = (
   <svg height="1em" width="1em" style={{ fill: 'currentcolor' }}>
@@ -37,20 +39,17 @@ export default {
     renderIcon: [null, icon]
   },
   excludeProps: ['focusColor'],
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       children: 'Hello'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return {
       background:
         props.color === 'primary-inverse' ? 'primary-inverse' : 'primary'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       // Only generate examples for type==="button"
@@ -65,4 +64,4 @@ export default {
           props.withBackground !== false))
     )
   }
-}
+} as StoryConfig<ButtonProps>

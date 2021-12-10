@@ -29,30 +29,105 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type { Spacing, WithStyleProps } from '@instructure/emotion'
 import type {
+  ToProp,
   AsElementType,
   PropValidators,
   BaseButtonTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/ui-prop-types'
+import type { ViewProps } from '@instructure/ui-view'
 
 type IconButtonOwnProps = {
-  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
-  renderIcon?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * An icon, or function returning an icon (identical to the `renderIcon` prop).
+   */
+  children?: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * An icon, or function that returns an icon (identical to the `children` prop).
+   */
+  renderIcon?: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * An accessible label for the `IconButton`.
+   */
   screenReaderLabel: string
+
+  /**
+   * Specifies the type of the `IconButton`'s underlying html element.
+   */
   type?: 'button' | 'submit' | 'reset'
+
+  /**
+   * The size of the `IconButton`
+   */
   size?: 'small' | 'medium' | 'large'
+
+  /**
+   * Provides a reference to the `IconButton`'s underlying html element.
+   */
   elementRef?: (element: Element | null) => void
+
+  /**
+   * The element to render as the component root, `button` by default.
+   */
   as?: AsElementType
+
+  /**
+   * Specifies if interaction with the `IconButton` is enabled, disabled, or readonly.
+   */
   interaction?: 'enabled' | 'disabled' | 'readonly'
+
+  /**
+   * Specifies the color for the `IconButton`.
+   */
   color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
+
+  /**
+   * Override the `Button`'s default focus outline color.
+   */
   focusColor?: 'info' | 'inverse'
+
+  /**
+   * Specifies if the `IconButton` shape should be a circle or rectangle.
+   */
   shape?: 'rectangle' | 'circle'
+
+  /**
+   * Specifies if the `IconButton` should render with a solid background. When false, the background is transparent.
+   */
   withBackground?: boolean
+
+  /**
+   * Specifies if the `IconButton` should render with a border.
+   */
   withBorder?: boolean
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+
+  /**
+   * Specify a mouse cursor to use when hovering over the button.
+   * The `pointer` cursor is used by default.
+   */
   cursor?: Cursor
+
+  /**
+   * Specifies an href attribute for the `IconButton`'s underlying html element.
+   */
   href?: string
+
+  /**
+   * Callback fired when the `Button` is clicked.
+   */
+  onClick?: (
+    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
+  ) => void
 }
 
 type PropKeys = keyof IconButtonOwnProps
@@ -61,44 +136,18 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type IconButtonProps = IconButtonOwnProps &
   WithStyleProps<BaseButtonTheme, null> &
-  OtherHTMLAttributes<IconButtonOwnProps>
+  OtherHTMLAttributes<IconButtonOwnProps> &
+  ToProp
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * An icon, or function returning an icon (identical to the `renderIcon` prop).
-   */
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * An icon, or function that returns an icon (identical to the `children` prop).
-   */
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * An accessible label for the `IconButton`.
-   */
   screenReaderLabel: PropTypes.string.isRequired,
-  /**
-   * Specifies the type of the `IconButton`'s underlying html element.
-   */
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  /**
-   * The size of the `IconButton`
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Provides a reference to the `IconButton`'s underlying html element.
-   */
   elementRef: PropTypes.func,
-  /**
-   * The element to render as the component root, `button` by default.
-   */
   as: PropTypes.elementType,
-  /**
-   * Specifies if interaction with the `IconButton` is enabled, disabled, or readonly.
-   */
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  /**
-   * Specifies the color for the `IconButton`.
-   */
   color: PropTypes.oneOf([
     'primary',
     'primary-inverse',
@@ -106,37 +155,14 @@ const propTypes: PropValidators<PropKeys> = {
     'success',
     'danger'
   ]),
-  /**
-   * Override the `Button`'s default focus outline color.
-   */
   focusColor: PropTypes.oneOf(['info', 'inverse']),
-  /**
-   * Specifies if the `IconButton` shape should be a circle or rectangle.
-   */
   shape: PropTypes.oneOf(['rectangle', 'circle']),
-  /**
-   * Specifies if the `IconButton` should render with a solid background. When false, the background is transparent.
-   */
   withBackground: PropTypes.bool,
-  /**
-   * Specifies if the `IconButton` should render with a border.
-   */
   withBorder: PropTypes.bool,
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Specify a mouse cursor to use when hovering over the button.
-   * The `pointer` cursor is used by default.
-   */
   cursor: PropTypes.string,
-  /**
-   * Specifies an href attribute for the `IconButton`'s underlying html element.
-   */
-  href: PropTypes.string
+  href: PropTypes.string,
+  onClick: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -155,7 +181,8 @@ const allowedProps: AllowedPropKeys = [
   'size',
   'type',
   'withBackground',
-  'withBorder'
+  'withBorder',
+  'onClick'
 ]
 
 export type { IconButtonProps }

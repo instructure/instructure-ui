@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
+
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type {
@@ -31,27 +33,95 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type {
+  ToProp,
   AsElementType,
   CloseButtonTheme,
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/ui-prop-types'
+import type { ViewProps } from '@instructure/ui-view'
 
 type CloseButtonOwnProps = {
-  screenReaderLabel: string | React.ReactNode
+  /**
+   * An accessible label for the `CloseButton` (required)
+   */
+  screenReaderLabel: React.ReactNode
+
+  /**
+   * Specifies the color for the `CloseButton`.
+   */
   color?: 'primary' | 'primary-inverse'
+
+  /**
+   * Specifies if interaction with the `CloseButton` is enabled, disabled, or readonly.
+   */
   interaction?: 'enabled' | 'disabled' | 'readonly'
+
+  /**
+   * Provides a reference to the `CloseButton`'s underlying html element.
+   */
   elementRef?: (element: Element | null) => void
+
+  /**
+   * The size of the `CloseButton`
+   */
   size?: 'small' | 'medium' | 'large'
-  onClick?: (...args: any[]) => any
+
+  /**
+   * Callback fired when the `CloseButton` is clicked.
+   */
+  onClick?: (
+    event: React.KeyboardEvent<ViewProps> | React.MouseEvent<ViewProps>
+  ) => void
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+
+  /**
+   * Specifies the placement of the `CloseButton`
+   */
   placement?: 'start' | 'end' | 'static'
+
+  /**
+   * Specifies the offset distance for the `CloseButton` with respect to both the top and start/end of the container.
+   * Note that for this property to have an effect, the `placement` prop must be set to either `start` or `end`. The
+   * offset will also be created with respect to a positioned parent. If it does not appear to be working, try setting
+   * the `position` of the parent container to `relative`.
+   */
   offset?: 'none' | 'x-small' | 'small' | 'medium'
+
+  /**
+   * Specifies the type of the `Button`'s underlying html element.
+   */
   type?: 'button' | 'submit' | 'reset'
+
+  /**
+   * The element to render as the component root, `CloseButton` by default.
+   */
   as?: AsElementType
+
+  /**
+   * Specifies an href attribute for the `CloseButton`'s underlying html element.
+   */
   href?: string
+
+  /**
+   * Specify a mouse cursor to use when hovering over the `CloseButton`.
+   */
   cursor?: Cursor
+
+  // Deprecated `string` tabIndex type
+  // TODO: remove string type in v9
+  /**
+   * Specifies the tabindex of the `CloseButton`.
+   *
+   * (`string` type is __deprecated__, use `number`)
+   */
   tabIndex?: number | string
 }
 
@@ -61,72 +131,28 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CloseButtonProps = CloseButtonOwnProps &
   WithStyleProps<CloseButtonTheme, CloseButtonStyle> &
-  OtherHTMLAttributes<CloseButtonOwnProps>
+  OtherHTMLAttributes<CloseButtonOwnProps> &
+  ToProp
 
 type CloseButtonStyle = ComponentStyle<'closeButton'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * An accessible label for the `CloseButton` (required)
-   */
   screenReaderLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
     .isRequired,
-  /**
-   * Specifies the color for the `CloseButton`.
-   */
   color: PropTypes.oneOf(['primary', 'primary-inverse']),
-  /**
-   * Specifies if interaction with the `CloseButton` is enabled, disabled, or readonly.
-   */
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  /**
-   * Provides a reference to the `CloseButton`'s underlying html element.
-   */
   elementRef: PropTypes.func,
-  /**
-   * The size of the `CloseButton`
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Callback fired when the `CloseButton` is clicked.
-   */
   onClick: PropTypes.func,
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Specifies the placement of the `CloseButton`
-   */
   placement: PropTypes.oneOf(['start', 'end', 'static']),
-  /**
-   * Specifies the offset distance for the `CloseButton` with respect to both the top and start/end of the container.
-   * Note that for this property to have an effect, the `placement` prop must be set to either `start` or `end`. The
-   * offset will also be created with respect to a positioned parent. If it does not appear to be working, try setting
-   * the `position` of the parent container to `relative`.
-   */
   offset: PropTypes.oneOf(['none', 'x-small', 'small', 'medium']),
-  /**
-   * Specifies the type of the `Button`'s underlying html element.
-   */
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  /**
-   * The element to render as the component root, `CloseButton` by default.
-   */
   as: PropTypes.elementType,
-  /**
-   * Specifies an href attribute for the `CloseButton`'s underlying html element.
-   */
   href: PropTypes.string,
-  /**
-   * Specify a mouse cursor to use when hovering over the `CloseButton`.
-   */
   cursor: PropTypes.string,
-  /**
-   * Specifies the tabindex of the `CloseButton`.
-   */
+  // Deprecated `string` tabIndex type
+  // TODO: remove string type in v9
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 }
 
