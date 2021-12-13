@@ -36,16 +36,48 @@ import type {
 
 type RadioInputGroupOwnProps = {
   name: string
+
   description: React.ReactNode
+
+  /**
+   * value to set on initial render
+   */
   defaultValue?: string | number
-  value?: any // TODO: controllable( PropTypes.oneOfType([PropTypes.string, PropTypes.number]) )
-  onChange?: (...args: any[]) => any
+
+  /**
+   * the selected value (must be accompanied by an `onChange` prop)
+   */
+  value?: string | number // TODO: controllable( PropTypes.oneOfType([PropTypes.string, PropTypes.number]) )
+
+  /**
+   * when used with the `value` prop, the component will not control its own state
+   */
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void
+
   disabled?: boolean
+
+  /**
+   * works just like disabled but keeps the same styles as if it were active
+   */
   readOnly?: boolean
+
+  /**
+   * Array of objects with shape: `{
+   *   text: ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
+   */
   messages?: FormMessage[]
-  variant?: 'simple' | 'toggle'
+
+  variant?: 'simple' | 'toggle' // TODO: split toggle out to its own component
+
   size?: 'small' | 'medium' | 'large'
+
   layout?: 'stacked' | 'columns' | 'inline'
+
+  /**
+   * any children (ones that aren't `RadioInput` are passed through)
+   */
   children?: React.ReactNode
 }
 
@@ -56,38 +88,23 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type RadioInputGroupProps = RadioInputGroupOwnProps &
   OtherHTMLAttributes<RadioInputGroupOwnProps>
 
+type RadioInputGroupState = {
+  value?: string | number
+}
+
 const propTypes: PropValidators<PropKeys> = {
   name: PropTypes.string.isRequired,
   description: PropTypes.node.isRequired,
-  /**
-   * value to set on initial render
-   */
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * the selected value (must be accompanied by an `onChange` prop)
-   */
   value: controllable(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
-  /**
-   * when used with the `value` prop, the component will not control its own state
-   */
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  /** works just like disabled but keeps the same styles as if it were active */
   readOnly: PropTypes.bool,
-  /**
-   * object with shape: `{
-   * text: PropTypes.node,
-   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   *   }`
-   */
   messages: PropTypes.arrayOf(FormPropTypes.message),
-  /**
-   * any children (ones that aren't `RadioInput` are passed through)
-   */
   children: PropTypes.node,
-  variant: PropTypes.oneOf(['simple', 'toggle']), // TODO: split toggle out to its own component
+  variant: PropTypes.oneOf(['simple', 'toggle']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   layout: PropTypes.oneOf(['stacked', 'columns', 'inline'])
 }
@@ -107,5 +124,5 @@ const allowedProps: AllowedPropKeys = [
   'layout'
 ]
 
-export type { RadioInputGroupProps }
+export type { RadioInputGroupProps, RadioInputGroupState }
 export { propTypes, allowedProps }

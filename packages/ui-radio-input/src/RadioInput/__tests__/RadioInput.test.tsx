@@ -240,22 +240,21 @@ describe('<RadioInput />', async () => {
     })
 
     it('focuses with the focus helper', async () => {
-      let ref
+      let ref: RadioInput | undefined
 
       await mount(
         <RadioInput
           label="fake label"
           value="someValue"
           name="someName"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; value: string; name: string... Remove this comment to see the full error message
+          //@ts-expect-error TODO this is coming from ReactComponentWrapper
           componentRef={(el) => (ref = el)}
         />
       )
 
       const radioInput = await RadioInputLocator.find()
 
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      ref.focus()
+      ref?.focus()
 
       await wait(() => {
         // @ts-expect-error This is intentionally overridden in assertions.ts

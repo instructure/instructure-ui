@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component, ReactElement } from 'react'
+import React, { Children, Component } from 'react'
 
 import { FormFieldGroup } from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
@@ -35,16 +35,24 @@ import {
 } from '@instructure/ui-react-utils'
 
 import { RadioInput } from '../RadioInput'
-import type { RadioInputGroupProps } from './props'
+import type { RadioInputProps } from '../RadioInput/props'
+
+import type { RadioInputGroupProps, RadioInputGroupState } from './props'
 import { allowedProps, propTypes } from './props'
+
+type RadioInputChild = React.ComponentElement<RadioInputProps, RadioInput>
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @testable()
-class RadioInputGroup extends Component<RadioInputGroupProps> {
+class RadioInputGroup extends Component<
+  RadioInputGroupProps,
+  RadioInputGroupState
+> {
   static readonly componentId = 'RadioInputGroup'
 
   static allowedProps = allowedProps
@@ -55,20 +63,19 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
     variant: 'simple',
     size: 'medium',
     layout: 'stacked',
-    readOnly: false,
-    children: null
+    readOnly: false
   }
 
   ref: Element | null = null
+
+  private readonly _messagesId: string
 
   handleRef = (el: Element | null) => {
     this.ref = el
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
-    super()
+  constructor(props: RadioInputGroupProps) {
+    super(props)
 
     if (typeof props.value === 'undefined') {
       this.state = {
@@ -76,16 +83,14 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
       }
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Rad... Remove this comment to see the full error message
     this._messagesId = uid('RadioInputGroup-messages')
   }
 
   get hasMessages() {
-    return this.props.messages && this.props.messages.length > 0
+    return !!this.props.messages && this.props.messages.length > 0
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleChange = (e) => {
+  handleChange: RadioInputProps['onChange'] = (e) => {
     const value = e.target.value
 
     if (this.props.disabled || this.props.readOnly) {
@@ -104,8 +109,7 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
 
   get value() {
     return typeof this.props.value === 'undefined'
-      ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'value' does not exist on type 'Readonly<... Remove this comment to see the full error message
-        this.state.value
+      ? this.state.value
       : this.props.value
   }
 
@@ -115,28 +119,24 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
     // This adds the passed in name property to each RadioInput component
     // and checks the input whose value matches the value property
     return Children.map(children, (child, index) => {
-      if (matchComponentTypes(child, [RadioInput])) {
-        // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-        const isChecked = this.value === child.props.value
+      if (matchComponentTypes(child as RadioInputChild, [RadioInput])) {
+        const isChecked = this.value === (child as RadioInput).props.value
         const defaultFocus = !this.value && index === 0
-        return safeCloneElement(child as ReactElement, {
+        return safeCloneElement(child as RadioInputChild, {
           name,
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          disabled: disabled || child.props.disabled,
+          disabled: disabled || (child as RadioInputChild).props.disabled,
           variant,
           size,
           checked: isChecked,
           onChange: this.handleChange,
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          readOnly: readOnly || child.props.readOnly,
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          width: child.props.width || 'auto',
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Rad... Remove this comment to see the full error message
-          'aria-describedby': this.hasMessages && this._messagesId,
+          readOnly: readOnly || (child as RadioInputChild).props.readOnly,
+          width: (child as RadioInputChild).props.width || 'auto',
+          'aria-describedby': this.hasMessages ? this._messagesId : undefined,
           // only one radio in a group should be considered tabbable
           // if a radio is checked, it should be the input to receive focus when tabbed to
           // if none of the inputs are checked, the first should receive the focus
-          tabIndex: isChecked || defaultFocus ? '0' : '-1'
+          tabIndex: isChecked || defaultFocus ? 0 : -1,
+          label: (child as RadioInputChild).props.label
         })
       } else {
         return child // ignore (but preserve) children that aren't RadioInput
@@ -145,13 +145,13 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
   }
 
   render() {
-    const { variant, layout } = this.props
+    const { variant, layout, description } = this.props
 
     return (
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormFieldGroup
         {...omitProps(this.props, RadioInputGroup.allowedProps)}
         {...pickProps(this.props, FormFieldGroup.allowedProps)}
+        description={description}
         // TODO: split out toggle variant into its own component
         layout={
           layout === 'columns' && variant === 'toggle' ? 'stacked' : layout
@@ -160,7 +160,6 @@ class RadioInputGroup extends Component<RadioInputGroupProps> {
         rowSpacing="small"
         colSpacing={variant === 'toggle' ? 'none' : 'small'} // keep toggles close together
         startAt={variant === 'toggle' ? 'small' : undefined}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Rad... Remove this comment to see the full error message
         messagesId={this._messagesId}
         elementRef={this.handleRef}
       >

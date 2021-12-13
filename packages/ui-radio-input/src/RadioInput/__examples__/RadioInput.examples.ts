@@ -22,19 +22,20 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { RadioInputProps } from '../props'
+
 export default {
   sectionProp: 'variant',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       label: 'A radio input'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       (props.variant === 'simple' && props.context !== 'off') ||
       (props.variant === 'toggle' && !props.checked && props.context !== 'off')
     )
   }
-}
+} as StoryConfig<RadioInputProps>
