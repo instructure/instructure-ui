@@ -32,7 +32,7 @@ const MyModal = () => {
   return (
     <Modal>
       <Modal.Header>My Modal</Modal.Header>
-      <Modal.Content>Hello world</Modal.Content>
+      <Modal.Body>Hello world</Modal.Body>
     </Modal>
   )
 }
