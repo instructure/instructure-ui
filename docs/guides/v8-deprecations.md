@@ -29,4 +29,4 @@ The tables below show what will be removed and what are they replaced with. We a
 | Utility                                 | Substitute                                                                                                                                          |
 | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [addResizeListener](#addResizeListener) | Use the native [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) utility. Example usage: [here](#addResizeListener) |
-| [Navigation](#Navigation)               | This component has been deprecated from version 8.                                                                                                  |
+| [Navigation](#Navigation)               | This component is deprecated in v8 and will be removed in InstUI v9 due to the lack of usage.                                                       |
