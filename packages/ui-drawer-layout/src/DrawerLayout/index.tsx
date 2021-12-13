@@ -108,7 +108,7 @@ class DrawerLayout extends Component<DrawerLayoutProps> {
       matchComponentTypes(child, [DrawerTray])
     )[0]
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'ReactChil... Remove this comment to see the full error message
-    return tray.props
+    return { ...this.props, ...tray.props }
   }
 
   get trayPlacement() {
