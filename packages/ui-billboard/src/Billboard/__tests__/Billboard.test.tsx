@@ -43,10 +43,7 @@ describe('<Billboard />', async () => {
   })
 
   describe('with generated examples', async () => {
-    generateA11yTests(
-      Billboard,
-      BillboardExamples as StoryConfig<BillboardProps>
-    )
+    generateA11yTests(Billboard, BillboardExamples)
   })
 
   it('should render a heading with the correct tag', async () => {
