@@ -21,9 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 
 import { RadioInput } from '../../RadioInput'
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { RadioInputGroupProps } from '../props'
 
 let counter = 1
 const generateName = () => `Example${counter++}`
@@ -33,8 +36,7 @@ export default {
   maxExamplesPerPage: 50,
   maxExamples: 600,
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       name: generateName(),
       size: 'medium',
@@ -49,4 +51,4 @@ export default {
       ]
     }
   }
-}
+} as StoryConfig<RadioInputGroupProps>

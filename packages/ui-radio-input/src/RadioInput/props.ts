@@ -21,15 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import React from 'react'
 import PropTypes from 'prop-types'
 
+import type { InputHTMLAttributes } from 'react'
 import type {
   OtherHTMLAttributes,
   PropValidators,
   RadioInputTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import { InputHTMLAttributes } from 'react'
 
 type RadioInputOwnProps = {
   label: React.ReactNode
@@ -37,14 +39,20 @@ type RadioInputOwnProps = {
   id?: string
   name?: string
   checked?: boolean
+  /**
+   * Whether or not to disable the input
+   */
   disabled?: boolean
+  /**
+   * Works just like disabled but keeps the same styles as if it were active
+   */
   readOnly?: boolean
   variant?: 'simple' | 'toggle'
   size?: 'small' | 'medium' | 'large'
   context?: 'success' | 'warning' | 'danger' | 'off'
   inline?: boolean
-  onClick?: (...args: any[]) => any
-  onChange?: (...args: any[]) => any
+  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 type PropKeys = keyof RadioInputOwnProps
@@ -62,19 +70,17 @@ type RadioInputStyle = ComponentStyle<
   'radioInput' | 'input' | 'control' | 'facade' | 'label'
 >
 
+type RadioInputState = {
+  checked?: boolean
+}
+
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   id: PropTypes.string,
   name: PropTypes.string,
   checked: PropTypes.bool,
-  /**
-   * Whether or not to disable the input
-   */
   disabled: PropTypes.bool,
-  /**
-   * Works just like disabled but keeps the same styles as if it were active
-   */
   readOnly: PropTypes.bool,
   variant: PropTypes.oneOf(['simple', 'toggle']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
@@ -100,5 +106,5 @@ const allowedProps: AllowedPropKeys = [
   'onChange'
 ]
 
-export type { RadioInputProps, RadioInputStyle }
+export type { RadioInputProps, RadioInputState, RadioInputStyle }
 export { propTypes, allowedProps }
