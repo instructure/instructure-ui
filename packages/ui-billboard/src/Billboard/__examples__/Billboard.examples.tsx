@@ -26,6 +26,7 @@ import React from 'react'
 import { IconAnnouncementLine } from '@instructure/ui-icons'
 import { Img } from '@instructure/ui-img'
 import { BillboardProps, HeroIconSize } from '../props'
+import type { StoryConfig } from '@instructure/ui-test-utils'
 
 export default {
   sectionProp: 'size',
@@ -63,4 +64,4 @@ export default {
       )
     )
   }
-}
+} as StoryConfig<BillboardProps>
