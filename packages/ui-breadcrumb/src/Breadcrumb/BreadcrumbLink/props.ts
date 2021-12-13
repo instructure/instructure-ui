@@ -63,7 +63,10 @@ type PropKeys = keyof BreadcrumbLinkOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type BreadcrumbLinkProps = BreadcrumbLinkOwnProps &
-  OtherHTMLAttributes<BreadcrumbLinkOwnProps>
+  OtherHTMLAttributes<BreadcrumbLinkOwnProps> & {
+    // React Router might add a `to` prop
+    to?: string
+  }
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node.isRequired,
