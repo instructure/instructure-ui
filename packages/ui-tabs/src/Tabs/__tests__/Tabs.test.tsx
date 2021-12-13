@@ -34,6 +34,7 @@ import {
 
 import { Tabs } from '../index'
 import { TabsLocator } from '../TabsLocator'
+import type { TabsProps } from '../props'
 
 describe('<Tabs />', async () => {
   it('should render the correct number of panels', async () => {
@@ -113,12 +114,12 @@ describe('<Tabs />', async () => {
   })
 
   it('should preserve Tab.Panel keys', async () => {
-    let tabs
+    let tabs: Tabs | undefined
 
     const subject = await mount(
       <Tabs
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; componentRef: (el: any)... Remove this comment to see the full error message
-        componentRef={(el) => {
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
+        componentRef={(el: Tabs) => {
           tabs = el
         }}
       >
@@ -126,16 +127,14 @@ describe('<Tabs />', async () => {
       </Tabs>
     )
 
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'children' implicitly has an 'any'... Remove this comment to see the full error message
-    const verifyChildKeys = ({ children }) => {
+    const verifyChildKeys = ({ children }: TabsProps) => {
       const childrenArray = Array.isArray(children) ? children : [children]
       childrenArray.forEach((child) => {
         expect(child.props.renderTitle).to.equal(child.key)
       })
     }
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    verifyChildKeys(tabs.props)
+    verifyChildKeys(tabs!.props)
 
     await subject.setProps({
       children: [
@@ -144,8 +143,7 @@ describe('<Tabs />', async () => {
       ]
     })
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    verifyChildKeys(tabs.props)
+    verifyChildKeys(tabs!.props)
   })
 
   it('should default to selecting the first tab', async () => {
@@ -450,8 +448,7 @@ describe('<Tabs />', async () => {
 
   describe('with tabOverflow set to scroll', async () => {
     it('should render a fade-out gradient when Tabs overflow', async () => {
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'width' implicitly has an 'any' ty... Remove this comment to see the full error message
-      const Example = ({ width }) => (
+      const Example = ({ width }: { width: string }) => (
         <div style={{ width }}>
           <Tabs tabOverflow="scroll">
             <Tabs.Panel renderTitle="Tab1">Contents of panel</Tabs.Panel>

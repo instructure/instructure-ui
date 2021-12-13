@@ -23,15 +23,17 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import { passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
 import type { TabsTabProps } from './props'
 import { allowedProps, propTypes } from './props'
 
@@ -40,6 +42,7 @@ import { allowedProps, propTypes } from './props'
 parent: Tabs
 id: Tabs.Tab
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Tab extends Component<TabsTabProps> {
@@ -49,47 +52,41 @@ class Tab extends Component<TabsTabProps> {
   static propTypes = propTypes
 
   static defaultProps = {
-    children: null,
     variant: 'default',
     isDisabled: false,
-    isSelected: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClick: (event, { index, id }) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyDown: (event, { index, id }) => {}
+    isSelected: false
   }
 
   componentDidMount() {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleClick = (event) => {
+  handleClick = (event: React.MouseEvent<ViewOwnProps>) => {
     const { onClick, index, id, isDisabled } = this.props
 
     if (isDisabled) {
       return
     }
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onClick(event, { index, id })
+    if (typeof onClick === 'function') {
+      onClick(event, { index, id })
+    }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleKeyDown = (event) => {
+  handleKeyDown = (event: React.KeyboardEvent<ViewOwnProps>) => {
     const { onKeyDown, index, id, isDisabled } = this.props
 
     if (isDisabled) {
       return
     }
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onKeyDown(event, { index, id })
+    if (typeof onKeyDown === 'function') {
+      onKeyDown(event, { index, id })
+    }
   }
 
   render() {
@@ -116,8 +113,7 @@ class Tab extends Component<TabsTabProps> {
         aria-selected={isSelected ? 'true' : undefined}
         aria-disabled={isDisabled ? 'true' : undefined}
         aria-controls={controls}
-        //@ts-expect-error fix this to be number
-        tabIndex={isSelected && !isDisabled ? '0' : undefined}
+        tabIndex={isSelected && !isDisabled ? 0 : undefined}
         position="relative"
         focusPosition="inset"
       >

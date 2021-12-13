@@ -39,7 +39,12 @@ import type {
 } from '@instructure/shared-types'
 
 type TabsPanelOwnProps = {
-  renderTitle: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * The content that will be rendered in the corresponding <Tab /> and will label
+   * this `<Tabs.Panel />` for screen readers
+   */
+  renderTitle: React.ReactNode | (() => React.ReactNode)
+  children?: React.ReactNode
   variant?: 'default' | 'secondary'
   isSelected?: boolean
   isDisabled?: boolean
@@ -49,8 +54,10 @@ type TabsPanelOwnProps = {
   labelledBy?: string
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
-  elementRef?: (element: Element | null) => void
-  children?: React.ReactNode
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef?: (element: HTMLDivElement | null) => void
 }
 
 type PropKeys = keyof TabsPanelOwnProps
@@ -64,10 +71,6 @@ type TabsPanelProps = TabsPanelOwnProps &
 type TabsPanelStyle = ComponentStyle<'panel' | 'content'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The content that will be rendered in the corresponding <Tab /> and will label
-   * this `<Tabs.Panel />` for screen readers
-   */
   renderTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   children: PropTypes.node,
   variant: PropTypes.oneOf(['default', 'secondary']),
@@ -79,9 +82,6 @@ const propTypes: PropValidators<PropKeys> = {
   labelledBy: PropTypes.string,
   padding: ThemeablePropTypes.spacing,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 

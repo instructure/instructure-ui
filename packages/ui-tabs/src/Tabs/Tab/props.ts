@@ -31,6 +31,7 @@ import type {
   TabsTabTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { ViewOwnProps } from '@instructure/ui-view'
 
 type TabsTabOwnProps = {
   variant?: 'default' | 'secondary'
@@ -39,9 +40,15 @@ type TabsTabOwnProps = {
   controls: string
   isDisabled?: boolean
   isSelected?: boolean
-  onClick?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  onClick?: (
+    event: React.MouseEvent<ViewOwnProps>,
+    tabData: { index: number; id: string }
+  ) => void
+  onKeyDown?: (
+    event: React.KeyboardEvent<ViewOwnProps>,
+    tabData: { index: number; id: string }
+  ) => void
+  children?: React.ReactNode | (() => React.ReactNode)
 }
 
 type PropKeys = keyof TabsTabOwnProps

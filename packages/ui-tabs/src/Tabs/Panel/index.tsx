@@ -41,6 +41,7 @@ import { allowedProps, propTypes } from './props'
 parent: Tabs
 id: Tabs.Panel
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Panel extends Component<TabsPanelProps> {
@@ -50,29 +51,24 @@ class Panel extends Component<TabsPanelProps> {
   static propTypes = propTypes
 
   static defaultProps = {
-    children: null,
     isDisabled: false,
     textAlign: 'start',
     variant: 'default',
-    labelledBy: null,
     isSelected: false,
-    padding: 'small',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {}
+    padding: 'small'
   }
 
   componentDidMount() {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     this.props.makeStyles?.()
   }
 
-  ref: Element | null = null
+  ref: HTMLDivElement | null = null
 
-  handleRef = (el: Element | null) => {
+  handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
 
     this.ref = el
