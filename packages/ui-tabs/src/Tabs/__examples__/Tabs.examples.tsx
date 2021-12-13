@@ -23,6 +23,8 @@
  */
 import React from 'react'
 import { Tabs } from '../index'
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { TabsProps } from '../props'
 
 const contentShort =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus mauris, aliquet a massa posuere, lobortis laoreet eros. Ut at lacus aliquet arcu volutpat porttitor ut vel nibh. Aenean iaculis elit eu nulla ultricies blandit vitae quis ex.'
@@ -42,7 +44,6 @@ export default {
     // TODO: textAlign doesn't seem to do anything when passed on Tabs
     'textAlign'
   ],
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     if (props.tabOverflow === 'scroll' && props.variant === 'secondary') {
       return true
@@ -57,8 +58,7 @@ export default {
 
     return false
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       margin: 'large',
       padding: 'small',
@@ -78,4 +78,4 @@ export default {
       ]
     }
   }
-}
+} as StoryConfig<TabsProps>

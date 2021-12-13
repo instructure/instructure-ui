@@ -27,13 +27,13 @@ import React, {
   Component,
   ComponentClass,
   ComponentElement,
-  createElement,
-  ReactElement
+  createElement
 } from 'react'
 
 import keycode from 'keycode'
 
 import { View } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view'
 import {
   matchComponentTypes,
   safeCloneElement,
@@ -44,7 +44,9 @@ import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Focusable } from '@instructure/ui-focusable'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
+import type { RectType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
+import type { Debounced } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
@@ -57,22 +59,24 @@ import { Tab } from './Tab'
 import { Panel } from './Panel'
 
 import { allowedProps, propTypes } from './props'
-import type { TabsProps } from './props'
+import type { TabsProps, TabsState } from './props'
+
 import type { TabsTabProps } from './Tab/props'
 import type { TabsPanelProps } from './Panel/props'
 
-type TabChild = ReactElement & ComponentElement<TabsTabProps, any>
-type PanelChild = ReactElement & ComponentElement<TabsPanelProps, any>
+type TabChild = ComponentElement<TabsTabProps, any>
+type PanelChild = ComponentElement<TabsPanelProps, any>
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
 @testable()
-class Tabs extends Component<TabsProps> {
+class Tabs extends Component<TabsProps, TabsState> {
   static readonly componentId = 'Tabs'
 
   static allowedProps = allowedProps
@@ -80,16 +84,18 @@ class Tabs extends Component<TabsProps> {
 
   static defaultProps = {
     variant: 'default',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestTabChange: (event, { index, id }) => {},
-    children: null,
-    elementRef: () => {},
     shouldFocusOnRender: false,
     tabOverflow: 'stack'
   }
 
   static Panel = Panel
   static Tab = Tab
+
+  private _tabList: Element | null = null
+  private _focusable: Focusable | null = null
+  private _tabListPosition?: RectType
+  private _debounced?: Debounced
+  private _resizeListener?: ResizeObserver
 
   ref: Element | null = null
 
@@ -103,14 +109,8 @@ class Tabs extends Component<TabsProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: TabsProps) {
     super(props)
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
-    this._tabList = null
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabListPosition' does not exist on type... Remove this comment to see the full error message
-    this._tabListPosition = null
 
     this.state = {
       withTabListOverflow: false
@@ -118,7 +118,6 @@ class Tabs extends Component<TabsProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
     if (this.props.tabOverflow === 'scroll' && this._tabList) {
       this.startScrollOverflow()
     }
@@ -130,8 +129,7 @@ class Tabs extends Component<TabsProps> {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: TabsProps, prevState: TabsState) {
     if (this.props.shouldFocusOnRender && !prevProps.shouldFocusOnRender) {
       this.focus()
     }
@@ -164,13 +162,10 @@ class Tabs extends Component<TabsProps> {
     // make sure active tab is always visible
     if (
       this.props.tabOverflow === 'scroll' &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
       this._tabList &&
       !prevState.withTabListOverflow &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'withTabListOverflow' does not exist on t... Remove this comment to see the full error message
       this.state.withTabListOverflow
     ) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
       const activeTabEl = this._tabList.querySelector('[aria-selected="true"]')
       this.showActiveTabIfOverlayed(activeTabEl)
     }
@@ -185,72 +180,58 @@ class Tabs extends Component<TabsProps> {
   startScrollOverflow() {
     this.handleResize()
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_debounced' does not exist on type 'Tabs... Remove this comment to see the full error message
     this._debounced = debounce(this.handleResize, 300, {
       leading: true,
       trailing: true
     })
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabListPosition' does not exist on type... Remove this comment to see the full error message
     this._tabListPosition = getBoundingClientRect(this._tabList)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_resizeListener' does not exist on type ... Remove this comment to see the full error message
     this._resizeListener = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const { width: newWidth } = entry.contentRect
 
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabListPosition' does not exist on type... Remove this comment to see the full error message
-        if (this._tabListPosition.width !== newWidth) {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_debounced' does not exist on type 'Tabs... Remove this comment to see the full error message
-          this._debounced()
+        if (this._tabListPosition!.width !== newWidth) {
+          this._debounced?.()
         }
       }
     })
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_resizeListener' does not exist on type ... Remove this comment to see the full error message
-    this._resizeListener.observe(this._tabList)
+    this._resizeListener.observe(this._tabList!)
   }
 
   cancelScrollOverflow() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_resizeListener' does not exist on type ... Remove this comment to see the full error message
     if (this._resizeListener) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_resizeListener' does not exist on type ... Remove this comment to see the full error message
       this._resizeListener.disconnect()
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_debounced' does not exist on type 'Tabs... Remove this comment to see the full error message
     if (this._debounced) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_debounced' does not exist on type 'Tabs... Remove this comment to see the full error message
       this._debounced.cancel()
     }
   }
 
-  // @ts-expect-error TODO: not all codepaths return a value!
   getOverlayWidth() {
     const { variant, tabOverflow, styles } = this.props
 
-    if (tabOverflow === 'scroll') {
+    if (styles && tabOverflow === 'scroll') {
       if (variant === 'default') {
-        return px(styles?.scrollOverlayWidthDefault as number)
+        return px(styles?.scrollOverlayWidthDefault)
       } else {
-        return px(styles?.scrollOverlayWidthSecondary as number)
+        return px(styles?.scrollOverlayWidthSecondary)
       }
     }
+
+    return 0
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'activeTabEl' implicitly has an 'any' ty... Remove this comment to see the full error message
-  showActiveTabIfOverlayed(activeTabEl) {
+  showActiveTabIfOverlayed(activeTabEl: Element | null) {
     if (
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
       this._tabList &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabListPosition' does not exist on type... Remove this comment to see the full error message
       this._tabListPosition &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
       typeof this._tabList.scrollTo === 'function' // test for scrollTo support
     ) {
       const { dir } = this.props
       const isRtl = dir === textDirectionContextConsumer.DIRECTION.rtl
 
       const tabPosition = getBoundingClientRect(activeTabEl)
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabListPosition' does not exist on type... Remove this comment to see the full error message
       const tabListPosition = this._tabListPosition
 
       const tabListBoundStart = isRtl
@@ -265,19 +246,15 @@ class Tabs extends Component<TabsProps> {
 
       if (tabListBoundEnd > tabPositionEnd) {
         const offset = Math.round(tabListBoundEnd - tabPositionEnd)
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
         this._tabList.scrollTo({
           top: 0,
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
           left: this._tabList.scrollLeft + offset,
           behavior: 'smooth'
         })
       } else if (tabListBoundStart > tabPositionStart) {
         const offset = Math.round(tabListBoundStart - tabPositionStart)
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
         this._tabList.scrollTo({
           top: 0,
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
           left: this._tabList.scrollLeft - offset,
           behavior: 'smooth'
         })
@@ -285,14 +262,12 @@ class Tabs extends Component<TabsProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleTabClick = (event, { index, id }) => {
+  handleTabClick: TabsTabProps['onClick'] = (event, { index }) => {
     const nextTab = this.getNextTab(index, 0)
     this.fireOnChange(event, nextTab)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleTabKeyDown = (event, { index }) => {
+  handleTabKeyDown: TabsTabProps['onKeyDown'] = (event, { index }) => {
     let nextTab
 
     if (
@@ -316,19 +291,20 @@ class Tabs extends Component<TabsProps> {
 
   handleResize = () => {
     this.setState({
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
-      withTabListOverflow: this._tabList.scrollWidth > this._tabList.offsetWidth
+      withTabListOverflow:
+        this._tabList!.scrollWidth > (this._tabList as HTMLElement).offsetWidth
     })
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabListPosition' does not exist on type... Remove this comment to see the full error message
     this._tabListPosition = getBoundingClientRect(this._tabList)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'startIndex' implicitly has an 'any' typ... Remove this comment to see the full error message
-  getNextTab(startIndex, step) {
+  getNextTab(
+    startIndex: number,
+    step: -1 | 0 | 1
+  ): { index: number; id?: string } {
     const tabs = React.Children.toArray(this.props.children).map(
       (child) => matchComponentTypes(child, [Panel]) && child
-    )
+    ) as PanelChild[]
     const count = tabs.length
     const change = step < 0 ? step + count : step
 
@@ -338,32 +314,30 @@ class Tabs extends Component<TabsProps> {
     )
 
     let nextIndex = startIndex
-    let nextTab
+    let nextTab: PanelChild
 
     do {
       nextIndex = (nextIndex + change) % count
       nextTab = tabs[nextIndex]
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
     } while (nextTab && nextTab.props && nextTab.props.isDisabled)
 
     error(
       nextIndex >= 0 && nextIndex < count,
       `[Tabs] Invalid tab index: '${nextIndex}'.`
     )
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type '{}'.
     return { index: nextIndex, id: nextTab.props.id }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  fireOnChange(event, { index, id }) {
+  fireOnChange(
+    event: React.MouseEvent<ViewOwnProps> | React.KeyboardEvent<ViewOwnProps>,
+    { index, id }: { index: number; id?: string }
+  ) {
     if (typeof this.props.onRequestTabChange === 'function') {
       this.props.onRequestTabChange(event, { index, id })
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'withTabListOverflow' does not exist on t... Remove this comment to see the full error message
     this.state.withTabListOverflow &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
-      this.showActiveTabIfOverlayed(this._tabList.querySelector(`#tab-${id}`))
+      this.showActiveTabIfOverlayed(this._tabList!.querySelector(`#tab-${id}`))
   }
 
   createTab(
@@ -409,33 +383,25 @@ class Tabs extends Component<TabsProps> {
       textAlign: panel.props.textAlign || this.props.textAlign,
       maxHeight: !hasFixedHeight ? this.props.maxHeight : undefined,
       minHeight: !hasFixedHeight ? this.props.minHeight : '100%'
-    })
+    } as TabsPanelProps & { key: string }) as PanelChild
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleFocusableRef = (el) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusable' does not exist on type 'Tabs... Remove this comment to see the full error message
+  handleFocusableRef = (el: Focusable | null) => {
     this._focusable = el
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleTabListRef = (el) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_tabList' does not exist on type 'Tabs'.
+  handleTabListRef = (el: Element | null) => {
     this._tabList = el
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusable' does not exist on type 'Tabs... Remove this comment to see the full error message
     this._focusable &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusable' does not exist on type 'Tabs... Remove this comment to see the full error message
       typeof this._focusable.focus === 'function' &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusable' does not exist on type 'Tabs... Remove this comment to see the full error message
       this._focusable.focus()
   }
 
   render() {
-    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'panels' implicitly has type 'any[]' in s... Remove this comment to see the full error message
-    const panels = []
+    const panels: PanelChild[] = []
     const tabs: TabChild[] = []
     const {
       children,
@@ -450,23 +416,24 @@ class Tabs extends Component<TabsProps> {
       ...props
     } = this.props
 
-    const selectedChildIndex = React.Children.toArray(children)
+    const selectedChildIndex = (
+      React.Children.toArray(children) as PanelChild[]
+    )
       .filter((child) => matchComponentTypes(child, [Panel]))
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
       .findIndex((child) => child.props.isSelected && !child.props.isDisabled)
 
     let index = 0
     const selectedIndex = selectedChildIndex >= 0 ? selectedChildIndex : 0
 
-    React.Children.forEach(children, (child) => {
+    React.Children.forEach(children as PanelChild[], (child) => {
       if (matchComponentTypes(child, [Panel])) {
         const selected =
-          !(child as PanelChild).props.isDisabled &&
-          ((child as PanelChild).props.isSelected || selectedIndex === index)
+          !child.props.isDisabled &&
+          (child.props.isSelected || selectedIndex === index)
         const id = uid()
 
-        tabs.push(this.createTab(index, id, selected, child as PanelChild))
-        panels.push(this.clonePanel(index, id, selected, child as PanelChild))
+        tabs.push(this.createTab(index, id, selected, child))
+        panels.push(this.clonePanel(index, id, selected, child))
 
         index++
       } else {
@@ -475,7 +442,6 @@ class Tabs extends Component<TabsProps> {
     })
 
     const withScrollFade =
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'withTabListOverflow' does not exist on t... Remove this comment to see the full error message
       tabOverflow === 'scroll' && this.state.withTabListOverflow
 
     // suppress overlay whenever final Tab is active, or Firefox will cover it
@@ -522,10 +488,7 @@ class Tabs extends Component<TabsProps> {
           )}
         </Focusable>
 
-        <div css={styles?.panelsContainer}>
-          {/* @ts-expect-error ts-migrate(7005) FIXME: Variable 'panels' implicitly has an 'any[]' type. */}
-          {panels}
-        </div>
+        <div css={styles?.panelsContainer}>{panels}</div>
       </View>
     )
   }

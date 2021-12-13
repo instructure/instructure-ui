@@ -40,22 +40,52 @@ import type {
   TabsTheme
 } from '@instructure/shared-types'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { ViewOwnProps } from '@instructure/ui-view'
 
 type TabsOwnProps = {
+  /**
+   * children of type `Tabs.Panel`
+   */
+  children?: React.ReactNode // TODO: oneOf([Panel, null])
   variant?: 'default' | 'secondary'
+  /**
+   * A screen ready only label for the list of tabs
+   */
   screenReaderLabel?: string
-  onRequestTabChange?: (...args: any[]) => any
+  /**
+   * Called when the selected tab should change
+   */
+  onRequestTabChange?: (
+    event: React.MouseEvent<ViewOwnProps> | React.KeyboardEvent<ViewOwnProps>,
+    tabData: { index: number; id?: string }
+  ) => void
   maxWidth?: string | number
   maxHeight?: string | number
   minHeight?: string | number
   fixHeight?: string | number
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+  /**
+   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+   */
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
+  /**
+   * Choose whether Tabs should stack or scroll when they exceed the width of their
+   * container.
+   */
   tabOverflow?: 'stack' | 'scroll'
   shouldFocusOnRender?: boolean
-  children?: React.ReactNode // TODO: oneOf([Panel, null])
 }
 
 type PropKeys = keyof TabsOwnProps
@@ -74,49 +104,28 @@ type TabsStyle = ComponentStyle<
   | 'panelsContainer'
   | 'scrollOverlay'
   | 'scrollSpacer'
-  | 'scrollOverlayWidthDefault'
-  | 'scrollOverlayWidthSecondary'
->
+> & {
+  scrollOverlayWidthDefault: string
+  scrollOverlayWidthSecondary: string
+}
+
+type TabsState = {
+  withTabListOverflow: boolean
+}
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * children of type `Tabs.Panel`
-   */
   children: Children.oneOf([Panel, null]),
   variant: PropTypes.oneOf(['default', 'secondary']),
-  /**
-   * A screen ready only label for the list of tabs
-   */
   screenReaderLabel: PropTypes.string,
-  /**
-   * Called when the selected tab should change
-   */
   onRequestTabChange: PropTypes.func,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fixHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-   */
   padding: ThemeablePropTypes.spacing,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func,
-  /**
-   * Choose whether Tabs should stack or scroll when they exceed the width of their
-   * container.
-   */
   tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
   shouldFocusOnRender: PropTypes.bool
 }
@@ -138,5 +147,5 @@ const allowedProps: AllowedPropKeys = [
   'shouldFocusOnRender'
 ]
 
-export type { TabsProps, TabsStyle }
+export type { TabsProps, TabsState, TabsStyle }
 export { propTypes, allowedProps }
