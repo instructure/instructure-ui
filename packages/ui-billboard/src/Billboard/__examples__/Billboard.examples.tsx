@@ -25,14 +25,14 @@ import React from 'react'
 
 import { IconAnnouncementLine } from '@instructure/ui-icons'
 import { Img } from '@instructure/ui-img'
+import { BillboardProps, HeroIconSize } from '../props'
 
 export default {
   sectionProp: 'size',
   maxExamplesPerPage: 50,
   propValues: {
     hero: [
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'size' implicitly has an 'any' type.
-      function renderHero(size) {
+      function renderHero(size: HeroIconSize) {
         return <IconAnnouncementLine size={size} />
       },
       <Img
@@ -52,8 +52,7 @@ export default {
       margin: 'medium small'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  filter: (props) => {
+  filter: (props: BillboardProps) => {
     return (
       props.size !== 'medium' &&
       !(
