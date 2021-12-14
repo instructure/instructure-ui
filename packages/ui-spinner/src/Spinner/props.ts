@@ -38,10 +38,27 @@ import type {
 } from '@instructure/shared-types'
 
 type SpinnerOwnProps = {
-  renderTitle?: ((...args: any[]) => any) | React.ReactNode
+  /**
+   * Give the spinner a title to be read by screenreaders
+   */
+  renderTitle?: (() => React.ReactNode) | React.ReactNode
+  /**
+   * Different-sized spinners
+   */
   size?: 'x-small' | 'small' | 'medium' | 'large'
+  /**
+   * Different color schemes for use with light or dark backgrounds
+   */
   variant?: 'default' | 'inverse'
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
   as?: AsElementType
 }
@@ -59,27 +76,10 @@ type SpinnerStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Give the spinner a title to be read by screenreaders
-   */
   renderTitle: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  /**
-   * Different-sized spinners
-   */
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
-  /**
-   * Different color schemes for use with light or dark backgrounds
-   */
   variant: PropTypes.oneOf(['default', 'inverse']),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func,
   as: PropTypes.elementType
 }
