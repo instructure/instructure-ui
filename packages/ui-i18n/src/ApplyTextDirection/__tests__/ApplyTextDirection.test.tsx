@@ -92,19 +92,6 @@ describe('<ApplyTextDirection />', async () => {
     expect(text.getAttribute('data-dir')).to.equal('ltr')
   })
 
-  it('should use the "auto" dir value correctly', async () => {
-    const subject = await mount(
-      <ApplyTextDirection dir="auto">
-        <span>
-          هذه الفقرة باللغة العربية ، لذا يجب الانتقال من اليمين إلى اليسار.
-        </span>
-      </ApplyTextDirection>
-    )
-    expect(
-      getComputedStyle(subject.getDOMNode().childNodes[0] as Element).direction
-    ).to.equal('rtl')
-  })
-
   it('allows a function as child', async () => {
     let dirValue: string
     let rtl: boolean
