@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '../FormPropTypes'
@@ -98,5 +99,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type { FormFieldProps }
+export type { FormFieldOwnProps, FormFieldProps }
 export { propTypes, allowedProps }

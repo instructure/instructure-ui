@@ -37,13 +37,10 @@ import NumberInputExamples from '../__examples__/NumberInput.examples'
 
 describe('<NumberInput />', () => {
   it('sets value on the input', async () => {
+    const onChange = stub()
+
     await mount(
-      <NumberInput
-        renderLabel="Label"
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        onChange={Function.prototype}
-        value="42"
-      />
+      <NumberInput renderLabel="Label" onChange={onChange} value="42" />
     )
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
@@ -52,13 +49,10 @@ describe('<NumberInput />', () => {
   })
 
   it('should accept a number for the value', async () => {
+    const onChange = stub()
+
     await mount(
-      <NumberInput
-        renderLabel="Label"
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        onChange={Function.prototype}
-        value={42}
-      />
+      <NumberInput renderLabel="Label" onChange={onChange} value={42} />
     )
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
@@ -332,8 +326,7 @@ describe('<NumberInput />', () => {
   })
 
   it('puts inputMode prop to input', async () => {
-    //@ts-expect-error fix this
-    await mount(<NumberInput inputMode="decimal" />)
+    await mount(<NumberInput renderLabel="Label" inputMode="decimal" />)
 
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()

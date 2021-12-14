@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import keycode from 'keycode'
 
 import { FormField } from '@instructure/ui-form-field'
@@ -43,18 +44,20 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+import { allowedProps, propTypes } from './props'
 import type {
   NumberInputProps,
   NumberInputState,
   NumberInputStyleProps
 } from './props'
-import { allowedProps, propTypes } from './props'
 
 /**
 ---
 category: components
 id: NumberInput
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -63,36 +66,23 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
   static allowedProps = allowedProps
   static propTypes = propTypes
   static defaultProps = {
-    id: null,
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
     messages: [],
-    placeholder: null,
     isRequired: false,
     showArrows: true,
     size: 'medium',
     display: 'block',
     textAlign: 'start',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    inputRef: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onChange: (event, value) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDecrement: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onIncrement: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onKeyDown: (event) => {},
     inputMode: 'numeric'
   }
 
   state: NumberInputState = { hasFocus: false }
-  _input = null
+
   ref: Element | null = null
+
+  private _input: HTMLInputElement | null = null
+  private _id?: string
 
   handleRef = (el: Element | null) => {
     this.ref = el
@@ -102,12 +92,9 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     if (this.props.id) {
       return this.props.id
     }
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'NumberInput... Remove this comment to see the full error message
     if (!this._id) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'NumberInput... Remove this comment to see the full error message
       this._id = uid('NumberInput')
     }
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'NumberInput... Remove this comment to see the full error message
     return this._id
   }
 
@@ -138,68 +125,77 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-  handleInputRef = (element) => {
+  handleInputRef = (element: HTMLInputElement | null) => {
     this._input = element
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.inputRef(element)
-  }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleFocus = (event) => {
-    this.setState({ hasFocus: true })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onFocus(event)
-  }
-
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleBlur = (event) => {
-    this.setState({ hasFocus: false })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onBlur(event)
-  }
-
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleChange = (event) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onChange(event, event.target.value)
-  }
-
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleKeyDown = (event) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onKeyDown(event)
-
-    if (event.keyCode === keycode.codes.down) {
-      event.preventDefault()
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      this.props.onDecrement(event)
-    } else if (event.keyCode === keycode.codes.up) {
-      event.preventDefault()
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      this.props.onIncrement(event)
+    if (typeof this.props.inputRef === 'function') {
+      this.props.inputRef(element)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleClickUpArrow = (event) => {
+  handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    this.setState({ hasFocus: true })
+
+    if (typeof this.props.onFocus === 'function') {
+      this.props.onFocus(event)
+    }
+  }
+
+  handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    this.setState({ hasFocus: false })
+
+    if (typeof this.props.onBlur === 'function') {
+      this.props.onBlur(event)
+    }
+  }
+
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(event, event.target.value)
+    }
+  }
+
+  handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const { onKeyDown, onDecrement, onIncrement } = this.props
+
+    if (typeof onKeyDown === 'function') {
+      onKeyDown(event)
+    }
+
+    if (event.keyCode === keycode.codes.down) {
+      event.preventDefault()
+      if (typeof onDecrement === 'function') {
+        onDecrement(event)
+      }
+    } else if (event.keyCode === keycode.codes.up) {
+      event.preventDefault()
+      if (typeof onIncrement === 'function') {
+        onIncrement(event)
+      }
+    }
+  }
+
+  handleClickUpArrow = (event: React.MouseEvent<HTMLButtonElement>) => {
     this.arrowClicked(event, this.props.onIncrement)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleClickDownArrow = (event) => {
+  handleClickDownArrow = (event: React.MouseEvent<HTMLButtonElement>) => {
     this.arrowClicked(event, this.props.onDecrement)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  arrowClicked(event, callback) {
+  arrowClicked(
+    event: React.MouseEvent<HTMLButtonElement>,
+    callback: NumberInputProps['onIncrement'] | NumberInputProps['onDecrement']
+  ) {
     const { interaction } = this
 
     event.preventDefault()
     if (interaction === 'enabled') {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      this._input.focus()
-      callback(event)
+      this._input?.focus()
+
+      if (typeof callback === 'function') {
+        callback(event)
+      }
     }
   }
 
@@ -210,8 +206,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
           aria-hidden
           css={this.props.styles?.arrow}
           onMouseDown={this.handleClickUpArrow}
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
-          tabIndex="-1"
+          tabIndex={-1}
           type="button"
         >
           <IconArrowOpenUpLine />
@@ -220,8 +215,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
           aria-hidden
           css={this.props.styles?.arrow}
           onMouseDown={this.handleClickDownArrow}
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
-          tabIndex="-1"
+          tabIndex={-1}
           type="button"
         >
           <IconArrowOpenDownLine />
