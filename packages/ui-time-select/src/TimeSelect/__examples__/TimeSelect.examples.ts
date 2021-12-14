@@ -22,17 +22,19 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { TimeSelectProps } from '../props'
+
 export default {
   maxExamplesPerPage: 50,
   sectionProp: 'size',
   propValues: {
     defaultValue: [undefined, '1986-05-17T18:00:00.000Z']
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       step: 30,
       renderLabel: 'Choose a time'
     }
   }
-}
+} as StoryConfig<TimeSelectProps>

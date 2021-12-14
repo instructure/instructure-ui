@@ -21,13 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
 import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { SVGIconProps } from '../props'
 
 export default {
   sectionProp: 'size',
-  filter: (props: SVGIconProps) => {
+  filter: (props) => {
     return (
       props.color !== 'primary' &&
       !(

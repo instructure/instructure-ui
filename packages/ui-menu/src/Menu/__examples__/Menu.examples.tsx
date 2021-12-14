@@ -25,6 +25,8 @@
 import React from 'react'
 
 import { Menu, MenuItem, MenuItemSeparator, MenuItemGroup } from '../index'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { MenuProps } from '../props'
 
 export default {
@@ -63,7 +65,7 @@ export default {
       constrain: 'none'
     }
   },
-  getExampleProps: (props: MenuProps) => {
+  getExampleProps: (props) => {
     return {
       dir: props.dir,
       as: 'div',
@@ -74,10 +76,10 @@ export default {
       textAlign: 'center'
     }
   },
-  filter: (props: MenuProps) => {
+  filter: (props) => {
     return !props.trigger && props.placement !== 'top start'
   }
-}
+} as StoryConfig<MenuProps>
 
 function getMenuChildren(defaultFlyoutOpen = false) {
   return [

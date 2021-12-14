@@ -21,8 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { ThemeablePropValues } from '@instructure/emotion'
-import { ViewProps } from '../props'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { ViewProps } from '../props'
 
 const { SHADOW_TYPES, BORDER_WIDTHS, BORDER_RADII } = ThemeablePropValues
 
@@ -60,7 +63,7 @@ export default {
     'overflowX',
     'overflowY'
   ],
-  filter: (props: ViewProps) => {
+  filter: (props) => {
     return (
       // Border radius and border width list 0 in addition to none in their object values
       // so we filter those here as they are redundant
@@ -87,4 +90,4 @@ export default {
           props.textAlign !== 'center'))
     )
   }
-}
+} as StoryConfig<ViewProps>

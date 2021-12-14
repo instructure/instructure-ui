@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+
 import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { ButtonProps } from '../props'
 

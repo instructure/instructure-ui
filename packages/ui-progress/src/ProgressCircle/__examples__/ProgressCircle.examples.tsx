@@ -21,7 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { ProgressCircleProps, Values } from '../props'
 
 const valueMax = 100
@@ -43,11 +46,11 @@ export default {
       valueMax
     }
   },
-  getExampleProps: (props: ProgressCircleProps) => {
+  getExampleProps: (props) => {
     return {
       background: props.color!.includes('inverse')
         ? 'primary-inverse'
         : 'primary'
     }
   }
-}
+} as StoryConfig<ProgressCircleProps>

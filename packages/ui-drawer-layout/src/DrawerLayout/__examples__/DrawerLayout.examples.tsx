@@ -23,15 +23,18 @@
  */
 
 import React from 'react'
+
 import { View } from '@instructure/ui-view'
 import { DrawerLayout } from '../index'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { DrawerLayoutProps } from '../props'
 
 export default {
   propValues: {
     dir: ['ltr']
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       children: [
         <DrawerLayout.Tray
@@ -65,8 +68,7 @@ export default {
       ]
     }
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getExampleProps: (props) => {
+  getExampleProps: () => {
     return {
       as: 'div',
       borderWidth: 'small'
@@ -79,4 +81,4 @@ export default {
     // Couldn't find any fix for it so far.
     return { disable: true }
   }
-}
+} as StoryConfig<DrawerLayoutProps>

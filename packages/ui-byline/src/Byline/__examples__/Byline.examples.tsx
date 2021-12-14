@@ -25,6 +25,9 @@
 import React from 'react'
 import { View } from '@instructure/ui-view'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { BylineProps } from '../props'
+
 export default {
   propValues: {
     title: [null, 'Graham Taylor'],
@@ -51,4 +54,4 @@ export default {
       )
     }
   }
-}
+} as StoryConfig<BylineProps>

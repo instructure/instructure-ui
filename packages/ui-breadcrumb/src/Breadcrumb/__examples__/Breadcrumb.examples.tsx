@@ -27,6 +27,9 @@ import { IconBankLine } from '@instructure/ui-icons'
 
 import { BreadcrumbLink } from '../index'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { BreadcrumbProps } from '../props'
+
 export default {
   propValues: {
     children: [
@@ -52,10 +55,9 @@ export default {
       ]
     ]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       label: 'You are here:'
     }
   }
-}
+} as StoryConfig<BreadcrumbProps>

@@ -24,14 +24,16 @@
 
 import React from 'react'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { ToggleGroupProps } from '../props'
+
 export default {
   sectionProp: 'size',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       toggleLabel: 'Toggle the details',
       summary: 'This is the summary',
       children: <span>hello content</span>
     }
   }
-}
+} as StoryConfig<ToggleGroupProps>

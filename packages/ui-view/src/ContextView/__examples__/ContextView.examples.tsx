@@ -21,7 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { ContextViewProps } from '../props'
 
 export default {
   sectionProp: 'background',
@@ -35,4 +39,4 @@ export default {
       debug: false
     }
   }
-}
+} as StoryConfig<ContextViewProps>

@@ -21,6 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { RatingProps } from '../props'
+
 export default {
   sectionProp: 'size',
   propValues: {
@@ -28,11 +32,10 @@ export default {
     iconCount: [3, 5],
     valueNow: [0, 2.4, 2.5, 5]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       label: 'Final rating',
       valueMax: 5
     }
   }
-}
+} as StoryConfig<RatingProps>

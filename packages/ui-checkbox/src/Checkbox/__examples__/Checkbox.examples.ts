@@ -22,23 +22,24 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { CheckboxProps } from '../props'
+
 export default {
   maxExamplesPerPage: 50,
   sectionProp: 'variant',
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       value: 'example',
       label: 'A checkbox component',
       readOnly: false
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       (props.variant === 'simple' && props.labelPlacement !== 'end') ||
       (props.variant === 'toggle' && props.indeterminate)
     )
   }
-}
+} as StoryConfig<CheckboxProps>

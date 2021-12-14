@@ -21,8 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
 import { Tabs } from '../index'
+
 import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { TabsProps } from '../props'
 

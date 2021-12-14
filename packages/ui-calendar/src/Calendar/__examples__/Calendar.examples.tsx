@@ -25,6 +25,7 @@
 import React from 'react'
 
 import { Calendar } from '../index'
+
 import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { CalendarProps } from '../props'
 

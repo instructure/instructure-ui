@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { TextAreaProps } from '../props'
+
 export default {
   maxExamplesPerPage: 50,
   maxExamples: 500,
@@ -46,4 +49,4 @@ export default {
   getParameters: () => {
     return { disable: true }
   }
-}
+} as StoryConfig<TextAreaProps>

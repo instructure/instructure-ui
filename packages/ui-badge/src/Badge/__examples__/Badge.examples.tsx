@@ -21,8 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import { View } from '@instructure/ui-view'
+
 import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { BadgeProps } from '../props'
 
@@ -40,7 +42,7 @@ export default {
       )
     }
   },
-  filter: (props: BadgeProps) => {
+  filter: (props) => {
     return (
       (props.type === 'notification' && props.countUntil) ||
       (props.standalone && props.placement !== 'start top')

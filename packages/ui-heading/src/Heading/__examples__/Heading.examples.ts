@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
-import { HeadingProps } from '../props'
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { HeadingProps } from '../props'
+
 export default {
   sectionProp: 'level',
   propValues: {
@@ -40,7 +42,7 @@ export default {
       margin: 'medium none'
     }
   },
-  getExampleProps: (props: HeadingProps) => {
+  getExampleProps: (props) => {
     return {
       background: ['primary-inverse', 'secondary-inverse'].includes(
         props.color!
@@ -49,4 +51,4 @@ export default {
         : 'primary'
     }
   }
-}
+} as StoryConfig<HeadingProps>

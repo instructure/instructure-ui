@@ -24,6 +24,7 @@
 
 import { IconTrashSolid } from '@instructure/ui-icons'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { LinkProps } from '../props'
 
 const longString =
@@ -42,16 +43,16 @@ export default {
       href: 'http://instructure.design'
     }
   },
-  getExampleProps: (props: LinkProps) => {
+  getExampleProps: (props) => {
     return {
       background: props.color === 'link' ? 'primary' : 'primary-inverse'
     }
   },
-  filter: (props: LinkProps) => {
+  filter: (props) => {
     return (
       (props.iconPlacement && !props.renderIcon) ||
-      (!props.iconPlacement && props.renderIcon) ||
+      (!props.iconPlacement && !!props.renderIcon) ||
       props.disabled
     )
   }
-}
+} as StoryConfig<LinkProps>

@@ -26,13 +26,15 @@ import React from 'react'
 
 import { Table } from '../index'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { TableProps } from '../props'
+
 export default {
   sectionProp: 'layout',
   propValues: {
     layout: ['auto', 'fixed', 'stacked']
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       caption: 'Top rated movies',
       children: [
@@ -67,4 +69,4 @@ export default {
       ]
     }
   }
-}
+} as StoryConfig<TableProps>

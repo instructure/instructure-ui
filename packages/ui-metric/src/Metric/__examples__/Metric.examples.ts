@@ -22,11 +22,14 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { MetricProps } from '../props'
+
 export default {
-  getComponentProps: (_props: any) => {
+  getComponentProps: () => {
     return {
       renderLabel: 'Grade',
       renderValue: '90%'
     }
   }
-}
+} as StoryConfig<MetricProps>

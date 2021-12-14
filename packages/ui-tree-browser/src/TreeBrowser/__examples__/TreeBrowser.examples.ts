@@ -28,6 +28,9 @@ import {
   IconAnnotateSolid
 } from '@instructure/ui-icons'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { TreeBrowserProps } from '../props'
+
 export default {
   sectionProp: 'size',
   propValues: {
@@ -38,7 +41,6 @@ export default {
     collectionIconExpanded: [undefined, IconExpandSolid],
     selectionType: ['none', 'single']
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getComponentProps: (props) => {
     const rootCollectionName =
       props.selectionType === 'single'
@@ -89,7 +91,6 @@ export default {
       defaultExpanded: [1]
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       // prevent unnecessary icon permutations
@@ -99,10 +100,9 @@ export default {
         props.collectionIconExpanded === undefined)
     )
   },
-  // @ts-expect-error ts-migrate(6198) FIXME: All destructured elements are unused.
-  getParameters: ({ examples, index }) => {
+  getParameters: () => {
     return {
       chromatic: { delay: 1000 }
     }
   }
-}
+} as StoryConfig<TreeBrowserProps>

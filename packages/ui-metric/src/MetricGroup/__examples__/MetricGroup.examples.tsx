@@ -23,9 +23,14 @@
  */
 
 import React from 'react'
+
 import { Metric } from '../../Metric'
 
-const getMetric = (textAlign: any) => {
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { MetricProps } from '../../Metric/props'
+import type { MetricGroupProps } from '../props'
+
+const getMetric = (textAlign: MetricProps['textAlign']) => {
   return [
     <Metric
       key="grade"
@@ -55,4 +60,4 @@ export default {
   propValues: {
     children: [getMetric('start'), getMetric('center'), getMetric('end')]
   }
-}
+} as StoryConfig<MetricGroupProps>

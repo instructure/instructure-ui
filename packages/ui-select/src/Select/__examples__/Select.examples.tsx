@@ -23,8 +23,10 @@
  */
 
 import React from 'react'
+
 import { IconUserLine } from '@instructure/ui-icons'
 import { Select } from '../../Select'
+
 import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { SelectProps } from '../../Select/props'
 

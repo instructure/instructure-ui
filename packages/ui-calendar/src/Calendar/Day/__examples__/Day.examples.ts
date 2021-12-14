@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { CalendarDayProps } from '../props'
 import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { CalendarDayProps } from '../props'
 
 export default {
   getComponentProps: () => {

@@ -26,8 +26,11 @@ import React from 'react'
 
 import { Checkbox } from '../../Checkbox'
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'variant' implicitly has an 'any' type.
-const getChildren = (variant) => {
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { CheckboxGroupProps } from '../props'
+import type { CheckboxProps } from '../../Checkbox/props'
+
+const getChildren = (variant: CheckboxProps['variant']) => {
   return [
     <Checkbox variant={variant} key="tennis" label="Tennis" value="tennis" />,
     <Checkbox
@@ -52,11 +55,10 @@ export default {
   propValues: {
     children: [getChildren('simple'), getChildren('toggle')]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       name: 'sports',
       description: 'Select your favorite sports'
     }
   }
-}
+} as StoryConfig<CheckboxGroupProps>

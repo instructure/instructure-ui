@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { TruncateTextProps } from '../props'
+
 export default {
   propValues: {
     maxLines: [1, 3]
@@ -40,4 +43,4 @@ export default {
   getParameters: () => {
     return { disable: true }
   }
-}
+} as StoryConfig<TruncateTextProps>

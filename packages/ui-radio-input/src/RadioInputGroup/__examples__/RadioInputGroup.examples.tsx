@@ -25,6 +25,7 @@
 import React from 'react'
 
 import { RadioInput } from '../../RadioInput'
+
 import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { RadioInputGroupProps } from '../props'
 
