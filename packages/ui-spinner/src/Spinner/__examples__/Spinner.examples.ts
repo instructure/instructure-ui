@@ -22,7 +22,10 @@
  * SOFTWARE.
  */
 
+<<<<<<< HEAD
 import type { StoryConfig } from '@instructure/ui-test-utils'
+=======
+>>>>>>> 5dd269ac2 (chore(ui-spinner): tS typing in `Spinner.test.tsx` and `Spinner.examples.ts`)
 import type { SpinnerProps } from '../props'
 
 export default {
@@ -32,7 +35,7 @@ export default {
       renderTitle: 'Loading'
     }
   },
-  getExampleProps: (props) => {
+  getExampleProps: (props: SpinnerProps) => {
     return {
       background: props.variant === 'inverse' ? 'primary-inverse' : 'primary'
     }
