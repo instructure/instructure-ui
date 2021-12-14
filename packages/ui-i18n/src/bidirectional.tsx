@@ -31,7 +31,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 // that uses the bidirectional decorator.
 // see https://github.com/microsoft/TypeScript/issues/4881
 export type BidirectionalProps = {
-  dir?: 'ltr' | 'rtl' // TODO add | 'auto' in the future
+  dir?: 'ltr' | 'rtl'
 }
 
 type BidirectionalInternalProps = {
