@@ -22,16 +22,16 @@
  * SOFTWARE.
  */
 
+import type { SpinnerProps } from '../props'
+
 export default {
   sectionProp: 'variant',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       renderTitle: 'Loading'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getExampleProps: (props) => {
+  getExampleProps: (props: SpinnerProps) => {
     return {
       background: props.variant === 'inverse' ? 'primary-inverse' : 'primary'
     }

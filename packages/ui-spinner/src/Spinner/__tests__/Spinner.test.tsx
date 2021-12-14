@@ -28,6 +28,7 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { Spinner } from '../index'
 import { SpinnerLocator } from '../SpinnerLocator'
 import { View } from '@instructure/ui-view'
+import type { SpinnerProps } from '../props'
 
 describe('<Spinner />', async () => {
   it('should render', async () => {
@@ -47,8 +48,7 @@ describe('<Spinner />', async () => {
   })
 
   it('should render the contents of a component used in renderTitle', async () => {
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'children' implicitly has an 'any'... Remove this comment to see the full error message
-    const Translation = ({ children }) => (
+    const Translation = ({ children }: SpinnerProps) => (
       <span>I have translated {children}.</span>
     )
     await mount(
@@ -62,7 +62,7 @@ describe('<Spinner />', async () => {
   })
 
   describe('when passing down props to View', async () => {
-    const allowedProps = {
+    const allowedProps: { [key: string]: any } = {
       margin: 'small',
       elementRef: () => {},
       as: 'div'
@@ -84,7 +84,6 @@ describe('<Spinner />', async () => {
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
-            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
 
