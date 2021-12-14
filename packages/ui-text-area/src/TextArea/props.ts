@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+import type { TextareaHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -32,9 +34,8 @@ import type {
   PropValidators,
   TextAreaTheme
 } from '@instructure/shared-types'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormMessage, FormFieldOwnProps } from '@instructure/ui-form-field'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import { TextareaHTMLAttributes } from 'react'
 
 type TextAreaOwnProps = {
   label: React.ReactNode
@@ -113,12 +114,15 @@ type PropKeys = keyof TextAreaOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TextAreaProps = TextAreaOwnProps &
-  WithStyleProps<TextAreaTheme, TextAreaStyle> &
-  OtherHTMLAttributes<
-    TextAreaOwnProps,
-    TextareaHTMLAttributes<TextAreaOwnProps>
-  >
+type TextAreaProps =
+  // pickProps passes through FormField.allowedProps, except the ones set manually
+  Omit<FormFieldOwnProps, 'label' | 'inline' | 'id' | 'elementRef'> &
+    TextAreaOwnProps &
+    WithStyleProps<TextAreaTheme, TextAreaStyle> &
+    OtherHTMLAttributes<
+      TextAreaOwnProps,
+      TextareaHTMLAttributes<TextAreaOwnProps>
+    >
 
 type TextAreaStyle = ComponentStyle<
   'textArea' | 'textAreaLayout' | 'textAreaOutline'

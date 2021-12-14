@@ -21,6 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import React from 'react'
+import type { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { FormPropTypes } from '@instructure/ui-form-field'
@@ -30,31 +33,128 @@ import type {
   NumberInputTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import { InputHTMLAttributes } from 'react'
 
 type NumberInputOwnProps = {
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * The form field label.
+   */
+  renderLabel: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * The id of the input. One is generated if not supplied.
+   */
   id?: string
+
+  /**
+   * Specifies if interaction with the input is enabled, disabled, or readonly.
+   * When "disabled", the input changes visibly to indicate that it cannot
+   * receive user interactions. When "readonly" the input still cannot receive
+   * user interactions but it keeps the same styles as if it were enabled.
+   */
   interaction?: InteractionType
+
+  /**
+   * Array of objects with shape: `{
+   *   text: ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
+   */
   messages?: FormMessage[]
+
+  /**
+   * Html placeholder text to display when the input has no value. This
+   * should be hint text, not a label replacement.
+   */
   placeholder?: string
+
+  /**
+   * Whether or not the text input is required.
+   */
   isRequired?: boolean
+
+  /**
+   * Whether or not to display the up/down arrow buttons.
+   */
   showArrows?: boolean
+
+  /**
+   * The size of the input.
+   */
   size?: 'medium' | 'large'
+
+  /**
+   * The value of the input (should be accompanied by an `onChange` prop).
+   */
   value?: string | number
+
+  /**
+   * The width of the input.
+   */
   width?: string
+
+  /**
+   * The display of the root element.
+   */
   display?: 'inline-block' | 'block'
-  inputRef?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onChange?: (...args: any[]) => any
-  onDecrement?: (...args: any[]) => any
-  onIncrement?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
+
+  /**
+   * A function that provides a reference to the actual input element.
+   */
+  inputRef?: (element: HTMLInputElement | null) => void
+
+  /**
+   * Callback fired when input receives focus.
+   */
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
+
+  /**
+   * Callback fired when the input loses focus.
+   */
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+
+  /**
+   * Callback executed when the input fires a change event.
+   * @param {Object} event - the event object
+   * @param {string} value - the string value of the input
+   */
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void
+
+  /**
+   * Called when the down arrow button is clicked, or the down arrow key is
+   * pressed.
+   */
+  onDecrement?: (
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLButtonElement>
+  ) => void
+
+  /**
+   * Called when the up arrow button is clicked, or the up arrow key is
+   * pressed.
+   */
+  onIncrement?: (
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLButtonElement>
+  ) => void
+
+  /**
+   * Callback fired when a key is pressed.
+   */
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+
+  /**
+   * The inputMode attribute of the underlying `input` element can be one of ['numeric', 'decimal', 'tel']
+   */
   inputMode?: 'numeric' | 'decimal' | 'tel'
+
+  /**
+   * The text alignment of the input.
+   */
   textAlign?: 'start' | 'center'
 }
 
@@ -71,12 +171,15 @@ type PropKeys = keyof NumberInputOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type NumberInputProps = NumberInputOwnProps &
-  WithStyleProps<NumberInputTheme, NumberInputStyle> &
-  OtherHTMLAttributes<
-    NumberInputOwnProps,
-    InputHTMLAttributes<NumberInputOwnProps>
-  >
+type NumberInputProps =
+  // pickProps passes through FormField.allowedProps, except the ones set manually
+  Omit<FormFieldOwnProps, 'label' | 'inline' | 'id' | 'elementRef'> &
+    NumberInputOwnProps &
+    WithStyleProps<NumberInputTheme, NumberInputStyle> &
+    OtherHTMLAttributes<
+      NumberInputOwnProps,
+      InputHTMLAttributes<NumberInputOwnProps>
+    >
 
 type NumberInputStyle = ComponentStyle<
   | 'numberInput'
@@ -88,96 +191,25 @@ type NumberInputStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The form field label.
-   */
   renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  /**
-   * The id of the input. One is generated if not supplied.
-   */
   id: PropTypes.string,
-  /**
-   * Specifies if interaction with the input is enabled, disabled, or readonly.
-   * When "disabled", the input changes visibly to indicate that it cannot
-   * receive user interactions. When "readonly" the input still cannot receive
-   * user interactions but it keeps the same styles as if it were enabled.
-   */
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  /**
-   * Object with shape: `{
-   *   text: PropTypes.node,
-   *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   * }`
-   */
   messages: PropTypes.arrayOf(FormPropTypes.message),
-  /**
-   * Html placeholder text to display when the input has no value. This
-   * should be hint text, not a label replacement.
-   */
   placeholder: PropTypes.string,
-  /**
-   * Whether or not the text input is required.
-   */
   isRequired: PropTypes.bool,
-  /**
-   * Whether or not to display the up/down arrow buttons.
-   */
   showArrows: PropTypes.bool,
-  /**
-   * The size of the input.
-   */
   size: PropTypes.oneOf(['medium', 'large']),
-  /**
-   * The value of the input (should be accompanied by an `onChange` prop).
-   */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * The width of the input.
-   */
   width: PropTypes.string,
-  /**
-   * The display of the root element.
-   */
   display: PropTypes.oneOf(['inline-block', 'block']),
-  /**
-   * A function that provides a reference to the actual input element.
-   */
   inputRef: PropTypes.func,
-  /**
-   * Callback fired when input receives focus.
-   */
   onFocus: PropTypes.func,
-  /**
-   * Callback fired when the input loses focus.
-   */
   onBlur: PropTypes.func,
-  /**
-   * Callback executed when the input fires a change event.
-   * @param {Object} event - the event object
-   * @param {Object} value - the string value of the input
-   */
   onChange: PropTypes.func,
-  /**
-   * Called when the down arrow button is clicked, or the down arrow key is
-   * pressed.
-   */
   onDecrement: PropTypes.func,
-  /**
-   * Called when the up arrow button is clicked, or the up arrow key is
-   * pressed.
-   */
   onIncrement: PropTypes.func,
-  /**
-   * Callback fired when a key is pressed.
-   */
   onKeyDown: PropTypes.func,
-  /**
-   * The inputMode attribute of the underlying `input` element can be one of ['numeric', 'decimal', 'tel']
-   */
   inputMode: PropTypes.oneOf(['numeric', 'decimal', 'tel']),
-  /**
-   * The text alignment of the input.
-   */
   textAlign: PropTypes.oneOf(['start', 'center'])
 }
 
