@@ -30,10 +30,8 @@ import {
   within,
   generateA11yTests
 } from '@instructure/ui-test-utils'
-import type { StoryConfig } from '@instructure/ui-test-utils'
 import { Billboard } from '../index'
 import BillboardExamples from '../__examples__/Billboard.examples'
-import { BillboardProps } from '../props'
 
 describe('<Billboard />', async () => {
   it('should render', async () => {
