@@ -55,6 +55,7 @@ class Spinner extends Component<SpinnerProps> {
   }
 
   ref: Element | null = null
+  titleId: string | undefined
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
@@ -66,11 +67,8 @@ class Spinner extends Component<SpinnerProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: SpinnerProps) {
     super(props)
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'Spinner... Remove this comment to see the full error message
     this.titleId = uid('Spinner')
   }
 
@@ -103,8 +101,7 @@ class Spinner extends Component<SpinnerProps> {
 
     const hasTitle = this.props.renderTitle
     error(
-      // @ts-expect-error FIXME
-      hasTitle,
+      !!hasTitle,
       '[Spinner] The renderTitle prop is necessary for screen reader support.'
     )
 
@@ -119,11 +116,9 @@ class Spinner extends Component<SpinnerProps> {
         <svg
           css={this.props.styles?.circle}
           role="img"
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'Spinner... Remove this comment to see the full error message
           aria-labelledby={this.titleId}
           focusable="false"
         >
-          {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'Spinner... Remove this comment to see the full error message */}
           <title id={this.titleId}>
             {callRenderProp(this.props.renderTitle)}
           </title>
