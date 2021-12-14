@@ -21,9 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { Options } from '../index'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { OptionsProps } from '../props'
 
 export default {
   maxExamplesPerPage: 50,
@@ -71,4 +76,4 @@ export default {
       ]
     ]
   }
-}
+} as StoryConfig<OptionsProps>

@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { PillProps } from '../props'
+
 export default {
   sectionProp: 'color',
   propValues: {
@@ -30,4 +33,4 @@ export default {
   getParameters: () => {
     return { disable: true }
   }
-}
+} as StoryConfig<PillProps>

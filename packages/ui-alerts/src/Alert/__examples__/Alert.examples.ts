@@ -21,6 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { AlertProps } from '../props'
+
 export default {
   sectionProp: 'variant',
   propValues: {
@@ -32,7 +36,7 @@ export default {
         'to fill'
     ]
   },
-  getComponentProps: (_props: any) => {
+  getComponentProps: () => {
     return {
       margin: 'medium',
       screenReaderOnly: false,
@@ -41,4 +45,4 @@ export default {
       open: true
     }
   }
-}
+} as StoryConfig<AlertProps>

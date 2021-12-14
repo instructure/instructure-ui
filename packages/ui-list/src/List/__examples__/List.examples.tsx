@@ -21,9 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
 import { List } from '../index'
-import { ListProps } from '../props'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { ListProps } from '../props'
 
 export default {
   sectionProp: 'size',
@@ -36,10 +40,10 @@ export default {
       ]
     }
   },
-  filter: (props: ListProps) => {
+  filter: (props) => {
     return (
       (['dashed', 'solid'].includes(props.delimiter!) && props.as === 'ol') ||
       (props.delimiter !== 'none' && props.itemSpacing !== 'none')
     )
   }
-}
+} as StoryConfig<ListProps>

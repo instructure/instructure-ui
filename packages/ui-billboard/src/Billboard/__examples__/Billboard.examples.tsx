@@ -25,8 +25,9 @@ import React from 'react'
 
 import { IconAnnouncementLine } from '@instructure/ui-icons'
 import { Img } from '@instructure/ui-img'
-import { BillboardProps, HeroIconSize } from '../props'
+
 import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { BillboardProps, HeroIconSize } from '../props'
 
 export default {
   sectionProp: 'size',
@@ -53,7 +54,7 @@ export default {
       margin: 'medium small'
     }
   },
-  filter: (props: BillboardProps) => {
+  filter: (props) => {
     return (
       props.size !== 'medium' &&
       !(

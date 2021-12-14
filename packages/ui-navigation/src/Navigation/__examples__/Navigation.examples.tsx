@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 
 import {
@@ -32,9 +33,11 @@ import {
 
 import { NavigationItem } from '../index'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { NavigationProps } from '../props'
+
 export default {
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       label: "I'm the main nav",
       toggleLabel: {
@@ -74,8 +77,7 @@ export default {
       ]
     }
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getExampleProps: (props) => {
+  getExampleProps: () => {
     return {
       style: {
         width: '5.25rem',
@@ -83,4 +85,4 @@ export default {
       }
     }
   }
-}
+} as StoryConfig<NavigationProps>

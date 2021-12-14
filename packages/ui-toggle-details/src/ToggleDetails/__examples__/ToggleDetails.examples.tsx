@@ -24,13 +24,15 @@
 
 import React from 'react'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { ToggleDetailsProps } from '../props'
+
 export default {
   sectionProp: 'variant',
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       summary: 'This is the summary',
       children: <span>hello content</span>
     }
   }
-}
+} as StoryConfig<ToggleDetailsProps>

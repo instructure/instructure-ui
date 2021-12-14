@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { DateTimeInputProps } from '../props'
+
 export default {
   sectionProp: 'layout',
   propValues: {
@@ -50,4 +53,4 @@ export default {
       locale: 'de-AT'
     }
   }
-}
+} as StoryConfig<DateTimeInputProps>

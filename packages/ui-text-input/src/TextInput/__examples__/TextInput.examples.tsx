@@ -28,6 +28,7 @@ import { IconSearchLine } from '@instructure/ui-icons'
 import { Badge } from '@instructure/ui-badge'
 import { Tag } from '@instructure/ui-tag'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { TextInputProps } from '../props'
 
 const renderBeforeInput = () => {
@@ -49,6 +50,7 @@ const renderBeforeInput = () => {
     />
   )
 }
+
 export default {
   sectionProp: 'size',
   maxExamplesPerPage: 50,
@@ -71,7 +73,7 @@ export default {
     }
   },
   excludeProps: ['readOnly', 'disabled'],
-  filter: (props: TextInputProps) => {
+  filter: (props) => {
     return (
       (props.display === 'inline-block' && !props.width) ||
       (props.renderBeforeInput && props.width) ||
@@ -81,4 +83,4 @@ export default {
       (props.size !== 'medium' && props.width)
     )
   }
-}
+} as StoryConfig<TextInputProps>

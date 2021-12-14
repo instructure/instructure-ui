@@ -23,6 +23,8 @@
  */
 
 import React from 'react'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { TooltipProps } from '../props'
 
 export default {
@@ -34,7 +36,7 @@ export default {
       </a>
     ]
   },
-  getComponentProps: (_props: TooltipProps) => {
+  getComponentProps: () => {
     return {
       renderTip: 'Hello world',
       isShowingContent: true,
@@ -42,13 +44,12 @@ export default {
       placement: 'bottom center'
     } as const
   },
-  getExampleProps: (props: TooltipProps) => {
+  getExampleProps: () => {
     return {
-      dir: (props as any).dir,
       as: 'div',
       margin: 'large small',
       padding: 'x-large',
       textAlign: 'center'
     } as const
   }
-}
+} as StoryConfig<TooltipProps>

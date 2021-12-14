@@ -25,6 +25,8 @@
 import React from 'react'
 
 import generateMessages from './generateMessages'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { FormFieldGroupProps } from '../props'
 
 export default {
@@ -43,7 +45,7 @@ export default {
       ]
     }
   },
-  filter: (props: FormFieldGroupProps) => {
+  filter: (props) => {
     return (
       props.vAlign ||
       props.startAt ||
@@ -51,4 +53,4 @@ export default {
       (props.layout !== 'inline' && props.vAlign !== 'middle')
     )
   }
-}
+} as StoryConfig<FormFieldGroupProps>

@@ -23,7 +23,11 @@
  */
 
 import React from 'react'
+
 import { SimpleSelect } from '../../SimpleSelect'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { SimpleSelectProps } from '../props'
 
 export default {
   sectionProp: 'size',
@@ -64,19 +68,17 @@ export default {
       ]
     ]
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
-      inputValue: !props.isEditable ? 'Option one' : '',
+      inputValue: 'Option one',
       renderLabel: 'Choose an option',
       constrain: 'scroll-parent'
     }
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     if (props.interaction === 'readonly') return true
     if (props.isRequired) return true
 
     return false
   }
-}
+} as StoryConfig<SimpleSelectProps>

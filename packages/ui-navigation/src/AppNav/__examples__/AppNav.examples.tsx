@@ -29,9 +29,11 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { IconArcSolid } from '@instructure/ui-icons'
 import { AppNav } from '../index'
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { AppNavProps } from '../props'
+
 export default {
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       screenReaderLabel: 'Navigation label',
       renderAfterItems: <span>renderAfter content!</span>,
@@ -59,4 +61,4 @@ export default {
       ]
     }
   }
-}
+} as StoryConfig<AppNavProps>

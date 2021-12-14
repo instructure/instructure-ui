@@ -21,13 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { TextProps } from '../props'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { TextProps } from '../props'
 
 export default {
   sectionProp: 'weight',
   maxExamplesPerPage: 50,
   maxExamples: 1000,
-  getComponentProps: (props: TextProps) => {
+  getComponentProps: (props) => {
     return {
       children:
         props.size &&
@@ -36,7 +38,7 @@ export default {
           : 'Lorem ipsum dolor sit amet, consectetur'
     }
   },
-  getExampleProps: (props: TextProps) => {
+  getExampleProps: (props) => {
     return {
       background: props?.color?.includes('inverse')
         ? 'primary-inverse'
@@ -44,7 +46,7 @@ export default {
       maxWidth: '25rem'
     }
   },
-  filter: (props: TextProps) => {
+  filter: (props) => {
     return (
       // Only generate a 1 variation for non-'primary' color
       (props.color !== 'primary' &&
@@ -65,4 +67,4 @@ export default {
           props.wrap !== 'normal'))
     )
   }
-}
+} as StoryConfig<TextProps>

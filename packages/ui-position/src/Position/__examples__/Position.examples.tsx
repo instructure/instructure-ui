@@ -21,8 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
-import { PositionProps } from '../props'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { PositionProps } from '../props'
 
 export default {
   propValues: {
@@ -51,7 +54,7 @@ export default {
       'start stretch'
     ]
   },
-  getComponentProps: (props: PositionProps) => {
+  getComponentProps: (props) => {
     const targetSize = '3px'
     const contentSize = '48px'
     const xStretch =
@@ -114,7 +117,7 @@ export default {
         )
     }
   },
-  getExampleProps: (props: PositionProps) => {
+  getExampleProps: (props) => {
     const xStretch =
       props.placement == 'top stretch' || props.placement === 'bottom stretch'
     const yStretch =
@@ -136,4 +139,4 @@ export default {
       withVisualDebug: true
     }
   }
-}
+} as StoryConfig<PositionProps>

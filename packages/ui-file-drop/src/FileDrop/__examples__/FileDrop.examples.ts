@@ -22,13 +22,15 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { FileDropProps } from '../props'
+
 export default {
   propValues: {
     // eslint-disable-next-line no-undefined
     messages: [undefined, [{ type: 'hint', text: 'hint text' }]]
   },
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       accept: 'image/*',
       renderLabel: 'Upload a file',
@@ -36,4 +38,4 @@ export default {
       shouldAllowMultiple: false
     }
   }
-}
+} as StoryConfig<FileDropProps>

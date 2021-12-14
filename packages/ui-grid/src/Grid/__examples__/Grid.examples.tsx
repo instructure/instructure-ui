@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
 import { Grid } from '../index'
 
 import type { StoryConfig } from '@instructure/ui-test-utils'
@@ -54,7 +56,7 @@ export default {
     hAlign: ['start', 'center', 'end', 'space-around', 'space-between'],
     vAlign: ['top', 'middle', 'bottom']
   },
-  filter: (props: GridProps) => {
+  filter: (props) => {
     return (
       props.startAt ||
       props.visualDebug ||

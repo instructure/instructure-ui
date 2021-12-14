@@ -23,6 +23,8 @@
  */
 
 import React from 'react'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { PopoverProps } from '../props'
 
 export default {
@@ -50,7 +52,7 @@ export default {
       children: <h2>Hello World</h2>
     }
   },
-  getExampleProps: (props: PopoverProps) => {
+  getExampleProps: (props) => {
     return {
       dir: props.dir,
       as: 'div',
@@ -61,7 +63,7 @@ export default {
       textAlign: 'center'
     }
   },
-  filter: (props: PopoverProps) => {
+  filter: (props) => {
     // only generate 1 example if its not showing content
     return (
       !props.isShowingContent &&
@@ -75,4 +77,4 @@ export default {
         props.withArrow !== false)
     )
   }
-}
+} as StoryConfig<PopoverProps>

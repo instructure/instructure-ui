@@ -21,9 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
 import { Flex } from '../index'
-import { FlexProps } from '../props'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { FlexProps } from '../props'
 
 const regular = [
   <Flex.Item key="0">One</Flex.Item>,
@@ -65,7 +69,7 @@ export default {
   propValues: {
     children: [regular, shrink, grow]
   },
-  filter: (props: FlexProps) => {
+  filter: (props) => {
     return (
       props.withVisualDebug ||
       props.direction === 'row-reverse' ||
@@ -75,4 +79,4 @@ export default {
       props.textAlign === 'center'
     )
   }
-}
+} as StoryConfig<FlexProps>

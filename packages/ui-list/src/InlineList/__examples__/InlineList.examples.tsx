@@ -21,9 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
 import { InlineList } from '../index'
-import { InlineListProps } from '../props'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { InlineListProps } from '../props'
 
 export default {
   sectionProp: 'size',
@@ -36,11 +40,11 @@ export default {
       ]
     }
   },
-  filter: (props: InlineListProps) => {
+  filter: (props) => {
     return (
       // itemSpacing has no affect on the list if the delimiter prop is set
       // to anything other than 'none' so filter the others
       props.delimiter !== 'none' && props.itemSpacing !== 'none'
     )
   }
-}
+} as StoryConfig<InlineListProps>
