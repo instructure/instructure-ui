@@ -89,6 +89,14 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
       return (
         <TextDirectionContext.Consumer>
           {(dir) => {
+            if (
+              process.env.NODE_ENV !== 'production' &&
+              (dir as BidirectionalProps | 'auto') === 'auto'
+            ) {
+              console.warn(
+                "'auto' is not an accepted value for the 'dir' prop. Please pass 'ltr' or 'rtl' "
+              )
+            }
             return <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
           }}
         </TextDirectionContext.Consumer>
