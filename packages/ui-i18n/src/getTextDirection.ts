@@ -73,9 +73,10 @@ const getDefaultDir = () => {
 function getTextDirection(element?: Element) {
   if (canUseDOM) {
     if (typeof element === 'undefined' || element === document.documentElement)
-      return getDefaultDir() as CSSDirection
+      return getDefaultDir()
+
     return (
-      (element.getAttribute('dir') as CSSDirection) ||
+      (element.getAttribute('dir') as HTMLDirection) ||
       (getComputedStyle(element).direction as CSSDirection)
     )
   }

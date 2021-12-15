@@ -104,6 +104,12 @@ function InstUISettingsProvider({
 }: React.PropsWithChildren<InstUIProviderProps>) {
   const finalDir = dir || useContext(TextDirectionContext)
 
+  if (process.env.NODE_ENV !== 'production' && finalDir === 'auto') {
+    console.warn(
+      "'auto' is not an supported value for the 'dir' prop. Please pass 'ltr' or 'rtl'"
+    )
+  }
+
   return (
     <ThemeProvider theme={getTheme(theme)}>
       <TextDirectionContext.Provider value={finalDir}>
