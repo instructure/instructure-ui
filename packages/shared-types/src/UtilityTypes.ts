@@ -60,10 +60,23 @@ type OtherHTMLAttributes<
   Attributes extends React.HTMLAttributes<Props> = React.AllHTMLAttributes<Props>
 > = Omit<Attributes, keyof Props>
 
+/**
+ * Helper type for the propTypes object.
+ * It ensures that the passed prop type keys match with the propType version.
+ */
 type PropValidators<PropKeys extends string> = Record<
   PropKeys,
   PropTypes.Validator<unknown>
 >
+
+/**
+ * These props are not the components own prop, but we have to allow them,
+ * since these are passed to another component.
+ */
+type PickPropsWithExceptions<
+  TargetProps extends Record<string, any>,
+  ExcludedProps extends keyof TargetProps
+> = Omit<TargetProps, ExcludedProps>
 
 export type {
   DeepPartial,
@@ -71,5 +84,6 @@ export type {
   Nullable,
   CSSShorthandValue,
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  PickPropsWithExceptions
 }

@@ -21,6 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -29,28 +31,62 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
   PropValidators,
-  RangeInputTheme
+  RangeInputTheme,
+  PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { FormMessage } from '@instructure/ui-form-field'
+import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import { InputHTMLAttributes } from 'react'
+import type { InputHTMLAttributes } from 'react'
 
 type RangeInputOwnProps = {
   min: number
+
   max: number
+
+  /**
+   * value to set on initial render
+   */
   defaultValue?: number
-  value?: any // TODO: controllable(PropTypes.number)
-  onChange?: (...args: any[]) => any
+
+  /**
+   * the selected value (must be accompanied by an `onChange` prop)
+   */
+  value?: number // TODO: controllable(PropTypes.number)
+
+  /**
+   * when used with the `value` prop, the component will not control its own state
+   */
+  onChange?: (value: number | string) => void
+
   messages?: FormMessage[]
+
+  /**
+   * The size of the value label
+   */
   size?: 'small' | 'medium' | 'large'
+
   layout?: 'stacked' | 'inline'
+
   id?: string
+
   label: React.ReactNode
+
+  /**
+   * whether to display the current value
+   */
   displayValue?: boolean
+
   step?: number
-  formatValue?: (...args: any[]) => any
+
+  /**
+   * A function to format the displayed value
+   */
+  formatValue?: (value?: number, max?: number) => string
+
   inline?: boolean
+
   disabled?: boolean
+
   readOnly?: boolean
 }
 
@@ -58,48 +94,40 @@ type PropKeys = keyof RangeInputOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type RangeInputProps = RangeInputOwnProps &
-  WithStyleProps<RangeInputTheme, RangeInputStyle> &
-  OtherHTMLAttributes<
-    RangeInputOwnProps,
-    InputHTMLAttributes<RangeInputOwnProps>
-  >
+type RangeInputProps =
+  // pickProps passes through FormField.allowedProps, except the ones set manually
+  PickPropsWithExceptions<
+    FormFieldOwnProps,
+    'label' | 'inline' | 'id' | 'elementRef'
+  > &
+    RangeInputOwnProps &
+    WithStyleProps<RangeInputTheme, RangeInputStyle> &
+    OtherHTMLAttributes<
+      RangeInputOwnProps,
+      InputHTMLAttributes<RangeInputOwnProps>
+    >
 
 type RangeInputStyle = ComponentStyle<
   'rangeInput' | 'rangeInputInput' | 'rangeInputInputValue'
 >
 
+type RangeInputState = {
+  value?: number | string
+}
+
 const propTypes: PropValidators<PropKeys> = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
-  /**
-   * value to set on initial render
-   */
   defaultValue: PropTypes.number,
-  /**
-   * the selected value (must be accompanied by an `onChange` prop)
-   */
   value: controllable(PropTypes.number),
-  /**
-   * when used with the `value` prop, the component will not control its own state
-   */
   onChange: PropTypes.func,
   messages: PropTypes.arrayOf(FormPropTypes.message),
-  /**
-   * The size of the value label
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   layout: PropTypes.oneOf(['stacked', 'inline']),
   id: PropTypes.string,
   label: PropTypes.node.isRequired,
-  /**
-   * whether to display the current value
-   */
   displayValue: PropTypes.bool,
   step: PropTypes.number,
-  /**
-   * A function to format the displayed value
-   */
   formatValue: PropTypes.func,
   inline: PropTypes.bool,
   disabled: PropTypes.bool,
@@ -125,5 +153,5 @@ const allowedProps: AllowedPropKeys = [
   'readOnly'
 ]
 
-export type { RangeInputProps, RangeInputStyle }
+export type { RangeInputProps, RangeInputState, RangeInputStyle }
 export { propTypes, allowedProps }

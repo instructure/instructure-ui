@@ -163,7 +163,8 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets invalid when error messages are present', async () => {
-    let ref
+    let ref: RangeInput | undefined
+
     await mount(
       <RangeInput
         label="Opacity"
@@ -171,13 +172,12 @@ describe('<RangeInput />', async () => {
         max={100}
         min={0}
         messages={[{ text: 'Invalid name', type: 'error' }]}
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-        componentRef={(el) => (ref = el)}
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
+        componentRef={(el: RangeInput) => (ref = el)}
       />
     )
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    expect(ref.invalid).to.be.true()
+    expect(ref?.invalid).to.be.true()
   })
 
   describe('for a11y', async () => {
