@@ -63,12 +63,13 @@
     "prestart:examples": "yarn bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
     "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
-    "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged",
+    "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged ts:check:references",
     "husky:pre-push": "yarn lint:commit",
     "build-storybook": "lerna run bundle --stream --scope docs-examples",
     "prepare": "husky install",
     "ts:check": "lerna run ts:check --stream",
-    "postinstall": "yarn build:node-scripts"
+    "postinstall": "yarn build:node-scripts",
+    "ts:check:references": "node scripts/checkTSReferences.js"
   },
   "license": "MIT",
   "resolutions": {
@@ -77,6 +78,7 @@
   },
   "devDependencies": {
     "@types/react-dom": "^17.0.0",
+    "chalk": "4",
     "danger": "^10.7.0",
     "esbuild": "^0.13.9",
     "eslint": "^7",
