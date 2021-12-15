@@ -151,11 +151,19 @@ class PaginationPageInput extends Component<
     }
   }
 
-  handleDecrement = (event: React.UIEvent<HTMLInputElement>) => {
+  handleDecrement = (
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLButtonElement>
+  ) => {
     this.setNewPage(event, Math.floor(this.currentPage - 1))
   }
 
-  handleIncrement = (event: React.UIEvent<HTMLInputElement>) => {
+  handleIncrement = (
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLButtonElement>
+  ) => {
     this.setNewPage(event, Math.floor(this.currentPage + 1))
   }
 
@@ -170,7 +178,10 @@ class PaginationPageInput extends Component<
   }
 
   setNewPage(
-    event: React.UIEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLInputElement>,
     n: number
   ) {
     const number = this.getNumberWithinRange(n)

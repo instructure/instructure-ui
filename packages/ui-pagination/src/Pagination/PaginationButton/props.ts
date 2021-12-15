@@ -33,6 +33,12 @@ import type {
 type PaginationPageOwnProps = {
   children: React.ReactNode
   current?: boolean
+  onClick?: (
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLInputElement>
+  ) => void
 }
 
 type PropKeys = keyof PaginationPageOwnProps
@@ -50,10 +56,20 @@ const propTypes: PropValidators<PropKeys> = {
   /**
    * Whether the page is currently displayed
    */
-  current: PropTypes.bool
+  current: PropTypes.bool,
+  /**
+   * Whether the page is currently displayed
+   */
+  onClick: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = ['children', 'current']
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'current'
+
+  // we don't want to pass onClick
+  // 'onClick'
+]
 
 export type { PaginationPageProps }
 export { propTypes, allowedProps }

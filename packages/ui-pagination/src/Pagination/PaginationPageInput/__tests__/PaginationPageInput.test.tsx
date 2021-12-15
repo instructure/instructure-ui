@@ -27,16 +27,12 @@ import { expect, match, mount, stub } from '@instructure/ui-test-utils'
 import { PaginationPageInput } from '../index'
 import { PaginationPageInputLocator } from '../PaginationPageInputLocator'
 
-const defaultOnChange = (
-  e: React.SyntheticEvent<HTMLInputElement>,
-  value: number
-) => {
-  console.log(e, value) // eslint-disable-line no-console
-}
 const defaultSRLabel = (currentPage: number, numberOfPages: number) =>
   `Select page (${currentPage} of ${numberOfPages})`
 
 describe('<PaginationPageInput />', async () => {
+  const defaultOnChange = stub()
+
   it('should render', async () => {
     await mount(
       <PaginationPageInput

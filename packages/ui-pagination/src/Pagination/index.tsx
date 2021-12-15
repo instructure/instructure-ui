@@ -39,10 +39,7 @@ import { PaginationPageInput } from './PaginationPageInput'
 import generateStyle from './styles'
 
 import type { PaginationPageProps } from './PaginationButton/props'
-import type {
-  PaginationNavigationProps,
-  PaginationArrowDirections
-} from './PaginationArrowButton/props'
+import type { PaginationArrowDirections } from './PaginationArrowButton/props'
 
 import { propTypes, allowedProps } from './props'
 import type { PaginationProps, PaginationSnapshot } from './props'
@@ -80,7 +77,6 @@ type ArrowConfig = {
 category: components
 ---
 **/
-
 @withStyle(generateStyle, null)
 @testable()
 class Pagination extends Component<PaginationProps> {
@@ -267,10 +263,13 @@ class Pagination extends Component<PaginationProps> {
   }
 
   handleInputChange(
-    event: React.SyntheticEvent<HTMLInputElement>,
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLInputElement>,
     pageIndex: number
   ) {
-    this.childPages[pageIndex].props.onClick?.(event as any)
+    this.childPages[pageIndex].props.onClick?.(event)
   }
 
   renderPages(currentPageIndex: number) {
@@ -385,8 +384,7 @@ class Pagination extends Component<PaginationProps> {
 
     const disabled =
       page?.props?.disabled || this.props.disabled || !shouldEnableIcon
-    const onClick = page?.props
-      ?.onClick as React.MouseEventHandler<PaginationNavigationProps>
+    const onClick = page?.props?.onClick
 
     return shouldEnableIcon || this.showDisabledButtons ? (
       <PaginationArrowButton

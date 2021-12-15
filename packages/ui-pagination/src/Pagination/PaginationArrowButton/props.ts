@@ -36,6 +36,12 @@ type PaginationNavigationOwnProps = {
   direction?: PaginationArrowDirections
   label: string | React.ReactChild | React.ReactFragment
   buttonRef?: (...args: any[]) => any
+  onClick?: (
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLInputElement>
+  ) => void
 }
 
 type PropKeys = keyof PaginationNavigationOwnProps
@@ -48,10 +54,18 @@ type PaginationNavigationProps = PaginationNavigationOwnProps &
 const propTypes: PropValidators<PropKeys> = {
   direction: PropTypes.oneOf(['first', 'prev', 'next', 'last']),
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  buttonRef: PropTypes.func
+  buttonRef: PropTypes.func,
+  onClick: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = ['direction', 'label', 'buttonRef']
+const allowedProps: AllowedPropKeys = [
+  'direction',
+  'label',
+  'buttonRef'
+
+  // we don't want to pass onClick
+  // 'onClick'
+]
 
 export type { PaginationNavigationProps, PaginationArrowDirections }
 export { propTypes, allowedProps }

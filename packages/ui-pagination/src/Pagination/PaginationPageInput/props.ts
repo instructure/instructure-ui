@@ -44,7 +44,10 @@ type PaginationPageInputOwnProps = {
    * Fires when a new page index is selected
    */
   onChange: (
-    event: React.SyntheticEvent<HTMLInputElement>,
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLInputElement>,
     pageIndex: number
   ) => void
   /**
