@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import { ContextView } from '@instructure/ui-view'
 import { FormField } from '@instructure/ui-form-field'
@@ -35,17 +35,19 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { RangeInputProps } from './props'
+
+import type { RangeInputProps, RangeInputState } from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class RangeInput extends Component<RangeInputProps> {
+class RangeInput extends Component<RangeInputProps, RangeInputState> {
   static readonly componentId = 'RangeInput'
 
   static allowedProps = allowedProps
@@ -53,8 +55,7 @@ class RangeInput extends Component<RangeInputProps> {
 
   static defaultProps = {
     step: 1,
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'val' implicitly has an 'any' type.
-    formatValue: (val) => val,
+    formatValue: (val?: number) => val,
     max: 0,
     min: 0,
     inline: false,
@@ -66,18 +67,18 @@ class RangeInput extends Component<RangeInputProps> {
   }
 
   ref: Element | null = null
-  _input: HTMLInputElement | null = null
-  _inputListener: { remove(): void } | null = null
-  _changeListener: { remove(): void } | null = null
+
+  private _input: HTMLInputElement | null = null
+  private _inputListener: { remove(): void } | null = null
+  private _changeListener: { remove(): void } | null = null
+  private readonly defaultId: string
 
   handleRef = (el: Element | null) => {
     this.ref = el
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
-    super()
+  constructor(props: RangeInputProps) {
+    super(props)
 
     if (typeof props.value === 'undefined') {
       this.state = {
@@ -85,7 +86,6 @@ class RangeInput extends Component<RangeInputProps> {
       }
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'defaultId' does not exist on type 'Range... Remove this comment to see the full error message
     this.defaultId = uid('RangeInput')
   }
 
@@ -112,10 +112,8 @@ class RangeInput extends Component<RangeInputProps> {
     if (!this._input) {
       return
     }
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_inputListener' does not exist on type 'R... Remove this comment to see the full error message
-    this._inputListener.remove()
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_changeListener' does not exist on type '... Remove this comment to see the full error message
-    this._changeListener.remove()
+    this._inputListener?.remove()
+    this._changeListener?.remove()
   }
   /* end workaround */
 
@@ -123,8 +121,7 @@ class RangeInput extends Component<RangeInputProps> {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleChange = (event) => {
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { onChange, value } = this.props
 
     if (typeof value === 'undefined') {
@@ -137,13 +134,15 @@ class RangeInput extends Component<RangeInputProps> {
   }
 
   // controlled input must have an onChange, but we're handling it with native events
-  noopChange = () => {}
+  noopChange: React.ChangeEventHandler<HTMLInputElement> = () => {}
 
   get value() {
-    return typeof this.props.value === 'undefined'
-      ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'value' does not exist on type 'Readonly<... Remove this comment to see the full error message
-        this.state.value
-      : this.props.value
+    const value =
+      typeof this.props.value === 'undefined'
+        ? this.state.value!
+        : this.props.value
+
+    return typeof value === 'string' ? parseInt(value) : value
   }
 
   get invalid() {
@@ -156,11 +155,9 @@ class RangeInput extends Component<RangeInputProps> {
   }
 
   get id() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'defaultId' does not exist on type 'Range... Remove this comment to see the full error message
     return this.props.id || this.defaultId
   }
 
-  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderValue() {
     if (this.props.displayValue) {
       return (
@@ -169,12 +166,18 @@ class RangeInput extends Component<RangeInputProps> {
             htmlFor={this.id}
             css={this.props.styles?.rangeInputInputValue}
           >
-            {/* @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message */}
-            {this.props.formatValue(this.value)}
+            {/**
+             * Value can be undefined when no value or defaultValue is given,
+             * and then it renders an empty ContextView
+             * TODO: Ask a designer what the intended behaviour is
+             */}
+            {this.props.formatValue!(this.value, this.props.max)}
           </output>
         </ContextView>
       )
     }
+
+    return null
   }
 
   render() {
@@ -184,9 +187,9 @@ class RangeInput extends Component<RangeInputProps> {
 
     /* eslint-disable jsx-a11y/no-redundant-roles */
     return (
-      // @ts-expect-error ts-migrate(2554) FIXME: no overload..
       <FormField
         {...pickProps(this.props, FormField.allowedProps)}
+        label={this.props.label}
         id={this.id}
         elementRef={this.handleRef}
       >
@@ -207,8 +210,7 @@ class RangeInput extends Component<RangeInputProps> {
             aria-valuenow={this.value}
             aria-valuemin={this.props.min}
             aria-valuemax={this.props.max}
-            // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-            aria-valuetext={formatValue(this.value, this.props.max)}
+            aria-valuetext={formatValue!(this.value, this.props.max)}
             {...props}
             disabled={disabled || readOnly}
             aria-disabled={disabled || readOnly ? 'true' : undefined}

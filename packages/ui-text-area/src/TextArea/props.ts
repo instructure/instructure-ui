@@ -32,7 +32,8 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
   PropValidators,
-  TextAreaTheme
+  TextAreaTheme,
+  PickPropsWithExceptions
 } from '@instructure/shared-types'
 import type { FormMessage, FormFieldOwnProps } from '@instructure/ui-form-field'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -116,7 +117,10 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TextAreaProps =
   // pickProps passes through FormField.allowedProps, except the ones set manually
-  Omit<FormFieldOwnProps, 'label' | 'inline' | 'id' | 'elementRef'> &
+  PickPropsWithExceptions<
+    FormFieldOwnProps,
+    'label' | 'inline' | 'id' | 'elementRef'
+  > &
     TextAreaOwnProps &
     WithStyleProps<TextAreaTheme, TextAreaStyle> &
     OtherHTMLAttributes<

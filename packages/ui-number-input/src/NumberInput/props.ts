@@ -31,11 +31,12 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 import type {
   PropValidators,
   NumberInputTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
 
 type NumberInputOwnProps = {
   /**
@@ -173,7 +174,10 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type NumberInputProps =
   // pickProps passes through FormField.allowedProps, except the ones set manually
-  Omit<FormFieldOwnProps, 'label' | 'inline' | 'id' | 'elementRef'> &
+  PickPropsWithExceptions<
+    FormFieldOwnProps,
+    'label' | 'inline' | 'id' | 'elementRef'
+  > &
     NumberInputOwnProps &
     WithStyleProps<NumberInputTheme, NumberInputStyle> &
     OtherHTMLAttributes<

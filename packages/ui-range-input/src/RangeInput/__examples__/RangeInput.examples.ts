@@ -22,14 +22,16 @@
  * SOFTWARE.
  */
 
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { RangeInputProps } from '../props'
+
 export default {
   sectionProp: 'layout',
   maxExamplesPerPage: 50,
-  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-  getComponentProps: (props) => {
+  getComponentProps: () => {
     return {
       label: 'Opacity',
       onChange: () => {}
     }
   }
-}
+} as StoryConfig<RangeInputProps>
