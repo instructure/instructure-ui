@@ -377,5 +377,5 @@ const allowedProps: AllowedPropKeys = [
   'elementRef'
 ]
 
-export type { PopoverProps, PopoverState }
+export type { PopoverOwnProps, PopoverProps, PopoverState }
 export { propTypes, allowedProps }

@@ -31,7 +31,8 @@ import { element } from '@instructure/ui-prop-types'
 import type {
   PropValidators,
   AsElementType,
-  TooltipTheme
+  TooltipTheme,
+  OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type {
   PlacementPropValues,
@@ -39,12 +40,13 @@ import type {
   PositionMountNode
 } from '@instructure/ui-position'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { PopoverOwnProps } from '@instructure/ui-popover'
 
 type TooltipRenderChildrenArgs = {
   focused: boolean
-  getTriggerProps: <P extends Record<string, any>>(
-    props: P
-  ) => { 'aria-describedby': string } & P
+  getTriggerProps: <TriggerProps extends Record<string, any>>(
+    props: TriggerProps
+  ) => { 'aria-describedby': string } & TriggerProps
 }
 
 type TooltipRenderChildren = (
@@ -52,106 +54,154 @@ type TooltipRenderChildren = (
 ) => React.ReactNode
 
 type TooltipOwnProps = {
-  renderTip: React.ReactNode | ((...args: any[]) => any)
-  children: React.ReactNode | TooltipRenderChildren
-  isShowingContent?: boolean
-  defaultIsShowingContent?: boolean
-  as?: AsElementType
-  on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]
-  color?: 'primary' | 'primary-inverse'
-  placement?: PlacementPropValues
-  mountNode?: PositionMountNode
-  constrain?: PositionConstraint
-  positionTarget?: PositionMountNode
-  offsetX?: string | number
-  offsetY?: string | number
-  onShowContent?: (...args: any[]) => any
-  onHideContent?: (...args: any[]) => any
-}
-
-type PropKeys = keyof TooltipOwnProps
-
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-
-// For now it doesn't need the OtherHTMLAttributes, because the extra props
-// get passed to Popover and it doesn't handle them
-type TooltipProps = TooltipOwnProps & WithStyleProps<TooltipTheme, TooltipStyle>
-
-type TooltipStyle = ComponentStyle<'tooltip'>
-
-const propTypes: PropValidators<PropKeys> = {
   /**
-   * @param {Object} renderProps
-   * @param {Boolean} renderProps.focused - Is the Tooltip trigger focused?
-   * @param {Function} renderProps.getTriggerProps - Props to be spread onto the trigger element
+   * A ReactNode or a function that returns a ReactNode with the following params:
+   *
+   * @param {Boolean} focused - Is the Tooltip trigger focused?
+   * @param {Function} getTriggerProps - Props to be spread onto the trigger element
    */
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  children: React.ReactNode | TooltipRenderChildren
+
   /**
    * The content to render in the tooltip
    */
-  renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  renderTip: React.ReactNode | (() => React.ReactNode)
+
   /**
    * Whether or not the tooltip content is shown, when controlled
    */
-  isShowingContent: PropTypes.bool,
+  isShowingContent?: boolean
+
   /**
    * Whether or not to show the content by default, when uncontrolled
    */
-  defaultIsShowingContent: PropTypes.bool,
+  defaultIsShowingContent?: boolean
+
   /**
    * the element type to render as (assumes a single child if 'as' is undefined)
    */
-  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  as?: AsElementType
+
   /**
    * The action that causes the Content to display (`click`, `hover`, `focus`)
    */
-  on: PropTypes.oneOfType([
-    PropTypes.oneOf(['click', 'hover', 'focus']),
-    PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus']))
-  ]),
+  on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]
+
   /**
    * The color of the tooltip content
    */
-  color: PropTypes.oneOf(['primary', 'primary-inverse']),
+  color?: 'primary' | 'primary-inverse'
+
   /**
    * Specifies where the Tooltip will be placed in relation to the target element.
    * Ex. placement="bottom" will render the Tooltip below the triggering element
    * (Note: if there is not room, it will position opposite. Ex. "top" will
    * automatically switch to "bottom")
    */
-  placement: PositionPropTypes.placement,
+  placement?: PlacementPropValues
+
   /**
    * An element or a function returning an element to use as the mount node
    * for the `<Tooltip />` (defaults to `document.body`)
    */
-  mountNode: PositionPropTypes.mountNode,
+  mountNode?: PositionMountNode
+
   /**
    * The parent in which to constrain the tooltip.
    * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
    * or a function returning an element
    */
-  constrain: PositionPropTypes.constrain,
+  constrain?: PositionConstraint
+
   /**
    * The horizontal offset for the positioned content
    */
-  offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  offsetX?: string | number
+
   /**
    * The vertical offset for the positioned content
    */
-  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  offsetY?: string | number
+
   /**
    * Target element for positioning the Tooltip (if it differs from children/trigger)
    */
-  positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
+  positionTarget?: PositionMountNode
+
   /**
    * Callback fired when content is shown. When controlled, this callback is
    * fired when the tooltip expects to be shown
    */
-  onShowContent: PropTypes.func,
+  onShowContent?: (event: React.UIEvent | React.FocusEvent) => void
+
   /**
    * Callback fired when content is hidden. When controlled, this callback is
    * fired when the tooltip expects to be hidden
    */
+  onHideContent?: (
+    event: React.UIEvent | React.FocusEvent,
+    args: { documentClick: boolean }
+  ) => void
+}
+
+type PropKeys = keyof TooltipOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+// passes through props for Popover, except the ones set manually
+type PropsPassableToPopover = Omit<
+  PopoverOwnProps,
+  | 'isShowingContent'
+  | 'defaultIsShowingContent'
+  | 'on'
+  | 'shouldRenderOffscreen'
+  | 'shouldReturnFocus'
+  | 'placement'
+  | 'color'
+  | 'mountNode'
+  | 'constrain'
+  | 'shadow'
+  | 'offsetX'
+  | 'offsetY'
+  | 'positionTarget'
+  | 'renderTrigger'
+  | 'onShowContent'
+  | 'onHideContent'
+  | 'onFocus'
+  | 'onBlur'
+  | 'elementRef'
+>
+
+type TooltipProps = PropsPassableToPopover &
+  TooltipOwnProps &
+  WithStyleProps<TooltipTheme, TooltipStyle> &
+  // the OtherHTMLAttributes might be passed to the trigger or Popover
+  OtherHTMLAttributes<TooltipOwnProps>
+
+type TooltipStyle = ComponentStyle<'tooltip'>
+
+type TooltipState = {
+  hasFocus: boolean
+}
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  isShowingContent: PropTypes.bool,
+  defaultIsShowingContent: PropTypes.bool,
+  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  on: PropTypes.oneOfType([
+    PropTypes.oneOf(['click', 'hover', 'focus']),
+    PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus']))
+  ]),
+  color: PropTypes.oneOf(['primary', 'primary-inverse']),
+  placement: PositionPropTypes.placement,
+  mountNode: PositionPropTypes.mountNode,
+  constrain: PositionPropTypes.constrain,
+  offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
+  onShowContent: PropTypes.func,
   onHideContent: PropTypes.func
 }
 
@@ -175,6 +225,7 @@ const allowedProps: AllowedPropKeys = [
 
 export type {
   TooltipProps,
+  TooltipState,
   TooltipStyle,
   TooltipRenderChildren,
   TooltipRenderChildrenArgs

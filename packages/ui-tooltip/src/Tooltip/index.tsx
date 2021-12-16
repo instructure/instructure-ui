@@ -35,22 +35,24 @@ import {
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
+import type { PopoverProps } from '@instructure/ui-popover'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import type { TooltipProps, TooltipRenderChildren } from './props'
+import type { TooltipProps, TooltipState } from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Tooltip extends Component<TooltipProps> {
+class Tooltip extends Component<TooltipProps, TooltipState> {
   static readonly componentId = 'Tooltip'
 
   static allowedProps = allowedProps
@@ -60,18 +62,12 @@ class Tooltip extends Component<TooltipProps> {
     defaultIsShowingContent: false,
     color: 'primary',
     placement: 'top',
-    mountNode: null,
     constrain: 'window',
     offsetX: 0,
-    offsetY: 0,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onShowContent: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onHideContent: (event, { documentClick }) => {}
+    offsetY: 0
   } as const
 
-  _id = uid('Tooltip')
-  state = { hasFocus: false }
+  private readonly _id: string
 
   ref: Element | null = null
 
@@ -79,28 +75,34 @@ class Tooltip extends Component<TooltipProps> {
     this.ref = el
   }
 
+  constructor(props: TooltipProps) {
+    super(props)
+
+    this._id = uid('Tooltip')
+
+    this.state = { hasFocus: false }
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleFocus = (event) => {
+  handleFocus: PopoverProps['onFocus'] = () => {
     this.setState({ hasFocus: true })
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleBlur = (event) => {
+  handleBlur: PopoverProps['onBlur'] = () => {
     this.setState({ hasFocus: false })
   }
 
   renderTrigger() {
-    const { children, as } = this.props
+    const { children, as } = this.props as TooltipProps
     const { hasFocus } = this.state
+
     const triggerProps = {
       'aria-describedby': this._id
     }
@@ -114,8 +116,7 @@ class Tooltip extends Component<TooltipProps> {
         </Trigger>
       )
     } else if (typeof children === 'function') {
-      // TODO: try to remove cast when typing Tooltip (React children types are badly calculated)
-      return (children as TooltipRenderChildren)({
+      return children({
         focused: hasFocus,
         getTriggerProps: (props) => ({
           ...triggerProps,
@@ -123,7 +124,7 @@ class Tooltip extends Component<TooltipProps> {
         })
       })
     } else {
-      return ensureSingleChild(this.props.children, triggerProps)
+      return ensureSingleChild(children, triggerProps)
     }
   }
 
