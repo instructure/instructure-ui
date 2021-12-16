@@ -152,13 +152,12 @@ type BaseButtonOwnProps = {
   renderIcon?: React.ReactNode | (() => React.ReactNode)
 
   // Deprecated `string` tabIndex type
-  // TODO: remove string type in v9
   /**
    * Specifies the tabindex of the `Button`.
    *
    * (`string` type is __deprecated__, use `number`)
    */
-  tabIndex?: number | string
+  tabIndex?: number | string // TODO: remove string type in v9
 }
 
 type BaseButtonStyleProps = {
