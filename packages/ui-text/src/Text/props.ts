@@ -25,6 +25,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { deprecated } from '@instructure/ui-react-utils'
+
 import type {
   PropValidators,
   AsElementType,
@@ -40,17 +42,19 @@ type TextOwnProps = {
   as?: AsElementType
   /**
    * Color of the text
+   *
+   * __Deprecated__: The `warning` color variant will be removed in version 9.0.0, because it doesn't have sufficient color contrast with the background (4.5:1) required for text.
    */
   color?:
     | 'primary'
     | 'secondary'
     | 'brand'
     | 'success'
-    | 'warning'
     | 'danger'
     | 'alert'
     | 'primary-inverse'
     | 'secondary-inverse'
+    | 'warning' // TODO: 'warning' is deprecated, remove in v9.
   /**
    * Provides a reference to the underlying HTML element
    */
@@ -78,17 +82,21 @@ type TextStyle = ComponentStyle<'text'>
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
   children: PropTypes.node,
-  color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'brand',
-    'success',
-    'warning',
-    'danger',
-    'alert',
-    'primary-inverse',
-    'secondary-inverse'
-  ]),
+  color: deprecated.deprecatePropValues(
+    PropTypes.oneOf([
+      'primary',
+      'secondary',
+      'brand',
+      'success',
+      'warning',
+      'danger',
+      'alert',
+      'primary-inverse',
+      'secondary-inverse'
+    ]),
+    ['warning'],
+    "The `warning` color variant will be removed in version 9.0.0, because it doesn't have sufficient color contrast with the background (4.5:1) required for text."
+  ),
   elementRef: PropTypes.func,
   fontStyle: PropTypes.oneOf(['italic', 'normal']),
   letterSpacing: PropTypes.oneOf(['normal', 'condensed', 'expanded']),

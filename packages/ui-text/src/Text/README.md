@@ -127,7 +127,6 @@ example: true
   <Text color="secondary">I&#39;m secondary text</Text><br/>
   <Text color="brand">I&#39;m brand text</Text><br />
   <Text color="success">I&#39;m success text</Text><br/>
-  <Text color="warning">I&#39;m warning text</Text><br/>
   <Text color="danger">I&#39;m danger text</Text><br />
   <Text color="alert">I&#39;m alert text</Text>
 </div>
