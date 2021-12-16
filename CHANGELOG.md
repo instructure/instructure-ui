@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
+
+### Bug Fixes
+
+- **ui-drawer-layout:** fix tray direction calculation ([ee3d106](https://github.com/instructure/instructure-ui/commit/ee3d106854950635178dd6fe076ade7ad8924abf))
+- **ui-icons:** make `arrow-double-end` and `arrow-double-start` icons to be bidirectional ([7f86f28](https://github.com/instructure/instructure-ui/commit/7f86f28942ab56c7d2167bb4fb65502fc0a74d48))
+- **ui-text-input:** fix `htmlSize` prop to accept only numbers ([1b5f16b](https://github.com/instructure/instructure-ui/commit/1b5f16b9e66601381a06aa50bcf709e29720ab4e))
+
+### Features
+
+- **ui-number-input,ui-pagination:** add Pagination `input` variant, NumberInput `textAlign` prop ([5b90d60](https://github.com/instructure/instructure-ui/commit/5b90d608fd51296ae04e353e991f50a373c592c5))
+- **ui-pagination:** add new arrow button features ([80a43fe](https://github.com/instructure/instructure-ui/commit/80a43fe967206e9a026a9d61236a227e9a6bb184))
+
+### Deprecations
+
+- **ui-navigation:** the [`Navigation`](https://instructure.design/#Navigation) component has been deprecated and will be removed from instructure-ui in version 9 ([5605b7f](https://github.com/instructure/instructure-ui/commit/5605b7ff0123fb323ba0c730d409ac18c09a5b20))
+
 # [8.13.0](https://github.com/instructure/instructure-ui/compare/v8.12.0...v8.13.0) (2021-12-01)
 
 ### Bug Fixes
