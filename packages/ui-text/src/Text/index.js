@@ -53,7 +53,7 @@ class Text extends Component {
     as: PropTypes.elementType,
     children: PropTypes.node,
     /**
-     * One of: primary, secondary, brand, success, warning, danger, alert, primary-inverse, secondary-inverse
+     * One of: primary, secondary, brand, success, danger, alert, primary-inverse, secondary-inverse
      */
     color: deprecated.deprecatePropValues(
       PropTypes.oneOf([
@@ -68,8 +68,8 @@ class Text extends Component {
         'primary-inverse',
         'secondary-inverse'
       ]),
-      ['error'],
-      'It will be removed in version 8.0.0. Use `danger` instead.'
+      ['error', 'warning'],
+      "The `error` value will be removed in version 8.0.0. Use `danger` instead. The `warning` value will be removed in version 9.0.0, because it doesn't have sufficient color contrast with the background (4.5:1) required for text."
     ),
     elementRef: PropTypes.func,
     fontStyle: PropTypes.oneOf(['italic', 'normal']),

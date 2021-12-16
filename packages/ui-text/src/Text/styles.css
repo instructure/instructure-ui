@@ -114,6 +114,7 @@ input.root[type] {
     color: var(--brandColor);
   }
 
+  /* deprecated, will be removed in v9. */
   &.color-warning {
     color: var(--warningColor);
   }
