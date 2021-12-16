@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
+
+### Bug Fixes
+
+- **ui-drawer-layout:** fix tray direction calculation ([ee3d106](https://github.com/instructure/instructure-ui/commit/ee3d106854950635178dd6fe076ade7ad8924abf))
+
 # [8.13.0](https://github.com/instructure/instructure-ui/compare/v8.12.0...v8.13.0) (2021-12-01)
 
 **Note:** Version bump only for package @instructure/ui-drawer-layout

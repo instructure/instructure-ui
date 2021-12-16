@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
+
+### Features
+
+- **ui-number-input,ui-pagination:** add Pagination `input` variant, NumberInput `textAlign` prop ([5b90d60](https://github.com/instructure/instructure-ui/commit/5b90d608fd51296ae04e353e991f50a373c592c5))
+- **ui-pagination:** add new arrow button features ([80a43fe](https://github.com/instructure/instructure-ui/commit/80a43fe967206e9a026a9d61236a227e9a6bb184))
+
 # [8.13.0](https://github.com/instructure/instructure-ui/compare/v8.12.0...v8.13.0) (2021-12-01)
 
 **Note:** Version bump only for package @instructure/ui-pagination

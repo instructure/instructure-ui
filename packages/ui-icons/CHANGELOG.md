@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
+
+### Bug Fixes
+
+- **ui-icons:** make `arrow-double-end` and `arrow-double-start` icons to be bidirectional ([7f86f28](https://github.com/instructure/instructure-ui/commit/7f86f28942ab56c7d2167bb4fb65502fc0a74d48))
+
 # [8.13.0](https://github.com/instructure/instructure-ui/compare/v8.12.0...v8.13.0) (2021-12-01)
 
 **Note:** Version bump only for package @instructure/ui-icons
