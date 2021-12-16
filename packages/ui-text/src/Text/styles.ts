@@ -57,9 +57,11 @@ const generateStyle = (
     'secondary-inverse': { color: componentTheme.secondaryInverseColor },
     success: { color: componentTheme.successColor },
     brand: { color: componentTheme.brandColor },
-    warning: { color: componentTheme.warningColor },
     danger: { color: componentTheme.dangerColor },
-    alert: { color: componentTheme.alertColor }
+    alert: { color: componentTheme.alertColor },
+
+    // deprecated, remove in v9
+    warning: { color: componentTheme.warningColor }
   }
 
   const wrapStyle = {

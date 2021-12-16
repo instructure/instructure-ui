@@ -28,6 +28,7 @@
     "@instructure/console": "8.14.0",
     "@instructure/emotion": "8.14.0",
     "@instructure/shared-types": "8.14.0",
+    "@instructure/ui-color-utils": "8.14.0",
     "@instructure/ui-react-utils": "8.14.0",
     "prop-types": "^15"
   },

@@ -49,11 +49,11 @@ const generateComponentTheme = (theme: Theme): TextTheme => {
     secondaryColor: colors?.textDark,
     secondaryInverseColor: colors?.textLight,
 
-    warningColor: colors?.textWarning,
     brandColor: colors?.textBrand,
     dangerColor: colors?.textDanger,
     successColor: colors?.textSuccess,
     alertColor: colors?.textAlert,
+    warningColor: colors?.textWarning, // deprecated, remove in v9
 
     paragraphMargin: `${spacing.medium} 0`
   }

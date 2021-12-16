@@ -24,12 +24,13 @@
 import { decorator } from '@instructure/ui-decorator'
 import { logWarnDeprecated as warnDeprecated } from '@instructure/console'
 import { ComponentClass } from 'react'
+import PropTypes from 'prop-types'
 
 export interface DeprecatedDecorator {
   (version: string, oldProps?: Record<string, any> | null, message?: string): (
     ComposedComponent: any
   ) => any
-  deprecatePropValues: (...args: any[]) => (...args: any[]) => boolean | null
+  deprecatePropValues: (...args: any[]) => PropTypes.Validator<unknown>
   warnDeprecatedProps: (...args: any[]) => void
   warnDeprecatedComponent: (...args: any[]) => void
   changedPackageWarning: (...args: any[]) => string
@@ -138,12 +139,7 @@ const deprecated = (() => {
    * @param {string|function} message - a string with additional information (like the version the prop will be removed) or a function returning a string
    */
   ;(deprecated as DeprecatedDecorator).deprecatePropValues = (
-    propType: (
-      props: Record<string, any>,
-      propName: string,
-      componentName: string,
-      ...rest: any[]
-    ) => boolean,
+    propType: PropTypes.Validator<unknown>,
     deprecated: string[] = [],
     message:
       | string
@@ -153,7 +149,7 @@ const deprecated = (() => {
       props: Record<string, any>,
       propName: string,
       componentName: string,
-      ...rest: any[]
+      ...rest
     ) => {
       const isDeprecatedValue = deprecated.includes(props[propName])
 
@@ -216,7 +212,8 @@ const deprecated = (() => {
    * @param {String} componentName the name of the component or Function.name of the utility function
    * @param {String} message a message to display as a console error in DEV env when condition is false
    */
-  ;(deprecated as DeprecatedDecorator).warnDeprecatedComponent = warnDeprecatedComponent
+  ;(deprecated as DeprecatedDecorator).warnDeprecatedComponent =
+    warnDeprecatedComponent
 
   /**
    * ---
