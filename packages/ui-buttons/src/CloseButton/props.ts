@@ -116,13 +116,12 @@ type CloseButtonOwnProps = {
   cursor?: Cursor
 
   // Deprecated `string` tabIndex type
-  // TODO: remove string type in v9
   /**
    * Specifies the tabindex of the `CloseButton`.
    *
    * (`string` type is __deprecated__, use `number`)
    */
-  tabIndex?: number | string
+  tabIndex?: number | string // TODO: remove string type in v9
 }
 
 type PropKeys = keyof CloseButtonOwnProps
