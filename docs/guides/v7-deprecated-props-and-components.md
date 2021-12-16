@@ -133,20 +133,21 @@ For more information, click the name of the component to see its full documentat
 
 \* CMA = Codemod available
 
-| Component          | Property    | Old value | New value       | CMA\* | Note                                                |
-| ------------------ | ----------- | --------- | --------------- | ----- | --------------------------------------------------- |
-| [List](#List)      | delimiter   | pipe      | -               | no    | will only be available when using [InlineList]      |
-|                    |             | slash     | -               | no    | will only be available when using [InlineList]      |
-|                    |             | arrow     | -               | no    | will only be available when using [InlineList]      |
-| [List.Item](#List) | delimiter   | pipe      | -               | no    | will only be available when using [InlineList.Item] |
-|                    |             | slash     | -               | no    | will only be available when using [InlineList.Item] |
-|                    |             | arrow     | -               | no    | will only be available when using [InlineList.Item] |
-| [Text](#Text)      | color       | error     | danger          | yes   |                                                     |
-| [View](#View)      | background  | default   | primary         | yes   |                                                     |
-|                    |             | light     | secondary       | yes   |                                                     |
-|                    |             | inverse   | primary-inverse | yes   |                                                     |
-|                    | borderColor | default   | primary         | yes   |                                                     |
-|                    |             | inverse   | transparent     | yes   |                                                     |
+| Component          | Property    | Old value | New value       | CMA\* | Note                                                                                                                                     |
+| ------------------ | ----------- | --------- | --------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [List](#List)      | delimiter   | pipe      | -               | no    | will only be available when using [InlineList]                                                                                           |
+|                    |             | slash     | -               | no    | will only be available when using [InlineList]                                                                                           |
+|                    |             | arrow     | -               | no    | will only be available when using [InlineList]                                                                                           |
+| [List.Item](#List) | delimiter   | pipe      | -               | no    | will only be available when using [InlineList.Item]                                                                                      |
+|                    |             | slash     | -               | no    | will only be available when using [InlineList.Item]                                                                                      |
+|                    |             | arrow     | -               | no    | will only be available when using [InlineList.Item]                                                                                      |
+| [Text](#Text)      | color       | error     | danger          | yes   |                                                                                                                                          |
+|                    | color       | warning   | -               | no    | The `warning` color variant doesn't have sufficient color contrast with the background (4.5:1) required for text. Will be removed in V9. |
+| [View](#View)      | background  | default   | primary         | yes   |                                                                                                                                          |
+|                    |             | light     | secondary       | yes   |                                                                                                                                          |
+|                    |             | inverse   | primary-inverse | yes   |                                                                                                                                          |
+|                    | borderColor | default   | primary         | yes   |                                                                                                                                          |
+|                    |             | inverse   | transparent     | yes   |                                                                                                                                          |
 
 ### Deprecated Theme Variables
 

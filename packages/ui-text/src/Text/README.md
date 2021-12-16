@@ -9,9 +9,10 @@ guidelines: true
 <Guidelines>
 <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
 <Figure.Item>The color prop <code>error</code> has been updated to <code>danger</code> for component consistency</Figure.Item>
+<Figure.Item>The color prop <code>warning</code> is deprecated and will be removed in version 9.0.0, because it doesn't have sufficient color contrast with the background (4.5:1) required for text.</Figure.Item>
 </Figure>
 </Guidelines>
-````
+```
 
 A component for styling textual content
 
@@ -138,7 +139,6 @@ example: true
   <Text color="secondary">I&#39;m secondary text</Text><br/>
   <Text color="brand">I&#39;m brand text</Text><br />
   <Text color="success">I&#39;m success text</Text><br/>
-  <Text color="warning">I&#39;m warning text</Text><br/>
   <Text color="danger">I&#39;m danger text</Text><br />
   <Text color="alert">I&#39;m alert text</Text>
 </div>

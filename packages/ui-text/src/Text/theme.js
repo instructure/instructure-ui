@@ -34,12 +34,12 @@ export default function generator({ typography, colors, spacing }) {
     secondaryColor: colors.textDark,
     secondaryInverseColor: colors.textLight,
 
-    warningColor: colors.textWarning,
     brandColor: colors.textBrand,
     errorColor: colors.textDanger,
     dangerColor: colors.textDanger,
     successColor: colors.textSuccess,
     alertColor: colors.textAlert,
+    warningColor: colors.textWarning, // deprecated, will be removed in v9.
 
     paragraphMargin: `${spacing.medium} 0`
   }
