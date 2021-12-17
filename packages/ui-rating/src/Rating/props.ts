@@ -36,13 +36,39 @@ import type {
 } from '@instructure/shared-types'
 
 type RatingOwnProps = {
+  /**
+   * A label is required for accessibility
+   */
   label: string
+  /**
+   * A function that returns the current value formatted for screen readers
+   */
   formatValueText?: (...args: any[]) => any
+  /**
+   * Choose from a 0-3 or 0-5 rating system
+   */
   iconCount?: 3 | 5
+  /**
+   * Choose from different rating icon sizes
+   */
   size?: 'small' | 'medium' | 'large'
+  /**
+   * The maximum rating (defaults to iconCount)
+   */
   valueMax?: number
+  /**
+   * The current rating
+   */
   valueNow?: number
+  /**
+   * Set to make the icons animate when they become filled
+   */
   animateFill?: boolean
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
 }
 
@@ -57,39 +83,13 @@ type RatingProps = RatingOwnProps &
 type RatingStyle = ComponentStyle<'rating'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * A label is required for accessibility
-   */
   label: PropTypes.string.isRequired,
-  /**
-   * A function that returns the current value formatted for screen readers
-   */
   formatValueText: PropTypes.func,
-  /**
-   * Choose from a 0-3 or 0-5 rating system
-   */
   iconCount: PropTypes.oneOf([3, 5]),
-  /**
-   * Choose from different rating icon sizes
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * The maximum rating (defaults to iconCount)
-   */
   valueMax: PropTypes.number,
-  /**
-   * The current rating
-   */
   valueNow: PropTypes.number,
-  /**
-   * Set to make the icons animate when they become filled
-   */
   animateFill: PropTypes.bool,
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing
 }
 
