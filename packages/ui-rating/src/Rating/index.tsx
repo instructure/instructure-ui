@@ -39,6 +39,7 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, null)
 @testable()
@@ -50,8 +51,8 @@ class Rating extends Component<RatingProps> {
 
   static defaultProps = {
     animateFill: false,
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'filled' implicitly has an 'any' type.
-    formatValueText: (filled, iconCount) => `${filled} / ${iconCount}`,
+    formatValueText: (filled: string, iconCount: string) =>
+      `${filled} / ${iconCount}`,
     iconCount: 3,
     size: 'medium',
     valueNow: 0
@@ -77,15 +78,12 @@ class Rating extends Component<RatingProps> {
     const { valueNow, iconCount, valueMax } = this.props
 
     // prevent divide by zero errors
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const max = valueMax > 0 ? valueMax : iconCount
+    const max = !!valueMax && valueMax > 0 ? valueMax : iconCount
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const filledIcons = Math.round((valueNow * iconCount) / max)
+    const filledIcons = Math.round((valueNow! * iconCount!) / max!)
 
     // Handle edge case where valueNow is greater than valueMax
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    if (filledIcons > iconCount) {
+    if (filledIcons > iconCount!) {
       return iconCount
     } else {
       return filledIcons
@@ -93,22 +91,14 @@ class Rating extends Component<RatingProps> {
   }
 
   get empty() {
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    return this.props.iconCount - this.filled
+    return this.props.iconCount! - this.filled!
   }
 
   render() {
-    const {
-      iconCount,
-      animateFill,
-      size,
-      margin,
-      label,
-      formatValueText
-    } = this.props
+    const { iconCount, animateFill, size, margin, label, formatValueText } =
+      this.props
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    const valueText = label + ' ' + formatValueText(this.filled, iconCount)
+    const valueText = label + ' ' + formatValueText?.(this.filled, iconCount)
 
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Rating.allowedProps),
@@ -124,19 +114,16 @@ class Rating extends Component<RatingProps> {
         elementRef={this.handleRef}
       >
         <ScreenReaderContent>{valueText}</ScreenReaderContent>
-        {/* @ts-expect-error ts-migrate(6133) FIXME: 'x' is declared but its value is never read. */}
-        {[...Array(this.filled)].map((x, i) => (
+        {[...Array(this.filled)].map((_x, i) => (
           <RatingIcon
             key={i + 1}
             filled
             animateFill={animateFill}
-            // @ts-expect-error ts-migrate(2322) FIXME: Type 'number | null' is not assignable to type 'nu... Remove this comment to see the full error message
-            animationDelay={animateFill ? (i + 1) * 200 : null}
+            animationDelay={animateFill ? (i + 1) * 200 : undefined}
             size={size}
           />
         ))}
-        {/* @ts-expect-error ts-migrate(6133) FIXME: 'x' is declared but its value is never read. */}
-        {[...Array(this.empty)].map((x, i) => (
+        {[...Array(this.empty)].map((_x, i) => (
           <RatingIcon key={i + 1} size={size} />
         ))}
       </View>
