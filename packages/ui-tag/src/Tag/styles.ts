@@ -207,13 +207,13 @@ const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       maxWidth: componentTheme.maxWidth,
+      transform: 'translateY(-0.0625rem)',
       ...sizeVariants[size!].text
     },
     icon: {
       label: 'tag__icon',
       marginInlineStart: componentTheme.iconMargin,
       marginInlineEnd: 0,
-      transform: 'translateY(0.0625rem)',
       transition: `all ${componentTheme.transitionTiming}`,
       cursor: 'pointer',
       ...sizeVariants[size!].icon,
