@@ -22,71 +22,60 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Component, ComponentClass, ReactElement } from 'react'
 
-import { Dialog } from '@instructure/ui-dialog'
 import { testable } from '@instructure/ui-testable'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
+import { Dialog } from '@instructure/ui-dialog'
+import type { DialogProps } from '@instructure/ui-dialog'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
-import type { OverlayProps } from './props'
+
+import type { OverlayProps, OverlayState } from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @testable()
-class Overlay extends Component<OverlayProps> {
+class Overlay extends Component<OverlayProps, OverlayState> {
   static allowedProps = allowedProps
   static propTypes = propTypes
 
   static defaultProps = {
-    children: null,
     open: false,
     insertAt: 'bottom',
-    onOpen: () => {},
-    onClose: () => {},
-    mountNode: null,
     shouldContainFocus: false,
     shouldReturnFocus: false,
     shouldCloseOnDocumentClick: false,
     shouldCloseOnEscape: true,
-    applicationElement: null,
-    defaultFocusElement: null,
-    contentElement: null,
-    onDismiss: () => {},
-    transition: null,
     in: false,
     unmountOnExit: false,
     transitionOnMount: false,
     transitionEnter: true,
-    transitionExit: true,
-    onEnter: function () {},
-    onEntering: function () {},
-    onEntered: function () {},
-    onExit: function () {},
-    onExiting: function () {},
-    onExited: function () {}
+    transitionExit: true
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: OverlayProps) {
     super(props)
 
     this.state = {
-      open: props.open,
+      open: props.open!,
       transitioning: false
     }
   }
 
-  _timeouts = []
-  _DOMNode: PortalNode = null
+  private _timeouts: ReturnType<typeof setTimeout>[] = []
+  private _DOMNode: PortalNode = null
+  private _isMounted = false
+
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
@@ -94,22 +83,19 @@ class Overlay extends Component<OverlayProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_isMounted' does not exist on type 'Over... Remove this comment to see the full error message
     this._isMounted = true
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: OverlayProps) {
     if (prevProps.open && !this.props.open) {
       // closing
       this.setState({
-        transitioning: prevProps.transition !== null
+        transitioning: !!prevProps.transition
       })
     }
   }
 
   componentWillUnmount() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_isMounted' does not exist on type 'Over... Remove this comment to see the full error message
     this._isMounted = false
     this._timeouts.forEach((timeout) => clearTimeout(timeout))
   }
@@ -126,9 +112,7 @@ class Overlay extends Component<OverlayProps> {
     this.DOMNode = DOMNode
 
     this._timeouts.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       setTimeout(() => {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_isMounted' does not exist on type 'Over... Remove this comment to see the full error message
         if (this._isMounted) {
           this.setState({
             open: true
@@ -145,8 +129,9 @@ class Overlay extends Component<OverlayProps> {
     })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'content' implicitly has an 'any' type.
-  renderTransition(content) {
+  renderTransition(
+    content: ReactElement<DialogProps, ComponentClass<DialogProps>>
+  ) {
     return (
       <Transition
         {...pickProps(this.props, Transition.allowedProps)}
@@ -165,12 +150,11 @@ class Overlay extends Component<OverlayProps> {
   }
 
   render() {
-    let content = (
+    let content: ReactElement<DialogProps, ComponentClass<DialogProps>> = (
       <Dialog
         {...omitProps(this.props, Overlay.allowedProps)}
         {...pickProps(this.props, Dialog.allowedProps)}
         defaultFocusElement={this.props.defaultFocusElement}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
         open={this.state.open}
         elementRef={this.handleRef}
       >
@@ -185,7 +169,6 @@ class Overlay extends Component<OverlayProps> {
     return (
       <Portal
         {...pickProps(this.props, Portal.allowedProps)}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitioning' does not exist on type 'R... Remove this comment to see the full error message
         open={this.props.open || this.state.transitioning}
         onOpen={createChainedFunction(this.handlePortalOpen, this.props.onOpen)}
       >
