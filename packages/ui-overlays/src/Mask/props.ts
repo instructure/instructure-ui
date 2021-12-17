@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
+import React, { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import type {
@@ -32,12 +33,15 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MaskOwnProps = {
+  children?: React.ReactNode
   onDismiss?: (...args: any[]) => any
   placement?: 'top' | 'center' | 'bottom' | 'stretch'
   fullscreen?: boolean
   onClick?: (...args: any[]) => any
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
-  children?: React.ReactNode
 }
 
 type PropKeys = keyof MaskOwnProps
@@ -56,9 +60,6 @@ const propTypes: PropValidators<PropKeys> = {
   fullscreen: PropTypes.bool,
   children: PropTypes.node,
   onClick: PropTypes.func,
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func
 }
 

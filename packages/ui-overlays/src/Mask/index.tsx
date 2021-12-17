@@ -23,10 +23,11 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'no-s... Remove this comment to see the full error message
 import noScroll from 'no-scroll'
 import { withStyle, jsx } from '@instructure/emotion'
+import type { ComponentStyle } from '@instructure/emotion'
 import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
@@ -38,6 +39,7 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components/utilities
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Mask extends Component<MaskProps> {
@@ -48,14 +50,12 @@ class Mask extends Component<MaskProps> {
 
   static defaultProps = {
     placement: 'center',
-    fullscreen: false,
-    children: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {}
+    fullscreen: false
   }
 
   componentDidMount() {
     this.props.makeStyles?.()
+
     if (this.props.fullscreen) {
       noScroll.on()
     }
@@ -83,9 +83,10 @@ class Mask extends Component<MaskProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  contentRef = (el) => {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_content' does not exist on type 'Mask'.... Remove this comment to see the full error message
+  // It can be a ref for any type of child
+  _content: any
+
+  contentRef: React.LegacyRef<any> = (el) => {
     this._content = el
   }
 
@@ -94,16 +95,17 @@ class Mask extends Component<MaskProps> {
       ref: this.contentRef
     })
 
-    const props = {
+    const props: React.ClassAttributes<HTMLSpanElement> &
+      React.HTMLAttributes<HTMLSpanElement> & {
+        css?: ComponentStyle<'mask'>['mask']
+      } = {
       ...omitProps(this.props, Mask.allowedProps),
       css: this.props.styles?.mask,
       ref: this.handleElementRef
     }
 
     if (typeof this.props.onClick === 'function') {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onClick' does not exist on type '{ css: ... Remove this comment to see the full error message
       props.onClick = this.props.onClick
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'tabIndex' does not exist on type '{ css:... Remove this comment to see the full error message
       props.tabIndex = -1
     }
 
