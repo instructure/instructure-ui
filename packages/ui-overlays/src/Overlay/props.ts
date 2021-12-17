@@ -28,153 +28,215 @@ import PropTypes from 'prop-types'
 import { element } from '@instructure/ui-prop-types'
 import { transitionTypePropType } from '@instructure/ui-motion'
 
-import type { PortalNode } from '@instructure/ui-portal'
+import type { PortalNode, PortalProps } from '@instructure/ui-portal'
 import type { PositionMountNode } from '@instructure/ui-position'
-import type { TransitionType } from '@instructure/ui-motion'
+import type { TransitionProps, TransitionType } from '@instructure/ui-motion'
+import type { DialogProps } from '@instructure/ui-dialog'
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PickPropsWithExceptions,
+  PropValidators,
+  UIElement
 } from '@instructure/shared-types'
 
 type OverlayOwnProps = {
+  /**
+   * Whether or not the `<Overlay />` is open
+   */
   open?: boolean
-  onOpen?: (DOMNode: PortalNode) => any
-  onClose?: (...args: any[]) => any
-  mountNode?: PositionMountNode
-  insertAt?: 'bottom' | 'top'
-  label: string
-  onDismiss?: (...args: any[]) => any
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
+
+  /**
+   * The type of `<Transition />` to use for animating in/out
+   */
+  transition?: TransitionType // passed as to Transition as `type`
+
+  // TODO: deprecate applicationElement, it was removed from Dialog in v6
+  /**
+   * An element or a function returning an element to apply `aria-hidden` to
+   */
   applicationElement?:
     | React.ReactElement[]
     | React.ReactElement
-    | ((...args: any[]) => any)
-  contentElement?: React.ReactElement | ((...args: any[]) => any)
-  shouldContainFocus?: boolean
-  shouldReturnFocus?: boolean
-  shouldCloseOnDocumentClick?: boolean
-  shouldCloseOnEscape?: boolean
-  transition?: TransitionType
-  in?: boolean
-  unmountOnExit?: boolean
-  transitionOnMount?: boolean
-  transitionEnter?: boolean
-  transitionExit?: boolean
-  onEnter?: (...args: any[]) => any
-  onEntering?: (...args: any[]) => any
-  onEntered?: (...args: any[]) => any
-  onExit?: (...args: any[]) => any
-  onExiting?: (...args: any[]) => any
-  onExited?: (type?: TransitionType) => void
+    | (() => React.ReactElement[] | React.ReactElement)
+} & PropsForPortal &
+  PropsForDialog &
+  PropsForTransition
+
+type PropsForPortal = {
+  /**
+   * Callback fired when `<Portal />` content has been mounted in the DOM
+   */
+  onOpen?: (DOMNode: PortalNode) => void
+
+  /**
+   * Callback fired when `<Portal />` has been unmounted from the DOM
+   */
+  onClose?: () => void
+
+  /**
+   * An element or a function returning an element to use as the mount node
+   * for the `<Portal />` (defaults to `document.body`)
+   */
+  mountNode?: PositionMountNode
+
+  /**
+   * Insert the element at the 'top' of the mountNode or at the 'bottom'
+   */
+  insertAt?: 'bottom' | 'top'
+}
+
+type PropsForDialog = {
   children?: React.ReactNode
+
+  /**
+   * An accessible label for the `<Overlay />` content
+   */
+  label: string
+
+  /**
+   * An element or a function returning an element to focus by default
+   */
+  defaultFocusElement?: UIElement
+
+  /**
+   * An element or a function returning an element that wraps the content of the `<Overlay />`
+   */
+  contentElement?: UIElement
+
+  shouldContainFocus?: boolean
+
+  shouldReturnFocus?: boolean
+
+  shouldCloseOnDocumentClick?: boolean
+
+  shouldCloseOnEscape?: boolean
+
+  /**
+   * Callback fired when the `<Overlay />` is requesting to be closed
+   */
+  onDismiss?: (
+    event: React.UIEvent | React.FocusEvent,
+    documentClick?: boolean
+  ) => void
+}
+
+type PropsForTransition = {
+  /**
+   * Show the component; triggers the enter or exit animation
+   */
+  in?: boolean
+
+  /**
+   * Unmount the component (remove it from the DOM) when it is not shown
+   */
+  unmountOnExit?: boolean
+
+  /**
+   * Run the enter animation when the component mounts, if it is initially
+   * shown
+   */
+  transitionOnMount?: boolean
+
+  /**
+   * Run the enter animation
+   */
+  transitionEnter?: boolean
+
+  /**
+   * Run the exit animation
+   */
+  transitionExit?: boolean
+
+  /**
+   * Callback fired before the "entering" classes are applied
+   */
+  onEnter?: () => void
+
+  /**
+   * Callback fired after the "entering" classes are applied
+   */
+  onEntering?: () => void
+
+  /**
+   * Callback fired after the "enter" classes are applied
+   */
+  onEntered?: (type?: TransitionType) => void
+
+  /**
+   * Callback fired before the "exiting" classes are applied
+   */
+  onExit?: () => void
+
+  /**
+   * Callback fired after the "exiting" classes are applied
+   */
+  onExiting?: () => void
+
+  /**
+   * Callback fired after the "exited" classes are applied
+   */
+  onExited?: (type?: TransitionType) => void
 }
 
 type PropKeys = keyof OverlayOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type OverlayProps = OverlayOwnProps & OtherHTMLAttributes<OverlayOwnProps>
+type OverlayProps =
+  // pickProps can pass props to Dialog
+  PickPropsWithExceptions<
+    DialogProps,
+    keyof PropsForDialog | 'open' | 'elementRef'
+  > &
+    // pickProps can pass props to Portal
+    PickPropsWithExceptions<
+      PortalProps,
+      keyof PropsForPortal | 'open' | 'children'
+    > &
+    // pickProps can pass props to Transition
+    PickPropsWithExceptions<
+      TransitionProps,
+      keyof PropsForTransition | 'children' | 'type'
+    > &
+    OverlayOwnProps &
+    OtherHTMLAttributes<OverlayOwnProps>
+
+type OverlayState = {
+  open: boolean
+  transitioning: boolean
+}
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node,
-  /**
-   * Whether or not the `<Overlay />` is open
-   */
   open: PropTypes.bool,
-  /**
-   * Callback fired when `<Portal />` content has been mounted in the DOM
-   */
   onOpen: PropTypes.func,
-  /**
-   * Callback fired when `<Portal />` has been unmounted from the DOM
-   */
   onClose: PropTypes.func,
-  /**
-   * An element or a function returning an element to use as the mount node
-   * for the `<Portal />` (defaults to `document.body`)
-   */
   mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-  /**
-   * Insert the element at the 'top' of the mountNode or at the 'bottom'
-   */
   insertAt: PropTypes.oneOf(['bottom', 'top']),
-  /**
-   * An accessible label for the `<Overlay />` content
-   */
   label: PropTypes.string.isRequired,
-  /**
-   * Callback fired when the `<Overlay />` is requesting to be closed
-   */
   onDismiss: PropTypes.func,
-  /**
-   * An element or a function returning an element to focus by default
-   */
   defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  /**
-   * An element or a function returning an element to apply `aria-hidden` to
-   */
   applicationElement: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
     PropTypes.func
   ]),
-  /**
-   * An element or a function returning an element that wraps the content of the `<Overlay />`
-   */
   contentElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-
   shouldContainFocus: PropTypes.bool,
   shouldReturnFocus: PropTypes.bool,
   shouldCloseOnDocumentClick: PropTypes.bool,
   shouldCloseOnEscape: PropTypes.bool,
-  /**
-   * The type of `<Transition />` to use for animating in/out
-   */
   transition: transitionTypePropType,
-  /**
-   * Show the component; triggers the enter or exit animation
-   */
   in: PropTypes.bool,
-  /**
-   * Unmount the component (remove it from the DOM) when it is not shown
-   */
   unmountOnExit: PropTypes.bool,
-  /**
-   * Run the enter animation when the component mounts, if it is initially
-   * shown
-   */
   transitionOnMount: PropTypes.bool,
-  /**
-   * Run the enter animation
-   */
   transitionEnter: PropTypes.bool,
-  /**
-   * Run the exit animation
-   */
   transitionExit: PropTypes.bool,
-  /**
-   * Callback fired before the "entering" classes are applied
-   */
   onEnter: PropTypes.func,
-  /**
-   * Callback fired after the "entering" classes are applied
-   */
   onEntering: PropTypes.func,
-  /**
-   * Callback fired after the "enter" classes are applied
-   */
   onEntered: PropTypes.func,
-  /**
-   * Callback fired before the "exiting" classes are applied
-   */
   onExit: PropTypes.func,
-  /**
-   * Callback fired after the "exiting" classes are applied
-   */
   onExiting: PropTypes.func,
-  /**
-   * Callback fired after the "exited" classes are applied
-   */
   onExited: PropTypes.func
 }
 
@@ -207,5 +269,5 @@ const allowedProps: AllowedPropKeys = [
   'onExited'
 ]
 
-export type { OverlayProps }
+export type { OverlayProps, OverlayState }
 export { propTypes, allowedProps }
