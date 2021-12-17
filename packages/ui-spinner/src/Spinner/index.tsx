@@ -41,6 +41,7 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -55,7 +56,7 @@ class Spinner extends Component<SpinnerProps> {
   }
 
   ref: Element | null = null
-  titleId: string | undefined
+  private readonly titleId?: string | undefined
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
