@@ -100,7 +100,7 @@ describe('<Rating />', async () => {
   })
 
   describe('when passing down props to View', async () => {
-    const allowedProps = {
+    const allowedProps: { [key: string]: any } = {
       margin: 'small'
     }
 
@@ -122,7 +122,6 @@ describe('<Rating />', async () => {
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
-            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
 
