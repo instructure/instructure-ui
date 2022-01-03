@@ -18,6 +18,7 @@ The tables below show what will be removed and what are they replaced with. We a
 
 - [Deprecated Components](/#v9-upgrade-guide/#upgrade-guide-for-version-9-deprecated-components)
 - [Deprecated Utilities](/#v9-upgrade-guide/#upgrade-guide-for-version-9-deprecated-utilities)
+- [Deprecated Properties](/#v9-upgrade-guide/#upgrade-guide-for-version-9-deprecated-properties)
 - [Deprecated Property Values](/#v9-upgrade-guide/#upgrade-guide-for-version-9-deprecated-property-values)
 - [Removed packages and scripts](/#v9-upgrade-guide/#upgrade-guide-for-version-9-removed-packages-and-scripts)
 - [Removal of deprecated legacy reference attributes from components](/#v9-upgrade-guide/#upgrade-guide-for-version-9-removal-of-deprecated-legacy-reference-attributes-from-components)
@@ -39,6 +40,17 @@ The tables below show what will be removed and what are they replaced with. We a
 | [ComponentIdentifier](#ComponentIdentifier)   | This util has been removed because it is not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.           |
 | [DateTime](#DateTime)                         | This util has been removed because it is not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.           |
 | [elementMatches](#elementMatches)             | This polyfill is only needed for old, unsupported browsers.                                                                                         |
+
+### Deprecated Properties
+
+For more information, click the name of the component to see its full documentation.
+
+- CMA = Codemod available
+
+| Component           | Old Property       | New Property | CMA\* | Notes                                                                                                                               |
+| ------------------- | ------------------ | ------------ | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| [Overlay](#Overlay) | applicationElement | -            | -     | This prop is passed to Dialog, but it has been removed from Dialog in V6, so it will be permanently removed from Overlay too in V9. |
+| [Mask](#Mask)       | onDismiss          | -            | -     | This prop hasn't been used by the component for a long time, will be permanently removed in V9.                                     |
 
 ### Deprecated Property Values
 

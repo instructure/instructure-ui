@@ -24,14 +24,19 @@
 
 /** @jsx jsx */
 import React, { Component } from 'react'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'no-s... Remove this comment to see the full error message
 import noScroll from 'no-scroll'
+
 import { withStyle, jsx } from '@instructure/emotion'
 import type { ComponentStyle } from '@instructure/emotion'
-import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
+import {
+  ensureSingleChild,
+  omitProps,
+  deprecated
+} from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
 import type { MaskProps } from './props'
 import { allowedProps, propTypes } from './props'
 
@@ -42,6 +47,7 @@ category: components/utilities
 @tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
+@deprecated('9.0.0', { onDismiss: null })
 class Mask extends Component<MaskProps> {
   static readonly componentId = 'Mask'
 

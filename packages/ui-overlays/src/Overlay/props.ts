@@ -50,9 +50,9 @@ type OverlayOwnProps = {
    */
   transition?: TransitionType // passed as to Transition as `type`
 
-  // TODO: deprecate applicationElement, it was removed from Dialog in v6
+  // TODO: remove applicationElement in V9, it was removed from Dialog in v6
   /**
-   * An element or a function returning an element to apply `aria-hidden` to
+   * __Deprecated__: An element or a function returning an element to apply `aria-hidden` to
    */
   applicationElement?:
     | React.ReactElement[]
@@ -216,11 +216,6 @@ const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
   onDismiss: PropTypes.func,
   defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  applicationElement: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-    PropTypes.func
-  ]),
   contentElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   shouldContainFocus: PropTypes.bool,
   shouldReturnFocus: PropTypes.bool,
@@ -237,7 +232,14 @@ const propTypes: PropValidators<PropKeys> = {
   onEntered: PropTypes.func,
   onExit: PropTypes.func,
   onExiting: PropTypes.func,
-  onExited: PropTypes.func
+  onExited: PropTypes.func,
+
+  // TODO: deprecated, remove in V9
+  applicationElement: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+    PropTypes.func
+  ])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -250,7 +252,6 @@ const allowedProps: AllowedPropKeys = [
   'label',
   'onDismiss',
   'defaultFocusElement',
-  'applicationElement',
   'contentElement',
   'shouldReturnFocus',
   'shouldCloseOnDocumentClick',
@@ -266,7 +267,10 @@ const allowedProps: AllowedPropKeys = [
   'onEntered',
   'onExit',
   'onExiting',
-  'onExited'
+  'onExited',
+
+  // TODO: deprecated, remove in V9
+  'applicationElement'
 ]
 
 export type { OverlayProps, OverlayState }
