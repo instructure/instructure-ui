@@ -24,7 +24,7 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 
-import { IconXSolid } from '@instructure/ui-icons'
+import { IconXLine } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view'
 import type { ViewProps } from '@instructure/ui-view'
 import { omitProps } from '@instructure/ui-react-utils'
@@ -129,7 +129,7 @@ class Tag extends Component<TagProps> {
         title={title || (typeof text === 'string' ? text : undefined)}
       >
         <span css={styles?.text}>{text}</span>
-        {onClick && dismissible ? <IconXSolid css={styles?.icon} /> : null}
+        {onClick && dismissible ? <IconXLine css={styles?.icon} /> : null}
       </View>
     )
   }
