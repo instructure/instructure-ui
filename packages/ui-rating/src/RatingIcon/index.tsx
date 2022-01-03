@@ -58,23 +58,20 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
 
   ref: Element | null = null
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
-    super()
+  constructor(props: RatingIconProps) {
+    super(props)
 
     this.state = {
-      filled: props.filled && !props.animateFill
+      filled: props.filled! && !props.animateFill
     }
   }
 
-  _timeouts = []
+  _timeouts: ReturnType<typeof setTimeout>[] = []
   _animation: RequestAnimationFrameType | undefined
 
   componentDidMount() {
     this.props.makeStyles?.(this.makeStyleProps())
     if (this.props.animateFill) {
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       this._timeouts.push(setTimeout(this.fill, this.props.animationDelay))
     }
   }

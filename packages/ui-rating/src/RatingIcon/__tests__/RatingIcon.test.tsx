@@ -26,9 +26,8 @@ import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { InstUISettingsProvider } from '@instructure/emotion'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
-// eslint-disable-next-line no-restricted-imports
-import { TransitionLocator } from '@instructure/ui-motion/es/Transition/TransitionLocator'
+
+import { TransitionLocator } from '@instructure/ui-motion/src/Transition/TransitionLocator'
 
 import { RatingIcon } from '../index'
 
