@@ -59,7 +59,7 @@ const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
       text: {
         lineHeight: `calc(${componentTheme.heightMedium} - (${componentTheme.defaultBorderWidth} * 2))`
       },
-      icon: { fontSize: '0.75rem' }
+      icon: { fontSize: '0.875rem' }
     },
     large: {
       tag: {
@@ -69,7 +69,7 @@ const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
       text: {
         lineHeight: `calc(${componentTheme.heightLarge} - (${componentTheme.defaultBorderWidth} * 2))`
       },
-      icon: { fontSize: '0.875rem' }
+      icon: { fontSize: '1rem' }
     }
   }
 
@@ -207,7 +207,6 @@ const generateStyle = (componentTheme: TagTheme, props: TagProps): TagStyle => {
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       maxWidth: componentTheme.maxWidth,
-      transform: 'translateY(-0.0625rem)',
       ...sizeVariants[size!].text
     },
     icon: {

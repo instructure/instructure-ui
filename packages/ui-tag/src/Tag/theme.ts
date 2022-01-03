@@ -118,7 +118,7 @@ const generateComponentTheme = (theme: Theme): TagTheme => {
     focusOutlineWidth: borders.widthMedium,
     focusOutlineStyle: borders.style,
     maxWidth: '10rem',
-    iconMargin: spacing.small,
+    iconMargin: spacing.xSmall,
     transitionTiming: '0.2s',
 
     ...tagVariant('default', {
