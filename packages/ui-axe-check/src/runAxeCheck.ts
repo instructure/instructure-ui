@@ -25,7 +25,7 @@
 import axeCore from 'axe-core'
 
 type AxeCheckOptions = {
-  exclude?: string | string[]
+  exclude?: string | Array<string | string[]>
   /**
    * Violations to ignore/filter out. 'color-contrast' is automatically excluded
    * because we test color contrast in theme tests.
@@ -34,20 +34,22 @@ type AxeCheckOptions = {
 }
 
 export default async function runAxe(
-  element: string,
+  element: string | Node,
   options: AxeCheckOptions = {}
 ) {
   let result: Error | true = true
   const context: axeCore.ContextObject = {
-    include: [element],
+    // This can accept a DOM node, just the typing is buggy as of axe-core 4.3.5
+    // https://github.com/dequelabs/axe-core/issues/3334
+    include: [element as any],
     exclude: options.exclude
   }
-  const config = {
+  const config: axeCore.RunOptions = {
     runOnly: {
       type: 'tag',
       values: ['wcag2a', 'wcag2aa', 'section508', 'best-practice']
     }
-  } as axeCore.RunOptions
+  }
 
   try {
     const axeResult = await axeCore.run(context, config)
