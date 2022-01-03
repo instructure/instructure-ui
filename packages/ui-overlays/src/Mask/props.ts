@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { InputHTMLAttributes } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import type {
@@ -34,14 +34,18 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MaskOwnProps = {
   children?: React.ReactNode
-  onDismiss?: (...args: any[]) => any
   placement?: 'top' | 'center' | 'bottom' | 'stretch'
   fullscreen?: boolean
-  onClick?: (...args: any[]) => any
+  onClick?: (event: React.MouseEvent<HTMLSpanElement>) => void
   /**
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+
+  /**
+   * __Deprecated__: The component doesn't use onDismiss internally, will be removed in V9.
+   */
+  onDismiss?: () => void
 }
 
 type PropKeys = keyof MaskOwnProps
@@ -55,21 +59,23 @@ type MaskProps = MaskOwnProps &
 type MaskStyle = ComponentStyle<'mask'>
 
 const propTypes: PropValidators<PropKeys> = {
-  onDismiss: PropTypes.func,
   placement: PropTypes.oneOf(['top', 'center', 'bottom', 'stretch']),
   fullscreen: PropTypes.bool,
   children: PropTypes.node,
   onClick: PropTypes.func,
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  onDismiss: PropTypes.func // TODO: deprecated, remove in V9
 }
 
 const allowedProps: AllowedPropKeys = [
-  'onDismiss',
   'placement',
   'fullscreen',
   'children',
   'onClick',
-  'elementRef'
+  'elementRef',
+
+  // TODO: deprecated, remove in V9
+  'onDismiss'
 ]
 
 export type { MaskProps, MaskStyle }

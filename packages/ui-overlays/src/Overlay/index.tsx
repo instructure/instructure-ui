@@ -26,7 +26,7 @@ import React, { Component, ComponentClass, ReactElement } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { omitProps, pickProps } from '@instructure/ui-react-utils'
+import { omitProps, pickProps, deprecated } from '@instructure/ui-react-utils'
 
 import { Dialog } from '@instructure/ui-dialog'
 import type { DialogProps } from '@instructure/ui-dialog'
@@ -45,6 +45,7 @@ category: components
 @tsProps
 **/
 @testable()
+@deprecated('9.0.0', { applicationElement: null })
 class Overlay extends Component<OverlayProps, OverlayState> {
   static allowedProps = allowedProps
   static propTypes = propTypes
