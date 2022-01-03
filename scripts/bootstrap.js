@@ -23,25 +23,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const util = require('util')
-const { execSync, fork, spawn } = require('child_process')
+const { execSync, fork, spawn, exec } = require('child_process')
 const path = require('path')
-const spawnAsync = util.promisify(spawn)
 
 const opts = { stdio: 'inherit' }
-async function buildProject() {
-  spawnAsync('yarn', ['build:ts'], opts)
+function buildProject() {
+  // this config lets us use the exisiting shell session for the sub processes stdins and stdouts
+  // and lets us handle the stderrs of sub processes
+  // if one of the sub processes fails, then we terminate the other sub process and exit he main process
+  const spawnStdIoOpts = { stdio: ['inherit', 'inherit', 'pipe'] }
+  const tsBuild = spawn('yarn', ['build:ts'], spawnStdIoOpts)
+  const babelBuild = spawn('yarn', ['build'], spawnStdIoOpts)
+  tsBuild.on('exit', (code) => {
+    if (code !== 0) {
+      babelBuild.kill()
+      process.exit(1)
+    }
+  })
+  babelBuild.on('exit', (code) => {
+    if (code !== 0) {
+      tsBuild.kill()
+      process.exit(1)
+    }
 
-  execSync('yarn build', opts)
-
-  if (process.env.CI) {
-    execSync('yarn build:tokens', opts)
-  }
+    if (process.env.CI) {
+      execSync('yarn build:tokens', opts)
+    }
+  })
 }
-async function bootstrap() {
-  execSync('yarn clean:modules', opts)
-  fork(path.resolve('scripts/clean.js'), opts)
-  execSync('yarn install:packages', opts)
+function bootstrap() {
+  try {
+    execSync('yarn clean:modules', opts)
+    fork(path.resolve('scripts/clean.js'), opts)
+    execSync('yarn install:packages', opts)
+  } catch (error) {
+    console.error(error)
+    process.exit(1)
+  }
 
   buildProject()
 }
