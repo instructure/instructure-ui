@@ -42,30 +42,109 @@ import type {
 } from '@instructure/shared-types'
 import type { PaginationPageProps } from './PaginationButton/props'
 
+type ChildPage = React.ReactElement<PaginationPageProps>
+
 type PaginationOwnProps = {
   // this won't filter the children completely well,
   // it will allow simple elements (e.g. `<div>`) and components with compatible props
   // TODO: find a better way to type Children.oneOf([PaginationButton])
-  children?:
-    | React.ReactElement<PaginationPageProps>
-    | React.ReactElement<PaginationPageProps>[]
+  /**
+   * children of type Pagination.Page
+   */
+  children?: ChildPage | ChildPage[]
+
+  /**
+   * Disables interaction with all pages
+   */
   disabled?: boolean
+
+  /**
+   * Displays "jump to first" and "jump to last" buttons. Always turned on with `input` variant.
+   */
   withFirstAndLastButton?: boolean
+
+  /**
+   * Displays the unavailable navigation buttons as disabled instead of hiding them. Always turned on with `input` variant.
+   */
   showDisabledButtons?: boolean
+
+  /**
+   * Visible label for component
+   */
   label?: React.ReactNode
+
+  /**
+   * Accessible label for next button
+   */
   labelNext?: string
+
+  /**
+   * Accessible label for previous button
+   */
   labelPrev?: string
+
+  /**
+   * Accessible label for "jump to first" button
+   */
   labelFirst?: string
+
+  /**
+   * Accessible label for "jump to last" button
+   */
   labelLast?: string
+
+  /**
+   * Label for number input
+   *
+   * (__only__ for `input` variant)
+   */
   labelNumberInput?: (numberOfPages: number) => React.ReactNode
+
+  /**
+   * ScreenReaderLabel for number input
+   *
+   * (__only__ for `input` variant)
+   */
   screenReaderLabelNumberInput?: (
     currentPage: number,
     numberOfPages: number
   ) => string
+
+  /**
+   * The compact variant truncates the page navigation to show only the first,
+   * last, and pages immediately surrounding the current page. Fewer than 5 pages,
+   * no next/previous arrow buttons will be shown, and all pages will be listed
+   */
   variant?: 'full' | 'compact' | 'input'
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+
+  /**
+   * the element type to render as
+   */
   as?: AsElementType
+
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
+
+  /**
+   * provides a reference to the html input element
+   *
+   * (__only__ for `input` variant)
+   */
+  inputRef?: (inputElement: HTMLInputElement | null) => void
+
+  /**
+   * For accessibility, Pagination sets focus on the first or last Pagination.Pages, respectively, when the Previous or Next arrow buttons are removed from the DOM.
+   * Set this property to `false` to prevent this behavior.
+   */
   shouldHandleFocus?: boolean
 }
 
@@ -80,75 +159,22 @@ type PaginationProps = PaginationOwnProps &
 type PaginationStyle = ComponentStyle<'pagination' | 'pages'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * children of type Pagination.Page
-   */
   children: Children.oneOf([PaginationButton]),
-  /**
-   * Disables interaction with all pages
-   */
   disabled: PropTypes.bool,
-  /**
-   * Displays "jump to first" and "jump to last" buttons. Always turned on with `input` variant.
-   */
   withFirstAndLastButton: PropTypes.bool,
-  /**
-   * Displays the unavailable navigation buttons as disabled instead of hiding them.  Always turned on with `input` variant.
-   */
   showDisabledButtons: PropTypes.bool,
-  /**
-   * Visible label for component
-   */
   label: PropTypes.node,
-  /**
-   * Accessible label for next button
-   */
   labelNext: PropTypes.string,
-  /**
-   * Accessible label for previous button
-   */
   labelPrev: PropTypes.string,
-  /**
-   * Accessible label for "jump to first" button
-   */
   labelFirst: PropTypes.string,
-  /**
-   * Accessible label for "jump to last" button
-   */
   labelLast: PropTypes.string,
-  /**
-   * Label for number input (for `input` variant)
-   */
   labelNumberInput: PropTypes.func,
-  /**
-   * ScreenReaderLabel for number input (for `input` variant)
-   */
   screenReaderLabelNumberInput: PropTypes.func,
-  /**
-   * The compact variant truncates the page navigation to show only the first,
-   * last, and pages immediately surrounding the current page. Fewer than 5 pages,
-   * no next/previous arrow buttons will be shown, and all pages will be listed
-   */
   variant: PropTypes.oneOf(['full', 'compact', 'input']),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * the element type to render as
-   */
   as: PropTypes.elementType,
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func,
-  /**
-   * For accessibility, Pagination sets focus on the first or last Pagination.Pages,
-   * respectively, when the Previous or Next arrow buttons are removed from the DOM.
-   * Set this property to `false` to prevent this behavior.
-   */
+  inputRef: PropTypes.func,
   shouldHandleFocus: PropTypes.bool
 }
 
@@ -168,6 +194,7 @@ const allowedProps: AllowedPropKeys = [
   'margin',
   'as',
   'elementRef',
+  'inputRef',
   'shouldHandleFocus'
 ]
 
@@ -175,5 +202,5 @@ type PaginationSnapshot = {
   lastFocusedButton?: HTMLButtonElement
 }
 
-export type { PaginationProps, PaginationStyle, PaginationSnapshot }
+export type { PaginationProps, PaginationStyle, PaginationSnapshot, ChildPage }
 export { propTypes, allowedProps }

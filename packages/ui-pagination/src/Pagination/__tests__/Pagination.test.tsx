@@ -30,6 +30,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Pagination, PaginationButton } from '../index'
 import { PaginationLocator } from '../PaginationLocator'
 import { View } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view'
 
 const buildPages = (count = 4, current = 0) => {
   return Array.from(Array(count)).map((_v, i) => {
@@ -717,7 +718,7 @@ describe('<Pagination />', async () => {
     })
 
     describe('when passing down props to View', async () => {
-      const allowedProps = {
+      const allowedProps: Partial<ViewOwnProps> = {
         margin: 'small',
         as: 'section'
       }
@@ -747,7 +748,6 @@ describe('<Pagination />', async () => {
             })
           } else {
             it(`should allow the '${prop}' prop`, async () => {
-              // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
               const props = { [prop]: allowedProps[prop] }
               const consoleError = stub(console, 'error')
 

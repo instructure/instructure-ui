@@ -61,7 +61,6 @@ class PaginationPageInput extends Component<
   }
 
   ref: HTMLSpanElement | null = null
-  _inputRef: HTMLInputElement | null = null
 
   constructor(props: PaginationPageInputProps) {
     super(props)
@@ -111,8 +110,6 @@ class PaginationPageInput extends Component<
   }
 
   handleInputRef = (el: HTMLInputElement | null) => {
-    this._inputRef = el
-
     if (typeof this.props.inputRef === 'function') {
       this.props.inputRef(el)
     }

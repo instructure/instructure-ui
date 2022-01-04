@@ -56,12 +56,14 @@ class PaginationButton extends Component<PaginationPageProps> {
 
   render() {
     const exclude = this.props.current ? ['onClick', 'href'] : []
+
     const props = omitProps(this.props, PaginationButton.allowedProps, exclude)
+
     return (
       <BaseButton
         color="primary"
-        withBackground={this.props.current ? true : false}
-        withBorder={this.props.current ? true : false}
+        withBackground={this.props.current}
+        withBorder={this.props.current}
         {...props}
         aria-current={this.props.current ? 'page' : undefined}
         elementRef={this.handleRef}

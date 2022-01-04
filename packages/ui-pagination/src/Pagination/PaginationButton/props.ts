@@ -27,12 +27,23 @@ import PropTypes from 'prop-types'
 
 import type {
   OtherHTMLAttributes,
+  PickPropsWithExceptions,
   PropValidators
 } from '@instructure/shared-types'
+import type { BaseButtonProps } from '@instructure/ui-buttons'
 
 type PaginationPageOwnProps = {
+  /**
+   * Content to render as page selection
+   */
   children: React.ReactNode
+  /**
+   * Whether the page is currently displayed
+   */
   current?: boolean
+  /**
+   * Whether the page is currently displayed
+   */
   onClick?: (
     event:
       | React.KeyboardEvent<HTMLInputElement>
@@ -45,21 +56,15 @@ type PropKeys = keyof PaginationPageOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PaginationPageProps = PaginationPageOwnProps &
-  OtherHTMLAttributes<PaginationPageOwnProps>
+type PaginationPageProps =
+  // We pass almost all props to BaseButton
+  PickPropsWithExceptions<BaseButtonProps, 'aria-current' | 'elementRef'> &
+    PaginationPageOwnProps &
+    OtherHTMLAttributes<PaginationPageOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Content to render as page selection
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * Whether the page is currently displayed
-   */
   current: PropTypes.bool,
-  /**
-   * Whether the page is currently displayed
-   */
   onClick: PropTypes.func
 }
 

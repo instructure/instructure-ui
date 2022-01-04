@@ -42,12 +42,13 @@ import type { PaginationPageProps } from './PaginationButton/props'
 import type { PaginationArrowDirections } from './PaginationArrowButton/props'
 
 import { propTypes, allowedProps } from './props'
-import type { PaginationProps, PaginationSnapshot } from './props'
+import type { PaginationProps, PaginationSnapshot, ChildPage } from './props'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'arr' implicitly has an 'any' type.
-const fastFindIndex = (arr, fn) =>
-  Number(Object.keys(arr).find((k) => fn(arr[Number(k)])))
+const fastFindIndex = (
+  arr: ChildPage[],
+  fn: (page: ChildPage) => boolean | undefined
+) => Number(Object.keys(arr).find((k) => fn(arr[Number(k)])))
 
 const childrenArray = (props: PaginationProps) => {
   const { children } = props
@@ -69,13 +70,14 @@ type ArrowConfig = {
   pageIndex: number
   label: string
   shouldEnableIcon: boolean
-  handleButtonRef: (el: HTMLButtonElement) => void
+  handleButtonRef: (el: Element | null) => void
 }
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, null)
 @testable()
@@ -85,14 +87,11 @@ class Pagination extends Component<PaginationProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     disabled: false,
     withFirstAndLastButton: false,
     showDisabledButtons: false,
     variant: 'full',
     as: 'div',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
     labelNumberInput: (numberOfPages: number) => `of ${numberOfPages}`,
     screenReaderLabelNumberInput: (
       currentPage: number,
@@ -104,20 +103,17 @@ class Pagination extends Component<PaginationProps> {
   static Page = PaginationButton
   static Navigation = PaginationArrowButton
 
-  _labelId: string
+  private readonly _labelId: string
+
+  private _firstButton: HTMLButtonElement | null = null
+  private _prevButton: HTMLButtonElement | null = null
+  private _nextButton: HTMLButtonElement | null = null
+  private _lastButton: HTMLButtonElement | null = null
 
   ref: Element | null = null
-  _inputRef: Element | null = null
 
-  _firstButton: HTMLButtonElement | null = null
-  _prevButton: HTMLButtonElement | null = null
-  _nextButton: HTMLButtonElement | null = null
-  _lastButton: HTMLButtonElement | null = null
-
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-  constructor(...args) {
-    // @ts-expect-error ts-migrate(2556) FIXME: Expected 1-2 arguments, but got 0 or more.
-    super(...args)
+  constructor(props: PaginationProps) {
+    super(props)
 
     this._labelId = uid('Pagination')
   }
@@ -221,15 +217,15 @@ class Pagination extends Component<PaginationProps> {
 
   handleElementRef = (el: Element | null) => {
     this.ref = el
-    if (el) {
-      if (typeof this.props.elementRef === 'function') {
-        this.props.elementRef(el)
-      }
+    if (el && typeof this.props.elementRef === 'function') {
+      this.props.elementRef(el)
     }
   }
 
-  handleInputRef = (el: Element | null) => {
-    this._inputRef = el
+  handleInputRef = (el: HTMLInputElement | null) => {
+    if (typeof this.props.inputRef === 'function') {
+      this.props.inputRef(el)
+    }
   }
 
   renderLabel() {
@@ -326,7 +322,7 @@ class Pagination extends Component<PaginationProps> {
           label: this.props.labelFirst || 'First Page',
           shouldEnableIcon: currentPageIndex > 1,
           handleButtonRef: (el) => {
-            this._firstButton = el
+            this._firstButton = el as HTMLButtonElement
           }
         }
       case 'prev':
@@ -335,7 +331,7 @@ class Pagination extends Component<PaginationProps> {
           label: this.props.labelPrev || 'Previous Page',
           shouldEnableIcon: currentPageIndex > 0,
           handleButtonRef: (el) => {
-            this._prevButton = el
+            this._prevButton = el as HTMLButtonElement
           }
         }
       case 'next':
@@ -344,7 +340,7 @@ class Pagination extends Component<PaginationProps> {
           label: this.props.labelNext || 'Next Page',
           shouldEnableIcon: currentPageIndex < pagesCount - 1,
           handleButtonRef: (el) => {
-            this._nextButton = el
+            this._nextButton = el as HTMLButtonElement
           }
         }
       case 'last':
@@ -353,7 +349,7 @@ class Pagination extends Component<PaginationProps> {
           label: this.props.labelLast || 'Last Page',
           shouldEnableIcon: currentPageIndex < pagesCount - 2,
           handleButtonRef: (el) => {
-            this._lastButton = el
+            this._lastButton = el as HTMLButtonElement
           }
         }
     }
@@ -402,8 +398,7 @@ class Pagination extends Component<PaginationProps> {
     if (!this.props.children) return null
 
     const currentPageIndex = fastFindIndex(
-      this.props.children,
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'p' implicitly has an 'any' type.
+      this.childPages,
       (p) => p && p.props && p.props.current
     )
 
