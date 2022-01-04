@@ -30,7 +30,7 @@ import {
   stub,
   wait
 } from '@instructure/ui-test-utils'
-
+import type { SinonStub } from '@instructure/ui-test-utils'
 import moment from 'moment-timezone'
 import { TimeSelect } from '../index'
 import { TimeSelectLocator } from '../TimeSelectLocator'
@@ -38,8 +38,7 @@ import TimeSelectExamples from '../__examples__/TimeSelect.examples'
 import { DateTime, ApplyLocale } from '@instructure/ui-i18n'
 
 describe('<TimeSelect />', async () => {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'spy' implicitly has an 'any' type.
-  const lastCall = (spy) => spy.lastCall.args
+  const lastCall = (spy: SinonStub) => spy.lastCall.args
 
   it('should render an input and list', async () => {
     await mount(<TimeSelect renderLabel="Choose a time" />)
