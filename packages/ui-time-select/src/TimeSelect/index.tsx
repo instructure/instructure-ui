@@ -37,29 +37,21 @@ import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
 
 import type { SelectProps } from '@instructure/ui-select'
-import type { TimeSelectProps } from './props'
+import type {
+  TimeSelectProps,
+  TimeSelectState,
+  TimeSelectOptions
+} from './props'
 
 import { allowedProps, propTypes } from './props'
-
-type TimeSelectOptions = {
-  id: string
-  value: string
-  label: string
-}
-
-type TimeSelectState = {
-  inputValue: string
-  options: TimeSelectOptions[]
-  filteredOptions: TimeSelectOptions[]
-  isShowingOptions: boolean
-  highlightedOptionId?: string
-  selectedOptionId?: string
-}
 
 /**
 ---
 category: components
 ---
+@tsProps
+
+A component used to select a time value.
  **/
 @testable()
 class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
@@ -70,7 +62,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
 
   static defaultProps = {
     defaultToFirstOption: false,
-    id: undefined,
     format: 'LT', // see https://momentjs.com/docs/#/displaying/
     step: 30,
     isRequired: false,
@@ -78,26 +69,13 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     visibleOptionsCount: 8,
     placement: 'bottom stretch',
     constrain: 'window',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onChange: (event, data) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onShowOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onHideOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    inputRef: (node) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    listRef: (node) => {},
-    renderEmptyOption: '---',
-    renderBeforeInput: null,
-    renderAfterInput: null
+    renderEmptyOption: '---'
   }
 
   static contextType = ApplyLocaleContext
+
+  ref: Select | null = null
+  _emptyOptionId = uid('Select-EmptyOption')
 
   constructor(props: TimeSelectProps) {
     super(props)
@@ -110,21 +88,19 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     this.setState(this.getInitialState())
   }
 
-  ref: Element | null = null
-  _emptyOptionId = uid('Select-EmptyOption')
-
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'TimeSel... Remove this comment to see the full error message
-    this.ref && this.ref.focus()
+    if (this.ref) {
+      this.ref.focus()
+    }
   }
 
   get _select() {
     console.warn(
       '_select property is deprecated and will be removed in v9, please use ref instead'
     )
-
     return this.ref
   }
+
   get isControlled() {
     return typeof this.props.value !== 'undefined'
   }
@@ -134,7 +110,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'TimeSel... Remove this comment to see the full error message
     return this.ref && this.ref.focused
   }
 
@@ -185,7 +160,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     }
   }
 
-  getInitialState() {
+  getInitialState(): TimeSelectState {
     const initialOptions = this.generateOptions()
     const initialSelection = this.getInitialOption(initialOptions)
     return {
@@ -193,16 +168,14 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       options: initialOptions,
       filteredOptions: initialOptions,
       isShowingOptions: false,
-      highlightedOptionId: initialSelection
-        ? (initialSelection as any).id
-        : undefined,
-      selectedOptionId: initialSelection
-        ? (initialSelection as any).id
-        : undefined
+      highlightedOptionId: initialSelection ? initialSelection.id : undefined,
+      selectedOptionId: initialSelection ? initialSelection.id : undefined
     }
   }
 
-  getInitialOption(options: TimeSelectOptions[]) {
+  getInitialOption(
+    options: TimeSelectOptions[]
+  ): TimeSelectOptions | undefined {
     const { value, defaultValue, defaultToFirstOption, format } = this.props
     const initialValue = value || defaultValue
 
@@ -217,22 +190,25 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       const date = DateTime.parse(initialValue, this.locale(), this.timezone())
       return { label: format ? date.format(format) : date.toISOString() }
     }
-    // otherwise return first option, if desired
+    // otherwise, return first option, if desired
     if (defaultToFirstOption) {
       return options[0]
     }
     return undefined
   }
 
-  getOption(field: string, value: unknown, options = this.state.options) {
-    return options.find((option: any) => option[field] === value)
+  getOption(
+    field: 'id' | 'value' | 'label',
+    value?: string,
+    options = this.state.options
+  ) {
+    return options.find((option: TimeSelectOptions) => option[field] === value)
   }
 
   getFormattedId(date: Moment) {
     // ISO8601 strings may contain a space. Remove any spaces before using the
     // date as the id.
-    const dateStr = date.toISOString()
-    return dateStr.replace(/\s/g, '')
+    return date.toISOString().replace(/\s/g, '')
   }
 
   getBaseDate() {
@@ -251,10 +227,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     const options = []
 
     for (let hour = 0; hour < 24; hour++) {
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      for (let minute = 0; minute < 60 / this.props.step; minute++) {
-        // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-        const minutes = minute * this.props.step
+      for (let minute = 0; minute < 60 / this.props.step!; minute++) {
+        const minutes = minute * this.props.step!
         const newDate = date.set({ hour: hour, minute: minutes })
         // store time options
         options.push({
@@ -317,7 +291,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     return undefined
   }
 
-  handleRef = (node: any) => {
+  handleRef = (node: Select) => {
     this.ref = node
   }
 
@@ -330,7 +304,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     const value = event.target.value
     const newOptions = this.filterOptions(value)
 
-    this.setState((_state: TimeSelectState) => ({
+    this.setState(() => ({
       inputValue: value,
       filteredOptions: newOptions,
       highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : undefined,
@@ -368,7 +342,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         : date.toISOString()
     }
 
-    this.setState((_state: TimeSelectState) => ({
+    this.setState(() => ({
       isShowingOptions: false,
       highlightedOptionId: undefined,
       inputValue: selectedOptionId ? option!.label : prevValue,
@@ -400,7 +374,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       this.setState({ isShowingOptions: false })
       return
     }
-    const option = this.getOption('id', id)
+    const option = this.getOption('id', id)!
 
     let newInputValue: string
     if (this.isControlled) {
@@ -412,7 +386,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         filteredOptions: this.filterOptions('')
       })
     } else {
-      newInputValue = option!.label
+      newInputValue = option.label
       this.setState({
         isShowingOptions: false,
         selectedOptionId: id,
@@ -423,7 +397,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
 
     if (id !== this.state.selectedOptionId) {
       this.props.onChange?.(event, {
-        value: option!.value,
+        value: option.value,
         inputText: newInputValue
       })
     }
@@ -438,11 +412,11 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       return this.renderEmptyOption()
     }
 
-    return filteredOptions.map((option: any) => {
+    return filteredOptions.map((option: TimeSelectOptions) => {
       const { id, label } = option
       return (
         <Select.Option
-          id={id}
+          id={id!}
           key={id}
           isHighlighted={id === highlightedOptionId}
           isSelected={id === selectedOptionId}

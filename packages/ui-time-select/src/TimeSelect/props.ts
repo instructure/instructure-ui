@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { InputHTMLAttributes } from 'react'
+import React, { BaseSyntheticEvent, InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -40,38 +40,6 @@ import type {
   PositionConstraint
 } from '@instructure/ui-position'
 
-type TimeSelectOwnProps = {
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
-  defaultToFirstOption?: boolean
-  value?: any // TODO: controllable(I18nPropTypes.iso8601, 'onChange'),
-  defaultValue?: string
-  id?: string
-  format?: string
-  step?: 5 | 10 | 15 | 20 | 30 | 60
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  placeholder?: string
-  isRequired?: boolean
-  isInline?: boolean
-  width?: string
-  optionsMaxWidth?: string
-  visibleOptionsCount?: number
-  messages?: FormMessage[]
-  placement?: PlacementPropValues
-  constrain?: PositionConstraint
-  onChange?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onShowOptions?: (...args: any[]) => any
-  onHideOptions?: (...args: any[]) => any
-  inputRef?: (...args: any[]) => any
-  listRef?: (...args: any[]) => any
-  renderEmptyOption?: React.ReactNode | ((...args: any[]) => any)
-  renderBeforeInput?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterInput?: React.ReactNode | ((...args: any[]) => any)
-  locale?: string
-  timezone?: string
-}
-
 type PropKeys = keyof TimeSelectOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
@@ -82,73 +50,70 @@ type TimeSelectProps = TimeSelectOwnProps &
     InputHTMLAttributes<TimeSelectOwnProps>
   >
 
-const propTypes: PropValidators<PropKeys> = {
+type TimeSelectOwnProps = {
   /**
    * The form field label.
    */
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  renderLabel: React.ReactNode | (() => React.ReactNode)
   /**
    * Whether to default to the first option when `defaultValue` hasn't been specified.
    */
-  defaultToFirstOption: PropTypes.bool,
+  defaultToFirstOption?: boolean
   /**
    * An ISO 8601 formatted date string representing the current selected value. If defined,
    * the component will act controlled and will not manage its own state.
    */
-  value: controllable(I18nPropTypes.iso8601, 'onChange'),
+  value?: string // TODO: controllable(I18nPropTypes.iso8601, 'onChange'),
   /**
    * An ISO 8601 formatted date string to use if `value` isn't provided.
    */
-  defaultValue: I18nPropTypes.iso8601,
+  defaultValue?: string
   /**
    * The id of the text input. One is generated if not supplied.
    */
-  id: PropTypes.string,
+  id?: string
   /**
    * The format to use when displaying the possible and currently selected options.
    *
    * See [moment](https://momentjs.com/docs/#/displaying/format/) for the list
    * of available formats.
    */
-  format: PropTypes.string,
+  format?: string
   /**
    * The number of minutes to increment by when generating the allowable options.
    */
-  step: PropTypes.oneOf([5, 10, 15, 20, 30, 60]),
+  step?: 5 | 10 | 15 | 20 | 30 | 60
   /**
    * Specifies if interaction with the input is enabled, disabled, or readonly.
    * When "disabled", the input changes visibly to indicate that it cannot
    * receive user interactions. When "readonly" the input still cannot receive
-   * user interactions but it keeps the same styles as if it were enabled.
+   * user interactions, but it keeps the same styles as if it were enabled.
    */
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
+  interaction?: 'enabled' | 'disabled' | 'readonly'
   /**
    * Html placeholder text to display when the input has no value. This should
    * be hint text, not a label replacement.
    */
-  placeholder: PropTypes.string,
-  /**
-   * Whether or not the text input is required.
-   */
-  isRequired: PropTypes.bool,
+  placeholder?: string
+  isRequired?: boolean
   /**
    * Whether the input is rendered inline with other elements or if it
    * is rendered as a block level element.
    */
-  isInline: PropTypes.bool,
+  isInline?: boolean
   /**
    * The width of the text input.
    */
-  width: PropTypes.string,
+  width?: string
   /**
    * The max width the options list can be before option text wraps. If not
    * set, the list will only display as wide as the text input.
    */
-  optionsMaxWidth: PropTypes.string,
+  optionsMaxWidth?: string
   /**
    * The number of options that should be visible before having to scroll.
    */
-  visibleOptionsCount: PropTypes.number,
+  visibleOptionsCount?: number
   /**
    * Displays messages and validation for the input. It should be an object
    * with the following shape:
@@ -157,61 +122,63 @@ const propTypes: PropValidators<PropKeys> = {
    *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
    * }`
    */
-  messages: PropTypes.arrayOf(FormPropTypes.message),
+  messages?: FormMessage[]
   /**
    * The placement of the options list.
    */
-  placement: PositionPropTypes.placement,
+  placement?: PlacementPropValues
   /**
    * The parent in which to constrain the placement.
    */
-  constrain: PositionPropTypes.constrain,
+  constrain?: PositionConstraint
   /**
    * Callback fired when a new option is selected.
    * @param {Object} event - the event object
    * @param {Object} data - additional data
    * @param data.value - the value of selected option
+   * @param data.inputText - the value in the input text
    */
-  onChange: PropTypes.func,
+  onChange?: (
+    event: React.SyntheticEvent,
+    data: { value?: string; inputText: string }
+  ) => void
   /**
    * Callback fired when text input receives focus.
    */
-  onFocus: PropTypes.func,
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
   /**
    * Callback fired when text input loses focus.
    */
-  onBlur: PropTypes.func,
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
   /**
    * Callback fired when the options list is shown.
    */
-  onShowOptions: PropTypes.func,
+  onShowOptions?: (event: BaseSyntheticEvent) => void
   /**
    * Callback fired when the options list is hidden.
    */
-  onHideOptions: PropTypes.func,
+  onHideOptions?: (event: React.SyntheticEvent) => void
   /**
    * A ref to the html `input` element.
    */
-  inputRef: PropTypes.func,
+  inputRef?: (inputElement: HTMLInputElement | null) => void
   /**
    * A ref to the html `ul` element.
    */
-  listRef: PropTypes.func,
+  listRef?: (listElement: HTMLUListElement | null) => void
   /**
    * Content to display in the list when no options are available.
    */
-  renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderEmptyOption?: React.ReactNode | (() => React.ReactNode)
   /**
    * Content to display before the text input. This will commonly be an icon.
    */
-  renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderBeforeInput?: React.ReactNode | (() => React.ReactNode)
   /**
    * Content to display after the text input. This content will replace the
    * default arrow icons.
    */
-  renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-
-  /* eslint-disable react/require-default-props */
+  renderAfterInput?: React.ReactNode | (() => React.ReactNode)
   /**
    * A standard language identifier.
    *
@@ -223,7 +190,7 @@ const propTypes: PropValidators<PropKeys> = {
    * The web browser's locale will be used if no value is set via a component property or a context
    * property.
    */
-  locale: PropTypes.string,
+  locale?: string
   /**
    * A timezone identifier in the format: Area/Location
    *
@@ -236,8 +203,39 @@ const propTypes: PropValidators<PropKeys> = {
    * The web browser's timezone will be used if no value is set via a component property or a context
    * property.
    */
+  timezone?: string
+}
+
+const propTypes: PropValidators<PropKeys> = {
+  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  defaultToFirstOption: PropTypes.bool,
+  value: controllable(I18nPropTypes.iso8601, 'onChange'),
+  defaultValue: I18nPropTypes.iso8601,
+  id: PropTypes.string,
+  format: PropTypes.string,
+  step: PropTypes.oneOf([5, 10, 15, 20, 30, 60]),
+  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
+  placeholder: PropTypes.string,
+  isRequired: PropTypes.bool,
+  isInline: PropTypes.bool,
+  width: PropTypes.string,
+  optionsMaxWidth: PropTypes.string,
+  visibleOptionsCount: PropTypes.number,
+  messages: PropTypes.arrayOf(FormPropTypes.message),
+  placement: PositionPropTypes.placement,
+  constrain: PositionPropTypes.constrain,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onShowOptions: PropTypes.func,
+  onHideOptions: PropTypes.func,
+  inputRef: PropTypes.func,
+  listRef: PropTypes.func,
+  renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  locale: PropTypes.string,
   timezone: PropTypes.string
-  /* eslint-enable react/require-default-props */
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -272,5 +270,20 @@ const allowedProps: AllowedPropKeys = [
   'timezone'
 ]
 
-export type { TimeSelectProps }
+type TimeSelectOptions = {
+  id?: string
+  value?: string
+  label: string
+}
+
+type TimeSelectState = {
+  inputValue: string
+  options: TimeSelectOptions[]
+  filteredOptions: TimeSelectOptions[]
+  isShowingOptions: boolean
+  highlightedOptionId?: string
+  selectedOptionId?: string
+}
+
+export type { TimeSelectProps, TimeSelectState, TimeSelectOptions }
 export { propTypes, allowedProps }

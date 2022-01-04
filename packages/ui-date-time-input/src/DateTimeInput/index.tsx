@@ -222,7 +222,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     // update state based on the DateInput's text value
     if (
       this.state.dateInputTextChanged ||
-      ((event as unknown) as KeyboardEvent).key === 'Enter'
+      (event as unknown as KeyboardEvent).key === 'Enter'
     ) {
       const dateParsed = this.tryParseDate(this.state.dateInputText)
       this.updateStateBasedOnDateInput(dateParsed, event)
@@ -276,9 +276,9 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
 
   handleTimeChange = (
     event: SyntheticEvent,
-    option: { value: string; inputText: string }
+    option: { value?: string; inputText: string }
   ) => {
-    let newValue: string
+    let newValue: string | undefined
     if (this.state.iso) {
       newValue = option.value
     } else {

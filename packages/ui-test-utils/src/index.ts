@@ -52,6 +52,11 @@ import {
   viewport,
   match
 } from '@instructure/ui-test-sandbox'
+import type {
+  SinonStub,
+  SinonSpy,
+  SinonSandbox
+} from '@instructure/ui-test-sandbox'
 
 import './utils/shims'
 
@@ -109,7 +114,14 @@ declare global {
   }
 }
 
-export type { StoryConfig, Example, ExamplesPage }
+export type {
+  StoryConfig,
+  Example,
+  ExamplesPage,
+  SinonStub,
+  SinonSpy,
+  SinonSandbox
+}
 
 // aliases for backwards compat:
 const within = wrapQueryResult

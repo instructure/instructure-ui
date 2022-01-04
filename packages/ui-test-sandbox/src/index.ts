@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 
+export type { SinonStub, SinonSpy, SinonSandbox } from 'sinon'
 export { viewport, mount, unmount, stub, spy, match } from './utils/sandbox'
-
 export { ReactComponentWrapper } from './utils/reactComponentWrapper'
