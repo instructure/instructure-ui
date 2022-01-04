@@ -43,6 +43,7 @@ import { allowedProps, propTypes } from './props'
 parent: Pagination
 id: Pagination.Navigation
 ---
+@tsProps
 **/
 @testable()
 class PaginationArrowButton extends Component<PaginationNavigationProps> {
@@ -51,10 +52,7 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
   static allowedProps = allowedProps
   static propTypes = propTypes
 
-  static defaultProps = {
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    buttonRef: (el) => {}
-  }
+  static defaultProps = {}
 
   ref: Element | null = null
 
@@ -90,6 +88,7 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
 
   render() {
     const { label, direction, buttonRef, ...props } = this.props
+
     return (
       <Tooltip
         on={['hover', 'focus']}
@@ -104,9 +103,7 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
           size="small"
           withBackground={false}
           withBorder={false}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           screenReaderLabel={label}
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'href' does not exist on type '{ children... Remove this comment to see the full error message
           rel={props.href || props.to ? direction : undefined}
           elementRef={buttonRef}
           margin={this.margin}

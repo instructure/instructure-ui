@@ -27,15 +27,17 @@ import PropTypes from 'prop-types'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  PickPropsWithExceptions
 } from '@instructure/shared-types'
+import type { IconButtonProps } from '@instructure/ui-buttons'
 
 type PaginationArrowDirections = 'first' | 'prev' | 'next' | 'last'
 
 type PaginationNavigationOwnProps = {
   direction?: PaginationArrowDirections
-  label: string | React.ReactChild | React.ReactFragment
-  buttonRef?: (...args: any[]) => any
+  label: string
+  buttonRef?: (element: Element | null) => void
   onClick?: (
     event:
       | React.KeyboardEvent<HTMLInputElement>
@@ -48,12 +50,24 @@ type PropKeys = keyof PaginationNavigationOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PaginationNavigationProps = PaginationNavigationOwnProps &
-  OtherHTMLAttributes<PaginationNavigationOwnProps>
+type PaginationNavigationProps =
+  // We pass almost all the props to IconButton
+  PickPropsWithExceptions<
+    IconButtonProps,
+    | 'size'
+    | 'withBackground'
+    | 'withBorder'
+    | 'screenReaderLabel'
+    | 'rel'
+    | 'elementRef'
+    | 'margin'
+  > &
+    PaginationNavigationOwnProps &
+    OtherHTMLAttributes<PaginationNavigationOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
   direction: PropTypes.oneOf(['first', 'prev', 'next', 'last']),
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  label: PropTypes.string.isRequired,
   buttonRef: PropTypes.func,
   onClick: PropTypes.func
 }

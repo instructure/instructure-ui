@@ -65,7 +65,7 @@ type PaginationPageInputOwnProps = {
   /**
    * provides a reference to the underlying html root element
    */
-  inputRef?: (element: Element | null) => void
+  inputRef?: (element: HTMLInputElement | null) => void
 }
 
 type PropKeys = keyof PaginationPageInputOwnProps
