@@ -22,52 +22,31 @@
  * SOFTWARE.
  */
 
-import React, { ReactElement } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Children } from '@instructure/ui-prop-types'
 
 import { TreeNode } from '../TreeNode'
-import type { CollectionData, CollectionItem } from '../props'
+import type { CollectionData } from '../props'
 
 import type {
   PropValidators,
   TreeBrowserCollectionTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import { CollectionProps } from '../props'
+import { CollectionProps, TreeBrowserBaseProps } from '../props'
 
 type TreeBrowserCollectionOwnProps = {
-  id?: string | number //!!
-  name?: string //!!
-  descriptor?: string //!!
-  size?: 'small' | 'medium' | 'large'
-  variant?: 'folderTree' | 'indent'
-  collectionIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
-  collectionIconExpanded?:
-    | React.ReactNode
-    | ((props: unknown) => React.ReactNode)
-  itemIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
-  expanded?: boolean //!!
-  level?: number
-  containerRef?: (el: HTMLElement | null) => void
-  renderContent?: (props: any) => JSX.Element
-  // until this line its almost the same as TreeButton, just
-  // type, thumbnail, onClick, selected, focused are missing
-  items?: CollectionItem[] //!!
-  collections?: CollectionProps[] //!!
-  selection?: string
-  getItemProps?: (props: Record<string, any>) => Record<string, any> // cant use generics here :/
-  getCollectionProps?: (props: Record<string, any>) => Record<string, any>
-  onItemClick?: (e: React.MouseEvent, data: CollectionData) => void
-  onCollectionClick?: (e: React.MouseEvent, data: CollectionData) => void
   onKeyDown?: (e: React.KeyboardEvent, data: CollectionData) => void
+  // TODO it would be nice to use the same handler as in TreeBrowser
+  onItemClick?: (e: React.MouseEvent, data: CollectionData) => void
   numChildren?: number
   position?: number
-  renderBeforeItems?: ReactElement // TODO: Children.oneOf([TreeNode]) //!!
-  renderAfterItems?: ReactElement // TODO: Children.oneOf([TreeNode])  //!!
-  isCollectionFlattened?: boolean //!!
-} // TODO use CollectionProps here!!
+  level?: number
+  selection?: string
+} & CollectionProps &
+  TreeBrowserBaseProps
 
 type PropKeys = keyof TreeBrowserCollectionOwnProps
 

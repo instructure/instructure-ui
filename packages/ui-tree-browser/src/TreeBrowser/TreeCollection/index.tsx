@@ -37,12 +37,8 @@ import generateStyles from './styles'
 import generateComponentTheme from './theme'
 import type { TreeBrowserCollectionProps, TreeCollectionState } from './props'
 import { allowedProps, propTypes } from './props'
-import { CollectionItem, CollectionProps } from '../props'
+import { CollectionItem, CollectionProps, CollectionData } from '../props'
 
-type CollectionItemHash = {
-  id?: string | number
-  type: 'child' | 'collection' | 'item'
-}
 type AriaSelectedType = { 'aria-selected'?: boolean }
 
 /**
@@ -93,12 +89,12 @@ class TreeCollection extends Component<
     return isCollectionFlattened ? level : level! + 1
   }
 
-  handleFocus = (e: SyntheticEvent, item: CollectionItemHash) => {
+  handleFocus = (e: SyntheticEvent, item: CollectionData) => {
     e.stopPropagation()
     this.setState({ focused: `${item.type}_${item.id}` })
   }
 
-  handleBlur = (e: SyntheticEvent, _item: CollectionItemHash) => {
+  handleBlur = (e: SyntheticEvent, _item: CollectionData) => {
     e.stopPropagation()
     this.setState({ focused: '' })
   }
@@ -108,7 +104,7 @@ class TreeCollection extends Component<
     const collection = {
       id,
       expanded: !expanded,
-      type: 'collection'
+      type: 'collection' as const
     }
     if (onCollectionClick && typeof onCollectionClick === 'function') {
       onCollectionClick(e, collection)
@@ -120,7 +116,7 @@ class TreeCollection extends Component<
     const collection = {
       id,
       expanded: !expanded,
-      type: 'collection'
+      type: 'collection' as const
     }
     if (onKeyDown && typeof onKeyDown === 'function') {
       onKeyDown(e, collection)
@@ -190,7 +186,7 @@ class TreeCollection extends Component<
       ariaSelected['aria-selected'] = selection === `child_${key}`
     }
 
-    const itemHash: CollectionItemHash = { id: key, type: 'child' }
+    const itemHash: CollectionData = { id: key, type: 'child' }
 
     const itemProps = getItemProps!({
       key: key,
@@ -266,7 +262,7 @@ class TreeCollection extends Component<
       ariaSelected['aria-selected'] = selection === `item_${item.id}`
     }
 
-    const itemHash: CollectionItemHash = { id: item.id, type: 'item' }
+    const itemHash: CollectionData = { id: item.id, type: 'item' }
 
     const itemProps = getItemProps!({
       ...this.getCommonButtonProps(),

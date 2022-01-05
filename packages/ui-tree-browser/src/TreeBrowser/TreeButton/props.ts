@@ -30,19 +30,13 @@ import type {
   PropValidators,
   TreeBrowserButtonTheme
 } from '@instructure/shared-types'
+import type { TreeBrowserCommonProps } from '../props'
 
 type TreeBrowserButtonOwnProps = {
   id?: string | number
   name?: string
   descriptor?: string
   type?: 'collection' | 'item'
-  size?: 'small' | 'medium' | 'large'
-  variant?: 'folderTree' | 'indent'
-  collectionIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
-  collectionIconExpanded?:
-    | React.ReactNode
-    | ((props: unknown) => React.ReactNode)
-  itemIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
   thumbnail?: string
   onClick?: (e: React.MouseEvent) => void
   expanded?: boolean
@@ -50,8 +44,7 @@ type TreeBrowserButtonOwnProps = {
   focused?: boolean
   level?: number
   containerRef?: (el: HTMLElement | null) => void
-  renderContent?: (props: TreeBrowserButtonProps) => JSX.Element
-}
+} & TreeBrowserCommonProps
 
 type PropKeys = keyof TreeBrowserButtonOwnProps
 
