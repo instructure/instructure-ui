@@ -35,6 +35,7 @@ import type {
   TreeBrowserButtonProps,
   TreeBrowserButtonStyle
 } from '../TreeButton/props'
+import { CollectionData } from '../props'
 
 type TreeBrowserNodeOwnProps = Pick<
   TreeBrowserButtonProps,
@@ -49,7 +50,7 @@ type TreeBrowserNodeOwnProps = Pick<
   | 'containerRef'
   | 'onClick'
 > & {
-  onKeyDown?: (...args: any[]) => any
+  onKeyDown?: (e: React.KeyboardEvent, data: CollectionData) => void
   children?: React.ReactNode
 }
 

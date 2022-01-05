@@ -40,6 +40,22 @@ type TreeBrowserOwnProps = {
   expanded?: (string | number | undefined)[] // TODO: controllable( PropTypes.arrayOf( PropTypes.oneOfType([PropTypes.string, PropTypes.number]) ), 'onCollectionToggle' )
   defaultExpanded?: (string | number)[]
   selectionType?: 'none' | 'single'
+  onCollectionToggle?: (collection: CollectionData) => void
+  onItemClick?: (data: CollectionData) => void
+  showRootCollection?: boolean
+  treeLabel?: string
+  sortOrder?: (obj1: any, obj2: any) => number
+} & TreeBrowserBaseProps
+
+// props shared between TreeBrowser, TreeCollection
+type TreeBrowserBaseProps = {
+  getItemProps?: (props: Record<string, any>) => Record<string, any> // cant use generics here :/
+  getCollectionProps?: (props: Record<string, any>) => Record<string, any>
+  onCollectionClick?: (e: React.MouseEvent, data: CollectionData) => void
+} & TreeBrowserCommonProps
+
+// props shared between TreeBrowser, TreeCollection, TreeButton
+type TreeBrowserCommonProps = {
   size?: 'small' | 'medium' | 'large'
   variant?: 'folderTree' | 'indent'
   collectionIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
@@ -47,15 +63,7 @@ type TreeBrowserOwnProps = {
     | React.ReactNode
     | ((props: unknown) => React.ReactNode)
   itemIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
-  getItemProps?: <T>(props: T) => Partial<T>
-  getCollectionProps?: <T>(props: T) => Partial<T>
-  onItemClick?: (data: CollectionData) => void
-  onCollectionClick?: (e: React.MouseEvent, data: CollectionData) => void
-  onCollectionToggle?: (collection: CollectionData) => void
-  showRootCollection?: boolean
-  treeLabel?: string
   renderContent?: (props: any) => JSX.Element
-  sortOrder?: (obj1: any, obj2: any) => number
 }
 
 type PropKeys = keyof TreeBrowserOwnProps
@@ -74,14 +82,14 @@ type Collection = {
   name: string
   descriptor?: string
   containerRef?: (el: HTMLElement | null) => void
-  renderBeforeItems?: ReactElement
-  renderAfterItems?: ReactElement
+  renderBeforeItems?: ReactElement // TODO: Children.oneOf([TreeNode])
+  renderAfterItems?: ReactElement // TODO: Children.oneOf([TreeNode])
   items?: number[]
   collections?: (number | string)[]
 }
 
 type CollectionItem = {
-  id: number // check is String is OK
+  id: number | string
   name: string
   descriptor?: string
   thumbnail?: string
@@ -93,13 +101,12 @@ type CollectionProps = {
   items?: CollectionItem[]
   expanded?: boolean
   isCollectionFlattened?: boolean
-  [key: string]: unknown // allow users to extend it
 } & Omit<Collection, 'collections' | 'items'>
 
 type CollectionData = {
   id?: number | string
   expanded?: boolean
-  type: 'collection' | string
+  type: 'child' | 'collection' | 'item'
 }
 
 const propTypes: PropValidators<PropKeys> = {
@@ -213,6 +220,8 @@ export type {
   CollectionData,
   Collection,
   CollectionItem,
-  CollectionProps
+  CollectionProps,
+  TreeBrowserBaseProps,
+  TreeBrowserCommonProps
 }
 export { propTypes, allowedProps }
