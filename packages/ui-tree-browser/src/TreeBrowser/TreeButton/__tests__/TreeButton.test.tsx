@@ -143,8 +143,7 @@ describe('<TreeButton />', async () => {
       await mount(
         <TreeButton
           id="1"
-          // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-          renderContent={(props) => <div className="test1">abcd</div>}
+          renderContent={() => <div className="test1">abcd</div>}
         />
       )
 

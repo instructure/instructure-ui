@@ -56,19 +56,10 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
   static propTypes = propTypes
 
   static defaultProps = {
-    id: undefined,
     size: 'medium',
     variant: 'folderTree',
     selected: false,
-    focused: false,
-    children: undefined,
-    itemIcon: undefined,
-    thumbnail: undefined,
-    level: undefined,
-    containerRef: function () {},
-    parentRef: undefined,
-    onKeyDown: undefined,
-    onClick: undefined
+    focused: false
   }
 
   ref: Element | null = null
@@ -76,21 +67,20 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
   componentDidMount() {
     this.props.makeStyles?.()
   }
+
   componentDidUpdate() {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleRef = (el) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    el && this.props.containerRef(el.parentElement)
+  handleRef = (el: HTMLDivElement) => {
+    if (el && typeof this.props.containerRef === 'function') {
+      this.props.containerRef(el.parentElement)
+    }
     this.ref = el
   }
 
-  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderItemImage() {
     const { thumbnail, itemIcon, styles } = this.props
-
     if (thumbnail) {
       return (
         <div css={styles?.thumbnail}>
@@ -98,15 +88,14 @@ class TreeNode extends Component<TreeBrowserNodeProps> {
         </div>
       )
     }
-
     if (itemIcon) {
       return <div css={styles?.icon}>{callRenderProp(itemIcon)}</div>
     }
+    return undefined
   }
 
   render() {
     const { children, styles } = this.props
-
     return (
       <div ref={this.handleRef} tabIndex={-1} css={styles?.treeButton}>
         <span css={styles?.layout}>

@@ -35,20 +35,22 @@ type TreeBrowserButtonOwnProps = {
   id?: string | number
   name?: string
   descriptor?: string
-  type?: string
+  type?: 'collection' | 'item'
   size?: 'small' | 'medium' | 'large'
   variant?: 'folderTree' | 'indent'
-  collectionIcon?: React.ReactNode | ((...args: any[]) => any)
-  collectionIconExpanded?: React.ReactNode | ((...args: any[]) => any)
-  itemIcon?: React.ReactNode | ((...args: any[]) => any)
+  collectionIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
+  collectionIconExpanded?:
+    | React.ReactNode
+    | ((props: unknown) => React.ReactNode)
+  itemIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
   thumbnail?: string
-  onClick?: (...args: any[]) => any
+  onClick?: (e: React.MouseEvent) => void
   expanded?: boolean
   selected?: boolean
   focused?: boolean
   level?: number
-  containerRef?: (...args: any[]) => any // TODO: function () {}
-  renderContent?: (...args: any[]) => any // TODO: function () {}
+  containerRef?: (el: HTMLElement | null) => void
+  renderContent?: (props: TreeBrowserButtonProps) => JSX.Element
 }
 
 type PropKeys = keyof TreeBrowserButtonOwnProps

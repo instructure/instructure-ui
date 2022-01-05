@@ -51,44 +51,35 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
 
   static allowedProps = allowedProps
   static propTypes = propTypes
+
   static defaultProps = {
     type: 'treeButton',
     size: 'medium',
     variant: 'folderTree',
     selected: false,
     focused: false,
-    onClick: function () {},
-    id: undefined,
-    name: undefined,
-    collectionIcon: undefined,
-    collectionIconExpanded: undefined,
-    itemIcon: undefined,
-    thumbnail: undefined,
-    expanded: false,
-    descriptor: undefined,
-    level: undefined,
-    containerRef: function () {},
-    renderContent: undefined
+    expanded: false
   }
+
   ref: Element | null = null
 
   componentDidMount() {
     this.props.makeStyles?.()
   }
+
   componentDidUpdate() {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  defaultContentRenderer(props) {
+  defaultContentRenderer(props: TreeBrowserButtonProps) {
     const { name, descriptor, styles } = props
     return (
-      <span css={styles.layout}>
+      <span css={styles!.layout}>
         {this.renderImage()}
-        <span css={styles.text}>
-          <span css={styles.textName}>{name}</span>
+        <span css={styles!.text}>
+          <span css={styles!.textName}>{name}</span>
           {descriptor ? (
-            <span css={styles.textDescriptor} title={descriptor}>
+            <span css={styles!.textDescriptor} title={descriptor}>
               {descriptor}
             </span>
           ) : null}
@@ -97,7 +88,6 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderImage() {
     const { type } = this.props
     switch (type) {
@@ -108,16 +98,12 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
       default:
         break
     }
+    return undefined
   }
 
-  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderCollectionIcon() {
-    const {
-      expanded,
-      collectionIcon,
-      collectionIconExpanded,
-      styles
-    } = this.props
+    const { expanded, collectionIcon, collectionIconExpanded, styles } =
+      this.props
 
     if (collectionIcon || collectionIconExpanded) {
       return (
@@ -126,12 +112,11 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
         </div>
       )
     }
+    return undefined
   }
 
-  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderItemImage() {
     const { thumbnail, itemIcon, styles } = this.props
-
     if (thumbnail) {
       return (
         <div css={styles?.thumbnail}>
@@ -139,16 +124,16 @@ class TreeButton extends Component<TreeBrowserButtonProps> {
         </div>
       )
     }
-
     if (itemIcon) {
       return <div css={styles?.icon}>{callRenderProp(itemIcon)}</div>
     }
+    return undefined
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleRef = (el) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    el && this.props.containerRef(el.parentElement)
+  handleRef = (el: HTMLButtonElement) => {
+    if (el && typeof this.props.containerRef === 'function') {
+      this.props.containerRef(el.parentElement)
+    }
     this.ref = el
   }
 

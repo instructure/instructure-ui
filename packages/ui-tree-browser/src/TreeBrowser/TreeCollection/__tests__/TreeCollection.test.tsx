@@ -174,11 +174,9 @@ describe('<TreeCollection />', async () => {
           collectionIcon={IconFolder}
           getCollectionProps={({ ...props }) => {
             let icon = props.collectionIcon
-
             if (props.name === 'Coll 2') {
               icon = IconUser
             }
-
             return {
               ...props,
               collectionIcon: icon
@@ -289,15 +287,12 @@ describe('<TreeCollection />', async () => {
           ]}
           getItemProps={({ name, ...props }) => {
             let itemIcon = IconDocument
-
             if (name === 'Item 1') {
               itemIcon = IconFolder
             }
-
             if (name === 'Item 2') {
               itemIcon = IconUser
             }
-
             return {
               ...props,
               itemIcon,
