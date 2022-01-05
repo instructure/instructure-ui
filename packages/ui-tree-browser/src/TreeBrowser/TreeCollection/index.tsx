@@ -25,7 +25,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 // eslint-disable-next-line no-unused-vars
-import React, { Component } from 'react'
+import React, { Component, ReactElement, SyntheticEvent } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -35,8 +35,15 @@ import { TreeButton } from '../TreeButton'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import type { TreeBrowserCollectionProps } from './props'
+import type { TreeBrowserCollectionProps, TreeCollectionState } from './props'
 import { allowedProps, propTypes } from './props'
+import { CollectionItem, CollectionProps } from '../props'
+
+type CollectionItemHash = {
+  id?: string | number
+  type: 'child' | 'collection' | 'item'
+}
+type AriaSelectedType = { 'aria-selected'?: boolean }
 
 /**
 ---
@@ -44,10 +51,12 @@ parent: TreeBrowser
 id: TreeBrowser.Collection
 ---
 **/
-
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class TreeCollection extends Component<TreeBrowserCollectionProps> {
+class TreeCollection extends Component<
+  TreeBrowserCollectionProps,
+  TreeCollectionState
+> {
   static readonly componentId = 'TreeBrowser.Collection'
 
   static allowedProps = allowedProps
@@ -60,34 +69,15 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
     selection: '',
     size: 'medium',
     variant: 'folderTree',
-    onItemClick: function () {},
-    onCollectionClick: function () {},
-    onKeyDown: function () {},
-    id: undefined,
-    name: undefined,
-    descriptor: undefined,
-    collectionIconExpanded: undefined,
-    collectionIcon: undefined,
-    itemIcon: undefined,
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-    getItemProps: (props) => props,
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-    getCollectionProps: (props) => props,
-    numChildren: undefined,
-    level: undefined,
-    position: undefined,
-    renderBeforeItems: null,
-    renderAfterItems: null,
-    containerRef: function () {},
-    isCollectionFlattened: false,
-    renderContent: undefined
+    getItemProps: (props: unknown) => props,
+    getCollectionProps: (props: unknown) => props,
+    isCollectionFlattened: false
   }
+
   ref: Element | null = null
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: TreeBrowserCollectionProps) {
     super(props)
-
     this.state = { focused: '' }
   }
 
@@ -100,45 +90,38 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
 
   get itemsLevel() {
     const { level, isCollectionFlattened } = this.props
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    return isCollectionFlattened ? level : level + 1
+    return isCollectionFlattened ? level : level! + 1
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleFocus = (e, item) => {
+  handleFocus = (e: SyntheticEvent, item: CollectionItemHash) => {
     e.stopPropagation()
     this.setState({ focused: `${item.type}_${item.id}` })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleBlur = (e, item) => {
+  handleBlur = (e: SyntheticEvent, _item: CollectionItemHash) => {
     e.stopPropagation()
     this.setState({ focused: '' })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleCollectionClick = (e) => {
+  handleCollectionClick = (e: React.MouseEvent) => {
     const { id, onCollectionClick, expanded } = this.props
     const collection = {
       id,
       expanded: !expanded,
       type: 'collection'
     }
-
     if (onCollectionClick && typeof onCollectionClick === 'function') {
       onCollectionClick(e, collection)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleCollectionKeyDown = (e) => {
+  handleCollectionKeyDown = (e: React.KeyboardEvent) => {
     const { id, onKeyDown, expanded } = this.props
     const collection = {
       id,
       expanded: !expanded,
       type: 'collection'
     }
-
     if (onKeyDown && typeof onKeyDown === 'function') {
       onKeyDown(e, collection)
     }
@@ -164,13 +147,8 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
   }
 
   renderChildren() {
-    const {
-      collections,
-      items,
-      id,
-      renderBeforeItems,
-      renderAfterItems
-    } = this.props
+    const { collections, items, id, renderBeforeItems, renderAfterItems } =
+      this.props
 
     let position = 1
     return (
@@ -182,12 +160,10 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
             position++,
             'before'
           )}
-        {/* @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'. */}
-        {collections.map((collection) => {
+        {collections!.map((collection) => {
           return this.renderCollectionNode(collection, position++)
         })}
-        {/* @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'. */}
-        {items.map((item) => {
+        {items!.map((item) => {
           return this.renderItemNode(item, position++)
         })}
         {renderAfterItems &&
@@ -201,23 +177,24 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'collectionId' implicitly has an 'any' t... Remove this comment to see the full error message
-  renderCollectionChildren(collectionId, child, position, keyword) {
+  renderCollectionChildren(
+    collectionId: string | number | undefined,
+    child: ReactElement,
+    position: number,
+    keyword: 'before' | 'after'
+  ) {
     const { selection, onKeyDown, getItemProps, styles } = this.props
     const key = `${collectionId}_${keyword}`
-    const ariaSelected = {}
+    const ariaSelected: AriaSelectedType = {}
     if (selection) {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ariaSelected['aria-selected'] = selection === `child_${key}`
     }
 
-    const itemHash = { id: key, type: 'child' }
+    const itemHash: CollectionItemHash = { id: key, type: 'child' }
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const itemProps = getItemProps({
+    const itemProps = getItemProps!({
       key: key,
       selected: selection === `child_${key}`,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'focused' does not exist on type 'Readonl... Remove this comment to see the full error message
       focused: this.state.focused === `child_${key}`,
       level: this.itemsLevel
     })
@@ -227,8 +204,7 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
         id={key}
         role="treeitem"
         css={styles?.item}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
-        tabIndex="-1"
+        tabIndex={-1}
         key={key}
         aria-posinset={position}
         aria-setsize={this.childCount}
@@ -242,27 +218,23 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
             e.stopPropagation()
           }
         }}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => void' is not assignable ... Remove this comment to see the full error message
-        onFocus={(e, n) => this.handleFocus(e, itemHash)}
+        onFocus={(e) => this.handleFocus(e, itemHash)}
         // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => void' is not assignable ... Remove this comment to see the full error message
         onKeyDown={(e, n) => {
           if (typeof child.props.onKeyDown === 'function') {
             child.props.onKeyDown(e, n)
           } else {
-            // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-            onKeyDown(e, itemHash)
+            onKeyDown?.(e, itemHash)
           }
         }}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => void' is not assignable ... Remove this comment to see the full error message
-        onBlur={(e, n) => this.handleBlur(e, itemHash)}
+        onBlur={(e) => this.handleBlur(e, itemHash)}
       >
         {safeCloneElement(child, itemProps)}
       </li>
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'collection' implicitly has an 'any' typ... Remove this comment to see the full error message
-  renderCollectionNode(collection, position) {
+  renderCollectionNode(collection: CollectionProps, position: number) {
     return (
       <TreeCollection
         {...this.props}
@@ -284,57 +256,43 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.
-  renderItemNode(item, position) {
-    const {
-      selection,
-      onItemClick,
-      onKeyDown,
-      getItemProps,
-      styles
-    } = this.props
+  renderItemNode(item: CollectionItem, position: number) {
+    const { selection, onItemClick, onKeyDown, getItemProps, styles } =
+      this.props
 
-    const ariaSelected = {}
+    const ariaSelected: AriaSelectedType = {}
 
     if (selection) {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ariaSelected['aria-selected'] = selection === `item_${item.id}`
     }
 
-    const itemHash = { id: item.id, type: 'item' }
+    const itemHash: CollectionItemHash = { id: item.id, type: 'item' }
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const itemProps = getItemProps({
+    const itemProps = getItemProps!({
       ...this.getCommonButtonProps(),
       id: item.id,
       name: item.name,
       descriptor: item.descriptor,
       thumbnail: item.thumbnail,
       selected: selection === `item_${item.id}`,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'focused' does not exist on type 'Readonl... Remove this comment to see the full error message
       focused: this.state.focused === `item_${item.id}`,
-      type: 'item'
+      type: 'item' as const
     })
 
     return (
       <li
         key={`i${position}`}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
-        tabIndex="-1"
+        tabIndex={-1}
         role="treeitem"
         aria-label={item.name}
         css={styles?.item}
         aria-level={this.itemsLevel}
         aria-posinset={position}
         aria-setsize={this.childCount}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => any' is not assignable t... Remove this comment to see the full error message
-        onClick={(e, n) => onItemClick(e, itemHash)}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => any' is not assignable t... Remove this comment to see the full error message
-        onKeyDown={(e, n) => onKeyDown(e, itemHash)}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => void' is not assignable ... Remove this comment to see the full error message
-        onFocus={(e, n) => this.handleFocus(e, itemHash)}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => void' is not assignable ... Remove this comment to see the full error message
-        onBlur={(e, n) => this.handleBlur(e, itemHash)}
+        onClick={(e) => onItemClick?.(e, itemHash)}
+        onKeyDown={(e) => onKeyDown?.(e, itemHash)}
+        onFocus={(e) => this.handleFocus(e, itemHash)}
+        onBlur={(e) => this.handleBlur(e, itemHash)}
         {...ariaSelected}
       >
         <TreeButton {...itemProps} />
@@ -369,23 +327,20 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
       styles
     } = this.props
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const collectionProps = getCollectionProps({
+    const collectionProps = getCollectionProps!({
       ...this.getCommonButtonProps(),
       expanded: expanded,
       collectionIcon: collectionIcon,
       collectionIconExpanded: collectionIconExpanded,
-      type: 'collection',
+      type: 'collection' as const,
       containerRef: this.props.containerRef,
       selected: this.props.selection === `collection_${id}`,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'focused' does not exist on type 'Readonl... Remove this comment to see the full error message
       focused: this.state.focused === `collection_${id}`,
       level
     })
 
-    const ariaSelected = {}
+    const ariaSelected: AriaSelectedType = {}
     if (this.props.selection)
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ariaSelected['aria-selected'] =
         this.props.selection === `collection_${id}`
 
@@ -397,8 +352,7 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
           this.ref = el
         }}
         css={styles?.treeCollection}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
-        tabIndex="-1"
+        tabIndex={-1}
         role="treeitem"
         aria-label={this.props.name}
         aria-level={level}
@@ -407,10 +361,8 @@ class TreeCollection extends Component<TreeBrowserCollectionProps> {
         aria-expanded={expanded}
         onClick={this.handleCollectionClick}
         onKeyDown={this.handleCollectionKeyDown}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => void' is not assignable ... Remove this comment to see the full error message
-        onFocus={(e, n) => this.handleFocus(e, { id: id, type: 'collection' })}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => void' is not assignable ... Remove this comment to see the full error message
-        onBlur={(e, n) => this.handleBlur(e, { id: id, type: 'collection' })}
+        onFocus={(e) => this.handleFocus(e, { id: id, type: 'collection' })}
+        onBlur={(e) => this.handleBlur(e, { id: id, type: 'collection' })}
         {...ariaSelected}
       >
         <TreeButton {...collectionProps} />
