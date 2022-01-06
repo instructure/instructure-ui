@@ -51,6 +51,9 @@ type TreeBrowserNodeOwnProps = Pick<
   | 'onClick'
 > & {
   onKeyDown?: (e: React.KeyboardEvent, data: CollectionData) => void
+  /**
+   * The children to be rendered within the `<TreeNode />`
+   */
   children?: React.ReactNode
 }
 
@@ -70,13 +73,7 @@ const propTypes: PropValidators<PropKeys> = {
   itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   thumbnail: PropTypes.string,
   level: PropTypes.number,
-  /**
-   * The children to be rendered within the `<TreeNode />`
-   */
   children: PropTypes.node,
-  /**
-   * A function that returns a reference to the parent li element
-   */
   containerRef: PropTypes.func,
   onKeyDown: PropTypes.func,
   onClick: PropTypes.func

@@ -43,6 +43,9 @@ type TreeBrowserButtonOwnProps = {
   selected?: boolean
   focused?: boolean
   level?: number
+  /**
+   * A function that returns a reference to the parent li element
+   */
   containerRef?: (el: HTMLElement | null) => void
 } & TreeBrowserCommonProps
 
