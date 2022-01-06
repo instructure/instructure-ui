@@ -36,17 +36,17 @@ import generateComponentTheme from '../TreeButton/theme'
 import type { TreeBrowserNodeProps } from './props'
 import { allowedProps, propTypes } from './props'
 
+// Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
+
 /**
 ---
 parent: TreeBrowser
 id: TreeBrowser.Node
 ---
+@tsProps
 A helper class used to render the :renderBeforeItems and :renderAfterItems
 in the TreeBrowser.
 **/
-
-// Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
-
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class TreeNode extends Component<TreeBrowserNodeProps> {

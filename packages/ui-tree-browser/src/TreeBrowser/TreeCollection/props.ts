@@ -80,13 +80,7 @@ const propTypes: PropValidators<PropKeys> = {
   numChildren: PropTypes.number,
   level: PropTypes.number,
   position: PropTypes.number,
-  /**
-   * children of type TreeNode
-   */
   renderBeforeItems: Children.oneOf([TreeNode]),
-  /**
-   * children of type TreeNode
-   */
   renderAfterItems: Children.oneOf([TreeNode]),
   containerRef: PropTypes.func,
   isCollectionFlattened: PropTypes.bool,

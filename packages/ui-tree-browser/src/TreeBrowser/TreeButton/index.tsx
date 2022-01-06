@@ -35,15 +35,15 @@ import generateComponentTheme from './theme'
 import type { TreeBrowserButtonProps } from './props'
 import { allowedProps, propTypes } from './props'
 
+// Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
+
 /**
 ---
 parent: TreeBrowser
 id: TreeBrowser.Button
 ---
+@tsProps
 **/
-
-// Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
-
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class TreeButton extends Component<TreeBrowserButtonProps> {
