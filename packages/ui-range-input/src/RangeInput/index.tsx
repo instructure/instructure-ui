@@ -25,6 +25,7 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 
+import { warn } from '@instructure/console'
 import { ContextView } from '@instructure/ui-view'
 import { FormField } from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'
@@ -139,7 +140,7 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
   get value() {
     const value =
       typeof this.props.value === 'undefined'
-        ? this.state.value!
+        ? this.state.value
         : this.props.value
 
     return typeof value === 'string' ? parseInt(value) : value
@@ -160,17 +161,21 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
 
   renderValue() {
     if (this.props.displayValue) {
+      if (!this.value) {
+        warn(
+          false,
+          'RangeInput should have a `value` or `defaultValue` set for the value to be displayed. If no value has to be displayed, set `displayValue={false}`.'
+        )
+
+        return null
+      }
+
       return (
         <ContextView background="inverse" placement="end center">
           <output
             htmlFor={this.id}
             css={this.props.styles?.rangeInputInputValue}
           >
-            {/**
-             * Value can be undefined when no value or defaultValue is given,
-             * and then it renders an empty ContextView
-             * TODO: Ask a designer what the intended behaviour is
-             */}
             {this.props.formatValue!(this.value, this.props.max)}
           </output>
         </ContextView>
