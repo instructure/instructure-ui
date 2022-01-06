@@ -326,5 +326,5 @@ const allowedProps: AllowedPropKeys = [
   'shouldNotWrap'
 ]
 
-export type { SelectProps, SelectStyle }
+export type { SelectProps, SelectOwnProps, SelectStyle }
 export { propTypes, allowedProps }

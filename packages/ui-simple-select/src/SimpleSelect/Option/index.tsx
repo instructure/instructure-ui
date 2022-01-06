@@ -31,6 +31,7 @@ import { allowedProps, propTypes } from './props'
 parent: SimpleSelect
 id: SimpleSelect.Option
 ---
+@tsProps
 **/
 class Option extends Component<SimpleSelectOptionProps> {
   static readonly componentId = 'SimpleSelect.Option'
@@ -38,8 +39,7 @@ class Option extends Component<SimpleSelectOptionProps> {
   static allowedProps = allowedProps
   static propTypes = propTypes
   static defaultProps = {
-    isDisabled: false,
-    children: null
+    isDisabled: false
   }
 
   /* istanbul ignore next */

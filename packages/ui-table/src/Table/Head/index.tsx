@@ -31,6 +31,7 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { SimpleSelect } from '@instructure/ui-simple-select'
+import type { SimpleSelectProps } from '@instructure/ui-simple-select'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { IconCheckLine } from '@instructure/ui-icons'
 import { warn } from '@instructure/console'
@@ -110,12 +111,8 @@ class Head extends Component<TableHeadProps> {
     Children.forEach(row.props.children, (colHeader) => {
       count += 1
       if (matchComponentTypes(colHeader, [ColHeader])) {
-        const {
-          id,
-          stackedSortByLabel,
-          sortDirection,
-          onRequestSort
-        } = colHeader.props
+        const { id, stackedSortByLabel, sortDirection, onRequestSort } =
+          colHeader.props
 
         const label = stackedSortByLabel || id
 
@@ -132,8 +129,7 @@ class Head extends Component<TableHeadProps> {
     if (!options.length) {
       return null
     }
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-    const handleSelect = (event, { value }) => {
+    const handleSelect: SimpleSelectProps['onChange'] = (event, { value }) => {
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       clickHandlers[value](event, { id: value })
     }
