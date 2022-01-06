@@ -35,6 +35,7 @@ import { Option } from './Option'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
+  PickPropsWithExceptions,
   PropValidators
 } from '@instructure/shared-types'
 import type {
@@ -42,180 +43,232 @@ import type {
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
+import type { SelectOwnProps } from '@instructure/ui-select'
 
-type SimpleSelectOwnProps = {
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
-  value?: string | number // TODO: it was using the "controllable" util, in the TS migration mimic that behaviour
-  defaultValue?: string
-  id?: string
-  size?: 'small' | 'medium' | 'large'
-  assistiveText?: string
-  placeholder?: string
-  interaction?: 'enabled' | 'disabled' | 'readonly'
-  isRequired?: boolean
-  isInline?: boolean
-  width?: string
-  optionsMaxWidth?: string
-  visibleOptionsCount?: number
-  messages?: FormMessage[]
-  placement?: PlacementPropValues
-  constrain?: PositionConstraint
-  mountNode?: PositionMountNode
-  onChange?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onShowOptions?: (...args: any[]) => any
-  onHideOptions?: (...args: any[]) => any
-  inputRef?: (...args: any[]) => any
-  listRef?: (...args: any[]) => any
-  renderEmptyOption?: React.ReactNode | ((...args: any[]) => any)
-  renderBeforeInput?: React.ReactNode | ((...args: any[]) => any)
-  renderAfterInput?: React.ReactNode | ((...args: any[]) => any)
-  children?: React.ReactNode
-}
-
-type PropKeys = keyof SimpleSelectOwnProps
-
-type AllowedPropKeys = Readonly<Array<PropKeys>>
-
-type SimpleSelectProps = SimpleSelectOwnProps &
-  OtherHTMLAttributes<
-    SimpleSelectOwnProps,
-    InputHTMLAttributes<SimpleSelectOwnProps>
-  >
-
-const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The form field label.
-   */
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+type SimpleSelectOwnProps = PropsPassedToSelect & {
   /**
    * The value corresponding to the value of the selected option. If defined,
    * the component will act controlled and will not manage its own state.
    */
-  // TODO: it was using the "controllable" util, in the TS migration mimic that behaviour
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value?: string | number // TODO: it was using the "controllable" util, in the TS migration mimic that behaviour
+
   /**
    * The value of the option to select by default, when uncontrolled.
    */
-  defaultValue: PropTypes.string,
+  defaultValue?: string
+
+  /**
+   * Callback fired when a new option is selected.
+   */
+  onChange?: (
+    event: React.SyntheticEvent,
+    data: {
+      value?: string | number
+      id?: string
+    }
+  ) => void
+
+  // passed to Select as onRequestShowOptions
+  /**
+   * Callback fired when the options list is shown.
+   */
+  onShowOptions?: (event: React.SyntheticEvent) => void
+
+  // passed to Select as onRequestHideOptions
+  /**
+   * Callback fired when the options list is hidden.
+   */
+  onHideOptions?: (event: React.SyntheticEvent) => void
+
+  /**
+   * Content to display in the list when no options are available.
+   */
+  renderEmptyOption?: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * Children of type `<SimpleSelect.Option />` or `<SimpleSelect.Group />`.
+   */
+  children?: React.ReactNode // TODO: ChildrenPropTypes.oneOf([Group, Option])
+}
+
+type PropsPassedToSelect = {
+  /**
+   * The form field label.
+   */
+  renderLabel: React.ReactNode | (() => React.ReactNode)
+
   /**
    * The id of the text input. One is generated if not supplied.
    */
-  id: PropTypes.string,
+  id?: string
+
   /**
    * The size of the text input.
    */
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  size?: 'small' | 'medium' | 'large'
+
   /**
    * Additional helpful text to provide to screen readers about the operation
    * of the component. Provided via aria-describedby.
    */
-  assistiveText: PropTypes.string,
+  assistiveText?: string
+
   /**
    * Html placeholder text to display when the input has no value. This should
    * be hint text, not a label replacement.
    */
-  placeholder: PropTypes.string,
+  placeholder?: string
+
   /**
    * Specifies if interaction with the input is enabled, disabled, or readonly.
    * When "disabled", the input changes visibly to indicate that it cannot
    * receive user interactions. When "readonly" the input still cannot receive
    * user interactions but it keeps the same styles as if it were enabled.
    */
-  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
+  interaction?: 'enabled' | 'disabled' | 'readonly'
+
   /**
    * Whether or not the text input is required.
    */
-  isRequired: PropTypes.bool,
+  isRequired?: boolean
+
   /**
    * Whether the input is rendered inline with other elements or if it
    * is rendered as a block level element.
    */
-  isInline: PropTypes.bool,
+  isInline?: boolean
+
   /**
    * The width of the text input.
    */
-  width: PropTypes.string,
+  width?: string
+
   /**
    * The max width the options list can be before option text wraps. If not
    * set, the list will only display as wide as the text input.
    */
-  optionsMaxWidth: PropTypes.string,
+  optionsMaxWidth?: string
+
   /**
    * The number of options that should be visible before having to scroll.
    */
-  visibleOptionsCount: PropTypes.number,
+  visibleOptionsCount?: number
+
   /**
-   * Displays messages and validation for the input. It should be an object
-   * with the following shape:
+   * Displays messages and validation for the input. It should be an array of
+   * objects with the following shape:
    * `{
-   *   text: PropTypes.node,
-   *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *   text: ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
    * }`
    */
-  messages: PropTypes.arrayOf(FormPropTypes.message),
+  messages?: FormMessage[]
+
   /**
    * The placement of the options list.
    */
-  placement: PositionPropTypes.placement,
+  placement?: PlacementPropValues
+
   /**
    * The parent in which to constrain the placement.
    */
-  constrain: PositionPropTypes.constrain,
+  constrain?: PositionConstraint
+
   /**
    * An element or a function returning an element to use mount the options
    * list to in the DOM (defaults to `document.body`)
    */
-  mountNode: PositionPropTypes.mountNode,
-  /**
-   * Callback fired when a new option is selected.
-   * @param {Object} event - the event object
-   * @param {Object} data - additional data
-   * @param data.value - the value of selected option
-   * @param data.id - the id of the selected option
-   */
-  onChange: PropTypes.func,
-  /**
-   * Callback fired when text input receives focus.
-   */
-  onFocus: PropTypes.func,
-  /**
-   * Callback fired when text input loses focus.
-   */
-  onBlur: PropTypes.func,
-  /**
-   * Callback fired when the options list is shown.
-   */
-  onShowOptions: PropTypes.func,
-  /**
-   * Callback fired when the options list is hidden.
-   */
-  onHideOptions: PropTypes.func,
+  mountNode?: PositionMountNode
+
   /**
    * A ref to the html `input` element.
    */
-  inputRef: PropTypes.func,
+  inputRef?: (inputElement: HTMLInputElement | null) => void
+
   /**
    * A ref to the html `ul` element.
    */
-  listRef: PropTypes.func,
-  /**
-   * Content to display in the list when no options are available.
-   */
-  renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  listRef?: (listElement: HTMLUListElement | null) => void
+
   /**
    * Content to display before the text input. This will commonly be an icon.
    */
-  renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderBeforeInput?: React.ReactNode | (() => React.ReactNode)
+
   /**
    * Content to display after the text input. This content will replace the
    * default arrow icons.
    */
-  renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderAfterInput?: React.ReactNode | (() => React.ReactNode)
+
   /**
-   * Children of type `<SimpleSelect.Option />` or `<SimpleSelect.Group />`.
+   * Callback fired when text input receives focus.
    */
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
+
+  /**
+   * Callback fired when text input loses focus.
+   */
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+}
+
+type PropKeys = keyof SimpleSelectOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type SimpleSelectProps = PickPropsWithExceptions<
+  SelectOwnProps,
+  | keyof PropsPassedToSelect
+  | 'children'
+  | 'onRequestShowOptions'
+  | 'onRequestHideOptions'
+  | 'onRequestHighlightOption'
+  | 'onRequestSelectOption'
+  | 'inputValue'
+  | 'isShowingOptions'
+> &
+  SimpleSelectOwnProps &
+  OtherHTMLAttributes<
+    SimpleSelectOwnProps,
+    InputHTMLAttributes<SimpleSelectOwnProps>
+  >
+
+type SimpleSelectState = {
+  inputValue?: string
+  isShowingOptions: boolean
+  highlightedOptionId?: string
+  selectedOptionId?: string
+}
+
+const propTypes: PropValidators<PropKeys> = {
+  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  // TODO: it was using the "controllable" util, in the TS migration mimic that behaviour
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  defaultValue: PropTypes.string,
+  id: PropTypes.string,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  assistiveText: PropTypes.string,
+  placeholder: PropTypes.string,
+  interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
+  isRequired: PropTypes.bool,
+  isInline: PropTypes.bool,
+  width: PropTypes.string,
+  optionsMaxWidth: PropTypes.string,
+  visibleOptionsCount: PropTypes.number,
+  messages: PropTypes.arrayOf(FormPropTypes.message),
+  placement: PositionPropTypes.placement,
+  constrain: PositionPropTypes.constrain,
+  mountNode: PositionPropTypes.mountNode,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onShowOptions: PropTypes.func,
+  onHideOptions: PropTypes.func,
+  inputRef: PropTypes.func,
+  listRef: PropTypes.func,
+  renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   children: ChildrenPropTypes.oneOf([Group, Option])
 }
 
@@ -250,5 +303,5 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { SimpleSelectProps }
+export type { SimpleSelectProps, SimpleSelectState }
 export { propTypes, allowedProps }

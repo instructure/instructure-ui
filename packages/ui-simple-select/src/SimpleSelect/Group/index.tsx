@@ -32,15 +32,14 @@ import { allowedProps, propTypes } from './props'
 parent: SimpleSelect
 id: SimpleSelect.Group
 ---
+@tsProps
 **/
 class Group extends Component<SimpleSelectGroupProps> {
   static readonly componentId = 'SimpleSelect.Group'
+
   static allowedProps = allowedProps
   static propTypes = propTypes
-
-  static defaultProps = {
-    children: null
-  }
+  static defaultProps = {}
 
   /* istanbul ignore next */
   render() {

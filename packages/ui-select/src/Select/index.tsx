@@ -142,7 +142,7 @@ class Select extends Component<SelectProps> {
   }
 
   get focused() {
-    return this.ref && isActiveElement(this.ref)
+    return this.ref ? isActiveElement(this.ref) : false
   }
 
   get id() {

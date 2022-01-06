@@ -33,16 +33,21 @@ import {
 } from '@instructure/ui-test-utils'
 
 import { IconCheckSolid } from '@instructure/ui-icons'
+
 import { SimpleSelect } from '../index'
 import { SimpleSelectLocator } from '../SimpleSelectLocator'
 import SimpleSelectExamples from '../__examples__/SimpleSelect.examples'
 
+import type { SimpleSelectOptionProps } from '../Option/props'
+
+type ExampleOption = 'foo' | 'bar' | 'baz'
+
 describe('<SimpleSelect />', async () => {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'spy' implicitly has an 'any' type.
-  const lastCall = (spy) => spy.lastCall.args
-  const defaultOptions = ['foo', 'bar', 'baz']
-  // @ts-expect-error ts-migrate(6133) FIXME: 'highlighted' is declared but its value is never r... Remove this comment to see the full error message
-  const getOptions = (highlighted, selected, disabled) =>
+  const lastCall = (spy: ReturnType<typeof stub>) => spy.lastCall.args
+
+  const defaultOptions: ExampleOption[] = ['foo', 'bar', 'baz']
+
+  const getOptions = (disabled?: ExampleOption) =>
     defaultOptions.map((opt) => (
       <SimpleSelect.Option
         id={opt}
@@ -56,7 +61,6 @@ describe('<SimpleSelect />', async () => {
 
   it('should render an input and a list', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       <SimpleSelect renderLabel="Choose an option">{getOptions()}</SimpleSelect>
     )
     const select = await SimpleSelectLocator.find()
@@ -114,8 +118,9 @@ describe('<SimpleSelect />', async () => {
     const consoleError = stub(console, 'error')
     await mount(
       <SimpleSelect renderLabel="Choose an option">
-        {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
-        <SimpleSelect.Option id="0">valid</SimpleSelect.Option>
+        <SimpleSelect.Option id="0" value={0}>
+          valid
+        </SimpleSelect.Option>
         <div>invalid</div>
       </SimpleSelect>
     )
@@ -140,7 +145,6 @@ describe('<SimpleSelect />', async () => {
     const onChange = stub()
     await mount(
       <SimpleSelect renderLabel="Choose an option" onChange={onChange}>
-        {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
         {getOptions()}
       </SimpleSelect>
     )
@@ -159,7 +163,6 @@ describe('<SimpleSelect />', async () => {
     const onChange = stub()
     await mount(
       <SimpleSelect renderLabel="Choose an option" onChange={onChange}>
-        {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
         {getOptions()}
       </SimpleSelect>
     )
@@ -186,7 +189,6 @@ describe('<SimpleSelect />', async () => {
         value={defaultOptions[1]}
         onChange={onChange}
       >
-        {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
         {getOptions()}
       </SimpleSelect>
     )
@@ -212,7 +214,6 @@ describe('<SimpleSelect />', async () => {
     const onFocus = stub()
     await mount(
       <SimpleSelect renderLabel="Choose an option" onFocus={onFocus}>
-        {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
         {getOptions()}
       </SimpleSelect>
     )
@@ -250,12 +251,7 @@ describe('<SimpleSelect />', async () => {
 
     it('should render disabled when interaction="disabled"', async () => {
       await mount(
-        <SimpleSelect
-          renderLabel="Choose an option"
-          interaction="disabled"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ renderLabel: string; interaction: "disable... Remove this comment to see the full error message
-          onInputChange={() => {}}
-        />
+        <SimpleSelect renderLabel="Choose an option" interaction="disabled" />
       )
       const select = await SimpleSelectLocator.find()
       const input = await select.findInput()
@@ -275,7 +271,6 @@ describe('<SimpleSelect />', async () => {
     it('should set input role to "button"', async () => {
       await mount(
         <SimpleSelect renderLabel="Choose an option">
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
           {getOptions()}
         </SimpleSelect>
       )
@@ -291,7 +286,6 @@ describe('<SimpleSelect />', async () => {
           renderLabel="Choose an option"
           assistiveText="hello world"
         >
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
           {getOptions()}
         </SimpleSelect>
       )
@@ -307,7 +301,6 @@ describe('<SimpleSelect />', async () => {
     it('should allow custom props to pass through', async () => {
       await mount(
         <SimpleSelect renderLabel="Choose an option" data-custom-attr="true">
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
           {getOptions()}
         </SimpleSelect>
       )
@@ -322,7 +315,6 @@ describe('<SimpleSelect />', async () => {
 
       await mount(
         <SimpleSelect renderLabel="Choose an option" inputRef={inputRef}>
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
           {getOptions()}
         </SimpleSelect>
       )
@@ -334,7 +326,7 @@ describe('<SimpleSelect />', async () => {
   })
 
   it('should render dynamically colored icons before option', async () => {
-    const renderBeforeLabel = (props: any) => {
+    const renderBeforeLabel = (props: Partial<SimpleSelectOptionProps>) => {
       return <IconCheckSolid color={props.isDisabled ? 'warning' : 'brand'} />
     }
 
@@ -378,7 +370,7 @@ describe('<SimpleSelect />', async () => {
     it('should set aria-disabled on options when isDisabled={true}', async () => {
       await mount(
         <SimpleSelect renderLabel="Choose an option">
-          {getOptions(null, null, defaultOptions[2])}
+          {getOptions(defaultOptions[2])}
         </SimpleSelect>
       )
       const select = await SimpleSelectLocator.find()
@@ -396,13 +388,7 @@ describe('<SimpleSelect />', async () => {
       const listRef = stub()
 
       await mount(
-        <SimpleSelect
-          renderLabel="Choose an option"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element[]; renderLabel: string; ... Remove this comment to see the full error message
-          isShowingOptions
-          listRef={listRef}
-        >
-          {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
+        <SimpleSelect renderLabel="Choose an option" listRef={listRef}>
           {getOptions()}
         </SimpleSelect>
       )

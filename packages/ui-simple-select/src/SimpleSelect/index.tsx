@@ -32,24 +32,39 @@ import {
   getInteraction
 } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
-import { Select } from '@instructure/ui-select'
 
+import { Select } from '@instructure/ui-select'
 import type { SelectProps } from '@instructure/ui-select'
 
 import { Option } from './Option'
+import type {
+  SimpleSelectOptionProps,
+  RenderSimpleSelectOptionLabel
+} from './Option/props'
+
 import { Group } from './Group'
+import type { SimpleSelectGroupProps } from './Group/props'
 
 import type { SimpleSelectProps } from './props'
-import { allowedProps, propTypes } from './props'
+import { allowedProps, propTypes, SimpleSelectState } from './props'
+
+type OptionChild = React.ComponentElement<SimpleSelectOptionProps, Option>
+type GroupChild = React.ComponentElement<SimpleSelectGroupProps, Group>
+
+type GetOption = <F extends 'id' | 'value'>(
+  field: F,
+  value?: SimpleSelectOptionProps[F]
+) => OptionChild | undefined
 
 /**
 ---
 category: components
 tags: form, field, dropdown
 ---
+@tsProps
 **/
 @testable()
-class SimpleSelect extends Component<SimpleSelectProps> {
+class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
   static readonly componentId = 'SimpleSelect'
 
   static Option = Option
@@ -60,51 +75,32 @@ class SimpleSelect extends Component<SimpleSelectProps> {
 
   static defaultProps = {
     size: 'medium',
-    placeholder: null,
     isRequired: false,
     isInline: false,
     visibleOptionsCount: 8,
     placement: 'bottom stretch',
     constrain: 'window',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onChange: (event, data) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onFocus: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onShowOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onHideOptions: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    inputRef: (node) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    listRef: (node) => {},
-    renderEmptyOption: '---',
-    renderBeforeInput: null,
-    renderAfterInput: null,
-    children: null
+    renderEmptyOption: '---'
   }
 
-  ref: Element | null = null
+  ref: Select | null = null
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  private readonly _emptyOptionId
+
+  constructor(props: SimpleSelectProps) {
     super(props)
 
     const option = this.getInitialOption(props)
 
     this.state = {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type '{}'.
       inputValue: option ? option.props.children : '',
       isShowingOptions: false,
-      highlightedOptionId: null,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type '{}'.
-      selectedOptionId: option ? option.props.id : null
+      highlightedOptionId: undefined,
+      selectedOptionId: option ? option.props.id : undefined
     }
-  }
 
-  _emptyOptionId = uid('Select-EmptyOption')
+    this._emptyOptionId = uid('Select-EmptyOption')
+  }
 
   get _select() {
     console.warn(
@@ -114,18 +110,22 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     return this.ref
   }
 
+  get childrenArray() {
+    return Children.toArray(this.props.children) as Array<
+      OptionChild | GroupChild
+    >
+  }
+
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'SimpleS... Remove this comment to see the full error message
     this.ref && this.ref.focus()
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'ref' does not exist on type 'SimpleS... Remove this comment to see the full error message
-    return this.ref && this.ref.focused
+    return this.ref ? this.ref.focused : false
   }
 
   get id() {
-    return this.ref && this.ref.id
+    return this.ref ? this.ref.id : undefined
   }
 
   get isControlled() {
@@ -136,8 +136,7 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     return getInteraction({ props: this.props })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: SimpleSelectProps) {
     if (this.props.value !== prevProps.value) {
       let option = this.getOption('value', this.props.value)
       if (typeof this.props.value === 'undefined') {
@@ -145,16 +144,13 @@ class SimpleSelect extends Component<SimpleSelectProps> {
         option = this.getOption('value', prevProps.value)
       }
       this.setState({
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type '{}'.
         inputValue: option ? option.props.children : '',
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type '{}'.
         selectedOptionId: option ? option.props.id : ''
       })
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getInitialOption(props) {
+  getInitialOption(props: SimpleSelectProps) {
     const { value, defaultValue } = props
     const initialValue = value || defaultValue
 
@@ -163,29 +159,28 @@ class SimpleSelect extends Component<SimpleSelectProps> {
       return this.getOption('value', initialValue)
     }
     // otherwise get the first option
-    return this.getOptionByIndex(0)
+    return this.getFirstOption()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'id' implicitly has an 'any' type.
-  getOptionLabelById(id) {
+  getOptionLabelById(id: string) {
     const option = this.getOption('id', id)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type '{}'.
     return option ? option.props.children : ''
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'index' is declared but its value is never read.
-  getOptionByIndex(index) {
-    const children = Children.toArray(this.props.children)
-    let match = null
+  getFirstOption() {
+    let match: OptionChild | undefined
 
-    for (let i = 0; i < children.length; i++) {
-      const child = children[i]
+    for (let i = 0; i < this.childrenArray.length; i++) {
+      const child = this.childrenArray[i]
       if (matchComponentTypes(child, [Option])) {
-        match = child
+        match = child as OptionChild
       } else if (matchComponentTypes(child, [Group])) {
         // first child is a group, not an option, find first child in group
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-        match = Children.toArray(child.props.children)[0]
+        match = (
+          Children.toArray(
+            (child as GroupChild).props.children
+          ) as OptionChild[]
+        )[0]
       }
       if (match) {
         break
@@ -194,24 +189,21 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     return match
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'field' implicitly has an 'any' type.
-  getOption(field, value) {
-    const children = Children.toArray(this.props.children)
-    let match = null
+  getOption: GetOption = (field, value) => {
+    let match: OptionChild | undefined
 
-    for (let i = 0; i < children.length; ++i) {
-      const child = children[i]
+    for (let i = 0; i < this.childrenArray.length; ++i) {
+      const child = this.childrenArray[i]
       if (matchComponentTypes(child, [Option])) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-        if (child.props[field] === value) {
-          match = child
+        if ((child as OptionChild).props[field] === value) {
+          match = child as OptionChild
         }
       } else if (matchComponentTypes(child, [Group])) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-        const groupChildren = Children.toArray(child.props.children)
+        const groupChildren = Children.toArray(
+          (child as GroupChild).props.children
+        ) as OptionChild[]
         for (let j = 0; j < groupChildren.length; ++j) {
           const groupChild = groupChildren[j]
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
           if (groupChild.props[field] === value) {
             match = groupChild
             break
@@ -223,37 +215,36 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     return match
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
-  handleRef = (node) => {
+  handleRef = (node: Select) => {
     this.ref = node
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleBlur = (event) => {
-    this.setState({ highlightedOptionId: null })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onBlur(event)
+  handleBlur: SelectProps['onBlur'] = (event) => {
+    this.setState({ highlightedOptionId: undefined })
+    if (typeof this.props.onBlur === 'function') {
+      this.props.onBlur(event)
+    }
   }
 
   handleShowOptions: SelectProps['onRequestShowOptions'] = (event) => {
     this.setState({ isShowingOptions: true })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onShowOptions(event)
+    if (typeof this.props.onShowOptions === 'function') {
+      this.props.onShowOptions(event)
+    }
   }
 
   handleHideOptions: SelectProps['onRequestHideOptions'] = (event) => {
     this.setState((state) => {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOptionId' does not exist on type... Remove this comment to see the full error message
       const option = this.getOption('id', state.selectedOptionId)
       return {
         isShowingOptions: false,
-        highlightedOptionId: null,
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type '{}'.
+        highlightedOptionId: undefined,
         inputValue: option ? option.props.children : ''
       }
     })
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onHideOptions(event)
+    if (typeof this.props.onHideOptions === 'function') {
+      this.props.onHideOptions(event)
+    }
   }
 
   handleHighlightOption: SelectProps['onRequestHighlightOption'] = (
@@ -263,9 +254,7 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     if (id === this._emptyOptionId) return
 
     const option = this.getOption('id', id)
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    const label = option.props.children
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputValue' does not exist on type 'Read... Remove this comment to see the full error message
+    const label = option?.props.children
     const inputValue = event.type === 'keydown' ? label : this.state.inputValue
 
     this.setState({
@@ -285,7 +274,6 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     }
 
     const option = this.getOption('id', id)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type '{}'.
     const value = option && option.props.value
 
     if (this.isControlled) {
@@ -294,28 +282,28 @@ class SimpleSelect extends Component<SimpleSelectProps> {
       this.setState((state) => ({
         isShowingOptions: false,
         selectedOptionId: id,
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type '{}'.
         inputValue: option ? option.props.children : state.inputValue
       }))
     }
     // fire onChange if selected option changed
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    option && this.props.onChange(event, { value, id })
+    if (option && typeof this.props.onChange === 'function') {
+      this.props.onChange(event, { value, id })
+    }
     // hide options list whenever selection is made
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onHideOptions(event)
+    if (typeof this.props.onHideOptions === 'function') {
+      this.props.onHideOptions(event)
+    }
   }
 
   renderChildren() {
-    let children = Children.toArray(this.props.children)
-    children = Children.map(children, (child) => {
+    const children = Children.map(this.childrenArray, (child) => {
       if (matchComponentTypes(child, [Option])) {
-        return this.renderOption(child)
+        return this.renderOption(child as OptionChild)
       } else if (matchComponentTypes(child, [Group])) {
-        return this.renderGroup(child)
+        return this.renderGroup(child as GroupChild)
       }
       return null
-    }).filter((child) => !!child)
+    }).filter((child: any) => !!child)
 
     if (children.length === 0) {
       // no valid children, render empty option
@@ -334,11 +322,10 @@ class SimpleSelect extends Component<SimpleSelectProps> {
       >
         {callRenderProp(this.props.renderEmptyOption)}
       </Select.Option>
-    )
+    ) as OptionChild
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'option' implicitly has an 'any' type.
-  renderOption(option) {
+  renderOption(option: OptionChild) {
     const {
       id,
       value,
@@ -349,12 +336,10 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     } = option.props
 
     const isDisabled = option.props.isDisabled
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'highlightedOptionId' does not exist on t... Remove this comment to see the full error message
     const isSelected = id === this.state.selectedOptionId
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'highlightedOptionId' does not exist on t... Remove this comment to see the full error message
     const isHighlighted = id === this.state.highlightedOptionId
 
-    const getRenderLabel = (renderLabel: any) => {
+    const getRenderLabel = (renderLabel: RenderSimpleSelectOptionLabel) => {
       return typeof renderLabel === 'function'
         ? renderLabel.bind(null, {
             id,
@@ -371,9 +356,7 @@ class SimpleSelect extends Component<SimpleSelectProps> {
         id={id}
         value={value}
         key={option.key || id}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'highlightedOptionId' does not exist on t... Remove this comment to see the full error message
         isHighlighted={id === this.state.highlightedOptionId}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOptionId' does not exist on type... Remove this comment to see the full error message
         isSelected={id === this.state.selectedOptionId}
         isDisabled={option.props.isDisabled}
         renderBeforeLabel={getRenderLabel(renderBeforeLabel)}
@@ -382,11 +365,10 @@ class SimpleSelect extends Component<SimpleSelectProps> {
       >
         {children}
       </Select.Option>
-    )
+    ) as OptionChild
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'group' implicitly has an 'any' type.
-  renderGroup(group) {
+  renderGroup(group: GroupChild) {
     const { id, renderLabel, children, ...rest } = group.props
     return (
       <Select.Group
@@ -394,9 +376,11 @@ class SimpleSelect extends Component<SimpleSelectProps> {
         key={group.key || id}
         {...passthroughProps(rest)}
       >
-        {Children.map(children, (child) => this.renderOption(child))}
+        {Children.map(children as OptionChild[], (child) =>
+          this.renderOption(child)
+        )}
       </Select.Group>
-    )
+    ) as GroupChild
   }
 
   render() {
@@ -434,9 +418,7 @@ class SimpleSelect extends Component<SimpleSelectProps> {
     return (
       <Select
         renderLabel={renderLabel}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputValue' does not exist on type 'Read... Remove this comment to see the full error message
         inputValue={this.state.inputValue}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingOptions' does not exist on type... Remove this comment to see the full error message
         isShowingOptions={this.state.isShowingOptions}
         id={id}
         size={size}
@@ -465,8 +447,7 @@ class SimpleSelect extends Component<SimpleSelectProps> {
         onRequestSelectOption={this.handleSelectOption}
         {...passthroughProps(rest)}
       >
-        {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 0 arguments, but got 1. */}
-        {this.renderChildren(children)}
+        {this.renderChildren()}
       </Select>
     )
   }
