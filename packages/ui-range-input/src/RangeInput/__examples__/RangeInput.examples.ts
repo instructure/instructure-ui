@@ -28,10 +28,44 @@ import type { RangeInputProps } from '../props'
 export default {
   sectionProp: 'layout',
   maxExamplesPerPage: 50,
+  propValues: {
+    value: [undefined, 20, 100],
+    defaultValue: [undefined, 88]
+  },
   getComponentProps: () => {
     return {
       label: 'Opacity',
-      onChange: () => {}
+      onChange: () => {},
+      min: 0,
+      max: 100
     }
+  },
+  filter: (props) => {
+    if (props.defaultValue && props.value) {
+      return true
+    }
+
+    if (
+      props.defaultValue &&
+      (props.size !== 'medium' ||
+        props.disabled ||
+        props.inline ||
+        props.readOnly)
+    ) {
+      return true
+    }
+
+    if (
+      !props.value &&
+      !props.defaultValue &&
+      (props.size !== 'medium' ||
+        props.disabled ||
+        props.inline ||
+        props.readOnly)
+    ) {
+      return true
+    }
+
+    return false
   }
 } as StoryConfig<RangeInputProps>
