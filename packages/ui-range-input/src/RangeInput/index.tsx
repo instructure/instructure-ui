@@ -57,8 +57,12 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
   static defaultProps = {
     step: 1,
     formatValue: (val?: number) => val,
+
+    // If min and max has default value, they don't give a warning if not set, even if they are required props.
+    // TODO: figure out if they don't need to be required or remove defaults in V9.
     max: 0,
     min: 0,
+
     inline: false,
     size: 'medium',
     layout: 'stacked',
