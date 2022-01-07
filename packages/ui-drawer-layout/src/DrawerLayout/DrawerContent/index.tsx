@@ -26,6 +26,7 @@
 import { Component } from 'react'
 
 import { debounce } from '@instructure/debounce'
+import type { Debounced } from '@instructure/debounce'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
@@ -37,7 +38,7 @@ import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
 import type {
   DrawerLayoutContentProps,
-  DrawerLayoutContentState
+  DrawerLayoutContentStyleProps
 } from './props'
 
 /**
@@ -45,32 +46,22 @@ import type {
 parent: DrawerLayout
 id: DrawerLayout.Content
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class DrawerContent extends Component<
-  DrawerLayoutContentProps,
-  DrawerLayoutContentState
-> {
+class DrawerContent extends Component<DrawerLayoutContentProps> {
   static readonly componentId = 'DrawerLayout.Content'
 
   static locatorAttribute = 'data-drawer-content'
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    contentRef: (el: any) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    onSizeChange: (node: any) => {},
     role: 'region'
   }
 
-  state: DrawerLayoutContentState = {
-    shouldTransition: false
-  }
+  ref: HTMLDivElement | null = null
 
-  ref: Element | null = null
   get _content() {
     console.warn(
       '_content property is deprecated and will be removed in v9, please use ref instead'
@@ -78,10 +69,10 @@ class DrawerContent extends Component<
 
     return this.ref
   }
-  _resizeListener = null
 
-  _debounced = null
-  _timeouts = []
+  private _resizeListener?: ResizeObserver
+
+  private _debounced?: Debounced
 
   componentDidMount() {
     const rect = getBoundingClientRect(this.ref)
@@ -89,72 +80,62 @@ class DrawerContent extends Component<
       width: rect.width
     }
     // set initial size
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
-    this.props.onSizeChange({ width: rect.width, height: rect.height })
-    // listen for changes to size
-    // @ts-expect-error ts-migrate(2322) FIXME: Type 'Function' is not assignable to type 'null'.
-    this._debounced = debounce(this.props.onSizeChange, 100, {
-      leading: false,
-      trailing: true
-    })
-    // @ts-expect-error ts-migrate(2322) FIXME: Type 'ResizeObserver' is not assignable to type 'n... Remove this comment to see the full error message
+    if (typeof this.props.onSizeChange === 'function') {
+      this.props.onSizeChange({ width: rect.width, height: rect.height })
+
+      // listen for changes to size
+      this._debounced = debounce(this.props.onSizeChange, 100, {
+        leading: false,
+        trailing: true
+      })
+    }
+
     this._resizeListener = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const size = {
           width: entry.contentRect.width
         }
         if (size.width !== origSize.width) {
-          // @ts-expect-error ts-migrate(2721) FIXME: Cannot invoke an object which is possibly 'null'.
-          this._debounced(size)
+          this._debounced?.(size)
         }
       }
     })
 
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    this._resizeListener.observe(this.ref)
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles({ shouldTransition: false })
+    this._resizeListener.observe(this.ref!)
+
+    this.props.makeStyles?.(this.makeStyleProps(false))
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps: any, prevState: any, snapshot: any) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles({ shouldTransition: true })
+  componentDidUpdate() {
+    this.props.makeStyles?.(this.makeStyleProps(true))
   }
 
   componentWillUnmount() {
-    if (this._resizeListener) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      this._resizeListener.disconnect()
-    }
+    this._resizeListener?.disconnect()
 
-    if (this._debounced) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      this._debounced.cancel()
-    }
-
-    this._timeouts.forEach((timeout) => {
-      clearTimeout(timeout)
-    })
+    this._debounced?.cancel()
   }
 
-  handleContentRef = (node: Element | null) => {
+  makeStyleProps = (
+    shouldTransition: DrawerLayoutContentStyleProps['shouldTransition']
+  ): DrawerLayoutContentStyleProps => {
+    return { shouldTransition }
+  }
+
+  handleContentRef = (node: HTMLDivElement | null) => {
     this.ref = node
-    this.props.contentRef?.(node)
+
+    if (typeof this.props.contentRef === 'function') {
+      this.props.contentRef(node)
+    }
   }
 
   render() {
-    const {
-      style, // eslint-disable-line react/prop-types
-      label,
-      role
-    } = this.props
+    const { style, label, role } = this.props
 
     return (
       <div
-        {...omitProps(this.props, DrawerContent.allowedProps, [
-          'shouldTransition'
-        ])}
+        {...omitProps(this.props, DrawerContent.allowedProps)}
         role={role}
         style={style}
         ref={this.handleContentRef}

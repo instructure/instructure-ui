@@ -24,6 +24,7 @@
 import React from 'react'
 
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+
 import { DrawerContent } from '../index'
 
 import { DrawerContentLocator } from '../DrawerContentLocator'
@@ -38,24 +39,21 @@ describe('<DrawerContent />', async () => {
     expect(drawerContent).to.exist()
   })
 
-  it('should not have a transition class if `shouldTransition` is set to false', async () => {
+  it('should not transition on mount, just on update', async () => {
     const subject = await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-      <DrawerContent label="DrawerContentTest" shouldTransition={false}>
-        Hello World
-      </DrawerContent>
+      <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
     )
-    const tr = await DrawerContentLocator.find('[class*=-transition]', {
-      expectEmpty: true
-    })
-    expect(tr).to.not.exist()
+
+    const style = getComputedStyle(subject.getDOMNode())
+    expect(style.transition).to.equal('all 0s ease 0s')
+
     subject.setProps({
-      shouldTransition: true,
       label: 'test'
     })
+
     await wait(() => {
-      const drawerContent = DrawerContentLocator.find('[class*=-transition]')
-      expect(drawerContent).to.exist()
+      const style = getComputedStyle(subject.getDOMNode())
+      expect(style.transition).to.not.equal('all 0s ease 0s')
     })
   })
 

@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
@@ -35,9 +36,22 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
 
 type DrawerLayoutOwnProps = {
+  /**
+   * Exactly one of each of the following child types: `DrawerLayout.Content`, `DrawerLayout.Tray`
+   */
   children?: React.ReactNode // TODO: oneOfEach([DrawerContent, DrawerTray])
+
+  /**
+   * Min width for the `<DrawerLayout.Content />`
+   */
   minWidth?: string
-  onOverlayTrayChange?: (...args: any[]) => any
+
+  /**
+   * Function called when the `<DrawerLayout.Content />` is resized and hits the `minWidth` breakpoint
+   * Called with a boolean value, `true` if the tray is now overlaying the content or `false` if
+   * it is side by side
+   */
+  onOverlayTrayChange?: (shouldOverlayTray: boolean) => void
 } & BidirectionalProps
 
 type PropKeys = keyof DrawerLayoutOwnProps
@@ -49,20 +63,15 @@ type DrawerLayoutProps = DrawerLayoutOwnProps &
 
 type DrawerLayoutStyle = ComponentStyle<'drawerLayout'>
 
+type DrawerLayoutState = {
+  shouldOverlayTray: boolean
+  trayWidth: number
+  contentWidth: number
+}
+
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Exactly one of each of the following child types: `DrawerLayout.Content`, `DrawerLayout.Tray`
-   */
   children: ChildrenPropTypes.oneOfEach([DrawerContent, DrawerTray]),
-  /**
-   * Min width for the `<DrawerLayout.Content />`
-   */
   minWidth: PropTypes.string,
-  /**
-   * Function called when the `<DrawerLayout.Content />` is resized and hits the `minWidth` breakpoint
-   * Called with a boolean value, `true` if the tray is now overlaying the content or `false` if
-   * it is side by side
-   */
   onOverlayTrayChange: PropTypes.func,
   dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION))
 }
@@ -74,5 +83,5 @@ const allowedProps: AllowedPropKeys = [
   'dir'
 ]
 
-export type { DrawerLayoutProps, DrawerLayoutStyle }
+export type { DrawerLayoutProps, DrawerLayoutState, DrawerLayoutStyle }
 export { propTypes, allowedProps }

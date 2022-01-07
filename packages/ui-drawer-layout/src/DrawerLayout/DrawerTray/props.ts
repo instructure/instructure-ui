@@ -35,38 +35,132 @@ import type {
   PropValidators,
   DrawerLayoutTrayTheme,
   OtherHTMLAttributes,
-  LiveRegion
+  LiveRegion,
+  UIElement
 } from '@instructure/shared-types'
+import {
+  BaseTransitionStatesType,
+  TransitionType
+} from '@instructure/ui-motion/src/Transition/BaseTransition/props'
 
 type DrawerTrayPlacement = 'start' | 'end'
 
 type DrawerLayoutTrayOwnProps = {
   label: string
-  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
-  render?: (...args: any[]) => any
+
+  children?: React.ReactNode | (() => React.ReactNode)
+
+  render?: () => React.ReactNode
+
+  /**
+   * Placement of the `<DrawerLayout.Tray />`
+   */
   placement?: DrawerTrayPlacement
+
+  /**
+   * If the tray is open or closed.
+   */
   open?: boolean
-  onOpen?: (...args: any[]) => any
-  onClose?: (...args: any[]) => any
+
+  /**
+   * Called when the `<DrawerLayout.Tray />` is opened
+   */
+  onOpen?: (transitionType?: TransitionType) => void
+
+  /**
+   * Called when the `<DrawerLayout.Tray />` is closed
+   */
+  onClose?: (transitionType?: TransitionType) => void
+
+  /**
+   * Should the `<DrawerLayout.Tray />` have a border
+   */
   border?: boolean
+
+  /**
+   * Should the `<DrawerLayout.Tray />` have a shadow
+   */
   shadow?: boolean
-  onTransition?: (...args: any[]) => any
-  onEnter?: (...args: any[]) => any
-  onEntering?: (...args: any[]) => any
-  onEntered?: (...args: any[]) => any
-  onExit?: (...args: any[]) => any
-  onExiting?: (...args: any[]) => any
-  onExited?: (...args: any[]) => any
-  contentRef?: (...args: any[]) => any
+
+  /**
+   * Ref function for the `<DrawerLayout.Tray />` content
+   */
+  contentRef?: (element: HTMLDivElement | null) => void
+
+  /**
+   * An element or a function returning an element to use as the mount node
+   * for the `<DrawerLayout.Tray />` when tray is overlaying content
+   */
   mountNode?: PositionMountNode
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
+} & PropsPassedToDialog &
+  PropsPassedToTransition &
+  BidirectionalProps
+
+type PropsPassedToDialog = {
+  /**
+   * An element or a function returning an element to focus by default
+   */
+  defaultFocusElement?: UIElement
+
+  /**
+   * An element, function returning an element, or array of elements that will not be hidden from
+   * the screen reader when the `<DrawerLayout.Tray />` is open
+   */
   liveRegion?: LiveRegion
-  onDismiss?: (...args: any[]) => any
+
+  onDismiss?: (
+    event: React.UIEvent | React.FocusEvent,
+    documentClick?: boolean
+  ) => void
+
   shouldContainFocus?: boolean
+
   shouldReturnFocus?: boolean
+
   shouldCloseOnDocumentClick?: boolean
+
   shouldCloseOnEscape?: boolean
-} & BidirectionalProps
+}
+
+type PropsPassedToTransition = {
+  /**
+   * Callback fired when the `<DrawerLayout.Tray />` transitions in/out
+   */
+  onTransition?: (
+    toState: BaseTransitionStatesType,
+    fromState: BaseTransitionStatesType
+  ) => void
+
+  /**
+   * Callback fired before the `<DrawerLayout.Tray />` transitions in
+   */
+  onEnter?: () => void
+
+  /**
+   * Callback fired as the `<DrawerLayout.Tray />` begins to transition in
+   */
+  onEntering?: () => void
+
+  /**
+   * Callback fired after the `<DrawerLayout.Tray />` finishes transitioning in
+   */
+  onEntered?: (type?: TransitionType) => void
+
+  /**
+   * Callback fired right before the `<DrawerLayout.Tray />` transitions out
+   */
+  onExit?: () => void
+
+  /**
+   * Callback fired as the `<DrawerLayout.Tray />` begins to transition out
+   */
+  onExiting?: () => void
+
+  /**
+   * Callback fired after the `<DrawerLayout.Tray />` finishes transitioning out
+   */
+  onExited?: (type?: TransitionType) => void
+}
 
 type DrawerLayoutTrayState = {
   transitioning: boolean
@@ -93,75 +187,22 @@ const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   render: PropTypes.func,
-  /**
-   * Placement of the `<DrawerLayout.Tray />`
-   */
   placement: PropTypes.oneOf(['start', 'end']),
-  /**
-   * If the tray is open or closed.
-   */
   open: PropTypes.bool,
-  /**
-   * Called when the `<DrawerLayout.Tray />` is opened
-   */
   onOpen: PropTypes.func,
-  /**
-   * Called when the `<DrawerLayout.Tray />` is closed
-   */
   onClose: PropTypes.func,
-  /**
-   * Should the `<DrawerLayout.Tray />` have a border
-   */
   border: PropTypes.bool,
-  /**
-   * Should the `<DrawerLayout.Tray />` have a shadow
-   */
   shadow: PropTypes.bool,
-  /**
-   * Callback fired when the `<DrawerLayout.Tray />` transitions in/out
-   */
   onTransition: PropTypes.func,
-  /**
-   * Callback fired before the `<DrawerLayout.Tray />` transitions in
-   */
   onEnter: PropTypes.func,
-  /**
-   * Callback fired as the `<DrawerLayout.Tray />` begins to transition in
-   */
   onEntering: PropTypes.func,
-  /**
-   * Callback fired after the `<DrawerLayout.Tray />` finishes transitioning in
-   */
   onEntered: PropTypes.func,
-  /**
-   * Callback fired right before the `<DrawerLayout.Tray />` transitions out
-   */
   onExit: PropTypes.func,
-  /**
-   * Callback fired as the `<DrawerLayout.Tray />` begins to transition out
-   */
   onExiting: PropTypes.func,
-  /**
-   * Callback fired after the `<DrawerLayout.Tray />` finishes transitioning out
-   */
   onExited: PropTypes.func,
-  /**
-   * Ref function for the `<DrawerLayout.Tray />` content
-   */
   contentRef: PropTypes.func,
-  /**
-   * An element or a function returning an element to use as the mount node
-   * for the `<DrawerLayout.Tray />` when tray is overlaying content
-   */
   mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-  /**
-   * An element or a function returning an element to focus by default
-   */
   defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  /**
-   * An element, function returning an element, or array of elements that will not be hidden from
-   * the screen reader when the `<DrawerLayout.Tray />` is open
-   */
   liveRegion: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,

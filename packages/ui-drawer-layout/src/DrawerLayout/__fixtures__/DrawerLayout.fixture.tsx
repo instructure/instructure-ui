@@ -21,12 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { DrawerLayout } from '../index'
+import type { DrawerLayoutProps } from '../props'
+import type { DrawerLayoutTrayProps } from '../DrawerTray/props'
 
-export default class DrawerLayoutFixture extends Component {
+type DrawerLayoutFixtureProps = {
+  layoutWidth?: string | number
+  trayWidth?: string | number
+  placement?: DrawerLayoutTrayProps['placement']
+  open?: DrawerLayoutTrayProps['open']
+  onOverlayTrayChange?: DrawerLayoutProps['onOverlayTrayChange']
+}
+
+export default class DrawerLayoutFixture extends Component<DrawerLayoutFixtureProps> {
   static propTypes = {
     layoutWidth: PropTypes.string,
     trayWidth: PropTypes.string,
@@ -44,18 +55,8 @@ export default class DrawerLayoutFixture extends Component {
   }
 
   render() {
-    const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'layoutWidth' does not exist on type 'Rea... Remove this comment to see the full error message
-      layoutWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'trayWidth' does not exist on type 'Reado... Remove this comment to see the full error message
-      trayWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
-      open,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'placement' does not exist on type 'Reado... Remove this comment to see the full error message
-      placement,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onOverlayTrayChange' does not exist on t... Remove this comment to see the full error message
-      onOverlayTrayChange
-    } = this.props
+    const { layoutWidth, trayWidth, open, placement, onOverlayTrayChange } =
+      this.props
 
     return (
       <div style={{ width: layoutWidth }}>
