@@ -26,12 +26,10 @@ const handleCreate = require('./handleCreate')
 const handleExecuteCodemods = require('./handleExecuteCodemods')
 const handleUpgrade = require('./handleUpgrade')
 const handleUpgradePackages = require('./handleUpgradePackages')
-const handleViewParserConfig = require('./handleViewParserConfig')
 
 module.exports = {
   handleCreate,
   handleExecuteCodemods,
   handleUpgrade,
-  handleUpgradePackages,
-  handleViewParserConfig
+  handleUpgradePackages
 }

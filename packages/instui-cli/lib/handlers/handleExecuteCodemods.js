@@ -104,7 +104,6 @@ module.exports = async ({
       parserConfig
     })
   }
-
   return
 }
 
