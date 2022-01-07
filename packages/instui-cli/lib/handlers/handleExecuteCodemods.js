@@ -26,7 +26,7 @@ const yargsInteractive = require('yargs-interactive')
 const semver = require('semver')
 
 const { info, error } = require('@instructure/command-utils')
-const executeCodemod = require('@instructure/ui-upgrade-scripts/lib/utils/execute-codemod')
+const executeCodemod = require('../utils/execute-codemod')
 
 const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
 const getParserConfigPath = require('../utils/getParserConfigPath')

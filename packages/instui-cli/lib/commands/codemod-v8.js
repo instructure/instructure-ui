@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const executeCodemod = require('@instructure/ui-upgrade-scripts/lib/utils/execute-codemod')
+const executeCodemod = require('../utils/execute-codemod')
 const { info, error } = require('@instructure/command-utils')
 
 exports.command = 'codemod-v8'

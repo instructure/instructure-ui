@@ -30,7 +30,6 @@ const NODE_PACKAGES = [
   'ui-icons-build',
   'ui-eslint-config',
   'ui-babel-preset',
-  'ui-upgrade-scripts',
   'ui-token-scripts',
   'ui-codemods',
   'ui-karma-config',

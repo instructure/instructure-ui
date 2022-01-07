@@ -98,7 +98,6 @@
     { "path": "./packages/ui-tray/tsconfig.build.json" },
     { "path": "./packages/ui-tree-browser/tsconfig.build.json" },
     { "path": "./packages/ui-truncate-text/tsconfig.build.json" },
-    { "path": "./packages/ui-upgrade-scripts/tsconfig.build.json" },
     { "path": "./packages/ui-utils/tsconfig.build.json" },
     { "path": "./packages/ui-view/tsconfig.build.json" },
     { "path": "./packages/ui-webpack-config/tsconfig.build.json" },

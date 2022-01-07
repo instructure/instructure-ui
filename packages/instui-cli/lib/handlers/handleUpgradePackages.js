@@ -22,9 +22,7 @@
  * SOFTWARE.
  */
 
-const {
-  handleUpgradeDependencies
-} = require('@instructure/ui-upgrade-scripts/lib/handlers')
+const upgradePackages = require('../utils/upgrade-packages')
 const { getPackageList } = require('../utils/getPackageLists')
 
 module.exports = ({
@@ -34,9 +32,9 @@ module.exports = ({
   ignoreWorkspaceRootCheck,
   npmClient
 }) => {
-  handleUpgradeDependencies({
-    sourcePath,
-    dependencies: getPackageList({ version }),
+  upgradePackages({
+    path: sourcePath,
+    packageList: getPackageList({ version }),
     version,
     useResolutions,
     ignoreWorkspaceRootCheck,
