@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
-const { handleExecuteCodemods, handleViewParserConfig } = require('../handlers')
+const { handleExecuteCodemods } = require('../handlers')
+const fs = require('fs')
+const { info, error } = require('@instructure/command-utils')
+const getParserConfigPath = require('../utils/getParserConfigPath')
 
 exports.command = 'codemod'
 exports.desc = 'Apply instructure-ui codemods to source at a specified path.'
-
 exports.builder = (yargs) => {
   yargs.option('path', {
     alias: 'p',
@@ -79,20 +81,20 @@ exports.builder = (yargs) => {
     'view-parser-config',
     'View the default instructure-ui parser configuration file that is supplied to jscodeshift when the codemods are executed',
     () => {
-      handleViewParserConfig()
+      fs.readFile(getParserConfigPath(), (err, data) => {
+        if (err) {
+          error(err)
+        } else {
+          info(data)
+        }
+      })
     }
   )
 }
 
 exports.handler = (argv) => {
-  const {
-    path,
-    scopeModifications,
-    ignore,
-    version,
-    parser,
-    parserConfig
-  } = argv
+  const { path, scopeModifications, ignore, version, parser, parserConfig } =
+    argv
 
   handleExecuteCodemods({
     sourcePath: path,

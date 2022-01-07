@@ -22,22 +22,155 @@
  * SOFTWARE.
  */
 
-const upgradePackages = require('../utils/upgrade-packages')
+const { info, error, runCommandSync } = require('@instructure/command-utils')
 const { getPackageList } = require('../utils/getPackageLists')
+const verifyPackageJson = require('../utils/verify-package-json')
+const { getPackage } = require('@instructure/pkg-utils')
 
 module.exports = ({
-  sourcePath,
+  path,
   version,
   useResolutions,
   ignoreWorkspaceRootCheck,
   npmClient
 }) => {
-  upgradePackages({
-    path: sourcePath,
-    packageList: getPackageList({ version }),
-    version,
-    useResolutions,
-    ignoreWorkspaceRootCheck,
-    npmClient
+  const packageList = getPackageList({ version })
+  verifyPackageJson({ sourcePath: path })
+
+  const pkg = getPackage({ cwd: path })
+
+  const pkgDependencies = Object.keys(pkg.get('dependencies') || {})
+  const pkgDevDependencies = Object.keys(pkg.get('devDependencies') || {})
+
+  const dependencies = packageList.filter((pkg) =>
+    pkgDependencies.includes(pkg)
+  )
+  const devDependencies = packageList.filter((pkg) =>
+    pkgDevDependencies.includes(pkg)
+  )
+
+  const allDependencies = [...dependencies, ...devDependencies]
+
+  if (allDependencies.length === 0) return
+
+  if (useResolutions && npmClient == 'yarn') {
+    info(`Updating resolutions in ${path}...`)
+    return updateResolutions({ pkg, packages: allDependencies, path, version })
+  } else {
+    info(`Upgrading ${allDependencies} in ${path} to ${version || 'latest'}`)
+
+    const mapVersion = (dependencies) =>
+      dependencies.map((dep) => `${dep}@${version || 'latest'}`)
+
+    try {
+      if (npmClient === 'yarn') {
+        const composeYarnArgs = (args) =>
+          ignoreWorkspaceRootCheck
+            ? [...args, '--ignore-workspace-root-check']
+            : args
+
+        runCommandSync(
+          'yarn',
+          composeYarnArgs(['remove', ...allDependencies, '--cwd', path])
+        )
+
+        if (dependencies.length > 0) {
+          runCommandSync(
+            'yarn',
+            composeYarnArgs(['add', ...mapVersion(dependencies), '--cwd', path])
+          )
+        }
+
+        if (devDependencies.length > 0) {
+          runCommandSync(
+            'yarn',
+            composeYarnArgs([
+              'add',
+              ...mapVersion(devDependencies),
+              '--cwd',
+              path,
+              '--dev'
+            ])
+          )
+        }
+      } else if (npmClient === 'npm') {
+        runCommandSync('npm', [
+          'uninstall',
+          '--prefix',
+          path,
+          ...allDependencies
+        ])
+
+        if (dependencies.length > 0) {
+          runCommandSync('npm', [
+            'install',
+            '--prefix',
+            path,
+            ...mapVersion(dependencies)
+          ])
+        }
+
+        if (devDependencies.length > 0) {
+          runCommandSync('npm', [
+            'install',
+            '--save-dev',
+            '--prefix',
+            path,
+            ...mapVersion(devDependencies)
+          ])
+        }
+      }
+    } catch (err) {
+      error(err)
+    }
+  }
+}
+
+async function updateResolutions({ pkg, packages, path, version }) {
+  const originalResolutions = { ...pkg.get('resolutions') }
+  const packageResolutions = {}
+
+  info(
+    `${packages.length} packages to upgrade. Updating package.json resolutions...`
+  )
+
+  packages.forEach((packageName) => {
+    try {
+      let upgradeVersion = version
+      if (!upgradeVersion) {
+        const { stdout } = runCommandSync(
+          'yarn',
+          ['info', `${packageName}`, 'dist-tags', '--json'],
+          [],
+          { stdio: 'pipe' }
+        )
+        const { data } = JSON.parse(stdout)
+        if (data) {
+          upgradeVersion = data.latest
+        }
+      }
+      packageResolutions[packageName] = upgradeVersion
+    } catch (err) {
+      error(err)
+    }
   })
+
+  pkg.set('resolutions', {
+    ...(originalResolutions || {}),
+    ...packageResolutions
+  })
+
+  await pkg.serialize()
+
+  try {
+    runCommandSync('yarn', ['--cwd', path])
+  } catch (err) {
+    error(err)
+  }
+
+  if (pkg) {
+    pkg.refresh()
+    pkg.set('resolutions', originalResolutions)
+    await pkg.serialize()
+  }
 }

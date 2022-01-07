@@ -29,8 +29,6 @@ const {
   runCommandSync
 } = require('@instructure/command-utils')
 const verifyPackageJson = require('../utils/verify-package-json')
-const checkDependencies = require('../utils/check-dependencies')
-
 const handleExecuteCodemods = require('./handleExecuteCodemods')
 const handleUpgradePackages = require('./handleUpgradePackages')
 
@@ -38,6 +36,8 @@ const {
   getRemovedPackageList,
   getPackageList
 } = require('../utils/getPackageLists')
+const depcheck = require('depcheck')
+const path = require('path')
 
 module.exports = async ({
   sourcePath,
@@ -75,7 +75,7 @@ module.exports = async ({
   })
 
   // Upgrade instructure ui packages that are still in the project to the latest
-  handleUpgradePackages({
+  await handleUpgradePackages({
     sourcePath,
     version,
     ignoreWorkspaceRootCheck,
@@ -196,4 +196,20 @@ Would you like this script to add them to your project now? [y/n]
       error(err)
     }
   }
+}
+
+const checkDependencies = ({ sourcePath, options }) => {
+  return new Promise((resolve, reject) => {
+    try {
+      depcheck(
+        path.resolve(process.cwd(), sourcePath),
+        options || {},
+        (result) => {
+          resolve(result)
+        }
+      )
+    } catch (err) {
+      reject(err)
+    }
+  })
 }
