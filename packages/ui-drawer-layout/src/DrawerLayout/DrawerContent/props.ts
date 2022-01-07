@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { AriaRole } from 'react'
 import PropTypes from 'prop-types'
 
 import type {
@@ -32,15 +32,20 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
+type DrawerContentSize = { width: number; height: number }
+
 type DrawerLayoutContentOwnProps = {
   label: string
   children?: React.ReactNode
-  contentRef?: (...args: any[]) => any
-  onSizeChange?: (...args: any[]) => any
-  role?: string
+  contentRef?: (element: HTMLDivElement | null) => void
+  /**
+   * Callback fired whenever the `<DrawerLayout.Content />` changes size
+   */
+  onSizeChange?: (contentSize: DrawerContentSize) => void
+  role?: AriaRole
 }
 
-type DrawerLayoutContentState = {
+type DrawerLayoutContentStyleProps = {
   shouldTransition: boolean
 }
 
@@ -58,9 +63,6 @@ const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
   children: PropTypes.node,
   contentRef: PropTypes.func,
-  /**
-   * Callback fired whenever the `<DrawerLayout.Content />` changes size
-   */
   onSizeChange: PropTypes.func,
   role: PropTypes.string
 }
@@ -75,7 +77,8 @@ const allowedProps: AllowedPropKeys = [
 
 export type {
   DrawerLayoutContentProps,
-  DrawerLayoutContentState,
-  DrawerLayoutContentStyle
+  DrawerLayoutContentStyleProps,
+  DrawerLayoutContentStyle,
+  DrawerContentSize
 }
 export { propTypes, allowedProps }

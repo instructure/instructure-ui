@@ -27,6 +27,7 @@ import { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { Transition } from '@instructure/ui-motion'
+import type { TransitionType } from '@instructure/ui-motion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
@@ -52,6 +53,7 @@ import type {
 parent: DrawerLayout
 id: DrawerLayout.Tray
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
@@ -67,34 +69,20 @@ class DrawerTray extends Component<
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     shouldContainFocus: true,
     shouldCloseOnEscape: true,
     shouldCloseOnDocumentClick: true,
     shouldReturnFocus: true,
     open: false,
-    onOpen: () => {},
     shadow: true,
     border: true,
-    placement: 'start',
-    mountNode: null,
-    onEnter: () => {},
-    onEntering: () => {},
-    onEntered: () => {},
-    onExit: () => {},
-    onExiting: () => {},
-    onExited: () => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
-    contentRef: (node: any) => {}
+    placement: 'start'
   }
 
-  state: DrawerLayoutTrayState = {
-    transitioning: false,
-    portalOpen: false
-  }
+  ref: HTMLDivElement | null = null
 
-  _DOMNode: PortalNode = null
-  ref: Element | null = null
+  private _DOMNode: PortalNode = null
+
   get _content() {
     console.warn(
       '_content property is deprecated and will be removed in v9, please use ref instead'
@@ -103,18 +91,26 @@ class DrawerTray extends Component<
     return this.ref
   }
 
-  componentDidMount() {
-    ;(this.props as any).makeStyles(this.makeStyleProps())
+  constructor(props: DrawerLayoutTrayProps) {
+    super(props)
+
+    this.state = {
+      transitioning: false,
+      portalOpen: false
+    }
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevState' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps: any, prevState: any, snapshot: any) {
-    if ((this.props as any).open !== prevProps.open) {
+  componentDidMount() {
+    this.props.makeStyles?.(this.makeStyleProps())
+  }
+
+  componentDidUpdate(prevProps: DrawerLayoutTrayProps) {
+    if (this.props.open !== prevProps.open) {
       this.setState({
         transitioning: true
       })
     }
-    ;(this.props as any).makeStyles(this.makeStyleProps())
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   makeStyleProps = (): DrawerLayoutTrayStyleProps => {
@@ -126,29 +122,32 @@ class DrawerTray extends Component<
   get placement() {
     const { placement, dir } = this.props
     const isRtl = dir === textDirectionContextConsumer.DIRECTION.rtl
-    return (isRtl
-      ? mirrorHorizontalPlacement(placement!, ' ')
-      : placement!) as DrawerTrayPlacement
+    return (
+      isRtl ? mirrorHorizontalPlacement(placement!, ' ') : placement!
+    ) as DrawerTrayPlacement
   }
 
   get direction() {
     return this.placement === 'end' ? 'right' : 'left'
   }
 
-  get transition() {
+  get transition(): TransitionType {
     return `slide-${this.direction}`
   }
 
-  handleContentRef = (node: Element | null) => {
+  handleContentRef = (node: HTMLDivElement | null) => {
     this.ref = node
-    this.props.contentRef?.(node)
+
+    if (typeof this.props.contentRef === 'function') {
+      this.props.contentRef(node)
+    }
   }
 
-  handleTransitionEntered = () => {
+  handleTransitionEntered = (_transitionType?: TransitionType) => {
     this.setState({ transitioning: false })
   }
 
-  handleTransitionExited = () => {
+  handleTransitionExited = (_transitionType?: TransitionType) => {
     this.setState({
       transitioning: false
     })
@@ -215,7 +214,7 @@ class DrawerTray extends Component<
       <DrawerLayoutContext.Consumer>
         {(shouldOverlayTray: boolean) => {
           const { portalOpen } = this.state
-          const needsPortal = shouldOverlayTray && mountNode
+          const needsPortal = shouldOverlayTray && !!mountNode
           // we have to handle the shadow version here,
           // because passing and handling it in styles.js makes it
           // rerender the component during the transition, breaking it
@@ -230,7 +229,6 @@ class DrawerTray extends Component<
           const content = (
             <Transition
               in={transitionIn}
-              // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
               type={this.transition}
               onTransition={onTransition}
               onEnter={onEnter}

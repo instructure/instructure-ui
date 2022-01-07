@@ -25,7 +25,7 @@
 import type { DrawerLayoutContentTheme } from '@instructure/shared-types'
 import type {
   DrawerLayoutContentProps,
-  DrawerLayoutContentState,
+  DrawerLayoutContentStyleProps,
   DrawerLayoutContentStyle
 } from './props'
 
@@ -41,9 +41,8 @@ import type {
  */
 const generateStyle = (
   componentTheme: DrawerLayoutContentTheme,
-  // @ts-expect-error no props used here
-  props: DrawerLayoutContentProps,
-  state: DrawerLayoutContentState
+  _props: DrawerLayoutContentProps,
+  state: DrawerLayoutContentStyleProps
 ): DrawerLayoutContentStyle => {
   const { shouldTransition } = state
 
