@@ -24,7 +24,7 @@
 
 //@ts-expect-error FIXME:
 // eslint-disable-next-line no-restricted-imports
-import generatePackageList from '@instructure/ui-upgrade-scripts/lib/utils/generate-package-list'
+import generatePackageList from '@instructure/instui-config/scripts/generate-package-list'
 
 const outputDir = process.argv[3] || process.cwd()
 

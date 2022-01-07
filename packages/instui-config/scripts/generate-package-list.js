@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,24 +22,24 @@
  * SOFTWARE.
  */
 
+const fse = require('fs-extra')
 const path = require('path')
-const semver = require('semver')
-const { getPackageJSON } = require('@instructure/pkg-utils')
-const { error } = require('@instructure/command-utils')
-const generatePackageList = require('@instructure/ui-upgrade-scripts/lib/utils/generate-package-list')
+const { info, error, runCommandSync } = require('@instructure/command-utils')
 
-try {
-  const { version } = getPackageJSON()
+module.exports = ({ outputDir, name = 'package-list.json' }) => {
+  try {
+    const { stdout } = runCommandSync('lerna', ['list', '--json'], [], {
+      stdio: 'pipe'
+    })
+    const packages = JSON.parse(stdout)
+    const packageList = packages.map((pkg) => pkg.name)
 
-  // Any package list changes will always apply to the next major version. We take
-  // the current version, and run `semver.inc` which will increase it by one major version.
-  // Use that version to determine where the generated package list should live
-  const pkgListDir = `v${semver.coerce(semver.inc(version, 'major')).major}`
+    const outputPath = path.join(outputDir, name)
 
-  generatePackageList({
-    outputDir: path.join(process.cwd(), 'package-lists', pkgListDir)
-  })
-} catch (err) {
-  error(err)
-  process.exit(1)
+    fse.outputFileSync(outputPath, JSON.stringify(packageList, null, 1))
+
+    info(`Successfully generated package list at ${outputPath}`)
+  } catch (err) {
+    error(err)
+  }
 }

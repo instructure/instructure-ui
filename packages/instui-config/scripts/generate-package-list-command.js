@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
  * The MIT License (MIT)
  *
@@ -22,14 +24,24 @@
  * SOFTWARE.
  */
 
-//@ts-expect-error FIXME:
-// eslint-disable-next-line no-restricted-imports
-import executeCodemod from '@instructure/ui-upgrade-scripts/lib/utils/execute-codemod'
-import { warn } from '@instructure/command-utils'
+const path = require('path')
+const semver = require('semver')
+const { getPackageJSON } = require('@instructure/pkg-utils')
+const { error } = require('@instructure/command-utils')
+const generatePackageList = require('./generate-package-list')
 
-export default (args = {}) => {
-  warn(
-    "`execute-codemod` has been moved from '@instructure/ui-scripts/lib/utils/execute-codemod' to '@instructure/ui-upgrade-scripts/lib/utils/execute-codemod'."
-  )
-  executeCodemod(args)
+try {
+  const { version } = getPackageJSON()
+
+  // Any package list changes will always apply to the next major version. We take
+  // the current version, and run `semver.inc` which will increase it by one major version.
+  // Use that version to determine where the generated package list should live
+  const pkgListDir = `v${semver.coerce(semver.inc(version, 'major')).major}`
+
+  generatePackageList({
+    outputDir: path.join(process.cwd(), 'package-lists', pkgListDir)
+  })
+} catch (err) {
+  error(err)
+  process.exit(1)
 }

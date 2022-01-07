@@ -28,8 +28,8 @@ const {
   confirm,
   runCommandSync
 } = require('@instructure/command-utils')
-const verifyPackageJson = require('@instructure/ui-upgrade-scripts/lib/utils/verify-package-json')
-const checkDependencies = require('@instructure/ui-upgrade-scripts/lib/utils/check-dependencies')
+const verifyPackageJson = require('../utils/verify-package-json')
+const checkDependencies = require('../utils/check-dependencies')
 
 const handleExecuteCodemods = require('./handleExecuteCodemods')
 const handleUpgradePackages = require('./handleUpgradePackages')
@@ -107,10 +107,9 @@ const checkInstuiDependencies = async ({ sourcePath, version }) => {
 
   return {
     missing: Object.keys(missing || {}).filter((dep) => packages.includes(dep)),
-    unused: [
-      ...(dependencies || []),
-      ...(devDependencies || [])
-    ].filter((dep) => removedPackages.includes(dep))
+    unused: [...(dependencies || []), ...(devDependencies || [])].filter(
+      (dep) => removedPackages.includes(dep)
+    )
   }
 }
 

@@ -11,7 +11,7 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "generate:package:list": "./scripts/generate-package-list.js"
+    "generate:package:list": "./scripts/generate-package-list-command.js"
   },
   "license": "MIT",
   "publishConfig": {
@@ -20,7 +20,7 @@
   "dependencies": {
     "@instructure/command-utils": "8.14.0",
     "@instructure/pkg-utils": "8.14.0",
-    "@instructure/ui-upgrade-scripts": "8.14.0",
-    "semver": "^7"
+    "semver": "^7",
+    "fs-extra": "^9"
   }
 }
