@@ -1,0 +1,25 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./types",
+    "composite": true
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../console/tsconfig.build.json" },
+    { "path": "../emotion/tsconfig.build.json" },
+    { "path": "../shared-types/tsconfig.build.json" },
+    { "path": "../ui-icons/tsconfig.build.json" },
+    { "path": "../ui-options/tsconfig.build.json" },
+    { "path": "../ui-pages/tsconfig.build.json" },
+    { "path": "../ui-react-utils/tsconfig.build.json" },
+    { "path": "../ui-testable/tsconfig.build.json" },
+    { "path": "../ui-view/tsconfig.build.json" },
+    { "path": "../ui-babel-preset/tsconfig.build.json" },
+    { "path": "../ui-color-utils/tsconfig.build.json" },
+    { "path": "../ui-test-locator/tsconfig.build.json" },
+    { "path": "../ui-test-utils/tsconfig.build.json" },
+    { "path": "../ui-themes/tsconfig.build.json" }
+  ]
+}

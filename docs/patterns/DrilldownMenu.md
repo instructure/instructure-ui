@@ -1,7 +1,7 @@
 ---
 title: Drilldown Menu
 category: Patterns
-id: Drilldown
+id: DrilldownMenu
 ---
 
 ## Drilldown Menu

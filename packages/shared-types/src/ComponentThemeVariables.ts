@@ -412,6 +412,11 @@ export type DrawerLayoutTrayTheme = {
   boxShadow: Shadows['depth3']
 }
 
+export type DrilldownTheme = {
+  background: Colors['backgroundLightest']
+  color: Colors['textDarkest']
+}
+
 export type FileDropTheme = {
   backgroundColor: Colors['backgroundLightest']
   borderRadius: Border['radiusLarge']
@@ -1427,6 +1432,7 @@ export interface ThemeVariables {
   'DrawerLayout.Content': DrawerLayoutContentTheme
   DrawerLayoutTray: DrawerLayoutTrayTheme
   'DrawerLayout.Tray': DrawerLayoutTrayTheme
+  Drilldown: DrilldownTheme
   FileDrop: FileDropTheme
   Flex: FlexTheme
   FormFieldGroup: FormFieldGroupTheme

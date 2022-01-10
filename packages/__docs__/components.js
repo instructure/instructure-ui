@@ -125,4 +125,5 @@ export {
   EmotionThemeProvider,
   InstUISettingsProvider
 } from '@instructure/emotion'
+export { Drilldown } from '@instructure/ui-drilldown'
 export { canvas, canvasHighContrast, instructure } from '@instructure/ui-themes'

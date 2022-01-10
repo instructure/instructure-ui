@@ -50,6 +50,7 @@
     "@instructure/ui-date-time-input": "8.14.0",
     "@instructure/ui-dialog": "8.14.0",
     "@instructure/ui-drawer-layout": "8.14.0",
+    "@instructure/ui-drilldown": "8.14.0",
     "@instructure/ui-editable": "8.14.0",
     "@instructure/ui-expandable": "8.14.0",
     "@instructure/ui-file-drop": "8.14.0",

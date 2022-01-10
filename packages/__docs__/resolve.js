@@ -68,6 +68,10 @@ module.exports = {
       __dirname,
       '../ui-drawer-layout/src/'
     ),
+    '@instructure/ui-drilldown$': path.resolve(
+      __dirname,
+      '../ui-drilldown/src/'
+    ),
     '@instructure/ui-editable$': path.resolve(__dirname, '../ui-editable/src/'),
     '@instructure/ui-expandable$': path.resolve(
       __dirname,
