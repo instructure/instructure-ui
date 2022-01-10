@@ -20,7 +20,8 @@
   "devDependencies": {
     "jest": "^24.9.0",
     "@types/prettier": "^2",
-    "@types/jscodeshift": "^0.11.3"
+    "@types/jscodeshift": "^0.11.3",
+    "@instructure/ui-babel-preset": "8.14.0"
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",
