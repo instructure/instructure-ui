@@ -35,10 +35,10 @@ import {
 
 import { Alert } from '../index'
 import AlertExamples from '../__examples__/Alert.examples'
+import type { AlertProps } from '../props'
 
 describe('<Alert />', async () => {
-  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'srdiv' implicitly has type 'any' in some... Remove this comment to see the full error message
-  let srdiv
+  let srdiv: HTMLDivElement | null
 
   beforeEach(async () => {
     stub(console, 'warn') // suppress deprecation warnings
@@ -52,8 +52,7 @@ describe('<Alert />', async () => {
   })
 
   afterEach(async () => {
-    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'srdiv' implicitly has an 'any' type.
-    srdiv && srdiv.parentNode && srdiv.parentNode.removeChild(srdiv)
+    srdiv?.parentNode?.removeChild(srdiv)
     srdiv = null
   })
 
@@ -104,17 +103,24 @@ describe('<Alert />', async () => {
   //   })
   // })
 
-  const iconComponentsVariants = {
+  const iconComponentsVariants: Record<
+    NonNullable<AlertProps['variant']>,
+    string
+  > = {
     error: 'IconNo',
     info: 'IconInfoBorderless',
     success: 'IconCheckMark',
     warning: 'IconWarningBorderless'
   }
 
-  Object.entries(iconComponentsVariants).forEach(([variant, iconComponent]) => {
+  ;(
+    Object.entries(iconComponentsVariants) as [
+      NonNullable<AlertProps['variant']>,
+      string
+    ][]
+  ).forEach(([variant, iconComponent]) => {
     it(`"${variant}" variant should have icon "${iconComponent}".`, async () => {
       const subject = await mount(
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         <Alert variant={variant} transition="none">
           Success: Sample alert text.
         </Alert>
@@ -143,17 +149,16 @@ describe('<Alert />', async () => {
       <Alert
         variant="success"
         transition="none"
-        liveRegion={() => liver}
+        liveRegion={() => liver!}
         liveRegionPoliteness="polite"
       >
         Success: Sample alert text.
       </Alert>
     )
 
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(liver.innerText).to.include('Success: Sample alert text.')
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(liver.getAttribute('aria-live')).to.equal('polite')
+    expect(liver!.innerText).to.include('Success: Sample alert text.')
+
+    expect(liver!.getAttribute('aria-live')).to.equal('polite')
   })
 
   describe('with `screenReaderOnly', async () => {
@@ -162,7 +167,7 @@ describe('<Alert />', async () => {
       const subject = await mount(
         <Alert
           variant="success"
-          liveRegion={() => liver}
+          liveRegion={() => liver!}
           screenReaderOnly={true}
         >
           Success: Sample alert text.
@@ -191,7 +196,7 @@ describe('<Alert />', async () => {
       <Alert
         variant="success"
         transition="none"
-        liveRegion={() => liver}
+        liveRegion={() => liver!}
         liveRegionPoliteness="polite"
         isLiveRegionAtomic
       >
@@ -199,51 +204,45 @@ describe('<Alert />', async () => {
       </Alert>
     )
 
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(liver.innerText).to.include('Success: Sample alert text.')
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(liver.getAttribute('aria-atomic')).to.equal('true')
+    expect(liver!.innerText).to.include('Success: Sample alert text.')
+    expect(liver!.getAttribute('aria-atomic')).to.equal('true')
   })
 
   it('should close when told to, with transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
     const subject = await mount(
-      <Alert variant="success" liveRegion={() => liver}>
+      <Alert variant="success" liveRegion={() => liver!}>
         Success: Sample alert text.
       </Alert>
     )
 
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(liver.children.length).to.equal(1)
+    expect(liver!.children.length).to.equal(1)
 
     await subject.setProps({
       open: false
     })
 
     await wait(() => {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      expect(liver.children.length).to.equal(0)
+      expect(liver!.children.length).to.equal(0)
     })
   })
 
   it('should close when told to, without transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
     const subject = await mount(
-      <Alert variant="success" transition="none" liveRegion={() => liver}>
+      <Alert variant="success" transition="none" liveRegion={() => liver!}>
         Success: Sample alert text.
       </Alert>
     )
 
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(liver.children.length).to.equal(1)
+    expect(liver!.children.length).to.equal(1)
 
     await subject.setProps({
       open: false
     })
 
     expect(subject.getDOMNode()).to.not.exist()
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(liver.children.length).to.equal(0)
+    expect(liver!.children.length).to.equal(0)
   })
 
   it('should have shadow by default', async () => {

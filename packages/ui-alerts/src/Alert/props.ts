@@ -35,18 +35,60 @@ import type {
 import type { AlertTheme, PropValidators } from '@instructure/shared-types'
 
 type AlertOwnProps = {
+  /**
+   * content to be rendered within Alert
+   */
   children?: ReactNode
+  /**
+   * Determines color and icon
+   */
   variant?: 'info' | 'success' | 'warning' | 'error'
-  liveRegion?: (...args: any[]) => any
+  /**
+   * Function that returns the DIV where screenreader alerts will be placed.
+   */
+  liveRegion?: () => Element
+  /**
+   * Choose the politeness level of screenreader alerts.
+   */
   liveRegionPoliteness?: 'polite' | 'assertive'
+  /**
+   * If the screenreader alert should be atomic
+   */
   isLiveRegionAtomic?: boolean
+  /**
+   * If the alert should only be visible to screen readers
+   */
   screenReaderOnly?: boolean
+  /**
+   * Milliseconds until the Alert is dismissed automatically
+   */
   timeout?: number
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
-  renderCloseButtonLabel?: ((...args: any[]) => any) | ReactNode
-  onDismiss?: (...args: any[]) => any
+  /**
+   * Close button label. Can be a React component
+   */
+  renderCloseButtonLabel?: () => ReactNode | ReactNode
+  /**
+   * Callback after the alert is closed
+   */
+  onDismiss?: () => void
+  /**
+   * Transition used to make the alert appear and disappear
+   */
   transition?: 'none' | 'fade'
+  /**
+   * if open transitions from truthy to falsey, it's a signal to close and unmount the alert.
+   * This is necessary to close the alert from the outside and still run the transition.
+   */
   open?: boolean
+  /**
+   * If the alert should have a shadow.
+   */
   hasShadow: boolean
 }
 
@@ -59,60 +101,18 @@ type AlertProps = AlertOwnProps & WithStyleProps<AlertTheme, AlertStyle>
 type AlertStyle = ComponentStyle<'alert' | 'icon' | 'closeButton' | 'content'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * content to be rendered within Alert
-   */
   children: PropTypes.node,
-  /**
-   * Determines color and icon
-   */
   variant: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Function that returns the DIV where screenreader alerts will be placed.
-   */
   liveRegion: PropTypes.func,
-  /**
-   * Choose the politeness level of screenreader alerts.
-   */
   liveRegionPoliteness: PropTypes.oneOf(['polite', 'assertive']),
-  /**
-   * If the screenreader alert should be atomic
-   */
   isLiveRegionAtomic: PropTypes.bool,
-  /**
-   * If the alert should only be visible to screen readers
-   */
   screenReaderOnly: PropTypes.bool,
-  /**
-   * Milliseconds until the Alert is dismissed automatically
-   */
   timeout: PropTypes.number,
-  /**
-   * Close button label. Can be a React component
-   */
   renderCloseButtonLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  /**
-   * Callback after the alert is closed
-   */
   onDismiss: PropTypes.func,
-  /**
-   * Transition used to make the alert appear and disappear
-   */
   transition: PropTypes.oneOf(['none', 'fade']),
-  /**
-   * if open transitions from truthy to falsey, it's a signal to close and unmount the alert.
-   * This is necessary to close the alert from the outside and still run the transition.
-   */
   open: PropTypes.bool,
-  /**
-   * If the alert should have a shadow.
-   */
   hasShadow: PropTypes.bool
 }
 
@@ -132,5 +132,9 @@ const allowedProps: AllowedPropKeys = [
   'hasShadow'
 ]
 
-export type { AlertProps, AlertStyle }
+type AlertState = {
+  open: boolean
+}
+
+export type { AlertProps, AlertStyle, AlertState }
 export { propTypes, allowedProps }
