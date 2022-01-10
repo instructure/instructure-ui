@@ -1,0 +1,54 @@
+{
+  "name": "@instructure/ui-drilldown",
+  "private": true,
+  "version": "8.14.0",
+  "description": "TODO: description",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
+  "module": "./es/index.js",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build --modules es,cjs",
+    "build:watch": "yarn ts:check --watch & ui-build --watch",
+    "build:types": "tsc -p tsconfig.build.json",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.13.10",
+    "@instructure/console": "8.14.0",
+    "@instructure/emotion": "8.14.0",
+    "@instructure/shared-types": "8.14.0",
+    "@instructure/ui-icons": "8.14.0",
+    "@instructure/ui-options": "8.14.0",
+    "@instructure/ui-pages": "8.14.0",
+    "@instructure/ui-react-utils": "8.14.0",
+    "@instructure/ui-testable": "8.14.0",
+    "@instructure/ui-view": "8.14.0",
+    "prop-types": "^15"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "8.14.0",
+    "@instructure/ui-color-utils": "8.14.0",
+    "@instructure/ui-test-locator": "8.14.0",
+    "@instructure/ui-test-utils": "8.14.0",
+    "@instructure/ui-themes": "8.14.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8 <=17"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false
+}

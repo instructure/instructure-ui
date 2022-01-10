@@ -276,6 +276,9 @@ class Nav extends Component {
 
     if (sectionId === '__uncategorized') {
       return this.renderSectionChildren(sectionId, markExpanded)
+    } else if (sectionId.includes('WIP')) {
+      // We don't want to list the WIP components etc.
+      return null
     } else {
       return this.createNavToggle({
         id: sectionId,
@@ -300,8 +303,12 @@ class Nav extends Component {
   renderSections() {
     return Object.keys(this.props.sections)
       .sort()
-      .filter((sectionId) => this.props.sections[sectionId].level === 0)
-      .filter((sectionId) => this.sectionHasMatches(sectionId))
+      .filter((sectionId) => {
+        return (
+          this.props.sections[sectionId].level === 0 &&
+          this.sectionHasMatches(sectionId)
+        )
+      })
       .map((sectionId) => this.renderSectionLink(sectionId))
   }
 
