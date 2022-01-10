@@ -22,50 +22,31 @@
  * SOFTWARE.
  */
 
-const path = require('path')
+import prettier from 'prettier'
 
-module.exports = function parseImport(importPath) {
-  let parsedImport = {}
+export default function formatSource(source: string, sourcePath: string) {
+  let options = null
 
-  if (!importPath) return {}
-
-  const splitPath = importPath.split('/')
-
-  const parseSourceAndModule = (entries = []) => {
-    if (entries.length === 0) return {}
-
-    const lastEntry = entries[entries.length - 1]
-
-    const moduleOffset = path.parse(lastEntry).name === 'index' ? 2 : 1
-
-    const moduleName = entries[entries.length - moduleOffset]
-
-    return {
-      moduleName: moduleName ? path.parse(moduleName).name : undefined,
-      sourcePath: entries.slice(0, entries.length - moduleOffset).join('/')
+  try {
+    options = prettier.resolveConfig.sync(sourcePath)
+    if (options) {
+      // Set the parser argument if the consumer did not set one to avoid a console warning
+      options = {
+        ...options,
+        parser: options.parser || 'babel'
+      }
     }
+  } catch (err) {
+    // Will revert to the default prettier options if a config cannot be parsed
   }
 
-  if (importPath[0] === '@') {
-    const [scope, name, ...rest] = splitPath
-
-    parsedImport = {
-      scope,
-      name,
-      fullName: `${scope}/${name}`,
-      moduleName: `${scope}/${name}`,
-      ...parseSourceAndModule(rest)
+  return prettier.format(
+    source,
+    options || {
+      parser: 'babel',
+      semi: false,
+      singleQuote: true,
+      trailingComma: 'none'
     }
-  } else {
-    const [name, ...rest] = splitPath
-
-    parsedImport = {
-      name,
-      fullName: name,
-      moduleName: name,
-      ...parseSourceAndModule(rest)
-    }
-  }
-
-  return parsedImport
+  )
 }

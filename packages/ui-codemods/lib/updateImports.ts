@@ -22,37 +22,65 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
+import formatSource from './utils/formatSource'
+import requireUncached from './utils/requireUncached'
+import replaceDeprecatedImports from './helpers/replaceDeprecatedImports'
+import type { API, FileInfo } from 'jscodeshift'
+import { ParsedImport } from './utils/parseImport'
 
-const formatSource = require('./utils/formatSource')
-const requireUncached = require('./utils/requireUncached')
-
-const replaceDeprecatedImports = require('./helpers/replaceDeprecatedImports')
-
-module.exports = function (file, api, options) {
+/**
+ * updates imports to the new per-package or the metapackage syntax.
+ * @param file Holds information about the currently processed file.
+ * @param api This object exposes the jscodeshift library and helper functions from the runner.
+ * @param options Contains all options that have been passed to runner
+ * @returns {*|null} null if there was nothing to reformat
+ */
+export default function updateImports(file: FileInfo, api: API, options: any) {
   const j = api.jscodeshift
   const c = path.resolve(process.cwd(), options.config)
-  let config = fs.existsSync(c) ? requireUncached(c) : null
-
+  let config:
+    | ConfigObject
+    | ((opts: { isMetaComponentPackageMigration: boolean }) => ConfigObject) =
+    fs.existsSync(c) ? requireUncached(c) : null
   if (!config) {
-    throw new Error(`Invalid config file "${c}"`)
+    throw new Error(`Invalid config file "${c}", is this the correct path?`)
   }
-
   if (typeof config === 'function') {
     const configOptions = {
       isMetaComponentPackageMigration: options.isMetaComponentPackageMigration
     }
-
     config = config(configOptions)
   }
-
   const root = j(file.source)
-
   let hasModifications = false
 
   hasModifications =
     replaceDeprecatedImports(j, root, config, api) || hasModifications
 
   return hasModifications ? formatSource(root.toSource(), file.path) : null
+}
+
+export type ConfigObject = {
+  transformDefaults: TransformObj
+  transforms: Transform[]
+}
+
+export type TransformObj = {
+  importType?: string
+  importPath: string | ((path: string, parsedImport?: ParsedImport) => string)
+  moduleName: string | ((path?: string) => string)
+}
+
+export type Transform = {
+  where: {
+    importPath?: string
+    importPattern?: string
+    packageName?: string
+    packageNames?: string[]
+    moduleName?: string
+    moduleNames?: string[]
+  }
+  transform: TransformObj
 }

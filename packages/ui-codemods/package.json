@@ -18,12 +18,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "@types/prettier": "^2",
+    "@types/jscodeshift": "^0.11.3"
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",
-    "jscodeshift": "^0.7.0",
-    "prettier": "^2.0.2"
+    "jscodeshift": "^0.13",
+    "prettier": "^2"
   },
   "publishConfig": {
     "access": "public"

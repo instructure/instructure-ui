@@ -42,7 +42,7 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.js <pat
 This codemod helps you update your project by renaming `imports` that have changed (e.g., `instructure-ui` => `@instructure/<package name>`).
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/imports.config.json
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/imports.config.js
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg

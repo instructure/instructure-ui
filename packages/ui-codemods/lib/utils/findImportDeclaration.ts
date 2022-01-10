@@ -22,16 +22,30 @@
  * SOFTWARE.
  */
 
+import { Collection, JSCodeshift } from 'jscodeshift'
+
 /**
- * Get all class declarations that match a component which has deprecated properties
- *
- * @param {object} j jscodeshift API
- * @param {object} root AST root node
- * @param {object} config Deprecated property configuration
- * @return {array} Filtered collection of component class declarations
+ * Finds an import statement with the given path in the given collection, e.g.
+ * "findImportDeclaration(j, root, 'myPath')" finds
+ * "import otherModule from 'myPath'"
+ * @param j JSCodeshift
+ * @param root the collection (AST tree) to search
+ * @param importPath the import path to look for
  */
-module.exports = function getClassDeclarations(j, root, config) {
-  return root
-    .find(j.ClassDeclaration)
-    .filter((path) => typeof config[path.value.id.name] !== 'undefined')
+export default function findImportDeclaration(
+  j: JSCodeshift,
+  root: Collection,
+  importPath: string
+) {
+  let importDeclaration
+  const declarationQueryResult = root.find(j.ImportDeclaration, {
+    source: {
+      type: 'StringLiteral',
+      value: importPath
+    }
+  })
+  if (declarationQueryResult.length > 0) {
+    importDeclaration = declarationQueryResult.get()
+  }
+  return importDeclaration
 }

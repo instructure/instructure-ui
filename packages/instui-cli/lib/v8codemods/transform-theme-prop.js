@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+/**
+ * Renames components theme={} prop to themeOverride={}
+ */
 export default function transformer(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)

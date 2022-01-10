@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-const updatePropNames = require('./updatePropNames')
-
-module.exports = {
-  updatePropNames
+export default function requireUncached(module: string) {
+  delete require.cache[require.resolve(module)]
+  return require(module)
 }
