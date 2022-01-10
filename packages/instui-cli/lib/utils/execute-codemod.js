@@ -32,7 +32,7 @@ module.exports = ({
   ignore = [],
   parser = 'babylon',
   parserConfig,
-  isMetaComponentPackageMigration = false,
+  isMetaComponentPackageMigration = false, // if true migrates imports to @instructure/ui
   printToStdOut = false,
   dryRun = false
 } = {}) => {

@@ -22,32 +22,38 @@
  * SOFTWARE.
  */
 
-const prettier = require('prettier')
+import type { UpdatePropNamesOptions } from '../updatePropNames'
 
-module.exports = function formatSource(source, sourcePath) {
-  let options = null
+/**
+ * Find the deprecated prop for a component
+ *
+ * @param {object} config Deprecated property configuration
+ * @param {string} comp Component name
+ * @param {string} prop Property name
+ * @return {object} Object if a match is found, otherwise null
+ */
+export default function findDeprecatedProp(
+  config: UpdatePropNamesOptions,
+  comp: string,
+  prop: string
+) {
+  if (config && comp && prop && config[comp]) {
+    const component = config[comp]
 
-  try {
-    options = prettier.resolveConfig.sync(sourcePath)
+    // Iterate versions
+    const versions = Object.keys(component)
+    for (let i = 0; i < versions.length; i++) {
+      const props = component[versions[i]]
 
-    if (options) {
-      // Set the parser argument if the consumer did not set one to avoid a console warning
-      options = {
-        ...options,
-        parser: options.parser || 'babel'
+      // Iterate properties
+      for (let j = 0; j < props.length; j++) {
+        const match = props[j]
+
+        if (prop === match.old) {
+          return match
+        }
       }
     }
-  } catch (err) {
-    // Will revert to the deafult prettier options if a config cannot be parsed
   }
-
-  return prettier.format(
-    source,
-    options || {
-      parser: 'babel',
-      semi: false,
-      singleQuote: true,
-      trailingComma: 'none'
-    }
-  )
+  return null
 }

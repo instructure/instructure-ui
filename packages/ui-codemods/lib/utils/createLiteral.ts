@@ -22,7 +22,12 @@
  * SOFTWARE.
  */
 
-module.exports = function createLiteral(j, value) {
+import type { JSCodeshift } from 'jscodeshift'
+
+export default function createLiteral(
+  j: JSCodeshift,
+  value: string | boolean | number | null
+) {
   if (typeof value === 'string') {
     return j.stringLiteral(value)
   }
@@ -36,7 +41,7 @@ module.exports = function createLiteral(j, value) {
   }
 
   if (value === null) {
-    return j.jsxExpressionContainer(j.nullLiteral(value))
+    return j.jsxExpressionContainer(j.nullLiteral())
   }
 
   return null

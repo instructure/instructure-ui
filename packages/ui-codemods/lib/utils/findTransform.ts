@@ -22,11 +22,14 @@
  * SOFTWARE.
  */
 
-module.exports = function findTransform(
-  transforms,
-  importPath,
-  parsedImport,
-  moduleName
+import { Transform } from '../updateImports'
+import { ParsedImport } from './parseImport'
+
+export default function findTransform(
+  transforms: Transform[],
+  importPath: string,
+  parsedImport: ParsedImport,
+  moduleName?: string
 ) {
   return (
     transforms.find(({ where = {} }) => {
@@ -57,7 +60,7 @@ module.exports = function findTransform(
         } else {
           foundTransform =
             foundTransform &&
-            where.moduleNames.includes(parsedImport.moduleName)
+            where.moduleNames.includes(parsedImport.moduleName!)
         }
       }
 
@@ -72,7 +75,7 @@ module.exports = function findTransform(
         performedTest = true
 
         foundTransform =
-          foundTransform && where.packageNames.includes(parsedImport.fullName)
+          foundTransform && where.packageNames.includes(parsedImport.fullName!)
       }
 
       if (where.importPath) {

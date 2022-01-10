@@ -22,8 +22,20 @@
  * SOFTWARE.
  */
 
-const findDeprecatedProp = require('../utils/findDeprecatedProp')
-const createLiteral = require('../utils/createLiteral')
+import findDeprecatedProp from '../utils/findDeprecatedProp'
+import createLiteral from '../utils/createLiteral'
+import {
+  ASTPath,
+  Collection,
+  JSCodeshift,
+  JSXAttribute,
+  JSXExpressionContainer,
+  JSXIdentifier
+} from 'jscodeshift'
+import type {
+  ComponentUpdateData,
+  UpdatePropNamesOptions
+} from '../updatePropNames'
 
 /**
  * Find JSX attributes (props)
@@ -31,14 +43,17 @@ const createLiteral = require('../utils/createLiteral')
  * Example:
  *  <MyComponent [name] />
  */
-module.exports = function replaceDeprecatedProps(j, root, config) {
+export default function replaceDeprecatedProps(
+  j: JSCodeshift,
+  root: Collection,
+  config: UpdatePropNamesOptions
+) {
   let hasModifications = false
-
   // Find JSX Elements
   //
   // Rewrite usages of deprecated props for a Component.
   root.find(j.JSXOpeningElement).forEach((el) => {
-    const name = el.value.name.name
+    const name = (el.value.name as JSXIdentifier).name
 
     // Make sure we're working with a Component that we need to modify
     if (config[name]) {
@@ -51,10 +66,8 @@ module.exports = function replaceDeprecatedProps(j, root, config) {
             .forEach((i) => {
               const prop = i.value.name
               const match = findDeprecatedProp(config, name, prop)
-
               if (match) {
                 hasModifications = true
-
                 if (!match.new) {
                   // If config sets the new name to null, the prop has been
                   // removed. Remove the prop and value.
@@ -81,20 +94,20 @@ module.exports = function replaceDeprecatedProps(j, root, config) {
                         const { type } = expressionContainer.value.expression
                         // Verify that the expression container contains a literal
                         if (type === 'Literal') {
-                          replaceValue({
+                          replaceValue(
                             j,
                             literals,
                             match,
                             attr,
                             expressionContainer
-                          })
+                          )
                         }
                       })
                     } else if (literals && literals.length > 0) {
                       // If the value isn't in a jsx expression container, but we have a literal, that
                       // means that the user is passing a string value. For example, in the following
                       // jsx, `<div prop="someValue" />` we are looking at `"someValue"`
-                      replaceValue({ j, literals, match, attr })
+                      replaceValue(j, literals, match, attr)
                     } else {
                       // If we don't have a jsx expression container or a string literal, that means that
                       // we have just the attribute. For example, in the following jsx, `<div prop />`
@@ -104,12 +117,7 @@ module.exports = function replaceDeprecatedProps(j, root, config) {
                         j.jsxAttribute(newPropName, j.booleanLiteral(true))
                       )
                       // Look for literals again after update
-                      replaceValue({
-                        j,
-                        literals: j(attr).find(j.Literal),
-                        match,
-                        attr
-                      })
+                      replaceValue(j, j(attr).find(j.Literal), match, attr)
                     }
                   }
                 }
@@ -122,13 +130,13 @@ module.exports = function replaceDeprecatedProps(j, root, config) {
   return hasModifications
 }
 
-const replaceValue = ({
-  j,
-  literals,
-  match,
-  attr,
-  expressionContainer
-} = {}) => {
+const replaceValue = (
+  j: JSCodeshift,
+  literals: Collection,
+  match: ComponentUpdateData,
+  attr: ASTPath<JSXAttribute>,
+  expressionContainer?: ASTPath<JSXExpressionContainer>
+) => {
   literals.forEach((literalValue) => {
     const currentValue = literalValue.value.value
 

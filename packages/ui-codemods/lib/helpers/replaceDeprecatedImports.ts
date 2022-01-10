@@ -22,15 +22,25 @@
  * SOFTWARE.
  */
 
-const parseImport = require('../utils/parseImport')
-const findTransform = require('../utils/findTransform')
-const findImportDeclaration = require('../utils/findImportDeclaration')
+import parseImport, { ParsedImport } from '../utils/parseImport'
+import findTransform from '../utils/findTransform'
+import findImportDeclaration from '../utils/findImportDeclaration'
+import {
+  API,
+  ASTPath,
+  Collection,
+  ImportDeclaration,
+  ImportDefaultSpecifier,
+  ImportSpecifier,
+  JSCodeshift
+} from 'jscodeshift'
+import type { ConfigObject, TransformObj } from '../updateImports'
 
 function transformImportPath(
-  importPath,
-  parsedImport,
-  transform,
-  transformDefaults
+  importPath: string,
+  parsedImport: ParsedImport,
+  transform: TransformObj,
+  transformDefaults: TransformObj
 ) {
   let updatedImportPath = transform.importPath || transformDefaults.importPath
 
@@ -47,34 +57,34 @@ function transformImportPath(
 }
 
 function updateImports(
-  j,
-  root,
-  config,
-  api,
-  importDeclaration,
-  importSpecifier,
-  importPath
+  j: JSCodeshift,
+  root: Collection,
+  config: ConfigObject,
+  api: API,
+  importDeclaration: ASTPath<ImportDeclaration>,
+  importSpecifier: ASTPath<ImportDefaultSpecifier> | ASTPath<ImportSpecifier>,
+  importPath: string
 ) {
   let hasModifications = false
-  const { transformDefaults = {}, transforms = [] } = config
-
+  const { transformDefaults = {} as TransformObj, transforms = [] } = config
   // This is the name of the export imported from the module. For example, in the import
   // `import { Foo as Bar } from '@instructure...` this would be Foo
   let moduleName
   if (
     importSpecifier &&
     importSpecifier.value &&
-    importSpecifier.value.imported
+    (importSpecifier.value as ImportSpecifier).imported
   ) {
-    moduleName = importSpecifier.value.imported.name
+    moduleName = (importSpecifier.value as ImportSpecifier).imported.name
   }
 
   // This is the local name created by the consumer. For example, in the import
   // `import { Foo as Bar } from '@instructure...` this would be Bar
-  let localName = importSpecifier.value.local.name
+  const localName = (importSpecifier.value as ImportDefaultSpecifier).local!
+    .name
 
   const parsedImport = parseImport(importPath)
-  let transform = findTransform(
+  const transform = findTransform(
     transforms,
     importPath,
     parsedImport,
@@ -90,16 +100,17 @@ function updateImports(
       importType = moduleName ? 'named' : 'default'
     }
 
-    let updatedModuleName = transform.moduleName || transformDefaults.moduleName
-    const currentModuleName = moduleName || parsedImport.moduleName
-
+    const updatedModuleName =
+      transform.moduleName || transformDefaults.moduleName
+    const currentModuleName = moduleName || parsedImport.moduleName!
+    let updatedModuleNameStr: string
     if (updatedModuleName) {
-      updatedModuleName =
+      updatedModuleNameStr =
         typeof updatedModuleName === 'function'
           ? updatedModuleName(currentModuleName)
           : updatedModuleName
     } else {
-      updatedModuleName = currentModuleName
+      updatedModuleNameStr = currentModuleName
     }
 
     const updatedImportPath = transformImportPath(
@@ -125,7 +136,7 @@ function updateImports(
     if (
       importType === 'named' &&
       importPath === updatedImportPath &&
-      moduleName === updatedModuleName
+      moduleName === updatedModuleNameStr
     ) {
       return false
     }
@@ -140,7 +151,7 @@ function updateImports(
     const { comments: existingComments = [] } =
       (updatedDeclaration || {}).value || {}
 
-    const cleanup = (newDeclaration) => {
+    const cleanup = (newDeclaration?: ImportDeclaration) => {
       hasModifications = true
       j(importSpecifier).remove()
 
@@ -168,7 +179,7 @@ function updateImports(
         // were already on the updated import declaration
         updatedDeclaration.value.comments = [
           ...(existingComments || []),
-          ...(removedImportDeclaration ? comments : [])
+          ...(removedImportDeclaration ? comments! : [])
         ]
       }
     }
@@ -198,7 +209,7 @@ function updateImports(
             .at(0)
             .insertAfter(
               j.importSpecifier(
-                j.identifier(updatedModuleName),
+                j.identifier(updatedModuleNameStr),
                 j.identifier(localName)
               )
             )
@@ -211,7 +222,7 @@ function updateImports(
             .at(0)
             .insertAfter(
               j.importSpecifier(
-                j.identifier(updatedModuleName),
+                j.identifier(updatedModuleNameStr),
                 j.identifier(localName)
               )
             )
@@ -224,7 +235,7 @@ function updateImports(
             j.importDeclaration(
               [
                 j.importSpecifier(
-                  j.identifier(updatedModuleName),
+                  j.identifier(updatedModuleNameStr),
                   j.identifier(localName)
                 )
               ],
@@ -238,7 +249,7 @@ function updateImports(
         const newDeclaration = j.importDeclaration(
           [
             j.importSpecifier(
-              j.identifier(updatedModuleName),
+              j.identifier(updatedModuleNameStr),
               j.identifier(localName)
             )
           ],
@@ -314,7 +325,12 @@ function updateImports(
  * Example:
  *  import Modal from 'instructure-ui/lib/Modal'
  */
-module.exports = function replaceDeprecatedImports(j, root, config, api) {
+export default function replaceDeprecatedImports(
+  j: JSCodeshift,
+  root: Collection,
+  config: ConfigObject,
+  api: API
+) {
   let hasModifications = false
 
   root.find(j.ImportDeclaration).forEach((importDeclaration) => {
@@ -360,7 +376,8 @@ module.exports = function replaceDeprecatedImports(j, root, config, api) {
           })
         } else {
           // If we have a declaration, but no specifiers that means there is just the import path
-          const { transformDefaults = {}, transforms = [] } = config
+          const { transformDefaults = {} as TransformObj, transforms = [] } =
+            config
           const parsedImport = parseImport(importPath)
           const transform = findTransform(transforms, importPath, parsedImport)
 

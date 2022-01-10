@@ -22,47 +22,40 @@
  * SOFTWARE.
  */
 
-const getClassDeclarations = require('../utils/getClassDeclarations')
-const findDeprecatedProp = require('../utils/findDeprecatedProp')
+import fs from 'fs'
+import path from 'path'
+import formatSource from './utils/formatSource'
+import requireUncached from './utils/requireUncached'
+import replaceDeprecatedProps from './helpers/replaceDeprecatedProps'
+import { API, FileInfo } from 'jscodeshift'
 
-/**
- * Find and replace property members
- *
- * Example:
- *  this.props[name]
- *  props[name]
- */
-module.exports = function replacePropertyMembers(j, root, config) {
+export default function (file: FileInfo, api: API, options: any) {
+  const j = api.jscodeshift
+  const c = path.resolve(process.cwd(), options.config)
+  const config: UpdatePropNamesOptions = fs.existsSync(c)
+    ? requireUncached(c)
+    : null
+
+  if (!config) {
+    throw new Error(`Invalid config file "${c}"`)
+  }
+
+  const root = j(file.source)
   let hasModifications = false
 
-  getClassDeclarations(j, root, config).forEach((path) => {
-    const name = path.value.id.name
+  hasModifications = replaceDeprecatedProps(j, root, config) || hasModifications
 
-    j(path)
-      .find(j.MemberExpression)
-      .forEach((me) => {
-        const prop = me.value.property.name
-        const match = findDeprecatedProp(config, name, prop)
+  return hasModifications ? formatSource(root.toSource(), file.path) : null
+}
 
-        if (match) {
-          // Find the object (should be `this.props` or `props`)
-          if (
-            me.value.object.name === 'props' ||
-            me.value.object.property.name === 'props'
-          ) {
-            // Find the actual identifier
-            j(me)
-              .find(j.Identifier)
-              .forEach((i) => {
-                if (i.value.name === prop) {
-                  hasModifications = true
-                  j(i).replaceWith(j.identifier(match.new))
-                }
-              })
-          }
-        }
-      })
-  })
+export type UpdatePropNamesOptions = {
+  [ComponentNames: string]: {
+    [versionNumber: string]: ComponentUpdateData[]
+  }
+}
 
-  return hasModifications
+export type ComponentUpdateData = {
+  old: string
+  new: string
+  values: { old: string | boolean; new: string | null }[]
 }
