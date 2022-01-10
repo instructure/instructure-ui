@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { BaseSyntheticEvent, Component } from 'react'
+import React, { Component } from 'react'
 import { Moment } from 'moment-timezone'
 
 import { ApplyLocaleContext, Locale, DateTime } from '@instructure/ui-i18n'
@@ -44,6 +44,12 @@ import type {
 } from './props'
 
 import { allowedProps, propTypes } from './props'
+
+type GetOption = <F extends keyof TimeSelectOptions>(
+  field: F,
+  value?: TimeSelectOptions[F],
+  options?: TimeSelectOptions[]
+) => TimeSelectOptions | undefined
 
 /**
 ---
@@ -75,7 +81,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   static contextType = ApplyLocaleContext
 
   ref: Select | null = null
-  _emptyOptionId = uid('Select-EmptyOption')
+  private readonly _emptyOptionId = uid('Select-EmptyOption')
 
   constructor(props: TimeSelectProps) {
     super(props)
@@ -89,9 +95,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   focus() {
-    if (this.ref) {
-      this.ref.focus()
-    }
+    this.ref?.focus()
   }
 
   get _select() {
@@ -197,12 +201,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     return undefined
   }
 
-  getOption(
-    field: 'id' | 'value' | 'label',
-    value?: string,
-    options = this.state.options
-  ) {
-    return options.find((option: TimeSelectOptions) => option[field] === value)
+  getOption: GetOption = (field, value, options = this.state.options) => {
+    return options.find((option) => option[field] === value)
   }
 
   getFormattedId(date: Moment) {
@@ -300,16 +300,16 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     this.props.onBlur?.(event)
   }
 
-  handleInputChange = (event: BaseSyntheticEvent) => {
+  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     const newOptions = this.filterOptions(value)
 
-    this.setState(() => ({
+    this.setState({
       inputValue: value,
       filteredOptions: newOptions,
       highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : undefined,
       isShowingOptions: true
-    }))
+    })
 
     if (!this.state.isShowingOptions) {
       this.props.onShowOptions?.(event)
@@ -467,7 +467,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     } = this.props
 
     const { inputValue, isShowingOptions } = this.state
-
     return (
       <Select
         renderLabel={renderLabel}
