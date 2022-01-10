@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { BaseSyntheticEvent, InputHTMLAttributes } from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -115,11 +115,11 @@ type TimeSelectOwnProps = {
    */
   visibleOptionsCount?: number
   /**
-   * Displays messages and validation for the input. It should be an object
-   * with the following shape:
+   * Displays messages and validation for the input. It should be an array of
+   * objects with the following shape:
    * `{
-   *   text: PropTypes.node,
-   *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *     text: ReactNode,
+   *     type: One of: ['error', 'hint', 'success', 'screenreader-only']
    * }`
    */
   messages?: FormMessage[]
@@ -133,10 +133,8 @@ type TimeSelectOwnProps = {
   constrain?: PositionConstraint
   /**
    * Callback fired when a new option is selected.
-   * @param {Object} event - the event object
-   * @param {Object} data - additional data
-   * @param data.value - the value of selected option
-   * @param data.inputText - the value in the input text
+   * @param event - the event object
+   * @param data - additional data
    */
   onChange?: (
     event: React.SyntheticEvent,
@@ -153,7 +151,7 @@ type TimeSelectOwnProps = {
   /**
    * Callback fired when the options list is shown.
    */
-  onShowOptions?: (event: BaseSyntheticEvent) => void
+  onShowOptions?: (event: React.SyntheticEvent) => void
   /**
    * Callback fired when the options list is hidden.
    */
