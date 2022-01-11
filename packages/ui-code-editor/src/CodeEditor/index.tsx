@@ -83,7 +83,7 @@ class CodeEditor extends Component<CodeEditorProps> {
 
   focus() {
     if (this.codeMirror) {
-      ;((this.codeMirror as unknown) as HTMLElement).focus()
+      ;(this.codeMirror as unknown as HTMLElement).focus()
     }
   }
 
@@ -106,20 +106,15 @@ class CodeEditor extends Component<CodeEditorProps> {
     return {
       ...this.props.options,
       readOnly: this.props.readOnly,
-      mode: this.mode
+      mode: this.mode,
+      extraKeys: this.props.readOnly ? { Tab: false, 'Shift-Tab': false } : {}
     }
   }
 
   render() {
-    const {
-      value,
-      label,
-      attachment,
-      readOnly,
-      onChange,
-      styles,
-      ...rest
-    } = this.props
+    const { value, label, attachment, readOnly, onChange, styles, ...rest } =
+      this.props
+
     return (
       <div css={styles?.codeEditor} ref={this.handleRef}>
         <Global styles={styles?.globalStyles} />
@@ -136,6 +131,9 @@ class CodeEditor extends Component<CodeEditorProps> {
             }}
             ref={(el) => {
               this.codeMirror = el ? el : null
+            }}
+            editorDidMount={(editor) => {
+              this.instance = editor
             }}
           />
         </label>
