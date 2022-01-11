@@ -132,9 +132,6 @@ class CodeEditor extends Component<CodeEditorProps> {
             ref={(el) => {
               this.codeMirror = el ? el : null
             }}
-            editorDidMount={(editor) => {
-              this.instance = editor
-            }}
           />
         </label>
       </div>
