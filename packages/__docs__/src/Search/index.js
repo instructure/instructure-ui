@@ -68,7 +68,8 @@ class Search extends Component {
         value: `#${option}`,
         label: option,
         groupLabel: doc.category,
-        tags: doc.tags
+        tags: doc.tags,
+        isWIP: doc.isWIP || doc.category.includes('WIP')
       })
     })
   }
@@ -78,11 +79,17 @@ class Search extends Component {
   }
 
   filterOptions = (value) => {
-    return this._options.filter(
-      (option) =>
+    return this._options.filter((option) => {
+      // We want to hide WIP components etc.
+      if (option?.isWIP) {
+        return false
+      }
+
+      return (
         option.label.toLowerCase().includes(value.toLowerCase()) ||
         (option.tags && option.tags.toString().includes(value.toLowerCase()))
-    )
+      )
+    })
   }
 
   handleClearInput = (event) => {
