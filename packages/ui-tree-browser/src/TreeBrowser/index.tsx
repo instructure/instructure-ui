@@ -29,7 +29,7 @@ import keycode from 'keycode'
 
 import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
 
-import { pickProps } from '@instructure/ui-react-utils'
+import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -344,7 +344,7 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
       .map((collection, i) => (
         <TreeCollection
           key={i}
-          {...pickProps(this.props, TreeCollection.allowedProps)}
+          {...pickProps(omitProps(this.props), TreeCollection.allowedProps)}
           {...this.getCollectionProps(collection)}
           selection={this.state.selection}
           onItemClick={this.handleItemClick}

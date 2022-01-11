@@ -65,6 +65,7 @@ describe('<TreeCollection />', async () => {
   it('should render', async () => {
     await mount(
       <TreeCollection
+        level={1}
         id={1}
         name="Coll 1"
         collections={[
@@ -81,6 +82,7 @@ describe('<TreeCollection />', async () => {
     it('should render icons on children', async () => {
       await mount(
         <TreeCollection
+          level={1}
           id={1}
           name="Coll 1"
           collections={[
@@ -107,6 +109,7 @@ describe('<TreeCollection />', async () => {
 
       await mount(
         <TreeCollection
+          level={1}
           id={1}
           containerRef={containerRef}
           name="Coll 1"
@@ -124,6 +127,7 @@ describe('<TreeCollection />', async () => {
     it('should pass an aria-expanded attribute to its list item', async () => {
       await mount(
         <TreeCollection
+          level={1}
           id={1}
           name="Coll 1"
           collections={[
@@ -142,6 +146,7 @@ describe('<TreeCollection />', async () => {
     it('should pass an aria-selected attribute to its list item', async () => {
       await mount(
         <TreeCollection
+          level={1}
           id={1}
           name="Coll 1"
           collections={[
@@ -161,6 +166,7 @@ describe('<TreeCollection />', async () => {
     it('should correctly evaluate `getCollectionProps` for each item', async () => {
       await mount(
         <TreeCollection
+          level={1}
           id={1}
           name="Coll 1"
           collections={[
@@ -198,6 +204,7 @@ describe('<TreeCollection />', async () => {
 
         await mount(
           <TreeCollection
+            level={1}
             id={1}
             name="Coll 1"
             collections={[
@@ -227,6 +234,7 @@ describe('<TreeCollection />', async () => {
     it('should not pass an aria-expanded attribute to its button', async () => {
       await mount(
         <TreeCollection
+          level={1}
           id={1}
           name="Coll 1"
           collections={[
@@ -249,6 +257,7 @@ describe('<TreeCollection />', async () => {
 
       await mount(
         <TreeCollection
+          level={1}
           id={1}
           name="Coll 1"
           collections={[
@@ -275,6 +284,7 @@ describe('<TreeCollection />', async () => {
     it('should correctly evaluate `getItemProps` for each item', async () => {
       await mount(
         <TreeCollection
+          level={1}
           id={1}
           name="Coll 1"
           collections={[

@@ -36,8 +36,11 @@ type TreeBrowserButtonOwnProps = {
   id?: string | number
   name?: string
   descriptor?: string
-  type?: 'collection' | 'item'
+  type?: 'collection' | 'item' | string // | string is for custom type
   thumbnail?: string
+  /**
+   * Called when this button is clicked
+   */
   onClick?: (e: React.MouseEvent) => void
   expanded?: boolean
   selected?: boolean

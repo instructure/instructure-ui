@@ -87,7 +87,7 @@ class TreeCollection extends Component<
 
   get itemsLevel() {
     const { level, isCollectionFlattened } = this.props
-    return isCollectionFlattened ? level : level! + 1
+    return isCollectionFlattened ? level : level + 1
   }
 
   handleFocus = (e: SyntheticEvent, item: CollectionData) => {
