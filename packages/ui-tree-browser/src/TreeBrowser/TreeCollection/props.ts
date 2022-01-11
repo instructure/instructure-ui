@@ -38,12 +38,12 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import { CollectionProps, TreeBrowserBaseProps } from '../props'
 
 type TreeBrowserCollectionOwnProps = {
+  level: number
   onKeyDown?: (e: React.KeyboardEvent, data: CollectionData) => void
   // TODO it would be nice to use the same handler as in TreeBrowser
   onItemClick?: (e: React.MouseEvent, data: CollectionData) => void
   numChildren?: number
   position?: number
-  level?: number
   selection?: string
 } & CollectionProps &
   TreeBrowserBaseProps

@@ -32,6 +32,7 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import React, { ReactElement } from 'react'
+import type { TreeBrowserButtonProps } from './TreeButton/props'
 
 type TreeBrowserOwnProps = {
   /**
@@ -98,7 +99,7 @@ type TreeBrowserBaseProps = {
    * you need to render the collection differently depending on it's props. For example, if you would like to
    * display a different icon for collections with a certain name.
    */
-  getCollectionProps?: (props: Record<string, any>) => Record<string, any>
+  getCollectionProps?: (props: Record<string, any>) => TreeBrowserButtonProps
   onCollectionClick?: (e: React.MouseEvent, data: CollectionData) => void
 } & TreeBrowserCommonProps
 
@@ -111,7 +112,7 @@ type TreeBrowserCommonProps = {
     | React.ReactNode
     | ((props: unknown) => React.ReactNode)
   itemIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
-  renderContent?: (props: any) => JSX.Element
+  renderContent?: (props: TreeBrowserButtonProps) => JSX.Element
 }
 
 type PropKeys = keyof TreeBrowserOwnProps
@@ -129,6 +130,10 @@ type Collection = {
   id: number | string
   name: string
   descriptor?: string
+  /**
+   * A function that returns a reference to the underlying HTML container
+   * @param el The DOM HTMLElement
+   */
   containerRef?: (el: HTMLElement | null) => void
   /**
    * children of type TreeNode

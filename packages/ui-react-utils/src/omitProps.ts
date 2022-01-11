@@ -33,14 +33,15 @@
  * @module omitProps
  * @param props The object to process
  * @param propsToOmit list disallowed prop keys or an object whose
- *        keys will be omitted.
+ *        keys will be omitted. If not specified the automatically excluded
+ *        props will be removed.
  * @param exclude an optional array of disallowed prop names to omit
  * @returns props object without the excluded props
  * @module omitProps
  */
 function omitProps<T extends Record<string, any>>(
   props: T,
-  propsToOmit: Record<string, any> | string[],
+  propsToOmit?: Record<string, any> | string[],
   exclude?: string[]
 ) {
   const propKeys = Array.isArray(propsToOmit)
@@ -56,7 +57,8 @@ const omit = <T>(originalObject: T, keysToOmit: string[]) => {
   // code based on babel's _objectWithoutProperties
   const newObject: Partial<T> = {}
   for (const key in originalObject) {
-    // special case because we always want to omit these and === is faster than concat'ing them in
+    // special case because we always want to omit these and === is faster than
+    // concat'ing them in
     if (
       key === 'theme' ||
       key === 'children' ||
