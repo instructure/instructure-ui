@@ -161,6 +161,11 @@ class Nav extends Component {
 
     return sections[sectionId].docs
       .filter((docId) => {
+        // WIP packages shouldn't be listed
+        if (docs[docId]?.isWIP) {
+          return false
+        }
+
         return (
           this.matchQuery(docId) ||
           this.matchQuery(docs[docId].title) ||
