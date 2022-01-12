@@ -29,9 +29,9 @@ import { withStyle, jsx } from '@instructure/emotion'
 import {
   omitProps,
   safeCloneElement,
-  matchComponentTypes
+  matchComponentTypes,
+  withSSR
 } from '@instructure/ui-react-utils'
-import { uid } from '@instructure/uid'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -52,6 +52,8 @@ type MenuSeparatorChild = React.ComponentElement<
   MenuItemSeparator
 >
 
+import { hashInstance } from '@instructure/ui-utils'
+
 /**
 ---
 parent: Menu
@@ -59,6 +61,7 @@ id: Menu.Group
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
@@ -83,7 +86,8 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
       }
     }
 
-    this._labelId = uid('MenuItemGroup')
+    //@ts-expect-error props.ssr
+    this._labelId = hashInstance('MenuItemGroup', this.props.ssr)
   }
 
   private _labelId: string

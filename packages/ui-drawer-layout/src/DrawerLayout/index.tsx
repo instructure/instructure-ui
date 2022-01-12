@@ -28,12 +28,12 @@ import React, { Children, Component, createContext } from 'react'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import {
   matchComponentTypes,
-  safeCloneElement
+  safeCloneElement,
+  withSSR
 } from '@instructure/ui-react-utils'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
-import { createChainedFunction, px } from '@instructure/ui-utils'
+import { createChainedFunction, px, hashInstance } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
-import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
@@ -69,6 +69,7 @@ category: components
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, null)
 @textDirectionContextConsumer()
 @testable()
@@ -94,7 +95,8 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
       contentWidth: 0
     }
 
-    this._id = uid('DrawerLayout')
+    //@ts-expect-error props.ssr
+    this._id = hashInstance('DrawerLayout', this.props.ssr)
   }
 
   private readonly _id: string

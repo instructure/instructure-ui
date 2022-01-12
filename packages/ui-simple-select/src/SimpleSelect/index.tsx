@@ -29,9 +29,9 @@ import {
   matchComponentTypes,
   passthroughProps,
   callRenderProp,
-  getInteraction
+  getInteraction,
+  withSSR
 } from '@instructure/ui-react-utils'
-import { uid } from '@instructure/uid'
 
 import { Select } from '@instructure/ui-select'
 import type { SelectProps } from '@instructure/ui-select'
@@ -48,6 +48,8 @@ import type { SimpleSelectGroupProps } from './Group/props'
 import type { SimpleSelectProps } from './props'
 import { allowedProps, propTypes, SimpleSelectState } from './props'
 
+import { hashInstance } from '@instructure/ui-utils'
+
 type OptionChild = React.ComponentElement<SimpleSelectOptionProps, Option>
 type GroupChild = React.ComponentElement<SimpleSelectGroupProps, Group>
 
@@ -63,6 +65,7 @@ tags: form, field, dropdown
 ---
 @tsProps
 **/
+@withSSR()
 @testable()
 class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
   static readonly componentId = 'SimpleSelect'
@@ -99,7 +102,8 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
       selectedOptionId: option ? option.props.id : undefined
     }
 
-    this._emptyOptionId = uid('Select-EmptyOption')
+    //@ts-expect-error props.ssr
+    this._emptyOptionId = hashInstance('Select-EmptyOption', this.props.ssr)
   }
 
   get _select() {

@@ -28,11 +28,11 @@ import React, { Component } from 'react'
 import {
   callRenderProp,
   getInteraction,
-  passthroughProps
+  passthroughProps,
+  withSSR
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
-import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -45,6 +45,8 @@ import type {
 } from './props'
 import { allowedProps, propTypes } from './props'
 
+import { hashInstance } from '@instructure/ui-utils'
+
 /**
 ---
 category: components
@@ -52,6 +54,7 @@ tags: form, field
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class TextInput extends Component<TextInputProps, TextInputState> {
@@ -75,8 +78,10 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   constructor(props: TextInputProps) {
     super(props)
     this.state = { hasFocus: false }
-    this._defaultId = uid('TextInput')
-    this._messagesId = uid('TextInput-messages')
+    //@ts-expect-error props.ssr
+    this._defaultId = hashInstance('TextInput', this.props.ssr)
+    //@ts-expect-error props.ssr
+    this._messagesId = hashInstance('TextInput-messages', this.props.ssr)
   }
 
   ref: Element | null = null

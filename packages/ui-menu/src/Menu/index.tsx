@@ -26,14 +26,15 @@ import React, { Children, Component, ReactElement } from 'react'
 import keycode from 'keycode'
 
 import { Popover } from '@instructure/ui-popover'
-import { uid } from '@instructure/uid'
 import {
   safeCloneElement,
-  matchComponentTypes
+  matchComponentTypes,
+  withSSR
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
+import { hashInstance } from '@instructure/ui-utils'
 
 import { MenuContext } from '../MenuContext'
 import { MenuItem } from './MenuItem'
@@ -64,11 +65,12 @@ category: components
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Menu extends Component<MenuProps> {
   static readonly componentId = 'Menu'
-
+  // static contextType = SSRContext
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
@@ -97,7 +99,9 @@ class Menu extends Component<MenuProps> {
   _trigger: MenuItem | (React.ReactInstance & { focus?: () => void }) | null =
     null
   _menu: HTMLUListElement | null = null
-  _labelId = uid('Menu__label')
+  //@ts-expect-error ssr
+  _labelId = hashInstance('Menu__label', this.props.ssr)
+
   _activeSubMenu?: Menu | null
   _id: string
 
@@ -113,10 +117,10 @@ class Menu extends Component<MenuProps> {
 
   constructor(props: MenuProps) {
     super(props)
+    //@ts-expect-error ssr
 
-    this._id = this.props.id || uid('Menu')
+    this._id = this.props.id || hashInstance('Menu', props.ssr)
   }
-
   componentDidMount() {
     this.props.makeStyles?.()
   }

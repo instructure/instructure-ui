@@ -25,13 +25,13 @@
 import React, { Children, Component } from 'react'
 
 import { FormFieldGroup } from '@instructure/ui-form-field'
-import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import {
   matchComponentTypes,
   safeCloneElement,
   omitProps,
-  pickProps
+  pickProps,
+  withSSR
 } from '@instructure/ui-react-utils'
 
 import { RadioInput } from '../RadioInput'
@@ -39,6 +39,8 @@ import type { RadioInputProps } from '../RadioInput/props'
 
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
 import { allowedProps, propTypes } from './props'
+
+import { hashInstance } from '@instructure/ui-utils'
 
 type RadioInputChild = React.ComponentElement<RadioInputProps, RadioInput>
 
@@ -48,6 +50,7 @@ category: components
 ---
 @tsProps
 **/
+@withSSR()
 @testable()
 class RadioInputGroup extends Component<
   RadioInputGroupProps,
@@ -83,7 +86,8 @@ class RadioInputGroup extends Component<
       }
     }
 
-    this._messagesId = uid('RadioInputGroup-messages')
+    //@ts-expect-error props.ssr
+    this._messagesId = hashInstance('RadioInputGroup-messages', this.props.ssr)
   }
 
   get hasMessages() {

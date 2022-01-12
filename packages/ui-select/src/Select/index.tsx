@@ -25,13 +25,13 @@
 /** @jsx jsx */
 import React, { Children, Component } from 'react'
 
-import { createChainedFunction } from '@instructure/ui-utils'
+import { createChainedFunction, hashInstance } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
-import { uid } from '@instructure/uid'
 import {
   matchComponentTypes,
   omitProps,
-  getInteraction
+  getInteraction,
+  withSSR
 } from '@instructure/ui-react-utils'
 import {
   getBoundingClientRect,
@@ -85,6 +85,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Select extends Component<SelectProps> {
@@ -124,10 +125,9 @@ class Select extends Component<SelectProps> {
   state = {
     hasInputRef: false
   }
-
   ref: HTMLInputElement | null = null
-
-  private _defaultId = uid('Select')
+  //@ts-expect-error props.ssr
+  private _defaultId = hashInstance('Select', this.props.ssr)
   private _inputContainer: HTMLSpanElement | null = null
   private _listView: Element | null = null
   // temporarily stores actionable options

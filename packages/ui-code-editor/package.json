@@ -38,7 +38,7 @@
     "@instructure/ui-react-utils": "8.17.0",
     "@instructure/ui-test-locator": "8.17.0",
     "@instructure/ui-testable": "8.17.0",
-    "@instructure/uid": "8.17.0",
+    "@instructure/ui-utils": "8.17.0",
     "codemirror": "5.48.4",
     "prop-types": "^15",
     "react-codemirror2": "^7.2.1"

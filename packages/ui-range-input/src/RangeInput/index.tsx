@@ -29,10 +29,9 @@ import { warn } from '@instructure/console'
 import { ContextView } from '@instructure/ui-view'
 import { FormField } from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'
-import { uid } from '@instructure/uid'
 import { withStyle, jsx } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, pickProps } from '@instructure/ui-react-utils'
+import { omitProps, pickProps, withSSR } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -40,12 +39,15 @@ import generateComponentTheme from './theme'
 import type { RangeInputProps, RangeInputState } from './props'
 import { allowedProps, propTypes } from './props'
 
+import { hashInstance } from '@instructure/ui-utils'
+
 /**
 ---
 category: components
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class RangeInput extends Component<RangeInputProps, RangeInputState> {
@@ -91,7 +93,8 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
       }
     }
 
-    this.defaultId = uid('RangeInput')
+    //@ts-expect-error props.ssr
+    this.defaultId = hashInstance('RangeInput', this.props.ssr)
   }
 
   /* workaround for https://github.com/facebook/react/issues/554 */

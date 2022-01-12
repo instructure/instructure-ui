@@ -40,10 +40,18 @@ import {
   handleMouseOverOut
 } from '@instructure/ui-dom-utils'
 
-import { safeCloneElement, callRenderProp } from '@instructure/ui-react-utils'
-import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
+import {
+  safeCloneElement,
+  callRenderProp,
+  withSSR
+} from '@instructure/ui-react-utils'
+import {
+  createChainedFunction,
+  shallowEqual,
+  px,
+  hashInstance
+} from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
-import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 
@@ -62,6 +70,7 @@ tags: overlay, portal, dialog
 ---
 @tsProps
 **/
+@withSSR()
 @textDirectionContextConsumer()
 @testable()
 class Popover extends Component<PopoverProps, PopoverState> {
@@ -105,7 +114,8 @@ class Popover extends Component<PopoverProps, PopoverState> {
           : undefined
     }
 
-    this._id = this.props.id || uid('Popover')
+    //@ts-expect-error props.ssr
+    this._id = this.props.id || hashInstance('Popover', this.props.ssr)
     this._raf = []
 
     this._handleMouseOver = handleMouseOverOut.bind(

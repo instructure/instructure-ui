@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import keycode from 'keycode'
 
-import { callRenderProp } from '@instructure/ui-react-utils'
+import { callRenderProp, withSSR } from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
@@ -39,9 +39,9 @@ import {
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
-import { uid } from '@instructure/uid'
 import { canvas } from '@instructure/ui-themes'
 import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
+import { hashInstance } from '@instructure/ui-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -55,6 +55,7 @@ category: components
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 class Alert extends Component<AlertProps, AlertState> {
   static readonly componentId = 'Alert'

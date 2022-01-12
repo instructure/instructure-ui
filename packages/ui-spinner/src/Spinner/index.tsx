@@ -25,8 +25,7 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
-import { uid } from '@instructure/uid'
+import { callRenderProp, omitProps, withSSR } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { logError as error } from '@instructure/console'
 
@@ -37,12 +36,15 @@ import generateComponentTheme from './theme'
 import type { SpinnerProps } from './props'
 import { allowedProps, propTypes } from './props'
 
+import { hashInstance } from '@instructure/ui-utils'
+
 /**
 ---
 category: components
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Spinner extends Component<SpinnerProps> {
@@ -70,7 +72,9 @@ class Spinner extends Component<SpinnerProps> {
 
   constructor(props: SpinnerProps) {
     super(props)
-    this.titleId = uid('Spinner')
+
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'Spinner... Remove this comment to see the full error message
+    this.titleId = hashInstance('Spinner', this.props.ssr)
   }
 
   componentDidMount() {

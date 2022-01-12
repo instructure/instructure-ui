@@ -21,24 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React, { ComponentClass, forwardRef, useContext } from 'react'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
-/* list utils in alphabetical order */
-export { callRenderProp } from './callRenderProp'
-export { ComponentIdentifier } from './ComponentIdentifier'
-export { deprecated } from './deprecated'
-export { ensureSingleChild } from './ensureSingleChild'
-export { experimental } from './experimental'
-export { hack } from './hack'
-export { getDisplayName } from './getDisplayName'
-export { getElementType } from './getElementType'
-export { getInteraction } from './getInteraction'
-export { matchComponentTypes } from './matchComponentTypes'
-export { omitProps } from './omitProps'
-export { passthroughProps } from './passthroughProps'
-export { pickProps } from './pickProps'
-export { safeCloneElement } from './safeCloneElement'
-export { windowMessageListener } from './windowMessageListener'
-export { SSRContext, SSRContextProvider, withSSR } from './SSRContext'
-export type { GetInteractionOptions } from './getInteraction'
-export type { InteractionType } from './getInteraction'
-export type { SSRContextProviderValue } from './SSRContext'
+import { SSRContext } from './SSRContextProvider'
+import { decorator } from '@instructure/ui-decorator'
+
+const withSSR = decorator((ComposedComponent: ComponentClass) => {
+  const WithSSR = forwardRef((props: any, ref: any) => {
+    const ssrValueMap = useContext(SSRContext)
+
+    return <ComposedComponent ref={ref} {...props} ssr={ssrValueMap} />
+  })
+
+  hoistNonReactStatics(WithSSR, ComposedComponent)
+
+  // we have to pass these on, because sometimes users
+  // access propTypes of the component in other components
+  // eslint-disable-next-line react/forbid-foreign-prop-types
+  WithSSR.propTypes = ComposedComponent.propTypes
+  WithSSR.defaultProps = ComposedComponent.defaultProps
+
+  // These static fields exist on InstUI components
+  //@ts-expect-error fix this
+  WithSSR.allowedProps = ComposedComponent.allowedProps
+
+  if (process.env.NODE_ENV !== 'production') {
+    WithSSR.displayName = `WithSSR(${ComposedComponent.displayName})`
+  }
+
+  return WithSSR
+})
+
+export default withSSR
+
+export { withSSR }

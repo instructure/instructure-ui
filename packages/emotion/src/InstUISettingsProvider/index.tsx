@@ -27,10 +27,13 @@ import { TextDirectionContext } from '@instructure/ui-i18n'
 import { ThemeProvider } from '@emotion/react'
 import { ThemeOrOverride } from '../EmotionTypes'
 import { getTheme } from '../EmotionThemeProvider'
+import { SSRContextProvider } from '@instructure/ui-react-utils'
+import type { SSRContextProviderValue } from '@instructure/ui-react-utils'
 
 type InstUIProviderProps = {
   theme?: ThemeOrOverride
   dir?: 'ltr' | 'rtl' // TODO allow "auto" too
+  ssr?: SSRContextProviderValue
 }
 
 /**
@@ -100,7 +103,8 @@ type InstUIProviderProps = {
 function InstUISettingsProvider({
   children,
   theme = {},
-  dir
+  dir,
+  ssr
 }: React.PropsWithChildren<InstUIProviderProps>) {
   const finalDir = dir || useContext(TextDirectionContext)
 
@@ -111,17 +115,20 @@ function InstUISettingsProvider({
   }
 
   return (
-    <ThemeProvider theme={getTheme(theme)}>
-      <TextDirectionContext.Provider value={finalDir}>
-        {children}
-      </TextDirectionContext.Provider>
-    </ThemeProvider>
+    <SSRContextProvider ssr={ssr!}>
+      <ThemeProvider theme={getTheme(theme)}>
+        <TextDirectionContext.Provider value={finalDir}>
+          {children}
+        </TextDirectionContext.Provider>
+      </ThemeProvider>
+    </SSRContextProvider>
   )
 }
 
 InstUISettingsProvider.defaultProps = {
   theme: {},
-  dir: undefined
+  dir: undefined,
+  ssr: new Map<string, number>()
 }
 export default InstUISettingsProvider
 export { InstUISettingsProvider }

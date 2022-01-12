@@ -82,7 +82,7 @@ class FormFieldLabel extends Component<FormFieldLabelProps> {
 
     return (
       <ElementType
-        // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
+        //@ts-expect-error too complex union type
         {...omitProps(this.props, FormFieldLabel.allowedProps)}
         css={styles?.formFieldLabel}
         ref={this.handleRef}

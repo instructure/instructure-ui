@@ -27,14 +27,14 @@ import keycode from 'keycode'
 
 import { FormFieldMessages } from '@instructure/ui-form-field'
 import { View } from '@instructure/ui-view'
-import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import {
   callRenderProp,
   passthroughProps,
-  getInteraction
+  getInteraction,
+  withSSR
 } from '@instructure/ui-react-utils'
-import { isEdge } from '@instructure/ui-utils'
+import { isEdge, hashInstance } from '@instructure/ui-utils'
 
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
@@ -67,6 +67,7 @@ const IS_MS = isBrowserMS()
 category: components
 ---
 **/
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class FileDrop extends Component<FileDropProps, FileDropState> {
@@ -102,10 +103,14 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   constructor(props: FileDropProps) {
     super(props)
     // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'null'.
-    this.defaultId = uid('FileDrop')
-    ;(this as any).messagesId = uid('FileDrop-messages')
+    this.defaultId = hashInstance(
+      'FileDrop',
+      //@ts-expect-error props.ssr
+      props.ssr
+    )
+    //@ts-expect-error props.ssr
+    this.messagesId = hashInstance('FileDrop-messages', props.ssr)
   }
-
   componentDidMount() {
     ;(this.props as any).makeStyles(this.makeStyleProps())
   }
