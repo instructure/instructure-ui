@@ -31,13 +31,13 @@ import {
   IconArrowOpenDownLine,
   IconArrowOpenUpLine
 } from '@instructure/ui-icons'
-import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import {
   omitProps,
   pickProps,
   callRenderProp,
-  getInteraction
+  getInteraction,
+  withSSR
 } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -52,6 +52,8 @@ import type {
   NumberInputStyleProps
 } from './props'
 
+import { hashInstance } from '@instructure/ui-utils'
+
 /**
 ---
 category: components
@@ -59,6 +61,7 @@ id: NumberInput
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class NumberInput extends Component<NumberInputProps, NumberInputState> {
@@ -93,7 +96,8 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       return this.props.id
     }
     if (!this._id) {
-      this._id = uid('NumberInput')
+      //@ts-expect-error props.ssr
+      this._id = hashInstance('NumberInput', this.props.ssr)
     }
     return this._id
   }

@@ -27,11 +27,10 @@ import React, { Component } from 'react'
 import keycode from 'keycode'
 
 import { FormFieldMessages } from '@instructure/ui-form-field'
-import { createChainedFunction } from '@instructure/ui-utils'
+import { createChainedFunction, hashInstance } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
-import { uid } from '@instructure/uid'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, withSSR } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 
@@ -58,6 +57,7 @@ tags: toggle, switch
 @tsProps
 **/
 
+@withSSR()
 @withStyle(generateStyle, null)
 @testable()
 class Checkbox extends Component<CheckboxProps, CheckboxState> {
@@ -87,7 +87,13 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
           : undefined
     }
 
-    this._defaultId = uid('Checkbox')
+    if (typeof props.checked === 'undefined') {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
+      this.state.checked = !!props.defaultChecked
+    }
+
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Chec... Remove this comment to see the full error message
+    this._defaultId = hashInstance('Checkbox', this.props.ssr)
   }
   private readonly _defaultId: string
   private _input: HTMLInputElement | null = null

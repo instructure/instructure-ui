@@ -29,10 +29,10 @@ import { ApplyLocaleContext, Locale, DateTime } from '@instructure/ui-i18n'
 import {
   getInteraction,
   passthroughProps,
-  callRenderProp
+  callRenderProp,
+  withSSR
 } from '@instructure/ui-react-utils'
 
-import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
 
@@ -44,6 +44,8 @@ import type {
 } from './props'
 
 import { allowedProps, propTypes } from './props'
+
+import { hashInstance } from '@instructure/ui-utils'
 
 type GetOption = <F extends keyof TimeSelectOptions>(
   field: F,
@@ -59,6 +61,7 @@ category: components
 
 A component used to select a time value.
  **/
+@withSSR()
 @testable()
 class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   static readonly componentId = 'TimeSelect'
@@ -81,7 +84,11 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   static contextType = ApplyLocaleContext
 
   ref: Select | null = null
-  private readonly _emptyOptionId = uid('Select-EmptyOption')
+  private readonly _emptyOptionId = hashInstance(
+    'Select-EmptyOption',
+    //@ts-expect-error props.ssr
+    this.props.ssr
+  )
 
   constructor(props: TimeSelectProps) {
     super(props)

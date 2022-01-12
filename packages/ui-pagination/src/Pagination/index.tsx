@@ -26,8 +26,7 @@ import React, { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-react-utils'
-import { uid } from '@instructure/uid'
+import { omitProps, withSSR } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -43,6 +42,8 @@ import type { PaginationArrowDirections } from './PaginationArrowButton/props'
 
 import { propTypes, allowedProps } from './props'
 import type { PaginationProps, PaginationSnapshot, ChildPage } from './props'
+
+import { hashInstance } from '@instructure/ui-utils'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
 const fastFindIndex = (
@@ -79,6 +80,7 @@ category: components
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, null)
 @testable()
 class Pagination extends Component<PaginationProps> {
@@ -115,7 +117,8 @@ class Pagination extends Component<PaginationProps> {
   constructor(props: PaginationProps) {
     super(props)
 
-    this._labelId = uid('Pagination')
+    //@ts-expect-error props.ssr
+    this._labelId = hashInstance('Pagination', this.props.ssr)
   }
 
   get _root() {

@@ -27,8 +27,7 @@ import { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { uid } from '@instructure/uid'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { passthroughProps, withSSR } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx, Global } from '@instructure/emotion'
 
@@ -41,12 +40,15 @@ import { propTypes, allowedProps } from './props'
 import type { CodeEditorProps } from './props'
 import type { EditorConfiguration } from 'codemirror'
 
+import { hashInstance } from '@instructure/ui-utils'
+
 /**
 ---
 category: components
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class CodeEditor extends Component<CodeEditorProps> {
@@ -66,7 +68,8 @@ class CodeEditor extends Component<CodeEditorProps> {
 
   constructor(props: CodeEditorProps) {
     super(props)
-    this._id = uid('CodeEditor')
+    //@ts-expect-error props.ssr
+    this._id = hashInstance('CodeEditor', this.props.ssr)
   }
 
   handleRef = (el: Element | null) => {
@@ -83,7 +86,7 @@ class CodeEditor extends Component<CodeEditorProps> {
 
   focus() {
     if (this.codeMirror) {
-      ;(this.codeMirror as unknown as HTMLElement).focus()
+      ;((this.codeMirror as unknown) as HTMLElement).focus()
     }
   }
 
@@ -112,9 +115,15 @@ class CodeEditor extends Component<CodeEditorProps> {
   }
 
   render() {
-    const { value, label, attachment, readOnly, onChange, styles, ...rest } =
-      this.props
-
+    const {
+      value,
+      label,
+      attachment,
+      readOnly,
+      onChange,
+      styles,
+      ...rest
+    } = this.props
     return (
       <div css={styles?.codeEditor} ref={this.handleRef}>
         <Global styles={styles?.globalStyles} />

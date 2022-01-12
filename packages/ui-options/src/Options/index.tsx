@@ -29,10 +29,10 @@ import {
   omitProps,
   matchComponentTypes,
   callRenderProp,
-  safeCloneElement
+  safeCloneElement,
+  withSSR
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { uid } from '@instructure/uid'
 
 import { View } from '@instructure/ui-view'
 
@@ -53,6 +53,7 @@ type ItemChild = React.ComponentElement<OptionsItemProps, Item>
 type SeparatorChild = React.ComponentElement<OptionsSeparatorProps, Separator>
 type OptionsChild = React.ComponentElement<OptionsProps, Options>
 type OptionsChildren = (ItemChild | SeparatorChild | OptionsChild)[]
+import { hashInstance } from '@instructure/ui-utils'
 
 /**
 ---
@@ -60,6 +61,7 @@ category: components
 ---
 @tsProps
 **/
+@withSSR()
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class Options extends Component<OptionsProps> {
@@ -92,8 +94,8 @@ class Options extends Component<OptionsProps> {
   componentDidUpdate() {
     this.props.makeStyles?.()
   }
-
-  _labelId = uid('Options-label')
+  //@ts-expect-error props.ssr
+  _labelId = hashInstance('Options-label', this.props.ssr)
 
   get childAs() {
     const { as } = this.props

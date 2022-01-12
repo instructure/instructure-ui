@@ -27,11 +27,12 @@ import React, { Component, SyntheticEvent } from 'react'
 import keycode from 'keycode'
 
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { createChainedFunction } from '@instructure/ui-utils'
+import { createChainedFunction, hashInstance } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
-import { uid } from '@instructure/uid'
 import type { SelectableProps } from './props'
 import { allowedProps, propTypes } from './props'
+
+import { withSSR } from '@instructure/ui-react-utils'
 
 /**
 ---
@@ -40,6 +41,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search
 ---
 @tsProps
 **/
+@withSSR()
 class Selectable extends Component<SelectableProps> {
   static allowedProps = allowedProps
   static propTypes = propTypes
@@ -48,7 +50,8 @@ class Selectable extends Component<SelectableProps> {
     isShowingOptions: false
   }
 
-  _id = this.props.id || uid('Selectable')
+  //@ts-expect-error props.ssr
+  _id = this.props.id || hashInstance('Selectable', this.props.ssr)
   _listId = `${this._id}-list`
   _descriptionId = `${this._id}-description`
   private _trigger: Element | null = null

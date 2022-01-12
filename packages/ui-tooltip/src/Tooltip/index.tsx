@@ -30,9 +30,9 @@ import {
   omitProps,
   ensureSingleChild,
   passthroughProps,
-  callRenderProp
+  callRenderProp,
+  withSSR
 } from '@instructure/ui-react-utils'
-import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
 import type { PopoverProps } from '@instructure/ui-popover'
@@ -44,6 +44,8 @@ import generateComponentTheme from './theme'
 import type { TooltipProps, TooltipState } from './props'
 import { allowedProps, propTypes } from './props'
 
+import { hashInstance } from '@instructure/ui-utils'
+
 /**
 ---
 category: components
@@ -51,6 +53,7 @@ category: components
 @tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
+@withSSR()
 @testable()
 class Tooltip extends Component<TooltipProps, TooltipState> {
   static readonly componentId = 'Tooltip'
@@ -78,7 +81,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
   constructor(props: TooltipProps) {
     super(props)
 
-    this._id = uid('Tooltip')
+    //@ts-expect-error props.ssr
+    this._id = hashInstance('Tooltip', this.props.ssr)
 
     this.state = { hasFocus: false }
   }
@@ -144,6 +148,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
       onShowContent,
       onHideContent,
       styles,
+      ssr,
       ...rest
     } = this.props
 

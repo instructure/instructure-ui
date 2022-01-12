@@ -26,8 +26,8 @@
 import { Component, Children, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { safeCloneElement } from '@instructure/ui-react-utils'
-import { uid } from '@instructure/uid'
+import { safeCloneElement, withSSR } from '@instructure/ui-react-utils'
+import { hashInstance } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -44,7 +44,7 @@ category: components
 ---
 @tsProps
 **/
-
+@withSSR()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Badge extends Component<BadgeProps> {
@@ -70,7 +70,8 @@ class Badge extends Component<BadgeProps> {
 
   constructor(props: BadgeProps) {
     super(props)
-    this._defaultId = uid('Badge')
+    //@ts-expect-error ssr prop
+    this._defaultId = hashInstance('Badge', props.ssr)
   }
 
   _defaultId: string
@@ -101,13 +102,8 @@ class Badge extends Component<BadgeProps> {
   }
 
   renderOutput() {
-    const {
-      count,
-      countUntil,
-      formatOverflowText,
-      formatOutput,
-      type
-    } = this.props
+    const { count, countUntil, formatOverflowText, formatOutput, type } =
+      this.props
 
     // If the badge count is >= than the countUntil limit, format the badge text
     // via the formatOverflowText function prop

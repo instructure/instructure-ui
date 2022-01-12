@@ -64,6 +64,44 @@ function executeHash(input: string): string {
   return toBase64(String(hash))
 }
 
+function cyrb53(str: string, seed = 0) {
+  let h1 = 0xdeadbeef ^ seed,
+    h2 = 0x41c6ce57 ^ seed
+  for (let i = 0, ch; i < str.length; i++) {
+    ch = str.charCodeAt(i)
+    h1 = Math.imul(h1 ^ ch, 2654435761)
+    h2 = Math.imul(h2 ^ ch, 1597334677)
+  }
+  h1 =
+    Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^
+    Math.imul(h2 ^ (h2 >>> 13), 3266489909)
+  h2 =
+    Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^
+    Math.imul(h1 ^ (h1 >>> 13), 3266489909)
+
+  return (
+    (h2 >>> 0).toString(16).padStart(8, 0) +
+    (h1 >>> 0).toString(16).padStart(8, 0)
+  )
+}
+function hashInstance(str: string, map: Map<string, number>) {
+  if (!map.has(str)) {
+    map.set(str, 0)
+  } else {
+    map.set(str, map.get(str)! + 1)
+  }
+
+  const instanceCount = map.get(str)!
+  const valueToHash = `${str}_${instanceCount}`
+  const hashed = cyrb53(valueToHash)
+
+  if (process.env.NODE_ENV !== 'production') {
+    return `${str}__${hashed}`
+  } else {
+    return hashed
+  }
+}
+
 function hash(value: unknown, maxLength = 0) {
   if (typeof value === 'undefined') {
     throw new Error('Cannot hash a value which is undefined')
@@ -89,4 +127,4 @@ function hash(value: unknown, maxLength = 0) {
 }
 
 export default hash
-export { hash }
+export { hash, hashInstance }
