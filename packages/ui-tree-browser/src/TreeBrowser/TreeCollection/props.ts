@@ -78,7 +78,7 @@ const propTypes: PropValidators<PropKeys> = {
   onCollectionClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   numChildren: PropTypes.number,
-  level: PropTypes.number,
+  level: PropTypes.number.isRequired,
   position: PropTypes.number,
   renderBeforeItems: Children.oneOf([TreeNode]),
   renderAfterItems: Children.oneOf([TreeNode]),
