@@ -6,5 +6,6 @@
     "composite": true,
     "rootDir": "./lib"
   },
-  "include": ["lib"]
+  "include": ["lib"],
+  "references": [{ "path": "../ui-babel-preset/tsconfig.build.json" }]
 }

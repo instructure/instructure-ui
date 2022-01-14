@@ -10,16 +10,16 @@
       "path": "../command-utils/tsconfig.build.json"
     },
     {
+      "path": "../cz-lerna-changelog/tsconfig.build.json"
+    },
+    {
+      "path": "../instui-config/tsconfig.build.json"
+    },
+    {
       "path": "../pkg-utils/tsconfig.build.json"
     },
     {
       "path": "../ui-template-scripts/tsconfig.build.json"
-    },
-    {
-      "path": "../cz-lerna-changelog/tsconfig.build.json"
-    },
-    {
-      "path": "../ui-upgrade-scripts/tsconfig.build.json"
     }
   ]
 }
