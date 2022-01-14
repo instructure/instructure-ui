@@ -44,4 +44,5 @@ const generateComponentTheme = (theme: Theme): OptionsSeparatorTheme => {
   }
 }
 
+export { generateComponentTheme as optionsSeparatorThemeGenerator }
 export default generateComponentTheme

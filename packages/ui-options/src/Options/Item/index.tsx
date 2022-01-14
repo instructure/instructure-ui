@@ -108,6 +108,7 @@ class Item extends Component<OptionsItemProps> {
       descriptionRole,
       renderBeforeLabel,
       renderAfterLabel,
+      elementRef,
       children
     } = this.props
 
@@ -122,8 +123,12 @@ class Item extends Component<OptionsItemProps> {
         role="none"
         css={styles?.item}
         // @ts-expect-error TODO: fix produces an union that is too complex to represent
-        ref={(element: any) => {
+        ref={(element: Element | null) => {
           this.ref = element
+
+          if (typeof elementRef === 'function') {
+            elementRef(element)
+          }
         }}
       >
         <span {...passthroughProps} css={styles?.container} role={role}>

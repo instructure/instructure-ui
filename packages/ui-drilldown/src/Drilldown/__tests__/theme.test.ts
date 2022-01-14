@@ -34,7 +34,9 @@ describe('Drilldown.theme', () => {
 
     describe('default color', () => {
       it('should ensure background color and text color meet 3:1 contrast', () => {
-        expect(contrast(variables.background, variables.color)).to.be.above(3)
+        expect(
+          contrast(variables.background, variables.headerActionColor)
+        ).to.be.above(3)
       })
     })
   })
@@ -44,7 +46,9 @@ describe('Drilldown.theme', () => {
 
     describe('default color', () => {
       it('should ensure background color and text color meet 4.5:1 contrast', () => {
-        expect(contrast(variables.background, variables.color)).to.be.above(4.5)
+        expect(
+          contrast(variables.background, variables.headerActionColor)
+        ).to.be.above(4.5)
       })
     })
   })

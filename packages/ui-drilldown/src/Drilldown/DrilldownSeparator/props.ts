@@ -22,30 +22,44 @@
  * SOFTWARE.
  */
 
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type {
-  DrilldownSeparatorTheme,
-  OtherHTMLAttributes,
-  PropValidators
-} from '@instructure/shared-types'
+import PropTypes from 'prop-types'
 
-// keeping here to keep the structure of props.ts
-// eslint-disable-next-line
-type DrilldownSeparatorOwnProps = {}
+import type {
+  OtherHTMLAttributes,
+  PickPropsWithExceptions,
+  PropValidators,
+  AsElementType,
+  OptionsSeparatorTheme
+} from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+import type { OptionsSeparatorProps } from '@instructure/ui-options'
+
+type DrilldownSeparatorOwnProps = {
+  id?: string
+
+  /**
+   * Element type to render as
+   */
+  as?: AsElementType
+}
 
 type PropKeys = keyof DrilldownSeparatorOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type DrilldownSeparatorProps = DrilldownSeparatorOwnProps &
-  WithStyleProps<DrilldownSeparatorTheme, DrilldownSeparatorStyle> &
-  OtherHTMLAttributes<DrilldownSeparatorOwnProps>
+type DrilldownSeparatorProps =
+  // we are passing all props to Options.Separator
+  PickPropsWithExceptions<OptionsSeparatorProps, 'as'> &
+    DrilldownSeparatorOwnProps &
+    WithStyleProps<OptionsSeparatorTheme, null> &
+    OtherHTMLAttributes<DrilldownSeparatorOwnProps>
 
-type DrilldownSeparatorStyle = ComponentStyle<'drilldownSeparator'>
+const propTypes: PropValidators<PropKeys> = {
+  id: PropTypes.string,
+  as: PropTypes.elementType
+}
 
-const propTypes: PropValidators<PropKeys> = {}
+const allowedProps: AllowedPropKeys = ['id', 'as']
 
-const allowedProps: AllowedPropKeys = []
-
-export type { DrilldownSeparatorProps, DrilldownSeparatorStyle }
+export type { DrilldownSeparatorProps }
 export { propTypes, allowedProps }
