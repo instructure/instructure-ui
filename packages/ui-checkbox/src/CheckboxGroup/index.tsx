@@ -35,9 +35,10 @@ import {
 import { testable } from '@instructure/ui-testable'
 
 import { Checkbox } from '../Checkbox'
+import type { CheckboxProps } from '../Checkbox/props'
 
 import { propTypes, allowedProps } from './props'
-import type { CheckboxGroupProps } from './props'
+import type { CheckboxGroupProps, CheckboxGroupState } from './props'
 
 /**
 ---
@@ -46,7 +47,7 @@ category: components
 **/
 
 @testable()
-class CheckboxGroup extends Component<CheckboxGroupProps> {
+class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
   static readonly componentId = 'CheckboxGroup'
 
   static propTypes = propTypes
@@ -59,21 +60,18 @@ class CheckboxGroup extends Component<CheckboxGroupProps> {
     children: null
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
-    super()
+  constructor(props: CheckboxGroupProps) {
+    super(props)
 
     if (typeof props.value === 'undefined') {
       this.state = {
-        value: props.defaultValue
+        value: props.defaultValue || []
       }
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
     this._messagesId = uid('CheckboxGroup-messages')
   }
-
+  private _messagesId: string
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
@@ -84,8 +82,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps> {
     return this.props.messages && this.props.messages.length > 0
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleChange = (e) => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = this.value || []
 
     if (this.props.disabled || this.props.readOnly) {
@@ -111,14 +108,12 @@ class CheckboxGroup extends Component<CheckboxGroupProps> {
   get value() {
     if (
       typeof this.props.value === 'undefined' &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'value' does not exist on type 'Readonly<... Remove this comment to see the full error message
       typeof this.state.value === 'undefined'
     ) {
       return []
     } else {
       return typeof this.props.value === 'undefined'
-        ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'value' does not exist on type 'Readonly<... Remove this comment to see the full error message
-          [...this.state.value]
+        ? [...this.state.value]
         : [...this.props.value]
     }
   }
@@ -126,24 +121,32 @@ class CheckboxGroup extends Component<CheckboxGroupProps> {
   renderChildren() {
     const { children, name, size, disabled, readOnly } = this.props
 
-    // @ts-expect-error ts-migrate(6133) FIXME: 'index' is declared but its value is never read.
-    return Children.map(children, (child, index) => {
+    return Children.map(children, (child) => {
       if (matchComponentTypes(child, [Checkbox])) {
         return safeCloneElement(child as ReactElement, {
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          key: `${child.props.name}`,
+          key: `${
+            (child as React.ComponentElement<CheckboxProps, Checkbox>).props
+              .name
+          }`,
           name,
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          disabled: disabled || child.props.disabled,
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          readOnly: readOnly || child.props.readOnly,
+          disabled:
+            disabled ||
+            (child as React.ComponentElement<CheckboxProps, Checkbox>).props
+              .disabled,
+          readOnly:
+            readOnly ||
+            (child as React.ComponentElement<CheckboxProps, Checkbox>).props
+              .readOnly,
           size,
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          checked: this.value.indexOf(child.props.value) > -1,
+          checked:
+            this.value.indexOf(
+              (child as React.ComponentElement<CheckboxProps, Checkbox>).props
+                .value
+            ) > -1,
           onChange: this.handleChange,
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          width: child.props.width || 'auto',
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
+          width:
+            (child as React.ComponentElement<CheckboxProps, Checkbox>).props
+              .width || 'auto',
           'aria-describedby': this.hasMessages && this._messagesId
         })
       } else {
@@ -154,13 +157,12 @@ class CheckboxGroup extends Component<CheckboxGroupProps> {
 
   render() {
     return (
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormFieldGroup
         {...omitProps(this.props, CheckboxGroup.allowedProps)}
         {...pickProps(this.props, FormFieldGroup.allowedProps)}
+        description={this.props.description}
         rowSpacing="small"
         vAlign="top"
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
         messagesId={this._messagesId}
         elementRef={this.handleRef}
       >

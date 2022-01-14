@@ -228,7 +228,7 @@ describe('<Checkbox />', async () => {
     })
 
     it('focuses with the focus helper', async () => {
-      let checkboxRef = null
+      let checkboxRef: Checkbox | undefined
 
       await mount(
         <Checkbox
@@ -236,21 +236,18 @@ describe('<Checkbox />', async () => {
           defaultChecked
           value="someValue"
           name="someName"
-          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-          componentRef={(el) => {
+          //@ts-expect-error TODO this is coming from ReactComponentWrapper
+          componentRef={(el: Checkbox) => {
             checkboxRef = el
           }}
         />
       )
 
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      expect(checkboxRef.focused).to.be.false()
+      expect(checkboxRef?.focused).to.be.false()
 
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      checkboxRef.focus()
+      checkboxRef?.focus()
 
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      expect(checkboxRef.focused).to.be.true()
+      expect(checkboxRef?.focused).to.be.true()
 
       const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
@@ -347,8 +344,14 @@ describe('<Checkbox />', async () => {
     it('should require a label', async () => {
       const consoleError = stub(console, 'error')
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-      await mount(<Checkbox defaultChecked value="someValue" name="someName" />)
+      await mount(
+        <Checkbox
+          label={undefined}
+          defaultChecked
+          value="someValue"
+          name="someName"
+        />
+      )
 
       expect(consoleError).to.have.been.calledWithMatch(
         match.string,

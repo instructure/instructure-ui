@@ -23,6 +23,7 @@
  */
 
 import type { CheckboxProps, CheckboxStyle } from './props'
+import type { ComponentTheme } from '@instructure/shared-types'
 
 /**
  * ---
@@ -35,8 +36,7 @@ import type { CheckboxProps, CheckboxStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  // @ts-expect-error no theme variables used here
-  componentTheme: any,
+  _componentTheme: ComponentTheme,
   props: CheckboxProps
 ): CheckboxStyle => {
   const { inline, disabled } = props

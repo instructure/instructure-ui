@@ -40,17 +40,39 @@ type CheckboxOwnProps = {
   label: React.ReactNode
   id?: string
   value?: string | number
+  /**
+   * object with shape: `{
+   * text: PropTypes.node,
+   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *   }`
+   */
   messages?: FormMessage[]
+  /* whether to set the input to checked or not on initial render */
   defaultChecked?: boolean
+  /**
+   * whether the input is checked or not (must be accompanied by an `onChange` prop)
+   */
   checked?: any // TODO: controllable(PropTypes.bool, 'onChange', 'defaultChecked')
-  onChange?: (...args: any[]) => any
-  onKeyDown?: (...args: any[]) => any
-  onFocus?: (...args: any[]) => any
-  onBlur?: (...args: any[]) => any
-  onMouseOver?: (...args: any[]) => any
-  onMouseOut?: (...args: any[]) => any
+  /**
+   * when used with the `checked` prop, the component will not control its own state
+   */
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
+  onMouseOver?: (e: React.MouseEvent<HTMLInputElement>) => void
+  onMouseOut?: (e: React.MouseEvent<HTMLInputElement>) => void
+  /**
+   * Whether or not to disable the checkbox
+   */
   disabled?: boolean
+  /**
+   * Works just like disabled but keeps the same styles as if it were active
+   */
   readOnly?: boolean
+  /**
+   * Visual state showing that child checkboxes are a combination of checked and unchecked
+   */
   indeterminate?: boolean
   size?: 'small' | 'medium' | 'large'
   variant?: 'simple' | 'toggle'
@@ -72,39 +94,17 @@ const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.node.isRequired,
   id: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * object with shape: `{
-   * text: PropTypes.node,
-   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   *   }`
-   */
   messages: PropTypes.arrayOf(FormPropTypes.message),
-  /* whether to set the input to checked or not on initial render */
   defaultChecked: PropTypes.bool,
-  /**
-   * whether the input is checked or not (must be accompanied by an `onChange` prop)
-   */
   checked: controllable(PropTypes.bool, 'onChange', 'defaultChecked'),
-  /**
-   * when used with the `checked` prop, the component will not control its own state
-   */
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func,
-  /**
-   * Whether or not to disable the checkbox
-   */
   disabled: PropTypes.bool,
-  /**
-   * Works just like disabled but keeps the same styles as if it were active
-   */
   readOnly: PropTypes.bool,
-  /**
-   * Visual state showing that child checkboxes are a combination of checked and unchecked
-   */
   indeterminate: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   variant: PropTypes.oneOf(['simple', 'toggle']),
@@ -134,5 +134,11 @@ const allowedProps: AllowedPropKeys = [
   'labelPlacement'
 ]
 
-export type { CheckboxProps, CheckboxStyle }
+type CheckboxState = {
+  focused: boolean
+  hovered: boolean
+  checked?: boolean
+}
+
+export type { CheckboxProps, CheckboxStyle, CheckboxState }
 export { propTypes, allowedProps }
