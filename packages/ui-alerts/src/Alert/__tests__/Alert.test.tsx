@@ -144,30 +144,30 @@ describe('<Alert />', async () => {
   })
 
   it('should add alert text to aria live region, when present', async () => {
-    const liver = document.getElementById('_alertLiveRegion')
+    const liver = document.getElementById('_alertLiveRegion')!
     await mount(
       <Alert
         variant="success"
         transition="none"
-        liveRegion={() => liver!}
+        liveRegion={() => liver}
         liveRegionPoliteness="polite"
       >
         Success: Sample alert text.
       </Alert>
     )
 
-    expect(liver!.innerText).to.include('Success: Sample alert text.')
+    expect(liver.innerText).to.include('Success: Sample alert text.')
 
-    expect(liver!.getAttribute('aria-live')).to.equal('polite')
+    expect(liver.getAttribute('aria-live')).to.equal('polite')
   })
 
   describe('with `screenReaderOnly', async () => {
     it('should not render anything when using `liveRegion`', async () => {
-      const liver = document.getElementById('_alertLiveRegion')
+      const liver = document.getElementById('_alertLiveRegion')!
       const subject = await mount(
         <Alert
           variant="success"
-          liveRegion={() => liver!}
+          liveRegion={() => liver}
           screenReaderOnly={true}
         >
           Success: Sample alert text.
@@ -191,12 +191,12 @@ describe('<Alert />', async () => {
   })
 
   it('should set aria-atomic to the aria live region when isLiveRegionAtomic is present', async () => {
-    const liver = document.getElementById('_alertLiveRegion')
+    const liver = document.getElementById('_alertLiveRegion')!
     await mount(
       <Alert
         variant="success"
         transition="none"
-        liveRegion={() => liver!}
+        liveRegion={() => liver}
         liveRegionPoliteness="polite"
         isLiveRegionAtomic
       >
@@ -204,45 +204,45 @@ describe('<Alert />', async () => {
       </Alert>
     )
 
-    expect(liver!.innerText).to.include('Success: Sample alert text.')
-    expect(liver!.getAttribute('aria-atomic')).to.equal('true')
+    expect(liver.innerText).to.include('Success: Sample alert text.')
+    expect(liver.getAttribute('aria-atomic')).to.equal('true')
   })
 
   it('should close when told to, with transition', async () => {
-    const liver = document.getElementById('_alertLiveRegion')
+    const liver = document.getElementById('_alertLiveRegion')!
     const subject = await mount(
-      <Alert variant="success" liveRegion={() => liver!}>
+      <Alert variant="success" liveRegion={() => liver}>
         Success: Sample alert text.
       </Alert>
     )
 
-    expect(liver!.children.length).to.equal(1)
+    expect(liver.children.length).to.equal(1)
 
     await subject.setProps({
       open: false
     })
 
     await wait(() => {
-      expect(liver!.children.length).to.equal(0)
+      expect(liver.children.length).to.equal(0)
     })
   })
 
   it('should close when told to, without transition', async () => {
-    const liver = document.getElementById('_alertLiveRegion')
+    const liver = document.getElementById('_alertLiveRegion')!
     const subject = await mount(
-      <Alert variant="success" transition="none" liveRegion={() => liver!}>
+      <Alert variant="success" transition="none" liveRegion={() => liver}>
         Success: Sample alert text.
       </Alert>
     )
 
-    expect(liver!.children.length).to.equal(1)
+    expect(liver.children.length).to.equal(1)
 
     await subject.setProps({
       open: false
     })
 
     expect(subject.getDOMNode()).to.not.exist()
-    expect(liver!.children.length).to.equal(0)
+    expect(liver.children.length).to.equal(0)
   })
 
   it('should have shadow by default', async () => {

@@ -72,7 +72,7 @@ type AlertOwnProps = {
   /**
    * Close button label. Can be a React component
    */
-  renderCloseButtonLabel?: () => ReactNode | ReactNode
+  renderCloseButtonLabel?: (() => ReactNode) | ReactNode
   /**
    * Callback after the alert is closed
    */
