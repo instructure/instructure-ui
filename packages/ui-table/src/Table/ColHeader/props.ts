@@ -32,14 +32,41 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableColHeaderOwnProps = {
+  /**
+   * A unique id for this column. The `id` is also used as option in combobox,
+   * when sortable table is in stacked layout,
+   * and no `stackedSortByLabel` is provided.
+   */
   id: string
+  /**
+   * A custom string to display as option text in the combobox (instead of
+   * using the `id` prop), when sortable table is in stacked layout.
+   */
   stackedSortByLabel?: string
+  /**
+   * Control the width of column.
+   */
   width?: string | number
+  /**
+   * Control the text alignment in column header
+   */
   textAlign?: 'start' | 'center' | 'end'
+  /**
+   * The string of sorting direction
+   */
   sortDirection?: 'none' | 'ascending' | 'descending'
-  onRequestSort?: (...args: any[]) => any
+  /**
+   * Callback fired when column header is clicked. Parameters: `(event, { id })`
+   */
+  onRequestSort?: (
+    event: React.SyntheticEvent,
+    param: { id: TableColHeaderOwnProps['id'] }
+  ) => void
+  /**
+   * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
+   */
   scope?: 'row' | 'col' | 'rowgroup' | 'colgroup' | 'auto'
-  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  children?: React.ReactNode | (() => React.ReactNode)
 }
 
 type PropKeys = keyof TableColHeaderOwnProps
@@ -56,37 +83,13 @@ type TableColHeaderProps = TableColHeaderOwnProps &
 type TableColHeaderStyle = ComponentStyle<'colHeader' | 'button'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * A unique id for this column. The `id` is also used as option in combobox,
-   * when sortable table is in stacked layout,
-   * and no `stackedSortByLabel` is provided.
-   */
   id: PropTypes.string.isRequired,
-  /**
-   * A custom string to display as option text in the combobox (instead of
-   * using the `id` prop), when sortable table is in stacked layout.
-   */
   stackedSortByLabel: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Control the width of column.
-   */
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Control the text alignment in column header
-   */
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  /**
-   * The string of sorting direction
-   */
   sortDirection: PropTypes.oneOf(['none', 'ascending', 'descending']),
-  /**
-   * Callback fired when column header is clicked. Parameters: `(event, { id })`
-   */
   onRequestSort: PropTypes.func,
-  /**
-   * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
-   */
   scope: PropTypes.oneOf(['row', 'col', 'rowgroup', 'colgroup', 'auto'])
 }
 

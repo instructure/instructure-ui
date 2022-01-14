@@ -48,6 +48,7 @@ import { allowedProps, propTypes } from './props'
 parent: Table
 id: Table.Row
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Row extends Component<TableRowProps> {
@@ -86,15 +87,13 @@ class Row extends Component<TableRowProps> {
             }
             if (matchComponentTypes(child, [RowHeader])) {
               return safeCloneElement(child as ReactElement, {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-                key: child.props.name,
+                key: (child as RowHeader).props.name,
                 isStacked
               })
             }
             if (matchComponentTypes(child, [Cell])) {
               return safeCloneElement(child as ReactElement, {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-                key: child.props.name,
+                key: (child as Cell).props.name,
                 isStacked,
                 header: headers && headers[index]
               })

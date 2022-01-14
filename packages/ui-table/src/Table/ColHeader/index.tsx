@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import {
@@ -43,6 +43,7 @@ import { allowedProps, propTypes } from './props'
 parent: Table
 id: Table.ColHeader
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColHeader extends Component<TableColHeaderProps> {
@@ -66,14 +67,10 @@ class ColHeader extends Component<TableColHeaderProps> {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleClick = (event) => {
+  handleClick = (event: React.SyntheticEvent) => {
     const { id, onRequestSort } = this.props
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onRequestSort(event, {
-      id
-    })
+    onRequestSort && onRequestSort(event, { id })
   }
 
   renderSortArrow() {
@@ -93,14 +90,8 @@ class ColHeader extends Component<TableColHeaderProps> {
   }
 
   render() {
-    const {
-      onRequestSort,
-      width,
-      children,
-      sortDirection,
-      scope,
-      styles
-    } = this.props
+    const { onRequestSort, width, children, sortDirection, scope, styles } =
+      this.props
 
     return (
       <th

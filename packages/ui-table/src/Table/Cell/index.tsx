@@ -40,6 +40,7 @@ import { allowedProps, propTypes } from './props'
 parent: Table
 id: Table.Cell
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Cell extends Component<TableCellProps> {

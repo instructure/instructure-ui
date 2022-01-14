@@ -34,8 +34,11 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableRowHeaderOwnProps = {
   isStacked?: boolean
+  /**
+   * Control the text alignment in row header
+   */
   textAlign?: 'start' | 'center' | 'end'
-  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  children?: React.ReactNode | (() => React.ReactNode)
 }
 
 type PropKeys = keyof TableRowHeaderOwnProps
@@ -51,9 +54,6 @@ type TableRowHeaderStyle = ComponentStyle<'rowHeader'>
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   isStacked: PropTypes.bool,
-  /**
-   * Control the text alignment in row header
-   */
   textAlign: PropTypes.oneOf(['start', 'center', 'end'])
 }
 

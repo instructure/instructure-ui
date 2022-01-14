@@ -37,6 +37,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { Row } from '../Row'
 import type { TableBodyProps } from './props'
+import type { TableRowProps } from '../Row/props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -44,6 +45,7 @@ import { allowedProps, propTypes } from './props'
 parent: Table
 id: Table.Body
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Body extends Component<TableBodyProps> {
@@ -60,8 +62,7 @@ class Body extends Component<TableBodyProps> {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
     this.props.makeStyles?.()
   }
 
@@ -75,16 +76,17 @@ class Body extends Component<TableBodyProps> {
         css={styles?.body}
         role={isStacked ? 'rowgroup' : undefined}
       >
-        {Children.map(children, (child) =>
-          matchComponentTypes(child, [Row])
-            ? safeCloneElement(child as ReactElement, {
-                // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-                key: child.props.name,
-                hover,
-                isStacked,
-                headers
-              })
-            : null
+        {Children.map(
+          children as React.ComponentElement<TableRowProps, Row>[],
+          (child) =>
+            matchComponentTypes(child, [Row])
+              ? safeCloneElement(child as ReactElement, {
+                  key: child.props.name,
+                  hover,
+                  isStacked,
+                  headers
+                })
+              : null
         )}
       </View>
     )

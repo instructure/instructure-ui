@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { Row } from '../Row'
+import type { TableRowProps } from '../Row/props'
 
 import type {
   OtherHTMLAttributes,
@@ -38,7 +39,10 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 type TableBodyOwnProps = {
   hover?: boolean
   isStacked?: boolean
-  headers?: (React.ReactNode | ((...args: any[]) => any))[]
+  headers?: TableRowProps['headers']
+  /**
+   * `Table.Row`
+   */
   children?: React.ReactNode
 }
 
@@ -53,9 +57,6 @@ type TableBodyProps = TableBodyOwnProps &
 type TableBodyStyle = ComponentStyle<'body'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * `Table.Row`
-   */
   children: ChildrenPropTypes.oneOf([Row]),
   hover: PropTypes.bool,
   isStacked: PropTypes.bool,

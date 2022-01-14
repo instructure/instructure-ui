@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children, ReactElement } from 'react'
+import React, { Component, Children, ReactElement } from 'react'
 
 import {
   matchComponentTypes,
@@ -45,12 +45,15 @@ import { ColHeader } from './ColHeader'
 import { RowHeader } from './RowHeader'
 import { Cell } from './Cell'
 import type { TableProps } from './props'
+import type { TableHeadProps } from './Head/props'
+import type { TableRowProps } from './Row/props'
 import { allowedProps, propTypes } from './props'
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Table extends Component<TableProps> {
@@ -94,17 +97,20 @@ class Table extends Component<TableProps> {
 
   getHeaders() {
     const { children } = this.props
-    const [head] = Children.toArray(children)
+    const [head] = Children.toArray(children) as React.ComponentElement<
+      TableHeadProps,
+      Head
+    >[]
 
     if (matchComponentTypes(head, [Head])) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-      const [row] = Children.toArray(head.props.children)
+      const [row] = Children.toArray(
+        head.props.children
+      ) as React.ComponentElement<TableRowProps, Row>[]
 
       if (matchComponentTypes(row, [Row])) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
         return Children.map(row.props.children, (colHeader) => {
           return matchComponentTypes(colHeader, [ColHeader])
-            ? colHeader.props.children
+            ? (colHeader as ColHeader).props.children
             : null
         })
       }
@@ -138,15 +144,13 @@ class Table extends Component<TableProps> {
         {Children.map(children, (child) => {
           if (matchComponentTypes(child, [Head])) {
             return safeCloneElement(child as ReactElement, {
-              // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-              key: child.props.name,
+              key: (child as Head).props.name,
               isStacked
             })
           }
           if (matchComponentTypes(child, [Body])) {
             return safeCloneElement(child as ReactElement, {
-              // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-              key: child.props.name,
+              key: (child as Body).props.name,
               isStacked,
               hover,
               headers
