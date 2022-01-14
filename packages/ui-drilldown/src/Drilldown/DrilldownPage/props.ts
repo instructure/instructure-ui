@@ -66,8 +66,8 @@ type DrilldownPageOwnProps = {
    * is the title of the previous page.
    */
   renderBackButtonLabel?:
-    | React.ReactNode
-    | ((prevPageTitle?: React.ReactNode) => React.ReactNode)
+  | React.ReactNode
+  | ((prevPageTitle?: React.ReactNode) => React.ReactNode)
 
   /**
    * Callback fired when the "action" option is clicked in the header
