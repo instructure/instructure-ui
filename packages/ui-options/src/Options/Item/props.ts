@@ -76,6 +76,10 @@ type OptionsItemOwnProps = ItemProps & {
    * The ARIA role of the description element
    */
   descriptionRole?: string
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef?: (element: Element | null) => void
 }
 
 type PropKeys = keyof OptionsItemOwnProps
@@ -105,6 +109,7 @@ const propTypes: PropValidators<PropKeys> = {
   afterLabelContentVAlign: PropTypes.oneOf(['start', 'center', 'end']),
   description: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   descriptionRole: PropTypes.string,
+  elementRef: PropTypes.func,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
@@ -118,6 +123,7 @@ const allowedProps: AllowedPropKeys = [
   'afterLabelContentVAlign',
   'description',
   'descriptionRole',
+  'elementRef',
   'children'
 ]
 

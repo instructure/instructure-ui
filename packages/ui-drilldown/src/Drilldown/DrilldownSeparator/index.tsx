@@ -25,13 +25,8 @@
 /** @jsx jsx */
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-react-utils'
-
-import { withStyle, jsx } from '@instructure/emotion'
-
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import { withStyle } from '@instructure/emotion'
+import { optionsSeparatorThemeGenerator } from '@instructure/ui-options'
 
 import { propTypes, allowedProps } from './props'
 import type { DrilldownSeparatorProps } from './props'
@@ -44,8 +39,9 @@ id: Drilldown.Separator
 @module DrilldownSeparator
 @tsProps
 **/
-@withStyle(generateStyle, generateComponentTheme)
-@testable()
+// needed for listing the available theme variables on docs page,
+// we pass the themeOverrides to Options.Separator
+@withStyle(null, optionsSeparatorThemeGenerator)
 class DrilldownSeparator extends Component<DrilldownSeparatorProps> {
   static readonly componentId = 'Drilldown.Separator'
 
@@ -53,33 +49,10 @@ class DrilldownSeparator extends Component<DrilldownSeparatorProps> {
   static allowedProps = allowedProps
   static defaultProps = {}
 
-  ref: Element | null = null
-
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
-  }
-
   render() {
-    const { styles } = this.props
-
-    const props = omitProps(this.props, DrilldownSeparator.allowedProps)
-
-    return (
-      <div
-        {...props}
-        role="presentation"
-        ref={this.handleRef}
-        css={styles?.drilldownSeparator}
-      />
-    )
+    // this component is only used for prop validation. Drilldown.Separator children
+    // are parsed in Drilldown and rendered as Options.Separator components
+    return null
   }
 }
 
