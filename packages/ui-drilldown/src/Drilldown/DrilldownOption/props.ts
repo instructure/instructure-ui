@@ -55,12 +55,12 @@ type DrilldownOptionOwnProps = {
    * Label of the Drilldown option.
    */
   children?:
-    | React.ReactNode
-    | ((props: {
-        id: string
-        variant: DrilldownOptionVariant
-        isSelected: boolean
-      }) => React.ReactNode)
+  | React.ReactNode
+  | ((props: {
+    id: string
+    variant: DrilldownOptionVariant
+    isSelected: boolean
+  }) => React.ReactNode)
 
   /**
    * The id of the sub-page the option navigates to.
@@ -98,8 +98,8 @@ type DrilldownOptionOwnProps = {
    * If a function is provided, it has a `props` parameter.
    */
   renderLabelInfo?:
-    | React.ReactNode
-    | ((props: RenderContentProps) => React.ReactNode)
+  | React.ReactNode
+  | ((props: RenderContentProps) => React.ReactNode)
 
   /**
    * Content to render before the label.
@@ -107,8 +107,8 @@ type DrilldownOptionOwnProps = {
    * If a function is provided, it has a `props` parameter.
    */
   renderBeforeLabel?:
-    | React.ReactNode
-    | ((props: RenderContentProps) => React.ReactNode)
+  | React.ReactNode
+  | ((props: RenderContentProps) => React.ReactNode)
 
   /**
    * Content to render after the label.
@@ -116,8 +116,8 @@ type DrilldownOptionOwnProps = {
    * If a function is provided, it has a `props` parameter.
    */
   renderAfterLabel?:
-    | React.ReactNode
-    | ((props: RenderContentProps) => React.ReactNode)
+  | React.ReactNode
+  | ((props: RenderContentProps) => React.ReactNode)
 
   /**
    * Sets the vAlign of renderBeforeLabel content
