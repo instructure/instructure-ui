@@ -60,9 +60,15 @@ type ViewOwnProps = {
    * By default the display prop is 'auto', meaning it takes on the
    * display rules of the html element it's rendered as (see `as` prop).
    */
-  display: 'auto' | 'inline' | 'block' | 'inline-block' | 'flex' | 'inline-flex'
-  overflowX: 'auto' | 'hidden' | 'visible'
-  overflowY: 'auto' | 'hidden' | 'visible'
+  display?:
+    | 'auto'
+    | 'inline'
+    | 'block'
+    | 'inline-block'
+    | 'flex'
+    | 'inline-flex'
+  overflowX?: 'auto' | 'hidden' | 'visible'
+  overflowY?: 'auto' | 'hidden' | 'visible'
   height?: string | number
   width?: string | number
   maxHeight?: string | number
@@ -80,7 +86,7 @@ type ViewOwnProps = {
   /**
    * Sets the color of the View border
    */
-  borderColor:
+  borderColor?:
     | 'transparent'
     | 'primary'
     | 'secondary'
@@ -107,7 +113,7 @@ type ViewOwnProps = {
   /**
    * Specify a value for the CSS position property. Use `relative` if `focusable` will be true.
    */
-  position: 'static' | 'absolute' | 'relative' | 'sticky' | 'fixed'
+  position?: 'static' | 'absolute' | 'relative' | 'sticky' | 'fixed'
   /**
    * The `left` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`.
    */
@@ -133,15 +139,15 @@ type ViewOwnProps = {
   /**
    * Determines whether the focus outline displays offset or inset from the focused View
    */
-  focusPosition: 'offset' | 'inset'
+  focusPosition?: 'offset' | 'inset'
   /**
    * Determines the color of the focus outline
    */
-  focusColor: 'info' | 'inverse' | 'success' | 'danger'
+  focusColor?: 'info' | 'inverse' | 'success' | 'danger'
   /**
    * Determines if the focus ring should animate when it appears
    */
-  shouldAnimateFocus: boolean
+  shouldAnimateFocus?: boolean
   /**
    * Activate a dotted outline around the component to make building your
    * layout easier

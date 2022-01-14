@@ -22,8 +22,11 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+
 import type { StoryConfig } from '@instructure/ui-test-utils'
 
+import { Drilldown } from '../index'
 import type { DrilldownProps } from '../props'
 
 export default {
@@ -33,6 +36,27 @@ export default {
     return false
   },
   getComponentProps: () => {
-    return {}
+    // TODO: write examples, these defaults are just for the build to run
+    return {
+      rootPageId: 'page0',
+      children: [
+        <Drilldown.Page id="page0" key="0">
+          <Drilldown.Option id="option1">Option 0</Drilldown.Option>
+        </Drilldown.Page>
+      ],
+      isDisabled: false,
+      rotateFocus: true,
+      overflowX: 'auto',
+      overflowY: 'auto',
+      placement: 'bottom center',
+      defaultShow: false,
+      shouldHideOnSelect: true,
+      shouldFocusTriggerOnClose: true,
+      shouldContainFocus: true,
+      shouldReturnFocus: true,
+      withArrow: true,
+      offsetX: 0,
+      offsetY: 0
+    }
   }
 } as StoryConfig<DrilldownProps>

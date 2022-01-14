@@ -25,12 +25,8 @@
 /** @jsx jsx */
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
-
-import { withStyle, jsx } from '@instructure/emotion'
-
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import { withStyle } from '@instructure/emotion'
+import { optionsThemeGenerator } from '@instructure/ui-options'
 
 import { propTypes, allowedProps } from './props'
 import type { DrilldownGroupProps } from './props'
@@ -43,43 +39,23 @@ id: Drilldown.Group
 @module DrilldownGroup
 @tsProps
 **/
-@withStyle(generateStyle, generateComponentTheme)
-@testable()
+// needed for listing the available theme variables on docs page,
+// we pass the themeOverrides to Options
+@withStyle(null, optionsThemeGenerator)
 class DrilldownGroup extends Component<DrilldownGroupProps> {
   static readonly componentId = 'Drilldown.Group'
 
   static propTypes = propTypes
   static allowedProps = allowedProps
-  static defaultProps = {}
-
-  ref: Element | null = null
-
-  handleRef = (el: Element | null) => {
-    const { elementRef } = this.props
-
-    this.ref = el
-
-    if (typeof elementRef === 'function') {
-      elementRef(el)
-    }
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
+  static defaultProps = {
+    isDisabled: false,
+    withoutSeparators: false
   }
 
   render() {
-    const { styles } = this.props
-
-    return (
-      <div ref={this.handleRef} css={styles?.drilldownGroup}>
-        Group
-      </div>
-    )
+    // this component is only used for prop validation.
+    // Drilldown.Group is parsed in Drilldown as an Options component.
+    return null
   }
 }
 

@@ -128,6 +128,7 @@ const generateStyle = (
     container: {
       label: 'optionItem__container',
       display: 'block',
+      outline: 'none',
       padding: componentTheme.padding,
       ...(containsList && { padding: '0' }),
       ...(hasContentBeforeLabel && {

@@ -22,30 +22,37 @@
  * SOFTWARE.
  */
 
-import type { DrilldownGroupTheme } from '@instructure/shared-types'
-import type { DrilldownGroupProps, DrilldownGroupStyle } from './props'
+/** @jsx jsx */
+import { Component } from 'react'
+
+import { propTypes, allowedProps } from './props'
+import type { DrilldownPageProps } from './props'
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (
-  componentTheme: DrilldownGroupTheme,
-  _props: DrilldownGroupProps
-): DrilldownGroupStyle => {
-  return {
-    drilldownGroup: {
-      label: 'drilldownGroup',
-      backgroundColor: componentTheme.background,
-      color: componentTheme.color
-    }
+---
+parent: Drilldown
+id: Drilldown.Page
+---
+@module DrilldownPage
+@tsProps
+**/
+class DrilldownPage extends Component<DrilldownPageProps> {
+  static readonly componentId = 'Drilldown.Page'
+
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static defaultProps = {
+    renderBackButtonLabel: 'Back',
+    isDisabled: false,
+    withoutHeaderSeparator: false
+  }
+
+  render() {
+    // this component is only used for prop validation.
+    // Drilldown.Page children are parsed in Drilldown.
+    return null
   }
 }
 
-export default generateStyle
+export default DrilldownPage
+export { DrilldownPage }

@@ -23,7 +23,11 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import { DrilldownTheme } from '@instructure/shared-types'
+import type {
+  DrilldownTheme,
+  DrilldownOwnTheme
+} from '@instructure/shared-types'
+import { optionsThemeGenerator } from '@instructure/ui-options'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
@@ -31,14 +35,18 @@ import { DrilldownTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): DrilldownTheme => {
-  const { colors } = theme
+  const { colors, typography, spacing } = theme
 
-  const componentVariables: DrilldownTheme = {
-    background: colors?.backgroundLightest,
-    color: colors?.textDarkest
+  const componentVariables: DrilldownOwnTheme = {
+    headerTitleFontWeight: typography.fontWeightBold,
+    headerActionColor: colors.textLink,
+    labelInfoPadding: spacing?.small
   }
 
   return {
+    // we pass the Options theme to the underlying Options component
+    ...optionsThemeGenerator(theme),
+
     ...componentVariables
   }
 }

@@ -412,31 +412,13 @@ export type DrawerLayoutTrayTheme = {
   boxShadow: Shadows['depth3']
 }
 
-export type DrilldownTheme = {
-  background: Colors['backgroundLightest']
-  color: Colors['textDarkest']
+export type DrilldownOwnTheme = {
+  headerTitleFontWeight: Typography['fontWeightBold']
+  headerActionColor: Colors['textLink']
+  labelInfoPadding: Spacing['small']
 }
 
-export type DrilldownGroupTheme = {
-  background: Colors['backgroundLightest']
-  color: Colors['textDarkest']
-}
-
-export type DrilldownHeaderTheme = {
-  background: Colors['backgroundLightest']
-  color: Colors['textDarkest']
-}
-
-export type DrilldownItemTheme = {
-  background: Colors['backgroundLightest']
-  color: Colors['textDarkest']
-}
-
-export type DrilldownSeparatorTheme = {
-  background: Colors['backgroundMedium']
-  height: Border['widthSmall']
-  margin: string | 0
-}
+export type DrilldownTheme = OptionsTheme & DrilldownOwnTheme
 
 export type FileDropTheme = {
   backgroundColor: Colors['backgroundLightest']
@@ -1461,14 +1443,6 @@ export interface ThemeVariables {
   DrawerLayoutTray: DrawerLayoutTrayTheme
   'DrawerLayout.Tray': DrawerLayoutTrayTheme
   Drilldown: DrilldownTheme
-  DrilldownGroup: DrilldownGroupTheme
-  'Drilldown.Group': DrilldownGroupTheme
-  DrilldownHeader: DrilldownHeaderTheme
-  'Drilldown.Header': DrilldownHeaderTheme
-  DrilldownItem: DrilldownItemTheme
-  'Drilldown.Item': DrilldownItemTheme
-  DrilldownSeparator: DrilldownSeparatorTheme
-  'Drilldown.Separator': DrilldownSeparatorTheme
   FileDrop: FileDropTheme
   Flex: FlexTheme
   FormFieldGroup: FormFieldGroupTheme

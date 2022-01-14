@@ -25,63 +25,45 @@
 /** @jsx jsx */
 import { Component } from 'react'
 
-import { testable } from '@instructure/ui-testable'
-
-import { withStyle, jsx } from '@instructure/emotion'
-
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import { withStyle } from '@instructure/emotion'
+import { optionsItemThemeGenerator } from '@instructure/ui-options'
 
 import { propTypes, allowedProps } from './props'
-import type { DrilldownItemProps } from './props'
+import type { DrilldownOptionProps } from './props'
 
 /**
 ---
 parent: Drilldown
-id: Drilldown.Item
+id: Drilldown.Option
 ---
-@module DrilldownItem
+@module DrilldownOption
 @tsProps
 **/
-@withStyle(generateStyle, generateComponentTheme)
-@testable()
-class DrilldownItem extends Component<DrilldownItemProps> {
-  static readonly componentId = 'Drilldown.Item'
+// needed for listing the available theme variables on docs page,
+// we pass the themeOverrides to Options.Item
+@withStyle(null, optionsItemThemeGenerator)
+class DrilldownOption extends Component<DrilldownOptionProps> {
+  static readonly componentId = 'Drilldown.Option'
 
   static propTypes = propTypes
   static allowedProps = allowedProps
-  static defaultProps = {}
 
-  ref: Element | null = null
-
-  handleRef = (el: Element | null) => {
-    const { elementRef } = this.props
-
-    this.ref = el
-
-    if (typeof elementRef === 'function') {
-      elementRef(el)
-    }
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.()
+  static defaultProps = {
+    isDisabled: false,
+    defaultSelected: false,
+    beforeLabelContentVAlign: 'start',
+    afterLabelContentVAlign: 'start',
+    descriptionRole: 'note',
+    as: 'span',
+    role: 'listitem'
   }
 
   render() {
-    const { styles } = this.props
-
-    return (
-      <div ref={this.handleRef} css={styles?.drilldownItem}>
-        Item
-      </div>
-    )
+    // this component is only used for prop validation. Drilldown.Option children
+    // are parsed in Drilldown and rendered as Options.Item components
+    return null
   }
 }
 
-export default DrilldownItem
-export { DrilldownItem }
+export default DrilldownOption
+export { DrilldownOption }

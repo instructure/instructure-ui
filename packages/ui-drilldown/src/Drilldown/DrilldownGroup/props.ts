@@ -22,20 +22,74 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
 
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import { Children } from '@instructure/ui-prop-types'
+
+import DrilldownOption from '../DrilldownOption'
+import DrilldownSeparator from '../DrilldownSeparator'
+
 import type {
-  DrilldownGroupTheme,
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  OptionsTheme
 } from '@instructure/shared-types'
+import type { WithStyleProps } from '@instructure/emotion'
+
+import type { DrilldownOptionValue } from '../DrilldownOption/props'
+import type { OptionChild, SeparatorChild } from '../props'
 
 type DrilldownGroupOwnProps = {
+  id: string
+
   /**
-   * provides a reference to the underlying html root element
+   * Children of type:
+   * `<Drilldown.Option />`, `<Drilldown.Separator />`
+   */
+  children?: (OptionChild | SeparatorChild)[] // TODO: type Children.oneOf([DrilldownOption, DrilldownSeparator])
+
+  /**
+   * The label of the option group.
+   */
+  renderGroupTitle?: React.ReactNode | (() => React.ReactNode)
+
+  /**
+   * Hides the separators around the group.
+   */
+  withoutSeparators?: boolean
+
+  /**
+   * Is the option group disabled.
+   */
+  isDisabled?: boolean
+
+  /**
+   * Provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+
+  // selection props
+  /**
+   * Makes the option group selectable (with "check" icon indicators).
+   * Can be set to a single-select (radio) or a multi-select (checkbox) group.
+   */
+  selectableType?: 'single' | 'multiple'
+
+  /**
+   * An array of the values for the selected items on initial render
+   */
+  defaultSelected?: DrilldownOptionValue[]
+
+  /**
+   * Callback fired when an option within the `<Drilldown.Group />` is selected
+   */
+  onSelect?: (
+    event: React.SyntheticEvent,
+    value: DrilldownOptionValue[],
+    isSelected: boolean,
+    selectedOption: OptionChild
+  ) => void
 }
 
 type PropKeys = keyof DrilldownGroupOwnProps
@@ -43,16 +97,32 @@ type PropKeys = keyof DrilldownGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrilldownGroupProps = DrilldownGroupOwnProps &
-  WithStyleProps<DrilldownGroupTheme, DrilldownGroupStyle> &
+  WithStyleProps<OptionsTheme, null> &
   OtherHTMLAttributes<DrilldownGroupOwnProps>
 
-type DrilldownGroupStyle = ComponentStyle<'drilldownGroup'>
-
 const propTypes: PropValidators<PropKeys> = {
-  elementRef: PropTypes.func
+  id: PropTypes.string.isRequired,
+  children: Children.oneOf([DrilldownOption, DrilldownSeparator]),
+  renderGroupTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  withoutSeparators: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  elementRef: PropTypes.func,
+  selectableType: PropTypes.oneOf(['single', 'multiple']),
+  defaultSelected: PropTypes.array,
+  onSelect: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = ['elementRef']
+const allowedProps: AllowedPropKeys = [
+  'id',
+  'children',
+  'renderGroupTitle',
+  'withoutSeparators',
+  'isDisabled',
+  'elementRef',
+  'selectableType',
+  'defaultSelected',
+  'onSelect'
+]
 
-export type { DrilldownGroupProps, DrilldownGroupStyle }
+export type { DrilldownGroupProps }
 export { propTypes, allowedProps }

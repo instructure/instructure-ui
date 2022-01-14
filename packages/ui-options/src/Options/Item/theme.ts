@@ -73,4 +73,5 @@ const generateComponentTheme = (theme: Theme): OptionsItemTheme => {
   }
 }
 
+export { generateComponentTheme as optionsItemThemeGenerator }
 export default generateComponentTheme
