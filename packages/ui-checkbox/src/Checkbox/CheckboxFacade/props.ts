@@ -36,6 +36,9 @@ type CheckboxFacadeOwnProps = {
   focused?: boolean
   hovered?: boolean
   size?: 'small' | 'medium' | 'large'
+  /**
+   * Visual state showing that child checkboxes are a combination of checked and unchecked
+   */
   indeterminate?: boolean
 }
 
@@ -54,9 +57,6 @@ const propTypes: PropValidators<PropKeys> = {
   focused: PropTypes.bool,
   hovered: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Visual state showing that child checkboxes are a combination of checked and unchecked
-   */
   indeterminate: PropTypes.bool
 }
 

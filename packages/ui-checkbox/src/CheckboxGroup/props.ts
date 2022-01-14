@@ -40,7 +40,7 @@ type CheckboxGroupOwnProps = {
   children?: React.ReactNode // TODO: oneOf([Checkbox])
   name: string
   description: React.ReactNode
-  defaultValue?: any[]
+  defaultValue?: boolean[]
   value?: any // TODO: controllable(PropTypes.array)
   onChange?: (...args: any[]) => any
   disabled?: boolean
@@ -102,5 +102,8 @@ const allowedProps: AllowedPropKeys = [
   'layout'
 ]
 
-export type { CheckboxGroupProps }
+type CheckboxGroupState = {
+  value: boolean[]
+}
+export type { CheckboxGroupProps, CheckboxGroupState }
 export { propTypes, allowedProps }

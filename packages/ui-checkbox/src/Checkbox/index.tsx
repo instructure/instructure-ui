@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import keycode from 'keycode'
 
 import { FormFieldMessages } from '@instructure/ui-form-field'
@@ -43,7 +43,7 @@ import { ToggleFacade } from './ToggleFacade'
 import generateStyle from './styles'
 
 import { propTypes, allowedProps } from './props'
-import type { CheckboxProps } from './props'
+import type { CheckboxProps, CheckboxState } from './props'
 
 import type {
   CheckboxFacadeTheme,
@@ -55,11 +55,12 @@ import type {
 category: components
 tags: toggle, switch
 ---
+@tsProps
 **/
 
 @withStyle(generateStyle, null)
 @testable()
-class Checkbox extends Component<CheckboxProps> {
+class Checkbox extends Component<CheckboxProps, CheckboxState> {
   static readonly componentId = 'Checkbox'
 
   static propTypes = propTypes
@@ -74,23 +75,22 @@ class Checkbox extends Component<CheckboxProps> {
     labelPlacement: 'end'
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: CheckboxProps) {
     super(props)
 
     this.state = {
       focused: false,
-      hovered: false
+      hovered: false,
+      checked:
+        typeof props.checked === 'undefined'
+          ? !!props.defaultChecked
+          : undefined
     }
 
-    if (typeof props.checked === 'undefined') {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
-      this.state.checked = !!props.defaultChecked
-    }
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Chec... Remove this comment to see the full error message
     this._defaultId = uid('Checkbox')
   }
+  private _defaultId: string
+  private _input?: HTMLInputElement | null
 
   ref: Element | null = null
 
@@ -99,28 +99,22 @@ class Checkbox extends Component<CheckboxProps> {
   }
 
   componentDidMount() {
-    // see https://github.com/facebook/react/issues/1798
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
-    this._input.indeterminate = this.props.indeterminate
-
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
-  }
-
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
-    // see https://github.com/facebook/react/issues/1798
-    if (prevProps.indeterminate !== this.props.indeterminate) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
-      this._input.indeterminate = this.props.indeterminate
+    if (this._input) {
+      this._input.indeterminate = this.props.indeterminate || false
     }
 
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleChange = (e) => {
+  componentDidUpdate(prevProps: CheckboxProps) {
+    if (prevProps.indeterminate !== this.props.indeterminate && this._input) {
+      this._input.indeterminate = this.props.indeterminate || false
+    }
+
+    this.props.makeStyles?.()
+  }
+
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { onChange, disabled, checked, readOnly } = this.props
 
     if (disabled || readOnly) {
@@ -129,7 +123,6 @@ class Checkbox extends Component<CheckboxProps> {
     }
 
     if (typeof checked === 'undefined') {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
       this.setState({ checked: !this.state.checked })
     }
 
@@ -138,66 +131,52 @@ class Checkbox extends Component<CheckboxProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleKeyDown = (e) => {
-    if (
-      this.props.variant === 'toggle' &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'return' does not exist on type 'CodesMap... Remove this comment to see the full error message
-      (e.keyCode === keycode.codes.enter || e.keyCode === keycode.codes.return)
-    ) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
-      this._input.click()
+  handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (this.props.variant === 'toggle' && e.keyCode === keycode.codes.enter) {
+      this._input && this._input.click()
       e.preventDefault()
     }
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-  handleFocus = (e) => {
+  handleFocus = () => {
     this.setState({
       focused: true
     })
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-  handleBlur = (e) => {
+  handleBlur = () => {
     this.setState({
       focused: false
     })
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-  handleMouseOver = (e) => {
+  handleMouseOver = () => {
     this.setState({
       hovered: true
     })
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-  handleMouseOut = (e) => {
+  handleMouseOut = () => {
     this.setState({
       hovered: false
     })
   }
 
   get id() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Chec... Remove this comment to see the full error message
     return this.props.id || this._defaultId
   }
 
   get checked() {
     return typeof this.props.checked === 'undefined'
-      ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
-        this.state.checked
+      ? this.state.checked
       : this.props.checked
   }
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
     return isActiveElement(this._input)
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
     this._input && this._input.focus()
   }
 
@@ -213,7 +192,6 @@ class Checkbox extends Component<CheckboxProps> {
       themeOverride
     } = this.props
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'hovered' does not exist on type 'Readonl... Remove this comment to see the full error message
     const { hovered, focused } = this.state
 
     error(
@@ -226,8 +204,6 @@ class Checkbox extends Component<CheckboxProps> {
         <ToggleFacade
           disabled={disabled}
           size={size}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-          hovered={hovered}
           focused={focused}
           checked={this.checked}
           readOnly={readOnly}
@@ -300,7 +276,6 @@ class Checkbox extends Component<CheckboxProps> {
           value={value}
           type="checkbox"
           ref={(c) => {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
             this._input = c
           }}
           disabled={disabled || readOnly}
