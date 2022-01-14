@@ -38,7 +38,10 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableHeadOwnProps = {
   isStacked?: boolean
-  renderSortLabel?: React.ReactNode | ((...args: any[]) => any)
+  renderSortLabel?: React.ReactNode | (() => React.ReactNode)
+  /**
+   * `Table.Row`
+   */
   children?: React.ReactNode
 }
 type PropKeys = keyof TableHeadOwnProps
@@ -52,9 +55,6 @@ type TableHeadProps = TableHeadOwnProps &
 type TableHeadStyle = ComponentStyle<'head'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * `Table.Row`
-   */
   children: ChildrenPropTypes.oneOf([Row]),
   isStacked: PropTypes.bool,
   renderSortLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])

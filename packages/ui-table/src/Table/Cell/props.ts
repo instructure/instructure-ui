@@ -34,9 +34,12 @@ import type {
 
 type TableCellOwnProps = {
   isStacked?: boolean
-  header?: React.ReactNode | ((...args: any[]) => any)
+  header?: React.ReactNode | (() => React.ReactNode)
+  /**
+   * Control the text alignment in cell
+   */
   textAlign?: 'start' | 'center' | 'end'
-  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  children?: React.ReactNode | (() => React.ReactNode)
 }
 
 type PropKeys = keyof TableCellOwnProps
@@ -53,9 +56,6 @@ const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   isStacked: PropTypes.bool,
   header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Control the text alignment in cell
-   */
   textAlign: PropTypes.oneOf(['start', 'center', 'end'])
 }
 

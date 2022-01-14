@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import React, { Component, Children } from 'react'
 
 import {
   omitProps,
@@ -43,7 +43,9 @@ import generateComponentTheme from './theme'
 
 import { Row } from '../Row'
 import { ColHeader } from '../ColHeader'
+import type { TableColHeaderProps } from '../ColHeader/props'
 import type { TableHeadProps } from './props'
+import type { TableRowProps } from '../Row/props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -51,6 +53,7 @@ import { allowedProps, propTypes } from './props'
 parent: Table
 id: Table.Head
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Head extends Component<TableHeadProps> {
@@ -64,16 +67,23 @@ class Head extends Component<TableHeadProps> {
   }
 
   get isSortable() {
-    const [row] = Children.toArray(this.props.children)
+    const [row] = Children.toArray(
+      this.props.children
+    ) as React.ComponentElement<TableRowProps, Row>[]
     let sortable = false
 
     if (row) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-      Children.forEach(row.props.children, (colHeader) => {
-        if (matchComponentTypes(colHeader, [ColHeader])) {
-          if (colHeader.props.onRequestSort) sortable = true
+      Children.forEach(
+        row.props.children as React.ComponentElement<
+          TableColHeaderProps,
+          ColHeader
+        >[],
+        (colHeader) => {
+          if (matchComponentTypes(colHeader, [ColHeader])) {
+            if (colHeader.props.onRequestSort) sortable = true
+          }
         }
-      })
+      )
     }
 
     return sortable
@@ -95,30 +105,38 @@ class Head extends Component<TableHeadProps> {
 
   renderSelect() {
     const { children, renderSortLabel } = this.props
-    const [row] = Children.toArray(children)
+    const [row] = Children.toArray(children) as React.ComponentElement<
+      TableRowProps,
+      Row
+    >[]
 
     if (!matchComponentTypes(row, [Row])) {
       return null
     }
-    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'options' implicitly has type 'any[]' in ... Remove this comment to see the full error message
-    const options = []
-    const clickHandlers = {}
-    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'selectedOption' implicitly has type 'any... Remove this comment to see the full error message
-    let selectedOption = undefined
+    const options: {
+      id: TableColHeaderProps['id']
+      label:
+        | TableColHeaderProps['stackedSortByLabel']
+        | TableColHeaderProps['id']
+    }[] = []
+    const clickHandlers: Record<
+      TableColHeaderProps['id'],
+      TableColHeaderProps['onRequestSort']
+    > = {}
+    let selectedOption: TableColHeaderProps['id'] | undefined
     let count = 0
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
     Children.forEach(row.props.children, (colHeader) => {
       count += 1
       if (matchComponentTypes(colHeader, [ColHeader])) {
-        const { id, stackedSortByLabel, sortDirection, onRequestSort } =
-          colHeader.props
+        const { id, stackedSortByLabel, sortDirection, onRequestSort } = (
+          colHeader as ColHeader
+        ).props
 
         const label = stackedSortByLabel || id
 
         if (onRequestSort) {
           options.push({ id, label })
-          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           clickHandlers[id] = onRequestSort
           if (sortDirection !== 'none') {
             selectedOption = id
@@ -130,8 +148,9 @@ class Head extends Component<TableHeadProps> {
       return null
     }
     const handleSelect: SimpleSelectProps['onChange'] = (event, { value }) => {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      clickHandlers[value](event, { id: value })
+      if (value && typeof clickHandlers[value] === 'function') {
+        clickHandlers[value]!(event, { id: `${value}` })
+      }
     }
     return (
       <div role="rowgroup">
@@ -149,14 +168,12 @@ class Head extends Component<TableHeadProps> {
               value={selectedOption}
               onChange={handleSelect}
             >
-              {/* @ts-expect-error ts-migrate(7005) FIXME: Variable 'options' implicitly has an 'any[]' type. */}
               {options.map(({ id, label }) => (
                 <SimpleSelect.Option
                   id={id}
                   key={id}
                   value={id}
                   renderBeforeLabel={
-                    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'selectedOption' implicitly has an 'any' ... Remove this comment to see the full error message
                     id === selectedOption
                       ? IconCheckLine
                       : () => <IconCheckLine style={{ color: 'transparent' }} />

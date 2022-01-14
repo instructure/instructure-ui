@@ -30,6 +30,7 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ColHeader } from '../ColHeader'
 import { RowHeader } from '../RowHeader'
 import { Cell } from '../Cell'
+import type { TableCellProps } from '../Cell/props'
 
 import type {
   OtherHTMLAttributes,
@@ -41,7 +42,10 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 type TableRowOwnProps = {
   hover?: boolean
   isStacked?: boolean
-  headers?: (React.ReactNode | ((...args: any[]) => any))[]
+  headers?: TableCellProps['header'][]
+  /**
+   * `Table.ColHeader`, `Table.RowHeader` or `Table.Cell`
+   */
   children?: React.ReactNode
 }
 
@@ -56,9 +60,6 @@ type TableRowProps = TableRowOwnProps &
 type TableRowStyle = ComponentStyle<'row'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * `Table.ColHeader`, `Table.RowHeader` or `Table.Cell`
-   */
   children: ChildrenPropTypes.oneOf([ColHeader, RowHeader, Cell]),
   hover: PropTypes.bool,
   isStacked: PropTypes.bool,

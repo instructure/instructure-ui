@@ -31,15 +31,15 @@ import {
   findAll,
   within
 } from '@instructure/ui-test-utils'
+//TODO
 /* eslint-disable no-restricted-imports */
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 import { SimpleSelectLocator } from '@instructure/ui-simple-select/es/SimpleSelect/SimpleSelectLocator'
-/* eslint-enable no-restricted-imports */
 import { Table } from '../index'
-
+import type { TableProps } from '../props'
+import type { TableColHeaderProps } from '../ColHeader/props'
 describe('<Table />', async () => {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  const render = (props) =>
+  const render = (props?: TableProps) =>
     mount(
       <Table caption="Test table" {...props}>
         <Table.Head>
@@ -58,7 +58,6 @@ describe('<Table />', async () => {
     )
 
   it('should render a caption', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     await render()
     const table = await find('table')
 
@@ -66,7 +65,6 @@ describe('<Table />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     await render()
     const table = await find('table')
     expect(await table.accessible()).to.be.true()
@@ -94,7 +92,6 @@ describe('<Table />', async () => {
   })
 
   it('sets the scope of column header to col', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     await render()
     const th = await find('thead th')
     const thNode = within(th.getDOMNode())
@@ -103,7 +100,6 @@ describe('<Table />', async () => {
   })
 
   it('sets the scope of row header to row', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     await render()
     const th = await find('tbody th')
     const thNode = within(th.getDOMNode())
@@ -178,10 +174,12 @@ describe('<Table />', async () => {
   })
 
   describe('when table is sortable', async () => {
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-    const renderSortableTable = (props, handlers = {}, layout = 'auto') =>
+    const renderSortableTable = (
+      props: TableColHeaderProps | null,
+      handlers = {},
+      layout: TableProps['layout'] = 'auto'
+    ) =>
       mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Table caption="Sortable table" layout={layout}>
           <Table.Head>
             <Table.Row>
@@ -202,6 +200,7 @@ describe('<Table />', async () => {
 
     it('can render up arrow for ascending order', async () => {
       await renderSortableTable({
+        id: 'id',
         sortDirection: 'ascending'
       })
       const arrow = await find('svg[name="IconMiniArrowUp"]')
@@ -211,6 +210,7 @@ describe('<Table />', async () => {
 
     it('can render down arrow for descending order', async () => {
       await renderSortableTable({
+        id: 'id',
         sortDirection: 'descending'
       })
       const arrow = await find('svg[name="IconMiniArrowDown"]')
@@ -222,7 +222,9 @@ describe('<Table />', async () => {
       const onRequestSort = stub()
 
       await renderSortableTable(
-        {},
+        {
+          id: 'id'
+        },
         {
           onRequestSort
         }
@@ -237,7 +239,9 @@ describe('<Table />', async () => {
       const sortFoo = stub()
 
       await renderSortableTable(
-        {},
+        {
+          id: 'id'
+        },
         {
           onRequestSort: sortFoo
         },
@@ -258,6 +262,7 @@ describe('<Table />', async () => {
     it('can display custom label in the select in stacked layout', async () => {
       await renderSortableTable(
         {
+          id: 'id',
           stackedSortByLabel: 'Custom Text'
         },
         {
@@ -282,6 +287,7 @@ describe('<Table />', async () => {
     it('can render check mark for sorted column in stacked layout', async () => {
       await renderSortableTable(
         {
+          id: 'id',
           sortDirection: 'ascending'
         },
         {
@@ -296,6 +302,7 @@ describe('<Table />', async () => {
 
     it('creates proper aria-sort attributes (ascending)', async () => {
       await renderSortableTable({
+        id: 'id',
         sortDirection: 'ascending'
       })
       const sortedHeader = await find('th[aria-sort="ascending"]')
@@ -305,6 +312,7 @@ describe('<Table />', async () => {
 
     it('creates proper aria-sort attributes (descending)', async () => {
       await renderSortableTable({
+        id: 'id',
         sortDirection: 'descending'
       })
       const sortedHeader = await find('th[aria-sort="descending"]')

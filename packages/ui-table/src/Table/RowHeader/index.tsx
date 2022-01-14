@@ -40,6 +40,7 @@ import { allowedProps, propTypes } from './props'
 parent: Table
 id: Table.RowHeader
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class RowHeader extends Component<TableRowHeaderProps> {
