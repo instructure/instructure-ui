@@ -22,30 +22,25 @@
  * SOFTWARE.
  */
 
-import { Collection, JSCodeshift } from 'jscodeshift'
+const path = require('path')
+const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
-/**
- * Finds an import statement with the given path in the given collection, e.g.
- * "findImportDeclaration(j, root, 'myPath')" finds
- * "import otherModule from 'myPath'"
- * @param j JSCodeshift
- * @param root the collection (AST tree) to search
- * @param importPath the import path to look for
- */
-export default function findImportDeclaration(
-  j: JSCodeshift,
-  root: Collection,
-  importPath: string
-) {
-  let importDeclaration
-  const declarationQueryResult = root.find(j.ImportDeclaration, {
-    source: {
-      type: 'StringLiteral',
-      value: importPath
-    }
+const tests = [
+  //'buttonMisc',
+  //'buttonWithText',
+  'buttonIconCircle'
+]
+
+// eslint-disable-next-line no-undef
+jest.autoMockOff()
+
+describe('updateV7Buttons', () => {
+  tests.forEach((test) => {
+    defineTest(
+      __dirname,
+      'lib/updateV7Buttons',
+      undefined,
+      `updateV7Buttons/${test}`
+    )
   })
-  if (declarationQueryResult.length > 0) {
-    importDeclaration = declarationQueryResult.get()
-  }
-  return importDeclaration
-}
+})
