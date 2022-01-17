@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component, ReactElement } from 'react'
+import React, { Children, Component } from 'react'
 
 import { FormFieldGroup } from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
@@ -44,6 +44,7 @@ import type { CheckboxGroupProps, CheckboxGroupState } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 
 @testable()
@@ -123,7 +124,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
 
     return Children.map(children, (child) => {
       if (matchComponentTypes(child, [Checkbox])) {
-        return safeCloneElement(child as ReactElement, {
+        return safeCloneElement(child as React.ReactElement, {
           key: `${
             (child as React.ComponentElement<CheckboxProps, Checkbox>).props
               .name
@@ -140,14 +141,16 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
           size,
           checked:
             this.value.indexOf(
-              (child as React.ComponentElement<CheckboxProps, Checkbox>).props
-                .value
+              Number(
+                (child as React.ComponentElement<CheckboxProps, Checkbox>).props
+                  .value
+              )
             ) > -1,
           onChange: this.handleChange,
           width:
             (child as React.ComponentElement<CheckboxProps, Checkbox>).props
               .width || 'auto',
-          'aria-describedby': this.hasMessages && this._messagesId
+          'aria-describedby': this.hasMessages ? this._messagesId : ''
         })
       } else {
         return child

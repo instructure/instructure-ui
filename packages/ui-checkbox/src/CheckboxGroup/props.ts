@@ -37,12 +37,12 @@ import type { PropValidators } from '@instructure/shared-types'
 import { Checkbox } from '../Checkbox'
 
 type CheckboxGroupOwnProps = {
-  children?: React.ReactNode // TODO: oneOf([Checkbox])
+  children?: Checkbox[]
   name: string
   description: React.ReactNode
-  defaultValue?: boolean[]
-  value?: any // TODO: controllable(PropTypes.array)
-  onChange?: (...args: any[]) => any
+  defaultValue?: (string | number)[]
+  value?: (string | number)[]
+  onChange?: (value: (string | number)[]) => void
   disabled?: boolean
   readOnly?: boolean
   messages?: FormMessage[]
@@ -103,7 +103,7 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 type CheckboxGroupState = {
-  value: boolean[]
+  value: (string | number)[]
 }
 export type { CheckboxGroupProps, CheckboxGroupState }
 export { propTypes, allowedProps }

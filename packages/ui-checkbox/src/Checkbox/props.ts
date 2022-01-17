@@ -52,7 +52,7 @@ type CheckboxOwnProps = {
   /**
    * whether the input is checked or not (must be accompanied by an `onChange` prop)
    */
-  checked?: any // TODO: controllable(PropTypes.bool, 'onChange', 'defaultChecked')
+  checked?: boolean // TODO: controllable(PropTypes.bool, 'onChange', 'defaultChecked')
   /**
    * when used with the `checked` prop, the component will not control its own state
    */
