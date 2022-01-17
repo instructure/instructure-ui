@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { findAttribute } from '../helpers/buttonUpdateHelpers'
+import { findAttribute, findOpeningTags } from '../helpers/buttonUpdateHelpers'
 import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 
 /**
@@ -41,42 +41,35 @@ export default function updateV7ButtonsWithText(
   importedName: string
 ) {
   // remove variant={default}
-  findAttribute(j, root, importedName, 'variant', 'default').remove()
+  const buttons = findOpeningTags(j, root, importedName)
+  findAttribute(j, buttons, 'variant', 'default').remove()
   // replace <Button variant="primary" with <Button color="primary"
-  findAttribute(j, root, importedName, 'variant', 'primary').replaceWith(
-    (nodePath) => {
-      // eslint-disable-next-line no-param-reassign
-      nodePath.node.name.name = 'color'
-      return nodePath.node
-    }
-  )
+  findAttribute(j, buttons, 'variant', 'primary').replaceWith((nodePath) => {
+    // eslint-disable-next-line no-param-reassign
+    nodePath.node.name.name = 'color'
+    return nodePath.node
+  })
   // replace <Button variant="success" with <Button color="success"
-  findAttribute(j, root, importedName, 'variant', 'success').replaceWith(
-    (nodePath) => {
-      const { node } = nodePath
-      node.name.name = 'color'
-      return nodePath.node
-    }
-  )
+  findAttribute(j, buttons, 'variant', 'success').replaceWith((nodePath) => {
+    const { node } = nodePath
+    node.name.name = 'color'
+    return nodePath.node
+  })
   // replace <Button variant="danger" with <Button color="danger"
-  findAttribute(j, root, importedName, 'variant', 'danger').replaceWith(
-    (nodePath) => {
-      const { node } = nodePath
-      node.name.name = 'color'
-      return nodePath.node
-    }
-  )
+  findAttribute(j, buttons, 'variant', 'danger').replaceWith((nodePath) => {
+    const { node } = nodePath
+    node.name.name = 'color'
+    return nodePath.node
+  })
   // replace <Button variant="light" with color="primary-inverse"
-  findAttribute(j, root, importedName, 'variant', 'light').replaceWith(
-    (nodePath) => {
-      const { node } = nodePath
-      node.name.name = 'color'
-      ;(node.value as Literal).value = 'primary-inverse'
-      return nodePath.node
-    }
-  )
+  findAttribute(j, buttons, 'variant', 'light').replaceWith((nodePath) => {
+    const { node } = nodePath
+    node.name.name = 'color'
+    ;(node.value as Literal).value = 'primary-inverse'
+    return nodePath.node
+  })
   // replace <Button variant="ghost" with <Button color="primary" withBackground={false}
-  findAttribute(j, root, importedName, 'variant', 'ghost')
+  findAttribute(j, buttons, 'variant', 'ghost')
     .replaceWith((nodePath) => {
       const { node } = nodePath
       node.name.name = 'color'
@@ -92,7 +85,7 @@ export default function updateV7ButtonsWithText(
 
   // replace <Button variant="ghost-inverse" with
   // <Button color="primary-inverse" withBackground={false}
-  findAttribute(j, root, importedName, 'variant', 'ghost-inverse')
+  findAttribute(j, buttons, 'variant', 'ghost-inverse')
     .replaceWith((nodePath) => {
       const { node } = nodePath
       node.name.name = 'color'
@@ -105,13 +98,4 @@ export default function updateV7ButtonsWithText(
         j.jsxExpressionContainer(j.jsxIdentifier('false'))
       )
     )
-}
-
-function findButton(j: JSCodeshift, root: Collection, tagName: string) {
-  return root.find(j.JSXOpeningElement, {
-    name: {
-      type: 'JSXIdentifier',
-      name: tagName
-    }
-  })
 }

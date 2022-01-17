@@ -24,36 +24,31 @@
 
 import {
   Collection,
+  ImportDeclaration,
   ImportDefaultSpecifier,
   ImportNamespaceSpecifier,
   ImportSpecifier,
   JSCodeshift,
+  JSXAttribute,
+  JSXElement,
+  JSXExpressionContainer,
+  JSXFragment,
+  JSXSpreadAttribute,
   Literal
 } from 'jscodeshift'
+import type { LiteralKind } from 'ast-types/gen/kinds'
 
 /**
- * Finds all the opening tag elements given in tagName
+ * Finds all the opening tag elements given in tagName.
+ * You can supply optional withAttrName and withAttrValue props,
+ * this will return only tags where these props exist.
  */
-function findTag(j: JSCodeshift, root: Collection, tagName: string) {
-  return root.find(j.JSXOpeningElement, {
-    name: {
-      type: 'JSXIdentifier',
-      name: tagName
-    }
-  })
-}
-
-/**
- * Returns the attribute(s) in the specified tag with the given name and value.
- * e.g. `findAttribute(j, root, "Button", "display", "block")` will return an
- * Attribute object when root looks like: `<p><Button display="block" /></p>`
- */
-function findAttribute(
+function findOpeningTags(
   j: JSCodeshift,
   root: Collection,
   tagName: string,
-  attrName: string,
-  attrValue: string
+  withAttrName?: string,
+  withAttrValue?: string | string[]
 ) {
   return root
     .find(j.JSXOpeningElement, {
@@ -62,38 +57,61 @@ function findAttribute(
         name: tagName
       }
     })
-    .find(j.JSXAttribute, {
-      name: {
-        name: attrName
-      },
-      value: {
-        value: attrValue
+    .filter((path) => {
+      if (!withAttrName) {
+        return true
       }
+      if (!path.value.attributes) {
+        return false
+      }
+      for (const attr of path.value.attributes) {
+        if (isJSXAttribue(attr) && attr.name.name === withAttrName) {
+          if (!withAttrValue) {
+            // attribute name matches, no values specified
+            return true
+          }
+          if (isLiteral(attr.value) && attr.value.value) {
+            if (typeof withAttrValue === 'string') {
+              if (attr.value.value === withAttrValue) {
+                return true
+              }
+            } else if (withAttrValue.includes(attr.value.value as string)) {
+              return true
+            }
+          }
+        }
+      }
+      return false
     })
 }
 
-function findAttribute2(
+function findAttribute(
   j: JSCodeshift,
   root: Collection,
-  attrName: string,
-  attrValue?: string | string[]
+  withAttrName: string,
+  withAttrValue?: string | string[]
 ) {
-  root
+  return root
     .find(j.JSXAttribute, {
       name: {
-        name: attrName
+        name: withAttrName
       }
     })
     .filter((path) => {
-      const currentAttrValue = (path.value?.value as Literal).value
-      if (typeof attrValue === 'string') {
-        if (currentAttrValue === attrValue) {
+      if (!withAttrName) {
+        return true
+      }
+      const currentAttrValue = path.value.value
+        ? (path.value.value as Literal).value
+        : undefined
+      if (typeof withAttrValue === 'string') {
+        if (currentAttrValue === withAttrValue) {
           return true
         }
       } else if (
-        attrValue &&
+        withAttrName &&
         typeof currentAttrValue === 'string' &&
-        attrValue.includes(currentAttrValue)
+        withAttrName.includes(currentAttrValue)
       ) {
         return true
       }
@@ -118,43 +136,80 @@ function findImport(
   path: string
 ) {
   let importedName: string | undefined
-  root
-    .find(j.ImportDeclaration)
-    // check for import path
-    .filter((astPath) => {
-      const importSource = astPath.node.source.value // e.g. "@instructure/ui"
-      if (importSource && typeof importSource === 'string') {
-        const match = importSource.indexOf(path) > -1
-        if (match) {
-          return true
-        }
-      }
-      return false
-    })
-    // check import name
-    .forEach((path) => {
-      if (path.node.specifiers) {
-        path.node.specifiers.forEach((specifier) => {
+  const importPaths = findImportPath(j, root, path)
+  // check import name
+  importPaths.forEach((path) => {
+    if (path.node.specifiers) {
+      path.node.specifiers.forEach((specifier) => {
+        if (isImportSpecifier(specifier) && specifier.imported.name === name) {
+          // is it imported via an alias? e.g. import { A as B } ..
           if (
-            isImportSpecifier(specifier) &&
-            specifier.imported.name === name
+            specifier.local &&
+            specifier.local.name &&
+            specifier.local.name != name
           ) {
-            // is it imported via an alias? e.g. import { A as B } ..
-            if (
-              specifier.local &&
-              specifier.local.name &&
-              specifier.local.name != name
-            ) {
-              importedName = specifier.local.name
-            } else {
-              importedName = specifier.imported.name
-            }
-            return
+            importedName = specifier.local.name
+          } else {
+            importedName = specifier.imported.name
           }
-        })
-      }
-    })
+          return
+        }
+      })
+    }
+  })
   return importedName
+}
+
+/**
+ * Adds a new import to an existing import, e.g.
+ * addImport(j, root, "@instructure/ui-buttons", "NewButton") will change
+ * import { Button } from '@instructure/ui-buttons'
+ * to
+ * import { Button, NewButton } from '@instructure/ui-buttons'
+ */
+function addImport(
+  j: JSCodeshift,
+  root: Collection,
+  importPath: string,
+  importToAdd: string
+) {
+  const paths: Collection<ImportDeclaration> = findImportPath(
+    j,
+    root,
+    importPath
+  )
+  if (paths.length != 1) {
+    throw new Error(
+      'Found multiple/no paths for ' +
+        importPath +
+        ' cannot decide where to add the new import'
+    )
+  }
+  paths.forEach((path) => {
+    path.value.specifiers!.push(j.importSpecifier(j.identifier(importToAdd)))
+  })
+}
+
+/**
+ * Finds all lines that import from importPath, e.g.
+ * `import {Button} from "@instructure/ui"
+ */
+function findImportPath(j: JSCodeshift, root: Collection, importPath: string) {
+  return (
+    root
+      .find(j.ImportDeclaration)
+      // check for import path
+      .filter((astPath) => {
+        const importSource = astPath.node.source.value // e.g. "@instructure/ui"
+        if (importSource && typeof importSource === 'string') {
+          const match = importSource.indexOf(importPath) > -1
+          if (match) {
+            return true
+          }
+        }
+        return false
+      })
+  )
 }
 
 /**
@@ -168,4 +223,27 @@ function isImportSpecifier(
   return specifier.type === 'ImportSpecifier'
 }
 
-export { findTag, findAttribute, findImport }
+function isJSXAttribue(
+  attr: JSXAttribute | JSXSpreadAttribute
+): attr is JSXAttribute {
+  return attr.type === 'JSXAttribute'
+}
+
+function isLiteral(
+  attr:
+    | LiteralKind
+    | JSXExpressionContainer
+    | JSXElement
+    | JSXFragment
+    | null
+    | undefined
+): attr is Literal {
+  return (
+    attr !== undefined &&
+    attr !== null &&
+    typeof attr === 'object' &&
+    attr.type === 'Literal'
+  )
+}
+
+export { findAttribute, findImport, findOpeningTags, addImport }

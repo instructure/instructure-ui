@@ -30,13 +30,18 @@ import {
   JSXIdentifier,
   Literal
 } from 'jscodeshift'
+import { addImport, findAttribute } from '../helpers/buttonUpdateHelpers'
 
 /**
  * Does the following updates on a <Button>:
  * - variant="icon" -> <IconButton withBackground={false} withBorder={false}
+ * - variant="icon-inverse" -> <IconButton color="primary-inverse" withBackground={false} withBorder={false}
+ * - variant="circle-default" -> <IconButton color="secondary" shape="circle"
+ * - variant="circle-danger" -> <IconButton color="danger" shape="circle"
+ * - variant="icon" -> <IconButton color="secondary" shape="circle"
  *
- * Note that it does NOT import <IconButton>!
- */
+ * This codemod also adds an import to IconButton
+ **/
 export default function updateV7ButtonsIconCircle(
   j: JSCodeshift,
   root: Collection,
@@ -106,46 +111,84 @@ export default function updateV7ButtonsIconCircle(
       )
       return false
     })
+
+  if (buttonsWithNoText.length == 0) {
+    return
+  }
+  // add IconButton import
+  addImport(j, root, '@instructure/ui-buttons', 'IconButton')
+
+  // rename every <Button to <IconButton
+  buttonsWithNoText.forEach((node) => {
+    const val = node.node
+    ;(val.openingElement.name as JSXIdentifier).name = 'IconButton'
+    if (val.closingElement) {
+      ;(val.closingElement.name as JSXIdentifier).name = 'IconButton'
+    }
+  })
+
   // remove variant="icon", add withBorder={false} withBackground={false}
-  buttonsWithNoText
-    .find(j.JSXAttribute, {
-      name: {
-        name: 'variant'
-      },
-      value: {
-        value: 'icon'
-      }
-    })
-    .remove()
-    .insertAfter(
-      j.jsxAttribute(
-        j.jsxIdentifier('withBorder'),
-        j.jsxExpressionContainer(j.jsxIdentifier('false'))
-      )
-    )
-    .insertAfter(
-      j.jsxAttribute(
-        j.jsxIdentifier('withBackground'),
-        j.jsxExpressionContainer(j.jsxIdentifier('false'))
-      )
-    )
+  const iconButton = findAttribute(
+    j,
+    buttonsWithNoText,
+    'variant',
+    'icon'
+  ).remove()
+  addWithBorderBackground(j, iconButton)
 
   // change variant="icon-inverse" to color="primary-inverse" withBorder={false} withBackground={false}
-  buttonsWithNoText
-    .find(j.JSXAttribute, {
-      name: {
-        name: 'variant'
-      },
-      value: {
-        value: 'icon-inverse'
-      }
-    })
+  const iconInverse = findAttribute(
+    j,
+    buttonsWithNoText,
+    'variant',
+    'icon-inverse'
+  ).replaceWith((nodePath) => {
+    const { node } = nodePath
+    node.name.name = 'color'
+    ;(node.value as Literal).value = 'primary-inverse'
+    return nodePath.node
+  })
+  addWithBorderBackground(j, iconInverse)
+
+  // change variant="circle-default" to color="secondary" shape="circle"
+  findAttribute(j, buttonsWithNoText, 'variant', 'circle-default')
     .replaceWith((nodePath) => {
       const { node } = nodePath
       node.name.name = 'color'
-      ;(node.value as Literal).value = 'primary-inverse'
+      ;(node.value as Literal).value = 'secondary'
       return nodePath.node
     })
+    .insertAfter(
+      j.jsxAttribute(j.jsxIdentifier('shape'), j.stringLiteral('circle'))
+    )
+
+  // change variant="circle-primary" to color="primary" shape="circle"
+  findAttribute(j, buttonsWithNoText, 'variant', 'circle-primary')
+    .replaceWith((nodePath) => {
+      const { node } = nodePath
+      node.name.name = 'color'
+      ;(node.value as Literal).value = 'primary'
+      return nodePath.node
+    })
+    .insertAfter(
+      j.jsxAttribute(j.jsxIdentifier('shape'), j.stringLiteral('circle'))
+    )
+
+  // change variant="circle-danger" to color="danger" shape="circle"
+  findAttribute(j, buttonsWithNoText, 'variant', 'circle-danger')
+    .replaceWith((nodePath) => {
+      const { node } = nodePath
+      node.name.name = 'color'
+      ;(node.value as Literal).value = 'danger'
+      return nodePath.node
+    })
+    .insertAfter(
+      j.jsxAttribute(j.jsxIdentifier('shape'), j.stringLiteral('circle'))
+    )
+}
+
+function addWithBorderBackground(j: JSCodeshift, root: Collection) {
+  root
     .insertAfter(
       j.jsxAttribute(
         j.jsxIdentifier('withBorder'),

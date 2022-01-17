@@ -25,11 +25,7 @@
 const path = require('path')
 const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
-const tests = [
-  //'buttonMisc',
-  //'buttonWithText',
-  'buttonIconCircle'
-]
+const tests = ['buttonMisc', 'buttonWithText', 'buttonIconCircle']
 
 // eslint-disable-next-line no-undef
 jest.autoMockOff()

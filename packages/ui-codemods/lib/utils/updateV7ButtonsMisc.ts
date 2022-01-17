@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { findTag } from '../helpers/buttonUpdateHelpers'
-import { Collection, JSCodeshift, JSXAttribute } from 'jscodeshift'
+import { findOpeningTags } from '../helpers/buttonUpdateHelpers'
+import { Collection, JSCodeshift } from 'jscodeshift'
 
 /**
  * Does the following updates on a <Button>:
@@ -39,7 +39,7 @@ export default function updateV7ButtonsMisc(
 ) {
   ///// Replace <Button fluidWidth .. with <Button display="block" textAlign="start"
   // remove fluidWidth attribute if its value is 'false'
-  findTag(j, root, importedName)
+  findOpeningTags(j, root, importedName)
     .find(j.JSXAttribute, {
       name: {
         name: 'fluidWidth'
@@ -51,9 +51,9 @@ export default function updateV7ButtonsMisc(
       }
     })
     .remove()
-
-  const buttonsWithFluidWidth = findTag(j, root, importedName).filter(
-    (path) => {
+  /*
+  const buttonsWithFluidWidth = findTag(j, root, importedName)
+    .filter((path) => {
       if (path.value.attributes) {
         for (const attr of path.value.attributes) {
           if (
@@ -67,7 +67,14 @@ export default function updateV7ButtonsMisc(
       return false
     }
   )
-  // remove fluidWidth attribute TODO OK
+ */
+  const buttonsWithFluidWidth = findOpeningTags(
+    j,
+    root,
+    importedName,
+    'fluidWidth'
+  )
+  // remove fluidWidth attribute
   buttonsWithFluidWidth
     .find(j.JSXAttribute, {
       name: {
@@ -75,7 +82,7 @@ export default function updateV7ButtonsMisc(
       }
     })
     .remove()
-  // remove display attribute TODO OK
+  // remove display attribute
   buttonsWithFluidWidth
     .find(j.JSXAttribute, {
       name: {
@@ -83,7 +90,7 @@ export default function updateV7ButtonsMisc(
       }
     })
     .remove()
-  // remove textAlign attribute TODO OK
+  // remove textAlign attribute
   buttonsWithFluidWidth
     .find(j.JSXAttribute, {
       name: {
@@ -105,12 +112,12 @@ export default function updateV7ButtonsMisc(
   })
 
   ///// replace <Button icon=.. with <Button renderIcon=..
-  findTag(j, root, importedName)
+  findOpeningTags(j, root, importedName)
     .find(j.JSXIdentifier, { name: 'icon' })
     .replaceWith('renderIcon')
 
   ///// replace <Button buttonRef=.. with <Button elementRef=..
-  findTag(j, root, importedName)
+  findOpeningTags(j, root, importedName)
     .find(j.JSXIdentifier, { name: 'buttonRef' })
     .replaceWith('elementRef')
 }

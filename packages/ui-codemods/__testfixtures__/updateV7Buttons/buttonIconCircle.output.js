@@ -9,21 +9,19 @@ let a = (
       withBackground={false}
       withBorder={false}
     />
-    <IconButton
-      color="circle-default"
-      withBackground={false}
-      withBorder={false}
-    />
+    <IconButton color="secondary" shape="circle" />
+    <IconButton color="primary" shape="circle" />
+    <IconButton color="danger" shape="circle" />
     <Button variant="icon">some text</Button>
     <Button variant="icon-inverse">
       <p>text</p>
     </Button>
     <IconButton
       color="primary-inverse"
-      withBorder={false}
       withBackground={false}
+      withBorder={false}
     >
-      <ScreenReaderContent>Close something</ScreenReaderContent>
+      <ScreenReaderContent>abc</ScreenReaderContent>
     </IconButton>
   </p>
 )
