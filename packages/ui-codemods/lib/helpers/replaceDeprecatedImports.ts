@@ -24,7 +24,6 @@
 
 import parseImport, { ParsedImport } from '../utils/parseImport'
 import findTransform from '../utils/findTransform'
-import findImportDeclaration from '../utils/findImportDeclaration'
 import {
   API,
   ASTPath,
@@ -401,4 +400,22 @@ export default function replaceDeprecatedImports(
   })
 
   return hasModifications
+}
+
+function findImportDeclaration(
+  j: JSCodeshift,
+  root: Collection,
+  importPath: string
+) {
+  let importDeclaration
+  const declarationQueryResult = root.find(j.ImportDeclaration, {
+    source: {
+      type: 'StringLiteral',
+      value: importPath
+    }
+  })
+  if (declarationQueryResult.length > 0) {
+    importDeclaration = declarationQueryResult.get()
+  }
+  return importDeclaration
 }

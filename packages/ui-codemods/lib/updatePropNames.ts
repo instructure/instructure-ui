@@ -29,7 +29,11 @@ import requireUncached from './utils/requireUncached'
 import replaceDeprecatedProps from './helpers/replaceDeprecatedProps'
 import { API, FileInfo } from 'jscodeshift'
 
-export default function (file: FileInfo, api: API, options: any) {
+export default function updatePropNames(
+  file: FileInfo,
+  api: API,
+  options: any
+) {
   const j = api.jscodeshift
   const c = path.resolve(process.cwd(), options.config)
   const config: UpdatePropNamesOptions = fs.existsSync(c)

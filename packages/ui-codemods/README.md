@@ -45,6 +45,14 @@ This codemod helps you update your project by renaming `imports` that have chang
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/imports.config.js
 ```
 
+### Updating Buttons to the InstUI v8 syntax
+
+Updates <Button> from the InstUI v7 syntax to the v8 syntax. This script contains the codemods referenced in https://instructure.design/v7/#button-upgrade-guide
+
+```sh
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Buttons.js <path>
+```
+
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-codemods
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
