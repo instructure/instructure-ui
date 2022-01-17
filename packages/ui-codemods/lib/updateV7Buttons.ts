@@ -49,12 +49,13 @@ export default function updateV7Buttons(file: FileInfo, api: API) {
 }
 
 function updateButtons(j: JSCodeshift, root: Collection, filePath: string) {
+  // TODO what if its imported from @instructure/ui?
   const importedName = findImport(j, root, 'Button', '@instructure/ui-buttons')
   if (!importedName) {
     return false
   }
-  //updateV7ButtonsMisc(j, root, importedName)
-  //updateV7ButtonsWithText(j, root, importedName)
+  updateV7ButtonsMisc(j, root, importedName)
+  updateV7ButtonsWithText(j, root, importedName)
   updateV7ButtonsIconCircle(j, root, importedName, filePath)
   return true
 }
