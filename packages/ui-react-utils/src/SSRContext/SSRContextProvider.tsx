@@ -22,20 +22,25 @@
  * SOFTWARE.
  */
 import React from 'react'
+type SSRContextProviderValue = Map<string, number>
+type SSRContextProviderProps = React.PropsWithChildren<{
+  instanceMap: SSRContextProviderValue
+}>
 
-const defaultContextValue = new Map<string, number>()
+const generateInstanceMap = (): SSRContextProviderValue =>
+  new Map<string, number>()
+
+const defaultContextValue = generateInstanceMap()
 
 const SSRContext = React.createContext(defaultContextValue)
 
-type SSRContextProviderValue = Map<string, number>
-type SSRContextProviderProps = React.PropsWithChildren<{
-  ssr: SSRContextProviderValue
-}>
 const SSRContextProvider = ({
   children,
-  ssr = defaultContextValue
+  instanceMap = defaultContextValue
 }: SSRContextProviderProps) => {
-  return <SSRContext.Provider value={ssr}>{children}</SSRContext.Provider>
+  return (
+    <SSRContext.Provider value={instanceMap}>{children}</SSRContext.Provider>
+  )
 }
-export { SSRContext, SSRContextProvider }
+export { SSRContext, SSRContextProvider, generateInstanceMap }
 export type { SSRContextProviderValue }

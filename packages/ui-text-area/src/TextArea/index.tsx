@@ -84,8 +84,8 @@ class TextArea extends Component<TextAreaProps> {
   constructor(props: TextAreaProps) {
     super(props)
 
-    //@ts-expect-error props.ssr
-    this._defaultId = hashInstance('TextArea', this.props.ssr)
+    //@ts-expect-error props.instanceMap
+    this._defaultId = hashInstance('TextArea', this.props.instanceMap)
   }
 
   componentDidMount() {

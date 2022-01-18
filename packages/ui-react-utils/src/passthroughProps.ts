@@ -44,7 +44,8 @@ function passthroughProps<P>(props: P) {
         propName !== 'className' &&
         propName !== 'children' &&
         propName !== 'styles' &&
-        propName !== 'makeStyles'
+        propName !== 'makeStyles' &&
+        propName !== 'instanceMap'
     )
     .forEach((propName) => {
       validProps[propName as keyof P] = props[propName as keyof P]

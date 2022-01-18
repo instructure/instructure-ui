@@ -102,8 +102,11 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
       selectedOptionId: option ? option.props.id : undefined
     }
 
-    //@ts-expect-error props.ssr
-    this._emptyOptionId = hashInstance('Select-EmptyOption', this.props.ssr)
+    this._emptyOptionId = hashInstance(
+      'Select-EmptyOption',
+      //@ts-expect-error props.instanceMap
+      props.instanceMap
+    )
   }
 
   get _select() {

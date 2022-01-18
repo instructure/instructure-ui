@@ -59,8 +59,8 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
         ? (props.expanded as boolean)
         : props.defaultExpanded
     }
-    //@ts-expect-error props.ssr
-    this._contentId = hashInstance('Expandable__content', this.props.ssr)
+    // @ts-expect-error props.instanceMap
+    this._contentId = hashInstance('Expandable__content', props.instanceMap)
   }
 
   get expanded() {

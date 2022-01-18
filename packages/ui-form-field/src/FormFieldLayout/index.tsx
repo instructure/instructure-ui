@@ -73,8 +73,8 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
 
     this._messagesId =
       props.messagesId ||
-      //@ts-expect-error props.ssr
-      hashInstance('FormFieldLayout-messages', this.props.ssr)
+      //@ts-expect-error props.instanceMap
+      hashInstance('FormFieldLayout-messages', this.props.instanceMap)
 
     error(
       typeof props.width !== 'undefined' ||

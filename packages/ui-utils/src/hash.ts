@@ -64,6 +64,7 @@ function executeHash(input: string): string {
   return toBase64(String(hash))
 }
 
+// resource: https://stackoverflow.com/a/52171480
 function cyrb53(str: string, seed = 0) {
   let h1 = 0xdeadbeef ^ seed,
     h2 = 0x41c6ce57 ^ seed
@@ -80,23 +81,23 @@ function cyrb53(str: string, seed = 0) {
     Math.imul(h1 ^ (h1 >>> 13), 3266489909)
 
   return (
-    (h2 >>> 0).toString(16).padStart(8, 0) +
-    (h1 >>> 0).toString(16).padStart(8, 0)
+    (h2 >>> 0).toString(16).padStart(8, '0') +
+    (h1 >>> 0).toString(16).padStart(8, '0')
   )
 }
-function hashInstance(str: string, map: Map<string, number>) {
-  if (!map.has(str)) {
-    map.set(str, 0)
+function hashInstance(instance: string, map: Map<string, number>) {
+  if (!map.has(instance)) {
+    map.set(instance, 0)
   } else {
-    map.set(str, map.get(str)! + 1)
+    map.set(instance, map.get(instance)! + 1)
   }
 
-  const instanceCount = map.get(str)!
-  const valueToHash = `${str}_${instanceCount}`
+  const instanceCount = map.get(instance)!
+  const valueToHash = `${instance}_${instanceCount}`
   const hashed = cyrb53(valueToHash)
 
   if (process.env.NODE_ENV !== 'production') {
-    return `${str}__${hashed}`
+    return `${instance}__${hashed}`
   } else {
     return hashed
   }

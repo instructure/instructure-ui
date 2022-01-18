@@ -92,8 +92,8 @@ class Pages extends Component<PagesProps> {
         : props.activePageIndex!
     ]
 
-    //@ts-expect-error props.ssr
-    this._contentId = hashInstance('Pages', this.props.ssr)
+    //@ts-expect-error props.instanceMap
+    this._contentId = hashInstance('Pages', this.props.instanceMap)
   }
 
   componentDidMount() {

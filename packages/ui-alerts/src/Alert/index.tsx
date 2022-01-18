@@ -167,7 +167,8 @@ class Alert extends Component<AlertProps, AlertState> {
   createScreenreaderAlert() {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
-      this.srid = uid('Alert')
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'srid' does not exist on type 'Alert'.
+      this.srid = hashInstance('Alert', this.props.instanceMap)
 
       const div = document.createElement('div')
       div.setAttribute('id', this.srid)

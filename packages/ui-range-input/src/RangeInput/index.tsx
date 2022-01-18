@@ -93,8 +93,8 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
       }
     }
 
-    //@ts-expect-error props.ssr
-    this.defaultId = hashInstance('RangeInput', this.props.ssr)
+    //@ts-expect-error props.instanceMap
+    this.defaultId = hashInstance('RangeInput', this.props.instanceMap)
   }
 
   /* workaround for https://github.com/facebook/react/issues/554 */

@@ -95,8 +95,8 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
       contentWidth: 0
     }
 
-    //@ts-expect-error props.ssr
-    this._id = hashInstance('DrawerLayout', this.props.ssr)
+    //@ts-expect-error props.instanceMap
+    this._id = hashInstance('DrawerLayout', this.props.instanceMap)
   }
 
   private readonly _id: string

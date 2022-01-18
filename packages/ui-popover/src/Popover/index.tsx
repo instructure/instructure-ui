@@ -114,8 +114,8 @@ class Popover extends Component<PopoverProps, PopoverState> {
           : undefined
     }
 
-    //@ts-expect-error props.ssr
-    this._id = this.props.id || hashInstance('Popover', this.props.ssr)
+    //@ts-expect-error props.instanceMap
+    this._id = this.props.id || hashInstance('Popover', this.props.instanceMap)
     this._raf = []
 
     this._handleMouseOver = handleMouseOverOut.bind(
