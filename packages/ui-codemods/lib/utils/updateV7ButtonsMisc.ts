@@ -51,23 +51,7 @@ export default function updateV7ButtonsMisc(
       }
     })
     .remove()
-  /*
-  const buttonsWithFluidWidth = findTag(j, root, importedName)
-    .filter((path) => {
-      if (path.value.attributes) {
-        for (const attr of path.value.attributes) {
-          if (
-            (attr as JSXAttribute).name &&
-            (attr as JSXAttribute).name.name === 'fluidWidth'
-          ) {
-            return true
-          }
-        }
-      }
-      return false
-    }
-  )
- */
+
   const buttonsWithFluidWidth = findOpeningTags(
     j,
     root,

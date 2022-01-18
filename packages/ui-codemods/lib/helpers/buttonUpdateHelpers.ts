@@ -39,7 +39,7 @@ import {
 import type { LiteralKind } from 'ast-types/gen/kinds'
 
 /**
- * Finds all the opening tag elements given in tagName.
+ * Finds all the opening tag elements (JSXOpeningElement) given in tagName.
  * You can supply optional withAttrName and withAttrValue props,
  * this will return only tags where these props exist.
  */
@@ -85,6 +85,15 @@ function findOpeningTags(
     })
 }
 
+/**
+ * Returns all attributes from the given collection with the given attribute
+ * name. Optionally you can supply attribute value(s), this will return only
+ * attributes where these exist.
+ * @param j
+ * @param root
+ * @param withAttrName
+ * @param withAttrValue
+ */
 function findAttribute(
   j: JSCodeshift,
   root: Collection,
@@ -215,7 +224,6 @@ function findImportPath(j: JSCodeshift, root: Collection, importPath: string) {
 /**
  * returns true for code like
  * "import { asd } from ..."
- * @param specifier
  */
 function isImportSpecifier(
   specifier: ImportSpecifier | ImportNamespaceSpecifier | ImportDefaultSpecifier

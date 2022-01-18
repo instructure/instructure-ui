@@ -40,7 +40,11 @@ import { addImport, findAttribute } from '../helpers/buttonUpdateHelpers'
  * - variant="circle-danger" -> <IconButton color="danger" shape="circle"
  * - variant="icon" -> <IconButton color="secondary" shape="circle"
  *
- * This codemod also adds an import to IconButton
+ * This codemod also adds an import to `IconButton`.
+ *
+ * It also outputs a warning and does not do anything if one of these variants
+ * has visible children (it simply checks whether it has 1
+ * `<ScreenReaderContent>` child.)
  **/
 export default function updateV7ButtonsIconCircle(
   j: JSCodeshift,
@@ -107,7 +111,9 @@ export default function updateV7ButtonsIconCircle(
           filePath +
           ' at line ' +
           path.value.loc?.start.line +
-          ' because it has visible child or has multiple children.'
+          ' because it has visible child or has multiple children. ' +
+          'This could be a false alert (the codemod just checks whether it has a ' +
+          'ScreenReaderContent child). You will need to update this manually.'
       )
       return false
     })
