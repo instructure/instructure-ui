@@ -141,10 +141,8 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
           size,
           checked:
             this.value.indexOf(
-              Number(
-                (child as React.ComponentElement<CheckboxProps, Checkbox>).props
-                  .value
-              )
+              (child as React.ComponentElement<CheckboxProps, Checkbox>).props
+                .value!
             ) > -1,
           onChange: this.handleChange,
           width:
