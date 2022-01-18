@@ -100,7 +100,7 @@ class Menu extends Component<MenuProps> {
     null
   _menu: HTMLUListElement | null = null
   //@ts-expect-error ssr
-  _labelId = hashInstance('Menu__label', this.props.ssr)
+  _labelId = hashInstance('Menu__label', this.props.instanceMap)
 
   _activeSubMenu?: Menu | null
   _id: string
@@ -119,7 +119,7 @@ class Menu extends Component<MenuProps> {
     super(props)
     //@ts-expect-error ssr
 
-    this._id = this.props.id || hashInstance('Menu', props.ssr)
+    this._id = this.props.id || hashInstance('Menu', props.instanceMap)
   }
   componentDidMount() {
     this.props.makeStyles?.()

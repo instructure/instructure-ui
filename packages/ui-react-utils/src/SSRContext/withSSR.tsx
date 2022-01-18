@@ -29,9 +29,9 @@ import { decorator } from '@instructure/ui-decorator'
 
 const withSSR = decorator((ComposedComponent: ComponentClass) => {
   const WithSSR = forwardRef((props: any, ref: any) => {
-    const ssrValueMap = useContext(SSRContext)
+    const instanceMap = useContext(SSRContext)
 
-    return <ComposedComponent ref={ref} {...props} ssr={ssrValueMap} />
+    return <ComposedComponent ref={ref} instanceMap={instanceMap} {...props} />
   })
 
   hoistNonReactStatics(WithSSR, ComposedComponent)

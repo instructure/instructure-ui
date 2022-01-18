@@ -77,7 +77,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
     }
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
-    this._messagesId = hashInstance('CheckboxGroup-messages', props.ssr)
+    this._messagesId = hashInstance('CheckboxGroup-messages', props.instanceMap)
   }
   private readonly _messagesId: string
   ref: Element | null = null

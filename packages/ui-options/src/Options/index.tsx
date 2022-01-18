@@ -94,8 +94,8 @@ class Options extends Component<OptionsProps> {
   componentDidUpdate() {
     this.props.makeStyles?.()
   }
-  //@ts-expect-error props.ssr
-  _labelId = hashInstance('Options-label', this.props.ssr)
+  //@ts-expect-error props.instanceMap
+  _labelId = hashInstance('Options-label', this.props.instanceMap)
 
   get childAs() {
     const { as } = this.props

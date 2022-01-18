@@ -78,10 +78,13 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   constructor(props: TextInputProps) {
     super(props)
     this.state = { hasFocus: false }
-    //@ts-expect-error props.ssr
-    this._defaultId = hashInstance('TextInput', this.props.ssr)
-    //@ts-expect-error props.ssr
-    this._messagesId = hashInstance('TextInput-messages', this.props.ssr)
+    //@ts-expect-error props.instanceMap
+    this._defaultId = hashInstance('TextInput', props.instanceMap)
+    this._messagesId = hashInstance(
+      'TextInput-messages',
+      //@ts-expect-error props.instanceMap
+      props.instanceMap
+    )
   }
 
   ref: Element | null = null

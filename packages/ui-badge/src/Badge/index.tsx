@@ -71,7 +71,7 @@ class Badge extends Component<BadgeProps> {
   constructor(props: BadgeProps) {
     super(props)
     //@ts-expect-error ssr prop
-    this._defaultId = hashInstance('Badge', props.ssr)
+    this._defaultId = hashInstance('Badge', props.instanceMap)
   }
 
   _defaultId: string

@@ -52,8 +52,8 @@ category: components
 ---
 @tsProps
 **/
-@withStyle(generateStyle, generateComponentTheme)
 @withSSR()
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Tooltip extends Component<TooltipProps, TooltipState> {
   static readonly componentId = 'Tooltip'
@@ -81,8 +81,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
   constructor(props: TooltipProps) {
     super(props)
 
-    //@ts-expect-error props.ssr
-    this._id = hashInstance('Tooltip', this.props.ssr)
+    //@ts-expect-error props.instanceMap
+    this._id = hashInstance('Tooltip', this.props.instanceMap)
 
     this.state = { hasFocus: false }
   }
@@ -148,7 +148,6 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
       onShowContent,
       onHideContent,
       styles,
-      ssr,
       ...rest
     } = this.props
 

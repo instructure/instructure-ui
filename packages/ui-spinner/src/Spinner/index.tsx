@@ -74,7 +74,7 @@ class Spinner extends Component<SpinnerProps> {
     super(props)
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'Spinner... Remove this comment to see the full error message
-    this.titleId = hashInstance('Spinner', this.props.ssr)
+    this.titleId = hashInstance('Spinner', this.props.instanceMap)
   }
 
   componentDidMount() {
