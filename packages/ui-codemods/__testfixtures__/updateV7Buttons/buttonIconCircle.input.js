@@ -12,8 +12,6 @@ let a = (
     <Button variant="icon-inverse">
       <p>text</p>
     </Button>
-    <Button variant="icon-inverse">
-      <ScreenReaderContent>abc</ScreenReaderContent>
-    </Button>
+    <Button variant="icon-inverse"><ScreenReaderContent>abc</ScreenReaderContent></Button>
   </p>
 )
