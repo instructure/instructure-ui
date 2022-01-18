@@ -35,9 +35,10 @@ import type { FormMessage } from '@instructure/ui-form-field'
 import type { PropValidators } from '@instructure/shared-types'
 
 import { Checkbox } from '../Checkbox'
+import type { CheckboxProps } from '../Checkbox/props'
 
 type CheckboxGroupOwnProps = {
-  children?: Checkbox[]
+  children?: React.ComponentElement<CheckboxProps, Checkbox>[]
   name: string
   description: React.ReactNode
   defaultValue?: (string | number)[]
