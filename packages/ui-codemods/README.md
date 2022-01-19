@@ -48,6 +48,7 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path>
 ### Updating Buttons to the InstUI v8 syntax
 
 Updates <Button> from the InstUI v7 syntax to the v8 syntax. This script contains the codemods referenced in https://instructure.design/v7/#button-upgrade-guide
+Please use JSCodeshift v0.13 or newer.
 
 ```sh
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Buttons.js <path>

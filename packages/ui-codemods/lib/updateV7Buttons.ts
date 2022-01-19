@@ -35,7 +35,7 @@ import UpdateV7ButtonsLink from './utils/UpdateV7ButtonsLink'
  * Updates <Button> from the InstUI v7 syntax to the v8 syntax.
  * This script contains the codemods referenced in
  * https://instructure.design/v7/#button-upgrade-guide
- * If can handle if the button and its attributes are defined in JSX; if the
+ * It can handle if the button and its attributes are defined in JSX; if the
  * Button is imported via an alias (`import {Button as BBB}`) is OK too.
  * It cannot handle if props are added via the spread operator or programmatically.
  * @param file Holds information about the currently processed file.
@@ -68,8 +68,9 @@ function updateButtons(j: JSCodeshift, root: Collection, filePath: string) {
   if (closeButtonImportName) {
     updateV7ButtonsClose(j, root, closeButtonImportName, filePath)
   }
+  // TODO could be a better modification check...
   if (buttonImportName || closeButtonImportName) {
-    return true
+    return formatSource(root.toSource(), filePath)
   }
-  return false // could be a better modification check...
+  return null
 }
