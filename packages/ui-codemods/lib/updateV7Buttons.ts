@@ -29,6 +29,7 @@ import updateV7ButtonsMisc from './utils/updateV7ButtonsMisc'
 import updateV7ButtonsWithText from './utils/updateV7ButtonsWithText'
 import updateV7ButtonsIconCircle from './utils/updateV7ButtonsIconCircle'
 import updateV7ButtonsClose from './utils/updateV7ButtonsClose'
+import UpdateV7ButtonsLink from './utils/UpdateV7ButtonsLink'
 
 /**
  * Updates <Button> from the InstUI v7 syntax to the v8 syntax.
@@ -50,24 +51,20 @@ export default function updateV7Buttons(file: FileInfo, api: API) {
 }
 
 function updateButtons(j: JSCodeshift, root: Collection, filePath: string) {
-  // TODO what if its imported from @instructure/ui?
-  const buttonImportName = findImport(
-    j,
-    root,
-    'Button',
-    '@instructure/ui-buttons'
-  )
+  const buttonImportName = findImport(j, root, 'Button', [
+    '@instructure/ui-buttons',
+    '@instructure/ui'
+  ])
   if (buttonImportName) {
     updateV7ButtonsMisc(j, root, buttonImportName)
     updateV7ButtonsWithText(j, root, buttonImportName)
     updateV7ButtonsIconCircle(j, root, buttonImportName, filePath)
+    UpdateV7ButtonsLink(j, root, buttonImportName, filePath)
   }
-  const closeButtonImportName = findImport(
-    j,
-    root,
-    'CloseButton',
-    '@instructure/ui-buttons'
-  )
+  const closeButtonImportName = findImport(j, root, 'CloseButton', [
+    '@instructure/ui-buttons',
+    '@instructure/ui'
+  ])
   if (closeButtonImportName) {
     updateV7ButtonsClose(j, root, closeButtonImportName, filePath)
   }

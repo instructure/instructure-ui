@@ -33,10 +33,43 @@ import {
   JSXElement,
   JSXExpressionContainer,
   JSXFragment,
+  JSXIdentifier,
   JSXSpreadAttribute,
   Literal
 } from 'jscodeshift'
 import type { LiteralKind } from 'ast-types/gen/kinds'
+
+/**
+ * Finds all the opening tag elements (JSXElement) given in tagName.
+ * You can supply optional withAttrName and withAttrValue props,
+ * this will return only tags where the given prop with the given
+ * value (or one in the array) exists.
+ */
+function findElements(
+  j: JSCodeshift,
+  root: Collection,
+  tagName: string,
+  withAttrName?: string,
+  withAttrValue?: string | string[]
+) {
+  return root
+    .find(j.JSXElement, {
+      openingElement: {
+        // finds all <tagName>
+        name: {
+          type: 'JSXIdentifier',
+          name: tagName
+        }
+      }
+    })
+    .filter((path) => {
+      return checkIfAttributeExist(
+        path.value.openingElement.attributes,
+        withAttrName,
+        withAttrValue
+      )
+    })
+}
 
 /**
  * Finds all the opening tag elements (JSXOpeningElement) given in tagName.
@@ -58,31 +91,52 @@ function findOpeningTags(
       }
     })
     .filter((path) => {
-      if (!withAttrName) {
+      return checkIfAttributeExist(
+        path.value.attributes,
+        withAttrName,
+        withAttrValue
+      )
+    })
+}
+
+type Attribute = {
+  name: string
+  value?: string | string[]
+}
+
+function checkIfAttributeExist(
+  attributes?: (JSXAttribute | JSXSpreadAttribute)[],
+  withAttrName?: string,
+  withAttrValue?: string | string[]
+) {
+  if (!withAttrName) {
+    // no attribute name is given, treat this as a match
+    return true
+  }
+  if (!attributes) {
+    // attribute name is given, but element has no attributes
+    return false
+  }
+  for (const attr of attributes) {
+    if (isJSXAttribue(attr) && attr.name.name === withAttrName) {
+      if (!withAttrValue) {
+        // attribute name matches, no values specified
         return true
       }
-      if (!path.value.attributes) {
-        return false
-      }
-      for (const attr of path.value.attributes) {
-        if (isJSXAttribue(attr) && attr.name.name === withAttrName) {
-          if (!withAttrValue) {
-            // attribute name matches, no values specified
+      if (isLiteral(attr.value) && attr.value.value) {
+        if (typeof withAttrValue === 'string') {
+          if (attr.value.value === withAttrValue) {
+            // name and value match
             return true
           }
-          if (isLiteral(attr.value) && attr.value.value) {
-            if (typeof withAttrValue === 'string') {
-              if (attr.value.value === withAttrValue) {
-                return true
-              }
-            } else if (withAttrValue.includes(attr.value.value as string)) {
-              return true
-            }
-          }
+        } else if (withAttrValue.includes(attr.value.value as string)) {
+          // name and one of the values match
+          return true
         }
       }
-      return false
-    })
+    }
+  }
+  return false
 }
 
 /**
@@ -135,14 +189,14 @@ function findAttribute(
  * @param j the JSCodeshift API
  * @param root the collection to check
  * @param name imported name, e.g. Button
- * @param path import path, or part of the path, e.g. @instructure/ui-buttons.
+ * @param path import path, or paths, e.g. @instructure/ui-buttons.
  * @return the name its imported as, undefined if it's not imported
  */
 function findImport(
   j: JSCodeshift,
   root: Collection,
   name: string,
-  path: string
+  path: string | string[]
 ) {
   let importedName: string | undefined
   const importPaths = findImportPath(j, root, path)
@@ -200,10 +254,36 @@ function addImport(
 }
 
 /**
+ * Renames every element (=JSX tag). Modifies the input collection
+ */
+function renameElements(
+  root: Collection<JSXElement>,
+  currentName: string,
+  newName: string
+) {
+  root.forEach((node) => {
+    const openingElement = node.node.openingElement.name as JSXIdentifier
+    if (openingElement.name === currentName) {
+      openingElement.name = newName
+      const closingElement = node.node.closingElement?.name as
+        | JSXIdentifier
+        | undefined
+      if (closingElement) {
+        closingElement.name = newName
+      }
+    }
+  })
+}
+
+/**
  * Finds all lines that import from importPath, e.g.
  * `import {Button} from "@instructure/ui"
  */
-function findImportPath(j: JSCodeshift, root: Collection, importPath: string) {
+function findImportPath(
+  j: JSCodeshift,
+  root: Collection,
+  importPath: string | string[]
+) {
   return (
     root
       .find(j.ImportDeclaration)
@@ -211,9 +291,16 @@ function findImportPath(j: JSCodeshift, root: Collection, importPath: string) {
       .filter((astPath) => {
         const importSource = astPath.node.source.value // e.g. "@instructure/ui"
         if (importSource && typeof importSource === 'string') {
-          const match = importSource.indexOf(importPath) > -1
-          if (match) {
-            return true
+          if (typeof importPath === 'string') {
+            if (importSource.indexOf(importPath) > -1) {
+              return true
+            }
+          } else {
+            for (const anImport of importPath) {
+              if (importSource.indexOf(anImport) > -1) {
+                return true
+              }
+            }
           }
         }
         return false
@@ -254,4 +341,12 @@ function isLiteral(
   )
 }
 
-export { findAttribute, findImport, findOpeningTags, addImport }
+export {
+  findElements,
+  findAttribute,
+  findImport,
+  findOpeningTags,
+  addImport,
+  renameElements,
+  isJSXAttribue
+}

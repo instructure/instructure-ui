@@ -30,7 +30,12 @@ import {
   JSXIdentifier,
   Literal
 } from 'jscodeshift'
-import { addImport, findAttribute } from '../helpers/buttonUpdateHelpers'
+import {
+  addImport,
+  findAttribute,
+  findElements,
+  renameElements
+} from '../helpers/buttonUpdateHelpers'
 
 /**
  * Does the following updates on a <Button>:
@@ -54,69 +59,38 @@ export default function updateV7ButtonsIconCircle(
 ) {
   // find out if the button has got any visible text inside it, in this case
   // just display a warning, that it cannot be upgraded.
-  const buttonsWithNoText = root
-    .find(j.JSXElement, {
-      openingElement: {
-        // finds all <Button
-        name: {
-          type: 'JSXIdentifier',
-          name: importedName
-        }
-      }
-    })
-    .filter((path) => {
-      // selects icon or circle variants
-      const attribArr = path.value.openingElement.attributes
-      if (!attribArr) {
-        return false
-      }
-      for (const attr of attribArr) {
-        const jsxAttr = attr as JSXAttribute
-        const attrName = jsxAttr.name ? jsxAttr.name.name : undefined
-        const attrValue = jsxAttr.value
-          ? (jsxAttr.value as Literal).value
-          : undefined
-        if (
-          attrName === 'variant' &&
-          [
-            'icon',
-            'icon-inverse',
-            'circle-default',
-            'circle-primary',
-            'circle-danger'
-          ].includes(attrValue as string)
-        ) {
-          return true
-        }
-      }
-      return false
-    })
-    .filter((path) => {
-      // finds all with no/ScreenReader children
-      if (!path.value.children || path.value.children.length == 0) {
+  const buttonsWithNoText = findElements(j, root, importedName, 'variant', [
+    'icon',
+    'icon-inverse',
+    'circle-default',
+    'circle-primary',
+    'circle-danger'
+  ]).filter((path) => {
+    // finds all with no/ScreenReader children
+    if (!path.value.children || path.value.children.length == 0) {
+      return true
+    }
+    if (path.value.children.length == 1) {
+      const theChild = path.value.children[0]
+      if (
+        isJSXElement(theChild) &&
+        (theChild.openingElement.name as JSXIdentifier).name ===
+          'ScreenReaderContent'
+      ) {
         return true
       }
-      if (path.value.children.length == 1) {
-        const theChild = path.value.children[0]
-        if (
-          isJSXElement(theChild) &&
-          (theChild.openingElement.name as JSXIdentifier).name ===
-            'ScreenReaderContent'
-        ) {
-          return true
-        }
-      }
-      console.warn(
-        'Cannot update icon/circle Button in ' +
-          filePath +
-          ' at line ' +
-          path.value.loc?.start.line +
-          ' because it has visible child or has multiple children. ' +
-          'This could be a false alert (the codemod just checks whether it has a ' +
-          'ScreenReaderContent child). You will need to update this manually.'
-      )
-      return false
-    })
+    }
+    console.warn(
+      'Cannot update icon/circle Button in ' +
+        filePath +
+        ' at line ' +
+        path.value.loc?.start.line +
+        ' because it has visible child or has multiple children. ' +
+        'This could be a false alert (the codemod just checks whether it has a ' +
+        'ScreenReaderContent child). You will need to update this manually.'
+    )
+    return false
+  })
 
   if (buttonsWithNoText.length == 0) {
     return
@@ -124,14 +98,8 @@ export default function updateV7ButtonsIconCircle(
   // add IconButton import
   addImport(j, root, '@instructure/ui-buttons', 'IconButton')
 
-  // rename every <Button to <IconButton
-  buttonsWithNoText.forEach((node) => {
-    const val = node.node
-    ;(val.openingElement.name as JSXIdentifier).name = 'IconButton'
-    if (val.closingElement) {
-      ;(val.closingElement.name as JSXIdentifier).name = 'IconButton'
-    }
-  })
+  // rename every <Button> to <IconButton>
+  renameElements(buttonsWithNoText, 'Button', 'IconButton')
 
   // remove variant="icon", add withBorder={false} withBackground={false}
   const iconButton = findAttribute(
@@ -193,7 +161,10 @@ export default function updateV7ButtonsIconCircle(
     )
 }
 
-function addWithBorderBackground(j: JSCodeshift, root: Collection) {
+function addWithBorderBackground(
+  j: JSCodeshift,
+  root: Collection<JSXAttribute>
+) {
   root
     .insertAfter(
       j.jsxAttribute(
