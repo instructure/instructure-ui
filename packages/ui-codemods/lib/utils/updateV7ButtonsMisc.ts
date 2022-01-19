@@ -28,7 +28,7 @@ import { Collection, JSCodeshift } from 'jscodeshift'
 /**
  * Does the following updates on a <Button>:
  * - `buttonRef` -> `elementRef`
- * - `fluidWidth` -> removed and `display="block"`, `textAlign="start"` added
+ * - `fluidWidth` -> removed and `display="block" textAlign="start"` added
  *   (overwrites any existing `display` and `textAlign` props)
  * - `icon` -> `renderIcon`
  */

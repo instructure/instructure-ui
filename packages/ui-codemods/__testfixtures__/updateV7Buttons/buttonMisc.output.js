@@ -1,13 +1,11 @@
 /* eslint-disable */
-import { Button as BBB } from '@instructure/ui-buttons'
-import { Button } from 'somewhere/else'
+import { Button } from '@instructure/ui-buttons'
 
 let btn
-btn = <BBB elementRef={() => {}} />
-btn = <BBB />
-btn = <BBB />
-btn = <BBB display="block" textAlign="start" />
-btn = <BBB display="block" textAlign="start" />
-btn = <BBB display="block" textAlign="start" />
-btn = <BBB renderIcon={SomeIcon} />
-btn = <Button fluidWidth={false} />
+btn = <Button />
+btn = <Button elementRef={() => {}} />
+btn = <Button />
+btn = <Button display="block" textAlign="start" />
+btn = <Button display="block" textAlign="start" />
+btn = <Button display="block" textAlign="start" />
+btn = <Button renderIcon={SomeIcon} />
