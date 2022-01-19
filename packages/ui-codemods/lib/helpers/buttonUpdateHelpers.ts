@@ -41,16 +41,15 @@ import type { LiteralKind } from 'ast-types/gen/kinds'
 
 /**
  * Finds all the opening tag elements (JSXElement) given in tagName.
- * You can supply optional withAttrName and withAttrValue props,
+ * You can supply an optional withAttributes argument,
  * this will return only tags where the given prop with the given
- * value (or one in the array) exists.
+ * values (or one in the array) exists (everything needs to exist).
  */
 function findElements(
   j: JSCodeshift,
   root: Collection,
   tagName: string,
-  withAttrName?: string,
-  withAttrValue?: string | string[]
+  withAttributes?: Attribute | Attribute[]
 ) {
   return root
     .find(j.JSXElement, {
@@ -65,8 +64,7 @@ function findElements(
     .filter((path) => {
       return checkIfAttributeExist(
         path.value.openingElement.attributes,
-        withAttrName,
-        withAttrValue
+        withAttributes
       )
     })
 }
@@ -80,8 +78,7 @@ function findOpeningTags(
   j: JSCodeshift,
   root: Collection,
   tagName: string,
-  withAttrName?: string,
-  withAttrValue?: string | string[]
+  withAttributes?: Attribute | Attribute[]
 ) {
   return root
     .find(j.JSXOpeningElement, {
@@ -91,11 +88,7 @@ function findOpeningTags(
       }
     })
     .filter((path) => {
-      return checkIfAttributeExist(
-        path.value.attributes,
-        withAttrName,
-        withAttrValue
-      )
+      return checkIfAttributeExist(path.value.attributes, withAttributes)
     })
 }
 
@@ -106,10 +99,12 @@ type Attribute = {
 
 function checkIfAttributeExist(
   attributes?: (JSXAttribute | JSXSpreadAttribute)[],
-  withAttrName?: string,
-  withAttrValue?: string | string[]
+  withAttributes?: Attribute | Attribute[] // if array has to match all
 ) {
-  if (!withAttrName) {
+  if (
+    !withAttributes ||
+    (Array.isArray(withAttributes) && withAttributes.length === 0)
+  ) {
     // no attribute name is given, treat this as a match
     return true
   }
@@ -117,24 +112,32 @@ function checkIfAttributeExist(
     // attribute name is given, but element has no attributes
     return false
   }
+  const attribsToFind = Array.isArray(withAttributes)
+    ? withAttributes
+    : [withAttributes]
+  let numMatches = 0
   for (const attr of attributes) {
-    if (isJSXAttribue(attr) && attr.name.name === withAttrName) {
-      if (!withAttrValue) {
-        // attribute name matches, no values specified
-        return true
-      }
-      if (isLiteral(attr.value) && attr.value.value) {
-        if (typeof withAttrValue === 'string') {
-          if (attr.value.value === withAttrValue) {
-            // name and value match
-            return true
+    for (const toFind of attribsToFind) {
+      if (isJSXAttribue(attr) && attr.name.name === toFind.name) {
+        if (!toFind.value) {
+          // attribute name matches, no values specified
+          numMatches++
+        } else if (isLiteral(attr.value) && attr.value.value) {
+          if (typeof toFind.value === 'string') {
+            if (attr.value.value === toFind.value) {
+              // name and value match
+              numMatches++
+            }
+          } else if (toFind.value.includes(attr.value.value as string)) {
+            // name and one of the values match
+            numMatches++
           }
-        } else if (withAttrValue.includes(attr.value.value as string)) {
-          // name and one of the values match
-          return true
         }
       }
     }
+  }
+  if (numMatches === attribsToFind.length) {
+    return true
   }
   return false
 }
@@ -143,10 +146,6 @@ function checkIfAttributeExist(
  * Returns all attributes from the given collection with the given attribute
  * name. Optionally you can supply attribute value(s), this will return only
  * attributes where these exist.
- * @param j
- * @param root
- * @param withAttrName
- * @param withAttrValue
  */
 function findAttribute(
   j: JSCodeshift,
@@ -162,20 +161,25 @@ function findAttribute(
     })
     .filter((path) => {
       if (!withAttrName) {
+        // no attribute name given, return every result
         return true
+      }
+      if (!withAttrValue) {
+        // no value(s) given, just check name match
+        if (withAttrName == path.value.name.name) {
+          return true
+        }
+        return false
       }
       const currentAttrValue = path.value.value
         ? (path.value.value as Literal).value
         : undefined
       if (typeof withAttrValue === 'string') {
         if (currentAttrValue === withAttrValue) {
+          // single value to search for
           return true
         }
-      } else if (
-        withAttrName &&
-        typeof currentAttrValue === 'string' &&
-        withAttrName.includes(currentAttrValue)
-      ) {
+      } else if (withAttrName.includes(currentAttrValue as string)) {
         return true
       }
       return false

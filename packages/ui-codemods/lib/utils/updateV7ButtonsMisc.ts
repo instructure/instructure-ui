@@ -52,12 +52,9 @@ export default function updateV7ButtonsMisc(
     })
     .remove()
 
-  const buttonsWithFluidWidth = findOpeningTags(
-    j,
-    root,
-    importedName,
-    'fluidWidth'
-  )
+  const buttonsWithFluidWidth = findOpeningTags(j, root, importedName, {
+    name: 'fluidWidth'
+  })
   // remove fluidWidth attribute
   buttonsWithFluidWidth
     .find(j.JSXAttribute, {

@@ -28,7 +28,7 @@ import {
   isJSXAttribue,
   renameElements
 } from '../helpers/buttonUpdateHelpers'
-import { Collection, JSCodeshift, JSXAttribute, Literal } from 'jscodeshift'
+import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 
 /**
  * Does the following updates on a <Button>:
@@ -47,41 +47,70 @@ export default function UpdateV7ButtonsLink(
   filePath: string
 ) {
   ///// variant=link or variant=link-inverse and no href attribute
-  /*
-  findElements(j, root, importedName,
-    'variant',['link', 'link-inverse'])
-    .forEach((path => {
-      const attributes = path.value.openingElement.attributes
-      if (!attributes) {
-        displayNoHrefWarning(filePath, path.value.loc!.start.line)
+  findElements(j, root, importedName, {
+    name: 'variant',
+    value: ['link', 'link-inverse']
+  }).forEach((path) => {
+    const attributes = path.value.openingElement.attributes
+    if (!attributes) {
+      displayNoHrefWarning(filePath, path.value.loc!.start.line)
+      return
+    }
+    for (const attr of attributes) {
+      if (isJSXAttribue(attr) && attr.name.name === 'href') {
         return
       }
-      for (const attr of attributes) {
-        if (isJSXAttribue(attr) && attr.name.name === 'href') {
-          return
-        }
-      }
-      displayNoHrefWarning(filePath, path.value.loc!.start.line)
-  }))
-*/
-  ///// variant=link and href attribute -> remove variant, add isWithinText
-  const linkVariants = findElements(j, root, importedName, 'variant', 'link')
+    }
+    displayNoHrefWarning(filePath, path.value.loc!.start.line)
+  })
+
+  ///// <Button variant="link" href= ->
+  ///// <Link href= isWithinText={false}
+  const linkVariants = findElements(j, root, importedName, [
+    { name: 'variant', value: 'link' },
+    { name: 'href' }
+  ])
   findAttribute(j, linkVariants, 'href').insertAfter(
     j.jsxAttribute(
       j.jsxIdentifier('isWithinText'),
       j.jsxExpressionContainer(j.jsxIdentifier('false'))
     )
   )
-  //renameElements(linkWithHref, "Button", "Link")
+  findAttribute(j, linkVariants, 'variant').remove()
+  renameElements(linkVariants, importedName, 'Link')
+
+  ///// <Button variant="link-inverse" href= ->
+  ///// <Link color="link-inverse" href= isWithinText={false}
+  const linkInverseVariants = findElements(j, root, importedName, [
+    { name: 'variant', value: 'link-inverse' },
+    { name: 'href' }
+  ])
+  findAttribute(j, linkInverseVariants, 'href').insertAfter(
+    j.jsxAttribute(
+      j.jsxIdentifier('isWithinText'),
+      j.jsxExpressionContainer(j.jsxIdentifier('false'))
+    )
+  )
+  findAttribute(j, linkInverseVariants, 'variant').replaceWith((nodePath) => {
+    const { node } = nodePath
+    node.name.name = 'color'
+    ;(node.value as Literal).value = 'link-inverse'
+    return nodePath.node
+  })
+  renameElements(linkInverseVariants, importedName, 'Link')
+
+  if (linkVariants.length > 0 || linkInverseVariants.length > 0) {
+    // TODO import Link
+  }
 }
 
 function displayNoHrefWarning(filePath: string, lineNumber: number) {
   console.warn(
-    'Cannot upgrade <Button variant="link" manually at' +
+    'Cannot upgrade <Button variant="link" manually at ' +
       filePath +
       ' line ' +
       lineNumber +
-      'for manual upgrade' +
+      ' for manual upgrade' +
       ' see https://instructure.design/v7/#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-no-href-attribute-and-padding-overrides'
   )
 }
