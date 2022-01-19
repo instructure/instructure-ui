@@ -41,6 +41,7 @@ module.exports = function (resourcePath, source, errorHandler) {
       doc = getJSDoc(source, errorHandler)
     }
   } else {
+    // never gets here!
     doc = getCodeDoc(source, errorHandler)
   }
 

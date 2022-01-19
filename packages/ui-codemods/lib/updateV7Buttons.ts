@@ -56,7 +56,7 @@ function updateButtons(j: JSCodeshift, root: Collection, filePath: string) {
     '@instructure/ui'
   ])
   if (buttonImportName) {
-    updateV7ButtonsMisc(j, root, buttonImportName)
+    updateV7ButtonsMisc(j, root, buttonImportName, filePath)
     updateV7ButtonsWithText(j, root, buttonImportName)
     updateV7ButtonsIconCircle(j, root, buttonImportName, filePath)
     UpdateV7ButtonsLink(j, root, buttonImportName, filePath)
