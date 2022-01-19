@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component, Children, ReactElement } from 'react'
+import { Component, Children } from 'react'
 
 import {
   matchComponentTypes,
@@ -44,9 +44,17 @@ import { Row } from './Row'
 import { ColHeader } from './ColHeader'
 import { RowHeader } from './RowHeader'
 import { Cell } from './Cell'
-import type { TableProps } from './props'
-import type { TableHeadProps } from './Head/props'
-import type { TableRowProps } from './Row/props'
+
+import type {
+  TableProps,
+  HeadChild,
+  BodyChild,
+  RowChild,
+  ColHeaderChild,
+  RowHeaderChild,
+  CellChild
+} from './props'
+
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -97,31 +105,29 @@ class Table extends Component<TableProps> {
 
   getHeaders() {
     const { children } = this.props
-    const [head] = Children.toArray(children) as React.ComponentElement<
-      TableHeadProps,
-      Head
-    >[]
+    const [head] = Children.toArray(children) as HeadChild[]
 
-    if (matchComponentTypes(head, [Head])) {
-      const [row] = Children.toArray(
-        head.props.children
-      ) as React.ComponentElement<TableRowProps, Row>[]
+    if (matchComponentTypes<HeadChild>(head, [Head])) {
+      const [row] = Children.toArray(head.props.children)
 
-      if (matchComponentTypes(row, [Row])) {
-        return Children.map(row.props.children, (colHeader) => {
-          return matchComponentTypes(colHeader, [ColHeader])
-            ? (colHeader as ColHeader).props.children
-            : null
-        })
+      if (matchComponentTypes<RowChild>(row, [Row])) {
+        return Children.map(
+          row.props.children as (ColHeaderChild | RowHeaderChild | CellChild)[],
+          (colHeader) => {
+            return matchComponentTypes<ColHeaderChild>(colHeader, [ColHeader])
+              ? colHeader.props.children
+              : undefined
+          }
+        )
       }
     }
-    return null
+    return undefined
   }
 
   render() {
     const { margin, layout, caption, children, hover, styles } = this.props
     const isStacked = layout === 'stacked'
-    const headers = isStacked ? this.getHeaders() : null
+    const headers = isStacked ? this.getHeaders() : undefined
 
     return (
       <View
@@ -142,15 +148,17 @@ class Table extends Component<TableProps> {
           </caption>
         )}
         {Children.map(children, (child) => {
-          if (matchComponentTypes(child, [Head])) {
-            return safeCloneElement(child as ReactElement, {
-              key: (child as Head).props.name,
+          if (matchComponentTypes<HeadChild>(child, [Head])) {
+            return safeCloneElement(child, {
+              // @ts-expect-error TODO: fix key
+              key: child.props.name,
               isStacked
             })
           }
-          if (matchComponentTypes(child, [Body])) {
-            return safeCloneElement(child as ReactElement, {
-              key: (child as Body).props.name,
+          if (matchComponentTypes<BodyChild>(child, [Body])) {
+            return safeCloneElement(child, {
+              // @ts-expect-error TODO: fix key
+              key: child.props.name,
               isStacked,
               hover,
               headers

@@ -35,10 +35,13 @@ import {
 import { testable } from '@instructure/ui-testable'
 
 import { Checkbox } from '../Checkbox'
-import type { CheckboxProps } from '../Checkbox/props'
 
 import { propTypes, allowedProps } from './props'
-import type { CheckboxGroupProps, CheckboxGroupState } from './props'
+import type {
+  CheckboxGroupProps,
+  CheckboxGroupState,
+  CheckboxChild
+} from './props'
 
 /**
 ---
@@ -46,7 +49,6 @@ category: components
 ---
 @tsProps
 **/
-
 @testable()
 class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
   static readonly componentId = 'CheckboxGroup'
@@ -116,31 +118,17 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
     const { children, name, size, disabled, readOnly } = this.props
 
     return Children.map(children, (child) => {
-      if (matchComponentTypes(child, [Checkbox])) {
-        return safeCloneElement(child as React.ReactElement, {
-          key: `${
-            (child as React.ComponentElement<CheckboxProps, Checkbox>).props
-              .name
-          }`,
+      if (matchComponentTypes<CheckboxChild>(child, [Checkbox])) {
+        return safeCloneElement(child, {
+          // @ts-expect-error TODO: key
+          key: `${child.props.name}`,
           name,
-          disabled:
-            disabled ||
-            (child as React.ComponentElement<CheckboxProps, Checkbox>).props
-              .disabled,
-          readOnly:
-            readOnly ||
-            (child as React.ComponentElement<CheckboxProps, Checkbox>).props
-              .readOnly,
+          disabled: disabled || child.props.disabled,
+          readOnly: readOnly || child.props.readOnly,
           size,
-          checked:
-            this.value.indexOf(
-              (child as React.ComponentElement<CheckboxProps, Checkbox>).props
-                .value!
-            ) > -1,
+          checked: this.value.indexOf(child.props.value!) > -1,
           onChange: this.handleChange,
-          width:
-            (child as React.ComponentElement<CheckboxProps, Checkbox>).props
-              .width || 'auto',
+          width: child.props.width || 'auto',
           'aria-describedby': this.hasMessages ? this._messagesId : undefined
         })
       } else {

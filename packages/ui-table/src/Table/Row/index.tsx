@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children, ReactElement } from 'react'
+import { Component, Children } from 'react'
 
 import {
   omitProps,
@@ -41,6 +41,7 @@ import { ColHeader } from '../ColHeader'
 import { RowHeader } from '../RowHeader'
 import { Cell } from '../Cell'
 import type { TableRowProps } from './props'
+import type { ColHeaderChild, RowHeaderChild, CellChild } from '../props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -79,21 +80,29 @@ class Row extends Component<TableRowProps> {
         css={styles?.row}
         role={isStacked ? 'row' : undefined}
       >
-        {Children.toArray(children)
+        {(
+          Children.toArray(children) as (
+            | ColHeaderChild
+            | RowHeaderChild
+            | CellChild
+          )[]
+        )
           .filter(Boolean)
           .map((child, index) => {
-            if (matchComponentTypes(child, [ColHeader])) {
+            if (matchComponentTypes<ColHeaderChild>(child, [ColHeader])) {
               return child
             }
-            if (matchComponentTypes(child, [RowHeader])) {
-              return safeCloneElement(child as ReactElement, {
-                key: (child as RowHeader).props.name,
+            if (matchComponentTypes<RowHeaderChild>(child, [RowHeader])) {
+              return safeCloneElement(child, {
+                // @ts-expect-error TODO: fix key
+                key: child.props.name,
                 isStacked
               })
             }
-            if (matchComponentTypes(child, [Cell])) {
-              return safeCloneElement(child as ReactElement, {
-                key: (child as Cell).props.name,
+            if (matchComponentTypes<CellChild>(child, [Cell])) {
+              return safeCloneElement(child, {
+                // @ts-expect-error ts-migrate(2339) TODO: fix key
+                key: child.props.name,
                 isStacked,
                 header: headers && headers[index]
               })

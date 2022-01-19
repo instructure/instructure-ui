@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children, ReactElement } from 'react'
+import { Component, Children } from 'react'
 
 import {
   matchComponentTypes,
@@ -37,7 +37,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { Row } from '../Row'
 import type { TableBodyProps } from './props'
-import type { TableRowProps } from '../Row/props'
+import type { RowChild } from '../props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -76,17 +76,16 @@ class Body extends Component<TableBodyProps> {
         css={styles?.body}
         role={isStacked ? 'rowgroup' : undefined}
       >
-        {Children.map(
-          children as React.ComponentElement<TableRowProps, Row>[],
-          (child) =>
-            matchComponentTypes(child, [Row])
-              ? safeCloneElement(child as ReactElement, {
-                  key: child.props.name,
-                  hover,
-                  isStacked,
-                  headers
-                })
-              : null
+        {Children.map(children as RowChild[], (child) =>
+          matchComponentTypes(child, [Row])
+            ? safeCloneElement(child, {
+                // @ts-expect-error ts-migrate(2533) TODO: fix key
+                key: child.props.name,
+                hover,
+                isStacked,
+                headers
+              })
+            : null
         )}
       </View>
     )

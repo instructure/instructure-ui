@@ -29,9 +29,12 @@ import {
   matchComponentTypes,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { CloseButton } from '@instructure/ui-buttons'
 import { testable } from '@instructure/ui-testable'
+
 import { withStyle, jsx } from '@instructure/emotion'
+
+import { CloseButton } from '@instructure/ui-buttons'
+import type { CloseButtonProps } from '@instructure/ui-buttons'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -85,7 +88,12 @@ class ModalHeader extends Component<ModalHeaderProps> {
     let hasCloseButton = false
 
     React.Children.forEach(this.props.children, (child) => {
-      if (child && matchComponentTypes(child, [CloseButton])) {
+      if (
+        child &&
+        matchComponentTypes<
+          React.ComponentElement<CloseButtonProps, CloseButton>
+        >(child, [CloseButton])
+      ) {
         hasCloseButton = true
       }
     })

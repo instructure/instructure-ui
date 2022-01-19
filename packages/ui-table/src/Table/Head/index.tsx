@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component, Children } from 'react'
+import { Component, Children } from 'react'
 
 import {
   omitProps,
@@ -45,7 +45,7 @@ import { Row } from '../Row'
 import { ColHeader } from '../ColHeader'
 import type { TableColHeaderProps } from '../ColHeader/props'
 import type { TableHeadProps } from './props'
-import type { TableRowProps } from '../Row/props'
+import type { ColHeaderChild, RowChild } from '../props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -67,19 +67,14 @@ class Head extends Component<TableHeadProps> {
   }
 
   get isSortable() {
-    const [row] = Children.toArray(
-      this.props.children
-    ) as React.ComponentElement<TableRowProps, Row>[]
+    const [row] = Children.toArray(this.props.children) as RowChild[]
     let sortable = false
 
     if (row) {
       Children.forEach(
-        row.props.children as React.ComponentElement<
-          TableColHeaderProps,
-          ColHeader
-        >[],
+        row.props.children as ColHeaderChild[],
         (colHeader) => {
-          if (matchComponentTypes(colHeader, [ColHeader])) {
+          if (matchComponentTypes<ColHeaderChild>(colHeader, [ColHeader])) {
             if (colHeader.props.onRequestSort) sortable = true
           }
         }
@@ -105,12 +100,9 @@ class Head extends Component<TableHeadProps> {
 
   renderSelect() {
     const { children, renderSortLabel } = this.props
-    const [row] = Children.toArray(children) as React.ComponentElement<
-      TableRowProps,
-      Row
-    >[]
+    const [row] = Children.toArray(children) as RowChild[]
 
-    if (!matchComponentTypes(row, [Row])) {
+    if (!matchComponentTypes<RowChild>(row, [Row])) {
       return null
     }
     const options: {
@@ -128,9 +120,9 @@ class Head extends Component<TableHeadProps> {
 
     Children.forEach(row.props.children, (colHeader) => {
       count += 1
-      if (matchComponentTypes(colHeader, [ColHeader])) {
+      if (matchComponentTypes<ColHeaderChild>(colHeader, [ColHeader])) {
         const { id, stackedSortByLabel, sortDirection, onRequestSort } = (
-          colHeader as ColHeader
+          colHeader
         ).props
 
         const label = stackedSortByLabel || id
@@ -197,7 +189,7 @@ class Head extends Component<TableHeadProps> {
     ) : (
       <thead {...omitProps(this.props, Head.allowedProps)} css={styles?.head}>
         {Children.map(children, (child) =>
-          matchComponentTypes(child, [Row]) ? child : null
+          matchComponentTypes<RowChild>(child, [Row]) ? child : null
         )}
       </thead>
     )

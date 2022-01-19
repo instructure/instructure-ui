@@ -30,7 +30,6 @@ import {
   controllable,
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
-import type { Menu } from './index'
 
 import type {
   PropValidators,
@@ -43,8 +42,11 @@ import type {
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
-import type { OnMenuItemSelect } from './MenuItem/props'
 import type { Popover } from '@instructure/ui-popover'
+
+import { MenuItem } from './MenuItem'
+import type { Menu } from './index'
+import type { MenuItemProps } from './MenuItem/props'
 
 type MenuOwnProps = {
   /**
@@ -83,7 +85,12 @@ type MenuOwnProps = {
   /**
    * Callback fired when an item within the `<Menu />` is selected
    */
-  onSelect?: OnMenuItemSelect
+  onSelect?: (
+    e: React.MouseEvent,
+    value: MenuItemProps['value'] | MenuItemProps['value'][],
+    selected: MenuItemProps['selected'],
+    args: MenuItem
+  ) => void
   /**
    * If a trigger is supplied, callback fired when the `<Menu />` is closed
    */
@@ -161,7 +168,10 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MenuProps = MenuOwnProps &
   WithStyleProps<MenuTheme, MenuStyle> &
-  OtherHTMLAttributes<MenuOwnProps>
+  // controls can be passed in renderChildren and used later as aria-controls
+  Omit<OtherHTMLAttributes<MenuOwnProps>, 'controls'> & {
+    controls?: React.AriaAttributes['aria-controls']
+  }
 
 type MenuStyle = ComponentStyle<'menu'>
 

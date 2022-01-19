@@ -23,31 +23,41 @@
  */
 
 /** @jsx jsx */
-import { Children, Component, ReactElement } from 'react'
+import React, { Children, Component } from 'react'
 
-import { Dialog } from '@instructure/ui-dialog'
 import {
   passthroughProps,
   safeCloneElement,
   matchComponentTypes
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
+import { testable } from '@instructure/ui-testable'
+
 import { Transition } from '@instructure/ui-motion'
 import type { TransitionType } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
-import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
+import { Dialog } from '@instructure/ui-dialog'
 import { Mask } from '@instructure/ui-overlays'
+
 import { ModalHeader } from './ModalHeader'
+import type { ModalHeaderProps } from './ModalHeader/props'
 import { ModalBody } from './ModalBody'
+import type { ModalBodyProps } from './ModalBody/props'
 import { ModalFooter } from './ModalFooter'
+import type { ModalFooterProps } from './ModalFooter/props'
+
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
 import type { ModalProps } from './props'
+
+type HeaderChild = React.ComponentElement<ModalHeaderProps, ModalHeader>
+type BodyChild = React.ComponentElement<ModalBodyProps, ModalBody>
+type FooterChild = React.ComponentElement<ModalFooterProps, ModalFooter>
 
 /**
 ---
@@ -172,21 +182,23 @@ class Modal extends Component<ModalProps> {
   renderChildren() {
     const { children, variant, overflow } = this.props
 
-    return Children.map(children, (child) => {
-      if (!child) return // ignore null, falsy children
+    return Children.map(
+      children as (HeaderChild | BodyChild | FooterChild)[],
+      (child) => {
+        if (!child) return // ignore null, falsy children
 
-      if (matchComponentTypes(child, [ModalBody])) {
-        return safeCloneElement(child as ReactElement, {
-          variant: variant,
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-          overflow: child.props.overflow || overflow
-        })
-      } else {
-        return safeCloneElement(child as ReactElement, {
-          variant: variant
-        })
+        if (matchComponentTypes<BodyChild>(child, [ModalBody])) {
+          return safeCloneElement(child, {
+            variant: variant,
+            overflow: child.props.overflow || overflow
+          })
+        } else {
+          return safeCloneElement(child, {
+            variant: variant
+          } as Partial<ModalFooterProps> | Partial<ModalHeaderProps>)
+        }
       }
-    })
+    )
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.

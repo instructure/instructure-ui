@@ -65,7 +65,7 @@ import type { TabsTabProps } from './Tab/props'
 import type { TabsPanelProps } from './Panel/props'
 
 type TabChild = ComponentElement<TabsTabProps, any>
-type PanelChild = ComponentElement<TabsPanelProps, any>
+type PanelChild = ComponentElement<TabsPanelProps, Panel>
 
 /**
 ---
@@ -303,7 +303,7 @@ class Tabs extends Component<TabsProps, TabsState> {
     step: -1 | 0 | 1
   ): { index: number; id?: string } {
     const tabs = React.Children.toArray(this.props.children).map(
-      (child) => matchComponentTypes(child, [Panel]) && child
+      (child) => matchComponentTypes<PanelChild>(child, [Panel]) && child
     ) as PanelChild[]
     const count = tabs.length
     const change = step < 0 ? step + count : step
@@ -419,14 +419,14 @@ class Tabs extends Component<TabsProps, TabsState> {
     const selectedChildIndex = (
       React.Children.toArray(children) as PanelChild[]
     )
-      .filter((child) => matchComponentTypes(child, [Panel]))
+      .filter((child) => matchComponentTypes<PanelChild>(child, [Panel]))
       .findIndex((child) => child.props.isSelected && !child.props.isDisabled)
 
     let index = 0
     const selectedIndex = selectedChildIndex >= 0 ? selectedChildIndex : 0
 
     React.Children.forEach(children as PanelChild[], (child) => {
-      if (matchComponentTypes(child, [Panel])) {
+      if (matchComponentTypes<PanelChild>(child, [Panel])) {
         const selected =
           !child.props.isDisabled &&
           (child.props.isSelected || selectedIndex === index)

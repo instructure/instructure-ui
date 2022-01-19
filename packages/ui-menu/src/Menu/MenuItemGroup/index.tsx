@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Children, Component, ReactElement } from 'react'
+import React, { Children, Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import {
@@ -36,13 +36,21 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { MenuItem } from '../MenuItem'
+import type { OnMenuItemSelect, MenuItemProps } from '../MenuItem/props'
+import { MenuItemSeparator } from '../MenuItemSeparator'
+import type { MenuSeparatorProps } from '../MenuItemSeparator/props'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
 import type { MenuGroupProps, MenuGroupState } from './props'
-import type { OnMenuItemSelect, MenuItemProps } from '../MenuItem/props'
+
+type MenuItemChild = React.ComponentElement<MenuItemProps, MenuItem>
+type MenuSeparatorChild = React.ComponentElement<
+  MenuSeparatorProps,
+  MenuItemSeparator
+>
 
 /**
 ---
@@ -147,9 +155,11 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
     const { children, allowMultiple } = props
     const selected: MenuGroupState['selected'] = []
 
-    const items = Children.toArray(children).filter((child) => {
-      return matchComponentTypes(child as MenuItem, [MenuItem])
-    }) as MenuItem[]
+    const items = (
+      Children.toArray(children) as (MenuItemChild | MenuSeparatorChild)[]
+    ).filter((child) => {
+      return matchComponentTypes<MenuItemChild>(child, [MenuItem])
+    }) as MenuItemChild[]
 
     items.forEach((item, index) => {
       if (
@@ -189,22 +199,26 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   renderChildren() {
     const { disabled, controls, allowMultiple, isTabbable, onMouseOver } =
       this.props
-    const children = this.props.children as ReactElement[]
+    const children = this.props.children as (
+      | MenuItemChild
+      | MenuSeparatorChild
+    )[]
     let index = -1
 
     return Children.map(children, (child) => {
-      if (matchComponentTypes(child, [MenuItem])) {
+      if (matchComponentTypes<MenuItemChild>(child, [MenuItem])) {
         ++index
         const value = child.props.value || index
 
         return (
           <li role="none">
             {' '}
-            {safeCloneElement(child as ReactElement, {
+            {safeCloneElement(child, {
               tabIndex: isTabbable && index === 0 ? 0 : -1,
               controls,
               value,
               type: allowMultiple ? 'checkbox' : 'radio',
+              // @ts-expect-error TODO: fix ref
               ref: this.props.itemRef,
               disabled: disabled || child.props.disabled,
               selected: this.selected.indexOf(value) > -1,

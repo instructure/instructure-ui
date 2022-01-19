@@ -27,9 +27,6 @@ import PropTypes from 'prop-types'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import { Head } from './Head'
-import { Body } from './Body'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -40,6 +37,26 @@ import type {
   PropValidators,
   TableTheme
 } from '@instructure/shared-types'
+
+import { Head } from './Head'
+import type { TableHeadProps } from './Head/props'
+import { Body } from './Body'
+import type { TableBodyProps } from './Body/props'
+import { Row } from './Row'
+import type { TableRowProps } from './Row/props'
+import { ColHeader } from './ColHeader'
+import type { TableColHeaderProps } from './ColHeader/props'
+import { RowHeader } from './RowHeader'
+import type { TableRowHeaderProps } from './RowHeader/props'
+import { Cell } from './Cell'
+import type { TableCellProps } from './Cell/props'
+
+type HeadChild = React.ComponentElement<TableHeadProps, Head>
+type BodyChild = React.ComponentElement<TableBodyProps, Body>
+type RowChild = React.ComponentElement<TableRowProps, Row>
+type ColHeaderChild = React.ComponentElement<TableColHeaderProps, ColHeader>
+type RowHeaderChild = React.ComponentElement<TableRowHeaderProps, RowHeader>
+type CellChild = React.ComponentElement<TableCellProps, Cell>
 
 type TableOwnProps = {
   /**
@@ -101,5 +118,15 @@ const allowedProps: AllowedPropKeys = [
   'layout'
 ]
 
-export type { TableProps, TableStyle }
+export type {
+  TableProps,
+  TableStyle,
+  // children
+  HeadChild,
+  BodyChild,
+  RowChild,
+  ColHeaderChild,
+  RowHeaderChild,
+  CellChild
+}
 export { propTypes, allowedProps }
