@@ -172,15 +172,11 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
 
     for (let i = 0; i < this.childrenArray.length; i++) {
       const child = this.childrenArray[i]
-      if (matchComponentTypes(child, [Option])) {
-        match = child as OptionChild
-      } else if (matchComponentTypes(child, [Group])) {
+      if (matchComponentTypes<OptionChild>(child, [Option])) {
+        match = child
+      } else if (matchComponentTypes<GroupChild>(child, [Group])) {
         // first child is a group, not an option, find first child in group
-        match = (
-          Children.toArray(
-            (child as GroupChild).props.children
-          ) as OptionChild[]
-        )[0]
+        match = (Children.toArray(child.props.children) as OptionChild[])[0]
       }
       if (match) {
         break
@@ -194,13 +190,13 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
 
     for (let i = 0; i < this.childrenArray.length; ++i) {
       const child = this.childrenArray[i]
-      if (matchComponentTypes(child, [Option])) {
-        if ((child as OptionChild).props[field] === value) {
-          match = child as OptionChild
+      if (matchComponentTypes<OptionChild>(child, [Option])) {
+        if (child.props[field] === value) {
+          match = child
         }
-      } else if (matchComponentTypes(child, [Group])) {
+      } else if (matchComponentTypes<GroupChild>(child, [Group])) {
         const groupChildren = Children.toArray(
-          (child as GroupChild).props.children
+          child.props.children
         ) as OptionChild[]
         for (let j = 0; j < groupChildren.length; ++j) {
           const groupChild = groupChildren[j]
@@ -297,13 +293,13 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
 
   renderChildren() {
     const children = Children.map(this.childrenArray, (child) => {
-      if (matchComponentTypes(child, [Option])) {
-        return this.renderOption(child as OptionChild)
-      } else if (matchComponentTypes(child, [Group])) {
-        return this.renderGroup(child as GroupChild)
+      if (matchComponentTypes<OptionChild>(child, [Option])) {
+        return this.renderOption(child)
+      } else if (matchComponentTypes<GroupChild>(child, [Group])) {
+        return this.renderGroup(child)
       }
       return null
-    }).filter((child: any) => !!child)
+    }).filter((child) => !!child)
 
     if (children.length === 0) {
       // no valid children, render empty option

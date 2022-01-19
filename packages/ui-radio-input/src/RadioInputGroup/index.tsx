@@ -119,24 +119,24 @@ class RadioInputGroup extends Component<
     // This adds the passed in name property to each RadioInput component
     // and checks the input whose value matches the value property
     return Children.map(children, (child, index) => {
-      if (matchComponentTypes(child as RadioInputChild, [RadioInput])) {
-        const isChecked = this.value === (child as RadioInput).props.value
+      if (matchComponentTypes<RadioInputChild>(child, [RadioInput])) {
+        const isChecked = this.value === child.props.value
         const defaultFocus = !this.value && index === 0
-        return safeCloneElement(child as RadioInputChild, {
+        return safeCloneElement(child, {
           name,
-          disabled: disabled || (child as RadioInputChild).props.disabled,
+          disabled: disabled || child.props.disabled,
           variant,
           size,
           checked: isChecked,
           onChange: this.handleChange,
-          readOnly: readOnly || (child as RadioInputChild).props.readOnly,
-          width: (child as RadioInputChild).props.width || 'auto',
+          readOnly: readOnly || child.props.readOnly,
+          width: child.props.width || 'auto',
           'aria-describedby': this.hasMessages ? this._messagesId : undefined,
           // only one radio in a group should be considered tabbable
           // if a radio is checked, it should be the input to receive focus when tabbed to
           // if none of the inputs are checked, the first should receive the focus
           tabIndex: isChecked || defaultFocus ? 0 : -1,
-          label: (child as RadioInputChild).props.label
+          label: child.props.label
         })
       } else {
         return child // ignore (but preserve) children that aren't RadioInput

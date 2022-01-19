@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import { logError as error } from '@instructure/console'
 import {
@@ -35,6 +36,8 @@ import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
+
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -101,21 +104,15 @@ class Item extends Component<AppNavItemProps> {
   render() {
     const ElementType = getElementType(Item, this.props)
 
-    const {
-      renderIcon,
-      renderLabel,
-      href,
-      renderAfter,
-      cursor,
-      isDisabled
-    } = this.props
+    const { renderIcon, renderLabel, href, renderAfter, cursor, isDisabled } =
+      this.props
 
     const icon = callRenderProp(renderIcon)
     const label = callRenderProp(renderLabel)
 
-    const labelIsForScreenReaders = matchComponentTypes(label, [
-      ScreenReaderContent
-    ])
+    const labelIsForScreenReaders = matchComponentTypes<
+      React.ComponentElement<ScreenReaderContentProps, ScreenReaderContent>
+    >(label, [ScreenReaderContent])
 
     if (icon) {
       error(

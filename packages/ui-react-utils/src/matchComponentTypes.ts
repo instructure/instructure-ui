@@ -37,10 +37,10 @@ import { ComponentType, ReactElement, ReactNode } from 'react'
  * @param {Array} types an array of React components
  * @returns {Boolean} true if the component matches at least one of the types
  */
-function matchComponentTypes(
+function matchComponentTypes<Type extends ReactElement = ReactElement>(
   componentInstance: ReactNode,
   types: string[] | ComponentType[] | ComponentType<any>[] = []
-) {
+): componentInstance is Type {
   if (componentInstance && (componentInstance as ReactElement).type) {
     const displayNames = types.map(
       (type: string | ComponentType | ComponentType<any>) =>

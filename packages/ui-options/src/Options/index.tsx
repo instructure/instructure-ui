@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children, ReactElement } from 'react'
+import React, { Component, Children } from 'react'
 
 import {
   omitProps,
@@ -42,9 +42,17 @@ import generateStyles from './styles'
 import generateComponentTheme from './theme'
 
 import { Item } from './Item'
+import type { OptionsItemProps } from './Item/props'
 import { Separator } from './Separator'
+import type { OptionsSeparatorProps } from './Separator/props'
+
 import type { OptionsProps } from './props'
 import { allowedProps, propTypes } from './props'
+
+type ItemChild = React.ComponentElement<OptionsItemProps, Item>
+type SeparatorChild = React.ComponentElement<OptionsSeparatorProps, Separator>
+type OptionsChild = React.ComponentElement<OptionsProps, Options>
+type OptionsChildren = (ItemChild | SeparatorChild | OptionsChild)[]
 
 /**
 ---
@@ -109,11 +117,11 @@ class Options extends Component<OptionsProps> {
     )
   }
 
-  renderSubList(children: React.ReactNode) {
+  renderSubList(subOptions: OptionsChild) {
     const { styles } = this.props
     return (
       <Item as={this.childAs} role="presentation" css={styles?.label}>
-        {children}
+        {subOptions}
       </Item>
     )
   }
@@ -121,12 +129,19 @@ class Options extends Component<OptionsProps> {
   renderChildren() {
     const { children } = this.props
 
-    return Children.map(children, (child) => {
-      if (matchComponentTypes(child, ['Options'])) {
+    return Children.map(children as OptionsChildren, (child) => {
+      if (matchComponentTypes<OptionsChild>(child, ['Options'])) {
         return this.renderSubList(child)
       }
-      if (matchComponentTypes(child, ['Item', 'Separator'])) {
-        return safeCloneElement(child as ReactElement, { as: this.childAs })
+      if (
+        matchComponentTypes<ItemChild | SeparatorChild>(child, [
+          'Item',
+          'Separator'
+        ])
+      ) {
+        return safeCloneElement(child, { as: this.childAs } as
+          | Partial<OptionsItemProps>
+          | Partial<OptionsSeparatorProps>)
       }
       return undefined
     })

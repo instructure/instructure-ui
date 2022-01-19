@@ -65,12 +65,18 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { Group } from './Group'
+import type { SelectGroupProps } from './Group/props'
 import { Option } from './Option'
+import type { SelectOptionProps } from './Option/props'
 
 import type { RenderSelectOptionLabel } from './Option/props'
 
 import type { SelectProps } from './props'
 import { allowedProps, propTypes } from './props'
+
+type GroupChild = React.ComponentElement<SelectGroupProps, Group>
+type OptionChild = React.ComponentElement<SelectOptionProps, Option>
+type SelectChildren = (GroupChild | OptionChild)[]
 
 /**
 ---
@@ -141,6 +147,14 @@ class Select extends Component<SelectProps> {
     return this.ref
   }
 
+  get childrenArray() {
+    return Children.toArray(this.props.children) as SelectChildren
+  }
+
+  getGroupChildrenArray(group: GroupChild) {
+    return Children.toArray(group.props.children) as OptionChild[]
+  }
+
   get focused() {
     return this.ref ? isActiveElement(this.ref) : false
   }
@@ -160,12 +174,10 @@ class Select extends Component<SelectProps> {
   get highlightedOptionId(): string | undefined {
     let highlightedOptionId: string | undefined
 
-    Children.toArray(this.props.children).forEach((child) => {
-      if (matchComponentTypes(child, [Group])) {
+    this.childrenArray.forEach((child) => {
+      if (matchComponentTypes<GroupChild>(child, [Group])) {
         // group found
-        ;(
-          Children.toArray((child as Group).props.children) as Option[]
-        ).forEach((option) => {
+        this.getGroupChildrenArray(child).forEach((option) => {
           // check options in group
           if (option.props.isHighlighted) {
             highlightedOptionId = option.props.id
@@ -173,8 +185,8 @@ class Select extends Component<SelectProps> {
         })
       } else {
         // ungrouped option found
-        if ((child as Option).props.isHighlighted) {
-          highlightedOptionId = (child as Option).props.id
+        if (child.props.isHighlighted) {
+          highlightedOptionId = child.props.id
         }
       }
     })
@@ -185,12 +197,10 @@ class Select extends Component<SelectProps> {
   get selectedOptionId() {
     const selectedOptionId: string[] = []
 
-    Children.toArray(this.props.children).forEach((child) => {
-      if (matchComponentTypes(child, [Group])) {
+    this.childrenArray.forEach((child) => {
+      if (matchComponentTypes<GroupChild>(child, [Group])) {
         // group found
-        ;(
-          Children.toArray((child as Group).props.children) as Option[]
-        ).forEach((option) => {
+        this.getGroupChildrenArray(child).forEach((option) => {
           // check options in group
           if (option.props.isSelected) {
             selectedOptionId.push(option.props.id)
@@ -198,8 +208,8 @@ class Select extends Component<SelectProps> {
         })
       } else {
         // ungrouped option found
-        if ((child as Option).props.isSelected) {
-          selectedOptionId.push((child as Option).props.id)
+        if (child.props.isSelected) {
+          selectedOptionId.push(child.props.id)
         }
       }
     })
@@ -331,7 +341,7 @@ class Select extends Component<SelectProps> {
   }
 
   renderOption(
-    option: Option,
+    option: OptionChild,
     data: Pick<SelectableRender, 'getOptionProps' | 'getDisabledOptionProps'>
   ) {
     const { getOptionProps, getDisabledOptionProps } = data
@@ -390,7 +400,7 @@ class Select extends Component<SelectProps> {
   }
 
   renderGroup(
-    group: Group,
+    group: GroupChild,
     data: Pick<
       SelectableRender,
       'getOptionProps' | 'getDisabledOptionProps'
@@ -426,7 +436,7 @@ class Select extends Component<SelectProps> {
         renderLabel={renderLabel}
         {...omitProps(rest, [...Options.allowedProps, ...Group.allowedProps])}
       >
-        {Children.map(children as Option[], (child) => {
+        {Children.map(children as OptionChild[], (child) => {
           return this.renderOption(child, {
             getOptionProps,
             getDisabledOptionProps
@@ -471,21 +481,21 @@ class Select extends Component<SelectProps> {
           {...getListProps({ as: 'ul', elementRef: this.handleListRef })}
         >
           {isShowingOptions
-            ? Children.map(children, (child, index) => {
+            ? Children.map(children as SelectChildren, (child, index) => {
                 if (!child || !matchComponentTypes(child, [Group, Option])) {
                   return // ignore invalid children
                 }
-                if (matchComponentTypes(child, [Option])) {
+                if (matchComponentTypes<OptionChild>(child, [Option])) {
                   lastWasGroup = false
-                  return this.renderOption(child as Option, {
+                  return this.renderOption(child, {
                     getOptionProps,
                     getDisabledOptionProps
                   })
                 }
-                if (matchComponentTypes(child, [Group])) {
+                if (matchComponentTypes<GroupChild>(child, [Group])) {
                   const afterGroup = lastWasGroup
                   lastWasGroup = true
-                  return this.renderGroup(child as Group, {
+                  return this.renderGroup(child, {
                     getOptionProps,
                     getDisabledOptionProps,
                     // for rendering separators appropriately

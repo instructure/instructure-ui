@@ -26,11 +26,17 @@ import React, { ReactNode } from 'react'
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
 
 function hasVisibleChildren(children: ReactNode) {
   let visible = false
   React.Children.forEach(children, (child) => {
-    if (child && !matchComponentTypes(child, [ScreenReaderContent])) {
+    if (
+      child &&
+      !matchComponentTypes<
+        React.ComponentElement<ScreenReaderContentProps, ScreenReaderContent>
+      >(child, [ScreenReaderContent])
+    ) {
       visible = true
     }
   })

@@ -119,7 +119,7 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
     const tray = (
       Children.toArray(this.props.children) as DrawerChildren
     ).filter((child) =>
-      matchComponentTypes(child, [DrawerTray])
+      matchComponentTypes<TrayChild>(child, [DrawerTray])
     )[0] as TrayChild
     return tray.props
   }
@@ -264,21 +264,21 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
     const children = Children.map(
       this.props.children as DrawerChildren,
       (child, _index) => {
-        if (matchComponentTypes(child, [DrawerTray])) {
+        if (matchComponentTypes<TrayChild>(child, [DrawerTray])) {
           trayCount++
-          return safeCloneElement(child as TrayChild, {
-            label: (child as TrayChild).props.label,
-            key: (child as TrayChild).props.label,
+          return safeCloneElement(child, {
+            label: child.props.label,
+            key: child.props.label,
             [DrawerTray.locatorAttribute]: this._id,
             contentRef: this.handleTrayContentRef,
             onEnter: this.handleTrayTransitionEnter,
             onExit: this.handleTrayTransitionExit
           }) as TrayChild
-        } else if (matchComponentTypes(child, [DrawerContent])) {
+        } else if (matchComponentTypes<ContentChild>(child, [DrawerContent])) {
           contentCount++
 
           const handleContentRef = (el: HTMLDivElement | null) => {
-            const { contentRef } = (child as ContentChild).props
+            const { contentRef } = child.props
 
             this._content = el
 
@@ -288,14 +288,14 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
           }
 
           return this.state.trayWidth !== null
-            ? (safeCloneElement(child as ContentChild, {
-                label: (child as ContentChild).props.label,
-                key: (child as ContentChild).props.label,
+            ? (safeCloneElement(child, {
+                label: child.props.label,
+                key: child.props.label,
                 [DrawerContent.locatorAttribute]: this._id,
                 style: this.contentStyle,
                 onSizeChange: createChainedFunction(
                   this.handleContentSizeChange,
-                  (child as ContentChild).props.onSizeChange
+                  child.props.onSizeChange
                 ),
                 contentRef: handleContentRef
               }) as ContentChild)

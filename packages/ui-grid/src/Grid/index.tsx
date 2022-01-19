@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children, ReactElement } from 'react'
+import React, { Component, Children } from 'react'
 
 import {
   safeCloneElement,
@@ -33,6 +33,7 @@ import {
 } from '@instructure/ui-react-utils'
 
 import { GridRow } from '../GridRow'
+import type { GridRowProps } from '../GridRow/props'
 import { GridCol } from '../GridCol'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -87,11 +88,15 @@ class Grid extends Component<GridProps> {
     const children = Children.toArray(this.props.children)
 
     return children.map((child, index) => {
-      if (matchComponentTypes(child, [GridRow])) {
-        return safeCloneElement(child as ReactElement, {
+      if (
+        matchComponentTypes<React.ComponentElement<GridRowProps, GridRow>>(
+          child,
+          [GridRow]
+        )
+      ) {
+        return safeCloneElement(child, {
           ...pickProps(props, Grid.allowedProps),
-          ...(child as ReactElement)
-            .props /* child props should override parent */,
+          ...child.props /* child props should override parent */,
           isLastRow: index + 1 === children.length
         })
       } else {

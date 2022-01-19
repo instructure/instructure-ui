@@ -93,11 +93,14 @@ class Flex extends Component<FlexProps> {
         return null
       }
 
-      return matchComponentTypes(child, ['Item'])
-        ? safeCloneElement(child as React.ReactElement<FlexItemProps>, {
+      return matchComponentTypes<React.ComponentElement<FlexItemProps, Item>>(
+        child,
+        ['Item']
+      )
+        ? safeCloneElement(child, {
             // child withVisualDebug prop should override parent
             withVisualDebug: this.props.withVisualDebug,
-            ...(child as React.ReactElement<FlexItemProps>).props,
+            ...child.props,
             direction: this.props.direction!.replace(
               /-reverse/,
               ''
