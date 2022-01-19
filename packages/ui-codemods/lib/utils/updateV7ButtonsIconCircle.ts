@@ -59,13 +59,16 @@ export default function updateV7ButtonsIconCircle(
 ) {
   // find out if the button has got any visible text inside it, in this case
   // just display a warning, that it cannot be upgraded.
-  const buttonsWithNoText = findElements(j, root, importedName, 'variant', [
-    'icon',
-    'icon-inverse',
-    'circle-default',
-    'circle-primary',
-    'circle-danger'
-  ]).filter((path) => {
+  const buttonsWithNoText = findElements(j, root, importedName, {
+    name: 'variant',
+    value: [
+      'icon',
+      'icon-inverse',
+      'circle-default',
+      'circle-primary',
+      'circle-danger'
+    ]
+  }).filter((path) => {
     // finds all with no/ScreenReader children
     if (!path.value.children || path.value.children.length == 0) {
       return true

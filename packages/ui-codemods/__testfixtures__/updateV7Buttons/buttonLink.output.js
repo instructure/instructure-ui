@@ -4,9 +4,9 @@ import { Link } from '@instructure/ui-link'
 
 let a = (
   <p>
-    <Link isWithinText={false} href="#" />
-    <Link color="link-inverse" isWithinText={false} href="#" />
-    <Link variant="link" />
-    <Link variant="link-inverse" />
+    <Link href="#" isWithinText={false} />
+    <Link color="link-inverse" href="#" isWithinText={false} />
+    <Button variant="link" />
+    <Button variant="link-inverse" />
   </p>
 )

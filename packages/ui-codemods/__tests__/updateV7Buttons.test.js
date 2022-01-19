@@ -26,11 +26,11 @@ const path = require('path')
 const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
 const tests = [
-  //'helpers',
-  //'buttonMisc',
-  //'buttonWithText',
-  //'buttonIconCircle',
-  //'buttonClose',
+  'helpers',
+  'buttonMisc',
+  'buttonWithText',
+  'buttonIconCircle',
+  'buttonClose',
   'buttonLink'
 ]
 
