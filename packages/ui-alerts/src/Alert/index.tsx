@@ -168,7 +168,7 @@ class Alert extends Component<AlertProps, AlertState> {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'srid' does not exist on type 'Alert'.
-      this.srid = hashInstance('Alert', this.props.instanceMap)
+      this.srid = hashInstance('Alert', this.props.instanceMapCounter)
 
       const div = document.createElement('div')
       div.setAttribute('id', this.srid)

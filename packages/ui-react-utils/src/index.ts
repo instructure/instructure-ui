@@ -38,12 +38,10 @@ export { passthroughProps } from './passthroughProps'
 export { pickProps } from './pickProps'
 export { safeCloneElement } from './safeCloneElement'
 export { windowMessageListener } from './windowMessageListener'
-export {
-  SSRContext,
-  SSRContextProvider,
-  withSSR,
-  generateInstanceMap
-} from './SSRContext'
+export { SSRContext } from './SSRContext'
+export { SSRContextProvider } from './SSRContext'
+export { generateInstanceMapCounter } from './SSRContext'
+export { withSSR } from './SSRContext'
 export type { GetInteractionOptions } from './getInteraction'
 export type { InteractionType } from './getInteraction'
 export type { SSRContextProviderValue } from './SSRContext'

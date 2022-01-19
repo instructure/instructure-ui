@@ -21,26 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { generateInstanceMapCounter } from './generateInstanceMapCounter'
-import { SSRContext } from './SSRContext'
-type SSRContextProviderValue = Map<string, number>
-type SSRContextProviderProps = React.PropsWithChildren<{
-  instanceMapCounter: SSRContextProviderValue
-}>
+import type { SSRContextProviderValue } from './SSRContextProvider'
 
-const defaultContextValue = generateInstanceMapCounter()
-
-const SSRContextProvider = ({
-  children,
-  instanceMapCounter = defaultContextValue
-}: SSRContextProviderProps) => {
-  return (
-    <SSRContext.Provider value={instanceMapCounter}>
-      {children}
-    </SSRContext.Provider>
-  )
+function generateInstanceMapCounter(): SSRContextProviderValue {
+  return new Map<string, number>()
 }
-export { SSRContextProvider }
 
-export type { SSRContextProviderValue }
+export default generateInstanceMapCounter
+export { generateInstanceMapCounter }

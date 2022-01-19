@@ -28,15 +28,15 @@ import { ThemeProvider } from '@emotion/react'
 import { ThemeOrOverride } from '../EmotionTypes'
 import { getTheme } from '../EmotionThemeProvider'
 import {
-  SSRContextProvider,
-  generateInstanceMap
+  generateInstanceMapCounter,
+  SSRContextProvider
 } from '@instructure/ui-react-utils'
 import type { SSRContextProviderValue } from '@instructure/ui-react-utils'
 
 type InstUIProviderProps = {
   theme?: ThemeOrOverride
   dir?: 'ltr' | 'rtl' // TODO allow "auto" too
-  instanceMap?: SSRContextProviderValue
+  instanceMapCounter?: SSRContextProviderValue
 }
 
 /**
@@ -107,7 +107,7 @@ function InstUISettingsProvider({
   children,
   theme = {},
   dir,
-  instanceMap
+  instanceMapCounter
 }: React.PropsWithChildren<InstUIProviderProps>) {
   const finalDir = dir || useContext(TextDirectionContext)
 
@@ -118,7 +118,7 @@ function InstUISettingsProvider({
   }
 
   return (
-    <SSRContextProvider instanceMap={instanceMap!}>
+    <SSRContextProvider instanceMapCounter={instanceMapCounter!}>
       <ThemeProvider theme={getTheme(theme)}>
         <TextDirectionContext.Provider value={finalDir}>
           {children}
@@ -131,7 +131,7 @@ function InstUISettingsProvider({
 InstUISettingsProvider.defaultProps = {
   theme: {},
   dir: undefined,
-  instanceMap: generateInstanceMap()
+  instanceMapCounter: generateInstanceMapCounter()
 }
 export default InstUISettingsProvider
 export { InstUISettingsProvider }

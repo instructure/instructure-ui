@@ -23,24 +23,7 @@
  */
 import React from 'react'
 import { generateInstanceMapCounter } from './generateInstanceMapCounter'
-import { SSRContext } from './SSRContext'
-type SSRContextProviderValue = Map<string, number>
-type SSRContextProviderProps = React.PropsWithChildren<{
-  instanceMapCounter: SSRContextProviderValue
-}>
 
-const defaultContextValue = generateInstanceMapCounter()
+const SSRContext = React.createContext(generateInstanceMapCounter())
 
-const SSRContextProvider = ({
-  children,
-  instanceMapCounter = defaultContextValue
-}: SSRContextProviderProps) => {
-  return (
-    <SSRContext.Provider value={instanceMapCounter}>
-      {children}
-    </SSRContext.Provider>
-  )
-}
-export { SSRContextProvider }
-
-export type { SSRContextProviderValue }
+export { SSRContext }

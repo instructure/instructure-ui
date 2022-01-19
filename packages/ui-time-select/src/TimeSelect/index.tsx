@@ -86,8 +86,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   ref: Select | null = null
   private readonly _emptyOptionId = hashInstance(
     'Select-EmptyOption',
-    //@ts-expect-error props.instanceMap
-    this.props.instanceMap
+    //@ts-expect-error props.instanceMapCounter
+    this.props.instanceMapCounter
   )
 
   constructor(props: TimeSelectProps) {

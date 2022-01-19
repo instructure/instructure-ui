@@ -22,10 +22,8 @@
  * SOFTWARE.
  */
 
-export {
-  SSRContext,
-  SSRContextProvider,
-  generateInstanceMap
-} from './SSRContextProvider'
+export { generateInstanceMapCounter } from './generateInstanceMapCounter'
+export { SSRContextProvider } from './SSRContextProvider'
+export { SSRContext } from './SSRContext'
 export { withSSR } from './withSSR'
 export type { SSRContextProviderValue } from './SSRContextProvider'

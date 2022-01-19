@@ -82,10 +82,13 @@ class InlineSVG extends Component<InlineSVGProps> {
   constructor(props: InlineSVGProps) {
     super(props)
 
-    //@ts-expect-error props.instanceMap
-    this.titleId = hashInstance('InlineSVG-title', this.props.instanceMap)
-    //@ts-expect-error props.instanceMap
-    this.descId = hashInstance('InlineSVG-desc', this.props.instanceMap)
+    this.titleId = hashInstance(
+      'InlineSVG-title',
+      //@ts-expect-error props.instanceMapCounter
+      props.instanceMapCounter
+    )
+    //@ts-expect-error props.instanceMapCounter
+    this.descId = hashInstance('InlineSVG-desc', props.instanceMapCounter)
   }
 
   componentDidMount() {

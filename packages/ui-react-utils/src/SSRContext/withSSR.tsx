@@ -24,14 +24,20 @@
 import React, { ComponentClass, forwardRef, useContext } from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
-import { SSRContext } from './SSRContextProvider'
+import { SSRContext } from './SSRContext'
 import { decorator } from '@instructure/ui-decorator'
 
 const withSSR = decorator((ComposedComponent: ComponentClass) => {
   const WithSSR = forwardRef((props: any, ref: any) => {
-    const instanceMap = useContext(SSRContext)
+    const instanceMapCounter = useContext(SSRContext)
 
-    return <ComposedComponent ref={ref} instanceMap={instanceMap} {...props} />
+    return (
+      <ComposedComponent
+        ref={ref}
+        instanceMapCounter={instanceMapCounter}
+        {...props}
+      />
+    )
   })
 
   hoistNonReactStatics(WithSSR, ComposedComponent)
@@ -52,7 +58,5 @@ const withSSR = decorator((ComposedComponent: ComponentClass) => {
 
   return WithSSR
 })
-
-export default withSSR
 
 export { withSSR }

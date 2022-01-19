@@ -96,8 +96,8 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       return this.props.id
     }
     if (!this._id) {
-      //@ts-expect-error props.instanceMap
-      this._id = hashInstance('NumberInput', this.props.instanceMap)
+      //@ts-expect-error props.instanceMapCounter
+      this._id = hashInstance('NumberInput', this.props.instanceMapCounter)
     }
     return this._id
   }
