@@ -150,14 +150,12 @@ class Table extends Component<TableProps> {
         {Children.map(children, (child) => {
           if (matchComponentTypes<HeadChild>(child, [Head])) {
             return safeCloneElement(child, {
-              // @ts-expect-error TODO: fix key
               key: child.props.name,
               isStacked
             })
           }
           if (matchComponentTypes<BodyChild>(child, [Body])) {
             return safeCloneElement(child, {
-              // @ts-expect-error TODO: fix key
               key: child.props.name,
               isStacked,
               hover,

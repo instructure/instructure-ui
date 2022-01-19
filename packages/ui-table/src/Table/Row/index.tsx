@@ -94,14 +94,12 @@ class Row extends Component<TableRowProps> {
             }
             if (matchComponentTypes<RowHeaderChild>(child, [RowHeader])) {
               return safeCloneElement(child, {
-                // @ts-expect-error TODO: fix key
                 key: child.props.name,
                 isStacked
               })
             }
             if (matchComponentTypes<CellChild>(child, [Cell])) {
               return safeCloneElement(child, {
-                // @ts-expect-error ts-migrate(2339) TODO: fix key
                 key: child.props.name,
                 isStacked,
                 header: headers && headers[index]

@@ -79,7 +79,6 @@ class Body extends Component<TableBodyProps> {
         {Children.map(children as RowChild[], (child) =>
           matchComponentTypes(child, [Row])
             ? safeCloneElement(child, {
-                // @ts-expect-error ts-migrate(2533) TODO: fix key
                 key: child.props.name,
                 hover,
                 isStacked,
