@@ -23,7 +23,7 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import { hash } from '../hash'
+import { hash, hashInstance } from '../hash'
 
 describe('hash', () => {
   it('should error if supplied value is undefined', () => {
@@ -543,5 +543,47 @@ describe('hash', () => {
 
       expect(result1).to.equal(result2)
     })
+  })
+})
+
+describe('hashInstance', () => {
+  it('should generate unique hashes for the same instance', () => {
+    const seed = new Map<string, number>()
+    const component = 'TestComponent'
+
+    const inst1 = hashInstance(component, seed)
+    const inst2 = hashInstance(component, seed)
+
+    expect(inst1).to.not.equal(inst2)
+  })
+  it('should create hashes deterministicly', () => {
+    const seed1 = new Map<string, number>()
+    const component = 'TestComponent'
+
+    //simulate rendering component: TestComponent
+    const render1 = hashInstance(component, seed1)
+
+    //suppose we have a refresh, meaning the instanceCounter will be reseted:
+    const seed2 = new Map<string, number>()
+    const render2 = hashInstance(component, seed2)
+
+    expect(render1).to.equal(render2)
+  })
+  it('should not create the same hash for the same instance', () => {
+    const counter = new Map<string, boolean>()
+    const seed = new Map<string, number>()
+    const component = 'TestComponent'
+
+    for (let i = 0; i <= 20000; i++) {
+      const hash = hashInstance(component, seed)
+
+      if (!counter.has(hash)) {
+        counter.set(hash, false)
+      } else {
+        counter.set(hash, true)
+      }
+
+      expect(counter.get(hash)).to.be.eq(false)
+    }
   })
 })
