@@ -88,8 +88,8 @@ class RadioInputGroup extends Component<
 
     this._messagesId = hashInstance(
       'RadioInputGroup-messages',
-      //@ts-expect-error props.instanceMap
-      this.props.instanceMap
+      //@ts-expect-error props.instanceMapCounter
+      this.props.instanceMapCounter
     )
   }
 

@@ -72,7 +72,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
     }
     //@ts-expect-error ssr
 
-    this.labelId = hashInstance('MenuItem__label', props.instanceMap)
+    this.labelId = hashInstance('MenuItem__label', props.instanceMapCounter)
   }
 
   get _node() {

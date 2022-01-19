@@ -117,8 +117,8 @@ class Pagination extends Component<PaginationProps> {
   constructor(props: PaginationProps) {
     super(props)
 
-    //@ts-expect-error props.instanceMap
-    this._labelId = hashInstance('Pagination', this.props.instanceMap)
+    //@ts-expect-error props.instanceMapCounter
+    this._labelId = hashInstance('Pagination', this.props.instanceMapCounter)
   }
 
   get _root() {

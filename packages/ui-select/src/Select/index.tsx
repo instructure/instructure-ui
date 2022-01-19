@@ -126,8 +126,8 @@ class Select extends Component<SelectProps> {
     hasInputRef: false
   }
   ref: HTMLInputElement | null = null
-  //@ts-expect-error props.instanceMap
-  private _defaultId = hashInstance('Select', this.props.instanceMap)
+  //@ts-expect-error props.instanceMapCounter
+  private _defaultId = hashInstance('Select', this.props.instanceMapCounter)
   private _inputContainer: HTMLSpanElement | null = null
   private _listView: Element | null = null
   // temporarily stores actionable options

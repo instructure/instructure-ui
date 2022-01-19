@@ -86,8 +86,8 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
       }
     }
 
-    //@ts-expect-error props.instanceMap
-    this._labelId = hashInstance('MenuItemGroup', this.props.instanceMap)
+    //@ts-expect-error props.instanceMapCounter
+    this._labelId = hashInstance('MenuItemGroup', props.instanceMapCounter)
   }
 
   private _labelId: string

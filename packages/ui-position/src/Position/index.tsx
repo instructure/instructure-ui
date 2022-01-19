@@ -96,8 +96,9 @@ class Position extends Component<PositionProps, PositionState> {
       leading: false,
       trailing: true
     })
-    //@ts-expect-error props.instanceMap
-    this._id = this.props.id || hashInstance('Position', this.props.instanceMap)
+    this._id =
+      //@ts-expect-error props.instanceMapCounter
+      this.props.id || hashInstance('Position', this.props.instanceMapCounter)
   }
 
   ref: Element | null = null

@@ -77,8 +77,8 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
       }
     }
 
-    //@ts-expect-error props.instanceMap
-    this._defaultId = hashInstance('RadioInput', this.props.instanceMap)
+    //@ts-expect-error props.instanceMapCounter
+    this._defaultId = hashInstance('RadioInput', props.instanceMapCounter)
   }
 
   componentDidMount() {

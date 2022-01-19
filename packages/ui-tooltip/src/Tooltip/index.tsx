@@ -81,8 +81,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
   constructor(props: TooltipProps) {
     super(props)
 
-    //@ts-expect-error props.instanceMap
-    this._id = hashInstance('Tooltip', this.props.instanceMap)
+    //@ts-expect-error props.instanceMapCounter
+    this._id = hashInstance('Tooltip', props.instanceMapCounter)
 
     this.state = { hasFocus: false }
   }

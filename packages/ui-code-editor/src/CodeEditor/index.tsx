@@ -68,8 +68,8 @@ class CodeEditor extends Component<CodeEditorProps> {
 
   constructor(props: CodeEditorProps) {
     super(props)
-    //@ts-expect-error props.instanceMap
-    this._id = hashInstance('CodeEditor', this.props.instanceMap)
+    //@ts-expect-error props.instanceMapCounter
+    this._id = hashInstance('CodeEditor', props.instanceMapCounter)
   }
 
   handleRef = (el: Element | null) => {

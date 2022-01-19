@@ -105,11 +105,14 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'null'.
     this.defaultId = hashInstance(
       'FileDrop',
-      //@ts-expect-error props.instanceMap
-      props.instanceMap
+      //@ts-expect-error props.instanceMapCounter
+      props.instanceMapCounter
     )
-    //@ts-expect-error props.instanceMap
-    this.messagesId = hashInstance('FileDrop-messages', props.instanceMap)
+    this.messagesId = hashInstance(
+      'FileDrop-messages',
+      //@ts-expect-error props.instanceMapCounter
+      props.instanceMapCounter
+    )
   }
   componentDidMount() {
     ;(this.props as any).makeStyles(this.makeStyleProps())
@@ -138,6 +141,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   enterCounter = 0
   fileInputEl = null
   defaultId = null
+  messagesId = ''
 
   ref: Element | null = null
 

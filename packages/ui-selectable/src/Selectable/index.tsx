@@ -50,8 +50,9 @@ class Selectable extends Component<SelectableProps> {
     isShowingOptions: false
   }
 
-  //@ts-expect-error props.instanceMap
-  _id = this.props.id || hashInstance('Selectable', this.props.instanceMap)
+  _id =
+    //@ts-expect-error props.instanceMapCounter
+    this.props.id || hashInstance('Selectable', this.props.instanceMapCounter)
   _listId = `${this._id}-list`
   _descriptionId = `${this._id}-description`
   private _trigger: Element | null = null
