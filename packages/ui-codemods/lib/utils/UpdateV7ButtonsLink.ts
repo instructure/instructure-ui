@@ -78,7 +78,9 @@ export default function UpdateV7ButtonsLink(
   )
   findAttribute(j, linkVariants, 'variant').remove()
   renameElements(linkVariants, importedName, 'Link')
-
+  linkVariants.forEach((path) => {
+    displayHrefWarning(filePath, path.value.loc!.start.line)
+  })
   ///// <Button variant="link-inverse" href= ->
   ///// <Link color="link-inverse" href= isWithinText={false}
   const linkInverseVariants = findElements(j, root, importedName, [
@@ -98,19 +100,44 @@ export default function UpdateV7ButtonsLink(
     return nodePath.node
   })
   renameElements(linkInverseVariants, importedName, 'Link')
+  linkVariants.forEach((path) => {
+    displayHrefWarning(filePath, path.value.loc!.start.line)
+  })
 
+  ///// insert import if Button was converted to Link
   if (linkVariants.length > 0 || linkInverseVariants.length > 0) {
-    // TODO import Link
+    root
+      .find(j.ImportDeclaration)
+      .insertAfter(
+        j.importDeclaration(
+          [j.importSpecifier(j.identifier('Link'))],
+          j.literal('@instructure/ui-link')
+        )
+      )
   }
+}
+
+function displayHrefWarning(filePath: string, lineNumber: number) {
+  console.warn(
+    '<Button with link or link-inverse variant might need the removal' +
+      ' of margin/padding parameters. File: ' +
+      filePath +
+      ' line ' +
+      lineNumber +
+      '. Also you will likely need to add @instructure/ui-link as a ' +
+      'dependency. For more see ' +
+      'https://instructure.design/v7/#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-an-href-attribute-and-padding-overrides'
+  )
 }
 
 function displayNoHrefWarning(filePath: string, lineNumber: number) {
   console.warn(
-    'Cannot upgrade <Button variant="link" manually at ' +
+    'Cannot upgrade <Button link or link-inverse manually when it has no href prop at ' +
       filePath +
       ' line ' +
       lineNumber +
-      ' for manual upgrade' +
-      ' see https://instructure.design/v7/#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-no-href-attribute-and-padding-overrides'
+      '. Also you will likely need to add @instructure/ui-link as a ' +
+      'dependency. For more see ' +
+      'https://instructure.design/v7/#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-no-href-attribute-and-padding-overrides'
   )
 }

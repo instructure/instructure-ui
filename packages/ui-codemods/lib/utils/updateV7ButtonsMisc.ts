@@ -35,7 +35,8 @@ import { Collection, JSCodeshift } from 'jscodeshift'
 export default function updateV7ButtonsMisc(
   j: JSCodeshift,
   root: Collection,
-  importedName: string
+  importedName: string,
+  filePath: string
 ) {
   ///// Replace <Button fluidWidth .. with <Button display="block" textAlign="start"
   // remove fluidWidth attribute if its value is 'false'
@@ -70,6 +71,14 @@ export default function updateV7ButtonsMisc(
         name: 'display'
       }
     })
+    .forEach((path) => {
+      console.warn(
+        filePath +
+          ' line ' +
+          path.value.loc!.start.line +
+          ": 'display' attribute was changed to 'block'"
+      )
+    })
     .remove()
   // remove textAlign attribute
   buttonsWithFluidWidth
@@ -77,6 +86,14 @@ export default function updateV7ButtonsMisc(
       name: {
         name: 'textAlign'
       }
+    })
+    .forEach((path) => {
+      console.warn(
+        filePath +
+          ' line ' +
+          path.value.loc!.start.line +
+          ": 'textAlign' attribute was changed to 'start'"
+      )
     })
     .remove()
   // add display="block" attribute
