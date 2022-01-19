@@ -120,9 +120,9 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
     return Children.map(children, (child) => {
       if (matchComponentTypes<CheckboxChild>(child, [Checkbox])) {
         return safeCloneElement(child, {
-          // @ts-expect-error TODO: key
           key: `${child.props.name}`,
           name,
+          label: child.props.label,
           disabled: disabled || child.props.disabled,
           readOnly: readOnly || child.props.readOnly,
           size,

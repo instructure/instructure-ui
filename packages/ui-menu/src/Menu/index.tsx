@@ -351,13 +351,14 @@ class Menu extends Component<MenuProps> {
             <li role="none">
               {safeCloneElement(child, {
                 controls,
+                children: child.props.children,
                 disabled: disabled || child.props.disabled,
                 onFocus: this.handleMenuItemFocus,
                 onBlur: this.handleMenuItemBlur,
                 onSelect: this.handleMenuItemSelect,
                 onMouseOver: this.handleMenuItemMouseOver,
                 tabIndex: isTabbable ? 0 : -1
-              } as Partial<MenuItemProps>)}
+              })}
             </li>
           )
         }

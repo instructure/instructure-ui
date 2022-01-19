@@ -36,11 +36,9 @@ import { createChainedFunction } from '@instructure/ui-utils'
  * @param props Props of the element
  * @param children
  */
-function safeCloneElement<
-  P extends Record<string, any> & { style?: any } & ClassAttributes<P>
->(
+function safeCloneElement<P extends Record<string, any> & { style?: any }>(
   element: ReactElement<P> & { ref?: any },
-  props: P,
+  props: P & { ref?: any } & ClassAttributes<any>,
   ...children: ReactNode[]
 ) {
   const cloneRef = props.ref
@@ -96,7 +94,6 @@ Ignoring ref: ${originalRef}`
         if (cloneRefIsFunction) {
           ;(cloneRef as (instance: any) => void)(component)
         } else {
-          //@ts-expect-error needed for backwards compat
           cloneRef.current = component
         }
         originalRef(component)

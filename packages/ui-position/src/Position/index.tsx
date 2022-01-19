@@ -295,8 +295,8 @@ class Position extends Component<PositionProps, PositionState> {
 
     if (target) {
       return safeCloneElement(target, {
-        ref: (el) => {
-          this._target = el as PositionElement
+        ref: (el: PositionElement) => {
+          this._target = el
         },
         [Position.targetLocatorAttribute]: this._id
       })

@@ -217,8 +217,8 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
               tabIndex: isTabbable && index === 0 ? 0 : -1,
               controls,
               value,
+              children: child.props.children,
               type: allowMultiple ? 'checkbox' : 'radio',
-              // @ts-expect-error TODO: fix ref
               ref: this.props.itemRef,
               disabled: disabled || child.props.disabled,
               selected: this.selected.indexOf(value) > -1,
