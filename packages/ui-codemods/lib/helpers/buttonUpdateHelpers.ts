@@ -187,6 +187,28 @@ function findAttribute(
 }
 
 /**
+ * Renames every element (=JSX tag). Modifies the input collection
+ */
+function renameElements(
+  root: Collection<JSXElement>,
+  currentName: string,
+  newName: string
+) {
+  root.forEach((node) => {
+    const openingElement = node.node.openingElement.name as JSXIdentifier
+    if (openingElement.name === currentName) {
+      openingElement.name = newName
+      const closingElement = node.node.closingElement?.name as
+        | JSXIdentifier
+        | undefined
+      if (closingElement) {
+        closingElement.name = newName
+      }
+    }
+  })
+}
+
+/**
  * Figures out if a certain component is imported in a AST tree, e.g.
  * If it's imported and renamed (e.g. `import {Button as BTN} ...`) then it
  * returns the renamed name of the import
@@ -228,60 +250,59 @@ function findImport(
 }
 
 /**
- * Adds a new import to an existing import, e.g.
- * addImport(j, root, "@instructure/ui-buttons", "NewButton") will change
- * import { Button } from '@instructure/ui-buttons'
- * to
- * import { Button, NewButton } from '@instructure/ui-buttons'
+ * Adds a new import if needed (not imported yet). If its imported it returns
+ * the value under it's imported at (e.g. an alias).
+ * @param j the JSCodeshift API
+ * @param root the collection to check
+ * @param name imported name, e.g. Button
+ * @param pathToAdd import path, or paths. If it
+ * has multiple values it will search them all for this import, if it's not
+ * found it will use the first element of the array to add the import.
+ * @returns the name under it's imported at
  */
-function addImport(
+function addImportIfNeeded(
   j: JSCodeshift,
   root: Collection,
-  importPath: string,
-  importToAdd: string
+  name: string,
+  pathToAdd: string | string[]
 ) {
+  // if its imported already return the import name
+  const importedName = findImport(j, root, name, pathToAdd)
+  if (importedName) {
+    return importedName
+  }
   const paths: Collection<ImportDeclaration> = findImportPath(
     j,
     root,
-    importPath
+    pathToAdd
   )
-  if (paths.length != 1) {
-    throw new Error(
-      'Found multiple/no paths for ' +
-        importPath +
-        ' cannot decide where to add the new import'
-    )
+  if (paths.length == 0) {
+    // not imported yet, just add a new line
+    const newPath = typeof pathToAdd === 'string' ? pathToAdd : pathToAdd[0]
+    root
+      .find(j.ImportDeclaration)
+      .insertAfter(
+        j.importDeclaration(
+          [j.importSpecifier(j.identifier(name))],
+          j.literal(newPath)
+        )
+      )
+  } else {
+    paths.nodes()[0].specifiers!.push(j.importSpecifier(j.identifier(name)))
   }
-  paths.forEach((path) => {
-    path.value.specifiers!.push(j.importSpecifier(j.identifier(importToAdd)))
-  })
-}
-
-/**
- * Renames every element (=JSX tag). Modifies the input collection
- */
-function renameElements(
-  root: Collection<JSXElement>,
-  currentName: string,
-  newName: string
-) {
-  root.forEach((node) => {
-    const openingElement = node.node.openingElement.name as JSXIdentifier
-    if (openingElement.name === currentName) {
-      openingElement.name = newName
-      const closingElement = node.node.closingElement?.name as
-        | JSXIdentifier
-        | undefined
-      if (closingElement) {
-        closingElement.name = newName
-      }
-    }
-  })
+  return name
 }
 
 /**
  * Finds all lines that import from importPath, e.g.
- * `import {Button} from "@instructure/ui"
+ * `findImportPath(j, root, ["@instructure/ui", "@instructure/ui-buttons"])`
+ * with the following root:
+ * ```
+ * import { a } from "@instructure/ui"
+ * import { b } from "@instructure/ui-buttons"
+ * import { c } from "react"
+ * ```
+ * will return lines 1 and 2
  */
 function findImportPath(
   j: JSCodeshift,
@@ -301,7 +322,7 @@ function findImportPath(
             }
           } else {
             for (const anImport of importPath) {
-              if (importSource.indexOf(anImport) > -1) {
+              if (importSource === anImport) {
                 return true
               }
             }
@@ -350,7 +371,7 @@ export {
   findAttribute,
   findImport,
   findOpeningTags,
-  addImport,
+  addImportIfNeeded,
   renameElements,
   isJSXAttribue
 }

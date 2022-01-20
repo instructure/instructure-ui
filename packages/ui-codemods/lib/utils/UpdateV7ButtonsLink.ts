@@ -23,6 +23,7 @@
  */
 
 import {
+  addImportIfNeeded,
   findAttribute,
   findElements,
   isJSXAttribue,
@@ -63,13 +64,27 @@ export default function UpdateV7ButtonsLink(
     }
     displayNoHrefWarning(filePath, path.value.loc!.start.line)
   })
-
-  ///// <Button variant="link" href= ->
-  ///// <Link href= isWithinText={false}
+  ////// find the buttons that will be changed and rename them
   const linkVariants = findElements(j, root, importedName, [
     { name: 'variant', value: 'link' },
     { name: 'href' }
   ])
+  const linkInverseVariants = findElements(j, root, importedName, [
+    { name: 'variant', value: 'link-inverse' },
+    { name: 'href' }
+  ])
+  ///// insert import if Button was converted to Link
+  if (linkVariants.length > 0 || linkInverseVariants.length > 0) {
+    const linkImportName = addImportIfNeeded(j, root, 'Link', [
+      '@instructure/ui-link',
+      '@instructure/ui'
+    ])
+    renameElements(linkVariants, importedName, linkImportName)
+    renameElements(linkInverseVariants, importedName, linkImportName)
+  }
+
+  ///// <Button variant="link" href= ->
+  ///// <Link href= isWithinText={false}
   findAttribute(j, linkVariants, 'href').insertAfter(
     j.jsxAttribute(
       j.jsxIdentifier('isWithinText'),
@@ -77,16 +92,12 @@ export default function UpdateV7ButtonsLink(
     )
   )
   findAttribute(j, linkVariants, 'variant').remove()
-  renameElements(linkVariants, importedName, 'Link')
   linkVariants.forEach((path) => {
     displayHrefWarning(filePath, path.value.loc!.start.line)
   })
   ///// <Button variant="link-inverse" href= ->
   ///// <Link color="link-inverse" href= isWithinText={false}
-  const linkInverseVariants = findElements(j, root, importedName, [
-    { name: 'variant', value: 'link-inverse' },
-    { name: 'href' }
-  ])
+
   findAttribute(j, linkInverseVariants, 'href').insertAfter(
     j.jsxAttribute(
       j.jsxIdentifier('isWithinText'),
@@ -99,22 +110,9 @@ export default function UpdateV7ButtonsLink(
     ;(node.value as Literal).value = 'link-inverse'
     return nodePath.node
   })
-  renameElements(linkInverseVariants, importedName, 'Link')
   linkVariants.forEach((path) => {
     displayHrefWarning(filePath, path.value.loc!.start.line)
   })
-
-  ///// insert import if Button was converted to Link
-  if (linkVariants.length > 0 || linkInverseVariants.length > 0) {
-    root
-      .find(j.ImportDeclaration)
-      .insertAfter(
-        j.importDeclaration(
-          [j.importSpecifier(j.identifier('Link'))],
-          j.literal('@instructure/ui-link')
-        )
-      )
-  }
 }
 
 function displayHrefWarning(filePath: string, lineNumber: number) {
