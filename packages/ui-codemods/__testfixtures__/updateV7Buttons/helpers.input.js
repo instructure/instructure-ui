@@ -12,6 +12,6 @@ btn = <Button fluidWidth={false} />
 import { CloseButton } from '@instructure/ui'
 btn = <CloseButton buttonRef={(_e) => 3} />
 
-// this should cause a new import to appear
+// this should rename it to the import alias of Link
 btn = <BBB variant="link" href="#" />
 btn = <BBB variant="link" href="#" />

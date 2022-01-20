@@ -28,6 +28,7 @@ import {
   JSXAttribute,
   JSXElement,
   JSXIdentifier,
+  JSXText,
   Literal
 } from 'jscodeshift'
 import {
@@ -73,22 +74,49 @@ export default function updateV7ButtonsIconCircle(
     if (!path.value.children || path.value.children.length == 0) {
       return true
     }
-    if (path.value.children.length == 1) {
-      const theChild = path.value.children[0]
-      if (
-        isJSXElement(theChild) &&
-        (theChild.openingElement.name as JSXIdentifier).name ===
+    let screenReaderChildText
+    for (const child of path.value.children) {
+      if (isJSXText(child) && child.value.trim().length > 0) {
+        // visible child, TODO display error
+        return false
+      } else if (
+        isJSXElement(child) &&
+        (child.openingElement.name as JSXIdentifier).name ===
           'ScreenReaderContent'
       ) {
-        return true
+        // TODO not good, this code should be OK: <ScreenReaderContent>{formatMessage('Edit')}</ScreenReaderContent>
+        if (
+          child.children &&
+          child.children.length === 1 &&
+          child.children[0].type === 'JSXText'
+        ) {
+          if (!screenReaderChildText) {
+            screenReaderChildText = child.children[0].value
+          } else {
+            // error, 2 or more screenreader children
+            return false
+          }
+        }
       }
+    }
+    if (screenReaderChildText) {
+      path.value.openingElement.attributes!.push(
+        j.jsxAttribute(
+          j.jsxIdentifier('screenReaderLabel'),
+          j.stringLiteral(screenReaderChildText)
+        )
+      )
+      while (path.value.children.length > 0) {
+        path.value.children.pop()
+      }
+      return true
     }
     console.warn(
       'Cannot update icon/circle Button in ' +
         filePath +
         ' at line ' +
         path.value.loc?.start.line +
-        ' because it has visible child or has multiple children. ' +
+        ' because it has visible child or has multiple/non-ScreenReader children. ' +
         'This could be a false alert (the codemod just checks whether it has a ' +
         'ScreenReaderContent child). You will need to update this manually.'
     )
@@ -190,4 +218,8 @@ function addWithBorderBackground(
 
 function isJSXElement(elem: { type: string }): elem is JSXElement {
   return elem.type == 'JSXElement'
+}
+
+function isJSXText(elem: { type: string }): elem is JSXText {
+  return elem.type == 'JSXText'
 }

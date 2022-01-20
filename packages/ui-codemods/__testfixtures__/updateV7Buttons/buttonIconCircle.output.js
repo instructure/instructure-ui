@@ -20,8 +20,12 @@ let a = (
       color="primary-inverse"
       withBackground={false}
       withBorder={false}
-    >
-      <ScreenReaderContent>abc</ScreenReaderContent>
-    </IconButton>
+      screenReaderLabel="abc"
+    ></IconButton>
+    <IconButton
+      screenReaderLabel="hello"
+      withBackground={false}
+      withBorder={false}
+    ></IconButton>
   </p>
 )

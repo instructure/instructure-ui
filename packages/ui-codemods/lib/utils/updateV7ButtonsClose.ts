@@ -57,6 +57,7 @@ export default function updateV7ButtonsClose(
     })
     .forEach((path) => {
       if (path.value.children && path.value.children.length > 0) {
+        // TODO do this in a codemod!
         console.warn(
           filePath +
             ' line ' +
