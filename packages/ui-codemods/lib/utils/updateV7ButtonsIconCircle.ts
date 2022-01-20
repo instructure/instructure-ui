@@ -31,7 +31,7 @@ import {
   Literal
 } from 'jscodeshift'
 import {
-  addImport,
+  addImportIfNeeded,
   findAttribute,
   findElements,
   renameElements
@@ -99,10 +99,15 @@ export default function updateV7ButtonsIconCircle(
     return
   }
   // add IconButton import
-  addImport(j, root, '@instructure/ui-buttons', 'IconButton')
+  const iconButtonImportName = addImportIfNeeded(
+    j,
+    root,
+    'IconButton',
+    '@instructure/ui-buttons'
+  )
 
-  // rename every <Button> to <IconButton>
-  renameElements(buttonsWithNoText, 'Button', 'IconButton')
+  // rename every <Button> to <IconButton> (or whatever alias its imported under)
+  renameElements(buttonsWithNoText, 'Button', iconButtonImportName)
 
   // remove variant="icon", add withBorder={false} withBackground={false}
   const iconButton = findAttribute(
