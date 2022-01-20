@@ -42,7 +42,7 @@ exports.builder = (yargs) => {
     alias: 'scope-modifications',
     type: 'array',
     describe:
-      'Specify the scope of the code modifications. For example, specifying only `imports` will limit the code changes to imports only.',
+      'Specify the scope of the code modifications. Specifying `imports` will only change import statement, `props` will update prop values.',
     choices: ['imports', 'props'],
     default: ['imports', 'props']
   })
