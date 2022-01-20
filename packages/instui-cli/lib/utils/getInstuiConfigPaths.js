@@ -31,6 +31,15 @@ const parseMajorVersion = ({ version }) => {
   return semanticVersion ? semanticVersion.major : version
 }
 
+/**
+ * Reads every config file with the given name inside the given folder up
+ * to the given version. e.g. getInstuiConfigPaths("a.json", "b", "v7")
+ * returns "b/v5/a.json, b/v6/a.json, b/v7/a.json"
+ * @param name the filename to find e.g. propNames.config.json
+ * @param type the directory inside intstui-config to look e.g. codemod-configs
+ * @param version optional only return config files up to this version
+ * @return {*[]} an array of file paths
+ */
 module.exports = ({ name, type, version } = {}) => {
   const root = path.resolve(
     path.dirname(require.resolve('@instructure/instui-config/package.json')),

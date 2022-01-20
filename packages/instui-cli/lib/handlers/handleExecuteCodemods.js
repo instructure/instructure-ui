@@ -94,6 +94,7 @@ module.exports = async ({
     executeCodemods({
       sourcePath,
       codemodName: 'updatePropNames.js',
+      // Array of every propNames.config.json
       configPaths: getInstuiConfigPaths({
         type: 'codemod-configs',
         name: 'propNames.config.json',
