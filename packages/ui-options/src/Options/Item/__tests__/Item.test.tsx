@@ -77,6 +77,33 @@ describe('<Item />', async () => {
     expect(child).to.exist()
   })
 
+  it('should render description properly', async () => {
+    await mount(
+      <Item description="Some text as description">
+        <span id="customContent">Hello World</span>
+      </Item>
+    )
+    const item = await ItemLocator.find()
+
+    expect(await item.find('#customContent')).to.have.text('Hello World')
+    expect(await item.find('[role="note"]')).to.have.text(
+      'Some text as description'
+    )
+  })
+
+  it('should render role attributes for description', async () => {
+    await mount(
+      <Item description="Some text as description" descriptionRole="comment">
+        Hello World
+      </Item>
+    )
+    const item = await ItemLocator.find()
+
+    expect(await item.find('[role="comment"]')).to.have.text(
+      'Some text as description'
+    )
+  })
+
   it('should pass props through to label', async () => {
     await mount(
       <Item role="option" tabIndex={-1} data-custom-attr="true">

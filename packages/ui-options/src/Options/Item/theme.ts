@@ -58,7 +58,13 @@ const generateComponentTheme = (theme: Theme): OptionsItemTheme => {
     nestedPadding: spacing?.medium,
 
     beforeLabelContentVOffset: '0.625rem',
-    afterLabelContentVOffset: '0.625rem'
+    afterLabelContentVOffset: '0.625rem',
+
+    descriptionFontSize: typography.fontSizeSmall,
+    descriptionFontWeight: typography.fontWeightNormal,
+    descriptionLineHeight: typography.lineHeight,
+    descriptionPaddingStart: '0.25em',
+    descriptionColor: colors.textDark
   }
 
   return {

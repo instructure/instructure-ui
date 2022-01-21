@@ -58,11 +58,9 @@ class Item extends Component<OptionsItemProps> {
     as: 'span',
     variant: 'default',
     role: 'listitem',
-    renderBeforeLabel: null,
-    renderAfterLabel: null,
+    descriptionRole: 'note',
     beforeLabelContentVAlign: 'center',
-    afterLabelContentVAlign: 'center',
-    children: null
+    afterLabelContentVAlign: 'center'
   } as const
 
   ref: Element | null = null
@@ -102,11 +100,22 @@ class Item extends Component<OptionsItemProps> {
   }
 
   render() {
-    const { as, role, styles, renderBeforeLabel, renderAfterLabel, children } =
-      this.props
+    const {
+      as,
+      role,
+      styles,
+      description,
+      descriptionRole,
+      renderBeforeLabel,
+      renderAfterLabel,
+      children
+    } = this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
     const passthroughProps = omitProps(this.props, Item.allowedProps)
+
+    const childrenContent = callRenderProp(children)
+    const descriptionContent = callRenderProp(description)
 
     return (
       <ElementType
@@ -118,7 +127,12 @@ class Item extends Component<OptionsItemProps> {
         }}
       >
         <span {...passthroughProps} css={styles?.container} role={role}>
-          {children}
+          {childrenContent}
+          {descriptionContent && (
+            <span css={styles?.description} role={descriptionRole}>
+              {descriptionContent}
+            </span>
+          )}
         </span>
         {renderBeforeLabel &&
           this.renderContent(renderBeforeLabel, styles?.contentBefore)}

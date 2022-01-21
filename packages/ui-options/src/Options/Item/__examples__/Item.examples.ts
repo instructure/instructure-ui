@@ -31,36 +31,46 @@ export default {
   propValues: {
     renderAfterLabel: [null, IconArrowOpenEndSolid],
     renderBeforeLabel: [null, IconCheckSolid],
-    children: [
-      'Lorem ipsum dolor sit amet',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor semper nunc et convallis. Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa. Integer sit amet ante vitae lectus gravida pulvinar. Maecenas id pulvinar massa. Ut ante quam, eleifend non sapien sit amet, ullamcorper ultricies neque. Fusce interdum, eros eu porta vestibulum, dui tortor posuere neque, eget porta arcu ipsum non est. Sed volutpat interdum arcu, sodales faucibus lacus sollicitudin eget. Ut ultricies tempor varius. Sed vel porta urna.'
+    description: [
+      null,
+      'Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa. Integer sit amet ante vitae lectus gravida pulvinar.'
     ]
   },
   getComponentProps: (props) => {
     return {
       renderAfterLabel: props.renderAfterLabel,
       renderBeforeLabel: props.renderBeforeLabel,
-      children: props.children,
-      role: 'none'
+      children: 'Lorem ipsum dolor sit amet',
+      role: 'none',
+      descriptionRole: 'note'
+    }
+  },
+  getExampleProps: () => {
+    return {
+      width: '400px'
     }
   },
   filter: (props) => {
-    if ((props.children as string).length > 50) {
-      if (props.variant !== 'default') {
-        return true
-      }
-
+    if (props.description) {
       if (
-        (!props.renderBeforeLabel && !props.renderAfterLabel) ||
-        (props.renderBeforeLabel && props.renderAfterLabel)
+        props.beforeLabelContentVAlign !== 'center' &&
+        (!props.renderBeforeLabel || props.renderAfterLabel)
       ) {
         return true
       }
 
       if (
-        (props.renderBeforeLabel &&
-          props.afterLabelContentVAlign !== 'center') ||
-        (props.renderAfterLabel && props.beforeLabelContentVAlign !== 'center')
+        props.afterLabelContentVAlign !== 'center' &&
+        (!props.renderAfterLabel || props.renderBeforeLabel)
+      ) {
+        return true
+      }
+    }
+
+    if (!props.description) {
+      if (
+        props.afterLabelContentVAlign !== 'center' ||
+        props.beforeLabelContentVAlign !== 'center'
       ) {
         return true
       }
