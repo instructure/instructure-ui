@@ -26,15 +26,17 @@ import {
   Collection,
   JSCodeshift,
   JSXAttribute,
-  JSXElement,
   JSXIdentifier,
-  JSXText,
   Literal
 } from 'jscodeshift'
 import {
   addImportIfNeeded,
   findAttribute,
   findElements,
+  getVisibleChildren,
+  isJSXElement,
+  isJSXExpressionContainer,
+  isJSXText,
   renameElements
 } from '../helpers/buttonUpdateHelpers'
 
@@ -71,31 +73,55 @@ export default function updateV7ButtonsIconCircle(
     ]
   }).filter((path) => {
     // finds all with no/ScreenReader children
-    if (!path.value.children || path.value.children.length == 0) {
+    const children = getVisibleChildren(path.value.children)
+    if (children.length == 0) {
       return true
     }
+    if (children.length > 1) {
+      console.warn(
+        'Cannot update icon/circle Button in ' +
+          filePath +
+          ' at line ' +
+          path.value.loc?.start.line +
+          ' because it has multiple children. ' +
+          'You will need to update this manually.'
+      )
+    }
     let screenReaderChildText
-    for (const child of path.value.children) {
-      if (isJSXText(child) && child.value.trim().length > 0) {
-        // visible child, TODO display error
-        return false
-      } else if (
-        isJSXElement(child) &&
-        (child.openingElement.name as JSXIdentifier).name ===
-          'ScreenReaderContent'
-      ) {
-        // TODO not good, this code should be OK: <ScreenReaderContent>{formatMessage('Edit')}</ScreenReaderContent>
-        if (
-          child.children &&
-          child.children.length === 1 &&
-          child.children[0].type === 'JSXText'
-        ) {
-          if (!screenReaderChildText) {
-            screenReaderChildText = child.children[0].value
+    const child = children[0]
+    if (
+      isJSXElement(child) &&
+      (child.openingElement.name as JSXIdentifier).name ===
+        'ScreenReaderContent'
+    ) {
+      if (child.children && child.children.length === 1) {
+        if (!screenReaderChildText) {
+          const firstChild = child.children[0]
+          if (isJSXText(firstChild)) {
+            screenReaderChildText = j.stringLiteral(firstChild.value)
+          } else if (isJSXExpressionContainer(firstChild)) {
+            screenReaderChildText = firstChild
           } else {
-            // error, 2 or more screenreader children
+            console.warn(
+              'Cannot update icon/circle Button in ' +
+                filePath +
+                ' at line ' +
+                path.value.loc?.start.line +
+                ' because I cant recognize whats inside its' +
+                'ScreenReaderContent. You will need to update this manually.'
+            )
             return false
           }
+        } else {
+          console.warn(
+            'Cannot update icon/circle Button in ' +
+              filePath +
+              ' at line ' +
+              path.value.loc?.start.line +
+              ' it has multiple ScreenReaderContent children.' +
+              'You will need to update this manually.'
+          )
+          return false
         }
       }
     }
@@ -103,11 +129,11 @@ export default function updateV7ButtonsIconCircle(
       path.value.openingElement.attributes!.push(
         j.jsxAttribute(
           j.jsxIdentifier('screenReaderLabel'),
-          j.stringLiteral(screenReaderChildText)
+          screenReaderChildText
         )
       )
-      while (path.value.children.length > 0) {
-        path.value.children.pop()
+      while (path.value.children!.length > 0) {
+        path.value.children!.pop()
       }
       return true
     }
@@ -116,9 +142,8 @@ export default function updateV7ButtonsIconCircle(
         filePath +
         ' at line ' +
         path.value.loc?.start.line +
-        ' because it has visible child or has multiple/non-ScreenReader children. ' +
-        'This could be a false alert (the codemod just checks whether it has a ' +
-        'ScreenReaderContent child). You will need to update this manually.'
+        ' because this script is buggy or it has some weird children.' +
+        'You will need to update this manually.'
     )
     return false
   })
@@ -214,12 +239,4 @@ function addWithBorderBackground(
         j.jsxExpressionContainer(j.jsxIdentifier('false'))
       )
     )
-}
-
-function isJSXElement(elem: { type: string }): elem is JSXElement {
-  return elem.type == 'JSXElement'
-}
-
-function isJSXText(elem: { type: string }): elem is JSXText {
-  return elem.type == 'JSXText'
 }

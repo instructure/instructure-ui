@@ -29,8 +29,8 @@ const tests = [
   //'helpers',
   // 'buttonMisc',
   // 'buttonWithText',
-  'buttonIconCircle'
-  //'buttonClose',
+  //'buttonIconCircle'
+  'buttonClose'
   // 'buttonLink'
 ]
 

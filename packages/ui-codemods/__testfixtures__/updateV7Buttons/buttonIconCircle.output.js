@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Button, IconButton } from '@instructure/ui-buttons'
 
+const fun = () => 'test'
 let a = (
   <p>
     <IconButton withBackground={false} withBorder={false} />
@@ -23,7 +24,7 @@ let a = (
       screenReaderLabel="abc"
     ></IconButton>
     <IconButton
-      screenReaderLabel="hello"
+      screenReaderLabel={fun()}
       withBackground={false}
       withBorder={false}
     ></IconButton>
