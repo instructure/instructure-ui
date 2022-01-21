@@ -55,7 +55,10 @@ const generateComponentTheme = (theme: Theme): OptionsItemTheme => {
 
     padding: `${spacing?.xSmall} ${spacing?.small}`,
     iconPadding: spacing?.small,
-    nestedPadding: spacing?.medium
+    nestedPadding: spacing?.medium,
+
+    beforeLabelContentVOffset: '0.625rem',
+    afterLabelContentVOffset: '0.625rem'
   }
 
   return {

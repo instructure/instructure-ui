@@ -787,6 +787,8 @@ export type OptionsItemTheme = {
   padding: string | 0
   iconPadding: Spacing['small']
   nestedPadding: Spacing['medium']
+  beforeLabelContentVOffset: string | 0
+  afterLabelContentVOffset: string | 0
 }
 
 export type OptionsSeparatorTheme = {

@@ -296,3 +296,41 @@ render(
   ]} />
 )
 ```
+
+The content of the `renderBeforeLabel` and `renderAfterLabel` props are vertically centered by default. This can be changed with the `beforeLabelContentVAlign` and `afterLabelContentVAlign` props.
+
+```js
+---
+example: true
+---
+<View display="block" width="300px">
+  <Options>
+    <Options.Item
+      renderBeforeLabel={IconCheckSolid}
+      renderAfterLabel={IconArrowOpenEndSolid}
+      beforeLabelContentVAlign="start"
+      afterLabelContentVAlign="start"
+    >
+      Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa.
+    </Options.Item>
+    <Options.Separator />
+    <Options.Item
+      renderBeforeLabel={IconCheckSolid}
+      renderAfterLabel={IconArrowOpenEndSolid}
+      beforeLabelContentVAlign="center"
+      afterLabelContentVAlign="center"
+    >
+      Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa.
+    </Options.Item>
+    <Options.Separator />
+    <Options.Item
+      renderBeforeLabel={IconCheckSolid}
+      renderAfterLabel={IconArrowOpenEndSolid}
+      beforeLabelContentVAlign="end"
+      afterLabelContentVAlign="end"
+    >
+      Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa.
+    </Options.Item>
+  </Options>
+</View>
+```

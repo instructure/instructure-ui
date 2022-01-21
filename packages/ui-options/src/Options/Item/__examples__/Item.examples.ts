@@ -23,20 +23,49 @@
  */
 
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
-import { OptionsItemProps } from '../props'
+import type { StoryConfig } from '@instructure/ui-test-utils'
+import type { OptionsItemProps } from '../props'
 
 export default {
   maxExamplesPerPage: 50,
   propValues: {
     renderAfterLabel: [null, IconArrowOpenEndSolid],
-    renderBeforeLabel: [null, IconCheckSolid]
+    renderBeforeLabel: [null, IconCheckSolid],
+    children: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor semper nunc et convallis. Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa. Integer sit amet ante vitae lectus gravida pulvinar. Maecenas id pulvinar massa. Ut ante quam, eleifend non sapien sit amet, ullamcorper ultricies neque. Fusce interdum, eros eu porta vestibulum, dui tortor posuere neque, eget porta arcu ipsum non est. Sed volutpat interdum arcu, sodales faucibus lacus sollicitudin eget. Ut ultricies tempor varius. Sed vel porta urna.'
+    ]
   },
-  getComponentProps: (props: OptionsItemProps) => {
+  getComponentProps: (props) => {
     return {
       renderAfterLabel: props.renderAfterLabel,
       renderBeforeLabel: props.renderBeforeLabel,
-      children: 'Lorem ipsum dolor sit amet',
+      children: props.children,
       role: 'none'
     }
+  },
+  filter: (props) => {
+    if ((props.children as string).length > 50) {
+      if (props.variant !== 'default') {
+        return true
+      }
+
+      if (
+        (!props.renderBeforeLabel && !props.renderAfterLabel) ||
+        (props.renderBeforeLabel && props.renderAfterLabel)
+      ) {
+        return true
+      }
+
+      if (
+        (props.renderBeforeLabel &&
+          props.afterLabelContentVAlign !== 'center') ||
+        (props.renderAfterLabel && props.beforeLabelContentVAlign !== 'center')
+      ) {
+        return true
+      }
+    }
+
+    return false
   }
-}
+} as StoryConfig<OptionsItemProps>

@@ -45,7 +45,9 @@ const generateStyle = (
     variant,
     children,
     renderBeforeLabel: hasContentBeforeLabel,
-    renderAfterLabel: hasContentAfterLabel
+    renderAfterLabel: hasContentAfterLabel,
+    beforeLabelContentVAlign,
+    afterLabelContentVAlign
   } = props
 
   const containsList = matchComponentTypes(children, ['Options'])
@@ -61,6 +63,32 @@ const generateStyle = (
     },
     disabled: { cursor: 'not-allowed', opacity: 0.5 },
     default: {}
+  }
+
+  const getContentVAlign = (type: 'before' | 'after') => {
+    const vAlign =
+      type === 'before' ? beforeLabelContentVAlign : afterLabelContentVAlign
+
+    const vOffset =
+      type === 'before'
+        ? componentTheme.beforeLabelContentVOffset
+        : componentTheme.afterLabelContentVOffset
+
+    return {
+      start: {
+        alignItems: 'flex-start',
+        paddingBlockStart: vOffset
+      },
+      center: {
+        alignItems: 'center',
+        paddingBlockStart: vOffset,
+        paddingBlockEnd: vOffset
+      },
+      end: {
+        alignItems: 'flex-end',
+        paddingBlockEnd: vOffset
+      }
+    }[vAlign]
   }
 
   return {
@@ -115,9 +143,9 @@ const generateStyle = (
     },
     content: {
       label: 'optionItem__content',
-      alignItems: 'center',
       display: 'flex',
       height: '100%',
+      boxSizing: 'border-box',
       pointerEvents: 'none',
       position: 'absolute',
       top: '0'
@@ -125,12 +153,14 @@ const generateStyle = (
     contentBefore: {
       label: 'optionItem__content--before',
       insetInlineEnd: 'auto',
-      insetInlineStart: componentTheme.iconPadding
+      insetInlineStart: componentTheme.iconPadding,
+      ...getContentVAlign('before')
     },
     contentAfter: {
       label: 'optionItem__content--after',
       insetInlineEnd: componentTheme.iconPadding,
-      insetInlineStart: 'auto'
+      insetInlineStart: 'auto',
+      ...getContentVAlign('after')
     }
   }
 }
