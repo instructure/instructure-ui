@@ -192,10 +192,6 @@ class Modal extends Component<ModalProps> {
             variant: variant,
             overflow: child.props.overflow || overflow
           })
-        } else if (matchComponentTypes<FooterChild>(child, [ModalFooter])) {
-          return safeCloneElement(child, {
-            variant: variant
-          })
         } else {
           return safeCloneElement(child, {
             variant: variant

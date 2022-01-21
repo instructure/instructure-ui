@@ -22,10 +22,24 @@
  * SOFTWARE.
  */
 
-import React, { ClassAttributes, ReactElement, ReactNode } from 'react'
+import React, {
+  Attributes,
+  FunctionComponentElement,
+  ComponentElement,
+  ReactElement,
+  ReactNode,
+  DOMElement
+} from 'react'
 
 import { logWarn as warn } from '@instructure/console'
 import { createChainedFunction } from '@instructure/ui-utils'
+
+type GetProps<E extends ReactElement = ReactElement> = E extends
+  | FunctionComponentElement<infer P>
+  | ComponentElement<infer P, any>
+  | DOMElement<infer P, any>
+  ? P & { ref?: E['ref'] }
+  : Record<string, any> & { ref?: any }
 
 /**
  * ---
@@ -36,9 +50,12 @@ import { createChainedFunction } from '@instructure/ui-utils'
  * @param props Props of the element
  * @param children
  */
-function safeCloneElement<P extends Record<string, any> & { style?: any }>(
-  element: ReactElement<P> & { ref?: any },
-  props: P & { ref?: any } & ClassAttributes<any>,
+function safeCloneElement<
+  E extends ReactElement = ReactElement,
+  P extends GetProps<E> = GetProps<E>
+>(
+  element: { ref?: any } & E,
+  props: { style?: any } & Attributes & P,
   ...children: ReactNode[]
 ) {
   const cloneRef = props.ref
@@ -76,7 +93,7 @@ function safeCloneElement<P extends Record<string, any> & { style?: any }>(
   })
 
   if (originalRef == null || cloneRef == null) {
-    return React.cloneElement<P>(element, mergedProps, ...children)
+    return React.cloneElement<P>(element, mergedProps, ...children) as E
   }
 
   warn(
@@ -90,7 +107,7 @@ Ignoring ref: ${originalRef}`
     element,
     {
       ...mergedProps,
-      ref(component: any) {
+      ref(component: E) {
         if (cloneRefIsFunction) {
           ;(cloneRef as (instance: any) => void)(component)
         } else {
@@ -100,7 +117,7 @@ Ignoring ref: ${originalRef}`
       }
     },
     ...children
-  )
+  ) as E
 }
 
 export default safeCloneElement
