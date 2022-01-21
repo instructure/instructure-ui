@@ -37,6 +37,7 @@ import {
   isJSXElement,
   isJSXExpressionContainer,
   isJSXText,
+  removeAllChildren,
   renameElements
 } from '../helpers/buttonUpdateHelpers'
 
@@ -132,9 +133,7 @@ export default function updateV7ButtonsIconCircle(
           screenReaderChildText
         )
       )
-      while (path.value.children!.length > 0) {
-        path.value.children!.pop()
-      }
+      removeAllChildren(path.value)
       return true
     }
     console.warn(
@@ -142,7 +141,7 @@ export default function updateV7ButtonsIconCircle(
         filePath +
         ' at line ' +
         path.value.loc?.start.line +
-        ' because this script is buggy or it has some weird children.' +
+        '\n because it has visible children. ' +
         'You will need to update this manually.'
     )
     return false

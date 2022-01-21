@@ -26,12 +26,12 @@ const path = require('path')
 const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
 const tests = [
-  //'helpers',
-  // 'buttonMisc',
-  // 'buttonWithText',
-  //'buttonIconCircle'
-  'buttonClose'
-  // 'buttonLink'
+  'helpers',
+  'buttonMisc',
+  'buttonWithText',
+  'buttonIconCircle',
+  'buttonClose',
+  'buttonLink'
 ]
 
 // eslint-disable-next-line no-undef

@@ -22,11 +22,11 @@ let a = (
       withBackground={false}
       withBorder={false}
       screenReaderLabel="abc"
-    ></IconButton>
+    />
     <IconButton
       screenReaderLabel={fun()}
       withBackground={false}
       withBorder={false}
-    ></IconButton>
+    />
   </p>
 )
