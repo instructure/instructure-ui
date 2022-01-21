@@ -60,6 +60,14 @@ type OptionsItemOwnProps = ItemProps & {
    * (if you pass a function, it has the `props` as its parameter)
    */
   renderAfterLabel?: React.ReactNode | ((props: ItemProps) => React.ReactNode)
+  /**
+   * Sets the vAlign of renderBeforeLabel content
+   */
+  beforeLabelContentVAlign: 'start' | 'center' | 'end'
+  /**
+   * Sets the vAlign of renderAfterLabel content
+   */
+  afterLabelContentVAlign: 'start' | 'center' | 'end'
   children?: React.ReactNode | (() => React.ReactNode)
 }
 
@@ -81,6 +89,8 @@ const propTypes: PropValidators<PropKeys> = {
   role: PropTypes.string,
   renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  beforeLabelContentVAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  afterLabelContentVAlign: PropTypes.oneOf(['start', 'center', 'end']),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
@@ -90,6 +100,8 @@ const allowedProps: AllowedPropKeys = [
   'role',
   'renderBeforeLabel',
   'renderAfterLabel',
+  'beforeLabelContentVAlign',
+  'afterLabelContentVAlign',
   'children'
 ]
 

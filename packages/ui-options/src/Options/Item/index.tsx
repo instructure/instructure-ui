@@ -60,6 +60,8 @@ class Item extends Component<OptionsItemProps> {
     role: 'listitem',
     renderBeforeLabel: null,
     renderAfterLabel: null,
+    beforeLabelContentVAlign: 'center',
+    afterLabelContentVAlign: 'center',
     children: null
   } as const
 
@@ -100,14 +102,8 @@ class Item extends Component<OptionsItemProps> {
   }
 
   render() {
-    const {
-      as,
-      role,
-      styles,
-      renderBeforeLabel,
-      renderAfterLabel,
-      children
-    } = this.props
+    const { as, role, styles, renderBeforeLabel, renderAfterLabel, children } =
+      this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
     const passthroughProps = omitProps(this.props, Item.allowedProps)
