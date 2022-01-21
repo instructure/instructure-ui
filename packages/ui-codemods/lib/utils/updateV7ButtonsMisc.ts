@@ -76,7 +76,7 @@ export default function updateV7ButtonsMisc(
         filePath +
           ' line ' +
           path.value.loc!.start.line +
-          ": 'display' attribute was changed to 'block'"
+          ":\n'display' attribute was changed to 'block'"
       )
     })
     .remove()
@@ -92,7 +92,7 @@ export default function updateV7ButtonsMisc(
         filePath +
           ' line ' +
           path.value.loc!.start.line +
-          ": 'textAlign' attribute was changed to 'start'"
+          ":\n'textAlign' attribute was changed to 'start'"
       )
     })
     .remove()

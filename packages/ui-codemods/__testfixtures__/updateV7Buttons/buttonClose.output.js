@@ -7,8 +7,8 @@ let a = (
     <CloseButton elementRef={(_e) => 3} />
     <CloseButton />
     <CloseButton color="primary-inverse" />
-    <CloseButton screenReaderLabel="simple text message"></CloseButton>
-    <CloseButton screenReaderLabel={fun()}></CloseButton>
+    <CloseButton screenReaderLabel="simple text message" />
+    <CloseButton screenReaderLabel={fun()} />
     <CloseButton>This cannot be updated {fun()}</CloseButton>
   </p>
 )

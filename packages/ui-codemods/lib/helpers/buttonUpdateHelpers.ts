@@ -363,6 +363,22 @@ function findImportPath(
   )
 }
 
+/**
+ * Removes all children from the specified element and makes it
+ * self-closing.
+ */
+function removeAllChildren(element: JSXElement) {
+  const elem = element
+  if (elem.children) {
+    while (elem.children.length > 0) {
+      elem.children.pop()
+    }
+    elem.openingElement.selfClosing = true
+    elem.closingElement = undefined
+  }
+}
+
+// type checkers
 type astElem = { type: string }
 function isImportSpecifier(elem?: astElem | null): elem is ImportSpecifier {
   return elem !== null && elem !== undefined && elem.type === 'ImportSpecifier'
@@ -400,6 +416,7 @@ export {
   addImportIfNeeded,
   renameElements,
   getVisibleChildren,
+  removeAllChildren,
   // type checkers
   isJSXAttribue,
   isJSXElement,

@@ -117,12 +117,12 @@ export default function UpdateV7ButtonsLink(
 
 function displayHrefWarning(filePath: string, lineNumber: number) {
   console.warn(
-    '<Button with link or link-inverse variant might need the removal' +
-      ' of margin/padding parameters. File: ' +
+    'Button with link or link-inverse variant might need the removal' +
+      ' of margin/padding parameters. File:\n' +
       filePath +
       ' line ' +
       lineNumber +
-      '. Also you will likely need to add @instructure/ui-link as a ' +
+      '.\nAlso you will likely need to add @instructure/ui-link as a ' +
       'dependency. For more see ' +
       'https://instructure.design/v7/#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-an-href-attribute-and-padding-overrides'
   )

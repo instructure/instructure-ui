@@ -25,10 +25,12 @@
 import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 import {
   findAttribute,
+  findElements,
   findOpeningTags,
   getVisibleChildren,
   isJSXExpressionContainer,
-  isJSXText
+  isJSXText,
+  removeAllChildren
 } from '../helpers/buttonUpdateHelpers'
 
 /**
@@ -50,47 +52,35 @@ export default function updateV7ButtonsClose(
     .find(j.JSXIdentifier, { name: 'buttonRef' })
     .replaceWith('elementRef')
 
-  ///// If it has children try to move them under screeReaderLabel
-  root
-    .find(j.JSXElement, {
-      openingElement: {
-        // finds all <CloseButton
-        name: {
-          type: 'JSXIdentifier',
-          name: importedName
-        }
+  ///// If it has children try to move them under screenReaderLabel
+  findElements(j, root, importedName).forEach((path) => {
+    const children = getVisibleChildren(path.value.children)
+    if (children.length == 1) {
+      const firstChild = children[0]
+      let screenReaderLabelText
+      if (isJSXText(firstChild)) {
+        screenReaderLabelText = j.stringLiteral(firstChild.value)
+      } else if (isJSXExpressionContainer(firstChild)) {
+        screenReaderLabelText = firstChild
       }
-    })
-    .forEach((path) => {
-      const children = getVisibleChildren(path.value.children)
-      if (children.length == 1) {
-        const firstChild = children[0]
-        let screenReaderLabelText
-        if (isJSXText(firstChild)) {
-          screenReaderLabelText = j.stringLiteral(firstChild.value)
-        } else if (isJSXExpressionContainer(firstChild)) {
-          screenReaderLabelText = firstChild
-        }
-        path.value.openingElement.attributes!.push(
-          j.jsxAttribute(
-            j.jsxIdentifier('screenReaderLabel'),
-            screenReaderLabelText
-          )
+      path.value.openingElement.attributes!.push(
+        j.jsxAttribute(
+          j.jsxIdentifier('screenReaderLabel'),
+          screenReaderLabelText
         )
-        while (path.value.children!.length > 0) {
-          path.value.children!.pop()
-        }
-      } else if (children.length > 1) {
-        console.warn(
-          'Cannot update CloseButton in ' +
-            filePath +
-            ' at line ' +
-            path.value.loc?.start.line +
-            ' because it has multiple children. ' +
-            'You will need to update this manually.'
-        )
-      }
-    })
+      )
+      removeAllChildren(path.value)
+    } else if (children.length > 1) {
+      console.warn(
+        'Cannot update CloseButton in ' +
+          filePath +
+          ' at line ' +
+          path.value.loc?.start.line +
+          ' because it has multiple children. ' +
+          'You will need to update this manually.'
+      )
+    }
+  })
 
   ///// Remove variant="icon" prop
   findAttribute(j, root, 'variant', 'icon').remove()
