@@ -48,6 +48,7 @@ type InstUIProviderProps = {
  *   - The value given in a parent `TextDirectionContext`
  *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
  *   - `ltr`
+ * @property {Map<string, number>} instanceMapCounter - a Map to keep track of instances
  */
 
 /**
@@ -67,8 +68,11 @@ type InstUIProviderProps = {
  *   - The value given in a parent `TextDirectionContext`
  *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
  *   - `ltr`
+ * - instanceMapCounter - A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+ * which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](https://instructure.design/#server-side-rendering))
  *
  * ```js
+ *
  * import { canvas, instructure } from '@instructure/ui-themes'
  * import { InstUISettingsProvider } from '@instructure/emotion'
  *

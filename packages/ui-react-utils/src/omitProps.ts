@@ -66,7 +66,8 @@ const omit = <T>(originalObject: T, keysToOmit: string[]) => {
       key === 'style' ||
       key === 'styles' ||
       key === 'makeStyles' ||
-      key === 'themeOverride'
+      key === 'themeOverride' ||
+      key === 'instanceMapCounter'
     ) {
       continue
     }

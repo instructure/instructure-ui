@@ -28,7 +28,7 @@ import { SSRContext } from './SSRContext'
 import { decorator } from '@instructure/ui-decorator'
 
 const withSSR = decorator((ComposedComponent: ComponentClass) => {
-  const WithSSR = forwardRef((props: any, ref: any) => {
+  const WithSSR = forwardRef((props: any, ref: React.ForwardedRef<any>) => {
     const instanceMapCounter = useContext(SSRContext)
 
     return (

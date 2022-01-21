@@ -1,7 +1,7 @@
 ---
 title: Upgrade Guide for Version 8.0
 category: Guides
-order: 1
+order: 2
 ---
 
 # Upgrade Guide for Version 8.0
