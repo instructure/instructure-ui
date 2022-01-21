@@ -33,14 +33,14 @@ const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
   expanded: !expanded
 })
 
-//@ts-expect-error check this
+//@ts-expect-error check out this later
 @withSSR()
 /**
 ---
-category: components/utilities
- ---
- @tsProps
- */
+category: components
+---
+* @tsProps
+**/
 class Expandable extends Component<ExpandableProps, ExpandableState> {
   static propTypes = propTypes
   static allowedProps = allowedProps

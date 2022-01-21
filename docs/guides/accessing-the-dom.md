@@ -1,7 +1,7 @@
 ---
 title: Accessing the DOM
 category: Guides
-order: 5
+order: 6
 ---
 
 ## Accessing the DOM
