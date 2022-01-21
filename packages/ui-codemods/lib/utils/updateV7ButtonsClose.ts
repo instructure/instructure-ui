@@ -23,7 +23,13 @@
  */
 
 import { Collection, JSCodeshift, Literal } from 'jscodeshift'
-import { findAttribute, findOpeningTags } from '../helpers/buttonUpdateHelpers'
+import {
+  findAttribute,
+  findOpeningTags,
+  getVisibleChildren,
+  isJSXExpressionContainer,
+  isJSXText
+} from '../helpers/buttonUpdateHelpers'
 
 /**
  * Does the following updates on a <CloseButton>:
@@ -44,7 +50,7 @@ export default function updateV7ButtonsClose(
     .find(j.JSXIdentifier, { name: 'buttonRef' })
     .replaceWith('elementRef')
 
-  ///// If it has children display a warning
+  ///// If it has children try to move them under screeReaderLabel
   root
     .find(j.JSXElement, {
       openingElement: {
@@ -56,15 +62,32 @@ export default function updateV7ButtonsClose(
       }
     })
     .forEach((path) => {
-      if (path.value.children && path.value.children.length > 0) {
-        // TODO do this in a codemod!
+      const children = getVisibleChildren(path.value.children)
+      if (children.length == 1) {
+        const firstChild = children[0]
+        let screenReaderLabelText
+        if (isJSXText(firstChild)) {
+          screenReaderLabelText = j.stringLiteral(firstChild.value)
+        } else if (isJSXExpressionContainer(firstChild)) {
+          screenReaderLabelText = firstChild
+        }
+        path.value.openingElement.attributes!.push(
+          j.jsxAttribute(
+            j.jsxIdentifier('screenReaderLabel'),
+            screenReaderLabelText
+          )
+        )
+        while (path.value.children!.length > 0) {
+          path.value.children!.pop()
+        }
+      } else if (children.length > 1) {
         console.warn(
-          filePath +
-            ' line ' +
+          'Cannot update CloseButton in ' +
+            filePath +
+            ' at line ' +
             path.value.loc?.start.line +
-            ': CloseButton has children, please pass them to the' +
-            " 'screenReaderLabel' prop instead. For more see " +
-            'https://instructure.design/v7/#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-closebutton'
+            ' because it has multiple children. ' +
+            'You will need to update this manually.'
         )
       }
     })

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Button } from '@instructure/ui-buttons'
 
+const fun = () => 'test'
 let a = (
   <p>
     <Button variant="icon" />
@@ -14,7 +15,7 @@ let a = (
     </Button>
     <Button variant="icon-inverse"><ScreenReaderContent>abc</ScreenReaderContent></Button>
     <Button variant="icon">
-      <ScreenReaderContent>hello</ScreenReaderContent>
+      <ScreenReaderContent>{fun()}</ScreenReaderContent>
     </Button>
   </p>
 )

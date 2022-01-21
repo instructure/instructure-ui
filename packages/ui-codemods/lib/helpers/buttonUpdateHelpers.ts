@@ -25,8 +25,6 @@
 import {
   Collection,
   ImportDeclaration,
-  ImportDefaultSpecifier,
-  ImportNamespaceSpecifier,
   ImportSpecifier,
   JSCodeshift,
   JSXAttribute,
@@ -35,6 +33,8 @@ import {
   JSXFragment,
   JSXIdentifier,
   JSXSpreadAttribute,
+  JSXSpreadChild,
+  JSXText,
   Literal
 } from 'jscodeshift'
 import type { LiteralKind } from 'ast-types/gen/kinds'
@@ -186,6 +186,36 @@ function findAttribute(
     })
 }
 
+type JSXChild =
+  | JSXElement
+  | JSXExpressionContainer
+  | JSXSpreadChild
+  | JSXFragment
+  | LiteralKind
+/**
+ * Prunes every non-visible child. This is useful because jscodeshift parses
+ * newlines and spaces as children too, for example here:
+ * ```
+ * <Button>
+ *   <aaa/>
+ * </Button>
+ * ```
+ * Button will have 3 children: a JSXText with value `"  \n"`, aaa element, and
+ * again a JSXText with `"  \n"`. This function removes the empty text nodes.
+ */
+function getVisibleChildren(nodes?: JSXChild[]) {
+  const result: JSXChild[] = []
+  if (!nodes) {
+    return result
+  }
+  for (const child of nodes) {
+    if (!isJSXText(child) || child.value.trim().length > 0) {
+      result.push(child)
+    }
+  }
+  return result
+}
+
 /**
  * Renames every element (=JSX tag). Modifies the input collection
  */
@@ -333,37 +363,33 @@ function findImportPath(
   )
 }
 
-/**
- * returns true for code like
- * "import { asd } from ..."
- */
-function isImportSpecifier(
-  specifier: ImportSpecifier | ImportNamespaceSpecifier | ImportDefaultSpecifier
-): specifier is ImportSpecifier {
-  return specifier.type === 'ImportSpecifier'
+type astElem = { type: string }
+function isImportSpecifier(elem?: astElem | null): elem is ImportSpecifier {
+  return elem !== null && elem !== undefined && elem.type === 'ImportSpecifier'
 }
 
-function isJSXAttribue(
-  attr: JSXAttribute | JSXSpreadAttribute
-): attr is JSXAttribute {
-  return attr.type === 'JSXAttribute'
+function isJSXAttribue(elem?: astElem | null): elem is JSXAttribute {
+  return elem !== null && elem !== undefined && elem.type === 'JSXAttribute'
 }
 
-function isLiteral(
-  attr:
-    | LiteralKind
-    | JSXExpressionContainer
-    | JSXElement
-    | JSXFragment
-    | null
-    | undefined
-): attr is Literal {
+function isJSXElement(elem?: astElem | null): elem is JSXElement {
+  return elem !== null && elem !== undefined && elem.type == 'JSXElement'
+}
+
+function isJSXText(elem?: astElem | null): elem is JSXText {
+  return elem !== null && elem !== undefined && elem.type == 'JSXText'
+}
+
+function isJSXExpressionContainer(
+  elem?: astElem | null
+): elem is JSXExpressionContainer {
   return (
-    attr !== undefined &&
-    attr !== null &&
-    typeof attr === 'object' &&
-    attr.type === 'Literal'
+    elem !== null && elem !== undefined && elem.type == 'JSXExpressionContainer'
   )
+}
+
+function isLiteral(elem?: astElem | null): elem is Literal {
+  return elem !== null && elem !== undefined && elem.type === 'Literal'
 }
 
 export {
@@ -373,5 +399,11 @@ export {
   findOpeningTags,
   addImportIfNeeded,
   renameElements,
-  isJSXAttribue
+  getVisibleChildren,
+  // type checkers
+  isJSXAttribue,
+  isJSXElement,
+  isJSXText,
+  isJSXExpressionContainer,
+  isLiteral
 }
