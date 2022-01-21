@@ -130,7 +130,11 @@ class Example extends React.Component {
         width="300px"
         shadow="above"
       >
-        <Options onKeyDown={this.handleKeyDown} tabIndex="0">
+        <Options
+          onKeyDown={this.handleKeyDown}
+          onMouseOut={(e) => this.setState({ highlighted: -1 })}
+          tabIndex="0"
+        >
           {this.props.options.map((option, index) => {
             let variant = 'default'
             if (this.state.highlighted === index) {
@@ -225,7 +229,11 @@ class Example extends React.Component {
         width="300px"
         shadow="above"
       >
-        <Options onKeyDown={this.handleKeyDown} tabIndex="0">
+        <Options
+          onKeyDown={this.handleKeyDown}
+          onMouseOut={(e) => this.setState({ highlighted: -1 })}
+          tabIndex="0"
+        >
           {this.props.options.map((option, index) => {
             let variant = 'default'
             if (this.state.highlighted === index) {
@@ -297,40 +305,70 @@ render(
 )
 ```
 
-The content of the `renderBeforeLabel` and `renderAfterLabel` props are vertically centered by default. This can be changed with the `beforeLabelContentVAlign` and `afterLabelContentVAlign` props.
+Additional/secondary text can be added via the `description` prop, and the ARIA role of it can be set with the `descriptionRole` prop.
+
+For longer, multi-line options the problem of the vertical alignment comes up. The content of the `renderBeforeLabel` and `renderAfterLabel` props are vertically centered by default. This can be changed with the `beforeLabelContentVAlign` and `afterLabelContentVAlign` props.
 
 ```js
 ---
+render: false
 example: true
 ---
-<View display="block" width="300px">
-  <Options>
-    <Options.Item
-      renderBeforeLabel={IconCheckSolid}
-      renderAfterLabel={IconArrowOpenEndSolid}
-      beforeLabelContentVAlign="start"
-      afterLabelContentVAlign="start"
-    >
-      Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa.
-    </Options.Item>
-    <Options.Separator />
-    <Options.Item
-      renderBeforeLabel={IconCheckSolid}
-      renderAfterLabel={IconArrowOpenEndSolid}
-      beforeLabelContentVAlign="center"
-      afterLabelContentVAlign="center"
-    >
-      Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa.
-    </Options.Item>
-    <Options.Separator />
-    <Options.Item
-      renderBeforeLabel={IconCheckSolid}
-      renderAfterLabel={IconArrowOpenEndSolid}
-      beforeLabelContentVAlign="end"
-      afterLabelContentVAlign="end"
-    >
-      Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa.
-    </Options.Item>
-  </Options>
-</View>
+class Example extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      highlighted: -1
+    }
+  }
+
+  handleMouseOver = (index) => {
+    this.setState({ highlighted: index })
+  }
+
+  render() {
+    return (
+      <View display="block" width="300px">
+        <Options onMouseOut={(e) => this.setState({ highlighted: -1 })}>
+          <Options.Item
+            onMouseOver={(e) => this.handleMouseOver(1)}
+            variant={this.state.highlighted === 1 ? 'highlighted' : 'default'}
+            description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
+            renderBeforeLabel={IconCheckSolid}
+            renderAfterLabel={IconArrowOpenEndSolid}
+            beforeLabelContentVAlign="start"
+            afterLabelContentVAlign="start"
+          >
+            Option one
+          </Options.Item>
+          <Options.Item
+            onMouseOver={(e) => this.handleMouseOver(2)}
+            variant={this.state.highlighted === 2 ? 'highlighted' : 'default'}
+            description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
+            renderBeforeLabel={IconCheckSolid}
+            renderAfterLabel={IconArrowOpenEndSolid}
+            beforeLabelContentVAlign="center"
+            afterLabelContentVAlign="center"
+          >
+            Option two
+          </Options.Item>
+          <Options.Item
+            onMouseOver={(e) => this.handleMouseOver(3)}
+            variant={this.state.highlighted === 3 ? 'highlighted' : 'default'}
+            description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
+            renderBeforeLabel={IconCheckSolid}
+            renderAfterLabel={IconArrowOpenEndSolid}
+            beforeLabelContentVAlign="end"
+            afterLabelContentVAlign="end"
+          >
+            Option three
+          </Options.Item>
+        </Options>
+      </View>
+    )
+  }
+}
+
+render(<Example />)
 ```

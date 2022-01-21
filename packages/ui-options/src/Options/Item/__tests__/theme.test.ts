@@ -37,6 +37,12 @@ describe('Item.theme', () => {
       expect(contrast(variables.background, variables.color)).to.be.above(3)
     })
 
+    it('should have default background and description text colors that meet 3:1 contrast', () => {
+      expect(
+        contrast(variables.background, variables.descriptionColor)
+      ).to.be.above(3)
+    })
+
     it('should have highlighted background and text colors that meet 3:1 contrast', () => {
       expect(
         contrast(
@@ -58,6 +64,12 @@ describe('Item.theme', () => {
 
     it('should have default background and text colors that meet 4.5:1 contrast', () => {
       expect(contrast(variables.background, variables.color)).to.be.above(4.5)
+    })
+
+    it('should have default background and description text colors that meet 3:1 contrast', () => {
+      expect(
+        contrast(variables.background, variables.descriptionColor)
+      ).to.be.above(4.5)
     })
 
     it('should have highlighted background and text colors that meet 4.5:1 contrast', () => {

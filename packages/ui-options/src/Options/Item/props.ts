@@ -44,7 +44,7 @@ type ItemProps = {
    */
   variant?: 'default' | 'highlighted' | 'selected' | 'disabled'
   /**
-   * The aria role of the element
+   * The ARIA role of the element
    */
   role?: string
 }
@@ -68,7 +68,14 @@ type OptionsItemOwnProps = ItemProps & {
    * Sets the vAlign of renderAfterLabel content
    */
   afterLabelContentVAlign: 'start' | 'center' | 'end'
-  children?: React.ReactNode | (() => React.ReactNode)
+  /**
+   * Additional "secondary" description text
+   */
+  description?: React.ReactNode | (() => React.ReactNode)
+  /**
+   * The ARIA role of the description element
+   */
+  descriptionRole?: string
 }
 
 type PropKeys = keyof OptionsItemOwnProps
@@ -80,7 +87,12 @@ type OptionsItemProps = OptionsItemOwnProps &
   OtherHTMLAttributes<OptionsItemOwnProps>
 
 type OptionsItemStyle = ComponentStyle<
-  'item' | 'container' | 'content' | 'contentBefore' | 'contentAfter'
+  | 'item'
+  | 'container'
+  | 'content'
+  | 'contentBefore'
+  | 'contentAfter'
+  | 'description'
 >
 
 const propTypes: PropValidators<PropKeys> = {
@@ -91,6 +103,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   beforeLabelContentVAlign: PropTypes.oneOf(['start', 'center', 'end']),
   afterLabelContentVAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  description: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  descriptionRole: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
@@ -102,6 +116,8 @@ const allowedProps: AllowedPropKeys = [
   'renderAfterLabel',
   'beforeLabelContentVAlign',
   'afterLabelContentVAlign',
+  'description',
+  'descriptionRole',
   'children'
 ]
 

@@ -789,6 +789,11 @@ export type OptionsItemTheme = {
   nestedPadding: Spacing['medium']
   beforeLabelContentVOffset: string | 0
   afterLabelContentVOffset: string | 0
+  descriptionFontSize: Typography['fontSizeSmall']
+  descriptionFontWeight: Typography['fontWeightNormal']
+  descriptionLineHeight: Typography['lineHeight']
+  descriptionPaddingStart: string | 0
+  descriptionColor: Colors['textDark']
 }
 
 export type OptionsSeparatorTheme = {

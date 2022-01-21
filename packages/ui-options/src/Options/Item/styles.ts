@@ -52,6 +52,7 @@ const generateStyle = (
 
   const containsList = matchComponentTypes(children, ['Options'])
 
+  // used for label and description too
   const variantVariants = {
     highlighted: {
       background: componentTheme.highlightedBackground,
@@ -91,6 +92,8 @@ const generateStyle = (
     }[vAlign]
   }
 
+  const transition = 'background 200ms'
+
   return {
     item: {
       label: 'optionItem',
@@ -104,7 +107,7 @@ const generateStyle = (
       lineHeight: componentTheme.lineHeight,
       outline: 'none',
       position: 'relative',
-      transition: 'background 200ms',
+      transition,
       userSelect: 'none',
       ...variantVariants[variant!],
       ...(containsList && { cursor: 'default' }),
@@ -161,6 +164,19 @@ const generateStyle = (
       insetInlineEnd: componentTheme.iconPadding,
       insetInlineStart: 'auto',
       ...getContentVAlign('after')
+    },
+    description: {
+      label: 'optionItem__description',
+      display: 'block',
+      transition,
+      paddingBlockStart: componentTheme.descriptionPaddingStart,
+      fontWeight: componentTheme.descriptionFontWeight,
+      fontSize: componentTheme.descriptionFontSize,
+      lineHeight: componentTheme.descriptionLineHeight,
+      color: componentTheme.descriptionColor,
+
+      ...variantVariants[variant!],
+      background: 'none' // needed to clear variant background
     }
   }
 }
