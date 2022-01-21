@@ -133,9 +133,7 @@ class Options extends Component<OptionsProps> {
       if (matchComponentTypes<OptionsChild>(child, ['Options'])) {
         return this.renderSubList(child)
       }
-      if (matchComponentTypes<ItemChild>(child, ['Item'])) {
-        return safeCloneElement(child, { as: this.childAs })
-      } else if (matchComponentTypes<SeparatorChild>(child, ['Separator'])) {
+      if (matchComponentTypes(child, ['Item', 'Separator'])) {
         return safeCloneElement(child, { as: this.childAs })
       }
       return undefined

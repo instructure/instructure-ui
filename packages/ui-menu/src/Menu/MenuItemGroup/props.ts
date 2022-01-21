@@ -73,7 +73,7 @@ type MenuGroupOwnProps = {
   /**
    * returns a reference to the `MenuItem`
    */
-  itemRef?: (element: Element | null) => void
+  itemRef?: (element: MenuItem | null) => void
   disabled?: boolean
   /**
    * should the group appear in the tab order (the first item will have a tabIndex of 0)
