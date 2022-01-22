@@ -33,11 +33,11 @@ import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 
 /**
  * Does the following updates on a <Button>:
- * - `variant="link" href=..` -> `isWithinText={false} href=..` and a warning
- *   that padding can be removed.
- * - `variant="link-inverse" href=..` ->
- *    `isWithinText={false} color="link-inverse" href=..` and a warning that
- *    padding can be removed
+ * - `variant="link" href=` -> `<Link isWithinText={false} href=..` and a
+ *   warning that padding can be removed.
+ * - `variant="link-inverse" href=` ->
+ *    <Link isWithinText={false} color="link-inverse" href=` and a warning
+ *    that padding can be removed
  * - `variant="link"` or `variant="link-inverse"` and no `href` attribute ->
  *    display a warning how to upgrade
  */
@@ -47,7 +47,7 @@ export default function UpdateV7ButtonsLink(
   importedName: string,
   filePath: string
 ) {
-  ///// variant=link or variant=link-inverse and no href attribute
+  ///// variant=link or variant=link-inverse, no href attribute display warning
   findElements(j, root, importedName, {
     name: 'variant',
     value: ['link', 'link-inverse']
@@ -64,7 +64,7 @@ export default function UpdateV7ButtonsLink(
     }
     displayNoHrefWarning(filePath, path.value.loc!.start.line)
   })
-  ////// find the buttons that will be changed and rename them
+  ////// find the link and link-inverse variants with href
   const linkVariants = findElements(j, root, importedName, [
     { name: 'variant', value: 'link' },
     { name: 'href' }
@@ -73,7 +73,7 @@ export default function UpdateV7ButtonsLink(
     { name: 'variant', value: 'link-inverse' },
     { name: 'href' }
   ])
-  ///// insert import if Button was converted to Link
+  ///// insert import for Link to these and rename them
   if (linkVariants.length > 0 || linkInverseVariants.length > 0) {
     const linkImportName = addImportIfNeeded(j, root, 'Link', [
       '@instructure/ui-link',
@@ -83,8 +83,7 @@ export default function UpdateV7ButtonsLink(
     renameElements(linkInverseVariants, importedName, linkImportName)
   }
 
-  ///// <Button variant="link" href= ->
-  ///// <Link href= isWithinText={false}
+  ///// insert isWithinText={false} and remove variant for variant="link"
   findAttribute(j, linkVariants, 'href').insertAfter(
     j.jsxAttribute(
       j.jsxIdentifier('isWithinText'),
@@ -95,9 +94,8 @@ export default function UpdateV7ButtonsLink(
   linkVariants.forEach((path) => {
     displayHrefWarning(filePath, path.value.loc!.start.line)
   })
-  ///// <Button variant="link-inverse" href= ->
-  ///// <Link color="link-inverse" href= isWithinText={false}
 
+  ///// variant="link-inverse" => color="link-inverse" isWithinText={false}
   findAttribute(j, linkInverseVariants, 'href').insertAfter(
     j.jsxAttribute(
       j.jsxIdentifier('isWithinText'),

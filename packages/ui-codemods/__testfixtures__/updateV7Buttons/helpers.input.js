@@ -15,3 +15,6 @@ btn = <CloseButton buttonRef={(_e) => 3} />
 // this should rename it to the import alias of Link
 btn = <BBB variant="link" href="#" />
 btn = <BBB variant="link" href="#" />
+
+// the spread operator here should trigger a warning
+btn = <BBB variant="primary" {...{ hello: 3 }} />

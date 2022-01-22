@@ -32,12 +32,25 @@ import {
   JSXExpressionContainer,
   JSXFragment,
   JSXIdentifier,
+  JSXOpeningElement,
   JSXSpreadAttribute,
   JSXSpreadChild,
   JSXText,
   Literal
 } from 'jscodeshift'
 import type { LiteralKind } from 'ast-types/gen/kinds'
+
+type JSXChild =
+  | JSXElement
+  | JSXExpressionContainer
+  | JSXSpreadChild
+  | JSXFragment
+  | LiteralKind
+
+type Attribute = {
+  name: string
+  value?: string | string[]
+}
 
 /**
  * Finds all the opening tag elements (JSXElement) given in tagName.
@@ -72,7 +85,8 @@ function findElements(
 /**
  * Finds all the opening tag elements (JSXOpeningElement) given in tagName.
  * You can supply optional withAttrName and withAttrValue props,
- * this will return only tags where these props exist.
+ * this will return only tags where ALL these props exist (the values have
+ * OR relation, none given is treated as a match).
  */
 function findOpeningTags(
   j: JSCodeshift,
@@ -90,11 +104,6 @@ function findOpeningTags(
     .filter((path) => {
       return checkIfAttributeExist(path.value.attributes, withAttributes)
     })
-}
-
-type Attribute = {
-  name: string
-  value?: string | string[]
 }
 
 function checkIfAttributeExist(
@@ -160,16 +169,9 @@ function findAttribute(
       }
     })
     .filter((path) => {
-      if (!withAttrName) {
-        // no attribute name given, return every result
+      if (!withAttrValue || withAttrValue.length == 0) {
+        // no value(s) given, return everything
         return true
-      }
-      if (!withAttrValue) {
-        // no value(s) given, just check name match
-        if (withAttrName == path.value.name.name) {
-          return true
-        }
-        return false
       }
       const currentAttrValue = path.value.value
         ? (path.value.value as Literal).value
@@ -179,19 +181,13 @@ function findAttribute(
           // single value to search for
           return true
         }
-      } else if (withAttrName.includes(currentAttrValue as string)) {
+      } else if (withAttrValue.includes(currentAttrValue as string)) {
         return true
       }
       return false
     })
 }
 
-type JSXChild =
-  | JSXElement
-  | JSXExpressionContainer
-  | JSXSpreadChild
-  | JSXFragment
-  | LiteralKind
 /**
  * Prunes every non-visible child. This is useful because jscodeshift parses
  * newlines and spaces as children too, for example here:
@@ -233,6 +229,31 @@ function renameElements(
         | undefined
       if (closingElement) {
         closingElement.name = newName
+      }
+    }
+  })
+}
+
+function checkForSpreadAttribute(
+  filePath: string,
+  elems: Collection<JSXOpeningElement>
+) {
+  elems.forEach((path) => {
+    const attribs = path.value.attributes
+    if (!attribs) {
+      return
+    }
+    for (const attribute of attribs) {
+      if (attribute.type === 'JSXSpreadAttribute') {
+        console.warn(
+          'Spread attribute (`...`) detected in ' +
+            filePath +
+            ' line ' +
+            attribute.loc?.start.line +
+            '. Please double check the' +
+            ' result, I cannot see what is inside a spread object.'
+        )
+        return
       }
     }
   })
@@ -417,6 +438,7 @@ export {
   renameElements,
   getVisibleChildren,
   removeAllChildren,
+  checkForSpreadAttribute,
   // type checkers
   isJSXAttribue,
   isJSXElement,

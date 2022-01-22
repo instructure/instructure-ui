@@ -15,3 +15,6 @@ btn = <CloseButton elementRef={(_e) => 3} />
 // this should rename it to the import alias of Link
 btn = <LL href="#" isWithinText={false} />
 btn = <LL href="#" isWithinText={false} />
+
+// the spread operator here should trigger a warning
+btn = <BBB color="primary" {...{ hello: 3 }} />

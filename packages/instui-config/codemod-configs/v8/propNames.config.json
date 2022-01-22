@@ -21,6 +21,14 @@
   "DateInput": {
     "8.0.0": [{ "old": "label", "new": "renderLabel" }]
   },
+  "FileDrop": {
+    "8.0.0": [
+      { "old": "label", "new": "renderLabel" },
+      { "old": "enablePreview", "new": "shouldEnablePreview" },
+      { "old": "allowRepeatFileSelection", "new": "shouldAllowRepeats" },
+      { "old": "allowMultiple", "new": "shouldAllowMultiple" }
+    ]
+  },
   "Flex": {
     "8.0.0": [
       {
@@ -90,6 +98,45 @@
       }
     ]
   },
+  "Pill": {
+    "8.0.0": [
+      {
+        "old": "variant",
+        "new": "color",
+        "values": [
+          { "old": "default", "new": "primary" },
+          { "old": "primary", "new": "info" },
+          { "old": "message", "new": "alert" }
+        ]
+      },
+      { "old": "text", "new": "children" }
+    ]
+  },
+  "Popover": {
+    "8.0.0": [
+      { "old": "show", "new": "isShowingContent" },
+      { "old": "label", "new": "screenReaderLabel" },
+      { "old": "alignArrow", "new": "shouldAlignArrow" },
+      { "old": "trackPosition", "new": "shouldTrackPosition" },
+      { "old": "defaultShow", "new": "defaultIsShowingContent" },
+      { "old": "onShow", "new": "onPositioned" },
+      { "old": "onDismiss", "new": "onHideContent" },
+      {
+        "old": "variant",
+        "new": "color",
+        "values": [
+          { "old": "default", "new": "primary" },
+          { "old": "inverse", "new": "primary-inverse" }
+        ]
+      }
+    ]
+  },
+  "Position": {
+    "8.0.0": [
+      { "old": "over", "new": "shouldPositionOverTarget" },
+      { "old": "trackPosition", "new": "shouldTrackPosition" }
+    ]
+  },
   "Spinner": {
     "8.0.0": [{ "old": "title", "new": "renderTitle" }]
   },
@@ -153,31 +200,6 @@
       }
     ]
   },
-  "Position": {
-    "8.0.0": [
-      { "old": "over", "new": "shouldPositionOverTarget" },
-      { "old": "trackPosition", "new": "shouldTrackPosition" }
-    ]
-  },
-  "Popover": {
-    "8.0.0": [
-      { "old": "show", "new": "isShowingContent" },
-      { "old": "label", "new": "screenReaderLabel" },
-      { "old": "alignArrow", "new": "shouldAlignArrow" },
-      { "old": "trackPosition", "new": "shouldTrackPosition" },
-      { "old": "defaultShow", "new": "defaultIsShowingContent" },
-      { "old": "onShow", "new": "onPositioned" },
-      { "old": "onDismiss", "new": "onHideContent" },
-      {
-        "old": "variant",
-        "new": "color",
-        "values": [
-          { "old": "default", "new": "primary" },
-          { "old": "inverse", "new": "primary-inverse" }
-        ]
-      }
-    ]
-  },
   "View": {
     "8.0.0": [
       {
@@ -199,28 +221,6 @@
       },
       { "old": "focused", "new": "withFocusOutline" },
       { "old": "debug", "new": "withVisualDebug" }
-    ]
-  },
-  "Pill": {
-    "8.0.0": [
-      {
-        "old": "variant",
-        "new": "color",
-        "values": [
-          { "old": "default", "new": "primary" },
-          { "old": "primary", "new": "info" },
-          { "old": "message", "new": "alert" }
-        ]
-      },
-      { "old": "text", "new": "children" }
-    ]
-  },
-  "FileDrop": {
-    "8.0.0": [
-      { "old": "label", "new": "renderLabel" },
-      { "old": "enablePreview", "new": "shouldEnablePreview" },
-      { "old": "allowRepeatFileSelection", "new": "shouldAllowRepeats" },
-      { "old": "allowMultiple", "new": "shouldAllowMultiple" }
     ]
   }
 }

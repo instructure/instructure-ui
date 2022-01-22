@@ -40,13 +40,14 @@ export default function updateV7ButtonsWithText(
   root: Collection,
   importedName: string
 ) {
-  // remove variant={default}
   const buttons = findOpeningTags(j, root, importedName)
+
+  // remove variant={default}
   findAttribute(j, buttons, 'variant', 'default').remove()
   // replace <Button variant="primary" with <Button color="primary"
   findAttribute(j, buttons, 'variant', 'primary').replaceWith((nodePath) => {
-    // eslint-disable-next-line no-param-reassign
-    nodePath.node.name.name = 'color'
+    const { node } = nodePath
+    node.name.name = 'color'
     return nodePath.node
   })
   // replace <Button variant="success" with <Button color="success"
