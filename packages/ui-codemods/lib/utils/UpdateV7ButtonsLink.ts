@@ -28,7 +28,7 @@ import {
   findElements,
   isJSXAttribue,
   renameElements
-} from '../helpers/buttonUpdateHelpers'
+} from '../helpers/v7PropsUpdateHelpers'
 import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 
 /**

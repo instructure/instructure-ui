@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { findAttribute, findOpeningTags } from '../helpers/buttonUpdateHelpers'
+import { findAttribute, findOpeningTags } from '../helpers/v7PropsUpdateHelpers'
 import { Collection, JSCodeshift } from 'jscodeshift'
 
 /**
@@ -56,7 +56,7 @@ export default function updateV7ButtonsMisc(
   const buttonsWithFluidWidth = findOpeningTags(j, root, importedName, {
     name: 'fluidWidth'
   })
-  // remove fluidWidth attribute
+  // remove fluidWidth attribute todo what if its value was a variable??
   findAttribute(j, buttonsWithFluidWidth, 'fluidWidth').remove()
   // remove display attribute
   findAttribute(j, buttonsWithFluidWidth, 'display')

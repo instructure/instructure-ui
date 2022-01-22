@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { findAttribute, findOpeningTags } from '../helpers/buttonUpdateHelpers'
+import { findAttribute, findOpeningTags } from '../helpers/v7PropsUpdateHelpers'
 import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 
 /**
