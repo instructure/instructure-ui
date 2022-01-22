@@ -28,12 +28,13 @@ import {
   checkForSpreadAttribute,
   findImport,
   findOpeningTags
-} from './helpers/buttonUpdateHelpers'
+} from './helpers/v7PropsUpdateHelpers'
 import updateV7ButtonsMisc from './utils/updateV7ButtonsMisc'
 import updateV7ButtonsWithText from './utils/updateV7ButtonsWithText'
 import updateV7ButtonsIconCircle from './utils/updateV7ButtonsIconCircle'
 import updateV7ButtonsClose from './utils/updateV7ButtonsClose'
 import UpdateV7ButtonsLink from './utils/UpdateV7ButtonsLink'
+import updateV7Heading from './utils/updateV7Heading'
 
 /**
  * Updates <Button> from the InstUI v7 syntax to the v8 syntax.
@@ -47,14 +48,14 @@ import UpdateV7ButtonsLink from './utils/UpdateV7ButtonsLink'
  *            from the runner.
  * @returns {*|null} null if there was nothing to reformat
  */
-export default function updateV7Buttons(file: FileInfo, api: API) {
+export default function updateV7Props(file: FileInfo, api: API) {
   const j = api.jscodeshift
   const root = j(file.source)
-  const hasModifications = updateButtons(j, root, file.path)
+  const hasModifications = updateProps(j, root, file.path)
   return hasModifications ? formatSource(root.toSource(), file.path) : null
 }
 
-function updateButtons(j: JSCodeshift, root: Collection, filePath: string) {
+function updateProps(j: JSCodeshift, root: Collection, filePath: string) {
   const buttonImportName = findImport(j, root, 'Button', [
     '@instructure/ui-buttons',
     '@instructure/ui'
@@ -80,8 +81,9 @@ function updateButtons(j: JSCodeshift, root: Collection, filePath: string) {
     )
     updateV7ButtonsClose(j, root, closeButtonImportName, filePath)
   }
+  const headingUpdated = updateV7Heading(j, root, filePath)
   // TODO could be a better modification check...
-  if (buttonImportName || closeButtonImportName) {
+  if (buttonImportName || closeButtonImportName || headingUpdated) {
     return formatSource(root.toSource(), filePath)
   }
   return null

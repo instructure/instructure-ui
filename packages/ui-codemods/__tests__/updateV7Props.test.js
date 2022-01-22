@@ -31,19 +31,20 @@ const tests = [
   'buttonWithText',
   'buttonIconCircle',
   'buttonClose',
-  'buttonLink'
+  'buttonLink',
+  'heading'
 ]
 
 // eslint-disable-next-line no-undef
 jest.autoMockOff()
 
-describe('updateV7Buttons', () => {
+describe('updateV7Props', () => {
   tests.forEach((test) => {
     defineTest(
       __dirname,
-      'lib/updateV7Buttons',
+      'lib/updateV7Props',
       undefined,
-      `updateV7Buttons/${test}`
+      `updateV7Props/${test}`
     )
   })
 })

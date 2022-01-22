@@ -173,9 +173,17 @@ function findAttribute(
         // no value(s) given, return everything
         return true
       }
-      const currentAttrValue = path.value.value
-        ? (path.value.value as Literal).value
-        : undefined
+      if (!isLiteral(path.value.value) && withAttrValue) {
+        console.warn(
+          'line' +
+            path.value.loc?.start.line +
+            ':\n' +
+            'Attribute whose value is checked has non-literal value,' +
+            'please check manually'
+        )
+        return false
+      }
+      const currentAttrValue = (path.value.value as Literal).value
       if (typeof withAttrValue === 'string') {
         if (currentAttrValue === withAttrValue) {
           // single value to search for
@@ -236,10 +244,12 @@ function renameElements(
 
 function checkForSpreadAttribute(
   filePath: string,
-  elems: Collection<JSXOpeningElement>
+  elems: Collection<JSXOpeningElement> | Collection<JSXElement>
 ) {
   elems.forEach((path) => {
-    const attribs = path.value.attributes
+    const attribs = isJSXElement(path.value)
+      ? path.value.openingElement.attributes
+      : path.value.attributes
     if (!attribs) {
       return
     }

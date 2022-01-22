@@ -39,7 +39,7 @@ import {
   isJSXText,
   removeAllChildren,
   renameElements
-} from '../helpers/buttonUpdateHelpers'
+} from '../helpers/v7PropsUpdateHelpers'
 
 /**
  * Does the following updates on a <Button>:
