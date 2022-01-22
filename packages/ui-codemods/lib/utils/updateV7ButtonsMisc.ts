@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { findOpeningTags } from '../helpers/buttonUpdateHelpers'
+import { findAttribute, findOpeningTags } from '../helpers/buttonUpdateHelpers'
 import { Collection, JSCodeshift } from 'jscodeshift'
 
 /**
@@ -57,20 +57,9 @@ export default function updateV7ButtonsMisc(
     name: 'fluidWidth'
   })
   // remove fluidWidth attribute
-  buttonsWithFluidWidth
-    .find(j.JSXAttribute, {
-      name: {
-        name: 'fluidWidth'
-      }
-    })
-    .remove()
+  findAttribute(j, buttonsWithFluidWidth, 'fluidWidth').remove()
   // remove display attribute
-  buttonsWithFluidWidth
-    .find(j.JSXAttribute, {
-      name: {
-        name: 'display'
-      }
-    })
+  findAttribute(j, buttonsWithFluidWidth, 'display')
     .forEach((path) => {
       console.warn(
         filePath +
@@ -81,12 +70,7 @@ export default function updateV7ButtonsMisc(
     })
     .remove()
   // remove textAlign attribute
-  buttonsWithFluidWidth
-    .find(j.JSXAttribute, {
-      name: {
-        name: 'textAlign'
-      }
-    })
+  findAttribute(j, buttonsWithFluidWidth, 'textAlign')
     .forEach((path) => {
       console.warn(
         filePath +

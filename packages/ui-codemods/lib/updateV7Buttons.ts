@@ -24,7 +24,11 @@
 
 import { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
 import formatSource from './utils/formatSource'
-import { findImport } from './helpers/buttonUpdateHelpers'
+import {
+  checkForSpreadAttribute,
+  findImport,
+  findOpeningTags
+} from './helpers/buttonUpdateHelpers'
 import updateV7ButtonsMisc from './utils/updateV7ButtonsMisc'
 import updateV7ButtonsWithText from './utils/updateV7ButtonsWithText'
 import updateV7ButtonsIconCircle from './utils/updateV7ButtonsIconCircle'
@@ -56,6 +60,10 @@ function updateButtons(j: JSCodeshift, root: Collection, filePath: string) {
     '@instructure/ui'
   ])
   if (buttonImportName) {
+    checkForSpreadAttribute(
+      filePath,
+      findOpeningTags(j, root, buttonImportName)
+    )
     updateV7ButtonsMisc(j, root, buttonImportName, filePath)
     updateV7ButtonsWithText(j, root, buttonImportName)
     updateV7ButtonsIconCircle(j, root, buttonImportName, filePath)
@@ -66,6 +74,10 @@ function updateButtons(j: JSCodeshift, root: Collection, filePath: string) {
     '@instructure/ui'
   ])
   if (closeButtonImportName) {
+    checkForSpreadAttribute(
+      filePath,
+      findOpeningTags(j, root, closeButtonImportName)
+    )
     updateV7ButtonsClose(j, root, closeButtonImportName, filePath)
   }
   // TODO could be a better modification check...

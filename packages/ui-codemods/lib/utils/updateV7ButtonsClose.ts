@@ -35,9 +35,9 @@ import {
 
 /**
  * Does the following updates on a <CloseButton>:
- * - <CloseButton buttonRef=.. -> <CloseButton elementRef=
- * - variant="icon" removed
- * - variant="icon-inverse" -> color="primary-inverse"
+ * - `buttonRef=` -> `elementRef=`
+ * - `variant="icon"` removed
+ * - `variant="icon-inverse"` -> `color="primary-inverse"`
  *
  * If it has children it outputs a warning on how to upgrade them
  **/
