@@ -32,7 +32,8 @@ const tests = [
   'buttonClose',
   'buttonLink',
   'heading',
-  'list'
+  'list',
+  'pill'
 ]
 
 // eslint-disable-next-line no-undef
