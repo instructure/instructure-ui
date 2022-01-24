@@ -22,19 +22,16 @@
  * SOFTWARE.
  */
 
-import { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
+import type { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
 import formatSource from './utils/formatSource'
-import {
-  checkForSpreadAttribute,
-  findImport,
-  findOpeningTags
-} from './helpers/v7PropsUpdateHelpers'
+import { findImport } from './helpers/v7PropsUpdateHelpers'
 import updateV7ButtonsMisc from './utils/updateV7ButtonsMisc'
 import updateV7ButtonsWithText from './utils/updateV7ButtonsWithText'
 import updateV7ButtonsIconCircle from './utils/updateV7ButtonsIconCircle'
 import updateV7ButtonsClose from './utils/updateV7ButtonsClose'
 import UpdateV7ButtonsLink from './utils/UpdateV7ButtonsLink'
 import updateV7Heading from './utils/updateV7Heading'
+import updateV7Lists from './utils/updateV7Lists'
 
 /**
  * Updates <Button> from the InstUI v7 syntax to the v8 syntax.
@@ -61,10 +58,6 @@ function updateProps(j: JSCodeshift, root: Collection, filePath: string) {
     '@instructure/ui'
   ])
   if (buttonImportName) {
-    checkForSpreadAttribute(
-      filePath,
-      findOpeningTags(j, root, buttonImportName)
-    )
     updateV7ButtonsMisc(j, root, buttonImportName, filePath)
     updateV7ButtonsWithText(j, root, buttonImportName)
     updateV7ButtonsIconCircle(j, root, buttonImportName, filePath)
@@ -75,15 +68,17 @@ function updateProps(j: JSCodeshift, root: Collection, filePath: string) {
     '@instructure/ui'
   ])
   if (closeButtonImportName) {
-    checkForSpreadAttribute(
-      filePath,
-      findOpeningTags(j, root, closeButtonImportName)
-    )
     updateV7ButtonsClose(j, root, closeButtonImportName, filePath)
   }
   const headingUpdated = updateV7Heading(j, root, filePath)
+  const listsUpdated = updateV7Lists(j, root, filePath)
   // TODO could be a better modification check...
-  if (buttonImportName || closeButtonImportName || headingUpdated) {
+  if (
+    buttonImportName ||
+    closeButtonImportName ||
+    headingUpdated ||
+    listsUpdated
+  ) {
     return formatSource(root.toSource(), filePath)
   }
   return null

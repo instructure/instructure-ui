@@ -30,7 +30,6 @@ import type {
 } from 'jscodeshift'
 import {
   addImportIfNeeded,
-  checkForSpreadAttribute,
   findElements,
   findImport,
   isJSXAttribue,
@@ -54,8 +53,6 @@ export default function updateV7Heading(
   ])
   if (importName) {
     const tags = findElements(j, root, importName, { name: 'ellipsis' })
-
-    checkForSpreadAttribute(filePath, tags)
 
     tags.forEach((path) => {
       if (path.value.openingElement.attributes) {

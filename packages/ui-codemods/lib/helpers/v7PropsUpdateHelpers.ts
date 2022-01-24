@@ -32,6 +32,7 @@ import {
   JSXExpressionContainer,
   JSXFragment,
   JSXIdentifier,
+  JSXMemberExpression,
   JSXOpeningElement,
   JSXSpreadAttribute,
   JSXSpreadChild,
@@ -131,7 +132,7 @@ function checkIfAttributeExist(
         if (!toFind.value) {
           // attribute name matches, no values specified
           numMatches++
-        } else if (isLiteral(attr.value) && attr.value.value) {
+        } else if (isLiteral(attr.value)) {
           if (typeof toFind.value === 'string') {
             if (attr.value.value === toFind.value) {
               // name and value match
@@ -141,6 +142,14 @@ function checkIfAttributeExist(
             // name and one of the values match
             numMatches++
           }
+        } else {
+          console.warn(
+            'Was looking for a string attribute value, but ' +
+              'found ' +
+              attr.value?.type +
+              ' at line ' +
+              attr.loc?.start.line
+          )
         }
       }
     }
@@ -224,22 +233,82 @@ function getVisibleChildren(nodes?: JSXChild[]) {
  * Renames every element (=JSX tag). Modifies the input collection
  */
 function renameElements(
-  root: Collection<JSXElement>,
+  root: Collection<JSXElement> | JSXElement['children'],
   currentName: string,
-  newName: string
+  newName: string,
+  fileName: string
 ) {
-  root.forEach((node) => {
-    const openingElement = node.node.openingElement.name as JSXIdentifier
+  if (!root) {
+    return
+  }
+  if (Array.isArray(root)) {
+    for (const elem of root) {
+      if (isJSXElement(elem)) {
+        renameElement(elem, currentName, newName)
+      } else {
+        console.warn(
+          fileName +
+            ' line ' +
+            elem.loc?.start.line +
+            ':\n' +
+            "non element type encountered while renaming '" +
+            currentName +
+            "' please check "
+        )
+      }
+    }
+  } else {
+    root.forEach((node) => {
+      renameElement(node.node, currentName, newName)
+    })
+  }
+}
+
+function renameElement(node: JSXElement, currentName: string, newName: string) {
+  if (isJSXIdentifier(node.openingElement.name)) {
+    // name looks like "List"
+    if (newName.indexOf('.') > -1) {
+      throw new Error(
+        'Cannot perform a rename that adds a `.` character ' + ' to the name'
+      ) // actually possible, but we don't need it.
+    }
+    const openingElement = node.openingElement.name
     if (openingElement.name === currentName) {
       openingElement.name = newName
-      const closingElement = node.node.closingElement?.name as
+      const closingElement = node.closingElement?.name as
         | JSXIdentifier
         | undefined
       if (closingElement) {
         closingElement.name = newName
       }
     }
-  })
+  } else if (isJSXMemberExpression(node.openingElement.name)) {
+    // name looks like "List.Item"
+    const newNameArr = newName.split('.')
+    if (newNameArr.length !== 2) {
+      throw new Error(
+        'Cannot perform a rename that removes a `.` character ' +
+          ' from the name'
+      ) // actually possible, but we don't need it.
+    }
+    const openingElement = node.openingElement.name
+    ;(openingElement.object as JSXIdentifier).name = newNameArr[0]
+    ;(openingElement.property as JSXIdentifier).name = newNameArr[1]
+    const closingElement = node.closingElement?.name as
+      | JSXMemberExpression
+      | undefined
+    if (closingElement) {
+      ;(closingElement.object as JSXIdentifier).name = newNameArr[0]
+      ;(closingElement.property as JSXIdentifier).name = newNameArr[1]
+    }
+  } else {
+    throw new Error(
+      'Cannot rename ' +
+        currentName +
+        ' this script cannot ' +
+        'handle namespaced names (e.g. `List:Item`'
+    )
+  }
 }
 
 function checkForSpreadAttribute(
@@ -427,6 +496,19 @@ function isJSXText(elem?: astElem | null): elem is JSXText {
   return elem !== null && elem !== undefined && elem.type == 'JSXText'
 }
 
+function isJSXIdentifier(elem?: astElem | null): elem is JSXIdentifier {
+  return elem !== null && elem !== undefined && elem.type == 'JSXIdentifier'
+}
+
+// Name of a tag that looks like "List.Item"
+function isJSXMemberExpression(
+  elem?: astElem | null
+): elem is JSXMemberExpression {
+  return (
+    elem !== null && elem !== undefined && elem.type == 'JSXMemberExpression'
+  )
+}
+
 function isJSXExpressionContainer(
   elem?: astElem | null
 ): elem is JSXExpressionContainer {
@@ -453,6 +535,8 @@ export {
   isJSXAttribue,
   isJSXElement,
   isJSXText,
+  isJSXIdentifier,
+  isJSXMemberExpression,
   isJSXExpressionContainer,
   isLiteral
 }
