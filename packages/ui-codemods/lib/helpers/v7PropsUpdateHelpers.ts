@@ -33,7 +33,6 @@ import {
   JSXFragment,
   JSXIdentifier,
   JSXMemberExpression,
-  JSXOpeningElement,
   JSXSpreadAttribute,
   JSXSpreadChild,
   JSXText,
@@ -53,6 +52,8 @@ type Attribute = {
   value?: string | string[]
 }
 
+const warningsMap: Record<string, boolean> = {}
+
 /**
  * Finds all the opening tag elements (JSXElement) given in tagName.
  * You can supply an optional withAttributes argument,
@@ -60,51 +61,42 @@ type Attribute = {
  * values (or one in the array) exists (everything needs to exist).
  */
 function findElements(
+  filePath: string,
   j: JSCodeshift,
   root: Collection,
   tagName: string,
   withAttributes?: Attribute | Attribute[]
 ) {
-  return root
-    .find(j.JSXElement, {
-      openingElement: {
-        // finds all <tagName>
-        name: {
-          type: 'JSXIdentifier',
-          name: tagName
-        }
-      }
-    })
-    .filter((path) => {
-      return checkIfAttributeExist(
-        path.value.openingElement.attributes,
-        withAttributes
-      )
-    })
-}
-
-/**
- * Finds all the opening tag elements (JSXOpeningElement) given in tagName.
- * You can supply optional withAttrName and withAttrValue props,
- * this will return only tags where ALL these props exist (the values have
- * OR relation, none given is treated as a match).
- */
-function findOpeningTags(
-  j: JSCodeshift,
-  root: Collection,
-  tagName: string,
-  withAttributes?: Attribute | Attribute[]
-) {
-  return root
-    .find(j.JSXOpeningElement, {
+  const elements = root.find(j.JSXElement, {
+    openingElement: {
+      // finds all <tagName>
       name: {
         type: 'JSXIdentifier',
         name: tagName
       }
-    })
-    .filter((path) => {
-      return checkIfAttributeExist(path.value.attributes, withAttributes)
-    })
+    }
+  })
+  elements.find(j.JSXSpreadAttribute).forEach((path) => {
+    const line = filePath + '_' + path.value.loc?.start.line
+    if (!warningsMap[line]) {
+      // prevent displaying the same warning multiple times
+      warningsMap[line] = true
+      console.warn(
+        'Spread attribute (`...`) detected in ' +
+          filePath +
+          ' line ' +
+          path.value.loc?.start.line +
+          '\nPlease double check the' +
+          ' result, I cannot see what is inside a spread object.'
+      )
+    }
+  })
+  return elements.filter((path) => {
+    return checkIfAttributeExist(
+      path.value.openingElement.attributes,
+      withAttributes
+    )
+  })
 }
 
 function checkIfAttributeExist(
@@ -311,33 +303,6 @@ function renameElement(node: JSXElement, currentName: string, newName: string) {
   }
 }
 
-function checkForSpreadAttribute(
-  filePath: string,
-  elems: Collection<JSXOpeningElement> | Collection<JSXElement>
-) {
-  elems.forEach((path) => {
-    const attribs = isJSXElement(path.value)
-      ? path.value.openingElement.attributes
-      : path.value.attributes
-    if (!attribs) {
-      return
-    }
-    for (const attribute of attribs) {
-      if (attribute.type === 'JSXSpreadAttribute') {
-        console.warn(
-          'Spread attribute (`...`) detected in ' +
-            filePath +
-            ' line ' +
-            attribute.loc?.start.line +
-            '. Please double check the' +
-            ' result, I cannot see what is inside a spread object.'
-        )
-        return
-      }
-    }
-  })
-}
-
 /**
  * Figures out if a certain component is imported in a AST tree, e.g.
  * If it's imported and renamed (e.g. `import {Button as BTN} ...`) then it
@@ -525,12 +490,10 @@ export {
   findElements,
   findAttribute,
   findImport,
-  findOpeningTags,
   addImportIfNeeded,
   renameElements,
   getVisibleChildren,
   removeAllChildren,
-  checkForSpreadAttribute,
   // type checkers
   isJSXAttribue,
   isJSXElement,

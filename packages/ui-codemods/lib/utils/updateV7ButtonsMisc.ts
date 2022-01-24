@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { findAttribute, findOpeningTags } from '../helpers/v7PropsUpdateHelpers'
+import { findAttribute, findElements } from '../helpers/v7PropsUpdateHelpers'
 import { Collection, JSCodeshift } from 'jscodeshift'
 
 /**
@@ -40,7 +40,7 @@ export default function updateV7ButtonsMisc(
 ) {
   ///// Replace <Button fluidWidth .. with <Button display="block" textAlign="start"
   // remove fluidWidth attribute if its value is 'false'
-  findOpeningTags(j, root, importedName)
+  findElements(filePath, j, root, importedName)
     .find(j.JSXAttribute, {
       name: {
         name: 'fluidWidth'
@@ -53,7 +53,7 @@ export default function updateV7ButtonsMisc(
     })
     .remove()
 
-  const buttonsWithFluidWidth = findOpeningTags(j, root, importedName, {
+  const buttonsWithFluidWidth = findElements(filePath, j, root, importedName, {
     name: 'fluidWidth'
   })
   // remove fluidWidth attribute todo what if its value was a variable??
@@ -82,24 +82,24 @@ export default function updateV7ButtonsMisc(
     .remove()
   // add display="block" attribute
   buttonsWithFluidWidth.forEach((path) => {
-    path.value.attributes!.push(
+    path.value.openingElement.attributes!.push(
       j.jsxAttribute(j.jsxIdentifier('display'), j.stringLiteral('block'))
     )
   })
   // add textAlign="start" attribute
   buttonsWithFluidWidth.forEach((path) => {
-    path.value.attributes!.push(
+    path.value.openingElement!.attributes!.push(
       j.jsxAttribute(j.jsxIdentifier('textAlign'), j.stringLiteral('start'))
     )
   })
 
   ///// replace <Button icon=.. with <Button renderIcon=..
-  findOpeningTags(j, root, importedName)
+  findElements(filePath, j, root, importedName)
     .find(j.JSXIdentifier, { name: 'icon' })
     .replaceWith('renderIcon')
 
   ///// replace <Button buttonRef=.. with <Button elementRef=..
-  findOpeningTags(j, root, importedName)
+  findElements(filePath, j, root, importedName)
     .find(j.JSXIdentifier, { name: 'buttonRef' })
     .replaceWith('elementRef')
 }

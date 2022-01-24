@@ -59,7 +59,7 @@ function updateProps(j: JSCodeshift, root: Collection, filePath: string) {
   ])
   if (buttonImportName) {
     updateV7ButtonsMisc(j, root, buttonImportName, filePath)
-    updateV7ButtonsWithText(j, root, buttonImportName)
+    updateV7ButtonsWithText(j, root, buttonImportName, filePath)
     updateV7ButtonsIconCircle(j, root, buttonImportName, filePath)
     UpdateV7ButtonsLink(j, root, buttonImportName, filePath)
   }
