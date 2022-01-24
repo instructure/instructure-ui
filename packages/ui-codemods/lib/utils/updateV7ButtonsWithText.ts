@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { findAttribute, findOpeningTags } from '../helpers/v7PropsUpdateHelpers'
+import { findAttribute, findElements } from '../helpers/v7PropsUpdateHelpers'
 import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 
 /**
@@ -38,9 +38,10 @@ import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 export default function updateV7ButtonsWithText(
   j: JSCodeshift,
   root: Collection,
-  importedName: string
+  importedName: string,
+  filePath: string
 ) {
-  const buttons = findOpeningTags(j, root, importedName)
+  const buttons = findElements(filePath, j, root, importedName)
 
   // remove variant={default}
   findAttribute(j, buttons, 'variant', 'default').remove()

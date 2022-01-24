@@ -63,7 +63,7 @@ export default function updateV7ButtonsIconCircle(
 ) {
   // find out if the button has got any visible text inside it, in this case
   // just display a warning, that it cannot be upgraded.
-  const buttonsWithNoText = findElements(j, root, importedName, {
+  const buttonsWithNoText = findElements(filePath, j, root, importedName, {
     name: 'variant',
     value: [
       'icon',

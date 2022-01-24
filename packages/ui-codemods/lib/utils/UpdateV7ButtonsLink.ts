@@ -48,7 +48,7 @@ export default function UpdateV7ButtonsLink(
   filePath: string
 ) {
   ///// variant=link or variant=link-inverse, no href attribute display warning
-  findElements(j, root, importedName, {
+  findElements(filePath, j, root, importedName, {
     name: 'variant',
     value: ['link', 'link-inverse']
   }).forEach((path) => {
@@ -65,11 +65,11 @@ export default function UpdateV7ButtonsLink(
     displayNoHrefWarning(filePath, path.value.loc!.start.line)
   })
   ////// find the link and link-inverse variants with href
-  const linkVariants = findElements(j, root, importedName, [
+  const linkVariants = findElements(filePath, j, root, importedName, [
     { name: 'variant', value: 'link' },
     { name: 'href' }
   ])
-  const linkInverseVariants = findElements(j, root, importedName, [
+  const linkInverseVariants = findElements(filePath, j, root, importedName, [
     { name: 'variant', value: 'link-inverse' },
     { name: 'href' }
   ])

@@ -52,7 +52,9 @@ export default function updateV7Heading(
     '@instructure/ui'
   ])
   if (importName) {
-    const tags = findElements(j, root, importName, { name: 'ellipsis' })
+    const tags = findElements(filePath, j, root, importName, {
+      name: 'ellipsis'
+    })
 
     tags.forEach((path) => {
       if (path.value.openingElement.attributes) {

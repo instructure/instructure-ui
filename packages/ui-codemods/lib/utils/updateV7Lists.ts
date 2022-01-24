@@ -47,7 +47,9 @@ export default function updateV7Lists(
     '@instructure/ui'
   ])
   if (importName) {
-    const tags = findElements(j, root, importName, { name: 'variant' })
+    const tags = findElements(filePath, j, root, importName, {
+      name: 'variant'
+    })
 
     ///// `<List variant="default"` -> `<List`
     findAttribute(j, tags, 'variant', 'default').remove()
@@ -58,7 +60,7 @@ export default function updateV7Lists(
       .insertAfter(j.jsxAttribute(j.jsxIdentifier('isUnstyled')))
 
     ///// `<List variant="inline"` -> `<InlineList`
-    const inlineLists = findElements(j, root, 'List', {
+    const inlineLists = findElements(filePath, j, root, 'List', {
       name: 'variant',
       value: 'inline'
     })

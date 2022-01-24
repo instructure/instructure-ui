@@ -26,7 +26,6 @@ import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 import {
   findAttribute,
   findElements,
-  findOpeningTags,
   getVisibleChildren,
   isJSXExpressionContainer,
   isJSXText,
@@ -48,12 +47,12 @@ export default function updateV7ButtonsClose(
   filePath: string
 ) {
   ///// replace <CloseButton buttonRef=.. with <CloseButton elementRef=..
-  findOpeningTags(j, root, importedName)
+  findElements(filePath, j, root, importedName)
     .find(j.JSXIdentifier, { name: 'buttonRef' })
     .replaceWith('elementRef')
 
   ///// If it has children try to move them under screenReaderLabel
-  findElements(j, root, importedName).forEach((path) => {
+  findElements(filePath, j, root, importedName).forEach((path) => {
     const children = getVisibleChildren(path.value.children)
     if (children.length == 1) {
       const firstChild = children[0]
