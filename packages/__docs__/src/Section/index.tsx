@@ -23,17 +23,12 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Heading } from '../Heading'
 
-class Section extends Component {
-  static propTypes = {
-    id: PropTypes.string,
-    heading: PropTypes.string,
-    children: PropTypes.node
-  }
+import type { SectionProps } from './props'
 
+class Section extends Component<SectionProps> {
   static defaultProps = {
     children: null,
     id: undefined,

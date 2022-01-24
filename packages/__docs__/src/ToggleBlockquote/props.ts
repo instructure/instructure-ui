@@ -21,19 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors, typography } = theme
-
-  return {
-    convertedValueTextColor: colors?.textDark,
-    convertedValueFontSize: typography?.fontSizeSmall
-  }
+import type { PropValidators } from '@instructure/shared-types'
+import PropTypes from 'prop-types'
+import { ReactChildren } from 'react'
+type ToggleBlockquoteOwnProps = {
+  children?: ReactChildren
+  summary: string
 }
 
-export default generateComponentTheme
+type PropKeys = keyof ToggleBlockquoteOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ToggleBlockquoteProps = ToggleBlockquoteOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  children: PropTypes.string,
+  summary: PropTypes.string.isRequired
+}
+
+const allowedProps: AllowedPropKeys = ['children', 'summary']
+export type { ToggleBlockquoteProps }
+export { propTypes, allowedProps }

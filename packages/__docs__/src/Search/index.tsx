@@ -23,7 +23,6 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Alert } from '@instructure/ui-alerts'
 import { IconButton } from '@instructure/ui-buttons'
@@ -33,19 +32,17 @@ import { Select } from '@instructure/ui-select'
 
 import { SearchStatus } from '../SearchStatus'
 
-class Search extends Component {
-  static propTypes = {
-    options: PropTypes.object
-  }
+import type { SearchProps, SearchState, OptionType } from './props'
 
+class Search extends Component<SearchProps, SearchState> {
   static defaultProps = {
     options: undefined
   }
 
-  _options = []
-  timeoutId = null
+  _options: OptionType[] = []
+  timeoutId?: ReturnType<typeof setTimeout>
 
-  constructor(props) {
+  constructor(props: SearchProps) {
     super(props)
 
     this.state = {
@@ -74,11 +71,11 @@ class Search extends Component {
     })
   }
 
-  getOptionById(queryId) {
+  getOptionById(queryId: string) {
     return this.state.filteredOptions.find(({ id }) => id === queryId)
   }
 
-  filterOptions = (value) => {
+  filterOptions = (value: string) => {
     return this._options.filter((option) => {
       // We want to hide WIP components etc.
       if (option?.isWIP) {
@@ -92,7 +89,7 @@ class Search extends Component {
     })
   }
 
-  handleClearInput = (event) => {
+  handleClearInput = () => {
     this.setState({
       isShowingOptions: false,
       isLoading: false,
@@ -105,52 +102,58 @@ class Search extends Component {
     })
   }
 
-  handleShowOptions = (event) => {
-    this.setState(({ filteredOptions }) => ({
-      isShowingOptions: true
-    }))
+  handleShowOptions = () => {
+    this.setState({ isShowingOptions: true })
   }
 
-  handleHideOptions = (event) => {
+  handleHideOptions = () => {
     this.handleClearInput()
   }
 
-  handleBlur = (event) => {
+  handleBlur = () => {
     this.setState({ highlightedOptionId: null })
   }
 
-  handleHighlightOption = (event, { id }) => {
+  handleHighlightOption = (
+    event: React.SyntheticEvent,
+    { id }: { id?: string; direction?: 1 | -1 }
+  ) => {
     event.persist()
-    const option = this.getOptionById(id)
+    const option = this.getOptionById(id || '')
     if (!option) return // prevent highlighting of empty option
     this.setState((state) => ({
-      highlightedOptionId: id,
+      highlightedOptionId: id || '',
       inputValue: event.type === 'keydown' ? option.label : state.inputValue,
       announcement: option.label
     }))
   }
 
-  handleSelectOption = (event, { id }) => {
-    const option = this.getOptionById(id)
+  handleSelectOption = (
+    _event: React.SyntheticEvent,
+    { id }: { id?: string }
+  ) => {
+    const option = this.getOptionById(id || '')
     if (!option) return // prevent selecting of empty option
     this.setState(
       {
-        selectedOptionId: id,
+        selectedOptionId: id || '',
         selectedOptionLabel: option.label,
         inputValue: option.label,
         isShowingOptions: false,
         announcement: `${option.label} selected. List collapsed.`,
-        filteredOptions: [this.getOptionById(id)]
+        filteredOptions: [this.getOptionById(id || '')!]
       },
       () => {
-        window.location = option.value
+        window.location.href = option.value
       }
     )
   }
 
-  handleInputChange = (event) => {
+  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
-    clearTimeout(this.timeoutId)
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId)
+    }
 
     if (!value || value === '') {
       this.setState({
@@ -158,7 +161,7 @@ class Search extends Component {
         inputValue: value,
         isShowingOptions: true,
         selectedOptionId: null,
-        selectedOptionLabel: null,
+        selectedOptionLabel: '',
         filteredOptions: []
       })
     } else {
@@ -195,11 +198,12 @@ class Search extends Component {
     )
   }
 
-  renderGroups(options) {
+  renderGroups(options: OptionType[]) {
     const { highlightedOptionId, selectedOptionId } = this.state
 
     // define group order
-    const groups = {
+    // TODO fix any
+    const groups: any = {
       'GETTING STARTED': [],
       GUIDES: [],
       PATTERNS: [],
@@ -229,17 +233,29 @@ class Search extends Component {
 
     return Object.keys(groups).map((group) => (
       <Select.Group renderLabel={group} key={group}>
-        {groups[group].map(({ id, value, label, disabled }) => (
-          <Select.Option
-            id={id}
-            key={id}
-            isHighlighted={id === highlightedOptionId}
-            isSelected={id === selectedOptionId}
-            isDisabled={disabled}
-          >
-            {label}
-          </Select.Option>
-        ))}
+        {groups[group].map(
+          ({
+            id,
+            _value,
+            label,
+            disabled
+          }: {
+            id: string
+            _value: string
+            label: string
+            disabled: boolean
+          }) => (
+            <Select.Option
+              id={id}
+              key={id}
+              isHighlighted={id === highlightedOptionId}
+              isSelected={id === selectedOptionId}
+              isDisabled={disabled}
+            >
+              {label}
+            </Select.Option>
+          )
+        )}
       </Select.Group>
     ))
   }

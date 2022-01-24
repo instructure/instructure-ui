@@ -22,52 +22,20 @@
  * SOFTWARE.
  */
 
+import type { ThemeTheme } from './props'
+import type { Theme } from '@instructure/ui-themes'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme) => {
-  const { colors, typography, spacing, borders, key: themeName } = theme
-
-  const colorCheckerboard = '#eee'
-  const colorCheckerboardInverse = '#444'
-
-  const themeSpecificStyles = {}
-
-  const componentVariables = {
-    padding: spacing?.small,
-    borderRadius: borders?.radiusMedium,
-    backgroundColorLight: colors?.backgroundLightest,
-    backgroundColorInverse: colors?.backgroundDarkest,
-    borderWidth: borders?.widthSmall,
-    borderColor: '#eee',
-    gradientCheckerboardSize: '1rem',
-    gradientCheckerboard: `
-      45deg,
-      ${colorCheckerboard} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${colorCheckerboard} 75%,
-      ${colorCheckerboard}`,
-    gradientCheckerboardInverse: `
-      45deg,
-      ${colorCheckerboardInverse} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${colorCheckerboardInverse} 75%,
-      ${colorCheckerboardInverse}`,
-    fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
-    fontSizeError: typography?.fontSizeSmall,
-    backgroundError: colors?.backgroundDanger,
-    colorError: colors?.textLightest,
-    toolbarColor: colors?.textLightest,
-    toolbarBackground: '#0084D1'
-  }
+const generateComponentTheme = (theme: Theme): ThemeTheme => {
+  const { colors, typography } = theme
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyles[themeName]
+    convertedValueTextColor: colors?.textDark,
+    convertedValueFontSize: typography?.fontSizeSmall
   }
 }
 

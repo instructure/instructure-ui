@@ -21,23 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-/**
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (componentTheme, props, state) => {
-  return {
-    convertedValue: {
-      label: 'searchStatus',
-      color: componentTheme.convertedValueTextColor,
-      fontSize: componentTheme.convertedValueFontSize,
-      display: 'inline-block'
-    }
-  }
+import type { PropValidators } from '@instructure/shared-types'
+import PropTypes from 'prop-types'
+import { ReactChildren } from 'react'
+type SectionOwnProps = {
+  id?: string
+  heading?: string
+  children?: ReactChildren
 }
 
-export default generateStyle
+type PropKeys = keyof SectionOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type SectionProps = SectionOwnProps
+
+const propTypes: PropValidators<PropKeys> = {
+  id: PropTypes.string,
+  heading: PropTypes.string,
+  children: PropTypes.node
+}
+
+const allowedProps: AllowedPropKeys = ['id', 'heading', 'children']
+export type { SectionProps }
+export { propTypes, allowedProps }
