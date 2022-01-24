@@ -79,8 +79,8 @@ export default function UpdateV7ButtonsLink(
       '@instructure/ui-link',
       '@instructure/ui'
     ])
-    renameElements(linkVariants, importedName, linkImportName)
-    renameElements(linkInverseVariants, importedName, linkImportName)
+    renameElements(linkVariants, importedName, linkImportName, filePath)
+    renameElements(linkInverseVariants, importedName, linkImportName, filePath)
   }
 
   ///// insert isWithinText={false} and remove variant for variant="link"

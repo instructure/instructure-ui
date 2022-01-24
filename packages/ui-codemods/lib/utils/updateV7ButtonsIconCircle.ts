@@ -159,7 +159,7 @@ export default function updateV7ButtonsIconCircle(
   )
 
   // rename every <Button> to <IconButton> (or whatever alias its imported under)
-  renameElements(buttonsWithNoText, 'Button', iconButtonImportName)
+  renameElements(buttonsWithNoText, 'Button', iconButtonImportName, filePath)
 
   // remove variant="icon", add withBorder={false} withBackground={false}
   const iconButton = findAttribute(

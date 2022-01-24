@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-const path = require('path')
 const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
 const tests = [
@@ -32,7 +31,8 @@ const tests = [
   'buttonIconCircle',
   'buttonClose',
   'buttonLink',
-  'heading'
+  'heading',
+  'list'
 ]
 
 // eslint-disable-next-line no-undef
