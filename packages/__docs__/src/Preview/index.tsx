@@ -36,15 +36,11 @@ import generateComponentTheme from './theme'
 
 import { compileAndRenderExample } from '../compileAndRenderExample'
 
-let _createElement
+import type { PreviewProps, PreviewState } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
-class Preview extends Component {
+class Preview extends Component<PreviewProps, PreviewState> {
   static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
     code: PropTypes.string.isRequired,
     render: PropTypes.bool,
     language: PropTypes.string.isRequired,
@@ -58,12 +54,10 @@ class Preview extends Component {
       'inverse',
       'light',
       'none'
-    ]),
-    // eslint-disable-next-line react/require-default-props
-    themes: PropTypes.object,
-    // eslint-disable-next-line react/require-default-props
-    themeKey: PropTypes.string
+    ])
   }
+
+  private _mountNode?: HTMLDivElement | null
 
   static defaultProps = {
     render: true,
@@ -74,7 +68,7 @@ class Preview extends Component {
     background: 'checkerboard'
   }
 
-  constructor(props) {
+  constructor(props: PreviewProps) {
     super(props)
 
     this.state = {
@@ -86,33 +80,31 @@ class Preview extends Component {
     if (this.props.code) {
       this.executeCode(this.props.code)
     }
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: PreviewProps) {
     if (
       this.props.code !== prevProps.code ||
       this.props.rtl !== prevProps.rtl
     ) {
       this.executeCode(this.props.code)
     }
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   componentWillUnmount() {
     if (this._mountNode) {
       ReactDOM.unmountComponentAtNode(this._mountNode)
     }
-
-    if (_createElement) {
-      React.createElement = _createElement
-    }
   }
 
-  executeCode(code) {
+  executeCode(code: string) {
     const mountNode = this._mountNode
 
-    ReactDOM.unmountComponentAtNode(mountNode)
+    if (mountNode) {
+      ReactDOM.unmountComponentAtNode(mountNode)
+    }
 
     this.setState({ error: null })
 
@@ -120,18 +112,21 @@ class Preview extends Component {
       return
     }
 
-    const render = (el) => {
+    const render = (el: React.ReactElement) => {
       const { themeKey, themes } = this.props
+
       const theme = themes?.[themeKey]?.resource || canvas
-      const dir = this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr
-      let elToRender = (
+      const dir = (this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr) as
+        | 'rtl'
+        | 'ltr'
+      const elToRender: React.ReactElement = (
         <InstUISettingsProvider theme={theme}>
           <TextDirectionContext.Provider value={dir}>
             <div dir={dir}>{el}</div>
           </TextDirectionContext.Provider>
         </InstUISettingsProvider>
       )
-      ReactDOM.render(elToRender, mountNode)
+      ReactDOM.render(elToRender, mountNode!)
     }
 
     compileAndRenderExample({
@@ -142,8 +137,10 @@ class Preview extends Component {
     })
   }
 
-  handleError = (err) => {
-    ReactDOM.unmountComponentAtNode(this._mountNode)
+  handleError = (err: Error) => {
+    if (this._mountNode) {
+      ReactDOM.unmountComponentAtNode(this._mountNode)
+    }
     this.setState({
       error: err.toString()
     })
@@ -171,9 +168,9 @@ class Preview extends Component {
     const { error } = this.state
 
     return (
-      <div css={error ? [styles.previewError] : [styles.preview]}>
+      <div css={error ? [styles?.previewError] : [styles?.preview]}>
         {this.renderContent()}
-        {error && <pre css={styles.error}>{error}</pre>}
+        {error && <pre css={styles?.error}>{error}</pre>}
       </div>
     )
   }

@@ -22,28 +22,52 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { Table } from '@instructure/ui-table'
 
-class Paragraph extends React.Component {
-  static propTypes = {
-    children: PropTypes.node
+import { compileMarkdown } from '../compileMarkdown'
+
+import type { ReturnsProps } from './props'
+
+class Returns extends Component<ReturnsProps> {
+  renderRows() {
+    return this.props.types.map((type, index) => {
+      const key = `${type.type}-${index}`
+      return (
+        <Table.Row key={key}>
+          <Table.Cell>
+            <code>{this.renderType(type.type)}</code>
+          </Table.Cell>
+          <Table.Cell>{this.renderDescription(type.description)}</Table.Cell>
+        </Table.Row>
+      )
+    })
   }
-  static defaultProps = {
-    children: null
+
+  //TODO fix
+  renderType(type: any) {
+    return type ? type.names.join(', ') : null
   }
 
-  static Paragraph = Paragraph
+  renderDescription(description: string) {
+    return <div>{description && compileMarkdown(description)}</div>
+  }
 
   render() {
     return (
-      <View as="div" margin="small 0">
-        {this.props.children}
-      </View>
+      <Table caption="Returns" margin="0 0 large">
+        <Table.Head>
+          <Table.Row>
+            <Table.ColHeader id="Type">Type</Table.ColHeader>
+            <Table.ColHeader id="Description">Description</Table.ColHeader>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>{this.renderRows()}</Table.Body>
+      </Table>
     )
   }
 }
 
-export { Paragraph }
+export default Returns
+export { Returns }

@@ -22,65 +22,22 @@
  * SOFTWARE.
  */
 
+import type { ThemeTheme, ThemeStyle } from './props'
+
 /**
- * ---
- * private: true
- * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme, props, state) => {
+const generateStyle = (componentTheme: ThemeTheme): ThemeStyle => {
   return {
-    properties: {
-      label: 'properties',
-      marginTop: '2rem',
-      code: { background: 'transparent', border: 'none' }
-    },
-
-    list: {
-      label: 'properties__list',
-      margin: 0,
-      padding: 0,
-      display: 'inline',
-      listStyleType: 'none',
-      code: { fontSize: '0.875em' }
-    },
-
-    listSignatureItem: {
-      label: 'properties__listSignatureItem',
-      whiteSpace: 'pre-wrap',
-      '&:first-of-type': { display: 'inline' }
-    },
-
-    listItem: {
-      label: 'properties__listItem',
-      display: 'inline',
-      '&::after': { content: '", "' },
-      '&:last-child::after': { content: '""' }
-    },
-
-    required: {
-      label: 'properties__required',
-      backgroundColor: '#333',
-      color: 'white',
-      borderRadius: '3px',
-      padding: '2px 3px',
-      fontSize: '0.75rem',
-      fontWeight: 400
-    },
-
-    oneOf: {
-      label: 'properties__oneOf',
-      fontWeight: 200,
-      fontStyle: 'italic'
-    },
-
-    noWrap: {
-      label: 'properties__noWrap',
-      whiteSpace: 'nowrap'
+    convertedValue: {
+      label: 'searchStatus',
+      color: componentTheme.convertedValueTextColor,
+      fontSize: componentTheme.convertedValueFontSize,
+      display: 'inline-block'
     }
   }
 }

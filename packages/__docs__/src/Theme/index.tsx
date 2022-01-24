@@ -23,7 +23,6 @@
  */
 /** @jsx jsx */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -42,35 +41,26 @@ import { ThemeColors } from '../ThemeColors'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-@withStyle(generateStyle, generateComponentTheme)
-class Theme extends Component {
-  static propTypes = {
-    themeKey: PropTypes.string.isRequired,
-    variables: PropTypes.object.isRequired,
-    requirePath: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+import { ThemeProps } from './props'
 
+@withStyle(generateStyle, generateComponentTheme)
+class Theme extends Component<ThemeProps> {
   static defaultProps = {
     description: undefined
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
-  _colorMap = {}
+  _colorMap: Record<string, string> = {}
 
-  mapColors(colorKey) {
-    const map = {}
+  mapColors(colorKey: Record<string, string>) {
+    const map: Record<string, string> = {}
     Object.keys(colorKey).forEach((color) => {
       const hex = colorKey[color]
       if (typeof map[hex] === 'undefined') {
@@ -80,7 +70,10 @@ class Theme extends Component {
     return map
   }
 
-  renderVariable(name, value) {
+  renderVariable(
+    name: string,
+    value: string | { text: string; color: string }
+  ) {
     let valueText = value
     let valueColor = ''
     let convertedValue
@@ -109,7 +102,9 @@ class Theme extends Component {
       <code>
         {valueText}{' '}
         {convertedValue ? (
-          <span css={this.props.styles.convertedValue}>({convertedValue})</span>
+          <span css={this.props?.styles?.convertedValue}>
+            ({convertedValue})
+          </span>
         ) : null}
       </code>
     )
@@ -135,13 +130,15 @@ class Theme extends Component {
     )
   }
 
-  renderRows(section) {
+  renderRows(
+    section: Record<string, string | number | { text: string; color: string }>
+  ) {
     return Object.keys(section).map((name) => {
-      return this.renderVariable(name, section[name])
+      return this.renderVariable(name, `${section[name]}`)
     })
   }
 
-  renderTable(name, content, sub = false) {
+  renderTable(name: string, content: React.ReactElement[], sub = false) {
     const headingElement = sub ? 'h4' : 'h3'
     const headingLevel = sub ? 'h3' : 'h2'
     const margin = sub ? 'small none small' : 'small none large'
@@ -178,10 +175,10 @@ class Theme extends Component {
     )
   }
 
-  renderSection(name, data) {
+  renderSection(name: string, data: Record<string, string>) {
     const subSections = []
     let baseColors = {}
-    let newData = Object.assign({}, data)
+    const newData = Object.assign({}, data)
 
     if (name === 'colors' && data.values) {
       baseColors = data.values
@@ -191,13 +188,13 @@ class Theme extends Component {
       subSections.push(<ThemeColors colors={baseColors} />)
     }
 
-    Object.keys(newData).forEach((key, index) => {
+    Object.keys(newData).forEach((key) => {
       const item = data[key]
       if (typeof item === 'object') {
-        const subData = {}
-        const subKeys = Object.keys(item)
+        const subData: Record<string, { text: string; color: string }> = {}
+        const subKeys = Object.keys(item) as string[]
         subKeys.forEach((subKey, i) => {
-          const val = item[subKey]
+          const val: string = item[subKey]
           subData[subKeys[i]] = {
             text: val.charAt(0) === '#' ? this._colorMap[val] : val,
             color: val.charAt(0) === '#' ? val : ''
@@ -236,8 +233,8 @@ class Theme extends Component {
   }
 
   render() {
-    const sections = []
-    const vars = []
+    const sections: React.ReactElement[] = []
+    const vars: React.ReactElement[] = []
 
     const { themeKey, variables, description } = this.props
 

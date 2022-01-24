@@ -21,51 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React from 'react'
+import type { PropValidators, Colors } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
+import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
-import { View } from '@instructure/ui-view'
-import { ToggleDetails } from '@instructure/ui-toggle-details'
-import { Heading } from '../Heading'
-import { Paragraph } from './Paragraph'
-
-class ToggleBlockquote extends React.Component {
-  static propTypes = {
-    summary: PropTypes.node.isRequired,
-    children: PropTypes.node
-  }
-  static defaultProps = {
-    children: null
-  }
-
-  static Paragraph = Paragraph
-
-  render() {
-    return (
-      <View
-        as="div"
-        margin="large 0"
-        padding="medium"
-        borderWidth="none none none large"
-        borderColor="info"
-        shadow="above"
-      >
-        <ToggleDetails
-          summary={
-            <Heading level="h3" as="h4">
-              {this.props.summary}
-            </Heading>
-          }
-          iconPosition="end"
-          defaultExpanded
-          fluidWidth
-        >
-          {this.props.children}
-        </ToggleDetails>
-      </View>
-    )
-  }
+type SearchStatusOwnProps = {
+  size?: string
+  status?: string
 }
 
-export { ToggleBlockquote }
+type PropKeys = keyof SearchStatusOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type SearchStatusProps = SearchStatusOwnProps &
+  WithStyleProps<SearchStatusTheme, SearchStatusStyle>
+
+type SearchStatusTheme = {
+  colorBrand: Colors['backgroundBrand']
+  colorAlert: Colors['backgroundAlert']
+  colorWarning: Colors['backgroundWarning']
+  colorDanger: Colors['backgroundDanger']
+  colorFaceSuccess: Colors['backgroundAlert']
+  colorFaceFailure: Colors['backgroundWarning']
+  colorFeatures: Colors['backgroundDarkest']
+}
+export type SearchStatusStyle = ComponentStyle<'searchStatus' | 'box'>
+
+const propTypes: PropValidators<PropKeys> = {
+  size: PropTypes.string,
+  status: PropTypes.oneOf(['inactive', 'active'])
+}
+
+const allowedProps: AllowedPropKeys = ['size', 'status']
+export type { SearchStatusProps, SearchStatusTheme }
+export { propTypes, allowedProps }

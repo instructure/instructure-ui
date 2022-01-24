@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import { IconSearchLine } from '@instructure/ui-icons'
@@ -32,28 +31,21 @@ import { IconSearchLine } from '@instructure/ui-icons'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-@withStyle(generateStyle, generateComponentTheme)
-class SearchStatus extends Component {
-  static propTypes = {
-    size: PropTypes.string,
-    status: PropTypes.oneOf(['inactive', 'active']),
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+import type { SearchStatusProps } from './props'
 
+@withStyle(generateStyle, generateComponentTheme)
+class SearchStatus extends Component<SearchStatusProps> {
   static defaultProps = {
     size: '1.25rem',
     status: 'inactive'
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   render() {
@@ -63,7 +55,7 @@ class SearchStatus extends Component {
     } else {
       return (
         <span
-          css={styles.searchStatus}
+          css={styles?.searchStatus}
           style={{
             width: size,
             height: size,
@@ -71,10 +63,10 @@ class SearchStatus extends Component {
           }}
         >
           <span>
-            <span css={styles.box} />
-            <span css={styles.box} />
-            <span css={styles.box} />
-            <span css={styles.box} />
+            <span css={styles?.box} />
+            <span css={styles?.box} />
+            <span css={styles?.box} />
+            <span css={styles?.box} />
           </span>
         </span>
       )

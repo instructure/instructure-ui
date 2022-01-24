@@ -21,24 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import type {
+  PropValidators,
+  Colors,
+  Typography
+} from '@instructure/shared-types'
+import PropTypes from 'prop-types'
+import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors } = theme
-
-  return {
-    colorBrand: colors?.backgroundBrand,
-    colorDanger: colors?.backgroundDanger,
-    colorAlert: colors?.inaccessibleAlert || colors?.backgroundAlert,
-    colorWarning: colors?.inaccessibleWarning || colors?.backgroundWarning,
-    colorFaceSuccess: colors?.inaccessibleAlert || colors?.backgroundAlert,
-    colorFaceFailure: colors?.inaccessibleWarning || colors?.backgroundWarning,
-    colorFeatures: colors?.backgroundDarkest
-  }
+type ThemeOwnProps = {
+  themeKey: string
+  //TODO type docs-data.js
+  variables: any
+  requirePath: string
+  description?: string
 }
 
-export default generateComponentTheme
+type PropKeys = keyof ThemeOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type ThemeProps = ThemeOwnProps & WithStyleProps<ThemeTheme, ThemeStyle>
+
+type ThemeTheme = {
+  convertedValueTextColor: Colors['textDark']
+  convertedValueFontSize: Typography['fontSizeSmall']
+}
+export type ThemeStyle = ComponentStyle<'convertedValue'>
+
+const propTypes: PropValidators<PropKeys> = {
+  themeKey: PropTypes.string.isRequired,
+  variables: PropTypes.object.isRequired,
+  requirePath: PropTypes.string.isRequired,
+  description: PropTypes.string
+}
+
+const allowedProps: AllowedPropKeys = [
+  'themeKey',
+  'variables',
+  'requirePath',
+  'description'
+]
+export type { ThemeProps, ThemeTheme }
+export { propTypes, allowedProps }
