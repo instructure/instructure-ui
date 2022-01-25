@@ -56,7 +56,7 @@ class Spinner extends Component<SpinnerProps> {
   }
 
   ref: Element | null = null
-  private readonly titleId?: string | undefined
+  private readonly titleId?: string
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props

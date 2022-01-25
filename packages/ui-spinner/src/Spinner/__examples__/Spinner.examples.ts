@@ -22,10 +22,7 @@
  * SOFTWARE.
  */
 
-<<<<<<< HEAD
 import type { StoryConfig } from '@instructure/ui-test-utils'
-=======
->>>>>>> 5dd269ac2 (chore(ui-spinner): tS typing in `Spinner.test.tsx` and `Spinner.examples.ts`)
 import type { SpinnerProps } from '../props'
 
 export default {
