@@ -220,6 +220,10 @@ const withStyle = decorator(
           {...props}
           makeStyles={makeStyleHandler}
           styles={styles}
+          // passing themeOverrides is needed for components like Button
+          // that have no makeStyles of their own and only pass themeOverrides
+          // to the underlying component (e.g.: BaseButton)
+          themeOverride={themeOverride}
         />
       )
     })
