@@ -41,6 +41,7 @@ import { allowedProps, propTypes } from './props'
 parent: Rating
 id: Rating.Icon
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class RatingIcon extends Component<RatingIconProps, RatingIconState> {
@@ -56,7 +57,7 @@ class RatingIcon extends Component<RatingIconProps, RatingIconState> {
     size: 'medium'
   }
 
-  ref: Element | null = null
+  ref: HTMLSpanElement | null = null
 
   constructor(props: RatingIconProps) {
     super(props)
