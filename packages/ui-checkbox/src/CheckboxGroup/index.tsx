@@ -84,7 +84,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
   }
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = this.value || []
+    const newValue = this.value
 
     if (this.props.disabled || this.props.readOnly) {
       e.preventDefault()
@@ -107,16 +107,9 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
   }
 
   get value() {
-    if (
-      typeof this.props.value === 'undefined' &&
-      typeof this.state.value === 'undefined'
-    ) {
-      return []
-    } else {
-      return typeof this.props.value === 'undefined'
-        ? [...this.state.value]
-        : [...this.props.value]
-    }
+    return typeof this.props.value === 'undefined'
+      ? [...this.state.value]
+      : [...this.props.value]
   }
 
   renderChildren() {
