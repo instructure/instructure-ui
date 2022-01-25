@@ -126,7 +126,7 @@ type TreeBrowserProps = TreeBrowserOwnProps &
 
 type TreeBrowserStyle = ComponentStyle<'treeBrowser'>
 
-type Collection = {
+type CollectionBase = {
   id: number | string
   name: string
   descriptor?: string
@@ -143,6 +143,9 @@ type Collection = {
    * children of type TreeNode
    */
   renderAfterItems?: ReactElement // TODO: Children.oneOf([TreeNode])
+}
+
+type Collection = CollectionBase & {
   items?: number[]
   collections?: (number | string)[]
 }
@@ -160,7 +163,7 @@ type CollectionProps = {
   items?: CollectionItem[]
   expanded?: boolean
   isCollectionFlattened?: boolean
-} & Omit<Collection, 'collections' | 'items'>
+} & CollectionBase
 
 type CollectionData = {
   id?: number | string
