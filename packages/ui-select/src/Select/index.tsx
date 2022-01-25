@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import React, { Children, Component } from 'react'
 
-import { createChainedFunction, hashInstance } from '@instructure/ui-utils'
+import { createChainedFunction, generateId } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import {
   matchComponentTypes,
@@ -127,7 +127,7 @@ class Select extends Component<SelectProps> {
   }
   ref: HTMLInputElement | null = null
   //@ts-expect-error props.instanceMapCounter
-  private _defaultId = hashInstance('Select', this.props.instanceMapCounter)
+  private _defaultId = generateId('Select', this.props.instanceMapCounter)
   private _inputContainer: HTMLSpanElement | null = null
   private _listView: Element | null = null
   // temporarily stores actionable options

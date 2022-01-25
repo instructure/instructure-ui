@@ -53,7 +53,7 @@ type ItemChild = React.ComponentElement<OptionsItemProps, Item>
 type SeparatorChild = React.ComponentElement<OptionsSeparatorProps, Separator>
 type OptionsChild = React.ComponentElement<OptionsProps, Options>
 type OptionsChildren = (ItemChild | SeparatorChild | OptionsChild)[]
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -95,7 +95,7 @@ class Options extends Component<OptionsProps> {
     this.props.makeStyles?.()
   }
   //@ts-expect-error props.instanceMapCounter
-  _labelId = hashInstance('Options-label', this.props.instanceMapCounter)
+  _labelId = generateId('Options-label', this.props.instanceMapCounter)
 
   get childAs() {
     const { as } = this.props

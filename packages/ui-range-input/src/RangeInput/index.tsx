@@ -39,7 +39,7 @@ import generateComponentTheme from './theme'
 import type { RangeInputProps, RangeInputState } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -94,7 +94,7 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
     }
 
     //@ts-expect-error props.instanceMapCounter
-    this.defaultId = hashInstance('RangeInput', props.instanceMapCounter)
+    this.defaultId = generateId('RangeInput', props.instanceMapCounter)
   }
 
   /* workaround for https://github.com/facebook/react/issues/554 */

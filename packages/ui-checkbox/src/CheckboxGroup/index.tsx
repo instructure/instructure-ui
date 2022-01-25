@@ -43,7 +43,7 @@ import type {
   CheckboxChild
 } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -77,7 +77,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
     }
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
-    this._messagesId = hashInstance(
+    this._messagesId = generateId(
       'CheckboxGroup-messages',
       props.instanceMapCounter
     )

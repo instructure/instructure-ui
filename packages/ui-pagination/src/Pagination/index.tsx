@@ -43,7 +43,7 @@ import type { PaginationArrowDirections } from './PaginationArrowButton/props'
 import { propTypes, allowedProps } from './props'
 import type { PaginationProps, PaginationSnapshot, ChildPage } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
 const fastFindIndex = (
@@ -118,7 +118,7 @@ class Pagination extends Component<PaginationProps> {
     super(props)
 
     //@ts-expect-error props.instanceMapCounter
-    this._labelId = hashInstance('Pagination', this.props.instanceMapCounter)
+    this._labelId = generateId('Pagination', this.props.instanceMapCounter)
   }
 
   get _root() {

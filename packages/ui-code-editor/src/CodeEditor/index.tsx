@@ -40,7 +40,7 @@ import { propTypes, allowedProps } from './props'
 import type { CodeEditorProps } from './props'
 import type { EditorConfiguration } from 'codemirror'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -69,7 +69,7 @@ class CodeEditor extends Component<CodeEditorProps> {
   constructor(props: CodeEditorProps) {
     super(props)
     //@ts-expect-error props.instanceMapCounter
-    this._id = hashInstance('CodeEditor', props.instanceMapCounter)
+    this._id = generateId('CodeEditor', props.instanceMapCounter)
   }
 
   handleRef = (el: Element | null) => {

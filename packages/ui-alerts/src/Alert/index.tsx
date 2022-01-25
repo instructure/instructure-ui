@@ -41,7 +41,7 @@ import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
 import { canvas } from '@instructure/ui-themes'
 import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -168,7 +168,7 @@ class Alert extends Component<AlertProps, AlertState> {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'srid' does not exist on type 'Alert'.
-      this.srid = hashInstance('Alert', this.props.instanceMapCounter)
+      this.srid = generateId('Alert', this.props.instanceMapCounter)
 
       const div = document.createElement('div')
       div.setAttribute('id', this.srid)

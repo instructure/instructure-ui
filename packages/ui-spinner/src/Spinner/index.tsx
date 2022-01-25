@@ -36,7 +36,7 @@ import generateComponentTheme from './theme'
 import type { SpinnerProps } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -74,7 +74,7 @@ class Spinner extends Component<SpinnerProps> {
     super(props)
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'Spinner... Remove this comment to see the full error message
-    this.titleId = hashInstance('Spinner', props.instanceMapCounter)
+    this.titleId = generateId('Spinner', props.instanceMapCounter)
   }
 
   componentDidMount() {

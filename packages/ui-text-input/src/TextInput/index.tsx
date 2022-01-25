@@ -45,7 +45,7 @@ import type {
 } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -79,8 +79,8 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     super(props)
     this.state = { hasFocus: false }
     //@ts-expect-error props.instanceMapCounter
-    this._defaultId = hashInstance('TextInput', props.instanceMapCounter)
-    this._messagesId = hashInstance(
+    this._defaultId = generateId('TextInput', props.instanceMapCounter)
+    this._messagesId = generateId(
       'TextInput-messages',
       //@ts-expect-error props.instanceMapCounter
       props.instanceMapCounter

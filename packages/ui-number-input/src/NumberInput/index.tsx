@@ -52,7 +52,7 @@ import type {
   NumberInputStyleProps
 } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -97,7 +97,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
     }
     if (!this._id) {
       //@ts-expect-error props.instanceMapCounter
-      this._id = hashInstance('NumberInput', this.props.instanceMapCounter)
+      this._id = generateId('NumberInput', this.props.instanceMapCounter)
     }
     return this._id
   }

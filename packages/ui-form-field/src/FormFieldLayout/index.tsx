@@ -46,7 +46,7 @@ import generateStyle from './styles'
 import { propTypes, allowedProps } from './props'
 import type { FormFieldLayoutProps } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -74,7 +74,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     this._messagesId =
       props.messagesId ||
       //@ts-expect-error props.instanceMapCounter
-      hashInstance('FormFieldLayout-messages', props.instanceMapCounter)
+      generateId('FormFieldLayout-messages', props.instanceMapCounter)
 
     error(
       typeof props.width !== 'undefined' ||
@@ -190,6 +190,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     const { width, layout, children } = props
     return (
       <ElementType
+        //@ts-expect-error too complex
         {...omitProps(props, [
           ...FormFieldLayout.allowedProps,
           ...Grid.allowedProps

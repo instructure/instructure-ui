@@ -37,7 +37,7 @@ import generateComponentTheme from './theme'
 import type { RadioInputProps, RadioInputState } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -78,7 +78,7 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
     }
 
     //@ts-expect-error props.instanceMapCounter
-    this._defaultId = hashInstance('RadioInput', props.instanceMapCounter)
+    this._defaultId = generateId('RadioInput', props.instanceMapCounter)
   }
 
   componentDidMount() {

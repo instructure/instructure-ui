@@ -21,21 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Browser } from './Browser'
-export { isEdge } from './isEdge'
-export { isIE11 } from './isIE11'
-export { capitalizeFirstLetter } from './capitalizeFirstLetter'
-export { cloneArray } from './cloneArray'
-export { createChainedFunction } from './createChainedFunction'
-export { deepEqual } from './deepEqual'
-export { hash } from './hash'
-export { generateId } from './generateId'
-export { isEmpty } from './isEmpty'
-export { mergeDeep } from './mergeDeep'
-export { ms } from './ms'
-export { parseUnit } from './parseUnit'
-export { px } from './px'
-export { shallowEqual } from './shallowEqual'
-export { within } from './within'
-export { camelize } from './camelize'
-export { pascalize } from './pascalize'
+
+/**
+ * Generates unique css safe ids for elements.
+ * @param instanceName - the name of the element/instance to keep track of
+ * @param map - a Map<string, counter>, which counts how many times the given element/instance was rendered
+ * @returns a string in a format `instanceName_intanceRenderedCount`: `Alert_4`
+ */
+
+const generateId = (instanceName: string, map: Map<string, number>) => {
+  if (!map.has(instanceName)) {
+    map.set(instanceName, 0)
+  } else {
+    map.set(instanceName, map.get(instanceName)! + 1)
+  }
+
+  return `${instanceName}_${map.get(instanceName!)}`
+}
+
+export default generateId
+export { generateId }
