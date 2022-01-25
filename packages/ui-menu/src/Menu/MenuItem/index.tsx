@@ -27,7 +27,7 @@ import keycode from 'keycode'
 
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { omitProps, getElementType, withSSR } from '@instructure/ui-react-utils'
-import { createChainedFunction, hashInstance } from '@instructure/ui-utils'
+import { createChainedFunction, generateId } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -72,7 +72,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
     }
     //@ts-expect-error ssr
 
-    this.labelId = hashInstance('MenuItem__label', props.instanceMapCounter)
+    this.labelId = generateId('MenuItem__label', props.instanceMapCounter)
   }
 
   get _node() {

@@ -40,7 +40,7 @@ import type { RadioInputProps } from '../RadioInput/props'
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 type RadioInputChild = React.ComponentElement<RadioInputProps, RadioInput>
 
@@ -86,7 +86,7 @@ class RadioInputGroup extends Component<
       }
     }
 
-    this._messagesId = hashInstance(
+    this._messagesId = generateId(
       'RadioInputGroup-messages',
       //@ts-expect-error props.instanceMapCounter
       this.props.instanceMapCounter

@@ -44,7 +44,7 @@ import generateComponentTheme from './theme'
 import type { TooltipProps, TooltipState } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -82,7 +82,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     super(props)
 
     //@ts-expect-error props.instanceMapCounter
-    this._id = hashInstance('Tooltip', props.instanceMapCounter)
+    this._id = generateId('Tooltip', props.instanceMapCounter)
 
     this.state = { hasFocus: false }
   }

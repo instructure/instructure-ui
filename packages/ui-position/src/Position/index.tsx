@@ -36,7 +36,7 @@ import {
   findDOMNode
 } from '@instructure/ui-dom-utils'
 import type { PositionChangeListenerType } from '@instructure/ui-dom-utils'
-import { shallowEqual, deepEqual, hashInstance } from '@instructure/ui-utils'
+import { shallowEqual, deepEqual, generateId } from '@instructure/ui-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { testable } from '@instructure/ui-testable'
@@ -98,7 +98,7 @@ class Position extends Component<PositionProps, PositionState> {
     })
     this._id =
       //@ts-expect-error props.instanceMapCounter
-      this.props.id || hashInstance('Position', this.props.instanceMapCounter)
+      this.props.id || generateId('Position', this.props.instanceMapCounter)
   }
 
   ref: Element | null = null

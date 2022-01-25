@@ -42,7 +42,7 @@ import type { PagesContextType } from './PagesContext'
 import { allowedProps, propTypes } from './props'
 import type { PagesProps } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -93,7 +93,7 @@ class Pages extends Component<PagesProps> {
     ]
 
     //@ts-expect-error props.instanceMapCounter
-    this._contentId = hashInstance('Pages', props.instanceMapCounter)
+    this._contentId = generateId('Pages', props.instanceMapCounter)
   }
 
   componentDidMount() {

@@ -34,7 +34,7 @@ import {
   getInteraction,
   withSSR
 } from '@instructure/ui-react-utils'
-import { isEdge, hashInstance } from '@instructure/ui-utils'
+import { isEdge, generateId } from '@instructure/ui-utils'
 
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
@@ -103,12 +103,12 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   constructor(props: FileDropProps) {
     super(props)
     // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'null'.
-    this.defaultId = hashInstance(
+    this.defaultId = generateId(
       'FileDrop',
       //@ts-expect-error props.instanceMapCounter
       props.instanceMapCounter
     )
-    this.messagesId = hashInstance(
+    this.messagesId = generateId(
       'FileDrop-messages',
       //@ts-expect-error props.instanceMapCounter
       props.instanceMapCounter

@@ -45,7 +45,7 @@ import type {
 
 import { allowedProps, propTypes } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 type GetOption = <F extends keyof TimeSelectOptions>(
   field: F,
@@ -84,7 +84,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   static contextType = ApplyLocaleContext
 
   ref: Select | null = null
-  private readonly _emptyOptionId = hashInstance(
+  private readonly _emptyOptionId = generateId(
     'Select-EmptyOption',
     //@ts-expect-error props.instanceMapCounter
     this.props.instanceMapCounter

@@ -49,7 +49,7 @@ import {
   createChainedFunction,
   shallowEqual,
   px,
-  hashInstance
+  generateId
 } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
@@ -116,7 +116,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
 
     this._id =
       //@ts-expect-error props.instanceMapCounter
-      this.props.id || hashInstance('Popover', props.instanceMapCounter)
+      this.props.id || generateId('Popover', props.instanceMapCounter)
     this._raf = []
 
     this._handleMouseOver = handleMouseOverOut.bind(

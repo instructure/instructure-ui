@@ -36,7 +36,7 @@ import generateComponentTheme from './theme'
 import { allowedProps, propTypes } from './props'
 import type { InlineSVGProps } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -82,13 +82,13 @@ class InlineSVG extends Component<InlineSVGProps> {
   constructor(props: InlineSVGProps) {
     super(props)
 
-    this.titleId = hashInstance(
+    this.titleId = generateId(
       'InlineSVG-title',
       //@ts-expect-error props.instanceMapCounter
       props.instanceMapCounter
     )
     //@ts-expect-error props.instanceMapCounter
-    this.descId = hashInstance('InlineSVG-desc', props.instanceMapCounter)
+    this.descId = generateId('InlineSVG-desc', props.instanceMapCounter)
   }
 
   componentDidMount() {

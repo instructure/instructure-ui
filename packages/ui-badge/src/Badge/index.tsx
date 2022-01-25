@@ -27,7 +27,7 @@ import { Component, Children, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { safeCloneElement, withSSR } from '@instructure/ui-react-utils'
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -71,7 +71,7 @@ class Badge extends Component<BadgeProps> {
   constructor(props: BadgeProps) {
     super(props)
     //@ts-expect-error ssr prop
-    this._defaultId = hashInstance('Badge', props.instanceMapCounter)
+    this._defaultId = generateId('Badge', props.instanceMapCounter)
   }
 
   _defaultId: string

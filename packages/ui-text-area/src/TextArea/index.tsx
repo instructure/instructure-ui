@@ -35,7 +35,7 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { withStyle, jsx } from '@instructure/emotion'
-import { px, hashInstance } from '@instructure/ui-utils'
+import { px, generateId } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import { omitProps, pickProps, withSSR } from '@instructure/ui-react-utils'
 
@@ -85,7 +85,7 @@ class TextArea extends Component<TextAreaProps> {
     super(props)
 
     //@ts-expect-error props.instanceMapCounter
-    this._defaultId = hashInstance('TextArea', this.props.instanceMapCounter)
+    this._defaultId = generateId('TextArea', this.props.instanceMapCounter)
   }
 
   componentDidMount() {

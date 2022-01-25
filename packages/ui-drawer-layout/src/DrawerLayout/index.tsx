@@ -32,7 +32,7 @@ import {
   withSSR
 } from '@instructure/ui-react-utils'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
-import { createChainedFunction, px, hashInstance } from '@instructure/ui-utils'
+import { createChainedFunction, px, generateId } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 
@@ -96,7 +96,7 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
     }
 
     //@ts-expect-error props.instanceMapCounter
-    this._id = hashInstance('DrawerLayout', this.props.instanceMapCounter)
+    this._id = generateId('DrawerLayout', this.props.instanceMapCounter)
   }
 
   private readonly _id: string

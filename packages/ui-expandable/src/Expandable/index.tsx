@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React, { Component } from 'react'
-import { createChainedFunction, hashInstance } from '@instructure/ui-utils'
+import { createChainedFunction, generateId } from '@instructure/ui-utils'
 
 import { propTypes, allowedProps } from './props'
 import type { ExpandableProps, ExpandableState } from './props'
@@ -59,7 +59,7 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
         ? (props.expanded as boolean)
         : props.defaultExpanded
     }
-    this._contentId = hashInstance(
+    this._contentId = generateId(
       'Expandable__content',
       // @ts-expect-error props.instanceMapCounter
       props.instanceMapCounter

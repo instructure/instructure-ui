@@ -52,7 +52,7 @@ type MenuSeparatorChild = React.ComponentElement<
   MenuItemSeparator
 >
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -87,7 +87,7 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
     }
 
     //@ts-expect-error props.instanceMapCounter
-    this._labelId = hashInstance('MenuItemGroup', props.instanceMapCounter)
+    this._labelId = generateId('MenuItemGroup', props.instanceMapCounter)
   }
 
   private _labelId: string

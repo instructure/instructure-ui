@@ -27,7 +27,7 @@ import React, { Component, SyntheticEvent } from 'react'
 import keycode from 'keycode'
 
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { createChainedFunction, hashInstance } from '@instructure/ui-utils'
+import { createChainedFunction, generateId } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import type { SelectableProps } from './props'
 import { allowedProps, propTypes } from './props'
@@ -52,7 +52,7 @@ class Selectable extends Component<SelectableProps> {
 
   _id =
     //@ts-expect-error props.instanceMapCounter
-    this.props.id || hashInstance('Selectable', this.props.instanceMapCounter)
+    this.props.id || generateId('Selectable', this.props.instanceMapCounter)
   _listId = `${this._id}-list`
   _descriptionId = `${this._id}-description`
   private _trigger: Element | null = null

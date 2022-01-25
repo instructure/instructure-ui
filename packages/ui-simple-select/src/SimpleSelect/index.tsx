@@ -48,7 +48,7 @@ import type { SimpleSelectGroupProps } from './Group/props'
 import type { SimpleSelectProps } from './props'
 import { allowedProps, propTypes, SimpleSelectState } from './props'
 
-import { hashInstance } from '@instructure/ui-utils'
+import { generateId } from '@instructure/ui-utils'
 
 type OptionChild = React.ComponentElement<SimpleSelectOptionProps, Option>
 type GroupChild = React.ComponentElement<SimpleSelectGroupProps, Group>
@@ -102,7 +102,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
       selectedOptionId: option ? option.props.id : undefined
     }
 
-    this._emptyOptionId = hashInstance(
+    this._emptyOptionId = generateId(
       'Select-EmptyOption',
       //@ts-expect-error props.instanceMapCounter
       props.instanceMapCounter
