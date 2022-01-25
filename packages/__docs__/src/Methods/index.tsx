@@ -23,17 +23,12 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Table } from '@instructure/ui-table'
 
 import { compileMarkdown } from '../compileMarkdown'
-
-class Methods extends Component {
-  static propTypes = {
-    methods: PropTypes.array.isRequired
-  }
-
+import { MethodsProps } from './props'
+class Methods extends Component<MethodsProps> {
   renderRows() {
     const methods = this.props.methods || []
 
@@ -54,20 +49,19 @@ class Methods extends Component {
       )
     })
   }
-
-  renderType(type) {
-    return type ? type.names.join(', ') : null
+  renderType(type: { name: string[] }) {
+    return type ? type.name.join(', ') : null
   }
 
-  renderParams(params) {
+  renderParams(params: { name: string }[]) {
     return params && params.map((param) => param.name).join(', ')
   }
 
-  renderReturns(returns) {
+  renderReturns(returns: { type: { name: string[] } }[]) {
     return returns && returns.map((ret) => this.renderType(ret.type)).join(', ')
   }
 
-  renderDescription(description) {
+  renderDescription(description: string) {
     return <div>{description && compileMarkdown(description)}</div>
   }
 
