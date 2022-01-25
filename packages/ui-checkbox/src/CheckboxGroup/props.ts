@@ -38,11 +38,11 @@ import { Checkbox } from '../Checkbox'
 import type { CheckboxProps } from '../Checkbox/props'
 
 type CheckboxGroupOwnProps = {
-  children?: React.ComponentElement<CheckboxProps, Checkbox>[]
+  children?: React.ComponentElement<CheckboxProps, Checkbox>[] // TODO: oneOf([Checkbox])
   name: string
   description: React.ReactNode
   defaultValue?: (string | number)[]
-  value?: (string | number)[]
+  value?: (string | number)[] // TODO: controllable(PropTypes.array)
   onChange?: (value: (string | number)[]) => void
   disabled?: boolean
   readOnly?: boolean

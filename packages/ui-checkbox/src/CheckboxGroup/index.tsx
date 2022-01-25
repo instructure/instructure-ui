@@ -72,7 +72,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
 
     this._messagesId = uid('CheckboxGroup-messages')
   }
-  private _messagesId: string
+  private readonly _messagesId: string
   ref: Element | null = null
 
   handleRef = (el: Element | null) => {
@@ -148,7 +148,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
           width:
             (child as React.ComponentElement<CheckboxProps, Checkbox>).props
               .width || 'auto',
-          'aria-describedby': this.hasMessages ? this._messagesId : ''
+          'aria-describedby': this.hasMessages ? this._messagesId : undefined
         })
       } else {
         return child

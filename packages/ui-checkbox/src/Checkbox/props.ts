@@ -41,9 +41,9 @@ type CheckboxOwnProps = {
   id?: string
   value?: string | number
   /**
-   * object with shape: `{
-   * text: PropTypes.node,
-   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   * Array of objects with shape: `{
+   *   text: ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
    *   }`
    */
   messages?: FormMessage[]

@@ -89,8 +89,8 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
 
     this._defaultId = uid('Checkbox')
   }
-  private _defaultId: string
-  private _input?: HTMLInputElement | null
+  private readonly _defaultId: string
+  private _input: HTMLInputElement | null = null
 
   ref: Element | null = null
 
@@ -100,7 +100,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
 
   componentDidMount() {
     if (this._input) {
-      this._input.indeterminate = this.props.indeterminate || false
+      this._input.indeterminate = this.props.indeterminate!
     }
 
     this.props.makeStyles?.()
