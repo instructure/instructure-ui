@@ -43,7 +43,7 @@ type RatingOwnProps = {
   /**
    * A function that returns the current value formatted for screen readers
    */
-  formatValueText?: (...args: any[]) => any
+  formatValueText?: (filled: number, iconCount: number) => string
   /**
    * Choose from a 0-3 or 0-5 rating system
    */

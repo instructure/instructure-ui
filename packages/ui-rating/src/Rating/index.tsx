@@ -51,7 +51,7 @@ class Rating extends Component<RatingProps> {
 
   static defaultProps = {
     animateFill: false,
-    formatValueText: (filled: string, iconCount: string) =>
+    formatValueText: (filled: number, iconCount: number) =>
       `${filled} / ${iconCount}`,
     iconCount: 3,
     size: 'medium',
@@ -78,13 +78,13 @@ class Rating extends Component<RatingProps> {
     const { valueNow, iconCount, valueMax } = this.props
 
     // prevent divide by zero errors
-    const max = !!valueMax && valueMax > 0 ? valueMax : iconCount
+    const max = !!valueMax && valueMax > 0 ? valueMax : iconCount!
 
-    const filledIcons = Math.round((valueNow! * iconCount!) / max!)
+    const filledIcons = Math.round((valueNow! * iconCount!) / max)
 
     // Handle edge case where valueNow is greater than valueMax
     if (filledIcons > iconCount!) {
-      return iconCount
+      return iconCount!
     } else {
       return filledIcons
     }
@@ -98,7 +98,7 @@ class Rating extends Component<RatingProps> {
     const { iconCount, animateFill, size, margin, label, formatValueText } =
       this.props
 
-    const valueText = label + ' ' + formatValueText?.(this.filled, iconCount)
+    const valueText = label + ' ' + formatValueText?.(this.filled, iconCount!)
 
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Rating.allowedProps),
