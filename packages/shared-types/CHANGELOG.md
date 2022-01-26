@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.15.0](https://github.com/instructure/instructure-ui/compare/v8.14.0...v8.15.0) (2022-01-26)
+
+### Features
+
+- **ui-options:** add `description` and `descriptionRole` props to Options.Item ([a2cfa0c](https://github.com/instructure/instructure-ui/commit/a2cfa0cd8bf43d6072f1b352bbd6e43542081be8))
+- **ui-options:** add props to set the vALign of Options.Item before/after content ([be635ba](https://github.com/instructure/instructure-ui/commit/be635ba5c734c0a40f9778131b251f32decddb75))
+
 # [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
 
 ### Features

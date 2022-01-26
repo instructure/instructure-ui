@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.15.0](https://github.com/instructure/instructure-ui/compare/v8.14.0...v8.15.0) (2022-01-26)
+
+### Bug Fixes
+
+- **ui-code-editor:** should tab out from the editor when it's readonly ([bcd0bf6](https://github.com/instructure/instructure-ui/commit/bcd0bf6a1afd5fbfcec3fe4bd55199338b695339))
+
 # [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
 
 **Note:** Version bump only for package @instructure/ui-code-editor

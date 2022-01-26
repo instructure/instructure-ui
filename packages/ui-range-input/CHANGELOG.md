@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.15.0](https://github.com/instructure/instructure-ui/compare/v8.14.0...v8.15.0) (2022-01-26)
+
+### Bug Fixes
+
+- **ui-range-input:** fixed empty label when `displayValue={true}` but has no `value`/`defaultValue` ([f238a9f](https://github.com/instructure/instructure-ui/commit/f238a9fe6b89c5d49b71b3df7bfd22785b198ed9))
+
 # [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
 
 **Note:** Version bump only for package @instructure/ui-range-input

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.15.0](https://github.com/instructure/instructure-ui/compare/v8.14.0...v8.15.0) (2022-01-26)
+
+### Bug Fixes
+
+- **emotion:** make theme componentOverrides apply to Buttons ([8a3583e](https://github.com/instructure/instructure-ui/commit/8a3583edd65823b7e241e1350e2f100555663d57))
+
 # [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
 
 **Note:** Version bump only for package @instructure/emotion
