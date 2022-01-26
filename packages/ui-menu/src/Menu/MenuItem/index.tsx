@@ -26,7 +26,11 @@ import { Component } from 'react'
 import keycode from 'keycode'
 
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
-import { omitProps, getElementType, withSSR } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  getElementType,
+  withDeterministicId
+} from '@instructure/ui-react-utils'
 import { createChainedFunction, generateId } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
@@ -47,7 +51,7 @@ id: Menu.Item
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MenuItem extends Component<MenuItemProps, MenuItemState> {
@@ -70,9 +74,8 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
         selected: !!props.defaultSelected
       }
     }
-    //@ts-expect-error ssr
 
-    this.labelId = generateId('MenuItem__label', props.instanceMapCounter)
+    this.labelId = generateId('MenuItem__label', props.instanceMapCounter!)
   }
 
   get _node() {

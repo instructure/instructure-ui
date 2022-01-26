@@ -21,28 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
+import { withDeterministicId } from '../DeterministicIdContext'
+import type { WithDeterministicIdProps } from '../DeterministicIdContext'
 
-/** Element func parameter, mainly for the `findDOMNode` util */
-export type UIElement =
-  | Node
-  | Window
-  | React.ReactElement
-  | React.Component
-  | (() => Node | Window | null | undefined)
-  | null
-
-/**
- * A DOM element or an array of DOM elements or a method that returns a DOM
- * element, that represents the part of the DOM that is not hidden from the
- * screen reader
- */
-export type LiveRegion = (() => Element) | Element[] | Element
-
-interface InstUIBaseComponent {
-  componentId: string
-  allowedProps: string[]
+@withDeterministicId()
+class TestComponent extends React.Component<WithDeterministicIdProps> {
+  render() {
+    return <div>{this.props.instanceMapCounter} - hello</div>
+  }
 }
-export interface InstUIComponent extends React.ComponentClass<any, any>, InstUIBaseComponent { }
+describe('@withDeterministicId', () => {
+  it('should pass an `instanceMapCounter` to child components', async () => {
+    const el = await mount(<TestComponent></TestComponent>)
+    // debugger
+    console.log(el)
 
+    expect(true)
+  })
+})

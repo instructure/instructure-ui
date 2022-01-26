@@ -26,7 +26,10 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import keycode from 'keycode'
 
-import { callRenderProp, withSSR } from '@instructure/ui-react-utils'
+import {
+  callRenderProp,
+  withDeterministicId
+} from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
@@ -41,7 +44,6 @@ import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
 import { canvas } from '@instructure/ui-themes'
 import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
-import { generateId } from '@instructure/ui-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -55,7 +57,7 @@ category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Alert extends Component<AlertProps, AlertState> {
   static readonly componentId = 'Alert'
@@ -167,8 +169,8 @@ class Alert extends Component<AlertProps, AlertState> {
   createScreenreaderAlert() {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'srid' does not exist on type 'Alert'.
-      this.srid = generateId('Alert', this.props.instanceMapCounter)
+      // @ts-expect-error ts-migrate() FIXME: Property 'srid' does not exist on type 'Alert'.
+      this.srid = this.props.deterministicId!
 
       const div = document.createElement('div')
       div.setAttribute('id', this.srid)

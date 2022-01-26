@@ -39,6 +39,7 @@ import type {
   PlacementPropValues,
   PositionConstraint
 } from '@instructure/ui-position'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type PropKeys = keyof TimeSelectOwnProps
 
@@ -49,6 +50,7 @@ type TimeSelectProps = TimeSelectOwnProps &
     TimeSelectOwnProps,
     InputHTMLAttributes<TimeSelectOwnProps>
   >
+  & WithDeterministicIdProps
 
 type TimeSelectOwnProps = {
   /**

@@ -43,6 +43,7 @@ import type {
   PositionMountNode
 } from '@instructure/ui-position'
 import type { Popover } from '@instructure/ui-popover'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 import { MenuItem } from './MenuItem'
 import type { Menu } from './index'
@@ -171,7 +172,7 @@ type MenuProps = MenuOwnProps &
   // controls can be passed in renderChildren and used later as aria-controls
   Omit<OtherHTMLAttributes<MenuOwnProps>, 'controls'> & {
     controls?: React.AriaAttributes['aria-controls']
-  }
+  } & WithDeterministicIdProps
 
 type MenuStyle = ComponentStyle<'menu'>
 

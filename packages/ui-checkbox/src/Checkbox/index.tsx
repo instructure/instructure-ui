@@ -27,10 +27,10 @@ import React, { Component } from 'react'
 import keycode from 'keycode'
 
 import { FormFieldMessages } from '@instructure/ui-form-field'
-import { createChainedFunction, generateId } from '@instructure/ui-utils'
+import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { omitProps, withSSR } from '@instructure/ui-react-utils'
+import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 
@@ -57,7 +57,7 @@ tags: toggle, switch
 @tsProps
 **/
 
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, null)
 @testable()
 class Checkbox extends Component<CheckboxProps, CheckboxState> {
@@ -93,7 +93,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
     }
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Chec... Remove this comment to see the full error message
-    this._defaultId = generateId('Checkbox', props.instanceMapCounter)
+    this._defaultId = props.deterministicId
   }
   private readonly _defaultId: string
   private _input: HTMLInputElement | null = null

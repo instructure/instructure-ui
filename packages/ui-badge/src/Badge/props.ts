@@ -38,6 +38,7 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type { PlacementPropValues } from '@instructure/ui-position'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type BadgeOwnProps = {
   count?: number
@@ -87,7 +88,7 @@ type PropKeys = keyof BadgeOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type BadgeProps = BadgeOwnProps & WithStyleProps<BadgeTheme, BadgeStyle>
+type BadgeProps = BadgeOwnProps & WithStyleProps<BadgeTheme, BadgeStyle> & WithDeterministicIdProps
 
 type BadgeStyle = ComponentStyle<'badge' | 'wrapper'>
 

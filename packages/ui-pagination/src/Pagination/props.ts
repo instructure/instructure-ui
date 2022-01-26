@@ -41,7 +41,7 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 import type { PaginationPageProps } from './PaginationButton/props'
-
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 type ChildPage = React.ReactElement<PaginationPageProps>
 
 type PaginationOwnProps = {
@@ -154,7 +154,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PaginationProps = PaginationOwnProps &
   WithStyleProps<null, PaginationStyle> &
-  OtherHTMLAttributes<PaginationOwnProps>
+  OtherHTMLAttributes<PaginationOwnProps> & WithDeterministicIdProps
 
 type PaginationStyle = ComponentStyle<'pagination' | 'pages'>
 

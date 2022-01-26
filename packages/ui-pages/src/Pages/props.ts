@@ -34,6 +34,7 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { PropValidators, PagesTheme } from '@instructure/shared-types'
 
 type PagesOwnProps = {
@@ -66,7 +67,7 @@ type PropKeys = keyof PagesOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PagesProps = PagesOwnProps & WithStyleProps<PagesTheme, PagesStyle>
+type PagesProps = PagesOwnProps & WithStyleProps<PagesTheme, PagesStyle> & WithDeterministicIdProps
 
 type PagesStyle = ComponentStyle<'pages'>
 

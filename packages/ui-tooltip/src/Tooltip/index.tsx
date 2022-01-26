@@ -31,7 +31,7 @@ import {
   ensureSingleChild,
   passthroughProps,
   callRenderProp,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
@@ -44,15 +44,13 @@ import generateComponentTheme from './theme'
 import type { TooltipProps, TooltipState } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Tooltip extends Component<TooltipProps, TooltipState> {
@@ -81,8 +79,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
   constructor(props: TooltipProps) {
     super(props)
 
-    //@ts-expect-error props.instanceMapCounter
-    this._id = generateId('Tooltip', props.instanceMapCounter)
+    this._id = props.deterministicId!
 
     this.state = { hasFocus: false }
   }

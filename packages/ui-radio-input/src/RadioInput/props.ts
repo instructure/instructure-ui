@@ -32,6 +32,7 @@ import type {
   RadioInputTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type RadioInputOwnProps = {
   label: React.ReactNode
@@ -64,7 +65,7 @@ type RadioInputProps = RadioInputOwnProps &
   OtherHTMLAttributes<
     RadioInputOwnProps,
     InputHTMLAttributes<RadioInputOwnProps>
-  >
+  > & WithDeterministicIdProps
 
 type RadioInputStyle = ComponentStyle<
   'radioInput' | 'input' | 'control' | 'facade' | 'label'

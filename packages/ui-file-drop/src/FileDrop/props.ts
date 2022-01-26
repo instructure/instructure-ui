@@ -38,6 +38,7 @@ import type {
   FileDropTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type FileDropOwnProps = {
   id?: string
@@ -85,7 +86,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FileDropProps = FileDropOwnProps &
   WithStyleProps<FileDropTheme, FileDropStyle> &
-  OtherHTMLAttributes<FileDropOwnProps>
+  OtherHTMLAttributes<FileDropOwnProps> & WithDeterministicIdProps
 
 type FileDropStyle = ComponentStyle<
   'fileDropLabel' | 'fileDropInput' | 'fileDropLabelContent' | 'fileDropLayout'

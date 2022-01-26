@@ -35,9 +35,13 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { withStyle, jsx } from '@instructure/emotion'
-import { px, generateId } from '@instructure/ui-utils'
+import { px } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, pickProps, withSSR } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  pickProps,
+  withDeterministicId
+} from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -50,7 +54,7 @@ category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class TextArea extends Component<TextAreaProps> {
@@ -84,8 +88,7 @@ class TextArea extends Component<TextAreaProps> {
   constructor(props: TextAreaProps) {
     super(props)
 
-    //@ts-expect-error props.instanceMapCounter
-    this._defaultId = generateId('TextArea', this.props.instanceMapCounter)
+    this._defaultId = props.deterministicId!
   }
 
   componentDidMount() {

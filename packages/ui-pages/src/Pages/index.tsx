@@ -27,7 +27,10 @@ import React, { Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { containsActiveElement, findTabbable } from '@instructure/ui-dom-utils'
-import { safeCloneElement, withSSR } from '@instructure/ui-react-utils'
+import {
+  safeCloneElement,
+  withDeterministicId
+} from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 
 import { Page } from './Page'
@@ -42,15 +45,13 @@ import type { PagesContextType } from './PagesContext'
 import { allowedProps, propTypes } from './props'
 import type { PagesProps } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class Pages extends Component<PagesProps> {
   static readonly componentId = 'Pages'
@@ -92,8 +93,7 @@ class Pages extends Component<PagesProps> {
         : props.activePageIndex!
     ]
 
-    //@ts-expect-error props.instanceMapCounter
-    this._contentId = generateId('Pages', props.instanceMapCounter)
+    this._contentId = props.deterministicId!
   }
 
   componentDidMount() {

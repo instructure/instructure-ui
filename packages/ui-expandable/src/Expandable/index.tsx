@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 import React, { Component } from 'react'
-import { createChainedFunction, generateId } from '@instructure/ui-utils'
+import { createChainedFunction } from '@instructure/ui-utils'
 
 import { propTypes, allowedProps } from './props'
 import type { ExpandableProps, ExpandableState } from './props'
 
-import { withSSR } from '@instructure/ui-react-utils'
+import { withDeterministicId } from '@instructure/ui-react-utils'
 
 const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
   expanded: !expanded
@@ -39,7 +39,7 @@ const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
  ---
  * @tsProps
  **/
-@withSSR()
+@withDeterministicId()
 class Expandable extends Component<ExpandableProps, ExpandableState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
@@ -58,11 +58,7 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
         ? (props.expanded as boolean)
         : props.defaultExpanded
     }
-    this._contentId = generateId(
-      'Expandable__content',
-      // @ts-expect-error props.instanceMapCounter
-      props.instanceMapCounter
-    )
+    this._contentId = props.deterministicId!
   }
 
   get expanded() {

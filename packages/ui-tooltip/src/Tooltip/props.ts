@@ -41,6 +41,7 @@ import type {
 } from '@instructure/ui-position'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { PopoverOwnProps } from '@instructure/ui-popover'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type TooltipRenderChildrenArgs = {
   focused: boolean
@@ -176,7 +177,7 @@ type TooltipProps = PropsPassableToPopover &
   TooltipOwnProps &
   WithStyleProps<TooltipTheme, TooltipStyle> &
   // the OtherHTMLAttributes might be passed to the trigger or Popover
-  OtherHTMLAttributes<TooltipOwnProps>
+  OtherHTMLAttributes<TooltipOwnProps> & WithDeterministicIdProps
 
 type TooltipStyle = ComponentStyle<'tooltip'>
 

@@ -29,10 +29,10 @@ import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import {
   matchComponentTypes,
   safeCloneElement,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
-import { createChainedFunction, px, generateId } from '@instructure/ui-utils'
+import { createChainedFunction, px } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 
@@ -69,7 +69,7 @@ category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, null)
 @textDirectionContextConsumer()
 @testable()
@@ -95,8 +95,7 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
       contentWidth: 0
     }
 
-    //@ts-expect-error props.instanceMapCounter
-    this._id = generateId('DrawerLayout', this.props.instanceMapCounter)
+    this._id = props.deterministicId!
   }
 
   private readonly _id: string
@@ -118,9 +117,9 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
   }
 
   get trayProps() {
-    const tray = (
-      Children.toArray(this.props.children) as DrawerChildren
-    ).filter((child) =>
+    const tray = (Children.toArray(
+      this.props.children
+    ) as DrawerChildren).filter((child) =>
       matchComponentTypes<TrayChild>(child, [DrawerTray])
     )[0] as TrayChild
     return tray.props

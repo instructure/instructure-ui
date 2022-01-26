@@ -35,6 +35,7 @@ import type {
   ToggleFacadeTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type CheckboxOwnProps = {
   label: React.ReactNode
@@ -86,7 +87,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CheckboxProps = CheckboxOwnProps &
   WithStyleProps<CheckboxFacadeTheme | ToggleFacadeTheme, CheckboxStyle> &
-  OtherHTMLAttributes<CheckboxOwnProps>
+  OtherHTMLAttributes<CheckboxOwnProps> & WithDeterministicIdProps
 
 type CheckboxStyle = ComponentStyle<'checkbox' | 'input' | 'control'>
 

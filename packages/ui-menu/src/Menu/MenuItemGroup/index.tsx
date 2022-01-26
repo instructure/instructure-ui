@@ -30,7 +30,7 @@ import {
   omitProps,
   safeCloneElement,
   matchComponentTypes,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { testable } from '@instructure/ui-testable'
@@ -61,7 +61,7 @@ id: Menu.Group
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
@@ -159,9 +159,10 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
     const { children, allowMultiple } = props
     const selected: MenuGroupState['selected'] = []
 
-    const items = (
-      Children.toArray(children) as (MenuItemChild | MenuSeparatorChild)[]
-    ).filter((child) => {
+    const items = (Children.toArray(children) as (
+      | MenuItemChild
+      | MenuSeparatorChild
+    )[]).filter((child) => {
       return matchComponentTypes<MenuItemChild>(child, [MenuItem])
     }) as MenuItemChild[]
 
@@ -201,8 +202,13 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   }
 
   renderChildren() {
-    const { disabled, controls, allowMultiple, isTabbable, onMouseOver } =
-      this.props
+    const {
+      disabled,
+      controls,
+      allowMultiple,
+      isTabbable,
+      onMouseOver
+    } = this.props
     const children = this.props.children as (
       | MenuItemChild
       | MenuSeparatorChild

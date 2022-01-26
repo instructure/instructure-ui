@@ -29,14 +29,14 @@ import {
   safeCloneElement,
   callRenderProp,
   ensureSingleChild,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import {
   addPositionChangeListener,
   findDOMNode
 } from '@instructure/ui-dom-utils'
 import type { PositionChangeListenerType } from '@instructure/ui-dom-utils'
-import { shallowEqual, deepEqual, generateId } from '@instructure/ui-utils'
+import { shallowEqual, deepEqual } from '@instructure/ui-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { testable } from '@instructure/ui-testable'
@@ -59,7 +59,7 @@ category: components/utilities
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Position extends Component<PositionProps, PositionState> {
@@ -96,9 +96,7 @@ class Position extends Component<PositionProps, PositionState> {
       leading: false,
       trailing: true
     })
-    this._id =
-      //@ts-expect-error props.instanceMapCounter
-      this.props.id || generateId('Position', this.props.instanceMapCounter)
+    this._id = this.props.id || props.deterministicId!
   }
 
   ref: Element | null = null

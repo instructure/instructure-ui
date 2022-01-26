@@ -27,16 +27,13 @@ import { TextDirectionContext } from '@instructure/ui-i18n'
 import { ThemeProvider } from '@emotion/react'
 import { ThemeOrOverride } from '../EmotionTypes'
 import { getTheme } from '../EmotionThemeProvider'
-import {
-  generateInstanceMapCounter,
-  SSRContextProvider
-} from '@instructure/ui-react-utils'
-import type { SSRContextProviderValue } from '@instructure/ui-react-utils'
+import { DeterministicIdContextProvider } from '@instructure/ui-react-utils'
+import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
 
 type InstUIProviderProps = {
   theme?: ThemeOrOverride
   dir?: 'ltr' | 'rtl' // TODO allow "auto" too
-  instanceMapCounter?: SSRContextProviderValue
+  instanceMapCounter?: DeterministicIdProviderValue
 }
 
 /**
@@ -122,20 +119,20 @@ function InstUISettingsProvider({
   }
 
   return (
-    <SSRContextProvider instanceMapCounter={instanceMapCounter!}>
+    <DeterministicIdContextProvider instanceMapCounter={instanceMapCounter!}>
       <ThemeProvider theme={getTheme(theme)}>
         <TextDirectionContext.Provider value={finalDir}>
           {children}
         </TextDirectionContext.Provider>
       </ThemeProvider>
-    </SSRContextProvider>
+    </DeterministicIdContextProvider>
   )
 }
 
 InstUISettingsProvider.defaultProps = {
   theme: {},
   dir: undefined,
-  instanceMapCounter: generateInstanceMapCounter()
+  instanceMapCounter: undefined
 }
 export default InstUISettingsProvider
 export { InstUISettingsProvider }

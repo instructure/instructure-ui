@@ -28,6 +28,7 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 
 import type { PropValidators } from '@instructure/shared-types'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type GetToggleProps = <P extends Record<string, any>>(
   props?: P & { onClick?: React.MouseEventHandler }
@@ -86,7 +87,7 @@ type PropKeys = keyof ExpandableOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ExpandableProps = ExpandableOwnProps
+type ExpandableProps = ExpandableOwnProps & WithDeterministicIdProps
 
 const propTypes: PropValidators<PropKeys> = {
   expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),

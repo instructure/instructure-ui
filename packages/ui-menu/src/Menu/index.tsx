@@ -29,7 +29,7 @@ import { Popover } from '@instructure/ui-popover'
 import {
   safeCloneElement,
   matchComponentTypes,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
@@ -65,7 +65,7 @@ category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Menu extends Component<MenuProps> {
@@ -95,11 +95,12 @@ class Menu extends Component<MenuProps> {
   _rootNode = null
   _menuItems: MenuItem[] = []
   _popover: Popover | null = null
-  _trigger: MenuItem | (React.ReactInstance & { focus?: () => void }) | null =
-    null
+  _trigger:
+    | MenuItem
+    | (React.ReactInstance & { focus?: () => void })
+    | null = null
   _menu: HTMLUListElement | null = null
-  //@ts-expect-error ssr
-  _labelId = generateId('Menu__label', this.props.instanceMapCounter)
+  _labelId = generateId('Menu__label', this.props.instanceMapCounter!)
 
   _activeSubMenu?: Menu | null
   _id: string
@@ -116,9 +117,8 @@ class Menu extends Component<MenuProps> {
 
   constructor(props: MenuProps) {
     super(props)
-    //@ts-expect-error ssr
 
-    this._id = this.props.id || generateId('Menu', props.instanceMapCounter)
+    this._id = this.props.id || props.deterministicId!
   }
   componentDidMount() {
     this.props.makeStyles?.()

@@ -37,6 +37,7 @@ import type {
   PlacementPropValues,
   ElementPosition
 } from '../PositionPropTypes'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type PositionOwnProps = {
   /**
@@ -133,7 +134,7 @@ type PropKeys = keyof PositionOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PositionProps = PositionOwnProps &
-  WithStyleProps<PositionTheme, PositionStyle>
+  WithStyleProps<PositionTheme, PositionStyle> & WithDeterministicIdProps
 
 const propTypes: PropValidators<PropKeys> = {
   renderTarget: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),

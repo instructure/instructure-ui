@@ -36,6 +36,7 @@ import type {
   PropValidators,
   SpinnerTheme
 } from '@instructure/shared-types'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type SpinnerOwnProps = {
   /**
@@ -69,7 +70,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SpinnerProps = SpinnerOwnProps &
   WithStyleProps<SpinnerTheme, SpinnerStyle> &
-  OtherHTMLAttributes<SpinnerOwnProps>
+  OtherHTMLAttributes<SpinnerOwnProps> & WithDeterministicIdProps
 
 type SpinnerStyle = ComponentStyle<
   'spinner' | 'circle' | 'circleTrack' | 'circleSpin'

@@ -37,6 +37,7 @@ import type {
 } from '@instructure/shared-types'
 import type { FormMessage, FormFieldOwnProps } from '@instructure/ui-form-field'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type TextAreaOwnProps = {
   label: React.ReactNode
@@ -121,12 +122,12 @@ type TextAreaProps =
     FormFieldOwnProps,
     'label' | 'inline' | 'id' | 'elementRef'
   > &
-    TextAreaOwnProps &
-    WithStyleProps<TextAreaTheme, TextAreaStyle> &
-    OtherHTMLAttributes<
-      TextAreaOwnProps,
-      TextareaHTMLAttributes<TextAreaOwnProps>
-    >
+  TextAreaOwnProps &
+  WithStyleProps<TextAreaTheme, TextAreaStyle> &
+  OtherHTMLAttributes<
+    TextAreaOwnProps,
+    TextareaHTMLAttributes<TextAreaOwnProps>
+  > & WithDeterministicIdProps
 
 type TextAreaStyle = ComponentStyle<
   'textArea' | 'textAreaLayout' | 'textAreaOutline'

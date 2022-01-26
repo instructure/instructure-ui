@@ -37,6 +37,7 @@ import type {
 import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { InputHTMLAttributes } from 'react'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type RangeInputOwnProps = {
   min: number
@@ -100,12 +101,12 @@ type RangeInputProps =
     FormFieldOwnProps,
     'label' | 'inline' | 'id' | 'elementRef'
   > &
-    RangeInputOwnProps &
-    WithStyleProps<RangeInputTheme, RangeInputStyle> &
-    OtherHTMLAttributes<
-      RangeInputOwnProps,
-      InputHTMLAttributes<RangeInputOwnProps>
-    >
+  RangeInputOwnProps &
+  WithStyleProps<RangeInputTheme, RangeInputStyle> &
+  OtherHTMLAttributes<
+    RangeInputOwnProps,
+    InputHTMLAttributes<RangeInputOwnProps>
+  > & WithDeterministicIdProps
 
 type RangeInputStyle = ComponentStyle<
   'rangeInput' | 'rangeInputInput' | 'rangeInputInputValue'

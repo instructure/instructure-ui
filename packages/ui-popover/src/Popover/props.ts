@@ -42,6 +42,7 @@ import type {
   LiveRegion,
   UIElement
 } from '@instructure/shared-types'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type PopoverOwnProps = {
   /**
@@ -269,7 +270,7 @@ type PopoverOwnProps = {
   elementRef?: (element: Element | null) => void
 }
 
-type PopoverProps = PopoverOwnProps & BidirectionalProps
+type PopoverProps = PopoverOwnProps & BidirectionalProps & WithDeterministicIdProps
 
 type PopoverState = {
   placement: PopoverOwnProps['placement']

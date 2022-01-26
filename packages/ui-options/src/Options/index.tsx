@@ -30,7 +30,7 @@ import {
   matchComponentTypes,
   callRenderProp,
   safeCloneElement,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -61,7 +61,7 @@ category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class Options extends Component<OptionsProps> {
@@ -94,8 +94,7 @@ class Options extends Component<OptionsProps> {
   componentDidUpdate() {
     this.props.makeStyles?.()
   }
-  //@ts-expect-error props.instanceMapCounter
-  _labelId = generateId('Options-label', this.props.instanceMapCounter)
+  _labelId = generateId('Options-label', this.props.instanceMapCounter!)
 
   get childAs() {
     const { as } = this.props

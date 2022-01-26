@@ -33,6 +33,7 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type { AlertTheme, PropValidators } from '@instructure/shared-types'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type AlertOwnProps = {
   /**
@@ -96,7 +97,7 @@ type PropKeys = keyof AlertOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AlertProps = AlertOwnProps & WithStyleProps<AlertTheme, AlertStyle>
+type AlertProps = AlertOwnProps & WithStyleProps<AlertTheme, AlertStyle> & WithDeterministicIdProps
 
 type AlertStyle = ComponentStyle<'alert' | 'icon' | 'closeButton' | 'content'>
 

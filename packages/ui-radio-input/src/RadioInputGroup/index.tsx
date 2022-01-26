@@ -31,7 +31,7 @@ import {
   safeCloneElement,
   omitProps,
   pickProps,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 
 import { RadioInput } from '../RadioInput'
@@ -50,7 +50,7 @@ category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @testable()
 class RadioInputGroup extends Component<
   RadioInputGroupProps,
@@ -88,8 +88,7 @@ class RadioInputGroup extends Component<
 
     this._messagesId = generateId(
       'RadioInputGroup-messages',
-      //@ts-expect-error props.instanceMapCounter
-      this.props.instanceMapCounter
+      props.instanceMapCounter!
     )
   }
 

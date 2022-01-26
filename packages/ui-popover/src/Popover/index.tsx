@@ -43,14 +43,9 @@ import {
 import {
   safeCloneElement,
   callRenderProp,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
-import {
-  createChainedFunction,
-  shallowEqual,
-  px,
-  generateId
-} from '@instructure/ui-utils'
+import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
@@ -70,7 +65,7 @@ tags: overlay, portal, dialog
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @textDirectionContextConsumer()
 @testable()
 class Popover extends Component<PopoverProps, PopoverState> {
@@ -114,9 +109,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
           : undefined
     }
 
-    this._id =
-      //@ts-expect-error props.instanceMapCounter
-      this.props.id || generateId('Popover', props.instanceMapCounter)
+    this._id = this.props.id || props.deterministicId!
     this._raf = []
 
     this._handleMouseOver = handleMouseOverOut.bind(
@@ -251,9 +244,8 @@ class Popover extends Component<PopoverProps, PopoverState> {
 
       // arrowSize and arrowBorderWidth are component theme variables
       // declared in ContextView's styles.js
-      const { arrowSize = 0, arrowBorderWidth = 0 } = (
-        this._view as ContextView
-      ).props.styles!
+      const { arrowSize = 0, arrowBorderWidth = 0 } = (this
+        ._view as ContextView).props.styles!
 
       const offsetAmount = (px(arrowSize) + px(arrowBorderWidth)) * 2
 

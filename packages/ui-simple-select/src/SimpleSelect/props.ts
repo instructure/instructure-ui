@@ -44,6 +44,7 @@ import type {
   PositionMountNode
 } from '@instructure/ui-position'
 import type { SelectOwnProps } from '@instructure/ui-select'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type SimpleSelectOwnProps = PropsPassedToSelect & {
   /**
@@ -237,7 +238,7 @@ type SimpleSelectProps = PickPropsWithExceptions<
   OtherHTMLAttributes<
     SimpleSelectOwnProps,
     InputHTMLAttributes<SimpleSelectOwnProps>
-  >
+  > & WithDeterministicIdProps
 
 type SimpleSelectState = {
   inputValue?: string

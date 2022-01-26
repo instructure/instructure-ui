@@ -26,6 +26,7 @@ import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import type { PropValidators } from '@instructure/shared-types'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type SelectableOwnProps = {
   /**
@@ -163,7 +164,7 @@ type PropKeys = keyof SelectableOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type SelectableProps = SelectableOwnProps
+type SelectableProps = SelectableOwnProps & WithDeterministicIdProps
 
 const propTypes: PropValidators<PropKeys> = {
   id: PropTypes.string,

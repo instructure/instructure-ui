@@ -44,6 +44,7 @@ import type {
   PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type SelectOwnProps = {
   /**
@@ -260,7 +261,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SelectProps = SelectOwnProps &
   WithStyleProps<SelectTheme, SelectStyle> &
-  OtherHTMLAttributes<SelectOwnProps, InputHTMLAttributes<SelectOwnProps>>
+  OtherHTMLAttributes<SelectOwnProps, InputHTMLAttributes<SelectOwnProps>> & WithDeterministicIdProps
 
 type SelectStyle = ComponentStyle<'select' | 'icon' | 'assistiveText'>
 
