@@ -27,6 +27,14 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 import { SSRContext } from './SSRContext'
 import { decorator } from '@instructure/ui-decorator'
 
+/**
+ * This decorator is used to enable the decorated class to use the `SSRContext` which is needed
+ * for deterministic id generation.
+ *
+ * The context is there for the users to pass an `instanceMapCounter` Map which is then used
+ * in the child components to deterministically create ids for them based on the `instanceMapCounter`.
+ * Read more about it here: [SSR guide](https://instructure.design/#server-side-rendering)
+ */
 const withSSR = decorator((ComposedComponent: ComponentClass) => {
   const WithSSR = forwardRef((props: any, ref: React.ForwardedRef<any>) => {
     const instanceMapCounter = useContext(SSRContext)

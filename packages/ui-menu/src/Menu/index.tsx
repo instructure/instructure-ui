@@ -70,7 +70,6 @@ category: components
 @testable()
 class Menu extends Component<MenuProps> {
   static readonly componentId = 'Menu'
-  // static contextType = SSRContext
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
