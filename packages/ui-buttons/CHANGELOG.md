@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.15.0](https://github.com/instructure/instructure-ui/compare/v8.14.0...v8.15.0) (2022-01-26)
+
+### Features
+
+- **ui-buttons:** deprecate `string` value for BaseButton and CloseButton `tabIndex` ([b1ff461](https://github.com/instructure/instructure-ui/commit/b1ff4615e6f67e7e53a3dc497bcfabe81bc47667))
+
 # [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
 
 **Note:** Version bump only for package @instructure/ui-buttons

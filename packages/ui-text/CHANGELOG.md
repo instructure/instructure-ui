@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.15.0](https://github.com/instructure/instructure-ui/compare/v8.14.0...v8.15.0) (2022-01-26)
+
+### Features
+
+- **ui-text:** deprecate the `warning` color variant for Text ([8e021a5](https://github.com/instructure/instructure-ui/commit/8e021a5b3e516729ccff9817aa74274df2268906))
+
 # [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
 
 **Note:** Version bump only for package @instructure/ui-text

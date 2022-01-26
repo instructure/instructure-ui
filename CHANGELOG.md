@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.15.0](https://github.com/instructure/instructure-ui/compare/v8.14.0...v8.15.0) (2022-01-26)
+
+### Bug Fixes
+
+- **emotion:** make theme componentOverrides apply to Buttons ([8a3583e](https://github.com/instructure/instructure-ui/commit/8a3583edd65823b7e241e1350e2f100555663d57))
+- **ui-code-editor:** should tab out from the editor when it's readonly ([bcd0bf6](https://github.com/instructure/instructure-ui/commit/bcd0bf6a1afd5fbfcec3fe4bd55199338b695339))
+- **ui-range-input:** fixed empty label when `displayValue={true}` but has no `value`/`defaultValue` ([f238a9f](https://github.com/instructure/instructure-ui/commit/f238a9fe6b89c5d49b71b3df7bfd22785b198ed9))
+
+### Features
+
+- **ui-buttons:** deprecate `string` value for BaseButton and CloseButton `tabIndex` ([b1ff461](https://github.com/instructure/instructure-ui/commit/b1ff4615e6f67e7e53a3dc497bcfabe81bc47667))
+- **ui-options:** add `description` and `descriptionRole` props to Options.Item ([a2cfa0c](https://github.com/instructure/instructure-ui/commit/a2cfa0cd8bf43d6072f1b352bbd6e43542081be8))
+- **ui-options:** add props to set the vALign of Options.Item before/after content ([be635ba](https://github.com/instructure/instructure-ui/commit/be635ba5c734c0a40f9778131b251f32decddb75))
+- **ui-overlays:** deprecate unused props: `applicationElement` of Overlay, `onDismiss` of Mask ([4c32099](https://github.com/instructure/instructure-ui/commit/4c3209999c7ae16939ea945b73d450312f228a5d))
+- **ui-text:** deprecate the `warning` color variant for Text ([8e021a5](https://github.com/instructure/instructure-ui/commit/8e021a5b3e516729ccff9817aa74274df2268906))
+
 # [8.14.0](https://github.com/instructure/instructure-ui/compare/v8.13.0...v8.14.0) (2021-12-16)
 
 ### Bug Fixes
