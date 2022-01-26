@@ -30,7 +30,7 @@ import {
   getInteraction,
   passthroughProps,
   callRenderProp,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 
 import { testable } from '@instructure/ui-testable'
@@ -61,7 +61,7 @@ category: components
 
 A component used to select a time value.
  **/
-@withSSR()
+@withDeterministicId()
 @testable()
 class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   static readonly componentId = 'TimeSelect'
@@ -86,8 +86,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   ref: Select | null = null
   private readonly _emptyOptionId = generateId(
     'Select-EmptyOption',
-    //@ts-expect-error props.instanceMapCounter
-    this.props.instanceMapCounter
+    this.props.instanceMapCounter!
   )
 
   constructor(props: TimeSelectProps) {
@@ -412,8 +411,11 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   renderOptions() {
-    const { filteredOptions, highlightedOptionId, selectedOptionId } =
-      this.state
+    const {
+      filteredOptions,
+      highlightedOptionId,
+      selectedOptionId
+    } = this.state
 
     if (filteredOptions.length < 1) {
       return this.renderEmptyOption()

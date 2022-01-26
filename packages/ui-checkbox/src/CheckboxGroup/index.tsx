@@ -30,7 +30,7 @@ import {
   safeCloneElement,
   pickProps,
   omitProps,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -43,8 +43,6 @@ import type {
   CheckboxChild
 } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 category: components
@@ -52,7 +50,7 @@ category: components
 @tsProps
 **/
 
-@withSSR()
+@withDeterministicId()
 @testable()
 class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
   static readonly componentId = 'CheckboxGroup'
@@ -76,11 +74,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
       }
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
-    this._messagesId = generateId(
-      'CheckboxGroup-messages',
-      props.instanceMapCounter
-    )
+    this._messagesId = props.deterministicId!
   }
   private readonly _messagesId: string
   ref: Element | null = null

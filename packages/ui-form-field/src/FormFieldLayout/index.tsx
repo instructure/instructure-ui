@@ -33,7 +33,7 @@ import {
   omitProps,
   pickProps,
   getElementType,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -46,15 +46,13 @@ import generateStyle from './styles'
 import { propTypes, allowedProps } from './props'
 import type { FormFieldLayoutProps } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 parent: FormField
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, null)
 class FormFieldLayout extends Component<FormFieldLayoutProps> {
   static readonly componentId = 'FormFieldLayout'
@@ -71,10 +69,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   constructor(props: FormFieldLayoutProps) {
     super(props)
 
-    this._messagesId =
-      props.messagesId ||
-      //@ts-expect-error props.instanceMapCounter
-      generateId('FormFieldLayout-messages', props.instanceMapCounter)
+    this._messagesId = props.messagesId || props.deterministicId!
 
     error(
       typeof props.width !== 'undefined' ||

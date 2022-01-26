@@ -31,7 +31,11 @@ import { FormField } from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, pickProps, withSSR } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  pickProps,
+  withDeterministicId
+} from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -39,15 +43,13 @@ import generateComponentTheme from './theme'
 import type { RangeInputProps, RangeInputState } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class RangeInput extends Component<RangeInputProps, RangeInputState> {
@@ -93,8 +95,7 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
       }
     }
 
-    //@ts-expect-error props.instanceMapCounter
-    this.defaultId = generateId('RangeInput', props.instanceMapCounter)
+    this.defaultId = props.deterministicId!
   }
 
   /* workaround for https://github.com/facebook/react/issues/554 */

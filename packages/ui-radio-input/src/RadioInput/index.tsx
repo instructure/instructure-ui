@@ -26,7 +26,7 @@
 import React, { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
-import { omitProps, withSSR } from '@instructure/ui-react-utils'
+import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -37,15 +37,13 @@ import generateComponentTheme from './theme'
 import type { RadioInputProps, RadioInputState } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class RadioInput extends Component<RadioInputProps, RadioInputState> {
@@ -77,8 +75,7 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
       }
     }
 
-    //@ts-expect-error props.instanceMapCounter
-    this._defaultId = generateId('RadioInput', props.instanceMapCounter)
+    this._defaultId = props.deterministicId!
   }
 
   componentDidMount() {

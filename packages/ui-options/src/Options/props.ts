@@ -33,6 +33,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type OptionsOwnProps = {
   /**
@@ -62,7 +63,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type OptionsProps = OptionsOwnProps &
   WithStyleProps<OptionsTheme, OptionsStyle> &
-  OtherHTMLAttributes<OptionsOwnProps>
+  OtherHTMLAttributes<OptionsOwnProps> & WithDeterministicIdProps
 
 type OptionsStyle = ComponentStyle<'options' | 'list' | 'label'>
 

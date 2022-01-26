@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { generateInstanceMapCounter } from './generateInstanceMapCounter'
-
-const SSRContext = React.createContext(generateInstanceMapCounter())
-
-export { SSRContext }
+import type { DeterministicIdProviderValue } from './DeterministicIdProvider'
+function generateInstanceMapCounter(): DeterministicIdProviderValue {
+  return new Map<string, number>()
+}
+export default generateInstanceMapCounter
+export { generateInstanceMapCounter }

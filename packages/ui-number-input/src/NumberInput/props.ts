@@ -37,6 +37,7 @@ import type {
 import type { InteractionType } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type NumberInputOwnProps = {
   /**
@@ -178,12 +179,13 @@ type NumberInputProps =
     FormFieldOwnProps,
     'label' | 'inline' | 'id' | 'elementRef'
   > &
-    NumberInputOwnProps &
-    WithStyleProps<NumberInputTheme, NumberInputStyle> &
-    OtherHTMLAttributes<
-      NumberInputOwnProps,
-      InputHTMLAttributes<NumberInputOwnProps>
-    >
+  NumberInputOwnProps &
+  WithStyleProps<NumberInputTheme, NumberInputStyle> &
+  OtherHTMLAttributes<
+    NumberInputOwnProps,
+    InputHTMLAttributes<NumberInputOwnProps>
+  >
+  & WithDeterministicIdProps
 
 type NumberInputStyle = ComponentStyle<
   | 'numberInput'

@@ -30,6 +30,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type InlineSVGOwnProps = {
   children?: React.ReactNode
@@ -47,17 +48,17 @@ type InlineSVGOwnProps = {
   height?: string | number
   inline?: boolean
   color?:
-    | 'inherit'
-    | 'primary'
-    | 'secondary'
-    | 'primary-inverse'
-    | 'secondary-inverse'
-    | 'success'
-    | 'error'
-    | 'alert'
-    | 'warning'
-    | 'brand'
-    | 'auto'
+  | 'inherit'
+  | 'primary'
+  | 'secondary'
+  | 'primary-inverse'
+  | 'secondary-inverse'
+  | 'success'
+  | 'error'
+  | 'alert'
+  | 'warning'
+  | 'brand'
+  | 'auto'
   /**
    * provides a reference to the underlying html root element
    */
@@ -70,7 +71,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type InlineSVGProps = InlineSVGOwnProps &
   WithStyleProps<InlineSVGTheme, InlineSVGStyle> &
-  OtherHTMLAttributes<InlineSVGOwnProps, SVGAttributes<InlineSVGOwnProps>>
+  OtherHTMLAttributes<InlineSVGOwnProps, SVGAttributes<InlineSVGOwnProps>> & WithDeterministicIdProps
 
 type InlineSVGStyle = ComponentStyle<'inlineSVG'>
 

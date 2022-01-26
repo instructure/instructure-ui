@@ -21,34 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { generateInstanceMapCounter } from './generateInstanceMapCounter'
-import { SSRContext } from './SSRContext'
-type SSRContextProviderValue = Map<string, number>
-type SSRContextProviderProps = React.PropsWithChildren<{
-  instanceMapCounter: SSRContextProviderValue
-}>
 
-const defaultContextValue = generateInstanceMapCounter()
-
-/**
- * ---
- * category: components/utilities
- * ---
- * This is utility component for wrapping components with `SSRContext.Provider`
- * See detailed documentation about how to use it: [InstUISettingsProvider](https://instructure.design/#InstUISettingsProvider)
- */
-
-const SSRContextProvider = ({
-  children,
-  instanceMapCounter = defaultContextValue
-}: SSRContextProviderProps) => {
-  return (
-    <SSRContext.Provider value={instanceMapCounter}>
-      {children}
-    </SSRContext.Provider>
-  )
-}
-export { SSRContextProvider }
-
-export type { SSRContextProviderValue }
+export { generateInstanceMapCounter } from './generateInstanceMapCounter'
+export { DeterministicIdContextProvider, } from './DeterministicIdProvider'
+export { DeterministicIdContext } from './DeterministicIdContext'
+export { withDeterministicId } from './withDeterministicId'
+export type { DeterministicIdProviderValue } from './DeterministicIdProvider'
+export type { WithDeterministicIdProps } from './withDeterministicId'

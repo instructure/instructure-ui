@@ -29,7 +29,7 @@ import {
   callRenderProp,
   getInteraction,
   passthroughProps,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
@@ -54,7 +54,7 @@ tags: form, field
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class TextInput extends Component<TextInputProps, TextInputState> {
@@ -78,12 +78,10 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   constructor(props: TextInputProps) {
     super(props)
     this.state = { hasFocus: false }
-    //@ts-expect-error props.instanceMapCounter
-    this._defaultId = generateId('TextInput', props.instanceMapCounter)
+    this._defaultId = generateId('TextInput', props.instanceMapCounter!)
     this._messagesId = generateId(
       'TextInput-messages',
-      //@ts-expect-error props.instanceMapCounter
-      props.instanceMapCounter
+      props.instanceMapCounter!
     )
   }
 

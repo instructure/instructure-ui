@@ -33,6 +33,7 @@ import {
 
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { PropValidators } from '@instructure/shared-types'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 import { Checkbox } from '../Checkbox'
 import type { CheckboxProps } from '../Checkbox/props'
@@ -57,7 +58,7 @@ type PropKeys = keyof CheckboxGroupOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type CheckboxGroupProps = CheckboxGroupOwnProps
+type CheckboxGroupProps = CheckboxGroupOwnProps & WithDeterministicIdProps
 
 const propTypes: PropValidators<PropKeys> = {
   name: PropTypes.string.isRequired,

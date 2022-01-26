@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import { Component } from 'react'
 
-import { omitProps, withSSR } from '@instructure/ui-react-utils'
+import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -44,7 +44,7 @@ category: components/utilities
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class InlineSVG extends Component<InlineSVGProps> {
@@ -82,13 +82,8 @@ class InlineSVG extends Component<InlineSVGProps> {
   constructor(props: InlineSVGProps) {
     super(props)
 
-    this.titleId = generateId(
-      'InlineSVG-title',
-      //@ts-expect-error props.instanceMapCounter
-      props.instanceMapCounter
-    )
-    //@ts-expect-error props.instanceMapCounter
-    this.descId = generateId('InlineSVG-desc', props.instanceMapCounter)
+    this.titleId = generateId('InlineSVG-title', props.instanceMapCounter!)
+    this.descId = generateId('InlineSVG-desc', props.instanceMapCounter!)
   }
 
   componentDidMount() {
@@ -198,8 +193,7 @@ class InlineSVG extends Component<InlineSVGProps> {
 function parseAttributes(src: InlineSVGProps['src']) {
   const attributes: Record<string, string> = {}
   const SVGAttributesRegExp = /<svg\s+([^>]*)\s*>/
-  const namesAndValuesRegExp =
-    /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
+  const namesAndValuesRegExp = /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
 
   if (typeof src === 'string') {
     const attributesMatches = SVGAttributesRegExp.exec(src)

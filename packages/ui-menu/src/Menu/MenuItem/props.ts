@@ -34,6 +34,7 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type OnMenuItemSelect = (
   e: React.MouseEvent,
@@ -83,7 +84,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MenuItemProps = MenuItemOwnProps &
   WithStyleProps<MenuItemTheme, MenuItemStyle> &
-  OtherHTMLAttributes<MenuItemOwnProps>
+  OtherHTMLAttributes<MenuItemOwnProps> & WithDeterministicIdProps
 
 type MenuItemStyle = ComponentStyle<'menuItem' | 'icon' | 'label'>
 

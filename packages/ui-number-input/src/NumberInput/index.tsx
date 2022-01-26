@@ -37,7 +37,7 @@ import {
   pickProps,
   callRenderProp,
   getInteraction,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -52,8 +52,6 @@ import type {
   NumberInputStyleProps
 } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 category: components
@@ -61,7 +59,7 @@ id: NumberInput
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class NumberInput extends Component<NumberInputProps, NumberInputState> {
@@ -96,8 +94,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       return this.props.id
     }
     if (!this._id) {
-      //@ts-expect-error props.instanceMapCounter
-      this._id = generateId('NumberInput', this.props.instanceMapCounter)
+      this._id = this.props.deterministicId!
     }
     return this._id
   }

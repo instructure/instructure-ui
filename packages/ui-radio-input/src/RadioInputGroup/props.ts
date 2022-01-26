@@ -33,6 +33,7 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type RadioInputGroupOwnProps = {
   name: string
@@ -86,7 +87,7 @@ type PropKeys = keyof RadioInputGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RadioInputGroupProps = RadioInputGroupOwnProps &
-  OtherHTMLAttributes<RadioInputGroupOwnProps>
+  OtherHTMLAttributes<RadioInputGroupOwnProps> & WithDeterministicIdProps
 
 type RadioInputGroupState = {
   value?: string | number

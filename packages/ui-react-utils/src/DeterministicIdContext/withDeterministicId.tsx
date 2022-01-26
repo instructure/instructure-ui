@@ -21,50 +21,73 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { ComponentClass, forwardRef, useContext } from 'react'
+import React, {
+  forwardRef,
+  PropsWithoutRef,
+  RefAttributes,
+  useContext
+} from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
-import { SSRContext } from './SSRContext'
+import { DeterministicIdContext } from './DeterministicIdContext'
 import { decorator } from '@instructure/ui-decorator'
+import { generateId } from '@instructure/ui-utils'
 
+import type { DeterministicIdProviderValue } from './DeterministicIdProvider'
+import type { InstUIComponent } from '@instructure/shared-types'
+
+type WithDeterministicIdProps = {
+  instanceMapCounter?: DeterministicIdProviderValue
+  deterministicId?: string
+}
 /**
- * This decorator is used to enable the decorated class to use the `SSRContext` which is needed
+ * This decorator is used to enable the decorated class to use the `DeterministicIdContext` which is needed
  * for deterministic id generation.
  *
  * The context is there for the users to pass an `instanceMapCounter` Map which is then used
  * in the child components to deterministically create ids for them based on the `instanceMapCounter`.
  * Read more about it here: [SSR guide](https://instructure.design/#server-side-rendering)
  */
-const withSSR = decorator((ComposedComponent: ComponentClass) => {
-  const WithSSR = forwardRef((props: any, ref: React.ForwardedRef<any>) => {
-    const instanceMapCounter = useContext(SSRContext)
+const withDeterministicId = decorator((ComposedComponent) => {
+  type Props = PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
+  const WithDeterministicId = forwardRef(
+    (props: Props, ref: React.ForwardedRef<any>) => {
+      const instanceMapCounter = useContext(DeterministicIdContext)
+      const deterministicId = generateId(
+        (ComposedComponent as InstUIComponent).componentId,
+        instanceMapCounter
+      )
 
-    return (
-      <ComposedComponent
-        ref={ref}
-        instanceMapCounter={instanceMapCounter}
-        {...props}
-      />
-    )
-  })
+      return (
+        <ComposedComponent
+          ref={ref}
+          instanceMapCounter={instanceMapCounter}
+          deterministicId={deterministicId}
+          {...props}
+        />
+      )
+    }
+  )
 
-  hoistNonReactStatics(WithSSR, ComposedComponent)
+  hoistNonReactStatics(WithDeterministicId, ComposedComponent)
 
   // we have to pass these on, because sometimes users
   // access propTypes of the component in other components
   // eslint-disable-next-line react/forbid-foreign-prop-types
-  WithSSR.propTypes = ComposedComponent.propTypes
-  WithSSR.defaultProps = ComposedComponent.defaultProps
+  WithDeterministicId.propTypes = ComposedComponent.propTypes
+  WithDeterministicId.defaultProps = ComposedComponent.defaultProps
 
   // These static fields exist on InstUI components
   //@ts-expect-error fix this
-  WithSSR.allowedProps = ComposedComponent.allowedProps
+  WithDeterministicId.allowedProps = ComposedComponent.allowedProps
 
   if (process.env.NODE_ENV !== 'production') {
-    WithSSR.displayName = `WithSSR(${ComposedComponent.displayName})`
+    WithDeterministicId.displayName = `WithDeterministicId(${ComposedComponent.displayName})`
   }
 
-  return WithSSR
+  return WithDeterministicId
 })
 
-export { withSSR }
+export default withDeterministicId
+export { withDeterministicId }
+export type { WithDeterministicIdProps }

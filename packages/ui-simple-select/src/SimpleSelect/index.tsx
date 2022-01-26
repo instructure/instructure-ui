@@ -30,7 +30,7 @@ import {
   passthroughProps,
   callRenderProp,
   getInteraction,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 
 import { Select } from '@instructure/ui-select'
@@ -65,7 +65,7 @@ tags: form, field, dropdown
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @testable()
 class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
   static readonly componentId = 'SimpleSelect'
@@ -104,8 +104,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
 
     this._emptyOptionId = generateId(
       'Select-EmptyOption',
-      //@ts-expect-error props.instanceMapCounter
-      props.instanceMapCounter
+      props.instanceMapCounter!
     )
   }
 

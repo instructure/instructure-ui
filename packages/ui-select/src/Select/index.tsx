@@ -25,13 +25,13 @@
 /** @jsx jsx */
 import React, { Children, Component } from 'react'
 
-import { createChainedFunction, generateId } from '@instructure/ui-utils'
+import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import {
   matchComponentTypes,
   omitProps,
   getInteraction,
-  withSSR
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import {
   getBoundingClientRect,
@@ -85,7 +85,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Select extends Component<SelectProps> {
@@ -126,8 +126,7 @@ class Select extends Component<SelectProps> {
     hasInputRef: false
   }
   ref: HTMLInputElement | null = null
-  //@ts-expect-error props.instanceMapCounter
-  private _defaultId = generateId('Select', this.props.instanceMapCounter)
+  private _defaultId = this.props.deterministicId!
   private _inputContainer: HTMLSpanElement | null = null
   private _listView: Element | null = null
   // temporarily stores actionable options
@@ -238,9 +237,9 @@ class Select extends Component<SelectProps> {
 
     // store option height to calculate list maxHeight
     if (node && node.querySelector('[role="option"]')) {
-      this._optionHeight = (
-        node.querySelector('[role="option"]') as HTMLElement
-      ).offsetHeight
+      this._optionHeight = (node.querySelector(
+        '[role="option"]'
+      ) as HTMLElement).offsetHeight
     }
   }
 

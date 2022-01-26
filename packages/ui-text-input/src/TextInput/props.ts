@@ -36,6 +36,7 @@ import type {
   TextInputTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type TextInputOwnProps = {
   /**
@@ -182,7 +183,7 @@ type TextInputProps = TextInputOwnProps &
   > &
   // The component will handle pass this prop to FormField, but it shouldn't be
   // listed as a prop
-  Pick<FormFieldProps, 'layout'>
+  Pick<FormFieldProps, 'layout'> & WithDeterministicIdProps
 
 type TextInputStyle = ComponentStyle<
   | 'textInput'

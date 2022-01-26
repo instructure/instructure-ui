@@ -34,6 +34,7 @@ import { DrawerTray } from './DrawerTray'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type DrawerLayoutOwnProps = {
   /**
@@ -59,7 +60,7 @@ type PropKeys = keyof DrawerLayoutOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrawerLayoutProps = DrawerLayoutOwnProps &
-  WithStyleProps<null, DrawerLayoutStyle>
+  WithStyleProps<null, DrawerLayoutStyle> & WithDeterministicIdProps
 
 type DrawerLayoutStyle = ComponentStyle<'drawerLayout'>
 

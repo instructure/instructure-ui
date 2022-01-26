@@ -27,7 +27,10 @@ import { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { passthroughProps, withSSR } from '@instructure/ui-react-utils'
+import {
+  passthroughProps,
+  withDeterministicId
+} from '@instructure/ui-react-utils'
 
 import { withStyle, jsx, Global } from '@instructure/emotion'
 
@@ -40,15 +43,13 @@ import { propTypes, allowedProps } from './props'
 import type { CodeEditorProps } from './props'
 import type { EditorConfiguration } from 'codemirror'
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class CodeEditor extends Component<CodeEditorProps> {
@@ -68,8 +69,7 @@ class CodeEditor extends Component<CodeEditorProps> {
 
   constructor(props: CodeEditorProps) {
     super(props)
-    //@ts-expect-error props.instanceMapCounter
-    this._id = generateId('CodeEditor', props.instanceMapCounter)
+    this._id = props.deterministicId!
   }
 
   handleRef = (el: Element | null) => {
@@ -86,7 +86,7 @@ class CodeEditor extends Component<CodeEditorProps> {
 
   focus() {
     if (this.codeMirror) {
-      ;(this.codeMirror as unknown as HTMLElement).focus()
+      ;((this.codeMirror as unknown) as HTMLElement).focus()
     }
   }
 
@@ -115,8 +115,15 @@ class CodeEditor extends Component<CodeEditorProps> {
   }
 
   render() {
-    const { value, label, attachment, readOnly, onChange, styles, ...rest } =
-      this.props
+    const {
+      value,
+      label,
+      attachment,
+      readOnly,
+      onChange,
+      styles,
+      ...rest
+    } = this.props
     return (
       <div css={styles?.codeEditor} ref={this.handleRef}>
         <Global styles={styles?.globalStyles} />

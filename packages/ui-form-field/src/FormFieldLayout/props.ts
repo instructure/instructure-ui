@@ -33,6 +33,7 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormMessage } from '../FormPropTypes'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type FormFieldLayoutOwnProps = {
   label: React.ReactNode
@@ -74,7 +75,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FormFieldLayoutProps = FormFieldLayoutOwnProps &
   WithStyleProps<null, FormFieldLayoutStyle> &
-  OtherHTMLAttributes<FormFieldLayoutOwnProps>
+  OtherHTMLAttributes<FormFieldLayoutOwnProps> & WithDeterministicIdProps
 
 type FormFieldLayoutStyle = ComponentStyle<'formFieldLayout'>
 

@@ -27,12 +27,12 @@ import React, { Component, SyntheticEvent } from 'react'
 import keycode from 'keycode'
 
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { createChainedFunction, generateId } from '@instructure/ui-utils'
+import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import type { SelectableProps } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { withSSR } from '@instructure/ui-react-utils'
+import { withDeterministicId } from '@instructure/ui-react-utils'
 
 /**
 ---
@@ -41,7 +41,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 class Selectable extends Component<SelectableProps> {
   static allowedProps = allowedProps
   static propTypes = propTypes
@@ -50,9 +50,7 @@ class Selectable extends Component<SelectableProps> {
     isShowingOptions: false
   }
 
-  _id =
-    //@ts-expect-error props.instanceMapCounter
-    this.props.id || generateId('Selectable', this.props.instanceMapCounter)
+  _id = this.props.id || this.props.deterministicId!
   _listId = `${this._id}-list`
   _descriptionId = `${this._id}-description`
   private _trigger: Element | null = null
@@ -67,8 +65,11 @@ class Selectable extends Component<SelectableProps> {
   }
 
   handleOpenClose = (event: React.KeyboardEvent | React.MouseEvent) => {
-    const { isShowingOptions, onRequestShowOptions, onRequestHideOptions } =
-      this.props
+    const {
+      isShowingOptions,
+      onRequestShowOptions,
+      onRequestHideOptions
+    } = this.props
 
     event.preventDefault()
 

@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, withSSR } from '@instructure/ui-react-utils'
+import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -42,8 +42,6 @@ import type { PaginationArrowDirections } from './PaginationArrowButton/props'
 
 import { propTypes, allowedProps } from './props'
 import type { PaginationProps, PaginationSnapshot, ChildPage } from './props'
-
-import { generateId } from '@instructure/ui-utils'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
 const fastFindIndex = (
@@ -80,7 +78,7 @@ category: components
 ---
 @tsProps
 **/
-@withSSR()
+@withDeterministicId()
 @withStyle(generateStyle, null)
 @testable()
 class Pagination extends Component<PaginationProps> {
@@ -117,8 +115,7 @@ class Pagination extends Component<PaginationProps> {
   constructor(props: PaginationProps) {
     super(props)
 
-    //@ts-expect-error props.instanceMapCounter
-    this._labelId = generateId('Pagination', this.props.instanceMapCounter)
+    this._labelId = props.deterministicId!
   }
 
   get _root() {
@@ -376,8 +373,12 @@ class Pagination extends Component<PaginationProps> {
       return null
     }
 
-    const { pageIndex, label, shouldEnableIcon, handleButtonRef } =
-      this.getArrowVariant(direction, currentPageIndex, childPages.length)
+    const {
+      pageIndex,
+      label,
+      shouldEnableIcon,
+      handleButtonRef
+    } = this.getArrowVariant(direction, currentPageIndex, childPages.length)
 
     const page = childPages[pageIndex]
 
