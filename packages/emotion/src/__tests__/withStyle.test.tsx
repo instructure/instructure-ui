@@ -161,21 +161,40 @@ describe('@withStyle', async () => {
       expect(computedStyle.backgroundColor).to.equal(backgroundLight)
     })
 
-    it('should allow configuration through props', async () => {
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemeableComponent
-            themeOverride={{
-              textColor: 'rgb(128, 0, 128)'
-            }}
-          />
-        </InstUISettingsProvider>
-      )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+    describe('should allow configuration through the themeOverride prop', async () => {
+      it('when it is an object', async () => {
+        const subject = await mount(
+          <InstUISettingsProvider theme={exampleTheme}>
+            <ThemeableComponent
+              themeOverride={{
+                textColor: 'rgb(128, 0, 128)'
+              }}
+            />
+          </InstUISettingsProvider>
+        )
+        const component = subject.getDOMNode()
+        const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal('rgb(128, 0, 128)')
-      expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+        expect(computedStyle.color).to.equal('rgb(128, 0, 128)')
+        expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+      })
+
+      it('when it is a function', async () => {
+        const subject = await mount(
+          <InstUISettingsProvider theme={exampleTheme}>
+            <ThemeableComponent
+              themeOverride={(componentTheme) => ({
+                textColor: componentTheme.backgroundColor
+              })}
+            />
+          </InstUISettingsProvider>
+        )
+        const component = subject.getDOMNode()
+        const computedStyle = getComputedStyle(component)
+
+        expect(computedStyle.color).to.equal(backgroundLight)
+        expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+      })
     })
 
     it('should ignore empty themeOverride props', async () => {
