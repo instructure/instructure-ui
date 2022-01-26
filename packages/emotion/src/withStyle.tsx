@@ -68,7 +68,9 @@ type WithStylePrivateProps<
     }
 
 type ThemeOverrideProp<Theme extends ComponentTheme | null = ComponentTheme> = {
-  themeOverride?: Partial<Theme>
+  themeOverride?:
+    | Partial<Theme>
+    | ((componentTheme: Theme, currentTheme: BaseTheme) => Partial<Theme>)
 }
 
 type WithStyleProps<
@@ -115,7 +117,7 @@ const defaultValues = {
  * InstUISettingsProvider provides a theme object with [global theme variables](#canvas).
  * These variables are mapped to the component's own variables in `theme.js` (see [@instructure/emotion](#emotion) package documentation for more info).
  *
- * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js.
+ * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js. It accepts an object or a function. The function has the component's theme and the currently active main theme as its parameter.
  *
  * ```js
  * // ExampleComponent/theme.js
@@ -142,6 +144,12 @@ const defaultValues = {
  * }}>
  *  {// component theme override}
  *   <ExampleComponent themeOverride={{ hoverColor: '#eee' }} />
+ *
+ *  {// component theme override with function}
+ *   <ExampleComponent themeOverride={(componentTheme, currentTheme) => ({
+ *     hoverBackground: componentTheme.background,
+ *     activeBackground: currentTheme.colors.backgroundBrand
+ *   })} />
  * </InstUISettingsProvider>
  * ```
  *
@@ -181,26 +189,27 @@ const withStyle = decorator(
           `Manually passing the "makeStyles" property is not allowed on the ${displayName} component. Styles are calculated by the @withStyle decorator.`
         )
       }
+
       const componentProps: Props = {
         ...ComposedComponent.defaultProps,
         ...props,
         ...defaultValues
       }
 
+      let componentTheme: ComponentTheme =
+        typeof generateComponentTheme === 'function'
+          ? generateComponentTheme(theme as BaseTheme)
+          : {}
+
       const themeOverride = getComponentThemeOverride(
         theme,
         displayName,
         ComposedComponent.componentId,
-        componentProps
+        componentProps,
+        componentTheme
       )
 
-      const componentTheme: ComponentTheme =
-        typeof generateComponentTheme === 'function'
-          ? {
-              ...generateComponentTheme(theme as BaseTheme),
-              ...themeOverride
-            }
-          : {}
+      componentTheme = { ...componentTheme, ...themeOverride }
 
       const [styles, setStyles] = useState(
         generateStyle ? generateStyle(componentTheme, componentProps, {}) : {}

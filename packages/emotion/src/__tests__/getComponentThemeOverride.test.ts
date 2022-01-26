@@ -72,6 +72,32 @@ describe('@getComponentThemeOverride', async () => {
       expect(override).to.deep.equal(componentOverride)
     })
 
+    it('if the `themeOverride` prop is a function', async () => {
+      const theme = {
+        backgroundGreen: 'rgb(0, 150, 0)',
+        backgroundBlue: 'rgb(0, 0, 150)',
+        backgroundDark: 'rgb(0, 0, 0)'
+      }
+
+      const override = getComponentThemeOverride(
+        canvas,
+        componentName,
+        componentId,
+        {
+          themeOverride: (componentTheme, currentTheme) => ({
+            backgroundBlue: componentTheme.backgroundGreen,
+            backgroundDark: currentTheme.colors.backgroundDark
+          })
+        },
+        theme
+      )
+
+      expect(override).to.deep.equal({
+        backgroundBlue: 'rgb(0, 150, 0)',
+        backgroundDark: '#6B7780'
+      })
+    })
+
     it('if `themeOverride` and `componentOverrides` are both set', async () => {
       const override = getComponentThemeOverride(
         {

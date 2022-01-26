@@ -83,7 +83,46 @@ export default Button
 
 Themeable components inject their themed styles into the document when they are mounted.
 
-A themeable component’s theme can be configured by wrapping it in an [InstUISettingsProvider](#InstUISettingsProvider) component, and/or set explicitly via its `themeOverride` prop (see [withStyle](#withStyle/#applying-themes) documentation).
+A themeable component’s theme can be configured by wrapping it in an [InstUISettingsProvider](#InstUISettingsProvider) component, and/or set explicitly via its `themeOverride` prop.
+
+#### themeOverride prop
+
+The themeable components accept a `themeOverride` prop which let's you override it's component theme object. It accepts an override object or a function, which has the current `componentTheme` as its parameter.
+
+(See [withStyle](#withStyle/#applying-themes) documentation for more info.)
+
+```js
+---
+example: true
+---
+<div>
+  <Button color='primary' themeOverride={{ primaryBackground: "purple" }}>
+    Button
+  </Button>
+  <Button
+    color='primary'
+    margin="0 0 0 small"
+    themeOverride={(componentTheme) => ({
+      primaryBackground: componentTheme.successBackground,
+      primaryBorderColor: componentTheme.successBorderColor
+    })}
+  >
+    Button
+  </Button>
+  <Button
+    color='primary'
+    margin="0 0 0 small"
+    themeOverride={(_componentTheme, currentTheme) => ({
+      primaryBackground: currentTheme.colors.backgroundWarning,
+      primaryBorderColor: currentTheme.colors.backgroundLightest,
+      borderWidth: currentTheme.borders.widthLarge,
+      borderStyle: 'dashed'
+    })}
+  >
+    Button
+  </Button>
+</div>
+```
 
 #### InstUISettingsProvider
 

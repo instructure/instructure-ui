@@ -27,7 +27,7 @@ import type {
   Overrides,
   ComponentOverride
 } from './EmotionTypes'
-import type { ComponentTheme } from '@instructure/shared-types'
+import type { BaseTheme, ComponentTheme } from '@instructure/shared-types'
 import type { WithStyleProps } from './withStyle'
 
 type ComponentName = keyof ComponentOverride | undefined
@@ -43,26 +43,46 @@ type ComponentName = keyof ComponentOverride | undefined
  * @param {*} displayName - Name of the component
  * @param {*} componentId - componentId of the component
  * @param {*} props - The component's props object
+ * @param {*} componentTheme - The component's default theme
  * @returns {object} The calculated theme override object
  */
 const getComponentThemeOverride = (
   theme: ThemeOrOverride,
   displayName: string,
   componentId?: string,
-  props?: { [k: string]: unknown } & WithStyleProps
-): ComponentTheme => {
-  let componentOverride: ComponentTheme = {}
-  const overrides = (theme as Overrides).componentOverrides
+  props?: { [k: string]: unknown } & WithStyleProps,
+  componentTheme?: ComponentTheme
+): Partial<ComponentTheme> => {
   const name = displayName as ComponentName
   const id = componentId as ComponentName
 
-  if (overrides) {
-    componentOverride = (name && overrides[name]) || (id && overrides[id]) || {}
+  const { themeOverride } = props as WithStyleProps
+  const { componentOverrides } = theme as Overrides
+
+  let overridesFromTheme: Partial<ComponentTheme> = {}
+  let overrideFromComponent: Partial<ComponentTheme> = {}
+
+  if (componentOverrides) {
+    overridesFromTheme =
+      (name && componentOverrides[name]) || (id && componentOverrides[id]) || {}
+  }
+
+  if (themeOverride) {
+    if (typeof themeOverride === 'function') {
+      overrideFromComponent = themeOverride(
+        componentTheme || {},
+        // the `theme` technically could be a partial theme / override object too,
+        // but we want to display all possible options
+        theme as BaseTheme
+      )
+    } else {
+      overrideFromComponent = themeOverride
+    }
   }
 
   return {
-    ...componentOverride,
-    ...(props?.themeOverride ?? {})
+    ...overridesFromTheme,
+    ...overrideFromComponent
   }
 }
 

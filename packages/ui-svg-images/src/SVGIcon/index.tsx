@@ -35,6 +35,7 @@ import generateComponentTheme from './theme'
 
 import { allowedProps, propTypes } from './props'
 import type { SVGIconProps } from './props'
+import { SVGIconTheme } from '@instructure/shared-types'
 
 /**
 ---
@@ -91,10 +92,19 @@ class SVGIcon extends Component<SVGIconProps> {
       ...props
     } = this.props
 
+    const {
+      sizeXSmall,
+      sizeSmall,
+      sizeMedium,
+      sizeLarge,
+      sizeXLarge,
+      ...inlineSVGThemeOverrides
+    } = themeOverride as Partial<SVGIconTheme>
+
     return (
       <InlineSVG
         {...props}
-        themeOverride={themeOverride}
+        themeOverride={inlineSVGThemeOverrides}
         rotate={rotate}
         css={styles?.svgIcon}
         className={className}
