@@ -63,11 +63,11 @@ type OptionsItemOwnProps = ItemProps & {
   /**
    * Sets the vAlign of renderBeforeLabel content
    */
-  beforeLabelContentVAlign: 'start' | 'center' | 'end'
+  beforeLabelContentVAlign?: 'start' | 'center' | 'end'
   /**
    * Sets the vAlign of renderAfterLabel content
    */
-  afterLabelContentVAlign: 'start' | 'center' | 'end'
+  afterLabelContentVAlign?: 'start' | 'center' | 'end'
   /**
    * Additional "secondary" description text
    */

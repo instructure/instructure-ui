@@ -89,7 +89,7 @@ const generateStyle = (
         alignItems: 'flex-end',
         paddingBlockEnd: vOffset
       }
-    }[vAlign]
+    }[vAlign!]
   }
 
   const transition = 'background 200ms'
