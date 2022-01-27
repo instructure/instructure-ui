@@ -169,7 +169,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
       list = (this.props as any).shouldAllowMultiple ? list : [list[0]]
     }
     if (shouldEnablePreview) {
-      return list.map((file) =>
+      return list.map((file: any) =>
         Object.assign(file, { preview: window.URL.createObjectURL(file) })
       )
     }
@@ -234,12 +234,8 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   }
 
   handleChange = (e: any) => {
-    const {
-      onDrop,
-      onDropAccepted,
-      onDropRejected,
-      shouldEnablePreview
-    } = this.props
+    const { onDrop, onDropAccepted, onDropRejected, shouldEnablePreview } =
+      this.props
     const fileList = this.getDataTransferItems(e, shouldEnablePreview)
     const [accepted, rejected] = this.parseFiles(fileList)
     e.preventDefault()
