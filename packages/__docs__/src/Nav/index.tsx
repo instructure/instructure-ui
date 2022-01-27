@@ -23,7 +23,6 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { IconSearchLine } from '@instructure/ui-icons'
 import { Link } from '@instructure/ui-link'
@@ -34,9 +33,11 @@ import { View } from '@instructure/ui-view'
 import { capitalizeFirstLetter } from '@instructure/ui-utils'
 
 import { NavToggle } from '../NavToggle'
-
-class Nav extends Component {
-  constructor(props) {
+import type { NavProps, NavState } from './props'
+class Nav extends Component<NavProps, NavState> {
+  _themeId: string
+  searchTimeout: ReturnType<typeof setTimeout> | null
+  constructor(props: NavProps) {
     super(props)
 
     this.state = {
@@ -50,14 +51,6 @@ class Nav extends Component {
     this.searchTimeout = null
   }
 
-  static propTypes = {
-    docs: PropTypes.object.isRequired,
-    sections: PropTypes.object.isRequired,
-    themes: PropTypes.object,
-    icons: PropTypes.object,
-    selected: PropTypes.string
-  }
-
   static defaultProps = {
     docs: [],
     themes: [],
@@ -65,8 +58,11 @@ class Nav extends Component {
     selected: undefined
   }
 
-  setExpandedSections = (expanded, sections) => {
-    const expandedSections = {}
+  setExpandedSections = (
+    expanded: boolean,
+    sections: NavProps['sections']
+  ): NavProps['sections'] => {
+    const expandedSections: NavProps['sections'] = {}
     Object.keys(sections).forEach((sectionId) => {
       expandedSections[sectionId] = expanded
     })
@@ -74,7 +70,7 @@ class Nav extends Component {
     return expandedSections
   }
 
-  handleSearchChange = (e) => {
+  handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
 
     const expandedSections = this.setExpandedSections(
@@ -82,7 +78,7 @@ class Nav extends Component {
       this.state.expandedSections
     )
 
-    clearTimeout(this.searchTimeout)
+    clearTimeout(this.searchTimeout!)
     this.searchTimeout = setTimeout(() => {
       this.setState({
         query: value ? new RegExp(value, 'i') : null,
@@ -93,8 +89,8 @@ class Nav extends Component {
     }, 500)
   }
 
-  handleToggleSection = (sectionId, expanded) => {
-    this.setState(({ expandedSections }) => {
+  handleToggleSection = (sectionId: string, expanded: boolean) => {
+    this.setState(() => {
       const newExpandedSections = { ...this.state.expandedSections }
       newExpandedSections[sectionId] = expanded
       return {
@@ -104,21 +100,22 @@ class Nav extends Component {
     })
   }
 
-  matchQuery(str) {
+  matchQuery(str: string) {
     const { query } = this.state
     return query && typeof query.test === 'function' ? query.test(str) : true
   }
 
-  buttonTheme(isSelected) {
-    return {
-      linkColor: isSelected
-        ? this.theme.linkColor
-        : this.theme.linkColorSelected,
-      fontWeight: isSelected ? 'bold' : null
-    }
-  }
-
-  createNavToggle({ id, title, children, variant }) {
+  createNavToggle({
+    id,
+    title,
+    children,
+    variant
+  }: {
+    id: string
+    title: string
+    children: React.ReactNode[]
+    variant?: 'section' | 'category'
+  }): React.ReactNode {
     if (children.length === 0) {
       return
     }
@@ -129,7 +126,7 @@ class Nav extends Component {
         <NavToggle
           variant={variant}
           summary={title}
-          onToggle={(e, toggleExpanded) => {
+          onToggle={(_e, toggleExpanded) => {
             this.handleToggleSection(id, toggleExpanded)
           }}
           expanded={expandedSections[id]}
@@ -141,7 +138,7 @@ class Nav extends Component {
     )
   }
 
-  markExpanded = (sectionId) => {
+  markExpanded = (sectionId: string) => {
     const { expandedSections, userToggling } = this.state
     // If we set expanded to true for a section that contains a
     // selected doc on every render, the user cannot collapse a section
@@ -156,11 +153,14 @@ class Nav extends Component {
     expandedSections[sectionId] = true
   }
 
-  matchingDocsInSection(sectionId, markExpanded) {
+  matchingDocsInSection(
+    sectionId: string,
+    markExpanded?: (sectionId: string) => void
+  ) {
     const { sections, selected, docs } = this.props
 
     return sections[sectionId].docs
-      .filter((docId) => {
+      .filter((docId: string) => {
         // WIP packages shouldn't be listed
         if (docs[docId]?.isWIP) {
           return false
@@ -174,7 +174,7 @@ class Nav extends Component {
           // TODO: check children for matches too
         )
       })
-      .map((docId) => {
+      .map((docId: string) => {
         if (typeof markExpanded === 'function' && docId === selected) {
           markExpanded(sectionId)
         }
@@ -182,9 +182,12 @@ class Nav extends Component {
       })
   }
 
-  matchingSectionsInSection(sectionId, markExpanded) {
+  matchingSectionsInSection(
+    sectionId: string,
+    markExpanded?: (sectionId: string) => void
+  ) {
     const { sections, selected } = this.props
-    return sections[sectionId].sections.map((sectionId) => {
+    return sections[sectionId].sections.map((sectionId: string) => {
       if (typeof markExpanded === 'function' && sectionId === selected) {
         markExpanded(sectionId)
       }
@@ -192,7 +195,7 @@ class Nav extends Component {
     })
   }
 
-  renderDocLink(docId, level = 0) {
+  renderDocLink(docId: string) {
     const { docs, selected } = this.props
     const docSelected = docId === selected
 
@@ -223,20 +226,28 @@ class Nav extends Component {
     )
   }
 
-  renderSectionChildren(sectionId, markExpanded) {
-    const children = {}
+  renderSectionChildren(
+    sectionId: string,
+    markExpanded: (sectionId: string) => void
+  ): React.ReactNode[] {
+    const children: Record<
+      string,
+      { id: string; section?: boolean; order: string }
+    > = {}
     const { docs, sections } = this.props
 
     this.matchingSectionsInSection(sectionId, markExpanded).forEach(
-      (sectionId) => {
+      (sectionId: string) => {
         const title = capitalizeFirstLetter(sections[sectionId].title)
-        children[title] = { section: true, id: sectionId, order: '__' }
+        children[title!] = { section: true, id: sectionId, order: '__' }
       }
     )
 
-    this.matchingDocsInSection(sectionId, markExpanded).forEach((docId) => {
-      children[docId] = { id: docId, order: docs[docId].order }
-    })
+    this.matchingDocsInSection(sectionId, markExpanded).forEach(
+      (docId: string) => {
+        children[docId] = { id: docId, order: docs[docId].order }
+      }
+    )
 
     return Object.keys(children)
       .sort((a, b) => {
@@ -260,15 +271,19 @@ class Nav extends Component {
             'category'
           )
         } else {
-          return this.renderDocLink(id, sections[sectionId].level)
+          return this.renderDocLink(id)
         }
       })
   }
 
-  renderSectionLink(sectionId, markParentExpanded, variant) {
+  renderSectionLink(
+    sectionId: string,
+    markParentExpanded?: () => void,
+    variant?: 'category' | 'section'
+  ): React.ReactNode {
     const { selected } = this.props
 
-    const markExpanded = (sectionId) => {
+    const markExpanded = (sectionId: string) => {
       this.markExpanded(sectionId)
       if (typeof markParentExpanded === 'function') {
         markParentExpanded()
@@ -294,11 +309,11 @@ class Nav extends Component {
     }
   }
 
-  sectionHasMatches(sectionId) {
+  sectionHasMatches(sectionId: string) {
     let matches = this.matchingDocsInSection(sectionId).length > 0
     const sections = this.matchingSectionsInSection(sectionId)
     if (sections.length > 0) {
-      sections.forEach((childSectionId) => {
+      sections.forEach((childSectionId: string) => {
         matches = matches || this.sectionHasMatches(childSectionId)
       })
     }
@@ -320,7 +335,7 @@ class Nav extends Component {
   renderThemes() {
     let themeSelected = false
 
-    const themeLinks = Object.keys(this.props.themes)
+    const themeLinks = Object.keys(this.props.themes!)
       .sort()
       .filter(
         (themeKey) => this.matchQuery(themeKey) || this.matchQuery('Themes')
@@ -362,7 +377,7 @@ class Nav extends Component {
 
   renderIcons() {
     const { icons } = this.props
-    if (!icons.formats) {
+    if (!icons?.formats) {
       return []
     }
     const formats = Object.keys(icons.formats).filter(
@@ -389,7 +404,7 @@ class Nav extends Component {
     const matches = [...sections, ...themes, ...icons]
     const hasMatches = matches.length > 0
     const errorMessage = [
-      { text: `No matches for '${this.state.queryStr}'`, type: 'hint' }
+      { text: `No matches for '${this.state.queryStr}'`, type: 'hint' as const }
     ]
 
     return (
@@ -404,7 +419,9 @@ class Nav extends Component {
             type="search"
             renderBeforeInput={<IconSearchLine inline={false} />}
             messages={
-              hasMatches || this.state.queryStr == null ? null : errorMessage
+              hasMatches || this.state.queryStr == null
+                ? undefined
+                : errorMessage
             }
             shouldNotWrap
           />
