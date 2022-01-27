@@ -23,32 +23,29 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { ToggleDetails } from '@instructure/ui-toggle-details'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import { instructure } from '@instructure/ui-themes'
-
-class NavToggle extends Component {
-  static propTypes = {
-    summary: PropTypes.string.isRequired,
-    variant: PropTypes.oneOf(['section', 'category']),
-    children: PropTypes.node
-  }
-
+import type { NavToggleProps } from './props'
+import { propTypes, allowedProps } from './props'
+class NavToggle extends Component<NavToggleProps> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     variant: 'section',
     children: null
   }
+  private _toggle: any
 
   focus() {
     this._toggle.focus()
   }
 
   render() {
-    const { summary, variant, ...props } = this.props
+    const { summary, variant, iconPosition, ...props } = this.props
 
     const isSection = variant === 'section'
 

@@ -27,8 +27,11 @@ import React, { Component } from 'react'
 import { Table } from '@instructure/ui-table'
 
 import { compileMarkdown } from '../compileMarkdown'
-import { MethodsProps } from './props'
+import type { MethodsProps } from './props'
+import { propTypes, allowedProps } from './props'
 class Methods extends Component<MethodsProps> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   renderRows() {
     const methods = this.props.methods || []
 
