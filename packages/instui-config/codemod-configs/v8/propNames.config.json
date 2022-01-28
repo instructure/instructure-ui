@@ -160,6 +160,9 @@
       { "old": "disabled", "new": "isDisabled" }
     ]
   },
+  "Table": {
+    "8.0.0": [{ "old": "mode", "new": "layout" }]
+  },
   "Text": {
     "8.0.0": [
       {

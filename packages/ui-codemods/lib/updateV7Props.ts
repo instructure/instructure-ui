@@ -34,6 +34,7 @@ import updateV7Heading from './utils/updateV7Heading'
 import updateV7Lists from './utils/updateV7Lists'
 import updateV7Pill from './utils/updateV7Pill'
 import updateV7Popover from './utils/updateV7Popover'
+import updateV7Tabs from './utils/updateV7Tabs'
 
 /**
  * Updates <Button> from the InstUI v7 syntax to the v8 syntax.
@@ -76,6 +77,7 @@ function updateProps(j: JSCodeshift, root: Collection, filePath: string) {
   const listsUpdated = updateV7Lists(j, root, filePath)
   const pillUpdated = updateV7Pill(j, root, filePath)
   const popoverUpdated = updateV7Popover(j, root, filePath)
+  const tabsUpdated = updateV7Tabs(j, root, filePath)
   // TODO could be a better modification check...
   if (
     buttonImportName ||
@@ -83,7 +85,8 @@ function updateProps(j: JSCodeshift, root: Collection, filePath: string) {
     headingUpdated ||
     listsUpdated ||
     pillUpdated ||
-    popoverUpdated
+    popoverUpdated ||
+    tabsUpdated
   ) {
     return formatSource(root.toSource(), filePath)
   }

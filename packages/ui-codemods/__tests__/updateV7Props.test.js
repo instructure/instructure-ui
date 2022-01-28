@@ -34,7 +34,8 @@ const tests = [
   'heading',
   'list',
   'pill',
-  'popover'
+  'popover',
+  'tabs'
 ]
 
 // eslint-disable-next-line no-undef
