@@ -28,7 +28,7 @@ import formatSource from './utils/formatSource'
 import requireUncached from './utils/requireUncached'
 import replaceDeprecatedImports from './helpers/replaceDeprecatedImports'
 import type { API, FileInfo } from 'jscodeshift'
-import { ParsedImport } from './utils/parseImport'
+import type { ParsedImport } from './helpers/replaceDeprecatedImports'
 
 /**
  * updates imports to the new per-package or the metapackage syntax.
