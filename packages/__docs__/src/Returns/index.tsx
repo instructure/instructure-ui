@@ -46,7 +46,7 @@ class Returns extends Component<ReturnsProps> {
   }
 
   //TODO fix
-  renderType(type: any) {
+  renderType(type: { names: string[] }) {
     return type ? type.names.join(', ') : null
   }
 

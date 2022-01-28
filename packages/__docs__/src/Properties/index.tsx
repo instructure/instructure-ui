@@ -34,6 +34,7 @@ import generateStyle from './styles'
 import { compileMarkdown } from '../compileMarkdown'
 
 import type { PropertiesProps } from './props'
+import type { Prop } from '../Document/props'
 
 @withStyle(generateStyle, null)
 class Properties extends Component<PropertiesProps> {
@@ -50,7 +51,7 @@ class Properties extends Component<PropertiesProps> {
     this.props.makeStyles?.()
   }
 
-  isTsProp(prop: PropertiesProps['props']) {
+  isTsProp(prop: Prop) {
     return this.props.hasTsProps && prop.tsType
   }
 
@@ -86,9 +87,7 @@ class Properties extends Component<PropertiesProps> {
             </Table.Cell>
             <Table.Cell>
               <code>
-                {this.isTsProp(prop)
-                  ? this.renderTSType(prop.tsType)
-                  : this.renderType(prop.type)}
+                {this.isTsProp(prop) ? this.renderTSType(prop.tsType) : null}
               </code>
             </Table.Cell>
             <Table.Cell>{this.renderDefault(prop)}</Table.Cell>
@@ -98,8 +97,7 @@ class Properties extends Component<PropertiesProps> {
       })
   }
 
-  //TODO remove any
-  renderTSType = (tsType: any) => {
+  renderTSType = (tsType: Prop['tsType']) => {
     const { name, elements, type, raw } = tsType
     let isEnum = true
     /*
@@ -114,8 +112,7 @@ class Properties extends Component<PropertiesProps> {
     // TODO: currently custom imported types are just showing the name of the can somehow link to these custom types
     switch (name) {
       case 'union':
-        //TODO remove any
-        elements.forEach((element: any) => {
+        ;(elements || []).forEach((element) => {
           if (element.name !== 'literal') {
             isEnum = false
           }
@@ -141,13 +138,11 @@ class Properties extends Component<PropertiesProps> {
     }
   }
 
-  //TODO remove any
-  renderType(type: any) {
+  renderType(type: Prop['type']) {
     const { name } = type || {}
-
     switch (name) {
       case 'arrayOf':
-        return `${type.value.name}[]`
+        return `${type?.value?.name}[]`
       case 'instanceOf':
         return type.value
       default:
@@ -155,15 +150,15 @@ class Properties extends Component<PropertiesProps> {
     }
   }
 
-  //TODO remove any
-  renderDefault(prop: any) {
+  renderDefault(prop: Prop) {
     const { styles } = this.props
 
     if (prop.required) {
       return <span css={styles?.required}>Required</span>
     } else if (prop.defaultValue) {
-      //TODO remove any
-      let defaultValue: any = this.unquote(prop.defaultValue.value)
+      let defaultValue: string | React.ReactNode = this.unquote(
+        prop.defaultValue.value
+      )
       if (defaultValue === '() => {}') {
         defaultValue = <span css={styles?.noWrap}>{defaultValue}</span>
       }
@@ -173,10 +168,8 @@ class Properties extends Component<PropertiesProps> {
     }
   }
 
-  //TODO remove any
-  renderDescription(prop: any) {
+  renderDescription(prop: Prop) {
     const { description } = prop || {}
-
     const isTsProp = this.isTsProp(prop)
 
     return (
@@ -191,8 +184,7 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 
-  //TODO remove any
-  renderEnum(prop: any) {
+  renderEnum(prop: Prop) {
     const { styles } = this.props
     const { type } = prop
 
@@ -204,12 +196,13 @@ class Properties extends Component<PropertiesProps> {
       return <span>{type.value}</span>
     }
 
-    //TODO remove any
-    const values = type.value.map(({ value }: any, idx: any) => (
-      <li css={styles?.listItem} key={idx}>
-        <code>{this.unquote(value)}</code>
-      </li>
-    ))
+    const values = type.value.map(
+      ({ value }: { value: string }, idx: number) => (
+        <li css={styles?.listItem} key={idx}>
+          <code>{this.unquote(value)}</code>
+        </li>
+      )
+    )
 
     return (
       <span>
@@ -219,8 +212,7 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 
-  //TODO remove any
-  renderUnion(prop: any) {
+  renderUnion(prop: Prop) {
     const { styles } = this.props
     const { type } = prop
 
@@ -230,8 +222,8 @@ class Properties extends Component<PropertiesProps> {
     if (!Array.isArray(type.value)) {
       return <span>{type.value}</span>
     }
-    //TODO remove any
-    const values = type.value.map((value: any, idx: any) => (
+
+    const values = type.value.map((value, idx) => (
       <li css={styles?.listItem} key={idx}>
         <code>{this.renderType(value)}</code>
       </li>
@@ -244,8 +236,7 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 
-  //TODO remove any
-  renderTsUnion(prop: any) {
+  renderTsUnion(prop: Prop) {
     const { styles } = this.props
     const { tsType } = prop
 
@@ -259,11 +250,12 @@ class Properties extends Component<PropertiesProps> {
 
     // react-docgen doesn't recognise functions if they are in parentheses,
     // so we have to parse the raw data
-    //TODO remove any
-    const elements = tsType.raw.split('|').filter((item: any) => item !== '')
 
-    //TODO remove any
-    const values = elements.map((rawValue: any, idx: any) => {
+    const elements = tsType?.raw
+      ?.split('|')
+      ?.filter((item: string) => item !== '')
+
+    const values = elements?.map((rawValue: string, idx: number) => {
       let value = rawValue.trim()
       if (this.isTsGeneralFunction(value)) {
         value = 'function'
@@ -283,8 +275,7 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 
-  //TODO remove any
-  renderTsSignature(prop: any) {
+  renderTsSignature(prop: Prop) {
     const { styles } = this.props
     const { tsType } = prop
 
@@ -292,12 +283,13 @@ class Properties extends Component<PropertiesProps> {
       return
     }
 
-    //TODO remove any
-    const signature = tsType.raw.split('\n').map((value: any, idx: number) => (
-      <li css={styles?.listSignatureItem} key={idx}>
-        <code>{value}</code>
-      </li>
-    ))
+    const signature = tsType?.raw
+      ?.split('\n')
+      .map((value: string, idx: number) => (
+        <li css={styles?.listSignatureItem} key={idx}>
+          <code>{value}</code>
+        </li>
+      ))
 
     return (
       <span>
@@ -307,8 +299,7 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 
-  //TODO remove any
-  renderTsArrayType(prop: any) {
+  renderTsArrayType(prop: Prop) {
     const { styles } = this.props
     const { tsType } = prop
 
