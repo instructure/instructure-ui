@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import findDeprecatedProp from '../utils/findDeprecatedProp'
-import createLiteral from '../utils/createLiteral'
 import {
   ASTPath,
   Collection,
@@ -158,4 +156,61 @@ const replaceValue = (
       }
     }
   })
+}
+
+/**
+ * Find the deprecated prop for a component
+ *
+ * @param {object} config Deprecated property configuration
+ * @param {string} comp Component name
+ * @param {string} prop Property name
+ * @return {object} Object if a match is found, otherwise null
+ */
+const findDeprecatedProp = (
+  config: UpdatePropNamesOptions,
+  comp: string,
+  prop: string
+) => {
+  if (config && comp && prop && config[comp]) {
+    const component = config[comp]
+
+    // Iterate versions
+    const versions = Object.keys(component)
+    for (let i = 0; i < versions.length; i++) {
+      const props = component[versions[i]]
+
+      // Iterate properties
+      for (let j = 0; j < props.length; j++) {
+        const match = props[j]
+
+        if (prop === match.old) {
+          return match
+        }
+      }
+    }
+  }
+  return null
+}
+
+const createLiteral = (
+  j: JSCodeshift,
+  value: string | boolean | number | null
+) => {
+  if (typeof value === 'string') {
+    return j.stringLiteral(value)
+  }
+
+  if (typeof value === 'number') {
+    return j.jsxExpressionContainer(j.numericLiteral(value))
+  }
+
+  if (typeof value === 'boolean') {
+    return j.jsxExpressionContainer(j.booleanLiteral(value))
+  }
+
+  if (value === null) {
+    return j.jsxExpressionContainer(j.nullLiteral())
+  }
+
+  return null
 }

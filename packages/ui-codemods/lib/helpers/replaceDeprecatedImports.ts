@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import parseImport, { ParsedImport } from '../utils/parseImport'
-import findTransform from '../utils/findTransform'
 import {
   API,
   ASTPath,
@@ -34,6 +32,16 @@ import {
   JSCodeshift
 } from 'jscodeshift'
 import type { ConfigObject, TransformObj } from '../updateImports'
+import { Transform } from '../updateImports'
+import path from 'path'
+
+type ParsedImport = {
+  scope?: string
+  name?: string
+  fullName?: string
+  moduleName?: string
+  sourcePath?: string
+}
 
 function transformImportPath(
   importPath: string,
@@ -318,6 +326,140 @@ function updateImports(
   return hasModifications
 }
 
+function findImportDeclaration(
+  j: JSCodeshift,
+  root: Collection,
+  importPath: string
+) {
+  let importDeclaration
+  const declarationQueryResult = root.find(j.ImportDeclaration, {
+    source: {
+      type: 'StringLiteral',
+      value: importPath
+    }
+  })
+  if (declarationQueryResult.length > 0) {
+    importDeclaration = declarationQueryResult.get()
+  }
+  return importDeclaration
+}
+
+function findTransform(
+  transforms: Transform[],
+  importPath: string,
+  parsedImport: ParsedImport,
+  moduleName?: string
+) {
+  return (
+    transforms.find(({ where = {} }) => {
+      // If `where` has no entries, there are no matching transforms
+      if (Object.keys(where).length === 0) return false
+
+      let performedTest = false
+      let foundTransform = true
+
+      if (where.moduleName) {
+        performedTest = true
+
+        if (moduleName) {
+          // Give preference to the module name parsed from the AST vs. the import path string
+          foundTransform = foundTransform && where.moduleName === moduleName
+        } else {
+          foundTransform =
+            foundTransform && where.moduleName === parsedImport.moduleName
+        }
+      }
+
+      if (where.moduleNames) {
+        performedTest = true
+
+        if (moduleName) {
+          foundTransform =
+            foundTransform && where.moduleNames.includes(moduleName)
+        } else {
+          foundTransform =
+            foundTransform &&
+            where.moduleNames.includes(parsedImport.moduleName!)
+        }
+      }
+
+      if (where.packageName) {
+        performedTest = true
+
+        foundTransform =
+          foundTransform && where.packageName === parsedImport.fullName
+      }
+
+      if (where.packageNames) {
+        performedTest = true
+
+        foundTransform =
+          foundTransform && where.packageNames.includes(parsedImport.fullName!)
+      }
+
+      if (where.importPath) {
+        performedTest = true
+
+        foundTransform = foundTransform && where.importPath === importPath
+      }
+
+      if (where.importPattern) {
+        performedTest = true
+
+        foundTransform =
+          foundTransform && new RegExp(where.importPattern).test(importPath)
+      }
+
+      return performedTest && foundTransform
+    }) || {}
+  ).transform
+}
+
+function parseImport(importPath: string): ParsedImport {
+  let parsedImport = {}
+
+  if (!importPath) return {}
+
+  const splitPath = importPath.split('/')
+
+  const parseSourceAndModule = (entries: string[] = []) => {
+    if (entries.length === 0) return {}
+
+    const lastEntry = entries[entries.length - 1]
+
+    const moduleOffset = path.parse(lastEntry).name === 'index' ? 2 : 1
+
+    const moduleName = entries[entries.length - moduleOffset]
+
+    return {
+      moduleName: moduleName ? path.parse(moduleName).name : undefined,
+      sourcePath: entries.slice(0, entries.length - moduleOffset).join('/')
+    }
+  }
+
+  if (importPath[0] === '@') {
+    const [scope, name, ...rest] = splitPath
+
+    parsedImport = {
+      scope,
+      name,
+      fullName: `${scope}/${name}`,
+      moduleName: `${scope}/${name}`,
+      ...parseSourceAndModule(rest)
+    }
+  } else {
+    const [name, ...rest] = splitPath
+
+    parsedImport = {
+      name,
+      fullName: name,
+      moduleName: name,
+      ...parseSourceAndModule(rest)
+    }
+  }
+  return parsedImport
+}
+
 /**
  * Find imports
  *
@@ -400,22 +542,4 @@ export default function replaceDeprecatedImports(
   })
 
   return hasModifications
-}
-
-function findImportDeclaration(
-  j: JSCodeshift,
-  root: Collection,
-  importPath: string
-) {
-  let importDeclaration
-  const declarationQueryResult = root.find(j.ImportDeclaration, {
-    source: {
-      type: 'StringLiteral',
-      value: importPath
-    }
-  })
-  if (declarationQueryResult.length > 0) {
-    importDeclaration = declarationQueryResult.get()
-  }
-  return importDeclaration
 }
