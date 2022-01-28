@@ -37,6 +37,30 @@ type SingleChildrenType = {
   description: string
 }
 
+type Prop = {
+  defaultValue?: {
+    computed: boolean
+    value: string
+  }
+  description: string
+  required: boolean
+  tsType: {
+    name: string
+    elements?: { name: string; value: string }[]
+    type?: string
+    raw?: string
+  }
+  type: {
+    name: string
+    value?: {
+      name?: string
+      value?: string
+      computed?: boolean
+      raw?: string
+    }
+  }
+}
+
 type DocType = {
   srcUrl: string
   srcPath: string
@@ -56,7 +80,7 @@ type DocType = {
   }[]
   returns: {
     type: {
-      name: string
+      names: string[]
     }
     description: string
   }[]
@@ -70,9 +94,9 @@ type DocType = {
     }[]
     docblock: string
   }[]
-  props: Record<string, any>
+  props: Record<string, Prop>
   extension: string
-  componentInstance?: any
+  componentInstance?: Record<string, any>
 } & SingleChildrenType
 
 type DocumentOwnProps = {
@@ -115,5 +139,6 @@ export type {
   DocType,
   DocumentStyle,
   DocumentTheme,
-  SingleChildrenType
+  SingleChildrenType,
+  Prop
 }

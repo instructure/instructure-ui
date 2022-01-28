@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 type ReturnsOwnProps = {
   types: {
     type: {
-      name: string
+      names: string[]
     }
     description: string
   }[]

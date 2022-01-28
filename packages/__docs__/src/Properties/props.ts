@@ -24,9 +24,10 @@
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import type { DocType } from '../Document/props'
 
 type PropertiesOwnProps = {
-  props: any
+  props: DocType['props']
   layout: string
   hasTsProps: boolean
 }
@@ -38,15 +39,6 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type PropertiesProps = PropertiesOwnProps &
   WithStyleProps<null, PropertiesStyle>
 
-// type PropertiesTheme = {
-//   colorBrand: string
-//   colorAlert: string
-//   colorWarning: string
-//   colorDanger: string
-//   colorFaceSuccess: string
-//   colorFaceFailure: string
-//   colorFeatures: string
-// }
 export type PropertiesStyle = ComponentStyle<
   | 'properties'
   | 'list'
