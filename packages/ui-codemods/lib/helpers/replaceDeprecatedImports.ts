@@ -35,7 +35,7 @@ import type { ConfigObject, TransformObj } from '../updateImports'
 import { Transform } from '../updateImports'
 import path from 'path'
 
-type ParsedImport = {
+export type ParsedImport = {
   scope?: string
   name?: string
   fullName?: string
