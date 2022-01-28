@@ -8,34 +8,23 @@ order: 4
 
 As we've built out our library, we've learned a lot about component APIs. Button was among the first components added to the library, and we made some decisions about the prop naming that have prevented the component from meeting the needs of our evolving design system.
 
-- [Props that need to be upgraded](#button-upgrade-guide/#button-upgrade-for-version-8.0-props-that-need-to-be-upgraded)
-- [Upgrading buttons **with visible text**](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-default,-primary,-success,-danger,-light,-ghost,-or-ghost-inverse)
+  - [Props that need to be upgraded](#button-upgrade-guide/#button-upgrade-for-version-8.0-props-that-need-to-be-upgraded)
+  - [Upgrading buttons __with visible text__](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-default,-primary,-success,-danger,-light,-ghost,-or-ghost-inverse)
+    - [Upgrade examples with visibile text](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-default,-primary,-success,-danger,-light,-ghost,-or-ghost-inverse-upgrade-examples-with-visible-text)
 
-  - [Upgrade examples with visibile text](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-default,-primary,-success,-danger,-light,-ghost,-or-ghost-inverse-upgrade-examples-with-visible-text)
+  - [Upgrading __icon only__ buttons, no visible text](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-icon,-icon-inverse,-circle-default,-circle-primary,-or-circle-danger)
+    - [Upgrade examples for "icon" or "icon-inverse"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-icon,-icon-inverse,-circle-default,-circle-primary,-or-circle-danger-upgrade-examples-for-icon-or-icon-inverse)
+    - [Upgrade examples for "circle-default", "circle-primary", or "circle-danger"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-icon,-icon-inverse,-circle-default,-circle-primary,-or-circle-danger-upgrade-examples-for-circle-default,-circle-primary,-or-circle-danger)
 
-- [Upgrading **icon only** buttons, no visible text](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-icon,-icon-inverse,-circle-default,-circle-primary,-or-circle-danger)
+  - [Upgrading __link variant__ values](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse)
+    - [Upgrade examples for variant=”link” and has "padding overrides plus href"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-an-href-attribute-and-padding-overrides)
+    - [Upgrade examples for variant="link" and has "padding overrides and no href"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-no-href-attribute-and-padding-overrides)
+    - [Upgrade examples for variant="link" and has "no padding overrides and no href"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-example-for-link-variant-with-no-href-attribute-and-no-padding-overrides)
+  - [Upgrading __CloseButton__](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-closebutton)
+    - [Upgrade examples for __CloseButton__](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-closebutton-upgrade-examples-for-closebutton)
 
-  - [Upgrade examples for "icon" or "icon-inverse"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-icon,-icon-inverse,-circle-default,-circle-primary,-or-circle-danger-upgrade-examples-for-icon-or-icon-inverse)
-  - [Upgrade examples for "circle-default", "circle-primary", or "circle-danger"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-icon,-icon-inverse,-circle-default,-circle-primary,-or-circle-danger-upgrade-examples-for-circle-default,-circle-primary,-or-circle-danger)
-
-- [Upgrading **link variant** values](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse)
-  - [Upgrade examples for variant=”link” and has "padding overrides plus href"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-an-href-attribute-and-padding-overrides)
-  - [Upgrade examples for variant="link" and has "padding overrides and no href"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-no-href-attribute-and-padding-overrides)
-  - [Upgrade examples for variant="link" and has "no padding overrides and no href"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-example-for-link-variant-with-no-href-attribute-and-no-padding-overrides)
-- [Upgrading **CloseButton**](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-closebutton)
-  - [Upgrade examples for **CloseButton**](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-closebutton-upgrade-examples-for-closebutton)
-
-##### Note about Codemods
-
-These complex props are updated via 2 sets of codemods, apply the simple codemods first:
-
-- updatePropNames: This applies the simple codemods like renaming a single property
-- updateV7Props: This applies the more complex codemods that change multiple values or move tags.
-
-These are in the V8 (and later) versions of the InstUI repo.
 
 ### Props that need to be upgraded
-
 ```javascript
 ---
 embed: true
@@ -48,22 +37,19 @@ embed: true
   </ToggleBlockquote.Paragraph>
 </ToggleBlockquote>
 ```
-
 The following props will need to be upgraded. They have been changed to be consistent with our [API guidelines](#api-guidelines).
-
-| Previous     | Upgraded                                                                       | Codemods Available?                                                                                                                                                                                               |
-| ------------ | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `variant`    | See the following sections for upgrade steps for each particular variant value | Partial: See [example section](#button-upgrade-guide/#v8-button-upgrade-guide-upgrading-variant-default,-primary,-success,-danger,-light,-ghost,-or-ghost-inverse-upgrade-examples-with-visible-text) for details |
-| `buttonRef`  | Change prop name to `elementRef`                                               | Yes                                                                                                                                                                                                               |
-| `fluidWidth` | Set `display="block"` and `textAlign="start"`                                  | Yes                                                                                                                                                                                                               |
-| `icon`       | Change prop name to `renderIcon`                                               | Yes                                                                                                                                                                                                               |
+ 
+| Previous | Upgraded | Codemods Available? |
+|----------|-----------------|-------------------|
+| `variant` | See the following sections for upgrade steps for each particular variant value | Partial: See [example section](#button-upgrade-guide/#v8-button-upgrade-guide-upgrading-variant-default,-primary,-success,-danger,-light,-ghost,-or-ghost-inverse-upgrade-examples-with-visible-text) for details |
+| `buttonRef` | Change prop name to `elementRef` | Yes |
+| `fluidWidth` | Set `display="block"` and `textAlign="start"` | Partial: `textAlign` will need to be set to `start` manually (it will be `center` by default) |
+| `icon` | Change prop name to `renderIcon` | Yes |
 
 <!-- /////////////////////////////////////////////// -->
 <!-- THIS IS WHERE THE VARIANT VS COLOR STUFF STARTS -->
 <!-- /////////////////////////////////////////////// -->
-
 ### Upgrading variant default, primary, success, danger, light, ghost, or ghost-inverse
-
 ```javascript
 ---
 embed: true
@@ -81,19 +67,18 @@ embed: true
 ```
 
 This table describes the upgrade process. If the `variant prop` is set to one of the following values, these changes will be necessary.
-
-| Previous                  | Upgraded                                                                               | Codemods Available? |
-| ------------------------- | -------------------------------------------------------------------------------------- | ------------------- |
-| `variant="default"`       | `color="secondary"` (or remove the `variant` prop as `secondary` is the default value) | Yes                 |
-| `variant="primary"`       | `color="primary"`                                                                      | Yes                 |
-| `variant="success"`       | `color="success"`                                                                      | Yes                 |
-| `variant="danger"`        | `color="danger"`                                                                       | Yes                 |
-| `variant="light"`         | `color="primary-inverse"`                                                              | Yes                 |
-| `variant="ghost"`         | `color="primary"` and set `withBackground={false}`                                     | Yes                 |
-| `variant="ghost-inverse"` | `color="primary-inverse"` and set `withBackground={false}`                             | Yes                 |
+ 
+| Previous | Upgraded | Codemods Available? |
+|---------------|---------------|--------------------|
+| `variant="default"` | `color="secondary"` (or remove the `variant` prop as `secondary` is the default value) | Yes |
+| `variant="primary"` | `color="primary"` | Yes |
+| `variant="success"` | `color="success"` | Yes |
+| `variant="danger"` |  `color="danger"` | Yes |
+| `variant="light"` | `color="primary-inverse"` | Yes |
+| `variant="ghost"` | `color="primary"` and set `withBackground={false}` | Partial: `withBackground` will need to be set to `false` manually |
+| `variant="ghost-inverse"` | `color="primary-inverse"` and set `withBackground={false}` | Partial: `withBackground` will need to be set to `false` manually |
 
 #### Upgrade examples with visible text
-
 ```javascript
 ---
 embed: true
@@ -102,7 +87,6 @@ embed: true
 <Button margin="medium small small 0">Default</Button><Button margin="medium 0 small 0" renderIcon={IconHeartLine}>Default</Button>
 </div>
 ```
-
 ```js
 /* Previous */
 <Button variant="default">Hello</Button>
@@ -112,8 +96,8 @@ embed: true
 <Button>Hello</Button>
 <Button renderIcon={IconHeartLine}>Hello</Button>
 ```
-
-```javascript
+ 
+ ```javascript
 ---
 embed: true
 ---
@@ -121,7 +105,6 @@ embed: true
 <Button color="primary" margin="medium small small 0">Primary</Button><Button color="primary" margin="medium 0 small 0" renderIcon={IconHeartLine}>Primary</Button>
 </div>
 ```
-
 ```js
 /* Previous */
 <Button variant="primary">Hello</Button>
@@ -140,7 +123,6 @@ embed: true
 <Button color="success" margin="medium small small 0">Success</Button><Button color="success" margin="medium 0 small 0" renderIcon={IconHeartLine}>Success</Button>
 </div>
 ```
-
 ```js
 /* Previous */
 <Button variant="success">Hello</Button>
@@ -160,7 +142,6 @@ theme: 'canvas'
 <Button color="danger" margin="medium small small 0">Danger</Button><Button color="danger" margin="medium 0 small 0" renderIcon={IconHeartLine}>Danger</Button>
 </div>
 ```
-
 ```js
 /* Previous */
 <Button variant="danger">Hello</Button>
@@ -179,7 +160,6 @@ embed: true
 <Button color="primary-inverse" margin="medium small small 0">Primary Inverse</Button><Button color="primary-inverse" margin="medium 0 small 0" renderIcon={IconHeartLine}>Primary Inverse</Button>
 </div>
 ```
-
 ```js
 /* Previous */
 <Button variant="light">Hello</Button>
@@ -189,7 +169,7 @@ embed: true
 <Button color="primary-inverse">Hello</Button>
 <Button color="primary-inverse" renderIcon={IconHeartLine}>Hello</Button>
 ```
-
+ 
 ```javascript
 ---
 embed: true
@@ -198,7 +178,6 @@ embed: true
 <Button color="primary" withBackground={false} margin="medium small small 0">Ghost</Button><Button color="primary" withBackground={false} margin="medium 0 small 0" renderIcon={IconHeartLine}>Ghost</Button>
 </div>
 ```
-
 ```js
 /* Previous */
 <Button variant="ghost">Hello</Button>
@@ -208,7 +187,7 @@ embed: true
 <Button color="primary" withBackground={false}>Hello</Button>
 <Button color="primary" withBackground={false} renderIcon={IconHeartLine}>Hello</Button>
 ```
-
+ 
 ```javascript
 ---
 embed: true
@@ -217,7 +196,6 @@ embed: true
 <Button color="primary-inverse" withBackground={false} margin="0 small 0 0">Ghost Inverse</Button><Button color="primary-inverse" withBackground={false} renderIcon={IconHeartLine}>Ghost Inverse</Button>
 </View>
 ```
-
 ```js
 /* Previous */
 <Button variant="ghost-inverse">Hello</Button>
@@ -231,9 +209,7 @@ embed: true
 <!-- /////////////////////////////////////////////// -->
 <!-- THIS IS WHERE THE ICON-ONLY BUTTON STUFF STARTS -->
 <!-- /////////////////////////////////////////////// -->
-
 ### Upgrading variant icon, icon-inverse, circle-default, circle-primary, or circle-danger
-
 ```javascript
 ---
 embed: true
@@ -247,19 +223,18 @@ embed: true
 </ToggleBlockquote>
 ```
 
-This table describes the upgrade process if the `variant="icon"` prop is set but **no visible children/text** are provided. These updates will also apply to any buttons with `variant="circle-` values. The following changes will be necessary.
+This table describes the upgrade process if the `variant="icon"` prop is set but __no visible children/text__ are provided. These updates will also apply to any buttons with `variant="circle-` values. The following changes will be necessary.
 
-| Previous                   | Upgraded                                                                                                                                                  | Codemods Available |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `variant="icon"`           | `<IconButton color="secondary"` (or remove the `variant` prop as `secondary` is the default value), set `withBorder={false}` and `withBackground={false}` | Yes                |
-| `variant="icon-inverse"`   | `<IconButton color="primary-inverse"`, set `withBorder={false}` and `withBackground={false}`                                                              | Yes                |
-| `variant="circle-default"` | `<IconButton color="secondary"` (or remove the `variant` prop as `secondary` is the default value), set `shape="circle"`                                  | Yes                |
-| `variant="circle-primary"` | `<IconButton color="primary"`, set `shape="circle"`                                                                                                       | Yes                |
-| `variant="circle-danger"`  | `<IconButton color="danger"`, set `shape="circle"`                                                                                                        | Yes                |
+| Previous | Upgraded | Codemods Available |
+|---------------|---------------|--------------------|
+| `variant="icon"` | __<IconButton />__`color="secondary"` (or remove the `variant` prop as `secondary` is the default value), set `withBorder={false}` and `withBackground={false}` | Partial: `color` only, others will need to be set manually |
+| `variant="icon-inverse"` | `color="primary-inverse"`, set `withBorder={false}` and `withBackground={false}` | Partial: `color` only, others will need to be set manually |
+| `variant="circle-default"` | `color="secondary"` (or remove the `variant` prop as `secondary` is the default value), set `shape="circle"` | Partial: `color` only, others will need to be set manually |
+| `variant="circle-primary"` | `color="primary"`, set `shape="circle"` | Partial: `color` only, others will need to be set manually  |
+| `variant="circle-danger"` | `color="danger"`, set `shape="circle"` | Partial: `color` only, others will need to be set manually |
 
 #### Upgrade examples for icon or icon-inverse
-
-Note, the same `color` values described in the previous section would apply to **IconButton**.
+Note, the same `color` values described in the previous section would apply to __IconButton__.
 
 ```javascript
 ---
@@ -267,7 +242,6 @@ embed: true
 ---
 <IconButton renderIcon={IconXSolid} screenReaderLabel="Do something" withBorder={false} withBackground={false} margin="medium 0 small 0" />
 ```
-
 ```js
 /* Previous */
 <Button
@@ -294,7 +268,6 @@ embed: true
   <IconButton color="primary-inverse" renderIcon={IconXSolid} screenReaderLabel="Do something" withBorder={false} withBackground={false}/>
 </View>
 ```
-
 ```js
 /* Previous */
 <Button
@@ -320,7 +293,6 @@ embed: true
 ---
 <IconButton renderIcon={IconXSolid} screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
-
 ```js
 /* Previous */
 <Button
@@ -343,7 +315,6 @@ embed: true
 ---
 <IconButton renderIcon={IconXSolid} color="primary" screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
-
 ```js
 /* Previous */
 <Button
@@ -367,7 +338,6 @@ embed: true
 ---
 <IconButton renderIcon={IconXSolid} color="success" screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
-
 ```js
 /* Previous */
 <Button
@@ -391,7 +361,6 @@ embed: true
 ---
 <IconButton renderIcon={IconXSolid} color="danger" screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
-
 ```js
 /* Previous */
 <Button
@@ -408,14 +377,13 @@ embed: true
   color="danger"
 />
 ```
-
+ 
 ```javascript
 ---
 embed: true
 ---
 <IconButton renderIcon={IconXSolid} color="primary-inverse" screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
-
 ```js
 /* Previous */
 <Button
@@ -439,7 +407,6 @@ embed: true
 ---
 <IconButton renderIcon={IconXSolid} color="primary" withBackground={false} screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
-
 ```js
 /* Previous */
 <Button
@@ -466,7 +433,6 @@ embed: true
 <IconButton renderIcon={IconXSolid} color="primary-inverse" withBackground={false} screenReaderLabel="Do something" margin="small" />
 </View>
 ```
-
 ```js
 /* Previous */
 <Button
@@ -486,14 +452,12 @@ embed: true
 ```
 
 #### Upgrade examples for circle-default, circle-primary, or circle-danger
-
 ```javascript
 ---
 embed: true
 ---
 <IconButton renderIcon={IconXSolid} screenReaderLabel="Close something" shape="circle" margin="medium 0 small 0" />
 ```
-
 ```js
 /* Previous */
 <Button
@@ -516,8 +480,7 @@ embed: true
 embed: true
 ---
 <IconButton renderIcon={IconXSolid} screenReaderLabel="Close something" color="primary" shape="circle" margin="medium 0 small 0" />
-```
-
+``` 
 ```js
 /* Previous */
 <Button
@@ -535,14 +498,13 @@ embed: true
   shape="circle"
 />
 ```
-
+ 
 ```javascript
 ---
 embed: true
 ---
 <IconButton renderIcon={IconXSolid} screenReaderLabel="Close something" color="danger" shape="circle" margin="medium 0 small 0" />
-```
-
+``` 
 ```js
 /* Previous */
 <Button
@@ -564,13 +526,10 @@ embed: true
 <!-- ///////////////////////////////////////////// -->
 <!-- THIS IS WHERE THE LINK VS BUTTON STUFF STARTS -->
 <!-- ///////////////////////////////////////////// -->
-
 ### Upgrading variant link or link-inverse
-
 There are a few upgrade possibilities depending on the situation when replacing the `link` variant. Because of this, we did not provide codemods as the update will depend on the judgment of the consumer.
 
-One of the primary reasons the “link” variant was removed was to mitigate the confusion between using buttons and links. If an `href` attribute is assigned, the Button will exhibit linking behavior. **The recommended upgrade path in this case is to use the [Link](#Link) component instead**. Link utilizes an underline style which is an important signifier to the user when an element is going to take them to a different location.
-
+One of the primary reasons the “link” variant was removed was to mitigate the confusion between using buttons and links. If an `href` attribute is assigned, the Button will exhibit linking behavior. __The recommended upgrade path in this case is to use the [Link](#Link) component instead__.  Link utilizes an underline style which is an important signifier to the user when an element is going to take them to a different location.
 ```javascript
 ---
 embed: true
@@ -584,17 +543,14 @@ embed: true
 </ToggleBlockquote>
 ```
 
-This table describes the upgrade process if the `variant="link"` prop is set, and **an href is provided**. The following changes will be necessary.
+This table describes the upgrade process if the `variant="link"` prop is set, and __an href is provided__. The following changes will be necessary.
 
-| Previous                          | Upgraded                                                                                                                                                   | Codemods Available |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `variant="link" href="#"`         | `<Link isWithinText={false} href="#">` (when Link needs to appear without surrounding text, the default underline can be configured to only show on hover) | Yes                |
-| `variant="link-inverse" href="#"` | `<Link isWithinText={false} color="link-inverse" href="#">`                                                                                                | Yes                |
-| `variant="link"`                  | `<CondensedButton` (when no href attribute)                                                                                                                | No                 |
-| `variant="link-inverse"`          | `<CondensedButton` (when no href attribute)                                                                                                                | No                 |
+| Previous | Upgraded | Codemods Available |
+|---------------|---------------|--------------------|
+| `variant="link"` | `<Link isWithinText={false} href="#">` (when Link needs to appear without surrounding text, the default underline can be configured to only show on hover) | No, will need to be set manually |
+| `variant="link-inverse"` | `<Link isWithinText={false} color="link-inverse" href="#">` | No, will need to be set manually |
 
 #### Upgrade examples for link variant with an href attribute and padding overrides
-
 When a button with the `link` variant set needed to align with other content or fit into a tight space, the recommendation at one point was to override theme variables in order to remove the padding. It should be noted that for this situation, [Link](#Link) now supports an `isWithinText` prop which, when set to `false`, does not underline the link by default (only on hover) giving you the same behavior that you were getting previously by using button with variant set to `link`.
 
 ```javascript
@@ -606,13 +562,12 @@ embed: true
   <Link href="#" isWithinText={false}>A link that aligns with the above text</Link>
 </View>
 ```
-
 ```js
 /* Previous */
 <View display="inline-block" padding="medium">
   Some description of something
   <br />
-  <Button variant="link" href="#"
+  <Button variant="link" href="#" 
     theme={{ mediumPadding: '0rem', mediumHeight: '1.25rem' }}
   >
     A link that aligns with the above text
@@ -639,13 +594,12 @@ embed: true
   <Link href="#" color="link-inverse" isWithinText={false}>A link that aligns with the above text</Link>
 </View>
 ```
-
 ```js
 /* Previous */
 <View display="inline-block" padding="medium">
   Some description of something
   <br />
-  <Button variant="link-inverse" href="#"
+  <Button variant="link-inverse" href="#" 
     theme={{ mediumPadding: '0rem', mediumHeight: '1.25rem' }}
   >
     A link that aligns with the above text
@@ -665,9 +619,7 @@ embed: true
 ```
 
 #### Upgrade examples for link variant with no href attribute and padding overrides
-
 If the button has padding overrides as described above, but does not have an `href` supplied, it should be replaced with the [CondensedButton](#CondensedButton) component. This button has been designed to fit into tight spaces and align with other content. It displays hover and active states consistent with other buttons instead of displaying the underline. Using the underline in a button was confusing for users as it visually signified linking behavior when it was actually just behaving as a button.
-
 ```javascript
 ---
 embed: true
@@ -678,19 +630,18 @@ embed: true
    <CondensedButton>A button that aligns with the above text</CondensedButton>
  </View>
 ```
-
 ```js
 /* Previous */
 <View display="inline-block" padding="medium">
   Some description of something
   <br />
-  <Button variant="link"
+  <Button variant="link" 
     theme={{ mediumPadding: '0rem', mediumHeight: '1.25rem' }}
   >
     A button that aligns with the above text
   </Button>
 </View>
-
+ 
 /* Upgraded */
 <View display="inline-block" padding="medium">
   Some description of something
@@ -698,7 +649,6 @@ embed: true
   <CondensedButton>A button that aligns with the above text</CondensedButton>
 </View>
 ```
-
 ```javascript
 ---
 embed: true
@@ -709,7 +659,6 @@ embed: true
   <CondensedButton color="primary-inverse">A button that aligns with the above text</CondensedButton>
 </View>
 ```
-
 ```js
 /* Previous */
 <View display="inline-block" padding="medium">
@@ -725,18 +674,15 @@ embed: true
   <CondensedButton color="primary-inverse">A button that aligns with the above text</CondensedButton>
 </View>
 ```
-
+ 
 #### Upgrade example for link variant with no href attribute and no padding overrides
-
 Consider using a Button with the `color` set to "primary" or "primary-inverse" and `withBackground` set to false
-
 ```javascript
 ---
 embed: true
 ---
 <Button color="primary" withBackground={false} margin="small">Hello</Button>
 ```
-
 ```js
 /* Previous */
 <Button variant="link" margin="small">Hello</Button>
@@ -753,13 +699,12 @@ embed: true
   <Button color="primary-inverse" withBackground={false} margin="small">Hello</Button>
 </View>
 ```
-
 ```js
 /* Previous */
 <View display="inline-block" background="primary-inverse">
   <Button variant="link-inverse" margin="small">Hello</Button>
 </View>
-
+ 
 /* Upgraded */
 <View display="inline-block" background="primary-inverse">
  <Button color="primary-inverse" withBackground={false} margin="small">Hello</Button>
@@ -770,22 +715,20 @@ embed: true
 
 The following table describes the upgrade process for [CloseButton](#CloseButton). Most of these changes are covered by automated codemods, except `children` will need to be changed to `screenReaderLabel` manually.
 
-| Previous                 | Upgraded                                                                           | Codemods Available                   |
-| ------------------------ | ---------------------------------------------------------------------------------- | ------------------------------------ |
-| `buttonRef`              | Change prop name to `elementRef`                                                   | Yes                                  |
-| `children`               | Pass children to the `screenReaderLabel` prop instead                              | No, will need to be changed manually |
-| `variant="icon"`         | `color="primary"` (or remove the `variant` prop as `primary` is the default value) | Yes                                  |
-| `variant="icon-inverse"` | `color="primary-inverse"`                                                          | Yes                                  |
+| Previous | Upgraded | Codemods Available |
+|---------------|---------------|--------------------|
+| `buttonRef` | Change prop name to `elementRef` | Yes |
+| `children` | Pass children to the `screenReaderLabel` prop instead | No, will need to be changed manually |
+| `variant="icon"` | `color="primary"` (or remove the `variant` prop as `primary` is the default value) | Yes |
+| `variant="icon-inverse"` | `color="primary-inverse"` | Yes |
 
 #### Upgrade examples for CloseButton
-
 ```javascript
 ---
 embed: true
 ---
 <CloseButton color="primary" margin="small" screenReaderLabel="Close" />
 ```
-
 ```js
 /* Previous */
 <CloseButton variant="icon">Close</CloseButton>
@@ -802,7 +745,6 @@ embed: true
   <CloseButton color="primary-inverse" margin="small" screenReaderLabel="Close" />
 </View>
 ```
-
 ```js
 /* Previous */
 <CloseButton variant="icon-inverse">Close</CloseButton>
