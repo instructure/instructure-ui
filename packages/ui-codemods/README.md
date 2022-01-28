@@ -45,13 +45,13 @@ This codemod helps you update your project by renaming `imports` that have chang
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/imports.config.js
 ```
 
-### Updating Buttons to the InstUI v8 syntax
+### Updating more complex props to the InstUI v8 syntax
 
-Updates <Button> from the InstUI v7 syntax to the v8 syntax. This script contains the codemods referenced in https://instructure.design/v7/#button-upgrade-guide
-Please use JSCodeshift v0.13 or newer.
+Updates most of the props that are listed in <https://instructure.design/v7/#v7-deprecated-props-and-components/> as having no codemods from the InstUI v7 syntax to the v8 syntax. If it cannot upgrade something it will display a console warning on how to proceed.
+Please use JSCodeShift v0.13 or newer.
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Buttons.js <path>
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.js <path>
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg

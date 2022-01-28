@@ -67,15 +67,38 @@ function findElements(
   tagName: string,
   withAttributes?: Attribute | Attribute[]
 ) {
-  const elements = root.find(j.JSXElement, {
-    openingElement: {
-      // finds all <tagName>
-      name: {
-        type: 'JSXIdentifier',
-        name: tagName
-      }
+  let elements
+  if (tagName.includes('.')) {
+    const tagNames = tagName.split('.')
+    if (tagNames.length > 2) {
+      throw new Error(`This script cannot handle tab names with 2 or more "."
+      characters. Tag name: ${tagName}`)
     }
-  })
+    elements = root.find(j.JSXElement, {
+      openingElement: {
+        // finds all <tagName.name>
+        name: {
+          type: 'JSXMemberExpression',
+          object: {
+            name: tagNames[0]
+          },
+          property: {
+            name: tagNames[1]
+          }
+        }
+      }
+    })
+  } else {
+    elements = root.find(j.JSXElement, {
+      openingElement: {
+        // finds all <tagName>
+        name: {
+          type: 'JSXIdentifier',
+          name: tagName
+        }
+      }
+    })
+  }
   elements.find(j.JSXSpreadAttribute).forEach((path) => {
     const line = filePath + '_' + path.value.loc?.start.line
     if (!warningsMap[line]) {
@@ -258,7 +281,7 @@ function renameElements(
 
 function renameElement(node: JSXElement, currentName: string, newName: string) {
   if (isJSXIdentifier(node.openingElement.name)) {
-    // name looks like "List"
+    // Old and new name does not have a "." character
     if (newName.indexOf('.') > -1) {
       throw new Error(
         'Cannot perform a rename that adds a `.` character ' + ' to the name'
@@ -275,7 +298,7 @@ function renameElement(node: JSXElement, currentName: string, newName: string) {
       }
     }
   } else if (isJSXMemberExpression(node.openingElement.name)) {
-    // name looks like "List.Item"
+    // Old and new name has a "." character
     const newNameArr = newName.split('.')
     if (newNameArr.length !== 2) {
       throw new Error(
