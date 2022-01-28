@@ -6,9 +6,13 @@ const a = (
   <p>
     <List></List>
     <List isUnstyled></List>
-    <InlineList>
+    <InlineList delimiter=",">
       <InlineList.Item>test</InlineList.Item>
       {...aVar}
     </InlineList>
+    // delimiter prop should trigger a warning
+    <List delimiter="|">
+      <List.Item delimiter="," />
+    </List>
   </p>
 )

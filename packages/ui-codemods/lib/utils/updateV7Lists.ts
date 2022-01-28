@@ -36,6 +36,8 @@ import {
  * - `<List variant="default"` -> `<List`
  * - `<List variant="unstyled"` -> `<List isUnstyled={true}`
  * - `<List variant="inline"` -> `<InlineList`
+ * - `<List delimiter=` -> display warning
+ * - `<List.Item delimiter=` -> display warning
  */
 export default function updateV7Lists(
   j: JSCodeshift,
@@ -46,44 +48,59 @@ export default function updateV7Lists(
     '@instructure/ui-lists',
     '@instructure/ui'
   ])
-  if (importName) {
-    const tags = findElements(filePath, j, root, importName, {
-      name: 'variant'
-    })
-
-    ///// `<List variant="default"` -> `<List`
-    findAttribute(j, tags, 'variant', 'default').remove()
-
-    ///// `<List variant="unstyled"` -> `<List isUnstyled`
-    findAttribute(j, tags, 'variant', 'unstyled')
-      .remove()
-      .insertAfter(j.jsxAttribute(j.jsxIdentifier('isUnstyled')))
-
-    ///// `<List variant="inline"` -> `<InlineList`
-    const inlineLists = findElements(filePath, j, root, 'List', {
-      name: 'variant',
-      value: 'inline'
-    })
-    if (inlineLists.length > 0) {
-      findAttribute(j, inlineLists, 'variant').remove()
-      renameElements(inlineLists, 'List', 'InlineList', filePath)
-      inlineLists.forEach((path) => {
-        if (path.value.children) {
-          // rename List.Item to InlineList.Item
-          renameElements(
-            path.value.children,
-            'List.Item',
-            'InlineList.Item',
-            filePath
-          )
-        }
-      })
-      addImportIfNeeded(j, root, 'InlineList', [
-        '@instructure/ui',
-        '@instructure/ui-lists'
-      ])
-    }
-    return tags.length > 0
+  if (!importName) {
+    return false
   }
-  return false
+  const tags = findElements(filePath, j, root, importName, {
+    name: 'variant'
+  })
+
+  ///// `<List variant="default"` -> `<List`
+  findAttribute(j, tags, 'variant', 'default').remove()
+
+  ///// `<List variant="unstyled"` -> `<List isUnstyled`
+  findAttribute(j, tags, 'variant', 'unstyled')
+    .remove()
+    .insertAfter(j.jsxAttribute(j.jsxIdentifier('isUnstyled')))
+
+  ///// `<List variant="inline"` -> `<InlineList`
+  const inlineLists = findElements(filePath, j, root, 'List', {
+    name: 'variant',
+    value: 'inline'
+  })
+  if (inlineLists.length > 0) {
+    findAttribute(j, inlineLists, 'variant').remove()
+    renameElements(inlineLists, 'List', 'InlineList', filePath)
+    inlineLists.forEach((path) => {
+      if (path.value.children) {
+        // rename List.Item to InlineList.Item
+        renameElements(
+          path.value.children,
+          'List.Item',
+          'InlineList.Item',
+          filePath
+        )
+      }
+    })
+    addImportIfNeeded(j, root, 'InlineList', [
+      '@instructure/ui',
+      '@instructure/ui-lists'
+    ])
+  }
+
+  ///// `<List delimiter=` -> display warning
+  ///// `<List.Item delimiter=` -> display warning
+  findElements(filePath, j, root, importName, { name: 'delimiter' }).forEach(
+    (path) => {
+      console.warn(`List's delimiter prop needs is only available for
+        'InlineList' at\n${filePath} line ${path.value.loc?.start.line}`)
+    }
+  )
+  findElements(filePath, j, root, 'List.Item', { name: 'delimiter' }).forEach(
+    (path) => {
+      console.warn(`List.Item's delimiter prop needs is only available for
+        'InlineList' at\n${filePath} line ${path.value.loc?.start.line}`)
+    }
+  )
+  return tags.length > 0
 }

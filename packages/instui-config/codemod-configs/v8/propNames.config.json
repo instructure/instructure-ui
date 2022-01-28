@@ -183,7 +183,8 @@
           { "old": true, "new": "inline-block" },
           { "old": false, "new": "block" }
         ]
-      }
+      },
+      { "old": "icon", "new": "renderAfterInput" }
     ]
   },
   "TimeSelect": {
