@@ -43,8 +43,8 @@ import { Returns } from '../Returns'
 import { Methods } from '../Methods'
 import { ComponentTheme } from '../ComponentTheme'
 import { Heading } from '../Heading'
-import { propTypes, allowedProps, DocDataType } from './props'
-import type { DocumentProps } from './props'
+import { propTypes, allowedProps } from './props'
+import type { DocumentProps, DocDataType } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Document extends Component<
