@@ -35,7 +35,7 @@ const defaultContextValue = generateInstanceMapCounter()
  * ---
  * category: components/utilities
  * ---
- * This is utility component for wrapping components with `SSRContext.Provider`
+ * This is utility component for wrapping components with `DeterministicIdContext.Provider`
  * See detailed documentation about how to use it: [InstUISettingsProvider](https://instructure.design/#InstUISettingsProvider)
  */
 
