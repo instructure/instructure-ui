@@ -62,4 +62,4 @@ That is it! You should be ready to go!
 
 Keeping track of instances is a way we achieve deterministic `id` generation for components. Since components are being rendered on 2 places (server - client), it is crucial to have the same `ids` attached to the same instances on both the client and server sides.
 
-To achieve deterministic `id` generation InstUI will keep track of every component instance internally, and will use this information to hash the instance name and the instance count to generate `ids` deterministically.
+To achieve deterministic `id` generation InstUI will keep track of every component instance internally, and will use this information to generate `ids` deterministically.

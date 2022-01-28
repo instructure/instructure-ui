@@ -35,6 +35,7 @@ import { generateId } from '@instructure/ui-utils'
 
 import type { DeterministicIdProviderValue } from './DeterministicIdProvider'
 import type { InstUIComponent } from '@instructure/shared-types'
+import { warn } from '@instructure/console'
 
 type WithDeterministicIdProps = {
   instanceMapCounter?: DeterministicIdProviderValue
@@ -52,11 +53,27 @@ const withDeterministicId = decorator((ComposedComponent) => {
   type Props = PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
   const WithDeterministicId = forwardRef(
     (props: Props, ref: React.ForwardedRef<any>) => {
+      const componentName =
+        (ComposedComponent as InstUIComponent).componentId ||
+        ComposedComponent.displayName ||
+        ComposedComponent.name
       const instanceMapCounter = useContext(DeterministicIdContext)
-      const deterministicId = generateId(
-        (ComposedComponent as InstUIComponent).componentId,
-        instanceMapCounter
-      )
+      const deterministicId = generateId(componentName, instanceMapCounter)
+
+      if (props.instanceMapCounter) {
+        warn(
+          false,
+          `Manually passing the "instanceMapCounter" property is not allowed on the ${componentName} component.\n`,
+          props.instanceMapCounter
+        )
+      }
+      if (props.deterministicId) {
+        warn(
+          false,
+          `Manually passing the "deterministicId" property is not allowed on the ${componentName} component.\n`,
+          props.deterministicId
+        )
+      }
 
       return (
         <ComposedComponent

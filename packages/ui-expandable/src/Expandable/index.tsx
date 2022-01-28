@@ -34,11 +34,11 @@ const toggleExpanded = ({ expanded }: { expanded: boolean }) => ({
 })
 
 /**
- ---
- category: components/utilities
- ---
- * @tsProps
- **/
+---
+category: components/utilities
+---
+ @tsProps
+**/
 @withDeterministicId()
 class Expandable extends Component<ExpandableProps, ExpandableState> {
   static propTypes = propTypes

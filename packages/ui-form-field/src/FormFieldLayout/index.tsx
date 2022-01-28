@@ -185,7 +185,6 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
     const { width, layout, children } = props
     return (
       <ElementType
-        //@ts-expect-error too complex
         {...omitProps(props, [
           ...FormFieldLayout.allowedProps,
           ...Grid.allowedProps
