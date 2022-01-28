@@ -161,10 +161,10 @@ const replaceValue = (
 /**
  * Find the deprecated prop for a component
  *
- * @param {object} config Deprecated property configuration
- * @param {string} comp Component name
- * @param {string} prop Property name
- * @return {object} Object if a match is found, otherwise null
+ * @param config Deprecated property configuration
+ * @param comp Component name
+ * @param prop Property name
+ * @return Object if a match is found, otherwise null
  */
 const findDeprecatedProp = (
   config: UpdatePropNamesOptions,
