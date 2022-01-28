@@ -23,46 +23,43 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import { Table } from '@instructure/ui-table'
 
 import { compileMarkdown } from '../compileMarkdown'
-
-class Params extends Component {
-  static propTypes = {
-    params: PropTypes.array.isRequired,
-    layout: PropTypes.string
-  }
+import type { ParamsProps } from './props'
+import { propTypes } from './props'
+class Params extends Component<ParamsProps> {
+  static propTypes = propTypes
 
   static defaultProps = {
     layout: 'small'
   }
 
   renderRows() {
-    return this.props.params.map((param) => {
+    return this.props.params?.map((param) => {
       return (
-        <Table.Row key={param.name}>
+        <Table.Row key={param?.name}>
           <Table.Cell>
-            <code>{param.name}</code>
+            <code>{param?.name}</code>
           </Table.Cell>
           <Table.Cell>
-            <code>{this.renderType(param.type)}</code>
+            <code>{this.renderType(param?.type)}</code>
           </Table.Cell>
           <Table.Cell>
-            <code>{param.defaultvalue}</code>
+            <code>{param?.defaultValue}</code>
           </Table.Cell>
-          <Table.Cell>{this.renderDescription(param.description)}</Table.Cell>
+          <Table.Cell>{this.renderDescription(param?.description!)}</Table.Cell>
         </Table.Row>
       )
     })
   }
 
-  renderType(type) {
-    return type ? type.names.join(', ') : null
+  renderType(type?: { names: string[] }) {
+    return type ? type.names : null
   }
 
-  renderDescription(description) {
+  renderDescription(description: string) {
     return <div>{description && compileMarkdown(description)}</div>
   }
 

@@ -71,7 +71,7 @@ type ParsedCodeData = {
     name: string
     type?: { names: string[] }
     optional?: boolean
-  }
+  }[]
   returns?: JSDocFunctionReturns[]
   // these are from https://github.com/reactjs/react-docgen/blob/main/src/Documentation.ts
   props?: Record<string, PropDescriptor>
