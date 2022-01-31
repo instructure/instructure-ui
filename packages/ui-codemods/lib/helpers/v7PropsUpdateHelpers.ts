@@ -58,7 +58,7 @@ const warningsMap: Record<string, boolean> = {}
  * Finds all the opening tag elements (JSXElement) given in tagName.
  * You can supply an optional withAttributes argument,
  * this will return only tags where the given prop with the given
- * values (or one in the array) exists (everything needs to exist).
+ * value (or at least one in the array) exists (every attribute needs to exist).
  */
 function findElements(
   filePath: string,
@@ -124,7 +124,7 @@ function findElements(
 
 function checkIfAttributeExist(
   attributes?: (JSXAttribute | JSXSpreadAttribute)[],
-  withAttributes?: Attribute | Attribute[] // if array has to match all
+  withAttributes?: Attribute | Attribute[] // if array has to match every name
 ) {
   if (
     !withAttributes ||
@@ -178,7 +178,7 @@ function checkIfAttributeExist(
 /**
  * Returns all attributes from the given collection with the given attribute
  * name. Optionally you can supply attribute value(s), this will return only
- * attributes where these exist.
+ * attributes where these exist (at least one in the array has to exist).
  */
 function findAttribute(
   j: JSCodeshift,
@@ -399,6 +399,7 @@ function addImportIfNeeded(
     const newPath = typeof pathToAdd === 'string' ? pathToAdd : pathToAdd[0]
     root
       .find(j.ImportDeclaration)
+      .at(-1)
       .insertAfter(
         j.importDeclaration(
           [j.importSpecifier(j.identifier(name))],

@@ -39,11 +39,12 @@ import updateV7FocusableView from './utils/updateV7FocusableView'
 import warnV7ComponentDeprecations from './utils/warnV7ComponentDeprecations'
 
 /**
- * Updates <Button> from the InstUI v7 syntax to the v8 syntax.
+ * Updates complex code from the InstUI v7 syntax to the v8 syntax.
  * This script contains the codemods referenced in
- * https://instructure.design/v7/#button-upgrade-guide
- * It can handle if the button and its attributes are defined in JSX; if the
- * Button is imported via an alias (`import {Button as BBB}`) is OK too.
+ * https://instructure.design/v7/#button-upgrade-guide and in
+ * https://instructure.design/v7/#v7-deprecated-props-and-components
+ * It can handle if a component and its attributes are defined in JSX; if its
+ * imported via an alias (`import {Button as BBB}`) is OK too.
  * It cannot handle if props are added via the spread operator or programmatically.
  * @param file Holds information about the currently processed file.
  * @param api This object exposes the JSCodeshift library and helper functions
