@@ -87,6 +87,7 @@ export default function updateV7ButtonsIconCircle(
           ' because it has multiple children. ' +
           'You will need to update this manually.'
       )
+      return false
     }
     let screenReaderChildText
     const child = children[0]
