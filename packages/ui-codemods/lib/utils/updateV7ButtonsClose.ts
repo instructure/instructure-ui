@@ -26,6 +26,7 @@ import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 import {
   findAttribute,
   findElements,
+  findImport,
   getVisibleChildren,
   isJSXExpressionContainer,
   isJSXText,
@@ -43,16 +44,22 @@ import {
 export default function updateV7ButtonsClose(
   j: JSCodeshift,
   root: Collection,
-  importedName: string,
   filePath: string
 ) {
+  const closeButtonImportName = findImport(j, root, 'CloseButton', [
+    '@instructure/ui-buttons',
+    '@instructure/ui'
+  ])
+  if (!closeButtonImportName) {
+    return false
+  }
   ///// replace <CloseButton buttonRef=.. with <CloseButton elementRef=..
-  findElements(filePath, j, root, importedName)
+  findElements(filePath, j, root, closeButtonImportName)
     .find(j.JSXIdentifier, { name: 'buttonRef' })
     .replaceWith('elementRef')
 
   ///// If it has children try to move them under screenReaderLabel
-  findElements(filePath, j, root, importedName).forEach((path) => {
+  findElements(filePath, j, root, closeButtonImportName).forEach((path) => {
     const children = getVisibleChildren(path.value.children)
     if (children.length == 1) {
       const firstChild = children[0]
@@ -91,4 +98,5 @@ export default function updateV7ButtonsClose(
     ;(node.value as Literal).value = 'primary-inverse'
     return nodePath.node
   })
+  return true
 }
