@@ -21,16 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { canUseDOM } from '@instructure/ui-dom-utils'
 import { Controlled as CodeMirror } from 'react-codemirror2'
-
-if (canUseDOM) {
-  require('codemirror/mode/jsx/jsx')
-  require('codemirror/mode/shell/shell')
-  require('codemirror/mode/css/css')
-  require('codemirror/mode/htmlmixed/htmlmixed')
-  require('codemirror/mode/markdown/markdown')
-  require('codemirror/mode/yaml/yaml')
-}
-
+import 'codemirror/mode/jsx/jsx'
+import 'codemirror/mode/shell/shell'
+import 'codemirror/mode/css/css'
+import 'codemirror/mode/htmlmixed/htmlmixed'
+import 'codemirror/mode/markdown/markdown'
+import 'codemirror/mode/yaml/yaml'
 export default CodeMirror
