@@ -158,7 +158,7 @@ export default function updateV7ButtonsIconCircle(
     '@instructure/ui-buttons'
   )
 
-  // rename every <Button> to <IconButton> (or whatever alias its imported under)
+  // rename every <Button> to <IconButton> (or whatever alias it's imported under)
   renameElements(buttonsWithNoText, 'Button', iconButtonImportName, filePath)
 
   // remove variant="icon", add withBorder={false} withBackground={false}

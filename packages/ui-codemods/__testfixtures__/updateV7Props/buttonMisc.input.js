@@ -5,6 +5,7 @@ let btn
 btn = <Button />
 btn = <Button buttonRef={() => {}} />
 btn = <Button fluidWidth={false} />
+btn = <Button fluidWidth={btn} />
 btn = <Button fluidWidth={true} />
 btn = <Button fluidWidth />
 btn = <Button fluidWidth textAlign="center" />

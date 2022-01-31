@@ -35,7 +35,9 @@ const tests = [
   'list',
   'pill',
   'popover',
-  'tabs'
+  'tabs',
+  'focusableView',
+  'v7ComponentDeprecations'
 ]
 
 // eslint-disable-next-line no-undef

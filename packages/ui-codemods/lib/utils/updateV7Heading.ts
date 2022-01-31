@@ -51,41 +51,33 @@ export default function updateV7Heading(
     '@instructure/ui-heading',
     '@instructure/ui'
   ])
-  if (importName) {
-    const tags = findElements(filePath, j, root, importName, {
-      name: 'ellipsis'
-    })
+  if (!importName) {
+    return false
+  }
+  const tags = findElements(filePath, j, root, importName, {
+    name: 'ellipsis'
+  })
 
-    tags.forEach((path) => {
-      if (path.value.openingElement.attributes) {
-        for (const attr of path.value.openingElement.attributes) {
-          if (isJSXAttribue(attr) && attr.name.name === 'ellipsis') {
-            if (!attr.value) {
-              // <Heading ellipsis>abc</Heading>
-              wrapInTruncateText(j, root, attr, path.value)
-            } else if (isJSXExpressionContainer(attr.value)) {
-              // <Heading ellipsis={expr}>abc</Heading>
-              if (isLiteral(attr.value.expression)) {
-                if (typeof attr.value.expression.value === 'boolean') {
-                  if (attr.value.expression.value === true) {
-                    // <Heading ellipsis={true}>abc</Heading>
-                    wrapInTruncateText(j, root, attr, path.value)
-                  } else {
-                    // <Heading ellipsis={false}>abc</Heading>
-                    // remove ellipsis attribute
-                    path.value.openingElement.attributes.splice(
-                      path.value.openingElement.attributes.indexOf(attr),
-                      1
-                    )
-                    return
-                  }
+  tags.forEach((path) => {
+    if (path.value.openingElement.attributes) {
+      for (const attr of path.value.openingElement.attributes) {
+        if (isJSXAttribue(attr) && attr.name.name === 'ellipsis') {
+          if (!attr.value) {
+            // <Heading ellipsis>abc</Heading>
+            wrapInTruncateText(j, root, attr, path.value)
+          } else if (isJSXExpressionContainer(attr.value)) {
+            // <Heading ellipsis={expr}>abc</Heading>
+            if (isLiteral(attr.value.expression)) {
+              if (typeof attr.value.expression.value === 'boolean') {
+                if (attr.value.expression.value === true) {
+                  // <Heading ellipsis={true}>abc</Heading>
+                  wrapInTruncateText(j, root, attr, path.value)
                 } else {
-                  console.warn(
-                    filePath +
-                      '\nline ' +
-                      path.value.loc?.start.line +
-                      ': Heading ellipsis ' +
-                      'parameter has non-boolean value, please refactor manually'
+                  // <Heading ellipsis={false}>abc</Heading>
+                  // remove ellipsis attribute
+                  path.value.openingElement.attributes.splice(
+                    path.value.openingElement.attributes.indexOf(attr),
+                    1
                   )
                   return
                 }
@@ -109,13 +101,22 @@ export default function updateV7Heading(
               )
               return
             }
+          } else {
+            console.warn(
+              filePath +
+                '\nline ' +
+                path.value.loc?.start.line +
+                ': Heading ellipsis ' +
+                'parameter has non-boolean value, please refactor manually'
+            )
+            return
           }
         }
       }
-    })
-    if (tags) {
-      return true
     }
+  })
+  if (tags) {
+    return true
   }
   return false
 }

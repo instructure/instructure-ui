@@ -22,7 +22,13 @@
  * SOFTWARE.
  */
 
-import { findAttribute, findElements } from '../helpers/v7PropsUpdateHelpers'
+import {
+  findAttribute,
+  findElements,
+  isJSXAttribue,
+  isJSXExpressionContainer,
+  isLiteral
+} from '../helpers/v7PropsUpdateHelpers'
 import { Collection, JSCodeshift } from 'jscodeshift'
 
 /**
@@ -38,8 +44,8 @@ export default function updateV7ButtonsMisc(
   importedName: string,
   filePath: string
 ) {
-  ///// Replace <Button fluidWidth .. with <Button display="block" textAlign="start"
-  // remove fluidWidth attribute if its value is 'false'
+  ///// <Button fluidWidth .. -> <Button display="block" textAlign="start"
+  // remove fluidWidth attribute if its value is 'false' (it's the default)
   findElements(filePath, j, root, importedName)
     .find(j.JSXAttribute, {
       name: {
@@ -55,8 +61,36 @@ export default function updateV7ButtonsMisc(
 
   const buttonsWithFluidWidth = findElements(filePath, j, root, importedName, {
     name: 'fluidWidth'
+  }).filter((path) => {
+    const attributes = path.value.openingElement.attributes!
+    for (const att of attributes) {
+      if (isJSXAttribue(att)) {
+        if (!att.value) {
+          // <Button fluidWidth />
+          return true
+        }
+        if (
+          isJSXExpressionContainer(att.value) &&
+          isLiteral(att.value.expression) &&
+          typeof att.value.expression.value === 'boolean'
+        ) {
+          // <Button fluidWidth={true} />
+          return att.value.expression.value
+        } else {
+          console.warn(
+            "Button's `fluidWidth` attribute has non-literal" +
+              ' value, please update manually at ' +
+              filePath +
+              ' line ' +
+              att.loc?.start.line
+          )
+          return false
+        }
+      }
+    }
+    return false
   })
-  // remove fluidWidth attribute todo what if its value was a variable??
+  // remove fluidWidth attribute
   findAttribute(j, buttonsWithFluidWidth, 'fluidWidth').remove()
   // remove display attribute
   findAttribute(j, buttonsWithFluidWidth, 'display')

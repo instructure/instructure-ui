@@ -35,6 +35,8 @@ import updateV7Lists from './utils/updateV7Lists'
 import updateV7Pill from './utils/updateV7Pill'
 import updateV7Popover from './utils/updateV7Popover'
 import updateV7Tabs from './utils/updateV7Tabs'
+import updateV7FocusableView from './utils/updateV7FocusableView'
+import warnV7ComponentDeprecations from './utils/warnV7ComponentDeprecations'
 
 /**
  * Updates <Button> from the InstUI v7 syntax to the v8 syntax.
@@ -66,27 +68,23 @@ function updateProps(j: JSCodeshift, root: Collection, filePath: string) {
     updateV7ButtonsIconCircle(j, root, buttonImportName, filePath)
     UpdateV7ButtonsLink(j, root, buttonImportName, filePath)
   }
-  const closeButtonImportName = findImport(j, root, 'CloseButton', [
-    '@instructure/ui-buttons',
-    '@instructure/ui'
-  ])
-  if (closeButtonImportName) {
-    updateV7ButtonsClose(j, root, closeButtonImportName, filePath)
-  }
+  const closeButtonUpdated = updateV7ButtonsClose(j, root, filePath)
   const headingUpdated = updateV7Heading(j, root, filePath)
   const listsUpdated = updateV7Lists(j, root, filePath)
   const pillUpdated = updateV7Pill(j, root, filePath)
   const popoverUpdated = updateV7Popover(j, root, filePath)
   const tabsUpdated = updateV7Tabs(j, root, filePath)
-  // TODO could be a better modification check...
+  const focusableViewUpdated = updateV7FocusableView(j, root, filePath)
+  warnV7ComponentDeprecations(j, root, filePath)
   if (
     buttonImportName ||
-    closeButtonImportName ||
+    closeButtonUpdated ||
     headingUpdated ||
     listsUpdated ||
     pillUpdated ||
     popoverUpdated ||
-    tabsUpdated
+    tabsUpdated ||
+    focusableViewUpdated
   ) {
     return formatSource(root.toSource(), filePath)
   }

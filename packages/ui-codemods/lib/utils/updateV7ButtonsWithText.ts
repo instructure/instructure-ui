@@ -43,7 +43,7 @@ export default function updateV7ButtonsWithText(
 ) {
   const buttons = findElements(filePath, j, root, importedName)
 
-  // remove variant={default}
+  // remove variant="default"
   findAttribute(j, buttons, 'variant', 'default').remove()
   // replace <Button variant="primary" with <Button color="primary"
   findAttribute(j, buttons, 'variant', 'primary').replaceWith((nodePath) => {
