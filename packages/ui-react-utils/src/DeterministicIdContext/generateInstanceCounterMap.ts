@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 import type { DeterministicIdProviderValue } from './DeterministicIdProvider'
-function generateInstanceMapCounter(): DeterministicIdProviderValue {
+function generateInstanceCounterMap(): DeterministicIdProviderValue {
   return new Map<string, number>()
 }
-export default generateInstanceMapCounter
-export { generateInstanceMapCounter }
+export default generateInstanceCounterMap
+export { generateInstanceCounterMap }

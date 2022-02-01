@@ -28,7 +28,7 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import {
   withDeterministicId,
   DeterministicIdContextProvider,
-  generateInstanceMapCounter
+  generateInstanceCounterMap
 } from '../DeterministicIdContext'
 import type { WithDeterministicIdProps } from '../DeterministicIdContext'
 
@@ -37,7 +37,7 @@ class TestComponent extends React.Component<
   React.PropsWithChildren<WithDeterministicIdProps>
 > {
   render() {
-    return <div id={this.props.deterministicId}>{this.props.children}</div>
+    return <div id={this.props.deterministicId!()}>{this.props.children}</div>
   }
 }
 
@@ -52,7 +52,7 @@ describe('DeterministicIdContext', () => {
     const Wrapper = ({ children }: any) => {
       return (
         <DeterministicIdContextProvider
-          instanceMapCounter={generateInstanceMapCounter()}
+          instanceCounterMap={generateInstanceCounterMap()}
         >
           <div id="wrapper">{children}</div>
         </DeterministicIdContextProvider>
@@ -69,11 +69,11 @@ describe('DeterministicIdContext', () => {
     })
   })
 
-  it('should work when instanceMapCounter is reset', async () => {
+  it('should work when instanceCounterMap is reset', async () => {
     for (let i = 0; i < 10; i++) {
       const el = await mount(
         <DeterministicIdContextProvider
-          instanceMapCounter={generateInstanceMapCounter()}
+          instanceCounterMap={generateInstanceCounterMap()}
         >
           <TestComponent></TestComponent>
         </DeterministicIdContextProvider>
@@ -83,11 +83,11 @@ describe('DeterministicIdContext', () => {
       expect(domNode.id).to.eq('TestComponent_0')
     }
   })
-  it('should work correctly when seeding the instanceMapCounter to the Context', async () => {
-    const seed = generateInstanceMapCounter()
+  it('should work correctly when seeding the instanceCounterMap to the Context', async () => {
+    const seed = generateInstanceCounterMap()
     seed.set('TestComponent', 20)
     const el = await mount(
-      <DeterministicIdContextProvider instanceMapCounter={seed}>
+      <DeterministicIdContextProvider instanceCounterMap={seed}>
         <TestComponent></TestComponent>
       </DeterministicIdContextProvider>
     )

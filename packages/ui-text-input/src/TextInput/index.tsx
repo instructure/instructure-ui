@@ -45,8 +45,6 @@ import type {
 } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 category: components
@@ -78,11 +76,8 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   constructor(props: TextInputProps) {
     super(props)
     this.state = { hasFocus: false }
-    this._defaultId = generateId('TextInput', props.instanceMapCounter!)
-    this._messagesId = generateId(
-      'TextInput-messages',
-      props.instanceMapCounter!
-    )
+    this._defaultId = props.deterministicId!()
+    this._messagesId = props.deterministicId!('TextInput-messages')
   }
 
   ref: Element | null = null

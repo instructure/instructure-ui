@@ -30,7 +30,6 @@ import {
   safeCloneElement,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { generateId } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -73,7 +72,7 @@ class Badge extends Component<BadgeProps> {
 
   constructor(props: BadgeProps) {
     super(props)
-    this._defaultId = generateId('Badge', props.instanceMapCounter!)
+    this._defaultId = this.props.deterministicId!()
   }
 
   _defaultId: string
@@ -104,13 +103,8 @@ class Badge extends Component<BadgeProps> {
   }
 
   renderOutput() {
-    const {
-      count,
-      countUntil,
-      formatOverflowText,
-      formatOutput,
-      type
-    } = this.props
+    const { count, countUntil, formatOverflowText, formatOutput, type } =
+      this.props
 
     // If the badge count is >= than the countUntil limit, format the badge text
     // via the formatOverflowText function prop

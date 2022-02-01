@@ -40,8 +40,6 @@ import type { RadioInputProps } from '../RadioInput/props'
 import type { RadioInputGroupProps, RadioInputGroupState } from './props'
 import { allowedProps, propTypes } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 type RadioInputChild = React.ComponentElement<RadioInputProps, RadioInput>
 
 /**
@@ -86,10 +84,7 @@ class RadioInputGroup extends Component<
       }
     }
 
-    this._messagesId = generateId(
-      'RadioInputGroup-messages',
-      props.instanceMapCounter!
-    )
+    this._messagesId = props.deterministicId!('RadioInputGroup-messages')
   }
 
   get hasMessages() {

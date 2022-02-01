@@ -34,7 +34,7 @@ import {
   getInteraction,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { isEdge, generateId } from '@instructure/ui-utils'
+import { isEdge } from '@instructure/ui-utils'
 
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
@@ -102,13 +102,8 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
 
   constructor(props: FileDropProps) {
     super(props)
-    // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'null'.
-    this.defaultId = props.deterministicId!
-    this.messagesId = generateId(
-      'FileDrop-messages',
-      //@ts-expect-error props.instanceMapCounter
-      props.instanceMapCounter
-    )
+    this.defaultId = props.deterministicId!()
+    this.messagesId = props.deterministicId!('FileDrop-messages')
   }
   componentDidMount() {
     ;(this.props as any).makeStyles(this.makeStyleProps())
@@ -136,7 +131,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
 
   enterCounter = 0
   fileInputEl = null
-  defaultId = null
+  defaultId: string | null = null
   messagesId = ''
 
   ref: Element | null = null
@@ -239,12 +234,8 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   }
 
   handleChange = (e: any) => {
-    const {
-      onDrop,
-      onDropAccepted,
-      onDropRejected,
-      shouldEnablePreview
-    } = this.props
+    const { onDrop, onDropAccepted, onDropRejected, shouldEnablePreview } =
+      this.props
     const fileList = this.getDataTransferItems(e, shouldEnablePreview)
     const [accepted, rejected] = this.parseFiles(fileList)
     e.preventDefault()

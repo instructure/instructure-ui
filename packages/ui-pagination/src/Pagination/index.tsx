@@ -115,7 +115,7 @@ class Pagination extends Component<PaginationProps> {
   constructor(props: PaginationProps) {
     super(props)
 
-    this._labelId = props.deterministicId!
+    this._labelId = props.deterministicId!()
   }
 
   get _root() {
@@ -373,12 +373,8 @@ class Pagination extends Component<PaginationProps> {
       return null
     }
 
-    const {
-      pageIndex,
-      label,
-      shouldEnableIcon,
-      handleButtonRef
-    } = this.getArrowVariant(direction, currentPageIndex, childPages.length)
+    const { pageIndex, label, shouldEnableIcon, handleButtonRef } =
+      this.getArrowVariant(direction, currentPageIndex, childPages.length)
 
     const page = childPages[pageIndex]
 

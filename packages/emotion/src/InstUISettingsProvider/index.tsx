@@ -33,7 +33,7 @@ import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
 type InstUIProviderProps = {
   theme?: ThemeOrOverride
   dir?: 'ltr' | 'rtl' // TODO allow "auto" too
-  instanceMapCounter?: DeterministicIdProviderValue
+  instanceCounterMap?: DeterministicIdProviderValue
 }
 
 /**
@@ -45,7 +45,7 @@ type InstUIProviderProps = {
  *   - The value given in a parent `TextDirectionContext`
  *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
  *   - `ltr`
- * @property {Map<string, number>} instanceMapCounter - a Map to keep track of instances
+ * @property {Map<string, number>} instanceCounterMap - a Map to keep track of instances
  */
 
 /**
@@ -65,8 +65,8 @@ type InstUIProviderProps = {
  *   - The value given in a parent `TextDirectionContext`
  *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
  *   - `ltr`
- * - instanceMapCounter - A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
- * which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](https://instructure.design/#server-side-rendering))
+ * - instanceCounterMap - A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+ * which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
  *
  * ```js
  *
@@ -96,6 +96,15 @@ type InstUIProviderProps = {
  *   <InstUISettingsProvider theme={instructure} dir="rtl">
  *     <div>Instructure themed part with RTL text</div>
  *   </InstUISettingsProvider>
+ *
+ *    //this is mostly needed for Server Side Rendering, to read more:
+ *    //read our [SSR](/#server-side-rendering) guide
+ *    const counter = generateInstanceCounterMap()
+ *    counter.set("Alert", 5)
+ *   <InstUISettingsProvider instanceCounterMap={counter}
+ *     //this Alert's rendered DOM Node will have [id="Alert_5"] on it
+ *     <Alert>Test!</Alert>
+ *   </InstUISettingsProvider>
  * </InstUISettingsProvider>
  * ```
  *
@@ -108,7 +117,7 @@ function InstUISettingsProvider({
   children,
   theme = {},
   dir,
-  instanceMapCounter
+  instanceCounterMap
 }: React.PropsWithChildren<InstUIProviderProps>) {
   const finalDir = dir || useContext(TextDirectionContext)
 
@@ -119,7 +128,7 @@ function InstUISettingsProvider({
   }
 
   return (
-    <DeterministicIdContextProvider instanceMapCounter={instanceMapCounter!}>
+    <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
       <ThemeProvider theme={getTheme(theme)}>
         <TextDirectionContext.Provider value={finalDir}>
           {children}
@@ -132,7 +141,7 @@ function InstUISettingsProvider({
 InstUISettingsProvider.defaultProps = {
   theme: {},
   dir: undefined,
-  instanceMapCounter: undefined
+  instanceCounterMap: undefined
 }
 export default InstUISettingsProvider
 export { InstUISettingsProvider }

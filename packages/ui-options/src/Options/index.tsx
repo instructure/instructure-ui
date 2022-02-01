@@ -53,7 +53,6 @@ type ItemChild = React.ComponentElement<OptionsItemProps, Item>
 type SeparatorChild = React.ComponentElement<OptionsSeparatorProps, Separator>
 type OptionsChild = React.ComponentElement<OptionsProps, Options>
 type OptionsChildren = (ItemChild | SeparatorChild | OptionsChild)[]
-import { generateId } from '@instructure/ui-utils'
 
 /**
 ---
@@ -94,7 +93,7 @@ class Options extends Component<OptionsProps> {
   componentDidUpdate() {
     this.props.makeStyles?.()
   }
-  _labelId = generateId('Options-label', this.props.instanceMapCounter!)
+  _labelId = this.props.deterministicId!('Options-label')
 
   get childAs() {
     const { as } = this.props

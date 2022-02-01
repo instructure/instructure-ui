@@ -94,7 +94,7 @@ class NumberInput extends Component<NumberInputProps, NumberInputState> {
       return this.props.id
     }
     if (!this._id) {
-      this._id = this.props.deterministicId!
+      this._id = this.props.deterministicId!()
     }
     return this._id
   }

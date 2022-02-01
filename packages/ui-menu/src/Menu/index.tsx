@@ -34,7 +34,6 @@ import {
 import { logError as error } from '@instructure/console'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
-import { generateId } from '@instructure/ui-utils'
 
 import { MenuContext } from '../MenuContext'
 import { MenuItem } from './MenuItem'
@@ -95,12 +94,10 @@ class Menu extends Component<MenuProps> {
   _rootNode = null
   _menuItems: MenuItem[] = []
   _popover: Popover | null = null
-  _trigger:
-    | MenuItem
-    | (React.ReactInstance & { focus?: () => void })
-    | null = null
+  _trigger: MenuItem | (React.ReactInstance & { focus?: () => void }) | null =
+    null
   _menu: HTMLUListElement | null = null
-  _labelId = generateId('Menu__label', this.props.instanceMapCounter!)
+  _labelId = this.props.deterministicId!('Menu__label')
 
   _activeSubMenu?: Menu | null
   _id: string
@@ -118,7 +115,7 @@ class Menu extends Component<MenuProps> {
   constructor(props: MenuProps) {
     super(props)
 
-    this._id = this.props.id || props.deterministicId!
+    this._id = this.props.id || props.deterministicId!()
   }
   componentDidMount() {
     this.props.makeStyles?.()

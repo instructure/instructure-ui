@@ -36,8 +36,6 @@ import generateComponentTheme from './theme'
 import { allowedProps, propTypes } from './props'
 import type { InlineSVGProps } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 category: components/utilities
@@ -82,8 +80,8 @@ class InlineSVG extends Component<InlineSVGProps> {
   constructor(props: InlineSVGProps) {
     super(props)
 
-    this.titleId = generateId('InlineSVG-title', props.instanceMapCounter!)
-    this.descId = generateId('InlineSVG-desc', props.instanceMapCounter!)
+    this.titleId = props.deterministicId!('InlineSVG-title')
+    this.descId = props.deterministicId!('InlineSVG-desc')
   }
 
   componentDidMount() {
@@ -193,7 +191,8 @@ class InlineSVG extends Component<InlineSVGProps> {
 function parseAttributes(src: InlineSVGProps['src']) {
   const attributes: Record<string, string> = {}
   const SVGAttributesRegExp = /<svg\s+([^>]*)\s*>/
-  const namesAndValuesRegExp = /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
+  const namesAndValuesRegExp =
+    /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
 
   if (typeof src === 'string') {
     const attributesMatches = SVGAttributesRegExp.exec(src)

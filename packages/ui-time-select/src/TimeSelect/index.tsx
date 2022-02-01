@@ -45,8 +45,6 @@ import type {
 
 import { allowedProps, propTypes } from './props'
 
-import { generateId } from '@instructure/ui-utils'
-
 type GetOption = <F extends keyof TimeSelectOptions>(
   field: F,
   value?: TimeSelectOptions[F],
@@ -84,10 +82,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   static contextType = ApplyLocaleContext
 
   ref: Select | null = null
-  private readonly _emptyOptionId = generateId(
-    'Select-EmptyOption',
-    this.props.instanceMapCounter!
-  )
+  private readonly _emptyOptionId =
+    this.props.deterministicId!('Select-EmptyOption')
 
   constructor(props: TimeSelectProps) {
     super(props)
@@ -411,11 +407,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   renderOptions() {
-    const {
-      filteredOptions,
-      highlightedOptionId,
-      selectedOptionId
-    } = this.state
+    const { filteredOptions, highlightedOptionId, selectedOptionId } =
+      this.state
 
     if (filteredOptions.length < 1) {
       return this.renderEmptyOption()

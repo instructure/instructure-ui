@@ -126,7 +126,7 @@ class Select extends Component<SelectProps> {
     hasInputRef: false
   }
   ref: HTMLInputElement | null = null
-  private _defaultId = this.props.deterministicId!
+  private _defaultId = this.props.deterministicId!()
   private _inputContainer: HTMLSpanElement | null = null
   private _listView: Element | null = null
   // temporarily stores actionable options

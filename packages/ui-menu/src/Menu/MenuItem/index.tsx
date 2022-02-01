@@ -31,7 +31,7 @@ import {
   getElementType,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { createChainedFunction, generateId } from '@instructure/ui-utils'
+import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -75,7 +75,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
       }
     }
 
-    this.labelId = generateId('MenuItem__label', props.instanceMapCounter!)
+    this.labelId = props.deterministicId!('MenuItem__label')
   }
 
   get _node() {

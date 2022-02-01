@@ -33,21 +33,19 @@ import { DeterministicIdContext } from './DeterministicIdContext'
 import { decorator } from '@instructure/ui-decorator'
 import { generateId } from '@instructure/ui-utils'
 
-import type { DeterministicIdProviderValue } from './DeterministicIdProvider'
 import type { InstUIComponent } from '@instructure/shared-types'
 import { warn } from '@instructure/console'
 
 type WithDeterministicIdProps = {
-  instanceMapCounter?: DeterministicIdProviderValue
-  deterministicId?: string
+  deterministicId?: (instanceName?: string) => string
 }
 /**
  * This decorator is used to enable the decorated class to use the `DeterministicIdContext` which is needed
  * for deterministic id generation.
  *
- * The context is there for the users to pass an `instanceMapCounter` Map which is then used
- * in the child components to deterministically create ids for them based on the `instanceMapCounter`.
- * Read more about it here: [SSR guide](https://instructure.design/#server-side-rendering)
+ * The context is there for the users to pass an `instanceCounterMap` Map which is then used
+ * in the child components to deterministically create ids for them based on the `instanceCounterMap`.
+ * Read more about it here: [SSR guide](/#server-side-rendering)
  */
 const withDeterministicId = decorator((ComposedComponent) => {
   type Props = PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
@@ -57,16 +55,10 @@ const withDeterministicId = decorator((ComposedComponent) => {
         (ComposedComponent as InstUIComponent).componentId ||
         ComposedComponent.displayName ||
         ComposedComponent.name
-      const instanceMapCounter = useContext(DeterministicIdContext)
-      const deterministicId = generateId(componentName, instanceMapCounter)
+      const instanceCounterMap = useContext(DeterministicIdContext)
+      const deterministicId = (instanceName = componentName) =>
+        generateId(instanceName, instanceCounterMap)
 
-      if (props.instanceMapCounter) {
-        warn(
-          false,
-          `Manually passing the "instanceMapCounter" property is not allowed on the ${componentName} component.\n`,
-          props.instanceMapCounter
-        )
-      }
       if (props.deterministicId) {
         warn(
           false,
@@ -78,7 +70,6 @@ const withDeterministicId = decorator((ComposedComponent) => {
       return (
         <ComposedComponent
           ref={ref}
-          instanceMapCounter={instanceMapCounter}
           deterministicId={deterministicId}
           {...props}
         />

@@ -88,7 +88,7 @@ class TextArea extends Component<TextAreaProps> {
   constructor(props: TextAreaProps) {
     super(props)
 
-    this._defaultId = props.deterministicId!
+    this._defaultId = props.deterministicId!()
   }
 
   componentDidMount() {

@@ -74,7 +74,7 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
       }
     }
 
-    this._messagesId = props.deterministicId!
+    this._messagesId = props.deterministicId!()
   }
   private readonly _messagesId: string
   ref: Element | null = null
