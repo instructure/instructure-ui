@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -39,7 +40,7 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { MenuItemProps } from '../MenuItem/props'
-import React from 'react'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type MenuGroupOwnProps = {
   label: React.ReactNode
@@ -87,7 +88,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type MenuGroupProps = MenuGroupOwnProps &
   WithStyleProps<MenuGroupTheme, MenuGroupStyle> &
-  OtherHTMLAttributes<MenuGroupOwnProps>
+  OtherHTMLAttributes<MenuGroupOwnProps> &
+  WithDeterministicIdProps
 
 type MenuGroupStyle = ComponentStyle<'menuItemGroup' | 'label' | 'items'>
 

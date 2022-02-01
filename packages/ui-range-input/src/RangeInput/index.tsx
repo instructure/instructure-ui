@@ -95,7 +95,7 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
       }
     }
 
-    this.defaultId = props.deterministicId!
+    this.defaultId = props.deterministicId!()
   }
 
   /* workaround for https://github.com/facebook/react/issues/554 */

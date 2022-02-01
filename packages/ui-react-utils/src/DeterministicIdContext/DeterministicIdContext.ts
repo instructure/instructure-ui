@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { generateInstanceMapCounter } from './generateInstanceMapCounter'
+import { generateInstanceCounterMap } from './generateInstanceCounterMap'
 
-const DeterministicIdContext = React.createContext(generateInstanceMapCounter())
+const DeterministicIdContext = React.createContext(generateInstanceCounterMap())
 
 export { DeterministicIdContext }

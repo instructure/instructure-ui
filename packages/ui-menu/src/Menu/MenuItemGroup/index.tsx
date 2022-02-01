@@ -52,8 +52,6 @@ type MenuSeparatorChild = React.ComponentElement<
   MenuItemSeparator
 >
 
-import { generateId } from '@instructure/ui-utils'
-
 /**
 ---
 parent: Menu
@@ -86,8 +84,7 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
       }
     }
 
-    //@ts-expect-error props.instanceMapCounter
-    this._labelId = generateId('MenuItemGroup', props.instanceMapCounter)
+    this._labelId = props.deterministicId!('MenuItemGroup')
   }
 
   private _labelId: string
@@ -159,10 +156,9 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
     const { children, allowMultiple } = props
     const selected: MenuGroupState['selected'] = []
 
-    const items = (Children.toArray(children) as (
-      | MenuItemChild
-      | MenuSeparatorChild
-    )[]).filter((child) => {
+    const items = (
+      Children.toArray(children) as (MenuItemChild | MenuSeparatorChild)[]
+    ).filter((child) => {
       return matchComponentTypes<MenuItemChild>(child, [MenuItem])
     }) as MenuItemChild[]
 
@@ -202,13 +198,8 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   }
 
   renderChildren() {
-    const {
-      disabled,
-      controls,
-      allowMultiple,
-      isTabbable,
-      onMouseOver
-    } = this.props
+    const { disabled, controls, allowMultiple, isTabbable, onMouseOver } =
+      this.props
     const children = this.props.children as (
       | MenuItemChild
       | MenuSeparatorChild

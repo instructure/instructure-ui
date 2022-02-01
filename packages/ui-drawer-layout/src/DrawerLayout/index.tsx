@@ -95,7 +95,7 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
       contentWidth: 0
     }
 
-    this._id = props.deterministicId!
+    this._id = props.deterministicId!()
   }
 
   private readonly _id: string
@@ -117,9 +117,9 @@ class DrawerLayout extends Component<DrawerLayoutProps, DrawerLayoutState> {
   }
 
   get trayProps() {
-    const tray = (Children.toArray(
-      this.props.children
-    ) as DrawerChildren).filter((child) =>
+    const tray = (
+      Children.toArray(this.props.children) as DrawerChildren
+    ).filter((child) =>
       matchComponentTypes<TrayChild>(child, [DrawerTray])
     )[0] as TrayChild
     return tray.props

@@ -26,7 +26,7 @@ yarn add @instructure/emotion @instructure/ui-react-utils
 - in your Next.js application create - if it does not already exists - a file named `_app.js` inside the `pages` directory. This is a special file in Next.js because it allows you to override/control component initialization. Read more about it in the [Next.js docs](https://nextjs.org/docs/advanced-features/custom-app).
 
 - then configure the `_app.js` so your component tree is wrapped with an `InstUISettingsProvider`
-- the important step is to call `generateInstanceMapCounter` on every request, so the server side instance tracking and browser side instance tracking stays in sync with each other:
+- the important step is to call `generateInstanceCounterMap` on every request, so the server side instance tracking and browser side instance tracking stays in sync with each other:
 
 ```js
 ---
@@ -37,7 +37,7 @@ example: false
 import React from 'react';
 import Head from 'next/head';
 import { InstUISettingsProvider } from "@instructure/emotion"
-import { generateInstanceMapCounter } from '@instructure/ui-react-utils'
+import { generateInstanceCounterMap } from '@instructure/ui-react-utils'
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -48,7 +48,7 @@ export default function MyApp(props) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
                                                {/* This is the important step */}
-      <InstUISettingsProvider instanceMapCounter={generateInstanceMapCounter()}>
+      <InstUISettingsProvider instanceCounterMap={generateInstanceCounterMap()}>
         <Component {...pageProps} />
       </InstUISettingsProvider>
     </>

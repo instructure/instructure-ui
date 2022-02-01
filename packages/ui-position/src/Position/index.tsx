@@ -96,7 +96,7 @@ class Position extends Component<PositionProps, PositionState> {
       leading: false,
       trailing: true
     })
-    this._id = this.props.id || props.deterministicId!
+    this._id = this.props.id || props.deterministicId!()
   }
 
   ref: Element | null = null

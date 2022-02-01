@@ -69,7 +69,7 @@ class CodeEditor extends Component<CodeEditorProps> {
 
   constructor(props: CodeEditorProps) {
     super(props)
-    this._id = props.deterministicId!
+    this._id = props.deterministicId!()
   }
 
   handleRef = (el: Element | null) => {
@@ -86,7 +86,7 @@ class CodeEditor extends Component<CodeEditorProps> {
 
   focus() {
     if (this.codeMirror) {
-      ;((this.codeMirror as unknown) as HTMLElement).focus()
+      ;(this.codeMirror as unknown as HTMLElement).focus()
     }
   }
 
@@ -115,15 +115,8 @@ class CodeEditor extends Component<CodeEditorProps> {
   }
 
   render() {
-    const {
-      value,
-      label,
-      attachment,
-      readOnly,
-      onChange,
-      styles,
-      ...rest
-    } = this.props
+    const { value, label, attachment, readOnly, onChange, styles, ...rest } =
+      this.props
     return (
       <div css={styles?.codeEditor} ref={this.handleRef}>
         <Global styles={styles?.globalStyles} />

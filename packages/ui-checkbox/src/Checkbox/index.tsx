@@ -92,8 +92,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
       this.state.checked = !!props.defaultChecked
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Chec... Remove this comment to see the full error message
-    this._defaultId = props.deterministicId
+    this._defaultId = props.deterministicId!()
   }
   private readonly _defaultId: string
   private _input: HTMLInputElement | null = null

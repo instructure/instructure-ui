@@ -93,7 +93,7 @@ class Pages extends Component<PagesProps> {
         : props.activePageIndex!
     ]
 
-    this._contentId = props.deterministicId!
+    this._contentId = props.deterministicId!()
   }
 
   componentDidMount() {

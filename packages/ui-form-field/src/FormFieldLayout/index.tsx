@@ -69,7 +69,7 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   constructor(props: FormFieldLayoutProps) {
     super(props)
 
-    this._messagesId = props.messagesId || props.deterministicId!
+    this._messagesId = props.messagesId || props.deterministicId!()
 
     error(
       typeof props.width !== 'undefined' ||

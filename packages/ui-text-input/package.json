@@ -40,8 +40,6 @@
     "@instructure/ui-react-utils": "8.17.0",
     "@instructure/ui-tag": "8.17.0",
     "@instructure/ui-testable": "8.17.0",
-    "@instructure/ui-utils": "8.17.0",
-    "@instructure/uid": "8.17.0",
     "prop-types": "^15"
   },
   "peerDependencies": {

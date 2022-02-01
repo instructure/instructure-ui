@@ -75,7 +75,7 @@ class RadioInput extends Component<RadioInputProps, RadioInputState> {
       }
     }
 
-    this._defaultId = props.deterministicId!
+    this._defaultId = props.deterministicId!()
   }
 
   componentDidMount() {

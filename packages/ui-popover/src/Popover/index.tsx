@@ -109,7 +109,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
           : undefined
     }
 
-    this._id = this.props.id || props.deterministicId!
+    this._id = this.props.id || props.deterministicId!()
     this._raf = []
 
     this._handleMouseOver = handleMouseOverOut.bind(
@@ -244,8 +244,9 @@ class Popover extends Component<PopoverProps, PopoverState> {
 
       // arrowSize and arrowBorderWidth are component theme variables
       // declared in ContextView's styles.js
-      const { arrowSize = 0, arrowBorderWidth = 0 } = (this
-        ._view as ContextView).props.styles!
+      const { arrowSize = 0, arrowBorderWidth = 0 } = (
+        this._view as ContextView
+      ).props.styles!
 
       const offsetAmount = (px(arrowSize) + px(arrowBorderWidth)) * 2
 

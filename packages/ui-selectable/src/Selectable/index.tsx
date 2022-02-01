@@ -50,7 +50,7 @@ class Selectable extends Component<SelectableProps> {
     isShowingOptions: false
   }
 
-  _id = this.props.id || this.props.deterministicId!
+  _id = this.props.id || this.props.deterministicId!()
   _listId = `${this._id}-list`
   _descriptionId = `${this._id}-description`
   private _trigger: Element | null = null
@@ -65,11 +65,8 @@ class Selectable extends Component<SelectableProps> {
   }
 
   handleOpenClose = (event: React.KeyboardEvent | React.MouseEvent) => {
-    const {
-      isShowingOptions,
-      onRequestShowOptions,
-      onRequestHideOptions
-    } = this.props
+    const { isShowingOptions, onRequestShowOptions, onRequestHideOptions } =
+      this.props
 
     event.preventDefault()
 

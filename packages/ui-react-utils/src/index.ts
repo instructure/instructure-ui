@@ -38,8 +38,15 @@ export { passthroughProps } from './passthroughProps'
 export { pickProps } from './pickProps'
 export { safeCloneElement } from './safeCloneElement'
 export { windowMessageListener } from './windowMessageListener'
-export { DeterministicIdContext, generateInstanceMapCounter, DeterministicIdContextProvider, withDeterministicId } from './DeterministicIdContext'
+export {
+  DeterministicIdContext,
+  generateInstanceCounterMap,
+  DeterministicIdContextProvider,
+  withDeterministicId
+} from './DeterministicIdContext'
 export type { GetInteractionOptions } from './getInteraction'
 export type { InteractionType } from './getInteraction'
-export type { DeterministicIdProviderValue, WithDeterministicIdProps } from './DeterministicIdContext'
-
+export type {
+  DeterministicIdProviderValue,
+  WithDeterministicIdProps
+} from './DeterministicIdContext'

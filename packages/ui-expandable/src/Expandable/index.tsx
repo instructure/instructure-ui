@@ -58,7 +58,7 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
         ? (props.expanded as boolean)
         : props.defaultExpanded
     }
-    this._contentId = props.deterministicId!
+    this._contentId = props.deterministicId!()
   }
 
   get expanded() {

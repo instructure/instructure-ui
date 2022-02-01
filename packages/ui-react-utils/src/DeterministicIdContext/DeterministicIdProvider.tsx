@@ -22,33 +22,37 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { generateInstanceMapCounter } from './generateInstanceMapCounter'
+import { generateInstanceCounterMap } from './generateInstanceCounterMap'
 import { DeterministicIdContext } from './DeterministicIdContext'
 type DeterministicIdProviderValue = Map<string, number>
 type DeterministicIdProviderProps = React.PropsWithChildren<{
-  instanceMapCounter: DeterministicIdProviderValue
+  instanceCounterMap?: DeterministicIdProviderValue
 }>
 
-const defaultContextValue = generateInstanceMapCounter()
+const defaultContextValue = generateInstanceCounterMap()
 
 /**
  * ---
  * category: components/utilities
  * ---
  * This is utility component for wrapping components with `DeterministicIdContext.Provider`
- * See detailed documentation about how to use it: [InstUISettingsProvider](https://instructure.design/#InstUISettingsProvider)
+ * See detailed documentation about how to use it: [InstUISettingsProvider](/#InstUISettingsProvider)
  */
 
 const DeterministicIdContextProvider = ({
   children,
-  instanceMapCounter = defaultContextValue
+  instanceCounterMap
 }: DeterministicIdProviderProps) => {
   return (
-    <DeterministicIdContext.Provider value={instanceMapCounter}>
+    <DeterministicIdContext.Provider value={instanceCounterMap!}>
       {children}
     </DeterministicIdContext.Provider>
   )
 }
+DeterministicIdContextProvider.defaultProps = {
+  instanceCounterMap: defaultContextValue
+}
+
 export { DeterministicIdContextProvider }
 
 export type { DeterministicIdProviderValue }

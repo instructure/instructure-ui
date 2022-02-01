@@ -79,7 +79,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
   constructor(props: TooltipProps) {
     super(props)
 
-    this._id = props.deterministicId!
+    this._id = props.deterministicId!()
 
     this.state = { hasFocus: false }
   }

@@ -75,7 +75,7 @@ class Spinner extends Component<SpinnerProps> {
   constructor(props: SpinnerProps) {
     super(props)
 
-    this.titleId = props.deterministicId
+    this.titleId = props.deterministicId!()
   }
 
   componentDidMount() {

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-export { generateInstanceMapCounter } from './generateInstanceMapCounter'
-export { DeterministicIdContextProvider, } from './DeterministicIdProvider'
+export { generateInstanceCounterMap } from './generateInstanceCounterMap'
+export { DeterministicIdContextProvider } from './DeterministicIdProvider'
 export { DeterministicIdContext } from './DeterministicIdContext'
 export { withDeterministicId } from './withDeterministicId'
 export type { DeterministicIdProviderValue } from './DeterministicIdProvider'
