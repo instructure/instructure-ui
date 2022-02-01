@@ -28,7 +28,8 @@ The tables below show what will be removed and what are they replaced with. We a
 
 ### Deprecated Components
 
-These components will be removed in the v8.0 release, and this table shows which components they can be substituted with. There are no [codemods](#ui-codemods) available for replacing components.
+These components will be removed in the v8.0 release, and this table shows which components they can be substituted with.
+Running the `updateV7Props` codemod in the v8 or newer git branch will either perform the update automatically or output a warning where you need to update something manually.
 
 For more information, click the name of the component to see its full documentation.
 
@@ -36,7 +37,7 @@ For more information, click the name of the component to see its full documentat
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
 | [DeprecatedButton](#DeprecatedButton)           | Use `Button` from `ui-buttons` package instead. See the [upgrade guide](https://instructure.design/#button-upgrade-guide) for detailed instructions on updating | No    |
 | [Media](#Media)                                 | Use `Byline` from the `ui-byline` package instead.                                                                                                              | No    |
-| [FocusableView](#FocusableView)                 | Use `View` instead.                                                                                                                                             | No    |
+| [FocusableView](#FocusableView)                 | Use `View` instead.                                                                                                                                             | Yes   |
 | [MetricsList](#MetricsList)                     | Use `MetricGroup` instead.                                                                                                                                      | No    |
 | [MetricsList.Item](#MetricsList)                | Use `Metric` instead.                                                                                                                                           | No    |
 | [Popover.Content](#Popover) (PopoverContent)    | Use `children` of `Popover` instead.                                                                                                                            | Yes   |
@@ -130,7 +131,7 @@ For more information, click the name of the component to see its full documentat
 
 The following table shows component properties that have changes in the set of values they accept.
 
-The listed `delimiter` values were deleted from `List` and `List.Item`, so they have to be changed manually, but the rest of the changes are covered with [codemods](#ui-codemods).
+The listed `delimiter` values were deleted from `List` and `List.Item`, so they have to be changed manually (the `updateV7Props` codemod will output a warning where you need to do so), but the rest of the changes are covered with [codemods](#ui-codemods).
 
 For more information, click the name of the component to see its full documentation.
 
