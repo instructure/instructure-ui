@@ -23,7 +23,7 @@ yarn add @instructure/emotion @instructure/ui-react-utils
 > The `@instructure/ui-code-editor` currently relies on browser specific APIs and requires that your choice of bundler/transpiler to touch the source code of this component, so effectively it is not in a usable state for out of box usage with Next.js.
 > You should install only the packages you need!
 
-- in your Next.js application create - if it does not already exists - a file named `_app.js` inside the `pages` directory. This is a special file in Next.js because it allows you to override/control component initialization. Read more about it in the [Next.js docs](https://nextjs.org/docs/advanced-features/custom-app).
+- in your Next.js application create - if it does not already exist - a file named `_app.js` inside the `pages` directory. This is a special file in Next.js because it allows you to override/control component initialization. Read more about it in the [Next.js docs](https://nextjs.org/docs/advanced-features/custom-app).
 
 - then configure the `_app.js` so your component tree is wrapped with an `InstUISettingsProvider`
 - the important step is to call `generateInstanceCounterMap` on every request, so the server side instance tracking and browser side instance tracking stays in sync with each other:

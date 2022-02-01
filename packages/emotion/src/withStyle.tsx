@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { ComponentClass, forwardRef, useState } from 'react'
+import React, { forwardRef, useState } from 'react'
 import type {
   ForwardRefExoticComponent,
   PropsWithoutRef,
@@ -38,7 +38,11 @@ import { decorator } from '@instructure/ui-decorator'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
 
-import type { BaseTheme, ComponentTheme } from '@instructure/shared-types'
+import type {
+  BaseTheme,
+  ComponentTheme,
+  InstUIComponent
+} from '@instructure/shared-types'
 import type {
   ComponentStyle,
   ComponentOverride,
@@ -49,9 +53,8 @@ import type {
 
 type ComponentName = keyof ComponentOverride
 
-interface WithStyleComponent extends ComponentClass<any, any> {
-  componentId?: ComponentName
-  allowedProps?: string[]
+interface WithStyleComponent extends InstUIComponent {
+  componentId: ComponentName
 }
 
 type WithStylePrivateProps<
@@ -149,6 +152,9 @@ const defaultValues = {
  * @returns {ReactElement} The decorated WithStyle Component
  */
 const withStyle = decorator(
+  //@ts-expect-error we know ComposedComponent is an InstUIComponent, but there is must be a better
+  //way of doing this
+
   (
     ComposedComponent: WithStyleComponent,
     generateStyle: GenerateStyle,
