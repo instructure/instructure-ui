@@ -88,8 +88,9 @@ class SingleSelectExample extends React.Component {
     } = this.state
 
     return (
-      <div>
+      <div style={{ height: '500px' }}>
         <Select
+          mountNode={() => document.getElementById('testContainer')}
           renderLabel="Single Select"
           assistiveText="Use arrow keys to navigate options."
           inputValue={inputValue}
@@ -113,6 +114,10 @@ class SingleSelectExample extends React.Component {
             )
           })}
         </Select>
+        <div
+          id="testContainer"
+          style={{ position: 'relative', zIndex: '99999' }}
+        ></div>
         <Alert
           liveRegion={() => document.getElementById('flash-messages')}
           liveRegionPoliteness="assertive"
