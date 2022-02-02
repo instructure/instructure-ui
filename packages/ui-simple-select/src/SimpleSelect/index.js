@@ -108,14 +108,19 @@ class SimpleSelect extends Component {
      */
     width: PropTypes.string,
     /**
+     * The number of options that should be visible before having to scroll. Works best when the options are the same height.
+     */
+    visibleOptionsCount: PropTypes.number,
+    /**
+     * The max height the options list can be before having to scroll. If
+     * set, it will __override__ the `visibleOptionsCount` prop.
+     */
+    optionsMaxHeight: PropTypes.string,
+    /**
      * The max width the options list can be before option text wraps. If not
      * set, the list will only display as wide as the text input.
      */
     optionsMaxWidth: PropTypes.string,
-    /**
-     * The number of options that should be visible before having to scroll.
-     */
-    visibleOptionsCount: PropTypes.number,
     /**
      * Displays messages and validation for the input. It should be an object
      * with the following shape:
@@ -201,6 +206,7 @@ class SimpleSelect extends Component {
     isInline: false,
     width: undefined,
     optionsMaxWidth: undefined,
+    optionsMaxHeight: undefined,
     visibleOptionsCount: 8,
     messages: undefined,
     placement: 'bottom stretch',
@@ -477,6 +483,7 @@ class SimpleSelect extends Component {
       isInline,
       width,
       optionsMaxWidth,
+      optionsMaxHeight,
       visibleOptionsCount,
       messages,
       placement,
@@ -509,6 +516,7 @@ class SimpleSelect extends Component {
         isInline={isInline}
         width={width}
         optionsMaxWidth={optionsMaxWidth}
+        optionsMaxHeight={optionsMaxHeight}
         visibleOptionsCount={visibleOptionsCount}
         messages={messages}
         placement={placement}
