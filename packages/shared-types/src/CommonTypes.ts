@@ -41,8 +41,9 @@ export type UIElement =
 export type LiveRegion = (() => Element) | Element[] | Element
 
 interface InstUIBaseComponent {
-  componentId: string
-  allowedProps: string[]
+  componentId?: string
+  allowedProps?: string[]
 }
-export interface InstUIComponent extends React.ComponentClass<any, any>, InstUIBaseComponent { }
-
+export interface InstUIComponent
+  extends React.ComponentClass<any, any>,
+    InstUIBaseComponent {}
