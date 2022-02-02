@@ -27,6 +27,7 @@ import ReactDOM from 'react-dom'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
+import { canUseDOM } from '@instructure/ui-dom-utils'
 
 import { propTypes, allowedProps } from './props'
 import type { PortalNode, PortalProps, PortalState } from './props'
@@ -55,6 +56,10 @@ class Portal extends Component<PortalProps, PortalState> {
   constructor(props: PortalProps) {
     super(props)
 
+    if (!canUseDOM) {
+      return
+    }
+
     this.state = {
       mountNode: this.findMountNode(props)
     }
@@ -63,6 +68,9 @@ class Portal extends Component<PortalProps, PortalState> {
   DOMNode: PortalNode = null
 
   componentDidMount() {
+    if (!canUseDOM) {
+      return
+    }
     // If Portal is mounting in an open condition fire onOpen handler
     if (this.props.open && typeof this.props.onOpen === 'function') {
       this.props.onOpen(this.DOMNode)
@@ -70,6 +78,9 @@ class Portal extends Component<PortalProps, PortalState> {
   }
 
   componentDidUpdate(prevProps: PortalProps) {
+    if (!canUseDOM) {
+      return
+    }
     const mountNode = this.findMountNode(this.props)
 
     if (mountNode !== this.state.mountNode) {
@@ -97,6 +108,9 @@ class Portal extends Component<PortalProps, PortalState> {
   }
 
   componentWillUnmount() {
+    if (!canUseDOM) {
+      return
+    }
     this.removeNode()
 
     // If Portal was open fire onClose handler
@@ -188,6 +202,10 @@ class Portal extends Component<PortalProps, PortalState> {
   }
 
   render(): React.ReactPortal | null {
+    if (!canUseDOM) {
+      return null
+    }
+
     const { children } = this.props
 
     return this.props.open && React.Children.count(children) > 0

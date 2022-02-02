@@ -10,23 +10,23 @@
     {
       "path": "../ui-babel-preset/tsconfig.build.json"
     },
-
     {
       "path": "../ui-test-utils/tsconfig.build.json"
     },
     {
       "path": "../shared-types/tsconfig.build.json"
     },
-
     {
       "path": "../ui-i18n/tsconfig.build.json"
     },
     {
       "path": "../ui-prop-types/tsconfig.build.json"
     },
-
     {
       "path": "../ui-react-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-dom-utils/tsconfig.build.json"
     }
   ]
 }
