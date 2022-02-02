@@ -47,21 +47,21 @@ class CodePenButton extends Component<CodePenButtonProps> {
       js: `const render = (el) => { ReactDOM.render(el, document.getElementById('app')) }\n\n${code}`,
       private: true,
       editors: '001',
-      html:
-        '<div id="app"></div><div id="flash-messages"></div><div id="nav"></div>',
-      layout: 'top',
+      html: '<div id="app"></div><div id="flash-messages"></div><div id="nav"></div>',
       css_prefix: 'autoprefixer',
       js_pre_processor: 'babel',
       ...this.props.options
     }
-
+    const JSONData = JSON.stringify(data)
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;')
     return (
       <form
         action="https://codepen.io/pen/define"
         method="POST"
         target="_blank"
       >
-        <input type="hidden" name="data" value={JSON.stringify(data)} />
+        <input type="hidden" name="data" value={JSONData} />
         <Tooltip renderTip="Edit in Codepen" placement="bottom">
           <IconButton
             type="submit"
