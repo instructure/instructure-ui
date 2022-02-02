@@ -459,8 +459,13 @@ class Select extends Component<SelectProps> {
     >
   ) {
     const { getListProps, getOptionProps, getDisabledOptionProps } = data
-    const { isShowingOptions, optionsMaxWidth, visibleOptionsCount, children } =
-      this.props
+    const {
+      isShowingOptions,
+      optionsMaxWidth,
+      optionsMaxHeight,
+      visibleOptionsCount,
+      children
+    } = this.props
 
     let lastWasGroup = false
 
@@ -468,7 +473,8 @@ class Select extends Component<SelectProps> {
       ? {
           display: 'block',
           overflowY: 'auto',
-          maxHeight: this._optionHeight * visibleOptionsCount!,
+          maxHeight:
+            optionsMaxHeight || this._optionHeight * visibleOptionsCount!,
           maxWidth: optionsMaxWidth || this.width,
           background: 'primary',
           elementRef: (node: Element | null) => (this._listView = node)

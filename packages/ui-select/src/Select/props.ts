@@ -72,15 +72,21 @@ type SelectOwnProps = {
   isInline?: boolean
 
   /**
+   * The number of options that should be visible before having to scroll. Works best when the options are the same height.
+   */
+  visibleOptionsCount?: number
+
+  /**
+   * The max height the options list can be before having to scroll. If
+   * set, it will __override__ the `visibleOptionsCount` prop.
+   */
+  optionsMaxHeight?: string
+
+  /**
    * The max width the options list can be before option text wraps. If not
    * set, the list will only display as wide as the text input.
    */
   optionsMaxWidth?: string
-
-  /**
-   * The number of options that should be visible before having to scroll.
-   */
-  visibleOptionsCount?: number
 
   // Passed directly to TextInput as `value`
   /**
@@ -270,8 +276,9 @@ const propTypes: PropValidators<PropKeys> = {
   isInline: PropTypes.bool,
   width: PropTypes.string,
   htmlSize: PropTypes.number,
-  optionsMaxWidth: PropTypes.string,
   visibleOptionsCount: PropTypes.number,
+  optionsMaxHeight: PropTypes.string,
+  optionsMaxWidth: PropTypes.string,
   messages: PropTypes.arrayOf(FormPropTypes.message),
   placement: PositionPropTypes.placement,
   constrain: PositionPropTypes.constrain,
@@ -305,8 +312,9 @@ const allowedProps: AllowedPropKeys = [
   'isInline',
   'width',
   'htmlSize',
-  'optionsMaxWidth',
   'visibleOptionsCount',
+  'optionsMaxHeight',
+  'optionsMaxWidth',
   'messages',
   'placement',
   'constrain',
