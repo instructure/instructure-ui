@@ -144,15 +144,21 @@ type PropsPassedToSelect = {
   width?: string
 
   /**
+   * The number of options that should be visible before having to scroll. Works best when the options are the same height.
+   */
+  visibleOptionsCount?: number
+
+  /**
+   * The max height the options list can be before having to scroll. If
+   * set, it will __override__ the `visibleOptionsCount` prop.
+   */
+  optionsMaxHeight?: string
+
+  /**
    * The max width the options list can be before option text wraps. If not
    * set, the list will only display as wide as the text input.
    */
   optionsMaxWidth?: string
-
-  /**
-   * The number of options that should be visible before having to scroll.
-   */
-  visibleOptionsCount?: number
 
   /**
    * Displays messages and validation for the input. It should be an array of
@@ -253,8 +259,9 @@ const propTypes: PropValidators<PropKeys> = {
   isRequired: PropTypes.bool,
   isInline: PropTypes.bool,
   width: PropTypes.string,
-  optionsMaxWidth: PropTypes.string,
   visibleOptionsCount: PropTypes.number,
+  optionsMaxHeight: PropTypes.string,
+  optionsMaxWidth: PropTypes.string,
   messages: PropTypes.arrayOf(FormPropTypes.message),
   placement: PositionPropTypes.placement,
   constrain: PositionPropTypes.constrain,
@@ -284,8 +291,9 @@ const allowedProps: AllowedPropKeys = [
   'isRequired',
   'isInline',
   'width',
-  'optionsMaxWidth',
   'visibleOptionsCount',
+  'optionsMaxHeight',
+  'optionsMaxWidth',
   'messages',
   'placement',
   'constrain',
