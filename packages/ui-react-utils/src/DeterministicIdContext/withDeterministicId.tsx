@@ -47,12 +47,12 @@ type WithDeterministicIdProps = {
  * in the child components to deterministically create ids for them based on the `instanceCounterMap`.
  * Read more about it here: [SSR guide](/#server-side-rendering)
  */
-const withDeterministicId = decorator((ComposedComponent) => {
+const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
   type Props = PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
   const WithDeterministicId = forwardRef(
     (props: Props, ref: React.ForwardedRef<any>) => {
       const componentName =
-        (ComposedComponent as InstUIComponent).componentId ||
+        ComposedComponent.componentId ||
         ComposedComponent.displayName ||
         ComposedComponent.name
       const instanceCounterMap = useContext(DeterministicIdContext)

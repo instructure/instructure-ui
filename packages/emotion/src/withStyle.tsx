@@ -54,7 +54,7 @@ import type {
 type ComponentName = keyof ComponentOverride
 
 interface WithStyleComponent extends InstUIComponent {
-  componentId: ComponentName
+  componentId?: ComponentName
 }
 
 type WithStylePrivateProps<
@@ -152,9 +152,6 @@ const defaultValues = {
  * @returns {ReactElement} The decorated WithStyle Component
  */
 const withStyle = decorator(
-  //@ts-expect-error we know ComposedComponent is an InstUIComponent, but there is must be a better
-  //way of doing this
-
   (
     ComposedComponent: WithStyleComponent,
     generateStyle: GenerateStyle,
