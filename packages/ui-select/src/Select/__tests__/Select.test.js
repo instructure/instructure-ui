@@ -416,6 +416,41 @@ describe('<Select />', async () => {
 
       expect(listRef).to.have.been.calledWith(listbox.getDOMNode())
     })
+
+    it('should set maxHeight according to the visibleOptionsCount prop', async () => {
+      await mount(
+        <Select
+          renderLabel="Choose an option"
+          isShowingOptions
+          visibleOptionsCount={2}
+        >
+          {getOptions()}
+        </Select>
+      )
+      const select = await SelectLocator.find()
+      const list = await select.findOptionsList()
+      const listView = await list.getDOMNode().parentNode
+
+      expect(getComputedStyle(listView).height).to.equal('72px')
+    })
+
+    it('should override maxHeight with optionsMaxHeight, even if visibleOptionsCount is set', async () => {
+      await mount(
+        <Select
+          renderLabel="Choose an option"
+          isShowingOptions
+          visibleOptionsCount={2}
+          optionsMaxHeight="50px"
+        >
+          {getOptions()}
+        </Select>
+      )
+      const select = await SelectLocator.find()
+      const list = await select.findOptionsList()
+      const listView = await list.getDOMNode().parentNode
+
+      expect(getComputedStyle(listView).height).to.equal('50px')
+    })
   })
 
   describe('with callbacks', async () => {

@@ -128,14 +128,19 @@ class Select extends Component {
      */
     htmlSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
+     * The number of options that should be visible before having to scroll. Works best when the options are the same height.
+     */
+    visibleOptionsCount: PropTypes.number,
+    /**
+     * The max height the options list can be before having to scroll. If
+     * set, it will __override__ the `visibleOptionsCount` prop.
+     */
+    optionsMaxHeight: PropTypes.string,
+    /**
      * The max width the options list can be before option text wraps. If not
      * set, the list will only display as wide as the text input.
      */
     optionsMaxWidth: PropTypes.string,
-    /**
-     * The number of options that should be visible before having to scroll.
-     */
-    visibleOptionsCount: PropTypes.number,
     /**
      * Displays messages and validation for the input. It should be an object
      * with the following shape:
@@ -228,8 +233,9 @@ class Select extends Component {
     isInline: false,
     width: undefined,
     htmlSize: undefined,
-    optionsMaxWidth: undefined,
     visibleOptionsCount: 8,
+    optionsMaxHeight: undefined,
+    optionsMaxWidth: undefined,
     messages: undefined,
     placement: 'bottom stretch',
     constrain: 'window',
@@ -535,6 +541,7 @@ class Select extends Component {
     const {
       isShowingOptions,
       optionsMaxWidth,
+      optionsMaxHeight,
       visibleOptionsCount,
       children
     } = this.props
@@ -544,7 +551,8 @@ class Select extends Component {
       ? {
           display: 'block',
           overflowY: 'auto',
-          maxHeight: this._optionHeight * visibleOptionsCount,
+          maxHeight:
+            optionsMaxHeight || this._optionHeight * visibleOptionsCount,
           maxWidth: optionsMaxWidth || this.width,
           background: 'primary',
           elementRef: (node) => (this._listView = node)
