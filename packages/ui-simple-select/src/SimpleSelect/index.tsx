@@ -393,6 +393,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
       isInline,
       width,
       optionsMaxWidth,
+      optionsMaxHeight,
       visibleOptionsCount,
       messages,
       placement,
@@ -425,6 +426,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
         isInline={isInline}
         width={width}
         optionsMaxWidth={optionsMaxWidth}
+        optionsMaxHeight={optionsMaxHeight}
         visibleOptionsCount={visibleOptionsCount}
         messages={messages}
         placement={placement}
