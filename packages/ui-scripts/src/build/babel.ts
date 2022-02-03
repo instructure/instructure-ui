@@ -32,13 +32,6 @@ const specifyCJSFormat = path.resolve(
   'specify-commonjs-format.js'
 )
 
-const specifyModuleFormat = path.resolve(
-  __dirname,
-  '../../',
-  'bin/',
-  'specify-module-format.js'
-)
-
 export const babel = () => {
   const {
     BABEL_ENV,
@@ -111,14 +104,11 @@ export const babel = () => {
   }
 
   const commands = {
-    es: [
-      getCommand(
-        'babel',
-        [...babelArgs, '--out-dir', 'es'],
-        [...envVars, 'ES_MODULES=1']
-      ),
-      getCommand(specifyModuleFormat, [], [])
-    ],
+    es: getCommand(
+      'babel',
+      [...babelArgs, '--out-dir', 'es'],
+      [...envVars, 'ES_MODULES=1']
+    ),
     cjs: [
       getCommand(
         'babel',
