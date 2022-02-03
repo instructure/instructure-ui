@@ -27,12 +27,7 @@ As we've built out our library, we've learned a lot about component APIs. Button
 
 ##### Note about Codemods
 
-These complex props are updated via 2 sets of codemods, apply the simple codemods first:
-
-- updatePropNames: This applies the simple codemods like renaming a single property
-- updateV7Props: This applies the more complex codemods that change multiple values or move tags.
-
-These are in the V8 (and later) versions of the InstUI repo.
+These complex props are updated the `updateV7Props.js` codemod that is described in the v8 docs at <https://instructure.design/#v8-upgrade-guide>. These are in the V8 (and later) versions of the InstUI repo.
 
 ### Props that need to be upgraded
 
