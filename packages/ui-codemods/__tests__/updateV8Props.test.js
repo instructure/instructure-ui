@@ -22,36 +22,20 @@
  * SOFTWARE.
  */
 
-/**
- * Renames components theme={} prop to themeOverride={}
- */
-export default function transformer(file, api) {
-  const j = api.jscodeshift
-  const root = j(file.source)
-  const instUIImports = []
-  root
-    .find(j.ImportDeclaration)
-    .filter((path) => {
-      const importSource = path.node.source.value
-      return importSource.match(/@instructure\/ui/gm)
-    })
-    .forEach((path) => {
-      path.node.specifiers.forEach((specifier) => {
-        instUIImports.push(specifier.local.name)
-      })
-    })
-  instUIImports.forEach((instUIImport) => {
-    root
-      .find(j.JSXOpeningElement, {
-        name: {
-          type: 'JSXIdentifier',
-          name: instUIImport
-        }
-      })
-      .find(j.JSXIdentifier, {
-        name: 'theme'
-      })
-      .replaceWith('themeOverride')
+const defineTest = require('jscodeshift/dist/testUtils').defineTest
+
+const tests = ['v8Props']
+
+// eslint-disable-next-line no-undef
+jest.autoMockOff()
+
+describe('updateV8Props', () => {
+  tests.forEach((test) => {
+    defineTest(
+      __dirname,
+      'lib/updateV8Props',
+      undefined,
+      `updateV8Props/${test}`
+    )
   })
-  return root.toSource()
-}
+})

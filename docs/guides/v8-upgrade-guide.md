@@ -39,9 +39,34 @@ You can find the legacy v7 documentation in the dropdown in the left sidebar.
 
 ### Removal of deprecated components and properties
 
-One of the changes of v8.0. is that we deleted all components and properties marked as `deprecated` in v7. Since these are not backwards compatible anymore, please make sure to update everything.
+One of the changes of v8.0 is that we deleted all components and properties marked as `deprecated` in v7. Since these are not backwards compatible anymore, please make sure to update everything.
 
 **We made a list of all the affected components and props on [Deprecated Properties and Components in Version 7.0](https://instructure.design/v7/#v7-deprecated-props-and-components) page to have a clear overview of the changes, removals, substitutes.** You can also find these changes in our [CHANGELOG](#CHANGELOG).
+
+### Upgrade step-by-step
+
+We strongly recommend to use codemods to ease your update process. To run these please install `jscodeshift` (v0.13 or newer) to your terminal. You can push your code after each step.
+
+1. Run the `updateImports` codemod with `8` as a version number:
+
+```sh
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/imports.config.js
+```
+
+This will do most of the simple upgrades (renaming props, deleting props). 2. Run
+
+```sh
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.js <path>
+```
+
+This will update more complex components (e.g. Buttons), and will tell you if it needs a manual update in the terminal. 3. Update to the latest InstUI 8 and run
+
+```sh
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Props.js <path>
+```
+
+This will update props whose name changed in v7-v8 update.
+After this you will need to manually update you custom components according to the [Emotion migration guide](#themeable-to-emotion-migration-guide)
 
 ### Configuration and build scripts are private
 

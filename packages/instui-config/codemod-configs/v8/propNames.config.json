@@ -108,8 +108,7 @@
           { "old": "primary", "new": "info" },
           { "old": "message", "new": "alert" }
         ]
-      },
-      { "old": "text", "new": "children" }
+      }
     ]
   },
   "Popover": {
