@@ -3,7 +3,6 @@
   "version": "8.16.0",
   "description": "Build scripts to export icons from SVG files",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "commonjs",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {

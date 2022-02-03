@@ -2,7 +2,6 @@
   "name": "@instructure/config-loader",
   "version": "8.16.0",
   "description": "A library to load config files",
-  "type": "commonjs",
   "main": "./lib/index.js",
   "scripts": {
     "lint": "ui-test --lint",

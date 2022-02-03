@@ -3,7 +3,6 @@
   "version": "8.16.0",
   "description": "A collection of UI scripts for generating code from templates.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "commonjs",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
