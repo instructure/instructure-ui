@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.15.0](https://github.com/instructure/instructure-ui/compare/v7.14.1...v7.15.0) (2022-02-03)
+
+### Features
+
+- **ui-select:** add `optionsMaxHeight` prop to Select ([41f9016](https://github.com/instructure/instructure-ui/commit/41f9016))
+- **ui-simple-select:** add `optionsMaxHeight` prop to SimpleSelect ([6dad00d](https://github.com/instructure/instructure-ui/commit/6dad00d))
+- **ui-text:** deprecate the `warning` color variant for Text ([e1093ab](https://github.com/instructure/instructure-ui/commit/e1093ab)), backports [#856](https://github.com/instructure/instructure-ui/issues/856)
+
 ## [7.14.1](https://github.com/instructure/instructure-ui/compare/v7.14.0...v7.14.1) (2021-12-06)
 
 ### Bug Fixes
