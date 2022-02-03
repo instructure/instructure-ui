@@ -47,35 +47,35 @@ One of the changes of v8.0 is that we deleted all components and properties mark
 
 We strongly recommend to use codemods to ease your update process. To run these please install `jscodeshift` (v0.13 or newer) to your terminal. You can push your code after each step.
 
-#### 1. Run the `updatePropNames` codemod with `8` as a version number:
+#### 1. Run the v7 `updatePropNames` codemod:
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v8/propNames.config.json
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v7/propNames.config.json
 ```
 
 This will do most of the simple upgrades (renaming props, deleting props).
 
-#### 2. Run
+#### 2. Run the `updateV7Props` codemod:
 
 ```sh
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.js <path>
 ```
 
-This will update more complex components (e.g. Buttons), and will tell you if it needs a manual update in the terminal.
+This will update more complex components (e.g. Buttons), and will tell you if it needs a manual update in the terminal. Fix what is needed manually.
 
-#### 3. Update to the latest InstUI 8 and then run
+#### 3. Update your dependencies latest InstUI 8 and then run
 
 ```sh
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Props.js <path>
 ```
 
-This will update props whose name changed in v7-v8 update. Also run
+This will update props whose name changed in v7-v8 update (there is just one, we renamed `theme` to `themeOverride`). Also run
 
 ```sh
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v8/imports.config.js
 ```
 
-this will update Themeable imports to Emotion imports.
+This will update Themeable imports to Emotion imports.
 
 After this you will need to manually update you custom components according to the [Emotion migration guide](#themeable-to-emotion-migration-guide)
 
