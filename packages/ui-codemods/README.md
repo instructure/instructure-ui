@@ -47,8 +47,7 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path>
 
 ### Updating more complex props to the InstUI v8 syntax
 
-Updates most of the props that are listed in <https://instructure.design/v7/#v7-deprecated-props-and-components/> as having no codemods from the InstUI v7 syntax to the v8 syntax. If it cannot upgrade something it will display a console warning on how to proceed.
-Please use JSCodeShift v0.13 or newer.
+This codemod upgrades more complex changes like Button, also outputs any manual changes needed to the console.
 
 ```sh
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.js <path>
