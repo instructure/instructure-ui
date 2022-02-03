@@ -3,7 +3,6 @@
   "version": "8.16.0",
   "description": "A debounce util made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "commonjs",
   "main": "./lib/index.js",
   "module": "./es/index.js",
   "types": "./types/index.d.ts",

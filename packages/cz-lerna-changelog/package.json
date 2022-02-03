@@ -3,7 +3,6 @@
   "version": "8.16.0",
   "description": "Prompts for conventional changelog standard in a lerna environment.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "commonjs",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",

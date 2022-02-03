@@ -3,7 +3,6 @@
   "version": "8.16.0",
   "description": "Icon set for Instructure, Inc. products",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
