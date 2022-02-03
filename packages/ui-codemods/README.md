@@ -47,7 +47,7 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path>
 
 ### Updating more complex props to the InstUI v8 syntax
 
-This codemod upgrades more complex changes like Button, also outputs any manual changes needed to the console.
+This codemod upgrades more complex changes like Button, also outputs any manual changes needed to the console. Run this in a InstUI v7 codebase only.
 
 ```sh
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.js <path>
