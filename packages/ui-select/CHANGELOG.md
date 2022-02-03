@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.16.0](https://github.com/instructure/instructure-ui/compare/v8.15.0...v8.16.0) (2022-02-03)
+
+### Features
+
+- **ui-select:** add `optionsMaxHeight` prop to Select ([cf361bf](https://github.com/instructure/instructure-ui/commit/cf361bf41dcef00548cd7a9053f44bec32c58f6a))
+
 # [8.15.0](https://github.com/instructure/instructure-ui/compare/v8.14.0...v8.15.0) (2022-01-26)
 
 **Note:** Version bump only for package @instructure/ui-select
