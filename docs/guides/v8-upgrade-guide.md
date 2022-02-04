@@ -45,7 +45,7 @@ One of the changes of v8.0 is that we deleted all components and properties mark
 
 ### Upgrade step-by-step
 
-We strongly recommend to use codemods to ease your update process. To run these please install `jscodeshift` (v0.13 or newer) to your terminal. You can push your code after each step.
+We strongly recommend to use codemods to ease your update process. To run these please install `jscodeshift` (v0.13 or newer) to your terminal and add [`@instructure/ui-codemods`](https://www.npmjs.com/package/@instructure/ui-codemods) with the latest version 8.x as a `devDependency` to your `package.json` You can push your code after each of these steps.
 
 #### 1. Run the v7 `updatePropNames` codemod:
 
@@ -77,7 +77,7 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path>
 
 This will update Themeable imports to Emotion imports.
 
-After this you will need to manually update you custom components according to the [Emotion migration guide](#themeable-to-emotion-migration-guide)
+After this you will need to manually update you custom components according to the [Emotion migration guide](#themeable-to-emotion-migration-guide). If you are done migrating you can remove `@instructure/ui-codemods` from your dependencies
 
 ### Configuration and build scripts are private
 
