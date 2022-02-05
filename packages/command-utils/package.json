@@ -29,6 +29,6 @@
   },
   "sideEffects": false,
   "devDependencies": {
-    "@types/which": "^2.0.0"
+    "@types/which": "^2"
   }
 }

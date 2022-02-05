@@ -176,7 +176,8 @@ class FormFieldLayout extends Component<FormFieldLayoutProps> {
   }
 
   render() {
-    const ElementType = this.elementType
+    // any cast is needed to prevent Expression produces a union type that is too complex to represent errors
+    const ElementType = this.elementType as any
 
     const { makeStyles, styles, ...props } = this.props
 

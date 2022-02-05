@@ -19,9 +19,9 @@
     "@instructure/pkg-utils": "8.17.0",
     "@semantic-release/commit-analyzer": "^8",
     "chalk": "^4",
-    "cz-customizable": "^6.2.0",
+    "cz-customizable": "^6",
     "inquirer": "^8",
-    "inquirer-autocomplete-prompt": "^1.0.1"
+    "inquirer-autocomplete-prompt": "^1"
   },
   "peerDependencies": {
     "lerna": "^4"

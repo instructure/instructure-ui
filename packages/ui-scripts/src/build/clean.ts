@@ -22,21 +22,22 @@
  * SOFTWARE.
  */
 
-import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
+import fs from 'fs'
 
 export const clean = () => {
-  process.exit(
-    runCommandsConcurrently({
-      clean: getCommand('rimraf', [
-        '__build__',
-        'es',
-        'dist',
-        'lib',
-        'tokens',
-        '.babel-cache',
-        '.cache',
-        'types'
-      ])
-    }).status
-  )
+  const dirs = [
+    '__build__',
+    'es',
+    'dist',
+    'lib',
+    'tokens',
+    '.babel-cache',
+    '.cache',
+    'types'
+  ]
+  for (const dir of dirs) {
+    if (fs.existsSync(dir)) {
+      fs.rmSync(dir, { force: true, recursive: true, maxRetries: 2 })
+    }
+  }
 }

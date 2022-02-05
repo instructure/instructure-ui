@@ -55,7 +55,8 @@ class AccessibleContent extends Component<AccessibleContentProps> {
 
   render() {
     const { alt, children, ...props } = this.props
-    const ElementType = getElementType(AccessibleContent, this.props)
+    // any cast is needed to prevent Expression produces a union type that is too complex to represent errors
+    const ElementType = getElementType(AccessibleContent, this.props) as any
 
     return (
       <ElementType
