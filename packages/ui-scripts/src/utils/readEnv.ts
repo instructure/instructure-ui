@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import findUp from 'find-up'
+import { sync } from 'find-up'
+import { config } from 'dotenv'
 
 export function readEnv() {
-  require('dotenv').config({ path: findUp.sync('.env') || process.cwd() })
+  config({ path: sync('.env') || process.cwd() })
 }
