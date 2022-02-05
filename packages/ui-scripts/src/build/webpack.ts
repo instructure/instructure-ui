@@ -51,7 +51,7 @@ export const webpack = () => {
   ]
 
   if (args.includes('--watch')) {
-    command = 'webpack-dev-server'
+    command = 'webpack'
     envVars = envVars
       .concat([
         'NODE_ENV=development',
@@ -61,7 +61,7 @@ export const webpack = () => {
         'DISABLE_SPEEDY_STYLESHEET=1'
       ])
       .filter(Boolean)
-    webpackArgs = ['--mode=development', `--port=${port}`]
+    webpackArgs = ['serve', '--mode=development', `--port=${port}`]
   } else {
     command = 'webpack'
     envVars = envVars
