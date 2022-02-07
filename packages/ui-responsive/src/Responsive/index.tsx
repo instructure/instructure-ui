@@ -25,7 +25,7 @@
 import React, { Component, createRef } from 'react'
 
 import { deepEqual } from '@instructure/ui-utils'
-import { logError as error } from '@instructure/console'
+import { logError as error, warn } from '@instructure/console'
 
 import {
   addElementQueryMatchListener,
@@ -147,11 +147,11 @@ class Responsive extends Component<ResponsiveProps> {
       // Iterate over the props for the current match. If that the prop is
       // already in `mergedProps` that means that the prop was defined for
       // multiple breakpoints, and more than one of those breakpoints is being
-      // currently applied so we log an error.
+      // currently applied so we log a warning.
       Object.keys(matchProps).forEach((prop) => {
         const currentValue = mergedProps[prop]
 
-        error(
+        warn(
           !(prop in mergedProps),
           [
             `[Responsive] The prop \`${prop}\` is defined at 2 or more breakpoints`,
