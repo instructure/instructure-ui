@@ -8,9 +8,9 @@ jobs:
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v2
-        name: Install Node 15
+        name: Install Node 16
         with:
-          node-version: '15'
+          node-version: '16'
       - name: Install dependencies
         run: yarn install --check-files
       - name: Bootstrap project
