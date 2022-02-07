@@ -113,7 +113,7 @@ describe('<Responsive />', async () => {
   })
 
   it('should warn when more than one breakpoint is applied and a prop value is overwritten', async () => {
-    const consoleError = stub(console, 'error')
+    const consoleError = stub(console, 'warn')
     await mount(
       <div style={{ width: 200 }}>
         <Responsive
