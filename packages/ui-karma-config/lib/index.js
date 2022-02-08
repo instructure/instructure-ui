@@ -186,14 +186,7 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
           new webpack.ProvidePlugin({ process: 'process/browser' }),
           new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] })
         ],
-        resolve: {
-          extensions: baseWebpackConfig.resolve.extensions,
-          fallback: {
-            fs: false,
-            module: false,
-            path: false
-          }
-        },
+        resolve: baseWebpackConfig.resolve,
         externals: {
           'react/lib/ExecutionEnvironment': true,
           'react/lib/ReactContext': true,
