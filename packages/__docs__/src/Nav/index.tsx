@@ -34,6 +34,7 @@ import { capitalizeFirstLetter } from '@instructure/ui-utils'
 
 import { NavToggle } from '../NavToggle'
 import type { NavProps, NavState } from './props'
+
 class Nav extends Component<NavProps, NavState> {
   _themeId: string
   searchTimeout: ReturnType<typeof setTimeout> | null

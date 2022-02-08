@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { PropValidators } from '@instructure/shared-types'
+import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import type { DocType } from '../Document/props'
 

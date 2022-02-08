@@ -23,15 +23,16 @@
  */
 
 import type { PropValidators } from '@instructure/shared-types'
+import type { ToggleDetailsProps } from '@instructure/ui-toggle-details'
 import PropTypes from 'prop-types'
 
 type NavToggleOwnProps = {
   summary: string
   variant?: 'section' | 'category'
   children?: React.ReactNode
-  onToggle?: (...args: any[]) => any
+  onToggle?: ToggleDetailsProps['onToggle']
   expanded?: boolean
-  iconPosition?: string
+  iconPosition?: ToggleDetailsProps['iconPosition']
   href?: string
   key?: string
 }
