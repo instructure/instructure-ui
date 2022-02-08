@@ -27,6 +27,9 @@
     },
     {
       "path": "../ui-dom-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../console/tsconfig.build.json"
     }
   ]
 }
