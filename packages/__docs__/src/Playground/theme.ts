@@ -21,32 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+import type { Theme } from '@instructure/ui-themes'
+import { PlaygroundTheme } from './props'
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (componentTheme, props, state) => {
-  return {
-    playground: {
-      label: 'playground',
-      fontSize: componentTheme.fontSize,
-      margin: '1rem 0 2rem'
-    },
+const generateComponentTheme = (theme: Theme): PlaygroundTheme => {
+  const { borders, typography, key: themeName } = theme
 
-    close: {
-      label: 'playground__close',
-      backgroundColor: 'rgba(0, 0, 0, 0.075)',
-      display: 'flex',
-      justifyContent: 'flex-end'
-    }
+  const themeSpecificStyles: Record<string, any> = {}
+
+  const componentVariables = {
+    editorBorderRadius: borders?.radiusMedium,
+    fontSize: typography?.fontSizeMedium
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyles[themeName]
   }
 }
 
-export default generateStyle
+export default generateComponentTheme
