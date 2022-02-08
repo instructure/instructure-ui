@@ -31,6 +31,7 @@ import { InstUISettingsProvider } from '@instructure/emotion'
 import { instructure } from '@instructure/ui-themes'
 import type { NavToggleProps } from './props'
 import { propTypes, allowedProps } from './props'
+
 class NavToggle extends Component<NavToggleProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
@@ -38,14 +39,14 @@ class NavToggle extends Component<NavToggleProps> {
     variant: 'section',
     children: null
   }
-  private _toggle: any
+  private _toggle: ToggleDetails | null = null
 
   focus() {
-    this._toggle.focus()
+    this._toggle?.focus()
   }
 
   render() {
-    const { summary, variant, iconPosition, ...props } = this.props
+    const { summary, variant, ...props } = this.props
 
     const isSection = variant === 'section'
 
@@ -70,7 +71,7 @@ class NavToggle extends Component<NavToggleProps> {
       >
         <InstUISettingsProvider theme={instructure}>
           <ToggleDetails
-            ref={(c) => {
+            ref={(c: ToggleDetails) => {
               this._toggle = c
             }}
             fluidWidth

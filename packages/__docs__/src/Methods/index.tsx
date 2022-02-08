@@ -29,6 +29,7 @@ import { Table } from '@instructure/ui-table'
 import { compileMarkdown } from '../compileMarkdown'
 import type { MethodsProps } from './props'
 import { propTypes, allowedProps } from './props'
+
 class Methods extends Component<MethodsProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
