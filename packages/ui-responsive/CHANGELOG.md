@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.16.0](https://github.com/instructure/instructure-ui/compare/v7.15.0...v7.16.0) (2022-02-08)
+
+### Features
+
+- **ui-responsive:** modify Responsive "props override" error to warning ([a2eb4b8](https://github.com/instructure/instructure-ui/commit/a2eb4b8))
+
 # [7.15.0](https://github.com/instructure/instructure-ui/compare/v7.14.1...v7.15.0) (2022-02-03)
 
 **Note:** Version bump only for package @instructure/ui-responsive
