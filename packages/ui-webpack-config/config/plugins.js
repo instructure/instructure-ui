@@ -37,4 +37,9 @@ const envVars = {
   OMIT_INSTUI_DEPRECATION_WARNINGS
 }
 
-module.exports = [new webpack.EnvironmentPlugin(envVars)].filter(Boolean)
+module.exports = [
+  // fix Buffer/process is not defined errors:
+  new webpack.ProvidePlugin({ process: 'process/browser' }),
+  new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] }),
+  new webpack.EnvironmentPlugin(envVars)
+]
