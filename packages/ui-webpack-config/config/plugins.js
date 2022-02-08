@@ -21,10 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const path = require('path')
-const webpack = require('webpack')
 
-const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
+const webpack = require('webpack')
 
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
@@ -39,7 +37,4 @@ const envVars = {
   OMIT_INSTUI_DEPRECATION_WARNINGS
 }
 
-module.exports = [
-  new webpack.EnvironmentPlugin(envVars),
-  DEBUG ? new WatchMissingNodeModulesPlugin(path.resolve('node_modules')) : null
-].filter(Boolean)
+module.exports = [new webpack.EnvironmentPlugin(envVars)].filter(Boolean)

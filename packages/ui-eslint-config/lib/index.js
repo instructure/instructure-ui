@@ -41,8 +41,7 @@ module.exports = {
     'eslint-plugin-no-explicit-type-exports',
     'mocha',
     'notice',
-    'instructure-ui',
-    'ejs'
+    'instructure-ui'
   ],
   env: {
     node: true,
@@ -105,17 +104,11 @@ module.exports = {
       rules: {
         'mocha/no-exclusive-tests': 'error'
       }
-    },
-    {
-      files: '*.ejs',
-      rules: {
-        'import/no-unresolved': 'off'
-      }
     }
   ],
   settings: {
     react: {
-      version: process.env.REACT_VERSION || '16.8.6'
+      version: process.env.REACT_VERSION || '17.0.2'
     },
     'import/resolver': {
       node: {

@@ -26,10 +26,10 @@ const DEBUG = process.env.DEBUG
 const ENV = process.env.NODE_ENV || 'production'
 
 module.exports = {
+  mode: ENV === 'production' ? 'production' : 'development',
   cache: ENV !== 'production',
   bail: !DEBUG,
-  devtool: ENV === 'production' ? 'none' : 'cheap-module-source-map',
-  node: { fs: 'empty' },
+  devtool: ENV === 'production' ? false : 'cheap-module-source-map',
   module: {
     rules: require('./module/rules')
   },
@@ -39,6 +39,9 @@ module.exports = {
     hints: ENV === 'production' ? 'warning' : false
   },
   resolve: {
+    fallback: {
+      fs: false
+    },
     extensions: ['.ts', '.tsx', '.js', '.json']
   }
 }

@@ -114,7 +114,8 @@
     "react-dom": "^17.0.0",
     "react-github-corner": "^2.1.0",
     "semver": "^7.3.5",
-    "webpack-merge": "^5.7.3"
+    "webpack-merge": "^5",
+    "buffer": "^6"
   },
   "devDependencies": {
     "@instructure/config-loader": "8.17.0",
@@ -125,11 +126,12 @@
     "@instructure/ui-webpack-config": "8.17.0",
     "globby": "^11",
     "gray-matter": "^3.1.1",
-    "html-webpack-plugin": "^4",
+    "html-webpack-plugin": "^5",
     "jsdoc-api": "^6.0.0",
     "mkdirp": "^1",
     "react-docgen": "^6.0.0-alpha.0",
     "svg-inline-loader": "^0.8.0",
-    "webpack-bundle-analyzer": "^4"
+    "webpack-bundle-analyzer": "^4",
+    "raw-loader": "^4"
   }
 }

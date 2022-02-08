@@ -41,13 +41,18 @@ const config = merge(baseConfig, {
     common: ['react', 'react-dom'],
     globals: './globals.js'
   },
+  module: {
+    // suppress "the request of a dependency is an expression" warnings
+    exprContextCritical: false
+  },
   output: {
     path: outputPath,
     filename: '[name].js'
   },
-
   devServer: {
-    contentBase: outputPath,
+    static: {
+      directory: outputPath
+    },
     host: '0.0.0.0'
   },
   plugins: [
