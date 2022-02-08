@@ -45,7 +45,7 @@ type WithDeterministicIdProps = {
  *
  * The context is there for the users to pass an `instanceCounterMap` Map which is then used
  * in the child components to deterministically create ids for them based on the `instanceCounterMap`.
- * Read more about it here: [SSR guide](/#server-side-rendering)
+ * Read more about it here: [SSR guide](https://instructure.design/#server-side-rendering)
  */
 const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
   type Props = PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
