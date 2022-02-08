@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { Modal } from '@instructure/ui-modal'
@@ -47,6 +46,8 @@ import { AppContext } from '../App'
 import { Preview } from '../Preview'
 import { CodeSandboxButton } from '../CodeSandboxButton'
 import { LibraryPropType } from '../propTypes'
+import type { PlaygroundProps, PlaygroundState } from './props'
+import { propTypes, allowedProps } from './props'
 
 /* eslint-disable max-len */
 const codeIconPath = (
@@ -58,26 +59,10 @@ const fullScreenIconPath = (
 /* eslint-enable max-len */
 
 @withStyle(generateStyle, generateComponentTheme)
-class Playground extends Component {
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
-    title: PropTypes.string.isRequired,
-    code: PropTypes.string.isRequired,
-    language: PropTypes.string.isRequired,
-    render: PropTypes.bool,
-    background: PropTypes.oneOf([
-      'checkerboard',
-      'checkerboard-inverse',
-      'light',
-      'inverse',
-      'none'
-    ]),
-    readOnly: PropTypes.bool
-  }
-
+class Playground extends Component<PlaygroundProps, PlaygroundState> {
+  _fullScreenButton: IconButton | null | undefined
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static defaultProps = {
     render: true,
     background: 'checkerboard',
@@ -88,8 +73,8 @@ class Playground extends Component {
     library: LibraryPropType
   }
 
-  constructor(props) {
-    super()
+  constructor(props: PlaygroundProps) {
+    super(props)
     this.state = {
       defaultCode: props.code, // to track changes to code
       code: props.code,
@@ -100,18 +85,23 @@ class Playground extends Component {
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: PlaygroundProps, prevState: PlaygroundState) {
     if (prevState.fullscreen === true && this.state.fullscreen === false) {
-      ReactDOM.findDOMNode(this._fullScreenButton).focus() // eslint-disable-line react/no-find-dom-node
+      ;(
+        ReactDOM.findDOMNode(this._fullScreenButton) as HTMLButtonElement
+      ).focus() // eslint-disable-line react/no-find-dom-node
     }
 
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(
+    nextProps: Readonly<PlaygroundProps>,
+    prevState: Readonly<PlaygroundState>
+  ) {
     if (nextProps.code !== prevState.defaultCode) {
       // code prop was updated, reset defaultCode and actual code state
       return {
@@ -141,7 +131,7 @@ class Playground extends Component {
     })
   }
 
-  handleChange = (newCode) => {
+  handleChange = (newCode: string) => {
     this.setState({
       code: newCode
     })
@@ -159,7 +149,7 @@ class Playground extends Component {
 
     return (
       <div>
-        <div css={styles.close}>
+        <div css={styles?.close}>
           <IconButton
             size="small"
             onClick={this.handleCodeToggle}
@@ -200,7 +190,13 @@ class Playground extends Component {
     const { styles } = this.props
     const { code, fullscreen, rtl } = this.state
 
-    const PreviewComponent = ({ themeKey, themes }) => (
+    const PreviewComponent = ({
+      themeKey,
+      themes
+    }: {
+      themeKey: string
+      themes: Record<string, any>
+    }) => (
       <Preview
         code={code}
         render={this.props.render}
@@ -215,8 +211,16 @@ class Playground extends Component {
 
     return (
       <AppContext.Consumer>
-        {({ library, themeKey, themes }) => (
-          <div css={styles.playground}>
+        {({
+          library,
+          themeKey,
+          themes
+        }: {
+          library: Record<string, any>
+          themeKey: string
+          themes: Record<string, any>
+        }) => (
+          <div css={styles?.playground}>
             {fullscreen ? (
               <Modal
                 open

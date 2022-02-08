@@ -22,25 +22,33 @@
  * SOFTWARE.
  */
 
+import { PlaygroundStyle, PlaygroundTheme } from './props'
+
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme) => {
-  const { borders, typography, key: themeName } = theme
-
-  const themeSpecificStyles = {}
-
-  const componentVariables = {
-    editorBorderRadius: borders?.radiusMedium,
-    fontSize: typography?.fontSizeMedium
-  }
-
+const generateStyle = (componentTheme: PlaygroundTheme): PlaygroundStyle => {
   return {
-    ...componentVariables,
-    ...themeSpecificStyles[themeName]
+    playground: {
+      label: 'playground',
+      fontSize: componentTheme.fontSize,
+      margin: '1rem 0 2rem'
+    },
+
+    close: {
+      label: 'playground__close',
+      backgroundColor: 'rgba(0, 0, 0, 0.075)',
+      display: 'flex',
+      justifyContent: 'flex-end'
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle
