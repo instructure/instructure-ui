@@ -28,6 +28,7 @@ import ReactDOM from 'react-dom'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { canUseDOM } from '@instructure/ui-dom-utils'
+import { warn } from '@instructure/console'
 
 import { propTypes, allowedProps } from './props'
 import type { PortalNode, PortalProps, PortalState } from './props'
@@ -203,6 +204,12 @@ class Portal extends Component<PortalProps, PortalState> {
 
   render(): React.ReactPortal | null {
     if (!canUseDOM) {
+      warn(
+        false,
+        `It looks like you are trying to render <Portal> on the server side, which is not supported!
+         Please be aware that this will result in a no-op!
+         Read more about it here: https://instructure.design/#server-side-rendering`
+      )
       return null
     }
 
