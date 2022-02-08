@@ -33,6 +33,7 @@
     "@instructure/ui-decorator": "8.17.0",
     "@instructure/ui-dom-utils": "8.17.0",
     "@instructure/ui-utils": "8.17.0",
+    "hoist-non-react-statics": "^3.3.2",
     "prop-types": "^15"
   },
   "peerDependencies": {
