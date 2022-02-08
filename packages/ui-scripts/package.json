@@ -49,7 +49,7 @@
     "stylelint": "^10",
     "validate-commit-msg": "^2",
     "webpack-cli": "^4",
-    "webpack-dev-server": "^3.8.1",
+    "webpack-dev-server": "^4",
     "yargs": "^16"
   },
   "devDependencies": {
@@ -63,7 +63,7 @@
   "peerDependencies": {
     "eslint": "^7",
     "react": ">=16.8 <=17",
-    "webpack": "^4"
+    "webpack": "^5"
   },
   "publishConfig": {
     "access": "public"

@@ -31,6 +31,7 @@ const noHeadless = process.argv.some((arg) => arg === '--no-headless')
 const randomizeTestOrder = process.argv.some((arg) => arg === '--randomize')
 
 const baseWebpackConfig = require('@instructure/ui-webpack-config')
+const webpack = require('webpack')
 
 const NO_DEBUG = !!process.env.NO_DEBUG
 const withCoverage = process.env.COVERAGE
@@ -179,13 +180,19 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
           ]
         },
         mode: 'development',
-        devtool: NO_DEBUG ? 'none' : 'inline-source-map',
-
-        //TODO: this is probably a hack and webpack 5 will remove these features
-        //investigate how to do this properly
-        node: { fs: 'empty', module: 'empty' },
+        devtool: NO_DEBUG ? false : 'inline-source-map',
+        plugins: [
+          // fix Buffer/process is not defined errors:
+          new webpack.ProvidePlugin({ process: 'process/browser' }),
+          new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] })
+        ],
         resolve: {
-          extensions: baseWebpackConfig.resolve.extensions
+          extensions: baseWebpackConfig.resolve.extensions,
+          fallback: {
+            fs: false,
+            module: false,
+            path: false
+          }
         },
         externals: {
           'react/lib/ExecutionEnvironment': true,

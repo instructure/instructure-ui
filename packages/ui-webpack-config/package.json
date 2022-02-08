@@ -20,13 +20,12 @@
     "dotenv": "^10",
     "eslint-loader": "^4",
     "file-loader": "^6",
-    "react-dev-utils": "^12",
     "style-loader": "^3",
     "stylelint": "^13",
-    "terser-webpack-plugin": "^4",
+    "terser-webpack-plugin": "^5",
     "thread-loader": "^3",
     "url-loader": "^4",
-    "webpack": "^4"
+    "webpack": "^5"
   },
   "publishConfig": {
     "access": "public"

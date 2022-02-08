@@ -31,11 +31,13 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-viewport": "^1.0.4",
     "karma-webpack": "^5",
-    "loader-utils": "^2"
+    "loader-utils": "^2",
+    "process": "^0.11",
+    "buffer": "^6"
   },
   "peerDependencies": {
     "mocha": "^7",
-    "webpack": "^4"
+    "webpack": "^5"
   },
   "publishConfig": {
     "access": "public"

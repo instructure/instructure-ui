@@ -33,7 +33,8 @@ export const clean = () => {
     'tokens',
     '.babel-cache',
     '.cache',
-    'types'
+    'types',
+    'tsconfig.build.tsbuildinfo'
   ]
   for (const dir of dirs) {
     if (fs.existsSync(dir)) {

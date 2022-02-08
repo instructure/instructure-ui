@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+// TODO raw-loader is deprecated in Webpack 5, use https://webpack.js.org/guides/asset-modules/
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import IconSVG from '!!raw-loader!./placeholder-logo.svg'
 

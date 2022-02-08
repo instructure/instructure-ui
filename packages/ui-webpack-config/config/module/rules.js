@@ -63,14 +63,14 @@ const rules = [
   {
     // eslint-disable-next-line no-useless-escape
     test: /\.(eot|woff2?|otf|svg|ttf)([\?]?.*)$/,
-    loader: 'url-loader',
+    loader: 'url-loader', // TODO use https://webpack.js.org/guides/asset-modules
     options: {
       limit: 8192
     }
   },
   {
     test: /\.(png|jpg|jpeg|gif)$/,
-    loader: 'url-loader',
+    loader: 'url-loader', // TODO use https://webpack.js.org/guides/asset-modules
     options: {
       limit: 8192
     }
@@ -78,6 +78,7 @@ const rules = [
 ]
 
 if (!noLint) {
+  // TODO make this diabled by default or rather do not lint here
   rules.unshift({
     enforce: 'pre',
     test: /\.m?js?$/,

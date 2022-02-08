@@ -11,7 +11,7 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "prestart": "yarn build:examples && yarn bundle",
+    "prestart": "yarn bundle",
     "start": "ui-scripts --server -p 9001",
     "start:watch": "yarn build:examples && ui-build --examples --watch -p 9090",
     "test:vrt": "ui-test --vrt -p 9001",
@@ -35,20 +35,26 @@
     "@instructure/ui-view": "8.17.0",
     "@instructure/ui-webpack-config": "8.17.0",
     "@instructure/uid": "8.17.0",
-    "@storybook/addons": "6.3.9",
-    "@storybook/react": "6.3.9",
-    "@storybook/theming": "6.3.9",
+    "@storybook/addons": "^6",
+    "@storybook/react": "^6",
+    "@storybook/theming": "^6",
     "chromatic": "^5",
     "execa": "^5.1.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "story2sketch": "^1.7.1",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^5"
   },
   "devDependencies": {
     "@instructure/ui-test-utils": "8.17.0",
+    "@storybook/builder-webpack5": "^6",
+    "@storybook/manager-webpack5": "^6",
+    "webpack": "^5",
     "globby": "^11",
     "prop-types": "^15",
     "react-docgen": "^6.0.0-alpha.0"
+  },
+  "resolutions": {
+    "@storybook/react/webpack": "^5"
   }
 }

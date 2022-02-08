@@ -29,6 +29,11 @@ import { App } from './App'
 import { canvas } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
+import { Buffer } from 'buffer'
+
+// workaround until https://github.com/jonschlinkert/gray-matter/pull/132
+// is released
+global.Buffer = global.Buffer || Buffer
 
 ReactDOM.render(
   <InstUISettingsProvider theme={canvas}>
