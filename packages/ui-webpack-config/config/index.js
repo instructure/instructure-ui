@@ -40,7 +40,9 @@ module.exports = {
   },
   resolve: {
     fallback: {
-      fs: false
+      fs: false,
+      module: false,
+      path: false
     },
     extensions: ['.ts', '.tsx', '.js', '.json']
   }
