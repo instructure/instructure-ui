@@ -7,7 +7,6 @@
   },
   "include": ["src"],
   "references": [
-    { "path": "../console/tsconfig.build.json" },
     { "path": "../ui-form-field/tsconfig.build.json" },
     { "path": "../ui-i18n/tsconfig.build.json" },
     { "path": "../ui-position/tsconfig.build.json" },
@@ -16,8 +15,8 @@
     { "path": "../ui-select/tsconfig.build.json" },
     { "path": "../ui-test-locator/tsconfig.build.json" },
     { "path": "../ui-testable/tsconfig.build.json" },
-    { "path": "../uid/tsconfig.build.json" },
     { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-test-utils/tsconfig.build.json" }
+    { "path": "../ui-test-utils/tsconfig.build.json" },
+    { "path": "../shared-types/tsconfig.build.json" }
   ]
 }

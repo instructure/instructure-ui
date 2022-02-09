@@ -20,7 +20,6 @@
     { "path": "../ui-prop-types/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../ui-tag/tsconfig.build.json" },
-    { "path": "../ui-testable/tsconfig.build.json" },
-    { "path": "../uid/tsconfig.build.json" }
+    { "path": "../ui-testable/tsconfig.build.json" }
   ]
 }
