@@ -18,7 +18,6 @@
     { "path": "../ui-byline/tsconfig.build.json" },
     { "path": "../ui-calendar/tsconfig.build.json" },
     { "path": "../ui-checkbox/tsconfig.build.json" },
-    { "path": "../ui-code-editor/tsconfig.build.json" },
     { "path": "../ui-date-input/tsconfig.build.json" },
     { "path": "../ui-dialog/tsconfig.build.json" },
     { "path": "../ui-drawer-layout/tsconfig.build.json" },
