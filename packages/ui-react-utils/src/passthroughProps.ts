@@ -29,7 +29,7 @@ import isPropValid from '@emotion/is-prop-valid'
  * HTML or SVG elements (see https://github.com/emotion-js/emotion/tree/main/packages/is-prop-valid)
  *
  * Disallowed is anything else and 'style', 'styles', 'className', 'children',
- * 'makeStyles'
+ * 'makeStyles', 'deterministicId'
  * @param props The props to process
  */
 function passthroughProps<P>(props: P) {
@@ -45,7 +45,7 @@ function passthroughProps<P>(props: P) {
         propName !== 'children' &&
         propName !== 'styles' &&
         propName !== 'makeStyles' &&
-        propName !== 'instanceCounterMap'
+        propName !== 'deterministicId'
     )
     .forEach((propName) => {
       validProps[propName as keyof P] = props[propName as keyof P]

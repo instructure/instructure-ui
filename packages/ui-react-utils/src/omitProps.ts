@@ -29,7 +29,7 @@
  * Return an object with the remaining props after the given props are omitted.
  *
  * Automatically excludes the following props:
- * 'theme', 'children', 'className', 'style', 'styles', 'makeStyles', 'themeOverride'
+ * 'theme', 'children', 'className', 'style', 'styles', 'makeStyles', 'themeOverride', 'deterministicId'
  * @module omitProps
  * @param props The object to process
  * @param propsToOmit list disallowed prop keys or an object whose
@@ -67,7 +67,7 @@ const omit = <T>(originalObject: T, keysToOmit: string[]) => {
       key === 'styles' ||
       key === 'makeStyles' ||
       key === 'themeOverride' ||
-      key === 'instanceCounterMap'
+      key === 'deterministicId'
     ) {
       continue
     }

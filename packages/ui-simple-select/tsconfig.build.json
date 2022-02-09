@@ -14,11 +14,11 @@
     { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../ui-select/tsconfig.build.json" },
     { "path": "../ui-testable/tsconfig.build.json" },
-    { "path": "../uid/tsconfig.build.json" },
     { "path": "../ui-babel-preset/tsconfig.build.json" },
     { "path": "../ui-color-utils/tsconfig.build.json" },
     { "path": "../ui-icons/tsconfig.build.json" },
     { "path": "../ui-test-locator/tsconfig.build.json" },
-    { "path": "../ui-test-utils/tsconfig.build.json" }
+    { "path": "../ui-test-utils/tsconfig.build.json" },
+    { "path": "../shared-types/tsconfig.build.json" }
   ]
 }
