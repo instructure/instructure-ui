@@ -10,6 +10,25 @@ This document will demonstrate how to achieve Server Side Rendering (SSR) with [
 
 > This document assumes that you already have a Next.js application in place.
 
+```javascript
+---
+embed: true
+---
+<ToggleBlockquote
+  summary="Note!"
+>
+  <ToggleBlockquote.Paragraph>
+   You should not install the InstUI meta package <code>@instructure/ui</code> since it has components that are not yet Server Side Renderable out of the box.
+  </ToggleBlockquote.Paragraph>
+  <ToggleBlockquote.Paragraph>
+   The <Link href="/#CodeEditor">CodeEditor</Link> component currently relies on browser specific API's, thus it won't work with SSR! (tough you can still render it with Next.js's <Link target="_blank" href="https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr">dynamic</Link> feature while making sure not to render it on the server side)
+  </ToggleBlockquote.Paragraph>
+  <ToggleBlockquote.Paragraph>
+  <strong>You should install only the packages you need!</strong>
+  </ToggleBlockquote.Paragraph>
+</ToggleBlockquote>
+```
+
 #### Initial steps
 
 - install InstUI related dependencies:
@@ -18,8 +37,6 @@ This document will demonstrate how to achieve Server Side Rendering (SSR) with [
 yarn add @instructure/emotion @instructure/ui-react-utils
 ```
 
-> Note!
->
 > Using components which are levereging [Portals](/#Portal) (Modal, Dialog, Tray, Position, Overlay, DrawerLayout) under the hood to render content is not recommended to use on the server side!
 > If you must do so, please render them using Next.js's [dynamic](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr) feature with `ssr` set to false.
 
