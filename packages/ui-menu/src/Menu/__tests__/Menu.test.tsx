@@ -335,6 +335,14 @@ describe('<Menu />', async () => {
     it('should apply offset values to Popover', async () => {
       const getTransforms = (transform: string) => {
         const transformValues = transform.match(/([\d])\w*/g)!.slice(-2)
+        // eslint-disable-next-line no-console
+        console.log(
+          'transform matrix',
+          transform,
+          'values',
+          transformValues[0],
+          transformValues[1]
+        )
         return {
           transformX: parseInt(transformValues[0]),
           transformY: parseInt(transformValues[1])
