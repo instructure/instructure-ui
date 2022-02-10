@@ -17,6 +17,8 @@ jobs:
         run: yarn bootstrap
       - name: Run test for the patchset
         run: yarn test:patchset
+      - name: Run SSR tests
+        run: yarn test:ssr
       - name: Calculate bundle size
         run: yarn danger ci
         env:
