@@ -32,6 +32,7 @@
     "test:changes": "ui-test --changed",
     "test": "ui-test",
     "test:jest": "lerna run test:jest --stream",
+    "test:ssr": "lerna run test:ssr --stream --scope @instructure/ui",
     "lint": "lerna run lint --stream",
     "lint:changes": "yarn lint --since HEAD^",
     "lint:fix": "lerna run lint:fix --stream",
