@@ -39,7 +39,9 @@ const envVars = {
 
 module.exports = [
   // fix Buffer/process is not defined errors:
-  new webpack.ProvidePlugin({ process: 'process/browser' }),
-  new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] }),
+  new webpack.ProvidePlugin({
+    process: 'process/browser',
+    Buffer: ['buffer', 'Buffer']
+  }),
   new webpack.EnvironmentPlugin(envVars)
 ]
