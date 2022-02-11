@@ -19,7 +19,8 @@
     "build": "ui-build --modules es,cjs",
     "build:watch": "yarn ts:check --watch & ui-build --watch",
     "build:types": "tsc -p tsconfig.build.json",
-    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false",
+    "hello": "echo hello from view!"
   },
   "license": "MIT",
   "dependencies": {
