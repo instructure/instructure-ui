@@ -116,12 +116,6 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
       coverageIstanbulReporter,
       browsers,
 
-      client: {
-        chai: {
-          includeStack: true
-        }
-      },
-
       port: 9876,
 
       colors: true,

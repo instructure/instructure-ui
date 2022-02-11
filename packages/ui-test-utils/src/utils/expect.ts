@@ -31,6 +31,10 @@ import promised from 'chai-as-promised'
 import assertions from './assertions'
 
 const init = (chai: Chai.ChaiStatic) => {
+  // eslint-disable-next-line no-param-reassign
+  chai.config.truncateThreshold = 999
+  // eslint-disable-next-line no-param-reassign
+  chai.config.includeStack = true
   chai.use(sinon)
   chai.use(exclude)
   chai.use(string)
