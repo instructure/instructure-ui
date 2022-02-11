@@ -29,7 +29,6 @@ import { App } from './App'
 import { canvas } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
-import { Buffer } from 'buffer'
 
 ReactDOM.render(
   <InstUISettingsProvider theme={canvas}>
