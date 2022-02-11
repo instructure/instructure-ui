@@ -424,15 +424,15 @@ describe('<Menu />', async () => {
         expect(await accessible()).to.be.true()
       })
 
-      it('should meet standards when menu is open', async () => {
-        await mount(
+      it.only('should meet standards when menu is open', async () => {
+        const subject = await mount(
           <Menu trigger={<button>More</button>} defaultShow>
             <MenuItem>Learning Mastery</MenuItem>
             <MenuItem disabled>Gradebook</MenuItem>
           </Menu>
         )
-
-        expect(await accessible()).to.be.true()
+        const el = wrapQueryResult(subject.getDOMNode())
+        expect(await el.accessible()).to.be.true()
       })
     })
   })
