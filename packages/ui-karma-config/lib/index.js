@@ -177,8 +177,10 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
         devtool: NO_DEBUG ? false : 'inline-source-map',
         plugins: [
           // fix Buffer/process is not defined errors:
-          new webpack.ProvidePlugin({ process: 'process/browser' }),
-          new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] })
+          new webpack.ProvidePlugin({
+            process: 'process/browser',
+            Buffer: ['buffer', 'Buffer']
+          })
         ],
         resolve: baseWebpackConfig.resolve,
         externals: {

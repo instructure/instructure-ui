@@ -424,7 +424,7 @@ describe('<Menu />', async () => {
         expect(await accessible()).to.be.true()
       })
 
-      it.only('should meet standards when menu is open', async () => {
+      it('should meet standards when menu is open', async () => {
         const subject = await mount(
           <Menu trigger={<button>More</button>} defaultShow>
             <MenuItem>Learning Mastery</MenuItem>
