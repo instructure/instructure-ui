@@ -39,9 +39,7 @@ export default async function runAxe(
 ) {
   let result: Error | true = true
   const context: axeCore.ContextObject = {
-    // This can accept a DOM node, just the typing is buggy as of axe-core 4.3.5
-    // https://github.com/dequelabs/axe-core/issues/3334
-    include: [element as any],
+    include: [element],
     exclude: options.exclude
   }
   const config: axeCore.RunOptions = {
@@ -64,22 +62,6 @@ export default async function runAxe(
     const violations = (axeResult.violations || []).filter(
       (violation) => !ignores.includes(violation.id)
     )
-
-    violations.forEach((violation) => {
-      /* eslint-disable no-console */
-      console.groupCollapsed(`[${violation.id}] ${violation.help}`)
-      violation.nodes.forEach(function (node) {
-        const el = document.querySelector(node.target.toString())
-        if (!el) {
-          console.info(node.target.toString())
-        } else {
-          console.info(el)
-        }
-      })
-      console.groupEnd()
-      /* eslint-enable no-console */
-    })
-
     if (violations.length > 0) {
       result = new Error(formatError(violations))
     }
@@ -90,18 +72,13 @@ export default async function runAxe(
 }
 
 function formatError(violations: axeCore.Result[]) {
-  return violations
-    .map((violation) => {
-      return [
-        `[${violation.id}] ${violation.help}`,
-        violation.nodes
-          .map(function (node) {
-            return node.target.toString()
-          })
-          .join('\n'),
-        violation.description,
-        `${violation.helpUrl}\n`
-      ].join('\n')
-    })
-    .join('\n')
+  let msg = ''
+  for (const violation of violations) {
+    msg += `[${violation.id}] rule violation:\n`
+    for (const node of violation.nodes) {
+      msg += `${node.failureSummary}:\n${node.html}\n`
+    }
+    msg += `${violation.help} ${violation.helpUrl}\n`
+  }
+  return msg
 }

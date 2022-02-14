@@ -78,8 +78,12 @@ export function generateA11yTests<Props>(
             it(description, async () => {
               const subject = await mount(<Example />)
               const element = within(subject.getDOMNode())
-
-              expect(await element.accessible()).to.be.true()
+              const result = await element.accessible()
+              if (result !== true) {
+                // \n is needed because chai cuts the log in two with a
+                // expected - actual message.
+                expect.fail('\n' + result.message)
+              }
             })
             j++
           })

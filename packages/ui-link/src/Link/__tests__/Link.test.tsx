@@ -188,9 +188,8 @@ describe('<Link />', async () => {
 
   describe('with `as` prop', async () => {
     describe('with `onClick`', async () => {
-      const onClick = stub()
-
       it('should render designated tag', async () => {
+        const onClick = stub()
         await mount(
           <Link as="a" onClick={onClick}>
             Hello World
@@ -202,6 +201,7 @@ describe('<Link />', async () => {
       })
 
       it('should set role="button"', async () => {
+        const onClick = stub()
         await mount(
           <Link as="span" onClick={onClick}>
             Hello World
@@ -212,6 +212,7 @@ describe('<Link />', async () => {
 
       describe('should not set type="button", unless it is actually a button', async () => {
         it('should not set type="button" on other things like <span>s', async () => {
+          const onClick = stub()
           await mount(
             <Link as="span" onClick={onClick}>
               Hello World
@@ -225,6 +226,7 @@ describe('<Link />', async () => {
         })
 
         it('should set type="button" on <button>s', async () => {
+          const onClick = stub()
           await mount(
             <Link as="button" onClick={onClick}>
               Hello World
@@ -235,6 +237,7 @@ describe('<Link />', async () => {
       })
 
       it('should set tabIndex="0"', async () => {
+        const onClick = stub()
         await mount(
           <Link as="span" onClick={onClick}>
             Hello World

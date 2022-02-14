@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, match } from '@instructure/ui-test-utils'
+import { expect, mount } from '@instructure/ui-test-utils'
 
 import { MetricGroup } from '../index'
 import { Metric } from '../../Metric'
@@ -41,18 +41,6 @@ describe('<MetricGroup />', async () => {
     const list = await MetricGroupLocator.find()
 
     expect(list.getTextContent()).to.equal('Grade80%Late4Missing2')
-  })
-
-  it('should not allow invalid children', async () => {
-    const cs = spy(console, 'error')
-    const warning = "Expected one of Metric in MetricGroup but found 'div'"
-
-    await mount(
-      <MetricGroup>
-        <div>foo</div>
-      </MetricGroup>
-    )
-    expect(cs).to.have.been.calledWith(match.string, match.string, warning)
   })
 
   it('passes props through to MetricGroup element', async () => {

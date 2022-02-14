@@ -125,19 +125,6 @@ describe('<Options />', async () => {
     expect(options.getAttribute('role')).to.equal('presentation')
   })
 
-  it('should not allow invalid children', async () => {
-    const cs = spy(console, 'error')
-    const warning =
-      "Expected one of Options, Item, Separator in Options but found 'span'"
-
-    await mount(
-      <Options>
-        <span />
-      </Options>
-    )
-    expect(cs).to.have.been.calledWith(match.string, match.string, warning)
-  })
-
   it('should allow null children', async () => {
     await mount(<Options />)
     const options = await OptionsLocator.find()

@@ -31,9 +31,8 @@ const defaultSRLabel = (currentPage: number, numberOfPages: number) =>
   `Select page (${currentPage} of ${numberOfPages})`
 
 describe('<PaginationPageInput />', async () => {
-  const defaultOnChange = stub()
-
   it('should render', async () => {
+    const defaultOnChange = stub()
     await mount(
       <PaginationPageInput
         numberOfPages={10}
@@ -48,6 +47,7 @@ describe('<PaginationPageInput />', async () => {
   })
 
   it('should display the current page number', async () => {
+    const defaultOnChange = stub()
     await mount(
       <PaginationPageInput
         numberOfPages={10}
@@ -63,6 +63,7 @@ describe('<PaginationPageInput />', async () => {
   })
 
   it('should correctly update page number', async () => {
+    const defaultOnChange = stub()
     const subject = await mount(
       <PaginationPageInput
         numberOfPages={10}
@@ -82,6 +83,7 @@ describe('<PaginationPageInput />', async () => {
   })
 
   it("shouldn't display the arrow keys of NumberInput", async () => {
+    const defaultOnChange = stub()
     await mount(
       <PaginationPageInput
         numberOfPages={10}
@@ -99,6 +101,7 @@ describe('<PaginationPageInput />', async () => {
   })
 
   it("should disable the input on 'disabled'", async () => {
+    const defaultOnChange = stub()
     await mount(
       <PaginationPageInput
         numberOfPages={10}
@@ -115,6 +118,7 @@ describe('<PaginationPageInput />', async () => {
   })
 
   it('should set the ScreenReaderLabel for the input', async () => {
+    const defaultOnChange = stub()
     await mount(
       <PaginationPageInput
         numberOfPages={10}
@@ -130,6 +134,7 @@ describe('<PaginationPageInput />', async () => {
   })
 
   it('should display the number of pages in the label', async () => {
+    const defaultOnChange = stub()
     await mount(
       <PaginationPageInput
         numberOfPages={10}
@@ -147,6 +152,7 @@ describe('<PaginationPageInput />', async () => {
 
   describe('on typing', async () => {
     it('a number, should update the number in the input', async () => {
+      const defaultOnChange = stub()
       await mount(
         <PaginationPageInput
           numberOfPages={10}
@@ -165,6 +171,7 @@ describe('<PaginationPageInput />', async () => {
     })
 
     it('a letter, should not update the input', async () => {
+      const defaultOnChange = stub()
       await mount(
         <PaginationPageInput
           numberOfPages={10}
@@ -183,6 +190,7 @@ describe('<PaginationPageInput />', async () => {
     })
 
     it("shouldn't call onChange on input", async () => {
+      const defaultOnChange = stub()
       const onChange = stub()
 
       await mount(
@@ -205,6 +213,7 @@ describe('<PaginationPageInput />', async () => {
 
   describe('on input and Enter', async () => {
     it('should keep the number in the input', async () => {
+      const defaultOnChange = stub()
       await mount(
         <PaginationPageInput
           numberOfPages={10}

@@ -146,7 +146,7 @@ class ReactComponentWrapper {
   }
 
   unmount() {
-    return new Promise((resolve, reject) => {
+    return new Promise<boolean | undefined>((resolve, reject) => {
       try {
         let result
         if (this._mountNode) {

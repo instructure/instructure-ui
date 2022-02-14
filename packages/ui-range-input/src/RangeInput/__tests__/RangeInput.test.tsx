@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, match, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { RangeInput } from '../index'
 import { RangeInputLocator } from '../RangeInputLocator'
@@ -112,19 +112,6 @@ describe('<RangeInput />', async () => {
     const input = await rangeInput.findInput()
 
     expect(input).to.have.attribute('step', '5')
-  })
-
-  it('requires an `onChange` prop with a `value` prop', async () => {
-    const consoleError = stub(console, 'error')
-    await mount(
-      <RangeInput label="Opacity" name="opacity" max={100} min={0} value={50} />
-    )
-
-    expect(consoleError).to.have.been.calledWithMatch(
-      match.string,
-      match.string,
-      `You provided a 'value' prop without an 'onChange' handler on`
-    )
   })
 
   it('formats the value displayed', async () => {

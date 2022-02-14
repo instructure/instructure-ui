@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect, stub } from '@instructure/ui-test-utils'
+import { expect } from '@instructure/ui-test-utils'
 import { getShorthandPropValue } from '../getShorthandPropValue'
 
 const theme = {
@@ -92,15 +92,5 @@ describe('getShorthandPropValue', () => {
     const values = '0 none auto large'
     const result = getShorthandPropValue(name, theme, values, 'border')
     expect(result).to.equal('0 0 auto 0.3rem')
-  })
-
-  it('warns if the theme value does not exist', () => {
-    const value = 'x-small'
-    const consoleError = stub(console, 'error')
-    const warning = `Warning: [TestComponent] 'borderRadiusXSmall' is an invalid 'borderRadius' value.`
-
-    getShorthandPropValue(name, theme, value, 'borderRadius')
-
-    expect(consoleError).to.have.been.calledWith(warning)
   })
 })

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, within, stub, match } from '@instructure/ui-test-utils'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { FormFieldLabel } from '../index'
 
@@ -40,19 +40,6 @@ describe('<FormFieldLabel />', async () => {
 
     const formFieldLabel = within(subject.getDOMNode())
     expect(await formFieldLabel.find('li:contains(Foo)')).to.exist()
-  })
-
-  it('should require children', async () => {
-    const consoleError = stub(console, 'error')
-
-    // @ts-expect-error We are expecting it to break
-    await mount(<FormFieldLabel />)
-
-    expect(consoleError).to.have.been.calledWith(
-      match.string,
-      match.string,
-      'The prop `children` is marked as required in `FormFieldLabel`, but its value is `undefined`.'
-    )
   })
 
   it('should meet a11y standards', async () => {
