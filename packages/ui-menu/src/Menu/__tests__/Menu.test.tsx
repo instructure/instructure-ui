@@ -29,9 +29,7 @@ import {
   stub,
   wait,
   accessible,
-  spy,
-  wrapQueryResult,
-  match
+  wrapQueryResult
 } from '@instructure/ui-test-utils'
 
 import { Menu, MenuItem, MenuItemSeparator } from '../index'
@@ -62,22 +60,6 @@ describe('<Menu />', async () => {
       const menu = await MenuLocator.find(':label(Settings)')
 
       expect(await menu.accessible()).to.be.true()
-    })
-
-    it('should not allow invalid children', async () => {
-      const cs = spy(console, 'error')
-      const warning = 'Expected one of '
-
-      await mount(
-        <Menu>
-          <div />
-        </Menu>
-      )
-      expect(cs).to.have.been.calledWithMatch(
-        match.string,
-        match.string,
-        warning
-      )
     })
 
     it('should call onSelect when menu item is selected', async () => {

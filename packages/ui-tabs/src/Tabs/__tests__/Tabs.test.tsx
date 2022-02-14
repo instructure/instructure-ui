@@ -23,14 +23,7 @@
  */
 
 import React from 'react'
-import {
-  expect,
-  match,
-  mount,
-  spy,
-  stub,
-  wait
-} from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { Tabs } from '../index'
 import { TabsLocator } from '../TabsLocator'
@@ -99,18 +92,6 @@ describe('<Tabs />', async () => {
     }
 
     expect(error).to.be.false()
-  })
-
-  it('should not allow invalid children', async () => {
-    const cs = spy(console, 'error')
-    const warning = "Expected one of Panel,  in Tabs but found 'div'"
-
-    await mount(
-      <Tabs>
-        <div>foo</div>
-      </Tabs>
-    )
-    expect(cs).to.have.been.calledWith(match.string, match.string, warning)
   })
 
   it('should preserve Tab.Panel keys', async () => {

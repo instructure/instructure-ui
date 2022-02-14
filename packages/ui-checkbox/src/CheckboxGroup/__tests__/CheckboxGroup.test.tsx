@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, match, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { CheckboxGroupLocator } from '../CheckboxGroupLocator'
 
@@ -83,29 +83,6 @@ describe('<CheckboxGroup />', async () => {
     const checkboxGroup = await CheckboxGroupLocator.find()
     const legend = await checkboxGroup.find('legend')
     expect(legend.getTextContent()).to.equal(description)
-  })
-
-  it('requires an `onChange` prop with a `value` prop', async () => {
-    const consoleError = stub(console, 'error')
-
-    await mount(
-      <CheckboxGroup
-        name="sports"
-        description="Select your favorite sports"
-        value={['basketball']}
-      >
-        <Checkbox label="Football" value="football" />
-        <Checkbox label="Basketball" value="basketball" />
-        <Checkbox label="Volleyball" value="volleyball" />
-        <Checkbox label="Other" value="other" />
-      </CheckboxGroup>
-    )
-
-    expect(consoleError).to.have.been.calledWithMatch(
-      match.string,
-      match.string,
-      `You provided a 'value' prop without an 'onChange' handler on 'CheckboxGroup'`
-    )
   })
 
   it('does not call the onChange prop when disabled', async () => {

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { mount, expect, stub, wait, spy } from '@instructure/ui-test-utils'
+import { mount, expect, stub, wait } from '@instructure/ui-test-utils'
 
 import { IconButton } from '../index'
 import { IconButtonLocator } from '../IconButtonLocator'
@@ -53,14 +53,6 @@ describe('<IconButton/>', async () => {
     )
     const button = await IconButtonLocator.find()
     expect(await button.find(iconSelector)).to.exist()
-  })
-
-  it('should fail if `screenReaderLabel` is not provided', async () => {
-    const cs = spy(console, 'error')
-    // @ts-expect-error we are expecting this to fail
-    await mount(<IconButton renderIcon={icon} />)
-
-    expect(cs).to.have.been.called()
   })
 
   it('should provide a focused getter', async () => {

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, match, mount, stub, wait } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { Checkbox } from '../index'
 import { CheckboxLocator } from '../CheckboxLocator'
@@ -339,25 +339,6 @@ describe('<Checkbox />', async () => {
       const checkbox = await CheckboxLocator.find()
 
       expect(await checkbox.accessible()).to.be.true()
-    })
-
-    it('should require a label', async () => {
-      const consoleError = stub(console, 'error')
-
-      await mount(
-        <Checkbox
-          label={undefined}
-          defaultChecked
-          value="someValue"
-          name="someName"
-        />
-      )
-
-      expect(consoleError).to.have.been.calledWithMatch(
-        match.string,
-        match.string,
-        'prop `label` is marked as required in `Checkbox`'
-      )
     })
   })
 })
