@@ -304,7 +304,8 @@ const generateStyle = (
       fontWeight: componentTheme.labelFontWeight,
       lineHeight: componentTheme.labelLineHeight,
       ...labelVariants[variant!].base,
-      ...labelVariants[variant!][size!]
+      ...labelVariants[variant!][size!],
+      cursor: 'default'
     }
   }
 }
