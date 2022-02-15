@@ -47,10 +47,10 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path>
 
 ### Updating more complex props to the InstUI v8 syntax
 
-This codemod upgrades more complex changes like Button, also outputs any manual changes needed to the console. Run this in a InstUI v7 codebase only.
+This codemod upgrades more complex changes like Button, also outputs any manual changes needed to the console. Run this in a InstUI v7 codebase only. This command has an optional fileName parameter, supplying this will append to the given file the warnings.
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.js <path>
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.js <path> -fileName updateV7PropsWarnings.txt
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg

@@ -24,7 +24,7 @@
 
 import type { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
 import formatSource from './utils/formatSource'
-import { findImport } from './helpers/v7PropsUpdateHelpers'
+import { findImport, writeWarningsToFile } from './helpers/v7PropsUpdateHelpers'
 import updateV7ButtonsMisc from './utils/updateV7ButtonsMisc'
 import updateV7ButtonsWithText from './utils/updateV7ButtonsWithText'
 import updateV7ButtonsIconCircle from './utils/updateV7ButtonsIconCircle'
@@ -49,13 +49,20 @@ import warnV7ComponentDeprecations from './utils/warnV7ComponentDeprecations'
  * @param file Holds information about the currently processed file.
  * @param api This object exposes the JSCodeshift library and helper functions
  *            from the runner.
+ * @param options pass a fileName parameter to write the warnings to a file.
  * @returns {*|null} null if there was nothing to reformat
  */
-export default function updateV7Props(file: FileInfo, api: API) {
+export default function updateV7Props(
+  file: FileInfo,
+  api: API,
+  options?: { fileName: string }
+) {
   const j = api.jscodeshift
   const root = j(file.source)
   const hasModifications = updateProps(j, root, file.path)
-  //TODO writeWarningsToFile('updateV7PropsWarnings.txt')
+  if (options && options.fileName) {
+    writeWarningsToFile(options.fileName)
+  }
   return hasModifications ? formatSource(root.toSource(), file.path) : null
 }
 
