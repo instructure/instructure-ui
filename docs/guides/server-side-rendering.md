@@ -15,13 +15,16 @@ This document will demonstrate how to achieve Server Side Rendering (SSR) with [
 embed: true
 ---
 <ToggleBlockquote
-  summary="Note!"
+  summary="Warning!"
 >
   <ToggleBlockquote.Paragraph>
    You should not install the InstUI meta package <code>@instructure/ui</code> since it has components that are not yet Server Side Renderable out of the box.
   </ToggleBlockquote.Paragraph>
   <ToggleBlockquote.Paragraph>
    The <Link href="/#CodeEditor">CodeEditor</Link> component currently relies on browser specific API's, thus it won't work with SSR! (You can still render it with Next.js's <Link target="_blank" href="https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr">dynamic</Link> feature while making sure not to render it on the server side.)
+  </ToggleBlockquote.Paragraph>
+  <ToggleBlockquote.Paragraph>
+    <i>Solving this limitation would be a breaking change, so we are planning to do this in the next major version of InstUI (v9).</i>
   </ToggleBlockquote.Paragraph>
   <ToggleBlockquote.Paragraph>
   <strong>You should install only the packages you need!</strong>
