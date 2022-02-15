@@ -39,7 +39,7 @@ import {
   Literal
 } from 'jscodeshift'
 import type { LiteralKind } from 'ast-types/gen/kinds'
-//import fs from 'fs'
+import fs from 'fs'
 
 type JSXChild =
   | JSXElement
@@ -508,25 +508,28 @@ function isLiteral(elem?: astElem | null): elem is Literal {
   return elem !== null && elem !== undefined && elem.type === 'Literal'
 }
 
-//const warnings: string[] = []
+const warnings: string[] = []
 function printWarning(
   filePath: string,
   line: number | undefined,
   message: string
 ) {
   const warning = filePath + ': ' + line + ': ' + message
-  //warnings.push(warning)
+  warnings.push(warning)
   console.warn(warning)
 }
-/*
+
 function writeWarningsToFile(fileName: string) {
   if (warnings.length > 0) {
     const sorted = warnings.sort()
-    fs.writeFileSync(fileName, sorted.join("\n") + "\n", {encoding: 'utf-8', flag: 'a'})
+    fs.writeFileSync(fileName, sorted.join('\n') + '\n', {
+      encoding: 'utf-8',
+      flag: 'a'
+    })
     warnings.length = 0
   }
 }
-*/
+
 export {
   findElements,
   findAttribute,
@@ -536,7 +539,7 @@ export {
   getVisibleChildren,
   removeAllChildren,
   printWarning,
-  //writeWarningsToFile,
+  writeWarningsToFile,
   // type checkers
   isJSXAttribue,
   isJSXElement,
