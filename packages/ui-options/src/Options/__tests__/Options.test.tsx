@@ -27,9 +27,7 @@ import {
   expect,
   mount,
   stub,
-  generateA11yTests,
-  spy,
-  match
+  generateA11yTests
 } from '@instructure/ui-test-utils'
 
 import { Options } from '../index'

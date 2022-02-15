@@ -24,8 +24,13 @@
 
 import axeCore from 'axe-core'
 
-type AxeCheckOptions = {
-  exclude?: string | Array<string | string[]>
+export type AxeCheckOptions = {
+  /**
+   * What to exclude from the a11y check. Can be a node, a CSS selector(s) as
+   * string. For more see
+   * https://www.deque.com/axe/core-documentation/api-documentation/#include-exclude-object
+   */
+  exclude?: string | Node | (string | Node | string[])[]
   /**
    * Violations to ignore/filter out. 'color-contrast' is automatically excluded
    * because we test color contrast in theme tests.
@@ -55,7 +60,6 @@ export default async function runAxe(
     // violations to ignore/filter out
     const ignores = [
       ...(options.ignores || []),
-      'aria-hidden-focus', // TODO: remove this and fix the broken tests
       'color-contrast' // because we test color contrast in theme tests
     ]
 

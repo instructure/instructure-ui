@@ -48,13 +48,16 @@ const renderExample = ({ Component, componentProps, key }: Example<any>) => (
  * @param Component - The base Component
  * @param componentExample - The example definition json, this will be the basis for the prop
  * combination generation.
+ * @param ariaRulesToIgnore - ARIA rules to ignore. these must be one of the
+ * rules described here: https://dequeuniversity.com/rules/axe/4.4
  *
  * @module generateA11yTests
  * @private
  */
 export function generateA11yTests<Props>(
   Component: React.ComponentType<any>,
-  componentExample: StoryConfig<Props>
+  componentExample: StoryConfig<Props>,
+  ariaRulesToIgnore?: string[]
 ) {
   const sections = generateComponentExamples(Component, componentExample)
   describe(`${Component.displayName} should meet accessibility standards`, async () => {
@@ -78,7 +81,11 @@ export function generateA11yTests<Props>(
             it(description, async () => {
               const subject = await mount(<Example />)
               const element = within(subject.getDOMNode())
-              const result = await element.accessible()
+              let axeOptions = undefined
+              if (ariaRulesToIgnore) {
+                axeOptions = { ignores: ariaRulesToIgnore }
+              }
+              const result = await element.accessible(axeOptions)
               if (result !== true) {
                 // \n is needed because chai cuts the log in two with a
                 // expected - actual message.

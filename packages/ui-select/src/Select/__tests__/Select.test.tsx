@@ -924,6 +924,8 @@ describe('<Select />', async () => {
   })
 
   describe('with generated examples', async () => {
-    generateA11yTests(Select, SelectExamples)
+    // aria-allowed-role is ignored because when the <Select> is readonly
+    // we set its role to "button" and this causes an ARIA violation
+    generateA11yTests(Select, SelectExamples, ['aria-allowed-role'])
   })
 })

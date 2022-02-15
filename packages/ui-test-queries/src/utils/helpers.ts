@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import runAxeCheck from '@instructure/ui-axe-check'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import type { AxeCheckOptions } from '@instructure/ui-axe-check'
 
 import { elementToString } from './elementToString'
 import { fireEvent } from './events'
@@ -423,10 +424,11 @@ function toString(
   return elementToString(element, maxLength, options)
 }
 
-function accessible(
-  element = document.body,
-  options?: Record<string, unknown>
-) {
+/**
+ * Runs axe accessibility check on the given element. If none is given it runs
+ * on the whole `document.body`
+ */
+function accessible(element = document.body, options?: AxeCheckOptions) {
   if (isElement(element)) {
     return runAxeCheck(element, options)
   } else {
@@ -506,10 +508,6 @@ function classNames(element: Element) {
 function matches(element: Element, selector: string | undefined) {
   return matchesSelector(element, selector)
 }
-
-//function bounds(element: Element) {
-//  return getBoundingClientRect(element).property
-//}
 
 function checked(element: Element) {
   return (element as any).checked || getAttribute(element, 'aria-checked')
