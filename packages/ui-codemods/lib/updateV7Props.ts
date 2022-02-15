@@ -55,6 +55,7 @@ export default function updateV7Props(file: FileInfo, api: API) {
   const j = api.jscodeshift
   const root = j(file.source)
   const hasModifications = updateProps(j, root, file.path)
+  //TODO writeWarningsToFile('updateV7PropsWarnings.txt')
   return hasModifications ? formatSource(root.toSource(), file.path) : null
 }
 

@@ -37,6 +37,7 @@ import {
   isJSXElement,
   isJSXExpressionContainer,
   isJSXText,
+  printWarning,
   removeAllChildren,
   renameElements
 } from '../helpers/v7PropsUpdateHelpers'
@@ -79,13 +80,11 @@ export default function updateV7ButtonsIconCircle(
       return true
     }
     if (children.length > 1) {
-      console.warn(
-        'Cannot update icon/circle Button in ' +
-          filePath +
-          ' at line ' +
-          path.value.loc?.start.line +
-          ' because it has multiple children. ' +
-          'You will need to update this manually.'
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
+        'Cannot update icon/circle Button because it has multiple ' +
+          'children. You will need to update this manually.'
       )
       return false
     }
@@ -104,24 +103,22 @@ export default function updateV7ButtonsIconCircle(
           } else if (isJSXExpressionContainer(firstChild)) {
             screenReaderChildText = firstChild
           } else {
-            console.warn(
-              'Cannot update icon/circle Button in ' +
-                filePath +
-                ' at line ' +
-                path.value.loc?.start.line +
-                ' because I cant recognize whats inside its' +
-                'ScreenReaderContent. You will need to update this manually.'
+            printWarning(
+              filePath,
+              path.value.loc?.start.line,
+              'Cannot update icon/circle Button because I cant ' +
+                'recognize whats inside its ScreenReaderContent. ' +
+                'You will need to update this manually.'
             )
             return false
           }
         } else {
-          console.warn(
-            'Cannot update icon/circle Button in ' +
-              filePath +
-              ' at line ' +
-              path.value.loc?.start.line +
-              ' it has multiple ScreenReaderContent children.' +
-              'You will need to update this manually.'
+          printWarning(
+            filePath,
+            path.value.loc?.start.line,
+            'Cannot update icon/circle Button because it has ' +
+              'multiple ScreenReaderContent children. You will need to ' +
+              'update this manually.'
           )
           return false
         }
@@ -137,13 +134,11 @@ export default function updateV7ButtonsIconCircle(
       removeAllChildren(path.value)
       return true
     }
-    console.warn(
-      'Cannot update icon/circle Button in ' +
-        filePath +
-        ' at line ' +
-        path.value.loc?.start.line +
-        '\n because it has visible children. ' +
-        'You will need to update this manually.'
+    printWarning(
+      filePath,
+      path.value.loc?.start.line,
+      'Cannot update icon/circle Button because it has visible ' +
+        'children. You will need to update this manually.'
     )
     return false
   })
@@ -160,10 +155,11 @@ export default function updateV7ButtonsIconCircle(
   )
 
   // rename every <Button> to <IconButton> (or whatever alias it's imported under)
-  renameElements(buttonsWithNoText, 'Button', iconButtonImportName, filePath)
+  renameElements(filePath, buttonsWithNoText, 'Button', iconButtonImportName)
 
   // remove variant="icon", add withBorder={false} withBackground={false}
   const iconButton = findAttribute(
+    filePath,
     j,
     buttonsWithNoText,
     'variant',
@@ -173,6 +169,7 @@ export default function updateV7ButtonsIconCircle(
 
   // change variant="icon-inverse" to color="primary-inverse" withBorder={false} withBackground={false}
   const iconInverse = findAttribute(
+    filePath,
     j,
     buttonsWithNoText,
     'variant',
@@ -186,7 +183,7 @@ export default function updateV7ButtonsIconCircle(
   addWithBorderBackground(j, iconInverse)
 
   // change variant="circle-default" to color="secondary" shape="circle"
-  findAttribute(j, buttonsWithNoText, 'variant', 'circle-default')
+  findAttribute(filePath, j, buttonsWithNoText, 'variant', 'circle-default')
     .replaceWith((nodePath) => {
       const { node } = nodePath
       node.name.name = 'color'
@@ -198,7 +195,7 @@ export default function updateV7ButtonsIconCircle(
     )
 
   // change variant="circle-primary" to color="primary" shape="circle"
-  findAttribute(j, buttonsWithNoText, 'variant', 'circle-primary')
+  findAttribute(filePath, j, buttonsWithNoText, 'variant', 'circle-primary')
     .replaceWith((nodePath) => {
       const { node } = nodePath
       node.name.name = 'color'
@@ -210,7 +207,7 @@ export default function updateV7ButtonsIconCircle(
     )
 
   // change variant="circle-danger" to color="danger" shape="circle"
-  findAttribute(j, buttonsWithNoText, 'variant', 'circle-danger')
+  findAttribute(filePath, j, buttonsWithNoText, 'variant', 'circle-danger')
     .replaceWith((nodePath) => {
       const { node } = nodePath
       node.name.name = 'color'

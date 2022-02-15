@@ -36,7 +36,8 @@ import {
   isJSXElement,
   isJSXIdentifier,
   isJSXMemberExpression,
-  isJSXText
+  isJSXText,
+  printWarning
 } from '../helpers/v7PropsUpdateHelpers'
 
 /**
@@ -96,12 +97,11 @@ export default function updateV7Popover(
   ///// `<Popover onToggle=` -> Display warning that it needs to be done manually
   findElements(filePath, j, root, 'Popover', { name: 'onToggle' }).forEach(
     (path) => {
-      console.warn(
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
         "Popover's onToggle needs to be converted manually " +
-          'to onShowContent and onHideContent at\n' +
-          filePath +
-          ' line ' +
-          path.value.loc?.start.line
+          'to onShowContent and onHideContent'
       )
     }
   )

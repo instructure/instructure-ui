@@ -27,6 +27,7 @@ import {
   findAttribute,
   findElements,
   isJSXAttribue,
+  printWarning,
   renameElements
 } from '../helpers/v7PropsUpdateHelpers'
 import { Collection, JSCodeshift, Literal } from 'jscodeshift'
@@ -79,61 +80,60 @@ export default function UpdateV7ButtonsLink(
       '@instructure/ui-link',
       '@instructure/ui'
     ])
-    renameElements(linkVariants, importedName, linkImportName, filePath)
-    renameElements(linkInverseVariants, importedName, linkImportName, filePath)
+    renameElements(filePath, linkVariants, importedName, linkImportName)
+    renameElements(filePath, linkInverseVariants, importedName, linkImportName)
   }
 
   ///// insert isWithinText={false} and remove variant for variant="link"
-  findAttribute(j, linkVariants, 'href').insertAfter(
+  findAttribute(filePath, j, linkVariants, 'href').insertAfter(
     j.jsxAttribute(
       j.jsxIdentifier('isWithinText'),
       j.jsxExpressionContainer(j.jsxIdentifier('false'))
     )
   )
-  findAttribute(j, linkVariants, 'variant').remove()
+  findAttribute(filePath, j, linkVariants, 'variant').remove()
   linkVariants.forEach((path) => {
     displayHrefWarning(filePath, path.value.loc!.start.line)
   })
 
   ///// variant="link-inverse" => color="link-inverse" isWithinText={false}
-  findAttribute(j, linkInverseVariants, 'href').insertAfter(
+  findAttribute(filePath, j, linkInverseVariants, 'href').insertAfter(
     j.jsxAttribute(
       j.jsxIdentifier('isWithinText'),
       j.jsxExpressionContainer(j.jsxIdentifier('false'))
     )
   )
-  findAttribute(j, linkInverseVariants, 'variant').replaceWith((nodePath) => {
-    const { node } = nodePath
-    node.name.name = 'color'
-    ;(node.value as Literal).value = 'link-inverse'
-    return nodePath.node
-  })
+  findAttribute(filePath, j, linkInverseVariants, 'variant').replaceWith(
+    (nodePath) => {
+      const { node } = nodePath
+      node.name.name = 'color'
+      ;(node.value as Literal).value = 'link-inverse'
+      return nodePath.node
+    }
+  )
   linkVariants.forEach((path) => {
     displayHrefWarning(filePath, path.value.loc!.start.line)
   })
 }
 
 function displayHrefWarning(filePath: string, lineNumber: number) {
-  console.warn(
+  printWarning(
+    filePath,
+    lineNumber,
     'Button with link or link-inverse variant might need the removal' +
-      ' of margin/padding parameters. File:\n' +
-      filePath +
-      ' line ' +
-      lineNumber +
-      '.\nAlso you will likely need to add @instructure/ui-link as a ' +
-      'dependency. For more see ' +
+      ' of margin/padding parameters. Also you will likely need to add ' +
+      '@instructure/ui-link as a dependency. For more see ' +
       'https://instructure.design/v7/#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-an-href-attribute-and-padding-overrides'
   )
 }
 
 function displayNoHrefWarning(filePath: string, lineNumber: number) {
-  console.warn(
-    'Cannot upgrade <Button link or link-inverse manually when it has no href prop at ' +
-      filePath +
-      ' line ' +
-      lineNumber +
-      '. Also you will likely need to add @instructure/ui-link as a ' +
-      'dependency. For more see ' +
+  printWarning(
+    filePath,
+    lineNumber,
+    'Cannot upgrade <Button link or link-inverse manually when it ' +
+      'has no href prop. Also you will likely need to add @instructure/ui-link ' +
+      'as a dependency. For more see ' +
       'https://instructure.design/v7/#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-no-href-attribute-and-padding-overrides'
   )
 }

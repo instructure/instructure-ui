@@ -39,6 +39,7 @@ import {
   Literal
 } from 'jscodeshift'
 import type { LiteralKind } from 'ast-types/gen/kinds'
+//import fs from 'fs'
 
 type JSXChild =
   | JSXElement
@@ -104,18 +105,17 @@ function findElements(
     if (!warningsMap[line]) {
       // prevent displaying the same warning multiple times
       warningsMap[line] = true
-      console.warn(
-        'Spread attribute (`...`) detected in ' +
-          filePath +
-          ' line ' +
-          path.value.loc?.start.line +
-          '\nPlease double check the' +
-          ' result, I cannot see what is inside a spread object.'
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
+        'Spread attribute (`...`) detected. Please double check the ' +
+          'result, I cannot see what is inside a spread object. '
       )
     }
   })
   return elements.filter((path) => {
     return checkIfAttributeExist(
+      filePath,
       path.value.openingElement.attributes,
       withAttributes
     )
@@ -123,6 +123,7 @@ function findElements(
 }
 
 function checkIfAttributeExist(
+  filePath: string,
   attributes?: (JSXAttribute | JSXSpreadAttribute)[],
   withAttributes?: Attribute | Attribute[] // if array has to match every name
 ) {
@@ -158,12 +159,11 @@ function checkIfAttributeExist(
             numMatches++
           }
         } else {
-          console.warn(
-            'Was looking for a string attribute value, but ' +
-              'found ' +
-              attr.value?.type +
-              ' at line ' +
-              attr.loc?.start.line
+          printWarning(
+            filePath,
+            attr.loc?.start.line,
+            'Was looking for a string attribute value, but found ' +
+              attr.value?.type
           )
         }
       }
@@ -181,6 +181,7 @@ function checkIfAttributeExist(
  * attributes where these exist (at least one in the array has to exist).
  */
 function findAttribute(
+  filePath: string,
   j: JSCodeshift,
   root: Collection,
   withAttrName: string,
@@ -198,11 +199,10 @@ function findAttribute(
         return true
       }
       if (!isLiteral(path.value.value) && withAttrValue) {
-        console.warn(
-          'line' +
-            path.value.loc?.start.line +
-            ':\n' +
-            'Attribute whose value is checked has non-literal value,' +
+        printWarning(
+          filePath,
+          path.value.loc?.start.line,
+          'Attribute whose value is checked has non-literal value,' +
             'please check manually'
         )
         return false
@@ -248,10 +248,10 @@ function getVisibleChildren(nodes?: JSXChild[]) {
  * Renames every element (=JSX tag). Modifies the input collection
  */
 function renameElements(
+  filePath: string,
   root: Collection<JSXElement> | JSXElement['children'],
   currentName: string,
-  newName: string,
-  fileName: string
+  newName: string
 ) {
   if (!root) {
     return
@@ -261,14 +261,12 @@ function renameElements(
       if (isJSXElement(elem)) {
         renameElement(elem, currentName, newName)
       } else {
-        console.warn(
-          fileName +
-            ' line ' +
-            elem.loc?.start.line +
-            ':\n' +
-            "non element type encountered while renaming '" +
+        printWarning(
+          filePath,
+          elem.loc?.start.line,
+          "non element type encountered while renaming '" +
             currentName +
-            "' please check "
+            "' please check."
         )
       }
     }
@@ -510,6 +508,25 @@ function isLiteral(elem?: astElem | null): elem is Literal {
   return elem !== null && elem !== undefined && elem.type === 'Literal'
 }
 
+//const warnings: string[] = []
+function printWarning(
+  filePath: string,
+  line: number | undefined,
+  message: string
+) {
+  const warning = filePath + ': ' + line + ': ' + message
+  //warnings.push(warning)
+  console.warn(warning)
+}
+/*
+function writeWarningsToFile(fileName: string) {
+  if (warnings.length > 0) {
+    const sorted = warnings.sort()
+    fs.writeFileSync(fileName, sorted.join("\n") + "\n", {encoding: 'utf-8', flag: 'a'})
+    warnings.length = 0
+  }
+}
+*/
 export {
   findElements,
   findAttribute,
@@ -518,6 +535,8 @@ export {
   renameElements,
   getVisibleChildren,
   removeAllChildren,
+  printWarning,
+  //writeWarningsToFile,
   // type checkers
   isJSXAttribue,
   isJSXElement,

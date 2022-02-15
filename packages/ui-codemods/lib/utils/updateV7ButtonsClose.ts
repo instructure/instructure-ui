@@ -30,6 +30,7 @@ import {
   getVisibleChildren,
   isJSXExpressionContainer,
   isJSXText,
+  printWarning,
   removeAllChildren
 } from '../helpers/v7PropsUpdateHelpers'
 
@@ -77,26 +78,26 @@ export default function updateV7ButtonsClose(
       )
       removeAllChildren(path.value)
     } else if (children.length > 1) {
-      console.warn(
-        'Cannot update CloseButton in ' +
-          filePath +
-          ' at line ' +
-          path.value.loc?.start.line +
-          ' because it has multiple children. ' +
-          'You will need to update this manually.'
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
+        'Cannot update CloseButton because it has multiple children.' +
+          ' You will need to update this manually.'
       )
     }
   })
 
   ///// Remove variant="icon" prop
-  findAttribute(j, root, 'variant', 'icon').remove()
+  findAttribute(filePath, j, root, 'variant', 'icon').remove()
 
   ///// Change variant="icon-inverse" to color="primary-inverse"
-  findAttribute(j, root, 'variant', 'icon-inverse').replaceWith((nodePath) => {
-    const { node } = nodePath
-    node.name.name = 'color'
-    ;(node.value as Literal).value = 'primary-inverse'
-    return nodePath.node
-  })
+  findAttribute(filePath, j, root, 'variant', 'icon-inverse').replaceWith(
+    (nodePath) => {
+      const { node } = nodePath
+      node.name.name = 'color'
+      ;(node.value as Literal).value = 'primary-inverse'
+      return nodePath.node
+    }
+  )
   return true
 }

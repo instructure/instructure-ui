@@ -28,6 +28,7 @@ import {
   findAttribute,
   findElements,
   findImport,
+  printWarning,
   renameElements
 } from '../helpers/v7PropsUpdateHelpers'
 import { Literal } from 'jscodeshift'
@@ -57,40 +58,48 @@ export default function updateV7FocusableView(
   const views = findElements(filePath, j, root, importName)
 
   ///// `<FocusableView/>` -> `<View/>`
-  renameElements(views, 'FocusableView', 'View', filePath)
+  renameElements(filePath, views, 'FocusableView', 'View')
   addImportIfNeeded(j, root, 'View', '@instructure/ui-view')
 
   ///// focused -> withFocusOutline
-  findAttribute(j, views, 'focused').replaceWith((nodePath) => {
+  findAttribute(filePath, j, views, 'focused').replaceWith((nodePath) => {
     const { node } = nodePath
     node.name.name = 'withFocusOutline'
     return nodePath.node
   })
 
   ///// shape -> delete and display warning, that focus ring shape cannot be set
-  findAttribute(j, views, 'shape')
+  findAttribute(filePath, j, views, 'shape')
     .forEach((path) => {
-      console.warn(`The 'shape' property was removed, focus ring shape
-       cannot be set in InstUI v8 at ${filePath} at line ${path.value.loc?.start.line}`)
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
+        `The 'shape' property was removed, focus ring shape
+       cannot be set in InstUI v8`
+      )
     })
     .remove()
 
   //// color="primary" -> delete, its the default
-  findAttribute(j, views, 'color', 'primary').remove()
+  findAttribute(filePath, j, views, 'color', 'primary').remove()
 
   //// color="error" -> focusColor="danger"
-  findAttribute(j, views, 'color', 'error').replaceWith((nodePath) => {
-    const { node } = nodePath
-    node.name.name = 'focusColor'
-    ;(node.value as Literal).value = 'danger'
-    return nodePath.node
-  })
+  findAttribute(filePath, j, views, 'color', 'error').replaceWith(
+    (nodePath) => {
+      const { node } = nodePath
+      node.name.name = 'focusColor'
+      ;(node.value as Literal).value = 'danger'
+      return nodePath.node
+    }
+  )
 
   ///// color="inverse" -> focusColor="inverse"
-  findAttribute(j, views, 'color', 'inverse').replaceWith((nodePath) => {
-    const { node } = nodePath
-    node.name.name = 'focusColor'
-    return nodePath.node
-  })
+  findAttribute(filePath, j, views, 'color', 'inverse').replaceWith(
+    (nodePath) => {
+      const { node } = nodePath
+      node.name.name = 'focusColor'
+      return nodePath.node
+    }
+  )
   return true
 }

@@ -23,7 +23,11 @@
  */
 
 import type { Collection, JSCodeshift } from 'jscodeshift'
-import { findElements, findImport } from '../helpers/v7PropsUpdateHelpers'
+import {
+  findElements,
+  findImport,
+  printWarning
+} from '../helpers/v7PropsUpdateHelpers'
 
 /**
  * Warns about the deprecation of DeprecatedButton, Media, MetricsList,
@@ -52,19 +56,17 @@ export default function warnV7ComponentDeprecations(
   ])
   if (importName) {
     findElements(filePath, j, root, importName + '.Content').forEach((path) => {
-      console.warn(
-        filePath +
-          '\nPosition.Content needs to be upgraded ' +
-          'manually at line ' +
-          path.value.loc?.start.line
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
+        'Position.Content needs to be upgraded manually at line.'
       )
     })
     findElements(filePath, j, root, importName + '.Target').forEach((path) => {
-      console.warn(
-        filePath +
-          '\nPosition.Target needs to be upgraded ' +
-          'manually at line ' +
-          path.value.loc?.start.line
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
+        'Position.Target needs to be upgraded manually at line.'
       )
     })
   }
@@ -84,13 +86,10 @@ function warnDeprecation(
   const importName = findImport(j, root, name, importPath)
   if (importName) {
     findElements(filePath, j, root, importName).forEach((path) => {
-      console.warn(
-        filePath +
-          '\n' +
-          name +
-          ' needs to be upgraded ' +
-          'manually at line ' +
-          path.value.loc?.start.line
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
+        name + ' needs to be upgraded manually.'
       )
     })
   }
