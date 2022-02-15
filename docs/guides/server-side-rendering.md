@@ -21,7 +21,7 @@ embed: true
    You should not install the InstUI meta package <code>@instructure/ui</code> since it has components that are not yet Server Side Renderable out of the box.
   </ToggleBlockquote.Paragraph>
   <ToggleBlockquote.Paragraph>
-   The <Link href="/#CodeEditor">CodeEditor</Link> component currently relies on browser specific API's, thus it won't work with SSR! (tough you can still render it with Next.js's <Link target="_blank" href="https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr">dynamic</Link> feature while making sure not to render it on the server side)
+   The <Link href="/#CodeEditor">CodeEditor</Link> component currently relies on browser specific API's, thus it won't work with SSR! (You can still render it with Next.js's <Link target="_blank" href="https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr">dynamic</Link> feature while making sure not to render it on the server side.)
   </ToggleBlockquote.Paragraph>
   <ToggleBlockquote.Paragraph>
   <strong>You should install only the packages you need!</strong>
