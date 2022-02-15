@@ -44,34 +44,42 @@ export default function updateV7ButtonsWithText(
   const buttons = findElements(filePath, j, root, importedName)
 
   // remove variant="default"
-  findAttribute(j, buttons, 'variant', 'default').remove()
+  findAttribute(filePath, j, buttons, 'variant', 'default').remove()
   // replace <Button variant="primary" with <Button color="primary"
-  findAttribute(j, buttons, 'variant', 'primary').replaceWith((nodePath) => {
-    const { node } = nodePath
-    node.name.name = 'color'
-    return nodePath.node
-  })
+  findAttribute(filePath, j, buttons, 'variant', 'primary').replaceWith(
+    (nodePath) => {
+      const { node } = nodePath
+      node.name.name = 'color'
+      return nodePath.node
+    }
+  )
   // replace <Button variant="success" with <Button color="success"
-  findAttribute(j, buttons, 'variant', 'success').replaceWith((nodePath) => {
-    const { node } = nodePath
-    node.name.name = 'color'
-    return nodePath.node
-  })
+  findAttribute(filePath, j, buttons, 'variant', 'success').replaceWith(
+    (nodePath) => {
+      const { node } = nodePath
+      node.name.name = 'color'
+      return nodePath.node
+    }
+  )
   // replace <Button variant="danger" with <Button color="danger"
-  findAttribute(j, buttons, 'variant', 'danger').replaceWith((nodePath) => {
-    const { node } = nodePath
-    node.name.name = 'color'
-    return nodePath.node
-  })
+  findAttribute(filePath, j, buttons, 'variant', 'danger').replaceWith(
+    (nodePath) => {
+      const { node } = nodePath
+      node.name.name = 'color'
+      return nodePath.node
+    }
+  )
   // replace <Button variant="light" with color="primary-inverse"
-  findAttribute(j, buttons, 'variant', 'light').replaceWith((nodePath) => {
-    const { node } = nodePath
-    node.name.name = 'color'
-    ;(node.value as Literal).value = 'primary-inverse'
-    return nodePath.node
-  })
+  findAttribute(filePath, j, buttons, 'variant', 'light').replaceWith(
+    (nodePath) => {
+      const { node } = nodePath
+      node.name.name = 'color'
+      ;(node.value as Literal).value = 'primary-inverse'
+      return nodePath.node
+    }
+  )
   // replace <Button variant="ghost" with <Button color="primary" withBackground={false}
-  findAttribute(j, buttons, 'variant', 'ghost')
+  findAttribute(filePath, j, buttons, 'variant', 'ghost')
     .replaceWith((nodePath) => {
       const { node } = nodePath
       node.name.name = 'color'
@@ -87,7 +95,7 @@ export default function updateV7ButtonsWithText(
 
   // replace <Button variant="ghost-inverse" with
   // <Button color="primary-inverse" withBackground={false}
-  findAttribute(j, buttons, 'variant', 'ghost-inverse')
+  findAttribute(filePath, j, buttons, 'variant', 'ghost-inverse')
     .replaceWith((nodePath) => {
       const { node } = nodePath
       node.name.name = 'color'

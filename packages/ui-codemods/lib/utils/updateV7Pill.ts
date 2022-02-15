@@ -26,7 +26,8 @@ import { Collection, JSCodeshift } from 'jscodeshift'
 import {
   findElements,
   findImport,
-  isJSXAttribue
+  isJSXAttribue,
+  printWarning
 } from '../helpers/v7PropsUpdateHelpers'
 
 /**
@@ -53,12 +54,10 @@ export default function updateV7Pill(
       for (const attr of tag.openingElement.attributes!) {
         if (isJSXAttribue(attr) && attr.name.name === 'text') {
           if (tag.children!.length !== 0) {
-            console.warn(
-              filePath +
-                ' line ' +
-                tag.loc?.start.line +
-                ': Pill had text attribute and' +
-                ' children, please check'
+            printWarning(
+              filePath,
+              tag.loc?.start.line,
+              'Pill had text attribute and children, please check'
             )
           }
           if (tag.openingElement.selfClosing) {

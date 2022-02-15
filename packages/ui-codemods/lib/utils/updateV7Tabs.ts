@@ -27,7 +27,8 @@ import {
   findElements,
   findImport,
   isJSXAttribue,
-  isLiteral
+  isLiteral,
+  printWarning
 } from '../helpers/v7PropsUpdateHelpers'
 
 type SizeValue = 'small' | 'medium' | 'large'
@@ -94,22 +95,20 @@ export default function updateV7Tabs(
               j.stringLiteral(sizeConverted)
             )
           )
-          console.warn(
+          printWarning(
+            filePath,
+            sizeAttribute!.loc?.start.line,
             "Tabs 'size' attribute was converted to " +
               "'maxWidth', please check the value, it's only valid if this " +
-              'was not overridden in the theme.\n' +
-              filePath +
-              ' line ' +
-              sizeAttribute!.loc?.start.line
+              'was not overridden in the theme.'
           )
           isUpdated = true
         } else {
-          console.warn(
+          printWarning(
+            filePath,
+            sizeAttribute!.loc?.start.line,
             "Tabs 'size' attribute has non-literal value," +
-              'please update manually at ' +
-              filePath +
-              ' line ' +
-              sizeAttribute!.loc?.start.line
+              'please update manually.'
           )
         }
       }
@@ -119,12 +118,11 @@ export default function updateV7Tabs(
   findElements(filePath, j, root, importName, {
     name: 'selectedIndex'
   }).forEach((path) => {
-    console.warn(
+    printWarning(
+      filePath,
+      path.value.loc?.start.line,
       "Tabs 'selectedIndex' attribute needs to be updated " +
-        "manually, use 'isSelected' on 'Tabs.Panel' at " +
-        filePath +
-        ' line ' +
-        path.value.loc?.start.line
+        "manually, use 'isSelected' on 'Tabs.Panel'."
     )
   })
   return isUpdated

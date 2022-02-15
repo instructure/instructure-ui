@@ -34,7 +34,8 @@ import {
   findImport,
   isJSXAttribue,
   isJSXExpressionContainer,
-  isLiteral
+  isLiteral,
+  printWarning
 } from '../helpers/v7PropsUpdateHelpers'
 
 /**
@@ -82,31 +83,28 @@ export default function updateV7Heading(
                   return
                 }
               } else {
-                console.warn(
-                  filePath +
-                    '\nline ' +
-                    path.value.loc?.start.line +
-                    ': Heading ellipsis ' +
+                printWarning(
+                  filePath,
+                  path.value.loc?.start.line,
+                  'Heading ellipsis ' +
                     'parameter has non-boolean value, please refactor manually'
                 )
                 return
               }
             } else {
-              console.warn(
-                filePath +
-                  '\nline ' +
-                  path.value.loc?.start.line +
-                  ': Heading ellipsis ' +
+              printWarning(
+                filePath,
+                path.value.loc?.start.line,
+                'Heading ellipsis ' +
                   'parameter has non-boolean value, please refactor manually'
               )
               return
             }
           } else {
-            console.warn(
-              filePath +
-                '\nline ' +
-                path.value.loc?.start.line +
-                ': Heading ellipsis ' +
+            printWarning(
+              filePath,
+              path.value.loc?.start.line,
+              'Heading ellipsis ' +
                 'parameter has non-boolean value, please refactor manually'
             )
             return

@@ -28,6 +28,7 @@ import {
   findAttribute,
   findElements,
   findImport,
+  printWarning,
   renameElements
 } from '../helpers/v7PropsUpdateHelpers'
 
@@ -56,10 +57,10 @@ export default function updateV7Lists(
   })
 
   ///// `<List variant="default"` -> `<List`
-  findAttribute(j, tags, 'variant', 'default').remove()
+  findAttribute(filePath, j, tags, 'variant', 'default').remove()
 
   ///// `<List variant="unstyled"` -> `<List isUnstyled`
-  findAttribute(j, tags, 'variant', 'unstyled')
+  findAttribute(filePath, j, tags, 'variant', 'unstyled')
     .remove()
     .insertAfter(j.jsxAttribute(j.jsxIdentifier('isUnstyled')))
 
@@ -69,16 +70,16 @@ export default function updateV7Lists(
     value: 'inline'
   })
   if (inlineLists.length > 0) {
-    findAttribute(j, inlineLists, 'variant').remove()
-    renameElements(inlineLists, 'List', 'InlineList', filePath)
+    findAttribute(filePath, j, inlineLists, 'variant').remove()
+    renameElements(filePath, inlineLists, 'List', 'InlineList')
     inlineLists.forEach((path) => {
       if (path.value.children) {
         // rename List.Item to InlineList.Item
         renameElements(
+          filePath,
           path.value.children,
           'List.Item',
-          'InlineList.Item',
-          filePath
+          'InlineList.Item'
         )
       }
     })
@@ -92,14 +93,20 @@ export default function updateV7Lists(
   ///// `<List.Item delimiter=` -> display warning
   findElements(filePath, j, root, importName, { name: 'delimiter' }).forEach(
     (path) => {
-      console.warn(`List's delimiter prop needs is only available for
-        'InlineList' at\n${filePath} line ${path.value.loc?.start.line}`)
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
+        `List's delimiter prop is only available for 'InlineList' in InstUI v8, please check.`
+      )
     }
   )
   findElements(filePath, j, root, 'List.Item', { name: 'delimiter' }).forEach(
     (path) => {
-      console.warn(`List.Item's delimiter prop needs is only available for
-        'InlineList' at\n${filePath} line ${path.value.loc?.start.line}`)
+      printWarning(
+        filePath,
+        path.value.loc?.start.line,
+        `List's delimiter prop is only available for 'InlineList' in InstUI v8, please check.`
+      )
     }
   )
   return tags.length > 0

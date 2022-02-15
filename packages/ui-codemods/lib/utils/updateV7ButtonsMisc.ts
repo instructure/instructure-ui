@@ -27,7 +27,8 @@ import {
   findElements,
   isJSXAttribue,
   isJSXExpressionContainer,
-  isLiteral
+  isLiteral,
+  printWarning
 } from '../helpers/v7PropsUpdateHelpers'
 import { Collection, JSCodeshift } from 'jscodeshift'
 
@@ -77,12 +78,11 @@ export default function updateV7ButtonsMisc(
           // <Button fluidWidth={true} />
           return att.value.expression.value
         } else {
-          console.warn(
+          printWarning(
+            filePath,
+            att.loc?.start.line,
             "Button's `fluidWidth` attribute has non-literal" +
-              ' value, please update manually at ' +
-              filePath +
-              ' line ' +
-              att.loc?.start.line
+              ' value, please update manually.'
           )
           return false
         }
@@ -91,26 +91,24 @@ export default function updateV7ButtonsMisc(
     return false
   })
   // remove fluidWidth attribute
-  findAttribute(j, buttonsWithFluidWidth, 'fluidWidth').remove()
+  findAttribute(filePath, j, buttonsWithFluidWidth, 'fluidWidth').remove()
   // remove display attribute
-  findAttribute(j, buttonsWithFluidWidth, 'display')
+  findAttribute(filePath, j, buttonsWithFluidWidth, 'display')
     .forEach((path) => {
-      console.warn(
-        filePath +
-          ' line ' +
-          path.value.loc!.start.line +
-          ":\n'display' attribute was changed to 'block'"
+      printWarning(
+        filePath,
+        path.value.loc!.start.line,
+        "'display' attribute was changed to 'block'"
       )
     })
     .remove()
   // remove textAlign attribute
-  findAttribute(j, buttonsWithFluidWidth, 'textAlign')
+  findAttribute(filePath, j, buttonsWithFluidWidth, 'textAlign')
     .forEach((path) => {
-      console.warn(
-        filePath +
-          ' line ' +
-          path.value.loc!.start.line +
-          ":\n'textAlign' attribute was changed to 'start'"
+      printWarning(
+        filePath,
+        path.value.loc!.start.line,
+        "'textAlign' attribute was changed to 'start'"
       )
     })
     .remove()
