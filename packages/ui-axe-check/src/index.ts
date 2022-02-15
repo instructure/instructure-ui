@@ -21,7 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import runAxeCheck from './runAxeCheck'
 
+import runAxeCheck from './runAxeCheck'
+import type { AxeCheckOptions } from './runAxeCheck'
+
+export type { AxeCheckOptions }
 export { runAxeCheck }
 export default runAxeCheck

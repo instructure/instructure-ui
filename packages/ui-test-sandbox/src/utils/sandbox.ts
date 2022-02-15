@@ -24,7 +24,6 @@
 
 import sinon from 'sinon'
 import { ReactComponentWrapper } from './reactComponentWrapper'
-import initConsole from './initConsole'
 import React from 'react'
 
 // Add "sandbox" to the global interface, so TS does not complain about
@@ -43,7 +42,6 @@ class Sandbox {
   private _attributes!: { document: Attr[]; body: Attr[] }
   private _addedNodes!: Node[]
   private _observer!: MutationObserver
-  private teardownComplete!: boolean
 
   constructor() {
     // eslint-disable-next-line no-console
@@ -59,8 +57,6 @@ class Sandbox {
   }
 
   init() {
-    initConsole()
-
     this._timeoutIds = []
     const originalSetTimeout = global.setTimeout
     if (typeof originalSetTimeout === 'function') {
@@ -107,14 +103,10 @@ class Sandbox {
       )
     })
     resetViewport()
-
-    this.teardownComplete = true
   }
 
-  async setup() {
-    if (!this.teardownComplete) {
-      await this.teardown()
-    }
+  setup() {
+    this.teardown()
 
     document.documentElement.setAttribute('dir', 'ltr')
     document.documentElement.setAttribute('lang', 'en-US')
@@ -139,44 +131,38 @@ class Sandbox {
         )
       })
     }
-
     this._observer.observe(document.body, { childList: true })
   }
 
-  async teardown() {
-    await ReactComponentWrapper.unmount()
-
+  teardown() {
+    ReactComponentWrapper.unmount()
     this._sandbox.restore()
-
     this._timeoutIds.forEach((timeoutId) => {
       clearTimeout(timeoutId)
     })
     this._timeoutIds = []
-
     this._raf.forEach((requestId) => {
       window.cancelAnimationFrame(requestId)
     })
     this._raf = []
-
     window.localStorage && window.localStorage.clear()
     window.sessionStorage && window.sessionStorage.clear()
-
     setAttributes(document.documentElement, this._attributes.document)
     setAttributes(document.body, this._attributes.body)
-
+    const newRecords = this._observer.takeRecords()
+    for (const newRecord of newRecords) {
+      this._addedNodes = this._addedNodes.concat(
+        Array.from(newRecord.addedNodes)
+      )
+    }
     this._observer.disconnect()
-    this._observer.takeRecords()
-
     this._addedNodes.forEach((node) => {
       if (node && typeof (node as ChildNode).remove === 'function') {
         ;(node as ChildNode).remove()
       }
     })
     this._addedNodes = []
-
     resetViewport()
-
-    this.teardownComplete = true
   }
 
   stub<T, K extends keyof T>(
@@ -213,7 +199,7 @@ class Sandbox {
     return this._sandbox.spy()
   }
 
-  mount(
+  async mount(
     element: React.ComponentElement<Record<string, unknown>, React.Component>,
     options?: { props?: Record<string, unknown> | undefined }
   ) {
@@ -275,7 +261,7 @@ const stub = <T, K>(
     ? sinon.SinonStub
     : sinon.SinonStubbedInstance<T>
   : sinon.SinonStub =>
-  sandbox.stub(obj, (method as unknown) as keyof T, fn) as any
+  sandbox.stub(obj, method as unknown as keyof T, fn) as any
 
 const spy = <T, K extends keyof T>(obj?: T, method?: K) =>
   sandbox.spy(obj, method)

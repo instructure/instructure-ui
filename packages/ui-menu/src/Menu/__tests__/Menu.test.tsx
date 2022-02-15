@@ -28,7 +28,6 @@ import {
   unmount,
   stub,
   wait,
-  accessible,
   wrapQueryResult
 } from '@instructure/ui-test-utils'
 
@@ -396,14 +395,15 @@ describe('<Menu />', async () => {
 
     describe('for a11y', async () => {
       it('should meet standards when menu is closed', async () => {
-        await mount(
+        const subject = await mount(
           <Menu trigger={<button>More</button>}>
             <MenuItem>Learning Mastery</MenuItem>
             <MenuItem disabled>Gradebook</MenuItem>
           </Menu>
         )
-
-        expect(await accessible()).to.be.true()
+        // TODO figure out why we get weird a11y errors if we dont wrap
+        const el = wrapQueryResult(subject.getDOMNode())
+        expect(await el.accessible()).to.be.true()
       })
 
       it('should meet standards when menu is open', async () => {
@@ -413,6 +413,7 @@ describe('<Menu />', async () => {
             <MenuItem disabled>Gradebook</MenuItem>
           </Menu>
         )
+        // TODO figure out why we get weird a11y errors if we dont wrap
         const el = wrapQueryResult(subject.getDOMNode())
         expect(await el.accessible()).to.be.true()
       })

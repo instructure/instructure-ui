@@ -77,7 +77,7 @@ class WrapperComponent extends React.Component<WrapperProp, WrapperProp> {
 class ReactComponentWrapper {
   private _mountNode: HTMLDivElement | null = null
 
-  mount(
+  async mount(
     element: React.ComponentElement<Record<string, unknown>, React.Component>,
     options: { props?: Record<string, unknown> } = {}
   ) {
@@ -146,18 +146,17 @@ class ReactComponentWrapper {
   }
 
   unmount() {
-    return new Promise<boolean | undefined>((resolve, reject) => {
-      try {
-        let result
-        if (this._mountNode) {
-          result = ReactDOM.unmountComponentAtNode(this._mountNode)
-          this._mountNode && this._mountNode.remove()
-        }
-        resolve(result)
-      } catch (err) {
-        reject(err)
+    try {
+      let result = true
+      if (this._mountNode) {
+        result = ReactDOM.unmountComponentAtNode(this._mountNode)
+        this._mountNode.remove()
       }
-    })
+      return result
+    } catch (err) {
+      console.error('Failed to unmount React wrapper', err)
+      throw err
+    }
   }
 }
 
