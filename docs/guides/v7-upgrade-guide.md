@@ -182,7 +182,6 @@ embed: true
 ```js
 /* Previous */
 import { Table } from '@instructure/ui-elements'
-
 ;<Table caption={<ScreenReaderContent>My Table</ScreenReaderContent>}>
   <thead>
     <tr>
@@ -204,7 +203,6 @@ import { Table } from '@instructure/ui-elements'
 
 /* Upgraded */
 import { Table } from '@instructure/ui-table'
-
 ;<Table caption="My Table">
   <Table.Head>
     <Table.Row>
@@ -239,7 +237,7 @@ DateInput has been removed from ui-forms; use DateInput from `ui-date-input` ins
 
 ### DateTimeInput
 
-DateTimeInput has been removed from ui-forms. See a **read only** example of implementing a [DateTime Input Pattern](/#TimeDate) using Select and DateInput.
+DateTimeInput has been removed from ui-forms. See a **read only** example of implementing a [DateTime Input Pattern](/#TimeDate) using Select and DateInput. Note that it has been added back in InstUI v8.
 
 <!-- ///////////////////////////////////// -->
 <!-- THIS IS WHERE THE SELECT STUFF STARTS -->
