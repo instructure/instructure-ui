@@ -47,7 +47,8 @@ export default function updatePropNames(
   const root = j(file.source)
   let hasModifications = false
 
-  hasModifications = replaceDeprecatedProps(j, root, config) || hasModifications
+  hasModifications =
+    replaceDeprecatedProps(file.path, j, root, config) || hasModifications
 
   return hasModifications ? formatSource(root.toSource(), file.path) : null
 }
