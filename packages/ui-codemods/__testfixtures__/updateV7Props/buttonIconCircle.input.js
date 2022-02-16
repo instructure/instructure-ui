@@ -17,5 +17,10 @@ let a = (
     <Button variant="icon">
       <ScreenReaderContent>{fun()}</ScreenReaderContent>
     </Button>
+    <Button variant="icon">
+      <ScreenReaderContent>
+        {fun.t('Remove %{filename}', {filename: file.name})}
+      </ScreenReaderContent>
+    </Button>
   </p>
 )
