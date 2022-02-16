@@ -28,5 +28,10 @@ let a = (
       withBackground={false}
       withBorder={false}
     />
+    <IconButton
+      screenReaderLabel={fun.t('Remove %{filename}', { filename: file.name })}
+      withBackground={false}
+      withBorder={false}
+    />
   </p>
 )

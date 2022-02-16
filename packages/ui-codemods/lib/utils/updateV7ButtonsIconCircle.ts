@@ -95,9 +95,10 @@ export default function updateV7ButtonsIconCircle(
       (child.openingElement.name as JSXIdentifier).name ===
         'ScreenReaderContent'
     ) {
-      if (child.children && child.children.length === 1) {
+      const screenReaderChildren = getVisibleChildren(child.children)
+      if (screenReaderChildren.length === 1) {
         if (!screenReaderChildText) {
-          const firstChild = child.children[0]
+          const firstChild = screenReaderChildren[0]
           if (isJSXText(firstChild)) {
             screenReaderChildText = j.stringLiteral(firstChild.value)
           } else if (isJSXExpressionContainer(firstChild)) {
