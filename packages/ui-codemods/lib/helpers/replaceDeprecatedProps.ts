@@ -34,14 +34,16 @@ import type {
   ComponentUpdateData,
   UpdatePropNamesOptions
 } from '../updatePropNames'
+import { printWarning } from './v7PropsUpdateHelpers'
 
 /**
- * Find JSX attributes (props)
- *
+ * Replaces deprecated pros and their values based on the given config
+ * object
  * Example:
- *  <MyComponent [name] />
+ *  <Flex wrapItems  ->  <Flex wrap="wrap"
  */
 export default function replaceDeprecatedProps(
+  filePath: string,
   j: JSCodeshift,
   root: Collection,
   config: UpdatePropNamesOptions
@@ -89,15 +91,26 @@ export default function replaceDeprecatedProps(
                       // This means the value is contained in a jsx expression container. For example,
                       // in the following jsx, `<div prop={someValue} />` we are looking at `{someValue}`
                       expressionContainers.forEach((expressionContainer) => {
-                        const { type } = expressionContainer.value.expression
                         // Verify that the expression container contains a literal
-                        if (type === 'Literal') {
+                        if (
+                          expressionContainer.value.expression.type ===
+                          'Literal'
+                        ) {
                           replaceValue(
                             j,
                             literals,
                             match,
                             attr,
                             expressionContainer
+                          )
+                        } else {
+                          printWarning(
+                            filePath,
+                            el.value.loc?.start.line,
+                            "Could not rename the value of '" +
+                              prop +
+                              "' because its value is a function or a variable " +
+                              'reference. Please update manually.'
                           )
                         }
                       })

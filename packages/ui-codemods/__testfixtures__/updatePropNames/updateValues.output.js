@@ -1,4 +1,5 @@
 /* eslint-disable */
+let shouldTriggerWarning = { b: 1 }
 
 const Test = (
   <div>
@@ -14,5 +15,6 @@ const Test = (
     />
     <TestComponent shape="circle" errorType="severe" />
     <TestComponent errorType="low" shouldDisplayAlert={false} testNull={null} />
+    <TestComponent errorType={shouldTriggerWarning} />
   </div>
 )
