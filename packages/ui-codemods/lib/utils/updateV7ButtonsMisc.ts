@@ -65,7 +65,7 @@ export default function updateV7ButtonsMisc(
   }).filter((path) => {
     const attributes = path.value.openingElement.attributes!
     for (const att of attributes) {
-      if (isJSXAttribue(att)) {
+      if (isJSXAttribue(att) && att.name.name === 'fluidWidth') {
         if (!att.value) {
           // <Button fluidWidth />
           return true
