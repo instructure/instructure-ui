@@ -45,7 +45,7 @@ One of the changes of v8.0 is that we deleted all components and properties mark
 
 ### Upgrade step-by-step
 
-We strongly recommend to use codemods to ease your update process. To run these please install `jscodeshift` (v0.13 or newer) to your terminal and add [`@instructure/ui-codemods`](https://www.npmjs.com/package/@instructure/ui-codemods) with the latest version 8.x as a `devDependency` to your `package.json` You can push your code after each of these steps.
+We strongly recommend to use codemods to ease your update process. To run these please install `jscodeshift` (v0.13 or newer) to your terminal and add [`@instructure/ui-codemods`](https://www.npmjs.com/package/@instructure/ui-codemods) with the latest version 8.x as a `devDependency` to your `package.json` You can push your code after each of these steps, it should fully work. Start the upgrade with the latest InstUI v7 version.
 
 #### 1. Run the v7 `updatePropNames` codemod:
 

@@ -53,16 +53,21 @@ export default function updateV7Pill(
       const tag = path.value
       for (const attr of tag.openingElement.attributes!) {
         if (isJSXAttribue(attr) && attr.name.name === 'text') {
-          if (tag.children!.length !== 0) {
+          if (tag.children && tag.children.length !== 0) {
             printWarning(
               filePath,
               tag.loc?.start.line,
-              'Pill had text attribute and children, please check'
+              "Pill had both `text` attribute and children. I've " +
+                'moved the value of `text` under its `children`, please double ' +
+                'check.'
             )
           }
           if (tag.openingElement.selfClosing) {
             tag.openingElement.selfClosing = false
             tag.closingElement = j.jsxClosingElement(j.jsxIdentifier('Pill'))
+          }
+          if (!tag.children) {
+            tag.children = []
           }
           tag.children!.push(attr.value!)
           tag.openingElement.attributes!.splice(
