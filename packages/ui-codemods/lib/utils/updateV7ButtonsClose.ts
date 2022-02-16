@@ -82,7 +82,8 @@ export default function updateV7ButtonsClose(
         filePath,
         path.value.loc?.start.line,
         'Cannot update CloseButton because it has multiple children.' +
-          ' You will need to update this manually.'
+          'Children should be moved to the `screenReaderLabel` prop,' +
+          'You will need to update this manually.'
       )
     }
   })

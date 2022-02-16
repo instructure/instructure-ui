@@ -131,9 +131,9 @@ function displayNoHrefWarning(filePath: string, lineNumber: number) {
   printWarning(
     filePath,
     lineNumber,
-    'Cannot upgrade <Button link or link-inverse manually when it ' +
-      'has no href prop. Also you will likely need to add @instructure/ui-link ' +
-      'as a dependency. For more see ' +
+    'Button with link or link-inverse variants cannot be upgraded ' +
+      'manually when it has no href prop. Also you will likely need to add ' +
+      '@instructure/ui-link as a dependency. Read more at ' +
       'https://instructure.design/v7/#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-no-href-attribute-and-padding-overrides'
   )
 }
