@@ -28,7 +28,7 @@ The tables below show what will be removed and what are they replaced with. We a
 
 ### Deprecated Components
 
-These components will be removed in the v8.0 release, and this table shows which components they can be substituted with.
+These components have been removed in the v8.0 release, and this table shows which components they can be substituted with.
 Running the `updateV7Props` codemod in the v8 or newer git branch will either perform the update automatically or output a warning where you need to update something manually.
 
 For more information, click the name of the component to see its full documentation.
