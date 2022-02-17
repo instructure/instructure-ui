@@ -26,7 +26,7 @@ This can be installed via the following command:
 yarn add @instructure/instui-config
 ```
 
-### If you are in the process of updating from InstUI v7 to v8, run these codemods from the latest version of this package!
+> **If you are in the process of updating from InstUI v7 to v8, run these codemods from the latest version of this package!**
 
 ### Executing Codemods Using instui-cli
 

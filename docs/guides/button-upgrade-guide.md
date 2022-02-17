@@ -27,7 +27,7 @@ As we've built out our library, we've learned a lot about component APIs. Button
 
 #### Note about Codemods
 
-These complex props are updated by the `updateV7Props` codemod that is described in the v8 docs at <https://instructure.design/#v8-upgrade-guide>. These are in the V8 (and later) versions of the InstUI repo. You should run all codemods from the latest version of the InstUI codemods package! To do this add [`@instructure/ui-codemods`](https://www.npmjs.com/package/@instructure/ui-codemods) with version `^8` as a `devDependency`, then run with e.g. `npx`: `npx jscodeshift -t ./node_modules/@instructure/ui-codemods/lib/updateV7Props.js` (you can remove this dependecy after you've done running the codemods.)
+These complex props are updated by the `updateV7Props` codemod that is described in the v8 docs at <https://instructure.design/#v8-upgrade-guide>. These are in the V8 (and newer) versions of the InstUI repo. You should run all codemods from the latest version of the InstUI codemods package! To do this add [`@instructure/ui-codemods`](https://www.npmjs.com/package/@instructure/ui-codemods) and `@instructure/instui-config` with version `^8` as a `devDependency`, then run with e.g. `npx`: `npx jscodeshift -t ./node_modules/@instructure/ui-codemods/lib/updateV7Props.js` (you can remove this dependecy after you've done running the codemods.)
 
 ### Props that need to be upgraded
 
