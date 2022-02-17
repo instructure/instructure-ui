@@ -20,7 +20,7 @@
     "build:watch": "yarn ts:check --watch & ui-build --watch",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false",
-    "test:ssr": "jest src/__tests__/ui.test.js --env node"
+    "test:jest": "jest"
   },
   "license": "MIT",
   "dependencies": {
@@ -95,15 +95,14 @@
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.17.0",
-    "@instructure/ui-test-utils": "8.17.0",
-    "jest": "^27.5.1"
+    "@instructure/ui-test-utils": "8.17.0"
   },
   "publishConfig": {
     "access": "public"
   },
   "sideEffects": false,
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": ">= 16.8 <=17",
+    "react-dom": ">= 16.8 <= 17"
   }
 }
