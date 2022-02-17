@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
  * The MIT License (MIT)
  *
@@ -23,7 +24,7 @@
  */
 import React from 'react'
 import ReactServer from 'react-dom/server'
-import * as EveryComponent from '..'
+import * as EveryComponent from '../src'
 
 const excludedComponents = [
   'canvas',
