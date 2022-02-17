@@ -8327,6 +8327,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-dom@npm:^17.0.11":
+  version: 17.0.11
+  resolution: "@types/react-dom@npm:17.0.11"
+  dependencies:
+    "@types/react": "*"
+  checksum: 4d5730dffbef86c887cecad7e3cecda424ce6a64d0b5441c63b5b015d48219868660a2bb1aa15e897e565ad8867fa6b885d4358b04e1c4e589ba4c07c3fda55c
+  languageName: node
+  linkType: hard
+
 "@types/react-syntax-highlighter@npm:11.0.5":
   version: 11.0.5
   resolution: "@types/react-syntax-highlighter@npm:11.0.5"
@@ -18251,6 +18260,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"git-cz@npm:^4.8.0":
+  version: 4.8.0
+  resolution: "git-cz@npm:4.8.0"
+  bin:
+    git-cz: bin/git-cz.js
+    gitcz: bin/git-cz.js
+  checksum: 2916ac622d77e1913ce75a2bd454e1ee41071c74323819f7dcfc6f2086edc6894b7968809cb70938214d136ab1591710fcac257d81ea419e60714a9ac0e0dafe
+  languageName: node
+  linkType: hard
+
 "git-raw-commits@npm:^2.0.8":
   version: 2.0.11
   resolution: "git-raw-commits@npm:2.0.11"
@@ -20230,6 +20249,7 @@ __metadata:
     danger: ^11
     esbuild: ^0.14
     eslint: ^7
+    git-cz: ^4.8.0
     husky: ^7
     lerna: ^4
     lint-staged: ^10
