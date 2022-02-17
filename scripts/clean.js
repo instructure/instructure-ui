@@ -75,5 +75,6 @@ async function clean() {
     }
   }
 }
-
+// eslint-disable-next-line no-console
+console.info('cleaning packages...')
 clean()

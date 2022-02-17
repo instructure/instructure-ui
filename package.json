@@ -36,7 +36,7 @@
     "generate:component": "instui create component",
     "generate:package": "instui create package",
     "commit": "ui-scripts --commit",
-    "bootstrap": "time node scripts/bootstrap.js",
+    "bootstrap": "node scripts/bootstrap.js",
     "bootstrap:docs": "npm-run-all clean:modules install:packages clean build",
     "build": "lerna run build --stream",
     "build:watch": "lerna run build:watch --stream",
@@ -69,12 +69,15 @@
     "@storybook/react/webpack": "^5"
   },
   "devDependencies": {
+    "@babel/cli": "^7.17.3",
     "@instructure/ui-scripts": "workspace:*",
+    "@instructure/ui-token-scripts": "workspace:*",
     "@types/react-dom": "^17.0.11",
     "chalk": "^4",
     "danger": "^11",
     "esbuild": "^0.14",
     "eslint": "^7",
+    "git-cz": "^4.8.0",
     "husky": "^7",
     "lerna": "^4",
     "lint-staged": "^10",
@@ -107,9 +110,5 @@
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
   ],
-  "packageManager": "yarn@3.1.1",
-  "dependencies": {
-    "@babel/cli": "^7.17.3",
-    "git-cz": "^4.8.0"
-  }
+  "packageManager": "yarn@3.1.1"
 }
