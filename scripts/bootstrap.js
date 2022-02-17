@@ -53,9 +53,7 @@ function buildProject() {
 }
 function bootstrap() {
   try {
-    execSync('yarn clean:modules', opts)
     fork(path.resolve('scripts/clean.js'), opts)
-    execSync('yarn install:packages', opts)
   } catch (error) {
     console.error(error)
     process.exit(1)
