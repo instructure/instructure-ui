@@ -32,23 +32,20 @@
     "lint:commit": "ui-scripts --lint-commit",
     "lint:staged": "lint-staged",
     "update:package:list": "lerna run generate:package:list --stream --scope @instructure/instui-config",
-    "commit:package:list": "git add **/package-list.json",
+    "commit:package:list": "git add packages/instui-config/package-lists/**/package-list.json",
     "generate:component": "instui create component",
     "generate:package": "instui create package",
     "commit": "ui-scripts --commit",
-    "install:react": "ui-scripts --install-react",
-    "install:packages": "lerna bootstrap --reject-cycles",
-    "bootstrap": "node scripts/bootstrap.js",
+    "bootstrap": "time node scripts/bootstrap.js",
     "bootstrap:docs": "npm-run-all clean:modules install:packages clean build",
     "build": "lerna run build --stream",
     "build:watch": "lerna run build:watch --stream",
     "build:docs": "lerna run bundle --stream --scope docs-app",
-    "build:types": "lerna run build:types --stream",
     "build:tokens": "ui-token-scripts generate-all-tokens",
-    "build:ts": "lerna run prepare-build --stream --scope @instructure/ui-icons && tsc -b tsconfig.references.json --verbose",
+    "build:tsc": "tsc -b tsconfig.references.json --verbose",
+    "build:ts": "lerna run prepare-build --stream --scope @instructure/ui-icons && yarn build:tsc",
     "build:node-scripts": "lerna run build:ts --scope @instructure/ui-scripts",
     "clean": "lerna run clean --stream",
-    "clean:modules": "lerna clean --yes",
     "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
     "bump": "ui-scripts --bump",
     "link:packages": "ui-scripts --link-packages",
@@ -63,7 +60,6 @@
     "prepare": "husky install",
     "ts:check": "lerna run ts:check --stream",
     "ts:check:references": "yarn node scripts/checkTSReferences.js",
-    "hello": "lerna run hello",
     "postinstall": "yarn build:node-scripts"
   },
   "license": "MIT",
@@ -74,6 +70,7 @@
   },
   "devDependencies": {
     "@instructure/ui-scripts": "workspace:*",
+    "@types/react-dom": "^17.0.11",
     "chalk": "^4",
     "danger": "^11",
     "esbuild": "^0.14",
@@ -88,7 +85,7 @@
   },
   "engines": {
     "node": ">=12.20",
-    "yarn": ">=1.6.0"
+    "yarn": ">=3"
   },
   "config": {
     "commitizen": {
@@ -110,5 +107,9 @@
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
   ],
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.1.1",
+  "dependencies": {
+    "@babel/cli": "^7.17.3",
+    "git-cz": "^4.8.0"
+  }
 }
