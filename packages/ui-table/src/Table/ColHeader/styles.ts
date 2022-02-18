@@ -82,6 +82,11 @@ const generateStyle = (
         outline: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`
       },
       ...buttonTextAlignVariants[textAlign!]
+    },
+    buttonContent: {
+      label: 'colHeader__buttonContent',
+      display: 'flex',
+      alignItems: 'center'
     }
   }
 }
