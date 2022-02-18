@@ -28,6 +28,10 @@
   "dependencies": {
     "@babel/runtime": "^7.13.10"
   },
+  "peerDependencies": {
+    "react": ">=16.8 <=17",
+    "react-dom": ">=16.8 <=17"
+  },
   "publishConfig": {
     "access": "public"
   },

@@ -16,6 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "babel-loader": "^8.2.3",
     "buffer": "^6",
     "css-loader": "^6",
     "dotenv": "^16",
@@ -27,6 +28,9 @@
     "thread-loader": "^3",
     "url-loader": "^4",
     "webpack": "^5"
+  },
+  "peerDependencies": {
+    "@babel/core": "7"
   },
   "publishConfig": {
     "access": "public"

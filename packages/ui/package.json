@@ -99,6 +99,10 @@
     "@instructure/ui-test-utils": "8.24.2",
     "jest": "^24.9.0"
   },
+  "peerDependencies": {
+    "react": ">=16.8 <=17",
+    "react-dom": ">=16.8 <=17"
+  },
   "publishConfig": {
     "access": "public"
   },

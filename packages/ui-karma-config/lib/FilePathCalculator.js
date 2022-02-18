@@ -27,6 +27,7 @@ const globby = require('globby')
 
 module.exports = function (uiTestScopePaths) {
   const files = ['packages/**/*.test.{js,ts,tsx}']
+  // TODO: check this, doctor reports it
   const ignore = ['packages/ui-codemods/**', '**/node_modules/**']
 
   return globby

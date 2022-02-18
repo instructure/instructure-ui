@@ -36,6 +36,11 @@
     "hoist-non-react-statics": "^3.3.2",
     "prop-types": "^15"
   },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    }
+  },
   "peerDependencies": {
     "react": ">=16.8 <=17",
     "react-dom": ">=16.8 <=17"

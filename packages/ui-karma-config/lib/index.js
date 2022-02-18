@@ -163,7 +163,7 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
             {
               test: /.*.tsx?$/,
               exclude: [/node_modules/, /\/lib\//, /\/es\//, /\/__tests__\//],
-              loader: '@jsdevtools/coverage-istanbul-loader',
+              loader: require.resolve('@jsdevtools/coverage-istanbul-loader'),
               enforce: 'post',
               options: {
                 esModules: true,

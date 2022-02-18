@@ -36,6 +36,12 @@
     "yargs": "^16",
     "yargs-interactive": "^3.0.0"
   },
+  "peerDependencies": {
+    "@babel/core": "^7",
+    "eslint": "^7",
+    "react": ">=16.8 <=17",
+    "react-dom": ">=16.8 <=17"
+  },
   "publishConfig": {
     "access": "public"
   }

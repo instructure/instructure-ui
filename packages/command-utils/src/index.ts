@@ -93,8 +93,7 @@ function runCommandsConcurrently(commands: Record<string, any>) {
       commandList = Array.isArray(commandList) ? commandList : [commandList]
       commandList.forEach((command: any) => {
         args.push(
-          `${command.toString()}${
-            command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
+          `${command.toString()}${command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
           }`
         )
       })

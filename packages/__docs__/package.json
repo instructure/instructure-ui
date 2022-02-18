@@ -137,6 +137,14 @@
     "raw-loader": "^4",
     "react-docgen": "6.0.0-alpha.0",
     "svg-inline-loader": "^0.8.0",
-    "webpack-bundle-analyzer": "^4"
+    "webpack": "^5",
+    "webpack-bundle-analyzer": "^4",
+    "eslint": "^7",
+  },
+  "peerDependencies": {
+    "@babel/core": ">=7",
+    "@babel/preset-env": ">= 7.1.6",
+    "eslint": "^7",
+    "webpack": "^5"
   }
 }

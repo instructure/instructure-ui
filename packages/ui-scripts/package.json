@@ -59,6 +59,8 @@
     "@storybook/react": "^6"
   },
   "peerDependencies": {
+    "@babel/core": ">= 7",
+    "@babel/preset-env": ">=7.1.6",
     "eslint": "^7",
     "react": ">=16.8 <=17",
     "webpack": "^5"

@@ -30,6 +30,11 @@
     "@instructure/console": "8.24.2",
     "@instructure/shared-types": "8.24.2"
   },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    }
+  },
   "peerDependencies": {
     "react": ">=16.8 <=17",
     "react-dom": ">=16.8 <=17"

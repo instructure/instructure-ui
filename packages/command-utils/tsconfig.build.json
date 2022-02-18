@@ -2,9 +2,9 @@
   "extends": "../../tsconfig.node.json",
   "compilerOptions": {
     "outDir": "./lib",
+    "moduleResolution": "node",
     "rootDir": "./src",
-    "declarationDir": "./types",
-    "composite": true
+    "declarationDir": "./types"
   },
   "include": ["src"]
 }
