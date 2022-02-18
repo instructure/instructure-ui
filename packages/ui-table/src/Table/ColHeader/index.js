@@ -30,7 +30,8 @@ import { themeable } from '@instructure/ui-themeable'
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import {
   IconMiniArrowUpLine,
-  IconMiniArrowDownLine
+  IconMiniArrowDownLine,
+  IconMiniArrowDoubleLine
 } from '@instructure/ui-icons'
 
 import styles from './styles.css'
@@ -96,12 +97,12 @@ class ColHeader extends Component {
     if (sortDirection === 'ascending') {
       return <IconMiniArrowUpLine />
     }
+
     if (sortDirection === 'descending') {
       return <IconMiniArrowDownLine />
     }
     if (onRequestSort) {
-      // Reserve a space for arrow to keep column width consistent
-      return <IconMiniArrowUpLine style={{ color: 'transparent' }} />
+      return <IconMiniArrowDoubleLine style={{ opacity: '30%' }} />
     }
     return null
   }
@@ -139,7 +140,7 @@ class ColHeader extends Component {
               [styles[`flexDirection--${textAlign}`]]: true
             })}
           >
-            <div>
+            <div className={styles.buttonContainer}>
               {callRenderProp(children)}
               {this.renderSortArrow()}
             </div>
