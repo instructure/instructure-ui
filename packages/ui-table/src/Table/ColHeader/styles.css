@@ -80,3 +80,8 @@
     outline: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
   }
 }
+
+.buttonContainer {
+  display: flex;
+  align-items: center; /* align arrow in vertical center */
+}
