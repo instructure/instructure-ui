@@ -28,7 +28,8 @@ import React, { Component } from 'react'
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import {
   IconMiniArrowUpLine,
-  IconMiniArrowDownLine
+  IconMiniArrowDownLine,
+  IconMiniArrowDoubleLine
 } from '@instructure/ui-icons'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -83,8 +84,7 @@ class ColHeader extends Component<TableColHeaderProps> {
       return <IconMiniArrowDownLine />
     }
     if (onRequestSort) {
-      // Reserve a space for arrow to keep column width consistent
-      return <IconMiniArrowUpLine style={{ color: 'transparent' }} />
+      return <IconMiniArrowDoubleLine css={{ opacity: '30%' }} />
     }
     return null
   }
@@ -105,7 +105,7 @@ class ColHeader extends Component<TableColHeaderProps> {
       >
         {onRequestSort && (
           <button onClick={this.handleClick} css={styles?.button}>
-            <div>
+            <div css={styles?.buttonContent}>
               {callRenderProp(children)}
               {this.renderSortArrow()}
             </div>

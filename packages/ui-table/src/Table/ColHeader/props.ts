@@ -80,7 +80,9 @@ type TableColHeaderProps = TableColHeaderOwnProps &
     ThHTMLAttributes<TableColHeaderOwnProps>
   >
 
-type TableColHeaderStyle = ComponentStyle<'colHeader' | 'button'>
+type TableColHeaderStyle = ComponentStyle<
+  'colHeader' | 'button' | 'buttonContent'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   id: PropTypes.string.isRequired,
