@@ -2,7 +2,7 @@
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
     "emitDeclarationOnly": false,
-    "module": "CommonJS",
+    "module": "commonjs",
     "sourceMap": true
   }
 }

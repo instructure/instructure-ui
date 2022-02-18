@@ -44,9 +44,15 @@
     "sinon-chai": "^3",
     "wait-for-expect": "^3"
   },
+  "peerDependenciesMeta": {
+    "sinon": {
+      "optional": true
+    }
+  },
   "peerDependencies": {
     "react": ">=16.8 <=17",
-    "react-dom": ">=16.8 <=17"
+    "react-dom": ">=16.8 <=17",
+    "sinon": ">=4.0.0"
   },
   "publishConfig": {
     "access": "public"

@@ -22,8 +22,8 @@ __build__
 
 tsconfig.build.tsbuildinfo
 
-.pnp.*
 .yarn/*
+!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases

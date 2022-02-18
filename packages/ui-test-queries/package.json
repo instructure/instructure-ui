@@ -34,6 +34,10 @@
     "@instructure/ui-babel-preset": "8.23.0",
     "@types/sizzle": "^2"
   },
+  "peerDependencies": {
+    "react": ">=16.8 <=17",
+    "react-dom": ">=16.8 <=17"
+  },
   "publishConfig": {
     "access": "public"
   },

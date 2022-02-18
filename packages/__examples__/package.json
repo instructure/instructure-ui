@@ -24,6 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7",
     "@babel/runtime": "^7.13.10",
     "@instructure/canvas-theme": "8.23.0",
     "@instructure/command-utils": "8.23.0",
@@ -52,6 +53,9 @@
     "prop-types": "^15",
     "react-docgen": "^6.0.0-alpha.0",
     "webpack": "^5"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7"
   },
   "resolutions": {
     "@storybook/react/webpack": "^5"

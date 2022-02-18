@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "ESNext",
     // use Node's module resolution algorithm, instead of the legacy TS one
-    "moduleResolution": "node",
+    "moduleResolution": "classic",
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,

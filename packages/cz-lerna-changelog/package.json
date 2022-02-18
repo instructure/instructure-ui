@@ -21,7 +21,8 @@
     "chalk": "^4",
     "cz-customizable": "^6",
     "inquirer": "^8",
-    "inquirer-autocomplete-prompt": "^1"
+    "inquirer-autocomplete-prompt": "^1",
+    "semantic-release": "^16.0.0"
   },
   "peerDependencies": {
     "lerna": "^4"

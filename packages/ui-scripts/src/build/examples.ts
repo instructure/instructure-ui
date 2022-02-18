@@ -25,6 +25,7 @@ import path from 'path'
 import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
 export const examples = () => {
+  // TODO: come back to this, doctor reports this
   const rootPath = path.resolve(process.cwd(), '../../node_modules')
   const { DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
 
