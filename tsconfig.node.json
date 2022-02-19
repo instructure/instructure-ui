@@ -2,6 +2,7 @@
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
     "emitDeclarationOnly": false,
+    "moduleResolution": "node",
     "module": "commonjs",
     "sourceMap": true
   }

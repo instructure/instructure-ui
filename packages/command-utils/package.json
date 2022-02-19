@@ -13,8 +13,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
-    "build": "tsc -p tsconfig.build.json"
+    "lint:fix": "ui-test --lint --fix"
   },
   "license": "MIT",
   "dependencies": {
@@ -29,6 +28,8 @@
   },
   "sideEffects": false,
   "devDependencies": {
+    "@types/node": "^17.0.18",
     "@types/which": "^2"
-  }
+  },
+  "packageManager": "yarn@3.1.1"
 }

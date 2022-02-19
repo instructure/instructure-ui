@@ -173,9 +173,9 @@ function getNodeEnvConfig() {
 
 function getWebEnvConfig(opts) {
   return {
-    targets: {
-      browsers: require('@instructure/browserslist-config-instui')
-    },
+    // targets: {
+    //   browsers: require('@instructure/browserslist-config-instui')
+    // },
     useBuiltIns: 'entry',
     corejs: 3,
     modules: opts.esModules ? false : 'commonjs',

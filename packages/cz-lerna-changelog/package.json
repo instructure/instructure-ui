@@ -24,9 +24,6 @@
     "inquirer-autocomplete-prompt": "^1",
     "semantic-release": "^16.0.0"
   },
-  "peerDependencies": {
-    "lerna": "^4"
-  },
   "publishConfig": {
     "access": "public"
   }

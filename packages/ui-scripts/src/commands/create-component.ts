@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import { warn } from '@instructure/command-utils'
-import { handleCreateComponent } from '../handlers'
 
 export default {
   command: 'create-component',
@@ -66,19 +64,5 @@ export default {
       default: '{}'
     })
   },
-  handler: async (argv: any) => {
-    const { template, path, packageSource, name, values } = argv
 
-    warn(
-      'This command has now been moved to `@instructure/ui-template-scripts`.'
-    )
-
-    handleCreateComponent({
-      componentTemplate: template,
-      path,
-      packageSource,
-      name,
-      values
-    })
-  }
 }

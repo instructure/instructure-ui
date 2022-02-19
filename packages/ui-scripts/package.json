@@ -19,20 +19,28 @@
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
     "build:watch": "tsc -w -p tsconfig.build.json",
-    "build:ts": "tsc -b tsconfig.build.json"
+    "ui-build": "ui-build"
   },
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.17.5",
     "@instructure/command-utils": "8.23.0",
     "@instructure/cz-lerna-changelog": "8.23.0",
     "@instructure/instui-config": "8.23.0",
     "@instructure/pkg-utils": "8.23.0",
     "@instructure/ui-template-scripts": "8.23.0",
+    "@instructure/browserslist-config-instui": "workspace:^",
     "@lerna/project": "^4",
+    "@yarnpkg/fslib": "^2.6.1-rc.10",
+    "@yarnpkg/libzip": "^2.2.3-rc.10",
+    "chalk": "^4",
     "commitizen": "^4",
+    "concurrently": "^6",
+    "cross-env": "^7",
     "dotenv": "^10",
     "esm": "^3",
+    "execa": "^5",
     "find-up": "^5",
     "git-url-parse": "^11",
     "http-server": "^14",
@@ -48,22 +56,19 @@
     "validate-commit-msg": "^2",
     "webpack-cli": "^4",
     "webpack-dev-server": "^4",
+    "which": "^2",
     "yargs": "^16"
   },
   "devDependencies": {
+    "@types/babel__core": "^7",
     "@types/git-url-parse": "^9.0.0",
     "@types/mocha": "^8.2.2",
-    "@types/semver": "^7.3.5"
+    "@types/react": "^17.0.39",
+    "@types/semver": "^7.3.5",
+    "@types/which": "^2"
   },
   "optionalDependencies": {
     "@storybook/react": "^6"
-  },
-  "peerDependencies": {
-    "@babel/core": ">= 7",
-    "@babel/preset-env": ">=7.1.6",
-    "eslint": "^7",
-    "react": ">=16.8 <=17",
-    "webpack": "^5"
   },
   "publishConfig": {
     "access": "public"

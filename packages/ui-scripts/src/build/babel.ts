@@ -22,21 +22,42 @@
  * SOFTWARE.
  */
 
-import path from 'path'
-import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
+// import path from 'path'
+// import { runCommandsConcurrently, getCommand } from '../utils/command'
+import { transformFileSync } from '@babel/core'
 
-const specifyCJSFormat = path.resolve(
-  __dirname,
-  '../../',
-  'bin/',
-  'specify-commonjs-format.js'
-)
+// const specifyCJSFormat = path.resolve(
+//   __dirname,
+//   '../../',
+//   'bin/',
+//   'specify-commonjs-format.js'
+// )
+// const { default: b } = require('@babel/cli/lib/babel/dir');
 
 type ModuleType = ('es' | 'cjs')[]
 
-export const babel = () => {
-  const { BABEL_ENV, NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } =
-    process.env
+
+// async function transform(sourcePath: string, outputDir: string) {
+//   await b({
+//     cliOptions: {
+//       filenames: [sourcePath],
+//       extensions: ['.tsx', '.js'],
+//       outDir: outputDir,
+//       copyFiles: true,
+//       copyIgnored: true,
+//     },
+//   });
+// }
+
+export const babel = async () => {
+  const {
+    BABEL_ENV,
+    NODE_ENV,
+    DEBUG,
+    UNMANGLED_CLASS_NAMES,
+    DISABLE_SPEEDY_STYLESHEET,
+    OMIT_INSTUI_DEPRECATION_WARNINGS
+  } = process.env
 
   const args = process.argv.slice(2)
 
@@ -46,6 +67,11 @@ export const babel = () => {
 
   // uncomment the extensions arg after renaming the files from js -> ts happens
   let babelArgs = ['--extensions', '.ts,.tsx,.js,.jsx']
+  const bArgs = {
+    cwd: `${process.cwd()}/${src}`,
+    ignore: ["src/**/*.test.js", "src/**/__tests__/**"],
+    extensions: ['.ts,.tsx,.js,.jsx']
+  }
 
   if (args.includes('--copy-files')) {
     babelArgs.push('--copy-files')
@@ -91,26 +117,48 @@ export const babel = () => {
     }
   }
 
-  const commands = {
-    es: getCommand(
-      'babel',
-      [...babelArgs, '--out-dir', 'es'],
-      [...envVars, 'ES_MODULES=1']
-    ),
-    cjs: [
-      getCommand(
-        'babel',
-        [...babelArgs, '--out-dir', 'lib'],
-        [...envVars, 'TRANSFORM_IMPORTS=1']
-      ),
-      getCommand(specifyCJSFormat, [], [])
-    ]
-  }
+  // TODO: rework this:
+  // this currently does the following:
+  //  - it will check wheter the given string to `getCommand` is in fact an executable binary
+  //  - if it is then, it will store the path to the binary in the `Command` class
+  //  - the `command-utils` exposes a couple of utility functions to run these commands (as async, or in concurrent mode)
+  //  - the `command-utils` will spawn sub processes and will call cli programs to do the work (such as babel)
+  //  - this is problematic, because I can give `getCommand` any kind of program, and if that program is in PATH
+  //  (which it will be by default if you install it to the monorepo) and it will get that binary
+  //  no matter which package installed it
+  //
+  // As opposed yarn classic, yarn modern does not allow using dependencies which are not declared in the pacakge.
+  // So we have to rework this script to only contain programs that are listed as dependencies, which means we should be
+  // using @babel/core programatically here, instead of calling it with a new sub process and using the @babel/cli.
+  // ----------------------------------- //
+  // const commands = {
+  //   es: getCommand(
+  //     'babel',
+  //     [...babelArgs, '--out-dir', 'es'],
+  //     [...envVars, 'ES_MODULES=1']
+  //   ),
+  //   cjs: [
+  //     getCommand(
+  //       'babel',
+  //       [...babelArgs, '--out-dir', 'lib'],
+  //       [...envVars, 'TRANSFORM_IMPORTS=1']
+  //     ),
+  //     getCommand(specifyCJSFormat, [], [])
+  //   ]
+  // }
 
-  const commandsToRun = modules.reduce(
-    (obj, key) => ({ ...obj, [key]: commands[key] }),
-    {}
-  )
+  // const commandsToRun = modules.reduce(
+  //   //@ts-expect-error FIXME:
+  //   (obj, key) => ({ ...obj, [key]: commands[key] }),
+  //   {}
+  // )
 
-  process.exit(runCommandsConcurrently(commandsToRun).status)
+  // process.exit(runCommandsConcurrently(commandsToRun).status)
+  // --------------------------------------------------------- //
+  console.log({ args, bArgs, cwd: process.cwd() })
+  // await transform(bArgs.cwd, "hello")
+  const res = transformFileSync(`${bArgs.cwd}/console.ts`)
+
+  console.log(res);
+
 }

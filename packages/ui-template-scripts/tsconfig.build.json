@@ -3,7 +3,6 @@
   "compilerOptions": {
     "outDir": "./types",
     "rootDir": "./lib",
-    "module": "CommonJS",
     "composite": true
   },
   "include": ["lib"],

@@ -1,4 +1,22 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {}
+  "extends": "../../tsconfig.node.json",
+  "compilerOptions": {
+    "declarationDir": "./types",
+    "outDir": "./lib"
+  },
+  "include": ["src/**/*"],
+  "references": [
+    {
+      "path": "../command-utils"
+    },
+    // {
+    //   "path": "../cz-lerna-changelog/tsconfig.build.json"
+    // },
+    // {
+    //   "path": "../instui-config/tsconfig.build.json"
+    // },
+    // {
+    //   "path": "../pkg-utils/tsconfig.build.json"
+    // },
+  ]
 }

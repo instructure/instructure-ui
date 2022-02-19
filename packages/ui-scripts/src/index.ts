@@ -23,7 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { error, info } from '@instructure/command-utils'
+import { error, info } from './utils/command'
 
 import { readEnv } from './utils/readEnv'
 
