@@ -254,9 +254,15 @@ class SortableTable extends React.Component {
     super(props)
     const { headers } = props
 
+    const initialColWidth = {}
+    headers.forEach((header) => {
+      initialColWidth[header.id] = 'start'
+    })
+
     this.state = {
       sortBy: headers && headers[0] && headers[0].id,
       ascending: true,
+      colTextAligns: initialColWidth
     }
   }
 
@@ -275,9 +281,128 @@ class SortableTable extends React.Component {
     }
   }
 
+  handleColTextAlignChange(id, value) {
+    this.setState(state => ({
+      colTextAligns: {
+        ...state.colTextAligns,
+        [id]: value
+      }
+    }))
+  }
+
+  renderHeaderRow(direction) {
+    const { headers } = this.props
+    const { colTextAligns , sortBy } = this.state
+
+    return (
+      <Table.Row>
+        {(headers || []).map(({ id, text, width }) => (
+          <Table.ColHeader
+            key={id}
+            id={id}
+            width={width}
+            {...(direction && {
+              textAlign: colTextAligns[id],
+              stackedSortByLabel: text,
+              onRequestSort: this.handleSort,
+              sortDirection: id === sortBy ? direction : 'none'
+            })}
+          >
+            {text}
+          </Table.ColHeader>
+        ))}
+      </Table.Row>
+    )
+  }
+
+  renderOptions () {
+    const { headers } = this.props
+    const { colTextAligns } = this.state
+
+    return (
+      <ToggleGroup
+        size="small"
+        toggleLabel="Set text-align for columns"
+        summary="Set text-align for columns"
+        background="default"
+      >
+        <Table caption='Set text-align for columns'>
+          <Table.Head>
+            {this.renderHeaderRow()}
+          </Table.Head>
+          <Table.Body>
+            <Table.Row>
+              {Object.entries(colTextAligns).map(([headerId, textAlign]) => {
+                return (
+                  <Table.Cell
+                    key={headerId}
+                    width={headers.find(header => header.id === headerId).width}
+                  >
+                    <RadioInputGroup
+                      description={
+                        <ScreenReaderContent>
+                          Set text-align for column: {headerId}
+                        </ScreenReaderContent>
+                      }
+                      name={`columnTextAlign_${headerId}`}
+                      value={textAlign}
+                      margin="0 0 small"
+                      size="small"
+                      onChange={
+                        (e, value) => this.handleColTextAlignChange(headerId, value)
+                      }
+                    >
+                      <RadioInput label="start" value="start" />
+                      <RadioInput label="center" value="center" />
+                      <RadioInput label="end" value="end" />
+                    </RadioInputGroup>
+                  </Table.Cell>
+                )
+              })}
+            </Table.Row>
+          </Table.Body>
+        </Table>
+      </ToggleGroup>
+    )
+
+    return (
+      <FormField id="columnTextAlign" label="Set column text-align">
+        <Flex margin="0 0 medium">
+          {Object.entries(colTextAligns).map(([headerId, textAlign]) => {
+            return (
+              <Flex.Item
+                key={headerId}
+                width={headers.find(header => header.id === headerId).width}
+              >
+                <RadioInputGroup
+                  description={
+                    <ScreenReaderContent>
+                      Column {headerId}textAlign
+                    </ScreenReaderContent>
+                  }
+                  name={`Column "${headerId}" textAlign`}
+                  value={textAlign}
+                  margin="0 0 small"
+                  size="small"
+                  onChange={
+                    (e, value) => this.handleColTextAlignChange(headerId, value)
+                  }
+                >
+                  <RadioInput label="start" value="start" />
+                  <RadioInput label="center" value="center" />
+                  <RadioInput label="end" value="end" />
+                </RadioInputGroup>
+              </Flex.Item>
+            )
+          })}
+        </Flex>
+      </FormField>
+    )
+  }
+
   render() {
     const { caption, headers, rows } = this.props
-    const { sortBy, ascending } = this.state
+    const { sortBy, ascending, colTextAligns } = this.state
     const direction = ascending ? 'ascending' : 'descending'
     const sortedRows = [...(rows || [])].sort((a, b) => {
       if (a[sortBy] < b[sortBy]) {
@@ -305,30 +430,24 @@ class SortableTable extends React.Component {
       >
         {(props) => (
           <div>
+            {props.layout !== 'stacked' && (
+              <View display="block" margin="0 0 medium">
+                {this.renderOptions()}
+              </View>
+            )}
+
             <Table
               caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
               {...props}
             >
               <Table.Head renderSortLabel="Sort by">
-                <Table.Row>
-                  {(headers || []).map(({ id, text }) => (
-                    <Table.ColHeader
-                      key={id}
-                      id={id}
-                      stackedSortByLabel={text}
-                      onRequestSort={this.handleSort}
-                      sortDirection={id === sortBy ? direction : 'none'}
-                    >
-                      {text}
-                    </Table.ColHeader>
-                   ))}
-                </Table.Row>
+                {this.renderHeaderRow(direction)}
               </Table.Head>
               <Table.Body>
                 {sortedRows.map((row) => (
                   <Table.Row key={row.id}>
                     {headers.map(({ id, renderCell }) => (
-                      <Table.Cell key={id}>
+                      <Table.Cell key={id} textAlign={colTextAligns[id]}>
                         {renderCell ? renderCell(row[id]) : row[id]}
                       </Table.Cell>
                     ))}
@@ -357,18 +476,22 @@ render(
       {
         id: 'rank',
         text: 'Rank',
+        width: '15%',
       },
       {
         id: 'title',
         text: 'Title',
+        width: '55%',
       },
       {
         id: 'year',
         text: 'Year',
+        width: '15%',
       },
       {
         id: 'rating',
         text: 'Rating',
+        width: '15%',
         renderCell: (rating) => rating.toFixed(1),
       },
     ]}
