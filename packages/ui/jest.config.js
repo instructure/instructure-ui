@@ -23,5 +23,6 @@
  */
 module.exports = {
   testEnvironment: 'node',
-  rootDir: '__tests__'
+  rootDir: '__tests__',
+  restoreMocks: true
 }
