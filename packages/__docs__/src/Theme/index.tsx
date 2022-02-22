@@ -72,7 +72,7 @@ class Theme extends Component<ThemeProps> {
 
   renderVariable(
     name: string,
-    value: string | { text: string; color: string }
+    value: string | number | { text: string; color: string }
   ) {
     let valueText = value
     let valueColor = ''
@@ -134,7 +134,7 @@ class Theme extends Component<ThemeProps> {
     section: Record<string, string | number | { text: string; color: string }>
   ) {
     return Object.keys(section).map((name) => {
-      return this.renderVariable(name, `${section[name]}`)
+      return this.renderVariable(name, section[name])
     })
   }
 
