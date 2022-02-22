@@ -87,7 +87,11 @@ class Properties extends Component<PropertiesProps> {
             </Table.Cell>
             <Table.Cell>
               <code>
-                {this.isTsProp(prop) ? this.renderTSType(prop.tsType) : null}
+                {this.isTsProp(prop)
+                  ? this.renderTSType(prop.tsType)
+                  : // the fallback is needed for the components
+                    // that have no @tsProps flag jet (not fully typed yet)
+                    this.renderType(prop.type)}
               </code>
             </Table.Cell>
             <Table.Cell>{this.renderDefault(prop)}</Table.Cell>
