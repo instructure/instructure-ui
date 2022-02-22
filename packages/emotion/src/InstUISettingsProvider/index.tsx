@@ -23,35 +23,45 @@
  */
 
 import React, { useContext } from 'react'
-import { TextDirectionContext } from '@instructure/ui-i18n'
+import PropTypes from 'prop-types'
 import { ThemeProvider } from '@emotion/react'
-import { ThemeOrOverride } from '../EmotionTypes'
-import { getTheme } from '../EmotionThemeProvider'
+
+import { TextDirectionContext } from '@instructure/ui-i18n'
 import { DeterministicIdContextProvider } from '@instructure/ui-react-utils'
+
+import { getTheme } from '../EmotionThemeProvider'
+
+import type { ThemeOrOverride } from '../EmotionTypes'
 import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
 
 type InstUIProviderProps = {
+  children?: React.ReactNode
+
+  /**
+   * A full theme or an override object
+   */
   theme?: ThemeOrOverride
-  dir?: 'ltr' | 'rtl' // TODO allow "auto" too
+
+  /**
+   * The text direction to use in the descendants. If not provided, it uses the following in this priority order:
+   *   - The value given in a parent `TextDirectionContext`
+   *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
+   *   - The default `ltr`
+   */
+  dir?: 'ltr' | 'rtl'
+
+  /**
+   * A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
+   */
   instanceCounterMap?: DeterministicIdProviderValue
 }
-
-/**
- * @typedef InstUISettingsProviderSettings
- * @type {object}
- * @property {string} theme - A full theme or an override object
- * @property {string} dir - The text direction to use in the descendants. If not
- * given it uses the following in this priority order:
- *   - The value given in a parent `TextDirectionContext`
- *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
- *   - `ltr`
- * @property {Map<string, number>} instanceCounterMap - a Map to keep track of instances
- */
 
 /**
  * ---
  * category: components/utilities
  * ---
+ * @module InstUISettingsProvider
+ * @tsProps
  *
  * Wrapper for emotion js's [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype).
  *
@@ -101,24 +111,19 @@ type InstUIProviderProps = {
  *    //read our [SSR](/#server-side-rendering) guide
  *    const counter = generateInstanceCounterMap()
  *    counter.set("Alert", 5)
- *   <InstUISettingsProvider instanceCounterMap={counter}
+ *   <InstUISettingsProvider instanceCounterMap={counter}>
  *     //this Alert's rendered DOM Node will have [id="Alert_5"] on it
  *     <Alert>Test!</Alert>
  *   </InstUISettingsProvider>
  * </InstUISettingsProvider>
  * ```
- *
- * @module InstUISettingsProvider
- *
- * @param {InstUISettingsProviderSettings} settings - A settings object
- * @returns {ReactElement} The settings provider
  */
 function InstUISettingsProvider({
   children,
   theme = {},
   dir,
   instanceCounterMap
-}: React.PropsWithChildren<InstUIProviderProps>) {
+}: InstUIProviderProps) {
   const finalDir = dir || useContext(TextDirectionContext)
 
   if (process.env.NODE_ENV !== 'production' && finalDir === 'auto') {
@@ -138,10 +143,18 @@ function InstUISettingsProvider({
   )
 }
 
-InstUISettingsProvider.defaultProps = {
-  theme: {},
-  dir: undefined,
-  instanceCounterMap: undefined
+InstUISettingsProvider.propTypes = {
+  /* eslint-disable react/require-default-props */
+  children: PropTypes.node,
+  theme: PropTypes.object,
+  dir: PropTypes.oneOf(['ltr', 'rtl']),
+  instanceCounterMap: PropTypes.instanceOf(Map)
+  /* eslint-enable react/require-default-props */
 }
+
+InstUISettingsProvider.defaultProps = {
+  theme: {}
+}
+
 export default InstUISettingsProvider
 export { InstUISettingsProvider }
