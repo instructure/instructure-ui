@@ -22,45 +22,35 @@
  * SOFTWARE.
  */
 
-import type { PropValidators } from '@instructure/shared-types'
-import type { ToggleDetailsProps } from '@instructure/ui-toggle-details'
+import React from 'react'
 import PropTypes from 'prop-types'
+
+import type { ToggleDetailsProps } from '@instructure/ui-toggle-details'
+import type {
+  PickPropsWithExceptions,
+  PropValidators
+} from '@instructure/shared-types'
 
 type NavToggleOwnProps = {
   summary: string
   variant?: 'section' | 'category'
   children?: React.ReactNode
-  onToggle?: ToggleDetailsProps['onToggle']
-  expanded?: boolean
-  iconPosition?: ToggleDetailsProps['iconPosition']
-  href?: string
-  key?: string
 }
 type PropKeys = keyof NavToggleOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type NavToggleProps = NavToggleOwnProps
+type NavToggleProps = PickPropsWithExceptions<
+  ToggleDetailsProps,
+  'summary' | 'fluidWidth' | keyof NavToggleOwnProps
+> &
+  NavToggleOwnProps
 
 const propTypes: PropValidators<PropKeys> = {
   summary: PropTypes.string.isRequired,
   variant: PropTypes.oneOf(['section', 'category']),
-  children: PropTypes.node,
-  onToggle: PropTypes.func,
-  expanded: PropTypes.bool,
-  iconPosition: PropTypes.string,
-  href: PropTypes.string,
-  key: PropTypes.string
+  children: PropTypes.node
 }
-const allowedProps: AllowedPropKeys = [
-  'children',
-  'summary',
-  'variant',
-  'onToggle',
-  'iconPosition',
-  'expanded',
-  'href',
-  'key'
-]
+const allowedProps: AllowedPropKeys = ['children', 'summary', 'variant']
 export type { NavToggleProps }
 export { allowedProps, propTypes }

@@ -37,7 +37,7 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 type ToggleDetailsOwnProps = {
   variant?: 'default' | 'filled'
   summary: React.ReactNode
-  expanded?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
+  expanded?: boolean // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
   defaultExpanded?: boolean
   onToggle?: (...args: any[]) => any
   icon?: (...args: any[]) => any
