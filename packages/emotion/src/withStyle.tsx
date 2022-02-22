@@ -92,7 +92,7 @@ const defaultValues = {
  *
  * A decorator or higher order component that makes a component themeable.
  *
- * It adds a `makeStyles` function and the generated `styles` object to the decorated Component's props.
+ * It adds a `makeStyles` function and the generated `styles` object to the decorated Component's props. If it has an own theme, it also adds the `themeOverride` prop to the component.
  *
  * As a HOC:
  *
@@ -100,7 +100,6 @@ const defaultValues = {
  * import { withStyle, jsx } from '@instructure/emotion'
  * import generateStyle from './styles'
  * import generateComponentTheme from './theme'
- *
  *
  * export default withStyle(generateStyle, generateComponentTheme)(ExampleComponent)
  * ```
@@ -114,10 +113,12 @@ const defaultValues = {
  * [InstUISettingsProvider](#InstUISettingsProvider) component, and/or set
  * explicitly via its `themeOverride` prop.
  *
- * InstUISettingsProvider provides a theme object with [global theme variables](#canvas).
+ * InstUISettingsProvider provides a theme object with global theme variables (e.g. the [canvas theme](/#canvas)).
  * These variables are mapped to the component's own variables in `theme.js` (see [@instructure/emotion](#emotion) package documentation for more info).
  *
  * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js. It accepts an object or a function. The function has the component's theme and the currently active main theme as its parameter.
+ *
+ * See more about the overrides on the [Using theme overrides](/#using-theme-overrides) docs page.
  *
  * ```js
  * // ExampleComponent/theme.js

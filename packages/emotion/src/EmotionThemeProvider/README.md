@@ -2,7 +2,18 @@
 describes: EmotionThemeProvider
 ---
 
-#### DEPRECATED. Please use [InstUISettingsProvider](#InstUISettingsProvider) instead. It has the same functionality and adds text direction configuration.
+```js
+---
+embed: true
+---
+<ToggleBlockquote
+  summary="DEPRECATED"
+>
+  <ToggleBlockquote.Paragraph>
+    This component is depreacted. Please use <Link href="#InstUISettingsProvider">InstUISettingsProvider</Link> instead. It has the same functionality and adds additional configuration.
+  </ToggleBlockquote.Paragraph>
+</ToggleBlockquote>
+```
 
 The `<EmotionThemeProvider/>` component provides a way to set the theme for our app or override the default theme properties for all themeable child components using the [withStyle](#withStyle) decorator.
 

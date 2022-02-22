@@ -89,7 +89,7 @@ A themeable component’s theme can be configured by wrapping it in an [InstUISe
 
 The themeable components accept a `themeOverride` prop which let's you override it's component theme object. It accepts an override object or a function, which has the current `componentTheme` as its parameter.
 
-(See [withStyle](#withStyle/#applying-themes) documentation for more info.)
+**See more on the [withStyle](#withStyle/#applying-themes) and [Using theme overrides](/#using-theme-overrides) doc pages for more info.**
 
 ```js
 ---

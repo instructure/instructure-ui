@@ -71,6 +71,11 @@ class Properties extends Component<PropertiesProps> {
       .filter((name) => {
         const description = props[name].description || ''
 
+        // we need to manually pass through the dir prop of InstUISettingsProvider
+        if (name === 'dir' && props.theme && props.instanceCounterMap) {
+          return true
+        }
+
         return (
           description.indexOf('@private') < 0 &&
           description.indexOf('@deprecated') < 0 &&
