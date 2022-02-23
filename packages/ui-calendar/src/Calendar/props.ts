@@ -49,25 +49,19 @@ type CalendarOwnProps = {
    * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
    * `renderIcon` to [IconArrowOpenEnd](#iconography).
    */
-  renderNextMonthButton?:
-    | React.ReactNode
-    | ((...args: any[]) => React.ReactNode)
+  renderNextMonthButton?: React.ReactNode | (() => React.ReactNode)
   /**
    * A button to render in the navigation header. The recommendation is to
    * compose it with the [IconButton](#Button) component by setting the `size`
    * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
    * `renderIcon` to [IconArrowOpenStart](#iconography).
    */
-  renderPrevMonthButton?:
-    | React.ReactNode
-    | ((...args: any[]) => React.ReactNode)
+  renderPrevMonthButton?: React.ReactNode | (() => React.ReactNode)
   /**
    * Content to render in the navigation header. The recommendation is to include
    * the name of the current rendered month along with the year.
    */
-  renderNavigationLabel?:
-    | React.ReactNode
-    | ((...args: any[]) => React.ReactNode)
+  renderNavigationLabel?: React.ReactNode | (() => React.ReactNode)
   /**
    * An array of labels containing the name of each day of the week. The visible
    * portion of the label should be abbreviated (no longer than three characters).
@@ -77,10 +71,7 @@ type CalendarOwnProps = {
    * full day name for assistive technologies and the children containing the
    * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
    */
-  renderWeekdayLabels: (
-    | React.ReactNode
-    | ((...args: any[]) => React.ReactNode)
-  )[]
+  renderWeekdayLabels: (React.ReactNode | (() => React.ReactNode))[]
   /**
    * Callback fired when the next month button is clicked in the navigation
    * header, requesting to render the next month.

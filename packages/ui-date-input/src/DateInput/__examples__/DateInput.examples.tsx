@@ -37,8 +37,6 @@ const generateDays = () => {
       <Calendar.Day
         date={date.toISOString()}
         label={date.toISOString()}
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        renderLabel={date.toISOString()}
         isOutsideMonth={date.getMonth() !== 7}
         id={date.toISOString()}
       >
