@@ -23,13 +23,19 @@
  */
 
 /** @jsx jsx */
-import { Children, Component, ReactElement } from 'react'
+import React, { Children, Component, ReactElement } from 'react'
 
 import { Calendar } from '@instructure/ui-calendar'
+import type { CalendarProps, CalendarDayProps } from '@instructure/ui-calendar'
 import { IconCalendarMonthLine } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover'
 import { Selectable } from '@instructure/ui-selectable'
+import type {
+  SelectableProps,
+  SelectableRender
+} from '@instructure/ui-selectable'
 import { TextInput } from '@instructure/ui-text-input'
+import type { TextInputProps } from '@instructure/ui-text-input'
 import { createChainedFunction } from '@instructure/ui-utils'
 import {
   getInteraction,
@@ -50,53 +56,32 @@ import type { DateInputProps } from './props'
 ---
 category: components
 ---
+The `DateInput` component provides a visual interface for inputting date data.
+See <https://instructure.design/#DateInput/>
+@tsProps
 **/
 @withStyle(generateStyle, null)
 @testable()
 class DateInput extends Component<DateInputProps> {
   static readonly componentId = 'DateInput'
-
   static Day = Calendar.Day
-
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
     value: '',
     size: 'medium',
-    placeholder: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onChange: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onBlur: (event) => {},
-    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    onBlur: () => {}, // must have a default so createChainedFunction works
     isRequired: false,
     isInline: false,
     layout: 'stacked',
-    width: null,
     display: 'inline-block',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    inputRef: (el) => {},
     placement: 'bottom center',
-    isShowingCalendar: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestValidateDate: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestShowCalendar: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestHideCalendar: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestSelectNextDay: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestSelectPrevDay: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestRenderNextMonth: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onRequestRenderPrevMonth: (event) => {},
-    renderNavigationLabel: null,
-    renderNextMonthButton: null,
-    renderPrevMonthButton: null,
-    children: null
+    isShowingCalendar: false
   }
+
+  state = { hasInputRef: false }
+  _input?: HTMLInputElement | null = undefined
+  ref: Element | null = null
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -106,27 +91,18 @@ class DateInput extends Component<DateInputProps> {
     this.props.makeStyles?.()
   }
 
-  state = {
-    hasInputRef: false
-  }
-
-  _input = undefined
-
-  ref: Element | null = null
-
   handleRef = (el: Element | null) => {
     this.ref = el
   }
 
   get selectedDateId() {
-    let selectedDateId
-
+    let selectedDateId: string | undefined
     Children.toArray(this.props.children).forEach((day) => {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
-      const { date, isSelected } = day.props
-      if (isSelected) selectedDateId = this.formatDateId(date)
+      const { date, isSelected } = (day as ReactElement<CalendarDayProps>).props
+      if (isSelected) {
+        selectedDateId = this.formatDateId(date)
+      }
     })
-
     return selectedDateId
   }
 
@@ -134,66 +110,45 @@ class DateInput extends Component<DateInputProps> {
     return getInteraction({ props: this.props })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'date' implicitly has an 'any' type.
-  formatDateId = (date) => {
+  formatDateId = (date: string) => {
     // ISO8601 strings may contain a space. Remove any spaces before using the
     // date as the id.
     return date.replace(/\s/g, '')
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleInputRef = (el) => {
-    const { inputRef } = this.props
-    const { hasInputRef } = this.state
-
+  handleInputRef: TextInputProps['inputRef'] = (el) => {
     // Ensures that we position the Calendar with respect to the input correctly
     // if the Calendar is open on mount
-    if (!hasInputRef) {
+    if (!this.state.hasInputRef) {
       this.setState({ hasInputRef: true })
     }
-
     this._input = el
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    inputRef(el)
+    this.props.inputRef?.(el)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleInputChange = (event, value) => {
-    const { onChange } = this.props
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onChange(event, { value })
+  handleInputChange: TextInputProps['onChange'] = (event, value) => {
+    this.props.onChange?.(event, { value })
     this.handleShowCalendar(event)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleShowCalendar = (event) => {
-    const { onRequestShowCalendar } = this.props
-    const { interaction } = this
-
-    if (interaction === 'enabled') {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      onRequestShowCalendar(event)
+  handleShowCalendar = (event: React.SyntheticEvent) => {
+    if (this.interaction === 'enabled') {
+      this.props.onRequestShowCalendar?.(event)
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleHideCalendar = (event) => {
-    const { onRequestHideCalendar, onRequestValidateDate } = this.props
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onRequestValidateDate(event)
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    onRequestHideCalendar(event)
+  handleHideCalendar = (event: React.SyntheticEvent) => {
+    this.props.onRequestValidateDate?.(event)
+    this.props.onRequestHideCalendar?.(event)
   }
 
-  handleHighlightOption = (
-    event: React.SyntheticEvent,
-    { direction }: { direction?: number }
+  handleHighlightOption: SelectableProps['onRequestHighlightOption'] = (
+    event,
+    { direction }
   ) => {
     const { onRequestSelectNextDay, onRequestSelectPrevDay } = this.props
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    if (direction === -1) onRequestSelectPrevDay(event)
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    if (direction === 1) onRequestSelectNextDay(event)
+    if (direction === -1) onRequestSelectPrevDay?.(event)
+    if (direction === 1) onRequestSelectNextDay?.(event)
   }
 
   renderMonthNavigationButton(type = 'prev') {
@@ -203,18 +158,15 @@ class DateInput extends Component<DateInputProps> {
     return button && safeCloneElement(callRenderProp(button), { tabIndex: -1 })
   }
 
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getOptionProps' implicitly has an... Remove this comment to see the full error message
-  renderDays({ getOptionProps }) {
-    const { children } = this.props
+  renderDays(getOptionProps: SelectableRender['getOptionProps']) {
+    const children = this.props.children as ReactElement<CalendarDayProps>
 
     return Children.map(children, (day) => {
-      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       const { date, isOutsideMonth } = day.props
-
-      let props = { tabIndex: -1, id: this.formatDateId(date) }
+      const props = { tabIndex: -1, id: this.formatDateId(date) }
       const optionProps = getOptionProps(props)
 
-      props = isOutsideMonth
+      const propsAdded = isOutsideMonth
         ? {
             ...props,
             onClick: optionProps.onClick,
@@ -222,37 +174,46 @@ class DateInput extends Component<DateInputProps> {
           }
         : optionProps
 
-      return safeCloneElement(day as ReactElement, props)
+      return safeCloneElement(day, propsAdded)
     })
   }
 
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getListProps' implicitly has an '... Remove this comment to see the full error message
-  renderCalendar({ getListProps, getOptionProps }) {
+  renderCalendar({
+    getListProps,
+    getOptionProps
+  }: {
+    getListProps: SelectableRender['getListProps']
+    getOptionProps: SelectableRender['getOptionProps']
+  }) {
     const {
       onRequestRenderNextMonth,
       onRequestRenderPrevMonth,
       renderNavigationLabel,
       renderWeekdayLabels
     } = this.props
-
     return (
       <Calendar
-        {...getListProps({
+        {...(getListProps({
           onRequestRenderNextMonth,
           onRequestRenderPrevMonth,
           renderNavigationLabel,
           renderWeekdayLabels,
           renderNextMonthButton: this.renderMonthNavigationButton('next'),
           renderPrevMonthButton: this.renderMonthNavigationButton('prev')
-        })}
+        }) as CalendarProps)}
       >
-        {this.renderDays({ getOptionProps })}
+        {this.renderDays(getOptionProps)}
       </Calendar>
     )
   }
 
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getInputProps' implicitly has an ... Remove this comment to see the full error message
-  renderInput({ getInputProps, getTriggerProps }) {
+  renderInput({
+    getInputProps,
+    getTriggerProps
+  }: {
+    getInputProps: SelectableRender['getInputProps']
+    getTriggerProps: SelectableRender['getInputProps']
+  }) {
     const {
       renderLabel,
       value,
@@ -309,8 +270,6 @@ class DateInput extends Component<DateInputProps> {
   render() {
     const { placement, isShowingCalendar, assistiveText, styles } = this.props
 
-    const { selectedDateId } = this
-
     return (
       <Selectable
         isShowingOptions={isShowingCalendar}
@@ -318,8 +277,8 @@ class DateInput extends Component<DateInputProps> {
         onRequestHideOptions={this.handleHideCalendar}
         onRequestHighlightOption={this.handleHighlightOption}
         onRequestSelectOption={this.handleHideCalendar}
-        selectedOptionId={selectedDateId}
-        highlightedOptionId={selectedDateId}
+        selectedOptionId={this.selectedDateId}
+        highlightedOptionId={this.selectedDateId}
       >
         {({
           getRootProps,

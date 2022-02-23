@@ -802,9 +802,7 @@ describe('<DateInput />', async () => {
       const calendar = await dateInput.findCalendar()
 
       const focusableElements = await calendar.findAll(':focusable')
-
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-      focusableElements.forEach((element, i) => {
+      focusableElements.forEach((element: Element) => {
         expect(element.getAttribute('tabIndex')).to.equal('-1')
       })
     })
@@ -831,8 +829,7 @@ describe('<DateInput />', async () => {
       const calendar = await dateInput.findCalendar()
       const results = await calendar.findAllDays()
 
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'day' implicitly has an 'any' type.
-      results.forEach((day) => {
+      results.forEach((day: any) => {
         if (day.getTextContent().includes('outside')) {
           expect(day.getAttribute('role')).to.equal('presentation')
         } else {
@@ -863,8 +860,7 @@ describe('<DateInput />', async () => {
       const calendar = await dateInput.findCalendar()
       const results = await calendar.findAllDays()
 
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'day' implicitly has an 'any' type.
-      results.forEach((day) => {
+      results.forEach((day: any) => {
         if (day.getTextContent().includes('selected')) {
           expect(day.getAttribute('aria-selected')).to.equal('true')
         } else {
