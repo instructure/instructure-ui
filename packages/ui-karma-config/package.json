@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-karma-config",
-  "version": "8.17.0",
+  "version": "8.18.0",
   "description": "A shared karma config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -16,9 +16,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/config-loader": "8.17.0",
-    "@instructure/ui-webpack-config": "8.17.0",
+    "@instructure/config-loader": "8.18.0",
+    "@instructure/ui-webpack-config": "8.18.0",
     "@jsdevtools/coverage-istanbul-loader": "3.0.5",
+    "buffer": "^6",
     "choma": "^1",
     "globby": "^10.0.1",
     "karma": "^6",
@@ -32,8 +33,7 @@
     "karma-viewport": "^1.0.4",
     "karma-webpack": "^5",
     "loader-utils": "^2",
-    "process": "^0.11",
-    "buffer": "^6"
+    "process": "^0.11"
   },
   "peerDependencies": {
     "mocha": "^7",

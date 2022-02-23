@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.18.0](https://github.com/instructure/instructure-ui/compare/v8.17.0...v8.18.0) (2022-02-23)
+
+### Bug Fixes
+
+- **ui-code-editor:** change dynamically imported `CodeMirror` language modes ([8e38d5a](https://github.com/instructure/instructure-ui/commit/8e38d5a2e11e842eafa2fa270e47a261c6ebb626))
+  - this fix might cause some `jest` tests to fail, details about [how to fix them](/#CodeEditor)
+- **ui-portal:** fix `Portal` not being SSR-able ([cb1375f](https://github.com/instructure/instructure-ui/commit/cb1375f2cda92fc4e659500a2f280fcd6de379f5))
+- **ui-radio-input:** fix cursor of radioinput, version toggle in Safari ([0670cf5](https://github.com/instructure/instructure-ui/commit/0670cf5bc27401023eb273a44bdbf8cc79b5efa8))
+
+### Features
+
+- InstUI components can be rendered on the server side (SSR) - [more details](/#server-side-rendering)
+
 # [8.17.0](https://github.com/instructure/instructure-ui/compare/v8.16.0...v8.17.0) (2022-02-07)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.18.0](https://github.com/instructure/instructure-ui/compare/v8.17.0...v8.18.0) (2022-02-23)
+
+### Bug Fixes
+
+- **ui-portal:** fix `Portal` not being SSR-able ([cb1375f](https://github.com/instructure/instructure-ui/commit/cb1375f2cda92fc4e659500a2f280fcd6de379f5))
+
 # [8.17.0](https://github.com/instructure/instructure-ui/compare/v8.16.0...v8.17.0) (2022-02-07)
 
 ### Bug Fixes
