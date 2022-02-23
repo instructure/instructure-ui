@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-number-input",
-  "version": "8.17.0",
+  "version": "8.18.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "homepage": "https://instructure.github.io/instructure-ui/",
@@ -23,21 +23,21 @@
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.17.0",
-    "@instructure/ui-test-locator": "8.17.0",
-    "@instructure/ui-test-utils": "8.17.0",
-    "@instructure/ui-themes": "8.17.0"
+    "@instructure/ui-babel-preset": "8.18.0",
+    "@instructure/ui-test-locator": "8.18.0",
+    "@instructure/ui-test-utils": "8.18.0",
+    "@instructure/ui-themes": "8.18.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/emotion": "8.17.0",
-    "@instructure/shared-types": "8.17.0",
-    "@instructure/ui-form-field": "8.17.0",
-    "@instructure/ui-icons": "8.17.0",
-    "@instructure/ui-react-utils": "8.17.0",
-    "@instructure/ui-testable": "8.17.0",
-    "@instructure/ui-utils": "8.17.0",
-    "@instructure/uid": "8.17.0",
+    "@instructure/emotion": "8.18.0",
+    "@instructure/shared-types": "8.18.0",
+    "@instructure/ui-form-field": "8.18.0",
+    "@instructure/ui-icons": "8.18.0",
+    "@instructure/ui-react-utils": "8.18.0",
+    "@instructure/ui-testable": "8.18.0",
+    "@instructure/ui-utils": "8.18.0",
+    "@instructure/uid": "8.18.0",
     "keycode": "^2",
     "prop-types": "^15"
   },

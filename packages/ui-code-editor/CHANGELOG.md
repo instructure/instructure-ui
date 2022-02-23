@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.18.0](https://github.com/instructure/instructure-ui/compare/v8.17.0...v8.18.0) (2022-02-23)
+
+### Bug Fixes
+
+- **ui-code-editor:** change dynamically imported `CodeMirror` language modes ([8e38d5a](https://github.com/instructure/instructure-ui/commit/8e38d5a2e11e842eafa2fa270e47a261c6ebb626))
+
 # [8.17.0](https://github.com/instructure/instructure-ui/compare/v8.16.0...v8.17.0) (2022-02-07)
 
 ### Bug Fixes
