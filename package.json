@@ -127,5 +127,8 @@
   },
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
-  ]
+  ],
+  "dependencies": {
+    "codesandbox": "^2.2.3"
+  }
 }
