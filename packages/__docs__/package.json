@@ -107,6 +107,7 @@
     "@instructure/ui-view": "8.18.0",
     "babel-loader": "^8.2.3",
     "buffer": "^6",
+    "codesandbox": "^2.2.3",
     "lorem-ipsum": "^1.0.6",
     "marked": "^2.0.3",
     "moment": "^2.23.0",
