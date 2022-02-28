@@ -28,7 +28,6 @@ type CodePenButtonOwnProps = {
   code: string
   title: string
   language: string
-  render?: boolean
   options?: Record<string, any>
 }
 
@@ -39,15 +38,8 @@ const propTypes: PropValidators<PropKeys> = {
   code: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
-  render: PropTypes.bool,
   options: PropTypes.object
 }
-const allowedProps: AllowedPropKeys = [
-  'code',
-  'title',
-  'language',
-  'render',
-  'options'
-]
+const allowedProps: AllowedPropKeys = ['code', 'title', 'language', 'options']
 export type { CodePenButtonProps }
 export { propTypes, allowedProps }
