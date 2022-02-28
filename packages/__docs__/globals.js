@@ -53,11 +53,11 @@ const globals = {
   ...Components,
   debounce,
   moment,
-  locales: moment.locales(),
-  avatarSquare,
-  avatarPortrait,
+  locales: moment.locales(), // unused TODO double check, should be used DateInput
+  avatarSquare, // image
+  avatarPortrait, // image
   DateTime,
-  iconExample,
+  iconExample, // image
   lorem: {
     sentence() {
       return lorem({
@@ -79,8 +79,8 @@ const globals = {
     }
   },
   mirrorHorizontalPlacement,
-  placeholderImage,
-  placeholderLogo,
+  placeholderImage, // image
+  placeholderLogo, // image
   React,
   ReactDOM
 }

@@ -35,17 +35,29 @@ class CodePenButton extends Component<CodePenButtonProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    options: {},
-    render: true
+    options: {}
   }
-
   render() {
-    const { render } = this.props
-    const code = render ? `render(${this.props.code})` : this.props.code
-
+    // 2 choices:
+    // 1: Add every import manually to every example
+    // 2: Just add render() if needed to every example and do the following:
+    //const code = this.props.code
+    // write something that parses this code, e.g. via regexpes and inserts the imports
+    // for example it looks for "<[Capital letter]" like <Avatar
+    // lets say that it found Avatar and Alert, then it constructs a string like
+    // const result = "import {Avatar, Alert} from '@instructure/ui'"
+    // Search in "code" for the exact string "mirrorHorizontalPlacement", if found
+    // code = "import { mirrorHorizontalPlacement } from '@instructure/ui-position'" + code
+    // add @instructure/ui-position to the package.json dependencies
+    //code = result + code
+    // For step 1 handle the following:
+    // Add React, ReactDOM imports
+    // Add component and icon imports
+    // Add imports for mirrorHorizontalPlacement, DateTime, moment, debounce
+    // And later we'll deal with the image imports and the preview bug
     const data = {
       title: this.props.title,
-      js: `const render = (el) => { ReactDOM.render(el, document.getElementById('app')) }\n\n${code}`,
+      js: this.props.code,
       private: true,
       editors: '001',
       html: '<div id="app"></div><div id="flash-messages"></div><div id="nav"></div>',
@@ -53,10 +65,10 @@ class CodePenButton extends Component<CodePenButtonProps> {
       js_pre_processor: 'babel',
       ...this.props.options
     }
-    const JSONData = JSON.stringify(data)
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&apos;')
-    const html = '<div id="root"></div>'
+    //    const JSONData = JSON.stringify(data)
+    //      .replace(/"/g, '&quot;')
+    //      .replace(/'/g, '&apos;')
+    //    const html = '<div id="root"></div>'
     const dependencies = JSON.stringify({
       dependencies: {
         '@instructure/debounce': '^8',
