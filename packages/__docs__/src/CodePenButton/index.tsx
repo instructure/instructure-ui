@@ -23,6 +23,7 @@
  */
 
 import React, { Component } from 'react'
+import { getParameters } from 'codesandbox/lib/api/define'
 
 import { Tooltip } from '@instructure/ui-tooltip'
 import { SVGIcon } from '@instructure/ui-svg-images'
@@ -55,13 +56,41 @@ class CodePenButton extends Component<CodePenButtonProps> {
     const JSONData = JSON.stringify(data)
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&apos;')
+    const html = '<div id="root"></div>'
+    const dependencies = JSON.stringify({
+      dependencies: {
+        '@instructure/debounce': '^8',
+        '@instructure/ui': '^8',
+        '@instructure/ui-icons': '^8',
+        'lorem-ipsum': '2.0.4',
+        react: '17.0.2',
+        'react-dom': '17.0.2',
+        'react-scripts': '4.0.0'
+      }
+    }).replace(/'/g, '&apos;')
+    const parameters = getParameters({
+      files: {
+        'package.json': {
+          content: dependencies,
+          isBinary: true
+        },
+        'index.js': {
+          content: data.js,
+          isBinary: false
+        },
+        'index.html': {
+          content: data.html,
+          isBinary: false
+        }
+      }
+    })
     return (
       <form
-        action="https://codepen.io/pen/define"
+        action="https://codesandbox.io/api/v1/sandboxes/define"
         method="POST"
         target="_blank"
       >
-        <input type="hidden" name="data" value={JSONData} />
+        <input type="hidden" name="parameters" value={parameters} />
         <Tooltip renderTip="Edit in Codepen" placement="bottom">
           <IconButton
             type="submit"
