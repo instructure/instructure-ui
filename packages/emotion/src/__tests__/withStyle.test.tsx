@@ -145,7 +145,9 @@ describe('@withStyle', async () => {
       )
       const emotionClassRegex = new RegExp(/^css-.+-exampleComponent$/)
 
-      expect(subject.getDOMNode().classList[0]).to.match(emotionClassRegex)
+      expect(subject.getDOMNode().firstElementChild!.classList[0]).to.match(
+        emotionClassRegex
+      )
     })
 
     it('should apply correct css props', async () => {
@@ -154,8 +156,8 @@ describe('@withStyle', async () => {
           <ThemeableComponent />
         </InstUISettingsProvider>
       )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+      const component = subject.getDOMNode().firstElementChild
+      const computedStyle = getComputedStyle(component!)
 
       expect(computedStyle.color).to.equal(textBrand)
       expect(computedStyle.backgroundColor).to.equal(backgroundLight)
@@ -203,8 +205,8 @@ describe('@withStyle', async () => {
           <ThemeableComponent themeOverride={{}} />
         </InstUISettingsProvider>
       )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+      const component = subject.getDOMNode().firstElementChild
+      const computedStyle = getComputedStyle(component!)
 
       expect(computedStyle.color).to.equal(textBrand)
       expect(computedStyle.backgroundColor).to.equal(backgroundLight)
@@ -244,15 +246,15 @@ describe('@withStyle', async () => {
       )
       const main = within(subject.getDOMNode())
       const clearBackgroundButton = await main.find('button')
-      const component = await main.getDOMNode()
+      const component = main.getDOMNode().firstElementChild
 
-      expect(getComputedStyle(component).backgroundColor).to.equal(
+      expect(getComputedStyle(component!).backgroundColor).to.equal(
         backgroundLight
       )
 
       await clearBackgroundButton.click()
 
-      expect(getComputedStyle(component).backgroundColor).to.equal(
+      expect(getComputedStyle(component!).backgroundColor).to.equal(
         'rgba(0, 0, 0, 0)'
       ) // transparent
     })
@@ -265,8 +267,8 @@ describe('@withStyle', async () => {
           <ThemeableComponent />
         </InstUISettingsProvider>
       )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+      const component = subject.getDOMNode().firstElementChild
+      const computedStyle = getComputedStyle(component!)
 
       // `inset-inline-start` should be transformed to 'left' in 'ltr' mode
       expect(computedStyle.left).to.equal('8px')
@@ -275,15 +277,11 @@ describe('@withStyle', async () => {
 
     it('in "rtl" mode', async () => {
       const subject = await mount(
-        <div dir="rtl">
-          <InstUISettingsProvider theme={exampleTheme}>
-            <ThemeableComponent />
-          </InstUISettingsProvider>
-        </div>
+        <InstUISettingsProvider theme={exampleTheme} dir="rtl">
+          <ThemeableComponent />
+        </InstUISettingsProvider>
       )
-      const component = subject
-        .getDOMNode()
-        .querySelector('[class$=-exampleComponent]')
+      const component = subject.getDOMNode().firstElementChild
       const computedStyle = getComputedStyle(component!)
 
       // `inset-inline-start` should be transformed to 'right' in 'rtl' mode
@@ -301,8 +299,8 @@ describe('@withStyle', async () => {
           <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
         </InstUISettingsProvider>
       )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+      const component = subject.getDOMNode().firstElementChild
+      const computedStyle = getComputedStyle(component!)
 
       expect(computedStyle.color).to.equal(textBrand)
     })
@@ -322,8 +320,8 @@ describe('@withStyle', async () => {
           />
         </InstUISettingsProvider>
       )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+      const component = subject.getDOMNode().firstElementChild
+      const computedStyle = getComputedStyle(component!)
 
       expect(computedStyle.color).to.equal(textBrand)
       expect(consoleLog).not.to.have.been.called()

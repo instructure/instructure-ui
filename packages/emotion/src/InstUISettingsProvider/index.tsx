@@ -33,6 +33,7 @@ import { getTheme } from '../EmotionThemeProvider'
 
 import type { ThemeOrOverride } from '../EmotionTypes'
 import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
+import type { AsElementType } from '@instructure/shared-types'
 
 type InstUIProviderProps = {
   children?: React.ReactNode
@@ -54,6 +55,7 @@ type InstUIProviderProps = {
    * A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
    */
   instanceCounterMap?: DeterministicIdProviderValue
+  as?: AsElementType
 }
 
 /**
@@ -77,6 +79,7 @@ type InstUIProviderProps = {
  *   - `ltr`
  * - instanceCounterMap - A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
  * which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
+ * - as - InstUISettingsProvider will wrap it's children with a HTML element (default: span), this can be changed with the `as` property
  *
  * ```js
  *
@@ -125,6 +128,7 @@ function InstUISettingsProvider({
   instanceCounterMap
 }: InstUIProviderProps) {
   const finalDir = dir || useContext(TextDirectionContext)
+  const Element = getElementType(InstUISettingsProvider, { as })
 
   if (process.env.NODE_ENV !== 'production' && finalDir === 'auto') {
     console.warn(
@@ -133,13 +137,15 @@ function InstUISettingsProvider({
   }
 
   return (
-    <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
-      <ThemeProvider theme={getTheme(theme)}>
-        <TextDirectionContext.Provider value={finalDir}>
-          {children}
-        </TextDirectionContext.Provider>
-      </ThemeProvider>
-    </DeterministicIdContextProvider>
+    <Element dir={finalDir}>
+      <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
+        <ThemeProvider theme={getTheme(theme)}>
+          <TextDirectionContext.Provider value={finalDir}>
+            {children}
+          </TextDirectionContext.Provider>
+        </ThemeProvider>
+      </DeterministicIdContextProvider>
+    </Element>
   )
 }
 

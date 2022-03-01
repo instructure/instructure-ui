@@ -47,8 +47,25 @@ describe('InstUISettingsProvider', async () => {
         </InstUISettingsProvider>
       </InstUISettingsProvider>
     )
-    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
+    let element = subject.getDOMNode().firstElementChild?.firstElementChild
+    expect(element!.getAttribute('data-dir')).to.equal('rtl')
     await subject.setProps({ dir: 'ltr' })
-    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('ltr')
+    element = subject.getDOMNode().firstElementChild?.firstElementChild
+    expect(element!.getAttribute('data-dir')).to.equal('ltr')
+  })
+  it('can handle text direction on native HTML elements', async () => {
+    const subject = await mount(
+      <InstUISettingsProvider dir="rtl">
+        <div>Should be RTL</div>
+      </InstUISettingsProvider>
+    )
+    let element = subject.getDOMNode()
+
+    expect(element.getAttribute('dir')).to.equal('rtl')
+
+    await subject.setProps({ dir: 'ltr' })
+    element = subject.getDOMNode()
+
+    expect(element.getAttribute('dir')).to.equal('ltr')
   })
 })
