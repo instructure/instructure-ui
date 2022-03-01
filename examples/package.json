@@ -1,0 +1,20 @@
+{
+  "name": "@instructure/ui-examples",
+  "description": "",
+  "private": "true",
+  "scripts": {
+    "preinstall": "sh prepare.sh",
+    "test": "echo \"Running regression test:\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Viktor Ohad",
+  "license": "ISC",
+  "devDependencies": {
+    "testcafe": "^1.18.4",
+    "@instructure/ui": "8.18.1-snapshot.0"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
