@@ -63,3 +63,19 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: npx netlify deploy --prod --dir ./packages/__docs__/__build__
+  regression-test:
+    needs: release
+    runs-on: ubuntu-latest
+    name: Regression testing
+    steps:
+      - name: Install jq tool
+        run: |
+          sudo apt-get update
+          sudo apt-get install jq -y
+      - uses: actions/checkout@v2
+      - name: Install dependencies for regression testing.
+        working-directory: ./examples
+        run: yarn install
+      - name: Run regression tests.
+        working-directory: ./examples
+        run: yarn test
