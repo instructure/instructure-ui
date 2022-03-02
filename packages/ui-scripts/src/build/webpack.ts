@@ -25,14 +25,7 @@
 import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
 export const webpack = () => {
-  const {
-    NODE_ENV,
-    DEBUG,
-    UNMANGLED_CLASS_NAMES,
-    DISABLE_SPEEDY_STYLESHEET,
-    USE_WEBPACK_CSS_LOADERS,
-    OMIT_INSTUI_DEPRECATION_WARNINGS
-  } = process.env
+  const { NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
 
   const args = process.argv.slice(2)
 
@@ -53,13 +46,7 @@ export const webpack = () => {
   if (args.includes('--watch')) {
     command = 'webpack'
     envVars = envVars
-      .concat([
-        'NODE_ENV=development',
-        'DEBUG=1',
-        'UNMANGLED_CLASS_NAMES=1',
-        'USE_WEBPACK_CSS_LOADERS=1',
-        'DISABLE_SPEEDY_STYLESHEET=1'
-      ])
+      .concat(['NODE_ENV=development', 'DEBUG=1'])
       .filter(Boolean)
     webpackArgs = ['serve', '--mode=development', `--port=${port}`]
   } else {
@@ -68,10 +55,7 @@ export const webpack = () => {
       .concat([
         `NODE_ENV=${NODE_ENV || 'production'}`,
         'NODE_OPTIONS=--max_old_space_size=120000',
-        DEBUG ? `DEBUG=1` : false,
-        UNMANGLED_CLASS_NAMES ? `UNMANGLED_CLASS_NAMES=1` : false,
-        USE_WEBPACK_CSS_LOADERS ? `USE_WEBPACK_CSS_LOADERS=1` : false,
-        DISABLE_SPEEDY_STYLESHEET ? `DISABLE_SPEEDY_STYLESHEET=1` : false
+        DEBUG ? `DEBUG=1` : false
       ])
       .filter(Boolean)
     webpackArgs = ['--mode=production']
