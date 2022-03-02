@@ -27,12 +27,7 @@ import { getPackages, getChangedPackages } from '@instructure/pkg-utils'
 import { getCommand, runCommandsConcurrently } from '@instructure/command-utils'
 
 export const karma = () => {
-  const {
-    UNMANGLED_CLASS_NAMES,
-    DISABLE_SPEEDY_STYLESHEET,
-    USE_WEBPACK_CSS_LOADERS,
-    OMIT_INSTUI_DEPRECATION_WARNINGS
-  } = process.env
+  const { OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
 
   const args = process.argv.slice(2)
 
@@ -48,23 +43,14 @@ export const karma = () => {
   ]
 
   if (args.includes('--watch')) {
-    envVars = envVars
-      .concat([
-        `UNMANGLED_CLASS_NAMES=1`,
-        `USE_WEBPACK_CSS_LOADERS=1`,
-        'DISABLE_SPEEDY_STYLESHEET=1'
-      ])
-      .filter(Boolean)
+    envVars = envVars.filter(Boolean)
   } else {
     envVars = envVars
       .concat([
         `NO_DEBUG=1`,
         `${React.version}`.startsWith('15') || args.includes('--no-coverage')
           ? false
-          : 'COVERAGE=1',
-        UNMANGLED_CLASS_NAMES ? `UNMANGLED_CLASS_NAMES=1` : false,
-        DISABLE_SPEEDY_STYLESHEET ? `DISABLE_SPEEDY_STYLESHEET=1` : false,
-        USE_WEBPACK_CSS_LOADERS ? `USE_WEBPACK_CSS_LOADERS=1` : false
+          : 'COVERAGE=1'
       ])
       .filter(Boolean)
   }
@@ -79,10 +65,6 @@ export const karma = () => {
 
   if (args.includes('--randomize')) {
     karmaArgs.push('--randomize')
-  }
-
-  if (args.includes('--no-lint')) {
-    karmaArgs.push('--no-lint')
   }
 
   const browsersArgIndex = args.findIndex((arg) =>

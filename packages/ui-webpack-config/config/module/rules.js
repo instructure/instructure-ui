@@ -21,12 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const path = require('path')
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
-const noLint = process.argv.includes('--no-lint')
-const DISABLE_LINTER_FAILURE_ON_WARNING =
-  process.env.DISABLE_LINTER_FAILURE_ON_WARNING === '1' || false
 const exclude = [/node_modules/, /\/lib\//, /\/es\//]
 
 const babelLoader = {
@@ -76,23 +72,5 @@ const rules = [
     }
   }
 ]
-
-if (!noLint) {
-  // TODO make this diabled by default or rather do not lint here
-  rules.unshift({
-    enforce: 'pre',
-    test: /\.m?js?$/,
-    exclude,
-    loader: 'eslint-loader',
-    options: {
-      failOnWarning: Boolean(!DEBUG && !DISABLE_LINTER_FAILURE_ON_WARNING),
-      emitError: Boolean(!DEBUG),
-      emitWarning: Boolean(DEBUG),
-      failOnError: Boolean(!DEBUG),
-      quiet: true,
-      ignorePath: path.join(process.cwd(), '.eslintignore')
-    }
-  })
-}
 
 module.exports = rules

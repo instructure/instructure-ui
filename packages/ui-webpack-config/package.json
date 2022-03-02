@@ -19,7 +19,6 @@
     "buffer": "^6",
     "css-loader": "^6",
     "dotenv": "^10",
-    "eslint-loader": "^4",
     "file-loader": "^6",
     "process": "^0.11",
     "style-loader": "^3",

@@ -32,15 +32,11 @@ const specifyCJSFormat = path.resolve(
   'specify-commonjs-format.js'
 )
 
+type ModuleType = ('es' | 'cjs')[]
+
 export const babel = () => {
-  const {
-    BABEL_ENV,
-    NODE_ENV,
-    DEBUG,
-    UNMANGLED_CLASS_NAMES,
-    DISABLE_SPEEDY_STYLESHEET,
-    OMIT_INSTUI_DEPRECATION_WARNINGS
-  } = process.env
+  const { BABEL_ENV, NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } =
+    process.env
 
   const args = process.argv.slice(2)
 
@@ -67,26 +63,18 @@ export const babel = () => {
   ]
 
   if (args.includes('--watch')) {
-    envVars = envVars
-      .concat([
-        'NODE_ENV=development',
-        'UNMANGLED_CLASS_NAMES=1',
-        'DISABLE_SPEEDY_STYLESHEET=1'
-      ])
-      .filter(Boolean)
+    envVars = envVars.concat(['NODE_ENV=development']).filter(Boolean)
     babelArgs.push('--watch')
   } else {
     envVars = envVars
       .concat([
         `NODE_ENV=${BABEL_ENV || NODE_ENV || 'production'}`,
-        DEBUG ? `DEBUG=1` : false,
-        UNMANGLED_CLASS_NAMES ? `UNMANGLED_CLASS_NAMES=1` : false,
-        DISABLE_SPEEDY_STYLESHEET ? `DISABLE_SPEEDY_STYLESHEET=1` : false
+        DEBUG ? `DEBUG=1` : false
       ])
       .filter(Boolean)
   }
 
-  let modules = ['es']
+  let modules: ModuleType = ['es']
 
   if (args.includes('--modules')) {
     //  eslint-disable-next-line no-unused-vars
@@ -96,7 +84,7 @@ export const babel = () => {
       throw new Error('Missing --modules argument')
     }
 
-    modules = arg.split(',')
+    modules = arg.split(',') as ModuleType
 
     if (modules.some((mod) => !['es', 'cjs'].includes(mod))) {
       throw new Error(`Invalid --modules argument: '${arg}'`)
@@ -120,7 +108,6 @@ export const babel = () => {
   }
 
   const commandsToRun = modules.reduce(
-    //@ts-expect-error FIXME:
     (obj, key) => ({ ...obj, [key]: commands[key] }),
     {}
   )

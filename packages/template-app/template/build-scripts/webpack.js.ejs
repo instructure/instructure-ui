@@ -27,9 +27,6 @@ const childProcess = require('child_process')
 const {
   NODE_ENV,
   DEBUG,
-  UNMANGLED_CLASS_NAMES,
-  DISABLE_SPEEDY_STYLESHEET,
-  USE_WEBPACK_CSS_LOADERS,
   OMIT_INSTUI_DEPRECATION_WARNINGS
 } = process.env
 
@@ -54,10 +51,7 @@ if (args.includes('--watch')) {
   envVars = envVars
     .concat([
       'NODE_ENV=development',
-      'DEBUG=1',
-      'UNMANGLED_CLASS_NAMES=1',
-      'USE_WEBPACK_CSS_LOADERS=1',
-      'DISABLE_SPEEDY_STYLESHEET=1'
+      'DEBUG=1'
     ])
     .filter(Boolean)
   webpackArgs = ['--mode=development', `--port=${port}`]
@@ -67,10 +61,7 @@ if (args.includes('--watch')) {
     .concat([
       `NODE_ENV=${NODE_ENV || 'production'}`,
       'NODE_OPTIONS=--max_old_space_size=120000',
-      DEBUG ? `DEBUG=1` : false,
-      UNMANGLED_CLASS_NAMES ? `UNMANGLED_CLASS_NAMES=1` : false,
-      USE_WEBPACK_CSS_LOADERS ? `USE_WEBPACK_CSS_LOADERS=1` : false,
-      DISABLE_SPEEDY_STYLESHEET ? `DISABLE_SPEEDY_STYLESHEET=1` : false
+      DEBUG ? `DEBUG=1` : false
     ])
     .filter(Boolean)
   webpackArgs = ['--mode=production']

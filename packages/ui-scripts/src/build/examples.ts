@@ -26,13 +26,7 @@ import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
 export const examples = () => {
   const rootPath = path.resolve(process.cwd(), '../../node_modules')
-  const {
-    DEBUG,
-    UNMANGLED_CLASS_NAMES,
-    DISABLE_SPEEDY_STYLESHEET,
-    USE_WEBPACK_CSS_LOADERS,
-    OMIT_INSTUI_DEPRECATION_WARNINGS
-  } = process.env
+  const { DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
 
   const args = process.argv.slice(2)
 
@@ -65,13 +59,7 @@ export const examples = () => {
       '--quiet'
     ]
     envVars = envVars
-      .concat([
-        'NODE_ENV=development',
-        'DEBUG=1',
-        'UNMANGLED_CLASS_NAMES=1',
-        'USE_WEBPACK_CSS_LOADERS=1',
-        'DISABLE_SPEEDY_STYLESHEET=1'
-      ])
+      .concat(['NODE_ENV=development', 'DEBUG=1'])
       .filter(Boolean)
   } else {
     command = 'build-storybook'
@@ -80,10 +68,7 @@ export const examples = () => {
       .concat([
         `NODE_ENV=production`,
         `NODE_PATH=${rootPath}`,
-        DEBUG ? `DEBUG=1` : false,
-        UNMANGLED_CLASS_NAMES ? `UNMANGLED_CLASS_NAMES=1` : false,
-        USE_WEBPACK_CSS_LOADERS ? `USE_WEBPACK_CSS_LOADERS=1` : false,
-        DISABLE_SPEEDY_STYLESHEET ? `DISABLE_SPEEDY_STYLESHEET=1` : false
+        DEBUG ? `DEBUG=1` : false
       ])
       .filter(Boolean)
   }
