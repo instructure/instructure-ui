@@ -23,7 +23,7 @@
  */
 
 import React, { createElement } from 'react'
-import marked from 'marked'
+import { marked } from 'marked'
 import grayMatter from 'gray-matter'
 
 import { logWarn as warn } from '@instructure/console'

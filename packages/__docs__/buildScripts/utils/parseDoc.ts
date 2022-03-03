@@ -22,14 +22,43 @@
  * SOFTWARE.
  */
 
-const grayMatter = require('gray-matter')
+import { getJSDoc } from './getJSDoc'
+import getCodeDoc from './getCodeDoc'
+import { getReactDoc } from './getReactDoc'
+import { getFrontMatter, MetaInfo } from './getFrontMatter'
+import path from 'path'
+import { Buffer } from 'buffer'
 
-module.exports = function getFrontMatter(description = '') {
-  const matter = grayMatter(description)
+export function parseDoc(
+  resourcePath: string,
+  source: Buffer,
+  errorHandler: (err: Error) => void
+) {
+  const extension = path.extname(resourcePath)
+  const allowedExtensions = ['.js', '.ts', '.tsx']
+  let doc: any
+
+  if (extension === '.md') {
+    doc = { description: source }
+  } else if (allowedExtensions.includes(extension)) {
+    doc = getReactDoc(source, resourcePath, errorHandler) // ~18 secs
+    if (!doc.props) {
+      doc = getJSDoc(source, errorHandler) // ~37 secs
+    }
+  } else {
+    doc = getCodeDoc(source, errorHandler) // ~<1 secs
+  }
+
+  // the YAML description in a JSDoc comment at the top of some files
+  let frontMatter: MetaInfo
+  try {
+    frontMatter = getFrontMatter(doc.description)
+  } catch (e) {
+    throw `Failed to parse YAML "${doc.description}" \nexception is \n${e}`
+  }
 
   return {
-    ...matter.data,
-    order: matter.data.order || '',
-    description: matter.content
+    ...doc,
+    ...frontMatter
   }
 }

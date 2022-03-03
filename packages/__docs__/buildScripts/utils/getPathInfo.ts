@@ -22,9 +22,14 @@
  * SOFTWARE.
  */
 
-const path = require('path')
+import path from 'path'
+import type { LibraryOptions } from '../build-docs'
 
-module.exports = function getPathInfo(resourcePath, projectRoot, library) {
+export function getPathInfo(
+  resourcePath: string,
+  projectRoot: string,
+  library: LibraryOptions
+) {
   return {
     relativePath: path.relative(projectRoot, resourcePath),
     extension: path.extname(resourcePath),
@@ -37,29 +42,31 @@ module.exports = function getPathInfo(resourcePath, projectRoot, library) {
   }
 }
 
-function pathParts(resourcePath, library = {}) {
-  let parts = resourcePath
+function pathParts(resourcePath: string, library: LibraryOptions) {
+  const parts = resourcePath
     .split(path.sep)
     .filter((part) => part !== library.packages && part !== 'index.js')
-  if (library.scope) {
-    parts = [library.scope].concat(parts)
-  }
-  if (!library.packages) {
-    parts = [library.name].concat(parts)
-  }
-  return parts
+  return [library.scope, ...parts]
 }
 
-function relativePath(resourcePath, projectRoot) {
+function relativePath(resourcePath: string, projectRoot: string) {
   return path.relative(projectRoot || process.cwd(), resourcePath)
 }
 
-function srcUrl(resourcePath, projectRoot, library) {
+function srcUrl(
+  resourcePath: string,
+  projectRoot: string,
+  library: LibraryOptions
+) {
   const path = relativePath(resourcePath, projectRoot)
   return `${library.repository.replace('.git', '')}/tree/master/${path}`
 }
 
-function requirePath(resourcePath, projectRoot, library) {
+function requirePath(
+  resourcePath: string,
+  projectRoot: string,
+  library: LibraryOptions
+) {
   return pathParts(
     relativePath(resourcePath, projectRoot).replace('/src/', '/lib/'),
     library
@@ -68,7 +75,11 @@ function requirePath(resourcePath, projectRoot, library) {
     .replace(path.extname(resourcePath), '')
 }
 
-function esPath(resourcePath, projectRoot, library) {
+function esPath(
+  resourcePath: string,
+  projectRoot: string,
+  library: LibraryOptions
+) {
   return pathParts(
     relativePath(resourcePath, projectRoot).replace('/src/', '/es/'),
     library
@@ -77,7 +88,11 @@ function esPath(resourcePath, projectRoot, library) {
     .replace(path.extname(resourcePath), '')
 }
 
-function packageName(resourcePath, projectRoot, library) {
+function packageName(
+  resourcePath: string,
+  projectRoot: string,
+  library: LibraryOptions
+) {
   const parts = requirePath(resourcePath, projectRoot, library).split(path.sep)
   if (library.scope) {
     return parts.slice(0, 2).join(path.sep)

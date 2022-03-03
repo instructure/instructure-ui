@@ -25,9 +25,6 @@ import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { Option } from '@instructure/ui-select/src/Select/Option'
-import type { SelectOptionProps as UISelectOptionProps } from '@instructure/ui-select'
-
 type SelectOwnProps = {
   name: string
   renderLabel: React.ReactNode | (() => void)

@@ -22,42 +22,50 @@
  * SOFTWARE.
  */
 
-const reactDocgen = require('react-docgen')
-const path = require('path')
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore This package does not have typings :(
+import jsdoc from 'jsdoc-api' // TODO use JSDOC directly
 
-const ERROR_MISSING_DEFINITION = 'No suitable component definition found.'
-
-module.exports = function getReactDoc(source, fileName, error) {
+export function getJSDoc(source: Buffer, error: (err: Error) => void) {
   let doc = {}
   try {
-    doc = reactDocgen.parse(
-      source,
-      reactDocgen.resolver.findAllExportedComponentDefinitions,
-      null,
-      {
-        filename: fileName,
-        importer: reactDocgen.importers.makeFsImporter()
-      }
-    )
-    if (Array.isArray(doc)) {
-      if (doc.length > 1) {
-        // If a file has multiple exports this will choose the one that has the
-        // same name in its path.
-        for (const docExport of doc) {
-          const filePathArray = fileName.split(path.sep)
-          if (filePathArray.includes(docExport.displayName)) {
-            doc = docExport
-            break
+    const sections = jsdoc
+      .explainSync({
+        configure: './jsdoc.config.json',
+        source
+      })
+      .filter((section: Record<string, any>) => {
+        return (
+          section.undocumented !== true &&
+          section.access !== 'private' &&
+          section.kind !== 'package'
+        )
+      })
+    const module =
+      sections.filter(
+        (section: Record<string, any>) => section.kind === 'module'
+      )[0] ||
+      sections[0] ||
+      {}
+    doc = {
+      ...module,
+      sections: sections
+        .filter(
+          (section: Record<string, any>) => section.longname !== module.longname
+        )
+        .map((section: Record<string, any>) => {
+          const name = section.longname.replace(`${module.longname}.`, '')
+          return {
+            ...section,
+            id: name,
+            title: name
           }
-        }
-      } else {
-        doc = doc.pop()
-      }
+        }),
+      undocumented: sections.length <= 0
     }
-  } catch (err) {
-    if (err.message !== ERROR_MISSING_DEFINITION) {
-      error(err)
-    }
+  } catch (err: any) {
+    error(err)
   }
+
   return doc
 }

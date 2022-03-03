@@ -24,7 +24,6 @@
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type { Colors, PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
-import React from 'react'
 
 type HeroOwnProps = {
   name: string
@@ -32,7 +31,7 @@ type HeroOwnProps = {
   version: string
   layout: 'small' | 'medium' | 'large' | 'x-large'
   description: string
-  docs: React.ReactNode
+  docs: any
 }
 
 type PropKeys = keyof HeroOwnProps

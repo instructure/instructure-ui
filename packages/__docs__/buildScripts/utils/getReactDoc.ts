@@ -22,44 +22,49 @@
  * SOFTWARE.
  */
 
-const jsdoc = require('jsdoc-api')
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore react-docgen does not have typings :(
+import reactDocgen from 'react-docgen'
+import path from 'path'
+import { Buffer } from 'buffer'
 
-module.exports = function getJSDoc(source, error) {
-  let doc = {}
+const ERROR_MISSING_DEFINITION = 'No suitable component definition found.'
+
+export function getReactDoc(
+  source: Buffer,
+  fileName: string,
+  error: (err: Error) => void
+) {
+  let doc: Record<string, any> = {}
   try {
-    const sections = jsdoc
-      .explainSync({
-        configure: './jsdoc.config.json',
-        source
-      })
-      .filter((section) => {
-        return (
-          section.undocumented !== true &&
-          section.access !== 'private' &&
-          section.kind !== 'package'
-        )
-      })
-    const module =
-      sections.filter((section) => section.kind === 'module')[0] ||
-      sections[0] ||
-      {}
-    doc = {
-      ...module,
-      sections: sections
-        .filter((section) => section.longname !== module.longname)
-        .map((section) => {
-          const name = section.longname.replace(`${module.longname}.`, '')
-          return {
-            ...section,
-            id: name,
-            title: name
+    doc = reactDocgen.parse(
+      source,
+      reactDocgen.resolver.findAllExportedComponentDefinitions,
+      null,
+      {
+        filename: fileName,
+        importer: reactDocgen.importers.makeFsImporter()
+      }
+    )
+    if (Array.isArray(doc)) {
+      if (doc.length > 1) {
+        // If a file has multiple exports this will choose the one that has the
+        // same name in its path.
+        for (const docExport of doc) {
+          const filePathArray = fileName.split(path.sep)
+          if (filePathArray.includes(docExport.displayName)) {
+            doc = docExport
+            break
           }
-        }),
-      undocumented: sections.length <= 0
+        }
+      } else {
+        doc = doc.pop()
+      }
     }
-  } catch (err) {
-    error(err)
+  } catch (err: any) {
+    if (err.message !== ERROR_MISSING_DEFINITION) {
+      error(err)
+    }
   }
-
   return doc
 }

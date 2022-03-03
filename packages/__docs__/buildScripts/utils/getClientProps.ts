@@ -22,9 +22,15 @@
  * SOFTWARE.
  */
 
+import type { LibraryOptions } from '../build-docs'
+
 const CATEGORY_DELIMITER = '/'
 
-module.exports = function getClientProps(docs, themes, library) {
+export function getClientProps(
+  docs: any[],
+  themes: any,
+  library: LibraryOptions
+) {
   return {
     ...parseDocs(docs, library),
     themes: parseThemes(themes),
@@ -32,7 +38,7 @@ module.exports = function getClientProps(docs, themes, library) {
   }
 }
 
-function parseDocs(docs, library) {
+function parseDocs(docs: any[], library: LibraryOptions) {
   const parsed = {
     sections: {
       __uncategorized: {
@@ -40,10 +46,10 @@ function parseDocs(docs, library) {
         sections: [],
         level: 0
       }
-    },
-    parents: {},
-    docs: {},
-    descriptions: {}
+    } as Record<string, any>,
+    parents: {} as Record<string, any>,
+    docs: {} as Record<string, any>,
+    descriptions: {} as Record<string, any>
   }
 
   docs
@@ -60,7 +66,7 @@ function parseDocs(docs, library) {
       parsed.docs[id] = {
         ...doc,
         methods: doc.methods
-          ? doc.methods.filter((method) => method.docblock !== null)
+          ? doc.methods.filter((method: any) => method.docblock !== null)
           : undefined
       }
       if (describes) {
@@ -75,7 +81,7 @@ function parseDocs(docs, library) {
       if (category && category !== 'index') {
         const sections = category.trim().split(CATEGORY_DELIMITER)
 
-        sections.forEach((sectionTitle, index) => {
+        sections.forEach((sectionTitle: any, index: any) => {
           const sectionId = sections
             .slice(0, index + 1)
             .join(CATEGORY_DELIMITER)
@@ -112,7 +118,7 @@ function parseDocs(docs, library) {
   return parsed
 }
 
-function warning(condition, message, ...args) {
+function warning(condition: boolean, message: string, ...args: any[]) {
   if (
     !condition &&
     process.env.NODE_ENV !== 'production' &&
@@ -122,9 +128,9 @@ function warning(condition, message, ...args) {
   }
 }
 
-function parseThemes(themes) {
-  const parsed = {}
-  themes.forEach((theme) => {
+function parseThemes(themes: any) {
+  const parsed: any = {}
+  themes.forEach((theme: any) => {
     parsed[theme.resource.key] = theme
   })
   return parsed

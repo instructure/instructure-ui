@@ -234,14 +234,13 @@ class Search extends Component<SearchProps, SearchState> {
     return Object.keys(groups).map((group) => (
       <Select.Group renderLabel={group} key={group}>
         {groups[group].map(
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           ({
             id,
-            _value,
             label,
             disabled
           }: {
             id: string
-            _value: string
             label: string
             disabled: boolean
           }) => (
@@ -313,7 +312,9 @@ class Search extends Component<SearchProps, SearchState> {
             : this.renderEmptyOption()}
         </Select>
         <Alert
-          liveRegion={() => document.getElementById('flash-messages')}
+          liveRegion={() =>
+            document.getElementById('flash-messages') as HTMLElement
+          }
           liveRegionPoliteness="assertive"
           screenReaderOnly
         >

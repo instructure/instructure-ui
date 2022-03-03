@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.node.json",
+  "compilerOptions": {
+    "declarationDir": "./types",
+    "outDir": "./lib",
+    "resolveJsonModule": true
+  },
+  "include": ["buildScripts/**/*"],
+  "exclude": ["__build__/**/*"]
+}

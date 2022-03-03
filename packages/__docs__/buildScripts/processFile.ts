@@ -22,30 +22,25 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
-const path = require('path')
-const parseDoc = require('./utils/parseDoc')
-const getPathInfo = require('./utils/getPathInfo')
+import fs from 'fs'
+import path from 'path'
+import { parseDoc } from './utils/parseDoc'
+import { getPathInfo } from './utils/getPathInfo'
+import type { LibraryOptions } from './build-docs'
 
-const DOCS = {}
+const DOCS: Record<string, any> = {}
 
-module.exports = function processFile(fullPath, loaderOptions) {
+export function processFile(
+  fullPath: string,
+  projectRoot: string,
+  library: LibraryOptions
+) {
   const source = fs.readFileSync(fullPath)
   const context = path.dirname(fullPath) || process.cwd() // the directory of the file
-  const pathInfo = getPathInfo(
-    fullPath,
-    loaderOptions.projectRoot,
-    loaderOptions.library
-  )
+  const pathInfo = getPathInfo(fullPath, projectRoot, library)
 
-  let doc = parseDoc(fullPath, source, (err) => {
-    console.warn(
-      '\x1b[33m%s\x1b[0m',
-      '[docgen-loader]: Error when parsing ',
-      this.request,
-      fullPath
-    )
-    console.warn(err.toString())
+  let doc: any = parseDoc(fullPath, source, (err: Error) => {
+    console.warn('Error when parsing ', fullPath, err.toString())
   })
   doc = {
     ...doc,
@@ -58,11 +53,10 @@ module.exports = function processFile(fullPath, loaderOptions) {
 
   // eslint-disable-next-line no-console
   console.info(`Processed ${doc.id} - ${doc.relativePath}`)
-
   return doc
 }
 
-function getDocId(docData, context, fullPath) {
+function getDocId(docData: any, context: string, fullPath: string) {
   const { relativePath, id, describes } = docData
   let docId
   const lowerPath = relativePath.toLowerCase()
