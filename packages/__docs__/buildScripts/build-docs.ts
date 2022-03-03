@@ -22,32 +22,49 @@
  * SOFTWARE.
  */
 
-const DOCS_DATA_JSON = 'docs-data.json'
-// eslint-disable-next-line no-console
-console.log('start building application data to file ' + DOCS_DATA_JSON)
-const semver = require('semver')
-const globby = require('globby')
-const path = require('path')
-const getClientProps = require('./utils/getClientProps')
-const processFile = require('./processFile')
-const fs = require('fs')
-const versionsData = require('../versions.json')
+import semver from 'semver'
+import globby from 'globby'
+import path from 'path'
+import { getClientProps } from './utils/getClientProps'
+import { processFile } from './processFile'
+import fs from 'fs'
+import versionsData from '../versions.json'
+import rootPackage from '../../../package.json' // root package.json
 
+export type LibraryOptions = {
+  name: string
+  version: string
+  repository: string
+  author: string
+  packages: 'packages'
+  scope: '@instructure'
+  codepen: {
+    js_external: string
+  }
+}
+
+type OptionsObject = {
+  projectRoot: string
+  library: LibraryOptions
+  files: string[]
+  ignore: string[]
+}
+
+// eslint-disable-next-line no-console
+console.log('start building application data')
+const projectRoot = path.resolve(__dirname, '../../../')
 const { COPY_VERSIONS_JSON = '1' } = process.env
 const shouldDoTheVersionCopy = Boolean(parseInt(COPY_VERSIONS_JSON))
 
-const projectRoot = path.resolve(__dirname, '../../../')
-const rootPackage = require(projectRoot + '/package.json') // root package.json
-
-const { major: latestMajorVersion } = semver.coerce(versionsData.latestVersion)
-const { major: rootPackageMajorVersion } = semver.coerce(rootPackage.version)
+const { major: latestMajorVersion } = semver.coerce(versionsData.latestVersion)!
+const { major: rootPackageMajorVersion } = semver.coerce(rootPackage.version)!
 
 const isOnLatestMajorVersion = latestMajorVersion === rootPackageMajorVersion
 const resourcePageURL = isOnLatestMajorVersion
   ? rootPackage.homepage
   : `${rootPackage.homepage}/v${rootPackageMajorVersion}`
 
-const options = {
+const options: OptionsObject = {
   projectRoot: projectRoot,
   library: {
     name: rootPackage.name,
@@ -115,24 +132,8 @@ const options = {
 
     // deprecated packages and modules:
     '**/InputModeListener.{js,ts}'
-  ],
-  themes: [
-    '@instructure/canvas-theme',
-    '@instructure/canvas-high-contrast-theme',
-    '@instructure/instructure-theme'
-  ],
-  icons: {
-    packageName: '@instructure/ui-icons',
-    formats: {
-      React: '',
-      SVG: 'svg',
-      Font: 'font'
-    }
-  }
+  ]
 }
-
-const themes = parseThemes(options.themes)
-const icons = parseIcons(options.icons)
 
 const files = options.files.map((file) =>
   path.resolve(options.projectRoot, file)
@@ -144,17 +145,26 @@ const ignore = options.ignore.map((file) =>
 
 globby(files, { ignore })
   .then((matches) => {
-    const docs = matches.map((filepath) => {
-      // loop trough every source and Readme file
-      return processFile(filepath, options)
-    })
-    const props = getClientProps(docs, themes, options.library)
-    props.icons = icons
-    props.showMenu = options.showMenu ? 'true' : 'false'
-    const everything = JSON.stringify(props)
     const buildDir = './__build__/'
     fs.mkdirSync(buildDir, { recursive: true })
-    fs.writeFileSync(buildDir + DOCS_DATA_JSON, everything)
+    // eslint-disable-next-line no-console
+    console.log('Parsing markdown and source files...')
+    const docs = matches.map((filepath) => {
+      // loop trough every source and Readme file
+      return processFile(filepath, options.projectRoot, options.library)
+    })
+    const themes = parseThemes()
+    const props = getClientProps(docs, themes, options.library)
+    const markdownsAndSources = JSON.stringify(props)
+    fs.writeFileSync(
+      buildDir + 'markdown-and-sources-data.json',
+      markdownsAndSources
+    )
+    // eslint-disable-next-line no-console
+    console.log('Parsing icons...')
+    const icons = parseIcons()
+    const iconJSON = JSON.stringify(icons)
+    fs.writeFileSync(buildDir + 'icons-data.json', iconJSON)
     // eslint-disable-next-line no-console
     console.log('Finished building documentation data')
   })
@@ -170,12 +180,18 @@ globby(files, { ignore })
         `${buildDirPath}/versions.json`
       )
     }
+    return undefined
   })
   .catch((error) => {
     throw Error('Error when generating documentation data: ' + error)
   })
 
-function parseThemes(themes = []) {
+function parseThemes() {
+  const themes = [
+    '@instructure/canvas-theme',
+    '@instructure/canvas-high-contrast-theme',
+    '@instructure/instructure-theme'
+  ]
   return themes.map((theme) => {
     return {
       resource: require(theme.toString()).theme,
@@ -184,15 +200,30 @@ function parseThemes(themes = []) {
   })
 }
 
-function parseIcons(icons = {}) {
-  const formats = {}
-  Object.keys(icons.formats).map((format) => {
+type IconFormat = {
+  format: 'React' | 'SVG' | 'Font'
+  glyphs: Record<string, any>
+  packageName: string
+  requirePath: string
+}
+
+function parseIcons() {
+  const packageName = '@instructure/ui-icons'
+  const iconFormats = {
+    React: '',
+    SVG: 'svg',
+    Font: 'font'
+  }
+  type FormatName = 'icons-svg' | 'icons-' | 'icons-font'
+  const formats: Record<FormatName, IconFormat> = {} as any
+  let format: keyof typeof iconFormats
+  for (format in iconFormats) {
     const pathEnd =
-      icons.formats[format].length > 0 ? '/' + icons.formats[format] : ''
-    const requirePath = icons.packageName + '/lib' + pathEnd
+      iconFormats[format].length > 0 ? '/' + iconFormats[format] : ''
+    const requirePath = packageName + '/lib' + pathEnd
     let glyphs = require(requirePath)
     if (format === 'React') {
-      const formats = {}
+      const formats: Record<string, any> = {}
       Object.keys(glyphs).forEach(function (key) {
         const IconClass = glyphs[key]
         formats[key] = {
@@ -204,16 +235,16 @@ function parseIcons(icons = {}) {
       })
       glyphs = formats
     }
-    const packageName = icons.packageName
-    formats[`icons-${format.toLowerCase()}`] = {
+    const formatName: FormatName = `icons-${format.toLowerCase()}` as FormatName
+    formats[formatName] = {
       format: format,
       glyphs: glyphs,
       packageName: packageName,
-      requirePath: icons.packageName + '/es' + pathEnd
+      requirePath: packageName + '/es' + pathEnd
     }
-  })
+  }
   return {
-    packageName: icons.packageName,
+    packageName: packageName,
     formats: formats
   }
 }

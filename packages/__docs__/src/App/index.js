@@ -105,7 +105,8 @@ class App extends Component {
       themeKey: null,
       layout: 'large',
       docsData: null,
-      versionsData: null
+      versionsData: null,
+      iconsData: null
     }
 
     this._content = null
@@ -113,8 +114,12 @@ class App extends Component {
     this._mediaQueryListener = null
 
     this.fetchVersionData()
-
-    fetch('docs-data.json')
+    fetch('icons-data.json')
+      .then((response) => response.json())
+      .then((iconsData) => {
+        this.setState({ iconsData: iconsData })
+      })
+    fetch('markdown-and-sources-data.json')
       .then((response) => response.json())
       .then((docsData) => {
         // Assign the component instance to the parsed JSON.
@@ -386,7 +391,7 @@ class App extends Component {
   }
 
   renderIcons(key) {
-    const { icons } = this.state.docsData
+    const { iconsData } = this.state
     const { layout } = this.state
     const smallerScreens = layout === 'small' || layout === 'medium'
 
@@ -401,9 +406,9 @@ class App extends Component {
           Iconography
         </Heading>
         <Icons
-          packageName={icons.packageName}
+          packageName={iconsData.packageName}
           selectedFormat={key}
-          formats={icons.formats}
+          formats={iconsData.formats}
         />
       </View>
     )
@@ -549,8 +554,8 @@ class App extends Component {
     const doc = this.state.docsData.docs[key]
     const theme = this.state.docsData.themes[key]
     let icon
-    if (this.state.docsData.icons.formats) {
-      icon = this.state.docsData.icons.formats[key]
+    if (this.state.iconsData.formats) {
+      icon = this.state.iconsData.formats[key]
     }
     const { repository } = this.state.docsData.library
 
@@ -636,7 +641,7 @@ class App extends Component {
           sections={this.state.docsData.sections}
           docs={this.state.docsData.docs}
           themes={this.state.docsData.themes}
-          icons={this.state.docsData.icons}
+          icons={this.state.iconsData}
         />
       </View>
     )
@@ -651,9 +656,9 @@ class App extends Component {
   }
 
   renderLegacyDocWarning() {
-    const { versionsData } = this.state
+    const { versionsData, iconsData } = this.state
 
-    if (!versionsData) {
+    if (!versionsData || !iconsData) {
       return null
     }
 
@@ -697,9 +702,9 @@ class App extends Component {
 
   render() {
     const key = this.state.key
-    const { showMenu, layout, docsData } = this.state
+    const { showMenu, layout, docsData, iconsData } = this.state
 
-    if (!docsData) {
+    if (!docsData || !iconsData) {
       return <LoadingScreen />
     }
     return (

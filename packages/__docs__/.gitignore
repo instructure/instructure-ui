@@ -1,3 +1,5 @@
+lib/
+types/
 node_modules/
 npm-debug.log
 __build__/

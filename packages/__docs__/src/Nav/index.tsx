@@ -101,7 +101,7 @@ class Nav extends Component<NavProps, NavState> {
     })
   }
 
-  matchQuery(str: string) {
+  matchQuery(str: string): boolean {
     const { query } = this.state
     return query && typeof query.test === 'function' ? query.test(str) : true
   }
