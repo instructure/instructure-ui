@@ -12,7 +12,8 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "examples/"
     ],
     "nohoist": [
       "**/acorn",

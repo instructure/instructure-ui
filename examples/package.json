@@ -1,12 +1,14 @@
 {
   "name": "@instructure/ui-examples",
   "description": "",
-  "private": "true",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
     "preinstall": "sh prepare.sh",
     "build": "node esbuild.cjs",
-    "serve": "serve public",
-    "test": "testcafe chrome ./src/test.ts"
+    "serve": "serve public -n",
+    "test": "testcafe chrome ./src/test.ts",
+    "test:ci": "testcafe chrome:headless ./src/test.ts"
   },
   "keywords": [],
   "author": "Viktor Ohad",
@@ -16,6 +18,7 @@
     "serve": "^13.0.2",
     "testcafe": "^1.18.4",
     "testcafe-react-selectors": "^4.1.5",
+    "@instructure/browserslist-config-instui": "8.18.1-snapshot.0",
     "typescript": "^4.6.2"
   },
   "dependencies": {
