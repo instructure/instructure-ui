@@ -8,23 +8,19 @@ jobs:
         browser: [chrome, firefox]
     runs-on: ubuntu-latest
     name: Regression testing
+    defaults:
+      run:
+        working-directory: ./examples
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '17'
-      - name: Install global dependencies for the machine.
-        run: |
-          sudo apt-get update
-          sudo apt-get install jq xvfb -y
       - name: Install dependencies for regression testing.
-        working-directory: ./examples
         run: yarn install
       - name: Build project and start the server.
-        working-directory: ./examples
         run: |
           yarn build
           yarn serve &
       - name: Run regression tests.
-        working-directory: ./examples
         run: npx testcafe ${{ matrix.browser }}:headless ./src/test.ts
