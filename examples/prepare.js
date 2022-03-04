@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* eslint-disable no-console */
 /*
  * The MIT License (MIT)
@@ -23,32 +24,49 @@
  * SOFTWARE.
  */
 
-;(async () => {
-  const esbuild = require('esbuild')
-  const isCI = process.env.CI
+const { exec } = require('node:child_process')
+const { promisify } = require('node:util')
+const { readFile, writeFile } = require('node:fs/promises')
+const { resolve } = require('node:path')
+const execAsync = promisify(exec)
 
+console.info('Retrieving latest snapshot version...')
+;(async () => {
   try {
-    const result = await esbuild.build({
-      entryPoints: ['./src/app.tsx'],
-      bundle: true,
-      treeShaking: true,
-      platform: 'browser',
-      outfile: './public/bundle.js',
-      metafile: !isCI,
-      jsx: 'transform',
-      loader: {
-        '.js': 'jsx'
+    // get the latest snapshot version from npm
+    const result = await execAsync('npm view @instructure/ui --json')
+
+    if (result.stderr) {
+      throw result.stderr
+    }
+    const parsedStdout = JSON.parse(result.stdout)
+    const latestSnapshotVersion = parsedStdout['dist-tags']['snapshot']
+
+    console.info(`Snapshot version is: ${latestSnapshotVersion}`)
+
+    const packageJson = JSON.parse(
+      await readFile(resolve('package.json'), {
+        encoding: 'utf-8'
+      })
+    )
+    // add dependencies with the correct snapshot version
+    Object.assign(packageJson, {
+      dependencies: {
+        ...packageJson.dependencies,
+        '@instructure/ui': latestSnapshotVersion
       },
-      define: {
-        'process.env.OMIT_INSTUI_DEPRECATION_WARNINGS': true,
-        global: false
+      devDependencies: {
+        ...packageJson.devDependencies,
+        '@instructure/browserslist-config-instui': latestSnapshotVersion
       }
     })
 
-    if (!isCI) {
-      const text = await esbuild.analyzeMetafile(result.metafile)
-      console.log(text)
-    }
+    // override the package json
+    await writeFile('package.json', JSON.stringify(packageJson), {
+      flag: 'w'
+    })
+
+    process.exit(0)
   } catch (error) {
     console.error(error)
     process.exit(1)

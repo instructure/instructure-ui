@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "preinstall": "./prepare.sh",
+    "preinstall": "node prepare.js",
     "build": "node esbuild.cjs",
     "serve": "serve public -n",
     "test": "testcafe chrome ./src/test.ts",

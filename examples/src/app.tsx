@@ -31,9 +31,9 @@ const App = () => {
     <InstUISettingsProvider theme={canvas}>
       <View as="div">
         {Object.entries(Components as Record<string, React.ElementType>).map(
-          ([ComponentName, Component]) => {
-            return <Component key={ComponentName}></Component>
-          }
+          ([ComponentName, Component]) => (
+            <Component key={ComponentName}></Component>
+          )
         )}
       </View>
     </InstUISettingsProvider>
