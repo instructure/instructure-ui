@@ -1,0 +1,3 @@
+dist/
+public/bundle.*
+node_modules/

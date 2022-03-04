@@ -21,23 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { View, InstUISettingsProvider, canvas } from '@instructure/ui'
-import * as Components from './components'
+const webpack = require('webpack')
+const path = require('node:path')
 
-const App = () => {
-  return (
-    <InstUISettingsProvider theme={canvas}>
-      <View as="div">
-        {Object.entries(Components as Record<string, React.ElementType>).map(
-          ([ComponentName, Component]) => (
-            <Component key={ComponentName}></Component>
-          )
-        )}
-      </View>
-    </InstUISettingsProvider>
-  )
+module.exports = {
+  entry: './src/app.tsx',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'public')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.m?jsx?/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/plugin-proposal-class-properties']
+          }
+        }
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.jsx']
+  },
+  mode: 'development'
 }
-
-ReactDOM.render(<App />, document.getElementById('app'))

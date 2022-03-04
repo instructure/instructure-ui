@@ -6,21 +6,22 @@ jobs:
     strategy:
       matrix:
         browser: [chrome, firefox]
+        bundler: [esbuild, webpack4]
     runs-on: ubuntu-latest
     name: Regression testing
     defaults:
       run:
-        working-directory: ./examples
+        working-directory: ./regression-test
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '17'
+          node-version: '16'
       - name: Install dependencies for regression testing.
         run: yarn install
       - name: Build project and start the server.
         run: |
-          yarn build
+          yarn build:${{ matrix.bundler }}
           yarn serve &
       - name: Run regression tests.
         run: npx testcafe ${{ matrix.browser }}:headless ./src/test.ts
