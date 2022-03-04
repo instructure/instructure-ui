@@ -17,11 +17,11 @@ In order to run the test you have to have it's dependencies installed. (this pro
 yarn install
 ```
 
-Then build the project:
+Then build the project(with `esbuild`):
 
 ```sh
 # cwd: examples
-yarn build
+yarn build:esbuild
 ```
 
 The regression testing tool (`testcafe`) will test the app in a real browser, so we have to have a server serving our application:

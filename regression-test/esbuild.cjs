@@ -40,7 +40,7 @@
         '.js': 'jsx'
       },
       define: {
-        'process.env.OMIT_INSTUI_DEPRECATION_WARNINGS': true,
+        'process.env.OMIT_INSTUI_DEPRECATION_WARNINGS': false,
         global: false
       }
     })
