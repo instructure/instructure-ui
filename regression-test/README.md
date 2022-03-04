@@ -13,28 +13,28 @@ The regression testing suite is fairly simple at this point, it will only check 
 In order to run the test you have to have it's dependencies installed. (this project is not a workspace of the main instui project)
 
 ```sh
-# cwd: examples
+# cwd: regression-test
 yarn install
 ```
 
 Then build the project(with `esbuild`):
 
 ```sh
-# cwd: examples
+# cwd: regression-test
 yarn build:esbuild
 ```
 
 The regression testing tool (`testcafe`) will test the app in a real browser, so we have to have a server serving our application:
 
 ```sh
-# cwd: examples
+# cwd: regression-test
 yarn serve
 ```
 
 Now you can run the test suite:
 
 ```sh
-# cwd: examples
+# cwd: regression-test
 yarn test
 ```
 

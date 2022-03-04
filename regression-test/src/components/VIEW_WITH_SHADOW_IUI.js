@@ -35,7 +35,7 @@ const VIEW_WITH_SHADOW_IUI = () => {
       background="primary"
       shadow="resting"
     >
-      asd
+      content
     </View>
   )
 }

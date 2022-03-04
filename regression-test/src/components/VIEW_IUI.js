@@ -25,7 +25,7 @@ import { View } from '@instructure/ui'
 import React from 'react'
 
 const VIEW_IUI = () => {
-  return <View>asd</View>
+  return <View>content</View>
 }
 
 export default VIEW_IUI
