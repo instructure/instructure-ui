@@ -37,10 +37,10 @@ console.info('Retrieving latest snapshot version...')
     const result = await execAsync('npm view @instructure/ui --json')
 
     if (result.stderr) {
-      throw result.stderr
+      throw new Error(result.stderr)
     }
-    const parsedStdout = JSON.parse(result.stdout)
-    const latestSnapshotVersion = parsedStdout['dist-tags']['snapshot']
+    const parsedStdOut = JSON.parse(result.stdout)
+    const latestSnapshotVersion = parsedStdOut['dist-tags']['snapshot']
 
     console.info(`Snapshot version is: ${latestSnapshotVersion}`)
 

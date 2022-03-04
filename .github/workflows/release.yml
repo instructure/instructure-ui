@@ -65,17 +65,26 @@ jobs:
         run: npx netlify deploy --prod --dir ./packages/__docs__/__build__
   regression-test:
     needs: release
-    runs-on: ubuntu-latest
+    if: "!startsWith(github.event.head_commit.message, 'chore(release)')"
     name: Regression testing
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+        bundler: [esbuild, webpack4]
+    defaults:
+      run:
+        working-directory: ./regression-test
     steps:
-      - name: Install jq tool
-        run: |
-          sudo apt-get update
-          sudo apt-get install jq -y
       - uses: actions/checkout@v2
-      - name: Install dependencies for regression testing.
-        working-directory: ./examples
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install dependencies for regression testing
         run: yarn install
-      - name: Run regression tests.
-        working-directory: ./examples
-        run: yarn test
+      - name: Build project and start the server
+        run: |
+          yarn build:${{ matrix.bundler }}
+          yarn serve &
+      - name: Run regression tests
+        run: npx testcafe ${{ matrix.browser }}:headless ./src/test.ts
