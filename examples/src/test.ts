@@ -36,9 +36,5 @@ test('App should render correctly', async (t) => {
 test('Check for console warnings/errors', async (t) => {
   const messages = await t.getBrowserConsoleMessages()
 
-  await t
-    .expect(messages.error.length)
-    .eql(0)
-    .expect(messages.warn.length)
-    .eql(0)
+  await t.expect(messages.error.length).eql(0)
 })
