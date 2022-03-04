@@ -27,7 +27,12 @@ import grayMatter from 'gray-matter'
 export type MetaInfo = {
   order: string
   description: string
-  [key: string]: any
+  describes?: string
+  category?: string
+  parent?: string
+  id?: string
+  // if true it won't be included in the docs
+  private: boolean
 }
 
 export function getFrontMatter(description = '') {

@@ -28,37 +28,39 @@ import { parseDoc } from './utils/parseDoc'
 import { getPathInfo } from './utils/getPathInfo'
 import type { LibraryOptions } from './build-docs'
 
-const DOCS: Record<string, any> = {}
+const DOCS: Record<string, string> = {}
+
+export type ProcessedFile = ReturnType<typeof parseDoc> &
+  ReturnType<typeof getPathInfo> & { id: string; title: string }
 
 export function processFile(
   fullPath: string,
   projectRoot: string,
   library: LibraryOptions
 ) {
-  const source = fs.readFileSync(fullPath)
+  const source = fs.readFileSync(fullPath) as unknown as string
   const context = path.dirname(fullPath) || process.cwd() // the directory of the file
   const pathInfo = getPathInfo(fullPath, projectRoot, library)
 
-  let doc: any = parseDoc(fullPath, source, (err: Error) => {
+  const doc = parseDoc(fullPath, source, (err: Error) => {
     console.warn('Error when parsing ', fullPath, err.toString())
   })
-  doc = {
+  const mergedDoc = {
     ...doc,
     ...pathInfo
+  } as ProcessedFile
+  mergedDoc.id = getDocId(mergedDoc, context, fullPath)
+  if (!mergedDoc.title) {
+    mergedDoc.title = mergedDoc.id
   }
-  doc.id = getDocId(doc, context, fullPath)
-  if (!doc.title && doc.id) {
-    doc.title = doc.id
-  }
-
   // eslint-disable-next-line no-console
-  console.info(`Processed ${doc.id} - ${doc.relativePath}`)
-  return doc
+  console.info(`Processed ${mergedDoc.id} - ${mergedDoc.relativePath}`)
+  return mergedDoc
 }
 
-function getDocId(docData: any, context: string, fullPath: string) {
+function getDocId(docData: ProcessedFile, context: string, fullPath: string) {
   const { relativePath, id, describes } = docData
-  let docId
+  let docId: string
   const lowerPath = relativePath.toLowerCase()
   if (id) {
     // exist if it was in the description at the top

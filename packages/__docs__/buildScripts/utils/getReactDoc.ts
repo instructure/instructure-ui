@@ -24,18 +24,21 @@
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore react-docgen does not have typings :(
-import reactDocgen from 'react-docgen'
+//import reactDocgen from 'react-docgen'
 import path from 'path'
-import { Buffer } from 'buffer'
+import { CodeDoc } from './parseDoc'
+
+// for some reason it doesnt work as import..
+const reactDocgen = require('react-docgen')
 
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found.'
 
 export function getReactDoc(
-  source: Buffer,
+  source: string,
   fileName: string,
   error: (err: Error) => void
 ) {
-  let doc: Record<string, any> = {}
+  let doc: CodeDoc = {} as CodeDoc
   try {
     doc = reactDocgen.parse(
       source,

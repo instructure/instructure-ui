@@ -28,8 +28,6 @@ import path from 'path'
 import { getClientProps } from './utils/getClientProps'
 import { processFile } from './processFile'
 import fs from 'fs'
-import versionsData from '../versions.json'
-import rootPackage from '../../../package.json' // root package.json
 
 export type LibraryOptions = {
   name: string
@@ -52,6 +50,11 @@ type OptionsObject = {
 
 // eslint-disable-next-line no-console
 console.log('start building application data')
+// there need to be required otherwise TSC will mess up the directory structure
+// in the build directory
+const versionsData = require('../versions.json')
+const rootPackage = require('../../../package.json') // root package.json
+
 const projectRoot = path.resolve(__dirname, '../../../')
 const { COPY_VERSIONS_JSON = '1' } = process.env
 const shouldDoTheVersionCopy = Boolean(parseInt(COPY_VERSIONS_JSON))

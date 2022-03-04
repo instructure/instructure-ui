@@ -13,8 +13,8 @@
   "scripts": {
     "prestart": "yarn build:scripts:ts && node lib/build-docs.js",
     "start": "ui-build --bundle && ui-scripts --server -p 8001",
-    "start:watch": "node lib/build-docs.js && ui-build --bundle --watch -p 8080",
-    "bundle": "node lib/build-docs.js && ui-build --bundle",
+    "start:watch": "yarn prestart && ui-build --bundle --watch -p 8080",
+    "bundle": "yarn prestart && ui-build --bundle",
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
     "build:scripts:ts": "tsc -b tsconfig.node.build.json",
