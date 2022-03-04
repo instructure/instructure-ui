@@ -23,20 +23,42 @@
  */
 
 import { getJSDoc } from './getJSDoc'
-import getCodeDoc from './getCodeDoc'
+import { getCodeDoc } from './getCodeDoc'
 import { getReactDoc } from './getReactDoc'
 import { getFrontMatter, MetaInfo } from './getFrontMatter'
 import path from 'path'
-import { Buffer } from 'buffer'
+
+export type Block = {
+  type: 'doc' | 'single' | 'multi' | null
+  line: number
+  text: string
+  raw: string
+  description?: string
+}
+
+export type CodeDoc = {
+  description: string | undefined
+  sections?: Block[]
+  undocumented?: boolean
+  props?: any
+  methods?: CodeMethod[]
+}
+
+export type CodeMethod = {
+  name: string
+  docblock: any
+  modifiers: string[]
+  params: any[]
+}
 
 export function parseDoc(
   resourcePath: string,
-  source: Buffer,
+  source: string,
   errorHandler: (err: Error) => void
 ) {
   const extension = path.extname(resourcePath)
   const allowedExtensions = ['.js', '.ts', '.tsx']
-  let doc: any
+  let doc: CodeDoc
 
   if (extension === '.md') {
     doc = { description: source }
@@ -56,7 +78,6 @@ export function parseDoc(
   } catch (e) {
     throw `Failed to parse YAML "${doc.description}" \nexception is \n${e}`
   }
-
   return {
     ...doc,
     ...frontMatter

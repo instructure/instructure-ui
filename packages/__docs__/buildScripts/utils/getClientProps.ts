@@ -23,11 +23,27 @@
  */
 
 import type { LibraryOptions } from '../build-docs'
+import { ProcessedFile } from '../processFile'
+import type { CodeMethod } from './parseDoc'
+
+type Section = {
+  docs: string[]
+  sections: string[]
+  level: number
+  title?: string
+}
+
+type ParsedDoc = {
+  sections: Record<string, Section>
+  parents: Record<string, { children: string[] }>
+  docs: Record<string, ProcessedFile>
+  descriptions: Record<string, string>
+}
 
 const CATEGORY_DELIMITER = '/'
 
 export function getClientProps(
-  docs: any[],
+  docs: ProcessedFile[],
   themes: any,
   library: LibraryOptions
 ) {
@@ -38,25 +54,24 @@ export function getClientProps(
   }
 }
 
-function parseDocs(docs: any[], library: LibraryOptions) {
-  const parsed = {
+function parseDocs(docs: ProcessedFile[], library: LibraryOptions) {
+  const parsed: ParsedDoc = {
     sections: {
       __uncategorized: {
         docs: [],
         sections: [],
         level: 0
       }
-    } as Record<string, any>,
-    parents: {} as Record<string, any>,
-    docs: {} as Record<string, any>,
-    descriptions: {} as Record<string, any>
+    },
+    parents: {},
+    docs: {},
+    descriptions: {}
   }
 
   docs
     .filter((doc) => !doc.private)
     .forEach((doc) => {
       const { category, id, parent, describes } = doc
-
       if (doc.undocumented) {
         return
       }
@@ -66,7 +81,7 @@ function parseDocs(docs: any[], library: LibraryOptions) {
       parsed.docs[id] = {
         ...doc,
         methods: doc.methods
-          ? doc.methods.filter((method: any) => method.docblock !== null)
+          ? doc.methods.filter((method: CodeMethod) => method.docblock !== null)
           : undefined
       }
       if (describes) {
@@ -81,7 +96,7 @@ function parseDocs(docs: any[], library: LibraryOptions) {
       if (category && category !== 'index') {
         const sections = category.trim().split(CATEGORY_DELIMITER)
 
-        sections.forEach((sectionTitle: any, index: any) => {
+        sections.forEach((sectionTitle: string, index: number) => {
           const sectionId = sections
             .slice(0, index + 1)
             .join(CATEGORY_DELIMITER)
