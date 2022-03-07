@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import { Component } from 'react'
 
-import { getElementType } from '@instructure/ui-react-utils'
+import { getElementType, omitProps } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -62,12 +62,18 @@ class Separator extends Component<OptionsSeparatorProps> {
   }
 
   render() {
-    const { as, styles, makeStyles, ...rest } = this.props
+    const { as, styles, ...rest } = this.props
+
     const ElementType = getElementType(Separator, this.props, () => as!)
 
     return (
       <ElementType role="none">
-        <div {...rest} css={styles?.separator} role="presentation" />
+        <div
+          // we need to omit the withStyle props
+          {...omitProps(rest, ['styles', 'makeStyles', 'themeOverride'])}
+          css={styles?.separator}
+          role="presentation"
+        />
       </ElementType>
     )
   }
