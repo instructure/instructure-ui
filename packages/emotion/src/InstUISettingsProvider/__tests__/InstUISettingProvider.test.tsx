@@ -47,10 +47,10 @@ describe('InstUISettingsProvider', async () => {
         </InstUISettingsProvider>
       </InstUISettingsProvider>
     )
-    let element = subject.getDOMNode().firstElementChild?.firstElementChild
+    let element = subject.getDOMNode().firstElementChild
     expect(element!.getAttribute('data-dir')).to.equal('rtl')
     await subject.setProps({ dir: 'ltr' })
-    element = subject.getDOMNode().firstElementChild?.firstElementChild
+    element = subject.getDOMNode().firstElementChild
     expect(element!.getAttribute('data-dir')).to.equal('ltr')
   })
   it('can handle text direction on native HTML elements', async () => {
