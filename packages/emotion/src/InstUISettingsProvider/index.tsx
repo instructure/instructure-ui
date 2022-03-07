@@ -55,8 +55,16 @@ type InstUIProviderProps = {
    * A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
    */
   instanceCounterMap?: DeterministicIdProviderValue
-  as?: AsElementType
-}
+} & (
+  | {
+      dir: 'ltr' | 'rtl'
+      as?: AsElementType
+    }
+  | {
+      dir?: never
+      as?: never
+    }
+)
 
 /**
  * ---
@@ -79,7 +87,7 @@ type InstUIProviderProps = {
  *   - `ltr`
  * - instanceCounterMap - A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
  * which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
- * - as - InstUISettingsProvider will wrap it's children with a HTML element (default: span), this can be changed with the `as` property
+ * - as - InstUISettingsProvider will wrap it's children with a HTML element when the its `dir` property is also set, this can be changed with the `as` property
  *
  * ```js
  *
@@ -128,7 +136,6 @@ function InstUISettingsProvider({
   instanceCounterMap
 }: InstUIProviderProps) {
   const finalDir = dir || useContext(TextDirectionContext)
-  const Element = getElementType(InstUISettingsProvider, { as })
 
   if (process.env.NODE_ENV !== 'production' && finalDir === 'auto') {
     console.warn(
@@ -136,17 +143,26 @@ function InstUISettingsProvider({
     )
   }
 
-  return (
-    <Element dir={finalDir}>
-      <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
-        <ThemeProvider theme={getTheme(theme)}>
-          <TextDirectionContext.Provider value={finalDir}>
-            {children}
-          </TextDirectionContext.Provider>
-        </ThemeProvider>
-      </DeterministicIdContextProvider>
-    </Element>
+  let providers = (
+    <DeterministicIdContextProvider instanceCounterMap={instanceCounterMap}>
+      <ThemeProvider theme={getTheme(theme)}>
+        <TextDirectionContext.Provider value={finalDir}>
+          {children}
+        </TextDirectionContext.Provider>
+      </ThemeProvider>
+    </DeterministicIdContextProvider>
   )
+
+  if (dir) {
+    const Element = getElementType(InstUISettingsProvider, { as })
+    providers = <Element dir={finalDir}>{providers}</Element>
+  } else if (as && process.env.NODE_ENV !== 'production') {
+    console.warn(
+      "The 'as' property should be used in conjunction with the 'dir' property!"
+    )
+  }
+
+  return providers
 }
 
 InstUISettingsProvider.propTypes = {
@@ -159,8 +175,11 @@ InstUISettingsProvider.propTypes = {
 }
 
 InstUISettingsProvider.defaultProps = {
-  theme: {}
-}
+  theme: {},
+  instanceCounterMap: undefined,
+  as: undefined,
+  dir: undefined
+} as const
 
 export default InstUISettingsProvider
 export { InstUISettingsProvider }
