@@ -67,7 +67,7 @@ class CodePenButton extends Component<CodePenButtonProps> {
     const pattern = /<[A-Z]\w+|Icon\w+/gm
     const neededClasses = this.props.code
       .match(pattern)
-      ?.map((className) => className.replace('<', '').trim())
+      ?.map((className) => className.replace(/</gm, '').trim())
     if (this.props.code.includes('Calendar')) {
       neededClasses?.push('Calendar')
     }
