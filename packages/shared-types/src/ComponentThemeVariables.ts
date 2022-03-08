@@ -316,6 +316,13 @@ export type CheckboxFacadeTheme = {
   iconSizeLarge: string
 }
 
+export type ColorPickerTheme = {
+  hashMarkColor: Colors['ash']
+  warningIconColor: Colors['fire']
+  errorIconColor: Colors['crimson']
+  successIconColor: Colors['shamrock']
+}
+
 export type ToggleFacadeTheme = {
   color: Colors['textLightest']
   background: Colors['backgroundLight']
