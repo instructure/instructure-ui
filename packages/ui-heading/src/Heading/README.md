@@ -50,12 +50,11 @@ example: true
 ```js
 ---
 example: true
-background: 'checkerboard-inverse'
 ---
-<div>
+<View background="primary-inverse" as="div">
   <Heading color="primary-inverse">I am primary-inverse color</Heading>
   <Heading color="secondary-inverse">I am secondary-inverse color</Heading>
-</div>
+</View>
 ```
 
 ### Heading borders
