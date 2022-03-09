@@ -27,9 +27,10 @@ dark backgrounds.
 ```js
 ---
 example: true
-background: 'checkerboard-inverse'
 ---
-<Spinner renderTitle="Loading" variant="inverse" />
+<View background="primary-inverse" as="div">
+  <Spinner renderTitle="Loading" variant="inverse" />
+</View>
 ```
 
 ### Screen reader support

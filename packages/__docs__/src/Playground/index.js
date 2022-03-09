@@ -45,7 +45,7 @@ import generateComponentTheme from './theme'
 import { AppContext } from '../App'
 
 import { Preview } from '../Preview'
-import { CodePenButton } from '../CodePenButton'
+import { CodeSandboxButton } from '../CodeSandboxButton'
 import { LibraryPropType } from '../propTypes'
 
 /* eslint-disable max-len */
@@ -286,7 +286,7 @@ class Playground extends Component {
                   </Flex.Item>
                   {library.codepen && (
                     <Flex.Item>
-                      <CodePenButton
+                      <CodeSandboxButton
                         code={code}
                         title={`${this.props.title} Example`}
                         language={this.props.language}

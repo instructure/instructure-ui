@@ -31,6 +31,7 @@ example: true
 ```
 
 ### Changing icon size
+
 To change the size of the icon, use one of the predefined options for the `size` prop.
 
 ```js
@@ -65,9 +66,9 @@ By default SVGIcon inherits the color of its parent element. However,
 the icon to one of the theme colors via the `color` property.
 
 > Setting `color` to `auto` will make SVGIcon not set
-any color fill. If you are setting the icon color via the `className` prop,
-use this option &#151; otherwise the `color` value set by your class
-could be overwritten.
+> any color fill. If you are setting the icon color via the `className` prop,
+> use this option &#151; otherwise the `color` value set by your class
+> could be overwritten.
 
 ```js
 ---
@@ -87,12 +88,11 @@ example: true
 ```js
 ---
 example: true
-background: 'checkerboard-inverse'
 ---
-<div>
-  <SVGIcon color="primary-inverse" src={iconExample} size="large" title="Icon Example" />
-  <SVGIcon color="secondary-inverse" src={iconExample} size="large" title="Icon Example" />
-</div>
+<View background="primary-inverse" as="div">
+    <SVGIcon color="primary-inverse" src={iconExample} size="large" title="Icon Example" />
+    <SVGIcon color="secondary-inverse" src={iconExample} size="large" title="Icon Example" />
+</View>
 ```
 
 ### Changing icon rotation
