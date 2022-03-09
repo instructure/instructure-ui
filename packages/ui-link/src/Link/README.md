@@ -16,9 +16,10 @@ example: true
 ```js
 ---
 example: true
-background: 'checkerboard-inverse'
 ---
-<Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
+<View background="primary-inverse" as="div">
+  <Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
+</View>
 ```
 
 ### Adding margin

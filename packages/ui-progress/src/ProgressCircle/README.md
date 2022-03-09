@@ -88,17 +88,20 @@ component. Set it to `primary-inverse` when the component is used on dark backgr
 ```js
 ---
 example: true
-background: 'checkerboard-inverse'
+
 ---
-<ProgressCircle
-  screenReaderLabel="Loading completion"
-  color="primary-inverse"
-  valueNow={50}
-  valueMax={60}
-/>
+<View background="primary-inverse" as="div">
+  <ProgressCircle
+    screenReaderLabel="Loading completion"
+    color="primary-inverse"
+    valueNow={50}
+    valueMax={60}
+  />
+</View>
 ```
 
 ### `meterColor`
+
 The color of the progress meter is set separately through the `meterColor` property.
 
 ```js
@@ -140,7 +143,7 @@ example: true
     valueNow={40}
     valueMax={60}
     margin="0 0 small"
-  />  
+  />
 </div>
 ```
 
@@ -169,8 +172,7 @@ example: true
 ```
 
 > `<ProgressCircle />` defaults to setting the meter color to `success` when
-complete.
-
+> complete.
 
 ### `renderValue` / `formatScreenReaderValue`
 
@@ -178,7 +180,7 @@ Via the `renderValue` prop, developers can use `valueMax` and `valueNow` props t
 value that `<ProgressCircle />` displays.
 
 > `renderValue` will not be spoken by screen readers. Any essential information
-in `renderValue` must also be conveyed via `formatScreenReaderValue` for screen reader users.
+> in `renderValue` must also be conveyed via `formatScreenReaderValue` for screen reader users.
 
 ```js
 ---

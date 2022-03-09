@@ -135,12 +135,11 @@ example: true
 ```js
 ---
 example: true
-background: 'checkerboard-inverse'
 ---
-<div>
-  <Text color="primary-inverse">I&#39;m primary text</Text><br/>
-  <Text color="secondary-inverse">I&#39;m secondary text</Text>
-</div>
+<View background="primary-inverse" as="div">
+    <Text color="primary-inverse">I&#39;m primary text</Text><br/>
+    <Text color="secondary-inverse">I&#39;m secondary text</Text>
+</View>
 ```
 
 ### Element styles

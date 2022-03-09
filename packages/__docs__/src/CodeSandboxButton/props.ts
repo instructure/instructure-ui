@@ -24,16 +24,16 @@
 
 import PropTypes from 'prop-types'
 import type { PropValidators } from '@instructure/shared-types'
-type CodePenButtonOwnProps = {
+type CodeSandboxButtonOwnProps = {
   code: string
   title: string
   language: string
   options?: Record<string, any>
 }
 
-type PropKeys = keyof CodePenButtonOwnProps
+type PropKeys = keyof CodeSandboxButtonOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
-type CodePenButtonProps = CodePenButtonOwnProps
+type CodeSandboxButtonProps = CodeSandboxButtonOwnProps
 const propTypes: PropValidators<PropKeys> = {
   code: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -41,5 +41,5 @@ const propTypes: PropValidators<PropKeys> = {
   options: PropTypes.object
 }
 const allowedProps: AllowedPropKeys = ['code', 'title', 'language', 'options']
-export type { CodePenButtonProps }
+export type { CodeSandboxButtonProps }
 export { propTypes, allowedProps }
