@@ -24,6 +24,7 @@
 
 import {
   Collection,
+  Identifier,
   ImportDeclaration,
   ImportSpecifier,
   JSCodeshift,
@@ -36,7 +37,8 @@ import {
   JSXSpreadAttribute,
   JSXSpreadChild,
   JSXText,
-  Literal
+  Literal,
+  MemberExpression
 } from 'jscodeshift'
 import type { LiteralKind } from 'ast-types/gen/kinds'
 import fs from 'fs'
@@ -325,13 +327,15 @@ function renameElement(node: JSXElement, currentName: string, newName: string) {
 }
 
 /**
- * Figures out if a certain component is imported in a AST tree, e.g.
+ * Figures out if a certain component is imported in a AST tree.
  * If it's imported and renamed (e.g. `import {Button as BTN} ...`) then it
  * returns the renamed name of the import
  * @param j the JSCodeshift API
  * @param root the collection to check
  * @param name imported name, e.g. Button
- * @param path import path, or paths, e.g. @instructure/ui-buttons.
+ * @param path import path, or paths, e.g. `@instructure/ui-buttons`. Uses
+ * `string.indexOf()` to search for matches, so substring matches are returned
+ * too.
  * @return the name its imported as, undefined if it's not imported
  */
 function findImport(
@@ -363,6 +367,39 @@ function findImport(
     }
   })
   return importedName
+}
+
+/**
+ * Finds every imported component from the given path in the given collection.
+ * If an import is renamed it returns the renamed name. If `exactMatch` is true
+ * importPath is searched via `string.indexOf()` so it can be a substring
+ * For example calling it with "@instructure/ui` on a collection with
+ * `exactMatch = true` with this collection:
+ * ```
+ * import { a } from "@instructure/ui"
+ * import { b } from "@instructure/ui-buttons"
+ * import { c } from "react"
+ * ```
+ * returns `["a", "b"]`
+ */
+function findEveryImport(
+  j: JSCodeshift,
+  root: Collection,
+  importPath: string,
+  exactMatch = true
+) {
+  const imports: string[] = []
+  const everyInstUIImport = findImportPath(j, root, importPath, exactMatch)
+  everyInstUIImport.forEach((path) => {
+    if (path.node.specifiers) {
+      path.node.specifiers.forEach((specifier) => {
+        if (specifier.local) {
+          imports.push(specifier.local.name)
+        }
+      })
+    }
+  })
+  return imports
 }
 
 /**
@@ -411,21 +448,27 @@ function addImportIfNeeded(
 }
 
 /**
- * Finds all lines that import from importPath, e.g.
- * `findImportPath(j, root, ["@instructure/ui", "@instructure/ui-buttons"])`
- * with the following root:
+ * Finds all lines that import from `importPath`. For example with the
+ * following root:
  * ```
  * import { a } from "@instructure/ui"
  * import { b } from "@instructure/ui-buttons"
  * import { c } from "react"
  * ```
- * will return lines 1 and 2
+ * `findImportPath(j, root, "@instructure/ui-buttons")`
+ * will return line 2.
+ * If exactMatch is `false` It uses `string.indexOf()` to find results, so
+ * it returns substring matches too.
  */
 function findImportPath(
   j: JSCodeshift,
   root: Collection,
-  importPath: string | string[]
+  importPath: string | string[],
+  exactMatch = true
 ) {
+  const matcher = exactMatch
+    ? (a: string, b: string) => a === b
+    : (a: string, b: string) => a.indexOf(b) > -1
   return (
     root
       .find(j.ImportDeclaration)
@@ -434,12 +477,12 @@ function findImportPath(
         const importSource = astPath.node.source.value // e.g. "@instructure/ui"
         if (importSource && typeof importSource === 'string') {
           if (typeof importPath === 'string') {
-            if (importSource.indexOf(importPath) > -1) {
+            if (matcher(importSource, importPath)) {
               return true
             }
           } else {
             for (const anImport of importPath) {
-              if (importSource === anImport) {
+              if (matcher(importSource, anImport)) {
                 return true
               }
             }
@@ -469,6 +512,18 @@ function removeAllChildren(element: JSXElement) {
 type astElem = { type: string }
 function isImportSpecifier(elem?: astElem | null): elem is ImportSpecifier {
   return elem !== null && elem !== undefined && elem.type === 'ImportSpecifier'
+}
+
+function isLiteral(elem?: astElem | null): elem is Literal {
+  return elem !== null && elem !== undefined && elem.type === 'Literal'
+}
+
+function isIdentifier(elem?: astElem | null): elem is Identifier {
+  return elem !== null && elem !== undefined && elem.type === 'Identifier'
+}
+
+function isMemberExpression(elem?: astElem | null): elem is MemberExpression {
+  return elem !== null && elem !== undefined && elem.type == 'MemberExpression'
 }
 
 function isJSXAttribue(elem?: astElem | null): elem is JSXAttribute {
@@ -504,10 +559,6 @@ function isJSXExpressionContainer(
   )
 }
 
-function isLiteral(elem?: astElem | null): elem is Literal {
-  return elem !== null && elem !== undefined && elem.type === 'Literal'
-}
-
 const warnings: string[] = []
 function printWarning(
   filePath: string,
@@ -534,6 +585,7 @@ export {
   findElements,
   findAttribute,
   findImport,
+  findEveryImport,
   addImportIfNeeded,
   renameElements,
   getVisibleChildren,
@@ -541,6 +593,9 @@ export {
   printWarning,
   writeWarningsToFile,
   // type checkers
+  isIdentifier,
+  isImportSpecifier,
+  isMemberExpression,
   isJSXAttribue,
   isJSXElement,
   isJSXText,

@@ -22,20 +22,28 @@
  * SOFTWARE.
  */
 
-const defineTest = require('jscodeshift/dist/testUtils').defineTest
+import { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
+import { writeWarningsToFile } from './helpers/v7PropsUpdateHelpers'
+import formatSource from './utils/formatSource'
+import { updateToV8Theming } from './utils/updateToV8Theming'
+import updateV8ThemeProp from './utils/updateV8ThemeProp'
 
-const tests = ['v8Props']
+export default function updateV8Breaking(
+  file: FileInfo,
+  api: API,
+  options?: { fileName: string }
+) {
+  const j = api.jscodeshift
+  const root = j(file.source)
+  const hasModifications = doUpdate(j, root, file.path)
+  if (options && options.fileName) {
+    writeWarningsToFile(options.fileName)
+  }
+  return hasModifications ? formatSource(root.toSource(), file.path) : null
+}
 
-// eslint-disable-next-line no-undef
-jest.autoMockOff()
-
-describe('updateV8Props', () => {
-  tests.forEach((test) => {
-    defineTest(
-      __dirname,
-      'lib/updateV8Props',
-      undefined,
-      `updateV8Props/${test}`
-    )
-  })
-})
+function doUpdate(j: JSCodeshift, root: Collection, filePath: string) {
+  const themeUpdated = updateToV8Theming(j, root, filePath)
+  const themePropUpdated = updateV8ThemeProp(j, root)
+  return themeUpdated || themePropUpdated
+}
