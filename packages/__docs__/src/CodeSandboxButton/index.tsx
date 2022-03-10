@@ -39,58 +39,72 @@ class CodeSandboxButton extends Component<CodeSandboxButtonProps> {
     render: true
   }
   render() {
-    const importReact = `import React from "react"
+    //TODO: we should not import everything everytime
+    //somehow conditionally import needed modules
+    const importStatements = `import React from "react"
 import ReactDOM from "react-dom"
 import moment from 'moment'
 import {avatarSquare, avatarPortrait, lorem} from "./samplemedia"
 import {placeholderImage} from "./samplemedia"
 import iconExample from "!svg-inline-loader!./heart_lg.svg"
+import 'moment/min/locales'
 `
-    const pattern = /<[A-Z]\w+|Icon\w+/gm
+    const reactComponentPattern = /<[A-Z]\w+|Icon\w+/gm
     const neededClasses = this.props.code
-      .match(pattern)
+      .match(reactComponentPattern)
       ?.map((className) => className.replace(/</gm, '').trim())
+
     if (this.props.code.includes('Calendar')) {
       neededClasses?.push('Calendar')
     }
-    const uniqueClass = [...new Set(neededClasses)]
+
+    const uniqueClasses = [...new Set(neededClasses)]
     const { render } = this.props
     const externalElements = this.props.code
       .match(/class.\w+|function.\w+|const.\w+/gm)
       ?.map((className) =>
         className.replace(/class|function|const/gm, '').trim()
       )
-    const allNeededClasses = uniqueClass?.filter(
+    const allNeededClasses = uniqueClasses?.filter(
       (className) => !externalElements?.includes(className)
     )
     const importClasses = `import {${allNeededClasses.join(
       ', '
     )}} from "@instructure/ui"\n\n`
-    const code = render ? `render(${this.props.code})` : this.props.code
+
+    const codeBlock = render ? `render(${this.props.code})` : this.props.code
     const renderStatement = `const render = (el) => { ReactDOM.render(el, document.getElementById('app')) }\n`
-    const data = {
+    const codeSandboxData = {
       title: this.props.title,
-      js: importReact + importClasses + renderStatement + code,
+      js: importStatements + importClasses + renderStatement + codeBlock,
       private: true,
       editors: '001',
-      html: '<div id="app"></div><div id="flash-messages"></div><div id="nav"></div>',
+      html: `<div id="app"></div>
+<div id="flash-messages"></div>
+<div id="nav"></div>`,
       css_prefix: 'autoprefixer',
       js_pre_processor: 'babel',
       ...this.props.options
     }
-    const dependencies = JSON.stringify({
-      dependencies: {
-        '@instructure/debounce': '^8',
-        '@instructure/ui': '^8',
-        '@instructure/ui-icons': '^8',
-        'lorem-ipsum': '^1.0.0',
-        react: '17.0.2',
-        'react-dom': '17.0.2',
-        'react-scripts': '4.0.0',
-        moment: '^2.23.0',
-        'svg-inline-loader': '0.8.2'
-      }
-    }).replace(/'/g, '&apos;')
+
+    const dependencies = JSON.stringify(
+      {
+        dependencies: {
+          '@instructure/debounce': '^8',
+          '@instructure/ui': '^8',
+          '@instructure/ui-icons': '^8',
+          'lorem-ipsum': '^1.0.0',
+          react: '17.0.2',
+          'react-dom': '17.0.2',
+          'react-scripts': '4.0.0',
+          moment: '^2.23.0',
+          'svg-inline-loader': '0.8.2'
+        }
+      },
+      null,
+      2
+    ).replace(/'/g, '&apos;')
+
     const IconSVG = `<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='{{w}}' height='{{h}}' viewBox='0 0 {{w}} {{h}}'><defs><symbol id='a' viewBox='0 0 90 66' opacity='0.3'><path d='M85 5v56H5V5h80m5-5H0v66h90V0z'/><circle cx='18' cy='20' r='6'/><path d='M56 14L37 39l-8-6-17 23h67z'/></symbol></defs><rect x='0' y='0' fill='#F8F8F8' width='100%' height='100%'/><text x='10' y='20' fill='#ccc' style="font: 14px sans-serif;">FPO: {{w}} x {{h}}</text><use xlink:href='#a' width='20%' x='40%'/></svg>`
     const parameters = getParameters({
       files: {
@@ -99,11 +113,11 @@ import iconExample from "!svg-inline-loader!./heart_lg.svg"
           isBinary: true
         },
         'index.js': {
-          content: data.js,
+          content: codeSandboxData.js,
           isBinary: false
         },
         'index.html': {
-          content: data.html,
+          content: codeSandboxData.html,
           isBinary: false
         },
         'samplemedia.js': {
