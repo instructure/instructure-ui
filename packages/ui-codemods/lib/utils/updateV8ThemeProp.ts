@@ -22,34 +22,14 @@
  * SOFTWARE.
  */
 
-import { API, FileInfo } from 'jscodeshift'
-import formatSource from './utils/formatSource'
+import { Collection, JSCodeshift } from 'jscodeshift'
+import { findEveryImport } from '../helpers/v7PropsUpdateHelpers'
 
 /**
  * Renames components theme={} prop to themeOverride={}
  */
-export default function updateV8Props(file: FileInfo, api: API) {
-  const j = api.jscodeshift
-  const root = j(file.source)
-  const instUIImports: string[] = []
-  root
-    .find(j.ImportDeclaration)
-    .filter((path) => {
-      const importSource = path.node.source.value
-      if (importSource && typeof importSource === 'string') {
-        return !!importSource.match(/@instructure\/ui/gm)
-      }
-      return false
-    })
-    .forEach((path) => {
-      if (path.node.specifiers) {
-        path.node.specifiers.forEach((specifier) => {
-          if (specifier.local) {
-            instUIImports.push(specifier.local.name)
-          }
-        })
-      }
-    })
+export default function updateV8ThemeProp(j: JSCodeshift, root: Collection) {
+  const instUIImports = findEveryImport(j, root, '@instructure/ui', false)
   let isChanged = false
   instUIImports.forEach((instUIImport) => {
     const elems = root
@@ -67,8 +47,5 @@ export default function updateV8Props(file: FileInfo, api: API) {
       isChanged = true
     }
   })
-  if (isChanged) {
-    return formatSource(root.toSource(), file.path)
-  }
-  return null
+  return isChanged
 }
