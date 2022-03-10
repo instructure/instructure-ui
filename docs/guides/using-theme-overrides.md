@@ -16,6 +16,11 @@ order: 4
   - [Override object](/#using-theme-overrides/#using-theme-overrides-component-themeoverride-prop-override-object)
   - [Override function](/#using-theme-overrides/#using-theme-overrides-component-themeoverride-prop-override-function)
 
+This document gives an overview on how you can customize Instructure UI components by tweaking their theme variables. While this gives you a level of flexibility on the look and feel of the components you should be aware of 2 things:
+
+- The default theme variables are tested to have high enough contrast ratios for WCAG conformance. If you are making changes, please make sure that your app stays WCAG conformant.
+- The look of components is only customisable to a certain degree. This is intentional, because Instructure UI is a design system geared towards the Canvas "look and feel", not a generic UI component library.
+
 ```js
 ---
 embed: true
@@ -24,7 +29,7 @@ embed: true
   summary="Note"
 >
   <ToggleBlockquote.Paragraph>
-    The "colorful" examples below are extreme and for demonstrational purposes only! Please style the components in a way that they fit into our style guidelines!
+    The "colorful" examples below are extreme and for demonstrational purposes only! Please style the components in a way that they fit into our style guidelines and have sufficient color contrast ratio!
   </ToggleBlockquote.Paragraph>
 </ToggleBlockquote>
 ```
