@@ -31,6 +31,7 @@ import type {
   OptionsItemTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type ItemProps = {
@@ -88,6 +89,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type OptionsItemProps = OptionsItemOwnProps &
   WithStyleProps<OptionsItemTheme, OptionsItemStyle> &
+  WithDeterministicIdProps &
   OtherHTMLAttributes<OptionsItemOwnProps>
 
 type OptionsItemStyle = ComponentStyle<
