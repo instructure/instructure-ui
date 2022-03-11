@@ -23,9 +23,11 @@
  */
 
 import {
+  CallExpression,
   Collection,
   Identifier,
   ImportDeclaration,
+  ImportDefaultSpecifier,
   ImportSpecifier,
   JSCodeshift,
   JSXAttribute,
@@ -38,7 +40,8 @@ import {
   JSXSpreadChild,
   JSXText,
   Literal,
-  MemberExpression
+  MemberExpression,
+  SpreadElement
 } from 'jscodeshift'
 import type { LiteralKind } from 'ast-types/gen/kinds'
 import fs from 'fs'
@@ -332,7 +335,7 @@ function renameElement(node: JSXElement, currentName: string, newName: string) {
  * returns the renamed name of the import
  * @param j the JSCodeshift API
  * @param root the collection to check
- * @param name imported name, e.g. Button
+ * @param name imported name, e.g. Button. If its a default import its ignored
  * @param path import path, or paths, e.g. `@instructure/ui-buttons`. Uses
  * `string.indexOf()` to search for matches, so substring matches are returned
  * too.
@@ -350,6 +353,10 @@ function findImport(
   importPaths.forEach((path) => {
     if (path.node.specifiers) {
       path.node.specifiers.forEach((specifier) => {
+        if (isImportDefaultSpecifier(specifier) && specifier.local) {
+          importedName = specifier.local.name
+          return
+        }
         if (isImportSpecifier(specifier) && specifier.imported.name === name) {
           // is it imported via an alias? e.g. import { A as B } ..
           if (
@@ -411,13 +418,15 @@ function findEveryImport(
  * @param pathToAdd import path, or paths. If it
  * has multiple values it will search them all for this import, if it's not
  * found it will use the first element of the array to add the import.
+ * @param isDefaultImport If true its added as a default import
  * @returns the name under it's imported at
  */
 function addImportIfNeeded(
   j: JSCodeshift,
   root: Collection,
   name: string,
-  pathToAdd: string | string[]
+  pathToAdd: string | string[],
+  isDefaultImport = false
 ) {
   // if its imported already return the import name
   const importedName = findImport(j, root, name, pathToAdd)
@@ -429,20 +438,18 @@ function addImportIfNeeded(
     root,
     pathToAdd
   )
+  const importSpecifier = isDefaultImport
+    ? j.importDefaultSpecifier(j.identifier(name))
+    : j.importSpecifier(j.identifier(name))
   if (paths.length == 0) {
     // not imported yet, just add a new line
     const newPath = typeof pathToAdd === 'string' ? pathToAdd : pathToAdd[0]
     root
       .find(j.ImportDeclaration)
       .at(-1)
-      .insertAfter(
-        j.importDeclaration(
-          [j.importSpecifier(j.identifier(name))],
-          j.literal(newPath)
-        )
-      )
+      .insertAfter(j.importDeclaration([importSpecifier], j.literal(newPath)))
   } else {
-    paths.nodes()[0].specifiers!.push(j.importSpecifier(j.identifier(name)))
+    paths.nodes()[0].specifiers!.push(importSpecifier)
   }
   return name
 }
@@ -510,8 +517,22 @@ function removeAllChildren(element: JSXElement) {
 
 // type checkers
 type astElem = { type: string }
+function isSpreadElement(elem?: astElem | null): elem is SpreadElement {
+  return elem !== null && elem !== undefined && elem.type === 'SpreadElement'
+}
+
 function isImportSpecifier(elem?: astElem | null): elem is ImportSpecifier {
   return elem !== null && elem !== undefined && elem.type === 'ImportSpecifier'
+}
+
+function isImportDefaultSpecifier(
+  elem?: astElem | null
+): elem is ImportDefaultSpecifier {
+  return (
+    elem !== null &&
+    elem !== undefined &&
+    elem.type === 'ImportDefaultSpecifier'
+  )
 }
 
 function isLiteral(elem?: astElem | null): elem is Literal {
@@ -524,6 +545,10 @@ function isIdentifier(elem?: astElem | null): elem is Identifier {
 
 function isMemberExpression(elem?: astElem | null): elem is MemberExpression {
   return elem !== null && elem !== undefined && elem.type == 'MemberExpression'
+}
+
+function isCallExpression(elem?: astElem | null): elem is CallExpression {
+  return elem !== null && elem !== undefined && elem.type == 'CallExpression'
 }
 
 function isJSXAttribue(elem?: astElem | null): elem is JSXAttribute {
@@ -593,9 +618,11 @@ export {
   printWarning,
   writeWarningsToFile,
   // type checkers
+  isSpreadElement,
   isIdentifier,
   isImportSpecifier,
   isMemberExpression,
+  isCallExpression,
   isJSXAttribue,
   isJSXElement,
   isJSXText,

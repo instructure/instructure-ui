@@ -76,6 +76,7 @@ export function updateToV8Theming(
       isIdentifier(astNode.property) &&
       astNode.property.name === 'theme'
     ) {
+      hasModifications = true
       astNode.property.name = 'componentId'
     }
   })
