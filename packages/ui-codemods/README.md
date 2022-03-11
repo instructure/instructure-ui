@@ -56,7 +56,7 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.js <path>
 ### Codemod for breaking changes after updating the dependencies to V8
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateToV8Theming.js <path>
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Breaking.js <path>
 ```
 
 This codemod updates breaking changes after a v8 upgrade. Run this in a project after you have upgraded your dependencies to InstUI v8.

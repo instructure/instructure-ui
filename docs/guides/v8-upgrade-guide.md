@@ -66,7 +66,7 @@ This will update more complex components (e.g. Buttons), and will tell you if it
 #### 3. Update your dependencies latest InstUI 8 and then run
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateToV8Theming.js <path>
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Breaking.js <path>
 ```
 
 This will update the breaking changes from themeable to emotion:
