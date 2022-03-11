@@ -61,6 +61,15 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Breaking.js <pa
 
 This codemod updates breaking changes after a v8 upgrade. Run this in a project after you have upgraded your dependencies to InstUI v8.
 
+### Codemod for adding a wrapper to ReactDOM.render()
+
+```sh
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8ReactDOM.js <path> -fileName updateV8ReactDOM.txt
+```
+
+This codemod updates ReactDOM.render calls with a given wrapper, for example:
+ReactDOM.render(<div />) -> ReactDOM.render(<Root><div /></Root>). This command has an optional fileName parameter, supplying this will append to the given file the warnings.
+
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-codemods
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
