@@ -23,7 +23,7 @@
  */
 
 import { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
-import { writeWarningsToFile } from './helpers/v7PropsUpdateHelpers'
+import { writeWarningsToFile } from './helpers/codemodHelpers'
 import formatSource from './utils/formatSource'
 import { updateToV8Theming } from './utils/updateToV8Theming'
 import updateV8ThemeProp from './utils/updateV8ThemeProp'

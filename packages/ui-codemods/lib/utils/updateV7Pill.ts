@@ -28,7 +28,7 @@ import {
   findImport,
   isJSXAttribue,
   printWarning
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 
 /**
  * Does the following updates on a <Pill>:

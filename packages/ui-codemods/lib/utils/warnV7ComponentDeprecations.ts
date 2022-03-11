@@ -27,7 +27,7 @@ import {
   findElements,
   findImport,
   printWarning
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 
 /**
  * Warns about the deprecation of DeprecatedButton, Media, MetricsList,

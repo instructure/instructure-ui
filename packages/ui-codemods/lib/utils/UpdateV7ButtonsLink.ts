@@ -29,7 +29,7 @@ import {
   isJSXAttribue,
   printWarning,
   renameElements
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 
 /**

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { findAttribute, findElements } from '../helpers/v7PropsUpdateHelpers'
+import { findAttribute, findElements } from '../helpers/codemodHelpers'
 import { Collection, JSCodeshift, Literal } from 'jscodeshift'
 
 /**

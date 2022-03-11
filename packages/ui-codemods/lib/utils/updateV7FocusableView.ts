@@ -30,7 +30,7 @@ import {
   findImport,
   printWarning,
   renameElements
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 import { Literal } from 'jscodeshift'
 
 /**

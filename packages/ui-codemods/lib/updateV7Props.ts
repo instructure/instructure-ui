@@ -24,7 +24,7 @@
 
 import type { API, Collection, FileInfo, JSCodeshift } from 'jscodeshift'
 import formatSource from './utils/formatSource'
-import { findImport, writeWarningsToFile } from './helpers/v7PropsUpdateHelpers'
+import { findImport, writeWarningsToFile } from './helpers/codemodHelpers'
 import updateV7ButtonsMisc from './utils/updateV7ButtonsMisc'
 import updateV7ButtonsWithText from './utils/updateV7ButtonsWithText'
 import updateV7ButtonsIconCircle from './utils/updateV7ButtonsIconCircle'

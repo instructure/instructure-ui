@@ -40,7 +40,7 @@ import {
   printWarning,
   removeAllChildren,
   renameElements
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 
 /**
  * Does the following updates on a <Button>:

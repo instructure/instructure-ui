@@ -29,7 +29,7 @@ import {
   isJSXAttribue,
   isLiteral,
   printWarning
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 
 type SizeValue = 'small' | 'medium' | 'large'
 
