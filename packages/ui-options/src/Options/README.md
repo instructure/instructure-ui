@@ -24,6 +24,9 @@ example: true
     <Options.Item variant="disabled">
       Disabled option
     </Options.Item>
+    <Options.Item variant="highlighted-disabled">
+      Highlighted disabled option
+    </Options.Item>
   </Options>
 </View>
 ```

@@ -43,7 +43,12 @@ type ItemProps = {
   /**
    * The style variant of the item
    */
-  variant?: 'default' | 'highlighted' | 'selected' | 'disabled'
+  variant?:
+    | 'default'
+    | 'highlighted'
+    | 'selected'
+    | 'disabled'
+    | 'highlighted-disabled'
   /**
    * The ARIA role of the element
    */
@@ -103,7 +108,13 @@ type OptionsItemStyle = ComponentStyle<
 
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
-  variant: PropTypes.oneOf(['default', 'highlighted', 'selected', 'disabled']),
+  variant: PropTypes.oneOf([
+    'default',
+    'highlighted',
+    'selected',
+    'disabled',
+    'highlighted-disabled'
+  ]),
   role: PropTypes.string,
   renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),

@@ -158,7 +158,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     defaultShow: false,
     shouldHideOnSelect: true,
     shouldFocusTriggerOnClose: true,
-    shouldContainFocus: true,
+    shouldContainFocus: false,
     shouldReturnFocus: true,
     withArrow: true,
     offsetX: 0,
@@ -743,7 +743,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   ) => {
     const selectedOption = this.getPageChildById(id)
 
-    if (!id || !selectedOption) {
+    if (!id || !selectedOption || selectedOption.props.disabled) {
       return
     }
 
@@ -778,7 +778,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
   // Setting extra logic for keyboard navigation.
   // Enter, Esc and up/down/home/end keys are handled by Selectable.
-  handleKeyUp = (event: React.KeyboardEvent) => {
+  handleKeyDown = (event: React.KeyboardEvent) => {
     const id = (event.target as HTMLElement).id
     const option = this.getPageChildById(id)
 
@@ -804,17 +804,17 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
     // On Left arrow...
     if (event.key === 'ArrowLeft') {
+      // if it is possible, we go a level up in the history
+      if (this._pageHistory.length > 1) {
+        this.goToPreviousPage()
+      }
+
       // if on root page and popover is open, we close it
       if (
         this.state.activePageId === this.props.rootPageId &&
         this._popover?.shown
       ) {
         this._popover.hide(event)
-      }
-
-      // if on option and is possible, we go a level up in the history
-      if (option && this._pageHistory.length > 1) {
-        this.goToPreviousPage()
       }
     }
   }
@@ -988,11 +988,12 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     // display option as disabled
     if (isOptionDisabled) {
       optionProps.variant = 'disabled'
+      optionProps['aria-disabled'] = 'true'
       optionProps = { ...optionProps, ...getDisabledOptionProps() }
     }
 
-    // track as valid active option if not disabled and not the title
-    if (!isOptionDisabled && id !== this._headerTitleId) {
+    // track as valid active option if not the title
+    if (id !== this._headerTitleId) {
       this._activeOptionsMap[id] = { ...option, ...optionData }
     }
 
@@ -1039,6 +1040,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     // display option as highlighted
     if (id === this.state.highlightedOptionId) {
       optionProps.variant = 'highlighted'
+
+      if (isOptionDisabled) {
+        optionProps.variant = 'highlighted-disabled'
+      }
     }
 
     const optionLabel = callRenderProp(children, {
@@ -1250,7 +1255,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
               // since Drilldown is not a combobox and has no popup
               'aria-haspopup': false,
               'aria-expanded': undefined,
-              onKeyUp: this.handleKeyUp,
+              onKeyDown: this.handleKeyDown,
               onBlur: (event: React.FocusEvent) => {
                 const target = event.currentTarget
                 const related = event.relatedTarget
