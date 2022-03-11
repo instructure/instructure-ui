@@ -449,6 +449,9 @@ class VideoSettingsExample extends React.Component {
         maxHeight="26.5rem"
         shouldHideOnSelect={false}
         trigger={this.renderTrigger()}
+        onToggle={(_event, { shown, goToPage }) => {
+          shown && goToPage('videoSettings')
+        }}
       >
         <Drilldown.Page
           id="videoSettings"
@@ -828,7 +831,7 @@ const pagesData = [
       .map((_item, idx) => ({
         id: `page0_${idx}`,
         subPageId: idx === 0 ? 'page1' : idx === 1 ? 'page2' : undefined,
-        label: (id) => `label ${id}`,
+        label: ({ id }) => `label ${id}`,
         description: 'This is a description'
       }))
   },
@@ -843,7 +846,7 @@ const pagesData = [
       .map((_item, idx) => ({
         id: `page1_${idx}`,
         subPageId: idx === 0 ? 'page3' : undefined,
-        label: (id) => `label ${id}`
+        label: ({ id }) => `label ${id}`,
       }))
   },
   {
