@@ -910,7 +910,13 @@ example: true
       Asd2
     </Drilldown.Option>
     <Drilldown.Separator id="sep1">Asd2</Drilldown.Separator>
-    <Drilldown.Option id="item4">Asd2</Drilldown.Option>
+    <Drilldown.Option
+      id="item4"
+      renderLabelInfo="After"
+      disabled
+    >
+      disabled
+    </Drilldown.Option>
     <Drilldown.Option
       id="item5"
       description={lorem.paragraph(2)}

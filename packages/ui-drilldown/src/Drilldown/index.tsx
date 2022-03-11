@@ -776,6 +776,49 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     }
   }
 
+  // Setting extra logic for keyboard navigation.
+  // Enter, Esc and up/down/home/end keys are handled by Selectable.
+  handleKeyUp = (event: React.KeyboardEvent) => {
+    const id = (event.target as HTMLElement).id
+    const option = this.getPageChildById(id)
+
+    // On Space...
+    if (event.key === ' ') {
+      // we need to preventDefault so the page doesn't scroll on Space
+      event.preventDefault()
+      event.stopPropagation()
+
+      // for options, Space it has to work as Enter (get selected)
+      if (option) {
+        this.handleOptionSelect(event, { id })
+      }
+    }
+
+    // On Right arrow...
+    if (event.key === 'ArrowRight') {
+      // if the option has subpage, we open it
+      if (option?.props.subPageId) {
+        this.handleOptionSelect(event, { id })
+      }
+    }
+
+    // On Left arrow...
+    if (event.key === 'ArrowLeft') {
+      // if on root page and popover is open, we close it
+      if (
+        this.state.activePageId === this.props.rootPageId &&
+        this._popover?.shown
+      ) {
+        this._popover.hide(event)
+      }
+
+      // if on option and is possible, we go a level up in the history
+      if (option && this._pageHistory.length > 1) {
+        this.goToPreviousPage()
+      }
+    }
+  }
+
   handleToggle = (event: React.UIEvent | React.FocusEvent, shown: boolean) => {
     const { onToggle } = this.props
 
@@ -814,7 +857,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
        */
       if (matchComponentTypes<GroupChild>(child, [DrilldownGroup])) {
         const isFirstChild = index === 0
-        const isLastChild = index === currentPage?.children.length - 1
+        const isLastChild = index === pageChildren.length - 1
         const afterSeparator = lastItemWasSeparator
 
         const needsFirstSeparator =
@@ -1206,27 +1249,28 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
               // We need to override these aria attributes added by Selectable,
               // since Drilldown is not a combobox and has no popup
               'aria-haspopup': false,
-              'aria-expanded': undefined
-            })}
-            onBlur={(event: React.FocusEvent) => {
-              const target = event.currentTarget
-              const related = event.relatedTarget
-              const containsRelated = contains(
-                target as Node | Window,
-                related as Node | Window
-              )
+              'aria-expanded': undefined,
+              onKeyUp: this.handleKeyUp,
+              onBlur: (event: React.FocusEvent) => {
+                const target = event.currentTarget
+                const related = event.relatedTarget
+                const containsRelated = contains(
+                  target as Node | Window,
+                  related as Node | Window
+                )
 
-              if (
-                !related ||
-                related === this._drilldownRef ||
-                (related !== target && !containsRelated)
-              ) {
+                if (
+                  !related ||
+                  related === this._drilldownRef ||
+                  (related !== target && !containsRelated)
+                ) {
+                  this.setState({ highlightedOptionId: undefined })
+                }
+              },
+              onMouseLeave: () => {
                 this.setState({ highlightedOptionId: undefined })
               }
-            }}
-            onMouseLeave={() => {
-              this.setState({ highlightedOptionId: undefined })
-            }}
+            })}
           >
             <View
               as="div"
