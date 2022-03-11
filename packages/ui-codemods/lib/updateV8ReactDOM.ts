@@ -30,11 +30,30 @@ import updateV8RenderProp from './utils/updateV8RenderProp'
 export default function updateV8Breaking(
   file: FileInfo,
   api: API,
-  options?: { fileName: string }
+  options?: {
+    fileName: string
+    wrapperPath: string
+    wrapperTag: string
+    isDefaultImport: true
+  }
 ) {
   const j = api.jscodeshift
   const root = j(file.source)
-  const hasModifications = updateV8RenderProp(j, root, file.path)
+  const finalOptions = {
+    wrapperPath: '@canvas/react-root',
+    wrapperTag: 'Root',
+    isDefaultImport: true
+  }
+  if (options && options.wrapperPath) {
+    finalOptions.wrapperPath = options.wrapperPath
+  }
+  if (options && options.wrapperTag) {
+    finalOptions.wrapperTag = options.wrapperTag
+  }
+  if (options && options.isDefaultImport) {
+    finalOptions.isDefaultImport = options.isDefaultImport
+  }
+  const hasModifications = updateV8RenderProp(j, root, file.path, finalOptions)
   if (options && options.fileName) {
     writeWarningsToFile(options.fileName)
   }

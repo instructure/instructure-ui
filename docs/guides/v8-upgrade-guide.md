@@ -85,6 +85,23 @@ This will update change the imports of 'ThemeablePropValues', 'ThemeablePropType
 
 After this you will need to manually update you custom components according to the [Emotion migration guide](#themeable-to-emotion-migration-guide). If you are done migrating you can remove `@instructure/ui-codemods` from your dependencies.
 
+##### Codemod for adding a wrapper to ReactDOM.render()
+
+This codemod is useful is you have lots of ReactDOM.render calls and want to wrap them to add `InstUISettingsProvider` easily.
+
+```sh
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8ReactDOM.js <path> -fileName updateV8ReactDOM.txt -wrapperPath <import path> -wrapperTag <tagName> -isDefaultImport <true or false>
+```
+
+This codemod updates ReactDOM.render calls with a given wrapper, for example:
+ReactDOM.render(<div />) -> ReactDOM.render(<Root><div /></Root>).
+Parameters (all optional):
+
+- `fileName`: supplying this will append to the given file the warnings.
+- `wrapperPath`: The import path for the wrapper, default value is '@canvas/react-root'.
+- `wrapperTag`: The tag to wrap render calls in, default is 'Root'.
+- `isDefaultImport`: Is the given tag a defult import? Default value is `true`.
+
 ### Configuration and build scripts are private
 
 These scripts are used for building and configuring InstUI, thus have frequent internal changes. If you depend on one of these packages we suggest to copy & paste their code to your project at the version you are currently using them:

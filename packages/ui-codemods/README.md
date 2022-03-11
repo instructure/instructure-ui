@@ -68,7 +68,13 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8ReactDOM.js <pa
 ```
 
 This codemod updates ReactDOM.render calls with a given wrapper, for example:
-ReactDOM.render(<div />) -> ReactDOM.render(<Root><div /></Root>). This command has an optional fileName parameter, supplying this will append to the given file the warnings.
+ReactDOM.render(<div />) -> ReactDOM.render(<Root><div /></Root>).
+Parameters (all optional):
+
+- `fileName`: supplying this will append to the given file the warnings.
+- `wrapperPath`: The import path for the wrapper, default value is '@canvas/react-root'.
+- `wrapperTag`: The tag to wrap render calls in, default is 'Root'.
+- `isDefaultImport`: Is the given tag a defult import? Default value is `true`.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-codemods

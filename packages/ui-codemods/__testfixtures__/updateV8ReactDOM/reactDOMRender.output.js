@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom'
 import Root from '@canvas/react-root'
 
 const aVar = () => 'hello'
+somethingElse.render(<div>a</div>, 3)
 ReactDOM.render(
   <Root>
     <div>aa</div>
