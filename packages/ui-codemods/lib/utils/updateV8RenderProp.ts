@@ -40,6 +40,12 @@ import {
   printWarning
 } from '../helpers/codemodHelpers'
 
+export type UpdateV8RenderPropOptions = {
+  wrapperPath: string
+  wrapperTag: string
+  isDefaultImport: boolean
+}
+
 /**
  * Updates ReactDOM.render calls with a given wrapper, for example:
  * ReactDOM.render(<div />) -> ReactDOM.render(<Root><div /></Root>)
@@ -47,7 +53,8 @@ import {
 export default function updateV8RenderProp(
   j: JSCodeshift,
   root: Collection,
-  filePath: string
+  filePath: string,
+  options: UpdateV8RenderPropOptions
 ) {
   const reactDOMImport = findImport(j, root, 'ReactDOM', 'react-dom')
   if (!reactDOMImport) {
@@ -64,15 +71,15 @@ export default function updateV8RenderProp(
       astNode.property.name === 'render'
     ) {
       hasModifications = true
-      // add import TODO allow to set via config (also whether its a default import)
-      addImportIfNeeded(j, root, 'Root', '@canvas/react-root', true)
+      // add import
+      addImportIfNeeded(j, root, options.wrapperTag, options.wrapperPath, true)
       // wrap in <Root>
       const args = path.value.arguments
       if (args.length === 0) {
         printWarning(
           filePath,
           path.value.loc?.start.line,
-          'ReactDOM' + '.render() seems to have 0 arguments, please check'
+          'ReactDOM.render() seems to have 0 arguments, please check'
         )
         return
       }
@@ -81,8 +88,7 @@ export default function updateV8RenderProp(
         printWarning(
           filePath,
           path.value.loc?.start.line,
-          'ReactDOM' +
-            '.render()-s first argument is spread element, please update manually.'
+          'ReactDOM.render()-s first argument is spread element, please update manually.'
         )
         return
       } else {
@@ -99,14 +105,13 @@ export default function updateV8RenderProp(
           printWarning(
             filePath,
             path.value.loc?.start.line,
-            'ReactDOM' +
-              '.render()-s first argument is some strange type, please update manually.'
+            'ReactDOM.render()-s first argument is some strange type, please update manually.'
           )
           return
         }
         args[0] = j.jsxElement(
-          j.jsxOpeningElement(j.jsxIdentifier('Root')),
-          j.jsxClosingElement(j.jsxIdentifier('Root')),
+          j.jsxOpeningElement(j.jsxIdentifier(options.wrapperTag)),
+          j.jsxClosingElement(j.jsxIdentifier(options.wrapperTag)),
           argToAdd
         )
       }
