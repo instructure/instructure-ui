@@ -55,7 +55,7 @@ class DrilldownOption extends Component<DrilldownOptionProps> {
     afterLabelContentVAlign: 'start',
     descriptionRole: 'note',
     as: 'span',
-    role: 'listitem'
+    role: 'menuitem'
   }
 
   render() {
