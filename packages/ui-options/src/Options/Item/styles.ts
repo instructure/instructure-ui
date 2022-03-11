@@ -63,6 +63,12 @@ const generateStyle = (
       color: componentTheme.highlightedLabelColor
     },
     disabled: { cursor: 'not-allowed', opacity: 0.5 },
+    ['highlighted-disabled']: {
+      background: componentTheme.highlightedBackground,
+      color: componentTheme.highlightedLabelColor,
+      cursor: 'not-allowed',
+      opacity: 0.5
+    },
     default: {}
   }
 

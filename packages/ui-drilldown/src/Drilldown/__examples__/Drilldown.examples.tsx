@@ -52,7 +52,7 @@ export default {
       defaultShow: false,
       shouldHideOnSelect: true,
       shouldFocusTriggerOnClose: true,
-      shouldContainFocus: true,
+      shouldContainFocus: false,
       shouldReturnFocus: true,
       withArrow: true,
       offsetX: 0,
