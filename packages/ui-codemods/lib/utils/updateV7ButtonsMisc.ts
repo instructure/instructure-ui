@@ -29,7 +29,7 @@ import {
   isJSXExpressionContainer,
   isLiteral,
   printWarning
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 import { Collection, JSCodeshift } from 'jscodeshift'
 
 /**

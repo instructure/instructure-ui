@@ -32,7 +32,7 @@ import {
   isJSXText,
   printWarning,
   removeAllChildren
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 
 /**
  * Does the following updates on a <CloseButton>:

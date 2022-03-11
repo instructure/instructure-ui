@@ -36,7 +36,7 @@ import {
   isJSXExpressionContainer,
   isLiteral,
   printWarning
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 
 /**
  * Does the following update on a <Heading>:

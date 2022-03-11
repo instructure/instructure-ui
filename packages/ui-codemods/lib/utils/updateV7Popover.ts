@@ -38,7 +38,7 @@ import {
   isJSXMemberExpression,
   isJSXText,
   printWarning
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 
 /**
  * Does the following updates on a <Popover>:

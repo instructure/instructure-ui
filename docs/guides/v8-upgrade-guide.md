@@ -66,18 +66,24 @@ This will update more complex components (e.g. Buttons), and will tell you if it
 #### 3. Update your dependencies latest InstUI 8 and then run
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Props.js <path>
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateToV8Theming.js <path>
 ```
 
-This will update props whose name changed in v7-v8 update (there is just one, we renamed `theme` to `themeOverride`). Also run
+This will update the breaking changes from themeable to emotion:
+
+1. `<ApplyTheme` -> `<InstUISettingsProvider`
+2. `Menu.theme` -> `Menu.componentId` (for every InstUI component)
+3. Renames components `theme={...}` prop to `themeOverride={...}`
+
+Then run
 
 ```sh
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v8/imports.config.js
 ```
 
-This will update Themeable imports to Emotion imports.
+This will update change the imports of 'ThemeablePropValues', 'ThemeablePropTypes' 'makeThemeVars', 'getShorthandPropValue', 'mirrorShorthandCorners', 'mirrorShorthandEdges' from `@instructure/ui-themeable` to `@instructure/emotion`.
 
-After this you will need to manually update you custom components according to the [Emotion migration guide](#themeable-to-emotion-migration-guide). If you are done migrating you can remove `@instructure/ui-codemods` from your dependencies
+After this you will need to manually update you custom components according to the [Emotion migration guide](#themeable-to-emotion-migration-guide). If you are done migrating you can remove `@instructure/ui-codemods` from your dependencies.
 
 ### Configuration and build scripts are private
 

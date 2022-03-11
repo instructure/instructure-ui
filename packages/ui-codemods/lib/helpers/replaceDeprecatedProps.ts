@@ -34,7 +34,7 @@ import type {
   ComponentUpdateData,
   UpdatePropNamesOptions
 } from '../updatePropNames'
-import { printWarning } from './v7PropsUpdateHelpers'
+import { printWarning } from './codemodHelpers'
 
 /**
  * Replaces deprecated pros and their values based on the given config

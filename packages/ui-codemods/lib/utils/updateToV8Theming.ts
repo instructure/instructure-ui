@@ -31,14 +31,12 @@ import {
   isIdentifier,
   isMemberExpression,
   renameElements
-} from '../helpers/v7PropsUpdateHelpers'
+} from '../helpers/codemodHelpers'
 
 /**
  * Does the following changes:
- * <ApplyTheme -> <InstUISettingsProvider
- * Menu.theme -> Menu.componentId (for every InstUI component)
- * <ApplyTheme theme={ApplyTheme.generateTheme(canvasTheme)} ->
- *   <InstUISettingsProvider theme={canvas}
+ * 1. `<ApplyTheme` -> `<InstUISettingsProvider`
+ * 2. `Menu.theme` -> `Menu.componentId` (for every InstUI component)
  */
 export function updateToV8Theming(
   j: JSCodeshift,

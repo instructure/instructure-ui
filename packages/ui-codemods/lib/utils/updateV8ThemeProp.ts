@@ -23,7 +23,7 @@
  */
 
 import { Collection, JSCodeshift } from 'jscodeshift'
-import { findEveryImport } from '../helpers/v7PropsUpdateHelpers'
+import { findEveryImport } from '../helpers/codemodHelpers'
 
 /**
  * Renames components theme={} prop to themeOverride={}
