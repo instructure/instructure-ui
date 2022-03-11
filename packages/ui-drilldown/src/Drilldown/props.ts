@@ -96,6 +96,11 @@ type DrilldownOwnProps = {
   rotateFocus?: boolean
 
   /**
+   * The ARIA role of the element
+   */
+  role?: string
+
+  /**
    * A function that returns a reference to the `<Drilldown />`
    */
   drilldownRef?: (el: HTMLDivElement | null) => void
@@ -268,6 +273,7 @@ const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string,
   isDisabled: PropTypes.bool,
   rotateFocus: PropTypes.bool,
+  role: PropTypes.string,
   drilldownRef: PropTypes.func,
   overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
   overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
@@ -303,6 +309,7 @@ const allowedProps: AllowedPropKeys = [
   'label',
   'isDisabled',
   'rotateFocus',
+  'role',
   'overflowX',
   'overflowY',
   'height',

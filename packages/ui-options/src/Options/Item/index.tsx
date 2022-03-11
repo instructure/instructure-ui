@@ -28,7 +28,8 @@ import { Component } from 'react'
 import {
   omitProps,
   getElementType,
-  callRenderProp
+  callRenderProp,
+  withDeterministicId
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -46,6 +47,7 @@ id: Options.Item
 ---
 @tsProps
 **/
+@withDeterministicId()
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class Item extends Component<OptionsItemProps> {
@@ -64,6 +66,14 @@ class Item extends Component<OptionsItemProps> {
   } as const
 
   ref: Element | null = null
+
+  private readonly _descriptionId: string
+
+  constructor(props: OptionsItemProps) {
+    super(props)
+
+    this._descriptionId = props.deterministicId!('OptionsItem-description')
+  }
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -131,10 +141,22 @@ class Item extends Component<OptionsItemProps> {
           }
         }}
       >
-        <span {...passthroughProps} css={styles?.container} role={role}>
+        <span
+          {...passthroughProps}
+          css={styles?.container}
+          role={role}
+          aria-describedby={
+            this.props['aria-describedby'] ||
+            (descriptionContent ? this._descriptionId : undefined)
+          }
+        >
           {childrenContent}
           {descriptionContent && (
-            <span css={styles?.description} role={descriptionRole}>
+            <span
+              css={styles?.description}
+              role={descriptionRole}
+              id={this._descriptionId}
+            >
               {descriptionContent}
             </span>
           )}

@@ -161,7 +161,13 @@ class Options extends Component<OptionsProps> {
           margin="none"
           padding="none"
           background="primary"
-          aria-labelledby={renderLabel ? this._labelId : undefined}
+          aria-labelledby={
+            renderLabel
+              ? this._labelId
+              : this.props['aria-labelledby']
+              ? this.props['aria-labelledby']
+              : undefined
+          }
         >
           {this.renderChildren()}
         </View>

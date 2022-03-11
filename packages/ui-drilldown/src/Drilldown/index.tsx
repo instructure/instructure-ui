@@ -151,6 +151,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   static defaultProps = {
     isDisabled: false,
     rotateFocus: true,
+    role: 'menu',
     overflowX: 'auto',
     overflowY: 'auto',
     placement: 'bottom center',
@@ -175,9 +176,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   private _containerElement: HTMLDivElement | null = null
 
   readonly _id: string
-  readonly _labelId: string
+  readonly _triggerId: string
   readonly _headerBackId: string
   readonly _headerTitleId: string
+  readonly _headerTitleLabelId: string
   readonly _headerActionId: string
 
   // Array of visited page ids in "breadcrumbs" fashion
@@ -225,9 +227,12 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     this.setDefaultSelected()
 
     this._id = props.id || props.deterministicId!()
-    this._labelId = props.deterministicId!('Drilldown-label')
+    this._triggerId = props.deterministicId!('Drilldown-label')
     this._headerBackId = props.deterministicId!('DrilldownHeader-Back')
     this._headerTitleId = props.deterministicId!('DrilldownHeader-Title')
+    this._headerTitleLabelId = props.deterministicId!(
+      'DrilldownHeader-Title-Label'
+    )
     this._headerActionId = props.deterministicId!('DrilldownHeader-Action')
   }
 
@@ -451,7 +456,9 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           id={this._headerBackId}
           onOptionClick={this.handleBackButtonClick}
         >
-          <div css={styles?.headerBack}>{backButtonLabel}</div>
+          <div css={styles?.headerBack} role="presentation">
+            {backButtonLabel}
+          </div>
         </DrilldownOption>
       )
     }
@@ -462,8 +469,14 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
       if (title) {
         headerChildren.push(
-          <DrilldownOption id={this._headerTitleId}>
-            <div css={styles?.headerTitle}>{title}</div>
+          <DrilldownOption
+            id={this._headerTitleId}
+            role="presentation"
+            aria-hidden="true"
+          >
+            <div css={styles?.headerTitle} id={this._headerTitleLabelId}>
+              {title}
+            </div>
           </DrilldownOption>
         )
       }
@@ -940,6 +953,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     // the rest are passed directly
     if (subPageId) {
       optionProps.renderAfterLabel = <IconArrowOpenEndSolid />
+      optionProps['aria-haspopup'] = true
+      optionProps.role = 'button'
       warn(
         !renderAfterLabel,
         `The prop "renderAfterLabel" is reserved on item with id: "${id}". When it has "subPageId" provided, a navigation arrow will render after the label.`
@@ -950,6 +965,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     }
     if (groupProps?.selectableType) {
       isSelected = this._selectedGroupOptionsMap[groupProps.id].has(id)
+      optionProps['aria-checked'] = isSelected
+
       optionProps.renderBeforeLabel = (
         <IconCheckSolid
           style={{
@@ -961,6 +978,14 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         !renderBeforeLabel,
         `The prop "renderBeforeLabel" is reserved on item with id: "${id}". When this option is a selectable member of a Drilldown.Group, selection indicator will render before the label.`
       )
+
+      // setting aria roles and attributes for selectable group items
+      if (groupProps.selectableType === 'single') {
+        optionProps.role = 'menuitemradio'
+      }
+      if (groupProps.selectableType === 'multiple') {
+        optionProps.role = 'menuitemcheckbox'
+      }
     }
 
     // display option as highlighted
@@ -998,20 +1023,35 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       end: 'flex-end'
     }
 
+    const labelAriaId = `${id}__label`
+    const infoAriaId = `${id}__info`
+
+    const labelledby = option.props['aria-labelledby'] || labelAriaId
+    const describedby =
+      option.props['aria-describedby'] || (labelInfo ? infoAriaId : undefined)
+
     return (
-      <Options.Item {...optionProps} key={id}>
-        <div css={styles?.optionContainer}>
-          <span css={styles?.optionContent}>{optionLabel}</span>
+      <Options.Item
+        {...optionProps}
+        key={id}
+        aria-labelledby={labelledby}
+        aria-describedby={describedby}
+      >
+        <div css={styles?.optionContainer} role="none">
+          <span css={styles?.optionContent} role="none" id={labelAriaId}>
+            {optionLabel}
+          </span>
 
           {labelInfo ? (
             <span
               css={styles?.optionLabelInfo}
               role="presentation"
-              aria-hidden="true"
               style={{ alignSelf: vAlignMap[afterLabelContentVAlign!] }}
             >
               {/* this container span is needed for correct vAlign */}
-              <span role="none">{labelInfo}</span>
+              <span role="note" id={infoAriaId}>
+                {labelInfo}
+              </span>
             </span>
           ) : null}
         </div>
@@ -1059,6 +1099,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       <Options
         id={id}
         key={id}
+        role={this.props.role}
         renderLabel={renderGroupTitle}
         elementRef={elementRef}
         // we pass the themeOverride to Options
@@ -1099,15 +1140,13 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       maxHeight,
       maxWidth,
       trigger,
+      role,
       label
     } = this.props
 
     if (!this.currentPage) {
       return null
     }
-
-    const labelledBy = this.props['aria-labelledby']
-    const controls = this.props['aria-controls']
 
     return (
       <Selectable
@@ -1148,38 +1187,41 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             borderRadius="small"
             width={width}
             maxWidth={maxWidth}
+            role={role}
+            aria-label={label}
+            aria-labelledby={
+              this.props['aria-labelledby'] ||
+              (trigger ? this._triggerId : undefined) ||
+              (this.currentPage?.renderTitle
+                ? this._headerTitleLabelId
+                : undefined)
+            }
             {...getTriggerProps({
               id: this._id,
-              // role: '?', TODO: role??
-              'aria-label': label,
-              'aria-controls': controls,
-              'aria-labelledby':
-                labelledBy || (trigger ? this._labelId : undefined),
+              // We need to override these aria attributes added by Selectable,
+              // since Drilldown is not a combobox and has no popup
+              'aria-haspopup': false,
+              'aria-expanded': undefined
+            })}
+            onBlur={(event: React.FocusEvent) => {
+              const target = event.currentTarget
+              const related = event.relatedTarget
+              const containsRelated = contains(
+                target as Node | Window,
+                related as Node | Window
+              )
 
-              // if Drilldown needs onKeyDown or onKeyUp handler, put it here
-              // onKeyDown: (_event) => {},
-              // onKeyUp: (_event) => {},
-
-              onBlur: (event: React.FocusEvent) => {
-                const target = event.currentTarget
-                const related = event.relatedTarget
-                const containsRelated = contains(
-                  target as Node | Window,
-                  related as Node | Window
-                )
-
-                if (
-                  !related ||
-                  related === this._drilldownRef ||
-                  (related !== target && !containsRelated)
-                ) {
-                  this.setState({ highlightedOptionId: undefined })
-                }
-              },
-              onMouseLeave: () => {
+              if (
+                !related ||
+                related === this._drilldownRef ||
+                (related !== target && !containsRelated)
+              ) {
                 this.setState({ highlightedOptionId: undefined })
               }
-            })}
+            }}
+            onMouseLeave={() => {
+              this.setState({ highlightedOptionId: undefined })
+            }}
           >
             <View
               as="div"
@@ -1191,6 +1233,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
               maxWidth={maxWidth}
               css={styles?.container}
               borderRadius="small"
+              role="presentation"
               elementRef={(element) => {
                 this._containerElement = element as HTMLDivElement
               }}
@@ -1198,6 +1241,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
               <Options
                 {...getListProps()}
                 themeOverride={this.optionsThemeOverride}
+                role="presentation"
                 as="div"
               >
                 {this.renderList(getOptionProps, getDisabledOptionProps)}
@@ -1267,8 +1311,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             // for the popover version the trigger has to be the ref
             this.ref = el?.ref || (el as Element)
           },
-          'aria-haspopup': true,
-          id: this._labelId,
+          'aria-haspopup': this.props.role,
+          id: this._triggerId,
           disabled: (trigger as ReactElement).props.disabled || isDisabled
         })}
       >
