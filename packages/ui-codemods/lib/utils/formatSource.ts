@@ -26,14 +26,18 @@ import prettier from 'prettier'
 
 export default function formatSource(source: string, sourcePath: string) {
   let options = null
-
+  const extension = sourcePath.split('.').pop()
+  let parser = 'babel'
+  if (extension === 'ts' || extension === 'tsx') {
+    parser = 'typescript'
+  }
   try {
     options = prettier.resolveConfig.sync(sourcePath)
     if (options) {
       // Set the parser argument if the consumer did not set one to avoid a console warning
       options = {
         ...options,
-        parser: options.parser || 'babel'
+        parser: options.parser || parser
       }
     }
   } catch (err) {
@@ -43,7 +47,7 @@ export default function formatSource(source: string, sourcePath: string) {
   return prettier.format(
     source,
     options || {
-      parser: 'babel',
+      parser: parser,
       semi: false,
       singleQuote: true,
       trailingComma: 'none'
