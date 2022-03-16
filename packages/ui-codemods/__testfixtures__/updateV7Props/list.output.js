@@ -1,12 +1,14 @@
 /* eslint-disable */
-import { List, InlineList } from '@instructure/ui-lists'
+import { List } from '@instructure/ui-list'
+
+import { InlineList } from '@instructure/ui'
 
 const aVar = {}
 const a = (
   <p>
     <List></List>
     <List isUnstyled></List>
-    <InlineList delimiter=",">
+    <InlineList delimiter="dashed">
       <InlineList.Item>test</InlineList.Item>
       {...aVar}
     </InlineList>

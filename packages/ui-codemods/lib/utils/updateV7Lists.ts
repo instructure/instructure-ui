@@ -46,7 +46,7 @@ export default function updateV7Lists(
   filePath: string
 ) {
   const importName = findImport(j, root, 'List', [
-    '@instructure/ui-lists',
+    '@instructure/ui-list',
     '@instructure/ui'
   ])
   if (!importName) {

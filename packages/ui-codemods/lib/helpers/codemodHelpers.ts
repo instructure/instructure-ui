@@ -265,7 +265,7 @@ function renameElements(
     for (const elem of root) {
       if (isJSXElement(elem)) {
         renameElement(elem, currentName, newName)
-      } else {
+      } else if (!(isJSXText(elem) && elem.value.trim().length === 0)) {
         printWarning(
           filePath,
           elem.loc?.start.line,
