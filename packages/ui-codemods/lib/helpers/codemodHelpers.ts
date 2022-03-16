@@ -567,6 +567,10 @@ function isJSXIdentifier(elem?: astElem | null): elem is JSXIdentifier {
   return elem !== null && elem !== undefined && elem.type == 'JSXIdentifier'
 }
 
+function isJSXFragment(elem?: astElem | null): elem is JSXFragment {
+  return elem !== null && elem !== undefined && elem.type == 'JSXFragment'
+}
+
 // Name of a tag that looks like "List.Item"
 function isJSXMemberExpression(
   elem?: astElem | null
@@ -627,6 +631,7 @@ export {
   isJSXElement,
   isJSXText,
   isJSXIdentifier,
+  isJSXFragment,
   isJSXMemberExpression,
   isJSXExpressionContainer,
   isLiteral
