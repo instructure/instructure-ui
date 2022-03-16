@@ -31,6 +31,7 @@ import { SVGIcon } from '@instructure/ui-svg-images'
 import { IconButton } from '@instructure/ui-buttons'
 import { propTypes, allowedProps } from './props'
 import type { CodeSandboxButtonProps } from './props'
+
 class CodeSandboxButton extends Component<CodeSandboxButtonProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
@@ -86,7 +87,8 @@ import 'moment/min/locales'
       js_pre_processor: 'babel',
       ...this.props.options
     }
-
+    const codeSandboxIconSvg =
+      'M115.498 261.088v-106.61L23.814 101.73v60.773L65.81 186.85v45.7l49.688 28.54Zm23.814.627l50.605-29.151V185.78l42.269-24.495v-60.011l-92.874 53.621v106.82Zm80.66-180.887l-48.817-28.289l-42.863 24.872l-43.188-24.897l-49.252 28.667l91.914 52.882l92.206-53.235ZM0 222.212V74.495L127.987 0L256 74.182v147.797l-128.016 73.744L0 222.212Z'
     const dependencies = JSON.stringify(
       {
         dependencies: {
@@ -178,14 +180,21 @@ export function placeholderImage(width = 512, height = 512) {
             withBorder={false}
             withBackground={false}
             renderIcon={
-              <SVGIcon viewBox="0 0 1792 1792" title="CodeSandbox">
-                <path
-                  d="M216 1169l603 402v-359l-334-223zm-62-144l193-129-193-129v258zm819 546l603-402-269-180-334
-                  223v359zm-77-493l272-182-272-182-272 182zm-411-275l334-223v-359l-603 402zm960 93l193
-                  129v-258zm-138-93l269-180-603-402v359zm485-180v546q0 41-34 64l-819 546q-21 13-43
-                  13t-43-13l-819-546q-34-23-34-64v-546q0-41 34-64l819-546q21-13 43-13t43 13l819 546q34 23 34 64z"
-                />
-              </SVGIcon>
+              // <SVGIcon viewBox="0 0 1792 1792" title="CodeSandbox">
+              //   <path d="M115.498 261.088v-106.61L23.814 101.73v60.773L65.81 186.85v45.7l49.688 28.54Zm23.814.627l50.605-29.151V185.78l42.269-24.495v-60.011l-92.874 53.621v106.82Zm80.66-180.887l-48.817-28.289l-42.863 24.872l-43.188-24.897l-49.252 28.667l91.914 52.882l92.206-53.235ZM0 222.212V74.495L127.987 0L256 74.182v147.797l-128.016 73.744L0 222.212Z"/>
+              // </SVGIcon>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="img"
+                width="0.87em"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 256 296"
+              >
+                <path d="M115.498 261.088v-106.61L23.814 101.73v60.773L65.81 186.85v45.7l49.688 28.54Zm23.814.627l50.605-29.151V185.78l42.269-24.495v-60.011l-92.874 53.621v106.82Zm80.66-180.887l-48.817-28.289l-42.863 24.872l-43.188-24.897l-49.252 28.667l91.914 52.882l92.206-53.235ZM0 222.212V74.495L127.987 0L256 74.182v147.797l-128.016 73.744L0 222.212Z" />
+              </svg>
             }
           />
         </Tooltip>

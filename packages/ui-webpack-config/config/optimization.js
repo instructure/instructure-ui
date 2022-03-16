@@ -28,10 +28,6 @@ module.exports = {
   splitChunks: {
     chunks: 'all'
   },
-  runtimeChunk: {
-    // so that old codepens still work
-    name: 'runtime~common'
-  },
   sideEffects: true,
   minimizer: [
     new TerserWebpackPlugin({
