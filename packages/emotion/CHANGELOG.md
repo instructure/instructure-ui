@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.19.0](https://github.com/instructure/instructure-ui/compare/v8.18.0...v8.19.0) (2022-03-16)
+
+### Features
+
+- **emotion:** themeOverride prop to accept function ([505f0bf](https://github.com/instructure/instructure-ui/commit/505f0bfad12aaa4f3d1607a85409f5541246e879))
+
 # [8.18.0](https://github.com/instructure/instructure-ui/compare/v8.17.0...v8.18.0) (2022-02-23)
 
 **Note:** Version bump only for package @instructure/emotion

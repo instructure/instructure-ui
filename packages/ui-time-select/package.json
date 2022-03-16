@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-time-select",
-  "version": "8.18.0",
+  "version": "8.19.0",
   "description": "A component for selecting time values.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,20 +24,20 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/shared-types": "8.18.0",
-    "@instructure/ui-form-field": "8.18.0",
-    "@instructure/ui-i18n": "8.18.0",
-    "@instructure/ui-position": "8.18.0",
-    "@instructure/ui-prop-types": "8.18.0",
-    "@instructure/ui-react-utils": "8.18.0",
-    "@instructure/ui-select": "8.18.0",
-    "@instructure/ui-test-locator": "8.18.0",
-    "@instructure/ui-testable": "8.18.0",
+    "@instructure/shared-types": "8.19.0",
+    "@instructure/ui-form-field": "8.19.0",
+    "@instructure/ui-i18n": "8.19.0",
+    "@instructure/ui-position": "8.19.0",
+    "@instructure/ui-prop-types": "8.19.0",
+    "@instructure/ui-react-utils": "8.19.0",
+    "@instructure/ui-select": "8.19.0",
+    "@instructure/ui-test-locator": "8.19.0",
+    "@instructure/ui-testable": "8.19.0",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.18.0",
-    "@instructure/ui-test-utils": "8.18.0",
+    "@instructure/ui-babel-preset": "8.19.0",
+    "@instructure/ui-test-utils": "8.19.0",
     "moment-timezone": "^0.5.33"
   },
   "peerDependencies": {

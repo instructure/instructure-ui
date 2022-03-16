@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.19.0](https://github.com/instructure/instructure-ui/compare/v8.18.0...v8.19.0) (2022-03-16)
+
+### Bug Fixes
+
+- **ui-babel-preset:** add back removed `@babel/plugin-proposal-optional-chaining` ([435c9ae](https://github.com/instructure/instructure-ui/commit/435c9ae794c15e2bd103f700f8c4e946d91c1b59))
+- **ui-options:** fix `themeOverride` prop being passed to the underlying `div` ([669aa58](https://github.com/instructure/instructure-ui/commit/669aa58926b123028bcb9e39427d36910b78b0d1))
+
+### Features
+
+- **emotion:** themeOverride prop to accept function ([505f0bf](https://github.com/instructure/instructure-ui/commit/505f0bfad12aaa4f3d1607a85409f5541246e879))
+
 # [8.18.0](https://github.com/instructure/instructure-ui/compare/v8.17.0...v8.18.0) (2022-02-23)
 
 ### Bug Fixes
