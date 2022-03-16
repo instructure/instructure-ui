@@ -334,6 +334,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     return map
   }
 
+  get isOnRootPage() {
+    return this.state.activePageId === this.props.rootPageId
+  }
+
   get currentPage(): MappedPage | undefined {
     return this.getPageById(this.state.activePageId)
   }
@@ -359,6 +363,25 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       goToPage,
       goToPreviousPage
     }
+  }
+
+  get currentPageAriaLabel() {
+    // return, if explicitly set
+    if (this.props['aria-labelledby']) {
+      return this.props['aria-labelledby']
+    }
+
+    // if it has title, point to the title label content
+    if (this.currentPage?.renderTitle) {
+      return this._headerTitleLabelId
+    }
+
+    // if root page has no title, try the trigger, if exists
+    if (this.isOnRootPage && this.props.trigger) {
+      return this._triggerId
+    }
+
+    return undefined
   }
 
   getPageById(id?: string): MappedPage | undefined {
@@ -810,10 +833,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       }
 
       // if on root page and popover is open, we close it
-      if (
-        this.state.activePageId === this.props.rootPageId &&
-        this._popover?.shown
-      ) {
+      if (this.isOnRootPage && this._popover?.shown) {
         this._popover.hide(event)
       }
     }
@@ -1207,7 +1227,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       width,
       maxHeight,
       maxWidth,
-      trigger,
       role,
       label
     } = this.props
@@ -1257,13 +1276,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             maxWidth={maxWidth}
             role={role}
             aria-label={label}
-            aria-labelledby={
-              this.props['aria-labelledby'] ||
-              (trigger ? this._triggerId : undefined) ||
-              (this.currentPage?.renderTitle
-                ? this._headerTitleLabelId
-                : undefined)
-            }
+            aria-labelledby={this.currentPageAriaLabel}
             {...getTriggerProps({
               id: this._id,
               // We need to override these aria attributes added by Selectable,
