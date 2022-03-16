@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.19.0](https://github.com/instructure/instructure-ui/compare/v8.18.0...v8.19.0) (2022-03-16)
+
+### Bug Fixes
+
+- **ui-babel-preset:** add back removed `@babel/plugin-proposal-optional-chaining` ([435c9ae](https://github.com/instructure/instructure-ui/commit/435c9ae794c15e2bd103f700f8c4e946d91c1b59))
+
 # [8.18.0](https://github.com/instructure/instructure-ui/compare/v8.17.0...v8.18.0) (2022-02-23)
 
 **Note:** Version bump only for package @instructure/ui-babel-preset
