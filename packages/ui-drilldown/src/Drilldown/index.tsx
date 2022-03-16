@@ -955,7 +955,22 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         ...Options.Item.allowedProps
       ]),
       // props from selectable
-      ...getOptionProps({ id }),
+      ...getOptionProps({
+        id,
+        // aria-selected is only valid for these roles, otherwise we need to unset it
+        ...(role &&
+          ![
+            'gridcell',
+            'option',
+            'row',
+            'tab',
+            'columnheader',
+            'rowheader',
+            'treeitem'
+          ].includes(role) && {
+            'aria-selected': undefined
+          })
+      }),
       // we pass the themeOverride to Options.Item
       themeOverride,
       // directly passed props
