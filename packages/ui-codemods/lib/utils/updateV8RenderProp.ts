@@ -26,7 +26,8 @@ import {
   Collection,
   JSCodeshift,
   JSXElement,
-  JSXExpressionContainer
+  JSXExpressionContainer,
+  JSXFragment
 } from 'jscodeshift'
 import {
   addImportIfNeeded,
@@ -34,6 +35,7 @@ import {
   isCallExpression,
   isIdentifier,
   isJSXElement,
+  isJSXFragment,
   isLiteral,
   isMemberExpression,
   isSpreadElement,
@@ -92,8 +94,8 @@ export default function updateV8RenderProp(
         )
         return
       } else {
-        let argToAdd: JSXElement[] | JSXExpressionContainer[]
-        if (isJSXElement(firstArg)) {
+        let argToAdd: (JSXElement | JSXExpressionContainer | JSXFragment)[]
+        if (isJSXElement(firstArg) || isJSXFragment(firstArg)) {
           argToAdd = [firstArg]
         } else if (
           isLiteral(firstArg) ||
