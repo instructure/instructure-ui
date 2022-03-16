@@ -38,4 +38,11 @@ describe('updateV8Breaking', () => {
       `updateV8Breaking/${test}`
     )
   })
+  defineTest(
+    __dirname,
+    'lib/updateV8Breaking',
+    undefined,
+    `updateV8Breaking/tsFile`,
+    { parser: 'tsx' }
+  )
 })
