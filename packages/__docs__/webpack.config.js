@@ -43,8 +43,7 @@ const config = merge(baseConfig, {
     // main entry point
     main: './src/index.js',
     // Note: these entries have to keep these names so that old codepens still work
-    common: ['react', 'react-dom'],
-    globals: './globals.js'
+    common: ['react', 'react-dom']
   },
   module: {
     // suppress "the request of a dependency is an expression" warnings
