@@ -26,8 +26,7 @@ import {
   Collection,
   JSCodeshift,
   JSXElement,
-  JSXExpressionContainer,
-  JSXFragment
+  JSXExpressionContainer
 } from 'jscodeshift'
 import {
   addImportIfNeeded,
@@ -94,8 +93,8 @@ export default function updateV8RenderProp(
         )
         return
       } else {
-        let argToAdd: (JSXElement | JSXExpressionContainer | JSXFragment)[]
-        if (isJSXElement(firstArg) || isJSXFragment(firstArg)) {
+        let argToAdd: (JSXElement | JSXExpressionContainer)[]
+        if (isJSXElement(firstArg)) {
           argToAdd = [firstArg]
         } else if (
           isLiteral(firstArg) ||
@@ -103,6 +102,8 @@ export default function updateV8RenderProp(
           isCallExpression(firstArg)
         ) {
           argToAdd = [j.jsxExpressionContainer(firstArg)]
+        } else if (isJSXFragment(firstArg)) {
+          return // no need to style empty tag
         } else {
           printWarning(
             filePath,

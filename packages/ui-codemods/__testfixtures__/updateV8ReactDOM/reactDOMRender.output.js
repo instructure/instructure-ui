@@ -28,9 +28,4 @@ ReactDOM.render(
 ReactDOM.render(<Root>{aVar()}</Root>, 'hello')
 ReactDOM.render(<Root>{aVar}</Root>, 'hello')
 ReactDOM.render(<Root>{'hello'}</Root>, 'hello')
-ReactDOM.render(
-  <Root>
-    <></>
-  </Root>,
-  'hello'
-)
+ReactDOM.render(<></>, 'hello')
