@@ -926,7 +926,20 @@ example: true
     >
       Asd2
     </Drilldown.Option>
-    <Drilldown.Option id="item6">Asd2</Drilldown.Option>
+
+    <Drilldown.Option
+      id="item6"
+      href="/#Drilldown/#Drilldown"
+    >
+      Link to top of the page
+    </Drilldown.Option>
+    <Drilldown.Option
+      id="item7"
+      href="/#Drilldown/#Drilldown"
+      disabled
+    >
+      Disabled Link
+    </Drilldown.Option>
 
     <Drilldown.Group
       id="group1"
@@ -948,51 +961,8 @@ example: true
       <Drilldown.Option id="item23">GroupItem</Drilldown.Option>
     </Drilldown.Group>
 
-    <Drilldown.Option id="item7">Asd2</Drilldown.Option>
-    <Drilldown.Option id="item8">Asd3</Drilldown.Option>
-  </Drilldown.Page>
-
-  <Drilldown.Page id="page1" renderTitle={"Asdddddd"}>
-    <Drilldown.Option id="item1">Asd1</Drilldown.Option>
-    <Drilldown.Option id="item2">Asd2</Drilldown.Option>
-    <Drilldown.Option id="item3">Asd3</Drilldown.Option>
-  </Drilldown.Page>
-</Drilldown>
-
-```
-
-```js
----
-example: true
----
-
-<Drilldown
-  rootPageId='page0'
-  width="25rem"
-  trigger={<Button>Toggle Drilldown</Button>}
->
-  <Drilldown.Page id="page0">
-    <Drilldown.Option
-      id="item1"
-      subPageId="page1"
-      description="This is a submenu"
-    >
-      Asd1
-    </Drilldown.Option>
-    <Drilldown.Option
-      id="item2"
-      subPageId="page1"
-      renderLabelInfo="After"
-    >
-      Asd2
-    </Drilldown.Option>
-    <Drilldown.Option
-      id="item3"
-    >
-      Asd2
-    </Drilldown.Option>
-    <Drilldown.Option id="item7">Asd2</Drilldown.Option>
-    <Drilldown.Option id="item8">Asd3</Drilldown.Option>
+    <Drilldown.Option id="item8">Asd2</Drilldown.Option>
+    <Drilldown.Option id="item9">Asd3</Drilldown.Option>
   </Drilldown.Page>
 
   <Drilldown.Page id="page1" renderTitle={"Asdddddd"}>

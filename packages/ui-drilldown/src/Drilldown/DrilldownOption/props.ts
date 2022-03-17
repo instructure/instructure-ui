@@ -78,7 +78,12 @@ type DrilldownOptionOwnProps = {
   value?: DrilldownOptionValue
 
   /**
-   * Element type to render as
+   * Providing href will render the option as `<a>`. Doesn't work, if subPageId is provided or is in a selectable group.
+   */
+  href?: string
+
+  /**
+   * Element type to render as. Will be set to `<a>` if href is provided.
    */
   as?: AsElementType
 
@@ -176,6 +181,7 @@ const propTypes: PropValidators<PropKeys> = {
   subPageId: PropTypes.string,
   disabled: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  href: PropTypes.string,
   as: PropTypes.elementType,
   role: PropTypes.string,
   renderLabelInfo: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -196,6 +202,7 @@ const allowedProps: AllowedPropKeys = [
   'subPageId',
   'disabled',
   'value',
+  'href',
   'as',
   'role',
   'renderLabelInfo',

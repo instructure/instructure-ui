@@ -767,13 +767,15 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     const selectedOption = this.getPageChildById(id)
 
     if (!id || !selectedOption || selectedOption.props.disabled) {
+      event.preventDefault()
+      event.stopPropagation()
       return
     }
 
     const { shouldHideOnSelect, onSelect } = this.props
 
     const { groupProps, ...selectedOptionChild } = selectedOption
-    const { subPageId, value, onOptionClick } = selectedOptionChild.props
+    const { subPageId, href, value, onOptionClick } = selectedOptionChild.props
 
     if (typeof onOptionClick === 'function') {
       onOptionClick(event, {
@@ -784,6 +786,18 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
     if (subPageId) {
       this.goToPage(subPageId)
+    }
+
+    if (href) {
+      const optionEl = (event.target as HTMLElement)
+        .parentElement as HTMLLinkElement
+      const isLink = optionEl.tagName.toLowerCase() === 'a'
+
+      // we need this check because in some cases
+      // we ignore href prop in renderOption()
+      if (isLink && optionEl?.href) {
+        optionEl.click()
+      }
     }
 
     if (groupProps?.selectableType) {
@@ -944,6 +958,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     const {
       id,
       children,
+      href,
       as,
       role,
       subPageId,
@@ -1078,6 +1093,22 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
       if (isOptionDisabled) {
         optionProps.variant = 'highlighted-disabled'
+      }
+    }
+
+    if (href) {
+      if (subPageId) {
+        warn(
+          false,
+          `Drilldown.Option with id "${id}" has subPageId, so it will ignore the "href" property.`
+        )
+      } else if (groupProps?.selectableType) {
+        warn(
+          false,
+          `Drilldown.Option with id "${id}" is in a selectable group, so it will ignore the "href" property.`
+        )
+      } else {
+        optionProps.href = href
       }
     }
 
