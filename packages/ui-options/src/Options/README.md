@@ -375,3 +375,61 @@ class Example extends React.Component {
 
 render(<Example />)
 ```
+
+Providing a `href` prop will render the option as `<a>` link element.
+
+**WARNING!** Since `Options` is a view-only component, you have to make sure it is accessible, and if set the variant to disabled, disable the links as well!
+
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      highlighted: -1
+    }
+  }
+
+  handleMouseOver = (index) => {
+    this.setState({ highlighted: index })
+  }
+
+  render() {
+    return (
+      <View display="block" width="300px">
+        <Options onMouseOut={(e) => this.setState({ highlighted: -1 })}>
+          <Options.Item
+            onMouseOver={(e) => this.handleMouseOver(1)}
+            variant={this.state.highlighted === 1 ? 'highlighted' : 'default'}
+            href="/"
+          >
+            Link one
+          </Options.Item>
+          <Options.Item
+            onMouseOver={(e) => this.handleMouseOver(2)}
+            variant={this.state.highlighted === 2 ? 'highlighted' : 'default'}
+            href="/"
+          >
+            Link two
+          </Options.Item>
+          <Options.Item
+            onMouseOver={(e) => this.handleMouseOver(3)}
+            variant={this.state.highlighted === 3 ? 'highlighted' : 'default'}
+            variant="disabled"
+            onClick={(e) => { e.preventDefault() }}
+            href="/"
+          >
+            Link three
+          </Options.Item>
+        </Options>
+      </View>
+    )
+  }
+}
+
+render(<Example />)
+```

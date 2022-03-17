@@ -112,6 +112,7 @@ class Item extends Component<OptionsItemProps> {
   render() {
     const {
       as,
+      href,
       role,
       styles,
       description,
@@ -123,6 +124,9 @@ class Item extends Component<OptionsItemProps> {
     } = this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
+
+    const InnerElementType = href ? 'a' : 'span'
+
     const passthroughProps = omitProps(this.props, Item.allowedProps)
 
     const childrenContent = callRenderProp(children)
@@ -141,10 +145,11 @@ class Item extends Component<OptionsItemProps> {
           }
         }}
       >
-        <span
+        <InnerElementType
           {...passthroughProps}
           css={styles?.container}
-          role={role}
+          role={href ? undefined : role}
+          href={href}
           aria-describedby={
             this.props['aria-describedby'] ||
             (descriptionContent ? this._descriptionId : undefined)
@@ -160,7 +165,7 @@ class Item extends Component<OptionsItemProps> {
               {descriptionContent}
             </span>
           )}
-        </span>
+        </InnerElementType>
         {renderBeforeLabel &&
           this.renderContent(renderBeforeLabel, styles?.contentBefore)}
         {renderAfterLabel &&

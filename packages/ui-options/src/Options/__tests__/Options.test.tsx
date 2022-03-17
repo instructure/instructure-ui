@@ -156,4 +156,18 @@ describe('<Options />', async () => {
   describe('with generated examples', async () => {
     generateA11yTests(Options, OptionsExamples)
   })
+
+  describe('for a11y', async () => {
+    it('should be accessible with links', async () => {
+      await mount(
+        <Options>
+          <Options.Item>Option</Options.Item>
+          <Options.Item href="/">Option link</Options.Item>
+        </Options>
+      )
+      const options = await OptionsLocator.find()
+
+      expect(await options.accessible()).to.be.true()
+    })
+  })
 })
