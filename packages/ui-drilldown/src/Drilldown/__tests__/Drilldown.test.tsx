@@ -23,10 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, generateA11yTests, mount } from '@instructure/ui-test-utils'
+
+import { IconCheckSolid } from '@instructure/ui-icons'
 
 import { Drilldown } from '../index'
 import { DrilldownLocator } from '../DrilldownLocator'
+import DrilldownExamples from '../__examples__/Drilldown.examples'
 
 // TODO: write tests
 describe('<Drilldown />', async () => {
@@ -49,8 +52,65 @@ describe('<Drilldown />', async () => {
       it('should be accessible', async () => {
         await mount(
           <Drilldown rootPageId="page0">
-            <Drilldown.Page id="page0">
-              <Drilldown.Option id="item1">Item1</Drilldown.Option>
+            <Drilldown.Page
+              id="page0"
+              renderTitle="Page Title"
+              renderActionLabel="Action Label"
+            >
+              <Drilldown.Option id="item01">Item1</Drilldown.Option>
+              <Drilldown.Option id="item02" subPageId="page1">
+                Item2
+              </Drilldown.Option>
+              <Drilldown.Option id="item03" description="This is a description">
+                Item3
+              </Drilldown.Option>
+              <Drilldown.Option id="item04" renderLabelInfo="After">
+                Item4
+              </Drilldown.Option>
+              <Drilldown.Option id="item05" disabled>
+                Item5
+              </Drilldown.Option>
+              <Drilldown.Option id="item06" href="/">
+                Item6
+              </Drilldown.Option>
+              <Drilldown.Option
+                id="item07"
+                renderBeforeLabel={<IconCheckSolid />}
+              >
+                Item7
+              </Drilldown.Option>
+              <Drilldown.Option
+                id="item08"
+                renderAfterLabel={<IconCheckSolid />}
+              >
+                Item8
+              </Drilldown.Option>
+
+              <Drilldown.Separator id="sep1" />
+
+              <Drilldown.Group
+                id="group1"
+                renderGroupTitle="Multi-select group"
+                selectableType="multiple"
+              >
+                <Drilldown.Option id="groupItem11">GroupItem</Drilldown.Option>
+                <Drilldown.Option id="groupItem12">GroupItem</Drilldown.Option>
+                <Drilldown.Option id="groupItem13">GroupItem</Drilldown.Option>
+              </Drilldown.Group>
+
+              <Drilldown.Group
+                id="group2"
+                renderGroupTitle="Single-select group"
+                selectableType="single"
+              >
+                <Drilldown.Option id="groupItem21">GroupItem</Drilldown.Option>
+                <Drilldown.Option id="groupItem22">GroupItem</Drilldown.Option>
+                <Drilldown.Option id="groupItem23">GroupItem</Drilldown.Option>
+              </Drilldown.Group>
+            </Drilldown.Page>
+
+            <Drilldown.Page id="page1">
+              <Drilldown.Option id="item11">Item1</Drilldown.Option>
             </Drilldown.Page>
           </Drilldown>
         )
@@ -60,5 +120,9 @@ describe('<Drilldown />', async () => {
         expect(await drilldown.accessible()).to.be.true()
       })
     })
+  })
+
+  describe('with generated examples', async () => {
+    generateA11yTests(Drilldown, DrilldownExamples)
   })
 })
