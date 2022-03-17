@@ -58,20 +58,29 @@ export default function updateV8RenderProp(
   filePath: string,
   options: UpdateV8RenderPropOptions
 ) {
-  const reactDOMImport = findImport(j, root, 'ReactDOM', 'react-dom')
-  if (!reactDOMImport) {
+  let functionImport: string | undefined
+  const defaultImport = findImport(j, root, 'ReactDOM', 'react-dom')
+  if (!defaultImport) {
+    functionImport = findImport(j, root, 'render', 'react-dom')
+  }
+  if (!functionImport && !defaultImport) {
     return false
   }
   let hasModifications = false
   root.find(j.CallExpression).forEach((path) => {
     const astNode = path.value.callee
-    if (
+    // it's a function import: import {render} from 'react-dom'; render()
+    const foundFunctionImport =
+      functionImport && isIdentifier(astNode) && astNode.name === functionImport
+    // it's a default import: import ReactDOM from 'react-dom'; ReactDOM.render()
+    const foundDefaultImport =
+      defaultImport &&
       isMemberExpression(astNode) &&
       isIdentifier(astNode.object) &&
-      astNode.object.name === 'ReactDOM' &&
+      astNode.object.name === defaultImport &&
       isIdentifier(astNode.property) &&
       astNode.property.name === 'render'
-    ) {
+    if (foundFunctionImport || foundDefaultImport) {
       hasModifications = true
       // add import
       addImportIfNeeded(j, root, options.wrapperTag, options.wrapperPath, true)
