@@ -21,3 +21,4 @@ ReactDOM.render(
   "hello",
   "hello")
 ReactDOM.render(<></>, 'hello')
+ReactDOM.render(<><br /><br /></>, 'hello')
