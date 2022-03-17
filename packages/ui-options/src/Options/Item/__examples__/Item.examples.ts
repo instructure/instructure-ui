@@ -31,6 +31,7 @@ export default {
   propValues: {
     renderAfterLabel: [null, IconArrowOpenEndSolid],
     renderBeforeLabel: [null, IconCheckSolid],
+    href: [undefined, '/hello'],
     description: [
       null,
       'Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa. Integer sit amet ante vitae lectus gravida pulvinar.'
@@ -74,6 +75,15 @@ export default {
       ) {
         return true
       }
+    }
+
+    if (
+      props.href &&
+      (props.beforeLabelContentVAlign !== 'center' ||
+        props.afterLabelContentVAlign !== 'center' ||
+        props.description)
+    ) {
+      return true
     }
 
     return false

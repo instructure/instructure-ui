@@ -98,6 +98,8 @@ const generateStyle = (
     }[vAlign!]
   }
 
+  const linkStyles = { textDecoration: 'none', color: 'currentColor' }
+
   const transition = 'background 200ms'
 
   return {
@@ -149,7 +151,15 @@ const generateStyle = (
         hasContentAfterLabel && {
           paddingInlineEnd: `calc(${componentTheme.iconPadding} * 2 + 1em)`,
           paddingInlineStart: `calc(${componentTheme.iconPadding} * 2 + 1em)`
-        })
+        }),
+
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(a)': {
+        '&, &:link, &:visited, &:active, &:hover, &:focus': linkStyles
+      },
+      '&:-webkit-any(a)': {
+        '&, &:link, &:visited, &:active, &:hover, &:focus': linkStyles
+      }
     },
     content: {
       label: 'optionItem__content',

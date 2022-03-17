@@ -231,6 +231,15 @@ describe('<Item />', async () => {
     expect(nestedItem).to.exist()
   })
 
+  it('should render as link with href prop', async () => {
+    await mount(<Item href="/helloWorld">Hello World</Item>)
+    const item = await ItemLocator.find()
+    const link = await item.find('[href="/helloWorld"]')
+
+    expect(link).to.exist()
+    expect(link.getDOMNode().tagName.toLowerCase()).to.equal('a')
+  })
+
   describe('with generated examples', async () => {
     generateA11yTests(Item, ItemExamples)
   })

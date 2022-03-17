@@ -37,7 +37,7 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 type ItemProps = {
   children?: React.ReactNode | (() => React.ReactNode)
   /**
-   * Element type to render as
+   * Element type to render as. Will be set to `<a>` if href is provided.
    */
   as?: AsElementType
   /**
@@ -83,6 +83,10 @@ type OptionsItemOwnProps = ItemProps & {
    */
   descriptionRole?: string
   /**
+   * Providing href will render the option as `<a>`.
+   */
+  href?: string
+  /**
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
@@ -122,6 +126,7 @@ const propTypes: PropValidators<PropKeys> = {
   afterLabelContentVAlign: PropTypes.oneOf(['start', 'center', 'end']),
   description: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   descriptionRole: PropTypes.string,
+  href: PropTypes.string,
   elementRef: PropTypes.func,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
@@ -136,6 +141,7 @@ const allowedProps: AllowedPropKeys = [
   'afterLabelContentVAlign',
   'description',
   'descriptionRole',
+  'href',
   'elementRef',
   'children'
 ]
