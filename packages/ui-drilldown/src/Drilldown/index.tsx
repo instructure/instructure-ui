@@ -926,9 +926,11 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         /**
          * --- RENDER OPTION ---
          */
-      } else {
+      } else if (matchComponentTypes<OptionChild>(child, [DrilldownOption])) {
         lastItemWasSeparator = false
         return this.renderOption(child, getOptionProps, getDisabledOptionProps)
+      } else {
+        return null
       }
     })
   }

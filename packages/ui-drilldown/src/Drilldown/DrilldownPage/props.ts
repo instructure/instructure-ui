@@ -72,7 +72,7 @@ type DrilldownPageOwnProps = {
   /**
    * Callback fired when the "action" option is clicked in the header
    */
-  onHeaderActionClicked?: (event: React.SyntheticEvent) => React.ReactNode
+  onHeaderActionClicked?: (event: React.SyntheticEvent) => void
 
   /**
    * Callback fired when the "back" navigation option is clicked in the header
