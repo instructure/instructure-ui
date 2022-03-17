@@ -71,3 +71,5 @@ export {
   findFrame,
   debug
 }
+
+export type { QueriesHelpersEventsType } from './utils/bindElementToUtilities'

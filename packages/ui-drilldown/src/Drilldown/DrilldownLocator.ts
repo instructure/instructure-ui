@@ -27,13 +27,14 @@ import { find, findAll } from '@instructure/ui-test-utils'
 
 /* eslint-disable no-restricted-imports */
 // @ts-expect-error bypass no type definition found error
+import { OptionsLocator } from '@instructure/ui-options/es/Options/OptionsLocator'
+// @ts-expect-error bypass no type definition found error
 import { OptionsItemLocator } from '@instructure/ui-options/es/Options/Item/OptionsItemLocator'
+// @ts-expect-error bypass no type definition found error
+import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 /* eslint-enable no-restricted-imports */
 
 import { Drilldown } from './index'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
-// eslint-disable-next-line no-restricted-imports
-import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 
 export const customMethods = {
   findPopoverContentWrapper: (...args: any[]) => {
@@ -87,5 +88,6 @@ export const customMethods = {
     return await find('[class$=__description]', ...args)
   }
 }
+
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const DrilldownLocator = locator(Drilldown.selector, customMethods)
