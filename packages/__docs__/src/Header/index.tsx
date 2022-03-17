@@ -47,7 +47,11 @@ class Header extends Component<HeaderProps> {
     versionsData: undefined
   }
 
-  handleSelect = (_e: Event, [selectedVersion]: string) => {
+  handleSelect = (
+    _e: React.MouseEvent<Element, MouseEvent>,
+    updated: (string | number | undefined)[]
+  ) => {
+    const [selectedVersion] = updated
     const { versionsData } = this.props
     const { latestVersion } = versionsData
     const isSelectedLatestVersion = selectedVersion === latestVersion
@@ -84,7 +88,6 @@ class Header extends Component<HeaderProps> {
         <Menu
           placement="bottom"
           label="Select InstUI version"
-          onSelect={this.handleSelect}
           themeOverride={{ minWidth: '12rem' }}
           trigger={
             <CondensedButton>
@@ -101,6 +104,7 @@ class Header extends Component<HeaderProps> {
         >
           <Menu.Group
             selected={[currentVersion]}
+            onSelect={this.handleSelect}
             label={
               <ScreenReaderContent>Select InstUI version</ScreenReaderContent>
             }
