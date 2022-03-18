@@ -60,7 +60,6 @@ const fullScreenIconPath = (
 
 @withStyle(generateStyle, generateComponentTheme)
 class Playground extends Component<PlaygroundProps, PlaygroundState> {
-  _fullScreenButton: IconButton | null | undefined
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
@@ -72,6 +71,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   static contextTypes = {
     library: LibraryPropType
   }
+  _fullScreenButton: IconButton | null = null
 
   constructor(props: PlaygroundProps) {
     super(props)
@@ -88,7 +88,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps: PlaygroundProps, prevState: PlaygroundState) {
+  componentDidUpdate(_prevProps: PlaygroundProps, prevState: PlaygroundState) {
     if (prevState.fullscreen === true && this.state.fullscreen === false) {
       ;(
         ReactDOM.findDOMNode(this._fullScreenButton) as HTMLButtonElement
@@ -189,7 +189,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   render() {
     const { styles } = this.props
     const { code, fullscreen, rtl } = this.state
-
+    // TODO: update type once AppContext is typed
     const PreviewComponent = ({
       themeKey,
       themes

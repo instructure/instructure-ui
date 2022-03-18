@@ -38,7 +38,7 @@ type DocumentOwnProps = {
   description: string
   themeVariables?: BaseThemeVariables
   repository?: string
-  layout?: string
+  layout?: 'small' | 'medium' | 'large' | 'x-large'
 }
 
 type PropKeys = keyof DocumentOwnProps
@@ -53,7 +53,7 @@ const propTypes: PropValidators<PropKeys> = {
   description: PropTypes.string,
   themeVariables: PropTypes.object,
   repository: PropTypes.string,
-  layout: PropTypes.string
+  layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large'])
 }
 
 type DocumentStyle = ComponentStyle<'githubCornerColor'>

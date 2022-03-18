@@ -31,7 +31,6 @@ import type {
 import PropTypes from 'prop-types'
 
 type PlaygroundOwnProps = {
-  styles?: PlaygroundStyle
   title: string
   code: string
   language: string
@@ -58,7 +57,6 @@ type PlaygroundTheme = {
   fontSize: Typography['fontSizeMedium']
 }
 const propTypes: PropValidators<PropKeys> = {
-  styles: PropTypes.object,
   title: PropTypes.string.isRequired,
   code: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
@@ -79,7 +77,6 @@ const allowedProps: AllowedPropKeys = [
   'language',
   'readOnly',
   'render',
-  'styles',
   'title'
 ]
 

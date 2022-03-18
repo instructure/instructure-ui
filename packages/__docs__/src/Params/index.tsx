@@ -23,12 +23,11 @@
  */
 
 import React, { Component } from 'react'
-
 import { Table } from '@instructure/ui-table'
-
 import { compileMarkdown } from '../compileMarkdown'
 import type { ParamsProps } from './props'
 import { propTypes } from './props'
+
 class Params extends Component<ParamsProps> {
   static propTypes = propTypes
 
@@ -49,7 +48,7 @@ class Params extends Component<ParamsProps> {
           <Table.Cell>
             <code>{param?.defaultValue}</code>
           </Table.Cell>
-          <Table.Cell>{this.renderDescription(param?.description!)}</Table.Cell>
+          <Table.Cell>{this.renderDescription(param.description!)}</Table.Cell>
         </Table.Row>
       )
     })
