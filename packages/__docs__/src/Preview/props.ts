@@ -39,15 +39,15 @@ type PreviewOwnProps = {
   frameless?: boolean
   inverse?: boolean
   rtl?: boolean
-  background:
+  background?:
     | 'checkerboard'
     | 'checkerboard-inverse'
     | 'inverse'
     | 'light'
     | 'none'
-  themeKey: number
+  themeKey?: number
   //TODO type build-docs.js
-  themes: any[]
+  themes?: any[]
 }
 
 type PropKeys = keyof PreviewOwnProps

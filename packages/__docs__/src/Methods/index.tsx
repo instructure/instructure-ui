@@ -29,6 +29,11 @@ import { Table } from '@instructure/ui-table'
 import { compileMarkdown } from '../compileMarkdown'
 import type { MethodsProps } from './props'
 import { propTypes, allowedProps } from './props'
+import {
+  MethodParameter,
+  MethodReturn,
+  TypeDescriptor
+} from '../../buildScripts/DataTypes'
 
 class Methods extends Component<MethodsProps> {
   static propTypes = propTypes
@@ -53,19 +58,19 @@ class Methods extends Component<MethodsProps> {
       )
     })
   }
-  renderType(type: { name: string[] }) {
-    return type ? type.name.join(', ') : null
+  renderType(type?: TypeDescriptor) {
+    return type ? type.name : null
   }
 
-  renderParams(params: { name: string }[]) {
+  renderParams(params: MethodParameter[]) {
     return params && params.map((param) => param.name).join(', ')
   }
 
-  renderReturns(returns: { type: { name: string[] } }[]) {
-    return returns && returns.map((ret) => this.renderType(ret.type)).join(', ')
+  renderReturns(returns: MethodReturn | null) {
+    return returns && this.renderType(returns.type)
   }
 
-  renderDescription(description: string) {
+  renderDescription(description: string | null) {
     return <div>{description && compileMarkdown(description)}</div>
   }
 

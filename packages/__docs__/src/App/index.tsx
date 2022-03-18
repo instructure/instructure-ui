@@ -23,8 +23,13 @@
  */
 
 /** @jsx jsx */
-import { Component, createContext } from 'react'
-import PropTypes from 'prop-types'
+import {
+  Component,
+  createContext,
+  LegacyRef,
+  ReactElement,
+  SyntheticEvent
+} from 'react'
 
 import { Alert } from '@instructure/ui-alerts'
 import {
@@ -44,6 +49,7 @@ import { IconButton } from '@instructure/ui-buttons'
 import { Tray } from '@instructure/ui-tray'
 import { Link } from '@instructure/ui-link'
 import { addMediaQueryMatchListener } from '@instructure/ui-responsive'
+import type { QueriesMatching } from '@instructure/ui-responsive'
 import {
   IconHamburgerSolid,
   IconHeartLine,
@@ -68,27 +74,29 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { LoadingScreen } from '../LoadingScreen'
 import * as EveryComponent from '../../components'
+import type { AppProps, AppState, DocData, LayoutSize } from './props'
+import { propTypes, allowedProps } from './props'
 
 export const AppContext = createContext({
   library: {},
   themes: {},
   themeKey: ''
 })
+
 @withStyle(generateStyle, generateComponentTheme)
-class App extends Component {
-  static propTypes = {
-    trayWidth: PropTypes.number,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
-  }
+class App extends Component<AppProps, AppState> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
 
   static defaultProps = {
     trayWidth: 300
   }
+  _content: HTMLDivElement | null
+  _menuTrigger: HTMLButtonElement | null
+  _mediaQueryListener: ReturnType<typeof addMediaQueryMatchListener> | null
+  _defaultDocumentTitle?: string
 
-  constructor(props) {
+  constructor(props: AppProps) {
     super(props)
     // determine what page we're loading
     const [page] = this.getPathInfo()
@@ -102,7 +110,7 @@ class App extends Component {
 
     this.state = {
       showMenu: showTrayOnPageLoad,
-      themeKey: null,
+      themeKey: undefined,
       layout: 'large',
       docsData: null,
       versionsData: null,
@@ -122,25 +130,6 @@ class App extends Component {
     fetch('markdown-and-sources-data.json')
       .then((response) => response.json())
       .then((docsData) => {
-        // Assign the component instance to the parsed JSON.
-        // This is used to dynamically calculate theme variable values
-        for (const key of Object.keys(EveryComponent)) {
-          // eslint-disable-next-line import/namespace
-          const Component = EveryComponent[key]
-          if (docsData.docs[key]) {
-            // eslint-disable-next-line no-param-reassign
-            docsData.docs[key].componentInstance = Component
-          }
-          // Enumerate over the sub-components of a component, e.g. "List.Item"
-          for (const subKey of this.getAllPropNames(Component)) {
-            const subComponentId = `${key}.${subKey}`
-            if (docsData.docs[subComponentId]) {
-              // eslint-disable-next-line no-param-reassign
-              docsData.docs[subComponentId].componentInstance =
-                Component[subKey]
-            }
-          }
-        }
         this.setState(
           {
             docsData,
@@ -155,13 +144,22 @@ class App extends Component {
       })
   }
 
+  fetchDocumentData = async (docId: string) => {
+    const result = await fetch('docs/' + docId + '.json')
+    const docData: DocData = await result.json()
+    docData.componentInstance =
+      // eslint-disable-next-line import/namespace
+      EveryComponent[docId as keyof typeof EveryComponent]
+    return docData
+  }
+
   fetchVersionData = async () => {
     const versionsData = await fetchVersionData()
     return this.setState({ versionsData })
   }
 
   scrollToElement() {
-    const [page, id] = this.getPathInfo()
+    const [_page, id] = this.getPathInfo()
 
     if (id) {
       // If we have an id and it corresponds to an element
@@ -179,9 +177,10 @@ class App extends Component {
    * @param object The object to check
    * @returns {Set<string>} the properties
    */
-  getAllPropNames(object) {
-    let obj = object
-    const props = new Set()
+  getAllPropNames(object: Record<string, any>) {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    let obj: object | null = object
+    const props: Set<string> = new Set()
     // exclude some common static props for performance
     const invalidKeys = [
       '$$typeof',
@@ -193,7 +192,7 @@ class App extends Component {
       'generateComponentTheme'
     ]
     while (obj) {
-      let keys = Object.keys(obj)
+      const keys = Object.keys(obj)
       keys.forEach((k) => {
         if (!invalidKeys.includes(k)) props.add(k)
       })
@@ -216,14 +215,14 @@ class App extends Component {
         large: { minWidth: 1100 },
         'x-large': { minWidth: 1300 }
       },
-      this._content,
+      this._content!,
       this.updateLayout
     )
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   componentWillUnmount() {
@@ -234,18 +233,19 @@ class App extends Component {
     }
   }
 
-  trackPage(page) {
+  trackPage(page: string) {
     let title = this._defaultDocumentTitle
     if (page !== 'index') {
       title = `${page} - ${this._defaultDocumentTitle}`
     }
 
-    document.title = title
+    document.title = title!
 
-    if (window.ga) {
-      window.ga('set', 'page', page)
-      window.ga('set', 'title', title)
-      window.ga('send', 'pageview')
+    const ga = (window as any).ga
+    if (ga) {
+      ga('set', 'page', page)
+      ga('set', 'title', title)
+      ga('send', 'pageview')
     }
   }
 
@@ -261,8 +261,8 @@ class App extends Component {
     return []
   }
 
-  updateLayout = (matches) => {
-    let layout = 'small'
+  updateLayout = (matches: QueriesMatching) => {
+    let layout: LayoutSize = 'small'
 
     if (matches.length > 0) {
       if (matches.includes('medium') && matches.length === 1) {
@@ -273,12 +273,11 @@ class App extends Component {
         layout = 'x-large'
       }
     }
-
     this.setState({ layout })
   }
 
   updateKey = () => {
-    const [page, id] = this.getPathInfo()
+    const [page, _id] = this.getPathInfo()
 
     if (page) {
       this.setState(
@@ -293,12 +292,12 @@ class App extends Component {
     }
   }
 
-  handleContentRef = (el) => {
+  handleContentRef: LegacyRef<HTMLDivElement> = (el) => {
     this._content = el
   }
 
-  handleMenuTriggerRef = (el) => {
-    this._menuTrigger = el
+  handleMenuTriggerRef = (el: Element | null) => {
+    this._menuTrigger = el as HTMLButtonElement
   }
 
   handleMenuOpen = () => {
@@ -311,13 +310,13 @@ class App extends Component {
     })
   }
 
-  handleThemeChange = (event, option) => {
+  handleThemeChange = (_event: SyntheticEvent, option: { value: string }) => {
     this.setState({
       themeKey: option.value
     })
   }
 
-  handleShowTrayOnURLChange = (key, showMenu) => {
+  handleShowTrayOnURLChange = (key: string | undefined, showMenu: boolean) => {
     const userIsComingFromHomepage =
       key === 'index' || typeof key === 'undefined'
 
@@ -334,7 +333,7 @@ class App extends Component {
   }
 
   renderThemeSelect() {
-    const themeKeys = Object.keys(this.state.docsData.themes)
+    const themeKeys = Object.keys(this.state.docsData!.themes)
     const smallScreen = this.state.layout === 'small'
 
     return themeKeys.length > 1 ? (
@@ -362,8 +361,8 @@ class App extends Component {
     ) : null
   }
 
-  renderTheme(themeKey) {
-    const theme = this.state.docsData.themes[themeKey]
+  renderTheme(themeKey: string) {
+    const theme = this.state.docsData!.themes[themeKey]
 
     const { layout } = this.state
     const smallerScreens = layout === 'small' || layout === 'medium'
@@ -390,7 +389,7 @@ class App extends Component {
     )
   }
 
-  renderIcons(key) {
+  renderIcons(key: string) {
     const { iconsData } = this.state
     const { layout } = this.state
     const smallerScreens = layout === 'small' || layout === 'medium'
@@ -406,9 +405,9 @@ class App extends Component {
           Iconography
         </Heading>
         <Icons
-          packageName={iconsData.packageName}
+          packageName={iconsData!.packageName}
           selectedFormat={key}
-          formats={iconsData.formats}
+          formats={iconsData!.formats}
         />
       </View>
     )
@@ -416,27 +415,39 @@ class App extends Component {
     return <Section id={key}>{this.renderWrappedContent(iconContent)}</Section>
   }
 
-  renderDocument(doc, repository) {
-    const { descriptions, docs, parents, themes } = this.state.docsData
+  renderDocument(docId: string, repository: string) {
+    const { parents } = this.state.docsData!
+    const children: any[] = []
+    const currentData = this.state.currentDocData
+    if (!currentData || currentData.id !== docId) {
+      // load all children and the main doc
+      this.fetchDocumentData(docId).then(async (data) => {
+        if (parents[docId]) {
+          for (const childId of parents[docId].children) {
+            children.push(await this.fetchDocumentData(childId))
+          }
+        }
+        // eslint-disable-next-line no-param-reassign
+        data.children = children
+        this.setState({ currentDocData: data })
+      })
+      return (
+        <View as="div" padding="xx-large 0">
+          <LoadingScreen />
+        </View>
+      )
+    }
+    const { themes } = this.state.docsData!
     const { layout, themeKey, versionsData } = this.state
     const { olderVersionsGitBranchMap } = versionsData || {}
-
-    let children = []
     let legacyGitBranch
-
-    if (parents[doc.id]) {
-      children = parents[doc.id].children.map((childId) => docs[childId])
-    }
 
     if (olderVersionsGitBranchMap) {
       legacyGitBranch = olderVersionsGitBranchMap[versionInPath]
     }
 
-    const themeVariables = themes[themeKey].resource
-
-    const description = descriptions[doc.id]
-    const heading = doc.extension !== '.md' ? doc.title : ''
-
+    const themeVariables = themes[themeKey!].resource
+    const heading = currentData.extension !== '.md' ? currentData.title : ''
     const documentContent = (
       <View
         as="div"
@@ -447,21 +458,20 @@ class App extends Component {
         }
       >
         {this.renderThemeSelect()}
-        {doc.experimental && (
+        {currentData.experimental && (
           <div>
             <Pill color="info" margin="small 0">
               Experimental
             </Pill>
           </div>
         )}
-        <Section id={doc.id} heading={heading}>
+        <Section id={currentData.id} heading={heading}>
           <Document
             doc={{
-              ...doc,
-              children,
+              ...currentData,
               legacyGitBranch
             }}
-            description={description || doc.description}
+            description={currentData.description}
             themeVariables={themeVariables}
             repository={repository}
             layout={layout}
@@ -469,19 +479,21 @@ class App extends Component {
         </Section>
       </View>
     )
-
     return this.renderWrappedContent(documentContent)
   }
 
-  renderWrappedContent(content, padding = 'large') {
+  renderWrappedContent(
+    content: ReactElement[] | ReactElement,
+    padding: any = 'large'
+  ) {
     return <ContentWrap padding={padding}>{content}</ContentWrap>
   }
 
   renderHero() {
-    const { library, docs, themes } = this.state.docsData
+    const { library, docs, themes } = this.state.docsData!
     const { layout } = this.state
 
-    const themeDocs = {}
+    const themeDocs: Record<string, any> = {}
 
     Object.keys(themes).forEach((key) => {
       themeDocs[key] = {
@@ -493,7 +505,6 @@ class App extends Component {
         <Hero
           name={library.name}
           docs={{ ...docs, ...themeDocs }}
-          description={library.description}
           repository={library.repository}
           version={library.version}
           layout={layout}
@@ -503,21 +514,26 @@ class App extends Component {
   }
 
   renderChangeLog() {
-    const { docs, library } = this.state.docsData
-    const { CHANGELOG } = docs
-    let content
-
-    if (!CHANGELOG) {
-      return null
+    if (!this.state.changelogData) {
+      this.fetchDocumentData('CHANGELOG').then((data) => {
+        this.setState({ changelogData: data })
+      })
+      return (
+        <View as="div" padding="xx-large 0">
+          <LoadingScreen />
+        </View>
+      )
     }
+    const CHANGELOG = this.state.changelogData
+    let content: string
 
     const { description } = CHANGELOG
-    const currentMajorVersion = library.version.slice(0, 1)
+    const currentMajorVersion = this.state.docsData!.library.version.slice(0, 1)
 
     // we want to cut the docs below the last 2 major versions,
     // so find the next title after it
     const versionCutoffPoint = parseInt(currentMajorVersion, 10) - 2
-    let breakpointIndex = description.indexOf(`# [${versionCutoffPoint}`) - 1
+    const breakpointIndex = description.indexOf(`# [${versionCutoffPoint}`) - 1
 
     if (breakpointIndex < 0) {
       content = description
@@ -550,14 +566,17 @@ class App extends Component {
     )
   }
 
-  renderContent(key) {
-    const doc = this.state.docsData.docs[key]
-    const theme = this.state.docsData.themes[key]
+  renderContent(key?: string) {
+    const doc = this.state.docsData!.docs[key!]
+    const theme = this.state.docsData!.themes[key!]
     let icon
-    if (this.state.iconsData.formats) {
-      icon = this.state.iconsData.formats[key]
+    if (this.state.iconsData && this.state.iconsData.formats) {
+      icon =
+        this.state.iconsData.formats[
+          key as 'icons-svg' | `icons-react` | 'icons-font'
+        ]
     }
-    const { repository } = this.state.docsData.library
+    const { repository } = this.state.docsData!.library
 
     if (!key || key === 'index') {
       return this.renderHero()
@@ -569,14 +588,14 @@ class App extends Component {
     } else if (theme) {
       return this.renderTheme(key)
     } else if (doc) {
-      return this.renderDocument(doc, repository)
+      return this.renderDocument(key!, repository)
     } else {
-      return this.renderError(key)
+      return this.renderError()
     }
   }
 
   renderFooter() {
-    const { author, repository } = this.state.docsData.library
+    const { author, repository } = this.state.docsData!.library
 
     return author || repository ? (
       <View as="footer" textAlign="center" padding="large medium">
@@ -599,10 +618,8 @@ class App extends Component {
   }
 
   renderNavigation() {
-    const { name, version } = this.state.docsData.library
-
+    const { name, version } = this.state.docsData!.library
     const { key, layout, showMenu, versionsData } = this.state
-
     // Render nothing when the menu is not shown and the layout isn't small
     // When the layout is small, we still render the tray so that it can properly
     // finish the exit transition
@@ -638,16 +655,16 @@ class App extends Component {
 
         <Nav
           selected={key}
-          sections={this.state.docsData.sections}
-          docs={this.state.docsData.docs}
-          themes={this.state.docsData.themes}
+          sections={this.state.docsData!.sections}
+          docs={this.state.docsData!.docs}
+          themes={this.state.docsData!.themes}
           icons={this.state.iconsData}
         />
       </View>
     )
 
     return layout !== 'small' ? (
-      <nav css={this.props.styles.inlineNavigation}>{navContent}</nav>
+      <nav css={this.props.styles?.inlineNavigation}>{navContent}</nav>
     ) : (
       <Tray label="Navigation" open={showMenu} onDismiss={this.handleMenuClose}>
         {navContent}
@@ -664,7 +681,7 @@ class App extends Component {
 
     // tf there is a version in the path, e.g. "/v6", then it is a legacy page
     return versionInPath ? (
-      <div css={this.props.styles.legacyVersionAlert}>
+      <div css={this.props.styles?.legacyVersionAlert}>
         <InstUISettingsProvider
           theme={{
             componentOverrides: {
@@ -711,24 +728,24 @@ class App extends Component {
       <AppContext.Provider
         value={{
           library: docsData.library,
-          themeKey: this.state.themeKey,
+          themeKey: this.state.themeKey!,
           themes: docsData.themes
         }}
       >
-        <div css={this.props.styles.app}>
-          <Global styles={this.props.styles.globalStyles} />
+        <div css={this.props.styles?.app}>
+          <Global styles={this.props.styles?.globalStyles} />
           {showMenu && layout === 'small' && (
             <Mask onClick={this.handleMenuClose} />
           )}
           {this.renderNavigation()}
           <div
-            css={this.props.styles.content}
-            label={key || docsData.library.name}
+            css={this.props.styles?.content}
+            aria-label={key || docsData.library.name}
             role="main"
             ref={this.handleContentRef}
           >
             {!showMenu && (
-              <div css={this.props.styles.hamburger}>
+              <div css={this.props.styles?.hamburger}>
                 <InstUISettingsProvider theme={instructure}>
                   <IconButton
                     onClick={this.handleMenuOpen}

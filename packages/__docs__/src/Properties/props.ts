@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type { DocType } from '../Document/props'
+import { PropDescriptor } from '../../buildScripts/DataTypes'
 
 type PropertiesOwnProps = {
-  props: DocType['props']
+  props: Record<string, PropDescriptor>
   layout: string
   hasTsProps: boolean
 }

@@ -30,7 +30,6 @@ type HeroOwnProps = {
   repository: string
   version: string
   layout: 'small' | 'medium' | 'large' | 'x-large'
-  description: string
   docs: any
 }
 
@@ -45,12 +44,10 @@ const propTypes: PropValidators<PropKeys> = {
   repository: PropTypes.string.isRequired,
   version: PropTypes.string.isRequired,
   layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large']).isRequired,
-  description: PropTypes.string,
   docs: PropTypes.object
 }
 
 const allowedProps: AllowedPropKeys = [
-  'description',
   'docs',
   'layout',
   'name',

@@ -23,56 +23,34 @@
  */
 
 import { getJSDoc } from './getJSDoc'
-import { getCodeDoc } from './getCodeDoc'
 import { getReactDoc } from './getReactDoc'
-import { getFrontMatter, MetaInfo } from './getFrontMatter'
+import { getFrontMatter } from './getFrontMatter'
 import path from 'path'
-
-export type Block = {
-  type: 'doc' | 'single' | 'multi' | null
-  line: number
-  text: string
-  raw: string
-  description?: string
-}
-
-export type CodeDoc = {
-  description: string | undefined
-  sections?: Block[]
-  undocumented?: boolean
-  props?: any
-  methods?: CodeMethod[]
-}
-
-export type CodeMethod = {
-  name: string
-  docblock: any
-  modifiers: string[]
-  params: any[]
-}
+import { Buffer } from 'buffer'
+import { ParsedCodeData, YamlMetaInfo } from '../DataTypes'
 
 export function parseDoc(
   resourcePath: string,
-  source: string,
+  source: Buffer,
   errorHandler: (err: Error) => void
-) {
+): ParsedCodeData & YamlMetaInfo {
   const extension = path.extname(resourcePath)
   const allowedExtensions = ['.js', '.ts', '.tsx']
-  let doc: CodeDoc
+  let doc: ParsedCodeData
 
   if (extension === '.md') {
     doc = { description: source }
   } else if (allowedExtensions.includes(extension)) {
-    doc = getReactDoc(source, resourcePath, errorHandler) // ~18 secs
+    doc = getReactDoc(source, resourcePath, errorHandler)
     if (!doc.props) {
-      doc = getJSDoc(source, errorHandler) // ~37 secs
+      doc = getJSDoc(source, errorHandler)
     }
   } else {
-    doc = getCodeDoc(source, errorHandler) // ~<1 secs
+    errorHandler(new Error('not allowed extension ' + extension))
+    doc = { description: source }
   }
-
   // the YAML description in a JSDoc comment at the top of some files
-  let frontMatter: MetaInfo
+  let frontMatter: YamlMetaInfo
   try {
     frontMatter = getFrontMatter(doc.description)
   } catch (e) {

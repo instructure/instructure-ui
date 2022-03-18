@@ -22,11 +22,8 @@
  * SOFTWARE.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore react-docgen does not have typings :(
-//import reactDocgen from 'react-docgen'
 import path from 'path'
-import { CodeDoc } from './parseDoc'
+import { ParsedCodeData } from '../DataTypes'
 
 // for some reason it doesnt work as import..
 const reactDocgen = require('react-docgen')
@@ -34,11 +31,11 @@ const reactDocgen = require('react-docgen')
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found.'
 
 export function getReactDoc(
-  source: string,
+  source: Buffer,
   fileName: string,
   error: (err: Error) => void
 ) {
-  let doc: CodeDoc = {} as CodeDoc
+  let doc: ParsedCodeData = {}
   try {
     doc = reactDocgen.parse(
       source,

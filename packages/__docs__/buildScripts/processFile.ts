@@ -26,63 +26,46 @@ import fs from 'fs'
 import path from 'path'
 import { parseDoc } from './utils/parseDoc'
 import { getPathInfo } from './utils/getPathInfo'
-import type { LibraryOptions } from './build-docs'
-
-const DOCS: Record<string, string> = {}
-
-export type ProcessedFile = ReturnType<typeof parseDoc> &
-  ReturnType<typeof getPathInfo> & { id: string; title: string }
+import type { LibraryOptions, ProcessedFile } from './DataTypes'
 
 export function processFile(
   fullPath: string,
   projectRoot: string,
   library: LibraryOptions
 ) {
-  const source = fs.readFileSync(fullPath) as unknown as string
-  const context = path.dirname(fullPath) || process.cwd() // the directory of the file
+  // eslint-disable-next-line no-console
+  console.info(`Processing ${fullPath}`)
+  const source = fs.readFileSync(fullPath)
+  const dirName = path.dirname(fullPath) || process.cwd()
   const pathInfo = getPathInfo(fullPath, projectRoot, library)
 
   const doc = parseDoc(fullPath, source, (err: Error) => {
     console.warn('Error when parsing ', fullPath, err.toString())
   })
-  const mergedDoc = {
-    ...doc,
-    ...pathInfo
-  } as ProcessedFile
-  mergedDoc.id = getDocId(mergedDoc, context, fullPath)
-  if (!mergedDoc.title) {
-    mergedDoc.title = mergedDoc.id
-  }
-  // eslint-disable-next-line no-console
-  console.info(`Processed ${mergedDoc.id} - ${mergedDoc.relativePath}`)
-  return mergedDoc
-}
-
-function getDocId(docData: ProcessedFile, context: string, fullPath: string) {
-  const { relativePath, id, describes } = docData
+  const docData = { ...doc, ...pathInfo } as ProcessedFile
+  // TODO dockblock is always undefined. Either show this or delete.
+  docData.methods = docData.methods
+    ? docData.methods.filter((method) => method.docblock !== null)
+    : undefined
   let docId: string
-  const lowerPath = relativePath.toLowerCase()
-  if (id) {
+  const lowerPath = docData.relativePath.toLowerCase()
+  if (docData.id) {
     // exist if it was in the description at the top
-    docId = id
+    docId = docData.id
   } else if (
     lowerPath.includes('/index.js') ||
     lowerPath.includes('/index.tsx')
   ) {
-    docId = path.basename(context) // return its folder name
+    docId = path.basename(dirName) // return its folder name
   } else if (lowerPath.includes('readme.md')) {
-    const folder = path.basename(context)
-    docId = describes ? folder + '__README' : folder
+    const folder = path.basename(dirName)
+    docId = docData.describes ? folder + '__README' : folder
   } else {
     docId = path.parse(fullPath).name // filename without extension
   }
-  if (DOCS[docId] && DOCS[docId] !== docData.relativePath) {
-    console.warn(
-      '\x1b[33m%s\x1b[0m',
-      `[${docId}] is a duplicate id: ${docData.relativePath}, ${DOCS[docId]}`
-    )
+  docData.id = docId
+  if (!docData.title) {
+    docData.title = docData.id
   }
-
-  DOCS[docId] = docData.relativePath
-  return docId
+  return docData
 }

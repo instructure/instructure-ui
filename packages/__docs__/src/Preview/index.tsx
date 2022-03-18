@@ -115,7 +115,7 @@ class Preview extends Component<PreviewProps, PreviewState> {
     const render = (el: React.ReactElement) => {
       const { themeKey, themes } = this.props
 
-      const theme = themes?.[themeKey]?.resource || canvas
+      const theme = themes?.[themeKey!]?.resource || canvas
       const dir = (this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr) as
         | 'rtl'
         | 'ltr'

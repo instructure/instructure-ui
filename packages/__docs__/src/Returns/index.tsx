@@ -29,6 +29,7 @@ import { Table } from '@instructure/ui-table'
 import { compileMarkdown } from '../compileMarkdown'
 
 import type { ReturnsProps } from './props'
+import { JSDocFunctionReturns } from '../../buildScripts/DataTypes'
 
 class Returns extends Component<ReturnsProps> {
   renderRows() {
@@ -45,8 +46,7 @@ class Returns extends Component<ReturnsProps> {
     })
   }
 
-  //TODO fix
-  renderType(type: { names: string[] }) {
+  renderType(type: JSDocFunctionReturns['type']) {
     return type ? type.names.join(', ') : null
   }
 

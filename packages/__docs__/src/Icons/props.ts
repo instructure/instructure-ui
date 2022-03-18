@@ -23,10 +23,8 @@
  */
 
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type { PropValidators } from '@instructure/shared-types'
+import type { PropValidators, Breakpoints } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
-
-import type { Breakpoints } from '@instructure/shared-types'
 
 type IconsOwnProps = {
   selectedFormat: string

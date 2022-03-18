@@ -23,23 +23,12 @@
  */
 
 import grayMatter from 'gray-matter'
+import { YamlMetaInfo } from '../DataTypes'
 
-export type MetaInfo = {
-  order: string
-  description: string
-  describes?: string
-  category?: string
-  parent?: string
-  id?: string
-  // if true it won't be included in the docs
-  private: boolean
-}
-
-export function getFrontMatter(description = '') {
+export function getFrontMatter(description: string | Buffer = '') {
   const matter = grayMatter(description)
   return {
     ...matter.data,
-    order: matter.data.order || '',
     description: matter.content
-  } as MetaInfo
+  } as YamlMetaInfo
 }

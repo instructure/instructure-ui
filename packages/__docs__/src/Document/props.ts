@@ -29,78 +29,12 @@ import type {
   PropValidators,
   BaseThemeVariables
 } from '@instructure/shared-types'
-import React from 'react'
+import { DocData } from '../App/props'
 
-type SingleChildrenType = {
-  id: React.Key
-  title: string
-  description: string
-}
-
-type Prop = {
-  defaultValue?: {
-    computed: boolean
-    value: string
-  }
-  description: string
-  required: boolean
-  tsType: {
-    name: string
-    elements?: { name: string; value: string }[]
-    type?: string
-    raw?: string
-  }
-  type: {
-    name: string
-    value?: {
-      name?: string
-      value?: string
-      computed?: boolean
-      raw?: string
-    }
-  }
-}
-
-type DocType = {
-  srcUrl: string
-  srcPath: string
-  esPath: string
-  displayName: string
-  packageName: string
-  children: SingleChildrenType[]
-  sections: (SingleChildrenType & { name: string; kind: string })[]
-  legacyGitBranch: string
-  params: {
-    name: string
-    type: {
-      name: string
-    }
-    defaultvalue: string
-    description: string
-  }[]
-  returns: {
-    type: {
-      names: string[]
-    }
-    description: string
-  }[]
-  methods: {
-    name: string
-    params: { name: string }[]
-    returns: {
-      type: {
-        name: string[]
-      }
-    }[]
-    docblock: string
-  }[]
-  props: Record<string, Prop>
-  extension: string
-  componentInstance?: Record<string, any>
-} & SingleChildrenType
+type DocDataType = DocData & { legacyGitBranch: any }
 
 type DocumentOwnProps = {
-  doc: DocType
+  doc: DocDataType
   description: string
   themeVariables?: BaseThemeVariables
   repository?: string
@@ -126,6 +60,7 @@ type DocumentStyle = ComponentStyle<'githubCornerColor'>
 type DocumentTheme = {
   githubCornerColor: string
 }
+
 const allowedProps: AllowedPropKeys = [
   'description',
   'doc',
@@ -134,11 +69,4 @@ const allowedProps: AllowedPropKeys = [
   'themeVariables'
 ]
 export { propTypes, allowedProps }
-export type {
-  DocumentProps,
-  DocType,
-  DocumentStyle,
-  DocumentTheme,
-  SingleChildrenType,
-  Prop
-}
+export type { DocumentProps, DocumentStyle, DocumentTheme, DocDataType }

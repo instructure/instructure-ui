@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { createElement } from 'react'
+import React, { createElement, ReactNode } from 'react'
 import { marked } from 'marked'
 import grayMatter from 'gray-matter'
 
@@ -42,40 +42,64 @@ import { Preview } from './Preview'
 import { compileAndRenderExample } from './compileAndRenderExample'
 import { Heading } from './Heading'
 import { Link } from './Link'
-
 import { trimIndent } from './trimIndent'
+
+type HeadingGenerator = { id: string; children: ReactNode }
+
+type Tracker = {
+  tree: any[]
+  elements: any
+  toc: any[]
+  nextElementId: number
+  context?: Record<string, any>
+  currentId: any[]
+}
 
 const themes = { canvas, canvasHighContrast, instructure }
 
 /* eslint-disable react/prop-types, react/display-name */
 const elements = {
-  h1: ({ id, children }) => (
+  h1: ({ id, children }: HeadingGenerator) => (
     <Heading id={id} level="h1" margin="0 0 large">
       {children}
     </Heading>
   ),
-  h2: ({ id, children }) => (
+  h2: ({ id, children }: HeadingGenerator) => (
     <Heading id={id} level="h1" as="h2" margin="x-large 0 large 0">
       {children}
     </Heading>
   ),
-  h3: ({ id, children }) => (
+  h3: ({ id, children }: HeadingGenerator) => (
     <Heading id={id} level="h2" as="h3" margin="large 0 medium 0">
       {children}
     </Heading>
   ),
-  h4: ({ id, children }) => (
+  h4: ({ id, children }: HeadingGenerator) => (
     <Heading id={id} level="h3" as="h4" margin="large 0 medium 0">
       {children}
     </Heading>
   ),
-  h5: ({ id, children }) => (
+  h5: ({ id, children }: HeadingGenerator) => (
     <Heading id={id} level="h4" as="h5" margin="large 0 small 0">
       {children}
     </Heading>
   ),
-  img: ({ src, alt }) => <Img src={src} alt={alt} />,
-  a: ({ href, title, target, name, children }) => {
+  img: ({ src, alt }: { src: string; alt?: string }) => (
+    <Img src={src} alt={alt} />
+  ),
+  a: ({
+    href,
+    title,
+    target,
+    name,
+    children
+  }: {
+    href?: string
+    title?: string
+    target?: string
+    name: string
+    children: ReactNode
+  }) => {
     if (href) {
       return (
         <Link href={href} title={title} target={target}>
@@ -83,7 +107,7 @@ const elements = {
         </Link>
       )
     } else {
-      return <a name={name}>{children}</a> // eslint-disable-line jsx-a11y/anchor-is-valid
+      return <a id={name}>{children}</a> // eslint-disable-line jsx-a11y/anchor-is-valid
     }
   }
 }
@@ -91,34 +115,39 @@ const elements = {
 
 const { renderer, tracker } = createRenderer()
 
-function compileMarkdown(content, context, options = {}) {
+function compileMarkdown(
+  content: string,
+  context?: Record<string, any>,
+  options = {}
+) {
   tracker.tree = []
   tracker.elements = {}
   tracker.toc = []
   tracker.nextElementId = 0
   tracker.context = context
   tracker.currentId = []
-
   marked(
     trimIndent(content),
     Object.assign({ renderer: renderer, smartypants: true }, options)
   )
-
   return tracker.tree
 }
 
 function createRenderer() {
-  const tracker = {
-    tree: null,
+  const tracker: Tracker = {
+    tree: [],
     elements: null,
-    toc: null,
-    nextElementId: null,
+    toc: [],
+    nextElementId: 0,
     context: {},
     currentId: []
   }
-  const renderer = new marked.Renderer()
+  type RendererType = marked.Renderer & {
+    a?: (name: string, text: string) => string
+  }
+  const renderer = new marked.Renderer() as RendererType
 
-  function getTocPosition(toc, level) {
+  function getTocPosition(toc: any, level: number) {
     let currentLevel = toc.children
     while (
       currentLevel.length &&
@@ -129,10 +158,10 @@ function createRenderer() {
     return currentLevel
   }
 
-  function parseChildren(textContent) {
+  function parseChildren(textContent: string) {
     const contentArray = textContent.split(/(\{\{.*?\}\})/)
     return contentArray.map((subStr, index) => {
-      let child = subStr
+      let child: ReactNode = subStr
 
       if (typeof child === 'string' && child.trim() === '') {
         return null
@@ -158,7 +187,11 @@ function createRenderer() {
     })
   }
 
-  function addElement(tag, props = {}, content) {
+  function addElement(
+    tag: string | any,
+    props: Record<string, any> = {},
+    content?: string | string[]
+  ) {
     const elementId = tracker.nextElementId++
     let children = null
 
@@ -177,7 +210,7 @@ function createRenderer() {
     }
 
     tracker.elements[elementId] = createElement(
-      (elements && elements[tag]) || tag,
+      (elements && (elements as any)[tag]) || tag,
       elementProps,
       children
     )
@@ -187,7 +220,7 @@ function createRenderer() {
     return `{{${elementId}}}`
   }
 
-  function getComponent(type, data) {
+  function getComponent(type: string, data: Record<string, any>) {
     const { matter, language, title, readOnly } = data
 
     const componentType = type.toLowerCase()
@@ -222,9 +255,10 @@ function createRenderer() {
         />
       )
     }
+    return undefined
   }
 
-  function formatId(rawId) {
+  function formatId(rawId: string) {
     let id = rawId
 
     const modifications = [
@@ -248,13 +282,13 @@ function createRenderer() {
         const matter = grayMatter(trimIndent(code))
         const readOnly = matter.data ? matter.data.readOnly : true
         const title =
-          tracker.context.title || matter.data.title || 'Code example'
+          tracker.context!.title || matter.data.title || 'Code example'
         const themeKey = (matter.data || {}).theme
         const data = { matter, readOnly, title, language }
-        let theme
+        let theme: any
 
         if (themeKey) {
-          theme = themes[themeKey]
+          theme = (themes as any)[themeKey]
 
           if (!theme) {
             warn(
@@ -279,7 +313,7 @@ function createRenderer() {
         } else if (language.indexOf('_embed') >= 0 || matter.data.embed) {
           compileAndRenderExample({
             code: matter.content,
-            render: (_el) => {
+            render: (_el: ReactNode) => {
               el = theme ? (
                 <InstUISettingsProvider theme={theme}>
                   {_el}
@@ -289,7 +323,7 @@ function createRenderer() {
               )
             },
             shouldCallRender: matter.data.render,
-            onError: (err) => {
+            onError: (err: Error) => {
               el = <Text color="danger">{err.toString()}</Text>
             }
           })
@@ -300,11 +334,11 @@ function createRenderer() {
         el = <code>{code}</code>
       }
 
-      return { element: el, type: el.type.displayName }
+      return { element: el, type: el!.type.displayName }
     }
 
     const Element = () => CodeComponent().element
-    tracker.elements[elementId] = createElement(Element, {
+    tracker.elements[elementId] = createElement(Element as any, {
       key: elementId,
       elementType: CodeComponent().type
     })
@@ -316,7 +350,6 @@ function createRenderer() {
 
   renderer.html = function (html) {
     const elementId = tracker.nextElementId++
-
     tracker.tree.push(
       createElement('div', {
         key: elementId,
@@ -325,21 +358,22 @@ function createRenderer() {
         }
       })
     )
+    return ''
   }
 
   renderer.paragraph = function (text) {
-    return addElement('p', null, text)
+    return addElement('p', undefined, text)
   }
 
   renderer.blockquote = function (text) {
-    return addElement('blockquote', null, text)
+    return addElement('blockquote', undefined, text)
   }
 
   renderer.link = function (href, title, text) {
     return addElement('a', { href, title }, text)
   }
 
-  renderer.a = function (name, text) {
+  renderer.a = function (name: string, text: string) {
     return addElement('a', { name }, text)
   }
 
@@ -352,15 +386,15 @@ function createRenderer() {
   }
 
   renderer.strong = function (text) {
-    return addElement('strong', null, text)
+    return addElement('strong', undefined, text)
   }
 
   renderer.del = function (text) {
-    return addElement('del', null, text)
+    return addElement('del', undefined, text)
   }
 
   renderer.em = function (text) {
-    return addElement('em', null, text)
+    return addElement('em', undefined, text)
   }
 
   renderer.heading = function (text, level) {
@@ -398,11 +432,11 @@ function createRenderer() {
   }
 
   renderer.list = function (body, ordered) {
-    return addElement(ordered ? 'ol' : 'ul', null, body)
+    return addElement(ordered ? 'ol' : 'ul', undefined, body)
   }
 
   renderer.listitem = function (text) {
-    return addElement('li', null, text)
+    return addElement('li', undefined, text)
   }
 
   renderer.table = function (header, body) {
@@ -414,34 +448,38 @@ function createRenderer() {
     // the meantime, adding an empty string as a caption to avoid throwing
     // a docs error.
     return addElement(Table, { caption: '' }, [
-      addElement(Table.Head, null, header),
-      addElement(Table.Body, null, body)
+      addElement(Table.Head, undefined, header),
+      addElement(Table.Body, undefined, body)
     ])
   }
-
-  renderer.thead = function (content) {
-    return addElement(Table.Head, null, content)
+  // TODO figure out why this errors
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  renderer.thead = function (content: string | string[]) {
+    return addElement(Table.Head, undefined, content)
   }
 
-  renderer.tbody = function (content) {
-    return addElement(Table.Body, null, content)
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  renderer.tbody = function (content: string | string[]) {
+    return addElement(Table.Body, undefined, content)
   }
 
   renderer.tablerow = function (content) {
-    return addElement(Table.Row, null, content)
+    return addElement(Table.Row, undefined, content)
   }
 
   renderer.tablecell = function (content, flag) {
     const tag = flag.header ? Table.ColHeader : Table.Cell
 
-    return addElement(tag, null, content)
+    return addElement(tag, undefined, content)
   }
 
   renderer.codespan = function (text) {
-    return addElement('code', null, text)
+    return addElement('code', undefined, text)
   }
 
-  renderer.image = function (href, title, text) {
+  renderer.image = function (href, _title, text) {
     return addElement('img', { src: href, alt: text })
   }
 
