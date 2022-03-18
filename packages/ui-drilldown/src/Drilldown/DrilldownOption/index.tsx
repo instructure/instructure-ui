@@ -50,7 +50,6 @@ class DrilldownOption extends Component<DrilldownOptionProps> {
 
   static defaultProps = {
     disabled: false,
-    defaultSelected: false,
     beforeLabelContentVAlign: 'start',
     afterLabelContentVAlign: 'start',
     descriptionRole: 'note',

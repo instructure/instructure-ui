@@ -40,6 +40,8 @@ import type { WithStyleProps } from '@instructure/emotion'
 import type { DrilldownOptionValue } from '../DrilldownOption/props'
 import type { OptionChild, SeparatorChild } from '../props'
 
+type GroupChildren = OptionChild | SeparatorChild
+
 type DrilldownGroupOwnProps = {
   id: string
 
@@ -47,7 +49,7 @@ type DrilldownGroupOwnProps = {
    * Children of type:
    * `<Drilldown.Option />`, `<Drilldown.Separator />`
    */
-  children?: (OptionChild | SeparatorChild)[] // TODO: type Children.oneOf([DrilldownOption, DrilldownSeparator])
+  children?: GroupChildren | GroupChildren[] // TODO: type Children.oneOf([DrilldownOption, DrilldownSeparator])
 
   /**
    * The label of the option group.
@@ -77,7 +79,7 @@ type DrilldownGroupOwnProps = {
   selectableType?: 'single' | 'multiple'
 
   /**
-   * An array of the values for the selected items on initial render
+   * An array of the values for the selected items on initial render. Works only with "selectableType" set. If "selectableType" is "single", the array has to have 1 item.
    */
   defaultSelected?: DrilldownOptionValue[]
 
@@ -124,5 +126,5 @@ const allowedProps: AllowedPropKeys = [
   'onSelect'
 ]
 
-export type { DrilldownGroupProps }
+export type { DrilldownGroupProps, GroupChildren }
 export { propTypes, allowedProps }
