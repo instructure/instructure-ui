@@ -233,7 +233,7 @@ class Nav extends Component<NavProps, NavState> {
   ): React.ReactNode[] {
     const children: Record<
       string,
-      { id: string; section?: boolean; order: string }
+      { id: string; section?: boolean; order?: string }
     > = {}
     const { docs, sections } = this.props
 
@@ -252,8 +252,10 @@ class Nav extends Component<NavProps, NavState> {
 
     return Object.keys(children)
       .sort((a, b) => {
-        const idA = `${children[a].order}${a.toUpperCase()}`
-        const idB = `${children[b].order}${b.toUpperCase()}`
+        const orderA = children[a].order ? children[a].order : ''
+        const orderB = children[b].order ? children[b].order : ''
+        const idA = `${orderA}${a.toUpperCase()}`
+        const idB = `${orderB}${b.toUpperCase()}`
         if (idA < idB) {
           return -1
         }

@@ -58,7 +58,6 @@ class Hero extends Component<HeroProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    description: undefined,
     docs: null
   }
 

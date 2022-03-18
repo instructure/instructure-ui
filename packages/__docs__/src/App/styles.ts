@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import type { AppStyle, AppTheme } from './props'
+
 /**
  * ---
  * private: true
@@ -32,7 +34,7 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme, props, state) => {
+const generateStyle = (componentTheme: AppTheme): AppStyle => {
   return {
     app: {
       label: 'app',

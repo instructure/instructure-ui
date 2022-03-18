@@ -24,17 +24,21 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-
 import { Table } from '@instructure/ui-table'
-
 import { withStyle, jsx } from '@instructure/emotion'
-
 import generateStyle from './styles'
-
 import { compileMarkdown } from '../compileMarkdown'
-
 import type { PropertiesProps } from './props'
-import type { Prop } from '../Document/props'
+import type {
+  ElementsType,
+  ObjectSignatureType,
+  PropDescriptor
+} from '../../buildScripts/DataTypes'
+import {
+  SimpleType,
+  TSFunctionSignatureType,
+  TypeDescriptor
+} from '../../buildScripts/DataTypes'
 
 @withStyle(generateStyle, null)
 class Properties extends Component<PropertiesProps> {
@@ -51,7 +55,7 @@ class Properties extends Component<PropertiesProps> {
     this.props.makeStyles?.()
   }
 
-  isTsProp(prop: Prop) {
+  isTsProp(prop: PropDescriptor) {
     return this.props.hasTsProps && prop.tsType
   }
 
@@ -84,7 +88,6 @@ class Properties extends Component<PropertiesProps> {
       })
       .map((name, idx) => {
         const prop = props[name]
-
         return (
           <Table.Row key={idx}>
             <Table.Cell>
@@ -93,7 +96,7 @@ class Properties extends Component<PropertiesProps> {
             <Table.Cell>
               <code>
                 {this.isTsProp(prop)
-                  ? this.renderTSType(prop.tsType)
+                  ? this.renderTSType(prop.tsType!)
                   : // the fallback is needed for the components
                     // that have no @tsProps flag jet (not fully typed yet)
                     this.renderType(prop.type)}
@@ -106,8 +109,14 @@ class Properties extends Component<PropertiesProps> {
       })
   }
 
-  renderTSType = (tsType: Prop['tsType']) => {
-    const { name, elements, type, raw } = tsType
+  renderTSType = (tsType: TypeDescriptor<TSFunctionSignatureType>) => {
+    const elements = (tsType as ElementsType<TSFunctionSignatureType>).elements
+    const type = (
+      tsType as
+        | ObjectSignatureType<TSFunctionSignatureType>
+        | TSFunctionSignatureType
+    ).type
+    const raw = (tsType as SimpleType).raw
     let isEnum = true
     /*
     possible types:
@@ -118,8 +127,9 @@ class Properties extends Component<PropertiesProps> {
       - array
       - ReactReactNode
     */
-    // TODO: currently custom imported types are just showing the name of the can somehow link to these custom types
-    switch (name) {
+    // TODO: currently custom imported types are just showing the name
+    //  of the type. somehow link to these custom types
+    switch (tsType.name) {
       case 'union':
         ;(elements || []).forEach((element) => {
           if (element.name !== 'literal') {
@@ -143,23 +153,23 @@ class Properties extends Component<PropertiesProps> {
       case 'ReactReactNode':
         return 'ReactNode'
       default:
-        return name
+        return tsType.name
     }
   }
 
-  renderType(type: Prop['type']) {
+  renderType(type: PropDescriptor['type']) {
     const { name } = type || {}
     switch (name) {
       case 'arrayOf':
         return `${type?.value?.name}[]`
       case 'instanceOf':
-        return type.value
+        return type!.value
       default:
         return name
     }
   }
 
-  renderDefault(prop: Prop) {
+  renderDefault(prop: PropDescriptor) {
     const { styles } = this.props
 
     if (prop.required) {
@@ -177,7 +187,7 @@ class Properties extends Component<PropertiesProps> {
     }
   }
 
-  renderDescription(prop: Prop) {
+  renderDescription(prop: PropDescriptor) {
     const { description } = prop || {}
     const isTsProp = this.isTsProp(prop)
 
@@ -193,7 +203,7 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 
-  renderEnum(prop: Prop) {
+  renderEnum(prop: PropDescriptor) {
     const { styles } = this.props
     const { type } = prop
 
@@ -221,7 +231,7 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 
-  renderUnion(prop: Prop) {
+  renderUnion(prop: PropDescriptor) {
     const { styles } = this.props
     const { type } = prop
 
@@ -245,16 +255,16 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 
-  renderTsUnion(prop: Prop) {
+  renderTsUnion(prop: PropDescriptor) {
     const { styles } = this.props
     const { tsType } = prop
 
     if (!tsType || tsType.name !== 'union') {
       return
     }
-
-    if (!Array.isArray(tsType.elements)) {
-      return <span>{tsType.elements}</span>
+    const tsElems = tsType as ElementsType<TSFunctionSignatureType>
+    if (!Array.isArray(tsElems.elements)) {
+      return <span>{tsElems.elements}</span>
     }
 
     // react-docgen doesn't recognise functions if they are in parentheses,
@@ -284,7 +294,7 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 
-  renderTsSignature(prop: Prop) {
+  renderTsSignature(prop: PropDescriptor) {
     const { styles } = this.props
     const { tsType } = prop
 
@@ -308,7 +318,7 @@ class Properties extends Component<PropertiesProps> {
     )
   }
 
-  renderTsArrayType(prop: Prop) {
+  renderTsArrayType(prop: PropDescriptor) {
     const { styles } = this.props
     const { tsType } = prop
 

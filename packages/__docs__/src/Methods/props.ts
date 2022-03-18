@@ -23,10 +23,10 @@
  */
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
-import type { DocType } from '../Document/props'
+import type { DocDataType } from '../Document/props'
 
 type MethodsOwnProps = {
-  methods: DocType['methods']
+  methods: DocDataType['methods']
 }
 type PropKeys = keyof MethodsOwnProps
 

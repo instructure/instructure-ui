@@ -28,7 +28,7 @@ type NavOwnProps = {
   docs: Record<string, any>
   sections: Record<string, any>
   themes?: Record<string, any>
-  icons?: Record<string, any>
+  icons?: Record<string, any> | null
   selected?: string
 }
 type PropKeys = keyof NavOwnProps

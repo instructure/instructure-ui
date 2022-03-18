@@ -28,6 +28,7 @@ import GithubCorner from 'react-github-corner'
 import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
+import type { TabsProps } from '@instructure/ui-tabs'
 import { CodeEditor } from '@instructure/ui-code-editor'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -42,8 +43,9 @@ import { Returns } from '../Returns'
 import { Methods } from '../Methods'
 import { ComponentTheme } from '../ComponentTheme'
 import { Heading } from '../Heading'
-import { propTypes, allowedProps } from './props'
-import type { DocumentProps, DocType, SingleChildrenType } from './props'
+import { propTypes, allowedProps, DocDataType } from './props'
+import type { DocumentProps } from './props'
+
 @withStyle(generateStyle, generateComponentTheme)
 class Document extends Component<
   DocumentProps,
@@ -71,17 +73,19 @@ class Document extends Component<
     this.props.makeStyles?.()
   }
 
-  handleDetailsTabChange = (_event: any, { index }: { index: number }) => {
+  handleDetailsTabChange: TabsProps['onRequestTabChange'] = (
+    _event,
+    { index }
+  ) => {
     this.setState({
       selectedDetailsTabIndex: index
     })
   }
 
-  renderProps(doc: DocType) {
+  renderProps(doc: DocDataType) {
     const { id, props, description } = doc
     const hasTsProps =
       typeof description === 'string' && description.includes('@tsProps')
-
     return props ? (
       <View margin="x-large 0" display="block">
         <Heading level="h2" as="h3" id={`${id}Properties`} margin="0 0 small 0">
@@ -96,7 +100,7 @@ class Document extends Component<
     ) : null
   }
 
-  renderTheme(doc: DocType) {
+  renderTheme(doc: DocDataType) {
     const { themeVariables } = this.props
     const generateComponentTheme =
       doc?.componentInstance?.generateComponentTheme
@@ -119,7 +123,7 @@ class Document extends Component<
     ) : null
   }
 
-  renderDescription(doc: SingleChildrenType, description: string) {
+  renderDescription(doc: DocDataType, description: string) {
     const { id, title } = doc
     const filteredDescription = description.replace('@tsProps', '')
 
@@ -194,7 +198,7 @@ import { ${importName} } from '${esPath}'
     )
   }
 
-  renderParams(doc: DocType) {
+  renderParams(doc: DocDataType) {
     const { id, params } = doc
 
     return params ? (
@@ -207,7 +211,7 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderReturns(doc: DocType) {
+  renderReturns(doc: DocDataType) {
     const { id, returns } = doc
 
     return returns ? (
@@ -220,7 +224,7 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderMethods(doc: DocType) {
+  renderMethods(doc: DocDataType) {
     const { id, methods } = doc
 
     return methods && methods.length > 0 ? (
@@ -233,7 +237,7 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderDetails(doc: any) {
+  renderDetails(doc: DocDataType) {
     return this.hasDetails(doc) ? (
       <div>
         {this.renderParams(doc)}
@@ -245,7 +249,7 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  hasDetails(doc: DocType) {
+  hasDetails(doc: DocDataType) {
     return doc.params || doc.returns || doc.methods || doc.props
   }
 

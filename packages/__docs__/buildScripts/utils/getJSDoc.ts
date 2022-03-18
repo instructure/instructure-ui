@@ -24,14 +24,15 @@
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore This package does not have typings :(
-import jsdoc from 'jsdoc-api' // TODO use JSDOC directly
-import type { CodeDoc } from './parseDoc'
+import jsdoc from 'jsdoc-api'
+import { ParsedCodeData } from '../DataTypes'
 
-export function getJSDoc(source: string, error: (err: Error) => void) {
-  let doc: CodeDoc = {} as CodeDoc
+export function getJSDoc(source: Buffer, error: (err: Error) => void) {
+  let doc: ParsedCodeData = {}
   try {
     const sections = jsdoc
       .explainSync({
+        // note: Do not use cache:true here, its buggy
         configure: './jsdoc.config.json',
         source
       })
@@ -67,6 +68,5 @@ export function getJSDoc(source: string, error: (err: Error) => void) {
   } catch (err: any) {
     error(err)
   }
-
   return doc
 }

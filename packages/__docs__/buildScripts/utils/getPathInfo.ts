@@ -23,13 +23,13 @@
  */
 
 import path from 'path'
-import type { LibraryOptions } from '../build-docs'
+import type { LibraryOptions, PackagePathData } from '../DataTypes'
 
 export function getPathInfo(
   resourcePath: string,
   projectRoot: string,
   library: LibraryOptions
-) {
+): PackagePathData {
   return {
     relativePath: path.relative(projectRoot, resourcePath),
     extension: path.extname(resourcePath),

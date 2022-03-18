@@ -27,8 +27,13 @@ const DEBUG = process.env.DEBUG || ENV === 'development'
 const path = require('path')
 const baseConfig = require('@instructure/ui-webpack-config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const chokidar = require('chokidar')
 const { merge } = require('webpack-merge')
+const {
+  pathsToProcess,
+  pathsToIgnore,
+  processSingleFile
+} = require('./lib/build-docs')
 
 const outputPath = path.resolve(__dirname, '__build__')
 const resolveAliases = DEBUG ? { resolve: require('./resolve') } : {}
@@ -53,7 +58,17 @@ const config = merge(baseConfig, {
     static: {
       directory: outputPath
     },
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    // listen to changes do docs source files and rebuild the JSON if they change
+    onListening: function () {
+      chokidar
+        .watch(pathsToProcess, { ignored: pathsToIgnore, cwd: '../../' })
+        .on('change', (evt) => {
+          const projectRoot = path.resolve(__dirname, '../../')
+          const fullPath = path.join(projectRoot, evt)
+          processSingleFile(fullPath)
+        })
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -22,39 +22,11 @@
  * SOFTWARE.
  */
 
-import type { LibraryOptions } from '../build-docs'
-import { ProcessedFile } from '../processFile'
-import type { CodeMethod } from './parseDoc'
-
-type Section = {
-  docs: string[]
-  sections: string[]
-  level: number
-  title?: string
-}
-
-type ParsedDoc = {
-  sections: Record<string, Section>
-  parents: Record<string, { children: string[] }>
-  docs: Record<string, ProcessedFile>
-  descriptions: Record<string, string>
-}
+import type { LibraryOptions, ParsedDoc, ProcessedFile } from '../DataTypes'
 
 const CATEGORY_DELIMITER = '/'
 
-export function getClientProps(
-  docs: ProcessedFile[],
-  themes: any,
-  library: LibraryOptions
-) {
-  return {
-    ...parseDocs(docs, library),
-    themes: parseThemes(themes),
-    library
-  }
-}
-
-function parseDocs(docs: ProcessedFile[], library: LibraryOptions) {
+export function getClientProps(docs: ProcessedFile[], library: LibraryOptions) {
   const parsed: ParsedDoc = {
     sections: {
       __uncategorized: {
@@ -64,10 +36,10 @@ function parseDocs(docs: ProcessedFile[], library: LibraryOptions) {
       }
     },
     parents: {},
-    docs: {},
-    descriptions: {}
+    descriptions: {},
+    docs: {}
   }
-
+  const docIDs: Record<string, string> = {}
   docs
     .filter((doc) => !doc.private)
     .forEach((doc) => {
@@ -75,15 +47,25 @@ function parseDocs(docs: ProcessedFile[], library: LibraryOptions) {
       if (doc.undocumented) {
         return
       }
-
-      warning(!parsed.docs[id], `[${id}] is a duplicate document ID.`)
-
-      parsed.docs[id] = {
-        ...doc,
-        methods: doc.methods
-          ? doc.methods.filter((method: CodeMethod) => method.docblock !== null)
-          : undefined
+      // warn if the ID already exists with a different path
+      if (docIDs[id] && docIDs[id] !== doc.srcPath) {
+        warning(
+          '"' +
+            id +
+            '" is a duplicate document ID, ' +
+            doc.srcPath +
+            ' has the same ID as ' +
+            docIDs[id]
+        )
       }
+      parsed.docs[id] = {
+        title: doc.title,
+        order: doc.order,
+        category: doc.category,
+        isWIP: doc.isWIP,
+        tags: doc.tags
+      }
+      docIDs[id] = doc.srcPath
       if (describes) {
         parsed.descriptions[describes] = doc.description
       }
@@ -133,20 +115,8 @@ function parseDocs(docs: ProcessedFile[], library: LibraryOptions) {
   return parsed
 }
 
-function warning(condition: boolean, message: string, ...args: any[]) {
-  if (
-    !condition &&
-    process.env.NODE_ENV !== 'production' &&
-    typeof console !== 'undefined'
-  ) {
+function warning(message: string, ...args: any[]) {
+  if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
     console.warn(`Warning: ${message}`, ...args)
   }
-}
-
-function parseThemes(themes: any) {
-  const parsed: any = {}
-  themes.forEach((theme: any) => {
-    parsed[theme.resource.key] = theme
-  })
-  return parsed
 }

@@ -23,14 +23,10 @@
  */
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
+import { JSDocFunctionReturns } from '../../buildScripts/DataTypes'
 
 type ReturnsOwnProps = {
-  types: {
-    type: {
-      names: string[]
-    }
-    description: string
-  }[]
+  types: JSDocFunctionReturns[]
 }
 
 type PropKeys = keyof ReturnsOwnProps

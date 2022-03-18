@@ -23,11 +23,12 @@
  */
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
-import { ReactChildren } from 'react'
+import { ReactNode } from 'react'
+
 type SectionOwnProps = {
   id?: string
   heading?: string
-  children?: ReactChildren
+  children?: ReactNode
 }
 
 type PropKeys = keyof SectionOwnProps

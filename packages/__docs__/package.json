@@ -11,7 +11,7 @@
   "homepage": "https://instructure.design",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "prestart": "yarn build:scripts:ts && node lib/build-docs.js",
+    "prestart": "yarn build:scripts:ts && node -e 'require(\"./lib/build-docs.js\").buildDocs()'",
     "start": "ui-build --bundle && ui-scripts --server -p 8001",
     "start:watch": "yarn prestart && ui-build --bundle --watch -p 8080",
     "bundle": "yarn prestart && ui-build --bundle",
@@ -134,6 +134,8 @@
     "raw-loader": "^4",
     "react-docgen": "^6.0.0-alpha.0",
     "svg-inline-loader": "^0.8.0",
-    "webpack-bundle-analyzer": "^4"
+    "webpack-bundle-analyzer": "^4",
+    "chokidar": "^3",
+    "@types/marked": "^4"
   }
 }
