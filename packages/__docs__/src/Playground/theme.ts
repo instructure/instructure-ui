@@ -29,9 +29,7 @@ import { PlaygroundTheme } from './props'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): PlaygroundTheme => {
-  const { borders, typography, key: themeName } = theme
-
-  const themeSpecificStyles: Record<string, any> = {}
+  const { borders, typography } = theme
 
   const componentVariables = {
     editorBorderRadius: borders?.radiusMedium,
@@ -39,8 +37,7 @@ const generateComponentTheme = (theme: Theme): PlaygroundTheme => {
   }
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyles[themeName]
+    ...componentVariables
   }
 }
 

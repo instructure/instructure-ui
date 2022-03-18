@@ -23,18 +23,18 @@
  */
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
-import type {DocDataType} from '../Document/props'
+import type { DocDataType } from '../Document/props'
 
 type ParamsOwnProp = {
   params: DocDataType['params']
-  layout?: string
+  layout?: 'small' | 'medium' | 'large' | 'x-large'
 }
 type PropKeys = keyof ParamsOwnProp
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 type ParamsProps = ParamsOwnProp
 const propTypes: PropValidators<PropKeys> = {
   params: PropTypes.array.isRequired,
-  layout: PropTypes.string
+  layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large'])
 }
 const allowedProps: AllowedPropKeys = ['layout', 'params']
 export type { ParamsProps }

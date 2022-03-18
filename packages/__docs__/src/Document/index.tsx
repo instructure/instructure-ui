@@ -30,12 +30,9 @@ import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
 import { CodeEditor } from '@instructure/ui-code-editor'
-
 import { withStyle, jsx } from '@instructure/emotion'
-
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
 import { Description } from '../Description'
 import { Properties } from '../Properties'
 import { Params } from '../Params'
