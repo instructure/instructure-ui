@@ -37,21 +37,6 @@ import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocato
 import { Drilldown } from './index'
 
 export const customMethods = {
-  findPopoverContentWrapper: (...args: any[]) => {
-    return PopoverLocator.findContent(...args)
-  },
-  findPopoverContent: async (...args: any[]) => {
-    const content = await PopoverLocator.findContent(...args)
-
-    const target = content.getAttribute('data-position-content')
-    return content.find(`[id=${target}]`)
-  },
-  findPopoverTrigger: async (...args: any[]) => {
-    const triggerWrapper = await PopoverLocator.find(...args)
-    const target = triggerWrapper.getAttribute('data-position')
-
-    return triggerWrapper.find(`[data-position-target=${target}]`)
-  },
   // return the wrapper Option.Items
   findAllOptions: async (...args: any[]) => {
     return await findAll('[role^=menuitem]', ...args)
@@ -86,6 +71,21 @@ export const customMethods = {
   },
   findDescription: async (...args: any[]) => {
     return await find('[class$=__description]', ...args)
+  },
+  findPopoverContentWrapper: (...args: any[]) => {
+    return PopoverLocator.findContent(...args)
+  },
+  findPopoverContent: async (...args: any[]) => {
+    const content = await PopoverLocator.findContent(...args)
+
+    const target = content.getAttribute('data-position-content')
+    return content.find(`[id=${target}]`)
+  },
+  findPopoverTrigger: async (...args: any[]) => {
+    const triggerWrapper = await PopoverLocator.find(...args)
+    const target = triggerWrapper.getAttribute('data-position')
+
+    return triggerWrapper.find(`[data-position-target=${target}]`)
   }
 }
 

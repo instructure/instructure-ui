@@ -89,9 +89,11 @@ import {
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import { DrilldownOption } from './DrilldownOption'
 import { DrilldownSeparator } from './DrilldownSeparator'
+import { DrilldownOption } from './DrilldownOption'
+import type { DrilldownOptionValue } from './DrilldownOption/props'
 import { DrilldownGroup } from './DrilldownGroup'
+import type { DrilldownGroupProps, GroupChildren } from './DrilldownGroup/props'
 import { DrilldownPage } from './DrilldownPage'
 import type { DrilldownPageProps, PageChildren } from './DrilldownPage/props'
 
@@ -100,7 +102,6 @@ import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
 
-import type { DrilldownOptionValue } from './DrilldownOption/props'
 import type {
   DrilldownProps,
   DrilldownStyleProps,
@@ -110,7 +111,6 @@ import type {
   GroupChild,
   SeparatorChild
 } from './props'
-import { DrilldownGroupProps } from './DrilldownGroup/props'
 
 // Additional data we need to track on the Options,
 // but shouldn't be settable via props
@@ -384,6 +384,15 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     return undefined
   }
 
+  getChildrenArray<C extends PageChildren | GroupChildren = PageChildren>(
+    children?: C | C[]
+  ) {
+    if (!children) {
+      return []
+    }
+    return Array.isArray(children) ? children : ([children] as C[])
+  }
+
   getPageById(id?: string): MappedPage | undefined {
     return this.pageMap && id ? this.pageMap[id] : undefined
   }
@@ -395,13 +404,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   setDefaultSelected() {
     this.pages.forEach((page) => {
       const { children } = page.props
-      let childrenArray: PageChildren[] = []
 
-      if (children) {
-        childrenArray = Array.isArray(children) ? children : [children]
-      }
-
-      childrenArray.forEach((child) => {
+      this.getChildrenArray(children).forEach((child) => {
         if (matchComponentTypes<GroupChild>(child, [DrilldownGroup])) {
           const {
             id: groupId,
@@ -414,9 +418,20 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             return
           }
 
+          if (selectableType === 'single' && groupDefaultSelected.length > 1) {
+            error(
+              false,
+              `Radio type selectable groups can have only one item selected! Group with id "${groupId}" cannot select multiple items: [${groupDefaultSelected.join(
+                ', '
+              )}]!`
+            )
+
+            return
+          }
+
           this._selectedGroupOptionsMap[groupId] = new Map()
 
-          groupChildren?.forEach((groupChild) => {
+          this.getChildrenArray(groupChildren)?.forEach((groupChild) => {
             if (
               matchComponentTypes<OptionChild>(groupChild, [DrilldownOption])
             ) {
@@ -425,6 +440,11 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
                 value: optionValue,
                 defaultSelected: optionDefaultSelected
               } = groupChild.props
+
+              // if explicitly set to false, it should override the group's
+              if (optionDefaultSelected === false) {
+                return
+              }
 
               const isGroupDefaultSelected =
                 typeof optionValue !== 'undefined' &&
@@ -1226,18 +1246,22 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         // we pass the themeOverride to Options
         themeOverride={themeOverride}
       >
-        {children.map((child) => {
+        {this.getChildrenArray(children).map((child) => {
           if (
             matchComponentTypes<SeparatorChild>(child, [DrilldownSeparator])
           ) {
             return this.renderSeparator(child)
-          } else {
+          } else if (
+            matchComponentTypes<OptionChild>(child, [DrilldownOption])
+          ) {
             return this.renderOption(
               child,
               getOptionProps,
               getDisabledOptionProps,
               group.props
             )
+          } else {
+            return null
           }
         })}
       </Options>

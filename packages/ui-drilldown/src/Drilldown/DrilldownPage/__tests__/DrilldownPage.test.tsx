@@ -28,9 +28,8 @@ import { expect, mount, find, stub, wait } from '@instructure/ui-test-utils'
 import { Drilldown } from '../../index'
 import { DrilldownLocator } from '../../DrilldownLocator'
 
-// TODO: write tests
-describe('<Drilldown />', async () => {
-  it("shouldn't render non-drilldown children", async () => {
+describe('<Drilldown.Page />', async () => {
+  it("shouldn't render non-DrilldownPage children", async () => {
     stub(console, 'error')
     await mount(
       <Drilldown rootPageId="page0">
@@ -90,10 +89,10 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const allItems = await drilldown.findAllItems()
+      const allOptions = await drilldown.findAllOptions()
 
       // it should only contain the 1 item but not the header
-      expect(allItems.length).to.equal(1)
+      expect(allOptions.length).to.equal(1)
     })
   })
 
@@ -148,10 +147,10 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const allItems = await drilldown.findAllItems()
+      const allOptions = await drilldown.findAllOptions()
 
       // it should only contain the 1 item but not the header
-      expect(allItems.length).to.equal(1)
+      expect(allOptions.length).to.equal(1)
     })
 
     it('should fire header action callback', async () => {
@@ -433,10 +432,10 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const allItems = await drilldown.findAllItems()
+      const allOptions = await drilldown.findAllOptions()
 
-      allItems.forEach((option: any) => {
-        expect(option.find('[aria-disabled="true"]')).to.exist()
+      allOptions.forEach((option) => {
+        expect(option.getAttribute('aria-disabled')).to.equal('true')
       })
     })
 
@@ -463,12 +462,10 @@ describe('<Drilldown />', async () => {
 
       await subPageOption.click()
 
-      const allItems = await drilldown.findAllItems()
+      const allOptions = await drilldown.findAllOptions()
 
-      allItems.forEach((item: any) => {
-        const option = item.getDOMNode().childNodes[0] as HTMLElement
-
-        if (option.id.includes('DrilldownHeader-Back')) {
+      allOptions.forEach((option) => {
+        if (option.getAttribute('id')!.includes('DrilldownHeader-Back')) {
           expect(option.getAttribute('aria-disabled')).to.equal(null)
         } else {
           expect(option.getAttribute('aria-disabled')).to.equal('true')
