@@ -288,7 +288,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                       />
                     </Tooltip>
                   </Flex.Item>
-                  {library.codepen && (
+                  {
                     <Flex.Item>
                       <CodeSandboxButton
                         code={code}
@@ -298,7 +298,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                         options={library.codepen}
                       />
                     </Flex.Item>
-                  )}
+                  }
                 </Flex>
               </Flex.Item>
 

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import semver from 'semver'
 import globby from 'globby'
 import path from 'path'
 import { getClientProps } from './utils/getClientProps'
@@ -45,32 +44,13 @@ const projectRoot = path.resolve(__dirname, '../../../')
 // there need to be required otherwise TSC will mess up the directory structure
 // in the build directory
 const rootPackage = require('../../../package.json') // root package.json
-const versionsData = require('../versions.json')
-const { major: latestMajorVersion } = semver.coerce(versionsData.latestVersion)!
-const { major: rootPackageMajorVersion } = semver.coerce(rootPackage.version)!
-const isOnLatestMajorVersion = latestMajorVersion === rootPackageMajorVersion
-const resourcePageURL = isOnLatestMajorVersion
-  ? rootPackage.homepage
-  : `${rootPackage.homepage}/v${rootPackageMajorVersion}`
 const library: LibraryOptions = {
   name: rootPackage.name,
   version: rootPackage.version,
   repository: rootPackage.repository.url,
   author: rootPackage.author,
   packages: 'packages',
-  scope: '@instructure',
-  codepen: {
-    // codepen button form data (https://blog.codepen.io/documentation/api/prefill/)
-    // this is usually whatever webpack entries you've defined
-    js_external: [
-      // should match entries in webpack.config.js
-      `${resourcePageURL}/vendors~common~globals~main.js`,
-      `${resourcePageURL}/vendors~globals~main.js`,
-      `${resourcePageURL}/runtime~common.js`,
-      `${resourcePageURL}/common.js`,
-      `${resourcePageURL}/globals.js`
-    ].join(';')
-  }
+  scope: '@instructure'
 }
 
 const pathsToProcess = [

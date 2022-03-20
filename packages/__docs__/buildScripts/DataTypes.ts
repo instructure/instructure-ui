@@ -222,9 +222,6 @@ type LibraryOptions = {
   author: string
   packages: 'packages'
   scope: '@instructure'
-  codepen: {
-    js_external: string
-  }
 }
 
 type Section = {
