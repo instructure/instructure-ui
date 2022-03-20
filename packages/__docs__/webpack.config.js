@@ -41,9 +41,7 @@ const resolveAliases = DEBUG ? { resolve: require('./resolve') } : {}
 const config = merge(baseConfig, {
   entry: {
     // main entry point
-    main: './src/index.js',
-    // Note: these entries have to keep these names so that old codepens still work
-    common: ['react', 'react-dom']
+    main: './src/index.js'
   },
   module: {
     // suppress "the request of a dependency is an expression" warnings
