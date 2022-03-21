@@ -28,8 +28,7 @@ const LibraryPropType = PropTypes.shape({
   name: PropTypes.string.isRequired,
   version: PropTypes.string,
   repository: PropTypes.string,
-  author: PropTypes.string,
-  codepen: PropTypes.object
+  author: PropTypes.string
 })
 
 const DocPropType = PropTypes.shape({

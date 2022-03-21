@@ -295,7 +295,6 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                         title={`${this.props.title} Example`}
                         language={this.props.language}
                         render={this.props.render}
-                        options={library.codepen}
                       />
                     </Flex.Item>
                   }
