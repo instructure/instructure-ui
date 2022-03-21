@@ -56,6 +56,10 @@ type TooltipRenderChildren = (
 
 type TooltipOwnProps = {
   /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef?: (element: Element | null) => void
+  /**
    * A ReactNode or a function that returns a ReactNode with the following params:
    *
    * @param {Boolean} focused - Is the Tooltip trigger focused?
@@ -177,7 +181,8 @@ type TooltipProps = PropsPassableToPopover &
   TooltipOwnProps &
   WithStyleProps<TooltipTheme, TooltipStyle> &
   // the OtherHTMLAttributes might be passed to the trigger or Popover
-  OtherHTMLAttributes<TooltipOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<TooltipOwnProps> &
+  WithDeterministicIdProps
 
 type TooltipStyle = ComponentStyle<'tooltip'>
 
@@ -186,6 +191,7 @@ type TooltipState = {
 }
 
 const propTypes: PropValidators<PropKeys> = {
+  elementRef: PropTypes.func,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   isShowingContent: PropTypes.bool,

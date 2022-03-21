@@ -197,6 +197,14 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
 
       webpackMiddleware: { stats: 'errors-only' },
 
+      client: {
+        mocha: {
+          // change the default test timeout to 5 secs. This must be higher
+          // than our async test timeouts (currently 1.9 secs) because if this
+          // happens first we do not get any sensible error message.
+          timeout: 5000
+        }
+      },
       // TODO: pull breakpoints from theme
       viewport: {
         breakpoints: [

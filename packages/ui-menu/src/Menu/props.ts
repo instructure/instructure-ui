@@ -55,7 +55,8 @@ type MenuOwnProps = {
    */
   children?: React.ReactNode // TODO: oneOf(['MenuItem', 'MenuItemGroup', 'MenuItemSeparator', 'Menu'])
   /**
-   * Description of the `<Menu />`
+   * Description of the `<Menu />`. The component uses it to add its value to
+   * the `aria-label` attribute.
    */
   label?: string
   /**

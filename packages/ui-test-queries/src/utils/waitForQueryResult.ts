@@ -23,7 +23,7 @@
  */
 
 import { elementToString } from './elementToString'
-import debounce from '@instructure/debounce'
+import { debounce } from '@instructure/debounce'
 import { QueriesHelpersEventsType } from './bindElementToUtilities'
 
 export interface QueryResult {
@@ -122,7 +122,6 @@ export function waitForQueryResult(
       clearTimeout(timer)
       setImmediate(() => observer.disconnect())
       debouncedQuery.cancel()
-
       if (e) {
         reject(e)
       } else {
@@ -144,8 +143,8 @@ export function waitForQueryResult(
           expectEmpty
             ? `Expected to find nothing but found ${lastResult.results}`
             : '',
-          `with selector: "${lastResult.selector}"`,
-          `element: ${elementToString(element, 7000, { highlight: false })}`
+          `Tried to find DOM element with selector: "${lastResult.selector}"`,
+          `in: ${elementToString(element, 7000, { highlight: false })}`
         ]
           .filter(Boolean)
           .join('\n')

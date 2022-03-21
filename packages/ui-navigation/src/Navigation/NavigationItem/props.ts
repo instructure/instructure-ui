@@ -32,6 +32,7 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type NavigationItemOwnProps = {
+  elementRef?: (el: Element | null) => void
   icon: React.ReactNode
   label: React.ReactNode
   as?: AsElementType
@@ -52,6 +53,10 @@ type NavigationItemProps = NavigationItemOwnProps &
 type NavigationItemStyle = ComponentStyle<'navigationItem' | 'icon' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
+  /**
+   * The reference to the underlying HTML element
+   */
+  elementRef: PropTypes.func,
   /**
    * The visual to display (ex. an Image, Logo, Avatar, or Icon)
    */
