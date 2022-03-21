@@ -671,6 +671,14 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       return undefined
     }
 
+    if (typeof newPageId !== 'string') {
+      warn(
+        false,
+        `Cannot go to page because parameter newPageId has to be string (valid page id). Current newPageId is "${typeof newPageId}".`
+      )
+      return undefined
+    }
+
     if (!this.pageMap?.[newPageId]) {
       warn(
         false,
@@ -705,7 +713,9 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     if (!this.previousPage) {
       warn(
         false,
-        `There is no previous page to go to. The current page history is: ${this._pageHistory}.`
+        `There is no previous page to go to. The current page history is: [${this._pageHistory.join(
+          ', '
+        )}].`
       )
       return undefined
     }
@@ -786,7 +796,12 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   ) => {
     const selectedOption = this.getPageChildById(id)
 
-    if (!id || !selectedOption || selectedOption.props.disabled) {
+    if (
+      !id ||
+      !selectedOption ||
+      selectedOption.props.disabled ||
+      (event.target as HTMLElement).getAttribute('aria-disabled')
+    ) {
       event.preventDefault()
       event.stopPropagation()
       return
@@ -996,6 +1011,14 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       themeOverride
     } = option.props
 
+    if (!id) {
+      warn(
+        false,
+        `Drilldown.Option without id won't be rendered. It is needed to internally track the options.`
+      )
+      return null
+    }
+
     if (this.getPageChildById(id)) {
       warn(
         false,
@@ -1060,7 +1083,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     // display option as disabled
     if (isOptionDisabled) {
       optionProps.variant = 'disabled'
-      optionProps['aria-disabled'] = 'true'
       optionProps = { ...optionProps, ...getDisabledOptionProps() }
     }
 
@@ -1069,13 +1091,16 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       this._activeOptionsMap[id] = { ...option, ...optionData }
     }
 
+    const customRole =
+      role !== DrilldownOption.defaultProps.role ? role : undefined
+
     // BEFORE/AFTER elements:
     // we set a few manually on Options.Item,
     // the rest are passed directly
     if (subPageId) {
       optionProps.renderAfterLabel = <IconArrowOpenEndSolid />
       optionProps['aria-haspopup'] = true
-      optionProps.role = 'button'
+      optionProps.role = customRole || 'button'
       warn(
         !renderAfterLabel,
         `The prop "renderAfterLabel" is reserved on item with id: "${id}". When it has "subPageId" provided, a navigation arrow will render after the label.`
@@ -1102,10 +1127,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
       // setting aria roles and attributes for selectable group items
       if (groupProps.selectableType === 'single') {
-        optionProps.role = 'menuitemradio'
+        optionProps.role = customRole || 'menuitemradio'
       }
       if (groupProps.selectableType === 'multiple') {
-        optionProps.role = 'menuitemcheckbox'
+        optionProps.role = customRole || 'menuitemcheckbox'
       }
     }
 
@@ -1148,15 +1173,30 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       return null
     }
 
+    const renderLabelProps = {
+      variant: optionProps.variant,
+      vAlign: afterLabelContentVAlign,
+      as,
+      role: optionProps.role,
+      isSelected
+    }
+
+    // we need to bind our own option props the render functions
+    if (typeof optionProps.renderBeforeLabel === 'function') {
+      optionProps.renderBeforeLabel = optionProps.renderBeforeLabel.bind(
+        null,
+        renderLabelProps
+      )
+    }
+    if (typeof optionProps.renderAfterLabel === 'function') {
+      optionProps.renderAfterLabel = optionProps.renderAfterLabel.bind(
+        null,
+        renderLabelProps
+      )
+    }
+
     const labelInfo =
-      renderLabelInfo &&
-      callRenderProp(renderLabelInfo, {
-        variant: optionProps.variant,
-        vAlign: afterLabelContentVAlign,
-        as,
-        role,
-        isSelected
-      })
+      renderLabelInfo && callRenderProp(renderLabelInfo, renderLabelProps)
 
     const vAlignMap = {
       start: 'flex-start',
@@ -1455,7 +1495,11 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           },
           'aria-haspopup': this.props.role,
           id: this._triggerId,
-          disabled: (trigger as ReactElement).props.disabled || disabled
+          disabled: !!((trigger as ReactElement).props.disabled || disabled),
+          'aria-disabled':
+            (trigger as ReactElement).props.disabled || disabled
+              ? 'true'
+              : undefined
         })}
       >
         {this.renderPage()}
