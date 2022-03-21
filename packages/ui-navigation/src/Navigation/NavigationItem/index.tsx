@@ -59,6 +59,14 @@ class NavigationItem extends Component<NavigationItemProps> {
 
   ref: Element | null = null
 
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+    this.ref = el
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
   componentDidMount() {
     this.props.makeStyles?.({ minimized: this.props.minimized })
   }
@@ -67,7 +75,7 @@ class NavigationItem extends Component<NavigationItemProps> {
     this.props.makeStyles?.({ minimized: this.props.minimized })
   }
 
-  renderLink() {
+  renderLink(addRef: boolean) {
     const ElementType = getElementType(NavigationItem, this.props)
 
     const { href, onClick, icon, label } = this.props
@@ -77,15 +85,13 @@ class NavigationItem extends Component<NavigationItemProps> {
     return (
       //@ts-expect-error TODO: INSTUI-3245
       <ElementType
+        // @ts-expect-error TODO: fix TS2590: Expression produces a union type that is too complex to represent.
         {...props}
         href={href}
         onClick={onClick}
+        ref={addRef ? this.handleRef : undefined}
         css={this.props.styles?.navigationItem}
         aria-label={this.props.minimized ? label : undefined}
-        // @ts-expect-error TODO: fix TS2590: Expression produces a union type that is too complex to represent.
-        ref={(element) => {
-          this.ref = element
-        }}
       >
         <div css={this.props.styles?.icon} aria-hidden="true">
           {icon}
@@ -99,11 +105,10 @@ class NavigationItem extends Component<NavigationItemProps> {
 
   render() {
     const { minimized, label } = this.props
-
-    const link = this.renderLink()
-
-    return minimized && hasVisibleChildren(label) ? (
-      <Tooltip renderTip={label} placement="end">
+    const hasTooltip: boolean = minimized! && hasVisibleChildren(label)
+    const link = this.renderLink(!hasTooltip)
+    return hasTooltip ? (
+      <Tooltip renderTip={label} placement="end" elementRef={this.handleRef}>
         {link}
       </Tooltip>
     ) : (

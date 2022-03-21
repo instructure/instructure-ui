@@ -70,9 +70,7 @@ class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
-
     this.ref = el
-
     if (typeof elementRef === 'function') {
       elementRef(el)
     }
@@ -115,6 +113,7 @@ class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
           this.setState({ isShowingTooltip: false })
         }}
         mountNode={mountNode}
+        elementRef={this.handleRef}
       >
         <IconButton
           {...passthroughProps(props)}
@@ -123,7 +122,6 @@ class ToggleButton extends Component<ToggleButtonProps, ToggleButtonState> {
           withBorder={false}
           color={color}
           size={size}
-          elementRef={this.handleRef}
           as={as}
           onClick={onClick}
           interaction={interaction}

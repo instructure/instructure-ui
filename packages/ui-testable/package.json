@@ -28,7 +28,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/ui-decorator": "8.22.0"
+    "@instructure/ui-decorator": "8.22.0",
+    "@instructure/ui-dom-utils": "8.22.0"
   },
   "peerDependencies": {
     "react": ">=16.8 <=17",

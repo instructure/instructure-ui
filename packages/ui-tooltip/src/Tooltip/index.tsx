@@ -74,6 +74,9 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
 
   handleRef = (el: Element | null) => {
     this.ref = el
+    if (typeof this.props.elementRef === 'function') {
+      this.props.elementRef(el)
+    }
   }
 
   constructor(props: TooltipProps) {

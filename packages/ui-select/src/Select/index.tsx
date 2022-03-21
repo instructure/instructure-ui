@@ -125,7 +125,8 @@ class Select extends Component<SelectProps> {
   state = {
     hasInputRef: false
   }
-  ref: HTMLInputElement | null = null
+  ref: HTMLSpanElement | null = null
+  inputRef: HTMLInputElement | null = null
   private _defaultId = this.props.deterministicId!()
   private _inputContainer: HTMLSpanElement | null = null
   private _listView: Element | null = null
@@ -142,8 +143,7 @@ class Select extends Component<SelectProps> {
     console.warn(
       '_input property is deprecated and will be removed in v9, please use ref instead'
     )
-
-    return this.ref
+    return this.inputRef
   }
 
   get childrenArray() {
@@ -155,7 +155,7 @@ class Select extends Component<SelectProps> {
   }
 
   get focused() {
-    return this.ref ? isActiveElement(this.ref) : false
+    return this.inputRef ? isActiveElement(this.inputRef) : false
   }
 
   get id() {
@@ -227,8 +227,7 @@ class Select extends Component<SelectProps> {
     if (!this.state.hasInputRef) {
       this.setState({ hasInputRef: true })
     }
-
-    this.ref = node
+    this.inputRef = node
     this.props.inputRef?.(node)
   }
 
@@ -646,7 +645,10 @@ class Select extends Component<SelectProps> {
           getDisabledOptionProps,
           getDescriptionProps
         }) => (
-          <span {...getRootProps({ css: styles?.select })}>
+          <span
+            {...getRootProps({ css: styles?.select })}
+            ref={(el) => (this.ref = el)}
+          >
             {this.renderInput({ getInputProps, getTriggerProps })}
             <span {...getDescriptionProps()} css={styles?.assistiveText}>
               {assistiveText}

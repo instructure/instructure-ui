@@ -110,6 +110,10 @@ class Menu extends Component<MenuProps> {
     if (typeof menuRef === 'function') {
       menuRef(el)
     }
+    // If there is no trigger `<ul>` is the ref, otherwise the trigger
+    if (!this.props.trigger) {
+      this.ref = el
+    }
   }
 
   constructor(props: MenuProps) {
@@ -492,11 +496,11 @@ class Menu extends Component<MenuProps> {
           if (typeof popoverRef === 'function') {
             popoverRef(el)
           }
+          this.ref = el ? el.ref : null
         }}
         renderTrigger={safeCloneElement(trigger as ReactElement, {
           ref: (el: (React.ReactInstance & { ref?: Element }) | null) => {
             this._trigger = el
-            this.ref = el?.ref || (el as Element)
           },
           'aria-haspopup': true,
           id: this._labelId,

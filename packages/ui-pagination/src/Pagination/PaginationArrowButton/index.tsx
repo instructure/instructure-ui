@@ -91,12 +91,9 @@ class PaginationArrowButton extends Component<PaginationNavigationProps> {
 
     return (
       <Tooltip
+        elementRef={this.handleRef}
         on={['hover', 'focus']}
-        renderTip={
-          <PresentationContent elementRef={this.handleRef}>
-            {label}
-          </PresentationContent>
-        }
+        renderTip={<PresentationContent>{label}</PresentationContent>}
       >
         <IconButton
           {...props}

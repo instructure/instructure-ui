@@ -634,13 +634,9 @@ describe('<Menu />', async () => {
           </Menu>
         </Menu>
       )
-      /* eslint-enable jsx-a11y/mouse-events-have-key-events */
-
       const menu = await MenuLocator.find(':label(Parent)')
       const trigger = await menu.findItem(':label(Flyout)')
-
       await trigger.mouseOver()
-
       expect(onMouseOver).to.have.been.calledOnce()
     })
   })

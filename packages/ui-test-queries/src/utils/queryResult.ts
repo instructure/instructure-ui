@@ -36,10 +36,7 @@ import { QueryFunction } from './queries'
 async function _getQueryResult(
   element: Element,
   queryFn: () => { results: Element[]; selector: string },
-  options: SelectorOptions = {
-    expectEmpty: false,
-    timeout: 1900
-  }
+  options: SelectorOptions
 ) {
   const { expectEmpty, timeout, customMethods } = options
 

@@ -23,11 +23,13 @@
  */
 
 import { ComponentClass, ComponentState } from 'react'
-import { findDOMNode } from 'react-dom'
 
 import { decorator } from '@instructure/ui-decorator'
+import { findDOMNode } from '@instructure/ui-dom-utils'
+import findDOMNodeReact from 'react-dom'
 
-// TODO: Components that render as non-native Portals have a DOMNode property. (Portal, ReactPortal, SubtreePortal, DrawerTray, Modal, Overlay, Tray). Make this a common interface that all of them implements.
+// TODO: Components that render as non-native Portals have a DOMNode property.
+//  (Portal, DrawerTray, Modal, Overlay, Tray). Make this a common interface that all of them implements.
 interface ComponentWithDOMNode {
   DOMNode?: HTMLSpanElement | null
 }
@@ -83,32 +85,38 @@ const testable =
           }
           appendLocatorAttribute() {
             this._locatorTimeout = setTimeout(() => {
-              let node: HTMLSpanElement | Element | Text | null = null
+              let node: Element | undefined = undefined
               if (this._testableUnmounted) {
                 return
               }
               try {
                 // Use this.DOMNode for components that render as non-native Portals...
+                //node = (this as ComponentWithDOMNode).DOMNode || findDOMNode(this) as Element
                 node =
-                  (this as ComponentWithDOMNode).DOMNode || findDOMNode(this)
+                  (this as ComponentWithDOMNode).DOMNode ||
+                  (findDOMNode(this) as Element)
+                if (findDOMNode(this) != findDOMNodeReact.findDOMNode(this)) {
+                  // eslint-disable-next-line no-console
+                  console.log(
+                    'BUGBUGBUG',
+                    selector,
+                    findDOMNode(this),
+                    findDOMNodeReact.findDOMNode(this)
+                  )
+                }
               } catch (e: any) {
                 console.warn(
                   `[ui-testable] Could not append locator attribute: ${e}`
                 )
               }
               if (node) {
-                const attribute = (node as Element).getAttribute(
-                  locator.attribute
-                )
+                const attribute = node.getAttribute(locator.attribute)
                 const values =
                   typeof attribute === 'string' ? attribute.split(/\s+/) : []
                 if (!values.includes(locator.value)) {
                   values.push(locator.value)
                 }
-                ;(node as Element).setAttribute(
-                  locator.attribute,
-                  values.join(' ')
-                )
+                node.setAttribute(locator.attribute, values.join(' '))
               }
             })
           }
