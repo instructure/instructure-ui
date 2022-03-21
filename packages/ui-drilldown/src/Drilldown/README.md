@@ -487,9 +487,16 @@ class VideoSettingsExample extends React.Component {
           </Drilldown.Option>
           <Drilldown.Option
             id="comments"
+            themeOverride={{ padding: '0.25rem 0.75rem' }}
+            afterLabelContentVAlign="center"
             onOptionClick={() => {
               this.setState((state) => ({ isCommentsOn: !state.isCommentsOn }))
             }}
+            role="checkbox"
+            aria-checked={this.state.isCommentsOn ? 'true' : 'false'}
+            // prevents reading the label of the checkbox too (duplicated)
+            aria-describedby={['']}
+
             renderLabelInfo={
               <Checkbox
                 label={<ScreenReaderContent>Comments</ScreenReaderContent>}
@@ -840,9 +847,6 @@ const pagesData = [
   {
     id: 'page1',
     renderBackButtonLabel: (prevPageTitle) => `Back to ${prevPageTitle}`,
-    renderTitle: (previousOptionId) => {
-      return previousOptionId
-    },
     options: Array(2)
       .fill(0)
       .map((_item, idx) => ({
@@ -895,20 +899,6 @@ example: true
       id="item2"
       subPageId="page1"
       renderLabelInfo="After"
-    >
-      Asd2
-    </Drilldown.Option>
-    <Drilldown.Option
-      id="item3"
-      themeOverride={{ padding: '0.25rem 0.75rem' }}
-      afterLabelContentVAlign="center"
-      renderLabelInfo={<Checkbox
-        label={<ScreenReaderContent>Label</ScreenReaderContent>}
-        variant='toggle'
-        defaultChecked
-        labelPlacement="start"
-        tabIndex={-1}
-      />}
     >
       Asd2
     </Drilldown.Option>
