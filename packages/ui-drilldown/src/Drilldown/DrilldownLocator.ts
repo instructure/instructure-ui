@@ -23,8 +23,32 @@
  */
 
 import { locator } from '@instructure/ui-test-locator'
+import { parseQueryArguments } from '@instructure/ui-test-queries'
 
 import { Drilldown } from './index'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
+// eslint-disable-next-line no-restricted-imports
+import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
+import { OptionsLocator } from '@instructure/ui-options/es/Options/OptionsLocator'
 
+export const customMethods = {
+  findOptions: (...args: any[]) => OptionsLocator.findAllItems(parseQueryArguments(...args)),
+  findContent: (...args: any[]) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return PopoverLocator.findContent(element, selector, {
+      ...options,
+      customMethods: {
+        ...options.customMethods,
+        ...customMethods
+      }
+    })
+  },
+  findTrigger: async (...args: any[]) => {
+    const triggerWrapper = await PopoverLocator.find(parseQueryArguments(...args))
+    const target = triggerWrapper.getAttribute('data-position')
+
+    return triggerWrapper.find(`[data-position-target=${target}]`)
+  }
+}
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const DrilldownLocator = locator(Drilldown.selector)
+export const DrilldownLocator = locator(Drilldown.selector, customMethods)
