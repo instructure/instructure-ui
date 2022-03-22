@@ -26,7 +26,6 @@ import { nanoid } from 'nanoid'
 
 import { generatePropCombinations } from './generatePropCombinations'
 import React, { ComponentType, ReactNode } from 'react'
-import type { ViewProps } from '@instructure/ui-view'
 
 export type StoryConfig<Props> = {
   /**
@@ -66,7 +65,7 @@ export type StoryConfig<Props> = {
    * returns an object of props that will be passed into the `renderExample`
    * function as exampleProps.
    */
-  getExampleProps?: (props: Props) => Partial<ViewProps>
+  getExampleProps?: (props: Props) => Record<string, any>
   /**
    * A function called with the examples and index for the current page of
    * examples. It returns an object of parameters/metadata for that page of
@@ -97,7 +96,7 @@ export type ExamplesPage<Props> = {
 export type Example<Props> = {
   Component: ComponentType
   componentProps: Partial<Props>
-  exampleProps: Partial<ViewProps>
+  exampleProps: Record<string, any> // actually Partial<ViewProps>
   key: string
 }
 
@@ -158,7 +157,7 @@ export function generateComponentExamples<Props>(
   }
 
   const getExampleProps = (props: Props) => {
-    let exampleProps: Partial<ViewProps> = {}
+    let exampleProps: Record<string, any> = {}
     if (typeof config.getExampleProps === 'function') {
       exampleProps = {
         ...config.getExampleProps(props)
