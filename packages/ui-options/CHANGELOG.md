@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.20.0](https://github.com/instructure/instructure-ui/compare/v8.19.0...v8.20.0) (2022-03-22)
+
+### Features
+
+- **ui-options:** add `href` prop to Options.Item ([49bf28c](https://github.com/instructure/instructure-ui/commit/49bf28c637f395f7ae5d23c0f676d83a15c2ee43))
+- **ui-options:** modify default nested Options padding to have no extra padding ([bfc4f7c](https://github.com/instructure/instructure-ui/commit/bfc4f7cb094d91d25b58a87a24a473363c90796b))
+
 # [8.19.0](https://github.com/instructure/instructure-ui/compare/v8.18.0...v8.19.0) (2022-03-16)
 
 ### Bug Fixes

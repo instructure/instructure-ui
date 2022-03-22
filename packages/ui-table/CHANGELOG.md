@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.20.0](https://github.com/instructure/instructure-ui/compare/v8.19.0...v8.20.0) (2022-03-22)
+
+### Features
+
+- **ui-table:** add `mini-arrow-double` icon to sortable ColHeaders ([6e60ef1](https://github.com/instructure/instructure-ui/commit/6e60ef176d7f53cba1396a57b3468ffba4898578))
+
 # [8.19.0](https://github.com/instructure/instructure-ui/compare/v8.18.0...v8.19.0) (2022-03-16)
 
 **Note:** Version bump only for package @instructure/ui-table
