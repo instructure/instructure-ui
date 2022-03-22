@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.17.0](https://github.com/instructure/instructure-ui/compare/v7.16.0...v7.17.0) (2022-03-22)
+
+### Features
+
+- **ui-options:** remove nested paddin from option groups ([c496fa8](https://github.com/instructure/instructure-ui/commit/c496fa8))
+
 # [7.16.0](https://github.com/instructure/instructure-ui/compare/v7.15.0...v7.16.0) (2022-02-08)
 
 **Note:** Version bump only for package @instructure/ui-options

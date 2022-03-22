@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.17.0](https://github.com/instructure/instructure-ui/compare/v7.16.0...v7.17.0) (2022-03-22)
+
+### Features
+
+- **ui-icons:** add `mini-arrow-double` icon to the Iconography ([a9e9fa3](https://github.com/instructure/instructure-ui/commit/a9e9fa3))
+- **ui-icons:** add new icons: `canvas-logo`, `cloud-upload`, `elevate-logo`, `impact-logo` and `mastery-logo`. ([c6d35b1](https://github.com/instructure/instructure-ui/commit/c6d35b1))
+
 # [7.16.0](https://github.com/instructure/instructure-ui/compare/v7.15.0...v7.16.0) (2022-02-08)
 
 **Note:** Version bump only for package @instructure/ui-icons
