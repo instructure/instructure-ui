@@ -28,6 +28,7 @@ import { Modal } from '@instructure/ui-modal'
 import { IconButton, CloseButton } from '@instructure/ui-buttons'
 import { IconInfoLine } from '@instructure/ui-icons'
 import { Example } from '@instructure/ui-test-utils'
+import { Heading } from '@instructure/ui-heading'
 
 export function renderExample({
   Component,
@@ -58,18 +59,20 @@ export function renderExample({
         size="small"
         renderIcon={IconInfoLine}
         screenReaderLabel="props"
-        // @ts-ignore FIXME when IconButton is typed
         onClick={toggleInfoModal}
       />
       <Modal
         open={isInfoOpen}
         onDismiss={toggleInfoModal}
-        size="auto"
+        size="large"
         label={`${Component.displayName} example`}
         shouldCloseOnDocumentClick
         variant="inverse"
       >
-        <Modal.Header>
+        <Modal.Header spacing="compact">
+          <Heading level="h3" margin="0 0 x-small">
+            {`${Component.displayName} example`}
+          </Heading>
           <CloseButton
             placement="end"
             offset="small"

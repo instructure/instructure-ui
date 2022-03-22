@@ -28,10 +28,21 @@ import type { StoryConfig } from '@instructure/ui-test-utils'
 
 import { Drilldown } from '../index'
 import type { DrilldownProps } from '../props'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Button } from '@instructure/ui-buttons'
 
 export default {
   // sectionProp: 'shape',
-  propValues: {},
+  propValues: {
+    trigger: [<Button key={1}>hello</Button>],
+    defaultShow: [true, false]
+  },
+  getExampleProps(props) {
+    return {
+      height: props.defaultShow ? '12rem' : '3rem',
+      width: '6rem'
+    }
+  },
   filter: () => {
     return false
   },
@@ -41,15 +52,15 @@ export default {
       rootPageId: 'page0',
       children: [
         <Drilldown.Page id="page0" key="0">
-          <Drilldown.Option id="option1">Option 0</Drilldown.Option>
+          <Drilldown.Option id="option1">Option 1</Drilldown.Option>
+          <Drilldown.Option id="option2">Option 2</Drilldown.Option>
+          <Drilldown.Option id="option3">Option 3</Drilldown.Option>
         </Drilldown.Page>
       ],
-      disabled: false,
       rotateFocus: true,
       overflowX: 'auto',
       overflowY: 'auto',
       placement: 'bottom center',
-      defaultShow: false,
       shouldHideOnSelect: true,
       shouldFocusTriggerOnClose: true,
       shouldContainFocus: false,

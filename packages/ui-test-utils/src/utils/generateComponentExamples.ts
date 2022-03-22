@@ -26,18 +26,57 @@ import { nanoid } from 'nanoid'
 
 import { generatePropCombinations } from './generatePropCombinations'
 import React, { ComponentType, ReactNode } from 'react'
+import type { ViewProps } from '@instructure/ui-view'
 
 export type StoryConfig<Props> = {
+  /**
+   * Used to divide the resulting examples into sections. It should correspond
+   * to an enumerated prop in the Component
+   */
   sectionProp?: keyof Props // TODO make this mandatory
+  /**
+   * Specifies the max number of examples that can exist in a single page
+   * within a section
+   */
   maxExamplesPerPage?: number | ((sectionName: string) => number)
+  /**
+   * Specifies the total max number of examples. Default: 500
+   */
   maxExamples?: number
+  /**
+   * An object with keys that correspond to the component props. Each key has a
+   * corresponding value array. This array contains possible values for that prop.
+   */
   propValues?: Partial<Record<keyof Props, any[]>>
+  /**
+   * Prop keys to exclude from propValues. Useful when generating propValues with code.
+   */
   excludeProps?: (keyof Props)[]
+  /**
+   * The values returned by this function are passed to the component.
+   * A function called with the prop combination for the current example. It
+   * returns an object of props that will be passed into the `renderExample`
+   * function as componentProps.
+   */
   getComponentProps?: (props: Props) => Partial<Props>
-  getExampleProps?: (props: Props) => Partial<Props>
-  getParameters?: (
-    params: ExamplesPage<Props>
-  ) => { [key: string]: any; delay?: number; disable?: boolean }
+  /**
+   * The values returned by this function are passed to a `View` that wraps the
+   * example.
+   * A function called with the prop combination for the current example. It
+   * returns an object of props that will be passed into the `renderExample`
+   * function as exampleProps.
+   */
+  getExampleProps?: (props: Props) => Partial<ViewProps>
+  /**
+   * A function called with the examples and index for the current page of
+   * examples. It returns an object of parameters/metadata for that page of
+   * examples (e.g. to be passed in to a visual regression tool like chromatic).
+   */
+  getParameters?: (params: ExamplesPage<Props>) => {
+    [key: string]: any
+    delay?: number
+    disable?: boolean
+  }
   filter?: (props: Props) => boolean
 }
 
@@ -58,7 +97,7 @@ export type ExamplesPage<Props> = {
 export type Example<Props> = {
   Component: ComponentType
   componentProps: Partial<Props>
-  exampleProps: Partial<Props>
+  exampleProps: Partial<ViewProps>
   key: string
 }
 
@@ -119,7 +158,7 @@ export function generateComponentExamples<Props>(
   }
 
   const getExampleProps = (props: Props) => {
-    let exampleProps: Partial<Props> = {}
+    let exampleProps: Partial<ViewProps> = {}
     if (typeof config.getExampleProps === 'function') {
       exampleProps = {
         ...config.getExampleProps(props)
@@ -208,7 +247,7 @@ export function generateComponentExamples<Props>(
       exampleCount++
       if (exampleCount < maxExamples) {
         PROPS_CACHE.push(propsString)
-        addExample((componentProps[sectionProp!] as unknown) as string, {
+        addExample(componentProps[sectionProp!] as unknown as string, {
           Component,
           componentProps,
           exampleProps,
