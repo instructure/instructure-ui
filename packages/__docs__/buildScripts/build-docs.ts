@@ -75,6 +75,7 @@ const library: LibraryOptions = {
 
 const pathsToProcess = [
   // these can be commented out for faster debugging
+  'CHANGELOG.md',
   '**/packages/**/*.md', // package READMEs
   '**/docs/**/*.md', // general docs
   '**/src/*.{js,ts,tsx}', // util src files
