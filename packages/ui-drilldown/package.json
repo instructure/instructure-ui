@@ -39,6 +39,7 @@
     "@instructure/ui-testable": "8.20.0",
     "@instructure/ui-utils": "8.20.0",
     "@instructure/ui-view": "8.20.0",
+    "@instructure/ui-test-queries": "8.20.0",
     "prop-types": "^15"
   },
   "devDependencies": {

@@ -133,6 +133,7 @@ type PageMap = Record<string, MappedPage>
 
 // A Map width the selected options in a group, with the id as key and their value
 type SelectedGroupOptionsMap = Map<string, DrilldownOptionValue>
+type V<T extends readonly unknown[]> = T[number]
 
 /**
 ---
@@ -645,7 +646,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   }
 
   // Navigates to the page and also returns the new and old pageIds
-  public goToPage = (newPageId: string) => {
+  public goToPage = (newPageId: V<typeof this._pageHistory>) => {
     if (!newPageId) {
       warn(false, `Cannot go to page because there was no page id provided.`)
       return undefined
