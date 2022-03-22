@@ -101,6 +101,11 @@ type DrilldownOwnProps = {
   role?: string
 
   /**
+   * A function that returns a reference to root HTML element
+   */
+  elementRef?: (el: Element | null) => void
+
+  /**
    * A function that returns a reference to the `<Drilldown />`
    */
   drilldownRef?: (el: HTMLDivElement | null) => void
@@ -198,12 +203,6 @@ type DrilldownOwnProps = {
   shouldHideOnSelect?: boolean
 
   /**
-   * If a trigger is supplied, should the `<Drilldown />` focus the trigger
-   * on after closing
-   */
-  shouldFocusTriggerOnClose?: boolean
-
-  /**
    * Whether focus should be contained within the `<Drilldown/>` when it is open.
    * Works only if `trigger` is provided.
    */
@@ -274,6 +273,7 @@ const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,
   rotateFocus: PropTypes.bool,
   role: PropTypes.string,
+  elementRef: PropTypes.func,
   drilldownRef: PropTypes.func,
   overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
   overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
@@ -294,7 +294,6 @@ const propTypes: PropValidators<PropKeys> = {
   popoverRef: PropTypes.func,
   mountNode: PositionPropTypes.mountNode,
   shouldHideOnSelect: PropTypes.bool,
-  shouldFocusTriggerOnClose: PropTypes.bool,
   shouldContainFocus: PropTypes.bool,
   shouldReturnFocus: PropTypes.bool,
   withArrow: PropTypes.bool,
@@ -327,11 +326,11 @@ const allowedProps: AllowedPropKeys = [
   'onDismiss',
   'onFocus',
   'onMouseOver',
+  'elementRef',
   'drilldownRef',
   'popoverRef',
   'mountNode',
   'shouldHideOnSelect',
-  'shouldFocusTriggerOnClose',
   'shouldContainFocus',
   'shouldReturnFocus',
   'withArrow',

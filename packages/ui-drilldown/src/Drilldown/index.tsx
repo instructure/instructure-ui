@@ -71,7 +71,7 @@ import {
 } from '@instructure/ui-react-utils'
 
 import { View } from '@instructure/ui-view'
-import { Options, optionsThemeKeys } from '@instructure/ui-options'
+import { Options } from '@instructure/ui-options'
 import type {
   OptionsProps,
   OptionsItemProps,
@@ -80,7 +80,6 @@ import type {
 import { Popover } from '@instructure/ui-popover'
 import { Selectable } from '@instructure/ui-selectable'
 import type { SelectableRender } from '@instructure/ui-selectable'
-import type { OptionsTheme } from '@instructure/shared-types'
 import {
   IconArrowOpenStartSolid,
   IconArrowOpenEndSolid,
@@ -157,7 +156,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     placement: 'bottom center',
     defaultShow: false,
     shouldHideOnSelect: true,
-    shouldFocusTriggerOnClose: true,
     shouldContainFocus: false,
     shouldReturnFocus: true,
     withArrow: true,
@@ -197,18 +195,30 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
   ref: HTMLDivElement | Element | null = null
 
-  handleRef = (el: Element | null) => {
+  handleRef = (el: HTMLDivElement | Element | null) => {
+    // ref and elementRef have to be set together for the same element
+    const { elementRef } = this.props
+
+    this.ref = el as HTMLDivElement
+
+    if (typeof elementRef === 'function') {
+      elementRef(el as HTMLDivElement)
+    }
+  }
+
+  handleDrilldownRef = (el: Element | null) => {
     const { drilldownRef } = this.props
 
     this._drilldownRef = el as HTMLDivElement
 
-    // if a trigger is provided, the Popover sets the ref
-    if (!this.props.trigger) {
-      this.ref = el as HTMLDivElement
-    }
-
     if (typeof drilldownRef === 'function') {
       drilldownRef(el as HTMLDivElement)
+    }
+
+    // setting ref for "non-popover" version, the drilldown itself
+    // (if a trigger is provided, the Popover sets the ref)
+    if (!this.props.trigger) {
+      this.handleRef(el as HTMLDivElement)
     }
   }
 
@@ -271,26 +281,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         highlightedOptionId: undefined
       })
     }
-  }
-
-  // filters Drilldown's themeOverride object
-  // and returns the themeOverride for the underlying Options component
-  get optionsThemeOverride() {
-    const { themeOverride = {} } = this.props
-    const optionsThemeOverride: Partial<OptionsTheme> = {}
-
-    if (typeof themeOverride == 'function') {
-      // we cannot filter the override function
-      return themeOverride
-    }
-
-    optionsThemeKeys.forEach((key) => {
-      if (themeOverride[key]) {
-        optionsThemeOverride[key] = themeOverride[key] as any
-      }
-    })
-
-    return optionsThemeOverride
   }
 
   get makeStylesVariables(): DrilldownStyleProps {
@@ -671,6 +661,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       return undefined
     }
 
+    // TS complains that it cannot be true, but since it is an exposed method,
+    // it is better if we provide a warning for this case too
     if (typeof newPageId !== 'string') {
       warn(
         false,
@@ -800,6 +792,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       !id ||
       !selectedOption ||
       selectedOption.props.disabled ||
+      (event.target as HTMLElement).getAttribute('disabled') ||
       (event.target as HTMLElement).getAttribute('aria-disabled')
     ) {
       event.preventDefault()
@@ -824,8 +817,9 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     }
 
     if (href) {
-      const optionEl = (event.target as HTMLElement)
-        .parentElement as HTMLLinkElement
+      const optionEl = this._drilldownRef?.querySelector(
+        `#${id}`
+      ) as HTMLLinkElement
       const isLink = optionEl.tagName.toLowerCase() === 'a'
 
       // we need this check because in some cases
@@ -843,6 +837,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       }
     }
 
+    // should prevent closing on page navigation
     if (shouldHideOnSelect && !subPageId && id !== this._headerBackId) {
       this.hide(event as React.UIEvent)
     }
@@ -855,7 +850,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     const option = this.getPageChildById(id)
 
     // On Space...
-    if (event.key === ' ') {
+    if ([' ', 'space', 'Space'].includes(event.key)) {
       // we need to preventDefault so the page doesn't scroll on Space
       event.preventDefault()
       event.stopPropagation()
@@ -1364,7 +1359,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         }) => (
           <View
             as="div"
-            elementRef={this.handleRef}
+            elementRef={this.handleDrilldownRef}
             tabIndex={0}
             css={styles?.drilldown}
             position="relative"
@@ -1417,15 +1412,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
                 this._containerElement = element as HTMLDivElement
               }}
             >
-              <Options
-                {...getListProps()}
-                // `any` cast is needed, because the themeOverride function
-                // might return some extra theme Drilldown theme props
-                // (but Options won't use them)
-                themeOverride={this.optionsThemeOverride as any}
-                role="presentation"
-                as="div"
-              >
+              <Options {...getListProps()} role="presentation" as="div">
                 {this.renderList(getOptionProps, getDisabledOptionProps)}
               </Options>
             </View>
@@ -1481,6 +1468,11 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         onMouseOver={onMouseOver}
         offsetX={offsetX}
         offsetY={offsetY}
+        elementRef={(element) => {
+          // setting ref for "Popover" version, the popover root
+          // (if there is no trigger, we set it in handleDrilldownRef)
+          this.handleRef(element)
+        }}
         ref={(el) => {
           this._popover = el
           if (typeof popoverRef === 'function') {
@@ -1490,8 +1482,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         renderTrigger={safeCloneElement(trigger as ReactElement, {
           ref: (el: (React.ReactInstance & { ref?: Element }) | null) => {
             this._trigger = el
-            // for the popover version the trigger has to be the ref
-            this.ref = el?.ref || (el as Element)
           },
           'aria-haspopup': this.props.role,
           id: this._triggerId,

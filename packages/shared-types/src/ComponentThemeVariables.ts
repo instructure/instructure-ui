@@ -412,13 +412,11 @@ export type DrawerLayoutTrayTheme = {
   boxShadow: Shadows['depth3']
 }
 
-export type DrilldownOwnTheme = {
+export type DrilldownTheme = {
   headerTitleFontWeight: Typography['fontWeightBold']
   headerActionColor: Colors['textLink']
   labelInfoPadding: Spacing['small']
 }
-
-export type DrilldownTheme = OptionsTheme & DrilldownOwnTheme
 
 export type FileDropTheme = {
   backgroundColor: Colors['backgroundLightest']

@@ -649,9 +649,10 @@ class EditableStructureExample extends React.Component {
   renderDeleteOption(type, label, idToDelete) {
     const id = type === 'school' ? "deleteSchool" : "deleteDistrict"
     const callback = type === 'school' ? this.deleteSchool : this.deleteDistrict
+    const separatorId = `${idToDelete}__separator`
 
     return [
-      <Drilldown.Separator key={`${idToDelete}__separator`} />,
+      <Drilldown.Separator id={separatorId} key={separatorId} />,
       <Drilldown.Option
         id={id}
         key={`${idToDelete}__${id}`}

@@ -24,7 +24,7 @@
 
 export { Options } from './Options'
 
-export { optionsThemeGenerator, optionsThemeKeys } from './Options/theme'
+export { optionsThemeGenerator } from './Options/theme'
 export { optionsItemThemeGenerator } from './Options/Item/theme'
 export { optionsSeparatorThemeGenerator } from './Options/Separator/theme'
 

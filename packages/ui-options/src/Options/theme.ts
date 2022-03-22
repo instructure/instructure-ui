@@ -25,14 +25,6 @@
 import type { Theme } from '@instructure/ui-themes'
 import type { OptionsTheme } from '@instructure/shared-types'
 
-const optionsThemeKeys: (keyof OptionsTheme)[] = [
-  'labelFontWeight',
-  'background',
-  'labelColor',
-  'labelPadding',
-  'nestedLabelPadding'
-]
-
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
@@ -41,7 +33,6 @@ const optionsThemeKeys: (keyof OptionsTheme)[] = [
 const generateComponentTheme = (theme: Theme): OptionsTheme => {
   const { colors, typography, spacing } = theme
 
-  // TODO: if updated, update optionsThemeKeys array too
   const componentVariables: OptionsTheme = {
     labelFontWeight: typography?.fontWeightBold,
 
@@ -57,5 +48,5 @@ const generateComponentTheme = (theme: Theme): OptionsTheme => {
   }
 }
 
-export { generateComponentTheme as optionsThemeGenerator, optionsThemeKeys }
+export { generateComponentTheme as optionsThemeGenerator }
 export default generateComponentTheme
