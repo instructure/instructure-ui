@@ -28,11 +28,56 @@ import ReactDOM from 'react-dom'
 import { App } from './App'
 import { canvas } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '@instructure/emotion'
+import { Drilldown } from '@instructure/ui-drilldown'
 import '../globals'
+
+const DrillDownExample = () => {
+  const ref = React.useRef()
+
+  React.useEffect(() => {
+    if (ref.current) {
+      console.log(ref.current)
+      console.log(ref.current.displayName)
+    }
+  }, [])
+  const data = Array(5)
+    .fill(0)
+    .map((_v, ind) => ({
+      label: `option ${ind}`,
+      id: `opt_${ind}`
+    }))
+
+  const renderOptions = (page = '') => {
+    return data.map((option) => (
+      <Drilldown.Option id={option.id} key={option.id}>
+        {option.label} {page ? ` - ${page}` : null}
+      </Drilldown.Option>
+    ))
+  }
+  return (
+    <Drilldown rootPageId="page0">
+      <Drilldown.Page id="page0" renderTitle={'Page 0'}>
+        <Drilldown.Option id="opt0" subPageId="page1">
+          To Page 1
+        </Drilldown.Option>
+      </Drilldown.Page>
+      <Drilldown.Page id="page1" renderTitle={'Page 1'}>
+        <Drilldown.Option id="opt5" subPageId="page2">
+          To Page 2
+        </Drilldown.Option>
+        {renderOptions()}
+      </Drilldown.Page>
+      <Drilldown.Page id="page2" renderTitle="Page 2">
+        {renderOptions('page 2')}
+      </Drilldown.Page>
+    </Drilldown>
+  )
+}
 
 ReactDOM.render(
   <InstUISettingsProvider theme={canvas}>
-    <App />
+    {/* <App /> */}
+    <DrillDownExample></DrillDownExample>
   </InstUISettingsProvider>,
   document.getElementById('app')
 )

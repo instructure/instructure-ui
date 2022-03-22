@@ -24,15 +24,19 @@
 
 import { locator } from '@instructure/ui-test-locator'
 import { parseQueryArguments } from '@instructure/ui-test-queries'
+import { find, findAll } from '@instructure/ui-test-utils'
+
+/* eslint-disable no-restricted-imports */
+// @ts-expect-error bypass no type definition found error
+import { OptionsItemLocator } from '@instructure/ui-options/es/Options/Item/OptionsItemLocator'
+/* eslint-enable no-restricted-imports */
 
 import { Drilldown } from './index'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 // eslint-disable-next-line no-restricted-imports
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
-import { OptionsLocator } from '@instructure/ui-options/es/Options/OptionsLocator'
 
 export const customMethods = {
-  findOptions: (...args: any[]) => OptionsLocator.findAllItems(parseQueryArguments(...args)),
   findContent: (...args: any[]) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return PopoverLocator.findContent(element, selector, {
@@ -48,6 +52,41 @@ export const customMethods = {
     const target = triggerWrapper.getAttribute('data-position')
 
     return triggerWrapper.find(`[data-position-target=${target}]`)
+  },
+  // return the wrapper Option.Items
+  findAllOptions: async (...args: any[]) => {
+    return await findAll('[role^=menuitem]', ...args)
+  },
+  findAllOptionWrappers: async (...args: any[]) => {
+    return await OptionsItemLocator.findAll(...args)
+  },
+  findOptionWrapperByOptionId: async (
+    _element: any,
+    optionId: string,
+    ...args: any[]
+  ) => {
+    return OptionsItemLocator.find(`:has(#${optionId})`, ...args)
+  },
+  findHeaderTitle: async (...args: any[]) => {
+    return await find('[id^=DrilldownHeader-Title]', ...args)
+  },
+  findHeaderActionOption: async (...args: any[]) => {
+    return await find('[id^=DrilldownHeader-Action]', ...args)
+  },
+  findHeaderBackOption: async (...args: any[]) => {
+    return await find('[id^=DrilldownHeader-Back]', ...args)
+  },
+  findHeaderSeparator: async (...args: any[]) => {
+    return await find('[id^=DrilldownHeader-Separator]', ...args)
+  },
+  findAllSeparators: async (...args: any[]) => {
+    return await findAll('[class$=-separator]', ...args)
+  },
+  findLabelInfo: async (...args: any[]) => {
+    return await find('[class$=-drilldown__optionLabelInfo]', ...args)
+  },
+  findDescription: async (...args: any[]) => {
+    return await find('[class$=__description]', ...args)
   }
 }
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
