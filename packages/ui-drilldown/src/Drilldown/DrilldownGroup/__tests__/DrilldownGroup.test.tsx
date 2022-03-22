@@ -93,8 +93,9 @@ describe('<Drilldown.Group />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
+      const groupLabels = await drilldown.findAllGroupLabels()
 
-      expect(await drilldown.find(':contains(Group Title)')).to.exist()
+      expect(groupLabels[0]).to.have.text('Group Title')
     })
 
     it('should display, if function is provided', async () => {
@@ -109,8 +110,9 @@ describe('<Drilldown.Group />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
+      const groupLabels = await drilldown.findAllGroupLabels()
 
-      expect(await drilldown.find(':contains(Group Title)')).to.exist()
+      expect(groupLabels[0]).to.have.text('Group Title')
     })
   })
 
@@ -719,6 +721,32 @@ describe('<Drilldown.Group />', async () => {
 
         await checkSelectedValues(options, ['item2'])
       })
+    })
+  })
+
+  describe('themeOverride prop', async () => {
+    it('should be passed to the Options component', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group
+              id="group0"
+              renderGroupTitle="Group label"
+              themeOverride={{ labelColor: 'rgb(100, 0, 0)' }}
+            >
+              <Drilldown.Option id="groupOption01">Option</Drilldown.Option>
+              <Drilldown.Option id="groupOption02">Option</Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const groupLabels = await drilldown.findAllGroupLabels()
+
+      const groupLabelStyle = getComputedStyle(groupLabels[0].getDOMNode())
+
+      expect(groupLabelStyle.color).to.equal('rgb(100, 0, 0)')
     })
   })
 })

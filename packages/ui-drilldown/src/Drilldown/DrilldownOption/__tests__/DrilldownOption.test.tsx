@@ -245,7 +245,172 @@ describe('<Drilldown.Option />', async () => {
     })
   })
 
+  describe('href prop', async () => {
+    it('should display option as link', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" href="/helloWorld">
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const option = await drilldown.find('#option1')
+
+      expect(option.getTagName()).to.equal('a')
+      expect(option.getAttribute('href')).to.equal('/helloWorld')
+    })
+
+    it('should navigate to url on Focus + Space', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" href="#helloWorld">
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const option = await drilldown.find('#option1')
+
+      await option.focus()
+      await option.keyDown('space')
+
+      expect(window.location.hash).to.equal('#helloWorld')
+      // reset hash
+      window.location.hash = ''
+    })
+
+    it('should navigate to url on Click', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" href="#helloWorld">
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const option = await drilldown.find('#option1')
+
+      await option.click()
+
+      expect(window.location.hash).to.equal('#helloWorld')
+      // reset hash
+      window.location.hash = ''
+    })
+
+    it("shouldn't navigate to url, if disabled", async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" href="#helloWorld" disabled>
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const option = await drilldown.find('#option1')
+
+      // reset hash
+      window.location.hash = ''
+
+      await option.click()
+
+      expect(window.location.hash).to.equal('')
+    })
+
+    it('should throw warning if subPageId is provided too', async () => {
+      const consoleWarning = stub(console, 'warn')
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" href="/helloWorld" subPageId="page1">
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const option = await drilldown.find('#option1')
+
+      expect(option.getTagName()).to.not.equal('a')
+      expect(option.getAttribute('href')).to.equal(null)
+      expect(consoleWarning).to.have.been.calledWith(
+        'Warning: Drilldown.Option with id "option1" has subPageId, so it will ignore the "href" property.'
+      )
+    })
+
+    it('should throw warning if option is in selectable group', async () => {
+      const consoleWarning = stub(console, 'warn')
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0" selectableType="multiple">
+              <Drilldown.Option id="groupOption01" href="/helloWorld">
+                Option
+              </Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const option = await drilldown.find('#groupOption01')
+
+      expect(option.getTagName()).to.not.equal('a')
+      expect(option.getAttribute('href')).to.equal(null)
+      expect(consoleWarning).to.have.been.calledWith(
+        'Warning: Drilldown.Option with id "groupOption01" is in a selectable group, so it will ignore the "href" property.'
+      )
+    })
+  })
+
+  describe('as prop', async () => {
+    it('should render option as specified html element', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" as="li">
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const wrapper = await drilldown.findOptionWrapperByOptionId('option1')
+
+      expect(wrapper.getTagName()).to.equal('li')
+    })
+  })
+
   describe('role prop', async () => {
+    it('should be "menuitem" by default', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const option = await drilldown.find('#option1')
+
+      expect(option.getAttribute('role')).to.equal('menuitem')
+    })
+
     it('should be applied on prop', async () => {
       await mount(
         <Drilldown rootPageId="page0">
@@ -770,6 +935,35 @@ describe('<Drilldown.Option />', async () => {
           )
         })
       })
+    })
+  })
+
+  describe('themeOverride prop', async () => {
+    it('should be passed to the Options.Item component', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option
+              id="option01"
+              themeOverride={{
+                color: 'rgb(0, 0, 100)',
+                background: 'rgb(200, 200, 200)'
+              }}
+            >
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const optionWrapper = await drilldown.findOptionWrapperByOptionId(
+        'option01'
+      )
+      const groupLabelStyle = getComputedStyle(optionWrapper.getDOMNode())
+
+      expect(groupLabelStyle.color).to.equal('rgb(0, 0, 100)')
+      expect(groupLabelStyle.backgroundColor).to.equal('rgb(200, 200, 200)')
     })
   })
 })

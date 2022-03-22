@@ -35,7 +35,7 @@ import type { WithStyleProps } from '@instructure/emotion'
 import type { OptionsSeparatorProps } from '@instructure/ui-options'
 
 type DrilldownSeparatorOwnProps = {
-  id?: string
+  id: string
 
   /**
    * Element type to render as
@@ -55,7 +55,7 @@ type DrilldownSeparatorProps =
     OtherHTMLAttributes<DrilldownSeparatorOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   as: PropTypes.elementType
 }
 

@@ -23,11 +23,9 @@
  */
 
 import { locator } from '@instructure/ui-test-locator'
-import { find, findAll } from '@instructure/ui-test-utils'
+import { find, findAll, parseQueryArguments } from '@instructure/ui-test-utils'
 
 /* eslint-disable no-restricted-imports */
-// @ts-expect-error bypass no type definition found error
-import { OptionsLocator } from '@instructure/ui-options/es/Options/OptionsLocator'
 // @ts-expect-error bypass no type definition found error
 import { OptionsItemLocator } from '@instructure/ui-options/es/Options/Item/OptionsItemLocator'
 // @ts-expect-error bypass no type definition found error
@@ -36,7 +34,7 @@ import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocato
 
 import { Drilldown } from './index'
 
-export const customMethods = {
+const customMethods = {
   // return the wrapper Option.Items
   findAllOptions: async (...args: any[]) => {
     return await findAll('[role^=menuitem]', ...args)
@@ -50,6 +48,9 @@ export const customMethods = {
     ...args: any[]
   ) => {
     return OptionsItemLocator.find(`:has(#${optionId})`, ...args)
+  },
+  findSizableContainer: async (...args: any[]) => {
+    return await find('[class$=-drilldown__container]', ...args)
   },
   findHeaderTitle: async (...args: any[]) => {
     return await find('[id^=DrilldownHeader-Title]', ...args)
@@ -66,11 +67,20 @@ export const customMethods = {
   findAllSeparators: async (...args: any[]) => {
     return await findAll('[class$=-separator]', ...args)
   },
+  findAllGroupLabels: async (...args: any[]) => {
+    return await findAll('[class$=-options__label]', ...args)
+  },
   findLabelInfo: async (...args: any[]) => {
     return await find('[class$=-drilldown__optionLabelInfo]', ...args)
   },
   findDescription: async (...args: any[]) => {
     return await find('[class$=__description]', ...args)
+  },
+  findPopoverRoot: (...args: any[]) => {
+    return PopoverLocator.find(...args)
+  },
+  findPopoverTrigger: (...args: any[]) => {
+    return PopoverLocator.findTrigger(...args)
   },
   findPopoverContentWrapper: (...args: any[]) => {
     return PopoverLocator.findContent(...args)
@@ -81,12 +91,16 @@ export const customMethods = {
     const target = content.getAttribute('data-position-content')
     return content.find(`[id=${target}]`)
   },
-  findPopoverTrigger: async (...args: any[]) => {
-    const triggerWrapper = await PopoverLocator.find(...args)
-    const target = triggerWrapper.getAttribute('data-position')
-
-    return triggerWrapper.find(`[data-position-target=${target}]`)
-  }
+  // findPopoverContent: (...args: any[]) => {
+  //   const { element, selector, options } = parseQueryArguments(...args)
+  //   return PopoverLocator.findContent(element, selector, {
+  //     ...options,
+  //     customMethods: {
+  //       ...options.customMethods,
+  //       ...customMethods
+  //     }
+  //   })
+  // }
 }
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message

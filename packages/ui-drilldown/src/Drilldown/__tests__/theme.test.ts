@@ -25,17 +25,20 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
+import { optionsThemeGenerator } from '@instructure/ui-options'
+
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import generateComponentTheme from '../theme'
 
 describe('Drilldown.theme', () => {
   describe('with the default theme', () => {
     const variables = generateComponentTheme(canvas)
+    const optionsVariables = optionsThemeGenerator(canvas)
 
     describe('default color', () => {
       it('should ensure background color and text color meet 3:1 contrast', () => {
         expect(
-          contrast(variables.background, variables.headerActionColor)
+          contrast(optionsVariables.background, variables.headerActionColor)
         ).to.be.above(3)
       })
     })
@@ -43,11 +46,12 @@ describe('Drilldown.theme', () => {
 
   describe('with the "canvas-high-contrast" theme', () => {
     const variables = generateComponentTheme(canvasHighContrast)
+    const optionsVariables = optionsThemeGenerator(canvas)
 
     describe('default color', () => {
       it('should ensure background color and text color meet 4.5:1 contrast', () => {
         expect(
-          contrast(variables.background, variables.headerActionColor)
+          contrast(optionsVariables.background, variables.headerActionColor)
         ).to.be.above(4.5)
       })
     })
