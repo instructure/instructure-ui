@@ -44,7 +44,7 @@ export default {
       { text: 'all custom props are undefined' },
       { text: 'disabled', defaultShow: false, disabled: true },
       {
-        text: 'no overflow',
+        text: 'no overflow setting',
         defaultShow: true,
         disabled: false,
         separator: true,
@@ -139,7 +139,9 @@ export default {
             {props.customProps.text}
           </Drilldown.Option>
           <Drilldown.Option id="o">
-            this should be an option with very very super very very long label
+            <div style={{ whiteSpace: 'nowrap' }}>
+              this should be an option with very very super very very long label
+            </div>
           </Drilldown.Option>
           <Drilldown.Option id="o1" href="#">
             this is a link
