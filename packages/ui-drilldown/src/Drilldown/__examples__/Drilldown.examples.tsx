@@ -28,17 +28,15 @@ import type { StoryConfig } from '@instructure/ui-test-utils'
 
 import { Drilldown } from '../index'
 import type { DrilldownProps } from '../props'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Button } from '@instructure/ui-buttons'
 
 export default {
   sectionProp: 'trigger',
   maxExamplesPerPage: 8,
   propValues: {
     trigger: [
-      <Button margin="medium" key={1}>
-        hello
-      </Button>,
+      <button key={1} style={{ margin: '5px' }}>
+        a drilldown trigger
+      </button>,
       undefined
     ],
     // these are non-existing props, we just pass them to getComponentProps()
