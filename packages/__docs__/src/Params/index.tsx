@@ -55,7 +55,7 @@ class Params extends Component<ParamsProps> {
   }
 
   renderType(type?: { names: string[] }) {
-    return type ? type.names : null
+    return type ? type.names.join(' | ') : null
   }
 
   renderDescription(description: string) {

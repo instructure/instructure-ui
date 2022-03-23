@@ -175,9 +175,7 @@ class Properties extends Component<PropertiesProps> {
     if (prop.required) {
       return <span css={styles?.required}>Required</span>
     } else if (prop.defaultValue) {
-      let defaultValue: string | React.ReactNode = this.unquote(
-        prop.defaultValue.value
-      )
+      let defaultValue: string | React.ReactNode = prop.defaultValue.value
       if (defaultValue === '() => {}') {
         defaultValue = <span css={styles?.noWrap}>{defaultValue}</span>
       }
