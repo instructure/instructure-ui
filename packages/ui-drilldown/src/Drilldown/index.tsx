@@ -133,7 +133,6 @@ type PageMap = Record<string, MappedPage>
 
 // A Map width the selected options in a group, with the id as key and their value
 type SelectedGroupOptionsMap = Map<string, DrilldownOptionValue>
-type V<T extends readonly unknown[]> = T[number]
 
 /**
 ---
@@ -646,7 +645,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   }
 
   // Navigates to the page and also returns the new and old pageIds
-  public goToPage = (newPageId: V<typeof this._pageHistory>) => {
+  public goToPage = (newPageId: string) => {
     if (!newPageId) {
       warn(false, `Cannot go to page because there was no page id provided.`)
       return undefined
@@ -819,7 +818,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   handleKeyDown = (event: React.KeyboardEvent) => {
     const id = (event.target as HTMLElement).id
     const option = this.getPageChildById(id)
-
     // On Space...
     if (event.key === ' ') {
       // we need to preventDefault so the page doesn't scroll on Space

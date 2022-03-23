@@ -26,9 +26,9 @@ import React from 'react'
 import {
   expect,
   generateA11yTests,
+  match,
   mount,
   stub,
-  wait,
   wrapQueryResult
 } from '@instructure/ui-test-utils'
 
@@ -37,15 +37,21 @@ import { IconCheckSolid } from '@instructure/ui-icons'
 import { Drilldown } from '../index'
 import { DrilldownLocator } from '../DrilldownLocator'
 import DrilldownExamples from '../__examples__/Drilldown.examples'
-import { PageChildren } from '../DrilldownPage/props'
 
-// TODO: write tests
 const data = Array(5)
   .fill(0)
   .map((_v, ind) => ({
     label: `option ${ind}`,
     id: `opt_${ind}`
   }))
+
+const renderOptions = (page: string) => {
+  return data.map((option) => (
+    <Drilldown.Option id={option.id} key={option.id}>
+      {option.label} - {page}
+    </Drilldown.Option>
+  ))
+}
 describe('<Drilldown />', async () => {
   it('should render', async () => {
     await mount(
@@ -78,6 +84,14 @@ describe('<Drilldown />', async () => {
     await option[1].click()
 
     expect(onSelect).to.have.been.calledOnce()
+    const selectValue = match.falsy.or(match.string).or(match.number)
+    expect(onSelect).to.have.been.calledWithMatch(
+      // this should be match.instanceOf(React.SyntheticEvent)
+      match.object,
+      match.every(selectValue).or(selectValue),
+      match.bool,
+      match.object
+    )
   })
 
   xit('should not call onSelect when drilldown is disabled', async () => {
@@ -117,7 +131,7 @@ describe('<Drilldown />', async () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const content = await DrilldownLocator.findContent()
+      const content = await DrilldownLocator.findPopoverContent()
       const drilldown = content.getDOMNode().querySelector('[id^=Drilldown]')
 
       expect(drilldownRef).to.have.been.called(drilldown)
@@ -130,8 +144,10 @@ describe('<Drilldown />', async () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const trigger = await DrilldownLocator.findTrigger()
-      const content = await DrilldownLocator.findContent({ expectEmpty: true })
+      const trigger = await DrilldownLocator.findPopoverTrigger()
+      const content = await DrilldownLocator.findPopoverContentWrapper({
+        expectEmpty: true
+      })
 
       expect(trigger.getTextContent()).to.be.eq('click me')
       expect(content).to.be.null()
@@ -152,7 +168,7 @@ describe('<Drilldown />', async () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const trigger = await DrilldownLocator.findTrigger()
+      const trigger = await DrilldownLocator.findPopoverTrigger()
 
       await trigger.click()
 
@@ -166,7 +182,7 @@ describe('<Drilldown />', async () => {
           </Drilldown.Page>
         </Drilldown>
       )
-      const drilldown = await DrilldownLocator.findTrigger()
+      const drilldown = await DrilldownLocator.findPopoverTrigger()
 
       expect(drilldown.getAttribute('aria-haspopup')).to.exist()
     })
@@ -184,12 +200,18 @@ describe('<Drilldown />', async () => {
         </Drilldown>
       )
 
-      const drilldown = await DrilldownLocator.findTrigger()
+      const drilldown = await DrilldownLocator.findPopoverTrigger()
 
       await drilldown.click()
 
-      expect(onToggle).to.have.been.called()
-      expect(onToggle).to.have.been.callCount(1)
+      expect(onToggle).to.have.been.calledOnce()
+      expect(onToggle).to.have.been.calledWithMatch(match.object, {
+        shown: true,
+        drilldown: match.object,
+        pageHistory: ['page0'],
+        goToPage: match.func,
+        goToPreviousPage: match.func
+      })
     })
     it('should call onToggle when Drilldown is closed', async () => {
       const onToggle = stub()
@@ -206,9 +228,16 @@ describe('<Drilldown />', async () => {
         </Drilldown>
       )
       const drilldown = await DrilldownLocator.find()
-      await drilldown.keyUp(27)
+      await drilldown.keyUp('esc')
 
-      expect(onToggle).to.have.been.called()
+      expect(onToggle).to.have.been.calledOnce()
+      expect(onToggle).to.have.been.calledWithMatch(match.instanceOf(Event), {
+        shown: false,
+        drilldown: match.object,
+        pageHistory: ['page0'],
+        goToPage: match.func,
+        goToPreviousPage: match.func
+      })
     })
     it('should call onDismiss when Drilldown is closed', async () => {
       const onDismiss = stub()
@@ -227,7 +256,12 @@ describe('<Drilldown />', async () => {
       const drilldown = await DrilldownLocator.find()
 
       await drilldown.keyUp(27)
-      expect(onDismiss).to.have.been.called()
+
+      expect(onDismiss).to.have.been.calledOnce()
+      expect(onDismiss).to.have.been.calledWithMatch(
+        match.instanceOf(Event),
+        false
+      )
     })
   })
 
@@ -249,7 +283,7 @@ describe('<Drilldown />', async () => {
         }
       }
     )
-    const trigger = await DrilldownLocator.findTrigger()
+    const trigger = await DrilldownLocator.findPopoverTrigger()
 
     expect(ref.current).to.be.not.null()
     expect(ref.current.ref).to.be.eq(trigger.getDOMNode())
@@ -283,15 +317,11 @@ describe('<Drilldown />', async () => {
       await drilldown.keyDown('down')
 
       expect(options[2].containsFocus()).to.be.true()
+
+      await drilldown.keyDown('up')
+      expect(options[1].containsFocus()).to.be.true()
     })
-    it('should be able to navigate between pages with right/left arrows', async () => {
-      const renderOptions = (page: string) => {
-        return data.map((option) => (
-          <Drilldown.Option id={option.id} key={option.id}>
-            {option.label} - {page}
-          </Drilldown.Option>
-        ))
-      }
+    it('should be able to navigate forward between pages with right arrow', async () => {
       await mount(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0" renderTitle={'Page 0'}>
@@ -301,10 +331,10 @@ describe('<Drilldown />', async () => {
           </Drilldown.Page>
           <Drilldown.Page id="page1" renderTitle={'Page 1'}>
             {[
-              ...renderOptions('page 1'),
               <Drilldown.Option key="opt5" id="opt5" subPageId="page2">
                 To Page 2
-              </Drilldown.Option>
+              </Drilldown.Option>,
+              ...renderOptions('page 1')
             ]}
           </Drilldown.Page>
 
@@ -314,39 +344,109 @@ describe('<Drilldown />', async () => {
         </Drilldown>
       )
       const drilldown = await DrilldownLocator.find()
-      const options = await drilldown.findAllOptionWrappers()
+      let options = await drilldown.findAllOptionWrappers()
 
       await drilldown.focus()
       await drilldown.keyDown('down')
-      await drilldown.keyDown(' ')
+      // the option which navigates to next page should be focused
+      expect(options[1].containsFocus()).to.be.true()
 
-      const options2 = await drilldown.findAllOptionWrappers()
+      // options[1] is the active element
+      let activeOption = wrapQueryResult(document.activeElement!)
+      await activeOption.keyDown('ArrowRight')
 
-      debugger
+      // the 1st option is the `Back` button, navigate to the second option
+      await Promise.all([drilldown.keyDown('down'), drilldown.keyDown('down')])
+      let header = await drilldown.findHeaderTitle()
+      expect(header.text()).to.be.eq('Page 1')
+      options = await drilldown.findAllOptionWrappers()
+      activeOption = options.find((opt: typeof drilldown) =>
+        opt.containsFocus()
+      )
+      expect(activeOption.text()).to.be.eq('To Page 2')
+      await activeOption.keyDown('ArrowRight')
+      header = await drilldown.findHeaderTitle()
+      expect(header.text()).to.be.eq('Page 2')
     })
-    it('should close the drilldown on root page and left arrow is pressed', async () => {})
+
+    it('should be able to navigate back to previous page with left arrow', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0" renderTitle={'Page 0'}>
+            <Drilldown.Option id="opt0" subPageId="page1">
+              To Page 1
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page1" renderTitle={'Page 1'}>
+            {[
+              <Drilldown.Option key="opt5" id="opt5" subPageId="page2">
+                To Page 2
+              </Drilldown.Option>,
+              ...renderOptions('page 1')
+            ]}
+          </Drilldown.Page>
+
+          <Drilldown.Page id="page2" renderTitle="Page 2">
+            {renderOptions('page 2')}
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+
+      await drilldown.focus()
+      await drilldown.keyDown('down')
+      const activeOption = wrapQueryResult(document.activeElement!)
+      await activeOption.keyDown('ArrowRight')
+      await drilldown.keyDown('ArrowLeft')
+
+      const header = await drilldown.findHeaderTitle()
+
+      expect(drilldown.containsFocus()).to.be.true()
+      expect(header.text()).to.be.eq('Page 0')
+    })
+    it('should close the drilldown on root page and left arrow is pressed', async () => {
+      await mount(
+        <Drilldown
+          rootPageId="page0"
+          trigger={<button>options</button>}
+          defaultShow
+        >
+          <Drilldown.Page id="page0" renderTitle={'Page 0'}>
+            <Drilldown.Option id="opt0" subPageId="page1">
+              To Page 1
+            </Drilldown.Option>
+          </Drilldown.Page>
+          <Drilldown.Page id="page1" renderTitle={'Page 1'}>
+            {[
+              <Drilldown.Option key="opt5" id="opt5" subPageId="page2">
+                To Page 2
+              </Drilldown.Option>,
+              ...renderOptions('page 1')
+            ]}
+          </Drilldown.Page>
+
+          <Drilldown.Page id="page2" renderTitle="Page 2">
+            {renderOptions('page 2')}
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const drilldown = await DrilldownLocator.find()
+
+      const content = await drilldown.findPopoverContent()
+
+      expect(content.getDOMNode()).to.be.eq(document.activeElement)
+
+      await content.keyDown('ArrowLeft')
+      const contentWrapper = await DrilldownLocator.findPopoverContentWrapper({
+        expectEmpty: true
+      })
+      expect(contentWrapper).to.be.null()
+      expect(drilldown.containsFocus()).to.be.false()
+    })
   })
-  it('should be able to set the root page via prop', async () => {})
 
-  describe('header', () => {
-    it('should not have back button on root page', async () => {})
-    it('should have back button when not on root page', async () => {})
-  })
-  describe('options', () => {})
-  xdescribe('for a11y', async () => {
-    // it('should be accessible', async () => {
-    //   await mount(
-    //     <Drilldown rootPageId="page0">
-    //       <Drilldown.Page id="page0">
-    //         <Drilldown.Option id="item1">Item1</Drilldown.Option>
-    //       </Drilldown.Page>
-    //     </Drilldown>
-    //   )
-
-    //   const drilldown = await DrilldownLocator.find()
-
-    //   expect(await drilldown.accessible()).to.be.true()
-    // })
+  describe('for a11y', async () => {
     it('should be accessible', async () => {
       await mount(
         <Drilldown rootPageId="page0">
@@ -426,7 +526,28 @@ describe('<Drilldown />', async () => {
       const element = wrapQueryResult(subject.getDOMNode())
       expect(await element.accessible()).to.be.true()
     })
-    it('should correctly return focus when "trigger" and "shouldReturnFocus" is set', async () => {})
+    it('should correctly return focus when "trigger" and "shouldReturnFocus" is set', async () => {
+      await mount(
+        <Drilldown
+          rootPageId="page0"
+          trigger={<button>Options</button>}
+          shouldReturnFocus
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option0">Option 0</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+      const drilldown = await DrilldownLocator.find()
+      const trigger = await DrilldownLocator.findPopoverTrigger()
+
+      await trigger.focus()
+
+      await trigger.keyDown(' ')
+      await drilldown.keyDown('esc')
+
+      expect(trigger.containsFocus()).to.be.true()
+    })
   })
   describe('with generated examples', async () => {
     generateA11yTests(Drilldown, DrilldownExamples)

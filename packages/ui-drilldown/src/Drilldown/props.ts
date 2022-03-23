@@ -63,28 +63,7 @@ type SeparatorChild = React.ComponentElement<
   DrilldownSeparator
 >
 
-type O = {
-  id: string
-}
-
-type Ob = {
-  [key: string]: string
-}
-
-// type ObM<T extends O> = T['id'] extends string
-// type Obj<T> = Readonly<T>
-// type D = Pick<Obj<O>, 'id'>
-
-// const d: D = { 'id': "hello" }
-
-// type V = D[keyof D]
-
-// const v: V =
-
-
-
 type DrilldownOwnProps = {
-  debug?: string
   /**
    * The id of the root page
    */
