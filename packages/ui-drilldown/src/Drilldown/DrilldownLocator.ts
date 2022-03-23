@@ -37,7 +37,7 @@ import { Drilldown } from './index'
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 
 export const customMethods = {
-  findContent: (...args: any[]) => {
+  findPopoverContentWrapper: (...args: any[]) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return PopoverLocator.findContent(element, selector, {
       ...options,
@@ -47,8 +47,18 @@ export const customMethods = {
       }
     })
   },
-  findTrigger: async (...args: any[]) => {
-    const triggerWrapper = await PopoverLocator.find(parseQueryArguments(...args))
+  findPopoverContent: async (...args: any[]) => {
+    const content = await PopoverLocator.findContent(
+      parseQueryArguments(...args)
+    )
+
+    const target = content.getAttribute('data-position-content')
+    return content.find(`[id=${target}]`)
+  },
+  findPopoverTrigger: async (...args: any[]) => {
+    const triggerWrapper = await PopoverLocator.find(
+      parseQueryArguments(...args)
+    )
     const target = triggerWrapper.getAttribute('data-position')
 
     return triggerWrapper.find(`[data-position-target=${target}]`)
