@@ -32,7 +32,7 @@ export type StoryConfig<Props> = {
    * Used to divide the resulting examples into sections. It should correspond
    * to an enumerated prop in the Component
    */
-  sectionProp?: keyof Props // TODO make this mandatory
+  sectionProp?: keyof Props
   /**
    * Specifies the max number of examples that can exist in a single page
    * within a section
@@ -46,7 +46,7 @@ export type StoryConfig<Props> = {
    * An object with keys that correspond to the component props. Each key has a
    * corresponding value array. This array contains possible values for that prop.
    */
-  propValues?: Partial<Record<keyof Props, any[]>>
+  propValues?: Partial<Record<keyof Props | string, any[]>>
   /**
    * Prop keys to exclude from propValues. Useful when generating propValues with code.
    */
@@ -57,7 +57,7 @@ export type StoryConfig<Props> = {
    * returns an object of props that will be passed into the `renderExample`
    * function as componentProps.
    */
-  getComponentProps?: (props: Props) => Partial<Props>
+  getComponentProps?: (props: Props & Record<string, any>) => Partial<Props>
   /**
    * The values returned by this function are passed to a `View` that wraps the
    * example.
@@ -65,7 +65,7 @@ export type StoryConfig<Props> = {
    * returns an object of props that will be passed into the `renderExample`
    * function as exampleProps.
    */
-  getExampleProps?: (props: Props) => Record<string, any>
+  getExampleProps?: (props: Props & Record<string, any>) => Record<string, any>
   /**
    * A function called with the examples and index for the current page of
    * examples. It returns an object of parameters/metadata for that page of
@@ -119,7 +119,7 @@ export function generateComponentExamples<Props>(
   const sections: ExampleSection<Props>[] = []
   const maxExamples = config.maxExamples ? config.maxExamples : 500
   let exampleCount = 0
-  let propValues: Partial<Record<keyof Props, unknown[]>> = {}
+  let propValues: Partial<Record<keyof Props | string, any[]>> = {}
 
   const getParameters = (page: ExamplesPage<Props>) => {
     const examples = page.examples
@@ -157,7 +157,7 @@ export function generateComponentExamples<Props>(
   }
 
   const getExampleProps = (props: Props) => {
-    let exampleProps: Record<string, any> = {}
+    let exampleProps: Record<string, unknown> = {}
     if (typeof config.getExampleProps === 'function') {
       exampleProps = {
         ...config.getExampleProps(props)
@@ -175,7 +175,7 @@ export function generateComponentExamples<Props>(
     return page
   }
 
-  const addExample = (sectionName = 'Examples', example: Example<Props>) => {
+  const addExample = (sectionName: string, example: Example<Props>) => {
     let section = sections.find(
       (section) => section.sectionName === sectionName
     )
@@ -246,7 +246,11 @@ export function generateComponentExamples<Props>(
       exampleCount++
       if (exampleCount < maxExamples) {
         PROPS_CACHE.push(propsString)
-        addExample(componentProps[sectionProp!] as unknown as string, {
+        let sectionName = 'Examples'
+        if (sectionProp && componentProps[sectionProp]) {
+          sectionName = componentProps[sectionProp] as unknown as string
+        }
+        addExample(sectionName, {
           Component,
           componentProps,
           exampleProps,
@@ -307,7 +311,6 @@ export function generateComponentExamples<Props>(
       page.parameters = getParameters(page)
     })
   })
-
   return sections
 }
 
