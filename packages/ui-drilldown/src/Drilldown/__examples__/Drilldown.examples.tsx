@@ -32,8 +32,8 @@ import type { DrilldownProps } from '../props'
 import { Button } from '@instructure/ui-buttons'
 
 export default {
-  //sectionProp: '',
-  maxExamplesPerPage: 11,
+  sectionProp: 'trigger',
+  maxExamplesPerPage: 8,
   propValues: {
     trigger: [
       <Button margin="medium" key={1}>
@@ -42,41 +42,121 @@ export default {
       undefined
     ],
     // these are non-existing props, we just pass them to getComponentProps()
-    contentVAlign: ['start', 'center', 'end'],
-    group: [
-      { separator: true, disabled: true, renderGroupTitle: 'groupTitle' },
-      { separator: false, disabled: false, renderGroupTitle: undefined }
+    customProps: [
+      { text: 'all custom props are undefined' },
+      { text: 'disabled', defaultShow: false, disabled: true },
+      {
+        text: 'no overflow',
+        defaultShow: true,
+        disabled: false,
+        separator: true,
+        groupDisabled: true,
+        renderGroupTitle: 'groupTitle',
+        contentVAlign: 'start'
+      },
+      // overflowX tests
+      {
+        text: 'overflowX auto',
+        defaultShow: true,
+        width: '12rem',
+        overflowX: 'auto',
+        disabled: false,
+        separator: true,
+        groupDisabled: true,
+        renderGroupTitle: 'groupTitle',
+        contentVAlign: 'start'
+      },
+      {
+        text: 'overflowX hidden',
+        defaultShow: true,
+        width: '12rem',
+        overflowX: 'hidden',
+        disabled: true,
+        separator: false,
+        groupDisabled: false,
+        renderGroupTitle: undefined,
+        contentVAlign: 'center'
+      },
+      {
+        text: 'overflowX visible',
+        defaultShow: true,
+        width: '12rem',
+        overflowX: 'visible',
+        disabled: false,
+        separator: false,
+        groupDisabled: false,
+        renderGroupTitle: undefined,
+        contentVAlign: 'end'
+      },
+      // overflowY tests
+      {
+        text: 'overflowY auto',
+        defaultShow: true,
+        height: '20rem',
+        overflowY: 'auto',
+        disabled: false,
+        separator: true,
+        groupDisabled: true,
+        renderGroupTitle: 'groupTitle',
+        contentVAlign: 'start'
+      },
+      {
+        text: 'overflowY hidden',
+        defaultShow: true,
+        height: '20rem',
+        overflowY: 'hidden',
+        disabled: true,
+        separator: false,
+        groupDisabled: false,
+        renderGroupTitle: undefined,
+        contentVAlign: 'center'
+      },
+      {
+        text: 'overflowY visible',
+        defaultShow: true,
+        height: '20rem',
+        overflowY: 'visible',
+        disabled: false,
+        separator: false,
+        groupDisabled: false,
+        renderGroupTitle: undefined,
+        contentVAlign: 'end'
+      }
     ]
   },
   getExampleProps(props) {
     return {
-      height: props.defaultShow || !props.trigger ? '30rem' : '3rem',
+      height:
+        props.customProps.defaultShow || !props.trigger ? '35rem' : '3rem',
       width: '25rem',
       padding: '0 0 0 large'
     }
-  },
-  filter: () => {
-    return false
   },
   getComponentProps: (props) => {
     return {
       rootPageId: 'page0',
       children: [
-        <Drilldown.Page id="page0" key="0">
-          <Drilldown.Option id="o1">minimal</Drilldown.Option>
+        <Drilldown.Page id="page0" key="page0">
+          <Drilldown.Option id="otext">
+            {props.customProps.text}
+          </Drilldown.Option>
+          <Drilldown.Option id="o">
+            this should be an option with very very super very very long label
+          </Drilldown.Option>
+          <Drilldown.Option id="o1" href="#">
+            this is a link
+          </Drilldown.Option>
           <Drilldown.Group
             id="g1"
-            disabled={props.group.disabled}
-            renderGroupTitle={props.group.renderGroupTitle}
-            withoutSeparators={props.group.separator}
+            disabled={props.customProps.groupDisabled}
+            renderGroupTitle={props.customProps.renderGroupTitle}
+            withoutSeparators={props.customProps.separator}
             selectableType="multiple"
           >
             <Drilldown.Option id="o2" renderLabelInfo="li" defaultSelected>
               defaultSelected
             </Drilldown.Option>
-            <Drilldown.Option id="o3" href="#">
-              renders as link
-            </Drilldown.Option>
+            <Drilldown.Option id="o3">minimal</Drilldown.Option>
           </Drilldown.Group>
           <Drilldown.Option id="o4" disabled>
             disabled
@@ -89,12 +169,12 @@ export default {
           >
             extra labels
           </Drilldown.Option>
-          <Drilldown.Separator />
+          <Drilldown.Separator id="s1" />
           <Drilldown.Option
             id="o6"
-            beforeLabelContentVAlign={props.contentVAlign}
+            beforeLabelContentVAlign={props.customProps.contentVAlign}
             renderBeforeLabel="bef"
-            afterLabelContentVAlign={props.contentVAlign}
+            afterLabelContentVAlign={props.customProps.contentVAlign}
             renderAfterLabel="after"
           >
             <br />
@@ -108,8 +188,8 @@ export default {
         </Drilldown.Page>
       ],
       rotateFocus: true,
-      overflowX: 'auto',
-      overflowY: 'auto',
+      overflowX: props.customProps.overflowX,
+      overflowY: props.customProps.overflowY,
       placement: 'bottom center',
       shouldHideOnSelect: true,
       shouldFocusTriggerOnClose: true,
@@ -117,9 +197,14 @@ export default {
       shouldReturnFocus: true,
       offsetX: 0,
       offsetY: 0,
-      disabled: false, // TODO comment this out
-      withArrow: props.trigger && props.defaultShow ? props.withArrow : false,
-      defaultShow: props.trigger ? props.defaultShow : false
+      width: props.customProps.width,
+      height: props.customProps.height,
+      disabled: props.customProps.disabled,
+      withArrow:
+        props.trigger && props.customProps.defaultShow
+          ? props.withArrow
+          : false,
+      defaultShow: props.trigger ? props.customProps.defaultShow : false
     }
   }
 } as StoryConfig<DrilldownProps>
