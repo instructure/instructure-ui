@@ -147,9 +147,16 @@ class App extends Component<AppProps, AppState> {
   fetchDocumentData = async (docId: string) => {
     const result = await fetch('docs/' + docId + '.json')
     const docData: DocData = await result.json()
-    docData.componentInstance =
-      // eslint-disable-next-line import/namespace
-      EveryComponent[docId as keyof typeof EveryComponent]
+    if (docId.includes('.')) {
+      // e.g. 'Calendar.Day', first get 'Calendar' then 'Day'
+      const components = docId.split('.')
+      const everyComp = EveryComponent as Record<string, any>
+      docData.componentInstance = everyComp[components[0]][components[1]]
+    } else {
+      docData.componentInstance =
+        // eslint-disable-next-line import/namespace
+        EveryComponent[docId as keyof typeof EveryComponent]
+    }
     return docData
   }
 
