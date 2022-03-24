@@ -23,7 +23,6 @@
  */
 
 import { locator } from '@instructure/ui-test-locator'
-import { parseQueryArguments } from '@instructure/ui-test-queries'
 import { find, findAll } from '@instructure/ui-test-utils'
 
 /* eslint-disable no-restricted-imports */
@@ -38,27 +37,16 @@ import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocato
 
 export const customMethods = {
   findPopoverContentWrapper: (...args: any[]) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return PopoverLocator.findContent(element, selector, {
-      ...options,
-      customMethods: {
-        ...options.customMethods,
-        ...customMethods
-      }
-    })
+    return PopoverLocator.findContent(...args)
   },
   findPopoverContent: async (...args: any[]) => {
-    const content = await PopoverLocator.findContent(
-      parseQueryArguments(...args)
-    )
+    const content = await PopoverLocator.findContent(...args)
 
     const target = content.getAttribute('data-position-content')
     return content.find(`[id=${target}]`)
   },
   findPopoverTrigger: async (...args: any[]) => {
-    const triggerWrapper = await PopoverLocator.find(
-      parseQueryArguments(...args)
-    )
+    const triggerWrapper = await PopoverLocator.find(...args)
     const target = triggerWrapper.getAttribute('data-position')
 
     return triggerWrapper.find(`[data-position-target=${target}]`)

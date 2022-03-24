@@ -113,29 +113,6 @@ describe('<Drilldown />', async () => {
   })
 
   describe('with a trigger', () => {
-    it('should set drilldownRef to the options container', async () => {
-      const drilldownRef = stub()
-      await mount(
-        <Drilldown
-          rootPageId="page0"
-          drilldownRef={drilldownRef}
-          trigger={<button>Options</button>}
-          defaultShow
-        >
-          <Drilldown.Page id="page0">
-            {data.map((option) => (
-              <Drilldown.Option id={option.id} key={option.id}>
-                {option.label}
-              </Drilldown.Option>
-            ))}
-          </Drilldown.Page>
-        </Drilldown>
-      )
-      const content = await DrilldownLocator.findPopoverContent()
-      const drilldown = content.getDOMNode().querySelector('[id^=Drilldown]')
-
-      expect(drilldownRef).to.have.been.called(drilldown)
-    })
     it('should not show content by default', async () => {
       await mount(
         <Drilldown rootPageId="page0" trigger={<button>click me</button>}>
@@ -263,30 +240,6 @@ describe('<Drilldown />', async () => {
         false
       )
     })
-  })
-
-  it('should give back the correct reference when "ref" is set', async () => {
-    const ref = React.createRef<Drilldown>()
-    await mount(
-      <Drilldown
-        rootPageId="page0"
-        trigger={<button>Options</button>}
-        defaultShow
-      >
-        <Drilldown.Page id="page0">
-          <Drilldown.Option id="option0">Option 0</Drilldown.Option>
-        </Drilldown.Page>
-      </Drilldown>,
-      {
-        props: {
-          ref
-        }
-      }
-    )
-    const trigger = await DrilldownLocator.findPopoverTrigger()
-
-    expect(ref.current).to.be.not.null()
-    expect(ref.current.ref).to.be.eq(trigger.getDOMNode())
   })
 
   describe('navigation', () => {
