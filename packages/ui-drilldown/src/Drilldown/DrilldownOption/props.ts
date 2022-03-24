@@ -34,6 +34,8 @@ import type {
 import type { WithStyleProps } from '@instructure/emotion'
 import type { OptionsItemProps } from '@instructure/ui-options'
 
+import Drilldown from '../index'
+
 type DrilldownOptionValue = string | number | undefined
 
 type RenderContentVAlign = 'start' | 'center' | 'end'
@@ -147,6 +149,7 @@ type DrilldownOptionOwnProps = {
     args: {
       optionId: string
       pageHistory: string[]
+      drilldown: Drilldown
       goToPage: (
         pageId: string
       ) => { prevPageId: string; newPageId: string } | undefined

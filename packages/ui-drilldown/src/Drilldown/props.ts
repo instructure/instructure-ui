@@ -165,7 +165,8 @@ type DrilldownOwnProps = {
     event: React.SyntheticEvent,
     value: DrilldownOptionValue | DrilldownOptionValue[],
     isSelected: boolean,
-    selectedOption: OptionChild
+    selectedOption: OptionChild,
+    drilldown: Drilldown
   ) => void
 
   /**

@@ -82,25 +82,16 @@ const customMethods = {
   findPopoverTrigger: (...args: any[]) => {
     return PopoverLocator.findTrigger(...args)
   },
-  findPopoverContentWrapper: (...args: any[]) => {
-    return PopoverLocator.findContent(...args)
-  },
-  findPopoverContent: async (...args: any[]) => {
-    const content = await PopoverLocator.findContent(...args)
-
-    const target = content.getAttribute('data-position-content')
-    return content.find(`[id=${target}]`)
-  },
-  // findPopoverContent: (...args: any[]) => {
-  //   const { element, selector, options } = parseQueryArguments(...args)
-  //   return PopoverLocator.findContent(element, selector, {
-  //     ...options,
-  //     customMethods: {
-  //       ...options.customMethods,
-  //       ...customMethods
-  //     }
-  //   })
-  // }
+  findPopoverContent: (...args: any[]) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return PopoverLocator.findContent(element, selector, {
+      ...options,
+      customMethods: {
+        ...options.customMethods,
+        ...customMethods
+      }
+    })
+  }
 }
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message

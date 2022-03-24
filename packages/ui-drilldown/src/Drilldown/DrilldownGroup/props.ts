@@ -37,6 +37,7 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
+import Drilldown from '../index'
 import type { DrilldownOptionValue } from '../DrilldownOption/props'
 import type { OptionChild, SeparatorChild } from '../props'
 
@@ -90,7 +91,8 @@ type DrilldownGroupOwnProps = {
     event: React.SyntheticEvent,
     value: DrilldownOptionValue[],
     isSelected: boolean,
-    selectedOption: OptionChild
+    selectedOption: OptionChild,
+    drilldown: Drilldown
   ) => void
 }
 

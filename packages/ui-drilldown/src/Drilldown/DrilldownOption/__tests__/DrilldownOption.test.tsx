@@ -713,6 +713,7 @@ describe('<Drilldown.Option />', async () => {
 
       expect(onOptionClick).to.have.been.calledWithMatch(match.object, {
         optionId: 'option1',
+        drilldown: match.object,
         pageHistory: ['page0'],
         goToPage: match.func,
         goToPreviousPage: match.func
