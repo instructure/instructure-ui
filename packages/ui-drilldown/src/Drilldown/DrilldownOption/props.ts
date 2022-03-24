@@ -148,8 +148,8 @@ type DrilldownOptionOwnProps = {
     event: React.SyntheticEvent,
     args: {
       optionId: string
-      pageHistory: string[]
       drilldown: Drilldown
+      pageHistory: string[]
       goToPage: (
         pageId: string
       ) => { prevPageId: string; newPageId: string } | undefined

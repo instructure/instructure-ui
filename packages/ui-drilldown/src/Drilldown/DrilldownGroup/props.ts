@@ -89,10 +89,12 @@ type DrilldownGroupOwnProps = {
    */
   onSelect?: (
     event: React.SyntheticEvent,
-    value: DrilldownOptionValue[],
-    isSelected: boolean,
-    selectedOption: OptionChild,
-    drilldown: Drilldown
+    args: {
+      value: DrilldownOptionValue[]
+      isSelected: boolean
+      selectedOption: OptionChild
+      drilldown: Drilldown
+    }
   ) => void
 }
 

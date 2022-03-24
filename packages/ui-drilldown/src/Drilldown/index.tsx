@@ -22,39 +22,6 @@
  * SOFTWARE.
  */
 
-// TODO: optimize code
-
-// TODO: add all necessary eventHandlers
-
-// TODO: controlled select? need it?
-// Edit: Since only groups have selections, and the defaultSelected can be set, I think we shouldn't add this feature, just if someone requests it later
-
-// TODO: history management
-// Edit: for now the pageHistory and the nav methods are exposed on the onToggle and onOptionClick methods - is it enough?
-
-// TODO: ARIA tags and roles - menu? combobox? both?
-// Info:
-// It's a big topic, we need an a11y person for it
-//  - option aria role (option? menuitem? menuitemcheckbox? menuitemradio?)
-//  - is it an option in a listbox (Selectable) or Menu with menuitems? settable?
-//  - hidden input for a11y? role="combobox" might be need it
-//  - does the trigger need the selectable trigger props/hidden input/nothing?
-
-// TODO: rotate focus on drilldown options (when using up-down arrows)
-// Edit: I made it settable with a props, but let's decide whether we should make it be the default and not settable?
-
-// TODO: `href` prop on option?
-// Edit: Is it needed? Probably nice if the drilldown acts like a Menu.
-// Problem: It cannot be done atm, the Options component overrides the Options.Item's as prop, probably a bug, needs to be fixed first.
-// Question: Is it going to work with the roles and etc? a11y needs to be checked too.
-
-// TODO: `controls` props on option?
-// Menu.Items have it, do we need it?
-
-// TODO: BUG? - hovering through can scroll to bottom
-// Info: hovering through a scrollable list and moving muse in-and-out at the bottom sometimes make it scroll to the bottom
-// Edit: could reproduce in Select too
-
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 import React, { Component, ReactElement } from 'react'
@@ -133,9 +100,12 @@ type PageMap = Record<string, MappedPage>
 // A Map width the selected options in a group, with the id as key and their value
 type SelectedGroupOptionsMap = Map<string, DrilldownOptionValue>
 
+// TODO: remove WIP when ready
+
 /**
 ---
 category: components/WIP
+experimental: true
 ---
 @tsProps
 **/
@@ -341,8 +311,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   // These are used in some callbacks to expose the navigation logic.
   get exposedNavigationProps() {
     const { goToPage, goToPreviousPage } = this
-
-    // TODO: make an example for onToggle/onOptionClick navigation (how to use goToPage etc.)
 
     // we make a copy of the array so the original history
     // cannot be modified from the outside
@@ -764,23 +732,21 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     )
 
     if (typeof groupOnSelect === 'function') {
-      groupOnSelect(
-        event,
-        selectedOptionValuesInGroup,
-        this._selectedGroupOptionsMap[groupId].has(optionId),
-        option,
-        this
-      )
+      groupOnSelect(event, {
+        value: selectedOptionValuesInGroup,
+        isSelected: this._selectedGroupOptionsMap[groupId].has(optionId),
+        selectedOption: option,
+        drilldown: this
+      })
     }
 
     if (typeof onSelect === 'function') {
-      onSelect(
-        event,
-        selectedOptionValuesInGroup,
-        this._selectedGroupOptionsMap[groupId].has(optionId),
-        option,
-        this
-      )
+      onSelect(event, {
+        value: selectedOptionValuesInGroup,
+        isSelected: this._selectedGroupOptionsMap[groupId].has(optionId),
+        selectedOption: option,
+        drilldown: this
+      })
     }
   }
 
@@ -836,7 +802,12 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       this.handleGroupOptionSelected(event, selectedOption)
     } else {
       if (typeof onSelect === 'function') {
-        onSelect(event, value, true, selectedOptionChild, this)
+        onSelect(event, {
+          value,
+          isSelected: true,
+          selectedOption: selectedOptionChild,
+          drilldown: this
+        })
       }
     }
 
@@ -1180,13 +1151,19 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     }
 
     // we need to bind our own option props the render functions
-    if (typeof optionProps.renderBeforeLabel === 'function') {
+    if (
+      typeof optionProps.renderBeforeLabel === 'function' &&
+      !optionProps.renderBeforeLabel?.prototype?.isReactComponent
+    ) {
       optionProps.renderBeforeLabel = optionProps.renderBeforeLabel.bind(
         null,
         renderLabelProps
       )
     }
-    if (typeof optionProps.renderAfterLabel === 'function') {
+    if (
+      typeof optionProps.renderAfterLabel === 'function' &&
+      !optionProps.renderAfterLabel?.prototype?.isReactComponent
+    ) {
       optionProps.renderAfterLabel = optionProps.renderAfterLabel.bind(
         null,
         renderLabelProps
@@ -1350,7 +1327,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         }}
       >
         {({
-          // TODO: figure out what other Selectable props we need:
+          // TODO: figure out what other Selectable props we need, if we want to add a Select version for drilldown:
           // getRootProps, - we probably don't need this
           // getLabelProps, - do we need label?
           // getDescriptionProps, - might be nice for assistiveText like in Select
@@ -1438,6 +1415,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       shouldReturnFocus,
       trigger,
       mountNode,
+      constrain,
+      positionTarget,
       popoverRef,
       disabled,
       onDismiss,
@@ -1463,6 +1442,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         mountNode={mountNode}
         placement={placement}
         withArrow={withArrow}
+        positionTarget={positionTarget}
+        constrain={constrain}
         shouldContainFocus={shouldContainFocus}
         shouldReturnFocus={shouldReturnFocus}
         id={this._id}

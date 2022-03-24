@@ -237,9 +237,9 @@ class Select extends Component<SelectProps> {
 
     // store option height to calculate list maxHeight
     if (node && node.querySelector('[role="option"]')) {
-      this._optionHeight = (node.querySelector(
-        '[role="option"]'
-      ) as HTMLElement).offsetHeight
+      this._optionHeight = (
+        node.querySelector('[role="option"]') as HTMLElement
+      ).offsetHeight
     }
   }
 
@@ -357,7 +357,8 @@ class Select extends Component<SelectProps> {
     const getRenderOptionLabel = (
       renderOptionLabel: RenderSelectOptionLabel
     ): React.ReactNode => {
-      return typeof renderOptionLabel === 'function'
+      return typeof renderOptionLabel === 'function' &&
+        !renderOptionLabel?.prototype?.isReactComponent
         ? renderOptionLabel.bind(null, {
             id,
             isDisabled,

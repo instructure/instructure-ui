@@ -679,20 +679,22 @@ describe('<Drilldown />', async () => {
 
       expect(onSelect).to.have.been.calledOnce()
       const selectValue = match.falsy.or(match.string).or(match.number)
-      expect(onSelect).to.have.been.calledWithMatch(
-        match.object,
-        match.every(selectValue).or(selectValue),
-        match.bool,
-        match.object,
-        match.object
-      )
+      expect(onSelect).to.have.been.calledWithMatch(match.object, {
+        value: match.every(selectValue).or(selectValue),
+        isSelected: match.bool,
+        selectedOption: match.object,
+        drilldown: match.object
+      })
 
       // 1st arg is the event
       expect(onSelect.lastCall.args[0].target).to.equal(option[1].getDOMNode())
-      // 4th arg is the option
-      expect(onSelect.lastCall.args[3].props.value).to.equal('opt_1')
-      // t5h arg is the drilldown
-      expect(typeof onSelect.lastCall.args[4].hide).to.equal('function')
+
+      expect(onSelect.lastCall.args[1].selectedOption.props.value).to.equal(
+        'opt_1'
+      )
+      expect(typeof onSelect.lastCall.args[1].drilldown.hide).to.equal(
+        'function'
+      )
     })
 
     it('should not fire when drilldown is disabled', async () => {

@@ -172,7 +172,6 @@ describe('<Drilldown.Page />', async () => {
 
       await actionOption.click()
 
-      // TODO: try to make work, doesn't register stub
       await wait(() => {
         expect(actionCallback).to.have.been.called()
       })
