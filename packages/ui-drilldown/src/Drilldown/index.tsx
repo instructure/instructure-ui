@@ -768,7 +768,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         event,
         selectedOptionValuesInGroup,
         this._selectedGroupOptionsMap[groupId].has(optionId),
-        option
+        option,
+        this
       )
     }
 
@@ -777,7 +778,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         event,
         selectedOptionValuesInGroup,
         this._selectedGroupOptionsMap[groupId].has(optionId),
-        option
+        option,
+        this
       )
     }
   }
@@ -808,6 +810,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     if (typeof onOptionClick === 'function') {
       onOptionClick(event, {
         optionId: id,
+        drilldown: this,
         ...this.exposedNavigationProps
       })
     }
@@ -833,7 +836,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       this.handleGroupOptionSelected(event, selectedOption)
     } else {
       if (typeof onSelect === 'function') {
-        onSelect(event, value, true, selectedOptionChild)
+        onSelect(event, value, true, selectedOptionChild, this)
       }
     }
 

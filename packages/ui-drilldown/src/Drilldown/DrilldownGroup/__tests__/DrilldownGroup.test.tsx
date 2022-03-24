@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, find, stub } from '@instructure/ui-test-utils'
+import { expect, mount, find, stub, match } from '@instructure/ui-test-utils'
 
 import type { QueriesHelpersEventsType } from '@instructure/ui-test-queries'
 
@@ -618,11 +618,20 @@ describe('<Drilldown.Group />', async () => {
 
       await option2.click()
 
-      expect(onSelect).to.have.been.calledOnce()
-      // 2nd arg is value array
-      expect(onSelect.lastCall.args[1][0]).to.equal('item2')
-      // 3rd arg is "isSelected" bool
-      expect(onSelect.lastCall.args[2]).to.equal(true)
+      expect(onSelect).to.have.been.calledWithMatch(
+        match.object,
+        ['item2'],
+        true,
+        match.object,
+        match.object
+      )
+
+      // 1st arg is the event
+      expect(onSelect.lastCall.args[0].target).to.equal(option2.getDOMNode())
+      // 4th arg is the option
+      expect(onSelect.lastCall.args[3].props.value).to.equal('item2')
+      // t5h arg is the drilldown
+      expect(typeof onSelect.lastCall.args[4].hide).to.equal('function')
     })
 
     describe('for "multiple" selectableType', async () => {
