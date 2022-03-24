@@ -119,13 +119,16 @@ export default {
         groupDisabled: false,
         renderGroupTitle: undefined,
         contentVAlign: 'end'
-      }
+      },
+      // tests for Drilldown.Page
+      { page: 'pageWithSubpages' },
+      { page: 'pageWithSubpages2' }
     ]
   },
   getExampleProps(props) {
     return {
       height:
-        props.customProps.defaultShow || !props.trigger ? '35rem' : '3rem',
+        props.customProps.defaultShow || !props.trigger ? '27rem' : '3rem',
       width: '25rem',
       padding: '0 0 0 large'
     }
@@ -133,60 +136,7 @@ export default {
   getComponentProps: (props) => {
     return {
       rootPageId: 'page0',
-      children: [
-        <Drilldown.Page id="page0" key="page0">
-          <Drilldown.Option id="otext">
-            {props.customProps.text}
-          </Drilldown.Option>
-          <Drilldown.Option id="o">
-            <div style={{ whiteSpace: 'nowrap' }}>
-              this should be an option with very very super very very long label
-            </div>
-          </Drilldown.Option>
-          <Drilldown.Option id="o1" href="#">
-            this is a link
-          </Drilldown.Option>
-          <Drilldown.Group
-            id="g1"
-            disabled={props.customProps.groupDisabled}
-            renderGroupTitle={props.customProps.renderGroupTitle}
-            withoutSeparators={props.customProps.separator}
-            selectableType="multiple"
-          >
-            <Drilldown.Option id="o2" renderLabelInfo="li" defaultSelected>
-              defaultSelected
-            </Drilldown.Option>
-            <Drilldown.Option id="o3">minimal</Drilldown.Option>
-          </Drilldown.Group>
-          <Drilldown.Option id="o4" disabled>
-            disabled
-          </Drilldown.Option>
-          <Drilldown.Option
-            id="o5"
-            renderBeforeLabel="be"
-            renderAfterLabel="af"
-            renderLabelInfo="li"
-          >
-            extra labels
-          </Drilldown.Option>
-          <Drilldown.Separator id="s1" />
-          <Drilldown.Option
-            id="o6"
-            beforeLabelContentVAlign={props.customProps.contentVAlign}
-            renderBeforeLabel="bef"
-            afterLabelContentVAlign={props.customProps.contentVAlign}
-            renderAfterLabel="after"
-          >
-            <br />
-            valign settings
-            <br />
-            <br />
-          </Drilldown.Option>
-          <Drilldown.Option id="o7" description="the description">
-            has description
-          </Drilldown.Option>
-        </Drilldown.Page>
-      ],
+      children: generateDrilldownChildren(props, props.customProps.page),
       rotateFocus: true,
       overflowX: props.customProps.overflowX,
       overflowY: props.customProps.overflowY,
@@ -208,3 +158,94 @@ export default {
     }
   }
 } as StoryConfig<DrilldownProps>
+
+function generateDrilldownChildren(
+  props: Record<string, any>,
+  variant: string
+) {
+  if (variant == 'pageWithSubpages') {
+    return [
+      <Drilldown.Page id="page0" key="page0" renderTitle="pageWithSubpages">
+        <Drilldown.Option id="o1" subPageId="subpage">
+          has subpage
+        </Drilldown.Option>
+        <Drilldown.Separator id="s1" />
+        <Drilldown.Option id="o2">does not have subpage</Drilldown.Option>
+        <Drilldown.Option id="o3" href="#">
+          this is a link
+        </Drilldown.Option>
+      </Drilldown.Page>,
+      <Drilldown.Page id="subpage" renderTitle="aaa" key={1}>
+        <Drilldown.Option id="tmp">not shown</Drilldown.Option>
+      </Drilldown.Page>
+    ]
+  } else if (variant == 'pageWithSubpages2') {
+    return [
+      <Drilldown.Page
+        id="page0"
+        key="page0"
+        renderTitle="pageWithSubpages2"
+        renderActionLabel="action label"
+        withoutHeaderSeparator
+        renderBackButtonLabel="go back"
+      >
+        <Drilldown.Option id="o1" subPageId="subpage">
+          has subpage
+        </Drilldown.Option>
+        <Drilldown.Separator id="s1" />
+        <Drilldown.Option id="o2">does not have subpage</Drilldown.Option>
+      </Drilldown.Page>,
+      <Drilldown.Page id="subpage" renderTitle="aaa" key={1}>
+        <Drilldown.Option id="tmp">subpage option</Drilldown.Option>
+      </Drilldown.Page>
+    ]
+  }
+  return [
+    <Drilldown.Page id="page0" key="page0">
+      <Drilldown.Option id="otext">{props.customProps.text}</Drilldown.Option>
+      <Drilldown.Option id="o">
+        <div style={{ whiteSpace: 'nowrap' }}>
+          this should be an option with very very super very very long label
+        </div>
+      </Drilldown.Option>
+      <Drilldown.Group
+        id="g1"
+        disabled={props.customProps.groupDisabled}
+        renderGroupTitle={props.customProps.renderGroupTitle}
+        withoutSeparators={props.customProps.separator}
+        selectableType="multiple"
+      >
+        <Drilldown.Option id="o2" renderLabelInfo="li" defaultSelected>
+          defaultSelected
+        </Drilldown.Option>
+        <Drilldown.Option id="o3">minimal</Drilldown.Option>
+      </Drilldown.Group>
+      <Drilldown.Option id="o4" disabled>
+        disabled
+      </Drilldown.Option>
+      <Drilldown.Option
+        id="o5"
+        renderBeforeLabel="be"
+        renderAfterLabel="af"
+        renderLabelInfo="li"
+      >
+        extra labels
+      </Drilldown.Option>
+      <Drilldown.Option
+        id="o6"
+        beforeLabelContentVAlign={props.customProps.contentVAlign}
+        renderBeforeLabel="bef"
+        afterLabelContentVAlign={props.customProps.contentVAlign}
+        renderAfterLabel="after"
+      >
+        <br />
+        valign settings
+        <br />
+        <br />
+      </Drilldown.Option>
+      <Drilldown.Option id="o7" description="the description">
+        has description
+      </Drilldown.Option>
+    </Drilldown.Page>
+  ]
+}
