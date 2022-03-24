@@ -818,6 +818,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   handleKeyDown = (event: React.KeyboardEvent) => {
     const id = (event.target as HTMLElement).id
     const option = this.getPageChildById(id)
+
     // On Space...
     if (event.key === ' ') {
       // we need to preventDefault so the page doesn't scroll on Space
