@@ -21,5 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { ColorPicker } from './ColorPicker'
-export { ColorMixer } from './ColorMixer'
+
+const shallowCompare = (
+  newObj: Record<string, unknown>,
+  prevObj: Record<string, unknown>
+) => {
+  for (const key in newObj) {
+    if (newObj[key] !== prevObj[key]) return true
+  }
+  return false
+}
+
+export default shallowCompare

@@ -21,5 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { ColorPicker } from './ColorPicker'
-export { ColorMixer } from './ColorMixer'
+
+import PropTypes from 'prop-types'
+import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
+import type { RGBAType } from '../props'
+
+type RGBAInputOwnProps = {
+  value: RGBAType
+  onChange: (rgba: RGBAType) => void
+}
+
+type RGBAInputState = {
+  value: RGBAType
+}
+
+type PropKeys = keyof RGBAInputOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type RGBAInputProps = RGBAInputOwnProps &
+  WithStyleProps<null, RGBAInputStyle> &
+  OtherHTMLAttributes<RGBAInputOwnProps>
+
+type RGBAInputStyle = ComponentStyle<'RGBAInput'>
+const propTypes: PropValidators<PropKeys> = {
+  value: PropTypes.object,
+  onChange: PropTypes.func
+}
+
+const allowedProps: AllowedPropKeys = ['onChange', 'value']
+
+export type { RGBAInputProps, RGBAInputState, RGBAInputStyle }
+export { propTypes, allowedProps }

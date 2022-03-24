@@ -14,7 +14,6 @@ render: false
 example: true
 ---
 class Example extends React.Component {
-  static contextType = TextDirectionContext;
 
   constructor(props) {
     super(props);
@@ -173,4 +172,39 @@ example: true
         renderIsRequiredMessage={()=>[{type:'error', text:'I am a required message'}]}
     />
 </div>
+```
+
+### Blablabla
+
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: { r: 51, g: 99, b: 42, a: 0 },
+
+    }
+  }
+
+  render() {
+
+
+    return (
+      <div>
+        <ColorMixer
+        value={this.state.value}
+        onChange={(value) => this.setState({ value })} />
+      </div>
+    );
+  }
+}
+
+render(<Example />);
+
+
 ```

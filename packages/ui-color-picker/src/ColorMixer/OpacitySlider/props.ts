@@ -21,5 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { ColorPicker } from './ColorPicker'
-export { ColorMixer } from './ColorMixer'
+
+import PropTypes from 'prop-types'
+
+import type {
+  OtherHTMLAttributes,
+  PropValidators
+} from '@instructure/shared-types'
+import type { RGBAType, RGBType } from '../props'
+
+type OpacitySliderOwnProps = {
+  value: number
+  onChange: (opacity: number) => void
+  width: number
+  height: number
+  indicatorRadius: number
+  color: RGBType
+}
+
+type OpacitySliderState = {
+  baseColor: RGBType
+  internalColor: RGBType
+  value: RGBAType
+}
+
+type PropKeys = keyof OpacitySliderOwnProps
+
+type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+type OpacitySliderProps = OpacitySliderOwnProps &
+  OtherHTMLAttributes<OpacitySliderOwnProps>
+
+const propTypes: PropValidators<PropKeys> = {
+  value: PropTypes.object,
+  onChange: PropTypes.func,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  indicatorRadius: PropTypes.number,
+  color: PropTypes.object
+}
+
+const allowedProps: AllowedPropKeys = [
+  'onChange',
+  'value',
+  'width',
+  'height',
+  'indicatorRadius'
+]
+
+export type { OpacitySliderProps, OpacitySliderState }
+export { propTypes, allowedProps }
