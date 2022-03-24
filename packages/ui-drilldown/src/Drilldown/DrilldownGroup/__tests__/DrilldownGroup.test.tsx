@@ -618,20 +618,22 @@ describe('<Drilldown.Group />', async () => {
 
       await option2.click()
 
-      expect(onSelect).to.have.been.calledWithMatch(
-        match.object,
-        ['item2'],
-        true,
-        match.object,
-        match.object
-      )
+      expect(onSelect).to.have.been.calledWithMatch(match.object, {
+        value: ['item2'],
+        isSelected: true,
+        selectedOption: match.object,
+        drilldown: match.object
+      })
 
       // 1st arg is the event
       expect(onSelect.lastCall.args[0].target).to.equal(option2.getDOMNode())
-      // 4th arg is the option
-      expect(onSelect.lastCall.args[3].props.value).to.equal('item2')
-      // t5h arg is the drilldown
-      expect(typeof onSelect.lastCall.args[4].hide).to.equal('function')
+
+      expect(onSelect.lastCall.args[1].selectedOption.props.value).to.equal(
+        'item2'
+      )
+      expect(typeof onSelect.lastCall.args[1].drilldown.hide).to.equal(
+        'function'
+      )
     })
 
     describe('for "multiple" selectableType', async () => {

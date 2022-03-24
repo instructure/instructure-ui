@@ -33,6 +33,7 @@ import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   PlacementPropValues,
+  PositionConstraint,
   PositionMountNode
 } from '@instructure/ui-position'
 import type {
@@ -163,10 +164,12 @@ type DrilldownOwnProps = {
    */
   onSelect?: (
     event: React.SyntheticEvent,
-    value: DrilldownOptionValue | DrilldownOptionValue[],
-    isSelected: boolean,
-    selectedOption: OptionChild,
-    drilldown: Drilldown
+    args: {
+      value: DrilldownOptionValue | DrilldownOptionValue[]
+      isSelected: boolean
+      selectedOption: OptionChild
+      drilldown: Drilldown
+    }
   ) => void
 
   /**
@@ -197,6 +200,16 @@ type DrilldownOwnProps = {
    * to use as the mount node for the `<Drilldown />` (defaults to `document.body`)
    */
   mountNode?: PositionMountNode
+
+  /**
+   * Target element for positioning the Popover (if it differs from the trigger)
+   */
+  positionTarget?: PositionMountNode
+
+  /**
+   * The parent in which to constrain the placement.
+   */
+  constrain?: PositionConstraint
 
   /**
    * If a trigger is supplied, should the `<Drilldown />` hide when an item is selected
@@ -294,6 +307,8 @@ const propTypes: PropValidators<PropKeys> = {
   onMouseOver: PropTypes.func,
   popoverRef: PropTypes.func,
   mountNode: PositionPropTypes.mountNode,
+  positionTarget: PositionPropTypes.mountNode,
+  constrain: PositionPropTypes.constrain,
   shouldHideOnSelect: PropTypes.bool,
   shouldContainFocus: PropTypes.bool,
   shouldReturnFocus: PropTypes.bool,
@@ -331,6 +346,8 @@ const allowedProps: AllowedPropKeys = [
   'drilldownRef',
   'popoverRef',
   'mountNode',
+  'positionTarget',
+  'constrain',
   'shouldHideOnSelect',
   'shouldContainFocus',
   'shouldReturnFocus',

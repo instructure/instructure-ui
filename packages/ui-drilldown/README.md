@@ -3,13 +3,15 @@ category: packages
 isWIP: true
 ---
 
+TODO: remove isWIP when ready
+
 ## ui-drilldown
 
 [![npm][npm]][npm-url]&nbsp;
 [![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-TODO: description
+A drilldown menu component.
 
 ### Components
 
