@@ -27,7 +27,10 @@ import PropTypes from 'prop-types'
 import { ThemeProvider } from '@emotion/react'
 
 import { TextDirectionContext } from '@instructure/ui-i18n'
-import { DeterministicIdContextProvider } from '@instructure/ui-react-utils'
+import {
+  DeterministicIdContextProvider,
+  getElementType
+} from '@instructure/ui-react-utils'
 
 import { getTheme } from '../EmotionThemeProvider'
 
@@ -44,19 +47,17 @@ type InstUIProviderProps = {
   theme?: ThemeOrOverride
 
   /**
-   * The text direction to use in the descendants. If not provided, it uses the following in this priority order:
-   *   - The value given in a parent `TextDirectionContext`
-   *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
-   *   - The default `ltr`
-   */
-  dir?: 'ltr' | 'rtl'
-
-  /**
    * A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
    */
   instanceCounterMap?: DeterministicIdProviderValue
 } & (
   | {
+      /**
+       * The text direction to use in the descendants. If not provided, it uses the following in this priority order:
+       *   - The value given in a parent `TextDirectionContext`
+       *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
+       *   - The default `ltr`
+       */
       dir: 'ltr' | 'rtl'
       as?: AsElementType
     }
@@ -133,7 +134,8 @@ function InstUISettingsProvider({
   children,
   theme = {},
   dir,
-  instanceCounterMap
+  instanceCounterMap,
+  as
 }: InstUIProviderProps) {
   const finalDir = dir || useContext(TextDirectionContext)
 
@@ -170,15 +172,14 @@ InstUISettingsProvider.propTypes = {
   children: PropTypes.node,
   theme: PropTypes.object,
   dir: PropTypes.oneOf(['ltr', 'rtl']),
-  instanceCounterMap: PropTypes.instanceOf(Map)
+  instanceCounterMap: PropTypes.instanceOf(Map),
+  as: PropTypes.string
   /* eslint-enable react/require-default-props */
 }
 
 InstUISettingsProvider.defaultProps = {
   theme: {},
-  instanceCounterMap: undefined,
-  as: undefined,
-  dir: undefined
+  as: undefined
 } as const
 
 export default InstUISettingsProvider

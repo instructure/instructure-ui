@@ -24,7 +24,7 @@
 
 /** @jsx jsx */
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
 import { canvas } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '../index'
 import { jsx } from '../../index'
@@ -67,5 +67,18 @@ describe('InstUISettingsProvider', async () => {
     element = subject.getDOMNode()
 
     expect(element.getAttribute('dir')).to.equal('ltr')
+  })
+  it('warns when "as" property is used without using the "dir" property', async () => {
+    const consoleWarning = spy(console, 'warn')
+    const warningMessage =
+      "The 'as' property should be used in conjunction with the 'dir' property!"
+
+    await mount(
+      //@ts-expect-error div is required
+      <InstUISettingsProvider as="div">
+        <div>text</div>
+      </InstUISettingsProvider>
+    )
+    expect(consoleWarning).to.has.been.calledWith(warningMessage)
   })
 })
