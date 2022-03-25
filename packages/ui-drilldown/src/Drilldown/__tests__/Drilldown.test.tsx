@@ -1522,6 +1522,8 @@ describe('<Drilldown />', async () => {
   })
 
   describe('with generated examples', async () => {
-    generateA11yTests(Drilldown, DrilldownExamples)
+    generateA11yTests(Drilldown, DrilldownExamples, [
+      'scrollable-region-focusable'
+    ])
   })
 })
