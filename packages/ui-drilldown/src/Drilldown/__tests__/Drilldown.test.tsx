@@ -1522,6 +1522,8 @@ describe('<Drilldown />', async () => {
   })
 
   describe('with generated examples', async () => {
+    // the `scrollable-region-focusable` axe error is not valid because
+    // axe does not see how the scrollable `div` can be focused
     generateA11yTests(Drilldown, DrilldownExamples, [
       'scrollable-region-focusable'
     ])
