@@ -113,10 +113,13 @@ class CloseButton extends Component<CloseButtonProps> {
     } = this.props
 
     return (
-      <span {...passthroughProps(props)} css={styles?.closeButton}>
+      <span
+        {...passthroughProps(props)}
+        css={styles?.closeButton}
+        ref={this.handleRef}
+      >
         <BaseButton
           renderIcon={IconXSolid}
-          elementRef={this.handleRef}
           interaction={this.interaction}
           type={type}
           color={this.color}
