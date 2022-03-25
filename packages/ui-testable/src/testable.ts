@@ -26,7 +26,6 @@ import { ComponentClass, ComponentState } from 'react'
 
 import { decorator } from '@instructure/ui-decorator'
 import { findDOMNode } from '@instructure/ui-dom-utils'
-import findDOMNodeReact from 'react-dom'
 
 // TODO: Components that render as non-native Portals have a DOMNode property.
 //  (Portal, DrawerTray, Modal, Overlay, Tray). Make this a common interface that all of them implements.
@@ -91,19 +90,9 @@ const testable =
               }
               try {
                 // Use this.DOMNode for components that render as non-native Portals...
-                //node = (this as ComponentWithDOMNode).DOMNode || findDOMNode(this) as Element
                 node =
                   (this as ComponentWithDOMNode).DOMNode ||
                   (findDOMNode(this) as Element)
-                if (findDOMNode(this) != findDOMNodeReact.findDOMNode(this)) {
-                  // eslint-disable-next-line no-console
-                  console.log(
-                    'BUGBUGBUG',
-                    selector,
-                    findDOMNode(this),
-                    findDOMNodeReact.findDOMNode(this)
-                  )
-                }
               } catch (e: any) {
                 console.warn(
                   `[ui-testable] Could not append locator attribute: ${e}`

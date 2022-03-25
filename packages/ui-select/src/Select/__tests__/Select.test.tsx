@@ -141,13 +141,12 @@ describe('<Select />', async () => {
     })
   })
 
-  it.only('should provide a focused getter', async () => {
+  it('should provide a focused getter', async () => {
     let selectRef: Select | undefined
     await mount(
       <Select
         renderLabel="Choose an option"
         //@ts-expect-error TODO this is coming from ReactComponentWrapper
-        //componentRef={(el) => {
         componentRef={(el) => {
           selectRef = el
         }}

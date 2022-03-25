@@ -262,7 +262,6 @@ class DateInput extends Component<DateInputProps> {
           display: isInline ? 'inline-block' : 'block',
           renderAfterInput: <IconCalendarMonthLine inline={false} />
         })}
-        elementRef={this.handleRef}
       />
     )
   }
@@ -288,7 +287,10 @@ class DateInput extends Component<DateInputProps> {
           getOptionProps,
           getDescriptionProps
         }) => (
-          <span {...getRootProps({ css: styles?.dateInput })}>
+          <span
+            {...getRootProps({ css: styles?.dateInput })}
+            ref={this.handleRef}
+          >
             {this.renderInput({ getInputProps, getTriggerProps })}
             <span {...getDescriptionProps()} css={styles?.assistiveText}>
               {assistiveText}

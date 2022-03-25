@@ -136,7 +136,7 @@ class Select extends Component<SelectProps> {
   private _optionHeight = 36
 
   focus() {
-    this.ref && this.ref.focus()
+    this.inputRef && this.inputRef.focus()
   }
 
   get _input() {

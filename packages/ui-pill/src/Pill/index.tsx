@@ -95,6 +95,7 @@ class Pill extends Component<PillProps, PillState> {
   }
 
   renderPill(
+    needsRef: boolean,
     focused?: TooltipRenderChildrenArgs['focused'],
     getTriggerProps?: TooltipRenderChildrenArgs['getTriggerProps']
   ) {
@@ -116,11 +117,12 @@ class Pill extends Component<PillProps, PillState> {
         ? getTriggerProps(filteredProps)
         : filteredProps
 
+    const refProp = needsRef ? { elementRef: this.handleRef } : {}
     return (
       <View
         {...containerProps}
         as={as}
-        elementRef={this.handleRef}
+        {...refProp}
         margin={margin}
         padding="0"
         maxWidth={styles?.maxWidth as string}
@@ -150,14 +152,14 @@ class Pill extends Component<PillProps, PillState> {
   render() {
     if (this.state.truncated) {
       return (
-        <Tooltip renderTip={this.props.children}>
+        <Tooltip renderTip={this.props.children} elementRef={this.handleRef}>
           {({ focused, getTriggerProps }) => {
-            return this.renderPill(focused, getTriggerProps)
+            return this.renderPill(false, focused, getTriggerProps)
           }}
         </Tooltip>
       )
     } else {
-      return this.renderPill()
+      return this.renderPill(true)
     }
   }
 }
