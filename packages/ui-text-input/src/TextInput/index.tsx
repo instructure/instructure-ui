@@ -31,7 +31,7 @@ import {
   passthroughProps,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { isActiveElement } from '@instructure/ui-dom-utils'
+import { isActiveElement, addEventListener } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -85,6 +85,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   private _input: HTMLInputElement | null = null
   private _defaultId: string
   private _messagesId: string
+  private _focusListener: { remove(): void } | null = null
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
@@ -97,6 +98,19 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   }
   componentDidMount() {
     this.props.makeStyles?.(this.makeStyleProps())
+    if (this._input) {
+      this._focusListener = addEventListener(
+        this._input,
+        'focus',
+        this.handleFocus
+      )
+    }
+  }
+
+  componentWillUnmount() {
+    if (this._focusListener) {
+      this._focusListener.remove()
+    }
   }
 
   componentDidUpdate() {
@@ -225,7 +239,6 @@ class TextInput extends Component<TextInputProps, TextInputState> {
         size={htmlSize}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
-        onFocus={this.handleFocus}
       />
     )
   }
