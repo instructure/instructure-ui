@@ -31,10 +31,13 @@ import type { DrilldownProps } from '../props'
 
 export default {
   sectionProp: 'trigger',
-  maxExamplesPerPage: 8,
+  maxExamplesPerPage: 5,
   propValues: {
     trigger: [
-      <button key={1} style={{ margin: '5px' }}>
+      <button
+        key={1}
+        style={{ marginLeft: '72px', position: 'absolute', top: '45%' }}
+      >
         a drilldown trigger
       </button>,
       undefined
@@ -128,9 +131,11 @@ export default {
   getExampleProps(props) {
     return {
       height:
-        props.customProps.defaultShow || !props.trigger ? '27rem' : '3rem',
-      width: '25rem',
-      padding: '0 0 0 large'
+        props.customProps.defaultShow || !props.trigger ? '57rem' : '5rem',
+      width: '38rem',
+      padding: '0 0 0 small',
+      withVisualDebug: true,
+      position: 'relative'
     }
   },
   getComponentProps: (props) => {
