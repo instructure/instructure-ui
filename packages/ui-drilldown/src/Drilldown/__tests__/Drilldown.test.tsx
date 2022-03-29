@@ -265,6 +265,38 @@ describe('<Drilldown />', async () => {
     })
   })
 
+  describe('as prop', async () => {
+    it('should be "ul" by default', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const drilldownContainer = await drilldown.findSelectableContainer()
+
+      expect(drilldownContainer.getDOMNode()).to.have.tagName('ul')
+    })
+
+    it('should render as passed element', async () => {
+      await mount(
+        <Drilldown rootPageId="page0" as="ol">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const drilldownContainer = await drilldown.findSelectableContainer()
+
+      expect(drilldownContainer.getDOMNode()).to.have.tagName('ol')
+    })
+  })
+
   describe('role prop', async () => {
     it('should be "menu" by default', async () => {
       await mount(
@@ -280,7 +312,7 @@ describe('<Drilldown />', async () => {
       expect(drilldown.getAttribute('role')).to.equal('menu')
     })
 
-    it('should be apply role', async () => {
+    it('should apply passed role', async () => {
       await mount(
         <Drilldown rootPageId="page0" role="list">
           <Drilldown.Page id="page0">

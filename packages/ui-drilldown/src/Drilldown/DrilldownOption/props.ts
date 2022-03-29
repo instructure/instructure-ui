@@ -85,7 +85,7 @@ type DrilldownOptionOwnProps = {
   href?: string
 
   /**
-   * Element type to render as. Will be set to `<a>` if href is provided.
+   * Element type to render as. Will be set to `<a>` if href is provided. If the parent is "ul" or "ol", the option is forced to be "li" element.
    */
   as?: AsElementType
 

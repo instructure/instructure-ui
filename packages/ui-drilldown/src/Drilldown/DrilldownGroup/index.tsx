@@ -49,7 +49,8 @@ class DrilldownGroup extends Component<DrilldownGroupProps> {
   static allowedProps = allowedProps
   static defaultProps = {
     disabled: false,
-    withoutSeparators: false
+    withoutSeparators: false,
+    role: 'group'
   }
 
   render() {

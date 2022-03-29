@@ -39,7 +39,8 @@ import type {
 import type {
   DrilldownTheme,
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  AsElementType
 } from '@instructure/shared-types'
 
 import { DrilldownPage } from './DrilldownPage'
@@ -95,6 +96,11 @@ type DrilldownOwnProps = {
    * when reaching the first or last option
    */
   rotateFocus?: boolean
+
+  /**
+   * Element type to render as.
+   */
+  as?: AsElementType
 
   /**
    * The ARIA role of the element
@@ -286,6 +292,7 @@ const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string,
   disabled: PropTypes.bool,
   rotateFocus: PropTypes.bool,
+  as: PropTypes.elementType,
   role: PropTypes.string,
   elementRef: PropTypes.func,
   drilldownRef: PropTypes.func,
@@ -324,6 +331,7 @@ const allowedProps: AllowedPropKeys = [
   'label',
   'disabled',
   'rotateFocus',
+  'as',
   'role',
   'overflowX',
   'overflowY',

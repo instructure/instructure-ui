@@ -33,7 +33,8 @@ import DrilldownSeparator from '../DrilldownSeparator'
 import type {
   OtherHTMLAttributes,
   PropValidators,
-  OptionsTheme
+  OptionsTheme,
+  AsElementType
 } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
 
@@ -66,6 +67,16 @@ type DrilldownGroupOwnProps = {
    * Is the option group disabled.
    */
   disabled?: boolean
+
+  /**
+   * The ARIA role of the element.
+   */
+  role?: string
+
+  /**
+   * Element type to render as. By default, it inherits Drilldown's `as` prop.
+   */
+  as?: AsElementType
 
   /**
    * Provides a reference to the underlying html root element
@@ -112,6 +123,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderGroupTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   withoutSeparators: PropTypes.bool,
   disabled: PropTypes.bool,
+  role: PropTypes.string,
+  as: PropTypes.elementType,
   elementRef: PropTypes.func,
   selectableType: PropTypes.oneOf(['single', 'multiple']),
   defaultSelected: PropTypes.array,
@@ -124,6 +137,8 @@ const allowedProps: AllowedPropKeys = [
   'renderGroupTitle',
   'withoutSeparators',
   'disabled',
+  'role',
+  'as',
   'elementRef',
   'selectableType',
   'defaultSelected',

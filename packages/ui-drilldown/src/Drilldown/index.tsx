@@ -120,6 +120,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   static defaultProps = {
     disabled: false,
     rotateFocus: true,
+    as: 'ul',
     role: 'menu',
     overflowX: 'auto',
     overflowY: 'auto',
@@ -943,9 +944,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     const { id, themeOverride, ...props } = separator.props
     return (
       <Options.Separator
+        {...props}
         id={id}
         key={id}
-        {...props}
+        role="separator"
         // we pass the themeOverride to Options.Separator
         themeOverride={themeOverride}
       />
@@ -1228,6 +1230,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       renderGroupTitle,
       themeOverride,
       selectableType,
+      role,
+      as,
       elementRef
     } = group.props
 
@@ -1255,7 +1259,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       <Options
         id={id}
         key={id}
-        role={this.props.role}
+        role={role}
+        as={as || this.props.as}
         renderLabel={renderGroupTitle}
         elementRef={elementRef}
         // we pass the themeOverride to Options
@@ -1300,6 +1305,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       maxHeight,
       maxWidth,
       role,
+      as,
       label
     } = this.props
 
@@ -1392,7 +1398,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
                 this._containerElement = element as HTMLDivElement
               }}
             >
-              <Options {...getListProps()} role="presentation" as="div">
+              <Options {...getListProps()} role="presentation" as={as}>
                 {this.renderList(getOptionProps, getDisabledOptionProps)}
               </Options>
             </View>

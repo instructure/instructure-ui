@@ -53,7 +53,7 @@ class DrilldownOption extends Component<DrilldownOptionProps> {
     beforeLabelContentVAlign: 'start',
     afterLabelContentVAlign: 'start',
     descriptionRole: 'note',
-    as: 'span',
+    as: 'li',
     role: 'menuitem'
   }
 
