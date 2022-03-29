@@ -52,6 +52,9 @@ const customMethods = {
   findSizableContainer: async (...args: any[]) => {
     return await find('[class$=-drilldown__container]', ...args)
   },
+  findSelectableContainer: async (...args: any[]) => {
+    return await find('[id^=Selectable_][id$=-list]', ...args)
+  },
   findHeaderTitle: async (...args: any[]) => {
     return await find('[id^=DrilldownHeader-Title]', ...args)
   },

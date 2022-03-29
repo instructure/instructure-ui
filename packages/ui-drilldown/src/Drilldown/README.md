@@ -698,7 +698,7 @@ class GroupsExample extends React.Component {
             />
             <Checkbox
               checked={this.state.showTitles}
-              label="Show separators"
+              label="Show group titles"
               variant="toggle"
               onChange={
                 () => {

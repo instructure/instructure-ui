@@ -207,6 +207,104 @@ describe('<Drilldown.Group />', async () => {
     })
   })
 
+  describe('role prop', async () => {
+    it('should be "group" by default', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0">
+              <Drilldown.Option id="groupOption01">Option</Drilldown.Option>
+              <Drilldown.Option id="groupOption02">Option</Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const group = await drilldown.find('#group0')
+
+      expect(group.getDOMNode()).to.have.attribute('role', 'group')
+    })
+
+    it('should render the group with passed role', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0" role="menu">
+              <Drilldown.Option id="groupOption01">Option</Drilldown.Option>
+              <Drilldown.Option id="groupOption02">Option</Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const group = await drilldown.find('#group0')
+
+      expect(group.getDOMNode()).to.have.attribute('role', 'menu')
+    })
+  })
+
+  describe('as prop', async () => {
+    it('should inherit Drilldown\'s "ul" by default', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0">
+              <Drilldown.Option id="groupOption01">Option</Drilldown.Option>
+              <Drilldown.Option id="groupOption02">Option</Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const drilldownContainer = await drilldown.findSelectableContainer()
+      const group = await drilldown.find('#group0')
+
+      expect(drilldownContainer.getDOMNode()).to.have.tagName('ul')
+      expect(group.getDOMNode()).to.have.tagName('ul')
+    })
+
+    it('should inherit Drilldown\'s "as" prop', async () => {
+      await mount(
+        <Drilldown rootPageId="page0" as="ol">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0">
+              <Drilldown.Option id="groupOption01">Option</Drilldown.Option>
+              <Drilldown.Option id="groupOption02">Option</Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const drilldownContainer = await drilldown.findSelectableContainer()
+      const group = await drilldown.find('#group0')
+
+      expect(drilldownContainer.getDOMNode()).to.have.tagName('ol')
+      expect(group.getDOMNode()).to.have.tagName('ol')
+    })
+
+    it('should render the group as other element', async () => {
+      await mount(
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0" as="ol">
+              <Drilldown.Option id="groupOption01">Option</Drilldown.Option>
+              <Drilldown.Option id="groupOption02">Option</Drilldown.Option>
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const group = await drilldown.find('#group0')
+
+      expect(group.getDOMNode()).to.have.tagName('ol')
+    })
+  })
+
   describe('selectableType', async () => {
     it('if not set, should render role="menuitem" options without icon by default', async () => {
       await mount(

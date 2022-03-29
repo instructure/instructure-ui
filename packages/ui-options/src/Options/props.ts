@@ -52,6 +52,7 @@ type OptionsOwnProps = {
    * Content to render as a label. Mostly for when the component is nested
    */
   renderLabel?: React.ReactNode | (() => React.ReactNode)
+
   //TODO children has to be typed better
   //e.g.: ChildrenPropTypes.oneOf(['Options', 'Item', 'Separator']))
   children?: React.ReactNode
@@ -63,7 +64,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type OptionsProps = OptionsOwnProps &
   WithStyleProps<OptionsTheme, OptionsStyle> &
-  OtherHTMLAttributes<OptionsOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<OptionsOwnProps> &
+  WithDeterministicIdProps
 
 type OptionsStyle = ComponentStyle<'options' | 'list' | 'label'>
 

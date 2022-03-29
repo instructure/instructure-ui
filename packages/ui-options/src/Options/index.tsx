@@ -140,6 +140,18 @@ class Options extends Component<OptionsProps> {
     })
   }
 
+  get ariaLabelledby() {
+    if (this.props.renderLabel) {
+      return this._labelId
+    }
+
+    if (this.props['aria-labelledby']) {
+      return this.props['aria-labelledby']
+    }
+
+    return undefined
+  }
+
   render() {
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Options.allowedProps),
@@ -161,13 +173,7 @@ class Options extends Component<OptionsProps> {
           margin="none"
           padding="none"
           background="primary"
-          aria-labelledby={
-            renderLabel
-              ? this._labelId
-              : this.props['aria-labelledby']
-              ? this.props['aria-labelledby']
-              : undefined
-          }
+          aria-labelledby={this.ariaLabelledby}
         >
           {this.renderChildren()}
         </View>

@@ -377,11 +377,26 @@ describe('<Drilldown.Option />', async () => {
   })
 
   describe('as prop', async () => {
-    it('should render option as specified html element', async () => {
+    it('should render option as `li` by default', async () => {
       await mount(
         <Drilldown rootPageId="page0">
           <Drilldown.Page id="page0">
-            <Drilldown.Option id="option1" as="li">
+            <Drilldown.Option id="option1">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const wrapper = await drilldown.findOptionWrapperByOptionId('option1')
+
+      expect(wrapper.getDOMNode()).to.have.tagName('li')
+    })
+
+    it('should force option to be `li` while the parent is "ul" or "ol"', async () => {
+      await mount(
+        <Drilldown rootPageId="page0" as="ol">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" as="div">
               Option
             </Drilldown.Option>
           </Drilldown.Page>
@@ -391,7 +406,24 @@ describe('<Drilldown.Option />', async () => {
       const drilldown = await DrilldownLocator.find()
       const wrapper = await drilldown.findOptionWrapperByOptionId('option1')
 
-      expect(wrapper.getTagName()).to.equal('li')
+      expect(wrapper.getDOMNode()).to.have.tagName('li')
+    })
+
+    it('should render option as specified html element, when the parent in non-list element', async () => {
+      await mount(
+        <Drilldown rootPageId="page0" as="div">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option1" as="div">
+              Option
+            </Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const wrapper = await drilldown.findOptionWrapperByOptionId('option1')
+
+      expect(wrapper.getDOMNode()).to.have.tagName('div')
     })
   })
 
@@ -464,7 +496,7 @@ describe('<Drilldown.Option />', async () => {
       expect(infoFunction).to.have.been.calledWith({
         variant: 'default',
         vAlign: 'start',
-        as: 'span',
+        as: 'li',
         role: 'menuitem',
         isSelected: false
       })
@@ -534,7 +566,7 @@ describe('<Drilldown.Option />', async () => {
       expect(beforeLabelFunction).to.have.been.calledWith({
         variant: 'default',
         vAlign: 'start',
-        as: 'span',
+        as: 'li',
         role: 'menuitem',
         isSelected: false
       })
@@ -603,7 +635,7 @@ describe('<Drilldown.Option />', async () => {
       expect(beforeLabelFunction).to.have.been.calledWith({
         variant: 'default',
         vAlign: 'start',
-        as: 'span',
+        as: 'li',
         role: 'menuitem',
         isSelected: false
       })
