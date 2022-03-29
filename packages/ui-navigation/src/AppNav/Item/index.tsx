@@ -44,12 +44,13 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { AppNavItemProps } from './props'
 import { allowedProps, propTypes } from './props'
-
+import type { ViewOwnProps, ViewProps } from '@instructure/ui-view'
 /**
 ---
 parent: AppNav
 id: AppNav.Item
 ---
+@tsProps
 @module Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
@@ -62,14 +63,15 @@ class Item extends Component<AppNavItemProps> {
 
   static defaultProps = {
     children: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClick: function (event) {},
+    onClick: function (_event: React.MouseEvent<ViewProps>) {},
     isSelected: false,
     cursor: 'pointer',
     isDisabled: false
   } as const
 
   ref: Element | null = null
+  handleFocus?: React.FocusEventHandler<ViewOwnProps>
+  handleBlur?: React.FocusEventHandler<ViewOwnProps>
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -89,8 +91,7 @@ class Item extends Component<AppNavItemProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
-  handleClick = (e) => {
+  handleClick = (e: React.MouseEvent<ViewProps>) => {
     const { isDisabled, onClick } = this.props
 
     if (isDisabled) {
@@ -132,9 +133,7 @@ class Item extends Component<AppNavItemProps> {
         display="flex"
         position="relative"
         borderRadius="medium"
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'handleFocus' does not exist on type 'Ite... Remove this comment to see the full error message
         onFocus={this.handleFocus}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'handleBlur' does not exist on type 'Item... Remove this comment to see the full error message
         onBlur={this.handleBlur}
         cursor={isDisabled ? 'not-allowed' : cursor}
         css={this.props.styles?.item}

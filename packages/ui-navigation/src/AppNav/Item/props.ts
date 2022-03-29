@@ -31,17 +31,50 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { Cursor } from '@instructure/ui-prop-types'
+import type { ViewProps } from '@instructure/ui-view'
 
 type AppNavItemOwnProps = {
-  renderLabel: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * The text to display. If the `icon` prop is used, label text must be wrapped
+   * in `ScreenReaderContent`.
+   */
+  renderLabel: React.ReactNode | string | ((...args: any[]) => string)
+  /**
+   * Content to display after the renderLabel text, such as a badge
+   */
   renderAfter?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * The visual to display (ex. an Image, Logo, Avatar, or Icon)
+   */
   renderIcon?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * If the item goes to a new page, pass an href
+   */
   href?: string
-  onClick?: (...args: any[]) => any
+  /**
+   * If the item does not go to a new page, pass an onClick
+   */
+  onClick?: (event: React.MouseEvent<ViewProps>) => void
+  /**
+   * Denotes which item is currently selected
+   */
   isSelected?: boolean
+  /**
+   * provides a reference to the underlying focusable (`button` or `a`) element
+   */
   elementRef?: (element: Element | null) => void
+  /**
+   * The element type to render as (will default to `<a>` if href is provided)
+   */
   as?: AsElementType
+  /**
+   * Specify the mouse cursor to use on :hover.
+   * The `pointer` cursor is used by default.
+   */
   cursor?: Cursor
+  /**
+   * Disables the link or button visually and functionally
+   */
   isDisabled?: boolean
 }
 
@@ -56,47 +89,19 @@ type AppNavItemProps = AppNavItemOwnProps &
 type AppNavItemStyle = ComponentStyle<'item' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The text to display. If the `icon` prop is used, label text must be wrapped
-   * in `ScreenReaderContent`.
-   */
-  renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  /**
-   * Content to display after the renderLabel text, such as a badge
-   */
+  renderLabel: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+    PropTypes.func
+  ]).isRequired,
   renderAfter: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * The visual to display (ex. an Image, Logo, Avatar, or Icon)
-   */
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * If the item goes to a new page, pass an href
-   */
   href: PropTypes.string,
-  /**
-   * If the item does not go to a new page, pass an onClick
-   */
   onClick: PropTypes.func,
-  /**
-   * Denotes which item is currently selected
-   */
   isSelected: PropTypes.bool,
-  /**
-   * provides a reference to the underlying focusable (`button` or `a`) element
-   */
   elementRef: PropTypes.func,
-  /**
-   * The element type to render as (will default to `<a>` if href is provided)
-   */
   as: PropTypes.elementType,
-  /**
-   * Specify the mouse cursor to use on :hover.
-   * The `pointer` cursor is used by default.
-   */
   cursor: PropTypes.string,
-  /**
-   * Disables the link or button visually and functionally
-   */
   isDisabled: PropTypes.bool
 }
 
