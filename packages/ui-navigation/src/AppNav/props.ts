@@ -41,15 +41,52 @@ import type {
 } from '@instructure/shared-types'
 
 type AppNavOwnProps = {
+  /**
+   * Screenreader label for the overall navigation
+   */
   screenReaderLabel: string
+  /**
+   * The rate (in ms) the component responds to container resizing or
+   * an update to one of its child items
+   */
   debounce?: number
+  /**
+   * Content to display before the navigation items, such as a logo
+   */
   renderBeforeItems?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * Content to display after the navigation items, aligned to the far end
+   * of the navigation
+   */
   renderAfterItems?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin?: Spacing
+  /**
+   * Provides a reference to the underlying nav element
+   */
   elementRef?: (element: Element | null) => void
+  /**
+   * Customize the text displayed in the menu trigger when links overflow
+   * the overall nav width.
+   */
   renderTruncateLabel?: React.ReactNode | ((...args: any[]) => any)
-  onUpdate?: (...args: any[]) => any
+  /**
+   * Called whenever the navigation items are updated or the size of
+   * the navigation changes. Passes in the `visibleItemsCount` as
+   * a parameter.
+   */
+  onUpdate?: ({ visibleItemsCount }: { visibleItemsCount: number }) => void
+  /**
+   * Sets the number of navigation items that are visible.
+   */
   visibleItemsCount?: number
+  /**
+   * Only accepts `AppNav.Item` as children
+   */
   children?: React.ReactNode
 }
 
@@ -71,52 +108,15 @@ type AppNavStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * Screenreader label for the overall navigation
-   */
   screenReaderLabel: PropTypes.string.isRequired,
-  /**
-   * Only accepts `AppNav.Item` as children
-   */
   children: ChildrenPropTypes.oneOf([Item]),
-  /**
-   * The rate (in ms) the component responds to container resizing or
-   * an update to one of its child items
-   */
   debounce: PropTypes.number,
-  /**
-   * Content to display before the navigation items, such as a logo
-   */
   renderBeforeItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Content to display after the navigation items, aligned to the far end
-   * of the navigation
-   */
   renderAfterItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
   margin: ThemeablePropTypes.spacing,
-  /**
-   * Provides a reference to the underlying nav element
-   */
   elementRef: PropTypes.func,
-  /**
-   * Customize the text displayed in the menu trigger when links overflow
-   * the overall nav width.
-   */
   renderTruncateLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Called whenever the navigation items are updated or the size of
-   * the navigation changes. Passes in the `visibleItemsCount` as
-   * a parameter.
-   */
   onUpdate: PropTypes.func,
-  /**
-   * Sets the number of navigation items that are visible.
-   */
   visibleItemsCount: PropTypes.number
 }
 
