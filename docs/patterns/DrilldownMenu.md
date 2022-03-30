@@ -6,6 +6,8 @@ id: DrilldownMenu
 
 ## Drilldown Menu
 
+> Note: We have added the official [Drilldown](#Drilldown) component to the InstUI library. Feel free to try it!
+
 This example shows an accessible implementation of a multi level menu using InstUI components. ([Popover](#Popover), [Menu](#Menu))
 This component is useful when you want to display large amounts of data in a compact manner and using [Menu.SubMenu](#Menu) would be too cumbersome to use.
 
