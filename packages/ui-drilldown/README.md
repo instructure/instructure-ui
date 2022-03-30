@@ -1,9 +1,6 @@
 ---
 category: packages
-isWIP: true
 ---
-
-TODO: remove isWIP when ready
 
 ## ui-drilldown
 

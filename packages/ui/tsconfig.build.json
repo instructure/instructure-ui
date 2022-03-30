@@ -22,6 +22,7 @@
     { "path": "../ui-date-input/tsconfig.build.json" },
     { "path": "../ui-dialog/tsconfig.build.json" },
     { "path": "../ui-drawer-layout/tsconfig.build.json" },
+    { "path": "../ui-drilldown/tsconfig.build.json" },
     { "path": "../ui-editable/tsconfig.build.json" },
     { "path": "../ui-expandable/tsconfig.build.json" },
     { "path": "../ui-file-drop/tsconfig.build.json" },

@@ -100,11 +100,9 @@ type PageMap = Record<string, MappedPage>
 // A Map width the selected options in a group, with the id as key and their value
 type SelectedGroupOptionsMap = Map<string, DrilldownOptionValue>
 
-// TODO: remove WIP when ready
-
 /**
 ---
-category: components/WIP
+category: components
 experimental: true
 ---
 @tsProps

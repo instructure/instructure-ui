@@ -1,6 +1,5 @@
 {
   "name": "@instructure/ui-drilldown",
-  "private": true,
   "version": "8.21.0",
   "description": "A drilldown menu component",
   "author": "Instructure, Inc. Engineering and Product Design",
