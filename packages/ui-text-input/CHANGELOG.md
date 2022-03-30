@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.21.0](https://github.com/instructure/instructure-ui/compare/v8.20.0...v8.21.0) (2022-03-30)
+
+### Bug Fixes
+
+- **ui-text-input:** fix Event handling for `TextInput`, so that the focus ring will appear as intended when used as `Popover` trigger ([002505b](https://github.com/instructure/instructure-ui/commit/002505b762a235d29c27eb3fc8b69bcaff7482c2))
+
 # [8.20.0](https://github.com/instructure/instructure-ui/compare/v8.19.0...v8.20.0) (2022-03-22)
 
 **Note:** Version bump only for package @instructure/ui-text-input
