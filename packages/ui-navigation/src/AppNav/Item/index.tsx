@@ -44,7 +44,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { AppNavItemProps } from './props'
 import { allowedProps, propTypes } from './props'
-import type { ViewOwnProps, ViewProps } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view'
 /**
 ---
 parent: AppNav
