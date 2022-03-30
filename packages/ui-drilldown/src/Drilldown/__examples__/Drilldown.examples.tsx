@@ -29,19 +29,18 @@ import type { StoryConfig } from '@instructure/ui-test-utils'
 import { Drilldown } from '../index'
 import type { DrilldownProps } from '../props'
 
+const triggerButton = (
+  <button
+    key={1}
+    style={{ marginLeft: '72px', position: 'absolute', top: '45%' }}
+  >
+    a drilldown trigger
+  </button>
+)
+
 export default {
-  sectionProp: 'trigger',
-  maxExamplesPerPage: 5,
+  maxExamplesPerPage: 10,
   propValues: {
-    trigger: [
-      <button
-        key={1}
-        style={{ marginLeft: '72px', position: 'absolute', top: '45%' }}
-      >
-        a drilldown trigger
-      </button>,
-      undefined
-    ],
     // these are non-existing props, we just pass them to getComponentProps()
     customProps: [
       { text: 'all custom props are undefined' },
@@ -125,13 +124,68 @@ export default {
       },
       // tests for Drilldown.Page
       { page: 'pageWithSubpages' },
-      { page: 'pageWithSubpages2' }
+      { page: 'pageWithSubpages2' },
+      // Popover version
+      {
+        text: 'with trigger',
+        trigger: triggerButton,
+        defaultShow: false,
+        disabled: false
+      },
+      {
+        text: 'with trigger disabled',
+        trigger: triggerButton,
+        defaultShow: false,
+        disabled: true
+      },
+      {
+        text: 'with trigger and defaultShow',
+        trigger: triggerButton,
+        defaultShow: true,
+        disabled: false
+      },
+      {
+        text: 'with trigger, defaultShow and disabled',
+        trigger: triggerButton,
+        defaultShow: true,
+        disabled: true
+      },
+      {
+        text: 'with trigger and withArrow',
+        trigger: triggerButton,
+        defaultShow: true,
+        withArrow: true
+      },
+      {
+        text: 'with trigger and withArrow="false"',
+        trigger: triggerButton,
+        defaultShow: true,
+        withArrow: false
+      },
+      {
+        text: 'with trigger and placement + offset',
+        trigger: triggerButton,
+        defaultShow: true,
+        placement: 'end top',
+        offsetX: 10,
+        offsetY: -20,
+        width: '20rem'
+      },
+      {
+        text: 'with trigger and width + height',
+        trigger: triggerButton,
+        defaultShow: true,
+        width: '20rem',
+        height: '20rem'
+      }
     ]
   },
   getExampleProps(props) {
     return {
       height:
-        props.customProps.defaultShow || !props.trigger ? '57rem' : '5rem',
+        props.customProps.defaultShow || !props.customProps.trigger
+          ? '57rem'
+          : '5rem',
       width: '38rem',
       padding: '0 0 0 small',
       withVisualDebug: true,
@@ -145,21 +199,29 @@ export default {
       rotateFocus: true,
       overflowX: props.customProps.overflowX,
       overflowY: props.customProps.overflowY,
-      placement: 'bottom center',
       shouldHideOnSelect: true,
       shouldFocusTriggerOnClose: true,
       shouldContainFocus: false,
       shouldReturnFocus: true,
-      offsetX: 0,
-      offsetY: 0,
       width: props.customProps.width,
       height: props.customProps.height,
       disabled: props.customProps.disabled,
-      withArrow:
-        props.trigger && props.customProps.defaultShow
-          ? props.withArrow
-          : false,
-      defaultShow: props.trigger ? props.customProps.defaultShow : false
+      trigger: props.customProps.trigger,
+      ...(props.customProps.trigger
+        ? {
+            defaultShow: props.customProps.defaultShow,
+            withArrow: props.customProps.withArrow,
+            placement: props.customProps.placement,
+            offsetX: props.customProps.offsetX,
+            offsetY: props.customProps.offsetY
+          }
+        : {
+            defaultShow: false,
+            withArrow: false,
+            placement: 'bottom center',
+            offsetX: 0,
+            offsetY: 0
+          })
     }
   }
 } as StoryConfig<DrilldownProps>
