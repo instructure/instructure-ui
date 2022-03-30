@@ -63,7 +63,7 @@ class Item extends Component<AppNavItemProps> {
 
   static defaultProps = {
     children: null,
-    onClick: function (_event: React.MouseEvent<ViewProps>) {},
+    onClick: function (_event: React.MouseEvent<Element>) {},
     isSelected: false,
     cursor: 'pointer',
     isDisabled: false
@@ -91,7 +91,7 @@ class Item extends Component<AppNavItemProps> {
     }
   }
 
-  handleClick = (e: React.MouseEvent<ViewProps>) => {
+  handleClick = (e: React.MouseEvent<Element>) => {
     const { isDisabled, onClick } = this.props
 
     if (isDisabled) {

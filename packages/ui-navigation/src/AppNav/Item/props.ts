@@ -31,7 +31,7 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { Cursor } from '@instructure/ui-prop-types'
-import type { ViewProps } from '@instructure/ui-view'
+import React from 'react'
 
 type AppNavItemOwnProps = {
   /**
@@ -54,7 +54,7 @@ type AppNavItemOwnProps = {
   /**
    * If the item does not go to a new page, pass an onClick
    */
-  onClick?: (event: React.MouseEvent<ViewProps>) => void
+  onClick?: (event: React.MouseEvent<Element>) => void
   /**
    * Denotes which item is currently selected
    */
