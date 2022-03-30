@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.18.0](https://github.com/instructure/instructure-ui/compare/v7.17.0...v7.18.0) (2022-03-30)
+
+### Features
+
+- **ui-icons:** update `stats` and `analytics` icons ([be58092](https://github.com/instructure/instructure-ui/commit/be58092))
+
 # [7.17.0](https://github.com/instructure/instructure-ui/compare/v7.16.0...v7.17.0) (2022-03-22)
 
 ### Features
