@@ -1,6 +1,6 @@
 [build]
   publish = "packages/__docs__/__build__"
-  command = "yarn bootstrap:docs && yarn build:docs"
+  command = "yarn bootstrap && yarn build:docs"
 
 [context.production]
   # ignore the build & deploy from the master branch
