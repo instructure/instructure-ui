@@ -91,10 +91,6 @@ class DateInput extends Component<DateInputProps> {
     this.props.makeStyles?.()
   }
 
-  handleRef = (el: Element | null) => {
-    this.ref = el
-  }
-
   get selectedDateId() {
     let selectedDateId: string | undefined
     Children.toArray(this.props.children).forEach((day) => {
@@ -289,7 +285,7 @@ class DateInput extends Component<DateInputProps> {
         }) => (
           <span
             {...getRootProps({ css: styles?.dateInput })}
-            ref={this.handleRef}
+            ref={(el) => (this.ref = el)}
           >
             {this.renderInput({ getInputProps, getTriggerProps })}
             <span {...getDescriptionProps()} css={styles?.assistiveText}>

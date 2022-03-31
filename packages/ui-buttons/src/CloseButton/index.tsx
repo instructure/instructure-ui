@@ -68,9 +68,6 @@ class CloseButton extends Component<CloseButtonProps> {
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
-
-    this.ref = el
-
     if (typeof elementRef === 'function') {
       elementRef(el)
     }
@@ -116,10 +113,11 @@ class CloseButton extends Component<CloseButtonProps> {
       <span
         {...passthroughProps(props)}
         css={styles?.closeButton}
-        ref={this.handleRef}
+        ref={(el) => (this.ref = el)}
       >
         <BaseButton
           renderIcon={IconXSolid}
+          elementRef={this.handleRef}
           interaction={this.interaction}
           type={type}
           color={this.color}
