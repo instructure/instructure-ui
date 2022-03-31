@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.22.0](https://github.com/instructure/instructure-ui/compare/v8.21.0...v8.22.0) (2022-03-31)
+
+### Features
+
+- **ui-drilldown,ui:** add new `Drilldown` component ([44e7e13](https://github.com/instructure/instructure-ui/commit/44e7e13f1720680be9f7e76a3d3ec0cf94e88d5b))
+
+##### Drilldown component
+
+The [Drilldown](#Drilldown) component exists to support navigating and managing tree structures in compact spaces.
+It is a diverse component that displays hierarchical data in a fashion that allows the users to “drill down” and dig deeper into the layers (pages) of the data structure.
+It has similar look and features to the [Menu](#Menu), [Select](#Select) and [TreeBrowser](#TreeBrowser) components.
+
 # [8.21.0](https://github.com/instructure/instructure-ui/compare/v8.20.0...v8.21.0) (2022-03-30)
 
 ### Bug Fixes

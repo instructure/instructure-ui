@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.22.0](https://github.com/instructure/instructure-ui/compare/v8.21.0...v8.22.0) (2022-03-31)
+
+**Note:** Version bump only for package @instructure/browserslist-config-instui
+
 # [8.21.0](https://github.com/instructure/instructure-ui/compare/v8.20.0...v8.21.0) (2022-03-30)
 
 **Note:** Version bump only for package @instructure/browserslist-config-instui
