@@ -24,16 +24,19 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
+
+import { withStyle, jsx } from '@instructure/emotion'
 import { Table } from '@instructure/ui-table'
 import { View } from '@instructure/ui-view'
 
+import type { BaseColors } from '@instructure/shared-types'
+
 import { ColorSwatch } from '../ColorSwatch'
 
-import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
-import type { ComponentThemeProps } from './props'
 import { propTypes, allowedProps } from './props'
-import type { BaseColors } from '@instructure/shared-types'
+import type { ComponentThemeProps } from './props'
+
 @withStyle(generateStyle, null)
 class ComponentTheme extends Component<ComponentThemeProps> {
   static propTypes = propTypes

@@ -25,8 +25,10 @@
 import React, { Component } from 'react'
 
 import { compileMarkdown } from '../compileMarkdown'
-import type { DescriptionProps } from './props'
+
 import { propTypes, allowedProps } from './props'
+import type { DescriptionProps } from './props'
+
 class Description extends Component<DescriptionProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
