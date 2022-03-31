@@ -24,17 +24,18 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
+
 import { Table } from '@instructure/ui-table'
 import { withStyle, jsx } from '@instructure/emotion'
+
 import generateStyle from './styles'
 import { compileMarkdown } from '../compileMarkdown'
+
 import type { PropertiesProps } from './props'
 import type {
   ElementsType,
   ObjectSignatureType,
-  PropDescriptor
-} from '../../buildScripts/DataTypes'
-import {
+  PropDescriptor,
   SimpleType,
   TSFunctionSignatureType,
   TypeDescriptor

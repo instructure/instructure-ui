@@ -107,7 +107,9 @@ class Document extends Component<
       typeof generateComponentTheme === 'function' &&
       generateComponentTheme(themeVariables)
 
-    return componentTheme && Object.keys(componentTheme).length > 0 ? (
+    const themeVariableKeys = Object.keys(componentTheme)
+
+    return componentTheme && themeVariableKeys.length > 0 ? (
       <View margin="x-large 0" display="block">
         <Heading level="h2" as="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
           Default Theme Variables
@@ -116,6 +118,45 @@ class Document extends Component<
           componentTheme={componentTheme}
           themeVariables={themeVariables}
         />
+
+        <View margin="x-large 0 0" display="block">
+          <Heading
+            level="h4"
+            id={`${doc.id}ThemeOverrideExample`}
+            margin="0 0 small 0"
+          >
+            How to override the default theme
+          </Heading>
+
+          <View margin="small 0" display="block">
+            In case you need to change the appearance of the{' '}
+            <code>{doc.id}</code> component, you can override it&apos;s default
+            theme variables.
+          </View>
+          <View margin="small 0" display="block">
+            The easiest way to do this is to utilize the{' '}
+            <code>themeOverride</code> property. See the{' '}
+            <Link href="#using-theme-overrides">Using theme overrides</Link>{' '}
+            guide for more info and alternative methods.
+          </View>
+
+          <CodeEditor
+            label="Component theme override example"
+            language="js"
+            readOnly
+            value={`// theme override example
+
+<${doc.id}
+  {...props}
+  themeOverride={{
+    ${
+      // get random theme variable
+      themeVariableKeys[Math.floor(Math.random() * themeVariableKeys.length)]
+    }: 'custom value'
+  }}
+/>`}
+          />
+        </View>
       </View>
     ) : null
   }
