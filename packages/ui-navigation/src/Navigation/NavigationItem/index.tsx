@@ -52,7 +52,7 @@ class NavigationItem extends Component<NavigationItemProps> {
 
   static defaultProps = {
     as: 'a',
-    onClick: function (_e: React.MouseEvent, _selected: boolean) {},
+    onClick: function (_event: React.MouseEvent) {},
     selected: false,
     minimized: false
   } as const
