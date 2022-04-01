@@ -32,15 +32,17 @@ import { RangeInputTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): RangeInputTheme => {
-  const { colors, typography, spacing, forms, key: themeName } = theme
+  const { colors, borders, typography, spacing, forms, key: themeName } = theme
 
   const themeSpecificStyle: ThemeSpecificStyle<RangeInputTheme> = {
     canvas: {
       handleBackground: theme['ic-brand-primary'],
-      handleShadowColor: darken(theme['ic-brand-primary'], 15),
-      handleFocusOutlineColor: alpha(theme['ic-brand-primary']!, 40),
       handleHoverBackground: theme['ic-brand-primary'],
-      handleFocusBackground: theme['ic-brand-primary']
+      handleFocusBackground: theme['ic-brand-primary'],
+
+      // Deprecated, remove with "deprecated" thumbVariant
+      handleShadowColor: darken(theme['ic-brand-primary'], 15),
+      handleFocusOutlineColor: alpha(theme['ic-brand-primary']!, 40)
     }
   }
 
@@ -49,11 +51,20 @@ const generateComponentTheme = (theme: Theme): RangeInputTheme => {
 
     handleSize: '1.5rem',
     handleBackground: colors?.backgroundBrand,
-    handleShadowColor: darken(colors?.borderBrand, 15),
+    handleBorderColor: colors?.borderLightest,
+    handleBorderSize: borders?.widthMedium,
+    handleShadow:
+      '0 0.0625rem 0.125rem rgba(0, 0, 0, .2), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1)',
 
-    handleHoverBackground: colors?.backgroundBrand,
+    handleFocusInset: borders?.widthSmall,
+    handleFocusRingSize: borders?.widthMedium,
+    handleFocusRingColor: colors?.backgroundLightest,
 
     handleFocusBackground: colors?.backgroundBrand,
+    handleHoverBackground: colors?.backgroundBrand,
+
+    // Deprecated, remove with "deprecated" thumbVariant
+    handleShadowColor: darken(colors?.borderBrand, 15),
     handleFocusOutlineColor: alpha(colors?.borderBrand, 40),
     handleFocusOutlineWidth: '0.75em',
 

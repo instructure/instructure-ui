@@ -30,6 +30,9 @@ import { RangeInputLocator } from '../RangeInputLocator'
 
 describe('<RangeInput />', async () => {
   it('renders an input with type "range"', async () => {
+    // TODO: remove console stubs after 'deprecated' thumbVariant is removed
+    stub(console, 'warn')
+
     await mount(<RangeInput label="Opacity" name="opacity" max={100} min={0} />)
     const rangeInput = await RangeInputLocator.find()
     const input = await rangeInput.findInput()
@@ -38,6 +41,7 @@ describe('<RangeInput />', async () => {
   })
 
   it('displays the default value', async () => {
+    stub(console, 'warn')
     await mount(
       <RangeInput
         label="Opacity"
@@ -54,6 +58,7 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets input value to default value', async () => {
+    stub(console, 'warn')
     await mount(
       <RangeInput
         label="Opacity"
@@ -70,6 +75,7 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets input value to controlled value', async () => {
+    stub(console, 'warn')
     await mount(
       <RangeInput
         label="Opacity"
@@ -86,7 +92,61 @@ describe('<RangeInput />', async () => {
     expect(input).to.have.value('25')
   })
 
+  describe('thumbVariant prop', async () => {
+    it('should throw deprecation warning by default', async () => {
+      const consoleWarning = stub(console, 'warn')
+      await mount(
+        <RangeInput
+          label="Opacity"
+          name="opacity"
+          max={100}
+          min={0}
+          defaultValue={30}
+        />
+      )
+
+      expect(consoleWarning).to.have.been.calledWith(
+        "Warning: [RangeInput] The 'deprecated' value for the `thumbVariant` prop is deprecated. The `deprecated` variant is not fully accessible and will be removed in V9. The connected theme variables will be removed as well: `handleShadowColor`, `handleFocusOutlineColor`, `handleFocusOutlineWidth`. Please use the `accessible` variant."
+      )
+    })
+
+    it('should throw deprecation warning when explicitly "deprecated"', async () => {
+      const consoleWarning = stub(console, 'warn')
+      await mount(
+        <RangeInput
+          label="Opacity"
+          name="opacity"
+          max={100}
+          min={0}
+          defaultValue={30}
+          thumbVariant="deprecated"
+        />
+      )
+
+      expect(consoleWarning).to.have.been.calledWith(
+        "Warning: [RangeInput] The 'deprecated' value for the `thumbVariant` prop is deprecated. The `deprecated` variant is not fully accessible and will be removed in V9. The connected theme variables will be removed as well: `handleShadowColor`, `handleFocusOutlineColor`, `handleFocusOutlineWidth`. Please use the `accessible` variant."
+      )
+    })
+
+    it('should not throw deprecation warning when "accessible"', async () => {
+      const consoleWarning = stub(console, 'warn')
+      await mount(
+        <RangeInput
+          label="Opacity"
+          name="opacity"
+          max={100}
+          min={0}
+          defaultValue={30}
+          thumbVariant="accessible"
+        />
+      )
+
+      expect(consoleWarning).to.not.have.been.called()
+    })
+  })
+
   it('sets min value', async () => {
+    stub(console, 'warn')
     await mount(
       <RangeInput label="Opacity" name="opacity" max={100} min={25} />
     )
@@ -97,6 +157,7 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets max value', async () => {
+    stub(console, 'warn')
     await mount(<RangeInput label="Opacity" name="opacity" max={75} min={0} />)
     const rangeInput = await RangeInputLocator.find()
     const input = await rangeInput.findInput()
@@ -105,6 +166,7 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets step value', async () => {
+    stub(console, 'warn')
     await mount(
       <RangeInput label="Opacity" name="opacity" max={100} min={0} step={5} />
     )
@@ -115,6 +177,7 @@ describe('<RangeInput />', async () => {
   })
 
   it('formats the value displayed', async () => {
+    stub(console, 'warn')
     await mount(
       <RangeInput
         label="Opacity"
@@ -134,6 +197,7 @@ describe('<RangeInput />', async () => {
   })
 
   it('hides the value when displayValue is false', async () => {
+    stub(console, 'warn')
     await mount(
       <RangeInput
         label="Opacity"
@@ -152,6 +216,7 @@ describe('<RangeInput />', async () => {
   it('sets invalid when error messages are present', async () => {
     let ref: RangeInput | undefined
 
+    stub(console, 'warn')
     await mount(
       <RangeInput
         label="Opacity"
@@ -169,6 +234,7 @@ describe('<RangeInput />', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
+      stub(console, 'warn')
       await mount(
         <RangeInput
           label="Opacity"
@@ -183,6 +249,7 @@ describe('<RangeInput />', async () => {
     })
 
     it('sets the input role to "slider"', async () => {
+      stub(console, 'warn')
       await mount(
         <RangeInput
           label="Opacity"
@@ -199,6 +266,7 @@ describe('<RangeInput />', async () => {
     })
 
     it('sets the aria-valuenow attribute', async () => {
+      stub(console, 'warn')
       await mount(
         <RangeInput
           label="Opacity"
@@ -215,6 +283,7 @@ describe('<RangeInput />', async () => {
     })
 
     it('sets the aria-valuemin attribute', async () => {
+      stub(console, 'warn')
       await mount(
         <RangeInput label="Opacity" name="opacity" max={100} min={20} />
       )
@@ -225,6 +294,7 @@ describe('<RangeInput />', async () => {
     })
 
     it('sets the aria-valuemax attribute', async () => {
+      stub(console, 'warn')
       await mount(
         <RangeInput label="Opacity" name="opacity" max={80} min={0} />
       )
@@ -235,6 +305,7 @@ describe('<RangeInput />', async () => {
     })
 
     it('formats the aria-valuetext attribute', async () => {
+      stub(console, 'warn')
       await mount(
         <RangeInput
           label="Opacity"
@@ -256,6 +327,7 @@ describe('<RangeInput />', async () => {
 
   describe('when the input value changes', async () => {
     it('should update the value displayed', async () => {
+      stub(console, 'warn')
       await mount(
         <RangeInput
           label="Opacity"
@@ -278,6 +350,7 @@ describe('<RangeInput />', async () => {
     it('should call the onChange prop', async () => {
       const onChange = stub()
 
+      stub(console, 'warn')
       await mount(
         <RangeInput
           label="Opacity"
@@ -297,6 +370,7 @@ describe('<RangeInput />', async () => {
     })
 
     it('should not update the input value when the value prop is set', async () => {
+      stub(console, 'warn')
       await mount(
         <RangeInput
           label="Opacity"

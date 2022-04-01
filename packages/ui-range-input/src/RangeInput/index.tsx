@@ -72,7 +72,8 @@ class RangeInput extends Component<RangeInputProps, RangeInputState> {
     layout: 'stacked',
     displayValue: true,
     disabled: false,
-    readOnly: false
+    readOnly: false,
+    thumbVariant: 'deprecated'
   }
 
   ref: Element | null = null
