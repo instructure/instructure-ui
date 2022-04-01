@@ -39,16 +39,37 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type NavigationOwnProps = {
-  minimized?: any // TODO: controllable(PropTypes.bool, 'onMinimized', 'defaultMinimized')
+  /**
+   * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
+   */
+  minimized?: boolean
+  /**
+   * Whether the `<Navigation />` is initially minimized (uncontrolled)
+   */
   defaultMinimized?: boolean
-  onMinimized?: (...args: any[]) => any
+  onMinimized?: (event: React.SyntheticEvent, minimized: boolean) => void
+  /**
+   * Screen reader label for the main Navigation
+   */
   label: string
+  /**
+   * Screen reader label for the toggle button expanded/minimized state
+   */
   toggleLabel: {
     expandedLabel?: string
     minimizedLabel?: string
   }
+  /**
+   * If the `<Navigation.Item>` goes to a new page, pass an href
+   */
   href?: string
-  onClick?: (...args: any[]) => any
+  /**
+   * If the `<Navigation.Item>` does not go to a new page pass an onClick
+   */
+  onClick?: (event: React.MouseEvent) => void
+  /**
+   * children of type Navigation.Item
+   */
   children?: React.ReactNode
 }
 
@@ -69,37 +90,16 @@ type NavigationStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * children of type Navigation.Item
-   */
   children: ChildrenPropTypes.oneOf([NavigationItem]),
-  /**
-   * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
-   */
   minimized: controllable(PropTypes.bool, 'onMinimized', 'defaultMinimized'),
-  /**
-   * Whether the `<Navigation />` is initially minimized (uncontrolled)
-   */
   defaultMinimized: PropTypes.bool,
   onMinimized: PropTypes.func,
-  /**
-   * Screen reader label for the main Navigation
-   */
   label: PropTypes.string.isRequired,
-  /**
-   * Screen reader label for the toggle button expanded/minimized state
-   */
   toggleLabel: PropTypes.shape({
     expandedLabel: PropTypes.string,
     minimizedLabel: PropTypes.string
   }).isRequired,
-  /**
-   * If the `<Navigation.Item>` goes to a new page, pass an href
-   */
   href: PropTypes.string,
-  /**
-   * If the `<Navigation.Item>` does not go to a new page pass an onClick
-   */
   onClick: PropTypes.func
 }
 

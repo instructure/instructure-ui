@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Component, Children, ReactElement } from 'react'
+import React, { Component, Children, ReactElement } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 
@@ -42,13 +42,15 @@ import generateComponentTheme from './theme'
 import type { NavigationProps, NavigationState } from './props'
 import { allowedProps, propTypes } from './props'
 
-// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'minimized' implicitly has an 'any... Remove this comment to see the full error message
-const navMinimized = ({ minimized }) => ({ minimized: !minimized })
+const navMinimized = ({ minimized }: { minimized: boolean }) => ({
+  minimized: !minimized
+})
 
 /**
 ---
 category: components/deprecated
 ---
+@tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
@@ -63,24 +65,23 @@ class Navigation extends Component<NavigationProps, NavigationState> {
   static defaultProps = {
     children: null,
     defaultMinimized: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onMinimized: function (event, minimized) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onClick: function (e) {}
+    onMinimized: function (
+      _event: React.SyntheticEvent,
+      _minimized: boolean
+    ) {},
+    onClick: function (_e: React.MouseEvent) {}
   }
 
   static Item = NavigationItem
 
   ref: Element | null = null
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
-    super()
+  constructor(props: NavigationProps) {
+    super(props)
 
     this.state = {
       minimized: this.isControlled(props)
-        ? props.minimized
+        ? !!props.minimized
         : !!props.defaultMinimized
     }
   }
@@ -104,14 +105,11 @@ class Navigation extends Component<NavigationProps, NavigationState> {
     return typeof props.minimized === 'boolean'
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleNavToggle = (event) => {
+  handleNavToggle = (event: React.SyntheticEvent) => {
     if (!this.isControlled()) {
       this.setState(navMinimized)
     }
-
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onMinimized(event, !this.minimized)
+    this.props.onMinimized!(event, !this.minimized)
   }
 
   renderChildren() {
