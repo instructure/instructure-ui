@@ -34,11 +34,29 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 type NavigationItemOwnProps = {
   elementRef?: (el: Element | null) => void
   icon: React.ReactNode
+  /**
+   * The text to display  for the Navigation Link
+   */
   label: React.ReactNode
+  /**
+   * The element type to render as (will default to `<a>` if href is provided)
+   */
   as?: AsElementType
+  /**
+   * If the NavigationItem goes to a new page, pass an href
+   */
   href?: string
+  /**
+   * If the NavigationItem does not go to a new page pass an onClick
+   */
   onClick?: (...args: any[]) => void
+  /**
+   * Denotes which NavigationItem is currently selected
+   */
   selected?: boolean
+  /**
+   * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
+   */
   minimized?: boolean
 }
 
@@ -61,29 +79,11 @@ const propTypes: PropValidators<PropKeys> = {
    * The visual to display (ex. an Image, Logo, Avatar, or Icon)
    */
   icon: PropTypes.node.isRequired,
-  /**
-   * The text to display  for the Navigation Link
-   */
   label: PropTypes.node.isRequired,
-  /**
-   * The element type to render as (will default to `<a>` if href is provided)
-   */
   as: PropTypes.elementType,
-  /**
-   * If the NavigationItem goes to a new page, pass an href
-   */
   href: PropTypes.string,
-  /**
-   * If the NavigationItem does not go to a new page pass an onClick
-   */
   onClick: PropTypes.func,
-  /**
-   * Denotes which NavigationItem is currently selected
-   */
   selected: PropTypes.bool,
-  /**
-   * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
-   */
   minimized: PropTypes.bool
 }
 
