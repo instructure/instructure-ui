@@ -962,6 +962,12 @@ export type RangeInputTheme = {
   minWidth: string | 0
   handleSize: string | 0
   handleBackground: Colors['backgroundBrand']
+  handleBorderColor: Colors['borderLightest']
+  handleBorderSize: Border['widthMedium']
+  handleShadow: string | 0
+  handleFocusInset: Border['widthSmall']
+  handleFocusRingSize: Border['widthMedium']
+  handleFocusRingColor: Colors['backgroundLightest']
   handleShadowColor: Colors['borderBrand']
   handleHoverBackground: Colors['backgroundBrand']
   handleFocusBackground: Colors['backgroundBrand']

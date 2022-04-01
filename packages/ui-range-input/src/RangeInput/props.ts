@@ -26,6 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
+import { deprecated } from '@instructure/ui-react-utils'
 import { FormPropTypes } from '@instructure/ui-form-field'
 
 import type {
@@ -89,6 +90,14 @@ type RangeInputOwnProps = {
   disabled?: boolean
 
   readOnly?: boolean
+
+  /**
+   * The "default" variant has an outer shadow on focus.
+   * The "accessible" variant has better color contrast, border and inset focus ring for better accessibility.
+   */
+  thumbVariant?:
+    | 'deprecated' // TODO: deprecated, remove in V9.
+    | 'accessible'
 }
 
 type PropKeys = keyof RangeInputOwnProps
@@ -101,12 +110,13 @@ type RangeInputProps =
     FormFieldOwnProps,
     'label' | 'inline' | 'id' | 'elementRef'
   > &
-  RangeInputOwnProps &
-  WithStyleProps<RangeInputTheme, RangeInputStyle> &
-  OtherHTMLAttributes<
-    RangeInputOwnProps,
-    InputHTMLAttributes<RangeInputOwnProps>
-  > & WithDeterministicIdProps
+    RangeInputOwnProps &
+    WithStyleProps<RangeInputTheme, RangeInputStyle> &
+    OtherHTMLAttributes<
+      RangeInputOwnProps,
+      InputHTMLAttributes<RangeInputOwnProps>
+    > &
+    WithDeterministicIdProps
 
 type RangeInputStyle = ComponentStyle<
   'rangeInput' | 'rangeInputInput' | 'rangeInputInputValue'
@@ -132,7 +142,12 @@ const propTypes: PropValidators<PropKeys> = {
   formatValue: PropTypes.func,
   inline: PropTypes.bool,
   disabled: PropTypes.bool,
-  readOnly: PropTypes.bool
+  readOnly: PropTypes.bool,
+  thumbVariant: deprecated.deprecatePropValues(
+    PropTypes.oneOf(['deprecated', 'accessible']),
+    ['deprecated'],
+    'The `deprecated` variant is not fully accessible and will be removed in V9. The connected theme variables will be removed as well: `handleShadowColor`, `handleFocusOutlineColor`, `handleFocusOutlineWidth`. Please use the `accessible` variant.'
+  )
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -151,7 +166,8 @@ const allowedProps: AllowedPropKeys = [
   'formatValue',
   'inline',
   'disabled',
-  'readOnly'
+  'readOnly',
+  'thumbVariant'
 ]
 
 export type { RangeInputProps, RangeInputState, RangeInputStyle }
