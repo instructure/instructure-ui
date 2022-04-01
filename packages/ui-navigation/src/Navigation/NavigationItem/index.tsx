@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
@@ -51,8 +51,7 @@ class NavigationItem extends Component<NavigationItemProps> {
 
   static defaultProps = {
     as: 'a',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onClick: function (e, selected) {},
+    onClick: function (_e: React.MouseEvent, _selected: boolean) {},
     selected: false,
     minimized: false
   } as const
@@ -83,7 +82,6 @@ class NavigationItem extends Component<NavigationItemProps> {
     const props = omitProps(this.props, NavigationItem.allowedProps)
 
     return (
-      //@ts-expect-error TODO: INSTUI-3245
       <ElementType
         // @ts-expect-error TODO: fix TS2590: Expression produces a union type that is too complex to represent.
         {...props}

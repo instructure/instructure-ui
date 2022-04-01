@@ -37,7 +37,7 @@ type NavigationItemOwnProps = {
   label: React.ReactNode
   as?: AsElementType
   href?: string
-  onClick?: (...args: any[]) => any
+  onClick?: (...args: any[]) => void
   selected?: boolean
   minimized?: boolean
 }
