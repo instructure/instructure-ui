@@ -111,12 +111,6 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
     return this.ref
   }
 
-  get childrenArray() {
-    return Children.toArray(this.props.children) as Array<
-      OptionChild | GroupChild
-    >
-  }
-
   focus() {
     this.ref && this.ref.focus()
   }
@@ -169,10 +163,14 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
   }
 
   getFirstOption() {
+    const children = Children.toArray(this.props.children) as (
+      | OptionChild
+      | GroupChild
+    )[]
     let match: OptionChild | undefined
 
-    for (let i = 0; i < this.childrenArray.length; i++) {
-      const child = this.childrenArray[i]
+    for (let i = 0; i < children.length; i++) {
+      const child = children[i]
       if (matchComponentTypes<OptionChild>(child, [Option])) {
         match = child
       } else if (matchComponentTypes<GroupChild>(child, [Group])) {
@@ -187,10 +185,14 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
   }
 
   getOption: GetOption = (field, value) => {
+    const children = Children.toArray(this.props.children) as (
+      | OptionChild
+      | GroupChild
+    )[]
     let match: OptionChild | undefined
 
-    for (let i = 0; i < this.childrenArray.length; ++i) {
-      const child = this.childrenArray[i]
+    for (let i = 0; i < children.length; ++i) {
+      const child = children[i]
       if (matchComponentTypes<OptionChild>(child, [Option])) {
         if (child.props[field] === value) {
           match = child
@@ -293,7 +295,11 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
   }
 
   renderChildren() {
-    const children = Children.map(this.childrenArray, (child) => {
+    let children = Children.toArray(this.props.children) as (
+      | OptionChild
+      | GroupChild
+    )[]
+    children = Children.map(children, (child) => {
       if (matchComponentTypes<OptionChild>(child, [Option])) {
         return this.renderOption(child)
       } else if (matchComponentTypes<GroupChild>(child, [Group])) {
