@@ -63,15 +63,16 @@ async function deleteDirs(dirs = []) {
 async function clean() {
   const packagesPath = path.resolve('./packages')
   const dir = await fsp.opendir(packagesPath)
-
   for await (const package of dir) {
-    const rmDirs = DIRS_TO_DELETE.map(
-      (dir) => `${packagesPath}/${package.name}/${dir}`
-    )
-    if (NODE_PACKAGES.includes(package.name)) {
-      deleteDirs(rmDirs)
-    } else {
-      deleteDirs([...rmDirs, `${packagesPath}/${package.name}/lib`])
+    if (package.isDirectory()) {
+      const rmDirs = DIRS_TO_DELETE.map(
+        (dir) => `${packagesPath}/${package.name}/${dir}`
+      )
+      if (NODE_PACKAGES.includes(package.name)) {
+        deleteDirs(rmDirs)
+      } else {
+        deleteDirs([...rmDirs, `${packagesPath}/${package.name}/lib`])
+      }
     }
   }
 }
