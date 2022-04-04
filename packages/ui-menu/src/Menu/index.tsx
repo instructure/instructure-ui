@@ -491,12 +491,14 @@ class Menu extends Component<MenuProps> {
         onMouseOver={onMouseOver}
         offsetX={offsetX}
         offsetY={offsetY}
+        elementRef={(element) => {
+          this.ref = element
+        }}
         ref={(el) => {
           this._popover = el
           if (typeof popoverRef === 'function') {
             popoverRef(el)
           }
-          this.ref = el ? el.ref : null
         }}
         renderTrigger={safeCloneElement(trigger as ReactElement, {
           ref: (el: (React.ReactInstance & { ref?: Element }) | null) => {

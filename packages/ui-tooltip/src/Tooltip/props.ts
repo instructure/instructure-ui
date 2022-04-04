@@ -213,6 +213,7 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
+  'elementRef',
   'children',
   'renderTip',
   'isShowingContent',
