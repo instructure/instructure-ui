@@ -101,7 +101,9 @@ const pathsToIgnore = [
   '**/ui-scripts/src/**',
 
   // deprecated packages and modules:
-  '**/InputModeListener.{js,ts}'
+  '**/InputModeListener.{js,ts}',
+  // regression testing app:
+  '**/regression-test/**'
 ]
 
 function buildDocs() {
