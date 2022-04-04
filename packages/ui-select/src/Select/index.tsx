@@ -126,7 +126,7 @@ class Select extends Component<SelectProps> {
     hasInputRef: false
   }
   ref: HTMLSpanElement | null = null
-  inputRef: HTMLInputElement | null = null
+  _input: HTMLInputElement | null = null
   private _defaultId = this.props.deterministicId!()
   private _inputContainer: HTMLSpanElement | null = null
   private _listView: Element | null = null
@@ -136,14 +136,7 @@ class Select extends Component<SelectProps> {
   private _optionHeight = 36
 
   focus() {
-    this.inputRef && this.inputRef.focus()
-  }
-
-  get _input() {
-    console.warn(
-      '_input property is deprecated and will be removed in v9, please use ref instead'
-    )
-    return this.inputRef
+    this._input && this._input.focus()
   }
 
   get childrenArray() {
@@ -155,7 +148,7 @@ class Select extends Component<SelectProps> {
   }
 
   get focused() {
-    return this.inputRef ? isActiveElement(this.inputRef) : false
+    return this._input ? isActiveElement(this._input) : false
   }
 
   get id() {
@@ -227,7 +220,7 @@ class Select extends Component<SelectProps> {
     if (!this.state.hasInputRef) {
       this.setState({ hasInputRef: true })
     }
-    this.inputRef = node
+    this._input = node
     this.props.inputRef?.(node)
   }
 

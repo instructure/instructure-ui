@@ -88,6 +88,7 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
+  'elementRef',
   'icon',
   'label',
   'as',
