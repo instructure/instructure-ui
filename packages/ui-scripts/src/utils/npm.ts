@@ -65,7 +65,10 @@ export const publishPackages = async (
       '--yes',
       '--no-push',
       '--no-git-tag-version',
-      '--force-publish=*'
+      '--force-publish=*',
+      // lerna does not work with NPM automation tokens
+      // related: https://github.com/lerna/lerna/issues/2788
+      '--no-verify-access'
     ])
 
     publishedVersion = await syncRootPackageVersion()
