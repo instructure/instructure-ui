@@ -5256,6 +5256,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/ui-babel-preset": 8.22.0
     "@instructure/ui-decorator": 8.22.0
+    "@instructure/ui-dom-utils": 8.22.0
     "@instructure/ui-test-utils": 8.22.0
     prop-types: ^15.6.2
   peerDependencies:
@@ -19884,16 +19885,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"git-cz@npm:^4.8.0":
-  version: 4.8.0
-  resolution: "git-cz@npm:4.8.0"
-  bin:
-    git-cz: bin/git-cz.js
-    gitcz: bin/git-cz.js
-  checksum: 4ca49c2e3ea1e5222616a5a98697cb4e0337a73a3b7d068920b783d734cdbb7febd8b40bfed8df7f30974434d97ee7ce63f239a4b186202d480df9efecd695b0
-  languageName: node
-  linkType: hard
-
 "git-raw-commits@npm:^2.0.8":
   version: 2.0.10
   resolution: "git-raw-commits@npm:2.0.10"
@@ -22003,10 +21994,10 @@ __metadata:
     "@instructure/ui-token-scripts": "workspace:*"
     "@types/react-dom": ^17.0.11
     chalk: ^4
+    commitizen: ^4
     danger: ^11
     esbuild: ^0.14
     eslint: ^7
-    git-cz: ^4.8.0
     husky: ^7
     lerna: ^4
     lint-staged: ^10
