@@ -34,7 +34,7 @@ All available codemods can also be executed using the [instui-cli](#instui-cli) 
 This codemod helps you update your project by renaming `props` that have had names changed (e.g., `onReady` => `onOpen`).
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/propNames.config.json
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.ts <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/propNames.config.json
 ```
 
 ### Updating Package Imports
@@ -42,7 +42,7 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.js <pat
 This codemod helps you update your project by renaming `imports` that have changed (e.g., `instructure-ui` => `@instructure/<package name>`).
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/imports.config.js
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.ts <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/imports.config.js
 ```
 
 ### Updating more complex props to the InstUI v8 syntax
@@ -50,13 +50,13 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path>
 This codemod upgrades more complex changes like Button, also outputs any manual changes needed to the console. Run this in a InstUI v7 codebase only. This command has an optional fileName parameter, supplying this will append to the given file the warnings.
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.js <path> -fileName updateV7PropsWarnings.txt
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.ts <path> -fileName updateV7PropsWarnings.txt
 ```
 
 ### Codemod for breaking changes after updating the dependencies to V8
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Breaking.js <path>
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Breaking.ts <path>
 ```
 
 This codemod updates breaking changes after a v8 upgrade. Run this in a project after you have upgraded your dependencies to InstUI v8.
@@ -64,7 +64,7 @@ This codemod updates breaking changes after a v8 upgrade. Run this in a project 
 ### Codemod for adding a wrapper to ReactDOM.render()
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8ReactDOM.js <path> -fileName updateV8ReactDOM.txt
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8ReactDOM.ts <path> -fileName updateV8ReactDOM.txt
 ```
 
 This codemod updates ReactDOM.render calls with a given wrapper, for example:

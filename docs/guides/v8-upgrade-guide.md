@@ -50,7 +50,7 @@ We strongly recommend to use codemods to ease your update process. To run these 
 #### 1. Run the v7 `updatePropNames` codemod:
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v7/propNames.config.json
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.ts <path> --config=node_modules/@instructure/instui-config/codemod-configs/v7/propNames.config.json
 ```
 
 This will do most of the simple upgrades (renaming props, deleting props).
@@ -58,7 +58,7 @@ This will do most of the simple upgrades (renaming props, deleting props).
 #### 2. Run the `updateV7Props` codemod:
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.js <path>
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.ts <path>
 ```
 
 This will update more complex components (e.g. Buttons), and will tell you if it needs a manual update in the terminal. Fix what is needed manually.
@@ -66,7 +66,7 @@ This will update more complex components (e.g. Buttons), and will tell you if it
 #### 3. Update your dependencies latest InstUI 8 and then run
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Breaking.js <path>
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Breaking.ts <path>
 ```
 
 This will update the breaking changes from themeable to emotion:
@@ -78,7 +78,7 @@ This will update the breaking changes from themeable to emotion:
 Then run
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/instui-config/codemod-configs/v8/imports.config.js
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.ts <path> --config=node_modules/@instructure/instui-config/codemod-configs/v8/imports.config.js
 ```
 
 This will update change the imports of 'ThemeablePropValues', 'ThemeablePropTypes' 'makeThemeVars', 'getShorthandPropValue', 'mirrorShorthandCorners', 'mirrorShorthandEdges' from `@instructure/ui-themeable` to `@instructure/emotion`.
@@ -90,7 +90,7 @@ After this you will need to manually update you custom components according to t
 This codemod is useful is you have lots of ReactDOM.render calls and want to wrap them to add `InstUISettingsProvider` easily.
 
 ```sh
-jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8ReactDOM.js <path> -fileName updateV8ReactDOM.txt -wrapperPath <import path> -wrapperTag <tagName> -isDefaultImport <true or false>
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8ReactDOM.ts <path> -fileName updateV8ReactDOM.txt -wrapperPath <import path> -wrapperTag <tagName> -isDefaultImport <true or false>
 ```
 
 This codemod updates ReactDOM.render calls with a given wrapper, for example:
