@@ -24,17 +24,32 @@
 
 import { alpha, darken } from '@instructure/ui-color-utils'
 
-export default function generator({ colors, typography, spacing, forms }) {
+export default function generator({
+  colors,
+  borders,
+  typography,
+  spacing,
+  forms
+}) {
   return {
     minWidth: '12.5rem',
 
     handleSize: '1.5rem',
     handleBackground: colors.backgroundBrand,
-    handleShadowColor: darken(colors.borderBrand, 15),
+    handleBorderColor: colors.borderLightest,
+    handleBorderSize: borders.widthMedium,
+    handleShadow:
+      '0 0.0625rem 0.125rem rgba(0, 0, 0, .2), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1)',
 
-    handleHoverBackground: colors.backgroundBrand,
+    handleFocusInset: borders?.widthSmall,
+    handleFocusRingSize: borders?.widthMedium,
+    handleFocusRingColor: colors?.backgroundLightest,
 
     handleFocusBackground: colors.backgroundBrand,
+    handleHoverBackground: colors.backgroundBrand,
+
+    // Deprecated, remove with "deprecated" thumbVariant
+    handleShadowColor: darken(colors.borderBrand, 15),
     handleFocusOutlineColor: alpha(colors.borderBrand, 40),
     handleFocusOutlineWidth: '0.75em',
 
@@ -61,10 +76,12 @@ export default function generator({ colors, typography, spacing, forms }) {
 generator.canvas = function (variables) {
   return {
     handleBackground: variables['ic-brand-primary'],
-    handleShadowColor: darken(variables['ic-brand-primary'], 15),
-    handleFocusOutlineColor: alpha(variables['ic-brand-primary'], 40),
     handleHoverBackground: variables['ic-brand-primary'],
     handleFocusBackground: variables['ic-brand-primary'],
-    valueBackground: variables['ic-brand-font-color-dark']
+    valueBackground: variables['ic-brand-font-color-dark'],
+
+    // Deprecated, remove with "deprecated" thumbVariant
+    handleShadowColor: darken(variables['ic-brand-primary'], 15),
+    handleFocusOutlineColor: alpha(variables['ic-brand-primary'], 40)
   }
 }

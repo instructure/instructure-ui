@@ -27,10 +27,25 @@
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.15s ease-in-out;
-    width: var(--handleSize);
-    height: var(--handleSize);
     background: var(--handleBackground);
-    box-shadow: 0 0.0625rem 0 var(--handleShadowColor);
+
+    /* stylelint-disable max-nesting-depth */
+    .thumbVariant-deprecated & {
+      width: var(--handleSize);
+      height: var(--handleSize);
+      box-shadow: 0 0.0625rem 0 var(--handleShadowColor);
+    }
+
+    .thumbVariant-accessible & {
+      width: calc(var(--handleSize) + (var(--handleBorderSize) * 2));
+      height: calc(var(--handleSize) + (var(--handleBorderSize) * 2));
+      border-width: var(--handleBorderSize);
+      border-color: var(--handleBorderColor);
+      border-style: solid;
+      box-sizing: border-box;
+      box-shadow: var(--handleShadow);
+    }
+    /* stylelint-enable max-nesting-depth */
 
     &:hover {
       background: var(--handleHoverBackground);
@@ -38,19 +53,37 @@
   }
 
   &::-webkit-slider-thumb {
-    margin-top: calc(-1 * var(--handleSize) / 4);
+    .thumbVariant-deprecated & {
+      margin-top: calc(-1 * var(--handleSize) / 4);
+    }
+
+    .thumbVariant-accessible & {
+      margin-top: calc(-1 * (var(--handleSize) + (var(--handleBorderSize) * 2)) / 4);
+    }
   }
 
   &:focus,
   &:active {
     outline: none;
 
-    /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+    /* stylelint-disable max-nesting-depth, selector-pseudo-element-no-unknown */
     &::range-thumb {
-      box-shadow:
-        0 0.0625rem 0 var(--handleShadowColor),
-        0 0 0 var(--handleFocusOutlineWidth) var(--handleFocusOutlineColor);
+      .thumbVariant-deprecated & {
+        background: var(--handleFocusBackground);
+        box-shadow:
+          0 0.0625rem 0 var(--handleShadowColor),
+          0 0 0 var(--handleFocusOutlineWidth) var(--handleFocusOutlineColor);
+      }
+
+      .thumbVariant-accessible & {
+        background: var(--handleFocusBackground);
+        box-shadow:
+          var(--handleShadow),
+          inset 0 0 0 var(--handleFocusInset) var(--handleFocusBackground),
+          inset 0 0 0 calc(var(--handleFocusInset) + var(--handleFocusRingSize)) var(--handleFocusRingColor);
+      }
     }
+    /* stylelint-enable max-nesting-depth, selector-pseudo-element-no-unknown */
   }
 
   /* remove outline in FF */
