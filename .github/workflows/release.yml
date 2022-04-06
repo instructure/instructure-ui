@@ -83,7 +83,7 @@ jobs:
       - name: Retrieve latest snapshot version
         run: node prepare.js
       - name: Install dependencies for regression testing
-        run: yarn install
+        run: yarn install --no-immutable
       - name: Build project and start the server
         run: |
           yarn build:${{ matrix.bundler }}
