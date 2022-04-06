@@ -1,10 +1,10 @@
 ---
-title: API Guidelines
+title: API Guidelines Flora
 category: Getting Started
 order: 4
 ---
 
-## API Guidelines
+## API Guidelines Flora
 
 ### Component Properties
 

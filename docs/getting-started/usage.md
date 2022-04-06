@@ -4,7 +4,7 @@ category: Getting Started
 order: 1
 ---
 
-## Quick Start
+## Quick Start Flora DS
 
 The following steps will create a React app that uses Instructure UI. Recommended if you are starting from scratch.
 
