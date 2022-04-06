@@ -80,6 +80,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
+      - name: Retrieve latest snapshot version
+        run: node prepare.js
       - name: Install dependencies for regression testing
         run: yarn install
       - name: Build project and start the server
