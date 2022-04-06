@@ -67,6 +67,18 @@ class Transition extends Component<TransitionProps> {
 
   static states = BaseTransition.states
 
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -117,6 +129,7 @@ class Transition extends Component<TransitionProps> {
           enteringClassName={styles!.classNames.entering}
           onEntered={this.handleEntered}
           onExited={this.handleExited}
+          elementRef={this.handleRef}
         >
           {children}
         </BaseTransition>

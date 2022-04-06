@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { Component } from 'react'
 import {
   expect,
   mount,
@@ -45,6 +45,12 @@ const getClass = (
   return classNames[phase]
 }
 
+class ExampleComponent extends Component {
+  render() {
+    return <div>Example</div>
+  }
+}
+
 describe('<Transition />', async () => {
   const types: TransitionType[] = [
     'fade',
@@ -56,10 +62,22 @@ describe('<Transition />', async () => {
   ]
 
   const expectTypeClass = function (type: TransitionType) {
-    it(`should correctly apply classes for '${type}'`, async () => {
+    it(`should correctly apply classes for '${type}' with html element`, async () => {
       const subject = await mount(
         <Transition type={type} in={true}>
           <div>hello</div>
+        </Transition>
+      )
+
+      const transition = within(subject.getDOMNode())
+
+      expect(transition.hasClass(getClass(type, 'entered'))).to.be.true()
+    })
+
+    it(`should correctly apply classes for '${type}' with Component`, async () => {
+      const subject = await mount(
+        <Transition type={type} in={true}>
+          <ExampleComponent />
         </Transition>
       )
 

@@ -98,6 +98,11 @@ type TransitionCommonProps = {
    * A single element to animate in and out
    */
   children?: React.ReactNode
+
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef?: (element: Element | null) => void
 }
 
 type OwnProps = {
@@ -171,7 +176,8 @@ const transitionCommonPropTypes: PropValidators<CommonPropKeys> = {
   onExit: PropTypes.func,
   onExiting: PropTypes.func,
   onExited: PropTypes.func,
-  children: PropTypes.node
+  children: PropTypes.node,
+  elementRef: PropTypes.func
 }
 
 const propTypes: PropValidators<PropKeys> = {
@@ -208,7 +214,8 @@ const allowedProps: AllowedPropKeys = [
   'onExiting',
   'onExited',
   'children',
-  'className'
+  'className',
+  'elementRef'
 ]
 
 type BaseTransitionState = {
