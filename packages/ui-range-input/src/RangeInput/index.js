@@ -33,7 +33,7 @@ import { addEventListener } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, pickProps } from '@instructure/ui-react-utils'
+import { omitProps, pickProps, deprecated } from '@instructure/ui-react-utils'
 import { isEdge } from '@instructure/ui-utils'
 
 import styles from './styles.css'
@@ -79,7 +79,15 @@ class RangeInput extends Component {
     formatValue: PropTypes.func,
     inline: PropTypes.bool,
     disabled: PropTypes.bool,
-    readOnly: PropTypes.bool
+    readOnly: PropTypes.bool,
+
+    // The thumbVariant prop got deprecated in V8, and is backported to V7.
+    // Will be removed in V9.
+    thumbVariant: deprecated.deprecatePropValues(
+      PropTypes.oneOf(['deprecated', 'accessible']),
+      ['deprecated'],
+      'The `deprecated` variant is not fully accessible and will be removed in V9. The connected theme variables will be removed as well: `handleShadowColor`, `handleFocusOutlineColor`, `handleFocusOutlineWidth`. Please use the `accessible` variant.'
+    )
   }
 
   static defaultProps = {
@@ -97,7 +105,11 @@ class RangeInput extends Component {
     defaultValue: undefined,
     value: undefined,
     onChange: undefined,
-    messages: undefined
+    messages: undefined,
+
+    // The thumbVariant prop got deprecated in V8, and is backported to V7.
+    // Will be removed in V9.
+    thumbVariant: 'deprecated'
   }
 
   constructor(props) {
@@ -186,13 +198,14 @@ class RangeInput extends Component {
   }
 
   render() {
-    const { formatValue, size, disabled, readOnly } = this.props
+    const { formatValue, size, disabled, readOnly, thumbVariant } = this.props
 
     const props = omitProps(this.props, RangeInput.propTypes)
 
     const classes = {
       [styles.root]: true,
       [styles[size]]: size,
+      [styles[`thumbVariant-${thumbVariant}`]]: thumbVariant,
       [styles.edge16Up]: isEdge
     }
 
