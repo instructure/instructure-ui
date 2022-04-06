@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import React, { createRef, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 
-import { getClassList } from '@instructure/ui-dom-utils'
+import { getClassList, findDOMNode } from '@instructure/ui-dom-utils'
 import {
   ensureSingleChild,
   safeCloneElement
@@ -75,6 +75,18 @@ class BaseTransition extends React.Component<
 
   state = {
     transitioning: false
+  }
+
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   componentDidMount() {
@@ -139,7 +151,7 @@ class BaseTransition extends React.Component<
 
     const { onTransition } = this.props
 
-    const classList = getClassList(this)
+    const classList = getClassList(this.ref)
 
     const transitionClassName = this.getTransitionClassName(toState)
     const prevTransitionClassName = this.getTransitionClassName(fromState)
@@ -180,7 +192,7 @@ class BaseTransition extends React.Component<
     this.setState({ transitioning: false }, () => {
       if (this._unmounted) return
 
-      const classList = getClassList(this)
+      const classList = getClassList(this.ref)
 
       ;(Object.values(STATES) as BaseTransitionStatesType[]).forEach(
         (state) => {
@@ -314,15 +326,17 @@ class BaseTransition extends React.Component<
     }
   }
 
-  ref = createRef()
-
   renderChildren() {
     return this.props.children
       ? safeCloneElement(
           ensureSingleChild(this.props.children) as ReactElement,
           {
             'aria-hidden': !this.props.in ? true : undefined,
-            ref: this.ref
+            ref: (el: React.ReactInstance | null) => {
+              const ref = (findDOMNode(el) as Element) || null
+
+              this.handleRef(ref)
+            }
           }
         )
       : null

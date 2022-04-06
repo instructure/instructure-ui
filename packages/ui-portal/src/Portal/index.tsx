@@ -68,6 +68,19 @@ class Portal extends Component<PortalProps, PortalState> {
 
   DOMNode: PortalNode = null
 
+  ref: PortalNode = null
+
+  handleRef = (el: PortalNode) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+    this.DOMNode = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
   componentDidMount() {
     if (!canUseDOM) {
       return
@@ -127,11 +140,8 @@ class Portal extends Component<PortalProps, PortalState> {
       typeof this.DOMNode.parentNode.removeChild === 'function'
     ) {
       this.DOMNode.parentNode.removeChild(this.DOMNode)
-      this.DOMNode = null
 
-      if (typeof this.props.elementRef === 'function') {
-        this.props.elementRef(this.DOMNode)
-      }
+      this.handleRef(null)
     }
   }
 
@@ -160,15 +170,11 @@ class Portal extends Component<PortalProps, PortalState> {
         node.setAttribute(name, attributes[name] as string)
       })
 
-      if (typeof elementRef === 'function') {
-        elementRef(node)
-      }
-
-      this.DOMNode = node
+      this.handleRef(node)
     }
 
     // Append node to container if it isn't already
-    if (this.DOMNode.parentNode !== this.state.mountNode) {
+    if (this.DOMNode && this.DOMNode.parentNode !== this.state.mountNode) {
       if (insertAt === 'bottom') {
         this.state.mountNode.appendChild(this.DOMNode)
       } else {
@@ -179,7 +185,7 @@ class Portal extends Component<PortalProps, PortalState> {
       }
     }
 
-    return this.DOMNode
+    return this.DOMNode!
   }
 
   findMountNode(props: PortalProps) {

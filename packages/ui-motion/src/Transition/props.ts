@@ -88,7 +88,8 @@ const allowedProps: AllowedPropKeys = [
   'onEntered',
   'onExit',
   'onExiting',
-  'onExited'
+  'onExited',
+  'elementRef'
 ]
 
 export type { TransitionProps, TransitionType, TransitionStyle }
