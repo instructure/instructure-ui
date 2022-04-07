@@ -36,6 +36,7 @@ import type {
 } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { PropValidators, PagesTheme } from '@instructure/shared-types'
+import type { PagesContextType } from './PagesContext'
 
 type PagesOwnProps = {
   /**
@@ -67,9 +68,15 @@ type PropKeys = keyof PagesOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type PagesProps = PagesOwnProps & WithStyleProps<PagesTheme, PagesStyle> & WithDeterministicIdProps
+type PagesProps = PagesOwnProps &
+  WithStyleProps<PagesTheme, PagesStyle> &
+  WithDeterministicIdProps
 
 type PagesStyle = ComponentStyle<'pages'>
+
+type PagesState = {
+  history: PagesContextType['history']
+}
 
 const propTypes: PropValidators<PropKeys> = {
   children: Children.oneOf([Page]),
@@ -91,5 +98,5 @@ const allowedProps: AllowedPropKeys = [
   'margin'
 ]
 
-export type { PagesProps, PagesStyle }
+export type { PagesProps, PagesState, PagesStyle }
 export { propTypes, allowedProps }

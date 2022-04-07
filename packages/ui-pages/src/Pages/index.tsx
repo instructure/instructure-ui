@@ -40,10 +40,9 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { PagesContext } from './PagesContext'
-import type { PagesContextType } from './PagesContext'
 
 import { allowedProps, propTypes } from './props'
-import type { PagesProps } from './props'
+import type { PagesProps, PagesState } from './props'
 
 /**
 ---
@@ -53,7 +52,7 @@ category: components
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
-class Pages extends Component<PagesProps> {
+class Pages extends Component<PagesProps, PagesState> {
   static readonly componentId = 'Pages'
 
   static allowedProps = allowedProps
@@ -66,7 +65,6 @@ class Pages extends Component<PagesProps> {
   static Page = Page
 
   _timeouts: ReturnType<typeof setTimeout>[] = []
-  _history: PagesContextType['history']
   _activePage: Page | null = null
   _contentId: string
 
@@ -87,11 +85,13 @@ class Pages extends Component<PagesProps> {
   constructor(props: PagesProps) {
     super(props)
 
-    this._history = [
-      typeof props.defaultPageIndex === 'number'
-        ? props.defaultPageIndex
-        : props.activePageIndex!
-    ]
+    this.state = {
+      history: [
+        typeof props.defaultPageIndex === 'number'
+          ? props.defaultPageIndex
+          : props.activePageIndex!
+      ]
+    }
 
     this._contentId = props.deterministicId!()
   }
@@ -101,25 +101,27 @@ class Pages extends Component<PagesProps> {
   }
 
   handleBackButtonClick = () => {
-    const oldPageIndex = this._history.pop()
-    const newPageIndex = this._history[this._history.length - 1]
+    const history = [...this.state.history]
+    const oldPageIndex = history.pop()
+    const newPageIndex = history[history.length - 1]
 
+    this.setState({ history })
     this.props.onPageIndexChange?.(newPageIndex || 0, oldPageIndex)
   }
 
-  // TODO: componentWillReceiveProps has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
-  componentWillReceiveProps(nextProps: PagesProps) {
-    if (
-      nextProps &&
-      typeof nextProps.activePageIndex === 'number' &&
-      (this._history.length === 0 ||
-        nextProps.activePageIndex !== this._history[this._history.length - 1])
-    ) {
-      this._history.push(nextProps.activePageIndex)
-    }
-  }
-
   componentDidUpdate() {
+    const { activePageIndex } = this.props
+    const { history } = this.state
+
+    if (
+      typeof activePageIndex === 'number' &&
+      (history.length === 0 || activePageIndex !== history[history.length - 1])
+    ) {
+      this.setState({
+        history: [...history, activePageIndex]
+      })
+    }
+
     this._timeouts.push(
       setTimeout(() => {
         !this.focused && this.focus()
@@ -178,7 +180,7 @@ class Pages extends Component<PagesProps> {
     return activePage ? (
       <PagesContext.Provider
         value={{
-          history: this._history,
+          history: this.state.history,
           navigateToPreviousPage: () => {
             this.handleBackButtonClick()
           }
