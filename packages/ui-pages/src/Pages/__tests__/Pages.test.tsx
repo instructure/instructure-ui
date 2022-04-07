@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, within } from '@instructure/ui-test-utils'
+import { expect, mount, spy, within, stub } from '@instructure/ui-test-utils'
 import { Pages, Page } from '../index'
 
 describe('<Pages />', async () => {
@@ -60,13 +60,25 @@ describe('<Pages />', async () => {
 
   it('should render the active Page', async () => {
     const subject = await mount(
-      <Pages activePageIndex={1}>
+      <Pages activePageIndex={1} onPageIndexChange={() => {}}>
         <Page>{() => 'Foo'}</Page>
         <Page>{() => 'Bar'}</Page>
       </Pages>
     )
 
     expect(subject.getDOMNode().textContent).to.equal('Bar')
+  })
+
+  it('should throw error if onPageIndexChange is not passed together with activePageIndex', async () => {
+    const consoleError = stub(console, 'error')
+    await mount(
+      <Pages activePageIndex={1}>
+        <Page>{() => 'Foo'}</Page>
+        <Page>{() => 'Bar'}</Page>
+      </Pages>
+    )
+
+    expect(consoleError).to.have.been.called()
   })
 
   it('should pass history and navigateToPreviousPage to Page', async () => {
