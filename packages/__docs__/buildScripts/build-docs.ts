@@ -177,9 +177,7 @@ function processSingleFile(fullPath: string) {
     // Components (e.g. Alert) store their descriptions in README.md files.
     // Add this to the final JSON if it's edited
     const readmeDesc = tryParseReadme(dirName)
-    docObject.description = readmeDesc
-      ? docObject.description + readmeDesc
-      : docObject.description
+    docObject.description = readmeDesc ? readmeDesc : docObject.description
   } else if (fileName === 'README') {
     // if we edit a README, we'll need to add the changes to the components JSON
     let componentIndexFile: string | undefined
