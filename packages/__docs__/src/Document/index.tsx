@@ -163,8 +163,9 @@ class Document extends Component<
 
   renderDescription(doc: DocDataType, description: string) {
     const { id, title } = doc
-    const filteredDescription = description.replace('@tsProps', '')
-
+    const filteredDescription = description
+      .replace('@tsProps', '')
+      .replace(/@module [a-zA-Z]+/g, '')
     return this.props.description ? (
       <Description
         id={`${id}Description`}

@@ -46,8 +46,6 @@ import type { ViewProps } from './props'
 ---
 category: components
 ---
-API:
-  - [View](https://instructure.design/#View)
 @module View
 @tsProps
 **/
