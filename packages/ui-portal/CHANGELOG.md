@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.23.0](https://github.com/instructure/instructure-ui/compare/v8.22.0...v8.23.0) (2022-04-07)
+
+### Bug Fixes
+
+- **ui-motion,ui-portal:** fix `ref` for Transition and Portal ([b847d9e](https://github.com/instructure/instructure-ui/commit/b847d9e895d630e5aa10061711d4e31cd6ab8841))
+
 # [8.22.0](https://github.com/instructure/instructure-ui/compare/v8.21.0...v8.22.0) (2022-03-31)
 
 **Note:** Version bump only for package @instructure/ui-portal

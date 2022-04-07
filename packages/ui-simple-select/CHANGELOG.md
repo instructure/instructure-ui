@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.23.0](https://github.com/instructure/instructure-ui/compare/v8.22.0...v8.23.0) (2022-04-07)
+
+### Bug Fixes
+
+- **ui-simple-select:** revert refactor on SimpleSelect ([a6613e9](https://github.com/instructure/instructure-ui/commit/a6613e9efbf60b08ad06883e70c1f400b033e838))
+
 # [8.22.0](https://github.com/instructure/instructure-ui/compare/v8.21.0...v8.22.0) (2022-03-31)
 
 **Note:** Version bump only for package @instructure/ui-simple-select

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.23.0](https://github.com/instructure/instructure-ui/compare/v8.22.0...v8.23.0) (2022-04-07)
+
+### Bug Fixes
+
+- **ui-codemods:** fix codemod paths in docs (`.ts` instead of `.js`) ([2372045](https://github.com/instructure/instructure-ui/commit/23720451b9e91fc1ba0b31b4f22fff32669a4d59))
+
 # [8.22.0](https://github.com/instructure/instructure-ui/compare/v8.21.0...v8.22.0) (2022-03-31)
 
 **Note:** Version bump only for package @instructure/ui-codemods
