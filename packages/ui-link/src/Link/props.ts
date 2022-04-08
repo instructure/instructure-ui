@@ -68,6 +68,17 @@ type LinkOwnProps = {
   as?: AsElementType
 
   /**
+   * The ARIA role of the element.
+   */
+  role?: string
+
+  /**
+   * If the Link has an onClick handler but is not a button element,
+   * force ARIA role to be "button".
+   */
+  forceButtonRole?: boolean
+
+  /**
    * Determines if the link is enabled or disabled
    */
   interaction?: 'enabled' | 'disabled'
@@ -142,6 +153,8 @@ const propTypes: PropValidators<PropKeys> = {
   color: PropTypes.oneOf(['link', 'link-inverse']),
   elementRef: PropTypes.func,
   as: PropTypes.elementType,
+  role: PropTypes.string,
+  forceButtonRole: PropTypes.bool,
   interaction: PropTypes.oneOf(['enabled', 'disabled']),
   margin: ThemeablePropTypes.spacing,
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
@@ -165,6 +178,8 @@ const allowedProps: AllowedPropKeys = [
   'color',
   'elementRef',
   'as',
+  'role',
+  'forceButtonRole',
   'interaction',
   'margin',
   'renderIcon',
