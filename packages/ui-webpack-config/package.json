@@ -18,11 +18,11 @@
   "dependencies": {
     "buffer": "^6",
     "css-loader": "^6",
-    "dotenv": "^10",
+    "dotenv": "^16",
     "file-loader": "^6",
     "process": "^0.11",
     "style-loader": "^3",
-    "stylelint": "^13",
+    "stylelint": "^14",
     "terser-webpack-plugin": "^5",
     "thread-loader": "^3",
     "url-loader": "^4",

@@ -42,7 +42,8 @@ module.exports = {
     fallback: {
       fs: false,
       module: false,
-      path: false
+      path: false,
+      process: false // needed for Sinon 12+
     },
     extensions: ['.ts', '.tsx', '.js', '.json']
   }

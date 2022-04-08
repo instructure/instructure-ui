@@ -36,7 +36,6 @@
     "esm": "^3",
     "find-up": "^5",
     "git-url-parse": "^11",
-    "globby": "^11",
     "http-server": "^14",
     "jira-client": "^6.11.0",
     "jscodeshift": "^0.13",

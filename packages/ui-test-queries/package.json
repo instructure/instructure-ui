@@ -27,12 +27,12 @@
     "@instructure/ui-axe-check": "8.23.0",
     "@instructure/ui-test-sandbox": "8.23.0",
     "keycode": "^2",
-    "pretty-format": "^24.9.0",
-    "sizzle": "^2.3.4"
+    "pretty-format": "^27",
+    "sizzle": "^2"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.23.0",
-    "@types/sizzle": "2.3.3"
+    "@types/sizzle": "^2"
   },
   "publishConfig": {
     "access": "public"

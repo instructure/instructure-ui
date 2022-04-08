@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "globby": "^10.0.1"
+    "globby": "^11"
   },
   "publishConfig": {
     "access": "public"

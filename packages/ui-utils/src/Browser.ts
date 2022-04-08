@@ -25,10 +25,12 @@
 import Browser from 'bowser'
 /**
  * ---
- * category: utilities
+ * category: components/deprecated
  * ---
  * A wrapper for [bowser](https://www.npmjs.com/package/bowser) browser
  * detection library.
+ *
+ * DEPRECATED This is just a re-export of the Bowser library
  * @module Browser
  */
 export default Browser
