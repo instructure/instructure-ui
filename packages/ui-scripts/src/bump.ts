@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { execSync } from 'node:child_process'
 import { getPackageJSON } from '@instructure/pkg-utils'
 import { error, info } from '@instructure/command-utils'
 
@@ -44,6 +45,8 @@ async function bump(packageName: any, requestedVersion: any) {
 
   try {
     releaseVersion = await bumpPackages(packageName, requestedVersion)
+    info('📦  Running yarn install to update yarn.lock file!')
+    execSync('yarn install', { stdio: 'inherit' })
   } catch (err: any) {
     error(err)
     process.exit(1)
