@@ -65,7 +65,8 @@ class Link extends Component<LinkProps, LinkState> {
     interaction: undefined,
     color: 'link',
     iconPlacement: 'start',
-    isWithinText: true
+    isWithinText: true,
+    forceButtonRole: true
   } as const
 
   state = { hasFocus: false }
@@ -182,6 +183,16 @@ class Link extends Component<LinkProps, LinkState> {
     return hasVisibleChildren(this.props.children)
   }
 
+  get role() {
+    const { role, forceButtonRole, onClick } = this.props
+
+    if (forceButtonRole) {
+      return onClick && this.element !== 'button' ? 'button' : role
+    }
+
+    return role
+  }
+
   focus() {
     this.ref && (this.ref as HTMLElement).focus()
   }
@@ -211,15 +222,17 @@ class Link extends Component<LinkProps, LinkState> {
       isWithinText,
       ...props
     } = this.props
+
     const { interaction } = this
 
     const isDisabled = interaction === 'disabled'
-    const role = onClick && this.element !== 'button' ? 'button' : undefined
+
     const type =
       this.element === 'button' || this.element === 'input'
         ? 'button'
         : undefined
-    const tabIndex = role === 'button' && !isDisabled ? 0 : undefined
+
+    const tabIndex = this.role === 'button' && !isDisabled ? 0 : undefined
 
     return (
       <View
@@ -233,7 +246,7 @@ class Link extends Component<LinkProps, LinkState> {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         aria-disabled={isDisabled ? 'true' : undefined}
-        role={role}
+        role={this.role}
         type={type}
         tabIndex={tabIndex}
         css={this.props.styles?.link}
