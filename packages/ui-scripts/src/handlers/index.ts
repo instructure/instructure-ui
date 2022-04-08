@@ -25,11 +25,5 @@
 import handleCreateComponent from './handleCreateComponent'
 import handleCreateFromTemplate from './handleCreateFromTemplate'
 import handleCreatePackage from './handleCreatePackage'
-import handleOpenSandbox from './handleOpenSandbox'
 
-export {
-  handleCreateComponent,
-  handleCreateFromTemplate,
-  handleCreatePackage,
-  handleOpenSandbox
-}
+export { handleCreateComponent, handleCreateFromTemplate, handleCreatePackage }
