@@ -31,7 +31,7 @@
     "@instructure/console": "8.23.0",
     "@instructure/ui-dom-utils": "8.23.0",
     "bowser": "^1.9.4",
-    "fast-deep-equal": "^2",
+    "fast-deep-equal": "^3",
     "json-stable-stringify": "^1.0.1",
     "keycode": "^2"
   },

@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-const fsp = require('fs/promises')
+const fs = require('fs')
 const path = require('path')
 
 const NODE_PACKAGES = [
@@ -55,23 +55,24 @@ const DIRS_TO_DELETE = [
   '.cache',
   'es'
 ]
-async function deleteDirs(dirs = []) {
-  return Promise.all(
-    dirs.map((dir) => fsp.rm(dir, { force: true, recursive: true }))
-  )
+function deleteDirs(dirs = []) {
+  return dirs.map((dir) => {
+    fs.rmSync(dir, { force: true, recursive: true })
+  })
 }
-async function clean() {
+function clean() {
   const packagesPath = path.resolve('./packages')
-  const dir = await fsp.opendir(packagesPath)
-  for await (const package of dir) {
-    if (package.isDirectory()) {
+  const dir = fs.opendirSync(packagesPath)
+  let packageDir
+  while ((packageDir = dir.readSync()) !== null) {
+    if (packageDir.isDirectory()) {
       const rmDirs = DIRS_TO_DELETE.map(
-        (dir) => `${packagesPath}/${package.name}/${dir}`
+        (dir) => `${packagesPath}/${packageDir.name}/${dir}`
       )
-      if (NODE_PACKAGES.includes(package.name)) {
+      if (NODE_PACKAGES.includes(packageDir.name)) {
         deleteDirs(rmDirs)
       } else {
-        deleteDirs([...rmDirs, `${packagesPath}/${package.name}/lib`])
+        deleteDirs([...rmDirs, `${packagesPath}/${packageDir.name}/lib`])
       }
     }
   }
@@ -79,3 +80,5 @@ async function clean() {
 // eslint-disable-next-line no-console
 console.info('cleaning packages...')
 clean()
+// eslint-disable-next-line no-console
+console.info('clean finished')

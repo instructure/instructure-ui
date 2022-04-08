@@ -21,15 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import prettyFormat from 'pretty-format'
+import { plugins, format } from 'pretty-format'
+import type { PrettyFormatOptions } from 'pretty-format'
 import { isElement } from './isElement'
 
-const { DOMElement, DOMCollection } = prettyFormat.plugins
-
-function format(
+function formatElement(
   element: Element | Document | DocumentFragment,
   maxLength: number,
-  options: Partial<prettyFormat.Options>
+  options: PrettyFormatOptions
 ): string {
   let htmlElement: HTMLElement = element as HTMLElement
   if ((element as Document).documentElement) {
@@ -37,8 +36,8 @@ function format(
     htmlElement = (element as Document).documentElement
   }
 
-  const debugContent = prettyFormat(htmlElement, {
-    plugins: [DOMElement, DOMCollection],
+  const debugContent = format(htmlElement, {
+    plugins: [plugins.DOMElement, plugins.DOMCollection],
     printFunctionName: false,
     highlight: true,
     ...options
@@ -55,7 +54,7 @@ function elementToString(
   options = { highlight: false }
 ): string {
   if (isElement(element)) {
-    return format(element, maxLength, options)
+    return formatElement(element, maxLength, options)
   } else if (typeof element.toString === 'function') {
     return element.toString()
   } else {

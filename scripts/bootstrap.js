@@ -23,31 +23,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { execSync, fork, spawn, exec } = require('child_process')
+const { execSync, fork, spawn } = require('child_process')
 const path = require('path')
 
 const opts = { stdio: 'inherit' }
 function buildProject() {
-  // this config lets us use the exisiting shell session for the sub processes stdins and stdouts
+  // this config lets us use the existing shell session for the sub processes stdins and stdouts
   // and lets us handle the stderrs of sub processes
   // if one of the sub processes fails, then we terminate the other sub process and exit the main process
   const spawnStdIoOpts = { stdio: ['inherit', 'inherit', 'pipe'] }
-  const tsBuild = spawn('yarn', ['build:ts'], spawnStdIoOpts)
+  execSync(
+    'lerna run prepare-build --stream --scope @instructure/ui-icons',
+    opts
+  )
+  // eslint-disable-next-line no-console
+  console.info('Starting Babel and TSC...')
+  const tsBuild = spawn('yarn', ['build:types', '--verbose'], spawnStdIoOpts)
   const babelBuild = spawn('yarn', ['build'], spawnStdIoOpts)
   tsBuild.on('exit', (code) => {
     if (code !== 0) {
       babelBuild.kill()
+      console.error("'yarn build:ts' failed :(")
       process.exit(code)
     }
+  })
+  tsBuild.stderr.on('data', (data) => {
+    console.error('tsc stderr', data.toString())
+  })
+  babelBuild.stderr.on('data', (data) => {
+    console.error('babel stderr', data.toString())
   })
   babelBuild.on('exit', (code) => {
     if (code !== 0) {
       tsBuild.kill()
+      console.error("'yarn build' failed :(")
       process.exit(code)
     }
-
     if (process.env.CI) {
-      execSync('yarn build:tokens', opts)
+      const result = execSync('yarn build:tokens', opts)
+      // eslint-disable-next-line no-console
+      console.info('yarn build:tokens result', result)
     }
   })
 }
@@ -55,7 +70,7 @@ function bootstrap() {
   try {
     fork(path.resolve('scripts/clean.js'), opts)
   } catch (error) {
-    console.error(error)
+    console.error('clean failed with error:', error)
     process.exit(1)
   }
 

@@ -38,12 +38,14 @@ class Component extends React.Component<TestComponentProps> {
 
   static propTypes = {
     foo: PropTypes.string,
-    onUnmount: PropTypes.func
+    onUnmount: PropTypes.func,
+    componentRef: PropTypes.func
   }
 
   static defaultProps = {
     foo: null, // or 'foo'?
-    onUnmount: null
+    onUnmount: null,
+    componentRef: undefined
   }
 
   test(cb: (test: string) => void) {
