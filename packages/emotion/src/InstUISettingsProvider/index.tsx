@@ -73,62 +73,6 @@ type InstUIProviderProps = {
  * ---
  * @module InstUISettingsProvider
  * @tsProps
- *
- * Wrapper for emotion js's [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype).
- *
- * Applies the given theme. It handles either a full theme, or an overrides object.
- * You can also specify the requested text direction for its descendants.
- *
- * It accepts the following props:
- * - theme - A full theme or an override object.
- * - dir - The text direction to use in the descendants. If not
- * given it uses the following in this priority order:
- *   - The value given in a parent `TextDirectionContext`
- *   - The `dir` prop of `document.documentElement` or its `direction` CSS prop
- *   - `ltr`
- * - instanceCounterMap - A [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
- * which keeps track of specific InstUI components. (generally this is used for deterministic id generation for [SSR](/#server-side-rendering))
- * - as - InstUISettingsProvider will wrap it's children with a HTML element when the its `dir` property is also set, this can be changed with the `as` property
- *
- * ```js
- *
- * import { canvas, instructure } from '@instructure/ui-themes'
- * import { InstUISettingsProvider } from '@instructure/emotion'
- *
- * <InstUISettingsProvider theme={canvas}>
- *   <div>Canvas themed part</div>
- *
- *   <InstUISettingsProvider
- *     theme={{
- *       themeOverrides: {
- *         canvas: {
- *           colors: {
- *             backgroundLightest: '#fefefe'
- *           },
- *           borders: {
- *             style: 'dashed'
- *           }
- *         }
- *       }
- *     }}
- *   >
- *     <div>Canvas with new 'backgroundLightest'</div>
- *   </InstUISettingsProvider>
- *
- *   <InstUISettingsProvider theme={instructure} dir="rtl">
- *     <div>Instructure themed part with RTL text</div>
- *   </InstUISettingsProvider>
- *
- *    //this is mostly needed for Server Side Rendering, to read more:
- *    //read our [SSR](/#server-side-rendering) guide
- *    const counter = generateInstanceCounterMap()
- *    counter.set("Alert", 5)
- *   <InstUISettingsProvider instanceCounterMap={counter}>
- *     //this Alert's rendered DOM Node will have [id="Alert_5"] on it
- *     <Alert>Test!</Alert>
- *   </InstUISettingsProvider>
- * </InstUISettingsProvider>
- * ```
  */
 function InstUISettingsProvider({
   children,

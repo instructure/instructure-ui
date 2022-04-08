@@ -59,47 +59,6 @@ const baseThemeProps: BaseThemeVariableKeys = [
  * ---
  * category: components/utilities
  * ---
- *
- * #### DEPRECATED Please use [InstUISettingsProvider](#InstUISettingsProvider)
- * instead. It has the same functionality and adds a text direction context.
- *
- * Wrapper for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype) of emotion js.
- *
- * Applies the given theme. It handles either a full theme, or an overrides object.
- *
- * ```js
- * import { canvas, instructure } from '@instructure/ui-themes'
- * import { EmotionThemeProvider } from '@instructure/emotion'
- *
- * @example
- * <EmotionThemeProvider theme={canvas}>
- *   <div>Canvas themed part</div>
- *
- *   <EmotionThemeProvider
- *     theme={{
- *       themeOverrides: {
- *         canvas: {
- *           colors: {
- *             backgroundLightest: '#fefefe'
- *           },
- *           borders: {
- *             style: 'dashed'
- *           }
- *         }
- *       }
- *     }}
- *   >
- *     <div>Canvas with new 'backgroundLightest'</div>
- *   </EmotionThemeProvider>
- *
- *   <EmotionThemeProvider theme={instructure}>
- *     <div>Instructure themed part</div>
- *   </EmotionThemeProvider>
- * </EmotionThemeProvider>
- * ```
- *
- * @param {object} children
- * @param {object} theme - A full theme or an override object
  * @module EmotionThemeProvider
  */
 function EmotionThemeProvider({
@@ -122,56 +81,56 @@ EmotionThemeProvider.defaultProps = { theme: {} }
  * @returns {function} A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
  * @module getTheme
  */
-const getTheme = (themeOrOverride: ThemeOrOverride) => (
-  ancestorTheme = {} as BaseTheme
-) => {
-  try {
-    // If a valid InstUI theme is given, it just returns the theme.
-    if (isBaseTheme(themeOrOverride)) {
-      return themeOrOverride
+const getTheme =
+  (themeOrOverride: ThemeOrOverride) =>
+  (ancestorTheme = {} as BaseTheme) => {
+    try {
+      // If a valid InstUI theme is given, it just returns the theme.
+      if (isBaseTheme(themeOrOverride)) {
+        return themeOrOverride
+      }
+    } catch {
+      // If the prop passed is not an Object, it will throw an error.
+      // We are using this fail-safe here for the non-TS users,
+      // because the whole page can break without a theme.
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn(
+          'The `theme` property provided to EmotionThemeProvider is not a valid InstUI theme object.\ntheme: ',
+          themeOrOverride
+        )
+      }
+      // eslint-disable-next-line no-param-reassign
+      themeOrOverride = {}
     }
-  } catch {
-    // If the prop passed is not an Object, it will throw an error.
-    // We are using this fail-safe here for the non-TS users,
-    // because the whole page can break without a theme.
-    if (process.env.NODE_ENV !== 'production') {
-      console.warn(
-        'The `theme` property provided to EmotionThemeProvider is not a valid InstUI theme object.\ntheme: ',
-        themeOrOverride
-      )
+
+    // we need to clone the ancestor theme not to override it
+    let currentTheme
+
+    if (Object.keys(ancestorTheme).length === 0) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn(
+          'No theme provided for [EmotionThemeProvider], using default `canvas` theme.'
+        )
+      }
+      currentTheme = cloneDeep(canvas)
+    } else {
+      currentTheme = cloneDeep(ancestorTheme)
     }
-    // eslint-disable-next-line no-param-reassign
-    themeOrOverride = {}
+
+    const themeName = currentTheme.key
+
+    // we pick the overrides for the current theme from the override object
+    const currentThemeOverrides =
+      (
+        (themeOrOverride as Overrides)?.themeOverrides as SpecificThemeOverride
+      )?.[themeName] || {}
+
+    return merge(
+      {},
+      currentTheme,
+      merge({}, themeOrOverride, currentThemeOverrides)
+    )
   }
-
-  // we need to clone the ancestor theme not to override it
-  let currentTheme
-
-  if (Object.keys(ancestorTheme).length === 0) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.warn(
-        'No theme provided for [EmotionThemeProvider], using default `canvas` theme.'
-      )
-    }
-    currentTheme = cloneDeep(canvas)
-  } else {
-    currentTheme = cloneDeep(ancestorTheme)
-  }
-
-  const themeName = currentTheme.key
-
-  // we pick the overrides for the current theme from the override object
-  const currentThemeOverrides =
-    ((themeOrOverride as Overrides)?.themeOverrides as SpecificThemeOverride)?.[
-      themeName
-    ] || {}
-
-  return merge(
-    {},
-    currentTheme,
-    merge({}, themeOrOverride, currentThemeOverrides)
-  )
-}
 
 const isBaseTheme = (theme: ThemeOrOverride): theme is BaseTheme => {
   if (Array.isArray(theme) || typeof theme === 'function') {
