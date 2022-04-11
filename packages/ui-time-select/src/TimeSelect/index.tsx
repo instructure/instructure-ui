@@ -159,8 +159,14 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         // preserve current value when changing from controlled to uncontrolled
         option = this.getOption('value', prevProps.value)
       }
+      const outsideVal = this.props.value ? this.props.value : ''
+      // value does not match an existing option
+      const date = DateTime.parse(outsideVal, this.locale(), this.timezone())
+      const label = this.props.format
+        ? date.format(this.props.format)
+        : date.toISOString()
       this.setState({
-        inputValue: option ? option.label : '',
+        inputValue: option ? option.label : label,
         selectedOptionId: option ? option.id : undefined
       })
     }
