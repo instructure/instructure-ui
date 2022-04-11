@@ -31,6 +31,7 @@ import { SVGIcon } from '@instructure/ui-svg-images'
 import { IconButton } from '@instructure/ui-buttons'
 import { propTypes, allowedProps } from './props'
 import type { CodeSandboxButtonProps } from './props'
+import { fetchVersionData, versionInPath } from '../versionData'
 
 class CodeSandboxButton extends Component<CodeSandboxButtonProps> {
   static propTypes = propTypes
@@ -89,12 +90,14 @@ import 'moment/min/locales'
     }
     const codeSandboxIconSvg =
       'M115.498 261.088v-106.61L23.814 101.73v60.773L65.81 186.85v45.7l49.688 28.54Zm23.814.627l50.605-29.151V185.78l42.269-24.495v-60.011l-92.874 53.621v106.82Zm80.66-180.887l-48.817-28.289l-42.863 24.872l-43.188-24.897l-49.252 28.667l91.914 52.882l92.206-53.235ZM0 222.212V74.495L127.987 0L256 74.182v147.797l-128.016 73.744L0 222.212Z'
+    const getVersion = window.location.href.match(/v\d/gm)
+    const currentVersion = getVersion ? getVersion[0] : 'v8'
     const dependencies = JSON.stringify(
       {
         dependencies: {
-          '@instructure/debounce': '^8',
-          '@instructure/ui': '^8',
-          '@instructure/ui-icons': '^8',
+          '@instructure/debounce': `${currentVersion}`,
+          '@instructure/ui': `${currentVersion}`,
+          '@instructure/ui-icons': `${currentVersion}`,
           'lorem-ipsum': '^1.0.0',
           react: '17.0.2',
           'react-dom': '17.0.2',
