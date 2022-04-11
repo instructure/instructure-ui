@@ -30,6 +30,8 @@ import { useTheme } from '../useTheme'
 import { InstUISettingsProvider } from '../InstUISettingsProvider'
 import type { ThemeOrOverride } from '../EmotionTypes'
 
+const defaultRegistry = ThemeRegistry.getRegistry()
+
 type Props = {
   callback(theme: ThemeOrOverride): void
 }
@@ -45,6 +47,10 @@ const ExampleComponent = (props: Props) => {
 describe('useTheme hook', () => {
   beforeEach(() => {
     ThemeRegistry.clearRegistry()
+  })
+  afterEach(() => {
+    //this is needed to not mess up the global Theme Registry
+    ThemeRegistry.setRegistry(defaultRegistry)
   })
   describe('with using InstUISettingsProvider', () => {
     it('should use default canvas theme no "theme" is provided', async () => {

@@ -24,8 +24,15 @@
 import { BaseTheme } from '@instructure/shared-types'
 import { expect } from '@instructure/ui-test-utils'
 import { ThemeRegistry } from '../ThemeRegistry'
+const defaultRegistry = ThemeRegistry.getRegistry()
 
 describe('ThemeRegistry', () => {
+  beforeEach(() => {
+    ThemeRegistry.clearRegistry()
+  })
+  afterEach(() => {
+    ThemeRegistry.setRegistry(defaultRegistry)
+  })
   it('should instantiate registry correctly', async () => {
     const registry = ThemeRegistry.getRegistry()
 

@@ -208,6 +208,10 @@ module.exports = {
       '../ui-file-drop/src/'
     ),
     '@instructure/ui-heading$': path.resolve(__dirname, '../ui-heading/src/'),
-    '@instructure/emotion$': path.resolve(__dirname, '../emotion/src/')
+    '@instructure/emotion$': path.resolve(__dirname, '../emotion/src/'),
+    '@instructure/theme-registry$': path.resolve(
+      __dirname,
+      '../theme-registry/src/'
+    )
   }
 }
