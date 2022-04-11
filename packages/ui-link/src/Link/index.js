@@ -78,6 +78,15 @@ class Link extends Component {
      */
     as: PropTypes.elementType,
     /**
+     * The ARIA role of the element.
+     */
+    role: PropTypes.string,
+    /**
+     * If the Link has an onClick handler but is not a button element,
+     * force ARIA role to be "button".
+     */
+    forceButtonRole: PropTypes.bool,
+    /**
      * Determines if the link is enabled or disabled
      */
     interaction: PropTypes.oneOf(['enabled', 'disabled']),
@@ -144,6 +153,8 @@ class Link extends Component {
     display: undefined,
     color: 'link',
     as: undefined,
+    role: undefined,
+    forceButtonRole: true,
     iconPlacement: 'start',
     isWithinText: true,
     onClick: undefined,
@@ -239,6 +250,16 @@ class Link extends Component {
     return hasVisibleChildren(this.props.children)
   }
 
+  get role() {
+    const { role, forceButtonRole, onClick } = this.props
+
+    if (forceButtonRole) {
+      return onClick && this.element !== 'button' ? 'button' : role
+    }
+
+    return role
+  }
+
   focus() {
     this._link && this._link.focus()
   }
@@ -284,10 +305,11 @@ class Link extends Component {
     const { interaction } = this
 
     const isDisabled = interaction === 'disabled'
-    const role = onClick && this.element !== 'button' ? 'button' : null
+
     const type =
       this.element === 'button' || this.element === 'input' ? 'button' : null
-    const tabIndex = role === 'button' && !isDisabled ? '0' : null
+
+    const tabIndex = this.role === 'button' && !isDisabled ? '0' : null
 
     return (
       <View
@@ -301,7 +323,7 @@ class Link extends Component {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         aria-disabled={isDisabled ? 'true' : null}
-        role={role}
+        role={this.role}
         type={type}
         tabIndex={tabIndex}
         className={classnames(classes)}
