@@ -23,8 +23,8 @@
  */
 
 export { generateInstanceCounterMap } from './generateInstanceCounterMap'
-export { DeterministicIdContextProvider } from './DeterministicIdProvider'
+export { DeterministicIdContextProvider } from './DeterministicIdContextProvider'
 export { DeterministicIdContext } from './DeterministicIdContext'
 export { withDeterministicId } from './withDeterministicId'
-export type { DeterministicIdProviderValue } from './DeterministicIdProvider'
+export type { DeterministicIdProviderValue } from './DeterministicIdContextProvider'
 export type { WithDeterministicIdProps } from './withDeterministicId'
