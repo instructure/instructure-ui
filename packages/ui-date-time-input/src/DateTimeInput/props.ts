@@ -153,6 +153,14 @@ type DateTimeInputProps = {
    **/
   layout?: 'stacked' | 'columns' | 'inline'
   /**
+   * Controls the spacing between the inputs when they are in a vertical layout.
+   **/
+  rowSpacing?: 'none' | 'small' | 'medium' | 'large'
+  /**
+   * Controls the spacing between the inputs when they are in a horizontal layout.
+   **/
+  colSpacing?: 'none' | 'small' | 'medium' | 'large'
+  /**
    * An ISO 8601 formatted date string representing the current date-time
    * (must be accompanied by an onChange prop).
    **/
@@ -264,6 +272,8 @@ const propTypes: PropValidators<PropKeys> = {
   messages: PropTypes.arrayOf(FormPropTypes.message),
   messageFormat: PropTypes.string,
   layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
+  rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+  colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
   value: controllable(I18nPropTypes.iso8601, 'onChange'),
   defaultValue: I18nPropTypes.iso8601,
   renderWeekdayLabels: PropTypes.arrayOf(
@@ -293,6 +303,8 @@ const allowedProps: AllowedPropKeys = [
   'messages',
   'messageFormat',
   'layout',
+  'rowSpacing',
+  'colSpacing',
   'value',
   'defaultValue',
   'renderWeekdayLabels',
