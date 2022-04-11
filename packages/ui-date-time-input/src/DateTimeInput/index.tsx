@@ -509,6 +509,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         ]}
       >
         <DateInput
+          display="block"
           value={this.state.dateInputText}
           onChange={this.handleDateTextChange}
           onBlur={this.handleBlur}
