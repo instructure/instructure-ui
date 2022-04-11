@@ -135,6 +135,30 @@ describe('<TimeSelect />', async () => {
     expect(input.getAttribute('value')).to.equal(options[3].getTextContent())
   })
 
+  it('should accept values that are not divisible by step', async () => {
+    const onChange = stub()
+    const subject = await mount(
+      <TimeSelect
+        renderLabel="Choose an option"
+        timezone="US/Eastern"
+        onChange={onChange}
+      />
+    )
+    const select = await TimeSelectLocator.find()
+    const input = await select.findInput()
+    // this expect() is needed so TimeSelect generates some default options
+    expect(input.getAttribute('value')).to.equal('')
+
+    const value = moment.tz(
+      '1986-05-17T05:02:00.000Z',
+      moment.ISO_8601,
+      'en',
+      'US/Eastern'
+    )
+    await subject.setProps({ value: value.toISOString() })
+    expect(input.getAttribute('value')).to.equal(value.format('LT'))
+  })
+
   it('should render a default value', async () => {
     const defaultValue = moment.tz(
       '1986-05-17T18:00:00.000Z',
