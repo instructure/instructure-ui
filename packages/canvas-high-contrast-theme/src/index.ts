@@ -24,6 +24,7 @@
 
 import { canvasHighContrast } from '@instructure/ui-theme-tokens'
 import { BaseTheme } from '@instructure/shared-types'
+import { ThemeRegistry } from '@instructure/theme-registry'
 
 const {
   borders,
@@ -44,11 +45,12 @@ export type CanvasHighContrastTheme = BaseTheme & {
   key: 'canvas-high-contrast'
 } & typeof canvasHighContrast
 
-const theme: CanvasHighContrastTheme = {
+const __theme: CanvasHighContrastTheme = {
   key,
   description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
   ...canvasHighContrast
 }
+const theme = ThemeRegistry.registerTheme(__theme)
 
 export default theme
 export {

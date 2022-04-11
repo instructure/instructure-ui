@@ -21,41 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { canvas, canvasHighContrast, instructure } from '..'
+import { expect } from '@instructure/ui-test-utils'
 
-import { useTheme as useEmotionTheme } from '@emotion/react'
-import { canvas } from '@instructure/ui-themes'
-import { isEmpty } from '@instructure/ui-utils'
-import { ThemeRegistry } from '@instructure/theme-registry'
+const themes = [canvas, canvasHighContrast, instructure]
 
-import type { ThemeOrOverride } from './EmotionTypes'
+describe('themes are backwards compatible', () => {
+  describe("should be able to access theme variables with 'theme.variables.x'", () => {
+    for (const theme of themes) {
+      it(`${theme.key}`, () => {
+        const brandColor = theme.variables.colors.brand
 
-/**
- * ---
- * private: true
- * ---
- * A hook that will return the currently applied theme object from the nearest Context.
- * If there is no Context, then it tries to get the current theme from the global ThemeRegistry.
- * If there is no theme provided to the Context and ThemeRegistry it will return the default `canvas` theme.
- * @returns {object} the theme object
- */
-const useTheme = () => {
-  let theme = useEmotionTheme() as ThemeOrOverride
-
-  if (isEmpty(theme)) {
-    const globalTheme = ThemeRegistry.getCurrentTheme()
-
-    if (globalTheme) {
-      return globalTheme
+        expect(brandColor).to.not.be.empty()
+      })
     }
-    if (process.env.NODE_ENV !== 'production') {
-      console.warn(
-        `No theme provided for [InstUISettingsProvider], using default <canvas> theme.`
-      )
-    }
-    theme = canvas
-  }
-  return theme
-}
+  })
+  describe("should be able to access theme variables with 'theme.x'", () => {
+    for (const theme of themes) {
+      it(`${theme.key}`, () => {
+        const brandColor = theme.colors.brand
 
-export default useTheme
-export { useTheme }
+        expect(brandColor).to.not.be.empty()
+      })
+    }
+  })
+})

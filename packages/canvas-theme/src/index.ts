@@ -23,7 +23,7 @@
  */
 
 import { canvas, functionalColors } from '@instructure/ui-theme-tokens'
-
+import { ThemeRegistry } from '@instructure/theme-registry'
 import { BaseTheme } from '@instructure/shared-types'
 
 const {
@@ -69,11 +69,13 @@ export type CanvasTheme = BaseTheme & {
 } & typeof canvas &
   CanvasBrandVariables
 
-const theme: CanvasTheme = {
+const __theme: CanvasTheme = {
   key,
   ...canvas,
   ...brandVariables
 }
+const theme = ThemeRegistry.registerTheme(__theme)
+
 export default theme
 export {
   theme,
