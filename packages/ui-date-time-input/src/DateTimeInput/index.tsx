@@ -56,6 +56,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   static allowedProps = allowedProps
   static defaultProps = {
     layout: 'inline',
+    colSpacing: 'medium',
+    rowSpacing: 'small',
     timeStep: 30,
     messageFormat: DateTimeInput.DEFAULT_MESSAGE_FORMAT,
     isRequired: false,
@@ -491,16 +493,19 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       timezone,
       messages,
       layout,
+      rowSpacing,
+      colSpacing,
       isRequired,
       interaction,
       renderWeekdayLabels
     } = this.props
+
     return (
       <FormFieldGroup
         description={description}
-        colSpacing="medium"
-        rowSpacing="small"
         layout={layout}
+        rowSpacing={rowSpacing}
+        colSpacing={colSpacing}
         vAlign="top"
         elementRef={this.handleRef}
         messages={[
