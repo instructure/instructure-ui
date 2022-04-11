@@ -224,3 +224,4 @@ export {
   getCurrentTheme,
   registerTheme
 }
+export type { Theme, Registry }

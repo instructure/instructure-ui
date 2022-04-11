@@ -23,3 +23,4 @@
  */
 
 export { ThemeRegistry, getCurrentTheme } from './ThemeRegistry'
+export type { Theme, Registry } from './ThemeRegistry'
