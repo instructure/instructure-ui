@@ -24,6 +24,9 @@
     },
     {
       "path": "../ui-theme-tokens/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-test-utils/tsconfig.build.json"
     }
   ]
 }

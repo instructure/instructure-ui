@@ -18,6 +18,7 @@
   "@instructure/template-app",
   "@instructure/template-component",
   "@instructure/template-package",
+  "@instructure/theme-registry",
   "@instructure/ui-a11y-content",
   "@instructure/ui-a11y-utils",
   "@instructure/ui-alerts",

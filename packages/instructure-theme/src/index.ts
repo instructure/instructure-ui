@@ -23,6 +23,7 @@
  */
 
 import { instructure } from '@instructure/ui-theme-tokens'
+import { ThemeRegistry } from '@instructure/theme-registry'
 import { BaseTheme } from '@instructure/shared-types'
 
 const {
@@ -44,10 +45,11 @@ export type InstructureTheme = BaseTheme & {
   key: 'instructure'
 } & typeof instructure
 
-const theme: InstructureTheme = {
+const __theme: InstructureTheme = {
   key,
   ...instructure
 }
+const theme = ThemeRegistry.registerTheme(__theme)
 
 export default theme
 export {

@@ -27,6 +27,7 @@
     "@emotion/react": "^11",
     "@instructure/console": "8.23.0",
     "@instructure/shared-types": "8.23.0",
+    "@instructure/theme-registry": "8.23.0",
     "@instructure/ui-decorator": "8.23.0",
     "@instructure/ui-i18n": "8.23.0",
     "@instructure/ui-react-utils": "8.23.0",
