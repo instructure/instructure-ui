@@ -37,7 +37,9 @@ export default {
   },
   getComponentProps: (props) => {
     return {
-      href: 'http://instructure.design'
+      href: 'http://instructure.design',
+      forceButtonRole: false,
+      role: undefined
     }
   },
   getExampleProps: (props) => {

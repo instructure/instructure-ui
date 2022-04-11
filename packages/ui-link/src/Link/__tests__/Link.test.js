@@ -311,6 +311,51 @@ describe('<Link />', async () => {
     })
   })
 
+  describe('when a `role` is provided', async () => {
+    it('should set role', async () => {
+      await mount(
+        <Link href="example.html" role="button">
+          Hello World
+        </Link>
+      )
+      expect(await LinkLocator.find('[role="button"]')).to.exist()
+    })
+
+    it('should not override button role when it is forced by default', async () => {
+      const onClick = stub()
+      await mount(
+        <Link role="link" onClick={onClick} as="a">
+          Hello World
+        </Link>
+      )
+      const link = await LinkLocator.find()
+      expect(link.getAttribute('role')).to.equal('button')
+    })
+  })
+
+  describe('when a `forceButtonRole` is set to false', async () => {
+    it('should not force button role', async () => {
+      const onClick = stub()
+      await mount(
+        <Link onClick={onClick} as="a" forceButtonRole={false}>
+          Hello World
+        </Link>
+      )
+      const link = await LinkLocator.find()
+      expect(link.getAttribute('role')).to.equal(null)
+    })
+
+    it('should override button role with `role` prop', async () => {
+      const onClick = stub()
+      await mount(
+        <Link role="link" onClick={onClick} as="a" forceButtonRole={false}>
+          Hello World
+        </Link>
+      )
+      expect(await LinkLocator.find('[role="link"]')).to.exist()
+    })
+  })
+
   describe('when a `to` is provided', async () => {
     it('should render an anchor element', async () => {
       await mount(<Link to="/example">Hello World</Link>)
