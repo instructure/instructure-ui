@@ -32,7 +32,7 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 
-import { getTheme } from '../EmotionThemeProvider'
+import { getTheme } from '../getTheme'
 
 import type { ThemeOrOverride } from '../EmotionTypes'
 import type { DeterministicIdProviderValue } from '@instructure/ui-react-utils'
