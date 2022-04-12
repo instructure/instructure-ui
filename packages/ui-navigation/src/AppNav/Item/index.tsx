@@ -44,7 +44,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { AppNavItemProps } from './props'
 import { allowedProps, propTypes } from './props'
-import type { ViewOwnProps } from '@instructure/ui-view'
+
 /**
 ---
 parent: AppNav
@@ -63,15 +63,13 @@ class Item extends Component<AppNavItemProps> {
 
   static defaultProps = {
     children: null,
-    onClick: function (_event: React.MouseEvent<Element>) {},
+    onClick: function () {},
     isSelected: false,
     cursor: 'pointer',
     isDisabled: false
   } as const
 
   ref: Element | null = null
-  handleFocus?: React.FocusEventHandler<ViewOwnProps>
-  handleBlur?: React.FocusEventHandler<ViewOwnProps>
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -133,8 +131,6 @@ class Item extends Component<AppNavItemProps> {
         display="flex"
         position="relative"
         borderRadius="medium"
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
         cursor={isDisabled ? 'not-allowed' : cursor}
         css={this.props.styles?.item}
       >

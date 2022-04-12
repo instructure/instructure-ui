@@ -38,15 +38,15 @@ type AppNavItemOwnProps = {
    * The text to display. If the `icon` prop is used, label text must be wrapped
    * in `ScreenReaderContent`.
    */
-  renderLabel: React.ReactNode | string | ((...args: any[]) => string)
+  renderLabel: React.ReactNode | string | (() => React.ReactNode)
   /**
    * Content to display after the renderLabel text, such as a badge
    */
-  renderAfter?: React.ReactNode | ((...args: any[]) => any)
+  renderAfter?: React.ReactNode | (() => React.ReactNode)
   /**
    * The visual to display (ex. an Image, Logo, Avatar, or Icon)
    */
-  renderIcon?: React.ReactNode | ((...args: any[]) => any)
+  renderIcon?: React.ReactNode | (() => React.ReactNode)
   /**
    * If the item goes to a new page, pass an href
    */
