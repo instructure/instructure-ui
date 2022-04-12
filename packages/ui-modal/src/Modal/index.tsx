@@ -34,7 +34,6 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { Transition } from '@instructure/ui-motion'
-import type { TransitionType } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { Dialog } from '@instructure/ui-dialog'
@@ -53,7 +52,12 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type { ModalProps } from './props'
+import type {
+  ModalProps,
+  ModalState,
+  ModalPropsForPortal,
+  ModalPropsForTransition
+} from './props'
 
 type HeaderChild = React.ComponentElement<ModalHeaderProps, ModalHeader>
 type BodyChild = React.ComponentElement<ModalBodyProps, ModalBody>
@@ -64,10 +68,11 @@ type FooterChild = React.ComponentElement<ModalFooterProps, ModalFooter>
 category: components
 tags: overlay, portal, dialog
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Modal extends Component<ModalProps> {
+class Modal extends Component<ModalProps, ModalState> {
   static readonly componentId = 'Modal'
 
   static propTypes = propTypes
@@ -77,28 +82,9 @@ class Modal extends Component<ModalProps> {
     size: 'auto',
     variant: 'default',
     transition: 'fade',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onOpen: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClose: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDismiss: (event) => {},
-    onEnter: () => {},
-    onEntering: () => {},
-    onEntered: () => {},
-    onExit: () => {},
-    onExiting: () => {},
-    onExited: () => {},
-    as: undefined,
-    mountNode: null,
     insertAt: 'bottom',
-    liveRegion: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    contentRef: (el) => {},
     shouldCloseOnDocumentClick: true,
     shouldReturnFocus: true,
-    defaultFocusElement: null,
-    children: null,
     constrain: 'window',
     overflow: 'scroll'
   }
@@ -107,8 +93,7 @@ class Modal extends Component<ModalProps> {
   static Body = ModalBody
   static Footer = ModalFooter
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: ModalProps) {
     super(props)
 
     this.state = {
@@ -117,6 +102,7 @@ class Modal extends Component<ModalProps> {
   }
 
   _DOMNode: PortalNode = null
+  _content: Dialog | null = null
 
   ref?: Element | null = null
 
@@ -125,20 +111,17 @@ class Modal extends Component<ModalProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: ModalProps) {
     if (prevProps.open && !this.props.open) {
       // closing
       this.setState({
         transitioning: prevProps.transition !== null
       })
     }
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
   get defaultFocusElement() {
@@ -164,15 +147,13 @@ class Modal extends Component<ModalProps> {
     this.DOMNode = DOMNode
   }
 
-  handleTransitionExited = (_type?: TransitionType) => {
+  handleTransitionExited: ModalProps['onExited'] = () => {
     this.setState({
       transitioning: false
     })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  contentRef = (el) => {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_content' does not exist on type 'Modal'... Remove this comment to see the full error message
+  contentRef = (el: Dialog | null) => {
     this._content = el
     if (typeof this.props.contentRef === 'function') {
       this.props.contentRef(el)
@@ -201,8 +182,15 @@ class Modal extends Component<ModalProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  renderDialog(props) {
+  renderDialog(
+    props: Omit<
+      ModalProps,
+      | keyof ModalPropsForPortal
+      | keyof ModalPropsForTransition
+      | 'constrain'
+      | 'overflow'
+    >
+  ) {
     const {
       onDismiss,
       label,
@@ -269,7 +257,6 @@ class Modal extends Component<ModalProps> {
       ...passthroughProps
     } = this.props
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitioning' does not exist on type 'R... Remove this comment to see the full error message
     const portalIsOpen = open || this.state.transitioning
 
     return (

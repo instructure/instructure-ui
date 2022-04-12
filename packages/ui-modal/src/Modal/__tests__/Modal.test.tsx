@@ -32,8 +32,9 @@ import {
   within
 } from '@instructure/ui-test-utils'
 
-import { Modal } from '../index'
+import { Modal, ModalHeader, ModalBody, ModalFooter } from '../index'
 import { ModalLocator } from '../ModalLocator'
+import type { ModalProps } from '../props'
 
 describe('<Modal />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {
@@ -326,9 +327,9 @@ describe('<Modal />', async () => {
     })
 
     it('should pass inverse variant to children when set', async () => {
-      let headerRef
-      let bodyRef
-      let footerRef
+      let headerRef: ModalHeader | null = null
+      let bodyRef: ModalBody | null = null
+      let footerRef: ModalFooter | null = null
 
       await mount(
         <Modal
@@ -347,40 +348,37 @@ describe('<Modal />', async () => {
         </Modal>
       )
 
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      expect(headerRef.props.variant).to.equal('inverse')
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      expect(bodyRef.props.variant).to.equal('inverse')
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      expect(footerRef.props.variant).to.equal('inverse')
+      expect(headerRef!.props.variant).to.equal('inverse')
+      expect(bodyRef!.props.variant).to.equal('inverse')
+      expect(footerRef!.props.variant).to.equal('inverse')
     })
 
     it('should pass overflow to Modal.Body', async () => {
-      let bodyRef
+      let bodyRef: ModalBody | null = null
 
       await mount(
         <Modal open label="Modal" shouldReturnFocus={false} overflow="fit">
           <Modal.Body ref={(el) => (bodyRef = el)}>Foo Bar Baz</Modal.Body>
         </Modal>
       )
-      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-      expect(bodyRef.props.overflow).to.equal('fit')
+      expect(bodyRef!.props.overflow).to.equal('fit')
     })
   })
 
   describe('managed focus', async () => {
-    class ModalExample extends React.Component {
+    class ModalExample extends React.Component<Partial<ModalProps>> {
       static propTypes = {
         // eslint-disable-next-line react/forbid-foreign-prop-types
         ...Modal.propTypes
       }
 
       render() {
+        const { label, ...props } = this.props
+
         return (
           <div>
             <input type="text" />
-            {/* @ts-expect-error ts-migrate(2741) FIXME: Property 'label' is missing in type '{ children: E... Remove this comment to see the full error message */}
-            <Modal {...this.props}>
+            <Modal label={label!} {...props}>
               <Modal.Header>
                 <button>Close</button>
               </Modal.Header>
