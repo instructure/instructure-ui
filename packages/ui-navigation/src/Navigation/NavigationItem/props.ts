@@ -32,12 +32,18 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type NavigationItemOwnProps = {
+  /**
+   * The reference to the underlying HTML element
+   */
   elementRef?: (el: Element | null) => void
+  /**
+   * The visual to display (ex. an Image, Logo, Avatar, or Icon)
+   */
   icon: React.ReactNode
   /**
    * The text to display  for the Navigation Link
    */
-  label: React.ReactNode
+  label: string
   /**
    * The element type to render as (will default to `<a>` if href is provided)
    */
@@ -71,13 +77,7 @@ type NavigationItemProps = NavigationItemOwnProps &
 type NavigationItemStyle = ComponentStyle<'navigationItem' | 'icon' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The reference to the underlying HTML element
-   */
   elementRef: PropTypes.func,
-  /**
-   * The visual to display (ex. an Image, Logo, Avatar, or Icon)
-   */
   icon: PropTypes.node.isRequired,
   label: PropTypes.node.isRequired,
   as: PropTypes.elementType,
