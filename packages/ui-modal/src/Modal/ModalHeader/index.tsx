@@ -42,11 +42,14 @@ import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
 import type { ModalHeaderProps, ModalHeaderStyleProps } from './props'
 
+type CloseButtonChild = React.ComponentElement<CloseButtonProps, CloseButton>
+
 /**
 ---
 parent: Modal
 id: Modal.Header
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -56,26 +59,22 @@ class ModalHeader extends Component<ModalHeaderProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    children: null,
     variant: 'default',
     spacing: 'default'
   }
 
-  ref: Element | null = null
+  ref: HTMLDivElement | null = null
 
-  handleRef = (el: Element | null) => {
+  handleRef = (el: HTMLDivElement | null) => {
     this.ref = el
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+  componentDidUpdate() {
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   makeStyleProps = (): ModalHeaderStyleProps => {
@@ -90,9 +89,7 @@ class ModalHeader extends Component<ModalHeaderProps> {
     React.Children.forEach(this.props.children, (child) => {
       if (
         child &&
-        matchComponentTypes<
-          React.ComponentElement<CloseButtonProps, CloseButton>
-        >(child, [CloseButton])
+        matchComponentTypes<CloseButtonChild>(child, [CloseButton])
       ) {
         hasCloseButton = true
       }

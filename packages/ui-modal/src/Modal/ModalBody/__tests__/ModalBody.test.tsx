@@ -23,12 +23,17 @@
  */
 
 import React from 'react'
+
 import { expect, mount, locator, stub } from '@instructure/ui-test-utils'
+import { color2hex } from '@instructure/ui-color-utils'
+import { canvas } from '@instructure/ui-themes'
+
+import { View } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view'
+
 import { ModalBody } from '../index'
 import generateComponentTheme from '../theme'
-import { canvas } from '@instructure/ui-themes'
-import { color2hex } from '@instructure/ui-color-utils'
-import { View } from '@instructure/ui-view'
+
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 const ModalBodyLocator = locator(ModalBody.selector)
 
@@ -65,7 +70,7 @@ describe('<ModalBody />', async () => {
   })
 
   describe('when passing down props to View', async () => {
-    const allowedProps = {
+    const allowedProps: Partial<ViewOwnProps> = {
       padding: 'small',
       elementRef: () => {},
       as: 'section'
@@ -89,7 +94,6 @@ describe('<ModalBody />', async () => {
           it(`should allow the '${prop}' prop`, async () => {
             const consoleError = stub(console, 'error')
             const props = {
-              // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
               [prop]: allowedProps[prop]
             }
 
