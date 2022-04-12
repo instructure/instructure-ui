@@ -63,10 +63,21 @@ describe('useTheme hook', () => {
 
       expect(callback).to.have.been.calledWith(canvas)
     })
-    it('should not use global theme when no "theme is provided"', async () => {
+    it('should use global theme when no "theme" is provided', async () => {
       const callback = spy()
       const theme = ThemeRegistry.registerTheme(instructure)
       theme.use()
+
+      await mount(
+        <InstUISettingsProvider>
+          <ExampleComponent callback={callback}></ExampleComponent>
+        </InstUISettingsProvider>
+      )
+
+      expect(callback).to.have.been.calledWith(theme)
+    })
+    it('should default to canvas theme when no global theme is available and no theme is provided', async () => {
+      const callback = spy()
 
       await mount(
         <InstUISettingsProvider>
@@ -89,6 +100,73 @@ describe('useTheme hook', () => {
 
       expect(callback).to.have.been.calledWith(canvasHighContrast)
     })
+    it('should override the default theme when no other theme is available', async () => {
+      const callback = spy()
+      await mount(
+        <InstUISettingsProvider theme={{ colors: { brand: 'red' } }}>
+          <ExampleComponent callback={callback}></ExampleComponent>
+        </InstUISettingsProvider>
+      )
+
+      expect(callback).to.have.been.calledWithMatch({
+        ...canvas,
+        colors: { brand: 'red' }
+      })
+    })
+    it('should override the global theme if that is the only theme available', async () => {
+      const callback = spy()
+      const theme = ThemeRegistry.registerTheme(instructure)
+      theme.use()
+
+      await mount(
+        <InstUISettingsProvider theme={{ colors: { brand: 'red' } }}>
+          <ExampleComponent callback={callback}></ExampleComponent>
+        </InstUISettingsProvider>
+      )
+
+      expect(callback).to.have.been.calledWithMatch({
+        ...theme,
+        colors: { brand: 'red' }
+      })
+    })
+    it('should override the global theme if that is the only theme available 2', async () => {
+      const callback = spy()
+      const theme = ThemeRegistry.registerTheme(instructure)
+      theme.use()
+
+      await mount(
+        <InstUISettingsProvider
+          theme={{ themeOverrides: { colors: { brand: 'red' } } }}
+        >
+          <ExampleComponent callback={callback}></ExampleComponent>
+        </InstUISettingsProvider>
+      )
+
+      expect(callback).to.have.been.calledWithMatch({
+        ...theme,
+        colors: { brand: 'red' }
+      })
+    })
+    it('shuold override the theme from context when provided', async () => {
+      const callback = spy()
+      const theme = ThemeRegistry.registerTheme(instructure)
+      theme.use()
+
+      await mount(
+        <InstUISettingsProvider theme={canvasHighContrast}>
+          <InstUISettingsProvider
+            theme={{ themeOverrides: { colors: { brand: 'red' } } }}
+          >
+            <ExampleComponent callback={callback}></ExampleComponent>
+          </InstUISettingsProvider>
+        </InstUISettingsProvider>
+      )
+
+      expect(callback).to.have.been.calledWithMatch({
+        ...canvasHighContrast,
+        colors: { brand: 'red' }
+      })
+    })
   })
   describe('without using InstUISettingsProvider', () => {
     it('should use theme from global ThemeRegistry', async () => {
@@ -102,13 +180,155 @@ describe('useTheme hook', () => {
     })
     it('should use default "canvas" theme when no theme is used from ThemeRegistry', async () => {
       const callback = spy()
-      const warn = spy(console, 'warn')
       await mount(<ExampleComponent callback={callback}></ExampleComponent>)
 
       expect(callback).to.have.been.calledWith(canvas)
-      expect(warn).to.have.been.calledWith(
-        'No theme provided for [InstUISettingsProvider], using default <canvas> theme.'
-      )
     })
+  })
+  describe('with InstUISettingsProvider and global theme', () => {
+    it('overrides should work correctly', async () => {
+      const [cb1, cb2, cb3, cb4, cb5, cb6] = Array(6)
+        .fill(0)
+        .map(() => spy())
+
+      const theme = ThemeRegistry.registerTheme(instructure)
+      theme.use({
+        overrides: {
+          colors: {
+            backgroundLight: 'red',
+            borderLight: 'yellow',
+            textDarkest: 'magenta'
+          }
+        }
+      })
+
+      await mount(
+        <>
+          {/* no provider -> instructure theme */}
+          <ExampleComponent callback={cb1}></ExampleComponent>
+          <InstUISettingsProvider theme={canvasHighContrast}>
+            {/* theme provided -> canvasHighContrast */}
+            <ExampleComponent callback={cb2}></ExampleComponent>
+            <InstUISettingsProvider theme={canvas}>
+              {/* theme provided -> canvas theme */}
+              <ExampleComponent callback={cb3}></ExampleComponent>
+              <InstUISettingsProvider
+                theme={{
+                  colors: {
+                    backgroundLight: 'orange'
+                  },
+                  themeOverrides: {
+                    colors: {
+                      borderLight: 'olive'
+                    }
+                  }
+                }}
+              >
+                {/* theme provided -> canvas theme with overrides */}
+                <ExampleComponent callback={cb4}></ExampleComponent>
+              </InstUISettingsProvider>
+            </InstUISettingsProvider>
+          </InstUISettingsProvider>
+          <InstUISettingsProvider>
+            {/* no theme provided -> instructure theme */}
+            <ExampleComponent callback={cb5}></ExampleComponent>
+            <InstUISettingsProvider
+              theme={{
+                colors: {
+                  backgroundLight: 'brown'
+                },
+                themeOverrides: {
+                  colors: {
+                    borderLight: 'pink'
+                  }
+                }
+              }}
+            >
+              {/* no theme provided -> instructure theme with overrides */}
+              <ExampleComponent callback={cb6}></ExampleComponent>
+            </InstUISettingsProvider>
+          </InstUISettingsProvider>
+        </>
+      )
+
+      expect(cb1).to.have.been.calledWithMatch({
+        ...theme,
+        colors: {
+          backgroundLight: 'red',
+          borderLight: 'yellow',
+          textDarkest: 'magenta'
+        }
+      })
+      expect(cb2).to.have.been.calledWith(canvasHighContrast)
+      expect(cb3).to.have.been.calledWith(canvas)
+      expect(cb4).to.have.been.calledWithMatch({
+        ...canvas,
+        colors: {
+          backgroundLight: 'orange',
+          borderLight: 'olive'
+        }
+      })
+      expect(cb5).to.have.been.calledWithMatch({
+        ...theme,
+        colors: {
+          backgroundLight: 'red',
+          borderLight: 'yellow',
+          textDarkest: 'magenta'
+        }
+      })
+      expect(cb6).to.have.been.calledWithMatch({
+        ...theme,
+        colors: {
+          backgroundLight: 'brown',
+          borderLight: 'pink',
+          textDarkest: 'magenta'
+        }
+      })
+    })
+  })
+  it('should work correctly when multiple React trees is used', async () => {
+    const callback1 = spy()
+    const callback2 = spy()
+
+    const theme = ThemeRegistry.registerTheme(instructure)
+    theme.use()
+
+    //first react tree
+    await mount(<ExampleComponent callback={callback1}></ExampleComponent>)
+
+    //second react tree
+    await mount(<ExampleComponent callback={callback2}></ExampleComponent>)
+
+    expect(callback1).to.have.been.calledWith(theme)
+    expect(callback2).to.have.been.calledWith(theme)
+  })
+  it('should work correctly when multiple React trees is used together with InstUISettingsProvider', async () => {
+    const callback1 = spy()
+    const callback2 = spy()
+    const callback3 = spy()
+
+    const theme = ThemeRegistry.registerTheme(instructure)
+    theme.use()
+
+    //first react tree
+    await mount(<ExampleComponent callback={callback1}></ExampleComponent>)
+
+    //second react tree
+    await mount(
+      <InstUISettingsProvider>
+        <ExampleComponent callback={callback2}></ExampleComponent>
+      </InstUISettingsProvider>
+    )
+
+    //third react tree
+    await mount(
+      <InstUISettingsProvider theme={canvasHighContrast}>
+        <ExampleComponent callback={callback3}></ExampleComponent>
+      </InstUISettingsProvider>
+    )
+
+    expect(callback1).to.have.been.calledWith(theme)
+    expect(callback2).to.have.been.calledWith(theme)
+    expect(callback3).to.have.been.calledWith(canvasHighContrast)
   })
 })
