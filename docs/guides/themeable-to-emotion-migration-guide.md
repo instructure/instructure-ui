@@ -194,6 +194,20 @@ To learn more about the available options and defaults simply run:
 
 #### theme.use() is deprecated
 
+```javascript
+---
+embed: true
+---
+<ToggleBlockquote
+  summary="The theme.use() API is available again from version 8.24.0!"
+>
+  <ToggleBlockquote.Paragraph>
+   To support multiple theming use cases we decided to re-introduce the <code>theme.use()</code> API into the library. <br/>
+   You can read more about how to use it in it's own or in conjuction with <code>InstUISettingsProvider</code> <Link href="/#using-theme-overrides/#using-theme-overrides-how-theming-works-in-instui">here</Link>.
+  </ToggleBlockquote.Paragraph>
+</ToggleBlockquote>
+```
+
 Applying themes with the former `.use()` method of themes (added by ui-themeable) is now deprecated. Wrap your app in `InstUISettingsProvider` instead.
 
 ```js

@@ -53,7 +53,7 @@ describe('useTheme hook', () => {
     ThemeRegistry.setRegistry(defaultRegistry)
   })
   describe('with using InstUISettingsProvider', () => {
-    it('should use default canvas theme no "theme" is provided', async () => {
+    it('should use default canvas theme when no "theme" is provided', async () => {
       const callback = spy()
       await mount(
         <InstUISettingsProvider>
@@ -129,7 +129,7 @@ describe('useTheme hook', () => {
         colors: { brand: 'red' }
       })
     })
-    it('should override the global theme if that is the only theme available 2', async () => {
+    it('should override the global theme with the "themeOverrides" option if that is the only theme available', async () => {
       const callback = spy()
       const theme = ThemeRegistry.registerTheme(instructure)
       theme.use()
@@ -147,7 +147,7 @@ describe('useTheme hook', () => {
         colors: { brand: 'red' }
       })
     })
-    it('shuold override the theme from context when provided', async () => {
+    it('should override the theme from context when provided', async () => {
       const callback = spy()
       const theme = ThemeRegistry.registerTheme(instructure)
       theme.use()

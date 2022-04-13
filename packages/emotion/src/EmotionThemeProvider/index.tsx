@@ -25,7 +25,6 @@
 import React from 'react'
 import { ThemeProvider } from '@emotion/react'
 
-import type {} from '@instructure/shared-types'
 import type { ThemeOrOverride } from '../EmotionTypes'
 import { getTheme } from '../getTheme'
 

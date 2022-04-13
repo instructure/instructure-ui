@@ -5,7 +5,6 @@ order: 4
 ---
 
 ## Using theme overrides
-
 This document gives an overview on how you can customize Instructure UI components by tweaking their theme variables. While this gives you a level of flexibility on the look and feel of the components you should be aware of 2 things:
 
 - The default theme variables are tested to have high enough contrast ratios for WCAG conformance. If you are making changes, please make sure that your app stays WCAG conformant.
@@ -26,11 +25,17 @@ embed: true
 
 ### How theming works in InstUI
 
-The theming system in InstUI has two levels:
+The theming system in InstUI has three levels:
 
 **The global theme**
 
-On the broader level, there is the main theme object that contains the color, spacing, typography etc. variables available in the theme (e.g.: [canvas theme](/#canvas)). The global theme can be set via the [InstUISettingsProvider](/#InstUISettingsProvider) component.
+Global themes are useful when you have multiple React Application trees and you want to set up themes and overrides on a more global level than application level theming.
+This basically means you don't necesseraly have to warp each application tree with an [InstUISettingsProvider](/#InstUISettingsProvider) to use themes.
+InstUI leverages the [ThemeRegistry](/#ThemeRegistry) package to achive global theming.
+
+**The application level theme**
+
+On the broader level, there is the main theme object that contains the color, spacing, typography etc. variables available in the theme (e.g.: [canvas theme](/#canvas)). The application level theme can be set via the [InstUISettingsProvider](/#InstUISettingsProvider) component.
 
 **The component's own theme**
 
@@ -39,7 +44,7 @@ Every themeable component has its own "theme map". This map defines the componen
 See the [emotion](/#emotion) and [InstUISettingsProvider](/#InstUISettingsProvider) docs pages for more info and examples.
 
 ```jsx
-// app/component root sets the global theme
+// app/component root sets the app theme
 ;<InstUISettingsProvider theme={canvas}>
   <ExampleComponent />
 </InstUISettingsProvider>
@@ -69,6 +74,37 @@ const generateStyle = (componentTheme) => {
 ```
 
 ### Global theme overrides
+
+In order to globally register and override themes, simply import the theme you wish to use and call `.use({ overrides })` on it:
+
+```js
+---
+example: false
+render: false
+---
+import ReactDOM from "react-dom"
+import { canvas } from "@instructure/ui-themes"
+
+canvas.use({
+  overrides: {
+    colors: {
+      brand: 'red'
+    }
+  }
+})
+
+ReactDOM.render(
+  <div>
+    ...your application code goes here...
+  </div>
+)
+```
+
+**Note**: globally overriding themes like this means that every InstUI component will use that theme, unless they are wrapped inside an `<InstUISettingsProvider/>`.
+
+You can see more examples [here](/#using-theme-overrides/#using-theme-overrides-examples).
+
+### Application level theme overrides
 
 `<InstUISettingsProvider/>` accepts full theme objects and override objects too.
 
@@ -202,9 +238,9 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-#### Globally overriding component themes
+#### Overriding component themes for a React Tree
 
-You can globally override the theme variables of specific components too with the `componentOverrides` key.
+You can override the theme variables of specific components too with the `componentOverrides` key.
 
 **Important:** these variables are the components own theme variables set in the `theme.js` of the component.
 
@@ -216,7 +252,7 @@ The `componentOverrides` can also be nested inside `themeOverrides`.
 ---
 example: true
 ---
-;<InstUISettingsProvider theme={canvas}>
+<InstUISettingsProvider theme={canvas}>
   <div>
     <Alert variant="info" margin="small">
       I am a default style Alert.
@@ -411,3 +447,139 @@ example: true
   </div>
 </div>
 ```
+
+### Examples
+
+#### Use global theme for multiple React trees
+
+If you have multiple `ReactDOM.render` calls and you would like to use the same theme with the same overrides for them, then you have 2 options:
+
+- wrap each `ReactDOM.render` application with an `InstUISettingsProvider` with the correct theme:
+
+  ```js
+  ---
+  example: false
+  ---
+  //ui/themeOverride.js
+  import { canvas } from "@instructure/ui-themes"
+
+  const themeWithOverrides = {
+    ...canvas,
+    colors: {
+      brand: 'red'
+    }
+  }
+
+  export { themeWithOverrides }
+  ```
+
+  ```jsx
+  ---
+  example: false
+  ---
+  //ui/app1/index.js
+  ReactDOM.render(
+    <InstUISettingsProvider theme={themeWithOverrides}>
+      <App1>
+    </InstUISettingsProvider>
+  )
+  ```
+
+  ```jsx
+  ---
+  example: false
+  ---
+  //ui/app2/index.js
+  ReactDOM.render(
+    <InstUISettingsProvider theme={themeWithOverrides}>
+      <App2>
+    </InstUISettingsProvider>
+  )
+  ```
+
+  This approach quickly becomes too cumbersome if you have more than a couple of `ReactDOM.render` calls.
+
+- instead you could achive the same thing with global themes:
+
+```jsx
+---
+example: false
+---
+//ui/init.js - make sure ui/init.js runs before any other app code!
+import { canvas } from "@instructure/ui-themes"
+
+canvas.use({
+  overrides: {
+    colors: {
+      brand: 'red'
+    }
+  }
+})
+```
+
+This will register the `canvas` theme with its overrides as the active theme in the [ThemeRegistry](/#ThemeRegistry) and then every InstUI component - that is not wrapped in an `InstUISettingsProvider` - will use this theme no matter which React tree they are rendered in.
+
+#### Use global theme together with InstUISettingsProvider
+
+You can use the global theming and the application level theming together, however there are some caveats you should be aware of:
+
+- if you globally `.use()` a theme and would like to override that theme in a sub-tree of your application, then make sure that sub-tree does not have a theme provided to any `InstUISettingsProvider` above it in the tree:
+
+  ```js
+  //ui/init.js
+  import { canvas } from "@instructure/ui-themes"
+
+  canvas.use({ overrides: ... })
+
+  //render app
+  ```
+
+  ```jsx
+  //then later in a sub-tree you can override the theme for that sub-tree only:
+  render() {
+    return(
+      <InstUISettingsProvider theme={{
+        colors: {
+          brand: 'magenta'
+        }
+      }}>
+      //Any InstUI component that uses the `theme.colors.brand` will have it's color set to "magenta" in this subtree
+      <SubTree />
+    </InstUISettingsProvider>
+    )
+  }
+  ```
+
+- this example won't override the global theme, instead it will the override the application level theme provided to `InstUISettingsProvider`
+
+  ```js
+  //ui/init.js
+  import { canvas } from "@instructure/ui-themes"
+
+  canvas.use({ overrides: ... })
+
+  //render app
+  ```
+
+  ```jsx
+  //your application root code:
+  import { instructure } from "@instructure/ui-themes"
+
+  render() {
+    return (
+      <InstUISettingsProvider theme={instructure}>
+        <SubTree1 />
+        //This theme override will only change the theme that is directly above it in the context,
+        //the 'instructure' theme not the global 'canvas' theme!
+        <InstUISettingsProvider theme={{
+          colors: {
+            brand: 'orange'
+          }
+        }}>
+          //Any InstUI component that uses the `theme.colors.brand` will have it's color set to "orange" in this subtree
+          <SubTree2/>
+        </InstUISettingsProvider>
+      </InstUISettingsProvider>
+   )
+  }
+  ```

@@ -22,30 +22,50 @@ yarn add @instructure/canvas-theme
 
 Before mounting (rendering) your React application:
 
-```js
-import { theme } from '@instructure/canvas-theme'
+- global theming:
 
-ReactDOM.render(
-  <InstUISettingsProvider theme={theme}>
-    <App />
-  </InstUISettingsProvider>,
-  element
-)
-```
+  ```js
+  import { theme } from '@instructure/canvas-theme'
+
+  theme.use()
+  ```
+
+- application level theming:
+
+  ```jsx
+  import { theme } from '@instructure/canvas-theme'
+
+  ReactDOM.render(
+    <InstUISettingsProvider theme={theme}>
+      <App />
+    </InstUISettingsProvider>,
+    element
+  )
+  ```
 
 To override the variables:
 
-```js
-import { theme } from '@instructure/canvas-theme'
-const themeOverrides = { colors: { brand: 'red' } }
+- globally:
 
-ReactDOM.render(
-  <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
-    <App />
-  </InstUISettingsProvider>,
-  element
-)
-```
+  ```js
+  import { theme } from '@instructure/canvas-theme'
+
+  theme.use({ overrides: { colors: { brand: 'red' } } })
+  ```
+
+- application level:
+
+  ```jsx
+  import { theme } from '@instructure/canvas-theme'
+  const themeOverrides = { colors: { brand: 'red' } }
+
+  ReactDOM.render(
+    <InstUISettingsProvider theme={{ ...theme, ...themeOverrides }}>
+      <App />
+    </InstUISettingsProvider>,
+    element
+  )
+  ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/canvas-theme.svg
 [npm-url]: https://npmjs.com/package/@instructure/canvas-theme

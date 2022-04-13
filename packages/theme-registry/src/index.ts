@@ -22,5 +22,12 @@
  * SOFTWARE.
  */
 
-export { ThemeRegistry, getCurrentTheme } from './ThemeRegistry'
+export {
+  ThemeRegistry,
+  getRegistry,
+  clearRegistry,
+  setRegistry,
+  getCurrentTheme,
+  registerTheme
+} from './ThemeRegistry'
 export type { Theme, Registry } from './ThemeRegistry'

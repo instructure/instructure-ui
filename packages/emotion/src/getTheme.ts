@@ -23,16 +23,18 @@
  */
 import { merge, cloneDeep } from 'lodash'
 import { canvas } from '@instructure/ui-themes'
+import { ThemeRegistry } from '@instructure/theme-registry'
+
 import type {
   BaseTheme,
   BaseThemeVariableKeys
 } from '@instructure/shared-types'
+
 import type {
   Overrides,
   ThemeOrOverride,
   SpecificThemeOverride
 } from './EmotionTypes'
-import { ThemeRegistry } from '@instructure/theme-registry'
 
 const baseThemeProps: BaseThemeVariableKeys = [
   'borders',
@@ -46,7 +48,11 @@ const baseThemeProps: BaseThemeVariableKeys = [
   'transitions',
   'typography'
 ]
+
 /**
+ * ---
+ * private: true
+ * ---
  * Gives back the theme object for the the provider.
  *
  * If a valid InstUI theme is given, it just returns the theme.
@@ -56,7 +62,6 @@ const baseThemeProps: BaseThemeVariableKeys = [
  *
  * @param {object} themeOrOverride - A full theme or an override object
  * @returns {function} A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
- * @module getTheme
  */
 const getTheme =
   (themeOrOverride: ThemeOrOverride) =>
@@ -130,4 +135,5 @@ const isBaseTheme = (theme: ThemeOrOverride): theme is BaseTheme => {
   }
 }
 
+export default getTheme
 export { getTheme }
