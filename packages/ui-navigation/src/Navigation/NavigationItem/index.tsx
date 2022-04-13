@@ -90,7 +90,7 @@ class NavigationItem extends Component<NavigationItemProps> {
         onClick={onClick}
         ref={addRef ? this.handleRef : undefined}
         css={this.props.styles?.navigationItem}
-        aria-label={this.props.minimized ? label : undefined}
+        aria-label={this.props.minimized ? (label as string) : undefined}
       >
         <div css={this.props.styles?.icon} aria-hidden="true">
           {icon}
