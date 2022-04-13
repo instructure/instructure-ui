@@ -69,6 +69,7 @@ class Navigation extends Component<NavigationProps, NavigationState> {
       _event: React.SyntheticEvent,
       _minimized: boolean
     ) {},
+    // TODO we should investigate later if it used or not
     onClick: function (_e: React.MouseEvent) {}
   }
 
@@ -109,7 +110,9 @@ class Navigation extends Component<NavigationProps, NavigationState> {
     if (!this.isControlled()) {
       this.setState(navMinimized)
     }
-    this.props.onMinimized!(event, !this.minimized)
+    if (typeof this.props.onMinimized === 'function') {
+      this.props.onMinimized(event, !this.minimized)
+    }
   }
 
   renderChildren() {

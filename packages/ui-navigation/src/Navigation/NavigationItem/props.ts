@@ -43,7 +43,7 @@ type NavigationItemOwnProps = {
   /**
    * The text to display  for the Navigation Link
    */
-  label: string
+  label: React.ReactNode
   /**
    * The element type to render as (will default to `<a>` if href is provided)
    */
