@@ -143,6 +143,28 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
               .minute(parsed.minute())
               .hour(parsed.hour())
               .toISOString()
+        if (this.isDisabledDate(parsed)) {
+          let text =
+            typeof this.props.disabledDateTimeMessage === 'function'
+              ? this.props.disabledDateTimeMessage(parsed.toISOString(true))
+              : this.props.disabledDateTimeMessage
+          if (!text) {
+            text =
+              typeof this.props.invalidDateTimeMessage === 'function'
+                ? this.props.invalidDateTimeMessage(parsed.toISOString(true))
+                : this.props.invalidDateTimeMessage
+          }
+          errorMsg = text ? { text, type: 'error' } : undefined
+          return {
+            iso: parsed.clone(),
+            calendarSelectedDate: parsed.clone(),
+            dateInputTextChanged: false,
+            dateInputText: parsed.format(this.dateFormat),
+            message: errorMsg,
+            timeSelectValue: newTimeSelectValue,
+            renderedDate: parsed.clone()
+          }
+        }
         return {
           iso: parsed.clone(),
           calendarSelectedDate: parsed.clone(),
@@ -194,6 +216,22 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
 
   get dateFormat() {
     return this.props.dateFormat
+  }
+
+  isDisabledDate(date: Moment) {
+    const disabledDates = this.props.disabledDates
+    if (!disabledDates) {
+      return false
+    }
+    if (Array.isArray(disabledDates)) {
+      for (const aDisabledDate of disabledDates) {
+        if (date.isSame(aDisabledDate, 'day')) {
+          return true
+        }
+      }
+      return false
+    }
+    return disabledDates(date.toISOString())
   }
 
   // Called when the user enters text into dateInput
@@ -327,6 +365,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
 
   handleShowCalendar = (_event: SyntheticEvent) => {
     this.setState({ isShowingCalendar: true })
+    this.setState({ isShowingCalendar: true })
   }
 
   handleSelectNextDay = (_event: SyntheticEvent) => {
@@ -408,6 +447,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           isOutsideMonth={!date.isSame(renderedDate, 'month')}
           label={date.format('D MMMM YYYY')} // used by screen readers
           onClick={this.handleDayClick}
+          interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}
         >
           {date.format('DD')}
         </DateInput.Day>

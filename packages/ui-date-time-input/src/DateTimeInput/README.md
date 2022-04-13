@@ -126,7 +126,7 @@ class Example extends React.Component {
   render() {
     return (
       <ApplyLocale locale="fr" timezone="Africa/Nairobi">
-        <div style={{ height: 350, width: '40em' }}>
+        <div style={{ height: '150px', width: '40em' }}>
           <DateTimeInput
             description="Pick a date and time"
             datePlaceholder="Choose a date"
@@ -144,6 +144,47 @@ class Example extends React.Component {
       </ApplyLocale>)
   }
 }
+render(<Example />)
+```
+
+A `DateTimeInput` with some disabled dates and a custom error message for them:
+
+```js
+---
+example: true
+render: false
+---
+const locale = 'en-us'
+const timezone = 'America/Denver'
+
+class Example extends React.Component {
+  getDisabledDates(isoDateToCheck) {
+    const parsed = moment.tz(isoDateToCheck, [moment.ISO_8601], locale, timezone)
+    const now = moment().locale(locale).tz(timezone)
+    return parsed.isBefore(now)
+  }
+  render() {
+    return (
+      <div style= { {height: '150px', width: '40em'}}>
+        <DateTimeInput
+          description="Pick a date and time"
+          datePlaceholder="Choose a date"
+          dateRenderLabel="Date"
+          timeRenderLabel="Time"
+          invalidDateTimeMessage={(rawDateValue) => 'Invalid date: ' + rawDateValue}
+          disabledDateTimeMessage={(rawDateValue) => 'Disabled date: ' + rawDateValue}
+          prevMonthLabel='Previous month'
+          nextMonthLabel='Next month'
+          defaultValue="2022-04-08T13:30"
+          layout="columns"
+          disabledDates={this.getDisabledDates}
+          locale={locale}
+          timezone={timezone}
+        />
+    </div>)
+  }
+}
+
 render(<Example />)
 ```
 

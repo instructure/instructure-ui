@@ -28,7 +28,7 @@ import type { FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'
 import { I18nPropTypes } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
-import PropTypes from 'prop-types'
+import PropTypes, { string } from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 
@@ -223,6 +223,17 @@ type DateTimeInputProps = {
    * component
    */
   onBlur?: (e: SyntheticEvent) => void
+  /*
+   * Specify which date(s) will be shown as disabled in the calendar.
+   * You can either supply an array of ISO8601 timeDate strings or
+   * a function that will be called for each date shown in the calendar.
+   */
+  disabledDates?: string[] | ((isoDateToCheck: string) => boolean)
+  /**
+   * Error message shown to the user if they enter a date that is disabled.
+   * If not specified the component will show the `invalidDateTimeMessage`.
+   */
+  disabledDateTimeMessage?: string | ((rawDateValue: string) => string)
 }
 
 type DateTimeInputState = {
@@ -283,7 +294,15 @@ const propTypes: PropValidators<PropKeys> = {
   onChange: PropTypes.func,
   dateInputRef: PropTypes.func,
   timeInputRef: PropTypes.func,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+  disabledDates: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(string)
+  ]),
+  disabledDateTimeMessage: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func
+  ])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -312,7 +331,9 @@ const allowedProps: AllowedPropKeys = [
   'onChange',
   'dateInputRef',
   'timeInputRef',
-  'onBlur'
+  'onBlur',
+  'disabledDates',
+  'disabledDateTimeMessage'
 ]
 
 export type { DateTimeInputProps, DateTimeInputState }
