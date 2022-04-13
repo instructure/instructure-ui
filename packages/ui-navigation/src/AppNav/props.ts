@@ -53,12 +53,12 @@ type AppNavOwnProps = {
   /**
    * Content to display before the navigation items, such as a logo
    */
-  renderBeforeItems?: React.ReactNode | ((...args: any[]) => any)
+  renderBeforeItems?: React.ReactNode | (() => React.ReactNode)
   /**
    * Content to display after the navigation items, aligned to the far end
    * of the navigation
    */
-  renderAfterItems?: React.ReactNode | ((...args: any[]) => any)
+  renderAfterItems?: React.ReactNode | (() => React.ReactNode)
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -73,7 +73,7 @@ type AppNavOwnProps = {
    * Customize the text displayed in the menu trigger when links overflow
    * the overall nav width.
    */
-  renderTruncateLabel?: React.ReactNode | ((...args: any[]) => any)
+  renderTruncateLabel?: React.ReactNode | (() => React.ReactNode)
   /**
    * Called whenever the navigation items are updated or the size of
    * the navigation changes. Passes in the `visibleItemsCount` as
