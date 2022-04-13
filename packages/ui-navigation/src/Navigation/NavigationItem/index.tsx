@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
@@ -52,7 +52,7 @@ class NavigationItem extends Component<NavigationItemProps> {
 
   static defaultProps = {
     as: 'a',
-    onClick: function (_event: React.MouseEvent) {},
+    onClick: function () {},
     selected: false,
     minimized: false
   } as const
