@@ -67,9 +67,7 @@ class AppNav extends Component<AppNavProps> {
     children: null,
     debounce: 300,
     margin: '0',
-    elementRef: (_el: Element | null) => {},
     renderTruncateLabel: () => 'More',
-    onUpdate: () => {},
     visibleItemsCount: 0
   }
 
@@ -80,9 +78,9 @@ class AppNav extends Component<AppNavProps> {
   }
 
   ref: Element | null = null
-  _list: Element | null = null
-  _debounced: Debounced | null = null
-  _resizeListener: ResizeObserver | null = null
+  _list: HTMLUListElement | null = null
+  _debounced?: Debounced
+  _resizeListener?: ResizeObserver
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -156,7 +154,9 @@ class AppNav extends Component<AppNavProps> {
     this.setState({ isMeasuring: true }, () => {
       const { visibleItemsCount } = this.measureItems()
 
-      this.props.onUpdate!({ visibleItemsCount })
+      if (typeof this.props.onUpdate === 'function') {
+        this.props.onUpdate({ visibleItemsCount })
+      }
       this.setState({ isMeasuring: false })
     })
   }
@@ -171,11 +171,7 @@ class AppNav extends Component<AppNavProps> {
     }
   }
 
-  renderListItem(
-    item: ReactChild | ReactFragment | ReactPortal,
-    isMenuTrigger: boolean,
-    key: number | null
-  ) {
+  renderListItem(item: React.ReactNode, isMenuTrigger: boolean, key?: number) {
     return (
       <li
         key={key}
@@ -189,7 +185,7 @@ class AppNav extends Component<AppNavProps> {
       </li>
     )
   }
-  renderMenu(items: (ReactChild | ReactFragment | ReactPortal | Item)[]) {
+  renderMenu(items: (ReactChild | ReactFragment | ReactPortal)[]) {
     const menu = (
       <Menu
         trigger={
@@ -199,28 +195,25 @@ class AppNav extends Component<AppNavProps> {
         }
       >
         {items.map((item, index) => {
+          const appNavItem = item as Item
           return (
             <Menu.Item
-              href={
-                (item as Item).props.href
-                  ? (item as Item).props.href
-                  : undefined
-              }
+              href={appNavItem.props.href ? appNavItem.props.href : undefined}
               onClick={
-                (item as Item).props.onClick && !(item as Item).props.href
-                  ? (item as Item).props.onClick
-                  : () => {}
+                appNavItem.props.onClick && !appNavItem.props.href
+                  ? appNavItem.props.onClick
+                  : undefined
               }
               key={index}
             >
-              {callRenderProp((item as Item).props.renderLabel)}
+              {callRenderProp(appNavItem.props.renderLabel)}
             </Menu.Item>
           )
         })}
       </Menu>
     )
 
-    return this.renderListItem(menu, true, null)
+    return this.renderListItem(menu, true)
   }
 
   render() {
