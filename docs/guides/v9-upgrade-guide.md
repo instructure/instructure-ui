@@ -14,15 +14,6 @@ We recommend upgrading your application for each major version gradually, e.g. i
 
 The tables below show what will be removed and what are they replaced with. We also marked if there are [codemods](#ui-codemods) available.
 
-##### Table of Contents
-
-- [Deprecated Components](/#v9-upgrade-guide/#upgrade-guide-for-version-9-deprecated-components)
-- [Deprecated Utilities](/#v9-upgrade-guide/#upgrade-guide-for-version-9-deprecated-utilities)
-- [Deprecated Properties](/#v9-upgrade-guide/#upgrade-guide-for-version-9-deprecated-properties)
-- [Deprecated Property Values](/#v9-upgrade-guide/#upgrade-guide-for-version-9-deprecated-property-values)
-- [Removed packages and scripts](/#v9-upgrade-guide/#upgrade-guide-for-version-9-removed-packages-and-scripts)
-- [Removal of deprecated legacy reference attributes from components](/#v9-upgrade-guide/#upgrade-guide-for-version-9-removal-of-deprecated-legacy-reference-attributes-from-components)
-
 ### Deprecated Components
 
 | Component                 | Substitute / Notes                                                                            |

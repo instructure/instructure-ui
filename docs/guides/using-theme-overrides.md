@@ -6,16 +6,6 @@ order: 4
 
 ## Using theme overrides
 
-- [How theming works in InstUI](/#using-theme-overrides/#using-theme-overrides-how-theming-works-in-instui)
-- [Global theme overrides](/#using-theme-overrides/#using-theme-overrides-global-theme-overrides)
-  - [Full themes](/#using-theme-overrides/#using-theme-overrides-global-theme-overrides-full-themes)
-  - [Partial theme overrides](/#using-theme-overrides/#using-theme-overrides-global-theme-overrides-partial-theme-overrides)
-  - [Targeting variables in multiple themes](/#using-theme-overrides/#using-theme-overrides-global-theme-overrides-targeting-variables-in-multiple-themes)
-  - [Globally overriding component themes](/#using-theme-overrides/#using-theme-overrides-global-theme-overrides-globally-overriding-component-themes)
-- [Component themeOverride prop](/#using-theme-overrides/#using-theme-overrides-component-themeoverride-prop)
-  - [Override object](/#using-theme-overrides/#using-theme-overrides-component-themeoverride-prop-override-object)
-  - [Override function](/#using-theme-overrides/#using-theme-overrides-component-themeoverride-prop-override-function)
-
 This document gives an overview on how you can customize Instructure UI components by tweaking their theme variables. While this gives you a level of flexibility on the look and feel of the components you should be aware of 2 things:
 
 - The default theme variables are tested to have high enough contrast ratios for WCAG conformance. If you are making changes, please make sure that your app stays WCAG conformant.

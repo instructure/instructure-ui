@@ -352,6 +352,7 @@ import { ${importName} } from '${esPath}'
   renderTOC() {
     const { doc } = this.props
     const { TOCData } = this.state
+    const category = doc.category?.toLowerCase()
 
     if (!TOCData || !TOCData.length) {
       return null
@@ -382,10 +383,17 @@ import { ${importName} } from '${esPath}'
         <View as="div" margin="medium 0">
           <ToggleDetails
             summary="Table of Contents"
-            defaultExpanded={doc.category?.includes('components')}
+            defaultExpanded={
+              category?.includes('components') || category === 'guides'
+            }
             size="large"
           >
-            <List margin="0 0 large" isUnstyled>
+            <List
+              margin="0 0 large"
+              isUnstyled
+              size="small"
+              itemSpacing="xx-small"
+            >
               {TOC}
             </List>
           </ToggleDetails>
