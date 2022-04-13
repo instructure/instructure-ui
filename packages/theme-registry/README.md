@@ -9,6 +9,7 @@ category: packages
 [![Code of Conduct][coc-badge]][coc]
 
 A pacakge for managing global themes.
+Read more about it [here](/#ThemeRegistry).
 
 ### Installation
 

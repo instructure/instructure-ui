@@ -2123,27 +2123,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/babel-plugin-transform-imports@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/babel-plugin-transform-imports@npm:8.22.0"
-  dependencies:
-    globby: ^10.0.1
-  checksum: adee40ba2ff4afed4e5220ea13ee7a05020f516269ed5d68035e230fdc8851e52a2ef62de1be8f395f07512a94b6ba46deba6a505f84b31f38e7f7ddcc7ad1c2
-  languageName: node
-  linkType: hard
-
 "@instructure/browserslist-config-instui@8.23.0, @instructure/browserslist-config-instui@workspace:packages/browserslist-config-instui":
   version: 0.0.0-use.local
   resolution: "@instructure/browserslist-config-instui@workspace:packages/browserslist-config-instui"
   languageName: unknown
   linkType: soft
-
-"@instructure/browserslist-config-instui@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/browserslist-config-instui@npm:8.22.0"
-  checksum: b924287e3549f165e2a09c1ea60af097cd1c7d22ad669af417486ee3e53b5ce638c07d4b99422a80b5781c7e0008f928d1a5180fbc67f325b0900961e7a746a2
-  languageName: node
-  linkType: hard
 
 "@instructure/canvas-high-contrast-theme@8.23.0, @instructure/canvas-high-contrast-theme@workspace:packages/canvas-high-contrast-theme":
   version: 0.0.0-use.local
@@ -2202,19 +2186,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/console@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/console@npm:8.22.0"
-  dependencies:
-    "@babel/helper-annotate-as-pure": ^7.8.3
-    "@babel/helper-module-imports": ^7.8.3
-    babel-plugin-macros: ^3
-  peerDependencies:
-    react: ">=16.8 <=17"
-  checksum: b9e4399819edad8ed1c8461ebd49b066eedc298ca59b539e8ba3cc48dcdb739e9b231fc165bf7e08f0ec5b44f92162ed7c26eb6059a1b0a23fc37fc5fffd1b95
-  languageName: node
-  linkType: hard
-
 "@instructure/cz-lerna-changelog@8.23.0, @instructure/cz-lerna-changelog@workspace:packages/cz-lerna-changelog":
   version: 0.0.0-use.local
   resolution: "@instructure/cz-lerna-changelog@workspace:packages/cz-lerna-changelog"
@@ -2238,15 +2209,6 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
   languageName: unknown
   linkType: soft
-
-"@instructure/debounce@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/debounce@npm:8.22.0"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-  checksum: 3cb78cde0745c64d5e1c301691a972cd5a2b198a5edbefb43df67417df8e1d7ad7c49cc85d600accc4312467e5ba631804c80afe6ee44ae65df890146825637a
-  languageName: node
-  linkType: hard
 
 "@instructure/emotion@8.23.0, @instructure/emotion@workspace:packages/emotion":
   version: 0.0.0-use.local
@@ -2342,16 +2304,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/shared-types@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/shared-types@npm:8.22.0"
-  dependencies:
-    prop-types: ^15
-    react: ^17.0.0
-  checksum: a1b0994566efebf5517e661bcc8befd38d5268de6f52e747751cff718b121b13b736c9f3b3ca8b8ae5fe6d0aaef1006e9b7b23e39ff063cbf029e21817bb2d76
-  languageName: node
-  linkType: hard
-
 "@instructure/template-app@8.23.0, @instructure/template-app@workspace:packages/template-app":
   version: 0.0.0-use.local
   resolution: "@instructure/template-app@workspace:packages/template-app"
@@ -2405,11 +2357,11 @@ __metadata:
   resolution: "@instructure/theme-registry@workspace:packages/theme-registry"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@instructure/console": 8.22.0
-    "@instructure/shared-types": 8.22.0
-    "@instructure/ui-babel-preset": 8.22.0
-    "@instructure/ui-test-utils": 8.22.0
-    "@instructure/ui-utils": 8.22.0
+    "@instructure/console": 8.23.0
+    "@instructure/shared-types": 8.23.0
+    "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-test-utils": 8.23.0
+    "@instructure/ui-utils": 8.23.0
   languageName: unknown
   linkType: soft
 
@@ -2517,16 +2469,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-axe-check@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/ui-axe-check@npm:8.22.0"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    axe-core: ^4
-  checksum: fa368e4f0c469dccb9d79dc41bb693c0aa899997449ec0c98d44ee5070622c2cfb02536106416fd6bf6ca82f1636e34a4f0fa422c6a4d50c2160b1363fa2fe19
-  languageName: node
-  linkType: hard
-
 "@instructure/ui-babel-preset@8.23.0, @instructure/ui-babel-preset@workspace:packages/ui-babel-preset":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-babel-preset@workspace:packages/ui-babel-preset"
@@ -2558,39 +2500,6 @@ __metadata:
     core-js: ^3.2.1
   languageName: unknown
   linkType: soft
-
-"@instructure/ui-babel-preset@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/ui-babel-preset@npm:8.22.0"
-  dependencies:
-    "@babel/core": ^7.13.10
-    "@babel/plugin-proposal-class-properties": ^7.8.3
-    "@babel/plugin-proposal-decorators": ^7.8.3
-    "@babel/plugin-proposal-export-default-from": ^7.8.3
-    "@babel/plugin-proposal-optional-chaining": ^7.8.3
-    "@babel/plugin-syntax-dynamic-import": ^7.8.3
-    "@babel/plugin-transform-classes": ^7.9.5
-    "@babel/plugin-transform-destructuring": ^7.9.5
-    "@babel/plugin-transform-react-constant-elements": ^7.9.0
-    "@babel/plugin-transform-react-display-name": ^7.8.3
-    "@babel/plugin-transform-runtime": ^7.13.10
-    "@babel/preset-env": ^7.9.5
-    "@babel/preset-react": ^7.9.4
-    "@babel/preset-typescript": ^7.13.0
-    "@babel/runtime": ^7.13.10
-    "@instructure/babel-plugin-transform-imports": 8.22.0
-    "@instructure/browserslist-config-instui": 8.22.0
-    babel-loader: ^8.1.0
-    babel-plugin-dynamic-import-node: ^2.3.0
-    babel-plugin-istanbul: ^6.0.0
-    babel-plugin-macros: ^3
-    babel-plugin-transform-ensure-ignore: ^0.1.0
-    babel-plugin-transform-remove-console: ^6.9.4
-    babel-plugin-transform-undefined-to-void: ^6.9.4
-    core-js: ^3.2.1
-  checksum: 54efa443e1636dd9184d2f3c794eb73de3b0eff301c1b29a112be8b5a383edf4f321858c7ef4e890b5ce6242d296ae3cadc7fd82a52a127e586a5258af1a66d1
-  languageName: node
-  linkType: hard
 
 "@instructure/ui-badge@8.23.0, @instructure/ui-badge@workspace:packages/ui-badge":
   version: 0.0.0-use.local
@@ -2920,20 +2829,6 @@ __metadata:
     react-dom: ">=16.8 <=17"
   languageName: unknown
   linkType: soft
-
-"@instructure/ui-dom-utils@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/ui-dom-utils@npm:8.22.0"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@instructure/console": 8.22.0
-    "@instructure/shared-types": 8.22.0
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
-  checksum: 3fb347bc008961b05ed2dd293e4d2c81e504ce796c9df34490290755e3d93dcc66833ae5efe906faa062776e56c0db698283ef8d3db5ecb73c543b804971ebf5
-  languageName: node
-  linkType: hard
 
 "@instructure/ui-drawer-layout@8.23.0, @instructure/ui-drawer-layout@workspace:packages/ui-drawer-layout":
   version: 0.0.0-use.local
@@ -4170,16 +4065,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-test-locator@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/ui-test-locator@npm:8.22.0"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@instructure/ui-test-queries": 8.22.0
-  checksum: 126ead4980f15c28c59a31b97d13dd6c8d2030f12434f9bdc614f039c773dd5be70fea4acba3ebce37b8b877a25d5dd7d0647cd13796d8cf83d0ff55b2a04746
-  languageName: node
-  linkType: hard
-
 "@instructure/ui-test-queries@8.23.0, @instructure/ui-test-queries@workspace:packages/ui-test-queries":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-test-queries@workspace:packages/ui-test-queries"
@@ -4195,20 +4080,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-test-queries@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/ui-test-queries@npm:8.22.0"
-  dependencies:
-    "@instructure/debounce": 8.22.0
-    "@instructure/ui-axe-check": 8.22.0
-    "@instructure/ui-test-sandbox": 8.22.0
-    keycode: ^2
-    pretty-format: ^24.9.0
-    sizzle: ^2.3.4
-  checksum: 400ef706cd2970d2c4558a344ed5cf5268e71596475be2fff7c5b26f350f473d7099e03a35388c60870058fafa21068c848c9178a17fe1da21fe89a0cb47e763
-  languageName: node
-  linkType: hard
-
 "@instructure/ui-test-sandbox@8.23.0, @instructure/ui-test-sandbox@workspace:packages/ui-test-sandbox":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-test-sandbox@workspace:packages/ui-test-sandbox"
@@ -4223,19 +4094,6 @@ __metadata:
     react-dom: ">=16.8 <=17"
   languageName: unknown
   linkType: soft
-
-"@instructure/ui-test-sandbox@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/ui-test-sandbox@npm:8.22.0"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    sinon: ^11.1.2
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
-  checksum: 544316d5db57313c15a997cd5199da55af30bf86764fcc26088a75aa13ef6463bb936c8bb14bf2833b82829fb60aefb5f2836bb1e6c36203f97cbc724edc04db
-  languageName: node
-  linkType: hard
 
 "@instructure/ui-test-utils@8.23.0, @instructure/ui-test-utils@workspace:packages/ui-test-utils":
   version: 0.0.0-use.local
@@ -4265,29 +4123,6 @@ __metadata:
     react-dom: ">=16.8 <=17"
   languageName: unknown
   linkType: soft
-
-"@instructure/ui-test-utils@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/ui-test-utils@npm:8.22.0"
-  dependencies:
-    "@instructure/ui-test-locator": 8.22.0
-    "@instructure/ui-test-queries": 8.22.0
-    "@instructure/ui-test-sandbox": 8.22.0
-    "@sheerun/mutationobserver-shim": ^0.3.2
-    chai: ^4
-    chai-as-promised: ^7
-    chai-exclude: ^2
-    chai-string: ^1
-    dirty-chai: ^2
-    nanoid: ^3
-    sinon-chai: ^3.3.0
-    wait-for-expect: ^2.0.0
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
-  checksum: dee32a39354d2f386585e1e6cf84a401f65bc2233b3317fc903e925446fb02367149dc705c276f2ab5d40efe7ae61bf27fb942dec6e9f13f370ef0b67ac3fd1d
-  languageName: node
-  linkType: hard
 
 "@instructure/ui-testable@8.23.0, @instructure/ui-testable@workspace:packages/ui-testable":
   version: 0.0.0-use.local
@@ -4595,24 +4430,6 @@ __metadata:
     react-dom: ">=16.8 <=17"
   languageName: unknown
   linkType: soft
-
-"@instructure/ui-utils@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@instructure/ui-utils@npm:8.22.0"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@instructure/console": 8.22.0
-    "@instructure/ui-dom-utils": 8.22.0
-    bowser: ^1.9.4
-    fast-deep-equal: ^2
-    json-stable-stringify: ^1.0.1
-    keycode: ^2
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
-  checksum: 4f39dd6490d36b96806db8226b8197467c6ba11c15fe9bf5503c80f8e11f30115354a50341aed671f36e4319b7807a6625c8fa47b7e0864cbdd894485487a367
-  languageName: node
-  linkType: hard
 
 "@instructure/ui-view@8.23.0, @instructure/ui-view@workspace:packages/ui-view":
   version: 0.0.0-use.local

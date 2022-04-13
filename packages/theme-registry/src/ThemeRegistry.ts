@@ -22,6 +22,15 @@
  * SOFTWARE.
  */
 
+/**
+ * ---
+ * category: utilities/themes
+ * ---
+ * A global theme registry used for registering theme objects, setting globally available themes
+ * and recieving the currently used theme.
+ * @module ThemeRegistry
+ */
+
 import { error } from '@instructure/console'
 import {
   BaseTheme,
@@ -32,15 +41,19 @@ import { mergeDeep } from '@instructure/ui-utils'
 
 declare global {
   // eslint-disable-next-line no-var
-  var GLOBAL_THEME_REGISTRY: Registry<Theme>
+  var GLOBAL_THEME_REGISTRY: Registry<RegisteredTheme>
 }
-/**
- * ---
- * category: utilities/themes
- * ---
- * A global theme registry
- * @module ThemeRegistry
- */
+
+type Registry<T extends RegisteredTheme> = {
+  currentThemeKey: string | null
+  themes: Record<string, T>
+  registered: Array<T['key']>
+}
+
+type RegisteredTheme<T extends BaseTheme = BaseTheme> = T & {
+  use(arg?: { overrides: DeepPartial<BaseThemeVariables> }): void
+  variables: BaseThemeVariables
+}
 
 const DEFAULT_THEME_KEY = '@@themeRegistryDefaultTheme'
 const GLOBAL_THEME_REGISTRY = 'GLOBAL_THEME_REGISTRY'
@@ -59,12 +72,13 @@ if (globalThis[GLOBAL_THEME_REGISTRY]) {
   clearRegistry()
 }
 
-type Registry<T extends Theme> = {
-  currentThemeKey: string | null
-  themes: Record<string, T>
-  registered: Array<T['key']>
-}
-function makeRegistry(): Registry<Theme> {
+/**
+ * Creates and returns a new empty registry.
+ * @returns {Registry} the empty registry object
+ * @module makeRegistry
+ * @private
+ */
+function makeRegistry(): Registry<RegisteredTheme> {
   const registry = {
     currentThemeKey: null,
     themes: {},
@@ -73,7 +87,14 @@ function makeRegistry(): Registry<Theme> {
 
   return registry
 }
-function validateRegistry(registry: Registry<Theme<BaseTheme>>) {
+
+/**
+ * Validates the passed registry, if the passed registry is undefined, then it will create an empty registry.
+ * @param registry - the registry to validate
+ * @returns {Registry} the registry
+ * @private
+ */
+function validateRegistry(registry: Registry<RegisteredTheme<BaseTheme>>) {
   const defaultRegistry = makeRegistry()
 
   if (typeof registry === 'undefined') {
@@ -84,7 +105,8 @@ function validateRegistry(registry: Registry<Theme<BaseTheme>>) {
 
   Object.keys(defaultRegistry).forEach((key) => {
     if (
-      typeof registry[key as keyof Registry<Theme<BaseTheme>>] === 'undefined'
+      typeof registry[key as keyof Registry<RegisteredTheme<BaseTheme>>] ===
+      'undefined'
     ) {
       valid = false
     }
@@ -96,32 +118,39 @@ function validateRegistry(registry: Registry<Theme<BaseTheme>>) {
 }
 
 /**
- * Get the global theme registry
- * @return The theme registry
+ * Get the global theme registry.
+ * @return {Registry}  the theme registry
+ * @module getRegistry
  */
-function getRegistry(): Registry<Theme> {
+function getRegistry(): Registry<RegisteredTheme> {
   return globalThis[GLOBAL_THEME_REGISTRY]
 }
 
 /**
- * Set the global theme registry
+ * Set the global theme registry.
+ * @param {Registry} registry - the registry to set/replacet the current registry with.
+ * @returns {void}
+ * @module setRegistry
  */
-function setRegistry(registry: Registry<Theme>) {
+function setRegistry(registry: Registry<RegisteredTheme>): void {
   globalThis[GLOBAL_THEME_REGISTRY] = registry
 }
 
 /**
- * Clear/reset the global theme registry
+ * Clear/reset the global theme registry.
+ * @module clearRegistry
+ * @returns {void}
  */
-function clearRegistry() {
+function clearRegistry(): void {
   setRegistry(makeRegistry())
 }
 
 /**
- * Get the default theme
- * @return the default theme
+ * Get the activated theme object.
+ * @return {RegisteredTheme} the default theme object
+ * @module getCurrentTheme
  */
-function getCurrentTheme(): Theme | undefined {
+function getCurrentTheme(): RegisteredTheme | undefined {
   const registry = getRegistry()
   const { currentThemeKey } = registry
 
@@ -133,14 +162,17 @@ function getCurrentTheme(): Theme | undefined {
 }
 
 /**
- * Get the default theme key
- * @param {String} the default theme key
- * @param {Object} overrides for the theme variables
+ * Activate a theme by the given themeKey.
+ * @param {String} themeKey - the default theme key
+ * @param {DeepPartial<BaseThemeVariables>} overrides - the overrides for the theme variables
+ * @returns {RegisteredTheme} the registered theme object
+ * @module activateTheme
+ * @private
  */
-function setDefaultTheme(
+function activateTheme(
   themeKey: string,
   overrides: DeepPartial<BaseThemeVariables>
-) {
+): RegisteredTheme {
   const registry = getRegistry()
   const theme = registry.themes[themeKey]
 
@@ -154,27 +186,28 @@ function setDefaultTheme(
   }
 
   registry.currentThemeKey = themeKey
-  const themeWithOverrides = mergeDeep(theme, overrides) as Theme<BaseTheme>
+  const themeWithOverrides = mergeDeep(
+    theme,
+    overrides
+  ) as RegisteredTheme<BaseTheme>
   registry.themes[themeKey] = themeWithOverrides
 
   return themeWithOverrides
 }
-
-type Theme<T extends BaseTheme = BaseTheme> = T & {
-  use(arg?: { overrides: DeepPartial<BaseThemeVariables> }): void
-  variables: BaseThemeVariables
-}
 /**
- * Wraps a theme and provides a method to set as default
+ * Wraps a theme and provides a method to activate the theme.
+ * @returns the wrapped theme object
+ * @module makeTheme
+ * @private
  */
-function makeTheme<T extends BaseTheme>(theme: T): Theme<T> {
+function makeTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
   const { key, description, ...rest } = theme
   const wrappedTheme = {
     key,
     description,
     ...rest,
     use(arg?: { overrides: DeepPartial<BaseThemeVariables> }): void {
-      setDefaultTheme(key, arg?.overrides || {})
+      activateTheme(key, arg?.overrides || {})
     }
   }
 
@@ -190,14 +223,21 @@ function makeTheme<T extends BaseTheme>(theme: T): Theme<T> {
       // eslint-disable-next-line prefer-rest-params
       return Reflect.get(target, property)
     }
-  }) as Theme<T>
+  }) as RegisteredTheme<T>
 }
 
-function registerTheme<T extends BaseTheme>(theme: T): Theme<T> {
+/**
+ * Registers the passed theme into the ThemeRegistry.
+ * @param {BaseTheme} theme - the theme object to register into the ThemeRegistry
+ * @returns {RegisteredTheme} If the given theme is already in the ThemeRegistry then simply return that theme.
+ * Otherwise returns the theme with a wrapper around it, so it can be `.use()`-ed to activate the given theme from the registry.
+ * @module registerTheme
+ */
+function registerTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
   const registry = getRegistry()
 
   if (theme.key && registry.themes[theme.key]) {
-    return registry.themes[theme.key] as Theme<T>
+    return registry.themes[theme.key] as RegisteredTheme<T>
   } else {
     const registeredTheme = makeTheme(theme)
     registry.themes[registeredTheme.key] = registeredTheme
@@ -224,4 +264,4 @@ export {
   getCurrentTheme,
   registerTheme
 }
-export type { Theme, Registry }
+export type { RegisteredTheme as Theme, Registry }
