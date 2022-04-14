@@ -22,40 +22,17 @@
  * SOFTWARE.
  */
 
-// import path from 'path'
-// import { runCommandsConcurrently, getCommand } from '../utils/command'
-import { transformFileSync } from '@babel/core'
-
-// const specifyCJSFormat = path.resolve(
-//   __dirname,
-//   '../../',
-//   'bin/',
-//   'specify-commonjs-format.js'
-// )
-// const { default: b } = require('@babel/cli/lib/babel/dir');
+import {  getCommand, runCommandAsync } from '../utils/command'
 
 type ModuleType = ('es' | 'cjs')[]
 
 
-// async function transform(sourcePath: string, outputDir: string) {
-//   await b({
-//     cliOptions: {
-//       filenames: [sourcePath],
-//       extensions: ['.tsx', '.js'],
-//       outDir: outputDir,
-//       copyFiles: true,
-//       copyIgnored: true,
-//     },
-//   });
-// }
 
 export const babel = async () => {
   const {
     BABEL_ENV,
     NODE_ENV,
     DEBUG,
-    UNMANGLED_CLASS_NAMES,
-    DISABLE_SPEEDY_STYLESHEET,
     OMIT_INSTUI_DEPRECATION_WARNINGS
   } = process.env
 
@@ -63,15 +40,11 @@ export const babel = async () => {
 
   // positional: ui-build src --watch
   const firstArg = args[0]
-  const src = firstArg && firstArg.indexOf('--') < 0 ? firstArg : 'src'
+  const src = firstArg && firstArg.indexOf('--') < 0 ? firstArg : `${process.cwd()}/src`
 
   // uncomment the extensions arg after renaming the files from js -> ts happens
-  let babelArgs = ['--extensions', '.ts,.tsx,.js,.jsx']
-  const bArgs = {
-    cwd: `${process.cwd()}/${src}`,
-    ignore: ["src/**/*.test.js", "src/**/__tests__/**"],
-    extensions: ['.ts,.tsx,.js,.jsx']
-  }
+  let babelArgs = ['--extensions', '.ts,.tsx,.js,.jsx', '--ignore', `${src}/__tests__/**,${src}/**/*.test.tsx`]
+  // }
 
   if (args.includes('--copy-files')) {
     babelArgs.push('--copy-files')
@@ -79,7 +52,6 @@ export const babel = async () => {
 
   babelArgs = babelArgs.concat([
     src,
-    '--ignore "src/**/*.test.js","src/**/__tests__/**"'
   ])
 
   let envVars = [
@@ -131,34 +103,43 @@ export const babel = async () => {
   // So we have to rework this script to only contain programs that are listed as dependencies, which means we should be
   // using @babel/core programatically here, instead of calling it with a new sub process and using the @babel/cli.
   // ----------------------------------- //
-  // const commands = {
-  //   es: getCommand(
-  //     'babel',
-  //     [...babelArgs, '--out-dir', 'es'],
-  //     [...envVars, 'ES_MODULES=1']
-  //   ),
-  //   cjs: [
-  //     getCommand(
-  //       'babel',
-  //       [...babelArgs, '--out-dir', 'lib'],
-  //       [...envVars, 'TRANSFORM_IMPORTS=1']
-  //     ),
-  //     getCommand(specifyCJSFormat, [], [])
-  //   ]
-  // }
+  const commands = {
+    es: getCommand(
+      'babel',
+      [...babelArgs, '--out-dir', 'es'],
+      [...envVars, 'ES_MODULES=1']
+    ),
+    cjs:
+      getCommand(
+        'babel',
+        [...babelArgs, '--out-dir', 'lib'],
+        [...envVars, 'TRANSFORM_IMPORTS=1']
+      )
+  }
 
-  // const commandsToRun = modules.reduce(
-  //   //@ts-expect-error FIXME:
-  //   (obj, key) => ({ ...obj, [key]: commands[key] }),
-  //   {}
-  // )
-
-  // process.exit(runCommandsConcurrently(commandsToRun).status)
-  // --------------------------------------------------------- //
-  console.log({ args, bArgs, cwd: process.cwd() })
-  // await transform(bArgs.cwd, "hello")
-  const res = transformFileSync(`${bArgs.cwd}/console.ts`)
-
-  console.log(res);
-
+  const commandsToRun = modules.reduce(
+    (obj, key) => ({ ...obj, [key]: commands[key] }),
+    {}
+  )
+ const procResults = await Promise.all([
+   //@ts-expect-error
+    runCommandAsync(commandsToRun.es.bin, commandsToRun.es.args, commandsToRun.es.vars, {
+    env: {
+      ...process.env,
+      NODE_ENV: 'production',
+      ES_MODULES: 1
+    }
+  }),
+  //@ts-expect-error
+  runCommandAsync(commandsToRun.cjs.bin, commandsToRun.cjs.args, commandsToRun.cjs.vars, {
+     env: {
+      ...process.env,
+      NODE_ENV: 'production',
+      ES_MODULES: 0,
+      //TODO: investigate this, if I uncomment it the process fails
+      // TRANSFORM_IMPORTS: 1
+    }
+  })
+])
+  process.exit(procResults.some(res => res.status !== 0) ? 1:0 )
 }

@@ -40,5 +40,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^"
   }
 }

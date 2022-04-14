@@ -23,10 +23,11 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/shared-types": "workspace:*",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-test-locator": "8.23.0",
-    "@instructure/ui-test-utils": "8.23.0",
-    "@instructure/shared-types": "workspace:*"
+    "@instructure/ui-test-utils": "8.23.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",

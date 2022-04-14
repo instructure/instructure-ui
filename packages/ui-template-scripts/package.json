@@ -29,5 +29,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^"
+  }
 }

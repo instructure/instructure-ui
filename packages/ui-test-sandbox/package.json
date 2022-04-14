@@ -27,6 +27,7 @@
     "sinon": "^13"
   },
   "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^",
     "@instructure/ui-babel-preset": "8.23.0",
     "@types/sinon": "^10",
     "prop-types": "^15"

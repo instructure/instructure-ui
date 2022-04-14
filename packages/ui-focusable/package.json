@@ -23,14 +23,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-<<<<<<< HEAD
+    "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/shared-types": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-test-utils": "8.23.0"
-=======
-    "@instructure/shared-types": "8.17.0",
-    "@instructure/ui-babel-preset": "8.17.0",
-    "@instructure/ui-test-utils": "8.17.0"
->>>>>>> 8b5324265 (chore: fix unmet peer dependencies)
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",

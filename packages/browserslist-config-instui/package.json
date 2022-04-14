@@ -18,5 +18,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "@instructure/browserslist-config-instui": "^8.23.0"
+  }
 }

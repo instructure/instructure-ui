@@ -25,5 +25,8 @@
   "dependencies": {
     "prop-types": "^15",
     "react": "^17.0.0"
+  },
+  "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^"
   }
 }

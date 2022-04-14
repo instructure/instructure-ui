@@ -28,8 +28,8 @@
   },
   "sideEffects": false,
   "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^",
     "@types/node": "^17.0.18",
     "@types/which": "^2"
-  },
-  "packageManager": "yarn@3.1.1"
+  }
 }

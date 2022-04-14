@@ -120,6 +120,7 @@
     "webpack-merge": "^5"
   },
   "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^",
     "@instructure/config-loader": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-eslint-config": "8.23.0",
@@ -128,6 +129,7 @@
     "@instructure/ui-webpack-config": "8.23.0",
     "@types/marked": "^4",
     "chokidar": "^3",
+    "eslint": "^7",
     "globby": "^11",
     "gray-matter": "^4",
     "html-webpack-plugin": "^5",
@@ -137,8 +139,7 @@
     "react-docgen": "6.0.0-alpha.0",
     "svg-inline-loader": "^0.8.0",
     "webpack": "^5",
-    "webpack-bundle-analyzer": "^4",
-    "eslint": "^7",
+    "webpack-bundle-analyzer": "^4"
   },
   "peerDependencies": {
     "@babel/core": ">=7",

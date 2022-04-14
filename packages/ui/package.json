@@ -95,20 +95,17 @@
     "@instructure/ui-view": "8.23.0"
   },
   "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-test-utils": "8.23.0",
     "jest": "^24.9.0"
   },
   "peerDependencies": {
-    "react": ">=16.8 <=17",
-    "react-dom": ">=16.8 <=17"
+    "react": ">= 16.8 <=17",
+    "react-dom": ">= 16.8 <= 17"
   },
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false,
-  "peerDependencies": {
-    "react": ">= 16.8 <=17",
-    "react-dom": ">= 16.8 <= 17"
-  }
+  "sideEffects": false
 }

@@ -35,6 +35,7 @@
     "prop-types": "^15"
   },
   "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-color-utils": "8.23.0",
     "@instructure/ui-test-locator": "8.23.0",

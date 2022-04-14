@@ -27,6 +27,7 @@
     "@instructure/ui-test-queries": "8.23.0"
   },
   "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^",
     "@instructure/ui-babel-preset": "8.23.0"
   },
   "peerDependencies": {

@@ -23,7 +23,6 @@
  */
 
 import fs from 'fs'
-import path from 'path'
 import which from 'which'
 import execa from 'execa'
 import rl from 'readline'
@@ -57,7 +56,7 @@ class Command {
     })
   }
   toString() {
-    return `${this.vars.length > 0 ? `${this.vars.join(' ')} ` : ''}${this.bin}`
+    return `${this.bin}`
   }
   get bin(): any {
     return this.bin
@@ -143,37 +142,10 @@ async function runCommandAsync(
 
 function resolveBin(
   modName: any,
-  { executable = modName, cwd = process.cwd() } = {}
+  { executable = modName } = {}
 ) {
-  let pathFromWhich
-  try {
-    if (process.versions.pnp) {
-      const pnpapi = require("pnpapi")
-      const res = pnpapi.resolveRequest(executable, '/Users/viktor.ohad/Work/Programming/instructure-ui/packages/ui-scripts/')
-      console.log(res)
-    } else {
-      pathFromWhich = fs.realpathSync(which.sync(executable))
-    }
-  } catch (_error) {
-    // ignore _error
+     return fs.realpathSync(which.sync(executable))
   }
-  try {
-    const modPkgPath = require.resolve(`${modName}/package.json`)
-    const modPkgDir = path.dirname(modPkgPath)
-    const { bin } = require(modPkgPath)
-    const binPath = typeof bin === 'string' ? bin : bin[executable]
-    const fullPathToBin = path.join(modPkgDir, binPath)
-    if (fullPathToBin === pathFromWhich) {
-      return executable
-    }
-    return fullPathToBin.replace(cwd, '.')
-  } catch (error) {
-    if (pathFromWhich) {
-      return executable
-    }
-    throw error
-  }
-}
 async function confirm(question: string): Promise<string> {
   return new Promise((resolve, reject) => {
     try {

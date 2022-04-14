@@ -17,6 +17,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@instructure/browserslist-config-instui": "workspace:^",
     "@instructure/ui-babel-preset": "8.23.0",
     "@types/jscodeshift": "^0.11.3",
     "@types/prettier": "^2",
