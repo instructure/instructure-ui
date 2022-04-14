@@ -27,15 +27,11 @@ import { Component } from 'react'
 import GithubCorner from 'react-github-corner'
 
 import { Link } from '@instructure/ui-link'
-import { List } from '@instructure/ui-list'
 import { View } from '@instructure/ui-view'
-import { ToggleDetails } from '@instructure/ui-toggle-details'
 import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
 import { CodeEditor } from '@instructure/ui-code-editor'
-import { instructure } from '@instructure/ui-themes'
-import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
-import type { SpacingValues } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -46,15 +42,11 @@ import { Params } from '../Params'
 import { Returns } from '../Returns'
 import { Methods } from '../Methods'
 import { ComponentTheme } from '../ComponentTheme'
+import { TableOfContents } from '../TableOfContents'
 import { Heading } from '../Heading'
 
 import { propTypes, allowedProps } from './props'
-import type {
-  DocumentProps,
-  DocumentState,
-  DocDataType,
-  TOCHeadingData
-} from './props'
+import type { DocumentProps, DocumentState, DocDataType } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Document extends Component<DocumentProps, DocumentState> {
@@ -70,14 +62,14 @@ class Document extends Component<DocumentProps, DocumentState> {
 
   state: DocumentState = {
     selectedDetailsTabIndex: 0,
-    TOCData: []
+    pageRef: null
   }
 
   ref: HTMLDivElement | null = null
 
   componentDidMount() {
     this.props.makeStyles?.()
-    this.setHeadingData()
+    this.setState({ pageRef: this.ref })
   }
 
   componentDidUpdate() {
@@ -306,104 +298,9 @@ import { ${importName} } from '${esPath}'
     return doc.params || doc.returns || doc.methods || doc.props
   }
 
-  setHeadingData() {
-    const { doc } = this.props
-    const headings = this.ref?.querySelectorAll<HTMLHeadingElement>(
-      'h1, h2, h3, h4, h5, h6'
-    )
-    const TOCData: DocumentState['TOCData'] = []
-    let hasLinkToTitle = false
-
-    headings?.forEach((h) => {
-      const { id, innerText, tagName } = h
-      const level = tagName[1]
-
-      if (['1', '2'].includes(level) || doc.id === id) {
-        // already has a page title
-        hasLinkToTitle = true
-      }
-
-      const data: TOCHeadingData = {
-        id,
-        innerText,
-        level: tagName[1]
-      }
-      TOCData.push(data)
-    })
-
-    if (!hasLinkToTitle) {
-      // if there is no link to the main title,
-      // add at the beginning of the list
-      TOCData.unshift({
-        id: doc.id,
-        innerText: doc.id,
-        level: '1'
-      })
-    }
-
-    if (TOCData.length === 1) {
-      // if there is only 1 item, clear TOC, no need for list
-      TOCData.pop()
-    }
-
-    this.setState({ TOCData })
-  }
-
-  renderTOC() {
-    const { doc } = this.props
-    const { TOCData } = this.state
-    const category = doc.category?.toLowerCase()
-
-    if (!TOCData || !TOCData.length) {
-      return null
-    }
-
-    const levelPaddingMap: Record<string, SpacingValues> = {
-      1: '0',
-      2: '0',
-      3: '0',
-      4: 'small',
-      5: 'medium',
-      6: 'x-large'
-    }
-
-    const TOC = TOCData.map((data) => {
-      return (
-        <List.Item
-          key={data.id}
-          padding={`0 0 0 ${levelPaddingMap[data.level]}`}
-        >
-          <Link href={`#${doc.id}/#${data.id}`}>{data.innerText}</Link>
-        </List.Item>
-      )
-    })
-
-    return (
-      <InstUISettingsProvider theme={instructure}>
-        <View as="div" margin="medium 0">
-          <ToggleDetails
-            summary="Table of Contents"
-            defaultExpanded={
-              category?.includes('components') || category === 'guides'
-            }
-            size="large"
-          >
-            <List
-              margin="0 0 large"
-              isUnstyled
-              size="small"
-              itemSpacing="xx-small"
-            >
-              {TOC}
-            </List>
-          </ToggleDetails>
-        </View>
-      </InstUISettingsProvider>
-    )
-  }
-
   render() {
     const { doc, repository, layout } = this.props
+    const { pageRef } = this.state
     const children = doc.children || []
 
     let details = null
@@ -467,7 +364,7 @@ import { ${importName} } from '${esPath}'
         }}
       >
         {doc.extension !== '.md' && this.renderSrcLink()}
-        {this.renderTOC()}
+        {pageRef && <TableOfContents doc={doc} pageElement={pageRef} />}
         {this.renderDescription(doc, this.props.description)}
         {details}
         {sections}
