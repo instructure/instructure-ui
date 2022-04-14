@@ -66,7 +66,7 @@ type TOCHeadingData = { id: string; innerText: string; level: string }
 
 type DocumentState = {
   selectedDetailsTabIndex: number
-  TOCData: TOCHeadingData[]
+  pageRef: HTMLDivElement | null
 }
 
 const allowedProps: AllowedPropKeys = [
