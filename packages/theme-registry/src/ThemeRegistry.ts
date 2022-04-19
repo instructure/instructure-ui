@@ -32,12 +32,13 @@
  */
 
 import { error } from '@instructure/console'
-import {
+import { mergeDeep } from '@instructure/ui-utils'
+import { isBaseTheme } from '@instructure/ui-utils'
+import type {
   BaseTheme,
   BaseThemeVariables,
   DeepPartial
 } from '@instructure/shared-types'
-import { mergeDeep } from '@instructure/ui-utils'
 
 declare global {
   // eslint-disable-next-line no-var
@@ -65,7 +66,6 @@ if (globalThis[GLOBAL_THEME_REGISTRY]) {
     `[theme-registry] A theme registry has already been initialized. Ensure that you are importing only one copy of '@instructure/theme-registry'.`
   )
   // initialize the registry using whatever has been previously defined:
-
   setRegistry(validateRegistry(globalThis[GLOBAL_THEME_REGISTRY]))
 } else {
   // initialize the registry to the default/empty state:
@@ -128,7 +128,7 @@ function getRegistry(): Registry<RegisteredTheme> {
 
 /**
  * Set the global theme registry.
- * @param {Registry} registry - the registry to set/replacet the current registry with.
+ * @param {Registry} registry - the registry to set/replace the current registry with.
  * @returns {void}
  * @module setRegistry
  */
@@ -239,6 +239,13 @@ function registerTheme<T extends BaseTheme>(theme: T): RegisteredTheme<T> {
   if (theme.key && registry.themes[theme.key]) {
     return registry.themes[theme.key] as RegisteredTheme<T>
   } else {
+    if (!isBaseTheme(theme)) {
+      error(
+        false,
+        "[theme-registry] The theme provided to 'registerTheme' is not a valid theme object!\nFor it to be valid some properties have to be present, check out https://instructure.design/#canvas as a reference."
+      )
+      throw new Error()
+    }
     const registeredTheme = makeTheme(theme)
     registry.themes[registeredTheme.key] = registeredTheme
     registry.registered.push(registeredTheme.key)

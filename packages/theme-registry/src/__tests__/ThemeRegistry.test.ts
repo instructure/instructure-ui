@@ -22,9 +22,22 @@
  * SOFTWARE.
  */
 import { BaseTheme } from '@instructure/shared-types'
-import { expect } from '@instructure/ui-test-utils'
+import { expect  } from '@instructure/ui-test-utils'
 import { ThemeRegistry } from '../ThemeRegistry'
 const defaultRegistry = ThemeRegistry.getRegistry()
+
+const baseTheme = {
+  'borders': {},
+  'breakpoints': {},
+  'colors': {},
+  'forms': {},
+  'media': {},
+  'shadows': {},
+  'spacing': {},
+  'stacking': {},
+  'transitions': {},
+  'typography': {}
+}
 
 describe('ThemeRegistry', () => {
   beforeEach(() => {
@@ -46,6 +59,7 @@ describe('ThemeRegistry', () => {
 
   it('should be able to register themes', async () => {
     const theme = {
+        ...baseTheme,
       key: 'test_theme',
       colors: {
         brand: 'red',
@@ -63,6 +77,7 @@ describe('ThemeRegistry', () => {
 
   it('should be able to get the current theme', async () => {
     const theme = {
+        ...baseTheme,
       key: 'test_theme',
       colors: {
         brand: 'red',
@@ -81,6 +96,7 @@ describe('ThemeRegistry', () => {
   })
   it('should be able to override themes with ".use()"', async () => {
     const theme = {
+        ...baseTheme,
       key: 'test_theme',
       colors: {
         brand: 'red',
@@ -98,5 +114,17 @@ describe('ThemeRegistry', () => {
       }
     })
     expect(ThemeRegistry.getCurrentTheme()?.colors.brand).to.be.eq('blue')
+  })
+  it('should throw an error when not a valid theme is registered', async () => {
+    const theme = {
+        key: 'my-theme'
+    }
+
+    expect(() => {
+        const registeredTheme = ThemeRegistry.registerTheme(theme as unknown as BaseTheme)
+        debugger
+        registeredTheme.use()
+    }).to.throw(Error)
+
   })
 })

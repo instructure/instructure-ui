@@ -24,30 +24,15 @@
 import { merge, cloneDeep } from 'lodash'
 import { canvas } from '@instructure/ui-themes'
 import { ThemeRegistry } from '@instructure/theme-registry'
+import { isBaseTheme } from '@instructure/ui-utils'
 
-import type {
-  BaseTheme,
-  BaseThemeVariableKeys
-} from '@instructure/shared-types'
+import type { BaseTheme } from '@instructure/shared-types'
 
 import type {
   Overrides,
   ThemeOrOverride,
   SpecificThemeOverride
 } from './EmotionTypes'
-
-const baseThemeProps: BaseThemeVariableKeys = [
-  'borders',
-  'breakpoints',
-  'colors',
-  'forms',
-  'media',
-  'shadows',
-  'spacing',
-  'stacking',
-  'transitions',
-  'typography'
-]
 
 /**
  * ---
@@ -119,21 +104,6 @@ const getTheme =
 
     return finalTheme
   }
-
-const isBaseTheme = (theme: ThemeOrOverride): theme is BaseTheme => {
-  if (Array.isArray(theme) || typeof theme === 'function') {
-    throw new Error()
-  }
-
-  try {
-    return (
-      'key' in (theme as BaseTheme) &&
-      baseThemeProps.every((prop) => prop in theme)
-    )
-  } catch {
-    throw new Error()
-  }
-}
 
 export default getTheme
 export { getTheme }
