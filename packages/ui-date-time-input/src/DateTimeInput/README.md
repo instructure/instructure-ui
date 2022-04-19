@@ -21,7 +21,7 @@ render: false
 class Example extends React.Component {
   render () {
     return (
-      <div style= { {height: 350,width: '40em'}}>
+      <div style= { {height: '10rem',width: '40em'}}>
         <DateTimeInput
           description="Pick a date and time"
           datePlaceholder="Choose a date"
@@ -69,9 +69,9 @@ class Example extends React.Component {
   render () {
     const text = this.state.value ? new Date(this.state.value).toString() : 'N/A'
     return (
-      <div style={{width: '20em'}}>
+      <div style={{width: '25em'}}>
         <div style={{marginBottom: '1em', fontStyle: 'italic'}}>You entered:<br/>{text}</div>
-        <div style={{height: 350}}>
+        <div style={{height: '14rem'}}>
           <DateTimeInput
             description={<ScreenReaderContent>Pick a date and time</ScreenReaderContent>}
             datePlaceholder="Choose"
@@ -126,7 +126,7 @@ class Example extends React.Component {
   render() {
     return (
       <ApplyLocale locale="fr" timezone="Africa/Nairobi">
-        <div style={{ height: '150px', width: '40em' }}>
+        <div style={{ height: '12rem', width: '40em' }}>
           <DateTimeInput
             description="Pick a date and time"
             datePlaceholder="Choose a date"
@@ -165,7 +165,7 @@ class Example extends React.Component {
   }
   render() {
     return (
-      <div style= { {height: '150px', width: '40em'}}>
+      <div style= { {height: '12rem', width: '40em'}}>
         <DateTimeInput
           description="Pick a date and time"
           datePlaceholder="Choose a date"
