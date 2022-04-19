@@ -2361,7 +2361,6 @@ __metadata:
     "@instructure/shared-types": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
-    "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
   languageName: unknown
   linkType: soft
