@@ -23,13 +23,7 @@
  */
 
 /** @jsx jsx */
-import {
-  Children,
-  Component,
-  ReactChild,
-  ReactFragment,
-  ReactPortal
-} from 'react'
+import { Children, Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
