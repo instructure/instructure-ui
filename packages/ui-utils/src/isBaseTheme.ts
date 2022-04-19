@@ -21,22 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Browser } from './Browser'
-export { isEdge } from './isEdge'
-export { isIE11 } from './isIE11'
-export { capitalizeFirstLetter } from './capitalizeFirstLetter'
-export { cloneArray } from './cloneArray'
-export { createChainedFunction } from './createChainedFunction'
-export { deepEqual } from './deepEqual'
-export { hash } from './hash'
-export { generateId } from './generateId'
-export { isEmpty } from './isEmpty'
-export { mergeDeep } from './mergeDeep'
-export { ms } from './ms'
-export { parseUnit } from './parseUnit'
-export { px } from './px'
-export { shallowEqual } from './shallowEqual'
-export { within } from './within'
-export { camelize } from './camelize'
-export { pascalize } from './pascalize'
-export { isBaseTheme } from './isBaseTheme'
+import type {
+  BaseTheme,
+  BaseThemeVariableKeys
+} from '@instructure/shared-types'
+
+const baseThemeProps: BaseThemeVariableKeys = [
+  'borders',
+  'breakpoints',
+  'colors',
+  'forms',
+  'media',
+  'shadows',
+  'spacing',
+  'stacking',
+  'transitions',
+  'typography'
+]
+
+const isBaseTheme = (theme: any): theme is BaseTheme => {
+  if (Array.isArray(theme) || typeof theme === 'function') {
+    throw new Error()
+  }
+
+  try {
+    return (
+      'key' in (theme as BaseTheme) &&
+      baseThemeProps.every((prop) => prop in theme)
+    )
+  } catch {
+    throw new Error()
+  }
+}
+
+export default isBaseTheme
+export { isBaseTheme }

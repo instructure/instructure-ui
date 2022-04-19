@@ -8,7 +8,7 @@ category: packages
 [![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
-A pacakge for managing global themes.
+A package for managing global themes.
 Read more about it [here](/#ThemeRegistry).
 
 ### Installation
