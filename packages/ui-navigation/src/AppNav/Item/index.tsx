@@ -63,7 +63,6 @@ class Item extends Component<AppNavItemProps> {
 
   static defaultProps = {
     children: null,
-    onClick: function () {},
     isSelected: false,
     cursor: 'pointer',
     isDisabled: false
