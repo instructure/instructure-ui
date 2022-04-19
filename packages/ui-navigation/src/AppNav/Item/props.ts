@@ -38,7 +38,7 @@ type AppNavItemOwnProps = {
    * The text to display. If the `icon` prop is used, label text must be wrapped
    * in `ScreenReaderContent`.
    */
-  renderLabel: React.ReactNode | string | (() => React.ReactNode)
+  renderLabel: React.ReactNode | (() => React.ReactNode)
   /**
    * Content to display after the renderLabel text, such as a badge
    */

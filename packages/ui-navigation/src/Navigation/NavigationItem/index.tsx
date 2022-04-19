@@ -52,7 +52,6 @@ class NavigationItem extends Component<NavigationItemProps> {
 
   static defaultProps = {
     as: 'a',
-    onClick: function () {},
     selected: false,
     minimized: false
   } as const

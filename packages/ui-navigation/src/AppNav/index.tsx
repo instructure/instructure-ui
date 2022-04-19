@@ -48,6 +48,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { AppNavProps } from './props'
 import { allowedProps, propTypes } from './props'
+import { AppNavItemProps } from './Item/props'
 
 /**
 ---
@@ -185,7 +186,7 @@ class AppNav extends Component<AppNavProps> {
       </li>
     )
   }
-  renderMenu(items: (ReactChild | ReactFragment | ReactPortal)[]) {
+  renderMenu(items: React.ComponentElement<AppNavItemProps, Item>[]) {
     const menu = (
       <Menu
         trigger={
@@ -195,18 +196,17 @@ class AppNav extends Component<AppNavProps> {
         }
       >
         {items.map((item, index) => {
-          const appNavItem = item as Item
           return (
             <Menu.Item
-              href={appNavItem.props.href ? appNavItem.props.href : undefined}
+              href={item.props.href ? item.props.href : undefined}
               onClick={
-                appNavItem.props.onClick && !appNavItem.props.href
-                  ? appNavItem.props.onClick
+                item.props.onClick && !item.props.href
+                  ? item.props.onClick
                   : undefined
               }
               key={index}
             >
-              {callRenderProp(appNavItem.props.renderLabel)}
+              {callRenderProp(item.props.renderLabel)}
             </Menu.Item>
           )
         })}
@@ -226,7 +226,10 @@ class AppNav extends Component<AppNavProps> {
     )
 
     const { isMeasuring } = this.state
-    const childrenArray = Children.toArray(children)
+    const childrenArray = Children.toArray(children) as React.ComponentElement<
+      AppNavItemProps,
+      Item
+    >[]
     const visibleChildren = isMeasuring
       ? childrenArray
       : childrenArray.splice(0, visibleItemsCount)
