@@ -205,7 +205,7 @@ type DateTimeInputProps = {
    * Called when the date-time value has changed.
    * The passed in parameters are:
    * - *event*: The triggering event (which may be from the underlying
-   * `          DateInput` or `TimeSelect`)
+   *   `DateInput` or `TimeSelect`)
    * - *isoValue*: The new date value in ISO8601 format, undefined if its invalid
    **/
   onChange?: (event: SyntheticEvent, isoValue?: string) => void

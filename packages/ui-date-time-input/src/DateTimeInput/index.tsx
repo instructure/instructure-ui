@@ -365,7 +365,6 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
 
   handleShowCalendar = (_event: SyntheticEvent) => {
     this.setState({ isShowingCalendar: true })
-    this.setState({ isShowingCalendar: true })
   }
 
   handleSelectNextDay = (_event: SyntheticEvent) => {
