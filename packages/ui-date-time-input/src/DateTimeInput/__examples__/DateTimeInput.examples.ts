@@ -41,7 +41,8 @@ export default {
         { text: 'success message', type: 'success' }
       ]
     ],
-    interaction: ['enabled', 'disabled']
+    interaction: ['enabled', 'disabled'],
+    disabledDates: [undefined, ['2018-01-18T16:00']]
   },
   getComponentProps: (props) => {
     const defaultPropsForLayout =
@@ -62,8 +63,10 @@ export default {
       prevMonthLabel: 'prev month',
       nextMonthLabel: 'next month',
       timeLabel: 'time label',
+      timeStep: 10,
       timezone: 'America/Tijuana',
       locale: 'de-AT',
+      disabledDateTimeMessage: 'Disabled Date!',
       colSpacing:
         defaultPropsForLayout &&
         props.rowSpacing === defaultRowSpacing &&
