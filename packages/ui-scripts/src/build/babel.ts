@@ -43,7 +43,7 @@ export const babel = async () => {
   const src = firstArg && firstArg.indexOf('--') < 0 ? firstArg : `${process.cwd()}/src`
 
   // uncomment the extensions arg after renaming the files from js -> ts happens
-  let babelArgs = ['--extensions', '.ts,.tsx,.js,.jsx', '--ignore', `${src}/__tests__/**,${src}/**/*.test.tsx`]
+  let babelArgs = ['--extensions', '.ts,.tsx,.js,.jsx', '--ignore', `${src}/__tests__/**,${src}/**/*.test.ts,${src}/**/*.test.tsx,${src}/**/*.test.js`]
   // }
 
   if (args.includes('--copy-files')) {

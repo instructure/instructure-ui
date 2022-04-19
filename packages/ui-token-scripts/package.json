@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/ui-react-utils": "workspace:^",
     "@instructure/ui-test-utils": "8.23.0"
   },
   "peerDependencies": {

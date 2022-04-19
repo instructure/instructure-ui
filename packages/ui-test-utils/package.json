@@ -24,6 +24,7 @@
   "devDependencies": {
     "@instructure/browserslist-config-instui": "workspace:^",
     "@instructure/ui-babel-preset": "8.23.0",
+    "@instructure/ui-react-utils": "workspace:^",
     "@types/chai": "^4",
     "@types/chai-as-promised": "^7",
     "@types/chai-string": "^1",

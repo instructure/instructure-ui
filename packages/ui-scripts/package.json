@@ -62,6 +62,7 @@
     "yargs": "^16"
   },
   "devDependencies": {
+    "@instructure/ui-react-utils": "workspace:^",
     "@types/babel__core": "^7",
     "@types/git-url-parse": "^9.0.0",
     "@types/mocha": "^8.2.2",

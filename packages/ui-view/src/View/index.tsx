@@ -99,6 +99,7 @@ class View extends Component<ViewProps> {
         error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
       })
     }
+
     return omitProps(props, propsToOmit)
   }
 

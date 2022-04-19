@@ -42,6 +42,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^"
+    "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/ui-react-utils": "workspace:^"
   }
 }

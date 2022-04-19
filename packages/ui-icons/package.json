@@ -25,6 +25,7 @@
     "@instructure/browserslist-config-instui": "workspace:^",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-icons-build": "8.23.0",
+    "@instructure/ui-react-utils": "workspace:^",
     "gulp": "^4.0.2"
   },
   "dependencies": {

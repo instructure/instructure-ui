@@ -1,4 +1,4 @@
 types/
 node_modules/
 lib/
-.tsbuildinfo
+*.tsbuildinfo

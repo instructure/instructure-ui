@@ -2620,6 +2620,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     axe-core: ^4
   languageName: unknown
   linkType: soft
@@ -2646,6 +2647,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/babel-plugin-transform-imports": 8.23.0
     "@instructure/browserslist-config-instui": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     babel-loader: ^8.1.0
     babel-plugin-dynamic-import-node: ^2.3.0
     babel-plugin-istanbul: ^6.0.0
@@ -2884,6 +2886,7 @@ __metadata:
   dependencies:
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@types/jscodeshift": ^0.11.3
     "@types/prettier": ^2
     babel-core: ^7.0.0-bridge.0
@@ -2900,6 +2903,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-utils": 8.23.0
     "@types/tinycolor2": ^1.4.2
     tinycolor2: ^1.4.2
@@ -2975,6 +2979,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
   peerDependencies:
     react: ">=16.8 <=17"
   languageName: unknown
@@ -3011,6 +3016,7 @@ __metadata:
     "@instructure/console": 8.23.0
     "@instructure/shared-types": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-utils": 8.23.0
   peerDependencies:
     react: ">=16.8 <=17"
@@ -3101,6 +3107,7 @@ __metadata:
     "@instructure/ui-flex": 8.23.0
     "@instructure/ui-focusable": 8.23.0
     "@instructure/ui-icons": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
@@ -3116,6 +3123,7 @@ __metadata:
   resolution: "@instructure/ui-eslint-config@workspace:packages/ui-eslint-config"
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@typescript-eslint/eslint-plugin": ^4.22.0
     "@typescript-eslint/parser": ^4.22.0
     eslint-config-prettier: ^8
@@ -3328,6 +3336,7 @@ __metadata:
   dependencies:
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/config-loader": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     del: ^6
     glob: ^7.1.4
     gulp: ^4
@@ -3357,6 +3366,7 @@ __metadata:
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-icons-build": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-svg-images": 8.23.0
     gulp: ^4.0.2
     prop-types: ^15
@@ -3395,6 +3405,7 @@ __metadata:
   dependencies:
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/config-loader": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-webpack-config": 8.23.0
     "@jsdevtools/coverage-istanbul-loader": 3.0.5
     buffer: ^6
@@ -3907,6 +3918,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-utils": 8.23.0
     prop-types: ">= 15.7.0"
   peerDependencies:
@@ -3997,7 +4009,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-react-utils@8.23.0, @instructure/ui-react-utils@workspace:packages/ui-react-utils":
+"@instructure/ui-react-utils@8.23.0, @instructure/ui-react-utils@^8.23.0, @instructure/ui-react-utils@workspace:^, @instructure/ui-react-utils@workspace:packages/ui-react-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-react-utils@workspace:packages/ui-react-utils"
   dependencies:
@@ -4009,6 +4021,7 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-decorator": 8.23.0
     "@instructure/ui-dom-utils": 8.23.0
+    "@instructure/ui-react-utils": ^8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
     hoist-non-react-statics: ^3.3.2
@@ -4056,6 +4069,7 @@ __metadata:
     "@instructure/cz-lerna-changelog": 8.23.0
     "@instructure/instui-config": 8.23.0
     "@instructure/pkg-utils": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-template-scripts": 8.23.0
     "@lerna/project": ^4
     "@storybook/react": ^6
@@ -4215,6 +4229,7 @@ __metadata:
   resolution: "@instructure/ui-stylelint-config@workspace:packages/ui-stylelint-config"
   dependencies:
     "@instructure/browserslist-config-instui": "workspace:^"
+    "@instructure/ui-react-utils": "workspace:^"
     stylelint: ^14
     stylelint-config-standard: ^25
     stylelint-declaration-strict-value: ^1
@@ -4338,6 +4353,7 @@ __metadata:
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/command-utils": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@lerna/project": ^4
     fs-extra: ^9
     lodash.template: ^4.5.0
@@ -4355,6 +4371,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-queries": 8.23.0
   peerDependencies:
     react: ">=16.8 <=17"
@@ -4370,6 +4387,7 @@ __metadata:
     "@instructure/debounce": 8.23.0
     "@instructure/ui-axe-check": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-sandbox": 8.23.0
     "@types/sizzle": ^2
     keycode: ^2
@@ -4388,6 +4406,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@types/sinon": ^10
     prop-types: ^15
     sinon: ^13
@@ -4403,6 +4422,7 @@ __metadata:
   dependencies:
     "@instructure/browserslist-config-instui": "workspace:^"
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-locator": 8.23.0
     "@instructure/ui-test-queries": 8.23.0
     "@instructure/ui-test-sandbox": 8.23.0
@@ -4440,6 +4460,7 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-decorator": 8.23.0
     "@instructure/ui-dom-utils": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-utils": 8.23.0
     prop-types: ^15.6.2
   peerDependencies:
@@ -4533,6 +4554,7 @@ __metadata:
     "@instructure/shared-types": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-color-utils": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-utils": 8.23.0
   languageName: unknown
   linkType: soft
@@ -4547,6 +4569,7 @@ __metadata:
     "@instructure/instructure-theme": 8.23.0
     "@instructure/shared-types": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-theme-tokens": 8.23.0
   languageName: unknown
   linkType: soft
@@ -4618,6 +4641,7 @@ __metadata:
     "@instructure/command-utils": 8.23.0
     "@instructure/config-loader": 8.23.0
     "@instructure/console": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-utils": 8.23.0
     fs-extra: ^9.0.0
     lodash.isplainobject: ^4.0.6
@@ -4751,6 +4775,7 @@ __metadata:
     "@instructure/console": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-dom-utils": 8.23.0
+    "@instructure/ui-react-utils": "workspace:^"
     "@instructure/ui-test-utils": 8.23.0
     "@types/json-stable-stringify": ^1.0.1
     bowser: ^1.9.4
@@ -4793,6 +4818,7 @@ __metadata:
   resolution: "@instructure/ui-webpack-config@workspace:packages/ui-webpack-config"
   dependencies:
     "@instructure/browserslist-config-instui": "workspace:^"
+    "@instructure/ui-react-utils": "workspace:^"
     babel-loader: ^8.2.3
     buffer: ^6
     css-loader: ^6

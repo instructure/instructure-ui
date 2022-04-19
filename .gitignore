@@ -21,6 +21,7 @@ __build__
 .netlify
 
 tsconfig.build.tsbuildinfo
+tsconfig.tsbuildinfo
 
 .yarn/*
 !.yarn/cache
