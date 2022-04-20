@@ -30,7 +30,7 @@ import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
-import { CodeEditor } from '@instructure/ui-code-editor'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -146,11 +146,11 @@ class Document extends Component<DocumentProps, DocumentState> {
             guide for more info and alternative methods.
           </View>
 
-          <CodeEditor
+          <SourceCodeEditor
             label="Component theme override example"
             language="js"
             readOnly
-            value={`// theme override example
+            defaultValue={`// theme override example
 
 <${doc.id}
   {...props}
@@ -226,16 +226,16 @@ import { ${importName} } from '${esPath}'
           Usage
         </Heading>
         <View margin="0 0 small 0" display="block">
-          <CodeEditor
+          <SourceCodeEditor
             label={`How to install ${title}`}
-            value={`yarn add ${packageName}`}
+            defaultValue={`yarn add ${packageName}`}
             language="shell"
             readOnly
           />
         </View>
-        <CodeEditor
+        <SourceCodeEditor
           label={`How to use ${title}`}
-          value={example.join('\n')}
+          defaultValue={example.join('\n')}
           language="javascript"
           readOnly
         />

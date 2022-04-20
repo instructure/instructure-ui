@@ -35,7 +35,7 @@ import { View } from '@instructure/ui-view'
 import { Table } from '@instructure/ui-table'
 import { Img } from '@instructure/ui-img'
 import { Text } from '@instructure/ui-text'
-import { CodeEditor } from '@instructure/ui-code-editor'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 
 import { Playground } from './Playground'
 import { Preview } from './Preview'
@@ -236,11 +236,11 @@ function createRenderer() {
           readOnly={readOnly}
         />
       )
-    } else if (componentType === 'codeeditor') {
+    } else if (componentType === 'sourcecodeeditor') {
       return (
-        <CodeEditor
+        <SourceCodeEditor
           label={title}
-          value={matter.content}
+          defaultValue={matter.content}
           language={language}
           readOnly
         />
@@ -328,7 +328,7 @@ function createRenderer() {
             }
           })
         } else {
-          el = getComponent('CodeEditor', data)
+          el = getComponent('SourceCodeEditor', data)
         }
       } else {
         el = <code>{code}</code>
@@ -471,8 +471,14 @@ function createRenderer() {
 
   renderer.tablecell = function (content, flag) {
     const tag = flag.header ? Table.ColHeader : Table.Cell
+    const alignMap = {
+      left: 'start',
+      center: 'center',
+      right: 'end'
+    }
+    const props = flag.align ? { textAlign: alignMap[flag.align] } : undefined
 
-    return addElement(tag, undefined, content)
+    return addElement(tag, props, content)
   }
 
   renderer.codespan = function (text) {

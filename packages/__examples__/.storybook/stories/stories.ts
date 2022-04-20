@@ -22,18 +22,61 @@
  * SOFTWARE.
  */
 
+import { ComponentType } from 'react'
+
 import { storiesOf } from '@storybook/react'
-import { renderExample } from './renderExample'
-import { renderPage } from './renderPage'
+import type { LegacyStoryFn, StoryKind, StoryName } from '@storybook/addons'
+import type { StoryFnReactReturnType } from '@storybook/react/dist/ts3.9/client/preview/types'
 import {
   generateComponentExamples,
   StoryConfig
 } from '@instructure/ui-test-utils'
-import { ComponentType } from 'react'
+
+import { renderExample } from './renderExample'
+import { renderPage } from './renderPage'
+
 // must be imported with Webpack because this file cannot contain async calls
 // @ts-ignore TODO figure out why this is an error
 import propJSONData from '../../prop-data.json'
+
 import TooltipPositioning from './TooltipPositioning'
+import SourceCodeEditorExamples from './SourceCodeEditorExamples'
+
+type AdditionalExample = {
+  title: StoryKind
+  stories: {
+    storyName: StoryName
+    storyFn: LegacyStoryFn<StoryFnReactReturnType>
+    chromaticSettings?: Record<string, any>
+  }[]
+}
+
+// Stories not tied to one component and custom component examples
+const additionalExamples: AdditionalExample[] = [
+  {
+    title: 'Tooltip positioning',
+    stories: [
+      {
+        storyName: 'Tooltip positions',
+        storyFn: () => TooltipPositioning()
+      }
+    ]
+  },
+  // TODO: try to fix the editor not rendering fully on chromatic screenshot,
+  //  even with delay
+  {
+    title: 'SourceCodeEditor',
+    stories: [
+      {
+        storyName: 'Examples',
+        storyFn: () => SourceCodeEditorExamples(),
+        chromaticSettings: {
+          delay: 3000
+        }
+      }
+    ]
+  }
+]
 
 const examplesContext = require.context(
   '../../../', // bug: This causes start:watch to recompile endlessly in SB 6.2+
@@ -48,6 +91,12 @@ const componentsContext = require.context(
   /ui-.*\/src\/.*\/index\.tsx$/,
   'sync'
 )
+
+const chromaticSettings = {
+  viewports: [1200],
+  pauseAnimationAtEnd: true,
+  delay: 700
+}
 
 let numStories = 0
 console.time('storybook-build-examples')
@@ -91,9 +140,7 @@ console.log(
               renderPage.bind(null, page),
               {
                 chromatic: {
-                  viewports: [1200],
-                  pauseAnimationAtEnd: true,
-                  delay: 700,
+                  ...chromaticSettings,
                   ...page.parameters
                 }
               }
@@ -109,11 +156,23 @@ console.log(
   }
 )
 
-// Stories not tied to one component
-storiesOf('Tooltip positioning', module).add('Tooltip positions', () =>
-  TooltipPositioning()
-)
-numStories++
+additionalExamples.forEach((example) => {
+  const { title, stories } = example
+
+  const storiesOfExample = storiesOf(title, module)
+  stories.forEach((story) => {
+    storiesOfExample.add(story.storyName, story.storyFn, {
+      chromatic: { chromaticSettings, ...story.chromaticSettings }
+    })
+    numStories++
+  })
+  console.log(
+    `Generated ${stories.length} ${
+      stories.length === 1 ? 'story' : 'stories'
+    } for ${title}.`
+  )
+})
+
 // eslint-disable-next-line no-console
 console.log(`Created ${numStories} stories!`)
 console.timeEnd('storybook-build-examples')

@@ -30,6 +30,7 @@ import type {
 } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
+import { MainDocsData } from '../../buildScripts/DataTypes'
 
 type PreviewOwnProps = {
   code: string
@@ -45,9 +46,8 @@ type PreviewOwnProps = {
     | 'inverse'
     | 'light'
     | 'none'
-  themeKey?: number
-  //TODO type build-docs.js
-  themes?: any[]
+  themeKey?: keyof MainDocsData['themes']
+  themes?: MainDocsData['themes']
 }
 
 type PropKeys = keyof PreviewOwnProps
@@ -90,8 +90,8 @@ const propTypes: PropValidators<PropKeys> = {
     'light',
     'none'
   ]),
-  themes: PropTypes.array,
-  themeKey: PropTypes.number
+  themes: PropTypes.object,
+  themeKey: PropTypes.string
 }
 type PreviewState = {
   error: string | null

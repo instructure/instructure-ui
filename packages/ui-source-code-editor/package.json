@@ -1,0 +1,68 @@
+{
+  "name": "@instructure/ui-source-code-editor",
+  "version": "8.25.0",
+  "description": "A UI component library made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "module": "./es/index.js",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "run -T ui-test --lint",
+    "lint:fix": "run -T ui-test --lint --fix",
+    "clean": "run -T ui-build --clean",
+    "build": "run -T ui-build --modules es,cjs",
+    "build:watch": "yarn ts:check --watch & run -T ui-build --watch",
+    "build:types": "run -T tsc -p tsconfig.build.json",
+    "ts:check": "run -T tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "8.25.0",
+    "@instructure/ui-test-queries": "8.25.0",
+    "@instructure/ui-test-utils": "8.25.0",
+    "@types/lodash": "^4"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.13.10",
+    "@codemirror/autocomplete": "^6.0.1",
+    "@codemirror/commands": "^6.0.0",
+    "@codemirror/lang-css": "^6.0.0",
+    "@codemirror/lang-html": "^6.0.0",
+    "@codemirror/lang-javascript": "^6.0.0",
+    "@codemirror/lang-json": "^6.0.0",
+    "@codemirror/lang-markdown": "^6.0.0",
+    "@codemirror/language": "^6.0.0",
+    "@codemirror/legacy-modes": "^6.0.0",
+    "@codemirror/lint": "^6.0.0",
+    "@codemirror/search": "^6.0.0",
+    "@codemirror/state": "^6.0.0",
+    "@codemirror/view": "^6.0.0",
+    "@instructure/emotion": "8.25.0",
+    "@instructure/shared-types": "8.25.0",
+    "@instructure/ui-a11y-content": "8.25.0",
+    "@instructure/ui-dom-utils": "8.25.0",
+    "@instructure/ui-i18n": "8.25.0",
+    "@instructure/ui-prop-types": "8.25.0",
+    "@instructure/ui-react-utils": "8.25.0",
+    "@instructure/ui-test-locator": "8.25.0",
+    "@instructure/ui-testable": "8.25.0",
+    "@instructure/ui-themes": "8.25.0",
+    "@instructure/ui-utils": "8.25.0",
+    "@lezer/highlight": "^1.0.0",
+    "lodash": "^4",
+    "prop-types": "^15"
+  },
+  "peerDependencies": {
+    "react": ">=16.8 <=17"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false
+}

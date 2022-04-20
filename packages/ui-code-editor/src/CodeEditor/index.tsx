@@ -28,6 +28,7 @@ import { Component } from 'react'
 import { testable } from '@instructure/ui-testable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import {
+  deprecated,
   passthroughProps,
   withDeterministicId
 } from '@instructure/ui-react-utils'
@@ -45,13 +46,18 @@ import type { EditorConfiguration } from 'codemirror'
 
 /**
 ---
-category: components
+category: components/deprecated
 ---
 @tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
+@deprecated(
+  '[TBD]',
+  null,
+  'This component is deprecated and will be removed in a later version. Use <SourceCodeEditor /> instead, which is the wrapper for the newer version of the CodeMirror code editor.'
+)
 class CodeEditor extends Component<CodeEditorProps> {
   static readonly componentId = 'CodeEditor'
   static propTypes = propTypes

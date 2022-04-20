@@ -72,6 +72,7 @@
     { "path": "../ui-select/tsconfig.build.json" },
     { "path": "../ui-selectable/tsconfig.build.json" },
     { "path": "../ui-simple-select/tsconfig.build.json" },
+    { "path": "../ui-source-code-editor/tsconfig.build.json" },
     { "path": "../ui-spinner/tsconfig.build.json" },
     { "path": "../ui-svg-images/tsconfig.build.json" },
     { "path": "../ui-table/tsconfig.build.json" },

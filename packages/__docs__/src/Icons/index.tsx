@@ -36,7 +36,7 @@ import {
   AccessibleContent
 } from '@instructure/ui-a11y-content'
 import { Modal } from '@instructure/ui-modal'
-import { CodeEditor } from '@instructure/ui-code-editor'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 import { withStyle, jsx } from '@instructure/emotion'
 import { IconXSolid } from '@instructure/ui-icons'
 import { IconButton } from '@instructure/ui-buttons'
@@ -179,9 +179,9 @@ class Icons extends Component<IconsProps, IconsState> {
         <Heading level="h2" as="h3" margin="medium 0">
           Installation
         </Heading>
-        <CodeEditor
+        <SourceCodeEditor
           label={`How to install`}
-          value={`yarn add ${this.props.packageName}`}
+          defaultValue={`yarn add ${this.props.packageName}`}
           language="shell"
           readOnly
         />
@@ -244,9 +244,9 @@ class MyIcon extends React.Component {
         <Heading level="h3" margin="small 0">
           Usage
         </Heading>
-        <CodeEditor
+        <SourceCodeEditor
           label={`How to use`}
-          value={example}
+          defaultValue={example}
           language="javascript"
           readOnly
         />
