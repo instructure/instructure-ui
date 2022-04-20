@@ -135,6 +135,31 @@ describe('<TimeSelect />', async () => {
     expect(input.getAttribute('value')).to.equal(options[3].getTextContent())
   })
 
+  it('should keep selection when value changes', async () => {
+    const onChange = stub()
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+
+    const subject = await mount(
+      <TimeSelect
+        renderLabel="Choose an option"
+        value={dateTime.toISOString()}
+        timezone="US/Eastern"
+        onChange={onChange}
+      />
+    )
+    const select = await TimeSelectLocator.find()
+    const input = await select.findInput()
+
+    expect(input.getAttribute('value')).to.equal(dateTime.format('LT'))
+
+    const newDateStr = '2022-03-29T19:00Z'
+    const newDateTime = DateTime.parse(newDateStr, locale, timezone)
+    await subject.setProps({ value: newDateTime })
+    expect(input.getAttribute('value')).to.equal(newDateTime.format('LT'))
+  })
+
   it('should accept values that are not divisible by step', async () => {
     const onChange = stub()
     const subject = await mount(
