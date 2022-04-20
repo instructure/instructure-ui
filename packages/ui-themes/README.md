@@ -16,7 +16,7 @@ yarn add @instructure/ui-themes
 
 ### Usage
 
-Before mounting (rendering) your React application:
+##### Before mounting (rendering) your React application:
 
 - global theming:
 
@@ -39,7 +39,7 @@ Before mounting (rendering) your React application:
   )
   ```
 
-To override the variables:
+##### To override the theme variables:
 
 - globally:
 
@@ -62,6 +62,8 @@ To override the variables:
     element
   )
   ```
+
+> You can read more about how our theming system works and how to use it [here](/#using-theme-overrides)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-themes.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-themes

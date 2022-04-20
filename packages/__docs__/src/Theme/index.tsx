@@ -268,10 +268,17 @@ class Theme extends Component<ThemeProps> {
         <Description
           id={`${themeKey}ApplicationUsage`}
           content={`
-            ### Usage in React applications
-
+            ### Usage (before mounting your application)
+            ##### Global theming
             ${'```js'}
-            // before mounting your React application:
+            import { theme } from '${this.props.requirePath}'
+
+            theme.use({ overrides: { colors: { brand: 'red' } }})
+
+            ${'```'}
+
+            ##### Application level theming
+            ${'```js'}
             import { theme } from '${this.props.requirePath}'
             const themeOverrides = { colors: { brand: 'red' } }
 
@@ -282,6 +289,9 @@ class Theme extends Component<ThemeProps> {
               element
             )
             ${'```'}
+
+
+            > You can read more about how our theming system works and how to use it [here](/#using-theme-overrides)
           `}
           title={`${themeKey} Theme Usage in applications`}
         />

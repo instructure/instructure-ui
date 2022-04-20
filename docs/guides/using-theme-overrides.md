@@ -33,18 +33,6 @@ Global themes are useful when you have multiple React Application trees and you 
 This basically means you don't necessarily have to wrap each application tree with an [InstUISettingsProvider](/#InstUISettingsProvider) to use themes.
 InstUI leverages the [ThemeRegistry](/#ThemeRegistry) package to achieve global theming.
 
-**The application level theme**
-
-On the broader level, there is the main theme object that contains the color, spacing, typography etc. variables available in the theme (e.g.: [canvas theme](/#canvas)). The application level theme can be set via the [InstUISettingsProvider](/#InstUISettingsProvider) component.
-
-**The component's own theme**
-
-Every themeable component has its own "theme map". This map defines the components own theme variables (used by this component only), and maps them to values in the global theme object. These local variables are then passed to the component and used in the styles object.
-
-See the [emotion](/#emotion), [built-in themes](/#ui-themes) and [InstUISettingsProvider](/#InstUISettingsProvider) docs pages for more info and examples.
-
-Either you set up the themes globally:
-
 ```jsx
 // app/init sets the global theme
 import { canvas } from '@instructure/ui-themes'
@@ -52,7 +40,9 @@ import { canvas } from '@instructure/ui-themes'
 canvas.use()
 ```
 
-Or you use the `InstUISettingsProvider` to set up themes:
+**The application level theme**
+
+On the broader level, there is the main theme object that contains the color, spacing, typography etc. variables available in the theme (e.g.: [canvas theme](/#canvas)). The application level theme can be set via the [InstUISettingsProvider](/#InstUISettingsProvider) component.
 
 ```jsx
 // app/component root sets the app theme
@@ -61,7 +51,13 @@ Or you use the `InstUISettingsProvider` to set up themes:
 </InstUISettingsProvider>
 ```
 
-Either way the component's `theme.js` will map it to theme variables:
+**The component's own theme**
+
+Every themeable component has its own "theme map". This map defines the components own theme variables (used by this component only), and maps them to values in the global theme object. These local variables are then passed to the component and used in the styles object.
+
+See the [emotion](/#emotion), [built-in themes](/#ui-themes) and [InstUISettingsProvider](/#InstUISettingsProvider) docs pages for more info and examples.
+
+Either you set up the themes globally, or you use the `InstUISettingsProvider` to set up themes, the component's `theme.js` will map it to theme variables:
 
 ```jsx
 // component's `theme.js` maps the
@@ -469,7 +465,7 @@ example: true
 
 If you have multiple `ReactDOM.render` calls and you would like to use the same theme with the same overrides for them, then you have 2 options:
 
-##### Option 1: wrap each `ReactDOM.render` application with an `InstUISettingsProvider` with the correct theme
+**Option 1**: wrap each `ReactDOM.render` application with an `InstUISettingsProvider` with the correct theme:
 
 ```js
 ---
@@ -514,7 +510,7 @@ ReactDOM.render(
 
 This approach quickly becomes too cumbersome if you have more than a couple of `ReactDOM.render` calls.
 
-##### Option 2: use global themes
+**Option 2**: use global themes:
 
 ```jsx
 ---
@@ -538,7 +534,7 @@ This will register the `canvas` theme with its overrides as the active theme in 
 
 You can use the global theming and the application level theming together, however there are some caveats you should be aware of:
 
-##### If you globally .use() a theme and would like to override that theme in a sub-tree of your application then just wrap that part in an `InstUISettingsProvider`
+If you globally .use() a theme and would like to override that theme in a sub-tree of your application then just wrap that part in an `InstUISettingsProvider`
 
 ```js
 //ui/init.js
@@ -567,7 +563,7 @@ render() {
 }
 ```
 
-##### This example won't override the global theme, instead it will override the application level theme provided to `InstUISettingsProvider`
+This example won't override the global theme, instead it will override the application level theme provided to `InstUISettingsProvider`
 
 ```js
 //ui/init.js
