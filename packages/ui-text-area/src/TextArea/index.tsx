@@ -85,6 +85,8 @@ class TextArea extends Component<TextAreaProps> {
   private _height?: string
   private _manuallyResized = false
 
+  ref: Element | null = null
+
   constructor(props: TextAreaProps) {
     super(props)
 
@@ -313,6 +315,9 @@ class TextArea extends Component<TextAreaProps> {
         label={this.props.label}
         vAlign="top"
         id={this.id}
+        elementRef={(el) => {
+          this.ref = el
+        }}
       >
         <div
           css={this.props.styles?.textAreaLayout}
