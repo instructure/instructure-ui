@@ -21,8 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { CodeEditor } from './CodeEditor'
-export type { CodeEditorProps } from './CodeEditor/props'
 
-export { CodeEditorV2 } from './CodeEditorV2'
-export type { CodeEditorV2Props } from './CodeEditorV2/props'
+import type { Theme } from '@instructure/ui-themes'
+import type { CodeEditorV2Theme } from '@instructure/shared-types'
+
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: Theme): CodeEditorV2Theme => {
+  const { colors, borders, typography, spacing } = theme
+
+  const componentVariables: CodeEditorV2Theme = {
+    fontFamily: typography?.fontFamilyMonospace,
+    fontSize: typography?.fontSizeSmall,
+    background: colors?.backgroundLightest,
+    color: colors?.textDarkest,
+    gutterBackground: colors?.backgroundLight,
+    borderWidth: borders?.widthSmall,
+    borderColor: colors?.borderLight,
+    borderRadius: borders?.radiusMedium,
+    focusBorderColor: colors?.borderBrand,
+    horizontalPadding: spacing?.xSmall,
+    verticalPadding: spacing?.xxSmall
+  }
+
+  return {
+    ...componentVariables
+  }
+}
+
+export default generateComponentTheme

@@ -399,6 +399,20 @@ export type CodeEditorTheme = {
   operatorColor: Colors['textDarkest']
 }
 
+export type CodeEditorV2Theme = {
+  fontFamily: Typography['fontFamilyMonospace']
+  fontSize: Typography['fontSizeSmall']
+  color: Colors['textDarkest']
+  background: Colors['backgroundLightest']
+  gutterBackground: Colors['backgroundLight']
+  borderWidth: Border['widthSmall']
+  borderColor: Colors['borderLight']
+  borderRadius: Border['radiusMedium']
+  focusBorderColor: Colors['borderBrand']
+  horizontalPadding: Spacing['xSmall']
+  verticalPadding: Spacing['xxSmall']
+}
+
 export type DrawerLayoutContentTheme = {
   duration: Transitions['duration']
 }
@@ -1442,6 +1456,7 @@ export interface ThemeVariables {
   CheckboxFacade: CheckboxFacadeTheme
   ToggleFacade: ToggleFacadeTheme
   CodeEditor: CodeEditorTheme
+  CodeEditorV2: CodeEditorV2Theme
   DrawerLayoutContent: DrawerLayoutContentTheme
   'DrawerLayout.Content': DrawerLayoutContentTheme
   DrawerLayoutTray: DrawerLayoutTrayTheme

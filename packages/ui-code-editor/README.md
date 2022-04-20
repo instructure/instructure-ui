@@ -15,6 +15,7 @@ A code editor component.
 The `ui-code-editor` package contains the following:
 
 - [CodeEditor](#CodeEditor)
+- [CodeEditorV2](#CodeEditorV2)
 
 ### Installation
 
@@ -26,11 +27,22 @@ yarn add @instructure/ui-code-editor
 
 ```js
 import React from 'react'
-import { CodeEditor } from '@instructure/ui-code-editor'
+import { CodeEditor, CodeEditorV2 } from '@instructure/ui-code-editor'
 
 const MyCodeEditor = () => {
   return (
     <CodeEditor
+      label="code editor"
+      defaultValue='{"foo": "bar"}'
+      language="javascript"
+      readOnly
+    />
+  )
+}
+
+const MyCodeEditorV2 = () => {
+  return (
+    <CodeEditorV2
       label="code editor"
       defaultValue='{"foo": "bar"}'
       language="javascript"

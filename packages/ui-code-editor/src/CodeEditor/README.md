@@ -2,7 +2,7 @@
 describes: CodeEditor
 ---
 
-A wrapper around the popular [CodeMirror](https://codemirror.net/) text editor.
+A wrapper around the popular [CodeMirror](https://codemirror.net/5/index.html) text editor (version 5). For the version 6 wrapper see [CodeMirrorV2](/#CodeEditorV2).
 
 ### Note!
 

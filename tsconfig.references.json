@@ -35,6 +35,7 @@
     { "path": "./packages/ui-date-time-input/tsconfig.build.json" },
     { "path": "./packages/ui-dom-utils/tsconfig.build.json" },
     { "path": "./packages/ui-drawer-layout/tsconfig.build.json" },
+    { "path": "./packages/ui-drilldown/tsconfig.build.json" },
     { "path": "./packages/ui-editable/tsconfig.build.json" },
     { "path": "./packages/ui-eslint-config/tsconfig.build.json" },
     { "path": "./packages/ui-expandable/tsconfig.build.json" },
