@@ -83,6 +83,7 @@
   "@instructure/ui-select",
   "@instructure/ui-selectable",
   "@instructure/ui-simple-select",
+  "@instructure/ui-source-code-editor",
   "@instructure/ui-spinner",
   "@instructure/ui-stylelint-config",
   "@instructure/ui-svg-images",

@@ -76,11 +76,18 @@ import { LoadingScreen } from '../LoadingScreen'
 import * as EveryComponent from '../../components'
 import type { AppProps, AppState, DocData, LayoutSize } from './props'
 import { propTypes, allowedProps } from './props'
+import type { LibraryOptions, MainDocsData } from '../../buildScripts/DataTypes'
 
-export const AppContext = createContext({
-  library: {},
+type AppContextType = {
+  themeKey: keyof MainDocsData['themes']
+  themes: MainDocsData['themes']
+  library?: LibraryOptions
+}
+
+export const AppContext = createContext<AppContextType>({
   themes: {},
-  themeKey: ''
+  themeKey: '',
+  library: undefined
 })
 
 @withStyle(generateStyle, generateComponentTheme)
@@ -775,4 +782,5 @@ class App extends Component<AppProps, AppState> {
 }
 
 export default App
+export type { AppContextType }
 export { App }

@@ -149,6 +149,10 @@ module.exports = {
       __dirname,
       '../ui-simple-select/src/'
     ),
+    '@instructure/ui-source-code-editor$': path.resolve(
+      __dirname,
+      '../ui-source-code-editor/src/'
+    ),
     '@instructure/ui-spinner$': path.resolve(__dirname, '../ui-spinner/src/'),
     '@instructure/ui-svg-images$': path.resolve(
       __dirname,

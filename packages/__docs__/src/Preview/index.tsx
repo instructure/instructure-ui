@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { DIRECTION, TextDirectionContext } from '@instructure/ui-i18n'
@@ -36,28 +35,13 @@ import generateComponentTheme from './theme'
 
 import { compileAndRenderExample } from '../compileAndRenderExample'
 
+import { propTypes, allowedProps } from './props'
 import type { PreviewProps, PreviewState } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Preview extends Component<PreviewProps, PreviewState> {
-  static propTypes = {
-    code: PropTypes.string.isRequired,
-    render: PropTypes.bool,
-    language: PropTypes.string.isRequired,
-    fullscreen: PropTypes.bool,
-    frameless: PropTypes.bool,
-    inverse: PropTypes.bool,
-    rtl: PropTypes.bool,
-    background: PropTypes.oneOf([
-      'checkerboard',
-      'checkerboard-inverse',
-      'inverse',
-      'light',
-      'none'
-    ])
-  }
-
-  private _mountNode?: HTMLDivElement | null
+  static propTypes = propTypes
+  static allowedProps = allowedProps
 
   static defaultProps = {
     render: true,
@@ -67,6 +51,8 @@ class Preview extends Component<PreviewProps, PreviewState> {
     rtl: false,
     background: 'checkerboard'
   }
+
+  private _mountNode?: HTMLDivElement | null
 
   constructor(props: PreviewProps) {
     super(props)

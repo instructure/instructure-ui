@@ -1008,6 +1008,20 @@ export type SelectTheme = {
   background: Colors['backgroundLightest']
 }
 
+export type SourceCodeEditorTheme = {
+  fontFamily: Typography['fontFamilyMonospace']
+  fontSize: Typography['fontSizeSmall']
+  color: Colors['textDarkest']
+  background: Colors['backgroundLightest']
+  gutterBackground: Colors['backgroundLight']
+  borderWidth: Border['widthSmall']
+  borderColor: Colors['borderLight']
+  borderRadius: Border['radiusMedium']
+  focusBorderColor: Colors['borderBrand']
+  horizontalPadding: Spacing['xSmall']
+  verticalPadding: Spacing['xxSmall']
+}
+
 export type SpinnerTheme = {
   trackColor: Colors['backgroundLight']
   color: Colors['backgroundBrand']
@@ -1506,6 +1520,7 @@ export interface ThemeVariables {
   RatingIcon: RatingIconTheme
   'Rating.Icon': RatingIconTheme
   Select: SelectTheme
+  SourceCodeEditor: SourceCodeEditorTheme
   Spinner: SpinnerTheme
   InlineSVG: InlineSVGTheme
   SVGIcon: SVGIconTheme

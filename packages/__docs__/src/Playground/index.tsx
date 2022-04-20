@@ -30,7 +30,7 @@ import { Modal } from '@instructure/ui-modal'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { SVGIcon } from '@instructure/ui-svg-images'
-import { CodeEditor } from '@instructure/ui-code-editor'
+import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 import { Checkbox } from '@instructure/ui-checkbox'
 import { Flex } from '@instructure/ui-flex'
 import { IconButton, CloseButton } from '@instructure/ui-buttons'
@@ -42,6 +42,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { AppContext } from '../App'
+import type { AppContextType } from '../App'
 
 import { Preview } from '../Preview'
 import { CodeSandboxButton } from '../CodeSandboxButton'
@@ -159,13 +160,18 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
             renderIcon={IconXLine}
           />
         </div>
-        <CodeEditor
+        <SourceCodeEditor
           label={`${this.props.title} Example Code`}
-          value={code}
+          defaultValue={code}
           onChange={this.handleChange}
           readOnly={this.props.readOnly}
           attachment="bottom"
           language="jsx"
+          lineNumbers
+          lineWrapping
+          foldGutter
+          highlightActiveLine
+          highlightActiveLineGutter
         />
       </div>
     )
@@ -189,14 +195,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   render() {
     const { styles } = this.props
     const { code, fullscreen, rtl } = this.state
-    // TODO: update type once AppContext is typed
-    const PreviewComponent = ({
-      themeKey,
-      themes
-    }: {
-      themeKey: string
-      themes: Record<string, any>
-    }) => (
+    const PreviewComponent = ({ themeKey, themes }: AppContextType) => (
       <Preview
         code={code}
         render={this.props.render}
@@ -211,15 +210,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
 
     return (
       <AppContext.Consumer>
-        {({
-          library,
-          themeKey,
-          themes
-        }: {
-          library: Record<string, any>
-          themeKey: string
-          themes: Record<string, any>
-        }) => (
+        {({ themeKey, themes }) => (
           <div css={styles?.playground}>
             {fullscreen ? (
               <Modal
