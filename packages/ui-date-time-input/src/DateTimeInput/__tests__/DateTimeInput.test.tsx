@@ -764,4 +764,41 @@ describe('<DateTimeInput />', async () => {
       })
     ).to.not.exist()
   })
+
+  it('should update Date and Time inputs when value prop changes', async () => {
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+
+    const subject = await mount(
+      <DateTimeInput
+        description="date time"
+        dateRenderLabel="date"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        timeRenderLabel="time"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        value={dateTime.toISOString()}
+      />
+    )
+
+    const dateTimeInput = await DateTimeInputLocator.find()
+    expect(
+      await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')
+    ).to.exist()
+    const newDateStr = '2022-03-29T19:00Z'
+    const newDateTime = DateTime.parse(newDateStr, locale, timezone)
+    await subject.setProps({ value: newDateStr })
+
+    const dateLocator = await dateTimeInput.findDateInput()
+    const timeLocator = await dateTimeInput.findTimeInput()
+
+    const dateInput = await dateLocator.findInput()
+    const timeInput = await timeLocator.findInput()
+
+    expect(dateInput).to.have.value(newDateTime.format('LL'))
+    expect(timeInput).to.have.value(newDateTime.format('LT'))
+  })
 })

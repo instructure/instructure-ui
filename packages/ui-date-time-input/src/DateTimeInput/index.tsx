@@ -68,7 +68,6 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
 
   static contextType = ApplyLocaleContext
 
-  private _timeInput?: TimeSelect
   ref: Element | null = null // This is used by Tooltip for positioning
 
   handleRef = (el: Element | null) => {
@@ -136,13 +135,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
             .month(this.state.iso.month())
             .year(this.state.iso.year())
         }
-        const newTimeSelectValue = this.state?.timeSelectValue
-          ? this.state.timeSelectValue
-          : this._timeInput
-              ?.getBaseDate()
-              .minute(parsed.minute())
-              .hour(parsed.hour())
-              .toISOString()
+        const newTimeSelectValue = parsed.toISOString()
         if (this.isDisabledDate(parsed)) {
           let text =
             typeof this.props.disabledDateTimeMessage === 'function'
@@ -357,10 +350,6 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         this.props.onBlur?.(e)
       }, 0)
     }
-  }
-
-  timeInputComponentRef = (node: TimeSelect) => {
-    this._timeInput = node
   }
 
   handleShowCalendar = (_event: SyntheticEvent) => {
@@ -589,7 +578,6 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           value={this.state.timeSelectValue}
           onChange={this.handleTimeChange}
           onBlur={this.handleBlur}
-          ref={this.timeInputComponentRef}
           renderLabel={timeRenderLabel}
           locale={locale}
           format={timeFormat}
