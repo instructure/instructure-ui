@@ -1205,9 +1205,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
               style={{ alignSelf: vAlignMap[afterLabelContentVAlign!] }}
             >
               {/* this container span is needed for correct vAlign */}
-              <span role="note" id={infoAriaId}>
-                {labelInfo}
-              </span>
+              <span id={infoAriaId}>{labelInfo}</span>
             </span>
           ) : null}
         </div>

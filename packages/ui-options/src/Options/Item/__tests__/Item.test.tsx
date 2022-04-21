@@ -86,7 +86,7 @@ describe('<Item />', async () => {
     const item = await ItemLocator.find()
 
     expect(await item.find('#customContent')).to.have.text('Hello World')
-    expect(await item.find('[role="note"]')).to.have.text(
+    expect(await item.find('[class$="__description"]')).to.have.text(
       'Some text as description'
     )
   })
