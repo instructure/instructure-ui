@@ -103,19 +103,19 @@ example: true
 ---
 <Drilldown rootPageId='root' width="20rem" maxHeight="30rem">
   <Drilldown.Page id="root">
-    <Drilldown.Option id="option1" href="/#Options">
+    <Drilldown.Option id="linkExampleOption1" href="/#Options">
       Options component
     </Drilldown.Option>
-    <Drilldown.Option id="option2"href="/#Menu">
+    <Drilldown.Option id="linkExampleOption2"href="/#Menu">
       Menu component
     </Drilldown.Option>
-    <Drilldown.Option id="option3" href="/#Select">
+    <Drilldown.Option id="linkExampleOption3" href="/#Select">
       Options component
     </Drilldown.Option>
-    <Drilldown.Option id="option4" href="/#SimpleSelect" disabled>
+    <Drilldown.Option id="linkExampleOption4" href="/#SimpleSelect" disabled>
       SimpleSelect component
     </Drilldown.Option>
-    <Drilldown.Option id="option5" href="/#TreeBrowser">
+    <Drilldown.Option id="linkExampleOption5" href="/#TreeBrowser">
       TreeBrowser component
     </Drilldown.Option>
   </Drilldown.Page>
@@ -131,7 +131,7 @@ example: true
 <Drilldown rootPageId='root' width="20rem" maxHeight="30rem">
   <Drilldown.Page id="root">
     <Drilldown.Option
-      id="option1"
+      id="renderElementExampleOption1"
       description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
       renderBeforeLabel={IconCheckSolid}
       renderAfterLabel={IconArrowOpenEndSolid}
@@ -141,7 +141,7 @@ example: true
       Option
     </Drilldown.Option>
     <Drilldown.Option
-      id="option2"
+      id="renderElementExampleOption2"
       description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
       renderBeforeLabel={IconCheckSolid}
       renderAfterLabel={IconArrowOpenEndSolid}
@@ -151,7 +151,7 @@ example: true
       Option
     </Drilldown.Option>
     <Drilldown.Option
-      id="option3"
+      id="renderElementExampleOption3"
       description="Curabitur fringilla, urna ut efficitur molestie, nibh lacus tincidunt elit, ut tempor ipsum nunc sit amet massa."
       renderBeforeLabel={IconCheckSolid}
       renderAfterLabel={IconArrowOpenEndSolid}
@@ -564,13 +564,13 @@ class BackNavigationExample extends React.Component {
               renderTitle={showTitle && 'Root page'}
               renderActionLabel={showAction && 'Action!'}
             >
-              <Drilldown.Option id="option1" subPageId='secondPage'>
+              <Drilldown.Option id="BackNavigationRoot1" subPageId='secondPage'>
                 Option
               </Drilldown.Option>
-              <Drilldown.Option id="option2" subPageId='secondPage'>
+              <Drilldown.Option id="BackNavigationRoot2" subPageId='secondPage'>
                 Option
               </Drilldown.Option>
-              <Drilldown.Option id="option3" subPageId='secondPage'>
+              <Drilldown.Option id="BackNavigationRoot3" subPageId='secondPage'>
                 Option
               </Drilldown.Option>
             </Drilldown.Page>
@@ -583,9 +583,15 @@ class BackNavigationExample extends React.Component {
                 ? ((prevPageTitle) => prevPageTitle ? `Back to ${prevPageTitle}` : 'Back')
                 : undefined}
             >
-              <Drilldown.Option id="option1">Option</Drilldown.Option>
-              <Drilldown.Option id="option2">Option</Drilldown.Option>
-              <Drilldown.Option id="option3">Option</Drilldown.Option>
+              <Drilldown.Option id="BackNavigationSecondPage1">
+                Option
+              </Drilldown.Option>
+              <Drilldown.Option id="BackNavigationSecondPage2">
+                Option
+              </Drilldown.Option>
+              <Drilldown.Option id="BackNavigationSecondPage3">
+                Option
+              </Drilldown.Option>
             </Drilldown.Page>
           </Drilldown>
         </Flex.Item>
@@ -997,13 +1003,13 @@ class DisabledExample extends React.Component {
                 disabled={disabledPages}
               >
                 <Drilldown.Option
-                  id="option1"
+                  id="disabledOption1"
                   subPageId='secondPage'
                   disabled={disabledOptions}
                 >
                   Option with subPage navigation
                 </Drilldown.Option>
-                <Drilldown.Option id="option2" disabled={disabledOptions}>
+                <Drilldown.Option id="disabledOption2" disabled={disabledOptions}>
                   Option
                 </Drilldown.Option>
                 <Drilldown.Group
@@ -1105,13 +1111,13 @@ example: true
   shouldHideOnSelect={false}
 >
   <Drilldown.Page id="root" renderTitle='Should not hide on select'>
-    <Drilldown.Option id="option1">
+    <Drilldown.Option id="shouldHideOption1">
       Option
     </Drilldown.Option>
-    <Drilldown.Option id="option2">
+    <Drilldown.Option id="shouldHideOption2">
       Option
     </Drilldown.Option>
-    <Drilldown.Option id="option3">
+    <Drilldown.Option id="shouldHideOption3">
       Option
     </Drilldown.Option>
     <Drilldown.Option
@@ -1152,14 +1158,14 @@ example: true
   maxHeight="30rem"
 >
   <Drilldown.Page id="Root Page" renderTitle='Root page'>
-    <Drilldown.Option id="option1" subPageId='Page Two'>
+    <Drilldown.Option id="navRootOption1" subPageId='Page Two'>
       Go to Page Two
     </Drilldown.Option>
-    <Drilldown.Option id="option2" subPageId='Page Three'>
+    <Drilldown.Option id="navRootOption2" subPageId='Page Three'>
       Go to Page Three
     </Drilldown.Option>
     <Drilldown.Option
-      id="option3"
+      id="navRootOption3"
       onOptionClick={(_event, args) => {
         console.log(args.pageHistory)
         const nav = args.goToPage('Page Two')
@@ -1172,11 +1178,11 @@ example: true
   </Drilldown.Page>
 
   <Drilldown.Page id="Page Two" renderTitle='Page Two'>
-    <Drilldown.Option id="option1" subPageId='Page Three'>
+    <Drilldown.Option id="navPage2Option1" subPageId='Page Three'>
       Go to Page Three
     </Drilldown.Option>
     <Drilldown.Option
-      id="option2"
+      id="navPage2Option2"
       onOptionClick={(_event, args) => {
         console.log(args.pageHistory)
         const nav = args.goToPreviousPage()
@@ -1187,7 +1193,7 @@ example: true
       Manual "Back" navigation
     </Drilldown.Option>
     <Drilldown.Option
-      id="option3"
+      id="navPage2Option3"
       onOptionClick={(_event, args) => {
         console.log(args.pageHistory)
         const nav = args.goToPage('Page Three')
@@ -1201,7 +1207,7 @@ example: true
 
   <Drilldown.Page id="Page Three" renderTitle='Page Three'>
     <Drilldown.Option
-      id="option1"
+      id="navPage3Option1"
       onOptionClick={(_event, args) => {
         console.log(args.pageHistory)
         const nav = args.goToPage(args.pageHistory[0])
@@ -1212,7 +1218,7 @@ example: true
       Manual "Back" navigation
     </Drilldown.Option>
     <Drilldown.Option
-      id="option2"
+      id="navPage3Option2"
       onOptionClick={(_event, args) => {
         console.log(args.pageHistory)
         const nav = args.goToPreviousPage()
