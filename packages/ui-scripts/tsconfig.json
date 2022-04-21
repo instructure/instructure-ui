@@ -4,19 +4,19 @@
     "declarationDir": "./types",
     "outDir": "./lib"
   },
-  "include": ["src/**/*"],
+  "include": ["src"],
   "references": [
     {
       "path": "../command-utils"
     },
-    // {
-    //   "path": "../cz-lerna-changelog/tsconfig.build.json"
-    // },
-    // {
-    //   "path": "../instui-config/tsconfig.build.json"
-    // },
-    // {
-    //   "path": "../pkg-utils/tsconfig.build.json"
-    // },
+     {
+       "path": "../cz-lerna-changelog/tsconfig.build.json"
+     },
+     {
+       "path": "../instui-config/tsconfig.build.json"
+     },
+     {
+       "path": "../pkg-utils/tsconfig.build.json"
+     }
   ]
 }

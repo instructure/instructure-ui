@@ -8,7 +8,7 @@
   },
   "include": ["lib"],
   "references": [
-    { "path": "../command-utils/tsconfig.build.json" },
+    { "path": "../command-utils" },
     { "path": "../config-loader/tsconfig.build.json" },
     { "path": "../console/tsconfig.build.json" },
     { "path": "../ui-test-utils/tsconfig.build.json" }

@@ -2254,6 +2254,15 @@ __metadata:
   resolution: "@instructure/babel-plugin-transform-imports@workspace:packages/babel-plugin-transform-imports"
   dependencies:
     "@instructure/browserslist-config-instui": "workspace:^"
+    "@instructure/ui-decorator": "workspace:^"
+    "@instructure/ui-dom-utils": "workspace:^"
+    "@instructure/ui-i18n": "workspace:^"
+    "@instructure/ui-prop-types": "workspace:^"
+    "@instructure/ui-react-utils": "workspace:^"
+    "@instructure/ui-test-locator": "workspace:^"
+    "@instructure/ui-theme-tokens": "workspace:^"
+    "@instructure/ui-themes": "workspace:^"
+    "@instructure/ui-utils": "workspace:^"
     globby: ^11
   languageName: unknown
   linkType: soft
@@ -2972,7 +2981,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-decorator@8.23.0, @instructure/ui-decorator@workspace:packages/ui-decorator":
+"@instructure/ui-decorator@8.23.0, @instructure/ui-decorator@workspace:^, @instructure/ui-decorator@workspace:packages/ui-decorator":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-decorator@workspace:packages/ui-decorator"
   dependencies:
@@ -3007,7 +3016,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-dom-utils@8.23.0, @instructure/ui-dom-utils@workspace:packages/ui-dom-utils":
+"@instructure/ui-dom-utils@8.23.0, @instructure/ui-dom-utils@workspace:^, @instructure/ui-dom-utils@workspace:packages/ui-dom-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-dom-utils@workspace:packages/ui-dom-utils"
   dependencies:
@@ -3306,7 +3315,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-i18n@8.23.0, @instructure/ui-i18n@workspace:packages/ui-i18n":
+"@instructure/ui-i18n@8.23.0, @instructure/ui-i18n@workspace:^, @instructure/ui-i18n@workspace:packages/ui-i18n":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-i18n@workspace:packages/ui-i18n"
   dependencies:
@@ -3911,7 +3920,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-prop-types@8.23.0, @instructure/ui-prop-types@workspace:packages/ui-prop-types":
+"@instructure/ui-prop-types@8.23.0, @instructure/ui-prop-types@workspace:^, @instructure/ui-prop-types@workspace:packages/ui-prop-types":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-prop-types@workspace:packages/ui-prop-types"
   dependencies:
@@ -4075,6 +4084,7 @@ __metadata:
     "@storybook/react": ^6
     "@types/babel__core": ^7
     "@types/git-url-parse": ^9.0.0
+    "@types/karma": ^6
     "@types/mocha": ^8.2.2
     "@types/react": ^17.0.39
     "@types/semver": ^7.3.5
@@ -4094,11 +4104,13 @@ __metadata:
     http-server: ^14
     jira-client: ^6.11.0
     jscodeshift: ^0.13
+    karma: 6
     karma-cli: ^2.0.0
     lerna: ^4
     mocha: ^7.1.2
     open: ^8
     prettier: ^2
+    react: 17
     semver: ^7
     stylelint: ^10
     validate-commit-msg: ^2
@@ -4106,6 +4118,9 @@ __metadata:
     webpack-dev-server: ^4
     which: ^2
     yargs: ^16
+  peerDependencies:
+    karma: 6
+    react: 17
   dependenciesMeta:
     "@storybook/react":
       optional: true
@@ -4364,7 +4379,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-test-locator@8.23.0, @instructure/ui-test-locator@workspace:packages/ui-test-locator":
+"@instructure/ui-test-locator@8.23.0, @instructure/ui-test-locator@workspace:^, @instructure/ui-test-locator@workspace:packages/ui-test-locator":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-test-locator@workspace:packages/ui-test-locator"
   dependencies:
@@ -4545,7 +4560,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-theme-tokens@8.23.0, @instructure/ui-theme-tokens@workspace:packages/ui-theme-tokens":
+"@instructure/ui-theme-tokens@8.23.0, @instructure/ui-theme-tokens@workspace:^, @instructure/ui-theme-tokens@workspace:packages/ui-theme-tokens":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-theme-tokens@workspace:packages/ui-theme-tokens"
   dependencies:
@@ -4559,7 +4574,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-themes@8.23.0, @instructure/ui-themes@workspace:packages/ui-themes":
+"@instructure/ui-themes@8.23.0, @instructure/ui-themes@workspace:^, @instructure/ui-themes@workspace:packages/ui-themes":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-themes@workspace:packages/ui-themes"
   dependencies:
@@ -4766,7 +4781,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-utils@8.23.0, @instructure/ui-utils@workspace:packages/ui-utils":
+"@instructure/ui-utils@8.23.0, @instructure/ui-utils@workspace:^, @instructure/ui-utils@workspace:packages/ui-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-utils@workspace:packages/ui-utils"
   dependencies:
@@ -8578,7 +8593,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/karma@npm:^6.3.3":
+"@types/karma@npm:^6, @types/karma@npm:^6.3.3":
   version: 6.3.3
   resolution: "@types/karma@npm:6.3.3"
   dependencies:
@@ -21361,6 +21376,7 @@ __metadata:
     "@instructure/ui-token-scripts": "workspace:*"
     "@types/babel__core": ^7
     "@types/babel__preset-env": ^7
+    "@types/karma": ^6
     "@types/mocha": ^9
     "@types/node": ^17.0.18
     "@types/react": ^17.0.39
@@ -21371,6 +21387,7 @@ __metadata:
     esbuild: ^0.14
     eslint: ^7
     husky: ^7
+    karma: 6
     lerna: ^4
     lint-staged: ^10
     mocha: ^9.2.0
@@ -23591,6 +23608,40 @@ __metadata:
   peerDependencies:
     webpack: ^5.0.0
   checksum: 869b835f91b99036d12c1b4342126b75093f7f524e2b245d557e720a402faf8bc90050f99962b0f12af98535812f46fa6325d1a7ed8569aed6dc5ead40c63ec4
+  languageName: node
+  linkType: hard
+
+"karma@npm:6":
+  version: 6.3.19
+  resolution: "karma@npm:6.3.19"
+  dependencies:
+    "@colors/colors": 1.5.0
+    body-parser: ^1.19.0
+    braces: ^3.0.2
+    chokidar: ^3.5.1
+    connect: ^3.7.0
+    di: ^0.0.1
+    dom-serialize: ^2.2.1
+    glob: ^7.1.7
+    graceful-fs: ^4.2.6
+    http-proxy: ^1.18.1
+    isbinaryfile: ^4.0.8
+    lodash: ^4.17.21
+    log4js: ^6.4.1
+    mime: ^2.5.2
+    minimatch: ^3.0.4
+    mkdirp: ^0.5.5
+    qjobs: ^1.2.0
+    range-parser: ^1.2.1
+    rimraf: ^3.0.2
+    socket.io: ^4.4.1
+    source-map: ^0.6.1
+    tmp: ^0.2.1
+    ua-parser-js: ^0.7.30
+    yargs: ^16.1.1
+  bin:
+    karma: bin/karma
+  checksum: c670a036037d7a4c6da406df9f390b78440b2a46cd05fdd9de2789addcb2700aa6d7870c67bfb79ec72bcbd1c391eb52435eda1e680386c29f86d71926c8637a
   languageName: node
   linkType: hard
 
@@ -32994,7 +33045,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io@npm:^4.2.0":
+"socket.io@npm:^4.2.0, socket.io@npm:^4.4.1":
   version: 4.4.1
   resolution: "socket.io@npm:4.4.1"
   dependencies:

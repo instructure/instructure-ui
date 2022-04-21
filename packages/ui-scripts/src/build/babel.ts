@@ -26,8 +26,6 @@ import {  getCommand, runCommandAsync } from '../utils/command'
 
 type ModuleType = ('es' | 'cjs')[]
 
-
-
 export const babel = async () => {
   const {
     BABEL_ENV,
@@ -40,7 +38,8 @@ export const babel = async () => {
 
   // positional: ui-build src --watch
   const firstArg = args[0]
-  const src = firstArg && firstArg.indexOf('--') < 0 ? firstArg : `${process.cwd()}/src`
+  const src = firstArg && firstArg.indexOf('--') < 0 ? `${process.cwd()}/${firstArg}`: `${process.cwd()}/src`
+  console.log({ babel_src: src })
 
   // uncomment the extensions arg after renaming the files from js -> ts happens
   let babelArgs = ['--extensions', '.ts,.tsx,.js,.jsx', '--ignore', `${src}/__tests__/**,${src}/**/*.test.ts,${src}/**/*.test.tsx,${src}/**/*.test.js`]
@@ -136,8 +135,7 @@ export const babel = async () => {
       ...process.env,
       NODE_ENV: 'production',
       ES_MODULES: 0,
-      //TODO: investigate this, if I uncomment it the process fails
-      // TRANSFORM_IMPORTS: 1
+     //   TRANSFORM_IMPORTS: 1
     }
   })
 ])

@@ -45,8 +45,9 @@ const NODE_PACKAGES = [
   'babel-plugin-transform-imports'
 ]
 
-const DIRS_TO_DELETE = [
+const FILES_TO_DELETE = [
   'tsconfig.build.tsbuildinfo',
+    'tsconfig.tsbuildinfo',
   'types',
   '__build__',
   'dist',
@@ -55,9 +56,9 @@ const DIRS_TO_DELETE = [
   '.cache',
   'es'
 ]
-function deleteDirs(dirs = []) {
-  return dirs.map((dir) => {
-    fs.rmSync(dir, { force: true, recursive: true })
+function deleteFiles(files = []) {
+  return files.map((file) => {
+    fs.rmSync(file, { force: true, recursive: true })
   })
 }
 function clean() {
@@ -66,13 +67,13 @@ function clean() {
   let packageDir
   while ((packageDir = dir.readSync()) !== null) {
     if (packageDir.isDirectory()) {
-      const rmDirs = DIRS_TO_DELETE.map(
+      const filesToRemove = FILES_TO_DELETE.map(
         (dir) => `${packagesPath}/${packageDir.name}/${dir}`
       )
       if (NODE_PACKAGES.includes(packageDir.name)) {
-        deleteDirs(rmDirs)
+        deleteFiles(filesToRemove)
       } else {
-        deleteDirs([...rmDirs, `${packagesPath}/${packageDir.name}/lib`])
+        deleteFiles([...filesToRemove, `${packagesPath}/${packageDir.name}/lib`])
       }
     }
   }

@@ -48,11 +48,13 @@
     "http-server": "^14",
     "jira-client": "^6.11.0",
     "jscodeshift": "^0.13",
+    "karma": "6",
     "karma-cli": "^2.0.0",
     "lerna": "^4",
     "mocha": "^7.1.2",
     "open": "^8",
     "prettier": "^2",
+    "react": "17",
     "semver": "^7",
     "stylelint": "^10",
     "validate-commit-msg": "^2",
@@ -65,6 +67,7 @@
     "@instructure/ui-react-utils": "workspace:^",
     "@types/babel__core": "^7",
     "@types/git-url-parse": "^9.0.0",
+    "@types/karma": "^6",
     "@types/mocha": "^8.2.2",
     "@types/react": "^17.0.39",
     "@types/semver": "^7.3.5",
@@ -75,5 +78,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "karma": "6",
+    "react": "17"
   }
 }

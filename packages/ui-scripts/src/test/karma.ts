@@ -24,7 +24,7 @@
 import path from 'path'
 import React from 'react'
 import { getPackages, getChangedPackages } from '@instructure/pkg-utils'
-import { getCommand, runCommandsConcurrently } from '@instructure/command-utils'
+import { getCommand, runCommandsConcurrently } from '../utils/command'
 
 export const karma = () => {
   const { OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
@@ -109,6 +109,13 @@ export const karma = () => {
     envVars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
   }
 
+  //runCommandAsync(commandsToRun.cjs.bin, commandsToRun.cjs.args, commandsToRun.cjs.vars, {
+ // const command = getCommand('karma', karmaArgs, envVars)
+ // runCommandSync(command.bin, command.args, command.vars, {
+ //   env: {
+ //       ...process.env
+ //   }
+ // })
   process.exit(
     runCommandsConcurrently({
       karma: getCommand('karma', karmaArgs, envVars)

@@ -144,7 +144,9 @@ function resolveBin(
   modName: any,
   { executable = modName } = {}
 ) {
-     return fs.realpathSync(which.sync(executable))
+    const t = which.sync(executable)
+    debugger
+     return fs.realpathSync(t)
   }
 async function confirm(question: string): Promise<string> {
   return new Promise((resolve, reject) => {

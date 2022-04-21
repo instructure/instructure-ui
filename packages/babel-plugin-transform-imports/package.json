@@ -22,6 +22,15 @@
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^"
+    "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/ui-decorator": "workspace:^",
+    "@instructure/ui-dom-utils": "workspace:^",
+    "@instructure/ui-i18n": "workspace:^",
+    "@instructure/ui-prop-types": "workspace:^",
+    "@instructure/ui-react-utils": "workspace:^",
+    "@instructure/ui-test-locator": "workspace:^",
+    "@instructure/ui-theme-tokens": "workspace:^",
+    "@instructure/ui-themes": "workspace:^",
+    "@instructure/ui-utils": "workspace:^"
   }
 }

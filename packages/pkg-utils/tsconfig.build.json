@@ -9,7 +9,7 @@
   "include": ["lib"],
   "references": [
     {
-      "path": "../command-utils/tsconfig.build.json"
+      "path": "../command-utils"
     }
   ]
 }
