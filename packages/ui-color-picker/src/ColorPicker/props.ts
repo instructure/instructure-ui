@@ -99,6 +99,11 @@ type ColorPickerOwnProps = {
   onChange?: (value: string) => void
 
   /**
+   * Placeholder for the inputfield
+   */
+  placeholderText: string
+
+  /**
    * If set and the hex is invalid, it will display the message after a blur event and remove it after a change event
    *
    * MessageType: Array<{
@@ -156,9 +161,9 @@ type ColorPickerOwnProps = {
 
 type ColorPickerState = {
   hexCode: string
-  isValidHex: boolean
-  contrast?: number
   showHelperErrorMessages: boolean
+  openColorPicker: boolean
+  mixedColor: string
 }
 
 type PropKeys = keyof ColorPickerOwnProps
@@ -187,6 +192,7 @@ const propTypes: PropValidators<PropKeys> = {
   isRequired: PropTypes.bool,
   label: PropTypes.node,
   onChange: PropTypes.func,
+  placeholderText: PropTypes.string,
   renderInvalidColorMessage: PropTypes.func,
   renderIsRequiredMessage: PropTypes.func,
   renderMessages: PropTypes.func,
@@ -203,6 +209,7 @@ const allowedProps: AllowedPropKeys = [
   'isRequired',
   'label',
   'onChange',
+  'placeholderText',
   'renderInvalidColorMessage',
   'renderIsRequiredMessage',
   'renderMessages',

@@ -22,24 +22,25 @@
  * SOFTWARE.
  */
 
-import Color from 'tinycolor2'
+import type { Theme } from '@instructure/ui-themes'
+import { ColorContrastTheme } from '@instructure/shared-types'
 
 /**
- * ---
- * category: utilities
- * ---
- * check the contrast ratio of 2 colors
- * @module contrast
- * @param {String} color1
- * @param {String} color2
- * @returns {Number} color contrast ratio
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const contrast = (color1: string, color2: string): number => {
-  return Color.readability(color1, color2)
+const generateComponentTheme = (theme: Theme): ColorContrastTheme => {
+  const { colors } = theme
+
+  const componentVariables = {
+    successColor: colors.shamrock,
+    failureColor: colors.crimson
+  }
+
+  return {
+    ...componentVariables
+  }
 }
 
-const getContrast2Dec = (color1: string, color2: string): number => {
-  return Math.round(Color.readability(color1, color2) * 100) / 100
-}
-
-export { contrast, getContrast2Dec }
+export default generateComponentTheme

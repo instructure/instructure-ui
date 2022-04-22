@@ -29,6 +29,10 @@
     "@instructure/ui-buttons": "8.20.0",
     "@instructure/ui-icons": "8.20.0",
     "@instructure/ui-tooltip": "8.20.0",
+    "@instructure/ui-text": "8.20.0",
+    "@instructure/ui-menu": "8.20.0",
+    "@instructure/ui-popover": "8.20.0",
+    "@instructure/ui-color-utils": "8.20.0",
     "@instructure/ui-form-field": "7.17.0",
     "@instructure/shared-types": "8.20.0",
     "prop-types": "^15"

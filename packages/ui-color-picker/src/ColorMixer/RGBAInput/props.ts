@@ -48,7 +48,9 @@ type RGBAInputProps = RGBAInputOwnProps &
   WithStyleProps<null, RGBAInputStyle> &
   OtherHTMLAttributes<RGBAInputOwnProps>
 
-type RGBAInputStyle = ComponentStyle<'RGBAInput'>
+type RGBAInputStyle = ComponentStyle<
+  'RGBAInput' | 'rInput' | 'gInput' | 'bInput' | 'aInput'
+>
 const propTypes: PropValidators<PropKeys> = {
   value: PropTypes.object,
   onChange: PropTypes.func

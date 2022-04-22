@@ -21,25 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+export { ColorPicker } from './ColorPicker'
+export { ColorMixer } from './ColorMixer'
+export { ColorPreset } from './ColorPreset'
+export { ColorContrast } from './ColorContrast'
+export { ColorSlider } from './ColorMixer/ColorSlider'
 
-import Color from 'tinycolor2'
-
-/**
- * ---
- * category: utilities
- * ---
- * check the contrast ratio of 2 colors
- * @module contrast
- * @param {String} color1
- * @param {String} color2
- * @returns {Number} color contrast ratio
- */
-const contrast = (color1: string, color2: string): number => {
-  return Color.readability(color1, color2)
-}
-
-const getContrast2Dec = (color1: string, color2: string): number => {
-  return Math.round(Color.readability(color1, color2) * 100) / 100
-}
-
-export { contrast, getContrast2Dec }
+export type { ColorPickerProps } from './ColorPicker/props'
+export type { ColorMixerProps } from './ColorMixer/props'
+export type { ColorPresetProps } from './ColorPreset/props'
+export type { ColorContrastProps } from './ColorContrast/props'

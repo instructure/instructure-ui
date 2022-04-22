@@ -34,8 +34,24 @@ import Color from 'tinycolor2'
  * @param {String} rgb a color string
  * @returns {String} a hex string like `#FF0000`
  */
-function color2hex(rgb: string): string {
+//TODO type
+const color2hex = (rgb: any): string => {
   return Color(rgb).toHexString().toUpperCase()
 }
 
-export { color2hex }
+//TODO type
+const colorTohex8 = (rgb: any): string => {
+  return Color(rgb).toHex8String().toUpperCase()
+}
+
+//TODO type
+const hexToRgb = (rgb: string): any => {
+  return Color(rgb).toRgb()
+}
+
+//TODO type
+const colorToHsva = (color: string): any => {
+  return Color(color).toHsv()
+}
+
+export { color2hex, hexToRgb, colorTohex8, colorToHsva }

@@ -21,5 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { ColorPicker } from './ColorPicker'
-export { ColorMixer } from './ColorMixer'
+import { locator } from '@instructure/ui-test-locator'
+
+import { ColorPreset } from './index'
+
+export const ColorPresetLocator = locator(ColorPreset.selector, {
+  /* custom component query methods go here */
+})

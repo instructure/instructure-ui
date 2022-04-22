@@ -10,7 +10,7 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
+ * The above copyrigfht notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -27,9 +27,12 @@ import React, { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
 import shallowCompare from '../utils/shallowCompare'
 import { ColorPaletteProps, ColorPaletteState } from './props'
-import { RGBType } from '../props'
+import { HSVType } from '../props'
 import generateStyle from './styles'
 
+/**
+@tsProps
+**/
 @withStyle(generateStyle)
 class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   constructor(props: ColorPaletteProps) {
@@ -41,20 +44,22 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   paletteRef: HTMLCanvasElement | null = null
 
   componentDidMount() {
-    this.props.makeStyles?.()
-    this.drawPalette(this.props.baseColor)
+    this.props.makeStyles?.(this.state)
+    this.drawPalette(this.props.hue)
     this.setState({
       colorPosition: this.calcPositionFromColor(this.props.color)
     })
   }
 
   componentDidUpdate(prevProps: ColorPaletteProps) {
-    this.props.makeStyles?.()
-    if (shallowCompare(prevProps.baseColor, this.props.baseColor)) {
-      this.drawPalette(this.props.baseColor)
-      this.props.onChange(
-        this.calcPickedColor(this.state.colorPosition, this.props.baseColor)
-      )
+    this.props.makeStyles?.(this.state)
+    if (prevProps.hue !== this.props.hue) {
+      this.drawPalette(this.props.hue)
+      this.props.onChange({
+        h: this.props.hue,
+        s: this.calcSaturation(this.state.colorPosition.x),
+        v: this.calcLuminance(this.state.colorPosition.y)
+      })
     }
 
     if (
@@ -70,7 +75,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     this.removeEventListeners()
   }
 
-  drawPalette(baseColor: RGBType) {
+  drawPalette(hue: number) {
     const canvasContext = this.paletteRef!.getContext('2d')
 
     const colorGradient = canvasContext!.createLinearGradient(
@@ -80,10 +85,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
       0
     )
     colorGradient.addColorStop(0, 'white')
-    colorGradient.addColorStop(
-      1,
-      `rgb(${baseColor.r},${baseColor.g},${baseColor.b})`
-    )
+    colorGradient.addColorStop(1, `hsl(${hue},100%,50%)`)
 
     canvasContext!.fillStyle = colorGradient
     canvasContext!.fillRect(0, 0, this.props.width, this.props.height)
@@ -101,37 +103,17 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     canvasContext!.fillRect(0, 0, this.props.width, this.props.height)
   }
 
-  calcPickedColor(colorPosition: { x: number; y: number }, baseColor: RGBType) {
-    const { x, y } = colorPosition
-    const { r, g, b } = baseColor
-    const transformedR = Math.round(
-      (r + (255 - r) * ((this.props.width - x) / this.props.width)) *
-        ((this.props.height - y) / this.props.height)
-    )
-    const transformedG = Math.round(
-      (g + (255 - g) * ((this.props.width - x) / this.props.width)) *
-        ((this.props.height - y) / this.props.height)
-    )
-    const transformedB = Math.round(
-      (b + (255 - b) * ((this.props.width - x) / this.props.width)) *
-        ((this.props.height - y) / this.props.height)
-    )
-    return { r: transformedR, g: transformedG, b: transformedB }
-  }
-  pickedColorRGBString() {
-    const { r, g, b } = this.calcPickedColor(
-      this.state.colorPosition,
-      this.props.baseColor
-    )
-    return `rgb(${r},${g},${b})`
-  }
-  calcPositionFromColor(rgb: RGBType) {
-    const sortedList = Object.values(rgb).sort((a, b) => a - b)
-    const max = sortedList[2]
-    const min = sortedList[0]
-    const y = Math.round(((255 - max) / 255) * this.props.height)
-    const x = Math.round(((max - min) / max) * this.props.width)
-    return { x, y }
+  calcSaturation = (position: number) =>
+    Math.round((position / this.props.width) * 100) / 100
+  calcLuminance = (position: number) =>
+    Math.round(((this.props.height - position) / this.props.height) * 100) / 100
+
+  calcPositionFromColor(hsv: HSVType) {
+    const { s, v } = hsv
+    return {
+      x: s * this.props.width,
+      y: this.props.height - v * this.props.height
+    }
   }
 
   handlePaletteMouseDown(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -184,12 +166,12 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     this.setState({
       colorPosition: { x: newXPosition, y: newYPosition }
     })
-    this.props.onChange(
-      this.calcPickedColor(
-        { x: newXPosition, y: newYPosition },
-        this.props.baseColor
-      )
-    )
+
+    this.props.onChange({
+      h: this.props.hue,
+      s: this.calcSaturation(newXPosition),
+      v: this.calcLuminance(newYPosition)
+    })
   }
   handleKeyDown(e: React.KeyboardEvent<HTMLCanvasElement>) {
     e.preventDefault()
@@ -216,16 +198,11 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     this.setState({
       colorPosition: { x: newXPosition, y: newYPosition }
     })
-    this.props.onChange(
-      this.calcPickedColor(
-        { x: newXPosition, y: newYPosition },
-        this.props.baseColor
-      )
-    )
-  }
-
-  handleColorChange(color: RGBType) {
-    this.drawPalette(color)
+    this.props.onChange({
+      h: this.props.hue,
+      s: this.calcSaturation(newXPosition),
+      v: this.calcLuminance(newYPosition)
+    })
   }
 
   render() {

@@ -6,6 +6,42 @@ The `ColorPicker` can be used in color input or full color picker mode.
 In color input mode ( `simpleView` prop set to `true`), it lets the user enter hex codes. It will display the color, validate the hex or check the contrast.
 The component can be either `uncontrolled` or `controlled`. If the `onChange` and `value` props are used, it will behave in a `controlled` manner, otherwise `uncontrolled`.
 
+### Color Input
+
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      selected: "",
+      colors: ['#ffffff', '#0CBF94', '#0C89BF00', '#BF0C6D', '#BF8D0C', '#ff0000', '#576A66', '#35423A', '#35423F']
+    }
+  }
+
+  render() {
+
+
+    return (
+         <ColorPicker
+          label="Color Input"
+          tooltip="This is an example"
+          placeholderText="Enter HEX"
+          simpleView={false}
+        />
+    );
+  }
+}
+
+render(<Example />);
+
+
+```
+
 ### Controlled Color Input
 
 ```js
@@ -19,12 +55,14 @@ class Example extends React.Component {
     super(props);
 
     this.state = {
+      value:"",
       withCheckContrast: false,
       contrastStrength: "mid",
       isStrict: false,
-      contrastAgainst: "#ffffff",
       disabled: false,
       isRequired: false,
+      contrastAgainst: "#ffffff",
+      colors: ['#ffffff', '#0CBF94', '#0C89BF00', '#BF0C6D', '#BF8D0C', '#ff0000', '#576A66', '#35423A', '#35423F']
     };
   }
 
@@ -41,6 +79,9 @@ class Example extends React.Component {
     return (
       <View as="div">
         <ColorPicker
+          onChange={(value)=>this.setState({value})}
+          value={this.state.value}
+          placeholderText="Enter HEX"
           label="Color Input"
           tooltip="This is an example"
           disabled={disabled}
@@ -63,7 +104,7 @@ class Example extends React.Component {
           renderInvalidColorMessage={(hexCode) => [
             {
               type: "error",
-              text: `Not valid hex color. It should be either 3 or 6 character long.`,
+              text: `Not valid hex color. It should be either 3, 6 or 8 character long.`,
             },
           ]}
           renderIsRequiredMessage={() => [
@@ -130,17 +171,13 @@ class Example extends React.Component {
                 <RadioInput label="mid (4.5:1)" value="mid" />
                 <RadioInput label="max (7:1)" value="max" />
               </RadioInputGroup>
-              <ColorPicker
-                width= "200px"
+
+              <ColorPreset
                 label="contrastAgainst"
-                value={contrastAgainst}
-                onChange={(value) => this.setState({ contrastAgainst: value })}
-                renderInvalidColorMessage={() => [
-                  {
-                    type: "error",
-                    text: "It needs to be a valid HEX. Either 3 or 6 characters",
-                  },
-                ]}
+                colors={this.state.colors}
+                selected={this.state.contrastAgainst}
+                onSelect={(contrastAgainst) => this.setState({ contrastAgainst })}
+                onPresetChange={(colors) => this.setState({ colors })}
               />
             </FormFieldGroup>
           )}
@@ -167,44 +204,10 @@ example: true
         renderContrastSuccessMessage:()=>[{type:'success', text:'I am a contrast success message'}],
         renderContrastErrorMessage:()=>[{type:'error', text:'I am a contrast warning message'}]
         }}
-        renderMessages={()=>[{type:'hint', text:'I can display anything, any time'}]}
+        renderMessages={()=>[{type:'hint', text:'I can display anything, at any time'}]}
         renderInvalidColorMessage={()=>[{type:'error', text:'I am an invalid color message'}]}
         renderIsRequiredMessage={()=>[{type:'error', text:'I am a required message'}]}
+        placeholderText="Enter HEX"
     />
 </div>
-```
-
-### Blablabla
-
-```js
----
-render: false
-example: true
----
-class Example extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: { r: 51, g: 99, b: 42, a: 0 },
-
-    }
-  }
-
-  render() {
-
-
-    return (
-      <div>
-        <ColorMixer
-        value={this.state.value}
-        onChange={(value) => this.setState({ value })} />
-      </div>
-    );
-  }
-}
-
-render(<Example />);
-
-
 ```

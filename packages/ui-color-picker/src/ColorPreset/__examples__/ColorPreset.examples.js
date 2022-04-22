@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import Color from 'tinycolor2'
-
-/**
- * ---
- * category: utilities
- * ---
- * check the contrast ratio of 2 colors
- * @module contrast
- * @param {String} color1
- * @param {String} color2
- * @returns {Number} color contrast ratio
- */
-const contrast = (color1: string, color2: string): number => {
-  return Color.readability(color1, color2)
+export default {
+  getComponentProps: (props) => {
+    return {
+      children: 'Hello world'
+    }
+  }
 }
-
-const getContrast2Dec = (color1: string, color2: string): number => {
-  return Math.round(Color.readability(color1, color2) * 100) / 100
-}
-
-export { contrast, getContrast2Dec }

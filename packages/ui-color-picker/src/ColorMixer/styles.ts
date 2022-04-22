@@ -37,8 +37,7 @@ import type { ColorMixerStyle } from './props'
 const generateStyle = (): ColorMixerStyle => {
   return {
     colorMixer: {
-      label: 'colorMixer',
-      padding: '20px'
+      label: 'colorMixer'
     }
   }
 }

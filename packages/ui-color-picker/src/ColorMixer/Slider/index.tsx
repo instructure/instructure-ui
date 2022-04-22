@@ -41,11 +41,7 @@ class Slider extends Component<SliderProps> {
 
   componentDidUpdate(prevProps: SliderProps) {
     this.props.makeStyles?.()
-    if (
-      prevProps.color &&
-      this.props.color &&
-      shallowCompare(prevProps.color, this.props.color)
-    ) {
+    if (prevProps.color && this.props.color) {
       this.props.drawSlider(
         this.sliderRef!,
         this.props.width,

@@ -36,7 +36,7 @@ type OpacitySliderOwnProps = {
   width: number
   height: number
   indicatorRadius: number
-  color: RGBType
+  color: RGBAType
 }
 
 type OpacitySliderState = {

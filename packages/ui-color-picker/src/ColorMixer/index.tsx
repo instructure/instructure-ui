@@ -29,9 +29,13 @@ import ColorPalette from './ColorPalette'
 import ColorSlider from './ColorSlider'
 import OpacitySlider from './OpacitySlider'
 import RGBAInput from './RGBAInput'
-import { ColorMixerProps, ColorMixerState, RGBAType, RGBType } from './props'
-import shallowCompare from './utils/shallowCompare'
+import { ColorMixerProps, ColorMixerState, HSVType } from './props'
 import generateStyle from './styles'
+import {
+  colorTohex8,
+  hexToRgb,
+  colorToHsva
+} from '@instructure/ui-color-utils/src/conversions'
 
 /**
 ---
@@ -44,100 +48,88 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   constructor(props: ColorMixerProps) {
     super(props)
     this.state = {
-      baseColor: { r: 255, g: 0, b: 0 },
-      internalColor: { r: 255, g: 0, b: 0 },
-      value: { r: 255, g: 0, b: 0, a: 1 }
+      hue: 0,
+      internalColor: ''
     }
   }
+  static readonly componentId = 'ColorMixer'
 
-  static defaultProps = {
-    width: 272,
-    paletteHeight: 160,
-    sliderHeight: 8,
-    sliderIndicatiorRadius: 6,
-    paletteIndicatiorRadius: 8
-  }
-  width = 272
-  paletteHeight = 160
-  sliderHeight = 8
-  sliderIndicatiorRadius = 6
-  paletteIndicatiorRadius = 8
+  private width = 272
+  private paletteHeight = 160
+  private sliderHeight = 8
+  private sliderIndicatiorRadius = 6
+  private paletteIndicatiorRadius = 8
 
   componentDidMount() {
-    this.props.makeStyles?.(this.state)
-    this.setState({ baseColor: this.calcBaseColor(this.props.value) })
+    this.props.makeStyles?.()
+    this.setState({ hue: colorToHsva(this.props.value).h })
   }
 
   componentDidUpdate(prevProps: ColorMixerProps) {
-    this.props.makeStyles?.(this.state)
+    this.props.makeStyles?.()
+
     if (
-      shallowCompare(prevProps.value, this.props.value) &&
-      shallowCompare(this.state.internalColor, this.props.value)
+      prevProps.value !== this.props.value &&
+      this.state.internalColor !== this.props.value
     ) {
       this.setState({
-        value: this.props.value,
-        internalColor: this.props.value,
-        baseColor: this.calcBaseColor(this.props.value)
+        internalColor: colorTohex8(this.props.value),
+        hue: colorToHsva(this.props.value).h
       })
     }
   }
 
-  calcBaseColor(rgba: RGBAType) {
-    const { a, ...rgb } = rgba
-    const { r, g, b } = rgb
-
-    if (r === g && g === b) {
-      return { r: 255, g: 0, b: 0 }
-    }
-
-    const sortedList = Object.values(rgb).sort((a, b) => a - b)
-    const calcTranslatedValue = (value: number) =>
-      (255 * (value - sortedList[0])) / (sortedList[2] - sortedList[0])
-
-    return {
-      r: calcTranslatedValue(r),
-      g: calcTranslatedValue(g),
-      b: calcTranslatedValue(b)
-    }
-  }
-  internalOnChange(color: RGBType) {
-    this.setState({ internalColor: color })
-    this.props.onChange({ ...color, a: this.props.value.a })
+  internalOnChange(color: HSVType) {
+    const hexColor = colorTohex8({ ...color, a: hexToRgb(this.props.value).a })
+    this.setState({ internalColor: hexColor })
+    this.props.onChange(hexColor)
   }
   onOpacityChange = (opacity: number) => {
-    this.props.onChange({ ...this.props.value, a: opacity })
+    this.props.onChange(
+      colorTohex8({ ...hexToRgb(this.props.value), a: opacity / 100 })
+    )
   }
   render() {
-    const { a, ...rgb } = this.props.value
+    const { a, ...rgb } = hexToRgb(this.props.value)
+
     return (
       <div css={this.props.styles?.colorMixer}>
         <ColorPalette
-          width={this.props.width!}
+          width={this.width}
           height={this.paletteHeight}
           indicatorRadius={this.paletteIndicatiorRadius}
-          baseColor={this.state.baseColor}
-          color={rgb}
-          internalColor={this.state.internalColor}
-          onChange={(color: RGBType) => this.internalOnChange(color)}
+          hue={this.state.hue}
+          color={{
+            ...colorToHsva(this.props.value),
+            h: this.state.hue
+          }}
+          internalColor={{
+            ...colorToHsva(this.state.internalColor),
+            h: this.state.hue
+          }}
+          onChange={(color: HSVType) => this.internalOnChange(color)}
         />
         <ColorSlider
-          width={this.props.width!}
+          width={this.width}
           height={this.sliderHeight}
           indicatorRadius={this.sliderIndicatiorRadius}
-          value={this.state.baseColor}
-          onChange={(baseColor: RGBType) => {
-            this.setState({ baseColor })
+          value={this.state.hue}
+          onChange={(hue: number) => {
+            this.setState({ hue })
           }}
         />
         <OpacitySlider
-          width={this.props.width!}
+          width={this.width}
           height={this.sliderHeight}
           indicatorRadius={this.sliderIndicatiorRadius}
           color={rgb}
-          value={this.props.value.a}
+          value={a}
           onChange={this.onOpacityChange}
         ></OpacitySlider>
-        <RGBAInput value={this.props.value} onChange={this.props.onChange} />
+        <RGBAInput
+          value={hexToRgb(this.props.value)}
+          onChange={(color) => this.props.onChange(colorTohex8(color))}
+        />
       </div>
     )
   }

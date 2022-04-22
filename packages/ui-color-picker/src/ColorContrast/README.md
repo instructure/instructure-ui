@@ -1,0 +1,101 @@
+---
+describes: ColorContrast
+---
+
+A component for displaying `ColorContrast` between two colors. It will perform checks according to the WCAG 2.1 standard, determinig if a given contrast ratio is acceptable for `normal` `large` or `graphics` texts. `normal` needs to be `4.5`, the other two `3`
+
+### Color Contrast
+
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      selected: "",
+      colors: ['#ffffff', '#0CBF94', '#0C89BF00', '#BF0C6D', '#BF8D0C', '#ff0000', '#576A66', '#35423A', '#35423F']
+    }
+  }
+
+  render() {
+
+
+    return (
+        <ColorContrast
+          firstColor="#FF0000"
+          secondColor="#FFFF00"
+          label= "Color Contrast Ratio"
+          successLabel= "PASS"
+          failureLabel= "FAIL"
+          normalTextLabel= "Normal text"
+          largeTextLabel="Large text"
+          graphicsTextLabel="Graphics text"
+          firstColorLabel="Background"
+          secondColorLabel="Foreground"
+      />
+    );
+  }
+}
+
+render(<Example />);
+```
+
+### In-line Color setting
+
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedForeGround: "#0CBF94",
+      selectedBackGround: "#35423A"
+    }
+  }
+
+  render() {
+
+
+    return (
+      <div>
+        <ColorPreset
+        label="Background"
+        colors={ ['#ffffff', '#0CBF94', '#0C89BF00', '#BF0C6D', '#BF8D0C', '#ff0000', '#576A66', '#35423A', '#35423F']}
+        selected={this.state.selectedBackGround}
+        onSelect={(selectedBackGround) => this.setState({ selectedBackGround })}
+      />
+      <ColorPreset
+        label="Foreground"
+        colors={ ['#ffffff', '#0CBF94', '#0C89BF00', '#BF0C6D', '#BF8D0C', '#ff0000', '#576A66', '#35423A', '#35423F']}
+        selected={this.state.selectedForeGround}
+        onSelect={(selectedForeGround) => this.setState({ selectedForeGround })}
+      />
+      <hr style={{width:"272px", marginLeft:0}}/>
+       <ColorContrast
+          withoutColorpreview
+          firstColor={this.state.selectedBackGround}
+          secondColor={this.state.selectedForeGround}
+          label= "Contrast Ratio"
+          successLabel= "PASS"
+          failureLabel= "FAIL"
+          normalTextLabel= "Normal text"
+          largeTextLabel="Large text"
+          graphicsTextLabel="Graphics text"
+      />
+      </div>
+    );
+  }
+}
+
+render(<Example />);
+
+
+```

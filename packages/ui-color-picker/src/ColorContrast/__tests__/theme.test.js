@@ -22,24 +22,26 @@
  * SOFTWARE.
  */
 
-import Color from 'tinycolor2'
+import { expect } from '@instructure/ui-test-utils'
+import { contrast } from '@instructure/ui-color-utils'
 
-/**
- * ---
- * category: utilities
- * ---
- * check the contrast ratio of 2 colors
- * @module contrast
- * @param {String} color1
- * @param {String} color2
- * @returns {Number} color contrast ratio
- */
-const contrast = (color1: string, color2: string): number => {
-  return Color.readability(color1, color2)
-}
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
-const getContrast2Dec = (color1: string, color2: string): number => {
-  return Math.round(Color.readability(color1, color2) * 100) / 100
-}
+describe('ColorPreset.theme', () => {
+  describe('with the default theme', () => {
+    const variables = generateComponentTheme(canvas)
 
-export { contrast, getContrast2Dec }
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(3)
+    })
+  })
+
+  describe('with the high contrast canvas theme', () => {
+    const variables = generateComponentTheme(canvasHighContrast)
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(4.5)
+    })
+  })
+})

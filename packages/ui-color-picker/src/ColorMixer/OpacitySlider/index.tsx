@@ -24,7 +24,7 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import { withStyle, jsx } from '@instructure/emotion'
+import { jsx } from '@instructure/emotion'
 import Slider from '../Slider'
 import { OpacitySliderProps } from './props'
 
@@ -95,14 +95,13 @@ class OpacitySlider extends Component<OpacitySliderProps> {
         width={this.props.width}
         height={this.props.height}
         indicatorRadius={this.props.indicatorRadius}
-        color={this.props.color}
         //@ts-expect-error TODO
         calcSliderPositionFromValue={this.calcSliderPositionFromValue}
         calcSliderPositionFromCursorPosition={
           this.calcSliderPositionFromCursorPosition
         }
         drawSlider={this.drawSlider}
-        value={this.props.value}
+        value={this.props.value * 100}
         onChange={this.onChange}
       />
     )

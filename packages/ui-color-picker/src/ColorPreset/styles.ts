@@ -22,12 +22,6 @@
  * SOFTWARE.
  */
 
-import type {
-  ColorPaletteStyle,
-  ColorPaletteProps,
-  ColorPaletteState
-} from './props'
-
 /**
  * ---
  * private: true
@@ -38,32 +32,44 @@ import type {
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (
-  _componentTheme: any,
-  props: ColorPaletteProps,
-  state: ColorPaletteState
-): ColorPaletteStyle => {
+const generateStyle = () => {
   return {
-    ColorPalette: {
-      label: 'ColorPalette',
-      width: props.width,
-      height: props.height,
-      position: 'relative'
+    colorPreset: {
+      label: 'colorPreset',
+      display: 'flex',
+      flexWrap: 'wrap',
+      width: '250px'
     },
-    indicator: {
-      width: `${2 * props.indicatorRadius}px`,
-      height: `${2 * props.indicatorRadius}px`,
-      borderRadius: `${2 * props.indicatorRadius}px`,
-      background: 'white',
-      position: 'absolute',
+    addNewPresetButton: {
+      width: '38px',
+      height: '38px',
+      margin: '6px'
+    },
+    presetRect: {
+      width: '38px',
+      height: '38px',
+      margin: '6px',
+      borderRadius: '4px',
+      boxSizing: 'border-box',
       borderStyle: 'solid',
-      borderWidth: '2px',
-      borderColor: 'black',
-      top: state?.colorPosition?.y - props.indicatorRadius,
-      left: state?.colorPosition?.x - props.indicatorRadius
+      backgroundImage: `linear-gradient(45deg, #C7CDD1 25%, transparent 25%),
+      linear-gradient(-45deg, #C7CDD1 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #C7CDD1 75%),
+      linear-gradient(-45deg, transparent 75%, #C7CDD1 75%)`,
+      backgroundSize: '8px 8px',
+      backgroundPosition: '0 0, 0 4px, 4px -4px, -4px 0px'
     },
-    canvas: {
-      borderRadius: '5px'
+    selectedIndicator: {
+      width: '20px',
+      height: '20px',
+      borderStyle: 'solid',
+      borderColor: '#2D3B45',
+      borderRadius: '20px',
+      boxSizing: 'border-box',
+      position: 'relative',
+      left: '13px',
+      bottom: '13px',
+      backgroundColor: 'white'
     }
   }
 }

@@ -47,7 +47,6 @@ type SliderOwnProps = {
   value: RGBType | number
   indicatorRadius: number
   height: number
-  color?: RGBAType
 }
 
 type SliderState = {
@@ -74,11 +73,19 @@ const propTypes: PropValidators<PropKeys> = {
   calcSliderPositionFromCursorPosition: PropTypes.func,
   value: PropTypes.object,
   indicatorRadius: PropTypes.number,
-  height: PropTypes.number,
-  color: PropTypes.object
+  height: PropTypes.number
 }
 
-const allowedProps: AllowedPropKeys = ['onChange', 'value', 'width']
+const allowedProps: AllowedPropKeys = [
+  'drawSlider',
+  'onChange',
+  'width',
+  'calcSliderPositionFromValue',
+  'calcSliderPositionFromCursorPosition',
+  'value',
+  'indicatorRadius',
+  'height'
+]
 
 export type { SliderProps, SliderStyle, SliderState }
 export { propTypes, allowedProps }

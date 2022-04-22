@@ -323,6 +323,11 @@ export type ColorPickerTheme = {
   successIconColor: Colors['shamrock']
 }
 
+export type ColorContrastTheme = {
+  successColor: Colors['shamrock']
+  failureColor: Colors['crimson']
+}
+
 export type ToggleFacadeTheme = {
   color: Colors['textLightest']
   background: Colors['backgroundLight']

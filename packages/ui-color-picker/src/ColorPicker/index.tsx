@@ -27,12 +27,21 @@ import { Component } from 'react'
 
 import { TextInput } from '@instructure/ui-text-input'
 import { Tooltip } from '@instructure/ui-tooltip'
+import { IconButton, Button } from '@instructure/ui-buttons'
+import {
+  colorTohex8,
+  hexToRgb
+} from '@instructure/ui-color-utils/src/conversions'
+import { isValid } from '@instructure/ui-color-utils/src/isValid'
+import { getContrast2Dec as getContrast } from '@instructure/ui-color-utils/src/contrast'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import colorContrastCalculator from './colorContrastCalculator'
+import { Popover } from '@instructure/ui-popover'
+import ColorMixer from '../ColorMixer'
+import ColorContrast from '../ColorContrast'
 import {
   IconCheckDarkLine,
   IconWarningLine,
@@ -83,10 +92,10 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     super(props)
 
     this.state = {
-      hexCode: '',
-      isValidHex: false,
-      contrast: undefined,
-      showHelperErrorMessages: false
+      hexCode: '#',
+      showHelperErrorMessages: false,
+      openColorPicker: false,
+      mixedColor: ''
     }
   }
 
@@ -117,41 +126,12 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
 
   componentDidUpdate(prevProps: ColorPickerProps) {
     this.props.makeStyles?.(this.state)
-    const prevContrastAgainst =
-      typeof prevProps.checkContrast === 'object' &&
-      prevProps.checkContrast.contrastAgainst
-        ? prevProps.checkContrast.contrastAgainst
-        : null
-    const contrastAgainst =
-      typeof this.props.checkContrast === 'object' &&
-      this.props.checkContrast.contrastAgainst
-        ? this.props.checkContrast.contrastAgainst
-        : null
-
-    if (
-      contrastAgainst &&
-      ((prevContrastAgainst && contrastAgainst !== prevContrastAgainst) ||
-        !prevContrastAgainst)
-    ) {
-      this.setState({
-        contrast: colorContrastCalculator(contrastAgainst, this.state.hexCode)
-      })
-    } else if (prevContrastAgainst && !contrastAgainst) {
-      this.setState({
-        contrast: colorContrastCalculator('#ffffff', this.state.hexCode)
-      })
-    }
 
     if (this.props.value && prevProps.value !== this.props.value) {
-      const hexCode = this.props.value.slice(1)
-      const isValidHex = this.isValidHex(hexCode)
+      const hexCode = this.props.value
       this.setState({
         showHelperErrorMessages: false,
-        hexCode,
-        isValidHex,
-        contrast: isValidHex
-          ? colorContrastCalculator('#FFFFFF', hexCode)
-          : undefined
+        hexCode
       })
     }
   }
@@ -160,35 +140,14 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     return <div css={this.props.styles?.colorCircle} />
   }
 
-  isValidHex(hex: string) {
-    const reg = /^([0-9a-f]{3}){1,2}$/i
-    return reg.test(hex)
-  }
-
   getminContrast(strength: ContrastStrength) {
     return { min: 3, mid: 4.5, max: 7 }[strength]
   }
 
-  contrastErrorMessage(contrast: number, minContrast: number) {
-    return [
-      {
-        type: 'error',
-        text: `Insufficient contrast ratio: ${contrast}:1.`
-      },
-      {
-        type: 'error',
-        text: `Contrast ratio has to be at least ${minContrast}:1.`
-      },
-      {
-        type: 'error',
-        text: `Please use a darker color.`
-      }
-    ]
-  }
-
   renderMessages() {
-    const { hexCode, isValidHex, contrast, showHelperErrorMessages } =
-      this.state
+    const { hexCode, showHelperErrorMessages } = this.state
+
+    const isValidHex = isValid(hexCode)
     const {
       checkContrast,
       renderMessages,
@@ -196,7 +155,10 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       renderIsRequiredMessage,
       isRequired
     } = this.props
-
+    const contrast =
+      this.props?.checkContrast?.contrastAgainst && isValidHex
+        ? getContrast(this.props.checkContrast.contrastAgainst, hexCode)
+        : undefined
     const contrastStrength = checkContrast?.contrastStrength
       ? checkContrast.contrastStrength
       : 'mid'
@@ -204,7 +166,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     const minContrast = this.getminContrast(contrastStrength)
     let invalidColorMessages: MessageType = []
     let isRequiredMessages: MessageType = []
-    let generalMessaqges: MessageType = []
+    let generalMessages: MessageType = []
     let contrastMessages: MessageType = []
 
     if (checkContrast && contrast) {
@@ -224,20 +186,21 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     }
     if (
       showHelperErrorMessages &&
-      hexCode !== '' &&
+      hexCode !== '#' &&
       !isValidHex &&
       typeof renderInvalidColorMessage === 'function'
     ) {
       invalidColorMessages = renderInvalidColorMessage(hexCode)
     }
-    if (isRequired && showHelperErrorMessages && hexCode === '') {
+
+    if (isRequired && showHelperErrorMessages && hexCode === '#') {
       isRequiredMessages =
         typeof renderIsRequiredMessage === 'function'
           ? renderIsRequiredMessage()
           : [{ type: 'error', text: '*' }]
     }
     if (typeof renderMessages === 'function') {
-      generalMessaqges = renderMessages(
+      generalMessages = renderMessages(
         hexCode,
         isValidHex,
         minContrast,
@@ -247,7 +210,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     return [
       ...invalidColorMessages,
       ...isRequiredMessages,
-      ...generalMessaqges,
+      ...generalMessages,
       ...contrastMessages
     ]
   }
@@ -262,8 +225,10 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   }
   renderAfterInput() {
     const { checkContrast, styles } = this.props
-    const { isValidHex, contrast } = this.state
-    if (checkContrast && isValidHex && contrast) {
+    const { hexCode } = this.state
+
+    if (checkContrast && isValid(hexCode)) {
+      const contrast = getContrast(checkContrast.contrastAgainst!, hexCode)
       const minContrast = this.getminContrast(
         checkContrast.contrastStrength ? checkContrast.contrastStrength : 'mid'
       )
@@ -287,23 +252,19 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   handleOnChange(event: React.ChangeEvent<HTMLInputElement>, value: string) {
     const { onChange } = this.props
     if (
-      value.length > 6 ||
+      value.length > 8 ||
       //TODO remove any
       !acceptedCharactersForHEX.includes((event.nativeEvent as any).data)
     ) {
       return
     }
-    const isValidHex = this.isValidHex(value)
     if (typeof onChange === 'function') {
       onChange(`#${value}`)
     } else {
       this.setState({
         showHelperErrorMessages: false,
-        hexCode: value,
-        isValidHex,
-        contrast: isValidHex
-          ? colorContrastCalculator('#FFFFFF', value)
-          : undefined
+        hexCode: `#${value}`,
+        mixedColor: `#${value}`
       })
     }
   }
@@ -312,22 +273,20 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   handleOnPaste(event: any) {
     const pasted = event.clipboardData.getData('Text')
     const newHex = `${this.state.hexCode}${pasted}`
-    if (this.isValidHex(newHex)) {
+    if (isValid(newHex.slice(1))) {
       this.setState({
-        hexCode: newHex,
-        isValidHex: true,
-        contrast: colorContrastCalculator('#FFFFFF', newHex)
+        hexCode: newHex.slice(1)
       })
       return event.preventDefault()
     }
-    if (this.isValidHex(newHex.slice(1))) {
+
+    if (isValid(newHex)) {
       this.setState({
-        hexCode: newHex.slice(1),
-        isValidHex: true,
-        contrast: colorContrastCalculator('#FFFFFF', newHex)
+        hexCode: newHex
       })
       return event.preventDefault()
     }
+
     event.preventDefault()
   }
 
@@ -351,27 +310,115 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       label
     )
   }
+
+  renderAddNewPresetButton = () => (
+    <Popover
+      renderTrigger={
+        <IconButton screenReaderLabel="Choose color">
+          {this.renderCircle()}
+        </IconButton>
+      }
+      isShowingContent={this.state.openColorPicker}
+      onShowContent={() => {
+        this.setState({ openColorPicker: true })
+      }}
+      onHideContent={() => {
+        this.setState({ openColorPicker: false })
+      }}
+      on="click"
+      screenReaderLabel="Popover Dialog Example"
+      shouldContainFocus
+      shouldReturnFocus
+      shouldCloseOnDocumentClick
+      offsetY="16px"
+      mountNode={() => document.getElementById('main')}
+    >
+      <div style={{ padding: '20px' }}>
+        <ColorMixer
+          value={hexToRgb(`#${this.state.mixedColor}`)}
+          onChange={(newColor: string) =>
+            this.setState({ mixedColor: colorTohex8(newColor).slice(1) })
+          }
+        />
+        <div
+          style={{
+            borderStyle: 'solid',
+            borderWidth: '1px',
+            borderColor: '#C7CDD1' /*Tiara */,
+            margin: '20px 0 20px 0'
+          }}
+        />
+        <ColorContrast
+          firstColor="#FFFFFF"
+          secondColor={`#${this.state.mixedColor}`}
+          label="Color Contrast Ratio"
+          successLabel="PASS"
+          failureLabel="FAIL"
+          normalTextLabel="Normal text"
+          largeTextLabel="Large text"
+          graphicsTextLabel="Graphics text"
+          firstColorLabel="Background"
+          secondColorLabel="Foreground"
+        />
+      </div>
+      <div
+        style={{
+          backgroundColor: '#F5F5F5' /*Porcelain */,
+          display: 'flex',
+          flexDirection: 'row-reverse',
+          padding: '14px'
+        }}
+      >
+        <Button
+          onClick={() => {
+            this.setState({
+              openColorPicker: false,
+              hexCode: `#${this.state.mixedColor}`
+            })
+          }}
+          color="primary"
+          margin="xx-small"
+        >
+          Add
+        </Button>
+        <Button
+          onClick={() => this.setState({ openColorPicker: false })}
+          color="secondary"
+          margin="xx-small"
+        >
+          Close
+        </Button>
+      </div>
+    </Popover>
+  )
   render() {
-    const { isRequired, disabled, width } = this.props
+    const { isRequired, disabled, width, placeholderText } = this.props
 
     return (
-      <TextInput
-        elementRef={this.handleRef}
-        isRequired={isRequired}
-        disabled={disabled}
-        renderLabel={() => this.renderLabel()}
-        display="inline-block"
-        width={width}
-        placeholder="Enter HEX"
-        themeOverride={{ padding: '0 0.75rem 0 0' }}
-        renderAfterInput={this.renderAfterInput()}
-        renderBeforeInput={this.renderBeforeInput()}
-        value={this.state.hexCode}
-        onChange={(event, value) => this.handleOnChange(event, value)}
-        onPaste={(event) => this.handleOnPaste(event)}
-        onBlur={() => this.handleOnBlur()}
-        messages={this.renderMessages()}
-      />
+      <div style={{ display: 'flex' }}>
+        <TextInput
+          elementRef={this.handleRef}
+          isRequired={isRequired}
+          disabled={disabled}
+          renderLabel={() => this.renderLabel()}
+          display="inline-block"
+          width={width}
+          placeholder={placeholderText}
+          themeOverride={{ padding: '0 0.75rem 0 0' }}
+          renderAfterInput={this.renderAfterInput()}
+          renderBeforeInput={this.renderBeforeInput()}
+          value={this.state.hexCode.slice(1)}
+          onChange={(event, value) => this.handleOnChange(event, value)}
+          onPaste={(event) => this.handleOnPaste(event)}
+          onBlur={() => this.handleOnBlur()}
+          messages={this.renderMessages()}
+        />
+        {!this.props.simpleView && (
+          <div style={{ alignSelf: 'flex-end', marginLeft: '8px' }}>
+            {this.renderAddNewPresetButton()}
+          </div>
+        )}
+      </div>
     )
   }
 }

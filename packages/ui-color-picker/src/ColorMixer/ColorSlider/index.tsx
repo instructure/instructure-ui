@@ -57,77 +57,79 @@ class ColorSlider extends Component<ColorSliderProps> {
       : newPosition
   }
 
-  calcSliderPositionFromValue = (color: RGBType) => {
-    const { r, g, b } = color
-    const segmentWidth = this.props.width / 6
-    if (r === 255 && b === 0) {
-      return (segmentWidth * g) / 255
-    }
-    if (g === 255 && b === 0) {
-      return segmentWidth + (segmentWidth * (255 - r)) / 255
-    }
-    if (g === 255 && r === 0) {
-      return 2 * segmentWidth + (segmentWidth * b) / 255
-    }
-    if (b === 255 && r === 0) {
-      return 3 * segmentWidth + (segmentWidth * (255 - g)) / 255
-    }
-    if (b === 255 && g === 0) {
-      return 4 * segmentWidth + (segmentWidth * r) / 255
-    }
-    if (r === 255 && g === 0) {
-      return 5 * segmentWidth + (segmentWidth * (255 - b)) / 255
-    }
-    return
-  }
-
-  calcValueFromSliderPosition = (position: number) => {
-    const ratio = position / this.props.width
-    const relativeRatio = ratio * 6 - Math.floor(ratio * 6)
-    if (ratio < 1 / 6) {
-      return {
-        r: 255,
-        g: Math.round(relativeRatio * 255),
-        b: 0
-      }
-    } else if (ratio < 2 / 6) {
-      return {
-        r: Math.round((1 - relativeRatio) * 255),
-        g: 255,
-        b: 0
-      }
-    } else if (ratio < 0.5) {
-      return {
-        r: 0,
-        g: 255,
-        b: Math.round(relativeRatio * 255)
-      }
-    } else if (ratio < 4 / 6) {
-      return {
-        r: 0,
-        g: Math.round((1 - relativeRatio) * 255),
-        b: 255
-      }
-    } else if (ratio < 5 / 6) {
-      return {
-        r: Math.round(relativeRatio * 255),
-        g: 0,
-        b: 255
-      }
-    } else if (ratio === 1) {
-      return {
-        r: 255,
-        g: 0,
-        b: 1
-      }
-    } else {
-      return {
-        r: 255,
-        g: 0,
-        b: Math.round((1 - relativeRatio) * 255)
-      }
-    }
-  }
+  // calcSliderPositionFromValue = (color: RGBType) => {
+  //   const { r, g, b } = color
+  //   const segmentWidth = this.props.width / 6
+  //   if (r === 255 && b === 0) {
+  //     return (segmentWidth * g) / 255
+  //   }
+  //   if (g === 255 && b === 0) {
+  //     return segmentWidth + (segmentWidth * (255 - r)) / 255
+  //   }
+  //   if (g === 255 && r === 0) {
+  //     return 2 * segmentWidth + (segmentWidth * b) / 255
+  //   }
+  //   if (b === 255 && r === 0) {
+  //     return 3 * segmentWidth + (segmentWidth * (255 - g)) / 255
+  //   }
+  //   if (b === 255 && g === 0) {
+  //     return 4 * segmentWidth + (segmentWidth * r) / 255
+  //   }
+  //   if (r === 255 && g === 0) {
+  //     return 5 * segmentWidth + (segmentWidth * (255 - b)) / 255
+  //   }
+  //   return
+  // }
+  // calcValueFromSliderPosition = (position: number) => {
+  //   const ratio = position / this.props.width
+  //   const relativeRatio = ratio * 6 - Math.floor(ratio * 6)
+  //   if (ratio < 1 / 6) {
+  //     return {
+  //       r: 255,
+  //       g: Math.round(relativeRatio * 255),
+  //       b: 0
+  //     }
+  //   } else if (ratio < 2 / 6) {
+  //     return {
+  //       r: Math.round((1 - relativeRatio) * 255),
+  //       g: 255,
+  //       b: 0
+  //     }
+  //   } else if (ratio < 0.5) {
+  //     return {
+  //       r: 0,
+  //       g: 255,
+  //       b: Math.round(relativeRatio * 255)
+  //     }
+  //   } else if (ratio < 4 / 6) {
+  //     return {
+  //       r: 0,
+  //       g: Math.round((1 - relativeRatio) * 255),
+  //       b: 255
+  //     }
+  //   } else if (ratio < 5 / 6) {
+  //     return {
+  //       r: Math.round(relativeRatio * 255),
+  //       g: 0,
+  //       b: 255
+  //     }
+  //   } else if (ratio === 1) {
+  //     return {
+  //       r: 255,
+  //       g: 0,
+  //       b: 1
+  //     }
+  //   } else {
+  //     return {
+  //       r: 255,
+  //       g: 0,
+  //       b: Math.round((1 - relativeRatio) * 255)
+  //     }
+  //   }
+  // }
+  calcSliderPositionFromValue = (hue: number) => (hue / 360) * this.props.width
+  calcValueFromSliderPosition = (position: number) =>
+    (position / this.props.width) * 360
 
   onChange = (position: number) => {
     this.props.onChange(this.calcValueFromSliderPosition(position))
@@ -151,5 +153,5 @@ class ColorSlider extends Component<ColorSliderProps> {
     )
   }
 }
-
+export { ColorSlider }
 export default ColorSlider

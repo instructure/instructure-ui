@@ -23,6 +23,8 @@
  */
 
 import type { ColorPickerTheme } from '@instructure/shared-types'
+
+import { isValid } from '@instructure/ui-color-utils/src/isValid'
 import type {
   ColorPickerProps,
   ColorPickerState,
@@ -47,7 +49,7 @@ const generateStyle = (
   const { hashMarkColor, errorIconColor, warningIconColor, successIconColor } =
     componentTheme
   const { simpleView, checkContrast } = props
-  const { hexCode, isValidHex } = state
+  const { hexCode } = state
 
   const checkerBoard = {
     backgroundColor: '#ffffff',
@@ -55,7 +57,7 @@ const generateStyle = (
     linear-gradient(45deg, #C7CDD1 25%, transparent 25%), 
     linear-gradient(-45deg, #C7CDD1 25%, transparent 25%), 
     linear-gradient(45deg, transparent 75%, #C7CDD1 75%), 
-    linear-gradient(-45deg, transparent 75%, #C7CDD1 75%)`, //#C7CDD1 -> Tiara
+    linear-gradient(-45deg, transparent 75%, #C7CDD1 75%)`,
     backgroundSize: '8px 8px',
     backgroundPosition: '0 0, 0 4px, 4px -4px, -4px 0px'
   }
@@ -65,14 +67,14 @@ const generateStyle = (
       label: 'colorPicker'
     },
     colorCircle: {
-      backgroundColor: `#${hexCode}`,
+      backgroundColor: hexCode,
       width: '1.5rem',
       height: '1.5rem',
       margin: 'auto',
       border: '1px solid rgba(56, 74, 88, .6)',
       borderRadius: '1.5rem',
       display: 'inline-block',
-      ...(!isValidHex ? checkerBoard : {})
+      ...(!isValid(hexCode) ? checkerBoard : {})
     },
     simpleColorContainer: {
       display: 'flex',

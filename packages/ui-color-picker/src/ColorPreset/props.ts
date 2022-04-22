@@ -29,6 +29,7 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
+import type { RGBAType } from '../ColorMixer/props'
 
 type ContrastStrength = 'min' | 'mid' | 'max'
 type MessageType = Array<{
@@ -36,57 +37,70 @@ type MessageType = Array<{
   text: string
 }>
 
-type RGBType = {
-  r: number
-  g: number
-  b: number
-}
-type HSVType = {
-  h: number
-  s: number
-  v: number
-}
-type RGBAType = {
-  r: number
-  g: number
-  b: number
-  a: number
-}
-type ColorMixerOwnProps = {
-  value: string
-  onChange: (rgba: string) => void
+type ColorPresetOwnProps = {
+  /**
+   * Array of HEX strings which are the preset colors. Supports 8 character HEX (with alpha)
+   */
+  colors: Array<string>
+  /**
+   * Label text of the component
+   */
+  label?: string
+  /**
+   * If set, color picking function is added to the component.
+   * The function gets called when a color gets added or removed from the preset list.
+   * It will be called with the new list of colors
+   */
+  onPresetChange?: (colors: ColorPresetOwnProps['colors']) => void
+  /**
+   * The function gets called when a color gets selected
+   */
+  onSelect: (selected: ColorPresetOwnProps['selected']) => void
+  /**
+   * The currently selected HEX string
+   */
+  selected: string | null
 }
 
-type ColorMixerState = {
-  hue: number
-  internalColor: string
+type ColorPresetState = {
+  openEditor: boolean | string
+  openAddNew: boolean
+  newColor: RGBAType
 }
 
-type PropKeys = keyof ColorMixerOwnProps
+type PropKeys = keyof ColorPresetOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ColorMixerProps = ColorMixerOwnProps &
-  WithStyleProps<null, ColorMixerStyle> &
-  OtherHTMLAttributes<ColorMixerOwnProps>
+type ColorPresetProps = ColorPresetOwnProps &
+  WithStyleProps<null, ColorPresetStyle> &
+  OtherHTMLAttributes<ColorPresetOwnProps>
 
-type ColorMixerStyle = ComponentStyle<'colorMixer'>
+type ColorPresetStyle = ComponentStyle<
+  'colorPreset' | 'addNewPresetButton' | 'presetRect' | 'selectedIndicator'
+>
 
 const propTypes: PropValidators<PropKeys> = {
-  value: PropTypes.object,
-  onChange: PropTypes.func
+  colors: PropTypes.array.isRequired,
+  label: PropTypes.string,
+  onPresetChange: PropTypes.func,
+  onSelect: PropTypes.func.isRequired,
+  selected: PropTypes.string.isRequired
 }
 
-const allowedProps: AllowedPropKeys = ['onChange', 'value']
+const allowedProps: AllowedPropKeys = [
+  'colors',
+  'label',
+  'onPresetChange',
+  'onSelect',
+  'selected'
+]
 
 export type {
-  ColorMixerProps,
-  ColorMixerStyle,
-  ColorMixerState,
+  ColorPresetProps,
+  ColorPresetStyle,
+  ColorPresetState,
   ContrastStrength,
-  MessageType,
-  RGBType,
-  RGBAType,
-  HSVType
+  MessageType
 }
 export { propTypes, allowedProps }

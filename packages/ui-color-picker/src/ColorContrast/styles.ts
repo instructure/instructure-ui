@@ -22,12 +22,7 @@
  * SOFTWARE.
  */
 
-import type {
-  ColorPaletteStyle,
-  ColorPaletteProps,
-  ColorPaletteState
-} from './props'
-
+import type { ColorContrastTheme } from '@instructure/shared-types'
 /**
  * ---
  * private: true
@@ -38,32 +33,48 @@ import type {
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (
-  _componentTheme: any,
-  props: ColorPaletteProps,
-  state: ColorPaletteState
-): ColorPaletteStyle => {
+const generateStyle = (componentTheme: ColorContrastTheme) => {
+  const statusIndicatorStyle = (pass: boolean) => ({
+    float: 'right',
+    textTransform: 'uppercase',
+    borderStyle: 'solid',
+    borderRadius: '15px',
+    borderColor: pass
+      ? componentTheme.successColor
+      : componentTheme.failureColor,
+    color: pass ? componentTheme.successColor : componentTheme.failureColor,
+    width: '54px',
+    textAlign: 'center'
+  })
+
+  const statusDescriptionStyle = (pass: boolean) => ({
+    flex: 1,
+    color: pass ? componentTheme.successColor : componentTheme.failureColor
+  })
+
   return {
-    ColorPalette: {
-      label: 'ColorPalette',
-      width: props.width,
-      height: props.height,
-      position: 'relative'
+    colorContrast: {
+      label: 'colorContrast',
+      width: '272px'
     },
-    indicator: {
-      width: `${2 * props.indicatorRadius}px`,
-      height: `${2 * props.indicatorRadius}px`,
-      borderRadius: `${2 * props.indicatorRadius}px`,
-      background: 'white',
-      position: 'absolute',
+    statusWrapper: {
+      width: '272px',
+      display: 'flex',
+      marginBottom: '5px'
+    },
+    successIndicator: statusIndicatorStyle(true),
+    failureIndicator: statusIndicatorStyle(false),
+    successDescription: statusDescriptionStyle(true),
+    failureDescription: statusDescriptionStyle(false),
+    colorIndicator: {
+      width: '24px',
+      height: '24px',
       borderStyle: 'solid',
-      borderWidth: '2px',
-      borderColor: 'black',
-      top: state?.colorPosition?.y - props.indicatorRadius,
-      left: state?.colorPosition?.x - props.indicatorRadius
-    },
-    canvas: {
-      borderRadius: '5px'
+      borderRadius: '24px',
+      boxSizing: 'border-box',
+      borderColor: '#384A5899',
+      borderWidth: '1px',
+      marginRight: '9px'
     }
   }
 }

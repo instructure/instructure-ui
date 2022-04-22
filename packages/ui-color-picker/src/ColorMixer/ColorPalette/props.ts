@@ -29,16 +29,16 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
-import type { RGBType } from '../props'
+import type { HSVType } from '../props'
 
 type ColorPaletteOwnProps = {
-  baseColor: RGBType
-  color: RGBType
-  internalColor: RGBType
+  hue: number
+  color: HSVType
+  internalColor: HSVType
   width: number
   height: number
   indicatorRadius: number
-  onChange: (rgb: RGBType) => void
+  onChange: (rgb: HSVType) => void
 }
 
 type ColorPaletteState = {
@@ -55,7 +55,7 @@ type ColorPaletteProps = ColorPaletteOwnProps &
 
 type ColorPaletteStyle = ComponentStyle<'ColorPalette' | 'indicator' | 'canvas'>
 const propTypes: PropValidators<PropKeys> = {
-  baseColor: PropTypes.object,
+  hue: PropTypes.number,
   color: PropTypes.object,
   internalColor: PropTypes.object,
   width: PropTypes.number,
@@ -65,7 +65,7 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
-  'baseColor',
+  'hue',
   'color',
   'internalColor',
   'width',

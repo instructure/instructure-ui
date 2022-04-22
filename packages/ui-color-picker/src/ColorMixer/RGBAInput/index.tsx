@@ -67,54 +67,40 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
       return
     }
   }
-  rgbToHex(rgb: RGBType) {
-    const { r, g, b } = rgb
-    return [r, g, b]
-      .map((x) => {
-        const hex = x.toString(16)
-        return hex.length === 1 ? '0' + hex : hex
-      })
-      .join('')
-  }
-  isValidHex(hex: string) {
-    const reg = /^([0-9a-f]{3}){1,2}$/i
-    return reg.test(hex)
-  }
+
   render() {
     return (
       <div css={this.props?.styles?.RGBAInput}>
-        <FormFieldGroup
-          description="RGBA"
-          layout="columns"
-          vAlign="top"
-          width="500px"
-        >
+        <span css={this.props?.styles?.rInput}>
           <TextInput
             value={`${this.state.value.r}`}
             onChange={(e) => this.handleChange('r', e)}
-            width="54px"
             renderLabel=""
           />
+        </span>
+        <span css={this.props?.styles?.gInput}>
           <TextInput
             value={`${this.state.value.g}`}
             onChange={(e) => this.handleChange('g', e)}
-            width="54px"
             renderLabel=""
           />
+        </span>
+
+        <span css={this.props?.styles?.bInput}>
           <TextInput
             value={`${this.state.value.b}`}
             onChange={(e) => this.handleChange('b', e)}
-            width="54px"
             renderLabel=""
           />
+        </span>
+        <span css={this.props?.styles?.aInput}>
           <TextInput
-            value={`${this.state.value.a}`}
+            value={`${Math.round(this.state.value.a * 100)}`}
             onChange={(e) => this.handleChange('a', e)}
             renderAfterInput="%"
-            width="70px"
             renderLabel=""
           />
-        </FormFieldGroup>
+        </span>
       </div>
     )
   }

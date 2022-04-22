@@ -31,17 +31,17 @@ import type {
 import type { RGBAType, RGBType } from '../props'
 
 type ColorSliderOwnProps = {
-  value: RGBType
-  onChange: (rgba: RGBType) => void
+  value: number
+  onChange: (hue: number) => void
   width: number
   height: number
   indicatorRadius: number
 }
 
 type ColorSliderState = {
-  baseColor: RGBType
+  baseColor: number
   internalColor: RGBType
-  value: RGBAType
+  value: number
 }
 
 type PropKeys = keyof ColorSliderOwnProps

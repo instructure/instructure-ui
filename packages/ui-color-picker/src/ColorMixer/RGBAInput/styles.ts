@@ -38,7 +38,23 @@ const generateStyle = (): RGBAInputStyle => {
   return {
     RGBAInput: {
       label: 'RGBAInput',
-      marginTop: '20px'
+      marginTop: '20px',
+      display: 'flex'
+    },
+    rInput: {
+      marginRight: '10px',
+      width: '53px'
+    },
+    gInput: {
+      marginRight: '10px',
+      width: '53px'
+    },
+    bInput: {
+      marginRight: '10px',
+      width: '53px'
+    },
+    aInput: {
+      width: '78px'
     }
   }
 }
