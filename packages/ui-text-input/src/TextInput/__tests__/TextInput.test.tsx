@@ -27,6 +27,20 @@ import { expect, mount, stub, within, find } from '@instructure/ui-test-utils'
 
 import { TextInput } from '../index'
 
+const contentBeforeSVG = (
+  <svg height="24" width="24">
+    <title>Content before</title>
+    <circle cx="50" cy="50" r="40" />
+  </svg>
+)
+
+const contentAfterSVG = (
+  <svg height="24" width="24">
+    <title>Content after</title>
+    <circle cx="50" cy="50" r="40" />
+  </svg>
+)
+
 describe('<TextInput/>', async () => {
   it('should include a label', async () => {
     await mount(<TextInput renderLabel="Name" />)
@@ -64,20 +78,6 @@ describe('<TextInput/>', async () => {
   })
 
   it('should prepend and append content', async () => {
-    const contentBeforeSVG = (
-      <svg height="24" width="24">
-        <title>Content before</title>
-        <circle cx="50" cy="50" r="40" />
-      </svg>
-    )
-
-    const contentAfterSVG = (
-      <svg height="24" width="24">
-        <title>Content after</title>
-        <circle cx="50" cy="50" r="40" />
-      </svg>
-    )
-
     const subject = await mount(
       <TextInput
         renderLabel="Name"
@@ -97,6 +97,48 @@ describe('<TextInput/>', async () => {
 
     const allContent = await textInput.findAll('svg')
     expect(allContent.length).to.equal(2)
+  })
+
+  it('should have no padding on empty before/after content', async () => {
+    const subject = await mount(
+      <TextInput
+        renderLabel="Name"
+        renderBeforeInput={<span id="before"></span>}
+        renderAfterInput={<span id="after"></span>}
+      />
+    )
+
+    const textInput = within(subject.getDOMNode())
+    let contentBefore = await textInput.find('[class$=__beforeElement]')
+    let contentAfter = await textInput.find('[class$=__afterElement]')
+
+    let contentBeforePadding = getComputedStyle(
+      contentBefore.getDOMNode()
+    ).paddingInlineStart
+    let contentAfterPadding = getComputedStyle(
+      contentAfter.getDOMNode()
+    ).paddingInlineEnd
+
+    expect(contentBeforePadding).to.equal('0px')
+    expect(contentAfterPadding).to.equal('0px')
+
+    await subject.setProps({
+      renderBeforeInput: () => contentBeforeSVG,
+      renderAfterInput: () => contentAfterSVG
+    })
+
+    contentBefore = await textInput.find('[class$=__beforeElement]')
+    contentAfter = await textInput.find('[class$=__afterElement]')
+
+    contentBeforePadding = getComputedStyle(
+      contentBefore.getDOMNode()
+    ).paddingInlineStart
+    contentAfterPadding = getComputedStyle(
+      contentAfter.getDOMNode()
+    ).paddingInlineEnd
+
+    expect(contentBeforePadding).to.equal('12px')
+    expect(contentAfterPadding).to.equal('12px')
   })
 
   it('should provide a value getter', async () => {
