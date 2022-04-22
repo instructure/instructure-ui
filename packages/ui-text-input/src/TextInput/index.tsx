@@ -75,7 +75,11 @@ class TextInput extends Component<TextInputProps, TextInputState> {
 
   constructor(props: TextInputProps) {
     super(props)
-    this.state = { hasFocus: false }
+    this.state = {
+      hasFocus: false,
+      beforeElementHasWidth: undefined,
+      afterElementHasWidth: undefined
+    }
     this._defaultId = props.deterministicId!()
     this._messagesId = props.deterministicId!('TextInput-messages')
   }
@@ -83,8 +87,12 @@ class TextInput extends Component<TextInputProps, TextInputState> {
   ref: Element | null = null
 
   private _input: HTMLInputElement | null = null
-  private _defaultId: string
-  private _messagesId: string
+  private _beforeElement: HTMLSpanElement | null = null
+  private _afterElement: HTMLSpanElement | null = null
+
+  private readonly _defaultId: string
+  private readonly _messagesId: string
+
   private _focusListener: { remove(): void } | null = null
 
   handleRef = (el: Element | null) => {
@@ -96,15 +104,22 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       elementRef(el)
     }
   }
+
   componentDidMount() {
-    this.props.makeStyles?.(this.makeStyleProps())
     if (this._input) {
       this._focusListener = addEventListener(
         this._input,
         'focus',
         this.handleFocus
       )
+
+      this.setState({
+        beforeElementHasWidth: this.getElementHasWidth(this._beforeElement),
+        afterElementHasWidth: this.getElementHasWidth(this._afterElement)
+      })
     }
+
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   componentWillUnmount() {
@@ -113,16 +128,30 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: TextInputProps) {
+    if (prevProps.renderBeforeInput !== this.props.renderBeforeInput) {
+      this.setState({
+        beforeElementHasWidth: this.getElementHasWidth(this._beforeElement)
+      })
+    }
+    if (prevProps.renderAfterInput !== this.props.renderAfterInput) {
+      this.setState({
+        afterElementHasWidth: this.getElementHasWidth(this._afterElement)
+      })
+    }
+
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
   makeStyleProps = (): TextInputStyleProps => {
     const { interaction } = this
+    const { hasFocus, beforeElementHasWidth, afterElementHasWidth } = this.state
     return {
       disabled: interaction === 'disabled',
       invalid: this.invalid,
-      focused: this.state.hasFocus
+      focused: hasFocus,
+      beforeElementHasWidth,
+      afterElementHasWidth
     }
   }
 
@@ -243,6 +272,22 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     )
   }
 
+  getElementHasWidth(element: HTMLSpanElement | null) {
+    if (!element) {
+      return undefined
+    }
+
+    const computedStyle = getComputedStyle(element)
+    const { width, paddingInlineStart, paddingInlineEnd } = computedStyle
+
+    const elementWidth =
+      parseFloat(width) -
+      parseFloat(paddingInlineStart) -
+      parseFloat(paddingInlineEnd)
+
+    return elementWidth > 0
+  }
+
   render() {
     const {
       width,
@@ -255,11 +300,14 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       styles
     } = this.props
 
-    const hasBeforeElement =
-      renderBeforeInput && callRenderProp(renderBeforeInput)
-    const hasAfterElement = renderAfterInput && callRenderProp(renderAfterInput)
+    const beforeElement: React.ReactNode = renderBeforeInput
+      ? callRenderProp(renderBeforeInput)
+      : null
+    const afterElement: React.ReactNode = renderAfterInput
+      ? callRenderProp(renderAfterInput)
+      : null
 
-    const renderBeforeOrAfter = hasBeforeElement || hasAfterElement
+    const renderBeforeOrAfter = !!beforeElement || !!afterElement
 
     return (
       <FormField
@@ -277,9 +325,14 @@ class TextInput extends Component<TextInputProps, TextInputState> {
           {renderBeforeOrAfter ? (
             <div>
               <span css={styles?.layout}>
-                {hasBeforeElement && (
-                  <span css={styles?.beforeElement}>
-                    {callRenderProp(renderBeforeInput)}
+                {beforeElement && (
+                  <span
+                    css={styles?.beforeElement}
+                    ref={(e) => {
+                      this._beforeElement = e
+                    }}
+                  >
+                    {beforeElement}
                   </span>
                 )}
                 <span css={styles?.innerWrapper}>
@@ -289,9 +342,14 @@ class TextInput extends Component<TextInputProps, TextInputState> {
                   */}
                   <span css={styles?.inputLayout}>
                     <span css={styles?.innerWrapper}>{this.renderInput()}</span>
-                    {hasAfterElement && (
-                      <span css={styles?.afterElement}>
-                        {callRenderProp(renderAfterInput)}
+                    {afterElement && (
+                      <span
+                        css={styles?.afterElement}
+                        ref={(e) => {
+                          this._afterElement = e
+                        }}
+                      >
+                        {afterElement}
                       </span>
                     )}
                   </span>

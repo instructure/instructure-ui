@@ -45,7 +45,13 @@ const generateStyle = (
   state: TextInputStyleProps
 ): TextInputStyle => {
   const { size, textAlign, shouldNotWrap } = props
-  const { disabled, invalid, focused } = state
+  const {
+    disabled,
+    invalid,
+    focused,
+    beforeElementHasWidth,
+    afterElementHasWidth
+  } = state
 
   const sizeVariants = {
     small: {
@@ -147,7 +153,6 @@ const generateStyle = (
 
   const flexItemBase = {
     ...viewBase,
-    minWidth: '0.0625rem',
     flexShrink: 0
   }
 
@@ -194,11 +199,17 @@ const generateStyle = (
     beforeElement: {
       label: 'textInput__beforeElement',
       ...flexItemBase,
-      paddingInlineStart: componentTheme.padding
+      paddingInlineStart: componentTheme.padding,
+      // we only override the padding once the width is calculated,
+      // it needs the padding on render
+      ...(beforeElementHasWidth === false && {
+        paddingInlineStart: 0
+      })
     },
     innerWrapper: {
       label: 'textInput__innerWrapper',
       ...flexItemBase,
+      minWidth: '0.0625rem',
       flexShrink: 1,
       flexGrow: 1
     },
@@ -209,7 +220,12 @@ const generateStyle = (
     afterElement: {
       label: 'textInput__afterElement',
       ...flexItemBase,
-      paddingInlineEnd: componentTheme.padding
+      paddingInlineEnd: componentTheme.padding,
+      // we only override the padding once the width is calculated,
+      // it needs the padding on render
+      ...(afterElementHasWidth === false && {
+        paddingInlineEnd: 0
+      })
     }
   }
 }
