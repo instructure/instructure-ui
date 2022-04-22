@@ -99,9 +99,19 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
     config.set({
       basePath: '',
 
-      // The default has some problems inside a monorepo, but specifying this manually
-      // seems to pull in all karma plugins across disparate node_modules/ dirs
-      plugins: ['karma-*'],
+      plugins: [
+          require('karma-webpack'),
+          // TODO: something is wrong with karma-cli
+       //   require('karma-cli'),
+          require('karma-mocha'),
+          require('karma-viewport'),
+         require('karma-mocha-reporter'),
+          require('karma-chrome-launcher'),
+          require('karma-safari-launcher'),
+          require('karma-firefox-launcher'),
+          require('karma-sourcemap-loader'),
+          require('karma-coverage-istanbul-reporter')
+      ],
 
       frameworks: ['mocha', 'viewport', 'webpack'],
 

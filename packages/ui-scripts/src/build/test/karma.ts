@@ -109,6 +109,13 @@ export const karma = () => {
     envVars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
   }
 
+  //runCommandAsync(commandsToRun.cjs.bin, commandsToRun.cjs.args, commandsToRun.cjs.vars, {
+ // const command = getCommand('karma', karmaArgs, envVars)
+ // runCommandSync(command.bin, command.args, command.vars, {
+ //   env: {
+ //       ...process.env
+ //   }
+ // })
   process.exit(
     runCommandsConcurrently({
       karma: getCommand('karma', karmaArgs, envVars)

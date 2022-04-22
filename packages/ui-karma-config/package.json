@@ -32,17 +32,16 @@
     "karma-sourcemap-loader": "^0.3",
     "karma-viewport": "^1",
     "karma-webpack": "^5",
-    "process": "^0.11"
-  },
-  "peerDependencies": {
-    "mocha": "^7",
-    "webpack": "^5"
+    "mocha": "7",
+    "process": "^0.11",
+    "webpack": "5"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
     "@instructure/browserslist-config-instui": "workspace:^",
-    "@instructure/ui-react-utils": "workspace:^"
+    "@instructure/ui-react-utils": "workspace:^",
+    "@types/mocha": "^7"
   }
 }

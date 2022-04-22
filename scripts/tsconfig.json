@@ -1,0 +1,8 @@
+{
+  "extends": "../tsconfig.node.json",
+  "compilerOptions": {
+    "declarationDir": "./types",
+    "outDir": "./lib"
+  },
+  "include": ["test", "build", "utils"]
+}
