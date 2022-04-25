@@ -728,7 +728,7 @@ describe('<DateTimeInput />', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
-    const errorMsg = (rawDate?: string) => 'Disabled date selected!'
+    const errorMsg = (_rawDate?: string) => 'Disabled date selected!'
     const checker = (toCheck: string) => {
       return toCheck.includes('2017')
     }
