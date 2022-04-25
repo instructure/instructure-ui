@@ -28,7 +28,7 @@ import type { FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'
 import { I18nPropTypes } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
-import PropTypes, { string } from 'prop-types'
+import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 
@@ -297,7 +297,7 @@ const propTypes: PropValidators<PropKeys> = {
   onBlur: PropTypes.func,
   disabledDates: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.arrayOf(string)
+    PropTypes.arrayOf(PropTypes.string)
   ]),
   disabledDateTimeMessage: PropTypes.oneOfType([
     PropTypes.string,
