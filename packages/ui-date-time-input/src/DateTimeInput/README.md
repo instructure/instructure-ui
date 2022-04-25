@@ -5,13 +5,19 @@ describes: DateTimeInput
 A DateTimeInput component is used to enter a date-time value. It is built as a composition
 of the [DateInput](#DateInput) and [TimeSelect](#TimeSelect) components.
 
-#### Localization
+The properties of DateTimeInput prefaced with _date_ are passed to the underlying [DateInput](#DateInput)
+(e.g. _dateLabel_ is DateInput's _label_), while the properties prefaced
+with _time_ are forwarded to the underlying
+[TimeSelect](#TimeSelect). Others are either shared by both sub-components (e.g. locale), or
+are unique to DateTimeInput (e.g. description).
+
+### Localization
 
 The component is localized via its `locale` and `timezone` parameters. Both are read from `props`, `context` and from the browser's locale in this priority order. `locale` determines the language and format dates and time are displayed in (e.g. month names, AM/PM or 24-hour format) and the beginning of the week (e.g. Monday in Germany, Sunday in the U.S.) in the dropdown calendar.
 
-#### Examples
+### Examples
 
-A DateTimeInput with `columns` layout and a default value:
+#### A DateTimeInput with `columns` layout and a default value:
 
 ```js
 ---
@@ -39,7 +45,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-A required DateInput with `stacked` layout that warns if the value in the past:
+#### A required DateInput with `stacked` layout that warns if the value in the past:
 
 ```js
 ---
@@ -94,7 +100,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-A disabled DateTimeInput:
+#### A disabled DateTimeInput:
 
 ```js
 ---
@@ -115,7 +121,7 @@ render: true
 />
 ```
 
-A DateTimeInput in a different locale and timezone where these are set from the React `context`:
+#### A DateTimeInput in a different locale and timezone where these are set from the React `context`:
 
 ```js
 ---
@@ -147,7 +153,31 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-A `DateTimeInput` with some disabled dates and a custom error message for them:
+#### A `DateTimeInput` with some disabled dates that are supplied via a `string` array:
+
+```js
+---
+example: true
+render: true
+---
+<DateTimeInput
+  description="Pick a date and time"
+  datePlaceholder="Choose a date"
+  dateRenderLabel="Date"
+  timeRenderLabel="Time"
+  invalidDateTimeMessage="Invalid date"
+  disabledDateTimeMessage="Disabled date"
+  prevMonthLabel="Previous month"
+  nextMonthLabel="Next month"
+  defaultValue="2022-04-08T13:30"
+  layout="columns"
+  disabledDates={['2022-04-01T13:30', '2022-04-03T13:30', '2022-04-04T13:30']}
+  locale="en-us"
+  timezone="America/Denver"
+/>
+```
+
+#### A `DateTimeInput` with some disabled dates that are supplied via a `function`:
 
 ```js
 ---
@@ -173,8 +203,8 @@ class Example extends React.Component {
           timeRenderLabel="Time"
           invalidDateTimeMessage={(rawDateValue) => 'Invalid date: ' + rawDateValue}
           disabledDateTimeMessage={(rawDateValue) => 'Disabled date: ' + rawDateValue}
-          prevMonthLabel='Previous month'
-          nextMonthLabel='Next month'
+          prevMonthLabel="Previous month"
+          nextMonthLabel="Next month"
           defaultValue="2022-04-08T13:30"
           layout="columns"
           disabledDates={this.getDisabledDates}
@@ -187,9 +217,3 @@ class Example extends React.Component {
 
 render(<Example />)
 ```
-
-The properties of DateTimeInput prefaced with _date_ are passed to the underlying [DateInput](#DateInput)
-(e.g. _dateLabel_ is DateInput's _label_), while the properties prefaced
-with _time_ are forwarded to the underlying
-[TimeSelect](#TimeSelect). Others are either shared by both sub-components (e.g. locale), or
-are unique to DateTimeInput (e.g. description).

@@ -42,7 +42,7 @@ export default {
       ]
     ],
     interaction: ['enabled', 'disabled'],
-    disabledDates: [undefined, ['2018-01-18T16:00']]
+    disabledDates: [undefined]
   },
   getComponentProps: (props) => {
     const defaultPropsForLayout =

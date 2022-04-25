@@ -686,7 +686,7 @@ describe('<DateTimeInput />', async () => {
     expect(await dateTimeInput.find(':contains(5/1/2017, 1:30 PM)')).to.exist()
   })
 
-  it('should show an error message when setting a disabled date', async () => {
+  it('should show an error message when setting a disabled date array', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
@@ -719,6 +719,47 @@ describe('<DateTimeInput />', async () => {
     await dateInput.keyDown('Enter')
     expect(
       await dateTimeInput.find(':contains(' + errorMsg + ')', {
+        expectEmpty: true
+      })
+    ).to.not.exist()
+  })
+
+  it('should show an error message when setting a disabled date function', async () => {
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+    const errorMsg = (rawDate?: string) => 'Disabled date selected!'
+    const checker = (toCheck: string) => {
+      return toCheck.includes('2017')
+    }
+    await mount(
+      <DateTimeInput
+        description="date time"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        dateRenderLabel="date"
+        timeRenderLabel="time"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        defaultValue={dateTime.toISOString()}
+        disabledDates={checker}
+        disabledDateTimeMessage={errorMsg}
+      />
+    )
+
+    const dateTimeInput = await DateTimeInputLocator.find()
+    const dateLocator = await dateTimeInput.findDateInput()
+
+    const dateInput = await dateLocator.findInput()
+
+    expect(dateInput).to.have.value(dateTime.format('LL'))
+    expect(await dateTimeInput.find(':contains(' + errorMsg() + ')')).to.exist()
+
+    await dateInput.change({ target: { value: 'May 18, 2022' } })
+    await dateInput.keyDown('Enter')
+    expect(
+      await dateTimeInput.find(':contains(' + errorMsg() + ')', {
         expectEmpty: true
       })
     ).to.not.exist()
