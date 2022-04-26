@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.24.0](https://github.com/instructure/instructure-ui/compare/v8.23.0...v8.24.0) (2022-04-26)
+
+### Bug Fixes
+
+- **ui-text-input:** fix empty TextInput before/after elements having padding ([a5786c9](https://github.com/instructure/instructure-ui/commit/a5786c9083448dc1d7d8b5eecac11788c8b26fec))
+
 # [8.23.0](https://github.com/instructure/instructure-ui/compare/v8.22.0...v8.23.0) (2022-04-07)
 
 **Note:** Version bump only for package @instructure/ui-text-input

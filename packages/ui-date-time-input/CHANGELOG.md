@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.24.0](https://github.com/instructure/instructure-ui/compare/v8.23.0...v8.24.0) (2022-04-26)
+
+### Bug Fixes
+
+- **ui-date-time-input:** fix Date input to fill container in `DateTimeInput` ([4069706](https://github.com/instructure/instructure-ui/commit/40697060749bb4770120e822ef2b2466279b1497))
+
+### Features
+
+- **ui-date-time-input:** allow to disable dates in the calendar.
+- **ui-date-time-input:** add `rowSpacing` and `colSpacing` props to DateTimeInput ([5e829fa](https://github.com/instructure/instructure-ui/commit/5e829fae6b005f080497818df8b3fff19365aab3))
+
 # [8.23.0](https://github.com/instructure/instructure-ui/compare/v8.22.0...v8.23.0) (2022-04-07)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input

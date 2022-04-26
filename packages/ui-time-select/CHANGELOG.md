@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.24.0](https://github.com/instructure/instructure-ui/compare/v8.23.0...v8.24.0) (2022-04-26)
+
+### Bug Fixes
+
+- **ui-date-time-input,ui-time-select:** setting non step divisible value works ([36d76fd](https://github.com/instructure/instructure-ui/commit/36d76fd2e7ab9b12e71bc101531e9d6615b674d5))
+
 # [8.23.0](https://github.com/instructure/instructure-ui/compare/v8.22.0...v8.23.0) (2022-04-07)
 
 **Note:** Version bump only for package @instructure/ui-time-select
