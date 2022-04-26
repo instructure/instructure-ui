@@ -1,10 +1,11 @@
 {
-  "extends": "../../tsconfig.build.json",
+  "extends": "../../tsconfig.node.json",
   "compilerOptions": {
     "outDir": "./types",
     "module": "CommonJS",
     "composite": true,
-    "rootDir": "./lib"
+    "rootDir": "./lib",
+    "lib": ["es2016"]
   },
   "include": ["lib"],
   "references": [{ "path": "../ui-babel-preset/tsconfig.build.json" }]

@@ -16,7 +16,7 @@
   "scripts": {
     "prestart": "yarn bootstrap",
     "start": "lerna run start --stream --scope docs-app",
-    "start:watch": "lerna run start:watch --stream --scope docs-app",
+    "start:watch": "yarn workspace docs-app run start:watch",
     "dev": "yarn start:watch",
     "test:patchset": "npm-run-all lint:commit lint:changes test:jest test",
     "pretest:merge": "yarn bootstrap && yarn check",

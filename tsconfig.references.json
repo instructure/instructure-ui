@@ -1,8 +1,9 @@
 {
   "references": [
+    { "path": "./packages/ui-test-sandbox/tsconfig.build.json" },
     { "path": "./packages/canvas-high-contrast-theme/tsconfig.build.json" },
     { "path": "./packages/canvas-theme/tsconfig.build.json" },
-    { "path": "./packages/command-utils"},
+    { "path": "./packages/command-utils" },
     { "path": "./packages/config-loader/tsconfig.build.json" },
     { "path": "./packages/console/tsconfig.build.json" },
     { "path": "./packages/cz-lerna-changelog/tsconfig.build.json" },
@@ -26,7 +27,7 @@
     { "path": "./packages/ui-calendar/tsconfig.build.json" },
     { "path": "./packages/ui-checkbox/tsconfig.build.json" },
     { "path": "./packages/ui-code-editor/tsconfig.build.json" },
-    { "path": "./packages/ui-codemods/tsconfig.build.json" },
+    { "path": "./packages/ui-codemods" },
     { "path": "./packages/ui-color-utils/tsconfig.build.json" },
     { "path": "./packages/ui-date-input/tsconfig.build.json" },
     { "path": "./packages/ui-decorator/tsconfig.build.json" },
@@ -83,7 +84,6 @@
     { "path": "./packages/ui-template-scripts/tsconfig.build.json" },
     { "path": "./packages/ui-test-locator/tsconfig.build.json" },
     { "path": "./packages/ui-test-queries/tsconfig.build.json" },
-    { "path": "./packages/ui-test-sandbox/tsconfig.build.json" },
     { "path": "./packages/ui-test-utils/tsconfig.build.json" },
     { "path": "./packages/ui-testable/tsconfig.build.json" },
     { "path": "./packages/ui-text/tsconfig.build.json" },
