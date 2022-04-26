@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.24.0](https://github.com/instructure/instructure-ui/compare/v8.23.0...v8.24.0) (2022-04-26)
+
+### Bug Fixes
+
+- **ui-text-area:** add missing `ref` to TextArea ([aa898b3](https://github.com/instructure/instructure-ui/commit/aa898b30de4e1049daf15f0fe4a2145d1994a8f4))
+
 # [8.23.0](https://github.com/instructure/instructure-ui/compare/v8.22.0...v8.23.0) (2022-04-07)
 
 **Note:** Version bump only for package @instructure/ui-text-area

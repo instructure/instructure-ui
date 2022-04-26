@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.24.0](https://github.com/instructure/instructure-ui/compare/v8.23.0...v8.24.0) (2022-04-26)
+
+### Bug Fixes
+
+- **ui-date-time-input,ui-time-select:** setting non step divisible value works ([36d76fd](https://github.com/instructure/instructure-ui/commit/36d76fd2e7ab9b12e71bc101531e9d6615b674d5))
+- **ui-date-time-input:** fix Date input to fill container in `DateTimeInput` ([4069706](https://github.com/instructure/instructure-ui/commit/40697060749bb4770120e822ef2b2466279b1497))
+- **ui-text-area:** add missing `ref` to TextArea ([aa898b3](https://github.com/instructure/instructure-ui/commit/aa898b30de4e1049daf15f0fe4a2145d1994a8f4))
+- **ui-text-input:** fix empty TextInput before/after elements having padding ([a5786c9](https://github.com/instructure/instructure-ui/commit/a5786c9083448dc1d7d8b5eecac11788c8b26fec))
+
+### Features
+
+- Docs: Render `Table of Contents` block on docs pages ([a64fbdb](https://github.com/instructure/instructure-ui/commit/a64fbdbe6a2c7eb50450aab15fe54e06459e15f9))
+- **theme-registry:** add `theme-registry` package ([63216ef](https://github.com/instructure/instructure-ui/commit/63216ef58cfa3d1d61f85f1d9784cddffeddad72))
+- **ui-date-time-input:** allow to disable dates in the calendar
+- **ui-date-time-input:** add `rowSpacing` and `colSpacing` props to DateTimeInput ([5e829fa](https://github.com/instructure/instructure-ui/commit/5e829fae6b005f080497818df8b3fff19365aab3))
+- **ui-link:** add `role` and `forceButtonRole` prop to Link component ([11828d0](https://github.com/instructure/instructure-ui/commit/11828d0b32844a522d267e189c8bc52aa928843a))
+
 # [8.23.0](https://github.com/instructure/instructure-ui/compare/v8.22.0...v8.23.0) (2022-04-07)
 
 ### Bug Fixes
