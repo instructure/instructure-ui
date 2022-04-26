@@ -27,9 +27,9 @@
     "@instructure/ui-test-queries": "8.23.0"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/browserslist-config-instui": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
-    "@instructure/ui-react-utils": "workspace:^"
+    "@instructure/ui-react-utils": "8.23.0"
   },
   "peerDependencies": {
     "react": ">=16.8 <=17",

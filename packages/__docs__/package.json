@@ -120,7 +120,7 @@
     "webpack-merge": "^5"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/browserslist-config-instui": "8.23.0",
     "@instructure/config-loader": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-eslint-config": "8.23.0",

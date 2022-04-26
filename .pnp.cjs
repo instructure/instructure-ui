@@ -11052,6 +11052,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/core", "npm:7.17.9"],\
             ["@babel/preset-env", "virtual:e6695cb32dae22d00bacc8073e6fa2608894f628cf98dd1be8acf32f366bee071fde135b1269235799fef6fa28c00face222f87c3dae7a3303a652a34fe1e291#npm:7.16.11"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
+            ["@instructure/cz-lerna-changelog", "workspace:packages/cz-lerna-changelog"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-karma-config", "workspace:packages/ui-karma-config"],\
             ["@instructure/ui-scripts", "virtual:21acb89ba94b9762d388a6d15c779cce8d855a66aacd24b3bb44edf87e7137953f670bf7a03ea1c71ac8b444912f18c86194400023a41f349348968cee281cdf#workspace:packages/ui-scripts"],\
@@ -46134,6 +46135,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/core", "npm:7.17.9"],\
             ["@babel/preset-env", "virtual:e6695cb32dae22d00bacc8073e6fa2608894f628cf98dd1be8acf32f366bee071fde135b1269235799fef6fa28c00face222f87c3dae7a3303a652a34fe1e291#npm:7.16.11"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
+            ["@instructure/cz-lerna-changelog", "workspace:packages/cz-lerna-changelog"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-karma-config", "workspace:packages/ui-karma-config"],\
             ["@instructure/ui-scripts", "virtual:21acb89ba94b9762d388a6d15c779cce8d855a66aacd24b3bb44edf87e7137953f670bf7a03ea1c71ac8b444912f18c86194400023a41f349348968cee281cdf#workspace:packages/ui-scripts"],\

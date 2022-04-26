@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/browserslist-config-instui": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-test-utils": "8.23.0"
   },

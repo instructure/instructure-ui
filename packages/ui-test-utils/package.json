@@ -22,9 +22,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/browserslist-config-instui": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
-    "@instructure/ui-react-utils": "workspace:^",
+    "@instructure/ui-react-utils": "8.23.0",
     "@types/chai": "^4",
     "@types/chai-as-promised": "^7",
     "@types/chai-string": "^1",

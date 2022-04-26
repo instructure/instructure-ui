@@ -22,15 +22,15 @@
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^",
-    "@instructure/ui-decorator": "workspace:^",
-    "@instructure/ui-dom-utils": "workspace:^",
-    "@instructure/ui-i18n": "workspace:^",
-    "@instructure/ui-prop-types": "workspace:^",
-    "@instructure/ui-react-utils": "workspace:^",
-    "@instructure/ui-test-locator": "workspace:^",
-    "@instructure/ui-theme-tokens": "workspace:^",
-    "@instructure/ui-themes": "workspace:^",
-    "@instructure/ui-utils": "workspace:^"
+    "@instructure/browserslist-config-instui": "8.23.0",
+    "@instructure/ui-decorator": "8.23.0",
+    "@instructure/ui-dom-utils": "8.23.0",
+    "@instructure/ui-i18n": "8.23.0",
+    "@instructure/ui-prop-types": "8.23.0",
+    "@instructure/ui-react-utils": "8.23.0",
+    "@instructure/ui-test-locator": "8.23.0",
+    "@instructure/ui-theme-tokens": "8.23.0",
+    "@instructure/ui-themes": "8.23.0",
+    "@instructure/ui-utils": "8.23.0"
   }
 }

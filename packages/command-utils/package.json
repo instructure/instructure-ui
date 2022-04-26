@@ -28,7 +28,7 @@
   },
   "sideEffects": false,
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/browserslist-config-instui": "8.23.0",
     "@types/node": "^17.0.18",
     "@types/which": "^2"
   }

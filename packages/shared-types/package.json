@@ -27,6 +27,6 @@
     "react": "^17.0.0"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^"
+    "@instructure/browserslist-config-instui": "8.23.0"
   }
 }

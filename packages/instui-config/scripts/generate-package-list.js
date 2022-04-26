@@ -26,14 +26,32 @@ const fse = require('fs-extra')
 const path = require('path')
 const { info, error, runCommandSync } = require('@instructure/command-utils')
 
-module.exports = ({ outputDir, name = 'package-list.json' }) => {
-  try {
-    const { stdout } = runCommandSync('lerna', ['list', '--json'], [], {
-      stdio: 'pipe'
-    })
-    const packages = JSON.parse(stdout)
-    const packageList = packages.map((pkg) => pkg.name)
+async function getPackages() {
+  const relativePath = path.relative(process.cwd(), '..')
+  const resolvedPath = path.resolve(relativePath)
 
+  const contents = await fse.readdir(resolvedPath)
+
+  const result = []
+  for (const package of contents) {
+    const packageJsonContents = fse
+      .readFileSync(`${resolvedPath}/${package}/package.json`)
+      .toString()
+    const asJson = JSON.parse(packageJsonContents)
+
+    if ('private' in asJson && asJson.private) {
+      continue
+    }
+
+    result.push(asJson.name)
+  }
+
+  return result
+}
+
+module.exports = async ({ outputDir, name = 'package-list.json' }) => {
+  try {
+    const packageList = await getPackages()
     const outputPath = path.join(outputDir, name)
 
     fse.outputFileSync(outputPath, JSON.stringify(packageList, null, 1))

@@ -46,6 +46,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^"
+    "@instructure/browserslist-config-instui": "8.23.0"
   }
 }

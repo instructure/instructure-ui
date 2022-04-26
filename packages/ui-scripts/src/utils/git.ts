@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { runCommandSync, error, info } from '@instructure/command-utils'
+import { error, info } from '@instructure/command-utils'
+import { runCommandSync } from '../utils/command'
 //@ts-expect-error FIXME: add typings
 import validateMessage from 'validate-commit-msg'
 

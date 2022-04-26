@@ -15,17 +15,17 @@
   "scripts": {
     "clean": "gulp clean && ui-build --clean",
     "prepare-build": "gulp",
-   "build-t": "ui-build __build__ --copy-files --modules es,cjs",
+    "build-t": "ui-build __build__ --copy-files --modules es,cjs",
     "export": "gulp clean && gulp && yarn build:types",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "workspace:^",
+    "@instructure/browserslist-config-instui": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-icons-build": "8.23.0",
-    "@instructure/ui-react-utils": "workspace:^",
+    "@instructure/ui-react-utils": "8.23.0",
     "gulp": "^4.0.2"
   },
   "dependencies": {

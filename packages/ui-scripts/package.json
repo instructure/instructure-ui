@@ -64,7 +64,7 @@
     "yargs": "^16"
   },
   "devDependencies": {
-    "@instructure/ui-react-utils": "workspace:^",
+    "@instructure/ui-react-utils": "8.23.0",
     "@types/babel__core": "^7",
     "@types/git-url-parse": "^9.0.0",
     "@types/karma": "^6",

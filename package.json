@@ -31,7 +31,7 @@
     "lint:fix": "lerna run lint:fix --stream",
     "lint:commit": "ui-scripts --lint-commit",
     "lint:staged": "lint-staged",
-    "update:package:list": "lerna run generate:package:list --stream --scope @instructure/instui-config",
+    "update:package:list": "yarn workspace @instructure/instui-config run generate:package:list",
     "commit:package:list": "git add packages/instui-config/package-lists/**/package-list.json",
     "generate:component": "instui create component",
     "generate:package": "instui create package",
@@ -55,11 +55,10 @@
     "prestart:examples": "yarn bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
     "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
-    "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged ts:check:references",
+    "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged",
     "husky:pre-push": "yarn lint:commit",
     "build-storybook": "lerna run bundle --stream --scope docs-examples",
     "prepare": "husky install",
-    "ts:check": "lerna run ts:check --stream",
     "ts:check:references": "yarn node scripts/checkTSReferences.js",
     "postinstall": "yarn build:node-scripts"
   },
@@ -73,12 +72,13 @@
     "@babel/cli": "^7.17.3",
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
-    "@instructure/browserslist-config-instui": "workspace:^",
-    "@instructure/ui-babel-preset": "workspace:*",
-    "@instructure/ui-karma-config": "workspace:*",
-    "@instructure/ui-scripts": "workspace:*",
-    "@instructure/ui-stylelint-config": "workspace:*",
-    "@instructure/ui-token-scripts": "workspace:*",
+    "@instructure/browserslist-config-instui": "8.23.0",
+    "@instructure/cz-lerna-changelog": "8.23.0",
+    "@instructure/ui-babel-preset": "8.23.0",
+    "@instructure/ui-karma-config": "8.23.0",
+    "@instructure/ui-scripts": "8.23.0",
+    "@instructure/ui-stylelint-config": "8.23.0",
+    "@instructure/ui-token-scripts": "8.23.0",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/karma": "^6",
@@ -149,7 +149,7 @@
       "changelog_url": "https://instructure.design/#CHANGELOG"
     },
     "commitizen": {
-      "path": "./node_modules/@instructure/cz-lerna-changelog"
+      "path": "@instructure/cz-lerna-changelog"
     }
   },
   "lint-staged": {
