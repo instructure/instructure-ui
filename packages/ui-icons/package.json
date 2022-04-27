@@ -15,7 +15,7 @@
   "scripts": {
     "clean": "gulp clean && ui-build --clean",
     "prepare-build": "gulp",
-    "build-t": "ui-build __build__ --copy-files --modules es,cjs",
+    "build": "ui-build __build__ --copy-files --modules es,cjs",
     "export": "gulp clean && gulp && yarn build:types",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"

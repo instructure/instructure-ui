@@ -22,36 +22,37 @@
  * SOFTWARE.
  */
 
-import {  getCommand, runCommandAsync } from '../utils/command'
+import { getCommand, runCommandSync } from '../utils/command'
 
 type ModuleType = ('es' | 'cjs')[]
 
 export const babel = async () => {
-  const {
-    BABEL_ENV,
-    NODE_ENV,
-    DEBUG,
-    OMIT_INSTUI_DEPRECATION_WARNINGS
-  } = process.env
+  const { BABEL_ENV, NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } =
+    process.env
 
   const args = process.argv.slice(2)
 
   // positional: ui-build src --watch
   const firstArg = args[0]
-  const src = firstArg && firstArg.indexOf('--') < 0 ? `${process.cwd()}/${firstArg}`: `${process.cwd()}/src`
-  console.log({ babel_src: src })
+  const src =
+    firstArg && firstArg.indexOf('--') < 0
+      ? `${process.cwd()}/${firstArg}`
+      : `${process.cwd()}/src`
 
   // uncomment the extensions arg after renaming the files from js -> ts happens
-  let babelArgs = ['--extensions', '.ts,.tsx,.js,.jsx', '--ignore', `${src}/__tests__/**,${src}/**/*.test.ts,${src}/**/*.test.tsx,${src}/**/*.test.js`]
+  let babelArgs = [
+    '--extensions',
+    '.ts,.tsx,.js,.jsx',
+    '--ignore',
+    `${src}/__tests__/**,${src}/**/*.test.ts,${src}/**/*.test.tsx,${src}/**/*.test.js`
+  ]
   // }
 
   if (args.includes('--copy-files')) {
     babelArgs.push('--copy-files')
   }
 
-  babelArgs = babelArgs.concat([
-    src,
-  ])
+  babelArgs = babelArgs.concat([src])
 
   let envVars = [
     OMIT_INSTUI_DEPRECATION_WARNINGS
@@ -108,36 +109,45 @@ export const babel = async () => {
       [...babelArgs, '--out-dir', 'es'],
       [...envVars, 'ES_MODULES=1']
     ),
-    cjs:
-      getCommand(
-        'babel',
-        [...babelArgs, '--out-dir', 'lib'],
-        [...envVars, 'TRANSFORM_IMPORTS=1']
-      )
+    cjs: getCommand(
+      'babel',
+      [...babelArgs, '--out-dir', 'lib'],
+      [...envVars, 'TRANSFORM_IMPORTS=1']
+    )
   }
 
   const commandsToRun = modules.reduce(
     (obj, key) => ({ ...obj, [key]: commands[key] }),
     {}
   )
- const procResults = await Promise.all([
-   //@ts-expect-error
-    runCommandAsync(commandsToRun.es.bin, commandsToRun.es.args, commandsToRun.es.vars, {
-    env: {
-      ...process.env,
-      NODE_ENV: 'production',
-      ES_MODULES: 1
+  //@ts-expect-error fix this
+  runCommandSync(
+    commandsToRun.cjs.bin,
+    commandsToRun.cjs.args,
+    commandsToRun.cjs.vars,
+    {
+      env: {
+        ...process.env,
+        ...envVars,
+        NODE_ENV: 'production',
+        ES_MODULES: ''
+        // TRANSFORM_IMPORTS: 1
+      }
     }
-  }),
-  //@ts-expect-error
-  runCommandAsync(commandsToRun.cjs.bin, commandsToRun.cjs.args, commandsToRun.cjs.vars, {
-     env: {
-      ...process.env,
-      NODE_ENV: 'production',
-      ES_MODULES: 0,
-     //   TRANSFORM_IMPORTS: 1
+  )
+
+  //@ts-expect-error fix this
+  runCommandSync(
+    commandsToRun.es.bin,
+    commandsToRun.es.args,
+    commandsToRun.es.vars,
+    {
+      env: {
+        ...process.env,
+        ...envVars,
+        NODE_ENV: 'production',
+        ES_MODULES: 1
+      }
     }
-  })
-])
-  process.exit(procResults.some(res => res.status !== 0) ? 1:0 )
+  )
 }
