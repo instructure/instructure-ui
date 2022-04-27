@@ -29,7 +29,13 @@
     "@instructure/ui-test-locator": "8.23.0",
     "@instructure/ui-test-utils": "8.23.0",
     "@instructure/ui-themes": "8.23.0",
-    "@types/mocha": "^7"
+    "@types/chai": "^4",
+    "@types/chai-as-promised": "^7",
+    "@types/chai-string": "^1",
+    "@types/dirty-chai": "^2",
+    "@types/mocha": "^7",
+    "@types/node": "^17",
+    "@types/sinon-chai": "^3"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",

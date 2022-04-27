@@ -2240,7 +2240,13 @@ __metadata:
     "@instructure/ui-theme-tokens": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     globby: ^11
   languageName: unknown
   linkType: soft
@@ -2250,7 +2256,13 @@ __metadata:
   resolution: "@instructure/browserslist-config-instui@workspace:packages/browserslist-config-instui"
   dependencies:
     "@instructure/browserslist-config-instui": ^8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
   languageName: unknown
   linkType: soft
 
@@ -2263,7 +2275,13 @@ __metadata:
     "@instructure/shared-types": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-theme-tokens": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
   languageName: unknown
   linkType: soft
 
@@ -2276,7 +2294,13 @@ __metadata:
     "@instructure/shared-types": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-theme-tokens": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
   languageName: unknown
   linkType: soft
 
@@ -2285,8 +2309,13 @@ __metadata:
   resolution: "@instructure/command-utils@workspace:packages/command-utils"
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
-    "@types/node": ^17.0.18
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     "@types/which": ^2
     chalk: ^4
     concurrently: ^6
@@ -2301,7 +2330,13 @@ __metadata:
   resolution: "@instructure/config-loader@workspace:packages/config-loader"
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
   languageName: unknown
   linkType: soft
 
@@ -2330,7 +2365,13 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/pkg-utils": 8.23.0
     "@semantic-release/commit-analyzer": ^8
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     chalk: ^4
     cz-customizable: ^6
     inquirer: ^8
@@ -2346,7 +2387,13 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
   languageName: unknown
   linkType: soft
 
@@ -2366,8 +2413,14 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/lodash": ^4.14.171
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     cpy-cli: ^3.1.1
     emotion-theming: ^11
     hoist-non-react-statics: ^3.3.2
@@ -2387,7 +2440,13 @@ __metadata:
     "@instructure/shared-types": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-theme-tokens": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
   languageName: unknown
   linkType: soft
 
@@ -2409,7 +2468,13 @@ __metadata:
     "@instructure/ui-stylelint-config": 8.23.0
     "@instructure/ui-template-scripts": 8.23.0
     "@instructure/ui-webpack-config": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     depcheck: ^1
     eslint: ^7
     react: ^16.8
@@ -2429,7 +2494,13 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/command-utils": 8.23.0
     "@instructure/pkg-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     fs-extra: ^9
     semver: ^7
   languageName: unknown
@@ -2442,7 +2513,13 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/command-utils": 8.23.0
     "@lerna/package": ^4
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     read-pkg-up: ^7
   languageName: unknown
   linkType: soft
@@ -2452,7 +2529,13 @@ __metadata:
   resolution: "@instructure/shared-types@workspace:packages/shared-types"
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^17.0.0
   languageName: unknown
@@ -2471,7 +2554,13 @@ __metadata:
     "@instructure/ui-text": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     html-webpack-plugin: ^4
     react: ^17.0.0
     react-dom: ^17.0.0
@@ -2492,7 +2581,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -2508,7 +2603,13 @@ __metadata:
     "@instructure/console": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
   languageName: unknown
   linkType: soft
 
@@ -2528,7 +2629,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -2551,7 +2658,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -2580,7 +2693,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -2606,7 +2725,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -2621,7 +2746,13 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     axe-core: ^4
   languageName: unknown
   linkType: soft
@@ -2649,7 +2780,13 @@ __metadata:
     "@instructure/babel-plugin-transform-imports": 8.23.0
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     babel-loader: ^8.1.0
     babel-plugin-dynamic-import-node: ^2.3.0
     babel-plugin-istanbul: ^6.0.0
@@ -2680,7 +2817,13 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -2704,7 +2847,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -2731,7 +2880,13 @@ __metadata:
     "@instructure/ui-truncate-text": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -2763,7 +2918,13 @@ __metadata:
     "@instructure/ui-tooltip": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -2786,7 +2947,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -2815,7 +2982,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -2846,7 +3019,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -2872,8 +3051,14 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
     "@types/codemirror": 5.x
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     codemirror: 5.48.4
     prop-types: ^15
     react: ^16.8
@@ -2889,10 +3074,15 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/jscodeshift": ^0.11.3
     "@types/mocha": ^7
-    "@types/node": ^17.0.18
+    "@types/node": ^17
     "@types/prettier": ^2
+    "@types/sinon-chai": ^3
     babel-core: ^7.0.0-bridge.0
     jest: ^24.9.0
     jscodeshift: ^0.13
@@ -2909,7 +3099,13 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     "@types/tinycolor2": ^1.4.2
     react: ^16.8
     react-dom: ^16.8
@@ -2939,7 +3135,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-text-input": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -2969,7 +3171,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-time-select": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -2984,7 +3192,13 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     react: ^16.8
   languageName: unknown
   linkType: soft
@@ -3004,7 +3218,13 @@ __metadata:
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3022,7 +3242,13 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     react: ^16.8
     react-dom: ^16.8
   languageName: unknown
@@ -3054,7 +3280,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3086,7 +3318,13 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3112,7 +3350,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3125,7 +3369,13 @@ __metadata:
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     "@typescript-eslint/eslint-plugin": ^4.22.0
     "@typescript-eslint/parser": ^4.22.0
     eslint: ^7
@@ -3156,7 +3406,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3183,7 +3439,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -3205,7 +3467,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3226,7 +3494,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3252,7 +3526,13 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3276,7 +3556,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3300,7 +3586,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3321,8 +3613,14 @@ __metadata:
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/hoist-non-react-statics": ^3.3.1
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     hoist-non-react-statics: ^3.3.2
     moment-timezone: ^0.5
     prop-types: ^15
@@ -3338,7 +3636,13 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/config-loader": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     del: ^6
     glob: ^7.1.4
     gulp: ^4
@@ -3370,7 +3674,13 @@ __metadata:
     "@instructure/ui-icons-build": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-svg-images": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     gulp: ^4.0.2
     prop-types: ^15
     react: ^16.8
@@ -3394,7 +3704,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3410,7 +3726,13 @@ __metadata:
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-webpack-config": 8.23.0
     "@jsdevtools/coverage-istanbul-loader": 3.0.5
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     buffer: ^6
     choma: ^1
     globby: ^11
@@ -3452,7 +3774,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3477,7 +3805,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3508,7 +3842,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -3533,7 +3873,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3565,7 +3911,13 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3588,7 +3940,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3623,7 +3981,13 @@ __metadata:
     "@instructure/ui-tooltip": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3648,7 +4012,13 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -3674,7 +4044,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3711,8 +4087,14 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
     "@types/no-scroll": ^2
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     no-scroll: ^2.1.0
     prop-types: ^15
     react: ^16.8
@@ -3738,7 +4120,13 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3771,7 +4159,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -3800,7 +4194,13 @@ __metadata:
     "@instructure/ui-truncate-text": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3831,7 +4231,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -3853,7 +4259,13 @@ __metadata:
     "@instructure/ui-prop-types": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3881,7 +4293,13 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3906,7 +4324,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3922,7 +4346,13 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ">= 15.7.0"
     react: ^16.8
     react-dom: ^16.8
@@ -3947,7 +4377,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -3977,7 +4413,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4004,7 +4446,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4026,7 +4474,13 @@ __metadata:
     "@instructure/ui-react-utils": ^8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     hoist-non-react-statics: ^3.3.2
     prop-types: ^15
     react: ^16.8
@@ -4050,7 +4504,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4073,11 +4533,17 @@ __metadata:
     "@lerna/project": ^4
     "@storybook/react": ^6
     "@types/babel__core": ^7
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/git-url-parse": ^9.0.0
     "@types/karma": ^6
     "@types/mocha": ^7
+    "@types/node": ^17
     "@types/react": ^17.0.39
     "@types/semver": ^7.3.5
+    "@types/sinon-chai": ^3
     "@types/which": ^2
     chalk: ^4
     commitizen: ^4
@@ -4142,7 +4608,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4163,7 +4635,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -4190,7 +4668,13 @@ __metadata:
     "@instructure/ui-test-locator": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4216,7 +4700,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4229,7 +4719,13 @@ __metadata:
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     stylelint: ^14
     stylelint-config-standard: ^25
     stylelint-declaration-strict-value: ^1
@@ -4252,7 +4748,13 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4280,7 +4782,13 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4312,7 +4820,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -4339,7 +4853,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4355,7 +4875,13 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@lerna/project": ^4
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     fs-extra: ^9
     lodash.template: ^4.5.0
     yargs: ^16
@@ -4374,7 +4900,13 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-queries": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     react: ^16.8
     react-dom: ^16.8
   languageName: unknown
@@ -4390,7 +4922,13 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-sandbox": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     "@types/sizzle": ^2
     keycode: ^2
     pretty-format: ^27
@@ -4408,8 +4946,14 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
     "@types/sinon": ^10
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4433,7 +4977,7 @@ __metadata:
     "@types/chai-string": ^1
     "@types/dirty-chai": ^2
     "@types/mocha": ^7
-    "@types/node": ^17.0.18
+    "@types/node": ^17
     "@types/sinon-chai": ^3
     chai: ^4
     chai-as-promised: ^7
@@ -4461,7 +5005,13 @@ __metadata:
     "@instructure/ui-dom-utils": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15.6.2
     react: ^16.8
     react-dom: ^16.8
@@ -4489,7 +5039,13 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4516,7 +5072,13 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4537,7 +5099,13 @@ __metadata:
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4555,7 +5123,13 @@ __metadata:
     "@instructure/ui-color-utils": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
   languageName: unknown
   linkType: soft
 
@@ -4571,7 +5145,13 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-theme-tokens": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
   languageName: unknown
   linkType: soft
 
@@ -4592,7 +5172,13 @@ __metadata:
     "@instructure/ui-test-locator": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     moment-timezone: ^0.5.33
     prop-types: ^15
     react: ^16.8
@@ -4626,7 +5212,13 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4644,7 +5236,13 @@ __metadata:
     "@instructure/console": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     fs-extra: ^9.0.0
     lodash.isplainobject: ^4.0.6
     react: ^16.8
@@ -4676,7 +5274,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4705,7 +5309,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4731,7 +5341,13 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     keycode: ^2
     prop-types: ^15
     react: ^16.8
@@ -4758,8 +5374,14 @@ __metadata:
     "@instructure/ui-text": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/escape-html": ^1
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     escape-html: ^1
     prop-types: ^15
     react: ^16.8
@@ -4778,8 +5400,14 @@ __metadata:
     "@instructure/ui-dom-utils": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/json-stable-stringify": ^1.0.1
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     bowser: ^1.9.4
     fast-deep-equal: ^3
     json-stable-stringify: ^1.0.1
@@ -4807,7 +5435,13 @@ __metadata:
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     prop-types: ^15
     react: ^16.8
     react-dom: ^16.8
@@ -4821,7 +5455,13 @@ __metadata:
     "@babel/core": ^7
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     babel-loader: ^8.2.3
     buffer: ^6
     css-loader: ^6
@@ -4913,7 +5553,13 @@ __metadata:
     "@instructure/ui-tree-browser": 8.23.0
     "@instructure/ui-truncate-text": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     jest: ^24.9.0
     react: ^16.8
     react-dom: ^16.8
@@ -4928,7 +5574,13 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     react: ^16.8
     react-dom: ^16.8
   languageName: unknown
@@ -8731,6 +9383,13 @@ __metadata:
   version: 16.11.27
   resolution: "@types/node@npm:16.11.27"
   checksum: 6ed0c8c4d29a549d0cfd607d19edf9a4668fbd39087701d923b4a04cd760564e47ad27f9403968cb9c11ee006f0ea6ab698b2491b4b2d2dec3f4a53d0fc22df7
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^17":
+  version: 17.0.29
+  resolution: "@types/node@npm:17.0.29"
+  checksum: bb9d7bce9d6d3882efd9d63b773b548dce98df4bd57eff8ceaa316aa2f3346e36d3618764cc93da84bbff92005174a35eec3465cde91ee973ef1c351ffa40074
   languageName: node
   linkType: hard
 
@@ -15499,8 +16158,14 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/ui-webpack-config": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/marked": ^4
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     babel-loader: ^8.2.3
     buffer: ^6
     chokidar: ^3
@@ -15551,7 +16216,13 @@ __metadata:
     "@storybook/manager-webpack5": ^6
     "@storybook/react": ^6
     "@storybook/theming": ^6
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     chromatic: ^6
     globby: ^11
     prop-types: ^15
@@ -16771,7 +17442,13 @@ __metadata:
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/pkg-utils": 8.23.0
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/mocha": ^7
+    "@types/node": ^17
+    "@types/sinon-chai": ^3
     eslint: ^7
     eslint-module-utils: ^2
     eslint-plugin-import: ^2
@@ -20965,12 +21642,17 @@ __metadata:
     "@instructure/ui-token-scripts": 8.23.0
     "@types/babel__core": ^7
     "@types/babel__preset-env": ^7
+    "@types/chai": ^4
+    "@types/chai-as-promised": ^7
+    "@types/chai-string": ^1
+    "@types/dirty-chai": ^2
     "@types/karma": ^6
     "@types/mocha": ^7
-    "@types/node": ^17.0.18
+    "@types/node": ^17
     "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.11
     "@types/semver": ^7.3.5
+    "@types/sinon-chai": ^3
     "@types/which": ^2
     chalk: ^4
     commitizen: ^4

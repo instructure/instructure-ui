@@ -2564,7 +2564,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ],\
       [\
         "@types/node",\
-        "npm:17.0.24"\
+        "npm:17.0.29"\
       ],\
       [\
         "@types/node-fetch",\
@@ -10936,12 +10936,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-token-scripts", "workspace:packages/ui-token-scripts"],\
             ["@types/babel__core", "npm:7.1.19"],\
             ["@types/babel__preset-env", "npm:7.9.2"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/karma", "npm:6.3.3"],\
             ["@types/mocha", "npm:7.0.2"],\
-            ["@types/node", "npm:17.0.24"],\
+            ["@types/node", "npm:17.0.29"],\
             ["@types/react", "npm:17.0.44"],\
             ["@types/react-dom", "npm:17.0.11"],\
             ["@types/semver", "npm:7.3.9"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["@types/which", "npm:2.0.1"],\
             ["chalk", "npm:4.1.2"],\
             ["commitizen", "npm:4.2.4"],\
@@ -17075,7 +17080,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-theme-tokens", "workspace:packages/ui-theme-tokens"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["globby", "npm:11.1.0"]\
           ],\
           "linkType": "SOFT"\
@@ -17086,7 +17097,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/browserslist-config-instui/",\
           "packageDependencies": [\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
-            ["@types/mocha", "npm:7.0.2"]\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
+            ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -17101,7 +17118,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/shared-types", "workspace:packages/shared-types"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-theme-tokens", "workspace:packages/ui-theme-tokens"],\
-            ["@types/mocha", "npm:7.0.2"]\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
+            ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -17116,7 +17139,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/shared-types", "workspace:packages/shared-types"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-theme-tokens", "workspace:packages/ui-theme-tokens"],\
-            ["@types/mocha", "npm:7.0.2"]\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
+            ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -17127,8 +17156,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@instructure/command-utils", "workspace:packages/command-utils"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
-            ["@types/node", "npm:17.0.24"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["@types/which", "npm:2.0.1"],\
             ["chalk", "npm:4.1.2"],\
             ["concurrently", "npm:6.5.1"],\
@@ -17145,7 +17179,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@instructure/config-loader", "workspace:packages/config-loader"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
-            ["@types/mocha", "npm:7.0.2"]\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
+            ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -17178,7 +17218,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/pkg-utils", "workspace:packages/pkg-utils"],\
             ["@semantic-release/commit-analyzer", "virtual:311dca76eb7a06d54ef56305ae0fd08f9cfe856bc74d9cfd8b12ff04449a162db241958deef7cb355a4fea0ea89a8dfa2c7e08263dfc641fe767548ba6b8b27a#npm:8.0.1"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["chalk", "npm:4.1.2"],\
             ["cz-customizable", "npm:6.3.0"],\
             ["inquirer", "npm:8.2.2"],\
@@ -17196,7 +17242,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/runtime", "npm:7.17.8"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
-            ["@types/mocha", "npm:7.0.2"]\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
+            ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -17218,8 +17270,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/lodash", "npm:4.14.181"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["cpy-cli", "npm:3.1.1"],\
             ["emotion-theming", "npm:11.0.0"],\
             ["hoist-non-react-statics", "npm:3.3.2"],\
@@ -17241,7 +17299,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/shared-types", "workspace:packages/shared-types"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-theme-tokens", "workspace:packages/ui-theme-tokens"],\
-            ["@types/mocha", "npm:7.0.2"]\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
+            ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -17265,7 +17329,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-stylelint-config", "workspace:packages/ui-stylelint-config"],\
             ["@instructure/ui-template-scripts", "workspace:packages/ui-template-scripts"],\
             ["@instructure/ui-webpack-config", "workspace:packages/ui-webpack-config"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["depcheck", "npm:1.4.3"],\
             ["eslint", "npm:7.32.0"],\
             ["react", "npm:17.0.2"],\
@@ -17285,7 +17355,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/command-utils", "workspace:packages/command-utils"],\
             ["@instructure/pkg-utils", "workspace:packages/pkg-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["fs-extra", "npm:9.1.0"],\
             ["semver", "npm:7.3.5"]\
           ],\
@@ -17300,7 +17376,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/command-utils", "workspace:packages/command-utils"],\
             ["@lerna/package", "npm:4.0.0"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["read-pkg-up", "npm:7.0.1"]\
           ],\
           "linkType": "SOFT"\
@@ -17312,7 +17394,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@instructure/shared-types", "workspace:packages/shared-types"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"]\
           ],\
@@ -17333,7 +17421,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-text", "workspace:packages/ui-text"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["html-webpack-plugin", "virtual:9e1f5a74c692ee6142846ed8d4e09d4e6f02c3522a7e5011a4fb34320955d7812721e55879299397a4cce1e1178fbaa2e56ea15190d95ba1e90a1ee578c591b9#npm:4.5.2"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17356,7 +17450,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17374,7 +17474,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/console", "workspace:packages/console"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
-            ["@types/mocha", "npm:7.0.2"]\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
+            ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -17456,7 +17562,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-tree-browser", "workspace:packages/ui-tree-browser"],\
             ["@instructure/ui-truncate-text", "workspace:packages/ui-truncate-text"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["jest", "npm:24.9.0"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17481,7 +17593,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -17506,7 +17624,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -17537,7 +17661,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -17565,7 +17695,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17582,7 +17718,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["axe-core", "npm:4.4.1"]\
           ],\
           "linkType": "SOFT"\
@@ -17612,7 +17754,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/babel-plugin-transform-imports", "workspace:packages/babel-plugin-transform-imports"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["babel-loader", "virtual:0a32177beea0658d550139e2ee0b790248c01bdbc0eebc86947a3e87988c44ea911d34595c6018ab23a80648ef9f28aff4cd12b4a07d5fc3f4d3070c57547dbc#npm:8.2.4"],\
             ["babel-plugin-dynamic-import-node", "npm:2.3.3"],\
             ["babel-plugin-istanbul", "npm:6.1.1"],\
@@ -17645,7 +17793,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17671,7 +17825,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17700,7 +17860,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-truncate-text", "workspace:packages/ui-truncate-text"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17734,7 +17900,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-tooltip", "workspace:packages/ui-tooltip"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -17759,7 +17931,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17790,7 +17968,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17823,7 +18007,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -17851,8 +18041,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
             ["@types/codemirror", "npm:5.60.5"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["codemirror", "npm:5.48.4"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -17870,10 +18066,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/jscodeshift", "npm:0.11.3"],\
             ["@types/mocha", "npm:7.0.2"],\
-            ["@types/node", "npm:17.0.24"],\
+            ["@types/node", "npm:17.0.29"],\
             ["@types/prettier", "npm:2.4.4"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["babel-core", "virtual:ed3f56392849b5072dc8b865ea24233b52af59915bcb0110d9e72d96de6c85df934869badd1c158f38a56aa337a5c1fa8fe4cc565100de710eca55e61d390923#npm:7.0.0-bridge.0"],\
             ["jest", "npm:24.9.0"],\
             ["jscodeshift", "virtual:a801f2df202cd07611f4d52a0f7c916b91d1a900a0f63ac316ca2a2a9cffcced7864f76cb26c03d80e233bbebde91ce39a715673c9a4d66fe254644d7d8898f8#npm:0.13.1"],\
@@ -17892,7 +18093,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["@types/tinycolor2", "npm:1.4.3"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"],\
@@ -17924,7 +18131,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-text-input", "workspace:packages/ui-text-input"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17956,7 +18169,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-time-select", "workspace:packages/ui-time-select"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -17973,7 +18192,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["react", "npm:17.0.2"]\
           ],\
           "linkType": "SOFT"\
@@ -17995,7 +18220,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18015,7 +18246,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
           ],\
@@ -18049,7 +18286,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18083,7 +18326,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18111,7 +18360,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18126,7 +18381,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-eslint-config", "workspace:packages/ui-eslint-config"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["@typescript-eslint/eslint-plugin", "virtual:5e41ccef904276d44b61d01ba58ff3e7b4df68dd5f33e4ea6143de2a5a01e44b52dfb4ed164c2cf1466d83ee3ccf3f063c4e69becac5be430a073f42400b00a4#npm:4.33.0"],\
             ["@typescript-eslint/parser", "virtual:5e41ccef904276d44b61d01ba58ff3e7b4df68dd5f33e4ea6143de2a5a01e44b52dfb4ed164c2cf1466d83ee3ccf3f063c4e69becac5be430a073f42400b00a4#npm:4.33.0"],\
             ["eslint", "npm:7.32.0"],\
@@ -18159,7 +18420,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18188,7 +18455,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -18212,7 +18485,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18235,7 +18514,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18263,7 +18548,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18289,7 +18580,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18315,7 +18612,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18338,8 +18641,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/hoist-non-react-statics", "npm:3.3.1"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["hoist-non-react-statics", "npm:3.3.2"],\
             ["moment-timezone", "npm:0.5.34"],\
             ["prop-types", "npm:15.8.1"],\
@@ -18360,7 +18669,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-icons-build", "workspace:packages/ui-icons-build"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-svg-images", "workspace:packages/ui-svg-images"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["gulp", "npm:4.0.2"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -18377,7 +18692,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/config-loader", "workspace:packages/config-loader"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["del", "npm:6.0.0"],\
             ["glob", "npm:7.2.0"],\
             ["gulp", "npm:4.0.2"],\
@@ -18417,7 +18738,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18435,7 +18762,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-webpack-config", "workspace:packages/ui-webpack-config"],\
             ["@jsdevtools/coverage-istanbul-loader", "npm:3.0.5"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["buffer", "npm:6.0.3"],\
             ["choma", "virtual:7729406e53f5abdafa01fcab81590240e90ce79cfd9f38104ceaf1a609f39412b23cd0a8fdfe3f1a899adb9b8445bfed798beae1101f7fac7736560ebb799777#npm:1.2.1"],\
             ["globby", "npm:11.1.0"],\
@@ -18479,7 +18812,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18506,7 +18845,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18539,7 +18884,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -18566,7 +18917,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18600,7 +18957,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18625,7 +18988,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18662,7 +19031,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-tooltip", "workspace:packages/ui-tooltip"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18689,7 +19064,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -18717,7 +19098,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18756,8 +19143,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
             ["@types/no-scroll", "npm:2.1.0"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["no-scroll", "npm:2.1.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -18785,7 +19178,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18820,7 +19219,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -18851,7 +19256,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-truncate-text", "workspace:packages/ui-truncate-text"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18884,7 +19295,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -18908,7 +19325,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-prop-types", "workspace:packages/ui-prop-types"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18938,7 +19361,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18965,7 +19394,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -18983,7 +19418,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19010,7 +19451,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19042,7 +19489,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19071,7 +19524,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19094,7 +19553,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["hoist-non-react-statics", "npm:3.3.2"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -19120,7 +19585,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19145,11 +19616,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@lerna/project", "npm:4.0.0"],\
             ["@storybook/react", "virtual:a801f2df202cd07611f4d52a0f7c916b91d1a900a0f63ac316ca2a2a9cffcced7864f76cb26c03d80e233bbebde91ce39a715673c9a4d66fe254644d7d8898f8#npm:6.4.20"],\
             ["@types/babel__core", "npm:7.1.19"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/git-url-parse", "npm:9.0.1"],\
             ["@types/karma", "npm:6.3.3"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
             ["@types/react", "npm:17.0.44"],\
             ["@types/semver", "npm:7.3.9"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["@types/which", "npm:2.0.1"],\
             ["chalk", "npm:4.1.2"],\
             ["commitizen", "npm:4.2.4"],\
@@ -19209,7 +19686,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19232,7 +19715,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -19261,7 +19750,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-locator", "workspace:packages/ui-test-locator"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19289,7 +19784,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19304,7 +19805,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-stylelint-config", "workspace:packages/ui-stylelint-config"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["stylelint", "npm:14.6.1"],\
             ["stylelint-config-standard", "virtual:bada91550d31f8336a45f1c5d903deba6b79480590e39e19ed530697f2e449986c90a162d91a541f992d6ce39a3ec3071332e9018152170dc0ad7ca4fa8c9dbc#npm:25.0.0"],\
             ["stylelint-declaration-strict-value", "virtual:bada91550d31f8336a45f1c5d903deba6b79480590e39e19ed530697f2e449986c90a162d91a541f992d6ce39a3ec3071332e9018152170dc0ad7ca4fa8c9dbc#npm:1.8.0"]\
@@ -19329,7 +19836,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19359,7 +19872,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19393,7 +19912,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -19422,7 +19947,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19440,7 +19971,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@lerna/project", "npm:4.0.0"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["fs-extra", "npm:9.1.0"],\
             ["lodash.template", "npm:4.5.0"],\
             ["yargs", "npm:16.2.0"],\
@@ -19459,7 +19996,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-queries", "workspace:packages/ui-test-queries"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
           ],\
@@ -19477,7 +20020,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-sandbox", "workspace:packages/ui-test-sandbox"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["@types/sizzle", "npm:2.3.3"],\
             ["keycode", "npm:2.2.1"],\
             ["pretty-format", "npm:27.5.1"],\
@@ -19497,8 +20046,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
             ["@types/sinon", "npm:10.0.11"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"],\
@@ -19524,7 +20079,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/chai-string", "npm:1.4.2"],\
             ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
-            ["@types/node", "npm:17.0.24"],\
+            ["@types/node", "npm:17.0.29"],\
             ["@types/sinon-chai", "npm:3.2.8"],\
             ["chai", "npm:4.3.6"],\
             ["chai-as-promised", "virtual:036e07819d9939ee4a3e29f58f7f3f6dbf1ec423638db1650c237ad9a1aa7aee173c8c986209cc70bc5b3026421b116f1771072bccbfd2be877b5a2c27e0d340#npm:7.1.1"],\
@@ -19554,7 +20109,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-dom-utils", "workspace:packages/ui-dom-utils"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19577,7 +20138,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19607,7 +20174,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19636,7 +20209,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19656,7 +20235,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-color-utils", "workspace:packages/ui-color-utils"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
-            ["@types/mocha", "npm:7.0.2"]\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
+            ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -19674,7 +20259,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-theme-tokens", "workspace:packages/ui-theme-tokens"],\
-            ["@types/mocha", "npm:7.0.2"]\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
+            ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -19697,7 +20288,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-test-locator", "workspace:packages/ui-test-locator"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["moment-timezone", "npm:0.5.34"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -19733,7 +20330,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/uid", "workspace:packages/uid"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19753,7 +20356,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/console", "workspace:packages/console"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["fs-extra", "npm:9.1.0"],\
             ["lodash.isplainobject", "npm:4.0.6"],\
             ["react", "npm:17.0.2"],\
@@ -19785,7 +20394,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19816,7 +20431,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19844,7 +20465,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-testable", "workspace:packages/ui-testable"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["keycode", "npm:2.2.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -19873,8 +20500,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-text", "workspace:packages/ui-text"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/escape-html", "npm:1.0.1"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["escape-html", "npm:1.0.3"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
@@ -19895,8 +20528,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-dom-utils", "workspace:packages/ui-dom-utils"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/json-stable-stringify", "npm:1.0.34"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["bowser", "npm:1.9.4"],\
             ["fast-deep-equal", "npm:3.1.3"],\
             ["json-stable-stringify", "npm:1.0.1"],\
@@ -19926,7 +20565,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
             ["@instructure/ui-themes", "workspace:packages/ui-themes"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
@@ -19942,7 +20587,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/core", "npm:7.17.9"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/ui-react-utils", "workspace:packages/ui-react-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["babel-loader", "virtual:e5f5968041be27c9766a2f449d06d8523c6eb5fafd69ae39faa176789b61ee268acc849aebf6a12cd90b66685ef6a58285b53a8591b25cdb7ff750e81eb81179#npm:8.2.4"],\
             ["buffer", "npm:6.0.3"],\
             ["css-loader", "virtual:e5f5968041be27c9766a2f449d06d8523c6eb5fafd69ae39faa176789b61ee268acc849aebf6a12cd90b66685ef6a58285b53a8591b25cdb7ff750e81eb81179#npm:6.7.1"],\
@@ -19968,7 +20619,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/ui-babel-preset", "workspace:packages/ui-babel-preset"],\
             ["@instructure/ui-test-utils", "workspace:packages/ui-test-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:84d4ed907b4bdc0c43b3e74970802f437865609547f131bb14a9d5bb4425b3ddd2ad477c05c371488aa00bcd8e99789bee9f007421b612ec5d5757e22729b4d0#npm:17.0.2"]\
           ],\
@@ -25284,6 +25941,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-17.0.24-5b16c4ab89-9e7c4f8636.zip/node_modules/@types/node/",\
           "packageDependencies": [\
             ["@types/node", "npm:17.0.24"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:17.0.29", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-17.0.29-0de8e6d3d0-bb9d7bce9d.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:17.0.29"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -33590,8 +34254,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-utils", "workspace:packages/ui-utils"],\
             ["@instructure/ui-view", "workspace:packages/ui-view"],\
             ["@instructure/ui-webpack-config", "workspace:packages/ui-webpack-config"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/marked", "npm:4.0.3"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["babel-loader", "virtual:e5f5968041be27c9766a2f449d06d8523c6eb5fafd69ae39faa176789b61ee268acc849aebf6a12cd90b66685ef6a58285b53a8591b25cdb7ff750e81eb81179#npm:8.2.4"],\
             ["buffer", "npm:6.0.3"],\
             ["chokidar", "npm:3.5.3"],\
@@ -33644,7 +34314,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/manager-webpack5", "virtual:2675d1ff9076c6d4eb546d52624a3456dae3b38454521770d6ad7b3455a72e66abb1f0a267ec7a7aba2d1078cfc1e343bb3276a7a1977bd394ef90278974e129#npm:6.4.20"],\
             ["@storybook/react", "virtual:2675d1ff9076c6d4eb546d52624a3456dae3b38454521770d6ad7b3455a72e66abb1f0a267ec7a7aba2d1078cfc1e343bb3276a7a1977bd394ef90278974e129#npm:6.4.20"],\
             ["@storybook/theming", "virtual:2675d1ff9076c6d4eb546d52624a3456dae3b38454521770d6ad7b3455a72e66abb1f0a267ec7a7aba2d1078cfc1e343bb3276a7a1977bd394ef90278974e129#npm:6.4.20"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["chromatic", "npm:6.5.3"],\
             ["globby", "npm:11.1.0"],\
             ["prop-types", "npm:15.8.1"],\
@@ -35204,7 +35880,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-instructure-ui", "workspace:packages/eslint-plugin-instructure-ui"],\
             ["@instructure/browserslist-config-instui", "workspace:packages/browserslist-config-instui"],\
             ["@instructure/pkg-utils", "workspace:packages/pkg-utils"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/mocha", "npm:7.0.2"],\
+            ["@types/node", "npm:17.0.29"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["eslint", "npm:7.32.0"],\
             ["eslint-module-utils", "virtual:84cabcb9d4df87703068d3d25e8e2f944c9bf906c92eb1fa8b546f30f7a34fb4415bb4dde526f731abf6bb3e46143e32fbe3b81e28d8d21893d8cd2c5f991334#npm:2.7.3"],\
             ["eslint-plugin-import", "virtual:84cabcb9d4df87703068d3d25e8e2f944c9bf906c92eb1fa8b546f30f7a34fb4415bb4dde526f731abf6bb3e46143e32fbe3b81e28d8d21893d8cd2c5f991334#npm:2.25.4"]\
@@ -39909,12 +40591,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@instructure/ui-token-scripts", "workspace:packages/ui-token-scripts"],\
             ["@types/babel__core", "npm:7.1.19"],\
             ["@types/babel__preset-env", "npm:7.9.2"],\
+            ["@types/chai", "npm:4.3.0"],\
+            ["@types/chai-as-promised", "npm:7.1.5"],\
+            ["@types/chai-string", "npm:1.4.2"],\
+            ["@types/dirty-chai", "npm:2.0.2"],\
             ["@types/karma", "npm:6.3.3"],\
             ["@types/mocha", "npm:7.0.2"],\
-            ["@types/node", "npm:17.0.24"],\
+            ["@types/node", "npm:17.0.29"],\
             ["@types/react", "npm:17.0.44"],\
             ["@types/react-dom", "npm:17.0.11"],\
             ["@types/semver", "npm:7.3.9"],\
+            ["@types/sinon-chai", "npm:3.2.8"],\
             ["@types/which", "npm:2.0.1"],\
             ["chalk", "npm:4.1.2"],\
             ["commitizen", "npm:4.2.4"],\
