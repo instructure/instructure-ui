@@ -25,7 +25,8 @@
     "@instructure/browserslist-config-instui": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-react-utils": "8.23.0",
-    "@instructure/ui-theme-tokens": "8.23.0"
+    "@instructure/ui-theme-tokens": "8.23.0",
+    "@types/mocha": "^7"
   },
   "dependencies": {
     "@instructure/canvas-high-contrast-theme": "8.23.0",

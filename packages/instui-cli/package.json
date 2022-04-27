@@ -19,6 +19,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7",
     "@instructure/command-utils": "8.23.0",
     "@instructure/instui-config": "8.23.0",
     "@instructure/pkg-utils": "8.23.0",
@@ -32,20 +33,18 @@
     "@instructure/ui-template-scripts": "8.23.0",
     "@instructure/ui-webpack-config": "8.23.0",
     "depcheck": "^1",
+    "eslint": "^7",
+    "react": "^16.8",
+    "react-dom": "^16.8",
     "semver": "^7",
     "yargs": "^16",
     "yargs-interactive": "^3.0.0"
-  },
-  "peerDependencies": {
-    "@babel/core": "^7",
-    "eslint": "^7",
-    "react": ">=16.8 <=17",
-    "react-dom": ">=16.8 <=17"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "8.23.0"
+    "@instructure/browserslist-config-instui": "8.23.0",
+    "@types/mocha": "^7"
   }
 }

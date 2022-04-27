@@ -31,6 +31,7 @@
     "@instructure/ui-test-locator": "8.23.0",
     "@instructure/ui-theme-tokens": "8.23.0",
     "@instructure/ui-themes": "8.23.0",
-    "@instructure/ui-utils": "8.23.0"
+    "@instructure/ui-utils": "8.23.0",
+    "@types/mocha": "^7"
   }
 }

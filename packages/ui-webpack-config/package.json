@@ -16,6 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7",
     "babel-loader": "^8.2.3",
     "buffer": "^6",
     "css-loader": "^6",
@@ -29,14 +30,12 @@
     "url-loader": "^4",
     "webpack": "^5"
   },
-  "peerDependencies": {
-    "@babel/core": "7"
-  },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
     "@instructure/browserslist-config-instui": "8.23.0",
-    "@instructure/ui-react-utils": "8.23.0"
+    "@instructure/ui-react-utils": "8.23.0",
+    "@types/mocha": "^7"
   }
 }

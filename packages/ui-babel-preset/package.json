@@ -47,6 +47,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/ui-react-utils": "8.23.0"
+    "@instructure/ui-react-utils": "8.23.0",
+    "@types/mocha": "^7"
   }
 }

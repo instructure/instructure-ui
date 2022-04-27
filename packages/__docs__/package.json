@@ -24,6 +24,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7",
+    "@babel/preset-env": "^7.1.6",
     "@babel/standalone": "^7.13.8",
     "@instructure/canvas-high-contrast-theme": "8.23.0",
     "@instructure/canvas-theme": "8.23.0",
@@ -109,6 +111,7 @@
     "babel-loader": "^8.2.3",
     "buffer": "^6",
     "codesandbox": "^2.2.3",
+    "eslint": "^7",
     "lorem-ipsum": "^1.0.6",
     "marked": "^4",
     "moment": "^2.23.0",
@@ -117,6 +120,7 @@
     "react-dom": "^17.0.0",
     "react-github-corner": "^2.1.0",
     "semver": "^7.3.5",
+    "webpack": "^5",
     "webpack-merge": "^5"
   },
   "devDependencies": {
@@ -128,6 +132,7 @@
     "@instructure/ui-stylelint-config": "8.23.0",
     "@instructure/ui-webpack-config": "8.23.0",
     "@types/marked": "^4",
+    "@types/mocha": "^7",
     "chokidar": "^3",
     "eslint": "^7",
     "globby": "^11",
@@ -140,11 +145,5 @@
     "svg-inline-loader": "^0.8.0",
     "webpack": "^5",
     "webpack-bundle-analyzer": "^4"
-  },
-  "peerDependencies": {
-    "@babel/core": ">=7",
-    "@babel/preset-env": ">= 7.1.6",
-    "eslint": "^7",
-    "webpack": "^5"
   }
 }

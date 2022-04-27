@@ -65,7 +65,7 @@
     "@types/babel__core": "^7",
     "@types/git-url-parse": "^9.0.0",
     "@types/karma": "^6",
-    "@types/mocha": "^8.2.2",
+    "@types/mocha": "^7",
     "@types/react": "^17.0.39",
     "@types/semver": "^7.3.5",
     "@types/which": "^2"
@@ -75,9 +75,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "peerDependencies": {
-    "karma": "6",
-    "react": "17"
   }
 }

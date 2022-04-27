@@ -120,7 +120,7 @@ export function waitForQueryResult(
 
     function onDone(e: Error | null, result: QueryResult) {
       clearTimeout(timer)
-      setImmediate(() => observer.disconnect())
+      setTimeout(() => observer.disconnect(), 0)
       debouncedQuery.cancel()
       if (e) {
         reject(e)

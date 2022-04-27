@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@instructure/browserslist-config-instui": "8.23.0",
+    "@types/mocha": "^7",
     "html-webpack-plugin": "^4"
   }
 }

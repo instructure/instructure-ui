@@ -50,13 +50,11 @@
     "@instructure/ui-test-utils": "8.23.0",
     "@storybook/builder-webpack5": "^6",
     "@storybook/manager-webpack5": "^6",
+    "@types/mocha": "^7",
     "globby": "^11",
     "prop-types": "^15",
     "react-docgen": "^6.0.0-alpha.0",
     "webpack": "^5"
-  },
-  "peerDependencies": {
-    "@babel/core": "^7"
   },
   "resolutions": {
     "@storybook/react/webpack": "^5"

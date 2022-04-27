@@ -19,6 +19,7 @@
     "@instructure/browserslist-config-instui": "8.23.0",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7",
     "eslint-config-prettier": "^8",
     "eslint-plugin-compat": "^3",
     "eslint-plugin-import": "^2",
@@ -29,13 +30,11 @@
     "eslint-plugin-notice": "^0.9.10",
     "eslint-plugin-react": "^7"
   },
-  "peerDependencies": {
-    "eslint": "^7"
-  },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/ui-react-utils": "8.23.0"
+    "@instructure/ui-react-utils": "8.23.0",
+    "@types/mocha": "^7"
   }
 }

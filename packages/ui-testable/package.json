@@ -26,16 +26,15 @@
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-react-utils": "8.23.0",
     "@instructure/ui-test-utils": "8.23.0",
+    "@types/mocha": "^7",
     "prop-types": "^15.6.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
     "@instructure/ui-decorator": "8.23.0",
-    "@instructure/ui-dom-utils": "8.23.0"
-  },
-  "peerDependencies": {
-    "react": ">=16.8 <=17",
-    "react-dom": ">=16.8 <=17"
+    "@instructure/ui-dom-utils": "8.23.0",
+    "react": "^16.8",
+    "react-dom": "^16.8"
   },
   "publishConfig": {
     "access": "public"

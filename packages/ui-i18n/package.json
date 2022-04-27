@@ -26,7 +26,8 @@
     "@instructure/browserslist-config-instui": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-test-utils": "8.23.0",
-    "@types/hoist-non-react-statics": "^3.3.1"
+    "@types/hoist-non-react-statics": "^3.3.1",
+    "@types/mocha": "^7"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
@@ -38,11 +39,9 @@
     "@instructure/ui-utils": "8.23.0",
     "hoist-non-react-statics": "^3.3.2",
     "moment-timezone": "^0.5",
-    "prop-types": "^15"
-  },
-  "peerDependencies": {
-    "react": ">=16.8 <=17",
-    "react-dom": ">=16.8 <=17"
+    "prop-types": "^15",
+    "react": "^16.8",
+    "react-dom": "^16.8"
   },
   "publishConfig": {
     "access": "public"

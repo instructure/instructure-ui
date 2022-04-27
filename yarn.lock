@@ -1487,7 +1487,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.11.5, @babel/preset-env@npm:^7.12.11, @babel/preset-env@npm:^7.16.11, @babel/preset-env@npm:^7.9.5":
+"@babel/preset-env@npm:^7.1.6, @babel/preset-env@npm:^7.11.5, @babel/preset-env@npm:^7.12.11, @babel/preset-env@npm:^7.16.11, @babel/preset-env@npm:^7.9.5":
   version: 7.16.11
   resolution: "@babel/preset-env@npm:7.16.11"
   dependencies:
@@ -2240,6 +2240,7 @@ __metadata:
     "@instructure/ui-theme-tokens": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     globby: ^11
   languageName: unknown
   linkType: soft
@@ -2249,6 +2250,7 @@ __metadata:
   resolution: "@instructure/browserslist-config-instui@workspace:packages/browserslist-config-instui"
   dependencies:
     "@instructure/browserslist-config-instui": ^8.23.0
+    "@types/mocha": ^7
   languageName: unknown
   linkType: soft
 
@@ -2261,6 +2263,7 @@ __metadata:
     "@instructure/shared-types": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-theme-tokens": 8.23.0
+    "@types/mocha": ^7
   languageName: unknown
   linkType: soft
 
@@ -2273,6 +2276,7 @@ __metadata:
     "@instructure/shared-types": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-theme-tokens": 8.23.0
+    "@types/mocha": ^7
   languageName: unknown
   linkType: soft
 
@@ -2281,6 +2285,7 @@ __metadata:
   resolution: "@instructure/command-utils@workspace:packages/command-utils"
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
+    "@types/mocha": ^7
     "@types/node": ^17.0.18
     "@types/which": ^2
     chalk: ^4
@@ -2296,6 +2301,7 @@ __metadata:
   resolution: "@instructure/config-loader@workspace:packages/config-loader"
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
+    "@types/mocha": ^7
   languageName: unknown
   linkType: soft
 
@@ -2309,11 +2315,11 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-scripts": 8.23.0
     "@types/babel-plugin-macros": ^2.8.4
+    "@types/mocha": ^7
     "@types/node": ^17.0.18
     babel-plugin-macros: ^3
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2324,6 +2330,7 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/pkg-utils": 8.23.0
     "@semantic-release/commit-analyzer": ^8
+    "@types/mocha": ^7
     chalk: ^4
     cz-customizable: ^6
     inquirer: ^8
@@ -2339,6 +2346,7 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
+    "@types/mocha": ^7
   languageName: unknown
   linkType: soft
 
@@ -2359,14 +2367,14 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@types/lodash": ^4.14.171
+    "@types/mocha": ^7
     cpy-cli: ^3.1.1
     emotion-theming: ^11
     hoist-non-react-statics: ^3.3.2
     lodash: ^4
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2379,6 +2387,7 @@ __metadata:
     "@instructure/shared-types": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-theme-tokens": 8.23.0
+    "@types/mocha": ^7
   languageName: unknown
   linkType: soft
 
@@ -2386,6 +2395,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@instructure/instui-cli@workspace:packages/instui-cli"
   dependencies:
+    "@babel/core": ^7
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/command-utils": 8.23.0
     "@instructure/instui-config": 8.23.0
@@ -2399,15 +2409,14 @@ __metadata:
     "@instructure/ui-stylelint-config": 8.23.0
     "@instructure/ui-template-scripts": 8.23.0
     "@instructure/ui-webpack-config": 8.23.0
+    "@types/mocha": ^7
     depcheck: ^1
+    eslint: ^7
+    react: ^16.8
+    react-dom: ^16.8
     semver: ^7
     yargs: ^16
     yargs-interactive: ^3.0.0
-  peerDependencies:
-    "@babel/core": ^7
-    eslint: ^7
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
   bin:
     instui: ./lib/index.js
   languageName: unknown
@@ -2420,6 +2429,7 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/command-utils": 8.23.0
     "@instructure/pkg-utils": 8.23.0
+    "@types/mocha": ^7
     fs-extra: ^9
     semver: ^7
   languageName: unknown
@@ -2432,6 +2442,7 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/command-utils": 8.23.0
     "@lerna/package": ^4
+    "@types/mocha": ^7
     read-pkg-up: ^7
   languageName: unknown
   linkType: soft
@@ -2441,6 +2452,7 @@ __metadata:
   resolution: "@instructure/shared-types@workspace:packages/shared-types"
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
     react: ^17.0.0
   languageName: unknown
@@ -2459,6 +2471,7 @@ __metadata:
     "@instructure/ui-text": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     html-webpack-plugin: ^4
     react: ^17.0.0
     react-dom: ^17.0.0
@@ -2479,10 +2492,10 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2495,6 +2508,7 @@ __metadata:
     "@instructure/console": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/mocha": ^7
   languageName: unknown
   linkType: soft
 
@@ -2514,11 +2528,11 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2537,11 +2551,11 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2566,11 +2580,11 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2592,10 +2606,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2607,6 +2621,7 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/mocha": ^7
     axe-core: ^4
   languageName: unknown
   linkType: soft
@@ -2634,6 +2649,7 @@ __metadata:
     "@instructure/babel-plugin-transform-imports": 8.23.0
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/mocha": ^7
     babel-loader: ^8.1.0
     babel-plugin-dynamic-import-node: ^2.3.0
     babel-plugin-istanbul: ^6.0.0
@@ -2664,10 +2680,10 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2688,10 +2704,10 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2715,10 +2731,10 @@ __metadata:
     "@instructure/ui-truncate-text": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2747,11 +2763,11 @@ __metadata:
     "@instructure/ui-tooltip": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2770,10 +2786,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2799,10 +2815,10 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2830,11 +2846,11 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2857,12 +2873,12 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@types/codemirror": 5.x
+    "@types/mocha": ^7
     codemirror: 5.48.4
     prop-types: ^15
+    react: ^16.8
     react-codemirror2: ^7.2.1
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2874,6 +2890,7 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@types/jscodeshift": ^0.11.3
+    "@types/mocha": ^7
     "@types/node": ^17.0.18
     "@types/prettier": ^2
     babel-core: ^7.0.0-bridge.0
@@ -2892,11 +2909,11 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/mocha": ^7
     "@types/tinycolor2": ^1.4.2
+    react: ^16.8
+    react-dom: ^16.8
     tinycolor2: ^1.4.2
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
   languageName: unknown
   linkType: soft
 
@@ -2922,10 +2939,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-text-input": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2952,10 +2969,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-time-select": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2967,8 +2984,8 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
-  peerDependencies:
-    react: ">=16.8 <=17"
+    "@types/mocha": ^7
+    react: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -2987,10 +3004,10 @@ __metadata:
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3005,12 +3022,9 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
+    "@types/mocha": ^7
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3040,10 +3054,10 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3072,10 +3086,10 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3098,10 +3112,10 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3111,8 +3125,10 @@ __metadata:
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/mocha": ^7
     "@typescript-eslint/eslint-plugin": ^4.22.0
     "@typescript-eslint/parser": ^4.22.0
+    eslint: ^7
     eslint-config-prettier: ^8
     eslint-plugin-compat: ^3
     eslint-plugin-import: ^2
@@ -3122,8 +3138,6 @@ __metadata:
     eslint-plugin-no-explicit-type-exports: ^0.12.1
     eslint-plugin-notice: ^0.9.10
     eslint-plugin-react: ^7
-  peerDependencies:
-    eslint: ^7
   languageName: unknown
   linkType: soft
 
@@ -3142,10 +3156,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3169,11 +3183,11 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3191,10 +3205,10 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3212,10 +3226,10 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3238,10 +3252,10 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3262,10 +3276,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3286,10 +3300,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3308,12 +3322,12 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@types/hoist-non-react-statics": ^3.3.1
+    "@types/mocha": ^7
     hoist-non-react-statics: ^3.3.2
     moment-timezone: ^0.5
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3324,6 +3338,7 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/config-loader": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/mocha": ^7
     del: ^6
     glob: ^7.1.4
     gulp: ^4
@@ -3355,11 +3370,11 @@ __metadata:
     "@instructure/ui-icons-build": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-svg-images": 8.23.0
+    "@types/mocha": ^7
     gulp: ^4.0.2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3379,10 +3394,10 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3437,10 +3452,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3462,10 +3477,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3493,11 +3508,11 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3518,10 +3533,10 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3550,10 +3565,10 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3573,10 +3588,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3608,10 +3623,10 @@ __metadata:
     "@instructure/ui-tooltip": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3633,11 +3648,11 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3659,10 +3674,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3696,12 +3711,12 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     "@types/no-scroll": ^2
     no-scroll: ^2.1.0
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3723,10 +3738,10 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3756,11 +3771,11 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3785,10 +3800,10 @@ __metadata:
     "@instructure/ui-truncate-text": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3816,11 +3831,11 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3838,10 +3853,10 @@ __metadata:
     "@instructure/ui-prop-types": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3866,10 +3881,10 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3891,10 +3906,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3907,10 +3922,10 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/mocha": ^7
     prop-types: ">= 15.7.0"
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3932,10 +3947,10 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3962,10 +3977,10 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -3989,10 +4004,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4011,14 +4026,11 @@ __metadata:
     "@instructure/ui-react-utils": ^8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     hoist-non-react-statics: ^3.3.2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4038,10 +4050,10 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4063,7 +4075,7 @@ __metadata:
     "@types/babel__core": ^7
     "@types/git-url-parse": ^9.0.0
     "@types/karma": ^6
-    "@types/mocha": ^8.2.2
+    "@types/mocha": ^7
     "@types/react": ^17.0.39
     "@types/semver": ^7.3.5
     "@types/which": ^2
@@ -4093,9 +4105,6 @@ __metadata:
     webpack-dev-server: ^4
     which: ^2
     yargs: ^16
-  peerDependencies:
-    karma: 6
-    react: 17
   dependenciesMeta:
     "@storybook/react":
       optional: true
@@ -4133,10 +4142,10 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4154,11 +4163,11 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4181,10 +4190,10 @@ __metadata:
     "@instructure/ui-test-locator": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4207,10 +4216,10 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4220,6 +4229,7 @@ __metadata:
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/mocha": ^7
     stylelint: ^14
     stylelint-config-standard: ^25
     stylelint-declaration-strict-value: ^1
@@ -4242,10 +4252,10 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4270,10 +4280,10 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4302,11 +4312,11 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4329,10 +4339,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4345,6 +4355,7 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@lerna/project": ^4
+    "@types/mocha": ^7
     fs-extra: ^9
     lodash.template: ^4.5.0
     yargs: ^16
@@ -4363,9 +4374,9 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-queries": 8.23.0
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    "@types/mocha": ^7
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4379,13 +4390,13 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-sandbox": 8.23.0
+    "@types/mocha": ^7
     "@types/sizzle": ^2
     keycode: ^2
     pretty-format: ^27
+    react: ^16.8
+    react-dom: ^16.8
     sizzle: ^2
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
   languageName: unknown
   linkType: soft
 
@@ -4397,13 +4408,12 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
-    "@types/mocha": 7
+    "@types/mocha": ^7
     "@types/sinon": ^10
     prop-types: ^15
+    react: ^16.8
+    react-dom: ^16.8
     sinon: ^13
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
   languageName: unknown
   linkType: soft
 
@@ -4432,15 +4442,11 @@ __metadata:
     dirty-chai: ^2
     nanoid: ^3
     prop-types: ^15
+    react: ^16.8
+    react-dom: ^16.8
+    sinon: ^4.0.0
     sinon-chai: ^3
     wait-for-expect: ^3
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
-    sinon: ">=4.0.0"
-  peerDependenciesMeta:
-    sinon:
-      optional: true
   languageName: unknown
   linkType: soft
 
@@ -4455,10 +4461,10 @@ __metadata:
     "@instructure/ui-dom-utils": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15.6.2
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4483,10 +4489,10 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4510,10 +4516,10 @@ __metadata:
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4531,10 +4537,10 @@ __metadata:
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4549,6 +4555,7 @@ __metadata:
     "@instructure/ui-color-utils": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/mocha": ^7
   languageName: unknown
   linkType: soft
 
@@ -4564,6 +4571,7 @@ __metadata:
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-theme-tokens": 8.23.0
+    "@types/mocha": ^7
   languageName: unknown
   linkType: soft
 
@@ -4584,11 +4592,11 @@ __metadata:
     "@instructure/ui-test-locator": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-testable": 8.23.0
+    "@types/mocha": ^7
     moment-timezone: ^0.5.33
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4618,10 +4626,10 @@ __metadata:
     "@instructure/ui-utils": 8.23.0
     "@instructure/ui-view": 8.23.0
     "@instructure/uid": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4636,13 +4644,13 @@ __metadata:
     "@instructure/console": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
+    "@types/mocha": ^7
     fs-extra: ^9.0.0
     lodash.isplainobject: ^4.0.6
+    react: ^16.8
+    react-dom: ^16.8
     style-dictionary: ^2.8.3
     yargs: ^16
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
   bin:
     ui-token-scripts: ./lib/index.js
   languageName: unknown
@@ -4668,10 +4676,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4697,10 +4705,10 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4723,11 +4731,11 @@ __metadata:
     "@instructure/ui-testable": 8.23.0
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
+    "@types/mocha": ^7
     keycode: ^2
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4751,11 +4759,11 @@ __metadata:
     "@instructure/ui-themes": 8.23.0
     "@instructure/ui-utils": 8.23.0
     "@types/escape-html": ^1
+    "@types/mocha": ^7
     escape-html: ^1
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4771,13 +4779,13 @@ __metadata:
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@types/json-stable-stringify": ^1.0.1
+    "@types/mocha": ^7
     bowser: ^1.9.4
     fast-deep-equal: ^3
     json-stable-stringify: ^1.0.1
     keycode: ^2
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4799,10 +4807,10 @@ __metadata:
     "@instructure/ui-react-utils": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
     "@instructure/ui-themes": 8.23.0
+    "@types/mocha": ^7
     prop-types: ^15
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4810,8 +4818,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@instructure/ui-webpack-config@workspace:packages/ui-webpack-config"
   dependencies:
+    "@babel/core": ^7
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-react-utils": 8.23.0
+    "@types/mocha": ^7
     babel-loader: ^8.2.3
     buffer: ^6
     css-loader: ^6
@@ -4824,8 +4834,6 @@ __metadata:
     thread-loader: ^3
     url-loader: ^4
     webpack: ^5
-  peerDependencies:
-    "@babel/core": 7
   languageName: unknown
   linkType: soft
 
@@ -4905,10 +4913,10 @@ __metadata:
     "@instructure/ui-tree-browser": 8.23.0
     "@instructure/ui-truncate-text": 8.23.0
     "@instructure/ui-view": 8.23.0
+    "@types/mocha": ^7
     jest: ^24.9.0
-  peerDependencies:
-    react: ">= 16.8 <=17"
-    react-dom: ">= 16.8 <= 17"
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -4920,9 +4928,9 @@ __metadata:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/ui-babel-preset": 8.23.0
     "@instructure/ui-test-utils": 8.23.0
-  peerDependencies:
-    react: ">=16.8 <=17"
-    react-dom: ">=16.8 <=17"
+    "@types/mocha": ^7
+    react: ^16.8
+    react-dom: ^16.8
   languageName: unknown
   linkType: soft
 
@@ -7156,7 +7164,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sinonjs/commons@npm:^1.6.0, @sinonjs/commons@npm:^1.7.0, @sinonjs/commons@npm:^1.8.3":
+"@sinonjs/commons@npm:^1, @sinonjs/commons@npm:^1.3.0, @sinonjs/commons@npm:^1.6.0, @sinonjs/commons@npm:^1.7.0, @sinonjs/commons@npm:^1.8.3":
   version: 1.8.3
   resolution: "@sinonjs/commons@npm:1.8.3"
   dependencies:
@@ -7171,6 +7179,36 @@ __metadata:
   dependencies:
     "@sinonjs/commons": "npm:^1.7.0"
   checksum: 609dc6036ae1ee0f5729fb4da194475c1a48b03233f55e573ae7b3b5f646af1c47682bca1d666ae31c0721626386f0cde4847b27ca4c2a7b5379aeddfc0f9a62
+  languageName: node
+  linkType: hard
+
+"@sinonjs/formatio@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@sinonjs/formatio@npm:2.0.0"
+  dependencies:
+    samsam: 1.3.0
+  checksum: 489d1e0351b8264836563ec55a22684391338bde5baf1688f6cc2d836600a57a3f3054e3da6435e541d5d118d55e900d32d81cfd0332638a0b8942b68217d853
+  languageName: node
+  linkType: hard
+
+"@sinonjs/formatio@npm:^3.2.1":
+  version: 3.2.2
+  resolution: "@sinonjs/formatio@npm:3.2.2"
+  dependencies:
+    "@sinonjs/commons": ^1
+    "@sinonjs/samsam": ^3.1.0
+  checksum: ddc30698df9b0aa59204da93ca94fd04bc5672ac03c798c0a487c35d514d7d8e0ce0e4c72386fc80e29f59cb1cc54eeea3b7f804281b3c4e3dd2394de56c6e4a
+  languageName: node
+  linkType: hard
+
+"@sinonjs/samsam@npm:^3.1.0":
+  version: 3.3.3
+  resolution: "@sinonjs/samsam@npm:3.3.3"
+  dependencies:
+    "@sinonjs/commons": ^1.3.0
+    array-from: ^2.1.1
+    lodash: ^4.17.15
+  checksum: 340f2f62dec3fa1e5e9300a75996bd12ab9d2da4f6b453fa5d1ee101cc5e58eb218af2e2584b496d41ba31c3c0854d47a691fd9a0d8b9092f3cb6a5c7a080856
   languageName: node
   linkType: hard
 
@@ -8644,24 +8682,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mocha@npm:7, @types/mocha@npm:^7":
+"@types/mocha@npm:^7":
   version: 7.0.2
   resolution: "@types/mocha@npm:7.0.2"
   checksum: 9be72c563976a809caa3594e3ee1fd71748887aaf105b4cfa99c69e882659d3ddbb331d4c1e3b3af9a67c78f3b7b4ab30fe1baa13cb50561dcc386512a75142a
-  languageName: node
-  linkType: hard
-
-"@types/mocha@npm:^8.2.2":
-  version: 8.2.3
-  resolution: "@types/mocha@npm:8.2.3"
-  checksum: b43ed1b642a2ee62bf10792a07d5d21d66ab8b4d2cf5d822c8a7643e77b90009aecc000eefab5f6ddc9eb69004192f84119a6f97a8499e1a13ea082e7a5e71bf
-  languageName: node
-  linkType: hard
-
-"@types/mocha@npm:^9":
-  version: 9.1.0
-  resolution: "@types/mocha@npm:9.1.0"
-  checksum: 21e1000dafcfe387c6812be41c44a47b48c27a74d5a70c3d5ef1bb5c88eadadfc74dba06e93f160e7248c8a57b3977b590f82504c801c9927816ecd4668023c0
   languageName: node
   linkType: hard
 
@@ -10543,6 +10567,13 @@ __metadata:
   version: 2.1.2
   resolution: "array-flatten@npm:2.1.2"
   checksum: e8988aac1fbfcdaae343d08c9a06a6fddd2c6141721eeeea45c3cf523bf4431d29a46602929455ed548c7a3e0769928cdc630405427297e7081bd118fdec9262
+  languageName: node
+  linkType: hard
+
+"array-from@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "array-from@npm:2.1.1"
+  checksum: 4cd5fa27aa6133b99a57c2881d2a8a66ec59b8e17a0c900f7e8ac9a0a2fae450ed682b67435467bfa71ac9328d025a760c5c46a95586a352180c5a79fc13015d
   languageName: node
   linkType: hard
 
@@ -15288,7 +15319,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff@npm:3.5.0":
+"diff@npm:3.5.0, diff@npm:^3.1.0":
   version: 3.5.0
   resolution: "diff@npm:3.5.0"
   checksum: 00842950a6551e26ce495bdbce11047e31667deea546527902661f25cc2e73358967ebc78cf86b1a9736ec3e14286433225f9970678155753a6291c3bca5227b
@@ -15377,6 +15408,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "docs-app@workspace:packages/__docs__"
   dependencies:
+    "@babel/core": ^7
+    "@babel/preset-env": ^7.1.6
     "@babel/standalone": ^7.13.8
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/canvas-high-contrast-theme": 8.23.0
@@ -15467,6 +15500,7 @@ __metadata:
     "@instructure/ui-view": 8.23.0
     "@instructure/ui-webpack-config": 8.23.0
     "@types/marked": ^4
+    "@types/mocha": ^7
     babel-loader: ^8.2.3
     buffer: ^6
     chokidar: ^3
@@ -15491,11 +15525,6 @@ __metadata:
     webpack: ^5
     webpack-bundle-analyzer: ^4
     webpack-merge: ^5
-  peerDependencies:
-    "@babel/core": ">=7"
-    "@babel/preset-env": ">= 7.1.6"
-    eslint: ^7
-    webpack: ^5
   languageName: unknown
   linkType: soft
 
@@ -15522,6 +15551,7 @@ __metadata:
     "@storybook/manager-webpack5": ^6
     "@storybook/react": ^6
     "@storybook/theming": ^6
+    "@types/mocha": ^7
     chromatic: ^6
     globby: ^11
     prop-types: ^15
@@ -15531,8 +15561,6 @@ __metadata:
     story2sketch: ^1
     webpack: ^5
     webpack-merge: ^5
-  peerDependencies:
-    "@babel/core": ^7
   languageName: unknown
   linkType: soft
 
@@ -16743,10 +16771,10 @@ __metadata:
   dependencies:
     "@instructure/browserslist-config-instui": 8.23.0
     "@instructure/pkg-utils": 8.23.0
+    "@types/mocha": ^7
+    eslint: ^7
     eslint-module-utils: ^2
     eslint-plugin-import: ^2
-  peerDependencies:
-    eslint: ^7
   languageName: unknown
   linkType: soft
 
@@ -20938,7 +20966,7 @@ __metadata:
     "@types/babel__core": ^7
     "@types/babel__preset-env": ^7
     "@types/karma": ^6
-    "@types/mocha": ^9
+    "@types/mocha": ^7
     "@types/node": ^17.0.18
     "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.11
@@ -24663,6 +24691,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lolex@npm:^2.2.0":
+  version: 2.7.5
+  resolution: "lolex@npm:2.7.5"
+  checksum: 25a0bc7487e76748bff5c0baf6ac7040dded620f76daef9f7d829e3aa0cf6126195c993b05b147b3e32720097def6bf3985d3f8ecbfb654300a878dceb963c7f
+  languageName: node
+  linkType: hard
+
+"lolex@npm:^5.0.1":
+  version: 5.1.2
+  resolution: "lolex@npm:5.1.2"
+  dependencies:
+    "@sinonjs/commons": ^1.7.0
+  checksum: 7eb468d4ef4746c024d23cb2b75f679f79449a9d5cbe11abadf2f3b147c1d7ffe28816438bedfb8a75c58357a625c2f9ba197b050c226d2b3f0c4a956cf556fb
+  languageName: node
+  linkType: hard
+
 "longest-streak@npm:^2.0.1":
   version: 2.0.4
   resolution: "longest-streak@npm:2.0.4"
@@ -26501,6 +26545,19 @@ __metadata:
   version: 1.0.5
   resolution: "nice-try@npm:1.0.5"
   checksum: 0b4af3b5bb5d86c289f7a026303d192a7eb4417231fe47245c460baeabae7277bcd8fd9c728fb6bd62c30b3e15cd6620373e2cf33353b095d8b403d3e8a15aff
+  languageName: node
+  linkType: hard
+
+"nise@npm:^1.2.0":
+  version: 1.5.3
+  resolution: "nise@npm:1.5.3"
+  dependencies:
+    "@sinonjs/formatio": ^3.2.1
+    "@sinonjs/text-encoding": ^0.7.1
+    just-extend: ^4.0.2
+    lolex: ^5.0.1
+    path-to-regexp: ^1.7.0
+  checksum: ec3af21345dcaf34650a6f5420a11e0fd21a836ac5960f5e8523c301ee98465abf88b958f7b3084ecc6e0a7133e5cf7963f4df176b90b423c4da4984f1ebd75e
   languageName: node
   linkType: hard
 
@@ -31718,6 +31775,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"samsam@npm:1.3.0":
+  version: 1.3.0
+  resolution: "samsam@npm:1.3.0"
+  checksum: 084914f7707538b735a41e0edba86abd8f9dd2a47a79511b56b55e8032801db767d9eb31899246179295fbb9ab7ab4d12ebc3410ad4265d897cbf0056c3db63d
+  languageName: node
+  linkType: hard
+
 "sane@npm:^4.0.3":
   version: 4.1.0
   resolution: "sane@npm:4.1.0"
@@ -32296,6 +32360,21 @@ __metadata:
     nise: "npm:^5.1.1"
     supports-color: "npm:^7.2.0"
   checksum: d0d90fdc5aea4170b9cbebaf0e2f6cb04c0feeadc4f5d1dfe1eaf22162637840dd3c989c5386a904b8995f44a9ca6bab61bd1bfac40e425112737f5b12b2a2a1
+  languageName: node
+  linkType: hard
+
+"sinon@npm:^4.0.0":
+  version: 4.5.0
+  resolution: "sinon@npm:4.5.0"
+  dependencies:
+    "@sinonjs/formatio": ^2.0.0
+    diff: ^3.1.0
+    lodash.get: ^4.4.2
+    lolex: ^2.2.0
+    nise: ^1.2.0
+    supports-color: ^5.1.0
+    type-detect: ^4.0.5
+  checksum: 48e4ce9a7ffd5f7c2a5021a03f5c01965801864ba0195bedab34f56fe77ad44087324bb5beb2948ab32065ff577d18265898f46a9796fcb898dd053dbe31d1c6
   languageName: node
   linkType: hard
 
@@ -33807,7 +33886,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"supports-color@npm:^5.0.0, supports-color@npm:^5.3.0":
+"supports-color@npm:^5.0.0, supports-color@npm:^5.1.0, supports-color@npm:^5.3.0":
   version: 5.5.0
   resolution: "supports-color@npm:5.5.0"
   dependencies:

@@ -24,16 +24,15 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/ui-test-queries": "8.23.0"
+    "@instructure/ui-test-queries": "8.23.0",
+    "react": "^16.8",
+    "react-dom": "^16.8"
   },
   "devDependencies": {
     "@instructure/browserslist-config-instui": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
-    "@instructure/ui-react-utils": "8.23.0"
-  },
-  "peerDependencies": {
-    "react": ">=16.8 <=17",
-    "react-dom": ">=16.8 <=17"
+    "@instructure/ui-react-utils": "8.23.0",
+    "@types/mocha": "^7"
   },
   "publishConfig": {
     "access": "public"

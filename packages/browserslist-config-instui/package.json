@@ -20,6 +20,7 @@
   },
   "sideEffects": false,
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "^8.23.0"
+    "@instructure/browserslist-config-instui": "^8.23.0",
+    "@types/mocha": "^7"
   }
 }

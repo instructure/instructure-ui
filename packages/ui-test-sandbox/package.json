@@ -21,19 +21,17 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
+    "react": "^16.8",
+    "react-dom": "^16.8",
     "sinon": "^13"
   },
   "devDependencies": {
     "@instructure/browserslist-config-instui": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
     "@instructure/ui-react-utils": "8.23.0",
-    "@types/mocha": "7",
+    "@types/mocha": "^7",
     "@types/sinon": "^10",
     "prop-types": "^15"
-  },
-  "peerDependencies": {
-    "react": ">=16.8 <=17",
-    "react-dom": ">=16.8 <=17"
   },
   "publishConfig": {
     "access": "public"

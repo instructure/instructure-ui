@@ -17,16 +17,15 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/pkg-utils": "8.23.0",
+    "eslint": "^7",
     "eslint-module-utils": "^2",
     "eslint-plugin-import": "^2"
-  },
-  "peerDependencies": {
-    "eslint": "^7"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "8.23.0"
+    "@instructure/browserslist-config-instui": "8.23.0",
+    "@types/mocha": "^7"
   }
 }

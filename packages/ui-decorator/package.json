@@ -24,13 +24,12 @@
   "devDependencies": {
     "@instructure/browserslist-config-instui": "8.23.0",
     "@instructure/ui-babel-preset": "8.23.0",
-    "@instructure/ui-react-utils": "8.23.0"
+    "@instructure/ui-react-utils": "8.23.0",
+    "@types/mocha": "^7"
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10"
-  },
-  "peerDependencies": {
-    "react": ">=16.8 <=17"
+    "@babel/runtime": "^7.13.10",
+    "react": "^16.8"
   },
   "publishConfig": {
     "access": "public"

@@ -32,7 +32,9 @@
     "@instructure/ui-react-utils": "8.23.0",
     "@instructure/ui-select": "8.23.0",
     "@instructure/ui-testable": "8.23.0",
-    "prop-types": "^15"
+    "prop-types": "^15",
+    "react": "^16.8",
+    "react-dom": "^16.8"
   },
   "devDependencies": {
     "@instructure/browserslist-config-instui": "8.23.0",
@@ -40,11 +42,8 @@
     "@instructure/ui-color-utils": "8.23.0",
     "@instructure/ui-icons": "8.23.0",
     "@instructure/ui-test-locator": "8.23.0",
-    "@instructure/ui-test-utils": "8.23.0"
-  },
-  "peerDependencies": {
-    "react": ">=16.8 <=17",
-    "react-dom": ">=16.8 <=17"
+    "@instructure/ui-test-utils": "8.23.0",
+    "@types/mocha": "^7"
   },
   "publishConfig": {
     "access": "public"
