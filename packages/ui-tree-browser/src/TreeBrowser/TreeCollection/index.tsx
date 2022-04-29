@@ -155,28 +155,9 @@ class TreeCollection extends Component<
           return { ...item, type: 'item' }
         })
       : []
-    collections_.sort(compareFunc)
-    items_.sort(compareFunc)
-    const renderQueue = []
-    const renderType = []
-    while (collections_.length > 0 && items_.length > 0) {
-      if (compareFunc(collections_[0], items_[0]) < 0) {
-        renderQueue.push(collections_.shift())
-        renderType.push(1)
-      } else {
-        renderQueue.push(items_.shift())
-        renderType.push(0)
-      }
-    }
-    while (collections_.length > 0) {
-      renderQueue.push(collections_.shift())
-      renderType.push(1)
-    }
-    while (items_.length > 0) {
-      renderQueue.push(items_.shift())
-      renderType.push(0)
-    }
-    return [renderQueue, renderType]
+    const renderQueue = collections_.concat(items_)
+    renderQueue.sort(compareFunc)
+    return renderQueue
   }
   renderChildren() {
     const {
@@ -189,9 +170,7 @@ class TreeCollection extends Component<
     } = this.props
 
     let position = 1
-    // let sortedChildren
-    // let renderType
-    const [sortedChildren, renderType] = this.sortingChildren()
+    const sortedChildren = this.sortingChildren()
     return (
       <>
         {renderBeforeItems &&
@@ -210,8 +189,8 @@ class TreeCollection extends Component<
             return this.renderItemNode(item, position++)
           })}
         {compareFunc &&
-          sortedChildren.map((child, index) => {
-            if (renderType[index] === 1) {
+          sortedChildren.map((child) => {
+            if (child.type === 'collection') {
               return this.renderCollectionNode(
                 child as CollectionProps,
                 position++
