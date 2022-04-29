@@ -324,4 +324,102 @@ describe('<TreeCollection />', async () => {
       expect(await item3.find('svg:title(Document icon)')).to.exist()
     })
   })
+
+  describe('sorting', async () => {
+    it('should show the items and subcollections in alphabetical order', async () => {
+      await mount(
+        <TreeCollection
+          level={1}
+          id={1}
+          name="Root"
+          collections={[
+            { id: 2, name: 'A', descriptor: 'Collection A' },
+            { id: 3, name: 'B', descriptor: 'Collection B' },
+            { id: 4, name: 'C', descriptor: 'Collection A' }
+          ]}
+          items={[
+            { id: 1, name: 'A1' },
+            { id: 2, name: 'B1' },
+            { id: 2, name: 'C1' }
+          ]}
+          getItemProps={({ name, ...props }) => {
+            const itemIcon = IconDocument
+            return {
+              ...props,
+              itemIcon,
+              name
+            }
+          }}
+          expanded={true}
+          compareFunc={(a, b) => {
+            return a.name.localeCompare(b.name)
+          }}
+        />
+      )
+
+      const collection = await TreeCollectionLocator.find()
+      const childs = await collection.findAllItems()
+      const childNameArr = childs.map((child) => {
+        return child.getDOMNode().ariaLabel
+      })
+      expect(childNameArr.slice(1)).deep.equal([
+        'A',
+        'A1',
+        'B',
+        'B1',
+        'C',
+        'C1'
+      ])
+    })
+
+    it('should show the items before the collections', async () => {
+      await mount(
+        <TreeCollection
+          level={1}
+          id={1}
+          name="Root"
+          collections={[
+            { id: 2, name: 'Coll A', descriptor: 'Collection A' },
+            { id: 3, name: 'Coll B', descriptor: 'Collection B' },
+            { id: 4, name: 'Coll C', descriptor: 'Collection A' }
+          ]}
+          items={[
+            { id: 1, name: 'Item A' },
+            { id: 2, name: 'Item B' },
+            { id: 2, name: 'Item C' }
+          ]}
+          getItemProps={({ name, ...props }) => {
+            const itemIcon = IconDocument
+            return {
+              ...props,
+              itemIcon,
+              name
+            }
+          }}
+          expanded={true}
+          compareFunc={(a, b) => {
+            if (a.type === 'item' && b.type === 'collection') return -1
+
+            if (a.type === 'collection' && b.type === 'item') return 1
+
+            return 0
+          }}
+        />
+      )
+
+      const collection = await TreeCollectionLocator.find()
+      const childs = await collection.findAllItems()
+      const childNameArr = childs.map((child) => {
+        return child.getDOMNode().ariaLabel
+      })
+      expect(childNameArr.slice(1)).deep.equal([
+        'Item A',
+        'Item B',
+        'Item C',
+        'Coll A',
+        'Coll B',
+        'Coll C'
+      ])
+    })
+  })
 })
