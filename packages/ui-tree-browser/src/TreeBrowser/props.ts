@@ -148,6 +148,7 @@ type CollectionBase = {
 type Collection = CollectionBase & {
   items?: number[]
   collections?: (number | string)[]
+  compareFunc?: (a: any, b: any) => number
 }
 
 type CollectionItem = {
@@ -163,6 +164,7 @@ type CollectionProps = {
   items?: CollectionItem[]
   expanded?: boolean
   isCollectionFlattened?: boolean
+  compareFunc?: (a: any, b: any) => number
 } & CollectionBase
 
 type CollectionData = {

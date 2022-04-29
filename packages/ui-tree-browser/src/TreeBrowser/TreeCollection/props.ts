@@ -84,7 +84,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderAfterItems: Children.oneOf([TreeNode]),
   containerRef: PropTypes.func,
   isCollectionFlattened: PropTypes.bool,
-  renderContent: PropTypes.func
+  renderContent: PropTypes.func,
+  compareFunc: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [

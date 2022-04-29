@@ -25,7 +25,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 // eslint-disable-next-line no-unused-vars
-import React, { Component, ReactElement, SyntheticEvent } from 'react'
+import React, { Children, Component, ReactElement, SyntheticEvent } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -142,12 +142,56 @@ class TreeCollection extends Component<
       (this.props.renderAfterItems ? 1 : 0)
     )
   }
-
+  sortingChildren() {
+    const { collections, items, compareFunc } = this.props
+    if (!compareFunc) return []
+    const collections_ = collections
+      ? collections.map((collection) => {
+          return { ...collection, type: 'collection' }
+        })
+      : []
+    const items_ = items
+      ? items.map((item) => {
+          return { ...item, type: 'item' }
+        })
+      : []
+    collections_.sort(compareFunc)
+    items_.sort(compareFunc)
+    const renderQueue = []
+    const renderType = []
+    while (collections_.length > 0 && items_.length > 0) {
+      if (compareFunc(collections_[0], items_[0]) < 0) {
+        renderQueue.push(collections_.shift())
+        renderType.push(1)
+      } else {
+        renderQueue.push(items_.shift())
+        renderType.push(0)
+      }
+    }
+    while (collections_.length > 0) {
+      renderQueue.push(collections_.shift())
+      renderType.push(1)
+    }
+    while (items_.length > 0) {
+      renderQueue.push(items_.shift())
+      renderType.push(0)
+    }
+    return [renderQueue, renderType]
+  }
   renderChildren() {
-    const { collections, items, id, renderBeforeItems, renderAfterItems } =
-      this.props
+    const {
+      collections,
+      items,
+      id,
+      renderBeforeItems,
+      renderAfterItems,
+      compareFunc
+    } = this.props
 
     let position = 1
+    // let sortedChildren
+    // let renderType
+    const [sortedChildren, renderType] = this.sortingChildren()
     return (
       <>
         {renderBeforeItems &&
@@ -157,12 +201,25 @@ class TreeCollection extends Component<
             position++,
             'before'
           )}
-        {collections!.map((collection) => {
-          return this.renderCollectionNode(collection, position++)
-        })}
-        {items!.map((item) => {
-          return this.renderItemNode(item, position++)
-        })}
+        {!compareFunc &&
+          collections!.map((collection) => {
+            return this.renderCollectionNode(collection, position++)
+          })}
+        {!compareFunc &&
+          items!.map((item) => {
+            return this.renderItemNode(item, position++)
+          })}
+        {compareFunc &&
+          sortedChildren.map((child, index) => {
+            if (renderType[index] === 1) {
+              return this.renderCollectionNode(
+                child as CollectionProps,
+                position++
+              )
+            } else {
+              return this.renderItemNode(child as CollectionItem, position++)
+            }
+          })}
         {renderAfterItems &&
           this.renderCollectionChildren(
             id,
@@ -249,6 +306,7 @@ class TreeCollection extends Component<
         renderBeforeItems={collection.renderBeforeItems}
         renderAfterItems={collection.renderAfterItems}
         isCollectionFlattened={false} // only the root needs to be flattened
+        compareFunc={collection.compareFunc}
       />
     )
   }

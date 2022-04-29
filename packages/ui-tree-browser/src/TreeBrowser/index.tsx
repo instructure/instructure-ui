@@ -327,7 +327,8 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
       renderBeforeItems: collection.renderBeforeItems,
       renderAfterItems: collection.renderAfterItems,
       expanded: this.getExpandedIndex(this.expanded, collection.id) >= 0,
-      isCollectionFlattened: this.getIsFlattened(collection)
+      isCollectionFlattened: this.getIsFlattened(collection),
+      compareFunc: collection.compareFunc
     }
   }
 
