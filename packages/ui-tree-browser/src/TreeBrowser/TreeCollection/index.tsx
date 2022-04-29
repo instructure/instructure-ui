@@ -25,7 +25,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 // eslint-disable-next-line no-unused-vars
-import React, { Children, Component, ReactElement, SyntheticEvent } from 'react'
+import React, { Component, ReactElement, SyntheticEvent } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
