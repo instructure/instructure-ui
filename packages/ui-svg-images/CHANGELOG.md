@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.24.1](https://github.com/instructure/instructure-ui/compare/v8.24.0...v8.24.1) (2022-04-29)
+
+**Note:** Version bump only for package @instructure/ui-svg-images
+
 # [8.24.0](https://github.com/instructure/instructure-ui/compare/v8.23.0...v8.24.0) (2022-04-26)
 
 **Note:** Version bump only for package @instructure/ui-svg-images
