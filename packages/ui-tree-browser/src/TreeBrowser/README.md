@@ -381,7 +381,7 @@ class Example extends React.Component {
 render(<Example/>)
 ```
 
-### Change the order of appearance of items and collection
+### Change the order of appearance of items and collections
 
 By default, the order of collections and items depend on the order of `collections` and `items` array. We can override it by providing a `sortOrder` comparison function.
 
@@ -447,6 +447,65 @@ class Example extends React.Component {
          sortOrder={this.state.sorted? (a,b)=>{return(a.name).localeCompare(b.name)}: (a,b)=>{return 0} }
         />
       </>
+    )
+  }
+}
+
+render(<Example/>)
+
+```
+
+There is another way to sort the children of one collection. By adding the `compareFunc` as the comparison function to the collection's properties. This will be effective only within the collection's scope. For more convenience, we support a prop called `type` to specify whether the collection's children is either an item or a subcollection (this is only make sense in `compareFunc`)
+
+```js
+---
+example: true
+render: false
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      size: 'medium'
+    }
+  }
+  render () {
+    return (
+        <TreeBrowser
+          size={this.state.size}
+          collections={{
+            1: {
+              id: 1,
+              name: "Assignments",
+              collections: [3,2],
+              items: [3],
+              descriptor: "Class Assignments",
+              // Sort the direct children of "Assignment" by their name in alphabetical order
+              compareFunc: (a,b)=>{return a.name.localeCompare(b.name)}
+            },
+            2: { id: 2, name: "English Assignments", collections: [4], items: [] },
+            3: { id: 3, name: "Math Assignments", collections: [5], items: [2,1],
+            //  The items appear before subcollections
+            compareFunc: (a,b)=>{
+              if(a.type==="item" && b.type==="collection")
+              return -1
+              if(a.type==="collection" && b.type==="item")
+              return 1
+              return 0
+            }},
+            4: { id: 4, name: "Reading Assignments", collections: [], items: [4] },
+            5: { id: 5, name: "Advanced Math Assignments", items: [5]}
+          }}
+          items={{
+            1: { id: 1, name: "Addition Worksheet" },
+            2: { id: 2, name: "Subtraction Worksheet" },
+            3: { id: 3, name: "General Questions" },
+            4: { id: 4, name: "Vogon Poetry" },
+            5: { id: 5, name: "Bistromath", descriptor: "Explain the Bistromathic Drive" }
+          }}
+          defaultExpanded={[1, 3]}
+          rootId={1}
+        />
     )
   }
 }
