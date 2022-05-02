@@ -42,7 +42,7 @@ import type {
 
 declare global {
   // eslint-disable-next-line no-var
-  var GLOBAL_THEME_REGISTRY: Registry<RegisteredTheme>
+  var __GLOBAL_THEME_REGISTRY__: Registry<RegisteredTheme>
 }
 
 type Registry<T extends RegisteredTheme> = {
@@ -57,7 +57,7 @@ type RegisteredTheme<T extends BaseTheme = BaseTheme> = T & {
 }
 
 const DEFAULT_THEME_KEY = '@@themeRegistryDefaultTheme'
-const GLOBAL_THEME_REGISTRY = 'GLOBAL_THEME_REGISTRY'
+const GLOBAL_THEME_REGISTRY = '__GLOBAL_THEME_REGISTRY__'
 
 // initialize the registry:
 if (globalThis[GLOBAL_THEME_REGISTRY]) {
