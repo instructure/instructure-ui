@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
+import { runCommandsConcurrently, getCommand } from '../utils/command'
 
 export const webpack = () => {
   const { NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env

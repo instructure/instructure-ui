@@ -1,0 +1,1052 @@
+diff --git a/cli.js b/cli.js
+index b1de34de69cc46e98b25c9f3932571398bb1a9a8..df8a7fb747f305522c3d5f2c162144ae7f775a66 100644
+--- a/cli.js
++++ b/cli.js
+@@ -10,10 +10,10 @@
+  * @private
+  */
+ module.exports = (() => {
+-    const app = require('jsdoc/app');
+-    const env = require('jsdoc/env');
+-    const logger = require('jsdoc/util/logger');
+-    const stripBom = require('jsdoc/util/stripbom');
++    const app = require('jsdoc/lib/jsdoc/app');
++    const env = require('jsdoc/lib/jsdoc/env');
++    const logger = require('jsdoc/lib/jsdoc/util/logger');
++    const stripBom = require('jsdoc/lib/jsdoc/util/stripbom');
+     const stripJsonComments = require('strip-json-comments');
+     const Promise = require('bluebird');
+ 
+@@ -48,11 +48,11 @@ module.exports = (() => {
+     // TODO: docs
+     cli.loadConfig = () => {
+         const _ = require('underscore');
+-        const args = require('jsdoc/opts/args');
+-        const Config = require('jsdoc/config');
++        const args = require('jsdoc/lib/jsdoc/opts/args');
++        const Config = require('jsdoc/lib/jsdoc/config');
+         let config;
+-        const fs = require('jsdoc/fs');
+-        const path = require('jsdoc/path');
++        const fs = require('jsdoc/lib/jsdoc/fs');
++        const path = require('jsdoc/lib/jsdoc/path');
+ 
+         let confPath;
+         let isFile;
+@@ -194,7 +194,7 @@ module.exports = (() => {
+     // TODO: docs
+     cli.printHelp = () => {
+         cli.printVersion();
+-        console.log( `\n${require('jsdoc/opts/args').help()}\n` );
++        console.log( `\n${require('jsdoc/lib/jsdoc/opts/args').help()}\n` );
+         console.log('Visit https://jsdoc.app/ for more information.');
+ 
+         return Promise.resolve(0);
+@@ -202,7 +202,7 @@ module.exports = (() => {
+ 
+     // TODO: docs
+     cli.runTests = () => {
+-        const path = require('jsdoc/path');
++        const path = require('jsdoc/lib/jsdoc/path');
+ 
+         const runner = Promise.promisify(require( path.join(env.dirname, 'test/runner') ));
+ 
+@@ -242,7 +242,7 @@ module.exports = (() => {
+     };
+ 
+     function readPackageJson(filepath) {
+-        const fs = require('jsdoc/fs');
++        const fs = require('jsdoc/lib/jsdoc/fs');
+ 
+         try {
+             return stripJsonComments( fs.readFileSync(filepath, 'utf8') );
+@@ -255,7 +255,7 @@ module.exports = (() => {
+     }
+ 
+     function buildSourceList() {
+-        const Readme = require('jsdoc/readme');
++        const Readme = require('jsdoc/lib/jsdoc/readme');
+ 
+         let packageJson;
+         let readmeHtml;
+@@ -298,7 +298,7 @@ module.exports = (() => {
+ 
+     // TODO: docs
+     cli.scanFiles = () => {
+-        const Filter = require('jsdoc/src/filter').Filter;
++        const Filter = require('jsdoc/lib/jsdoc/src/filter').Filter;
+ 
+         let filter;
+ 
+@@ -316,7 +316,7 @@ module.exports = (() => {
+     };
+ 
+     function resolvePluginPaths(paths) {
+-        const path = require('jsdoc/path');
++        const path = require('jsdoc/lib/jsdoc/path');
+ 
+         const pluginPaths = [];
+ 
+@@ -338,9 +338,9 @@ module.exports = (() => {
+     }
+ 
+     cli.createParser = () => {
+-        const handlers = require('jsdoc/src/handlers');
+-        const parser = require('jsdoc/src/parser');
+-        const plugins = require('jsdoc/plugins');
++        const handlers = require('jsdoc/lib/jsdoc/src/handlers');
++        const parser = require('jsdoc/lib/jsdoc/src/parser');
++        const plugins = require('jsdoc/lib/jsdoc/plugins');
+ 
+         app.jsdoc.parser = parser.createParser(env.conf.parser);
+ 
+@@ -355,9 +355,9 @@ module.exports = (() => {
+     };
+ 
+     cli.parseFiles = () => {
+-        const augment = require('jsdoc/augment');
+-        const borrow = require('jsdoc/borrow');
+-        const Package = require('jsdoc/package').Package;
++        const augment = require('jsdoc/lib/jsdoc/augment');
++        const borrow = require('jsdoc/lib/jsdoc/borrow');
++        const Package = require('jsdoc/lib/jsdoc/package').Package;
+ 
+         let docs;
+         let packageDocs;
+@@ -394,13 +394,13 @@ module.exports = (() => {
+     };
+ 
+     cli.dumpParseResults = () => {
+-        console.log(require('jsdoc/util/dumper').dump(props.docs));
++        console.log(require('jsdoc/lib/jsdoc/util/dumper').dump(props.docs));
+ 
+         return cli;
+     };
+ 
+     cli.resolveTutorials = () => {
+-        const resolver = require('jsdoc/tutorial/resolver');
++        const resolver = require('jsdoc/lib/jsdoc/tutorial/resolver');
+ 
+         if (env.opts.tutorials) {
+             resolver.load(env.opts.tutorials);
+@@ -411,8 +411,8 @@ module.exports = (() => {
+     };
+ 
+     cli.generateDocs = () => {
+-        const path = require('jsdoc/path');
+-        const resolver = require('jsdoc/tutorial/resolver');
++        const path = require('jsdoc/lib/jsdoc/path');
++        const resolver = require('jsdoc/lib/jsdoc/tutorial/resolver');
+         const taffy = require('taffydb').taffy;
+ 
+         let template;
+diff --git a/jsdoc.js b/jsdoc.js
+index 6f33c0af644a0e668d8ca705ab94c00a94822530..d2a842b8c7f7c564b9a83ce4374ccb8f3ffa9b74 100755
+--- a/jsdoc.js
++++ b/jsdoc.js
+@@ -9,18 +9,6 @@
+     let jsdocPath = __dirname;
+     const pwd = process.cwd();
+ 
+-    // Create a custom require method that adds `lib/jsdoc` and `node_modules` to the module
+-    // lookup path. This makes it possible to `require('jsdoc/foo')` from external templates and
+-    // plugins, and within JSDoc itself. It also allows external templates and plugins to
+-    // require JSDoc's module dependencies without installing them locally.
+-    /* eslint-disable no-global-assign, no-redeclare */
+-    require = require('requizzle')({
+-        requirePaths: {
+-            before: [path.join(__dirname, 'lib')],
+-            after: [path.join(__dirname, 'node_modules')]
+-        },
+-        infect: true
+-    });
+     /* eslint-enable no-global-assign, no-redeclare */
+ 
+     // resolve the path if it's a symlink
+@@ -38,7 +26,7 @@
+  * Data about the environment in which JSDoc is running, including the configuration settings that
+  * were used to run JSDoc.
+  *
+- * @deprecated As of JSDoc 3.4.0. Use `require('jsdoc/env')` to access the `env` object. The global
++ * @deprecated As of JSDoc 3.4.0. Use `require('jsdoc/lib/jsdoc/env')` to access the `env` object. The global
+  * `env` object will be removed in a future release.
+  * @namespace
+  * @name env
+diff --git a/lib/jsdoc/app.js b/lib/jsdoc/app.js
+index 9a62f36133a83ef32d15c5078c8946b9766ca11d..e5ac01f49a56aeb3857a3959df642ecfe766cb8a 100644
+--- a/lib/jsdoc/app.js
++++ b/lib/jsdoc/app.js
+@@ -12,8 +12,8 @@ module.exports = {
+      * @type {Object}
+      */
+     jsdoc: {
+-        name: require('jsdoc/name'),
++        name: require('jsdoc/lib/jsdoc/name'),
+         parser: null,
+-        scanner: new (require('jsdoc/src/scanner').Scanner)()
++        scanner: new (require('jsdoc/lib/jsdoc/src/scanner').Scanner)()
+     }
+ };
+diff --git a/lib/jsdoc/augment.js b/lib/jsdoc/augment.js
+index 91050f34ae1b6332a0c20bd1b9fa3969ba42dac0..1fb716e4e2d7e30d98a23e9b4d506c5462022bf5 100644
+--- a/lib/jsdoc/augment.js
++++ b/lib/jsdoc/augment.js
+@@ -3,11 +3,11 @@
+  * @module jsdoc/augment
+  */
+ 
+-const doop = require('jsdoc/util/doop');
++const doop = require('jsdoc/lib/jsdoc/util/doop');
+ const jsdoc = {
+-    doclet: require('jsdoc/doclet')
++    doclet: require('jsdoc/lib/jsdoc/doclet')
+ };
+-const name = require('jsdoc/name');
++const name = require('jsdoc/lib/jsdoc/name');
+ 
+ const hasOwnProp = Object.prototype.hasOwnProperty;
+ 
+diff --git a/lib/jsdoc/borrow.js b/lib/jsdoc/borrow.js
+index 7c887c722462fe243fbaadb2968dabf8d1bd9d32..79aa6e0e6831755ca45717e0668226bb79a58582 100644
+--- a/lib/jsdoc/borrow.js
++++ b/lib/jsdoc/borrow.js
+@@ -2,8 +2,8 @@
+  * A collection of functions relating to resolving @borrows tags in JSDoc symbols.
+  * @module jsdoc/borrow
+  */
+-const doop = require('jsdoc/util/doop');
+-const SCOPE = require('jsdoc/name').SCOPE;
++const doop = require('jsdoc/lib/jsdoc/util/doop');
++const SCOPE = require('jsdoc/lib/jsdoc/name').SCOPE;
+ 
+ function cloneBorrowedDoclets({borrowed, longname}, doclets) {
+     borrowed.forEach(({from, as}) => {
+diff --git a/lib/jsdoc/config.js b/lib/jsdoc/config.js
+index 8e867498fdbc03f997c31f013ad7eef01d9fb547..cc3e6fa70b14a0561d4ef05fb073c63070b10bc7 100644
+--- a/lib/jsdoc/config.js
++++ b/lib/jsdoc/config.js
+@@ -1,7 +1,7 @@
+ /**
+  * @module jsdoc/config
+  */
+-const stripBom = require('jsdoc/util/stripbom');
++const stripBom = require('jsdoc/lib/jsdoc/util/stripbom');
+ const stripJsonComments = require('strip-json-comments');
+ 
+ function mergeRecurse(target, source) {
+diff --git a/lib/jsdoc/doclet.js b/lib/jsdoc/doclet.js
+index 8a862ec6f39bb282665380821a02bef5a8227297..c9907228329a8abfeee2efab1e2ea8150bbb4a39 100644
+--- a/lib/jsdoc/doclet.js
++++ b/lib/jsdoc/doclet.js
+@@ -3,21 +3,21 @@
+  */
+ const _ = require('underscore');
+ const jsdoc = {
+-    env: require('jsdoc/env'),
+-    name: require('jsdoc/name'),
++    env: require('jsdoc/lib/jsdoc/env'),
++    name: require('jsdoc/lib/jsdoc/name'),
+     src: {
+-        astnode: require('jsdoc/src/astnode'),
+-        Syntax: require('jsdoc/src/syntax').Syntax
++        astnode: require('jsdoc/lib/jsdoc/src/astnode'),
++        Syntax: require('jsdoc/lib/jsdoc/src/syntax').Syntax
+     },
+     tag: {
+-        Tag: require('jsdoc/tag').Tag,
+-        dictionary: require('jsdoc/tag/dictionary')
++        Tag: require('jsdoc/lib/jsdoc/tag').Tag,
++        dictionary: require('jsdoc/lib/jsdoc/tag/dictionary')
+     },
+     util: {
+-        doop: require('jsdoc/util/doop')
++        doop: require('jsdoc/lib/jsdoc/util/doop')
+     }
+ };
+-const path = require('jsdoc/path');
++const path = require('jsdoc/lib/jsdoc/path');
+ const Syntax = jsdoc.src.Syntax;
+ const util = require('util');
+ 
+@@ -164,8 +164,8 @@ function fixDescription(docletSrc, {code}) {
+  */
+ exports._replaceDictionary = function _replaceDictionary(dict) {
+     jsdoc.tag.dictionary = dict;
+-    require('jsdoc/tag')._replaceDictionary(dict);
+-    require('jsdoc/util/templateHelper')._replaceDictionary(dict);
++    require('jsdoc/lib/jsdoc/tag')._replaceDictionary(dict);
++    require('jsdoc/lib/jsdoc/util/templateHelper')._replaceDictionary(dict);
+ };
+ 
+ function removeGlobal(longname) {
+diff --git a/lib/jsdoc/opts/args.js b/lib/jsdoc/opts/args.js
+index 4dbe5e5e6e2d14bbd4fc316b1f1582f5b25f5dde..6206dfb1087f72250fa6420b7232feb36fb87fbc 100644
+--- a/lib/jsdoc/opts/args.js
++++ b/lib/jsdoc/opts/args.js
+@@ -2,8 +2,8 @@
+  * @module jsdoc/opts/args
+  * @requires jsdoc/opts/argparser
+  */
+-const ArgParser = require('jsdoc/opts/argparser');
+-const cast = require('jsdoc/util/cast').cast;
++const ArgParser = require('jsdoc/lib/jsdoc/opts/argparser');
++const cast = require('jsdoc/lib/jsdoc/util/cast').cast;
+ const querystring = require('querystring');
+ 
+ let ourOptions;
+diff --git a/lib/jsdoc/package.js b/lib/jsdoc/package.js
+index 2dafd8bfae436163664d33a1ac216afaf3128402..80d6840e15452d526b0340515965b68fa210a60e 100644
+--- a/lib/jsdoc/package.js
++++ b/lib/jsdoc/package.js
+@@ -1,5 +1,5 @@
+-const logger = require('jsdoc/util/logger');
+-const stripBom = require('jsdoc/util/stripbom');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
++const stripBom = require('jsdoc/lib/jsdoc/util/stripbom');
+ 
+ /**
+  * Provides access to information about a JavaScript package.
+diff --git a/lib/jsdoc/path.js b/lib/jsdoc/path.js
+index e4116d9e39a5fed7985cf1e0654cc6034fbab93e..efbfbebfb58cce176ed3f79cd2136b10f0642aad 100644
+--- a/lib/jsdoc/path.js
++++ b/lib/jsdoc/path.js
+@@ -2,7 +2,7 @@
+  * Extended version of the standard `path` module.
+  * @module jsdoc/path
+  */
+-const env = require('jsdoc/env');
++const env = require('jsdoc/lib/jsdoc/env');
+ const fs = require('fs');
+ const path = require('path');
+ 
+diff --git a/lib/jsdoc/plugins.js b/lib/jsdoc/plugins.js
+index 83ff3d38078559ad75ca55fd5d323235134c3a50..cb9e197e5eea4242f52442a3a7a443df9eb31a68 100644
+--- a/lib/jsdoc/plugins.js
++++ b/lib/jsdoc/plugins.js
+@@ -2,7 +2,7 @@
+  * Utility functions to support the JSDoc plugin framework.
+  * @module jsdoc/plugins
+  */
+-const dictionary = require('jsdoc/tag/dictionary');
++const dictionary = require('jsdoc/lib/jsdoc/tag/dictionary');
+ 
+ function addHandlers(handlers, parser) {
+     Object.keys(handlers).forEach(eventName => {
+diff --git a/lib/jsdoc/readme.js b/lib/jsdoc/readme.js
+index 8da87c32081a7743c70ec7133ff95c21dca2c45e..6a8066a9159dfe166de626d4e152ec9e30325a88 100644
+--- a/lib/jsdoc/readme.js
++++ b/lib/jsdoc/readme.js
+@@ -2,9 +2,9 @@
+  * Make the contents of a README file available to include in the output.
+  * @module jsdoc/readme
+  */
+-const env = require('jsdoc/env');
+-const fs = require('jsdoc/fs');
+-const markdown = require('jsdoc/util/markdown');
++const env = require('jsdoc/lib/jsdoc/env');
++const fs = require('jsdoc/lib/jsdoc/fs');
++const markdown = require('jsdoc/lib/jsdoc/util/markdown');
+ 
+ /**
+  * Represents a README file.
+diff --git a/lib/jsdoc/src/astbuilder.js b/lib/jsdoc/src/astbuilder.js
+index 58e1b059546db10e543e55f1eb48fd57800d6f98..adf8341f4209285c836145943fe832ee90010774 100644
+--- a/lib/jsdoc/src/astbuilder.js
++++ b/lib/jsdoc/src/astbuilder.js
+@@ -1,6 +1,6 @@
+ const babelParser = require('@babel/parser');
+-const env = require('jsdoc/env');
+-const logger = require('jsdoc/util/logger');
++const env = require('jsdoc/lib/jsdoc/env');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
+ 
+ // exported so we can use them in tests
+ const parserOptions = exports.parserOptions = {
+diff --git a/lib/jsdoc/src/astnode.js b/lib/jsdoc/src/astnode.js
+index 483797f5350e4191edc2e6953ca63be7acc6049b..20684f02792d82b78bdc1cdc94cbeabab7559930 100644
+--- a/lib/jsdoc/src/astnode.js
++++ b/lib/jsdoc/src/astnode.js
+@@ -1,9 +1,9 @@
+ // TODO: docs
+ /** @module jsdoc/src/astnode */
+-const cast = require('jsdoc/util/cast').cast;
+-const env = require('jsdoc/env');
+-const name = require('jsdoc/name');
+-const Syntax = require('jsdoc/src/syntax').Syntax;
++const cast = require('jsdoc/lib/jsdoc/util/cast').cast;
++const env = require('jsdoc/lib/jsdoc/env');
++const name = require('jsdoc/lib/jsdoc/name');
++const Syntax = require('jsdoc/lib/jsdoc/src/syntax').Syntax;
+ const util = require('util');
+ 
+ // Counter for generating unique node IDs.
+diff --git a/lib/jsdoc/src/filter.js b/lib/jsdoc/src/filter.js
+index be7a162e50329c31a4ae99420249524b02173a5f..12c6b3d5c966c0e25c6687d5d49e06b4a9e20094 100644
+--- a/lib/jsdoc/src/filter.js
++++ b/lib/jsdoc/src/filter.js
+@@ -1,8 +1,8 @@
+ /**
+  * @module jsdoc/src/filter
+  */
+-const env = require('jsdoc/env');
+-const path = require('jsdoc/path');
++const env = require('jsdoc/lib/jsdoc/env');
++const path = require('jsdoc/lib/jsdoc/path');
+ 
+ function makeRegExp(config) {
+     let regExp = null;
+diff --git a/lib/jsdoc/src/handlers.js b/lib/jsdoc/src/handlers.js
+index 0c4e2555d646b14e39e04e9ab4d56c5242f9d7d4..e152fefed42d505fcec3abd984ec0af8720ab7be 100644
+--- a/lib/jsdoc/src/handlers.js
++++ b/lib/jsdoc/src/handlers.js
+@@ -3,13 +3,13 @@
+  */
+ const escape = require('escape-string-regexp');
+ const jsdoc = {
+-    doclet: require('jsdoc/doclet'),
+-    name: require('jsdoc/name'),
++    doclet: require('jsdoc/lib/jsdoc/doclet'),
++    name: require('jsdoc/lib/jsdoc/name'),
+     src: {
+-        syntax: require('jsdoc/src/syntax')
++        syntax: require('jsdoc/lib/jsdoc/src/syntax')
+     },
+     util: {
+-        logger: require('jsdoc/util/logger')
++        logger: require('jsdoc/lib/jsdoc/util/logger')
+     }
+ };
+ 
+diff --git a/lib/jsdoc/src/parser.js b/lib/jsdoc/src/parser.js
+index cead39b710f691fe92c71df5eb58daad401c401a..5f4bdbf8d57bac1ed9abc193f2f571269767bc41 100644
+--- a/lib/jsdoc/src/parser.js
++++ b/lib/jsdoc/src/parser.js
+@@ -2,27 +2,27 @@
+  * @module jsdoc/src/parser
+  */
+ const EventEmitter = require('events').EventEmitter;
+-const fs = require('jsdoc/fs');
++const fs = require('jsdoc/lib/jsdoc/fs');
+ const jsdoc = {
+-    doclet: require('jsdoc/doclet'),
+-    env: require('jsdoc/env'),
+-    name: require('jsdoc/name'),
++    doclet: require('jsdoc/lib/jsdoc/doclet'),
++    env: require('jsdoc/lib/jsdoc/env'),
++    name: require('jsdoc/lib/jsdoc/name'),
+     src: {
+-        astnode: require('jsdoc/src/astnode'),
+-        syntax: require('jsdoc/src/syntax')
++        astnode: require('jsdoc/lib/jsdoc/src/astnode'),
++        syntax: require('jsdoc/lib/jsdoc/src/syntax')
+     },
+     util: {
+-        doop: require('jsdoc/util/doop')
++        doop: require('jsdoc/lib/jsdoc/util/doop')
+     }
+ };
+-const logger = require('jsdoc/util/logger');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
+ 
+ const hasOwnProp = Object.prototype.hasOwnProperty;
+ const Syntax = jsdoc.src.syntax.Syntax;
+ 
+ // TODO: docs
+ const PARSERS = exports.PARSERS = {
+-    js: 'jsdoc/src/parser'
++    js: 'jsdoc/lib/jsdoc/src/parser'
+ };
+ /* eslint-disable no-script-url */
+ // Prefix for JavaScript strings that were provided in lieu of a filename.
+@@ -103,9 +103,9 @@ class Parser extends EventEmitter {
+ 
+         this.clear();
+ 
+-        this._astBuilder = builderInstance || new (require('jsdoc/src/astbuilder').AstBuilder)();
+-        this._visitor = visitorInstance || new (require('jsdoc/src/visitor').Visitor)();
+-        this._walker = walkerInstance || new (require('jsdoc/src/walker').Walker)();
++        this._astBuilder = builderInstance || new (require('jsdoc/lib/jsdoc/src/astbuilder').AstBuilder)();
++        this._visitor = visitorInstance || new (require('jsdoc/lib/jsdoc/src/visitor').Visitor)();
++        this._walker = walkerInstance || new (require('jsdoc/lib/jsdoc/src/walker').Walker)();
+ 
+         this._visitor.setParser(this);
+ 
+diff --git a/lib/jsdoc/src/scanner.js b/lib/jsdoc/src/scanner.js
+index e7d96e9f0b359837066e6445be6a914e28bca6cd..de4ccd9eace80bc41aa911c174ef3c65c4e042ea 100644
+--- a/lib/jsdoc/src/scanner.js
++++ b/lib/jsdoc/src/scanner.js
+@@ -3,10 +3,10 @@
+  * @requires module:jsdoc/fs
+  */
+ const EventEmitter = require('events').EventEmitter;
+-const env = require('jsdoc/env');
+-const fs = require('jsdoc/fs');
+-const logger = require('jsdoc/util/logger');
+-const path = require('jsdoc/path');
++const env = require('jsdoc/lib/jsdoc/env');
++const fs = require('jsdoc/lib/jsdoc/fs');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
++const path = require('jsdoc/lib/jsdoc/path');
+ 
+ /**
+  * @extends module:events.EventEmitter
+diff --git a/lib/jsdoc/src/visitor.js b/lib/jsdoc/src/visitor.js
+index c712cc815edefb8c1c1262b79f0ba9fddda45adf..939f3c9addc3fa2cac0ef1900802f0280df2b3c0 100644
+--- a/lib/jsdoc/src/visitor.js
++++ b/lib/jsdoc/src/visitor.js
+@@ -4,14 +4,14 @@
+ // TODO: consider exporting more stuff so users can override it
+ 
+ const jsdoc = {
+-    doclet: require('jsdoc/doclet'),
+-    name: require('jsdoc/name'),
++    doclet: require('jsdoc/lib/jsdoc/doclet'),
++    name: require('jsdoc/lib/jsdoc/name'),
+     src: {
+-        astnode: require('jsdoc/src/astnode'),
+-        syntax: require('jsdoc/src/syntax')
++        astnode: require('jsdoc/lib/jsdoc/src/astnode'),
++        syntax: require('jsdoc/lib/jsdoc/src/syntax')
+     },
+     util: {
+-        logger: require('jsdoc/util/logger')
++        logger: require('jsdoc/lib/jsdoc/util/logger')
+     }
+ };
+ 
+diff --git a/lib/jsdoc/src/walker.js b/lib/jsdoc/src/walker.js
+index a38049df5ade2c8f648fa94fb7e039c03b828253..92a01062695af5bc2bddd98632c54698a65dbd18 100644
+--- a/lib/jsdoc/src/walker.js
++++ b/lib/jsdoc/src/walker.js
+@@ -3,9 +3,9 @@
+  *
+  * @module jsdoc/src/walker
+  */
+-const astnode = require('jsdoc/src/astnode');
+-const logger = require('jsdoc/util/logger');
+-const Syntax = require('jsdoc/src/syntax').Syntax;
++const astnode = require('jsdoc/lib/jsdoc/src/astnode');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
++const Syntax = require('jsdoc/lib/jsdoc/src/syntax').Syntax;
+ 
+ // TODO: docs
+ function getCurrentScope(scopes) {
+diff --git a/lib/jsdoc/tag/dictionary/definitions.js b/lib/jsdoc/tag/dictionary/definitions.js
+index a4f3139f2bcaea8536fefe8c6ab54382147a7f95..c9bb06e4315dbf03cde1a4cc047e8a95e2e26ed9 100644
+--- a/lib/jsdoc/tag/dictionary/definitions.js
++++ b/lib/jsdoc/tag/dictionary/definitions.js
+@@ -4,22 +4,22 @@
+  */
+ const _ = require('underscore');
+ const jsdoc = {
+-    env: require('jsdoc/env'),
+-    name: require('jsdoc/name'),
++    env: require('jsdoc/lib/jsdoc/env'),
++    name: require('jsdoc/lib/jsdoc/name'),
+     src: {
+-        astnode: require('jsdoc/src/astnode')
++        astnode: require('jsdoc/lib/jsdoc/src/astnode')
+     },
+     tag: {
+-        inline: require('jsdoc/tag/inline'),
+-        type: require('jsdoc/tag/type')
++        inline: require('jsdoc/lib/jsdoc/tag/inline'),
++        type: require('jsdoc/lib/jsdoc/tag/type')
+     },
+     util: {
+-        doop: require('jsdoc/util/doop'),
+-        logger: require('jsdoc/util/logger')
++        doop: require('jsdoc/lib/jsdoc/util/doop'),
++        logger: require('jsdoc/lib/jsdoc/util/logger')
+     }
+ };
+-const path = require('jsdoc/path');
+-const Syntax = require('jsdoc/src/syntax').Syntax;
++const path = require('jsdoc/lib/jsdoc/path');
++const Syntax = require('jsdoc/lib/jsdoc/src/syntax').Syntax;
+ 
+ const hasOwnProp = Object.prototype.hasOwnProperty;
+ 
+diff --git a/lib/jsdoc/tag/dictionary.js b/lib/jsdoc/tag/dictionary.js
+index 8d2e1aaa15c148bf83f5230b75adbdbf4d6f0875..8579ae4344f2362865bd955c13c1a463a9e7b50a 100644
+--- a/lib/jsdoc/tag/dictionary.js
++++ b/lib/jsdoc/tag/dictionary.js
+@@ -1,5 +1,5 @@
+ /** @module jsdoc/tag/dictionary */
+-const definitions = require('jsdoc/tag/dictionary/definitions');
++const definitions = require('jsdoc/lib/jsdoc/tag/dictionary/definitions');
+ 
+ const hasOwnProp = Object.prototype.hasOwnProperty;
+ 
+diff --git a/lib/jsdoc/tag/type.js b/lib/jsdoc/tag/type.js
+index 69c8d05ea87921a6dc3220ae19d9211da1b0d994..79fcf995a91fe7d75e2d6a18cebc487953605542 100644
+--- a/lib/jsdoc/tag/type.js
++++ b/lib/jsdoc/tag/type.js
+@@ -3,12 +3,12 @@
+  */
+ const catharsis = require('catharsis');
+ const jsdoc = {
+-    name: require('jsdoc/name'),
++    name: require('jsdoc/lib/jsdoc/name'),
+     tag: {
+-        inline: require('jsdoc/tag/inline')
++        inline: require('jsdoc/lib/jsdoc/tag/inline')
+     },
+     util: {
+-        cast: require('jsdoc/util/cast')
++        cast: require('jsdoc/lib/jsdoc/util/cast')
+     }
+ };
+ 
+diff --git a/lib/jsdoc/tag/validator.js b/lib/jsdoc/tag/validator.js
+index a10dfb13d5bf1fd0ae350c7b2d407b010d6b0361..01280aeba082a8d2a4456ce1661c703536d6bce4 100644
+--- a/lib/jsdoc/tag/validator.js
++++ b/lib/jsdoc/tag/validator.js
+@@ -2,8 +2,8 @@
+  * @module jsdoc/tag/validator
+  * @requires jsdoc/tag/dictionary
+  */
+-const env = require('jsdoc/env');
+-const logger = require('jsdoc/util/logger');
++const env = require('jsdoc/lib/jsdoc/env');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
+ 
+ function buildMessage(tagName, {filename, lineno, comment}, desc) {
+     let result = `The @${tagName} tag ${desc}. File: ${filename}, line: ${lineno}`;
+diff --git a/lib/jsdoc/tag.js b/lib/jsdoc/tag.js
+index 3b9376c35722b4fbc6616e836e0fd3fc11f14685..acc53e916df73a234658d187e5ef1d7074abcd4b 100644
+--- a/lib/jsdoc/tag.js
++++ b/lib/jsdoc/tag.js
+@@ -10,17 +10,17 @@
+  * @requires module:util
+  */
+ const jsdoc = {
+-    env: require('jsdoc/env'),
++    env: require('jsdoc/lib/jsdoc/env'),
+     tag: {
+-        dictionary: require('jsdoc/tag/dictionary'),
+-        validator: require('jsdoc/tag/validator'),
+-        type: require('jsdoc/tag/type')
++        dictionary: require('jsdoc/lib/jsdoc/tag/dictionary'),
++        validator: require('jsdoc/lib/jsdoc/tag/validator'),
++        type: require('jsdoc/lib/jsdoc/tag/type')
+     },
+     util: {
+-        logger: require('jsdoc/util/logger')
++        logger: require('jsdoc/lib/jsdoc/util/logger')
+     }
+ };
+-const path = require('jsdoc/path');
++const path = require('jsdoc/lib/jsdoc/path');
+ const util = require('util');
+ 
+ // Check whether the text is the same as a symbol name with leading or trailing whitespace. If so,
+diff --git a/lib/jsdoc/template.js b/lib/jsdoc/template.js
+index c01cb852f2f11fc9c8fda2fb41209423de69bbcd..7f4e4fc652c8cee0f0c70f3e438746dd2ea145cb 100644
+--- a/lib/jsdoc/template.js
++++ b/lib/jsdoc/template.js
+@@ -3,7 +3,7 @@
+  * @module jsdoc/template
+  */
+ const _ = require('underscore');
+-const fs = require('jsdoc/fs');
++const fs = require('jsdoc/lib/jsdoc/fs');
+ const path = require('path');
+ 
+ /**
+diff --git a/lib/jsdoc/tutorial/resolver.js b/lib/jsdoc/tutorial/resolver.js
+index c3a82051657acc6d7ea17598669620a0e025424b..adbca9c16efa132ca88c1f834393cb619ad57b08 100644
+--- a/lib/jsdoc/tutorial/resolver.js
++++ b/lib/jsdoc/tutorial/resolver.js
+@@ -1,12 +1,12 @@
+ /**
+  * @module jsdoc/tutorial/resolver
+  */
+-const env = require('jsdoc/env');
+-const fs = require('jsdoc/fs');
+-const logger = require('jsdoc/util/logger');
++const env = require('jsdoc/lib/jsdoc/env');
++const fs = require('jsdoc/lib/jsdoc/fs');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
+ const path = require('path');
+-const stripBom = require('jsdoc/util/stripbom');
+-const tutorial = require('jsdoc/tutorial');
++const stripBom = require('jsdoc/lib/jsdoc/util/stripbom');
++const tutorial = require('jsdoc/lib/jsdoc/tutorial');
+ 
+ const hasOwnProp = Object.prototype.hasOwnProperty;
+ 
+diff --git a/lib/jsdoc/tutorial.js b/lib/jsdoc/tutorial.js
+index 29e74d182e9f8f65f309a12c71d052c68abad552..21d08cd81fdc981435beb02b988f7043d7fee5f8 100644
+--- a/lib/jsdoc/tutorial.js
++++ b/lib/jsdoc/tutorial.js
+@@ -1,7 +1,7 @@
+ /**
+  * @module jsdoc/tutorial
+  */
+-const markdown = require('jsdoc/util/markdown');
++const markdown = require('jsdoc/lib/jsdoc/util/markdown');
+ 
+ const hasOwnProp = Object.prototype.hasOwnProperty;
+ 
+diff --git a/lib/jsdoc/util/error.js b/lib/jsdoc/util/error.js
+index ff06198999a9aebd42f230768e97a6288442fa46..ceaef414124f6b6988aa5b786c52747d93d3aaab 100644
+--- a/lib/jsdoc/util/error.js
++++ b/lib/jsdoc/util/error.js
+@@ -20,7 +20,7 @@
+  * @memberof module:jsdoc/util/error
+  */
+ exports.handle = e => {
+-    const logger = require('jsdoc/util/logger');
++    const logger = require('jsdoc/lib/jsdoc/util/logger');
+     let msg = e ? ( e.message || JSON.stringify(e) ) : '';
+ 
+     // include the error type if it's an Error object
+diff --git a/lib/jsdoc/util/logger.js b/lib/jsdoc/util/logger.js
+index 59e8b93691e86e385f4d5e88d8d32a945d504765..63e6b1ee3f278106be4520f58664867c1b1e6ee2 100644
+--- a/lib/jsdoc/util/logger.js
++++ b/lib/jsdoc/util/logger.js
+@@ -23,7 +23,7 @@
+  * @module jsdoc/util/logger
+  * @extends module:events.EventEmitter
+  * @example
+- * var logger = require('jsdoc/util/logger');
++ * var logger = require('jsdoc/lib/jsdoc/util/logger');
+  *
+  * var data = {
+  *   foo: 'bar'
+diff --git a/lib/jsdoc/util/markdown.js b/lib/jsdoc/util/markdown.js
+index 9ffe36fc74647403a2822c50f0270db823a44ae3..c9e21e9900137b5e1bc814c95aaefea1f63a2b93 100644
+--- a/lib/jsdoc/util/markdown.js
++++ b/lib/jsdoc/util/markdown.js
+@@ -2,12 +2,12 @@
+  * Provides access to Markdown-related functions.
+  * @module jsdoc/util/markdown
+  */
+-const env = require('jsdoc/env');
+-const logger = require('jsdoc/util/logger');
++const env = require('jsdoc/lib/jsdoc/env');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
+ const MarkdownIt = require('markdown-it');
+ const marked = require('marked');
+ const mda = require('markdown-it-anchor');
+-const path = require('jsdoc/path');
++const path = require('jsdoc/lib/jsdoc/path');
+ const util = require('util');
+ 
+ /**
+diff --git a/lib/jsdoc/util/templateHelper.js b/lib/jsdoc/util/templateHelper.js
+index fa1604f25398dcc1b45b2f60e47333f8d79d9494..e155dbba53722178f6d80d02f21e554e736d379a 100644
+--- a/lib/jsdoc/util/templateHelper.js
++++ b/lib/jsdoc/util/templateHelper.js
+@@ -2,11 +2,11 @@
+  * @module jsdoc/util/templateHelper
+  */
+ const catharsis = require('catharsis');
+-let dictionary = require('jsdoc/tag/dictionary');
+-const env = require('jsdoc/env');
+-const inline = require('jsdoc/tag/inline');
+-const logger = require('jsdoc/util/logger');
+-const name = require('jsdoc/name');
++let dictionary = require('jsdoc/lib/jsdoc/tag/dictionary');
++const env = require('jsdoc/lib/jsdoc/env');
++const inline = require('jsdoc/lib/jsdoc/tag/inline');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
++const name = require('jsdoc/lib/jsdoc/name');
+ const util = require('util');
+ 
+ const hasOwnProp = Object.prototype.hasOwnProperty;
+diff --git a/plugins/eventDumper.js b/plugins/eventDumper.js
+index 45e590088fc7c2819c9c28a44303312fec3ca3b0..3d81323d8ebcd35cec5c2a277862c5ab6f3dcc9f 100644
+--- a/plugins/eventDumper.js
++++ b/plugins/eventDumper.js
+@@ -4,9 +4,9 @@
+  * @module plugins/eventDumper
+  */
+ const _ = require('underscore');
+-const doop = require('jsdoc/util/doop');
+-const dump = require('jsdoc/util/dumper').dump;
+-const env = require('jsdoc/env');
++const doop = require('jsdoc/lib/jsdoc/util/doop');
++const dump = require('jsdoc/lib/jsdoc/util/dumper').dump;
++const env = require('jsdoc/lib/jsdoc/env');
+ const util = require('util');
+ 
+ const conf = env.conf.eventDumper || {};
+diff --git a/plugins/markdown.js b/plugins/markdown.js
+index 4904867ba7ecfac97a4b53ca99fb3932361319c3..ef23e4851c82e5e075ea2adef08cdf1a78089465 100644
+--- a/plugins/markdown.js
++++ b/plugins/markdown.js
+@@ -3,7 +3,7 @@
+  *
+  * @module plugins/markdown
+  */
+-const env = require('jsdoc/env');
++const env = require('jsdoc/lib/jsdoc/env');
+ 
+ const config = env.conf.markdown || {};
+ const defaultTags = [
+@@ -18,7 +18,7 @@ const defaultTags = [
+     'summary'
+ ];
+ const hasOwnProp = Object.prototype.hasOwnProperty;
+-const parse = require('jsdoc/util/markdown').getParser();
++const parse = require('jsdoc/lib/jsdoc/util/markdown').getParser();
+ let tags = [];
+ let excludeTags = [];
+ 
+diff --git a/plugins/partial.js b/plugins/partial.js
+index 83c84f20069bd652fafdbb17fbe6339282d37ac0..0b42aeb4dbbd8f95770e766586737ce86ffd63a1 100644
+--- a/plugins/partial.js
++++ b/plugins/partial.js
+@@ -3,8 +3,8 @@
+  *
+  * @module plugins/partial
+  */
+-const env = require('jsdoc/env');
+-const fs = require('jsdoc/fs');
++const env = require('jsdoc/lib/jsdoc/env');
++const fs = require('jsdoc/lib/jsdoc/fs');
+ const path = require('path');
+ 
+ exports.handlers = {
+diff --git a/plugins/sourcetag.js b/plugins/sourcetag.js
+index 624414043c8b23ca95bbf526045f626c53c30686..a3686ba85ce44b92ba45c8295ccce9110fda291b 100644
+--- a/plugins/sourcetag.js
++++ b/plugins/sourcetag.js
+@@ -1,7 +1,7 @@
+ /**
+  * @module plugins/sourcetag
+  */
+-const logger = require('jsdoc/util/logger');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
+ 
+ exports.handlers = {
+     /**
+diff --git a/plugins/test/specs/commentConvert.js b/plugins/test/specs/commentConvert.js
+index 583678c012d3b741987ce8a6999392fde4c4db93..a8975649db6af200961c1eb9d62df577c3494da8 100644
+--- a/plugins/test/specs/commentConvert.js
++++ b/plugins/test/specs/commentConvert.js
+@@ -1,8 +1,8 @@
+ 'use strict';
+ 
+ describe('commentConvert plugin', function() {
+-    var env = require('jsdoc/env');
+-    var path = require('jsdoc/path');
++    var env = require('jsdoc/lib/jsdoc/env');
++    var path = require('jsdoc/lib/jsdoc/path');
+ 
+     var docSet;
+     var parser = jasmine.createParser();
+@@ -10,7 +10,7 @@ describe('commentConvert plugin', function() {
+     var pluginPathResolved = path.join(env.dirname, pluginPath);
+     var plugin = require(pluginPathResolved);
+ 
+-    require('jsdoc/plugins').installPlugins([pluginPathResolved], parser);
++    require('jsdoc/lib/jsdoc/plugins').installPlugins([pluginPathResolved], parser);
+     docSet = jasmine.getDocSetFromFile(pluginPath + '.js', parser);
+ 
+     it('should convert ///-style comments into jsdoc comments', function() {
+diff --git a/plugins/test/specs/escapeHtml.js b/plugins/test/specs/escapeHtml.js
+index d74979649391033a83d1eedd1e78c98cf0173d64..ec266291ce69caa6d69447301a74659b4790bccc 100644
+--- a/plugins/test/specs/escapeHtml.js
++++ b/plugins/test/specs/escapeHtml.js
+@@ -1,15 +1,15 @@
+ 'use strict';
+ 
+ describe('escapeHtml plugin', function() {
+-    var env = require('jsdoc/env');
+-    var path = require('jsdoc/path');
++    var env = require('jsdoc/lib/jsdoc/env');
++    var path = require('jsdoc/lib/jsdoc/path');
+ 
+     var docSet;
+     var parser = jasmine.createParser();
+     var pluginPath = 'plugins/escapeHtml';
+     var pluginPathResolved = path.join(env.dirname, pluginPath);
+ 
+-    require('jsdoc/plugins').installPlugins([pluginPathResolved], parser);
++    require('jsdoc/lib/jsdoc/plugins').installPlugins([pluginPathResolved], parser);
+     docSet = jasmine.getDocSetFromFile(pluginPath + '.js', parser);
+ 
+     it("should escape '&', '<' and newlines in doclet descriptions", function() {
+diff --git a/plugins/test/specs/markdown.js b/plugins/test/specs/markdown.js
+index 8c8d74c00812a4159c6c63c48b1d3f7de6a8e8b5..5b71b25cd19b80243c000f16d3b9ad57f566404f 100644
+--- a/plugins/test/specs/markdown.js
++++ b/plugins/test/specs/markdown.js
+@@ -1,7 +1,7 @@
+ 'use strict';
+ 
+-var env = require('jsdoc/env');
+-var path = require('jsdoc/path');
++var env = require('jsdoc/lib/jsdoc/env');
++var path = require('jsdoc/lib/jsdoc/path');
+ 
+ describe('markdown plugin', function() {
+     var pluginPath = 'plugins/markdown';
+diff --git a/plugins/test/specs/overloadHelper.js b/plugins/test/specs/overloadHelper.js
+index 3e69ea6bca74649cf5645dfe95e93eef34ea1998..d32b18e41c277b5d032efe0996004b84a74b249a 100644
+--- a/plugins/test/specs/overloadHelper.js
++++ b/plugins/test/specs/overloadHelper.js
+@@ -1,8 +1,8 @@
+ 'use strict';
+ 
+ describe('plugins/overloadHelper', function() {
+-    var env = require('jsdoc/env');
+-    var path = require('jsdoc/path');
++    var env = require('jsdoc/lib/jsdoc/env');
++    var path = require('jsdoc/lib/jsdoc/path');
+ 
+     var docSet;
+     var parser = jasmine.createParser();
+@@ -10,7 +10,7 @@ describe('plugins/overloadHelper', function() {
+     var pluginPathResolved = path.resolve(env.dirname, pluginPath);
+     var plugin = require(pluginPathResolved);
+ 
+-    require('jsdoc/plugins').installPlugins([pluginPathResolved], parser);
++    require('jsdoc/lib/jsdoc/plugins').installPlugins([pluginPathResolved], parser);
+     docSet = jasmine.getDocSetFromFile('plugins/test/fixtures/overloadHelper.js', parser);
+ 
+     it('should exist', function() {
+diff --git a/plugins/test/specs/railsTemplate.js b/plugins/test/specs/railsTemplate.js
+index abd39d3218faf8b7beb01bb685e37a99858bae46..0a121d0de332ac23f659742688fb1499e4acb63b 100644
+--- a/plugins/test/specs/railsTemplate.js
++++ b/plugins/test/specs/railsTemplate.js
+@@ -1,15 +1,15 @@
+ 'use strict';
+ 
+ describe('railsTemplate plugin', function() {
+-    var env = require('jsdoc/env');
+-    var path = require('jsdoc/path');
++    var env = require('jsdoc/lib/jsdoc/env');
++    var path = require('jsdoc/lib/jsdoc/path');
+ 
+     var parser = jasmine.createParser();
+     var pluginPath = path.join(env.dirname, 'plugins/railsTemplate');
+     var plugin = require(pluginPath);
+ 
+-    require('jsdoc/plugins').installPlugins([pluginPath], parser);
+-    require('jsdoc/src/handlers').attachTo(parser);
++    require('jsdoc/lib/jsdoc/plugins').installPlugins([pluginPath], parser);
++    require('jsdoc/lib/jsdoc/src/handlers').attachTo(parser);
+ 
+     it('should remove <% %> rails template tags from the source of *.erb files', function() {
+         var docSet = parser.parse([path.join(env.dirname, 'plugins/test/fixtures/railsTemplate.js.erb')]);
+diff --git a/plugins/test/specs/shout.js b/plugins/test/specs/shout.js
+index c0bfe7a9c6394550deda6eeea79aef5003129b7a..544213dec2dbcf1bc78848fe17ebb8aace0bb7a3 100644
+--- a/plugins/test/specs/shout.js
++++ b/plugins/test/specs/shout.js
+@@ -1,8 +1,8 @@
+ 'use strict';
+ 
+ describe('shout plugin', function() {
+-    var env = require('jsdoc/env');
+-    var path = require('jsdoc/path');
++    var env = require('jsdoc/lib/jsdoc/env');
++    var path = require('jsdoc/lib/jsdoc/path');
+ 
+     var docSet;
+     var parser = jasmine.createParser();
+@@ -10,7 +10,7 @@ describe('shout plugin', function() {
+     var pluginPathResolved = path.join(env.dirname, pluginPath);
+     var plugin = require(pluginPathResolved);
+ 
+-    require('jsdoc/plugins').installPlugins([pluginPathResolved], parser);
++    require('jsdoc/lib/jsdoc/plugins').installPlugins([pluginPathResolved], parser);
+     docSet = jasmine.getDocSetFromFile(pluginPath + '.js', parser);
+ 
+     it('should make the description uppercase', function() {
+diff --git a/plugins/test/specs/sourcetag.js b/plugins/test/specs/sourcetag.js
+index d0948a279c422ba6f86d163156d2ecbd2eb7f804..05fe5880eef85013ca00353547867d1cd88a46e2 100644
+--- a/plugins/test/specs/sourcetag.js
++++ b/plugins/test/specs/sourcetag.js
+@@ -1,15 +1,15 @@
+ 'use strict';
+ 
+ describe('sourcetag plugin', function() {
+-    var env = require('jsdoc/env');
+-    var path = require('jsdoc/path');
++    var env = require('jsdoc/lib/jsdoc/env');
++    var path = require('jsdoc/lib/jsdoc/path');
+ 
+     var docSet;
+     var parser = jasmine.createParser();
+     var pluginPath = 'plugins/sourcetag';
+     var pluginPathResolved = path.join(env.dirname, pluginPath);
+ 
+-    require('jsdoc/plugins').installPlugins([pluginPathResolved], parser);
++    require('jsdoc/lib/jsdoc/plugins').installPlugins([pluginPathResolved], parser);
+     docSet = jasmine.getDocSetFromFile(pluginPath + '.js', parser);
+ 
+     it("should set the lineno and filename of the doclet's meta property", function() {
+diff --git a/plugins/test/specs/underscore.js b/plugins/test/specs/underscore.js
+index 506671a6a542699357d9756945b4120d0e35416d..60462cb4863765de4ebcf9c52b5397a4192b6900 100644
+--- a/plugins/test/specs/underscore.js
++++ b/plugins/test/specs/underscore.js
+@@ -1,8 +1,8 @@
+ 'use strict';
+ 
+ describe('underscore plugin', function () {
+-    var env = require('jsdoc/env');
+-    var path = require('jsdoc/path');
++    var env = require('jsdoc/lib/jsdoc/env');
++    var path = require('jsdoc/lib/jsdoc/path');
+ 
+     var docSet;
+     var parser = jasmine.createParser();
+@@ -11,7 +11,7 @@ describe('underscore plugin', function () {
+     var pluginPathResolved = path.join(env.dirname, pluginPath);
+     var plugin = require(pluginPathResolved);
+ 
+-    require('jsdoc/plugins').installPlugins([pluginPathResolved], parser);
++    require('jsdoc/lib/jsdoc/plugins').installPlugins([pluginPathResolved], parser);
+     docSet = jasmine.getDocSetFromFile(fixturePath + '.js', parser);
+ 
+     it('should not mark normal, public properties as private', function() {
+diff --git a/templates/default/publish.js b/templates/default/publish.js
+index aaa99b3fb1301995445b4523f4ef77e80b90b17f..84af951b2a4b93ecb8b599f1771f861930584b43 100644
+--- a/templates/default/publish.js
++++ b/templates/default/publish.js
+@@ -1,11 +1,11 @@
+-const doop = require('jsdoc/util/doop');
+-const env = require('jsdoc/env');
+-const fs = require('jsdoc/fs');
+-const helper = require('jsdoc/util/templateHelper');
+-const logger = require('jsdoc/util/logger');
+-const path = require('jsdoc/path');
++const doop = require('jsdoc/lib/jsdoc/util/doop');
++const env = require('jsdoc/lib/jsdoc/env');
++const fs = require('jsdoc/lib/jsdoc/fs');
++const helper = require('jsdoc/lib/jsdoc/util/templateHelper');
++const logger = require('jsdoc/lib/jsdoc/util/logger');
++const path = require('jsdoc/lib/jsdoc/path');
+ const taffy = require('taffydb').taffy;
+-const template = require('jsdoc/template');
++const template = require('jsdoc/lib/jsdoc/template');
+ const util = require('util');
+ 
+ const htmlsafe = helper.htmlsafe;
+@@ -513,8 +513,8 @@ exports.publish = (taffyData, opts, tutorials) => {
+         staticFilePaths = conf.default.staticFiles.include ||
+             conf.default.staticFiles.paths ||
+             [];
+-        staticFileFilter = new (require('jsdoc/src/filter').Filter)(conf.default.staticFiles);
+-        staticFileScanner = new (require('jsdoc/src/scanner').Scanner)();
++        staticFileFilter = new (require('jsdoc/lib/jsdoc/src/filter').Filter)(conf.default.staticFiles);
++        staticFileScanner = new (require('jsdoc/lib/jsdoc/src/scanner').Scanner)();
+ 
+         staticFilePaths.forEach(filePath => {
+             let extraStaticFiles;
+diff --git a/templates/haruki/publish.js b/templates/haruki/publish.js
+index 47aa60618507e78c83f4e726851f4732e357aa0b..2c2a8474d3db7fdb60d9de4fd4b8044037483176 100644
+--- a/templates/haruki/publish.js
++++ b/templates/haruki/publish.js
+@@ -215,7 +215,7 @@ exports.publish = (data, {destination, query}) => {
+             console.log( xml.parse('jsdoc', root) );
+         }
+         else {
+-            console.log( require('jsdoc/util/dumper').dump(root) );
++            console.log( require('jsdoc/lib/jsdoc/util/dumper').dump(root) );
+         }
+     }
+     else {

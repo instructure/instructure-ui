@@ -36,6 +36,7 @@ export function getJSDoc(source: Buffer, error: (err: Error) => void) {
         configure: './jsdoc.config.json',
         source
       })
+
       .filter((section: Record<string, any>) => {
         return (
           section.undocumented !== true &&

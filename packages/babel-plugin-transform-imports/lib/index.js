@@ -79,19 +79,8 @@ function transform(transformOption, importName, matches) {
     // Sometimes the import is not located at root level of the src. Examine the source of the specified package and if the designated
     // import is not at the root level, construct a relative path from the source root to it's location.
     if (matches && matches[1]) {
-        debugger
       const packageName = matches[1]
-        let sourceIndex
-        if(process.versions.pnp) {
-            const targetPnp = findPnpApi(packageName)
-            const packageLocation = targetPnp.findPackageLocator(packageName)
-            const packageInfo = targetPnp.getPackageInformation(packageLocation)
-            console.log({ packageInfo: packageInfo.packageLocation, packageName})
-            const pnpRequire = createRequire(packageInfo.packageLocation)
-            sourceIndex = pnpRequire.resolve(packageInfo.packageLocation)
-        } else {
-             sourceIndex = require.resolve()
-        }
+      const sourceIndex = require.resolve(packageName)
       const sourceRoot = dirname(sourceIndex)
 
       const importPaths = globby.sync(

@@ -22,8 +22,15 @@
  * SOFTWARE.
  */
 
-import { getCommand, runCommandSync } from '../utils/command'
+import path from 'node:path'
+import { getCommand, runCommandsConcurrently } from '../utils/command'
 
+const specifyCJSFormat = path.resolve(
+  __dirname,
+  '../../',
+  'bin/',
+  'specify-commonjs-format.js'
+)
 type ModuleType = ('es' | 'cjs')[]
 
 export const babel = async () => {
@@ -46,7 +53,6 @@ export const babel = async () => {
     '--ignore',
     `${src}/__tests__/**,${src}/**/*.test.ts,${src}/**/*.test.tsx,${src}/**/*.test.js`
   ]
-  // }
 
   if (args.includes('--copy-files')) {
     babelArgs.push('--copy-files')
@@ -109,45 +115,20 @@ export const babel = async () => {
       [...babelArgs, '--out-dir', 'es'],
       [...envVars, 'ES_MODULES=1']
     ),
-    cjs: getCommand(
-      'babel',
-      [...babelArgs, '--out-dir', 'lib'],
-      [...envVars, 'TRANSFORM_IMPORTS=1']
-    )
+    cjs: [
+      getCommand(
+        'babel',
+        [...babelArgs, '--out-dir', 'lib'],
+        [...envVars, 'TRANSFORM_IMPORTS=1']
+      ),
+      getCommand(specifyCJSFormat, [], [])
+    ]
   }
 
   const commandsToRun = modules.reduce(
     (obj, key) => ({ ...obj, [key]: commands[key] }),
     {}
   )
-  //@ts-expect-error fix this
-  runCommandSync(
-    commandsToRun.cjs.bin,
-    commandsToRun.cjs.args,
-    commandsToRun.cjs.vars,
-    {
-      env: {
-        ...process.env,
-        ...envVars,
-        NODE_ENV: 'production',
-        ES_MODULES: ''
-        // TRANSFORM_IMPORTS: 1
-      }
-    }
-  )
 
-  //@ts-expect-error fix this
-  runCommandSync(
-    commandsToRun.es.bin,
-    commandsToRun.es.args,
-    commandsToRun.es.vars,
-    {
-      env: {
-        ...process.env,
-        ...envVars,
-        NODE_ENV: 'production',
-        ES_MODULES: 1
-      }
-    }
-  )
+  process.exit(runCommandsConcurrently(commandsToRun).status)
 }

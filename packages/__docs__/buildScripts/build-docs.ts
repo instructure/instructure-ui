@@ -58,9 +58,9 @@ const pathsToProcess = [
   'CHANGELOG.md',
   '**/packages/**/*.md', // package READMEs
   '**/docs/**/*.md', // general docs
-  '**/src/*.{js,ts,tsx}', // util src files
-  '**/src/*/*.{js,ts,tsx}', // component src files
-  '**/src/*/*/*.{js,ts,tsx}' // child component src files,
+  '**/src/*.{js,ts}', // util src files
+  '**/src/*/*.{js,ts}', // component src files
+  '**/src/*/*/*.{js,ts}' // child component src files,
 ]
 
 const pathsToIgnore = [
