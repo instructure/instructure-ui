@@ -1,0 +1,33 @@
+{
+  "name": "@instructure/theme-registry",
+  "version": "8.24.2",
+  "description": "Package for global ThemeRegistry.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "types": "./types",
+  "module": "./es/index.js",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "license": "MIT",
+  "scripts": {
+    "build": "ui-build --modules es,cjs",
+    "build:watch": "ui-build --watch"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.13.10",
+    "@instructure/console": "8.24.2",
+    "@instructure/shared-types": "8.24.2",
+    "@instructure/ui-utils": "8.24.2"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "8.24.2",
+    "@instructure/ui-test-utils": "8.24.2"
+  }
+}

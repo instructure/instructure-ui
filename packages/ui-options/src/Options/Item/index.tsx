@@ -60,7 +60,6 @@ class Item extends Component<OptionsItemProps> {
     as: 'span',
     variant: 'default',
     role: 'listitem',
-    descriptionRole: 'note',
     beforeLabelContentVAlign: 'center',
     afterLabelContentVAlign: 'center'
   } as const

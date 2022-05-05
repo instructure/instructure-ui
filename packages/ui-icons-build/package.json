@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-icons-build",
-  "version": "8.23.0",
+  "version": "8.24.2",
   "description": "Build scripts to export icons from SVG files",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -18,7 +18,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/config-loader": "8.23.0",
+    "@instructure/config-loader": "8.24.2",
     "del": "^6",
     "glob": "^7.1.4",
     "gulp": "^4",
@@ -42,8 +42,8 @@
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "8.23.0",
-    "@instructure/ui-react-utils": "8.23.0",
+    "@instructure/browserslist-config-instui": "8.24.2",
+    "@instructure/ui-react-utils": "8.24.2",
     "@types/chai": "^4",
     "@types/chai-as-promised": "^7",
     "@types/chai-string": "^1",

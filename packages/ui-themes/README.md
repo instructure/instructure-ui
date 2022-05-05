@@ -16,45 +16,54 @@ yarn add @instructure/ui-themes
 
 ### Usage
 
-Before mounting (rendering) your React application:
+##### Before mounting (rendering) your React application:
 
-```js
-import { canvas } from '@instructure/ui-themes'
+- global theming:
 
-ReactDOM.render(
-  <InstUISettingsProvider theme={canvas}>
-    <App />
-  </InstUISettingsProvider>,
-  element
-)
-```
+  ```js
+  import { canvas } from '@instructure/ui-themes'
 
-To override the variables:
+  canvas.use()
+  ```
 
-```js
-import { canvas } from '@instructure/ui-themes'
-const themeOverrides = { colors: { brand: 'red' } }
+- application level theming:
 
-ReactDOM.render(
-  <InstUISettingsProvider theme={{ ...canvas, ...themeOverrides }}>
-    <App />
-  </InstUISettingsProvider>,
-  element
-)
-```
+  ```jsx
+  import { canvas } from '@instructure/ui-themes'
 
-To use the high contrast theme:
+  ReactDOM.render(
+    <InstUISettingsProvider theme={canvas}>
+      <App />
+    </InstUISettingsProvider>,
+    element
+  )
+  ```
 
-```js
-import { canvasHighContrast } from '@instructure/ui-themes'
+##### To override the theme variables:
 
-ReactDOM.render(
-  <InstUISettingsProvider theme={canvasHighContrast}>
-    <App />
-  </InstUISettingsProvider>,
-  element
-)
-```
+- globally:
+
+  ```js
+  import { canvas } from '@instructure/ui-themes'
+
+  canvas.use({ overrides: { colors: { brand: 'red' } } })
+  ```
+
+- application level:
+
+  ```jsx
+  import { canvas } from '@instructure/ui-themes'
+  const themeOverrides = { colors: { brand: 'red' } }
+
+  ReactDOM.render(
+    <InstUISettingsProvider theme={{ ...canvas, ...themeOverrides }}>
+      <App />
+    </InstUISettingsProvider>,
+    element
+  )
+  ```
+
+> You can read more about how our theming system works and how to use it [here](/#using-theme-overrides)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-themes.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-themes

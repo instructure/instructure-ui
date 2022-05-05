@@ -1,6 +1,6 @@
 {
   "name": "@instructure/instui-config",
-  "version": "8.23.0",
+  "version": "8.24.2",
   "description": "A package containing Instructure UI specific configuration data for operations such as upgrades and codemod scripts",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
@@ -17,13 +17,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@instructure/command-utils": "8.23.0",
-    "@instructure/pkg-utils": "8.23.0",
+    "@instructure/command-utils": "8.24.2",
+    "@instructure/pkg-utils": "8.24.2",
     "fs-extra": "^9",
     "semver": "^7"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "8.23.0",
+    "@instructure/browserslist-config-instui": "8.24.2",
     "@types/chai": "^4",
     "@types/chai-as-promised": "^7",
     "@types/chai-string": "^1",

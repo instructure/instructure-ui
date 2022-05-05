@@ -183,7 +183,8 @@ type TextInputProps = TextInputOwnProps &
   > &
   // The component will handle pass this prop to FormField, but it shouldn't be
   // listed as a prop
-  Pick<FormFieldProps, 'layout'> & WithDeterministicIdProps
+  Pick<FormFieldProps, 'layout'> &
+  WithDeterministicIdProps
 
 type TextInputStyle = ComponentStyle<
   | 'textInput'
@@ -249,12 +250,16 @@ const allowedProps: AllowedPropKeys = [
 
 type TextInputState = {
   hasFocus: boolean
+  beforeElementHasWidth?: boolean
+  afterElementHasWidth?: boolean
 }
 
 type TextInputStyleProps = {
   disabled: boolean
   invalid: boolean
   focused: TextInputState['hasFocus']
+  beforeElementHasWidth: TextInputState['beforeElementHasWidth']
+  afterElementHasWidth: TextInputState['afterElementHasWidth']
 }
 
 export type {

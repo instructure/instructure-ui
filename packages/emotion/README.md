@@ -24,12 +24,6 @@ With this framework, each UI component can be used in isolation and support mult
 
 7. Use a popular, well maintained and broadly adopted JS design and theming library that supports runtime theme switching ([Emotion](https://emotion.sh/)).
 
-### Installation
-
-```sh
-yarn add @instructure/emotion
-```
-
 ### Usage
 
 Make a component themeable with the [withStyle](#withStyle) decorator. It adds a `makeStyles` function and the generated `styles` object to the decorated Component's props.

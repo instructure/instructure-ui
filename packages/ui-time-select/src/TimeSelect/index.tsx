@@ -144,7 +144,9 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   componentDidUpdate(prevProps: TimeSelectProps) {
     if (
       this.props.step !== prevProps.step ||
-      this.props.format !== prevProps.format
+      this.props.format !== prevProps.format ||
+      this.props.locale !== prevProps.locale ||
+      this.props.timezone !== prevProps.timezone
     ) {
       // options change, reset everything
       // when controlled, selection will be preserved
@@ -153,17 +155,36 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     }
 
     if (this.props.value !== prevProps.value) {
+      const normalizedValue = this.normalizeISOTime(this.props.value)
       // value changed
-      let option = this.getOption('value', this.props.value)
-      if (typeof this.props.value === 'undefined') {
+      const initState = this.getInitialState()
+      this.setState(initState)
+      // options need to be passed because state is not set immediately
+      let option = this.getOption('value', normalizedValue, initState.options)
+      if (typeof normalizedValue === 'undefined') {
         // preserve current value when changing from controlled to uncontrolled
-        option = this.getOption('value', prevProps.value)
+        option = this.getOption('value', this.normalizeISOTime(prevProps.value))
       }
+      const outsideVal = this.props.value ? this.props.value : ''
+      // value does not match an existing option
+      const date = DateTime.parse(outsideVal, this.locale(), this.timezone())
+      const label = this.props.format
+        ? date.format(this.props.format)
+        : date.toISOString()
       this.setState({
-        inputValue: option ? option.label : '',
+        inputValue: option ? option.label : label,
         selectedOptionId: option ? option.id : undefined
       })
     }
+  }
+
+  // value needs to be normalized because e.g. 2022-03-29T19:00Z and
+  // 2022-03-29T19:00:00.000Z refer to the same time in the same timezone.
+  normalizeISOTime(value?: string) {
+    if (!value) {
+      return value
+    }
+    return DateTime.parse(value, this.locale(), this.timezone()).toISOString()
   }
 
   getInitialState(): TimeSelectState {
@@ -187,7 +208,11 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
 
     if (typeof initialValue === 'string') {
       // get option based on value or defaultValue, if provided
-      const option = this.getOption('value', initialValue, options)
+      const option = this.getOption(
+        'value',
+        this.normalizeISOTime(initialValue),
+        options
+      )
       if (option) {
         // value matches an existing option
         return option

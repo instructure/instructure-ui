@@ -40,6 +40,7 @@ import { allowedProps, propTypes } from './props'
 parent: Navigation
 id: Navigation.Item
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -51,8 +52,6 @@ class NavigationItem extends Component<NavigationItemProps> {
 
   static defaultProps = {
     as: 'a',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onClick: function (e, selected) {},
     selected: false,
     minimized: false
   } as const
@@ -83,7 +82,6 @@ class NavigationItem extends Component<NavigationItemProps> {
     const props = omitProps(this.props, NavigationItem.allowedProps)
 
     return (
-      //@ts-expect-error TODO: INSTUI-3245
       <ElementType
         // @ts-expect-error TODO: fix TS2590: Expression produces a union type that is too complex to represent.
         {...props}
@@ -91,7 +89,7 @@ class NavigationItem extends Component<NavigationItemProps> {
         onClick={onClick}
         ref={addRef ? this.handleRef : undefined}
         css={this.props.styles?.navigationItem}
-        aria-label={this.props.minimized ? label : undefined}
+        aria-label={this.props.minimized ? (label as string) : undefined}
       >
         <div css={this.props.styles?.icon} aria-hidden="true">
           {icon}

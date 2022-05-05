@@ -41,6 +41,7 @@ import type { ModalBodyProps } from './props'
 parent: Modal
 id: Modal.Body
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
@@ -52,8 +53,7 @@ class ModalBody extends Component<ModalBodyProps> {
   static defaultProps = {
     padding: 'medium',
     as: 'div',
-    variant: 'default',
-    children: null
+    variant: 'default'
   }
 
   ref: Element | null = null
@@ -69,26 +69,16 @@ class ModalBody extends Component<ModalBodyProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
   render() {
-    const {
-      as,
-      elementRef,
-      overflow,
-      variant,
-      padding,
-      children,
-      ...rest
-    } = this.props
+    const { as, elementRef, overflow, variant, padding, children, ...rest } =
+      this.props
 
     const passthroughProps = View.omitViewProps(
       omitProps(rest, ModalBody.allowedProps),

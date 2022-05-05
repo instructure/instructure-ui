@@ -685,4 +685,120 @@ describe('<DateTimeInput />', async () => {
     })
     expect(await dateTimeInput.find(':contains(5/1/2017, 1:30 PM)')).to.exist()
   })
+
+  it('should show an error message when setting a disabled date array', async () => {
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+    const errorMsg = 'Disabled date selected!'
+    await mount(
+      <DateTimeInput
+        description="date time"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        dateRenderLabel="date"
+        timeRenderLabel="time"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        defaultValue={dateTime.toISOString()}
+        disabledDates={[dateTime.toISOString()]}
+        disabledDateTimeMessage={errorMsg}
+      />
+    )
+
+    const dateTimeInput = await DateTimeInputLocator.find()
+    const dateLocator = await dateTimeInput.findDateInput()
+
+    const dateInput = await dateLocator.findInput()
+
+    expect(dateInput).to.have.value(dateTime.format('LL'))
+    expect(await dateTimeInput.find(':contains(' + errorMsg + ')')).to.exist()
+
+    await dateInput.change({ target: { value: 'May 18, 2017' } })
+    await dateInput.keyDown('Enter')
+    expect(
+      await dateTimeInput.find(':contains(' + errorMsg + ')', {
+        expectEmpty: true
+      })
+    ).to.not.exist()
+  })
+
+  it('should show an error message when setting a disabled date function', async () => {
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+    const errorMsg = (_rawDate?: string) => 'Disabled date selected!'
+    const checker = (toCheck: string) => {
+      return toCheck.includes('2017')
+    }
+    await mount(
+      <DateTimeInput
+        description="date time"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        dateRenderLabel="date"
+        timeRenderLabel="time"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        defaultValue={dateTime.toISOString()}
+        disabledDates={checker}
+        disabledDateTimeMessage={errorMsg}
+      />
+    )
+
+    const dateTimeInput = await DateTimeInputLocator.find()
+    const dateLocator = await dateTimeInput.findDateInput()
+
+    const dateInput = await dateLocator.findInput()
+
+    expect(dateInput).to.have.value(dateTime.format('LL'))
+    expect(await dateTimeInput.find(':contains(' + errorMsg() + ')')).to.exist()
+
+    await dateInput.change({ target: { value: 'May 18, 2022' } })
+    await dateInput.keyDown('Enter')
+    expect(
+      await dateTimeInput.find(':contains(' + errorMsg() + ')', {
+        expectEmpty: true
+      })
+    ).to.not.exist()
+  })
+
+  it('should update Date and Time inputs when value prop changes', async () => {
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+
+    const subject = await mount(
+      <DateTimeInput
+        description="date time"
+        dateRenderLabel="date"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        timeRenderLabel="time"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        value={dateTime.toISOString()}
+      />
+    )
+
+    const dateTimeInput = await DateTimeInputLocator.find()
+    expect(
+      await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')
+    ).to.exist()
+    const newDateStr = '2022-03-29T19:00Z'
+    const newDateTime = DateTime.parse(newDateStr, locale, timezone)
+    await subject.setProps({ value: newDateStr })
+
+    const dateLocator = await dateTimeInput.findDateInput()
+    const timeLocator = await dateTimeInput.findTimeInput()
+
+    const dateInput = await dateLocator.findInput()
+    const timeInput = await timeLocator.findInput()
+
+    expect(dateInput).to.have.value(newDateTime.format('LL'))
+    expect(timeInput).to.have.value(newDateTime.format('LT'))
+  })
 })

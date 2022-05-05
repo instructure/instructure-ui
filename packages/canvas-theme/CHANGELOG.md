@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.24.2](https://github.com/instructure/instructure-ui/compare/v8.24.1...v8.24.2) (2022-05-02)
+
+**Note:** Version bump only for package @instructure/canvas-theme
+
+
+
+
+
+## [8.24.1](https://github.com/instructure/instructure-ui/compare/v8.24.0...v8.24.1) (2022-04-29)
+
+**Note:** Version bump only for package @instructure/canvas-theme
+
+# [8.24.0](https://github.com/instructure/instructure-ui/compare/v8.23.0...v8.24.0) (2022-04-26)
+
+### Features
+
+- **theme-registry:** add `theme-registry` pacakge ([63216ef](https://github.com/instructure/instructure-ui/commit/63216ef58cfa3d1d61f85f1d9784cddffeddad72))
+
 # [8.23.0](https://github.com/instructure/instructure-ui/compare/v8.22.0...v8.23.0) (2022-04-07)
 
 **Note:** Version bump only for package @instructure/canvas-theme

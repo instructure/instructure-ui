@@ -57,8 +57,16 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 type DocumentStyle = ComponentStyle<'githubCornerColor'>
+
 type DocumentTheme = {
   githubCornerColor: string
+}
+
+type TOCHeadingData = { id: string; innerText: string; level: string }
+
+type DocumentState = {
+  selectedDetailsTabIndex: number
+  pageRef: HTMLDivElement | null
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -68,5 +76,13 @@ const allowedProps: AllowedPropKeys = [
   'repository',
   'themeVariables'
 ]
+
 export { propTypes, allowedProps }
-export type { DocumentProps, DocumentStyle, DocumentTheme, DocDataType }
+export type {
+  DocumentProps,
+  DocumentStyle,
+  DocumentState,
+  DocumentTheme,
+  DocDataType,
+  TOCHeadingData
+}

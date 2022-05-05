@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import PropTypes from 'prop-types'
-
+import React from 'react'
 import type {
   AsElementType,
   PropValidators,
@@ -32,13 +32,37 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type NavigationItemOwnProps = {
+  /**
+   * The reference to the underlying HTML element
+   */
   elementRef?: (el: Element | null) => void
+  /**
+   * The visual to display (ex. an Image, Logo, Avatar, or Icon)
+   */
   icon: React.ReactNode
+  /**
+   * The text to display  for the Navigation Link
+   */
   label: React.ReactNode
+  /**
+   * The element type to render as (will default to `<a>` if href is provided)
+   */
   as?: AsElementType
+  /**
+   * If the NavigationItem goes to a new page, pass an href
+   */
   href?: string
-  onClick?: (...args: any[]) => any
+  /**
+   * If the NavigationItem does not go to a new page pass an onClick
+   */
+  onClick?: (event: React.MouseEvent) => void
+  /**
+   * Denotes which NavigationItem is currently selected
+   */
   selected?: boolean
+  /**
+   * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
+   */
   minimized?: boolean
 }
 
@@ -53,37 +77,13 @@ type NavigationItemProps = NavigationItemOwnProps &
 type NavigationItemStyle = ComponentStyle<'navigationItem' | 'icon' | 'label'>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The reference to the underlying HTML element
-   */
   elementRef: PropTypes.func,
-  /**
-   * The visual to display (ex. an Image, Logo, Avatar, or Icon)
-   */
   icon: PropTypes.node.isRequired,
-  /**
-   * The text to display  for the Navigation Link
-   */
   label: PropTypes.node.isRequired,
-  /**
-   * The element type to render as (will default to `<a>` if href is provided)
-   */
   as: PropTypes.elementType,
-  /**
-   * If the NavigationItem goes to a new page, pass an href
-   */
   href: PropTypes.string,
-  /**
-   * If the NavigationItem does not go to a new page pass an onClick
-   */
   onClick: PropTypes.func,
-  /**
-   * Denotes which NavigationItem is currently selected
-   */
   selected: PropTypes.bool,
-  /**
-   * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
-   */
   minimized: PropTypes.bool
 }
 

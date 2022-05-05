@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-scripts",
-  "version": "8.23.0",
+  "version": "8.24.2",
   "description": "A UI build scripts library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -26,12 +26,12 @@
   "dependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.17.5",
-    "@instructure/browserslist-config-instui": "8.23.0",
-    "@instructure/command-utils": "8.23.0",
-    "@instructure/cz-lerna-changelog": "8.23.0",
-    "@instructure/instui-config": "8.23.0",
-    "@instructure/pkg-utils": "8.23.0",
-    "@instructure/ui-template-scripts": "8.23.0",
+    "@instructure/browserslist-config-instui": "8.24.2",
+    "@instructure/command-utils": "8.24.2",
+    "@instructure/cz-lerna-changelog": "8.24.2",
+    "@instructure/instui-config": "8.24.2",
+    "@instructure/pkg-utils": "8.24.2",
+    "@instructure/ui-template-scripts": "8.24.2",
     "@lerna/project": "^4",
     "chalk": "^4",
     "commitizen": "^4",
@@ -61,7 +61,7 @@
     "yargs": "^16"
   },
   "devDependencies": {
-    "@instructure/ui-react-utils": "8.23.0",
+    "@instructure/ui-react-utils": "8.24.2",
     "@types/babel__core": "^7",
     "@types/chai": "^4",
     "@types/chai-as-promised": "^7",

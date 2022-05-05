@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-webpack-config",
-  "version": "8.23.0",
+  "version": "8.24.2",
   "description": "A shared webpack config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./config/index.js",
@@ -34,8 +34,8 @@
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "8.23.0",
-    "@instructure/ui-react-utils": "8.23.0",
+    "@instructure/browserslist-config-instui": "8.24.2",
+    "@instructure/ui-react-utils": "8.24.2",
     "@types/chai": "^4",
     "@types/chai-as-promised": "^7",
     "@types/chai-string": "^1",

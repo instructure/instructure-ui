@@ -132,8 +132,7 @@ describe('<AppNav />', async () => {
       const onUpdate = stub()
       const itemWidth = 70
 
-      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'width' implicitly has an 'any' ty... Remove this comment to see the full error message
-      const Nav = ({ width }) => (
+      const Nav = ({ width }: { width: number }) => (
         <div style={{ width }}>
           <AppNav screenReaderLabel="App navigation" onUpdate={onUpdate}>
             <AppNav.Item

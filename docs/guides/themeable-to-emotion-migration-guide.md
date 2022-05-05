@@ -17,27 +17,6 @@ In the v8.0. release we removed `ui-themeable` and its supporting packages from 
 - replace `ApplyTheme` with `InstUISettingsProvider` and import themes directly instead of registering them
 - if you have your own themeable components, refactor them to use `emotion`
 
-##### Table of Contents
-
-- [The emotion package](#themeable-to-emotion-migration-guide/#the-emotion-package)
-- [Theme handling](#themeable-to-emotion-migration-guide/#theme-handling)
-  - [ApplyTheme to EmotionThemeProvider](#themeable-to-emotion-migration-guide/#theme-handling-applytheme-to-emotionthemeprovider)
-  - [Using the built-in themes](#themeable-to-emotion-migration-guide/#theme-handling-using-the-built-in-themes)
-  - [Using component overrides](#themeable-to-emotion-migration-guide/#theme-handling-using-component-overrides)
-  - [Theme-based overrides](#themeable-to-emotion-migration-guide/#theme-handling-theme-based-overrides)
-  - [Mixed and nested overrides](#themeable-to-emotion-migration-guide/#theme-handling-mixed-and-nested-overrides)
-  - [Local theme variable overrides of components](#themeable-to-emotion-migration-guide/#theme-handling-local-theme-variable-overrides-of-components)
-  - [theme.use() is deprecated](<#themeable-to-emotion-migration-guide/#theme-handling-theme.use()-is-deprecated>)
-- [Migrating your @themeable components](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components)
-  - [1. Refactor theme.js](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-1.-refactor-theme.js)
-  - [2. Create the styles.js file](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-2.-create-the-styles.js-file)
-  - [3. Make changes in the component](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-3.-make-changes-in-the-component)
-  - [Accessing theme variables in index.js](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-accessing-theme-variables-in-index.js)
-  - [Global styles](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-global-styles)
-  - [Keyframes](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-keyframes)
-  - [An example component using emotion theming](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-an-example-component-using-emotion-theming)
-  - [Theme tests](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-theme-tests)
-
 ## The emotion package
 
 The `@instructure/emotion` package contains our wrapper and helpers for the emotion theming library. You can find the full documentation [here](#emotion).
@@ -214,6 +193,20 @@ To learn more about the available options and defaults simply run:
 ```
 
 #### theme.use() is deprecated
+
+```javascript
+---
+embed: true
+---
+<ToggleBlockquote
+  summary="The theme.use() API is available again from version 8.24.0!"
+>
+  <ToggleBlockquote.Paragraph>
+   To support multiple theming use cases we decided to re-introduce the <code>theme.use()</code> API into the library. <br/>
+   You can read more about how to use it in it's own or in conjuction with <code>InstUISettingsProvider</code> <Link href="/#using-theme-overrides/#using-theme-overrides-how-theming-works-in-instui">here</Link>.
+  </ToggleBlockquote.Paragraph>
+</ToggleBlockquote>
+```
 
 Applying themes with the former `.use()` method of themes (added by ui-themeable) is now deprecated. Wrap your app in `InstUISettingsProvider` instead.
 

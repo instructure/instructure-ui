@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-instructure-ui",
-  "version": "8.23.0",
+  "version": "8.24.2",
   "description": "An eslint configuration for Instructure UI",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/pkg-utils": "8.23.0",
+    "@instructure/pkg-utils": "8.24.2",
     "eslint": "^7",
     "eslint-module-utils": "^2",
     "eslint-plugin-import": "^2"
@@ -25,7 +25,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "8.23.0",
+    "@instructure/browserslist-config-instui": "8.24.2",
     "@types/chai": "^4",
     "@types/chai-as-promised": "^7",
     "@types/chai-string": "^1",

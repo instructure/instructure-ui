@@ -25,29 +25,31 @@
 /** @jsx jsx */
 import { Component } from 'react'
 import GithubCorner from 'react-github-corner'
+
 import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
 import { CodeEditor } from '@instructure/ui-code-editor'
 import { withStyle, jsx } from '@instructure/emotion'
+
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
 import { Description } from '../Description'
 import { Properties } from '../Properties'
 import { Params } from '../Params'
 import { Returns } from '../Returns'
 import { Methods } from '../Methods'
 import { ComponentTheme } from '../ComponentTheme'
+import { TableOfContents } from '../TableOfContents'
 import { Heading } from '../Heading'
+
 import { propTypes, allowedProps } from './props'
-import type { DocumentProps, DocDataType } from './props'
+import type { DocumentProps, DocumentState, DocDataType } from './props'
 
 @withStyle(generateStyle, generateComponentTheme)
-class Document extends Component<
-  DocumentProps,
-  { selectedDetailsTabIndex: number }
-> {
+class Document extends Component<DocumentProps, DocumentState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
 
@@ -58,12 +60,16 @@ class Document extends Component<
     layout: 'small'
   }
 
-  state = {
-    selectedDetailsTabIndex: 0
+  state: DocumentState = {
+    selectedDetailsTabIndex: 0,
+    pageRef: null
   }
+
+  ref: HTMLDivElement | null = null
 
   componentDidMount() {
     this.props.makeStyles?.()
+    this.setState({ pageRef: this.ref })
   }
 
   componentDidUpdate() {
@@ -294,6 +300,7 @@ import { ${importName} } from '${esPath}'
 
   render() {
     const { doc, repository, layout } = this.props
+    const { pageRef } = this.state
     const children = doc.children || []
 
     let details = null
@@ -351,8 +358,13 @@ import { ${importName} } from '${esPath}'
     }
 
     return (
-      <div>
+      <div
+        ref={(e) => {
+          this.ref = e
+        }}
+      >
         {doc.extension !== '.md' && this.renderSrcLink()}
+        {pageRef && <TableOfContents doc={doc} pageElement={pageRef} />}
         {this.renderDescription(doc, this.props.description)}
         {details}
         {sections}

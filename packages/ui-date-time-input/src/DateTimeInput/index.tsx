@@ -56,6 +56,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   static allowedProps = allowedProps
   static defaultProps = {
     layout: 'inline',
+    colSpacing: 'medium',
+    rowSpacing: 'small',
     timeStep: 30,
     messageFormat: DateTimeInput.DEFAULT_MESSAGE_FORMAT,
     isRequired: false,
@@ -66,7 +68,6 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
 
   static contextType = ApplyLocaleContext
 
-  private _timeInput?: TimeSelect
   ref: Element | null = null // This is used by Tooltip for positioning
 
   handleRef = (el: Element | null) => {
@@ -134,13 +135,29 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
             .month(this.state.iso.month())
             .year(this.state.iso.year())
         }
-        const newTimeSelectValue = this.state?.timeSelectValue
-          ? this.state.timeSelectValue
-          : this._timeInput
-              ?.getBaseDate()
-              .minute(parsed.minute())
-              .hour(parsed.hour())
-              .toISOString()
+        const newTimeSelectValue = parsed.toISOString()
+        if (this.isDisabledDate(parsed)) {
+          let text =
+            typeof this.props.disabledDateTimeMessage === 'function'
+              ? this.props.disabledDateTimeMessage(parsed.toISOString(true))
+              : this.props.disabledDateTimeMessage
+          if (!text) {
+            text =
+              typeof this.props.invalidDateTimeMessage === 'function'
+                ? this.props.invalidDateTimeMessage(parsed.toISOString(true))
+                : this.props.invalidDateTimeMessage
+          }
+          errorMsg = text ? { text, type: 'error' } : undefined
+          return {
+            iso: parsed.clone(),
+            calendarSelectedDate: parsed.clone(),
+            dateInputTextChanged: false,
+            dateInputText: parsed.format(this.dateFormat),
+            message: errorMsg,
+            timeSelectValue: newTimeSelectValue,
+            renderedDate: parsed.clone()
+          }
+        }
         return {
           iso: parsed.clone(),
           calendarSelectedDate: parsed.clone(),
@@ -192,6 +209,22 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
 
   get dateFormat() {
     return this.props.dateFormat
+  }
+
+  isDisabledDate(date: Moment) {
+    const disabledDates = this.props.disabledDates
+    if (!disabledDates) {
+      return false
+    }
+    if (Array.isArray(disabledDates)) {
+      for (const aDisabledDate of disabledDates) {
+        if (date.isSame(aDisabledDate, 'day')) {
+          return true
+        }
+      }
+      return false
+    }
+    return disabledDates(date.toISOString())
   }
 
   // Called when the user enters text into dateInput
@@ -319,10 +352,6 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     }
   }
 
-  timeInputComponentRef = (node: TimeSelect) => {
-    this._timeInput = node
-  }
-
   handleShowCalendar = (_event: SyntheticEvent) => {
     this.setState({ isShowingCalendar: true })
   }
@@ -406,6 +435,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           isOutsideMonth={!date.isSame(renderedDate, 'month')}
           label={date.format('D MMMM YYYY')} // used by screen readers
           onClick={this.handleDayClick}
+          interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}
         >
           {date.format('DD')}
         </DateInput.Day>
@@ -491,16 +521,19 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       timezone,
       messages,
       layout,
+      rowSpacing,
+      colSpacing,
       isRequired,
       interaction,
       renderWeekdayLabels
     } = this.props
+
     return (
       <FormFieldGroup
         description={description}
-        colSpacing="medium"
-        rowSpacing="small"
         layout={layout}
+        rowSpacing={rowSpacing}
+        colSpacing={colSpacing}
         vAlign="top"
         elementRef={this.handleRef}
         messages={[
@@ -509,6 +542,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         ]}
       >
         <DateInput
+          display="block"
           value={this.state.dateInputText}
           onChange={this.handleDateTextChange}
           onBlur={this.handleBlur}
@@ -544,7 +578,6 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           value={this.state.timeSelectValue}
           onChange={this.handleTimeChange}
           onBlur={this.handleBlur}
-          ref={this.timeInputComponentRef}
           renderLabel={timeRenderLabel}
           locale={locale}
           format={timeFormat}

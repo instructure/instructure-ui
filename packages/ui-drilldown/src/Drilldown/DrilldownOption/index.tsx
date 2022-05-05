@@ -52,7 +52,6 @@ class DrilldownOption extends Component<DrilldownOptionProps> {
     disabled: false,
     beforeLabelContentVAlign: 'start',
     afterLabelContentVAlign: 'start',
-    descriptionRole: 'note',
     as: 'li',
     role: 'menuitem'
   }

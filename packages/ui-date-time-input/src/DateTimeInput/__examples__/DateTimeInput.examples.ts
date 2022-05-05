@@ -29,8 +29,11 @@ export default {
   sectionProp: 'layout',
   propValues: {
     datePlaceholder: [undefined, 'date placeholder'],
+    colSpacing: ['small', 'medium'],
+    rowSpacing: ['small', 'medium'],
     defaultValue: [undefined, '2018-01-18T16:00', 'intentionally wrong'],
     invalidDateTimeMessage: ['invalid date'],
+    timeStep: [10],
     messages: [
       undefined,
       [
@@ -38,19 +41,44 @@ export default {
         { text: 'success message', type: 'success' }
       ]
     ],
-    interaction: ['enabled', 'disabled']
+    interaction: ['enabled', 'disabled'],
+    disabledDates: [undefined]
   },
-  getComponentProps: () => {
+  getComponentProps: (props) => {
+    const defaultPropsForLayout =
+      props.interaction === 'enabled' &&
+      !props.datePlaceholder &&
+      !props.defaultValue &&
+      !props.isRequired &&
+      !props.messages
+
+    const defaultColSpacing = 'medium'
+    const defaultRowSpacing = 'small'
+
     return {
       description: 'desc',
-      dateLabel: 'date label',
+      dateRenderLabel: 'date render label',
+      timeRenderLabel: 'time render label',
       isRequired: false,
       prevMonthLabel: 'prev month',
       nextMonthLabel: 'next month',
       timeLabel: 'time label',
       timeStep: 10,
       timezone: 'America/Tijuana',
-      locale: 'de-AT'
+      locale: 'de-AT',
+      disabledDateTimeMessage: 'Disabled Date!',
+      colSpacing:
+        defaultPropsForLayout &&
+        props.rowSpacing === defaultRowSpacing &&
+        props.layout === 'columns'
+          ? props.colSpacing
+          : defaultColSpacing,
+      rowSpacing:
+        defaultPropsForLayout &&
+        props.colSpacing === defaultColSpacing &&
+        props.layout !== 'columns'
+          ? props.rowSpacing
+          : defaultRowSpacing
     }
   }
 } as StoryConfig<DateTimeInputProps>

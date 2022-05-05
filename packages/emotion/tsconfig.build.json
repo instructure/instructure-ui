@@ -33,6 +33,9 @@
     },
     {
       "path": "../ui-react-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../theme-registry/tsconfig.build.json"
     }
   ]
 }

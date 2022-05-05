@@ -153,6 +153,14 @@ type DateTimeInputProps = {
    **/
   layout?: 'stacked' | 'columns' | 'inline'
   /**
+   * Controls the spacing between the inputs when they are in a vertical layout.
+   **/
+  rowSpacing?: 'none' | 'small' | 'medium' | 'large'
+  /**
+   * Controls the spacing between the inputs when they are in a horizontal layout.
+   **/
+  colSpacing?: 'none' | 'small' | 'medium' | 'large'
+  /**
    * An ISO 8601 formatted date string representing the current date-time
    * (must be accompanied by an onChange prop).
    **/
@@ -197,7 +205,7 @@ type DateTimeInputProps = {
    * Called when the date-time value has changed.
    * The passed in parameters are:
    * - *event*: The triggering event (which may be from the underlying
-   * `          DateInput` or `TimeSelect`)
+   *   `DateInput` or `TimeSelect`)
    * - *isoValue*: The new date value in ISO8601 format, undefined if its invalid
    **/
   onChange?: (event: SyntheticEvent, isoValue?: string) => void
@@ -215,6 +223,17 @@ type DateTimeInputProps = {
    * component
    */
   onBlur?: (e: SyntheticEvent) => void
+  /*
+   * Specify which date(s) will be shown as disabled in the calendar.
+   * You can either supply an array of ISO8601 timeDate strings or
+   * a function that will be called for each date shown in the calendar.
+   */
+  disabledDates?: string[] | ((isoDateToCheck: string) => boolean)
+  /**
+   * Error message shown to the user if they enter a date that is disabled.
+   * If not specified the component will show the `invalidDateTimeMessage`.
+   */
+  disabledDateTimeMessage?: string | ((rawDateValue: string) => string)
 }
 
 type DateTimeInputState = {
@@ -264,6 +283,8 @@ const propTypes: PropValidators<PropKeys> = {
   messages: PropTypes.arrayOf(FormPropTypes.message),
   messageFormat: PropTypes.string,
   layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
+  rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+  colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
   value: controllable(I18nPropTypes.iso8601, 'onChange'),
   defaultValue: I18nPropTypes.iso8601,
   renderWeekdayLabels: PropTypes.arrayOf(
@@ -273,7 +294,15 @@ const propTypes: PropValidators<PropKeys> = {
   onChange: PropTypes.func,
   dateInputRef: PropTypes.func,
   timeInputRef: PropTypes.func,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+  disabledDates: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(PropTypes.string)
+  ]),
+  disabledDateTimeMessage: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func
+  ])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -293,6 +322,8 @@ const allowedProps: AllowedPropKeys = [
   'messages',
   'messageFormat',
   'layout',
+  'rowSpacing',
+  'colSpacing',
   'value',
   'defaultValue',
   'renderWeekdayLabels',
@@ -300,7 +331,9 @@ const allowedProps: AllowedPropKeys = [
   'onChange',
   'dateInputRef',
   'timeInputRef',
-  'onBlur'
+  'onBlur',
+  'disabledDates',
+  'disabledDateTimeMessage'
 ]
 
 export type { DateTimeInputProps, DateTimeInputState }
