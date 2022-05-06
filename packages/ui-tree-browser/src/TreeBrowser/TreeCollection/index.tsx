@@ -36,6 +36,7 @@ import { TreeButton } from '../TreeButton'
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
 import type { TreeBrowserCollectionProps, TreeCollectionState } from './props'
+import type { CompareObject } from '../props'
 import { allowedProps, propTypes } from './props'
 import { CollectionItem, CollectionProps, CollectionData } from '../props'
 
@@ -142,15 +143,15 @@ class TreeCollection extends Component<
       (this.props.renderAfterItems ? 1 : 0)
     )
   }
-  sortingChildren() {
+  sortChildren() {
     const { collections, items, compareFunc } = this.props
     if (!compareFunc) return []
-    const collections_ = collections
+    const collections_: CompareObject[] = collections
       ? collections.map((collection) => {
           return { ...collection, type: 'collection' }
         })
       : []
-    const items_ = items
+    const items_: CompareObject[] = items
       ? items.map((item) => {
           return { ...item, type: 'item' }
         })
@@ -170,7 +171,7 @@ class TreeCollection extends Component<
     } = this.props
 
     let position = 1
-    const sortedChildren = this.sortingChildren()
+    const sortedChildren = this.sortChildren()
     return (
       <>
         {renderBeforeItems &&

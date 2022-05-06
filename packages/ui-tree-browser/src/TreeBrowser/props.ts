@@ -148,7 +148,7 @@ type CollectionBase = {
 type Collection = CollectionBase & {
   items?: number[]
   collections?: (number | string)[]
-  compareFunc?: (a: any, b: any) => number
+  compareFunc?: (a: CompareObject, b: CompareObject) => number
 }
 
 type CollectionItem = {
@@ -164,8 +164,13 @@ type CollectionProps = {
   items?: CollectionItem[]
   expanded?: boolean
   isCollectionFlattened?: boolean
-  compareFunc?: (a: any, b: any) => number
+  compareFunc?: (a: CompareObject, b: CompareObject) => number
 } & CollectionBase
+
+type CompareCollection = CollectionProps & { type: 'collection' }
+type CompareItem = CollectionItem & { type: 'item' }
+// this is a sum type, so CompareObject is one of CompareCollection OR CompareItem
+type CompareObject = CompareItem | CompareCollection
 
 type CollectionData = {
   id?: number | string
@@ -238,6 +243,9 @@ export type {
   CollectionData,
   Collection,
   CollectionItem,
+  CompareCollection,
+  CompareItem,
+  CompareObject,
   CollectionProps,
   TreeBrowserBaseProps,
   TreeBrowserCommonProps
