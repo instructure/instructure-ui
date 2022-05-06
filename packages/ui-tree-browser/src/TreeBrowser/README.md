@@ -487,10 +487,12 @@ class Example extends React.Component {
             3: { id: 3, name: "Math Assignments", collections: [5], items: [2,1],
             //  The items appear before subcollections
             compareFunc: (a,b)=>{
-              if(a.type==="item" && b.type==="collection")
-              return -1
-              if(a.type==="collection" && b.type==="item")
-              return 1
+              if(a.type === "item" && b.type === "collection"){
+                return -1
+              }
+              if(a.type === "collection" && b.type === "item"){
+                return 1
+              }
               return 0
             }},
             4: { id: 4, name: "Reading Assignments", collections: [], items: [4] },
