@@ -28,7 +28,6 @@ import execa from 'execa'
 import rl from 'readline'
 import chalk from 'chalk'
 
-
 function info(...args: string[]) {
   console.info(chalk.blue(...args)) // eslint-disable-line no-console
 }
@@ -93,7 +92,8 @@ function runCommandsConcurrently(commands: Record<string, any>) {
       commandList = Array.isArray(commandList) ? commandList : [commandList]
       commandList.forEach((command: any) => {
         args.push(
-          `${command.toString()}${command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
+          `${command.toString()}${
+            command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
           }`
         )
       })
@@ -140,14 +140,10 @@ async function runCommandAsync(
   return { ...result, status: result.exitCode }
 }
 
-function resolveBin(
-  modName: any,
-  { executable = modName } = {}
-) {
-    const t = which.sync(executable)
-    debugger
-     return fs.realpathSync(t)
-  }
+function resolveBin(modName: any, { executable = modName } = {}) {
+  const t = which.sync(executable)
+  return fs.realpathSync(t)
+}
 async function confirm(question: string): Promise<string> {
   return new Promise((resolve, reject) => {
     try {
