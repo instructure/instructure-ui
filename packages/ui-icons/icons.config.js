@@ -62,6 +62,7 @@ const deprecated = {
   'note-light': 'note',
   'icon-reply-2': 'icon-reply',
   'icon-replied': 'icon-reply',
+  instructure: 'instructure-logo',
   'settings-2': 'settings',
   'twitter-boxed': 'twitter',
   'arrow-left': 'arrow-start',
