@@ -35,11 +35,11 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
-
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { ToggleDetailsProps, ToggleDetailsStyleProps } from './props'
 import { allowedProps, propTypes } from './props'
+import { UIElement } from '@instructure/shared-types'
 
 /**
 ---
@@ -61,21 +61,19 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     iconExpanded: IconArrowOpenDownSolid,
     iconPosition: 'start',
     defaultExpanded: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onToggle: function (event, expanded) {},
+    onToggle: function (_event: React.MouseEvent, _expanded: boolean) {},
     children: null
   }
 
   ref: Element | null = null
+  _button: UIElement | null = null
 
   get focused() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_button' does not exist on type 'ToggleD... Remove this comment to see the full error message
     return isActiveElement(this._button)
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_button' does not exist on type 'ToggleD... Remove this comment to see the full error message
-    this._button.focus()
+    this._button && (this._button as HTMLElement).focus()
   }
 
   componentDidMount() {
@@ -86,11 +84,9 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     this.props.makeStyles?.({ animate: true } as ToggleDetailsStyleProps)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  getButtonRef = (el) => (this._button = el)
+  getButtonRef = (el: Element | null) => (this._button = el)
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'expanded' implicitly has an 'any' type.
-  renderSummary(expanded) {
+  renderSummary(expanded: boolean) {
     const { summary, iconPosition } = this.props
 
     return (
@@ -102,15 +98,13 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'toggleProps' implicitly has an 'any' ty... Remove this comment to see the full error message
-  renderToggle(toggleProps, expanded) {
+  renderToggle(toggleProps: any, expanded: boolean) {
     const { variant } = this.props
 
     const props = {
       ...omitProps(this.props, ToggleDetails.allowedProps),
       ...toggleProps,
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
-      children: this.renderSummary()
+      children: this.renderSummary(expanded)
     }
 
     const summary = this.renderSummary(expanded)
@@ -146,20 +140,17 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'expanded' implicitly has an 'any' type.
-  renderIcon(expanded) {
+  renderIcon(expanded: boolean) {
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
 
-    return this.props.children ? (
+    return this.props.children && Icon ? (
       <span css={this.props.styles?.icon}>
-        {/* @ts-expect-error ts-migrate(2604) FIXME: JSX element type 'Icon' does not have any construc... Remove this comment to see the full error message */}
         <Icon />
       </span>
     ) : null
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'expanded' implicitly has an 'any' type.
-  renderDetails(expanded, detailsProps) {
+  renderDetails(expanded: boolean, detailsProps: { id: string }) {
     const { children } = this.props
     const expandedStyles = expanded ? { display: 'block' } : { display: 'none' }
     return (
@@ -173,10 +164,8 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     return <div css={this.props.styles?.content}>{this.props.children}</div>
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleToggle = (event, expanded) => {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.onToggle(event, expanded)
+  handleToggle = (event: React.MouseEvent, expanded: boolean) => {
+    this.props.onToggle?.(event, expanded)
     this.props.makeStyles?.({ animate: true })
   }
 
