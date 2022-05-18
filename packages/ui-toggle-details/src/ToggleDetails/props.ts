@@ -36,15 +36,42 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type ToggleDetailsOwnProps = {
   variant?: 'default' | 'filled'
+  /**
+   * The summary that displays and can be interacted with
+   */
   summary: React.ReactNode
+  /**
+   * Whether the content is expanded or hidden
+   */
   expanded?: boolean // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
+  /**
+   * Whether the content is initially expanded or hidden (uncontrolled)
+   */
   defaultExpanded?: boolean
-  onToggle?: (...args: any[]) => any
-  icon?: (...args: any[]) => any
-  iconExpanded?: (...args: any[]) => any
+  onToggle?: (event: React.MouseEvent, expanded: boolean) => void
+  /**
+   * The icon to display next to the summary text when content is hidden
+   */
+  icon?: (...args: any[]) => React.ReactElement
+  /**
+   * The icon to display when content is expanded
+   */
+  iconExpanded?: (...args: any[]) => React.ReactElement
+  /**
+   * Icon position at the start or end of the summary text
+   */
   iconPosition?: 'start' | 'end'
+  /**
+   * should the summary fill the width of its container
+   */
   fluidWidth?: boolean
+  /**
+   * Choose a size for the expand/collapse icon
+   */
   size?: 'small' | 'medium' | 'large'
+  /**
+   * The toggleable content passed inside the ToggleDetails component
+   */
   children?: React.ReactNode
 }
 
@@ -72,42 +99,15 @@ type ToggleDetailsStyleProps = {
 
 const propTypes: PropValidators<PropKeys> = {
   variant: PropTypes.oneOf(['default', 'filled']),
-  /**
-   * The summary that displays and can be interacted with
-   */
   summary: PropTypes.node.isRequired,
-  /**
-   * Whether the content is expanded or hidden
-   */
   expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
-  /**
-   * Whether the content is initially expanded or hidden (uncontrolled)
-   */
   defaultExpanded: PropTypes.bool,
   onToggle: PropTypes.func,
-  /**
-   * The icon to display next to the summary text when content is hidden
-   */
   icon: PropTypes.func,
-  /**
-   * The icon to display when content is expanded
-   */
   iconExpanded: PropTypes.func,
-  /**
-   * Icon position at the start or end of the summary text
-   */
   iconPosition: PropTypes.oneOf(['start', 'end']),
-  /**
-   * should the summary fill the width of its container
-   */
   fluidWidth: PropTypes.bool,
-  /**
-   * The toggleable content passed inside the ToggleDetails component
-   */
   children: PropTypes.node,
-  /**
-   * Choose a size for the expand/collapse icon
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large'])
 }
 
