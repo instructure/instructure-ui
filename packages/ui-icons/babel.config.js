@@ -29,8 +29,12 @@ module.exports = {
       {
         coverage: Boolean(process.env.COVERAGE),
         esModules: Boolean(process.env.ES_MODULES),
-        removeConsole: process.env.NODE_ENV === 'production',
-        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+        transformImports: Boolean(process.env.TRANSFORM_IMPORTS),
+
+        // we need the console for the deprecation warning.
+        // Note: if you want to use console in the icons, wrap it in a
+        // `if (process.env.NODE_ENV !== 'production') {}` check
+        removeConsole: false
       }
     ]
   ]
