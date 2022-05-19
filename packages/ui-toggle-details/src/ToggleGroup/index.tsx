@@ -47,6 +47,7 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
+@tsProps
 **/
 @testable()
 class ToggleGroup extends Component<ToggleGroupProps> {
@@ -60,12 +61,9 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     icon: IconArrowOpenEndSolid,
     iconExpanded: IconArrowOpenDownSolid,
     defaultExpanded: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onToggle: function (event, expanded) {},
     transition: true,
     as: 'span',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {},
+    elementRef: (_el: Element | null) => {},
     border: true
   } as const
 
@@ -92,23 +90,22 @@ class ToggleGroup extends Component<ToggleGroupProps> {
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    this._button.focus()
+    this._button && (this._button as HTMLElement).focus()
   }
 
   componentDidMount() {
     this._shouldTransition = true
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'expanded' implicitly has an 'any' type.
-  renderIcon(expanded) {
+  renderIcon(expanded: boolean) {
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
-    // @ts-expect-error ts-migrate(2604) FIXME: JSX element type 'Icon' does not have any construc... Remove this comment to see the full error message
-    return <Icon />
+    if (Icon) {
+      if (typeof Icon === 'function') return <Icon />
+      else return Icon
+    } else return null
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'toggleProps' implicitly has an 'any' ty... Remove this comment to see the full error message
-  renderToggle(toggleProps, expanded) {
+  renderToggle(toggleProps: any, expanded: boolean) {
     const { toggleLabel, size } = this.props
     let label
     if (typeof toggleLabel === 'function') {
@@ -130,8 +127,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'detailsProps' implicitly has an 'any' t... Remove this comment to see the full error message
-  renderDetails(detailsProps) {
+  renderDetails(detailsProps: { id: string }) {
     return (
       <View
         {...detailsProps}

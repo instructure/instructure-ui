@@ -34,18 +34,55 @@ import {
 } from '@instructure/shared-types'
 
 type ToggleGroupOwnProps = {
+  /**
+   * the content to show and hide
+   */
   children: React.ReactNode
+  /**
+   * the content area next to the toggle button
+   */
   summary: React.ReactNode
+  /**
+   * provides a screenreader label for the toggle button
+   * (takes `expanded` as an argument if a function)
+   */
   toggleLabel: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * the element type to render as
+   */
   as?: AsElementType
+  /**
+   * provides a reference to the underlying html root element
+   */
   elementRef?: (element: Element | null) => void
   size?: 'small' | 'medium' | 'large'
-  expanded?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
+  /**
+   * Whether the content is expanded or hidden
+   */
+  expanded?: boolean // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
+  /**
+   * Whether the content is initially expanded or hidden (uncontrolled)
+   */
   defaultExpanded?: boolean
-  onToggle?: (...args: any[]) => any
-  icon?: React.ReactNode | ((...args: any[]) => any)
-  iconExpanded?: React.ReactNode | ((...args: any[]) => any)
+  /**
+   * Fired when the content display is toggled
+   */
+  onToggle?: (event: React.MouseEvent, expanded: boolean) => void
+  /**
+   * The icon displayed in the toggle button when the content is hidden
+   */
+  icon?: React.ReactNode | ((...args: any[]) => React.ReactElement)
+  /**
+   * The icon displayed in the toggle button when the content is showing
+   */
+  iconExpanded?: React.ReactNode | ((...args: any[]) => React.ReactElement)
+  /**
+   * Transition content into view
+   */
   transition?: boolean
+  /**
+   * Toggle the border around the component
+   */
   border?: boolean
 }
 
@@ -57,55 +94,18 @@ type ToggleGroupProps = ToggleGroupOwnProps &
   OtherHTMLAttributes<ToggleGroupOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * the content to show and hide
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * the content area next to the toggle button
-   */
   summary: PropTypes.node.isRequired,
-  /**
-   * provides a screenreader label for the toggle button
-   * (takes `expanded` as an argument if a function)
-   */
   toggleLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  /**
-   * the element type to render as
-   */
   as: PropTypes.elementType,
-  /**
-   * provides a reference to the underlying html root element
-   */
   elementRef: PropTypes.func,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Whether the content is expanded or hidden
-   */
   expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
-  /**
-   * Whether the content is initially expanded or hidden (uncontrolled)
-   */
   defaultExpanded: PropTypes.bool,
-  /**
-   * Fired when the content display is toggled
-   */
   onToggle: PropTypes.func,
-  /**
-   * The icon displayed in the toggle button when the content is hidden
-   */
   icon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * The icon displayed in the toggle button when the content is showing
-   */
   iconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * Transition content into view
-   */
   transition: PropTypes.bool,
-  /**
-   * Toggle the border around the component
-   */
   border: PropTypes.bool
 }
 
