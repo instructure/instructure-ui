@@ -128,8 +128,7 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should call onToggle on click events', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    const onToggle = spy((e) => {
+    const onToggle = spy((e: React.MouseEvent) => {
       e.persist()
     })
 
@@ -233,13 +232,13 @@ describe('<ToggleGroup />', () => {
   })
 
   it('focuses with the focus helper', async () => {
-    let toggleRef = null
+    let toggleRef: ToggleGroup | undefined
     await mount(
       <ToggleGroup
         transition={false}
         summary="This is the summary section"
         toggleLabel="This is the toggleLabel"
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
+        //@ts-expect-error TODO this is coming from ReactComponentWrapper
         componentRef={(el) => {
           toggleRef = el
         }}
@@ -250,14 +249,9 @@ describe('<ToggleGroup />', () => {
 
     const toggleGroup = await ToggleGroupLocator.find()
     const toggle = await toggleGroup.findToggle()
-
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(toggleRef.focused).to.be.false()
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    toggleRef.focus()
-
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    expect(toggleRef.focused).to.be.true()
+    expect(toggleRef?.focused).to.be.false()
+    toggleRef?.focus()
+    expect(toggleRef?.focused).to.be.true()
     expect(toggle.getDOMNode()).to.equal(document.activeElement)
   })
 })

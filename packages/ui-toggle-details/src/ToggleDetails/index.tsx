@@ -45,6 +45,7 @@ import { UIElement } from '@instructure/shared-types'
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
