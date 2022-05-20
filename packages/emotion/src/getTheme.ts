@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { merge, cloneDeep } from 'lodash'
+import merge from 'lodash/merge'
+import cloneDeep from 'lodash/cloneDeep'
 import { canvas } from '@instructure/ui-themes'
 import { ThemeRegistry } from '@instructure/theme-registry'
 import { isBaseTheme } from '@instructure/ui-utils'
