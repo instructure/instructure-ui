@@ -29,7 +29,7 @@ import type {
   RefAttributes
 } from 'react'
 
-import { isEqual } from 'lodash'
+import isEqual from 'lodash/isEqual'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 import { warn } from '@instructure/console'
