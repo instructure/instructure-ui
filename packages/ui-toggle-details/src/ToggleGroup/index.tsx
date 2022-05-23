@@ -27,7 +27,8 @@ import React, { Component } from 'react'
 import {
   omitProps,
   pickProps,
-  getElementType
+  getElementType,
+  callRenderProp
 } from '@instructure/ui-react-utils'
 import { IconButton } from '@instructure/ui-buttons'
 import { Transition } from '@instructure/ui-motion'
@@ -99,10 +100,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
 
   renderIcon(expanded: boolean) {
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
-    if (Icon) {
-      if (typeof Icon === 'function') return <Icon />
-      else return Icon
-    } else return null
+    return Icon ? callRenderProp(Icon) : null
   }
 
   renderToggle(toggleProps: any, expanded: boolean) {
