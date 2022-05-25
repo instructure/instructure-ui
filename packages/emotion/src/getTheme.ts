@@ -81,6 +81,8 @@ const getTheme =
           'No theme provided for [InstUISettingsProvider], using default `canvas` theme.'
         )
       }
+      //TODO: replace cloneDeeps with native `structuredClone` API
+      //once we hit last 2 version browser support
       currentTheme = cloneDeep(globalTheme || canvas)
     } else {
       currentTheme = cloneDeep(ancestorTheme)
