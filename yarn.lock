@@ -2227,8 +2227,6 @@ __metadata:
     "@instructure/ui-themes": 8.24.2
     "@instructure/ui-utils": 8.24.2
     "@types/lodash": ^4.14.171
-    cpy-cli: ^3.1.1
-    emotion-theming: ^11
     hoist-non-react-statics: ^3.3.2
     lodash: ^4
     prop-types: ^15
@@ -13441,19 +13439,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cpy-cli@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "cpy-cli@npm:3.1.1"
-  dependencies:
-    cpy: "npm:^8.0.0"
-    meow: "npm:^6.1.1"
-  bin:
-    cpy: cli.js
-  checksum: 0852a0095a64d01974931cfff2492d89b057aa358cff3cdd55dee183d15536a38ee51243274b298671aeec027c5878cbb8e170c09583499a6809f8d5909d22fb
-  languageName: node
-  linkType: hard
-
-"cpy@npm:^8.0.0, cpy@npm:^8.1.0, cpy@npm:^8.1.2":
+"cpy@npm:^8.1.0, cpy@npm:^8.1.2":
   version: 8.1.2
   resolution: "cpy@npm:8.1.2"
   dependencies:
@@ -15359,13 +15345,6 @@ __metadata:
     "@emotion/core": ^10.0.27
     react: ">=16.3.0"
   checksum: 2b0366afadbf60ab8d3d15750f0ac2949a74d580faa42713dad5c4fbe1652abee39e94ed9b228c47869111bf57d960d547da7a5844cd1ab86c9cdbfe62da9e99
-  languageName: node
-  linkType: hard
-
-"emotion-theming@npm:^11":
-  version: 11.0.0
-  resolution: "emotion-theming@npm:11.0.0"
-  checksum: d823a50c4d3df3d9a4c21574c354cdbddbe06ad1d07b7fc2807cdc2eaf5d765ea1486d9d3292ea1855d9fb18b29edd39a7e3a784da4afa54ef5f1c02970142ed
   languageName: node
   linkType: hard
 
@@ -24160,25 +24139,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"meow@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "meow@npm:6.1.1"
-  dependencies:
-    "@types/minimist": "npm:^1.2.0"
-    camelcase-keys: "npm:^6.2.2"
-    decamelize-keys: "npm:^1.1.0"
-    hard-rejection: "npm:^2.1.0"
-    minimist-options: "npm:^4.0.2"
-    normalize-package-data: "npm:^2.5.0"
-    read-pkg-up: "npm:^7.0.1"
-    redent: "npm:^3.0.0"
-    trim-newlines: "npm:^3.0.0"
-    type-fest: "npm:^0.13.1"
-    yargs-parser: "npm:^18.1.3"
-  checksum: 77b569781145ad030be77130623d9f74d6eef0af5e0a349419d3df39bcf6d88cc25be046a7757062162a88160fb5d8604e540b5177b371d2bbc2aaf73ec01479
-  languageName: node
-  linkType: hard
-
 "meow@npm:^8.0.0":
   version: 8.1.2
   resolution: "meow@npm:8.1.2"
@@ -24482,7 +24442,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist-options@npm:4.1.0, minimist-options@npm:^4.0.2":
+"minimist-options@npm:4.1.0":
   version: 4.1.0
   resolution: "minimist-options@npm:4.1.0"
   dependencies:
@@ -33011,13 +32971,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "type-fest@npm:0.13.1"
-  checksum: e6bf2e3c449f27d4ef5d56faf8b86feafbc3aec3025fc9a5fbe2db0a2587c44714521f9c30d8516a833c8c506d6263f5cc11267522b10c6ccdb6cc55b0a9d1c4
-  languageName: node
-  linkType: hard
-
 "type-fest@npm:^0.16.0":
   version: 0.16.0
   resolution: "type-fest@npm:0.16.0"
@@ -35253,7 +35206,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs-parser@npm:^18.1.2, yargs-parser@npm:^18.1.3":
+"yargs-parser@npm:^18.1.2":
   version: 18.1.3
   resolution: "yargs-parser@npm:18.1.3"
   dependencies:

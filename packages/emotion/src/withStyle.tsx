@@ -29,9 +29,9 @@ import type {
   RefAttributes
 } from 'react'
 
-import { isEqual } from 'lodash'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
+import { deepEqual as isEqual } from '@instructure/ui-utils'
 import { warn } from '@instructure/console'
 import { decorator } from '@instructure/ui-decorator'
 
