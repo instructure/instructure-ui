@@ -3,13 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [8.24.2](https://github.com/instructure/instructure-ui/compare/v8.24.1...v8.24.2) (2022-05-02)
+## [8.24.3](https://github.com/instructure/instructure-ui/compare/v8.24.2...v8.24.3) (2022-05-25)
 
 **Note:** Version bump only for package @instructure/ui-grid
 
+## [8.24.2](https://github.com/instructure/instructure-ui/compare/v8.24.1...v8.24.2) (2022-05-02)
 
-
-
+**Note:** Version bump only for package @instructure/ui-grid
 
 ## [8.24.1](https://github.com/instructure/instructure-ui/compare/v8.24.0...v8.24.1) (2022-04-29)
 

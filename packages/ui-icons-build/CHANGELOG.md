@@ -3,13 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.24.3](https://github.com/instructure/instructure-ui/compare/v8.24.2...v8.24.3) (2022-05-25)
+
+### Bug Fixes
+
+- **ui-icons-build,ui-icons:** correct `instructure` icon displaying `canvas` logo ([53afffb](https://github.com/instructure/instructure-ui/commit/53afffb68cdee592b6d98380f2b7559659c2caee))
+
 ## [8.24.2](https://github.com/instructure/instructure-ui/compare/v8.24.1...v8.24.2) (2022-05-02)
 
 **Note:** Version bump only for package @instructure/ui-icons-build
-
-
-
-
 
 ## [8.24.1](https://github.com/instructure/instructure-ui/compare/v8.24.0...v8.24.1) (2022-04-29)
 
