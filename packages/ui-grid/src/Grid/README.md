@@ -64,20 +64,20 @@ example: true
 You can control the width of the `<Grid.Col>` columns for each
 breakpoint with the `width` prop. Please note the following:
 
-+ If you don't need complex responsive behavior, you can just set
+- If you don't need complex responsive behavior, you can just set
   the width property to a single value for all breakpoints after
   and including the breakpoint set via the `startAt` prop. e.g.
   `<Grid.Col width={2}>`
 
-+ The Grid is made up of **12 columns**. If the columns' total
+- The Grid is made up of **12 columns**. If the columns' total
   width exceeds 12, the layout will break.
 
-+ In addition to accepting the numerical values `1, 2, 3 ... 12`,
+- In addition to accepting any positive, `<=12` numerical values,
   columns can also accept an `auto` value. This tells the column
   to expand to the width of its content. (See the final example Grid
   to see how this can be useful for right-aligning column content.)
 
-+ The `startAt` prop setting supersedes any `<Grid.Col>` width props. For
+- The `startAt` prop setting supersedes any `<Grid.Col>` width props. For
   example, if you set `width={{small: 2}}` on a column, but the `startAt` prop
   on your `<Grid>` is set to `medium`, the `width={{small: 2}}` will be ignored.
 

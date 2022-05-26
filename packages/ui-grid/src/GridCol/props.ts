@@ -33,8 +33,12 @@ import type {
 import type { GridBreakpoints } from '../GridTypes'
 
 // TODO: get numcols from theme config
-const COL_WIDTHS: ColWidths[] = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-type ColWidths = 'auto' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+const COL_WIDTHS = PropTypes.oneOfType([
+  PropTypes.number,
+  PropTypes.oneOf(['auto'])
+])
+
+type ColWidths = 'auto' | number
 
 type GridColOwnProps = {
   children?: React.ReactNode
@@ -95,21 +99,21 @@ const propTypes: PropValidators<PropKeys> = {
   startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
   visualDebug: PropTypes.bool,
   width: PropTypes.oneOfType([
-    PropTypes.oneOf(COL_WIDTHS),
+    COL_WIDTHS,
     PropTypes.shape({
-      small: PropTypes.oneOf(COL_WIDTHS),
-      medium: PropTypes.oneOf(COL_WIDTHS),
-      large: PropTypes.oneOf(COL_WIDTHS),
-      xLarge: PropTypes.oneOf(COL_WIDTHS)
+      small: COL_WIDTHS,
+      medium: COL_WIDTHS,
+      large: COL_WIDTHS,
+      xLarge: COL_WIDTHS
     })
   ]),
   offset: PropTypes.oneOfType([
-    PropTypes.oneOf(COL_WIDTHS),
+    COL_WIDTHS,
     PropTypes.shape({
-      small: PropTypes.oneOf(COL_WIDTHS),
-      medium: PropTypes.oneOf(COL_WIDTHS),
-      large: PropTypes.oneOf(COL_WIDTHS),
-      xLarge: PropTypes.oneOf(COL_WIDTHS)
+      small: COL_WIDTHS,
+      medium: COL_WIDTHS,
+      large: COL_WIDTHS,
+      xLarge: COL_WIDTHS
     })
   ]),
   isLastRow: PropTypes.bool,

@@ -28,6 +28,7 @@ import { Component } from 'react'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
+import { logWarn as warn } from '@instructure/console'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -67,12 +68,36 @@ class GridCol extends Component<GridColProps> {
     }
   }
 
+  widthCheck() {
+    const { width } = this.props
+    let shouldWarn = false
+    if (width) {
+      if (typeof width === 'number' && width <= 0) {
+        shouldWarn = true
+      }
+
+      if (typeof width === 'object') {
+        Object.keys(width).forEach((breakpoint) => {
+          //@ts-expect-error Ts doesn't understand Object.keys properly
+          if (typeof width[breakpoint] === 'number' && width[breakpoint] <= 0) {
+            shouldWarn = true
+          }
+        })
+      }
+    }
+    if (shouldWarn) {
+      warn(false, 'Col width must be positive!')
+    }
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
+    this.widthCheck()
   }
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+    this.widthCheck()
   }
 
   render() {
