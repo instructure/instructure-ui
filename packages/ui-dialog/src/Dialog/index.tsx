@@ -73,14 +73,14 @@ class Dialog extends Component<DialogProps> {
   }
 
   componentDidUpdate(prevProps: DialogProps) {
-    const { open } = this.props
+    const { open, contentElement, ...options } = this.props
     if (open && !prevProps.open) {
       this.open()
     } else if (!open && prevProps.open) {
       this.close()
     }
     if (this._focusRegion) {
-      this._focusRegion.updateElement(this.contentElement)
+      this._focusRegion.updateElement(this.contentElement, options)
     }
   }
 
