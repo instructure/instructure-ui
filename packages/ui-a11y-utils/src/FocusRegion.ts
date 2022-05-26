@@ -61,8 +61,11 @@ class FocusRegion {
     this._id = uid()
   }
 
-  updateElement(element: Element | Node) {
+  updateElement(element: Element | Node, options?: FocusRegionOptions) {
     this._contextElement = element
+    if (options) {
+      this._options = options
+    }
     if (this._keyboardFocusRegion) {
       this._keyboardFocusRegion.updateElement(element)
     }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import {
   expect,
   match,
@@ -455,5 +455,45 @@ describe('<Modal />', async () => {
         expect(onDismiss).to.have.been.called()
       })
     })
+  })
+
+  it('should not call stale callbacks', async () => {
+    function Example(props: { handleDissmiss: (v: number) => number }) {
+      const [value, setValue] = useState(0)
+
+      function onButtonClick() {
+        setValue(value + 1)
+      }
+
+      return (
+        <Modal
+          label="Modal"
+          open
+          onDismiss={() => {
+            props.handleDissmiss(value)
+          }}
+        >
+          <Modal.Body>
+            <div>{value}</div>
+            <button id="increment-btn" onClick={onButtonClick}>
+              Click
+            </button>
+          </Modal.Body>
+        </Modal>
+      )
+    }
+    const handleDissmiss = stub()
+
+    await mount(<Example handleDissmiss={handleDissmiss} />)
+
+    const incrementBtn: HTMLElement = document.querySelector('#increment-btn')!
+    const btn = within(incrementBtn)
+
+    await btn.click()
+
+    // to trigger the modal to close
+    document.body.click()
+
+    expect(handleDissmiss).to.have.been.calledWith(1)
   })
 })
