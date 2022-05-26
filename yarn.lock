@@ -3046,6 +3046,7 @@ __metadata:
   resolution: "@instructure/ui-grid@workspace:packages/ui-grid"
   dependencies:
     "@babel/runtime": ^7.13.10
+    "@instructure/console": 8.24.3
     "@instructure/emotion": 8.24.3
     "@instructure/shared-types": 8.24.3
     "@instructure/ui-a11y-content": 8.24.3
