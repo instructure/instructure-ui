@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
+import { colorIndicatorBorderColor } from '../../ColorIndicator/theme'
 import type { SliderStyle, SliderProps } from './props'
-import type { ColorMixerSliderTheme } from '@instructure/shared-types'
+import type { SliderTheme } from '@instructure/shared-types'
 
 /**
  * ---
@@ -36,7 +37,7 @@ import type { ColorMixerSliderTheme } from '@instructure/shared-types'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ColorMixerSliderTheme,
+  componentTheme: SliderTheme,
   props: SliderProps,
   state: any
 ): SliderStyle => {
@@ -53,17 +54,19 @@ const generateStyle = (
 
   return {
     colorSlider: {
-      label: 'colorMixerSlider'
+      label: 'colorMixerSlider',
+      width: props.width,
+      height: props.height,
+      position: 'relative'
     },
     indicator: {
-      label: 'colorMixerSlider__indicator',
       width: `${props.indicatorRadius / 8}rem`,
       height: `${props.indicatorRadius / 8}rem`,
       borderRadius: `${props.indicatorRadius / 8}rem`,
       background: 'white',
       position: 'absolute',
       borderStyle: 'solid',
-      borderWidth: componentTheme.indicatorBorderWidth,
+      borderWidth: componentTheme.smallBorder,
       borderColor: componentTheme.indicatorBorderColor,
       top: `-0.1875rem`,
       left: `${
@@ -71,11 +74,10 @@ const generateStyle = (
           props.indicatorRadius) /
         16
       }rem`,
-      zIndex: componentTheme.indicatorZIndex
+      zIndex: componentTheme.stackAbove
     },
 
     sliderBackground: {
-      label: 'colorMixerSlider__sliderBackground',
       borderRadius: `${props.height / 16}rem`,
       width: `${props.width / 16}rem`,
       height: `${props.height / 16}rem`,
@@ -83,7 +85,6 @@ const generateStyle = (
       ...sliderBackground
     },
     slider: {
-      label: 'colorMixerSlider__slider',
       width: `${props.width / 16}rem`,
       height: `${props.height / 16}rem`,
       background: props.isColorSlider
@@ -97,18 +98,8 @@ const generateStyle = (
       boxSizing: 'border-box',
 
       borderStyle: 'solid',
-      borderColor: componentTheme.colorIndicatorBorderColor,
-      borderWidth: componentTheme.sliderBorderWidth
-    },
-    disabledOverlay: {
-      label: 'colorMixerSlider__disabledOverlay',
-      background: 'rgba(255,255,255,.5)',
-      zIndex: componentTheme.disabledOverlayZIndex,
-      width: `${props.width / 16 + 1}rem`,
-      height: `${props.height / 16 + 1}rem`,
-      position: 'absolute',
-      top: '-.5rem',
-      left: '-.5rem'
+      borderColor: colorIndicatorBorderColor,
+      borderWidth: componentTheme.smallBorder
     }
   }
 }

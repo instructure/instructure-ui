@@ -26,9 +26,8 @@
 import { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
 import { View } from '@instructure/ui-view'
-import { addEventListener } from '@instructure/ui-dom-utils'
-import type { ViewOwnProps } from '@instructure/ui-view'
-import type { SliderProps } from './props'
+import { ViewOwnProps } from '@instructure/ui-view/src/View/props'
+import { SliderProps } from './props'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -46,24 +45,11 @@ class Slider extends Component<SliderProps> {
   static defaultProps = {
     isColorSlider: false
   }
-
-  ref: Element | null = null
-  mouseMoveListener?: { remove(): void }
-  mouseUpListener?: { remove(): void }
-
-  handleRef = (el: Element | null) => {
-    const { elementRef } = this.props
-
-    this.ref = el
-
-    if (typeof elementRef === 'function') {
-      elementRef(el)
-    }
-  }
   componentDidMount() {
     this.props.makeStyles?.({
       calcSliderPositionFromValue: this.calcSliderPositionFromValue
     })
+    // this.props.drawSlider(this.sliderRef!, this.props.width, this.props.height)
   }
 
   componentDidUpdate() {
@@ -77,27 +63,19 @@ class Slider extends Component<SliderProps> {
   }
 
   removeEventListeners() {
-    this.mouseMoveListener?.remove()
-    this.mouseUpListener?.remove()
+    //@ts-expect-error TODO
+    window.removeEventListener('mousemove', this.handleChange)
+    window.removeEventListener('mouseup', this.handleMouseUp)
   }
 
   handleMouseDown(e: React.MouseEvent<ViewOwnProps, MouseEvent>) {
     this.handleChange(e)
-
-    this.mouseMoveListener = addEventListener(
-      window,
-      'mousemove',
-      this.handleChange
-    )
-    this.mouseUpListener = addEventListener(
-      window,
-      'mouseup',
-      this.handleMouseUp
-    )
+    //@ts-expect-error TODO
+    window.addEventListener('mousemove', this.handleChange)
+    window.addEventListener('mouseup', this.handleMouseUp)
   }
 
   handleChange = (e: React.MouseEvent<ViewOwnProps, MouseEvent>) => {
-    if (this.props.disabled) return
     const { clientX } = e
     const newPosition = this.calcSliderPositionFromCursorPosition(
       clientX,
@@ -178,24 +156,21 @@ class Slider extends Component<SliderProps> {
   render() {
     return (
       <View
-        elementRef={this.handleRef}
-        disabled={this.props.disabled}
         position="relative"
+        width={this.props.width}
+        height={this.props.height}
         background="transparent"
         margin="small 0 0 0"
-        display="inline-block"
+        display="flex"
         borderRadius="medium"
         borderWidth="0"
         padding="0"
-        as="div"
+        as="button"
         onKeyDown={(e) => this.handleKeyDown(e)}
         onMouseDown={(e) => this.handleMouseDown(e)}
-        tabIndex={this.props.disabled ? undefined : 0}
+        tabIndex={0}
       >
         <div css={this.props.styles?.indicator} />
-        {this.props.disabled && (
-          <div css={this.props.styles?.disabledOverlay} />
-        )}
         <div
           ref={(ref) => {
             this.sliderRef = ref

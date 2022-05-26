@@ -27,23 +27,16 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators,
-  ColorMixerRGBAInputTheme
+  PropValidators
 } from '@instructure/shared-types'
 import type { RGBAType } from '../props'
 
 type RGBAInputOwnProps = {
-  disabled?: boolean
   label?: string
   width: number
   value: RGBAType
   onChange: (rgba: RGBAType) => void
   withAlpha: boolean
-  rgbRedInputScreenReaderLabel: string
-  rgbGreenInputScreenReaderLabel: string
-  rgbBlueInputScreenReaderLabel: string
-  rgbAlphaInputScreenReaderLabel: string
-  elementRef?: (element: Element | null) => void
 }
 
 type RGBAInputState = {
@@ -55,39 +48,27 @@ type PropKeys = keyof RGBAInputOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RGBAInputProps = RGBAInputOwnProps &
-  WithStyleProps<ColorMixerRGBAInputTheme, RGBAInputStyle> &
+  WithStyleProps<null, RGBAInputStyle> &
   OtherHTMLAttributes<RGBAInputOwnProps>
 
 type RGBAInputStyle = ComponentStyle<
-  'RGBAInput' | 'label' | 'inputContainer' | 'rgbInput' | 'aInput'
+  | 'RGBAInput'
+  | 'label'
+  | 'inputContainer'
+  | 'rInput'
+  | 'gInput'
+  | 'bInput'
+  | 'aInput'
 >
 const propTypes: PropValidators<PropKeys> = {
-  disabled: PropTypes.bool,
   label: PropTypes.string,
   width: PropTypes.number,
   value: PropTypes.object,
   onChange: PropTypes.func,
-  withAlpha: PropTypes.bool,
-  rgbRedInputScreenReaderLabel: PropTypes.string,
-  rgbGreenInputScreenReaderLabel: PropTypes.string,
-  rgbBlueInputScreenReaderLabel: PropTypes.string,
-  rgbAlphaInputScreenReaderLabel: PropTypes.string,
-  elementRef: PropTypes.func
+  withAlpha: PropTypes.bool
 }
 
-const allowedProps: AllowedPropKeys = [
-  'disabled',
-  'label',
-  'width',
-  'value',
-  'onChange',
-  'withAlpha',
-  'rgbRedInputScreenReaderLabel',
-  'rgbGreenInputScreenReaderLabel',
-  'rgbBlueInputScreenReaderLabel',
-  'rgbAlphaInputScreenReaderLabel',
-  'elementRef'
-]
+const allowedProps: AllowedPropKeys = ['onChange', 'value']
 
 export type { RGBAInputProps, RGBAInputState, RGBAInputStyle }
 export { propTypes, allowedProps }

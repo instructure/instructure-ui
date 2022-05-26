@@ -27,8 +27,7 @@ import PropTypes from 'prop-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators,
-  ColorPresetTheme
+  PropValidators
 } from '@instructure/shared-types'
 import type { RGBAType } from '../ColorMixer/props'
 
@@ -39,10 +38,6 @@ type MessageType = Array<{
 }>
 
 type ColorPresetOwnProps = {
-  /**
-   * screenReaderLabel for the add new preset button
-   */
-  addNewPresetButtonScreenReaderLabel: string
   /**
    * Array of HEX strings which are the preset colors. Supports 8 character HEX (with alpha)
    */
@@ -67,14 +62,9 @@ type ColorPresetOwnProps = {
    * It will be called with the new list of colors
    */
   colorMixerSettings?: {
-    maxHeight: string
     onPresetChange: (colors: ColorPresetOwnProps['colors']) => void
     colorMixer: {
       withAlpha: boolean
-      rgbRedInputScreenReaderLabel: string
-      rgbGreenInputScreenReaderLabel: string
-      rgbBlueInputScreenReaderLabel: string
-      rgbAlphaInputScreenReaderLabel: string
     }
     colorContrast?: {
       firstColor: string
@@ -93,10 +83,6 @@ type ColorPresetOwnProps = {
    */
   onSelect: (selected: string) => void
   /**
-   * Sets the ScreenReaderLabel for the popover
-   */
-  popoverScreenReaderLabel?: string
-  /**
    * The currently selected HEX string
    */
   selected: string | null
@@ -113,41 +99,36 @@ type PropKeys = keyof ColorPresetOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorPresetProps = ColorPresetOwnProps &
-  WithStyleProps<ColorPresetTheme, ColorPresetStyle> &
+  WithStyleProps<null, ColorPresetStyle> &
   OtherHTMLAttributes<ColorPresetOwnProps>
 
 type ColorPresetStyle = ComponentStyle<
   | 'colorPreset'
   | 'addNewPresetButton'
+  | 'presetRect'
   | 'selectedIndicator'
   | 'popoverContent'
   | 'popoverDivider'
   | 'popoverFooter'
   | 'label'
-  | 'popoverContrastBlock'
+  | 'popoverContentBlock'
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  addNewPresetButtonScreenReaderLabel: PropTypes.string,
   colors: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
   elementRef: PropTypes.func,
   label: PropTypes.string,
   colorMixerSettings: PropTypes.object,
   onSelect: PropTypes.func.isRequired,
-  popoverScreenReaderLabel: PropTypes.string,
   selected: PropTypes.string.isRequired
 }
 
 const allowedProps: AllowedPropKeys = [
-  'addNewPresetButtonScreenReaderLabel',
   'colors',
-  'disabled',
-  'elementRef',
   'label',
   'colorMixerSettings',
   'onSelect',
-  'popoverScreenReaderLabel',
   'selected'
 ]
 

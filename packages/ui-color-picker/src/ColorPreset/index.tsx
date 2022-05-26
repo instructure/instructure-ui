@@ -23,25 +23,28 @@
  */
 
 /** @jsx jsx */
-import { Component, SyntheticEvent } from 'react'
+import { Component } from 'react'
 
-import { passthroughProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
+import { Menu } from '@instructure/ui-menu'
 import { IconButton, Button } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { Popover } from '@instructure/ui-popover'
 import { Text } from '@instructure/ui-text'
-import { Drilldown } from '@instructure/ui-drilldown'
-import type { DrilldownOnSelectArgs } from '@instructure/ui-drilldown'
 import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
-import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
-import { ColorIndicator } from '../ColorIndicator'
+import {
+  colorTohex8,
+  hexToRgb
+} from '@instructure/ui-color-utils/src/conversions'
+import { isValid } from '@instructure/ui-color-utils/src/isValid'
+import { colorIndicatorBorderColor } from '../ColorIndicator/theme'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
 import { propTypes, allowedProps } from './props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import type { RGBAType } from '../ColorMixer/props'
 import ColorMixer from '../ColorMixer'
 import ColorContrast from '../ColorContrast'
 /**
@@ -66,9 +69,9 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
   static defaultProps = {
     disabled: false
   }
-  ref: HTMLDivElement | null = null
+  ref: Element | null = null
 
-  handleRef = (el: HTMLDivElement | null) => {
+  handleRef = (el: Element | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -86,13 +89,30 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     this.props.makeStyles?.()
   }
 
+  calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
+    // as decided by design
+    const c2Alpha = c2.a * 0.4
+    const c1Alpha = 1 - c2Alpha
+    const alpha = 1 - c1Alpha * (1 - c1Alpha)
+
+    return `rgba(
+      ${(c2.r * c2Alpha) / alpha + (c1.r * c1Alpha * (1 - c2Alpha)) / alpha},
+      ${(c2.g * c2Alpha) / alpha + (c1.g * c1Alpha * (1 - c2Alpha)) / alpha},
+      ${(c2.b * c2Alpha) / alpha + (c1.b * c1Alpha * (1 - c2Alpha)) / alpha},
+      ${c2.a}
+      )`
+  }
+
   onMenuItemSelected =
     (color: string) =>
-    (_e: SyntheticEvent<Element, Event>, args: DrilldownOnSelectArgs) => {
-      if (args.value === 'select') {
+    (
+      _e: React.MouseEvent<Element, MouseEvent>,
+      action: string | number | (string | number | undefined)[] | undefined
+    ) => {
+      if (action === 'select') {
         this.props.onSelect(color)
       }
-      if (args.value === 'remove') {
+      if (action === 'remove') {
         this.props?.colorMixerSettings?.onPresetChange(
           this.props.colors.filter((clr) => clr !== color)
         )
@@ -105,7 +125,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         <div css={this.props?.styles?.addNewPresetButton}>
           <IconButton
             disabled={this.props.disabled}
-            screenReaderLabel={this.props.addNewPresetButtonScreenReaderLabel}
+            screenReaderLabel="Add User"
           >
             <IconAddLine />
           </IconButton>
@@ -113,51 +133,34 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
       }
       isShowingContent={this.state.openAddNew}
       onShowContent={() => {
-        if (this.props.disabled) return
         this.setState({ openAddNew: true })
       }}
       onHideContent={() => {
         this.setState({ openAddNew: false })
       }}
       on="click"
-      screenReaderLabel={this.props.popoverScreenReaderLabel}
+      screenReaderLabel="Popover Dialog Example"
       shouldContainFocus
       shouldReturnFocus
       shouldCloseOnDocumentClick
-      offsetY={16}
+      offsetY="16px"
       mountNode={() => document.getElementById('main')}
     >
       <div css={this.props.styles?.popoverContent}>
         <ColorMixer
-          value={colorToHex8(this.state.newColor)}
+          value={colorTohex8(this.state.newColor)}
           onChange={(newColor: string) =>
-            this.setState({ newColor: colorToRGB(newColor) })
+            this.setState({ newColor: hexToRgb(newColor) })
           }
           withAlpha={this.props?.colorMixerSettings?.colorMixer?.withAlpha}
-          rgbRedInputScreenReaderLabel={
-            this.props.colorMixerSettings!.colorMixer
-              .rgbRedInputScreenReaderLabel
-          }
-          rgbGreenInputScreenReaderLabel={
-            this.props.colorMixerSettings!.colorMixer
-              .rgbGreenInputScreenReaderLabel
-          }
-          rgbBlueInputScreenReaderLabel={
-            this.props.colorMixerSettings!.colorMixer
-              .rgbBlueInputScreenReaderLabel
-          }
-          rgbAlphaInputScreenReaderLabel={
-            this.props.colorMixerSettings!.colorMixer
-              .rgbAlphaInputScreenReaderLabel
-          }
         />
         {this.props?.colorMixerSettings?.colorContrast && (
-          <div css={this.props.styles?.popoverContrastBlock}>
+          <div css={this.props.styles?.popoverContentBlock}>
             <ColorContrast
               firstColor={
                 this.props.colorMixerSettings.colorContrast.firstColor
               }
-              secondColor={colorToHex8(this.state.newColor)}
+              secondColor={colorTohex8(this.state.newColor)}
               label={this.props.colorMixerSettings.colorContrast.label}
               successLabel={
                 this.props.colorMixerSettings.colorContrast.successLabel
@@ -188,7 +191,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         <Button
           onClick={() => {
             this.props?.colorMixerSettings?.onPresetChange([
-              colorToHex8(this.state.newColor),
+              colorTohex8(this.state.newColor),
               ...this.props.colors
             ])
             this.setState({ openAddNew: false })
@@ -225,10 +228,17 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         {...(selectOnClick
           ? { onClick: () => this.props.onSelect(color) }
           : {})}
-        {...(this.props.selected === color ? { 'aria-label': 'selected' } : {})}
       >
-        <div>
-          <ColorIndicator color={color} shape="rectangle" />
+        <div
+          css={this.props?.styles?.presetRect}
+          style={{
+            borderColor: this.calcBlendedColor(
+              hexToRgb(colorIndicatorBorderColor),
+              hexToRgb(isValid(color) ? color : '#fff')
+            ),
+            boxShadow: `inset 0 0 0 50px ${color}`
+          }}
+        >
           {this.props.selected === color && (
             <div css={this.props?.styles?.selectedIndicator}>
               <IconCheckDarkSolid
@@ -242,43 +252,22 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     </Tooltip>
   )
   renderSettingsMenu = (color: string, index: number) => (
-    <Drilldown
-      onSelect={this.onMenuItemSelected(color)}
-      trigger={this.renderColorIndicator(color)}
+    <Menu
       key={`color-preset-color-${index}`}
-      rootPageId="root"
-      width="10rem"
-      offsetY="15rem"
+      placement="bottom"
+      trigger={this.renderColorIndicator(color)}
+      mountNode={() => document.getElementById('main')}
+      onSelect={this.onMenuItemSelected(color)}
     >
-      <Drilldown.Page withoutHeaderSeparator id="root" renderTitle={color}>
-        <Drilldown.Option value="select" id="select">
-          Select
-        </Drilldown.Option>
-        <Drilldown.Option value="remove" id="remove">
-          Remove
-        </Drilldown.Option>
-      </Drilldown.Page>
-    </Drilldown>
+      <Menu.Group label={color} />
+      <Menu.Item value="select">Select</Menu.Item>
+      <Menu.Item value="remove">Remove</Menu.Item>
+    </Menu>
   )
-
   render() {
-    const {
-      disabled,
-      onSelect,
-      selected,
-      styles,
-      label,
-      colorMixerSettings,
-      colors,
-      elementRef,
-      ...props
-    } = this.props
+    const { styles, label, colorMixerSettings, colors, elementRef } = this.props
     return (
-      <div
-        {...passthroughProps(props)}
-        ref={this.handleRef}
-        css={styles?.colorPreset}
-      >
+      <div ref={elementRef} css={styles?.colorPreset}>
         {label && (
           <div css={styles?.label}>
             <Text weight="bold">{label}</Text>

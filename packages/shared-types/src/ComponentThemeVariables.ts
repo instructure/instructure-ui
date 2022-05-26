@@ -428,21 +428,12 @@ export type ColorPickerTheme = {
 }
 
 export type ColorContrastTheme = {
-  width: string
-
-  fontFamily: Typography['fontFamily']
-  fontWeight: Typography['fontWeightNormal']
-  lineHeight: Typography['lineHeightCondensed']
-  fontSize: Typography['fontSizeMedium']
-
   statusWrapperBottomMargin: Spacing['xxSmall']
   colorIndicatorRightMargin: Spacing['small']
   colorPreviewBottomMargin: Spacing['small']
   colorPreviewTopMargin: Spacing['xSmall']
   labelBottomMargin: Spacing['xxSmall']
-
   smallBorder: Border['widthSmall']
-
   successColor: Colors['shamrock']
   failureColor: Colors['crimson']
   pickedHexColor: Colors['ash']

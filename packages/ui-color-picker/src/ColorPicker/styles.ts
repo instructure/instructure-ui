@@ -23,7 +23,9 @@
  */
 
 import type { ColorPickerTheme } from '@instructure/shared-types'
+import { colorIndicatorBorderColor } from '../ColorIndicator/theme'
 
+import { isValid } from '@instructure/ui-color-utils/src/isValid'
 import type {
   ColorPickerProps,
   ColorPickerState,
@@ -47,79 +49,80 @@ const generateStyle = (
 ): ColorPickerStyle => {
   const { hashMarkColor, errorIconColor, warningIconColor, successIconColor } =
     componentTheme
-  const { checkContrast, popoverMaxHeight } = props
-  const { isSimple } = state
+  const { checkContrast } = props
+  const { hexCode, isSimple } = state
+
+  const checkerBoard = {
+    backgroundColor: componentTheme.checkerboardBackgroundColor,
+    background: componentTheme.checkerboardBackgroundImage,
+    backgroundSize: componentTheme.checkerboardBackgroundSize,
+    backgroundPosition: componentTheme.checkerboardBackgroundPosition
+  }
 
   return {
     colorPicker: {
       label: 'colorPicker',
       display: 'flex'
     },
+    colorCircle: {
+      backgroundColor: `#${hexCode}`,
+      width: '1.5rem',
+      height: '1.5rem',
+      margin: 'auto',
+      border: `${componentTheme.smallBorder} solid ${colorIndicatorBorderColor}`,
+      borderRadius: '1.5rem',
+      display: 'inline-block',
+      ...(!isValid(hexCode) ? checkerBoard : {})
+    },
     simpleColorContainer: {
-      label: 'colorPicker__simpleColorContainer',
       display: 'flex',
-      paddingLeft: componentTheme.simpleColorContainerLeftPadding,
-      alignItems: 'center'
+      paddingLeft: componentTheme.xSmallSpacing
     },
     hashMarkContainer: {
-      label: 'colorPicker__hashMarkContainer',
       color: hashMarkColor,
       display: 'inline-block',
       fontSize: '1rem',
-      lineHeight: componentTheme.hashMarkContainerLineHeight,
+      lineHeight: componentTheme.xLargeFontSize,
       ...(isSimple
         ? {
-            paddingInlineStart: componentTheme.hashMarkContainerLeftPadding,
-            paddingInlineEnd: componentTheme.hashMarkContainerRightPadding
+            paddingLeft: componentTheme.xSmallSpacing,
+            paddingRight: componentTheme.xxxSmallSpacing
           }
         : {})
     },
     errorIcons: {
-      label: 'colorPicker__errorIcons',
       display: 'flex',
-      paddingInlineEnd: componentTheme.errorIconsRightPadding,
+      paddingRight: componentTheme.smallSpacing,
       color: checkContrast?.isStrict ? errorIconColor : warningIconColor
     },
     successIcon: {
-      label: 'colorPicker__successIcon',
       display: 'flex',
-      paddingInlineEnd: componentTheme.successIconRightPadding,
+      paddingRight: componentTheme.smallSpacing,
       color: successIconColor
     },
     label: {
-      label: 'colorPicker__label',
-      marginInlineEnd: componentTheme.labelRightMargin
+      marginRight: componentTheme.xxSmallSpacing
     },
     popoverContent: {
-      label: 'colorPicker__popoverContent',
-      padding: componentTheme.popoverContentPadding
+      padding: componentTheme.xxSmallSpacing
     },
     popoverContentBlock: {
-      label: 'colorPicker__popoverContentBlock',
       borderTop: 'solid',
-      borderWidth: componentTheme.popoverContentBlockBorderWidth,
+      borderWidth: componentTheme.smallBorder,
       borderColor: componentTheme.popoverSeparatorColor,
-      marginTop: componentTheme.popoverContentBlockTopMargin,
-      marginBottom: componentTheme.popoverContentBlockBottomMargin
+      margin: `${componentTheme.smallSpacing} 0 ${componentTheme.smallSpacing} 0`
     },
     popoverFooter: {
-      label: 'colorPicker__popoverFooter',
       backgroundColor: componentTheme.popoverFooterColor,
       display: 'flex',
-      justifyContent: 'flex-end',
-      padding: componentTheme.popoverFooterPadding,
-      borderTop: `solid ${componentTheme.popoverFooterTopBorderWidth}`,
-      borderColor: componentTheme.popoverSeparatorColor
+      flexDirection: 'row-reverse',
+      padding: componentTheme.xSmallSpacing,
+      borderColor: componentTheme.popoverSeparatorColor,
+      borderTop: `solid ${componentTheme.smallBorder}`
     },
     colorMixerButtonContainer: {
-      label: 'colorPicker__colorMixerButtonContainer',
       alignSelf: 'flex-end',
-      marginInlineStart: componentTheme.colorMixerButtonContainerLeftMargin
-    },
-    popoverContentContainer: {
-      label: 'colorPicker__popoverContentContainer',
-      maxHeight: popoverMaxHeight || '100vh',
-      overflow: 'scroll'
+      marginLeft: componentTheme.xSmallSpacing
     }
   }
 }

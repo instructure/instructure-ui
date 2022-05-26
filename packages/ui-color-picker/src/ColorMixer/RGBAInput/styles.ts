@@ -23,7 +23,7 @@
  */
 
 import type { RGBAInputStyle, RGBAInputProps } from './props'
-import type { ColorMixerRGBAInputTheme } from '@instructure/shared-types'
+import type { RGBAInputTheme } from '@instructure/shared-types'
 
 /**
  * ---
@@ -36,31 +36,35 @@ import type { ColorMixerRGBAInputTheme } from '@instructure/shared-types'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ColorMixerRGBAInputTheme,
+  componentTheme: RGBAInputTheme,
   props: RGBAInputProps
 ): RGBAInputStyle => {
   return {
     RGBAInput: {
       label: 'RGBAInput',
-      marginTop: componentTheme.rgbaInputTopMargin,
+      marginTop: componentTheme.mediumMargin,
       width: `${props.width / 16}rem`
     },
     label: {
-      label: 'RGBAInput__label',
-      fontWeight: componentTheme.labelFontWeight
+      fontWeight: componentTheme.boldFontWeight
     },
     inputContainer: {
-      label: 'RGBAInput__inputContainer',
       display: 'flex',
-      marginTop: componentTheme.inputContainerTopMargin
+      marginTop: componentTheme.xSmallMargin
     },
-    rgbInput: {
-      label: 'RGBAInput__rgbInput',
-      marginInlineEnd: componentTheme.tgbInputTopMargin,
+    rInput: {
+      marginRight: componentTheme.xSmallMargin,
+      flex: 7
+    },
+    gInput: {
+      marginRight: componentTheme.xSmallMargin,
+      flex: 7
+    },
+    bInput: {
+      marginRight: componentTheme.xSmallMargin,
       flex: 7
     },
     aInput: {
-      label: 'RGBAInput__aInput',
       flex: 10
     }
   }

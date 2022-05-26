@@ -27,7 +27,8 @@ import type {
   ColorPaletteProps,
   ColorPaletteState
 } from './props'
-import type { ColorMixerPaletteTheme } from '@instructure/shared-types'
+import type { PaletteTheme } from '@instructure/shared-types'
+import { colorIndicatorBorderColor } from '../../ColorIndicator/theme'
 import { px } from '@instructure/ui-utils'
 
 /**
@@ -41,7 +42,7 @@ import { px } from '@instructure/ui-utils'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: ColorMixerPaletteTheme,
+  componentTheme: PaletteTheme,
   props: ColorPaletteProps,
   state: ColorPaletteState
 ): ColorPaletteStyle => {
@@ -50,14 +51,13 @@ const generateStyle = (
       label: 'ColorPalette'
     },
     indicator: {
-      label: 'ColorPalette__indicator',
       width: `${props.indicatorRadius / 8}rem`,
       height: `${props.indicatorRadius / 8}rem`,
       borderRadius: `${props.indicatorRadius / 8}rem`,
       background: componentTheme.whiteColor,
       position: 'absolute',
       borderStyle: 'solid',
-      borderWidth: componentTheme.indicatorBorderWidth,
+      borderWidth: componentTheme.smallBorder,
       borderColor: componentTheme.indicatorBorderColor,
       top: `${
         state?.colorPosition?.y - px(`${props.indicatorRadius / 16}rem`)
@@ -67,26 +67,15 @@ const generateStyle = (
       }px`
     },
     palette: {
-      label: 'ColorPalette__palette',
       width: `${props.width / 16}rem`,
       height: `${props.height / 16}rem`,
-      borderRadius: componentTheme.paletteBorderRadius,
+      borderRadius: componentTheme.mediumBorderRadius,
       borderStyle: 'solid',
-      borderWidth: componentTheme.paletteBorderWidth,
+      borderWidth: componentTheme.smallBorder,
       boxSizing: 'border-box',
-      borderColor: componentTheme.colorIndicatorBorderColor,
+      borderColor: colorIndicatorBorderColor,
       background: `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)),
       linear-gradient(to right, white, hsl(${props.hue},100%,50%))`
-    },
-    disabledOverlay: {
-      label: 'ColorPalette__disabledOverlay',
-      background: 'rgba(255,255,255,.5)',
-      zIndex: componentTheme.disabledOverlayZIndex,
-      width: `${props.width / 16 + 1}rem`,
-      height: `${props.height / 16 + 1}rem`,
-      position: 'absolute',
-      top: '-.5rem',
-      left: '-.5rem'
     }
   }
 }

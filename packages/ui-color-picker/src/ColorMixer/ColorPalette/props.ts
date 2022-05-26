@@ -27,20 +27,17 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators,
-  ColorMixerPaletteTheme
+  PropValidators
 } from '@instructure/shared-types'
 import type { HSVType } from '../props'
 
 type ColorPaletteOwnProps = {
-  disabled?: boolean
   hue: number
   color: HSVType
   width: number
   height: number
   indicatorRadius: number
   onChange: (rgb: HSVType) => void
-  elementRef?: (element: Element | null) => void
 }
 
 type ColorPaletteState = {
@@ -52,32 +49,28 @@ type PropKeys = keyof ColorPaletteOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorPaletteProps = ColorPaletteOwnProps &
-  WithStyleProps<ColorMixerPaletteTheme, ColorPaletteStyle> &
+  WithStyleProps<null, ColorPaletteStyle> &
   OtherHTMLAttributes<ColorPaletteOwnProps>
 
 type ColorPaletteStyle = ComponentStyle<
-  'ColorPalette' | 'indicator' | 'palette' | 'disabledOverlay'
+  'ColorPalette' | 'indicator' | 'palette'
 >
 const propTypes: PropValidators<PropKeys> = {
-  disabled: PropTypes.number,
   hue: PropTypes.number,
   color: PropTypes.object,
   width: PropTypes.number,
   height: PropTypes.number,
   indicatorRadius: PropTypes.number,
-  onChange: PropTypes.func,
-  elementRef: PropTypes.func
+  onChange: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
-  'disabled',
   'hue',
   'color',
   'width',
   'height',
   'indicatorRadius',
-  'onChange',
-  'elementRef'
+  'onChange'
 ]
 
 export type { ColorPaletteProps, ColorPaletteState, ColorPaletteStyle }

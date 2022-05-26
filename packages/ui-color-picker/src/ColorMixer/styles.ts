@@ -37,13 +37,7 @@ import type { ColorMixerStyle } from './props'
 const generateStyle = (): ColorMixerStyle => {
   return {
     colorMixer: {
-      label: 'colorMixer',
-      width: '17rem'
-    },
-    sliderAndPaletteContainer: {
-      label: 'colorMixer__sliderAndPaletteContainer',
-      display: 'flex',
-      flexDirection: 'column'
+      label: 'colorMixer'
     }
   }
 }

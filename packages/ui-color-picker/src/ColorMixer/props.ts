@@ -30,6 +30,12 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 
+type ContrastStrength = 'min' | 'mid' | 'max'
+type MessageType = Array<{
+  type: 'success' | 'hint' | 'error' | 'screenreader-only'
+  text: string
+}>
+
 type RGBType = {
   r: number
   g: number
@@ -72,22 +78,6 @@ type ColorMixerOwnProps = {
    * Toggles alpha. If true, alpha slider will appear
    */
   withAlpha: boolean
-  /**
-   * screenReaderLabel for the RGBA input's red input field
-   */
-  rgbRedInputScreenReaderLabel: string
-  /**
-   * screenReaderLabel for the RGBA input's green input field
-   */
-  rgbGreenInputScreenReaderLabel: string
-  /**
-   * screenReaderLabel for the RGBA input's blue input field
-   */
-  rgbBlueInputScreenReaderLabel: string
-  /**
-   * screenReaderLabel for the RGBA input's alpha input field
-   */
-  rgbAlphaInputScreenReaderLabel: string
 }
 
 type ColorMixerState = {
@@ -105,38 +95,29 @@ type ColorMixerProps = ColorMixerOwnProps &
   WithStyleProps<null, ColorMixerStyle> &
   OtherHTMLAttributes<ColorMixerOwnProps>
 
-type ColorMixerStyle = ComponentStyle<
-  'colorMixer' | 'sliderAndPaletteContainer'
->
+type ColorMixerStyle = ComponentStyle<'colorMixer'>
 
 const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,
   elementRef: PropTypes.func,
   value: PropTypes.object,
   onChange: PropTypes.func,
-  withAlpha: PropTypes.bool,
-  rgbRedInputScreenReaderLabel: PropTypes.string,
-  rgbGreenInputScreenReaderLabel: PropTypes.string,
-  rgbBlueInputScreenReaderLabel: PropTypes.string,
-  rgbAlphaInputScreenReaderLabel: PropTypes.string
+  withAlpha: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
-  'disabled',
   'elementRef',
   'value',
   'onChange',
-  'withAlpha',
-  'rgbRedInputScreenReaderLabel',
-  'rgbGreenInputScreenReaderLabel',
-  'rgbBlueInputScreenReaderLabel',
-  'rgbAlphaInputScreenReaderLabel'
+  'withAlpha'
 ]
 
 export type {
   ColorMixerProps,
   ColorMixerStyle,
   ColorMixerState,
+  ContrastStrength,
+  MessageType,
   RGBType,
   RGBAType,
   HSVType,

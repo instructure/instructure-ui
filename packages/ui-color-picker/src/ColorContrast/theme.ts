@@ -34,18 +34,14 @@ const generateComponentTheme = (theme: Theme): ColorContrastTheme => {
   const { colors, typography, spacing, borders } = theme
 
   const componentVariables = {
-    width: '17rem',
-
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
-    lineHeight: typography?.lineHeight,
+    lineHeight: typography?.lineHeightCondensed,
     fontSize: typography?.fontSizeMedium,
 
-    statusWrapperBottomMargin: spacing?.xxSmall,
-    colorIndicatorRightMargin: spacing?.small,
-    colorPreviewBottomMargin: spacing?.small,
-    colorPreviewTopMargin: spacing?.xSmall,
-    labelBottomMargin: spacing?.xxSmall,
+    xxSmallSpacing: spacing?.xxSmall,
+    xSmallSpacing: spacing?.xSmall,
+    smallSpacing: spacing?.small,
 
     smallBorder: borders.widthSmall,
 

@@ -23,10 +23,8 @@
  */
 
 /** @jsx jsx */
-/** @jsxFrag React.Fragment */
-import React, { Component } from 'react'
+import { Component, Fragment } from 'react'
 
-import { passthroughProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 import { Text } from '@instructure/ui-text'
 import ColorIndicator from '../ColorIndicator'
@@ -35,13 +33,12 @@ import type { ColorContrastProps } from './props'
 import { propTypes, allowedProps } from './props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import {
-  contrast as getContrast,
-  colorToRGB,
-  colorToHex8
-} from '@instructure/ui-color-utils'
+import { contrast as getContrast } from '@instructure/ui-color-utils/src/contrast'
 import { Pill } from '@instructure/ui-pill'
-
+import {
+  colorToRGB,
+  colorTohex8
+} from '@instructure/ui-color-utils/src/conversions'
 import type { RGBAType } from '../ColorMixer/props'
 
 /**
@@ -58,10 +55,9 @@ class ColorContrast extends Component<ColorContrastProps> {
   constructor(props: ColorContrastProps) {
     super(props)
   }
-
   ref: HTMLDivElement | null = null
 
-  handleRef = (el: HTMLDivElement | null) => {
+  handleRef = (el: Element | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -99,7 +95,7 @@ class ColorContrast extends Component<ColorContrastProps> {
   }
 
   renderColorIndicator = (color: string, label: string) => (
-    <>
+    <Fragment>
       <div>
         <div css={this.props.styles?.colorIndicator}>
           <ColorIndicator color={color} />
@@ -110,9 +106,10 @@ class ColorContrast extends Component<ColorContrastProps> {
         <div css={this.props.styles?.colorIndicatorLabel}>{label}</div>
         <div css={this.props.styles?.pickedColorHex}>{color}</div>
       </div>
-    </>
+    </Fragment>
   )
   calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
+    // as decided by design
     const alpha = 1 - (1 - c1.a) * (1 - c2.a)
     return {
       r: (c2.r * c2.a) / alpha + (c1.r * c1.a * (1 - c2.a)) / alpha,
@@ -133,14 +130,11 @@ class ColorContrast extends Component<ColorContrastProps> {
     )
     const c2OnC1OnWhite = this.calcBlendedColor(c1OnWhite, c2RGBA)
 
-    return getContrast(colorToHex8(c1OnWhite), colorToHex8(c2OnC1OnWhite), 2)
+    return getContrast(colorTohex8(c1OnWhite), colorTohex8(c2OnC1OnWhite), 2)
   }
   render() {
     const {
       styles,
-      elementRef,
-      failureLabel,
-      successLabel,
       withoutColorPreview,
       firstColor,
       secondColor,
@@ -149,22 +143,17 @@ class ColorContrast extends Component<ColorContrastProps> {
       secondColorLabel,
       normalTextLabel,
       largeTextLabel,
-      graphicsTextLabel,
-      ...props
+      graphicsTextLabel
     } = this.props
     const contrast = this.calcContrast
     return (
-      <div
-        {...passthroughProps(props)}
-        ref={this.handleRef}
-        css={styles?.colorContrast}
-      >
-        <div css={this.props.styles?.label}>
-          <Text weight="bold" as="div">
-            {label}
-          </Text>
-        </div>
-        <Text size="x-large">{contrast}:1</Text>
+      <div ref={this.handleRef} css={styles?.colorContrast}>
+        <Text weight="bold" as="div">
+          {label}
+        </Text>
+        <Text weight="bold" size="x-large">
+          {contrast}:1
+        </Text>
         {!withoutColorPreview && (
           <div css={this.props.styles?.colorPreview}>
             <div css={this.props.styles?.firstColorPreview}>

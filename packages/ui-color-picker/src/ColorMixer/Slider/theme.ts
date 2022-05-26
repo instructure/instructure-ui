@@ -23,19 +23,22 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import type { ColorMixerSliderTheme } from '@instructure/shared-types'
-import { colorIndicatorBorderColor } from '../../ColorIndicator/theme'
+import { SliderTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: Theme): ColorMixerSliderTheme => {
+const generateComponentTheme = (theme: Theme): SliderTheme => {
   const { colors, borders, stacking } = theme
 
   const componentVariables = {
     indicatorBorderColor: colors.licorice,
+
+    smallBorder: borders.widthSmall,
+
+    stackAbove: stacking.above,
 
     checkerboardBackgroundImage: `linear-gradient(45deg, ${colors.tiara} 25%, transparent 25%),
     linear-gradient(-45deg, ${colors.tiara} 25%, transparent 25%),
@@ -43,12 +46,7 @@ const generateComponentTheme = (theme: Theme): ColorMixerSliderTheme => {
     linear-gradient(-45deg, transparent 75%, ${colors.tiara} 75%)`,
     checkerboardBackgroundSize: '.5rem .5rem',
     checkerboardBackgroundPosition:
-      '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px',
-    colorIndicatorBorderColor,
-    indicatorBorderWidth: borders.widthSmall,
-    sliderBorderWidth: borders.widthSmall,
-    indicatorZIndex: stacking.above,
-    disabledOverlayZIndex: stacking.topmost
+      '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px'
   }
 
   return {

@@ -23,7 +23,6 @@
  */
 
 import type { ColorPresetTheme } from '@instructure/shared-types'
-import type { ColorPresetProps } from './props'
 /**
  * ---
  * private: true
@@ -34,11 +33,7 @@ import type { ColorPresetProps } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (
-  componentTheme: ColorPresetTheme,
-  props: ColorPresetProps
-) => {
-  const { colorMixerSettings } = props
+const generateStyle = (componentTheme: ColorPresetTheme) => {
   return {
     colorPreset: {
       label: 'colorPreset',
@@ -47,60 +42,52 @@ const generateStyle = (
       width: '17rem'
     },
     addNewPresetButton: {
-      label: 'colorPreset__addNewPresetButton',
       width: '2.375rem',
       height: '2.375rem',
       margin: componentTheme.xxSmallSpacing
     },
+    presetRect: {
+      width: '100%',
+      height: '100%',
+      borderRadius: componentTheme.xxSmallSpacing,
+      boxSizing: 'border-box',
+      borderStyle: 'solid',
+      backgroundImage: componentTheme.checkerboardBackgroundImage,
+      backgroundSize: componentTheme.checkerboardBackgroundSize,
+      backgroundPosition: componentTheme.checkerboardBackgroundPosition
+    },
     selectedIndicator: {
-      label: 'colorPreset__selectedIndicator',
       width: '1.25rem',
       height: '1.25rem',
       borderStyle: 'solid',
       borderColor: componentTheme.selectedIndicatorBorderColor,
-      borderWidth: componentTheme.smallBorder,
       borderRadius: '1.25rem',
       boxSizing: 'border-box',
       position: 'relative',
-      insetInlineStart: '1.5rem',
-      bottom: '2.75rem',
-      backgroundColor: componentTheme.selectedIndicatorBackgroundColor,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
+      left: '1.375rem',
+      bottom: '.5rem',
+      backgroundColor: componentTheme.selectedIndicatorBackgroundColor
     },
-    popoverContent: {
-      label: 'colorPreset__popoverContent',
-      padding: componentTheme.smallSpacing,
-      maxHeight: colorMixerSettings?.maxHeight || '100vh',
-      overflow: 'scroll'
-    },
+    popoverContent: { padding: componentTheme.smallSpacing },
     popoverDivider: {
-      label: 'colorPreset__popoverDivider',
       borderTop: 'solid',
       borderWidth: componentTheme.smallBorder,
       borderColor: componentTheme.popoverDividerColor,
       margin: `${componentTheme.smallSpacing} 0 ${componentTheme.smallSpacing} 0`
     },
-    popoverContrastBlock: {
-      label: 'colorPreset__popoverContrastBlock',
+    popoverContentBlock: {
       borderTop: 'solid',
       borderWidth: componentTheme.smallBorder,
       borderColor: componentTheme.popoverDividerColor,
       margin: `${componentTheme.smallSpacing} 0 ${componentTheme.smallSpacing} 0`
     },
     popoverFooter: {
-      label: 'colorPreset__popoverFooter',
       backgroundColor: componentTheme.popoverFooterColor,
       display: 'flex',
       flexDirection: 'row-reverse',
       padding: componentTheme.smallSpacing
     },
-    label: {
-      label: 'colorPreset__label',
-      width: '100%',
-      margin: componentTheme.xxSmallSpacing
-    }
+    label: { width: '100%', margin: componentTheme.xxSmallSpacing }
   }
 }
 

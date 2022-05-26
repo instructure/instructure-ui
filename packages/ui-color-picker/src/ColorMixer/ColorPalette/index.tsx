@@ -26,11 +26,9 @@
 import React, { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
 import { View } from '@instructure/ui-view'
-import type { ViewOwnProps } from '@instructure/ui-view'
-import { addEventListener } from '@instructure/ui-dom-utils'
 import shallowCompare from '../utils/shallowCompare'
-import type { ColorPaletteProps, ColorPaletteState } from './props'
-import type { HSVType } from '../props'
+import { ColorPaletteProps, ColorPaletteState } from './props'
+import { HSVType } from '../props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -49,19 +47,6 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     }
   }
   paletteRef: HTMLDivElement | null = null
-  ref: Element | null = null
-  mouseMoveListener?: { remove(): void }
-  mouseUpListener?: { remove(): void }
-
-  handleRef = (el: Element | null) => {
-    const { elementRef } = this.props
-
-    this.ref = el
-
-    if (typeof elementRef === 'function') {
-      elementRef(el)
-    }
-  }
 
   componentDidMount() {
     this.props.makeStyles?.(this.state)
@@ -103,20 +88,12 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
       y: this.paletteHeight - v * this.paletteHeight
     }
   }
-
-  handlePaletteMouseDown(e: React.MouseEvent<ViewOwnProps, MouseEvent>) {
+  //TODO remove any
+  handlePaletteMouseDown(e: React.MouseEvent<any, MouseEvent>) {
     this.handleChange(e)
-
-    this.mouseMoveListener = addEventListener(
-      window,
-      'mousemove',
-      this.handleChange
-    )
-    this.mouseUpListener = addEventListener(
-      window,
-      'mouseup',
-      this.handleMouseUp
-    )
+    //TODO remove any
+    window.addEventListener('mousemove', this.handleChange as any)
+    window.addEventListener('mouseup', this.handleMouseUp)
   }
 
   handleMouseUp = () => {
@@ -124,8 +101,9 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   }
 
   removeEventListeners() {
-    this.mouseMoveListener?.remove()
-    this.mouseUpListener?.remove()
+    //TODO remove any
+    window.removeEventListener('mousemove', this.handleChange as any)
+    window.removeEventListener('mouseup', this.handleMouseUp)
   }
 
   calcColorPosition(clientX: number, clientY: number) {
@@ -152,8 +130,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     return { newXPosition, newYPosition }
   }
 
-  handleChange = (e: React.MouseEvent<ViewOwnProps, MouseEvent>) => {
-    if (this.props.disabled) return
+  handleChange = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { clientX, clientY } = e
     const { newXPosition, newYPosition } = this.calcColorPosition(
       clientX,
@@ -169,9 +146,8 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
       v: this.calcLuminance(newYPosition)
     })
   }
-
-  handleKeyDown(e: React.KeyboardEvent<ViewOwnProps>) {
-    if (this.props.disabled) return
+  //TODO remove any
+  handleKeyDown(e: React.KeyboardEvent<any>) {
     const { key } = e
     if (key === 'Tab') return
     e.preventDefault()
@@ -208,23 +184,19 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   render() {
     return (
       <View
-        elementRef={this.handleRef}
-        disabled={this.props.disabled}
         position="relative"
+        width={`${this.props.width / 16}rem`}
+        height={`${this.props.height / 16}rem`}
         background="transparent"
         display="inline-block"
         borderRadius="medium"
         borderWidth="0"
         padding="0"
-        as="div"
-        tabIndex={this.props.disabled ? undefined : 0}
+        as="button"
         onKeyDown={(e) => this.handleKeyDown(e)}
         onMouseDown={(e) => this.handlePaletteMouseDown(e)}
       >
         <div css={this.props.styles?.indicator} />
-        {this.props.disabled && (
-          <div css={this.props.styles?.disabledOverlay} />
-        )}
         <div
           css={this.props.styles?.palette}
           ref={(ref) => {

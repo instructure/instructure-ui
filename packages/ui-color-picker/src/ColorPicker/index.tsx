@@ -23,18 +23,14 @@
  */
 
 /** @jsx jsx */
-/** @jsxFrag React.Fragment */
 import React, { Component } from 'react'
 
-import { passthroughProps } from '@instructure/ui-react-utils'
 import { TextInput } from '@instructure/ui-text-input'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { Button, IconButton } from '@instructure/ui-buttons'
-import {
-  colorToHex8,
-  isValid,
-  contrast as getContrast
-} from '@instructure/ui-color-utils'
+import { colorTohex8 } from '@instructure/ui-color-utils/src/conversions'
+import { isValid } from '@instructure/ui-color-utils/src/isValid'
+import { contrast as getContrast } from '@instructure/ui-color-utils/src/contrast'
 import ColorIndicator from '../ColorIndicator'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -52,7 +48,7 @@ import {
   IconTroubleLine,
   IconInfoLine
 } from '@instructure/ui-icons'
-import type {
+import {
   ColorPickerProps,
   ColorPickerState,
   ContrastStrength,
@@ -138,10 +134,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   componentDidUpdate(prevProps: ColorPickerProps) {
     this.props.makeStyles?.({ ...this.state, isSimple: this.isSimple })
 
-    if (
-      prevProps.value !== this.props.value &&
-      this.props.value !== this.state.hexCode
-    ) {
+    if (prevProps.value !== this.props.value) {
       this.setState({
         showHelperErrorMessages: false,
         hexCode: this.props.value?.slice(1) || ''
@@ -179,8 +172,11 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   get isCustomPopover() {
     return this.renderMode === 'customPopover'
   }
+  renderCircle() {
+    return <div css={this.props.styles?.colorCircle} />
+  }
 
-  getMinContrast(strength: ContrastStrength) {
+  getminContrast(strength: ContrastStrength) {
     return { min: 3, mid: 4.5, max: 7 }[strength]
   }
 
@@ -195,18 +191,15 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       renderIsRequiredMessage,
       isRequired
     } = this.props
-    const contrast = isValidHex
-      ? getContrast(
-          this.props.checkContrast?.contrastAgainst || '#fff',
-          hexCode,
-          2
-        )
-      : undefined
+    const contrast =
+      this.props?.checkContrast?.contrastAgainst && isValidHex
+        ? getContrast(this.props.checkContrast.contrastAgainst, hexCode, 2)
+        : undefined
     const contrastStrength = checkContrast?.contrastStrength
       ? checkContrast.contrastStrength
       : 'mid'
 
-    const minContrast = this.getMinContrast(contrastStrength)
+    const minContrast = this.getminContrast(contrastStrength)
     let invalidColorMessages: MessageType = []
     let isRequiredMessages: MessageType = []
     let generalMessages: MessageType = []
@@ -250,7 +243,6 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         contrast
       )
     }
-
     return [
       ...invalidColorMessages,
       ...isRequiredMessages,
@@ -273,11 +265,11 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
 
     if (checkContrast && isValid(hexCode)) {
       const contrast = getContrast(
-        checkContrast.contrastAgainst || '#fff',
+        checkContrast.contrastAgainst || '',
         hexCode,
         2
       )
-      const minContrast = this.getMinContrast(
+      const minContrast = this.getminContrast(
         checkContrast.contrastStrength ? checkContrast.contrastStrength : 'mid'
       )
 
@@ -301,20 +293,14 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     const { onChange } = this.props
     if (
       value.length > (this.props.withAlpha ? 8 : 6) ||
-      value
-        .split('')
-        .find((char) => !acceptedCharactersForHEX.includes(char)) !== undefined
+      //TODO remove any
+      !acceptedCharactersForHEX.includes((event.nativeEvent as any).data)
     ) {
       return
     }
     if (typeof onChange === 'function') {
       onChange(`#${value}`)
     }
-    this.setState({
-      showHelperErrorMessages: false,
-      hexCode: value,
-      mixedColor: `${value}`
-    })
   }
 
   //TODO remove any
@@ -338,8 +324,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         this.props.onChange(`#${newHex}`)
       }
       this.setState({
-        hexCode: newHex,
-        mixedColor: `${newHex}`
+        hexCode: newHex
       })
       return event.preventDefault()
     }
@@ -359,7 +344,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         <span css={styles?.label}>{label}</span>
         <span>
           <Tooltip renderTip={tooltip}>
-            <IconInfoLine tabIndex={0} />
+            <IconInfoLine />
           </Tooltip>
         </span>
       </div>
@@ -369,14 +354,14 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   }
 
   stripAlphaIfNeeded = (hex: string) =>
-    hex.length === 8 && hex.slice(-2) === 'FF' ? hex.slice(0, -2) : hex
+    hex.slice(-2) === 'FF' ? hex.slice(0, -2) : hex
 
   renderPopover = () => (
     <Popover
       renderTrigger={
         <IconButton
           disabled={this.props.disabled}
-          screenReaderLabel={this.props.popoverButtonScreenReaderLabel || ''}
+          screenReaderLabel={this.props.popverButtonScreenReaderLabel}
         >
           <ColorIndicator color={`#${this.state.hexCode}`} />
         </IconButton>
@@ -389,17 +374,16 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         this.setState({ openColorPicker: false })
       }}
       on="click"
-      screenReaderLabel={this.props.popoverScreenReaderLabel || ''}
+      screenReaderLabel="Popover Dialog Example"
       shouldContainFocus
       shouldReturnFocus
       shouldCloseOnDocumentClick
-      offsetY="10rem"
+      offsetY="16px"
+      mountNode={() => document.getElementById('main')}
     >
-      <div css={this.props.styles?.popoverContentContainer}>
-        {this.isDefaultPopover
-          ? this.renderDefaultPopoverContent()
-          : this.renderCustomPopoverContent()}
-      </div>
+      {this.isDefaultPopover
+        ? this.renderDefaultPopoverContent()
+        : this.renderCustomPopoverContent()}
     </Popover>
   )
 
@@ -429,31 +413,15 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     </div>
   )
   renderDefaultPopoverContent = () => (
-    <>
+    <React.Fragment>
       <div css={this.props.styles?.popoverContent}>
         {this.props?.colorMixerSettings?.colorMixer && (
           <ColorMixer
             value={`#${this.state.mixedColor}`}
             onChange={(newColor: string) =>
-              this.setState({ mixedColor: colorToHex8(newColor).slice(1) })
+              this.setState({ mixedColor: colorTohex8(newColor).slice(1) })
             }
             withAlpha={this.props.colorMixerSettings.colorMixer.withAlpha}
-            rgbRedInputScreenReaderLabel={
-              this.props.colorMixerSettings.colorMixer
-                .rgbRedInputScreenReaderLabel
-            }
-            rgbGreenInputScreenReaderLabel={
-              this.props.colorMixerSettings.colorMixer
-                .rgbGreenInputScreenReaderLabel
-            }
-            rgbBlueInputScreenReaderLabel={
-              this.props.colorMixerSettings.colorMixer
-                .rgbBlueInputScreenReaderLabel
-            }
-            rgbAlphaInputScreenReaderLabel={
-              this.props.colorMixerSettings.colorMixer
-                .rgbAlphaInputScreenReaderLabel
-            }
           />
         )}
         {this.props?.colorMixerSettings?.colorPreset && (
@@ -462,10 +430,6 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
               label={this.props.colorMixerSettings.colorPreset.label}
               colors={this.props.colorMixerSettings.colorPreset.colors}
               selected={this.state.mixedColor}
-              addNewPresetButtonScreenReaderLabel={
-                this.props.colorMixerSettings.colorPreset
-                  .addNewPresetButtonScreenReaderLabel
-              }
               onSelect={(color: string) =>
                 this.setState({ mixedColor: color.slice(1) })
               }
@@ -507,6 +471,18 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       </div>
       <div css={this.props.styles?.popoverFooter}>
         <Button
+          onClick={() => {
+            this.setState({
+              openColorPicker: false,
+              hexCode: `${this.stripAlphaIfNeeded(this.state.mixedColor)}`
+            })
+          }}
+          color="primary"
+          margin="xx-small"
+        >
+          Add
+        </Button>
+        <Button
           onClick={() =>
             this.setState({
               openColorPicker: false,
@@ -536,34 +512,12 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           {this.props.colorMixerSettings?.popoverAddButtonLabel}
         </Button>
       </div>
-    </>
+    </React.Fragment>
   )
   render() {
-    const {
-      checkContrast,
-      colorMixerSettings,
-      disabled,
-      elementRef,
-      isRequired,
-      label,
-      onChange,
-      placeholderText,
-      popoverButtonScreenReaderLabel,
-      renderInvalidColorMessage,
-      renderIsRequiredMessage,
-      renderMessages,
-      tooltip,
-      value,
-      width,
-      withAlpha,
-      ...props
-    } = this.props
+    const { isRequired, disabled, width, placeholderText } = this.props
     return (
-      <div
-        {...passthroughProps(props)}
-        css={this.props.styles?.colorPicker}
-        ref={this.handleRef}
-      >
+      <div css={this.props.styles?.colorPicker} ref={this.handleRef}>
         <TextInput
           isRequired={isRequired}
           disabled={disabled}
@@ -571,7 +525,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           display="inline-block"
           width={width}
           placeholder={placeholderText}
-          themeOverride={{ padding: '' }}
+          themeOverride={{ padding: '0 0.75rem 0 0' }}
           renderAfterInput={this.renderAfterInput()}
           renderBeforeInput={this.renderBeforeInput()}
           value={this.props.value?.slice(1)}

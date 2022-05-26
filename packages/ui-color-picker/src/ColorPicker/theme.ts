@@ -23,8 +23,7 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import type { ColorPickerTheme } from '@instructure/shared-types'
-import { colorIndicatorBorderColor } from '../ColorIndicator/theme'
+import { ColorPickerTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
@@ -36,9 +35,9 @@ const generateComponentTheme = (theme: Theme): ColorPickerTheme => {
 
   const componentVariables = {
     hashMarkColor: colors?.ash,
-    warningIconColor: colors?.textWarning,
-    errorIconColor: colors?.textDanger,
-    successIconColor: colors?.textSuccess,
+    warningIconColor: colors?.fire,
+    errorIconColor: colors?.crimson,
+    successIconColor: colors?.shamrock,
     popoverSeparatorColor: colors?.tiara,
     popoverFooterColor: colors?.porcelain,
     smallBorder: borders?.widthSmall,
@@ -54,22 +53,7 @@ const generateComponentTheme = (theme: Theme): ColorPickerTheme => {
     linear-gradient(-45deg, transparent 75%, ${colors.tiara} 75%)`,
     checkerboardBackgroundSize: '.5rem .5rem',
     checkerboardBackgroundPosition:
-      '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px',
-    colorIndicatorBorderColor,
-    simpleColorContainerLeftPadding: spacing?.xSmall,
-    hashMarkContainerLineHeight: typography?.fontSizeXLarge,
-    hashMarkContainerLeftPadding: spacing?.xSmall,
-    hashMarkContainerRightPadding: spacing?.xxxSmall,
-    errorIconsRightPadding: spacing?.small,
-    successIconRightPadding: spacing?.small,
-    labelRightMargin: spacing?.xxSmall,
-    popoverContentPadding: spacing?.small,
-    popoverContentBlockBorderWidth: borders?.widthSmall,
-    popoverContentBlockTopMargin: spacing?.small,
-    popoverContentBlockBottomMargin: spacing?.small,
-    popoverFooterPadding: spacing?.xSmall,
-    popoverFooterTopBorderWidth: borders?.widthSmall,
-    colorMixerButtonContainerLeftMargin: spacing?.xSmall
+      '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px'
   }
 
   return {

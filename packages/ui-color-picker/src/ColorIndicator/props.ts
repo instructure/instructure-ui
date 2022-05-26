@@ -26,24 +26,20 @@ import PropTypes from 'prop-types'
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
+  ToProp,
   OtherHTMLAttributes,
-  PropValidators,
-  ColorIndicatorTheme
+  PropValidators
 } from '@instructure/shared-types'
 
 type ColorIndicatorOwnProps = {
   /**
-   * Valid CSS color string. E.g.: #555, rgba(55,55,55,1). It can accept empty strings
+   * Valid CSS color string. E.g.: #555, rgba(55,55,55,1)
    */
-  color?: string
+  color: string
   /**
    * Provides a reference to the `ColorIndicator`'s underlying html element.
    */
   elementRef?: (element: Element | null) => void
-  /**
-   * Sets the shape of the indicator. Either a circle or a rectangle
-   */
-  shape?: 'circle' | 'rectangle'
 }
 
 type PropKeys = keyof ColorIndicatorOwnProps
@@ -51,18 +47,20 @@ type PropKeys = keyof ColorIndicatorOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorIndicatorProps = ColorIndicatorOwnProps &
-  WithStyleProps<ColorIndicatorTheme, ColorIndicatorStyle> &
-  OtherHTMLAttributes<ColorIndicatorOwnProps>
+  WithStyleProps<null, ColorIndicatorStyle> &
+  OtherHTMLAttributes<ColorIndicatorOwnProps> &
+  ToProp
 
-type ColorIndicatorStyle = ComponentStyle<'colorIndicator'>
+type ColorIndicatorStyle = ComponentStyle<
+  'colorIndicator' | 'checkerBoardWithColor'
+>
 
 const propTypes: PropValidators<PropKeys> = {
-  color: PropTypes.string,
-  elementRef: PropTypes.func,
-  shape: PropTypes.oneOf(['circle', 'rectangle'])
+  color: PropTypes.string.isRequired,
+  elementRef: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = ['color', 'elementRef', 'shape']
+const allowedProps: AllowedPropKeys = ['color']
 
 export type { ColorIndicatorProps, ColorIndicatorStyle }
 export { propTypes, allowedProps }

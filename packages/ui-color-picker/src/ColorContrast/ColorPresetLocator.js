@@ -21,29 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-import type { Theme } from '@instructure/ui-themes'
-import { PaletteTheme } from '@instructure/shared-types'
+import { ColorPreset } from './index'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): PaletteTheme => {
-  const { colors, borders } = theme
-
-  const componentVariables = {
-    indicatorBorderColor: colors.licorice,
-    whiteColor: colors.white,
-
-    smallBorder: borders.widthSmall,
-    mediumBorderRadius: borders.radiusMedium
-  }
-
-  return {
-    ...componentVariables
-  }
-}
-
-export default generateComponentTheme
+export const ColorPresetLocator = locator(ColorPreset.selector, {
+  /* custom component query methods go here */
+})

@@ -23,21 +23,20 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import { ColorMixerRGBAInputTheme } from '@instructure/shared-types'
+import { RGBAInputTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: Theme): ColorMixerRGBAInputTheme => {
+const generateComponentTheme = (theme: Theme): RGBAInputTheme => {
   const { spacing, typography } = theme
 
   const componentVariables = {
-    labelFontWeight: typography.fontWeightBold,
-    inputContainerTopMargin: spacing.xSmall,
-    tgbInputTopMargin: spacing.xSmall,
-    rgbaInputTopMargin: spacing.medium
+    mediumMargin: spacing.medium,
+    xSmallMargin: spacing.xSmall,
+    boldFontWeight: typography.fontWeightBold
   }
 
   return {

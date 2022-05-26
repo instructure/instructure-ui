@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import { withStyle, jsx } from '@instructure/emotion'
-import { passthroughProps } from '@instructure/ui-react-utils'
 import { Component } from 'react'
 import ColorPalette from './ColorPalette'
 import Slider from './Slider'
@@ -33,10 +32,10 @@ import type { ColorMixerProps, ColorMixerState, HSVType } from './props'
 import { propTypes, allowedProps } from './props'
 import generateStyle from './styles'
 import {
-  colorToHex8,
+  colorTohex8,
   colorToHsva,
   colorToRGB
-} from '@instructure/ui-color-utils'
+} from '@instructure/ui-color-utils/src/conversions'
 
 /**
 ---
@@ -61,13 +60,12 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   static readonly componentId = 'ColorMixer'
 
   static defaultProps = {
-    withAlpha: false,
-    disabled: false
+    withAlpha: false
   }
 
-  ref: HTMLDivElement | null = null
+  ref: Element | null = null
 
-  handleRef = (el: HTMLDivElement | null) => {
+  handleRef = (el: Element | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -80,8 +78,8 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   private width = 272
   private paletteHeight = 160
   private sliderHeight = 8
-  private sliderIndicatorRadius = 6
-  private paletteIndicatorRadius = 6
+  private sliderIndicatiorRadius = 6
+  private paletteIndicatiorRadius = 6
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -101,11 +99,11 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       prevState.v !== v ||
       prevState.a !== a
     ) {
-      this.props.onChange(colorToHex8({ h, s, v, a }))
+      this.props.onChange(colorTohex8({ h, s, v, a }))
     }
     if (
       prevProps.value !== this.props.value &&
-      colorToHex8({ h, s, v, a }) !== this.props.value
+      colorTohex8({ h, s, v, a }) !== this.props.value
     ) {
       this.setState({
         ...colorToHsva(this.props.value)
@@ -114,37 +112,15 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   }
 
   render() {
-    const {
-      disabled,
-      onChange,
-      value,
-      elementRef,
-      styles,
-      withAlpha,
-      rgbRedInputScreenReaderLabel,
-      rgbGreenInputScreenReaderLabel,
-      rgbBlueInputScreenReaderLabel,
-      rgbAlphaInputScreenReaderLabel,
-      ...props
-    } = this.props
+    const { elementRef, styles, withAlpha } = this.props
     const { h, s, v, a } = this.state
     return (
-      <div
-        {...passthroughProps(props)}
-        aria-disabled={disabled}
-        ref={this.handleRef}
-        css={styles?.colorMixer}
-      >
-        <span
-          css={styles?.sliderAndPaletteContainer}
-          aria-label={`${colorToHex8({ h, s, v, a })}`}
-          aria-live="polite"
-        >
+      <div ref={elementRef} css={styles?.colorMixer}>
+        <span aria-label={`${colorTohex8({ h, s, v, a })}`} aria-live="polite">
           <ColorPalette
-            disabled={disabled}
             width={this.width}
             height={this.paletteHeight}
-            indicatorRadius={this.paletteIndicatorRadius}
+            indicatorRadius={this.paletteIndicatiorRadius}
             hue={h}
             color={{
               h,
@@ -156,40 +132,33 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
             }}
           />
           <Slider
-            disabled={disabled}
             isColorSlider
             width={this.width}
             height={this.sliderHeight}
-            indicatorRadius={this.sliderIndicatorRadius}
+            indicatorRadius={this.sliderIndicatiorRadius}
             value={h}
-            color={colorToHex8({ h, s, v, a })}
+            color={colorTohex8({ h, s, v, a })}
             onChange={(hue: number) => {
               this.setState({ h: hue })
             }}
           />
           {withAlpha && (
             <Slider
-              disabled={disabled}
               width={this.width}
               height={this.sliderHeight}
-              indicatorRadius={this.sliderIndicatorRadius}
-              color={colorToHex8({ h, s, v })}
+              indicatorRadius={this.sliderIndicatiorRadius}
+              color={colorTohex8({ h, s, v })}
               value={a}
               onChange={(opacity) => this.setState({ a: opacity / 100 })}
             ></Slider>
           )}
         </span>
         <RGBAInput
-          disabled={disabled}
-          label={withAlpha ? 'RGBA' : 'RGB'}
+          label="RGBA"
           width={this.width}
           value={colorToRGB({ h, s, v, a })}
           onChange={(color) => this.setState({ ...colorToHsva(color) })}
           withAlpha={withAlpha}
-          rgbRedInputScreenReaderLabel={rgbRedInputScreenReaderLabel}
-          rgbGreenInputScreenReaderLabel={rgbGreenInputScreenReaderLabel}
-          rgbBlueInputScreenReaderLabel={rgbBlueInputScreenReaderLabel}
-          rgbAlphaInputScreenReaderLabel={rgbAlphaInputScreenReaderLabel}
         />
       </div>
     )
