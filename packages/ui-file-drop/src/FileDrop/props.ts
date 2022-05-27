@@ -41,28 +41,114 @@ import type {
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type FileDropOwnProps = {
+  /**
+   * The id of the input (to link it to its label for a11y)
+   */
   id?: string
+  /**
+   * The content of FileDrop; can be a component or React node.
+   * Components receive `isDragAccepted` and `isDragRejected` as props.
+   */
   renderLabel: ((...args: any[]) => any) | React.ReactNode
+  /**
+   * The mime media type/s or file extension/s allowed to be dropped inside
+   */
   accept?: string | string[]
+  /**
+   * object with shape: `{
+   * text: PropTypes.node,
+   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+   *   }`
+   */
   messages?: FormMessage[]
-  onClick?: (...args: any[]) => any
-  onDrop?: (...args: any[]) => any
-  onDropAccepted?: (...args: any[]) => any
-  onDropRejected?: (...args: any[]) => any
-  onDragEnter?: (...args: any[]) => any
-  onDragOver?: (...args: any[]) => any
-  onDragLeave?: (...args: any[]) => any
+  /**
+   * Called when clicking on drop area to select files to upload
+   */
+  onClick?: (e: React.MouseEvent) => void
+  /**
+   * Called when dropping files or when file dialog window exits successfully
+   */
+  onDrop?: (
+    accepted: ArrayLike<DataTransferItem | File>,
+    rejected: ArrayLike<DataTransferItem | File>,
+    e: React.DragEvent
+  ) => void
+  /**
+   * Called when dropping allowed files
+   */
+  onDropAccepted?: (
+    accepted: ArrayLike<DataTransferItem | File>,
+    e: React.DragEvent | React.ChangeEvent
+  ) => void
+  /**
+   * Called when dropping rejected files
+   */
+  onDropRejected?: (
+    rejected: ArrayLike<DataTransferItem | File>,
+    e: React.DragEvent | React.ChangeEvent
+  ) => void
+  /**
+   * Called when dragging files
+   * and passing through FileDrop's content for the first time
+   */
+  onDragEnter?: (e: React.DragEvent) => void
+  /**
+   * Called when dragging files and passing through FileDrop's content
+   */
+  onDragOver?: (e: React.DragEvent) => void
+  /**
+   * Called when dragging files and leaving FileDrop's content
+   */
+  onDragLeave?: (e: React.DragEvent) => void
+  /**
+   * Flag to use window.URL.createObjectURL for each dropped file and pass it through file.preview
+   */
   shouldEnablePreview?: boolean
+  /**
+   * Flag to allow multiple files to drop at once
+   */
   shouldAllowMultiple?: boolean
+  /**
+   * Flag to allow upload of the same file more than once
+   */
   shouldAllowRepeats?: boolean
+  /**
+   * the maximum file size allowed
+   */
   maxSize?: number
+  /**
+   * the minimum file size allowed
+   */
   minSize?: number
+  /**
+   * Specifies if interaction with the input is enabled, disabled, or readonly.
+   */
   interaction?: 'enabled' | 'disabled' | 'readonly'
+  /**
+   * Set the CSS `display` property on FileInput's outermost element
+   */
   display?: 'block' | 'inline-block'
+  /**
+   * Set the CSS `height` property on FileInput's outermost element
+   */
   height?: string | number
+  /**
+   * Set the CSS `width` property on FileInput's outermost element
+   */
   width?: string | number
+  /**
+   * Set the CSS `maxWidth` property on FileInput's outermost element
+   */
   maxWidth?: string | number
+  /**
+   * Set the CSS `minWidth` property on FileInput's outermost element
+   */
   minWidth?: string | number
+  /**
+   * Valid values are 0, none, auto, xxx-small, xx-small, x-small, small,
+   * medium, large, x-large, xx-large. Apply these values via familiar
+   * CSS-like shorthand. For example: margin="small auto large".
+   */
   margin?: Spacing
 }
 
@@ -86,114 +172,39 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type FileDropProps = FileDropOwnProps &
   WithStyleProps<FileDropTheme, FileDropStyle> &
-  OtherHTMLAttributes<FileDropOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<FileDropOwnProps> &
+  WithDeterministicIdProps
 
 type FileDropStyle = ComponentStyle<
   'fileDropLabel' | 'fileDropInput' | 'fileDropLabelContent' | 'fileDropLayout'
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  /**
-   * The id of the input (to link it to its label for a11y)
-   */
   id: PropTypes.string,
-  /**
-   * The content of FileDrop; can be a component or React node.
-   * Components receive `isDragAccepted` and `isDragRejected` as props.
-   */
   renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
-  /**
-   * The mime media type/s or file extension/s allowed to be dropped inside
-   */
   accept: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string)
   ]),
-  /**
-   * object with shape: `{
-   * text: PropTypes.node,
-   * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-   *   }`
-   */
   messages: PropTypes.arrayOf(FormPropTypes.message),
-  /**
-   * Called when clicking on drop area to select files to upload
-   */
   onClick: PropTypes.func,
-  /**
-   * Called when dropping files or when file dialog window exits successfully
-   */
   onDrop: PropTypes.func,
-  /**
-   * Called when dropping allowed files
-   */
   onDropAccepted: PropTypes.func,
-  /**
-   * Called when dropping rejected files
-   */
   onDropRejected: PropTypes.func,
-  /**
-   * Called when dragging files
-   * and passing through FileDrop's content for the first time
-   */
   onDragEnter: PropTypes.func,
-  /**
-   * Called when dragging files and passing through FileDrop's content
-   */
   onDragOver: PropTypes.func,
-  /**
-   * Called when dragging files and leaving FileDrop's content
-   */
   onDragLeave: PropTypes.func,
-  /**
-   * Flag to use window.URL.createObjectURL for each dropped file and pass it through file.preview
-   */
   shouldEnablePreview: PropTypes.bool,
-  /**
-   * Flag to allow multiple files to drop at once
-   */
   shouldAllowMultiple: PropTypes.bool,
-  /**
-   * Flag to allow upload of the same file more than once
-   */
   shouldAllowRepeats: PropTypes.bool,
-  /**
-   * the maximum file size allowed
-   */
   maxSize: PropTypes.number,
-  /**
-   * the minimum file size allowed
-   */
   minSize: PropTypes.number,
-  /**
-   * Specifies if interaction with the input is enabled, disabled, or readonly.
-   */
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
-  /**
-   * Set the CSS `display` property on FileInput's outermost element
-   */
   display: PropTypes.oneOf(['block', 'inline-block']),
-  /**
-   * Set the CSS `height` property on FileInput's outermost element
-   */
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Set the CSS `width` property on FileInput's outermost element
-   */
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Set the CSS `maxWidth` property on FileInput's outermost element
-   */
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Set the CSS `minWidth` property on FileInput's outermost element
-   */
   minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * Valid values are 0, none, auto, xxx-small, xx-small, x-small, small,
-   * medium, large, x-large, xx-large. Apply these values via familiar
-   * CSS-like shorthand. For example: margin="small auto large".
-   */
   margin: ThemeablePropTypes.spacing
 }
 
