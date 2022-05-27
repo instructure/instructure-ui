@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.24.4](https://github.com/instructure/instructure-ui/compare/v8.24.3...v8.24.4) (2022-05-27)
+
+
+### Bug Fixes
+
+* **ui-grid:** modify Ts types for GridCol to accept prositive fractions as well ([0f44843](https://github.com/instructure/instructure-ui/commit/0f44843420c27b918ea284ab9066f83fc3c929d7))
+
+
+
+
+
 ## [8.24.3](https://github.com/instructure/instructure-ui/compare/v8.24.2...v8.24.3) (2022-05-25)
 
 **Note:** Version bump only for package @instructure/ui-grid

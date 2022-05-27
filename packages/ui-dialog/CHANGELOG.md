@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.24.4](https://github.com/instructure/instructure-ui/compare/v8.24.3...v8.24.4) (2022-05-27)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils,ui-dialog,ui-modal:** calling stale callbacks ([c24cb92](https://github.com/instructure/instructure-ui/commit/c24cb92f62c9a8df7602501c73c69f6b61151812))
+
+
+
+
+
 ## [8.24.3](https://github.com/instructure/instructure-ui/compare/v8.24.2...v8.24.3) (2022-05-25)
 
 **Note:** Version bump only for package @instructure/ui-dialog
