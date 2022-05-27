@@ -1,6 +1,6 @@
 {
   "name": "@instructure/instructure-theme",
-  "version": "8.24.3",
+  "version": "8.24.4",
   "description": "A theme for Instructure made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,13 +22,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.24.3"
+    "@instructure/ui-babel-preset": "8.24.4"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/shared-types": "8.24.3",
-    "@instructure/theme-registry": "8.24.3",
-    "@instructure/ui-theme-tokens": "8.24.3"
+    "@instructure/shared-types": "8.24.4",
+    "@instructure/theme-registry": "8.24.4",
+    "@instructure/ui-theme-tokens": "8.24.4"
   },
   "publishConfig": {
     "access": "public"
