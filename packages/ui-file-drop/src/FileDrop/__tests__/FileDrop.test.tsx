@@ -82,8 +82,7 @@ describe('<FileDrop />', async () => {
       expect(onDrop).to.have.been.called()
     })
     it('accepts correct files using mymetypes', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-      const onDrop = spy((accepted: any, rejected: any, e: any) => {
+      const onDrop = spy((_accepted: any, _rejected: any, e: any) => {
         e.persist()
       })
       const onDropAccepted = spy()
@@ -111,8 +110,7 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.not.have.been.called()
     })
     it('rejects incorrect files using mymetypes and shouldEnablePreview', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-      const onDrop = spy((accepted: any, rejected: any, e: any) => {
+      const onDrop = spy((_accepted: any, _rejected: any, e: any) => {
         e.persist()
       })
       const onDropAccepted = spy()
@@ -141,8 +139,7 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.have.been.called()
     })
     it('accepts correct files using mymetypes and enablePreview', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-      const onDrop = spy((accepted: any, rejected: any, e: any) => {
+      const onDrop = spy((_accepted: any, _rejected: any, e: any) => {
         e.persist()
       })
       const onDropAccepted = spy()
@@ -200,8 +197,7 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.not.have.been.called()
     })
     it('rejects incorrect files using mymetypes', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-      const onDrop = spy((accepted: any, rejected: any, e: any) => {
+      const onDrop = spy((_accepted: any, _rejected: any, e: any) => {
         e.persist()
       })
       const onDropAccepted = spy()
@@ -229,8 +225,7 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.have.been.called()
     })
     it('rejects incorrect files using extensions', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-      const onDrop = spy((accepted: any, rejected: any, e: any) => {
+      const onDrop = spy((_accepted: any, _rejected: any, e: any) => {
         e.persist()
       })
       const onDropAccepted = spy()

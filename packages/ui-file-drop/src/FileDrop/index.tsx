@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import keycode from 'keycode'
-
 import { FormFieldMessages } from '@instructure/ui-form-field'
+import type { FormMessage } from '@instructure/ui-form-field'
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import {
@@ -46,15 +46,19 @@ import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
 import type { FileDropProps, FileDropState, FileDropStyleProps } from './props'
 
-function keyEventIsClickButton(e: any) {
+function keyEventIsClickButton(e: React.KeyboardEvent) {
   return e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter
 }
 
+declare global {
+  interface Document {
+    documentMode?: any
+  }
+}
 // Used try-catch due to missing document/navigator references in Jenkins
 function isBrowserMS() {
   let result = false
   try {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property 'documentMode' does not exist on type 'Do... Remove this comment to see the full error message
     result = document.documentMode || isEdge
   } catch (e) {} // eslint-disable-line no-empty
   return result
@@ -66,6 +70,7 @@ const IS_MS = isBrowserMS()
 ---
 category: components
 ---
+@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
@@ -76,20 +81,23 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onClick: function (e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'accepted' is declared but its value is never read... Remove this comment to see the full error message
-    onDrop: function (accepted: any, rejected: any, e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'accepted' is declared but its value is never read... Remove this comment to see the full error message
-    onDropAccepted: function (accepted: any, e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'rejected' is declared but its value is never read... Remove this comment to see the full error message
-    onDropRejected: function (rejected: any, e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onDragEnter: function (e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onDragOver: function (e: any) {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
-    onDragLeave: function (e: any) {},
+    onClick: function (_e: React.MouseEvent) {},
+    onDrop: function (
+      _accepted: ArrayLike<DataTransferItem | File>,
+      _rejected: ArrayLike<DataTransferItem | File>,
+      _e: React.DragEvent
+    ) {},
+    onDropAccepted: function (
+      _accepted: ArrayLike<DataTransferItem | File>,
+      _e: React.DragEvent
+    ) {},
+    onDropRejected: function (
+      _rejected: ArrayLike<DataTransferItem | File>,
+      _e: React.DragEvent
+    ) {},
+    onDragEnter: function (_e: React.DragEvent) {},
+    onDragOver: function (_e: React.DragEvent) {},
+    onDragLeave: function (_e: React.DragEvent) {},
     shouldEnablePreview: false,
     shouldAllowMultiple: false,
     shouldAllowRepeats: true,
@@ -113,6 +121,12 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     ;(this.props as any).makeStyles(this.makeStyleProps())
   }
 
+  convertToFile(fileLikeItem: DataTransferItem | File) {
+    if (fileLikeItem instanceof DataTransferItem)
+      return fileLikeItem.getAsFile()
+    else return fileLikeItem
+  }
+
   makeStyleProps = (): FileDropStyleProps => {
     return {
       functionallyDisabled: this.functionallyDisabled,
@@ -130,7 +144,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   }
 
   enterCounter = 0
-  fileInputEl = null
+  fileInputEl: HTMLInputElement | null = null
   defaultId: string | null = null
   messagesId = ''
 
@@ -157,26 +171,32 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   get invalid() {
     return (
       this.hasMessages &&
-      (this.props as any).messages.findIndex((message: any) => {
+      (this.props as any).messages.findIndex((message: FormMessage) => {
         return message.type === 'error'
       }) >= 0
     )
   }
-
-  getDataTransferItems(e: any, shouldEnablePreview: any) {
-    let list = Array.from(getEventFiles(e, this.fileInputEl))
+  getDataTransferItems(
+    e: React.ChangeEvent | React.DragEvent,
+    shouldEnablePreview?: boolean
+  ): Array<File> {
+    let list: Array<File> = []
+    Array.from(getEventFiles(e, this.fileInputEl)).forEach((file) => {
+      const fileObj = this.convertToFile(file)
+      if (fileObj) list.push(fileObj)
+    })
     if (list.length > 1) {
       list = (this.props as any).shouldAllowMultiple ? list : [list[0]]
     }
     if (shouldEnablePreview) {
-      return list.map((file: any) =>
+      return list.map((file: File) =>
         Object.assign(file, { preview: window.URL.createObjectURL(file) })
       )
     }
     return list
   }
 
-  handleDragEnter = (e: any) => {
+  handleDragEnter = (e: React.DragEvent) => {
     e.preventDefault()
     // Count the dropzone and any children that are entered.
     this.enterCounter += 1
@@ -184,7 +204,6 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     if (this.enterCounter > 1) {
       return
     }
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const allFilesAccepted = this.allFilesAccepted(this.getDataTransferItems(e))
     this.setState({
       isDragAccepted: allFilesAccepted,
@@ -193,7 +212,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     ;(this.props as any).onDragEnter(e)
   }
 
-  handleDragOver = (e: any) => {
+  handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
     try {
@@ -206,7 +225,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     return false
   }
 
-  handleDragLeave = (e: any) => {
+  handleDragLeave = (e: React.DragEvent) => {
     e.preventDefault()
     this.enterCounter -= 1
     // Only deactivate once the dropzone and all children was left
@@ -220,11 +239,16 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     ;(this.props as any).onDragLeave(e)
   }
 
-  parseFiles(fileList: any) {
-    const accepted: any = []
-    const rejected: any = []
-    fileList.forEach((file: any) => {
-      if (this.fileAccepted(file) && this.fileMatchSize(file)) {
+  parseFiles(fileList: Array<DataTransferItem | File>) {
+    const accepted: typeof fileList = []
+    const rejected: typeof fileList = []
+    fileList.forEach((file: DataTransferItem | File) => {
+      const fileObj = this.convertToFile(file)
+      if (
+        fileObj &&
+        this.fileAccepted(fileObj) &&
+        this.fileMatchSize(fileObj)
+      ) {
         accepted.push(file)
       } else {
         rejected.push(file)
@@ -233,21 +257,18 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     return [accepted, rejected]
   }
 
-  handleChange = (e: any) => {
+  handleChange = (e: React.ChangeEvent | React.DragEvent) => {
     const { onDrop, onDropAccepted, onDropRejected, shouldEnablePreview } =
       this.props
     const fileList = this.getDataTransferItems(e, shouldEnablePreview)
     const [accepted, rejected] = this.parseFiles(fileList)
     e.preventDefault()
     this.enterCounter = 0
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
-    onDrop(accepted, rejected, e)
-    if (rejected.length > 0) {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
+    onDrop && onDrop(accepted, rejected, e as React.DragEvent)
+    if (rejected.length > 0 && onDropRejected) {
       onDropRejected(rejected, e)
     }
-    if (accepted.length > 0) {
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
+    if (accepted.length > 0 && onDropAccepted) {
       onDropAccepted(accepted, e)
     }
     this.setState({
@@ -257,24 +278,24 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     })
   }
 
-  fileAccepted = (file: any) => {
+  fileAccepted = (file: File) => {
     return accepts(file, (this.props as any).accept)
   }
 
-  fileMatchSize(file: any) {
+  fileMatchSize(file: File) {
     return (
       file.size <= (this.props as any).maxSize &&
       file.size >= (this.props as any).minSize
     )
   }
 
-  allFilesAccepted(files: any) {
+  allFilesAccepted(files: Array<File>) {
     return files.every(this.fileAccepted)
   }
 
   acceptStr() {
     const { accept } = this.props
-    return accept ? getAcceptList(accept).join(',') : null
+    return accept ? getAcceptList(accept).join(',') : undefined
   }
 
   renderLabel() {
@@ -286,7 +307,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     })
   }
 
-  handleRef = (el: any) => {
+  handleRef = (el: HTMLInputElement) => {
     this.fileInputEl = el
   }
 
@@ -304,26 +325,22 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     })
   }
 
-  handleClick = (e: any) => {
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    if (this.fileInputEl.value && (this.props as any).shouldAllowRepeats) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-      this.fileInputEl.value = null
+  handleClick = (e: React.MouseEvent) => {
+    if (this.fileInputEl!.value && (this.props as any).shouldAllowRepeats) {
+      this.fileInputEl!.value = null as unknown as string
     }
     // focus the input (because FF won't)
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    this.fileInputEl.focus()
+    this.fileInputEl?.focus()
     ;(this.props as any).onClick(e)
     this.setState({
       isFileBrowserDisplayed: true
     })
   }
 
-  handleKeyDown = (e: any) => {
+  handleKeyDown = (e: React.KeyboardEvent) => {
     if (this.state.isFocused && keyEventIsClickButton(e)) {
       if ((this.props as any).shouldAllowRepeats) {
-        // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-        this.fileInputEl.value = null
+        this.fileInputEl!.value = null as unknown as string
       }
       // This bit of logic is necessary for MS browsers but causes unwanted warnings in Firefox
       // So we need to apply this logic only on MS browsers
@@ -331,13 +348,12 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
       if (IS_MS) {
         e.stopPropagation()
         e.preventDefault()
-        // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-        this.fileInputEl.click()
+        this.fileInputEl?.click()
       }
     }
   }
 
-  handleKeyUp = (e: any) => {
+  handleKeyUp = (e: React.KeyboardEvent) => {
     // This is to handle the case where ESC is pressed inside a Dialog so that
     // closing the file browser dialog doesn't also close the Dialog.
     if (e.keyCode === keycode.codes.esc && this.state.isFileBrowserDisplayed) {

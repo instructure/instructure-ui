@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-function accepts(file: any, acceptProp: any) {
+function accepts(file: any, acceptProp: string | string[]) {
   if (file && acceptProp && file.type !== 'application/x-moz-file') {
     const acceptList = getAcceptList(acceptProp)
     const mimeType = file.type || ''
@@ -45,7 +45,7 @@ function accepts(file: any, acceptProp: any) {
   return true
 }
 
-function getAcceptList(accept: any) {
+function getAcceptList(accept: string | string[]) {
   const list = Array.isArray(accept) ? accept : accept.split(',')
   return list.map((a: any) => a.trim().replace(/^\w+$/, '.$&'))
 }

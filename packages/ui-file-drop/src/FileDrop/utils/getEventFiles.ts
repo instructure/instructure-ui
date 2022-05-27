@@ -22,19 +22,24 @@
  * SOFTWARE.
  */
 
-function getEventFiles(event: any, inputEl: any) {
-  const dt = event.dataTransfer
+import React from 'react'
 
-  if (dt) {
-    if (dt.files && dt.files.length) {
-      return dt.files
-    } else if (dt.items && dt.items.length) {
-      return dt.items
+function getEventFiles(
+  event: React.DragEvent | React.ChangeEvent,
+  inputEl: HTMLInputElement | null
+): ArrayLike<DataTransferItem | File | never> {
+  if ('dataTransfer' in event) {
+    const dt = event.dataTransfer
+    if (dt) {
+      if (dt.files && dt.files.length) {
+        return dt.files
+      } else if (dt.items && dt.items.length) {
+        return dt.items
+      }
     }
   } else if (inputEl && inputEl.files) {
     return inputEl.files
   }
-
   return []
 }
 
