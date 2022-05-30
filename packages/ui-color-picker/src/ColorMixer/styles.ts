@@ -38,6 +38,16 @@ const generateStyle = (): ColorMixerStyle => {
   return {
     colorMixer: {
       label: 'colorMixer'
+    },
+    disabledOverlay: {
+      width: '18rem',
+      background: 'rgba(255,255,255,.5)',
+      height: '13.4rem',
+      position: 'absolute',
+      top: '0.3rem',
+      left: '0.3rem',
+      zIndex: 100,
+      cursor: 'not-allowed'
     }
   }
 }

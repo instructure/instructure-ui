@@ -131,6 +131,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   }
 
   handleChange = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (this.props.disabled) return
     const { clientX, clientY } = e
     const { newXPosition, newYPosition } = this.calcColorPosition(
       clientX,
@@ -148,6 +149,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   }
   //TODO remove any
   handleKeyDown(e: React.KeyboardEvent<any>) {
+    if (this.props.disabled) return
     const { key } = e
     if (key === 'Tab') return
     e.preventDefault()

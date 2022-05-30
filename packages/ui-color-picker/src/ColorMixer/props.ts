@@ -95,7 +95,7 @@ type ColorMixerProps = ColorMixerOwnProps &
   WithStyleProps<null, ColorMixerStyle> &
   OtherHTMLAttributes<ColorMixerOwnProps>
 
-type ColorMixerStyle = ComponentStyle<'colorMixer'>
+type ColorMixerStyle = ComponentStyle<'colorMixer' | 'disabledOverlay'>
 
 const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,

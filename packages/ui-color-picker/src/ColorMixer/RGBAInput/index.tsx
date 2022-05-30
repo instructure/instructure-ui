@@ -80,36 +80,39 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
   }
 
   render() {
+    const { styles, disabled, label, withAlpha } = this.props
     return (
-      <div css={this.props?.styles?.RGBAInput}>
-        {this.props.label && (
-          <div css={this.props?.styles?.label}>{this.props.label}</div>
-        )}
-        <div css={this.props?.styles?.inputContainer}>
-          <span css={this.props?.styles?.rInput}>
+      <div css={styles?.RGBAInput}>
+        {label && <div css={styles?.label}>{label}</div>}
+        <div css={styles?.inputContainer}>
+          <span css={styles?.rInput}>
             <TextInput
+              disabled={disabled}
               value={`${this.state.value.r}`}
               onChange={(e) => this.handleChange('r', e)}
               renderLabel=""
             />
           </span>
-          <span css={this.props?.styles?.gInput}>
+          <span css={styles?.gInput}>
             <TextInput
+              disabled={disabled}
               value={`${this.state.value.g}`}
               onChange={(e) => this.handleChange('g', e)}
               renderLabel=""
             />
           </span>
-          <span css={this.props?.styles?.bInput}>
+          <span css={styles?.bInput}>
             <TextInput
+              disabled={disabled}
               value={`${this.state.value.b}`}
               onChange={(e) => this.handleChange('b', e)}
               renderLabel=""
             />
           </span>
-          {this.props.withAlpha && (
-            <span css={this.props?.styles?.aInput}>
+          {withAlpha && (
+            <span css={styles?.aInput}>
               <TextInput
+                disabled={disabled}
                 value={`${Math.round(this.state.value.a * 100)}`}
                 onChange={(e) => this.handleChange('a', e)}
                 renderAfterInput="%"

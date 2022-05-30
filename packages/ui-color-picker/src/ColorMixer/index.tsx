@@ -61,7 +61,8 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   static readonly componentId = 'ColorMixer'
 
   static defaultProps = {
-    withAlpha: false
+    withAlpha: false,
+    disabled: false
   }
 
   ref: Element | null = null
@@ -126,11 +127,14 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
     return (
       <div
         {...passthroughProps(props)}
+        aria-disabled={disabled}
         ref={elementRef}
         css={styles?.colorMixer}
       >
         <span aria-label={`${colorTohex8({ h, s, v, a })}`} aria-live="polite">
+          {disabled && <div css={styles?.disabledOverlay} />}
           <ColorPalette
+            disabled={disabled}
             width={this.width}
             height={this.paletteHeight}
             indicatorRadius={this.paletteIndicatiorRadius}
@@ -167,6 +171,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
           )}
         </span>
         <RGBAInput
+          disabled={disabled!}
           label="RGBA"
           width={this.width}
           value={colorToRGB({ h, s, v, a })}

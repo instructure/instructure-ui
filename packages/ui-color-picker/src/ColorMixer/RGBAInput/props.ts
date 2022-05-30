@@ -32,6 +32,7 @@ import type {
 import type { RGBAType } from '../props'
 
 type RGBAInputOwnProps = {
+  disabled: boolean
   label?: string
   width: number
   value: RGBAType
@@ -61,6 +62,7 @@ type RGBAInputStyle = ComponentStyle<
   | 'aInput'
 >
 const propTypes: PropValidators<PropKeys> = {
+  disabled: PropTypes.bool,
   label: PropTypes.string,
   width: PropTypes.number,
   value: PropTypes.object,
