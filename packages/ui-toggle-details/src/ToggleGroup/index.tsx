@@ -33,6 +33,7 @@ import {
 import { IconButton } from '@instructure/ui-buttons'
 import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
+import type { GetToggleProps } from '@instructure/ui-expandable'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
@@ -64,12 +65,11 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     defaultExpanded: false,
     transition: true,
     as: 'span',
-    elementRef: (_el: Element | null) => {},
     border: true
   } as const
 
   ref: Element | null = null
-  _button: Element | null = null
+  _button: HTMLElement | null = null
   _shouldTransition = false
 
   handleRef = (el: Element | null) => {
@@ -83,7 +83,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
   }
 
   handleButtonRef = (el: Element | null) => {
-    this._button = el
+    this._button = el as HTMLElement
   }
 
   get focused() {
@@ -91,7 +91,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
   }
 
   focus() {
-    this._button && (this._button as HTMLElement).focus()
+    this._button?.focus()
   }
 
   componentDidMount() {
@@ -103,7 +103,10 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     return Icon ? callRenderProp(Icon) : null
   }
 
-  renderToggle(toggleProps: any, expanded: boolean) {
+  renderToggle(
+    ExpandableToggleProps: ReturnType<GetToggleProps>,
+    expanded: boolean
+  ) {
     const { toggleLabel, size } = this.props
     let label
     if (typeof toggleLabel === 'function') {
@@ -113,7 +116,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     }
     return (
       <IconButton
-        {...toggleProps}
+        {...ExpandableToggleProps}
         withBackground={false}
         withBorder={false}
         size={size === 'large' ? 'medium' : 'small'}

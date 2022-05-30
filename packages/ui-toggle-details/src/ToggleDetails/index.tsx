@@ -23,7 +23,7 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-
+import React from 'react'
 import { Button } from '@instructure/ui-buttons'
 import {
   IconArrowOpenEndSolid,
@@ -39,7 +39,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { ToggleDetailsProps, ToggleDetailsStyleProps } from './props'
 import { allowedProps, propTypes } from './props'
-import { UIElement } from '@instructure/shared-types'
+import type { GetToggleProps } from '@instructure/ui-expandable'
 
 /**
 ---
@@ -62,19 +62,18 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     iconExpanded: IconArrowOpenDownSolid,
     iconPosition: 'start',
     defaultExpanded: false,
-    onToggle: function (_event: React.MouseEvent, _expanded: boolean) {},
     children: null
   }
 
   ref: Element | null = null
-  _button: UIElement | null = null
+  _button: HTMLElement | null = null
 
   get focused() {
     return isActiveElement(this._button)
   }
 
   focus() {
-    this._button && (this._button as HTMLElement).focus()
+    this._button?.focus()
   }
 
   componentDidMount() {
@@ -85,7 +84,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     this.props.makeStyles?.({ animate: true } as ToggleDetailsStyleProps)
   }
 
-  getButtonRef = (el: Element | null) => (this._button = el)
+  getButtonRef = (el: Element | null) => (this._button = el as HTMLElement)
 
   renderSummary(expanded: boolean) {
     const { summary, iconPosition } = this.props
@@ -99,14 +98,18 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
     )
   }
 
-  renderToggle(toggleProps: any, expanded: boolean) {
+  renderToggle(
+    ExpandableToggleProps: ReturnType<GetToggleProps>,
+    expanded: boolean
+  ) {
     const { variant } = this.props
 
     const props = {
       ...omitProps(this.props, ToggleDetails.allowedProps),
-      ...toggleProps,
+      ...ExpandableToggleProps,
       children: this.renderSummary(expanded)
-    }
+      // spread operator makes toggleProps loose Record<string, any>>
+    } as Record<string, any>
 
     const summary = this.renderSummary(expanded)
 
@@ -166,7 +169,9 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
   }
 
   handleToggle = (event: React.MouseEvent, expanded: boolean) => {
-    this.props.onToggle?.(event, expanded)
+    if (typeof this.props.onToggle === 'function') {
+      this.props.onToggle(event, expanded)
+    }
     this.props.makeStyles?.({ animate: true })
   }
 
