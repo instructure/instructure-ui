@@ -46,7 +46,7 @@ type ToggleGroupOwnProps = {
    * provides a screenreader label for the toggle button
    * (takes `expanded` as an argument if a function)
    */
-  toggleLabel: React.ReactNode | ((...args: any[]) => any)
+  toggleLabel: React.ReactNode | ((expanded: boolean) => React.ReactNode)
   /**
    * the element type to render as
    */

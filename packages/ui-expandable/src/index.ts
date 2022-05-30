@@ -22,4 +22,8 @@
  * SOFTWARE.
  */
 export { Expandable } from './Expandable'
-export type { ExpandableProps, RenderExpandable } from './Expandable/props'
+export type {
+  ExpandableProps,
+  RenderExpandable,
+  GetToggleProps
+} from './Expandable/props'

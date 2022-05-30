@@ -35,7 +35,7 @@ type GetToggleProps = <P extends Record<string, any>>(
 ) => {
   'aria-controls': string
   'aria-expanded': boolean
-  onClick: (event: React.MouseEvent) => void
+  onClick: (event: React.MouseEvent<any> | React.KeyboardEvent<any>) => void
 } & P
 
 type RenderProps = {
@@ -105,5 +105,10 @@ const allowedProps: AllowedPropKeys = [
   'render'
 ]
 
-export type { ExpandableProps, ExpandableState, RenderExpandable }
+export type {
+  ExpandableProps,
+  ExpandableState,
+  RenderExpandable,
+  GetToggleProps
+}
 export { propTypes, allowedProps }
