@@ -24,6 +24,7 @@
 
 /** @jsx jsx */
 import { withStyle, jsx } from '@instructure/emotion'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { Component } from 'react'
 import ColorPalette from './ColorPalette'
 import Slider from './Slider'
@@ -112,10 +113,22 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   }
 
   render() {
-    const { elementRef, styles, withAlpha } = this.props
+    const {
+      disabled,
+      onChange,
+      value,
+      elementRef,
+      styles,
+      withAlpha,
+      ...props
+    } = this.props
     const { h, s, v, a } = this.state
     return (
-      <div ref={elementRef} css={styles?.colorMixer}>
+      <div
+        {...passthroughProps(props)}
+        ref={elementRef}
+        css={styles?.colorMixer}
+      >
         <span aria-label={`${colorTohex8({ h, s, v, a })}`} aria-live="polite">
           <ColorPalette
             width={this.width}

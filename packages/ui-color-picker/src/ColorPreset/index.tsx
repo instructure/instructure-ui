@@ -25,6 +25,7 @@
 /** @jsx jsx */
 import { Component } from 'react'
 
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 import { Menu } from '@instructure/ui-menu'
 import { IconButton, Button } from '@instructure/ui-buttons'
@@ -265,9 +266,23 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     </Menu>
   )
   render() {
-    const { styles, label, colorMixerSettings, colors, elementRef } = this.props
+    const {
+      disabled,
+      onSelect,
+      selected,
+      styles,
+      label,
+      colorMixerSettings,
+      colors,
+      elementRef,
+      ...props
+    } = this.props
     return (
-      <div ref={elementRef} css={styles?.colorPreset}>
+      <div
+        {...passthroughProps(props)}
+        ref={elementRef}
+        css={styles?.colorPreset}
+      >
         {label && (
           <div css={styles?.label}>
             <Text weight="bold">{label}</Text>

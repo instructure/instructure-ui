@@ -25,6 +25,7 @@
 /** @jsx jsx */
 import { Component, Fragment } from 'react'
 
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 import { Text } from '@instructure/ui-text'
 import ColorIndicator from '../ColorIndicator'
@@ -135,6 +136,9 @@ class ColorContrast extends Component<ColorContrastProps> {
   render() {
     const {
       styles,
+      elementRef,
+      failureLabel,
+      successLabel,
       withoutColorPreview,
       firstColor,
       secondColor,
@@ -143,11 +147,16 @@ class ColorContrast extends Component<ColorContrastProps> {
       secondColorLabel,
       normalTextLabel,
       largeTextLabel,
-      graphicsTextLabel
+      graphicsTextLabel,
+      ...props
     } = this.props
     const contrast = this.calcContrast
     return (
-      <div ref={this.handleRef} css={styles?.colorContrast}>
+      <div
+        {...passthroughProps(props)}
+        ref={this.handleRef}
+        css={styles?.colorContrast}
+      >
         <Text weight="bold" as="div">
           {label}
         </Text>

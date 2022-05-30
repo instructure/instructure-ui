@@ -25,6 +25,7 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { TextInput } from '@instructure/ui-text-input'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { Button, IconButton } from '@instructure/ui-buttons'
@@ -515,10 +516,29 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     </React.Fragment>
   )
   render() {
-    const { isRequired, disabled, width, placeholderText } = this.props
+    const {
+      checkContrast,
+      colorMixerSettings,
+      disabled,
+      elementRef,
+      isRequired,
+      label,
+      onChange,
+      placeholderText,
+      popverButtonScreenReaderLabel,
+      renderInvalidColorMessage,
+      renderIsRequiredMessage,
+      renderMessages,
+      tooltip,
+      value,
+      width,
+      withAlpha,
+      ...props
+    } = this.props
     return (
       <div css={this.props.styles?.colorPicker} ref={this.handleRef}>
         <TextInput
+          {...passthroughProps(props)}
           isRequired={isRequired}
           disabled={disabled}
           renderLabel={() => this.renderLabel()}

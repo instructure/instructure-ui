@@ -26,7 +26,7 @@
 import { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
-
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 import { hexToRgb } from '@instructure/ui-color-utils/src/conversions'
 import { isValid } from '@instructure/ui-color-utils/src/isValid'
@@ -93,14 +93,16 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
       ${c2.a})`
   }
   render() {
-    const color = this.props.color || 'none'
+    const { color, elementRef, ...props } = this.props
+
     return (
       <div
+        {...passthroughProps(props)}
         css={this.props.styles?.checkerBoardWithColor}
         style={{
           borderColor: this.calcBlendedColor(
             hexToRgb(colorIndicatorBorderColor),
-            hexToRgb(isValid(color) ? color : '#fff')
+            hexToRgb(isValid(color || 'none') ? color || 'none' : '#fff')
           )
         }}
       />
