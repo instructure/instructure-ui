@@ -34,7 +34,7 @@ const generateComponentTheme = (theme: Theme): ColorIndicatorTheme => {
   const { colors, borders } = theme
 
   const componentVariables = {
-    smallBorder: borders?.widthSmall,
+    borderWidth: borders?.widthSmall,
     backgroundImage: `linear-gradient(45deg, ${colors.tiara} 25%, transparent 25%),
     linear-gradient(-45deg, ${colors.tiara} 25%, transparent 25%),
     linear-gradient(45deg, transparent 75%, ${colors.tiara} 75%),

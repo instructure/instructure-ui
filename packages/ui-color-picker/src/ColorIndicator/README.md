@@ -15,13 +15,23 @@ example: true
 
 ```
 
+### With semitransparent color
+
+```js
+---
+example: true
+---
+<ColorIndicator color='#ff000088'/>
+
+```
+
 ### Color Button Pattern
 
 ```js
 ---
 example: true
 ---
-<IconButton>
+<IconButton screenReaderLabel="ColorIndicator button">
   <ColorIndicator color='#ff0000'/>
 </IconButton>
 ```

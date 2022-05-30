@@ -98,11 +98,12 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
     return (
       <div
         {...passthroughProps(props)}
-        css={this.props.styles?.checkerBoardWithColor}
+        ref={elementRef}
+        css={this.props.styles?.colorIndicator}
         style={{
           borderColor: this.calcBlendedColor(
             hexToRgb(colorIndicatorBorderColor),
-            hexToRgb(isValid(color || 'none') ? color || 'none' : '#fff')
+            hexToRgb(isValid(color) ? color : '#fff')
           )
         }}
       />

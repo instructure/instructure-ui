@@ -51,9 +51,7 @@ type ColorIndicatorProps = ColorIndicatorOwnProps &
   OtherHTMLAttributes<ColorIndicatorOwnProps> &
   ToProp
 
-type ColorIndicatorStyle = ComponentStyle<
-  'colorIndicator' | 'checkerBoardWithColor'
->
+type ColorIndicatorStyle = ComponentStyle<'colorIndicator'>
 
 const propTypes: PropValidators<PropKeys> = {
   color: PropTypes.string.isRequired,

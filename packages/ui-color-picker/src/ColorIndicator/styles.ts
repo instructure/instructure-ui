@@ -43,14 +43,12 @@ const generateStyle = (
 
   return {
     colorIndicator: {
-      label: 'colorIndicator'
-    },
-    checkerBoardWithColor: {
+      label: 'colorIndicator',
       width: '1.5rem',
       height: '1.5rem',
       borderRadius: '1.5rem',
       boxSizing: 'border-box',
-      borderWidth: componentTheme.smallBorder,
+      borderWidth: componentTheme.borderWidth,
       boxShadow: `inset 0 0 0 1.5rem ${color || 'none'}`,
       borderStyle: 'solid',
       backgroundImage: componentTheme.backgroundImage,
