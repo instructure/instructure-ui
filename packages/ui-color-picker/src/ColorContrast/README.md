@@ -2,7 +2,7 @@
 describes: ColorContrast
 ---
 
-A component for displaying `ColorContrast` between two colors. It will perform checks according to the WCAG 2.1 standard, determinig if a given contrast ratio is acceptable for `normal` `large` or `graphics` texts. `normal` needs to be `4.5`, the other two `3`
+A component for displaying color contrast between two colors. It will perform checks according to the [WCAG 2.1 standard](https://webaim.org/articles/contrast/#ratio), determinig if a given contrast ratio is acceptable for `normal`, `large` or `graphics` texts. `normal` needs to be `4.5`, the other two `3`.
 
 ### Color Contrast
 

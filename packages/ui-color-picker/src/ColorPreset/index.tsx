@@ -134,6 +134,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
       }
       isShowingContent={this.state.openAddNew}
       onShowContent={() => {
+        if (this.props.disabled) return
         this.setState({ openAddNew: true })
       }}
       onHideContent={() => {

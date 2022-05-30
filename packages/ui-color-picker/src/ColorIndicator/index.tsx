@@ -56,10 +56,7 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorIndicator'
-  static defaultProps = {
-    onClick: null,
-    disabled: false
-  }
+
   ref: Element | null = null
 
   componentDidMount() {
