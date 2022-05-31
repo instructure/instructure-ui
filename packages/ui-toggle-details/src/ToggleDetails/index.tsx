@@ -110,7 +110,6 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
       children: this.renderSummary(expanded)
       // spread operator makes toggleProps loose Record<string, any>>
     } as Record<string, any>
-
     const summary = this.renderSummary(expanded)
 
     if (variant === 'filled') {

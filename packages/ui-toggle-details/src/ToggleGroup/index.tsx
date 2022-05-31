@@ -114,9 +114,11 @@ class ToggleGroup extends Component<ToggleGroupProps> {
     } else {
       label = toggleLabel
     }
+
+    const props = { ...ExpandableToggleProps } as Record<string, any>
     return (
       <IconButton
-        {...ExpandableToggleProps}
+        {...props}
         withBackground={false}
         withBorder={false}
         size={size === 'large' ? 'medium' : 'small'}
