@@ -5,15 +5,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [8.24.5](https://github.com/instructure/instructure-ui/compare/v8.24.3...v8.24.5) (2022-05-31)
 
-Fixing previous broken release.
+### Bug Fixes
+
+- **ui-a11y-utils,ui-dialog,ui-modal:** calling stale callbacks ([c24cb92](https://github.com/instructure/instructure-ui/commit/c24cb92f62c9a8df7602501c73c69f6b61151812))
+- **ui-grid:** modify Ts types for GridCol to accept positive fractions as well ([0f44843](https://github.com/instructure/instructure-ui/commit/0f44843420c27b918ea284ab9066f83fc3c929d7))
 
 ## [8.24.4](https://github.com/instructure/instructure-ui/compare/v8.24.3...v8.24.4) (2022-05-27)
 
+### DEPRECATED
 
-### Bug Fixes
-
-* **ui-a11y-utils,ui-dialog,ui-modal:** calling stale callbacks ([c24cb92](https://github.com/instructure/instructure-ui/commit/c24cb92f62c9a8df7602501c73c69f6b61151812))
-* **ui-grid:** modify Ts types for GridCol to accept positive fractions as well ([0f44843](https://github.com/instructure/instructure-ui/commit/0f44843420c27b918ea284ab9066f83fc3c929d7))
+This release is deprecated, because we encountered problems during the release.
 
 ## [8.24.3](https://github.com/instructure/instructure-ui/compare/v8.24.2...v8.24.3) (2022-05-25)
 
