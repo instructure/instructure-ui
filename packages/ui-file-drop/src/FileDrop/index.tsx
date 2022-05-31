@@ -114,11 +114,11 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     this.messagesId = props.deterministicId!('FileDrop-messages')
   }
   componentDidMount() {
-    ;(this.props as any).makeStyles(this.makeStyleProps())
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   componentDidUpdate() {
-    ;(this.props as any).makeStyles(this.makeStyleProps())
+    this.props.makeStyles?.(this.makeStyleProps())
   }
 
   convertToFile(fileLikeItem: DataTransferItem | File) {
@@ -159,9 +159,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   }
 
   get hasMessages() {
-    return (
-      (this.props as any).messages && (this.props as any).messages.length > 0
-    )
+    return this.props.messages && this.props.messages.length > 0
   }
 
   get interaction() {
@@ -169,12 +167,10 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   }
 
   get invalid() {
-    return (
-      this.hasMessages &&
-      (this.props as any).messages.findIndex((message: FormMessage) => {
+    return (this.hasMessages &&
+      this.props.messages!.findIndex((message: FormMessage) => {
         return message.type === 'error'
-      }) >= 0
-    )
+      }) >= 0) as boolean
   }
   getDataTransferItems(
     e: React.ChangeEvent | React.DragEvent,
@@ -186,7 +182,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
       if (fileObj) list.push(fileObj)
     })
     if (list.length > 1) {
-      list = (this.props as any).shouldAllowMultiple ? list : [list[0]]
+      list = this.props.shouldAllowMultiple ? list : [list[0]]
     }
     if (shouldEnablePreview) {
       return list.map((file: File) =>
@@ -209,7 +205,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
       isDragAccepted: allFilesAccepted,
       isDragRejected: !allFilesAccepted
     })
-    ;(this.props as any).onDragEnter(e)
+    this.props.onDragEnter?.(e)
   }
 
   handleDragOver = (e: React.DragEvent) => {
@@ -221,7 +217,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
     } catch (err) {
       // continue regardless of error
     }
-    ;(this.props as any).onDragOver(e)
+    this.props.onDragOver?.(e)
     return false
   }
 
@@ -236,7 +232,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
       isDragAccepted: false,
       isDragRejected: false
     })
-    ;(this.props as any).onDragLeave(e)
+    this.props.onDragLeave?.(e)
   }
 
   parseFiles(fileList: Array<DataTransferItem | File>) {
@@ -279,14 +275,12 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   }
 
   fileAccepted = (file: File) => {
-    return accepts(file, (this.props as any).accept)
+    if (this.props.accept) return accepts(file, this.props.accept)
+    else return true
   }
 
   fileMatchSize(file: File) {
-    return (
-      file.size <= (this.props as any).maxSize &&
-      file.size >= (this.props as any).minSize
-    )
+    return file.size <= this.props.maxSize! && file.size >= this.props.minSize!
   }
 
   allFilesAccepted(files: Array<File>) {
@@ -326,12 +320,12 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   }
 
   handleClick = (e: React.MouseEvent) => {
-    if (this.fileInputEl!.value && (this.props as any).shouldAllowRepeats) {
+    if (this.fileInputEl!.value && this.props.shouldAllowRepeats) {
       this.fileInputEl!.value = null as unknown as string
     }
     // focus the input (because FF won't)
     this.fileInputEl?.focus()
-    ;(this.props as any).onClick(e)
+    this.props.onClick!(e)
     this.setState({
       isFileBrowserDisplayed: true
     })
@@ -339,7 +333,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
 
   handleKeyDown = (e: React.KeyboardEvent) => {
     if (this.state.isFocused && keyEventIsClickButton(e)) {
-      if ((this.props as any).shouldAllowRepeats) {
+      if (this.props.shouldAllowRepeats) {
         this.fileInputEl!.value = null as unknown as string
       }
       // This bit of logic is necessary for MS browsers but causes unwanted warnings in Firefox
@@ -377,7 +371,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
       onDropRejected,
       ...props
     } = this.props
-    const id = (this.props as any).id || this.defaultId
+    const id = this.props.id || this.defaultId!
     const focusColor =
       this.state.isDragRejected || this.invalid ? 'danger' : undefined
 
@@ -393,7 +387,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
         elementRef={this.handleElementRef}
       >
         <label
-          css={(this.props as any).styles.fileDropLabel}
+          css={this.props.styles?.fileDropLabel}
           htmlFor={id}
           onDragEnter={this.handleDragEnter}
           onDragOver={this.handleDragOver}
@@ -408,8 +402,8 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
             focusColor={focusColor}
             height={height}
           >
-            <span css={(this.props as any).styles.fileDropLabelContent}>
-              <span css={(this.props as any).styles.fileDropLayout}>
+            <span css={this.props.styles?.fileDropLabelContent}>
+              <span css={this.props.styles?.fileDropLayout}>
                 <View height={height}>{this.renderLabel()}</View>
               </span>
             </span>
@@ -419,24 +413,24 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
           {...passthroughProps(props)}
           onClick={this.handleClick}
           type="file"
-          css={(this.props as any).styles.fileDropInput}
+          css={this.props.styles?.fileDropInput}
           id={id}
           ref={this.handleRef}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
           onKeyUp={this.handleKeyUp}
-          multiple={(this.props as any).shouldAllowMultiple}
+          multiple={this.props.shouldAllowMultiple}
           accept={this.acceptStr()}
           onChange={this.handleChange}
-          aria-describedby={this.hasMessages ? (this as any).messagesId : null}
+          aria-describedby={this.hasMessages ? this.messagesId : undefined}
           disabled={this.functionallyDisabled}
         />
         {this.hasMessages ? (
           <View display="block" margin="small 0 0">
             <FormFieldMessages
-              id={(this as any).messagesId}
-              messages={(this.props as any).messages}
+              id={this.messagesId}
+              messages={this.props.messages}
             />
           </View>
         ) : null}

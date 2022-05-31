@@ -39,7 +39,11 @@ import type {
   OtherHTMLAttributes
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
-
+type RenderLabelProps = {
+  isDragAccepted: boolean
+  isDragRejected: boolean
+  interaction: boolean
+}
 type FileDropOwnProps = {
   /**
    * The id of the input (to link it to its label for a11y)
@@ -49,7 +53,7 @@ type FileDropOwnProps = {
    * The content of FileDrop; can be a component or React node.
    * Components receive `isDragAccepted` and `isDragRejected` as props.
    */
-  renderLabel: ((...args: any[]) => any) | React.ReactNode
+  renderLabel: ((props: RenderLabelProps) => React.ReactNode) | React.ReactNode
   /**
    * The mime media type/s or file extension/s allowed to be dropped inside
    */
