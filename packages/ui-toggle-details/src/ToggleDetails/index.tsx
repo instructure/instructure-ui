@@ -98,14 +98,14 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
   }
 
   renderToggle(
-    ExpandableToggleProps: ReturnType<ExpandableToggleProps>,
+    toggleProps: ReturnType<ExpandableToggleProps>,
     expanded: boolean
   ) {
     const { variant } = this.props
 
     const props = {
       ...omitProps(this.props, ToggleDetails.allowedProps),
-      ...ExpandableToggleProps,
+      ...toggleProps,
       children: this.renderSummary(expanded)
       // spread operator makes toggleProps loose Record<string, any>>
     } as Record<string, any>
