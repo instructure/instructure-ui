@@ -34,7 +34,6 @@ import {
   getInteraction,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-import { isEdge } from '@instructure/ui-utils'
 
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
