@@ -50,22 +50,6 @@ function keyEventIsClickButton(e: React.KeyboardEvent) {
   return e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter
 }
 
-declare global {
-  interface Document {
-    documentMode?: any
-  }
-}
-// Used try-catch due to missing document/navigator references in Jenkins
-function isBrowserMS() {
-  let result = false
-  try {
-    result = document.documentMode || isEdge
-  } catch (e) {} // eslint-disable-line no-empty
-  return result
-}
-
-const IS_MS = isBrowserMS()
-
 /**
 ---
 category: components
@@ -339,11 +323,6 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
       // This bit of logic is necessary for MS browsers but causes unwanted warnings in Firefox
       // So we need to apply this logic only on MS browsers
       /* istanbul ignore if  */
-      if (IS_MS) {
-        e.stopPropagation()
-        e.preventDefault()
-        this.fileInputEl?.click()
-      }
     }
   }
 
