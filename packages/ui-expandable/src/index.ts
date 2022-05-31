@@ -25,5 +25,5 @@ export { Expandable } from './Expandable'
 export type {
   ExpandableProps,
   RenderExpandable,
-  GetToggleProps
+  ExpandableToggleProps
 } from './Expandable/props'

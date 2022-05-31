@@ -33,7 +33,7 @@ import {
 import { IconButton } from '@instructure/ui-buttons'
 import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
-import type { GetToggleProps } from '@instructure/ui-expandable'
+import type { ExpandableToggleProps } from '@instructure/ui-expandable'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
@@ -104,7 +104,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
   }
 
   renderToggle(
-    ExpandableToggleProps: ReturnType<GetToggleProps>,
+    toggleProps: ReturnType<ExpandableToggleProps>,
     expanded: boolean
   ) {
     const { toggleLabel, size } = this.props
@@ -115,7 +115,7 @@ class ToggleGroup extends Component<ToggleGroupProps> {
       label = toggleLabel
     }
 
-    const props = { ...ExpandableToggleProps } as Record<string, any>
+    const props = { ...toggleProps } as Record<string, any>
     return (
       <IconButton
         {...props}

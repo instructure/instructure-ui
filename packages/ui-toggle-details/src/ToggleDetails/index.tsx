@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Component } from 'react'
-import React from 'react'
+import React, { Component } from 'react'
 import { Button } from '@instructure/ui-buttons'
 import {
   IconArrowOpenEndSolid,
@@ -39,7 +38,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { ToggleDetailsProps, ToggleDetailsStyleProps } from './props'
 import { allowedProps, propTypes } from './props'
-import type { GetToggleProps } from '@instructure/ui-expandable'
+import type { ExpandableToggleProps } from '@instructure/ui-expandable'
 
 /**
 ---
@@ -99,7 +98,7 @@ class ToggleDetails extends Component<ToggleDetailsProps> {
   }
 
   renderToggle(
-    ExpandableToggleProps: ReturnType<GetToggleProps>,
+    ExpandableToggleProps: ReturnType<ExpandableToggleProps>,
     expanded: boolean
   ) {
     const { variant } = this.props
