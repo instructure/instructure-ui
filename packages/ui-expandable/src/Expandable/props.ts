@@ -109,6 +109,6 @@ export type {
   ExpandableProps,
   ExpandableState,
   RenderExpandable,
-  GetToggleProps
+  GetToggleProps as ExpandableToggleProps
 }
 export { propTypes, allowedProps }
