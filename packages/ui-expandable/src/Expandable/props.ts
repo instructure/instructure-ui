@@ -35,7 +35,7 @@ type GetToggleProps = <P extends Record<string, any>>(
 ) => {
   'aria-controls': string
   'aria-expanded': boolean
-  onClick: (event: React.MouseEvent<any> | React.KeyboardEvent<any>) => void
+  onClick: (event: React.MouseEvent) => void
 } & P
 
 type RenderProps = {
