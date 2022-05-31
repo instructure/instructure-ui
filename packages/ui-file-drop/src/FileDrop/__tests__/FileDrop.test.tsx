@@ -25,6 +25,7 @@ import React from 'react'
 import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 import { FileDrop } from '../index'
 import { FileDropLocator } from '../FileDropLocator'
+import type { FileDropProps } from '../props'
 describe('<FileDrop />', async () => {
   it('should render', async () => {
     await mount(<FileDrop renderLabel="fake label" />)
@@ -82,9 +83,11 @@ describe('<FileDrop />', async () => {
       expect(onDrop).to.have.been.called()
     })
     it('accepts correct files using mymetypes', async () => {
-      const onDrop = spy((_accepted: any, _rejected: any, e: any) => {
+      const spyFunc: FileDropProps['onDrop'] = (_accepted, _rejected, e) => {
         e.persist()
-      })
+      }
+
+      const onDrop = spy(spyFunc)
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
@@ -110,9 +113,10 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.not.have.been.called()
     })
     it('rejects incorrect files using mymetypes and shouldEnablePreview', async () => {
-      const onDrop = spy((_accepted: any, _rejected: any, e: any) => {
+      const spyFunc: FileDropProps['onDrop'] = (_accepted, _rejected, e) => {
         e.persist()
-      })
+      }
+      const onDrop = spy(spyFunc)
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
@@ -139,9 +143,10 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.have.been.called()
     })
     it('accepts correct files using mymetypes and enablePreview', async () => {
-      const onDrop = spy((_accepted: any, _rejected: any, e: any) => {
+      const spyFunc: FileDropProps['onDrop'] = (_accepted, _rejected, e) => {
         e.persist()
-      })
+      }
+      const onDrop = spy(spyFunc)
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
@@ -168,10 +173,10 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.not.have.been.called()
     })
     it('accepts correct files using extensions', async () => {
-      // @ts-expect-error intentionally unused params
-      const onDrop = spy((accepted: any, rejected: any, e: any) => {
+      const spyFunc: FileDropProps['onDrop'] = (_accepted, _rejected, e) => {
         e.persist()
-      })
+      }
+      const onDrop = spy(spyFunc)
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
@@ -197,9 +202,10 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.not.have.been.called()
     })
     it('rejects incorrect files using mymetypes', async () => {
-      const onDrop = spy((_accepted: any, _rejected: any, e: any) => {
+      const spyFunc: FileDropProps['onDrop'] = (_accepted, _rejected, e) => {
         e.persist()
-      })
+      }
+      const onDrop = spy(spyFunc)
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
@@ -225,9 +231,10 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.have.been.called()
     })
     it('rejects incorrect files using extensions', async () => {
-      const onDrop = spy((_accepted: any, _rejected: any, e: any) => {
+      const spyFunc: FileDropProps['onDrop'] = (_accepted, _rejected, e) => {
         e.persist()
-      })
+      }
+      const onDrop = spy(spyFunc)
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
@@ -262,26 +269,36 @@ describe('<FileDrop />', async () => {
       expect(await fileDrop.find('section#test-id')).to.exist()
     })
     it('passes isDragAccepted and isDragRejected boolean props to component label', async () => {
-      let result = {}
-      const label = (props: any) => {
+      type RenderLabelProps = {
+        isDragAccepted: boolean
+        isDragRejected: boolean
+        interaction: boolean
+      }
+      let result: RenderLabelProps = {} as RenderLabelProps
+      const label: FileDropProps['renderLabel'] = (props) => {
         result = { ...props }
         return null
       }
 
       await mount(<FileDrop renderLabel={label} />)
-      expect(typeof (result as any).isDragAccepted === 'boolean').to.be.true()
-      expect(typeof (result as any).isDragRejected === 'boolean').to.be.true()
+      expect(typeof result.isDragAccepted === 'boolean').to.be.true()
+      expect(typeof result.isDragRejected === 'boolean').to.be.true()
     })
     it(`label component's props are false by default`, async () => {
-      let result = {}
-      const label = (props: any) => {
+      type RenderLabelProps = {
+        isDragAccepted: boolean
+        isDragRejected: boolean
+        interaction: boolean
+      }
+      let result: RenderLabelProps = {} as RenderLabelProps
+      const label: FileDropProps['renderLabel'] = (props) => {
         result = { ...props }
         return null
       }
 
       await mount(<FileDrop renderLabel={label} />)
-      expect((result as any).isDragAccepted).to.be.false()
-      expect((result as any).isDragRejected).to.be.false()
+      expect(result.isDragAccepted).to.be.false()
+      expect(result.isDragRejected).to.be.false()
     })
   })
   describe('onDrag events', async () => {
