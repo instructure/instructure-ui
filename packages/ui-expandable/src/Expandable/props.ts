@@ -30,7 +30,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
-type GetToggleProps = <P extends Record<string, any>>(
+type ExpandableToggleProps = <P extends Record<string, any>>(
   props?: P & { onClick?: React.MouseEventHandler }
 ) => {
   'aria-controls': string
@@ -44,7 +44,7 @@ type RenderProps = {
   /**
    * Props to be spread onto the trigger element
    */
-  getToggleProps: GetToggleProps
+  getToggleProps: ExpandableToggleProps
 
   /**
    * Props to be spread onto the details element
@@ -109,6 +109,6 @@ export type {
   ExpandableProps,
   ExpandableState,
   RenderExpandable,
-  GetToggleProps as ExpandableToggleProps
+  ExpandableToggleProps
 }
 export { propTypes, allowedProps }
