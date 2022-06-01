@@ -36,7 +36,7 @@ import {
   colorTohex8,
   colorToHsva,
   colorToRGB
-} from '@instructure/ui-color-utils/src/conversions'
+} from '@instructure/ui-color-utils'
 
 /**
 ---
@@ -80,8 +80,8 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   private width = 272
   private paletteHeight = 160
   private sliderHeight = 8
-  private sliderIndicatiorRadius = 6
-  private paletteIndicatiorRadius = 6
+  private sliderIndicatorRadius = 6
+  private paletteIndicatorRadius = 6
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -137,7 +137,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
             disabled={disabled}
             width={this.width}
             height={this.paletteHeight}
-            indicatorRadius={this.paletteIndicatiorRadius}
+            indicatorRadius={this.paletteIndicatorRadius}
             hue={h}
             color={{
               h,
@@ -149,10 +149,11 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
             }}
           />
           <Slider
+            disabled={disabled}
             isColorSlider
             width={this.width}
             height={this.sliderHeight}
-            indicatorRadius={this.sliderIndicatiorRadius}
+            indicatorRadius={this.sliderIndicatorRadius}
             value={h}
             color={colorTohex8({ h, s, v, a })}
             onChange={(hue: number) => {
@@ -161,9 +162,10 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
           />
           {withAlpha && (
             <Slider
+              disabled={disabled}
               width={this.width}
               height={this.sliderHeight}
-              indicatorRadius={this.sliderIndicatiorRadius}
+              indicatorRadius={this.sliderIndicatorRadius}
               color={colorTohex8({ h, s, v })}
               value={a}
               onChange={(opacity) => this.setState({ a: opacity / 100 })}
@@ -171,7 +173,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
           )}
         </span>
         <RGBAInput
-          disabled={disabled!}
+          disabled={disabled}
           label="RGBA"
           width={this.width}
           value={colorToRGB({ h, s, v, a })}

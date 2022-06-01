@@ -91,7 +91,7 @@ class Example extends React.Component {
         <hr style={{ width: "272px", marginLeft: 0 }} />
         <ColorContrast
           withoutColorPreview
-          firstColor={this.state.selectedBackGround}å
+          firstColor={this.state.selectedBackGround}
           secondColor={this.state.selectedForeGround}
           label="Contrast Ratio"
           successLabel="PASS"

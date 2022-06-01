@@ -29,9 +29,11 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { TextInput } from '@instructure/ui-text-input'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { Button, IconButton } from '@instructure/ui-buttons'
-import { colorTohex8 } from '@instructure/ui-color-utils/src/conversions'
-import { isValid } from '@instructure/ui-color-utils/src/isValid'
-import { contrast as getContrast } from '@instructure/ui-color-utils/src/contrast'
+import {
+  colorTohex8,
+  isValid,
+  contrast as getContrast
+} from '@instructure/ui-color-utils'
 import ColorIndicator from '../ColorIndicator'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -192,10 +194,13 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       renderIsRequiredMessage,
       isRequired
     } = this.props
-    const contrast =
-      this.props?.checkContrast?.contrastAgainst && isValidHex
-        ? getContrast(this.props.checkContrast.contrastAgainst, hexCode, 2)
-        : undefined
+    const contrast = isValidHex
+      ? getContrast(
+          this.props.checkContrast?.contrastAgainst || '#fff',
+          hexCode,
+          2
+        )
+      : undefined
     const contrastStrength = checkContrast?.contrastStrength
       ? checkContrast.contrastStrength
       : 'mid'
@@ -244,6 +249,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         contrast
       )
     }
+
     return [
       ...invalidColorMessages,
       ...isRequiredMessages,
@@ -266,7 +272,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
 
     if (checkContrast && isValid(hexCode)) {
       const contrast = getContrast(
-        checkContrast.contrastAgainst || '',
+        checkContrast.contrastAgainst || '#fff',
         hexCode,
         2
       )
@@ -362,7 +368,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       renderTrigger={
         <IconButton
           disabled={this.props.disabled}
-          screenReaderLabel={this.props.popverButtonScreenReaderLabel}
+          screenReaderLabel={this.props.popverButtonScreenReaderLabel || ''}
         >
           <ColorIndicator color={`#${this.state.hexCode}`} />
         </IconButton>
@@ -375,16 +381,18 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         this.setState({ openColorPicker: false })
       }}
       on="click"
-      screenReaderLabel="Popover Dialog Example"
+      screenReaderLabel={this.props.popverScreenReaderLabel || ''}
       shouldContainFocus
       shouldReturnFocus
       shouldCloseOnDocumentClick
       offsetY="16px"
       mountNode={() => document.getElementById('main')}
     >
-      {this.isDefaultPopover
-        ? this.renderDefaultPopoverContent()
-        : this.renderCustomPopoverContent()}
+      <div css={this.props.styles?.popoverContentContainer}>
+        {this.isDefaultPopover
+          ? this.renderDefaultPopoverContent()
+          : this.renderCustomPopoverContent()}
+      </div>
     </Popover>
   )
 

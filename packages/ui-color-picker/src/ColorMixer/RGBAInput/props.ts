@@ -32,7 +32,7 @@ import type {
 import type { RGBAType } from '../props'
 
 type RGBAInputOwnProps = {
-  disabled: boolean
+  disabled?: boolean
   label?: string
   width: number
   value: RGBAType

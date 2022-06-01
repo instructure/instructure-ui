@@ -26,7 +26,7 @@
 import { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
 import { View } from '@instructure/ui-view'
-import { ViewOwnProps } from '@instructure/ui-view/src/View/props'
+import type { ViewOwnProps } from '@instructure/ui-view'
 import { SliderProps } from './props'
 
 import generateStyle from './styles'
@@ -63,19 +63,20 @@ class Slider extends Component<SliderProps> {
   }
 
   removeEventListeners() {
-    //@ts-expect-error TODO
     window.removeEventListener('mousemove', this.handleChange)
     window.removeEventListener('mouseup', this.handleMouseUp)
   }
 
   handleMouseDown(e: React.MouseEvent<ViewOwnProps, MouseEvent>) {
     this.handleChange(e)
-    //@ts-expect-error TODO
+
     window.addEventListener('mousemove', this.handleChange)
     window.addEventListener('mouseup', this.handleMouseUp)
   }
 
-  handleChange = (e: React.MouseEvent<ViewOwnProps, MouseEvent>) => {
+  handleChange = (
+    e: React.MouseEvent<ViewOwnProps, MouseEvent> | MouseEvent
+  ) => {
     const { clientX } = e
     const newPosition = this.calcSliderPositionFromCursorPosition(
       clientX,
@@ -156,6 +157,7 @@ class Slider extends Component<SliderProps> {
   render() {
     return (
       <View
+        disabled={this.props.disabled}
         position="relative"
         width={this.props.width}
         height={this.props.height}

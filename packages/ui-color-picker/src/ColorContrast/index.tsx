@@ -23,7 +23,8 @@
  */
 
 /** @jsx jsx */
-import { Component, Fragment } from 'react'
+/** @jsxFrag React.Fragment */
+import React, { Component } from 'react'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -34,12 +35,13 @@ import type { ColorContrastProps } from './props'
 import { propTypes, allowedProps } from './props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { contrast as getContrast } from '@instructure/ui-color-utils/src/contrast'
-import { Pill } from '@instructure/ui-pill'
 import {
+  contrast as getContrast,
   colorToRGB,
   colorTohex8
-} from '@instructure/ui-color-utils/src/conversions'
+} from '@instructure/ui-color-utils'
+import { Pill } from '@instructure/ui-pill'
+
 import type { RGBAType } from '../ColorMixer/props'
 
 /**
@@ -96,7 +98,7 @@ class ColorContrast extends Component<ColorContrastProps> {
   }
 
   renderColorIndicator = (color: string, label: string) => (
-    <Fragment>
+    <>
       <div>
         <div css={this.props.styles?.colorIndicator}>
           <ColorIndicator color={color} />
@@ -107,7 +109,7 @@ class ColorContrast extends Component<ColorContrastProps> {
         <div css={this.props.styles?.colorIndicatorLabel}>{label}</div>
         <div css={this.props.styles?.pickedColorHex}>{color}</div>
       </div>
-    </Fragment>
+    </>
   )
   calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
     // as decided by design

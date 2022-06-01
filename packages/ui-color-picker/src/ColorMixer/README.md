@@ -15,7 +15,7 @@ class Example extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "#ffff00",
+      value: "#328DCFC2",
     };
   }
 
@@ -24,7 +24,6 @@ class Example extends React.Component {
       <div>
         <div style={{ display: "flex" }}>
           <ColorMixer
-            disabled
             withAlpha
             value={this.state.value}
             onChange={(value) => this.setState({ value })}
@@ -50,6 +49,31 @@ class Example extends React.Component {
           </Button>
         </div>
       </div>
+    );
+  }
+}
+
+render(<Example />);
+
+
+```
+
+### Color Mixer
+
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+  render() {
+    return (
+      <ColorMixer
+        disabled
+        withAlpha
+        value="#38C25494"
+         onChange={() => {}}
+      />
     );
   }
 }

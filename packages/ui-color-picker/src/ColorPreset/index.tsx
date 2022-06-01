@@ -34,11 +34,7 @@ import { Tooltip } from '@instructure/ui-tooltip'
 import { Popover } from '@instructure/ui-popover'
 import { Text } from '@instructure/ui-text'
 import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
-import {
-  colorTohex8,
-  hexToRgb
-} from '@instructure/ui-color-utils/src/conversions'
-import { isValid } from '@instructure/ui-color-utils/src/isValid'
+import { colorTohex8, hexToRgb, isValid } from '@instructure/ui-color-utils'
 import { colorIndicatorBorderColor } from '../ColorIndicator/theme'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
@@ -141,7 +137,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         this.setState({ openAddNew: false })
       }}
       on="click"
-      screenReaderLabel="Popover Dialog Example"
+      screenReaderLabel={this.props.popoverScreenReaderLabel}
       shouldContainFocus
       shouldReturnFocus
       shouldCloseOnDocumentClick
@@ -281,7 +277,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     return (
       <div
         {...passthroughProps(props)}
-        ref={elementRef}
+        ref={this.handleRef}
         css={styles?.colorPreset}
       >
         {label && (

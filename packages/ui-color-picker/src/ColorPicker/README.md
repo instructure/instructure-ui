@@ -2,8 +2,11 @@
 describes: ColorPicker
 ---
 
-The `ColorPicker` can be used in color input or full color picker mode.
-In color input mode ( `simpleView` prop set to `true`), it lets the user enter hex codes. It will display the color, validate the hex or check the contrast.
+The `ColorPicker` is a versatile component that can be used to select colors and check their contrast ratios. It has 2 modes of operation:
+
+- In the simple, color input mode, it lets the user enter hex codes. It will display the color, validate the hex and check the contrast.
+- In the more complex, color picker mode, the same functionality is available as for the simpler mode, but there is the option to pick a color from a visual color mixer component or from any other method added in a popover.
+
 The component can be either `uncontrolled` or `controlled`. If the `onChange` and `value` props are used, it will behave in a `controlled` manner, otherwise `uncontrolled`.
 
 ### ColorPicker with default popover content
@@ -185,95 +188,7 @@ class Example extends React.Component {
 render(<Example />);
 ```
 
-### Color Input
-
-```js
----
-render: false
-example: true
----
-class Example extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: "",
-      withAlpha: false,
-    };
-  }
-
-  render() {
-    const { value, withAlpha } = this.state;
-
-    return (
-      <div>
-        <ColorPicker
-          value={value}
-          onChange={(value) => this.setState({ value })}
-          label="Color Input"
-          tooltip="This is an example"
-          placeholderText="Enter HEX"
-          popverButtonScreenReaderLabel="Open color mixer popover"
-          withAlpha={withAlpha}
-          colorMixerSettings={{
-            colorMixer: {
-              withAlpha: false,
-            },
-            colorPreset: {
-              label: "Choose a nice color",
-              colors: [
-                "#ffffff",
-                "#0CBF94",
-                "#0C89BF00",
-                "#BF0C6D",
-                "#BF8D0C",
-                "#ff0000",
-                "#576A66",
-                "#35423A",
-                "#35423F",
-              ],
-            },
-            colorContrast: {
-              firstColor: "#FFFF00",
-              label: "Color Contrast Ratio",
-              successLabel: "PASS",
-              failureLabel: "FAIL",
-              normalTextLabel: "Normal text",
-              largeTextLabel: "Large text",
-              graphicsTextLabel: "Graphics text",
-              firstColorLabel: "Background",
-              secondColorLabel: "Foreground",
-            },
-          }}
-        />
-
-        <hr />
-        <FormFieldGroup description="Settings">
-          <Checkbox
-            label="withAlpha"
-            value="small"
-            variant="toggle"
-            size="small"
-            inline
-            checked={withAlpha}
-            onChange={() =>
-              this.setState({
-                withAlpha: !withAlpha,
-                value: value.slice(0, 6),
-              })
-            }
-          />
-        </FormFieldGroup>
-      </div>
-    );
-  }
-}
-
-render(<Example />);
-
-
-```
-
-### Controlled Color Input
+### Complex Color input example
 
 ```js
 ---

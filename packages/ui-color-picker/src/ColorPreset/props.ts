@@ -83,6 +83,10 @@ type ColorPresetOwnProps = {
    */
   onSelect: (selected: string) => void
   /**
+   * Sets the ScreenReaderLabel for the popover
+   */
+  popoverScreenReaderLabel?: string
+  /**
    * The currently selected HEX string
    */
   selected: string | null
@@ -121,6 +125,7 @@ const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string,
   colorMixerSettings: PropTypes.object,
   onSelect: PropTypes.func.isRequired,
+  popoverScreenReaderLabel: PropTypes.string,
   selected: PropTypes.string.isRequired
 }
 

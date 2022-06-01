@@ -123,6 +123,10 @@ const generateStyle = (
     colorMixerButtonContainer: {
       alignSelf: 'flex-end',
       marginLeft: componentTheme.xSmallSpacing
+    },
+    popoverContentContainer: {
+      maxHeight: '80vh',
+      overflow: 'scroll'
     }
   }
 }

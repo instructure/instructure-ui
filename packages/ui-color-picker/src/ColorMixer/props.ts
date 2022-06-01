@@ -30,12 +30,6 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 
-type ContrastStrength = 'min' | 'mid' | 'max'
-type MessageType = Array<{
-  type: 'success' | 'hint' | 'error' | 'screenreader-only'
-  text: string
-}>
-
 type RGBType = {
   r: number
   g: number
@@ -116,8 +110,6 @@ export type {
   ColorMixerProps,
   ColorMixerStyle,
   ColorMixerState,
-  ContrastStrength,
-  MessageType,
   RGBType,
   RGBAType,
   HSVType,
