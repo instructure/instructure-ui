@@ -4466,7 +4466,6 @@ __metadata:
     stylelint: ^14
     terser-webpack-plugin: ^5
     thread-loader: ^3
-    url-loader: ^4
     webpack: ^5
   languageName: unknown
   linkType: soft
@@ -33682,7 +33681,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"url-loader@npm:^4, url-loader@npm:^4.1.1":
+"url-loader@npm:^4.1.1":
   version: 4.1.1
   resolution: "url-loader@npm:4.1.1"
   dependencies:

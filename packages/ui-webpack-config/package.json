@@ -25,7 +25,6 @@
     "stylelint": "^14",
     "terser-webpack-plugin": "^5",
     "thread-loader": "^3",
-    "url-loader": "^4",
     "webpack": "^5"
   },
   "publishConfig": {
