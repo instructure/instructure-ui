@@ -59,17 +59,11 @@ const rules = [
   {
     // eslint-disable-next-line no-useless-escape
     test: /\.(eot|woff2?|otf|svg|ttf)([\?]?.*)$/,
-    loader: 'url-loader', // TODO use https://webpack.js.org/guides/asset-modules
-    options: {
-      limit: 8192
-    }
+    type: 'asset/resource'
   },
   {
     test: /\.(png|jpg|jpeg|gif)$/,
-    loader: 'url-loader', // TODO use https://webpack.js.org/guides/asset-modules
-    options: {
-      limit: 8192
-    }
+    type: 'asset/resource'
   }
 ]
 
