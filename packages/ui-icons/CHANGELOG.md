@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.19.0](https://github.com/instructure/instructure-ui/compare/v7.18.0...v7.19.0) (2022-06-03)
+
+### Bug Fixes
+
+- **ui-icons-build,ui-icons:** correct `instructure` icon displaying `canvas` logo ([93fe5a4](https://github.com/instructure/instructure-ui/commit/93fe5a4))
+
+### Features
+
+- **ui-icons:** add new `configure` icon ([9e64574](https://github.com/instructure/instructure-ui/commit/9e64574))
+- **ui-icons:** replace the `bank` icon with a new one ([3e4e69a](https://github.com/instructure/instructure-ui/commit/3e4e69a))
+
 # [7.18.0](https://github.com/instructure/instructure-ui/compare/v7.17.0...v7.18.0) (2022-03-30)
 
 ### Features
