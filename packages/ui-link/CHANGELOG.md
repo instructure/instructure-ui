@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.19.0](https://github.com/instructure/instructure-ui/compare/v7.18.0...v7.19.0) (2022-06-03)
+
+### Features
+
+- **ui-link:** add `role`and `forceButtonRole` prop to Link component ([cd9ce8c](https://github.com/instructure/instructure-ui/commit/cd9ce8c))
+
 # [7.18.0](https://github.com/instructure/instructure-ui/compare/v7.17.0...v7.18.0) (2022-03-30)
 
 **Note:** Version bump only for package @instructure/ui-link
