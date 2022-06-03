@@ -3,21 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.25.0](https://github.com/instructure/instructure-ui/compare/v8.24.5...v8.25.0) (2022-06-03)
+
+### Bug Fixes
+
+- **ui-webpack-config:** fix icon fonts not loading correctly ([5947205](https://github.com/instructure/instructure-ui/commit/594720520f74500feb88ca64f3e3697b33434f44))
+
 ## [8.24.5](https://github.com/instructure/instructure-ui/compare/v8.24.3...v8.24.5) (2022-05-31)
 
 **Note:** Version bump only for package @instructure/ui-webpack-config
 
-
-
-
-
 ## [8.24.4](https://github.com/instructure/instructure-ui/compare/v8.24.3...v8.24.4) (2022-05-27)
 
 **Note:** Version bump only for package @instructure/ui-webpack-config
-
-
-
-
 
 ## [8.24.3](https://github.com/instructure/instructure-ui/compare/v8.24.2...v8.24.3) (2022-05-25)
 

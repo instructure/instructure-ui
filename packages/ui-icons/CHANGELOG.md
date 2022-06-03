@@ -3,21 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.25.0](https://github.com/instructure/instructure-ui/compare/v8.24.5...v8.25.0) (2022-06-03)
+
+### Features
+
+- **ui-icons:** add new `configure` icon ([04059ea](https://github.com/instructure/instructure-ui/commit/04059ead31f299766bd01b88105f2793456f1973))
+- **ui-icons:** replace the `bank` icon with a new one ([c1c83a1](https://github.com/instructure/instructure-ui/commit/c1c83a1958383800cffa0f86abe512ea9de5468c))
+
 ## [8.24.5](https://github.com/instructure/instructure-ui/compare/v8.24.3...v8.24.5) (2022-05-31)
 
 **Note:** Version bump only for package @instructure/ui-icons
 
-
-
-
-
 ## [8.24.4](https://github.com/instructure/instructure-ui/compare/v8.24.3...v8.24.4) (2022-05-27)
 
 **Note:** Version bump only for package @instructure/ui-icons
-
-
-
-
 
 ## [8.24.3](https://github.com/instructure/instructure-ui/compare/v8.24.2...v8.24.3) (2022-05-25)
 
