@@ -45,7 +45,7 @@ const color2hex = (rgb: ColorInputWithoutInstance): string => {
 
 /**
  * Transforms any `TinyColor` to 8 length HEX (alpha included)
- * @param {ColorInputWithoutInstance} any color representation from `TinyColor`
+ * @param {ColorInputWithoutInstance} color representation from `TinyColor`
  * @returns {String} An 8 length hex string like `#FF0000FF`
  * @module colorTohex8
  */
@@ -56,7 +56,7 @@ const colorTohex8 = (color: ColorInputWithoutInstance): string => {
 /**
  * Transforms any `TinyColor` to RGBA object ( {r:number, g:number, b:number, a:number} )
  * also exported as `hexToRgb` for backward compatiblity reasons
- * @param {ColorInputWithoutInstance} any color representation from `TinyColor`
+ * @param {ColorInputWithoutInstance} color representation from `TinyColor`
  * @returns {Color.ColorFormats.RGBA} A `TinyColor` RGBA type
  * @module colorToRGB
  */
@@ -68,7 +68,7 @@ const colorToRGB = (
 
 /**
  * Transforms any `TinyColor` to HSVA object ( {h:number, s:number, v:number, a:number} )
- * @param {ColorInputWithoutInstance} any color representation from `TinyColor`
+ * @param {ColorInputWithoutInstance} color representation from `TinyColor`
  * @returns {Color.ColorFormats.HSVA} A `TinyColor` HSVA type
  * @module colorToHsva
  */
@@ -80,7 +80,7 @@ const colorToHsva = (
 
 /**
  * Transforms any `TinyColor` to HSLA object ( {h:number, s:number, l:number, a:number} )
- * @param {ColorInputWithoutInstance} any color representation from `TinyColor`
+ * @param {ColorInputWithoutInstance} color representation from `TinyColor`
  * @returns {Color.ColorFormats.HSLA} A `TinyColor` HSLA type
  * @module colorToHsla
  */

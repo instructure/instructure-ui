@@ -23,14 +23,14 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import { SliderTheme } from '@instructure/shared-types'
+import { ColorMixerSliderTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: Theme): SliderTheme => {
+const generateComponentTheme = (theme: Theme): ColorMixerSliderTheme => {
   const { colors, borders, stacking } = theme
 
   const componentVariables = {

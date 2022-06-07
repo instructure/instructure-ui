@@ -102,6 +102,7 @@ type ColorContrastStyle = ComponentStyle<
   | 'colorPreview'
   | 'firstColorPreview'
   | 'secondColorPreview'
+  | 'label'
 >
 
 const propTypes: PropValidators<PropKeys> = {

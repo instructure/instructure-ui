@@ -40,6 +40,7 @@ const generateStyle = (): ColorMixerStyle => {
       label: 'colorMixer'
     },
     disabledOverlay: {
+      label: 'colorMixer__disabledOverlay',
       width: '18rem',
       background: 'rgba(255,255,255,.5)',
       height: '13.4rem',

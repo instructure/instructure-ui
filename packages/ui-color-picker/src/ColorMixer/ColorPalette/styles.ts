@@ -27,7 +27,7 @@ import type {
   ColorPaletteProps,
   ColorPaletteState
 } from './props'
-import type { PaletteTheme } from '@instructure/shared-types'
+import type { ColorMixerPaletteTheme } from '@instructure/shared-types'
 import { colorIndicatorBorderColor } from '../../ColorIndicator/theme'
 import { px } from '@instructure/ui-utils'
 
@@ -42,7 +42,7 @@ import { px } from '@instructure/ui-utils'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: PaletteTheme,
+  componentTheme: ColorMixerPaletteTheme,
   props: ColorPaletteProps,
   state: ColorPaletteState
 ): ColorPaletteStyle => {
@@ -51,6 +51,7 @@ const generateStyle = (
       label: 'ColorPalette'
     },
     indicator: {
+      label: 'ColorPalette__indicator',
       width: `${props.indicatorRadius / 8}rem`,
       height: `${props.indicatorRadius / 8}rem`,
       borderRadius: `${props.indicatorRadius / 8}rem`,
@@ -67,6 +68,7 @@ const generateStyle = (
       }px`
     },
     palette: {
+      label: 'ColorPalette__palette',
       width: `${props.width / 16}rem`,
       height: `${props.height / 16}rem`,
       borderRadius: componentTheme.mediumBorderRadius,

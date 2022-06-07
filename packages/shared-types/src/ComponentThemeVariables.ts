@@ -401,39 +401,39 @@ export type CodeEditorTheme = {
 
 export type ColorPickerTheme = {
   hashMarkColor: Colors['ash']
-  warningIconColor: Colors['textWarning']
-  errorIconColor: Colors['textDanger']
-  successIconColor: Colors['textSuccess']
+  warningIconColor: Colors['fire']
+  errorIconColor: Colors['crimson']
+  successIconColor: Colors['shamrock']
   popoverSeparatorColor: Colors['tiara']
   popoverFooterColor: Colors['porcelain']
+  smallBorder: Border['widthSmall']
+  smallSpacing: Spacing['small']
+  xSmallSpacing: Spacing['xSmall']
+  xxSmallSpacing: Spacing['xxSmall']
+  xxxSmallSpacing: Spacing['xxxSmall']
+  xLargeFontSize: Typography['fontSizeXLarge']
   checkerboardBackgroundColor: Colors['white']
   checkerboardBackgroundImage: string
   checkerboardBackgroundSize: string
   checkerboardBackgroundPosition: string
-  colorIndicatorBorderColor: string
-  simpleColorContainerLeftPadding: Spacing['xSmall']
-  hashMarkContainerLineHeight: Typography['fontSizeXLarge']
-  hashMarkContainerLeftPadding: Spacing['xSmall']
-  hashMarkContainerRightPadding: Spacing['xxxSmall']
-  errorIconsRightPadding: Spacing['small']
-  successIconRightPadding: Spacing['small']
-  labelRightMargin: Spacing['xxSmall']
-  popoverContentPadding: Spacing['xxSmall']
-  popoverContentBlockBorderWidth: Border['widthSmall']
-  popoverContentBlockTopMargin: Spacing['small']
-  popoverContentBlockBottomMargin: Spacing['small']
-  popoverFooterPadding: Spacing['xSmall']
-  popoverFooterTopBorderWidth: Border['widthSmall']
-  colorMixerButtonContainerLeftMargin: Spacing['xSmall']
 }
 
 export type ColorContrastTheme = {
+  width: string
+
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeightCondensed']
+  fontSize: Typography['fontSizeMedium']
+
   statusWrapperBottomMargin: Spacing['xxSmall']
   colorIndicatorRightMargin: Spacing['small']
   colorPreviewBottomMargin: Spacing['small']
   colorPreviewTopMargin: Spacing['xSmall']
   labelBottomMargin: Spacing['xxSmall']
+
   smallBorder: Border['widthSmall']
+
   successColor: Colors['shamrock']
   failureColor: Colors['crimson']
   pickedHexColor: Colors['ash']
@@ -442,34 +442,27 @@ export type ColorContrastTheme = {
 export type ColorMixerSliderTheme = {
   indicatorBorderColor: Colors['licorice']
 
+  smallBorder: Border['widthSmall']
+
+  stackAbove: Stacking['above']
+
   checkerboardBackgroundImage: string
   checkerboardBackgroundSize: string
   checkerboardBackgroundPosition: string
-  colorIndicatorBorderColor: string
-
-  indicatorBorderWidth: Border['widthSmall']
-  sliderBorderWidth: Border['widthSmall']
-  indicatorZIndex: Stacking['above']
-  disabledOverlayZIndex: Stacking['topmost']
 }
 
 export type ColorMixerPaletteTheme = {
+  smallBorder: Border['widthSmall']
+  mediumBorderRadius: Border['radiusMedium']
+
   indicatorBorderColor: Colors['licorice']
   whiteColor: Colors['white']
-  colorIndicatorBorderColor: string
-
-  indicatorBorderWidth: Border['widthSmall']
-  paletteBorderRadius: Border['radiusMedium']
-  paletteBorderWidth: Border['widthSmall']
-
-  disabledOverlayZIndex: Stacking['topmost']
 }
 
 export type ColorMixerRGBAInputTheme = {
-  labelFontWeight: Typography['fontWeightBold']
-  inputContainerTopMargin: Spacing['xSmall']
-  tgbInputTopMargin: Spacing['xSmall']
-  rgbaInputTopMargin: Spacing['medium']
+  mediumMargin: Spacing['medium']
+  xSmallMargin: Spacing['xSmall']
+  boldFontWeight: Typography['fontWeightBold']
 }
 
 export type ColorPresetTheme = {
@@ -490,11 +483,7 @@ export type ColorIndicatorTheme = {
   backgroundImage: string
   backgroundSize: string
   backgroundPosition: string
-  circleIndicatorSize: string
-  rectangleIndicatorSize: string
-  colorIndicatorBorderColor: string
-  rectangularIndicatorBorderRadius: Spacing['xxSmall']
-  rectangularIndicatorBorderWidth: Border['widthSmall']
+  size: string
 }
 
 export type DrawerLayoutContentTheme = {

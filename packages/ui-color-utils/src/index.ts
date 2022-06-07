@@ -28,10 +28,10 @@ export { lighten } from './lighten'
 export { contrast } from './contrast'
 export { isValid } from './isValid'
 export { color2hex } from './conversions'
-export {
-  colorToHex8,
-  colorToHsva,
-  colorToHsla,
-  colorToRGB
-} from './conversions'
+export { colorTohex8 } from './conversions'
+export { colorToHsva } from './conversions'
+export { colorToHsla } from './conversions'
+export { colorToRGB } from './conversions'
+export { hexToRgb } from './conversions'
+export { calcBlendedColor } from './calcBlendedColor'
 export type { RGBType, HSVType, HSLType, RGBAType } from './colorTypes'

@@ -35,6 +35,9 @@ import type { ColorContrastTheme } from '@instructure/shared-types'
  */
 const generateStyle = (componentTheme: ColorContrastTheme) => {
   const statusDescriptionStyle = (pass: boolean) => ({
+    label: pass
+      ? 'colorContrast__successDescription'
+      : 'colorContrast__failureDescription',
     flex: 1,
     color: pass ? componentTheme.successColor : componentTheme.failureColor
   })
@@ -42,45 +45,56 @@ const generateStyle = (componentTheme: ColorContrastTheme) => {
   return {
     colorContrast: {
       label: 'colorContrast',
-      width: '17rem',
+      width: componentTheme.width,
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
       lineHeight: componentTheme.lineHeight,
       fontSize: componentTheme.fontSize
     },
     statusWrapper: {
-      width: '17rem',
+      label: 'colorContrast__statusWrapper',
+      width: '100%',
       display: 'flex',
-      marginBottom: componentTheme.xxSmallSpacing
+      marginBottom: componentTheme.statusWrapperBottomMargin
     },
     successDescription: statusDescriptionStyle(true),
     failureDescription: statusDescriptionStyle(false),
     colorIndicator: {
-      marginRight: componentTheme.smallSpacing
+      marginRight: componentTheme.colorIndicatorRightMargin
     },
     statusIndicatorWrapper: {
+      label: 'colorContrast__statusIndicatorWrapper',
       flex: 1,
       display: 'flex',
       flexDirection: 'row-reverse'
     },
     colorIndicatorLabel: {
+      label: 'colorContrast__colorIndicatorLabel',
       wordBreak: 'break-all'
     },
     pickedColorHex: {
+      label: 'colorContrast__pickedColorHex',
       color: componentTheme.pickedHexColor
     },
     colorPreview: {
+      label: 'colorContrast__colorPreview',
       display: 'flex',
-      width: '17rem',
-      marginBottom: componentTheme.smallSpacing,
-      marginTop: componentTheme.xSmallSpacing
+      width: '100%',
+      marginBottom: componentTheme.colorPreviewBottomMargin,
+      marginTop: componentTheme.colorPreviewTopMargin
     },
     firstColorPreview: {
+      label: 'colorContrast__firstColorPreview',
       display: 'flex',
       flex: 1
     },
     secondColorPreview: {
+      label: 'colorContrast__secondColorPreview',
       display: 'flex'
+    },
+    label: {
+      label: 'colorContrast__label',
+      marginBottom: componentTheme.labelBottomMargin
     }
   }
 }

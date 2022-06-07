@@ -33,9 +33,9 @@ import type {
 
 type ColorIndicatorOwnProps = {
   /**
-   * Valid CSS color string. E.g.: #555, rgba(55,55,55,1)
+   * Valid CSS color string. E.g.: #555, rgba(55,55,55,1). It can accept empty strings
    */
-  color: string
+  color?: string
   /**
    * Provides a reference to the `ColorIndicator`'s underlying html element.
    */
@@ -48,13 +48,12 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorIndicatorProps = ColorIndicatorOwnProps &
   WithStyleProps<null, ColorIndicatorStyle> &
-  OtherHTMLAttributes<ColorIndicatorOwnProps> &
-  ToProp
+  OtherHTMLAttributes<ColorIndicatorOwnProps>
 
 type ColorIndicatorStyle = ComponentStyle<'colorIndicator'>
 
 const propTypes: PropValidators<PropKeys> = {
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   elementRef: PropTypes.func
 }
 

@@ -40,7 +40,8 @@ const generateComponentTheme = (theme: Theme): ColorIndicatorTheme => {
     linear-gradient(45deg, transparent 75%, ${colors.tiara} 75%),
     linear-gradient(-45deg, transparent 75%, ${colors.tiara} 75%)`,
     backgroundSize: '.5rem .5rem',
-    backgroundPosition: '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px'
+    backgroundPosition: '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px',
+    size: '1.5rem'
   }
 
   return {

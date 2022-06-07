@@ -53,13 +53,7 @@ type RGBAInputProps = RGBAInputOwnProps &
   OtherHTMLAttributes<RGBAInputOwnProps>
 
 type RGBAInputStyle = ComponentStyle<
-  | 'RGBAInput'
-  | 'label'
-  | 'inputContainer'
-  | 'rInput'
-  | 'gInput'
-  | 'bInput'
-  | 'aInput'
+  'RGBAInput' | 'label' | 'inputContainer' | 'rgbInput' | 'aInput'
 >
 const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,

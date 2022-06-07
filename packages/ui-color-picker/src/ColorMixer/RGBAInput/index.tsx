@@ -85,7 +85,7 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
       <div css={styles?.RGBAInput}>
         {label && <div css={styles?.label}>{label}</div>}
         <div css={styles?.inputContainer}>
-          <span css={styles?.rInput}>
+          <span css={styles?.rgbInput}>
             <TextInput
               disabled={disabled}
               value={`${this.state.value.r}`}
@@ -93,7 +93,7 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
               renderLabel=""
             />
           </span>
-          <span css={styles?.gInput}>
+          <span css={styles?.rgbInput}>
             <TextInput
               disabled={disabled}
               value={`${this.state.value.g}`}
@@ -101,7 +101,7 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
               renderLabel=""
             />
           </span>
-          <span css={styles?.bInput}>
+          <span css={styles?.rgbInput}>
             <TextInput
               disabled={disabled}
               value={`${this.state.value.b}`}

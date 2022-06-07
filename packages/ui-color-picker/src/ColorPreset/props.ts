@@ -39,6 +39,10 @@ type MessageType = Array<{
 
 type ColorPresetOwnProps = {
   /**
+   * screenReaderLabel for the add new preset button
+   */
+  addNewPresetButtonScreenReaderLabel: string
+  /**
    * Array of HEX strings which are the preset colors. Supports 8 character HEX (with alpha)
    */
   colors: Array<string>
@@ -119,6 +123,7 @@ type ColorPresetStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
+  addNewPresetButtonScreenReaderLabel: PropTypes.string,
   colors: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
   elementRef: PropTypes.func,

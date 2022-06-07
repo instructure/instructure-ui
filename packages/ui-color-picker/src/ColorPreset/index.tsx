@@ -34,14 +34,18 @@ import { Tooltip } from '@instructure/ui-tooltip'
 import { Popover } from '@instructure/ui-popover'
 import { Text } from '@instructure/ui-text'
 import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
-import { colorTohex8, hexToRgb, isValid } from '@instructure/ui-color-utils'
+import {
+  colorTohex8,
+  hexToRgb,
+  isValid,
+  calcBlendedColor
+} from '@instructure/ui-color-utils'
 import { colorIndicatorBorderColor } from '../ColorIndicator/theme'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
 import { propTypes, allowedProps } from './props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { RGBAType } from '../ColorMixer/props'
 import ColorMixer from '../ColorMixer'
 import ColorContrast from '../ColorContrast'
 /**
@@ -66,9 +70,9 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
   static defaultProps = {
     disabled: false
   }
-  ref: Element | null = null
+  ref: HTMLDivElement | null = null
 
-  handleRef = (el: Element | null) => {
+  handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -84,20 +88,6 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
 
   componentDidUpdate() {
     this.props.makeStyles?.()
-  }
-
-  calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
-    // as decided by design
-    const c2Alpha = c2.a * 0.4
-    const c1Alpha = 1 - c2Alpha
-    const alpha = 1 - c1Alpha * (1 - c1Alpha)
-
-    return `rgba(
-      ${(c2.r * c2Alpha) / alpha + (c1.r * c1Alpha * (1 - c2Alpha)) / alpha},
-      ${(c2.g * c2Alpha) / alpha + (c1.g * c1Alpha * (1 - c2Alpha)) / alpha},
-      ${(c2.b * c2Alpha) / alpha + (c1.b * c1Alpha * (1 - c2Alpha)) / alpha},
-      ${c2.a}
-      )`
   }
 
   onMenuItemSelected =
@@ -122,7 +112,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         <div css={this.props?.styles?.addNewPresetButton}>
           <IconButton
             disabled={this.props.disabled}
-            screenReaderLabel="Add User"
+            screenReaderLabel={this.props.addNewPresetButtonScreenReaderLabel}
           >
             <IconAddLine />
           </IconButton>
@@ -230,7 +220,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         <div
           css={this.props?.styles?.presetRect}
           style={{
-            borderColor: this.calcBlendedColor(
+            borderColor: calcBlendedColor(
               hexToRgb(colorIndicatorBorderColor),
               hexToRgb(isValid(color) ? color : '#fff')
             ),

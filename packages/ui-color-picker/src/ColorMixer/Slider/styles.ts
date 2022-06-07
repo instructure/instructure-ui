@@ -24,7 +24,7 @@
 
 import { colorIndicatorBorderColor } from '../../ColorIndicator/theme'
 import type { SliderStyle, SliderProps } from './props'
-import type { SliderTheme } from '@instructure/shared-types'
+import type { ColorMixerSliderTheme } from '@instructure/shared-types'
 
 /**
  * ---
@@ -37,7 +37,7 @@ import type { SliderTheme } from '@instructure/shared-types'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: SliderTheme,
+  componentTheme: ColorMixerSliderTheme,
   props: SliderProps,
   state: any
 ): SliderStyle => {
@@ -60,6 +60,7 @@ const generateStyle = (
       position: 'relative'
     },
     indicator: {
+      label: 'colorMixerSlider__indicator',
       width: `${props.indicatorRadius / 8}rem`,
       height: `${props.indicatorRadius / 8}rem`,
       borderRadius: `${props.indicatorRadius / 8}rem`,
@@ -78,6 +79,7 @@ const generateStyle = (
     },
 
     sliderBackground: {
+      label: 'colorMixerSlider__sliderBackground',
       borderRadius: `${props.height / 16}rem`,
       width: `${props.width / 16}rem`,
       height: `${props.height / 16}rem`,
@@ -85,6 +87,7 @@ const generateStyle = (
       ...sliderBackground
     },
     slider: {
+      label: 'colorMixerSlider__slider',
       width: `${props.width / 16}rem`,
       height: `${props.height / 16}rem`,
       background: props.isColorSlider

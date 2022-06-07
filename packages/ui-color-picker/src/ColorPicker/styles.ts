@@ -65,6 +65,7 @@ const generateStyle = (
       display: 'flex'
     },
     colorCircle: {
+      label: 'colorPicker__colorCircle',
       backgroundColor: `#${hexCode}`,
       width: '1.5rem',
       height: '1.5rem',
@@ -75,10 +76,13 @@ const generateStyle = (
       ...(!isValid(hexCode) ? checkerBoard : {})
     },
     simpleColorContainer: {
+      label: 'colorPicker__simpleColorContainer',
       display: 'flex',
-      paddingLeft: componentTheme.xSmallSpacing
+      paddingLeft: componentTheme.xSmallSpacing,
+      alignItems: 'center'
     },
     hashMarkContainer: {
+      label: 'colorPicker__hashMarkContainer',
       color: hashMarkColor,
       display: 'inline-block',
       fontSize: '1rem',
@@ -91,28 +95,34 @@ const generateStyle = (
         : {})
     },
     errorIcons: {
+      label: 'colorPicker__errorIcons',
       display: 'flex',
       paddingRight: componentTheme.smallSpacing,
       color: checkContrast?.isStrict ? errorIconColor : warningIconColor
     },
     successIcon: {
+      label: 'colorPicker__successIcon',
       display: 'flex',
       paddingRight: componentTheme.smallSpacing,
       color: successIconColor
     },
     label: {
+      label: 'colorPicker__label',
       marginRight: componentTheme.xxSmallSpacing
     },
     popoverContent: {
+      label: 'colorPicker__popoverContent',
       padding: componentTheme.xxSmallSpacing
     },
     popoverContentBlock: {
+      label: 'colorPicker__popoverContentBlock',
       borderTop: 'solid',
       borderWidth: componentTheme.smallBorder,
       borderColor: componentTheme.popoverSeparatorColor,
       margin: `${componentTheme.smallSpacing} 0 ${componentTheme.smallSpacing} 0`
     },
     popoverFooter: {
+      label: 'colorPicker__popoverFooter',
       backgroundColor: componentTheme.popoverFooterColor,
       display: 'flex',
       flexDirection: 'row-reverse',
@@ -121,10 +131,12 @@ const generateStyle = (
       borderTop: `solid ${componentTheme.smallBorder}`
     },
     colorMixerButtonContainer: {
+      label: 'colorPicker__colorMixerButtonContainer',
       alignSelf: 'flex-end',
       marginLeft: componentTheme.xSmallSpacing
     },
     popoverContentContainer: {
+      label: 'colorPicker__popoverContentContainer',
       maxHeight: '80vh',
       overflow: 'scroll'
     }

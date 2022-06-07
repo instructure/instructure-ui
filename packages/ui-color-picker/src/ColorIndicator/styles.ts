@@ -24,6 +24,13 @@
 
 import type { ColorIndicatorProps, ColorIndicatorStyle } from './props'
 import { ColorIndicatorTheme } from '@instructure/shared-types'
+import {
+  hexToRgb,
+  isValid,
+  calcBlendedColor
+} from '@instructure/ui-color-utils'
+import type { RGBAType } from '../ColorMixer/props'
+import { colorIndicatorBorderColor } from './theme'
 
 /**
  * ---
@@ -44,16 +51,20 @@ const generateStyle = (
   return {
     colorIndicator: {
       label: 'colorIndicator',
-      width: '1.5rem',
-      height: '1.5rem',
-      borderRadius: '1.5rem',
+      width: componentTheme.size,
+      height: componentTheme.size,
+      borderRadius: componentTheme.size,
       boxSizing: 'border-box',
       borderWidth: componentTheme.borderWidth,
       boxShadow: `inset 0 0 0 1.5rem ${color || 'none'}`,
       borderStyle: 'solid',
       backgroundImage: componentTheme.backgroundImage,
       backgroundSize: componentTheme.backgroundSize,
-      backgroundPosition: componentTheme.backgroundPosition
+      backgroundPosition: componentTheme.backgroundPosition,
+      borderColor: calcBlendedColor(
+        hexToRgb(colorIndicatorBorderColor),
+        hexToRgb(isValid(color!) ? color! : '#fff')
+      )
     }
   }
 }

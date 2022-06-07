@@ -28,20 +28,12 @@ import { Component } from 'react'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
-import { hexToRgb, isValid } from '@instructure/ui-color-utils'
 
 import generateStyle from './styles'
-import generateComponentTheme, { colorIndicatorBorderColor } from './theme'
+import generateComponentTheme from './theme'
 
 import type { ColorIndicatorProps } from './props'
 import { propTypes, allowedProps } from './props'
-
-type RGBAType = {
-  r: number
-  g: number
-  b: number
-  a: number
-}
 
 /**
 ---
@@ -56,7 +48,10 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
   static allowedProps = allowedProps
   static readonly componentId = 'ColorIndicator'
 
-  ref: Element | null = null
+  static defaultProps = {
+    color: ''
+  }
+  ref: HTMLDivElement | null = null
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -66,7 +61,7 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
     this.props.makeStyles?.()
   }
 
-  handleRef = (el: Element | null) => {
+  handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -76,18 +71,6 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
     }
   }
 
-  calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
-    // 0.4 as decided by design
-    const c2Alpha = c2.a * 0.4
-    const c1Alpha = 1 - c2Alpha
-    const alpha = 1 - c1Alpha * (1 - c1Alpha)
-
-    return `rgba(
-      ${(c2.r * c2Alpha) / alpha + (c1.r * c1Alpha * (1 - c2Alpha)) / alpha},
-      ${(c2.g * c2Alpha) / alpha + (c1.g * c1Alpha * (1 - c2Alpha)) / alpha},
-      ${(c2.b * c2Alpha) / alpha + (c1.b * c1Alpha * (1 - c2Alpha)) / alpha},
-      ${c2.a})`
-  }
   render() {
     const { color, elementRef, ...props } = this.props
 
@@ -96,12 +79,6 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
         {...passthroughProps(props)}
         ref={elementRef}
         css={this.props.styles?.colorIndicator}
-        style={{
-          borderColor: this.calcBlendedColor(
-            hexToRgb(colorIndicatorBorderColor),
-            hexToRgb(isValid(color) ? color : '#fff')
-          )
-        }}
       />
     )
   }

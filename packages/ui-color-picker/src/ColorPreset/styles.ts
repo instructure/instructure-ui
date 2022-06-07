@@ -42,14 +42,17 @@ const generateStyle = (componentTheme: ColorPresetTheme) => {
       width: '17rem'
     },
     addNewPresetButton: {
+      label: 'colorPreset__addNewPresetButton',
       width: '2.375rem',
       height: '2.375rem',
       margin: componentTheme.xxSmallSpacing
     },
     presetRect: {
+      label: 'colorPreset__presetRect',
       width: '100%',
       height: '100%',
       borderRadius: componentTheme.xxSmallSpacing,
+      borderWidth: componentTheme.smallBorder,
       boxSizing: 'border-box',
       borderStyle: 'solid',
       backgroundImage: componentTheme.checkerboardBackgroundImage,
@@ -57,10 +60,12 @@ const generateStyle = (componentTheme: ColorPresetTheme) => {
       backgroundPosition: componentTheme.checkerboardBackgroundPosition
     },
     selectedIndicator: {
+      label: 'colorPreset__selectedIndicator',
       width: '1.25rem',
       height: '1.25rem',
       borderStyle: 'solid',
       borderColor: componentTheme.selectedIndicatorBorderColor,
+      borderWidth: componentTheme.smallBorder,
       borderRadius: '1.25rem',
       boxSizing: 'border-box',
       position: 'relative',
@@ -68,26 +73,36 @@ const generateStyle = (componentTheme: ColorPresetTheme) => {
       bottom: '.5rem',
       backgroundColor: componentTheme.selectedIndicatorBackgroundColor
     },
-    popoverContent: { padding: componentTheme.smallSpacing },
+    popoverContent: {
+      label: 'colorPreset__popoverContent',
+      padding: componentTheme.smallSpacing
+    },
     popoverDivider: {
+      label: 'colorPreset__popoverDivider',
       borderTop: 'solid',
       borderWidth: componentTheme.smallBorder,
       borderColor: componentTheme.popoverDividerColor,
       margin: `${componentTheme.smallSpacing} 0 ${componentTheme.smallSpacing} 0`
     },
     popoverContentBlock: {
+      label: 'colorPreset__popoverContentBlock',
       borderTop: 'solid',
       borderWidth: componentTheme.smallBorder,
       borderColor: componentTheme.popoverDividerColor,
       margin: `${componentTheme.smallSpacing} 0 ${componentTheme.smallSpacing} 0`
     },
     popoverFooter: {
+      label: 'colorPreset__popoverFooter',
       backgroundColor: componentTheme.popoverFooterColor,
       display: 'flex',
       flexDirection: 'row-reverse',
       padding: componentTheme.smallSpacing
     },
-    label: { width: '100%', margin: componentTheme.xxSmallSpacing }
+    label: {
+      label: 'colorPreset__label',
+      width: '100%',
+      margin: componentTheme.xxSmallSpacing
+    }
   }
 }
 

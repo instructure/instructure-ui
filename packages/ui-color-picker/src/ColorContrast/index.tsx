@@ -60,7 +60,7 @@ class ColorContrast extends Component<ColorContrastProps> {
   }
   ref: HTMLDivElement | null = null
 
-  handleRef = (el: Element | null) => {
+  handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -112,7 +112,6 @@ class ColorContrast extends Component<ColorContrastProps> {
     </>
   )
   calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
-    // as decided by design
     const alpha = 1 - (1 - c1.a) * (1 - c2.a)
     return {
       r: (c2.r * c2.a) / alpha + (c1.r * c1.a * (1 - c2.a)) / alpha,
@@ -159,12 +158,12 @@ class ColorContrast extends Component<ColorContrastProps> {
         ref={this.handleRef}
         css={styles?.colorContrast}
       >
-        <Text weight="bold" as="div">
-          {label}
-        </Text>
-        <Text weight="bold" size="x-large">
-          {contrast}:1
-        </Text>
+        <div css={this.props.styles?.label}>
+          <Text weight="bold" as="div">
+            {label}
+          </Text>
+        </div>
+        <Text size="x-large">{contrast}:1</Text>
         {!withoutColorPreview && (
           <div css={this.props.styles?.colorPreview}>
             <div css={this.props.styles?.firstColorPreview}>
