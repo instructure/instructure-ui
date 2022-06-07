@@ -33,7 +33,7 @@ const calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
       ${(c2.r * c2Alpha) / alpha + (c1.r * c1Alpha * (1 - c2Alpha)) / alpha},
       ${(c2.g * c2Alpha) / alpha + (c1.g * c1Alpha * (1 - c2Alpha)) / alpha},
       ${(c2.b * c2Alpha) / alpha + (c1.b * c1Alpha * (1 - c2Alpha)) / alpha},
-      ${c2.a})`
+      ${c2.a < 0.6 ? 0.6 : c2.a})`
 }
 
 export { calcBlendedColor }

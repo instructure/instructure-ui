@@ -77,7 +77,7 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
     return (
       <div
         {...passthroughProps(props)}
-        ref={elementRef}
+        ref={this.handleRef}
         css={this.props.styles?.colorIndicator}
       />
     )

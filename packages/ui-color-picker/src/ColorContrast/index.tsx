@@ -38,7 +38,7 @@ import generateComponentTheme from './theme'
 import {
   contrast as getContrast,
   colorToRGB,
-  colorTohex8
+  colorToHex8
 } from '@instructure/ui-color-utils'
 import { Pill } from '@instructure/ui-pill'
 
@@ -132,7 +132,7 @@ class ColorContrast extends Component<ColorContrastProps> {
     )
     const c2OnC1OnWhite = this.calcBlendedColor(c1OnWhite, c2RGBA)
 
-    return getContrast(colorTohex8(c1OnWhite), colorTohex8(c2OnC1OnWhite), 2)
+    return getContrast(colorToHex8(c1OnWhite), colorToHex8(c2OnC1OnWhite), 2)
   }
   render() {
     const {

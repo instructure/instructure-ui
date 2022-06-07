@@ -23,7 +23,6 @@
  */
 
 import type { ColorPickerTheme } from '@instructure/shared-types'
-import { colorIndicatorBorderColor } from '../ColorIndicator/theme'
 
 import { isValid } from '@instructure/ui-color-utils/src/isValid'
 import type {
@@ -70,7 +69,7 @@ const generateStyle = (
       width: '1.5rem',
       height: '1.5rem',
       margin: 'auto',
-      border: `${componentTheme.smallBorder} solid ${colorIndicatorBorderColor}`,
+      border: `${componentTheme.smallBorder} solid ${componentTheme.colorIndicatorBorderColor}`,
       borderRadius: '1.5rem',
       display: 'inline-block',
       ...(!isValid(hexCode) ? checkerBoard : {})

@@ -27,15 +27,15 @@ import { Component } from 'react'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
-import { Menu } from '@instructure/ui-menu'
 import { IconButton, Button } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { Popover } from '@instructure/ui-popover'
 import { Text } from '@instructure/ui-text'
+import { Drilldown } from '@instructure/ui-drilldown'
 import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
 import {
-  colorTohex8,
+  colorToHex8,
   hexToRgb,
   isValid,
   calcBlendedColor
@@ -92,14 +92,11 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
 
   onMenuItemSelected =
     (color: string) =>
-    (
-      _e: React.MouseEvent<Element, MouseEvent>,
-      action: string | number | (string | number | undefined)[] | undefined
-    ) => {
-      if (action === 'select') {
+    (_e: React.MouseEvent<Element, MouseEvent>, args: { value: any }) => {
+      if (args.value === 'select') {
         this.props.onSelect(color)
       }
-      if (action === 'remove') {
+      if (args.value === 'remove') {
         this.props?.colorMixerSettings?.onPresetChange(
           this.props.colors.filter((clr) => clr !== color)
         )
@@ -136,7 +133,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     >
       <div css={this.props.styles?.popoverContent}>
         <ColorMixer
-          value={colorTohex8(this.state.newColor)}
+          value={colorToHex8(this.state.newColor)}
           onChange={(newColor: string) =>
             this.setState({ newColor: hexToRgb(newColor) })
           }
@@ -148,7 +145,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
               firstColor={
                 this.props.colorMixerSettings.colorContrast.firstColor
               }
-              secondColor={colorTohex8(this.state.newColor)}
+              secondColor={colorToHex8(this.state.newColor)}
               label={this.props.colorMixerSettings.colorContrast.label}
               successLabel={
                 this.props.colorMixerSettings.colorContrast.successLabel
@@ -179,7 +176,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         <Button
           onClick={() => {
             this.props?.colorMixerSettings?.onPresetChange([
-              colorTohex8(this.state.newColor),
+              colorToHex8(this.state.newColor),
               ...this.props.colors
             ])
             this.setState({ openAddNew: false })
@@ -240,18 +237,25 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     </Tooltip>
   )
   renderSettingsMenu = (color: string, index: number) => (
-    <Menu
-      key={`color-preset-color-${index}`}
-      placement="bottom"
-      trigger={this.renderColorIndicator(color)}
-      mountNode={() => document.getElementById('main')}
+    <Drilldown
       onSelect={this.onMenuItemSelected(color)}
+      trigger={this.renderColorIndicator(color)}
+      key={`color-preset-color-${index}`}
+      rootPageId="root"
+      width="10rem"
+      offsetY="15rem"
     >
-      <Menu.Group label={color} />
-      <Menu.Item value="select">Select</Menu.Item>
-      <Menu.Item value="remove">Remove</Menu.Item>
-    </Menu>
+      <Drilldown.Page withoutHeaderSeparator id="root" renderTitle={color}>
+        <Drilldown.Option value="select" id="select">
+          Select
+        </Drilldown.Option>
+        <Drilldown.Option value="remove" id="remove">
+          Remove
+        </Drilldown.Option>
+      </Drilldown.Page>
+    </Drilldown>
   )
+
   render() {
     const {
       disabled,

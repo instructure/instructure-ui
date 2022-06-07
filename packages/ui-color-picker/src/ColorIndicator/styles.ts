@@ -29,8 +29,6 @@ import {
   isValid,
   calcBlendedColor
 } from '@instructure/ui-color-utils'
-import type { RGBAType } from '../ColorMixer/props'
-import { colorIndicatorBorderColor } from './theme'
 
 /**
  * ---
@@ -62,7 +60,7 @@ const generateStyle = (
       backgroundSize: componentTheme.backgroundSize,
       backgroundPosition: componentTheme.backgroundPosition,
       borderColor: calcBlendedColor(
-        hexToRgb(colorIndicatorBorderColor),
+        hexToRgb(componentTheme.colorIndicatorBorderColor),
         hexToRgb(isValid(color!) ? color! : '#fff')
       )
     }

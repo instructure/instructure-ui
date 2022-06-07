@@ -28,7 +28,6 @@ import type {
   ColorPaletteState
 } from './props'
 import type { ColorMixerPaletteTheme } from '@instructure/shared-types'
-import { colorIndicatorBorderColor } from '../../ColorIndicator/theme'
 import { px } from '@instructure/ui-utils'
 
 /**
@@ -75,7 +74,7 @@ const generateStyle = (
       borderStyle: 'solid',
       borderWidth: componentTheme.smallBorder,
       boxSizing: 'border-box',
-      borderColor: colorIndicatorBorderColor,
+      borderColor: componentTheme.colorIndicatorBorderColor,
       background: `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)),
       linear-gradient(to right, white, hsl(${props.hue},100%,50%))`
     }

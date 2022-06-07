@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import { colorIndicatorBorderColor } from '../../ColorIndicator/theme'
 import type { SliderStyle, SliderProps } from './props'
 import type { ColorMixerSliderTheme } from '@instructure/shared-types'
 
@@ -101,7 +100,7 @@ const generateStyle = (
       boxSizing: 'border-box',
 
       borderStyle: 'solid',
-      borderColor: colorIndicatorBorderColor,
+      borderColor: componentTheme.colorIndicatorBorderColor,
       borderWidth: componentTheme.smallBorder
     }
   }

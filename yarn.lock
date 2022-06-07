@@ -2730,9 +2730,9 @@ __metadata:
     "@instructure/ui-babel-preset": 8.24.5
     "@instructure/ui-buttons": 8.24.5
     "@instructure/ui-color-utils": 8.24.5
+    "@instructure/ui-drilldown": 8.24.5
     "@instructure/ui-form-field": 8.24.5
     "@instructure/ui-icons": 8.24.5
-    "@instructure/ui-menu": 8.24.5
     "@instructure/ui-pill": 8.24.5
     "@instructure/ui-popover": 8.24.5
     "@instructure/ui-react-utils": 8.24.5

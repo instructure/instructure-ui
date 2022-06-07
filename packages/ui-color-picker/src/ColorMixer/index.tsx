@@ -33,7 +33,7 @@ import type { ColorMixerProps, ColorMixerState, HSVType } from './props'
 import { propTypes, allowedProps } from './props'
 import generateStyle from './styles'
 import {
-  colorTohex8,
+  colorToHex8,
   colorToHsva,
   colorToRGB
 } from '@instructure/ui-color-utils'
@@ -101,11 +101,11 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       prevState.v !== v ||
       prevState.a !== a
     ) {
-      this.props.onChange(colorTohex8({ h, s, v, a }))
+      this.props.onChange(colorToHex8({ h, s, v, a }))
     }
     if (
       prevProps.value !== this.props.value &&
-      colorTohex8({ h, s, v, a }) !== this.props.value
+      colorToHex8({ h, s, v, a }) !== this.props.value
     ) {
       this.setState({
         ...colorToHsva(this.props.value)
@@ -131,7 +131,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
         ref={elementRef}
         css={styles?.colorMixer}
       >
-        <span aria-label={`${colorTohex8({ h, s, v, a })}`} aria-live="polite">
+        <span aria-label={`${colorToHex8({ h, s, v, a })}`} aria-live="polite">
           {disabled && <div css={styles?.disabledOverlay} />}
           <ColorPalette
             disabled={disabled}
@@ -155,7 +155,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
             height={this.sliderHeight}
             indicatorRadius={this.sliderIndicatorRadius}
             value={h}
-            color={colorTohex8({ h, s, v, a })}
+            color={colorToHex8({ h, s, v, a })}
             onChange={(hue: number) => {
               this.setState({ h: hue })
             }}
@@ -166,7 +166,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
               width={this.width}
               height={this.sliderHeight}
               indicatorRadius={this.sliderIndicatorRadius}
-              color={colorTohex8({ h, s, v })}
+              color={colorToHex8({ h, s, v })}
               value={a}
               onChange={(opacity) => this.setState({ a: opacity / 100 })}
             ></Slider>

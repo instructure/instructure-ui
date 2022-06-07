@@ -30,7 +30,7 @@ import { TextInput } from '@instructure/ui-text-input'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { Button, IconButton } from '@instructure/ui-buttons'
 import {
-  colorTohex8,
+  colorToHex8,
   isValid,
   contrast as getContrast
 } from '@instructure/ui-color-utils'
@@ -428,7 +428,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           <ColorMixer
             value={`#${this.state.mixedColor}`}
             onChange={(newColor: string) =>
-              this.setState({ mixedColor: colorTohex8(newColor).slice(1) })
+              this.setState({ mixedColor: colorToHex8(newColor).slice(1) })
             }
             withAlpha={this.props.colorMixerSettings.colorMixer.withAlpha}
           />

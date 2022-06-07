@@ -83,6 +83,7 @@ class Example extends React.Component {
           colors={this.state.colors}
           selected={this.state.selected}
           onSelect={(selected) => this.setState({ selected })}
+          addNewPresetButtonScreenReaderLabel='Add new color'
           colorMixerSettings={{
             onPresetChange:(colors) => this.setState({ colors }),
             colorContrast:{
@@ -95,7 +96,7 @@ class Example extends React.Component {
                 largeTextLabel:"Large text",
                 graphicsTextLabel:"Graphics text",
                 firstColorLabel:"Background",
-                secondColorLabel:"Foreground"
+                secondColorLabel:"Foreground",
             }
           }}
         />

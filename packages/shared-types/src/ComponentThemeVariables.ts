@@ -416,6 +416,7 @@ export type ColorPickerTheme = {
   checkerboardBackgroundImage: string
   checkerboardBackgroundSize: string
   checkerboardBackgroundPosition: string
+  colorIndicatorBorderColor: string
 }
 
 export type ColorContrastTheme = {
@@ -449,6 +450,7 @@ export type ColorMixerSliderTheme = {
   checkerboardBackgroundImage: string
   checkerboardBackgroundSize: string
   checkerboardBackgroundPosition: string
+  colorIndicatorBorderColor: string
 }
 
 export type ColorMixerPaletteTheme = {
@@ -457,6 +459,7 @@ export type ColorMixerPaletteTheme = {
 
   indicatorBorderColor: Colors['licorice']
   whiteColor: Colors['white']
+  colorIndicatorBorderColor: string
 }
 
 export type ColorMixerRGBAInputTheme = {
@@ -484,6 +487,7 @@ export type ColorIndicatorTheme = {
   backgroundSize: string
   backgroundPosition: string
   size: string
+  colorIndicatorBorderColor: string
 }
 
 export type DrawerLayoutContentTheme = {

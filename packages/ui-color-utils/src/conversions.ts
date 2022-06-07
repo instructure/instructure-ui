@@ -39,7 +39,7 @@ import type { ColorInputWithoutInstance } from 'tinycolor2'
  * @returns {String} a hex string like `#FF0000`
  * @module color2hex
  */
-const color2hex = (rgb: ColorInputWithoutInstance): string => {
+const colorToHex = (rgb: ColorInputWithoutInstance): string => {
   return Color(rgb).toHexString().toUpperCase()
 }
 
@@ -47,9 +47,9 @@ const color2hex = (rgb: ColorInputWithoutInstance): string => {
  * Transforms any `TinyColor` to 8 length HEX (alpha included)
  * @param {ColorInputWithoutInstance} color representation from `TinyColor`
  * @returns {String} An 8 length hex string like `#FF0000FF`
- * @module colorTohex8
+ * @module colorToHex8
  */
-const colorTohex8 = (color: ColorInputWithoutInstance): string => {
+const colorToHex8 = (color: ColorInputWithoutInstance): string => {
   return Color(color).toHex8String().toUpperCase()
 }
 
@@ -91,10 +91,15 @@ const colorToHsla = (
 }
 
 export {
-  color2hex,
-  colorTohex8,
+  colorToHex,
+  colorToHex8,
   colorToHsva,
   colorToHsla,
   colorToRGB,
-  colorToRGB as hexToRgb
+  //these are needed for backward compatibility
+  //TODO deprecate
+  colorToRGB as hexToRgb,
+  //these are needed for backward compatibility
+  //TODO deprecate
+  colorToHex as color2hex
 }
