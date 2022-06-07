@@ -64,8 +64,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     dateFormat: 'LL' // Localized date with full month, e.g. "August 6, 2014"
   } as const
 
-  context!: React.ContextType<typeof ApplyLocaleContext>
-
+  declare context: React.ContextType<typeof ApplyLocaleContext>
   static contextType = ApplyLocaleContext
 
   ref: Element | null = null // This is used by Tooltip for positioning

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Component, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import { mount, expect, stub } from '@instructure/ui-test-utils'
 import { ComponentIdentifier } from '../ComponentIdentifier'
@@ -32,7 +32,7 @@ describe('ComponentIdentifier', async () => {
     static displayName = 'Trigger'
   }
 
-  class App extends Component {
+  class App extends Component<{ children: ReactNode }> {
     static propTypes = {
       children: PropTypes.node
     }

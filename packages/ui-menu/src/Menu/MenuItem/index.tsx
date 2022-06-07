@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import keycode from 'keycode'
 
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
@@ -64,6 +64,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
     disabled: false
   } as const
 
+  declare context: React.ContextType<typeof MenuContext>
   static contextType = MenuContext
 
   constructor(props: MenuItemProps) {

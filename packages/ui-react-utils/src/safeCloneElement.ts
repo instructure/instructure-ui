@@ -38,7 +38,7 @@ type GetProps<E extends ReactElement = ReactElement> = E extends
   | FunctionComponentElement<infer P>
   | ComponentElement<infer P, any>
   | DOMElement<infer P, any>
-  ? P & { ref?: E['ref'] }
+  ? P & { ref?: any }
   : Record<string, any> & { ref?: any }
 
 /**

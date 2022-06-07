@@ -54,7 +54,7 @@ function makeThemeVars<P extends string, V extends Partial<ThemeVarGroup>>(
 ) {
   const themeVars: Record<string, unknown> = {}
   ;(Object.keys(vars) as Array<keyof V>).forEach((variable) => {
-    themeVars[camelize(`${prefix}-${variable}`)] = vars[variable]
+    themeVars[camelize(`${prefix}-${String(variable)}`)] = vars[variable]
   })
   return themeVars as PrefixedThemeVars<P, V>
 }

@@ -28,7 +28,9 @@ import { ApplyLocale } from '../index'
 import { ApplyLocaleContext } from '../ApplyLocaleContext'
 
 class LocalizableComponent extends React.Component {
+  declare context: React.ContextType<typeof ApplyLocaleContext>
   static contextType = ApplyLocaleContext
+
   render() {
     return (
       <div>
