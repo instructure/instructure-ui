@@ -32,6 +32,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 // see https://github.com/microsoft/TypeScript/issues/4881
 export type BidirectionalProps = {
   dir?: 'ltr' | 'rtl'
+  children?: React.ReactNode
 }
 
 type BidirectionalInternalProps = {

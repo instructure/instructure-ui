@@ -78,7 +78,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     constrain: 'window',
     renderEmptyOption: '---'
   }
-
+  declare context: React.ContextType<typeof ApplyLocaleContext>
   static contextType = ApplyLocaleContext
 
   ref: Select | null = null

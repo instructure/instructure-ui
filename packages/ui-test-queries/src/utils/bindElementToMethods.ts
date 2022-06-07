@@ -49,7 +49,9 @@ export function bindElementToMethods<K extends Record<string, T>, T>(
         return bound
       } else {
         throw new Error(
-          `[ui-test-queries] cannot bind to a non-function of type ${typeof fn} ${key}`
+          `[ui-test-queries] cannot bind to a non-function of type ${typeof fn} ${String(
+            key
+          )}`
         )
       }
     },

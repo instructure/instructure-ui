@@ -29,5 +29,5 @@ export { optionsItemThemeGenerator } from './Options/Item/theme'
 export { optionsSeparatorThemeGenerator } from './Options/Separator/theme'
 
 export type { OptionsProps } from './Options/props'
-export type { OptionsItemProps } from './Options/Item/props'
+export type { OptionsItemProps, ItemProps } from './Options/Item/props'
 export type { OptionsSeparatorProps } from './Options/Separator/props'

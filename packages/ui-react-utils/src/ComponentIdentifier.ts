@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component, ComponentType, ReactElement, ReactNode } from 'react'
+import React, { Component, ComponentType, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import { matchComponentTypes } from './matchComponentTypes'
@@ -71,7 +71,9 @@ Abstract component identifier. Helpful for picking out a specific child.
   undefined,
   'This component will be removed in InstUI 9.0 since its not used.'
 )
-class ComponentIdentifier<P> extends Component<P> {
+class ComponentIdentifier<
+  P extends { children: ReactNode }
+> extends Component<P> {
   static propTypes = {
     children: PropTypes.node
   }
@@ -95,7 +97,7 @@ class ComponentIdentifier<P> extends Component<P> {
   render() {
     const { children, ...props } = this.props
 
-    return ensureSingleChild(children as ReactElement, props)
+    return ensureSingleChild(children, props)
   }
 }
 

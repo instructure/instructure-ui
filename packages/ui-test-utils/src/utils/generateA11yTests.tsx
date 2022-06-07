@@ -63,7 +63,7 @@ export function generateA11yTests<Props>(
   describe(`${Component.displayName} should meet accessibility standards`, async () => {
     sections.forEach(({ pages, propName, propValue }, i) => {
       const description = propName
-        ? `rendered with prop '${propName}' = '${propValue}'`
+        ? `rendered with prop '${String(propName)}' = '${propValue}'`
         : 'rendered'
       describe(`${description}`, async () => {
         let rendered = 0

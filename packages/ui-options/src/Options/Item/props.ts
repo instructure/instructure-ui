@@ -146,5 +146,5 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { OptionsItemProps, OptionsItemStyle }
+export type { OptionsItemProps, OptionsItemStyle, ItemProps }
 export { propTypes, allowedProps }

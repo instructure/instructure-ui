@@ -52,7 +52,8 @@ import type { ViewProps } from '@instructure/ui-view'
 import type { TextInputProps } from '@instructure/ui-text-input'
 import type {
   OptionsItemProps,
-  OptionsSeparatorProps
+  OptionsSeparatorProps,
+  ItemProps
 } from '@instructure/ui-options'
 import type {
   SelectableProps,
@@ -67,9 +68,7 @@ import generateComponentTheme from './theme'
 import { Group } from './Group'
 import type { SelectGroupProps } from './Group/props'
 import { Option } from './Option'
-import type { SelectOptionProps } from './Option/props'
-
-import type { RenderSelectOptionLabel } from './Option/props'
+import type { SelectOptionProps, RenderSelectOptionLabel } from './Option/props'
 
 import type { SelectProps } from './props'
 import { allowedProps, propTypes } from './props'
@@ -348,7 +347,7 @@ class Select extends Component<SelectProps> {
 
     const getRenderOptionLabel = (
       renderOptionLabel: RenderSelectOptionLabel
-    ): React.ReactNode => {
+    ): React.ReactNode | ((args: ItemProps) => React.ReactNode) => {
       return typeof renderOptionLabel === 'function' &&
         !renderOptionLabel?.prototype?.isReactComponent
         ? renderOptionLabel.bind(null, {

@@ -69,22 +69,7 @@ type DateTimeInputProps = {
   /**
    * The label over the time input
    **/
-  timeRenderLabel:
-    | React.ReactNode
-    | (({
-        id,
-        isDisabled,
-        isSelected,
-        isHighlighted,
-        children
-      }: // TODO type this better when Select is typed
-      {
-        id: any
-        isDisabled: any
-        isSelected: any
-        isHighlighted: any
-        children: any
-      }) => React.ReactNode)
+  timeRenderLabel: React.ReactNode | (() => React.ReactNode)
   /**
    * The number of minutes to increment by when generating the allowable time options.
    */

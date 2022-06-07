@@ -54,12 +54,11 @@ function callRenderProp<P>(
         ClassicComponentClass<P>
       >
     | ComponentClass<P>
-    | ReactNode,
+    | ReactNode
+    | (() => ReactNode),
   props: P = {} as P
 ) {
   if (typeof value === 'function') {
-    // note: this part is needed for React 16
-    // TODO: Simplify this when we drop React 15
     // In react 16, `createElement` accepts a function. In react 15 we get an
     // error on rendering the result. Evaluate the function here if it is not a
     // react component.

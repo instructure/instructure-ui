@@ -36,7 +36,7 @@ module.exports = function (
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
 
   const presets = [
-    require('@babel/preset-typescript').default,
+    [require('@babel/preset-typescript').default, { allowDeclareFields: true }],
     [require('@babel/preset-env').default, envPresetConfig],
     [require('@babel/preset-react').default, { useBuiltIns: true }]
   ]
@@ -89,7 +89,6 @@ module.exports = function (
     require('@babel/plugin-transform-destructuring').default,
     [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before plugins that set displayName!
     require('./babel-plugin-add-displayname-for-react'),
-    require('@babel/plugin-proposal-class-properties').default,
     require('@babel/plugin-proposal-export-default-from').default,
     [
       require('@babel/plugin-transform-runtime').default,
