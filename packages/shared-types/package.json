@@ -12,9 +12,9 @@
     "url": "git+https://github.com/instructure/instructure-ui.git"
   },
   "scripts": {
-    "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
-    "build:types": "tsc -p tsconfig.build.json"
+    "lint": "run -T ui-test --lint",
+    "lint:fix": "run -T ui-test --lint --fix",
+    "build:types": "run -T tsc -p tsconfig.build.json"
   },
   "bugs": {
     "url": "https://github.com/instructure/instructure-ui/issues"
