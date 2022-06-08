@@ -31,7 +31,6 @@ readEnv()
 
 const commands = [
   '--publish',
-  '--post-publish',
   '--bump',
   '--deploy-docs',
   '--deploy-docs-via-github',
@@ -73,8 +72,6 @@ if (process.argv.includes('create-component')) {
   executeYargs()
 } else if (process.argv.includes('--help')) {
   listCommands()
-} else if (process.argv.includes('--post-publish')) {
-  require('./post-publish')
 } else if (process.argv.includes('--bump')) {
   require('./bump')
 } else if (process.argv.includes('--publish')) {

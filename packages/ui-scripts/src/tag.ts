@@ -36,9 +36,9 @@ try {
   // optional fix version argument:
   // e.g. ui-scripts --tag add 5.11.0 rc
   // e.g. ui-scripts --tag rm 5.11.0 latest
-  const pkgJSON = getPackageJSON(undefined)
+  const pkgJSON = getPackageJSON()
   const command = process.argv[3] || 'add'
-  const versionToTag = process.argv[4] || pkgJSON.version
+  const versionToTag = process.argv[4] || pkgJSON.version!
   const tag = process.argv[5] || 'latest'
 
   distTag(command, versionToTag, tag, getConfig(pkgJSON))

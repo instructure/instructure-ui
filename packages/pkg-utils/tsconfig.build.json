@@ -1,12 +1,11 @@
 {
-  "extends": "../../tsconfig.build.json",
+  "extends": "../../tsconfig.node.json",
   "compilerOptions": {
-    "outDir": "./types",
-    "rootDir": "./lib",
-    "module": "CommonJS",
+    "outDir": "./lib",
+    "rootDir": "./src",
     "composite": true
   },
-  "include": ["lib"],
+  "include": ["src"],
   "references": [
     {
       "path": "../command-utils/tsconfig.build.json"

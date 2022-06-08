@@ -21,20 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const {
-  readPackage,
-  getPackage,
-  getPackageJSON,
-  getPackagePath
-} = require('./get-package')
+import { runCommandSync } from '@instructure/command-utils'
+import { getPackage } from './get-package'
 
-module.exports = {
-  getPackages: require('./get-packages'),
-  getChangedPackages: require('./get-changed-packages'),
-  readPkgUp: require('read-pkg-up'),
-  readPkg: getPackageJSON,
-  readPackage,
-  getPackage,
-  getPackageJSON,
-  getPackagePath
+type Package = {
+  name: string
+  version: string
+  private: boolean
+  location: string
 }
+
+/**
+ * Calls lerna list --json, which will parse all of our packages and
+ * gives back meta information about them.
+ * @returns packages information
+ */
+function getPackages(): Array<Package> {
+  const result = runCommandSync('lerna', ['list', '--json'], [], {
+    stdio: 'pipe'
+  }).stdout
+  const packageData: Package[] = JSON.parse(result)
+
+  return packageData.map(({ location }) => getPackage({ cwd: location }))
+}
+
+export { getPackages }
+
+export type { Package }

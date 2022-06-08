@@ -21,13 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { runCommandSync } = require('@instructure/command-utils')
-const { getPackage } = require('./get-package')
+import { runCommandSync } from '@instructure/command-utils'
+import path from 'path'
+import { getPackages } from './get-packages'
 
-module.exports = function getPackages() {
-  const result = runCommandSync('lerna', ['list', '--json'], [], {
+import type { Package } from './get-packages'
+
+export function getChangedPackages(
+  commitIsh = 'HEAD^1',
+  allPackages?: Package[]
+) {
+  allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
+
+  const result = runCommandSync('git', ['diff', commitIsh, '--name-only'], [], {
     stdio: 'pipe'
   }).stdout
-  const packageData = JSON.parse(result)
-  return packageData.map(({ location }) => getPackage({ cwd: location }))
+  const changedFiles = result.split('\n')
+
+  return allPackages.filter((pkg) => {
+    const relativePath = path.relative('.', pkg.location) + path.sep
+    return (
+      changedFiles.findIndex((changedFile: string) =>
+        changedFile.startsWith(relativePath)
+      ) >= 0
+    )
+  })
 }

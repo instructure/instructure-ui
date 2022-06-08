@@ -91,12 +91,7 @@
   },
   "config": {
     "ui-scripts": {
-      "jira_host": "instructure.atlassian.net",
-      "jira_project_id": "17900",
-      "jira_project_key": "INSTUI",
       "npm_scope": "@instructure:registry=https://registry.npmjs.org/",
-      "gh_pages_dir": "packages/__docs__/__build__",
-      "gh_pages_cname": "instructure.design",
       "changelog_url": "https://instructure.design/#CHANGELOG"
     },
     "commitizen": {

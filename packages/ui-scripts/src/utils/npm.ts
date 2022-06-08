@@ -34,59 +34,9 @@ import {
 //@ts-expect-error FIXME: add typings
 import { Project } from '@lerna/project'
 
-export const publishPackages = async (
-  packageName: string,
-  releaseVersion: string,
-  preidAndTag: string
-) => {
-  const args =
-    releaseVersion === 'prerelease'
-      ? [
-          '--canary',
-          '--preid',
-          preidAndTag,
-          '--dist-tag',
-          preidAndTag,
-          '--exact',
-          '--include-merged-tags',
-          '--conventional-commits',
-          '--conventional-prerelease=*',
-          '--no-git-reset'
-        ]
-      : ['from-package', '--dist-tag', preidAndTag]
-
-  info(`📦  Publishing ${releaseVersion} of ${packageName}...`)
-
-  let publishedVersion
-  try {
-    runCommandSync('lerna', [
-      'publish',
-      ...args,
-      '--yes',
-      '--no-push',
-      '--no-git-tag-version',
-      '--force-publish=*',
-      // lerna does not work with NPM automation tokens
-      // related: https://github.com/lerna/lerna/issues/2788
-      '--no-verify-access'
-    ])
-
-    publishedVersion = await syncRootPackageVersion()
-
-    info(
-      `📦  ${publishedVersion} of ${packageName} was successfully published!`
-    )
-  } catch (err: any) {
-    error(err)
-    process.exit(1)
-  }
-
-  return publishedVersion
-}
-
 const syncRootPackageVersion = async (useProjectVersion?: any) => {
   const project = new Project(process.cwd())
-  const rootPkg = getPackage(undefined)
+  const rootPkg = getPackage()
 
   let projectVersion
 
@@ -95,8 +45,8 @@ const syncRootPackageVersion = async (useProjectVersion?: any) => {
   } else {
     // unfortunately lerna doesn't update lerna.json for canary releases,
     // so we have to do this:
-    const pkgs = getChangedPackages(undefined, undefined)
-    projectVersion = pkgs[0].get('version')
+    const pkgs = getChangedPackages()
+    projectVersion = pkgs[0].version
   }
 
   if (projectVersion !== rootPkg.get('version')) {

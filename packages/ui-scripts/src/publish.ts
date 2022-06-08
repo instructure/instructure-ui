@@ -22,34 +22,37 @@
  * SOFTWARE.
  */
 import { getPackageJSON, getPackages } from '@instructure/pkg-utils'
-import {
-  error,
-  info,
-  runCommandSync,
-  runCommandAsync
-} from '@instructure/command-utils'
+import { error, info, runCommandAsync } from '@instructure/command-utils'
 
 import { getConfig } from './utils/config'
-import { checkWorkingDirectory, isReleaseCommit, setupGit } from './utils/git'
-import { publishPackages, createNPMRCFile } from './utils/npm'
+import {
+  checkWorkingDirectory,
+  isReleaseCommit,
+  runGitCommand,
+  setupGit
+} from './utils/git'
+import { bumpPackages, createNPMRCFile } from './utils/npm'
+import semver from 'semver'
 
-try {
-  const pkgJSON = getPackageJSON(undefined)
-  // ui-scripts --publish               - to publish from the master branch
-  // ui-scripts --publish maintenance   - to publish from any legacy branch
-  const isMaintenance = process.argv[3] === 'maintenance'
+type PackageInfo = ReturnType<typeof getPackages>[number]
+;(async function doPublish() {
+  try {
+    const pkgJSON = getPackageJSON()
+    // ui-scripts --publish               - to publish from the master branch
+    // ui-scripts --publish maintenance   - to publish from any legacy branch
+    const isMaintenance = process.argv[3] === 'maintenance'
 
-  publish({
-    packageName: pkgJSON.name,
-    version: pkgJSON.version,
-    isMaintenance,
-    //TODO investigate if config is needed
-    config: getConfig(pkgJSON)
-  })
-} catch (err: any) {
-  error(err)
-  process.exit(1)
-}
+    await publish({
+      packageName: pkgJSON.name!,
+      version: pkgJSON.version!,
+      isMaintenance,
+      config: getConfig(pkgJSON)
+    })
+  } catch (err: any) {
+    error(err)
+    process.exit(1)
+  }
+})()
 
 async function publish({
   packageName,
@@ -62,20 +65,15 @@ async function publish({
   isMaintenance: boolean
   config: any
 }) {
-  const isRelease = isReleaseCommit(version)
+  const isRegularRelease = isReleaseCommit(version)
 
   setupGit()
   createNPMRCFile(config)
 
   checkWorkingDirectory()
+  const packages = getPackages().filter((pkg) => !pkg.private)
 
-  // lerna usually fails in releasing, but releasing snapshots is too complicated
-  // without it. Npm-cli figures out versions from the package.json so if we'd like to
-  // release a snapshot version, like: 8.3.5-snapshot.19, we'd need to set this exact version
-  // to package.json and set it back to the current released version after the release.
-  // We use lerna for snapshot and native npm-cli commands for releases
-
-  if (isRelease) {
+  if (isRegularRelease) {
     // If on legacy branch, and it is a release, its tag should say vx_maintenance
     const tag = isMaintenance
       ? `v${version.split('.')[0]}_maintenance`
@@ -83,52 +81,124 @@ async function publish({
 
     info(`📦  Version: ${version}, Tag: ${tag}`)
 
-    return Promise.all(
-      getPackages().map(async (pkg: any) => {
-        if (pkg.private) {
-          info(`${pkg.name} is private.`)
-        } else {
-          let packageInfo: { versions: string[] } = { versions: [] }
-
-          try {
-            const { stdout } = runCommandSync(
-              'npm',
-              ['info', pkg.name, '--json'],
-              [],
-              { stdio: 'pipe' }
-            )
-            packageInfo = JSON.parse(stdout)
-          } catch (e: any) {
-            error(e)
-          }
-
-          if (packageInfo.versions.includes(version)) {
-            info(`📦  v${version} of ${pkg.name} is already published!`)
-          } else {
-            try {
-              await runCommandAsync('npm', [
-                'publish',
-                pkg.location,
-                '--tag',
-                tag
-              ])
-              info(
-                `📦  Version ${version} of ${packageName} was successfully published!`
-              )
-            } catch (err: any) {
-              error(err)
-            }
-          }
-        }
-      })
-    )
+    return publishRegularVersion({
+      version,
+      tag,
+      packages
+    })
   } else {
-    try {
-      info(`📦  Version: ${version}, Tag: snapshot`)
-      return await publishPackages(packageName, 'prerelease', 'snapshot')
-    } catch (e: any) {
-      error(e)
-      process.exit(1)
+    info(`📦  Version: ${version}, Tag: snapshot`)
+    return publishSnapshotVersion({
+      version,
+      packageName,
+      packages
+    })
+  }
+}
+
+/**
+ * Publishes each package to npm.
+ */
+async function publishRegularVersion(arg: {
+  version: string
+  tag: string
+  packages: PackageInfo[]
+}) {
+  const { version, packages, tag } = arg
+  for await (const pkg of publishPackages(packages, version, tag)) {
+    info(`📦  Version ${version} of ${pkg.name} was successfully published!`)
+  }
+}
+
+/**
+ * Calculates the new snapshot version based on the latest tag
+ * and the current commit, then publishes each package to npm
+ * with the new snapshot version.
+ */
+async function publishSnapshotVersion(arg: {
+  version: string
+  packageName: string
+  packages: PackageInfo[]
+}) {
+  const { version, packageName, packages } = arg
+  const snapshotVersion = calculateNextSnapshotVersion(version)
+
+  info(`applying new snapshot version (${snapshotVersion}) to each package`)
+
+  await bumpPackages(packageName, snapshotVersion)
+
+  for await (const pkg of publishPackages(packages, snapshotVersion)) {
+    info(
+      `📦  Version ${snapshotVersion} of ${pkg.name} was successfully published!`
+    )
+  }
+}
+
+/**
+ * Calculates the new snapshot version.
+ * @returns the new snapshot version
+ */
+function calculateNextSnapshotVersion(version: string): string {
+  const ver = `v${version}`
+  // get the commit count between the current released version
+  // and the commit that we are on currently
+  // note: this will not include the release commit into the count
+  const commitCount = runGitCommand([
+    'rev-list',
+    '--count',
+    `${ver}..${runGitCommand(['describe'])}`
+  ])
+
+  // we have to decrease the commitCount by 1 because the snapshots are
+  // zero based
+  const snapshotVersion = `${semver.inc(version, 'patch')}-snapshot-${
+    Number(commitCount) - 1
+  }`
+
+  info(`next snapshot version is: ${snapshotVersion}`)
+
+  return snapshotVersion
+}
+
+/**
+ * An async generator function which will do the publishing
+ * for each pacakge.
+ */
+async function* publishPackages(
+  packages: PackageInfo[],
+  version: string,
+  tag?: string
+) {
+  const wait = (delay: number) =>
+    new Promise((resolve) => {
+      setTimeout(resolve, delay)
+    })
+
+  for (const pkg of packages) {
+    const { stdout } = await runCommandAsync(
+      'npm',
+      ['info', pkg.name, '--json'],
+      [],
+      {
+        stdio: 'pipe'
+      }
+    )
+    const packageVersions: string[] = JSON.parse(stdout).versions
+
+    // if the package is already in the registry then don't try
+    // to publish it again
+    if (packageVersions.includes(version)) {
+      throw new Error(`📦  v${version} of ${pkg.name} is already published!`)
+    } else {
+      const publishArgs = ['publish', pkg.location]
+      if (tag) {
+        publishArgs.push(...['--tag', tag])
+      }
+      await runCommandAsync('npm', publishArgs, [])
+
+      await wait(500)
+
+      yield pkg
     }
   }
 }
