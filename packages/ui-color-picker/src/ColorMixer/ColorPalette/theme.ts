@@ -23,7 +23,7 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import { ColorMixerPaletteTheme } from '@instructure/shared-types'
+import type { ColorMixerPaletteTheme } from '@instructure/shared-types'
 import { colorIndicatorBorderColor } from '../../ColorIndicator/theme'
 
 /**
@@ -37,9 +37,10 @@ const generateComponentTheme = (theme: Theme): ColorMixerPaletteTheme => {
   const componentVariables = {
     indicatorBorderColor: colors.licorice,
     whiteColor: colors.white,
-    smallBorder: borders.widthSmall,
-    mediumBorderRadius: borders.radiusMedium,
-    colorIndicatorBorderColor
+    colorIndicatorBorderColor,
+    indicatorBorderWidth: borders.widthSmall,
+    paletteBorderRadius: borders.radiusMedium,
+    paletteBorderWidth: borders.widthSmall
   }
 
   return {

@@ -38,6 +38,11 @@ type RGBAInputOwnProps = {
   value: RGBAType
   onChange: (rgba: RGBAType) => void
   withAlpha: boolean
+  rgbRedInputScreenReaderLabel: string
+  rgbGreenInputScreenReaderLabel: string
+  rgbBlueInputScreenReaderLabel: string
+  rgbAlphaInputScreenReaderLabel: string
+  elementRef?: (element: Element | null) => void
 }
 
 type RGBAInputState = {
@@ -61,7 +66,12 @@ const propTypes: PropValidators<PropKeys> = {
   width: PropTypes.number,
   value: PropTypes.object,
   onChange: PropTypes.func,
-  withAlpha: PropTypes.bool
+  withAlpha: PropTypes.bool,
+  rgbRedInputScreenReaderLabel: PropTypes.string,
+  rgbGreenInputScreenReaderLabel: PropTypes.string,
+  rgbBlueInputScreenReaderLabel: PropTypes.string,
+  rgbAlphaInputScreenReaderLabel: PropTypes.string,
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = ['onChange', 'value']

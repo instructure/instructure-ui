@@ -86,6 +86,12 @@ class Example extends React.Component {
           addNewPresetButtonScreenReaderLabel='Add new color'
           colorMixerSettings={{
             onPresetChange:(colors) => this.setState({ colors }),
+            colorMixer:{
+              rgbRedInputScreenReaderLabel:'Input field for red',
+              rgbGreenInputScreenReaderLabel:'Input field for green',
+              rgbBlueInputScreenReaderLabel:'Input field for blue',
+              rgbAlphaInputScreenReaderLabel:'Input field for alpha'
+            },
             colorContrast:{
                 firstColor:"#FF0000",
                 secondColor:"#FFFF00",

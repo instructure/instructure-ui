@@ -27,6 +27,10 @@ class Example extends React.Component {
             withAlpha
             value={this.state.value}
             onChange={(value) => this.setState({ value })}
+            rgbRedInputScreenReaderLabel='Input field for red'
+            rgbGreenInputScreenReaderLabel='Input field for green'
+            rgbBlueInputScreenReaderLabel='Input field for blue'
+            rgbAlphaInputScreenReaderLabel='Input field for alpha'
           />
           <div
             style={{
@@ -58,7 +62,7 @@ render(<Example />);
 
 ```
 
-### Color Mixer
+### Disabled Color Mixer
 
 ```js
 ---

@@ -99,7 +99,14 @@ class Example extends React.Component {
   renderPopoverContent = (value, onChange, handleAdd, handleClose) => (
     <div>
       <div style={{ padding: "20px" }}>
-        <ColorMixer withAlpha value={value} onChange={onChange} />
+        <ColorMixer
+          withAlpha
+          value={value}
+          onChange={onChange}
+          rgbRedInputScreenReaderLabel='Input field for red'
+          rgbGreenInputScreenReaderLabel='Input field for green'
+          rgbBlueInputScreenReaderLabel='Input field for blue'
+          rgbAlphaInputScreenReaderLabel='Input field for alpha'/>
         <div
           style={{
             borderTop: "solid",
@@ -175,7 +182,7 @@ class Example extends React.Component {
           label="Color Input"
           tooltip="This is an example"
           placeholderText="Enter HEX"
-          popverButtonScreenReaderLabel="Open color mixer popover"
+          popoverButtonScreenReaderLabel="Open color mixer popover"
         >
           {this.renderPopoverContent}
         </ColorPicker>
@@ -245,7 +252,7 @@ class Example extends React.Component {
           disabled={disabled}
           isRequired={isRequired}
           withAlpha={withAlpha}
-          popverButtonScreenReaderLabel="Open color mixer popover"
+          popoverButtonScreenReaderLabel="Open color mixer popover"
           checkContrast={
             withCheckContrast
               ? {

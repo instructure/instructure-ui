@@ -57,7 +57,7 @@ const generateStyle = (
       background: componentTheme.whiteColor,
       position: 'absolute',
       borderStyle: 'solid',
-      borderWidth: componentTheme.smallBorder,
+      borderWidth: componentTheme.indicatorBorderWidth,
       borderColor: componentTheme.indicatorBorderColor,
       top: `${
         state?.colorPosition?.y - px(`${props.indicatorRadius / 16}rem`)
@@ -70,9 +70,9 @@ const generateStyle = (
       label: 'ColorPalette__palette',
       width: `${props.width / 16}rem`,
       height: `${props.height / 16}rem`,
-      borderRadius: componentTheme.mediumBorderRadius,
+      borderRadius: componentTheme.paletteBorderRadius,
       borderStyle: 'solid',
-      borderWidth: componentTheme.smallBorder,
+      borderWidth: componentTheme.paletteBorderWidth,
       boxSizing: 'border-box',
       borderColor: componentTheme.colorIndicatorBorderColor,
       background: `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)),

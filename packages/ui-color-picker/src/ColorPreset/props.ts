@@ -69,6 +69,10 @@ type ColorPresetOwnProps = {
     onPresetChange: (colors: ColorPresetOwnProps['colors']) => void
     colorMixer: {
       withAlpha: boolean
+      rgbRedInputScreenReaderLabel: string
+      rgbGreenInputScreenReaderLabel: string
+      rgbBlueInputScreenReaderLabel: string
+      rgbAlphaInputScreenReaderLabel: string
     }
     colorContrast?: {
       firstColor: string

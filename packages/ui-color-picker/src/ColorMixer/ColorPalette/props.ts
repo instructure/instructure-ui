@@ -39,6 +39,7 @@ type ColorPaletteOwnProps = {
   height: number
   indicatorRadius: number
   onChange: (rgb: HSVType) => void
+  elementRef?: (element: Element | null) => void
 }
 
 type ColorPaletteState = {
@@ -63,7 +64,8 @@ const propTypes: PropValidators<PropKeys> = {
   width: PropTypes.number,
   height: PropTypes.number,
   indicatorRadius: PropTypes.number,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [

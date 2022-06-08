@@ -42,21 +42,21 @@ const generateStyle = (
   return {
     RGBAInput: {
       label: 'RGBAInput',
-      marginTop: componentTheme.mediumMargin,
+      marginTop: componentTheme.rgbaInputTopMargin,
       width: `${props.width / 16}rem`
     },
     label: {
       label: 'RGBAInput__label',
-      fontWeight: componentTheme.boldFontWeight
+      fontWeight: componentTheme.labelFontWeight
     },
     inputContainer: {
       label: 'RGBAInput__inputContainer',
       display: 'flex',
-      marginTop: componentTheme.xSmallMargin
+      marginTop: componentTheme.inputContainerTopMargin
     },
     rgbInput: {
       label: 'RGBAInput__rgbInput',
-      marginRight: componentTheme.xSmallMargin,
+      marginRight: componentTheme.tgbInputTopMargin,
       flex: 7
     },
     aInput: {

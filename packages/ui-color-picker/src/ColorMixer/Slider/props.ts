@@ -38,6 +38,7 @@ type SliderOwnProps = {
   value: number
   indicatorRadius: number
   height: number
+  elementRef?: (element: Element | null) => void
 }
 
 type SliderState = {
@@ -64,7 +65,8 @@ const propTypes: PropValidators<PropKeys> = {
   width: PropTypes.number,
   value: PropTypes.object,
   indicatorRadius: PropTypes.number,
-  height: PropTypes.number
+  height: PropTypes.number,
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [

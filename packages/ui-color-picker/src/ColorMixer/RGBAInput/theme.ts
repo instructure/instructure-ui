@@ -34,9 +34,10 @@ const generateComponentTheme = (theme: Theme): ColorMixerRGBAInputTheme => {
   const { spacing, typography } = theme
 
   const componentVariables = {
-    mediumMargin: spacing.medium,
-    xSmallMargin: spacing.xSmall,
-    boldFontWeight: typography.fontWeightBold
+    labelFontWeight: typography.fontWeightBold,
+    inputContainerTopMargin: spacing.xSmall,
+    tgbInputTopMargin: spacing.xSmall,
+    rgbaInputTopMargin: spacing.medium
   }
 
   return {

@@ -72,6 +72,22 @@ type ColorMixerOwnProps = {
    * Toggles alpha. If true, alpha slider will appear
    */
   withAlpha: boolean
+  /**
+   * screenReaderLabel for the RGBA input's red input field
+   */
+  rgbRedInputScreenReaderLabel: string
+  /**
+   * screenReaderLabel for the RGBA input's green input field
+   */
+  rgbGreenInputScreenReaderLabel: string
+  /**
+   * screenReaderLabel for the RGBA input's blue input field
+   */
+  rgbBlueInputScreenReaderLabel: string
+  /**
+   * screenReaderLabel for the RGBA input's alpha input field
+   */
+  rgbAlphaInputScreenReaderLabel: string
 }
 
 type ColorMixerState = {
@@ -96,7 +112,11 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func,
   value: PropTypes.object,
   onChange: PropTypes.func,
-  withAlpha: PropTypes.bool
+  withAlpha: PropTypes.bool,
+  rgbRedInputScreenReaderLabel: PropTypes.string,
+  rgbGreenInputScreenReaderLabel: PropTypes.string,
+  rgbBlueInputScreenReaderLabel: PropTypes.string,
+  rgbAlphaInputScreenReaderLabel: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [

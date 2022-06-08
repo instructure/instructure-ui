@@ -66,7 +66,7 @@ const generateStyle = (
       background: 'white',
       position: 'absolute',
       borderStyle: 'solid',
-      borderWidth: componentTheme.smallBorder,
+      borderWidth: componentTheme.indicatorBorderWidth,
       borderColor: componentTheme.indicatorBorderColor,
       top: `-0.1875rem`,
       left: `${
@@ -74,7 +74,7 @@ const generateStyle = (
           props.indicatorRadius) /
         16
       }rem`,
-      zIndex: componentTheme.stackAbove
+      zIndex: componentTheme.indicatorZIndex
     },
 
     sliderBackground: {
@@ -101,7 +101,7 @@ const generateStyle = (
 
       borderStyle: 'solid',
       borderColor: componentTheme.colorIndicatorBorderColor,
-      borderWidth: componentTheme.smallBorder
+      borderWidth: componentTheme.sliderBorderWidth
     }
   }
 }

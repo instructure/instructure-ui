@@ -23,7 +23,7 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import { ColorMixerSliderTheme } from '@instructure/shared-types'
+import type { ColorMixerSliderTheme } from '@instructure/shared-types'
 import { colorIndicatorBorderColor } from '../../ColorIndicator/theme'
 
 /**
@@ -37,10 +37,6 @@ const generateComponentTheme = (theme: Theme): ColorMixerSliderTheme => {
   const componentVariables = {
     indicatorBorderColor: colors.licorice,
 
-    smallBorder: borders.widthSmall,
-
-    stackAbove: stacking.above,
-
     checkerboardBackgroundImage: `linear-gradient(45deg, ${colors.tiara} 25%, transparent 25%),
     linear-gradient(-45deg, ${colors.tiara} 25%, transparent 25%),
     linear-gradient(45deg, transparent 75%, ${colors.tiara} 75%),
@@ -48,7 +44,10 @@ const generateComponentTheme = (theme: Theme): ColorMixerSliderTheme => {
     checkerboardBackgroundSize: '.5rem .5rem',
     checkerboardBackgroundPosition:
       '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px',
-    colorIndicatorBorderColor
+    colorIndicatorBorderColor,
+    indicatorBorderWidth: borders.widthSmall,
+    sliderBorderWidth: borders.widthSmall,
+    indicatorZIndex: stacking.above
   }
 
   return {

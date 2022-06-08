@@ -27,7 +27,7 @@ import { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
-import { SliderProps } from './props'
+import type { SliderProps } from './props'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -45,11 +45,22 @@ class Slider extends Component<SliderProps> {
   static defaultProps = {
     isColorSlider: false
   }
+
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
   componentDidMount() {
     this.props.makeStyles?.({
       calcSliderPositionFromValue: this.calcSliderPositionFromValue
     })
-    // this.props.drawSlider(this.sliderRef!, this.props.width, this.props.height)
   }
 
   componentDidUpdate() {
@@ -157,10 +168,9 @@ class Slider extends Component<SliderProps> {
   render() {
     return (
       <View
+        elementRef={this.handleRef}
         disabled={this.props.disabled}
         position="relative"
-        width={this.props.width}
-        height={this.props.height}
         background="transparent"
         margin="small 0 0 0"
         display="flex"

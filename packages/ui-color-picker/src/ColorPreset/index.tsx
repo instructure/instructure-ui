@@ -138,6 +138,22 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
             this.setState({ newColor: hexToRgb(newColor) })
           }
           withAlpha={this.props?.colorMixerSettings?.colorMixer?.withAlpha}
+          rgbRedInputScreenReaderLabel={
+            this.props.colorMixerSettings!.colorMixer
+              .rgbRedInputScreenReaderLabel
+          }
+          rgbGreenInputScreenReaderLabel={
+            this.props.colorMixerSettings!.colorMixer
+              .rgbGreenInputScreenReaderLabel
+          }
+          rgbBlueInputScreenReaderLabel={
+            this.props.colorMixerSettings!.colorMixer
+              .rgbBlueInputScreenReaderLabel
+          }
+          rgbAlphaInputScreenReaderLabel={
+            this.props.colorMixerSettings!.colorMixer
+              .rgbAlphaInputScreenReaderLabel
+          }
         />
         {this.props?.colorMixerSettings?.colorContrast && (
           <div css={this.props.styles?.popoverContentBlock}>

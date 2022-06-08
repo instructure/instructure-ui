@@ -28,8 +28,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
 import shallowCompare from '../utils/shallowCompare'
-import { ColorPaletteProps, ColorPaletteState } from './props'
-import { HSVType } from '../props'
+import type { ColorPaletteProps, ColorPaletteState } from './props'
+import type { HSVType } from '../props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -48,6 +48,17 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     }
   }
   paletteRef: HTMLDivElement | null = null
+  ref: Element | null = null
+
+  handleRef = (el: Element | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
 
   componentDidMount() {
     this.props.makeStyles?.(this.state)
@@ -189,10 +200,9 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   render() {
     return (
       <View
+        elementRef={this.handleRef}
         disabled={this.props.disabled}
         position="relative"
-        width={`${this.props.width / 16}rem`}
-        height={`${this.props.height / 16}rem`}
         background="transparent"
         display="inline-block"
         borderRadius="medium"

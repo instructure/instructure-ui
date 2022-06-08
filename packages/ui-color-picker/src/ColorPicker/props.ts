@@ -76,8 +76,14 @@ type ColorPickerOwnProps = {
    * will not be rendered.
    */
   colorMixerSettings?: {
+    popoverAddButtonLabel: string
+    popoverCloseButtonLabel: string
     colorMixer?: {
       withAlpha: boolean
+      rgbRedInputScreenReaderLabel: string
+      rgbGreenInputScreenReaderLabel: string
+      rgbBlueInputScreenReaderLabel: string
+      rgbAlphaInputScreenReaderLabel: string
     }
     colorPreset?: {
       colors: Array<string>

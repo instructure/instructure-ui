@@ -65,9 +65,9 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
     disabled: false
   }
 
-  ref: Element | null = null
+  ref: HTMLDivElement | null = null
 
-  handleRef = (el: Element | null) => {
+  handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -121,6 +121,10 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       elementRef,
       styles,
       withAlpha,
+      rgbRedInputScreenReaderLabel,
+      rgbGreenInputScreenReaderLabel,
+      rgbBlueInputScreenReaderLabel,
+      rgbAlphaInputScreenReaderLabel,
       ...props
     } = this.props
     const { h, s, v, a } = this.state
@@ -128,7 +132,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       <div
         {...passthroughProps(props)}
         aria-disabled={disabled}
-        ref={elementRef}
+        ref={this.handleRef}
         css={styles?.colorMixer}
       >
         <span aria-label={`${colorToHex8({ h, s, v, a })}`} aria-live="polite">
@@ -179,6 +183,10 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
           value={colorToRGB({ h, s, v, a })}
           onChange={(color) => this.setState({ ...colorToHsva(color) })}
           withAlpha={withAlpha}
+          rgbRedInputScreenReaderLabel={rgbRedInputScreenReaderLabel}
+          rgbGreenInputScreenReaderLabel={rgbGreenInputScreenReaderLabel}
+          rgbBlueInputScreenReaderLabel={rgbBlueInputScreenReaderLabel}
+          rgbAlphaInputScreenReaderLabel={rgbAlphaInputScreenReaderLabel}
         />
       </div>
     )

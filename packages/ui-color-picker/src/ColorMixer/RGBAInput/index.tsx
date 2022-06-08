@@ -25,9 +25,10 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { TextInput } from '@instructure/ui-text-input'
 import shallowCompare from '../utils/shallowCompare'
-import { RGBAInputProps, RGBAInputState } from './props'
+import type { RGBAInputProps, RGBAInputState } from './props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -48,6 +49,18 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
 
   static defaultProps = {
     withAlpha: false
+  }
+
+  ref: HTMLDivElement | null = null
+
+  handleRef = (el: HTMLDivElement | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   componentDidMount() {
@@ -82,7 +95,7 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
   render() {
     const { styles, disabled, label, withAlpha } = this.props
     return (
-      <div css={styles?.RGBAInput}>
+      <div ref={this.handleRef} css={styles?.RGBAInput}>
         {label && <div css={styles?.label}>{label}</div>}
         <div css={styles?.inputContainer}>
           <span css={styles?.rgbInput}>
@@ -90,7 +103,11 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
               disabled={disabled}
               value={`${this.state.value.r}`}
               onChange={(e) => this.handleChange('r', e)}
-              renderLabel=""
+              renderLabel={
+                <ScreenReaderContent>
+                  {this.props.rgbRedInputScreenReaderLabel}
+                </ScreenReaderContent>
+              }
             />
           </span>
           <span css={styles?.rgbInput}>
@@ -98,7 +115,11 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
               disabled={disabled}
               value={`${this.state.value.g}`}
               onChange={(e) => this.handleChange('g', e)}
-              renderLabel=""
+              renderLabel={
+                <ScreenReaderContent>
+                  {this.props.rgbGreenInputScreenReaderLabel}
+                </ScreenReaderContent>
+              }
             />
           </span>
           <span css={styles?.rgbInput}>
@@ -106,7 +127,11 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
               disabled={disabled}
               value={`${this.state.value.b}`}
               onChange={(e) => this.handleChange('b', e)}
-              renderLabel=""
+              renderLabel={
+                <ScreenReaderContent>
+                  {this.props.rgbBlueInputScreenReaderLabel}
+                </ScreenReaderContent>
+              }
             />
           </span>
           {withAlpha && (
@@ -116,7 +141,11 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
                 value={`${Math.round(this.state.value.a * 100)}`}
                 onChange={(e) => this.handleChange('a', e)}
                 renderAfterInput="%"
-                renderLabel=""
+                renderLabel={
+                  <ScreenReaderContent>
+                    {this.props.rgbAlphaInputScreenReaderLabel}
+                  </ScreenReaderContent>
+                }
               />
             </span>
           )}

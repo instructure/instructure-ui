@@ -401,22 +401,30 @@ export type CodeEditorTheme = {
 
 export type ColorPickerTheme = {
   hashMarkColor: Colors['ash']
-  warningIconColor: Colors['fire']
-  errorIconColor: Colors['crimson']
-  successIconColor: Colors['shamrock']
+  warningIconColor: Colors['textWarning']
+  errorIconColor: Colors['textDanger']
+  successIconColor: Colors['textSuccess']
   popoverSeparatorColor: Colors['tiara']
   popoverFooterColor: Colors['porcelain']
-  smallBorder: Border['widthSmall']
-  smallSpacing: Spacing['small']
-  xSmallSpacing: Spacing['xSmall']
-  xxSmallSpacing: Spacing['xxSmall']
-  xxxSmallSpacing: Spacing['xxxSmall']
-  xLargeFontSize: Typography['fontSizeXLarge']
   checkerboardBackgroundColor: Colors['white']
   checkerboardBackgroundImage: string
   checkerboardBackgroundSize: string
   checkerboardBackgroundPosition: string
   colorIndicatorBorderColor: string
+  simpleColorContainerLeftPadding: Spacing['xSmall']
+  hashMarkContainerLineHeight: Typography['fontSizeXLarge']
+  hashMarkContainerLeftPadding: Spacing['xSmall']
+  hashMarkContainerRightPadding: Spacing['xxxSmall']
+  errorIconsRightPadding: Spacing['small']
+  successIconRightPadding: Spacing['small']
+  labelRightMargin: Spacing['xxSmall']
+  popoverContentPadding: Spacing['xxSmall']
+  popoverContentBlockBorderWidth: Border['widthSmall']
+  popoverContentBlockTopMargin: Spacing['small']
+  popoverContentBlockBottomMargin: Spacing['small']
+  popoverFooterPadding: Spacing['xSmall']
+  popoverFooterTopBorderWidth: Border['widthSmall']
+  colorMixerButtonContainerLeftMargin: Spacing['xSmall']
 }
 
 export type ColorContrastTheme = {
@@ -443,29 +451,31 @@ export type ColorContrastTheme = {
 export type ColorMixerSliderTheme = {
   indicatorBorderColor: Colors['licorice']
 
-  smallBorder: Border['widthSmall']
-
-  stackAbove: Stacking['above']
-
   checkerboardBackgroundImage: string
   checkerboardBackgroundSize: string
   checkerboardBackgroundPosition: string
   colorIndicatorBorderColor: string
+
+  indicatorBorderWidth: Border['widthSmall']
+  sliderBorderWidth: Border['widthSmall']
+  indicatorZIndex: Stacking['above']
 }
 
 export type ColorMixerPaletteTheme = {
-  smallBorder: Border['widthSmall']
-  mediumBorderRadius: Border['radiusMedium']
-
   indicatorBorderColor: Colors['licorice']
   whiteColor: Colors['white']
   colorIndicatorBorderColor: string
+
+  indicatorBorderWidth: Border['widthSmall']
+  paletteBorderRadius: Border['radiusMedium']
+  paletteBorderWidth: Border['widthSmall']
 }
 
 export type ColorMixerRGBAInputTheme = {
-  mediumMargin: Spacing['medium']
-  xSmallMargin: Spacing['xSmall']
-  boldFontWeight: Typography['fontWeightBold']
+  labelFontWeight: Typography['fontWeightBold']
+  inputContainerTopMargin: Spacing['xSmall']
+  tgbInputTopMargin: Spacing['xSmall']
+  rgbaInputTopMargin: Spacing['medium']
 }
 
 export type ColorPresetTheme = {
