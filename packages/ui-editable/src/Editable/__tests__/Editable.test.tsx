@@ -26,20 +26,16 @@ import React from 'react'
 import { expect, mount, spy, within, wait } from '@instructure/ui-test-utils'
 
 import { Editable } from '../index'
+import type { EditableRenderProps } from '../props'
 
 const noop = () => {}
 const render = ({
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'mode' implicitly has an 'any' typ... Remove this comment to see the full error message
   mode,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getContainerProps' implicitly has... Remove this comment to see the full error message
   getContainerProps,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getViewerProps' implicitly has an... Remove this comment to see the full error message
   getViewerProps,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getEditorProps' implicitly has an... Remove this comment to see the full error message
   getEditorProps,
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getEditButtonProps' implicitly ha... Remove this comment to see the full error message
   getEditButtonProps
-}) => {
+}: EditableRenderProps) => {
   const { isVisible, buttonRef, ...buttonProps } = getEditButtonProps()
   const { onBlur, editorRef } = getEditorProps()
   return (
@@ -57,14 +53,14 @@ describe('<Editable />', async () => {
   it('should render view mode', async () => {
     const renderSpy = spy(render)
     await mount(<Editable mode="view" onChangeMode={noop} render={renderSpy} />)
-    const args = renderSpy.lastCall.args[0] as any
+    const args = renderSpy.lastCall.args[0] as EditableRenderProps
     expect(args.mode).to.equal('view')
   })
 
   it('should render edit mode', async () => {
     const renderSpy = spy(render)
     await mount(<Editable mode="edit" onChangeMode={noop} render={renderSpy} />)
-    const args = renderSpy.lastCall.args[0] as any
+    const args = renderSpy.lastCall.args[0] as EditableRenderProps
     expect(args.mode).to.equal('edit')
   })
 
@@ -75,7 +71,8 @@ describe('<Editable />', async () => {
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
-    let args = renderSpy.lastCall.args[0] as any
+    let args: EditableRenderProps | string = renderSpy.lastCall
+      .args[0] as EditableRenderProps
     expect(args.mode).to.equal('view')
 
     const editable = within(subject.getDOMNode())
@@ -84,7 +81,7 @@ describe('<Editable />', async () => {
     await editButton.focus()
     await editButton.click()
 
-    args = onChangeModeSpy.lastCall.args[0]
+    args = onChangeModeSpy.lastCall.args[0] as string
     expect(args).to.equal('edit')
   })
 
@@ -95,7 +92,7 @@ describe('<Editable />', async () => {
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
-    const renderProps = renderSpy.lastCall.args[0] as any
+    const renderProps = renderSpy.lastCall.args[0] as EditableRenderProps
     expect(renderProps.mode).to.equal('view')
 
     const container = within(subject.getDOMNode())
@@ -112,17 +109,23 @@ describe('<Editable />', async () => {
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
-    let props = (renderSpy.lastCall.args[0] as any).getEditButtonProps()
+    let props = (
+      renderSpy.lastCall.args[0] as EditableRenderProps
+    ).getEditButtonProps()
     expect(props.isVisible).to.be.false()
 
     const editable = within(subject.getDOMNode())
     await editable.mouseOver()
-    props = (renderSpy.lastCall.args[0] as any).getEditButtonProps()
+    props = (
+      renderSpy.lastCall.args[0] as EditableRenderProps
+    ).getEditButtonProps()
 
     expect(props.isVisible).to.be.true()
 
     await editable.mouseOut()
-    props = (renderSpy.lastCall.args[0] as any).getEditButtonProps()
+    props = (
+      renderSpy.lastCall.args[0] as EditableRenderProps
+    ).getEditButtonProps()
 
     expect(props.isVisible).to.be.false()
   })
@@ -134,7 +137,8 @@ describe('<Editable />', async () => {
     const subject = await mount(
       <Editable mode="edit" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
-    let args = renderSpy.lastCall.args[0] as any
+    let args: EditableRenderProps | string = renderSpy.lastCall
+      .args[0] as EditableRenderProps
     expect(args.mode).to.equal('edit')
 
     const editable = within(subject.getDOMNode())
@@ -144,7 +148,7 @@ describe('<Editable />', async () => {
     const editButton = await editable.find('button:contains(edit)')
     await editButton.focus()
 
-    args = onChangeModeSpy.lastCall.args[0]
+    args = onChangeModeSpy.lastCall.args[0] as string
     expect(args).to.equal('view')
   })
 

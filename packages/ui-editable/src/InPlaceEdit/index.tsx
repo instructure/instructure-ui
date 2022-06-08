@@ -27,6 +27,7 @@ import { Component } from 'react'
 
 import { Flex } from '@instructure/ui-flex'
 import { IconButton } from '@instructure/ui-buttons'
+import type { IconButtonProps } from '@instructure/ui-buttons'
 import { IconEditLine } from '@instructure/ui-icons'
 import { logWarn as warn } from '@instructure/console'
 import { createChainedFunction } from '@instructure/ui-utils'
@@ -38,11 +39,13 @@ import generateStyle from './styles'
 
 import { propTypes, allowedProps } from './props'
 import type { InPlaceEditProps } from './props'
+import type { EditableRenderProps } from '../Editable/props'
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, null)
 class InPlaceEdit extends Component<InPlaceEditProps> {
@@ -57,13 +60,13 @@ class InPlaceEdit extends Component<InPlaceEditProps> {
   }
 
   ref: Element | null = null
+  _editButtonRef: HTMLButtonElement | null = null
 
   handleRef = (el: Element | null) => {
     this.ref = el
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: InPlaceEditProps) {
     super(props)
 
     warn(
@@ -73,24 +76,23 @@ class InPlaceEdit extends Component<InPlaceEditProps> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleEditButtonRef = (el) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_editButtonRef' does not exist on type '... Remove this comment to see the full error message
+  handleEditButtonRef = (el: HTMLButtonElement) => {
     this._editButtonRef = el
   }
 
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'mode' implicitly has an 'any' typ... Remove this comment to see the full error message
-  renderEditor({ mode, onBlur, editorRef, readOnly }) {
+  renderEditor({
+    mode,
+    onBlur,
+    editorRef,
+    readOnly
+  }: ReturnType<EditableRenderProps['getEditorProps']>) {
     const { showFocusRing, renderEditor } = this.props
     const isEditMode = !readOnly && mode === 'edit'
 
@@ -109,13 +111,17 @@ class InPlaceEdit extends Component<InPlaceEditProps> {
     ) : null
   }
 
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'readOnly' implicitly has an 'any'... Remove this comment to see the full error message
-  renderViewer({ readOnly, mode }) {
+  renderViewer({
+    readOnly,
+    mode
+  }: ReturnType<EditableRenderProps['getViewerProps']>) {
     return readOnly || mode === 'view' ? this.props.renderViewer() : null
   }
 
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'buttonRef' implicitly has an 'any... Remove this comment to see the full error message
-  renderEditButton({ buttonRef, ...rest }) {
+  renderEditButton({
+    buttonRef,
+    ...rest
+  }: ReturnType<EditableRenderProps['getEditButtonProps']>) {
     return this.props.renderEditButton({
       elementRef: createChainedFunction(this.handleEditButtonRef, buttonRef),
       ...rest
@@ -125,14 +131,15 @@ class InPlaceEdit extends Component<InPlaceEditProps> {
   // Render a default edit button, an icon button with the edit icon
   // the margin makes room for the focus ring
   static renderDefaultEditButton = ({
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'isVisible' implicitly has an 'any... Remove this comment to see the full error message
     isVisible,
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'readOnly' implicitly has an 'any'... Remove this comment to see the full error message
     readOnly,
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'label' implicitly has an 'any' ty... Remove this comment to see the full error message
     label,
     ...buttonProps
-  }) => {
+  }: {
+    isVisible: boolean
+    readOnly?: boolean
+    label: string
+  } & Partial<IconButtonProps>) => {
     if (readOnly) {
       return null
     }
@@ -150,15 +157,11 @@ class InPlaceEdit extends Component<InPlaceEditProps> {
   }
 
   renderAll = ({
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getContainerProps' implicitly has... Remove this comment to see the full error message
     getContainerProps,
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getViewerProps' implicitly has an... Remove this comment to see the full error message
     getViewerProps,
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getEditorProps' implicitly has an... Remove this comment to see the full error message
     getEditorProps,
-    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getEditButtonProps' implicitly ha... Remove this comment to see the full error message
     getEditButtonProps
-  }) => {
+  }: EditableRenderProps) => {
     const flexDir =
       this.props.editButtonPlacement === 'start' ? 'row-reverse' : 'row'
     const justifyItems = flexDir === 'row-reverse' ? 'end' : 'start'

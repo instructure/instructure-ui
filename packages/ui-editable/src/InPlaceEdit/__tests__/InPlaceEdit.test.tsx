@@ -26,11 +26,14 @@ import React from 'react'
 import { expect, mount, within, wait } from '@instructure/ui-test-utils'
 
 import { InPlaceEdit } from '../index'
+import type { InPlaceEditProps } from '../props'
 
 const noop = () => {}
 const renderViewer = () => <div id="viewer">text</div>
-// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'editorRef' implicitly has an 'any... Remove this comment to see the full error message
-const renderEditor = ({ editorRef, onBlur }) => {
+const renderEditor: InPlaceEditProps['renderEditor'] = ({
+  editorRef,
+  onBlur
+}) => {
   // eslint-disable-line react/prop-types
   return (
     <input
@@ -41,17 +44,21 @@ const renderEditor = ({ editorRef, onBlur }) => {
     />
   )
 }
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-const renderEditButton = (props) => {
-  return InPlaceEdit.renderDefaultEditButton({ label: 'Edit', ...props })
+const renderEditButton: InPlaceEditProps['renderEditButton'] = (props) => {
+  const elementRef = props.elementRef as (el: Element | null) => void
+  const { onClick, onFocus, onBlur, isVisible, readOnly } = props
+  return InPlaceEdit.renderDefaultEditButton({
+    isVisible,
+    readOnly,
+    label: 'Edit',
+    ...{ onClick, onFocus, onBlur, elementRef }
+  })
 }
 
 describe('<InPlaceEdit />', async () => {
   it('should render view mode', async () => {
     const subject = await mount(
       <InPlaceEdit
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ id: string; mode: "view"; onChangeMode: ()... Remove this comment to see the full error message
-        id="foos"
         mode="view"
         onChangeMode={noop}
         renderViewer={renderViewer}
