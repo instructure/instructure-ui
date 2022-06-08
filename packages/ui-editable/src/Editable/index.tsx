@@ -21,20 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import { deepEqual } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
 
-import { propTypes, allowedProps } from './props'
-import type { EditableProps } from './props'
+import { propTypes, allowedProps, EditableState } from './props'
+import type {
+  EditableProps,
+  GetContainerProps,
+  GetEditButtonProps,
+  GetEditorProps,
+  GetViewerProps
+} from './props'
 
 /**
 ---
 category: components
 experimental: true
 ---
+@tsProps
 **/
 class Editable extends Component<EditableProps> {
   static propTypes = propTypes
@@ -44,16 +51,15 @@ class Editable extends Component<EditableProps> {
     children: null
   }
 
-  state = {
+  state: EditableState = {
     showModeToggle: false,
     valueOnEdit: null // the value when mode flips from view -> edit
   }
 
-  _editorRef = null
-  _editButtonRef = null
+  _editorRef: HTMLInputElement | null = null
+  _editButtonRef: HTMLButtonElement | null = null
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: EditableProps) {
     super(props)
 
     warn(
@@ -67,10 +73,8 @@ class Editable extends Component<EditableProps> {
       this.focusEditor()
     }
   }
-  componentWillUnmount() {}
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: EditableProps) {
     const { mode, value, onChange } = this.props
 
     // on the switch from view -> edit
@@ -81,7 +85,6 @@ class Editable extends Component<EditableProps> {
 
     // on the switch from edit to view
     if (prevProps.mode === 'edit' && mode !== 'edit') {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._editButtonRef && this._editButtonRef.focus()
       if (onChange && !deepEqual(this.state.valueOnEdit, value)) {
         onChange(value)
@@ -95,7 +98,6 @@ class Editable extends Component<EditableProps> {
       '[Editable] Did you forget to connect editorRef to your editor component?'
     )
     if (this._editorRef) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._editorRef.focus()
     }
   }
@@ -116,15 +118,13 @@ class Editable extends Component<EditableProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleEditESC = (event) => {
+  handleEditESC = (event: React.KeyboardEvent) => {
     if (event.key === 'Escape') {
       this.enterView()
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleViewMouseOver = (event) => {
+  handleViewMouseOver = (event: React.MouseEvent) => {
     if (this.props.mode === 'view') {
       // because the mouse event handlers are on the container, not the view
       event.stopPropagation()
@@ -132,8 +132,7 @@ class Editable extends Component<EditableProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleViewMouseOut = (event) => {
+  handleViewMouseOut = (event: React.MouseEvent) => {
     if (this.props.mode === 'view') {
       event.stopPropagation()
       this.setState({
@@ -142,8 +141,7 @@ class Editable extends Component<EditableProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleViewClick = (event) => {
+  handleViewClick = (event: React.MouseEvent) => {
     if (event.buttons === 1) {
       requestAnimationFrame(() => {
         this.enterEdit()
@@ -151,23 +149,19 @@ class Editable extends Component<EditableProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleEditBlur = (event) => {
+  handleEditBlur = () => {
     this.enterView()
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleEditButtonFocus = (event) => {
+  handleEditButtonFocus = () => {
     this.setState({ showModeToggle: true })
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleEditButtonBlur = (event) => {
+  handleEditButtonBlur = () => {
     this.setState({ showModeToggle: false })
   }
 
-  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-  handleEditButtonClick = (event) => {
+  handleEditButtonClick = () => {
     this.enterEdit()
   }
 
@@ -184,20 +178,20 @@ class Editable extends Component<EditableProps> {
   }
 
   // ------- prop getters ------
-  getContainerProps = (props = {}) => {
+  getContainerProps: GetContainerProps = (props = {}) => {
     const { mode, readOnly } = this.props
     return {
       onMouseOver: this.handleViewMouseOver,
       onMouseOut: this.handleViewMouseOut,
-      onMouseDown: mode !== 'edit' ? this.handleViewClick : null,
-      onKeyUp: mode === 'edit' ? this.handleEditESC : null,
+      onMouseDown: mode !== 'edit' ? this.handleViewClick : undefined,
+      onKeyUp: mode === 'edit' ? this.handleEditESC : undefined,
       readOnly,
       ...props,
       ref: this.handleContainerRef
     }
   }
 
-  getViewerProps = (props = {}) => {
+  getViewerProps: GetViewerProps = (props = {}) => {
     return {
       mode: this.props.mode,
       readOnly: this.props.readOnly,
@@ -205,29 +199,26 @@ class Editable extends Component<EditableProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  getEditorProps = (props) => {
+  getEditorProps: GetEditorProps = (props = {}) => {
     return {
       mode: this.props.mode,
       onBlur: this.handleEditBlur,
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-      editorRef: (el) => {
-        this._editorRef = el
+      editorRef: (el: HTMLElement | null) => {
+        this._editorRef = el as HTMLInputElement
       },
       readOnly: this.props.readOnly,
       ...props
     }
   }
 
-  getEditButtonProps = (props = {}) => {
+  getEditButtonProps: GetEditButtonProps = (props = {}) => {
     return {
       onClick: this.handleEditButtonClick,
       onFocus: this.handleEditButtonFocus,
       onBlur: this.handleEditButtonBlur,
       isVisible: this.state.showModeToggle,
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-      buttonRef: (el) => {
-        this._editButtonRef = el
+      buttonRef: (el: Element) => {
+        this._editButtonRef = el as HTMLButtonElement
       },
       readOnly: this.props.readOnly,
       ...props
