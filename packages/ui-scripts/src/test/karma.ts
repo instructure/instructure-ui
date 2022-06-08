@@ -78,7 +78,7 @@ export const karma = () => {
   const scopeArgIndex = args.indexOf('--scope')
   const pathArgIndex = args.indexOf('--path')
 
-  let paths = []
+  let paths: string[] = []
 
   if (scopeArgIndex >= 0) {
     const allPackages = getPackages()

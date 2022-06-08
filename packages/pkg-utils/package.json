@@ -4,7 +4,7 @@
   "description": "Utilities for managing node packages in a monorepo.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
-  "types": "./types/index.d.ts",
+  "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -13,7 +13,8 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "run -T ui-test --lint",
-    "lint:fix": "run -T ui-test --lint --fix"
+    "lint:fix": "run -T ui-test --lint --fix",
+    "build:ts": "run -T tsc -b tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {

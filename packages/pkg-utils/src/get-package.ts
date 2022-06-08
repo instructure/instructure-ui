@@ -22,43 +22,54 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
-const path = require('path')
-const readPkgUp = require('read-pkg-up')
-const Package = require('@lerna/package').Package
+import fs from 'fs'
+import path from 'path'
+import readPkgUp, { NormalizedReadResult, NormalizeOptions } from 'read-pkg-up'
+//@ts-expect-error: no type declarations for this package
+import { Package } from '@lerna/package'
 
-exports.getPackage = function getPackage(options) {
+type Options = Partial<NormalizeOptions>
+
+function getPackage(options?: Options) {
   const result = readPackage(options)
 
   return new Package(result.packageJson, path.dirname(result.path))
 }
 
-exports.getPackageJSON = function getPackageJSON(options) {
+function getPackageJSON(options?: Options): readPkgUp.PackageJson {
   const pkg = readPackage(options).packageJson
 
   return pkg
 }
 
-exports.getPackagePath = function getPackagePath(options) {
-  return readPackage(options).path
+function getPackagePath(options: Options) {
+  const packageJson = readPackage(options)
+
+  return packageJson.path
 }
 
-function readPackage(options) {
+type PackageJson = {
+  pkg?: readPkgUp.PackageJson
+} & NormalizedReadResult
+
+function readPackage(options?: Options): PackageJson {
   // eslint-disable-next-line no-param-reassign
-  options = {
+  const opts = {
     cwd: process.cwd(),
     normalize: false,
     ...options
   }
 
   const pkg = readPkgUp.sync({
-    cwd: fs.realpathSync(options.cwd),
-    normalize: options.normalize
-  })
+    cwd: fs.realpathSync(opts.cwd),
+    normalize: opts.normalize
+  }) as PackageJson
 
   // for backwards compat:
-  pkg.pkg = pkg.packageJson
+  pkg.pkg = pkg?.packageJson
 
   return pkg
 }
-exports.readPackage = readPackage
+
+export { readPackage, getPackage, getPackageJSON, getPackagePath }
+export type { PackageJson, Options }

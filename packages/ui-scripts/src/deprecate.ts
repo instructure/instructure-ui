@@ -36,7 +36,7 @@ try {
   // optional version and fix version arguments:
   // e.g. ui-scripts --deprecate 5.11.0 5.11.1
   const pkgJSON = getPackageJSON(undefined)
-  const versionToDeprecate = process.argv[3] || pkgJSON.version
+  const versionToDeprecate = process.argv[3] || pkgJSON.version!
   const fixVersion = process.argv[4]
 
   deprecate(versionToDeprecate, fixVersion, getConfig(pkgJSON))

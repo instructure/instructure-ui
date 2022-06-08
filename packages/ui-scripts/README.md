@@ -86,14 +86,6 @@ To publish all packages (defaults to current version):
 
 `yarn ui-scripts --publish [version]`
 
-#### `post-publish`
-
-To run post-publish steps
-(create Git tag, create Jira version, Slack notification)
-of the release script:
-
-`yarn ui-scripts --post-publish`
-
 #### `deploy-docs`
 
 To run the deploy of the documentation (to Github pages):
