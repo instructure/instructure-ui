@@ -53,7 +53,7 @@ import type { TextInputProps } from '@instructure/ui-text-input'
 import type {
   OptionsItemProps,
   OptionsSeparatorProps,
-  ItemProps
+  OptionsItemRenderProps
 } from '@instructure/ui-options'
 import type {
   SelectableProps,
@@ -347,7 +347,9 @@ class Select extends Component<SelectProps> {
 
     const getRenderOptionLabel = (
       renderOptionLabel: RenderSelectOptionLabel
-    ): React.ReactNode | ((args: ItemProps) => React.ReactNode) => {
+    ):
+      | React.ReactNode
+      | ((_args: OptionsItemRenderProps) => React.ReactNode) => {
       return typeof renderOptionLabel === 'function' &&
         !renderOptionLabel?.prototype?.isReactComponent
         ? renderOptionLabel.bind(null, {
