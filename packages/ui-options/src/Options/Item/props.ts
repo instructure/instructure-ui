@@ -34,7 +34,7 @@ import type {
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
-type ItemProps = {
+type OptionsItemRenderProps = {
   children?: React.ReactNode | (() => React.ReactNode)
   /**
    * Element type to render as. Will be set to `<a>` if href is provided.
@@ -55,17 +55,21 @@ type ItemProps = {
   role?: string
 }
 
-type OptionsItemOwnProps = ItemProps & {
+type OptionsItemOwnProps = OptionsItemRenderProps & {
   /**
    * Content to render before the label
    * (if you pass a function, it has the `props` as its parameter)
    */
-  renderBeforeLabel?: React.ReactNode | ((props: ItemProps) => React.ReactNode)
+  renderBeforeLabel?:
+    | React.ReactNode
+    | ((props: OptionsItemRenderProps) => React.ReactNode)
   /**
    * Content to render after the label
    * (if you pass a function, it has the `props` as its parameter)
    */
-  renderAfterLabel?: React.ReactNode | ((props: ItemProps) => React.ReactNode)
+  renderAfterLabel?:
+    | React.ReactNode
+    | ((props: OptionsItemRenderProps) => React.ReactNode)
   /**
    * Sets the vAlign of renderBeforeLabel content
    */
@@ -146,5 +150,5 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { OptionsItemProps, OptionsItemStyle, ItemProps }
+export type { OptionsItemProps, OptionsItemStyle, OptionsItemRenderProps }
 export { propTypes, allowedProps }

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { ForwardedRef, forwardRef } from 'react'
+import React, { ForwardedRef, forwardRef, PropsWithChildren } from 'react'
 import { decorator } from '@instructure/ui-decorator'
 import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
 import hoistNonReactStatics from 'hoist-non-react-statics'
@@ -30,10 +30,9 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
 // decorators into account. This type needs to be added to every component,
 // that uses the bidirectional decorator.
 // see https://github.com/microsoft/TypeScript/issues/4881
-export type BidirectionalProps = {
+export type BidirectionalProps = PropsWithChildren<{
   dir?: 'ltr' | 'rtl'
-  children?: React.ReactNode
-}
+}>
 
 type BidirectionalInternalProps = {
   forwardedRef: ForwardedRef<any>
