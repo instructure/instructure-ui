@@ -496,8 +496,11 @@ export type ColorIndicatorTheme = {
   backgroundImage: string
   backgroundSize: string
   backgroundPosition: string
-  size: string
+  circleIndicatorSize: string
+  rectangleIndicatorSize: string
   colorIndicatorBorderColor: string
+  rectangularIndicatorBorderRadius: Spacing['xxSmall']
+  rectangularIndicatorBorderWidth: Border['widthSmall']
 }
 
 export type DrawerLayoutContentTheme = {

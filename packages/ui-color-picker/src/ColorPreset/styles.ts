@@ -23,6 +23,7 @@
  */
 
 import type { ColorPresetTheme } from '@instructure/shared-types'
+import type { ColorPresetProps } from './props'
 /**
  * ---
  * private: true
@@ -33,7 +34,11 @@ import type { ColorPresetTheme } from '@instructure/shared-types'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: ColorPresetTheme) => {
+const generateStyle = (
+  componentTheme: ColorPresetTheme,
+  props: ColorPresetProps
+) => {
+  const { colorMixerSettings } = props
   return {
     colorPreset: {
       label: 'colorPreset',
@@ -47,18 +52,6 @@ const generateStyle = (componentTheme: ColorPresetTheme) => {
       height: '2.375rem',
       margin: componentTheme.xxSmallSpacing
     },
-    presetRect: {
-      label: 'colorPreset__presetRect',
-      width: '100%',
-      height: '100%',
-      borderRadius: componentTheme.xxSmallSpacing,
-      borderWidth: componentTheme.smallBorder,
-      boxSizing: 'border-box',
-      borderStyle: 'solid',
-      backgroundImage: componentTheme.checkerboardBackgroundImage,
-      backgroundSize: componentTheme.checkerboardBackgroundSize,
-      backgroundPosition: componentTheme.checkerboardBackgroundPosition
-    },
     selectedIndicator: {
       label: 'colorPreset__selectedIndicator',
       width: '1.25rem',
@@ -69,13 +62,18 @@ const generateStyle = (componentTheme: ColorPresetTheme) => {
       borderRadius: '1.25rem',
       boxSizing: 'border-box',
       position: 'relative',
-      left: '1.375rem',
-      bottom: '.5rem',
-      backgroundColor: componentTheme.selectedIndicatorBackgroundColor
+      left: '1.5rem',
+      bottom: '2.75rem',
+      backgroundColor: componentTheme.selectedIndicatorBackgroundColor,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     popoverContent: {
       label: 'colorPreset__popoverContent',
-      padding: componentTheme.smallSpacing
+      padding: componentTheme.smallSpacing,
+      maxHeight: colorMixerSettings?.maxHeight || '100vh',
+      overflow: 'scroll'
     },
     popoverDivider: {
       label: 'colorPreset__popoverDivider',
@@ -84,8 +82,8 @@ const generateStyle = (componentTheme: ColorPresetTheme) => {
       borderColor: componentTheme.popoverDividerColor,
       margin: `${componentTheme.smallSpacing} 0 ${componentTheme.smallSpacing} 0`
     },
-    popoverContentBlock: {
-      label: 'colorPreset__popoverContentBlock',
+    popoverContrastBlock: {
+      label: 'colorPreset__popoverContrastBlock',
       borderTop: 'solid',
       borderWidth: componentTheme.smallBorder,
       borderColor: componentTheme.popoverDividerColor,

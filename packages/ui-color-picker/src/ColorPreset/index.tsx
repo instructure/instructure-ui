@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, SyntheticEvent } from 'react'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -33,14 +33,10 @@ import { Tooltip } from '@instructure/ui-tooltip'
 import { Popover } from '@instructure/ui-popover'
 import { Text } from '@instructure/ui-text'
 import { Drilldown } from '@instructure/ui-drilldown'
+import type { DrillDownOnSelectArgs } from '@instructure/ui-drilldown'
 import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
-import {
-  colorToHex8,
-  hexToRgb,
-  isValid,
-  calcBlendedColor
-} from '@instructure/ui-color-utils'
-import { colorIndicatorBorderColor } from '../ColorIndicator/theme'
+import { colorToHex8, hexToRgb } from '@instructure/ui-color-utils'
+import { ColorIndicator } from '../ColorIndicator'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
 import { propTypes, allowedProps } from './props'
@@ -92,7 +88,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
 
   onMenuItemSelected =
     (color: string) =>
-    (_e: React.MouseEvent<Element, MouseEvent>, args: { value: any }) => {
+    (_e: SyntheticEvent<Element, Event>, args: DrillDownOnSelectArgs) => {
       if (args.value === 'select') {
         this.props.onSelect(color)
       }
@@ -156,7 +152,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
           }
         />
         {this.props?.colorMixerSettings?.colorContrast && (
-          <div css={this.props.styles?.popoverContentBlock}>
+          <div css={this.props.styles?.popoverContrastBlock}>
             <ColorContrast
               firstColor={
                 this.props.colorMixerSettings.colorContrast.firstColor
@@ -230,16 +226,8 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
           ? { onClick: () => this.props.onSelect(color) }
           : {})}
       >
-        <div
-          css={this.props?.styles?.presetRect}
-          style={{
-            borderColor: calcBlendedColor(
-              hexToRgb(colorIndicatorBorderColor),
-              hexToRgb(isValid(color) ? color : '#fff')
-            ),
-            boxShadow: `inset 0 0 0 50px ${color}`
-          }}
-        >
+        <div>
+          <ColorIndicator color={color} shape="rectangle" />
           {this.props.selected === color && (
             <div css={this.props?.styles?.selectedIndicator}>
               <IconCheckDarkSolid

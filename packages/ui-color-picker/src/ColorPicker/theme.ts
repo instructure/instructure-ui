@@ -63,7 +63,7 @@ const generateComponentTheme = (theme: Theme): ColorPickerTheme => {
     errorIconsRightPadding: spacing?.small,
     successIconRightPadding: spacing?.small,
     labelRightMargin: spacing?.xxSmall,
-    popoverContentPadding: spacing?.xxSmall,
+    popoverContentPadding: spacing?.small,
     popoverContentBlockBorderWidth: borders?.widthSmall,
     popoverContentBlockTopMargin: spacing?.small,
     popoverContentBlockBottomMargin: spacing?.small,

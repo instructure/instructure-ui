@@ -33,7 +33,7 @@ export const colorIndicatorBorderColor = '#384A5899'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): ColorIndicatorTheme => {
-  const { colors, borders } = theme
+  const { colors, borders, spacing } = theme
 
   const componentVariables = {
     borderWidth: borders?.widthSmall,
@@ -43,8 +43,11 @@ const generateComponentTheme = (theme: Theme): ColorIndicatorTheme => {
     linear-gradient(-45deg, transparent 75%, ${colors.tiara} 75%)`,
     backgroundSize: '.5rem .5rem',
     backgroundPosition: '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px',
-    size: '1.5rem',
-    colorIndicatorBorderColor
+    circleIndicatorSize: '1.5rem',
+    rectangleIndicatorSize: '2.375rem',
+    colorIndicatorBorderColor,
+    rectangularIndicatorBorderRadius: spacing?.xxSmall,
+    rectangularIndicatorBorderWidth: borders?.widthSmall
   }
 
   return {

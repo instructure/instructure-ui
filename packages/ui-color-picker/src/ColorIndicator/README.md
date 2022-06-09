@@ -41,10 +41,27 @@ example: true
   <View margin='small'>
     <ColorIndicator color='hwb(1.5708rad 60% 0%)'/>
   </View>
-
 </div>
 
 
+```
+
+### Shapes
+
+`ColorIndicator` can have a `shape` prop. It is either a `circle` which is the default, or a `rectangle`
+
+```js
+---
+example: true
+---
+<div style={{display:'flex', background:'white'}}>
+  <View margin='small'>
+    <ColorIndicator color='#ff0000'/>
+  </View>
+  <View margin='small'>
+    <ColorIndicator color='#ff0000' shape='rectangle'/>
+  </View>
+</div>
 ```
 
 ### Color Button Pattern

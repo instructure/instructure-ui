@@ -49,7 +49,8 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
   static readonly componentId = 'ColorIndicator'
 
   static defaultProps = {
-    color: ''
+    color: '',
+    shape: 'circle'
   }
   ref: HTMLDivElement | null = null
 

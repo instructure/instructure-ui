@@ -27,6 +27,7 @@ import React, { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
+import { addEventListener } from '@instructure/ui-dom-utils'
 import shallowCompare from '../utils/shallowCompare'
 import type { ColorPaletteProps, ColorPaletteState } from './props'
 import type { HSVType } from '../props'
@@ -100,12 +101,12 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
       y: this.paletteHeight - v * this.paletteHeight
     }
   }
-  //TODO remove any
+
   handlePaletteMouseDown(e: React.MouseEvent<ViewOwnProps, MouseEvent>) {
     this.handleChange(e)
-    //TODO remove any
-    window.addEventListener('mousemove', this.handleChange as any)
-    window.addEventListener('mouseup', this.handleMouseUp)
+
+    addEventListener(window, 'mousemove', this.handleChange)
+    addEventListener(window, 'mouseup', this.handleMouseUp)
   }
 
   handleMouseUp = () => {
@@ -113,9 +114,8 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   }
 
   removeEventListeners() {
-    //TODO remove any
-    window.removeEventListener('mousemove', this.handleChange as any)
-    window.removeEventListener('mouseup', this.handleMouseUp)
+    addEventListener(window, 'mousemove', this.handleChange)
+    addEventListener(window, 'mouseup', this.handleMouseUp)
   }
 
   calcColorPosition(clientX: number, clientY: number) {
@@ -142,9 +142,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     return { newXPosition, newYPosition }
   }
 
-  handleChange = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent
-  ) => {
+  handleChange = (e: React.MouseEvent<ViewOwnProps, MouseEvent>) => {
     if (this.props.disabled) return
     const { clientX, clientY } = e
     const { newXPosition, newYPosition } = this.calcColorPosition(

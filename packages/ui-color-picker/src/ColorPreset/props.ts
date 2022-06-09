@@ -66,6 +66,7 @@ type ColorPresetOwnProps = {
    * It will be called with the new list of colors
    */
   colorMixerSettings?: {
+    maxHeight: string
     onPresetChange: (colors: ColorPresetOwnProps['colors']) => void
     colorMixer: {
       withAlpha: boolean
@@ -117,13 +118,12 @@ type ColorPresetProps = ColorPresetOwnProps &
 type ColorPresetStyle = ComponentStyle<
   | 'colorPreset'
   | 'addNewPresetButton'
-  | 'presetRect'
   | 'selectedIndicator'
   | 'popoverContent'
   | 'popoverDivider'
   | 'popoverFooter'
   | 'label'
-  | 'popoverContentBlock'
+  | 'popoverContrastBlock'
 >
 
 const propTypes: PropValidators<PropKeys> = {

@@ -24,12 +24,21 @@
 
 import type { ColorIndicatorProps, ColorIndicatorStyle } from './props'
 import { ColorIndicatorTheme } from '@instructure/shared-types'
-import {
-  hexToRgb,
-  isValid,
-  calcBlendedColor
-} from '@instructure/ui-color-utils'
+import type { RGBAType } from '@instructure/ui-color-utils'
+import { hexToRgb, isValid } from '@instructure/ui-color-utils'
 
+const calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
+  // 0.4 as decided by design
+  const c2Alpha = c2.a * 0.4
+  const c1Alpha = 1 - c2Alpha
+  const alpha = 1 - c1Alpha * (1 - c1Alpha)
+
+  return `rgba(
+      ${(c2.r * c2Alpha) / alpha + (c1.r * c1Alpha * (1 - c2Alpha)) / alpha},
+      ${(c2.g * c2Alpha) / alpha + (c1.g * c1Alpha * (1 - c2Alpha)) / alpha},
+      ${(c2.b * c2Alpha) / alpha + (c1.b * c1Alpha * (1 - c2Alpha)) / alpha},
+      ${c2.a < 0.6 ? 0.6 : c2.a})`
+}
 /**
  * ---
  * private: true
@@ -44,14 +53,23 @@ const generateStyle = (
   componentTheme: ColorIndicatorTheme,
   props: ColorIndicatorProps
 ): ColorIndicatorStyle => {
-  const { color } = props
+  const { color, shape } = props
 
   return {
     colorIndicator: {
       label: 'colorIndicator',
-      width: componentTheme.size,
-      height: componentTheme.size,
-      borderRadius: componentTheme.size,
+      width:
+        shape === 'rectangle'
+          ? componentTheme.rectangleIndicatorSize
+          : componentTheme.circleIndicatorSize,
+      height:
+        shape === 'rectangle'
+          ? componentTheme.rectangleIndicatorSize
+          : componentTheme.circleIndicatorSize,
+      borderRadius:
+        shape === 'rectangle'
+          ? componentTheme.rectangularIndicatorBorderRadius
+          : componentTheme.circleIndicatorSize,
       boxSizing: 'border-box',
       borderWidth: componentTheme.borderWidth,
       boxShadow: `inset 0 0 0 1.5rem ${color || 'none'}`,

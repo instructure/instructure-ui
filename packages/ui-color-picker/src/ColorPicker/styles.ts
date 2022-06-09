@@ -47,7 +47,7 @@ const generateStyle = (
 ): ColorPickerStyle => {
   const { hashMarkColor, errorIconColor, warningIconColor, successIconColor } =
     componentTheme
-  const { checkContrast } = props
+  const { checkContrast, popoverMaxHeight } = props
   const { isSimple } = state
 
   return {
@@ -108,8 +108,8 @@ const generateStyle = (
       display: 'flex',
       flexDirection: 'row-reverse',
       padding: componentTheme.popoverFooterPadding,
-      borderColor: componentTheme.popoverSeparatorColor,
-      borderTop: `solid ${componentTheme.popoverFooterTopBorderWidth}`
+      borderTop: `solid ${componentTheme.popoverFooterTopBorderWidth}`,
+      borderColor: componentTheme.popoverSeparatorColor
     },
     colorMixerButtonContainer: {
       label: 'colorPicker__colorMixerButtonContainer',
@@ -118,7 +118,7 @@ const generateStyle = (
     },
     popoverContentContainer: {
       label: 'colorPicker__popoverContentContainer',
-      maxHeight: '80vh',
+      maxHeight: popoverMaxHeight || '100vh',
       overflow: 'scroll'
     }
   }
