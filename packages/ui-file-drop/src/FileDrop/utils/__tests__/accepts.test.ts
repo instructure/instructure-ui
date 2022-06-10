@@ -26,26 +26,16 @@ import { expect } from '@instructure/ui-test-utils'
 import { accepts } from '../accepts'
 
 describe('accepts', () => {
-  const dropImage = {
-    lastModified: 1489419040000,
-    name: 'whale whale whale.jpg',
-    size: 4419800,
+  const dropImage = new File([], 'whale whale whale.jpg', {
     type: 'image/jpeg'
-  }
-  const dropFile = {
-    lastModified: 1489419040000,
-    name: 'whale oil production.pdf',
-    size: 44198009,
+  })
+  const dropFile = new File([], 'whale oil production.pdf', {
     type: 'application/pdf'
-  }
-  const chromeDragEnterFile = {
-    kind: 'file',
-    type: 'image/jpeg'
-  }
-  const firefoxDragEnterFile = {
-    kind: 'file',
+  })
+  const chromeDragEnterFile = new File([], '', { type: 'image/jpeg' })
+  const firefoxDragEnterFile = new File([], '', {
     type: 'application/x-moz-file'
-  }
+  })
 
   it('should take image/* to mean any image type', () => {
     expect(accepts(dropImage, 'image/*')).to.be.true()

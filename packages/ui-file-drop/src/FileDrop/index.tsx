@@ -65,22 +65,6 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   static allowedProps = allowedProps
   static defaultProps = {
     onClick: function (_e: React.MouseEvent) {},
-    onDrop: function (
-      _accepted: ArrayLike<DataTransferItem | File>,
-      _rejected: ArrayLike<DataTransferItem | File>,
-      _e: React.DragEvent
-    ) {},
-    onDropAccepted: function (
-      _accepted: ArrayLike<DataTransferItem | File>,
-      _e: React.DragEvent
-    ) {},
-    onDropRejected: function (
-      _rejected: ArrayLike<DataTransferItem | File>,
-      _e: React.DragEvent
-    ) {},
-    onDragEnter: function (_e: React.DragEvent) {},
-    onDragOver: function (_e: React.DragEvent) {},
-    onDragLeave: function (_e: React.DragEvent) {},
     shouldEnablePreview: false,
     shouldAllowMultiple: false,
     shouldAllowRepeats: true,
@@ -319,9 +303,6 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
       if (this.props.shouldAllowRepeats) {
         this.fileInputEl!.value = null as unknown as string
       }
-      // This bit of logic is necessary for MS browsers but causes unwanted warnings in Firefox
-      // So we need to apply this logic only on MS browsers
-      /* istanbul ignore if  */
     }
   }
 
