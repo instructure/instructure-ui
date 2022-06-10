@@ -87,11 +87,13 @@ async function publish({
       packages
     })
   } else {
-    info(`📦  Version: ${version}, Tag: snapshot`)
+    const tag = 'snapshot'
+    info(`📦  Version: ${version}, Tag: ${tag}`)
     return publishSnapshotVersion({
       version,
       packageName,
-      packages
+      packages,
+      tag
     })
   }
 }
@@ -119,15 +121,16 @@ async function publishSnapshotVersion(arg: {
   version: string
   packageName: string
   packages: PackageInfo[]
+  tag: string
 }) {
-  const { version, packageName, packages } = arg
+  const { version, packageName, packages, tag } = arg
   const snapshotVersion = calculateNextSnapshotVersion(version)
 
   info(`applying new snapshot version (${snapshotVersion}) to each package`)
 
   await bumpPackages(packageName, snapshotVersion)
 
-  for await (const pkg of publishPackages(packages, snapshotVersion)) {
+  for await (const pkg of publishPackages(packages, snapshotVersion, tag)) {
     info(
       `📦  Version ${snapshotVersion} of ${pkg.name} was successfully published!`
     )
@@ -167,7 +170,7 @@ function calculateNextSnapshotVersion(version: string): string {
 async function* publishPackages(
   packages: PackageInfo[],
   version: string,
-  tag?: string
+  tag: string
 ) {
   const wait = (delay: number) =>
     new Promise((resolve) => {
@@ -190,10 +193,7 @@ async function* publishPackages(
     if (packageVersions.includes(version)) {
       throw new Error(`📦  v${version} of ${pkg.name} is already published!`)
     } else {
-      const publishArgs = ['publish', pkg.location]
-      if (tag) {
-        publishArgs.push(...['--tag', tag])
-      }
+      const publishArgs = ['publish', pkg.location, '--tag', tag]
       await runCommandAsync('npm', publishArgs, [])
 
       await wait(500)

@@ -41,7 +41,6 @@ const NODE_PACKAGES = [
   'cz-lerna-changelog',
   'eslint-plugin-instructure-ui',
   'instui-cli',
-  'pkg-utils',
   'babel-plugin-transform-imports'
 ]
 
