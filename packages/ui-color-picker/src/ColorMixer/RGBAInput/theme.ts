@@ -22,15 +22,27 @@
  * SOFTWARE.
  */
 
-export { alpha } from './alpha'
-export { darken } from './darken'
-export { lighten } from './lighten'
-export { contrast } from './contrast'
-export { isValid } from './isValid'
-export { color2hex } from './conversions'
-export { colorToHex8 } from './conversions'
-export { colorToHsva } from './conversions'
-export { colorToHsla } from './conversions'
-export { colorToRGB } from './conversions'
-export { hexToRgb } from './conversions'
-export type { RGBType, HSVType, HSLType, RGBAType } from './colorTypes'
+import type { Theme } from '@instructure/ui-themes'
+import { ColorMixerRGBAInputTheme } from '@instructure/shared-types'
+
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: Theme): ColorMixerRGBAInputTheme => {
+  const { spacing, typography } = theme
+
+  const componentVariables = {
+    labelFontWeight: typography.fontWeightBold,
+    inputContainerTopMargin: spacing.xSmall,
+    tgbInputTopMargin: spacing.xSmall,
+    rgbaInputTopMargin: spacing.medium
+  }
+
+  return {
+    ...componentVariables
+  }
+}
+
+export default generateComponentTheme

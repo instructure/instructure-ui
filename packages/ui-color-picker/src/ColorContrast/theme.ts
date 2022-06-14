@@ -22,39 +22,41 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
-import { findDOMNode } from './findDOMNode'
-
-type ReactEvent = <T extends Event>(event: T) => void
+import type { Theme } from '@instructure/ui-themes'
+import { ColorContrastTheme } from '@instructure/shared-types'
 
 /**
- * ---
- * category: utilities/DOM
- * ---
- * Wrapper function for DOM addEventListener
- * @module addEventListener
- * @param { Node | Window } el - DOM node which will have the event listener attached
- * @param { string } event - a string specifying the event name ('click', 'focus', etc)
- * @param { React.EventHandler<React.SyntheticEvent<any, any>> } handler - function to run when event occurs
- * @param { boolean } capture - should the event be executed in the capturing or bubbling phase
- * @returns {{ remove(): void }} a method to remove the event listener
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-function addEventListener(
-  el: Node | Window,
-  event: keyof WindowEventMap,
-  handler: React.EventHandler<React.SyntheticEvent<any, any>>,
-  capture?: boolean
-) {
-  const node = el === window || el === document ? el : findDOMNode(el)
-  node?.addEventListener(event, handler as ReactEvent, capture)
+const generateComponentTheme = (theme: Theme): ColorContrastTheme => {
+  const { colors, typography, spacing, borders } = theme
+
+  const componentVariables = {
+    width: '17rem',
+
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeight,
+    fontSize: typography?.fontSizeMedium,
+
+    statusWrapperBottomMargin: spacing?.xxSmall,
+    colorIndicatorRightMargin: spacing?.small,
+    colorPreviewBottomMargin: spacing?.small,
+    colorPreviewTopMargin: spacing?.xSmall,
+    labelBottomMargin: spacing?.xxSmall,
+
+    smallBorder: borders.widthSmall,
+
+    successColor: colors.shamrock,
+    failureColor: colors.crimson,
+    pickedHexColor: colors.ash
+  }
 
   return {
-    remove() {
-      node?.removeEventListener(event, handler as ReactEvent, capture)
-    }
+    ...componentVariables
   }
 }
 
-export default addEventListener
-export { addEventListener }
+export default generateComponentTheme

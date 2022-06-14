@@ -21,16 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+export { ColorPicker } from './ColorPicker'
+export { ColorMixer } from './ColorMixer'
+export { ColorPreset } from './ColorPreset'
+export { ColorContrast } from './ColorContrast'
+export { ColorIndicator } from './ColorIndicator'
 
-export { alpha } from './alpha'
-export { darken } from './darken'
-export { lighten } from './lighten'
-export { contrast } from './contrast'
-export { isValid } from './isValid'
-export { color2hex } from './conversions'
-export { colorToHex8 } from './conversions'
-export { colorToHsva } from './conversions'
-export { colorToHsla } from './conversions'
-export { colorToRGB } from './conversions'
-export { hexToRgb } from './conversions'
-export type { RGBType, HSVType, HSLType, RGBAType } from './colorTypes'
+export type { ColorPickerProps } from './ColorPicker/props'
+export type { ColorMixerProps } from './ColorMixer/props'
+export type { ColorPresetProps } from './ColorPreset/props'
+export type { ColorContrastProps } from './ColorContrast/props'
+export type { ColorIndicatorProps } from './ColorIndicator/props'

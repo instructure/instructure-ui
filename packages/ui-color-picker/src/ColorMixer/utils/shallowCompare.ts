@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-export { alpha } from './alpha'
-export { darken } from './darken'
-export { lighten } from './lighten'
-export { contrast } from './contrast'
-export { isValid } from './isValid'
-export { color2hex } from './conversions'
-export { colorToHex8 } from './conversions'
-export { colorToHsva } from './conversions'
-export { colorToHsla } from './conversions'
-export { colorToRGB } from './conversions'
-export { hexToRgb } from './conversions'
-export type { RGBType, HSVType, HSLType, RGBAType } from './colorTypes'
+const shallowCompare = (
+  newObj: Record<string, unknown>,
+  prevObj: Record<string, unknown>
+) => {
+  for (const key in newObj) {
+    if (newObj[key] !== prevObj[key]) return true
+  }
+  return false
+}
+
+export default shallowCompare

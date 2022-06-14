@@ -28,14 +28,22 @@ import Color from 'tinycolor2'
  * ---
  * category: utilities
  * ---
- * check the contrast ratio of 2 colors
+ * check the contrast ratio of 2 colors. Optionally number of decimal places can be added
  * @module contrast
  * @param {String} color1
  * @param {String} color2
+ * @param {Number} decimalPlaces
  * @returns {Number} color contrast ratio
  */
-function contrast(color1: string, color2: string): number {
-  return Color.readability(color1, color2)
+const contrast = (
+  color1: string,
+  color2: string,
+  decimalPlaces = -1
+): number => {
+  return decimalPlaces >= 0
+    ? Math.round(Color.readability(color1, color2) * 10 ** decimalPlaces) /
+        10 ** decimalPlaces
+    : Color.readability(color1, color2)
 }
 
 export { contrast }

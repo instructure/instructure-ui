@@ -22,15 +22,16 @@
  * SOFTWARE.
  */
 
-export { alpha } from './alpha'
-export { darken } from './darken'
-export { lighten } from './lighten'
-export { contrast } from './contrast'
-export { isValid } from './isValid'
-export { color2hex } from './conversions'
-export { colorToHex8 } from './conversions'
-export { colorToHsva } from './conversions'
-export { colorToHsla } from './conversions'
-export { colorToRGB } from './conversions'
-export { hexToRgb } from './conversions'
-export type { RGBType, HSVType, HSLType, RGBAType } from './colorTypes'
+module.exports = {
+  presets: [
+    [
+      '@instructure/ui-babel-preset',
+      {
+        coverage: Boolean(process.env.COVERAGE),
+        esModules: Boolean(process.env.ES_MODULES),
+        removeConsole: process.env.NODE_ENV === 'production',
+        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+      }
+    ]
+  ]
+}

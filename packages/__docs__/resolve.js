@@ -51,6 +51,10 @@ module.exports = {
       __dirname,
       '../ui-code-editor/src/'
     ),
+    '@instructure/ui-color-picker$': path.resolve(
+      __dirname,
+      '../ui-color-picker/src/'
+    ),
     '@instructure/ui-date-input$': path.resolve(
       __dirname,
       '../ui-date-input/src/'

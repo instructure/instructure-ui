@@ -22,15 +22,35 @@
  * SOFTWARE.
  */
 
-export { alpha } from './alpha'
-export { darken } from './darken'
-export { lighten } from './lighten'
-export { contrast } from './contrast'
-export { isValid } from './isValid'
-export { color2hex } from './conversions'
-export { colorToHex8 } from './conversions'
-export { colorToHsva } from './conversions'
-export { colorToHsla } from './conversions'
-export { colorToRGB } from './conversions'
-export { hexToRgb } from './conversions'
-export type { RGBType, HSVType, HSLType, RGBAType } from './colorTypes'
+import type { ColorMixerStyle } from './props'
+
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (): ColorMixerStyle => {
+  return {
+    colorMixer: {
+      label: 'colorMixer'
+    },
+    disabledOverlay: {
+      label: 'colorMixer__disabledOverlay',
+      width: '18rem',
+      background: 'rgba(255,255,255,.5)',
+      height: '13.4rem',
+      position: 'absolute',
+      top: '0.3rem',
+      left: '0.3rem',
+      zIndex: 100,
+      cursor: 'not-allowed'
+    }
+  }
+}
+
+export default generateStyle
