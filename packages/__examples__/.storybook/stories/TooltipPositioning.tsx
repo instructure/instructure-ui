@@ -65,6 +65,18 @@ import {
 } from '@instructure/ui'
 
 function TooltipPositioning() {
+  return {
+    title: 'Tooltip positioning',
+    stories: [
+      {
+        storyName: 'Tooltip positions',
+        storyFn: toolTipPage
+      }
+    ]
+  }
+}
+
+const toolTipPage = () => {
   const components = [
     'just some text',
     <a href="/">'a' tag</a>,

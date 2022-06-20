@@ -244,10 +244,18 @@ const bar = "It should override the defaultValue."`,
   }
 ]
 
-function CodeEditorV2Examples() {
+function splitToChunks<P>(array: P[], parts: number) {
+  let result = []
+  for (let i = parts; i > 0; i--) {
+    result.push(array.splice(0, Math.ceil(array.length / i)))
+  }
+  return result
+}
+
+function generatePage(propCombos: CMProps[]) {
   return (
     <div style={{ width: '30rem' }}>
-      {propCombinations.map((props, idx) => (
+      {propCombos.map((props, idx) => (
         <div style={{ marginTop: '2rem' }} key={props.exampleLabel || idx}>
           {props.exampleLabel && (
             <Heading level="h4" margin="small none">
@@ -270,6 +278,22 @@ function CodeEditorV2Examples() {
       ))}
     </div>
   )
+}
+
+function CodeEditorV2Examples() {
+  const pages = splitToChunks(propCombinations, 3).map((page, index) => {
+    return {
+      storyName: 'Examples ' + index,
+      storyFn: () => generatePage(page),
+      chromaticSettings: {
+        delay: 3000
+      }
+    }
+  })
+  return {
+    title: 'CodeEditorV2',
+    stories: pages
+  }
 }
 
 export default CodeEditorV2Examples

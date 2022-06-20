@@ -53,27 +53,8 @@ type AdditionalExample = {
 
 // Stories not tied to one component and custom component examples
 const additionalExamples: AdditionalExample[] = [
-  {
-    title: 'Tooltip positioning',
-    stories: [
-      {
-        storyName: 'Tooltip positions',
-        storyFn: () => TooltipPositioning()
-      }
-    ]
-  },
-  {
-    title: 'CodeEditorV2',
-    stories: [
-      {
-        storyName: 'Examples',
-        storyFn: () => CodeEditorV2Examples(),
-        chromaticSettings: {
-          delay: 3000
-        }
-      }
-    ]
-  }
+  TooltipPositioning(),
+  CodeEditorV2Examples()
 ]
 
 const examplesContext = require.context(
@@ -156,7 +137,6 @@ console.log(
 
 additionalExamples.forEach((example) => {
   const { title, stories } = example
-
   const storiesOfExample = storiesOf(title, module)
   stories.forEach((story) => {
     storiesOfExample.add(story.storyName, story.storyFn, {
