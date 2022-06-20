@@ -40,7 +40,7 @@ import { renderPage } from './renderPage'
 import propJSONData from '../../prop-data.json'
 
 import TooltipPositioning from './TooltipPositioning'
-// import CodeEditorV2Examples from './CodeEditorV2Examples'
+import CodeEditorV2Examples from './CodeEditorV2Examples'
 
 type AdditionalExample = {
   title: StoryKind
@@ -61,21 +61,19 @@ const additionalExamples: AdditionalExample[] = [
         storyFn: () => TooltipPositioning()
       }
     ]
+  },
+  {
+    title: 'CodeEditorV2',
+    stories: [
+      {
+        storyName: 'Examples',
+        storyFn: () => CodeEditorV2Examples(),
+        chromaticSettings: {
+          delay: 3000
+        }
+      }
+    ]
   }
-  // TODO: try to fix the editor not rendering fully on chromatic screenshot,
-  //  even with delay
-  // {
-  //   title: 'CodeEditorV2',
-  //   stories: [
-  //     {
-  //       storyName: 'Examples',
-  //       storyFn: () => CodeEditorV2Examples(),
-  //       chromaticSettings: {
-  //         delay: 3000
-  //       }
-  //     }
-  //   ]
-  // }
 ]
 
 const examplesContext = require.context(
@@ -162,8 +160,10 @@ additionalExamples.forEach((example) => {
   const storiesOfExample = storiesOf(title, module)
   stories.forEach((story) => {
     storiesOfExample.add(story.storyName, story.storyFn, {
-      chromatic: chromaticSettings,
-      ...(story.chromaticSettings || {})
+      chromatic: {
+        ...chromaticSettings,
+        ...(story.chromaticSettings || {})
+      }
     })
     numStories++
   })
