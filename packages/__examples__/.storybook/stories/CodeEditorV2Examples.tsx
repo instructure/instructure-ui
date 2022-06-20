@@ -286,7 +286,8 @@ function CodeEditorV2Examples() {
       storyName: 'Examples ' + index,
       storyFn: () => generatePage(page),
       chromaticSettings: {
-        delay: 3000
+        delay: 3000,
+        pauseAnimationAtEnd: false
       }
     }
   })
