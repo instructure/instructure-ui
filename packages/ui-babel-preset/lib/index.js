@@ -88,6 +88,11 @@ module.exports = function (
     require('@babel/plugin-proposal-optional-chaining').default,
     require('@babel/plugin-transform-destructuring').default,
     [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before plugins that set displayName!
+    [
+      require('@babel/plugin-transform-typescript').default,
+      { allowDeclareFields: true }
+    ], // needed by plugin-proposal-class-properties
+    require('@babel/plugin-proposal-class-properties').default, // needed for Webpack 4 compat
     require('./babel-plugin-add-displayname-for-react'),
     require('@babel/plugin-proposal-export-default-from').default,
     [
@@ -149,7 +154,6 @@ module.exports = function (
       ]
     ].concat(plugins)
   }
-
   return {
     presets,
     plugins,
