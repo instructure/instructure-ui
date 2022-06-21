@@ -165,4 +165,29 @@ describe('<Responsive />', async () => {
 
     expect(renderSpy).to.have.been.calledOnce()
   })
+
+  it('should apply the `display` prop', async () => {
+    const renderSpy = spy()
+    await mount(
+      <div style={{ width: 200 }} id="testContainer">
+        <Responsive
+          query={{
+            small: { maxWidth: 300 },
+            medium: { minWidth: 300 },
+            large: { minWidth: 800 }
+          }}
+          render={(props, matches) => {
+            renderSpy(props, matches)
+            return <div>hello</div>
+          }}
+          display="inline-flex"
+        />
+      </div>
+    )
+
+    const responsiveDiv = document.querySelector('#testContainer')
+      ?.firstChild as HTMLDivElement
+
+    expect(responsiveDiv.style.display).to.equal('inline-flex')
+  })
 })

@@ -168,7 +168,7 @@ class Responsive extends Component<ResponsiveProps> {
 
   render() {
     const { matches, hasRendered } = this.state
-    const { props, render, children } = this.props
+    const { props, render, children, display } = this.props
     let renderFunc
     // Responsive needs to render once to measure the dom and obtain matches.
     // Calling the render prop on this initial render can cause visual side
@@ -180,7 +180,7 @@ class Responsive extends Component<ResponsiveProps> {
     }
 
     return (
-      <div ref={this.ref}>
+      <div ref={this.ref} style={{ display }}>
         {renderFunc && renderFunc(this.mergeProps(matches, props), matches)}
       </div>
     )

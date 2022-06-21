@@ -77,6 +77,13 @@ type ResponsiveOwnProps = {
     props?: ResponsivePropsObject | null,
     matches?: QueriesMatching
   ) => any
+
+  /**
+   * The Responsive component is rendered as a `<div>`,
+   * so it has `display="block"` by default.
+   * You can override the display value with this prop.
+   */
+  display?: 'inline' | 'block' | 'inline-block' | 'flex' | 'inline-flex'
 }
 
 type PropKeys = keyof ResponsiveOwnProps
@@ -90,7 +97,14 @@ const propTypes: PropValidators<PropKeys> = {
   query: PropTypes.objectOf(ResponsivePropTypes.validQuery).isRequired,
   props: PropTypes.objectOf(PropTypes.object),
   render: PropTypes.func,
-  children: PropTypes.func
+  children: PropTypes.func,
+  display: PropTypes.oneOf([
+    'inline',
+    'block',
+    'inline-block',
+    'flex',
+    'inline-flex'
+  ])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -98,7 +112,8 @@ const allowedProps: AllowedPropKeys = [
   'query',
   'props',
   'render',
-  'children'
+  'children',
+  'display'
 ]
 
 export type {
