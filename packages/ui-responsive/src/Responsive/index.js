@@ -69,14 +69,27 @@ class Responsive extends Component {
      * Function that takes the same form and arguments as the render prop. Either this or a `render`
      * prop function must be supplied.
      */
-    children: PropTypes.func
+    children: PropTypes.func,
+    /**
+     * The Responsive component is rendered as a `<div>`,
+     * so it has `display="block"` by default.
+     * You can override the display value with this prop.
+     */
+    display: PropTypes.oneOf([
+      'inline',
+      'block',
+      'inline-block',
+      'flex',
+      'inline-flex'
+    ])
   }
 
   static defaultProps = {
     children: null,
     render: undefined,
     match: 'element',
-    props: null
+    props: null,
+    display: undefined
   }
 
   _matchListener = null
@@ -182,7 +195,7 @@ class Responsive extends Component {
 
   render() {
     const { matches, hasRendered } = this.state
-    const { props, render, children } = this.props
+    const { props, render, display, children } = this.props
     let renderFunc
     // Responsive needs to render once to measure the dom and obtain matches.
     // Calling the render prop on this initial render can cause visual side
@@ -193,7 +206,7 @@ class Responsive extends Component {
       renderFunc = children || render
     }
     return (
-      <div>
+      <div style={{ display }}>
         {renderFunc && renderFunc(this.mergeProps(matches, props), matches)}
       </div>
     )
