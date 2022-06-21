@@ -260,19 +260,24 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = [
   'checkContrast',
+  'colorMixerSettings',
+  'children',
   'disabled',
   'elementRef',
   'isRequired',
   'label',
   'onChange',
   'placeholderText',
+  'popoverScreenReaderLabel',
+  'popoverButtonScreenReaderLabel',
+  'popoverMaxHeight',
   'renderInvalidColorMessage',
   'renderIsRequiredMessage',
   'renderMessages',
-  'colorMixerSettings',
   'tooltip',
   'value',
-  'width'
+  'width',
+  'withAlpha'
 ]
 
 export type {

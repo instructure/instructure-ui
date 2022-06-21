@@ -27,7 +27,8 @@ import PropTypes from 'prop-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  ColorIndicatorTheme
 } from '@instructure/shared-types'
 
 type ColorIndicatorOwnProps = {
@@ -50,7 +51,7 @@ type PropKeys = keyof ColorIndicatorOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorIndicatorProps = ColorIndicatorOwnProps &
-  WithStyleProps<null, ColorIndicatorStyle> &
+  WithStyleProps<ColorIndicatorTheme, ColorIndicatorStyle> &
   OtherHTMLAttributes<ColorIndicatorOwnProps>
 
 type ColorIndicatorStyle = ComponentStyle<'colorIndicator'>
@@ -61,7 +62,7 @@ const propTypes: PropValidators<PropKeys> = {
   shape: PropTypes.oneOf(['circle', 'rectangle'])
 }
 
-const allowedProps: AllowedPropKeys = ['color']
+const allowedProps: AllowedPropKeys = ['color', 'elementRef', 'shape']
 
 export type { ColorIndicatorProps, ColorIndicatorStyle }
 export { propTypes, allowedProps }

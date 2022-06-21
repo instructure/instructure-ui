@@ -35,7 +35,7 @@ import type { ColorInputWithoutInstance } from 'tinycolor2'
 
 /**
  * Converts any valid `TinyColor` colors to hex string
- * @param {String} rgb a color string
+ * @param {ColorInputWithoutInstance} rgb a color string
  * @returns {String} a hex string like `#FF0000`
  * @module color2hex
  */
@@ -96,10 +96,7 @@ export {
   colorToHsva,
   colorToHsla,
   colorToRGB,
-  //these are needed for backward compatibility
-  //TODO deprecate
-  colorToRGB as hexToRgb,
-  //these are needed for backward compatibility
+  //this is needed for backward compatibility
   //TODO deprecate
   colorToHex as color2hex
 }

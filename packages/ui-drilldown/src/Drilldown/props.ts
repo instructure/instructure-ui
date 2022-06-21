@@ -64,13 +64,13 @@ type SeparatorChild = React.ComponentElement<
   DrilldownSeparatorProps,
   DrilldownSeparator
 >
-type DrillDownOnSelectArgs = {
+type DrilldownOnSelectArgs = {
   value: DrilldownOptionValue | DrilldownOptionValue[]
   isSelected: boolean
   selectedOption: OptionChild
   drilldown: Drilldown
 }
-type DrillDownOnToggleArgs = {
+type DrilldownOnToggleArgs = {
   shown: boolean
   drilldown: Drilldown
   pageHistory: string[]
@@ -167,13 +167,13 @@ type DrilldownOwnProps = {
    */
   onToggle?: (
     event: React.UIEvent | React.FocusEvent,
-    args: DrillDownOnToggleArgs
+    args: DrilldownOnToggleArgs
   ) => void
 
   /**
    * Callback fired when an item within the `<Drilldown />` is selected
    */
-  onSelect?: (event: React.SyntheticEvent, args: DrillDownOnSelectArgs) => void
+  onSelect?: (event: React.SyntheticEvent, args: DrilldownOnSelectArgs) => void
 
   /**
    * If a trigger is supplied, callback fired when the `<Drilldown />` is closed
@@ -371,7 +371,7 @@ export type {
   GroupChild,
   OptionChild,
   SeparatorChild,
-  DrillDownOnSelectArgs,
-  DrillDownOnToggleArgs
+  DrilldownOnSelectArgs,
+  DrilldownOnToggleArgs
 }
 export { propTypes, allowedProps }

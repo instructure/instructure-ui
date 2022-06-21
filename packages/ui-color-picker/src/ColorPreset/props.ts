@@ -27,7 +27,8 @@ import PropTypes from 'prop-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  ColorPresetTheme
 } from '@instructure/shared-types'
 import type { RGBAType } from '../ColorMixer/props'
 
@@ -112,7 +113,7 @@ type PropKeys = keyof ColorPresetOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorPresetProps = ColorPresetOwnProps &
-  WithStyleProps<null, ColorPresetStyle> &
+  WithStyleProps<ColorPresetTheme, ColorPresetStyle> &
   OtherHTMLAttributes<ColorPresetOwnProps>
 
 type ColorPresetStyle = ComponentStyle<
@@ -139,10 +140,14 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
+  'addNewPresetButtonScreenReaderLabel',
   'colors',
+  'disabled',
+  'elementRef',
   'label',
   'colorMixerSettings',
   'onSelect',
+  'popoverScreenReaderLabel',
   'selected'
 ]
 

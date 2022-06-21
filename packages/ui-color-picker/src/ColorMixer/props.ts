@@ -122,10 +122,15 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
+  'disabled',
   'elementRef',
   'value',
   'onChange',
-  'withAlpha'
+  'withAlpha',
+  'rgbRedInputScreenReaderLabel',
+  'rgbGreenInputScreenReaderLabel',
+  'rgbBlueInputScreenReaderLabel',
+  'rgbAlphaInputScreenReaderLabel'
 ]
 
 export type {

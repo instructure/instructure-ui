@@ -25,7 +25,7 @@
 import type { ColorIndicatorProps, ColorIndicatorStyle } from './props'
 import { ColorIndicatorTheme } from '@instructure/shared-types'
 import type { RGBAType } from '@instructure/ui-color-utils'
-import { hexToRgb, isValid } from '@instructure/ui-color-utils'
+import { colorToRGB, isValid } from '@instructure/ui-color-utils'
 
 const calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
   // 0.4 as decided by design
@@ -78,8 +78,8 @@ const generateStyle = (
       backgroundSize: componentTheme.backgroundSize,
       backgroundPosition: componentTheme.backgroundPosition,
       borderColor: calcBlendedColor(
-        hexToRgb(componentTheme.colorIndicatorBorderColor),
-        hexToRgb(isValid(color!) ? color! : '#fff')
+        colorToRGB(componentTheme.colorIndicatorBorderColor),
+        colorToRGB(isValid(color!) ? color! : '#fff')
       )
     }
   }

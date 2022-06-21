@@ -27,7 +27,8 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  ColorMixerPaletteTheme
 } from '@instructure/shared-types'
 import type { HSVType } from '../props'
 
@@ -51,7 +52,7 @@ type PropKeys = keyof ColorPaletteOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorPaletteProps = ColorPaletteOwnProps &
-  WithStyleProps<null, ColorPaletteStyle> &
+  WithStyleProps<ColorMixerPaletteTheme, ColorPaletteStyle> &
   OtherHTMLAttributes<ColorPaletteOwnProps>
 
 type ColorPaletteStyle = ComponentStyle<
@@ -69,12 +70,14 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
+  'disabled',
   'hue',
   'color',
   'width',
   'height',
   'indicatorRadius',
-  'onChange'
+  'onChange',
+  'elementRef'
 ]
 
 export type { ColorPaletteProps, ColorPaletteState, ColorPaletteStyle }

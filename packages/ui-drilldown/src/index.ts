@@ -25,6 +25,6 @@
 export { Drilldown } from './Drilldown'
 export type {
   DrilldownProps,
-  DrillDownOnSelectArgs,
-  DrillDownOnToggleArgs
+  DrilldownOnSelectArgs,
+  DrilldownOnToggleArgs
 } from './Drilldown/props'
