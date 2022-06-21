@@ -131,8 +131,11 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
         ref={this.handleRef}
         css={styles?.colorMixer}
       >
-        <span aria-label={`${colorToHex8({ h, s, v, a })}`} aria-live="polite">
-          {disabled && <div css={styles?.disabledOverlay} />}
+        <span
+          css={styles?.sliderAndPaletteContainer}
+          aria-label={`${colorToHex8({ h, s, v, a })}`}
+          aria-live="polite"
+        >
           <ColorPalette
             disabled={disabled}
             width={this.width}

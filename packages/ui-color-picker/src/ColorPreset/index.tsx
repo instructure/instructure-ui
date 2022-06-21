@@ -221,9 +221,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         {...(selectOnClick
           ? { onClick: () => this.props.onSelect(color) }
           : {})}
-        aria-label={
-          this.props.selected === color ? `${color}, selected'` : color
-        }
+        {...(this.props.selected === color ? { 'aria-label': 'selected' } : {})}
       >
         <div>
           <ColorIndicator color={color} shape="rectangle" />

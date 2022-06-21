@@ -459,6 +459,7 @@ export type ColorMixerSliderTheme = {
   indicatorBorderWidth: Border['widthSmall']
   sliderBorderWidth: Border['widthSmall']
   indicatorZIndex: Stacking['above']
+  disabledOverlayZIndex: Stacking['topmost']
 }
 
 export type ColorMixerPaletteTheme = {
@@ -469,6 +470,8 @@ export type ColorMixerPaletteTheme = {
   indicatorBorderWidth: Border['widthSmall']
   paletteBorderRadius: Border['radiusMedium']
   paletteBorderWidth: Border['widthSmall']
+
+  disabledOverlayZIndex: Stacking['topmost']
 }
 
 export type ColorMixerRGBAInputTheme = {

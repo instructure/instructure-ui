@@ -56,7 +56,7 @@ const generateStyle = (
     },
     rgbInput: {
       label: 'RGBAInput__rgbInput',
-      marginRight: componentTheme.tgbInputTopMargin,
+      marginInlineEnd: componentTheme.tgbInputTopMargin,
       flex: 7
     },
     aInput: {

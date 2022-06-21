@@ -25,7 +25,14 @@ import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { ColorIndicatorProps } from '../props'
 
 export default {
-  getComponentProps: () => {
-    return {}
+  sectionProp: 'shape',
+  propValues: {
+    shape: ['circle', 'rectangle'],
+    color: ['#ff0000', 'yellow', 'rgba(50,100,150,.5)']
+  },
+  getExampleProps: (props) => {
+    return {
+      display: 'flex'
+    }
   }
 } as StoryConfig<ColorIndicatorProps>

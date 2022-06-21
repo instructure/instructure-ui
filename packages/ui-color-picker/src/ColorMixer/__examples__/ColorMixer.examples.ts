@@ -25,7 +25,14 @@ import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { ColorMixerProps } from '../props'
 
 export default {
-  getComponentProps: () => {
-    return {}
+  propValues: {
+    withAlpha: [true, false],
+    disabled: [true, false],
+    value: ['#ff5500'],
+    onChange: [() => {}],
+    rgbRedInputScreenReaderLabel: ['Input field for red'],
+    rgbGreenInputScreenReaderLabel: ['Input field for green'],
+    rgbBlueInputScreenReaderLabel: ['Input field for blue'],
+    rgbAlphaInputScreenReaderLabel: ['Input field for alpha']
   }
 } as StoryConfig<ColorMixerProps>

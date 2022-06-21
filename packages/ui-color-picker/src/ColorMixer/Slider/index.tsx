@@ -97,6 +97,7 @@ class Slider extends Component<SliderProps> {
   }
 
   handleChange = (e: React.MouseEvent<ViewOwnProps, MouseEvent>) => {
+    if (this.props.disabled) return
     const { clientX } = e
     const newPosition = this.calcSliderPositionFromCursorPosition(
       clientX,
@@ -182,7 +183,7 @@ class Slider extends Component<SliderProps> {
         position="relative"
         background="transparent"
         margin="small 0 0 0"
-        display="flex"
+        display="inline-block"
         borderRadius="medium"
         borderWidth="0"
         padding="0"
@@ -192,6 +193,9 @@ class Slider extends Component<SliderProps> {
         tabIndex={this.props.disabled ? undefined : 0}
       >
         <div css={this.props.styles?.indicator} />
+        {this.props.disabled && (
+          <div css={this.props.styles?.disabledOverlay} />
+        )}
         <div
           ref={(ref) => {
             this.sliderRef = ref

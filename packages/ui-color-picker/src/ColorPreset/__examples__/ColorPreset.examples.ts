@@ -25,7 +25,44 @@ import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { ColorPresetProps } from '../props'
 
 export default {
-  getComponentProps: () => {
-    return {}
+  propValues: {
+    selected: ['', '#0C89BF00'],
+    colors: [
+      [
+        '#ffffff',
+        '#0CBF94',
+        '#0C89BF00',
+        '#BF0C6D',
+        '#BF8D0C',
+        '#ff0000',
+        '#576A66',
+        '#35423A',
+        '#35423F'
+      ]
+    ],
+    colorMixerSettings: [
+      undefined,
+      {
+        onPresetChange: () => {},
+        colorMixer: {
+          rgbRedInputScreenReaderLabel: 'Input field for red',
+          rgbGreenInputScreenReaderLabel: 'Input field for green',
+          rgbBlueInputScreenReaderLabel: 'Input field for blue',
+          rgbAlphaInputScreenReaderLabel: 'Input field for alpha'
+        },
+        colorContrast: {
+          firstColor: '#FF0000',
+          secondColor: '#FFFF00',
+          label: 'Color Contrast Ratio',
+          successLabel: 'PASS',
+          failureLabel: 'FAIL',
+          normalTextLabel: 'Normal text',
+          largeTextLabel: 'Large text',
+          graphicsTextLabel: 'Graphics text',
+          firstColorLabel: 'Background',
+          secondColorLabel: 'Foreground'
+        }
+      }
+    ]
   }
 } as StoryConfig<ColorPresetProps>

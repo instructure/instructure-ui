@@ -222,6 +222,9 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
         onMouseDown={(e) => this.handlePaletteMouseDown(e)}
       >
         <div css={this.props.styles?.indicator} />
+        {this.props.disabled && (
+          <div css={this.props.styles?.disabledOverlay} />
+        )}
         <div
           css={this.props.styles?.palette}
           ref={(ref) => {

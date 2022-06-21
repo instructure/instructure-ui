@@ -56,7 +56,11 @@ type SliderProps = SliderOwnProps &
   OtherHTMLAttributes<SliderOwnProps>
 
 type SliderStyle = ComponentStyle<
-  'colorSlider' | 'indicator' | 'slider' | 'sliderBackground'
+  | 'colorSlider'
+  | 'indicator'
+  | 'slider'
+  | 'sliderBackground'
+  | 'disabledOverlay'
 >
 
 const propTypes: PropValidators<PropKeys> = {

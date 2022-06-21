@@ -328,8 +328,12 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
 
     const newHex = `${this.state.hexCode}${toPaste}`
     if (isValid(newHex)) {
+      if (typeof this.props.onChange === 'function') {
+        this.props.onChange(`${newHex}`)
+      }
       this.setState({
-        hexCode: newHex
+        hexCode: newHex,
+        mixedColor: `${newHex}`
       })
       return event.preventDefault()
     }
@@ -510,6 +514,11 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         </Button>
         <Button
           onClick={() => {
+            if (typeof this.props.onChange === 'function') {
+              this.props.onChange(
+                `${this.stripAlphaIfNeeded(this.state.mixedColor)}`
+              )
+            }
             this.setState({
               openColorPicker: false,
               hexCode: `${this.stripAlphaIfNeeded(this.state.mixedColor)}`

@@ -75,7 +75,7 @@ class Example extends React.Component {
       <ColorMixer
         disabled
         withAlpha
-        value="#38C25494"
+        value="#328DCFC2"
          onChange={() => {}}
       />
     );

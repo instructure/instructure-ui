@@ -60,7 +60,7 @@ const generateStyle = (componentTheme: ColorContrastTheme) => {
     successDescription: statusDescriptionStyle(true),
     failureDescription: statusDescriptionStyle(false),
     colorIndicator: {
-      marginRight: componentTheme.colorIndicatorRightMargin
+      marginInlineEnd: componentTheme.colorIndicatorRightMargin
     },
     statusIndicatorWrapper: {
       label: 'colorContrast__statusIndicatorWrapper',

@@ -25,7 +25,53 @@ import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { ColorPickerProps } from '../props'
 
 export default {
-  getComponentProps: () => {
-    return {}
+  propValues: {
+    withAlpha: [true, false],
+    disabled: [false, true],
+    value: ['#ff5500'],
+    onChange: [() => {}],
+    label: ['Color Input'],
+    tooltip: ['This is an example'],
+    placeholderText: ['Enter HEX'],
+    popoverButtonScreenReaderLabel: ['Open color mixer popover'],
+    colorMixerSettings: [
+      undefined,
+      {
+        popoverAddButtonLabel: 'Add',
+        popoverCloseButtonLabel: 'Cancel',
+        colorMixer: {
+          withAlpha: false,
+          rgbRedInputScreenReaderLabel: 'Input field for red',
+          rgbGreenInputScreenReaderLabel: 'Input field for green',
+          rgbBlueInputScreenReaderLabel: 'Input field for blue',
+          rgbAlphaInputScreenReaderLabel: 'Input field for alpha'
+        },
+        colorPreset: {
+          label: 'Choose a nice color',
+          colors: [
+            '#ffffff',
+            '#0CBF94',
+            '#0C89BF00',
+            '#BF0C6D',
+            '#BF8D0C',
+            '#ff0000',
+            '#576A66',
+            '#35423A',
+            '#35423F'
+          ]
+        },
+        colorContrast: {
+          firstColor: '#FFFF00',
+          label: 'Color Contrast Ratio',
+          successLabel: 'PASS',
+          failureLabel: 'FAIL',
+          normalTextLabel: 'Normal text',
+          largeTextLabel: 'Large text',
+          graphicsTextLabel: 'Graphics text',
+          firstColorLabel: 'Background',
+          secondColorLabel: 'Foreground'
+        }
+      }
+    ]
   }
 } as StoryConfig<ColorPickerProps>

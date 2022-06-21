@@ -25,7 +25,17 @@ import type { StoryConfig } from '@instructure/ui-test-utils'
 import type { ColorContrastProps } from '../props'
 
 export default {
-  getComponentProps: () => {
-    return {}
+  propValues: {
+    withoutColorPreview: [true, false],
+    firstColor: ['#0CBF94', '#ffff0099'],
+    secondColor: ['#35423A', '#ff000055'],
+    label: ['Contrast Ratio'],
+    successLabel: ['PASS'],
+    failureLabel: ['FAIL'],
+    normalTextLabel: ['Normal text'],
+    largeTextLabel: ['Large text'],
+    graphicsTextLabel: ['Graphics text'],
+    firstColorLabel: ['Background'],
+    secondColorLabel: ['Foreground']
   }
 } as StoryConfig<ColorContrastProps>
