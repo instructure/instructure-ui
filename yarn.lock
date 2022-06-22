@@ -1393,7 +1393,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-typescript@npm:^7.13.10, @babel/plugin-transform-typescript@npm:^7.17.12":
+"@babel/plugin-transform-typescript@npm:^7.17.12":
   version: 7.18.4
   resolution: "@babel/plugin-transform-typescript@npm:7.18.4"
   dependencies:
@@ -2408,7 +2408,6 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.9.0
     "@babel/plugin-transform-react-display-name": ^7.8.3
     "@babel/plugin-transform-runtime": ^7.13.10
-    "@babel/plugin-transform-typescript": ^7.13.10
     "@babel/preset-env": ^7.9.5
     "@babel/preset-react": ^7.9.4
     "@babel/preset-typescript": ^7.13.0
