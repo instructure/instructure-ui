@@ -27,8 +27,7 @@ import type { ColorIndicatorProps } from '../props'
 export default {
   sectionProp: 'shape',
   propValues: {
-    shape: ['circle', 'rectangle'],
-    color: ['#ff0000', 'yellow', 'rgba(50,100,150,.5)']
+    color: ['#ff0000', 'yellow', 'rgba(50,100,150,.5)', 'black']
   },
   getExampleProps: (props) => {
     return {

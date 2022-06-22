@@ -58,6 +58,7 @@ import type {
   ContrastStrength,
   MessageType
 } from './props'
+import { propTypes, allowedProps } from './props'
 
 const acceptedCharactersForHEX = [
   '0',
@@ -92,6 +93,9 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+
   constructor(props: ColorPickerProps) {
     super(props)
 
@@ -127,6 +131,8 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   componentDidMount() {
     this.props.makeStyles?.({ ...this.state, isSimple: this.isSimple })
     this.checkSettings()
+
+    this.props.value && this.setState({ hexCode: this.props.value?.slice(1) })
   }
 
   componentDidUpdate(prevProps: ColorPickerProps) {
@@ -138,7 +144,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     ) {
       this.setState({
         showHelperErrorMessages: false,
-        hexCode: this.props.value || ''
+        hexCode: this.props.value?.slice(1) || ''
       })
     }
     this.checkSettings()
@@ -302,7 +308,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       return
     }
     if (typeof onChange === 'function') {
-      onChange(`${value}`)
+      onChange(`#${value}`)
     }
     this.setState({
       showHelperErrorMessages: false,
@@ -329,7 +335,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     const newHex = `${this.state.hexCode}${toPaste}`
     if (isValid(newHex)) {
       if (typeof this.props.onChange === 'function') {
-        this.props.onChange(`${newHex}`)
+        this.props.onChange(`#${newHex}`)
       }
       this.setState({
         hexCode: newHex,
@@ -411,7 +417,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
               hexCode: `${this.stripAlphaIfNeeded(this.state.mixedColor)}`
             })
             this.props?.onChange?.(
-              this.stripAlphaIfNeeded(this.state.mixedColor.slice(1))
+              `#${this.stripAlphaIfNeeded(this.state.mixedColor.slice(1))}`
             )
           },
           () =>
@@ -516,7 +522,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           onClick={() => {
             if (typeof this.props.onChange === 'function') {
               this.props.onChange(
-                `${this.stripAlphaIfNeeded(this.state.mixedColor)}`
+                `#${this.stripAlphaIfNeeded(this.state.mixedColor)}`
               )
             }
             this.setState({
@@ -568,7 +574,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           themeOverride={{ padding: '' }}
           renderAfterInput={this.renderAfterInput()}
           renderBeforeInput={this.renderBeforeInput()}
-          value={this.state.hexCode}
+          value={this.props.value?.slice(1)}
           onChange={(event, value) => this.handleOnChange(event, value)}
           onPaste={(event) => this.handleOnPaste(event)}
           onBlur={() => this.handleOnBlur()}

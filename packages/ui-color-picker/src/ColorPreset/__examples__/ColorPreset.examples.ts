@@ -38,7 +38,9 @@ export default {
         '#576A66',
         '#35423A',
         '#35423F'
-      ]
+      ],
+      [],
+      ['#ffffff', '#0CBF94', '#0C89BF00']
     ],
     colorMixerSettings: [
       undefined,

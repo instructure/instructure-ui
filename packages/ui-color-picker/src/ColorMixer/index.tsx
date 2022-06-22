@@ -30,6 +30,7 @@ import ColorPalette from './ColorPalette'
 import Slider from './Slider'
 import RGBAInput from './RGBAInput'
 import type { ColorMixerProps, ColorMixerState, HSVType } from './props'
+import { propTypes, allowedProps } from './props'
 import generateStyle from './styles'
 import {
   colorToHex8,
@@ -45,6 +46,9 @@ category: components
 **/
 @withStyle(generateStyle)
 class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+
   constructor(props: ColorMixerProps) {
     super(props)
     this.state = {

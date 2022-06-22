@@ -33,6 +33,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import type { ColorIndicatorProps } from './props'
+import { propTypes, allowedProps } from './props'
 
 /**
 ---
@@ -43,6 +44,8 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ColorIndicator extends Component<ColorIndicatorProps> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
   static readonly componentId = 'ColorIndicator'
 
   static defaultProps = {

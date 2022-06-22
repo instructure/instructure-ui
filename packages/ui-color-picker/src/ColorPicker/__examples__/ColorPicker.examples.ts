@@ -26,14 +26,6 @@ import type { ColorPickerProps } from '../props'
 
 export default {
   propValues: {
-    withAlpha: [true, false],
-    disabled: [false, true],
-    value: ['#ff5500'],
-    onChange: [() => {}],
-    label: ['Color Input'],
-    tooltip: ['This is an example'],
-    placeholderText: ['Enter HEX'],
-    popoverButtonScreenReaderLabel: ['Open color mixer popover'],
     colorMixerSettings: [
       undefined,
       {
@@ -73,5 +65,15 @@ export default {
         }
       }
     ]
+  },
+  getComponentProps: () => {
+    return {
+      value: '#BF876F',
+      onChange: () => {},
+      label: 'Color Input',
+      placeholderText: 'Enter HEX',
+      tooltip: 'example',
+      popoverButtonScreenReaderLabel: 'Open color mixer popover'
+    }
   }
 } as StoryConfig<ColorPickerProps>

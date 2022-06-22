@@ -31,7 +31,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 import { Text } from '@instructure/ui-text'
 import ColorIndicator from '../ColorIndicator'
 
-import { ColorContrastProps } from './props'
+import type { ColorContrastProps } from './props'
+import { propTypes, allowedProps } from './props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import {
@@ -51,9 +52,13 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColorContrast extends Component<ColorContrastProps> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+
   constructor(props: ColorContrastProps) {
     super(props)
   }
+
   ref: HTMLDivElement | null = null
 
   handleRef = (el: HTMLDivElement | null) => {

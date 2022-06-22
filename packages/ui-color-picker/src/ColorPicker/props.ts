@@ -190,7 +190,7 @@ type ColorPickerOwnProps = {
   /**
    * If set, an info icon with a tooltip will be displayed
    */
-  tooltip?: Node
+  tooltip?: React.ReactNode
 
   /**
    * If set, the component will behave as controlled

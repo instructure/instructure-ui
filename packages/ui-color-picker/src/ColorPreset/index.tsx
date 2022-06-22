@@ -39,6 +39,7 @@ import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
 import { ColorIndicator } from '../ColorIndicator'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
+import { propTypes, allowedProps } from './props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import ColorMixer from '../ColorMixer'
@@ -51,6 +52,9 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+
   constructor(props: ColorPresetProps) {
     super(props)
     this.state = {
