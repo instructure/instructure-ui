@@ -36,8 +36,8 @@ module.exports = function (
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
 
   const presets = [
-    [require('@babel/preset-typescript').default, { allowDeclareFields: true }],
     [require('@babel/preset-env').default, envPresetConfig],
+    [require('@babel/preset-typescript').default, { allowDeclareFields: true }],
     [require('@babel/preset-react').default, { useBuiltIns: true }]
   ]
 
@@ -88,11 +88,6 @@ module.exports = function (
     require('@babel/plugin-proposal-optional-chaining').default,
     require('@babel/plugin-transform-destructuring').default,
     [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before plugins that set displayName!
-    [
-      require('@babel/plugin-transform-typescript').default,
-      { allowDeclareFields: true }
-    ], // needed by plugin-proposal-class-properties
-    require('@babel/plugin-proposal-class-properties').default, // needed for Webpack 4 compat
     require('./babel-plugin-add-displayname-for-react'),
     require('@babel/plugin-proposal-export-default-from').default,
     [
@@ -185,6 +180,9 @@ function getWebEnvConfig(opts) {
     // debug: true, // un-comment if you want to see what browsers are being targeted and what plugins that means it will activate
     exclude: ['transform-typeof-symbol'],
     // have to include this plugin because babel-loader can't handle the `??` operator
-    include: ['proposal-nullish-coalescing-operator']
+    include: [
+      'proposal-nullish-coalescing-operator',
+      'proposal-class-properties'
+    ]
   }
 }
