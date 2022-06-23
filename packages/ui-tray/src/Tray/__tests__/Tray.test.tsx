@@ -34,6 +34,7 @@ import {
 
 import { Tray } from '../index'
 import { TrayLocator } from '../TrayLocator'
+import type { TrayProps } from '../props'
 
 describe('<Tray />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {
@@ -171,7 +172,7 @@ describe('<Tray />', async () => {
   })
 
   describe('transition()', () => {
-    const placements = {
+    const placements: Record<string, any> = {
       ltr: {
         enteringPlacements: {
           start: 'slide-left',
@@ -200,10 +201,8 @@ describe('<Tray />', async () => {
 
     for (const dir in placements) {
       describe(`when text direction is '${dir}'`, () => {
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         // eslint-disable-next-line no-restricted-syntax
         for (const placement in placements[dir].enteringPlacements) {
-          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           const val = placements[dir].enteringPlacements[placement]
           it(`returns ${val} for ${placement} when entering`, async () => {
             const onEntered = stub()
@@ -213,8 +212,7 @@ describe('<Tray />', async () => {
               <Tray
                 open
                 label="Tray Example"
-                // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-                placement={placement}
+                placement={placement as TrayProps['placement']}
                 onEntered={onEntered}
               >
                 Hello
@@ -227,10 +225,8 @@ describe('<Tray />', async () => {
           })
         }
 
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         // eslint-disable-next-line no-restricted-syntax
         for (const placement in placements[dir].exitingPlacements) {
-          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           const val = placements[dir].exitingPlacements[placement]
           it(`returns ${val} for ${placement} when exiting`, async () => {
             const onExited = stub()
@@ -240,8 +236,7 @@ describe('<Tray />', async () => {
               <Tray
                 open
                 label="Tray Example"
-                // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-                placement={placement}
+                placement={placement as TrayProps['placement']}
                 onExited={onExited}
               >
                 Hello

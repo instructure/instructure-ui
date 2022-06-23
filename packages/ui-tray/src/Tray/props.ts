@@ -32,35 +32,117 @@ import type {
   OtherHTMLAttributes,
   PropValidators,
   TrayTheme,
-  LiveRegion
+  LiveRegion,
+  UIElement
 } from '@instructure/shared-types'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
-import type { TransitionType } from '@instructure/ui-motion'
+import type {
+  TransitionType,
+  BaseTransitionStatesType
+} from '@instructure/ui-motion'
 
 type TrayOwnProps = {
   label: string
+  /**
+   * The size (width) of the `<Tray />` when placement is `start` or `end`
+   */
   size?: 'x-small' | 'small' | 'regular' | 'medium' | 'large'
+  /**
+   * Placement to determine where the `<Tray />` should display in the viewport
+   */
   placement?: 'top' | 'bottom' | 'start' | 'end' | 'center'
+  /**
+   * Whether or not the `<Tray />` is open
+   */
   open?: boolean
-  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  contentRef?: (...args: any[]) => any
+  /**
+   * An element or a function returning an element to focus by default
+   */
+  defaultFocusElement?: UIElement
+  /**
+   *
+   * A function that returns a reference to the content element
+   */
+  contentRef?: (el: HTMLSpanElement | null) => void
+  /**
+   * Whether focus should be contained within the `<Tray/>` when it is open
+   */
   shouldContainFocus?: boolean
+  /**
+   * Whether focus should be restored when the `<Tray/>` is closed
+   */
   shouldReturnFocus?: boolean
+  /**
+   * Should the `<Tray />` hide when clicks occur outside the content
+   */
   shouldCloseOnDocumentClick?: boolean
+  /**
+   * Callback fired when `<Tray />` content has been mounted in the DOM
+   */
   onOpen?: (type?: TransitionType) => void
+  /**
+   * Callback fired when `<Tray />` has been unmounted from the DOM
+   */
   onClose?: (type?: TransitionType) => void
-  onDismiss?: (...args: any[]) => any
-  mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func])
+  /**
+   * Callback fired when the `<Tray />` is requesting to be closed
+   */
+  onDismiss?: (
+    event: React.UIEvent | React.FocusEvent,
+    documentClick?: boolean
+  ) => void
+  /**
+   * An element or a function returning an element to use as the mount node
+   * for the `<Tray />` (defaults to `document.body`)
+   */
+  mountNode?: Element | (() => Element | null) | null
+  /**
+   * Insert the element at the 'top' of the mountNode or at the 'bottom'
+   */
   insertAt?: 'bottom' | 'top'
+  /**
+   * An element, function returning an element, or array of elements that will not be hidden from
+   * the screen reader when the `<Tray />` is open
+   */
   liveRegion?: LiveRegion
-  onTransition?: (...args: any[]) => any
-  onEnter?: (...args: any[]) => any
-  onEntering?: (...args: any[]) => any
+  /**
+   * Callback fired when the <Tray /> transitions in/out
+   */
+  onTransition?: (
+    toState: BaseTransitionStatesType,
+    fromState: BaseTransitionStatesType
+  ) => void
+  /**
+   * Callback fired before the <Tray /> transitions in
+   */
+  onEnter?: () => void
+  /**
+   * Callback fired as the <Tray /> begins to transition in
+   */
+  onEntering?: () => void
+  /**
+   * Callback fired after the <Tray /> finishes transitioning in
+   */
   onEntered?: (type?: TransitionType) => void
-  onExit?: (...args: any[]) => any
-  onExiting?: (...args: any[]) => any
+  /**
+   * Callback fired right before the <Tray /> transitions out
+   */
+  onExit?: () => void
+  /**
+   * Callback fired as the <Tray /> begins to transition out
+   */
+  onExiting?: () => void
+  /**
+   * Callback fired after the <Tray /> finishes transitioning out
+   */
   onExited?: (type?: TransitionType) => void
+  /**
+   * Should the `<Tray />` have a border
+   */
   border?: boolean
+  /**
+   * Should the `<Tray />` have a box shadow
+   */
   shadow?: boolean
   children?: React.ReactNode
 }
@@ -79,121 +161,32 @@ type TrayStyle = ComponentStyle<'tray' | 'content'>
 const propTypes: PropValidators<PropKeys> = {
   label: PropTypes.string.isRequired,
   children: PropTypes.node,
-
-  /**
-   * The size (width) of the `<Tray />` when placement is `start` or `end`
-   */
   size: PropTypes.oneOf(['x-small', 'small', 'regular', 'medium', 'large']),
-
-  /**
-   * Placement to determine where the `<Tray />` should display in the viewport
-   */
   placement: PropTypes.oneOf(['top', 'bottom', 'start', 'end', 'center']),
-
-  /**
-   * Whether or not the `<Tray />` is open
-   */
   open: PropTypes.bool,
-
-  /**
-   * An element or a function returning an element to focus by default
-   */
   defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-
-  /**
-   *
-   * A function that returns a reference to the content element
-   */
   contentRef: PropTypes.func,
-
-  /**
-   * Whether focus should be contained within the `<Tray/>` when it is open
-   */
   shouldContainFocus: PropTypes.bool,
-
-  /**
-   * Whether focus should be restored when the `<Tray/>` is closed
-   */
   shouldReturnFocus: PropTypes.bool,
-
-  /**
-   * Should the `<Tray />` hide when clicks occur outside the content
-   */
   shouldCloseOnDocumentClick: PropTypes.bool,
-
-  /**
-   * Callback fired when `<Tray />` content has been mounted in the DOM
-   */
   onOpen: PropTypes.func,
-
-  /**
-   * Callback fired when `<Tray />` has been unmounted from the DOM
-   */
   onClose: PropTypes.func,
-
-  /**
-   * Callback fired when the `<Tray />` is requesting to be closed
-   */
   onDismiss: PropTypes.func,
-
-  /**
-   * An element or a function returning an element to use as the mount node
-   * for the `<Tray />` (defaults to `document.body`)
-   */
   mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-
-  /**
-   * Insert the element at the 'top' of the mountNode or at the 'bottom'
-   */
   insertAt: PropTypes.oneOf(['bottom', 'top']),
-
-  /**
-   * An element, function returning an element, or array of elements that will not be hidden from
-   * the screen reader when the `<Tray />` is open
-   */
   liveRegion: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
     PropTypes.func
   ]),
-
-  /**
-   * Callback fired when the <Tray /> transitions in/out
-   */
   onTransition: PropTypes.func,
-  /**
-   * Callback fired before the <Tray /> transitions in
-   */
   onEnter: PropTypes.func,
-  /**
-   * Callback fired as the <Tray /> begins to transition in
-   */
   onEntering: PropTypes.func,
-  /**
-   * Callback fired after the <Tray /> finishes transitioning in
-   */
   onEntered: PropTypes.func,
-  /**
-   * Callback fired right before the <Tray /> transitions out
-   */
   onExit: PropTypes.func,
-  /**
-   * Callback fired as the <Tray /> begins to transition out
-   */
   onExiting: PropTypes.func,
-  /**
-   * Callback fired after the <Tray /> finishes transitioning out
-   */
   onExited: PropTypes.func,
-
-  /**
-   * Should the `<Tray />` have a border
-   */
   border: PropTypes.bool,
-
-  /**
-   * Should the `<Tray />` have a box shadow
-   */
   shadow: PropTypes.bool
 }
 
@@ -224,6 +217,6 @@ const allowedProps: AllowedPropKeys = [
   'border',
   'shadow'
 ]
-
-export type { TrayProps, TrayStyle }
+type TrayState = { transitioning: boolean }
+export type { TrayProps, TrayStyle, TrayState }
 export { propTypes, allowedProps }

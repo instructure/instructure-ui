@@ -23,4 +23,5 @@
  */
 export { Transition } from './Transition'
 export type { TransitionProps, TransitionType } from './Transition/props'
+export type { BaseTransitionStatesType } from './Transition/BaseTransition/props'
 export { transitionTypePropType } from './Transition/props'
