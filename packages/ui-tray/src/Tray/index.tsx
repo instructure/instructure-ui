@@ -39,12 +39,13 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
-import type { TrayProps } from './props'
+import type { TrayProps, TrayState } from './props'
 
 /**
 ---
 category: components
 ---
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()
@@ -56,47 +57,27 @@ class Tray extends Component<TrayProps> {
   static propTypes = propTypes
 
   static defaultProps = {
+    defaultFocusElement: null,
     open: false,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onOpen: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onClose: (event) => {},
-    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
-    onDismiss: (event) => {},
-    onEnter: () => {},
-    onEntering: () => {},
-    onEntered: () => {},
-    onExit: () => {},
-    onExiting: () => {},
-    onExited: () => {},
-    mountNode: null,
     insertAt: 'bottom',
-    liveRegion: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    contentRef: (el) => {},
     shouldCloseOnDocumentClick: false,
     shouldContainFocus: true,
     shouldReturnFocus: true,
-    defaultFocusElement: null,
     size: 'small',
     placement: 'start',
     shadow: true,
-    border: false,
-    children: null
+    border: false
   }
 
-  state = {
+  state: TrayState = {
     transitioning: false
   }
-
   ref: Element | null = null
-
   componentDidMount() {
     this.props.makeStyles?.()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: TrayProps, _prevState: TrayState) {
     if (this.props.open !== prevProps.open) {
       this.setState({ transitioning: true })
     }
@@ -123,13 +104,8 @@ class Tray extends Component<TrayProps> {
     }
   }
 
-  get transition() {
+  get transition(): TransitionType {
     return `slide-${this.direction}`
-  }
-
-  get defaultFocusElement() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_closeButton' does not exist on type 'Tr... Remove this comment to see the full error message
-    return this.props.defaultFocusElement || (() => this._closeButton)
   }
 
   handleTransitionComplete = (_type?: TransitionType) => {
@@ -194,7 +170,6 @@ class Tray extends Component<TrayProps> {
         {portalIsOpen && (
           <Transition
             in={open}
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             type={this.transition}
             onTransition={onTransition}
             onEnter={onEnter}
@@ -226,7 +201,7 @@ class Tray extends Component<TrayProps> {
                 <Dialog
                   as="div"
                   label={label}
-                  defaultFocusElement={this.defaultFocusElement}
+                  defaultFocusElement={defaultFocusElement}
                   open
                   shouldContainFocus={shouldContainFocus}
                   shouldReturnFocus={shouldReturnFocus}
