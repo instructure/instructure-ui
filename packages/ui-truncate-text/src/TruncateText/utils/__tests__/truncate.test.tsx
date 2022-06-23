@@ -223,8 +223,7 @@ describe('truncate', () => {
     )
 
     const result = truncate(stage!, { maxLines: 'auto' })
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    const text = stage.textContent
+    const text = stage!.textContent
 
     expect(text).to.not.equal({ defaultText })
     expect(text!.length).to.not.equal(1)

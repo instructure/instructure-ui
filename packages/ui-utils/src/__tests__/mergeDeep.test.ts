@@ -55,7 +55,6 @@ describe('mergeDeep', () => {
 
     const result = mergeDeep(obj1, obj2, obj3)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
     expect(result.a).to.equal('bar')
   })
 
@@ -66,9 +65,7 @@ describe('mergeDeep', () => {
     const result = mergeDeep({}, obj1, obj2)
 
     expect(result).to.deep.equal({ a: { b: 1, c: 2 } })
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
     expect(result.a).to.not.deep.equal(obj1.a)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
     expect(result.a).to.not.deep.equal(obj2.a)
   })
 
@@ -87,11 +84,8 @@ describe('mergeDeep', () => {
 
     const result = mergeDeep(obj1, obj2)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
     expect(result.a).to.deep.equal([1, 2, [3, 4]])
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
     expect(result.a[2]).to.deep.equal([3, 4])
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'b' does not exist on type '{}'.
     expect(result.b).to.deep.equal(obj2.b)
   })
 
@@ -101,9 +95,7 @@ describe('mergeDeep', () => {
 
     const result = mergeDeep(obj1, obj2)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
     expect(result.a).to.deep.equal([1, 2, [3, 4], 5, 6])
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
     expect(result.a[2]).to.deep.equal([3, 4])
   })
 
@@ -114,9 +106,7 @@ describe('mergeDeep', () => {
 
     const result = mergeDeep(obj1, obj2, obj3)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
     expect(result.a).to.deep.equal([1, 2, [3, 4], 5, 6])
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
     expect(result.a[2]).to.deep.equal([3, 4])
   })
 
@@ -127,18 +117,16 @@ describe('mergeDeep', () => {
 
     const result = mergeDeep(obj1, obj2, obj3)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
     expect(result.a).to.deep.equal(['foo', 'bar'])
   })
 
   it('should copy source properties', () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 0 arguments, but got 1.
     expect(mergeDeep({ test: true }).test).to.be.true()
   })
 
   it('should not clone objects created with custom constructor', () => {
     function TestType() {}
-    // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
+    // @ts-expect-error intentional "new"
     const func = new TestType()
     expect(mergeDeep(func)).to.deep.equal(func)
   })

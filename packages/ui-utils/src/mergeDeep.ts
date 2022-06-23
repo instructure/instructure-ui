@@ -34,7 +34,7 @@
  * @param {Object} args objects to merge
  * @returns {Object} a new object with items from all arguments
  */
-function mergeDeep(...args: Record<string, unknown>[]) {
+function mergeDeep(...args: Record<string, unknown>[]): Record<string, any> {
   // note: This could be typed as the union of its args, but since
   // its barely used its not worth the effort currently
   let target = {}

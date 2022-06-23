@@ -244,19 +244,17 @@ class TreeCollection extends Component<
         aria-setsize={this.childCount}
         aria-level={this.itemsLevel}
         {...ariaSelected}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => void' is not assignable ... Remove this comment to see the full error message
-        onClick={(e, n) => {
+        onClick={(e) => {
           if (typeof child.props.onClick === 'function') {
-            child.props.onClick(e, n)
+            child.props.onClick(e)
           } else {
             e.stopPropagation()
           }
         }}
         onFocus={(e) => this.handleFocus(e, itemHash)}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '(e: any, n: any) => void' is not assignable ... Remove this comment to see the full error message
-        onKeyDown={(e, n) => {
+        onKeyDown={(e) => {
           if (typeof child.props.onKeyDown === 'function') {
-            child.props.onKeyDown(e, n)
+            child.props.onKeyDown(e)
           } else {
             onKeyDown?.(e, itemHash)
           }

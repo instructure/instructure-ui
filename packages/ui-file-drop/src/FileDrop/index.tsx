@@ -111,7 +111,7 @@ class FileDrop extends Component<FileDropProps, FileDropState> {
   }
 
   enterCounter = 0
-  fileInputEl: HTMLInputElement | null = null
+  fileInputEl?: HTMLInputElement
   defaultId: string | null = null
   messagesId = ''
 
