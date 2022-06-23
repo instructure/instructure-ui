@@ -220,6 +220,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
         tabIndex={this.props.disabled ? undefined : 0}
         onKeyDown={(e) => this.handleKeyDown(e)}
         onMouseDown={(e) => this.handlePaletteMouseDown(e)}
+        aria-label={this.props.navigationExplanationScreenReaderLabel}
       >
         <div css={this.props.styles?.indicator} />
         {this.props.disabled && (

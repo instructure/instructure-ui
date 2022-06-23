@@ -41,6 +41,7 @@ type ColorPaletteOwnProps = {
   indicatorRadius: number
   onChange: (rgb: HSVType) => void
   elementRef?: (element: Element | null) => void
+  navigationExplanationScreenReaderLabel: string
 }
 
 type ColorPaletteState = {
@@ -66,7 +67,8 @@ const propTypes: PropValidators<PropKeys> = {
   height: PropTypes.number,
   indicatorRadius: PropTypes.number,
   onChange: PropTypes.func,
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  navigationExplanationScreenReaderLabel: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -77,7 +79,8 @@ const allowedProps: AllowedPropKeys = [
   'height',
   'indicatorRadius',
   'onChange',
-  'elementRef'
+  'elementRef',
+  'navigationExplanationScreenReaderLabel'
 ]
 
 export type { ColorPaletteProps, ColorPaletteState, ColorPaletteStyle }

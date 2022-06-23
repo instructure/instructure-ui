@@ -44,7 +44,10 @@ class Example extends React.Component {
               rgbRedInputScreenReaderLabel:'Input field for red',
               rgbGreenInputScreenReaderLabel:'Input field for green',
               rgbBlueInputScreenReaderLabel:'Input field for blue',
-              rgbAlphaInputScreenReaderLabel:'Input field for alpha'
+              rgbAlphaInputScreenReaderLabel:'Input field for alpha',
+              colorSliderNavigationExplanationScreenReaderLabel:`You are on a color slider. To navigate the slider left or right, use the 'A' and 'D' buttons respectively`,
+              alphaSliderNavigationExplanationScreenReaderLabel:`You are on an alpha slider. To navigate the slider left or right, use the 'A' and 'D' buttons respectively`,
+              colorPaletteNavigationExplanationScreenReaderLabel:`You are on a color palette. To navigate on the palette up, left, down or right, use the 'W', 'A', 'S' and 'D' buttons respectively`
             },
             colorPreset: {
               label: "Choose a nice color",
@@ -106,7 +109,12 @@ class Example extends React.Component {
           rgbRedInputScreenReaderLabel='Input field for red'
           rgbGreenInputScreenReaderLabel='Input field for green'
           rgbBlueInputScreenReaderLabel='Input field for blue'
-          rgbAlphaInputScreenReaderLabel='Input field for alpha'/>
+          rgbAlphaInputScreenReaderLabel='Input field for alpha'
+          colorSliderNavigationExplanationScreenReaderLabel={`You are on a color slider. To navigate the slider left or right, use the 'A' and 'D' buttons respectively`}
+          alphaSliderNavigationExplanationScreenReaderLabel={`You are on an alpha slider. To navigate the slider left or right, use the 'A' and 'D' buttons respectively`}
+          colorPaletteNavigationExplanationScreenReaderLabel={`You are on a color palette. To navigate on the palette up, left, down or right, use the 'W', 'A', 'S' and 'D' buttons respectively`}
+
+          />
         <div
           style={{
             borderTop: "solid",

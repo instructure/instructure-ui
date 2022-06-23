@@ -88,6 +88,21 @@ type ColorMixerOwnProps = {
    * screenReaderLabel for the RGBA input's alpha input field
    */
   rgbAlphaInputScreenReaderLabel: string
+  /**
+   * screenReaderLabel for the color slider. It should explain how to navigate the slider
+   * with the keyboard ('A' for left, 'D' for right)
+   */
+  colorSliderNavigationExplanationScreenReaderLabel: string
+  /**
+   * screenReaderLabel for the alpha slider. It should explain how to navigate the slider
+   * with the keyboard ('A' for left, 'D' for right)
+   */
+  alphaSliderNavigationExplanationScreenReaderLabel: string
+  /**
+   * screenReaderLabel for the color palette. It should explain how to navigate the palette
+   * with the keyboard ('W' for up, 'A' for left, 'S' for down and 'D' for right)
+   */
+  colorPaletteNavigationExplanationScreenReaderLabel: string
 }
 
 type ColorMixerState = {
@@ -112,13 +127,19 @@ type ColorMixerStyle = ComponentStyle<
 const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,
   elementRef: PropTypes.func,
-  value: PropTypes.object,
+  value: PropTypes.string,
   onChange: PropTypes.func,
   withAlpha: PropTypes.bool,
-  rgbRedInputScreenReaderLabel: PropTypes.string,
-  rgbGreenInputScreenReaderLabel: PropTypes.string,
-  rgbBlueInputScreenReaderLabel: PropTypes.string,
-  rgbAlphaInputScreenReaderLabel: PropTypes.string
+  rgbRedInputScreenReaderLabel: PropTypes.string.isRequired,
+  rgbGreenInputScreenReaderLabel: PropTypes.string.isRequired,
+  rgbBlueInputScreenReaderLabel: PropTypes.string.isRequired,
+  rgbAlphaInputScreenReaderLabel: PropTypes.string.isRequired,
+  colorSliderNavigationExplanationScreenReaderLabel:
+    PropTypes.string.isRequired,
+  alphaSliderNavigationExplanationScreenReaderLabel:
+    PropTypes.string.isRequired,
+  colorPaletteNavigationExplanationScreenReaderLabel:
+    PropTypes.string.isRequired
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -130,7 +151,10 @@ const allowedProps: AllowedPropKeys = [
   'rgbRedInputScreenReaderLabel',
   'rgbGreenInputScreenReaderLabel',
   'rgbBlueInputScreenReaderLabel',
-  'rgbAlphaInputScreenReaderLabel'
+  'rgbAlphaInputScreenReaderLabel',
+  'colorSliderNavigationExplanationScreenReaderLabel',
+  'alphaSliderNavigationExplanationScreenReaderLabel',
+  'colorPaletteNavigationExplanationScreenReaderLabel'
 ]
 
 export type {

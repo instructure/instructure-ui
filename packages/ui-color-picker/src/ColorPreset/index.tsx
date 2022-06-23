@@ -105,7 +105,9 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         <div css={this.props?.styles?.addNewPresetButton}>
           <IconButton
             disabled={this.props.disabled}
-            screenReaderLabel={this.props.addNewPresetButtonScreenReaderLabel}
+            screenReaderLabel={
+              this.props.colorMixerSettings!.addNewPresetButtonScreenReaderLabel
+            }
           >
             <IconAddLine />
           </IconButton>
@@ -149,6 +151,18 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
           rgbAlphaInputScreenReaderLabel={
             this.props.colorMixerSettings!.colorMixer
               .rgbAlphaInputScreenReaderLabel
+          }
+          colorSliderNavigationExplanationScreenReaderLabel={
+            this.props.colorMixerSettings!.colorMixer
+              .colorSliderNavigationExplanationScreenReaderLabel
+          }
+          alphaSliderNavigationExplanationScreenReaderLabel={
+            this.props.colorMixerSettings!.colorMixer
+              .alphaSliderNavigationExplanationScreenReaderLabel
+          }
+          colorPaletteNavigationExplanationScreenReaderLabel={
+            this.props.colorMixerSettings!.colorMixer
+              .colorPaletteNavigationExplanationScreenReaderLabel
           }
         />
         {this.props?.colorMixerSettings?.colorContrast && (
@@ -226,6 +240,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
           ? { onClick: () => this.props.onSelect(color) }
           : {})}
         {...(this.props.selected === color ? { 'aria-label': 'selected' } : {})}
+        role="presentation"
       >
         <div>
           <ColorIndicator color={color} shape="rectangle" />

@@ -40,6 +40,7 @@ type SliderOwnProps = {
   indicatorRadius: number
   height: number
   elementRef?: (element: Element | null) => void
+  navigationExplanationScreenReaderLabel: string
 }
 
 type SliderState = {
@@ -71,7 +72,8 @@ const propTypes: PropValidators<PropKeys> = {
   value: PropTypes.object,
   indicatorRadius: PropTypes.number,
   height: PropTypes.number,
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  navigationExplanationScreenReaderLabel: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -81,7 +83,8 @@ const allowedProps: AllowedPropKeys = [
   'value',
   'indicatorRadius',
   'height',
-  'elementRef'
+  'elementRef',
+  'navigationExplanationScreenReaderLabel'
 ]
 
 export type { SliderProps, SliderStyle, SliderState }

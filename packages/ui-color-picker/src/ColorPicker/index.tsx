@@ -454,6 +454,18 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
               this.props.colorMixerSettings.colorMixer
                 .rgbAlphaInputScreenReaderLabel
             }
+            colorSliderNavigationExplanationScreenReaderLabel={
+              this.props.colorMixerSettings!.colorMixer
+                .colorSliderNavigationExplanationScreenReaderLabel
+            }
+            alphaSliderNavigationExplanationScreenReaderLabel={
+              this.props.colorMixerSettings!.colorMixer
+                .alphaSliderNavigationExplanationScreenReaderLabel
+            }
+            colorPaletteNavigationExplanationScreenReaderLabel={
+              this.props.colorMixerSettings!.colorMixer
+                .colorPaletteNavigationExplanationScreenReaderLabel
+            }
           />
         )}
         {this.props?.colorMixerSettings?.colorPreset && (
@@ -462,10 +474,6 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
               label={this.props.colorMixerSettings.colorPreset.label}
               colors={this.props.colorMixerSettings.colorPreset.colors}
               selected={this.state.mixedColor}
-              addNewPresetButtonScreenReaderLabel={
-                this.props.colorMixerSettings.colorPreset
-                  .addNewPresetButtonScreenReaderLabel
-              }
               onSelect={(color: string) =>
                 this.setState({ mixedColor: color.slice(1) })
               }

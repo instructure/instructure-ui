@@ -40,10 +40,6 @@ type MessageType = Array<{
 
 type ColorPresetOwnProps = {
   /**
-   * screenReaderLabel for the add new preset button
-   */
-  addNewPresetButtonScreenReaderLabel: string
-  /**
    * Array of HEX strings which are the preset colors. Supports 8 character HEX (with alpha)
    */
   colors: Array<string>
@@ -67,6 +63,10 @@ type ColorPresetOwnProps = {
    * It will be called with the new list of colors
    */
   colorMixerSettings?: {
+    /**
+     * screenReaderLabel for the add new preset button
+     */
+    addNewPresetButtonScreenReaderLabel: string
     maxHeight: string
     onPresetChange: (colors: ColorPresetOwnProps['colors']) => void
     colorMixer: {
@@ -75,6 +75,9 @@ type ColorPresetOwnProps = {
       rgbGreenInputScreenReaderLabel: string
       rgbBlueInputScreenReaderLabel: string
       rgbAlphaInputScreenReaderLabel: string
+      colorSliderNavigationExplanationScreenReaderLabel: string
+      alphaSliderNavigationExplanationScreenReaderLabel: string
+      colorPaletteNavigationExplanationScreenReaderLabel: string
     }
     colorContrast?: {
       firstColor: string
@@ -128,7 +131,6 @@ type ColorPresetStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  addNewPresetButtonScreenReaderLabel: PropTypes.string,
   colors: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
   elementRef: PropTypes.func,
@@ -140,7 +142,6 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
-  'addNewPresetButtonScreenReaderLabel',
   'colors',
   'disabled',
   'elementRef',

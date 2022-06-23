@@ -191,6 +191,7 @@ class Slider extends Component<SliderProps> {
         onKeyDown={(e) => this.handleKeyDown(e)}
         onMouseDown={(e) => this.handleMouseDown(e)}
         tabIndex={this.props.disabled ? undefined : 0}
+        aria-label={this.props.navigationExplanationScreenReaderLabel}
       >
         <div css={this.props.styles?.indicator} />
         {this.props.disabled && (

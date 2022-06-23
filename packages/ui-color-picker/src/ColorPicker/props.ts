@@ -84,11 +84,13 @@ type ColorPickerOwnProps = {
       rgbGreenInputScreenReaderLabel: string
       rgbBlueInputScreenReaderLabel: string
       rgbAlphaInputScreenReaderLabel: string
+      colorSliderNavigationExplanationScreenReaderLabel: string
+      alphaSliderNavigationExplanationScreenReaderLabel: string
+      colorPaletteNavigationExplanationScreenReaderLabel: string
     }
     colorPreset?: {
       colors: Array<string>
       label: string
-      addNewPresetButtonScreenReaderLabel: string
     }
     colorContrast?: {
       firstColor: string
