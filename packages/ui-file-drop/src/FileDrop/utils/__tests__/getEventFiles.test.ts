@@ -24,6 +24,7 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import { getEventFiles } from '../getEventFiles'
+import React from 'react'
 
 describe('getEventFiles', () => {
   const chromeDragEnter = {
@@ -66,21 +67,20 @@ describe('getEventFiles', () => {
   }
 
   it('should return items on chrome dragenter event', () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    expect(getEventFiles(chromeDragEnter)).to.be.equal(
-      chromeDragEnter.dataTransfer.items
-    )
+    expect(
+      getEventFiles(chromeDragEnter as unknown as React.DragEvent)
+    ).to.be.equal(chromeDragEnter.dataTransfer.items)
   })
 
   it('should return items on a firefox dragenter event', () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    expect(getEventFiles(firefoxDragEnter)).to.be.equal(
-      firefoxDragEnter.dataTransfer.items
-    )
+    expect(
+      getEventFiles(firefoxDragEnter as unknown as React.DragEvent)
+    ).to.be.equal(firefoxDragEnter.dataTransfer.items)
   })
 
   it('should return empty array on a safari dragenter event', () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    expect(getEventFiles(safariDragEnter).length).to.be.equal(0)
+    expect(
+      getEventFiles(safariDragEnter as unknown as React.DragEvent).length
+    ).to.be.equal(0)
   })
 })

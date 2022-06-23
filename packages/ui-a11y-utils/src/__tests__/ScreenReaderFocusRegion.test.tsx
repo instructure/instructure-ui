@@ -144,12 +144,11 @@ describe('ScreenReaderFocusRegion', async () => {
     content.appendChild(desc)
 
     screenReaderFocusRegion.handleDOMMutation([
-      ({ addedNodes: [desc], removedNodes: [] } as unknown) as MutationRecord
+      { addedNodes: [desc], removedNodes: [] } as unknown as MutationRecord
     ])
 
     Array.from(content.childNodes).forEach((node) => {
-      // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
-      expect(node.getAttribute('aria-hidden')).to.not.exist()
+      expect((node as Element).getAttribute('aria-hidden')).to.not.exist()
     })
   })
 
@@ -181,24 +180,20 @@ describe('ScreenReaderFocusRegion', async () => {
     const content = (await main.find('[data-test-content]')).getDOMNode()
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
 
-    const attrsMap = {}
+    const attrsMap: Record<string, Attr[]> = {}
     const parentNodes = await main.findAll('[data-test-parent]')
     parentNodes.forEach((node) => {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      attrsMap[node.getAttribute('id')] = [...node.getDOMNode().attributes]
+      attrsMap[node.getAttribute('id')!] = [...node.getDOMNode().attributes]
     })
-
     screenReaderFocusRegion.activate()
     screenReaderFocusRegion.deactivate()
 
     parentNodes.forEach((node) => {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      const preNodeAttrs = attrsMap[node.getAttribute('id')]
+      const preNodeAttrs = attrsMap[node.getAttribute('id')!]
       const postNodeAttrs = [...node.getDOMNode().attributes]
 
       expect(preNodeAttrs.length).to.equal(postNodeAttrs.length) // both should have same number of attributes
 
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'preNodeAttribute' implicitly has an 'an... Remove this comment to see the full error message
       preNodeAttrs.forEach((preNodeAttribute) => {
         const matchingAttribute = postNodeAttrs.filter(
           (postNodeAttribute) =>
@@ -262,8 +257,8 @@ describe('ScreenReaderFocusRegion', async () => {
     const content = (await main.find('[data-test-content]')).getDOMNode()
     const ignore = (await main.find('[data-test-ignore]')).getDOMNode()
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'iframe' implicitly has an 'any' type.
-    const getIframeBody = (iframe) => iframe.getDOMNode().contentDocument.body
+    const getIframeBody = (iframe: any) =>
+      iframe.getDOMNode().contentDocument.body
 
     const alwaysHidden = getIframeBody(
       await main.find('iframe[title="always-hidden"]')

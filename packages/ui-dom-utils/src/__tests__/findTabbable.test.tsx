@@ -37,8 +37,7 @@ describe('findTabbable', async () => {
         <div>
           <a href="#">Yep</a>
           <div>Nope</div>
-          {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message */}
-          <div tabIndex="1">Yep</div>
+          <div tabIndex={1}>Yep</div>
           <input type="text" value="Yep" readOnly />
           <div>
             <button>Yep</button>

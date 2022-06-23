@@ -150,8 +150,9 @@ module.exports = function (
     ].concat(plugins)
   }
   return {
-    presets,
+    // Note: Babel runs plugins always before presets
     plugins,
+    presets,
     // see https://babeljs.io/docs/en/assumptions
     assumptions: {
       setPublicClassFields: true
@@ -180,9 +181,10 @@ function getWebEnvConfig(opts) {
     // debug: true, // un-comment if you want to see what browsers are being targeted and what plugins that means it will activate
     exclude: ['transform-typeof-symbol'],
     include: [
-      // have to include this plugin because babel-loader can't handle the `??` operator
+      // webpack 4 uses acorn 6, which only supports features up to ES2020
+      // have to include this plugin because webpack 4 can't parse the `??` operator
       'proposal-nullish-coalescing-operator',
-      // needed for Webpack 4 compat
+      // have to include this plugin because webpack 4 can't parse class properties (like 'static)
       'proposal-class-properties'
     ]
   }

@@ -112,8 +112,7 @@ describe('isVisible', async () => {
         </span>
       </div>
     )
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    const textNode = document.getElementById('test-2').childNodes[0]
+    const textNode = document.getElementById('test-2')!.childNodes[0]
     const nonrecursive = isVisible(textNode, false)
     const recursive = isVisible(textNode)
     expect(nonrecursive).to.equal(true)

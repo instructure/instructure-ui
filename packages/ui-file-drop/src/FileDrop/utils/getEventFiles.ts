@@ -26,7 +26,7 @@ import React from 'react'
 
 function getEventFiles(
   event: React.DragEvent | React.ChangeEvent,
-  inputEl: HTMLInputElement | null
+  inputEl?: HTMLInputElement
 ): ArrayLike<DataTransferItem | File | never> {
   if ('dataTransfer' in event) {
     const dt = event.dataTransfer
