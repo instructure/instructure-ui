@@ -25,6 +25,7 @@
   "dependencies": {
     "@babel/runtime": "^7.13.10",
     "@instructure/console": "8.25.0",
+    "@instructure/debounce": "8.25.0",
     "@instructure/emotion": "8.25.0",
     "@instructure/shared-types": "8.25.0",
     "@instructure/ui-buttons": "8.25.0",

@@ -28,13 +28,15 @@ import { Component } from 'react'
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
+import { debounce } from '@instructure/debounce'
+import type { Debounced } from '@instructure/debounce'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type { ModalBodyProps } from './props'
+import type { ModalBodyProps, ModalBodyState } from './props'
 
 /**
 ---
@@ -45,7 +47,7 @@ id: Modal.Body
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ModalBody extends Component<ModalBodyProps> {
+class ModalBody extends Component<ModalBodyProps, ModalBodyState> {
   static readonly componentId = 'Modal.Body'
 
   static propTypes = propTypes
@@ -58,6 +60,9 @@ class ModalBody extends Component<ModalBodyProps> {
 
   ref: Element | null = null
 
+  private _debounced?: Debounced
+  private _resizeListener?: ResizeObserver
+
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
 
@@ -68,17 +73,62 @@ class ModalBody extends Component<ModalBodyProps> {
     }
   }
 
+  constructor(props: ModalBodyProps) {
+    super(props)
+
+    this.state = {
+      isScrollable: false
+    }
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
+
+    if (this.ref) {
+      this._debounced = debounce(this.handleScroll, 200, {
+        leading: true,
+        trailing: true
+      })
+
+      this._resizeListener = new ResizeObserver(() => {
+        this._debounced!()
+      })
+
+      this._resizeListener.observe(this.ref)
+    }
   }
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+    // console.log('update')
+    // console.log(this.ref)
+  }
+
+  componentWillUnmount() {
+    // console.log('unmount')
+    // console.log(this.ref)
+    if (this._resizeListener) {
+      this._resizeListener.disconnect()
+    }
+
+    if (this._debounced) {
+      this._debounced.cancel()
+    }
+  }
+
+  handleScroll() {
+    if (this.ref) {
+      const isScrollable = this.ref.scrollHeight > this.ref.clientHeight
+      // console.log({ isScrollable })
+
+      this.setState({ isScrollable })
+    }
   }
 
   render() {
     const { as, elementRef, overflow, variant, padding, children, ...rest } =
       this.props
+    // console.log(this.state.isScrollable)
 
     const passthroughProps = View.omitViewProps(
       omitProps(rest, ModalBody.allowedProps),
@@ -96,7 +146,9 @@ class ModalBody extends Component<ModalBodyProps> {
         as={as}
         css={this.props.styles?.modalBody}
         padding={padding}
-        tabIndex={-1} // prevent FF from focusing view when scrollable
+        focusPosition="inset"
+        // position="relative"
+        tabIndex={this.state.isScrollable ? 0 : -1}
       >
         {children}
       </View>

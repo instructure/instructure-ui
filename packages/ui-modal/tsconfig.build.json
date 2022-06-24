@@ -8,6 +8,7 @@
   "include": ["src"],
   "references": [
     { "path": "../console/tsconfig.build.json" },
+    { "path": "../debounce/tsconfig.build.json" },
     { "path": "../emotion/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" },
     { "path": "../ui-buttons/tsconfig.build.json" },
