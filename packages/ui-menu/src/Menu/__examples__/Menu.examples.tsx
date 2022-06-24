@@ -31,7 +31,9 @@ import type { MenuProps } from '../props'
 
 export default {
   sectionProp: 'placement',
-  maxExamplesPerPage: 20,
+  // we display 1 menu/page so that the placement prop has
+  // enough room to render the menu around the trigger
+  maxExamplesPerPage: 1,
   maxExamples: 200,
   excludeProps: [
     'defaultShow',
@@ -70,14 +72,17 @@ export default {
       dir: props.dir,
       as: 'div',
       width: '100%',
-      height: '30rem',
-      margin: 'large',
-      padding: 'large',
-      textAlign: 'center'
+      ...(props.trigger && {
+        textAlign: 'center',
+        padding: 'large 0',
+        themeOverride: { paddingLarge: '20rem' }
+      })
     }
   },
   filter: (props) => {
-    return !props.trigger && props.placement !== 'top start'
+    return (
+      (!props.trigger || !props.withArrow) && props.placement !== 'top start'
+    )
   }
 } as StoryConfig<MenuProps>
 
