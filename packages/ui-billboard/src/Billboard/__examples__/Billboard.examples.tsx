@@ -31,7 +31,7 @@ import type { BillboardProps, HeroIconSize } from '../props'
 
 export default {
   sectionProp: 'size',
-  maxExamplesPerPage: 50,
+  maxExamplesPerPage: 60,
   propValues: {
     hero: [
       function renderHero(size: HeroIconSize) {
@@ -45,7 +45,7 @@ export default {
     ],
     href: [null, 'instructure.design']
   },
-  excludeProps: ['margin', 'headingLevel', 'readOnly'],
+  excludeProps: ['margin', 'readOnly'],
   getComponentProps: () => {
     return {
       heading: 'I am a billboard',
@@ -55,14 +55,21 @@ export default {
     }
   },
   filter: (props) => {
-    return (
-      props.size !== 'medium' &&
-      !(
-        props.hero === null &&
-        props.headingLevel === 'h1' &&
-        props.headingAs === 'h1' &&
-        props.disabled === false
-      )
-    )
+    if (props.headingLevel === props.headingAs) {
+      return true
+    }
+
+    if (
+      props.headingLevel !== 'h1' &&
+      (props.disabled || props.href || props.hero === null)
+    ) {
+      return true
+    }
+
+    if (props.size !== 'medium' && typeof props.hero !== 'function') {
+      return true
+    }
+
+    return false
   }
 } as StoryConfig<BillboardProps>
