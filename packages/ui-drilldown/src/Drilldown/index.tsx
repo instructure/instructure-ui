@@ -103,7 +103,6 @@ type SelectedGroupOptionsMap = Map<string, DrilldownOptionValue>
 /**
 ---
 category: components
-experimental: true
 ---
 @tsProps
 **/

@@ -42,7 +42,6 @@ type PackagePathData = {
 
 // YAML descriptions exported with gray-matter
 type YamlMetaInfo = {
-  experimental?: boolean
   category?: string
   describes?: string
   description: string

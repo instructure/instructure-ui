@@ -39,7 +39,6 @@ import type {
 /**
 ---
 category: components
-experimental: true
 ---
 @tsProps
 **/
