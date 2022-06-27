@@ -472,13 +472,6 @@ class App extends Component<AppProps, AppState> {
         }
       >
         {this.renderThemeSelect()}
-        {currentData.experimental && (
-          <div>
-            <Pill color="info" margin="small 0">
-              Experimental
-            </Pill>
-          </div>
-        )}
         <Section id={currentData.id} heading={heading}>
           <Document
             doc={{

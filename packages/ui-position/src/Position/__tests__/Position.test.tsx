@@ -38,10 +38,6 @@ describe('<Position />', async () => {
     overflow: 'auto'
   }
 
-  beforeEach(async () => {
-    stub(console, 'warn') // suppress experimental warnings
-  })
-
   it('should render', async () => {
     await mount(
       <div style={{ padding: '50px' }}>
