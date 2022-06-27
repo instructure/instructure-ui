@@ -21,9 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
+import { ColorPicker } from '@instructure/ui'
+import React from 'react'
 
-import { ColorContrast } from './index'
+const COLOR_MIXER_IUI = () => {
+  return (
+    <ColorPicker
+      checkContrast={{
+        isStrict: false,
+        renderContrastSuccessMessage: () => [
+          { type: 'success', text: 'I am a contrast success message' }
+        ],
+        renderContrastErrorMessage: () => [
+          { type: 'error', text: 'I am a contrast warning message' }
+        ]
+      }}
+      renderMessages={() => [
+        { type: 'hint', text: 'I can display anything, at any time' }
+      ]}
+      renderInvalidColorMessage={() => [
+        { type: 'error', text: 'I am an invalid color message' }
+      ]}
+      renderIsRequiredMessage={() => [
+        { type: 'error', text: 'I am a required message' }
+      ]}
+      placeholderText="Enter HEX"
+    />
+  )
+}
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const ColorContrastLocator = locator(ColorContrast.selector)
+export default COLOR_MIXER_IUI

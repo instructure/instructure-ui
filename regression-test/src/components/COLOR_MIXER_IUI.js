@@ -21,9 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
+import { ColorMixer } from '@instructure/ui'
+import React, { useState } from 'react'
 
-import { ColorContrast } from './index'
+const COLOR_MIXER_IUI = () => {
+  const [value, setValue] = useState('#ff0')
+  return (
+    <ColorMixer
+      withAlpha
+      value={value}
+      onChange={(value) => setValue(value)}
+      rgbRedInputScreenReaderLabel="Input field for red"
+      rgbGreenInputScreenReaderLabel="Input field for green"
+      rgbBlueInputScreenReaderLabel="Input field for blue"
+      rgbAlphaInputScreenReaderLabel="Input field for alpha"
+      colorSliderNavigationExplanationScreenReaderLabel={`You are on a color slider. To navigate the slider left or right, use the 'A' and 'D' buttons respectively`}
+      alphaSliderNavigationExplanationScreenReaderLabel={`You are on an alpha slider. To navigate the slider left or right, use the 'A' and 'D' buttons respectively`}
+      colorPaletteNavigationExplanationScreenReaderLabel={`You are on a color palette. To navigate on the palette up, left, down or right, use the 'W', 'A', 'S' and 'D' buttons respectively`}
+    />
+  )
+}
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const ColorContrastLocator = locator(ColorContrast.selector)
+export default COLOR_MIXER_IUI

@@ -25,6 +25,5 @@ import { locator } from '@instructure/ui-test-locator'
 
 import { ColorPicker } from './index'
 
-export const ColorPickerLocator = locator(ColorPicker.selector, {
-  /* custom component query methods go here */
-})
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const ColorPickerLocator = locator(ColorPicker.selector)

@@ -29,7 +29,7 @@ export default {
   propValues: {
     color: ['#ff0000', 'yellow', 'rgba(50,100,150,.5)', 'black']
   },
-  getExampleProps: (props) => {
+  getExampleProps: () => {
     return {
       display: 'flex'
     }

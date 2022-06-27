@@ -120,6 +120,10 @@ const generateStyle = (
       label: 'colorPicker__popoverContentContainer',
       maxHeight: popoverMaxHeight || '100vh',
       overflow: 'scroll'
+    },
+    colorMixerButtonWrapper: {
+      position: 'absolute',
+      top: '2.69rem'
     }
   }
 }

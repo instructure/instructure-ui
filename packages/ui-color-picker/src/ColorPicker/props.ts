@@ -236,6 +236,7 @@ type ColorPickerStyle = ComponentStyle<
   | 'popoverFooter'
   | 'colorMixerButtonContainer'
   | 'popoverContentContainer'
+  | 'colorMixerButtonWrapper'
 >
 
 const propTypes: PropValidators<PropKeys> = {

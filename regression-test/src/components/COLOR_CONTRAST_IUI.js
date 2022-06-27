@@ -21,9 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
+import { ColorContrast } from '@instructure/ui'
+import React from 'react'
 
-import { ColorContrast } from './index'
+const COLOR_CONTRAST_IUI = () => {
+  return (
+    <ColorContrast
+      firstColor="#FF0000"
+      secondColor="#FFFF00"
+      label="Color Contrast Ratio"
+      successLabel="PASS"
+      failureLabel="FAIL"
+      normalTextLabel="Normal text"
+      largeTextLabel="Large text"
+      graphicsTextLabel="Graphics text"
+      firstColorLabel="Background"
+      secondColorLabel="Foreground"
+    />
+  )
+}
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const ColorContrastLocator = locator(ColorContrast.selector)
+export default COLOR_CONTRAST_IUI

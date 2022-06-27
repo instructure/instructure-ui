@@ -21,9 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
+import { ColorIndicator, View } from '@instructure/ui'
+import React from 'react'
 
-import { ColorContrast } from './index'
+const COLOR_INDICATOR_IUI = () => {
+  return (
+    <div style={{ display: 'flex', background: 'white' }}>
+      <View margin="small">
+        <ColorIndicator color="" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="#ff0000" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="#ff000088" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="#ff000000" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="yellow" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="rgb(155,55,82)" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="rgba(155,55,82,.5)" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="hsl(30, 100%, 50%)" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="hsla(30, 100%, 50%, .3)" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="hwb(1.5708rad 60% 0%)" />
+      </View>
+    </div>
+  )
+}
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const ColorContrastLocator = locator(ColorContrast.selector)
+export default COLOR_INDICATOR_IUI

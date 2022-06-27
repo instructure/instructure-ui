@@ -140,7 +140,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
 
     if (
       prevProps.value !== this.props.value &&
-      this.props.value !== this.state.hexCode
+      this.props.value !== this.props.value?.slice(1)
     ) {
       this.setState({
         showHelperErrorMessages: false,
@@ -198,7 +198,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     const contrast = isValidHex
       ? getContrast(
           this.props.checkContrast?.contrastAgainst || '#fff',
-          hexCode,
+          this.props.value ?? hexCode,
           2
         )
       : undefined
@@ -297,7 +297,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     return null
   }
 
-  handleOnChange(event: React.ChangeEvent<HTMLInputElement>, value: string) {
+  handleOnChange(_event: React.ChangeEvent<HTMLInputElement>, value: string) {
     const { onChange } = this.props
     if (
       value.length > (this.props.withAlpha ? 8 : 6) ||
@@ -378,7 +378,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           disabled={this.props.disabled}
           screenReaderLabel={this.props.popoverButtonScreenReaderLabel || ''}
         >
-          <ColorIndicator color={`#${this.state.hexCode}`} />
+          <ColorIndicator color={`${this.props.value}`} />
         </IconButton>
       }
       isShowingContent={this.state.openColorPicker}
@@ -590,7 +590,9 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         />
         {!this.isSimple && (
           <div css={this.props.styles?.colorMixerButtonContainer}>
-            {this.renderPopover()}
+            <div css={this.props.styles?.colorMixerButtonWrapper}>
+              {this.renderPopover()}
+            </div>
           </div>
         )}
       </div>
