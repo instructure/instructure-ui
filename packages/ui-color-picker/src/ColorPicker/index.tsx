@@ -59,6 +59,7 @@ import type {
   MessageType
 } from './props'
 import { propTypes, allowedProps } from './props'
+import testable from '@instructure/ui-testable'
 
 const acceptedCharactersForHEX = [
   '0',
@@ -92,6 +93,7 @@ category: components
 @tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
+@testable()
 class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   static propTypes = propTypes
   static allowedProps = allowedProps

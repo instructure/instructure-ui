@@ -22,8 +22,99 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-locator'
+import {
+  find,
+  findAll,
+  parseQueryArguments,
+  findWithText,
+  within
+} from '@instructure/ui-test-utils'
 
-import { ColorPicker } from './index'
+import { ColorPicker } from '.'
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const ColorPickerLocator = locator(ColorPicker.selector)
+/* eslint-disable no-restricted-imports */
+// @ts-expect-error bypass no type definition found error
+import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
+/* eslint-enable no-restricted-imports */
+
+async function _findColorPreset(...args: any[]) {
+  const popoverContent = await PopoverLocator.findContent(...args)
+  const colorPreset = await popoverContent.find('[class$=-colorPreset]')
+
+  return colorPreset.findAll('[class$=-colorIndicator]')
+}
+
+const customMethods = {
+  findTextInput: (...args: any[]) => {
+    return find('[id^=TextInput_]', ...args)
+  },
+  findColorIndicator: (...args: any[]) => {
+    return find('[class$=-colorIndicator]', ...args)
+  },
+  findInputAfterIcon: (...args: any[]) => {
+    return find('[class$=-textInput__afterElement]', ...args)
+  },
+  findFormMessages: (...args: any[]) => {
+    return findAll('[class$=-formFieldMessage]', ...args)
+  },
+  findPopoverRoot: (...args: any[]) => {
+    return PopoverLocator.find(...args)
+  },
+  findPopoverTrigger: (...args: any[]) => {
+    return PopoverLocator.findTrigger(...args)
+  },
+  findColorMixer: (...args: any[]) => {
+    return find('[class$=-colorMixer]', ...args)
+  },
+  findPopoverContent: (...args: any[]) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return PopoverLocator.findContent(element, selector, {
+      ...options,
+      customMethods: {
+        ...options.customMethods,
+        ...customMethods
+      }
+    })
+  },
+  findRGBAInputs: async (...args: any[]) => {
+    const rgbaInputs = await findAll('[class$=-RGBAInput__rgbInput]', ...args)
+
+    return Promise.all(rgbaInputs.map((span) => span.find('input')))
+  },
+  findPopoverButtonWithText: async (...args: any[]) => {
+    let el = await findWithText(...args)
+
+    while (el.getTagName() !== 'button') {
+      const parentNode = el.getParentNode()
+      if (!parentNode) {
+        break
+      }
+      el = within(parentNode as Element)
+    }
+
+    return el
+  },
+  findColorPreset: async (...args: []) => {
+    return _findColorPreset(...args)
+  },
+  findColorPresetButtons: async (...args: []) => {
+    const colorPresets = await _findColorPreset(...args)
+
+    const colorPressetButtons = []
+
+    for (let el of colorPresets) {
+      while (el.getTagName() !== 'button') {
+        const parentNode = el.getParentNode()
+        if (!parentNode) {
+          break
+        }
+        el = within(parentNode as Element)
+      }
+      colorPressetButtons.push(el)
+    }
+    return colorPressetButtons
+  }
+}
+
+//@ts-expect-error no selector on class
+export const ColorPickerLocator = locator(ColorPicker.selector, customMethods)
