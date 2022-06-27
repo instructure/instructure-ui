@@ -35,6 +35,26 @@ import type {
 type ContrastStrength = 'min' | 'mid' | 'max'
 type MessageType = Array<FormMessage>
 
+type ColorMixerInput = {
+  rgbRedInputScreenReaderLabel: string
+  rgbGreenInputScreenReaderLabel: string
+  rgbBlueInputScreenReaderLabel: string
+  colorSliderNavigationExplanationScreenReaderLabel: string
+  colorPaletteNavigationExplanationScreenReaderLabel: string
+}
+
+type ColorMixer =
+  | ({
+      withAlpha: true
+      rgbAlphaInputScreenReaderLabel: string
+      alphaSliderNavigationExplanationScreenReaderLabel: string
+    } & ColorMixerInput)
+  | ({
+      withAlpha: false
+      rgbAlphaInputScreenReaderLabel?: never
+      alphaSliderNavigationExplanationScreenReaderLabel?: never
+    } & ColorMixerInput)
+
 type ColorPickerOwnProps = {
   /**
    * Configures the contrast checker. If false, there will be no checking.
@@ -78,17 +98,10 @@ type ColorPickerOwnProps = {
   colorMixerSettings?: {
     popoverAddButtonLabel: string
     popoverCloseButtonLabel: string
-    colorMixer?: {
-      withAlpha: boolean
-      rgbRedInputScreenReaderLabel: string
-      rgbGreenInputScreenReaderLabel: string
-      rgbBlueInputScreenReaderLabel: string
-      rgbAlphaInputScreenReaderLabel: string
-    }
+    colorMixer?: ColorMixer
     colorPreset?: {
       colors: Array<string>
       label: string
-      addNewPresetButtonScreenReaderLabel: string
     }
     colorContrast?: {
       firstColor: string
@@ -234,6 +247,7 @@ type ColorPickerStyle = ComponentStyle<
   | 'popoverFooter'
   | 'colorMixerButtonContainer'
   | 'popoverContentContainer'
+  | 'colorMixerButtonWrapper'
 >
 
 const propTypes: PropValidators<PropKeys> = {

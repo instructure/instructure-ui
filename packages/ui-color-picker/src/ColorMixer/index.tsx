@@ -125,6 +125,9 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       rgbGreenInputScreenReaderLabel,
       rgbBlueInputScreenReaderLabel,
       rgbAlphaInputScreenReaderLabel,
+      colorSliderNavigationExplanationScreenReaderLabel,
+      alphaSliderNavigationExplanationScreenReaderLabel,
+      colorPaletteNavigationExplanationScreenReaderLabel,
       ...props
     } = this.props
     const { h, s, v, a } = this.state
@@ -135,8 +138,11 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
         ref={this.handleRef}
         css={styles?.colorMixer}
       >
-        <span aria-label={`${colorToHex8({ h, s, v, a })}`} aria-live="polite">
-          {disabled && <div css={styles?.disabledOverlay} />}
+        <span
+          css={styles?.sliderAndPaletteContainer}
+          aria-label={`${colorToHex8({ h, s, v, a })}`}
+          aria-live="polite"
+        >
           <ColorPalette
             disabled={disabled}
             width={this.width}
@@ -151,6 +157,9 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
             onChange={(color: HSVType) => {
               this.setState({ s: color.s, v: color.v })
             }}
+            navigationExplanationScreenReaderLabel={
+              colorPaletteNavigationExplanationScreenReaderLabel
+            }
           />
           <Slider
             disabled={disabled}
@@ -163,6 +172,9 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
             onChange={(hue: number) => {
               this.setState({ h: hue })
             }}
+            navigationExplanationScreenReaderLabel={
+              colorSliderNavigationExplanationScreenReaderLabel
+            }
           />
           {withAlpha && (
             <Slider
@@ -173,12 +185,15 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
               color={colorToHex8({ h, s, v })}
               value={a}
               onChange={(opacity) => this.setState({ a: opacity / 100 })}
+              navigationExplanationScreenReaderLabel={
+                alphaSliderNavigationExplanationScreenReaderLabel
+              }
             ></Slider>
           )}
         </span>
         <RGBAInput
           disabled={disabled}
-          label="RGBA"
+          label={withAlpha ? 'RGBA' : 'RGB'}
           width={this.width}
           value={colorToRGB({ h, s, v, a })}
           onChange={(color) => this.setState({ ...colorToHsva(color) })}

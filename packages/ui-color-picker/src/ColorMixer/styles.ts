@@ -37,18 +37,13 @@ import type { ColorMixerStyle } from './props'
 const generateStyle = (): ColorMixerStyle => {
   return {
     colorMixer: {
-      label: 'colorMixer'
+      label: 'colorMixer',
+      width: '17rem'
     },
-    disabledOverlay: {
-      label: 'colorMixer__disabledOverlay',
-      width: '18rem',
-      background: 'rgba(255,255,255,.5)',
-      height: '13.4rem',
-      position: 'absolute',
-      top: '0.3rem',
-      left: '0.3rem',
-      zIndex: 100,
-      cursor: 'not-allowed'
+    sliderAndPaletteContainer: {
+      label: 'colorMixer__sliderAndPaletteContainer',
+      display: 'flex',
+      flexDirection: 'column'
     }
   }
 }

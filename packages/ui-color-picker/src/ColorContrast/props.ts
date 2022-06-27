@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
+  ColorContrastTheme,
   PropValidators
 } from '@instructure/shared-types'
 
@@ -87,7 +88,7 @@ type PropKeys = keyof ColorContrastOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorContrastProps = ColorContrastOwnProps &
-  WithStyleProps<null, ColorContrastStyle> &
+  WithStyleProps<ColorContrastTheme, ColorContrastStyle> &
   OtherHTMLAttributes<ColorContrastOwnProps>
 
 type ColorContrastStyle = ComponentStyle<
@@ -121,6 +122,7 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
+  'elementRef',
   'failureLabel',
   'firstColor',
   'firstColorLabel',

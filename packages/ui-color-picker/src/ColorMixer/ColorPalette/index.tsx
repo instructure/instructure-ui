@@ -50,6 +50,8 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   }
   paletteRef: HTMLDivElement | null = null
   ref: Element | null = null
+  mouseMoveListener?: { remove(): void }
+  mouseUpListener?: { remove(): void }
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
@@ -105,8 +107,16 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   handlePaletteMouseDown(e: React.MouseEvent<ViewOwnProps, MouseEvent>) {
     this.handleChange(e)
 
-    addEventListener(window, 'mousemove', this.handleChange)
-    addEventListener(window, 'mouseup', this.handleMouseUp)
+    this.mouseMoveListener = addEventListener(
+      window,
+      'mousemove',
+      this.handleChange
+    )
+    this.mouseUpListener = addEventListener(
+      window,
+      'mouseup',
+      this.handleMouseUp
+    )
   }
 
   handleMouseUp = () => {
@@ -114,8 +124,8 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   }
 
   removeEventListeners() {
-    addEventListener(window, 'mousemove', this.handleChange)
-    addEventListener(window, 'mouseup', this.handleMouseUp)
+    this.mouseMoveListener?.remove()
+    this.mouseUpListener?.remove()
   }
 
   calcColorPosition(clientX: number, clientY: number) {
@@ -206,11 +216,16 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
         borderRadius="medium"
         borderWidth="0"
         padding="0"
-        as="button"
+        tabIndex={this.props.disabled ? undefined : 0}
+        as="div"
         onKeyDown={(e) => this.handleKeyDown(e)}
         onMouseDown={(e) => this.handlePaletteMouseDown(e)}
+        aria-label={this.props.navigationExplanationScreenReaderLabel}
       >
         <div css={this.props.styles?.indicator} />
+        {this.props.disabled && (
+          <div css={this.props.styles?.disabledOverlay} />
+        )}
         <div
           css={this.props.styles?.palette}
           ref={(ref) => {

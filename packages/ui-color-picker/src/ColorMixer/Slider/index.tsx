@@ -48,6 +48,8 @@ class Slider extends Component<SliderProps> {
   }
 
   ref: Element | null = null
+  mouseMoveListener?: { remove(): void }
+  mouseUpListener?: { remove(): void }
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
@@ -75,18 +77,27 @@ class Slider extends Component<SliderProps> {
   }
 
   removeEventListeners() {
-    addEventListener(window, 'mousemove', this.handleChange)
-    addEventListener(window, 'mouseup', this.handleMouseUp)
+    this.mouseMoveListener?.remove()
+    this.mouseUpListener?.remove()
   }
 
   handleMouseDown(e: React.MouseEvent<ViewOwnProps, MouseEvent>) {
     this.handleChange(e)
 
-    addEventListener(window, 'mousemove', this.handleChange)
-    addEventListener(window, 'mouseup', this.handleMouseUp)
+    this.mouseMoveListener = addEventListener(
+      window,
+      'mousemove',
+      this.handleChange
+    )
+    this.mouseUpListener = addEventListener(
+      window,
+      'mouseup',
+      this.handleMouseUp
+    )
   }
 
   handleChange = (e: React.MouseEvent<ViewOwnProps, MouseEvent>) => {
+    if (this.props.disabled) return
     const { clientX } = e
     const newPosition = this.calcSliderPositionFromCursorPosition(
       clientX,
@@ -172,16 +183,20 @@ class Slider extends Component<SliderProps> {
         position="relative"
         background="transparent"
         margin="small 0 0 0"
-        display="flex"
+        display="inline-block"
         borderRadius="medium"
         borderWidth="0"
         padding="0"
-        as="button"
+        as="div"
         onKeyDown={(e) => this.handleKeyDown(e)}
         onMouseDown={(e) => this.handleMouseDown(e)}
-        tabIndex={0}
+        tabIndex={this.props.disabled ? undefined : 0}
+        aria-label={this.props.navigationExplanationScreenReaderLabel}
       >
         <div css={this.props.styles?.indicator} />
+        {this.props.disabled && (
+          <div css={this.props.styles?.disabledOverlay} />
+        )}
         <div
           ref={(ref) => {
             this.sliderRef = ref

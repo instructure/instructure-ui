@@ -62,7 +62,7 @@ const generateStyle = (
       borderRadius: '1.25rem',
       boxSizing: 'border-box',
       position: 'relative',
-      left: '1.5rem',
+      insetInlineStart: '1.5rem',
       bottom: '2.75rem',
       backgroundColor: componentTheme.selectedIndicatorBackgroundColor,
       display: 'flex',

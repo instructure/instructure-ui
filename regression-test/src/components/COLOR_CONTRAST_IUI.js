@@ -21,20 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { StoryConfig } from '@instructure/ui-test-utils'
-import type { ColorMixerProps } from '../props'
+import { ColorContrast } from '@instructure/ui'
+import React from 'react'
 
-export default {
-  propValues: {
-    value: ['', '#BF876F', '#ffff0099']
-  },
-  getComponentProps: () => {
-    return {
-      onChange: () => {},
-      rgbRedInputScreenReaderLabel: 'Input field for red',
-      rgbGreenInputScreenReaderLabel: 'Input field for green',
-      rgbBlueInputScreenReaderLabel: 'Input field for blue',
-      rgbAlphaInputScreenReaderLabel: 'Input field for alpha'
-    }
-  }
-} as StoryConfig<ColorMixerProps>
+const COLOR_CONTRAST_IUI = () => {
+  return (
+    <ColorContrast
+      firstColor="#FF0000"
+      secondColor="#FFFF00"
+      label="Color Contrast Ratio"
+      successLabel="PASS"
+      failureLabel="FAIL"
+      normalTextLabel="Normal text"
+      largeTextLabel="Large text"
+      graphicsTextLabel="Graphics text"
+      firstColorLabel="Background"
+      secondColorLabel="Foreground"
+    />
+  )
+}
+
+export default COLOR_CONTRAST_IUI

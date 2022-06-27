@@ -21,20 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { StoryConfig } from '@instructure/ui-test-utils'
-import type { ColorMixerProps } from '../props'
+import { ColorIndicator, View } from '@instructure/ui'
+import React from 'react'
 
-export default {
-  propValues: {
-    value: ['', '#BF876F', '#ffff0099']
-  },
-  getComponentProps: () => {
-    return {
-      onChange: () => {},
-      rgbRedInputScreenReaderLabel: 'Input field for red',
-      rgbGreenInputScreenReaderLabel: 'Input field for green',
-      rgbBlueInputScreenReaderLabel: 'Input field for blue',
-      rgbAlphaInputScreenReaderLabel: 'Input field for alpha'
-    }
-  }
-} as StoryConfig<ColorMixerProps>
+const COLOR_INDICATOR_IUI = () => {
+  return (
+    <div style={{ display: 'flex', background: 'white' }}>
+      <View margin="small">
+        <ColorIndicator color="" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="#ff0000" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="#ff000088" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="#ff000000" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="yellow" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="rgb(155,55,82)" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="rgba(155,55,82,.5)" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="hsl(30, 100%, 50%)" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="hsla(30, 100%, 50%, .3)" />
+      </View>
+      <View margin="small">
+        <ColorIndicator color="hwb(1.5708rad 60% 0%)" />
+      </View>
+    </div>
+  )
+}
+
+export default COLOR_INDICATOR_IUI

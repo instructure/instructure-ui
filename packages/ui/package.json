@@ -37,6 +37,7 @@
     "@instructure/ui-calendar": "8.25.0",
     "@instructure/ui-checkbox": "8.25.0",
     "@instructure/ui-code-editor": "8.25.0",
+    "@instructure/ui-color-picker": "8.25.0",
     "@instructure/ui-date-input": "8.25.0",
     "@instructure/ui-date-time-input": "8.25.0",
     "@instructure/ui-dialog": "8.25.0",

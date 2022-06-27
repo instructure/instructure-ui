@@ -27,6 +27,7 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 import type {
   OtherHTMLAttributes,
+  ColorMixerRGBAInputTheme,
   PropValidators
 } from '@instructure/shared-types'
 import type { RGBAType } from '../props'
@@ -54,7 +55,7 @@ type PropKeys = keyof RGBAInputOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RGBAInputProps = RGBAInputOwnProps &
-  WithStyleProps<null, RGBAInputStyle> &
+  WithStyleProps<ColorMixerRGBAInputTheme, RGBAInputStyle> &
   OtherHTMLAttributes<RGBAInputOwnProps>
 
 type RGBAInputStyle = ComponentStyle<
@@ -74,7 +75,19 @@ const propTypes: PropValidators<PropKeys> = {
   elementRef: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = ['onChange', 'value']
+const allowedProps: AllowedPropKeys = [
+  'disabled',
+  'label',
+  'width',
+  'value',
+  'onChange',
+  'withAlpha',
+  'rgbRedInputScreenReaderLabel',
+  'rgbGreenInputScreenReaderLabel',
+  'rgbBlueInputScreenReaderLabel',
+  'rgbAlphaInputScreenReaderLabel',
+  'elementRef'
+]
 
 export type { RGBAInputProps, RGBAInputState, RGBAInputStyle }
 export { propTypes, allowedProps }

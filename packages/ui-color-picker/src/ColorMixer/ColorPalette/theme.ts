@@ -32,7 +32,7 @@ import { colorIndicatorBorderColor } from '../../ColorIndicator/theme'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): ColorMixerPaletteTheme => {
-  const { colors, borders } = theme
+  const { colors, borders, stacking } = theme
 
   const componentVariables = {
     indicatorBorderColor: colors.licorice,
@@ -40,7 +40,8 @@ const generateComponentTheme = (theme: Theme): ColorMixerPaletteTheme => {
     colorIndicatorBorderColor,
     indicatorBorderWidth: borders.widthSmall,
     paletteBorderRadius: borders.radiusMedium,
-    paletteBorderWidth: borders.widthSmall
+    paletteBorderWidth: borders.widthSmall,
+    disabledOverlayZIndex: stacking.topmost
   }
 
   return {

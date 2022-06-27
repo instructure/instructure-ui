@@ -27,6 +27,7 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 import type {
   OtherHTMLAttributes,
+  ColorMixerPaletteTheme,
   PropValidators
 } from '@instructure/shared-types'
 import type { HSVType } from '../props'
@@ -40,6 +41,7 @@ type ColorPaletteOwnProps = {
   indicatorRadius: number
   onChange: (rgb: HSVType) => void
   elementRef?: (element: Element | null) => void
+  navigationExplanationScreenReaderLabel: string
 }
 
 type ColorPaletteState = {
@@ -51,11 +53,11 @@ type PropKeys = keyof ColorPaletteOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorPaletteProps = ColorPaletteOwnProps &
-  WithStyleProps<null, ColorPaletteStyle> &
+  WithStyleProps<ColorMixerPaletteTheme, ColorPaletteStyle> &
   OtherHTMLAttributes<ColorPaletteOwnProps>
 
 type ColorPaletteStyle = ComponentStyle<
-  'ColorPalette' | 'indicator' | 'palette'
+  'ColorPalette' | 'indicator' | 'palette' | 'disabledOverlay'
 >
 const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.number,
@@ -65,16 +67,20 @@ const propTypes: PropValidators<PropKeys> = {
   height: PropTypes.number,
   indicatorRadius: PropTypes.number,
   onChange: PropTypes.func,
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  navigationExplanationScreenReaderLabel: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
+  'disabled',
   'hue',
   'color',
   'width',
   'height',
   'indicatorRadius',
-  'onChange'
+  'onChange',
+  'elementRef',
+  'navigationExplanationScreenReaderLabel'
 ]
 
 export type { ColorPaletteProps, ColorPaletteState, ColorPaletteStyle }

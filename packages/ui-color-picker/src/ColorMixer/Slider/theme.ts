@@ -47,7 +47,8 @@ const generateComponentTheme = (theme: Theme): ColorMixerSliderTheme => {
     colorIndicatorBorderColor,
     indicatorBorderWidth: borders.widthSmall,
     sliderBorderWidth: borders.widthSmall,
-    indicatorZIndex: stacking.above
+    indicatorZIndex: stacking.above,
+    disabledOverlayZIndex: stacking.topmost
   }
 
   return {

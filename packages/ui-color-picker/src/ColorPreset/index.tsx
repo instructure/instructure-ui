@@ -33,9 +33,9 @@ import { Tooltip } from '@instructure/ui-tooltip'
 import { Popover } from '@instructure/ui-popover'
 import { Text } from '@instructure/ui-text'
 import { Drilldown } from '@instructure/ui-drilldown'
-import type { DrillDownOnSelectArgs } from '@instructure/ui-drilldown'
+import type { DrilldownOnSelectArgs } from '@instructure/ui-drilldown'
 import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
-import { colorToHex8, hexToRgb } from '@instructure/ui-color-utils'
+import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
 import { ColorIndicator } from '../ColorIndicator'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
@@ -88,7 +88,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
 
   onMenuItemSelected =
     (color: string) =>
-    (_e: SyntheticEvent<Element, Event>, args: DrillDownOnSelectArgs) => {
+    (_e: SyntheticEvent<Element, Event>, args: DrilldownOnSelectArgs) => {
       if (args.value === 'select') {
         this.props.onSelect(color)
       }
@@ -105,7 +105,9 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         <div css={this.props?.styles?.addNewPresetButton}>
           <IconButton
             disabled={this.props.disabled}
-            screenReaderLabel={this.props.addNewPresetButtonScreenReaderLabel}
+            screenReaderLabel={
+              this.props.colorMixerSettings!.addNewPresetButtonScreenReaderLabel
+            }
           >
             <IconAddLine />
           </IconButton>
@@ -124,14 +126,14 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
       shouldContainFocus
       shouldReturnFocus
       shouldCloseOnDocumentClick
-      offsetY="16px"
+      offsetY={16}
       mountNode={() => document.getElementById('main')}
     >
       <div css={this.props.styles?.popoverContent}>
         <ColorMixer
           value={colorToHex8(this.state.newColor)}
           onChange={(newColor: string) =>
-            this.setState({ newColor: hexToRgb(newColor) })
+            this.setState({ newColor: colorToRGB(newColor) })
           }
           withAlpha={this.props?.colorMixerSettings?.colorMixer?.withAlpha}
           rgbRedInputScreenReaderLabel={
@@ -149,6 +151,18 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
           rgbAlphaInputScreenReaderLabel={
             this.props.colorMixerSettings!.colorMixer
               .rgbAlphaInputScreenReaderLabel
+          }
+          colorSliderNavigationExplanationScreenReaderLabel={
+            this.props.colorMixerSettings!.colorMixer
+              .colorSliderNavigationExplanationScreenReaderLabel
+          }
+          alphaSliderNavigationExplanationScreenReaderLabel={
+            this.props.colorMixerSettings!.colorMixer
+              .alphaSliderNavigationExplanationScreenReaderLabel
+          }
+          colorPaletteNavigationExplanationScreenReaderLabel={
+            this.props.colorMixerSettings!.colorMixer
+              .colorPaletteNavigationExplanationScreenReaderLabel
           }
         />
         {this.props?.colorMixerSettings?.colorContrast && (
@@ -225,6 +239,8 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         {...(selectOnClick
           ? { onClick: () => this.props.onSelect(color) }
           : {})}
+        {...(this.props.selected === color ? { 'aria-label': 'selected' } : {})}
+        role="presentation"
       >
         <div>
           <ColorIndicator color={color} shape="rectangle" />

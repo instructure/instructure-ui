@@ -137,10 +137,15 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
           {withAlpha && (
             <span css={styles?.aInput}>
               <TextInput
+                aria-label="%"
                 disabled={disabled}
                 value={`${Math.round(this.state.value.a * 100)}`}
                 onChange={(e) => this.handleChange('a', e)}
-                renderAfterInput="%"
+                renderAfterInput={
+                  <span aria-hidden="true" role="presentation">
+                    %
+                  </span>
+                }
                 renderLabel={
                   <ScreenReaderContent>
                     {this.props.rgbAlphaInputScreenReaderLabel}

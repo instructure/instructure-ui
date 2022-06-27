@@ -271,6 +271,17 @@ describe('<TextInput/>', async () => {
       expect(await textInput.find('input[disabled]')).to.exist()
     })
 
+    // TODO: investigate why we can't test disabled state of the text input
+    // it.only('should set the disabled attribute when `disabled` is set', async () => {
+    //   const subject = await mount(<TextInput disabled renderLabel="Name" />)
+    //   const textInput = within(subject.getDOMNode())
+    //   const input = await textInput.find('input')
+
+    //   await input.typeIn('g')
+
+    //   expect(input.value()).to.be.eq('')
+    // })
+
     it('should set the readonly attribute when `interaction` is readonly', async () => {
       const subject = await mount(
         <TextInput renderLabel="Name" interaction="readonly" />

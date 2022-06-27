@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
+  ColorMixerSliderTheme,
   PropValidators
 } from '@instructure/shared-types'
 import type { RGBType, RGBAType } from '../props'
@@ -39,6 +40,7 @@ type SliderOwnProps = {
   indicatorRadius: number
   height: number
   elementRef?: (element: Element | null) => void
+  navigationExplanationScreenReaderLabel: string
 }
 
 type SliderState = {
@@ -52,11 +54,15 @@ type PropKeys = keyof SliderOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SliderProps = SliderOwnProps &
-  WithStyleProps<null, SliderStyle> &
+  WithStyleProps<ColorMixerSliderTheme, SliderStyle> &
   OtherHTMLAttributes<SliderOwnProps>
 
 type SliderStyle = ComponentStyle<
-  'colorSlider' | 'indicator' | 'slider' | 'sliderBackground'
+  | 'colorSlider'
+  | 'indicator'
+  | 'slider'
+  | 'sliderBackground'
+  | 'disabledOverlay'
 >
 
 const propTypes: PropValidators<PropKeys> = {
@@ -66,7 +72,8 @@ const propTypes: PropValidators<PropKeys> = {
   value: PropTypes.object,
   indicatorRadius: PropTypes.number,
   height: PropTypes.number,
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  navigationExplanationScreenReaderLabel: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -75,7 +82,9 @@ const allowedProps: AllowedPropKeys = [
   'width',
   'value',
   'indicatorRadius',
-  'height'
+  'height',
+  'elementRef',
+  'navigationExplanationScreenReaderLabel'
 ]
 
 export type { SliderProps, SliderStyle, SliderState }

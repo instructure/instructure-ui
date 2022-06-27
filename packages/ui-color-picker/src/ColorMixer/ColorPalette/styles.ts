@@ -77,6 +77,16 @@ const generateStyle = (
       borderColor: componentTheme.colorIndicatorBorderColor,
       background: `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)),
       linear-gradient(to right, white, hsl(${props.hue},100%,50%))`
+    },
+    disabledOverlay: {
+      label: 'ColorPalette__disabledOverlay',
+      background: 'rgba(255,255,255,.5)',
+      zIndex: componentTheme.disabledOverlayZIndex,
+      width: `${props.width / 16 + 1}rem`,
+      height: `${props.height / 16 + 1}rem`,
+      position: 'absolute',
+      top: '-.5rem',
+      left: '-.5rem'
     }
   }
 }

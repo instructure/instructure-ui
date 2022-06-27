@@ -21,20 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { StoryConfig } from '@instructure/ui-test-utils'
-import type { ColorMixerProps } from '../props'
+import { ColorPicker } from '@instructure/ui'
+import React from 'react'
 
-export default {
-  propValues: {
-    value: ['', '#BF876F', '#ffff0099']
-  },
-  getComponentProps: () => {
-    return {
-      onChange: () => {},
-      rgbRedInputScreenReaderLabel: 'Input field for red',
-      rgbGreenInputScreenReaderLabel: 'Input field for green',
-      rgbBlueInputScreenReaderLabel: 'Input field for blue',
-      rgbAlphaInputScreenReaderLabel: 'Input field for alpha'
-    }
-  }
-} as StoryConfig<ColorMixerProps>
+const COLOR_MIXER_IUI = () => {
+  return (
+    <ColorPicker
+      checkContrast={{
+        isStrict: false,
+        renderContrastSuccessMessage: () => [
+          { type: 'success', text: 'I am a contrast success message' }
+        ],
+        renderContrastErrorMessage: () => [
+          { type: 'error', text: 'I am a contrast warning message' }
+        ]
+      }}
+      renderMessages={() => [
+        { type: 'hint', text: 'I can display anything, at any time' }
+      ]}
+      renderInvalidColorMessage={() => [
+        { type: 'error', text: 'I am an invalid color message' }
+      ]}
+      renderIsRequiredMessage={() => [
+        { type: 'error', text: 'I am a required message' }
+      ]}
+      placeholderText="Enter HEX"
+    />
+  )
+}
+
+export default COLOR_MIXER_IUI

@@ -10,6 +10,13 @@ The regression testing suite is fairly simple at this point, it will only check 
 
 ## Run the regeression tests locally
 
+Run `prepare.js` to fetch latest snapshot versions
+
+```sh
+# cwd: regression-test
+node ./prepare.js
+```
+
 In order to run the test you have to have it's dependencies installed. (this project is not a workspace of the main instui project)
 
 ```sh

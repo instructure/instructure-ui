@@ -53,10 +53,7 @@ const generateStyle = (
 
   return {
     colorSlider: {
-      label: 'colorMixerSlider',
-      width: props.width,
-      height: props.height,
-      position: 'relative'
+      label: 'colorMixerSlider'
     },
     indicator: {
       label: 'colorMixerSlider__indicator',
@@ -102,6 +99,16 @@ const generateStyle = (
       borderStyle: 'solid',
       borderColor: componentTheme.colorIndicatorBorderColor,
       borderWidth: componentTheme.sliderBorderWidth
+    },
+    disabledOverlay: {
+      label: 'colorMixerSlider__disabledOverlay',
+      background: 'rgba(255,255,255,.5)',
+      zIndex: componentTheme.disabledOverlayZIndex,
+      width: `${props.width / 16 + 1}rem`,
+      height: `${props.height / 16 + 1}rem`,
+      position: 'absolute',
+      top: '-.5rem',
+      left: '-.5rem'
     }
   }
 }

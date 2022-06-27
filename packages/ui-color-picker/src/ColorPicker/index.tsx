@@ -59,6 +59,7 @@ import type {
   MessageType
 } from './props'
 import { propTypes, allowedProps } from './props'
+import { testable } from '@instructure/ui-testable'
 
 const acceptedCharactersForHEX = [
   '0',
@@ -92,6 +93,7 @@ category: components
 @tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
+@testable()
 class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
@@ -138,7 +140,10 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   componentDidUpdate(prevProps: ColorPickerProps) {
     this.props.makeStyles?.({ ...this.state, isSimple: this.isSimple })
 
-    if (prevProps.value !== this.props.value) {
+    if (
+      prevProps.value !== this.props.value &&
+      this.props.value !== this.props.value?.slice(1)
+    ) {
       this.setState({
         showHelperErrorMessages: false,
         hexCode: this.props.value?.slice(1) || ''
@@ -195,7 +200,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     const contrast = isValidHex
       ? getContrast(
           this.props.checkContrast?.contrastAgainst || '#fff',
-          hexCode,
+          this.props.value ?? hexCode,
           2
         )
       : undefined
@@ -294,18 +299,24 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     return null
   }
 
-  handleOnChange(event: React.ChangeEvent<HTMLInputElement>, value: string) {
+  handleOnChange(_event: React.ChangeEvent<HTMLInputElement>, value: string) {
     const { onChange } = this.props
     if (
       value.length > (this.props.withAlpha ? 8 : 6) ||
-      //TODO remove any
-      !acceptedCharactersForHEX.includes((event.nativeEvent as any).data)
+      value
+        .split('')
+        .find((char) => !acceptedCharactersForHEX.includes(char)) !== undefined
     ) {
       return
     }
     if (typeof onChange === 'function') {
       onChange(`#${value}`)
     }
+    this.setState({
+      showHelperErrorMessages: false,
+      hexCode: value,
+      mixedColor: `${value}`
+    })
   }
 
   //TODO remove any
@@ -329,7 +340,8 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         this.props.onChange(`#${newHex}`)
       }
       this.setState({
-        hexCode: newHex
+        hexCode: newHex,
+        mixedColor: `${newHex}`
       })
       return event.preventDefault()
     }
@@ -349,7 +361,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         <span css={styles?.label}>{label}</span>
         <span>
           <Tooltip renderTip={tooltip}>
-            <IconInfoLine />
+            <IconInfoLine tabIndex={0} />
           </Tooltip>
         </span>
       </div>
@@ -368,7 +380,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           disabled={this.props.disabled}
           screenReaderLabel={this.props.popoverButtonScreenReaderLabel || ''}
         >
-          <ColorIndicator color={`#${this.state.hexCode}`} />
+          <ColorIndicator color={`${this.props.value}`} />
         </IconButton>
       }
       isShowingContent={this.state.openColorPicker}
@@ -444,6 +456,18 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
               this.props.colorMixerSettings.colorMixer
                 .rgbAlphaInputScreenReaderLabel
             }
+            colorSliderNavigationExplanationScreenReaderLabel={
+              this.props.colorMixerSettings!.colorMixer
+                .colorSliderNavigationExplanationScreenReaderLabel
+            }
+            alphaSliderNavigationExplanationScreenReaderLabel={
+              this.props.colorMixerSettings!.colorMixer
+                .alphaSliderNavigationExplanationScreenReaderLabel
+            }
+            colorPaletteNavigationExplanationScreenReaderLabel={
+              this.props.colorMixerSettings!.colorMixer
+                .colorPaletteNavigationExplanationScreenReaderLabel
+            }
           />
         )}
         {this.props?.colorMixerSettings?.colorPreset && (
@@ -452,10 +476,6 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
               label={this.props.colorMixerSettings.colorPreset.label}
               colors={this.props.colorMixerSettings.colorPreset.colors}
               selected={this.state.mixedColor}
-              addNewPresetButtonScreenReaderLabel={
-                this.props.colorMixerSettings.colorPreset
-                  .addNewPresetButtonScreenReaderLabel
-              }
               onSelect={(color: string) =>
                 this.setState({ mixedColor: color.slice(1) })
               }
@@ -496,18 +516,6 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         )}
       </div>
       <div css={this.props.styles?.popoverFooter}>
-        <Button
-          onClick={() => {
-            this.setState({
-              openColorPicker: false,
-              hexCode: `${this.stripAlphaIfNeeded(this.state.mixedColor)}`
-            })
-          }}
-          color="primary"
-          margin="xx-small"
-        >
-          {this.props.colorMixerSettings?.popoverAddButtonLabel}
-        </Button>
         <Button
           onClick={() =>
             this.setState({
@@ -584,7 +592,9 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         />
         {!this.isSimple && (
           <div css={this.props.styles?.colorMixerButtonContainer}>
-            {this.renderPopover()}
+            <div css={this.props.styles?.colorMixerButtonWrapper}>
+              {this.renderPopover()}
+            </div>
           </div>
         )}
       </div>

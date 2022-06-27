@@ -21,20 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { StoryConfig } from '@instructure/ui-test-utils'
-import type { ColorMixerProps } from '../props'
+import { locator } from '@instructure/ui-test-locator'
 
-export default {
-  propValues: {
-    value: ['', '#BF876F', '#ffff0099']
-  },
-  getComponentProps: () => {
-    return {
-      onChange: () => {},
-      rgbRedInputScreenReaderLabel: 'Input field for red',
-      rgbGreenInputScreenReaderLabel: 'Input field for green',
-      rgbBlueInputScreenReaderLabel: 'Input field for blue',
-      rgbAlphaInputScreenReaderLabel: 'Input field for alpha'
-    }
-  }
-} as StoryConfig<ColorMixerProps>
+import { ColorMixer } from './index'
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const ColorMixerLocator = locator(ColorMixer.selector)

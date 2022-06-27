@@ -21,20 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import type { StoryConfig } from '@instructure/ui-test-utils'
-import type { ColorMixerProps } from '../props'
+import { ColorPreset } from '@instructure/ui'
+import React, { useState } from 'react'
 
-export default {
-  propValues: {
-    value: ['', '#BF876F', '#ffff0099']
-  },
-  getComponentProps: () => {
-    return {
-      onChange: () => {},
-      rgbRedInputScreenReaderLabel: 'Input field for red',
-      rgbGreenInputScreenReaderLabel: 'Input field for green',
-      rgbBlueInputScreenReaderLabel: 'Input field for blue',
-      rgbAlphaInputScreenReaderLabel: 'Input field for alpha'
-    }
-  }
-} as StoryConfig<ColorMixerProps>
+const COLOR_PRESET_IUI = () => {
+  const [selected, setSelected] = useState('#0C89BF')
+
+  return (
+    <ColorPreset
+      label="Choose a color"
+      colors={[
+        '#ffffff',
+        '#0CBF94',
+        '#0C89BF',
+        '#BF0C6D',
+        '#BF8D0C',
+        '#ff0000',
+        '#576A66',
+        '#35423A',
+        '#35423F'
+      ]}
+      selected={selected}
+      onSelect={(selected) => setSelected(selected)}
+    />
+  )
+}
+
+export default COLOR_PRESET_IUI

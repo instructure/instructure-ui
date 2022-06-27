@@ -69,26 +69,26 @@ const generateStyle = (
       lineHeight: componentTheme.hashMarkContainerLineHeight,
       ...(isSimple
         ? {
-            paddingLeft: componentTheme.hashMarkContainerLeftPadding,
-            paddingRight: componentTheme.hashMarkContainerRightPadding
+            paddingInlineStart: componentTheme.hashMarkContainerLeftPadding,
+            paddingInlineEnd: componentTheme.hashMarkContainerRightPadding
           }
         : {})
     },
     errorIcons: {
       label: 'colorPicker__errorIcons',
       display: 'flex',
-      paddingRight: componentTheme.errorIconsRightPadding,
+      paddingInlineEnd: componentTheme.errorIconsRightPadding,
       color: checkContrast?.isStrict ? errorIconColor : warningIconColor
     },
     successIcon: {
       label: 'colorPicker__successIcon',
       display: 'flex',
-      paddingRight: componentTheme.successIconRightPadding,
+      paddingInlineEnd: componentTheme.successIconRightPadding,
       color: successIconColor
     },
     label: {
       label: 'colorPicker__label',
-      marginRight: componentTheme.labelRightMargin
+      marginInlineEnd: componentTheme.labelRightMargin
     },
     popoverContent: {
       label: 'colorPicker__popoverContent',
@@ -106,7 +106,7 @@ const generateStyle = (
       label: 'colorPicker__popoverFooter',
       backgroundColor: componentTheme.popoverFooterColor,
       display: 'flex',
-      flexDirection: 'row-reverse',
+      justifyContent: 'flex-end',
       padding: componentTheme.popoverFooterPadding,
       borderTop: `solid ${componentTheme.popoverFooterTopBorderWidth}`,
       borderColor: componentTheme.popoverSeparatorColor
@@ -114,12 +114,16 @@ const generateStyle = (
     colorMixerButtonContainer: {
       label: 'colorPicker__colorMixerButtonContainer',
       alignSelf: 'flex-end',
-      marginLeft: componentTheme.colorMixerButtonContainerLeftMargin
+      marginInlineStart: componentTheme.colorMixerButtonContainerLeftMargin
     },
     popoverContentContainer: {
       label: 'colorPicker__popoverContentContainer',
       maxHeight: popoverMaxHeight || '100vh',
       overflow: 'scroll'
+    },
+    colorMixerButtonWrapper: {
+      position: 'absolute',
+      top: '2.69rem'
     }
   }
 }

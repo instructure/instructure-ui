@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
+  ColorPresetTheme,
   PropValidators
 } from '@instructure/shared-types'
 import type { RGBAType } from '../ColorMixer/props'
@@ -38,10 +39,6 @@ type MessageType = Array<{
 }>
 
 type ColorPresetOwnProps = {
-  /**
-   * screenReaderLabel for the add new preset button
-   */
-  addNewPresetButtonScreenReaderLabel: string
   /**
    * Array of HEX strings which are the preset colors. Supports 8 character HEX (with alpha)
    */
@@ -66,6 +63,10 @@ type ColorPresetOwnProps = {
    * It will be called with the new list of colors
    */
   colorMixerSettings?: {
+    /**
+     * screenReaderLabel for the add new preset button
+     */
+    addNewPresetButtonScreenReaderLabel: string
     maxHeight: string
     onPresetChange: (colors: ColorPresetOwnProps['colors']) => void
     colorMixer: {
@@ -74,6 +75,9 @@ type ColorPresetOwnProps = {
       rgbGreenInputScreenReaderLabel: string
       rgbBlueInputScreenReaderLabel: string
       rgbAlphaInputScreenReaderLabel: string
+      colorSliderNavigationExplanationScreenReaderLabel: string
+      alphaSliderNavigationExplanationScreenReaderLabel: string
+      colorPaletteNavigationExplanationScreenReaderLabel: string
     }
     colorContrast?: {
       firstColor: string
@@ -112,7 +116,7 @@ type PropKeys = keyof ColorPresetOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorPresetProps = ColorPresetOwnProps &
-  WithStyleProps<null, ColorPresetStyle> &
+  WithStyleProps<ColorPresetTheme, ColorPresetStyle> &
   OtherHTMLAttributes<ColorPresetOwnProps>
 
 type ColorPresetStyle = ComponentStyle<
@@ -127,7 +131,6 @@ type ColorPresetStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  addNewPresetButtonScreenReaderLabel: PropTypes.string,
   colors: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
   elementRef: PropTypes.func,
@@ -140,9 +143,12 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = [
   'colors',
+  'disabled',
+  'elementRef',
   'label',
   'colorMixerSettings',
   'onSelect',
+  'popoverScreenReaderLabel',
   'selected'
 ]
 
