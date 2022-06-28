@@ -72,20 +72,6 @@ describe('<ColorPicker />', () => {
       expect(input.value()).to.be.eq('FFF555')
     })
 
-    // TODO modify test. It should pass.
-    it.skip('should not allow to change value when value is constant', async () => {
-      const color = '#FFF'
-
-      await mount(<SimpleExample value={color} />)
-
-      const cp = await ColorPickerLocator.find()
-      const input = await cp.findTextInput()
-
-      await input.typeIn('123')
-
-      expect(input.value()).to.be.eq('FFF')
-    })
-
     it('should accept 3 digit hex code', async () => {
       const color = '0CB'
       await mount(<SimpleExample />)
@@ -110,8 +96,7 @@ describe('<ColorPicker />', () => {
       expect(input.value()).to.eq(color)
     })
 
-    // TODO modify test. It should pass.
-    it.skip('should not accept not valid hex code', async () => {
+    it('should not accept not valid hex code', async () => {
       const color = 'WWWZZZ'
       await mount(<SimpleExample />)
 
@@ -120,10 +105,10 @@ describe('<ColorPicker />', () => {
 
       await input.typeIn(color)
 
-      expect(input.value()).to.eq(color)
+      expect(input.value()).to.not.eq(color)
     })
 
-    it.skip('should not allow more than 6 characters', async () => {
+    it('should not allow more than 6 characters', async () => {
       const color = '0CBF2D1234567'
       await mount(<SimpleExample />)
 
@@ -145,9 +130,8 @@ describe('<ColorPicker />', () => {
       await input.typeIn(color)
 
       const colorIndicator = await cp.findColorIndicator()
-      const computedStyle = colorIndicator.getComputedStyle().boxShadow
+      const currentColor = colorIndicator.getColorRGBA()
       const expectedColor = colorToRGB(`#${color}`)
-      const currentColor = /rgb\(\d+,\s\d+,\s\d+\)/.exec(computedStyle)![0]
 
       expect(expectedColor).to.eql(colorToRGB(currentColor))
     })
@@ -162,7 +146,11 @@ describe('<ColorPicker />', () => {
       expect(await textInput.find('input[disabled]')).to.exist()
     })
 
-    for (const contrastStrength of ['min', 'mid', 'max']) {
+    for (const contrastStrength of [
+      'min',
+      'mid',
+      'max'
+    ] as ContrastStrength[]) {
       it(`should check contrast correctly when color has enough constrast [contrastStrength=${contrastStrength}]`, async () => {
         //oxford in canvas color palette, should be valid with all contrast strenght checkers
         const colorToCheck = '394B58'
@@ -170,7 +158,7 @@ describe('<ColorPicker />', () => {
           <SimpleExample
             checkContrast={{
               isStrict: false,
-              contrastStrength: contrastStrength as ContrastStrength
+              contrastStrength: contrastStrength
             }}
           />
         )
@@ -193,7 +181,7 @@ describe('<ColorPicker />', () => {
           <SimpleExample
             checkContrast={{
               isStrict: false,
-              contrastStrength: contrastStrength as ContrastStrength
+              contrastStrength: contrastStrength
             }}
           />
         )
@@ -220,7 +208,7 @@ describe('<ColorPicker />', () => {
           <SimpleExample
             checkContrast={{
               isStrict: true,
-              contrastStrength: contrastStrength as ContrastStrength
+              contrastStrength: contrastStrength
             }}
           />
         )
@@ -246,7 +234,7 @@ describe('<ColorPicker />', () => {
           <SimpleExample
             checkContrast={{
               isStrict: false,
-              contrastStrength: contrastStrength as ContrastStrength,
+              contrastStrength: contrastStrength,
               renderContrastSuccessMessage: () => [
                 { type: 'success', text: 'I am a contrast success message' }
               ]
@@ -269,7 +257,7 @@ describe('<ColorPicker />', () => {
           <SimpleExample
             checkContrast={{
               isStrict: false,
-              contrastStrength: contrastStrength as ContrastStrength,
+              contrastStrength: contrastStrength,
               renderContrastErrorMessage: () => [
                 { type: 'error', text: 'I am a contrast warning message' }
               ]
@@ -292,7 +280,7 @@ describe('<ColorPicker />', () => {
           <SimpleExample
             checkContrast={{
               isStrict: true,
-              contrastStrength: contrastStrength as ContrastStrength,
+              contrastStrength: contrastStrength,
               renderContrastErrorMessage: () => [
                 { type: 'error', text: 'I am a contrast error message' }
               ]
@@ -545,9 +533,8 @@ describe('<ColorPicker />', () => {
 
       await input.typeIn(color)
 
-      const computedStyle = colorIndicator.getComputedStyle().boxShadow
+      const currentColor = colorIndicator.getColorRGBA()
       const expectedColor = colorToRGB(`#${color}`)
-      const currentColor = /rgb\(\d+,\s\d+,\s\d+\)/.exec(computedStyle)![0]
 
       expect(expectedColor).to.eql(colorToRGB(currentColor))
     })

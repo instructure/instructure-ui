@@ -23,12 +23,16 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
-import { withStyle, jsx } from '@instructure/emotion'
-import { View } from '@instructure/ui-view'
+import React, { Component } from 'react'
+
 import { addEventListener } from '@instructure/ui-dom-utils'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
-import type { SliderProps } from './props'
+
+import { propTypes, allowedProps } from './props'
+import type { SliderProps, SliderStyleProps } from './props'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -41,15 +45,18 @@ import generateComponentTheme from './theme'
  **/
 @withStyle(generateStyle, generateComponentTheme)
 class Slider extends Component<SliderProps> {
-  sliderRef: HTMLDivElement | null = null
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static readonly componentId = 'ColorMixer.Slider'
 
   static defaultProps = {
     isColorSlider: false
   }
 
   ref: Element | null = null
-  mouseMoveListener?: { remove(): void }
-  mouseUpListener?: { remove(): void }
+  private _sliderRef: HTMLDivElement | null = null
+  private _mouseMoveListener?: { remove(): void }
+  private _mouseUpListener?: { remove(): void }
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
@@ -60,16 +67,13 @@ class Slider extends Component<SliderProps> {
       elementRef(el)
     }
   }
+
   componentDidMount() {
-    this.props.makeStyles?.({
-      calcSliderPositionFromValue: this.calcSliderPositionFromValue
-    })
+    this.props.makeStyles?.(this.makeStylesProps)
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.({
-      calcSliderPositionFromValue: this.calcSliderPositionFromValue
-    })
+    this.props.makeStyles?.(this.makeStylesProps)
   }
 
   componentWillUnmount() {
@@ -77,19 +81,39 @@ class Slider extends Component<SliderProps> {
   }
 
   removeEventListeners() {
-    this.mouseMoveListener?.remove()
-    this.mouseUpListener?.remove()
+    this._mouseMoveListener?.remove()
+    this._mouseUpListener?.remove()
+  }
+
+  get sliderPositionFromValue() {
+    return this.calcSliderPositionFromValue(this.props.value)
+  }
+
+  get roundedValue() {
+    const { value, maxValue } = this.props
+
+    if (maxValue <= 1) {
+      return Math.round(value * 100)
+    } else {
+      return Math.round(value)
+    }
+  }
+
+  get makeStylesProps(): SliderStyleProps {
+    return {
+      sliderPositionFromValue: this.sliderPositionFromValue
+    }
   }
 
   handleMouseDown(e: React.MouseEvent<ViewOwnProps, MouseEvent>) {
     this.handleChange(e)
 
-    this.mouseMoveListener = addEventListener(
+    this._mouseMoveListener = addEventListener(
       window,
       'mousemove',
       this.handleChange
     )
-    this.mouseUpListener = addEventListener(
+    this._mouseUpListener = addEventListener(
       window,
       'mouseup',
       this.handleMouseUp
@@ -101,29 +125,28 @@ class Slider extends Component<SliderProps> {
     const { clientX } = e
     const newPosition = this.calcSliderPositionFromCursorPosition(
       clientX,
-      this.sliderRef!
+      this._sliderRef!
     )
 
     this.props.onChange(this.calcValueFromSliderPosition(newPosition))
-    this.setState({
-      position: newPosition
-    })
   }
 
   handleMouseUp = () => {
     this.removeEventListeners()
   }
+
   applyBoundaries(x: number) {
     if (x > this.props.width) return this.props.width
     if (x < 0) return 0
     return x
   }
+
   calcSliderPositionFromCursorPosition = (
     clientX: number,
-    sliderRef: HTMLDivElement
+    _sliderRef: HTMLDivElement
   ) => {
     if (this.props.isColorSlider) {
-      const { x } = sliderRef.getBoundingClientRect()
+      const { x } = _sliderRef.getBoundingClientRect()
       const newPosition = clientX - x
       return newPosition < 0
         ? 0
@@ -131,10 +154,11 @@ class Slider extends Component<SliderProps> {
         ? this.props.width - 1
         : newPosition
     } else {
-      const { x } = sliderRef.getBoundingClientRect()
+      const { x } = _sliderRef.getBoundingClientRect()
       return clientX - x
     }
   }
+
   calcSliderPositionFromValue = (value: number) => {
     if (this.props.isColorSlider) {
       return (value / 360) * this.props.width
@@ -170,7 +194,7 @@ class Slider extends Component<SliderProps> {
     }
 
     const newPosition = this.applyBoundaries(
-      this.calcSliderPositionFromValue(this.props.value) + deltaX
+      this.sliderPositionFromValue + deltaX
     )
     this.props.onChange(this.calcValueFromSliderPosition(newPosition))
   }
@@ -192,6 +216,11 @@ class Slider extends Component<SliderProps> {
         onMouseDown={(e) => this.handleMouseDown(e)}
         tabIndex={this.props.disabled ? undefined : 0}
         aria-label={this.props.navigationExplanationScreenReaderLabel}
+        // TODO: check RangeInput and ProgressBar to see how the slider role can be handled well
+        // role="slider"
+        // aria-valuemin={this.props.minValue}
+        // aria-valuemax={this.props.maxValue}
+        // aria-valuenow={this.roundedValue}
       >
         <div css={this.props.styles?.indicator} />
         {this.props.disabled && (
@@ -199,7 +228,7 @@ class Slider extends Component<SliderProps> {
         )}
         <div
           ref={(ref) => {
-            this.sliderRef = ref
+            this._sliderRef = ref
           }}
           css={this.props.styles?.sliderBackground}
         >

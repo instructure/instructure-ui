@@ -22,8 +22,30 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-locator'
+import { find } from '@instructure/ui-test-queries'
+
+/* eslint-disable no-restricted-imports */
+// @ts-expect-error bypass no type definition found error
+import { PillLocator } from '@instructure/ui-pill/es/Pill/PillLocator'
+/* eslint-enable no-restricted-imports */
 
 import { ColorContrast } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const ColorContrastLocator = locator(ColorContrast.selector)
+export const ColorContrastLocator = locator(ColorContrast.selector, {
+  findPreview: (...args: any[]) => {
+    return find('[class$=-colorContrast__colorPreview]', ...args)
+  },
+  findNormalTextCheckPill: async () => {
+    const pills = await PillLocator.findAll()
+    return pills[0]
+  },
+  findLargeTextCheckPill: async () => {
+    const pills = await PillLocator.findAll()
+    return pills[1]
+  },
+  findGraphicsCheckPill: async () => {
+    const pills = await PillLocator.findAll()
+    return pills[2]
+  }
+})

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import type { SliderStyle, SliderProps } from './props'
 import type { ColorMixerSliderTheme } from '@instructure/shared-types'
+import type { SliderStyle, SliderProps, SliderStyleProps } from './props'
 
 /**
  * ---
@@ -38,7 +38,7 @@ import type { ColorMixerSliderTheme } from '@instructure/shared-types'
 const generateStyle = (
   componentTheme: ColorMixerSliderTheme,
   props: SliderProps,
-  state: any
+  state: SliderStyleProps
 ): SliderStyle => {
   const sliderBackground = props.isColorSlider
     ? {
@@ -67,9 +67,7 @@ const generateStyle = (
       borderColor: componentTheme.indicatorBorderColor,
       top: `-0.1875rem`,
       left: `${
-        (state?.calcSliderPositionFromValue?.(props.value) -
-          props.indicatorRadius) /
-        16
+        (state?.sliderPositionFromValue - props.indicatorRadius) / 16
       }rem`,
       zIndex: componentTheme.indicatorZIndex
     },

@@ -24,11 +24,16 @@
 
 /** @jsx jsx */
 import React, { Component } from 'react'
+
 import { withStyle, jsx } from '@instructure/emotion'
+import shallowCompare from '../utils/shallowCompare'
+
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { TextInput } from '@instructure/ui-text-input'
-import shallowCompare from '../utils/shallowCompare'
+
+import { propTypes, allowedProps } from './props'
 import type { RGBAInputProps, RGBAInputState } from './props'
+
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -40,6 +45,10 @@ import generateComponentTheme from './theme'
  **/
 @withStyle(generateStyle, generateComponentTheme)
 class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static readonly componentId = 'ColorMixer.RGBAInput'
+
   constructor(props: RGBAInputProps) {
     super(props)
     this.state = {

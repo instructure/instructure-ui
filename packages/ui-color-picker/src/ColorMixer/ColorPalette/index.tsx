@@ -24,13 +24,18 @@
 
 /** @jsx jsx */
 import React, { Component } from 'react'
+
 import { withStyle, jsx } from '@instructure/emotion'
-import { View } from '@instructure/ui-view'
-import type { ViewOwnProps } from '@instructure/ui-view'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import shallowCompare from '../utils/shallowCompare'
+
+import { View } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view'
+
+import { propTypes, allowedProps } from './props'
 import type { ColorPaletteProps, ColorPaletteState } from './props'
 import type { HSVType } from '../props'
+
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -42,16 +47,21 @@ import generateComponentTheme from './theme'
  **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static readonly componentId = 'ColorMixer.Palette'
+
   constructor(props: ColorPaletteProps) {
     super(props)
     this.state = {
       colorPosition: { x: 0, y: 0 }
     }
   }
-  paletteRef: HTMLDivElement | null = null
+
   ref: Element | null = null
-  mouseMoveListener?: { remove(): void }
-  mouseUpListener?: { remove(): void }
+  private _paletteRef: HTMLDivElement | null = null
+  private _mouseMoveListener?: { remove(): void }
+  private _mouseUpListener?: { remove(): void }
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
@@ -84,11 +94,11 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   }
 
   get paletteWidth() {
-    return this.paletteRef!.getBoundingClientRect().width
+    return this._paletteRef!.getBoundingClientRect().width
   }
 
   get paletteHeight() {
-    return this.paletteRef!.getBoundingClientRect().height
+    return this._paletteRef!.getBoundingClientRect().height
   }
   calcSaturation = (position: number) =>
     Math.round((position / this.paletteWidth) * 100) / 100
@@ -107,12 +117,12 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   handlePaletteMouseDown(e: React.MouseEvent<ViewOwnProps, MouseEvent>) {
     this.handleChange(e)
 
-    this.mouseMoveListener = addEventListener(
+    this._mouseMoveListener = addEventListener(
       window,
       'mousemove',
       this.handleChange
     )
-    this.mouseUpListener = addEventListener(
+    this._mouseUpListener = addEventListener(
       window,
       'mouseup',
       this.handleMouseUp
@@ -124,12 +134,12 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   }
 
   removeEventListeners() {
-    this.mouseMoveListener?.remove()
-    this.mouseUpListener?.remove()
+    this._mouseMoveListener?.remove()
+    this._mouseUpListener?.remove()
   }
 
   calcColorPosition(clientX: number, clientY: number) {
-    const { x, y } = this.paletteRef!.getBoundingClientRect()
+    const { x, y } = this._paletteRef!.getBoundingClientRect()
 
     return this.applyBoundaries(clientX - x, clientY - y)
   }
@@ -229,7 +239,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
         <div
           css={this.props.styles?.palette}
           ref={(ref) => {
-            this.paletteRef = ref
+            this._paletteRef = ref
           }}
         />
       </View>

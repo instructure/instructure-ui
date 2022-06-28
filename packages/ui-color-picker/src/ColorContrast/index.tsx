@@ -27,6 +27,7 @@
 import React, { Component } from 'react'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
+import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import { Text } from '@instructure/ui-text'
 import ColorIndicator from '../ColorIndicator'
@@ -51,9 +52,11 @@ category: components
 @tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
+@testable()
 class ColorContrast extends Component<ColorContrastProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
+  static readonly componentId = 'ColorContrast'
 
   constructor(props: ColorContrastProps) {
     super(props)
@@ -71,7 +74,6 @@ class ColorContrast extends Component<ColorContrastProps> {
     }
   }
 
-  static readonly componentId = 'ColorContrast'
   componentDidMount() {
     this.props.makeStyles?.()
   }
@@ -176,8 +178,8 @@ class ColorContrast extends Component<ColorContrastProps> {
           </div>
         )}
         {this.renderStatus(contrast >= 4.5, normalTextLabel)}
-        {this.renderStatus(contrast >= 3.5, largeTextLabel)}
-        {this.renderStatus(contrast >= 3.5, graphicsTextLabel)}
+        {this.renderStatus(contrast >= 3, largeTextLabel)}
+        {this.renderStatus(contrast >= 3, graphicsTextLabel)}
       </div>
     )
   }

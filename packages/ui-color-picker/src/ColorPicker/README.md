@@ -29,8 +29,8 @@ class Example extends React.Component {
 
     return (
         <ColorPicker
-          value={value}
-          onChange={(value) =>{ this.setState({ value })}}
+          // value={value}
+          // onChange={(value) =>{ this.setState({ value })}}
           label="Color Input"
           tooltip="This is an example"
           placeholderText="Enter HEX"

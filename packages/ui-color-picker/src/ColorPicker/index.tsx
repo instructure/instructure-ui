@@ -26,40 +26,42 @@
 /** @jsxFrag React.Fragment */
 import React, { Component } from 'react'
 
+import { withStyle, jsx } from '@instructure/emotion'
+import { warn } from '@instructure/console'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { TextInput } from '@instructure/ui-text-input'
-import { Tooltip } from '@instructure/ui-tooltip'
-import { Button, IconButton } from '@instructure/ui-buttons'
+import { testable } from '@instructure/ui-testable'
 import {
   colorToHex8,
   isValid,
   contrast as getContrast
 } from '@instructure/ui-color-utils'
-import ColorIndicator from '../ColorIndicator'
 
-import { withStyle, jsx } from '@instructure/emotion'
-import { warn } from '@instructure/console'
-
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import { TextInput } from '@instructure/ui-text-input'
+import { Tooltip } from '@instructure/ui-tooltip'
+import { Button, IconButton } from '@instructure/ui-buttons'
 import { Popover } from '@instructure/ui-popover'
-import ColorMixer from '../ColorMixer'
-import ColorContrast from '../ColorContrast'
-import ColorPreset from '../ColorPreset'
 import {
   IconCheckDarkLine,
   IconWarningLine,
   IconTroubleLine,
   IconInfoLine
 } from '@instructure/ui-icons'
+
+import ColorIndicator from '../ColorIndicator'
+import ColorMixer from '../ColorMixer'
+import ColorContrast from '../ColorContrast'
+import ColorPreset from '../ColorPreset'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
+import { propTypes, allowedProps } from './props'
 import type {
   ColorPickerProps,
   ColorPickerState,
   ContrastStrength,
   MessageType
 } from './props'
-import { propTypes, allowedProps } from './props'
-import testable from '@instructure/ui-testable'
 
 const acceptedCharactersForHEX = [
   '0',
@@ -97,6 +99,16 @@ category: components
 class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
+  static readonly componentId = 'ColorPicker'
+
+  static defaultProps = {
+    elementRef: () => null,
+    disabled: false,
+    label: 'Color',
+    checkContrast: false,
+    width: '22.5rem',
+    withAlpha: false
+  }
 
   constructor(props: ColorPickerProps) {
     super(props)
@@ -107,15 +119,6 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       openColorPicker: false,
       mixedColor: ''
     }
-  }
-
-  static defaultProps = {
-    elementRef: () => null,
-    disabled: false,
-    label: 'Color',
-    checkContrast: false,
-    width: '22.5rem',
-    withAlpha: false
   }
 
   ref: Element | null = null

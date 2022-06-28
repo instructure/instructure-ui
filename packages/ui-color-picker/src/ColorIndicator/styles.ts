@@ -72,7 +72,7 @@ const generateStyle = (
           : componentTheme.circleIndicatorSize,
       boxSizing: 'border-box',
       borderWidth: componentTheme.borderWidth,
-      boxShadow: `inset 0 0 0 1.5rem ${color || 'none'}`,
+      boxShadow: color ? `inset 0 0 0 1.5rem ${color}` : 'none',
       borderStyle: 'solid',
       backgroundImage: componentTheme.backgroundImage,
       backgroundSize: componentTheme.backgroundSize,

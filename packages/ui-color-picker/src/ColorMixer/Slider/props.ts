@@ -30,23 +30,18 @@ import type {
   PropValidators,
   ColorMixerSliderTheme
 } from '@instructure/shared-types'
-import type { RGBType, RGBAType } from '../props'
 
 type SliderOwnProps = {
-  isColorSlider: boolean
+  isColorSlider?: boolean
   onChange: (position: number) => void
   width: number
   value: number
+  minValue: number
+  maxValue: number
   indicatorRadius: number
   height: number
   elementRef?: (element: Element | null) => void
   navigationExplanationScreenReaderLabel: string
-}
-
-type SliderState = {
-  baseColor: RGBType
-  internalColor: RGBType
-  value: RGBAType
 }
 
 type PropKeys = keyof SliderOwnProps
@@ -56,6 +51,10 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type SliderProps = SliderOwnProps &
   WithStyleProps<ColorMixerSliderTheme, SliderStyle> &
   OtherHTMLAttributes<SliderOwnProps>
+
+type SliderStyleProps = {
+  sliderPositionFromValue: number
+}
 
 type SliderStyle = ComponentStyle<
   | 'colorSlider'
@@ -67,13 +66,15 @@ type SliderStyle = ComponentStyle<
 
 const propTypes: PropValidators<PropKeys> = {
   isColorSlider: PropTypes.bool,
-  onChange: PropTypes.func,
-  width: PropTypes.number,
-  value: PropTypes.object,
-  indicatorRadius: PropTypes.number,
-  height: PropTypes.number,
+  onChange: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+  minValue: PropTypes.number.isRequired,
+  maxValue: PropTypes.number.isRequired,
+  indicatorRadius: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
   elementRef: PropTypes.func,
-  navigationExplanationScreenReaderLabel: PropTypes.string
+  navigationExplanationScreenReaderLabel: PropTypes.string.isRequired
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -81,11 +82,13 @@ const allowedProps: AllowedPropKeys = [
   'onChange',
   'width',
   'value',
+  'minValue',
+  'maxValue',
   'indicatorRadius',
   'height',
   'elementRef',
   'navigationExplanationScreenReaderLabel'
 ]
 
-export type { SliderProps, SliderStyle, SliderState }
+export type { SliderProps, SliderStyle, SliderStyleProps }
 export { propTypes, allowedProps }

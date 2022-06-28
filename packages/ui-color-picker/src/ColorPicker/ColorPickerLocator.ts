@@ -37,11 +37,15 @@ import { ColorPicker } from '.'
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 /* eslint-enable no-restricted-imports */
 
+import { ColorIndicatorLocator } from '../ColorIndicator/ColorIndicatorLocator'
+import { ColorMixerLocator } from '../ColorMixer/ColorMixerLocator'
+import { ColorPresetLocator } from '../ColorPreset/ColorPresetLocator'
+
 async function _findColorPreset(...args: any[]) {
   const popoverContent = await PopoverLocator.findContent(...args)
-  const colorPreset = await popoverContent.find('[class$=-colorPreset]')
+  const colorPreset = await ColorPresetLocator.find(popoverContent.getDOMNode())
 
-  return colorPreset.findAll('[class$=-colorIndicator]')
+  return ColorIndicatorLocator.findAll(colorPreset.getDOMNode())
 }
 
 const customMethods = {
@@ -49,7 +53,7 @@ const customMethods = {
     return find('[id^=TextInput_]', ...args)
   },
   findColorIndicator: (...args: any[]) => {
-    return find('[class$=-colorIndicator]', ...args)
+    return ColorIndicatorLocator.find(...args)
   },
   findInputAfterIcon: (...args: any[]) => {
     return find('[class$=-textInput__afterElement]', ...args)
@@ -64,7 +68,7 @@ const customMethods = {
     return PopoverLocator.findTrigger(...args)
   },
   findColorMixer: (...args: any[]) => {
-    return find('[class$=-colorMixer]', ...args)
+    return ColorMixerLocator.find(...args)
   },
   findPopoverContent: (...args: any[]) => {
     const { element, selector, options } = parseQueryArguments(...args)
@@ -100,7 +104,7 @@ const customMethods = {
   findColorPresetButtons: async (...args: []) => {
     const colorPresets = await _findColorPreset(...args)
 
-    const colorPressetButtons = []
+    const colorPresetButtons = []
 
     for (let el of colorPresets) {
       while (el.getTagName() !== 'button') {
@@ -108,11 +112,11 @@ const customMethods = {
         if (!parentNode) {
           break
         }
-        el = within(parentNode as Element)
+        el = within(parentNode as Element) as any
       }
-      colorPressetButtons.push(el)
+      colorPresetButtons.push(el)
     }
-    return colorPressetButtons
+    return colorPresetButtons
   }
 }
 

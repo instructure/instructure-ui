@@ -2613,6 +2613,7 @@ __metadata:
     "@instructure/ui-popover": 8.25.0
     "@instructure/ui-react-utils": 8.25.0
     "@instructure/ui-test-locator": 8.25.0
+    "@instructure/ui-test-queries": 8.25.0
     "@instructure/ui-test-utils": 8.25.0
     "@instructure/ui-testable": 8.25.0
     "@instructure/ui-text": 8.25.0

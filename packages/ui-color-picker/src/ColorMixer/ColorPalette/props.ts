@@ -60,15 +60,15 @@ type ColorPaletteStyle = ComponentStyle<
   'ColorPalette' | 'indicator' | 'palette' | 'disabledOverlay'
 >
 const propTypes: PropValidators<PropKeys> = {
-  disabled: PropTypes.number,
-  hue: PropTypes.number,
-  color: PropTypes.object,
-  width: PropTypes.number,
-  height: PropTypes.number,
-  indicatorRadius: PropTypes.number,
-  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  hue: PropTypes.number.isRequired,
+  color: PropTypes.object.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  indicatorRadius: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
   elementRef: PropTypes.func,
-  navigationExplanationScreenReaderLabel: PropTypes.string
+  navigationExplanationScreenReaderLabel: PropTypes.string.isRequired
 }
 
 const allowedProps: AllowedPropKeys = [

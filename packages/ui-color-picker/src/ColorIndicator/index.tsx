@@ -52,6 +52,7 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
     color: '',
     shape: 'circle'
   }
+
   ref: HTMLDivElement | null = null
 
   componentDidMount() {

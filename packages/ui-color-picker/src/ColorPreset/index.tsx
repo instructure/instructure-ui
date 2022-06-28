@@ -25,8 +25,11 @@
 /** @jsx jsx */
 import { Component, SyntheticEvent } from 'react'
 
-import { passthroughProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
+import { passthroughProps } from '@instructure/ui-react-utils'
+import { testable } from '@instructure/ui-testable'
+import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
+
 import { IconButton, Button } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
@@ -35,15 +38,17 @@ import { Text } from '@instructure/ui-text'
 import { Drilldown } from '@instructure/ui-drilldown'
 import type { DrilldownOnSelectArgs } from '@instructure/ui-drilldown'
 import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
-import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
+
 import { ColorIndicator } from '../ColorIndicator'
+import { ColorMixer } from '../ColorMixer'
+import { ColorContrast } from '../ColorContrast'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import type { ColorPresetProps, ColorPresetState } from './props'
 import { propTypes, allowedProps } from './props'
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
-import ColorMixer from '../ColorMixer'
-import ColorContrast from '../ColorContrast'
+
 /**
 ---
 category: components
@@ -51,9 +56,15 @@ category: components
 @tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
+@testable()
 class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
+  static readonly componentId = 'ColorPreset'
+
+  static defaultProps = {
+    disabled: false
+  }
 
   constructor(props: ColorPresetProps) {
     super(props)
@@ -63,9 +74,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
       newColor: { r: 51, g: 99, b: 42, a: 1 }
     }
   }
-  static defaultProps = {
-    disabled: false
-  }
+
   ref: HTMLDivElement | null = null
 
   handleRef = (el: HTMLDivElement | null) => {

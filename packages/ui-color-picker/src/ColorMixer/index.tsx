@@ -23,20 +23,24 @@
  */
 
 /** @jsx jsx */
+import { Component } from 'react'
+
 import { withStyle, jsx } from '@instructure/emotion'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { Component } from 'react'
-import ColorPalette from './ColorPalette'
-import Slider from './Slider'
-import RGBAInput from './RGBAInput'
-import type { ColorMixerProps, ColorMixerState, HSVType } from './props'
-import { propTypes, allowedProps } from './props'
-import generateStyle from './styles'
+import { testable } from '@instructure/ui-testable'
 import {
   colorToHex8,
   colorToHsva,
   colorToRGB
 } from '@instructure/ui-color-utils'
+
+import ColorPalette from './ColorPalette'
+import Slider from './Slider'
+import RGBAInput from './RGBAInput'
+
+import type { ColorMixerProps, ColorMixerState, HSVType } from './props'
+import { propTypes, allowedProps } from './props'
+import generateStyle from './styles'
 
 /**
 ---
@@ -44,10 +48,17 @@ category: components
 ---
 @tsProps
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, null)
+@testable()
 class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
+  static readonly componentId = 'ColorMixer'
+
+  static defaultProps = {
+    withAlpha: false,
+    disabled: false
+  }
 
   constructor(props: ColorMixerProps) {
     super(props)
@@ -58,14 +69,14 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       a: 1
     }
   }
-  static readonly componentId = 'ColorMixer'
-
-  static defaultProps = {
-    withAlpha: false,
-    disabled: false
-  }
 
   ref: HTMLDivElement | null = null
+
+  private _width = 272
+  private _paletteHeight = 160
+  private _sliderHeight = 8
+  private _sliderIndicatorRadius = 6
+  private _paletteIndicatorRadius = 6
 
   handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
@@ -76,12 +87,6 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       elementRef(el)
     }
   }
-
-  private width = 272
-  private paletteHeight = 160
-  private sliderHeight = 8
-  private sliderIndicatorRadius = 6
-  private paletteIndicatorRadius = 6
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -145,9 +150,9 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
         >
           <ColorPalette
             disabled={disabled}
-            width={this.width}
-            height={this.paletteHeight}
-            indicatorRadius={this.paletteIndicatorRadius}
+            width={this._width}
+            height={this._paletteHeight}
+            indicatorRadius={this._paletteIndicatorRadius}
             hue={h}
             color={{
               h,
@@ -164,10 +169,12 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
           <Slider
             disabled={disabled}
             isColorSlider
-            width={this.width}
-            height={this.sliderHeight}
-            indicatorRadius={this.sliderIndicatorRadius}
+            width={this._width}
+            height={this._sliderHeight}
+            indicatorRadius={this._sliderIndicatorRadius}
             value={h}
+            minValue={0}
+            maxValue={359}
             color={colorToHex8({ h, s, v, a })}
             onChange={(hue: number) => {
               this.setState({ h: hue })
@@ -179,22 +186,24 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
           {withAlpha && (
             <Slider
               disabled={disabled}
-              width={this.width}
-              height={this.sliderHeight}
-              indicatorRadius={this.sliderIndicatorRadius}
+              width={this._width}
+              height={this._sliderHeight}
+              indicatorRadius={this._sliderIndicatorRadius}
               color={colorToHex8({ h, s, v })}
               value={a}
+              minValue={0}
+              maxValue={1}
               onChange={(opacity) => this.setState({ a: opacity / 100 })}
               navigationExplanationScreenReaderLabel={
                 alphaSliderNavigationExplanationScreenReaderLabel
               }
-            ></Slider>
+            />
           )}
         </span>
         <RGBAInput
           disabled={disabled}
           label={withAlpha ? 'RGBA' : 'RGB'}
-          width={this.width}
+          width={this._width}
           value={colorToRGB({ h, s, v, a })}
           onChange={(color) => this.setState({ ...colorToHsva(color) })}
           withAlpha={withAlpha}
