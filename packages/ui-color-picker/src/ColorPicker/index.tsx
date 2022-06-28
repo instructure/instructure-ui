@@ -316,8 +316,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     }
   }
 
-  //TODO remove any
-  handleOnPaste(event: any) {
+  handleOnPaste(event: React.ClipboardEvent<unknown>) {
     const pasted = event.clipboardData.getData('Text')
     let toPaste = pasted
     if (pasted[0] && pasted[0] === '#') {
