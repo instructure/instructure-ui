@@ -29,7 +29,7 @@ import {
   stub,
   within
 } from '@instructure/ui-test-utils'
-import { color2hex, colorToRGB, contrast } from '@instructure/ui-color-utils'
+import { color2hex, colorToRGB } from '@instructure/ui-color-utils'
 import { ColorPicker } from '../'
 import { ColorPickerLocator } from '../ColorPickerLocator'
 import { ContrastStrength } from '../props'
@@ -552,37 +552,6 @@ describe('<ColorPicker />', () => {
       expect(expectedColor).to.eql(colorToRGB(currentColor))
     })
 
-    it.skip('should correctly handle focus when popover is opened', async () => {
-      await mount(
-        <SimpleExample
-          colorMixerSettings={{
-            popoverAddButtonLabel: 'add',
-            popoverCloseButtonLabel: 'close',
-            colorMixer: {
-              withAlpha: false,
-              rgbRedInputScreenReaderLabel: 'Red input',
-              rgbBlueInputScreenReaderLabel: 'Blue input',
-              colorSliderNavigationExplanationScreenReaderLabel: '',
-              rgbAlphaInputScreenReaderLabel: '',
-              alphaSliderNavigationExplanationScreenReaderLabel: '',
-              colorPaletteNavigationExplanationScreenReaderLabel: '',
-              rgbGreenInputScreenReaderLabel: 'Green input'
-            }
-          }}
-        />
-      )
-      const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
-
-      await trigger.click()
-
-      const popoverContent = await cp.findPopoverContent()
-      //TODO: the element returned from this function is not the one
-      //that will be focused
-      const colorMixer = await popoverContent.findColorMixer()
-
-      expect(colorMixer.focused()).to.be.true()
-    })
     it('should display the list of colors passed to it', async () => {
       const colorPreset = [
         '#ffffff',
@@ -634,7 +603,7 @@ describe('<ColorPicker />', () => {
       }
     })
 
-    it.skip('should correctly set the color when picked from the list of colors', async () => {
+    it('should correctly set the color when picked from the list of colors', async () => {
       const colorPreset = [
         '#ffffff',
         '#0CBF94',
@@ -686,7 +655,7 @@ describe('<ColorPicker />', () => {
 
       const input = await cp.findTextInput()
 
-      expect(input.value()).to.be.eq(colorPreset[1])
+      expect(`#${input.value()}`).to.be.eq(colorPreset[1])
     })
 
     it('should correctly call onChange with the color when picked from the list of colors', async () => {
@@ -742,56 +711,6 @@ describe('<ColorPicker />', () => {
       await addButton.click()
 
       expect(onChange).to.have.been.calledWith(colorPreset[1])
-    })
-
-    //TODO the contrast in the dom is not in the correct format.
-    it.skip('should display the contrast ratio for the selected color', async () => {
-      const color = '0CBF94'
-      const backgroundColor = '#FFFF00'
-      await mount(
-        <SimpleExample
-          value={color}
-          colorMixerSettings={{
-            popoverAddButtonLabel: 'add',
-            popoverCloseButtonLabel: 'close',
-            colorMixer: {
-              withAlpha: false,
-              rgbRedInputScreenReaderLabel: 'Red input',
-              rgbBlueInputScreenReaderLabel: 'Blue input',
-              colorSliderNavigationExplanationScreenReaderLabel: '',
-              rgbAlphaInputScreenReaderLabel: '',
-              alphaSliderNavigationExplanationScreenReaderLabel: '',
-              colorPaletteNavigationExplanationScreenReaderLabel: '',
-              rgbGreenInputScreenReaderLabel: 'Green input'
-            },
-            colorContrast: {
-              firstColor: backgroundColor,
-              label: 'Color Contrast Ratio',
-              successLabel: 'PASS',
-              failureLabel: 'FAIL',
-              normalTextLabel: 'Normal text',
-              largeTextLabel: 'Large text',
-              graphicsTextLabel: 'Graphics text',
-              firstColorLabel: 'Background',
-              secondColorLabel: 'Foreground'
-            }
-          }}
-        />
-      )
-      const contrastRatio = contrast(backgroundColor, color, 2)
-      const expectedContrast = `${contrastRatio}:1`
-
-      const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
-
-      await trigger.click()
-
-      const popoverContent = await cp.findPopoverContent()
-      const displayedContrast = await popoverContent.findWithText(
-        expectedContrast
-      )
-
-      expect(displayedContrast.text()).to.be.eq(expectedContrast)
     })
 
     it('should display the text passed to colorcontast', async () => {
