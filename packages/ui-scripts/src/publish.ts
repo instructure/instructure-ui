@@ -165,40 +165,56 @@ function calculateNextSnapshotVersion(version: string): string {
 
 /**
  * An async generator function which will do the publishing
- * for each pacakge.
+ * for each package.
  */
 async function* publishPackages(
   packages: PackageInfo[],
   version: string,
   tag: string
 ) {
-  const wait = (delay: number) =>
-    new Promise((resolve) => {
-      setTimeout(resolve, delay)
-    })
-
   for (const pkg of packages) {
-    const { stdout } = await runCommandAsync(
-      'npm',
-      ['info', pkg.name, '--json'],
-      [],
-      {
-        stdio: 'pipe'
-      }
-    )
-    const packageVersions: string[] = JSON.parse(stdout).versions
+    let packageVersions: string[] = []
+    try {
+      const { stdout } = await runCommandAsync(
+        'npm',
+        ['info', pkg.name, '--json'],
+        [],
+        {
+          stdio: 'pipe'
+        }
+      )
+      packageVersions = JSON.parse(stdout).versions
+    } catch (npmErr: any) {
+      // if we run into this error that probably means that the
+      // pkg we try to release is not in the registry yet (ie. it is a new package).
+      // lets just swallow the error and continue with the publish
+      info(
+        `It looks like package (${pkg.name}) is currently not in the npm registry. Continuing publishing...`
+      )
+      info('Original NPM error:')
+      info(npmErr)
+    }
 
     // if the package is already in the registry then don't try
     // to publish it again
     if (packageVersions.includes(version)) {
       throw new Error(`📦  v${version} of ${pkg.name} is already published!`)
     } else {
-      const publishArgs = ['publish', pkg.location, '--tag', tag]
-      await runCommandAsync('npm', publishArgs, [])
-
-      await wait(500)
+      await publishPackage(pkg, tag)
 
       yield pkg
     }
   }
+}
+
+async function publishPackage(pkg: PackageInfo, tag: string) {
+  const wait = (delay: number) =>
+    new Promise((resolve) => {
+      setTimeout(resolve, delay)
+    })
+
+  const publishArgs = ['publish', pkg.location, '--tag', tag]
+  await runCommandAsync('npm', publishArgs, [])
+
+  return wait(500)
 }
