@@ -140,10 +140,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   componentDidUpdate(prevProps: ColorPickerProps) {
     this.props.makeStyles?.({ ...this.state, isSimple: this.isSimple })
 
-    if (
-      prevProps.value !== this.props.value &&
-      this.props.value !== this.props.value?.slice(1)
-    ) {
+    if (prevProps.value !== this.props.value) {
       this.setState({
         showHelperErrorMessages: false,
         hexCode: this.props.value?.slice(1) || ''
@@ -200,7 +197,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     const contrast = isValidHex
       ? getContrast(
           this.props.checkContrast?.contrastAgainst || '#fff',
-          this.props.value ?? hexCode,
+          hexCode,
           2
         )
       : undefined
@@ -311,12 +308,12 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     }
     if (typeof onChange === 'function') {
       onChange(`#${value}`)
+    } else {
+      this.setState({
+        showHelperErrorMessages: false,
+        hexCode: value
+      })
     }
-    this.setState({
-      showHelperErrorMessages: false,
-      hexCode: value,
-      mixedColor: `${value}`
-    })
   }
 
   //TODO remove any
@@ -338,12 +335,12 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     if (isValid(newHex)) {
       if (typeof this.props.onChange === 'function') {
         this.props.onChange(`#${newHex}`)
+      } else {
+        this.setState({
+          showHelperErrorMessages: false,
+          hexCode: newHex
+        })
       }
-      this.setState({
-        hexCode: newHex,
-        mixedColor: `${newHex}`
-      })
-      return event.preventDefault()
     }
 
     event.preventDefault()
@@ -361,7 +358,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         <span css={styles?.label}>{label}</span>
         <span>
           <Tooltip renderTip={tooltip}>
-            <IconInfoLine tabIndex={0} />
+            <IconInfoLine tabIndex={-1} />
           </Tooltip>
         </span>
       </div>
@@ -380,12 +377,12 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           disabled={this.props.disabled}
           screenReaderLabel={this.props.popoverButtonScreenReaderLabel || ''}
         >
-          <ColorIndicator color={`${this.props.value}`} />
+          <ColorIndicator color={`#${this.state.hexCode}`} />
         </IconButton>
       }
       isShowingContent={this.state.openColorPicker}
       onShowContent={() => {
-        this.setState({ openColorPicker: true })
+        this.setState({ openColorPicker: true, mixedColor: this.state.hexCode })
       }}
       onHideContent={() => {
         this.setState({ openColorPicker: false })
@@ -534,11 +531,15 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
               this.props.onChange(
                 `#${this.stripAlphaIfNeeded(this.state.mixedColor)}`
               )
+              this.setState({
+                openColorPicker: false
+              })
+            } else {
+              this.setState({
+                openColorPicker: false,
+                hexCode: `${this.stripAlphaIfNeeded(this.state.mixedColor)}`
+              })
             }
-            this.setState({
-              openColorPicker: false,
-              hexCode: `${this.stripAlphaIfNeeded(this.state.mixedColor)}`
-            })
           }}
           color="primary"
           margin="xx-small"
@@ -584,7 +585,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           themeOverride={{ padding: '' }}
           renderAfterInput={this.renderAfterInput()}
           renderBeforeInput={this.renderBeforeInput()}
-          value={this.props.value?.slice(1)}
+          value={this.state.hexCode}
           onChange={(event, value) => this.handleOnChange(event, value)}
           onPaste={(event) => this.handleOnPaste(event)}
           onBlur={() => this.handleOnBlur()}
