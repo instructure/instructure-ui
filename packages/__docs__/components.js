@@ -42,6 +42,13 @@ export {
 export { Byline } from '@instructure/ui-byline'
 export { Calendar } from '@instructure/ui-calendar'
 export { CodeEditor } from '@instructure/ui-code-editor'
+export {
+  ColorPicker,
+  ColorMixer,
+  ColorPreset,
+  ColorContrast,
+  ColorIndicator
+} from '@instructure/ui-color-picker'
 export { Dialog } from '@instructure/ui-dialog'
 export { Editable, InPlaceEdit } from '@instructure/ui-editable'
 export { Expandable } from '@instructure/ui-expandable'

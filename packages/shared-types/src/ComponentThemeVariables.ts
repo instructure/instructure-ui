@@ -399,6 +399,113 @@ export type CodeEditorTheme = {
   operatorColor: Colors['textDarkest']
 }
 
+export type ColorContrastTheme = {
+  width: string
+
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeightCondensed']
+  fontSize: Typography['fontSizeMedium']
+
+  statusWrapperBottomMargin: Spacing['xxSmall']
+  colorIndicatorRightMargin: Spacing['small']
+  colorPreviewBottomMargin: Spacing['small']
+  colorPreviewTopMargin: Spacing['xSmall']
+  labelBottomMargin: Spacing['xxSmall']
+
+  smallBorder: Border['widthSmall']
+
+  successColor: Colors['shamrock']
+  failureColor: Colors['crimson']
+  pickedHexColor: Colors['ash']
+}
+
+export type ColorIndicatorTheme = {
+  borderWidth: Border['widthSmall']
+  backgroundImage: string
+  backgroundSize: string
+  backgroundPosition: string
+  circleIndicatorSize: string
+  rectangleIndicatorSize: string
+  colorIndicatorBorderColor: string
+  rectangularIndicatorBorderRadius: Spacing['xxSmall']
+  rectangularIndicatorBorderWidth: Border['widthSmall']
+}
+
+export type ColorMixerPaletteTheme = {
+  indicatorBorderColor: Colors['licorice']
+  whiteColor: Colors['white']
+  colorIndicatorBorderColor: string
+
+  indicatorBorderWidth: Border['widthSmall']
+  paletteBorderRadius: Border['radiusMedium']
+  paletteBorderWidth: Border['widthSmall']
+
+  disabledOverlayZIndex: Stacking['topmost']
+}
+
+export type ColorMixerRGBAInputTheme = {
+  labelFontWeight: Typography['fontWeightBold']
+  inputContainerTopMargin: Spacing['xSmall']
+  tgbInputTopMargin: Spacing['xSmall']
+  rgbaInputTopMargin: Spacing['medium']
+}
+
+export type ColorMixerSliderTheme = {
+  indicatorBorderColor: Colors['licorice']
+
+  checkerboardBackgroundImage: string
+  checkerboardBackgroundSize: string
+  checkerboardBackgroundPosition: string
+  colorIndicatorBorderColor: string
+
+  indicatorBorderWidth: Border['widthSmall']
+  sliderBorderWidth: Border['widthSmall']
+  indicatorZIndex: Stacking['above']
+  disabledOverlayZIndex: Stacking['topmost']
+}
+
+export type ColorPickerTheme = {
+  hashMarkColor: Colors['ash']
+  warningIconColor: Colors['textWarning']
+  errorIconColor: Colors['textDanger']
+  successIconColor: Colors['textSuccess']
+  popoverSeparatorColor: Colors['tiara']
+  popoverFooterColor: Colors['porcelain']
+  checkerboardBackgroundColor: Colors['white']
+  checkerboardBackgroundImage: string
+  checkerboardBackgroundSize: string
+  checkerboardBackgroundPosition: string
+  colorIndicatorBorderColor: string
+  simpleColorContainerLeftPadding: Spacing['xSmall']
+  hashMarkContainerLineHeight: Typography['fontSizeXLarge']
+  hashMarkContainerLeftPadding: Spacing['xSmall']
+  hashMarkContainerRightPadding: Spacing['xxxSmall']
+  errorIconsRightPadding: Spacing['small']
+  successIconRightPadding: Spacing['small']
+  labelRightMargin: Spacing['xxSmall']
+  popoverContentPadding: Spacing['xxSmall']
+  popoverContentBlockBorderWidth: Border['widthSmall']
+  popoverContentBlockTopMargin: Spacing['small']
+  popoverContentBlockBottomMargin: Spacing['small']
+  popoverFooterPadding: Spacing['xSmall']
+  popoverFooterTopBorderWidth: Border['widthSmall']
+  colorMixerButtonContainerLeftMargin: Spacing['xSmall']
+}
+
+export type ColorPresetTheme = {
+  xxSmallSpacing: Spacing['xxSmall']
+  smallSpacing: Spacing['small']
+  selectedIndicatorBackgroundColor: Colors['white']
+  selectedIndicatorBorderColor: Colors['licorice']
+  popoverDividerColor: Colors['tiara']
+  smallBorder: Border['widthSmall']
+  popoverFooterColor: Colors['porcelain']
+  checkerboardBackgroundImage: string
+  checkerboardBackgroundSize: string
+  checkerboardBackgroundPosition: string
+}
+
 export type DrawerLayoutContentTheme = {
   duration: Transitions['duration']
 }
@@ -1456,6 +1563,16 @@ export interface ThemeVariables {
   CheckboxFacade: CheckboxFacadeTheme
   ToggleFacade: ToggleFacadeTheme
   CodeEditor: CodeEditorTheme
+  ColorContrast: ColorContrastTheme
+  ColorIndicator: ColorIndicatorTheme
+  ColorMixerPalette: ColorMixerPaletteTheme
+  'ColorMixer.Palette': ColorMixerPaletteTheme
+  ColorMixerRGBAInput: ColorMixerRGBAInputTheme
+  'ColorMixer.RGBAInput': ColorMixerRGBAInputTheme
+  ColorMixerSlider: ColorMixerSliderTheme
+  'ColorMixer.Slider': ColorMixerSliderTheme
+  ColorPicker: ColorPickerTheme
+  ColorPreset: ColorPresetTheme
   DrawerLayoutContent: DrawerLayoutContentTheme
   'DrawerLayout.Content': DrawerLayoutContentTheme
   DrawerLayoutTray: DrawerLayoutTrayTheme

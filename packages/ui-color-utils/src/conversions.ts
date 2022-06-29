@@ -22,20 +22,81 @@
  * SOFTWARE.
  */
 
-import Color from 'tinycolor2'
-
 /**
  * ---
  * category: utilities
  * ---
- * Converts a color string to a hex string like `#FF0000`
- * For possible inputs see https://github.com/bgrins/TinyColor
- * @module color2hex
- * @param {String} rgb a color string
- * @returns {String} a hex string like `#FF0000`
+ * Color conversion utilities to transform between `TinyColor` colors (https://github.com/bgrins/TinyColor)
+ * @module conversions
  */
-function color2hex(rgb: string): string {
+
+import Color from 'tinycolor2'
+import type { ColorInputWithoutInstance } from 'tinycolor2'
+
+/**
+ * Converts any valid `TinyColor` colors to hex string
+ * @param {ColorInputWithoutInstance} rgb a color string
+ * @returns {String} a hex string like `#FF0000`
+ * @module color2hex
+ */
+const colorToHex = (rgb: ColorInputWithoutInstance): string => {
   return Color(rgb).toHexString().toUpperCase()
 }
 
-export { color2hex }
+/**
+ * Transforms any `TinyColor` to 8 length HEX (alpha included)
+ * @param {ColorInputWithoutInstance} color representation from `TinyColor`
+ * @returns {String} An 8 length hex string like `#FF0000FF`
+ * @module colorToHex8
+ */
+const colorToHex8 = (color: ColorInputWithoutInstance): string => {
+  return Color(color).toHex8String().toUpperCase()
+}
+
+/**
+ * Transforms any `TinyColor` to RGBA object ( {r:number, g:number, b:number, a:number} )
+ * also exported as `hexToRgb` for backward compatiblity reasons
+ * @param {ColorInputWithoutInstance} color representation from `TinyColor`
+ * @returns {Color.ColorFormats.RGBA} A `TinyColor` RGBA type
+ * @module colorToRGB
+ */
+const colorToRGB = (
+  color: ColorInputWithoutInstance
+): Color.ColorFormats.RGBA => {
+  return Color(color).toRgb()
+}
+
+/**
+ * Transforms any `TinyColor` to HSVA object ( {h:number, s:number, v:number, a:number} )
+ * @param {ColorInputWithoutInstance} color representation from `TinyColor`
+ * @returns {Color.ColorFormats.HSVA} A `TinyColor` HSVA type
+ * @module colorToHsva
+ */
+const colorToHsva = (
+  color: ColorInputWithoutInstance
+): Color.ColorFormats.HSVA => {
+  return Color(color).toHsv()
+}
+
+/**
+ * Transforms any `TinyColor` to HSLA object ( {h:number, s:number, l:number, a:number} )
+ * @param {ColorInputWithoutInstance} color representation from `TinyColor`
+ * @returns {Color.ColorFormats.HSLA} A `TinyColor` HSLA type
+ * @module colorToHsla
+ */
+const colorToHsla = (
+  color: ColorInputWithoutInstance
+): Color.ColorFormats.HSLA => {
+  return Color(color).toHsl()
+}
+
+export {
+  colorToHex,
+  colorToHex8,
+  colorToHsva,
+  colorToHsla,
+  colorToRGB,
+  //this is needed for backward compatibility
+  //TODO deprecate
+  colorToHex as color2hex
+}

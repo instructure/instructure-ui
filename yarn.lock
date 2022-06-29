@@ -2802,6 +2802,41 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@instructure/ui-color-picker@8.25.0, @instructure/ui-color-picker@workspace:packages/ui-color-picker":
+  version: 0.0.0-use.local
+  resolution: "@instructure/ui-color-picker@workspace:packages/ui-color-picker"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@instructure/console": 8.25.0
+    "@instructure/emotion": 8.25.0
+    "@instructure/shared-types": 8.25.0
+    "@instructure/ui-a11y-content": 8.25.0
+    "@instructure/ui-babel-preset": 8.25.0
+    "@instructure/ui-buttons": 8.25.0
+    "@instructure/ui-color-utils": 8.25.0
+    "@instructure/ui-dom-utils": 8.25.0
+    "@instructure/ui-drilldown": 8.25.0
+    "@instructure/ui-form-field": 8.25.0
+    "@instructure/ui-icons": 8.25.0
+    "@instructure/ui-pill": 8.25.0
+    "@instructure/ui-popover": 8.25.0
+    "@instructure/ui-react-utils": 8.25.0
+    "@instructure/ui-test-locator": 8.25.0
+    "@instructure/ui-test-queries": 8.25.0
+    "@instructure/ui-test-utils": 8.25.0
+    "@instructure/ui-testable": 8.25.0
+    "@instructure/ui-text": 8.25.0
+    "@instructure/ui-text-input": 8.25.0
+    "@instructure/ui-themes": 8.25.0
+    "@instructure/ui-tooltip": 8.25.0
+    "@instructure/ui-utils": 8.25.0
+    "@instructure/ui-view": 8.25.0
+    prop-types: ^15
+  peerDependencies:
+    react: ">=16.8 <=17"
+  languageName: unknown
+  linkType: soft
+
 "@instructure/ui-color-utils@8.25.0, @instructure/ui-color-utils@workspace:packages/ui-color-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-color-utils@workspace:packages/ui-color-utils"
@@ -4613,6 +4648,7 @@ __metadata:
     "@instructure/ui-calendar": 8.25.0
     "@instructure/ui-checkbox": 8.25.0
     "@instructure/ui-code-editor": 8.25.0
+    "@instructure/ui-color-picker": 8.25.0
     "@instructure/ui-date-input": 8.25.0
     "@instructure/ui-date-time-input": 8.25.0
     "@instructure/ui-dialog": 8.25.0
@@ -14974,6 +15010,7 @@ __metadata:
     "@instructure/ui-calendar": 8.25.0
     "@instructure/ui-checkbox": 8.25.0
     "@instructure/ui-code-editor": 8.25.0
+    "@instructure/ui-color-picker": 8.25.0
     "@instructure/ui-color-utils": 8.25.0
     "@instructure/ui-date-input": 8.25.0
     "@instructure/ui-date-time-input": 8.25.0
