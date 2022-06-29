@@ -36,14 +36,14 @@ type ReactEvent = <T extends Event>(event: T) => void
  * @module addEventListener
  * @param { Node | Window } el - DOM node which will have the event listener attached
  * @param { string } event - a string specifying the event name ('click', 'focus', etc)
- * @param { React.EventHandler<React.SyntheticEvent> } handler - function to run when event occurs
+ * @param { React.EventHandler<React.SyntheticEvent<any, any>> } handler - function to run when event occurs
  * @param { boolean } capture - should the event be executed in the capturing or bubbling phase
  * @returns {{ remove(): void }} a method to remove the event listener
  */
 function addEventListener(
   el: Node | Window,
   event: keyof WindowEventMap,
-  handler: React.EventHandler<React.SyntheticEvent>,
+  handler: React.EventHandler<React.SyntheticEvent<any, any>>,
   capture?: boolean
 ) {
   const node = el === window || el === document ? el : findDOMNode(el)

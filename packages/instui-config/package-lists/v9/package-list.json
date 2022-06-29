@@ -34,6 +34,7 @@
   "@instructure/ui-checkbox",
   "@instructure/ui-code-editor",
   "@instructure/ui-codemods",
+  "@instructure/ui-color-picker",
   "@instructure/ui-color-utils",
   "@instructure/ui-date-input",
   "@instructure/ui-date-time-input",

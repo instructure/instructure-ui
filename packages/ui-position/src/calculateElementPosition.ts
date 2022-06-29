@@ -561,6 +561,7 @@ function parseOffset(
   } as Offset
 }
 
+//TODO make it work properly with sting offsets. e.g.: 10rem
 function offsetToPx(offset: Offset<string | number | undefined>, size: Size) {
   let { left, top } = offset
 

@@ -55,6 +55,13 @@ export {
   ToggleFacade
 } from '@instructure/ui-checkbox'
 export { CodeEditor } from '@instructure/ui-code-editor'
+export {
+  ColorPicker,
+  ColorMixer,
+  ColorPreset,
+  ColorContrast,
+  ColorIndicator
+} from '@instructure/ui-color-picker'
 export { DateInput } from '@instructure/ui-date-input'
 export { DateTimeInput } from '@instructure/ui-date-time-input'
 export { Dialog } from '@instructure/ui-dialog'

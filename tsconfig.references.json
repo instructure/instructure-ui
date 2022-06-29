@@ -28,6 +28,7 @@
     { "path": "./packages/ui-checkbox/tsconfig.build.json" },
     { "path": "./packages/ui-code-editor/tsconfig.build.json" },
     { "path": "./packages/ui-codemods/tsconfig.build.json" },
+    { "path": "./packages/ui-color-picker/tsconfig.build.json" },
     { "path": "./packages/ui-color-utils/tsconfig.build.json" },
     { "path": "./packages/ui-date-input/tsconfig.build.json" },
     { "path": "./packages/ui-decorator/tsconfig.build.json" },

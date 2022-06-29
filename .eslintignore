@@ -6,3 +6,4 @@ stylelint.config.js
 tests.bundle.js
 babel.config.js
 /types/**
+/regression-test/**
