@@ -106,7 +106,10 @@ class ProgressBar extends Component<ProgressBarProps> {
     // But leaving aria-valuetext because JAWS ignores aria-label
     const labelAndValueText = `${screenReaderLabel} ${valueText}`
 
-    const value = callRenderProp(renderValue, { valueNow, valueMax })
+    const value = callRenderProp(renderValue, {
+      valueNow: valueNow!,
+      valueMax: valueMax!
+    })
 
     /* eslint-disable jsx-a11y/no-redundant-roles, jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (

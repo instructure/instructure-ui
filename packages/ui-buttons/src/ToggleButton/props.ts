@@ -38,6 +38,7 @@ import type {
   PositionMountNode
 } from '@instructure/ui-position'
 import type { ViewProps } from '@instructure/ui-view'
+import { Renderable } from '@instructure/shared-types'
 
 type ToggleButtonOwnProps = {
   /**
@@ -53,7 +54,7 @@ type ToggleButtonOwnProps = {
   /**
    * An icon or function that returns an icon
    */
-  renderIcon: React.ReactNode | (() => React.ReactNode)
+  renderIcon: Renderable
 
   /**
    * Toggles the `aria-pressed` attribute on the button (`true` if `pressed`; `false` if `unpressed`)

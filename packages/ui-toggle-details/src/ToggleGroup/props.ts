@@ -30,7 +30,8 @@ import { controllable } from '@instructure/ui-prop-types'
 import {
   AsElementType,
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  Renderable
 } from '@instructure/shared-types'
 
 type ToggleGroupOwnProps = {
@@ -71,11 +72,11 @@ type ToggleGroupOwnProps = {
   /**
    * The icon displayed in the toggle button when the content is hidden
    */
-  icon?: React.ReactNode | ((...args: any[]) => React.ReactElement)
+  icon?: Renderable
   /**
    * The icon displayed in the toggle button when the content is showing
    */
-  iconExpanded?: React.ReactNode | ((...args: any[]) => React.ReactElement)
+  iconExpanded?: Renderable
   /**
    * Transition content into view
    */

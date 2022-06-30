@@ -32,9 +32,13 @@ import type {
   AsElementType
 } from '@instructure/shared-types'
 import type { WithStyleProps } from '@instructure/emotion'
-import type { OptionsItemProps } from '@instructure/ui-options'
+import type {
+  OptionsItemRenderProps,
+  OptionsItemProps
+} from '@instructure/ui-options'
 
 import Drilldown from '../index'
+import { Renderable } from '@instructure/shared-types'
 
 type DrilldownOptionValue = string | number | undefined
 
@@ -46,7 +50,7 @@ type RenderContentProps = {
   as: DrilldownOptionOwnProps['as']
   role: DrilldownOptionOwnProps['role']
   variant: DrilldownOptionVariant
-  vAlign: RenderContentVAlign
+  vAlign?: RenderContentVAlign
   isSelected: boolean
 }
 
@@ -99,27 +103,21 @@ type DrilldownOptionOwnProps = {
    *
    * If a function is provided, it has a `props` parameter.
    */
-  renderLabelInfo?:
-    | React.ReactNode
-    | ((props: RenderContentProps) => React.ReactNode)
+  renderLabelInfo?: Renderable<RenderContentProps>
 
   /**
    * Content to render before the label.
    *
    * If a function is provided, it has a `props` parameter.
    */
-  renderBeforeLabel?:
-    | React.ReactNode
-    | ((props: RenderContentProps) => React.ReactNode)
+  renderBeforeLabel?: Renderable<OptionsItemRenderProps>
 
   /**
    * Content to render after the label.
    *
    * If a function is provided, it has a `props` parameter.
    */
-  renderAfterLabel?:
-    | React.ReactNode
-    | ((props: RenderContentProps) => React.ReactNode)
+  renderAfterLabel?: Renderable<OptionsItemRenderProps>
 
   /**
    * Sets the vAlign of renderBeforeLabel content

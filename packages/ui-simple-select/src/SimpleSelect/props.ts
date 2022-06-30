@@ -45,6 +45,7 @@ import type {
 } from '@instructure/ui-position'
 import type { SelectOwnProps } from '@instructure/ui-select'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import { Renderable } from '@instructure/shared-types'
 
 type SimpleSelectOwnProps = PropsPassedToSelect & {
   /**
@@ -84,7 +85,7 @@ type SimpleSelectOwnProps = PropsPassedToSelect & {
   /**
    * Content to display in the list when no options are available.
    */
-  renderEmptyOption?: React.ReactNode | (() => React.ReactNode)
+  renderEmptyOption?: Renderable
 
   /**
    * Children of type `<SimpleSelect.Option />` or `<SimpleSelect.Group />`.
@@ -200,13 +201,13 @@ type PropsPassedToSelect = {
   /**
    * Content to display before the text input. This will commonly be an icon.
    */
-  renderBeforeInput?: React.ReactNode | (() => React.ReactNode)
+  renderBeforeInput?: Renderable
 
   /**
    * Content to display after the text input. This content will replace the
    * default arrow icons.
    */
-  renderAfterInput?: React.ReactNode | (() => React.ReactNode)
+  renderAfterInput?: Renderable
 
   /**
    * Callback fired when text input receives focus.
@@ -238,7 +239,8 @@ type SimpleSelectProps = PickPropsWithExceptions<
   OtherHTMLAttributes<
     SimpleSelectOwnProps,
     InputHTMLAttributes<SimpleSelectOwnProps>
-  > & WithDeterministicIdProps
+  > &
+  WithDeterministicIdProps
 
 type SimpleSelectState = {
   inputValue?: string

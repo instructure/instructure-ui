@@ -35,6 +35,7 @@ import {
 import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
+import type { ViewOwnProps } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
 
@@ -88,7 +89,7 @@ class Item extends Component<AppNavItemProps> {
     }
   }
 
-  handleClick = (e: React.MouseEvent<Element>) => {
+  handleClick = (e: React.MouseEvent<ViewOwnProps, MouseEvent>) => {
     const { isDisabled, onClick } = this.props
 
     if (isDisabled) {

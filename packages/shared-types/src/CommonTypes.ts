@@ -22,7 +22,16 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, {
+  ClassicComponent,
+  ClassicComponentClass,
+  ClassType,
+  ComponentClass,
+  ComponentState,
+  ReactHTML,
+  ReactNode,
+  ReactSVG
+} from 'react'
 
 /** Element func parameter, mainly for the `findDOMNode` util */
 export type UIElement =
@@ -32,6 +41,17 @@ export type UIElement =
   | React.Component
   | (() => Node | Window | null | undefined)
   | null
+
+/** Type that is renderable by `callRenderProp` **/
+export type Renderable<P = never> =
+  | keyof ReactHTML
+  | keyof ReactSVG
+  | ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>
+  | ComponentClass
+  | ReactNode
+  | ((data: P) => ReactNode | Element)
+  | (() => ReactNode | Element)
+  | Element
 
 /**
  * A DOM element or an array of DOM elements or a method that returns a DOM

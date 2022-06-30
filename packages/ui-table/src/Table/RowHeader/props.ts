@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import type {
   OtherHTMLAttributes,
   PropValidators,
+  Renderable,
   TableRowHeaderTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -38,7 +38,7 @@ type TableRowHeaderOwnProps = {
    * Control the text alignment in row header
    */
   textAlign?: 'start' | 'center' | 'end'
-  children?: React.ReactNode | (() => React.ReactNode)
+  children?: Renderable
 }
 
 type PropKeys = keyof TableRowHeaderOwnProps

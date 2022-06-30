@@ -35,6 +35,7 @@ import type { CalendarDayProps } from '@instructure/ui-calendar'
 import type { FormMessage } from '@instructure/ui-form-field'
 import type { PlacementPropValues } from '@instructure/ui-position'
 import type {
+  Renderable,
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
@@ -45,7 +46,7 @@ type DateInputOwnProps = {
   /**
    * Specifies the input label.
    */
-  renderLabel: React.ReactNode | (() => React.ReactNode)
+  renderLabel: Renderable
   /**
    * Specifies the input value.
    */
@@ -181,14 +182,14 @@ type DateInputOwnProps = {
    * prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to
    * [IconArrowOpenEnd](#iconography).
    */
-  renderNextMonthButton?: (() => React.ReactNode) | React.ReactNode
+  renderNextMonthButton?: Renderable
   /**
    * A button to render in the calendar navigation header. The recommendation is
    * to compose it with the [Button](#Button) component, setting the `variant`
    * prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to
    * [IconArrowOpenStart](#iconography).
    */
-  renderPrevMonthButton?: (() => React.ReactNode) | React.ReactNode
+  renderPrevMonthButton?: Renderable
   /**
    * children of type `<DateInput.Day />` There should be exactly 42 provided (6
    * weeks).

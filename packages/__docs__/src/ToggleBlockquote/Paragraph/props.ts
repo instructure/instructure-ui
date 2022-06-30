@@ -23,16 +23,13 @@
  */
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
-import { ReactChildren } from 'react'
-type ParagraphOwnProps = {
-  children?: ReactChildren
-}
+import { PropsWithChildren } from 'react'
 
-type PropKeys = keyof ParagraphOwnProps
+type PropKeys = keyof PropsWithChildren
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ParagraphProps = ParagraphOwnProps
+type ParagraphProps = PropsWithChildren
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.string

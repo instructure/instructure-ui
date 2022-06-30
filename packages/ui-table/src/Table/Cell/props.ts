@@ -22,24 +22,24 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
   PropValidators,
+  Renderable,
   TableCellTheme
 } from '@instructure/shared-types'
 
 type TableCellOwnProps = {
   isStacked?: boolean
-  header?: React.ReactNode | (() => React.ReactNode)
+  header?: Renderable
   /**
    * Control the text alignment in cell
    */
   textAlign?: 'start' | 'center' | 'end'
-  children?: React.ReactNode | (() => React.ReactNode)
+  children?: Renderable
 }
 
 type PropKeys = keyof TableCellOwnProps

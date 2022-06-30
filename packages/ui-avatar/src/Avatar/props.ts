@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { SyntheticEvent } from 'react'
+import { SyntheticEvent } from 'react'
 import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
@@ -38,6 +38,7 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
+import { Renderable } from '@instructure/shared-types'
 
 type AvatarOwnProps = {
   /**
@@ -96,7 +97,7 @@ type AvatarOwnProps = {
   /**
    * An icon, or function that returns an icon that gets displayed. If the `src` prop is provided, `src` will have priority.
    */
-  renderIcon?: React.ReactNode | (() => React.ReactNode)
+  renderIcon?: Renderable
 }
 
 export type AvatarState = {

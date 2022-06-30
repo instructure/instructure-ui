@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import React, { Component } from 'react'
+import React, { Component, MouseEventHandler } from 'react'
 import keycode from 'keycode'
 
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
@@ -43,6 +43,7 @@ import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
 import type { MenuItemProps, MenuItemState } from './props'
+import type { ViewOwnProps } from '@instructure/ui-view'
 
 /**
 ---
@@ -115,7 +116,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
     }
   }
 
-  handleClick = (e: React.MouseEvent) => {
+  handleClick = (e: React.MouseEvent<ViewOwnProps>) => {
     const { onSelect, onClick, disabled, value } = this.props
     const selected = !this.selected
 
@@ -254,7 +255,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
               : 'false'
             : undefined
         }
-        onClick={this.handleClick}
+        onClick={this.handleClick as MouseEventHandler}
         onKeyUp={createChainedFunction(onKeyUp, this.handleKeyUp)}
         onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
         ref={this.handleRef}

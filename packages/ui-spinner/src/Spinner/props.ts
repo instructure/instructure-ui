@@ -37,12 +37,13 @@ import type {
   SpinnerTheme
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import { Renderable } from '@instructure/shared-types'
 
 type SpinnerOwnProps = {
   /**
    * Give the spinner a title to be read by screenreaders
    */
-  renderTitle?: (() => React.ReactNode) | React.ReactNode
+  renderTitle?: Renderable
   /**
    * Different-sized spinners
    */
@@ -70,7 +71,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SpinnerProps = SpinnerOwnProps &
   WithStyleProps<SpinnerTheme, SpinnerStyle> &
-  OtherHTMLAttributes<SpinnerOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<SpinnerOwnProps> &
+  WithDeterministicIdProps
 
 type SpinnerStyle = ComponentStyle<
   'spinner' | 'circle' | 'circleTrack' | 'circleSpin'

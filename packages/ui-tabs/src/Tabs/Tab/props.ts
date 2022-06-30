@@ -28,6 +28,7 @@ import PropTypes from 'prop-types'
 import type {
   OtherHTMLAttributes,
   PropValidators,
+  Renderable,
   TabsTabTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -48,7 +49,7 @@ type TabsTabOwnProps = {
     event: React.KeyboardEvent<ViewOwnProps>,
     tabData: { index: number; id: string }
   ) => void
-  children?: React.ReactNode | (() => React.ReactNode)
+  children?: Renderable
 }
 
 type PropKeys = keyof TabsTabOwnProps

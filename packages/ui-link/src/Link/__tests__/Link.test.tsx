@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { expect, mount, stub, within, wait } from '@instructure/ui-test-utils'
 import { Link } from '../index'
 import { LinkLocator } from '../LinkLocator'
 
-class TruncateText extends React.Component {
+class TruncateText extends React.Component<PropsWithChildren> {
   render() {
     return <span>{this.props.children}</span>
   }

@@ -66,7 +66,7 @@ type TableColHeaderOwnProps = {
    * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
    */
   scope?: 'row' | 'col' | 'rowgroup' | 'colgroup' | 'auto'
-  children?: React.ReactNode | (() => React.ReactNode)
+  children?: React.ReactNode
 }
 
 type PropKeys = keyof TableColHeaderOwnProps

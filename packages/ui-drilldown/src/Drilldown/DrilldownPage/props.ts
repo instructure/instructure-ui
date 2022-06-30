@@ -37,6 +37,7 @@ import DrilldownOption from '../DrilldownOption'
 import DrilldownSeparator from '../DrilldownSeparator'
 
 import type { OptionChild, SeparatorChild, GroupChild } from '../props'
+import { Renderable } from '@instructure/shared-types'
 
 type PageChildren = GroupChild | OptionChild | SeparatorChild
 
@@ -52,7 +53,7 @@ type DrilldownPageOwnProps = {
   /**
    * The title of the page displayed in the header
    */
-  renderTitle?: React.ReactNode | (() => React.ReactNode)
+  renderTitle?: Renderable
 
   /**
    * Label for the optional "action" option in the header (e.g.: "Select all")
@@ -66,8 +67,8 @@ type DrilldownPageOwnProps = {
    * is the title of the previous page.
    */
   renderBackButtonLabel?:
-  | React.ReactNode
-  | ((prevPageTitle?: React.ReactNode) => React.ReactNode)
+    | React.ReactNode
+    | ((prevPageTitle?: React.ReactNode) => React.ReactNode)
 
   /**
    * Callback fired when the "action" option is clicked in the header

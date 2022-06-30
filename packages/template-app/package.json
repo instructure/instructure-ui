@@ -25,8 +25,8 @@
     "@instructure/ui-text": "8.26.3",
     "@instructure/ui-themes": "8.26.3",
     "@instructure/ui-view": "8.26.3",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "html-webpack-plugin": "^4"

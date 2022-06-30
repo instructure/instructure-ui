@@ -39,6 +39,7 @@ import type {
 } from '@instructure/shared-types'
 import type { ViewProps } from '@instructure/ui-view'
 import React, { MouseEvent } from 'react'
+import { Renderable } from '@instructure/shared-types'
 type HeroIconSize = 'medium' | 'x-large' | 'large'
 type BillboardOwnProps = {
   /**
@@ -76,7 +77,7 @@ type BillboardOwnProps = {
    * `onClick`. That would cause the Billboard to render as a button or link
    * and would result in nested interactive content.
    */
-  message?: React.ReactNode | (() => React.ReactNode)
+  message?: Renderable
   /**
    * If you add an onClick prop, the Billboard renders as a clickable button
    */

@@ -27,7 +27,8 @@ import PropTypes from 'prop-types'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  Renderable
 } from '@instructure/shared-types'
 
 type OptionProps = {
@@ -53,9 +54,7 @@ type OptionProps = {
   children?: React.ReactNode
 }
 
-type RenderSelectOptionLabel =
-  | React.ReactNode
-  | ((args: OptionProps) => React.ReactNode)
+type RenderSelectOptionLabel = Renderable<OptionProps>
 
 type SelectOptionOwnProps = OptionProps & {
   /**

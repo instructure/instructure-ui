@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
@@ -33,7 +33,8 @@ import type {
   AsElementType,
   PropValidators,
   BaseButtonTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  Renderable
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/ui-prop-types'
 import type { ViewProps } from '@instructure/ui-view'
@@ -42,17 +43,17 @@ type IconButtonOwnProps = {
   /**
    * An icon, or function returning an icon (identical to the `renderIcon` prop).
    */
-  children?: React.ReactNode | (() => React.ReactNode)
+  children?: Renderable
 
   /**
    * An icon, or function that returns an icon (identical to the `children` prop).
    */
-  renderIcon?: React.ReactNode | (() => React.ReactNode)
+  renderIcon?: Renderable
 
   /**
    * An accessible label for the `IconButton`.
    */
-  screenReaderLabel: string
+  screenReaderLabel: ReactNode
 
   /**
    * Specifies the type of the `IconButton`'s underlying html element.

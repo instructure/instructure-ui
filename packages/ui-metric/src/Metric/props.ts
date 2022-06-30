@@ -22,20 +22,20 @@
  * SOFTWARE.
  */
 
-import { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import type {
   PropValidators,
   MetricTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  Renderable
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type MetricOwnProps = {
   textAlign: 'start' | 'center' | 'end'
-  renderLabel?: ((props?: any) => ReactNode) | ReactNode
-  renderValue?: ((props?: any) => ReactNode) | ReactNode
+  renderLabel?: Renderable
+  renderValue?: Renderable
   /**
    * Set to true when a child of MetricGroup so the appropriate
    * aria labels get set

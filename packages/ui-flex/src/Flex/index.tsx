@@ -88,7 +88,8 @@ class Flex extends Component<FlexProps> {
   }
 
   renderChildren(children: FlexProps['children']) {
-    return Children.map(children, (child) => {
+    // TODO this might fail if children are () => ReactNode
+    return Children.map(children as React.ReactNode, (child) => {
       if (!child) {
         return null
       }

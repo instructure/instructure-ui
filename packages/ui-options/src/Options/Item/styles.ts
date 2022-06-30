@@ -26,6 +26,7 @@ import { matchComponentTypes } from '@instructure/ui-react-utils'
 
 import type { OptionsItemTheme } from '@instructure/shared-types'
 import type { OptionsItemProps, OptionsItemStyle } from './props'
+import { ReactNode } from 'react'
 
 /**
  * ---
@@ -49,8 +50,8 @@ const generateStyle = (
     beforeLabelContentVAlign,
     afterLabelContentVAlign
   } = props
-
-  const containsList = matchComponentTypes(children, ['Options'])
+  // TODO if children are () => ReactNode this wont match anything
+  const containsList = matchComponentTypes(children as ReactNode, ['Options'])
 
   // used for label and description too
   const variantVariants = {

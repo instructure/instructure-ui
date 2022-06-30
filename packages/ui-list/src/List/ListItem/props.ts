@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { PropsWithChildren } from 'react'
 import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
@@ -39,7 +39,6 @@ import type {
 } from '@instructure/shared-types'
 
 type ListItemOwnProps = {
-  children: React.ReactNode | (() => React.ReactNode)
   /**
    * Inherits delimiter from the parent List component.
    */
@@ -74,7 +73,7 @@ type ListItemOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
-}
+} & PropsWithChildren
 
 type PropKeys = keyof ListItemOwnProps
 

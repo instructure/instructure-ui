@@ -352,7 +352,7 @@ class Select extends Component<SelectProps> {
       | ((_args: OptionsItemRenderProps) => React.ReactNode) => {
       return typeof renderOptionLabel === 'function' &&
         !renderOptionLabel?.prototype?.isReactComponent
-        ? renderOptionLabel.bind(null, {
+        ? (renderOptionLabel as any).bind(null, {
             id,
             isDisabled,
             isSelected,
