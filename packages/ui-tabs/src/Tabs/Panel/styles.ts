@@ -69,7 +69,9 @@ const generateStyle = (
       borderLeft: 'none',
       borderRight: 'none',
       borderBottom: 'none',
-      overflowY: 'auto',
+      // we exposed this so in some use cases it can be set to "visible",
+      // e.g. when a 100% width button's focus ring would get cropped
+      overflowY: componentTheme.defaultOverflowY,
       ...(maxHeight && { overflow: 'auto' })
     }
   }

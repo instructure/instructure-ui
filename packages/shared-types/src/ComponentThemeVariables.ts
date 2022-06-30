@@ -1243,6 +1243,7 @@ export type TabsPanelTheme = {
   borderColor: Colors['borderMedium']
   borderWidth: Border['widthSmall']
   borderStyle: Border['style']
+  defaultOverflowY: string
 }
 
 export type TabsTabTheme = {
