@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.26.0](https://github.com/instructure/instructure-ui/compare/v8.25.0...v8.26.0) (2022-06-30)
+
+**Note:** Version bump only for package @instructure/ui-portal
+
 # [8.25.0](https://github.com/instructure/instructure-ui/compare/v8.24.5...v8.25.0) (2022-06-03)
 
 **Note:** Version bump only for package @instructure/ui-portal

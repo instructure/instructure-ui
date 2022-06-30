@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.26.0](https://github.com/instructure/instructure-ui/compare/v8.25.0...v8.26.0) (2022-06-30)
+
+### Features
+
+- **ui-responsive:** add `display` prop to Responsive ([b5663dc](https://github.com/instructure/instructure-ui/commit/b5663dc883a784e516f09fde682d05e794ea772b))
+
 # [8.25.0](https://github.com/instructure/instructure-ui/compare/v8.24.5...v8.25.0) (2022-06-03)
 
 **Note:** Version bump only for package @instructure/ui-responsive

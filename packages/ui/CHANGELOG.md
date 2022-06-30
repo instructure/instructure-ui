@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.26.0](https://github.com/instructure/instructure-ui/compare/v8.25.0...v8.26.0) (2022-06-30)
+
+### Features
+
+- **ui-color-picker:** Add `ColorPicker` component ([1cbd877](https://github.com/instructure/instructure-ui/commit/1cbd87783da67144ffbd1f6ed535ccd370fd4eeb))
+- **ui-source-code-editor,ui-code-editor,ui:** add new `SourceCodeEditor` component ([b5064f5](https://github.com/instructure/instructure-ui/commit/b5064f5c767eb2d5c5a6d7f5bb6d05bd689418b5))
+
 # [8.25.0](https://github.com/instructure/instructure-ui/compare/v8.24.5...v8.25.0) (2022-06-03)
 
 **Note:** Version bump only for package @instructure/ui
