@@ -108,7 +108,7 @@ describe('callRenderProp', async () => {
     })
 
     it('should pass props correctly to React classes', async () => {
-      type FooProps = { shape: 'circle' | 'rectangle' }
+      type FooProps = { shape?: string }
       class Foo extends React.Component<FooProps> {
         static propTypes = {
           shape: PropTypes.oneOf(['circle', 'rectangle'])

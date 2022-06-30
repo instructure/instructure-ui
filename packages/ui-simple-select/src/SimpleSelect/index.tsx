@@ -345,7 +345,7 @@ class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
     const getRenderLabel = (renderLabel: RenderSimpleSelectOptionLabel) => {
       return typeof renderLabel === 'function' &&
         !renderLabel?.prototype?.isReactComponent
-        ? renderLabel.bind(null, {
+        ? (renderLabel as any).bind(null, {
             id,
             isDisabled,
             isSelected,

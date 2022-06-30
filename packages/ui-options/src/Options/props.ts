@@ -34,6 +34,7 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import { Renderable } from '@instructure/shared-types'
 
 type OptionsOwnProps = {
   /**
@@ -51,7 +52,7 @@ type OptionsOwnProps = {
   /**
    * Content to render as a label. Mostly for when the component is nested
    */
-  renderLabel?: React.ReactNode | (() => React.ReactNode)
+  renderLabel?: Renderable
 
   //TODO children has to be typed better
   //e.g.: ChildrenPropTypes.oneOf(['Options', 'Item', 'Separator']))

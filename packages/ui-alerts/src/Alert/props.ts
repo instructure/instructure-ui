@@ -32,7 +32,11 @@ import type {
   WithStyleProps,
   ComponentStyle
 } from '@instructure/emotion'
-import type { AlertTheme, PropValidators } from '@instructure/shared-types'
+import type {
+  AlertTheme,
+  PropValidators,
+  Renderable
+} from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type AlertOwnProps = {
@@ -73,7 +77,7 @@ type AlertOwnProps = {
   /**
    * Close button label. Can be a React component
    */
-  renderCloseButtonLabel?: (() => ReactNode) | ReactNode
+  renderCloseButtonLabel?: Renderable
   /**
    * Callback after the alert is closed
    */
@@ -97,7 +101,9 @@ type PropKeys = keyof AlertOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type AlertProps = AlertOwnProps & WithStyleProps<AlertTheme, AlertStyle> & WithDeterministicIdProps
+type AlertProps = AlertOwnProps &
+  WithStyleProps<AlertTheme, AlertStyle> &
+  WithDeterministicIdProps
 
 type AlertStyle = ComponentStyle<'alert' | 'icon' | 'closeButton' | 'content'>
 

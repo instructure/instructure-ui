@@ -38,12 +38,13 @@ import type {
   ElementPosition
 } from '../PositionPropTypes'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import { Renderable } from '@instructure/shared-types'
 
 type PositionOwnProps = {
   /**
    * The node to use as the position target
    */
-  renderTarget?: React.ReactNode | (() => React.ReactNode)
+  renderTarget?: Renderable
 
   /**
    * The target to be used when not using `renderTarget`
@@ -134,7 +135,8 @@ type PropKeys = keyof PositionOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PositionProps = PositionOwnProps &
-  WithStyleProps<PositionTheme, PositionStyle> & WithDeterministicIdProps
+  WithStyleProps<PositionTheme, PositionStyle> &
+  WithDeterministicIdProps
 
 const propTypes: PropValidators<PropKeys> = {
   renderTarget: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),

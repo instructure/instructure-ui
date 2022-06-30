@@ -33,6 +33,7 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import React, { ReactElement } from 'react'
 import type { TreeBrowserButtonProps } from './TreeButton/props'
+import { Renderable } from '@instructure/shared-types'
 
 type TreeBrowserOwnProps = {
   /**
@@ -107,11 +108,9 @@ type TreeBrowserBaseProps = {
 type TreeBrowserCommonProps = {
   size?: 'small' | 'medium' | 'large'
   variant?: 'folderTree' | 'indent'
-  collectionIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
-  collectionIconExpanded?:
-    | React.ReactNode
-    | ((props: unknown) => React.ReactNode)
-  itemIcon?: React.ReactNode | ((props: unknown) => React.ReactNode)
+  collectionIcon?: Renderable
+  collectionIconExpanded?: Renderable
+  itemIcon?: Renderable
   renderContent?: (props: TreeBrowserButtonProps) => JSX.Element
 }
 

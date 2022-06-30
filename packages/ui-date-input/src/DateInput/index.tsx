@@ -155,7 +155,7 @@ class DateInput extends Component<DateInputProps> {
   }
 
   renderDays(getOptionProps: SelectableRender['getOptionProps']) {
-    const children = this.props.children as ReactElement<CalendarDayProps>
+    const children = this.props.children as ReactElement<CalendarDayProps>[]
 
     return Children.map(children, (day) => {
       const { date, isOutsideMonth } = day.props

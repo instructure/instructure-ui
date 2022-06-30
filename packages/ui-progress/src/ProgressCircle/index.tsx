@@ -139,7 +139,10 @@ class ProgressCircle extends Component<
     // But leaving aria-valuetext because JAWS ignores aria-label
     const labelAndValueText = `${screenReaderLabel} ${valueText}`
 
-    const value = callRenderProp(renderValue, { valueNow, valueMax })
+    const value = callRenderProp(renderValue, {
+      valueNow: valueNow!,
+      valueMax: valueMax!
+    })
 
     const style = {
       strokeDashoffset: `${styles?.dashOffset}em`

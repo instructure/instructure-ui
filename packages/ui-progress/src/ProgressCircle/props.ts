@@ -33,7 +33,8 @@ import type {
   PropValidators,
   AsElementType,
   ProgressCircleTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  Renderable
 } from '@instructure/shared-types'
 
 export type ProgressCircleMeterColor =
@@ -71,7 +72,7 @@ type ProgressCircleOwnProps = {
    * A function to format the displayed value. If null the value will not display.
    * Takes `valueNow` and `valueMax` as parameters.
    */
-  renderValue?: ((values: Values) => React.ReactNode) | React.ReactNode
+  renderValue?: Renderable<Values>
   /**
    * Controls the overall color scheme of the component
    */

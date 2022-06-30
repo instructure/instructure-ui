@@ -74,27 +74,29 @@ class Theme extends Component<ThemeProps> {
     name: string,
     value: string | number | { text: string; color: string }
   ) {
-    let valueText = value
+    let valueText: string
     let valueColor = ''
     let convertedValue
     if (typeof value === 'object') {
       convertedValue = value.color
       valueColor = value.color
       valueText = value.text
+    } else if (typeof value === 'string') {
+      valueText = value
+    } else {
+      valueText = String(value)
     }
-    if (typeof valueText === 'string') {
-      if (valueText.charAt(0) === '#' && this._colorMap) {
-        convertedValue = valueText
-        valueColor = valueText
-        valueText = this._colorMap[valueText]
-      } else {
-        const values = valueText.split(' ')
-        const convertedValues = values.map((value) => {
-          return value.slice(-2) === 'em' ? `${px(value)}px` : value
-        })
-        if (valueText !== convertedValues.join(' ')) {
-          convertedValue = convertedValues.join(' ')
-        }
+    if (valueText.charAt(0) === '#' && this._colorMap) {
+      convertedValue = valueText
+      valueColor = valueText
+      valueText = this._colorMap[valueText]
+    } else {
+      const values = valueText.split(' ')
+      const convertedValues = values.map((value) => {
+        return value.slice(-2) === 'em' ? `${px(value)}px` : value
+      })
+      if (valueText !== convertedValues.join(' ')) {
+        convertedValue = convertedValues.join(' ')
       }
     }
 

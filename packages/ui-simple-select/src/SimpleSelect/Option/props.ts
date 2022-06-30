@@ -29,18 +29,17 @@ import type {
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
+import { Renderable } from '@instructure/shared-types'
 
 type OptionProps = {
   id: SimpleSelectOptionOwnProps['id']
-  isDisabled: SimpleSelectOptionOwnProps['isDisabled']
-  isSelected: boolean
-  isHighlighted: boolean
-  children: SimpleSelectOptionOwnProps['children']
+  isDisabled?: SimpleSelectOptionOwnProps['isDisabled']
+  isSelected?: boolean
+  isHighlighted?: boolean
+  children?: React.ReactNode
 }
 
-type RenderSimpleSelectOptionLabel =
-  | React.ReactNode
-  | ((args: OptionProps) => React.ReactNode)
+type RenderSimpleSelectOptionLabel = Renderable<OptionProps>
 
 type SimpleSelectOptionOwnProps = {
   /**

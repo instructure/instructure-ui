@@ -23,11 +23,11 @@
  */
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
-import { ReactChildren } from 'react'
+import { PropsWithChildren } from 'react'
+
 type ToggleBlockquoteOwnProps = {
-  children?: ReactChildren
   summary: string
-}
+} & PropsWithChildren
 
 type PropKeys = keyof ToggleBlockquoteOwnProps
 

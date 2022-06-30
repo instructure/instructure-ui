@@ -22,20 +22,20 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import type {
   AsElementType,
   PropValidators,
   OptionsItemTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  Renderable
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type OptionsItemRenderProps = {
-  children?: React.ReactNode | (() => React.ReactNode)
+  children?: Renderable
   /**
    * Element type to render as. Will be set to `<a>` if href is provided.
    */
@@ -60,16 +60,12 @@ type OptionsItemOwnProps = OptionsItemRenderProps & {
    * Content to render before the label
    * (if you pass a function, it has the `props` as its parameter)
    */
-  renderBeforeLabel?:
-    | React.ReactNode
-    | ((props: OptionsItemRenderProps) => React.ReactNode)
+  renderBeforeLabel?: Renderable<OptionsItemRenderProps>
   /**
    * Content to render after the label
    * (if you pass a function, it has the `props` as its parameter)
    */
-  renderAfterLabel?:
-    | React.ReactNode
-    | ((props: OptionsItemRenderProps) => React.ReactNode)
+  renderAfterLabel?: Renderable<OptionsItemRenderProps>
   /**
    * Sets the vAlign of renderBeforeLabel content
    */
@@ -81,7 +77,7 @@ type OptionsItemOwnProps = OptionsItemRenderProps & {
   /**
    * Additional "secondary" description text
    */
-  description?: React.ReactNode | (() => React.ReactNode)
+  description?: Renderable
   /**
    * The ARIA role of the description element
    */

@@ -32,21 +32,23 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { Cursor } from '@instructure/ui-prop-types'
 import React from 'react'
+import type { ViewOwnProps } from '@instructure/ui-view'
+import { Renderable } from '@instructure/shared-types'
 
 type AppNavItemOwnProps = {
   /**
    * The text to display. If the `icon` prop is used, label text must be wrapped
    * in `ScreenReaderContent`.
    */
-  renderLabel: React.ReactNode | (() => React.ReactNode)
+  renderLabel: Renderable
   /**
    * Content to display after the renderLabel text, such as a badge
    */
-  renderAfter?: React.ReactNode | (() => React.ReactNode)
+  renderAfter?: Renderable
   /**
    * The visual to display (ex. an Image, Logo, Avatar, or Icon)
    */
-  renderIcon?: React.ReactNode | (() => React.ReactNode)
+  renderIcon?: Renderable
   /**
    * If the item goes to a new page, pass an href
    */
@@ -54,7 +56,7 @@ type AppNavItemOwnProps = {
   /**
    * If the item does not go to a new page, pass an onClick
    */
-  onClick?: (event: React.MouseEvent<Element>) => void
+  onClick?: (event: React.MouseEvent<ViewOwnProps>) => void
   /**
    * Denotes which item is currently selected
    */

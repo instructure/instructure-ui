@@ -24,11 +24,12 @@
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { Renderable } from '@instructure/shared-types'
 
 type SelectOwnProps = {
   name: string
-  renderLabel: React.ReactNode | (() => void)
-  renderBeforeInput?: React.ReactNode | (() => void)
+  renderLabel: React.ReactNode | (() => React.ReactNode)
+  renderBeforeInput?: Renderable
   id?: string
   value?: string
   onChange?: (e: React.SyntheticEvent, params: { value: string }) => void

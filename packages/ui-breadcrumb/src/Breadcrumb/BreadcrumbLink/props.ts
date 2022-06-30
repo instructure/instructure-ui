@@ -27,7 +27,8 @@ import PropTypes from 'prop-types'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  Renderable
 } from '@instructure/shared-types'
 import type { ViewOwnProps } from '@instructure/ui-view'
 
@@ -51,7 +52,7 @@ type BreadcrumbLinkOwnProps = {
   /**
    * Add an icon to the Breadcrumb.Link
    */
-  renderIcon?: React.ReactNode | (() => React.ReactNode)
+  renderIcon?: Renderable
   /**
    * Place the icon before or after the text in the Breadcrumb.Link
    */

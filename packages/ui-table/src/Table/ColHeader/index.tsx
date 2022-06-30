@@ -86,7 +86,7 @@ class ColHeader extends Component<TableColHeaderProps> {
     if (onRequestSort) {
       return <IconMiniArrowDoubleLine css={{ opacity: '30%' }} />
     }
-    return null
+    return undefined
   }
 
   render() {

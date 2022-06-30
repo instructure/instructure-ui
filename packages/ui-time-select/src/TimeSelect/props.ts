@@ -40,6 +40,7 @@ import type {
   PositionConstraint
 } from '@instructure/ui-position'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import { Renderable } from '@instructure/shared-types'
 
 type PropKeys = keyof TimeSelectOwnProps
 
@@ -49,8 +50,8 @@ type TimeSelectProps = TimeSelectOwnProps &
   OtherHTMLAttributes<
     TimeSelectOwnProps,
     InputHTMLAttributes<TimeSelectOwnProps>
-  >
-  & WithDeterministicIdProps
+  > &
+  WithDeterministicIdProps
 
 type TimeSelectOwnProps = {
   /**
@@ -169,7 +170,7 @@ type TimeSelectOwnProps = {
   /**
    * Content to display in the list when no options are available.
    */
-  renderEmptyOption?: React.ReactNode | (() => React.ReactNode)
+  renderEmptyOption?: Renderable
   /**
    * Content to display before the text input. This will commonly be an icon.
    */

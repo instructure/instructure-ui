@@ -34,16 +34,19 @@ import type {
   OtherHTMLAttributes,
   PickPropsWithExceptions
 } from '@instructure/shared-types'
-import type { InteractionType } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { FormFieldOwnProps, FormMessage } from '@instructure/ui-form-field'
-import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import type {
+  InteractionType,
+  WithDeterministicIdProps
+} from '@instructure/ui-react-utils'
+import { Renderable } from '@instructure/shared-types'
 
 type NumberInputOwnProps = {
   /**
    * The form field label.
    */
-  renderLabel: React.ReactNode | (() => React.ReactNode)
+  renderLabel: Renderable
 
   /**
    * The id of the input. One is generated if not supplied.
@@ -179,13 +182,13 @@ type NumberInputProps =
     FormFieldOwnProps,
     'label' | 'inline' | 'id' | 'elementRef'
   > &
-  NumberInputOwnProps &
-  WithStyleProps<NumberInputTheme, NumberInputStyle> &
-  OtherHTMLAttributes<
-    NumberInputOwnProps,
-    InputHTMLAttributes<NumberInputOwnProps>
-  >
-  & WithDeterministicIdProps
+    NumberInputOwnProps &
+    WithStyleProps<NumberInputTheme, NumberInputStyle> &
+    OtherHTMLAttributes<
+      NumberInputOwnProps,
+      InputHTMLAttributes<NumberInputOwnProps>
+    > &
+    WithDeterministicIdProps
 
 type NumberInputStyle = ComponentStyle<
   | 'numberInput'

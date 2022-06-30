@@ -272,7 +272,7 @@ describe('<FileDrop />', async () => {
       type RenderLabelProps = {
         isDragAccepted: boolean
         isDragRejected: boolean
-        interaction: boolean
+        interaction?: string
       }
       let result: RenderLabelProps = {} as RenderLabelProps
       const label: FileDropProps['renderLabel'] = (props) => {
@@ -288,7 +288,7 @@ describe('<FileDrop />', async () => {
       type RenderLabelProps = {
         isDragAccepted: boolean
         isDragRejected: boolean
-        interaction: boolean
+        interaction?: string
       }
       let result: RenderLabelProps = {} as RenderLabelProps
       const label: FileDropProps['renderLabel'] = (props) => {

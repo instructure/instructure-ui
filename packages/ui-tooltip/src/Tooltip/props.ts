@@ -42,6 +42,7 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { PopoverOwnProps } from '@instructure/ui-popover'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import { Renderable } from '@instructure/shared-types'
 
 type TooltipRenderChildrenArgs = {
   focused: boolean
@@ -70,7 +71,7 @@ type TooltipOwnProps = {
   /**
    * The content to render in the tooltip
    */
-  renderTip: React.ReactNode | (() => React.ReactNode)
+  renderTip: Renderable
 
   /**
    * Whether or not the tooltip content is shown, when controlled
@@ -163,6 +164,7 @@ type PropsPassableToPopover = Omit<
   | 'shouldReturnFocus'
   | 'placement'
   | 'color'
+  | 'children'
   | 'mountNode'
   | 'constrain'
   | 'shadow'

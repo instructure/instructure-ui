@@ -28,7 +28,6 @@ import PropTypes from 'prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { controllable } from '@instructure/ui-prop-types'
 
-import type { InteractionType } from '@instructure/ui-react-utils'
 import type { FormFieldProps, FormMessage } from '@instructure/ui-form-field'
 import type {
   OtherHTMLAttributes,
@@ -36,13 +35,17 @@ import type {
   TextInputTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
-import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import type {
+  InteractionType,
+  WithDeterministicIdProps
+} from '@instructure/ui-react-utils'
+import { Renderable } from '@instructure/shared-types'
 
 type TextInputOwnProps = {
   /**
    * The form field label.
    */
-  renderLabel?: React.ReactNode | (() => React.ReactNode)
+  renderLabel?: Renderable
 
   /**
    * Determines the underlying native HTML `<input>` element's `type`.
@@ -146,12 +149,12 @@ type TextInputOwnProps = {
   /**
    * Content to display before the input text, such as an icon
    */
-  renderBeforeInput?: React.ReactNode | (() => React.ReactNode)
+  renderBeforeInput?: Renderable
 
   /**
    * Content to display after the input text, such as an icon
    */
-  renderAfterInput?: React.ReactNode | (() => React.ReactNode)
+  renderAfterInput?: Renderable
 
   /**
    * Callback executed when the input fires a change event.

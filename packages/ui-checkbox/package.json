@@ -48,7 +48,7 @@
     "@instructure/ui-themes": "8.26.3"
   },
   "peerDependencies": {
-    "react": ">=16.8 <=17"
+    "react": ">=16.8 <=18"
   },
   "publishConfig": {
     "access": "public"

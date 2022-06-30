@@ -124,7 +124,7 @@ class Position extends Component<PositionProps, PositionState> {
     return (
       !deepEqual(this.state, nextState) ||
       !shallowEqual(this.props, nextProps) ||
-      !shallowEqual(this.context, nextContext)
+      !shallowEqual(this.context as any, nextContext)
     )
   }
 

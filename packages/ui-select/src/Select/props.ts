@@ -45,6 +45,7 @@ import type {
   PositionMountNode
 } from '@instructure/ui-position'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import { Renderable } from '@instructure/shared-types'
 
 type SelectOwnProps = {
   /**
@@ -220,13 +221,13 @@ type PropsFromTextInput = {
    * Content to display before the text input. This will commonly be an icon or
    * tags to show multiple selections.
    */
-  renderBeforeInput?: React.ReactNode | (() => React.ReactNode)
+  renderBeforeInput?: Renderable
 
   /**
    * Content to display after the text input. This content will replace the
    * default arrow icons.
    */
-  renderAfterInput?: React.ReactNode | (() => React.ReactNode)
+  renderAfterInput?: Renderable
 
   /**
    * Prevents the default behavior of wrapping the input and rendered content
@@ -261,7 +262,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SelectProps = SelectOwnProps &
   WithStyleProps<SelectTheme, SelectStyle> &
-  OtherHTMLAttributes<SelectOwnProps, InputHTMLAttributes<SelectOwnProps>> & WithDeterministicIdProps
+  OtherHTMLAttributes<SelectOwnProps, InputHTMLAttributes<SelectOwnProps>> &
+  WithDeterministicIdProps
 
 type SelectStyle = ComponentStyle<'select' | 'icon' | 'assistiveText'>
 

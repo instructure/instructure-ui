@@ -24,7 +24,7 @@
 
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
-import React, { Component, ReactElement } from 'react'
+import React, { Component, ReactElement, ReactNode } from 'react'
 
 import { warn, error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
@@ -1129,7 +1129,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
     const optionLabel = callRenderProp(children, {
       id,
-      variant: optionProps.variant,
+      variant: optionProps.variant as Exclude<
+        OptionsItemProps['variant'],
+        'selected'
+      >,
       isSelected
     })
 
@@ -1142,7 +1145,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     }
 
     const renderLabelProps = {
-      variant: optionProps.variant,
+      variant: optionProps.variant as Exclude<
+        OptionsItemProps['variant'],
+        'selected'
+      >,
       vAlign: afterLabelContentVAlign,
       as,
       role: optionProps.role,
@@ -1154,19 +1160,17 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       typeof optionProps.renderBeforeLabel === 'function' &&
       !optionProps.renderBeforeLabel?.prototype?.isReactComponent
     ) {
-      optionProps.renderBeforeLabel = optionProps.renderBeforeLabel.bind(
-        null,
-        renderLabelProps
-      )
+      optionProps.renderBeforeLabel = (
+        optionProps.renderBeforeLabel as () => ReactNode
+      ).bind(null, renderLabelProps)
     }
     if (
       typeof optionProps.renderAfterLabel === 'function' &&
       !optionProps.renderAfterLabel?.prototype?.isReactComponent
     ) {
-      optionProps.renderAfterLabel = optionProps.renderAfterLabel.bind(
-        null,
-        renderLabelProps
-      )
+      optionProps.renderAfterLabel = (
+        optionProps.renderAfterLabel as () => ReactNode
+      ).bind(null, renderLabelProps)
     }
 
     const labelInfo =

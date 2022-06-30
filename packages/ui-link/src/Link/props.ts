@@ -40,6 +40,7 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type { ViewOwnProps } from '@instructure/ui-view'
+import { Renderable } from '@instructure/shared-types'
 
 type LinkOwnProps = {
   /**
@@ -94,7 +95,7 @@ type LinkOwnProps = {
    * Add an SVG icon to the Link. Do not add icons directly as
    * children.
    */
-  renderIcon?: (() => React.ReactNode) | React.ReactNode
+  renderIcon?: Renderable
 
   /**
    * Place the icon before or after the text in the Link.

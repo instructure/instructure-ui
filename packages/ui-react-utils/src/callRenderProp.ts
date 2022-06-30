@@ -22,17 +22,8 @@
  * SOFTWARE.
  */
 
-import React, {
-  ClassicComponent,
-  ClassicComponentClass,
-  ClassType,
-  ComponentClass,
-  ComponentState,
-  FunctionComponent,
-  ReactHTML,
-  ReactNode,
-  ReactSVG
-} from 'react'
+import React from 'react'
+import type { Renderable } from '@instructure/shared-types'
 
 /**
  * ---
@@ -43,21 +34,7 @@ import React, {
  * @param value
  * @param props
  */
-function callRenderProp<P>(
-  value:
-    | keyof ReactHTML
-    | keyof ReactSVG
-    | FunctionComponent<P>
-    | ClassType<
-        P,
-        ClassicComponent<P, ComponentState>,
-        ClassicComponentClass<P>
-      >
-    | ComponentClass<P>
-    | ReactNode
-    | (() => ReactNode),
-  props: P = {} as P
-) {
+function callRenderProp<P>(value: Renderable<P>, props: P = {} as P) {
   if (typeof value === 'function') {
     // In react 16, `createElement` accepts a function. In react 15 we get an
     // error on rendering the result. Evaluate the function here if it is not a

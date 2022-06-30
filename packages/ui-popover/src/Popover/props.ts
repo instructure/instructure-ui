@@ -40,7 +40,8 @@ import type { BidirectionalProps } from '@instructure/ui-i18n'
 import type {
   PropValidators,
   LiveRegion,
-  UIElement
+  UIElement,
+  Renderable
 } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
@@ -257,12 +258,12 @@ type PopoverOwnProps = {
   /**
    * The element that triggers the popover
    */
-  renderTrigger?: React.ReactNode | (() => React.ReactNode)
+  renderTrigger?: Renderable
 
   /**
    * The content to be shown by the popover
    */
-  children?: React.ReactNode | (() => React.ReactNode)
+  children?: Renderable
 
   /**
    * Provides a reference to the underlying HTML root element
@@ -270,7 +271,9 @@ type PopoverOwnProps = {
   elementRef?: (element: Element | null) => void
 }
 
-type PopoverProps = PopoverOwnProps & BidirectionalProps & WithDeterministicIdProps
+type PopoverProps = PopoverOwnProps &
+  BidirectionalProps &
+  WithDeterministicIdProps
 
 type PopoverState = {
   placement: PopoverOwnProps['placement']

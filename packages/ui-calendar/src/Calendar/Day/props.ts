@@ -34,12 +34,13 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import { KeyboardEvent, MouseEvent } from 'react'
 import type { ViewProps } from '@instructure/ui-view'
+import { Renderable } from '@instructure/shared-types'
 
 type CalendarDayOwnProps = {
   /**
    * The rendered representation of the corresponding date.
    */
-  children?: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  children?: Renderable
   /**
    * An ISO 8601 formatted string representing the date corresponding to
    * this `<Calendar.Day />`

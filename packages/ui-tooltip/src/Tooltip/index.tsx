@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, ReactNode } from 'react'
 
 import {
   getElementType,
@@ -116,7 +116,9 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
       const props = omitProps(this.props, Tooltip.allowedProps)
       return (
         <Trigger {...props} {...triggerProps}>
-          {children}
+          {
+            children as ReactNode /*TODO check if it can be TooltipRenderChildren, this might cause a crash*/
+          }
         </Trigger>
       )
     } else if (typeof children === 'function') {

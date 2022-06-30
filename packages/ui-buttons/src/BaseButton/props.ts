@@ -42,6 +42,7 @@ import type {
 } from '@instructure/shared-types'
 import type { Cursor } from '@instructure/ui-prop-types'
 import type { ViewProps } from '@instructure/ui-view'
+import { Renderable } from '@instructure/shared-types'
 
 type BaseButtonOwnProps = {
   /**
@@ -149,7 +150,7 @@ type BaseButtonOwnProps = {
   /**
    * An icon, or function that returns an icon.
    */
-  renderIcon?: React.ReactNode | (() => React.ReactNode)
+  renderIcon?: Renderable
 
   // Deprecated `string` tabIndex type
   /**

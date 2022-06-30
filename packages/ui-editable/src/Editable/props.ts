@@ -28,10 +28,10 @@ import type { PropValidators } from '@instructure/shared-types'
 
 type GetContainerProps = (props?: Record<string, any>) => {
   ref: React.RefCallback<any>
-  onMouseOver: (event: React.MouseEvent) => void
-  onMouseOut: (event: React.MouseEvent) => void
-  onMouseDown?: (event: React.MouseEvent) => void
-  onKeyUp?: (event: React.KeyboardEvent) => void
+  onMouseOver: (event: React.MouseEvent<any>) => void
+  onMouseOut: (event: React.MouseEvent<any>) => void
+  onMouseDown?: (event: React.MouseEvent<any>) => void
+  onKeyUp?: (event: React.KeyboardEvent<any>) => void
   readOnly?: boolean
 } & Record<string, any>
 

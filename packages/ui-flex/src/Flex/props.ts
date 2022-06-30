@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
@@ -31,7 +30,8 @@ import type {
   AsElementType,
   PropValidators,
   FlexTheme,
-  OtherHTMLAttributes
+  OtherHTMLAttributes,
+  Renderable
 } from '@instructure/shared-types'
 import type {
   Spacing,
@@ -47,7 +47,7 @@ type FlexOwnProps = {
    * Note that if you do not use `Flex.Item`, the `withVisualDebug` and
    * `direction` props will not automatically be set on the children.
    */
-  children?: React.ReactNode | (() => React.ReactNode)
+  children?: Renderable
 
   /**
    * the element type to render as

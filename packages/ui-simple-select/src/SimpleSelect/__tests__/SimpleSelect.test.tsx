@@ -38,8 +38,6 @@ import { SimpleSelect } from '../index'
 import { SimpleSelectLocator } from '../SimpleSelectLocator'
 import SimpleSelectExamples from '../__examples__/SimpleSelect.examples'
 
-import type { SimpleSelectOptionProps } from '../Option/props'
-
 type ExampleOption = 'foo' | 'bar' | 'baz'
 
 describe('<SimpleSelect />', async () => {
@@ -326,7 +324,7 @@ describe('<SimpleSelect />', async () => {
   })
 
   it('should render dynamically colored icons before option', async () => {
-    const renderBeforeLabel = (props: Partial<SimpleSelectOptionProps>) => {
+    const renderBeforeLabel = (props: any) => {
       return <IconCheckSolid color={props.isDisabled ? 'warning' : 'brand'} />
     }
 

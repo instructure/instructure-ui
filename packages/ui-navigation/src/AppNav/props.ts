@@ -39,6 +39,7 @@ import type {
   AppNavTheme,
   OtherHTMLAttributes
 } from '@instructure/shared-types'
+import { Renderable } from '@instructure/shared-types'
 
 type AppNavOwnProps = {
   /**
@@ -53,12 +54,12 @@ type AppNavOwnProps = {
   /**
    * Content to display before the navigation items, such as a logo
    */
-  renderBeforeItems?: React.ReactNode | (() => React.ReactNode)
+  renderBeforeItems?: Renderable
   /**
    * Content to display after the navigation items, aligned to the far end
    * of the navigation
    */
-  renderAfterItems?: React.ReactNode | (() => React.ReactNode)
+  renderAfterItems?: Renderable
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -73,7 +74,7 @@ type AppNavOwnProps = {
    * Customize the text displayed in the menu trigger when links overflow
    * the overall nav width.
    */
-  renderTruncateLabel?: React.ReactNode | (() => React.ReactNode)
+  renderTruncateLabel?: Renderable
   /**
    * Called whenever the navigation items are updated or the size of
    * the navigation changes. Passes in the `visibleItemsCount` as
