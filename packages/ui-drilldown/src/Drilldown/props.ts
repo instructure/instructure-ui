@@ -64,21 +64,6 @@ type SeparatorChild = React.ComponentElement<
   DrilldownSeparatorProps,
   DrilldownSeparator
 >
-type DrilldownOnSelectArgs = {
-  value: DrilldownOptionValue | DrilldownOptionValue[]
-  isSelected: boolean
-  selectedOption: OptionChild
-  drilldown: Drilldown
-}
-type DrilldownOnToggleArgs = {
-  shown: boolean
-  drilldown: Drilldown
-  pageHistory: string[]
-  goToPage: (
-    pageId: string
-  ) => { prevPageId: string; newPageId: string } | undefined
-  goToPreviousPage: () => { prevPageId: string; newPageId: string } | undefined
-}
 
 type DrilldownOwnProps = {
   /**
@@ -167,13 +152,31 @@ type DrilldownOwnProps = {
    */
   onToggle?: (
     event: React.UIEvent | React.FocusEvent,
-    args: DrilldownOnToggleArgs
+    args: {
+      shown: boolean
+      drilldown: Drilldown
+      pageHistory: string[]
+      goToPage: (
+        pageId: string
+      ) => { prevPageId: string; newPageId: string } | undefined
+      goToPreviousPage: () =>
+        | { prevPageId: string; newPageId: string }
+        | undefined
+    }
   ) => void
 
   /**
    * Callback fired when an item within the `<Drilldown />` is selected
    */
-  onSelect?: (event: React.SyntheticEvent, args: DrilldownOnSelectArgs) => void
+  onSelect?: (
+    event: React.SyntheticEvent,
+    args: {
+      value: DrilldownOptionValue | DrilldownOptionValue[]
+      isSelected: boolean
+      selectedOption: OptionChild
+      drilldown: Drilldown
+    }
+  ) => void
 
   /**
    * If a trigger is supplied, callback fired when the `<Drilldown />` is closed
@@ -370,8 +373,6 @@ export type {
   PageChild,
   GroupChild,
   OptionChild,
-  SeparatorChild,
-  DrilldownOnSelectArgs,
-  DrilldownOnToggleArgs
+  SeparatorChild
 }
 export { propTypes, allowedProps }
