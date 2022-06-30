@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-tooltip",
-  "version": "8.25.0",
+  "version": "8.26.0",
   "description": "A component for showing small text-only overlays on hover/focus.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,23 +24,23 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/emotion": "8.25.0",
-    "@instructure/shared-types": "8.25.0",
-    "@instructure/ui-popover": "8.25.0",
-    "@instructure/ui-position": "8.25.0",
-    "@instructure/ui-prop-types": "8.25.0",
-    "@instructure/ui-react-utils": "8.25.0",
-    "@instructure/ui-testable": "8.25.0",
-    "@instructure/ui-utils": "8.25.0",
+    "@instructure/emotion": "8.26.0",
+    "@instructure/shared-types": "8.26.0",
+    "@instructure/ui-popover": "8.26.0",
+    "@instructure/ui-position": "8.26.0",
+    "@instructure/ui-prop-types": "8.26.0",
+    "@instructure/ui-react-utils": "8.26.0",
+    "@instructure/ui-testable": "8.26.0",
+    "@instructure/ui-utils": "8.26.0",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.25.0",
-    "@instructure/ui-color-utils": "8.25.0",
-    "@instructure/ui-test-locator": "8.25.0",
-    "@instructure/ui-test-queries": "8.25.0",
-    "@instructure/ui-test-utils": "8.25.0",
-    "@instructure/ui-themes": "8.25.0"
+    "@instructure/ui-babel-preset": "8.26.0",
+    "@instructure/ui-color-utils": "8.26.0",
+    "@instructure/ui-test-locator": "8.26.0",
+    "@instructure/ui-test-queries": "8.26.0",
+    "@instructure/ui-test-utils": "8.26.0",
+    "@instructure/ui-themes": "8.26.0"
   },
   "peerDependencies": {
     "react": ">=16.8 <=17"

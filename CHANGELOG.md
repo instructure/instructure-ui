@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.26.0](https://github.com/instructure/instructure-ui/compare/v8.25.0...v8.26.0) (2022-06-30)
+
+### Features
+
+- **ui-color-picker:** Add `ColorPicker` component ([1cbd877](https://github.com/instructure/instructure-ui/commit/1cbd87783da67144ffbd1f6ed535ccd370fd4eeb))
+- **ui-source-code-editor,ui-code-editor,ui:** add new `SourceCodeEditor` component ([b5064f5](https://github.com/instructure/instructure-ui/commit/b5064f5c767eb2d5c5a6d7f5bb6d05bd689418b5))
+- **ui-responsive:** add `display` prop to Responsive ([b5663dc](https://github.com/instructure/instructure-ui/commit/b5663dc883a784e516f09fde682d05e794ea772b))
+- **ui-tabs:** expose `defaultOverflowY` theme variable on Tabs.Panel ([a4b9540](https://github.com/instructure/instructure-ui/commit/a4b9540cb4a5f9655714152b1c62617b1b0e3a1f))
+
+##### ColorPicker component
+
+The `ColorPicker` is a versatile component that can be used to select colors and check their contrast ratios.
+
+This commit also adds the [ColorPicker](/#ColorPicker)'s subcomponents as standalone components: [ColorIndicator](/#ColorIndicator), [ColorMixer](/#ColorMixer), [ColorPreset](/#ColorPreset), [ColorContrast](/#ColorContrast).
+
+##### SourceCodeEditor component
+
+A wrapper around the popular [CodeMirror V6](https://codemirror.net/) code editor component. CodeMirror provides a text input field with features like line gutters, syntax highlighting, and autocompletion.
+It has better accessibility features than the (now deprecated) [CodeEditor](/#CodeEditor) component that is based on the former [version 5](https://codemirror.net/5/index.html) of CodeMirror.
+
 # [8.25.0](https://github.com/instructure/instructure-ui/compare/v8.24.5...v8.25.0) (2022-06-03)
 
 ### Bug Fixes
