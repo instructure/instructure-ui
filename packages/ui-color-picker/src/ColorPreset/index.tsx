@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, SyntheticEvent } from 'react'
+import { Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import { passthroughProps } from '@instructure/ui-react-utils'
@@ -36,7 +36,7 @@ import { Tooltip } from '@instructure/ui-tooltip'
 import { Popover } from '@instructure/ui-popover'
 import { Text } from '@instructure/ui-text'
 import { Drilldown } from '@instructure/ui-drilldown'
-import type { DrilldownOnSelectArgs } from '@instructure/ui-drilldown'
+import type { DrilldownProps } from '@instructure/ui-drilldown'
 import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
 
 import { ColorIndicator } from '../ColorIndicator'
@@ -96,8 +96,8 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
   }
 
   onMenuItemSelected =
-    (color: string) =>
-    (_e: SyntheticEvent<Element, Event>, args: DrilldownOnSelectArgs) => {
+    (color: string): DrilldownProps['onSelect'] =>
+    (_e, args) => {
       if (args.value === 'select') {
         this.props.onSelect(color)
       }
