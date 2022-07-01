@@ -22,8 +22,40 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-locator'
+import { find } from '@instructure/ui-test-queries'
+
+/* eslint-disable no-restricted-imports */
+// @ts-expect-error bypass no type definition found error
+import { DrilldownLocator } from '@instructure/ui-drilldown/es/Drilldown/DrilldownLocator'
+// @ts-expect-error bypass no type definition found error
+import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
+/* eslint-enable no-restricted-imports */
+
+import { ColorIndicatorLocator } from '../ColorIndicator/ColorIndicatorLocator'
 
 import { ColorPreset } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const ColorPresetLocator = locator(ColorPreset.selector)
+export const ColorPresetLocator = locator(ColorPreset.selector, {
+  findAllColorIndicators: (...args: any[]) => {
+    return ColorIndicatorLocator.findAll(...args)
+  },
+  findAllColorTooltips: (...args: any[]) => {
+    return TooltipLocator.findAll(...args)
+  },
+  findAllColorMenus: (...args: any[]) => {
+    return DrilldownLocator.findAll(...args)
+  },
+  findSelectedIndicator: async (...args: any[]) => {
+    const selected = await find('[aria-label="selected"]', ...args)
+
+    if (!selected) {
+      return selected
+    }
+
+    return await ColorIndicatorLocator.find(selected.getDOMNode())
+  },
+  findSelectedIcon: (...args: any[]) => {
+    return find('[class$=-colorPreset__selectedIndicator]', ...args)
+  }
+})

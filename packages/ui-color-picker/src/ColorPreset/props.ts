@@ -33,10 +33,6 @@ import type {
 import type { RGBAType } from '../ColorMixer/props'
 
 type ContrastStrength = 'min' | 'mid' | 'max'
-type MessageType = Array<{
-  type: 'success' | 'hint' | 'error' | 'screenreader-only'
-  text: string
-}>
 
 type ColorPresetOwnProps = {
   /**
@@ -67,8 +63,8 @@ type ColorPresetOwnProps = {
      * screenReaderLabel for the add new preset button
      */
     addNewPresetButtonScreenReaderLabel: string
-    maxHeight: string
     onPresetChange: (colors: ColorPresetOwnProps['colors']) => void
+    maxHeight: string
     colorMixer: {
       withAlpha: boolean
       rgbRedInputScreenReaderLabel: string
@@ -156,7 +152,6 @@ export type {
   ColorPresetProps,
   ColorPresetStyle,
   ColorPresetState,
-  ContrastStrength,
-  MessageType
+  ContrastStrength
 }
 export { propTypes, allowedProps }

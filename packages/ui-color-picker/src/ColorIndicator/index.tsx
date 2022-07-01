@@ -26,7 +26,7 @@
 import { Component } from 'react'
 
 import { testable } from '@instructure/ui-testable'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -74,12 +74,13 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
   }
 
   render() {
-    const { color, elementRef, ...props } = this.props
+    const { styles } = this.props
+
     return (
       <div
-        {...passthroughProps(props)}
+        {...omitProps(this.props, ColorIndicator.allowedProps)}
         ref={this.handleRef}
-        css={this.props.styles?.colorIndicator}
+        css={styles?.colorIndicator}
       />
     )
   }

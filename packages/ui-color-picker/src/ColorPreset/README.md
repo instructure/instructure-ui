@@ -83,9 +83,10 @@ class Example extends React.Component {
           colors={this.state.colors}
           selected={this.state.selected}
           onSelect={(selected) => this.setState({ selected })}
-          addNewPresetButtonScreenReaderLabel='Add new color'
           colorMixerSettings={{
             addNewPresetButtonScreenReaderLabel:'Add new preset button label',
+            selectColorLabel: 'Select',
+            removeColorLabel: 'Remove',
             onPresetChange:(colors) => this.setState({ colors }),
             colorMixer:{
               rgbRedInputScreenReaderLabel:'Input field for red',
@@ -98,7 +99,6 @@ class Example extends React.Component {
             },
             colorContrast:{
                 firstColor:"#FF0000",
-                secondColor:"#FFFF00",
                 label:"Color Contrast Ratio",
                 successLabel:"PASS",
                 failureLabel:"FAIL",

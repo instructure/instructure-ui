@@ -26,7 +26,7 @@
 import { Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
 
@@ -265,6 +265,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
       </View>
     </Tooltip>
   )
+
   renderSettingsMenu = (color: string, index: number) => (
     <Drilldown
       onSelect={this.onMenuItemSelected(color)}
@@ -286,20 +287,11 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
   )
 
   render() {
-    const {
-      disabled,
-      onSelect,
-      selected,
-      styles,
-      label,
-      colorMixerSettings,
-      colors,
-      elementRef,
-      ...props
-    } = this.props
+    const { styles, label, colorMixerSettings, colors } = this.props
+
     return (
       <div
-        {...passthroughProps(props)}
+        {...omitProps(this.props, ColorPreset.allowedProps)}
         ref={this.handleRef}
         css={styles?.colorPreset}
       >

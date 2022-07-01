@@ -33,7 +33,6 @@ import type {
 } from '@instructure/shared-types'
 
 type ContrastStrength = 'min' | 'mid' | 'max'
-type MessageType = Array<FormMessage>
 
 type ColorPickerOwnProps = {
   /**
@@ -50,11 +49,10 @@ type ColorPickerOwnProps = {
    *
    * renderContrastErrorMessage: if set and the contrast is not high enough, it will display the message
    *
-   *
-   * MessageType: Array<{
-   *   type: 'success' | 'hint' | 'error' | 'screenreader-only'
-   *   text: string
-   * }>
+   * FormMessage[]: Array of objects with shape: `{
+   *   text: ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
    */
   checkContrast?: {
     isStrict: boolean
@@ -63,12 +61,12 @@ type ColorPickerOwnProps = {
     renderContrastSuccessMessage?: (
       contrast: number,
       minContrast: number
-    ) => MessageType
+    ) => FormMessage[]
 
     renderContrastErrorMessage?: (
       contrast: number,
       minContrast: number
-    ) => MessageType
+    ) => FormMessage[]
   }
 
   /**
@@ -157,37 +155,37 @@ type ColorPickerOwnProps = {
   /**
    * If set and the hex is invalid, it will display the message after a blur event and remove it after a change event
    *
-   * MessageType: Array<{
-   *   type: 'success' | 'hint' | 'error' | 'screenreader-only'
-   *   text: string
-   * }>
+   * FormMessage[]: Array of objects with shape: `{
+   *   text: ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
    */
-  renderInvalidColorMessage?: (hexCode: string) => MessageType
+  renderInvalidColorMessage?: (hexCode: string) => FormMessage[]
 
   /**
    * If set, isRequired is true and the input is empty, it will display the message after a blur event and remove it after a change event
    *
-   * MessageType: Array<{
-   *   type: 'success' | 'hint' | 'error' | 'screenreader-only'
-   *   text: string
-   * }>
+   * FormMessage[]: Array of objects with shape: `{
+   *   text: ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
    */
-  renderIsRequiredMessage?: () => MessageType
+  renderIsRequiredMessage?: () => FormMessage[]
 
   /**
    * If set, it will display the message it returns
    *
-   * MessageType: Array<{
-   *   type: 'success' | 'hint' | 'error' | 'screenreader-only'
-   *   text: string
-   * }>
+   * FormMessage[]: Array of objects with shape: `{
+   *   text: ReactNode,
+   *   type: One of: ['error', 'hint', 'success', 'screenreader-only']
+   * }`
    */
   renderMessages?: (
     hexCode: string,
     isValidHex: boolean,
     minContrast: number,
     contrast?: number
-  ) => MessageType
+  ) => FormMessage[]
 
   /**
    * If set, an info icon with a tooltip will be displayed
@@ -287,7 +285,6 @@ export type {
   ColorPickerProps,
   ColorPickerStyle,
   ColorPickerState,
-  ContrastStrength,
-  MessageType
+  ContrastStrength
 }
 export { propTypes, allowedProps }
