@@ -28,7 +28,7 @@ import React, { Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import { warn } from '@instructure/console'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import {
   colorToHex8,
@@ -46,6 +46,7 @@ import {
   IconTroubleLine,
   IconInfoLine
 } from '@instructure/ui-icons'
+import type { FormMessage } from '@instructure/ui-form-field'
 
 import ColorIndicator from '../ColorIndicator'
 import ColorMixer from '../ColorMixer'
@@ -59,8 +60,7 @@ import { propTypes, allowedProps } from './props'
 import type {
   ColorPickerProps,
   ColorPickerState,
-  ContrastStrength,
-  MessageType
+  ContrastStrength
 } from './props'
 
 const acceptedCharactersForHEX = [
@@ -209,10 +209,10 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       : 'mid'
 
     const minContrast = this.getMinContrast(contrastStrength)
-    let invalidColorMessages: MessageType = []
-    let isRequiredMessages: MessageType = []
-    let generalMessages: MessageType = []
-    let contrastMessages: MessageType = []
+    let invalidColorMessages: FormMessage[] = []
+    let isRequiredMessages: FormMessage[] = []
+    let generalMessages: FormMessage[] = []
+    let contrastMessages: FormMessage[] = []
 
     if (checkContrast && contrast) {
       const { renderContrastSuccessMessage, renderContrastErrorMessage } =
@@ -552,28 +552,11 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     </>
   )
   render() {
-    const {
-      checkContrast,
-      colorMixerSettings,
-      disabled,
-      elementRef,
-      isRequired,
-      label,
-      onChange,
-      placeholderText,
-      popoverButtonScreenReaderLabel,
-      renderInvalidColorMessage,
-      renderIsRequiredMessage,
-      renderMessages,
-      tooltip,
-      value,
-      width,
-      withAlpha,
-      ...props
-    } = this.props
+    const { disabled, isRequired, placeholderText, width } = this.props
+
     return (
       <div
-        {...passthroughProps(props)}
+        {...omitProps(this.props, ColorPicker.allowedProps)}
         css={this.props.styles?.colorPicker}
         ref={this.handleRef}
       >

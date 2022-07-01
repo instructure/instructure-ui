@@ -26,7 +26,7 @@
 /** @jsxFrag React.Fragment */
 import React, { Component } from 'react'
 
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import { Text } from '@instructure/ui-text'
@@ -140,9 +140,6 @@ class ColorContrast extends Component<ColorContrastProps> {
   render() {
     const {
       styles,
-      elementRef,
-      failureLabel,
-      successLabel,
       withoutColorPreview,
       firstColor,
       secondColor,
@@ -151,28 +148,29 @@ class ColorContrast extends Component<ColorContrastProps> {
       secondColorLabel,
       normalTextLabel,
       largeTextLabel,
-      graphicsTextLabel,
-      ...props
+      graphicsTextLabel
     } = this.props
+
     const contrast = this.calcContrast
+
     return (
       <div
-        {...passthroughProps(props)}
+        {...omitProps(this.props, ColorContrast.allowedProps)}
         ref={this.handleRef}
         css={styles?.colorContrast}
       >
-        <div css={this.props.styles?.label}>
+        <div css={styles?.label}>
           <Text weight="bold" as="div">
             {label}
           </Text>
         </div>
         <Text size="x-large">{contrast}:1</Text>
         {!withoutColorPreview && (
-          <div css={this.props.styles?.colorPreview}>
-            <div css={this.props.styles?.firstColorPreview}>
+          <div css={styles?.colorPreview}>
+            <div css={styles?.firstColorPreview}>
               {this.renderColorIndicator(firstColor, firstColorLabel || '')}
             </div>
-            <div css={this.props.styles?.secondColorPreview}>
+            <div css={styles?.secondColorPreview}>
               {this.renderColorIndicator(secondColor, secondColorLabel || '')}
             </div>
           </div>

@@ -26,7 +26,7 @@
 import { Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import {
   colorToHex8,
@@ -121,9 +121,6 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   render() {
     const {
       disabled,
-      onChange,
-      value,
-      elementRef,
       styles,
       withAlpha,
       rgbRedInputScreenReaderLabel,
@@ -132,13 +129,14 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       rgbAlphaInputScreenReaderLabel,
       colorSliderNavigationExplanationScreenReaderLabel,
       alphaSliderNavigationExplanationScreenReaderLabel,
-      colorPaletteNavigationExplanationScreenReaderLabel,
-      ...props
+      colorPaletteNavigationExplanationScreenReaderLabel
     } = this.props
+
     const { h, s, v, a } = this.state
+
     return (
       <div
-        {...passthroughProps(props)}
+        {...omitProps(this.props, ColorMixer.allowedProps)}
         aria-disabled={disabled}
         ref={this.handleRef}
         css={styles?.colorMixer}

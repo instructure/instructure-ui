@@ -51,6 +51,7 @@ type RGBAType = {
   b: number
   a: number
 }
+
 type ColorMixerOwnProps = {
   /**
    * Makes the component uninteractable
