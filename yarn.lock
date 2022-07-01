@@ -1794,15 +1794,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/commands@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "@codemirror/commands@npm:6.0.0"
+"@codemirror/commands@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "@codemirror/commands@npm:6.0.1"
   dependencies:
     "@codemirror/language": ^6.0.0
     "@codemirror/state": ^6.0.0
     "@codemirror/view": ^6.0.0
     "@lezer/common": ^1.0.0
-  checksum: 5b3bac420635316f9fb324e38b76a281a4d1425f80e6a5e66a34cf1508414e5d182f494e3c30936b27f86aa67403c1af4137bca5df0f0e53b2a4baa49a25caf2
+  checksum: 7b3b73596c13d256b267aa7e2a0dd1fb297426918e9e42135faa4280cc220ff66b0d4743cd6214b6ed2111eccf3c125d1f197fc8585c48c45b386210d53673dd
   languageName: node
   linkType: hard
 
@@ -1833,6 +1833,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@codemirror/lang-html@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@codemirror/lang-html@npm:6.1.0"
+  dependencies:
+    "@codemirror/autocomplete": ^6.0.0
+    "@codemirror/lang-css": ^6.0.0
+    "@codemirror/lang-javascript": ^6.0.0
+    "@codemirror/language": ^6.0.0
+    "@codemirror/state": ^6.0.0
+    "@lezer/common": ^1.0.0
+    "@lezer/html": ^1.0.0
+  checksum: 7a526c9b626d034d6b340d1dfe44061e5e3af87c875709a69de830ed102ce32b71ed733ba0ff02b78388371497907970e163ec84f0ae90a58a807122a17348e0
+  languageName: node
+  linkType: hard
+
 "@codemirror/lang-javascript@npm:^6.0.0":
   version: 6.0.0
   resolution: "@codemirror/lang-javascript@npm:6.0.0"
@@ -1845,6 +1860,21 @@ __metadata:
     "@lezer/common": ^1.0.0
     "@lezer/javascript": ^1.0.0
   checksum: 6ec2f286c685b8e6556e207fb278637b8918a763344504c8e13c8a00bef06bc05e744858df9c21fbd47cb01bb7a4cbeb7bb5ef6ba2608eb57dfe1b8192d6736e
+  languageName: node
+  linkType: hard
+
+"@codemirror/lang-javascript@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "@codemirror/lang-javascript@npm:6.0.1"
+  dependencies:
+    "@codemirror/autocomplete": ^6.0.0
+    "@codemirror/language": ^6.0.0
+    "@codemirror/lint": ^6.0.0
+    "@codemirror/state": ^6.0.0
+    "@codemirror/view": ^6.0.0
+    "@lezer/common": ^1.0.0
+    "@lezer/javascript": ^1.0.0
+  checksum: 630573877ec3f2fdaedf3c7bf3bf9a8a7645f76bde52ad2d4c51cb1e173b49ccda5d7944f98521ff5f723ec12ae196c03a9f044fe91e50a5bf615d3b867966cf
   languageName: node
   linkType: hard
 
@@ -1886,7 +1916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/legacy-modes@npm:^6.0.0":
+"@codemirror/legacy-modes@npm:^6.1.0":
   version: 6.1.0
   resolution: "@codemirror/legacy-modes@npm:6.1.0"
   dependencies:
@@ -4027,14 +4057,14 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.13.10
     "@codemirror/autocomplete": ^6.0.1
-    "@codemirror/commands": ^6.0.0
+    "@codemirror/commands": ^6.0.1
     "@codemirror/lang-css": ^6.0.0
-    "@codemirror/lang-html": ^6.0.0
-    "@codemirror/lang-javascript": ^6.0.0
+    "@codemirror/lang-html": ^6.1.0
+    "@codemirror/lang-javascript": ^6.0.1
     "@codemirror/lang-json": ^6.0.0
     "@codemirror/lang-markdown": ^6.0.0
     "@codemirror/language": ^6.0.0
-    "@codemirror/legacy-modes": ^6.0.0
+    "@codemirror/legacy-modes": ^6.1.0
     "@codemirror/lint": ^6.0.0
     "@codemirror/search": ^6.0.0
     "@codemirror/state": ^6.0.0
