@@ -49,7 +49,6 @@ class ColorIndicator extends Component<ColorIndicatorProps> {
   static readonly componentId = 'ColorIndicator'
 
   static defaultProps = {
-    color: '',
     shape: 'circle'
   }
 

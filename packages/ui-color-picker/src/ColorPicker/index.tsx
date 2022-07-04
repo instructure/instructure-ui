@@ -27,7 +27,7 @@
 import React, { Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
-import { warn } from '@instructure/console'
+import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import {
@@ -88,6 +88,7 @@ const acceptedCharactersForHEX = [
   'F',
   null
 ]
+
 /**
 ---
 category: components
@@ -102,12 +103,10 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   static readonly componentId = 'ColorPicker'
 
   static defaultProps = {
-    elementRef: () => null,
     disabled: false,
-    label: 'Color',
-    checkContrast: false,
+    withAlpha: false,
     width: '22.5rem',
-    withAlpha: false
+    popoverMaxHeight: '100vh'
   }
 
   constructor(props: ColorPickerProps) {
@@ -158,6 +157,13 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         false,
         'You should either use children, colorMixerSettings or neither, not both. In this case, the colorMixerSettings will be ignored',
         ''
+      )
+    }
+
+    if (this.props.value && typeof this.props.onChange !== 'function') {
+      error(
+        false,
+        'You provided a `value` prop on ColorPicker, which will render a controlled component. Please provide an `onChange` handler.'
       )
     }
   }
@@ -260,6 +266,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       ...contrastMessages
     ]
   }
+
   renderBeforeInput() {
     const { styles } = this.props
     return (
@@ -301,6 +308,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
 
   handleOnChange(_event: React.ChangeEvent<HTMLInputElement>, value: string) {
     const { onChange } = this.props
+
     if (
       value.length > (this.props.withAlpha ? 8 : 6) ||
       value
@@ -309,6 +317,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     ) {
       return
     }
+
     if (typeof onChange === 'function') {
       onChange(`#${value}`)
     } else {
@@ -390,7 +399,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         this.setState({ openColorPicker: false })
       }}
       on="click"
-      screenReaderLabel={this.props.popoverScreenReaderLabel || ''}
+      screenReaderLabel={this.props.popoverScreenReaderLabel}
       shouldContainFocus
       shouldReturnFocus
       shouldCloseOnDocumentClick
@@ -429,6 +438,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         )}
     </div>
   )
+
   renderDefaultPopoverContent = () => (
     <>
       <div css={this.props.styles?.popoverContent}>
@@ -551,6 +561,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       </div>
     </>
   )
+
   render() {
     const { disabled, isRequired, placeholderText, width } = this.props
 

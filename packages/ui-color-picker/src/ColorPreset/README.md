@@ -88,6 +88,8 @@ class Example extends React.Component {
             selectColorLabel: 'Select',
             removeColorLabel: 'Remove',
             onPresetChange:(colors) => this.setState({ colors }),
+            popoverAddButtonLabel: "Add",
+            popoverCloseButtonLabel: "Cancel",
             colorMixer:{
               rgbRedInputScreenReaderLabel:'Input field for red',
               rgbGreenInputScreenReaderLabel:'Input field for green',

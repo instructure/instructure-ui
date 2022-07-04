@@ -61,6 +61,7 @@ type RGBAInputProps = RGBAInputOwnProps &
 type RGBAInputStyle = ComponentStyle<
   'RGBAInput' | 'label' | 'inputContainer' | 'rgbInput' | 'aInput'
 >
+
 const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,
   label: PropTypes.string,

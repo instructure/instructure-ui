@@ -63,10 +63,14 @@ type ColorPresetOwnProps = {
      * screenReaderLabel for the add new preset button
      */
     addNewPresetButtonScreenReaderLabel: string
+    selectColorLabel: string
+    removeColorLabel: string
     onPresetChange: (colors: ColorPresetOwnProps['colors']) => void
-    maxHeight: string
+    popoverAddButtonLabel: string
+    popoverCloseButtonLabel: string
+    maxHeight?: string
     colorMixer: {
-      withAlpha: boolean
+      withAlpha?: boolean
       rgbRedInputScreenReaderLabel: string
       rgbGreenInputScreenReaderLabel: string
       rgbBlueInputScreenReaderLabel: string
@@ -98,7 +102,7 @@ type ColorPresetOwnProps = {
   /**
    * The currently selected HEX string
    */
-  selected: string | null
+  selected?: string
 }
 
 type ColorPresetState = {
@@ -128,13 +132,45 @@ type ColorPresetStyle = ComponentStyle<
 
 const propTypes: PropValidators<PropKeys> = {
   colors: PropTypes.array.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  selected: PropTypes.string,
   disabled: PropTypes.bool,
   elementRef: PropTypes.func,
   label: PropTypes.string,
-  colorMixerSettings: PropTypes.object,
-  onSelect: PropTypes.func.isRequired,
   popoverScreenReaderLabel: PropTypes.string,
-  selected: PropTypes.string.isRequired
+  colorMixerSettings: PropTypes.shape({
+    addNewPresetButtonScreenReaderLabel: PropTypes.string.isRequired,
+    selectColorLabel: PropTypes.string.isRequired,
+    removeColorLabel: PropTypes.string.isRequired,
+    onPresetChange: PropTypes.func,
+    popoverAddButtonLabel: PropTypes.string.isRequired,
+    popoverCloseButtonLabel: PropTypes.string.isRequired,
+    maxHeight: PropTypes.string,
+    colorMixer: PropTypes.shape({
+      withAlpha: PropTypes.bool,
+      rgbRedInputScreenReaderLabel: PropTypes.string.isRequired,
+      rgbGreenInputScreenReaderLabel: PropTypes.string.isRequired,
+      rgbBlueInputScreenReaderLabel: PropTypes.string.isRequired,
+      rgbAlphaInputScreenReaderLabel: PropTypes.string.isRequired,
+      colorSliderNavigationExplanationScreenReaderLabel:
+        PropTypes.string.isRequired,
+      alphaSliderNavigationExplanationScreenReaderLabel:
+        PropTypes.string.isRequired,
+      colorPaletteNavigationExplanationScreenReaderLabel:
+        PropTypes.string.isRequired
+    }).isRequired,
+    colorContrast: PropTypes.shape({
+      firstColor: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      successLabel: PropTypes.string.isRequired,
+      failureLabel: PropTypes.string.isRequired,
+      normalTextLabel: PropTypes.string.isRequired,
+      largeTextLabel: PropTypes.string.isRequired,
+      graphicsTextLabel: PropTypes.string.isRequired,
+      firstColorLabel: PropTypes.string.isRequired,
+      secondColorLabel: PropTypes.string.isRequired
+    })
+  })
 }
 
 const allowedProps: AllowedPropKeys = [

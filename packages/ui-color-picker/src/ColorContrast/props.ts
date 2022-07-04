@@ -77,8 +77,10 @@ type ColorContrastOwnProps = {
    */
   successLabel: string
   /**
-   * toggles the color preview part of the component
-   * if true, firstColorLabel and secondColorLabel is not necessary. Otherwise required
+   * Toggles the color preview part of the component.
+   *
+   * If true, firstColorLabel and secondColorLabel is not necessary.
+   * Otherwise, it is required.
    */
   withoutColorPreview?: boolean
 }

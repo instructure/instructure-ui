@@ -38,26 +38,26 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 /**
- * ---
- * private: true
- * ---
- * @tsProps
- **/
+---
+private: true
+---
+@tsProps
+**/
 @withStyle(generateStyle, generateComponentTheme)
 class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorMixer.RGBAInput'
 
+  static defaultProps = {
+    withAlpha: false
+  }
+
   constructor(props: RGBAInputProps) {
     super(props)
     this.state = {
       value: props.value
     }
-  }
-
-  static defaultProps = {
-    withAlpha: false
   }
 
   ref: HTMLDivElement | null = null
@@ -103,6 +103,7 @@ class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {
 
   render() {
     const { styles, disabled, label, withAlpha } = this.props
+
     return (
       <div ref={this.handleRef} css={styles?.RGBAInput}>
         {label && <div css={styles?.label}>{label}</div>}

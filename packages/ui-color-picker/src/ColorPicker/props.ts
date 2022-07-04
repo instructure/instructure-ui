@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import type { FormMessage } from '@instructure/ui-form-field'
@@ -36,7 +37,7 @@ type ContrastStrength = 'min' | 'mid' | 'max'
 
 type ColorPickerOwnProps = {
   /**
-   * Configures the contrast checker. If false, there will be no checking.
+   * Configures the contrast checker. If not provided, there will be no checking.
    *
    *
    * isStrict: if it's true, it will display an error if false, a warning
@@ -55,14 +56,13 @@ type ColorPickerOwnProps = {
    * }`
    */
   checkContrast?: {
-    isStrict: boolean
+    isStrict?: boolean
     contrastStrength?: ContrastStrength
     contrastAgainst?: string
     renderContrastSuccessMessage?: (
       contrast: number,
       minContrast: number
     ) => FormMessage[]
-
     renderContrastErrorMessage?: (
       contrast: number,
       minContrast: number
@@ -77,7 +77,7 @@ type ColorPickerOwnProps = {
     popoverAddButtonLabel: string
     popoverCloseButtonLabel: string
     colorMixer?: {
-      withAlpha: boolean
+      withAlpha?: boolean
       rgbRedInputScreenReaderLabel: string
       rgbGreenInputScreenReaderLabel: string
       rgbBlueInputScreenReaderLabel: string
@@ -102,6 +102,7 @@ type ColorPickerOwnProps = {
       secondColorLabel: string
     }
   }
+
   /**
    * If a child function is provided, the component will render it to the popover.
    */
@@ -110,7 +111,8 @@ type ColorPickerOwnProps = {
     onChange: (hex: string) => void,
     handleAdd: () => void,
     handleClose: () => void
-  ) => Node
+  ) => React.ReactNode
+
   /**
    * Sets the input to disabled state
    */
@@ -119,7 +121,7 @@ type ColorPickerOwnProps = {
   /**
    * provides a reference to the underlying html root element
    */
-  elementRef: (element: Element | null) => void
+  elementRef?: (element: Element | null) => void
 
   /**
    * If true, it will display a red error ring or a message after a blur event and remove it after a change event
@@ -137,21 +139,26 @@ type ColorPickerOwnProps = {
   onChange?: (value: string) => void
 
   /**
-   * Placeholder for the inputfield
+   * Placeholder for the input field
    */
   placeholderText: string
+
   /**
-   * If set, it will set the popover's max height. Useful when the popover is too big
+   * If set, it will set the popover's max height.
+   * Useful when the popover is too big
    */
   popoverMaxHeight?: string
+
   /**
    * Sets the ScreenReaderLabel for the popover
    */
   popoverScreenReaderLabel?: string
+
   /**
    * Sets the ScreenReaderLabel for the popover Button
    */
   popoverButtonScreenReaderLabel?: string
+
   /**
    * If set and the hex is invalid, it will display the message after a blur event and remove it after a change event
    *
@@ -201,8 +208,9 @@ type ColorPickerOwnProps = {
    * The width of the input.
    */
   width?: string
+
   /**
-   * If true, alpha slider will be rendered. Deafults to false
+   * If true, alpha slider will be rendered. Defaults to false
    */
   withAlpha?: boolean
 }
@@ -238,13 +246,50 @@ type ColorPickerStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
-  checkContrast: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  colorMixerSettings: PropTypes.object,
+  checkContrast: PropTypes.shape({
+    isStrict: PropTypes.bool,
+    contrastStrength: PropTypes.oneOf(['min', 'mid', 'max']),
+    contrastAgainst: PropTypes.string,
+    renderContrastSuccessMessage: PropTypes.func,
+    renderContrastErrorMessage: PropTypes.func
+  }),
+  colorMixerSettings: PropTypes.shape({
+    popoverAddButtonLabel: PropTypes.string.isRequired,
+    popoverCloseButtonLabel: PropTypes.string.isRequired,
+    colorMixer: PropTypes.shape({
+      withAlpha: PropTypes.bool,
+      rgbRedInputScreenReaderLabel: PropTypes.string.isRequired,
+      rgbGreenInputScreenReaderLabel: PropTypes.string.isRequired,
+      rgbBlueInputScreenReaderLabel: PropTypes.string.isRequired,
+      rgbAlphaInputScreenReaderLabel: PropTypes.string.isRequired,
+      colorSliderNavigationExplanationScreenReaderLabel:
+        PropTypes.string.isRequired,
+      alphaSliderNavigationExplanationScreenReaderLabel:
+        PropTypes.string.isRequired,
+      colorPaletteNavigationExplanationScreenReaderLabel:
+        PropTypes.string.isRequired
+    }),
+    colorPreset: PropTypes.shape({
+      colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+      label: PropTypes.string.isRequired
+    }),
+    colorContrast: PropTypes.shape({
+      firstColor: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      successLabel: PropTypes.string.isRequired,
+      failureLabel: PropTypes.string.isRequired,
+      normalTextLabel: PropTypes.string.isRequired,
+      largeTextLabel: PropTypes.string.isRequired,
+      graphicsTextLabel: PropTypes.string.isRequired,
+      firstColorLabel: PropTypes.string.isRequired,
+      secondColorLabel: PropTypes.string.isRequired
+    })
+  }),
   children: PropTypes.func,
   disabled: PropTypes.bool,
   elementRef: PropTypes.func,
   isRequired: PropTypes.bool,
-  label: PropTypes.node,
+  label: PropTypes.node.isRequired,
   onChange: PropTypes.func,
   placeholderText: PropTypes.string,
   popoverScreenReaderLabel: PropTypes.string,

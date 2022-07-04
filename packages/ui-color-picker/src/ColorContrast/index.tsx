@@ -28,22 +28,25 @@ import React, { Component } from 'react'
 
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
-import { Text } from '@instructure/ui-text'
-import ColorIndicator from '../ColorIndicator'
-
-import type { ColorContrastProps } from './props'
-import { propTypes, allowedProps } from './props'
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
+import { error } from '@instructure/console'
 import {
   contrast as getContrast,
   colorToRGB,
   colorToHex8
 } from '@instructure/ui-color-utils'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import { Text } from '@instructure/ui-text'
 import { Pill } from '@instructure/ui-pill'
 
+import ColorIndicator from '../ColorIndicator'
 import type { RGBAType } from '../ColorMixer/props'
+
+import { propTypes, allowedProps } from './props'
+import type { ColorContrastProps } from './props'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -57,6 +60,10 @@ class ColorContrast extends Component<ColorContrastProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static readonly componentId = 'ColorContrast'
+
+  static defaultProps = {
+    withoutColorPreview: false
+  }
 
   constructor(props: ColorContrastProps) {
     super(props)
@@ -114,6 +121,42 @@ class ColorContrast extends Component<ColorContrastProps> {
       </div>
     </>
   )
+
+  renderPreview() {
+    const {
+      styles,
+      withoutColorPreview,
+      firstColor,
+      secondColor,
+      firstColorLabel,
+      secondColorLabel
+    } = this.props
+
+    if (withoutColorPreview) {
+      return null
+    }
+
+    if (!firstColorLabel || !secondColorLabel) {
+      error(
+        false,
+        'When `withoutColorPreview` is not set to true, the properties `firstColorLabel` and `secondColorLabel` are required!'
+      )
+    }
+
+    return (
+      !withoutColorPreview && (
+        <div css={styles?.colorPreview}>
+          <div css={styles?.firstColorPreview}>
+            {this.renderColorIndicator(firstColor, firstColorLabel || '')}
+          </div>
+          <div css={styles?.secondColorPreview}>
+            {this.renderColorIndicator(secondColor, secondColorLabel || '')}
+          </div>
+        </div>
+      )
+    )
+  }
+
   calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
     const alpha = 1 - (1 - c1.a) * (1 - c2.a)
     return {
@@ -137,15 +180,11 @@ class ColorContrast extends Component<ColorContrastProps> {
 
     return getContrast(colorToHex8(c1OnWhite), colorToHex8(c2OnC1OnWhite), 2)
   }
+
   render() {
     const {
       styles,
-      withoutColorPreview,
-      firstColor,
-      secondColor,
       label,
-      firstColorLabel,
-      secondColorLabel,
       normalTextLabel,
       largeTextLabel,
       graphicsTextLabel
@@ -165,16 +204,7 @@ class ColorContrast extends Component<ColorContrastProps> {
           </Text>
         </div>
         <Text size="x-large">{contrast}:1</Text>
-        {!withoutColorPreview && (
-          <div css={styles?.colorPreview}>
-            <div css={styles?.firstColorPreview}>
-              {this.renderColorIndicator(firstColor, firstColorLabel || '')}
-            </div>
-            <div css={styles?.secondColorPreview}>
-              {this.renderColorIndicator(secondColor, secondColorLabel || '')}
-            </div>
-          </div>
-        )}
+        {this.renderPreview()}
         {this.renderStatus(contrast >= 4.5, normalTextLabel)}
         {this.renderStatus(contrast >= 3, largeTextLabel)}
         {this.renderStatus(contrast >= 3, graphicsTextLabel)}
