@@ -59,6 +59,7 @@ type ColorPaletteProps = ColorPaletteOwnProps &
 type ColorPaletteStyle = ComponentStyle<
   'ColorPalette' | 'indicator' | 'palette' | 'disabledOverlay'
 >
+
 const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,
   hue: PropTypes.number.isRequired,

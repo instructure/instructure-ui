@@ -58,6 +58,8 @@ const testColorMixerSettings: ColorPresetProps['colorMixerSettings'] = {
   selectColorLabel: 'Select',
   removeColorLabel: 'Remove',
   onPresetChange: () => {},
+  popoverAddButtonLabel: 'Add',
+  popoverCloseButtonLabel: 'Cancel',
   colorMixer: {
     rgbRedInputScreenReaderLabel: 'Input field for red',
     rgbGreenInputScreenReaderLabel: 'Input field for green',

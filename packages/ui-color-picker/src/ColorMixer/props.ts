@@ -68,11 +68,11 @@ type ColorMixerOwnProps = {
   /**
    * Sets the value of the component. If changes, the color changes inside the component as well
    */
-  value: string
+  value?: string
   /**
    * Toggles alpha. If true, alpha slider will appear
    */
-  withAlpha: boolean
+  withAlpha?: boolean
   /**
    * screenReaderLabel for the RGBA input's red input field
    */
@@ -128,9 +128,9 @@ type ColorMixerStyle = ComponentStyle<
 const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,
   elementRef: PropTypes.func,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
   withAlpha: PropTypes.bool,
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
   rgbRedInputScreenReaderLabel: PropTypes.string.isRequired,
   rgbGreenInputScreenReaderLabel: PropTypes.string.isRequired,
   rgbBlueInputScreenReaderLabel: PropTypes.string.isRequired,

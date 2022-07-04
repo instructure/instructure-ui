@@ -18,14 +18,14 @@ example: true
 ---
 class Example extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       value: ""
-    };
+    }
   }
 
   render() {
-    const { value } = this.state;
+    const { value } = this.state
 
     return (
         <ColorPicker
@@ -76,11 +76,11 @@ class Example extends React.Component {
             },
           }}
         />
-    );
+    )
   }
 }
 
-render(<Example />);
+render(<Example />)
 
 
 ```
@@ -94,10 +94,10 @@ example: true
 ---
 class Example extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       value: "",
-    };
+    }
   }
   renderPopoverContent = (value, onChange, handleAdd, handleClose) => (
     <div>
@@ -177,7 +177,7 @@ class Example extends React.Component {
         </Button>
       </div>
     </div>
-  );
+  )
 
   render() {
     return (
@@ -185,7 +185,7 @@ class Example extends React.Component {
         <ColorPicker
           value={this.state.value}
           onChange={(value) => {
-            this.setState({ value });
+            this.setState({ value })
           }}
           label="Color Input"
           tooltip="This is an example"
@@ -195,12 +195,12 @@ class Example extends React.Component {
           {this.renderPopoverContent}
         </ColorPicker>
       </div>
-    );
+    )
   }
 }
 
 
-render(<Example />);
+render(<Example />)
 ```
 
 ### Complex Color input example
@@ -212,11 +212,11 @@ example: true
 ---
 class Example extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       value: "",
-      withCheckContrast: false,
+      withCheckContrast: undefined,
       contrastStrength: "mid",
       isStrict: false,
       disabled: false,
@@ -234,7 +234,7 @@ class Example extends React.Component {
         "#35423F",
       ],
       withAlpha: false,
-    };
+    }
   }
 
   render() {
@@ -247,7 +247,7 @@ class Example extends React.Component {
       isRequired,
       withAlpha,
       value,
-    } = this.state;
+    } = this.state
 
     return (
       <View as="div">
@@ -261,21 +261,17 @@ class Example extends React.Component {
           isRequired={isRequired}
           withAlpha={withAlpha}
           popoverButtonScreenReaderLabel="Open color mixer popover"
-          checkContrast={
-            withCheckContrast
-              ? {
-                  isStrict,
-                  contrastStrength,
-                  contrastAgainst,
-                  renderContrastErrorMessage: (contrast, minContrast) => [
-                    {
-                      type: "error",
-                      text: `Not high enough contrast. Minimum required is ${minContrast}:1, current is ${contrast}:1`,
-                    },
-                  ],
-                }
-              : false
-          }
+          checkContrast={withCheckContrast && {
+            isStrict,
+            contrastStrength,
+            contrastAgainst,
+            renderContrastErrorMessage: (contrast, minContrast) => [
+              {
+                type: "error",
+                text: `Not high enough contrast. Minimum required is ${minContrast}:1, current is ${contrast}:1`,
+              },
+            ],
+          }}
           renderInvalidColorMessage={(hexCode) => [
             {
               type: "error",
@@ -372,17 +368,16 @@ class Example extends React.Component {
                 onSelect={(contrastAgainst) =>
                   this.setState({ contrastAgainst })
                 }
-                onPresetChange={(colors) => this.setState({ colors })}
               />
             </FormFieldGroup>
           )}
         </FormFieldGroup>
       </View>
-    );
+    )
   }
 }
 
-render(<Example />);
+render(<Example />)
 
 
 ```
@@ -395,6 +390,7 @@ example: true
 ---
 <div>
   <ColorPicker
+    label="Color"
     checkContrast={{
       isStrict: false,
       renderContrastSuccessMessage: () => [
@@ -415,6 +411,6 @@ example: true
     ]}
     placeholderText="Enter HEX"
   />
-</div>;
+</div>
 
 ```

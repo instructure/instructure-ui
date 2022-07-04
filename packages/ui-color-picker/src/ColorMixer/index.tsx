@@ -56,6 +56,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
   static readonly componentId = 'ColorMixer'
 
   static defaultProps = {
+    value: '#000',
     withAlpha: false,
     disabled: false
   }
@@ -90,11 +91,9 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
 
   componentDidMount() {
     this.props.makeStyles?.()
-    if (this.props.value) {
-      this.setState({
-        ...colorToHsva(this.props.value)
-      })
-    }
+    this.setState({
+      ...colorToHsva(this.props.value!)
+    })
   }
 
   componentDidUpdate(prevProps: ColorMixerProps, prevState: ColorMixerState) {
@@ -113,7 +112,7 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
       colorToHex8({ h, s, v, a }) !== this.props.value
     ) {
       this.setState({
-        ...colorToHsva(this.props.value)
+        ...colorToHsva(this.props.value!)
       })
     }
   }

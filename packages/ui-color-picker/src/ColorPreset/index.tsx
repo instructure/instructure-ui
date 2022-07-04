@@ -28,6 +28,7 @@ import { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+import { warn } from '@instructure/console'
 import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
 
 import { IconButton, Button } from '@instructure/ui-buttons'
@@ -68,6 +69,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
 
   constructor(props: ColorPresetProps) {
     super(props)
+
     this.state = {
       openEditor: false,
       openAddNew: false,
@@ -219,18 +221,19 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
           color="primary"
           margin="0 xx-small 0 xx-small"
         >
-          Add
+          {this.props.colorMixerSettings?.popoverAddButtonLabel}
         </Button>
         <Button
           onClick={() => this.setState({ openAddNew: false })}
           color="secondary"
           margin="0 xx-small 0 xx-small"
         >
-          Close
+          {this.props.colorMixerSettings?.popoverCloseButtonLabel}
         </Button>
       </div>
     </Popover>
   )
+
   renderColorIndicator = (color: string, selectOnClick?: boolean) => (
     <Tooltip renderTip={<div>{color}</div>}>
       <View
@@ -277,17 +280,26 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     >
       <Drilldown.Page withoutHeaderSeparator id="root" renderTitle={color}>
         <Drilldown.Option value="select" id="select">
-          Select
+          {this.props.colorMixerSettings!.selectColorLabel}
         </Drilldown.Option>
         <Drilldown.Option value="remove" id="remove">
-          Remove
+          {this.props.colorMixerSettings!.removeColorLabel}
         </Drilldown.Option>
       </Drilldown.Page>
     </Drilldown>
   )
 
   render() {
-    const { styles, label, colorMixerSettings, colors } = this.props
+    const { styles, label, colorMixerSettings, colors, selected } = this.props
+
+    if (selected && selected !== '' && colors.indexOf(selected) < 0) {
+      warn(
+        false,
+        `The selected color value "${selected}" doesn't exist in the color presets: [${colors.join(
+          ', '
+        )}]`
+      )
+    }
 
     return (
       <div
@@ -300,8 +312,10 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
             <Text weight="bold">{label}</Text>
           </div>
         )}
+
         {typeof colorMixerSettings?.onPresetChange === 'function' &&
           this.renderAddNewPresetButton()}
+
         {colors.map((color, index) =>
           typeof colorMixerSettings?.onPresetChange === 'function' ? (
             this.renderSettingsMenu(color, index)

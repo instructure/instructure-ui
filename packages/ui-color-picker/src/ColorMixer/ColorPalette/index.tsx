@@ -40,11 +40,11 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 /**
- * ---
- * private: true
- * ---
- * @tsProps
- **/
+---
+private: true
+---
+@tsProps
+**/
 @withStyle(generateStyle, generateComponentTheme)
 class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   static propTypes = propTypes
