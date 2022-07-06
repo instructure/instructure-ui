@@ -30,7 +30,7 @@ import type {
   PropValidators,
   ColorPresetTheme
 } from '@instructure/shared-types'
-import type { RGBAType } from '../ColorMixer/props'
+import type { RGBAType } from '@instructure/ui-color-utils'
 
 type ContrastStrength = 'min' | 'mid' | 'max'
 

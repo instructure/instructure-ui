@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
 import {
   expect,
   generateA11yTests,
@@ -30,10 +32,18 @@ import {
   within
 } from '@instructure/ui-test-utils'
 import { color2hex, colorToRGB } from '@instructure/ui-color-utils'
-import { ColorPicker } from '../'
+
+import { Button } from '@instructure/ui-buttons'
+
+import { ColorContrast } from '../../ColorContrast'
+import { ColorMixer } from '../../ColorMixer'
+import { ColorPreset } from '../../ColorPreset'
+
 import { ColorPickerLocator } from '../ColorPickerLocator'
-import { ContrastStrength } from '../props'
 import ColorPickerExamples from '../__examples__/ColorPicker.examples'
+
+import { ColorPicker } from '../'
+import { ContrastStrength } from '../props'
 import type { ColorPickerProps } from '../props'
 
 const SimpleExample = (props: Partial<ColorPickerProps>) => {
@@ -251,6 +261,7 @@ describe('<ColorPicker />', () => {
         expect(messages.length).to.be.eq(1)
         expect(messages[0].text()).to.be.eq('I am a contrast success message')
       })
+
       it(`should display error message when contrast is not met [contrastStrength=${contrastStrength}, isStrict=false]`, async () => {
         const colorToCheck = 'F5F5F5'
         await mount(
@@ -274,6 +285,7 @@ describe('<ColorPicker />', () => {
         expect(messages.length).to.be.eq(1)
         expect(messages[0].text()).to.be.eq('I am a contrast warning message')
       })
+
       it(`should display error message when contrast is not met [contrastStrength=${contrastStrength}, isStrict=true]`, async () => {
         const colorToCheck = 'F5F5F5'
         await mount(
@@ -376,6 +388,7 @@ describe('<ColorPicker />', () => {
 
       expect(trigger).to.be.not.undefined()
     })
+
     it('should open popover when trigger is clicked', async () => {
       await mount(
         <SimpleExample
@@ -394,6 +407,7 @@ describe('<ColorPicker />', () => {
 
       expect(popoverContent).to.be.not.undefined()
     })
+
     it('should display the color mixer', async () => {
       await mount(
         <SimpleExample
@@ -700,7 +714,7 @@ describe('<ColorPicker />', () => {
       expect(onChange).to.have.been.calledWith(colorPreset[1])
     })
 
-    it('should display the text passed to colorcontast', async () => {
+    it('should display the text passed to ColorContrast', async () => {
       await mount(
         <SimpleExample
           colorMixerSettings={{
@@ -729,6 +743,384 @@ describe('<ColorPicker />', () => {
             }
           }}
         />
+      )
+      const cp = await ColorPickerLocator.find()
+      const trigger = await cp.findPopoverTrigger()
+
+      await trigger.click()
+
+      const popoverContent = await cp.findPopoverContent()
+      const t1 = await popoverContent.findWithText('Normal text')
+      const t2 = await popoverContent.findWithText('Large text')
+      const t3 = await popoverContent.findWithText('Graphics text')
+
+      expect(t1.text()).to.be.eq('Normal text')
+      expect(t2.text()).to.be.eq('Large text')
+      expect(t3.text()).to.be.eq('Graphics text')
+    })
+  })
+
+  describe('custom popover mode', () => {
+    it('should throw warning if children and settings object are passed too', async () => {
+      const consoleWarning = stub(console, 'warn')
+      await mount(
+        <SimpleExample
+          colorMixerSettings={{
+            popoverAddButtonLabel: 'add',
+            popoverCloseButtonLabel: 'close'
+          }}
+        >
+          {() => <div></div>}
+        </SimpleExample>
+      )
+      expect(consoleWarning).to.have.been.calledWith(
+        'Warning: You should either use children, colorMixerSettings or neither, not both. In this case, the colorMixerSettings will be ignored.'
+      )
+    })
+
+    it('should display trigger button', async () => {
+      await mount(<SimpleExample>{() => <div></div>}</SimpleExample>)
+      const cp = await ColorPickerLocator.find()
+      const trigger = await cp.findPopoverTrigger()
+
+      expect(trigger).to.be.not.undefined()
+    })
+
+    it('should display the correct color in the colormixer when the input is prefilled', async () => {
+      const color = '0374B5'
+      await mount(
+        <SimpleExample>
+          {(value, onChange, handleAdd, handleClose) => (
+            <div>
+              <ColorMixer
+                withAlpha
+                value={value}
+                onChange={onChange}
+                rgbRedInputScreenReaderLabel="Label"
+                rgbGreenInputScreenReaderLabel="Label"
+                rgbBlueInputScreenReaderLabel="Label"
+                rgbAlphaInputScreenReaderLabel="Label"
+                colorSliderNavigationExplanationScreenReaderLabel="Label"
+                alphaSliderNavigationExplanationScreenReaderLabel="Label"
+                colorPaletteNavigationExplanationScreenReaderLabel="Label"
+              />
+              <div>
+                <Button onClick={handleAdd}>add</Button>
+                <Button onClick={handleClose}>close</Button>
+              </div>
+            </div>
+          )}
+        </SimpleExample>
+      )
+      const cp = await ColorPickerLocator.find()
+      const input = await cp.findTextInput()
+      const trigger = await cp.findPopoverTrigger()
+
+      await input.typeIn(color)
+
+      await trigger.click()
+
+      const popoverContent = await cp.findPopoverContent()
+      const convertedColor = colorToRGB(`#${color}`)
+      const [r, g, b] = await popoverContent.findRGBAInputs()
+      const actualColor = {
+        r: Number(r.value()),
+        g: Number(g.value()),
+        b: Number(b.value()),
+        a: 1
+      }
+
+      expect(convertedColor).to.be.eql(actualColor)
+    })
+
+    it('should trigger onChange when selected color is added from colorMixer', async () => {
+      const onChange = stub()
+      const rgb = { r: 131, g: 6, b: 25, a: 1 }
+      let passedValue
+      await mount(
+        <SimpleExample onChange={onChange}>
+          {(value, onChange, handleAdd, handleClose) => {
+            passedValue = value
+            return (
+              <div>
+                <ColorMixer
+                  withAlpha
+                  value={value}
+                  onChange={onChange}
+                  rgbRedInputScreenReaderLabel="Label"
+                  rgbGreenInputScreenReaderLabel="Label"
+                  rgbBlueInputScreenReaderLabel="Label"
+                  rgbAlphaInputScreenReaderLabel="Label"
+                  colorSliderNavigationExplanationScreenReaderLabel="Label"
+                  alphaSliderNavigationExplanationScreenReaderLabel="Label"
+                  colorPaletteNavigationExplanationScreenReaderLabel="Label"
+                />
+                <div>
+                  <Button onClick={handleAdd}>add</Button>
+                  <Button onClick={handleClose}>close</Button>
+                </div>
+              </div>
+            )
+          }}
+        </SimpleExample>
+      )
+      const cp = await ColorPickerLocator.find()
+      const trigger = await cp.findPopoverTrigger()
+
+      expect(passedValue).to.equal('#')
+
+      await trigger.click()
+
+      const popoverContent = await cp.findPopoverContent()
+
+      const [r, g, b] = await popoverContent.findRGBAInputs()
+
+      await r.typeIn(`${rgb.r}`)
+      await g.typeIn(`${rgb.g}`)
+      await b.typeIn(`${rgb.b}`)
+
+      const addBtn = await popoverContent.findPopoverButtonWithText('add')
+
+      await addBtn.click()
+
+      expect(onChange).to.have.been.calledWith(color2hex(rgb))
+      expect(passedValue).to.equal(color2hex(rgb))
+    })
+
+    it('should display the color in the trigger button', async () => {
+      const color = '0374B5'
+      await mount(
+        <SimpleExample>
+          {(value, onChange, handleAdd, handleClose) => (
+            <div>
+              <ColorMixer
+                withAlpha
+                value={value}
+                onChange={onChange}
+                rgbRedInputScreenReaderLabel="Label"
+                rgbGreenInputScreenReaderLabel="Label"
+                rgbBlueInputScreenReaderLabel="Label"
+                rgbAlphaInputScreenReaderLabel="Label"
+                colorSliderNavigationExplanationScreenReaderLabel="Label"
+                alphaSliderNavigationExplanationScreenReaderLabel="Label"
+                colorPaletteNavigationExplanationScreenReaderLabel="Label"
+              />
+              <div>
+                <Button onClick={handleAdd}>add</Button>
+                <Button onClick={handleClose}>close</Button>
+              </div>
+            </div>
+          )}
+        </SimpleExample>
+      )
+      const cp = await ColorPickerLocator.find()
+      const input = await cp.findTextInput()
+      const colorIndicator = await cp.findColorIndicator()
+
+      await input.typeIn(color)
+
+      const currentColor = colorIndicator.getColorRGBA()
+      const expectedColor = colorToRGB(`#${color}`)
+
+      expect(expectedColor).to.eql(colorToRGB(currentColor))
+    })
+
+    it('should display the list of colors passed to it', async () => {
+      const colorPreset = [
+        '#ffffff',
+        '#0CBF94',
+        '#0C89BF',
+        '#BF0C6D',
+        '#BF8D0C',
+        '#ff0000',
+        '#576A66',
+        '#35423A',
+        '#35423F'
+      ]
+
+      await mount(
+        <SimpleExample>
+          {(value, onChange, handleAdd, handleClose) => (
+            <div>
+              <ColorPreset
+                label="Choose a color"
+                colors={colorPreset}
+                selected={value}
+                onSelect={onChange}
+              />
+              <div>
+                <Button onClick={handleAdd}>add</Button>
+                <Button onClick={handleClose}>close</Button>
+              </div>
+            </div>
+          )}
+        </SimpleExample>
+      )
+      const cp = await ColorPickerLocator.find()
+      const trigger = await cp.findPopoverTrigger()
+
+      await trigger.click()
+
+      const colors = await cp.findColorPreset()
+
+      for (let i = 0; i < colors.length; i++) {
+        const computedStyle = colors[i].getComputedStyle().boxShadow
+        const expectedColor = colorToRGB(colorPreset[i])
+        const currentColor = /rgb\(\d+,\s\d+,\s\d+\)/.exec(computedStyle)![0]
+
+        expect(expectedColor).to.be.eql(colorToRGB(currentColor))
+      }
+    })
+
+    it('should correctly set the color when picked from the list of colors', async () => {
+      const colorPreset = [
+        '#ffffff',
+        '#0CBF94',
+        '#0C89BF',
+        '#BF0C6D',
+        '#BF8D0C',
+        '#ff0000',
+        '#576A66',
+        '#35423A',
+        '#35423F'
+      ]
+
+      await mount(
+        <SimpleExample>
+          {(value, onChange, handleAdd, handleClose) => (
+            <div>
+              <ColorPreset
+                label="Choose a color"
+                colors={colorPreset}
+                selected={value}
+                onSelect={onChange}
+              />
+              <div>
+                <Button onClick={handleAdd}>add</Button>
+                <Button onClick={handleClose}>close</Button>
+              </div>
+            </div>
+          )}
+        </SimpleExample>
+      )
+      const cp = await ColorPickerLocator.find()
+      const trigger = await cp.findPopoverTrigger()
+
+      await trigger.click()
+
+      const popoverContent = await cp.findPopoverContent()
+
+      const colorButtons = await cp.findColorPresetButtons()
+
+      await colorButtons[1].click()
+
+      const addButton = await popoverContent.findPopoverButtonWithText('add')
+
+      await addButton.click()
+
+      const input = await cp.findTextInput()
+
+      expect(`#${input.value()}`).to.be.eq(colorPreset[1])
+    })
+
+    it('should correctly call onChange with the color when picked from the list of colors', async () => {
+      const colorPreset = [
+        '#ffffff',
+        '#0CBF94',
+        '#0C89BF',
+        '#BF0C6D',
+        '#BF8D0C',
+        '#ff0000',
+        '#576A66',
+        '#35423A',
+        '#35423F'
+      ]
+      const onChange = stub()
+      let passedValue
+
+      await mount(
+        <SimpleExample onChange={onChange}>
+          {(value, onChange, handleAdd, handleClose) => {
+            passedValue = value
+            return (
+              <div>
+                <ColorPreset
+                  label="Choose a color"
+                  colors={colorPreset}
+                  selected={value}
+                  onSelect={onChange}
+                />
+                <div>
+                  <Button onClick={handleAdd}>add</Button>
+                  <Button onClick={handleClose}>close</Button>
+                </div>
+              </div>
+            )
+          }}
+        </SimpleExample>
+      )
+      const cp = await ColorPickerLocator.find()
+      const trigger = await cp.findPopoverTrigger()
+
+      expect(passedValue).to.equal('#')
+
+      await trigger.click()
+
+      const popoverContent = await cp.findPopoverContent()
+
+      const colorButtons = await cp.findColorPresetButtons()
+
+      await colorButtons[1].click()
+
+      const addButton = await popoverContent.findPopoverButtonWithText('add')
+
+      await addButton.click()
+
+      expect(onChange).to.have.been.calledWith(colorPreset[1])
+      expect(passedValue).to.equal(colorPreset[1])
+    })
+
+    it('should display the text passed to ColorContrast', async () => {
+      const colorPreset = [
+        '#ffffff',
+        '#0CBF94',
+        '#0C89BF',
+        '#BF0C6D',
+        '#BF8D0C',
+        '#ff0000',
+        '#576A66',
+        '#35423A',
+        '#35423F'
+      ]
+      await mount(
+        <SimpleExample>
+          {(value, onChange, handleAdd, handleClose) => (
+            <div>
+              <ColorPreset
+                label="Choose a color"
+                colors={colorPreset}
+                selected={value}
+                onSelect={onChange}
+              />
+              <ColorContrast
+                firstColor="#FFFF00"
+                secondColor={value}
+                label="Color Contrast Ratio"
+                successLabel="PASS"
+                failureLabel="FAIL"
+                normalTextLabel="Normal text"
+                largeTextLabel="Large text"
+                graphicsTextLabel="Graphics text"
+                firstColorLabel="Background"
+                secondColorLabel="Foreground"
+              />
+              <div>
+                <Button onClick={handleAdd}>add</Button>
+                <Button onClick={handleClose}>close</Button>
+              </div>
+            </div>
+          )}
+        </SimpleExample>
       )
       const cp = await ColorPickerLocator.find()
       const trigger = await cp.findPopoverTrigger()

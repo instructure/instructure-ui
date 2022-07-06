@@ -155,7 +155,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     if (this.props.children && this.props.colorMixerSettings) {
       warn(
         false,
-        'You should either use children, colorMixerSettings or neither, not both. In this case, the colorMixerSettings will be ignored',
+        'You should either use children, colorMixerSettings or neither, not both. In this case, the colorMixerSettings will be ignored.',
         ''
       )
     }
@@ -186,6 +186,13 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   }
   get isCustomPopover() {
     return this.renderMode === 'customPopover'
+  }
+
+  get mixedColorWithStrippedAlpha() {
+    const { mixedColor } = this.state
+    return mixedColor.length === 8 && mixedColor.slice(-2) === 'FF'
+      ? mixedColor.slice(0, -2)
+      : mixedColor
   }
 
   getMinContrast(strength: ContrastStrength) {
@@ -276,6 +283,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       </div>
     )
   }
+
   renderAfterInput() {
     const { checkContrast, styles } = this.props
     const { hexCode } = this.state
@@ -378,9 +386,6 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     )
   }
 
-  stripAlphaIfNeeded = (hex: string) =>
-    hex.length === 8 && hex.slice(-2) === 'FF' ? hex.slice(0, -2) : hex
-
   renderPopover = () => (
     <Popover
       renderTrigger={
@@ -413,31 +418,33 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     </Popover>
   )
 
-  renderCustomPopoverContent = () => (
-    <div css={this.props.styles?.popoverContent}>
-      {typeof this.props?.children === 'function' &&
-        this.props?.children(
-          this.stripAlphaIfNeeded(this.state.mixedColor),
-          (color: string) => {
-            this.setState({ mixedColor: color })
-          },
-          () => {
-            this.setState({
-              openColorPicker: false,
-              hexCode: `${this.stripAlphaIfNeeded(this.state.mixedColor)}`
-            })
-            this.props?.onChange?.(
-              `#${this.stripAlphaIfNeeded(this.state.mixedColor.slice(1))}`
-            )
-          },
-          () =>
-            this.setState({
-              openColorPicker: false,
-              mixedColor: this.state.hexCode
-            })
-        )}
-    </div>
-  )
+  renderCustomPopoverContent = () => {
+    const { styles, children, onChange } = this.props
+
+    return (
+      <div css={styles?.popoverContent}>
+        {typeof children === 'function' &&
+          children(
+            `#${this.mixedColorWithStrippedAlpha}`,
+            (newColor: string) => {
+              this.setState({ mixedColor: colorToHex8(newColor).slice(1) })
+            },
+            () => {
+              this.setState({
+                openColorPicker: false,
+                hexCode: this.mixedColorWithStrippedAlpha
+              })
+              onChange?.(`#${this.mixedColorWithStrippedAlpha}`)
+            },
+            () =>
+              this.setState({
+                openColorPicker: false,
+                mixedColor: this.state.hexCode
+              })
+          )}
+      </div>
+    )
+  }
 
   renderDefaultPopoverContent = () => (
     <>
@@ -484,7 +491,11 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             <ColorPreset
               label={this.props.colorMixerSettings.colorPreset.label}
               colors={this.props.colorMixerSettings.colorPreset.colors}
-              selected={this.state.mixedColor}
+              selected={
+                this.mixedColorWithStrippedAlpha
+                  ? `#${this.mixedColorWithStrippedAlpha}`
+                  : undefined
+              }
               onSelect={(color: string) =>
                 this.setState({ mixedColor: color.slice(1) })
               }
@@ -497,7 +508,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
               firstColor={
                 this.props.colorMixerSettings.colorContrast.firstColor
               }
-              secondColor={`#${this.stripAlphaIfNeeded(this.state.mixedColor)}`}
+              secondColor={`#${this.mixedColorWithStrippedAlpha}`}
               label={this.props.colorMixerSettings.colorContrast.label}
               successLabel={
                 this.props.colorMixerSettings.colorContrast.successLabel
@@ -540,16 +551,14 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         <Button
           onClick={() => {
             if (typeof this.props.onChange === 'function') {
-              this.props.onChange(
-                `#${this.stripAlphaIfNeeded(this.state.mixedColor)}`
-              )
+              this.props.onChange(`#${this.mixedColorWithStrippedAlpha}`)
               this.setState({
                 openColorPicker: false
               })
             } else {
               this.setState({
                 openColorPicker: false,
-                hexCode: `${this.stripAlphaIfNeeded(this.state.mixedColor)}`
+                hexCode: `${this.mixedColorWithStrippedAlpha}`
               })
             }
           }}

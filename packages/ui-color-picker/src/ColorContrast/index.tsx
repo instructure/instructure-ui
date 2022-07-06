@@ -34,13 +34,13 @@ import {
   colorToRGB,
   colorToHex8
 } from '@instructure/ui-color-utils'
+import type { RGBAType } from '@instructure/ui-color-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { Text } from '@instructure/ui-text'
 import { Pill } from '@instructure/ui-pill'
 
 import ColorIndicator from '../ColorIndicator'
-import type { RGBAType } from '../ColorMixer/props'
 
 import { propTypes, allowedProps } from './props'
 import type { ColorContrastProps } from './props'

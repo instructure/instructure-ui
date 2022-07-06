@@ -30,7 +30,7 @@ import type {
   PropValidators,
   ColorMixerPaletteTheme
 } from '@instructure/shared-types'
-import type { HSVType } from '../props'
+import type { HSVType } from '@instructure/ui-color-utils'
 
 type ColorPaletteOwnProps = {
   disabled?: boolean

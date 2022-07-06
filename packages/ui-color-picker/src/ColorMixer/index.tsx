@@ -33,12 +33,13 @@ import {
   colorToHsva,
   colorToRGB
 } from '@instructure/ui-color-utils'
+import type { HSVType } from '@instructure/ui-color-utils'
 
 import ColorPalette from './ColorPalette'
 import Slider from './Slider'
 import RGBAInput from './RGBAInput'
 
-import type { ColorMixerProps, ColorMixerState, HSVType } from './props'
+import type { ColorMixerProps, ColorMixerState } from './props'
 import { propTypes, allowedProps } from './props'
 import generateStyle from './styles'
 

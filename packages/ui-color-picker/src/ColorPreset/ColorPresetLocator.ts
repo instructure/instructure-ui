@@ -29,6 +29,8 @@ import { find } from '@instructure/ui-test-queries'
 import { DrilldownLocator } from '@instructure/ui-drilldown/es/Drilldown/DrilldownLocator'
 // @ts-expect-error bypass no type definition found error
 import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
+// @ts-expect-error bypass no type definition found error
+import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 /* eslint-enable no-restricted-imports */
 
 import { ColorIndicatorLocator } from '../ColorIndicator/ColorIndicatorLocator'
@@ -57,5 +59,17 @@ export const ColorPresetLocator = locator(ColorPreset.selector, {
   },
   findSelectedIcon: (...args: any[]) => {
     return find('[class$=-colorPreset__selectedIndicator]', ...args)
+  },
+  findAddColorPopoverContent: (...args: any[]) => {
+    return PopoverLocator.findContent(...args)
+  },
+  getMenuForIndex: async (_element: any, index: number) => {
+    const component = await ColorPresetLocator.find()
+    const indicators = await component.findAllColorIndicators()
+    const menus = await component.findAllColorMenus()
+
+    await indicators[index].click()
+
+    return await menus[index].findPopoverContent()
   }
 })
