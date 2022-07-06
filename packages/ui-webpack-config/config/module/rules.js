@@ -26,7 +26,7 @@ const DEBUG = process.env.DEBUG || ENV === 'development'
 const exclude = [/node_modules/, /\/lib\//, /\/es\//]
 
 const babelLoader = {
-  loader: 'babel-loader',
+  loader: require.resolve('babel-loader'),
   options: {
     cacheDirectory: !DEBUG ? false : '.babel-cache'
   }
@@ -38,7 +38,7 @@ const rules = [
     exclude: [...exclude],
     use: [
       {
-        loader: 'thread-loader',
+        loader: require.resolve('thread-loader'),
         options: {
           workers: 2,
           workerParallelJobs: 50,
@@ -54,7 +54,7 @@ const rules = [
   {
     test: /\.css$/,
     include: [/ui-icons/],
-    use: ['style-loader', 'css-loader']
+    use: [require.resolve('style-loader'), require.resolve('css-loader')]
   },
   {
     // eslint-disable-next-line no-useless-escape
