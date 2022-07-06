@@ -38,7 +38,6 @@ import {
   IconArrowOpenEndSolid,
   IconArrowOpenStartSolid
 } from '@instructure/ui-icons'
-import { debounce } from '@instructure/debounce'
 import type { DateTimeInputProps, DateTimeInputState } from './props'
 import { propTypes, allowedProps } from './props'
 
@@ -251,25 +250,32 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   }
 
   handleHideCalendar = (event: SyntheticEvent) => {
-    // update state based on the DateInput's text value
-    if (
-      this.state.dateInputTextChanged ||
-      (event as unknown as KeyboardEvent).key === 'Enter'
-    ) {
-      const dateParsed = this.tryParseDate(this.state.dateInputText)
-      this.updateStateBasedOnDateInput(dateParsed, event)
-    } else {
-      // user clicked outside or tabbed away or pressed esc, reset text
-      this.setState({
-        dateInputText: this.state.iso
-          ? this.state.iso.format(this.dateFormat)
-          : '',
-        calendarSelectedDate: this.state.iso
-          ? this.state.iso.clone()
-          : undefined
-      })
-    }
-    this.setState({ isShowingCalendar: false, dateInputTextChanged: false })
+    // prevent event pooling https://reactjs.org/docs/legacy-event-pooling.html
+    // Remove if React 16 is no longer supported
+    event.persist()
+    // timeout is needed here because handleDayClick could be called in the same
+    // frame, and it updates calendarSelectedDate which is read in here.
+    window.setTimeout(() => {
+      // update state based on the DateInput's text value
+      if (
+        this.state.dateInputTextChanged ||
+        (event as React.KeyboardEvent).key === 'Enter'
+      ) {
+        const dateParsed = this.tryParseDate(this.state.dateInputText)
+        this.updateStateBasedOnDateInput(dateParsed, event)
+      } else {
+        // user clicked outside or tabbed away or pressed esc, reset text
+        this.setState({
+          dateInputText: this.state.iso
+            ? this.state.iso.format(this.dateFormat)
+            : '',
+          calendarSelectedDate: this.state.iso
+            ? this.state.iso.clone()
+            : undefined
+        })
+      }
+      this.setState({ isShowingCalendar: false, dateInputTextChanged: false })
+    }, 0)
   }
 
   updateStateBasedOnDateInput(
@@ -552,9 +558,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
             renderWeekdayLabels ? renderWeekdayLabels : this.defaultWeekdays
           }
           onRequestShowCalendar={this.handleShowCalendar}
-          // debounce is needed here because handleDayClick updates calendarSelectedDate
-          // and this is read in handleHideCalendar
-          onRequestHideCalendar={debounce(this.handleHideCalendar)}
+          onRequestHideCalendar={this.handleHideCalendar}
           isShowingCalendar={this.state.isShowingCalendar}
           renderNextMonthButton={this.renderNextPrevMonthButton('next')}
           renderPrevMonthButton={this.renderNextPrevMonthButton('prev')}
