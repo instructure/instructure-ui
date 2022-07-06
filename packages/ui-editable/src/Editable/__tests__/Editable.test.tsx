@@ -116,6 +116,9 @@ describe('<Editable />', async () => {
 
     const editable = within(subject.getDOMNode())
     await editable.mouseOver()
+    // We need to wait 1 frame in React 18 for the render() call to be executed
+    await new Promise((r) => setTimeout(r))
+
     props = (
       renderSpy.lastCall.args[0] as EditableRenderProps
     ).getEditButtonProps()
@@ -123,6 +126,8 @@ describe('<Editable />', async () => {
     expect(props.isVisible).to.be.true()
 
     await editable.mouseOut()
+    // We need to wait 1 frame in React 18 for the render() call to be executed
+    await new Promise((r) => setTimeout(r))
     props = (
       renderSpy.lastCall.args[0] as EditableRenderProps
     ).getEditButtonProps()

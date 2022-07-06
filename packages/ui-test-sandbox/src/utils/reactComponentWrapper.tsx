@@ -24,7 +24,16 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+const createRoot = async () => {
+  try {
+    return await import('react-dom/client')
+  } catch (e) {
+    // swallow error, createRoot was added in React 18
+    return undefined
+  }
+}
 import PropTypes from 'prop-types'
+import { Root } from 'react-dom/client'
 
 interface WrapperProp extends React.ComponentProps<React.ElementType> {
   Component: React.ElementType
@@ -76,6 +85,7 @@ class WrapperComponent extends React.Component<WrapperProp, WrapperProp> {
 
 class ReactComponentWrapper {
   private _mountNode: HTMLDivElement | null = null
+  private _root?: Root = undefined
 
   async mount(
     element: React.ComponentElement<Record<string, unknown>, React.Component>,
@@ -97,8 +107,26 @@ class ReactComponentWrapper {
       if (wrapper && !rendered) {
         result = {
           setProps(newProps: Record<string, unknown>) {
-            return doAsync(() => {
-              wrapper.setChildProps(newProps)
+            return new Promise((resolve, reject) => {
+              let error: unknown
+              // this timeout is needed because of some failing DrawerTray tests
+              setTimeout(() => {
+                try {
+                  wrapper.setChildProps(newProps)
+                } catch (e) {
+                  // catch unhandled errors
+                  error = e
+                }
+                // this timeout is needed because prop changes are only a frame
+                // later applied in React 18
+                setTimeout(() => {
+                  if (error) {
+                    reject(error)
+                  } else {
+                    resolve(result)
+                  }
+                })
+              })
             })
           },
           getDOMNode(): Element {
@@ -112,7 +140,6 @@ class ReactComponentWrapper {
         ref(wrapper)
       }
     }
-
     const WrappedElement = (
       <WrapperComponent
         Component={type}
@@ -121,27 +148,43 @@ class ReactComponentWrapper {
       />
     )
 
-    const doAsync = (actionFn: () => void): Promise<WrappedRef> => {
-      return new Promise((resolve, reject) => {
-        let error: unknown
-        setTimeout(() => {
+    return new Promise<WrappedRef>((resolve, reject) => {
+      createRoot()
+        .then((res) => {
+          let err: unknown
           try {
-            actionFn()
-          } catch (e) {
-            // catch unhandled errors
-            error = e
+            this._root = res!.createRoot(this._mountNode!)
+            this._root.render(WrappedElement)
+          } catch (error) {
+            err = error
           }
-          if (error) {
-            return reject(error)
-          } else {
-            return resolve(result)
-          }
+          // this timeout is needed because Root.render() seems to cause
+          // prop validation to be emitted a frame later
+          setTimeout(() => {
+            if (err) {
+              reject(err)
+            } else {
+              resolve(result)
+            }
+          })
         })
-      })
-    }
-
-    return doAsync(() => {
-      ReactDOM.render(WrappedElement, this._mountNode)
+        .catch(() => {
+          // react-dom/client does not exist, its React 16 or 17
+          let error: unknown
+          setTimeout(() => {
+            try {
+              ReactDOM.render(WrappedElement, this._mountNode)
+            } catch (e) {
+              // catch unhandled errors
+              error = e
+            }
+            if (error) {
+              return reject(error)
+            } else {
+              return resolve(result)
+            }
+          })
+        })
     })
   }
 
@@ -149,7 +192,11 @@ class ReactComponentWrapper {
     try {
       let result = true
       if (this._mountNode) {
-        result = ReactDOM.unmountComponentAtNode(this._mountNode)
+        if (this._root) {
+          this._root.unmount()
+        } else {
+          result = ReactDOM.unmountComponentAtNode(this._mountNode)
+        }
         this._mountNode.remove()
       }
       return result
