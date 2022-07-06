@@ -25,15 +25,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 const createRoot = async () => {
-  try {
-    return await import('react-dom/client')
-  } catch (e) {
-    // swallow error, createRoot was added in React 18
-    return undefined
-  }
+  // eslint-disable-next-line import/no-unresolved
+  return await import('react-dom/client')
 }
 import PropTypes from 'prop-types'
-import { Root } from 'react-dom/client'
+
+// copied from React 18's source
+interface Root {
+  render(children: React.ReactNode): void
+  unmount(): void
+}
 
 interface WrapperProp extends React.ComponentProps<React.ElementType> {
   Component: React.ElementType

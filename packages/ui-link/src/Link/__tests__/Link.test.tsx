@@ -26,8 +26,8 @@ import React, { PropsWithChildren } from 'react'
 import { expect, mount, stub, within, wait } from '@instructure/ui-test-utils'
 import { Link } from '../index'
 import { LinkLocator } from '../LinkLocator'
-
-class TruncateText extends React.Component<PropsWithChildren> {
+// <unknown> is needed for React 17 compatibility
+class TruncateText extends React.Component<PropsWithChildren<unknown>> {
   render() {
     return <span>{this.props.children}</span>
   }

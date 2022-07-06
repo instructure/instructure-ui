@@ -25,11 +25,11 @@ import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import { PropsWithChildren } from 'react'
 
-type PropKeys = keyof PropsWithChildren
+type PropKeys = keyof PropsWithChildren<unknown> // <unknown> is needed for React 17 compatibility
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type ParagraphProps = PropsWithChildren
+type ParagraphProps = PropsWithChildren<unknown> // <unknown> is needed for React 17 compatibility
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.string

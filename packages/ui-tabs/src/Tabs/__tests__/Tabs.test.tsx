@@ -110,7 +110,8 @@ describe('<Tabs />', async () => {
 
     const verifyChildKeys = ({ children }: TabsProps) => {
       const childrenArray = Array.isArray(children) ? children : [children]
-      childrenArray.forEach((child) => {
+      childrenArray.forEach((child: any) => {
+        // "any" is needed for React 16 compat
         expect(child.props.renderTitle).to.equal(child.key)
       })
     }
