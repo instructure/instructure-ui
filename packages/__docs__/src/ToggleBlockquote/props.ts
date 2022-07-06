@@ -27,7 +27,7 @@ import { PropsWithChildren } from 'react'
 
 type ToggleBlockquoteOwnProps = {
   summary: string
-} & PropsWithChildren
+} & PropsWithChildren<unknown> // <unknown> is needed for React 17 compatibility
 
 type PropKeys = keyof ToggleBlockquoteOwnProps
 

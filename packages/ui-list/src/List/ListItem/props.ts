@@ -73,7 +73,7 @@ type ListItemOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
-} & PropsWithChildren
+} & PropsWithChildren<unknown> // <unknown> is needed for React 17 compatibility
 
 type PropKeys = keyof ListItemOwnProps
 
