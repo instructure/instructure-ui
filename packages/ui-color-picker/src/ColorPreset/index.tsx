@@ -28,7 +28,6 @@ import { Component } from 'react'
 import { withStyle, jsx } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { warn } from '@instructure/console'
 import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
 
 import { IconButton, Button } from '@instructure/ui-buttons'
@@ -95,6 +94,15 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+  }
+
+  get isModifiable() {
+    return typeof this.props.colorMixerSettings?.onPresetChange === 'function'
+  }
+
+  isSelectedColor(color: string) {
+    const { selected } = this.props
+    return !!selected && colorToHex8(selected) === colorToHex8(color)
   }
 
   onMenuItemSelected =
@@ -251,12 +259,12 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
         {...(selectOnClick
           ? { onClick: () => this.props.onSelect(color) }
           : {})}
-        {...(this.props.selected === color ? { 'aria-label': 'selected' } : {})}
+        {...(this.isSelectedColor(color) ? { 'aria-label': 'selected' } : {})}
         role="presentation"
       >
         <div>
           <ColorIndicator color={color} shape="rectangle" />
-          {this.props.selected === color && (
+          {this.isSelectedColor(color) && (
             <div css={this.props?.styles?.selectedIndicator}>
               <IconCheckDarkSolid
                 themeOverride={{ sizeXSmall: '0.8rem' }}
@@ -290,15 +298,12 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
   )
 
   render() {
-    const { styles, label, colorMixerSettings, colors, selected } = this.props
+    const { styles, label, colors } = this.props
 
-    if (selected && selected !== '' && colors.indexOf(selected) < 0) {
-      warn(
-        false,
-        `The selected color value "${selected}" doesn't exist in the color presets: [${colors.join(
-          ', '
-        )}]`
-      )
+    if (!this.isModifiable && colors.length === 0) {
+      // if there is no preset and no ability to add new,
+      // there is no point of rendering the component
+      return null
     }
 
     return (
@@ -313,18 +318,17 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
           </div>
         )}
 
-        {typeof colorMixerSettings?.onPresetChange === 'function' &&
-          this.renderAddNewPresetButton()}
+        {this.isModifiable && this.renderAddNewPresetButton()}
 
-        {colors.map((color, index) =>
-          typeof colorMixerSettings?.onPresetChange === 'function' ? (
+        {colors.map((color, index) => {
+          return this.isModifiable ? (
             this.renderSettingsMenu(color, index)
           ) : (
             <div key={`color-preset-color-${index}`}>
               {this.renderColorIndicator(color, true)}
             </div>
           )
-        )}
+        })}
       </div>
     )
   }

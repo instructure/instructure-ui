@@ -31,6 +31,7 @@ import {
   stub
 } from '@instructure/ui-test-utils'
 import { colorToRGB } from '@instructure/ui-color-utils'
+import type { QueriesHelpersEventsType } from '@instructure/ui-test-queries'
 
 import { ColorPreset } from '../'
 import { ColorPresetLocator } from '../ColorPresetLocator'
@@ -49,7 +50,6 @@ const testValue = {
     '#35423A',
     '#35423F'
   ],
-  selected: '',
   onSelect: () => {}
 }
 
@@ -106,9 +106,7 @@ describe('<ColorPreset />', () => {
 
   describe('colors prop', () => {
     it('should display color indicators for all colors', async () => {
-      await mount(
-        <ColorPreset colors={testValue.colors} onSelect={stub()} selected="" />
-      )
+      await mount(<ColorPreset colors={testValue.colors} onSelect={stub()} />)
 
       const component = await ColorPresetLocator.find()
       const indicators = await component.findAllColorIndicators()
@@ -123,9 +121,7 @@ describe('<ColorPreset />', () => {
     })
 
     it('should render tooltips for all colors', async () => {
-      await mount(
-        <ColorPreset colors={testValue.colors} onSelect={stub()} selected="" />
-      )
+      await mount(<ColorPreset colors={testValue.colors} onSelect={stub()} />)
 
       const component = await ColorPresetLocator.find()
       const indicators = await component.findAllColorIndicators()
@@ -137,6 +133,14 @@ describe('<ColorPreset />', () => {
           colorToRGB(tooltipContent.getTextContent())
         )
       }
+    })
+
+    it('should not render component when empty sting and not modifiable', async () => {
+      await mount(<ColorPreset colors={[]} onSelect={stub()} />)
+
+      const component = await ColorPresetLocator.find({ expectEmpty: true })
+
+      expect(component).to.not.exist()
     })
   })
 
@@ -256,12 +260,7 @@ describe('<ColorPreset />', () => {
       )
 
       const component = await ColorPresetLocator.find()
-      const indicators = await component.findAllColorIndicators()
-      const menus = await component.findAllColorMenus()
-
-      await indicators[testableIdx].click()
-
-      const openMenu = await menus[testableIdx].findPopoverContent()
+      const openMenu = await component.getMenuForIndex(testableIdx)
       const title = await openMenu.findHeaderTitle()
       const options = await openMenu.findAllOptions()
 
@@ -273,6 +272,90 @@ describe('<ColorPreset />', () => {
       expect(options[1].getTextContent()).to.equal(
         testColorMixerSettings.removeColorLabel
       )
+    })
+
+    it('should allow adding presets', async () => {
+      const onPresetChange = stub()
+      await mount(
+        <ColorPreset
+          {...testValue}
+          colorMixerSettings={{ ...testColorMixerSettings, onPresetChange }}
+        />
+      )
+
+      const component = await ColorPresetLocator.find()
+      const addColorButton = await component.find('button[type="button"]')
+
+      await addColorButton.click()
+
+      const popover: QueriesHelpersEventsType =
+        await component.findAddColorPopoverContent()
+      const popoverButtons = await popover.findAll('button[type="button"]')
+      const confirmButton = popoverButtons.find(
+        (button) =>
+          button.getTextContent() ===
+          testColorMixerSettings.popoverAddButtonLabel
+      )
+
+      await confirmButton?.click(undefined, { clickable: false })
+
+      expect(onPresetChange).to.have.been.calledWith([
+        '#33632AFF',
+        ...testValue.colors
+      ])
+    })
+
+    it('should allow removing presets', async () => {
+      const testableIdx = 5
+      const onPresetChange = stub()
+      await mount(
+        <ColorPreset
+          {...testValue}
+          colorMixerSettings={{ ...testColorMixerSettings, onPresetChange }}
+        />
+      )
+
+      const component = await ColorPresetLocator.find()
+      const openMenu = await component.getMenuForIndex(testableIdx)
+      const options: QueriesHelpersEventsType[] =
+        await openMenu.findAllOptions()
+      const removeOption = options.find(
+        (option) =>
+          option.getTextContent() === testColorMixerSettings.removeColorLabel
+      )
+
+      await removeOption?.click()
+
+      expect(onPresetChange).to.have.been.calledWith(
+        testValue.colors.filter(
+          (color) => color !== testValue.colors[testableIdx]
+        )
+      )
+    })
+
+    it('should allow selecting presets', async () => {
+      const testableIdx = 3
+      const onSelect = stub()
+      await mount(
+        <ColorPreset
+          {...testValue}
+          onSelect={onSelect}
+          colorMixerSettings={testColorMixerSettings}
+        />
+      )
+
+      const component = await ColorPresetLocator.find()
+      const openMenu = await component.getMenuForIndex(testableIdx)
+      const options: QueriesHelpersEventsType[] =
+        await openMenu.findAllOptions()
+      const selectOption = options.find(
+        (option) =>
+          option.getTextContent() === testColorMixerSettings.selectColorLabel
+      )
+
+      await selectOption?.click()
+
+      expect(onSelect).to.have.been.calledWith(testValue.colors[testableIdx])
     })
   })
 

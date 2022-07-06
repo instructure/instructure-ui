@@ -27,14 +27,15 @@ import React, { Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import { addEventListener } from '@instructure/ui-dom-utils'
-import shallowCompare from '../utils/shallowCompare'
+import type { HSVType } from '@instructure/ui-color-utils'
 
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
 
+import shallowCompare from '../utils/shallowCompare'
+
 import { propTypes, allowedProps } from './props'
 import type { ColorPaletteProps, ColorPaletteState } from './props'
-import type { HSVType } from '../props'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

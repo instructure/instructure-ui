@@ -30,7 +30,7 @@ import type {
   PropValidators,
   ColorMixerRGBAInputTheme
 } from '@instructure/shared-types'
-import type { RGBAType } from '../props'
+import type { RGBAType } from '@instructure/ui-color-utils'
 
 type RGBAInputOwnProps = {
   disabled?: boolean

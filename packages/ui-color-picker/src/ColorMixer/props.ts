@@ -30,28 +30,6 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 
-type RGBType = {
-  r: number
-  g: number
-  b: number
-}
-type HSVType = {
-  h: number
-  s: number
-  v: number
-}
-type HSLType = {
-  h: number
-  s: number
-  l: number
-}
-type RGBAType = {
-  r: number
-  g: number
-  b: number
-  a: number
-}
-
 type ColorMixerOwnProps = {
   /**
    * Makes the component uninteractable
@@ -158,13 +136,5 @@ const allowedProps: AllowedPropKeys = [
   'colorPaletteNavigationExplanationScreenReaderLabel'
 ]
 
-export type {
-  ColorMixerProps,
-  ColorMixerStyle,
-  ColorMixerState,
-  RGBType,
-  RGBAType,
-  HSVType,
-  HSLType
-}
+export type { ColorMixerProps, ColorMixerStyle, ColorMixerState }
 export { propTypes, allowedProps }
