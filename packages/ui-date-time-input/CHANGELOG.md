@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.26.1](https://github.com/instructure/instructure-ui/compare/v8.26.0...v8.26.1) (2022-07-06)
+
+### Bug Fixes
+
+- **ui-date-time-input:** fix enter not applyting date in React 16 ([244bb8d](https://github.com/instructure/instructure-ui/commit/244bb8df0b9955da6eef0ceba23e19e547a6720c))
+
 # [8.26.0](https://github.com/instructure/instructure-ui/compare/v8.25.0...v8.26.0) (2022-06-30)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
