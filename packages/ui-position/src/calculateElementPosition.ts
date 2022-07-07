@@ -33,8 +33,10 @@ import {
 } from '@instructure/ui-dom-utils'
 import type { RectType } from '@instructure/ui-dom-utils'
 import { mirrorPlacement } from './mirrorPlacement'
+// @ts-expect-error will be needed for fix in the `offsetToPx` method
+import { px } from '@instructure/ui-utils'
 
-import {
+import type {
   PlacementPropValues,
   PlacementValues,
   PositionConstraint,
@@ -45,7 +47,7 @@ import {
   Overflow,
   Offset
 } from './PositionPropTypes'
-import { UIElement } from '@instructure/shared-types'
+import type { UIElement } from '@instructure/shared-types'
 
 type PlacementValuesWithoutOffscreen = Exclude<PlacementValues, 'offscreen'>
 
@@ -116,7 +118,7 @@ class PositionedElement {
 
     this.rect = getBoundingClientRect(this.node)
 
-    this._offset = offsetToPx(offset, this.size)
+    this._offset = offsetToPx(offset, this.size, this.node)
   }
 
   node?: Node | Window | null
@@ -196,7 +198,7 @@ class PositionedElement {
     }
 
     return addOffsets([
-      offsetToPx({ top, left }, this.size),
+      offsetToPx({ top, left }, this.size, this.node),
       parseOffset(this._offset, this.placement)
     ])
   }
@@ -561,19 +563,33 @@ function parseOffset(
   } as Offset
 }
 
-//TODO make it work properly with sting offsets. e.g.: 10rem
-function offsetToPx(offset: Offset<string | number | undefined>, size: Size) {
+function offsetToPx(
+  offset: Offset<string | number | undefined>,
+  size: Size,
+  // @ts-expect-error will be needed for the TODO below
+  node?: Node | Window | null // eslint-disable-line
+) {
   let { left, top } = offset
 
-  if (typeof left === 'string' && left.indexOf('%') !== -1) {
-    left = (parseFloat(left) / 100) * size.width // eslint-disable-line no-mixed-operators
+  if (typeof left === 'string') {
+    if (left.indexOf('%') !== -1) {
+      left = (parseFloat(left) / 100) * size.width
+    } else {
+      // TODO this fixes INSTUI-3505, but it is a breaking change, so uncomment it in V9 with the appropriate release notes
+      // left = px(left, node)
+    }
   }
 
-  if (typeof top === 'string' && top.indexOf('%') !== -1) {
-    top = (parseFloat(top) / 100) * size.height // eslint-disable-line no-mixed-operators
+  if (typeof top === 'string') {
+    if (top.indexOf('%') !== -1) {
+      top = (parseFloat(top) / 100) * size.height
+    } else {
+      // TODO this fixes INSTUI-3505, but it is a breaking change, so uncomment it in V9 with the appropriate release notes
+      // top = px(top, node)
+    }
   }
 
-  return { top, left } as Offset<number>
+  return { top, left } as Offset
 }
 
 function sortPlacement(placement: PlacementValuesWithoutOffscreenArray) {
