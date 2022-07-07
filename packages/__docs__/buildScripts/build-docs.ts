@@ -60,7 +60,9 @@ const pathsToProcess = [
   '**/docs/**/*.md', // general docs
   '**/src/*.{js,ts,tsx}', // util src files
   '**/src/*/*.{js,ts,tsx}', // component src files
-  '**/src/*/*/*.{js,ts,tsx}' // child component src files,
+  '**/src/*/*/*.{js,ts,tsx}', // child component src files,
+  'CODE_OF_CONDUCT.md',
+  'LICENSE.md'
 ]
 
 const pathsToIgnore = [
