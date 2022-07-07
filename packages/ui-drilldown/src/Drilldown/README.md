@@ -1111,15 +1111,17 @@ example: true
   shouldHideOnSelect={false}
 >
   <Drilldown.Page id="root" renderTitle='Should not hide on select'>
-    <Drilldown.Option id="shouldHideOption1">
-      Option
-    </Drilldown.Option>
-    <Drilldown.Option id="shouldHideOption2">
-      Option
-    </Drilldown.Option>
-    <Drilldown.Option id="shouldHideOption3">
-      Option
-    </Drilldown.Option>
+    <Drilldown.Group id="group1" selectableType='single'>
+      <Drilldown.Option value="1" id="shouldHideOption1">
+        Option 1
+      </Drilldown.Option>
+      <Drilldown.Option value="2" id="shouldHideOption2">
+        Option 2
+      </Drilldown.Option>
+      <Drilldown.Option value="3" id="shouldHideOption3">
+        Option 3
+      </Drilldown.Option>
+    </Drilldown.Group>
     <Drilldown.Option
       id="close"
       renderBeforeLabel={<IconXLine />}
