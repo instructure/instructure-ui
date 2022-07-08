@@ -159,7 +159,7 @@ type PropsFromTextInput = {
   /**
    * The form field label.
    */
-  renderLabel: React.ReactNode | (() => React.ReactNode)
+  renderLabel: Renderable
 
   /**
    * The size of the text input.

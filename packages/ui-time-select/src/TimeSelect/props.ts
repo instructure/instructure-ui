@@ -57,7 +57,7 @@ type TimeSelectOwnProps = {
   /**
    * The form field label.
    */
-  renderLabel: React.ReactNode | (() => React.ReactNode)
+  renderLabel: Renderable
   /**
    * Whether to default to the first option when `defaultValue` hasn't been specified.
    */
@@ -174,12 +174,12 @@ type TimeSelectOwnProps = {
   /**
    * Content to display before the text input. This will commonly be an icon.
    */
-  renderBeforeInput?: React.ReactNode | (() => React.ReactNode)
+  renderBeforeInput?: Renderable
   /**
    * Content to display after the text input. This content will replace the
    * default arrow icons.
    */
-  renderAfterInput?: React.ReactNode | (() => React.ReactNode)
+  renderAfterInput?: Renderable
   /**
    * A standard language identifier.
    *

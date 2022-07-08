@@ -97,7 +97,7 @@ type PropsPassedToSelect = {
   /**
    * The form field label.
    */
-  renderLabel: React.ReactNode | (() => React.ReactNode)
+  renderLabel: Renderable
 
   /**
    * The id of the text input. One is generated if not supplied.

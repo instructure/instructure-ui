@@ -32,13 +32,14 @@ import { Row } from '../Row'
 import type {
   OtherHTMLAttributes,
   PropValidators,
+  Renderable,
   TableHeadTheme
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 
 type TableHeadOwnProps = {
   isStacked?: boolean
-  renderSortLabel?: React.ReactNode | (() => React.ReactNode)
+  renderSortLabel?: Renderable
   /**
    * `Table.Row`
    */
