@@ -29,14 +29,15 @@ import { Option } from '../Option'
 
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  Renderable
 } from '@instructure/shared-types'
 
 type SelectGroupOwnProps = {
   /**
    * The label associated with the group options.
    */
-  renderLabel: React.ReactNode | (() => React.ReactNode)
+  renderLabel: Renderable
   /**
    * Children of type `<SimpleSelect.Option />` that will be considered part of the group.
    */

@@ -39,6 +39,7 @@ import type {
 } from '@instructure/emotion'
 import type { PlacementPropValues } from '@instructure/ui-position'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
+import type { PropsWithChildren } from 'react'
 
 type BadgeOwnProps = {
   count?: number
@@ -48,7 +49,6 @@ type BadgeOwnProps = {
    * would stop the count at 99.
    */
   countUntil?: number
-  children?: React.ReactNode
   /**
    * Render Badge as a counter (`count`) or as a smaller dot (`notification`) with
    * no count number displayed.
@@ -82,13 +82,15 @@ type BadgeOwnProps = {
    * `bottom start`, and `start center`
    */
   placement: PlacementPropValues
-}
+} & PropsWithChildren<unknown> // <unknown is needed for React 17 support
 
 type PropKeys = keyof BadgeOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type BadgeProps = BadgeOwnProps & WithStyleProps<BadgeTheme, BadgeStyle> & WithDeterministicIdProps
+type BadgeProps = BadgeOwnProps &
+  WithStyleProps<BadgeTheme, BadgeStyle> &
+  WithDeterministicIdProps
 
 type BadgeStyle = ComponentStyle<'badge' | 'wrapper'>
 

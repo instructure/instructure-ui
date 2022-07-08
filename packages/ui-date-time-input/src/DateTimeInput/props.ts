@@ -30,7 +30,7 @@ import { I18nPropTypes } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
 import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
-import type { PropValidators } from '@instructure/shared-types'
+import type { PropValidators, Renderable } from '@instructure/shared-types'
 
 type DateTimeInputProps = {
   /**
@@ -40,7 +40,7 @@ type DateTimeInputProps = {
   /**
    * The label over the DateInput
    **/
-  dateRenderLabel: React.ReactNode | ((...args: any[]) => React.ReactNode)
+  dateRenderLabel: Renderable
   /**
    * The screen reader label for the calendar navigation header's prev month
    * button
@@ -69,7 +69,7 @@ type DateTimeInputProps = {
   /**
    * The label over the time input
    **/
-  timeRenderLabel: React.ReactNode | (() => React.ReactNode)
+  timeRenderLabel: Renderable
   /**
    * The number of minutes to increment by when generating the allowable time options.
    */
