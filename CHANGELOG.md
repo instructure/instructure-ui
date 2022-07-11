@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.26.2](https://github.com/instructure/instructure-ui/compare/v8.26.1...v8.26.2) (2022-07-11)
+
+### Bug Fixes
+
+- **ui-color-picker:** fix required props for `ColorPicker` and sub-components ([4d38fb6](https://github.com/instructure/instructure-ui/commit/4d38fb61caaf5ca9140403db75d2ae56fe5be46b))
+
+  **WARNING!** Since this commit fixes props that should be required props, some code changes might be needed.
+
 ## [8.26.1](https://github.com/instructure/instructure-ui/compare/v8.26.0...v8.26.1) (2022-07-06)
 
 ### Bug Fixes
