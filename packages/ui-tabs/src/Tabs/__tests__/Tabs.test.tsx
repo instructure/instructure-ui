@@ -25,8 +25,10 @@
 import React from 'react'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
-import { Tabs } from '../index'
 import { TabsLocator } from '../TabsLocator'
+import { Panel } from '../Panel'
+import type { TabsPanelProps } from '../Panel/props'
+import { Tabs } from '../index'
 import type { TabsProps } from '../props'
 
 describe('<Tabs />', async () => {
@@ -109,9 +111,10 @@ describe('<Tabs />', async () => {
     )
 
     const verifyChildKeys = ({ children }: TabsProps) => {
-      const childrenArray = Array.isArray(children) ? children : [children]
-      childrenArray.forEach((child: any) => {
-        // "any" is needed for React 16 compat
+      const childrenArray = (
+        Array.isArray(children) ? children : [children]
+      ) as React.ComponentElement<TabsPanelProps, Panel>[]
+      childrenArray.forEach((child) => {
         expect(child.props.renderTitle).to.equal(child.key)
       })
     }
