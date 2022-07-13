@@ -171,6 +171,8 @@ const generateStyle = (
       border: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`,
       borderRadius: componentTheme.borderRadius,
       background: componentTheme.background,
+      color: componentTheme.color,
+
       '&::before': {
         content: '""',
         pointerEvents: 'none',
