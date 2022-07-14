@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.26.3](https://github.com/instructure/instructure-ui/compare/v8.26.2...v8.26.3) (2022-07-14)
+
+### Bug Fixes
+
+- **ui-color-picker,ui-date-input,ui-date-time-input,ui-select,ui-simple-select,ui-text-input,ui-time-select:** before/after elements should inherit input color ([7daf257](https://github.com/instructure/instructure-ui/commit/7daf257a8ee491f84de2f00a56becd22636891e3))
+
 ## [8.26.2](https://github.com/instructure/instructure-ui/compare/v8.26.1...v8.26.2) (2022-07-11)
 
 **Note:** Version bump only for package @instructure/ui-time-select
