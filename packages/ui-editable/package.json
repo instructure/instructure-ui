@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-editable",
-  "version": "8.26.2",
+  "version": "8.26.3",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,21 +23,21 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.26.2",
-    "@instructure/ui-test-utils": "8.26.2"
+    "@instructure/ui-babel-preset": "8.26.3",
+    "@instructure/ui-test-utils": "8.26.3"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.26.2",
-    "@instructure/emotion": "8.26.2",
-    "@instructure/ui-a11y-content": "8.26.2",
-    "@instructure/ui-buttons": "8.26.2",
-    "@instructure/ui-dom-utils": "8.26.2",
-    "@instructure/ui-flex": "8.26.2",
-    "@instructure/ui-focusable": "8.26.2",
-    "@instructure/ui-icons": "8.26.2",
-    "@instructure/ui-utils": "8.26.2",
-    "@instructure/ui-view": "8.26.2",
+    "@instructure/console": "8.26.3",
+    "@instructure/emotion": "8.26.3",
+    "@instructure/ui-a11y-content": "8.26.3",
+    "@instructure/ui-buttons": "8.26.3",
+    "@instructure/ui-dom-utils": "8.26.3",
+    "@instructure/ui-flex": "8.26.3",
+    "@instructure/ui-focusable": "8.26.3",
+    "@instructure/ui-icons": "8.26.3",
+    "@instructure/ui-utils": "8.26.3",
+    "@instructure/ui-view": "8.26.3",
     "prop-types": "^15"
   },
   "peerDependencies": {
