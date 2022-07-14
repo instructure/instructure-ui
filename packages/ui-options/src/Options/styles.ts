@@ -23,7 +23,7 @@
  */
 
 import type { OptionsTheme } from '@instructure/shared-types'
-import type { OptionsStyle } from './props'
+import type { OptionsProps, OptionsStyle, OptionsStyleProps } from './props'
 
 /**
  * ---
@@ -35,7 +35,30 @@ import type { OptionsStyle } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: OptionsTheme): OptionsStyle => {
+const generateStyle = (
+  componentTheme: OptionsTheme,
+  _props: OptionsProps,
+  state: OptionsStyleProps
+): OptionsStyle => {
+  const { color } = state
+
+  const listColorVariants = {
+    primary: {},
+    'primary-inverse': {
+      background: componentTheme.backgroundInverse
+    }
+  }
+
+  const labelColorVariants = {
+    primary: {
+      color: componentTheme.labelColor
+    },
+    'primary-inverse': {
+      color: componentTheme.labelColorInverse,
+      background: componentTheme.backgroundInverse
+    }
+  }
+
   return {
     options: {
       label: 'options',
@@ -45,15 +68,16 @@ const generateStyle = (componentTheme: OptionsTheme): OptionsStyle => {
     list: {
       label: 'options__list',
       listStyleType: 'none',
-      position: 'relative'
+      position: 'relative',
+      ...(color && listColorVariants[color])
     },
     label: {
       label: 'options__label',
-      color: componentTheme.labelColor,
       cursor: 'default',
       display: 'block',
       fontWeight: componentTheme.labelFontWeight,
-      padding: componentTheme.nestedLabelPadding
+      padding: componentTheme.nestedLabelPadding,
+      ...(color && labelColorVariants[color])
     }
   }
 }

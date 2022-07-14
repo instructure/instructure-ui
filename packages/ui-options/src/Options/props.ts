@@ -52,6 +52,10 @@ type OptionsOwnProps = {
    * Content to render as a label. Mostly for when the component is nested
    */
   renderLabel?: React.ReactNode | (() => React.ReactNode)
+  /**
+   * Color variant
+   */
+  color?: 'primary' | 'primary-inverse'
 
   //TODO children has to be typed better
   //e.g.: ChildrenPropTypes.oneOf(['Options', 'Item', 'Separator']))
@@ -69,11 +73,16 @@ type OptionsProps = OptionsOwnProps &
 
 type OptionsStyle = ComponentStyle<'options' | 'list' | 'label'>
 
+type OptionsStyleProps = {
+  color: OptionsOwnProps['color']
+}
+
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
   role: PropTypes.string,
   elementRef: PropTypes.func,
   renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  color: PropTypes.oneOf(['primary', 'primary-inverse']),
   children: ChildrenPropTypes.oneOf(['Options', 'Item', 'Separator'])
 }
 
@@ -82,8 +91,9 @@ const allowedProps: AllowedPropKeys = [
   'role',
   'elementRef',
   'renderLabel',
+  'color',
   'children'
 ]
 
-export type { OptionsProps, OptionsStyle }
+export type { OptionsProps, OptionsStyle, OptionsStyleProps }
 export { propTypes, allowedProps }

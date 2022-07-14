@@ -31,7 +31,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import type { OptionsSeparatorProps } from './props'
+import type { OptionsSeparatorProps, OptionsSeparatorStyleProps } from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -54,11 +54,21 @@ class Separator extends Component<OptionsSeparatorProps> {
   } as const
 
   componentDidMount() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.(this.makeStyleProps)
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.(this.makeStyleProps)
+  }
+
+  get color() {
+    // we use a getter instead of defaultProps, because
+    // we need to check for the `undefined` value when overriding
+    return this.props.color || 'primary'
+  }
+
+  get makeStyleProps(): OptionsSeparatorStyleProps {
+    return { color: this.color }
   }
 
   render() {

@@ -45,6 +45,7 @@ type DrilldownOptionVariant = Exclude<OptionsItemProps['variant'], 'selected'>
 type RenderContentProps = {
   as: DrilldownOptionOwnProps['as']
   role: DrilldownOptionOwnProps['role']
+  color: DrilldownOptionOwnProps['color']
   variant: DrilldownOptionVariant
   vAlign: RenderContentVAlign
   isSelected: boolean
@@ -93,6 +94,11 @@ type DrilldownOptionOwnProps = {
    * The ARIA role of the element
    */
   role?: string
+
+  /**
+   * Color variant
+   */
+  color?: 'primary' | 'primary-inverse'
 
   /**
    * Info content to render after the label.
@@ -187,6 +193,7 @@ const propTypes: PropValidators<PropKeys> = {
   href: PropTypes.string,
   as: PropTypes.elementType,
   role: PropTypes.string,
+  color: PropTypes.oneOf(['primary', 'primary-inverse']),
   renderLabelInfo: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -208,6 +215,7 @@ const allowedProps: AllowedPropKeys = [
   'href',
   'as',
   'role',
+  'color',
   'renderLabelInfo',
   'renderBeforeLabel',
   'renderAfterLabel',

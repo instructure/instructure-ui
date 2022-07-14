@@ -46,7 +46,7 @@ import type { OptionsItemProps } from './Item/props'
 import { Separator } from './Separator'
 import type { OptionsSeparatorProps } from './Separator/props'
 
-import type { OptionsProps } from './props'
+import type { OptionsProps, OptionsStyleProps } from './props'
 import { allowedProps, propTypes } from './props'
 
 type ItemChild = React.ComponentElement<OptionsItemProps, Item>
@@ -87,13 +87,14 @@ class Options extends Component<OptionsProps> {
   }
 
   componentDidMount() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.(this.makeStyleProps)
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.(this.makeStyleProps)
   }
-  _labelId = this.props.deterministicId!('Options-label')
+
+  private readonly _labelId = this.props.deterministicId!('Options-label')
 
   get childAs() {
     const { as } = this.props
@@ -101,6 +102,18 @@ class Options extends Component<OptionsProps> {
       return 'li'
     }
     return undefined
+  }
+
+  get color() {
+    // we use a getter instead of defaultProps, because
+    // we need to check for the `undefined` value when overriding
+    return this.props.color || 'primary'
+  }
+
+  get makeStyleProps(): OptionsStyleProps {
+    return {
+      color: this.color
+    }
   }
 
   renderLabel() {
@@ -119,9 +132,19 @@ class Options extends Component<OptionsProps> {
 
   renderSubList(subOptions: OptionsChild) {
     const { styles } = this.props
+
+    const sublistColor = subOptions.props.color || this.color
+
     return (
-      <Item as={this.childAs} role="presentation" css={styles?.label}>
-        {subOptions}
+      <Item
+        as={this.childAs}
+        role="presentation"
+        css={styles?.label}
+        color={sublistColor}
+      >
+        {safeCloneElement(subOptions, {
+          color: sublistColor
+        })}
       </Item>
     )
   }
@@ -134,7 +157,10 @@ class Options extends Component<OptionsProps> {
         return this.renderSubList(child)
       }
       if (matchComponentTypes(child, ['Item', 'Separator'])) {
-        return safeCloneElement(child, { as: this.childAs || child.props.as })
+        return safeCloneElement(child, {
+          as: this.childAs || child.props.as,
+          color: child.props.color || this.color
+        })
       }
       return undefined
     })
@@ -158,7 +184,7 @@ class Options extends Component<OptionsProps> {
       Options
     )
 
-    const { as, role, renderLabel, elementRef, styles } = this.props
+    const { as, role, renderLabel, elementRef, color, styles } = this.props
 
     return (
       <div css={styles?.options} role="presentation" ref={this.handleRef}>
@@ -172,7 +198,7 @@ class Options extends Component<OptionsProps> {
           display="block"
           margin="none"
           padding="none"
-          background="primary"
+          background={color}
           aria-labelledby={this.ariaLabelledby}
         >
           {this.renderChildren()}

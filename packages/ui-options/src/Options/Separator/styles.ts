@@ -23,7 +23,11 @@
  */
 
 import type { OptionsSeparatorTheme } from '@instructure/shared-types'
-import type { OptionsSeparatorStyle } from './props'
+import type {
+  OptionsSeparatorProps,
+  OptionsSeparatorStyle,
+  OptionsSeparatorStyleProps
+} from './props'
 
 /**
  * ---
@@ -36,15 +40,28 @@ import type { OptionsSeparatorStyle } from './props'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: OptionsSeparatorTheme
+  componentTheme: OptionsSeparatorTheme,
+  _props: OptionsSeparatorProps,
+  state: OptionsSeparatorStyleProps
 ): OptionsSeparatorStyle => {
+  const { color } = state
+
+  const colorVariants = {
+    primary: {
+      background: componentTheme.background
+    },
+    'primary-inverse': {
+      background: componentTheme.backgroundInverse
+    }
+  }
+
   return {
     separator: {
       label: 'separator',
       height: componentTheme.height,
       margin: componentTheme.margin,
       overflow: 'hidden',
-      background: componentTheme.background
+      ...(color && colorVariants[color])
     }
   }
 }

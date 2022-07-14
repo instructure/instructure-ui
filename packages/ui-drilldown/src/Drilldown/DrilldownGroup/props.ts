@@ -79,6 +79,11 @@ type DrilldownGroupOwnProps = {
   as?: AsElementType
 
   /**
+   * Color variant
+   */
+  color?: 'primary' | 'primary-inverse'
+
+  /**
    * Provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
@@ -125,6 +130,7 @@ const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,
   role: PropTypes.string,
   as: PropTypes.elementType,
+  color: PropTypes.oneOf(['primary', 'primary-inverse']),
   elementRef: PropTypes.func,
   selectableType: PropTypes.oneOf(['single', 'multiple']),
   defaultSelected: PropTypes.array,
@@ -139,6 +145,7 @@ const allowedProps: AllowedPropKeys = [
   'disabled',
   'role',
   'as',
+  'color',
   'elementRef',
   'selectableType',
   'defaultSelected',

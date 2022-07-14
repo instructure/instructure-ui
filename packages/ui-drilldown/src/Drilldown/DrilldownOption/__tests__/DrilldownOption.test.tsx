@@ -498,6 +498,7 @@ describe('<Drilldown.Option />', async () => {
         vAlign: 'start',
         as: 'li',
         role: 'menuitem',
+        color: 'primary',
         isSelected: false
       })
     })
@@ -568,6 +569,7 @@ describe('<Drilldown.Option />', async () => {
         vAlign: 'start',
         as: 'li',
         role: 'menuitem',
+        color: 'primary',
         isSelected: false
       })
     })
@@ -637,6 +639,7 @@ describe('<Drilldown.Option />', async () => {
         vAlign: 'start',
         as: 'li',
         role: 'menuitem',
+        color: 'primary',
         isSelected: false
       })
     })

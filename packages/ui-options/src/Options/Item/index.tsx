@@ -37,7 +37,11 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import type { OptionsItemProps, OptionsItemStyle } from './props'
+import type {
+  OptionsItemProps,
+  OptionsItemStyle,
+  OptionsItemStyleProps
+} from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -75,11 +79,21 @@ class Item extends Component<OptionsItemProps> {
   }
 
   componentDidMount() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.(this.makeStyleProps)
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.(this.makeStyleProps)
+  }
+
+  get color() {
+    // we use a getter instead of defaultProps, because
+    // we need to check for the `undefined` value when overriding
+    return this.props.color || 'primary'
+  }
+
+  get makeStyleProps(): OptionsItemStyleProps {
+    return { color: this.color }
   }
 
   renderContent(
@@ -100,6 +114,7 @@ class Item extends Component<OptionsItemProps> {
       >
         {callRenderProp(renderLabel, {
           variant,
+          color: this.color,
           as,
           role,
           children

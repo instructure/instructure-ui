@@ -38,6 +38,7 @@ import {
 } from '@instructure/ui-react-utils'
 
 import { View } from '@instructure/ui-view'
+import type { ViewProps } from '@instructure/ui-view'
 import { Options } from '@instructure/ui-options'
 import type {
   OptionsProps,
@@ -119,6 +120,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     rotateFocus: true,
     as: 'ul',
     role: 'menu',
+    color: 'primary',
+    focusColor: 'primary',
     overflowX: 'auto',
     overflowY: 'auto',
     placement: 'bottom center',
@@ -303,6 +306,23 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   get previousPage(): MappedPage | undefined {
     const previousPageId = this._pageHistory[this._pageHistory.length - 2]
     return this.getPageById(previousPageId)
+  }
+
+  get currentPageColor() {
+    return this.currentPage?.color || this.props.color!
+  }
+
+  get currentPageFocusColor(): ViewProps['focusColor'] {
+    const variant = this.currentPage?.focusColor || this.props.focusColor!
+
+    switch (variant) {
+      case 'primary':
+        return 'info'
+      case 'primary-inverse':
+        return 'inverse'
+      default:
+        return undefined
+    }
   }
 
   // Returns the navigation methods and the page history.
@@ -494,7 +514,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         headerChildren.push(
           <DrilldownOption
             id={this._headerActionId}
-            themeOverride={{ color: styles?.headerActionColor }}
+            themeOverride={{
+              color: styles?.headerActionColor,
+              colorInverse: styles?.headerActionColorInverse
+            }}
             onOptionClick={(event) => {
               if (typeof onHeaderActionClicked === 'function') {
                 onHeaderActionClicked(event)
@@ -938,13 +961,19 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   }
 
   renderSeparator(separator: SeparatorChild) {
-    const { id, themeOverride, ...props } = separator.props
+    const {
+      id,
+      themeOverride,
+      color: separatorColor,
+      ...props
+    } = separator.props
     return (
       <Options.Separator
         {...props}
         id={id}
         key={id}
         role="separator"
+        color={separatorColor || this.currentPageColor}
         // we pass the themeOverride to Options.Separator
         themeOverride={themeOverride}
       />
@@ -966,6 +995,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       href,
       as,
       role,
+      color: optionColor,
       subPageId,
       disabled,
       renderLabelInfo,
@@ -1030,6 +1060,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       descriptionRole,
       as,
       role,
+      color: optionColor || groupProps?.color || this.currentPageColor,
       elementRef,
       variant: 'default',
       tabIndex: -1
@@ -1146,6 +1177,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       vAlign: afterLabelContentVAlign,
       as,
       role: optionProps.role,
+      color: optionProps.color,
       isSelected
     }
 
@@ -1227,6 +1259,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       selectableType,
       role,
       as,
+      color: groupColor,
       elementRef
     } = group.props
 
@@ -1241,7 +1274,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
     // add a separator above
     if (needsFirstSeparator) {
-      groupChildren.push(<Options.Separator />)
+      groupChildren.push(<Options.Separator color={this.currentPageColor} />)
     }
 
     if (selectableType && !this._selectedGroupOptionsMap[id]) {
@@ -1256,6 +1289,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         key={id}
         role={role}
         as={as || this.props.as}
+        color={groupColor || this.currentPageColor}
         renderLabel={renderGroupTitle}
         elementRef={elementRef}
         // we pass the themeOverride to Options
@@ -1284,7 +1318,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
     // add a separator below
     if (needsLastSeparator) {
-      groupChildren.push(<Options.Separator />)
+      groupChildren.push(<Options.Separator color={this.currentPageColor} />)
     }
 
     return groupChildren
@@ -1343,6 +1377,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             elementRef={this.handleDrilldownRef}
             tabIndex={0}
             css={styles?.drilldown}
+            focusColor={this.currentPageFocusColor}
             position="relative"
             borderRadius="small"
             width={width}
@@ -1393,7 +1428,12 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
                 this._containerElement = element as HTMLDivElement
               }}
             >
-              <Options {...getListProps()} role="presentation" as={as}>
+              <Options
+                {...getListProps()}
+                role="presentation"
+                as={as}
+                color={this.currentPageColor}
+              >
                 {this.renderList(getOptionProps, getDisabledOptionProps)}
               </Options>
             </View>
@@ -1429,6 +1469,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
 
     return trigger ? (
       <Popover
+        color={this.currentPageColor}
         isShowingContent={show}
         defaultIsShowingContent={defaultShow}
         shouldCloseOnDocumentClick={true}

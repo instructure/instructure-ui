@@ -522,6 +522,7 @@ export type DrawerLayoutTrayTheme = {
 export type DrilldownTheme = {
   headerTitleFontWeight: Typography['fontWeightBold']
   headerActionColor: Colors['textLink']
+  headerActionColorInverse: Colors['textLink']
   labelInfoPadding: Spacing['small']
 }
 
@@ -871,6 +872,12 @@ export type OptionsItemTheme = {
   highlightedBackground: Colors['backgroundBrand']
   selectedLabelColor: Colors['textLightest']
   selectedBackground: Colors['backgroundDark']
+  colorInverse: Colors['textLightest']
+  backgroundInverse: Colors['backgroundDarkest']
+  highlightedLabelColorInverse: Colors['textDarkest']
+  highlightedBackgroundInverse: Colors['backgroundLightest']
+  selectedLabelColorInverse: Colors['textDarkest']
+  selectedBackgroundInverse: Colors['backgroundLight']
   padding: string | 0
   iconPadding: Spacing['small']
   nestedPadding: Spacing['medium']
@@ -881,10 +888,12 @@ export type OptionsItemTheme = {
   descriptionLineHeight: Typography['lineHeight']
   descriptionPaddingStart: string | 0
   descriptionColor: Colors['textDark']
+  descriptionColorInverse: Colors['textDark']
 }
 
 export type OptionsSeparatorTheme = {
   background: Colors['backgroundMedium']
+  backgroundInverse: Colors['backgroundMedium']
   height: Border['widthSmall']
   margin: string | 0
 }
@@ -893,6 +902,8 @@ export type OptionsTheme = {
   labelFontWeight: Typography['fontWeightBold']
   background: Colors['backgroundLightest']
   labelColor: Colors['textDarkest']
+  backgroundInverse: Colors['backgroundDarkest']
+  labelColorInverse: Colors['textLightest']
   labelPadding: string | 0
   nestedLabelPadding: string | 0
 }

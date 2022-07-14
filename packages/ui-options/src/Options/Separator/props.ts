@@ -37,6 +37,10 @@ type OptionsSeparatorOwnProps = {
    * Element type to render as
    */
   as?: AsElementType
+  /**
+   * Color variant
+   */
+  color?: 'primary' | 'primary-inverse'
 }
 
 type PropKeys = keyof OptionsSeparatorOwnProps
@@ -49,11 +53,20 @@ type OptionsSeparatorProps = OptionsSeparatorOwnProps &
 
 type OptionsSeparatorStyle = ComponentStyle<'separator'>
 
-const propTypes: PropValidators<PropKeys> = {
-  as: PropTypes.elementType
+type OptionsSeparatorStyleProps = {
+  color: OptionsSeparatorOwnProps['color']
 }
 
-const allowedProps: AllowedPropKeys = ['as']
+const propTypes: PropValidators<PropKeys> = {
+  as: PropTypes.elementType,
+  color: PropTypes.oneOf(['primary', 'primary-inverse'])
+}
 
-export type { OptionsSeparatorProps, OptionsSeparatorStyle }
+const allowedProps: AllowedPropKeys = ['as', 'color']
+
+export type {
+  OptionsSeparatorProps,
+  OptionsSeparatorStyle,
+  OptionsSeparatorStyleProps
+}
 export { propTypes, allowedProps }

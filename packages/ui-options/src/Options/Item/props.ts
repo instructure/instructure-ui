@@ -50,6 +50,10 @@ type OptionsItemRenderProps = {
     | 'disabled'
     | 'highlighted-disabled'
   /**
+   * Color variant
+   */
+  color?: 'primary' | 'primary-inverse'
+  /**
    * The ARIA role of the element
    */
   role?: string
@@ -114,6 +118,10 @@ type OptionsItemStyle = ComponentStyle<
   | 'description'
 >
 
+type OptionsItemStyleProps = {
+  color: OptionsItemOwnProps['color']
+}
+
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
   variant: PropTypes.oneOf([
@@ -123,6 +131,7 @@ const propTypes: PropValidators<PropKeys> = {
     'disabled',
     'highlighted-disabled'
   ]),
+  color: PropTypes.oneOf(['primary', 'primary-inverse']),
   role: PropTypes.string,
   renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -138,6 +147,7 @@ const propTypes: PropValidators<PropKeys> = {
 const allowedProps: AllowedPropKeys = [
   'as',
   'variant',
+  'color',
   'role',
   'renderBeforeLabel',
   'renderAfterLabel',
@@ -150,5 +160,10 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { OptionsItemProps, OptionsItemStyle, OptionsItemRenderProps }
+export type {
+  OptionsItemProps,
+  OptionsItemStyle,
+  OptionsItemRenderProps,
+  OptionsItemStyleProps
+}
 export { propTypes, allowedProps }

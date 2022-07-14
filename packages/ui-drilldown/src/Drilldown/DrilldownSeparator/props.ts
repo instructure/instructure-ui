@@ -41,6 +41,11 @@ type DrilldownSeparatorOwnProps = {
    * Element type to render as
    */
   as?: AsElementType
+
+  /**
+   * Color variant
+   */
+  color?: 'primary' | 'primary-inverse'
 }
 
 type PropKeys = keyof DrilldownSeparatorOwnProps
@@ -56,10 +61,11 @@ type DrilldownSeparatorProps =
 
 const propTypes: PropValidators<PropKeys> = {
   id: PropTypes.string.isRequired,
-  as: PropTypes.elementType
+  as: PropTypes.elementType,
+  color: PropTypes.oneOf(['primary', 'primary-inverse'])
 }
 
-const allowedProps: AllowedPropKeys = ['id', 'as']
+const allowedProps: AllowedPropKeys = ['id', 'as', 'color']
 
 export type { DrilldownSeparatorProps }
 export { propTypes, allowedProps }

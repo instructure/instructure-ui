@@ -16,6 +16,145 @@ Some of Drilldown's features include:
 - secondary information blocks can be displayed both in-line with the option, or below the option with a dedicated text and color style;
 - the component can be rendered both in-line and in a popover.
 
+### Inverse color version
+
+```js
+---
+example: true
+render: false
+---
+class InverseColorExample extends React.Component {
+  state = {
+    color: 'primary-inverse',
+    focusColor: 'primary-inverse',
+    withTrigger: false
+  }
+
+  render() {
+    const { color, focusColor, withTrigger } = this.state
+
+    return (
+      <Flex alignItems='start'>
+        <Flex.Item width="20rem" textAlign='center' padding='x-small 0 0'>
+          <View textAlign='start'>
+            <Drilldown
+              rootPageId='root'
+              width="20rem"
+              trigger={withTrigger && <Button>Toggle button</Button>}
+              color={color}
+              focusColor={focusColor}
+            >
+              <Drilldown.Page
+                id="root"
+                renderTitle="Root page"
+                renderActionLabel="Action"
+              >
+                <Drilldown.Option
+                  id="option1"
+                  subPageId='secondPage'
+                >
+                  Option with subPage navigation
+                </Drilldown.Option>
+                <Drilldown.Option id="option2">
+                  Option
+                </Drilldown.Option>
+                <Drilldown.Option id="option3" description={lorem.sentence()}>
+                  Option with description
+                </Drilldown.Option>
+                <Drilldown.Option id="option4" renderLabelInfo='Info'>
+                  Option with info
+                </Drilldown.Option>
+                <Drilldown.Option id="option5" disabled>
+                  Disabled option
+                </Drilldown.Option>
+                <Drilldown.Group
+                  id="group1"
+                  renderGroupTitle="Selectable Group"
+                  selectableType='multiple'
+                >
+                  {['Apple', 'Orange', 'Banana', 'Strawberry'].map(
+                    item => (
+                      <Drilldown.Option
+                        id={item}
+                        key={item}
+                        value={item}
+                        defaultSelected={item === 'Apple'}
+                        disabled={item === 'Banana'}
+                      >
+                        {item}
+                      </Drilldown.Option>
+                    )
+                  )}
+                </Drilldown.Group>
+              </Drilldown.Page>
+
+              <Drilldown.Page
+                id="secondPage"
+                renderTitle="Second page"
+              >
+                {['Option 1', 'Option 2', 'Option 3', 'Option 4'].map(
+                  item => (
+                    <Drilldown.Option
+                      id={item}
+                      key={item}
+                    >
+                      {item}
+                    </Drilldown.Option>
+                  )
+                )}
+              </Drilldown.Page>
+            </Drilldown>
+          </View>
+        </Flex.Item>
+
+        <Flex.Item padding="0 0 0 large" shouldGrow shouldShrink>
+          <FormFieldGroup
+            description={<ScreenReaderContent>Settings</ScreenReaderContent>}
+            colSpacing="large"
+          >
+            <RadioInputGroup
+              onChange={(_event, value) => {
+                this.setState({ color: value })
+              }}
+              defaultValue="primary-inverse"
+              name="color"
+              description="Color version"
+            >
+              {['primary', 'primary-inverse'].map(part => <RadioInput key={part} value={part} label={part} />)}
+            </RadioInputGroup>
+
+
+            <RadioInputGroup
+              onChange={(_event, value) => {
+                this.setState({ focusColor: value })
+              }}
+              defaultValue="primary-inverse"
+              name="focusColor"
+              description="Focus color version"
+            >
+              {['primary', 'primary-inverse'].map(part => <RadioInput key={part} value={part} label={part} />)}
+            </RadioInputGroup>
+
+            <Checkbox
+              checked={this.state.withTrigger}
+              label="With toggle button"
+              variant="toggle"
+              onChange={
+                () => {
+                  this.setState({ withTrigger: !this.state.withTrigger })
+                }
+              }
+            />
+          </FormFieldGroup>
+        </Flex.Item>
+      </Flex>
+    )
+  }
+}
+
+render(<InverseColorExample />)
+```
+
 ### Pages
 
 The main building blocks of Drilldown are the `Drilldown.Pages`. These represent the layers of the structure and can contain Options, Separators and Groups. Each page has a "header" that can contain a page title, the back navigation and a "page action" option (see [Page header section](/#Drilldown/#page-header)).

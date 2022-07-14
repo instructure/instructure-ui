@@ -66,8 +66,8 @@ type DrilldownPageOwnProps = {
    * is the title of the previous page.
    */
   renderBackButtonLabel?:
-  | React.ReactNode
-  | ((prevPageTitle?: React.ReactNode) => React.ReactNode)
+    | React.ReactNode
+    | ((prevPageTitle?: React.ReactNode) => React.ReactNode)
 
   /**
    * Callback fired when the "action" option is clicked in the header
@@ -88,6 +88,16 @@ type DrilldownPageOwnProps = {
    * Is the page disabled
    */
   disabled?: boolean
+
+  /**
+   * Color variant
+   */
+  color?: 'primary' | 'primary-inverse'
+
+  /**
+   * Color variant of the focus ring
+   */
+  focusColor?: 'primary' | 'primary-inverse'
 }
 
 type PropKeys = keyof DrilldownPageOwnProps
@@ -110,7 +120,9 @@ const propTypes: PropValidators<PropKeys> = {
   onHeaderActionClicked: PropTypes.func,
   onBackButtonClicked: PropTypes.func,
   withoutHeaderSeparator: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  color: PropTypes.oneOf(['primary', 'primary-inverse']),
+  focusColor: PropTypes.oneOf(['primary', 'primary-inverse'])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -122,7 +134,9 @@ const allowedProps: AllowedPropKeys = [
   'onHeaderActionClicked',
   'onBackButtonClicked',
   'withoutHeaderSeparator',
-  'disabled'
+  'disabled',
+  'color',
+  'focusColor'
 ]
 
 export type { DrilldownPageProps, PageChildren }

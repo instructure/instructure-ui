@@ -53,6 +53,13 @@ const generateComponentTheme = (theme: Theme): OptionsItemTheme => {
     selectedLabelColor: colors?.textLightest,
     selectedBackground: colors?.backgroundDark,
 
+    colorInverse: colors?.textLightest,
+    backgroundInverse: colors?.backgroundDarkest,
+    highlightedLabelColorInverse: colors?.textDarkest,
+    highlightedBackgroundInverse: colors?.backgroundLightest,
+    selectedLabelColorInverse: colors?.textDarkest,
+    selectedBackgroundInverse: colors?.backgroundMedium,
+
     padding: `${spacing?.xSmall} ${spacing?.small}`,
     iconPadding: spacing?.small,
     nestedPadding: spacing?.small,
@@ -64,7 +71,8 @@ const generateComponentTheme = (theme: Theme): OptionsItemTheme => {
     descriptionFontWeight: typography.fontWeightNormal,
     descriptionLineHeight: typography.lineHeight,
     descriptionPaddingStart: '0.25em',
-    descriptionColor: colors.textDark
+    descriptionColor: colors.textDark,
+    descriptionColorInverse: colors.textLight
   }
 
   return {

@@ -38,6 +38,8 @@ const generateComponentTheme = (theme: Theme): OptionsTheme => {
 
     background: colors?.backgroundLightest,
     labelColor: colors?.textDarkest,
+    backgroundInverse: colors?.backgroundDarkest,
+    labelColorInverse: colors?.textLightest,
 
     labelPadding: `${spacing?.xSmall} 0`,
     nestedLabelPadding: `${spacing?.xSmall} ${spacing?.small}`

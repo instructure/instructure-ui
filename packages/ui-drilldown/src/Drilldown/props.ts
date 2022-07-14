@@ -108,6 +108,16 @@ type DrilldownOwnProps = {
   role?: string
 
   /**
+   * Color variant
+   */
+  color?: 'primary' | 'primary-inverse'
+
+  /**
+   * Color variant of the focus ring
+   */
+  focusColor?: 'primary' | 'primary-inverse'
+
+  /**
    * A function that returns a reference to root HTML element
    */
   elementRef?: (el: Element | null) => void
@@ -271,7 +281,10 @@ type DrilldownStyle = ComponentStyle<
   | 'optionContainer'
   | 'optionLabelInfo'
   | 'optionContent'
-> & { headerActionColor: string }
+> & {
+  headerActionColor: string
+  headerActionColorInverse: string
+}
 
 type DrilldownStyleProps = {
   hasHighlightedOption: boolean
@@ -294,6 +307,8 @@ const propTypes: PropValidators<PropKeys> = {
   rotateFocus: PropTypes.bool,
   as: PropTypes.elementType,
   role: PropTypes.string,
+  color: PropTypes.oneOf(['primary', 'primary-inverse']),
+  focusColor: PropTypes.oneOf(['primary', 'primary-inverse']),
   elementRef: PropTypes.func,
   drilldownRef: PropTypes.func,
   overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
@@ -333,6 +348,8 @@ const allowedProps: AllowedPropKeys = [
   'rotateFocus',
   'as',
   'role',
+  'color',
+  'focusColor',
   'overflowX',
   'overflowY',
   'height',

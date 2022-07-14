@@ -25,7 +25,11 @@
 import { matchComponentTypes } from '@instructure/ui-react-utils'
 
 import type { OptionsItemTheme } from '@instructure/shared-types'
-import type { OptionsItemProps, OptionsItemStyle } from './props'
+import type {
+  OptionsItemProps,
+  OptionsItemStyle,
+  OptionsItemStyleProps
+} from './props'
 
 /**
  * ---
@@ -39,7 +43,8 @@ import type { OptionsItemProps, OptionsItemStyle } from './props'
  */
 const generateStyle = (
   componentTheme: OptionsItemTheme,
-  props: OptionsItemProps
+  props: OptionsItemProps,
+  state: OptionsItemStyleProps
 ): OptionsItemStyle => {
   const {
     variant,
@@ -49,27 +54,73 @@ const generateStyle = (
     beforeLabelContentVAlign,
     afterLabelContentVAlign
   } = props
+  const { color } = state
 
   const containsList = matchComponentTypes(children, ['Options'])
 
   // used for label and description too
-  const variantVariants = {
-    highlighted: {
-      background: componentTheme.highlightedBackground,
-      color: componentTheme.highlightedLabelColor
+  const colorAndVariantMap = {
+    primary: {
+      default: {
+        background: componentTheme.background,
+        color: componentTheme.color
+      },
+      highlighted: {
+        background: componentTheme.highlightedBackground,
+        color: componentTheme.highlightedLabelColor
+      },
+      selected: {
+        background: componentTheme.selectedBackground,
+        color: componentTheme.highlightedLabelColor
+      },
+      disabled: {
+        background: componentTheme.background,
+        color: componentTheme.color,
+        cursor: 'not-allowed',
+        opacity: 0.5
+      },
+      'highlighted-disabled': {
+        background: componentTheme.highlightedBackground,
+        color: componentTheme.highlightedLabelColor,
+        cursor: 'not-allowed',
+        opacity: 0.5
+      }
     },
-    selected: {
-      background: componentTheme.selectedBackground,
-      color: componentTheme.highlightedLabelColor
+    'primary-inverse': {
+      default: {
+        background: componentTheme.backgroundInverse,
+        color: componentTheme.colorInverse
+      },
+      highlighted: {
+        background: componentTheme.highlightedBackgroundInverse,
+        color: componentTheme.highlightedLabelColorInverse
+      },
+      selected: {
+        background: componentTheme.selectedBackgroundInverse,
+        color: componentTheme.highlightedLabelColorInverse
+      },
+      disabled: {
+        background: componentTheme.backgroundInverse,
+        color: componentTheme.colorInverse,
+        cursor: 'not-allowed',
+        opacity: 0.6
+      },
+      'highlighted-disabled': {
+        background: componentTheme.highlightedBackgroundInverse,
+        color: componentTheme.highlightedLabelColorInverse,
+        cursor: 'not-allowed',
+        opacity: 0.6
+      }
+    }
+  }
+
+  const descriptionColorVariants = {
+    primary: {
+      color: componentTheme.descriptionColor
     },
-    disabled: { cursor: 'not-allowed', opacity: 0.5 },
-    ['highlighted-disabled']: {
-      background: componentTheme.highlightedBackground,
-      color: componentTheme.highlightedLabelColor,
-      cursor: 'not-allowed',
-      opacity: 0.5
-    },
-    default: {}
+    'primary-inverse': {
+      color: componentTheme.descriptionColorInverse
+    }
   }
 
   const getContentVAlign = (type: 'before' | 'after') => {
@@ -105,8 +156,6 @@ const generateStyle = (
   return {
     item: {
       label: 'optionItem',
-      background: componentTheme.background,
-      color: componentTheme.color,
       cursor: 'pointer',
       display: 'block',
       fontSize: componentTheme.fontSize,
@@ -117,7 +166,7 @@ const generateStyle = (
       position: 'relative',
       transition,
       userSelect: 'none',
-      ...variantVariants[variant!],
+      ...(color && colorAndVariantMap[color][variant!]),
       ...(containsList && { cursor: 'default' }),
 
       // for nested items
@@ -190,9 +239,10 @@ const generateStyle = (
       fontWeight: componentTheme.descriptionFontWeight,
       fontSize: componentTheme.descriptionFontSize,
       lineHeight: componentTheme.descriptionLineHeight,
-      color: componentTheme.descriptionColor,
-
-      ...variantVariants[variant!],
+      ...(color && {
+        ...descriptionColorVariants[color],
+        ...colorAndVariantMap[color][variant!]
+      }),
       background: 'none' // needed to clear variant background
     }
   }

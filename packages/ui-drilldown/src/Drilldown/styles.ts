@@ -88,7 +88,8 @@ const generateStyle = (
     },
 
     // we use it in the index file
-    headerActionColor: componentTheme.headerActionColor
+    headerActionColor: componentTheme.headerActionColor,
+    headerActionColorInverse: componentTheme.headerActionColorInverse
   }
 }
 
