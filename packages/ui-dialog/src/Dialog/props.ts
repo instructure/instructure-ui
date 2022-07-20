@@ -95,12 +95,12 @@ const propTypes: PropValidators<PropKeys> = {
    * the screen reader when the focus region is active
    */
   liveRegion: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.elementType),
+    PropTypes.elementType,
     PropTypes.func
   ]),
   /**
-   * When set to true or its an array that includes the 'keyboard' string,
+   * When set to true, or it is an array that includes the 'keyboard' string,
    * the keyboard and screenreader focus is trapped; when set to 'screenreader'
    * only the screenreader focus is trapped.
    */

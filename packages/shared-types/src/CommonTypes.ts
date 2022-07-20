@@ -58,7 +58,11 @@ export type Renderable<P = never> =
  * element, that represents the part of the DOM that is not hidden from the
  * screen reader
  */
-export type LiveRegion = (() => Element) | Element[] | Element
+export type LiveRegion =
+  | (() => Element[])
+  | (() => Element)
+  | Element[]
+  | Element
 
 interface InstUIBaseComponent {
   componentId?: string

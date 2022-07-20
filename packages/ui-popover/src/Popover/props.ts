@@ -308,8 +308,8 @@ const propTypes: PropValidators<PropKeys> = {
   mountNode: PositionPropTypes.mountNode,
   insertAt: PropTypes.oneOf(['bottom', 'top']),
   liveRegion: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.elementType),
+    PropTypes.elementType,
     PropTypes.func
   ]),
   id: PropTypes.string,
