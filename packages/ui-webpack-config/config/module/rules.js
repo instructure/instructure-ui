@@ -58,8 +58,12 @@ const rules = [
   },
   {
     // eslint-disable-next-line no-useless-escape
-    test: /\.(eot|woff2?|otf|svg|ttf)([\?]?.*)$/,
+    test: /\.(eot|woff2?|otf|ttf)([\?]?.*)$/,
     type: 'asset/resource'
+  },
+  {
+    test: /\.svg$/,
+    type: 'asset/source'
   },
   {
     test: /\.(png|jpg|jpeg|gif)$/,
