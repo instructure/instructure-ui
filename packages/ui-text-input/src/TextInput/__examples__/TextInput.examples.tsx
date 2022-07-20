@@ -82,5 +82,10 @@ export default {
       (props.placeholder && props.width) ||
       (props.size !== 'medium' && props.width)
     )
+  },
+  getParameters: () => {
+    return {
+      delay: 3000
+    }
   }
 } as StoryConfig<TextInputProps>

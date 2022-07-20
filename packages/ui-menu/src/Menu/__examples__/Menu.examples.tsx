@@ -83,6 +83,11 @@ export default {
     return (
       (!props.trigger || !props.withArrow) && props.placement !== 'top start'
     )
+  },
+  getParameters: () => {
+    return {
+      diffThreshold: 0.8
+    }
   }
 } as StoryConfig<MenuProps>
 
