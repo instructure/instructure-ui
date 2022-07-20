@@ -348,6 +348,7 @@ class Hero extends Component<HeroProps> {
             <Img
               src="https://instui-docs.s3.us-east-2.amazonaws.com/hero2.jpg"
               display="block"
+              rel="prefetch"
               constrain="cover"
               overlay={{
                 color: styles?.backgroundColor as string,
