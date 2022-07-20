@@ -225,8 +225,8 @@ const propTypes: PropValidators<PropKeys> = {
   mountNode: PropTypes.oneOfType([element, PropTypes.func]),
   insertAt: PropTypes.oneOf(['bottom', 'top']),
   liveRegion: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.elementType),
+    PropTypes.elementType,
     PropTypes.func
   ]),
   transition: transitionTypePropType,
