@@ -24,6 +24,7 @@
 
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import { Calendar } from '@instructure/ui-calendar'
 import { IconCalendarMonthLine } from '@instructure/ui-icons'
@@ -126,6 +127,10 @@ class DateInput extends Component {
      * Specifies the width of the input.
      */
     width: PropTypes.string,
+    /**
+     * Specifies the display property of the container.
+     */
+    display: PropTypes.oneOf(['inline-block', 'block']),
     /**
      * Provides a ref to the underlying input element.
      */
@@ -240,6 +245,7 @@ class DateInput extends Component {
     assistiveText: undefined,
     layout: 'stacked',
     width: null,
+    display: 'inline-block',
     inputRef: (el) => {},
     messages: undefined,
     placement: 'bottom center',
@@ -432,7 +438,7 @@ class DateInput extends Component {
   }
 
   render() {
-    const { placement, isShowingCalendar, assistiveText } = this.props
+    const { placement, isShowingCalendar, assistiveText, display } = this.props
 
     const { selectedDateId } = this
 
@@ -454,7 +460,14 @@ class DateInput extends Component {
           getOptionProps,
           getDescriptionProps
         }) => (
-          <span {...getRootProps({ className: styles.root })}>
+          <span
+            {...getRootProps({
+              className: classnames({
+                [styles.root]: true,
+                [styles[`display-${display}`]]: display
+              })
+            })}
+          >
             {this.renderInput({ getInputProps, getTriggerProps })}
             <span {...getDescriptionProps()} className={styles.assistiveText}>
               {assistiveText}

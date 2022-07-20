@@ -47,6 +47,7 @@ const generateDays = () => {
 }
 
 export default {
+  sectionProp: 'size',
   excludeProps: ['label'],
   propValues: {
     placement: [
@@ -89,6 +90,7 @@ export default {
     if (props.isInline && props.layout === 'inline') return true
     if (props.isShowingCalendar && props.interaction === 'disabled') return true
     if (props.isShowingCalendar && props.size !== 'medium') return true
+    if (props.isShowingCalendar && props.display !== 'inline-block') return true
     if (!props.isShowingCalendar && props.placement) return true
 
     return false
