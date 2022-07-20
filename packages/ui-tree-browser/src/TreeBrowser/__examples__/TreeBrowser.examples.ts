@@ -102,7 +102,7 @@ export default {
   },
   getParameters: () => {
     return {
-      chromatic: { delay: 1000 }
+      delay: 1000
     }
   }
 } as StoryConfig<TreeBrowserProps>
