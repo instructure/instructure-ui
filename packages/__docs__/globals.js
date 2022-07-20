@@ -43,7 +43,7 @@ import '@instructure/ui-icons/es/font/Line/InstructureIcons-Line.css'
 import { DateTime } from '@instructure/ui-i18n'
 
 // eslint-disable-next-line import/no-unresolved
-import iconExample from '!svg-inline-loader!./buildScripts/samplemedia/heart_lg.svg'
+import iconExample from './buildScripts/samplemedia/heart_lg.svg'
 import avatarSquare from './buildScripts/samplemedia/avatarSquare.jpg'
 import avatarPortrait from './buildScripts/samplemedia/avatarPortrait.jpg'
 import placeholderImage from './buildScripts/samplemedia/placeholder-image'
