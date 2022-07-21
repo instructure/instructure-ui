@@ -33,7 +33,8 @@ const {
 module.exports = async ({
   contentType, // e.g. 'package' or 'app'
   path: sourcePath, // the path where it will be created
-  name // e.g. 'myApp'
+  name, // e.g. 'myApp',
+  formatInstructions
 }) => {
   const pkgPath = require.resolve(
     `@instructure/template-${contentType}/package.json`
@@ -42,17 +43,21 @@ module.exports = async ({
 
   const dependencies = formatDependencies(pkg.dependencies)
   const pkgDependencies = Object.assign({}, pkg.devDependencies)
+  const devDependencies = formatDependencies(pkgDependencies)
+  const peerDependencies = formatDependencies({
+    dependencies: pkg.peerDependencies
+  })
+  const tsDependencies = formatTsDependencies(
+    pkg.dependencies,
+    pkg.devDependencies
+  )
+
   if (contentType === 'app') {
     mergeInDependencies(pkgDependencies, '@instructure/ui-babel-preset')
     mergeInDependencies(pkgDependencies, '@instructure/ui-eslint-config')
     mergeInDependencies(pkgDependencies, '@instructure/ui-stylelint-config')
     mergeInDependencies(pkgDependencies, '@instructure/ui-webpack-config')
   }
-  const devDependencies = formatDependencies(pkgDependencies)
-
-  const peerDependencies = formatDependencies({
-    dependencies: pkg.peerDependencies
-  })
 
   const template = path.join(path.dirname(pkgPath), 'template')
 
@@ -73,11 +78,13 @@ module.exports = async ({
       template,
       path: sourcePath,
       name,
+      formatInstructions,
       values: ({ name, version }) => ({
         NAME: name,
         VERSION: version,
         DEPENDENCIES: dependencies,
-        DEV_DEPENDENCIES: devDependencies
+        DEV_DEPENDENCIES: devDependencies,
+        TS_DEPENDENCIES: tsDependencies
       })
     })
   } else if (contentType === 'component') {
@@ -86,6 +93,7 @@ module.exports = async ({
       packageTemplate: template,
       path: sourcePath,
       name,
+      formatInstructions,
       values: ({ name, packageName, version }) => ({
         NAME: name,
         STYLE_NAME: name.charAt(0).toLowerCase() + name.substring(1),
@@ -104,6 +112,24 @@ const formatDependencies = (dependencies) => {
   return Object.keys(dependencies)
     .map((dependency) => `    "${dependency}": "${dependencies[dependency]}"`)
     .join(',\n')
+}
+
+const formatTsDependencies = (dependencies = {}, devDependencies = {}) => {
+  const deps = { ...dependencies, ...devDependencies }
+  const tsDeps = []
+
+  Object.keys(deps).forEach((dependency) => {
+    if (dependency.indexOf('@instructure/') > -1) {
+      tsDeps.push(
+        `    { "path": "../${dependency.replace(
+          '@instructure/',
+          ''
+        )}/tsconfig.build.json" }`
+      )
+    }
+  })
+
+  return tsDeps.join(',\n')
 }
 
 const mergeInDependencies = (currentDependencies, packageToMerge) => {

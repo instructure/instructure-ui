@@ -24,6 +24,7 @@
 
 const path = require('path')
 const yargsInteractive = require('yargs-interactive')
+const { info } = require('@instructure/command-utils')
 
 const Project = require('@lerna/project').Project
 
@@ -32,15 +33,17 @@ const handleCreateFromTemplate = require('./handleCreateFromTemplate')
 const promptContentName = require('../utils/promptContentName')
 
 module.exports = async (args) => {
-  const { path: sourcePath, packageSource, name } = args
+  const { path: sourcePath, packageSource, name, formatInstructions } = args
 
   const project = new Project(sourcePath)
   const packages = await project.getPackages()
 
+  info('This script is for internal use only!')
+
   const componentName = await promptContentName({
     name,
     contentType: 'component',
-    formatInstructions: ' (in PascalCase, e.g. NumberInput)'
+    formatInstructions
   })
 
   promptChooseHowToCreateComponent({

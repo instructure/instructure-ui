@@ -3,7 +3,6 @@
   "version": "<%= VERSION %>",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
@@ -14,12 +13,13 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
-    "clean": "ui-build --clean",
-    "build": "ui-build",
-    "build:watch": "ui-build --watch",
-    "build:types": "ui-scripts --types"
+    "lint": "run -T ui-test --lint",
+    "lint:fix": "run -T ui-test --lint --fix",
+    "clean": "run -T ui-build --clean",
+    "build": "run -T ui-build --modules es,cjs",
+    "build:watch": "yarn ts:check --watch & run -T ui-build --watch",
+    "build:types": "run -T tsc -p tsconfig.build.json",
+    "ts:check": "run -T tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "dependencies": {
@@ -27,6 +27,9 @@
   },
   "devDependencies": {
 <%= DEV_DEPENDENCIES %>
+  },
+  "peerDependencies": {
+    "react": ">=16.8 <=18"
   },
   "publishConfig": {
     "access": "public"

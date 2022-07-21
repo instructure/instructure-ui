@@ -81,7 +81,11 @@ Please update the documentation and examples with any changes.
 ### Adding a package
 
 1. Run `yarn generate:package` and choose a name for your package (use "kebab" case (dashes), e.g. 'my-package').
+1. Run `yarn` to update the lockfile.
+1. Add package reference in the root `tsconfig.references.json`.
 1. Add an alias for your package in `packages/__docs__/resolve.js`.
+1. Add the dependency in `packages/__docs__/package.json`.
+1. Add the reference in `packages/__docs__/tsconfig.build.json`.
 1. Stop the dev server (if you have it running), and run `yarn dev` to pick up the new package.
 1. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your package listed in the docs.
 

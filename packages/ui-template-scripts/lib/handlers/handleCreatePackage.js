@@ -30,13 +30,25 @@ const handleCreateFromTemplate = require('./handleCreateFromTemplate')
 const promptContentName = require('../utils/promptContentName')
 const getWorkspacePaths = require('../utils/getWorkspacePaths')
 
-module.exports = async ({ template, path, name, values } = {}) => {
+module.exports = async ({
+  template,
+  path,
+  name,
+  values,
+  formatInstructions
+} = {}) => {
   let inputPath = path
 
   const project = new Project(path)
   const version = project.version
 
-  const packageName = await promptContentName({ name, contentType: 'package' })
+  info('This script is for internal use only!')
+
+  const packageName = await promptContentName({
+    name,
+    contentType: 'package',
+    formatInstructions
+  })
 
   // No path provided, look at workspaces
   if (!inputPath) {
