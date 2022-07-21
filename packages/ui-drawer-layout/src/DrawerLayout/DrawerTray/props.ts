@@ -206,7 +206,7 @@ const propTypes: PropValidators<PropKeys> = {
   liveRegion: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.elementType),
     PropTypes.elementType,
-    PropTypes.number
+    PropTypes.func
   ]),
   onDismiss: PropTypes.func,
   shouldContainFocus: PropTypes.bool,
