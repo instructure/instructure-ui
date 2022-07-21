@@ -47,6 +47,7 @@ exports.builder = (yargs) => {
     })
   }
 
+  // TODO: remove create app script and any related code
   const appCommand = 'app'
   yargs.command(
     appCommand,
@@ -63,35 +64,50 @@ exports.builder = (yargs) => {
   )
 
   const packageCommand = 'package'
+  const packageFormatInstructions = ' (in kebab-case, e.g. my-package)'
   yargs.command(
     packageCommand,
-    'Create an Instructure UI package. DEPRECATED, this will be deleted in InstUI 9',
+    'Create an Instructure UI package. FOR INTERNAL USE ONLY!',
     (yargs) => {
       const options = { yargs, contentType: packageCommand }
       generatePathOption(options)
-      generateNameOption(options)
+      generateNameOption({
+        ...options,
+        formatInstructions: packageFormatInstructions
+      })
     },
     async (argv) => {
       const { name, path } = argv
-      handleCreate({ contentType: packageCommand, path, name })
+      handleCreate({
+        contentType: packageCommand,
+        path,
+        name,
+        formatInstructions: packageFormatInstructions
+      })
     }
   )
 
   const componentCommand = 'component'
+  const componentFormatInstructions = ' (in PascalCase, e.g. NumberInput)'
   yargs.command(
     componentCommand,
-    'Create an Instructure UI component. DEPRECATED, this will be deleted in InstUI 9',
+    'Create an Instructure UI component. FOR INTERNAL USE ONLY!',
     (yargs) => {
       const options = { yargs, contentType: componentCommand }
       generatePathOption(options)
       generateNameOption({
         ...options,
-        formatInstructions: ' (in PascalCase, e.g. NumberInput)'
+        formatInstructions: componentFormatInstructions
       })
     },
     async (argv) => {
       const { name, path } = argv
-      handleCreate({ contentType: componentCommand, path, name })
+      handleCreate({
+        contentType: componentCommand,
+        path,
+        name,
+        formatInstructions: componentFormatInstructions
+      })
     }
   )
 }

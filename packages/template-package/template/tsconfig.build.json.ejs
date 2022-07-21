@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./types",
+    "composite": true
+  },
+  "include": ["src"],
+  "references": [
+<%= TS_DEPENDENCIES %>
+  ]
+}
