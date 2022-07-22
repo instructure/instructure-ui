@@ -59,9 +59,9 @@ export type Renderable<P = never> =
  * screen reader
  */
 export type LiveRegion =
-  | (() => Element[])
-  | (() => Element)
-  | Element[]
+  | (() => (Element | null)[])
+  | (() => Element | null)
+  | (Element | null)[]
   | Element
   | null
 
