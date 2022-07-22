@@ -63,6 +63,7 @@ export type LiveRegion =
   | (() => Element)
   | Element[]
   | Element
+  | null
 
 interface InstUIBaseComponent {
   componentId?: string
