@@ -28,7 +28,7 @@ import { FocusRegionOptions } from './FocusRegionOptions'
 class ScreenReaderFocusRegion {
   private _parents: HTMLElement[] = []
   private _nodes: Element[] = []
-  private _liveRegion: (Element | undefined)[]
+  private _liveRegion: (Element | undefined | null)[]
   private _contextElement: Element | Node | null
   private _options: FocusRegionOptions
   private _observer: MutationObserver | null = null
