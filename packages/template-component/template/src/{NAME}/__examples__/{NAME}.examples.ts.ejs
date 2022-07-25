@@ -21,4 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { <%= NAME %> } from './<%= NAME %>'
+
+import type { StoryConfig } from '@instructure/ui-test-utils'
+
+import type { <%= NAME %>Props } from '../props'
+
+export default {
+  getComponentProps: () => {
+    return {
+      children: 'Hello world'
+    }
+  }
+} as StoryConfig<<%= NAME %>Props>

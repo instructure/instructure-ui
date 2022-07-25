@@ -22,26 +22,5 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { contrast } from '@instructure/ui-color-utils'
-
-import { canvas, canvasHighContrast } from '@instructure/ui-themes'
-import generateComponentTheme from '../theme'
-
-describe('<%= NAME %>.theme', () => {
-  describe('with the default theme', () => {
-    const variables = generateComponentTheme(canvas)
-
-    it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.background, variables.color)).to.be.above(3)
-    })
-  })
-
-  describe('with the high contrast canvas theme', () => {
-    const variables = generateComponentTheme(canvasHighContrast)
-
-    it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.background, variables.color)).to.be.above(4.5)
-    })
-  })
-})
+export { <%= NAME %> } from './<%= NAME %>'
+export type { <%= NAME %>Props } from './<%= NAME %>/props'

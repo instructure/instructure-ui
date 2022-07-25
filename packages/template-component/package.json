@@ -16,6 +16,7 @@
   "dependencies": {
     "@babel/runtime": "^7.13.10",
     "@instructure/emotion": "8.27.0",
+    "@instructure/shared-types": "8.27.0",
     "@instructure/ui-react-utils": "8.27.0",
     "@instructure/ui-testable": "8.27.0",
     "prop-types": "^15"

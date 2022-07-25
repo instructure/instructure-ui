@@ -44,9 +44,7 @@ module.exports = async ({
   const dependencies = formatDependencies(pkg.dependencies)
   const pkgDependencies = Object.assign({}, pkg.devDependencies)
   const devDependencies = formatDependencies(pkgDependencies)
-  const peerDependencies = formatDependencies({
-    dependencies: pkg.peerDependencies
-  })
+  const peerDependencies = formatDependencies(pkg.peerDependencies)
   const tsDependencies = formatTsDependencies(
     pkg.dependencies,
     pkg.devDependencies
@@ -84,6 +82,7 @@ module.exports = async ({
         VERSION: version,
         DEPENDENCIES: dependencies,
         DEV_DEPENDENCIES: devDependencies,
+        PEER_DEPENDENCIES: peerDependencies,
         TS_DEPENDENCIES: tsDependencies
       })
     })
@@ -101,7 +100,8 @@ module.exports = async ({
         VERSION: version,
         DEPENDENCIES: dependencies,
         DEV_DEPENDENCIES: devDependencies,
-        PEER_DEPENDENCIES: peerDependencies
+        PEER_DEPENDENCIES: peerDependencies,
+        TS_DEPENDENCIES: tsDependencies
       })
     })
   }

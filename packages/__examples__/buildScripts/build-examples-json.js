@@ -35,7 +35,12 @@ const projectRoot = path.resolve(__dirname, '../../')
 async function buildExamplesJSON() {
   const filesToParse = '**/src/**/*.examples.ts*'
   const files = path.resolve(projectRoot, filesToParse)
-  const ignorePaths = ['**/node_modules/**', '**/lib/**', '**/es/**']
+  const ignorePaths = [
+    '**/node_modules/**',
+    '**/lib/**',
+    '**/es/**',
+    '**/template/**'
+  ]
   const ignore = ignorePaths.map(
     (file) => '!' + path.resolve(projectRoot, file)
   )
