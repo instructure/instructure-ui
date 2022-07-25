@@ -1,0 +1,48 @@
+{
+  "private": true,
+  "name": "@instructure/ui-top-nav-bar",
+  "version": "8.27.0",
+  "description": "A UI component library made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "module": "./es/index.js",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "run -T ui-test --lint",
+    "lint:fix": "run -T ui-test --lint --fix",
+    "clean": "run -T ui-build --clean",
+    "build": "run -T ui-build --modules es,cjs",
+    "build:watch": "yarn ts:check --watch & run -T ui-build --watch",
+    "build:types": "run -T tsc -p tsconfig.build.json",
+    "ts:check": "run -T tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.13.10",
+    "@instructure/emotion": "8.27.0",
+    "@instructure/shared-types": "8.27.0",
+    "@instructure/ui-react-utils": "8.27.0",
+    "@instructure/ui-testable": "8.27.0",
+    "prop-types": "^15"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "8.27.0",
+    "@instructure/ui-color-utils": "8.27.0",
+    "@instructure/ui-test-locator": "8.27.0",
+    "@instructure/ui-test-utils": "8.27.0",
+    "@instructure/ui-themes": "8.27.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8 <=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false
+}

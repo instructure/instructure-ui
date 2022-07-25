@@ -86,6 +86,7 @@
     { "path": "../ui-time-select/tsconfig.build.json" },
     { "path": "../ui-toggle-details/tsconfig.build.json" },
     { "path": "../ui-tooltip/tsconfig.build.json" },
+    { "path": "../ui-top-nav-bar/tsconfig.build.json" },
     { "path": "../ui-tray/tsconfig.build.json" },
     { "path": "../ui-tree-browser/tsconfig.build.json" },
     { "path": "../ui-truncate-text/tsconfig.build.json" },

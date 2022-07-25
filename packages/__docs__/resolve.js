@@ -176,6 +176,10 @@ module.exports = {
       '../ui-toggle-details/src/'
     ),
     '@instructure/ui-tooltip$': path.resolve(__dirname, '../ui-tooltip/src/'),
+    '@instructure/ui-top-nav-bar$': path.resolve(
+      __dirname,
+      '../ui-top-nav-bar/src/'
+    ),
     '@instructure/ui-tray$': path.resolve(__dirname, '../ui-tray/src/'),
     '@instructure/ui-tree-browser$': path.resolve(
       __dirname,
