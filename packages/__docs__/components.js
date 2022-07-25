@@ -134,4 +134,5 @@ export {
 } from '@instructure/emotion'
 export { Drilldown } from '@instructure/ui-drilldown'
 export { SourceCodeEditor } from '@instructure/ui-source-code-editor'
+export { TopNavBar } from '@instructure/ui-top-nav-bar'
 export { canvas, canvasHighContrast, instructure } from '@instructure/ui-themes'

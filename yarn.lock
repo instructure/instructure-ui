@@ -4526,6 +4526,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@instructure/ui-top-nav-bar@8.27.0, @instructure/ui-top-nav-bar@workspace:packages/ui-top-nav-bar":
+  version: 0.0.0-use.local
+  resolution: "@instructure/ui-top-nav-bar@workspace:packages/ui-top-nav-bar"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@instructure/emotion": 8.27.0
+    "@instructure/shared-types": 8.27.0
+    "@instructure/ui-babel-preset": 8.27.0
+    "@instructure/ui-color-utils": 8.27.0
+    "@instructure/ui-react-utils": 8.27.0
+    "@instructure/ui-test-locator": 8.27.0
+    "@instructure/ui-test-utils": 8.27.0
+    "@instructure/ui-testable": 8.27.0
+    "@instructure/ui-themes": 8.27.0
+    prop-types: ^15
+  peerDependencies:
+    react: ">=16.8 <=18"
+  languageName: unknown
+  linkType: soft
+
 "@instructure/ui-tray@8.27.0, @instructure/ui-tray@workspace:packages/ui-tray":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-tray@workspace:packages/ui-tray"
@@ -15106,6 +15126,7 @@ __metadata:
     "@instructure/ui-time-select": 8.27.0
     "@instructure/ui-toggle-details": 8.27.0
     "@instructure/ui-tooltip": 8.27.0
+    "@instructure/ui-top-nav-bar": 8.27.0
     "@instructure/ui-tray": 8.27.0
     "@instructure/ui-tree-browser": 8.27.0
     "@instructure/ui-truncate-text": 8.27.0

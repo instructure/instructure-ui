@@ -1402,6 +1402,15 @@ export type TooltipTheme = {
   padding: Spacing['small']
 }
 
+export type TopNavBarTheme = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+
+  color: Colors['textDarkest']
+  background: Colors['backgroundLightest']
+}
+
 export type TrayTheme = {
   background: Colors['backgroundLightest']
   borderColor: Colors['borderMedium']
@@ -1666,6 +1675,7 @@ export interface ThemeVariables {
   TextInput: TextInputTheme
   ToggleDetails: ToggleDetailsTheme
   Tooltip: TooltipTheme
+  TopNavBar: TopNavBarTheme
   Tray: TrayTheme
   TreeBrowserButton: TreeBrowserButtonTheme
   'TreeBrowser.Button': TreeBrowserButtonTheme

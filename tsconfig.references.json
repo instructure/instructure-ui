@@ -99,6 +99,7 @@
     { "path": "./packages/ui-toggle-details/tsconfig.build.json" },
     { "path": "./packages/ui-token-scripts/tsconfig.build.json" },
     { "path": "./packages/ui-tooltip/tsconfig.build.json" },
+    { "path": "./packages/ui-top-nav-bar/tsconfig.build.json" },
     { "path": "./packages/ui-tray/tsconfig.build.json" },
     { "path": "./packages/ui-tree-browser/tsconfig.build.json" },
     { "path": "./packages/ui-truncate-text/tsconfig.build.json" },
