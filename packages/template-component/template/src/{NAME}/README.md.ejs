@@ -4,15 +4,18 @@ describes: <%= NAME %>
 
 A `<%= NAME %>` component [WIP]
 
-```javascript
+```js
 ---
 example: true
 render: false
 ---
-const Example = (props) => {
-  return (
-    <<%= NAME %>>Hello from <%= NAME %></<%= NAME %>>
-  )
+class Example extends React.Component {
+  render() {
+    return (
+      <<%= NAME %>>Hello from <%= NAME %></<%= NAME %>>
+    )
+  }
 }
-render(Example)
+
+render(<Example />)
 ```

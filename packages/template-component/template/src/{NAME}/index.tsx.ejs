@@ -24,14 +24,21 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 
-import { passthroughProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
+import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+import { propTypes, allowedProps } from './props'
+import type {
+  <%= NAME %>Props,
+  <%= NAME %>State,
+  <%= NAME %>StyleProps
+} from './props'
 
 /**
 ---
@@ -39,39 +46,64 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class <%= NAME %> extends Component {
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object,
+@testable()
+class <%= NAME %> extends Component<<%= NAME %>Props, <%= NAME %>State> {
+  static readonly componentId = '<%= NAME %>'
+
+  static propTypes = propTypes
+  static allowedProps = allowedProps
+  static defaultProps = {
     /**
-     * FIXME: description of the children prop goes here
+     * FIXME: defaultProps go here
      */
-    children: PropTypes.node,
-    elementRef: PropTypes.func
   }
 
-  static defaultProps = {
-    children: null,
-    elementRef: (el) => {}
+  ref: HTMLDivElement | Element | null = null
+
+  handleRef = (el: HTMLDivElement | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
+  constructor(props: <%= NAME %>Props) {
+    super(props)
+
+    this.state = {
+      /**
+       * FIXME: If needed, state goes here
+       */
+    }
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles?.(this.makeStylesVariables)
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles?.(this.makeStylesVariables)
+  }
+
+  get makeStylesVariables(): <%= NAME %>StyleProps {
+    return {
+      /**
+       * FIXME: If needed, props that gets passed to makeStyles come here
+       */
+    }
   }
 
   render () {
     const { children, elementRef, styles, ...props } = this.props
+
     return (
       <div
-        {...passthroughProps(props)}
-        ref={elementRef}
-        css={styles.<%= STYLE_NAME %>}
+        {...omitProps(props, allowedProps)}
+        ref={this.handleRef}
+        css={styles?.<%= STYLE_NAME %>}
       >
         {children}
       </div>

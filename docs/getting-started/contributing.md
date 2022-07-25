@@ -81,26 +81,48 @@ Please update the documentation and examples with any changes.
 ### Adding a package
 
 1. Run `yarn generate:package` and choose a name for your package (use "kebab" case (dashes), e.g. 'my-package').
-1. Run `yarn` to update the lockfile.
-1. Add package reference in the root `tsconfig.references.json`.
-1. Add an alias for your package in `packages/__docs__/resolve.js`.
-1. Add the dependency in `packages/__docs__/package.json`.
-1. Add the reference in `packages/__docs__/tsconfig.build.json`.
-1. Stop the dev server (if you have it running), and run `yarn dev` to pick up the new package.
-1. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your package listed in the docs.
+2. Run `yarn` to update the lockfile.
+3. Give a new package `description` in the `package.json` file.
+4. Add package reference in the root `tsconfig.references.json`.
+5. Register your package in the **docs app**:
+   1. Add an alias for your package in `packages/__docs__/resolve.js`.
+   2. Add the dependency in `packages/__docs__/package.json`.
+   3. Add the reference in `packages/__docs__/tsconfig.build.json`.
+6. Stop the dev server (if you have it running), and run `yarn dev` to pick up the new package.
+7. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your package listed in the docs.
 
 ### Adding a component
 
 1. Run `yarn generate:component` and choose a name for your component (use Pascal case: e.g., 'MyComponent').
-1. Choose to create a new package for your component, add it to an existing package, or create the component with no package.
-1. If you created a new package for your component, an export for the component will automatically be added to `packages/[package]/src/components/index.js`. If you're adding your component to an existing package, you will need to add the export manually.
-1. Run `yarn bootstrap` to generate the `es` and `lib` directories for your component.
-1. Add your component to `packages/__docs__/components.js`.
-1. If you created a new package for your component, add an alias for it in `packages/__docs__/resolve.js`.
-1. If you added your component to an existing package, confirm that the component's dependencies are listed in the package's `package.json`.
-1. Stop the dev server (if you have it running), and run `yarn dev` to pick up the new component.
-1. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your component listed in the docs.
-1. Start making changes to your component, and watch it update in the browser automatically.
+2. Choose to create a new package for your component, add it to an existing package, or create the component with no package.
+3. If you added the component to an **existing package**:
+   1. Don't forget to [add the new dependencies and devDependencies](/#contributing/#code-guidelines-adding-a-new-dependency) to the package.
+   2. List the new component in the package's `README.md` file under the `### Components` title (use other packages as reference when there is no "Components" block yet).
+   3. Export the component from the `packages/[package]/src/index.js` (`export { MyComponent } from './MyComponent'`)
+   4. Export the "Props type" from the `packages/[package]/src/index.js` (`export type { MyComponentProps } from './MyComponent/props'`)
+4. If you created a **new package** for your component:
+   1. Follow the setup steps 2-5 of [Adding a package](/#contributing/#code-guidelines-adding-a-package). Do not start the dev server yet.
+   2. The exports for the component and its Props type will be added automatically to `packages/[package]/src/index.js`.
+5. When adding a child component to another component, modify the child's `componentId` to be prefixed with the parent, e.g.: `MyComponent.Item`.
+6. [Register the components Theme type](/#contributing/#code-guidelines-registering-the-components-theme-type). For the initial setup, define the mock variables used in the `theme.js`.
+7. Run `yarn` to update the lockfile.
+8. Run `yarn bootstrap` to generate the `es`, `lib` and `types` directories for your component.
+9. Add your component to `packages/__docs__/components.js`.
+10. Stop the dev server (if you have it running), and run `yarn dev` to pick up the new component.
+11. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your component listed in the docs.
+12. Start making changes to your component, and watch it update in the browser automatically.
+13. Resolve all `FIXME` comments in the generated code (except in the `MyComponentLocator.ts`).
+
+### Adding a new dependency
+
+1. Add the new dependency or devDependency in the package's `package.json`.
+2. If the dependency is one of our own `@instructure/` packages, add it to the type references in the package's `tsconfig.build.json` too.
+
+### Registering the components Theme type
+
+1. Add the component theme type (`export type MyComponentTheme = {}`) in `packages/shared-types/src/ComponentThemeVariables.ts`.
+2. Add this new type to the `ThemeVariables` map in the same file (this is needed for the theme overrides to be typed well).
+3. When naming the theme for a subcomponent (e.g.: `MyComponent > Item`), prefix the name with its parent's name, e.g.: `MyComponentItemTheme`. In the `ThemeVariables`, register it both under its prefixed name (`MyComponentItem`) and under its componentId as well (`MyComponent.Item`).
 
 ### Accessibility and Internationalization Requirements
 
