@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
+
+### Bug Fixes
+
+- fix TS type and propType for liveRegion prop ([d0143ce](https://github.com/instructure/instructure-ui/commit/d0143ce1e3a252e79b6d7cb0aa1c6c63ec4fdc12))
+
+### Features
+
+- support React 18 ([0a2bf0c](https://github.com/instructure/instructure-ui/commit/0a2bf0cdd4d8bcec6e42a7ccf28a787e4a35bc40))
+
 ## [8.26.3](https://github.com/instructure/instructure-ui/compare/v8.26.2...v8.26.3) (2022-07-14)
 
 **Note:** Version bump only for package @instructure/ui-dialog

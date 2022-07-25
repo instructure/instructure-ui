@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
+
+### Bug Fixes
+
+- **ui-webpack-config:** `iconExample` is missing from SVGIcon and InlineSVG docs pages ([7ef6282](https://github.com/instructure/instructure-ui/commit/7ef62823dff36ce1b4855a2e5ffd9625e373685d))
+
 ## [8.26.3](https://github.com/instructure/instructure-ui/compare/v8.26.2...v8.26.3) (2022-07-14)
 
 **Note:** Version bump only for package @instructure/ui-webpack-config
