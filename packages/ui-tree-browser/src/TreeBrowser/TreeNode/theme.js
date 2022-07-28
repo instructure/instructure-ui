@@ -23,7 +23,7 @@
  */
 
 /**
- TODO: this file is copied as Node's theme, keep in sync!
+ TODO: this is a copy of the Button's theme, keep in sync!
  It needs to be copied instead of reused,
  otherwise it messes with theme overrides
 */

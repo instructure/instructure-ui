@@ -39,6 +39,8 @@ import theme from './theme'
 ---
 parent: TreeBrowser
 ---
+DO NOT use as standalone component!
+TreeBrowser generates all Collections and Buttons internally.
 **/
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
