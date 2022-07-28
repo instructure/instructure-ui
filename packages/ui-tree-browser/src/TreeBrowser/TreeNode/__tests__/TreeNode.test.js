@@ -32,7 +32,7 @@ import {
 } from '@instructure/ui-test-utils'
 
 import { TreeNode } from '../index'
-import styles from '../../TreeButton/styles.css'
+import styles from '../styles.css'
 
 const TreeNodeLocator = locator(TreeNode.selector)
 

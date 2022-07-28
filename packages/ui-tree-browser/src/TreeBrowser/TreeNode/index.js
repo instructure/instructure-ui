@@ -32,8 +32,8 @@ import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { isIE11 } from '@instructure/ui-utils'
 
-import styles from '../TreeButton/styles.css'
-import theme from '../TreeButton/theme'
+import styles from './styles.css'
+import theme from './theme'
 
 /**
 ---

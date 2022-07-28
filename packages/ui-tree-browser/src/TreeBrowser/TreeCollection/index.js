@@ -45,6 +45,8 @@ import theme from './theme'
 ---
 parent: TreeBrowser
 ---
+DO NOT use as standalone component!
+TreeBrowser generates all Collections and Buttons internally.
 **/
 
 @testable()

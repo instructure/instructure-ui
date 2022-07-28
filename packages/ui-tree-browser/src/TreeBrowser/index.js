@@ -34,6 +34,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
 import { TreeCollection } from './TreeCollection'
+import { TreeButton } from './TreeButton'
 import { TreeNode } from './TreeNode'
 
 import styles from './styles.css'
@@ -139,6 +140,8 @@ class TreeBrowser extends Component {
     treeLabel: undefined
   }
 
+  static Collection = TreeCollection
+  static Button = TreeButton
   static Node = TreeNode
 
   constructor(props) {
