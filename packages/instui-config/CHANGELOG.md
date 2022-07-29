@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.20.2](https://github.com/instructure/instructure-ui/compare/v7.20.1...v7.20.2) (2022-07-29)
+
+**Note:** Version bump only for package @instructure/instui-config
+
 ## [7.20.1](https://github.com/instructure/instructure-ui/compare/v7.20.0...v7.20.1) (2022-07-22)
 
 **Note:** Version bump only for package @instructure/instui-config
