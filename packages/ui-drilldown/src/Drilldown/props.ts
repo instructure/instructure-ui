@@ -27,10 +27,12 @@ import PropTypes from 'prop-types'
 
 import { Children, controllable } from '@instructure/ui-prop-types'
 import { PositionPropTypes } from '@instructure/ui-position'
+
 import { Popover } from '@instructure/ui-popover'
-import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
   PlacementPropValues,
   PositionConstraint,
@@ -122,6 +124,8 @@ type DrilldownOwnProps = {
   overflowY?: 'auto' | 'hidden' | 'visible'
   height?: string | number
   width?: string | number
+  minHeight?: string | number
+  minWidth?: string | number
   maxHeight?: string | number
   maxWidth?: string | number
 
@@ -300,6 +304,8 @@ const propTypes: PropValidators<PropKeys> = {
   overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -337,6 +343,8 @@ const allowedProps: AllowedPropKeys = [
   'overflowY',
   'height',
   'width',
+  'minHeight',
+  'minWidth',
   'maxHeight',
   'maxWidth',
 

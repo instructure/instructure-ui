@@ -605,6 +605,31 @@ describe('<Drilldown />', async () => {
     })
   })
 
+  describe('minWidth prop', async () => {
+    it('should set minWidth in popover mode', async () => {
+      await mount(
+        <Drilldown
+          rootPageId="page0"
+          minWidth="21rem"
+          trigger={<button>Trigger</button>}
+          show
+          onToggle={stub()}
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const popoverContent = await drilldown.findPopoverContent()
+      const container = await popoverContent.findSizableContainer()
+      const containerStyle = getComputedStyle(container.getDOMNode())
+
+      expect(containerStyle.width).to.equal('336px')
+    })
+  })
+
   describe('height prop', async () => {
     it('should set the height of the drilldown', async () => {
       await mount(
@@ -644,7 +669,7 @@ describe('<Drilldown />', async () => {
       expect(containerStyle.height).to.equal('320px')
     })
 
-    it('should be overruled by maxWidth prop', async () => {
+    it('should be overruled by maxHeight prop', async () => {
       await mount(
         <Drilldown rootPageId="page0" height="20rem" maxHeight="10rem">
           <Drilldown.Page id="page0">
@@ -660,7 +685,7 @@ describe('<Drilldown />', async () => {
       expect(containerStyle.height).to.equal('160px')
     })
 
-    it('should be affected by overflowX prop', async () => {
+    it('should be affected by overflowY prop', async () => {
       await mount(
         <Drilldown rootPageId="page0" height="10rem" overflowY="auto">
           <Drilldown.Page id="page0">
@@ -684,6 +709,47 @@ describe('<Drilldown />', async () => {
       expect(containerNode.scrollHeight > containerNode.clientHeight).to.equal(
         true
       )
+    })
+  })
+
+  describe('minHeight prop', async () => {
+    it('should set height', async () => {
+      await mount(
+        <Drilldown rootPageId="page0" minHeight="21rem">
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const container = await drilldown.findSizableContainer()
+      const containerStyle = getComputedStyle(container.getDOMNode())
+
+      expect(containerStyle.height).to.equal('336px')
+    })
+
+    it('should set height in popover mode', async () => {
+      await mount(
+        <Drilldown
+          rootPageId="page0"
+          minHeight="21rem"
+          trigger={<button>Trigger</button>}
+          show
+          onToggle={stub()}
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const drilldown = await DrilldownLocator.find()
+      const popoverContent = await drilldown.findPopoverContent()
+      const container = await popoverContent.findSizableContainer()
+      const containerStyle = getComputedStyle(container.getDOMNode())
+
+      expect(containerStyle.height).to.equal('336px')
     })
   })
 

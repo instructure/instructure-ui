@@ -1304,6 +1304,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       overflowX,
       height,
       width,
+      minHeight,
+      minWidth,
       maxHeight,
       maxWidth,
       role,
@@ -1353,6 +1355,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             position="relative"
             borderRadius="small"
             width={width}
+            minWidth={maxWidth}
             maxWidth={maxWidth}
             role={role}
             aria-label={label}
@@ -1391,6 +1394,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
               overflowX={overflowX}
               height={height}
               width={width}
+              minHeight={minHeight}
+              minWidth={minWidth}
               maxHeight={maxHeight}
               maxWidth={maxWidth}
               css={styles?.container}
