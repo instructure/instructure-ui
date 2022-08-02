@@ -23,4 +23,18 @@
  */
 
 export { Drilldown } from './Drilldown'
-export type { DrilldownProps } from './Drilldown/props'
+
+export type {
+  DrilldownProps,
+  PageChild as DrilldownPageChild,
+  GroupChild as DrilldownGroupChild,
+  OptionChild as DrilldownOptionChild,
+  SeparatorChild as DrilldownSeparatorChild
+} from './Drilldown/props'
+export type { DrilldownGroupProps } from './Drilldown/DrilldownGroup/props'
+export type { DrilldownOptionProps } from './Drilldown/DrilldownOption/props'
+export type {
+  DrilldownPageProps,
+  PageChildren as DrilldownPageChildren
+} from './Drilldown/DrilldownPage/props'
+export type { DrilldownSeparatorProps } from './Drilldown/DrilldownSeparator/props'
