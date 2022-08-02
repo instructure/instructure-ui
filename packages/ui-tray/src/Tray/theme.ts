@@ -44,7 +44,8 @@ const generateComponentTheme = (theme: Theme): TrayTheme => {
     regularWidth: breakpoints?.small,
     mediumWidth: breakpoints?.medium,
     largeWidth: breakpoints?.large,
-    zIndex: stacking?.topmost
+    zIndex: stacking?.topmost,
+    position: 'fixed'
   }
 
   return {
