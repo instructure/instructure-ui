@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 
 import { deepEqual } from '@instructure/ui-utils'
 import { logError as error, warn } from '@instructure/console'
@@ -56,12 +56,23 @@ class Responsive extends Component<ResponsiveProps> {
     match: 'element',
     props: null
   }
-  ref = createRef<HTMLDivElement>()
+
+  ref: HTMLDivElement | null = null
   _matchListener: { remove(): void } | null = null
 
   state: { matches: QueriesMatching; hasRendered: boolean } = {
     matches: [],
     hasRendered: false
+  }
+
+  handleRef = (el: HTMLDivElement | null) => {
+    const { elementRef } = this.props
+
+    this.ref = el
+
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
   }
 
   componentDidMount() {
@@ -180,7 +191,7 @@ class Responsive extends Component<ResponsiveProps> {
     }
 
     return (
-      <div ref={this.ref} style={{ display }}>
+      <div ref={this.handleRef} style={{ display }}>
         {renderFunc && renderFunc(this.mergeProps(matches, props), matches)}
       </div>
     )
