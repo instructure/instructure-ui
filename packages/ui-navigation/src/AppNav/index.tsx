@@ -123,8 +123,7 @@ class AppNav extends Component<AppNavProps> {
 
       const itemWidths = Array.from(this._list.getElementsByTagName('li')).map(
         (item) => {
-          // Todo: if item's type isn't `unknown`, can remove `Element`
-          const { width } = getBoundingClientRect(item as Element)
+          const { width } = getBoundingClientRect(item)
           return width
         }
       )

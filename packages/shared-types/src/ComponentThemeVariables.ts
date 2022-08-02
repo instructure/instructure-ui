@@ -1423,6 +1423,7 @@ export type TrayTheme = {
   mediumWidth: Breakpoints['medium']
   largeWidth: Breakpoints['large']
   zIndex: Stacking['topmost']
+  position: string
 }
 
 export type TreeBrowserButtonTheme = {

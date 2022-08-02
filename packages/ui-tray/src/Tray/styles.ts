@@ -129,7 +129,7 @@ const generateStyle = (
     tray: {
       label: 'tray',
       backgroundColor: componentTheme.background,
-      position: 'fixed',
+      position: componentTheme.position,
       overflowY: 'auto',
       overflowX: 'hidden',
       boxSizing: 'border-box',
