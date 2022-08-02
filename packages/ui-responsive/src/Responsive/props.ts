@@ -84,6 +84,11 @@ type ResponsiveOwnProps = {
    * You can override the display value with this prop.
    */
   display?: 'inline' | 'block' | 'inline-block' | 'flex' | 'inline-flex'
+
+  /**
+   * A function that returns a reference to root HTML element
+   */
+  elementRef?: (el: HTMLDivElement | null) => void
 }
 
 type PropKeys = keyof ResponsiveOwnProps
@@ -104,7 +109,8 @@ const propTypes: PropValidators<PropKeys> = {
     'inline-block',
     'flex',
     'inline-flex'
-  ])
+  ]),
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -113,7 +119,8 @@ const allowedProps: AllowedPropKeys = [
   'props',
   'render',
   'children',
-  'display'
+  'display',
+  'elementRef'
 ]
 
 export type {
