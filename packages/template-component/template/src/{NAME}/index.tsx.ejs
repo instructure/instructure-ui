@@ -97,11 +97,11 @@ class <%= NAME %> extends Component<<%= NAME %>Props, <%= NAME %>State> {
   }
 
   render () {
-    const { children, elementRef, styles, ...props } = this.props
+    const { children, styles } = this.props
 
     return (
       <div
-        {...omitProps(props, allowedProps)}
+        {...omitProps(this.props, allowedProps)}
         ref={this.handleRef}
         css={styles?.<%= STYLE_NAME %>}
       >
