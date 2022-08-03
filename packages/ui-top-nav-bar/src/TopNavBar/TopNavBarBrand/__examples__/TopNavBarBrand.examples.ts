@@ -22,30 +22,14 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { contrast } from '@instructure/ui-color-utils'
+import type { StoryConfig } from '@instructure/ui-test-utils'
 
-import { canvas, canvasHighContrast } from '@instructure/ui-themes'
-import generateComponentTheme from '../theme'
+import type { TopNavBarBrandProps } from '../props'
 
-describe('TopNavBar.theme', () => {
-  describe('with the default "canvas" theme', () => {
-    const variables = generateComponentTheme(canvas)
-
-    describe('default color', () => {
-      it('should have a background and text colors that meet 3:1 contrast', () => {
-        expect(contrast(variables.background, variables.color)).to.be.above(3)
-      })
-    })
-  })
-
-  describe('with the "canvas-high-contrast" theme', () => {
-    const variables = generateComponentTheme(canvasHighContrast)
-
-    describe('default color', () => {
-      it('should have a background and text colors that meet 4.5:1 contrast', () => {
-        expect(contrast(variables.background, variables.color)).to.be.above(4.5)
-      })
-    })
-  })
-})
+export default {
+  getComponentProps: () => {
+    return {
+      children: 'Hello world'
+    }
+  }
+} as StoryConfig<TopNavBarBrandProps>

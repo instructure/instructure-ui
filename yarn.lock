@@ -4533,13 +4533,25 @@ __metadata:
     "@babel/runtime": ^7.13.10
     "@instructure/emotion": 8.27.0
     "@instructure/shared-types": 8.27.0
+    "@instructure/ui-avatar": 8.27.0
     "@instructure/ui-babel-preset": 8.27.0
+    "@instructure/ui-buttons": 8.27.0
     "@instructure/ui-color-utils": 8.27.0
+    "@instructure/ui-dom-utils": 8.27.0
+    "@instructure/ui-drilldown": 8.27.0
+    "@instructure/ui-icons": 8.27.0
+    "@instructure/ui-link": 8.27.0
+    "@instructure/ui-position": 8.27.0
+    "@instructure/ui-prop-types": 8.27.0
     "@instructure/ui-react-utils": 8.27.0
+    "@instructure/ui-responsive": 8.27.0
     "@instructure/ui-test-locator": 8.27.0
     "@instructure/ui-test-utils": 8.27.0
     "@instructure/ui-testable": 8.27.0
     "@instructure/ui-themes": 8.27.0
+    "@instructure/ui-tray": 8.27.0
+    "@instructure/ui-utils": 8.27.0
+    "@instructure/ui-view": 8.27.0
     prop-types: ^15
   peerDependencies:
     react: ">=16.8 <=18"

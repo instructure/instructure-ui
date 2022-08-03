@@ -25,10 +25,23 @@
 /** @jsx jsx */
 import { Component } from 'react'
 
-import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+import { px } from '@instructure/ui-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
+
+import { Responsive } from '@instructure/ui-responsive'
+
+import { TopNavBarActionItems } from './TopNavBarActionItems'
+import { TopNavBarBrand } from './TopNavBarBrand'
+import { TopNavBarItem } from './TopNavBarItem'
+import { TopNavBarLayout } from './TopNavBarLayout'
+import { TopNavBarMenuItems } from './TopNavBarMenuItems'
+import { TopNavBarSmallViewportLayout } from './TopNavBarSmallViewportLayout'
+import { TopNavBarUser } from './TopNavBarUser'
+
+import { TopNavBarContext } from './TopNavBarContext'
+import type { TopNavBarLayouts } from './TopNavBarContext'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -39,6 +52,7 @@ import type {
   TopNavBarState,
   TopNavBarStyleProps
 } from './props'
+import { pickProps } from '@instructure/ui-react-utils'
 
 /**
 ---
@@ -51,12 +65,22 @@ category: components/WIP
 class TopNavBar extends Component<TopNavBarProps, TopNavBarState> {
   static readonly componentId = 'TopNavBar'
 
+  // TODO: mention in docs
+  static ActionItems = TopNavBarActionItems
+  static Brand = TopNavBarBrand
+  static Item = TopNavBarItem
+  static Layout = TopNavBarLayout
+  static MenuItems = TopNavBarMenuItems
+  static SmallViewportLayout = TopNavBarSmallViewportLayout
+  static User = TopNavBarUser
+
+  static contextType = TopNavBarContext
+
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    /**
-     * FIXME: defaultProps go here
-     */
+    breakpoint: 950, // TODO: what should be the default?
+    mediaQueryMatch: 'element'
   }
 
   ref: HTMLDivElement | Element | null = null
@@ -97,17 +121,58 @@ class TopNavBar extends Component<TopNavBarProps, TopNavBarState> {
     }
   }
 
+  get breakpoint() {
+    return px(this.props.breakpoint!)
+  }
+
+  get desktopLayout() {
+    const { renderLayout } = this.props
+
+    return renderLayout
+  }
+
+  get smallViewportLayout() {
+    const { renderSmallViewportLayout } = this.props
+
+    if (!renderSmallViewportLayout) {
+      return (
+        <TopNavBarSmallViewportLayout
+          {...pickProps(
+            this.desktopLayout.props,
+            TopNavBarSmallViewportLayout.allowedProps
+          )}
+        />
+      )
+    }
+
+    return renderSmallViewportLayout
+  }
+
   render() {
-    const { children, elementRef, styles, ...props } = this.props
+    const { mediaQueryMatch } = this.props
 
     return (
-      <div
-        {...omitProps(props, allowedProps)}
-        ref={this.handleRef}
-        css={styles?.topNavBar}
-      >
-        {children}
-      </div>
+      <Responsive
+        elementRef={this.handleRef}
+        match={mediaQueryMatch}
+        query={{
+          smallViewPort: { maxWidth: this.breakpoint - 1 },
+          desktop: { minWidth: this.breakpoint }
+        }}
+        render={(_props, matches) => {
+          const layout = matches
+            ? (matches[0] as TopNavBarLayouts)
+            : 'smallViewport'
+
+          return (
+            <TopNavBarContext.Provider value={{ layout }}>
+              {layout === 'desktop'
+                ? this.desktopLayout
+                : this.smallViewportLayout}
+            </TopNavBarContext.Provider>
+          )
+        }}
+      />
     )
   }
 }

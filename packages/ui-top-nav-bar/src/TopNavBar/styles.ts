@@ -47,11 +47,8 @@ const generateStyle = (
   return {
     topNavBar: {
       label: 'topNavBar',
-      fontSize: componentTheme.fontSize,
-      fontFamily: componentTheme.fontFamily,
-      fontWeight: componentTheme.fontWeight,
-      color: componentTheme.color,
-      background: componentTheme.background
+      fontFamily: componentTheme.fontFamily, // TODO: needed?
+      display: 'flex'
     }
   }
 }

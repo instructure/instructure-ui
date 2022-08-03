@@ -1403,10 +1403,52 @@ export type TooltipTheme = {
 }
 
 export type TopNavBarTheme = {
+  fontFamily: Typography['fontFamily']
+}
+
+export type TopNavBarActionItemsTheme = {
+  color: Colors['textDarkest']
+  background: Colors['backgroundLightest']
+}
+
+export type TopNavBarBrandTheme = {
+  color: Colors['textDarkest']
+  background: Colors['backgroundLightest']
+}
+
+export type TopNavBarLayoutTheme = {
+  color: Colors['textLightest']
+  background: Colors['backgroundDarkest']
+  height: string
+  zIndex: Stacking['topmost']
+}
+
+export type TopNavBarItemTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeight']
+  color: Colors['textLightest']
+  background: Colors['backgroundDarkest']
+  padding: Spacing['xxSmall']
+  itemSpacing: Spacing['small']
+  selectedIndicatorWidth: Border['widthMedium']
+  selectedIndicatorColor: Colors['textLightest']
+}
 
+export type TopNavBarMenuItemsTheme = {
+  color: Colors['textDarkest']
+  background: Colors['backgroundLightest']
+}
+
+export type TopNavBarSmallViewportLayoutTheme = {
+  color: Colors['textLight']
+  background: Colors['backgroundDarkest']
+  height: string
+  zIndex: Stacking['topmost']
+}
+
+export type TopNavBarUserTheme = {
   color: Colors['textDarkest']
   background: Colors['backgroundLightest']
 }
@@ -1677,6 +1719,20 @@ export interface ThemeVariables {
   ToggleDetails: ToggleDetailsTheme
   Tooltip: TooltipTheme
   TopNavBar: TopNavBarTheme
+  TopNavBarActionItems: TopNavBarActionItemsTheme
+  'TopNavBar.ActionItems': TopNavBarActionItemsTheme
+  TopNavBarBrand: TopNavBarBrandTheme
+  'TopNavBar.Brand': TopNavBarBrandTheme
+  TopNavBarLayout: TopNavBarLayoutTheme
+  'TopNavBar.Layout': TopNavBarLayoutTheme
+  TopNavBarItem: TopNavBarItemTheme
+  'TopNavBar.Item': TopNavBarItemTheme
+  TopNavBarMenuItems: TopNavBarMenuItemsTheme
+  'TopNavBar.MenuItems': TopNavBarMenuItemsTheme
+  TopNavBarSmallViewportLayout: TopNavBarSmallViewportLayoutTheme
+  'TopNavBar.SmallViewportLayout': TopNavBarSmallViewportLayoutTheme
+  TopNavBarUser: TopNavBarUserTheme
+  'TopNavBar.User': TopNavBarUserTheme
   Tray: TrayTheme
   TreeBrowserButton: TreeBrowserButtonTheme
   'TreeBrowser.Button': TreeBrowserButtonTheme

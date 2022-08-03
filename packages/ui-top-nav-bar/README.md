@@ -16,6 +16,7 @@ A UI component library made by Instructure Inc.
 The `ui-top-nav-bar` package contains the following:
 
 - [TopNavBar](#TopNavBar)
+- [TopNavBarItem](#TopNavBarItem)
 
 ### Installation
 

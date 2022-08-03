@@ -171,6 +171,7 @@ class Document extends Component<DocumentProps, DocumentState> {
     const { id, title } = doc
     const filteredDescription = description
       .replace('@tsProps', '')
+      .replace('@isWIP', '')
       .replace(/@module [a-zA-Z]+/g, '')
     return this.props.description ? (
       <Description
