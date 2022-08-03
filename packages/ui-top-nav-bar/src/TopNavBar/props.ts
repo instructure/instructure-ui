@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
+
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
@@ -32,11 +33,37 @@ import type {
   PropValidators
 } from '@instructure/shared-types'
 
+import { TopNavBarLayout } from './TopNavBarLayout'
+import { TopNavBarSmallViewportLayout } from './TopNavBarSmallViewportLayout'
+
+import type { ActionItemsChild } from './TopNavBarActionItems/props'
+import type { BrandChild } from './TopNavBarBrand/props'
+import type { ItemChild } from './TopNavBarItem/props'
+import type { LayoutChild } from './TopNavBarLayout/props'
+import type { MenuItemsChild } from './TopNavBarMenuItems/props'
+import type { SmallViewportLayoutChild } from './TopNavBarSmallViewportLayout/props'
+import type { UserChild } from './TopNavBarUser/props'
+
 type TopNavBarOwnProps = {
   /**
-   * FIXME: description of the children prop goes here
+   * TODO: description of the renderLayout prop goes here
    */
-  children?: React.ReactNode
+  renderLayout: LayoutChild
+
+  /**
+   * TODO: description of the renderSmallViewportLayout prop goes here
+   */
+  renderSmallViewportLayout?: SmallViewportLayoutChild
+
+  /**
+   * The breakpoint between desktop and small viewport mode
+   */
+  breakpoint?: string | number
+
+  /**
+   * Specifies if the underlying `<Responsive />` component should use element or media queries
+   */
+  mediaQueryMatch?: 'element' | 'media'
 
   /**
    * A function that returns a reference to root HTML element
@@ -63,16 +90,35 @@ type TopNavBarStyleProps = {
 }
 
 const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
+  renderLayout: ChildrenPropTypes.oneOf([TopNavBarLayout]).isRequired,
+  renderSmallViewportLayout: ChildrenPropTypes.oneOf([
+    TopNavBarSmallViewportLayout
+  ]),
+  breakpoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  mediaQueryMatch: PropTypes.oneOf(['element', 'media']),
   elementRef: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = ['children', 'elementRef']
+const allowedProps: AllowedPropKeys = [
+  'renderLayout',
+  'renderSmallViewportLayout',
+  'breakpoint',
+  'mediaQueryMatch',
+  'elementRef'
+]
 
 export type {
   TopNavBarProps,
   TopNavBarStyle,
   TopNavBarState,
-  TopNavBarStyleProps
+  TopNavBarStyleProps,
+  // Child types:
+  ActionItemsChild,
+  BrandChild,
+  LayoutChild,
+  ItemChild,
+  MenuItemsChild,
+  SmallViewportLayoutChild,
+  UserChild
 }
 export { propTypes, allowedProps }

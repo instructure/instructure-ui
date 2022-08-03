@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { Theme, ThemeSpecificStyle } from '@instructure/ui-themes'
+import type { Theme } from '@instructure/ui-themes'
 import type { TopNavBarTheme } from '@instructure/shared-types'
 
 /**
@@ -31,26 +31,15 @@ import type { TopNavBarTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): TopNavBarTheme => {
-  const { colors, typography, key: themeName } = theme
+  const { typography } = theme
 
-  const themeSpecificStyle: ThemeSpecificStyle<TopNavBarTheme> = {
-    canvas: {
-      /* FIXME: add theme specific styles here, or remove block when not needed */
-    }
-  }
-
-  const componentVariables = {
-    fontSize: typography?.fontSizeMedium,
-    fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightNormal,
-
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest
+  const componentVariables: TopNavBarTheme = {
+    // TODO: might not be needed
+    fontFamily: typography?.fontFamily
   }
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
+    ...componentVariables
   }
 }
 

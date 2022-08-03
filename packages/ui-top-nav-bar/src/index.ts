@@ -23,4 +23,7 @@
  */
 
 export { TopNavBar } from './TopNavBar'
+
 export type { TopNavBarProps } from './TopNavBar/props'
+export type { TopNavBarItemProps } from './TopNavBar/TopNavBarItem/props'
+// TODO: export subcomponent types
