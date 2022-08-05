@@ -93,6 +93,17 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   componentWillUnmount() {
     this.removeEventListeners()
   }
+  get padding() {
+    return 2
+  }
+
+  get movableHeight() {
+    return this.props.height - 2 * this.padding
+  }
+
+  get movableWidth() {
+    return this.props.width - 2 * this.padding
+  }
 
   get paletteWidth() {
     return this._paletteRef!.getBoundingClientRect().width
@@ -102,17 +113,18 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     return this._paletteRef!.getBoundingClientRect().height
   }
   calcSaturation = (position: number) =>
-    Math.round((position / this.paletteWidth) * 100) / 100
+    Math.round(((position - this.padding) / this.movableWidth) * 100) / 100
   calcLuminance = (position: number) =>
-    Math.round(((this.paletteHeight - position) / this.paletteHeight) * 100) /
-    100
+    Math.round(
+      ((this.paletteHeight - position - this.padding) / this.movableHeight) *
+        100
+    ) / 100
 
   calcPositionFromColor(hsv: HSVType) {
     const { s, v } = hsv
-    return {
-      x: s * this.paletteWidth,
-      y: this.paletteHeight - v * this.paletteHeight
-    }
+    const x = s * this.movableWidth + this.padding
+    const y = (1 - v) * this.movableHeight + this.padding
+    return { x, y }
   }
 
   handlePaletteMouseDown(e: React.MouseEvent<ViewOwnProps, MouseEvent>) {
@@ -148,17 +160,17 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   applyBoundaries(x: number, y: number) {
     let newXPosition = x
     let newYPosition = y
-    if (x > this.paletteWidth) {
-      newXPosition = this.paletteWidth
+    if (x > this.paletteWidth - this.padding) {
+      newXPosition = this.paletteWidth - this.padding
     }
-    if (x < 0) {
-      newXPosition = 0
+    if (x < this.padding) {
+      newXPosition = this.padding
     }
-    if (y > this.paletteHeight) {
-      newYPosition = this.paletteHeight
+    if (y > this.paletteHeight - this.padding) {
+      newYPosition = this.paletteHeight - this.padding
     }
-    if (y < 0) {
-      newYPosition = 0
+    if (y < this.padding) {
+      newYPosition = this.padding
     }
     return { newXPosition, newYPosition }
   }
