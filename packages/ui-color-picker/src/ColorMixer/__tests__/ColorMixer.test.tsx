@@ -29,11 +29,10 @@ import {
   mount,
   stub
 } from '@instructure/ui-test-utils'
-
+import { deepEqual } from '@instructure/ui-utils'
 import { ColorMixer } from '../'
 import { ColorMixerLocator } from '../ColorMixerLocator'
-import { colorToHex8 } from '@instructure/ui-color-utils'
-import type { ColorMixerProps } from '../props'
+import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
 // import ColorMixerExamples from '../__examples__/ColorMixer.examples'
 
 const testValue = {
@@ -172,9 +171,10 @@ describe('<ColorMixer />', () => {
     })
 
     it('mount with 3-character hex color', async () => {
+      const colorInput = '#abc'
       await mount(
         <ColorMixer
-          value="#abc"
+          value={colorInput}
           {...testInputLabels}
           {...testScreenReaderLabels}
           withAlpha
@@ -187,14 +187,60 @@ describe('<ColorMixer />', () => {
       const [r, g, b, a] = await inputs.map((input) =>
         Number(input.getAttribute('value'))
       )
-      const colorHex = colorToHex8({ r, g, b, a: a / 100 })
-      expect(colorHex).to.be.eq('#AABBCCFF')
+      const rgba = colorToRGB(colorInput)
+      rgba.a = Math.round(rgba.a * 100)
+      expect(deepEqual(rgba, { r, g, b, a })).to.be.true()
+    })
+
+    it('mount with 4-character hex color', async () => {
+      const colorInput = '#abcd'
+      await mount(
+        <ColorMixer
+          value={colorInput}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          withAlpha
+          onChange={stub()}
+        />
+      )
+
+      const component = await ColorMixerLocator.find()
+      const inputs = await component.findAll('input')
+      const [r, g, b, a] = await inputs.map((input) =>
+        Number(input.getAttribute('value'))
+      )
+      const rgba = colorToRGB(colorInput)
+      rgba.a = Math.round(rgba.a * 100)
+      expect(deepEqual(rgba, { r, g, b, a })).to.be.true()
+    })
+
+    it('mount with 8-character hex color', async () => {
+      const colorInput = '#abcdefaa'
+      await mount(
+        <ColorMixer
+          value={colorInput}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          withAlpha
+          onChange={stub()}
+        />
+      )
+
+      const component = await ColorMixerLocator.find()
+      const inputs = await component.findAll('input')
+      const [r, g, b, a] = await inputs.map((input) =>
+        Number(input.getAttribute('value'))
+      )
+      const rgba = colorToRGB(colorInput)
+      rgba.a = Math.round(rgba.a * 100)
+      expect(deepEqual(rgba, { r, g, b, a })).to.be.true()
     })
 
     it('mount with 6-character hex color', async () => {
+      const colorInput = '#abcdef'
       await mount(
         <ColorMixer
-          value="#abcdef"
+          value={colorInput}
           {...testInputLabels}
           {...testScreenReaderLabels}
           withAlpha
@@ -207,8 +253,9 @@ describe('<ColorMixer />', () => {
       const [r, g, b, a] = await inputs.map((input) =>
         Number(input.getAttribute('value'))
       )
-      const colorHex = colorToHex8({ r, g, b, a: a / 100 })
-      expect(colorHex).to.be.eq('#ABCDEFFF')
+      const rgba = colorToRGB(colorInput)
+      rgba.a = Math.round(rgba.a * 100)
+      expect(deepEqual(rgba, { r, g, b, a })).to.be.true()
     })
 
     it('mount with invalid hex color', async () => {
@@ -313,7 +360,7 @@ describe('<ColorMixer />', () => {
         const hueSlider = await component.findColorSlider()
         const rect = hueSlider.getBoundingClientRect()
         await hueSlider.mouseDown({ clientX: rect.x })
-        expect(onChange).to.have.been.called()
+        expect(onChange).to.have.been.calledTwice()
       })
 
       it('click at the outside of the slider to the left', async () => {
@@ -419,7 +466,7 @@ describe('<ColorMixer />', () => {
       expect(onChange).to.have.been.calledTwice()
     })
 
-    it('the hue indicator move left when receive "a" key is pressed', async () => {
+    it('the hue indicator move left when "a" key is pressed', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -439,7 +486,7 @@ describe('<ColorMixer />', () => {
       expect(pos_2.x).to.be.lt(pos_1.x)
     })
 
-    it('the hue indicator move left when receive "ArrowLeft" key is pressed', async () => {
+    it('the hue indicator move left when "ArrowLeft" key is pressed', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -459,7 +506,7 @@ describe('<ColorMixer />', () => {
       expect(pos_2.x).to.be.lt(pos_1.x)
     })
 
-    it('the hue indicator move right when receive "ArrowRight" key is pressed', async () => {
+    it('the hue indicator move right when "ArrowRight" key is pressed', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -479,7 +526,7 @@ describe('<ColorMixer />', () => {
       expect(pos_2.x).to.be.gt(pos_1.x)
     })
 
-    it('the hue indicator move right when receive "d" key is pressed', async () => {
+    it('the hue indicator move right when "d" key is pressed', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -697,7 +744,7 @@ describe('<ColorMixer />', () => {
       })
     })
 
-    it('shoul not call onChange when the component is disabled', async () => {
+    it('should not call onChange when the component is disabled', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -1144,7 +1191,7 @@ describe('<ColorMixer />', () => {
           const component = await ColorMixerLocator.find()
           const palette = await component.find('[aria-label*="color palette"]')
           await palette.keyDown(keyEvent)
-          // we use `calledTwice` because it is called first time when passing  `testValue` color
+          // use `calledTwice` because it is called first time when passing  `testValue` color
           expect(onChange).to.have.been.calledTwice()
         })
       })
@@ -1527,7 +1574,41 @@ describe('<ColorMixer />', () => {
   })
 
   describe('color input', () => {
-    it('shoul not call oncChange when `disabled` is set and get the input', async () => {
+    it('the alpha input exsits when `withAlpha` is set', async () => {
+      await mount(
+        <ColorMixer
+          withAlpha
+          {...testValue}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={stub()}
+        />
+      )
+
+      const component = await ColorMixerLocator.find()
+      const RGBAInput = await component.find('[class*="RGBAInput"]')
+      const alphaInput = await RGBAInput.find('[class*="-RGBAInput__aInput"]')
+      expect(alphaInput).to.exist()
+    })
+
+    it('the alpha input does not exsit when `withAlpha` is not set', async () => {
+      await mount(
+        <ColorMixer
+          {...testValue}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={stub()}
+        />
+      )
+      const component = await ColorMixerLocator.find()
+      const RGBAInput = await component.find('[class*="RGBAInput"]')
+      const alphaInput = await RGBAInput.find('[class*="-RGBAInput__aInput"]', {
+        expectEmpty: true
+      })
+      expect(alphaInput).to.not.exist()
+    })
+
+    it('should not call oncChange when `disabled` is set and get the input', async () => {
       const fakeValue = '234234'
       const onChange = stub()
       await mount(
