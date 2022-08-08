@@ -22,8 +22,26 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-locator'
+import { find } from '@instructure/ui-test-utils'
 
 import { ColorMixer } from './index'
 
+const customMethos = {
+  findTextInput: (...args: any[]) => {
+    return find('[id^=TextInput_]', ...args)
+  },
+  findColorPalette: (...args: any[]) => {
+    return find('[aria-label*="color palette"]', ...args)
+  },
+  findColorSlider: (...args: any[]) => {
+    return find('[aria-label*="color slider"]', ...args)
+  },
+  findAlphaSlider: (...args: any[]) => {
+    return find('[aria-label*="alpha slider"]', ...args)
+  },
+  findIndicator: (...args: any[]) => {
+    return find('[clas*=__indicator]', ...args)
+  }
+}
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const ColorMixerLocator = locator(ColorMixer.selector)
+export const ColorMixerLocator = locator(ColorMixer.selector, customMethos)
