@@ -144,6 +144,11 @@ type PopoverOwnProps = {
   positionTarget?: PositionMountNode
 
   /**
+   * Set the CSS `display` property on the `<span>` container element of the underlying Position component
+   */
+  positionContainerDisplay?: 'inline-block' | 'block'
+
+  /**
    * Insert the element at the 'top' of the mountNode or at the 'bottom'
    */
   insertAt?: 'bottom' | 'top'
@@ -305,6 +310,7 @@ const propTypes: PropValidators<PropKeys> = {
   offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   constrain: PositionPropTypes.constrain,
   positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
+  positionContainerDisplay: PropTypes.oneOf(['inline-block', 'block']),
   mountNode: PositionPropTypes.mountNode,
   insertAt: PropTypes.oneOf(['bottom', 'top']),
   liveRegion: PropTypes.oneOfType([
@@ -353,6 +359,7 @@ const allowedProps: AllowedPropKeys = [
   'offsetY',
   'constrain',
   'positionTarget',
+  'positionContainerDisplay',
   'mountNode',
   'insertAt',
   'liveRegion',
