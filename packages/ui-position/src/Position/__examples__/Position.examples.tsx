@@ -68,6 +68,7 @@ export default {
       constrain: 'none',
       shouldTrackPosition: false,
       insertAt: 'bottom',
+      containerDisplay: undefined,
       shouldPositionOverTarget: xStretch || yStretch,
       offsetX: yStretch ? -parseInt(targetSize) : 0,
       offsetY: xStretch ? -parseInt(targetSize) : 0,

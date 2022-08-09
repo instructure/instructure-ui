@@ -108,6 +108,7 @@
   "@instructure/ui-tooltip",
   "@instructure/ui-tray",
   "@instructure/ui-tree-browser",
+  "@instructure/ui-truncate-list",
   "@instructure/ui-truncate-text",
   "@instructure/ui-utils",
   "@instructure/ui-view",

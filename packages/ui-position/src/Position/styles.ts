@@ -23,7 +23,7 @@
  */
 
 import type { PositionTheme } from '@instructure/shared-types'
-import type { PositionStyle } from './props'
+import type { PositionProps, PositionStyle } from './props'
 
 /**
  * ---
@@ -35,8 +35,15 @@ import type { PositionStyle } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: PositionTheme): PositionStyle => {
+const generateStyle = (
+  componentTheme: PositionTheme,
+  props: PositionProps
+): PositionStyle => {
   return {
+    position: {
+      label: 'position',
+      display: props.containerDisplay
+    },
     zIndex: componentTheme.zIndex
   }
 }

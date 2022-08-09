@@ -637,4 +637,71 @@ describe('<Position />', async () => {
       })
     })
   })
+
+  describe('containerDisplay prop', async () => {
+    it('should be <span> default when unset', async () => {
+      await mount(
+        <div style={{ padding: '50px' }}>
+          <div style={{ ...parentDefaults }}>
+            <Position constrain="window" renderTarget={<button>Target</button>}>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </Position>
+          </div>
+        </div>
+      )
+
+      const position = await PositionLocator.find()
+      const style = getComputedStyle(position.getDOMNode())
+
+      expect(style.display).to.equal('inline')
+    })
+
+    it('should apply "inline-block"', async () => {
+      await mount(
+        <div style={{ padding: '50px' }}>
+          <div style={{ ...parentDefaults }}>
+            <Position
+              constrain="window"
+              renderTarget={<button>Target</button>}
+              containerDisplay="inline-block"
+            >
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </Position>
+          </div>
+        </div>
+      )
+
+      const position = await PositionLocator.find()
+      const style = getComputedStyle(position.getDOMNode())
+
+      expect(style.display).to.equal('inline-block')
+    })
+
+    it('should apply "block"', async () => {
+      await mount(
+        <div style={{ padding: '50px' }}>
+          <div style={{ ...parentDefaults }}>
+            <Position
+              constrain="window"
+              renderTarget={<button>Target</button>}
+              containerDisplay="block"
+            >
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </Position>
+          </div>
+        </div>
+      )
+
+      const position = await PositionLocator.find()
+      const style = getComputedStyle(position.getDOMNode())
+
+      expect(style.display).to.equal('block')
+    })
+  })
 })
