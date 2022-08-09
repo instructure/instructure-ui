@@ -272,6 +272,23 @@ describe('<Popover />', async () => {
       expect(onHideContent).to.have.been.calledOnce()
     })
   })
+
+  it('should pass positionContainerDisplay prop to Position', async () => {
+    await mount(
+      <Popover
+        on="click"
+        renderTrigger={<button>Click Me</button>}
+        positionContainerDisplay="block"
+      >
+        <h2>Foo Bar Baz</h2>
+      </Popover>
+    )
+
+    const popover = await PopoverLocator.find(':label(Click Me)')
+    const style = getComputedStyle(popover.getDOMNode())
+
+    expect(style.display).to.equal('block')
+  })
 })
 
 function testShowContent(

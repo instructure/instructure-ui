@@ -288,6 +288,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
       onPositioned: this.handlePositioned,
       onPositionChanged: this.handlePositionChanged,
       target: this.props.positionTarget,
+      containerDisplay: this.props.positionContainerDisplay,
       mountNode: this.props.mountNode,
       id: this._id
     }

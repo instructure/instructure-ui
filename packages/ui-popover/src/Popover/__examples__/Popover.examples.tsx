@@ -37,6 +37,7 @@ export default {
     dir: ['rtl', 'ltr']
   },
   excludeProps: [
+    'positionContainerDisplay',
     'shouldCloseOnDocumentClick',
     'shouldCloseOnEscape',
     'shouldReturnFocus',
