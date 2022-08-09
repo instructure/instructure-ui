@@ -144,6 +144,10 @@ type MenuOwnProps = {
    */
   shouldFocusTriggerOnClose?: boolean
   /**
+   * If a trigger is supplied, this prop can set the CSS `display` property on the `<span>` container element of the underlying Position component
+   */
+  positionContainerDisplay?: 'inline-block' | 'block'
+  /**
    * The type of `<Menu />`
    */
   type?: 'flyout'
@@ -203,6 +207,7 @@ const propTypes: PropValidators<PropKeys> = {
   constrain: PositionPropTypes.constrain,
   shouldHideOnSelect: PropTypes.bool,
   shouldFocusTriggerOnClose: PropTypes.bool,
+  positionContainerDisplay: PropTypes.oneOf(['inline-block', 'block']),
   type: PropTypes.oneOf(['flyout']),
   id: PropTypes.string,
   withArrow: PropTypes.bool,
@@ -231,6 +236,7 @@ const allowedProps: AllowedPropKeys = [
   'constrain',
   'shouldHideOnSelect',
   'shouldFocusTriggerOnClose',
+  'positionContainerDisplay',
   'type',
   'id',
   'withArrow',
