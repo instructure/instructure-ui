@@ -115,6 +115,11 @@ type PositionOwnProps = {
   children?: React.ReactNode
 
   /**
+   * Set the CSS `display` property on the outermost `<span>` container element
+   */
+  containerDisplay?: 'inline-block' | 'block'
+
+  /**
    * Provides a reference to the underlying HTML root element (the target)
    */
   elementRef?: (element: Element | null) => void
@@ -124,7 +129,7 @@ type PositionState = {
   positioned: boolean
 } & ElementPosition
 
-type PositionStyle = ComponentStyle<'zIndex'>
+type PositionStyle = ComponentStyle<'position' | 'zIndex'>
 
 type PositionObject = ElementPosition['style'] & {
   placement: ElementPosition['placement']
@@ -153,6 +158,7 @@ const propTypes: PropValidators<PropKeys> = {
   onPositionChanged: PropTypes.func,
   onPositioned: PropTypes.func,
   children: PropTypes.node,
+  containerDisplay: PropTypes.oneOf(['inline-block', 'block']),
   elementRef: PropTypes.func
 }
 
@@ -171,6 +177,7 @@ const allowedProps: AllowedPropKeys = [
   'onPositionChanged',
   'onPositioned',
   'children',
+  'containerDisplay',
   'elementRef'
 ]
 
