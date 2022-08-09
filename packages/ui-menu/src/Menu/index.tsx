@@ -465,6 +465,7 @@ class Menu extends Component<MenuProps> {
       onDismiss,
       onFocus,
       onMouseOver,
+      positionContainerDisplay,
       offsetX,
       offsetY
     } = this.props
@@ -489,6 +490,7 @@ class Menu extends Component<MenuProps> {
         shouldReturnFocus
         onFocus={onFocus}
         onMouseOver={onMouseOver}
+        positionContainerDisplay={positionContainerDisplay}
         offsetX={offsetX}
         offsetY={offsetY}
         elementRef={(element) => {

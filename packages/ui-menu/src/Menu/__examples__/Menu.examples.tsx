@@ -37,6 +37,7 @@ export default {
   maxExamples: 200,
   excludeProps: [
     'defaultShow',
+    'positionContainerDisplay',
     'shouldFocusTriggerOnClose',
     'shouldHideOnSelect'
   ],

@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
+
 import {
   expect,
   mount,
@@ -30,6 +32,8 @@ import {
   wait,
   wrapQueryResult
 } from '@instructure/ui-test-utils'
+
+import { Popover } from '@instructure/ui-popover'
 
 import { Menu, MenuItem, MenuItemSeparator } from '../index'
 
@@ -391,6 +395,26 @@ describe('<Menu />', async () => {
       const trigger = await menu.findPopoverTrigger(':label(More)')
 
       expect(trigger.getAttribute('aria-haspopup')).to.exist()
+    })
+
+    it('should pass positionContainerDisplay prop to Popover', async () => {
+      let popoverRef: Popover | null = null
+      await mount(
+        <Menu
+          trigger={<button>More</button>}
+          popoverRef={(e) => {
+            popoverRef = e
+          }}
+          positionContainerDisplay="block"
+        >
+          <MenuItem>Learning Mastery</MenuItem>
+          <MenuItem disabled>Gradebook</MenuItem>
+        </Menu>
+      )
+
+      const popoverProps = popoverRef!.props
+
+      expect(popoverProps.positionContainerDisplay).to.equal('block')
     })
 
     describe('for a11y', async () => {
