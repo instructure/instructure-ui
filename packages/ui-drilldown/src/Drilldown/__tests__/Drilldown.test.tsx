@@ -1209,6 +1209,30 @@ describe('<Drilldown />', async () => {
     })
   })
 
+  describe('positionContainerDisplay prop', async () => {
+    it('should be passed to Popover', async () => {
+      let popoverRef: Popover | null = null
+      await mount(
+        <Drilldown
+          rootPageId="page0"
+          trigger={<button>Toggle</button>}
+          popoverRef={(e) => {
+            popoverRef = e
+          }}
+          positionContainerDisplay="block"
+        >
+          <Drilldown.Page id="page0">
+            <Drilldown.Option id="option01">Option</Drilldown.Option>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+
+      const popoverProps = popoverRef!.props
+
+      expect(popoverProps.positionContainerDisplay).to.equal('block')
+    })
+  })
+
   describe('shouldHideOnSelect prop', async () => {
     it('should be true by default', async () => {
       await mount(

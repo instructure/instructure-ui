@@ -217,6 +217,11 @@ type DrilldownOwnProps = {
   positionTarget?: PositionMountNode
 
   /**
+   * If a trigger is supplied, this prop can set the CSS `display` property on the `<span>` container element of the underlying Position component
+   */
+  positionContainerDisplay?: 'inline-block' | 'block'
+
+  /**
    * The parent in which to constrain the placement.
    */
   constrain?: PositionConstraint
@@ -321,6 +326,7 @@ const propTypes: PropValidators<PropKeys> = {
   popoverRef: PropTypes.func,
   mountNode: PositionPropTypes.mountNode,
   positionTarget: PositionPropTypes.mountNode,
+  positionContainerDisplay: PropTypes.oneOf(['inline-block', 'block']),
   constrain: PositionPropTypes.constrain,
   shouldHideOnSelect: PropTypes.bool,
   shouldContainFocus: PropTypes.bool,
@@ -363,6 +369,7 @@ const allowedProps: AllowedPropKeys = [
   'popoverRef',
   'mountNode',
   'positionTarget',
+  'positionContainerDisplay',
   'constrain',
   'shouldHideOnSelect',
   'shouldContainFocus',

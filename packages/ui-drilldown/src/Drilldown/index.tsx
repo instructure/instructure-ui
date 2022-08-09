@@ -1430,6 +1430,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       mountNode,
       constrain,
       positionTarget,
+      positionContainerDisplay,
       popoverRef,
       disabled,
       onDismiss,
@@ -1456,6 +1457,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         placement={placement}
         withArrow={withArrow}
         positionTarget={positionTarget}
+        positionContainerDisplay={positionContainerDisplay}
         constrain={constrain}
         shouldContainFocus={shouldContainFocus}
         shouldReturnFocus={shouldReturnFocus}
