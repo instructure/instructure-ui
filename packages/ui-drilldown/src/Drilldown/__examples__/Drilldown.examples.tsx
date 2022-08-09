@@ -177,6 +177,18 @@ export default {
         defaultShow: true,
         width: '20rem',
         height: '20rem'
+      },
+      {
+        text: 'with display="block" container',
+        trigger: (
+          <button key={1} style={{ margin: '30px auto', width: '100%' }}>
+            a drilldown trigger
+          </button>
+        ),
+        defaultShow: false,
+        width: '20rem',
+        height: '20rem',
+        positionContainerDisplay: 'block'
       }
     ]
   },
@@ -207,6 +219,7 @@ export default {
       height: props.customProps.height,
       disabled: props.customProps.disabled,
       trigger: props.customProps.trigger,
+      positionContainerDisplay: props.customProps.positionContainerDisplay,
       ...(props.customProps.trigger
         ? {
             defaultShow: props.customProps.defaultShow,
