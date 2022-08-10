@@ -45,36 +45,17 @@ const generateStyle = (componentTheme: AppNavTheme): AppNavStyle => {
     alignCenter: {
       alignItems: 'center'
     },
-    listItemWithMenuTrigger: {
-      label: 'appNav__listItemWithMenuTrigger',
-      minWidth: '0.0625rem',
-      marginInlineStart: componentTheme.horizontalMargin,
-      marginInlineEnd: '0',
-      flexShrink: 0,
-      flexBasis: componentTheme.menuTriggerWidth
-    },
-    listItem: {
-      label: 'appNav__listItem',
-      minWidth: '0.0625rem',
-      marginInlineStart: componentTheme.horizontalMargin,
-      marginInlineEnd: '0',
-      flexShrink: 0
-    },
     list: {
       label: 'appNav__list',
-      boxSizing: 'border-box',
-      listStyleType: 'none',
       height: componentTheme.height,
-      margin: '0',
-      padding: '0',
-      display: 'flex',
-      alignItems: 'center',
       flexGrow: 1,
       flexShrink: 1,
       flexBasis: '0',
-      minWidth: '0.0625rem'
+      minWidth: '0.0625rem',
+      paddingInlineStart: componentTheme.horizontalMargin
     },
-    menuTriggerWidth: componentTheme.menuTriggerWidth
+    horizontalMargin: componentTheme.horizontalMargin.toString(),
+    menuTriggerWidth: componentTheme.menuTriggerWidth.toString()
   }
 }
 

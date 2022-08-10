@@ -99,14 +99,10 @@ type AppNavProps = AppNavOwnProps &
   WithStyleProps<AppNavTheme, AppNavStyle> &
   OtherHTMLAttributes<AppNavOwnProps>
 
-type AppNavStyle = ComponentStyle<
-  | 'appNav'
-  | 'alignCenter'
-  | 'listItemWithMenuTrigger'
-  | 'listItem'
-  | 'list'
-  | 'menuTriggerWidth'
->
+type AppNavStyle = ComponentStyle<'appNav' | 'alignCenter' | 'list'> & {
+  horizontalMargin: string
+  menuTriggerWidth: string
+}
 
 const propTypes: PropValidators<PropKeys> = {
   screenReaderLabel: PropTypes.string.isRequired,

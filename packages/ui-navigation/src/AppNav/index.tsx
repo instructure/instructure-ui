@@ -23,15 +23,11 @@
  */
 
 /** @jsx jsx */
-import { Children, Component } from 'react'
+import React, { Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
-import { px } from '@instructure/ui-utils'
-import { debounce } from '@instructure/debounce'
-import type { Debounced } from '@instructure/debounce'
 import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
@@ -43,6 +39,8 @@ import generateComponentTheme from './theme'
 import type { AppNavProps } from './props'
 import { allowedProps, propTypes } from './props'
 import { AppNavItemProps } from './Item/props'
+
+import { TruncateList } from '@instructure/ui-truncate-list'
 
 /**
 ---
@@ -73,86 +71,13 @@ class AppNav extends Component<AppNavProps> {
   }
 
   ref: Element | null = null
-  _list: HTMLUListElement | null = null
-  _debounced?: Debounced
-  _resizeListener?: ResizeObserver
 
   componentDidMount() {
     this.props.makeStyles?.()
-    const { width: origWidth } = getBoundingClientRect(this._list)
-
-    this._debounced = debounce(this.handleResize, this.props.debounce, {
-      leading: true,
-      trailing: true
-    })
-    this._resizeListener = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const { width } = entry.contentRect
-
-        if (origWidth !== width) {
-          this._debounced!()
-        }
-      }
-    })
-
-    this._resizeListener.observe(this._list!)
-
-    this.handleResize()
   }
 
   componentDidUpdate() {
     this.props.makeStyles?.()
-  }
-
-  componentWillUnmount() {
-    if (this._resizeListener) {
-      this._resizeListener.disconnect()
-    }
-
-    if (this._debounced) {
-      this._debounced.cancel()
-    }
-  }
-
-  measureItems = () => {
-    const menuTriggerWidth = px(this.props.styles?.menuTriggerWidth as number)
-    let visibleItemsCount = 0
-
-    if (this._list) {
-      const { width: navWidth } = getBoundingClientRect(this._list)
-
-      const itemWidths = Array.from(this._list.getElementsByTagName('li')).map(
-        (item) => {
-          const { width } = getBoundingClientRect(item)
-          return width
-        }
-      )
-
-      let currentWidth = 0
-
-      for (let i = 0; i < itemWidths.length; i++) {
-        currentWidth += itemWidths[i]
-
-        if (currentWidth <= navWidth - menuTriggerWidth) {
-          visibleItemsCount++
-        } else {
-          break
-        }
-      }
-    }
-
-    return { visibleItemsCount }
-  }
-
-  handleResize = () => {
-    this.setState({ isMeasuring: true }, () => {
-      const { visibleItemsCount } = this.measureItems()
-
-      if (typeof this.props.onUpdate === 'function') {
-        this.props.onUpdate({ visibleItemsCount })
-      }
-      this.setState({ isMeasuring: false })
-    })
   }
 
   handleRef = (el: Element | null) => {
@@ -165,22 +90,8 @@ class AppNav extends Component<AppNavProps> {
     }
   }
 
-  renderListItem(item: React.ReactNode, isMenuTrigger: boolean, key?: number) {
-    return (
-      <li
-        key={key}
-        css={
-          isMenuTrigger
-            ? this.props.styles?.listItemWithMenuTrigger
-            : this.props.styles?.listItem
-        }
-      >
-        {item}
-      </li>
-    )
-  }
   renderMenu(items: React.ComponentElement<AppNavItemProps, Item>[]) {
-    const menu = (
+    return (
       <Menu
         trigger={
           <AppNav.Item
@@ -188,29 +99,29 @@ class AppNav extends Component<AppNavProps> {
           />
         }
       >
-        {items.map((item, index) => {
-          return (
-            <Menu.Item
-              href={item.props.href ? item.props.href : undefined}
-              onClick={
-                item.props.onClick && !item.props.href
-                  ? item.props.onClick
-                  : undefined
-              }
-              key={index}
-            >
-              {callRenderProp(item.props.renderLabel)}
-            </Menu.Item>
-          )
-        })}
+        {(items as React.ComponentElement<AppNavItemProps, Item>[]).map(
+          (item, index) => {
+            return (
+              <Menu.Item
+                href={item.props.href ? item.props.href : undefined}
+                onClick={
+                  item.props.onClick && !item.props.href
+                    ? item.props.onClick
+                    : undefined
+                }
+                key={index}
+              >
+                {callRenderProp(item.props.renderLabel)}
+              </Menu.Item>
+            )
+          }
+        )}
       </Menu>
     )
-
-    return this.renderListItem(menu, true)
   }
 
   render() {
-    const { children, visibleItemsCount, screenReaderLabel, margin } =
+    const { visibleItemsCount, screenReaderLabel, margin, debounce, styles } =
       this.props
 
     const passthroughProps = View.omitViewProps(
@@ -218,15 +129,6 @@ class AppNav extends Component<AppNavProps> {
       AppNav
     )
 
-    const { isMeasuring } = this.state
-    const childrenArray = Children.toArray(children) as React.ComponentElement<
-      AppNavItemProps,
-      Item
-    >[]
-    const visibleChildren = isMeasuring
-      ? childrenArray
-      : childrenArray.splice(0, visibleItemsCount)
-    const hiddenChildren = isMeasuring ? [] : childrenArray
     const renderBeforeItems = callRenderProp(this.props.renderBeforeItems)
     const renderAfterItems = callRenderProp(this.props.renderAfterItems)
     const hasRenderedContent = renderBeforeItems || renderAfterItems
@@ -235,25 +137,30 @@ class AppNav extends Component<AppNavProps> {
       <View
         {...passthroughProps}
         as="nav"
-        css={[
-          this.props.styles?.appNav,
-          hasRenderedContent ? this.props.styles?.alignCenter : ''
-        ]}
+        css={[styles?.appNav, hasRenderedContent ? styles?.alignCenter : '']}
         margin={margin}
         display={hasRenderedContent ? 'flex' : 'block'}
         elementRef={this.handleRef}
       >
         {renderBeforeItems && <span>{renderBeforeItems}</span>}
-        <ul
-          ref={(el) => (this._list = el)}
-          css={this.props.styles?.list}
+
+        <TruncateList
+          visibleItemsCount={visibleItemsCount}
+          debounce={debounce}
+          onUpdate={this.props.onUpdate}
+          renderHiddenItemMenu={(hiddenChildren) =>
+            this.renderMenu(
+              hiddenChildren as React.ComponentElement<AppNavItemProps, Item>[]
+            )
+          }
+          itemSpacing={styles?.horizontalMargin}
+          fixMenuTriggerWidth={styles?.menuTriggerWidth}
+          css={styles?.list}
           aria-label={callRenderProp(screenReaderLabel)}
         >
-          {visibleChildren.map((child, index) => {
-            return this.renderListItem(child, false, index)
-          })}
-          {hiddenChildren.length > 0 && this.renderMenu(hiddenChildren)}
-        </ul>
+          {this.props.children}
+        </TruncateList>
+
         {renderAfterItems && <span>{renderAfterItems}</span>}
       </View>
     )
