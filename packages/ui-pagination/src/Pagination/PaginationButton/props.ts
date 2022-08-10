@@ -42,7 +42,7 @@ type PaginationPageOwnProps = {
    */
   current?: boolean
   /**
-   * Whether the page is currently displayed
+   * Callback fired when the `Pagination.Page` is clicked.
    */
   onClick?: (
     event:
