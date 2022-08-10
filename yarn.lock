@@ -3528,6 +3528,7 @@ __metadata:
     "@instructure/ui-testable": 8.27.0
     "@instructure/ui-themes": 8.27.0
     "@instructure/ui-tooltip": 8.27.0
+    "@instructure/ui-truncate-list": 8.27.0
     "@instructure/ui-utils": 8.27.0
     "@instructure/ui-view": 8.27.0
     prop-types: ^15
@@ -4610,6 +4611,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@instructure/ui-truncate-list@8.27.0, @instructure/ui-truncate-list@workspace:packages/ui-truncate-list":
+  version: 0.0.0-use.local
+  resolution: "@instructure/ui-truncate-list@workspace:packages/ui-truncate-list"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@instructure/console": 8.27.0
+    "@instructure/debounce": 8.27.0
+    "@instructure/emotion": 8.27.0
+    "@instructure/shared-types": 8.27.0
+    "@instructure/ui-babel-preset": 8.27.0
+    "@instructure/ui-color-utils": 8.27.0
+    "@instructure/ui-dom-utils": 8.27.0
+    "@instructure/ui-react-utils": 8.27.0
+    "@instructure/ui-test-locator": 8.27.0
+    "@instructure/ui-test-queries": 8.27.0
+    "@instructure/ui-test-utils": 8.27.0
+    "@instructure/ui-testable": 8.27.0
+    "@instructure/ui-themes": 8.27.0
+    "@instructure/ui-utils": 8.27.0
+    prop-types: ^15
+  peerDependencies:
+    react: ">=16.8 <=18"
+  languageName: unknown
+  linkType: soft
+
 "@instructure/ui-truncate-text@8.27.0, @instructure/ui-truncate-text@workspace:packages/ui-truncate-text":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-truncate-text@workspace:packages/ui-truncate-text"
@@ -4771,6 +4797,7 @@ __metadata:
     "@instructure/ui-tooltip": 8.27.0
     "@instructure/ui-tray": 8.27.0
     "@instructure/ui-tree-browser": 8.27.0
+    "@instructure/ui-truncate-list": 8.27.0
     "@instructure/ui-truncate-text": 8.27.0
     "@instructure/ui-view": 8.27.0
     jest: ^24.9.0
@@ -15141,6 +15168,7 @@ __metadata:
     "@instructure/ui-top-nav-bar": 8.27.0
     "@instructure/ui-tray": 8.27.0
     "@instructure/ui-tree-browser": 8.27.0
+    "@instructure/ui-truncate-list": 8.27.0
     "@instructure/ui-truncate-text": 8.27.0
     "@instructure/ui-utils": 8.27.0
     "@instructure/ui-view": 8.27.0

@@ -23,32 +23,41 @@
  */
 
 import React from 'react'
-import {
-  expect,
-  mount,
-  accessible,
-  generateA11yTests
-} from '@instructure/ui-test-utils'
 
-import { <%= NAME %> } from '../index'
-import { <%= NAME %>Locator } from '../<%= NAME %>Locator'
-import <%= NAME %>Examples from '../__examples__/<%= NAME %>.examples'
+import type { StoryConfig } from '@instructure/ui-test-utils'
 
-describe('<<%= NAME %> />', async () => {
-  it('should render', async () => {
-    await mount(<<%= NAME %> />)
-    const component = await <%= NAME %>Locator.find()
+import type { TruncateListProps } from '../props'
 
-    expect(component).to.exist()
-  })
+export default {
+  propValues: {
+    visibleItemsCount: [undefined, 6],
+    renderHiddenItemMenu: [
+      undefined,
+      (hiddenChildren) => (
+        <button style={{ width: '100%' }}>
+          Hidden: {hiddenChildren.length}
+        </button>
+      )
+    ] as TruncateListProps['renderHiddenItemMenu'][],
+    itemSpacing: [undefined, '1em'],
+    fixMenuTriggerWidth: [undefined, '200px']
+  },
+  getComponentProps: () => {
+    return {
+      children: Array.from(Array(10)).map((_item, idx) => (
+        <div key={idx}>Item {idx + 1}</div>
+      ))
+    }
+  },
+  filter: (props) => {
+    if (props.itemSpacing && props.fixMenuTriggerWidth) {
+      return true
+    }
 
-  describe('should be accessible', async () => {
-    generateA11yTests(<%= NAME %>, <%= NAME %>Examples)
+    if (!props.visibleItemsCount && props.renderHiddenItemMenu) {
+      return true
+    }
 
-    it('a11y', async () => {
-      await mount(<<%= NAME %> />)
-
-      expect(await accessible()).to.be.true()
-    })
-  })
-})
+    return false
+  }
+} as StoryConfig<TruncateListProps>

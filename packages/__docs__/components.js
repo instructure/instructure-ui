@@ -135,4 +135,5 @@ export {
 export { Drilldown } from '@instructure/ui-drilldown'
 export { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 export { TopNavBar } from '@instructure/ui-top-nav-bar'
+export { TruncateList } from '@instructure/ui-truncate-list'
 export { canvas, canvasHighContrast, instructure } from '@instructure/ui-themes'

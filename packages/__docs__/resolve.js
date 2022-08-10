@@ -185,6 +185,10 @@ module.exports = {
       __dirname,
       '../ui-tree-browser/src/'
     ),
+    '@instructure/ui-truncate-list$': path.resolve(
+      __dirname,
+      '../ui-truncate-list/src/'
+    ),
     '@instructure/ui-truncate-text$': path.resolve(
       __dirname,
       '../ui-truncate-text/src/'

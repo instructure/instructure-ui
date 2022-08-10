@@ -107,6 +107,7 @@
     "@instructure/ui-top-nav-bar": "8.27.0",
     "@instructure/ui-tray": "8.27.0",
     "@instructure/ui-tree-browser": "8.27.0",
+    "@instructure/ui-truncate-list": "8.27.0",
     "@instructure/ui-truncate-text": "8.27.0",
     "@instructure/ui-utils": "8.27.0",
     "@instructure/ui-view": "8.27.0",
