@@ -46,6 +46,7 @@
     "@instructure/ui-react-utils": "8.27.0",
     "@instructure/ui-testable": "8.27.0",
     "@instructure/ui-tooltip": "8.27.0",
+    "@instructure/ui-truncate-list": "8.27.0",
     "@instructure/ui-utils": "8.27.0",
     "@instructure/ui-view": "8.27.0",
     "prop-types": "^15"
