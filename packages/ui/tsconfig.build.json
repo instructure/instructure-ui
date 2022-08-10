@@ -74,6 +74,7 @@
     { "path": "../ui-tooltip/tsconfig.build.json" },
     { "path": "../ui-tray/tsconfig.build.json" },
     { "path": "../ui-tree-browser/tsconfig.build.json" },
+    { "path": "../ui-truncate-list/tsconfig.build.json" },
     { "path": "../ui-truncate-text/tsconfig.build.json" },
     { "path": "../ui-view/tsconfig.build.json" },
     { "path": "../ui-babel-preset/tsconfig.build.json" },

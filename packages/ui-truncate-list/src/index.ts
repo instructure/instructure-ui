@@ -22,33 +22,5 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import {
-  expect,
-  mount,
-  accessible,
-  generateA11yTests
-} from '@instructure/ui-test-utils'
-
-import { <%= NAME %> } from '../index'
-import { <%= NAME %>Locator } from '../<%= NAME %>Locator'
-import <%= NAME %>Examples from '../__examples__/<%= NAME %>.examples'
-
-describe('<<%= NAME %> />', async () => {
-  it('should render', async () => {
-    await mount(<<%= NAME %> />)
-    const component = await <%= NAME %>Locator.find()
-
-    expect(component).to.exist()
-  })
-
-  describe('should be accessible', async () => {
-    generateA11yTests(<%= NAME %>, <%= NAME %>Examples)
-
-    it('a11y', async () => {
-      await mount(<<%= NAME %> />)
-
-      expect(await accessible()).to.be.true()
-    })
-  })
-})
+export { TruncateList } from './TruncateList'
+export type { TruncateListProps } from './TruncateList/props'

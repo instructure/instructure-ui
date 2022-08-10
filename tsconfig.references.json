@@ -102,6 +102,7 @@
     { "path": "./packages/ui-top-nav-bar/tsconfig.build.json" },
     { "path": "./packages/ui-tray/tsconfig.build.json" },
     { "path": "./packages/ui-tree-browser/tsconfig.build.json" },
+    { "path": "./packages/ui-truncate-list/tsconfig.build.json" },
     { "path": "./packages/ui-truncate-text/tsconfig.build.json" },
     { "path": "./packages/ui-utils/tsconfig.build.json" },
     { "path": "./packages/ui-view/tsconfig.build.json" },

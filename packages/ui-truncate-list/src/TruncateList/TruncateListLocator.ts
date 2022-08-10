@@ -21,34 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
+import { find, findAll } from '@instructure/ui-test-queries'
 
-import React from 'react'
-import {
-  expect,
-  mount,
-  accessible,
-  generateA11yTests
-} from '@instructure/ui-test-utils'
+import { TruncateList } from './index'
 
-import { <%= NAME %> } from '../index'
-import { <%= NAME %>Locator } from '../<%= NAME %>Locator'
-import <%= NAME %>Examples from '../__examples__/<%= NAME %>.examples'
-
-describe('<<%= NAME %> />', async () => {
-  it('should render', async () => {
-    await mount(<<%= NAME %> />)
-    const component = await <%= NAME %>Locator.find()
-
-    expect(component).to.exist()
-  })
-
-  describe('should be accessible', async () => {
-    generateA11yTests(<%= NAME %>, <%= NAME %>Examples)
-
-    it('a11y', async () => {
-      await mount(<<%= NAME %> />)
-
-      expect(await accessible()).to.be.true()
-    })
-  })
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const TruncateListLocator = locator(TruncateList.selector, {
+  findAllListItems: (...args: any[]) => {
+    return findAll('li', ...args)
+  },
+  findMenuTriggerItem: (...args: any[]) => {
+    return find('li[class*=-truncateList__menuTrigger]', ...args)
+  }
 })
