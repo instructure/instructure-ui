@@ -61,23 +61,25 @@ const generateStyle = (
 
       ...(isDisabled && { fontWeight: 'normal' }),
 
-      '&::after': {
-        content: '""',
-        height: '0.25rem',
-        width: '100%',
-        position: 'absolute',
-        insetInlineStart: 0,
-        bottom: 0,
-        opacity: 0,
-        transform: 'translate3d(0, 0, 0) scaleX(0.01)',
-        ...(isSelected && {
-          backgroundColor: componentTheme.defaultSelectedBorderColor,
-          animationName: selectedTab,
-          animationDuration: '0.2s',
-          animationFillMode: 'forwards',
-          animationTimingFunction: 'ease-out'
-        })
-      },
+      ...(!isDisabled && {
+        '&::after': {
+          content: '""',
+          height: '0.25rem',
+          width: '100%',
+          position: 'absolute',
+          insetInlineStart: 0,
+          bottom: 0,
+          opacity: 0,
+          transform: 'translate3d(0, 0, 0) scaleX(0.01)',
+          ...(isSelected && {
+            backgroundColor: componentTheme.defaultSelectedBorderColor,
+            animationName: selectedTab,
+            animationDuration: '0.2s',
+            animationFillMode: 'forwards',
+            animationTimingFunction: 'ease-out'
+          })
+        }
+      }),
 
       '&:hover': {
         ...(!isDisabled &&

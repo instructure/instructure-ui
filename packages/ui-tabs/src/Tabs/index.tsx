@@ -61,11 +61,13 @@ import { Panel } from './Panel'
 import { allowedProps, propTypes } from './props'
 import type { TabsProps, TabsState } from './props'
 
-import type { TabsTabProps } from './Tab/props'
+import type { TabsTabProps, TabsTabOwnProps } from './Tab/props'
 import type { TabsPanelProps } from './Panel/props'
 
 type TabChild = ComponentElement<TabsTabProps, any>
 type PanelChild = ComponentElement<TabsPanelProps, Panel>
+
+type NextTab = { index: number; id?: string; isDisabled?: boolean }
 
 /**
 ---
@@ -113,7 +115,9 @@ class Tabs extends Component<TabsProps, TabsState> {
     super(props)
 
     this.state = {
-      withTabListOverflow: false
+      withTabListOverflow: false,
+      selectedTabIndexForInnerTracking: this.selectedActiveChildIndex || 0,
+      selectedPanelIndex: this.selectedActiveChildIndex || 0
     }
   }
 
@@ -298,10 +302,25 @@ class Tabs extends Component<TabsProps, TabsState> {
     this._tabListPosition = getBoundingClientRect(this._tabList)
   }
 
-  getNextTab(
-    startIndex: number,
-    step: -1 | 0 | 1
-  ): { index: number; id?: string } {
+  get selectedActiveChildIndex() {
+    const selectedChildIndex = (
+      React.Children.toArray(this.props.children) as PanelChild[]
+    )
+      .filter((child) => matchComponentTypes<PanelChild>(child, [Panel]))
+      .findIndex((child) => {
+        return child.props.isSelected && !child.props.isDisabled
+      })
+
+    return selectedChildIndex >= 0 ? selectedChildIndex : undefined
+  }
+
+  getTabByIndex(index: number) {
+    return (
+      React.Children.toArray(this.props.children) as (PanelChild | undefined)[]
+    )[index]
+  }
+
+  getNextTab(startIndex: number, step: -1 | 0 | 1): NextTab {
     const tabs = React.Children.toArray(this.props.children).map(
       (child) => matchComponentTypes<PanelChild>(child, [Panel]) && child
     ) as PanelChild[]
@@ -313,25 +332,32 @@ class Tabs extends Component<TabsProps, TabsState> {
       `[Tabs] Invalid tab index: '${startIndex}'.`
     )
 
-    let nextIndex = startIndex
-    let nextTab: PanelChild
-
-    do {
-      nextIndex = (nextIndex + change) % count
-      nextTab = tabs[nextIndex]
-    } while (nextTab && nextTab.props && nextTab.props.isDisabled)
+    const nextIndex = (startIndex + change) % count
+    const nextTab: PanelChild = tabs[nextIndex]
 
     error(
       nextIndex >= 0 && nextIndex < count,
       `[Tabs] Invalid tab index: '${nextIndex}'.`
     )
-    return { index: nextIndex, id: nextTab.props.id }
+    return {
+      index: nextIndex,
+      id: nextTab.props.id,
+      isDisabled: nextTab.props.isDisabled
+    }
   }
 
   fireOnChange(
-    event: React.MouseEvent<ViewOwnProps> | React.KeyboardEvent<ViewOwnProps>,
-    { index, id }: { index: number; id?: string }
+    event:
+      | React.MouseEvent<ViewOwnProps>
+      | React.KeyboardEvent<ViewOwnProps>
+      | React.FocusEvent<TabsTabOwnProps>,
+    { index, id, isDisabled }: NextTab
   ) {
+    this.setState((state) => ({
+      selectedTabIndexForInnerTracking: index,
+      selectedPanelIndex: isDisabled ? state.selectedPanelIndex : index
+    }))
+
     if (typeof this.props.onRequestTabChange === 'function') {
       this.props.onRequestTabChange(event, { index, id })
     }
@@ -358,7 +384,17 @@ class Tabs extends Component<TabsProps, TabsState> {
       isDisabled: panel.props.isDisabled,
       children: panel.props.renderTitle,
       onClick: this.handleTabClick,
-      onKeyDown: this.handleTabKeyDown
+      onKeyDown: this.handleTabKeyDown,
+      onBlur: (event) => {
+        if (panel.props.isDisabled) {
+          const { selectedPanelIndex } = this.state
+          this.fireOnChange(event, {
+            index: selectedPanelIndex,
+            id: this.getTabByIndex(selectedPanelIndex)?.props.id,
+            isDisabled: false
+          })
+        }
+      }
     })
   }
 
@@ -416,24 +452,24 @@ class Tabs extends Component<TabsProps, TabsState> {
       ...props
     } = this.props
 
-    const selectedChildIndex = (
-      React.Children.toArray(children) as PanelChild[]
-    )
-      .filter((child) => matchComponentTypes<PanelChild>(child, [Panel]))
-      .findIndex((child) => child.props.isSelected && !child.props.isDisabled)
-
     let index = 0
-    const selectedIndex = selectedChildIndex >= 0 ? selectedChildIndex : 0
+
+    const selectedTabIndex =
+      this.selectedActiveChildIndex ||
+      this.state.selectedTabIndexForInnerTracking
+    const selectedPanelIndex = this.state.selectedPanelIndex
 
     React.Children.forEach(children as PanelChild[], (child) => {
       if (matchComponentTypes<PanelChild>(child, [Panel])) {
-        const selected =
-          !child.props.isDisabled &&
-          (child.props.isSelected || selectedIndex === index)
+        const isTabSelected = child.props.isDisabled
+          ? selectedTabIndex === index
+          : child.props.isSelected || selectedTabIndex === index
+
+        const isPanelSelected = selectedPanelIndex === index
         const id = uid()
 
-        tabs.push(this.createTab(index, id, selected, child))
-        panels.push(this.clonePanel(index, id, selected, child))
+        tabs.push(this.createTab(index, id, isTabSelected, child))
+        panels.push(this.clonePanel(index, id, isPanelSelected, child))
 
         index++
       } else {
@@ -446,7 +482,7 @@ class Tabs extends Component<TabsProps, TabsState> {
 
     // suppress overlay whenever final Tab is active, or Firefox will cover it
     const scrollOverlay =
-      selectedIndex !== React.Children.count(children) - 1 ? (
+      selectedTabIndex !== React.Children.count(children) - 1 ? (
         <span key="overlay" css={styles?.scrollOverlay} />
       ) : null
 

@@ -36,6 +36,7 @@ import generateComponentTheme from './theme'
 
 import type { TabsTabProps } from './props'
 import { allowedProps, propTypes } from './props'
+import keycode from 'keycode'
 
 /**
 ---
@@ -80,7 +81,15 @@ class Tab extends Component<TabsTabProps> {
   handleKeyDown = (event: React.KeyboardEvent<ViewOwnProps>) => {
     const { onKeyDown, index, id, isDisabled } = this.props
 
-    if (isDisabled) {
+    if (
+      isDisabled &&
+      ![
+        keycode.codes.up,
+        keycode.codes.left,
+        keycode.codes.down,
+        keycode.codes.right
+      ].includes(event.keyCode)
+    ) {
       return
     }
 
@@ -110,10 +119,10 @@ class Tab extends Component<TabsTabProps> {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         css={styles?.tab}
-        aria-selected={isSelected ? 'true' : undefined}
+        aria-selected={isSelected && !isDisabled ? 'true' : undefined}
         aria-disabled={isDisabled ? 'true' : undefined}
         aria-controls={controls}
-        tabIndex={isSelected && !isDisabled ? 0 : undefined}
+        tabIndex={isSelected ? 0 : undefined}
         position="relative"
         focusPosition="inset"
       >

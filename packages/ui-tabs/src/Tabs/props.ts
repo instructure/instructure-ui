@@ -27,8 +27,6 @@ import PropTypes from 'prop-types'
 import { Children } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
-import { Panel } from './Panel'
-
 import type {
   Spacing,
   WithStyleProps,
@@ -41,6 +39,10 @@ import type {
 } from '@instructure/shared-types'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
 import type { ViewOwnProps } from '@instructure/ui-view'
+
+import { Panel } from './Panel'
+
+import type { TabsTabOwnProps } from './Tab/props'
 
 type TabsOwnProps = {
   /**
@@ -56,7 +58,10 @@ type TabsOwnProps = {
    * Called when the selected tab should change
    */
   onRequestTabChange?: (
-    event: React.MouseEvent<ViewOwnProps> | React.KeyboardEvent<ViewOwnProps>,
+    event:
+      | React.MouseEvent<ViewOwnProps>
+      | React.KeyboardEvent<ViewOwnProps>
+      | React.FocusEvent<TabsTabOwnProps>,
     tabData: { index: number; id?: string }
   ) => void
   maxWidth?: string | number
@@ -111,6 +116,8 @@ type TabsStyle = ComponentStyle<
 
 type TabsState = {
   withTabListOverflow: boolean
+  selectedTabIndexForInnerTracking: number
+  selectedPanelIndex: number
 }
 
 const propTypes: PropValidators<PropKeys> = {

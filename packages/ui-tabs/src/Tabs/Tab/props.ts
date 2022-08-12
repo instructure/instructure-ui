@@ -86,5 +86,5 @@ const allowedProps: AllowedPropKeys = [
   'children'
 ]
 
-export type { TabsTabProps, TabsTabStyle }
+export type { TabsTabProps, TabsTabOwnProps, TabsTabStyle }
 export { propTypes, allowedProps }

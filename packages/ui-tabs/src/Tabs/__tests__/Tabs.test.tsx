@@ -145,7 +145,7 @@ describe('<Tabs />', async () => {
     const tabs = await TabsLocator.find()
 
     expect(await tabs.findSelectedTab(':contains(First Tab)')).to.exist()
-    const selectedTabsPanel = await tabs.findTabPanel(
+    const selectedTabsPanel = await tabs.findActiveTabPanel(
       ':contains(Tab 1 content)'
     )
     expect(selectedTabsPanel.getAttribute('aria-hidden')).to.not.exist()
@@ -171,7 +171,7 @@ describe('<Tabs />', async () => {
     expect(secondPanel.getAttribute('aria-hidden')).to.not.exist()
   })
 
-  it('should not allow selecting a disabled tab', async () => {
+  it('when the initial selected tab is disabled, select next active one tab', async () => {
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -225,6 +225,33 @@ describe('<Tabs />', async () => {
     })
   })
 
+  it('should not be able to select disabled by click', async () => {
+    const onChange = stub()
+
+    await mount(
+      <Tabs onRequestTabChange={onChange}>
+        <Tabs.Panel renderTitle="First Tab" isSelected id="one">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab" id="two">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled id="three">
+          Tab 3 content
+        </Tabs.Panel>
+      </Tabs>
+    )
+
+    const tabs = await TabsLocator.find()
+    const secondTab = await tabs.findTab(':contains(Third Tab)')
+
+    await secondTab.click()
+
+    await wait(() => {
+      expect(onChange).to.not.have.been.called()
+    })
+  })
+
   it('should focus the selected tab when shouldFocusOnRender is set', async () => {
     await mount(
       <Tabs shouldFocusOnRender>
@@ -253,23 +280,12 @@ describe('<Tabs />', async () => {
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
-          Tab 3 content
-        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab">Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
     const tabs = await TabsLocator.find()
-    const selectedTab = await tabs.findSelectedTab()
-
-    await selectedTab.keyDown('left')
-
-    await wait(() => {
-      expect(onChange).to.have.been.calledOnce()
-      expect(onChange.getCall(0).args[1].index).to.equal(1)
-    })
-
-    onChange.resetHistory()
+    let selectedTab = await tabs.findSelectedTab()
 
     await selectedTab.keyDown('right')
 
@@ -279,8 +295,19 @@ describe('<Tabs />', async () => {
     })
 
     onChange.resetHistory()
+    selectedTab = await tabs.findSelectedTab()
 
-    await selectedTab.keyDown('up')
+    await selectedTab.keyDown('left')
+
+    await wait(() => {
+      expect(onChange).to.have.been.calledOnce()
+      expect(onChange.getCall(0).args[1].index).to.equal(0)
+    })
+
+    onChange.resetHistory()
+    selectedTab = await tabs.findSelectedTab()
+
+    await selectedTab.keyDown('down')
 
     await wait(() => {
       expect(onChange).to.have.been.calledOnce()
@@ -288,12 +315,56 @@ describe('<Tabs />', async () => {
     })
 
     onChange.resetHistory()
+    selectedTab = await tabs.findSelectedTab()
 
-    await selectedTab.keyDown('down')
+    await selectedTab.keyDown('up')
+
+    await wait(() => {
+      expect(onChange).to.have.been.calledOnce()
+      expect(onChange.getCall(0).args[1].index).to.equal(0)
+    })
+  })
+
+  it('should by able to select disabled tab with keyboard arrow keys, but not changing the panel', async () => {
+    const onChange = stub()
+
+    await mount(
+      <Tabs onRequestTabChange={onChange}>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab" isDisabled>
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab">Tab 3 content</Tabs.Panel>
+      </Tabs>
+    )
+
+    const tabs = await TabsLocator.find()
+    let selectedTab = await tabs.findSelectedTab()
+    let panel = await tabs.findActiveTabPanel()
+
+    expect(panel.getTextContent()).to.equal('Tab 1 content')
+
+    await selectedTab.keyDown('right')
+
+    panel = await tabs.findActiveTabPanel()
 
     await wait(() => {
       expect(onChange).to.have.been.calledOnce()
       expect(onChange.getCall(0).args[1].index).to.equal(1)
+      expect(panel.getTextContent()).to.equal('Tab 1 content')
+    })
+
+    onChange.resetHistory()
+    selectedTab = await tabs.findSelectedTab()
+
+    await selectedTab.keyDown('right')
+
+    panel = await tabs.findActiveTabPanel()
+
+    await wait(() => {
+      expect(onChange).to.have.been.calledOnce()
+      expect(onChange.getCall(0).args[1].index).to.equal(2)
+      expect(panel.getTextContent()).to.equal('Tab 3 content')
     })
   })
 
@@ -384,7 +455,7 @@ describe('<Tabs />', async () => {
     const tabs = await TabsLocator.find()
     const firstTab = await tabs.findTab(':contains(First Tab)')
 
-    const firstPanel = await tabs.findTabPanel(':contains(Tab 1 content)')
+    const firstPanel = await tabs.findActiveTabPanel(':contains(Tab 1 content)')
 
     expect(firstTab.getAttribute('aria-controls')).to.equal(
       firstPanel.getAttribute('id')
@@ -452,6 +523,10 @@ describe('<Tabs />', async () => {
       expect(await tabs.find('[class$="-tabs__scrollSpacer"]')).to.exist()
 
       await subject.setProps({ width: '550px' })
+
+      await wait(async () => {
+        expect(tabs.getDOMNode().clientWidth).to.equal(550)
+      })
 
       expect(
         await tabs.find('[class$="-tabs__scrollOverlay"]', {

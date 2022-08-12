@@ -27,7 +27,10 @@ import { Tabs } from './index'
 
 const TabLocator = locator('[role="tab"]')
 const PanelLocator = locator('[role="tabpanel"]')
-const SelectedTabLocator = locator('[role="tab"][aria-selected="true"]')
+const ActivePanelLocator = locator(
+  '[role="tabpanel"]:not([aria-hidden="true"])'
+)
+const SelectedTabLocator = locator('[role="tab"][tabindex="0"]')
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const TabsLocator = locator(Tabs.selector, {
@@ -39,6 +42,9 @@ export const TabsLocator = locator(Tabs.selector, {
   },
   findSelectedTab: (...args: any[]) => {
     return SelectedTabLocator.find(...args)
+  },
+  findActiveTabPanel: (...args: any[]) => {
+    return ActivePanelLocator.find(...args)
   },
   findTabPanel: (...args: any[]) => {
     return PanelLocator.find(...args)
