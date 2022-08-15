@@ -60,10 +60,10 @@ const generateStyle = (
       borderWidth: componentTheme.indicatorBorderWidth,
       borderColor: componentTheme.indicatorBorderColor,
       top: `${
-        state?.colorPosition?.y - 1 - px(`${props.indicatorRadius / 16}rem`)
+        state?.colorPosition?.y - px(`${props.indicatorRadius / 16}rem`)
       }px`,
       left: `${
-        state?.colorPosition?.x - 1 - px(`${props.indicatorRadius / 16}rem`)
+        state?.colorPosition?.x - px(`${props.indicatorRadius / 16}rem`)
       }px`
     },
     palette: {
