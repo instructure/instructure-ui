@@ -43,7 +43,7 @@
     "@types/lodash": "^4.14.171"
   },
   "peerDependencies": {
-    "react": ">=16.8 <=18"
+    "react": ">=16.8 <=17"
   },
   "publishConfig": {
     "access": "public"

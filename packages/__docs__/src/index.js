@@ -23,15 +23,16 @@
  */
 
 import React from 'react'
-import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom'
 
 import { App } from './App'
 import { canvas } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
 
-createRoot(document.getElementById('app')).render(
+ReactDOM.render(
   <InstUISettingsProvider theme={canvas}>
     <App />
-  </InstUISettingsProvider>
+  </InstUISettingsProvider>,
+  document.getElementById('app')
 )

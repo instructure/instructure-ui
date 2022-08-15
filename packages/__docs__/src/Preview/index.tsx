@@ -24,13 +24,17 @@
 
 /** @jsx jsx */
 import React, { Component } from 'react'
-import { createRoot, Root } from 'react-dom/client'
+import ReactDOM from 'react-dom'
+
 import { DIRECTION, TextDirectionContext } from '@instructure/ui-i18n'
 import { InstUISettingsProvider, withStyle, jsx } from '@instructure/emotion'
 import { canvas } from '@instructure/ui-themes'
+
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
 import { compileAndRenderExample } from '../compileAndRenderExample'
+
 import { propTypes, allowedProps } from './props'
 import type { PreviewProps, PreviewState } from './props'
 
@@ -49,7 +53,6 @@ class Preview extends Component<PreviewProps, PreviewState> {
   }
 
   private _mountNode?: HTMLDivElement | null
-  private _root?: Root
 
   constructor(props: PreviewProps) {
     super(props)
@@ -76,10 +79,17 @@ class Preview extends Component<PreviewProps, PreviewState> {
     this.props.makeStyles?.()
   }
 
+  componentWillUnmount() {
+    if (this._mountNode) {
+      ReactDOM.unmountComponentAtNode(this._mountNode)
+    }
+  }
+
   executeCode(code: string) {
-    if (this._root) {
-      this._root.unmount()
-      this._root = undefined
+    const mountNode = this._mountNode
+
+    if (mountNode) {
+      ReactDOM.unmountComponentAtNode(mountNode)
     }
 
     this.setState({ error: null })
@@ -102,8 +112,7 @@ class Preview extends Component<PreviewProps, PreviewState> {
           </TextDirectionContext.Provider>
         </InstUISettingsProvider>
       )
-      this._root = createRoot(this._mountNode!)
-      this._root.render(elToRender)
+      ReactDOM.render(elToRender, mountNode!)
     }
 
     compileAndRenderExample({
@@ -115,9 +124,8 @@ class Preview extends Component<PreviewProps, PreviewState> {
   }
 
   handleError = (err: Error) => {
-    if (this._root) {
-      this._root.unmount()
-      this._root = undefined
+    if (this._mountNode) {
+      ReactDOM.unmountComponentAtNode(this._mountNode)
     }
     this.setState({
       error: err.toString()
