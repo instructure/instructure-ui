@@ -26,7 +26,7 @@
 import React, { Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
-import { addEventListener } from '@instructure/ui-dom-utils'
+import { addEventListener, getFontSize } from '@instructure/ui-dom-utils'
 import type { HSVType } from '@instructure/ui-color-utils'
 
 import { View } from '@instructure/ui-view'
@@ -63,6 +63,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   private _paletteRef: HTMLDivElement | null = null
   private _mouseMoveListener?: { remove(): void }
   private _mouseUpListener?: { remove(): void }
+  private _paletteOffset = (getFontSize(this.window) / 16) * 2
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
@@ -93,37 +94,26 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   componentWillUnmount() {
     this.removeEventListeners()
   }
-  get padding() {
-    return 2
-  }
-
-  get movableHeight() {
-    return this.props.height - 2 * this.padding
-  }
-
-  get movableWidth() {
-    return this.props.width - 2 * this.padding
-  }
 
   get paletteWidth() {
-    return this._paletteRef!.getBoundingClientRect().width
+    return this._paletteRef!.getBoundingClientRect().width - this._paletteOffset
   }
 
   get paletteHeight() {
-    return this._paletteRef!.getBoundingClientRect().height
+    return (
+      this._paletteRef!.getBoundingClientRect().height - this._paletteOffset
+    )
   }
   calcSaturation = (position: number) =>
-    Math.round(((position - this.padding) / this.movableWidth) * 100) / 100
+    Math.round((position / this.paletteWidth) * 100) / 100
   calcLuminance = (position: number) =>
-    Math.round(
-      ((this.paletteHeight - position - this.padding) / this.movableHeight) *
-        100
-    ) / 100
+    Math.round(((this.paletteHeight - position) / this.paletteHeight) * 100) /
+    100
 
   calcPositionFromColor(hsv: HSVType) {
     const { s, v } = hsv
-    const x = s * this.movableWidth + this.padding
-    const y = (1 - v) * this.movableHeight + this.padding
+    const x = s * this.paletteWidth
+    const y = (1 - v) * this.paletteHeight
     return { x, y }
   }
 
@@ -160,17 +150,17 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   applyBoundaries(x: number, y: number) {
     let newXPosition = x
     let newYPosition = y
-    if (x > this.paletteWidth - this.padding) {
-      newXPosition = this.paletteWidth - this.padding
+    if (x > this.paletteWidth) {
+      newXPosition = this.paletteWidth
     }
-    if (x < this.padding) {
-      newXPosition = this.padding
+    if (x < 0) {
+      newXPosition = 0
     }
-    if (y > this.paletteHeight - this.padding) {
-      newYPosition = this.paletteHeight - this.padding
+    if (y > this.paletteHeight) {
+      newYPosition = this.paletteHeight
     }
-    if (y < this.padding) {
-      newYPosition = this.padding
+    if (y < 0) {
+      newYPosition = 0
     }
     return { newXPosition, newYPosition }
   }
