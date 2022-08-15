@@ -63,6 +63,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   private _paletteRef: HTMLDivElement | null = null
   private _mouseMoveListener?: { remove(): void }
   private _mouseUpListener?: { remove(): void }
+  //@ts-expect-error Property 'window' does not exist on type 'ColorPalette'
   private _paletteOffset = (getFontSize(this.window) / 16) * 2
 
   handleRef = (el: Element | null) => {
