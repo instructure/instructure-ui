@@ -245,70 +245,174 @@ class Truncator {
   truncate() {
     const { ellipsis, ignore, position } = this._options
     const middle = position === 'middle'
-
     let truncated = false
-    let fits = false
-    let nodeIndex = 0
-    let dataIndex = 0
     let truncatedText = ''
     let stringData: string[][] | null = null
-    let remove: number[] | null = null
 
     if (!this._stage) {
       return
     }
 
-    stringData = cloneArray(this._defaultStringData)
-    dataIndex = middle ? 0 : this._nodeDataIndexes.length - 1
-
-    while (!fits) {
-      if (dataIndex < 0) {
-        break
-      }
-
-      if (middle) {
-        // as data is removed from the middle of our set, the node order could
-        // change each iteration, so we need to keep updating a node index matrix
-        // based on the current string data
-        const matrix = this.getNodeIndexes(stringData)
-        const center = Math.floor(matrix.length / 2)
-        // the node index and word index to remove
-        remove = matrix[center]
-        if (dataIndex > 0) {
-          // remove word/character currently in the center
-          stringData[remove[0]].splice(remove[1], 1, ellipsis)
-        }
-      } else {
-        nodeIndex = this._nodeDataIndexes[dataIndex]
-        if (dataIndex < this._nodeDataIndexes.length - 1) {
-          stringData[nodeIndex] = stringData[nodeIndex].slice(0, -1)
-          stringData[nodeIndex].push(ellipsis)
-        }
-      }
-      // test new data
-      fits = this.checkFit(stringData)
-
-      if (fits) {
-        for (let i = 0; i < stringData.length; i++) {
-          const data = stringData[i]
-          truncatedText += data.join('')
-        }
-        break
-      } else {
-        truncated = true
-        if (middle) {
-          // remove ellipsis before re-testing
-          stringData[remove![0]].splice(remove![1], 1)
-          dataIndex++
+    const binarySearch = (
+      _low: number,
+      _high: number,
+      ev: (tryNumber: number, middle: boolean) => boolean,
+      middle: boolean,
+      // in case we can not find the result
+      _default: number | null = null
+    ): number | null => {
+      let low = _low
+      let high = _high
+      let bestResult = _default
+      while (low <= high) {
+        const tryNumber = Math.floor((low + high) / 2)
+        if (ev(tryNumber, middle)) {
+          high = tryNumber - 1
+          bestResult = tryNumber
         } else {
-          stringData[nodeIndex] = stringData[nodeIndex].slice(0, -1)
-          dataIndex--
+          low = tryNumber + 1
         }
       }
+      return bestResult
     }
 
-    stringData = cleanData(stringData, this._options, true)
+    const truncateArray = (
+      truncatedLength: number,
+      originalArray: string[][],
+      indexArray: number[],
+      middle: boolean
+    ): { truncated: boolean; truncatedArray: string[][] } => {
+      let truncated = false
+      const truncatedArray = cloneArray(originalArray)
 
+      switch (truncatedLength) {
+        // truncate nothing
+        case 0:
+          break
+
+        // truncate all
+        case indexArray.length:
+          truncated = true
+
+          for (let i = 0; i < truncatedArray.length; i++) {
+            truncatedArray[i] = []
+          }
+          truncatedArray[0].push(ellipsis)
+          break
+
+        // truncate a positive amount of elements
+        default:
+          truncated = true
+
+          if (middle) {
+            const dataHalves: number[] = Array(2)
+            // calculate the indexes for two parts
+            dataHalves[0] = Math.floor(
+              (indexArray.length - truncatedLength - 1) / 2
+            )
+            dataHalves[1] = dataHalves[0] + truncatedLength + 1
+            const nodeHalves = dataHalves.map((index) => indexArray[index])
+            const sliceAmounts: number[] = Array(2)
+            sliceAmounts[0] = dataHalves[0] + 1
+            sliceAmounts[1] =
+              indexArray.length - truncatedLength - sliceAmounts[0]
+
+            // keep the first part
+            for (let i = 0; i <= nodeHalves[0]; i++) {
+              switch (true) {
+                case i < nodeHalves[0]:
+                  sliceAmounts[0] -= truncatedArray[i].length
+                  break
+
+                case i === nodeHalves[0]:
+                  truncatedArray[i] = originalArray[i].slice(0, sliceAmounts[0])
+                  truncatedArray[i].push(ellipsis)
+                  break
+              }
+            }
+
+            // and the second part
+            for (let i = originalArray.length - 1; i >= nodeHalves[1]; i--) {
+              switch (true) {
+                case i > nodeHalves[1]:
+                  sliceAmounts[1] -= originalArray[i].length
+                  break
+
+                case i === nodeHalves[1]:
+                  if (nodeHalves[1] > nodeHalves[0])
+                    truncatedArray[i] = originalArray[i].slice(-sliceAmounts[1])
+                  if (nodeHalves[1] === nodeHalves[0])
+                    truncatedArray[i] = truncatedArray[i].concat(
+                      originalArray[i].slice(-sliceAmounts[1])
+                    )
+                  break
+              }
+            }
+
+            // delete the middle
+            for (let i = nodeHalves[0] + 1; i < nodeHalves[1]; i++) {
+              truncatedArray[i] = []
+            }
+          } else {
+            // the right most index to keep from truncating
+            const indexToTry = indexArray.length - truncatedLength - 1
+            const nodeIndex = indexArray[indexToTry]
+
+            let sliceAmount = indexToTry + 1
+
+            for (let i = 0; i < originalArray.length; i++) {
+              switch (true) {
+                case i < nodeIndex:
+                  sliceAmount -= truncatedArray[i].length
+                  break
+
+                case i === nodeIndex:
+                  truncatedArray[i] = truncatedArray[i].slice(0, sliceAmount)
+                  truncatedArray[i].push(ellipsis)
+                  break
+
+                case i > nodeIndex:
+                  truncatedArray[i] = []
+                  break
+              }
+            }
+          }
+          break
+      }
+      return { truncated, truncatedArray }
+    }
+
+    const truncateEvaluate = (truncatedLength: number, middle: boolean) => {
+      const { truncatedArray } = truncateArray(
+        truncatedLength,
+        this._defaultStringData,
+        this._nodeDataIndexes,
+        middle
+      )
+      return this.checkFit(truncatedArray)
+    }
+
+    // find the best number of element to truncate
+    const finestMatch = binarySearch(
+      0,
+      this._nodeDataIndexes.length,
+      truncateEvaluate,
+      middle,
+      this._nodeDataIndexes.length
+    )
+
+    ;({ truncated, truncatedArray: stringData } = truncateArray(
+      finestMatch!,
+      this._defaultStringData,
+      this._nodeDataIndexes,
+      middle
+    ))
+
+    stringData = cleanData(stringData, this._options, true)
+    for (let i = 0; i < stringData.length; i++) {
+      const data = stringData[i]
+      truncatedText += data.join('')
+    }
     if (truncated && !middle) {
       truncatedText = cleanString(
         truncatedText.split(ellipsis)[0],
