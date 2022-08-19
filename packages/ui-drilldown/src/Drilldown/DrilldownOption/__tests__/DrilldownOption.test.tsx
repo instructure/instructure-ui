@@ -81,10 +81,9 @@ describe('<Drilldown.Option />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const allOptions = await drilldown.findAllOptions()
+      const allOptions = await drilldown.findAllOptions({ expectEmpty: true })
 
-      expect(allOptions.length).to.equal(1)
-      expect(allOptions[0]).to.have.text('Option1')
+      expect(allOptions.length).to.equal(0)
     })
   })
 

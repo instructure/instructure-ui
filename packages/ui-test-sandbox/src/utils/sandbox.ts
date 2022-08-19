@@ -201,7 +201,10 @@ class Sandbox {
 
   async mount(
     element: React.ComponentElement<Record<string, unknown>, React.Component>,
-    options?: { props?: Record<string, unknown> | undefined }
+    options: {
+      props?: Record<string, unknown> | undefined
+      strictMode?: boolean
+    }
   ) {
     return ReactComponentWrapper.mount(element, options)
   }
@@ -245,7 +248,12 @@ const viewport = sandbox.viewport
 
 const mount = (
   element: React.ComponentElement<Record<string, unknown>, React.Component>,
-  options?: { props?: Record<string, unknown> | undefined }
+  options: {
+    props?: Record<string, unknown> | undefined
+    strictMode?: boolean
+  } = {
+    strictMode: true
+  }
 ) => sandbox.mount(element, options)
 
 const unmount = sandbox.unmount

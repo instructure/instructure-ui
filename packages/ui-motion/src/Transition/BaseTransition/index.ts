@@ -91,6 +91,7 @@ class BaseTransition extends React.Component<
 
   componentDidMount() {
     this.startTransition(this.props.in, this.props.transitionOnMount)
+    this._unmounted = false
   }
 
   getSnapshotBeforeUpdate(

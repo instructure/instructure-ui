@@ -163,7 +163,7 @@ describe('<Responsive />', async () => {
       </div>
     )
 
-    expect(renderSpy).to.have.been.calledOnce()
+    expect(renderSpy).to.have.been.called()
   })
 
   it('should apply the `display` prop', async () => {

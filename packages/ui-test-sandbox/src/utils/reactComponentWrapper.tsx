@@ -26,7 +26,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 const createRoot = async () => {
   // eslint-disable-next-line import/no-unresolved
-  return await import('react-dom/client')
+  return import('react-dom/client')
 }
 import PropTypes from 'prop-types'
 
@@ -90,9 +90,12 @@ class ReactComponentWrapper {
 
   async mount(
     element: React.ComponentElement<Record<string, unknown>, React.Component>,
-    options: { props?: Record<string, unknown> } = {}
+    options: { props?: Record<string, unknown>; strictMode?: boolean } = {
+      strictMode: true
+    }
   ) {
     const { type, ref, props } = element
+    const shouldWrapInStrictMode = options.strictMode
 
     this.unmount()
 
@@ -155,7 +158,13 @@ class ReactComponentWrapper {
           let err: unknown
           try {
             this._root = res!.createRoot(this._mountNode!)
-            this._root.render(WrappedElement)
+            this._root.render(
+              shouldWrapInStrictMode ? (
+                <React.StrictMode>{WrappedElement}</React.StrictMode>
+              ) : (
+                WrappedElement
+              )
+            )
           } catch (error) {
             err = error
           }
@@ -174,7 +183,14 @@ class ReactComponentWrapper {
           let error: unknown
           setTimeout(() => {
             try {
-              ReactDOM.render(WrappedElement, this._mountNode)
+              ReactDOM.render(
+                shouldWrapInStrictMode ? (
+                  <React.StrictMode>{WrappedElement}</React.StrictMode>
+                ) : (
+                  WrappedElement
+                ),
+                this._mountNode
+              )
             } catch (e) {
               // catch unhandled errors
               error = e

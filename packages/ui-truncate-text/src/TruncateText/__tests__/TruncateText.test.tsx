@@ -35,7 +35,8 @@ describe('<TruncateText />', async () => {
     const subject = await mount(
       <div style={{ width: '200px' }}>
         <TruncateText>{defaultText}</TruncateText>
-      </div>
+      </div>,
+      { strictMode: false }
     )
 
     const renderedContent = within(subject.getDOMNode())
@@ -87,7 +88,8 @@ describe('<TruncateText />', async () => {
             <em>should truncate</em>
           </p>
         </TruncateText>
-      </div>
+      </div>,
+      { strictMode: false }
     )
 
     const renderedContent = within(subject.getDOMNode())

@@ -79,7 +79,7 @@ describe('<Menu />', async () => {
 
       await item.click()
 
-      expect(onSelect).to.have.been.calledOnce()
+      expect(onSelect).to.have.been.called()
       expect(onSelect.getCall(0).args[1]).to.equal('Account')
     })
 
@@ -575,7 +575,7 @@ describe('<Menu />', async () => {
 
       await popover.keyDown('tab')
 
-      expect(onDismiss).to.have.been.calledOnce()
+      expect(onDismiss).to.have.been.called()
     })
 
     it('it should call onSelect when sub-menu popover option is selected', async () => {
@@ -607,7 +607,7 @@ describe('<Menu />', async () => {
 
       await menuItem.click()
 
-      expect(onSelect).to.have.been.calledOnce()
+      expect(onSelect).to.have.been.called()
     })
 
     it('it should call onToggle on document click and on dismiss', async () => {
@@ -628,7 +628,7 @@ describe('<Menu />', async () => {
 
       await trigger.click()
 
-      expect(onToggle).to.have.been.calledOnce()
+      expect(onToggle).to.have.been.called()
       expect(onToggle.getCall(0).args[0]).to.equal(true)
 
       const subMenu = await MenuLocator.find(':label(Flyout)')
@@ -638,10 +638,11 @@ describe('<Menu />', async () => {
         expect(popover.containsFocus()).to.be.true()
       })
 
+      onToggle.resetHistory()
       await wrapQueryResult(trigger.getOwnerDocument().documentElement).click()
 
-      expect(onToggle).to.have.been.calledTwice()
-      expect(onToggle.getCall(1).args[0]).to.equal(false)
+      expect(onToggle).to.have.been.called()
+      expect(onToggle.getCall(0).args[0]).to.equal(false)
     })
 
     it('it should call onMouseOver on hover', async () => {
@@ -665,7 +666,7 @@ describe('<Menu />', async () => {
 
       await trigger.mouseOver()
 
-      expect(onMouseOver).to.have.been.calledOnce()
+      expect(onMouseOver).to.have.been.called()
     })
   })
 })

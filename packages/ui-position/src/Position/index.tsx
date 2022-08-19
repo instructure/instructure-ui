@@ -26,9 +26,9 @@
 import { Component } from 'react'
 
 import {
-  safeCloneElement,
   callRenderProp,
   ensureSingleChild,
+  safeCloneElement,
   withDeterministicId
 } from '@instructure/ui-react-utils'
 import {
@@ -36,14 +36,12 @@ import {
   findDOMNode
 } from '@instructure/ui-dom-utils'
 import type { PositionChangeListenerType } from '@instructure/ui-dom-utils'
-import { shallowEqual, deepEqual } from '@instructure/ui-utils'
-import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
+import { deepEqual, shallowEqual } from '@instructure/ui-utils'
+import { debounce } from '@instructure/debounce'
 import { testable } from '@instructure/ui-testable'
-
 import { Portal } from '@instructure/ui-portal'
-
-import { withStyle, jsx } from '@instructure/emotion'
+import { jsx, withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -91,11 +89,11 @@ class Position extends Component<PositionProps, PositionState> {
       positioned: false,
       ...this.calculatePosition(props)
     }
-
     this.position = debounce(this.position, 0, {
       leading: false,
       trailing: true
     })
+
     this._id = this.props.id || props.deterministicId!()
   }
 

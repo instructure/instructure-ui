@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, createRef } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -43,6 +43,7 @@ import CodeMirror from './codemirror'
 import { propTypes, allowedProps } from './props'
 import type { CodeEditorProps } from './props'
 import type { EditorConfiguration } from 'codemirror'
+import { Controlled } from 'react-codemirror2'
 
 /**
 ---
@@ -70,16 +71,16 @@ class CodeEditor extends Component<CodeEditorProps> {
     }
   }
   private readonly _id: string
-  private codeMirror: CodeMirror | null = null
-  ref: Element | null = null
+  private codeMirror
+  ref
+  editor
 
   constructor(props: CodeEditorProps) {
     super(props)
     this._id = props.deterministicId!()
-  }
-
-  handleRef = (el: Element | null) => {
-    this.ref = el
+    this.ref = createRef<HTMLDivElement>()
+    this.editor = createRef<CodeMirror.Editor>()
+    this.codeMirror = createRef<Controlled>()
   }
 
   componentDidMount() {
@@ -124,7 +125,7 @@ class CodeEditor extends Component<CodeEditorProps> {
     const { value, label, attachment, readOnly, onChange, styles, ...rest } =
       this.props
     return (
-      <div css={styles?.codeEditor} ref={this.handleRef}>
+      <div css={styles?.codeEditor} ref={this.ref}>
         <Global styles={styles?.globalStyles} />
         <label htmlFor={this._id}>
           <ScreenReaderContent>{label}</ScreenReaderContent>
@@ -137,8 +138,16 @@ class CodeEditor extends Component<CodeEditorProps> {
             onBeforeChange={(_editor, _data, value) => {
               onChange?.(value)
             }}
-            ref={(el) => {
-              this.codeMirror = el ? el : null
+            ref={this.codeMirror}
+            // @ts-expect-error hack:
+            editorDidMount={(e) => (this.editor.current = e)}
+            editorWillUnmount={() => {
+              // @ts-expect-error hack:
+              this.editor.current.display.wrapper.remove()
+              if (this.codeMirror.current) {
+                // @ts-expect-error hack:
+                this.codeMirror.current.hydrated = false
+              }
             }}
           />
         </label>

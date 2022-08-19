@@ -95,6 +95,7 @@ const propTypes: PropValidators<PropKeys> = {
 }
 type PreviewState = {
   error: string | null
+  elToRender: React.ReactElement | null
 }
 const allowedProps: AllowedPropKeys = [
   'code',

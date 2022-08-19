@@ -775,7 +775,7 @@ describe('<Drilldown />', async () => {
       const option = await drilldown.findAllOptions()
       await option[1].click()
 
-      expect(onSelect).to.have.been.calledOnce()
+      expect(onSelect).to.have.been.called()
       const selectValue = match.falsy.or(match.string).or(match.number)
       expect(onSelect).to.have.been.calledWithMatch(match.object, {
         value: match.every(selectValue).or(selectValue),
@@ -890,7 +890,7 @@ describe('<Drilldown />', async () => {
 
       await trigger.click()
 
-      expect(onToggle).to.have.been.calledOnce()
+      expect(onToggle).to.have.been.called()
       expect(onToggle).to.have.been.calledWithMatch(match.object, {
         shown: true,
         drilldown: match.object,
@@ -917,7 +917,7 @@ describe('<Drilldown />', async () => {
       const drilldown = await DrilldownLocator.find()
       await drilldown.keyUp('esc')
 
-      expect(onToggle).to.have.been.calledOnce()
+      expect(onToggle).to.have.been.called()
       expect(onToggle).to.have.been.calledWithMatch(match.instanceOf(Event), {
         shown: false,
         drilldown: match.object,
@@ -945,7 +945,7 @@ describe('<Drilldown />', async () => {
 
       await drilldown.keyUp(27)
 
-      expect(onDismiss).to.have.been.calledOnce()
+      expect(onDismiss).to.have.been.called()
       expect(onDismiss).to.have.been.calledWithMatch(
         match.instanceOf(Event),
         false

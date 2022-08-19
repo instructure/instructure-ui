@@ -26,9 +26,9 @@ import React, { Component } from 'react'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
-import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
 import { FocusRegion, FocusRegionManager } from '@instructure/ui-a11y-utils'
+import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 
 import { propTypes, allowedProps } from './props'
 import type { DialogProps } from './props'
@@ -66,12 +66,6 @@ class Dialog extends Component<DialogProps> {
     return this.ref
   }
 
-  componentDidMount() {
-    if (this.props.open) {
-      this.open()
-    }
-  }
-
   componentDidUpdate(prevProps: DialogProps) {
     const { open, contentElement, ...options } = this.props
     if (open && !prevProps.open) {
@@ -81,6 +75,12 @@ class Dialog extends Component<DialogProps> {
     }
     if (this._focusRegion) {
       this._focusRegion.updateElement(this.contentElement, options)
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.open) {
+      this.open()
     }
   }
 

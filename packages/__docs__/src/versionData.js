@@ -29,15 +29,18 @@
  *   latestVersion: string, (e.g.: 'v8')
  *   previousVersions: string[] (e.g.: ['v7', 'v6'])
  * }
+ * @param signal {AbortController.signal}
  * @returns {Promise<null|object>}
  */
-const fetchVersionData = async () => {
+const fetchVersionData = async (signal) => {
   // eslint-disable-next-line compat/compat
   const isLocalHost = window.location.hostname === 'localhost'
 
   if (!isLocalHost) {
     // eslint-disable-next-line compat/compat
-    const result = await fetch(`${window.location.origin}/versions.json`)
+    const result = await fetch(`${window.location.origin}/versions.json`, {
+      signal
+    })
     const versionsData = await result.json()
 
     return versionsData
