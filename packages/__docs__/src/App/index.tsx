@@ -44,7 +44,6 @@ import { View } from '@instructure/ui-view'
 import { instructure } from '@instructure/ui-themes'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
-import { Pill } from '@instructure/ui-pill'
 import { IconButton } from '@instructure/ui-buttons'
 import { Tray } from '@instructure/ui-tray'
 import { Link } from '@instructure/ui-link'
@@ -77,6 +76,7 @@ import * as EveryComponent from '../../components'
 import type { AppProps, AppState, DocData, LayoutSize } from './props'
 import { propTypes, allowedProps } from './props'
 import type { LibraryOptions, MainDocsData } from '../../buildScripts/DataTypes'
+import { logError } from '@instructure/console'
 
 type AppContextType = {
   themeKey: keyof MainDocsData['themes']
@@ -98,10 +98,11 @@ class App extends Component<AppProps, AppState> {
   static defaultProps = {
     trayWidth: 300
   }
-  _content: HTMLDivElement | null
-  _menuTrigger: HTMLButtonElement | null
-  _mediaQueryListener: ReturnType<typeof addMediaQueryMatchListener> | null
+  _content?: HTMLDivElement
+  _menuTrigger?: HTMLButtonElement
+  _mediaQueryListener?: ReturnType<typeof addMediaQueryMatchListener>
   _defaultDocumentTitle?: string
+  _controller?: AbortController
 
   constructor(props: AppProps) {
     super(props)
@@ -123,36 +124,12 @@ class App extends Component<AppProps, AppState> {
       versionsData: null,
       iconsData: null
     }
-
-    this._content = null
-    this._menuTrigger = null
-    this._mediaQueryListener = null
-
-    this.fetchVersionData()
-    fetch('icons-data.json')
-      .then((response) => response.json())
-      .then((iconsData) => {
-        this.setState({ iconsData: iconsData })
-      })
-    fetch('markdown-and-sources-data.json')
-      .then((response) => response.json())
-      .then((docsData) => {
-        this.setState(
-          {
-            docsData,
-            themeKey: Object.keys(docsData.themes)[0]
-          },
-          this.scrollToElement
-        )
-      })
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error('Unable to load docs data :(\n' + error)
-      })
   }
 
   fetchDocumentData = async (docId: string) => {
-    const result = await fetch('docs/' + docId + '.json')
+    const result = await fetch('docs/' + docId + '.json', {
+      signal: this._controller?.signal
+    })
     const docData: DocData = await result.json()
     if (docId.includes('.')) {
       // e.g. 'Calendar.Day', first get 'Calendar' then 'Day'
@@ -167,8 +144,8 @@ class App extends Component<AppProps, AppState> {
     return docData
   }
 
-  fetchVersionData = async () => {
-    const versionsData = await fetchVersionData()
+  fetchVersionData = async (signal: AbortController['signal']) => {
+    const versionsData = await fetchVersionData(signal)
     return this.setState({ versionsData })
   }
 
@@ -233,6 +210,34 @@ class App extends Component<AppProps, AppState> {
       this.updateLayout
     )
     this.props.makeStyles?.()
+
+    this._controller = new AbortController()
+    const signal = this._controller.signal
+
+    this.fetchVersionData(signal)
+
+    const errorHandler = (error: Error) => {
+      logError(error.name === 'AbortError', error.message)
+    }
+
+    fetch('icons-data.json', { signal })
+      .then((response) => response.json())
+      .then((iconsData) => {
+        this.setState({ iconsData: iconsData })
+      })
+      .catch(errorHandler)
+    fetch('markdown-and-sources-data.json', { signal })
+      .then((response) => response.json())
+      .then((docsData) => {
+        this.setState(
+          {
+            docsData,
+            themeKey: Object.keys(docsData.themes)[0]
+          },
+          this.scrollToElement
+        )
+      })
+      .catch(errorHandler)
   }
 
   componentDidUpdate() {
@@ -240,6 +245,8 @@ class App extends Component<AppProps, AppState> {
   }
 
   componentWillUnmount() {
+    //cancel ongoing requests
+    this._controller?.abort()
     window.removeEventListener('hashchange', this.updateKey, false)
 
     if (this._mediaQueryListener) {

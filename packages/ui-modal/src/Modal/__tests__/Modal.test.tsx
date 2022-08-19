@@ -174,9 +174,9 @@ describe('<Modal />', async () => {
     )
 
     await wait(() => {
-      expect(onEnter).to.have.been.calledOnce()
-      expect(onEntering).to.have.been.calledOnce()
-      expect(onEntered).to.have.been.calledOnce()
+      expect(onEnter).to.have.been.called()
+      expect(onEntering).to.have.been.called()
+      expect(onEntered).to.have.been.called()
     })
   })
 
@@ -194,7 +194,7 @@ describe('<Modal />', async () => {
     )
 
     await wait(() => {
-      expect(onOpen).to.have.been.calledOnce()
+      expect(onOpen).to.have.been.called()
     })
   })
 
@@ -215,7 +215,7 @@ describe('<Modal />', async () => {
     await subject.setProps({ open: false })
 
     await wait(() => {
-      expect(onClose).to.have.been.calledOnce()
+      expect(onClose).to.have.been.called()
     })
   })
 
@@ -243,7 +243,7 @@ describe('<Modal />', async () => {
     await (within(modal.getOwnerDocument().documentElement) as any).click()
 
     await wait(() => {
-      expect(onDismiss).to.have.been.calledOnce()
+      expect(onDismiss).to.have.been.called()
     })
   })
 

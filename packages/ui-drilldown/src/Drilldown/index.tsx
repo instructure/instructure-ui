@@ -527,6 +527,26 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     return this.props.trigger ? this.state.isShowingPopover : true
   }
 
+  containsDuplicateChild(children: PageChildren[]) {
+    let containsDuplicate = false
+    const childMap = new Map<string, boolean>()
+
+    for (const child of children) {
+      if (!childMap.has(child.props.id)) {
+        childMap.set(child.props.id, true)
+      } else {
+        warn(
+          false,
+          `Duplicate id: "${child.props.id}"! Make sure all options have unique ids, otherwise they won't be rendered.`
+        )
+
+        return (containsDuplicate = true)
+      }
+    }
+
+    return containsDuplicate
+  }
+
   show = (event: React.SyntheticEvent) => {
     if (this._popover) {
       this._popover.show(event as React.UIEvent | React.FocusEvent)
@@ -878,7 +898,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   ) {
     const { currentPage, headerChildren } = this
 
-    if (!currentPage) {
+    if (!currentPage || this.containsDuplicateChild(currentPage.children)) {
       return null
     }
 
@@ -986,14 +1006,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       warn(
         false,
         `Drilldown.Option without id won't be rendered. It is needed to internally track the options.`
-      )
-      return null
-    }
-
-    if (this.getPageChildById(id)) {
-      warn(
-        false,
-        `Duplicate id: "${id}"! Make sure all options have unique ids, otherwise they won't be rendered.`
       )
       return null
     }

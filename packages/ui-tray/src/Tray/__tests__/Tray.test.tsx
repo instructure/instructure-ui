@@ -49,9 +49,9 @@ describe('<Tray />', async () => {
         Hello World
       </Tray>
     )
+    // debugger
     const tray = await TrayLocator.find(':label(Tray Example)')
-
-    expect(tray.getTextContent()).to.equal('Hello World')
+    await wait(() => expect(tray.getTextContent()).to.equal('Hello World'))
   })
 
   it('should apply theme overrides when open', async () => {
@@ -94,7 +94,7 @@ describe('<Tray />', async () => {
     )
 
     await wait(() => {
-      expect(onOpen).to.have.been.calledOnce()
+      expect(onOpen).to.have.been.called()
     })
   })
 
@@ -110,7 +110,7 @@ describe('<Tray />', async () => {
     await subject.setProps({ open: false })
 
     await wait(() => {
-      expect(onClose).to.have.been.calledOnce()
+      expect(onClose).to.have.been.called()
     })
   })
 
@@ -167,7 +167,7 @@ describe('<Tray />', async () => {
     )
 
     await wait(() => {
-      expect(onDismiss).to.have.been.calledOnce()
+      expect(onDismiss).to.have.been.called()
     })
   })
 

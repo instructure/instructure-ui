@@ -46,7 +46,6 @@ import type { AppContextType } from '../App'
 
 import { Preview } from '../Preview'
 import { CodeSandboxButton } from '../CodeSandboxButton'
-import { LibraryPropType } from '../propTypes'
 import type { PlaygroundProps, PlaygroundState } from './props'
 import { propTypes, allowedProps } from './props'
 
@@ -69,9 +68,6 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     readOnly: false
   }
 
-  static contextTypes = {
-    library: LibraryPropType
-  }
   _fullScreenButton: IconButton | null = null
 
   constructor(props: PlaygroundProps) {

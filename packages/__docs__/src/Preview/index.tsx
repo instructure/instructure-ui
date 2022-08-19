@@ -24,15 +24,14 @@
 
 /** @jsx jsx */
 import React, { Component } from 'react'
-import { createRoot, Root } from 'react-dom/client'
 import { DIRECTION, TextDirectionContext } from '@instructure/ui-i18n'
-import { InstUISettingsProvider, withStyle, jsx } from '@instructure/emotion'
-import { canvas } from '@instructure/ui-themes'
+import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { compileAndRenderExample } from '../compileAndRenderExample'
 import { propTypes, allowedProps } from './props'
 import type { PreviewProps, PreviewState } from './props'
+import canvas from '@instructure/ui-themes'
 
 @withStyle(generateStyle, generateComponentTheme)
 class Preview extends Component<PreviewProps, PreviewState> {
@@ -48,14 +47,12 @@ class Preview extends Component<PreviewProps, PreviewState> {
     background: 'checkerboard'
   }
 
-  private _mountNode?: HTMLDivElement | null
-  private _root?: Root
-
   constructor(props: PreviewProps) {
     super(props)
 
     this.state = {
-      error: null
+      error: null,
+      elToRender: null
     }
   }
 
@@ -77,20 +74,8 @@ class Preview extends Component<PreviewProps, PreviewState> {
   }
 
   executeCode(code: string) {
-    if (this._root) {
-      this._root.unmount()
-      this._root = undefined
-    }
-
-    this.setState({ error: null })
-
-    if (!code) {
-      return
-    }
-
     const render = (el: React.ReactElement) => {
       const { themeKey, themes } = this.props
-
       const theme = themes?.[themeKey!]?.resource || canvas
       const dir = (this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr) as
         | 'rtl'
@@ -102,8 +87,8 @@ class Preview extends Component<PreviewProps, PreviewState> {
           </TextDirectionContext.Provider>
         </InstUISettingsProvider>
       )
-      this._root = createRoot(this._mountNode!)
-      this._root.render(elToRender)
+
+      this.setState({ elToRender })
     }
 
     compileAndRenderExample({
@@ -115,24 +100,16 @@ class Preview extends Component<PreviewProps, PreviewState> {
   }
 
   handleError = (err: Error) => {
-    if (this._root) {
-      this._root.unmount()
-      this._root = undefined
-    }
     this.setState({
       error: err.toString()
     })
   }
 
   renderContent() {
+    const { elToRender } = this.state
+
     // Add div around content so parent's `display: flex` doesn't mess up component styles
-    const content = (
-      <div
-        ref={(el) => {
-          this._mountNode = el
-        }}
-      />
-    )
+    const content = <div>{elToRender}</div>
 
     if (this.props.background === 'none') {
       return <div>{content}</div>

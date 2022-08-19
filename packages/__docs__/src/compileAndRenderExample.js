@@ -24,12 +24,10 @@
 
 import { transform } from '@babel/standalone'
 
-const compileCode = (code) => {
-  return transform(code, {
-    presets: ['es2015', ['stage-1', { decoratorsLegacy: true }], 'react'],
-    plugins: ['proposal-object-rest-spread']
+const compileCode = (code) =>
+  transform(code, {
+    presets: ['react']
   }).code
-}
 
 export const compileAndRenderExample = ({
   code,
@@ -42,7 +40,7 @@ export const compileAndRenderExample = ({
     const el = eval(compiledCode) // eslint-disable-line no-eval
 
     if (shouldCallRender !== false) {
-      render(el)
+      return render(el)
     }
   } catch (err) {
     onError(err)

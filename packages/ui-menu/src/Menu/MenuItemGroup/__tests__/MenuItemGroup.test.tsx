@@ -234,25 +234,29 @@ describe('<MenuItemGroup />', async () => {
 
     expect(items[0].getAttribute('aria-checked')).to.equal('true')
 
-    expect(onSelect).to.have.been.calledOnce()
+    expect(onSelect).to.have.been.called()
     expect(onSelect.getCall(0).args[1]).to.deep.equal([0])
     expect(onSelect.getCall(0).args[2]).to.be.true()
+
+    onSelect.resetHistory()
 
     await items[1].click()
 
     expect(items[1].getAttribute('aria-checked')).to.equal('true')
 
-    expect(onSelect).to.have.been.calledTwice()
-    expect(onSelect.getCall(1).args[1]).to.deep.equal([0, 1])
-    expect(onSelect.getCall(1).args[2]).to.be.true()
+    expect(onSelect).to.have.been.called()
+    expect(onSelect.getCall(0).args[1]).to.deep.equal([0, 1])
+    expect(onSelect.getCall(0).args[2]).to.be.true()
+
+    onSelect.resetHistory()
 
     await items[0].click()
 
     expect(items[0].getAttribute('aria-checked')).to.equal('false')
 
-    expect(onSelect).to.have.been.calledThrice()
-    expect(onSelect.getCall(2).args[1]).to.deep.equal([1])
-    expect(onSelect.getCall(2).args[2]).to.be.false()
+    expect(onSelect).to.have.been.called()
+    expect(onSelect.getCall(0).args[1]).to.deep.equal([1])
+    expect(onSelect.getCall(0).args[2]).to.be.false()
   })
 
   it('updates the selected items when allowMultiple is false', async () => {
@@ -273,17 +277,19 @@ describe('<MenuItemGroup />', async () => {
     expect(items[0].getAttribute('aria-checked')).to.equal('true')
     expect(items[1].getAttribute('aria-checked')).to.equal('false')
 
-    expect(onSelect).to.have.been.calledOnce()
+    expect(onSelect).to.have.been.called()
     expect(onSelect.getCall(0).args[1]).to.deep.equal([0])
     expect(onSelect.getCall(0).args[2]).to.be.true()
+
+    onSelect.resetHistory()
 
     await items[1].click()
 
     expect(items[1].getAttribute('aria-checked')).to.equal('true')
     expect(items[0].getAttribute('aria-checked')).to.equal('false')
 
-    expect(onSelect).to.have.been.calledTwice()
-    expect(onSelect.getCall(1).args[1]).to.deep.equal([1])
-    expect(onSelect.getCall(1).args[2]).to.be.true()
+    expect(onSelect).to.have.been.called()
+    expect(onSelect.getCall(0).args[1]).to.deep.equal([1])
+    expect(onSelect.getCall(0).args[2]).to.be.true()
   })
 })

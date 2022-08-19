@@ -307,7 +307,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
   }
 
   componentWillUnmount() {
-    this._editorView = undefined
+    this._editorView?.destroy()
 
     this.cancelAnimationFrames()
   }

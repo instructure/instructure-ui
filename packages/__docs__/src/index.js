@@ -31,7 +31,9 @@ import { InstUISettingsProvider } from '@instructure/emotion'
 import '../globals'
 
 createRoot(document.getElementById('app')).render(
-  <InstUISettingsProvider theme={canvas}>
-    <App />
-  </InstUISettingsProvider>
+  <React.StrictMode>
+    <InstUISettingsProvider theme={canvas}>
+      <App />
+    </InstUISettingsProvider>
+  </React.StrictMode>
 )

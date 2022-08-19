@@ -4,6 +4,7 @@
  * Copyright (c) 2015 - present Instructure, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
+ *
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -51,7 +52,9 @@ describe(`<Portal />`, async () => {
         Hello World
       </Portal>
     )
+
     const portal = await find('#portal')
+
     expect(onOpen).to.have.been.calledWith(portal.getDOMNode())
   })
 
@@ -59,12 +62,10 @@ describe(`<Portal />`, async () => {
     const onClose = stub()
 
     const subject = await mount(
-      <Portal onClose={onClose} open>
+      <Portal open onClose={onClose}>
         Hello World
       </Portal>
     )
-
-    expect(onClose).to.not.have.been.called()
 
     await subject.setProps({ open: false })
 

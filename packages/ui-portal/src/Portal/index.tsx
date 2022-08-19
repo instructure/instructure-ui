@@ -85,9 +85,14 @@ class Portal extends Component<PortalProps, PortalState> {
     if (!canUseDOM) {
       return
     }
+
     // If Portal is mounting in an open condition fire onOpen handler
-    if (this.props.open && typeof this.props.onOpen === 'function') {
-      this.props.onOpen(this.DOMNode)
+    if (this.props.open && React.Children.count(this.props.children) > 0) {
+      this.forceUpdate(() => {
+        if (this.props.open && typeof this.props.onOpen === 'function') {
+          this.props.onOpen(this.DOMNode)
+        }
+      })
     }
   }
 

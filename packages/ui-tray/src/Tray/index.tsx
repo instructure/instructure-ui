@@ -122,7 +122,9 @@ class Tray extends Component<TrayProps> {
   }
 
   handlePortalOpen = (DOMNode: PortalNode) => {
-    this.DOMNode = DOMNode
+    if (DOMNode) {
+      this.DOMNode = DOMNode
+    }
   }
 
   render() {

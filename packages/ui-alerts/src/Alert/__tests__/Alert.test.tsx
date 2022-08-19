@@ -164,7 +164,7 @@ describe('<Alert />', async () => {
   describe('with `screenReaderOnly', async () => {
     it('should not render anything when using `liveRegion`', async () => {
       const liver = document.getElementById('_alertLiveRegion')!
-      const subject = await mount(
+      await mount(
         <Alert
           variant="success"
           liveRegion={() => liver}
@@ -174,7 +174,10 @@ describe('<Alert />', async () => {
         </Alert>
       )
 
-      expect(subject.getDOMNode()).to.not.exist()
+      const root = document.querySelector('[data-ui-test-utils]')!
+
+      expect(root.children.length).to.equal(0)
+      expect(liver.children.length).to.equal(1)
     })
 
     it('should warn if `liveRegion` is not defined', async () => {

@@ -58,6 +58,7 @@ const testable =
           private _testableUnmounted: boolean | undefined
           _locatorTimeout: ReturnType<typeof setTimeout> | undefined
           componentDidMount() {
+            this._testableUnmounted = false
             if (super.componentDidMount) {
               super.componentDidMount()
             }

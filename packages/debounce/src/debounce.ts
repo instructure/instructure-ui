@@ -75,7 +75,6 @@ function debounce(
   let lastCallTime: number | undefined // TODO this should never be undefined
   let lastInvokeTime = 0
   let timers: ReturnType<typeof setTimeout>[] = []
-  let cancelled = false
   if (typeof func !== 'function') {
     throw new TypeError('Expected a function')
   }
@@ -92,10 +91,8 @@ function debounce(
     lastArgs = undefined
     lastThis = undefined
     lastInvokeTime = time
-    if (!cancelled) {
-      result = func.apply(thisArg, args as unknown[])
-      return result
-    }
+    result = func.apply(thisArg, args as unknown[])
+    return result
   }
 
   function leadingEdge(time: number) {
@@ -155,7 +152,6 @@ function debounce(
   }
 
   function cancel() {
-    cancelled = true
     clearAllTimers()
     lastInvokeTime = 0
     lastArgs = lastCallTime = lastThis = undefined

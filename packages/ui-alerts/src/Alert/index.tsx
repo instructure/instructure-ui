@@ -42,8 +42,7 @@ import {
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
 import { logError as error } from '@instructure/console'
-import { canvas } from '@instructure/ui-themes'
-import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -80,13 +79,14 @@ class Alert extends Component<AlertProps, AlertState> {
   constructor(props: AlertProps) {
     super(props)
 
+    this.srid = this.props.deterministicId!()
     this.state = {
       open: true
     }
   }
 
   _timeouts: ReturnType<typeof setTimeout>[] = []
-  srid?: string
+  srid: string
 
   variantUI = {
     error: IconNoSolid,
@@ -169,36 +169,11 @@ class Alert extends Component<AlertProps, AlertState> {
   createScreenreaderAlert() {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
-      this.srid = this.props.deterministicId!()
-
       const div = document.createElement('div')
       div.setAttribute('id', this.srid)
 
-      this.renderScreenreeaderAlert(div)
       liveRegion.appendChild(div)
     }
-  }
-
-  updateScreenreaderAlert() {
-    if (this.getLiveRegion()) {
-      const div = document.getElementById(this.srid!) as HTMLDivElement
-      if (div) {
-        ReactDOM.render(null as any, div, () => {
-          this.renderScreenreeaderAlert(div)
-        })
-      }
-    }
-  }
-
-  renderScreenreeaderAlert(div: HTMLDivElement) {
-    const content = this.createScreenreaderContentNode()
-    ReactDOM.render(
-      // since ScreenReaderContent gets rendered outside the app,
-      // and uses the withStyle decorator, we need to provide a theme for it,
-      // otherwise throws warning (any theme, doesn't use any theme variables)
-      <InstUISettingsProvider theme={canvas}>{content}</InstUISettingsProvider>,
-      div
-    )
   }
 
   removeScreenreaderAlert() {
@@ -213,9 +188,6 @@ class Alert extends Component<AlertProps, AlertState> {
         liveRegion.removeAttribute('aria-live')
         liveRegion.removeAttribute('aria-relevant')
         liveRegion.removeAttribute('aria-atomic')
-
-        ReactDOM.unmountComponentAtNode(div)
-        div?.parentNode?.removeChild(div)
 
         this.initLiveRegion(liveRegion)
       }
@@ -239,7 +211,10 @@ class Alert extends Component<AlertProps, AlertState> {
     }
 
     this.handleTimeout()
-    this.createScreenreaderAlert()
+  }
+
+  componentWillUnmount() {
+    this.clearTimeouts()
   }
 
   componentDidUpdate(prevProps: AlertProps) {
@@ -248,16 +223,7 @@ class Alert extends Component<AlertProps, AlertState> {
       // this outside world is asking us to close the alert, which needs to
       // take place internally so the transition runs
       this.close()
-    } else {
-      if (this.props.children !== prevProps.children) {
-        this.updateScreenreaderAlert()
-      }
     }
-  }
-
-  componentWillUnmount() {
-    this.removeScreenreaderAlert()
-    this.clearTimeouts()
   }
 
   renderIcon() {
@@ -301,7 +267,22 @@ class Alert extends Component<AlertProps, AlertState> {
     )
   }
 
+  createScreenReaderPortal(liveRegion: Element) {
+    const { open } = this.state
+
+    return open
+      ? ReactDOM.createPortal(
+          <div id={this.srid}>{this.createScreenreaderContentNode()}</div>,
+          liveRegion
+        )
+      : null
+  }
+
   render() {
+    const liveRegion = this.getLiveRegion()
+    const screenReaderContent = liveRegion
+      ? this.createScreenReaderPortal(liveRegion)
+      : null
     // Don't render anything if screen reader only
     if (this.props.screenReaderOnly) {
       error(
@@ -309,22 +290,30 @@ class Alert extends Component<AlertProps, AlertState> {
         `[Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'.`
       )
 
-      return null
+      return screenReaderContent
     }
 
     if (this.props.transition === 'none') {
-      return this.state.open ? this.renderAlert() : null
+      return this.state.open ? (
+        <React.Fragment>
+          {screenReaderContent}
+          {this.renderAlert()}
+        </React.Fragment>
+      ) : null
     }
     return (
-      <Transition
-        type={this.props.transition}
-        transitionOnMount
-        in={this.state.open}
-        unmountOnExit
-        onExited={this.onExitTransition}
-      >
-        {this.renderAlert()}
-      </Transition>
+      <React.Fragment>
+        {screenReaderContent}
+        <Transition
+          type={this.props.transition}
+          transitionOnMount
+          in={this.state.open}
+          unmountOnExit
+          onExited={this.onExitTransition}
+        >
+          {this.renderAlert()}
+        </Transition>
+      </React.Fragment>
     )
   }
 }
