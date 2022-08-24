@@ -45,7 +45,15 @@ const edgeColorValues = {
   'Black, transparent': '#00000000',
   'White, transparent': '#FFFFFF00'
 }
-const paletteKeyboardEvent = [
+
+const differentHexColorValues = {
+  3: '#abc',
+  4: '#abcd',
+  6: '#abcdef',
+  8: '#abcdefaa'
+}
+
+const paletteKeyboardEvents = [
   'a',
   'w',
   's',
@@ -55,6 +63,8 @@ const paletteKeyboardEvent = [
   'ArrowUp',
   'ArrowDown'
 ]
+
+const sliderKeyboardEvents = ['a', 'd', 'ArrowLeft', 'ArrowRight']
 
 const testInputLabels = {
   rgbRedInputScreenReaderLabel: 'Input field for red',
@@ -162,103 +172,41 @@ describe('<ColorMixer />', () => {
 
         const component = await ColorMixerLocator.find()
         const inputs = await component.findAll('input')
-        const [r, g, b, a] = await inputs.map((input) =>
+        const [r, g, b, a] = inputs.map((input) =>
           Number(input.getAttribute('value'))
         )
-        const colorHex = await colorToHex8({ r, g, b, a })
+        const colorHex = colorToHex8({ r, g, b, a })
         expect(colorHex).to.be.eq(color)
       })
     })
 
-    it('mount with 3-character hex color', async () => {
-      const colorInput = '#abc'
-      await mount(
-        <ColorMixer
-          value={colorInput}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          withAlpha
-          onChange={stub()}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const inputs = await component.findAll('input')
-      const [r, g, b, a] = await inputs.map((input) =>
-        Number(input.getAttribute('value'))
-      )
-      const rgba = colorToRGB(colorInput)
-      rgba.a = Math.round(rgba.a * 100)
-      expect(deepEqual(rgba, { r, g, b, a })).to.be.true()
-    })
-
-    it('mount with 4-character hex color', async () => {
-      const colorInput = '#abcd'
-      await mount(
-        <ColorMixer
-          value={colorInput}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          withAlpha
-          onChange={stub()}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const inputs = await component.findAll('input')
-      const [r, g, b, a] = await inputs.map((input) =>
-        Number(input.getAttribute('value'))
-      )
-      const rgba = colorToRGB(colorInput)
-      rgba.a = Math.round(rgba.a * 100)
-      expect(deepEqual(rgba, { r, g, b, a })).to.be.true()
-    })
-
-    it('mount with 8-character hex color', async () => {
-      const colorInput = '#abcdefaa'
-      await mount(
-        <ColorMixer
-          value={colorInput}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          withAlpha
-          onChange={stub()}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const inputs = await component.findAll('input')
-      const [r, g, b, a] = await inputs.map((input) =>
-        Number(input.getAttribute('value'))
-      )
-      const rgba = colorToRGB(colorInput)
-      rgba.a = Math.round(rgba.a * 100)
-      expect(deepEqual(rgba, { r, g, b, a })).to.be.true()
-    })
-
-    it('mount with 6-character hex color', async () => {
-      const colorInput = '#abcdef'
-      await mount(
-        <ColorMixer
-          value={colorInput}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          withAlpha
-          onChange={stub()}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const inputs = await component.findAll('input')
-      const [r, g, b, a] = await inputs.map((input) =>
-        Number(input.getAttribute('value'))
-      )
-      const rgba = colorToRGB(colorInput)
-      rgba.a = Math.round(rgba.a * 100)
-      expect(deepEqual(rgba, { r, g, b, a })).to.be.true()
+    Object.entries(differentHexColorValues).forEach(([length, color]) => {
+      it(`mount with ${length}-character hex color`, async () => {
+        const colorInput = color
+        await mount(
+          <ColorMixer
+            value={colorInput}
+            {...testInputLabels}
+            {...testScreenReaderLabels}
+            withAlpha
+            onChange={stub()}
+          />
+        )
+        const component = await ColorMixerLocator.find()
+        const inputs = await component.findAll('input')
+        const [r, g, b, a] = inputs.map((input) =>
+          Number(input.getAttribute('value'))
+        )
+        const rgba = colorToRGB(colorInput)
+        rgba.a = Math.round(rgba.a * 100)
+        expect(deepEqual(rgba, { r, g, b, a })).to.be.true()
+      })
     })
 
     it('mount with invalid hex color', async () => {
+      const consoleWarn = stub(console, 'warn')
+      const warning =
+        'Warning: [ColorMixer] The passed color value is not valid.'
       await mount(
         <ColorMixer
           value="#GGGGGGGG"
@@ -271,16 +219,17 @@ describe('<ColorMixer />', () => {
 
       const component = await ColorMixerLocator.find()
       const inputs = await component.findAll('input')
-      const [r, g, b, a] = await inputs.map((input) =>
+      const [r, g, b, a] = inputs.map((input) =>
         Number(input.getAttribute('value'))
       )
       const colorHex = colorToHex8({ r, g, b, a })
       expect(colorHex).to.be.eq('#000000FF')
+      expect(consoleWarn).to.be.calledWith(warning)
     })
   })
 
   describe('hue slider', () => {
-    it('should not call onChange when receive `tab` key press', async () => {
+    it('should not call onChange when the `tab` key is pressed', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -297,7 +246,7 @@ describe('<ColorMixer />', () => {
       expect(onChange).to.not.have.been.called()
     })
 
-    it('onChange should not be call with click event when component is disable', async () => {
+    it('onChange should not be call when component is disabled', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -346,7 +295,7 @@ describe('<ColorMixer />', () => {
         expect(onChange).to.have.been.called()
       })
 
-      it('click at the begin of the slider', async () => {
+      it('click at the beginning of the slider', async () => {
         const onChange = stub()
         await mount(
           <ColorMixer
@@ -360,6 +309,7 @@ describe('<ColorMixer />', () => {
         const hueSlider = await component.findColorSlider()
         const rect = hueSlider.getBoundingClientRect()
         await hueSlider.mouseDown({ clientX: rect.x })
+        // Because we already passed the `value` that different from the default value then the component changes their color once, so if we want to test with any action after that, `onChange` should be called twice.
         expect(onChange).to.have.been.calledTwice()
       })
 
@@ -377,6 +327,7 @@ describe('<ColorMixer />', () => {
         const hueSlider = await component.findColorSlider()
         const rect = hueSlider.getBoundingClientRect()
         await hueSlider.mouseDown({ clientX: rect.x - 100 })
+        // Because we already passed the `value` that different from the default value then the component changes their color once, so if we want to test with any action after that, `onChange` should be called twice.
         expect(onChange).to.have.been.calledTwice()
       })
 
@@ -394,79 +345,31 @@ describe('<ColorMixer />', () => {
         const hueSlider = await component.findColorSlider()
         const rect = hueSlider.getBoundingClientRect()
         await hueSlider.mouseDown({ clientX: rect.x + rect.width + 100 })
+        // Because we already passed the `value` that different from the default value then the component changes their color once, so if we want to test with any action after that, `onChange` should be called twice.
         expect(onChange).to.have.been.calledTwice()
       })
     })
 
-    it("hue value change with 'a' key pressed", async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          {...testValue}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
+    sliderKeyboardEvents.forEach((keyboardEvent) => {
+      it(`hue value change with '${keyboardEvent}' key pressed`, async () => {
+        const onChange = stub()
+        await mount(
+          <ColorMixer
+            {...testValue}
+            {...testInputLabels}
+            {...testScreenReaderLabels}
+            onChange={onChange}
+          />
+        )
 
-      const component = await ColorMixerLocator.find()
-      const hueSlider = await component.findColorSlider()
-      await hueSlider.keyDown('a')
-      expect(onChange).to.have.been.calledTwice()
+        const component = await ColorMixerLocator.find()
+        const hueSlider = await component.findColorSlider()
+        await hueSlider.keyDown(keyboardEvent)
+        expect(onChange).to.have.been.calledTwice()
+      })
     })
 
-    it("hue value change with 'ArrowLeft' key pressed", async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          {...testValue}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const hueSlider = await component.findColorSlider()
-      await hueSlider.keyDown('ArrowLeft')
-      expect(onChange).to.have.been.calledTwice()
-    })
-
-    it("hue value change with 'd' key pressed", async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          {...testValue}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const hueSlider = await component.findColorSlider()
-      await hueSlider.keyDown('d')
-      expect(onChange).to.have.been.calledTwice()
-    })
-
-    it("hue value change with 'ArrowRight' key pressed", async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          {...testValue}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const hueSlider = await component.findColorSlider()
-      await hueSlider.keyDown('ArrowRight')
-      expect(onChange).to.have.been.calledTwice()
-    })
-
-    it('the hue indicator move left when "a" key is pressed', async () => {
+    it('the hue indicator move left', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -484,29 +387,12 @@ describe('<ColorMixer />', () => {
       await hueSlider.keyDown('a')
       const pos_2 = indicator.getBoundingClientRect()
       expect(pos_2.x).to.be.lt(pos_1.x)
-    })
-
-    it('the hue indicator move left when "ArrowLeft" key is pressed', async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          {...testValue}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const hueSlider = await component.findColorSlider()
-      const indicator = await hueSlider.find('[class*=__indicator]')
-      const pos_1 = indicator.getBoundingClientRect()
       await hueSlider.keyDown('ArrowLeft')
-      const pos_2 = indicator.getBoundingClientRect()
-      expect(pos_2.x).to.be.lt(pos_1.x)
+      const pos_3 = indicator.getBoundingClientRect()
+      expect(pos_3.x).to.be.lt(pos_2.x)
     })
 
-    it('the hue indicator move right when "ArrowRight" key is pressed', async () => {
+    it('the hue indicator move right', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -524,29 +410,12 @@ describe('<ColorMixer />', () => {
       await hueSlider.keyDown('ArrowRight')
       const pos_2 = indicator.getBoundingClientRect()
       expect(pos_2.x).to.be.gt(pos_1.x)
-    })
-
-    it('the hue indicator move right when "d" key is pressed', async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          {...testValue}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const hueSlider = await component.findColorSlider()
-      const indicator = await hueSlider.find('[class*=__indicator]')
-      const pos_1 = indicator.getBoundingClientRect()
       await hueSlider.keyDown('d')
-      const pos_2 = indicator.getBoundingClientRect()
-      expect(pos_2.x).to.be.gt(pos_1.x)
+      const pos_3 = indicator.getBoundingClientRect()
+      expect(pos_3.x).to.be.gt(pos_2.x)
     })
 
-    it('the hue indicator does not move when reach the left border ("ArrowLeft" key)', async () => {
+    it('the hue indicator does not move when reach the left border', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -564,29 +433,12 @@ describe('<ColorMixer />', () => {
       await hueSlider.keyDown('ArrowLeft')
       const pos_2 = indicator.getBoundingClientRect()
       expect(pos_2.x).to.be.eq(pos_1.x)
-    })
-
-    it('the hue indicator does not move when reach the left border ("a" key)', async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 0, s: 0.5, v: 0.5 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const hueSlider = await component.findColorSlider()
-      const indicator = await hueSlider.find('[class*=__indicator]')
-      const pos_1 = indicator.getBoundingClientRect()
       await hueSlider.keyDown('a')
-      const pos_2 = indicator.getBoundingClientRect()
-      expect(pos_2.x).to.be.eq(pos_1.x)
+      const pos_3 = indicator.getBoundingClientRect()
+      expect(pos_3.x).to.be.eq(pos_1.x)
     })
 
-    it('the hue indicator does not move when reach the right border ("ArrowRight" key)', async () => {
+    it('the hue indicator does not move when reach the right border', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -605,32 +457,14 @@ describe('<ColorMixer />', () => {
       await hueSlider.keyDown('ArrowRight')
       const pos_2 = indicator.getBoundingClientRect()
       expect(pos_2.x).to.be.eq(pos_1.x)
-    })
-
-    it('the hue indicator does not move when reach the right border ("d" key)', async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          value="#804041FF"
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const hueSlider = await component.findColorSlider()
-      const indicator = await hueSlider.find('[class*=__indicator]')
       await hueSlider.keyDown('d')
-      const pos_1 = indicator.getBoundingClientRect()
-      await hueSlider.keyDown('d')
-      const pos_2 = indicator.getBoundingClientRect()
-      expect(pos_2.x).to.be.eq(pos_1.x)
+      const pos_3 = indicator.getBoundingClientRect()
+      expect(pos_3.x).to.be.eq(pos_1.x)
     })
   })
 
   describe('alpha slider', () => {
-    it('should not call onChange when receive `tab` key press', async () => {
+    it('should not call onChange when a `tab` key press is received', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -647,7 +481,7 @@ describe('<ColorMixer />', () => {
       expect(onChange).to.not.have.been.called()
     })
 
-    describe('alpha value change when receive a mousedown event', () => {
+    describe('alpha value should change when a mousedown event is received', () => {
       it('click at the begin of the bar', async () => {
         const onChange = stub()
         await mount(
@@ -764,79 +598,27 @@ describe('<ColorMixer />', () => {
       expect(onChange).to.have.not.been.called()
     })
 
-    it("alpha value change with 'a' key pressed", async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          withAlpha
-          {...testValue}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
+    sliderKeyboardEvents.forEach((keyboardEvent) => {
+      it(`alpha value change with '${keyboardEvent}' key pressed`, async () => {
+        const onChange = stub()
+        await mount(
+          <ColorMixer
+            withAlpha
+            value="#000000AA"
+            {...testInputLabels}
+            {...testScreenReaderLabels}
+            onChange={onChange}
+          />
+        )
 
-      const component = await ColorMixerLocator.find()
-      const alpharSlider = await component.findAlphaSlider()
-      await alpharSlider.keyDown('a')
-      expect(onChange).to.have.been.calledTwice()
+        const component = await ColorMixerLocator.find()
+        const alpharSlider = await component.findAlphaSlider()
+        await alpharSlider.keyDown(keyboardEvent)
+        expect(onChange).to.have.been.calledTwice()
+      })
     })
 
-    it("alpha value change with 'ArrowLeft' key pressed", async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          withAlpha
-          {...testValue}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const alpharSlider = await component.findAlphaSlider()
-      await alpharSlider.keyDown('ArrowLeft')
-      expect(onChange).to.have.been.calledTwice()
-    })
-
-    it("alpha value change with 'd' key pressed", async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          withAlpha
-          value="#804041CC"
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const alpharSlider = await component.findAlphaSlider()
-      await alpharSlider.keyDown('d')
-      expect(onChange).to.have.been.calledTwice()
-    })
-
-    it("alpha value change with 'ArrowRight' key pressed", async () => {
-      const onChange = stub()
-      await mount(
-        <ColorMixer
-          withAlpha
-          value="#804041CC"
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const alpharSlider = await component.findAlphaSlider()
-      await alpharSlider.keyDown('ArrowRight')
-      expect(onChange).to.have.been.calledTwice()
-    })
-
-    it('the alpha indicator does not move right when reach the right border ("d" key)', async () => {
+    it('the alpha indicator does not move right when it reachs the right border', async () => {
       const onChange = stub()
 
       await mount(
@@ -856,33 +638,13 @@ describe('<ColorMixer />', () => {
       await alphaSlider.keyDown('d')
       const pos_2 = indicator.getBoundingClientRect()
       expect(pos_2.x).to.be.eq(pos_1.x)
-      expect(onChange).to.have.been.calledOnce()
-    })
-
-    it('the alpha indicator does not move right when reach the right border ("ArrowRight" key)', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          withAlpha
-          value="#804041FF"
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const alphaSlider = await component.findAlphaSlider()
-      const indicator = await alphaSlider.find('[class*=__indicator]')
-      const pos_1 = indicator.getBoundingClientRect()
       await alphaSlider.keyDown('ArrowRight')
-      const pos_2 = indicator.getBoundingClientRect()
-      expect(pos_2.x).to.be.eq(pos_1.x)
+      const pos_3 = indicator.getBoundingClientRect()
+      expect(pos_3.x).to.be.eq(pos_1.x)
       expect(onChange).to.have.been.calledOnce()
     })
 
-    it('the alpha indicator does not move left when reach the left border ("a" key)', async () => {
+    it('the alpha indicator does not move left when reach the left border', async () => {
       const onChange = stub()
 
       await mount(
@@ -902,29 +664,9 @@ describe('<ColorMixer />', () => {
       await alphaSlider.keyDown('a')
       const pos_2 = indicator.getBoundingClientRect()
       expect(pos_2.x).to.be.eq(pos_1.x)
-      expect(onChange).to.have.been.calledOnce()
-    })
-
-    it('the alpha indicator does not move left when reach the left border ("ArrowLeft" key)', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          withAlpha
-          value="#80404100"
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const alphaSlider = await component.findAlphaSlider()
-      const indicator = await alphaSlider.find('[class*=__indicator]')
-      const pos_1 = indicator.getBoundingClientRect()
       await alphaSlider.keyDown('ArrowLeft')
-      const pos_2 = indicator.getBoundingClientRect()
-      expect(pos_2.x).to.be.eq(pos_1.x)
+      const pos_3 = indicator.getBoundingClientRect()
+      expect(pos_3.x).to.be.eq(pos_1.x)
       expect(onChange).to.have.been.calledOnce()
     })
 
@@ -947,7 +689,7 @@ describe('<ColorMixer />', () => {
       ).to.not.exist()
     })
 
-    it('the alpha slider does not show when withAlpha is false', async () => {
+    it('the alpha slider does not show when withAlpha is not set', async () => {
       const onChange = stub()
 
       await mount(
@@ -986,7 +728,7 @@ describe('<ColorMixer />', () => {
   })
 
   describe('color palette', () => {
-    describe('should change the color when receive mousedown', () => {
+    describe('should change the color when mousedown event is received', () => {
       it('inside the palette', async () => {
         const onChange = stub()
         await mount(
@@ -1003,7 +745,10 @@ describe('<ColorMixer />', () => {
           clientX: rect.x + rect.width / 2,
           clientY: rect.y + rect.height / 2
         })
-        expect(onChange).to.have.been.called()
+
+        expect(onChange).to.have.been.calledWith(
+          colorToHex8({ h: 0, s: 0.5, v: 0.5, a: 1 })
+        )
       })
 
       it('at the top border', async () => {
@@ -1148,7 +893,7 @@ describe('<ColorMixer />', () => {
         )
         const component = await ColorMixerLocator.find()
         const colorPalette = await component.findColorPalette()
-        const rect = await colorPalette.getBoundingClientRect()
+        const rect = colorPalette.getBoundingClientRect()
         await colorPalette.mouseDown({
           clientY: rect.y + rect.height,
           clientX: rect.x
@@ -1176,7 +921,7 @@ describe('<ColorMixer />', () => {
     })
 
     describe('onChange is call when the palette receive event from keyboard', () => {
-      paletteKeyboardEvent.forEach((keyEvent) => {
+      paletteKeyboardEvents.forEach((keyEvent) => {
         it(keyEvent, async () => {
           const onChange = stub()
           await mount(
@@ -1197,7 +942,7 @@ describe('<ColorMixer />', () => {
       })
     })
 
-    it('the indicator moves up when receive the arrowup keyboard event', async () => {
+    it('the indicator moves up when receive the arrowup or w keyboard event', async () => {
       const onChange = stub()
       await mount(
         <ColorMixer
@@ -1213,14 +958,17 @@ describe('<ColorMixer />', () => {
       const indicatorRef = await palette.find(
         '[class*="ColorPalette__indicator"]'
       )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
+      const pos_1 = indicatorRef.getBoundingClientRect()
       await palette.keyDown('ArrowUp')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
+      const pos_2 = indicatorRef.getBoundingClientRect()
       expect(pos_2.y).to.be.lt(pos_1.y)
       expect(onChange).to.have.been.calledTwice()
+      await palette.keyDown('w')
+      const pos_3 = indicatorRef.getBoundingClientRect()
+      expect(pos_3.y).to.be.lt(pos_2.y)
     })
 
-    it('the indicator moves down when receive the arrowdown keyboard event', async () => {
+    it('the indicator moves down when receive the arrowdown or `s` keyboard event', async () => {
       const onChange = stub()
 
       await mount(
@@ -1237,14 +985,17 @@ describe('<ColorMixer />', () => {
       const indicatorRef = await palette.find(
         '[class*="ColorPalette__indicator"]'
       )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
+      const pos_1 = indicatorRef.getBoundingClientRect()
       await palette.keyDown('ArrowDown')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
+      const pos_2 = indicatorRef.getBoundingClientRect()
       expect(pos_2.y).to.be.gt(pos_1.y)
       expect(onChange).to.have.been.calledTwice()
+      await palette.keyDown('s')
+      const pos_3 = indicatorRef.getBoundingClientRect()
+      expect(pos_3.y).to.be.gt(pos_2.y)
     })
 
-    it('the indicator moves left when receive the arrowleft keyboard event', async () => {
+    it(`the indicator moves left when receive the arrowleft or 'a' keyboard event`, async () => {
       const onChange = stub()
 
       await mount(
@@ -1261,14 +1012,17 @@ describe('<ColorMixer />', () => {
       const indicatorRef = await palette.find(
         '[class*="ColorPalette__indicator"]'
       )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
+      const pos_1 = indicatorRef.getBoundingClientRect()
       await palette.keyDown('ArrowLeft')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
+      const pos_2 = indicatorRef.getBoundingClientRect()
       expect(pos_2.x).to.be.lt(pos_1.x)
       expect(onChange).to.have.been.calledTwice()
+      await palette.keyDown('a')
+      const pos_3 = indicatorRef.getBoundingClientRect()
+      expect(pos_3.x).to.be.lt(pos_2.x)
     })
 
-    it('the indicator moves right when receive the arrowright keyboard event', async () => {
+    it(`the indicator moves right when receive the arrowright or 'd' keyboard event`, async () => {
       const onChange = stub()
 
       await mount(
@@ -1285,291 +1039,118 @@ describe('<ColorMixer />', () => {
       const indicatorRef = await palette.find(
         '[class*="ColorPalette__indicator"]'
       )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
+      const pos_1 = indicatorRef.getBoundingClientRect()
       await palette.keyDown('ArrowRight')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
+      const pos_2 = indicatorRef.getBoundingClientRect()
       expect(pos_2.x).to.be.gt(pos_1.x)
       expect(onChange).to.have.been.calledTwice()
-    })
-
-    it('the indicator moves up when receive the "w" keyboard event', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 0.5, v: 0.5, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('w')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.y).to.be.lt(pos_1.y)
-      expect(onChange).to.have.been.calledTwice()
-    })
-
-    it('the indicator moves down when receive the "s" keyboard event', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 0.5, v: 0.5, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('s')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.y).to.be.gt(pos_1.y)
-      expect(onChange).to.have.been.calledTwice()
-    })
-
-    it('the indicator moves left when receive the "a" keyboard event', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 0.5, v: 0.5, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('a')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.x).to.be.lt(pos_1.x)
-      expect(onChange).to.have.been.calledTwice()
-    })
-
-    it('the indicator moves right when receive the "d" keyboard event', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 0.5, v: 0.5, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('ArrowRight')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.x).to.be.gt(pos_1.x)
-      expect(onChange).to.have.been.calledTwice()
-    })
-
-    it('the indicator does not move up when it reach the top border ("ArrowUp" keyboard event)', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 0.5, v: 1, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('ArrowUp')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.y).to.be.eq(pos_1.y)
-    })
-
-    it('the indicator does not move up when it reach the top border ("w" keyboard event)', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 0.5, v: 1, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('w')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.y).to.be.eq(pos_1.y)
-    })
-
-    it('the indicator does not move down when it reach the bottom border ("ArrowDown" keyboard event)', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 0.5, v: 0, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('ArrowDown')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.y).to.be.eq(pos_1.y)
-    })
-
-    it('the indicator does not move down when it reach the bottom border ("s" keyboard event)', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 0.5, v: 0, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('s')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.y).to.be.eq(pos_1.y)
-    })
-
-    it('the indicator does not move left when it reach the left border ("ArrowLeft" keyboard event)', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 0, v: 0.5, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('ArrowLeft')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.x).to.be.eq(pos_1.x)
-    })
-
-    it('the indicator does not move left when it reach the left border ("a" keyboard event)', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 0, v: 0.5, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('a')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.x).to.be.eq(pos_1.x)
-    })
-
-    it('the indicator does not move right when it reach the right border ("ArrowRight" keyboard event)', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 1, v: 0.5, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
-      await palette.keyDown('ArrowRight')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
-      expect(pos_2.x).to.be.eq(pos_1.x)
-    })
-
-    it('the indicator does not move right when it reach the right border ("d" keyboard event)', async () => {
-      const onChange = stub()
-
-      await mount(
-        <ColorMixer
-          value={colorToHex8({ h: 200, s: 1, v: 0.5, a: 1 })}
-          {...testInputLabels}
-          {...testScreenReaderLabels}
-          onChange={onChange}
-        />
-      )
-
-      const component = await ColorMixerLocator.find()
-      const palette = await component.findColorPalette()
-      const indicatorRef = await palette.find(
-        '[class*="ColorPalette__indicator"]'
-      )
-      const pos_1 = await indicatorRef.getBoundingClientRect()
       await palette.keyDown('d')
-      const pos_2 = await indicatorRef.getBoundingClientRect()
+      const pos_3 = indicatorRef.getBoundingClientRect()
+      expect(pos_3.x).to.be.gt(pos_2.x)
+    })
+
+    it('the indicator does not move up when it reach the top border', async () => {
+      const onChange = stub()
+
+      await mount(
+        <ColorMixer
+          value={colorToHex8({ h: 200, s: 0.5, v: 1, a: 1 })}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={onChange}
+        />
+      )
+
+      const component = await ColorMixerLocator.find()
+      const palette = await component.findColorPalette()
+      const indicatorRef = await palette.find(
+        '[class*="ColorPalette__indicator"]'
+      )
+      const pos_1 = indicatorRef.getBoundingClientRect()
+      await palette.keyDown('ArrowUp')
+      const pos_2 = indicatorRef.getBoundingClientRect()
+      expect(pos_2.y).to.be.eq(pos_1.y)
+      await palette.keyDown('w')
+      const pos_3 = indicatorRef.getBoundingClientRect()
+      expect(pos_3.y).to.be.eq(pos_1.y)
+    })
+
+    it('the indicator does not move down when it reach the bottom border', async () => {
+      const onChange = stub()
+
+      await mount(
+        <ColorMixer
+          value={colorToHex8({ h: 200, s: 0.5, v: 0, a: 1 })}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={onChange}
+        />
+      )
+
+      const component = await ColorMixerLocator.find()
+      const palette = await component.findColorPalette()
+      const indicatorRef = await palette.find(
+        '[class*="ColorPalette__indicator"]'
+      )
+      const pos_1 = indicatorRef.getBoundingClientRect()
+      await palette.keyDown('ArrowDown')
+      const pos_2 = indicatorRef.getBoundingClientRect()
+      expect(pos_2.y).to.be.eq(pos_1.y)
+      await palette.keyDown('s')
+      const pos_3 = indicatorRef.getBoundingClientRect()
+      expect(pos_3.y).to.be.eq(pos_1.y)
+    })
+
+    it('the indicator does not move left when it reach the left border', async () => {
+      const onChange = stub()
+
+      await mount(
+        <ColorMixer
+          value={colorToHex8({ h: 200, s: 0, v: 0.5, a: 1 })}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={onChange}
+        />
+      )
+
+      const component = await ColorMixerLocator.find()
+      const palette = await component.findColorPalette()
+      const indicatorRef = await palette.find(
+        '[class*="ColorPalette__indicator"]'
+      )
+      const pos_1 = indicatorRef.getBoundingClientRect()
+      await palette.keyDown('ArrowLeft')
+      const pos_2 = indicatorRef.getBoundingClientRect()
       expect(pos_2.x).to.be.eq(pos_1.x)
+      await palette.keyDown('a')
+      const pos_3 = indicatorRef.getBoundingClientRect()
+      expect(pos_3.x).to.be.eq(pos_1.x)
+    })
+
+    it('the indicator does not move right when it reach the right border', async () => {
+      const onChange = stub()
+
+      await mount(
+        <ColorMixer
+          value={colorToHex8({ h: 200, s: 1, v: 0.5, a: 1 })}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={onChange}
+        />
+      )
+
+      const component = await ColorMixerLocator.find()
+      const palette = await component.findColorPalette()
+      const indicatorRef = await palette.find(
+        '[class*="ColorPalette__indicator"]'
+      )
+      const pos_1 = indicatorRef.getBoundingClientRect()
+      await palette.keyDown('ArrowRight')
+      const pos_2 = indicatorRef.getBoundingClientRect()
+      expect(pos_2.x).to.be.eq(pos_1.x)
+      await palette.keyDown('d')
+      const pos_3 = indicatorRef.getBoundingClientRect()
+      expect(pos_3.x).to.be.eq(pos_1.x)
     })
   })
 
@@ -1608,7 +1189,7 @@ describe('<ColorMixer />', () => {
       expect(alphaInput).to.not.exist()
     })
 
-    it('should not call oncChange when `disabled` is set and get the input', async () => {
+    it('should not call onChange when `disabled` is set and get the input', async () => {
       const fakeValue = '234234'
       const onChange = stub()
       await mount(
@@ -1622,7 +1203,7 @@ describe('<ColorMixer />', () => {
       )
       const component = await ColorMixerLocator.find()
       const inputs = await component.findAll('input[disabled]')
-      await inputs.forEach(async (input) => {
+      inputs.forEach(async (input) => {
         input.change({ target: { value: fakeValue } })
       })
       expect(onChange).to.have.not.been.called()
@@ -1640,7 +1221,7 @@ describe('<ColorMixer />', () => {
       )
       const component = await ColorMixerLocator.find()
       const inputs = await component.findAll('input[disabled]')
-      await inputs.forEach(async (input) => {
+      inputs.forEach(async (input) => {
         expect(input).to.be.disabled()
       })
       expect(inputs.length === 4)
@@ -1657,7 +1238,7 @@ describe('<ColorMixer />', () => {
       )
       const component = await ColorMixerLocator.find()
       const inputs = await component.findAll('input[disabled]')
-      await inputs.forEach(async (input) => {
+      inputs.forEach(async (input) => {
         expect(input).to.be.disabled()
       })
       expect(inputs.length === 3)
@@ -1675,7 +1256,7 @@ describe('<ColorMixer />', () => {
       )
       const component = await ColorMixerLocator.find()
       const inputs = await component.findAll('input')
-      await inputs.forEach(async (input) => {
+      inputs.forEach(async (input) => {
         await input.change({ target: { value: invalidColor } })
         expect(input.value()).not.to.eq(invalidColor)
       })
@@ -1693,7 +1274,7 @@ describe('<ColorMixer />', () => {
       )
       const component = await ColorMixerLocator.find()
       const inputs = await component.findAll('input')
-      await inputs.forEach(async (input) => {
+      inputs.forEach(async (input) => {
         await input.change({ target: { value: invalidColor } })
         expect(input.value()).not.to.eq(invalidColor)
       })
@@ -1710,7 +1291,7 @@ describe('<ColorMixer />', () => {
       )
       const component = await ColorMixerLocator.find()
       const inputs = await component.findAll('input')
-      await inputs.forEach(async (input) => {
+      inputs.forEach(async (input) => {
         await input.change({ target: { value: invalidColor } })
         expect(input.value()).not.to.eq(invalidColor)
       })
