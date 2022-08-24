@@ -32,6 +32,18 @@ embed: true
 </ToggleBlockquote>
 ```
 
+```javascript
+---
+embed: true
+---
+<ToggleBlockquote summary="Missing DOM APIs">
+  <ToggleBlockquote.Paragraph>
+    You will need to substitute <code>Element</code> from the DOM API because it is used by some components:
+    <code>Element = typeof Element === 'undefined' ? function(){} : Element</code>
+  </ToggleBlockquote.Paragraph>
+</ToggleBlockquote>
+```
+
 #### Initial steps
 
 - install InstUI related dependencies:

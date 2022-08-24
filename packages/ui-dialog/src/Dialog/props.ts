@@ -95,8 +95,8 @@ const propTypes: PropValidators<PropKeys> = {
    * the screen reader when the focus region is active
    */
   liveRegion: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.elementType),
-    PropTypes.elementType,
+    PropTypes.arrayOf(PropTypes.instanceOf(Element)),
+    PropTypes.instanceOf(Element),
     PropTypes.func
   ]),
   /**

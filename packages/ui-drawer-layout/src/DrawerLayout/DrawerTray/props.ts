@@ -204,8 +204,8 @@ const propTypes: PropValidators<PropKeys> = {
   mountNode: PropTypes.oneOfType([element, PropTypes.func]),
   defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   liveRegion: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.elementType),
-    PropTypes.elementType,
+    PropTypes.arrayOf(PropTypes.instanceOf(Element)),
+    PropTypes.instanceOf(Element),
     PropTypes.func
   ]),
   onDismiss: PropTypes.func,

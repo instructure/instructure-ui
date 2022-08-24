@@ -175,8 +175,8 @@ const propTypes: PropValidators<PropKeys> = {
   mountNode: PropTypes.oneOfType([element, PropTypes.func]),
   insertAt: PropTypes.oneOf(['bottom', 'top']),
   liveRegion: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.elementType),
-    PropTypes.elementType,
+    PropTypes.arrayOf(PropTypes.instanceOf(Element)),
+    PropTypes.instanceOf(Element),
     PropTypes.func
   ]),
   onTransition: PropTypes.func,
