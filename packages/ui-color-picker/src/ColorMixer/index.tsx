@@ -31,10 +31,11 @@ import { testable } from '@instructure/ui-testable'
 import {
   colorToHex8,
   colorToHsva,
-  colorToRGB
+  colorToRGB,
+  isValid
 } from '@instructure/ui-color-utils'
+import { logWarn as warn } from '@instructure/console'
 import type { HSVType } from '@instructure/ui-color-utils'
-
 import ColorPalette from './ColorPalette'
 import Slider from './Slider'
 import RGBAInput from './RGBAInput'
@@ -92,6 +93,10 @@ class ColorMixer extends Component<ColorMixerProps, ColorMixerState> {
 
   componentDidMount() {
     this.props.makeStyles?.()
+    warn(
+      isValid(this.props.value!),
+      `[ColorMixer] The passed color value is not valid.`
+    )
     this.setState({
       ...colorToHsva(this.props.value!)
     })
