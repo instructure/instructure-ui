@@ -254,13 +254,6 @@ class App extends Component<AppProps, AppState> {
     }
 
     document.title = title!
-
-    const ga = (window as any).ga
-    if (ga) {
-      ga('set', 'page', page)
-      ga('set', 'title', title)
-      ga('send', 'pageview')
-    }
   }
 
   getPathInfo = () => {
