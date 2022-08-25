@@ -247,8 +247,8 @@ const extraProps = {
 describe('Testing every imported component for SSR', () => {
   beforeAll(() => {
     // since we don't provide every needed prop propTypes will complain when
-    // we render the components, so in order to not to spam the console
-    // we supress these warnings/errors
+    // we render the components, so in order to not spam the console
+    // we suppress these warnings/errors
     jest.spyOn(console, 'warn').mockImplementation(() => {})
     jest.spyOn(console, 'error').mockImplementation(() => {})
   })
