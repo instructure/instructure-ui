@@ -24,5 +24,8 @@
 module.exports = {
   testEnvironment: 'node',
   rootDir: '__tests__',
-  restoreMocks: true
+  restoreMocks: true,
+  globals: {
+    Element: function () {} // used by some propTypes
+  }
 }
