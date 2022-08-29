@@ -24,7 +24,7 @@
 
 const commitAnalyzer = require('@semantic-release/commit-analyzer')
 const chalk = require('chalk')
-const buildCommit = require('cz-customizable/buildCommit')
+const buildCommit = require('cz-customizable/lib/build-commit')
 const autocomplete = require('inquirer-autocomplete-prompt')
 const { getPackages, getChangedPackages } = require('@instructure/pkg-utils')
 const makeDefaultQuestions = require('./make-default-questions')
@@ -45,10 +45,9 @@ function makePrompter() {
   return function (cz, commit) {
     const scope = '@instructure'
     const allPackages = getPackages()
-    const changedPackages = getChangedPackages(
-      '--cached',
-      allPackages
-    ).map((pkg) => pkg.name.replace(`${scope}/`, ''))
+    const changedPackages = getChangedPackages('--cached', allPackages).map(
+      (pkg) => pkg.name.replace(`${scope}/`, '')
+    )
     const packageNames = allPackages.map((pkg) =>
       pkg.name.replace(`${scope}/`, '')
     )

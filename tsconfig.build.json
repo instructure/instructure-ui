@@ -27,7 +27,9 @@
     "noFallthroughCasesInSwitch": true,
     // noUnused* overlap with @typescript-eslint/no-unused-vars, can disable if duplicative
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    // ES2019 is needed so TS recognizes new features like Array.flat
+    "lib": ["ES2019", "DOM", "DOM.Iterable"]
   },
   "exclude": ["node_modules"]
 }
