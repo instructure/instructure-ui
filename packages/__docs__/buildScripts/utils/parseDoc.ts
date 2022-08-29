@@ -26,7 +26,6 @@ import { getJSDoc } from './getJSDoc'
 import { getReactDoc } from './getReactDoc'
 import { getFrontMatter } from './getFrontMatter'
 import path from 'path'
-import { Buffer } from 'buffer'
 import { ParsedCodeData, YamlMetaInfo } from '../DataTypes'
 
 export function parseDoc(

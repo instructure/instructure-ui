@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import type { Buffer } from 'buffer'
-
 // This is the format of the saved JSON files
 type ProcessedFile = ParsedCodeData &
   YamlMetaInfo &
