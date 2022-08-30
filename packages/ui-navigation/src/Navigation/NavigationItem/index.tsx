@@ -83,7 +83,6 @@ class NavigationItem extends Component<NavigationItemProps> {
 
     return (
       <ElementType
-        // @ts-expect-error TODO: fix TS2590: Expression produces a union type that is too complex to represent.
         {...props}
         href={href}
         onClick={onClick}

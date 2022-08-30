@@ -62,7 +62,6 @@ class PresentationContent extends Component<PresentationContentProps> {
 
     return (
       <ElementType
-        // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...passthroughProps(props)}
         aria-hidden="true"
         ref={this.handleRef}

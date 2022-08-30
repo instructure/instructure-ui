@@ -51,6 +51,8 @@ type CSSShorthandValue<Value extends string> =
 /**
  * Generates a type which contains HTML attributes for the given element
  * excluding attributes which are defined in Props.
+ * The "dir" prop is forced to the given value because InstUI accepts only
+ * these.
  *
  * @example
  * class Button extends React.Component<ButtonProps & OtherHTMLAttributes<ButtonProps, React.ButtonHTMLAttributes<ButtonProps>>> {}
@@ -58,7 +60,7 @@ type CSSShorthandValue<Value extends string> =
 type OtherHTMLAttributes<
   Props,
   Attributes extends React.HTMLAttributes<Props> = React.AllHTMLAttributes<Props>
-> = Omit<Attributes, keyof Props>
+> = Omit<Attributes, keyof Props | 'dir'> & { dir?: 'ltr' | 'rtl' }
 
 /**
  * Helper type for the propTypes object.

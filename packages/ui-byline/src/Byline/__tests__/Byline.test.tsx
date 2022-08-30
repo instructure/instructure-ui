@@ -83,6 +83,8 @@ describe('<Byline />', async () => {
 
   it(`should not allow the 'as' prop`, async () => {
     const consoleError = stub(console, 'error')
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore intentionally wrong prop
     await mount(<Byline as="foo">{image}</Byline>)
     expect(consoleError).to.be.calledWith(
       "Warning: [Byline] prop 'as' is not allowed."

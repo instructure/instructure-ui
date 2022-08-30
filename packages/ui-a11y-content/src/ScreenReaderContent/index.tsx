@@ -76,9 +76,7 @@ class ScreenReaderContent extends Component<ScreenReaderContentProps> {
 
   render() {
     const { children, styles, ...props } = this.props
-    // any cast is needed to prevent Expression produces a union type that is too complex to represent errors
-    const ElementType = getElementType(ScreenReaderContent, props) as any
-
+    const ElementType = getElementType(ScreenReaderContent, props)
     return (
       <ElementType
         {...passthroughProps(props)}

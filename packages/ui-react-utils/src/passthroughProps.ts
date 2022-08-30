@@ -32,7 +32,7 @@ import isPropValid from '@emotion/is-prop-valid'
  * 'makeStyles', 'deterministicId'
  * @param props The props to process
  */
-function passthroughProps<P>(props: P) {
+function passthroughProps<P extends Record<string, unknown>>(props: P) {
   const validProps: Partial<P> = {}
   Object.keys(props)
     // style and className need to be explicitly passed through
@@ -50,7 +50,7 @@ function passthroughProps<P>(props: P) {
     .forEach((propName) => {
       validProps[propName as keyof P] = props[propName as keyof P]
     })
-  return validProps as Record<string, any>
+  return validProps as Record<string, unknown>
 }
 
 export { passthroughProps }
