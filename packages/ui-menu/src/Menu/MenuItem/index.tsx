@@ -240,7 +240,6 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
 
     return (
       <ElementType
-        // @ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         tabIndex={-1} // note: tabIndex can be overridden by Menu or MenuItemGroup components
         {...props}
         href={href}

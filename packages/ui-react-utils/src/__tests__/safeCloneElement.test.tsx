@@ -30,7 +30,7 @@ import { expect, mount, stub, spy, within } from '@instructure/ui-test-utils'
 import { safeCloneElement } from '../safeCloneElement'
 
 describe('safeCloneElement', async () => {
-  const SafeClone = function <P>({
+  const SafeClone = function <P extends { style?: unknown }>({
     element,
     props,
     children

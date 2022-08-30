@@ -34,7 +34,10 @@ import type { Renderable } from '@instructure/shared-types'
  * @param value
  * @param props
  */
-function callRenderProp<P>(value: Renderable<P>, props: P = {} as P) {
+function callRenderProp<P extends Record<string, unknown>>(
+  value: Renderable<P>,
+  props: P = {} as P
+) {
   if (typeof value === 'function') {
     // In react 16, `createElement` accepts a function. In react 15 we get an
     // error on rendering the result. Evaluate the function here if it is not a

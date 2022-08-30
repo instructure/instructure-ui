@@ -54,7 +54,7 @@ const renderExample = ({ Component, componentProps, key }: Example<any>) => (
  * @module generateA11yTests
  * @private
  */
-export function generateA11yTests<Props>(
+export function generateA11yTests<Props extends Record<string, any>>(
   Component: React.ComponentType<any>,
   componentExample: StoryConfig<Props>,
   ariaRulesToIgnore?: string[]

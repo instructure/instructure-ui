@@ -31,8 +31,8 @@ const experimental =
     : decorator(
         (ComposedComponent, experimentalProps: string[], message: string) => {
           return class ExperimentalComponent<
-            P,
-            S,
+            P extends Readonly<any>,
+            S extends Readonly<any>,
             SS
           > extends ComposedComponent {
             componentDidMount() {

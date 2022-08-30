@@ -35,7 +35,9 @@ type ArrayElement<A> = A extends readonly (infer T)[] ? T : never
  * @module generatePropCombinations
  * @private
  */
-export function generatePropCombinations<T>(propValues: Props<T>) {
+export function generatePropCombinations<T extends Record<string, unknown>>(
+  propValues: Props<T>
+) {
   type PropValueType = ArrayElement<Props<T>[keyof Props<T>]>
   const propNames = Object.keys(propValues)
   const combos: Array<Record<keyof Props<T>, PropValueType>> = []

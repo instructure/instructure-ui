@@ -50,7 +50,11 @@ const hack =
   process.env.NODE_ENV == 'production'
     ? () => (Component: React.ComponentClass<any>) => Component
     : decorator((ComposedComponent, hackProps: string[], message: string) => {
-        return class HackComponent<P, S, SS> extends ComposedComponent {
+        return class HackComponent<
+          P extends Readonly<any>,
+          S extends Readonly<any>,
+          SS
+        > extends ComposedComponent {
           componentDidMount() {
             if (hackProps) {
               warnHackProps(

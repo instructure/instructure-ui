@@ -109,7 +109,7 @@ export type Example<Props> = {
  * @private
  *
  */
-export function generateComponentExamples<Props>(
+export function generateComponentExamples<Props extends Record<string, any>>(
   Component: ComponentType<any>,
   config: StoryConfig<Props>
 ) {

@@ -26,7 +26,11 @@ import { ComponentType } from 'react'
 import { logWarn as warn } from '@instructure/console'
 import { AsElementType } from '@instructure/shared-types'
 
-interface ComponentWithAsProp {
+/**
+ * A props object that is searched for some fields to determine the
+ * element's type.
+ */
+interface PropsObject {
   as?: AsElementType
   to?: string
   href?: string | null
@@ -45,23 +49,20 @@ interface ComponentWithAsProp {
  * @param {Function} getDefault an optional function that returns the default element type
  * @returns {String} the element type
  */
-function getElementType<T extends ComponentWithAsProp>(
+function getElementType<T extends PropsObject>(
   Component: Omit<ComponentType<T>, 'propTypes'>,
   props: T,
-  getDefault?: () => AsElementType
-): AsElementType {
+  getDefault?: () => AsElementType<T>
+) {
   if (props.as && props.as !== Component.defaultProps?.as) {
     return props.as
   }
-
   if (typeof getDefault === 'function') {
     return getDefault()
   }
-
   if (props.href) {
     return 'a'
   }
-
   if (props.to) {
     warn(
       // if to prop is used without as
@@ -70,12 +71,10 @@ function getElementType<T extends ComponentWithAsProp>(
     )
     return 'a'
   }
-
   if (typeof props.onClick === 'function') {
     return 'button'
   }
-
-  return (Component.defaultProps?.as || 'span') as AsElementType
+  return Component.defaultProps?.as || 'span'
 }
 
 export default getElementType

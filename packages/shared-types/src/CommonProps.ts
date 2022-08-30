@@ -24,7 +24,7 @@
 
 import { ComponentType } from 'react'
 
-type AsElementType = keyof JSX.IntrinsicElements | ComponentType
+type AsElementType<P = any> = keyof JSX.IntrinsicElements | ComponentType<P>
 
 type ToProp = {
   /**

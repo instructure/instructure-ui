@@ -213,7 +213,6 @@ class View extends Component<ViewProps> {
 
     return (
       <ElementType
-        //@ts-expect-error TODO: `ref` prop causes: "Expression produces a union type that is too complex to represent.ts(2590)"
         {...passthroughProps(props)}
         className={className}
         css={[styles?.view, styles?.inlineStyles]}
