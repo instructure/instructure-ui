@@ -511,6 +511,10 @@ class IndentExample extends React.Component {
     this.editor.indentAll()
   }
 
+  indentCurrentSelection () {
+    this.editor.indentCurrentSelection()
+  }
+
   render () {
     return (
       <View display="block" padding="medium medium small" background="primary">
@@ -538,6 +542,11 @@ class IndentExample extends React.Component {
               this.reIndent()
             }}>
               Re-indent code
+            </Button>
+            <Button onClick={() => {
+              this.indentCurrentSelection()
+            }}>
+              Indent current selection
             </Button>
           </FormFieldGroup>
         </View>

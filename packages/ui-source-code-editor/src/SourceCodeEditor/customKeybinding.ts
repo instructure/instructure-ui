@@ -27,6 +27,8 @@ import {
   cursorCharRight,
   cursorGroupLeft,
   cursorGroupRight,
+  cursorLineBoundaryLeft,
+  cursorLineBoundaryRight,
   cursorLineBoundaryBackward,
   cursorLineBoundaryForward,
   cursorSyntaxLeft,
@@ -41,6 +43,8 @@ import {
   selectCharRight,
   selectGroupLeft,
   selectGroupRight,
+  selectLineBoundaryLeft,
+  selectLineBoundaryRight,
   selectLineBoundaryBackward,
   selectLineBoundaryForward,
   selectSyntaxLeft,
@@ -70,8 +74,8 @@ const rtlHorizontalArrowKeymap: KeyBinding[] = [
   },
   {
     mac: 'Cmd-ArrowLeft',
-    run: cursorLineBoundaryForward,
-    shift: selectLineBoundaryForward
+    run: cursorLineBoundaryRight,
+    shift: selectLineBoundaryRight
   },
   {
     key: 'Home',
@@ -100,8 +104,8 @@ const rtlHorizontalArrowKeymap: KeyBinding[] = [
   },
   {
     mac: 'Cmd-ArrowRight',
-    run: cursorLineBoundaryBackward,
-    shift: selectLineBoundaryBackward
+    run: cursorLineBoundaryLeft,
+    shift: selectLineBoundaryLeft
   },
   {
     key: 'End',
