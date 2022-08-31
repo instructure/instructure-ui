@@ -57,7 +57,7 @@ type ColorPaletteProps = ColorPaletteOwnProps &
   OtherHTMLAttributes<ColorPaletteOwnProps>
 
 type ColorPaletteStyle = ComponentStyle<
-  'ColorPalette' | 'indicator' | 'palette' | 'disabledOverlay'
+  'ColorPalette' | 'indicator' | 'palette' | 'disabledOverlay' | 'paletteOffset'
 >
 
 const propTypes: PropValidators<PropKeys> = {
