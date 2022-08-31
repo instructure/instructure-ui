@@ -33,6 +33,7 @@ import { deepEqual } from '@instructure/ui-utils'
 import { ColorMixer } from '../'
 import { ColorMixerLocator } from '../ColorMixerLocator'
 import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
+import { px } from '@instructure/ui-utils'
 // import ColorMixerExamples from '../__examples__/ColorMixer.examples'
 
 const testValue = {
@@ -742,8 +743,8 @@ describe('<ColorMixer />', () => {
         const colorPalette = await component.findColorPalette()
         const rect = await colorPalette.getBoundingClientRect()
         await colorPalette.mouseDown({
-          clientX: rect.x + rect.width / 2,
-          clientY: rect.y + rect.height / 2
+          clientX: rect.x + (rect.width - px('0.125rem')) / 2,
+          clientY: rect.y + (rect.height - px('0.125rem')) / 2
         })
 
         expect(onChange).to.have.been.calledWith(
