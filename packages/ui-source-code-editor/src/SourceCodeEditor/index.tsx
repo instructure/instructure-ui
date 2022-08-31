@@ -62,6 +62,7 @@ import {
 import { lintKeymap } from '@codemirror/lint'
 import {
   indentOnInput,
+  indentRange,
   indentUnit,
   StreamLanguage,
   bracketMatching,
@@ -223,9 +224,19 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
 
   public indentAll() {
     this.addAnimationFrame(() => {
-      this.selectAll()
-      this.indentCurrentSelection()
-      this.deselectAll()
+      if (this._editorView && this.currentDocValue) {
+        this.indentCodeRange(0, this.currentDocValue.length)
+      }
+    })
+  }
+
+  private indentCodeRange(from: number, to: number) {
+    this.addAnimationFrame(() => {
+      if (this._editorView && this.currentDocValue) {
+        this.dispatchViewChanges({
+          changes: indentRange(this._editorView.state, from, to)
+        })
+      }
     })
   }
 
