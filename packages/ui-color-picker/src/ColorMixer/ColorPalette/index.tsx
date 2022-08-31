@@ -26,7 +26,7 @@
 import React, { Component } from 'react'
 
 import { withStyle, jsx } from '@instructure/emotion'
-import { addEventListener, getFontSize } from '@instructure/ui-dom-utils'
+import { addEventListener } from '@instructure/ui-dom-utils'
 import type { HSVType } from '@instructure/ui-color-utils'
 
 import { View } from '@instructure/ui-view'
@@ -39,6 +39,7 @@ import type { ColorPaletteProps, ColorPaletteState } from './props'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { px } from '@instructure/ui-utils'
 
 /**
 ---
@@ -63,8 +64,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   private _paletteRef: HTMLDivElement | null = null
   private _mouseMoveListener?: { remove(): void }
   private _mouseUpListener?: { remove(): void }
-  //@ts-expect-error Property 'window' does not exist on type 'ColorPalette'
-  private _paletteOffset = (getFontSize(this.window) / 16) * 2
+  private _paletteOffset = px(this.props.styles?.paletteOffset as string)
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props

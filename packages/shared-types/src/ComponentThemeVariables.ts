@@ -442,6 +442,7 @@ export type ColorMixerPaletteTheme = {
   paletteBorderWidth: Border['widthSmall']
 
   disabledOverlayZIndex: Stacking['topmost']
+  paletteOffset: string
 }
 
 export type ColorMixerRGBAInputTheme = {

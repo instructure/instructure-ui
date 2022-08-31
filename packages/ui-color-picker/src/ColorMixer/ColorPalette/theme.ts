@@ -41,7 +41,8 @@ const generateComponentTheme = (theme: Theme): ColorMixerPaletteTheme => {
     indicatorBorderWidth: borders.widthSmall,
     paletteBorderRadius: borders.radiusMedium,
     paletteBorderWidth: borders.widthSmall,
-    disabledOverlayZIndex: stacking.topmost
+    disabledOverlayZIndex: stacking.topmost,
+    paletteOffset: '0.125rem'
   }
 
   return {

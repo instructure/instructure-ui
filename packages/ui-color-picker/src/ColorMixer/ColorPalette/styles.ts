@@ -87,7 +87,8 @@ const generateStyle = (
       position: 'absolute',
       top: '-.5rem',
       left: '-.5rem'
-    }
+    },
+    paletteOffset: componentTheme.paletteOffset
   }
 }
 
