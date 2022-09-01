@@ -48,16 +48,12 @@ const generateStyle = (
     default: {
       container: { background: componentTheme.defaultBackground },
       tabs: { marginBottom: `calc(${componentTheme.tabVerticalOffset} * -1)` },
-      scrollOverlay: { width: componentTheme.scrollOverlayWidthDefault },
-      scrollSpacer: { flexBasis: componentTheme.scrollOverlayWidthDefault }
+      scrollOverlay: { width: componentTheme.scrollOverlayWidthDefault }
     },
     secondary: {
       container: {},
       tabs: {},
-      scrollOverlay: { width: componentTheme.scrollOverlayWidthSecondary },
-      scrollSpacer: {
-        flexBasis: componentTheme.scrollOverlayWidthSecondary
-      }
+      scrollOverlay: { width: componentTheme.scrollOverlayWidthSecondary }
     }
   }
 
@@ -80,6 +76,15 @@ const generateStyle = (
         }
       })
     }
+  }
+
+  const commonOverlay = {
+    height: `calc(100% - (${componentTheme.tabVerticalOffset} + 0.25rem))`,
+    position: 'absolute',
+    zIndex: componentTheme.zIndex,
+    top: '0',
+    pointerEvents: 'none',
+    ...variants[variant!].scrollOverlay
   }
 
   return {
@@ -116,28 +121,24 @@ const generateStyle = (
       })
     },
 
-    scrollOverlay: {
-      label: 'tabs__scrollOverlay',
-      height: `calc(100% - (${componentTheme.tabVerticalOffset} + 0.25rem))`,
-      position: 'absolute',
-      zIndex: componentTheme.zIndex,
-      top: '0',
+    endScrollOverlay: {
+      label: 'tabs__endScrollOverlay',
       insetInlineEnd: '0',
       background: `linear-gradient(to left, ${componentTheme.scrollFadeColor} 0%, rgba(255, 255, 255, 0) 100%)`,
-      pointerEvents: 'none',
-      ...variants[variant!].scrollOverlay,
-
       '[dir="rtl"] &': {
         background: `linear-gradient(to right, ${componentTheme.scrollFadeColor} 0%, rgba(255, 255, 255, 0) 100%)`
-      }
+      },
+      ...commonOverlay
     },
-
-    scrollSpacer: {
-      label: 'tabs__scrollSpacer',
-      flexShrink: 0,
-      ...variants[variant!].scrollSpacer
+    startScrollOverlay: {
+      label: 'tabs__startScrollOverlay',
+      insetInlineStart: '0',
+      background: `linear-gradient(to right, ${componentTheme.scrollFadeColor} 0%, rgba(255, 255, 255, 0) 100%)`,
+      '[dir="rtl"] &': {
+        background: `linear-gradient(to left, ${componentTheme.scrollFadeColor} 0%, rgba(255, 255, 255, 0) 100%)`
+      },
+      ...commonOverlay
     },
-
     scrollOverlayWidthDefault: componentTheme.scrollOverlayWidthDefault,
     scrollOverlayWidthSecondary: componentTheme.scrollOverlayWidthSecondary
   }
