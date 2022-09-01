@@ -448,18 +448,17 @@ describe('<Tabs />', async () => {
       const subject = await mount(<Example width="150px" />)
       const tabs = await TabsLocator.find()
 
-      expect(await tabs.find('[class$="-tabs__scrollOverlay"]')).to.exist()
-      expect(await tabs.find('[class$="-tabs__scrollSpacer"]')).to.exist()
+      expect(await tabs.find('[class$="-tabs__endScrollOverlay"]')).to.exist()
+
+      const tabPanels = await tabs.findAllTabPanels()
+      tabPanels[2].click()
+
+      expect(await tabs.find('[class$="-tabs__startScrollOverlay"]')).to.exist()
 
       await subject.setProps({ width: '550px' })
 
       expect(
-        await tabs.find('[class$="-tabs__scrollOverlay"]', {
-          expectEmpty: true
-        })
-      ).to.not.exist()
-      expect(
-        await tabs.find('[class$="-tabs__scrollSpacer"]', {
+        await tabs.find('[class$="-tabs__endScrollOverlay"]', {
           expectEmpty: true
         })
       ).to.not.exist()

@@ -102,8 +102,8 @@ type TabsStyle = ComponentStyle<
   | 'container'
   | 'tabList'
   | 'panelsContainer'
-  | 'scrollOverlay'
-  | 'scrollSpacer'
+  | 'startScrollOverlay'
+  | 'endScrollOverlay'
 > & {
   scrollOverlayWidthDefault: string
   scrollOverlayWidthSecondary: string
@@ -111,6 +111,8 @@ type TabsStyle = ComponentStyle<
 
 type TabsState = {
   withTabListOverflow: boolean
+  showStartOverLay: boolean
+  showEndOverLay: boolean
 }
 
 const propTypes: PropValidators<PropKeys> = {

@@ -48,7 +48,6 @@ import type { RectType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
-import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -74,7 +73,6 @@ category: components
 @tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@textDirectionContextConsumer()
 @testable()
 class Tabs extends Component<TabsProps, TabsState> {
   static readonly componentId = 'Tabs'
@@ -113,7 +111,9 @@ class Tabs extends Component<TabsProps, TabsState> {
     super(props)
 
     this.state = {
-      withTabListOverflow: false
+      withTabListOverflow: false,
+      showStartOverLay: false,
+      showEndOverLay: false
     }
   }
 
@@ -228,18 +228,11 @@ class Tabs extends Component<TabsProps, TabsState> {
       this._tabListPosition &&
       typeof this._tabList.scrollTo === 'function' // test for scrollTo support
     ) {
-      const { dir } = this.props
-      const isRtl = dir === textDirectionContextConsumer.DIRECTION.rtl
-
       const tabPosition = getBoundingClientRect(activeTabEl)
       const tabListPosition = this._tabListPosition
 
-      const tabListBoundStart = isRtl
-        ? tabListPosition.left + this.getOverlayWidth()
-        : tabListPosition.left
-      const tabListBoundEnd = isRtl
-        ? tabListPosition.right
-        : tabListPosition.right + this.getOverlayWidth()
+      const tabListBoundStart = tabListPosition.left + this.getOverlayWidth()
+      const tabListBoundEnd = tabListPosition.right + this.getOverlayWidth()
 
       const tabPositionStart = tabPosition.left
       const tabPositionEnd = tabPosition.right
@@ -400,6 +393,27 @@ class Tabs extends Component<TabsProps, TabsState> {
       this._focusable.focus()
   }
 
+  handleScroll = (
+    event: React.UIEvent<ViewOwnProps> & React.UIEvent<HTMLElement>
+  ) => {
+    if (
+      this.props.tabOverflow !== 'scroll' ||
+      !this.state.withTabListOverflow
+    ) {
+      event.preventDefault()
+      return
+    }
+    const tabList = event.currentTarget as HTMLElement
+    const scrollLeftMax = Math.round(
+      tabList.scrollWidth - getBoundingClientRect(tabList).width
+    )
+
+    const scrollLeft = Math.floor(Math.abs(tabList.scrollLeft))
+    this.setState({
+      showStartOverLay: scrollLeft > 0,
+      showEndOverLay: scrollLeft < scrollLeftMax
+    })
+  }
   render() {
     const panels: PanelChild[] = []
     const tabs: TabChild[] = []
@@ -445,16 +459,13 @@ class Tabs extends Component<TabsProps, TabsState> {
       tabOverflow === 'scroll' && this.state.withTabListOverflow
 
     // suppress overlay whenever final Tab is active, or Firefox will cover it
-    const scrollOverlay =
-      selectedIndex !== React.Children.count(children) - 1 ? (
-        <span key="overlay" css={styles?.scrollOverlay} />
-      ) : null
+    const startScrollOverlay = this.state.showStartOverLay ? (
+      <span key="start-overlay" css={styles?.startScrollOverlay} />
+    ) : null
 
-    const scrollFadeEls = [
-      // spacer element prevents final Tab from being obscured by scroll overflow gradient
-      <span key="spacer" css={styles?.scrollSpacer} />,
-      scrollOverlay
-    ]
+    const endScrollOverlay = this.state.showEndOverLay ? (
+      <span key="end-overlay" css={styles?.endScrollOverlay} />
+    ) : null
 
     return (
       <View
@@ -480,9 +491,11 @@ class Tabs extends Component<TabsProps, TabsState> {
                 css={styles?.tabList}
                 aria-label={screenReaderLabel}
                 elementRef={this.handleTabListRef}
+                onScroll={this.handleScroll}
               >
                 {tabs}
-                {withScrollFade && scrollFadeEls}
+                {withScrollFade && startScrollOverlay}
+                {withScrollFade && endScrollOverlay}
               </View>
             </View>
           )}
