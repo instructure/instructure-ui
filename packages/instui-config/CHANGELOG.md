@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
+
+
+### Features
+
+* **ui-position:** add `containerDisplay` prop to Position ([0fdd83f](https://github.com/instructure/instructure-ui/commit/0fdd83fc06f3d63eadf4bd42bc96e0e8514a5981))
+
+
+
+
+
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 
 **Note:** Version bump only for package @instructure/instui-config

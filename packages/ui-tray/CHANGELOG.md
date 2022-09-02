@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
+
+
+### Bug Fixes
+
+* fix propType for liveRegion ([e9ae7d3](https://github.com/instructure/instructure-ui/commit/e9ae7d396e4c5de5eb1df56666630b92f73a670e))
+
+
+### Features
+
+* **ui-tray:** add `position` theme variable to Tray ([375ed68](https://github.com/instructure/instructure-ui/commit/375ed68a6c38c241d45d3a13f5bb757ed68b9ab2))
+
+
+
+
+
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 
 ### Bug Fixes

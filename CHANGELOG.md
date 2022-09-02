@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
+
+
+### Bug Fixes
+
+* **ui-pagination:** wrong type description for Pagination's onClick ([867eb1a](https://github.com/instructure/instructure-ui/commit/867eb1a6c0bcbd2c65d26a23cac643df37a0aad3))
+
+* fix propType for liveRegion ([e9ae7d3](https://github.com/instructure/instructure-ui/commit/e9ae7d396e4c5de5eb1df56666630b92f73a670e))
+
+  **WARNING!** In case of **SSR**(server side rendering) and **Jest** you will need to substitute `Element` from the DOM API because it is used by some components:
+    ```Element = typeof Element === 'undefined' ? function(){} : Element```.
+
+    ```
+    // jest.config.js
+    module.exports = {
+      ...
+      globals: {
+        Element: function () {}
+      }
+    }
+    ```
+
+### Features
+
+* **ui-drilldown:** add `minHeight` and `minWidth` props to Drilldown ([7e10b29](https://github.com/instructure/instructure-ui/commit/7e10b2966f4dfb79dfdecca62f12c3f9ba5b62b4))
+* **ui-drilldown:** add `positionContainerDisplay` prop to Drilldown ([834302c](https://github.com/instructure/instructure-ui/commit/834302c1510c96bde8436307465fa480957719bc))
+* **ui-icons:** add `header` icon ([46932bc](https://github.com/instructure/instructure-ui/commit/46932bcb4fbc3fc98566ae886b44c1005ebeb924))
+* **ui-menu:** add `positionContainerDisplay` prop to Menu ([e8ed689](https://github.com/instructure/instructure-ui/commit/e8ed689bacb82b88bde3be3db1ade6ea6ee6ed89))
+* **ui-popover:** add `positionContainerDisplay` prop to Popover ([fdcacec](https://github.com/instructure/instructure-ui/commit/fdcacecd6d1a0f52580f9ccd051dfa8e5270baf0))
+* **ui-position:** add `containerDisplay` prop to Position ([0fdd83f](https://github.com/instructure/instructure-ui/commit/0fdd83fc06f3d63eadf4bd42bc96e0e8514a5981))
+* **ui-responsive:** add `elementRef` prop to Responsive ([be7a338](https://github.com/instructure/instructure-ui/commit/be7a338d330e07f4120565fb61c92dd85518528c))
+* **ui-tray:** add `position` theme variable to Tray ([375ed68](https://github.com/instructure/instructure-ui/commit/375ed68a6c38c241d45d3a13f5bb757ed68b9ab2))
+* **ui-truncate-list,ui:** add `TruncateList` utility component ([f8b17ea](https://github.com/instructure/instructure-ui/commit/f8b17ea8b60234f746fcd7576f1532f38d5bbe5f))
+
+
+
+
+
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 
 ### Bug Fixes

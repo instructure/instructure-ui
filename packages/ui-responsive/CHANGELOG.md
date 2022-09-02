@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
+
+
+### Features
+
+* **ui-responsive:** add `elementRef` prop to Responsive ([be7a338](https://github.com/instructure/instructure-ui/commit/be7a338d330e07f4120565fb61c92dd85518528c))
+
+
+
+
+
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 
 ### Features
