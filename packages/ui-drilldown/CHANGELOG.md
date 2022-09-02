@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
+
+
+### Features
+
+* **ui-drilldown:** add `minHeight` and `minWidth` props to Drilldown ([7e10b29](https://github.com/instructure/instructure-ui/commit/7e10b2966f4dfb79dfdecca62f12c3f9ba5b62b4))
+* **ui-drilldown:** add `positionContainerDisplay` prop to Drilldown ([834302c](https://github.com/instructure/instructure-ui/commit/834302c1510c96bde8436307465fa480957719bc))
+
+
+
+
+
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 
 ### Features

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
+
+
+### Bug Fixes
+
+* **ui-pagination:** wrong type description for Pagination's onClick ([867eb1a](https://github.com/instructure/instructure-ui/commit/867eb1a6c0bcbd2c65d26a23cac643df37a0aad3))
+
+
+
+
+
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 
 ### Features
