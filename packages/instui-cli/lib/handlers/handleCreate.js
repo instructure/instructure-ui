@@ -50,28 +50,9 @@ module.exports = async ({
     pkg.devDependencies
   )
 
-  if (contentType === 'app') {
-    mergeInDependencies(pkgDependencies, '@instructure/ui-babel-preset')
-    mergeInDependencies(pkgDependencies, '@instructure/ui-eslint-config')
-    mergeInDependencies(pkgDependencies, '@instructure/ui-stylelint-config')
-    mergeInDependencies(pkgDependencies, '@instructure/ui-webpack-config')
-  }
-
   const template = path.join(path.dirname(pkgPath), 'template')
 
-  if (contentType === 'app') {
-    await handleCreateFromTemplate({
-      template,
-      path: sourcePath,
-      name,
-      values: ({ name }) => ({
-        NAME: name,
-        DEPENDENCIES: dependencies,
-        DEV_DEPENDENCIES: devDependencies
-      }),
-      copyConfigFiles: true
-    })
-  } else if (contentType === 'package') {
+  if (contentType === 'package') {
     await handleCreatePackage({
       template,
       path: sourcePath,
@@ -130,10 +111,4 @@ const formatTsDependencies = (dependencies = {}, devDependencies = {}) => {
   })
 
   return tsDeps.join(',\n')
-}
-
-const mergeInDependencies = (currentDependencies, packageToMerge) => {
-  const pkgPath = require.resolve(`${packageToMerge}/package.json`)
-  const pkg = require(pkgPath)
-  Object.assign(currentDependencies, pkg.dependencies)
 }

@@ -47,22 +47,6 @@ exports.builder = (yargs) => {
     })
   }
 
-  // TODO: remove create app script and any related code
-  const appCommand = 'app'
-  yargs.command(
-    appCommand,
-    'Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app. DEPRECATED, this will be deleted in InstUI 9',
-    (yargs) => {
-      const options = { yargs, contentType: appCommand }
-      generatePathOption(options)
-      generateNameOption(options)
-    },
-    async (argv) => {
-      const { name, path } = argv
-      handleCreate({ contentType: appCommand, path, name })
-    }
-  )
-
   const packageCommand = 'package'
   const packageFormatInstructions = ' (in kebab-case, e.g. my-package)'
   yargs.command(
