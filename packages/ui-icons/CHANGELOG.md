@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.21.0](https://github.com/instructure/instructure-ui/compare/v7.20.2...v7.21.0) (2022-09-05)
+
+### Features
+
+- **ui-icons:** add `header` icon ([8bfae47](https://github.com/instructure/instructure-ui/commit/8bfae47))
+
 ## [7.20.2](https://github.com/instructure/instructure-ui/compare/v7.20.1...v7.20.2) (2022-07-29)
 
 **Note:** Version bump only for package @instructure/ui-icons
