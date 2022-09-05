@@ -13,7 +13,7 @@ A cli for working with Instructure UI packages.
 #### Using npx
 
 ```bash
-$ npx @instructure/instui-cli create app --name MyInstuiApp
+$ npx @instructure/instui-cli create component
 ```
 
 #### Globally installing `instui-cli` with `yarn` or `npm`
@@ -31,12 +31,11 @@ $ npm install -g @instructure/instui-cli
 You now have access to `instui` commands
 
 ```bash
-instui create app --name MyInstuiApp
+instui create component
 ```
 
 ### Available commands
 
-- **create app** | Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app. DEPRECATED, this will be deleted in InstUI 9
 - **create component** | Create an Instructure UI component. DEPRECATED, will be removed in InstUI v9.
 - **create package** | Create an Instructure UI package. DEPRECATED, will be removed in InstUI v9.
 - **upgrade** | Upgrades instructure-ui in a designated repository to the latest stable version including upgrading packages and applying codemods.
