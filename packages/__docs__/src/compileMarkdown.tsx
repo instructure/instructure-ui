@@ -38,7 +38,7 @@ import { Text } from '@instructure/ui-text'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 
 import { Playground } from './Playground'
-import { Preview } from './Preview'
+import { Preview, PreviewErrorBoundary } from './Preview'
 import { compileAndRenderExample } from './compileAndRenderExample'
 import { Heading } from './Heading'
 import { Link } from './Link'
@@ -247,12 +247,14 @@ function createRenderer() {
       )
     } else if (componentType === 'preview') {
       return (
-        <Preview
-          code={matter.content}
-          language={language}
-          background={data.background || 'checkerboard'}
-          frameless={data.frameless}
-        />
+        <PreviewErrorBoundary>
+          <Preview
+            code={matter.content}
+            language={language}
+            background={data.background || 'checkerboard'}
+            frameless={data.frameless}
+          />
+        </PreviewErrorBoundary>
       )
     }
     return undefined

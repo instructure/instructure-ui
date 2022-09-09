@@ -48,6 +48,7 @@ type PreviewOwnProps = {
     | 'none'
   themeKey?: keyof MainDocsData['themes']
   themes?: MainDocsData['themes']
+  error?: string
 }
 
 type PropKeys = keyof PreviewOwnProps

@@ -47,6 +47,16 @@ class Preview extends Component<PreviewProps, PreviewState> {
     background: 'checkerboard'
   }
 
+  static getDerivedStateFromProps(props: PreviewProps, state: PreviewState) {
+    if (props.error) {
+      return {
+        ...state,
+        error: props.error
+      }
+    }
+    return null
+  }
+
   constructor(props: PreviewProps) {
     super(props)
 
@@ -70,6 +80,7 @@ class Preview extends Component<PreviewProps, PreviewState> {
     ) {
       this.executeCode(this.props.code)
     }
+
     this.props.makeStyles?.()
   }
 
@@ -131,5 +142,35 @@ class Preview extends Component<PreviewProps, PreviewState> {
   }
 }
 
+class PreviewErrorBoundary extends Component<
+  React.PropsWithChildren,
+  { error: string | null }
+> {
+  constructor(props: any) {
+    super(props)
+    this.state = { error: null }
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { error: error.toString() }
+  }
+
+  render() {
+    const children = React.Children.map(this.props.children, (child) => {
+      if (React.isValidElement(child) && this.state.error) {
+        return React.cloneElement(child, {
+          ...child.props,
+          // have to set this to empty string to prevent infinte render cycle
+          code: '',
+          error: this.state.error
+        })
+      }
+      return child
+    })
+
+    return children
+  }
+}
+
 export default Preview
-export { Preview }
+export { Preview, PreviewErrorBoundary }
