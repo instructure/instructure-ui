@@ -22,28 +22,21 @@
  * SOFTWARE.
  */
 
-import { isDefinedCustomElement } from './isDefinedCustomElement'
-
 /**
  * ---
  * category: utilities/DOM
  * ---
  *
- * Get the active element of the specified document
- * @module getActiveElement
- * @param { Document } doc - document by default or user specified doc
- * @return { Element | null } the active element
+ * Check whether an element is a defined custom element. (if it was defined with `customElements.define`)
+ * @module isDefinedCustomElement
+ * @param { Element } el - the element to check
+ * @return { Boolean } whether the element is a custom element or not
  */
-function getActiveElement(doc?: Document) {
-  const activeElement = (doc || document).activeElement
-
-  //check if activeElement is a custom element or not
-  if (activeElement && isDefinedCustomElement(activeElement)) {
-    return activeElement.shadowRoot!.activeElement
-  }
-
-  return activeElement
+function isDefinedCustomElement(el: Element) {
+  return Boolean(
+    el.tagName.includes('-') && customElements.get(el.tagName.toLowerCase())
+  )
 }
 
-export default getActiveElement
-export { getActiveElement }
+export { isDefinedCustomElement }
+export default isDefinedCustomElement

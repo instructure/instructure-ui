@@ -101,6 +101,7 @@ function visible(element: Element) {
 
   while (el) {
     if (el === document.body) break
+    if (el instanceof ShadowRoot) break
     if (hidden(el)) return false
     if (positioned(el)) break
     el = el.parentNode
