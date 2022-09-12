@@ -22,28 +22,24 @@
  * SOFTWARE.
  */
 
-import { isDefinedCustomElement } from './isDefinedCustomElement'
+import { expect } from '@instructure/ui-test-utils'
+import { isDefinedCustomElement } from '../isDefinedCustomElement'
 
-/**
- * ---
- * category: utilities/DOM
- * ---
- *
- * Get the active element of the specified document
- * @module getActiveElement
- * @param { Document } doc - document by default or user specified doc
- * @return { Element | null } the active element
- */
-function getActiveElement(doc?: Document) {
-  const activeElement = (doc || document).activeElement
+class TestElement extends HTMLElement {}
 
-  //check if activeElement is a custom element or not
-  if (activeElement && isDefinedCustomElement(activeElement)) {
-    return activeElement.shadowRoot!.activeElement
-  }
+describe('isDefinedCustomElement', () => {
+  before(() => {
+    customElements.define('test-element', TestElement)
+  })
+  it('should return true for defined elements', async () => {
+    const el = document.createElement('test-element')
 
-  return activeElement
-}
+    expect(isDefinedCustomElement(el)).to.be.true()
+  })
+  it('should return false for not defined elements', async () => {
+    // it is possible to create a custom element that is not defined
+    const el = document.createElement('my-element')
 
-export default getActiveElement
-export { getActiveElement }
+    expect(isDefinedCustomElement(el)).to.be.false()
+  })
+})
