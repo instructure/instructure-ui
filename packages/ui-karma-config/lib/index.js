@@ -24,14 +24,13 @@
 
 const constants = require('karma').constants
 const choma = require.resolve('choma')
+const baseWebpackConfig = require('@instructure/ui-webpack-config')
+const webpack = require('webpack')
 const filePathCalculator = require('./FilePathCalculator')
 
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
 const noHeadless = process.argv.some((arg) => arg === '--no-headless')
 const randomizeTestOrder = process.argv.some((arg) => arg === '--randomize')
-
-const baseWebpackConfig = require('@instructure/ui-webpack-config')
-const webpack = require('webpack')
 
 const NO_DEBUG = !!process.env.NO_DEBUG
 const withCoverage = process.env.COVERAGE
@@ -102,7 +101,6 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
       // The default has some problems inside a monorepo, but specifying this manually
       // seems to pull in all karma plugins across disparate node_modules/ dirs
       plugins: ['karma-*'],
-
       frameworks: ['mocha', 'viewport', 'webpack'],
 
       files: randomizeTestOrder ? [choma, ...karmaFiles] : karmaFiles,
@@ -203,7 +201,12 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
           // than our async test timeouts (currently 1.9 secs) because if this
           // happens first we do not get any sensible error message.
           timeout: 5000
-        }
+        },
+        args: [
+          {
+            USE_REACT_STRICT_MODE: process.env.USE_REACT_STRICT_MODE === '1'
+          }
+        ]
       },
       // TODO: pull breakpoints from theme
       viewport: {

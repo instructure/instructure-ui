@@ -16,7 +16,7 @@ jobs:
       - name: Bootstrap project
         run: yarn bootstrap
       - name: Run test for the patchset
-        run: yarn test:patchset
+        run: USE_REACT_STRICT_MODE=1 yarn test:patchset
       - name: Calculate bundle size
         run: yarn danger ci
         env:

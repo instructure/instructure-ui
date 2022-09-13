@@ -13,6 +13,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,7 +28,8 @@ import { getPackages, getChangedPackages } from '@instructure/pkg-utils'
 import { getCommand, runCommandsConcurrently } from '@instructure/command-utils'
 
 export const karma = () => {
-  const { OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
+  const { OMIT_INSTUI_DEPRECATION_WARNINGS, USE_REACT_STRICT_MODE = '1' } =
+    process.env
 
   const args = process.argv.slice(2)
 
@@ -39,7 +41,8 @@ export const karma = () => {
     'NODE_OPTIONS=--max_old_space_size=120000',
     OMIT_INSTUI_DEPRECATION_WARNINGS
       ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
-      : false
+      : false,
+    `USE_REACT_STRICT_MODE=${USE_REACT_STRICT_MODE}`
   ]
 
   if (args.includes('--watch')) {

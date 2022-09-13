@@ -26,6 +26,20 @@ import sinon from 'sinon'
 import { ReactComponentWrapper } from './reactComponentWrapper'
 import React from 'react'
 
+type KarmaArgs = {
+  config: {
+    args: any[]
+  }
+}
+
+// We are adding additional options through karma, these options
+// are available on the window object.
+declare global {
+  interface Window {
+    __karma__?: KarmaArgs
+  }
+}
+
 // Add "sandbox" to the global interface, so TS does not complain about
 // global.sandbox this should not be needed, but the solutions in
 // https://github.com/squidfunk/karma-viewport/issues/35 dont seem to work
@@ -42,10 +56,33 @@ class Sandbox {
   private _attributes!: { document: Attr[]; body: Attr[] }
   private _addedNodes!: Node[]
   private _observer!: MutationObserver
+  private _useStrictMode = true
 
   constructor() {
     // eslint-disable-next-line no-console
     console.info('[ui-test-sandbox] Initializing test sandbox...')
+
+    if (window.__karma__ && window.__karma__.config) {
+      const karmaArgs = window.__karma__.config.args
+      const strictModeSetting: { USE_REACT_STRICT_MODE: boolean } | undefined =
+        karmaArgs.find(
+          (arg) => typeof arg === 'object' && 'USE_REACT_STRICT_MODE' in arg
+        )
+
+      if (strictModeSetting) {
+        this._useStrictMode = strictModeSetting.USE_REACT_STRICT_MODE
+      }
+    }
+
+    // eslint-disable-next-line no-console
+    console.info(
+      `[ui-test-sandbox] ${
+        this._useStrictMode
+          ? 'Using React.StrictMode.'
+          : 'NOT using React.StrictMode.'
+      }`
+    )
+
     try {
       // global Mocha hooks
       before(this.init.bind(this))
@@ -102,6 +139,7 @@ class Sandbox {
           ))
       )
     })
+
     resetViewport()
   }
 
@@ -204,9 +242,11 @@ class Sandbox {
     options: {
       props?: Record<string, unknown> | undefined
       strictMode?: boolean
-    }
+    } = {}
   ) {
-    return ReactComponentWrapper.mount(element, options)
+    const strictMode = options.strictMode ?? this._useStrictMode
+
+    return ReactComponentWrapper.mount(element, { ...options, strictMode })
   }
 
   unmount() {
@@ -248,11 +288,9 @@ const viewport = sandbox.viewport
 
 const mount = (
   element: React.ComponentElement<Record<string, unknown>, React.Component>,
-  options: {
+  options?: {
     props?: Record<string, unknown> | undefined
     strictMode?: boolean
-  } = {
-    strictMode: true
   }
 ) => sandbox.mount(element, options)
 

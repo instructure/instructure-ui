@@ -90,12 +90,10 @@ class ReactComponentWrapper {
 
   async mount(
     element: React.ComponentElement<Record<string, unknown>, React.Component>,
-    options: { props?: Record<string, unknown>; strictMode?: boolean } = {
-      strictMode: true
-    }
+    options: { props?: Record<string, unknown>; strictMode?: boolean } = {}
   ) {
     const { type, ref, props } = element
-    const shouldWrapInStrictMode = options.strictMode
+    const shouldWrapInStrictMode = options.strictMode ?? true
 
     this.unmount()
 
