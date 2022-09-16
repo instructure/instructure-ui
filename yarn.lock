@@ -4749,7 +4749,7 @@ __metadata:
     "@instructure/ui-view": 8.28.1
     jest: ^24.9.0
   peerDependencies:
-    react: ">= 16.8 <=17"
+    react: ">= 16.8 <= 18"
     react-dom: ">= 16.8 <= 18"
   languageName: unknown
   linkType: soft
