@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import { View, InstUISettingsProvider, canvas } from '@instructure/ui'
 //@ts-expect-error any
 import * as Components from './components'
@@ -41,4 +41,6 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+//TODO: turn on React.StrictMode
+// Pages still uses legacy API which in turn fails the regression test when StrictMode is on
+ReactDOM.createRoot(document.getElementById('app')!).render(<App />)
