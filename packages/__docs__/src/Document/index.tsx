@@ -120,6 +120,12 @@ class Document extends Component<DocumentProps, DocumentState> {
         <Heading level="h2" as="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
           Default Theme Variables
         </Heading>
+        {doc.themePath ? (
+          <View as="div" margin="0 0 x-small 0">
+            See which global theme variables are mapped to the component here:{' '}
+            {this.renderThemeLink(doc)}
+          </View>
+        ) : null}
         <ComponentTheme
           componentTheme={componentTheme}
           themeVariables={themeVariables}
@@ -136,8 +142,10 @@ class Document extends Component<DocumentProps, DocumentState> {
 
           <View margin="small 0" display="block">
             In case you need to change the appearance of the{' '}
-            <code>{doc.id}</code> component, you can override it&apos;s default
-            theme variables.
+            <code>{doc.id}</code> component, you can override it&apos;s
+            {doc.themePath
+              ? this.renderThemeLink(doc, ' default theme variables.')
+              : ' default theme variables.'}
           </View>
           <View margin="small 0" display="block">
             The easiest way to do this is to utilize the{' '}
@@ -197,6 +205,22 @@ class Document extends Component<DocumentProps, DocumentState> {
         <Link href={legacySrcUrl || srcUrl}>{srcPath}</Link>
       </View>
     )
+  }
+
+  renderThemeLink(doc: any, text?: string) {
+    if (doc.themeUrl && doc.themePath) {
+      const { themePath, themeUrl, legacyGitBranch } = doc
+
+      let legacySrcUrl
+
+      if (legacyGitBranch) {
+        legacySrcUrl = themeUrl.replace('/master/', `/${legacyGitBranch}/`)
+      }
+
+      const _text = text ? text : themePath
+      return <Link href={legacySrcUrl || themeUrl}>{_text}</Link>
+    }
+    return null
   }
 
   renderUsage() {
