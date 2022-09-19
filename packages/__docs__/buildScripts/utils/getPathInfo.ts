@@ -23,6 +23,7 @@
  */
 
 import path from 'path'
+import fs from 'fs'
 import type { LibraryOptions, PackagePathData } from '../DataTypes'
 
 export function getPathInfo(
@@ -30,7 +31,7 @@ export function getPathInfo(
   projectRoot: string,
   library: LibraryOptions
 ): PackagePathData {
-  return {
+  const pathInfo: PackagePathData = {
     relativePath: path.relative(projectRoot, resourcePath),
     extension: path.extname(resourcePath),
     srcPath: relativePath(resourcePath, projectRoot),
@@ -40,6 +41,14 @@ export function getPathInfo(
     requireStr: `require('${resourcePath}').default`,
     esPath: esPath(resourcePath, projectRoot, library)
   }
+
+  const themePath = resourcePath.replace('index.tsx', 'theme.ts')
+
+  if (fs.existsSync(themePath)) {
+    pathInfo.themePath = pathInfo.srcPath.replace('index.tsx', 'theme.ts')
+    pathInfo.themeUrl = pathInfo.srcUrl.replace('index.tsx', 'theme.ts')
+  }
+  return pathInfo
 }
 
 function pathParts(resourcePath: string, library: LibraryOptions) {

@@ -36,6 +36,8 @@ type PackagePathData = {
   requireStr: string
   srcPath: string
   srcUrl: string
+  themeUrl?: string
+  themePath?: string
 }
 
 // YAML descriptions exported with gray-matter
