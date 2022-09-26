@@ -140,6 +140,15 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       })
     }
 
+    if (
+      getInteraction({ props: prevProps }) !== 'disabled' &&
+      getInteraction({ props: this.props }) === 'disabled'
+    ) {
+      this.setState({
+        hasFocus: false
+      })
+    }
+
     this.props.makeStyles?.(this.makeStyleProps())
   }
 
