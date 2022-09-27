@@ -300,10 +300,11 @@ example: true
 render: false
 ---
 class Example extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
-      expanded: true
+      expanded: true,
+      hoveredLine: null
     }
   }
 
@@ -311,24 +312,76 @@ class Example extends React.Component {
     const { expanded } = this.state
     if (expanded) {
       return (
-        <View as="div" padding="xx-small" onFocus={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
-          <TextInput placeholder="Enter new group name" display="inline-block" width="12rem" renderLabel=''/>
-          <IconButton screenReaderLabel="Cancel" onClick={(e) => this.setExpand(e, !expanded)} margin="0 0 0 small" ><IconXSolid/></IconButton>
-          <IconButton screenReaderLabel="Add new group" onClick={(e) => this.setExpand(e, !expanded)} margin="0 0 0 small" ><IconCheckSolid/></IconButton>
-        </View>
+        <InstUISettingsProvider
+          theme={
+            this.state.hoveredLine === 'renderAfter'
+              ? {
+                  componentOverrides: {
+                    View: {
+                      focusColorInfo: 'white'
+                    },
+                    TextInput: {
+                      focusOutlineColor: 'white'
+                    }
+                  }
+                }
+              : undefined
+          }
+        >
+          <View
+            as="div"
+            padding="xx-small"
+            onFocus={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
+            onMouseEnter={() => this.setState({ hoveredLine: 'renderAfter' })}
+            onMouseLeave={() => this.setState({ hoveredLine: 'null' })}
+          >
+            <TextInput
+              placeholder="Enter new group name"
+              display="inline-block"
+              width="12rem"
+              renderLabel=""
+              onKeyDown={(e) => {
+                e.stopPropagation()
+              }}
+            />
+            <IconButton
+              screenReaderLabel="Cancel"
+              onClick={(e) => this.setExpand(e, !expanded)}
+              onKeyDown={(e) => {
+                if (e.code === 'Space' || e.code === 'Enter') {
+                  e.preventDefault()
+                  this.setExpand(e, !expanded)
+                }
+              }}
+              margin="0 0 0 small"
+            >
+              <IconXSolid />
+            </IconButton>
+            <IconButton
+              screenReaderLabel="Add new group"
+              onClick={(e) => this.setExpand(e, !expanded)}
+              onKeyDown={(e) => {
+                if (e.code === 'Space' || e.code === 'Enter') {
+                  e.preventDefault()
+                  this.setExpand(e, !expanded)
+                }
+              }}
+              margin="0 0 0 small"
+            >
+              <IconCheckSolid />
+            </IconButton>
+          </View>
+        </InstUISettingsProvider>
       )
     }
 
-    return (
-      <View as="div">
-        Create New Group
-      </View>
-    )
+    return <View as="div">Create New Group</View>
   }
 
   setExpand = (e, expanded) => {
     e.stopPropagation()
-    this.setState({expanded})
+    this.setState({ expanded })
     this._node.focus()
   }
 
@@ -336,9 +389,15 @@ class Example extends React.Component {
     const { expanded } = this.state
     return (
       <TreeBrowser.Node
-        containerRef={(el) => this._node = el}
+        containerRef={(el) => (this._node = el)}
         onClick={(e) => this.setExpand(e, !expanded)}
-        itemIcon={this.state.expanded ? '' : <IconPlusLine /> }
+        onKeyDown={(e) => {
+          if (e.code === 'Space' || e.code === 'Enter') {
+            e.preventDefault()
+            this.setExpand(e, !expanded)
+          }
+        }}
+        itemIcon={this.state.expanded ? '' : <IconPlusLine />}
         size="large"
       >
         {this.renderInput()}
@@ -346,7 +405,7 @@ class Example extends React.Component {
     )
   }
 
-  render () {
+  render() {
     return (
       <TreeBrowser
         selectionType="single"
@@ -355,21 +414,21 @@ class Example extends React.Component {
         collections={{
           1: {
             id: 1,
-            name: "Grade 1",
-            collections: [2],
+            name: 'Grade 1',
+            collections: [2]
           },
           2: {
             id: 2,
-            name: "Math Outcomes",
+            name: 'Math Outcomes',
             collections: [],
             items: [1, 2],
-            descriptor: "1 Group | 2 Outcomes",
+            descriptor: '1 Group | 2 Outcomes',
             renderAfterItems: this.renderNode()
           }
         }}
         items={{
-          1: { id: 1, name: "Can add" },
-          2: { id: 2, name: "Can subtract" },
+          1: { id: 1, name: 'Can add' },
+          2: { id: 2, name: 'Can subtract' }
         }}
         showRootCollection={true}
         rootId={1}
