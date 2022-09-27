@@ -1,7 +1,7 @@
 ---
 title: Accessibility
 category: Getting Started
-order: 5
+order: 6
 ---
 
 ## Accessibility

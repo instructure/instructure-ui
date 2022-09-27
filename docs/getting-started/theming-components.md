@@ -1,7 +1,7 @@
 ---
 title: Themes
 category: Getting Started
-order: 7
+order: 8
 ---
 
 ## Themes
