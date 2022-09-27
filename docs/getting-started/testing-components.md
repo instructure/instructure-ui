@@ -1,7 +1,7 @@
 ---
 title: Testing
 category: Getting Started
-order: 6
+order: 7
 ---
 
 ## Testing
@@ -29,6 +29,7 @@ The `yarn test` script also accepts the `--scope` argument if you want to run it
 ### Test Run Options
 
 Options that can be run with `yarn test`/`yarn test:watch`:
+
 - `--changed` will run the tests against any package that has changes (since the previous commit, including un-staged changes).
 - `--staged` will run tests against packages that have been staged but not yet committed.
 - `--scope [package name from its package.json (comma delimited)]` will run the tests against a single package.
