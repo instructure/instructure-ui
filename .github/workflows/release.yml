@@ -10,11 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     name: Release to npm
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
       - name: Install packages.
-        run: yarn install
+        run: yarn install --immutable
       - name: Set up project.
         run: yarn bootstrap
       - name: Run tests.
@@ -31,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Tag release commit
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Set up git identity
@@ -47,11 +51,15 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy docs to Netlify
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
       - name: Install packages.
-        run: yarn install
+        run: yarn install --immutable
       - name: Set up project.
         run: yarn bootstrap
       - name: Build docs-app.
@@ -76,10 +84,11 @@ jobs:
       run:
         working-directory: ./regression-test
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
+          cache: 'yarn'
       - name: Retrieve latest snapshot version
         run: node prepare.js
       - name: Install dependencies for regression testing

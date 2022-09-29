@@ -4,15 +4,16 @@ jobs:
   pr_validation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         name: Install Node 16
         with:
           node-version: '16'
+          cache: 'yarn'
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
       - name: Bootstrap project
         run: yarn bootstrap
       - name: Run test for the patchset
