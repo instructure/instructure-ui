@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
+
+
+### Bug Fixes
+
+* **ui-text-input:** remove focusring when receiving disabled prop ([f16e88e](https://github.com/instructure/instructure-ui/commit/f16e88ea8d591cc7d042027492e834c3b9090bf1))
+
+
+
+
+
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
 **Note:** Version bump only for package @instructure/ui-text-input
