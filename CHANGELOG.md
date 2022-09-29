@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
+
+
+### Bug Fixes
+
+* **ui-text-input:** remove focusring when receiving disabled prop ([f16e88e](https://github.com/instructure/instructure-ui/commit/f16e88ea8d591cc7d042027492e834c3b9090bf1))
+* **ui-truncate-text:** impove TruncateText's performance for large amounts of contents ([22fcf14](https://github.com/instructure/instructure-ui/commit/22fcf143c9c1d923205b6ede3582a7edf61ecd37))
+
+
+### Features
+
+* **ui-dom-utils:** add webcomponent support for certain utility functions ([1bade83](https://github.com/instructure/instructure-ui/commit/1bade83c2d7aea75aa6eac6ceff852bac5186e84))
+* **ui-icons:** add `award` icon ([4c7c37c](https://github.com/instructure/instructure-ui/commit/4c7c37ce1c75f28eb35faf621892647d245b8916))
+* **ui-icons:** add `predictive` icon ([e9b210b](https://github.com/instructure/instructure-ui/commit/e9b210bb8f6101a257d5c8b019ce474157e6b058))
+
+
+
+
+
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
+
+
+### Features
+
+* **ui-dom-utils:** add webcomponent support for certain utility functions ([1bade83](https://github.com/instructure/instructure-ui/commit/1bade83c2d7aea75aa6eac6ceff852bac5186e84))
+
+
+
+
+
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
 **Note:** Version bump only for package @instructure/ui-dom-utils

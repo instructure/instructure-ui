@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
+
+
+### Bug Fixes
+
+* support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
+* **ui-truncate-text:** impove TruncateText's performance for large amounts of contents ([22fcf14](https://github.com/instructure/instructure-ui/commit/22fcf143c9c1d923205b6ede3582a7edf61ecd37))
+
+
+
+
+
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
 
