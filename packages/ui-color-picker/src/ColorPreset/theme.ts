@@ -47,7 +47,10 @@ const generateComponentTheme = (theme: Theme): ColorPresetTheme => {
     linear-gradient(-45deg, transparent 75%, ${colors.tiara} 75%)`,
     checkerboardBackgroundSize: '.5rem .5rem',
     checkerboardBackgroundPosition:
-      '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px'
+      '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px',
+    popoverContentBlockTopMargin: spacing?.medium,
+    popoverContentBlockBottomMargin: spacing?.small,
+    popoverContentBlockTopPadding: spacing?.medium
   }
 
   return {

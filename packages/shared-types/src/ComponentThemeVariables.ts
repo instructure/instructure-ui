@@ -489,6 +489,7 @@ export type ColorPickerTheme = {
   popoverContentBlockBorderWidth: Border['widthSmall']
   popoverContentBlockTopMargin: Spacing['small']
   popoverContentBlockBottomMargin: Spacing['small']
+  popoverContentBlockTopPadding: Spacing['small']
   popoverFooterPadding: Spacing['xSmall']
   popoverFooterTopBorderWidth: Border['widthSmall']
   colorMixerButtonContainerLeftMargin: Spacing['xSmall']
@@ -505,6 +506,9 @@ export type ColorPresetTheme = {
   checkerboardBackgroundImage: string
   checkerboardBackgroundSize: string
   checkerboardBackgroundPosition: string
+  popoverContentBlockTopMargin: Spacing['small']
+  popoverContentBlockBottomMargin: Spacing['small']
+  popoverContentBlockTopPadding: Spacing['small']
 }
 
 export type DrawerLayoutContentTheme = {

@@ -73,7 +73,7 @@ const generateStyle = (
       label: 'colorPreset__popoverContent',
       padding: componentTheme.smallSpacing,
       maxHeight: colorMixerSettings?.maxHeight || '100vh',
-      overflow: 'scroll'
+      overflow: 'auto'
     },
     popoverDivider: {
       label: 'colorPreset__popoverDivider',
@@ -87,7 +87,9 @@ const generateStyle = (
       borderTop: 'solid',
       borderWidth: componentTheme.smallBorder,
       borderColor: componentTheme.popoverDividerColor,
-      margin: `${componentTheme.smallSpacing} 0 ${componentTheme.smallSpacing} 0`
+      marginTop: componentTheme.popoverContentBlockTopMargin,
+      marginBottom: componentTheme.popoverContentBlockBottomMargin,
+      paddingTop: componentTheme.popoverContentBlockTopPadding
     },
     popoverFooter: {
       label: 'colorPreset__popoverFooter',
