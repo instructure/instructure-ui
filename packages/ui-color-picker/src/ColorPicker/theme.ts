@@ -65,8 +65,9 @@ const generateComponentTheme = (theme: Theme): ColorPickerTheme => {
     labelRightMargin: spacing?.xxSmall,
     popoverContentPadding: spacing?.small,
     popoverContentBlockBorderWidth: borders?.widthSmall,
-    popoverContentBlockTopMargin: spacing?.small,
+    popoverContentBlockTopMargin: spacing?.medium,
     popoverContentBlockBottomMargin: spacing?.small,
+    popoverContentBlockTopPadding: spacing?.medium,
     popoverFooterPadding: spacing?.xSmall,
     popoverFooterTopBorderWidth: borders?.widthSmall,
     colorMixerButtonContainerLeftMargin: spacing?.xSmall

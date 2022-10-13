@@ -100,7 +100,8 @@ const generateStyle = (
       borderWidth: componentTheme.popoverContentBlockBorderWidth,
       borderColor: componentTheme.popoverSeparatorColor,
       marginTop: componentTheme.popoverContentBlockTopMargin,
-      marginBottom: componentTheme.popoverContentBlockBottomMargin
+      marginBottom: componentTheme.popoverContentBlockBottomMargin,
+      paddingTop: componentTheme.popoverContentBlockTopPadding
     },
     popoverFooter: {
       label: 'colorPicker__popoverFooter',
@@ -119,11 +120,11 @@ const generateStyle = (
     popoverContentContainer: {
       label: 'colorPicker__popoverContentContainer',
       maxHeight: popoverMaxHeight || '100vh',
-      overflow: 'scroll'
+      overflow: 'auto'
     },
     colorMixerButtonWrapper: {
-      position: 'absolute',
-      top: '2.69rem'
+      label: 'colorPicker__colorMixerButtonWrapper',
+      position: 'static'
     }
   }
 }

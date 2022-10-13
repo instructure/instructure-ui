@@ -419,10 +419,10 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   )
 
   renderCustomPopoverContent = () => {
-    const { styles, children, onChange } = this.props
+    const { children, onChange } = this.props
 
     return (
-      <div css={styles?.popoverContent}>
+      <div>
         {typeof children === 'function' &&
           children(
             `#${this.mixedColorWithStrippedAlpha}`,
