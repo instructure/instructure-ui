@@ -40,8 +40,7 @@
     "@instructure/ui-testable": "8.29.0",
     "@instructure/ui-utils": "8.29.0",
     "codemirror": "5.48.4",
-    "prop-types": "^15",
-    "react-codemirror2": "^7.2.1"
+    "prop-types": "^15"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"

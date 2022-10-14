@@ -192,11 +192,12 @@ const generateStyle = (
         position: 'relative',
         borderRight: '30px solid transparent'
       },
-      '.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler': {
-        position: 'absolute',
-        zIndex: `calc(${componentTheme.zIndex} + 7)`,
-        display: 'none'
-      },
+      '.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler':
+        {
+          position: 'absolute',
+          zIndex: `calc(${componentTheme.zIndex} + 7)`,
+          display: 'none'
+        },
       '.CodeMirror-vscrollbar': {
         right: '0',
         top: '0',
@@ -285,9 +286,10 @@ const generateStyle = (
       },
       '.CodeMirror-rtl pre': { direction: 'rtl' },
       '.CodeMirror-code': { outline: 'none' },
-      '.CodeMirror-scroll, .CodeMirror-sizer, .CodeMirror-gutter, .CodeMirror-gutters, .CodeMirror-linenumber': {
-        boxSizing: 'content-box'
-      },
+      '.CodeMirror-scroll, .CodeMirror-sizer, .CodeMirror-gutter, .CodeMirror-gutters, .CodeMirror-linenumber':
+        {
+          boxSizing: 'content-box'
+        },
       '.CodeMirror-measure': {
         position: 'absolute',
         width: '100%',
@@ -296,9 +298,10 @@ const generateStyle = (
         visibility: 'hidden'
       },
       '.CodeMirror-measure pre': { position: 'static' },
-      '.CodeMirror-selected, .CodeMirror-focused .CodeMirror-selected, .CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection': {
-        background: componentTheme.selectedBackground
-      },
+      '.CodeMirror-selected, .CodeMirror-focused .CodeMirror-selected, .CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection':
+        {
+          background: componentTheme.selectedBackground
+        },
       '.cm-searching': { background: componentTheme.searchingBackground },
       '.cm-force-border': { paddingRight: '0.1px' },
       '@media print': {

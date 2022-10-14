@@ -23,7 +23,7 @@
  */
 
 const { danger, markdown } = require('danger')
-const { exec } = require('child_process')
+const { execSync, exec } = require('child_process')
 const path = require('path')
 const { esBuild, gzip } = require('./scripts/calculateBundleSize')
 
@@ -48,15 +48,6 @@ const calculateSizes = async () => {
   const headCommitSha = danger.git.head
   const baseCommitSha = danger.git.base
 
-  //We want to calculate the bundle size agains the base commit of the PR.
-  //this will be the base agains we will calculate the bundle size changes.
-  await git(`checkout -d ${baseCommitSha}`)
-
-  const { outFile } = await esBuild(META_FILE, baseCommitSha)
-  const baseStats = await gzip(outFile)
-
-  await git(`checkout ${danger.github.pr.head.ref}`)
-
   const { outFile: outFile2, analysis } = await esBuild(
     META_FILE,
     headCommitSha
@@ -68,6 +59,16 @@ const calculateSizes = async () => {
   console.log(analysis)
 
   const prHeadStats = await gzip(outFile2)
+
+  // We want to calculate the bundle size agains the base commit of the PR.
+  // this will be the base agains we will calculate the bundle size changes.
+  // eslint-disable-next-line no-console
+  console.log('switching to master branch...')
+  await git(`checkout -d ${baseCommitSha}`)
+  execSync('yarn install')
+
+  const { outFile } = await esBuild(META_FILE, baseCommitSha)
+  const baseStats = await gzip(outFile)
 
   markdown(`
   Description | Bundle size (gzipped) |
