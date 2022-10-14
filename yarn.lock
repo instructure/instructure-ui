@@ -2763,7 +2763,6 @@ __metadata:
     "@types/codemirror": 5.x
     codemirror: 5.48.4
     prop-types: ^15
-    react-codemirror2: ^7.2.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
@@ -28520,16 +28519,6 @@ __metadata:
   bin:
     rc: ./cli.js
   checksum: 2e26e052f8be2abd64e6d1dabfbd7be03f80ec18ccbc49562d31f617d0015fbdbcf0f9eed30346ea6ab789e0fdfe4337f033f8016efdbee0df5354751842080e
-  languageName: node
-  linkType: hard
-
-"react-codemirror2@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "react-codemirror2@npm:7.2.1"
-  peerDependencies:
-    codemirror: 5.x
-    react: ">=15.5 <=16.x"
-  checksum: 5c524a073167fbd89429a32f6ccbda83b78890231dd743219fb95335c2fd4c90fecc906fe9410a26b42c3baea62e00800d0e4e85c67965ab05234b6f7d4dd82d
   languageName: node
   linkType: hard
 

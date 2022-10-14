@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, createRef } from 'react'
+import { Component, createRef, lazy, Suspense } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -38,12 +38,30 @@ import { withStyle, jsx, Global } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import CodeMirror from './codemirror'
-
 import { propTypes, allowedProps } from './props'
 import type { CodeEditorProps } from './props'
+import type CodeMirror from 'codemirror'
 import type { EditorConfiguration } from 'codemirror'
-import { Controlled } from 'react-codemirror2'
+import type Controlled from '../CodeMirrorWrapper'
+
+declare global {
+  // eslint-disable-next-line no-var
+  var PREVENT_CODEMIRROR_RENDER: boolean
+}
+
+//@ts-expect-error: different types between node and client version
+const CodeMirrorWrapper = lazy(() => {
+  const isServerRendered =
+    typeof navigator === 'undefined' ||
+    (typeof global !== 'undefined' &&
+      global['PREVENT_CODEMIRROR_RENDER'] === true)
+
+  if (isServerRendered) {
+    return import('../CodeMirrorWrapper/index.node')
+  }
+
+  return import('../CodeMirrorWrapper')
+})
 
 /**
 ---
@@ -126,31 +144,35 @@ class CodeEditor extends Component<CodeEditorProps> {
       this.props
     return (
       <div css={styles?.codeEditor} ref={this.ref}>
-        <Global styles={styles?.globalStyles} />
-        <label htmlFor={this._id}>
-          <ScreenReaderContent>{label}</ScreenReaderContent>
-          <CodeMirror
-            {...passthroughProps(rest)}
-            // @ts-expect-error we should delete this..
-            id={this._id}
-            options={this.options}
-            value={value!}
-            onBeforeChange={(_editor, _data, value) => {
-              onChange?.(value)
-            }}
-            ref={this.codeMirror}
-            // @ts-expect-error hack:
-            editorDidMount={(e) => (this.editor.current = e)}
-            editorWillUnmount={() => {
-              // @ts-expect-error hack:
-              this.editor.current.display.wrapper.remove()
-              if (this.codeMirror.current) {
+        <Suspense>
+          <Global styles={styles?.globalStyles} />
+          <label htmlFor={this._id}>
+            <ScreenReaderContent>{label}</ScreenReaderContent>
+            <CodeMirrorWrapper
+              {...passthroughProps(rest)}
+              id={this._id}
+              options={this.options}
+              value={value!}
+              onBeforeChange={(_editor, _data, value) => {
+                onChange?.(value)
+              }}
+              // @ts-expect-error we should delete this..
+              ref={this.codeMirror}
+              editorDidMount={(e) => {
+                // @ts-expect-error read only property
+                this.editor.current = e
+              }}
+              editorWillUnmount={() => {
                 // @ts-expect-error hack:
-                this.codeMirror.current.hydrated = false
-              }
-            }}
-          />
-        </label>
+                this.editor.current.display.wrapper.remove()
+                if (this.codeMirror.current) {
+                  // @ts-expect-error hack:
+                  this.codeMirror.current.hydrated = false
+                }
+              }}
+            />
+          </label>
+        </Suspense>
       </div>
     )
   }

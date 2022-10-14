@@ -44,18 +44,18 @@ type CodeEditorOwnProps = {
    * language that was loaded.
    */
   language?:
-  | 'sh'
-  | 'js'
-  | 'json'
-  | 'javascript'
-  | 'jsx'
-  | 'shell'
-  | 'css'
-  | 'html'
-  | 'markdown'
-  | 'yaml'
-  | 'yml'
-  | 'bash'
+    | 'sh'
+    | 'js'
+    | 'json'
+    | 'javascript'
+    | 'jsx'
+    | 'shell'
+    | 'css'
+    | 'html'
+    | 'markdown'
+    | 'yaml'
+    | 'yml'
+    | 'bash'
   /**
    * This disables editing of the editor content by the user.
    * If the special option "nocursor" is given (instead of simply true),
@@ -87,7 +87,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type CodeEditorProps = CodeEditorOwnProps &
   WithStyleProps<CodeEditorTheme, CodeEditorStyle> &
-  OtherHTMLAttributes<CodeEditorOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<CodeEditorOwnProps> &
+  WithDeterministicIdProps
 
 type CodeEditorStyle = ComponentStyle<'codeEditor' | 'globalStyles'>
 

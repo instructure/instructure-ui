@@ -2,3 +2,4 @@
 /lib/**
 /es/**
 /types/**
+/src/CodeMirrorWrapper/**

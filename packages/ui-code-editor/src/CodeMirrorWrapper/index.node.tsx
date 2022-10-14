@@ -21,11 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { Controlled as CodeMirror } from 'react-codemirror2'
-import 'codemirror/mode/jsx/jsx'
-import 'codemirror/mode/shell/shell'
-import 'codemirror/mode/css/css'
-import 'codemirror/mode/htmlmixed/htmlmixed'
-import 'codemirror/mode/markdown/markdown'
-import 'codemirror/mode/yaml/yaml'
-export default CodeMirror
+
+import { Component } from 'react'
+import type { IControlledCodeMirror } from './index'
+
+// This is an empty class which does not have any dependency on 'codemirror',
+// which in turn enables us to server side render the `CodeEditor` component (altough it will only
+// render content on the client side)
+class Controlled extends Component<IControlledCodeMirror, any> {
+  /** @internal */
+  constructor(props: IControlledCodeMirror) {
+    super(props)
+  }
+
+  /** @internal */
+  hydrate() {}
+
+  /** @internal */
+  initChange() {}
+
+  /** @internal */
+  resolveChange() {}
+
+  /** @internal */
+  mirrorChange() {}
+
+  /** @internal */
+  public componentDidMount() {}
+
+  /** @internal */
+  public componentDidUpdate() {}
+
+  /** @internal */
+  public componentWillUnmount() {}
+
+  /** @internal */
+  public shouldComponentUpdate() {
+    return false
+  }
+
+  /** @internal */
+  public render() {
+    return null
+  }
+}
+
+export default Controlled
