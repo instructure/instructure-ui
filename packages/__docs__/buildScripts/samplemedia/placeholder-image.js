@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-// TODO raw-loader is deprecated in Webpack 5, use https://webpack.js.org/guides/asset-modules/
-// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
-import IconSVG from '!!raw-loader!./placeholder.svg'
+import IconSVG from './placeholder.svg'
 
 export default function placeholderImage(width = 512, height = 512) {
   // We need to base64 encode this because otherwise FF will add extra escape chars
-  const dataUri = btoa(
+  const dataUri = Buffer.from(
     IconSVG.replace(/{{w}}/g, width).replace(/{{h}}/g, height).trim()
-  )
+  ).toString('base64')
+
   return `data:image/svg+xml;base64,${dataUri}`
 }
