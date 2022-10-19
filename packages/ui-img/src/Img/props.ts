@@ -41,6 +41,10 @@ type ImgOwnProps = {
   alt?: string
   display?: 'inline-block' | 'block'
   /**
+   * Gets passed down to  the img component. Same as the native HTML img's loading attribute
+   */
+  loading?: 'eager' | 'lazy'
+  /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
@@ -77,6 +81,7 @@ const propTypes: PropValidators<PropKeys> = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string,
   display: PropTypes.oneOf(['inline-block', 'block']),
+  loading: PropTypes.oneOf(['eager', 'lazy']),
   margin: ThemeablePropTypes.spacing,
   overlay: PropTypes.shape({
     color: PropTypes.string.isRequired,
@@ -104,6 +109,7 @@ const allowedProps: AllowedPropKeys = [
   'src',
   'alt',
   'display',
+  'loading',
   'margin',
   'overlay',
   'withGrayscale',
