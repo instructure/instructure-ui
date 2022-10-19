@@ -90,6 +90,7 @@ class Img extends Component<ImgProps> {
       height,
       elementRef,
       styles,
+      loading,
       ...props
     } = this.props
 
@@ -99,7 +100,8 @@ class Img extends Component<ImgProps> {
 
     const imageProps = {
       css: styles?.img,
-      src
+      src,
+      loading
     }
 
     const containerProps = {

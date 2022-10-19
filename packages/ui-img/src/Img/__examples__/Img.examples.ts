@@ -38,5 +38,6 @@ export default {
       height: '15rem',
       width: '12rem'
     }
-  }
+  },
+  excludeProps: ['loading']
 } as StoryConfig<ImgProps>
