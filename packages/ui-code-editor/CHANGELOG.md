@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
+
+
+### Bug Fixes
+
+* **ui-code-editor:** integrate `react-codemirror2` ([1fee246](https://github.com/instructure/instructure-ui/commit/1fee246068aff15d9bdbae882e48431bd73df6a3))
+
+
+
+
+
 # [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
 
 

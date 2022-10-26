@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
+
+
+### Features
+
+* **ui-img:** add 'loading' prop to Img component ([0b69af2](https://github.com/instructure/instructure-ui/commit/0b69af2c34cd0ff85a6dbfccfe85abf21ec033c6))
+
+
+
+
+
 # [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
 
 **Note:** Version bump only for package @instructure/ui-img
