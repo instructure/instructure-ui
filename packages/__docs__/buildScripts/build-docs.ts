@@ -101,6 +101,7 @@ const pathsToIgnore = [
   '**/template-package/**',
   '**/ui-test-*/src/**',
   '**/ui-scripts/src/**',
+  '**/ui-code-editor/src/CodeMirrorWrapper/**',
 
   // deprecated packages and modules:
   '**/InputModeListener.{js,ts}',

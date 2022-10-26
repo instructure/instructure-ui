@@ -7,3 +7,4 @@ tests.bundle.js
 babel.config.js
 /types/**
 /regression-test/**
+/packages/ui-code-editor/src/CodeMirrorWrapper/**

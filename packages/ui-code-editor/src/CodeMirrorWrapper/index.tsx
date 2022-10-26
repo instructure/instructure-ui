@@ -37,7 +37,6 @@ class Controlled extends React.Component<IControlledCodeMirror, any> {
   /** @internal */
   private appliedNext: boolean
   /** @internal */
-  /** @internal */
   private deferred: any
   /** @internal */
   private editor!: codemirror.Editor
