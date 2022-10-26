@@ -23,22 +23,23 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
-import { omitProps } from '@instructure/ui-react-utils'
+import { getElementType, omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
+
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { View } from '@instructure/ui-view'
+
+import { TopNavBarContext } from '../TopNavBarContext'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type {
-  TopNavBarBrandProps,
-  TopNavBarBrandState,
-  TopNavBarBrandStyleProps
-} from './props'
+import type { TopNavBarBrandProps, TopNavBarBrandStyleProps } from './props'
 
 /**
 ---
@@ -46,26 +47,22 @@ parent: TopNavBar
 id: TopNavBar.Brand
 ---
 @module TopNavBarBrand
-@isWIP
+@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class TopNavBarBrand extends Component<
-  TopNavBarBrandProps,
-  TopNavBarBrandState
-> {
+class TopNavBarBrand extends Component<TopNavBarBrandProps> {
   static readonly componentId = 'TopNavBar.Brand'
   // TODO: add to the docs: making it static on parent and jsdocs parent/module settings, dont export child on its own
 
   static propTypes = propTypes
   static allowedProps = allowedProps
-  static defaultProps = {
-    /**
-     * FIXME: defaultProps go here
-     */
-  }
+  static defaultProps = {}
 
-  ref: HTMLDivElement | Element | null = null
+  declare context: React.ContextType<typeof TopNavBarContext>
+  static contextType = TopNavBarContext
+
+  ref: HTMLDivElement | null = null
 
   handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
@@ -74,16 +71,6 @@ class TopNavBarBrand extends Component<
 
     if (typeof elementRef === 'function') {
       elementRef(el)
-    }
-  }
-
-  constructor(props: TopNavBarBrandProps) {
-    super(props)
-
-    this.state = {
-      /**
-       * FIXME: If needed, state goes here
-       */
     }
   }
 
@@ -97,22 +84,52 @@ class TopNavBarBrand extends Component<
 
   get makeStylesVariables(): TopNavBarBrandStyleProps {
     return {
-      /**
-       * FIXME: If needed, props that gets passed to makeStyles come here
-       */
+      layout: this.context.layout
     }
   }
 
   render() {
-    const { children, elementRef, styles, ...props } = this.props
+    const { screenReaderLabel, renderName, renderIcon, href, onClick, styles } =
+      this.props
+
+    const ElementType = getElementType(TopNavBarBrand, this.props)
 
     return (
-      <div
-        {...omitProps(props, allowedProps)}
-        ref={this.handleRef}
-        css={styles?.topNavBarBrand}
-      >
-        {children}
+      <div ref={this.handleRef} css={styles?.topNavBarBrand}>
+        {(renderIcon || renderName) && (
+          <View
+            {...omitProps(this.props, allowedProps)}
+            css={styles?.container}
+            as={ElementType}
+            href={href}
+            onClick={onClick}
+            position="relative"
+            focusColor={this.context.inverseColor ? 'info' : 'inverse'}
+            focusPosition="inset"
+            borderRadius="medium"
+            themeOverride={{ focusOutlineInset: styles?.focusOutlineInset }}
+          >
+            <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
+            {renderIcon && this.context.layout !== 'smallViewport' && (
+              <div
+                css={styles?.iconContainer}
+                role="presentation"
+                aria-hidden="true"
+              >
+                {renderIcon}
+              </div>
+            )}
+            {renderName && (
+              <div
+                css={styles?.nameContainer}
+                role="presentation"
+                aria-hidden="true"
+              >
+                {renderName}
+              </div>
+            )}
+          </View>
+        )}
       </div>
     )
   }

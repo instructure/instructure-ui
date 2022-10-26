@@ -23,11 +23,7 @@
  */
 
 import type { TopNavBarMenuItemsTheme } from '@instructure/shared-types'
-import type {
-  TopNavBarMenuItemsProps,
-  TopNavBarMenuItemsStyleProps,
-  TopNavBarMenuItemsStyle
-} from './props'
+import type { TopNavBarMenuItemsStyle } from './props'
 
 /**
  * ---
@@ -40,23 +36,36 @@ import type {
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (
-  componentTheme: TopNavBarMenuItemsTheme,
-  _props: TopNavBarMenuItemsProps,
-  state: TopNavBarMenuItemsStyleProps
+  componentTheme: TopNavBarMenuItemsTheme
 ): TopNavBarMenuItemsStyle => {
-  const { layout } = state
-
-  const isDesktop = layout === 'desktop'
+  const submenuOptionStyle = {
+    display: 'inline-block',
+    padding: `0 ${componentTheme.desktopSubmenuActiveOptionIndicatorSpacing}`
+  }
 
   return {
     topNavBarMenuItems: {
       label: 'topNavBarMenuItems',
-      color: componentTheme.color,
-      background: componentTheme.background,
       flex: '1 1',
       display: 'flex',
-      flexDirection: isDesktop ? 'row' : 'column'
-    }
+      flexDirection: 'row',
+      alignItems: 'stretch',
+      // padding to prevent focus ring getting cropped by `overflow: hidden`
+      padding: '0 0.125rem'
+    },
+    submenuOption: {
+      label: 'topNavBarMenuItems__submenuOption',
+      ...submenuOptionStyle
+    },
+    submenuOptionActive: {
+      label: 'topNavBarMenuItems__submenuOptionActive',
+      ...submenuOptionStyle,
+      fontWeight: componentTheme.desktopSubmenuActiveOptionFontWeight,
+      paddingBlockEnd:
+        componentTheme.desktopSubmenuActiveOptionIndicatorSpacing,
+      borderBottom: `${componentTheme.desktopSubmenuActiveOptionIndicatorWidth} solid ${componentTheme.desktopSubmenuActiveOptionIndicatorColor}`
+    },
+    itemSpacing: componentTheme.desktopItemSpacing
   }
 }
 

@@ -30,12 +30,14 @@ import type { TopNavBarBrandTheme } from '@instructure/shared-types'
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (_theme: Theme): TopNavBarBrandTheme => {
-  // const { colors, typography } = theme
+const generateComponentTheme = (theme: Theme): TopNavBarBrandTheme => {
+  const { spacing } = theme
 
   const componentVariables: TopNavBarBrandTheme = {
-    color: 'inherit',
-    background: 'inherit'
+    logoHeight: '2.25rem',
+    logoPadding: spacing.small,
+    iconPadding: spacing.small,
+    focusOutlineInset: '-0.25rem'
   }
 
   return {

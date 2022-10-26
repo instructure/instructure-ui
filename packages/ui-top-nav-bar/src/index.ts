@@ -24,6 +24,39 @@
 
 export { TopNavBar } from './TopNavBar'
 
-export type { TopNavBarProps } from './TopNavBar/props'
-export type { TopNavBarItemProps } from './TopNavBar/TopNavBarItem/props'
-// TODO: export subcomponent types
+export type { TopNavBarProps, TopNavBarOwnProps } from './TopNavBar/props'
+export type {
+  TopNavBarActionItemsProps,
+  TopNavBarActionItemsOwnProps
+} from './TopNavBar/TopNavBarActionItems/props'
+export type {
+  TopNavBarBrandProps,
+  TopNavBarBrandOwnProps
+} from './TopNavBar/TopNavBarBrand/props'
+export type {
+  TopNavBarItemProps,
+  TopNavBarItemOwnProps,
+  TopNavBarItemTooltipType
+} from './TopNavBar/TopNavBarItem/props'
+export type {
+  TopNavBarLayoutProps,
+  CommonTopNavBarLayoutProps
+} from './TopNavBar/TopNavBarLayout/props'
+export type {
+  TopNavBarDesktopLayoutProps,
+  TopNavBarDesktopLayoutOwnProps,
+  DesktopLayoutOwnProps
+} from './TopNavBar/TopNavBarLayout/DesktopLayout/props'
+export type {
+  TopNavBarSmallViewportLayoutProps,
+  TopNavBarSmallViewportLayoutOwnProps,
+  SmallViewportLayoutOwnProps
+} from './TopNavBar/TopNavBarLayout/SmallViewportLayout/props'
+export type {
+  TopNavBarMenuItemsProps,
+  TopNavBarMenuItemsOwnProps
+} from './TopNavBar/TopNavBarMenuItems/props'
+export type {
+  TopNavBarUserProps,
+  TopNavBarUserOwnProps
+} from './TopNavBar/TopNavBarUser/props'

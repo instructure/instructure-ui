@@ -23,22 +23,21 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component, Children } from 'react'
 
+import { error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
+import { TopNavBarContext } from '../TopNavBarContext'
+import type { TopNavBarItemProps } from '../TopNavBarItem/props'
+
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type {
-  TopNavBarUserProps,
-  TopNavBarUserState,
-  TopNavBarUserStyleProps
-} from './props'
+import type { TopNavBarUserProps } from './props'
 
 /**
 ---
@@ -46,23 +45,21 @@ parent: TopNavBar
 id: TopNavBar.User
 ---
 @module TopNavBarUser
-@isWIP
+@tsProps
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, null)
 @testable()
-class TopNavBarUser extends Component<TopNavBarUserProps, TopNavBarUserState> {
+class TopNavBarUser extends Component<TopNavBarUserProps> {
   static readonly componentId = 'TopNavBar.User'
-  // TODO: add to the docs: makeing it static on parent and jsdocs parent/module settings, dont export child on its own
 
   static propTypes = propTypes
   static allowedProps = allowedProps
-  static defaultProps = {
-    /**
-     * FIXME: defaultProps go here
-     */
-  }
+  static defaultProps = {}
 
-  ref: HTMLDivElement | Element | null = null
+  declare context: React.ContextType<typeof TopNavBarContext>
+  static contextType = TopNavBarContext
+
+  ref: HTMLDivElement | null = null
 
   handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
@@ -74,42 +71,59 @@ class TopNavBarUser extends Component<TopNavBarUserProps, TopNavBarUserState> {
     }
   }
 
-  constructor(props: TopNavBarUserProps) {
-    super(props)
-
-    this.state = {
-      /**
-       * FIXME: If needed, state goes here
-       */
-    }
-  }
-
   componentDidMount() {
-    this.props.makeStyles?.(this.makeStylesVariables)
+    this.props.makeStyles?.()
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.(this.makeStylesVariables)
+    this.props.makeStyles?.()
   }
 
-  get makeStylesVariables(): TopNavBarUserStyleProps {
-    return {
-      /**
-       * FIXME: If needed, props that gets passed to makeStyles come here
-       */
-    }
+  get content() {
+    const { children } = this.props
+
+    const allowedVariants: TopNavBarItemProps['variant'][] = [
+      'default',
+      'button',
+      'avatar'
+    ]
+
+    return Children.map(children, (child) => {
+      const { id, variant } = child.props
+
+      if (variant && !allowedVariants.includes(variant)) {
+        error(
+          false,
+          `Item with id "${id}" has "${variant}" variant, but only the following variants are allowed in <TopNavBarUser>: ${allowedVariants.join(
+            ', '
+          )}.`
+        )
+        return null
+      }
+
+      return child
+    })
   }
 
   render() {
-    const { children, elementRef, styles, ...props } = this.props
+    const { styles } = this.props
+
+    if (!this.content || this.content.length === 0) {
+      return null
+    }
+
+    if (this.context.layout === 'smallViewport') {
+      // in smallViewport mode it is rendered as a Drilldown
+      return null
+    }
 
     return (
       <div
-        {...omitProps(props, allowedProps)}
+        {...omitProps(this.props, allowedProps)}
         ref={this.handleRef}
         css={styles?.topNavBarUser}
       >
-        {children}
+        {this.content}
       </div>
     )
   }

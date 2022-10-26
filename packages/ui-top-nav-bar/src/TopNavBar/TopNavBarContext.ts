@@ -28,6 +28,7 @@ type TopNavBarLayouts = 'desktop' | 'smallViewport'
 
 type TopNavBarContextType = {
   layout: TopNavBarLayouts
+  inverseColor: boolean
 }
 
 /**
@@ -37,7 +38,8 @@ private: true
 @module TopNavBarContext
 **/
 const TopNavBarContext = createContext<TopNavBarContextType>({
-  layout: 'desktop'
+  layout: 'desktop',
+  inverseColor: false
 })
 
 export default TopNavBarContext

@@ -24,9 +24,23 @@
 
 import { locator } from '@instructure/ui-test-locator'
 
+import { TopNavBarDesktopLayoutLocator } from './DesktopLayout/TopNavBarDesktopLayoutLocator'
+import { TopNavBarSmallViewportLayoutLocator } from './SmallViewportLayout/TopNavBarSmallViewportLayoutLocator'
+
 import { TopNavBarLayout } from './index'
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const TopNavBarLayoutLocator = locator(TopNavBarLayout.selector, {
-  /* custom component query methods go here */
+// TODO: this type seems to be too complex, try to fix it later
+export const TopNavBarLayoutLocator: {
+  customMethods: {
+    findDesktopLayout: any
+    findSmallViewportLayout: any
+  }
+  // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+} = locator(TopNavBarLayout.selector, {
+  findDesktopLayout: (...args: any[]) => {
+    return TopNavBarDesktopLayoutLocator.find(...args)
+  },
+  findSmallViewportLayout: (...args: any[]) => {
+    return TopNavBarSmallViewportLayoutLocator.find(...args)
+  }
 })

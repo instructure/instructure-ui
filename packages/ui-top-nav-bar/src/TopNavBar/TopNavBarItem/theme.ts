@@ -31,22 +31,25 @@ import type { TopNavBarItemTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): TopNavBarItemTheme => {
-  const { spacing, typography, borders } = theme
+  const { colors, spacing, typography, borders } = theme
 
   const componentVariables: TopNavBarItemTheme = {
     fontSize: typography?.fontSizeMedium,
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
-    lineHeight: typography?.lineHeight,
 
     color: 'inherit',
-    background: 'inherit',
+    colorInverse: 'inherit',
 
-    padding: `${spacing?.xxSmall} ${spacing?.xxxSmall}`,
-    itemSpacing: spacing?.small,
+    itemHorizontalPadding: spacing?.xSmall,
+    itemSpacing: spacing?.xSmall,
+    iconTextGap: spacing?.xSmall,
 
-    selectedIndicatorWidth: borders?.widthMedium,
-    selectedIndicatorColor: 'currentColor'
+    activeItemFontWeight: typography?.fontWeightBold,
+    activeItemIndicatorSpacing: '0.25rem',
+    activeIndicatorWidth: borders?.widthMedium,
+    activeIndicatorColor: colors?.textLightest,
+    activeIndicatorColorInverse: colors.textDarkest
   }
 
   return {
