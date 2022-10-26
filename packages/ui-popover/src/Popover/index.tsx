@@ -455,6 +455,12 @@ class Popover extends Component<PopoverProps, PopoverState> {
       if (shouldContainFocus) {
         // only set aria-expanded if popover can contain focus
         expanded = this.shown ? 'true' : 'false'
+
+        if ('aria-expanded' in this.props) {
+          // @ts-expect-error It is an escape hatch, in case someone
+          // wants to remove/override aria-expanded even when shouldContainFocus
+          expanded = this.props['aria-expanded']
+        }
       } else {
         expanded = undefined
       }
