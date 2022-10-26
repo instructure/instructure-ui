@@ -210,7 +210,8 @@ class Search extends Component<SearchProps, SearchState> {
       COMPONENTS: [],
       PACKAGES: [],
       UTILITIES: [],
-      THEMES: []
+      THEMES: [],
+      DESIGN: []
     }
 
     // parse items into groups
