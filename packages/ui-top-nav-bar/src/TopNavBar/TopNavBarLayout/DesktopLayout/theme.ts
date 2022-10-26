@@ -23,19 +23,39 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import type { TopNavBarTheme } from '@instructure/shared-types'
+import type { TopNavBarLayoutDesktopTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme: Theme): TopNavBarTheme => {
-  const { typography } = theme
+const generateComponentTheme = (theme: Theme): TopNavBarLayoutDesktopTheme => {
+  const { colors, stacking, typography, spacing, borders } = theme
 
-  const componentVariables: TopNavBarTheme = {
-    // TODO: might not be needed
-    fontFamily: typography?.fontFamily
+  const componentVariables: TopNavBarLayoutDesktopTheme = {
+    desktopFontSize: typography?.fontSizeMedium,
+    desktopFontFamily: typography?.fontFamily,
+    desktopFontWeight: typography?.fontWeightNormal,
+
+    desktopBackground: colors?.backgroundBrandSecondary,
+    desktopBackgroundInverse: colors?.backgroundLightest,
+    desktopBottomBorder: 'none',
+    desktopBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.borderMedium}`,
+    desktopHeight: '4rem',
+    desktopZIndex: stacking?.topmost + 1,
+
+    desktopHorizontalPadding: `0 ${spacing.small}`,
+    desktopBrandContainerMargin: `0 ${spacing.medium} 0 0`,
+    desktopMenuItemsContainerMargin: `0 ${spacing.large} 0 0`,
+    desktopActionItemsContainerMargin: `0 0 0 ${spacing.xSmall}`,
+    desktopUserContainerMargin: `0 0 0 ${spacing.xSmall}`,
+
+    desktopUserSeparatorGap: spacing?.xSmall,
+    desktopUserSeparatorHeight: '1.5rem',
+    desktopUserSeparatorWidth: borders?.widthSmall,
+    desktopUserSeparatorColor: colors.borderMedium,
+    desktopUserSeparatorColorInverse: colors.borderMedium
   }
 
   return {

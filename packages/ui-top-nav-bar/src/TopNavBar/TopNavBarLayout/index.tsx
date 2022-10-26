@@ -23,22 +23,28 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
-import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import type {
+  TopNavBarLayoutDesktopTheme,
+  TopNavBarLayoutSmallViewportTheme
+} from '@instructure/shared-types'
+
+import { TopNavBarContext } from '../TopNavBarContext'
+
 import generateComponentTheme from './theme'
 
+import { TopNavBarSmallViewportLayout } from './SmallViewportLayout'
+import type { TopNavBarSmallViewportLayoutProps } from './SmallViewportLayout/props'
+import { TopNavBarDesktopLayout } from './DesktopLayout'
+import type { TopNavBarDesktopLayoutProps } from './DesktopLayout/props'
+
 import { propTypes, allowedProps } from './props'
-import type {
-  TopNavBarLayoutProps,
-  TopNavBarLayoutState,
-  TopNavBarLayoutStyleProps
-} from './props'
+import type { TopNavBarLayoutProps } from './props'
 
 /**
 ---
@@ -46,28 +52,26 @@ parent: TopNavBar
 id: TopNavBar.Layout
 ---
 @module TopNavBarLayout
-@isWIP
+@tsProps
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(null, generateComponentTheme)
 @testable()
-class TopNavBarLayout extends Component<
-  TopNavBarLayoutProps,
-  TopNavBarLayoutState
-> {
+class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
   static readonly componentId = 'TopNavBar.Layout'
-  // TODO: add to the docs: making it static on parent and jsdocs parent/module settings, dont export child on its own
 
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    /**
-     * FIXME: defaultProps go here
-     */
+    desktopConfig: {},
+    smallViewportConfig: {}
   }
 
-  ref: HTMLDivElement | Element | null = null
+  declare context: React.ContextType<typeof TopNavBarContext>
+  static contextType = TopNavBarContext
 
-  handleRef = (el: HTMLDivElement | null) => {
+  ref: HTMLElement | null = null
+
+  handleRef = (el: HTMLElement | null) => {
     const { elementRef } = this.props
 
     this.ref = el
@@ -77,52 +81,66 @@ class TopNavBarLayout extends Component<
     }
   }
 
-  constructor(props: TopNavBarLayoutProps) {
-    super(props)
+  get sortedThemeOverride() {
+    const { themeOverride } = this.props
 
-    this.state = {
-      /**
-       * FIXME: If needed, state goes here
-       */
+    // TODO: try to type better, the themeOverride types are not prepared to be inherited and sorted
+
+    if (!themeOverride || typeof themeOverride === 'function') {
+      return {
+        desktopThemeOverride: themeOverride as any,
+        smallViewportThemeOverride: themeOverride as any
+      }
     }
-  }
 
-  componentDidMount() {
-    this.props.makeStyles?.(this.makeStylesVariables)
-  }
+    const desktopThemeOverride: Partial<TopNavBarLayoutDesktopTheme> = {}
+    const smallViewportThemeOverride: Partial<TopNavBarLayoutSmallViewportTheme> =
+      {}
 
-  componentDidUpdate() {
-    this.props.makeStyles?.(this.makeStylesVariables)
-  }
-
-  get makeStylesVariables(): TopNavBarLayoutStyleProps {
-    return {
-      /**
-       * FIXME: If needed, props that gets passed to makeStyles come here
-       */
+    for (const key in themeOverride) {
+      if (key.startsWith('smallViewport')) {
+        const variable = key as keyof TopNavBarLayoutSmallViewportTheme
+        smallViewportThemeOverride[variable] = themeOverride[variable] as any
+      } else if (
+        (key as keyof TopNavBarLayoutDesktopTheme).startsWith('desktop')
+      ) {
+        const variable = key as keyof TopNavBarLayoutDesktopTheme
+        desktopThemeOverride[variable] = themeOverride[variable] as any
+      }
     }
+
+    return { desktopThemeOverride, smallViewportThemeOverride }
   }
 
   render() {
     const {
-      renderBrand,
-      renderMenuItems,
-      renderActionItems,
-      renderUser,
-      styles
+      desktopConfig,
+      smallViewportConfig,
+      // @ts-expect-error prevents it to be passed
+      styles,
+      // @ts-expect-error prevents it to be passed
+      makeStyles,
+      ...restProps
     } = this.props
 
+    if (this.context.layout === 'smallViewport') {
+      return (
+        <TopNavBarSmallViewportLayout
+          {...smallViewportConfig}
+          {...(restProps as TopNavBarSmallViewportLayoutProps)}
+          themeOverride={this.sortedThemeOverride.smallViewportThemeOverride}
+          elementRef={this.handleRef}
+        />
+      )
+    }
+
     return (
-      <div
-        {...omitProps(this.props, allowedProps)}
-        ref={this.handleRef}
-        css={styles?.topNavBarLayout}
-      >
-        {renderBrand}
-        {renderMenuItems}
-        {renderActionItems}
-        {renderUser}
-      </div>
+      <TopNavBarDesktopLayout
+        {...desktopConfig}
+        {...(restProps as TopNavBarDesktopLayoutProps)}
+        themeOverride={this.sortedThemeOverride.desktopThemeOverride}
+        elementRef={this.handleRef}
+      />
     )
   }
 }

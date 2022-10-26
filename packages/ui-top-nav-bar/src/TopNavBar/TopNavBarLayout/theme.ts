@@ -25,19 +25,18 @@
 import type { Theme } from '@instructure/ui-themes'
 import type { TopNavBarLayoutTheme } from '@instructure/shared-types'
 
+import desktopTheme from './DesktopLayout/theme'
+import smallViewportTheme from './SmallViewportLayout/theme'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): TopNavBarLayoutTheme => {
-  const { colors, stacking } = theme
-
   const componentVariables: TopNavBarLayoutTheme = {
-    color: colors?.textLightest,
-    background: colors?.backgroundDarkest,
-    height: '4rem',
-    zIndex: stacking?.topmost + 1
+    ...desktopTheme(theme),
+    ...smallViewportTheme(theme)
   }
 
   return {

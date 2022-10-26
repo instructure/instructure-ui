@@ -1403,55 +1403,93 @@ export type TooltipTheme = {
   padding: Spacing['small']
 }
 
-export type TopNavBarTheme = {
-  fontFamily: Typography['fontFamily']
-}
-
 export type TopNavBarActionItemsTheme = {
-  color: Colors['textDarkest']
-  background: Colors['backgroundLightest']
+  smallViewportActionItemContainerMargin: Spacing['medium']
+  smallViewportActionItemContainerMaxWidth: string | 0
+  smallViewportDropdownMenuActiveOptionFontWeight: Typography['fontWeightBold']
+  smallViewportDropdownMenuActiveOptionIndicatorSpacing: Spacing['xSmall']
+  smallViewportDropdownMenuActiveOptionIndicatorWidth: Border['widthMedium']
+  smallViewportDropdownMenuActiveOptionIndicatorColor: string
 }
 
 export type TopNavBarBrandTheme = {
-  color: Colors['textDarkest']
-  background: Colors['backgroundLightest']
-}
-
-export type TopNavBarLayoutTheme = {
-  color: Colors['textLightest']
-  background: Colors['backgroundDarkest']
-  height: string
-  zIndex: Stacking['topmost']
+  logoHeight: string
+  logoPadding: Spacing['small']
+  iconPadding: Spacing['small']
+  focusOutlineInset: string | 0
 }
 
 export type TopNavBarItemTheme = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
-  lineHeight: Typography['lineHeight']
-  color: Colors['textLightest']
-  background: Colors['backgroundDarkest']
-  padding: Spacing['xxSmall']
-  itemSpacing: Spacing['small']
-  selectedIndicatorWidth: Border['widthMedium']
-  selectedIndicatorColor: Colors['textLightest']
+  color: string
+  colorInverse: string
+  itemHorizontalPadding: Spacing['xxSmall']
+  itemSpacing: Spacing['xSmall']
+  iconTextGap: Spacing['xSmall']
+  activeItemFontWeight: Typography['fontWeightBold']
+  activeItemIndicatorSpacing: Spacing['xSmall']
+  activeIndicatorWidth: Border['widthMedium']
+  activeIndicatorColor: Colors['textLightest']
+  activeIndicatorColorInverse: Colors['textDarkest']
+}
+
+export type TopNavBarLayoutTheme = TopNavBarLayoutDesktopTheme &
+  TopNavBarLayoutSmallViewportTheme
+
+export type TopNavBarLayoutDesktopTheme = {
+  desktopFontSize: Typography['fontSizeMedium']
+  desktopFontFamily: Typography['fontFamily']
+  desktopFontWeight: Typography['fontWeightNormal']
+  desktopBackground: Colors['backgroundBrandSecondary']
+  desktopBackgroundInverse: Colors['backgroundLightest']
+  desktopBottomBorder: string
+  desktopBottomBorderInverse: string
+  desktopHeight: string
+  desktopZIndex: Stacking['topmost']
+
+  desktopHorizontalPadding: Spacing['small']
+  desktopBrandContainerMargin: Spacing['medium']
+  desktopMenuItemsContainerMargin: Spacing['large']
+  desktopActionItemsContainerMargin: Spacing['xSmall']
+  desktopUserContainerMargin: Spacing['xSmall']
+
+  desktopUserSeparatorGap: Spacing['xSmall']
+  desktopUserSeparatorHeight: string | 0
+  desktopUserSeparatorWidth: Border['widthSmall']
+  desktopUserSeparatorColor: Colors['borderMedium']
+  desktopUserSeparatorColorInverse: Colors['borderMedium']
+}
+
+export type TopNavBarLayoutSmallViewportTheme = {
+  smallViewportFontSize: Typography['fontSizeMedium']
+  smallViewportFontFamily: Typography['fontFamily']
+  smallViewportFontWeight: Typography['fontWeightNormal']
+  smallViewportBackground: Colors['backgroundDarkest']
+  smallViewportBackgroundInverse: Colors['backgroundLightest']
+  smallViewportBottomBorder: string
+  smallViewportBottomBorderInverse: string
+  smallViewportHeight: string | 0
+  smallViewportPadding: string | 0
+  smallViewportZIndex: Stacking['topmost']
+  smallViewportTrayPosition: string
+  smallViewportTrayFixTopPosition: string | undefined
+  smallViewportTrayZIndex: Stacking['topmost']
+  smallViewportDropdownMenuActiveOptionFontWeight: Typography['fontWeightBold']
+  smallViewportDropdownMenuActiveOptionIndicatorSpacing: Spacing['xSmall']
+  smallViewportDropdownMenuActiveOptionIndicatorWidth: Border['widthMedium']
+  smallViewportDropdownMenuActiveOptionIndicatorColor: string
+  smallViewportAlternativeTitleMargin: Spacing['xSmall']
 }
 
 export type TopNavBarMenuItemsTheme = {
-  color: Colors['textDarkest']
-  background: Colors['backgroundLightest']
-}
-
-export type TopNavBarSmallViewportLayoutTheme = {
-  color: Colors['textLight']
-  background: Colors['backgroundDarkest']
-  height: string
-  zIndex: Stacking['topmost']
-}
-
-export type TopNavBarUserTheme = {
-  color: Colors['textDarkest']
-  background: Colors['backgroundLightest']
+  desktopItemSpacing: string
+  desktopMaxWidth: string
+  desktopSubmenuActiveOptionFontWeight: Typography['fontWeightBold']
+  desktopSubmenuActiveOptionIndicatorSpacing: Spacing['xSmall']
+  desktopSubmenuActiveOptionIndicatorWidth: Border['widthMedium']
+  desktopSubmenuActiveOptionIndicatorColor: Colors['textLightest']
 }
 
 export type TrayTheme = {
@@ -1719,21 +1757,18 @@ export interface ThemeVariables {
   TextInput: TextInputTheme
   ToggleDetails: ToggleDetailsTheme
   Tooltip: TooltipTheme
-  TopNavBar: TopNavBarTheme
-  TopNavBarActionItems: TopNavBarActionItemsTheme
-  'TopNavBar.ActionItems': TopNavBarActionItemsTheme
   TopNavBarBrand: TopNavBarBrandTheme
   'TopNavBar.Brand': TopNavBarBrandTheme
-  TopNavBarLayout: TopNavBarLayoutTheme
-  'TopNavBar.Layout': TopNavBarLayoutTheme
   TopNavBarItem: TopNavBarItemTheme
   'TopNavBar.Item': TopNavBarItemTheme
+  TopNavBarLayout: TopNavBarLayoutTheme
+  'TopNavBar.Layout': TopNavBarLayoutTheme
+  TopNavBarDesktopLayout: TopNavBarLayoutDesktopTheme
+  'TopNavBar.DesktopLayout': TopNavBarLayoutDesktopTheme
+  TopNavBarSmallViewportLayout: TopNavBarLayoutSmallViewportTheme
+  'TopNavBar.SmallViewportLayout': TopNavBarLayoutSmallViewportTheme
   TopNavBarMenuItems: TopNavBarMenuItemsTheme
   'TopNavBar.MenuItems': TopNavBarMenuItemsTheme
-  TopNavBarSmallViewportLayout: TopNavBarSmallViewportLayoutTheme
-  'TopNavBar.SmallViewportLayout': TopNavBarSmallViewportLayoutTheme
-  TopNavBarUser: TopNavBarUserTheme
-  'TopNavBar.User': TopNavBarUserTheme
   Tray: TrayTheme
   TreeBrowserButton: TreeBrowserButtonTheme
   'TreeBrowser.Button': TreeBrowserButtonTheme

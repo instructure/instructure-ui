@@ -44,47 +44,98 @@ const generateStyle = (
   props: TopNavBarItemProps,
   state: TopNavBarItemStyleProps
 ): TopNavBarItemStyle => {
-  const { isActive } = props
-  const { layout, submenuContainerSelector } = state
+  const { status, variant, renderSubmenu, renderAvatar, customPopoverConfig } =
+    props
+  const { layout, inverseColor } = state
 
-  // @ts-expect-error TODO: remove this and layout if not needed
-  const isDesktop = layout === 'desktop'
+  const isSmallViewport = layout === 'smallViewport'
+  const isActive = renderAvatar
+    ? false
+    : status === 'active' && variant === 'default'
+  const hasPopover = renderSubmenu || customPopoverConfig
+
+  const activeIndicatorPosition = `calc(${componentTheme.itemHorizontalPadding} - ${componentTheme.activeItemIndicatorSpacing})`
 
   return {
     topNavBarItem: {
       label: 'topNavBarItem',
-      margin: `0 ${componentTheme.itemSpacing}`,
+      padding: `0 calc(${componentTheme.itemSpacing} / 2)`,
+      height: '100%',
       display: 'flex',
-      alignItems: 'center'
+      justifyContent: 'center',
+      alignItems: hasPopover ? 'stretch' : 'center'
+    },
+    container: {
+      label: 'topNavBarItem__container',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      position: 'relative',
+
+      ...(isActive && {
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          insetBlockEnd: 0,
+          insetInlineStart: activeIndicatorPosition,
+          insetInlineEnd: activeIndicatorPosition,
+          height: componentTheme.activeIndicatorWidth,
+          background: inverseColor
+            ? componentTheme.activeIndicatorColorInverse
+            : componentTheme.activeIndicatorColor,
+          display: 'block'
+        }
+      }),
+
+      '& a': {
+        textDecoration: 'none'
+      }
     },
     content: {
       label: 'topNavBarItem__content',
       fontSize: componentTheme.fontSize,
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
-      lineHeight: componentTheme.lineHeight,
+      appearance: 'none',
+      border: 0,
+      outline: 0,
+      margin: 0,
+      textDecoration: 'none',
       whiteSpace: 'nowrap',
-      padding: componentTheme.padding,
-      color: componentTheme.color,
-      background: componentTheme.background,
-      borderStyle: 'solid',
-      borderColor: 'transparent',
-      borderWidth: `${componentTheme.selectedIndicatorWidth} 0`,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: inverseColor ? componentTheme.colorInverse : componentTheme.color,
+
       ...(isActive && {
-        borderBottomColor: componentTheme.selectedIndicatorColor
-      })
+        fontWeight: componentTheme.activeItemFontWeight
+      }),
+
+      '*': {
+        pointerEvents: 'none'
+      }
     },
-    triggerContainer: {
-      label: 'topNavBarItem__triggerContainer',
-      display: 'flex'
+    avatarContainer: {
+      label: 'topNavBarItem__avatarContainer',
+      display: 'flex',
+      alignItems: 'center',
+      paddingInlineEnd: `calc(${componentTheme.iconTextGap} * 1.5)`
     },
-    globalStyles: {
-      ...(submenuContainerSelector && {
-        [submenuContainerSelector]: {
-          height: '100%'
-        }
-      })
-    }
+    submenuTriggerContainer: {
+      label: 'topNavBarItem__submenuTriggerContainer',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center'
+    },
+    submenuIcon: {
+      label: 'topNavBarItem__submenuIcon',
+      fontSize: '0.875em',
+      display: 'flex',
+      alignItems: 'center',
+      paddingInlineStart: componentTheme.iconTextGap
+    },
+    focusOutlineOffset: isSmallViewport ? '0.375rem' : '0.625rem',
+    itemHorizontalPadding: componentTheme.itemHorizontalPadding
   }
 }
 

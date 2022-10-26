@@ -25,15 +25,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
   TopNavBarActionItemsTheme,
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
 
-import { TopNavBarActionItems } from './index'
+import { TopNavBarItem } from '../TopNavBarItem'
+import { topNavBarItemTooltipPropType } from '../TopNavBarItem/props'
+import type {
+  ItemChild,
+  TopNavBarItemTooltipType
+} from '../TopNavBarItem/props'
 import type { TopNavBarContextType } from '../TopNavBarContext'
+
+import { TopNavBarActionItems } from './index'
 
 type ActionItemsChild = React.ComponentElement<
   TopNavBarActionItemsProps,
@@ -42,14 +51,46 @@ type ActionItemsChild = React.ComponentElement<
 
 type TopNavBarActionItemsOwnProps = {
   /**
-   * FIXME: description of the children prop goes here
+   * Children of type: `<TopNavBar.Item>`.
+   *
+   * Items in small viewport mode are __required__ to have the `renderIcon` prop,
+   * because only the icons are displayed due to the lack of space.
    */
-  children?: React.ReactNode
+  children?: ItemChild | ItemChild[]
+
+  /**
+   * An 'aria-label' for the action items list.
+   */
+  listLabel?: string
+
+  /**
+   * In __smallViewport__ mode, a __required__ label for the trigger item
+   * of the hidden list items menu, used as an accessible screen reader label.
+   * (The list is not truncated in __desktop__ mode.)
+   *
+   * When there is not enough room to list all the action items,
+   * they will be accessible via a dropdown menu at the end of the list.
+   */
+  renderHiddenItemsMenuTriggerLabel:
+    | string
+    | ((hiddenChildrenCount: number) => string)
+
+  /**
+   * In __smallViewport__ mode, an optional tooltip for the trigger item
+   * of the hidden list items menu.
+   * (The list is not truncated in __desktop__ mode.)
+   *
+   * When there is not enough room to list all the action items,
+   * they will be accessible via a dropdown menu at the end of the list.
+   */
+  renderHiddenItemsMenuTriggerTooltip?:
+    | TopNavBarItemTooltipType
+    | ((hiddenChildrenCount: number) => TopNavBarItemTooltipType)
 
   /**
    * A function that returns a reference to root HTML element
    */
-  elementRef?: (el: Element | null) => void
+  elementRef?: (el: HTMLUListElement | null) => void
 }
 
 type PropKeys = keyof TopNavBarActionItemsOwnProps
@@ -58,30 +99,53 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarActionItemsProps = TopNavBarActionItemsOwnProps &
   WithStyleProps<TopNavBarActionItemsTheme, TopNavBarActionItemsStyle> &
-  OtherHTMLAttributes<TopNavBarActionItemsOwnProps>
+  OtherHTMLAttributes<TopNavBarActionItemsOwnProps> &
+  WithDeterministicIdProps
 
-type TopNavBarActionItemsStyle = ComponentStyle<'topNavBarActionItems'>
+type TopNavBarActionItemsStyle = ComponentStyle<
+  | 'topNavBarActionItems'
+  | 'listItem'
+  | 'dropdownMenuOption'
+  | 'dropdownMenuOptionActive'
+>
 
 type TopNavBarActionItemsState = {
-  // state comes here
+  key: number
+  visibleActionItemsCount?: number
 }
 
 type TopNavBarActionItemsStyleProps = {
-  layout: TopNavBarContextType['layout']
+  layout?: TopNavBarContextType['layout']
 }
 
 const propTypes: PropValidators<PropKeys> = {
-  children: PropTypes.node,
+  children: ChildrenPropTypes.oneOf([TopNavBarItem]),
+  listLabel: PropTypes.string,
+  renderHiddenItemsMenuTriggerLabel: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func
+  ]).isRequired,
+  renderHiddenItemsMenuTriggerTooltip: PropTypes.oneOfType([
+    topNavBarItemTooltipPropType,
+    PropTypes.func
+  ]),
   elementRef: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = ['children', 'elementRef']
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'listLabel',
+  'renderHiddenItemsMenuTriggerLabel',
+  'renderHiddenItemsMenuTriggerTooltip',
+  'elementRef'
+]
 
 export type {
   ActionItemsChild,
   TopNavBarActionItemsProps,
-  TopNavBarActionItemsStyle,
+  TopNavBarActionItemsOwnProps,
   TopNavBarActionItemsState,
-  TopNavBarActionItemsStyleProps
+  TopNavBarActionItemsStyleProps,
+  TopNavBarActionItemsStyle
 }
 export { propTypes, allowedProps }

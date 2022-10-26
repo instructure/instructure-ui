@@ -24,39 +24,32 @@
 
 import PropTypes from 'prop-types'
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
-  TopNavBarTheme,
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
-
-import { TopNavBarLayout } from './TopNavBarLayout'
-import { TopNavBarSmallViewportLayout } from './TopNavBarSmallViewportLayout'
 
 import type { ActionItemsChild } from './TopNavBarActionItems/props'
 import type { BrandChild } from './TopNavBarBrand/props'
 import type { ItemChild } from './TopNavBarItem/props'
 import type { LayoutChild } from './TopNavBarLayout/props'
 import type { MenuItemsChild } from './TopNavBarMenuItems/props'
-import type { SmallViewportLayoutChild } from './TopNavBarSmallViewportLayout/props'
 import type { UserChild } from './TopNavBarUser/props'
+
+import type { TopNavBarContextType } from './TopNavBarContext'
 
 type TopNavBarOwnProps = {
   /**
-   * TODO: description of the renderLayout prop goes here
+   * A required children function that returns a `<TopNavBar.Layout>` component.
+   * The function has the current layout ('desktop' or 'smallViewport') as its parameter.
    */
-  renderLayout: LayoutChild
+  children: (props: {
+    currentLayout: TopNavBarContextType['layout']
+    inverseColor: TopNavBarContextType['inverseColor']
+  }) => LayoutChild
 
   /**
-   * TODO: description of the renderSmallViewportLayout prop goes here
-   */
-  renderSmallViewportLayout?: SmallViewportLayoutChild
-
-  /**
-   * The breakpoint between desktop and small viewport mode
+   * The breakpoint between 'desktop' and 'smallViewport' mode.
    */
   breakpoint?: string | number
 
@@ -66,59 +59,50 @@ type TopNavBarOwnProps = {
   mediaQueryMatch?: 'element' | 'media'
 
   /**
+   * Displays the TopNavBar in inverse color mode.
+   * If a function is passed, the function has the current layout ('desktop' or 'smallViewport') as its parameter.
+   */
+  inverseColor?:
+    | boolean
+    | ((currentLayout: TopNavBarContextType['layout']) => boolean)
+
+  /**
    * A function that returns a reference to root HTML element
    */
-  elementRef?: (el: Element | null) => void
+  elementRef?: (el: HTMLDivElement | null) => void
 }
 
 type PropKeys = keyof TopNavBarOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type TopNavBarProps = TopNavBarOwnProps &
-  WithStyleProps<TopNavBarTheme, TopNavBarStyle> &
-  OtherHTMLAttributes<TopNavBarOwnProps>
-
-type TopNavBarStyle = ComponentStyle<'topNavBar'>
-
-type TopNavBarState = {
-  // state comes here
-}
-
-type TopNavBarStyleProps = {
-  // props passed to makeStyles come here
-}
+type TopNavBarProps = TopNavBarOwnProps & OtherHTMLAttributes<TopNavBarOwnProps>
 
 const propTypes: PropValidators<PropKeys> = {
-  renderLayout: ChildrenPropTypes.oneOf([TopNavBarLayout]).isRequired,
-  renderSmallViewportLayout: ChildrenPropTypes.oneOf([
-    TopNavBarSmallViewportLayout
-  ]),
+  children: PropTypes.func,
   breakpoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   mediaQueryMatch: PropTypes.oneOf(['element', 'media']),
+  inverseColor: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
-  'renderLayout',
-  'renderSmallViewportLayout',
+  'children',
   'breakpoint',
   'mediaQueryMatch',
+  'inverseColor',
   'elementRef'
 ]
 
 export type {
   TopNavBarProps,
-  TopNavBarStyle,
-  TopNavBarState,
-  TopNavBarStyleProps,
+  TopNavBarOwnProps,
   // Child types:
   ActionItemsChild,
   BrandChild,
   LayoutChild,
   ItemChild,
   MenuItemsChild,
-  SmallViewportLayoutChild,
   UserChild
 }
 export { propTypes, allowedProps }

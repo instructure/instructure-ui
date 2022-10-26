@@ -23,10 +23,89 @@
  */
 
 import { locator } from '@instructure/ui-test-locator'
+import { find } from '@instructure/ui-test-utils'
+import { getComputedStyle } from '@instructure/ui-dom-utils'
+
+/* eslint-disable no-restricted-imports */
+// @ts-expect-error bypass no type definition found error
+import { BaseButtonLocator } from '@instructure/ui-buttons/es/BaseButton/BaseButtonLocator'
+// @ts-expect-error bypass no type definition found error
+import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
+// @ts-expect-error bypass no type definition found error
+import { AvatarLocator } from '@instructure/ui-avatar/es/Avatar/AvatarLocator'
+// @ts-expect-error bypass no type definition found error
+import { DrilldownLocator } from '@instructure/ui-drilldown/es/Drilldown/DrilldownLocator'
+// @ts-expect-error bypass no type definition found error
+import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
+/* eslint-enable no-restricted-imports */
 
 import { TopNavBarItem } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const TopNavBarItemLocator = locator(TopNavBarItem.selector, {
-  /* custom component query methods go here */
+  findButton: (...args: any[]) => {
+    return BaseButtonLocator.find(...args)
+  },
+  getButtonBackground: async () => {
+    const buttonContent = await find('[class$="-baseButton__content"]')
+    return buttonContent
+      ? getComputedStyle(buttonContent.getDOMNode()).backgroundColor
+      : undefined
+  },
+  getButtonBorder: async () => {
+    const buttonContent = await find('[class$="-baseButton__content"]')
+    return buttonContent
+      ? getComputedStyle(buttonContent.getDOMNode()).border
+      : undefined
+  },
+  getButtonOpacity: async () => {
+    const buttonContent = await find('[class$="-baseButton__content"]')
+    return buttonContent
+      ? getComputedStyle(buttonContent.getDOMNode()).opacity
+      : undefined
+  },
+  getFocusRingColor: async () => {
+    const buttonContent = await find('[class$="-baseButton"]')
+    return buttonContent
+      ? getComputedStyle(buttonContent.getDOMNode(), '::before').borderColor
+      : undefined
+  },
+  getActiveIndicatorStyle: async () => {
+    const container = await find('[class$="-topNavBarItem__container"]')
+    return getComputedStyle(container.getDOMNode(), '::after')
+  },
+  findContent: (...args: any[]) => {
+    return find('[class$="-topNavBarItem__content"]', ...args)
+  },
+  findSubmenu: (...args: any[]) => {
+    return DrilldownLocator.find(...args)
+  },
+  findCustomPopover: async (...args: any[]) => {
+    const popover = await PopoverLocator.find(...args)
+
+    if (popover) {
+      const isDrilldown = popover.getAttribute('data-cid').includes('Drilldown')
+      return isDrilldown ? null : popover
+    } else {
+      return popover
+    }
+  },
+  findTooltip: (...args: any[]) => {
+    return TooltipLocator.find(...args)
+  },
+  findIcon: (...args: any[]) => {
+    return find('[class*="-baseButton__icon"] [class$="-svgIcon"]', ...args)
+  },
+  findSubmenuChevron: (...args: any[]) => {
+    return find(
+      '[class$="-topNavBarItem__submenuIcon"] [class$="-svgIcon"]',
+      ...args
+    )
+  },
+  findAvatar: (...args: any[]) => {
+    return AvatarLocator.find(...args)
+  },
+  findScreenReaderLabel: (...args: any[]) => {
+    return find('[class$="-screenReaderContent"]', ...args)
+  }
 })

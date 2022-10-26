@@ -24,9 +24,33 @@
 
 import { locator } from '@instructure/ui-test-locator'
 
+/* eslint-disable no-restricted-imports */
+// @ts-expect-error bypass no type definition found error
+import { TruncateListLocator } from '@instructure/ui-truncate-list/es/TruncateList/TruncateListLocator'
+/* eslint-enable no-restricted-imports */
+
+import { TopNavBarItemLocator } from '../TopNavBarItem/TopNavBarItemLocator'
+
 import { TopNavBarMenuItems } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const TopNavBarMenuItemsLocator = locator(TopNavBarMenuItems.selector, {
-  /* custom component query methods go here */
+  findAllMenuItems: (...args: any[]) => {
+    return TopNavBarItemLocator.findAll(...args)
+  },
+  findTruncateList: (...args: any[]) => {
+    return TruncateListLocator.find(...args)
+  },
+  findTruncateListTriggerItem: async (...args: any[]) => {
+    const truncateList = await TruncateListLocator.find(...args)
+
+    if (truncateList) {
+      return TopNavBarItemLocator.find(
+        '[id^=TopNavBarMenuItems-hiddenMenuItemsMenuTrigger_]',
+        ...args
+      )
+    } else {
+      return truncateList
+    }
+  }
 })

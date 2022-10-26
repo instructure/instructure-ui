@@ -22,12 +22,7 @@
  * SOFTWARE.
  */
 
-import type { TopNavBarUserTheme } from '@instructure/shared-types'
-import type {
-  TopNavBarUserProps,
-  TopNavBarUserStyleProps,
-  TopNavBarUserStyle
-} from './props'
+import type { TopNavBarUserStyle } from './props'
 
 /**
  * ---
@@ -39,18 +34,12 @@ import type {
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (
-  componentTheme: TopNavBarUserTheme,
-  _props: TopNavBarUserProps,
-  _state: TopNavBarUserStyleProps
-): TopNavBarUserStyle => {
+const generateStyle = (): TopNavBarUserStyle => {
   return {
     topNavBarUser: {
       label: 'topNavBarUser',
-      color: componentTheme.color,
-      background: componentTheme.background,
-      display: 'flex',
-      alignItems: 'center'
+      flex: '0 0',
+      display: 'flex'
     }
   }
 }

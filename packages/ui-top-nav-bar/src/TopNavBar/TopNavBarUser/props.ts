@@ -29,7 +29,6 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
-  TopNavBarUserTheme,
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
@@ -43,14 +42,18 @@ type UserChild = React.ComponentElement<TopNavBarUserProps, TopNavBarUser>
 
 type TopNavBarUserOwnProps = {
   /**
-   * FIXME: description of the children prop goes here
+   * Required children of type TopNavBar.Item.
+   *
+   * Only accepts 'default', 'button' and 'avatar' variants.
+   *
+   * In "smallViewport" mode it will always display as text (with or without avatar).
    */
-  children?: ItemChild | ItemChild[]
+  children: ItemChild | ItemChild[]
 
   /**
    * A function that returns a reference to root HTML element
    */
-  elementRef?: (el: Element | null) => void
+  elementRef?: (el: HTMLDivElement | null) => void
 }
 
 type PropKeys = keyof TopNavBarUserOwnProps
@@ -58,21 +61,13 @@ type PropKeys = keyof TopNavBarUserOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarUserProps = TopNavBarUserOwnProps &
-  WithStyleProps<TopNavBarUserTheme, TopNavBarUserStyle> &
+  WithStyleProps<null, TopNavBarUserStyle> &
   OtherHTMLAttributes<TopNavBarUserOwnProps>
 
 type TopNavBarUserStyle = ComponentStyle<'topNavBarUser'>
 
-type TopNavBarUserState = {
-  // state comes here
-}
-
-type TopNavBarUserStyleProps = {
-  // props passed to makeStyles come here
-}
-
 const propTypes: PropValidators<PropKeys> = {
-  children: ChildrenPropTypes.oneOf([TopNavBarItem]),
+  children: ChildrenPropTypes.oneOf([TopNavBarItem]).isRequired,
   elementRef: PropTypes.func
 }
 
@@ -81,8 +76,7 @@ const allowedProps: AllowedPropKeys = ['children', 'elementRef']
 export type {
   UserChild,
   TopNavBarUserProps,
-  TopNavBarUserStyle,
-  TopNavBarUserState,
-  TopNavBarUserStyleProps
+  TopNavBarUserOwnProps,
+  TopNavBarUserStyle
 }
 export { propTypes, allowedProps }
