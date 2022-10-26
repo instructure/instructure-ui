@@ -53,6 +53,7 @@ const generateStyle = (
       listStyleType: 'none',
       margin: '0',
       padding: '0',
+      overflow: 'hidden',
       display: 'flex',
       justifyContent: 'flex-start',
       alignItems: 'center'

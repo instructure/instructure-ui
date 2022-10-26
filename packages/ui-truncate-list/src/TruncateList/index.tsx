@@ -30,7 +30,10 @@ import type { Debounced } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
-import { getBoundingClientRect } from '@instructure/ui-dom-utils'
+import {
+  getBoundingClientRect,
+  getComputedStyle
+} from '@instructure/ui-dom-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -225,6 +228,11 @@ class TruncateList extends Component<TruncateListProps, TruncateListState> {
 
     if (this.ref) {
       const { width: navWidth } = getBoundingClientRect(this.ref)
+      const { paddingInlineStart, paddingInlineEnd } = getComputedStyle(
+        this.ref
+      )
+      const navWidthWithoutPadding =
+        navWidth - px(paddingInlineStart) - px(paddingInlineEnd)
 
       const itemWidths = Array.from(this.ref.getElementsByTagName('li')).map(
         (item) => {
@@ -241,8 +249,8 @@ class TruncateList extends Component<TruncateListProps, TruncateListState> {
         // for the last item we don't need to calculate with the menu trigger
         const maxWidth =
           i === itemWidths.length - 1
-            ? navWidth
-            : navWidth - (menuTriggerWidthPx + itemSpacingPx)
+            ? navWidthWithoutPadding
+            : navWidthWithoutPadding - (menuTriggerWidthPx + itemSpacingPx)
 
         if (currentWidth <= maxWidth) {
           visibleItemsCount++
