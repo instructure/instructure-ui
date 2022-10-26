@@ -37,7 +37,10 @@ import { Drilldown } from './index'
 const customMethods = {
   // return the wrapper Option.Items
   findAllOptions: async (...args: any[]) => {
-    return await findAll('[role^=menuitem]', ...args)
+    return await findAll(
+      '[class$=-optionItem__container]:not([role="presentation"])',
+      ...args
+    )
   },
   findAllOptionWrappers: async (...args: any[]) => {
     return await OptionsItemLocator.findAll(...args)
