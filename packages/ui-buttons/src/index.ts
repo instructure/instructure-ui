@@ -29,7 +29,7 @@ export { CondensedButton } from './CondensedButton'
 export { IconButton } from './IconButton'
 export { ToggleButton } from './ToggleButton'
 
-export type { BaseButtonProps } from './BaseButton/props'
+export type { BaseButtonProps, BaseButtonOwnProps } from './BaseButton/props'
 export type { ButtonProps } from './Button/props'
 export type { CloseButtonProps } from './CloseButton/props'
 export type { CondensedButtonProps } from './CondensedButton/props'

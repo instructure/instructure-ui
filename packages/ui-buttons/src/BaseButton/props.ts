@@ -242,5 +242,10 @@ const allowedProps: AllowedPropKeys = [
   'withBorder'
 ]
 
-export type { BaseButtonProps, BaseButtonStyleProps, BaseButtonStyle }
+export type {
+  BaseButtonProps,
+  BaseButtonOwnProps,
+  BaseButtonStyleProps,
+  BaseButtonStyle
+}
 export { propTypes, allowedProps }
