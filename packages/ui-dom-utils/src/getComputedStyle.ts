@@ -37,15 +37,19 @@ import { UIElement } from '@instructure/shared-types'
  * @module getComputedStyle
  *
  * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
+ * @param { string | null | undefined } pseudoElt - A string specifying the pseudo-element to match. Omitted (or null ) for real elements.
  * @returns { Object } object containing css properties and values for the element
  */
-function getComputedStyle(el?: UIElement) {
+function getComputedStyle(el?: UIElement, pseudoElt?: string | null) {
   let style = {}
   if (canUseDOM) {
     const node = el && findDOMNode(el)
     if (node) {
       const window = ownerWindow(el)
-      style = window !== null ? window.getComputedStyle(node as Element) : {}
+      style =
+        window !== null
+          ? window.getComputedStyle(node as Element, pseudoElt)
+          : {}
     }
   }
   return style as CSSStyleDeclaration
