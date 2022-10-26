@@ -23,23 +23,46 @@
  */
 
 import React from 'react'
-import {
-  expect,
-  mount,
-  accessible,
-  generateA11yTests
-} from '@instructure/ui-test-utils'
+import { expect, mount, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { TopNavBar } from '../index'
 import { TopNavBarLocator } from '../TopNavBarLocator'
 import TopNavBarExamples from '../__examples__/TopNavBar.examples'
 
+const BaseExample = () => {
+  return (
+    <TopNavBar breakpoint={700}>
+      {() => (
+        <TopNavBar.Layout
+          desktopConfig={{}}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu'
+          }}
+          renderMenuItems={
+            <TopNavBar.MenuItems
+              listLabel="Page navigation"
+              currentPageId="Overview"
+              renderHiddenItemsMenuTriggerLabel={(hiddenChildrenCount) =>
+                `${hiddenChildrenCount} More`
+              }
+            >
+              <TopNavBar.Item id="Overview" href="/#TopNavBar">
+                Overview
+              </TopNavBar.Item>
+            </TopNavBar.MenuItems>
+          }
+        />
+      )}
+    </TopNavBar>
+  )
+}
+
 // TODO: write tests
-xdescribe('<TopNavBar />', async () => {
+describe('<TopNavBar />', async () => {
   it('should render', async () => {
-    // @ts-expect-error TODO fix
-    await mount(<TopNavBar />)
-    const component = TopNavBarLocator.find()
+    await mount(<BaseExample />)
+    const component = await TopNavBarLocator.find()
 
     expect(component).to.exist()
   })
@@ -48,10 +71,9 @@ xdescribe('<TopNavBar />', async () => {
     generateA11yTests(TopNavBar, TopNavBarExamples)
 
     it('a11y', async () => {
-      // @ts-expect-error TODO fix
-      await mount(<TopNavBar />)
-
-      expect(await accessible()).to.be.true()
+      await mount(<BaseExample />)
+      const topNavBar = await TopNavBarLocator.find()
+      expect(await topNavBar.accessible()).to.be.true()
     })
   })
 })
