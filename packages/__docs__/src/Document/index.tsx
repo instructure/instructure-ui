@@ -244,6 +244,17 @@ import { ${importName} } from '${esPath}'
     )
   }
 
+  renderEditOnGithub() {
+    const { srcUrl } = this.props.doc
+    const type = srcUrl.split('/')[8]
+
+    return type === 'design' ? (
+      <Link target="_blank" href={srcUrl.replace('tree', 'edit')}>
+        Edit this page in GitHub
+      </Link>
+    ) : null
+  }
+
   renderParams(doc: DocDataType) {
     const { id, params } = doc
 
@@ -370,6 +381,7 @@ import { ${importName} } from '${esPath}'
         {details}
         {sections}
         {['.js', '.ts', '.tsx'].includes(doc.extension) && this.renderUsage()}
+        {this.renderEditOnGithub()}
         {repository && layout !== 'small' && (
           <GithubCorner
             href={repository}
