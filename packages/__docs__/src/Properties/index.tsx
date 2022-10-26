@@ -127,6 +127,7 @@ class Properties extends Component<PropertiesProps> {
       - boolean
       - array
       - ReactReactNode
+      - ReactComponentElement
     */
     // TODO: currently custom imported types are just showing the name
     //  of the type. somehow link to these custom types
@@ -153,6 +154,8 @@ class Properties extends Component<PropertiesProps> {
         return 'array'
       case 'ReactReactNode':
         return 'ReactNode'
+      case 'ReactComponentElement':
+        return 'ComponentElement'
       default:
         return tsType.name
     }
