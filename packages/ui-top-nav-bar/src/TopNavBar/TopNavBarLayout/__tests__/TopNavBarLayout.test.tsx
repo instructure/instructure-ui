@@ -23,33 +23,167 @@
  */
 
 import React from 'react'
+
+import { expect, mount } from '@instructure/ui-test-utils'
+import { getComputedStyle } from '@instructure/ui-dom-utils'
+
 import {
-  expect,
-  mount,
-  accessible,
-  generateA11yTests
-} from '@instructure/ui-test-utils'
+  SmallViewportModeWrapper,
+  getLayoutProps
+} from '../../utils/exampleHelpers'
 
 import { TopNavBarLayout } from '../index'
 import { TopNavBarLayoutLocator } from '../TopNavBarLayoutLocator'
-import TopNavBarLayoutExamples from '../__examples__/TopNavBarLayout.examples'
 
-// TODO: write tests
-xdescribe('<TopNavBarLayout />', async () => {
-  it('should render', async () => {
-    await mount(<TopNavBarLayout />)
-    const component = TopNavBarLayoutLocator.find()
+describe('<TopNavBarLayout />', async () => {
+  describe('in "desktop" mode', async () => {
+    it('should render DesktopLayout', async () => {
+      await mount(
+        <SmallViewportModeWrapper layout="desktop">
+          <TopNavBarLayout
+            {...getLayoutProps({
+              currentLayout: 'desktop',
+              inverseColor: false
+            })}
+          />
+        </SmallViewportModeWrapper>
+      )
+      // @ts-expect-error TODO: type is too complex, try to fix later
+      const component = await TopNavBarLayoutLocator.find()
+      const desktopLayout = await component.findDesktopLayout()
+      const smallViewportLayout = await component.findSmallViewportLayout({
+        expectEmpty: true
+      })
 
-    expect(component).to.exist()
+      expect(desktopLayout).to.be.visible()
+      expect(smallViewportLayout).to.not.exist()
+    })
+
+    it('should pass the "desktopConfig" props to DesktopLayout', async () => {
+      await mount(
+        <SmallViewportModeWrapper layout="desktop">
+          <TopNavBarLayout
+            {...getLayoutProps({
+              currentLayout: 'desktop',
+              inverseColor: false
+            })}
+            desktopConfig={{ hideActionsUserSeparator: true }}
+          />
+        </SmallViewportModeWrapper>
+      )
+      // @ts-expect-error TODO: type is too complex, try to fix later
+      const component = await TopNavBarLayoutLocator.find()
+      const desktopLayout = await component.findDesktopLayout()
+      const separatorBackground =
+        await desktopLayout.getActionsUserSeparatorBackground()
+
+      expect(separatorBackground).to.equal('rgba(0, 0, 0, 0)')
+    })
+
+    it('should pass the proper "themeOverride"-s to DesktopLayout', async () => {
+      await mount(
+        <SmallViewportModeWrapper layout="desktop">
+          <TopNavBarLayout
+            {...getLayoutProps({
+              currentLayout: 'desktop',
+              inverseColor: false
+            })}
+            themeOverride={{ desktopZIndex: 88, smallViewportZIndex: 102 }}
+          />
+        </SmallViewportModeWrapper>
+      )
+
+      // @ts-expect-error TODO: type is too complex, try to fix later
+      const component = await TopNavBarLayoutLocator.find()
+      const desktopLayout = await component.findDesktopLayout()
+
+      expect(getComputedStyle(desktopLayout.getDOMNode()).zIndex).to.equal('88')
+    })
   })
 
-  describe('should be accessible', async () => {
-    generateA11yTests(TopNavBarLayout, TopNavBarLayoutExamples)
+  describe('in "smallViewport" mode', async () => {
+    it('should render SmallViewportLayout', async () => {
+      await mount(
+        <SmallViewportModeWrapper layout="smallViewport">
+          <TopNavBarLayout
+            {...getLayoutProps({
+              currentLayout: 'smallViewport',
+              inverseColor: false
+            })}
+          />
+        </SmallViewportModeWrapper>
+      )
+      // @ts-expect-error TODO: type is too complex, try to fix later
+      const component = await TopNavBarLayoutLocator.find()
+      const desktopLayout = await component.findDesktopLayout({
+        expectEmpty: true
+      })
+      const smallViewportLayout = await component.findSmallViewportLayout()
 
-    it('a11y', async () => {
-      await mount(<TopNavBarLayout />)
+      expect(desktopLayout).to.not.exist()
+      expect(smallViewportLayout).to.be.visible()
+    })
 
-      expect(await accessible()).to.be.true()
+    it('should pass the "smallViewportConfig" prop to SmallViewportLayout', async () => {
+      const config = getLayoutProps({
+        currentLayout: 'smallViewport',
+        inverseColor: false
+      })
+      await mount(
+        <SmallViewportModeWrapper layout="smallViewport">
+          <TopNavBarLayout
+            {...{
+              ...config,
+              ...{
+                smallViewportConfig: {
+                  ...config.smallViewportConfig,
+                  dropdownMenuToggleButtonLabel: 'Toggle Menu Test Label',
+                  dropdownMenuLabel: 'Main Menu Test Label'
+                }
+              }
+            }}
+          />
+        </SmallViewportModeWrapper>
+      )
+      // @ts-expect-error TODO: type is too complex, try to fix later
+      const component = await TopNavBarLayoutLocator.find()
+      const smallViewportLayout = await component.findSmallViewportLayout()
+      const menuTriggerButton =
+        await smallViewportLayout.findDropdownMenuTriggerButton()
+
+      expect(menuTriggerButton.getDOMNode()).to.have.text(
+        'Toggle Menu Test Label'
+      )
+
+      await menuTriggerButton.click()
+
+      const dropdownMenu = await smallViewportLayout.findDropdownMenu()
+
+      expect(dropdownMenu).to.have.attribute(
+        'aria-label',
+        'Main Menu Test Label'
+      )
+    })
+
+    it('should pass the proper "themeOverride"-s to SmallViewportLayout', async () => {
+      await mount(
+        <SmallViewportModeWrapper layout="smallViewport">
+          <TopNavBarLayout
+            {...getLayoutProps({
+              currentLayout: 'smallViewport',
+              inverseColor: false
+            })}
+            themeOverride={{ desktopZIndex: 88, smallViewportZIndex: 102 }}
+          />
+        </SmallViewportModeWrapper>
+      )
+
+      // @ts-expect-error TODO: type is too complex, try to fix later
+      const component = await TopNavBarLayoutLocator.find()
+      const smallViewportLayout = await component.findSmallViewportLayout()
+      const navbar = await smallViewportLayout.findNavBar()
+
+      expect(getComputedStyle(navbar.getDOMNode()).zIndex).to.equal('102')
     })
   })
 })

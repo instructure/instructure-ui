@@ -26,30 +26,112 @@ import React from 'react'
 import {
   expect,
   mount,
-  accessible,
+  stub,
   generateA11yTests
 } from '@instructure/ui-test-utils'
+
+import { IconSearchLine } from '@instructure/ui-icons'
+
+import {
+  getUser,
+  avatarExample,
+  SmallViewportModeWrapper
+} from '../../utils/exampleHelpers'
+import type { TopNavBarItemProps } from '../../TopNavBarItem/props'
 
 import { TopNavBarUser } from '../index'
 import { TopNavBarUserLocator } from '../TopNavBarUserLocator'
 import TopNavBarUserExamples from '../__examples__/TopNavBarUser.examples'
 
-// TODO: write tests
-xdescribe('<TopNavBarUser />', async () => {
-  it('should render', async () => {
-    await mount(<TopNavBarUser />)
-    const component = TopNavBarUserLocator.find()
+describe('<TopNavBarUser />', async () => {
+  describe('children prop', async () => {
+    const variants: TopNavBarItemProps['variant'][] = [
+      'default',
+      'button',
+      'icon',
+      'avatar'
+    ]
 
-    expect(component).to.exist()
+    variants.forEach((variant) => {
+      if (variant === 'icon') {
+        it(`should not allow "${variant}" variant`, async () => {
+          const consoleError = stub(console, 'error')
+          await mount(
+            getUser({
+              // @ts-expect-error intentionally wrong
+              userVariant: variant,
+              userId: 'UserTest',
+              userItemProps: {
+                renderIcon: variant === 'icon' ? IconSearchLine : undefined
+              }
+            })
+          )
+          const component = await TopNavBarUserLocator.find({
+            expectEmpty: true
+          })
+
+          expect(consoleError).to.have.been.calledWith(
+            `Warning: Item with id "UserTest" has "${variant}" variant, but only the following variants are allowed in <TopNavBarUser>: default, button, avatar.`
+          )
+          expect(component).to.not.exist()
+        })
+      } else {
+        it(`should allow "${variant}" variant`, async () => {
+          await mount(
+            getUser({
+              userVariant: variant,
+              userId: 'UserTest',
+              userItemProps: {
+                renderAvatar: variant === 'avatar' ? avatarExample : undefined
+              }
+            })
+          )
+          const component = await TopNavBarUserLocator.find()
+          const item = await component.find('[id="UserTest"]')
+
+          expect(item).to.exist()
+        })
+      }
+    })
+
+    describe('should not render', async () => {
+      it('when there are no children passed', async () => {
+        await mount(getUser({ userProps: { children: undefined } }))
+        const component = await TopNavBarUserLocator.find({ expectEmpty: true })
+
+        expect(component).to.not.exist()
+      })
+
+      it('in "smallViewport" mode (it is exported to a drilldown)', async () => {
+        await mount(
+          <SmallViewportModeWrapper>
+            {getUser({ userProps: { children: undefined } })}
+          </SmallViewportModeWrapper>
+        )
+        const component = await TopNavBarUserLocator.find({ expectEmpty: true })
+
+        expect(component).to.not.exist()
+      })
+    })
+  })
+
+  describe('elementRef prop', async () => {
+    it('should return with the root element', async () => {
+      const elementRef = stub()
+      await mount(getUser({ userProps: { elementRef } }))
+      const component = await TopNavBarUserLocator.find()
+
+      expect(elementRef).to.have.been.calledWith(component.getDOMNode())
+    })
   })
 
   describe('should be accessible', async () => {
     generateA11yTests(TopNavBarUser, TopNavBarUserExamples)
 
     it('a11y', async () => {
-      await mount(<TopNavBarUser />)
-
-      expect(await accessible()).to.be.true()
+      await mount(getUser())
+      const topNavBarUser = await TopNavBarUserLocator.find()
+      expect(await topNavBarUser.accessible()).to.be.true()
     })
   })
 })

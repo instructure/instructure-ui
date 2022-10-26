@@ -106,6 +106,7 @@
   "@instructure/ui-toggle-details",
   "@instructure/ui-token-scripts",
   "@instructure/ui-tooltip",
+  "@instructure/ui-top-nav-bar",
   "@instructure/ui-tray",
   "@instructure/ui-tree-browser",
   "@instructure/ui-truncate-list",
