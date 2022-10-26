@@ -142,7 +142,10 @@ const generateStyle = (
       ...(border && borderPlacementStyle[placement!]),
       ...sizeStyle
     },
-    content: contentStyle
+    content: {
+      label: 'tray__content',
+      ...contentStyle
+    }
   }
 }
 

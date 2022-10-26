@@ -154,6 +154,7 @@ class Tray extends Component<TrayProps> {
       onTransition,
       border,
       shadow,
+      role,
       ...props
     } = this.props
 
@@ -208,6 +209,7 @@ class Tray extends Component<TrayProps> {
                   shouldCloseOnEscape
                   liveRegion={liveRegion}
                   onDismiss={onDismiss}
+                  role={role}
                 >
                   <div css={this.props.styles?.content}>{children}</div>
                 </Dialog>
