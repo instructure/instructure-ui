@@ -30,14 +30,12 @@ import {
   element
 } from '@instructure/ui-prop-types'
 
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { WithStyleProps } from '@instructure/emotion'
 import type {
   TopNavBarLayoutTheme,
   OtherHTMLAttributes,
   PropValidators
 } from '@instructure/shared-types'
-
-import type { TrayProps } from '@instructure/ui-tray'
 
 import { TopNavBarActionItems } from '../TopNavBarActionItems'
 import { TopNavBarBrand } from '../TopNavBarBrand'
@@ -49,83 +47,163 @@ import type { BrandChild } from '../TopNavBarBrand/props'
 import type { MenuItemsChild } from '../TopNavBarMenuItems/props'
 import type { UserChild } from '../TopNavBarUser/props'
 
+import { topNavBarItemTooltipPropType } from '../TopNavBarItem/props'
+
 import { TopNavBarLayout } from './index'
+import type { DesktopLayoutOwnProps } from './DesktopLayout/props'
+import type { SmallViewportLayoutOwnProps } from './SmallViewportLayout/props'
 
 type LayoutChild = React.ComponentElement<TopNavBarLayoutProps, TopNavBarLayout>
 
-type TopNavBarLayoutOwnProps = {
+type CommonTopNavBarLayoutProps = {
   /**
-   * TODO: desc
+   * Displays the app/product/brand/company/etc. name and/or logo.
+   *
+   * Accepts a `<TopNavBar.Brand>` component.
    */
   renderBrand?: BrandChild
 
   /**
-   * TODO: desc
+   * Displays the main navbar items.
+   *
+   * In __desktop__ mode the items are listed on the navbar,
+   * in __smallViewport__ mode the items are accessible under the main "hamburger" menu.
+   *
+   * Accepts a `<TopNavBar.MenuItems>` component.
    */
   renderMenuItems?: MenuItemsChild
 
   /**
-   * TODO: desc
+   * Displays the action items, icons, buttons, etc.
+   *
+   * Renders in the top right corner of the navbar in both __desktop__ and __smallViewport__ mode.
+   *
+   * Accepts a `<TopNavBar.ActionItems>` component.
    */
   renderActionItems?: ActionItemsChild
 
   /**
-   * TODO: desc
+   * Displays the user menu.
+   *
+   * In __desktop__ mode it renders in the top right corner of the navbar,
+   * in __smallViewport__ mode it is rendered under the main "hamburger" menu, above the menu items.
+   *
+   * Accepts a `<TopNavBar.User>` component.
    */
   renderUser?: UserChild
 
   /**
-   * TODO: desc - it is used for the small viewport layout!
+   * The 'aria-label' for the underlying `<nav>` element
    */
-  trayMountNode?: TrayProps['mountNode']
+  navLabel?: string
 
   /**
    * A function that returns a reference to root HTML element
    */
-  elementRef?: (el: Element | null) => void
+  elementRef?: (el: HTMLElement | null) => void
 }
 
-type PropKeys = keyof TopNavBarLayoutOwnProps
+type TopNavBarLayoutOwnProps = CommonTopNavBarLayoutProps & {
+  /**
+   * Config object for the "desktop" mode:
+   */
+  desktopConfig?: DesktopLayoutOwnProps
 
+  /**
+   * Config object for the "small viewport" mode. It is required, if there is no custom `renderSmallViewportLayout` is set on `<TopNavBar>`.
+   */
+  smallViewportConfig: SmallViewportLayoutOwnProps
+}
+
+type CommonPropKeys = keyof CommonTopNavBarLayoutProps
+type PropKeys = keyof TopNavBarLayoutOwnProps
+type DesktopPropKeys = keyof DesktopLayoutOwnProps
+type SmallViewportPropKeys = keyof SmallViewportLayoutOwnProps
+
+type CommonAllowedPropKeys = Readonly<Array<CommonPropKeys>>
+type DesktopAllowedPropKeys = Readonly<Array<DesktopPropKeys>>
+type SmallViewportAllowedPropKeys = Readonly<Array<SmallViewportPropKeys>>
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarLayoutProps = TopNavBarLayoutOwnProps &
-  WithStyleProps<TopNavBarLayoutTheme, TopNavBarLayoutStyle> &
+  WithStyleProps<TopNavBarLayoutTheme, null> &
   OtherHTMLAttributes<TopNavBarLayoutOwnProps>
 
-type TopNavBarLayoutStyle = ComponentStyle<'topNavBarLayout'>
-
-type TopNavBarLayoutState = {
-  // state comes here
-}
-
-type TopNavBarLayoutStyleProps = {
-  // props passed to makeStyles come here
-}
-
-const propTypes: PropValidators<PropKeys> = {
+const commonPropTypes: PropValidators<CommonPropKeys> = {
   renderBrand: ChildrenPropTypes.oneOf([TopNavBarBrand]),
   renderMenuItems: ChildrenPropTypes.oneOf([TopNavBarMenuItems]),
   renderActionItems: ChildrenPropTypes.oneOf([TopNavBarActionItems]),
   renderUser: ChildrenPropTypes.oneOf([TopNavBarUser]),
-  trayMountNode: PropTypes.oneOfType([element, PropTypes.func]),
+  navLabel: PropTypes.string,
   elementRef: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = [
+const desktopPropTypes: PropValidators<DesktopPropKeys> = {
+  hideActionsUserSeparator: PropTypes.bool
+}
+
+const smallViewportPropTypes: PropValidators<SmallViewportPropKeys> = {
+  dropdownMenuToggleButtonLabel: PropTypes.string.isRequired,
+  dropdownMenuToggleButtonTooltip: topNavBarItemTooltipPropType,
+  dropdownMenuLabel: PropTypes.string,
+  alternativeTitle: PropTypes.node,
+  renderInPlaceDialogConfig: PropTypes.shape({
+    open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    closeButtonLabel: PropTypes.string.isRequired,
+    content: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    returnFocusElement: PropTypes.func,
+    shouldContainFocus: PropTypes.bool,
+    shouldCloseOnDocumentClick: PropTypes.bool,
+    shouldCloseOnEscape: PropTypes.bool
+  }),
+  trayMountNode: PropTypes.oneOfType([element, PropTypes.func]),
+  onDropdownMenuToggle: PropTypes.func,
+  onDropdownMenuSelect: PropTypes.func
+}
+
+const propTypes: PropValidators<PropKeys> = {
+  ...commonPropTypes,
+  desktopConfig: PropTypes.shape(desktopPropTypes),
+  smallViewportConfig: PropTypes.shape(smallViewportPropTypes).isRequired
+}
+
+const commonAllowedProps: CommonAllowedPropKeys = [
   'renderBrand',
   'renderMenuItems',
   'renderActionItems',
   'renderUser',
-  'trayMountNode',
+  'navLabel',
   'elementRef'
 ]
 
-export type {
-  LayoutChild,
-  TopNavBarLayoutProps,
-  TopNavBarLayoutStyle,
-  TopNavBarLayoutState,
-  TopNavBarLayoutStyleProps
+const desktopAllowedProps: DesktopAllowedPropKeys = ['hideActionsUserSeparator']
+
+const smallViewportAllowedProps: SmallViewportAllowedPropKeys = [
+  'dropdownMenuToggleButtonLabel',
+  'dropdownMenuToggleButtonTooltip',
+  'dropdownMenuLabel',
+  'alternativeTitle',
+  'renderInPlaceDialogConfig',
+  'trayMountNode',
+  'onDropdownMenuToggle',
+  'onDropdownMenuSelect'
+]
+
+const allowedProps: AllowedPropKeys = [
+  ...commonAllowedProps,
+  'desktopConfig',
+  'smallViewportConfig'
+]
+
+export type { LayoutChild, CommonTopNavBarLayoutProps, TopNavBarLayoutProps }
+export {
+  propTypes,
+  allowedProps,
+  commonPropTypes,
+  commonAllowedProps,
+  desktopPropTypes,
+  smallViewportPropTypes,
+  desktopAllowedProps,
+  smallViewportAllowedProps
 }
-export { propTypes, allowedProps }

@@ -23,10 +23,22 @@
  */
 
 import { locator } from '@instructure/ui-test-locator'
+import { find } from '@instructure/ui-test-utils'
 
 import { TopNavBarBrand } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const TopNavBarBrandLocator = locator(TopNavBarBrand.selector, {
-  /* custom component query methods go here */
+  findContainer: (...args: any[]) => {
+    return find('[class$="-topNavBarBrand__container"]', ...args)
+  },
+  findBrandNameContainer: (...args: any[]) => {
+    return find('[class$="-topNavBarBrand__nameContainer"]', ...args)
+  },
+  findBrandIconContainer: (...args: any[]) => {
+    return find('[class$="-topNavBarBrand__iconContainer"]', ...args)
+  },
+  findScreenReaderLabel: (...args: any[]) => {
+    return find('[class$="-screenReaderContent"]', ...args)
+  }
 })

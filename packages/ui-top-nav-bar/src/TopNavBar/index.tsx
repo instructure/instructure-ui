@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 
+import { error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 import { px } from '@instructure/ui-utils'
-
-import { withStyle, jsx } from '@instructure/emotion'
+import { matchComponentTypes } from '@instructure/ui-react-utils'
 
 import { Responsive } from '@instructure/ui-responsive'
 
@@ -37,32 +36,22 @@ import { TopNavBarBrand } from './TopNavBarBrand'
 import { TopNavBarItem } from './TopNavBarItem'
 import { TopNavBarLayout } from './TopNavBarLayout'
 import { TopNavBarMenuItems } from './TopNavBarMenuItems'
-import { TopNavBarSmallViewportLayout } from './TopNavBarSmallViewportLayout'
 import { TopNavBarUser } from './TopNavBarUser'
 
 import { TopNavBarContext } from './TopNavBarContext'
 import type { TopNavBarLayouts } from './TopNavBarContext'
 
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
-
 import { propTypes, allowedProps } from './props'
-import type {
-  TopNavBarProps,
-  TopNavBarState,
-  TopNavBarStyleProps
-} from './props'
-import { pickProps } from '@instructure/ui-react-utils'
+import type { TopNavBarProps } from './props'
 
 /**
 ---
-category: components/WIP
+category: components
 ---
-@isWIP
+@tsProps
 **/
-@withStyle(generateStyle, generateComponentTheme)
 @testable()
-class TopNavBar extends Component<TopNavBarProps, TopNavBarState> {
+class TopNavBar extends Component<TopNavBarProps> {
   static readonly componentId = 'TopNavBar'
 
   // TODO: mention in docs
@@ -71,7 +60,6 @@ class TopNavBar extends Component<TopNavBarProps, TopNavBarState> {
   static Item = TopNavBarItem
   static Layout = TopNavBarLayout
   static MenuItems = TopNavBarMenuItems
-  static SmallViewportLayout = TopNavBarSmallViewportLayout
   static User = TopNavBarUser
 
   static contextType = TopNavBarContext
@@ -79,11 +67,12 @@ class TopNavBar extends Component<TopNavBarProps, TopNavBarState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    breakpoint: 950, // TODO: what should be the default?
-    mediaQueryMatch: 'element'
+    breakpoint: 1024,
+    mediaQueryMatch: 'media',
+    inverseColor: false
   }
 
-  ref: HTMLDivElement | Element | null = null
+  ref: HTMLDivElement | null = null
 
   handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
@@ -95,68 +84,19 @@ class TopNavBar extends Component<TopNavBarProps, TopNavBarState> {
     }
   }
 
-  constructor(props: TopNavBarProps) {
-    super(props)
-
-    this.state = {
-      /**
-       * FIXME: If needed, state goes here
-       */
-    }
-  }
-
-  componentDidMount() {
-    this.props.makeStyles?.(this.makeStylesVariables)
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles?.(this.makeStylesVariables)
-  }
-
-  get makeStylesVariables(): TopNavBarStyleProps {
-    return {
-      /**
-       * FIXME: If needed, props that gets passed to makeStyles come here
-       */
-    }
-  }
-
   get breakpoint() {
     return px(this.props.breakpoint!)
   }
 
-  get desktopLayout() {
-    const { renderLayout } = this.props
-
-    return renderLayout
-  }
-
-  get smallViewportLayout() {
-    const { renderSmallViewportLayout } = this.props
-
-    if (!renderSmallViewportLayout) {
-      return (
-        <TopNavBarSmallViewportLayout
-          {...pickProps(
-            this.desktopLayout.props,
-            TopNavBarSmallViewportLayout.allowedProps
-          )}
-        />
-      )
-    }
-
-    return renderSmallViewportLayout
-  }
-
   render() {
-    const { mediaQueryMatch } = this.props
+    const { children, mediaQueryMatch, inverseColor } = this.props
 
     return (
       <Responsive
         elementRef={this.handleRef}
         match={mediaQueryMatch}
         query={{
-          smallViewPort: { maxWidth: this.breakpoint - 1 },
+          smallViewport: { maxWidth: this.breakpoint - 1 },
           desktop: { minWidth: this.breakpoint }
         }}
         render={(_props, matches) => {
@@ -164,11 +104,32 @@ class TopNavBar extends Component<TopNavBarProps, TopNavBarState> {
             ? (matches[0] as TopNavBarLayouts)
             : 'smallViewport'
 
+          const isInverseColor =
+            typeof inverseColor === 'function'
+              ? inverseColor(layout)
+              : !!inverseColor
+
+          const content = children({
+            currentLayout: layout,
+            inverseColor: isInverseColor
+          })
+
+          if (!matchComponentTypes(content, [TopNavBarLayout])) {
+            error(
+              false,
+              'The `children` function prop of TopNavBar has to return a child of type <TopNavBar.Layout>, but it returned:',
+              content
+            )
+          }
+
           return (
-            <TopNavBarContext.Provider value={{ layout }}>
-              {layout === 'desktop'
-                ? this.desktopLayout
-                : this.smallViewportLayout}
+            <TopNavBarContext.Provider
+              value={{
+                layout,
+                inverseColor: isInverseColor
+              }}
+            >
+              {content}
             </TopNavBarContext.Provider>
           )
         }}

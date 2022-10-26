@@ -4478,17 +4478,20 @@ __metadata:
   resolution: "@instructure/ui-top-nav-bar@workspace:packages/ui-top-nav-bar"
   dependencies:
     "@babel/runtime": ^7.13.10
+    "@instructure/console": 8.30.0
     "@instructure/emotion": 8.30.0
     "@instructure/shared-types": 8.30.0
+    "@instructure/ui-a11y-content": 8.30.0
     "@instructure/ui-avatar": 8.30.0
     "@instructure/ui-babel-preset": 8.30.0
     "@instructure/ui-buttons": 8.30.0
     "@instructure/ui-color-utils": 8.30.0
+    "@instructure/ui-dialog": 8.30.0
     "@instructure/ui-dom-utils": 8.30.0
     "@instructure/ui-drilldown": 8.30.0
     "@instructure/ui-icons": 8.30.0
     "@instructure/ui-link": 8.30.0
-    "@instructure/ui-position": 8.30.0
+    "@instructure/ui-popover": 8.30.0
     "@instructure/ui-prop-types": 8.30.0
     "@instructure/ui-react-utils": 8.30.0
     "@instructure/ui-responsive": 8.30.0
@@ -4496,7 +4499,9 @@ __metadata:
     "@instructure/ui-test-utils": 8.30.0
     "@instructure/ui-testable": 8.30.0
     "@instructure/ui-themes": 8.30.0
+    "@instructure/ui-tooltip": 8.30.0
     "@instructure/ui-tray": 8.30.0
+    "@instructure/ui-truncate-list": 8.30.0
     "@instructure/ui-utils": 8.30.0
     "@instructure/ui-view": 8.30.0
     prop-types: ^15
@@ -4741,6 +4746,7 @@ __metadata:
     "@instructure/ui-time-select": 8.30.0
     "@instructure/ui-toggle-details": 8.30.0
     "@instructure/ui-tooltip": 8.30.0
+    "@instructure/ui-top-nav-bar": 8.30.0
     "@instructure/ui-tray": 8.30.0
     "@instructure/ui-tree-browser": 8.30.0
     "@instructure/ui-truncate-list": 8.30.0

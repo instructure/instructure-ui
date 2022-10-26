@@ -44,19 +44,47 @@ const generateStyle = (
   _props: TopNavBarActionItemsProps,
   state: TopNavBarActionItemsStyleProps
 ): TopNavBarActionItemsStyle => {
-  const { layout } = state
-
-  // @ts-expect-error TODO: remove if not needed
-  const isDesktop = layout === 'desktop'
+  const dropdownMenuOptionStyle = {
+    display: 'inline-block',
+    padding: `0 ${componentTheme.smallViewportDropdownMenuActiveOptionIndicatorSpacing}`
+  }
 
   return {
     topNavBarActionItems: {
       label: 'topNavBarActionItems',
-      color: componentTheme.color,
-      background: componentTheme.background,
+      boxSizing: 'border-box',
+      listStyleType: 'none',
+      margin: '0',
+      padding: '0',
       flex: '0 0',
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      alignItems: 'stretch',
+      justifyContent: 'flex-end',
+
+      ...(state.layout === 'smallViewport' && {
+        flex: '1 1',
+        marginInlineStart:
+          componentTheme.smallViewportActionItemContainerMargin,
+        maxWidth: componentTheme.smallViewportActionItemContainerMaxWidth
+      })
+    },
+    listItem: {
+      label: 'topNavBarActionItems__listItem',
+      flex: '0 0'
+    },
+    dropdownMenuOption: {
+      label: 'topNavBarActionItems__dropdownMenuOption',
+      ...dropdownMenuOptionStyle
+    },
+    dropdownMenuOptionActive: {
+      label: 'topNavBarActionItems__dropdownMenuOptionActive',
+      ...dropdownMenuOptionStyle,
+      fontWeight:
+        componentTheme.smallViewportDropdownMenuActiveOptionFontWeight,
+      paddingBlockEnd:
+        componentTheme.smallViewportDropdownMenuActiveOptionIndicatorSpacing,
+      borderBottom: `${componentTheme.smallViewportDropdownMenuActiveOptionIndicatorWidth} solid ${componentTheme.smallViewportDropdownMenuActiveOptionIndicatorColor}`
     }
   }
 }

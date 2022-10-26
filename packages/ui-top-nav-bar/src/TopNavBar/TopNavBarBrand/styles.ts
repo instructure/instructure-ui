@@ -25,8 +25,8 @@
 import type { TopNavBarBrandTheme } from '@instructure/shared-types'
 import type {
   TopNavBarBrandProps,
-  TopNavBarBrandStyleProps,
-  TopNavBarBrandStyle
+  TopNavBarBrandStyle,
+  TopNavBarBrandStyleProps
 } from './props'
 
 /**
@@ -41,17 +41,61 @@ import type {
  */
 const generateStyle = (
   componentTheme: TopNavBarBrandTheme,
-  _props: TopNavBarBrandProps,
-  _state: TopNavBarBrandStyleProps
+  props: TopNavBarBrandProps,
+  state: TopNavBarBrandStyleProps
 ): TopNavBarBrandStyle => {
+  const { nameBackground, iconBackground } = props
+  const isDesktop = state.layout === 'desktop'
+
   return {
     topNavBarBrand: {
       label: 'topNavBarBrand',
-      color: componentTheme.color,
-      background: componentTheme.background,
       display: 'flex',
+      alignItems: 'stretch'
+    },
+    container: {
+      label: 'topNavBarBrand__container',
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'stretch',
+      border: 0,
+      outline: 0,
+      padding: 0,
+      margin: 0,
+      appearance: 'none',
+      textDecoration: 'none'
+    },
+    nameContainer: {
+      label: 'topNavBarBrand__nameContainer',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      pointerEvents: 'none',
+      padding: componentTheme.logoPadding,
+      background: isDesktop ? nameBackground : undefined
+    },
+    name: {
+      label: 'topNavBarBrand__name',
+      display: 'flex',
+      alignItems: 'center',
+      height: componentTheme.logoHeight
+    },
+    iconContainer: {
+      label: 'topNavBarBrand__iconContainer',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      pointerEvents: 'none',
+      padding: componentTheme.iconPadding,
+      background: isDesktop ? iconBackground : undefined
+    },
+    icon: {
+      label: 'topNavBarBrand__icon',
+      display: 'flex',
+      justifyContent: 'center',
       alignItems: 'center'
-    }
+    },
+    focusOutlineInset: componentTheme.focusOutlineInset
   }
 }
 

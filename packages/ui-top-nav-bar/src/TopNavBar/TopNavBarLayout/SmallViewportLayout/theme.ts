@@ -23,19 +23,41 @@
  */
 
 import type { Theme } from '@instructure/ui-themes'
-import type { TopNavBarUserTheme } from '@instructure/shared-types'
+import type { TopNavBarLayoutSmallViewportTheme } from '@instructure/shared-types'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (_theme: Theme): TopNavBarUserTheme => {
-  // const { colors, typography } = theme
+const generateComponentTheme = (
+  theme: Theme
+): TopNavBarLayoutSmallViewportTheme => {
+  const { colors, stacking, typography, spacing, borders } = theme
 
-  const componentVariables: TopNavBarUserTheme = {
-    color: 'inherit',
-    background: 'inherit'
+  const componentVariables: TopNavBarLayoutSmallViewportTheme = {
+    smallViewportFontSize: typography?.fontSizeMedium,
+    smallViewportFontFamily: typography?.fontFamily,
+    smallViewportFontWeight: typography?.fontWeightNormal,
+
+    smallViewportBackground: colors?.backgroundBrandSecondary,
+    smallViewportBackgroundInverse: colors?.backgroundLightest,
+    smallViewportBottomBorder: 'none',
+    smallViewportBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.borderMedium}`,
+    smallViewportHeight: '3.5rem',
+    smallViewportPadding: `0 0.25rem`,
+    smallViewportZIndex: stacking?.topmost + 1,
+
+    smallViewportTrayPosition: 'fixed',
+    smallViewportTrayFixTopPosition: undefined,
+    smallViewportTrayZIndex: stacking?.topmost + 1,
+
+    smallViewportDropdownMenuActiveOptionFontWeight: typography?.fontWeightBold,
+    smallViewportDropdownMenuActiveOptionIndicatorSpacing: '0.25rem',
+    smallViewportDropdownMenuActiveOptionIndicatorWidth: borders?.widthMedium,
+    smallViewportDropdownMenuActiveOptionIndicatorColor: 'currentColor',
+
+    smallViewportAlternativeTitleMargin: `0 ${spacing?.xxSmall}`
   }
 
   return {

@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   TopNavBarMenuItemsTheme,
@@ -38,7 +39,6 @@ import { TopNavBarItem } from '../TopNavBarItem'
 import type { ItemChild } from '../TopNavBarItem/props'
 
 import { TopNavBarMenuItems } from './index'
-import type { TopNavBarContextType } from '../TopNavBarContext'
 
 type MenuItemsChild = React.ComponentElement<
   TopNavBarMenuItemsProps,
@@ -47,14 +47,40 @@ type MenuItemsChild = React.ComponentElement<
 
 type TopNavBarMenuItemsOwnProps = {
   /**
-   * FIXME: description of the children prop goes here
+   * Children of type: `<TopNavBar.Item>`.
+   *
+   * In __desktop__ mode the items are listed on the navbar. See `renderHiddenItemsMenuTriggerLabel` prop description for overflow logic.
+   *
+   * In __smallViewport__ mode the items are accessible under the main "hamburger" menu.
    */
   children?: ItemChild | ItemChild[]
 
   /**
+   * The `id` of the link to the current page. Marks the item by setting `aria-current="page"` attribute on it and setting its status to 'active'.
+   *
+   * (Note: only non-disabled, `variant="default"` items can be set to current/active.)
+   */
+  currentPageId?: string
+
+  /**
+   * In __desktop__ mode, required label for the trigger item of the hidden list items menu.
+   *
+   * When there is not enough room to list all the menu items,
+   * they will be accessible via a dropdown menu at the end of the list.
+   */
+  renderHiddenItemsMenuTriggerLabel: (
+    hiddenChildrenCount: number
+  ) => React.ReactNode
+
+  /**
+   * In __desktop__ mode, 'aria-label' for the `<ul>` container.
+   */
+  listLabel?: string
+
+  /**
    * A function that returns a reference to root HTML element
    */
-  elementRef?: (el: Element | null) => void
+  elementRef?: (el: HTMLUListElement | null) => void
 }
 
 type PropKeys = keyof TopNavBarMenuItemsOwnProps
@@ -63,30 +89,41 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TopNavBarMenuItemsProps = TopNavBarMenuItemsOwnProps &
   WithStyleProps<TopNavBarMenuItemsTheme, TopNavBarMenuItemsStyle> &
+  WithDeterministicIdProps &
   OtherHTMLAttributes<TopNavBarMenuItemsOwnProps>
 
-type TopNavBarMenuItemsStyle = ComponentStyle<'topNavBarMenuItems'>
-
-type TopNavBarMenuItemsState = {
-  // state comes here
+type TopNavBarMenuItemsStyle = ComponentStyle<
+  'topNavBarMenuItems' | 'submenuOption' | 'submenuOptionActive'
+> & {
+  itemSpacing: string
 }
 
-type TopNavBarMenuItemsStyleProps = {
-  layout: TopNavBarContextType['layout']
+type TopNavBarMenuItemsState = {
+  key: number
+  visibleItemsCount?: number
 }
 
 const propTypes: PropValidators<PropKeys> = {
   children: ChildrenPropTypes.oneOf([TopNavBarItem]),
+  currentPageId: PropTypes.string,
+  renderHiddenItemsMenuTriggerLabel: PropTypes.func.isRequired,
+  listLabel: PropTypes.string,
   elementRef: PropTypes.func
 }
 
-const allowedProps: AllowedPropKeys = ['children', 'elementRef']
+const allowedProps: AllowedPropKeys = [
+  'children',
+  'currentPageId',
+  'renderHiddenItemsMenuTriggerLabel',
+  'listLabel',
+  'elementRef'
+]
 
 export type {
   MenuItemsChild,
   TopNavBarMenuItemsProps,
+  TopNavBarMenuItemsOwnProps,
   TopNavBarMenuItemsStyle,
-  TopNavBarMenuItemsState,
-  TopNavBarMenuItemsStyleProps
+  TopNavBarMenuItemsState
 }
 export { propTypes, allowedProps }
