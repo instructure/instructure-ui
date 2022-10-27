@@ -1425,7 +1425,7 @@ export type TopNavBarItemTheme = {
   fontWeight: Typography['fontWeightNormal']
   color: string
   colorInverse: string
-  itemHorizontalPadding: Spacing['xxSmall']
+  itemInlinePadding: Spacing['xxSmall']
   itemSpacing: Spacing['xSmall']
   iconTextGap: Spacing['xSmall']
   activeItemFontWeight: Typography['fontWeightBold']
@@ -1449,11 +1449,11 @@ export type TopNavBarLayoutDesktopTheme = {
   desktopHeight: string
   desktopZIndex: Stacking['topmost']
 
-  desktopHorizontalPadding: Spacing['small']
-  desktopBrandContainerMargin: Spacing['medium']
-  desktopMenuItemsContainerMargin: Spacing['large']
-  desktopActionItemsContainerMargin: Spacing['xSmall']
-  desktopUserContainerMargin: Spacing['xSmall']
+  desktopInlinePadding: Spacing['small']
+  desktopBrandContainerInlineMargin: Spacing['medium']
+  desktopMenuItemsContainerInlineMargin: Spacing['large']
+  desktopActionItemsContainerInlineMargin: Spacing['xSmall']
+  desktopUserContainerInlineMargin: Spacing['xSmall']
 
   desktopUserSeparatorGap: Spacing['xSmall']
   desktopUserSeparatorHeight: string | 0
@@ -1471,7 +1471,7 @@ export type TopNavBarLayoutSmallViewportTheme = {
   smallViewportBottomBorder: string
   smallViewportBottomBorderInverse: string
   smallViewportHeight: string | 0
-  smallViewportPadding: string | 0
+  smallViewportInlinePadding: string | 0
   smallViewportZIndex: Stacking['topmost']
   smallViewportTrayPosition: string
   smallViewportTrayFixTopPosition: string | undefined
@@ -1480,7 +1480,8 @@ export type TopNavBarLayoutSmallViewportTheme = {
   smallViewportDropdownMenuActiveOptionIndicatorSpacing: Spacing['xSmall']
   smallViewportDropdownMenuActiveOptionIndicatorWidth: Border['widthMedium']
   smallViewportDropdownMenuActiveOptionIndicatorColor: string
-  smallViewportAlternativeTitleMargin: Spacing['xSmall']
+  smallViewportAlternativeTitleInlineMargin: Spacing['xSmall']
+  smallViewportAlternativeTitleBlockMargin: Spacing['xSmall']
 }
 
 export type TopNavBarMenuItemsTheme = {

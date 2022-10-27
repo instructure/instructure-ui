@@ -10,9 +10,6 @@ example: true
 render: false
 ---
 class Example extends React.Component {
-  state = {
-  }
-
   render() {
     return (
       <div
@@ -208,13 +205,18 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
+### Playground
+
+Click on the button below to open up a fullscreen modal, where you can toggle elements of TopNavBar on and off. You can test the desktop and small viewport modes, several layout versions, states, menu item variants, and many more.
+
 ```js
 ---
 example: true
 render: false
 ---
-class Example extends React.Component {
+class PlaygroundExample extends React.Component {
   state = {
+    rtlMode: false,
     isSecondaryNavigation: false,
     hasBrandSection: true,
     hasMenuItemsSection: true,
@@ -459,7 +461,8 @@ class Example extends React.Component {
         label: 'Example settings',
         radios: {
           exampleViewport: ['desktop', 'smallViewport']
-        }
+        },
+        checkboxes: ['rtlMode']
       },
       inverseColor: {
         label: 'Inverse color mode',
@@ -538,6 +541,7 @@ class Example extends React.Component {
 
     const settingLabels = {
       exampleViewport: 'Toggle example viewport',
+      rtlMode: 'RTL mode',
       isSecondaryNavigation: 'Display as secondary navigation',
       hasBrandSection: '"renderBrand" prop',
       hasMenuItemsSection: '"renderMenuItems" prop',
@@ -736,7 +740,7 @@ class Example extends React.Component {
     const navItems = [
       ...this.navItems,
       ...(this.state.extraMenuItems
-        ? Array.from(Array(15)).map((i, idx) => (
+        ? Array.from(Array(20)).map((i, idx) => (
           {
             id: `item${idx}`,
             label: `Item ${idx + 1}`,
@@ -774,7 +778,6 @@ class Example extends React.Component {
               smallViewportConfig={{
                 dropdownMenuToggleButtonLabel: 'Toggle Menu',
                 dropdownMenuLabel: 'Main Menu',
-                // TODO: current page title
                 alternativeTitle: this.state.useAlternativeTitle || inverseColor
                   ? this.state.breadcrumbs[this.state.breadcrumbs.length - 1]
                   : undefined,
@@ -1043,7 +1046,10 @@ class Example extends React.Component {
           </div>
         )}
 
-        {this.renderNavBar()}
+
+        <InstUISettingsProvider dir={this.state.rtlMode ? 'rtl' : 'ltr'}>
+          {this.renderNavBar()}
+        </InstUISettingsProvider>
 
         {this.renderPageContent()}
       </div>
@@ -1053,7 +1059,10 @@ class Example extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={() => { this.setState({ isModalOpen: true }) }}>
+        <Button
+          color="primary"
+          onClick={() => { this.setState({ isModalOpen: true }) }}
+        >
           Open TopNavBar Fullscreen Example
         </Button>
 
@@ -1244,5 +1253,5 @@ const elevateIcon = (
   </svg>
 )
 
-render(<Example />)
+render(<PlaygroundExample />)
 ```

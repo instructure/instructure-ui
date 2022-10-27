@@ -54,7 +54,7 @@ category: components
 class TopNavBar extends Component<TopNavBarProps> {
   static readonly componentId = 'TopNavBar'
 
-  // TODO: mention in docs
+  // TODO: mention subcomponent registration in "new component" docs
   static ActionItems = TopNavBarActionItems
   static Brand = TopNavBarBrand
   static Item = TopNavBarItem
