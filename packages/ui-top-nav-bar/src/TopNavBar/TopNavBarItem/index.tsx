@@ -267,7 +267,7 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
     const themeOverride: BaseButtonProps['themeOverride'] = {}
 
     if (this.isDefaultVariant || this.hasAvatar) {
-      themeOverride.mediumPaddingHorizontal = styles?.itemHorizontalPadding
+      themeOverride.mediumPaddingHorizontal = styles?.itemInlinePadding
     }
 
     if (this.hasAvatar) {

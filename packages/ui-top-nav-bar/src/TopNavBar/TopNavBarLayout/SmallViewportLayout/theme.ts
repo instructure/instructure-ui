@@ -45,7 +45,7 @@ const generateComponentTheme = (
     smallViewportBottomBorder: 'none',
     smallViewportBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.borderMedium}`,
     smallViewportHeight: '3.5rem',
-    smallViewportPadding: `0 0.25rem`,
+    smallViewportInlinePadding: `0.25rem`,
     smallViewportZIndex: stacking?.topmost + 1,
 
     smallViewportTrayPosition: 'fixed',
@@ -57,7 +57,8 @@ const generateComponentTheme = (
     smallViewportDropdownMenuActiveOptionIndicatorWidth: borders?.widthMedium,
     smallViewportDropdownMenuActiveOptionIndicatorColor: 'currentColor',
 
-    smallViewportAlternativeTitleMargin: `0 ${spacing?.xxSmall}`
+    smallViewportAlternativeTitleInlineMargin: spacing?.xxSmall,
+    smallViewportAlternativeTitleBlockMargin: '0'
   }
 
   return {

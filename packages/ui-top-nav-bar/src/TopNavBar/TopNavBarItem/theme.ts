@@ -41,7 +41,7 @@ const generateComponentTheme = (theme: Theme): TopNavBarItemTheme => {
     color: 'inherit',
     colorInverse: 'inherit',
 
-    itemHorizontalPadding: spacing?.xSmall,
+    itemInlinePadding: spacing?.xSmall,
     itemSpacing: spacing?.xSmall,
     iconTextGap: spacing?.xSmall,
 

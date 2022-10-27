@@ -72,7 +72,8 @@ const generateStyle = (
       : componentTheme.smallViewportBottomBorder,
     height: componentTheme.smallViewportHeight,
     maxWidth: '100%',
-    padding: componentTheme.smallViewportPadding,
+    paddingBlock: 0,
+    paddingInline: componentTheme.smallViewportInlinePadding,
     position: 'relative',
     zIndex: componentTheme.smallViewportZIndex,
     display: 'flex',
@@ -117,7 +118,8 @@ const generateStyle = (
     },
     alternativeTitleContainer: {
       label: 'topNavBarSmallViewportLayout__alternativeTitleContainer',
-      margin: componentTheme.smallViewportAlternativeTitleMargin
+      marginBlock: componentTheme.smallViewportAlternativeTitleBlockMargin,
+      marginInline: componentTheme.smallViewportAlternativeTitleInlineMargin
     },
     dropdownMenuOption: {
       label: 'topNavBarSmallViewportLayout__dropdownMenuOption',

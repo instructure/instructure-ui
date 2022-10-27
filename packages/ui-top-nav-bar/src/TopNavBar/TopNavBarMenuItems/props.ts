@@ -106,7 +106,10 @@ type TopNavBarMenuItemsState = {
 const propTypes: PropValidators<PropKeys> = {
   children: ChildrenPropTypes.oneOf([TopNavBarItem]),
   currentPageId: PropTypes.string,
-  renderHiddenItemsMenuTriggerLabel: PropTypes.func.isRequired,
+  renderHiddenItemsMenuTriggerLabel: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string
+  ]).isRequired,
   listLabel: PropTypes.string,
   elementRef: PropTypes.func
 }

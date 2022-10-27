@@ -250,7 +250,7 @@ type TopNavBarItemStyle = ComponentStyle<
   | 'submenuIcon'
 > & {
   focusOutlineOffset: string | 0
-  itemHorizontalPadding: string | 0
+  itemInlinePadding: string | 0
 }
 
 type TopNavBarItemState = {

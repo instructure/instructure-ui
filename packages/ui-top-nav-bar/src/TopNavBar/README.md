@@ -4,217 +4,20 @@ describes: TopNavBar
 
 The `TopNavBar` component is a navigation bar component that can be used for page navigation, actions, user menu and more. TopNavBar adapts to small screen widths by displaying a more specialised view.
 
-```js
----
-example: true
-render: false
----
-class Example extends React.Component {
-  state = {
-  }
+### Playground
 
-  render() {
-    return (
-      <div
-        style={{
-          height: '100%',
-          position: 'relative',
-          background: '#fff'
-        }}
-      >
-        <TopNavBar
-          breakpoint='650'
-          mediaQueryMatch='element'
-        >
-          {({ currentLayout }) => {
-            return (
-              <TopNavBar.Layout
-                navLabel="Example navigation bar"
-                desktopConfig={{
-                  hideActionsUserSeparator: true
-                }}
-                smallViewportConfig={{
-                  trayMountNode: () => document.getElementById('menuMountNode'),
-                  dropdownMenuToggleButtonLabel: 'Toggle Menu',
-                  dropdownMenuLabel: 'Main Menu'
-                }}
-                renderBrand={
-                  <TopNavBar.Brand
-                    screenReaderLabel="Brand name"
-                    renderName={(
-                      <View as="div" minWidth="7rem">
-                        <Text
-                          as="div"
-                          color="primary-inverse"
-                          transform="uppercase"
-                          size="small"
-                          weight="bold"
-                          lineHeight="condensed"
-                        >
-                          Brand
-                        </Text>
-                        <Text
-                          as="div"
-                          color="primary-inverse"
-                          size="large"
-                          weight="normal"
-                          lineHeight="condensed"
-                        >
-                          Sub-brand
-                        </Text>
-                      </View>
-                    )}
-                    renderIcon={(
-                      <IconBoldLine
-                        size="small"
-                        color="primary-inverse"
-                        height="2.5rem"
-                        width="2.5rem"
-                      />
-                    )}
-                    iconBackground="#0097D3"
-                    href="/#TopNavBar"
-                  />
-                }
-                renderMenuItems={
-                  <TopNavBar.MenuItems
-                    listLabel="Page navigation"
-                    currentPageId="OverviewPage"
-                    renderHiddenItemsMenuTriggerLabel={(
-                      hiddenChildrenCount
-                    ) => `${hiddenChildrenCount} More`}
-                  >
-                    <TopNavBar.Item
-                      id="OverviewPage"
-                      href="/#TopNavBar"
-                    >
-                      Overview
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="AdminPage"
-                      href="/#TopNavBar"
-                    >
-                      Admin
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="SettingsPage"
-                      href="/#TopNavBar"
-                    >
-                      Settings
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="MapsPage"
-                      href="/#TopNavBar"
-                    >
-                      Maps
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="AssessmentsPage"
-                      href="/#TopNavBar"
-                    >
-                      Assessments
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="CommunityPage"
-                      href="/#TopNavBar"
-                    >
-                      Community
-                    </TopNavBar.Item>
-                  </TopNavBar.MenuItems>
-                }
-                renderActionItems={
-                  <TopNavBar.ActionItems
-                    listLabel="Actions"
-                    renderHiddenItemsMenuTriggerLabel={(
-                      hiddenChildrenCount
-                    ) => `${hiddenChildrenCount} more actions`}
-                  >
-                    <TopNavBar.Item
-                      id="InfoAction"
-                      variant="icon"
-                      tooltip="Info"
-                      renderIcon={<IconQuestionLine />}
-                      onClick={() => {
-                        console.log('Info')
-                      }}
-                    >
-                      Info
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="AlertsAction"
-                      variant="icon"
-                      tooltip="Alerts"
-                      renderIcon={<IconAlertsLine />}
-                      onClick={() => {
-                        console.log('Alerts')
-                      }}
-                    >
-                      Alerts
-                    </TopNavBar.Item>
-                  </TopNavBar.ActionItems>
-                }
-                renderUser={
-                  <TopNavBar.User>
-                    <TopNavBar.Item
-                      id="LogInRegisterButton"
-                      href="/#TopNavBar"
-                      variant="button"
-                    >
-                      Log In/Register
-                    </TopNavBar.Item>
-                  </TopNavBar.User>
-                }
-                themeOverride={{
-                  // For example demo
-                  smallViewportZIndex: 9999,
-                  smallViewportMenuFixHeight: 'calc(100% - 3.5rem)'
-                }}
-              />
-            )
-          }}
-        </TopNavBar>
+We've made an interactive, fullscreen example, so
 
-        <div
-          id="menuMountNode"
-          style={{
-            position: 'absolute',
-            insetBlockStart: '3.5rem',
-            insetInlineStart: '0px',
-            width: '100%',
-            height: 'calc(100% - 3.5rem)',
-          }}
-        />
-
-        <View as="div" minHeight='10rem' padding="medium">
-          <Heading as="p" level="h2" margin="medium 0">
-            Page Content
-          </Heading>
-
-          <p>
-            Reprehenderit magna aliquip laboris nostrud. Culpa aliqua ex laboris pariatur quis laboris ipsum culpa quis aliquip nisi veniam consectetur amet. Cillum dolore officia irure est velit.
-          </p>
-          <p>
-            Mollit laboris anim dolor amet mollit ut in duis quis anim. Minim sit aute laborum sunt ad veniam. Labore id in enim labore culpa. Ullamco irure magna enim excepteur nulla incididunt laboris. Dolor quis duis Lorem ad. Veniam non eu nisi labore duis est quis. Laborum aute quis velit reprehenderit consequat esse qui tempor ad in et voluptate.
-          </p>
-          <p>
-            Irure velit duis amet pariatur anim nostrud sit magna anim non do ea exercitation. Adipisicing veniam culpa do nostrud nisi. Do aliqua cupidatat ad fugiat labore ad non fugiat. Laboris et tempor sunt velit incididunt sunt enim occaecat do aliquip nulla magna.
-          </p>
-        </View>
-      </div>
-    )
-  }
-}
-
-render(<Example />)
-```
+Click on the button below to open up an interactive, fullscreen example, where you can toggle the elements of TopNavBar on and off. You can test the "desktop" and "small viewport" views, several layout versions, states, menu item variants, and many more.
 
 ```js
 ---
 example: true
 render: false
 ---
-class Example extends React.Component {
+class PlaygroundExample extends React.Component {
   state = {
+    rtlMode: false,
     isSecondaryNavigation: false,
     hasBrandSection: true,
     hasMenuItemsSection: true,
@@ -459,7 +262,8 @@ class Example extends React.Component {
         label: 'Example settings',
         radios: {
           exampleViewport: ['desktop', 'smallViewport']
-        }
+        },
+        checkboxes: ['rtlMode']
       },
       inverseColor: {
         label: 'Inverse color mode',
@@ -538,6 +342,7 @@ class Example extends React.Component {
 
     const settingLabels = {
       exampleViewport: 'Toggle example viewport',
+      rtlMode: 'RTL mode',
       isSecondaryNavigation: 'Display as secondary navigation',
       hasBrandSection: '"renderBrand" prop',
       hasMenuItemsSection: '"renderMenuItems" prop',
@@ -736,7 +541,7 @@ class Example extends React.Component {
     const navItems = [
       ...this.navItems,
       ...(this.state.extraMenuItems
-        ? Array.from(Array(15)).map((i, idx) => (
+        ? Array.from(Array(20)).map((i, idx) => (
           {
             id: `item${idx}`,
             label: `Item ${idx + 1}`,
@@ -774,7 +579,6 @@ class Example extends React.Component {
               smallViewportConfig={{
                 dropdownMenuToggleButtonLabel: 'Toggle Menu',
                 dropdownMenuLabel: 'Main Menu',
-                // TODO: current page title
                 alternativeTitle: this.state.useAlternativeTitle || inverseColor
                   ? this.state.breadcrumbs[this.state.breadcrumbs.length - 1]
                   : undefined,
@@ -1043,7 +847,10 @@ class Example extends React.Component {
           </div>
         )}
 
-        {this.renderNavBar()}
+
+        <InstUISettingsProvider dir={this.state.rtlMode ? 'rtl' : 'ltr'}>
+          {this.renderNavBar()}
+        </InstUISettingsProvider>
 
         {this.renderPageContent()}
       </div>
@@ -1053,7 +860,10 @@ class Example extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={() => { this.setState({ isModalOpen: true }) }}>
+        <Button
+          color="primary"
+          onClick={() => { this.setState({ isModalOpen: true }) }}
+        >
           Open TopNavBar Fullscreen Example
         </Button>
 
@@ -1244,5 +1054,341 @@ const elevateIcon = (
   </svg>
 )
 
-render(<Example />)
+render(<PlaygroundExample />)
+```
+
+### Responsive layout
+
+TopNavBar is a responsive component, and it has 4 "sections" or "blocks".
+
+- `<TopNavBar.Brand>` contains the brand logo and icon
+- `<TopNavBar.MenuItems>` contains the main menu items, subpage links
+- `<TopNavBar.ActionItems>` contains items that do some action or have special function
+- `<TopNavBar.User>` contains the login/register button and user menu
+
+At the breakpoint (defined by the `breakpoint` and `mediaQueryMatch` props) it will switch between the "desktop" (fullscreen) view mode and the "smallViewport" view mode (optimized for mobile devices and smaller viewports).
+
+The main difference between the two is that in "smallViewport" mode:
+
+- the content of the `<TopNavBar.MenuItems>` and the `<TopNavBar.User>` blocks will be moved to a dropdown menu
+- the `<TopNavBar.ActionItems>` stays in place, but its items will be converted into "icon" variant items
+- the `<TopNavBar.Brand>` block will only display the brand logo
+
+```js
+---
+example: true
+render: false
+---
+class LayoutExample extends React.Component {
+  state = {
+    exampleWidth: '100%'
+  }
+
+  render() {
+    return (
+      <View as="div">
+        <View as="div" margin="0 0 medium">
+          <Button onClick={() => {
+            this.setState({ exampleWidth: this.state.exampleWidth === '100%'
+              ? '500px'
+              : '100%'
+            })
+          }}>
+            Toggle viewport mode
+          </Button>
+        </View>
+
+        <View as="div" width={this.state.exampleWidth}>
+          <div
+            style={{
+              height: '100%',
+              position: 'relative',
+              background: '#fff'
+            }}
+          >
+            <TopNavBar
+              breakpoint='650'
+              mediaQueryMatch='element'
+              key={this.state.exampleWidth}
+            >
+              {({ currentLayout }) => {
+                return (
+                  <TopNavBar.Layout
+                    navLabel="Example navigation bar"
+                    desktopConfig={{
+                      hideActionsUserSeparator: true
+                    }}
+                    smallViewportConfig={{
+                      trayMountNode: () => document.getElementById('menuMountNode'),
+                      dropdownMenuToggleButtonLabel: 'Toggle Menu',
+                      dropdownMenuLabel: 'Main Menu'
+                    }}
+                    renderBrand={
+                      <TopNavBar.Brand
+                        screenReaderLabel="Brand name"
+                        renderName={(
+                          <View as="div" minWidth="7rem">
+                            <Text
+                              as="div"
+                              color="primary-inverse"
+                              transform="uppercase"
+                              size="small"
+                              weight="bold"
+                              lineHeight="condensed"
+                            >
+                              Brand
+                            </Text>
+                            <Text
+                              as="div"
+                              color="primary-inverse"
+                              size="large"
+                              weight="normal"
+                              lineHeight="condensed"
+                            >
+                              Sub-brand
+                            </Text>
+                          </View>
+                        )}
+                        renderIcon={(
+                          <IconBoldLine
+                            size="small"
+                            color="primary-inverse"
+                            height="2.5rem"
+                            width="2.5rem"
+                          />
+                        )}
+                        iconBackground="#0097D3"
+                        href="/#TopNavBar"
+                      />
+                    }
+                    renderMenuItems={
+                      <TopNavBar.MenuItems
+                        listLabel="Page navigation"
+                        currentPageId="OverviewPage"
+                        renderHiddenItemsMenuTriggerLabel={(
+                          hiddenChildrenCount
+                        ) => `${hiddenChildrenCount} More`}
+                      >
+                        <TopNavBar.Item
+                          id="OverviewPage"
+                          href="/#TopNavBar"
+                        >
+                          Overview
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="AdminPage"
+                          href="/#TopNavBar"
+                        >
+                          Admin
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="SettingsPage"
+                          href="/#TopNavBar"
+                        >
+                          Settings
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="MapsPage"
+                          href="/#TopNavBar"
+                        >
+                          Maps
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="AssessmentsPage"
+                          href="/#TopNavBar"
+                        >
+                          Assessments
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="CommunityPage"
+                          href="/#TopNavBar"
+                        >
+                          Community
+                        </TopNavBar.Item>
+                      </TopNavBar.MenuItems>
+                    }
+                    renderActionItems={
+                      <TopNavBar.ActionItems
+                        listLabel="Actions"
+                        renderHiddenItemsMenuTriggerLabel={(
+                          hiddenChildrenCount
+                        ) => `${hiddenChildrenCount} more actions`}
+                      >
+                        <TopNavBar.Item
+                          id="InfoAction"
+                          variant="icon"
+                          tooltip="Info"
+                          renderIcon={<IconQuestionLine />}
+                          onClick={() => {
+                            console.log('Info')
+                          }}
+                        >
+                          Info
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="AlertsAction"
+                          variant="icon"
+                          tooltip="Alerts"
+                          renderIcon={<IconAlertsLine />}
+                          onClick={() => {
+                            console.log('Alerts')
+                          }}
+                        >
+                          Alerts
+                        </TopNavBar.Item>
+                      </TopNavBar.ActionItems>
+                    }
+                    renderUser={
+                      <TopNavBar.User>
+                        <TopNavBar.Item
+                          id="LogInRegisterButton"
+                          href="/#TopNavBar"
+                          variant="button"
+                        >
+                          Log In/Register
+                        </TopNavBar.Item>
+                      </TopNavBar.User>
+                    }
+                    themeOverride={{
+                      // For example demo
+                      smallViewportZIndex: 9999,
+                      smallViewportMenuFixHeight: 'calc(100% - 3.5rem)'
+                    }}
+                  />
+                )
+              }}
+            </TopNavBar>
+
+            <div
+              id="menuMountNode"
+              style={{
+                position: 'absolute',
+                insetBlockStart: '3.5rem',
+                insetInlineStart: '0px',
+                width: '100%',
+                height: 'calc(100% - 3.5rem)',
+              }}
+            />
+
+            <View as="div" minHeight='10rem' padding="medium">
+              <Heading as="p" level="h2" margin="medium 0">
+                Page Content
+              </Heading>
+
+              <p>
+                Reprehenderit magna aliquip laboris nostrud. Culpa aliqua ex laboris pariatur quis laboris ipsum culpa quis aliquip nisi veniam consectetur amet. Cillum dolore officia irure est velit.
+              </p>
+              <p>
+                Mollit laboris anim dolor amet mollit ut in duis quis anim. Minim sit aute laborum sunt ad veniam. Labore id in enim labore culpa. Ullamco irure magna enim excepteur nulla incididunt laboris. Dolor quis duis Lorem ad. Veniam non eu nisi labore duis est quis. Laborum aute quis velit reprehenderit consequat esse qui tempor ad in et voluptate.
+              </p>
+              <p>
+                Irure velit duis amet pariatur anim nostrud sit magna anim non do ea exercitation. Adipisicing veniam culpa do nostrud nisi. Do aliqua cupidatat ad fugiat labore ad non fugiat. Laboris et tempor sunt velit incididunt sunt enim occaecat do aliquip nulla magna.
+              </p>
+            </View>
+          </div>
+
+        </View>
+      </View>
+    )
+  }
+}
+
+render(<LayoutExample />)
+```
+
+### Item variants
+
+The main building block of TopNavBar is the `<TopNavBar.Item>`. The items have 4 variants, can have icons, avatars, submenus, tooltips, etc.
+
+Not all variation is available in every container, e.g.: items with avatars can only be used in `<TopNavBar.User>`.
+
+In small viewport mode, items in `<TopNavBar.ActionItems>` will be converted to `icon` variants (and are required to have `renderIcon` prop), and the rest of the items in `<TopNavBar.User>` and `<TopNavBar.MenuItems>` will be converted to dropdown menu items (Drilldown options), thus displaying different (e.g.: icons are not displayed).
+
+```js
+---
+example: true
+---
+
+<View as="div" background="primary-inverse" padding="medium">
+  <Flex margin="medium 0">
+    <Flex.Item padding="0 small">
+      <TopNavBar.Item
+        id="defaultText"
+      >
+        Default variant
+      </TopNavBar.Item>
+    </Flex.Item>
+    <Flex.Item padding="0 small">
+      <TopNavBar.Item
+        id="defaultIcon"
+        renderIcon={<IconDiscussionLine />}
+      >
+        Default with icon
+      </TopNavBar.Item>
+    </Flex.Item>
+    <Flex.Item padding="0 small">
+      <TopNavBar.Item
+        id="defaultAvatar"
+        renderAvatar={{ avatarName: 'User Name' }}
+      >
+        Default with avatar
+      </TopNavBar.Item>
+    </Flex.Item>
+  </Flex>
+
+  <Flex margin="medium 0">
+    <Flex.Item padding="0 small">
+      <TopNavBar.Item
+        id="buttonText"
+        variant="button"
+      >
+        Button variant
+      </TopNavBar.Item>
+    </Flex.Item>
+    <Flex.Item padding="0 small">
+      <TopNavBar.Item
+        id="buttonIcon"
+        variant="button"
+        renderIcon={<IconDiscussionLine />}
+      >
+        Button with icon
+      </TopNavBar.Item>
+    </Flex.Item>
+    <Flex.Item padding="0 small">
+      <TopNavBar.Item
+        id="buttonAvatar"
+        variant="button"
+        renderAvatar={{ avatarName: 'User Name' }}
+      >
+        Button with avatar
+      </TopNavBar.Item>
+    </Flex.Item>
+  </Flex>
+
+  <Flex margin="medium 0">
+    <Flex.Item padding="0 small">
+      <TopNavBar.Item
+        id="iconItem"
+        variant="icon"
+        renderIcon={<IconDiscussionLine />}
+        tooltip="Icon variant"
+      >
+        Icon variant
+      </TopNavBar.Item>
+    </Flex.Item>
+  </Flex>
+
+  <Flex margin="medium 0">
+    <Flex.Item padding="0 small">
+      <TopNavBar.Item
+        id="avatarItem"
+        variant="avatar"
+        renderAvatar={{ avatarName: 'User Name' }}
+        tooltip="Avatar variant"
+      >
+        Avatar variant
+      </TopNavBar.Item>
+    </Flex.Item>
+  </Flex>
+</View>
 ```
