@@ -54,6 +54,7 @@ const generateStyle = (
   return {
     topNavBarDesktopLayout: {
       label: 'topNavBarDesktopLayout',
+      flowMode: 'logical',
       fontSize: componentTheme.desktopFontSize,
       fontFamily: componentTheme.desktopFontFamily,
       fontWeight: componentTheme.desktopFontWeight,
@@ -70,7 +71,8 @@ const generateStyle = (
       zIndex: componentTheme.desktopZIndex,
       maxWidth: '100%',
       overflow: 'hidden',
-      padding: componentTheme.desktopHorizontalPadding,
+      paddingInline: componentTheme.desktopInlinePadding,
+      paddingBlock: 0,
       ...(hasBrandBlock && {
         paddingInlineStart: 0
       })
@@ -80,14 +82,16 @@ const generateStyle = (
       display: 'flex',
       flexGrow: 0,
       flexShrink: 0,
-      margin: componentTheme.desktopBrandContainerMargin
+      marginBlock: 0,
+      marginInline: componentTheme.desktopBrandContainerInlineMargin
     },
     menuItemsContainer: {
       label: 'topNavBarDesktopLayout__menuItemsContainer',
       display: 'flex',
       flexGrow: 1,
       flexShrink: 1,
-      margin: componentTheme.desktopMenuItemsContainerMargin,
+      marginBlock: 0,
+      marginInline: componentTheme.desktopMenuItemsContainerInlineMargin,
       overflow: 'hidden'
     },
     actionItemsContainer: {
@@ -95,14 +99,16 @@ const generateStyle = (
       display: 'flex',
       flexGrow: 0,
       flexShrink: 0,
-      margin: componentTheme.desktopActionItemsContainerMargin
+      marginBlock: 0,
+      marginInline: componentTheme.desktopActionItemsContainerInlineMargin
     },
     userContainer: {
       label: 'topNavBarDesktopLayout__userContainer',
       display: 'flex',
       flexGrow: 0,
       flexShrink: 0,
-      margin: componentTheme.desktopUserContainerMargin,
+      marginBlock: 0,
+      marginInline: componentTheme.desktopUserContainerInlineMargin,
 
       ...(hasUserSeparator && {
         position: 'relative',

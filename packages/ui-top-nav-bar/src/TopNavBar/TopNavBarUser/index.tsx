@@ -32,7 +32,7 @@ import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { TopNavBarContext } from '../TopNavBarContext'
-import type { TopNavBarItemProps } from '../TopNavBarItem/props'
+import type { ItemChild, TopNavBarItemProps } from '../TopNavBarItem/props'
 
 import generateStyle from './styles'
 
@@ -80,7 +80,7 @@ class TopNavBarUser extends Component<TopNavBarUserProps> {
   }
 
   get content() {
-    const { children } = this.props
+    const children = React.Children.toArray(this.props.children) as ItemChild[]
 
     const allowedVariants: TopNavBarItemProps['variant'][] = [
       'default',

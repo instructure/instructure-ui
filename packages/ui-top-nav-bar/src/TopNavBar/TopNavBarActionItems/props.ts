@@ -31,7 +31,8 @@ import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {
   TopNavBarActionItemsTheme,
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  ChildrenOfType
 } from '@instructure/shared-types'
 
 import { TopNavBarItem } from '../TopNavBarItem'
@@ -56,7 +57,7 @@ type TopNavBarActionItemsOwnProps = {
    * Items in small viewport mode are __required__ to have the `renderIcon` prop,
    * because only the icons are displayed due to the lack of space.
    */
-  children?: ItemChild | ItemChild[]
+  children?: ChildrenOfType<ItemChild>
 
   /**
    * An 'aria-label' for the action items list.

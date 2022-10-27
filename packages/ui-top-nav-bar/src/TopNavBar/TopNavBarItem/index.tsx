@@ -26,6 +26,7 @@
 import React, { Component } from 'react'
 
 import {
+  callRenderProp,
   matchComponentTypes,
   omitProps,
   passthroughProps,
@@ -67,6 +68,10 @@ import type {
 
 type BaseButtonElement = React.ComponentElement<BaseButtonProps, BaseButton>
 
+const navbarStackingDefault = 10000
+const submenuStacking = navbarStackingDefault + 1
+const tooltipStacking = navbarStackingDefault + 2
+
 /**
 ---
 parent: TopNavBar
@@ -95,6 +100,8 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   ref: HTMLDivElement | null = null
   private _itemRef: HTMLButtonElement | HTMLLinkElement | null = null
 
+  private readonly _tooltipContentId: string
+
   handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
 
@@ -117,6 +124,8 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
 
   constructor(props: TopNavBarItemProps) {
     super(props)
+
+    this._tooltipContentId = props.deterministicId!('TopNavBarItem-tooltip')
 
     this.state = {
       isSubmenuOpen: false,
@@ -267,7 +276,7 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
     const themeOverride: BaseButtonProps['themeOverride'] = {}
 
     if (this.isDefaultVariant || this.hasAvatar) {
-      themeOverride.mediumPaddingHorizontal = styles?.itemHorizontalPadding
+      themeOverride.mediumPaddingHorizontal = styles?.itemInlinePadding
     }
 
     if (this.hasAvatar) {
@@ -501,12 +510,14 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
 
     return (
       <div css={styles?.container}>
-        {this.props.tooltip ? this.wrapButtonInTooltip(button) : button}
+        {this.props.tooltip
+          ? this.wrapButtonInTooltip(button, children)
+          : button}
       </div>
     )
   }
 
-  wrapButtonInTooltip(button: BaseButtonElement) {
+  wrapButtonInTooltip(button: BaseButtonElement, content: React.ReactNode) {
     const { tooltip, styles } = this.props
 
     if (!tooltip) {
@@ -524,9 +535,13 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       tooltipProps = { ...tooltipProps, ...tooltip }
     }
 
-    if (!tooltipProps.renderTip) {
+    const tipContent = callRenderProp(tooltipProps.renderTip)
+
+    if (!tipContent) {
       return button
     }
+
+    const contentAndTooltipIdentical = tipContent === content
 
     return (
       <InstUISettingsProvider
@@ -534,17 +549,29 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
           componentOverrides: {
             View: {
               // moves tooltips above submenus/popovers
-              stackingTopmost: 10000
+              stackingTopmost: tooltipStacking
             }
           }
         }}
       >
         <Tooltip
-          renderTip={tooltipProps.renderTip}
           {...tooltipProps}
+          renderTip={
+            contentAndTooltipIdentical ? (
+              tipContent
+            ) : (
+              <div id={this._tooltipContentId}>{tipContent}</div>
+            )
+          }
           positionContainerDisplay="block"
         >
-          <div css={styles?.submenuTriggerContainer}>{button}</div>
+          <div css={styles?.submenuTriggerContainer}>
+            {contentAndTooltipIdentical
+              ? button
+              : safeCloneElement(button, {
+                  'aria-describedby': this._tooltipContentId
+                })}
+          </div>
         </Tooltip>
       </InstUISettingsProvider>
     )
@@ -680,9 +707,35 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
     let content
 
     if (this.shouldRenderPopover) {
-      content = this.renderPopover()
+      content = (
+        <InstUISettingsProvider
+          theme={{
+            componentOverrides: {
+              View: {
+                // moves popovers above navbar, below tooltips
+                stackingTopmost: submenuStacking
+              }
+            }
+          }}
+        >
+          {this.renderPopover()}
+        </InstUISettingsProvider>
+      )
     } else if (this.shouldRenderSubmenu) {
-      content = this.renderDropdownMenu()
+      content = (
+        <InstUISettingsProvider
+          theme={{
+            componentOverrides: {
+              View: {
+                // moves submenus above navbar, below tooltips
+                stackingTopmost: submenuStacking
+              }
+            }
+          }}
+        >
+          {this.renderDropdownMenu()}
+        </InstUISettingsProvider>
+      )
     } else {
       content = this.renderContent()
     }

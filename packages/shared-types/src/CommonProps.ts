@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { ComponentType } from 'react'
+import type { ComponentType } from 'react'
 
 type AsElementType<P = any> = keyof JSX.IntrinsicElements | ComponentType<P>
 

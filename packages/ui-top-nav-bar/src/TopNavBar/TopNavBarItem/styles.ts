@@ -54,7 +54,7 @@ const generateStyle = (
     : status === 'active' && variant === 'default'
   const hasPopover = renderSubmenu || customPopoverConfig
 
-  const activeIndicatorPosition = `calc(${componentTheme.itemHorizontalPadding} - ${componentTheme.activeItemIndicatorSpacing})`
+  const activeIndicatorPosition = `calc(${componentTheme.itemInlinePadding} - ${componentTheme.activeItemIndicatorSpacing})`
 
   return {
     topNavBarItem: {
@@ -135,7 +135,7 @@ const generateStyle = (
       paddingInlineStart: componentTheme.iconTextGap
     },
     focusOutlineOffset: isSmallViewport ? '0.375rem' : '0.625rem',
-    itemHorizontalPadding: componentTheme.itemHorizontalPadding
+    itemInlinePadding: componentTheme.itemInlinePadding
   }
 }
 

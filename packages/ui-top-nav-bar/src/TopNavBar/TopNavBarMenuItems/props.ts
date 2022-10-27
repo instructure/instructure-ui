@@ -32,7 +32,8 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   TopNavBarMenuItemsTheme,
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  ChildrenOfType
 } from '@instructure/shared-types'
 
 import { TopNavBarItem } from '../TopNavBarItem'
@@ -53,7 +54,7 @@ type TopNavBarMenuItemsOwnProps = {
    *
    * In __smallViewport__ mode the items are accessible under the main "hamburger" menu.
    */
-  children?: ItemChild | ItemChild[]
+  children?: ChildrenOfType<ItemChild>
 
   /**
    * The `id` of the link to the current page. Marks the item by setting `aria-current="page"` attribute on it and setting its status to 'active'.
@@ -106,7 +107,10 @@ type TopNavBarMenuItemsState = {
 const propTypes: PropValidators<PropKeys> = {
   children: ChildrenPropTypes.oneOf([TopNavBarItem]),
   currentPageId: PropTypes.string,
-  renderHiddenItemsMenuTriggerLabel: PropTypes.func.isRequired,
+  renderHiddenItemsMenuTriggerLabel: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string
+  ]).isRequired,
   listLabel: PropTypes.string,
   elementRef: PropTypes.func
 }

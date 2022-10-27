@@ -58,7 +58,6 @@ const BaseExample = () => {
   )
 }
 
-// TODO: write tests
 describe('<TopNavBar />', async () => {
   it('should render', async () => {
     await mount(<BaseExample />)
