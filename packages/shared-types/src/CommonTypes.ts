@@ -22,14 +22,17 @@
  * SOFTWARE.
  */
 
-import React, {
+import type {
   ClassicComponent,
   ClassicComponentClass,
   ClassType,
+  Component,
   ComponentClass,
+  ComponentElement,
   ComponentState,
   ReactHTML,
   ReactNode,
+  ReactElement,
   ReactSVG
 } from 'react'
 
@@ -37,12 +40,12 @@ import React, {
 export type UIElement =
   | Node
   | Window
-  | React.ReactElement
-  | React.Component
+  | ReactElement
+  | Component
   | (() => Node | Window | null | undefined)
   | null
 
-/** Type that is renderable by `callRenderProp` **/
+/** Type that is renderable by `callRenderProp` */
 export type Renderable<P = never> =
   | keyof ReactHTML
   | keyof ReactSVG
@@ -52,6 +55,16 @@ export type Renderable<P = never> =
   | ((data: P) => ReactNode | Element)
   | (() => ReactNode | Element)
   | Element
+
+/**
+ * Union type helper for the "children" prop.
+ * The argument has to be type of, or union of type of
+ * React.ComponentElement<any, any> */
+export type ChildrenOfType<T extends ComponentElement<any, any>> =
+  | T
+  | undefined
+  | null
+  | ChildrenOfType<T>[]
 
 /**
  * A DOM element or an array of DOM elements or a method that returns a DOM
@@ -70,5 +83,5 @@ interface InstUIBaseComponent {
   allowedProps?: string[]
 }
 export interface InstUIComponent
-  extends React.ComponentClass<any, any>,
+  extends ComponentClass<any, any>,
     InstUIBaseComponent {}

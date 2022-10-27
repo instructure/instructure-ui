@@ -2,219 +2,22 @@
 describes: TopNavBar
 ---
 
-The `TopNavBar` component is a navigation bar component that can be used for page navigation, actions, user menu and more. TopNavBar adapts to small screen widths by displaying a more specialised view.
+The `TopNavBar` component is a navigation bar component that helps to consistently position the site navigation items and actions throughout all pages and applications. It’s used for branding, navigation, user login and actions.
+
+TopNavBar adapts to small screen widths by truncating nav items and displaying a more specialised view.
+
+### Playground
+
+Click on the button below to open up an interactive, fullscreen example, where you can toggle the elements of TopNavBar on and off. You can test the "desktop" and "smallViewport" views, several layout versions, states, menu item variants, and many more.
 
 ```js
 ---
 example: true
 render: false
 ---
-class Example extends React.Component {
+class PlaygroundExample extends React.Component {
   state = {
-  }
-
-  render() {
-    return (
-      <div
-        style={{
-          height: '100%',
-          position: 'relative',
-          background: '#fff'
-        }}
-      >
-        <TopNavBar
-          breakpoint='650'
-          mediaQueryMatch='element'
-        >
-          {({ currentLayout }) => {
-            return (
-              <TopNavBar.Layout
-                navLabel="Example navigation bar"
-                desktopConfig={{
-                  hideActionsUserSeparator: true
-                }}
-                smallViewportConfig={{
-                  trayMountNode: () => document.getElementById('menuMountNode'),
-                  dropdownMenuToggleButtonLabel: 'Toggle Menu',
-                  dropdownMenuLabel: 'Main Menu'
-                }}
-                renderBrand={
-                  <TopNavBar.Brand
-                    screenReaderLabel="Brand name"
-                    renderName={(
-                      <View as="div" minWidth="7rem">
-                        <Text
-                          as="div"
-                          color="primary-inverse"
-                          transform="uppercase"
-                          size="small"
-                          weight="bold"
-                          lineHeight="condensed"
-                        >
-                          Brand
-                        </Text>
-                        <Text
-                          as="div"
-                          color="primary-inverse"
-                          size="large"
-                          weight="normal"
-                          lineHeight="condensed"
-                        >
-                          Sub-brand
-                        </Text>
-                      </View>
-                    )}
-                    renderIcon={(
-                      <IconBoldLine
-                        size="small"
-                        color="primary-inverse"
-                        height="2.5rem"
-                        width="2.5rem"
-                      />
-                    )}
-                    iconBackground="#0097D3"
-                    href="/#TopNavBar"
-                  />
-                }
-                renderMenuItems={
-                  <TopNavBar.MenuItems
-                    listLabel="Page navigation"
-                    currentPageId="OverviewPage"
-                    renderHiddenItemsMenuTriggerLabel={(
-                      hiddenChildrenCount
-                    ) => `${hiddenChildrenCount} More`}
-                  >
-                    <TopNavBar.Item
-                      id="OverviewPage"
-                      href="/#TopNavBar"
-                    >
-                      Overview
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="AdminPage"
-                      href="/#TopNavBar"
-                    >
-                      Admin
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="SettingsPage"
-                      href="/#TopNavBar"
-                    >
-                      Settings
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="MapsPage"
-                      href="/#TopNavBar"
-                    >
-                      Maps
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="AssessmentsPage"
-                      href="/#TopNavBar"
-                    >
-                      Assessments
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="CommunityPage"
-                      href="/#TopNavBar"
-                    >
-                      Community
-                    </TopNavBar.Item>
-                  </TopNavBar.MenuItems>
-                }
-                renderActionItems={
-                  <TopNavBar.ActionItems
-                    listLabel="Actions"
-                    renderHiddenItemsMenuTriggerLabel={(
-                      hiddenChildrenCount
-                    ) => `${hiddenChildrenCount} more actions`}
-                  >
-                    <TopNavBar.Item
-                      id="InfoAction"
-                      variant="icon"
-                      tooltip="Info"
-                      renderIcon={<IconQuestionLine />}
-                      onClick={() => {
-                        console.log('Info')
-                      }}
-                    >
-                      Info
-                    </TopNavBar.Item>
-                    <TopNavBar.Item
-                      id="AlertsAction"
-                      variant="icon"
-                      tooltip="Alerts"
-                      renderIcon={<IconAlertsLine />}
-                      onClick={() => {
-                        console.log('Alerts')
-                      }}
-                    >
-                      Alerts
-                    </TopNavBar.Item>
-                  </TopNavBar.ActionItems>
-                }
-                renderUser={
-                  <TopNavBar.User>
-                    <TopNavBar.Item
-                      id="LogInRegisterButton"
-                      href="/#TopNavBar"
-                      variant="button"
-                    >
-                      Log In/Register
-                    </TopNavBar.Item>
-                  </TopNavBar.User>
-                }
-                themeOverride={{
-                  // For example demo
-                  smallViewportZIndex: 9999,
-                  smallViewportMenuFixHeight: 'calc(100% - 3.5rem)'
-                }}
-              />
-            )
-          }}
-        </TopNavBar>
-
-        <div
-          id="menuMountNode"
-          style={{
-            position: 'absolute',
-            insetBlockStart: '3.5rem',
-            insetInlineStart: '0px',
-            width: '100%',
-            height: 'calc(100% - 3.5rem)',
-          }}
-        />
-
-        <View as="div" minHeight='10rem' padding="medium">
-          <Heading as="p" level="h2" margin="medium 0">
-            Page Content
-          </Heading>
-
-          <p>
-            Reprehenderit magna aliquip laboris nostrud. Culpa aliqua ex laboris pariatur quis laboris ipsum culpa quis aliquip nisi veniam consectetur amet. Cillum dolore officia irure est velit.
-          </p>
-          <p>
-            Mollit laboris anim dolor amet mollit ut in duis quis anim. Minim sit aute laborum sunt ad veniam. Labore id in enim labore culpa. Ullamco irure magna enim excepteur nulla incididunt laboris. Dolor quis duis Lorem ad. Veniam non eu nisi labore duis est quis. Laborum aute quis velit reprehenderit consequat esse qui tempor ad in et voluptate.
-          </p>
-          <p>
-            Irure velit duis amet pariatur anim nostrud sit magna anim non do ea exercitation. Adipisicing veniam culpa do nostrud nisi. Do aliqua cupidatat ad fugiat labore ad non fugiat. Laboris et tempor sunt velit incididunt sunt enim occaecat do aliquip nulla magna.
-          </p>
-        </View>
-      </div>
-    )
-  }
-}
-
-render(<Example />)
-```
-
-```js
----
-example: true
-render: false
----
-class Example extends React.Component {
-  state = {
+    rtlMode: false,
     isSecondaryNavigation: false,
     hasBrandSection: true,
     hasMenuItemsSection: true,
@@ -294,17 +97,38 @@ class Example extends React.Component {
       ],
     },
     {
-      id: 'settings',
-      label: 'Settings',
+      id: 'contact',
+      label: 'Contact',
       customPopoverConfig: {
-       children: (
-         <View padding="medium" as="div">
-           Example Setting Custom Popover
-         </View>
-       ),
-       on: 'click',
-       shouldContainFocus: false
-     }
+        on: 'click',
+        shouldContainFocus: true,
+        children: (
+          <View
+            as="div"
+            padding="medium"
+            width="25rem"
+            role="dialog"
+            tabIndex={0}
+            aria-label="Contact information"
+            position="relative"
+            borderRadius="small"
+          >
+            <Heading level="h3">Contact information</Heading>
+            <p>{lorem.sentence()}</p>
+            <Button color="primary" margin="x-small 0 small">Help Center</Button>
+            <hr aria-hidden="true" />
+            <View as="div" margin="medium 0 0">
+              <Text weight="bold">
+                <div>Contact person</div>
+                <Link href="/#TopNavBar" isWithinText={false}>
+                  contact.person@example.com
+                </Link>
+                <div>(801) 123-4567</div>
+              </Text>
+            </View>
+          </View>
+        )
+      }
     },
     {
       id: 'data',
@@ -318,7 +142,7 @@ class Example extends React.Component {
   }
 
   generateSubmenu(navItem) {
-    const {id: rootItemId, submenu} = navItem
+    const { id: rootItemId, submenu } = navItem
 
     return (
       <Drilldown rootPageId={`root_${rootItemId}`}>
@@ -352,6 +176,7 @@ class Example extends React.Component {
                     href={!submenuItem.submenu ? submenuItem.href : undefined}
                     onOptionClick={onOptionClick}
                     afterLabelContentVAlign="center"
+                    renderBeforeLabel={submenuItem.renderIcon}
                     {...this.state.disableSubmenuItem
                       && submenuItem.label === 'Item Bank'
                       && { disabled: true }
@@ -459,7 +284,8 @@ class Example extends React.Component {
         label: 'Example settings',
         radios: {
           exampleViewport: ['desktop', 'smallViewport']
-        }
+        },
+        checkboxes: ['rtlMode']
       },
       inverseColor: {
         label: 'Inverse color mode',
@@ -538,6 +364,7 @@ class Example extends React.Component {
 
     const settingLabels = {
       exampleViewport: 'Toggle example viewport',
+      rtlMode: 'RTL mode',
       isSecondaryNavigation: 'Display as secondary navigation',
       hasBrandSection: '"renderBrand" prop',
       hasMenuItemsSection: '"renderMenuItems" prop',
@@ -736,7 +563,7 @@ class Example extends React.Component {
     const navItems = [
       ...this.navItems,
       ...(this.state.extraMenuItems
-        ? Array.from(Array(15)).map((i, idx) => (
+        ? Array.from(Array(20)).map((i, idx) => (
           {
             id: `item${idx}`,
             label: `Item ${idx + 1}`,
@@ -774,7 +601,6 @@ class Example extends React.Component {
               smallViewportConfig={{
                 dropdownMenuToggleButtonLabel: 'Toggle Menu',
                 dropdownMenuLabel: 'Main Menu',
-                // TODO: current page title
                 alternativeTitle: this.state.useAlternativeTitle || inverseColor
                   ? this.state.breadcrumbs[this.state.breadcrumbs.length - 1]
                   : undefined,
@@ -883,7 +709,7 @@ class Example extends React.Component {
                   ) => `${hiddenChildrenCount} more actions`}
                 >
                   <TopNavBar.Item
-                    id="Search"
+                    id="Search1"
                     renderIcon={<IconSearchLine />}
                     aria-label="Open to search in the page"
                     {...actionItemSettings}
@@ -976,11 +802,16 @@ class Example extends React.Component {
                       ? undefined
                       : this.generateSubmenu({
                         id: 'Info',
-                        submenu: ['Profile', 'Personal settings', 'Log out'].map(item => ({
-                          id: item.replace(' ', '').toLowerCase(),
-                          label: item,
+                        submenu: [
+                          { label: 'Profile', icon: IconUserLine },
+                          { label: 'Personal settings', icon: IconSettingsLine },
+                          { label: 'Log out', icon: IconXLine },
+                        ].map(item => ({
+                          id: item.label.replace(' ', '').toLowerCase(),
+                          label: item.label,
+                          renderIcon: item.icon,
                           onClick: () => {
-                            console.log(`"${item}" action clicked`)
+                            console.log(`"${item.label}" action clicked`)
                           }
                         }))
                       })
@@ -1043,7 +874,10 @@ class Example extends React.Component {
           </div>
         )}
 
-        {this.renderNavBar()}
+
+        <InstUISettingsProvider dir={this.state.rtlMode ? 'rtl' : 'ltr'}>
+          {this.renderNavBar()}
+        </InstUISettingsProvider>
 
         {this.renderPageContent()}
       </div>
@@ -1053,7 +887,10 @@ class Example extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={() => { this.setState({ isModalOpen: true }) }}>
+        <Button
+          color="primary"
+          onClick={() => { this.setState({ isModalOpen: true }) }}
+        >
           Open TopNavBar Fullscreen Example
         </Button>
 
@@ -1244,5 +1081,1249 @@ const elevateIcon = (
   </svg>
 )
 
-render(<Example />)
+render(<PlaygroundExample />)
+```
+
+### Responsive layout
+
+TopNavBar is a responsive component, and it has 4 "sections" or "blocks".
+
+The `<TopNavBar.Layout>` component has a `desktopConfig` and a `smallViewportConfig` prop that handles how the different views are set up.
+
+#### Main blocks
+
+##### TopNavBar.Brand
+
+`<TopNavBar.Brand>` contains the brand logo and icon.
+
+Use the brand logo over the primary brand color in front of the brand's name. If there is no brand logo then use the name with darker background.
+
+```js
+---
+example: true
+---
+<div>
+  <View as="div" margin="medium 0">
+    <TopNavBar>
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderBrand={(
+            <TopNavBar.Brand
+              screenReaderLabel="Brand name"
+              renderName={(
+                <View as="div" minWidth="7rem">
+                  <Text
+                    as="div"
+                    color="primary-inverse"
+                    transform="uppercase"
+                    size="small"
+                    weight="bold"
+                    lineHeight="condensed"
+                  >
+                    Brand
+                  </Text>
+                  <Text
+                    as="div"
+                    color="primary-inverse"
+                    size="large"
+                    weight="normal"
+                    lineHeight="condensed"
+                  >
+                    Sub-brand
+                  </Text>
+                </View>
+              )}
+              renderIcon={(
+                <IconBoldLine
+                  size="small"
+                  color="primary-inverse"
+                  height="2.5rem"
+                  width="2.5rem"
+                />
+              )}
+              iconBackground="#0097D3"
+              href="/#TopNavBar"
+            />
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+
+  <View as="div" margin="medium 0">
+    <TopNavBar>
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderBrand={(
+            <TopNavBar.Brand
+              screenReaderLabel="Brand name"
+              renderName={(
+                <View as="div" minWidth="7rem">
+                  <Text
+                    as="div"
+                    color="primary-inverse"
+                    transform="uppercase"
+                    size="small"
+                    weight="bold"
+                    lineHeight="condensed"
+                  >
+                    Brand
+                  </Text>
+                  <Text
+                    as="div"
+                    color="primary-inverse"
+                    size="large"
+                    weight="normal"
+                    lineHeight="condensed"
+                  >
+                    Sub-brand
+                  </Text>
+                </View>
+              )}
+              nameBackground="#2D3B45"
+              href="/#TopNavBar"
+            />
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+</div>
+```
+
+##### TopNavBar.MenuItems
+
+`<TopNavBar.MenuItems>` contains the main menu items, subpage links.
+
+If there is not enough space to display all items, the list is truncated, and the hidden items are available under a dropdown menu.
+
+When a menu item has multiple levels, a submenu can be rendered by passing a [Drilldown](#Drilldown) navigation via it's `renderSubmenu` prop. If a more specialized dropdown is needed, it can be configured by the `customPopoverConfig` prop (see the [Dropdowns](/#TopNavBar/#items-dropdowns) section).
+
+The current page is highlighted, if it's id is passed via the `currentPageId` prop. (Note that it doesn't highlight items in submenus, but it highlights items hidden in truncated lists.)
+
+```js
+---
+example: true
+---
+<div>
+  <View as="div" margin="medium 0">
+    <TopNavBar breakpoint="10rem">
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderMenuItems={(
+            <TopNavBar.MenuItems
+              listLabel="Page navigation"
+              currentPageId="menuItems1Page2"
+              renderHiddenItemsMenuTriggerLabel={(
+                hiddenChildrenCount
+              ) => `${hiddenChildrenCount} More`}
+            >
+              {Array.from(Array(4)).map((_item, idx) => (
+                <TopNavBar.Item
+                  id={`menuItems1Page${idx + 1}`}
+                  key={`menuItems1Page${idx + 1}`}
+                  href={idx === 2 ? undefined : "/#TopNavBar"}
+                  renderSubmenu={idx === 2 ? (
+                    <Drilldown rootPageId="root">
+                      <Drilldown.Page id="root">
+                        {Array.from(Array(4)).map((_item, idx) => (
+                          <Drilldown.Option
+                            id={`option${idx + 1}`}
+                            key={`option${idx + 1}`}
+                            href="/#TopNavBar"
+                          >
+                            Option {idx + 1}
+                          </Drilldown.Option>
+                        ))}
+                      </Drilldown.Page>
+                    </Drilldown>
+                  ) : undefined}
+                >
+                  Page {idx + 1}
+                </TopNavBar.Item>
+              ))}
+            </TopNavBar.MenuItems>
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+
+  <View as="div" margin="medium 0">
+    <TopNavBar breakpoint="10rem">
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderMenuItems={(
+            <TopNavBar.MenuItems
+              listLabel="Page navigation"
+              currentPageId="menuItems2Page11"
+              renderHiddenItemsMenuTriggerLabel={(
+                hiddenChildrenCount
+              ) => `${hiddenChildrenCount} More`}
+            >
+              {Array.from(Array(14)).map((_item, idx) => (
+                <TopNavBar.Item
+                  id={`menuItems2Page${idx + 1}`}
+                  key={`menuItems2Page${idx + 1}`}
+                  href={idx === 2 || idx === 6 ? undefined : "/#TopNavBar"}
+                  renderSubmenu={idx === 2 ? (
+                    <Drilldown rootPageId="root">
+                      <Drilldown.Page id="root">
+                        {Array.from(Array(4)).map((_item, idx) => (
+                          <Drilldown.Option
+                            id={`option${idx + 1}`}
+                            key={`option${idx + 1}`}
+                            href="/#TopNavBar"
+                          >
+                            Option {idx + 1}
+                          </Drilldown.Option>
+                        ))}
+                      </Drilldown.Page>
+                    </Drilldown>
+                  ) : undefined}
+                  customPopoverConfig={idx === 6 ? {
+                    children: (
+                      <View padding="medium" as="div">
+                        Example Custom Popover
+                      </View>
+                    ),
+                    on: 'click'
+                  }: undefined}
+                >
+                  Page {idx + 1}
+                </TopNavBar.Item>
+              ))}
+            </TopNavBar.MenuItems>
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+</div>
+```
+
+##### TopNavBar.ActionItems
+
+`<TopNavBar.ActionItems>` contains items that do some action or have special function.
+
+Action items can have submenus and popovers too. It is also recommended to add helpful tooltips to items that are "icon" variants.
+
+**Special case:** The "Search" action should open in a flyout on desktop. On the mobile/tablet view it should fill the header (see the [Playground](/#TopNavBar/#playground) example).
+
+If the last action is shown as text and the user is shown as text, use the separator between the 2 blocks, otherwise it is optional (`desktopConfig.hideActionsUserSeparator` prop on the `<TopNavBar.Layout>`).
+
+```js
+---
+example: true
+---
+<div>
+  <View as="div" margin="medium 0">
+    <TopNavBar>
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: true
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderActionItems={(
+            <TopNavBar.ActionItems
+              listLabel="Actions"
+              renderHiddenItemsMenuTriggerLabel={(
+                hiddenChildrenCount
+              ) => `${hiddenChildrenCount} more actions`}
+            >
+              <TopNavBar.Item
+                id="AlertsAction1"
+                variant="icon"
+                tooltip="Alerts"
+                renderIcon={<IconAlertsLine />}
+                onClick={() => {
+                  console.log('Alerts')
+                }}
+              >
+                Alerts
+              </TopNavBar.Item>
+              <TopNavBar.Item
+                id="SearchAction"
+                variant="icon"
+                tooltip="Search"
+                renderIcon={<IconSearchLine />}
+                customPopoverConfig={{
+                  on: 'click',
+                  children: (
+                    <View as="div" padding="x-small">
+                      <TextInput
+                        id="searchInput"
+                        width="100%"
+                        display="block"
+                        renderLabel={<ScreenReaderContent>Search</ScreenReaderContent>}
+                        renderBeforeInput={() => <IconSearchLine inline={false} />}
+                        placeholder="Search..."
+                        onChange={(_event, value) => {
+                          console.log(value)
+                        }}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            event.preventDefault()
+                            event.stopPropagation()
+
+                            console.log(`Search input submitted.`)
+                          }
+                        }}
+                      />
+                    </View>
+                  )
+                }}
+              >
+                Search
+              </TopNavBar.Item>
+              <TopNavBar.Item
+                id="ForumAction1"
+                renderIcon={<IconDiscussionLine />}
+                onClick={() => {
+                  console.log('Forum')
+                }}
+              >
+                Forum
+              </TopNavBar.Item>
+              <TopNavBar.Item
+                id="InfoAction1"
+                variant="icon"
+                tooltip="Info"
+                renderIcon={<IconQuestionLine />}
+                href="/#TopNavBar"
+              >
+                Info
+              </TopNavBar.Item>
+            </TopNavBar.ActionItems>
+          )}
+          renderUser={(
+            <TopNavBar.User>
+              <TopNavBar.Item
+                id="LogInRegisterButton1"
+                href="/#TopNavBar"
+                variant="button"
+              >
+                Log In/Register
+              </TopNavBar.Item>
+            </TopNavBar.User>
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+
+  <View as="div" margin="medium 0">
+    <TopNavBar>
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderActionItems={(
+            <TopNavBar.ActionItems
+              listLabel="Actions"
+              renderHiddenItemsMenuTriggerLabel={(
+                hiddenChildrenCount
+              ) => `${hiddenChildrenCount} more actions`}
+            >
+              <TopNavBar.Item
+                id="AlertsAction2"
+                renderIcon={<IconAlertsLine />}
+                onClick={() => {
+                  console.log('Alerts')
+                }}
+              >
+                Alerts
+              </TopNavBar.Item>
+              <TopNavBar.Item
+                id="ForumAction2"
+                renderIcon={<IconDiscussionLine />}
+                onClick={() => {
+                  console.log('Forum')
+                }}
+              >
+                Forum
+              </TopNavBar.Item>
+              <TopNavBar.Item
+                id="InfoAction2"
+                renderIcon={<IconQuestionLine />}
+                onClick={() => {
+                  console.log('Info')
+                }}
+              >
+                Info
+              </TopNavBar.Item>
+            </TopNavBar.ActionItems>
+          )}
+          renderUser={(
+            <TopNavBar.User>
+              <TopNavBar.Item
+                id="LogInRegisterButton2"
+                href="/#TopNavBar"
+              >
+                Log In/Register
+              </TopNavBar.Item>
+            </TopNavBar.User>
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+</div>
+```
+
+##### TopNavBar.User
+
+`<TopNavBar.User>` contains the login/register button and user menu.
+
+If the last action is shown as text and the user is shown as text, use the separator between the 2 blocks, otherwise it is optional (`desktopConfig.hideActionsUserSeparator` prop on the `<TopNavBar.Layout>`).
+
+```js
+---
+example: true
+---
+<div>
+  <View as="div" margin="medium 0">
+    <TopNavBar breakpoint="10rem">
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderUser={(
+            <TopNavBar.User>
+              <TopNavBar.Item
+                id="LogInRegisterButton3"
+                href="/#TopNavBar"
+              >
+                Log In/Register
+              </TopNavBar.Item>
+            </TopNavBar.User>
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+
+  <View as="div" margin="medium 0">
+    <TopNavBar breakpoint="10rem">
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderUser={(
+            <TopNavBar.User>
+              <TopNavBar.Item
+                id="LogInRegisterButton4"
+                href="/#TopNavBar"
+                variant="button"
+              >
+                Log In/Register
+              </TopNavBar.Item>
+            </TopNavBar.User>
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+
+  <View as="div" margin="medium 0">
+    <TopNavBar breakpoint="10rem">
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderUser={(
+            <TopNavBar.User>
+              <TopNavBar.Item
+                id="UserMenu1"
+                renderSubmenu={(
+                  <Drilldown rootPageId="root">
+                    <Drilldown.Page id="root">
+                      {Array.from(Array(4)).map((_item, idx) => (
+                        <Drilldown.Option
+                          id={`userOption${idx + 1}`}
+                          key={`userOption${idx + 1}`}
+                          href="/#TopNavBar"
+                        >
+                          User Menu Option {idx + 1}
+                        </Drilldown.Option>
+                      ))}
+                    </Drilldown.Page>
+                  </Drilldown>
+                )}
+              >
+                User Name
+              </TopNavBar.Item>
+            </TopNavBar.User>
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+
+  <View as="div" margin="medium 0">
+    <TopNavBar breakpoint="10rem">
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderUser={(
+            <TopNavBar.User>
+              <TopNavBar.Item
+                id="UserMenu2"
+                renderAvatar={{ avatarName: 'User Name', avatarSrc: avatarSquare }}
+                renderSubmenu={(
+                  <Drilldown rootPageId="root">
+                    <Drilldown.Page id="root">
+                      {Array.from(Array(4)).map((_item, idx) => (
+                        <Drilldown.Option
+                          id={`userOption${idx + 1}`}
+                          key={`userOption${idx + 1}`}
+                          href="/#TopNavBar"
+                        >
+                          User Menu Option {idx + 1}
+                        </Drilldown.Option>
+                      ))}
+                    </Drilldown.Page>
+                  </Drilldown>
+                )}
+              >
+                User Name
+              </TopNavBar.Item>
+            </TopNavBar.User>
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+
+  <View as="div" margin="medium 0">
+    <TopNavBar breakpoint="10rem">
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderUser={(
+            <TopNavBar.User>
+              <TopNavBar.Item
+                id="UserMenu3"
+                variant="avatar"
+                renderAvatar={{ avatarName: 'User Name', avatarSrc: avatarSquare }}
+                onClick={() => {
+                  console.log('User action')
+                }}
+              >
+                User Name
+              </TopNavBar.Item>
+            </TopNavBar.User>
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+</div>
+```
+
+#### smallViewport mode
+
+At the breakpoint (defined by the `breakpoint` and `mediaQueryMatch` props) it will switch between the "desktop" (fullscreen) view mode and the "smallViewport" view mode (optimized for mobile devices and smaller viewports).
+
+The main difference between the two is that in "smallViewport" mode:
+
+- The content of the `<TopNavBar.MenuItems>` and the `<TopNavBar.User>` blocks will be moved to a dropdown menu. The user block comes first, and there is a separator between the 2 blocks.
+- The `<TopNavBar.ActionItems>` stays in place, but its items will be converted into "icon" variant items.
+- The `<TopNavBar.Brand>` block will only display the brand logo.
+
+```js
+---
+example: true
+render: false
+---
+class LayoutExample extends React.Component {
+  state = {
+    exampleWidth: '100%',
+    isSecondaryNavigation: false
+  }
+
+  render() {
+    return (
+      <View as="div">
+        <View as="div" maxWidth="42rem" padding="small" background="primary">
+          <FormFieldGroup description="Example settings" layout="columns">
+            <Checkbox
+              variant="toggle"
+              value="toggleSmallViewportMode"
+              label="Toggle smallViewport mode"
+              checked={this.state.exampleWidth === '500px'}
+              onChange={() => {
+                this.setState({ exampleWidth: this.state.exampleWidth === '100%'
+                  ? '500px'
+                  : '100%'
+                })
+              }}
+            />
+
+            <Checkbox
+              variant="toggle"
+              value="toggleSecondaryNavigationtMode"
+              label="Toggle secondary navigation mode"
+              checked={this.state.isSecondaryNavigation}
+              onChange={() => {
+                this.setState({
+                  isSecondaryNavigation: !this.state.isSecondaryNavigation
+                })
+              }}
+            />
+          </FormFieldGroup>
+        </View>
+
+        <View as="div" margin="medium 0 0" width={this.state.exampleWidth}>
+          <div
+            style={{
+              height: '100%',
+              position: 'relative',
+              background: '#fff'
+            }}
+          >
+            <TopNavBar
+              breakpoint='650'
+              mediaQueryMatch='element'
+              inverseColor={this.state.isSecondaryNavigation}
+              key={this.state.exampleWidth}
+            >
+              {({ currentLayout, inverseColor }) => {
+                return (
+                  <TopNavBar.Layout
+                    navLabel={this.state.isSecondaryNavigation
+                      ? 'Example secondary navigation bar'
+                      : 'Example navigation bar'}
+                    desktopConfig={{
+                      hideActionsUserSeparator: true
+                    }}
+                    smallViewportConfig={{
+                      trayMountNode: () => document.getElementById('menuMountNode'),
+                      dropdownMenuToggleButtonLabel: 'Toggle Menu',
+                      dropdownMenuLabel: 'Main Menu',
+                      alternativeTitle: inverseColor ? 'Overview' : undefined
+                    }}
+                    renderBrand={
+                      <TopNavBar.Brand
+                        screenReaderLabel="Brand name"
+                        renderName={(
+                          <View as="div" minWidth="7rem">
+                            <Text
+                              as="div"
+                              color={inverseColor
+                                ? "brand"
+                                : "primary-inverse"
+                              }
+                              transform="uppercase"
+                              size="small"
+                              weight="bold"
+                              lineHeight="condensed"
+                            >
+                              Brand
+                            </Text>
+                            <Text
+                              as="div"
+                              color={inverseColor
+                                ? "primary"
+                                : "primary-inverse"
+                              }
+                              size="large"
+                              weight="normal"
+                              lineHeight="condensed"
+                            >
+                              Sub-brand
+                            </Text>
+                          </View>
+                        )}
+                        renderIcon={inverseColor ? undefined : (
+                          <IconBoldLine
+                            size="small"
+                            color="primary-inverse"
+                            height="2.5rem"
+                            width="2.5rem"
+                          />
+                        )}
+                        iconBackground="#0097D3"
+                        href="/#TopNavBar"
+                      />
+                    }
+                    renderMenuItems={
+                      <TopNavBar.MenuItems
+                        listLabel="Page navigation"
+                        currentPageId="OverviewPage"
+                        renderHiddenItemsMenuTriggerLabel={(
+                          hiddenChildrenCount
+                        ) => `${hiddenChildrenCount} More`}
+                      >
+                        <TopNavBar.Item
+                          id="OverviewPage"
+                          href="/#TopNavBar"
+                        >
+                          Overview
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="AdminPage"
+                          href="/#TopNavBar"
+                        >
+                          Admin
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="SettingsPage"
+                          href="/#TopNavBar"
+                        >
+                          Settings
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="MapsPage"
+                          href="/#TopNavBar"
+                        >
+                          Maps
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="AssessmentsPage"
+                          href="/#TopNavBar"
+                        >
+                          Assessments
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="CommunityPage"
+                          href="/#TopNavBar"
+                        >
+                          Community
+                        </TopNavBar.Item>
+                      </TopNavBar.MenuItems>
+                    }
+                    renderActionItems={
+                      <TopNavBar.ActionItems
+                        listLabel="Actions"
+                        renderHiddenItemsMenuTriggerLabel={(
+                          hiddenChildrenCount
+                        ) => `${hiddenChildrenCount} more actions`}
+                      >
+                        <TopNavBar.Item
+                          id="InfoAction3"
+                          variant="icon"
+                          tooltip="Info"
+                          renderIcon={<IconQuestionLine />}
+                          onClick={() => {
+                            console.log('Info')
+                          }}
+                        >
+                          Info
+                        </TopNavBar.Item>
+                        <TopNavBar.Item
+                          id="AlertsAction3"
+                          variant="icon"
+                          tooltip="Alerts"
+                          renderIcon={<IconAlertsLine />}
+                          onClick={() => {
+                            console.log('Alerts')
+                          }}
+                        >
+                          Alerts
+                        </TopNavBar.Item>
+                      </TopNavBar.ActionItems>
+                    }
+                    renderUser={
+                      <TopNavBar.User>
+                        <TopNavBar.Item
+                          id="LogInRegisterButton5"
+                          href="/#TopNavBar"
+                          variant="button"
+                        >
+                          Log In/Register
+                        </TopNavBar.Item>
+                      </TopNavBar.User>
+                    }
+                    themeOverride={{
+                      // For example demo
+                      smallViewportZIndex: 9999,
+                      smallViewportTrayFixTopPosition: this.state.isSecondaryNavigation
+                        ? `57px`
+                        : '56px'
+                    }}
+                  />
+                )
+              }}
+            </TopNavBar>
+
+            <div
+              id="menuMountNode"
+              style={{
+                position: 'absolute',
+                insetBlockStart: this.state.isSecondaryNavigation
+                  ? 'calc(3.5rem + 1px)'
+                  : '3.5rem',
+                insetInlineStart: '0px',
+                width: '100%',
+                height: this.state.isSecondaryNavigation
+                  ? 'calc(100% - 3.5rem - 1px)'
+                  : 'calc(100% - 3.5rem)',
+              }}
+            />
+
+            <View as="div" minHeight='10rem' padding="medium">
+              <Heading as="p" level="h2" margin="medium 0">
+                Page Content
+              </Heading>
+
+              <p>
+                Reprehenderit magna aliquip laboris nostrud. Culpa aliqua ex laboris pariatur quis laboris ipsum culpa quis aliquip nisi veniam consectetur amet. Cillum dolore officia irure est velit.
+              </p>
+              <p>
+                Mollit laboris anim dolor amet mollit ut in duis quis anim. Minim sit aute laborum sunt ad veniam. Labore id in enim labore culpa. Ullamco irure magna enim excepteur nulla incididunt laboris. Dolor quis duis Lorem ad. Veniam non eu nisi labore duis est quis. Laborum aute quis velit reprehenderit consequat esse qui tempor ad in et voluptate.
+              </p>
+              <p>
+                Irure velit duis amet pariatur anim nostrud sit magna anim non do ea exercitation. Adipisicing veniam culpa do nostrud nisi. Do aliqua cupidatat ad fugiat labore ad non fugiat. Laboris et tempor sunt velit incididunt sunt enim occaecat do aliquip nulla magna.
+              </p>
+            </View>
+          </div>
+
+        </View>
+      </View>
+    )
+  }
+}
+
+render(<LayoutExample />)
+```
+
+#### Secondary navigation
+
+In case TopNavBar is used as secondary navigation (e.g. LTI tools menu in Canvas), use the inverse color version. The `inverseColor` prop displays the navbar with inverted colors.
+
+In the smallViewport layout of the "secodary navigation" mode, don’t show the branding, instead display the current/selected page title by passing the `smallViewportConfig.alternativeTitle` prop. See the example above (toggle secondary navigation mode).
+
+### Items
+
+The main building block of TopNavBar is the `<TopNavBar.Item>`. The items have 4 variants, can have icons, avatars, submenus, tooltips, etc.
+
+#### Variants
+
+The items can display as text, button, icon only or avatar only. The text and button versions can have icons and avatars, and all variants can have submenus, popovers and tooltips.
+
+Not all 4 variation are available in every container, e.g.: items with avatars can only be used in `<TopNavBar.User>`.
+
+In small viewport mode, items in `<TopNavBar.User>` and `<TopNavBar.MenuItems>` will be converted to dropdown menu items ([Drilldown](#Drilldown) options), thus displaying differently (e.g.: all variants display as text options and icons are not rendered). The items in `<TopNavBar.ActionItems>` will be converted to `icon` variants (and are required to have `renderIcon` prop), and the list will get truncated when there is not enough space to display all actions.
+
+```js
+---
+example: true
+---
+
+<View as="div" background="primary-inverse" padding="medium">
+  <Flex wrap="wrap">
+    <Flex.Item padding="small">
+      <TopNavBar.Item
+        id="defaultText"
+      >
+        Default variant
+      </TopNavBar.Item>
+    </Flex.Item>
+    <Flex.Item padding="small">
+      <TopNavBar.Item
+        id="defaultIcon"
+        renderIcon={<IconDiscussionLine />}
+      >
+        Default with icon
+      </TopNavBar.Item>
+    </Flex.Item>
+    <Flex.Item padding="small">
+      <TopNavBar.Item
+        id="defaultAvatar"
+        renderAvatar={{ avatarName: 'User Name', avatarSrc: avatarSquare }}
+      >
+        Default with avatar
+      </TopNavBar.Item>
+    </Flex.Item>
+  </Flex>
+
+  <Flex wrap="wrap">
+    <Flex.Item padding="small">
+      <TopNavBar.Item
+        id="buttonText"
+        variant="button"
+      >
+        Button variant
+      </TopNavBar.Item>
+    </Flex.Item>
+    <Flex.Item padding="small">
+      <TopNavBar.Item
+        id="buttonIcon"
+        variant="button"
+        renderIcon={<IconDiscussionLine />}
+      >
+        Button with icon
+      </TopNavBar.Item>
+    </Flex.Item>
+    <Flex.Item padding="small">
+      <TopNavBar.Item
+        id="buttonAvatar"
+        variant="button"
+        renderAvatar={{ avatarName: 'User Name', avatarSrc: avatarSquare }}
+      >
+        Button with avatar
+      </TopNavBar.Item>
+    </Flex.Item>
+  </Flex>
+
+  <Flex wrap="wrap">
+    <Flex.Item padding="small">
+      <TopNavBar.Item
+        id="iconItem"
+        variant="icon"
+        renderIcon={<IconDiscussionLine />}
+        tooltip="Icon variant"
+      >
+        Icon variant
+      </TopNavBar.Item>
+    </Flex.Item>
+  </Flex>
+
+  <Flex wrap="wrap">
+    <Flex.Item padding="small">
+      <TopNavBar.Item
+        id="avatarItem"
+        variant="avatar"
+        renderAvatar={{ avatarName: 'User Name', avatarSrc: avatarSquare }}
+        tooltip="Avatar variant"
+      >
+        Avatar variant
+      </TopNavBar.Item>
+    </Flex.Item>
+  </Flex>
+</View>
+```
+
+#### Dropdowns
+
+`<TopNavBar.Item>` can display 3 type of dropdowns.
+
+##### Submenu
+
+The most common use case is when we want to open a submenu by clicking on the item. The `renderSubmenu` prop accepts a [Drilldown](#Drilldown) component, and the toggle logic is handled by `TopNavBar.Item`. The submenu can have multiple levels.
+
+##### Custom Popover
+
+If custom content needs to be displayed in the dropdown (e.g. search feature), use the `customPopoverConfig` prop. It accepts a config object of [Popover](#Popover) component props (except `renderTrigger`, since the item itself is the trigger).
+
+**Note**: in "smallViewport" mode items in `TopNavBar.ActionItems` can display custom popovers, but since the items in `TopNavBar.MenuItems` are converted to Drilldown options, custom popovers are not recommended to use in menu items.
+
+##### Tooltip
+
+The `tooltip` prop can display extra information on hover/focus. Tooltips can be useful for `variant="icon"` or `variant="avatar"` type menu items where there is no visible text.
+
+It accepts either a string or a config object containing a subset of props from [Tooltip](#Tooltip).
+
+**Note**: items rendered as Drilldown options don't render tooltips.
+
+```js
+---
+example: true
+---
+
+<div>
+  <View as="div" margin="medium 0">
+    <TopNavBar breakpoint="10rem">
+      {() => (
+        <TopNavBar.Layout
+          navLabel="Example navigation bar"
+          desktopConfig={{
+            hideActionsUserSeparator: false
+          }}
+          smallViewportConfig={{
+            dropdownMenuToggleButtonLabel: 'Toggle Menu',
+            dropdownMenuLabel: 'Main Menu',
+          }}
+          renderMenuItems={(
+            <TopNavBar.MenuItems
+             listLabel="Page navigation"
+              renderHiddenItemsMenuTriggerLabel={(
+                hiddenChildrenCount
+              ) => `${hiddenChildrenCount} More`}
+            >
+              <TopNavBar.Item
+                id="itemSubmenuExample"
+                renderSubmenu={(
+                  <Drilldown rootPageId="root">
+                    <Drilldown.Page id="root">
+                      <Drilldown.Option id="rootOption1" subPageId="secondPage">
+                        Link One
+                      </Drilldown.Option>
+                      <Drilldown.Option id="rootOption2" href="/#TopNavBar">
+                        Link Two
+                      </Drilldown.Option>
+                      <Drilldown.Option id="rootOption3" href="/#TopNavBar">
+                        Link Three
+                      </Drilldown.Option>
+                    </Drilldown.Page>
+                    <Drilldown.Page id="secondPage">
+                      <Drilldown.Option id="secondPageOption1">
+                        Level 2 Option One
+                      </Drilldown.Option>
+                      <Drilldown.Option id="secondPageOption2" href="/#TopNavBar">
+                        Level 2 Option Two
+                      </Drilldown.Option>
+                    </Drilldown.Page>
+                  </Drilldown>
+                )}
+              >
+                Menu Item with submenu
+              </TopNavBar.Item>
+            </TopNavBar.MenuItems>
+          )}
+          renderActionItems={(
+            <TopNavBar.ActionItems
+             listLabel="Actions"
+              renderHiddenItemsMenuTriggerLabel={(
+                hiddenChildrenCount
+              ) => `${hiddenChildrenCount} More`}
+            >
+              <TopNavBar.Item
+                id="itemTooltipExample"
+                variant="icon"
+                tooltip={{
+                  renderTip: "Settings action",
+                  placement: 'bottom end',
+                }}
+                renderIcon={<IconSettingsLine />}
+              >
+                Action Item with tooltip
+              </TopNavBar.Item>
+              <TopNavBar.Item
+                id="itemPopoverExample"
+                variant="icon"
+                showSubmenuChevron={false}
+                tooltip="Open for Content info"
+                renderIcon={<IconQuestionLine />}
+                customPopoverConfig={{
+                  on: 'click',
+                  placement: 'bottom end',
+                  shouldContainFocus: true,
+                  children: (
+                    <View
+                      as="div"
+                      padding="medium"
+                      width="25rem"
+                      role="dialog"
+                      tabIndex={0}
+                      aria-label="Contact information"
+                      position="relative"
+                      borderRadius="small"
+                    >
+                      <Heading level="h3">Contact information</Heading>
+                      <p>{lorem.sentence()}</p>
+                      <Button color="primary" margin="x-small 0 small">Help Center</Button>
+                      <hr aria-hidden="true" />
+                      <View as="div" margin="medium 0 0">
+                        <Text weight="bold">
+                          <div>Contact person</div>
+                          <Link href="/#TopNavBar" isWithinText={false}>
+                            contact.person@example.com
+                          </Link>
+                          <div>(801) 123-4567</div>
+                        </Text>
+                      </View>
+                    </View>
+                  )
+                }}
+              >
+                Action Item with popover
+              </TopNavBar.Item>
+            </TopNavBar.ActionItems>
+          )}
+        />
+      )}
+    </TopNavBar>
+  </View>
+</div>
+```
+
+##### Full width dialog on small viewports
+
+In "smallViewport" mode, due to the lack of space, some features might be rendered in a special dialog that covers the whole navbar (e.g.: search feature).
+
+This feature is settable via the `smallViewportConfig.renderInPlaceDialogConfig` prop of `TopNavBar.Layout`, and accepts a config object. It can also trap focus.
+
+**Note**: please make sure to set an element to return the focus to upon closing the dialog via the `returnFocusElement` prop.
+
+```js
+---
+example: true
+render: false
+---
+
+class InPlaceDialogExample extends React.Component {
+  state = {
+    isSearchOpen: false,
+    searchInputValue: ''
+  }
+
+  toggleSearch(isOpen) {
+    this.setState({ isSearchOpen: isOpen })
+  }
+
+  render() {
+    return (
+      <View as="div" margin="medium 0" maxWidth="29rem">
+        <TopNavBar breakpoint="30rem" mediaQueryMatch="element">
+          {({ currentLayout }) => (
+            <TopNavBar.Layout
+              navLabel="Example navigation bar"
+              desktopConfig={{
+                hideActionsUserSeparator: false
+              }}
+              smallViewportConfig={{
+                dropdownMenuToggleButtonLabel: 'Toggle Menu',
+                dropdownMenuLabel: 'Main Menu',
+                renderInPlaceDialogConfig: {
+                  open: this.state.isSearchOpen,
+                  onClose: () => {
+                    this.toggleSearch(false)
+                  },
+                  closeButtonLabel: 'Close Search and return to Navigation',
+                  returnFocusElement: () =>
+                    document.getElementById('Search'),
+                  shouldCloseOnEscape: true,
+                  shouldCloseOnDocumentClick: false,
+                  shouldContainFocus: false,
+                  content: ({ closeInPlaceDialog }) => (
+                    <View as="div" padding="x-small">
+                      <TextInput
+                        id="searchInput"
+                        width="100%"
+                        display="block"
+                        renderLabel={<ScreenReaderContent>Search</ScreenReaderContent>}
+                        renderBeforeInput={() => <IconSearchLine inline={false} />}
+                        placeholder="Search..."
+                        onChange={(_event, value) => {
+                          this.setState({ searchInputValue: value })
+                        }}
+                        value={this.state.searchInputValue}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            event.preventDefault()
+                            event.stopPropagation()
+
+                            console.log(`Search input submitted value "${this.state.searchInputValue}".`)
+
+                            this.setState({ searchInputValue: '' })
+
+                            if (currentLayout === 'smallViewport' && typeof closeInPlaceDialog === 'function') {
+                              closeInPlaceDialog()
+                            }
+                          }
+                        }}
+                        themeOverride={(_theme, globalTheme) => ({
+                          focusOutlineColor: globalTheme.colors.borderLightest
+                        })}
+                      />
+                    </View>
+                  )
+                }
+              }}
+              renderActionItems={(
+                <TopNavBar.ActionItems
+                 listLabel="Actions"
+                  renderHiddenItemsMenuTriggerLabel={(
+                    hiddenChildrenCount
+                  ) => `${hiddenChildrenCount} More`}
+                >
+                  <TopNavBar.Item
+                    id="Search2"
+                    renderIcon={<IconSearchLine />}
+                    tooltip="Opens search dialog"
+                    onClick={() => {
+                      this.toggleSearch(true)
+                    }}
+                  >
+                    Search
+                  </TopNavBar.Item>
+                </TopNavBar.ActionItems>
+              )}
+            />
+          )}
+        </TopNavBar>
+      </View>
+    )
+  }
+}
+
+render(<InPlaceDialogExample />)
+
 ```

@@ -41,7 +41,7 @@ import type { TopNavBarContextType } from './TopNavBarContext'
 type TopNavBarOwnProps = {
   /**
    * A required children function that returns a `<TopNavBar.Layout>` component.
-   * The function has the current layout ('desktop' or 'smallViewport') as its parameter.
+   * The function has the 2 parameters: the current layout ('desktop' or 'smallViewport') and whether it is currently in "inverseColor" mode.
    */
   children: (props: {
     currentLayout: TopNavBarContextType['layout']

@@ -54,7 +54,7 @@ import { Drilldown } from '@instructure/ui-drilldown'
 import type { DrilldownPageChildren } from '@instructure/ui-drilldown'
 
 import { TopNavBarItem } from '../../TopNavBarItem'
-import type { TopNavBarItemProps } from '../../TopNavBarItem/props'
+import type { ItemChild, TopNavBarItemProps } from '../../TopNavBarItem/props'
 import {
   mapItemsForDrilldown,
   renderMappedItemDrilldownSubpages,
@@ -225,22 +225,34 @@ class TopNavBarSmallViewportLayout extends Component<
   get mappedUserOptions() {
     const { renderUser } = this.props
 
-    return this.hasUserBlock(renderUser)
-      ? mapItemsForDrilldown(renderUser.props.children, {
-          renderOptionContent: this.renderOptionContent
-        })
-      : []
+    if (!this.hasUserBlock(renderUser)) {
+      return []
+    }
+
+    const userChildren = React.Children.toArray(
+      renderUser.props.children
+    ) as ItemChild[]
+
+    return mapItemsForDrilldown(userChildren, {
+      renderOptionContent: this.renderOptionContent
+    })
   }
 
   get mappedMenuItemsOptions() {
     const { renderMenuItems } = this.props
 
-    return this.hasMenuItemsBlock(renderMenuItems)
-      ? mapItemsForDrilldown(renderMenuItems.props.children, {
-          renderOptionContent: this.renderOptionContent,
-          currentPageId: renderMenuItems.props.currentPageId
-        })
-      : []
+    if (!this.hasMenuItemsBlock(renderMenuItems)) {
+      return []
+    }
+
+    const menuItemsChildren = React.Children.toArray(
+      renderMenuItems.props.children
+    ) as ItemChild[]
+
+    return mapItemsForDrilldown(menuItemsChildren, {
+      renderOptionContent: this.renderOptionContent,
+      currentPageId: renderMenuItems.props.currentPageId
+    })
   }
 
   get extractDrilldownSubpages() {
@@ -428,6 +440,7 @@ class TopNavBarSmallViewportLayout extends Component<
         id={this._drilldownId}
         rootPageId={this._menuId}
         label={dropdownMenuLabel}
+        height="100%"
         width="100%"
         onSelect={(e, args) => {
           if (typeof onDropdownMenuSelect === 'function') {
@@ -478,6 +491,7 @@ class TopNavBarSmallViewportLayout extends Component<
         }}
         shouldCloseOnDocumentClick
         placement="top"
+        shadow={false}
         mountNode={
           trayMountNode || document.getElementById(this._trayContainerId)
         }

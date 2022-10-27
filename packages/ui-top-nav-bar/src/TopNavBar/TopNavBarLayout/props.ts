@@ -110,7 +110,7 @@ type TopNavBarLayoutOwnProps = CommonTopNavBarLayoutProps & {
   desktopConfig?: DesktopLayoutOwnProps
 
   /**
-   * Config object for the "small viewport" mode. It is required, if there is no custom `renderSmallViewportLayout` is set on `<TopNavBar>`.
+   * Config object for the "small viewport" mode:
    */
   smallViewportConfig: SmallViewportLayoutOwnProps
 }

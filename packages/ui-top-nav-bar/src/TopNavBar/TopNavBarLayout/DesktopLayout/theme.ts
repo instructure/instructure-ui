@@ -45,11 +45,11 @@ const generateComponentTheme = (theme: Theme): TopNavBarLayoutDesktopTheme => {
     desktopHeight: '4rem',
     desktopZIndex: stacking?.topmost + 1,
 
-    desktopHorizontalPadding: `0 ${spacing.small}`,
-    desktopBrandContainerMargin: `0 ${spacing.medium} 0 0`,
-    desktopMenuItemsContainerMargin: `0 ${spacing.large} 0 0`,
-    desktopActionItemsContainerMargin: `0 0 0 ${spacing.xSmall}`,
-    desktopUserContainerMargin: `0 0 0 ${spacing.xSmall}`,
+    desktopInlinePadding: spacing.small,
+    desktopBrandContainerInlineMargin: `0 ${spacing.medium}`,
+    desktopMenuItemsContainerInlineMargin: `0 ${spacing.large}`,
+    desktopActionItemsContainerInlineMargin: `${spacing.xSmall} 0`,
+    desktopUserContainerInlineMargin: `${spacing.xSmall} 0`,
 
     desktopUserSeparatorGap: spacing?.xSmall,
     desktopUserSeparatorHeight: '1.5rem',

@@ -142,7 +142,9 @@ class TopNavBarActionItems extends Component<
   }
 
   get childrenArray() {
-    return React.Children.map(this.props.children || [], (child) => {
+    const children = React.Children.toArray(this.props.children) as ItemChild[]
+
+    return children.map((child) => {
       if (!child?.props) {
         return null
       }

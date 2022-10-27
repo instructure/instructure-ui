@@ -55,6 +55,8 @@ type TopNavBarItemTooltipType =
       renderTip: TooltipProps['renderTip']
       color?: TooltipProps['color']
       placement?: TooltipProps['placement']
+      offsetX?: TooltipProps['offsetX']
+      offsetY?: TooltipProps['offsetY']
       onShowContent?: TooltipProps['onShowContent']
       onHideContent?: TooltipProps['onHideContent']
     }
@@ -65,6 +67,8 @@ const topNavBarItemTooltipPropType = PropTypes.oneOfType([
     renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     color: PropTypes.oneOf(['primary', 'primary-inverse']),
     placement: PropTypes.string,
+    offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onShowContent: PropTypes.func,
     onHideContent: PropTypes.func
   })
@@ -142,8 +146,7 @@ type TopNavBarItemOwnProps = {
    * Tooltips can be useful for `variant="icon"` or `variant="avatar"` type
    * menu items where there is no visible text.
    *
-   * Accepts a string or a config object containing the "renderTip", "color",
-   * "placement", "onShowContent" and "onHideContent" props from [Tooltip](#Tooltip).
+   * Accepts a string or a config object containing a subset of props from [Tooltip](#Tooltip).
    */
   tooltip?: TopNavBarItemTooltipType
 
@@ -250,7 +253,7 @@ type TopNavBarItemStyle = ComponentStyle<
   | 'submenuIcon'
 > & {
   focusOutlineOffset: string | 0
-  itemHorizontalPadding: string | 0
+  itemInlinePadding: string | 0
 }
 
 type TopNavBarItemState = {

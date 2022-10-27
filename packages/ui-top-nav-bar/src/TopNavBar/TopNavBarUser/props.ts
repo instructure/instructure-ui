@@ -30,7 +30,8 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   OtherHTMLAttributes,
-  PropValidators
+  PropValidators,
+  ChildrenOfType
 } from '@instructure/shared-types'
 
 import { TopNavBarItem } from '../TopNavBarItem'
@@ -48,7 +49,7 @@ type TopNavBarUserOwnProps = {
    *
    * In "smallViewport" mode it will always display as text (with or without avatar).
    */
-  children: ItemChild | ItemChild[]
+  children: ChildrenOfType<ItemChild>
 
   /**
    * A function that returns a reference to root HTML element

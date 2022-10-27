@@ -54,8 +54,7 @@ type SmallViewportLayoutChild = React.ComponentElement<
 
 type SmallViewportLayoutOwnProps = {
   /**
-   * A __required__ label for the hamburger menu icon,
-   * used as an accessible screen reader label.
+   * A __required__ label for the hamburger menu icon, used as an accessible screen reader label.
    */
   dropdownMenuToggleButtonLabel: string
 
@@ -79,7 +78,8 @@ type SmallViewportLayoutOwnProps = {
   /**
    * Renders a custom `<Dialog>` that renders in place of the navbar.
    * Useful for features like full width search bars, etc.
-   * Will contain and return focus.
+   *
+   * Use `returnFocusElement` prop for returning focus after close.
    */
   renderInPlaceDialogConfig?: {
     open: boolean
@@ -98,8 +98,7 @@ type SmallViewportLayoutOwnProps = {
   }
 
   /**
-   * An element or a function returning an element to use as the mount node
-   * for the dropdown menu's `<Tray>` container.
+   * An element or a function returning an element to use as the mount node for the dropdown menu's `<Tray>` container.
    *
    * Use this prop when the default Tray placement doesn't work for your layout (e.g.: when the TopNavBar is not the main navbar of the window).
    */

@@ -72,7 +72,8 @@ const generateStyle = (
       : componentTheme.smallViewportBottomBorder,
     height: componentTheme.smallViewportHeight,
     maxWidth: '100%',
-    padding: componentTheme.smallViewportPadding,
+    paddingBlock: 0,
+    paddingInline: componentTheme.smallViewportInlinePadding,
     position: 'relative',
     zIndex: componentTheme.smallViewportZIndex,
     display: 'flex',
@@ -117,7 +118,8 @@ const generateStyle = (
     },
     alternativeTitleContainer: {
       label: 'topNavBarSmallViewportLayout__alternativeTitleContainer',
-      margin: componentTheme.smallViewportAlternativeTitleMargin
+      marginBlock: componentTheme.smallViewportAlternativeTitleBlockMargin,
+      marginInline: componentTheme.smallViewportAlternativeTitleInlineMargin
     },
     dropdownMenuOption: {
       label: 'topNavBarSmallViewportLayout__dropdownMenuOption',
@@ -156,13 +158,23 @@ const generateStyle = (
       })
     },
     globalStyles: {
-      // removes the focus ring on the drilldown,
-      // not needed on the mobile menu
-      [`#${drilldownId}::before`]: {
-        display: 'none'
-      },
+      // the tray should all have 100% height
       [`#${trayId}`]: {
         height: '100%'
+      },
+      // removes the focus ring on the drilldown,
+      // not needed on the mobile menu
+      [`#${drilldownId}`]: {
+        height: '100%',
+
+        '&::before': {
+          // display: 'none'
+          top: '4px',
+          left: '4px',
+          right: '4px',
+          bottom: '4px',
+          zIndex: 1
+        }
       }
     },
     navbarHeight: componentTheme.smallViewportHeight
