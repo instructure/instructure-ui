@@ -31,6 +31,7 @@ import type {
   ColorMixerPaletteTheme
 } from '@instructure/shared-types'
 import type { HSVType } from '@instructure/ui-color-utils'
+import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 
 type ColorPaletteOwnProps = {
   disabled?: boolean
@@ -54,7 +55,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type ColorPaletteProps = ColorPaletteOwnProps &
   WithStyleProps<ColorMixerPaletteTheme, ColorPaletteStyle> &
-  OtherHTMLAttributes<ColorPaletteOwnProps>
+  OtherHTMLAttributes<ColorPaletteOwnProps> &
+  WithDeterministicIdProps
 
 type ColorPaletteStyle = ComponentStyle<
   'ColorPalette' | 'indicator' | 'palette' | 'disabledOverlay' | 'paletteOffset'

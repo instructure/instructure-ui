@@ -31,7 +31,7 @@ const customMethos = {
     return find('[id^=TextInput_]', ...args)
   },
   findColorPalette: (...args: any[]) => {
-    return find('[aria-label*="color palette"]', ...args)
+    return find('[id^=ColorMixer__Palette]', ...args)
   },
   findColorSlider: (...args: any[]) => {
     return find('[aria-label*="color slider"]', ...args)
