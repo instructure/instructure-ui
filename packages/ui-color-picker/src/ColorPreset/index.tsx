@@ -38,6 +38,7 @@ import { Text } from '@instructure/ui-text'
 import { Drilldown } from '@instructure/ui-drilldown'
 import type { DrilldownProps } from '@instructure/ui-drilldown'
 import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { ColorIndicator } from '../ColorIndicator'
 import { ColorMixer } from '../ColorMixer'
@@ -260,10 +261,9 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
           ? { onClick: () => this.props.onSelect(color) }
           : {})}
         {...(this.isSelectedColor(color) ? { 'aria-label': 'selected' } : {})}
-        role="presentation"
       >
         <div>
-          <ColorIndicator color={color} shape="rectangle" />
+          <ColorIndicator color={color} shape="rectangle" role="presentation" />
           {this.isSelectedColor(color) && (
             <div css={this.props?.styles?.selectedIndicator}>
               <IconCheckDarkSolid
@@ -272,6 +272,7 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
               />
             </div>
           )}
+          <ScreenReaderContent>{`Color: ${color}`}</ScreenReaderContent>
         </div>
       </View>
     </Tooltip>
