@@ -31,6 +31,9 @@ import type { HSVType } from '@instructure/ui-color-utils'
 
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
+import { px } from '@instructure/ui-utils'
+import { withDeterministicId } from '@instructure/ui-react-utils'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import shallowCompare from '../utils/shallowCompare'
 
@@ -39,7 +42,6 @@ import type { ColorPaletteProps, ColorPaletteState } from './props'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { px } from '@instructure/ui-utils'
 
 /**
 ---
@@ -47,6 +49,7 @@ private: true
 ---
 @tsProps
 **/
+@withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
   static propTypes = propTypes
@@ -58,8 +61,9 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
     this.state = {
       colorPosition: { x: 0, y: 0 }
     }
+    this._id = props.deterministicId!('ColorMixer__Palette')
   }
-
+  private readonly _id: string
   ref: Element | null = null
   private _paletteRef: HTMLDivElement | null = null
   private _mouseMoveListener?: { remove(): void }
@@ -234,8 +238,11 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
         tabIndex={this.props.disabled ? undefined : 0}
         onKeyDown={(e) => this.handleKeyDown(e)}
         onMouseDown={(e) => this.handlePaletteMouseDown(e)}
-        aria-label={this.props.navigationExplanationScreenReaderLabel}
+        id={this._id}
       >
+        <ScreenReaderContent>
+          {this.props.navigationExplanationScreenReaderLabel}
+        </ScreenReaderContent>
         <div css={this.props.styles?.indicator} />
         {this.props.disabled && (
           <div css={this.props.styles?.disabledOverlay} />

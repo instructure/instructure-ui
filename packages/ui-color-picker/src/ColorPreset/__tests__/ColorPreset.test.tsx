@@ -24,18 +24,12 @@
 
 import React from 'react'
 
-import {
-  expect,
-  // generateA11yTests,
-  mount,
-  stub
-} from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { colorToRGB } from '@instructure/ui-color-utils'
 import type { QueriesHelpersEventsType } from '@instructure/ui-test-queries'
 
 import { ColorPreset } from '../'
 import { ColorPresetLocator } from '../ColorPresetLocator'
-// import ColorPresetExamples from '../__examples__/ColorPreset.examples'
 import type { ColorPresetProps } from '../props'
 
 const testValue = {
@@ -359,14 +353,5 @@ describe('<ColorPreset />', () => {
     })
   })
 
-  // TODO: this block throws a ton of errors, we should investigate
-  // describe('should be accessible', () => {
-  //   generateA11yTests(ColorPreset, ColorPresetExamples)
-  //   it('a11y', async () => {
-  //     await mount(<ColorPreset {...testValue} />)
-  //     const subject = await ColorPresetLocator.find()
-  //
-  //     expect(await subject.accessible()).to.be.true()
-  //   })
-  // })
+  // The accessibility tests are ignored because the tooltips of the ColorIndicator, which are defined in the "aria-labelledby" attribute, are located out of the scope of the ColorPreset.
 })

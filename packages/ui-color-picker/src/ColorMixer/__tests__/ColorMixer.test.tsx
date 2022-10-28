@@ -25,7 +25,7 @@
 import React from 'react'
 import {
   expect,
-  // generateA11yTests,
+  generateA11yTests,
   mount,
   stub
 } from '@instructure/ui-test-utils'
@@ -34,7 +34,7 @@ import { ColorMixer } from '../'
 import { ColorMixerLocator } from '../ColorMixerLocator'
 import { colorToHex8, colorToRGB } from '@instructure/ui-color-utils'
 import { px } from '@instructure/ui-utils'
-// import ColorMixerExamples from '../__examples__/ColorMixer.examples'
+import ColorMixerExamples from '../__examples__/ColorMixer.examples'
 
 const testValue = {
   value: '#09918B'
@@ -133,30 +133,33 @@ describe('<ColorMixer />', () => {
           />
         )
         const component = await ColorMixerLocator.find()
-        const labelElement = await component.findWithLabel(text)
+
+        const labelElement =
+          text ===
+          testScreenReaderLabels.colorPaletteNavigationExplanationScreenReaderLabel
+            ? await component.findWithText(text)
+            : await component.findWithLabel(text)
 
         expect(labelElement.getDOMNode()).to.be.visible()
       })
     })
   })
+  describe('should be accessible', () => {
+    generateA11yTests(ColorMixer, ColorMixerExamples)
+    it('a11y', async () => {
+      await mount(
+        <ColorMixer
+          {...testValue}
+          {...testInputLabels}
+          {...testScreenReaderLabels}
+          onChange={stub()}
+        />
+      )
+      const subject = await ColorMixerLocator.find()
 
-  // TODO: this block throws a few errors, we should investigate
-  // describe.only('should be accessible', () => {
-  //   generateA11yTests(ColorMixer, ColorMixerExamples)
-  //   it('a11y', async () => {
-  //     await mount(
-  //       <ColorMixer
-  //         {...testValue}
-  //         {...testInputLabels}
-  //         {...testScreenReaderLabels}
-  //         onChange={stub()}
-  //       />
-  //     )
-  //     const subject = await ColorMixerLocator.find()
-  //
-  //     expect(await subject.accessible()).to.be.true()
-  //   })
-  // })
+      expect(await subject.accessible()).to.be.true()
+    })
+  })
 
   describe('edge cases for color value', () => {
     Object.entries(edgeColorValues).forEach(([label, color]) => {
@@ -935,7 +938,7 @@ describe('<ColorMixer />', () => {
           )
 
           const component = await ColorMixerLocator.find()
-          const palette = await component.find('[aria-label*="color palette"]')
+          const palette = await component.findColorPalette()
           await palette.keyDown(keyEvent)
           // use `calledTwice` because it is called first time when passing  `testValue` color
           expect(onChange).to.have.been.calledTwice()

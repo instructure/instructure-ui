@@ -216,11 +216,10 @@ class Slider extends Component<SliderProps> {
         onMouseDown={(e) => this.handleMouseDown(e)}
         tabIndex={this.props.disabled ? undefined : 0}
         aria-label={this.props.navigationExplanationScreenReaderLabel}
-        // TODO: check RangeInput and ProgressBar to see how the slider role can be handled well
-        // role="slider"
-        // aria-valuemin={this.props.minValue}
-        // aria-valuemax={this.props.maxValue}
-        // aria-valuenow={this.roundedValue}
+        role="slider"
+        aria-valuemin={this.props.minValue}
+        aria-valuemax={this.props.maxValue}
+        aria-valuenow={this.roundedValue}
       >
         <div css={this.props.styles?.indicator} />
         {this.props.disabled && (
