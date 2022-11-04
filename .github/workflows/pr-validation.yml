@@ -24,6 +24,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build docs-app
         run: yarn build:docs
+      - name: Archive docs-build
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs-build
+          path: packages/__docs__/__build__
+      - name: Archive tooltip package
+        uses: actions/upload-artifact@v3
+        with:
+          name: tooltip-package
+          path: packages/ui-tooltip
       - name: Deploy preview docs
         # only run this step if the PR is not from a fork since repository
         # secrets are not passed to forks and we need the repo secrets for the below steps
