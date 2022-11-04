@@ -44,7 +44,8 @@ const generateStyle = (componentTheme: TooltipTheme): TooltipStyle => {
       boxSizing: 'border-box',
       display: 'block',
       fontSize: componentTheme.fontSize,
-      padding: componentTheme.padding
+      // padding: componentTheme.padding
+      padding: '3rem'
     }
   }
 }
