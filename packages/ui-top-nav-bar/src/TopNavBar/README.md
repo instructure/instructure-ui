@@ -1059,7 +1059,7 @@ render(<PlaygroundExample />)
 
 ### Responsive layout
 
-TopNavBar is a responsive component, and it has 4 "sections" or "blocks".
+TopNavBar is a responsive component, and it has four "sections" or "blocks".
 
 - `<TopNavBar.Brand>` contains the brand logo and icon
 - `<TopNavBar.MenuItems>` contains the main menu items, subpage links
