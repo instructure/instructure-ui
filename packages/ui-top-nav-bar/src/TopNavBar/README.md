@@ -2,7 +2,7 @@
 describes: TopNavBar
 ---
 
-A `TopNavBar` component [WIP]
+A `TopNavBar` component [WIP] - test
 
 ```js
 ---
