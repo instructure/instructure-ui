@@ -36,6 +36,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-plugin-istanbul": "^6.0.0",
+    "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-macros": "^3",
     "babel-plugin-transform-ensure-ignore": "^0.1.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
