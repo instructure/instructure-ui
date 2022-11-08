@@ -60,8 +60,8 @@ const calculateSizes = async () => {
 
   const prHeadStats = await gzip(outFile2)
 
-  // We want to calculate the bundle size agains the base commit of the PR.
-  // this will be the base agains we will calculate the bundle size changes.
+  // We want to calculate the bundle size against the base commit of the PR.
+  // this will be the base against we will calculate the bundle size changes.
   // eslint-disable-next-line no-console
   console.log('switching to master branch...')
   await git(`checkout -d ${baseCommitSha}`)
@@ -89,6 +89,13 @@ const calculateSizes = async () => {
   }) | **${formatSize(prHeadStats.size)}**
   **${calculateSizeDiff({ base: baseStats.size, head: prHeadStats.size })}**
   `)
+
+  // We have to switch back to the feature branch and run yarn install
+  // so that the rest of the workflow actions are not executed on master
+  // eslint-disable-next-line no-console
+  console.log('switching back to feature branch...')
+  await git(`checkout ${danger.github.pr.head.ref}`)
+  execSync('yarn install')
 }
 
 const formatSize = (sizeInBytes: number) => {

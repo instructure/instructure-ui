@@ -14,14 +14,27 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Pre bootstrap archive tooltip package
+        uses: actions/upload-artifact@v3
+        with:
+          name: tooltip-package-pre-bootstrap
+          path: packages/ui-tooltip
       - name: Bootstrap project
         run: yarn bootstrap
-      - name: Run test for the patchset
-        run: USE_REACT_STRICT_MODE=1 yarn test:patchset
+      - name: After bootstrap archive tooltip package
+        uses: actions/upload-artifact@v3
+        with:
+          name: tooltip-package-after-bootstrap
+          path: packages/ui-tooltip
       - name: Calculate bundle size
         run: yarn danger ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Before docs build archive tooltip package
+        uses: actions/upload-artifact@v3
+        with:
+          name: tooltip-package-before-docs-build
+          path: packages/ui-tooltip
       - name: Build docs-app
         run: yarn build:docs
       - name: Archive docs-build
@@ -32,25 +45,5 @@ jobs:
       - name: Archive tooltip package
         uses: actions/upload-artifact@v3
         with:
-          name: tooltip-package
+          name: tooltip-package-before-preview-deploy
           path: packages/ui-tooltip
-      - name: Deploy preview docs
-        # only run this step if the PR is not from a fork since repository
-        # secrets are not passed to forks and we need the repo secrets for the below steps
-        if: github.event.pull_request.head.repo.full_name == github.repository
-        id: deploy_to_netlify
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        # set <preview_url> variable to be available for the following steps
-        run: echo "::set-output name=preview_url::$(npx netlify deploy --dir ./packages/__docs__/__build__ --alias ${{ github.event.pull_request.number }} | grep "Website Draft URL" | awk '{print $4}')"
-      - name: Add Comment to PR with the preview URL
-        # only run this step if the previous step has not failed
-        # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#steps-context
-        if: ${{ steps.deploy_to_netlify.outcome == 'success' }}
-        uses: mshick/add-pr-comment@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          repo-token-user-login: 'github-actions[bot]'
-          message: |
-            Preview URL: ${{ steps.deploy_to_netlify.outputs.preview_url }}
