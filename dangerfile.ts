@@ -94,7 +94,7 @@ const calculateSizes = async () => {
   // so that the rest of the workflow actions are not executed on master
   // eslint-disable-next-line no-console
   console.log('switching back to feature branch...')
-  await git(`checkout ${danger.github.pr.head.ref}`)
+  await git(`checkout -d ${headCommitSha}`)
   execSync('yarn install')
 }
 
