@@ -176,7 +176,8 @@ function getWebEnvConfig(opts) {
       browsers: require('@instructure/browserslist-config-instui')
     },
     useBuiltIns: 'entry',
-    corejs: 3,
+    // this version has to match the version in package.json
+    corejs: '3.26.1',
     modules: opts.esModules ? false : 'commonjs',
     // debug: true, // un-comment if you want to see what browsers are being targeted and what plugins that means it will activate
     exclude: ['transform-typeof-symbol'],

@@ -24,7 +24,7 @@
 
 /** @jsx jsx */
 import { Component } from 'react'
-import { merge, cloneDeep, isEqual } from 'lodash'
+import { deepEqual as isEqual } from '@instructure/ui-utils'
 
 import { EditorSelection, EditorState, StateEffect } from '@codemirror/state'
 import type { Transaction, TransactionSpec } from '@codemirror/state'
@@ -468,11 +468,9 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
     const { rtlMoveVisually } = this.props
 
     if (this.direction === 'rtl' && !rtlMoveVisually) {
+      //TODO: fix this broken logic
       // we need to clone the original so that it doesn't get overridden
-      return merge(
-        cloneDeep(defaultKeymap),
-        rtlHorizontalArrowKeymap
-      ) as KeyBinding[]
+      return [...defaultKeymap, ...rtlHorizontalArrowKeymap]
     }
 
     return defaultKeymap

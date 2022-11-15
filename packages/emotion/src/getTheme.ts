@@ -21,10 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { merge, cloneDeep } from 'lodash'
 import { canvas } from '@instructure/ui-themes'
 import { ThemeRegistry } from '@instructure/theme-registry'
-import { isBaseTheme } from '@instructure/ui-utils'
+import { isBaseTheme, mergeDeep } from '@instructure/ui-utils'
 
 import type { BaseTheme } from '@instructure/shared-types'
 
@@ -81,11 +80,9 @@ const getTheme =
           'No theme provided for [InstUISettingsProvider], using default `canvas` theme.'
         )
       }
-      //TODO: replace cloneDeeps with native `structuredClone` API
-      //once we hit last 2 version browser support
-      currentTheme = cloneDeep(globalTheme || canvas)
+      currentTheme = globalTheme || canvas
     } else {
-      currentTheme = cloneDeep(ancestorTheme)
+      currentTheme = ancestorTheme
     }
 
     const themeName = currentTheme.key
@@ -98,13 +95,7 @@ const getTheme =
       (themeOrOverride as Overrides).themeOverrides ||
       {}
 
-    const finalTheme = merge(
-      {},
-      currentTheme,
-      merge({}, themeOrOverride, currentThemeOverrides)
-    )
-
-    return finalTheme
+    return mergeDeep(currentTheme, themeOrOverride, currentThemeOverrides)
   }
 
 export default getTheme
