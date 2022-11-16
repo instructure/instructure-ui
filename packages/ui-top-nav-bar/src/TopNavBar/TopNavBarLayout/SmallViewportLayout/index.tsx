@@ -475,6 +475,7 @@ class TopNavBarSmallViewportLayout extends Component<
         label={''}
         role="none"
         open={this.state.isDropdownMenuOpen}
+        transitionExit={false}
         onDismiss={() => {
           this.toggleDropdownMenu()
         }}
