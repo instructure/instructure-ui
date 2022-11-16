@@ -137,6 +137,19 @@ type TrayOwnProps = {
    */
   onExited?: (type?: TransitionType) => void
   /**
+   * Run the enter animation when the component mounts, if it is initially
+   * shown
+   */
+  transitionOnMount?: boolean
+  /**
+   * Run the enter animation
+   */
+  transitionEnter?: boolean
+  /**
+   * Run the exit animation
+   */
+  transitionExit?: boolean
+  /**
    * Should the `<Tray />` have a border
    */
   border?: boolean
@@ -186,6 +199,9 @@ const propTypes: PropValidators<PropKeys> = {
   onExit: PropTypes.func,
   onExiting: PropTypes.func,
   onExited: PropTypes.func,
+  transitionOnMount: PropTypes.bool,
+  transitionEnter: PropTypes.bool,
+  transitionExit: PropTypes.bool,
   border: PropTypes.bool,
   shadow: PropTypes.bool
 }
@@ -214,6 +230,9 @@ const allowedProps: AllowedPropKeys = [
   'onExit',
   'onExiting',
   'onExited',
+  'transitionOnMount',
+  'transitionEnter',
+  'transitionExit',
   'border',
   'shadow'
 ]

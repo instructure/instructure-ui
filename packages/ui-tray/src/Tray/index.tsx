@@ -65,6 +65,9 @@ class Tray extends Component<TrayProps> {
     shouldReturnFocus: true,
     size: 'small',
     placement: 'start',
+    transitionOnMount: true,
+    transitionEnter: true,
+    transitionExit: true,
     shadow: true,
     border: false
   }
@@ -152,6 +155,9 @@ class Tray extends Component<TrayProps> {
       onExiting,
       onExited,
       onTransition,
+      transitionOnMount,
+      transitionEnter,
+      transitionExit,
       border,
       shadow,
       role,
@@ -186,9 +192,9 @@ class Tray extends Component<TrayProps> {
               onExited,
               onClose
             )}
-            transitionOnMount
-            transitionEnter
-            transitionExit
+            transitionOnMount={transitionOnMount}
+            transitionEnter={transitionEnter}
+            transitionExit={transitionExit}
           >
             <span
               {...omitProps(props, Tray.allowedProps)}
