@@ -3,57 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.31.0](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.31.0) (2022-11-21)
+
+**Note:** Version bump only for package @instructure/ui-responsive
+
 # [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
 
 **Note:** Version bump only for package @instructure/ui-responsive
 
-
-
-
-
 # [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
-
 
 ### Bug Fixes
 
-* support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
-
-
-
-
+- support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
 
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
-
 ### Bug Fixes
 
-* support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
-
-
-
-
+- support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
 
 ## [8.28.1](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.1) (2022-09-12)
 
-
 ### Bug Fixes
 
-* support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
-
-
-
-
+- support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
 
 # [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
 
-
 ### Features
 
-* **ui-responsive:** add `elementRef` prop to Responsive ([be7a338](https://github.com/instructure/instructure-ui/commit/be7a338d330e07f4120565fb61c92dd85518528c))
-
-
-
-
+- **ui-responsive:** add `elementRef` prop to Responsive ([be7a338](https://github.com/instructure/instructure-ui/commit/be7a338d330e07f4120565fb61c92dd85518528c))
 
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 

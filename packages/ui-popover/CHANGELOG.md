@@ -3,53 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
+# [8.31.0](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.31.0) (2022-11-21)
 
 **Note:** Version bump only for package @instructure/ui-popover
 
+# [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
 
-
-
+**Note:** Version bump only for package @instructure/ui-popover
 
 # [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
 
 **Note:** Version bump only for package @instructure/ui-popover
 
-
-
-
-
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
 **Note:** Version bump only for package @instructure/ui-popover
-
-
-
-
 
 ## [8.28.1](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.1) (2022-09-12)
 
 **Note:** Version bump only for package @instructure/ui-popover
 
-
-
-
-
 # [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
-
 
 ### Bug Fixes
 
-* fix propType for liveRegion ([e9ae7d3](https://github.com/instructure/instructure-ui/commit/e9ae7d396e4c5de5eb1df56666630b92f73a670e))
-
+- fix propType for liveRegion ([e9ae7d3](https://github.com/instructure/instructure-ui/commit/e9ae7d396e4c5de5eb1df56666630b92f73a670e))
 
 ### Features
 
-* **ui-popover:** add `positionContainerDisplay` prop to Popover ([fdcacec](https://github.com/instructure/instructure-ui/commit/fdcacecd6d1a0f52580f9ccd051dfa8e5270baf0))
-
-
-
-
+- **ui-popover:** add `positionContainerDisplay` prop to Popover ([fdcacec](https://github.com/instructure/instructure-ui/commit/fdcacecd6d1a0f52580f9ccd051dfa8e5270baf0))
 
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 

@@ -3,48 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.31.0](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.31.0) (2022-11-21)
+
+**Note:** Version bump only for package docs-app
+
 # [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
 
 **Note:** Version bump only for package docs-app
 
-
-
-
-
 # [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
 
-
 **Note:** Version bump only for package docs-app
-
 
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
 **Note:** Version bump only for package docs-app
 
-
-
 ## [8.28.1](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.1) (2022-09-12)
-
 
 ### Bug Fixes
 
-* fix doc preview errors ([8b2d44c](https://github.com/instructure/instructure-ui/commit/8b2d44cbd022fae977790fbb4a6816377136905a))
-* support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
-
-
-
-
+- fix doc preview errors ([8b2d44c](https://github.com/instructure/instructure-ui/commit/8b2d44cbd022fae977790fbb4a6816377136905a))
+- support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
 
 # [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
 
-
 ### Features
 
-* **ui-truncate-list,ui:** add `TruncateList` utility component ([f8b17ea](https://github.com/instructure/instructure-ui/commit/f8b17ea8b60234f746fcd7576f1532f38d5bbe5f))
-
-
-
-
+- **ui-truncate-list,ui:** add `TruncateList` utility component ([f8b17ea](https://github.com/instructure/instructure-ui/commit/f8b17ea8b60234f746fcd7576f1532f38d5bbe5f))
 
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 

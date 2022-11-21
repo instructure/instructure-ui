@@ -3,52 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.31.0](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.31.0) (2022-11-21)
+
+**Note:** Version bump only for package @instructure/ui-icons
+
 # [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
 
 **Note:** Version bump only for package @instructure/ui-icons
 
-
-
-
-
 # [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
-
 
 ### Features
 
-* **ui-icons:** add `award` icon ([4c7c37c](https://github.com/instructure/instructure-ui/commit/4c7c37ce1c75f28eb35faf621892647d245b8916))
-* **ui-icons:** add `predictive` icon ([e9b210b](https://github.com/instructure/instructure-ui/commit/e9b210bb8f6101a257d5c8b019ce474157e6b058))
-
-
-
-
+- **ui-icons:** add `award` icon ([4c7c37c](https://github.com/instructure/instructure-ui/commit/4c7c37ce1c75f28eb35faf621892647d245b8916))
+- **ui-icons:** add `predictive` icon ([e9b210b](https://github.com/instructure/instructure-ui/commit/e9b210bb8f6101a257d5c8b019ce474157e6b058))
 
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
 **Note:** Version bump only for package @instructure/ui-icons
 
-
-
-
-
 ## [8.28.1](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.1) (2022-09-12)
 
 **Note:** Version bump only for package @instructure/ui-icons
 
-
-
-
-
 # [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
-
 
 ### Features
 
-* **ui-icons:** add `header` icon ([46932bc](https://github.com/instructure/instructure-ui/commit/46932bcb4fbc3fc98566ae886b44c1005ebeb924))
-
-
-
-
+- **ui-icons:** add `header` icon ([46932bc](https://github.com/instructure/instructure-ui/commit/46932bcb4fbc3fc98566ae886b44c1005ebeb924))
 
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 
