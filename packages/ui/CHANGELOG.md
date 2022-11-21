@@ -3,51 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.31.0](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.31.0) (2022-11-21)
+
+### Features
+
+- **shared-types,ui,ui-top-nav-bar:** add new `TopNavBar` component ([3f27257](https://github.com/instructure/instructure-ui/commit/3f272572276fb62d7b06005dd46206604c890db2))
+
 # [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
 
 **Note:** Version bump only for package @instructure/ui
 
-
-
-
-
 # [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
-
 
 **Note:** Version bump only for package @instructure/ui
 
-
-
-
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
-
 
 ### Bug Fixes
 
-* **ui:** wrong peer dependency for `react` ([80580a7](https://github.com/instructure/instructure-ui/commit/80580a709d846f612a73dc757a5932cd975d49f8))
-
-
-
-
+- **ui:** wrong peer dependency for `react` ([80580a7](https://github.com/instructure/instructure-ui/commit/80580a709d846f612a73dc757a5932cd975d49f8))
 
 ## [8.28.1](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.1) (2022-09-12)
 
 **Note:** Version bump only for package @instructure/ui
 
-
-
-
-
 # [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
-
 
 ### Features
 
-* **ui-truncate-list,ui:** add `TruncateList` utility component ([f8b17ea](https://github.com/instructure/instructure-ui/commit/f8b17ea8b60234f746fcd7576f1532f38d5bbe5f))
-
-
-
-
+- **ui-truncate-list,ui:** add `TruncateList` utility component ([f8b17ea](https://github.com/instructure/instructure-ui/commit/f8b17ea8b60234f746fcd7576f1532f38d5bbe5f))
 
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 

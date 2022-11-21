@@ -3,100 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
-
+# [8.31.0](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.31.0) (2022-11-21)
 
 ### Bug Fixes
 
-* **ui-code-editor:** Fix `global` is undefined build error that could come up using certain bundlers(vite, esbuild) by integrating `react-codemirror2` dependency into the `CodeEditor` component. ([1fee246](https://github.com/instructure/instructure-ui/commit/1fee246068aff15d9bdbae882e48431bd73df6a3))
-
+- **ui-tray:** pass `role` attribute to Dialog instead of the `\<span\>` ([5610130](https://github.com/instructure/instructure-ui/commit/56101302f6138e4474bbd14ddba43bddab648759))
+- **ui-truncate-list:** take the container padding into accout in the maxWidth calculation ([013ab3b](https://github.com/instructure/instructure-ui/commit/013ab3beda58cd097ccf810394df41ca150c9588))
 
 ### Features
 
-* **ui-img:** add 'loading' prop to Img component ([0b69af2](https://github.com/instructure/instructure-ui/commit/0b69af2c34cd0ff85a6dbfccfe85abf21ec033c6))
+- **shared-types,ui,ui-top-nav-bar:** add new `TopNavBar` component ([3f27257](https://github.com/instructure/instructure-ui/commit/3f272572276fb62d7b06005dd46206604c890db2))
+- **ui-dom-utils:** add `pseudoElt` parameter to `getComputedStyle` util ([b73434c](https://github.com/instructure/instructure-ui/commit/b73434c9d3fc90e243a178577b6ea865638f8fa3))
+- **ui-tray:** pass extra Transition props on Tray ([afcaf92](https://github.com/instructure/instructure-ui/commit/afcaf922b83cb66b5a2ad635c6b5a3f5612cabad))
 
+# [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
 
+### Bug Fixes
 
+- **ui-code-editor:** Fix `global` is undefined build error that could come up using certain bundlers(vite, esbuild) by integrating `react-codemirror2` dependency into the `CodeEditor` component. ([1fee246](https://github.com/instructure/instructure-ui/commit/1fee246068aff15d9bdbae882e48431bd73df6a3))
 
+### Features
+
+- **ui-img:** add 'loading' prop to Img component ([0b69af2](https://github.com/instructure/instructure-ui/commit/0b69af2c34cd0ff85a6dbfccfe85abf21ec033c6))
 
 # [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
 
-
 ### Bug Fixes
 
-* **ui-text-input:** remove focusring when receiving disabled prop ([f16e88e](https://github.com/instructure/instructure-ui/commit/f16e88ea8d591cc7d042027492e834c3b9090bf1))
-* **ui-truncate-text:** impove TruncateText's performance for large amounts of contents ([22fcf14](https://github.com/instructure/instructure-ui/commit/22fcf143c9c1d923205b6ede3582a7edf61ecd37))
-
+- **ui-text-input:** remove focusring when receiving disabled prop ([f16e88e](https://github.com/instructure/instructure-ui/commit/f16e88ea8d591cc7d042027492e834c3b9090bf1))
+- **ui-truncate-text:** impove TruncateText's performance for large amounts of contents ([22fcf14](https://github.com/instructure/instructure-ui/commit/22fcf143c9c1d923205b6ede3582a7edf61ecd37))
 
 ### Features
 
-* **ui-dom-utils:** add webcomponent support for certain utility functions ([1bade83](https://github.com/instructure/instructure-ui/commit/1bade83c2d7aea75aa6eac6ceff852bac5186e84))
-* **ui-icons:** add `award` icon ([4c7c37c](https://github.com/instructure/instructure-ui/commit/4c7c37ce1c75f28eb35faf621892647d245b8916))
-* **ui-icons:** add `predictive` icon ([e9b210b](https://github.com/instructure/instructure-ui/commit/e9b210bb8f6101a257d5c8b019ce474157e6b058))
-
-
-
-
+- **ui-dom-utils:** add webcomponent support for certain utility functions ([1bade83](https://github.com/instructure/instructure-ui/commit/1bade83c2d7aea75aa6eac6ceff852bac5186e84))
+- **ui-icons:** add `award` icon ([4c7c37c](https://github.com/instructure/instructure-ui/commit/4c7c37ce1c75f28eb35faf621892647d245b8916))
+- **ui-icons:** add `predictive` icon ([e9b210b](https://github.com/instructure/instructure-ui/commit/e9b210bb8f6101a257d5c8b019ce474157e6b058))
 
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
-
 ### Bug Fixes
 
-* **ui:** wrong peer dependency for `react` ([80580a7](https://github.com/instructure/instructure-ui/commit/80580a709d846f612a73dc757a5932cd975d49f8))
-
-
-
-
+- **ui:** wrong peer dependency for `react` ([80580a7](https://github.com/instructure/instructure-ui/commit/80580a709d846f612a73dc757a5932cd975d49f8))
 
 ## [8.28.1](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.1) (2022-09-12)
 
-
 ### Bug Fixes
 
-* fix issues in some components when using `React.StrictMode` and React 18  ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
-
-
-
-
+- fix issues in some components when using `React.StrictMode` and React 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
 
 # [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
 
-
 ### Bug Fixes
 
-* **ui-pagination:** wrong type description for Pagination's onClick ([867eb1a](https://github.com/instructure/instructure-ui/commit/867eb1a6c0bcbd2c65d26a23cac643df37a0aad3))
+- **ui-pagination:** wrong type description for Pagination's onClick ([867eb1a](https://github.com/instructure/instructure-ui/commit/867eb1a6c0bcbd2c65d26a23cac643df37a0aad3))
 
-* fix propType for liveRegion ([e9ae7d3](https://github.com/instructure/instructure-ui/commit/e9ae7d396e4c5de5eb1df56666630b92f73a670e))
+- fix propType for liveRegion ([e9ae7d3](https://github.com/instructure/instructure-ui/commit/e9ae7d396e4c5de5eb1df56666630b92f73a670e))
 
   **WARNING!** In case of **SSR**(server side rendering) and **Jest** you will need to substitute `Element` from the DOM API because it is used by some components:
-    ```Element = typeof Element === 'undefined' ? function(){} : Element```.
+  `Element = typeof Element === 'undefined' ? function(){} : Element`.
 
-    ```
-    // jest.config.js
-    module.exports = {
-      ...
-      globals: {
-        Element: function () {}
-      }
+  ```
+  // jest.config.js
+  module.exports = {
+    ...
+    globals: {
+      Element: function () {}
     }
-    ```
+  }
+  ```
 
 ### Features
 
-* **ui-drilldown:** add `minHeight` and `minWidth` props to Drilldown ([7e10b29](https://github.com/instructure/instructure-ui/commit/7e10b2966f4dfb79dfdecca62f12c3f9ba5b62b4))
-* **ui-drilldown:** add `positionContainerDisplay` prop to Drilldown ([834302c](https://github.com/instructure/instructure-ui/commit/834302c1510c96bde8436307465fa480957719bc))
-* **ui-icons:** add `header` icon ([46932bc](https://github.com/instructure/instructure-ui/commit/46932bcb4fbc3fc98566ae886b44c1005ebeb924))
-* **ui-menu:** add `positionContainerDisplay` prop to Menu ([e8ed689](https://github.com/instructure/instructure-ui/commit/e8ed689bacb82b88bde3be3db1ade6ea6ee6ed89))
-* **ui-popover:** add `positionContainerDisplay` prop to Popover ([fdcacec](https://github.com/instructure/instructure-ui/commit/fdcacecd6d1a0f52580f9ccd051dfa8e5270baf0))
-* **ui-position:** add `containerDisplay` prop to Position ([0fdd83f](https://github.com/instructure/instructure-ui/commit/0fdd83fc06f3d63eadf4bd42bc96e0e8514a5981))
-* **ui-responsive:** add `elementRef` prop to Responsive ([be7a338](https://github.com/instructure/instructure-ui/commit/be7a338d330e07f4120565fb61c92dd85518528c))
-* **ui-tray:** add `position` theme variable to Tray ([375ed68](https://github.com/instructure/instructure-ui/commit/375ed68a6c38c241d45d3a13f5bb757ed68b9ab2))
-* **ui-truncate-list,ui:** add `TruncateList` utility component ([f8b17ea](https://github.com/instructure/instructure-ui/commit/f8b17ea8b60234f746fcd7576f1532f38d5bbe5f))
-
-
-
-
+- **ui-drilldown:** add `minHeight` and `minWidth` props to Drilldown ([7e10b29](https://github.com/instructure/instructure-ui/commit/7e10b2966f4dfb79dfdecca62f12c3f9ba5b62b4))
+- **ui-drilldown:** add `positionContainerDisplay` prop to Drilldown ([834302c](https://github.com/instructure/instructure-ui/commit/834302c1510c96bde8436307465fa480957719bc))
+- **ui-icons:** add `header` icon ([46932bc](https://github.com/instructure/instructure-ui/commit/46932bcb4fbc3fc98566ae886b44c1005ebeb924))
+- **ui-menu:** add `positionContainerDisplay` prop to Menu ([e8ed689](https://github.com/instructure/instructure-ui/commit/e8ed689bacb82b88bde3be3db1ade6ea6ee6ed89))
+- **ui-popover:** add `positionContainerDisplay` prop to Popover ([fdcacec](https://github.com/instructure/instructure-ui/commit/fdcacecd6d1a0f52580f9ccd051dfa8e5270baf0))
+- **ui-position:** add `containerDisplay` prop to Position ([0fdd83f](https://github.com/instructure/instructure-ui/commit/0fdd83fc06f3d63eadf4bd42bc96e0e8514a5981))
+- **ui-responsive:** add `elementRef` prop to Responsive ([be7a338](https://github.com/instructure/instructure-ui/commit/be7a338d330e07f4120565fb61c92dd85518528c))
+- **ui-tray:** add `position` theme variable to Tray ([375ed68](https://github.com/instructure/instructure-ui/commit/375ed68a6c38c241d45d3a13f5bb757ed68b9ab2))
+- **ui-truncate-list,ui:** add `TruncateList` utility component ([f8b17ea](https://github.com/instructure/instructure-ui/commit/f8b17ea8b60234f746fcd7576f1532f38d5bbe5f))
 
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 

@@ -3,48 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.31.0](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.31.0) (2022-11-21)
+
+### Features
+
+- **ui-dom-utils:** add `pseudoElt` parameter to `getComputedStyle` util ([b73434c](https://github.com/instructure/instructure-ui/commit/b73434c9d3fc90e243a178577b6ea865638f8fa3))
+
 # [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
 
 **Note:** Version bump only for package @instructure/ui-dom-utils
 
-
-
-
-
 # [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
-
 
 ### Features
 
-* **ui-dom-utils:** add webcomponent support for certain utility functions ([1bade83](https://github.com/instructure/instructure-ui/commit/1bade83c2d7aea75aa6eac6ceff852bac5186e84))
-
-
-
-
+- **ui-dom-utils:** add webcomponent support for certain utility functions ([1bade83](https://github.com/instructure/instructure-ui/commit/1bade83c2d7aea75aa6eac6ceff852bac5186e84))
 
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
 **Note:** Version bump only for package @instructure/ui-dom-utils
 
-
-
-
-
 ## [8.28.1](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.1) (2022-09-12)
 
 **Note:** Version bump only for package @instructure/ui-dom-utils
 
-
-
-
-
 # [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
 
 **Note:** Version bump only for package @instructure/ui-dom-utils
-
-
-
-
 
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 

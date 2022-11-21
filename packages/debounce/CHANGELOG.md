@@ -3,54 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.31.0](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.31.0) (2022-11-21)
+
+**Note:** Version bump only for package @instructure/debounce
+
 # [8.30.0](https://github.com/instructure/instructure-ui/compare/v8.29.0...v8.30.0) (2022-10-26)
 
 **Note:** Version bump only for package @instructure/debounce
 
-
-
-
-
 # [8.29.0](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.29.0) (2022-09-29)
-
 
 ### Bug Fixes
 
-* support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
-
-
-
-
+- support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
 
 ## [8.28.2](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.2) (2022-09-16)
 
-
 ### Bug Fixes
 
-* support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
-
-
-
-
+- support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
 
 ## [8.28.1](https://github.com/instructure/instructure-ui/compare/v8.28.0...v8.28.1) (2022-09-12)
 
-
 ### Bug Fixes
 
-* support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
-
-
-
-
+- support react 18 ([972bb93](https://github.com/instructure/instructure-ui/commit/972bb93d2835fcca3548d624b1ba2497661b4243))
 
 # [8.28.0](https://github.com/instructure/instructure-ui/compare/v8.27.0...v8.28.0) (2022-09-02)
 
 **Note:** Version bump only for package @instructure/debounce
-
-
-
-
 
 # [8.27.0](https://github.com/instructure/instructure-ui/compare/v8.26.3...v8.27.0) (2022-07-25)
 
