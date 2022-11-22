@@ -55,7 +55,7 @@ const generateStyle = (
   return {
     drawerContent: {
       label: 'drawerLayout__content',
-      overflowY: 'auto',
+      overflowY: componentTheme.overflowY,
       height: '100%',
       boxSizing: 'content-box',
       ...transitionState

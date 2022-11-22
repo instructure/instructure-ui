@@ -39,7 +39,10 @@ const generateComponentTheme = (theme: Theme): DrawerLayoutTrayTheme => {
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
     zIndex: stacking?.topmost,
-    boxShadow: shadows?.depth3
+    boxShadow: shadows?.depth3,
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    contentOverflowY: 'auto'
   }
 
   return {

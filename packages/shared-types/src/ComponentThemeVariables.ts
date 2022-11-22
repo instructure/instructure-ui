@@ -509,6 +509,7 @@ export type ColorPresetTheme = {
 
 export type DrawerLayoutContentTheme = {
   duration: Transitions['duration']
+  overflowY: string
 }
 
 export type DrawerLayoutTrayTheme = {
@@ -518,6 +519,9 @@ export type DrawerLayoutTrayTheme = {
   borderStyle: Border['style']
   zIndex: Stacking['topmost']
   boxShadow: Shadows['depth3']
+  overflowX: string
+  overflowY: string
+  contentOverflowY: string
 }
 
 export type DrilldownTheme = {

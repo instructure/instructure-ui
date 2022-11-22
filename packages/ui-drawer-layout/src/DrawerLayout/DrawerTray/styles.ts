@@ -73,8 +73,8 @@ const generateStyle = (
     position: 'absolute',
     backgroundColor: componentTheme.background,
     zIndex: componentTheme.zIndex,
-    overflowY: 'auto',
-    overflowX: 'hidden',
+    overflowY: componentTheme.overflowY,
+    overflowX: componentTheme.overflowX,
     ...borderStyles,
     top: 0,
     bottom: 0,
@@ -93,7 +93,7 @@ const generateStyle = (
     },
     drawerTrayContent: {
       label: 'drawerTray__content',
-      overflowY: 'auto',
+      overflowY: componentTheme.contentOverflowY,
       height: '100%',
       boxSizing: 'content-box'
     }
