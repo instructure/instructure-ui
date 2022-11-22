@@ -34,7 +34,8 @@ const generateComponentTheme = (theme: Theme): DrawerLayoutContentTheme => {
   const { transitions } = theme
 
   return {
-    duration: transitions?.duration
+    duration: transitions?.duration,
+    overflowY: 'auto'
   }
 }
 
