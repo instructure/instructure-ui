@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.32.0](https://github.com/instructure/instructure-ui/compare/v8.31.0...v8.32.0) (2022-11-23)
+
+**Note:** Version bump only for package @instructure/cz-lerna-changelog
+
 # [8.31.0](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.31.0) (2022-11-21)
 
 **Note:** Version bump only for package @instructure/cz-lerna-changelog
