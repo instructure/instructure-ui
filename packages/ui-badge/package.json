@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-badge",
-  "version": "8.31.0",
+  "version": "8.32.0",
   "description": "A badge component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,22 +24,22 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.31.0",
-    "@instructure/emotion": "8.31.0",
-    "@instructure/shared-types": "8.31.0",
-    "@instructure/ui-color-utils": "8.31.0",
-    "@instructure/ui-position": "8.31.0",
-    "@instructure/ui-react-utils": "8.31.0",
-    "@instructure/ui-testable": "8.31.0",
-    "@instructure/ui-utils": "8.31.0",
-    "@instructure/ui-view": "8.31.0",
+    "@instructure/console": "8.32.0",
+    "@instructure/emotion": "8.32.0",
+    "@instructure/shared-types": "8.32.0",
+    "@instructure/ui-color-utils": "8.32.0",
+    "@instructure/ui-position": "8.32.0",
+    "@instructure/ui-react-utils": "8.32.0",
+    "@instructure/ui-testable": "8.32.0",
+    "@instructure/ui-utils": "8.32.0",
+    "@instructure/ui-view": "8.32.0",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.31.0",
-    "@instructure/ui-test-locator": "8.31.0",
-    "@instructure/ui-test-utils": "8.31.0",
-    "@instructure/ui-themes": "8.31.0"
+    "@instructure/ui-babel-preset": "8.32.0",
+    "@instructure/ui-test-locator": "8.32.0",
+    "@instructure/ui-test-utils": "8.32.0",
+    "@instructure/ui-themes": "8.32.0"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"

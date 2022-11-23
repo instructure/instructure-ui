@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.32.0](https://github.com/instructure/instructure-ui/compare/v8.31.0...v8.32.0) (2022-11-23)
+
+### Features
+
+- **ui-drawer-layout:** expose `overflow` css props as themeable variables ([f64159c](https://github.com/instructure/instructure-ui/commit/f64159c55dfd374c4359159dfc10963135b0e9e6))
+
 # [8.31.0](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.31.0) (2022-11-21)
 
 **Note:** Version bump only for package @instructure/ui-drawer-layout
