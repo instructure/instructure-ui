@@ -468,9 +468,19 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
     const { rtlMoveVisually } = this.props
 
     if (this.direction === 'rtl' && !rtlMoveVisually) {
-      //TODO: fix this broken logic
-      // we need to clone the original so that it doesn't get overridden
-      return [...defaultKeymap, ...rtlHorizontalArrowKeymap]
+      const overrideableKeys = rtlHorizontalArrowKeymap.map((binding) =>
+        binding.key ? binding.key : binding.mac ? binding.mac : binding
+      )
+      // we have to remove the binding we want to override from the original,
+      // otherwise all will be merged and the defaults will still apply
+      const filteredOriginal = defaultKeymap.filter((binding) =>
+        binding.key
+          ? overrideableKeys.indexOf(binding.key) < 0
+          : binding.mac
+          ? overrideableKeys.indexOf(binding.mac) < 0
+          : false
+      )
+      return [...filteredOriginal, ...rtlHorizontalArrowKeymap]
     }
 
     return defaultKeymap
