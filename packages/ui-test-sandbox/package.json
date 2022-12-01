@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-test-sandbox",
-  "version": "8.32.0",
+  "version": "8.32.1",
   "description": "A wrapper for sinon test sandbox and associated utilities.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -27,7 +27,7 @@
     "sinon": "^13"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.32.0",
+    "@instructure/ui-babel-preset": "8.32.1",
     "@types/sinon": "^10",
     "prop-types": "^15"
   },
