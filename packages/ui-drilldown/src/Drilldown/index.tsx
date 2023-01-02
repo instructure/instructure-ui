@@ -57,7 +57,6 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import { DrilldownSeparator } from './DrilldownSeparator'
 import { DrilldownOption } from './DrilldownOption'
-import type { DrilldownOptionValue } from './DrilldownOption/props'
 import { DrilldownGroup } from './DrilldownGroup'
 import type { DrilldownGroupProps, GroupChildren } from './DrilldownGroup/props'
 import { DrilldownPage } from './DrilldownPage'
@@ -66,7 +65,7 @@ import type { DrilldownPageProps, PageChildren } from './DrilldownPage/props'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { propTypes, allowedProps } from './props'
+import { propTypes, allowedProps, SelectedGroupOptionsMap } from './props'
 
 import type {
   DrilldownProps,
@@ -96,9 +95,6 @@ type MappedPage = DrilldownPageProps & {
 
 // An object with the mapped Pages with their id as keys
 type PageMap = Record<string, MappedPage>
-
-// A Map width the selected options in a group, with the id as key and their value
-type SelectedGroupOptionsMap = Map<string, DrilldownOptionValue>
 
 /**
 ---
@@ -157,9 +153,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   } = {}
 
   // Map of the selected options in groups (grouped by group id)
-  _selectedGroupOptionsMap: {
-    [groupId: string]: SelectedGroupOptionsMap
-  } = {}
 
   ref: HTMLDivElement | Element | null = null
 
@@ -197,12 +190,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       isShowingPopover: props.trigger ? !!props.show : false,
       activePageId: props.rootPageId,
       highlightedOptionId: undefined,
-      lastSelectedId: undefined
+      lastSelectedId: undefined,
+      selectedGroupOptionsMap: this.setDefaultSelected()
     }
-
     this._pageHistory = [props.rootPageId]
-
-    this.setDefaultSelected()
 
     this._id = props.id || props.deterministicId!()
     this._triggerId = props.deterministicId!('Drilldown-Trigger')
@@ -358,6 +349,8 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   }
 
   setDefaultSelected() {
+    const selectedGroupOptionsMap: SelectedGroupOptionsMap = {}
+
     this.pages.forEach((page) => {
       const { children } = page.props
 
@@ -374,6 +367,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             return
           }
 
+          if (selectableType && !selectedGroupOptionsMap[groupId]) {
+            selectedGroupOptionsMap[groupId] = new Map()
+          }
+
           if (selectableType === 'single' && groupDefaultSelected.length > 1) {
             error(
               false,
@@ -385,7 +382,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
             return
           }
 
-          this._selectedGroupOptionsMap[groupId] = new Map()
+          selectedGroupOptionsMap[groupId] = new Map()
 
           this.getChildrenArray(groupChildren)?.forEach((groupChild) => {
             if (
@@ -409,20 +406,18 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
                   .includes(optionValue)
 
               if (optionDefaultSelected || isGroupDefaultSelected) {
-                this._selectedGroupOptionsMap[groupId].set(
-                  optionId,
-                  optionValue
-                )
+                selectedGroupOptionsMap[groupId].set(optionId, optionValue)
               }
             }
           })
         }
       })
     })
+    return selectedGroupOptionsMap
   }
 
   get selectedGroupOptionIdsArray() {
-    return Object.values(this._selectedGroupOptionsMap)
+    return Object.values(this.state.selectedGroupOptionsMap)
       .map((groupIdMap) => Array.from(groupIdMap.keys()))
       .flat()
   }
@@ -1105,8 +1100,15 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     if (id === this._headerBackId) {
       optionProps.renderBeforeLabel = <IconArrowOpenStartSolid />
     }
-    if (groupProps?.selectableType) {
-      isSelected = this._selectedGroupOptionsMap[groupProps.id].has(id)
+    const isOptionControlled = typeof option.props.selected === 'boolean'
+    if ((groupProps?.selectableType || isOptionControlled) && groupProps) {
+      if (!isOptionControlled) {
+        isSelected = Boolean(
+          this.state.selectedGroupOptionsMap[groupProps.id]?.has(id)
+        )
+      } else {
+        isSelected = Boolean(option.props.selected)
+      }
       optionProps['aria-checked'] = isSelected
 
       optionProps.renderBeforeLabel = (
@@ -1116,6 +1118,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
           }}
         />
       )
+
       warn(
         !renderBeforeLabel,
         `The prop "renderBeforeLabel" is reserved on item with id: "${id}". When this option is a selectable member of a Drilldown.Group, selection indicator will render before the label.`
@@ -1129,7 +1132,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
         optionProps.role = customRole || 'menuitemcheckbox'
       }
     }
-
     // display option as highlighted
     if (id === this.state.highlightedOptionId) {
       optionProps.variant = 'highlighted'
@@ -1256,7 +1258,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       children,
       renderGroupTitle,
       themeOverride,
-      selectableType,
       role,
       as,
       elementRef
@@ -1274,10 +1275,6 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     // add a separator above
     if (needsFirstSeparator) {
       groupChildren.push(<Options.Separator />)
-    }
-
-    if (selectableType && !this._selectedGroupOptionsMap[id]) {
-      this._selectedGroupOptionsMap[id] = new Map()
     }
 
     // create a sublist as a group

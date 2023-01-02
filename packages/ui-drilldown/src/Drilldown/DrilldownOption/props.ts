@@ -79,6 +79,11 @@ type DrilldownOptionOwnProps = {
   disabled?: boolean
 
   /**
+   * Whether the option is selected or not. (Setting this property assumes controlled behaviour)
+   */
+  selected?: boolean
+
+  /**
    * The value of the option. Should be set for options in selectable groups.
    */
   value?: DrilldownOptionValue
@@ -181,6 +186,7 @@ const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   subPageId: PropTypes.string,
   disabled: PropTypes.bool,
+  selected: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   href: PropTypes.string,
   as: PropTypes.elementType,
@@ -202,6 +208,7 @@ const allowedProps: AllowedPropKeys = [
   'children',
   'subPageId',
   'disabled',
+  'selected',
   'value',
   'href',
   'as',
