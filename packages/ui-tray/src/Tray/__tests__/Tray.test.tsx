@@ -49,7 +49,7 @@ describe('<Tray />', async () => {
         Hello World
       </Tray>
     )
-    // debugger
+
     const tray = await TrayLocator.find(':label(Tray Example)')
     await wait(() => expect(tray.getTextContent()).to.equal('Hello World'))
   })

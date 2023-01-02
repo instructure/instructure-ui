@@ -718,54 +718,67 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     event: React.SyntheticEvent,
     selectedOption: MappedOption
   ) {
-    const { id: optionId, value } = selectedOption.props
-    const {
-      id: groupId,
-      selectableType,
-      onSelect: groupOnSelect
-    } = selectedOption.groupProps!
+    this.setState(
+      (oldState) => {
+        const { id: optionId, value } = selectedOption.props
+        const { id: groupId, selectableType } = selectedOption.groupProps!
 
-    const { onSelect } = this.props
+        let newState = new Map(oldState.selectedGroupOptionsMap[groupId])
 
-    if (this._selectedGroupOptionsMap[groupId].has(optionId)) {
-      // toggle off, if already selected
-      this._selectedGroupOptionsMap[groupId].delete(optionId)
-    } else {
-      if (selectableType === 'multiple') {
-        // "checkbox"
-        this._selectedGroupOptionsMap[groupId].set(optionId, value)
-      } else if (selectableType === 'single') {
-        // "radio"
-        this._selectedGroupOptionsMap[groupId] = new Map()
-        this._selectedGroupOptionsMap[groupId].set(optionId, value)
+        if (
+          selectableType === 'multiple' &&
+          Boolean(oldState.selectedGroupOptionsMap[groupId]?.has(optionId))
+        ) {
+          // toggle off, if already selected
+          newState.delete(optionId)
+        } else {
+          if (selectableType === 'multiple') {
+            // "checkbox"
+            newState.set(optionId, value)
+          } else if (selectableType === 'single') {
+            // "radio"
+            newState = new Map()
+            newState.set(optionId, value)
+          }
+        }
+        return {
+          ...oldState,
+          selectedGroupOptionsMap: {
+            ...oldState.selectedGroupOptionsMap,
+            [groupId]: newState
+          }
+        }
+      },
+      () => {
+        const { value } = selectedOption.props
+        const { id: groupId, onSelect: groupOnSelect } =
+          selectedOption.groupProps!
+
+        const { onSelect } = this.props
+        const { groupProps, ...option } = selectedOption
+        const selectedOptionValuesInGroup = [
+          ...this.state.selectedGroupOptionsMap[groupId].values()
+        ]
+
+        if (typeof groupOnSelect === 'function') {
+          groupOnSelect(event, {
+            value: selectedOptionValuesInGroup,
+            isSelected: selectedOptionValuesInGroup.includes(value),
+            selectedOption: option,
+            drilldown: this
+          })
+        }
+
+        if (typeof onSelect === 'function') {
+          onSelect(event, {
+            value: selectedOptionValuesInGroup,
+            isSelected: selectedOptionValuesInGroup.includes(value),
+            selectedOption: option,
+            drilldown: this
+          })
+        }
       }
-    }
-
-    // needed for rerender
-    this.setState({ lastSelectedId: optionId })
-
-    const { groupProps, ...option } = selectedOption
-    const selectedOptionValuesInGroup = Array.from(
-      this._selectedGroupOptionsMap[groupId].values()
     )
-
-    if (typeof groupOnSelect === 'function') {
-      groupOnSelect(event, {
-        value: selectedOptionValuesInGroup,
-        isSelected: this._selectedGroupOptionsMap[groupId].has(optionId),
-        selectedOption: option,
-        drilldown: this
-      })
-    }
-
-    if (typeof onSelect === 'function') {
-      onSelect(event, {
-        value: selectedOptionValuesInGroup,
-        isSelected: this._selectedGroupOptionsMap[groupId].has(optionId),
-        selectedOption: option,
-        drilldown: this
-      })
-    }
   }
 
   handleOptionSelect = (
