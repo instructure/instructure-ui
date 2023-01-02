@@ -591,7 +591,6 @@ describe('<Drilldown />', async () => {
           </Drilldown.Page>
         </Drilldown>
       )
-
       const drilldown = await DrilldownLocator.find()
       const container = await drilldown.findSizableContainer()
       const containerNode = container.getDOMNode()

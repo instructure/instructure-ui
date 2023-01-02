@@ -286,12 +286,17 @@ type DrilldownStyleProps = {
   hasHighlightedOption: boolean
 }
 
+type SelectedGroupOptionsMap = {
+  [groupId: string]: Map<string, DrilldownOptionValue>
+}
+
 type DrilldownState = {
   isShowingPopover: boolean
   activePageId: string
   highlightedOptionId?: string
   // needed for rerender
   lastSelectedId?: string
+  selectedGroupOptionsMap: SelectedGroupOptionsMap
 }
 
 const propTypes: PropValidators<PropKeys> = {
@@ -388,6 +393,7 @@ export type {
   PageChild,
   GroupChild,
   OptionChild,
-  SeparatorChild
+  SeparatorChild,
+  SelectedGroupOptionsMap
 }
 export { propTypes, allowedProps }

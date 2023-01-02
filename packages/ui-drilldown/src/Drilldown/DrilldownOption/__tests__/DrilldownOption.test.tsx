@@ -31,6 +31,76 @@ import { Drilldown } from '../../index'
 import { DrilldownLocator } from '../../DrilldownLocator'
 
 describe('<Drilldown.Option />', async () => {
+  it('should allow setting "selected" property on Options', async () => {
+    await mount(
+      <Drilldown rootPageId="page0">
+        <Drilldown.Page id="page0">
+          <Drilldown.Group id="group0">
+            <Drilldown.Option id="groupOption01">Option - 1</Drilldown.Option>
+            <Drilldown.Option selected id="groupOption02">
+              Option - 2
+            </Drilldown.Option>
+            <Drilldown.Option id="groupOption03">Option - 3</Drilldown.Option>
+            <Drilldown.Option id="groupOption04">Option - 4</Drilldown.Option>
+          </Drilldown.Group>
+        </Drilldown.Page>
+      </Drilldown>
+    )
+    const drilldown = await DrilldownLocator.find()
+    const selectedOption = await drilldown.find('#groupOption02')
+
+    expect(selectedOption.getDOMNode().getAttribute('aria-checked')).to.be.eq(
+      'true'
+    )
+  })
+  it('should allow controlled behaviour', async () => {
+    const options = ['one', 'two', 'three']
+    const Example = ({
+      opts,
+      selected
+    }: {
+      opts: typeof options
+      selected: string
+    }) => {
+      return (
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0">
+              {opts.map((opt) => {
+                return (
+                  <Drilldown.Option
+                    key={opt}
+                    value={opt}
+                    name={opt}
+                    id={opt}
+                    selected={selected === opt}
+                  >
+                    {opt}
+                  </Drilldown.Option>
+                )
+              })}
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+    }
+    const subject = await mount(<Example opts={options} selected="two" />)
+    let drilldown = await DrilldownLocator.find()
+    let opts = await drilldown.findAllOptions()
+
+    expect(opts[0].getDOMNode().getAttribute('aria-checked')).to.be.eq('false')
+    expect(opts[1].getDOMNode().getAttribute('aria-checked')).to.be.eq('true')
+    expect(opts[2].getDOMNode().getAttribute('aria-checked')).to.be.eq('false')
+
+    subject.setProps({ selected: 'three' })
+
+    drilldown = await DrilldownLocator.find()
+    opts = await drilldown.findAllOptions()
+
+    expect(opts[0].getDOMNode().getAttribute('aria-checked')).to.be.eq('false')
+    expect(opts[1].getDOMNode().getAttribute('aria-checked')).to.be.eq('false')
+    expect(opts[2].getDOMNode().getAttribute('aria-checked')).to.be.eq('true')
+  })
   describe('id prop', async () => {
     it('should throw warning the id is not provided', async () => {
       stub(console, 'error')
