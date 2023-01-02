@@ -45,6 +45,51 @@ const checkSelectedValues = async (
 }
 
 describe('<Drilldown.Group />', async () => {
+  it('should not allow de-selecting an option when selectableType = "single"', async () => {
+    const options = ['one', 'two', 'three']
+    const Example = ({ opts }: { opts: typeof options }) => {
+      return (
+        <Drilldown rootPageId="page0">
+          <Drilldown.Page id="page0">
+            <Drilldown.Group id="group0" selectableType="single">
+              {opts.map((opt) => {
+                return (
+                  <Drilldown.Option
+                    key={opt}
+                    value={opt}
+                    name={opt}
+                    id={opt}
+                    defaultSelected={opt === 'three'}
+                  >
+                    {opt}
+                  </Drilldown.Option>
+                )
+              })}
+            </Drilldown.Group>
+          </Drilldown.Page>
+        </Drilldown>
+      )
+    }
+
+    await mount(<Example opts={options} />)
+
+    let drilldown = await DrilldownLocator.find()
+    let selectedOption = await drilldown.find('#three')
+
+    expect(selectedOption.getDOMNode().getAttribute('aria-checked')).to.be.eq(
+      'true'
+    )
+
+    selectedOption.click()
+
+    drilldown = await DrilldownLocator.find()
+    selectedOption = await drilldown.find('#three')
+
+    expect(selectedOption.getDOMNode().getAttribute('aria-checked')).to.be.eq(
+      'true'
+    )
+  })
+
   it("shouldn't render non-DrilldownGroup children", async () => {
     stub(console, 'error')
     await mount(
