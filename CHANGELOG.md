@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.33.0](https://github.com/instructure/instructure-ui/compare/v8.32.1...v8.33.0) (2023-01-04)
+
+
+### Bug Fixes
+
+* **shared-types,ui-color-picker:** colorPicker css problem ([82ce9e3](https://github.com/instructure/instructure-ui/commit/82ce9e3cc43d566686a15838d95b5e6a81e86239))
+* **ui-drilldown:** selectableType=single works like radio buttons ([3a20ddb](https://github.com/instructure/instructure-ui/commit/3a20ddb132bf5efd15f719df1236cd98933f1219))
+* **ui-tabs:** tab bar is not scrollable on the left side ([d369138](https://github.com/instructure/instructure-ui/commit/d369138d74edacffd29039c1fe5a99de4990e385))
+
+
+### Features
+
+* **ui-drilldown:** add `selected` prop to Drilldown.Option which allows controlled behavior ([5776937](https://github.com/instructure/instructure-ui/commit/57769376930e8f6201ce603b9e9e832564db2dd6))
+* **ui-icons:** add `arrow-nest` icon ([cb17dff](https://github.com/instructure/instructure-ui/commit/cb17dff42b4533bfe735cc86e71884b428f0e69f))
+
+
+
+
+
 ## [8.32.1](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.32.1) (2022-12-01)
 
 
