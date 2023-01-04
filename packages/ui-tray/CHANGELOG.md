@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.33.0](https://github.com/instructure/instructure-ui/compare/v8.32.1...v8.33.0) (2023-01-04)
+
+
+### Bug Fixes
+
+* **ui-drilldown:** selectableType=single works like radio buttons ([3a20ddb](https://github.com/instructure/instructure-ui/commit/3a20ddb132bf5efd15f719df1236cd98933f1219))
+
+
+
+
+
 ## [8.32.1](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.32.1) (2022-12-01)
 
 **Note:** Version bump only for package @instructure/ui-tray

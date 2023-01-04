@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.33.0](https://github.com/instructure/instructure-ui/compare/v8.32.1...v8.33.0) (2023-01-04)
+
+**Note:** Version bump only for package @instructure/ui-dom-utils
+
+
+
+
+
 ## [8.32.1](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.32.1) (2022-12-01)
 
 **Note:** Version bump only for package @instructure/ui-dom-utils
