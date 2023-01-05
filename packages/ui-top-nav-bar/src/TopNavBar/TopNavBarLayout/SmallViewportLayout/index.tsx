@@ -161,6 +161,10 @@ class TopNavBarSmallViewportLayout extends Component<
 
   componentWillUnmount() {
     this._raf.forEach((request) => request.cancel())
+
+    if (this.state.isDropdownMenuOpen) {
+      this.toggleDropdownMenu()
+    }
   }
 
   get makeStylesVariables(): TopNavBarSmallViewportLayoutStyleProps {
