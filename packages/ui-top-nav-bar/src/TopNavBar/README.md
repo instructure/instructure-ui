@@ -1714,7 +1714,8 @@ render: false
 class LayoutExample extends React.Component {
   state = {
     exampleWidth: '100%',
-    isSecondaryNavigation: false
+    isSecondaryNavigation: false,
+    isSmallViewportMenuOpen: false
   }
 
   render() {
@@ -1776,6 +1777,9 @@ class LayoutExample extends React.Component {
                       trayMountNode: () => document.getElementById('menuMountNode'),
                       dropdownMenuToggleButtonLabel: 'Toggle Menu',
                       dropdownMenuLabel: 'Main Menu',
+                      onDropdownMenuToggle: (isMenuOpen) => {
+                        this.setState({ isSmallViewportMenuOpen: isMenuOpen })
+                      },
                       alternativeTitle: inverseColor ? 'Overview' : undefined
                     }}
                     renderBrand={
@@ -1931,9 +1935,12 @@ class LayoutExample extends React.Component {
                   : '3.5rem',
                 insetInlineStart: '0px',
                 width: '100%',
-                height: this.state.isSecondaryNavigation
+                height: !this.state.isSmallViewportMenuOpen
+                  ? '0'
+                  : this.state.isSecondaryNavigation
                   ? 'calc(100% - 3.5rem - 1px)'
                   : 'calc(100% - 3.5rem)',
+
               }}
             />
 
