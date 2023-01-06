@@ -3,13 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.33.1](https://github.com/instructure/instructure-ui/compare/v8.33.0...v8.33.1) (2023-01-06)
+
+### Bug Fixes
+
+- **ui-top-nav-bar:** fix TopNavBar `smallViewport mode` example ([7ddaf8a](https://github.com/instructure/instructure-ui/commit/7ddaf8a06211d20d0d942c935edc67aa4e5f5232))
+- **ui-top-nav-bar:** smallViewport menu should close on layout switch ([10cd5a6](https://github.com/instructure/instructure-ui/commit/10cd5a6829c3e57fa107e6b710549620e9c4d275))
+
 # [8.33.0](https://github.com/instructure/instructure-ui/compare/v8.32.1...v8.33.0) (2023-01-04)
 
 **Note:** Version bump only for package @instructure/ui-top-nav-bar
-
-
-
-
 
 ## [8.32.1](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.32.1) (2022-12-01)
 
