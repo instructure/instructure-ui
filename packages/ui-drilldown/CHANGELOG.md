@@ -3,29 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.33.0](https://github.com/instructure/instructure-ui/compare/v8.32.1...v8.33.0) (2023-01-04)
+## [8.33.1](https://github.com/instructure/instructure-ui/compare/v8.33.0...v8.33.1) (2023-01-06)
 
+**Note:** Version bump only for package @instructure/ui-drilldown
+
+# [8.33.0](https://github.com/instructure/instructure-ui/compare/v8.32.1...v8.33.0) (2023-01-04)
 
 ### Bug Fixes
 
-* **ui-drilldown:** selectableType=single works like radio buttons ([3a20ddb](https://github.com/instructure/instructure-ui/commit/3a20ddb132bf5efd15f719df1236cd98933f1219))
-
+- **ui-drilldown:** selectableType=single works like radio buttons ([3a20ddb](https://github.com/instructure/instructure-ui/commit/3a20ddb132bf5efd15f719df1236cd98933f1219))
 
 ### Features
 
-* **ui-drilldown:** add `selected` prop to Drilldown.Option which allows controlled behavior ([5776937](https://github.com/instructure/instructure-ui/commit/57769376930e8f6201ce603b9e9e832564db2dd6))
-
-
-
-
+- **ui-drilldown:** add `selected` prop to Drilldown.Option which allows controlled behavior ([5776937](https://github.com/instructure/instructure-ui/commit/57769376930e8f6201ce603b9e9e832564db2dd6))
 
 ## [8.32.1](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.32.1) (2022-12-01)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
-
-
-
-
 
 # [8.32.0](https://github.com/instructure/instructure-ui/compare/v8.31.0...v8.32.0) (2022-11-23)
 

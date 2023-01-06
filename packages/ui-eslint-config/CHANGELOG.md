@@ -3,21 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.33.1](https://github.com/instructure/instructure-ui/compare/v8.33.0...v8.33.1) (2023-01-06)
+
+**Note:** Version bump only for package @instructure/ui-eslint-config
+
 # [8.33.0](https://github.com/instructure/instructure-ui/compare/v8.32.1...v8.33.0) (2023-01-04)
 
 **Note:** Version bump only for package @instructure/ui-eslint-config
 
-
-
-
-
 ## [8.32.1](https://github.com/instructure/instructure-ui/compare/v8.30.0...v8.32.1) (2022-12-01)
 
 **Note:** Version bump only for package @instructure/ui-eslint-config
-
-
-
-
 
 # [8.32.0](https://github.com/instructure/instructure-ui/compare/v8.31.0...v8.32.0) (2022-11-23)
 
