@@ -28,13 +28,14 @@ import { Component } from 'react'
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
+import { getComputedStyle } from '@instructure/ui-dom-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
-import type { ModalBodyProps } from './props'
+import type { ModalBodyProps, ModalBodyState } from './props'
 
 /**
 ---
@@ -45,7 +46,7 @@ id: Modal.Body
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ModalBody extends Component<ModalBodyProps> {
+class ModalBody extends Component<ModalBodyProps, ModalBodyState> {
   static readonly componentId = 'Modal.Body'
 
   static propTypes = propTypes
@@ -68,8 +69,30 @@ class ModalBody extends Component<ModalBodyProps> {
     }
   }
 
+  constructor(props: ModalBodyProps) {
+    super(props)
+
+    this.state = {
+      isFirefox: false
+    }
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
+
+    // We detect if -moz- prefixed style is present to identify whether we are in Firefox browser
+    const style = this.ref && getComputedStyle(this.ref)
+    const isFirefox = !!(
+      style &&
+      Array.prototype.slice
+        .call(style)
+        .join('')
+        .match(/(?:-moz-)/)
+    )
+
+    if (isFirefox) {
+      this.setState({ isFirefox })
+    }
   }
 
   componentDidUpdate() {
@@ -96,7 +119,11 @@ class ModalBody extends Component<ModalBodyProps> {
         as={as}
         css={this.props.styles?.modalBody}
         padding={padding}
-        tabIndex={-1} // prevent FF from focusing view when scrollable
+        // We have to make an exception in Firefox, because it makes
+        //  the container focusable when it is scrollable.
+        //  This is a feature, not a bug, but it prevents VoiceOver
+        //  to correctly focus inside the body in other browsers.
+        {...(this.state.isFirefox && { tabIndex: -1 })}
       >
         {children}
       </View>

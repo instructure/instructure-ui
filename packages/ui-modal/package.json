@@ -29,6 +29,7 @@
     "@instructure/shared-types": "8.33.1",
     "@instructure/ui-buttons": "8.33.1",
     "@instructure/ui-dialog": "8.33.1",
+    "@instructure/ui-dom-utils": "8.33.1",
     "@instructure/ui-motion": "8.33.1",
     "@instructure/ui-overlays": "8.33.1",
     "@instructure/ui-portal": "8.33.1",
