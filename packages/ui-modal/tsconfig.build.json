@@ -12,6 +12,7 @@
     { "path": "../shared-types/tsconfig.build.json" },
     { "path": "../ui-buttons/tsconfig.build.json" },
     { "path": "../ui-dialog/tsconfig.build.json" },
+    { "path": "../ui-dom-utils/tsconfig.build.json" },
     { "path": "../ui-motion/tsconfig.build.json" },
     { "path": "../ui-overlays/tsconfig.build.json" },
     { "path": "../ui-portal/tsconfig.build.json" },
