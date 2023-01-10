@@ -21,6 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+// TODO: try to migrate package to ES6
+// we are currently using a fix react-docgen version ("6.0.0-alpha.3"),
+//  because "6.0.0-alpha.4" migrated to ES6 modules, and we couldn't yet
+//  migrate our package to ES6.
 const { resolver, parse, importers } = require('react-docgen')
 
 /**

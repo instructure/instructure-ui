@@ -50,7 +50,7 @@
     "@storybook/manager-webpack5": "^6",
     "globby": "^11",
     "prop-types": "^15",
-    "react-docgen": "^6.0.0-alpha.0",
+    "react-docgen": "6.0.0-alpha.3",
     "webpack": "^5"
   },
   "resolutions": {
