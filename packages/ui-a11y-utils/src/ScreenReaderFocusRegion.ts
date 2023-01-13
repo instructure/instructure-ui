@@ -25,6 +25,10 @@
 import { logWarn as warn } from '@instructure/console'
 import { FocusRegionOptions } from './FocusRegionOptions'
 
+function isElement(elem: Node): elem is Element {
+  return elem instanceof Element
+}
+
 class ScreenReaderFocusRegion {
   private _parents: HTMLElement[] = []
   private _nodes: Element[] = []
@@ -115,22 +119,25 @@ class ScreenReaderFocusRegion {
 
   handleDOMMutation = (records: MutationRecord[]) => {
     records.forEach((record) => {
-      const addedNodes = Array.from(record.addedNodes) as Element[]
-      const removedNodes = Array.from(record.removedNodes) as Element[]
+      const addedNodes = Array.from(record.addedNodes)
+      const removedNodes = Array.from(record.removedNodes)
 
-      this.hideNodes(addedNodes)
+      this.hideNodes(addedNodes.filter(isElement) as Element[])
 
-      removedNodes.forEach((removedNode) => {
-        // Node has been removed from the DOM, make sure it is
-        // removed from our list of hidden nodes as well
-        if (removedNode.tagName.toLowerCase() !== 'iframe') {
-          this.restoreNode(removedNode)
+      ;(removedNodes.filter(isElement) as Element[]).forEach(
+        (removedNode: Element) => {
+          // Node has been removed from the DOM, make sure it is
+          // removed from our list of hidden nodes as well
+
+          if (removedNode.tagName.toLowerCase() !== 'iframe') {
+            this.restoreNode(removedNode as Element)
+          }
+          const iframeBodies = this.parseIframeBodies(removedNode as Element)
+          iframeBodies.forEach((iframeBody) => {
+            this.restoreNode(iframeBody)
+          })
         }
-        const iframeBodies = this.parseIframeBodies(removedNode)
-        iframeBodies.forEach((iframeBody) => {
-          this.restoreNode(iframeBody)
-        })
-      })
+      )
     })
   }
 
