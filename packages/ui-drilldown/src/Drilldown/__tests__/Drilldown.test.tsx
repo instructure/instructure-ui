@@ -1572,7 +1572,14 @@ describe('<Drilldown />', async () => {
 
       const drilldown = await DrilldownLocator.find()
 
-      expect(await drilldown.accessible()).to.be.true()
+      expect(
+        await drilldown.accessible({
+          ignores: [
+            // see explanation in Options.test.tsx
+            'aria-required-children'
+          ]
+        })
+      ).to.be.true()
     })
 
     it('should meet a11y standarts when drilldown is open', async () => {
@@ -1615,7 +1622,9 @@ describe('<Drilldown />', async () => {
     // the `scrollable-region-focusable` axe error is not valid because
     // axe does not see how the scrollable `div` can be focused
     generateA11yTests(Drilldown, DrilldownExamples, [
-      'scrollable-region-focusable'
+      'scrollable-region-focusable',
+      // see explanation in Options.test.tsx
+      'aria-required-children'
     ])
   })
 })

@@ -61,12 +61,20 @@ example: true
     </Options>
     <Options.Separator />
     <Options role="menu" as="ul" renderLabel={'Radio group'}>
-      <Options.Item role="menuitemradio" renderBeforeLabel={IconCheckSolid}>
+      <Options.Item
+        role="menuitemradio"
+        aria-checked="true"
+        renderBeforeLabel={IconCheckSolid}
+      >
         Radio option one
       </Options.Item>
-      <Options.Item role="menuitemradio" renderBeforeLabel={
-        <IconCheckLine style={{opacity: 0}} />
-      }>
+      <Options.Item
+        role="menuitemradio"
+        aria-checked="false"
+        renderBeforeLabel={
+          <IconCheckLine style={{opacity: 0}} />
+        }
+      >
         Radio option two
       </Options.Item>
     </Options>
@@ -420,6 +428,7 @@ class Example extends React.Component {
             onMouseOver={(e) => this.handleMouseOver(3)}
             variant={this.state.highlighted === 3 ? 'highlighted' : 'default'}
             variant="disabled"
+            aria-disabled="true"
             onClick={(e) => { e.preventDefault() }}
             href="/"
           >
