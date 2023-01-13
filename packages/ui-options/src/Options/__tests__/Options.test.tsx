@@ -154,7 +154,12 @@ describe('<Options />', async () => {
   })
 
   describe('with generated examples', async () => {
-    generateA11yTests(Options, OptionsExamples)
+    generateA11yTests(Options, OptionsExamples, [
+      // axe-check is more strict now, and expects "list" role to have "listitem" children, but we use "role='none'" children. After discussing it with the A11y team, we agreed to ignore this error because the screen readers can read the component perfectly.
+      // TODO: try to remove this ignore if axe-check is updated and isn't this strict anymore
+      // https://dequeuniversity.com/rules/axe/4.6/aria-required-children?application=axeAPI
+      'aria-required-children'
+    ])
   })
 
   describe('for a11y', async () => {
@@ -167,7 +172,14 @@ describe('<Options />', async () => {
       )
       const options = await OptionsLocator.find()
 
-      expect(await options.accessible()).to.be.true()
+      expect(
+        await options.accessible({
+          ignores: [
+            // same explanation as in generateA11yTests
+            'aria-required-children'
+          ]
+        })
+      ).to.be.true()
     })
   })
 })
