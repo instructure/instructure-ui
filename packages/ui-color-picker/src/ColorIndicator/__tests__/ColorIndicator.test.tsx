@@ -53,7 +53,7 @@ describe('<ColorIndicator />', () => {
       rgba: 'rgba(100, 0, 200, .5)',
       named: 'white',
       hsl: 'hsl(30, 100%, 50%)',
-      hsla: 'hsla(30, 100%, 50%, .3)'
+      hsla: 'hsla(30, 100%, 50%, .35)'
     }
 
     Object.entries(colorTestCases).forEach(([testCase, color]) => {
