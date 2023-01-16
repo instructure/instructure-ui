@@ -96,7 +96,8 @@ module.exports = {
         allowTernary: true,
         allowTaggedTemplates: true
       }
-    ]
+    ],
+    'react/no-unknown-property': ['error', { ignore: ['css'] }]
   },
   overrides: [
     {
