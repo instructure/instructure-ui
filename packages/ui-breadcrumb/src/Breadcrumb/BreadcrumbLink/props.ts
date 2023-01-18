@@ -26,11 +26,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import type {
+  PickPropsWithExceptions,
   OtherHTMLAttributes,
   PropValidators,
   Renderable
 } from '@instructure/shared-types'
 import type { ViewOwnProps } from '@instructure/ui-view'
+import type { LinkProps } from '@instructure/ui-link'
 
 type BreadcrumbLinkOwnProps = {
   /**
@@ -63,11 +65,18 @@ type PropKeys = keyof BreadcrumbLinkOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
-type BreadcrumbLinkProps = BreadcrumbLinkOwnProps &
-  OtherHTMLAttributes<BreadcrumbLinkOwnProps> & {
-    // React Router might add a `to` prop
-    to?: string
-  }
+type BreadcrumbLinkProps = PickPropsWithExceptions<
+  LinkProps,
+  | 'children'
+  | 'href'
+  | 'onClick'
+  | 'renderIcon'
+  | 'iconPlacement'
+  | 'isWithinText'
+  | 'elementRef'
+> &
+  BreadcrumbLinkOwnProps &
+  OtherHTMLAttributes<BreadcrumbLinkOwnProps & LinkProps>
 
 const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node.isRequired,
