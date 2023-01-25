@@ -97,7 +97,7 @@ module.exports = {
         allowTaggedTemplates: true
       }
     ],
-    'react/no-unknown-property': ['error', { ignore: ['css'] }]
+    'react/no-unknown-property': ['error', { ignore: ['css', 'componentRef'] }]
   },
   overrides: [
     {

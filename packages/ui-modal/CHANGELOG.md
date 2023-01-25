@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.33.2](https://github.com/instructure/instructure-ui/compare/v8.33.1...v8.33.2) (2023-01-25)
+
+### Bug Fixes
+
+- **ui-modal:** fix screenreader focus order in Chrome ([f32ae67](https://github.com/instructure/instructure-ui/commit/f32ae671b35ec251c7ab3d1e50d15df6bb287308))
+
 ## [8.33.1](https://github.com/instructure/instructure-ui/compare/v8.33.0...v8.33.1) (2023-01-06)
 
 **Note:** Version bump only for package @instructure/ui-modal
