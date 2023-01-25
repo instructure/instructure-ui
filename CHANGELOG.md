@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.33.2](https://github.com/instructure/instructure-ui/compare/v8.33.1...v8.33.2) (2023-01-25)
+
+### Bug Fixes
+
+- **ui-breadcrumb:** fix prop typing for `Breadcrumb.Link` ([9093c3e](https://github.com/instructure/instructure-ui/commit/9093c3e216144519e63a4d4ea189312ac9422111))
+- **ui-modal:** fix screenreader focus order in Chrome ([f32ae67](https://github.com/instructure/instructure-ui/commit/f32ae671b35ec251c7ab3d1e50d15df6bb287308))
+
 ## [8.33.1](https://github.com/instructure/instructure-ui/compare/v8.33.0...v8.33.1) (2023-01-06)
 
 ### Bug Fixes
