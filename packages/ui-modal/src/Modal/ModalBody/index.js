@@ -31,6 +31,7 @@ import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { error } from '@instructure/console/macro'
 import { isIE11 } from '@instructure/ui-utils'
+import { getComputedStyle } from '@instructure/ui-dom-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -60,6 +61,40 @@ class ModalBody extends Component {
     children: null,
     elementRef: undefined,
     overflow: undefined
+  }
+
+  ref = null
+
+  handleRef = (el) => {
+    const { elementRef } = this.props
+    this.ref = el
+    if (typeof elementRef === 'function') {
+      elementRef(el)
+    }
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isFirefox: false
+    }
+  }
+
+  componentDidMount() {
+    // We detect if -moz- prefixed style is present to identify whether we are in Firefox browser
+    const style = this.ref && getComputedStyle(this.ref)
+    const isFirefox = !!(
+      style &&
+      Array.prototype.slice
+        .call(style)
+        .join('')
+        .match(/(?:-moz-)/)
+    )
+
+    if (isFirefox) {
+      this.setState({ isFirefox })
+    }
   }
 
   render() {
@@ -93,11 +128,15 @@ class ModalBody extends Component {
         display="block"
         width={isFit ? '100%' : null}
         height={isFit ? '100%' : null}
-        elementRef={elementRef}
+        elementRef={this.handleRef}
         as={as}
         className={classes}
         padding={padding}
-        tabIndex="-1" // prevent FF from focusing view when scrollable
+        // We have to make an exception in Firefox, because it makes
+        //  the container focusable when it is scrollable.
+        //  This is a feature, not a bug, but it prevents VoiceOver
+        //  to correctly focus inside the body in other browsers.
+        {...(this.state.isFirefox && { tabIndex: -1 })}
       >
         {children}
       </View>

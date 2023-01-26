@@ -26,6 +26,7 @@
     "@instructure/console": "^7.22.0",
     "@instructure/ui-buttons": "^7.22.0",
     "@instructure/ui-dialog": "^7.22.0",
+    "@instructure/ui-dom-utils": "^7.22.0",
     "@instructure/ui-motion": "^7.22.0",
     "@instructure/ui-overlays": "^7.22.0",
     "@instructure/ui-portal": "^7.22.0",
