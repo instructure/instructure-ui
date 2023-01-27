@@ -3,13 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.22.1](https://github.com/instructure/instructure-ui/compare/v7.22.0...v7.22.1) (2023-01-27)
+
+### Bug Fixes
+
+- **ui-modal:** fix screen reader focus order in Chrome ([19aeebe](https://github.com/instructure/instructure-ui/commit/19aeebe))
+
 # [7.22.0](https://github.com/instructure/instructure-ui/compare/v7.21.0...v7.22.0) (2023-01-05)
 
 **Note:** Version bump only for package @instructure/ui-modal
-
-
-
-
 
 # [7.21.0](https://github.com/instructure/instructure-ui/compare/v7.20.2...v7.21.0) (2022-09-05)
 
