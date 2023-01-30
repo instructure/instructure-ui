@@ -122,22 +122,20 @@ class ScreenReaderFocusRegion {
       const addedNodes = Array.from(record.addedNodes)
       const removedNodes = Array.from(record.removedNodes)
 
-      this.hideNodes(addedNodes.filter(isElement) as Element[])
+      this.hideNodes(addedNodes.filter(isElement))
 
-      ;(removedNodes.filter(isElement) as Element[]).forEach(
-        (removedNode: Element) => {
-          // Node has been removed from the DOM, make sure it is
-          // removed from our list of hidden nodes as well
+      removedNodes.filter(isElement).forEach((removedNode) => {
+        // Node has been removed from the DOM, make sure it is
+        // removed from our list of hidden nodes as well
 
-          if (removedNode.tagName.toLowerCase() !== 'iframe') {
-            this.restoreNode(removedNode as Element)
-          }
-          const iframeBodies = this.parseIframeBodies(removedNode as Element)
-          iframeBodies.forEach((iframeBody) => {
-            this.restoreNode(iframeBody)
-          })
+        if (removedNode.tagName.toLowerCase() !== 'iframe') {
+          this.restoreNode(removedNode)
         }
-      )
+        const iframeBodies = this.parseIframeBodies(removedNode)
+        iframeBodies.forEach((iframeBody) => {
+          this.restoreNode(iframeBody)
+        })
+      })
     })
   }
 
