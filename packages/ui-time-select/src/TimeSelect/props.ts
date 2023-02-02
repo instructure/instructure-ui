@@ -37,7 +37,8 @@ import type {
 } from '@instructure/shared-types'
 import type {
   PlacementPropValues,
-  PositionConstraint
+  PositionConstraint,
+  PositionMountNode
 } from '@instructure/ui-position'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
@@ -135,6 +136,11 @@ type TimeSelectOwnProps = {
    */
   constrain?: PositionConstraint
   /**
+   * An element or a function returning an element to use mount the options
+   * list to in the DOM (defaults to `document.body`)
+   */
+  mountNode?: PositionMountNode
+  /**
    * Callback fired when a new option is selected.
    * @param event - the event object
    * @param data - additional data
@@ -225,6 +231,7 @@ const propTypes: PropValidators<PropKeys> = {
   messages: PropTypes.arrayOf(FormPropTypes.message),
   placement: PositionPropTypes.placement,
   constrain: PositionPropTypes.constrain,
+  mountNode: PositionPropTypes.mountNode,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
@@ -253,6 +260,7 @@ const allowedProps: AllowedPropKeys = [
   'isInline',
   'width',
   'optionsMaxWidth',
+  'mountNode',
   'visibleOptionsCount',
   'messages',
   'placement',
