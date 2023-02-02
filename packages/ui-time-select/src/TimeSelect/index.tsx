@@ -490,12 +490,14 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       onFocus,
       onShowOptions,
       onHideOptions,
+      mountNode,
       ...rest
     } = this.props
 
     const { inputValue, isShowingOptions } = this.state
     return (
       <Select
+        mountNode={mountNode}
         renderLabel={renderLabel}
         inputValue={inputValue}
         interaction={this.interaction}
