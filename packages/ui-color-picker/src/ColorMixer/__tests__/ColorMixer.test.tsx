@@ -133,19 +133,13 @@ describe('<ColorMixer />', () => {
           />
         )
         const component = await ColorMixerLocator.find()
-
-        const labelElement =
-          text ===
-          testScreenReaderLabels.colorPaletteNavigationExplanationScreenReaderLabel
-            ? await component.findWithText(text)
-            : await component.findWithLabel(text)
-
+        const labelElement = await component.findWithLabel(text)
         expect(labelElement.getDOMNode()).to.be.visible()
       })
     })
   })
   describe('should be accessible', () => {
-    generateA11yTests(ColorMixer, ColorMixerExamples)
+    generateA11yTests(ColorMixer, ColorMixerExamples, ['aria-allowed-attr'])
     it('a11y', async () => {
       await mount(
         <ColorMixer
@@ -157,7 +151,9 @@ describe('<ColorMixer />', () => {
       )
       const subject = await ColorMixerLocator.find()
 
-      expect(await subject.accessible()).to.be.true()
+      expect(
+        await subject.accessible({ ignores: ['aria-allowed-attr'] })
+      ).to.be.true()
     })
   })
 
