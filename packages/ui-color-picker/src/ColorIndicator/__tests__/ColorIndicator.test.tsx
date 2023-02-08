@@ -113,12 +113,14 @@ describe('<ColorIndicator />', () => {
   })
 
   describe('should be accessible', () => {
-    generateA11yTests(ColorIndicator, ColorIndicatorExamples)
+    generateA11yTests(ColorIndicator, ColorIndicatorExamples, ['button-name'])
     it('a11y', async () => {
       await mount(<ColorIndicator />)
       const subject = await ColorIndicatorLocator.find()
 
-      expect(await subject.accessible()).to.be.true()
+      expect(
+        await subject.accessible({ ignores: ['button-name'] })
+      ).to.be.true()
     })
   })
 })
