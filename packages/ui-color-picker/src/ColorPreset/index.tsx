@@ -38,7 +38,6 @@ import { Text } from '@instructure/ui-text'
 import { Drilldown } from '@instructure/ui-drilldown'
 import type { DrilldownProps } from '@instructure/ui-drilldown'
 import { IconAddLine, IconCheckDarkSolid } from '@instructure/ui-icons'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { ColorIndicator } from '../ColorIndicator'
 import { ColorMixer } from '../ColorMixer'
@@ -272,7 +271,6 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
               />
             </div>
           )}
-          <ScreenReaderContent>{`Color: ${color}`}</ScreenReaderContent>
         </div>
       </View>
     </Tooltip>
