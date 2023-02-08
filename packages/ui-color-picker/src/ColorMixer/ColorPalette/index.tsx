@@ -33,7 +33,6 @@ import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'
 import { px } from '@instructure/ui-utils'
 import { withDeterministicId } from '@instructure/ui-react-utils'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import shallowCompare from '../utils/shallowCompare'
 
@@ -238,11 +237,9 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
         tabIndex={this.props.disabled ? undefined : 0}
         onKeyDown={(e) => this.handleKeyDown(e)}
         onMouseDown={(e) => this.handlePaletteMouseDown(e)}
+        aria-label={this.props.navigationExplanationScreenReaderLabel}
         id={this._id}
       >
-        <ScreenReaderContent>
-          {this.props.navigationExplanationScreenReaderLabel}
-        </ScreenReaderContent>
         <div css={this.props.styles?.indicator} />
         {this.props.disabled && (
           <div css={this.props.styles?.disabledOverlay} />
