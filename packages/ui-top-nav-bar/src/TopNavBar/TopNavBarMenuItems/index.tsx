@@ -227,6 +227,8 @@ class TopNavBarMenuItems extends Component<
 
         return safeCloneElement(child, {
           status: 'active',
+          id: child.props.id,
+          children: child.props.children,
           // if it has submenu, the root item cannot be current,
           // just a link inside the submenu
           'aria-current': renderSubmenu ? undefined : 'page'

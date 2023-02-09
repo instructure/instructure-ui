@@ -157,6 +157,8 @@ class TopNavBarActionItems extends Component<
           `Items in <TopNavBar.ActionItems> are not allowed to have avatars, please remove it from item with the id "${id}".`
         )
         return safeCloneElement(child, {
+          id: child.props.id,
+          children: child.props.children,
           renderAvatar: undefined,
           variant: 'default'
         })
@@ -172,6 +174,8 @@ class TopNavBarActionItems extends Component<
         }
 
         return safeCloneElement(child, {
+          id: child.props.id,
+          children: child.props.children,
           variant: 'icon'
         })
       }
