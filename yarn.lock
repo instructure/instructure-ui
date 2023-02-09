@@ -20927,7 +20927,7 @@ __metadata:
     lint-staged: ^10
     netlify-cli: ^4
     npm-run-all: ^4
-    typescript: 4.8.2
+    typescript: ^4.9.5
     webpack: ^5
   languageName: unknown
   linkType: soft
@@ -33873,16 +33873,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.8.2":
-  version: 4.8.2
-  resolution: "typescript@npm:4.8.2"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 7f5b81d0d558c9067f952c7af52ab7f19c2e70a916817929e4a5b256c93990bf3178eccb1ac8a850bc75df35f6781b6f4cb3370ce20d8b1ded92ed462348f628
-  languageName: node
-  linkType: hard
-
 "typescript@npm:^3.9.10":
   version: 3.9.10
   resolution: "typescript@npm:3.9.10"
@@ -33893,7 +33883,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.1.5, typescript@npm:^4.4.3, typescript@npm:^4.6.4":
+"typescript@npm:^4.1.5, typescript@npm:^4.4.3, typescript@npm:^4.6.4, typescript@npm:^4.9.5":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -33903,17 +33893,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.8.2#~builtin<compat/typescript>":
-  version: 4.8.2
-  resolution: "typescript@patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=bda367"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 6f49363af8af2fe480da1d5fa68712644438785208b06690a3cbe5e7365fd652c3a0f1e587bc8684d78fb69de3dde4de185c0bad7bb4f3664ddfc813ce8caad6
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@npm%3A^4.1.5#~builtin<compat/typescript>, typescript@patch:typescript@npm%3A^4.4.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>, typescript@patch:typescript@npm%3A^4.1.5#~builtin<compat/typescript>, typescript@patch:typescript@npm%3A^4.4.3#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=bda367"
   bin:

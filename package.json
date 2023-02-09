@@ -83,7 +83,7 @@
     "lint-staged": "^10",
     "netlify-cli": "^4",
     "npm-run-all": "^4",
-    "typescript": "4.8.2",
+    "typescript": "^4.9.5",
     "webpack": "^5"
   },
   "engines": {
