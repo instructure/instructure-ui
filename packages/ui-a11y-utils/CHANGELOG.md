@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.34.0](https://github.com/instructure/instructure-ui/compare/v8.33.2...v8.34.0) (2023-02-10)
+
+### Bug Fixes
+
+- **ui-a11y-utils:** fix type for removedNodes and addedNodes ([f43c2ff](https://github.com/instructure/instructure-ui/commit/f43c2ffc92e152062bee943ea801b09d669c51a6))
+
 ## [8.33.2](https://github.com/instructure/instructure-ui/compare/v8.33.1...v8.33.2) (2023-01-25)
 
 **Note:** Version bump only for package @instructure/ui-a11y-utils

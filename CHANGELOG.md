@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.34.0](https://github.com/instructure/instructure-ui/compare/v8.33.2...v8.34.0) (2023-02-10)
+
+### Bug Fixes
+
+- **ui-a11y-utils:** fix type for `removedNodes` and `addedNodes` ([f43c2ff](https://github.com/instructure/instructure-ui/commit/f43c2ffc92e152062bee943ea801b09d669c51a6))
+- **ui-color-picker:** axe-check tests failing ([d32f395](https://github.com/instructure/instructure-ui/commit/d32f395d68bae878d7f720bdbb30c4c15300f1d0))
+
+### Features
+
+- **ui-time-select:** added "mountNode" property; ([c7df9a1](https://github.com/instructure/instructure-ui/commit/c7df9a1eb52a181ff89e3782acc918e706fd0016))
+
 ## [8.33.2](https://github.com/instructure/instructure-ui/compare/v8.33.1...v8.33.2) (2023-01-25)
 
 ### Bug Fixes

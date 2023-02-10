@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-breadcrumb",
-  "version": "8.33.2",
+  "version": "8.34.0",
   "description": "A breadcrumb component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,23 +23,23 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.33.2",
-    "@instructure/ui-test-locator": "8.33.2",
-    "@instructure/ui-test-utils": "8.33.2",
-    "@instructure/ui-themes": "8.33.2"
+    "@instructure/ui-babel-preset": "8.34.0",
+    "@instructure/ui-test-locator": "8.34.0",
+    "@instructure/ui-test-utils": "8.34.0",
+    "@instructure/ui-themes": "8.34.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/emotion": "8.33.2",
-    "@instructure/shared-types": "8.33.2",
-    "@instructure/ui-icons": "8.33.2",
-    "@instructure/ui-link": "8.33.2",
-    "@instructure/ui-prop-types": "8.33.2",
-    "@instructure/ui-react-utils": "8.33.2",
-    "@instructure/ui-testable": "8.33.2",
-    "@instructure/ui-truncate-text": "8.33.2",
-    "@instructure/ui-utils": "8.33.2",
-    "@instructure/ui-view": "8.33.2",
+    "@instructure/emotion": "8.34.0",
+    "@instructure/shared-types": "8.34.0",
+    "@instructure/ui-icons": "8.34.0",
+    "@instructure/ui-link": "8.34.0",
+    "@instructure/ui-prop-types": "8.34.0",
+    "@instructure/ui-react-utils": "8.34.0",
+    "@instructure/ui-testable": "8.34.0",
+    "@instructure/ui-truncate-text": "8.34.0",
+    "@instructure/ui-utils": "8.34.0",
+    "@instructure/ui-view": "8.34.0",
     "prop-types": "^15"
   },
   "peerDependencies": {
