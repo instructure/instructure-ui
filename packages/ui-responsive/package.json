@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
+    "@babel/runtime": "^7.20.13",
     "@instructure/console": "8.34.0",
     "@instructure/debounce": "8.34.0",
     "@instructure/shared-types": "8.34.0",
@@ -31,7 +31,7 @@
     "@instructure/ui-react-utils": "8.34.0",
     "@instructure/ui-testable": "8.34.0",
     "@instructure/ui-utils": "8.34.0",
-    "prop-types": "^15"
+    "prop-types": "^15.8.1"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.34.0",

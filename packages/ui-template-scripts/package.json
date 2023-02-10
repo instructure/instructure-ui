@@ -20,11 +20,11 @@
   "dependencies": {
     "@instructure/command-utils": "8.34.0",
     "@instructure/ui-babel-preset": "8.34.0",
-    "@lerna/project": "^4",
-    "fs-extra": "^9",
+    "@lerna/project": "^4.0.0",
+    "fs-extra": "^9.1.0",
     "lodash.template": "^4.5.0",
-    "yargs": "^16",
-    "yargs-interactive": "^3.0.0"
+    "yargs": "^16.2.0",
+    "yargs-interactive": "^3.0.1"
   },
   "publishConfig": {
     "access": "public"

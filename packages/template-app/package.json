@@ -25,10 +25,10 @@
     "@instructure/ui-text": "8.34.0",
     "@instructure/ui-themes": "8.34.0",
     "@instructure/ui-view": "8.34.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "html-webpack-plugin": "^4"
+    "html-webpack-plugin": "^4.5.2"
   }
 }

@@ -23,7 +23,7 @@
     "access": "public"
   },
   "dependencies": {
-    "prop-types": "^15"
+    "prop-types": "^15.8.1"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"

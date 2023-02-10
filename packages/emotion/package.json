@@ -23,8 +23,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
-    "@emotion/react": "^11",
+    "@babel/runtime": "^7.20.13",
+    "@emotion/react": "^11.10.5",
     "@instructure/console": "8.34.0",
     "@instructure/shared-types": "8.34.0",
     "@instructure/theme-registry": "8.34.0",
@@ -34,7 +34,7 @@
     "@instructure/ui-themes": "8.34.0",
     "@instructure/ui-utils": "8.34.0",
     "hoist-non-react-statics": "^3.3.2",
-    "prop-types": "^15"
+    "prop-types": "^15.8.1"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.34.0",
