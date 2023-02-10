@@ -19,7 +19,7 @@
   "dependencies": {
     "@instructure/command-utils": "8.34.0",
     "@instructure/pkg-utils": "8.34.0",
-    "fs-extra": "^9",
-    "semver": "^7"
+    "fs-extra": "^9.1.0",
+    "semver": "^7.3.8"
   }
 }

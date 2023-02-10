@@ -17,11 +17,11 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/pkg-utils": "8.34.0",
-    "@semantic-release/commit-analyzer": "^8",
-    "chalk": "^4",
-    "cz-customizable": "^6",
-    "inquirer": "^8",
-    "inquirer-autocomplete-prompt": "^1"
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "chalk": "^4.1.2",
+    "cz-customizable": "^6.9.2",
+    "inquirer": "^8.2.5",
+    "inquirer-autocomplete-prompt": "^1.4.0"
   },
   "peerDependencies": {
     "lerna": "^4"

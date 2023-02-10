@@ -28,7 +28,7 @@
     "@instructure/ui-test-utils": "8.34.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
+    "@babel/runtime": "^7.20.13",
     "@instructure/emotion": "8.34.0",
     "@instructure/ui-calendar": "8.34.0",
     "@instructure/ui-form-field": "8.34.0",
@@ -41,7 +41,7 @@
     "@instructure/ui-testable": "8.34.0",
     "@instructure/ui-text-input": "8.34.0",
     "@instructure/ui-utils": "8.34.0",
-    "prop-types": "^15"
+    "prop-types": "^15.8.1"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"

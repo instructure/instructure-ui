@@ -179,7 +179,7 @@ export function getIssuesInRelease(jiraProjectKey: string) {
     process.exit(1)
   }
 
-  let issueKeys = result.match(jiraMatcher) || []
+  let issueKeys: string[] = result.match(jiraMatcher) || []
 
   issueKeys = issueKeys.filter((key) => key.indexOf(jiraProjectKey) != -1)
 
@@ -201,7 +201,7 @@ export function getIssuesInCommit(jiraProjectKey: any) {
     process.exit(1)
   }
 
-  let issueKeys = result.match(jiraMatcher) || []
+  let issueKeys: string[] = result.match(jiraMatcher) || []
 
   issueKeys = issueKeys.filter((key) => key.indexOf(jiraProjectKey) != -1)
 

@@ -18,14 +18,14 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.34.0",
-    "@types/jscodeshift": "^0.11.3",
-    "@types/prettier": "^2",
+    "@types/jscodeshift": "^0.11.6",
+    "@types/prettier": "^2.7.2",
     "jest": "^24.9.0"
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",
-    "jscodeshift": "^0.13",
-    "prettier": "^2"
+    "jscodeshift": "^0.13.1",
+    "prettier": "^2.8.4"
   },
   "publishConfig": {
     "access": "public"

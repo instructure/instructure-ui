@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
+    "@babel/runtime": "^7.20.13",
     "@instructure/canvas-theme": "8.34.0",
     "@instructure/command-utils": "8.34.0",
     "@instructure/ui-babel-preset": "8.34.0",
@@ -35,23 +35,23 @@
     "@instructure/ui-view": "8.34.0",
     "@instructure/ui-webpack-config": "8.34.0",
     "@instructure/uid": "8.34.0",
-    "@storybook/addons": "^6",
-    "@storybook/react": "^6",
-    "@storybook/theming": "^6",
-    "chromatic": "^6",
-    "react": "^18",
-    "react-dom": "^18",
-    "story2sketch": "^1",
-    "webpack-merge": "^5"
+    "@storybook/addons": "^6.5.16",
+    "@storybook/react": "^6.5.16",
+    "@storybook/theming": "^6.5.16",
+    "chromatic": "^6.17.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "story2sketch": "^1.7.1",
+    "webpack-merge": "^5.8.0"
   },
   "devDependencies": {
     "@instructure/ui-test-utils": "8.34.0",
-    "@storybook/builder-webpack5": "^6",
-    "@storybook/manager-webpack5": "^6",
-    "globby": "^11",
-    "prop-types": "^15",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
+    "globby": "^11.1.0",
+    "prop-types": "^15.8.1",
     "react-docgen": "6.0.0-alpha.3",
-    "webpack": "^5"
+    "webpack": "^5.75.0"
   },
   "resolutions": {
     "@storybook/react/webpack": "^5"

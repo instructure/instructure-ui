@@ -18,17 +18,17 @@
   },
   "license": "MIT",
   "dependencies": {
-    "chalk": "^4",
-    "concurrently": "^6",
-    "cross-env": "^7",
-    "execa": "^5",
-    "which": "^2"
+    "chalk": "^4.1.2",
+    "concurrently": "^6.5.1",
+    "cross-env": "^7.0.3",
+    "execa": "^5.1.1",
+    "which": "^2.0.2"
   },
   "publishConfig": {
     "access": "public"
   },
   "sideEffects": false,
   "devDependencies": {
-    "@types/which": "^2"
+    "@types/which": "^2.0.2"
   }
 }

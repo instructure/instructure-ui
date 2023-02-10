@@ -28,10 +28,10 @@
     "@instructure/ui-test-queries": "8.34.0",
     "@instructure/ui-test-utils": "8.34.0",
     "@instructure/ui-themes": "8.34.0",
-    "@types/no-scroll": "^2"
+    "@types/no-scroll": "^2.1.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
+    "@babel/runtime": "^7.20.13",
     "@instructure/console": "8.34.0",
     "@instructure/emotion": "8.34.0",
     "@instructure/shared-types": "8.34.0",
@@ -51,8 +51,8 @@
     "@instructure/ui-utils": "8.34.0",
     "@instructure/ui-view": "8.34.0",
     "@instructure/uid": "8.34.0",
-    "no-scroll": "^2.1.0",
-    "prop-types": "^15"
+    "no-scroll": "^2.1.1",
+    "prop-types": "^15.8.1"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"

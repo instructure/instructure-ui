@@ -24,10 +24,10 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.34.0",
     "@instructure/ui-test-utils": "8.34.0",
-    "prop-types": "^15.6.2"
+    "prop-types": "^15.8.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
+    "@babel/runtime": "^7.20.13",
     "@instructure/ui-decorator": "8.34.0",
     "@instructure/ui-dom-utils": "8.34.0"
   },
