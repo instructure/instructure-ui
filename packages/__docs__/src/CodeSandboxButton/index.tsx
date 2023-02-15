@@ -96,9 +96,9 @@ import 'moment/min/locales'
           '@instructure/ui': '^8',
           '@instructure/ui-icons': '^8',
           'lorem-ipsum': '^1.0.0',
-          react: '17.0.2',
-          'react-dom': '17.0.2',
-          'react-scripts': '4.0.0',
+          react: '18.2.0',
+          'react-dom': '18.2.0',
+          'react-scripts': '5.0.1',
           moment: '^2.23.0',
           'svg-inline-loader': '0.8.2'
         }
