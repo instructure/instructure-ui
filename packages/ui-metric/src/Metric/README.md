@@ -12,6 +12,7 @@ example: true
 ```
 
 The Metric component can be set to align 'start'.
+
 ```javascript
 ---
 example: true
@@ -20,6 +21,7 @@ example: true
 ```
 
 The Metric component can be set to align 'end'.
+
 ```javascript
 ---
 example: true
