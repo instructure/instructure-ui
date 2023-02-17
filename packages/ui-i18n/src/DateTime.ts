@@ -51,26 +51,39 @@ function now(locale: string, timezone: string) {
  * @param {String} dateString
  * @param {String} locale
  * @param {String} timezone
+ * @param {String} format
+ * @param {Boolean} strict
  * @returns {String} ISO 8601 string
  */
-function parse(dateString: string, locale: string, timezone: string) {
+function parse(
+  dateString: string,
+  locale: string,
+  timezone: string, // list all available localized formats, from most specific to least
+  format = [
+    moment.ISO_8601,
+    'llll',
+    'LLLL',
+    'lll',
+    'LLL',
+    'll',
+    'LL',
+    'l',
+    'L'
+  ],
+  strict = false
+) {
   _checkParams(locale, timezone)
-  // list all available localized formats, from most specific to least
-  return moment.tz(
-    dateString,
-    [moment.ISO_8601, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'],
-    locale,
-    timezone
-  )
+  return moment.tz(dateString, format, locale, strict, timezone)
 }
 
 /**
- * Determines if a string is a valid ISO 8601 string
+ * Determines if a string is a valid date/time string
  * @param {String} dateString
+ * @param {Array} formats see https://momentjs.com/docs/#/displaying/format/ default is ISO_8601
  * @returns {Boolean} true if dateString is a valid ISO 8601 string
  */
-function isValid(dateString: string) {
-  return moment(dateString, [moment.ISO_8601]).isValid()
+function isValid(dateString: string, formats = [moment.ISO_8601]) {
+  return moment(dateString, formats).isValid()
 }
 
 /**

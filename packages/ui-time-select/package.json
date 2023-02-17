@@ -33,6 +33,7 @@
     "@instructure/ui-select": "8.34.0",
     "@instructure/ui-test-locator": "8.34.0",
     "@instructure/ui-testable": "8.34.0",
+    "@instructure/ui-utils": "8.34.0",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
