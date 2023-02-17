@@ -2261,7 +2261,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@instructure/babel-plugin-transform-imports@8.34.0, @instructure/babel-plugin-transform-imports@workspace:packages/babel-plugin-transform-imports":
+"@instructure/babel-plugin-transform-imports@8.35.0, @instructure/babel-plugin-transform-imports@workspace:packages/babel-plugin-transform-imports":
   version: 0.0.0-use.local
   resolution: "@instructure/babel-plugin-transform-imports@workspace:packages/babel-plugin-transform-imports"
   dependencies:
@@ -2269,37 +2269,37 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/browserslist-config-instui@8.34.0, @instructure/browserslist-config-instui@workspace:packages/browserslist-config-instui":
+"@instructure/browserslist-config-instui@8.35.0, @instructure/browserslist-config-instui@workspace:packages/browserslist-config-instui":
   version: 0.0.0-use.local
   resolution: "@instructure/browserslist-config-instui@workspace:packages/browserslist-config-instui"
   languageName: unknown
   linkType: soft
 
-"@instructure/canvas-high-contrast-theme@8.34.0, @instructure/canvas-high-contrast-theme@workspace:packages/canvas-high-contrast-theme":
+"@instructure/canvas-high-contrast-theme@8.35.0, @instructure/canvas-high-contrast-theme@workspace:packages/canvas-high-contrast-theme":
   version: 0.0.0-use.local
   resolution: "@instructure/canvas-high-contrast-theme@workspace:packages/canvas-high-contrast-theme"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/shared-types": 8.34.0
-    "@instructure/theme-registry": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-theme-tokens": 8.34.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/theme-registry": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-theme-tokens": 8.35.0
   languageName: unknown
   linkType: soft
 
-"@instructure/canvas-theme@8.34.0, @instructure/canvas-theme@workspace:packages/canvas-theme":
+"@instructure/canvas-theme@8.35.0, @instructure/canvas-theme@workspace:packages/canvas-theme":
   version: 0.0.0-use.local
   resolution: "@instructure/canvas-theme@workspace:packages/canvas-theme"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/shared-types": 8.34.0
-    "@instructure/theme-registry": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-theme-tokens": 8.34.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/theme-registry": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-theme-tokens": 8.35.0
   languageName: unknown
   linkType: soft
 
-"@instructure/command-utils@8.34.0, @instructure/command-utils@workspace:packages/command-utils":
+"@instructure/command-utils@8.35.0, @instructure/command-utils@workspace:packages/command-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/command-utils@workspace:packages/command-utils"
   dependencies:
@@ -2312,19 +2312,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/config-loader@8.34.0, @instructure/config-loader@workspace:packages/config-loader":
+"@instructure/config-loader@8.35.0, @instructure/config-loader@workspace:packages/config-loader":
   version: 0.0.0-use.local
   resolution: "@instructure/config-loader@workspace:packages/config-loader"
   languageName: unknown
   linkType: soft
 
-"@instructure/console@8.34.0, @instructure/console@workspace:packages/console":
+"@instructure/console@8.35.0, @instructure/console@workspace:packages/console":
   version: 0.0.0-use.local
   resolution: "@instructure/console@workspace:packages/console"
   dependencies:
     "@babel/helper-annotate-as-pure": ^7.18.6
     "@babel/helper-module-imports": ^7.18.6
-    "@instructure/ui-babel-preset": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
     "@types/babel-plugin-macros": ^2.8.5
     babel-plugin-macros: ^3.1.0
   peerDependencies:
@@ -2332,11 +2332,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/cz-lerna-changelog@8.34.0, @instructure/cz-lerna-changelog@workspace:packages/cz-lerna-changelog":
+"@instructure/cz-lerna-changelog@8.35.0, @instructure/cz-lerna-changelog@workspace:packages/cz-lerna-changelog":
   version: 0.0.0-use.local
   resolution: "@instructure/cz-lerna-changelog@workspace:packages/cz-lerna-changelog"
   dependencies:
-    "@instructure/pkg-utils": 8.34.0
+    "@instructure/pkg-utils": 8.35.0
     "@semantic-release/commit-analyzer": ^8.0.1
     chalk: ^4.1.2
     cz-customizable: ^6.9.2
@@ -2347,31 +2347,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/debounce@8.34.0, @instructure/debounce@workspace:packages/debounce":
+"@instructure/debounce@8.35.0, @instructure/debounce@workspace:packages/debounce":
   version: 0.0.0-use.local
   resolution: "@instructure/debounce@workspace:packages/debounce"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/ui-babel-preset": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
   languageName: unknown
   linkType: soft
 
-"@instructure/emotion@8.34.0, @instructure/emotion@workspace:packages/emotion":
+"@instructure/emotion@8.35.0, @instructure/emotion@workspace:packages/emotion":
   version: 0.0.0-use.local
   resolution: "@instructure/emotion@workspace:packages/emotion"
   dependencies:
     "@babel/runtime": ^7.20.13
     "@emotion/react": ^11.10.5
-    "@instructure/console": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/theme-registry": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-decorator": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/theme-registry": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-decorator": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     hoist-non-react-statics: ^3.3.2
     prop-types: ^15.8.1
   peerDependencies:
@@ -2379,15 +2379,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/instructure-theme@8.34.0, @instructure/instructure-theme@workspace:packages/instructure-theme":
+"@instructure/instructure-theme@8.35.0, @instructure/instructure-theme@workspace:packages/instructure-theme":
   version: 0.0.0-use.local
   resolution: "@instructure/instructure-theme@workspace:packages/instructure-theme"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/shared-types": 8.34.0
-    "@instructure/theme-registry": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-theme-tokens": 8.34.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/theme-registry": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-theme-tokens": 8.35.0
   languageName: unknown
   linkType: soft
 
@@ -2395,18 +2395,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@instructure/instui-cli@workspace:packages/instui-cli"
   dependencies:
-    "@instructure/command-utils": 8.34.0
-    "@instructure/instui-config": 8.34.0
-    "@instructure/pkg-utils": 8.34.0
-    "@instructure/template-app": 8.34.0
-    "@instructure/template-component": 8.34.0
-    "@instructure/template-package": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-codemods": 8.34.0
-    "@instructure/ui-eslint-config": 8.34.0
-    "@instructure/ui-stylelint-config": 8.34.0
-    "@instructure/ui-template-scripts": 8.34.0
-    "@instructure/ui-webpack-config": 8.34.0
+    "@instructure/command-utils": 8.35.0
+    "@instructure/instui-config": 8.35.0
+    "@instructure/pkg-utils": 8.35.0
+    "@instructure/template-app": 8.35.0
+    "@instructure/template-component": 8.35.0
+    "@instructure/template-package": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-codemods": 8.35.0
+    "@instructure/ui-eslint-config": 8.35.0
+    "@instructure/ui-stylelint-config": 8.35.0
+    "@instructure/ui-template-scripts": 8.35.0
+    "@instructure/ui-webpack-config": 8.35.0
     depcheck: ^1.4.3
     semver: ^7.3.8
     yargs: ^16.2.0
@@ -2416,28 +2416,28 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/instui-config@8.34.0, @instructure/instui-config@workspace:packages/instui-config":
+"@instructure/instui-config@8.35.0, @instructure/instui-config@workspace:packages/instui-config":
   version: 0.0.0-use.local
   resolution: "@instructure/instui-config@workspace:packages/instui-config"
   dependencies:
-    "@instructure/command-utils": 8.34.0
-    "@instructure/pkg-utils": 8.34.0
+    "@instructure/command-utils": 8.35.0
+    "@instructure/pkg-utils": 8.35.0
     fs-extra: ^9.1.0
     semver: ^7.3.8
   languageName: unknown
   linkType: soft
 
-"@instructure/pkg-utils@8.34.0, @instructure/pkg-utils@workspace:packages/pkg-utils":
+"@instructure/pkg-utils@8.35.0, @instructure/pkg-utils@workspace:packages/pkg-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/pkg-utils@workspace:packages/pkg-utils"
   dependencies:
-    "@instructure/command-utils": 8.34.0
+    "@instructure/command-utils": 8.35.0
     "@lerna/package": ^4.0.0
     read-pkg-up: ^7.0.1
   languageName: unknown
   linkType: soft
 
-"@instructure/shared-types@8.34.0, @instructure/shared-types@workspace:packages/shared-types":
+"@instructure/shared-types@8.35.0, @instructure/shared-types@workspace:packages/shared-types":
   version: 0.0.0-use.local
   resolution: "@instructure/shared-types@workspace:packages/shared-types"
   dependencies:
@@ -2447,85 +2447,85 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/template-app@8.34.0, @instructure/template-app@workspace:packages/template-app":
+"@instructure/template-app@8.35.0, @instructure/template-app@workspace:packages/template-app":
   version: 0.0.0-use.local
   resolution: "@instructure/template-app@workspace:packages/template-app"
   dependencies:
-    "@instructure/canvas-theme": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/ui-heading": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-svg-images": 8.34.0
-    "@instructure/ui-text": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/canvas-theme": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/ui-heading": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-svg-images": 8.35.0
+    "@instructure/ui-text": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     html-webpack-plugin: ^4.5.2
     react: ^18.2.0
     react-dom: ^18.2.0
   languageName: unknown
   linkType: soft
 
-"@instructure/template-component@8.34.0, @instructure/template-component@workspace:packages/template-component":
+"@instructure/template-component@8.35.0, @instructure/template-component@workspace:packages/template-component":
   version: 0.0.0-use.local
   resolution: "@instructure/template-component@workspace:packages/template-component"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/template-package@8.34.0, @instructure/template-package@workspace:packages/template-package":
+"@instructure/template-package@8.35.0, @instructure/template-package@workspace:packages/template-package":
   version: 0.0.0-use.local
   resolution: "@instructure/template-package@workspace:packages/template-package"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/theme-registry@8.34.0, @instructure/theme-registry@workspace:packages/theme-registry":
+"@instructure/theme-registry@8.35.0, @instructure/theme-registry@workspace:packages/theme-registry":
   version: 0.0.0-use.local
   resolution: "@instructure/theme-registry@workspace:packages/theme-registry"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-utils": 8.35.0
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-a11y-content@8.34.0, @instructure/ui-a11y-content@workspace:packages/ui-a11y-content":
+"@instructure/ui-a11y-content@8.35.0, @instructure/ui-a11y-content@workspace:packages/ui-a11y-content":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-a11y-content@workspace:packages/ui-a11y-content"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/uid": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -2533,20 +2533,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-a11y-utils@8.34.0, @instructure/ui-a11y-utils@workspace:packages/ui-a11y-utils":
+"@instructure/ui-a11y-utils@8.35.0, @instructure/ui-a11y-utils@workspace:packages/ui-a11y-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-a11y-utils@workspace:packages/ui-a11y-utils"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/uid": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -2554,26 +2554,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-alerts@8.34.0, @instructure/ui-alerts@workspace:packages/ui-alerts":
+"@instructure/ui-alerts@8.35.0, @instructure/ui-alerts@workspace:packages/ui-alerts":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-alerts@workspace:packages/ui-alerts"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-motion": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-motion": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -2582,40 +2582,40 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-avatar@8.34.0, @instructure/ui-avatar@workspace:packages/ui-avatar":
+"@instructure/ui-avatar@8.35.0, @instructure/ui-avatar@workspace:packages/ui-avatar":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-avatar@workspace:packages/ui-avatar"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-axe-check@8.34.0, @instructure/ui-axe-check@workspace:packages/ui-axe-check":
+"@instructure/ui-axe-check@8.35.0, @instructure/ui-axe-check@workspace:packages/ui-axe-check":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-axe-check@workspace:packages/ui-axe-check"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/ui-babel-preset": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
     axe-core: ^4.6.3
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-babel-preset@8.34.0, @instructure/ui-babel-preset@workspace:packages/ui-babel-preset":
+"@instructure/ui-babel-preset@8.35.0, @instructure/ui-babel-preset@workspace:packages/ui-babel-preset":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-babel-preset@workspace:packages/ui-babel-preset"
   dependencies:
@@ -2634,8 +2634,8 @@ __metadata:
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
     "@babel/runtime": ^7.20.13
-    "@instructure/babel-plugin-transform-imports": 8.34.0
-    "@instructure/browserslist-config-instui": 8.34.0
+    "@instructure/babel-plugin-transform-imports": 8.35.0
+    "@instructure/browserslist-config-instui": 8.35.0
     babel-loader: ^8.3.0
     babel-plugin-dynamic-import-node: ^2.3.3
     babel-plugin-istanbul: ^6.1.1
@@ -2647,101 +2647,101 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-badge@8.34.0, @instructure/ui-badge@workspace:packages/ui-badge":
+"@instructure/ui-badge@8.35.0, @instructure/ui-badge@workspace:packages/ui-badge":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-badge@workspace:packages/ui-badge"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-billboard@8.34.0, @instructure/ui-billboard@workspace:packages/ui-billboard":
+"@instructure/ui-billboard@8.35.0, @instructure/ui-billboard@workspace:packages/ui-billboard":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-billboard@workspace:packages/ui-billboard"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-heading": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-img": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-heading": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-img": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-breadcrumb@8.34.0, @instructure/ui-breadcrumb@workspace:packages/ui-breadcrumb":
+"@instructure/ui-breadcrumb@8.35.0, @instructure/ui-breadcrumb@workspace:packages/ui-breadcrumb":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-breadcrumb@workspace:packages/ui-breadcrumb"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-link": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-truncate-text": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-link": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-truncate-text": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-buttons@8.34.0, @instructure/ui-buttons@workspace:packages/ui-buttons":
+"@instructure/ui-buttons@8.35.0, @instructure/ui-buttons@workspace:packages/ui-buttons":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-buttons@workspace:packages/ui-buttons"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-a11y-utils": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-tooltip": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-a11y-utils": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-tooltip": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -2749,76 +2749,76 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-byline@8.34.0, @instructure/ui-byline@workspace:packages/ui-byline":
+"@instructure/ui-byline@8.35.0, @instructure/ui-byline@workspace:packages/ui-byline":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-byline@workspace:packages/ui-byline"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-calendar@8.34.0, @instructure/ui-calendar@workspace:packages/ui-calendar":
+"@instructure/ui-calendar@8.35.0, @instructure/ui-calendar@workspace:packages/ui-calendar":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-calendar@workspace:packages/ui-calendar"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-checkbox@8.34.0, @instructure/ui-checkbox@workspace:packages/ui-checkbox":
+"@instructure/ui-checkbox@8.35.0, @instructure/ui-checkbox@workspace:packages/ui-checkbox":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-checkbox@workspace:packages/ui-checkbox"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-svg-images": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-svg-images": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -2826,23 +2826,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-code-editor@8.34.0, @instructure/ui-code-editor@workspace:packages/ui-code-editor":
+"@instructure/ui-code-editor@8.35.0, @instructure/ui-code-editor@workspace:packages/ui-code-editor":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-code-editor@workspace:packages/ui-code-editor"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     "@types/codemirror": 5.x
     codemirror: 5.65.11
     prop-types: ^15.8.1
@@ -2851,11 +2851,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-codemods@8.34.0, @instructure/ui-codemods@workspace:packages/ui-codemods":
+"@instructure/ui-codemods@8.35.0, @instructure/ui-codemods@workspace:packages/ui-codemods":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-codemods@workspace:packages/ui-codemods"
   dependencies:
-    "@instructure/ui-babel-preset": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
     "@types/jscodeshift": ^0.11.6
     "@types/prettier": ^2.7.2
     babel-core: ^7.0.0-bridge.0
@@ -2865,229 +2865,229 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-color-picker@8.34.0, @instructure/ui-color-picker@workspace:packages/ui-color-picker":
+"@instructure/ui-color-picker@8.35.0, @instructure/ui-color-picker@workspace:packages/ui-color-picker":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-color-picker@workspace:packages/ui-color-picker"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-drilldown": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-pill": 8.34.0
-    "@instructure/ui-popover": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-text": 8.34.0
-    "@instructure/ui-text-input": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-tooltip": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-drilldown": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-pill": 8.35.0
+    "@instructure/ui-popover": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-text": 8.35.0
+    "@instructure/ui-text-input": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-tooltip": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-color-utils@8.34.0, @instructure/ui-color-utils@workspace:packages/ui-color-utils":
+"@instructure/ui-color-utils@8.35.0, @instructure/ui-color-utils@workspace:packages/ui-color-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-color-utils@workspace:packages/ui-color-utils"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
     "@types/tinycolor2": ^1.4.3
     tinycolor2: ^1.6.0
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-date-input@8.34.0, @instructure/ui-date-input@workspace:packages/ui-date-input":
+"@instructure/ui-date-input@8.35.0, @instructure/ui-date-input@workspace:packages/ui-date-input":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-date-input@workspace:packages/ui-date-input"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-calendar": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-popover": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-selectable": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-text-input": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-calendar": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-popover": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-selectable": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-text-input": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-date-time-input@8.34.0, @instructure/ui-date-time-input@workspace:packages/ui-date-time-input":
+"@instructure/ui-date-time-input@8.35.0, @instructure/ui-date-time-input@workspace:packages/ui-date-time-input":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-date-time-input@workspace:packages/ui-date-time-input"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/debounce": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-calendar": 8.34.0
-    "@instructure/ui-date-input": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-time-select": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-calendar": 8.35.0
+    "@instructure/ui-date-input": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-time-select": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-decorator@8.34.0, @instructure/ui-decorator@workspace:packages/ui-decorator":
+"@instructure/ui-decorator@8.35.0, @instructure/ui-decorator@workspace:packages/ui-decorator":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-decorator@workspace:packages/ui-decorator"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/ui-babel-preset": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-dialog@8.34.0, @instructure/ui-dialog@workspace:packages/ui-dialog":
+"@instructure/ui-dialog@8.35.0, @instructure/ui-dialog@workspace:packages/ui-dialog":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-dialog@workspace:packages/ui-dialog"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-utils": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-utils": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-dom-utils@8.34.0, @instructure/ui-dom-utils@workspace:packages/ui-dom-utils":
+"@instructure/ui-dom-utils@8.35.0, @instructure/ui-dom-utils@workspace:packages/ui-dom-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-dom-utils@workspace:packages/ui-dom-utils"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
   peerDependencies:
     react: ">=16.8 <=18"
     react-dom: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-drawer-layout@8.34.0, @instructure/ui-drawer-layout@workspace:packages/ui-drawer-layout":
+"@instructure/ui-drawer-layout@8.35.0, @instructure/ui-drawer-layout@workspace:packages/ui-drawer-layout":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-drawer-layout@workspace:packages/ui-drawer-layout"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/debounce": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dialog": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-motion": 8.34.0
-    "@instructure/ui-portal": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dialog": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-motion": 8.35.0
+    "@instructure/ui-portal": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-drilldown@8.34.0, @instructure/ui-drilldown@workspace:packages/ui-drilldown":
+"@instructure/ui-drilldown@8.35.0, @instructure/ui-drilldown@workspace:packages/ui-drilldown":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-drilldown@workspace:packages/ui-drilldown"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-options": 8.34.0
-    "@instructure/ui-popover": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-selectable": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-options": 8.35.0
+    "@instructure/ui-popover": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-selectable": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-editable@8.34.0, @instructure/ui-editable@workspace:packages/ui-editable":
+"@instructure/ui-editable@8.35.0, @instructure/ui-editable@workspace:packages/ui-editable":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-editable@workspace:packages/ui-editable"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-flex": 8.34.0
-    "@instructure/ui-focusable": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-flex": 8.35.0
+    "@instructure/ui-focusable": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
@@ -3095,17 +3095,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-eslint-config@8.34.0, @instructure/ui-eslint-config@workspace:packages/ui-eslint-config":
+"@instructure/ui-eslint-config@8.35.0, @instructure/ui-eslint-config@workspace:packages/ui-eslint-config":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-eslint-config@workspace:packages/ui-eslint-config"
   dependencies:
-    "@instructure/browserslist-config-instui": 8.34.0
+    "@instructure/browserslist-config-instui": 8.35.0
     "@typescript-eslint/eslint-plugin": ^4.33.0
     "@typescript-eslint/parser": ^4.33.0
     eslint-config-prettier: ^8
     eslint-plugin-compat: ^3
     eslint-plugin-import: ^2
-    eslint-plugin-instructure-ui: 8.34.0
+    eslint-plugin-instructure-ui: 8.35.0
     eslint-plugin-jsx-a11y: ^6
     eslint-plugin-mocha: ^9
     eslint-plugin-no-explicit-type-exports: ^0.12.1
@@ -3116,45 +3116,45 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-expandable@8.34.0, @instructure/ui-expandable@workspace:packages/ui-expandable":
+"@instructure/ui-expandable@8.35.0, @instructure/ui-expandable@workspace:packages/ui-expandable":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-expandable@workspace:packages/ui-expandable"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-file-drop@8.34.0, @instructure/ui-file-drop@workspace:packages/ui-file-drop":
+"@instructure/ui-file-drop@8.35.0, @instructure/ui-file-drop@workspace:packages/ui-file-drop":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-file-drop@workspace:packages/ui-file-drop"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -3162,125 +3162,125 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-flex@8.34.0, @instructure/ui-flex@workspace:packages/ui-flex":
+"@instructure/ui-flex@8.35.0, @instructure/ui-flex@workspace:packages/ui-flex":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-flex@workspace:packages/ui-flex"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-focusable@8.34.0, @instructure/ui-focusable@workspace:packages/ui-focusable":
+"@instructure/ui-focusable@8.35.0, @instructure/ui-focusable@workspace:packages/ui-focusable":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-focusable@workspace:packages/ui-focusable"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-form-field@8.34.0, @instructure/ui-form-field@workspace:packages/ui-form-field":
+"@instructure/ui-form-field@8.35.0, @instructure/ui-form-field@workspace:packages/ui-form-field":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-form-field@workspace:packages/ui-form-field"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-a11y-utils": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-grid": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-a11y-utils": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-grid": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-grid@8.34.0, @instructure/ui-grid@workspace:packages/ui-grid":
+"@instructure/ui-grid@8.35.0, @instructure/ui-grid@workspace:packages/ui-grid":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-grid@workspace:packages/ui-grid"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-heading@8.34.0, @instructure/ui-heading@workspace:packages/ui-heading":
+"@instructure/ui-heading@8.35.0, @instructure/ui-heading@workspace:packages/ui-heading":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-heading@workspace:packages/ui-heading"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-i18n@8.34.0, @instructure/ui-i18n@workspace:packages/ui-i18n":
+"@instructure/ui-i18n@8.35.0, @instructure/ui-i18n@workspace:packages/ui-i18n":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-i18n@workspace:packages/ui-i18n"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-decorator": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-decorator": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     "@types/hoist-non-react-statics": ^3.3.1
     hoist-non-react-statics: ^3.3.2
     moment-timezone: ^0.5.40
@@ -3290,11 +3290,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-icons-build@8.34.0, @instructure/ui-icons-build@workspace:packages/ui-icons-build":
+"@instructure/ui-icons-build@8.35.0, @instructure/ui-icons-build@workspace:packages/ui-icons-build":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-icons-build@workspace:packages/ui-icons-build"
   dependencies:
-    "@instructure/config-loader": 8.34.0
+    "@instructure/config-loader": 8.35.0
     del: ^6.1.1
     glob: ^7.2.3
     gulp: ^4.0.2
@@ -3316,14 +3316,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-icons@8.34.0, @instructure/ui-icons@workspace:packages/ui-icons":
+"@instructure/ui-icons@8.35.0, @instructure/ui-icons@workspace:packages/ui-icons":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-icons@workspace:packages/ui-icons"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-icons-build": 8.34.0
-    "@instructure/ui-svg-images": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-icons-build": 8.35.0
+    "@instructure/ui-svg-images": 8.35.0
     gulp: ^4.0.2
     prop-types: ^15.8.1
   peerDependencies:
@@ -3331,21 +3331,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-img@8.34.0, @instructure/ui-img@workspace:packages/ui-img":
+"@instructure/ui-img@8.35.0, @instructure/ui-img@workspace:packages/ui-img":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-img@workspace:packages/ui-img"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
@@ -3356,8 +3356,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@instructure/ui-karma-config@workspace:packages/ui-karma-config"
   dependencies:
-    "@instructure/config-loader": 8.34.0
-    "@instructure/ui-webpack-config": 8.34.0
+    "@instructure/config-loader": 8.35.0
+    "@instructure/ui-webpack-config": 8.35.0
     "@jsdevtools/coverage-istanbul-loader": 3.0.5
     buffer: ^6.0.3
     choma: ^1.2.1
@@ -3379,79 +3379,79 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-link@8.34.0, @instructure/ui-link@workspace:packages/ui-link":
+"@instructure/ui-link@8.35.0, @instructure/ui-link@workspace:packages/ui-link":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-link@workspace:packages/ui-link"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-utils": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-utils": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-list@8.34.0, @instructure/ui-list@workspace:packages/ui-list":
+"@instructure/ui-list@8.35.0, @instructure/ui-list@workspace:packages/ui-list":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-list@workspace:packages/ui-list"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-menu@8.34.0, @instructure/ui-menu@workspace:packages/ui-menu":
+"@instructure/ui-menu@8.35.0, @instructure/ui-menu@workspace:packages/ui-menu":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-menu@workspace:packages/ui-menu"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-utils": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-popover": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-utils": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-popover": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -3459,131 +3459,131 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-metric@8.34.0, @instructure/ui-metric@workspace:packages/ui-metric":
+"@instructure/ui-metric@8.35.0, @instructure/ui-metric@workspace:packages/ui-metric":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-metric@workspace:packages/ui-metric"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-modal@8.34.0, @instructure/ui-modal@workspace:packages/ui-modal":
+"@instructure/ui-modal@8.35.0, @instructure/ui-modal@workspace:packages/ui-modal":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-modal@workspace:packages/ui-modal"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dialog": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-motion": 8.34.0
-    "@instructure/ui-overlays": 8.34.0
-    "@instructure/ui-portal": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dialog": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-motion": 8.35.0
+    "@instructure/ui-overlays": 8.35.0
+    "@instructure/ui-portal": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-motion@8.34.0, @instructure/ui-motion@workspace:packages/ui-motion":
+"@instructure/ui-motion@8.35.0, @instructure/ui-motion@workspace:packages/ui-motion":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-motion@workspace:packages/ui-motion"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-navigation@8.34.0, @instructure/ui-navigation@workspace:packages/ui-navigation":
+"@instructure/ui-navigation@8.35.0, @instructure/ui-navigation@workspace:packages/ui-navigation":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-navigation@workspace:packages/ui-navigation"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/debounce": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-a11y-utils": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-badge": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-focusable": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-menu": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-tooltip": 8.34.0
-    "@instructure/ui-truncate-list": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-a11y-utils": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-badge": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-focusable": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-menu": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-tooltip": 8.35.0
+    "@instructure/ui-truncate-list": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-number-input@8.34.0, @instructure/ui-number-input@workspace:packages/ui-number-input":
+"@instructure/ui-number-input@8.35.0, @instructure/ui-number-input@workspace:packages/ui-number-input":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-number-input@workspace:packages/ui-number-input"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/uid": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -3591,58 +3591,58 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-options@8.34.0, @instructure/ui-options@workspace:packages/ui-options":
+"@instructure/ui-options@8.35.0, @instructure/ui-options@workspace:packages/ui-options":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-options@workspace:packages/ui-options"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-overlays@8.34.0, @instructure/ui-overlays@workspace:packages/ui-overlays":
+"@instructure/ui-overlays@8.35.0, @instructure/ui-overlays@workspace:packages/ui-overlays":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-overlays@workspace:packages/ui-overlays"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-dialog": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-focusable": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-motion": 8.34.0
-    "@instructure/ui-popover": 8.34.0
-    "@instructure/ui-portal": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-tooltip": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-dialog": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-focusable": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-motion": 8.35.0
+    "@instructure/ui-popover": 8.35.0
+    "@instructure/ui-portal": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-tooltip": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     "@types/no-scroll": ^2.1.0
     no-scroll: ^2.1.1
     prop-types: ^15.8.1
@@ -3651,54 +3651,54 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-pages@8.34.0, @instructure/ui-pages@workspace:packages/ui-pages":
+"@instructure/ui-pages@8.35.0, @instructure/ui-pages@workspace:packages/ui-pages":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-pages@workspace:packages/ui-pages"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-pagination@8.34.0, @instructure/ui-pagination@workspace:packages/ui-pagination":
+"@instructure/ui-pagination@8.35.0, @instructure/ui-pagination@workspace:packages/ui-pagination":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-pagination@workspace:packages/ui-pagination"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-a11y-utils": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-number-input": 8.34.0
-    "@instructure/ui-portal": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-tooltip": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-a11y-utils": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-number-input": 8.35.0
+    "@instructure/ui-portal": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-tooltip": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -3706,55 +3706,55 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-pill@8.34.0, @instructure/ui-pill@workspace:packages/ui-pill":
+"@instructure/ui-pill@8.35.0, @instructure/ui-pill@workspace:packages/ui-pill":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-pill@workspace:packages/ui-pill"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-tooltip": 8.34.0
-    "@instructure/ui-truncate-text": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-tooltip": 8.35.0
+    "@instructure/ui-truncate-text": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-popover@8.34.0, @instructure/ui-popover@workspace:packages/ui-popover":
+"@instructure/ui-popover@8.35.0, @instructure/ui-popover@workspace:packages/ui-popover":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-popover@workspace:packages/ui-popover"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/ui-a11y-utils": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dialog": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/ui-a11y-utils": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dialog": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -3762,19 +3762,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-portal@8.34.0, @instructure/ui-portal@workspace:packages/ui-portal":
+"@instructure/ui-portal@8.35.0, @instructure/ui-portal@workspace:packages/ui-portal":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-portal@workspace:packages/ui-portal"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
@@ -3782,157 +3782,157 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-position@8.34.0, @instructure/ui-position@workspace:packages/ui-position":
+"@instructure/ui-position@8.35.0, @instructure/ui-position@workspace:packages/ui-position":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-position@workspace:packages/ui-position"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/debounce": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-portal": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-portal": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-progress@8.34.0, @instructure/ui-progress@workspace:packages/ui-progress":
+"@instructure/ui-progress@8.35.0, @instructure/ui-progress@workspace:packages/ui-progress":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-progress@workspace:packages/ui-progress"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-prop-types@8.34.0, @instructure/ui-prop-types@workspace:packages/ui-prop-types":
+"@instructure/ui-prop-types@8.35.0, @instructure/ui-prop-types@workspace:packages/ui-prop-types":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-prop-types@workspace:packages/ui-prop-types"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-radio-input@8.34.0, @instructure/ui-radio-input@workspace:packages/ui-radio-input":
+"@instructure/ui-radio-input@8.35.0, @instructure/ui-radio-input@workspace:packages/ui-radio-input":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-radio-input@workspace:packages/ui-radio-input"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-range-input@8.34.0, @instructure/ui-range-input@workspace:packages/ui-range-input":
+"@instructure/ui-range-input@8.35.0, @instructure/ui-range-input@workspace:packages/ui-range-input":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-range-input@workspace:packages/ui-range-input"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-rating@8.34.0, @instructure/ui-rating@workspace:packages/ui-rating":
+"@instructure/ui-rating@8.35.0, @instructure/ui-rating@workspace:packages/ui-rating":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-rating@workspace:packages/ui-rating"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-motion": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-motion": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-react-utils@8.34.0, @instructure/ui-react-utils@workspace:packages/ui-react-utils":
+"@instructure/ui-react-utils@8.35.0, @instructure/ui-react-utils@workspace:packages/ui-react-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-react-utils@workspace:packages/ui-react-utils"
   dependencies:
     "@babel/runtime": ^7.20.13
     "@emotion/is-prop-valid": ^1.2.0
-    "@instructure/console": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-decorator": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-decorator": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     hoist-non-react-statics: ^3.3.2
     prop-types: ^15.8.1
   peerDependencies:
@@ -3941,37 +3941,37 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-responsive@8.34.0, @instructure/ui-responsive@workspace:packages/ui-responsive":
+"@instructure/ui-responsive@8.35.0, @instructure/ui-responsive@workspace:packages/ui-responsive":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-responsive@workspace:packages/ui-responsive"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/debounce": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-scripts@8.34.0, @instructure/ui-scripts@workspace:*, @instructure/ui-scripts@workspace:packages/ui-scripts":
+"@instructure/ui-scripts@8.35.0, @instructure/ui-scripts@workspace:*, @instructure/ui-scripts@workspace:packages/ui-scripts":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-scripts@workspace:packages/ui-scripts"
   dependencies:
     "@babel/cli": ^7.20.7
-    "@instructure/command-utils": 8.34.0
-    "@instructure/cz-lerna-changelog": 8.34.0
-    "@instructure/instui-config": 8.34.0
-    "@instructure/pkg-utils": 8.34.0
-    "@instructure/ui-template-scripts": 8.34.0
+    "@instructure/command-utils": 8.35.0
+    "@instructure/cz-lerna-changelog": 8.35.0
+    "@instructure/instui-config": 8.35.0
+    "@instructure/pkg-utils": 8.35.0
+    "@instructure/ui-template-scripts": 8.35.0
     "@lerna/project": ^4.0.0
     "@storybook/react": ^6.5.16
     "@types/git-url-parse": ^9.0.1
@@ -4010,51 +4010,51 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-select@8.34.0, @instructure/ui-select@workspace:packages/ui-select":
+"@instructure/ui-select@8.35.0, @instructure/ui-select@workspace:packages/ui-select":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-select@workspace:packages/ui-select"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-options": 8.34.0
-    "@instructure/ui-popover": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-selectable": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-text-input": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-options": 8.35.0
+    "@instructure/ui-popover": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-selectable": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-text-input": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-selectable@8.34.0, @instructure/ui-selectable@workspace:packages/ui-selectable":
+"@instructure/ui-selectable@8.35.0, @instructure/ui-selectable@workspace:packages/ui-selectable":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-selectable@workspace:packages/ui-selectable"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -4062,31 +4062,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-simple-select@8.34.0, @instructure/ui-simple-select@workspace:packages/ui-simple-select":
+"@instructure/ui-simple-select@8.35.0, @instructure/ui-simple-select@workspace:packages/ui-simple-select":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-simple-select@workspace:packages/ui-simple-select"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-select": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-select": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-source-code-editor@8.34.0, @instructure/ui-source-code-editor@workspace:packages/ui-source-code-editor":
+"@instructure/ui-source-code-editor@8.35.0, @instructure/ui-source-code-editor@workspace:packages/ui-source-code-editor":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-source-code-editor@workspace:packages/ui-source-code-editor"
   dependencies:
@@ -4104,20 +4104,20 @@ __metadata:
     "@codemirror/search": ^6.2.3
     "@codemirror/state": ^6.1.4
     "@codemirror/view": ^6.6.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     "@lezer/highlight": ^1.1.3
     prop-types: ^15.8.1
   peerDependencies:
@@ -4125,31 +4125,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-spinner@8.34.0, @instructure/ui-spinner@workspace:packages/ui-spinner":
+"@instructure/ui-spinner@8.35.0, @instructure/ui-spinner@workspace:packages/ui-spinner":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-spinner@workspace:packages/ui-spinner"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-stylelint-config@8.34.0, @instructure/ui-stylelint-config@workspace:packages/ui-stylelint-config":
+"@instructure/ui-stylelint-config@8.35.0, @instructure/ui-stylelint-config@workspace:packages/ui-stylelint-config":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-stylelint-config@workspace:packages/ui-stylelint-config"
   dependencies:
@@ -4159,77 +4159,77 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-svg-images@8.34.0, @instructure/ui-svg-images@workspace:packages/ui-svg-images":
+"@instructure/ui-svg-images@8.35.0, @instructure/ui-svg-images@workspace:packages/ui-svg-images":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-svg-images@workspace:packages/ui-svg-images"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-table@8.34.0, @instructure/ui-table@workspace:packages/ui-table":
+"@instructure/ui-table@8.35.0, @instructure/ui-table@workspace:packages/ui-table":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-table@workspace:packages/ui-table"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-simple-select": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-simple-select": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-tabs@8.34.0, @instructure/ui-tabs@workspace:packages/ui-tabs":
+"@instructure/ui-tabs@8.35.0, @instructure/ui-tabs@workspace:packages/ui-tabs":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-tabs@workspace:packages/ui-tabs"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/debounce": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-focusable": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-motion": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-focusable": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-motion": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -4237,36 +4237,36 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-tag@8.34.0, @instructure/ui-tag@workspace:packages/ui-tag":
+"@instructure/ui-tag@8.35.0, @instructure/ui-tag@workspace:packages/ui-tag":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-tag@workspace:packages/ui-tag"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-template-scripts@8.34.0, @instructure/ui-template-scripts@workspace:packages/ui-template-scripts":
+"@instructure/ui-template-scripts@8.35.0, @instructure/ui-template-scripts@workspace:packages/ui-template-scripts":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-template-scripts@workspace:packages/ui-template-scripts"
   dependencies:
-    "@instructure/command-utils": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
+    "@instructure/command-utils": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
     "@lerna/project": ^4.0.0
     fs-extra: ^9.1.0
     lodash.template: ^4.5.0
@@ -4277,24 +4277,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-test-locator@8.34.0, @instructure/ui-test-locator@workspace:packages/ui-test-locator":
+"@instructure/ui-test-locator@8.35.0, @instructure/ui-test-locator@workspace:packages/ui-test-locator":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-test-locator@workspace:packages/ui-test-locator"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-test-queries@8.34.0, @instructure/ui-test-queries@workspace:packages/ui-test-queries":
+"@instructure/ui-test-queries@8.35.0, @instructure/ui-test-queries@workspace:packages/ui-test-queries":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-test-queries@workspace:packages/ui-test-queries"
   dependencies:
-    "@instructure/debounce": 8.34.0
-    "@instructure/ui-axe-check": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-test-sandbox": 8.34.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/ui-axe-check": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-test-sandbox": 8.35.0
     "@types/sizzle": ^2.3.3
     keycode: ^2.2.1
     pretty-format: ^27.5.1
@@ -4302,12 +4302,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-test-sandbox@8.34.0, @instructure/ui-test-sandbox@workspace:packages/ui-test-sandbox":
+"@instructure/ui-test-sandbox@8.35.0, @instructure/ui-test-sandbox@workspace:packages/ui-test-sandbox":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-test-sandbox@workspace:packages/ui-test-sandbox"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/ui-babel-preset": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
     "@types/sinon": ^10.0.13
     prop-types: ^15.8.1
     sinon: ^13.0.2
@@ -4317,14 +4317,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-test-utils@8.34.0, @instructure/ui-test-utils@workspace:packages/ui-test-utils":
+"@instructure/ui-test-utils@8.35.0, @instructure/ui-test-utils@workspace:packages/ui-test-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-test-utils@workspace:packages/ui-test-utils"
   dependencies:
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-sandbox": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-sandbox": 8.35.0
     "@sheerun/mutationobserver-shim": ^0.3.3
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -4346,15 +4346,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-testable@8.34.0, @instructure/ui-testable@workspace:packages/ui-testable":
+"@instructure/ui-testable@8.35.0, @instructure/ui-testable@workspace:packages/ui-testable":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-testable@workspace:packages/ui-testable"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-decorator": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-decorator": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
@@ -4362,119 +4362,119 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-text-area@8.34.0, @instructure/ui-text-area@workspace:packages/ui-text-area":
+"@instructure/ui-text-area@8.35.0, @instructure/ui-text-area@workspace:packages/ui-text-area":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-text-area@workspace:packages/ui-text-area"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/debounce": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-text-input@8.34.0, @instructure/ui-text-input@workspace:packages/ui-text-input":
+"@instructure/ui-text-input@8.35.0, @instructure/ui-text-input@workspace:packages/ui-text-input":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-text-input@workspace:packages/ui-text-input"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-badge": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-tag": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-badge": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-tag": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-text@8.34.0, @instructure/ui-text@workspace:packages/ui-text":
+"@instructure/ui-text@8.35.0, @instructure/ui-text@workspace:packages/ui-text":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-text@workspace:packages/ui-text"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-themes": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-themes": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-theme-tokens@8.34.0, @instructure/ui-theme-tokens@workspace:packages/ui-theme-tokens":
+"@instructure/ui-theme-tokens@8.35.0, @instructure/ui-theme-tokens@workspace:packages/ui-theme-tokens":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-theme-tokens@workspace:packages/ui-theme-tokens"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-themes@8.34.0, @instructure/ui-themes@workspace:packages/ui-themes":
+"@instructure/ui-themes@8.35.0, @instructure/ui-themes@workspace:packages/ui-themes":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-themes@workspace:packages/ui-themes"
   dependencies:
-    "@instructure/canvas-high-contrast-theme": 8.34.0
-    "@instructure/canvas-theme": 8.34.0
-    "@instructure/instructure-theme": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-theme-tokens": 8.34.0
+    "@instructure/canvas-high-contrast-theme": 8.35.0
+    "@instructure/canvas-theme": 8.35.0
+    "@instructure/instructure-theme": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-theme-tokens": 8.35.0
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-time-select@8.34.0, @instructure/ui-time-select@workspace:packages/ui-time-select":
+"@instructure/ui-time-select@8.35.0, @instructure/ui-time-select@workspace:packages/ui-time-select":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-time-select@workspace:packages/ui-time-select"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-select": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-select": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     moment-timezone: ^0.5.40
     prop-types: ^15.8.1
   peerDependencies:
@@ -4482,31 +4482,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-toggle-details@8.34.0, @instructure/ui-toggle-details@workspace:packages/ui-toggle-details":
+"@instructure/ui-toggle-details@8.35.0, @instructure/ui-toggle-details@workspace:packages/ui-toggle-details":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-toggle-details@workspace:packages/ui-toggle-details"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-expandable": 8.34.0
-    "@instructure/ui-flex": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-menu": 8.34.0
-    "@instructure/ui-motion": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-expandable": 8.35.0
+    "@instructure/ui-flex": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-menu": 8.35.0
+    "@instructure/ui-motion": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/uid": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
@@ -4518,10 +4518,10 @@ __metadata:
   resolution: "@instructure/ui-token-scripts@workspace:packages/ui-token-scripts"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/command-utils": 8.34.0
-    "@instructure/config-loader": 8.34.0
-    "@instructure/console": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
+    "@instructure/command-utils": 8.35.0
+    "@instructure/config-loader": 8.35.0
+    "@instructure/console": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
     fs-extra: ^9.1.0
     lodash.isplainobject: ^4.0.6
     style-dictionary: ^2.10.3
@@ -4531,113 +4531,113 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-tooltip@8.34.0, @instructure/ui-tooltip@workspace:packages/ui-tooltip":
+"@instructure/ui-tooltip@8.35.0, @instructure/ui-tooltip@workspace:packages/ui-tooltip":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-tooltip@workspace:packages/ui-tooltip"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-popover": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-popover": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-top-nav-bar@8.34.0, @instructure/ui-top-nav-bar@workspace:packages/ui-top-nav-bar":
+"@instructure/ui-top-nav-bar@8.35.0, @instructure/ui-top-nav-bar@workspace:packages/ui-top-nav-bar":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-top-nav-bar@workspace:packages/ui-top-nav-bar"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-avatar": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dialog": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-drilldown": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-link": 8.34.0
-    "@instructure/ui-popover": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-responsive": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-tooltip": 8.34.0
-    "@instructure/ui-tray": 8.34.0
-    "@instructure/ui-truncate-list": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-avatar": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dialog": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-drilldown": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-link": 8.35.0
+    "@instructure/ui-popover": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-responsive": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-tooltip": 8.35.0
+    "@instructure/ui-tray": 8.35.0
+    "@instructure/ui-truncate-list": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-tray@8.34.0, @instructure/ui-tray@workspace:packages/ui-tray":
+"@instructure/ui-tray@8.35.0, @instructure/ui-tray@workspace:packages/ui-tray":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-tray@workspace:packages/ui-tray"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dialog": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-motion": 8.34.0
-    "@instructure/ui-portal": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dialog": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-motion": 8.35.0
+    "@instructure/ui-portal": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-tree-browser@8.34.0, @instructure/ui-tree-browser@workspace:packages/ui-tree-browser":
+"@instructure/ui-tree-browser@8.35.0, @instructure/ui-tree-browser@workspace:packages/ui-tree-browser":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-tree-browser@workspace:packages/ui-tree-browser"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-img": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-img": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     keycode: ^2.2.1
     prop-types: ^15.8.1
   peerDependencies:
@@ -4645,49 +4645,49 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-truncate-list@8.34.0, @instructure/ui-truncate-list@workspace:packages/ui-truncate-list":
+"@instructure/ui-truncate-list@8.35.0, @instructure/ui-truncate-list@workspace:packages/ui-truncate-list":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-truncate-list@workspace:packages/ui-truncate-list"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/debounce": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-locator": 8.34.0
-    "@instructure/ui-test-queries": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-locator": 8.35.0
+    "@instructure/ui-test-queries": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-truncate-text@8.34.0, @instructure/ui-truncate-text@workspace:packages/ui-truncate-text":
+"@instructure/ui-truncate-text@8.35.0, @instructure/ui-truncate-text@workspace:packages/ui-truncate-text":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-truncate-text@workspace:packages/ui-truncate-text"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/debounce": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-text": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-text": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-utils": 8.35.0
     "@types/escape-html": ^1.0.2
     escape-html: ^1.0.3
     prop-types: ^15.8.1
@@ -4696,15 +4696,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-utils@8.34.0, @instructure/ui-utils@workspace:packages/ui-utils":
+"@instructure/ui-utils@8.35.0, @instructure/ui-utils@workspace:packages/ui-utils":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-utils@workspace:packages/ui-utils"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
     "@types/json-stable-stringify": ^1.0.34
     bowser: ^1.9.4
     fast-deep-equal: ^3.1.3
@@ -4716,30 +4716,30 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-view@8.34.0, @instructure/ui-view@workspace:packages/ui-view":
+"@instructure/ui-view@8.35.0, @instructure/ui-view@workspace:packages/ui-view":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-view@workspace:packages/ui-view"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/console": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-themes": 8.34.0
+    "@instructure/console": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-themes": 8.35.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">=16.8 <=18"
   languageName: unknown
   linkType: soft
 
-"@instructure/ui-webpack-config@8.34.0, @instructure/ui-webpack-config@workspace:packages/ui-webpack-config":
+"@instructure/ui-webpack-config@8.35.0, @instructure/ui-webpack-config@workspace:packages/ui-webpack-config":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-webpack-config@workspace:packages/ui-webpack-config"
   dependencies:
@@ -4756,85 +4756,85 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/ui@8.34.0, @instructure/ui@workspace:packages/ui":
+"@instructure/ui@8.35.0, @instructure/ui@workspace:packages/ui":
   version: 0.0.0-use.local
   resolution: "@instructure/ui@workspace:packages/ui"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/emotion": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-alerts": 8.34.0
-    "@instructure/ui-avatar": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-badge": 8.34.0
-    "@instructure/ui-billboard": 8.34.0
-    "@instructure/ui-breadcrumb": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-byline": 8.34.0
-    "@instructure/ui-calendar": 8.34.0
-    "@instructure/ui-checkbox": 8.34.0
-    "@instructure/ui-code-editor": 8.34.0
-    "@instructure/ui-color-picker": 8.34.0
-    "@instructure/ui-date-input": 8.34.0
-    "@instructure/ui-date-time-input": 8.34.0
-    "@instructure/ui-dialog": 8.34.0
-    "@instructure/ui-drawer-layout": 8.34.0
-    "@instructure/ui-drilldown": 8.34.0
-    "@instructure/ui-editable": 8.34.0
-    "@instructure/ui-expandable": 8.34.0
-    "@instructure/ui-file-drop": 8.34.0
-    "@instructure/ui-flex": 8.34.0
-    "@instructure/ui-focusable": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-grid": 8.34.0
-    "@instructure/ui-heading": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-img": 8.34.0
-    "@instructure/ui-link": 8.34.0
-    "@instructure/ui-list": 8.34.0
-    "@instructure/ui-menu": 8.34.0
-    "@instructure/ui-metric": 8.34.0
-    "@instructure/ui-modal": 8.34.0
-    "@instructure/ui-motion": 8.34.0
-    "@instructure/ui-navigation": 8.34.0
-    "@instructure/ui-number-input": 8.34.0
-    "@instructure/ui-options": 8.34.0
-    "@instructure/ui-overlays": 8.34.0
-    "@instructure/ui-pages": 8.34.0
-    "@instructure/ui-pagination": 8.34.0
-    "@instructure/ui-pill": 8.34.0
-    "@instructure/ui-popover": 8.34.0
-    "@instructure/ui-portal": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-progress": 8.34.0
-    "@instructure/ui-radio-input": 8.34.0
-    "@instructure/ui-range-input": 8.34.0
-    "@instructure/ui-rating": 8.34.0
-    "@instructure/ui-responsive": 8.34.0
-    "@instructure/ui-select": 8.34.0
-    "@instructure/ui-selectable": 8.34.0
-    "@instructure/ui-simple-select": 8.34.0
-    "@instructure/ui-source-code-editor": 8.34.0
-    "@instructure/ui-spinner": 8.34.0
-    "@instructure/ui-svg-images": 8.34.0
-    "@instructure/ui-table": 8.34.0
-    "@instructure/ui-tabs": 8.34.0
-    "@instructure/ui-tag": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-text": 8.34.0
-    "@instructure/ui-text-area": 8.34.0
-    "@instructure/ui-text-input": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-time-select": 8.34.0
-    "@instructure/ui-toggle-details": 8.34.0
-    "@instructure/ui-tooltip": 8.34.0
-    "@instructure/ui-top-nav-bar": 8.34.0
-    "@instructure/ui-tray": 8.34.0
-    "@instructure/ui-tree-browser": 8.34.0
-    "@instructure/ui-truncate-list": 8.34.0
-    "@instructure/ui-truncate-text": 8.34.0
-    "@instructure/ui-view": 8.34.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-alerts": 8.35.0
+    "@instructure/ui-avatar": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-badge": 8.35.0
+    "@instructure/ui-billboard": 8.35.0
+    "@instructure/ui-breadcrumb": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-byline": 8.35.0
+    "@instructure/ui-calendar": 8.35.0
+    "@instructure/ui-checkbox": 8.35.0
+    "@instructure/ui-code-editor": 8.35.0
+    "@instructure/ui-color-picker": 8.35.0
+    "@instructure/ui-date-input": 8.35.0
+    "@instructure/ui-date-time-input": 8.35.0
+    "@instructure/ui-dialog": 8.35.0
+    "@instructure/ui-drawer-layout": 8.35.0
+    "@instructure/ui-drilldown": 8.35.0
+    "@instructure/ui-editable": 8.35.0
+    "@instructure/ui-expandable": 8.35.0
+    "@instructure/ui-file-drop": 8.35.0
+    "@instructure/ui-flex": 8.35.0
+    "@instructure/ui-focusable": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-grid": 8.35.0
+    "@instructure/ui-heading": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-img": 8.35.0
+    "@instructure/ui-link": 8.35.0
+    "@instructure/ui-list": 8.35.0
+    "@instructure/ui-menu": 8.35.0
+    "@instructure/ui-metric": 8.35.0
+    "@instructure/ui-modal": 8.35.0
+    "@instructure/ui-motion": 8.35.0
+    "@instructure/ui-navigation": 8.35.0
+    "@instructure/ui-number-input": 8.35.0
+    "@instructure/ui-options": 8.35.0
+    "@instructure/ui-overlays": 8.35.0
+    "@instructure/ui-pages": 8.35.0
+    "@instructure/ui-pagination": 8.35.0
+    "@instructure/ui-pill": 8.35.0
+    "@instructure/ui-popover": 8.35.0
+    "@instructure/ui-portal": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-progress": 8.35.0
+    "@instructure/ui-radio-input": 8.35.0
+    "@instructure/ui-range-input": 8.35.0
+    "@instructure/ui-rating": 8.35.0
+    "@instructure/ui-responsive": 8.35.0
+    "@instructure/ui-select": 8.35.0
+    "@instructure/ui-selectable": 8.35.0
+    "@instructure/ui-simple-select": 8.35.0
+    "@instructure/ui-source-code-editor": 8.35.0
+    "@instructure/ui-spinner": 8.35.0
+    "@instructure/ui-svg-images": 8.35.0
+    "@instructure/ui-table": 8.35.0
+    "@instructure/ui-tabs": 8.35.0
+    "@instructure/ui-tag": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-text": 8.35.0
+    "@instructure/ui-text-area": 8.35.0
+    "@instructure/ui-text-input": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-time-select": 8.35.0
+    "@instructure/ui-toggle-details": 8.35.0
+    "@instructure/ui-tooltip": 8.35.0
+    "@instructure/ui-top-nav-bar": 8.35.0
+    "@instructure/ui-tray": 8.35.0
+    "@instructure/ui-tree-browser": 8.35.0
+    "@instructure/ui-truncate-list": 8.35.0
+    "@instructure/ui-truncate-text": 8.35.0
+    "@instructure/ui-view": 8.35.0
     jest: ^24.9.0
   peerDependencies:
     react: ">= 16.8 <= 18"
@@ -4842,13 +4842,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/uid@8.34.0, @instructure/uid@workspace:packages/uid":
+"@instructure/uid@8.35.0, @instructure/uid@workspace:packages/uid":
   version: 0.0.0-use.local
   resolution: "@instructure/uid@workspace:packages/uid"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
   languageName: unknown
   linkType: soft
 
@@ -15439,98 +15439,98 @@ __metadata:
   resolution: "docs-app@workspace:packages/__docs__"
   dependencies:
     "@babel/standalone": ^7.20.15
-    "@instructure/canvas-high-contrast-theme": 8.34.0
-    "@instructure/canvas-theme": 8.34.0
-    "@instructure/config-loader": 8.34.0
-    "@instructure/console": 8.34.0
-    "@instructure/debounce": 8.34.0
-    "@instructure/emotion": 8.34.0
-    "@instructure/instructure-theme": 8.34.0
-    "@instructure/shared-types": 8.34.0
-    "@instructure/ui": 8.34.0
-    "@instructure/ui-a11y-content": 8.34.0
-    "@instructure/ui-a11y-utils": 8.34.0
-    "@instructure/ui-alerts": 8.34.0
-    "@instructure/ui-avatar": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-badge": 8.34.0
-    "@instructure/ui-billboard": 8.34.0
-    "@instructure/ui-breadcrumb": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-byline": 8.34.0
-    "@instructure/ui-calendar": 8.34.0
-    "@instructure/ui-checkbox": 8.34.0
-    "@instructure/ui-code-editor": 8.34.0
-    "@instructure/ui-color-picker": 8.34.0
-    "@instructure/ui-color-utils": 8.34.0
-    "@instructure/ui-date-input": 8.34.0
-    "@instructure/ui-date-time-input": 8.34.0
-    "@instructure/ui-dialog": 8.34.0
-    "@instructure/ui-dom-utils": 8.34.0
-    "@instructure/ui-drawer-layout": 8.34.0
-    "@instructure/ui-drilldown": 8.34.0
-    "@instructure/ui-editable": 8.34.0
-    "@instructure/ui-eslint-config": 8.34.0
-    "@instructure/ui-expandable": 8.34.0
-    "@instructure/ui-file-drop": 8.34.0
-    "@instructure/ui-flex": 8.34.0
-    "@instructure/ui-focusable": 8.34.0
-    "@instructure/ui-form-field": 8.34.0
-    "@instructure/ui-grid": 8.34.0
-    "@instructure/ui-heading": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-img": 8.34.0
-    "@instructure/ui-link": 8.34.0
-    "@instructure/ui-list": 8.34.0
-    "@instructure/ui-menu": 8.34.0
-    "@instructure/ui-metric": 8.34.0
-    "@instructure/ui-modal": 8.34.0
-    "@instructure/ui-motion": 8.34.0
-    "@instructure/ui-navigation": 8.34.0
-    "@instructure/ui-number-input": 8.34.0
-    "@instructure/ui-options": 8.34.0
-    "@instructure/ui-overlays": 8.34.0
-    "@instructure/ui-pages": 8.34.0
-    "@instructure/ui-pagination": 8.34.0
-    "@instructure/ui-pill": 8.34.0
-    "@instructure/ui-popover": 8.34.0
-    "@instructure/ui-portal": 8.34.0
-    "@instructure/ui-position": 8.34.0
-    "@instructure/ui-progress": 8.34.0
-    "@instructure/ui-prop-types": 8.34.0
-    "@instructure/ui-radio-input": 8.34.0
-    "@instructure/ui-range-input": 8.34.0
-    "@instructure/ui-rating": 8.34.0
-    "@instructure/ui-react-utils": 8.34.0
-    "@instructure/ui-responsive": 8.34.0
-    "@instructure/ui-scripts": 8.34.0
-    "@instructure/ui-select": 8.34.0
-    "@instructure/ui-selectable": 8.34.0
-    "@instructure/ui-simple-select": 8.34.0
-    "@instructure/ui-source-code-editor": 8.34.0
-    "@instructure/ui-spinner": 8.34.0
-    "@instructure/ui-stylelint-config": 8.34.0
-    "@instructure/ui-svg-images": 8.34.0
-    "@instructure/ui-table": 8.34.0
-    "@instructure/ui-tabs": 8.34.0
-    "@instructure/ui-tag": 8.34.0
-    "@instructure/ui-testable": 8.34.0
-    "@instructure/ui-text": 8.34.0
-    "@instructure/ui-text-area": 8.34.0
-    "@instructure/ui-text-input": 8.34.0
-    "@instructure/ui-themes": 8.34.0
-    "@instructure/ui-time-select": 8.34.0
-    "@instructure/ui-toggle-details": 8.34.0
-    "@instructure/ui-tooltip": 8.34.0
-    "@instructure/ui-top-nav-bar": 8.34.0
-    "@instructure/ui-tray": 8.34.0
-    "@instructure/ui-tree-browser": 8.34.0
-    "@instructure/ui-truncate-list": 8.34.0
-    "@instructure/ui-truncate-text": 8.34.0
-    "@instructure/ui-utils": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/ui-webpack-config": 8.34.0
+    "@instructure/canvas-high-contrast-theme": 8.35.0
+    "@instructure/canvas-theme": 8.35.0
+    "@instructure/config-loader": 8.35.0
+    "@instructure/console": 8.35.0
+    "@instructure/debounce": 8.35.0
+    "@instructure/emotion": 8.35.0
+    "@instructure/instructure-theme": 8.35.0
+    "@instructure/shared-types": 8.35.0
+    "@instructure/ui": 8.35.0
+    "@instructure/ui-a11y-content": 8.35.0
+    "@instructure/ui-a11y-utils": 8.35.0
+    "@instructure/ui-alerts": 8.35.0
+    "@instructure/ui-avatar": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-badge": 8.35.0
+    "@instructure/ui-billboard": 8.35.0
+    "@instructure/ui-breadcrumb": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-byline": 8.35.0
+    "@instructure/ui-calendar": 8.35.0
+    "@instructure/ui-checkbox": 8.35.0
+    "@instructure/ui-code-editor": 8.35.0
+    "@instructure/ui-color-picker": 8.35.0
+    "@instructure/ui-color-utils": 8.35.0
+    "@instructure/ui-date-input": 8.35.0
+    "@instructure/ui-date-time-input": 8.35.0
+    "@instructure/ui-dialog": 8.35.0
+    "@instructure/ui-dom-utils": 8.35.0
+    "@instructure/ui-drawer-layout": 8.35.0
+    "@instructure/ui-drilldown": 8.35.0
+    "@instructure/ui-editable": 8.35.0
+    "@instructure/ui-eslint-config": 8.35.0
+    "@instructure/ui-expandable": 8.35.0
+    "@instructure/ui-file-drop": 8.35.0
+    "@instructure/ui-flex": 8.35.0
+    "@instructure/ui-focusable": 8.35.0
+    "@instructure/ui-form-field": 8.35.0
+    "@instructure/ui-grid": 8.35.0
+    "@instructure/ui-heading": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-img": 8.35.0
+    "@instructure/ui-link": 8.35.0
+    "@instructure/ui-list": 8.35.0
+    "@instructure/ui-menu": 8.35.0
+    "@instructure/ui-metric": 8.35.0
+    "@instructure/ui-modal": 8.35.0
+    "@instructure/ui-motion": 8.35.0
+    "@instructure/ui-navigation": 8.35.0
+    "@instructure/ui-number-input": 8.35.0
+    "@instructure/ui-options": 8.35.0
+    "@instructure/ui-overlays": 8.35.0
+    "@instructure/ui-pages": 8.35.0
+    "@instructure/ui-pagination": 8.35.0
+    "@instructure/ui-pill": 8.35.0
+    "@instructure/ui-popover": 8.35.0
+    "@instructure/ui-portal": 8.35.0
+    "@instructure/ui-position": 8.35.0
+    "@instructure/ui-progress": 8.35.0
+    "@instructure/ui-prop-types": 8.35.0
+    "@instructure/ui-radio-input": 8.35.0
+    "@instructure/ui-range-input": 8.35.0
+    "@instructure/ui-rating": 8.35.0
+    "@instructure/ui-react-utils": 8.35.0
+    "@instructure/ui-responsive": 8.35.0
+    "@instructure/ui-scripts": 8.35.0
+    "@instructure/ui-select": 8.35.0
+    "@instructure/ui-selectable": 8.35.0
+    "@instructure/ui-simple-select": 8.35.0
+    "@instructure/ui-source-code-editor": 8.35.0
+    "@instructure/ui-spinner": 8.35.0
+    "@instructure/ui-stylelint-config": 8.35.0
+    "@instructure/ui-svg-images": 8.35.0
+    "@instructure/ui-table": 8.35.0
+    "@instructure/ui-tabs": 8.35.0
+    "@instructure/ui-tag": 8.35.0
+    "@instructure/ui-testable": 8.35.0
+    "@instructure/ui-text": 8.35.0
+    "@instructure/ui-text-area": 8.35.0
+    "@instructure/ui-text-input": 8.35.0
+    "@instructure/ui-themes": 8.35.0
+    "@instructure/ui-time-select": 8.35.0
+    "@instructure/ui-toggle-details": 8.35.0
+    "@instructure/ui-tooltip": 8.35.0
+    "@instructure/ui-top-nav-bar": 8.35.0
+    "@instructure/ui-tray": 8.35.0
+    "@instructure/ui-tree-browser": 8.35.0
+    "@instructure/ui-truncate-list": 8.35.0
+    "@instructure/ui-truncate-text": 8.35.0
+    "@instructure/ui-utils": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/ui-webpack-config": 8.35.0
     "@types/marked": ^4.0.8
     babel-loader: ^8.3.0
     buffer: ^6.0.3
@@ -15562,17 +15562,17 @@ __metadata:
   resolution: "docs-examples@workspace:packages/__examples__"
   dependencies:
     "@babel/runtime": ^7.20.13
-    "@instructure/canvas-theme": 8.34.0
-    "@instructure/command-utils": 8.34.0
-    "@instructure/ui-babel-preset": 8.34.0
-    "@instructure/ui-buttons": 8.34.0
-    "@instructure/ui-i18n": 8.34.0
-    "@instructure/ui-icons": 8.34.0
-    "@instructure/ui-test-utils": 8.34.0
-    "@instructure/ui-tooltip": 8.34.0
-    "@instructure/ui-view": 8.34.0
-    "@instructure/ui-webpack-config": 8.34.0
-    "@instructure/uid": 8.34.0
+    "@instructure/canvas-theme": 8.35.0
+    "@instructure/command-utils": 8.35.0
+    "@instructure/ui-babel-preset": 8.35.0
+    "@instructure/ui-buttons": 8.35.0
+    "@instructure/ui-i18n": 8.35.0
+    "@instructure/ui-icons": 8.35.0
+    "@instructure/ui-test-utils": 8.35.0
+    "@instructure/ui-tooltip": 8.35.0
+    "@instructure/ui-view": 8.35.0
+    "@instructure/ui-webpack-config": 8.35.0
+    "@instructure/uid": 8.35.0
     "@storybook/addons": ^6.5.16
     "@storybook/builder-webpack5": ^6.5.16
     "@storybook/manager-webpack5": ^6.5.16
@@ -16861,11 +16861,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-instructure-ui@8.34.0, eslint-plugin-instructure-ui@workspace:packages/eslint-plugin-instructure-ui":
+"eslint-plugin-instructure-ui@8.35.0, eslint-plugin-instructure-ui@workspace:packages/eslint-plugin-instructure-ui":
   version: 0.0.0-use.local
   resolution: "eslint-plugin-instructure-ui@workspace:packages/eslint-plugin-instructure-ui"
   dependencies:
-    "@instructure/pkg-utils": 8.34.0
+    "@instructure/pkg-utils": 8.35.0
     eslint-module-utils: ^2
     eslint-plugin-import: ^2
   peerDependencies:

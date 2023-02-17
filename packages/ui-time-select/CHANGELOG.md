@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.35.0](https://github.com/instructure/instructure-ui/compare/v8.34.0...v8.35.0) (2023-02-17)
+
+### Features
+
+- **ui-time-select:** allow non-step values with allowNonStepInput ([6dace32](https://github.com/instructure/instructure-ui/commit/6dace32d7fbb4d13227ac988b83f521308541204))
+
 # [8.34.0](https://github.com/instructure/instructure-ui/compare/v8.33.2...v8.34.0) (2023-02-10)
 
 ### Features
