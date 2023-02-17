@@ -4474,6 +4474,7 @@ __metadata:
     "@instructure/ui-test-locator": 8.34.0
     "@instructure/ui-test-utils": 8.34.0
     "@instructure/ui-testable": 8.34.0
+    "@instructure/ui-utils": 8.34.0
     moment-timezone: ^0.5.40
     prop-types: ^15.8.1
   peerDependencies:

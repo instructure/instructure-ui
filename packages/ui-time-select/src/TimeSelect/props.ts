@@ -211,6 +211,32 @@ type TimeSelectOwnProps = {
    * property.
    */
   timezone?: string
+  /**
+   * Whether to allow the user to enter non-step divisible values in the input field.
+   * Note that even if this is set to `false` one can enter non-step divisible values programatically.
+   * The user will need to enter the value exactly (except for lower/uppercase) as specified by the `format` prop  for
+   * it to be accepted.
+   *
+   * Default is `false`
+   */
+  allowNonStepInput?: boolean
+  /**
+   * Callback fired when text input value changes.
+   */
+  onInputChange?: (
+    /**
+     * The raw HTML input event
+     */
+    event: React.ChangeEvent<HTMLInputElement>,
+    /**
+     * The text value in the input field.
+     */
+    value: string,
+    /**
+     * Current value as ISO datetime string, undefined it its a non-valid value.
+     */
+    valueAsISOString?: string
+  ) => void
 }
 
 const propTypes: PropValidators<PropKeys> = {
@@ -243,7 +269,9 @@ const propTypes: PropValidators<PropKeys> = {
   renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   locale: PropTypes.string,
-  timezone: PropTypes.string
+  timezone: PropTypes.string,
+  allowNonStepInput: PropTypes.bool,
+  onInputChange: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -276,7 +304,9 @@ const allowedProps: AllowedPropKeys = [
   'renderBeforeInput',
   'renderAfterInput',
   'locale',
-  'timezone'
+  'timezone',
+  'allowNonStepInput',
+  'onInputChange'
 ]
 
 type TimeSelectOptions = {
@@ -286,12 +316,22 @@ type TimeSelectOptions = {
 }
 
 type TimeSelectState = {
+  /**
+   * The current value in the input field, not necessarily a valid time
+   */
   inputValue: string
   options: TimeSelectOptions[]
   filteredOptions: TimeSelectOptions[]
+  /**
+   * Whether to show the options list.
+   */
   isShowingOptions: boolean
   highlightedOptionId?: string
   selectedOptionId?: string
+  /**
+   * Last valid input when nonStepInput is true
+   */
+  lastValidInput?: string
 }
 
 export type { TimeSelectProps, TimeSelectState, TimeSelectOptions }

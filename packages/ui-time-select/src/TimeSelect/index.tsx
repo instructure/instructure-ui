@@ -23,8 +23,7 @@
  */
 
 import React, { Component } from 'react'
-import { Moment } from 'moment-timezone'
-
+import type { Moment } from 'moment-timezone'
 import { ApplyLocaleContext, Locale, DateTime } from '@instructure/ui-i18n'
 import {
   getInteraction,
@@ -32,7 +31,6 @@ import {
   callRenderProp,
   withDeterministicId
 } from '@instructure/ui-react-utils'
-
 import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
 
@@ -62,11 +60,11 @@ A component used to select a time value.
 @withDeterministicId()
 @testable()
 class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
-  static readonly componentId = 'TimeSelect'
+  declare context: React.ContextType<typeof ApplyLocaleContext>
 
+  static readonly componentId = 'TimeSelect'
   static allowedProps = allowedProps
   static propTypes = propTypes
-
   static defaultProps = {
     defaultToFirstOption: false,
     format: 'LT', // see https://momentjs.com/docs/#/displaying/
@@ -76,9 +74,9 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     visibleOptionsCount: 8,
     placement: 'bottom stretch',
     constrain: 'window',
-    renderEmptyOption: '---'
+    renderEmptyOption: '---',
+    allowNonStepInput: false
   }
-  declare context: React.ContextType<typeof ApplyLocaleContext>
   static contextType = ApplyLocaleContext
 
   ref: Select | null = null
@@ -153,7 +151,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       // when uncontrolled, selection will be lost
       this.setState(this.getInitialState())
     }
-
     if (this.props.value !== prevProps.value) {
       const normalizedValue = this.normalizeISOTime(this.props.value)
       // value changed
@@ -168,9 +165,12 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       const outsideVal = this.props.value ? this.props.value : ''
       // value does not match an existing option
       const date = DateTime.parse(outsideVal, this.locale(), this.timezone())
-      const label = this.props.format
-        ? date.format(this.props.format)
-        : date.toISOString()
+      let label = ''
+      if (date.isValid()) {
+        label = this.props.format
+          ? date.format(this.props.format)
+          : date.toISOString()
+      }
       this.setState({
         inputValue: option ? option.label : label,
         selectedOptionId: option ? option.id : undefined
@@ -330,17 +330,21 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     const newOptions = this.filterOptions(value)
-
     this.setState({
       inputValue: value,
       filteredOptions: newOptions,
       highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : undefined,
       isShowingOptions: true
     })
-
     if (!this.state.isShowingOptions) {
       this.props.onShowOptions?.(event)
     }
+    const inputAsDate = this.parseInputText(value)
+    this.props.onInputChange?.(
+      event,
+      value,
+      inputAsDate.isValid() ? inputAsDate.toISOString() : undefined
+    )
   }
 
   handleShowOptions = (event: React.SyntheticEvent) => {
@@ -351,31 +355,42 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     this.props.onShowOptions?.(event)
   }
 
-  handleHideOptions: SelectProps['onRequestHideOptions'] = (
-    event: React.SyntheticEvent
-  ) => {
-    const { selectedOptionId } = this.state
-    const option = this.getOption('id', selectedOptionId)
-    let prevValue = ''
-
+  handleHideOptions: SelectProps['onRequestHideOptions'] = (event) => {
+    const input = this.parseInputText(this.state.inputValue)
+    let defaultValue = ''
     if (this.props.defaultValue) {
       const date = DateTime.parse(
         this.props.defaultValue,
         this.locale(),
         this.timezone()
       )
-      prevValue = this.props.format
+      defaultValue = this.props.format
         ? date.format(this.props.format)
         : date.toISOString()
     }
-
-    this.setState(() => ({
-      isShowingOptions: false,
-      highlightedOptionId: undefined,
-      inputValue: selectedOptionId ? option!.label : prevValue,
-      filteredOptions: this.filterOptions(''),
-      ...this.matchValue()
-    }))
+    if (
+      !this.props.allowNonStepInput ||
+      (this.props.allowNonStepInput &&
+        input.isValid() &&
+        input.minute() % this.props.step! === 0)
+    ) {
+      const { selectedOptionId } = this.state
+      const option = this.getOption('id', selectedOptionId)
+      this.setState(() => ({
+        isShowingOptions: false,
+        highlightedOptionId: undefined,
+        inputValue: selectedOptionId ? option!.label : defaultValue,
+        filteredOptions: this.filterOptions(''),
+        ...this.matchValue()
+      }))
+    } else {
+      this.setState(() => ({
+        isShowingOptions: false,
+        highlightedOptionId: undefined,
+        inputValue: this.state.lastValidInput || defaultValue || '',
+        filteredOptions: this.filterOptions('')
+      }))
+    }
     this.props.onHideOptions?.(event)
   }
 
@@ -423,6 +438,9 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     }
 
     if (id !== this.state.selectedOptionId) {
+      this.setState({
+        lastValidInput: newInputValue
+      })
       this.props.onChange?.(event, {
         value: option.value,
         inputText: newInputValue
@@ -466,6 +484,46 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     )
   }
 
+  onKeyDown = (event: React.KeyboardEvent<any>) => {
+    const input = this.parseInputText(this.state.inputValue)
+    // validate input and if OK close dropdown
+    if (
+      event.key === 'Enter' &&
+      this.props.allowNonStepInput &&
+      input.isValid() &&
+      input.minute() % this.props.step! !== 0 &&
+      this.state.lastValidInput != this.state.inputValue
+    ) {
+      this.setState(() => ({
+        isShowingOptions: false,
+        highlightedOptionId: undefined,
+        filteredOptions: this.filterOptions(''),
+        lastValidInput: this.state.inputValue
+      }))
+      this.props.onChange?.(event, {
+        value: input.toISOString(),
+        inputText: this.state.inputValue
+      })
+      // others are set in OnHideOptions
+    }
+    this.props.onKeyDown?.(event)
+  }
+
+  parseInputText = (inputValue: string) => {
+    const input = DateTime.parse(
+      inputValue,
+      this.locale(),
+      this.timezone(),
+      [this.props.format!],
+      true
+    )
+    const baseDate = this.getBaseDate()
+    input.year(baseDate.year())
+    input.month(baseDate.month())
+    input.date(baseDate.date())
+    return input
+  }
+
   render() {
     const {
       value,
@@ -490,6 +548,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       onFocus,
       onShowOptions,
       onHideOptions,
+      onInputChange,
+      onKeyDown,
       mountNode,
       ...rest
     } = this.props
@@ -524,6 +584,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         onRequestHighlightOption={this.handleHighlightOption}
         onRequestSelectOption={this.handleSelectOption}
         onInputChange={this.handleInputChange}
+        onKeyDown={this.onKeyDown}
         {...passthroughProps(rest)}
       >
         {isShowingOptions && this.renderOptions()}
