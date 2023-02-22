@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/command-utils": "8.35.0",
-    "@lerna/package": "^4.0.0",
+    "@lerna/package": "^6.4.1",
     "read-pkg-up": "^7.0.1"
   },
   "publishConfig": {
