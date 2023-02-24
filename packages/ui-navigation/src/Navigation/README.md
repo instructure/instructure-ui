@@ -21,7 +21,7 @@ example: true
       }}
     >
       <Navigation.Item
-        icon={<Img src={placeholderLogo(85, 85)} constrain="cover" />}
+        icon={<IconUserLine />}
         label={<ScreenReaderContent>Home</ScreenReaderContent>}
         href="#"
         themeOverride={{
