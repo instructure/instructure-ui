@@ -45,7 +45,14 @@ const config = merge(baseConfig, {
   },
   module: {
     // suppress "the request of a dependency is an expression" warnings
-    exprContextCritical: false
+    exprContextCritical: false,
+
+    rules: [
+      {
+        test: /\.svg/,
+        type: 'asset/source'
+      }
+    ]
   },
   output: {
     path: outputPath,

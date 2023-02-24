@@ -47,7 +47,6 @@ import iconExample from './buildScripts/samplemedia/heart_lg.svg'
 import avatarSquare from './buildScripts/samplemedia/avatarSquare.jpg'
 import avatarPortrait from './buildScripts/samplemedia/avatarPortrait.jpg'
 import placeholderImage from './buildScripts/samplemedia/placeholder-image'
-import placeholderLogo from './buildScripts/samplemedia/placeholder-logo'
 
 const globals = {
   ...Components,
@@ -79,7 +78,6 @@ const globals = {
   },
   mirrorHorizontalPlacement,
   placeholderImage,
-  placeholderLogo,
   React,
   ReactDOM
 }
