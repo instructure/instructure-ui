@@ -37,7 +37,7 @@ export {
   mirrorShorthandEdges
 } from './styleUtils'
 
-export type { ComponentStyle, StyleObject } from './EmotionTypes'
+export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
 export type { WithStyleProps } from './withStyle'
 export type {
   SpacingValues,
