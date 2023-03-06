@@ -32,18 +32,6 @@ embed: true
 </ToggleBlockquote>
 ```
 
-```javascript
----
-embed: true
----
-<ToggleBlockquote summary="Missing DOM APIs">
-  <ToggleBlockquote.Paragraph>
-    You will need to substitute <code>Element</code> from the DOM API because it is used by some components:
-    <code>Element = typeof Element === 'undefined' ? function(){} : Element</code>
-  </ToggleBlockquote.Paragraph>
-</ToggleBlockquote>
-```
-
 #### Initial steps
 
 - install InstUI related dependencies:
@@ -51,9 +39,6 @@ embed: true
 ```sh
 yarn add @instructure/emotion @instructure/ui-react-utils
 ```
-
-> Using components which are levereging [Portals](/#Portal) (Modal, Dialog, Tray, Position, Overlay, DrawerLayout) under the hood to render content is not recommended to use on the server side!
-> If you must do so, please render them using Next.js's [dynamic](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr) feature with `ssr` set to false.
 
 - in your Next.js application create - if it does not already exist - a file named `_app.js` inside the `pages` directory. This is a special file in Next.js because it allows you to override/control component initialization. Read more about it in the [Next.js docs](https://nextjs.org/docs/advanced-features/custom-app).
 

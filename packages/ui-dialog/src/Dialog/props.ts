@@ -25,6 +25,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { element } from '@instructure/ui-prop-types'
+
 import type {
   AsElementType,
   OtherHTMLAttributes,
@@ -95,8 +97,8 @@ const propTypes: PropValidators<PropKeys> = {
    * the screen reader when the focus region is active
    */
   liveRegion: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.instanceOf(Element)),
-    PropTypes.instanceOf(Element),
+    element,
+    PropTypes.arrayOf(element),
     PropTypes.func
   ]),
   /**

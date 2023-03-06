@@ -30,12 +30,12 @@ import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
-import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
+import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
-  PropValidators,
   DrawerLayoutTrayTheme,
-  OtherHTMLAttributes,
   LiveRegion,
+  OtherHTMLAttributes,
+  PropValidators,
   UIElement
 } from '@instructure/shared-types'
 import {
@@ -204,8 +204,8 @@ const propTypes: PropValidators<PropKeys> = {
   mountNode: PropTypes.oneOfType([element, PropTypes.func]),
   defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   liveRegion: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.instanceOf(Element)),
-    PropTypes.instanceOf(Element),
+    element,
+    PropTypes.arrayOf(element),
     PropTypes.func
   ]),
   onDismiss: PropTypes.func,
@@ -248,8 +248,8 @@ const allowedProps: AllowedPropKeys = [
 export type {
   DrawerLayoutTrayProps,
   DrawerLayoutTrayState,
+  DrawerLayoutTrayStyle,
   DrawerLayoutTrayStyleProps,
-  DrawerTrayPlacement,
-  DrawerLayoutTrayStyle
+  DrawerTrayPlacement
 }
-export { propTypes, allowedProps }
+export { allowedProps, propTypes }
