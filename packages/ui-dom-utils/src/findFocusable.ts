@@ -37,6 +37,19 @@
 import { getComputedStyle, findDOMNode, elementMatches } from './'
 import { UIElement } from '@instructure/shared-types'
 
+const focusableSelector = [
+  'a[href]',
+  'frame',
+  'iframe',
+  'object',
+  'input:not([type=hidden])',
+  'select',
+  'textarea',
+  'button',
+  '*[tabindex]',
+  '[contenteditable="true"]'
+].join(',')
+
 function findFocusable(
   el?: UIElement,
   filter?: (el: Element) => boolean,
@@ -50,9 +63,6 @@ function findFocusable(
   ) {
     return []
   }
-
-  const focusableSelector =
-    'a[href],frame,iframe,object,input:not([type=hidden]),select,textarea,button,*[tabindex]'
 
   let matches = Array.from(
     (element as Element | Document).querySelectorAll(focusableSelector)
