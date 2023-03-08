@@ -622,7 +622,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
 
     const currentValue = this._editorView.state.doc!.toString()
 
-    if (value && currentValue !== value) {
+    if (typeof value !== 'undefined' && currentValue !== value) {
       let userEvent
       const lengthDiff = value.length - currentValue.length
 
