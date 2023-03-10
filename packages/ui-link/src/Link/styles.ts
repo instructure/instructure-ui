@@ -55,6 +55,7 @@ const generateStyle = (
     outlineColor: 'transparent',
     outlineWidth: componentTheme.focusOutlineWidth,
     outlineStyle: componentTheme.focusOutlineStyle,
+    borderRadius: componentTheme.focusOutlineBorderRadius,
     outlineOffset: '0.25rem',
 
     // If TruncateText is used in Link with icon, align the icon and the text vertically
@@ -134,7 +135,8 @@ const generateStyle = (
       ...(inverseStyle && {
         ...inverseStyles,
         '&:is(a):link, &:is(a):visited, &:is(button)': inverseStyles,
-        '&:-webkit-any(a):link, &:-webkit-any(a):visited, &:-webkit-any(button)': inverseStyles
+        '&:-webkit-any(a):link, &:-webkit-any(a):visited, &:-webkit-any(button)':
+          inverseStyles
       })
     },
     icon: {
