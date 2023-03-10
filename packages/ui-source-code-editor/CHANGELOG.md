@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.35.1](https://github.com/instructure/instructure-ui/compare/v8.35.0...v8.35.1) (2023-03-10)
+
+### Bug Fixes
+
+- **ui-source-code-editor:** sourceCodeEditor doesn't delete text when select all with cmd+a in controlled mode ([89bf43f](https://github.com/instructure/instructure-ui/commit/89bf43fa2cdece4ce5318017eb68298d73d0983e))
+
 # [8.35.0](https://github.com/instructure/instructure-ui/compare/v8.34.0...v8.35.0) (2023-02-17)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor

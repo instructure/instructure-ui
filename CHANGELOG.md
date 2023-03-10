@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.35.1](https://github.com/instructure/instructure-ui/compare/v8.35.0...v8.35.1) (2023-03-10)
+
+### Bug Fixes
+
+- **ui-dialog,ui-drawer-layout,ui-modal,ui-popover,ui-tray:** remove browser reliant `Element` usage ([8c49c42](https://github.com/instructure/instructure-ui/commit/8c49c4277a3fc5b4b3f64cb3cbe00983cb1602e2))
+- **ui-dom-utils:** add contenteditable to focusableSelector ([21c0108](https://github.com/instructure/instructure-ui/commit/21c01082a6a6f5ed1e4328aea486f1bef48c05e7))
+- **ui-source-code-editor:** sourceCodeEditor doesn't delete text when select all with cmd+a in controlled mode ([89bf43f](https://github.com/instructure/instructure-ui/commit/89bf43fa2cdece4ce5318017eb68298d73d0983e))
+
 # [8.35.0](https://github.com/instructure/instructure-ui/compare/v8.34.0...v8.35.0) (2023-02-17)
 
 ### Features
