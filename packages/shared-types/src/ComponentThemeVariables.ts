@@ -629,6 +629,7 @@ export type LinkTheme = {
   focusOutlineWidth: Border['widthMedium']
   focusOutlineColor: Colors['borderBrand']
   focusOutlineStyle: Border['style']
+  focusOutlineBorderRadius: Border['radiusSmall']
   hoverColor: Colors['textLink']
   colorInverse: Colors['textLight']
   focusInverseOutlineColor: Colors['borderLightest']

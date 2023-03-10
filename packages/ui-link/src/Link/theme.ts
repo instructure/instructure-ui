@@ -62,6 +62,7 @@ const generateComponentTheme = (theme: Theme): LinkTheme => {
     focusOutlineWidth: borders?.widthMedium,
     focusOutlineColor: colors?.borderBrand,
     focusOutlineStyle: borders?.style,
+    focusOutlineBorderRadius: borders?.radiusSmall,
 
     hoverColor: darken(colors?.textLink, 10),
 
