@@ -34,11 +34,16 @@ export default {
     placement: ['start top', 'end top', 'start bottom', 'end bottom'],
     countUntil: [null, 100]
   },
-  getComponentProps: () => {
+  getComponentProps: (props) => {
     return {
       count: 100,
       children: (
-        <View display="block" width="2rem" height="2rem" borderWidth="small" />
+        <View
+          display="block"
+          width={props.display === 'block' ? '100%' : '2rem'}
+          height="2rem"
+          borderWidth="small"
+        />
       )
     }
   },

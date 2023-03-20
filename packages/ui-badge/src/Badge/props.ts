@@ -72,16 +72,22 @@ type BadgeOwnProps = {
   formatOutput?: (formattedCount: string) => JSX.Element | string | number
   as?: AsElementType
   /**
+   * Specifies the display property of the container.
+   *
+   * __Use "block" only when the content inside the Badge also has "block" display.__
+   */
+  display?: 'inline-block' | 'block'
+  /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
    */
-  margin: Spacing
+  margin?: Spacing
   /**
    * Supported values are `top start`, `top end`, `end center`, `bottom end`,
    * `bottom start`, and `start center`
    */
-  placement: PlacementPropValues
+  placement?: PlacementPropValues
 } & PropsWithChildren<unknown> // <unknown is needed for React 17 support
 
 type PropKeys = keyof BadgeOwnProps
@@ -103,6 +109,7 @@ const propTypes: PropValidators<PropKeys> = {
   pulse: PropTypes.bool,
   variant: PropTypes.oneOf(['primary', 'success', 'danger', 'inverse']),
   placement: PositionPropTypes.placement,
+  display: PropTypes.oneOf(['inline-block', 'block']),
   margin: ThemeablePropTypes.spacing,
   elementRef: PropTypes.func,
   formatOverflowText: PropTypes.func,
@@ -119,6 +126,7 @@ const allowedProps: AllowedPropKeys = [
   'pulse',
   'variant',
   'placement',
+  'display',
   'margin',
   'elementRef',
   'formatOverflowText',

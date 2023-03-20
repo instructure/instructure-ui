@@ -55,14 +55,10 @@ class Badge extends Component<BadgeProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    count: undefined,
-    children: null,
-    countUntil: undefined,
-    margin: undefined,
-    formatOutput: undefined,
     standalone: false,
     type: 'count',
     variant: 'primary',
+    display: 'inline-block',
     pulse: false,
     placement: 'top end',
     elementRef: () => {},
@@ -154,7 +150,7 @@ class Badge extends Component<BadgeProps> {
   }
 
   render() {
-    const { margin, standalone, as, styles } = this.props
+    const { margin, standalone, display, as, styles } = this.props
 
     if (standalone) {
       return this.renderBadge()
@@ -165,7 +161,7 @@ class Badge extends Component<BadgeProps> {
           margin={margin}
           elementRef={this.handleRef}
           css={styles?.wrapper}
-          display="inline-block"
+          display={display}
         >
           {this.renderChildren()}
           {this.renderBadge()}
