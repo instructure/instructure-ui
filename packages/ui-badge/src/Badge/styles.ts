@@ -49,7 +49,7 @@ const generateStyle = (
   componentTheme: BadgeTheme,
   props: BadgeProps
 ): BadgeStyle => {
-  const { type, variant, placement, standalone, pulse } = props
+  const { type, variant, placement = '', standalone, pulse } = props
 
   const top = placement.indexOf('top') > -1
   const bottom = placement.indexOf('bottom') > -1
