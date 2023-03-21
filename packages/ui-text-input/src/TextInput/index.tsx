@@ -289,6 +289,14 @@ class TextInput extends Component<TextInputProps, TextInputState> {
     const computedStyle = getComputedStyle(element)
     const { width, paddingInlineStart, paddingInlineEnd } = computedStyle
 
+    if (width === 'auto') {
+      // This is a workaround for an edge-case, when the TextInput's parent
+      // is hidden on load, so the element is not visible either.
+      // In this case the computed width is going to be 'auto', so we assume
+      // it has width so that the padding won't be removed.
+      return true
+    }
+
     const elementWidth =
       parseFloat(width) -
       parseFloat(paddingInlineStart) -
