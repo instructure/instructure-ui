@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.36.0](https://github.com/instructure/instructure-ui/compare/v8.35.1...v8.36.0) (2023-03-23)
+
+### Bug Fixes
+
+- **ui-text-input:** fix padding calculation for before/after element ([fe0f225](https://github.com/instructure/instructure-ui/commit/fe0f225e140d314ac4ad3a6c443fe518bea0f1fb))
+
 ## [8.35.1](https://github.com/instructure/instructure-ui/compare/v8.35.0...v8.35.1) (2023-03-10)
 
 **Note:** Version bump only for package @instructure/ui-text-input
