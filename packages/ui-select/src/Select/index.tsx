@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Children, Component } from 'react'
+import React, { Children, Component, memo } from 'react'
 
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
@@ -77,6 +77,51 @@ type GroupChild = React.ComponentElement<SelectGroupProps, Group>
 type OptionChild = React.ComponentElement<SelectOptionProps, Option>
 type SelectChildren = (GroupChild | OptionChild)[]
 
+type MemoedOptionProps = React.PropsWithChildren<{
+  selectOption: OptionChild
+  optionsItemProps: OptionsItemProps
+}>
+
+// This memoed Option component is used to prevent unnecessary re-renders of
+// Options.Item when the Select component is re-rendered. This is necessary
+// because the Select component is re-rendered on every prop change of the <Select.Option>
+// and with a large amount of options, this can cause a lot of unnecessary re-renders.
+const MemoedOption = memo(
+  function Opt(props: MemoedOptionProps) {
+    const { optionsItemProps, children } = props
+
+    return (
+      // The main <Options> that renders this is always an "ul"
+      <Options.Item as="li" {...optionsItemProps}>
+        {children}
+      </Options.Item>
+    )
+  },
+  // This is a custom equality function that checks if the props of the
+  // <Select.Option> have changed. If they haven't, then the Options.Item
+  // doesn't need to be re-rendered.
+  (prevProps, nextProps) => {
+    return (
+      prevProps.selectOption.props.isHighlighted ===
+        nextProps.selectOption.props.isHighlighted &&
+      prevProps.selectOption.props.isSelected ===
+        nextProps.selectOption.props.isSelected &&
+      prevProps.selectOption.props.isDisabled ===
+        nextProps.selectOption.props.isDisabled &&
+      prevProps.selectOption.props.children ===
+        nextProps.selectOption.props.children &&
+      prevProps.selectOption.props.id === nextProps.selectOption.props.id &&
+      prevProps.selectOption.props.renderBeforeLabel ===
+        nextProps.selectOption.props.renderBeforeLabel &&
+      prevProps.selectOption.props.renderAfterLabel ===
+        nextProps.selectOption.props.renderAfterLabel &&
+      prevProps.children === nextProps.children
+    )
+  }
+)
+// This is needed so the propTypes in <Options> check are correct
+MemoedOption.displayName = 'Item'
+
 /**
 ---
 category: components
@@ -118,7 +163,7 @@ class Select extends Component<SelectProps> {
     this.props.makeStyles?.()
 
     // scroll option into view if needed
-    this.scrollToOption(this.highlightedOptionId)
+    requestAnimationFrame(() => this.scrollToOption(this.highlightedOptionId))
   }
 
   state = {
@@ -273,13 +318,12 @@ class Select extends Component<SelectProps> {
       onRequestSelectOption
     } = this.props
 
-    const highlightedOptionId = this.highlightedOptionId
-    const selectedOptionId = this.selectedOptionId
-
     return this.interaction === 'enabled'
       ? {
           onRequestShowOptions: (event) => {
             onRequestShowOptions?.(event)
+            const selectedOptionId = this.selectedOptionId
+
             if (selectedOptionId && !Array.isArray(selectedOptionId)) {
               // highlight selected option on show
               this.highlightOption(event, selectedOptionId)
@@ -293,6 +337,8 @@ class Select extends Component<SelectProps> {
             { id, direction }: { id?: string; direction?: number }
           ) => {
             if (!isShowingOptions) return
+
+            const highlightedOptionId = this.highlightedOptionId
             // if id exists, use that
             let highlightId = this._optionIds.indexOf(id!) > -1 ? id : undefined
             if (!highlightId) {
@@ -389,7 +435,11 @@ class Select extends Component<SelectProps> {
       this._optionIds.push(id)
     }
 
-    return <Options.Item {...optionProps}>{children}</Options.Item>
+    return (
+      <MemoedOption optionsItemProps={optionProps} selectOption={option}>
+        {children}
+      </MemoedOption>
+    )
   }
 
   renderGroup(
