@@ -136,6 +136,7 @@ class Options extends Component<OptionsProps> {
       if (matchComponentTypes(child, ['Item', 'Separator'])) {
         return safeCloneElement(child, { as: this.childAs || child.props.as })
       }
+
       return undefined
     })
   }
