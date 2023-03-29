@@ -65,6 +65,7 @@ class Example extends React.Component {
   onChange = (e, isoDate) => {
     let messages = []
     if (!isoDate) {
+      // this happens if an invalid date is entered
       this.setState({ messages })
       return
     }

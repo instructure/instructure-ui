@@ -159,7 +159,42 @@ describe('<DateTimeInput />', async () => {
     expect(timeInput).to.have.value('12:00 AM')
   })
 
-  it('should call invalidDateTimeMessage if time is set w/o a date', async () => {
+  it('should call invalidDateTimeMessage if time is set w/o a date and is required', async () => {
+    const props = {
+      invalidDateTimeMessage: (_rawd: unknown) => 'whoops'
+    }
+    const messageSpy = spy(props, 'invalidDateTimeMessage')
+
+    await mount(
+      <DateTimeInput
+        description="date time"
+        dateRenderLabel="date"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        timeRenderLabel="time"
+        locale="en-US"
+        timezone="US/Eastern"
+        isRequired
+        {...props}
+      />
+    )
+
+    const dateTimeInput = await DateTimeInputLocator.find()
+    const timeLocator = await dateTimeInput.findTimeInput()
+
+    const timeInput = await timeLocator.findInput()
+
+    await timeInput.change({ target: { value: '1:00 PM' } })
+    await timeInput.keyDown('enter')
+
+    await wait(() => {
+      expect(messageSpy).to.have.been.called()
+    })
+
+    expect(await dateTimeInput.find(':contains(whoops)')).to.exist()
+  })
+
+  it('should not call invalidDateTimeMessage if time is set w/o a date', async () => {
     const props = {
       invalidDateTimeMessage: (_rawd: unknown) => 'whoops'
     }
@@ -187,10 +222,14 @@ describe('<DateTimeInput />', async () => {
     await timeInput.keyDown('enter')
 
     await wait(() => {
-      expect(messageSpy).to.have.been.called()
+      expect(messageSpy).to.have.not.been.called()
     })
 
-    expect(await dateTimeInput.find(':contains(whoops)')).to.exist()
+    expect(
+      await dateTimeInput.find(':contains(whoops)', {
+        expectEmpty: true
+      })
+    ).to.not.exist()
   })
 
   it('should fire the onChange event when DateInput value changes', async () => {
