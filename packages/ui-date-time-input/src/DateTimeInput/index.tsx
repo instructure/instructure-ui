@@ -309,15 +309,11 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     event: SyntheticEvent,
     option: { value?: string; inputText: string }
   ) => {
-    let newValue: string | undefined
-    if (this.state.iso) {
-      newValue = option.value
-    } else {
-      // if no date is set just return the input text, it will error
-      newValue = option.inputText
-    }
+    // this.state.iso is undefined if date is invalid or not set.
+    // in this case recalculate with the dateInput's text which will result in
+    // an empty valid date (if isRequired is false) or an invalid date.
+    const newValue = this.state.iso ? option.value : this.state.dateInputText
     const newState = this.recalculateState(newValue, true, false)
-
     this.changeStateIfNeeded(newState, event)
     this.setState({ timeSelectValue: option.value })
   }

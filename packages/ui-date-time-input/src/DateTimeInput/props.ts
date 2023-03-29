@@ -176,7 +176,8 @@ type DateTimeInputProps = {
   )[]
   /**
    * Specifies if the input is required (its passed down to the native DOM
-   * elements).
+   * elements). If its `true` then an empty input will produce an error message
+   * (`invalidDateTimeMessage`)
    */
   isRequired?: boolean
   /**
