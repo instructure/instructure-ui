@@ -232,8 +232,8 @@ type DateTimeInputState = {
   // the date rendered by the opened calendar. Not selected just determines
   // which month/year to show
   renderedDate: Moment
-  // The value currently displayed in the dateTime component.
-  // Just the time part is visible
+  // The value currently displayed in the dateInput component.
+  // Just the date part is visible
   dateInputText: string
   // The value currently displayed in the timeSelect component as ISO datetime
   timeSelectValue?: string

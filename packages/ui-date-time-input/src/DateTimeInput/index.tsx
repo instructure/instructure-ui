@@ -169,13 +169,13 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           renderedDate: parsed.clone()
         }
       }
-      if (dateStr.length > 0 || this.props.isRequired) {
-        const text =
-          typeof this.props.invalidDateTimeMessage === 'function'
-            ? this.props.invalidDateTimeMessage(dateStr)
-            : this.props.invalidDateTimeMessage
-        errorMsg = text ? { text, type: 'error' } : undefined
-      }
+    }
+    if (this.props.isRequired || (dateStr && dateStr.length > 0)) {
+      const text =
+        typeof this.props.invalidDateTimeMessage === 'function'
+          ? this.props.invalidDateTimeMessage(dateStr ? dateStr : '')
+          : this.props.invalidDateTimeMessage
+      errorMsg = { text: text, type: 'error' }
     }
     return {
       iso: undefined,
@@ -256,23 +256,16 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     // timeout is needed here because handleDayClick could be called in the same
     // frame, and it updates calendarSelectedDate which is read in here.
     window.setTimeout(() => {
-      // update state based on the DateInput's text value
-      if (
-        this.state.dateInputTextChanged ||
-        (event as React.KeyboardEvent).key === 'Enter'
-      ) {
+      if ((event as React.KeyboardEvent).key === 'Enter') {
+        // user pressed enter, use the selected value in the calendar
+        this.updateStateBasedOnDateInput(
+          this.state.calendarSelectedDate!,
+          event
+        )
+      } else {
+        // user clicked outside/tabbed away/pressed esc, try to use the value in dateInputText
         const dateParsed = this.tryParseDate(this.state.dateInputText)
         this.updateStateBasedOnDateInput(dateParsed, event)
-      } else {
-        // user clicked outside or tabbed away or pressed esc, reset text
-        this.setState({
-          dateInputText: this.state.iso
-            ? this.state.iso.format(this.dateFormat)
-            : '',
-          calendarSelectedDate: this.state.iso
-            ? this.state.iso.clone()
-            : undefined
-        })
       }
       this.setState({ isShowingCalendar: false, dateInputTextChanged: false })
     }, 0)
@@ -373,8 +366,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     toAlter.add({ days: 1 })
     this.setState({
       calendarSelectedDate: toAlter,
-      renderedDate: toAlter.clone(),
-      dateInputText: toAlter.format(this.dateFormat)
+      renderedDate: toAlter.clone()
     })
   }
 
@@ -390,8 +382,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     toAlter.subtract({ days: 1 })
     this.setState({
       calendarSelectedDate: toAlter,
-      renderedDate: toAlter.clone(),
-      dateInputText: toAlter.format(this.dateFormat)
+      renderedDate: toAlter.clone()
     })
   }
 

@@ -63,9 +63,13 @@ class Example extends React.Component {
   }
 
   onChange = (e, isoDate) => {
+    let messages = []
+    if (!isoDate) {
+      this.setState({ messages })
+      return
+    }
     const now = new Date()
     const newValue = new Date(isoDate)
-    let messages = []
     if ( newValue.valueOf() <= now.valueOf()) {
       messages = [{text: 'That date-time is in the past', type: 'hint'}]
     }
