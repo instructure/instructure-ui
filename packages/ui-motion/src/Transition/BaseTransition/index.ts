@@ -119,7 +119,9 @@ class BaseTransition extends React.Component<
     }
 
     if (prevProps.in !== this.props.in) {
-      this.startTransition(this.props.in, true)
+      if (_prevState.transitioning)
+        setTimeout(() => this.startTransition(this.props.in, true), 300)
+      else this.startTransition(this.props.in, true)
     }
   }
 
