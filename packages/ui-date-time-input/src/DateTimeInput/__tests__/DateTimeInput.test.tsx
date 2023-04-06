@@ -564,6 +564,9 @@ describe('<DateTimeInput />', async () => {
       />
     )
     const dateTimeInput = await DateTimeInputLocator.find()
+    const dateLocator = await dateTimeInput.findDateInput()
+    const dateInput = await dateLocator.findInput()
+    await dateInput.focusOut()
     expect(await dateTimeInput.find(':contains(whoops)')).to.exist()
   })
 
@@ -580,6 +583,9 @@ describe('<DateTimeInput />', async () => {
       />
     )
     const dateTimeInput = await DateTimeInputLocator.find()
+    const dateLocator = await dateTimeInput.findDateInput()
+    const dateInput = await dateLocator.findInput()
+    await dateInput.focusOut()
     expect(await dateTimeInput.find(':contains(whoops)')).to.exist()
   })
 
@@ -608,6 +614,9 @@ describe('<DateTimeInput />', async () => {
       await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')
     ).to.exist()
     await subject.setProps({ value: 'A very invalid date' })
+    const dateLocator = await dateTimeInput.findDateInput()
+    const dateInput = await dateLocator.findInput()
+    await dateInput.focusOut()
     expect(await dateTimeInput.find(':contains(whoops)')).to.exist()
   })
 

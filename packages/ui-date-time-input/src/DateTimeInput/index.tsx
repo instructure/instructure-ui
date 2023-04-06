@@ -170,18 +170,10 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         }
       }
     }
-    if (this.props.isRequired || (dateStr && dateStr.length > 0)) {
-      const text =
-        typeof this.props.invalidDateTimeMessage === 'function'
-          ? this.props.invalidDateTimeMessage(dateStr ? dateStr : '')
-          : this.props.invalidDateTimeMessage
-      errorMsg = { text: text, type: 'error' }
-    }
     return {
       iso: undefined,
       calendarSelectedDate: undefined,
       dateInputText: dateStr ? dateStr : '',
-      message: errorMsg,
       renderedDate: DateTime.now(this.locale(), this.timezone()),
       dateInputTextChanged: false
     }
@@ -258,10 +250,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     window.setTimeout(() => {
       if ((event as React.KeyboardEvent).key === 'Enter') {
         // user pressed enter, use the selected value in the calendar
-        this.updateStateBasedOnDateInput(
-          this.state.calendarSelectedDate!,
-          event
-        )
+        this.updateStateBasedOnDateInput(this.state.calendarSelectedDate, event)
       } else {
         // user clicked outside/tabbed away/pressed esc, try to use the value in dateInputText
         const dateParsed = this.tryParseDate(this.state.dateInputText)
@@ -272,7 +261,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   }
 
   updateStateBasedOnDateInput(
-    dateParsed: Moment | null,
+    dateParsed: Moment | null | undefined,
     event: SyntheticEvent
   ) {
     let newState
@@ -319,20 +308,29 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   }
 
   changeStateIfNeeded = (newState: DateTimeInputState, e: SyntheticEvent) => {
-    this.setState({ message: newState.message })
-    if (!newState.iso && !this.state.iso) {
-      return
-    }
+    const dateStr = newState.dateInputText
     if (
-      !this.state.iso ||
-      !newState.iso ||
-      !this.state.iso.isSame(newState.iso)
+      (this.props.isRequired && !newState.iso) ||
+      (dateStr && dateStr.length > 0 && !newState.iso)
     ) {
-      this.setState(newState)
-      if (this.props.onChange) {
-        this.props.onChange(e, newState.iso?.toISOString())
-      }
+      const text =
+        typeof this.props.invalidDateTimeMessage === 'function'
+          ? this.props.invalidDateTimeMessage(dateStr ? dateStr : '')
+          : this.props.invalidDateTimeMessage
+      // eslint-disable-next-line no-param-reassign
+      newState.message = { text: text, type: 'error' }
     }
+    this.setState(newState)
+    if (this.areDifferentDates(this.state.iso, newState.iso)) {
+      this.props.onChange?.(e, newState.iso?.toISOString())
+    }
+  }
+
+  areDifferentDates = (d1?: Moment, d2?: Moment) => {
+    if (!d1 && !d2) {
+      return false
+    }
+    return !d1 || !d2 || !d1.isSame(d2)
   }
 
   handleBlur = (e: SyntheticEvent) => {
