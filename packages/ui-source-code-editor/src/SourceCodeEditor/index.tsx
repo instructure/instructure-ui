@@ -132,7 +132,8 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
     rtlMoveVisually: true,
     indentOnLoad: false,
     indentWithTab: false,
-    defaultValue: ''
+    defaultValue: '',
+    height: 'auto'
   }
 
   private readonly _id: string
@@ -662,7 +663,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
           omitProps(restProps, SourceCodeEditor.allowedProps)
         )}
       >
-        <label htmlFor={this._id}>
+        <label css={styles?.label} htmlFor={this._id}>
           <ScreenReaderContent>{label}</ScreenReaderContent>
           <div
             ref={this.handleContainerRef}

@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { SourceCodeEditor } from '../index'
 
@@ -380,6 +381,61 @@ line3`}
       const label = await editor.findLabel()
 
       expect(label.getTextContent()).to.equal('this is a label for the SR')
+    })
+  })
+
+  describe('width', async () => {
+    it('should apply and update width', async () => {
+      const testValue1 = '300px'
+      const testValue2 = '500px'
+
+      const subject = await mount(
+        <SourceCodeEditor
+          label="this is a label for the SR"
+          defaultValue="hello"
+          width={testValue1}
+        />
+      )
+
+      const editor = await SourceCodeEditorLocator.find()
+      const cmRoot = await editor.findCodeMirrorRoot()
+      const input = await editor.findInput()
+
+      expect(getComputedStyle(editor.getDOMNode()).width).to.equal(testValue1)
+      expect(getComputedStyle(cmRoot.getDOMNode()).width).to.equal(testValue1)
+      expect(getComputedStyle(input.getDOMNode()).width).to.equal(testValue1)
+
+      await subject.setProps({ width: testValue2 })
+
+      expect(getComputedStyle(editor.getDOMNode()).width).to.equal(testValue2)
+      expect(getComputedStyle(cmRoot.getDOMNode()).width).to.equal(testValue2)
+      expect(getComputedStyle(input.getDOMNode()).width).to.equal(testValue2)
+    })
+  })
+
+  describe('height', async () => {
+    it('should apply and update height', async () => {
+      const testValue1 = '300px'
+      const testValue2 = '500px'
+
+      const subject = await mount(
+        <SourceCodeEditor
+          label="this is a label for the SR"
+          defaultValue="hello"
+          height={testValue1}
+        />
+      )
+
+      const editor = await SourceCodeEditorLocator.find()
+      const cmRoot = await editor.findCodeMirrorRoot()
+
+      expect(getComputedStyle(editor.getDOMNode()).height).to.equal(testValue1)
+      expect(getComputedStyle(cmRoot.getDOMNode()).height).to.equal(testValue1)
+
+      await subject.setProps({ height: testValue2 })
+
+      expect(getComputedStyle(editor.getDOMNode()).height).to.equal(testValue2)
+      expect(getComputedStyle(cmRoot.getDOMNode()).height).to.equal(testValue2)
     })
   })
 

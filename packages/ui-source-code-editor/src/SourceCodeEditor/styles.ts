@@ -40,7 +40,7 @@ const generateStyle = (
   componentTheme: SourceCodeEditorTheme,
   props: SourceCodeEditorProps
 ): SourceCodeEditorStyle => {
-  const { attachment } = props
+  const { attachment, height, width } = props
 
   const attachmentBorderRadius = {
     top: {
@@ -65,13 +65,25 @@ const generateStyle = (
     }
   }
 
+  const lineHeight = 1.4375
+
   return {
     codeEditor: {
       label: 'codeEditor',
-      position: 'relative'
+      position: 'relative',
+      boxSizing: 'border-box',
+      height: height || 'auto',
+      width
+    },
+    label: {
+      label: 'label',
+      height: '100%',
+      width: '100%'
     },
     codeEditorContainer: {
       label: 'codeEditorContainer',
+      height: '100%',
+      width: '100%',
       borderColor: componentTheme?.borderColor,
       borderStyle: 'solid',
       borderWidth: componentTheme?.borderWidth,
@@ -86,13 +98,14 @@ const generateStyle = (
       '&': {
         overflow: 'hidden',
         background: componentTheme.background,
-        height: 'auto',
         fontFamily: componentTheme.fontFamily,
         fontSize: componentTheme.fontSize,
         color: componentTheme.color,
         border: 0,
-        lineHeight: 1.4375,
-        minHeight: '1.4375rem',
+        height: '100%',
+        width: '100%',
+        minHeight: `${lineHeight}rem`,
+        lineHeight,
         borderRadius: componentTheme.borderRadius,
         ...(attachment && {
           ...attachmentBorderRadius[attachment]
