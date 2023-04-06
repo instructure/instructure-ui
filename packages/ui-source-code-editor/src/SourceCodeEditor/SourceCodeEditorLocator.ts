@@ -35,6 +35,9 @@ export const SourceCodeEditorLocator = locator(SourceCodeEditor.selector, {
   findLabel: async (...args: any[]) => {
     return await find('[class$=-screenReaderContent]', ...args)
   },
+  findCodeMirrorRoot: async (...args: any[]) => {
+    return await find('.cm-editor', ...args)
+  },
   findInput: async (...args: any[]) => {
     return await find('[role="textbox"]', ...args)
   },

@@ -179,6 +179,16 @@ type SourceCodeEditorOwnProps = {
    */
   attachment?: 'bottom' | 'top'
 
+  /**
+   * The height of the editor.
+   */
+  height?: string
+
+  /**
+   * The width of the editor.
+   */
+  width?: string
+
   // TODO: discuss the future of the dark theme with the Design theme
   // We decided not to use the dark theme yet, the colors need to be configured
   // (e.g. color contrast)
@@ -212,7 +222,7 @@ type SourceCodeEditorProps = SourceCodeEditorOwnProps &
   WithDeterministicIdProps
 
 type SourceCodeEditorStyle = ComponentStyle<
-  'codeEditor' | 'codeEditorContainer'
+  'codeEditor' | 'label' | 'codeEditorContainer'
 > & {
   theme: StyleObject
   highlightStyle: TagStyle[]
@@ -254,6 +264,8 @@ const propTypes: PropValidators<PropKeys> = {
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   attachment: PropTypes.oneOf(['bottom', 'top']),
+  height: PropTypes.string,
+  width: PropTypes.string,
   // darkTheme: PropTypes.bool,
   elementRef: PropTypes.func,
   containerRef: PropTypes.func
@@ -282,6 +294,8 @@ const allowedProps: AllowedPropKeys = [
   'onFocus',
   'onBlur',
   'attachment',
+  'height',
+  'width',
   // 'darkTheme',
   'elementRef',
   'containerRef'
