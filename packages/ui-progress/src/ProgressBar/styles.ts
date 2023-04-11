@@ -39,12 +39,24 @@ const generateStyle = (
   componentTheme: ProgressBarTheme,
   props: ProgressBarProps
 ): ProgressBarStyle => {
-  const { valueNow = 0, valueMax = 100, size, color, meterColor } = props
+  const {
+    valueNow = 0,
+    valueMax = 100,
+    size,
+    color,
+    meterColor,
+    shouldAnimate
+  } = props
 
   const meterColorClassName =
     typeof meterColor === 'function'
       ? meterColor({ valueNow, valueMax })
       : meterColor
+
+  const currentValue =
+    valueNow > valueMax ? valueMax : valueNow < 0 ? 0 : valueNow
+
+  const currentValuePercent = `${(currentValue / valueMax) * 100}%`
 
   const sizeVariants = {
     'x-small': {
@@ -118,50 +130,30 @@ const generateStyle = (
       ...colorVariants[color!].trackLayout
     },
 
-    trackBorder: {
-      label: 'progressBar__trackBorder',
+    track: {
+      label: 'progressBar__track',
       display: 'block',
-      position: 'absolute',
-      top: '0',
-      left: '0',
-      width: '100%',
-      height: '100%',
       boxSizing: 'border-box',
+      width: '100%',
       borderBottomWidth: componentTheme.trackBottomBorderWidth,
       borderBottomStyle: 'solid',
+      background: 'transparent',
 
+      ...sizeVariants[size!].track,
       ...colorVariants[color!].trackBorder
     },
 
-    track: {
-      label: 'progressBar__track',
-      '&[value]': {
-        display: 'block',
-        position: 'relative',
-        boxSizing: 'border-box',
-        appearance: 'none',
-        background: 'transparent',
-        width: '100%',
-        border: 'none',
+    trackValue: {
+      label: 'progressBar__trackValue',
+      display: 'block',
+      boxSizing: 'border-box',
+      height: '100%',
+      width: currentValuePercent,
+      maxWidth: '100%',
 
-        ...sizeVariants[size!].track,
-
-        '&::-webkit-progress-bar': { background: 'transparent' },
-
-        '&::-webkit-progress-value': {
-          ...(meterColorClassName &&
-            trackBackgroundVariants[color!][meterColorClassName])
-        },
-        '&::-moz-progress-bar': {
-          ...(meterColorClassName &&
-            trackBackgroundVariants[color!][meterColorClassName])
-        },
-        '&::-ms-fill': {
-          border: 'none',
-          ...(meterColorClassName &&
-            trackBackgroundVariants[color!][meterColorClassName])
-        }
-      }
+      ...(shouldAnimate && { transition: 'all 0.5s' }),
+      ...(meterColorClassName &&
+        trackBackgroundVariants[color!][meterColorClassName])
     },
 
     value: {
@@ -172,6 +164,19 @@ const generateStyle = (
       flex: '0 0 5.625rem',
 
       ...sizeVariants[size!].value
+    },
+
+    htmlProgress: {
+      label: 'progressBar__htmlProgress',
+      display: 'block',
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%',
+      boxSizing: 'border-box',
+      zIndex: -1,
+      opacity: 0
     }
   }
 }

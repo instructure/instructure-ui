@@ -31,6 +31,7 @@ const valueMax = 100
 
 export default {
   sectionProp: 'color',
+  excludeProps: ['shouldAnimate'],
   propValues: {
     valueNow: [0, 40, 80, 100],
     renderValue: [

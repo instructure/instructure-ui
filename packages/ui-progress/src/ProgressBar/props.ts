@@ -53,31 +53,38 @@ type ProgressBarOwnProps = {
    * A label is required for accessibility
    */
   screenReaderLabel: string
+
   /**
    * Control the height of the progress bar
    */
   size?: 'x-small' | 'small' | 'medium' | 'large'
+
   /**
    * Maximum value (defaults to 100)
    */
   valueMax?: Values['valueMax']
+
   /**
    * Receives the progress of the event
    */
   valueNow?: Values['valueNow']
+
   /**
    * A function for formatting the text provided to screen readers via `aria-valuenow`
    */
   formatScreenReaderValue?: (values: Values) => string
+
   /**
    * A function to format the displayed value. If null the value will not display.
    * Takes `valueNow` and `valueMax` as parameters.
    */
   renderValue?: Renderable<Values>
+
   /**
    * Controls the overall color scheme of the component
    */
   color?: 'primary' | 'primary-inverse'
+
   /**
    * Control the color of the progress meter. Defaults to showing theme success
    * color on completion, based on `valueNow` and `valueMax`.
@@ -85,16 +92,24 @@ type ProgressBarOwnProps = {
   meterColor?:
     | ((values: Values) => ProgressBarMeterColor)
     | ProgressBarMeterColor
+
+  /**
+   * Whether the change of value should have a transition
+   */
+  shouldAnimate?: boolean
+
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
    */
   margin?: Spacing
+
   /**
    * Provides a reference to the component's root HTML element
    */
   elementRef?: (element: Element | null) => void
+
   /**
    * Set the element type of the component's root
    */
@@ -110,7 +125,12 @@ type ProgressBarProps = ProgressBarOwnProps &
   OtherHTMLAttributes<ProgressBarOwnProps>
 
 type ProgressBarStyle = ComponentStyle<
-  'progressBar' | 'trackLayout' | 'trackBorder' | 'track' | 'value'
+  | 'progressBar'
+  | 'trackLayout'
+  | 'track'
+  | 'trackValue'
+  | 'value'
+  | 'htmlProgress'
 >
 
 const propTypes: PropValidators<PropKeys> = {
@@ -125,6 +145,7 @@ const propTypes: PropValidators<PropKeys> = {
     PropTypes.func,
     PropTypes.oneOf(['info', 'warning', 'danger', 'alert', 'success', 'brand'])
   ]),
+  shouldAnimate: PropTypes.bool,
   margin: ThemeablePropTypes.spacing,
   elementRef: PropTypes.func,
   as: PropTypes.elementType
@@ -139,6 +160,7 @@ const allowedProps: AllowedPropKeys = [
   'renderValue',
   'color',
   'meterColor',
+  'shouldAnimate',
   'margin',
   'elementRef',
   'as'
