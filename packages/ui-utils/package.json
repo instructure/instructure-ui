@@ -27,7 +27,7 @@
     "@types/json-stable-stringify": "^1.0.34"
   },
   "dependencies": {
-    "@babel/runtime": "^7.20.13",
+    "@babel/runtime": "^7.21.0",
     "@instructure/console": "8.36.0",
     "@instructure/ui-dom-utils": "8.36.0",
     "bowser": "^1.9.4",

@@ -23,8 +23,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.20.13",
-    "@emotion/react": "^11.10.5",
+    "@babel/runtime": "^7.21.0",
+    "@emotion/react": "^11.10.6",
     "@instructure/console": "8.36.0",
     "@instructure/shared-types": "8.36.0",
     "@instructure/theme-registry": "8.36.0",

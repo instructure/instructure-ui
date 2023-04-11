@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/standalone": "^7.20.15",
+    "@babel/standalone": "^7.21.4",
     "@instructure/canvas-high-contrast-theme": "8.36.0",
     "@instructure/canvas-theme": "8.36.0",
     "@instructure/console": "8.36.0",
@@ -115,7 +115,7 @@
     "buffer": "^6.0.3",
     "codesandbox": "^2.2.3",
     "lorem-ipsum": "^1.0.6",
-    "marked": "^4.2.12",
+    "marked": "^4.3.0",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
