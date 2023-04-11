@@ -103,8 +103,8 @@ const generateStyle = (
     },
     'primary-inverse': {
       brand: { background: componentTheme.meterColorBrandInverse },
-      info: { background: componentTheme.meterColorSuccessInverse },
-      success: {},
+      info: { background: componentTheme.meterColorInfoInverse },
+      success: { background: componentTheme.meterColorSuccessInverse },
       danger: { background: componentTheme.meterColorDangerInverse },
       warning: { background: componentTheme.meterColorWarningInverse },
       alert: { background: componentTheme.meterColorAlertInverse }
