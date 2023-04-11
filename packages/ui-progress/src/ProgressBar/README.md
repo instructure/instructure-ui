@@ -162,3 +162,109 @@ example: true
   valueNow={33}
 />
 ```
+
+### `shouldAnimate`
+
+The `shouldAnimate` prop makes the progress bar animate the transition between value changes, giving it a smoother look.
+
+```js
+---
+example: true
+render: false
+---
+class Example extends React.Component {
+  MIN = 0
+  MAX = 100
+
+  state = {
+    value: 25,
+    shouldAnimate: true
+  }
+
+  bound (n) {
+    if (n < this.MIN) return this.MIN
+    if (n > this.MAX) return this.MAX
+    return n
+  }
+
+  setNumber (n) {
+    return { value: this.bound(n) }
+  }
+
+  handleChange = (event, value) => {
+    const newValue = Number(value)
+
+    if (isNaN(newValue)) {
+      return
+    }
+
+    this.setState({
+      value: newValue
+    })
+  }
+
+  handleDecrement = (event) => this.setState(({ value }) => {
+    if (Number.isInteger(value)) {
+      return this.setNumber(value - 1)
+    }
+    return this.setNumber(Math.floor(value))
+  })
+
+  handleIncrement = (event) => this.setState(({ value }) => {
+    if (Number.isInteger(value)) {
+      return this.setNumber(value + 1)
+    }
+    return this.setNumber(Math.ceil(value))
+  })
+
+  handleBlur = (event) => this.setState(({ value }) => {
+    return this.setNumber(Math.round(value))
+  })
+
+  render() {
+    return (
+      <div>
+        <View
+          as="div"
+          background="primary"
+          padding="medium"
+          margin="0 0 large 0"
+        >
+          <FormFieldGroup
+            description={<ScreenReaderContent>Settings</ScreenReaderContent>}
+          >
+            <Checkbox
+              label="Should animate"
+              checked={this.state.shouldAnimate}
+              onChange={() => {
+                this.setState({ shouldAnimate: !this.state.shouldAnimate })
+              }}
+              variant="toggle"
+            />
+
+            <NumberInput
+              renderLabel={`ProgressBar value (${this.MIN}-${this.MAX})`}
+              display="inline-block"
+              onBlur={this.handleBlur}
+              onChange={this.handleChange}
+              onDecrement={this.handleDecrement}
+              onIncrement={this.handleIncrement}
+              showArrows
+              value={this.state.value}
+            />
+          </FormFieldGroup>
+        </View>
+
+        <ProgressBar
+          screenReaderLabel="Loading completion"
+          valueNow={this.state.value}
+          valueMax={this.MAX}
+          shouldAnimate={this.state.shouldAnimate}
+        />
+      </div>
+    )
+  }
+}
+
+render(<Example />)
+```

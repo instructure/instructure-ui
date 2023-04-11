@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /** @jsx jsx */
 import { Component } from 'react'
 
@@ -32,6 +33,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
 import type { ProgressBarProps, Values } from './props'
 import { allowedProps, propTypes } from './props'
 
@@ -57,6 +59,7 @@ class ProgressBar extends Component<ProgressBarProps> {
     valueNow: 0,
     as: 'div',
     color: 'primary',
+    shouldAnimate: false,
 
     // default to showing `success` color on completion
     meterColor: ({ valueNow, valueMax }: Values) =>
@@ -121,11 +124,8 @@ class ProgressBar extends Component<ProgressBarProps> {
         elementRef={this.handleRef}
       >
         <span css={styles?.trackLayout}>
-          {/* creates bottom border effect - <progress /> hard to style x-browser */}
-          <span css={styles?.trackBorder}></span>
-
           <progress
-            css={styles?.track}
+            css={styles?.htmlProgress}
             max={valueMax}
             value={valueNow}
             role="progressbar"
@@ -134,6 +134,10 @@ class ProgressBar extends Component<ProgressBarProps> {
             aria-valuemax={valueMax}
             aria-label={labelAndValueText}
           />
+
+          <span css={styles?.track} role="presentation" aria-hidden="true">
+            <span css={styles?.trackValue}></span>
+          </span>
         </span>
 
         {value && (
