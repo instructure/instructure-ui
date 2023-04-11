@@ -31,10 +31,9 @@
     "@instructure/ui-template-scripts": "8.36.0",
     "@lerna/project": "^6.4.1",
     "commitizen": "^4.3.0",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.3",
     "esm": "^3.2.25",
     "find-up": "^5.0.0",
-    "git-url-parse": "^11.6.0",
     "http-server": "^14.1.1",
     "jira-client": "^6.23.0",
     "jscodeshift": "^0.13.1",
@@ -51,7 +50,6 @@
     "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "@types/git-url-parse": "^9.0.1",
     "@types/mocha": "^8.2.3",
     "@types/semver": "^7.3.13"
   },
