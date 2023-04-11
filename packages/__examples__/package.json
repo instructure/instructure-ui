@@ -49,7 +49,7 @@
     "globby": "^11.1.0",
     "prop-types": "^15.8.1",
     "react-docgen": "6.0.0-alpha.3",
-    "webpack": "^5.75.0"
+    "webpack": "^5.78.0"
   },
   "resolutions": {
     "@storybook/react/webpack": "^5"

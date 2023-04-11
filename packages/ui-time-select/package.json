@@ -39,7 +39,7 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.36.0",
     "@instructure/ui-test-utils": "8.36.0",
-    "moment-timezone": "^0.5.40"
+    "moment-timezone": "^0.5.43"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
