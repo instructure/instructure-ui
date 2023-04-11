@@ -18,7 +18,6 @@
     "accept:vrt": "run -T ui-test --vrt -p 9001 --auto-accept-changes",
     "bundle": "yarn build:examples && run -T ui-build --examples",
     "clean": "ui-scripts --clean",
-    "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json",
     "build:storybook": "run -T ui-build --examples",
     "build:examples": "node buildScripts/build-examples-json.js"
   },
@@ -41,7 +40,6 @@
     "chromatic": "^6.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "story2sketch": "^1.7.1",
     "webpack-merge": "^5.8.0"
   },
   "devDependencies": {

@@ -52,7 +52,6 @@
     "dev:examples": "lerna run start:watch --stream --scope docs-examples",
     "prestart:examples": "yarn bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
-    "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
     "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged ts:check:references",
     "husky:pre-push": "yarn lint:commit",
     "build-storybook": "lerna run bundle --stream --scope docs-examples",
@@ -69,21 +68,21 @@
     "@storybook/react/webpack": "^5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.20.7",
+    "@babel/cli": "^7.21.0",
     "@instructure/ui-scripts": "workspace:*",
     "@instructure/ui-token-scripts": "workspace:*",
     "@types/react-dom": "^18.0.11",
     "chalk": "^4.1.2",
     "commitizen": "^4.3.0",
-    "danger": "^11.2.3",
+    "danger": "^11.2.6",
     "esbuild": "^0.14.54",
     "eslint": "^7",
     "husky": "^7.0.4",
-    "lerna": "^6.5.1",
+    "lerna": "^6.6.1",
     "lint-staged": "^10.5.4",
     "netlify-cli": "^4.4.4",
     "npm-run-all": "^4.1.5",
-    "typescript": "4.9.5",
+    "typescript": "5.0.4",
     "webpack": "^5.75.0"
   },
   "engines": {
