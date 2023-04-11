@@ -83,7 +83,7 @@
     "netlify-cli": "^4.4.4",
     "npm-run-all": "^4.1.5",
     "typescript": "5.0.4",
-    "webpack": "^5.75.0"
+    "webpack": "^5.78.0"
   },
   "engines": {
     "node": ">=12.20",
@@ -113,5 +113,5 @@
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
   ],
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "yarn@3.5.0"
 }

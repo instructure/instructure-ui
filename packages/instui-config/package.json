@@ -20,6 +20,6 @@
     "@instructure/command-utils": "8.36.0",
     "@instructure/pkg-utils": "8.36.0",
     "fs-extra": "^9.1.0",
-    "semver": "^7.3.8"
+    "semver": "^7.4.0"
   }
 }

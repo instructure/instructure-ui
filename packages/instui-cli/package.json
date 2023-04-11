@@ -32,7 +32,7 @@
     "@instructure/ui-template-scripts": "8.36.0",
     "@instructure/ui-webpack-config": "8.36.0",
     "depcheck": "^1.4.3",
-    "semver": "^7.3.8",
+    "semver": "^7.4.0",
     "yargs": "^16.2.0",
     "yargs-interactive": "^3.0.1"
   },
