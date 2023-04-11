@@ -19,15 +19,15 @@
     "@instructure/browserslist-config-instui": "8.36.0",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
-    "eslint-config-prettier": "^8",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-compat": "^3",
-    "eslint-plugin-import": "^2",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-instructure-ui": "8.36.0",
-    "eslint-plugin-jsx-a11y": "^6",
-    "eslint-plugin-mocha": "^9",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-mocha": "^9.0.0",
     "eslint-plugin-no-explicit-type-exports": "^0.12.1",
     "eslint-plugin-notice": "^0.9.10",
-    "eslint-plugin-react": "^7"
+    "eslint-plugin-react": "^7.32.2"
   },
   "peerDependencies": {
     "eslint": "^7"

@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.20.7",
+    "@babel/cli": "^7.21.0",
     "@instructure/command-utils": "8.36.0",
     "@instructure/cz-lerna-changelog": "8.36.0",
     "@instructure/instui-config": "8.36.0",
@@ -39,7 +39,7 @@
     "jira-client": "^6.23.0",
     "jscodeshift": "^0.13.1",
     "karma-cli": "^2.0.0",
-    "lerna": "^6.5.1",
+    "lerna": "^6.6.1",
     "mocha": "^7.2.0",
     "open": "^8.4.2",
     "prettier": "^2.8.7",

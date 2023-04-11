@@ -28,7 +28,7 @@
     "@instructure/ui-test-utils": "8.36.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.20.13",
+    "@babel/runtime": "^7.21.0",
     "@codemirror/autocomplete": "^6.3.4",
     "@codemirror/commands": "^6.1.2",
     "@codemirror/lang-css": "^6.0.1",
