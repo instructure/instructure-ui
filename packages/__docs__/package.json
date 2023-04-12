@@ -111,7 +111,7 @@
     "@instructure/ui-truncate-text": "8.36.0",
     "@instructure/ui-utils": "8.36.0",
     "@instructure/ui-view": "8.36.0",
-    "babel-loader": "^8.3.0",
+    "babel-loader": "^9.1.2",
     "buffer": "^6.0.3",
     "codesandbox": "^2.2.3",
     "lorem-ipsum": "^1.0.6",
