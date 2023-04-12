@@ -173,6 +173,7 @@ function debounce(
     lastArgs = args
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     lastThis = this
     lastCallTime = time
 

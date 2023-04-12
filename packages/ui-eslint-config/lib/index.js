@@ -109,7 +109,7 @@ module.exports = {
   ],
   settings: {
     react: {
-      version: process.env.REACT_VERSION || '17.0.2'
+      version: process.env.REACT_VERSION || '18.2.0'
     },
     'import/resolver': {
       node: {
