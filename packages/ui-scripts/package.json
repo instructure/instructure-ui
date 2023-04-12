@@ -35,11 +35,10 @@
     "esm": "^3.2.25",
     "find-up": "^5.0.0",
     "http-server": "^14.1.1",
-    "jira-client": "^6.23.0",
     "jscodeshift": "^0.13.1",
     "karma-cli": "^2.0.0",
     "lerna": "^6.6.1",
-    "mocha": "^7.2.0",
+    "mocha": "^10.2.0",
     "open": "^8.4.2",
     "prettier": "^2.8.7",
     "semver": "^7.4.0",
@@ -50,7 +49,7 @@
     "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "@types/mocha": "^8.2.3",
+    "@types/mocha": "^10.0.1",
     "@types/semver": "^7.3.13"
   },
   "optionalDependencies": {
