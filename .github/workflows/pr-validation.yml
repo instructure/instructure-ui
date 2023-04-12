@@ -18,10 +18,12 @@ jobs:
         run: yarn bootstrap
       - name: Run test for the patchset
         run: USE_REACT_STRICT_MODE=1 yarn test:patchset
-      - name: Calculate bundle size
-        run: yarn danger ci
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# commented out because our danger script needs the same version of yarn on master and on a branch.
+# TODO uncomment when this PR is merged
+#      - name: Calculate bundle size
+#        run: yarn danger ci
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build docs-app
         run: yarn build:docs
       - name: Deploy preview docs
