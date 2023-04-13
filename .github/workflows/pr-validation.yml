@@ -14,6 +14,8 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm install
+      - name: TEST remove later
+        run: npm run build
       - name: Bootstrap project
         run: npm run bootstrap
       - name: Run test for the patchset
