@@ -16,10 +16,10 @@
     "ui-test": "./lib/test/index.js"
   },
   "scripts": {
-    "lint": "run -T ui-test --lint",
-    "lint:fix": "run -T ui-test --lint --fix",
-    "build:watch": "run -T tsc -b tsconfig.build.json -w",
-    "build:ts": "run -T tsc -b tsconfig.build.json"
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "build:watch": "tsc -b tsconfig.build.json -w",
+    "build:ts": "tsc -b tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {

@@ -20,13 +20,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'yarn'
+          cache: 'npm'
       - name: Install project dependencies
-        run: yarn install --immutable
+        run: npm ci
       - name: Bootstrap project
-        run: yarn bootstrap
+        run: npm run bootstrap
       - name: Build Storybook examples
-        run: yarn build-storybook
+        run: npm run build-storybook
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:

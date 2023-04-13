@@ -13,12 +13,12 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "clean": "gulp clean && run -T ui-build --clean",
+    "clean": "gulp clean && ui-build --clean",
     "prepare-build": "gulp",
-    "build": "run -T ui-build __build__ --copy-files --modules es,cjs",
-    "export": "gulp clean && gulp && yarn build:types",
-    "build:types": "run -T tsc -p tsconfig.build.json",
-    "ts:check": "run -T tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+    "build": "ui-build __build__ --copy-files --modules es,cjs",
+    "export": "gulp clean && gulp && npm run build:types",
+    "build:types": "tsc -p tsconfig.build.json",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "devDependencies": {

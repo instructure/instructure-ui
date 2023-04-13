@@ -8,7 +8,7 @@ order: 4
 
 Instructure UI is a mono-repository which means it has multiple packages (almost always a component means an individual package) and they are treated as one whole package when dealing with dependencies and building them.
 
-The project uses `yarn` for managing these packages and also for resolving dependencies, running scripts and managing the whole mono-repository itself.
+The project uses `npm` for managing these packages and also for resolving dependencies, running scripts and managing the whole mono-repository itself.
 
 > **Note**: Windows OS is not supported as a build platform due to some libraries that we rely on for building Instructure UI do not support Windows
 >
@@ -16,7 +16,7 @@ The project uses `yarn` for managing these packages and also for resolving depen
 
 ### How to build the project
 
-In order to build the project one should have [`git`](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [`node`](https://nodejs.org/en/download/) (supported version is defined in the root [package.json](https://github.com/instructure/instructure-ui/blob/master/package.json#L90)) and [`yarn`](https://yarnpkg.com/getting-started/install) installed.
+In order to build the project one should have [`git`](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [`node`](https://nodejs.org/en/download/) (supported version is defined in the root [package.json](https://github.com/instructure/instructure-ui/blob/master/package.json#L90)) and `npm` installed (`node` includes `npm`).
 
 1. Download the source code and go into the root directory of instructure-ui:
    ```sh
@@ -25,11 +25,11 @@ In order to build the project one should have [`git`](https://git-scm.com/book/e
    ```
 2. Install dependencies for packages:
    ```sh
-   yarn install
+   npm install
    ```
 3. Run the bootstrap script:
    ```sh
-   yarn bootstrap
+   npm run bootstrap
    ```
    This script will invoke:
    - the `TypeScript` compiler (tsc) to generate the type definitions for the packages

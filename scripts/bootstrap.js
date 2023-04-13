@@ -36,33 +36,38 @@ function buildProject() {
     'lerna run prepare-build --stream --scope @instructure/ui-icons',
     opts
   )
+  execSync('npm run build:node-scripts', opts)
   // eslint-disable-next-line no-console
   console.info('Starting Babel and TSC...')
-  const tsBuild = spawn('yarn', ['build:types', '--verbose'], spawnStdIoOpts)
-  const babelBuild = spawn('yarn', ['build'], spawnStdIoOpts)
+  const tsBuild = spawn(
+    'npm',
+    ['run', 'build:types', '--verbose'],
+    spawnStdIoOpts
+  )
+  const babelBuild = spawn('npm', ['run', 'build'], spawnStdIoOpts)
   tsBuild.on('exit', (code) => {
     if (code !== 0) {
       babelBuild.kill()
-      console.error("'yarn build:ts' failed :(")
+      console.error("'npm run build:types' failed :(")
       process.exit(code)
     }
   })
   tsBuild.stderr.on('data', (data) => {
-    console.error('tsc stderr', data.toString())
+    console.error('tsc stderr:', data.toString())
   })
   babelBuild.stderr.on('data', (data) => {
-    console.error('babel stderr', data.toString())
+    console.error('babel stderr:', data.toString())
   })
   babelBuild.on('exit', (code) => {
     if (code !== 0) {
       tsBuild.kill()
-      console.error("'yarn build' failed :(")
+      console.error("'npm run build' failed :(")
       process.exit(code)
     }
     if (process.env.CI) {
-      const result = execSync('yarn build:tokens', opts)
+      const result = execSync('npm run build:tokens', opts)
       // eslint-disable-next-line no-console
-      console.info('yarn build:tokens result', result)
+      console.info('npm run build:tokens result', result)
     }
   })
 }
@@ -70,10 +75,9 @@ function bootstrap() {
   try {
     fork(path.resolve('scripts/clean.js'), opts)
   } catch (error) {
-    console.error('clean failed with error:', error)
+    console.error('scripts/clean.js failed with error:', error)
     process.exit(1)
   }
-
   buildProject()
 }
 

@@ -11,8 +11,8 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "lint": "run -T ui-test --lint",
-    "lint:fix": "run -T ui-test --lint --fix"
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix"
   },
   "license": "MIT",
   "dependencies": {
@@ -24,7 +24,7 @@
     "inquirer-autocomplete-prompt": "^1.4.0"
   },
   "peerDependencies": {
-    "lerna": "^4"
+    "lerna": "^6"
   },
   "publishConfig": {
     "access": "public"

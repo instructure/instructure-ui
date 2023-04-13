@@ -11,15 +11,15 @@
   "homepage": "https://instructure.design",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "workspaces": [
-    "packages/*"
+    "./packages/*"
   ],
   "scripts": {
-    "prestart": "yarn bootstrap",
-    "start": "yarn workspace docs-app start",
-    "start:watch": "yarn workspace docs-app start:watch ",
-    "dev": "yarn start:watch",
+    "prestart": "npm run bootstrap",
+    "start": "npm run start --workspace=docs-app",
+    "start:watch": "npm run start:watch --workspace=docs-app",
+    "dev": "npm run start:watch",
     "test:patchset": "npm-run-all lint:commit lint:changes test:jest test",
-    "pretest:merge": "yarn bootstrap && yarn check",
+    "pretest:merge": "npm run bootstrap && npm run check",
     "test:merge": "npm-run-all lint:commit lint test",
     "test:all": "npm-run-all test:jest test",
     "test:watch": "ui-test --watch --no-headless",
@@ -27,39 +27,39 @@
     "test": "ui-test --randomize",
     "test:jest": "lerna run test:jest --stream",
     "lint": "lerna run lint --stream",
-    "lint:changes": "yarn lint --since HEAD^",
+    "lint:changes": "npm run lint --since HEAD^",
     "lint:fix": "lerna run lint:fix --stream",
     "lint:commit": "ui-scripts --lint-commit",
     "lint:staged": "lint-staged",
     "update:package:list": "lerna run generate:package:list --stream --scope @instructure/instui-config",
     "commit:package:list": "git add packages/instui-config/package-lists/**/package-list.json",
-    "generate:component": "yarn workspace @instructure/instui-cli instui create component",
-    "generate:package": "yarn workspace @instructure/instui-cli instui create package",
+    "generate:component": "npm exec instui create component --workspace=@instructure/instui-cli",
+    "generate:package": "npm exec instui create package --workspace=@instructure/instui-cli",
     "commit": "ui-scripts --commit",
-    "bootstrap": "time yarn node scripts/bootstrap.js",
+    "bootstrap": "node scripts/bootstrap.js",
     "build": "lerna run build --stream",
     "build:watch": "lerna run build:watch --stream",
     "build:docs": "lerna run bundle --stream --scope docs-app",
     "build:tokens": "ui-token-scripts generate-all-tokens",
     "build:types": "tsc -b tsconfig.references.json",
-    "build:ts": "lerna run prepare-build --stream --scope @instructure/ui-icons && yarn build:types --verbose",
-    "build:node-scripts": "yarn workspace @instructure/ui-scripts build:ts",
-    "clean": "yarn node scripts/clean.js",
+    "build:ts": "lerna run prepare-build --stream --scope @instructure/ui-icons && npm run build:types --verbose",
+    "build:node-scripts": "npm run build:ts --workspace=@instructure/ui-scripts",
+    "clean": "node scripts/clean.js",
     "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
     "bump": "ui-scripts --bump",
     "link:packages": "ui-scripts --link-packages",
     "release": "ui-scripts --publish",
     "dev:examples": "lerna run start:watch --stream --scope docs-examples",
-    "prestart:examples": "yarn bootstrap",
+    "prestart:examples": "npm run bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
     "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
     "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged ts:check:references",
-    "husky:pre-push": "yarn lint:commit",
+    "husky:pre-push": "npm run lint:commit",
     "build-storybook": "lerna run bundle --stream --scope docs-examples",
     "prepare": "husky install",
     "ts:check": "lerna run ts:check --stream",
-    "ts:check:references": "yarn node scripts/checkTSReferences.js",
-    "postinstall": "yarn build:node-scripts"
+    "ts:check:references": "node scripts/checkTSReferences.js",
+    "postinstall": "npm run build:node-scripts"
   },
   "license": "MIT",
   "resolutions": {
@@ -70,8 +70,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",
-    "@instructure/ui-scripts": "workspace:*",
-    "@instructure/ui-token-scripts": "workspace:*",
+    "@instructure/ui-scripts": "8.35.1",
+    "@instructure/ui-token-scripts": "8.35.1",
     "@types/react-dom": "^18.0.11",
     "chalk": "^4.1.2",
     "commitizen": "^4.3.0",
@@ -87,8 +87,7 @@
     "webpack": "^5.75.0"
   },
   "engines": {
-    "node": ">=12.20",
-    "yarn": ">=3"
+    "node": ">=12.20"
   },
   "config": {
     "ui-scripts": {
@@ -114,5 +113,5 @@
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
   ],
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "npm@8.5.5"
 }

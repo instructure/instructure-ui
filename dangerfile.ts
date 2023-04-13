@@ -65,7 +65,7 @@ const calculateSizes = async () => {
   // eslint-disable-next-line no-console
   console.log('switching to master branch...')
   await git(`checkout -d ${baseCommitSha}`)
-  execSync('yarn install')
+  execSync('npm install')
 
   const { outFile } = await esBuild(META_FILE, baseCommitSha)
   const baseStats = await gzip(outFile)
@@ -95,7 +95,7 @@ const calculateSizes = async () => {
   // eslint-disable-next-line no-console
   console.log('switching back to feature branch...')
   await git(`checkout -d ${headCommitSha}`)
-  execSync('yarn install')
+  execSync('npm install')
 }
 
 const formatSize = (sizeInBytes: number) => {

@@ -4,7 +4,7 @@ yarn-error.log
 lerna-debug.log
 ./build-storybook.log
 coverage/
-package-lock.json
+yarn.lock
 .yarnclean
 .babel-cache
 __build__
@@ -24,8 +24,3 @@ tsconfig.build.tsbuildinfo
 
 .pnp.*
 .yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions

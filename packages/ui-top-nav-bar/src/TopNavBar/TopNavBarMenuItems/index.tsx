@@ -229,7 +229,9 @@ class TopNavBarMenuItems extends Component<
           status: 'active',
           // if it has submenu, the root item cannot be current,
           // just a link inside the submenu
-          'aria-current': renderSubmenu ? undefined : 'page'
+          'aria-current': renderSubmenu ? undefined : 'page',
+          children: undefined,
+          id: 'none'
         })
       }
     })

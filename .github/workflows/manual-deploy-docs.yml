@@ -16,15 +16,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'yarn'
+          cache: 'npm'
       - name: Install packages.
-        run: yarn install --immutable
+        run: npm ci
       - name: Set up project.
-        run: yarn bootstrap
+        run: npm run bootstrap
       - name: Build docs-app.
         env:
           COPY_VERSIONS_JSON: 0
-        run: yarn build:docs
+        run: npm run build:docs
       - name: Deploy docs-app to netlify
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

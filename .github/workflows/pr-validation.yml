@@ -11,19 +11,20 @@ jobs:
         name: Install Node 16
         with:
           node-version: '16'
-          cache: 'yarn'
+          cache: 'npm'
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install
       - name: Bootstrap project
-        run: yarn bootstrap
+        run: |
+          echo "$PWD" && npm run bootstrap
       - name: Run test for the patchset
-        run: USE_REACT_STRICT_MODE=1 yarn test:patchset
+        run: USE_REACT_STRICT_MODE=1 npm run test:patchset
       - name: Calculate bundle size
-        run: yarn danger ci
+        run: npm run danger ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build docs-app
-        run: yarn build:docs
+        run: npm run build:docs
       - name: Deploy preview docs
         # only run this step if the PR is not from a fork since repository
         # secrets are not passed to forks and we need the repo secrets for the below steps

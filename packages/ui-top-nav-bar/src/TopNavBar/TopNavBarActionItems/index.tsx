@@ -158,7 +158,9 @@ class TopNavBarActionItems extends Component<
         )
         return safeCloneElement(child, {
           renderAvatar: undefined,
-          variant: 'default'
+          variant: 'default',
+          children: undefined,
+          id: 'none'
         })
       }
 
@@ -172,7 +174,9 @@ class TopNavBarActionItems extends Component<
         }
 
         return safeCloneElement(child, {
-          variant: 'icon'
+          variant: 'icon',
+          children: undefined,
+          id: 'none'
         })
       }
 

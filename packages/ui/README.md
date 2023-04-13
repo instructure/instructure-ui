@@ -106,7 +106,7 @@ The `ui` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui
+npm install @instructure/ui
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui.svg
