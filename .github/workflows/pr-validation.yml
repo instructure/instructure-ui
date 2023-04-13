@@ -15,8 +15,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Bootstrap project
-        run: |
-          echo "$PWD" && npm run bootstrap
+        run: npm run bootstrap
       - name: Run test for the patchset
         run: USE_REACT_STRICT_MODE=1 npm run test:patchset
       - name: Calculate bundle size

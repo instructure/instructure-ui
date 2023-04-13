@@ -70,8 +70,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",
-    "@instructure/ui-scripts": "8.35.1",
-    "@instructure/ui-token-scripts": "8.35.1",
+    "@instructure/ui-scripts": "8.36.0",
+    "@instructure/ui-token-scripts": "8.36.0",
     "@types/react-dom": "^18.0.11",
     "chalk": "^4.1.2",
     "commitizen": "^4.3.0",
