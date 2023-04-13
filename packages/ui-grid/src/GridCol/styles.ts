@@ -180,7 +180,7 @@ const generateStyle = (
     return breakpointIsEnabled(breakpoint)
       ? {
           ...(size && getFlexColumnBySize(size)),
-          ...(offset && getColumnOffsetBySize(size))
+          ...(offset && getColumnOffsetBySize(offset))
         }
       : {}
   }
