@@ -22,6 +22,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@instructure/ui-scripts": "8.36.0",
     "@instructure/ui-babel-preset": "8.36.0"
   },
   "dependencies": {

@@ -6,5 +6,8 @@
     "composite": true
   },
   "include": ["src"],
-  "references": [{ "path": "../ui-babel-preset/tsconfig.build.json" }]
+  "references": [
+    { "path": "../ui-babel-preset/tsconfig.build.json" },
+    { "path": "../ui-scripts/tsconfig.build.json" }
+  ]
 }
