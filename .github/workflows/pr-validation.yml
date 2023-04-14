@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: TEST remove later
-        run: ECHO file node_modules/.bin/ui-build
+        run: ECHO ls -l ./node_modules/.bin/ui-build
       - name: TEST2 remove later
         run: echo "$PATH" | sed 's/:/\n/g'
       - name: Bootstrap project
