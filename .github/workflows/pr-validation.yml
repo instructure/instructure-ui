@@ -8,14 +8,14 @@ jobs:
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v3
-        name: Install Node 16
+        name: Install Node 18
         with:
-          node-version: '16'
+          node-version: '18'
           cache: 'npm'
       - name: Install dependencies
         run: npm install
       - name: TEST remove later
-        run: echo "$(ls -l ./node_modules/.bin/ui-build)"
+        run: echo "$(ls ./node_modules/.bin/)"
       - name: TEST2 remove later
         run: echo "$PATH" | sed 's/:/\n/g'
       - name: Bootstrap project
