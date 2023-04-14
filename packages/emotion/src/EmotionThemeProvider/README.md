@@ -10,7 +10,7 @@ embed: true
   summary="DEPRECATED"
 >
   <ToggleBlockquote.Paragraph>
-    This component is depreacted. Please use <Link href="#InstUISettingsProvider">InstUISettingsProvider</Link> instead. It has the same functionality and adds additional configuration.
+    This component is deprecated. Please use <Link href="#InstUISettingsProvider">InstUISettingsProvider</Link> instead. It has the same functionality and adds additional configuration.
   </ToggleBlockquote.Paragraph>
 </ToggleBlockquote>
 ```

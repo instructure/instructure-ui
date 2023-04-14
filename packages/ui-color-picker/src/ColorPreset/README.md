@@ -2,7 +2,7 @@
 describes: ColorPreset
 ---
 
-A component for picking a color from a list of colors. Supports adding new colors either programatically through the `colors` prop, or manually with the built in color picker.
+A component for picking a color from a list of colors. Supports adding new colors either programmatically through the `colors` prop, or manually with the built in color picker.
 
 ### Color Preset
 

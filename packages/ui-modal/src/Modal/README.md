@@ -484,7 +484,7 @@ class Example extends React.Component {
             {this.renderCloseButton()}
             {this.state.smallViewport
               ? <Heading as="h2" level="h3" themeOverride={{ h3FontWeight: 400 }}>This Modal is optimized for small viewport</Heading>
-              : <Heading as="h2">This is a deafult size Modal</Heading>
+              : <Heading as="h2">This is a default size Modal</Heading>
             }
           </Modal.Header>
           <Modal.Body>

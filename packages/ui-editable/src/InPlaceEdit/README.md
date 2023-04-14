@@ -179,7 +179,7 @@ class Example extends React.Component {
   )
 
   // Renders the edit button.
-  // Leverage the default implemetation provided by InPlaceEdit
+  // Leverage the default implementation provided by InPlaceEdit
   renderEditButton = (props) => {
     props.label = `Edit title "${this.state.value}"`
     return InPlaceEdit.renderDefaultEditButton(props)
@@ -352,7 +352,7 @@ class Example extends React.Component {
   )
 
   // Renders the edit button.
-  // Leverage the default implemetation provided by InPlaceEdit
+  // Leverage the default implementation provided by InPlaceEdit
   renderEditButton = (props) => {
     props.label = `Edit title "${this.state.value}"`
     return InPlaceEdit.renderDefaultEditButton(props)

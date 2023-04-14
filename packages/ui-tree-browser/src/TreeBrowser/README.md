@@ -465,7 +465,7 @@ class Example extends React.Component {
       sorted: false
     }
   }
-  toogleSort = (event)=>{ this.setState({sorted:!this.state.sorted}) }
+  toggleSort = (event)=>{ this.setState({sorted:!this.state.sorted}) }
   render () {
     return (
       <>
@@ -474,7 +474,7 @@ class Example extends React.Component {
               <Checkbox
                 checked={this.state.sorted}
                 label="Sort"
-                onChange={this.toogleSort}
+                onChange={this.toggleSort}
               />
                </FormFieldGroup>
         </View>

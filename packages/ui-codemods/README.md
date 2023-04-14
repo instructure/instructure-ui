@@ -74,7 +74,7 @@ Parameters (all optional):
 - `fileName`: supplying this will append to the given file the warnings.
 - `wrapperPath`: The import path for the wrapper, default value is '@canvas/react-root'.
 - `wrapperTag`: The tag to wrap render calls in, default is 'Root'.
-- `isDefaultImport`: Is the given tag a defult import? Default value is `true`.
+- `isDefaultImport`: Is the given tag a default import? Default value is `true`.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-codemods
