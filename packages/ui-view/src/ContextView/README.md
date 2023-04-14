@@ -1,7 +1,7 @@
 ---
 describes: ContextView
 ---
-`<ContextView/>` is a container that can be rendered inline in the document flow (vs as a [Popover](#Popover)) but with an arrow pointing to something. See [RangeInput](#RangeInput) for an example of how ContextView can be used to display contextual information in conjuction with another component. It is used internally in [Popover](#Popover).
+`<ContextView/>` is a container that can be rendered inline in the document flow (vs as a [Popover](#Popover)) but with an arrow pointing to something. See [RangeInput](#RangeInput) for an example of how ContextView can be used to display contextual information in conjunction with another component. It is used internally in [Popover](#Popover).
 
 - Defaults to no padding around its content. To add padding, use the `padding` prop.
 

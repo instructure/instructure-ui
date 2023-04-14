@@ -19,7 +19,7 @@ example: true
 
 ### Adding a delimiter
 
-The `delimiter` prop lets you display a separator between Items in the List. The built-in delimeter options include ['none', 'pipe', 'slash', and 'arrow'].
+The `delimiter` prop lets you display a separator between Items in the List. The built-in delimiter options include ['none', 'pipe', 'slash', and 'arrow'].
 
 ```javascript
 ---

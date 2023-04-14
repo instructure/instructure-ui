@@ -203,7 +203,7 @@ embed: true
 >
   <ToggleBlockquote.Paragraph>
    To support multiple theming use cases we decided to re-introduce the <code>theme.use()</code> API into the library. <br/>
-   You can read more about how to use it in it's own or in conjuction with <code>InstUISettingsProvider</code> <Link href="/#using-theme-overrides/#using-theme-overrides-how-theming-works-in-instui">here</Link>.
+   You can read more about how to use it in it's own or in conjunction with <code>InstUISettingsProvider</code> <Link href="/#using-theme-overrides/#using-theme-overrides-how-theming-works-in-instui">here</Link>.
   </ToggleBlockquote.Paragraph>
 </ToggleBlockquote>
 ```
