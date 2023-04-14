@@ -13,7 +13,8 @@
   "bin": {
     "ui-build": "./lib/build/index.js",
     "ui-scripts": "./lib/index.js",
-    "ui-test": "./lib/test/index.js"
+    "ui-test": "./lib/test/index.js",
+    "ui-testtesttest": "src/test123.js"
   },
   "scripts": {
     "lint": "ui-test --lint",
