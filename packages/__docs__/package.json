@@ -12,7 +12,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "prestart": "yarn build:scripts:ts && node -e 'require(\"./lib/build-docs.js\").buildDocs()'",
-    "start": "run -T ui-build --bundle && ui-scripts --server -p 8001",
+    "start": "run -T ui-build --bundle && ui-scripts server -p 8001",
     "start:watch": "yarn prestart && run -T ui-build --bundle --watch -p 8080",
     "bundle": "yarn prestart && run -T ui-build --bundle",
     "lint": "run -T ui-test --lint",

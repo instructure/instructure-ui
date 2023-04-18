@@ -4,7 +4,6 @@
   "description": "Node CLI utilties made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
-  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -13,8 +12,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "run -T ui-test --lint",
-    "lint:fix": "run -T ui-test --lint --fix",
-    "build": "run -T tsc -p tsconfig.build.json"
+    "lint:fix": "run -T ui-test --lint --fix"
   },
   "license": "MIT",
   "dependencies": {
@@ -27,8 +25,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false,
-  "devDependencies": {
-    "@types/which": "^2.0.2"
-  }
+  "sideEffects": false
 }

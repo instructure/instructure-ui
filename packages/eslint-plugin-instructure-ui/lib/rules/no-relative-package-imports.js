@@ -25,8 +25,8 @@ const path = require('path')
 const { readPackage } = require('@instructure/pkg-utils')
 
 const resolve = require('eslint-module-utils/resolve').default
-const resolveImportType = require('eslint-plugin-import/lib/core/importType')
-  .default
+const resolveImportType =
+  require('eslint-plugin-import/lib/core/importType').default
 
 module.exports = {
   meta: {
