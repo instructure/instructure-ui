@@ -25,7 +25,7 @@
 const { info, error, runCommandSync } = require('@instructure/command-utils')
 const { getPackageList } = require('../utils/getPackageLists')
 const verifyPackageJson = require('../utils/verify-package-json')
-const { getPackage } = require('@instructure/pkg-utils')
+const pkgUtils = require('@instructure/pkg-utils')
 
 module.exports = ({
   path,
@@ -37,7 +37,7 @@ module.exports = ({
   const packageList = getPackageList({ version })
   verifyPackageJson({ sourcePath: path })
 
-  const pkg = getPackage({ cwd: path })
+  const pkg = pkgUtils.getPackage({ cwd: path })
 
   const pkgDependencies = Object.keys(pkg.get('dependencies') || {})
   const pkgDevDependencies = Object.keys(pkg.get('devDependencies') || {})
