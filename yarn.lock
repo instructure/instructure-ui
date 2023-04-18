@@ -3041,14 +3041,13 @@ __metadata:
   resolution: "@instructure/cz-lerna-changelog@workspace:packages/cz-lerna-changelog"
   dependencies:
     "@instructure/pkg-utils": 8.36.0
-    "@instructure/ui-babel-preset": 8.36.0
     "@semantic-release/commit-analyzer": ^8.0.1
     chalk: ^4.1.2
     cz-customizable: ^6.9.2
     inquirer: ^8.2.5
     inquirer-autocomplete-prompt: ^1.4.0
   peerDependencies:
-    lerna: ^6
+    lerna: ^4
   languageName: unknown
   linkType: soft
 
@@ -5219,6 +5218,7 @@ __metadata:
     "@babel/runtime": ^7.21.0
     "@instructure/command-utils": 8.36.0
     "@instructure/config-loader": 8.36.0
+    "@instructure/console": 8.36.0
     "@instructure/ui-test-utils": 8.36.0
     fs-extra: ^9.1.0
     lodash.isplainobject: ^4.0.6
