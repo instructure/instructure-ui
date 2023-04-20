@@ -849,4 +849,41 @@ describe('<DateTimeInput />', async () => {
     expect(dateInput).to.have.value(newDateTime.format('LL'))
     expect(timeInput).to.have.value(newDateTime.format('LT'))
   })
+
+  it.only('should allow the user to enter any time value if allowNonStepInput is true', async () => {
+    const onChange = stub()
+
+    await mount(
+      <DateTimeInput
+        description="date time"
+        dateRenderLabel="date"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        timeRenderLabel="time"
+        invalidDateTimeMessage="whoops"
+        locale="en-US"
+        timezone="US/Eastern"
+        onChange={onChange}
+        allowNonStepInput={true}
+      />
+    )
+
+    const dateTimeInput = await DateTimeInputLocator.find()
+
+    const timeLocator = await dateTimeInput.findTimeInput()
+    const timeInput = await timeLocator.findInput()
+    await timeInput.typeIn('7:34 PM')
+    await timeInput.keyDown('Enter') // should send onChange event
+    await timeInput.keyUp('esc') // should do nothing
+
+    const dateLocator = await dateTimeInput.findDateInput()
+    const dateInput = await dateLocator.findInput()
+    await dateInput.change({ target: { value: 'May 1, 2017' } })
+    await dateInput.keyDown('Enter')
+
+    await wait(() => {
+      expect(onChange).to.have.been.called()
+      expect(onChange.getCall(0).args[1]).to.include('2017-05-01T23:34:00.000Z')
+    })
+  })
 })

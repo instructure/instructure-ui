@@ -45,7 +45,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-#### A required DateInput with `stacked` layout that warns if the value in the past:
+#### A required DateInput with `stacked` layout that warns if the value in the past that allows the user to enter any time value:
 
 ```js
 ---
@@ -95,6 +95,7 @@ class Example extends React.Component {
             value={this.state.value}
             invalidDateTimeMessage="Invalid date!"
             messages={this.state.messages}
+            allowNonStepInput={true}
             isRequired
           />
         </div>

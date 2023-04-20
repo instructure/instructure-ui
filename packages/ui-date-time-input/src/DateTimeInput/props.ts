@@ -220,6 +220,15 @@ type DateTimeInputProps = {
    * If not specified the component will show the `invalidDateTimeMessage`.
    */
   disabledDateTimeMessage?: string | ((rawDateValue: string) => string)
+  /**
+   * Whether to allow the user to enter non-step divisible values in the time
+   * input field. Note that even if this is set to false one can enter non-step
+   * divisible values programmatically. The user will need to enter the value
+   * exactly (except for lower/uppercase) as specified by the `timeFormat` prop
+   * for it to be accepted.
+   * Default is `undefined` which equals to `false`
+   */
+  allowNonStepInput?: boolean
 }
 
 type DateTimeInputState = {
@@ -288,7 +297,8 @@ const propTypes: PropValidators<PropKeys> = {
   disabledDateTimeMessage: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func
-  ])
+  ]),
+  allowNonStepInput: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -319,7 +329,8 @@ const allowedProps: AllowedPropKeys = [
   'timeInputRef',
   'onBlur',
   'disabledDates',
-  'disabledDateTimeMessage'
+  'disabledDateTimeMessage',
+  'allowNonStepInput'
 ]
 
 export type { DateTimeInputProps, DateTimeInputState }

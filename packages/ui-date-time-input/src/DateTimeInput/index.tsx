@@ -515,7 +515,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       colSpacing,
       isRequired,
       interaction,
-      renderWeekdayLabels
+      renderWeekdayLabels,
+      allowNonStepInput
     } = this.props
 
     return (
@@ -573,6 +574,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           timezone={timezone}
           inputRef={timeInputRef}
           interaction={interaction}
+          allowNonStepInput={allowNonStepInput}
         />
       </FormFieldGroup>
     )
