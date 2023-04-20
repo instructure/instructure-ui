@@ -42,7 +42,8 @@ export default {
       ]
     ],
     interaction: ['enabled', 'disabled'],
-    disabledDates: [undefined]
+    disabledDates: [undefined],
+    allowNonStepInput: [false]
   },
   getComponentProps: (props) => {
     const defaultPropsForLayout =
