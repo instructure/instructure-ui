@@ -850,7 +850,7 @@ describe('<DateTimeInput />', async () => {
     expect(timeInput).to.have.value(newDateTime.format('LT'))
   })
 
-  it.only('should allow the user to enter any time value if allowNonStepInput is true', async () => {
+  it('should allow the user to enter any time value if allowNonStepInput is true', async () => {
     const onChange = stub()
 
     await mount(
