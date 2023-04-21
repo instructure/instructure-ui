@@ -60,7 +60,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     timeStep: 30,
     messageFormat: DateTimeInput.DEFAULT_MESSAGE_FORMAT,
     isRequired: false,
-    dateFormat: 'LL' // Localized date with full month, e.g. "August 6, 2014"
+    dateFormat: 'LL', // Localized date with full month, e.g. "August 6, 2014"
+    allowNonStepInput: false
   } as const
 
   declare context: React.ContextType<typeof ApplyLocaleContext>
