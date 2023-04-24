@@ -136,10 +136,10 @@ class FocusRegion {
 
       if (this._options.shouldCloseOnDocumentClick) {
         this._listeners.push(
-          addEventListener(doc, 'click', this.captureDocumentClick, true)
+          addEventListener(doc, 'mousedown', this.captureDocumentClick, true)
         )
         this._listeners.push(
-          addEventListener(doc, 'click', this.handleDocumentClick)
+          addEventListener(doc, 'mousedown', this.handleDocumentClick)
         )
 
         Array.from(doc.getElementsByTagName('iframe')).forEach((el) => {
