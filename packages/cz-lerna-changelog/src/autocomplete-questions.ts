@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,11 +22,29 @@
  * SOFTWARE.
  */
 
-import yargs from 'yargs'
-import { hideBin } from 'yargs/helpers'
-import generateAllTokens from './commands/generate-all-tokens.js'
-import generateTokens from './commands/generate-tokens.js'
+import type { QuestionType, QuestionChoices } from './make-default-questions'
 
-/* eslint-disable no-unused-expressions */
-yargs(hideBin(process.argv)).command([generateAllTokens, generateTokens]).argv
-/* eslint-enable no-unused-expressions */
+export function autoCompleteQuestions(questions: QuestionType[]) {
+  return questions.map((question) =>
+    Object.assign(
+      question,
+      question.type === 'autocomplete'
+        ? {
+            source: autoCompleteSource(question.choices!)
+          }
+        : {}
+    )
+  )
+}
+
+function autoCompleteSource(options: QuestionChoices) {
+  return (_answersSoFar: any, input: string) => {
+    return new Promise((resolve) => {
+      const matches = options.filter(
+        ({ name }) =>
+          !input || name.toLowerCase().indexOf(input.toLowerCase()) === 0
+      )
+      resolve(matches)
+    })
+  }
+}

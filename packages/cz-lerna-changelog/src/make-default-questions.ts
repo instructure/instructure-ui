@@ -22,7 +22,22 @@
  * SOFTWARE.
  */
 
-module.exports = (allPackages, changedPackages) => [
+export type QuestionChoices = { value: string; name: string }[]
+
+export type QuestionType = {
+  type: string
+  name: string
+  message: string
+  default?: any
+  choices?: QuestionChoices
+  filter?: (val: string) => string
+  validate?: (val: string) => boolean
+}
+
+export const makeDefaultQuestions = (
+  allPackages: any,
+  changedPackages: any
+): QuestionType[] => [
   {
     type: 'autocomplete',
     name: 'type',
@@ -40,18 +55,15 @@ module.exports = (allPackages, changedPackages) => [
       { value: 'docs', name: 'docs:     📖  Documentation only changes' },
       {
         value: 'chore',
-        name:
-          'chore:    🛠   Changes to the build process or auxiliary tools\n                and libraries such as documentation generation'
+        name: 'chore:    🛠   Changes to the build process or auxiliary tools\n                and libraries such as documentation generation'
       },
       {
         value: 'style',
-        name:
-          'style:    💄  Changes that do not affect the meaning of the code\n                (white-space, formatting, missing semi-colons, etc)'
+        name: 'style:    💄  Changes that do not affect the meaning of the code\n                (white-space, formatting, missing semi-colons, etc)'
       },
       {
         value: 'refactor',
-        name:
-          'refactor: ✨  A code change that neither fixes a bug nor adds a feature'
+        name: 'refactor: ✨  A code change that neither fixes a bug nor adds a feature'
       },
       { value: 'test', name: 'test:     ✅  Adding missing tests' },
       {
@@ -72,10 +84,10 @@ module.exports = (allPackages, changedPackages) => [
     type: 'input',
     name: 'subject',
     message: 'Write a short, imperative tense description of the change:\n',
-    filter: function (value) {
+    filter: function (value: string) {
       return value.charAt(0).toLowerCase() + value.slice(1)
     },
-    validate: function (value) {
+    validate: function (value: string) {
       return !!value
     }
   },

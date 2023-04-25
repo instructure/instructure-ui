@@ -3,7 +3,9 @@
   "version": "8.37.0",
   "description": "Prompts for conventional changelog standard in a lerna environment.",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "module": "./es/index.js",
   "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -12,19 +14,27 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "run -T ui-test --lint",
-    "lint:fix": "run -T ui-test --lint --fix"
+    "lint:fix": "run -T ui-test --lint --fix",
+    "clean": "run -T ui-build --clean",
+    "build": "run -T ui-build --modules es,cjs",
+    "build:watch": "run -T ui-build --watch",
+    "build:types": "run -T tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {
     "@instructure/pkg-utils": "8.37.0",
-    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
     "chalk": "^4.1.2",
     "cz-customizable": "^6.9.2",
     "inquirer": "^8.2.5",
-    "inquirer-autocomplete-prompt": "^1.4.0"
+    "inquirer-autocomplete-prompt": "^2.0.0"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "8.36.0",
+    "@types/inquirer-autocomplete-prompt": "^2.0.0"
   },
   "peerDependencies": {
-    "lerna": "^4"
+    "lerna": "^6"
   },
   "publishConfig": {
     "access": "public"

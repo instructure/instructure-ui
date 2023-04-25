@@ -22,38 +22,34 @@
  * SOFTWARE.
  */
 
-const loadConfig = require('@instructure/config-loader')
-const {
-  runCommandsConcurrently,
-  getCommand
-} = require('@instructure/command-utils')
+import loadConfig from '@instructure/config-loader'
+import { getCommand, runCommandsConcurrently } from '@instructure/command-utils'
 
-exports.command = 'generate-all-tokens'
-exports.desc =
-  'Generate cross-platform design tokens for all themes in configuration.'
-
-exports.handler = (argv) => {
-  const config = loadConfig('ui-token-scripts')
-
-  const commandsToRun = config.reduce(
-    (commands, { themeKey, sourceTokens, outputPackage, groupOutput }) => {
-      return {
-        ...commands,
-        [`${themeKey} - ${outputPackage}`]: getCommand('ui-token-scripts', [
-          'generate-tokens',
-          '-s',
-          sourceTokens,
-          '-t',
-          themeKey,
-          '-p',
-          outputPackage,
-          '-g',
-          groupOutput === true
-        ])
-      }
-    },
-    {}
-  )
-
-  runCommandsConcurrently(commandsToRun)
+export default {
+  command: 'generate-all-tokens',
+  describe:
+    'Generate cross-platform design tokens for all themes in configuration.',
+  handler: (argv) => {
+    const config = loadConfig('ui-token-scripts')
+    const commandsToRun = config.reduce(
+      (commands, { themeKey, sourceTokens, outputPackage, groupOutput }) => {
+        return {
+          ...commands,
+          [`${themeKey} - ${outputPackage}`]: getCommand('ui-token-scripts', [
+            'generate-tokens',
+            '-s',
+            sourceTokens,
+            '-t',
+            themeKey,
+            '-p',
+            outputPackage,
+            '-g',
+            groupOutput === true
+          ])
+        }
+      },
+      {}
+    )
+    runCommandsConcurrently(commandsToRun)
+  }
 }
