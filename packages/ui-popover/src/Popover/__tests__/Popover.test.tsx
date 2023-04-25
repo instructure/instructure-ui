@@ -88,7 +88,9 @@ describe('<Popover />', async () => {
     await wait(() => {
       expect(content.containsFocus()).to.be.true()
     })
-    await wrapQueryResult(trigger.getOwnerDocument().documentElement).click()
+    await wrapQueryResult(
+      trigger.getOwnerDocument().documentElement
+    ).mouseDown()
 
     content = await popover.findContent({ expectEmpty: true })
 
