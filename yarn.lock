@@ -140,7 +140,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.21.4":
+"@babel/core@npm:^7.20.12, @babel/core@npm:^7.21.4":
   version: 7.21.4
   resolution: "@babel/core@npm:7.21.4"
   dependencies:
@@ -708,7 +708,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-decorators@npm:^7.21.0":
+"@babel/plugin-proposal-decorators@npm:^7.20.13, @babel/plugin-proposal-decorators@npm:^7.21.0":
   version: 7.21.0
   resolution: "@babel/plugin-proposal-decorators@npm:7.21.0"
   dependencies:
@@ -1254,7 +1254,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-classes@npm:^7.21.0":
+"@babel/plugin-transform-classes@npm:^7.20.7, @babel/plugin-transform-classes@npm:^7.21.0":
   version: 7.21.0
   resolution: "@babel/plugin-transform-classes@npm:7.21.0"
   dependencies:
@@ -1296,7 +1296,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-destructuring@npm:^7.21.3":
+"@babel/plugin-transform-destructuring@npm:^7.20.7, @babel/plugin-transform-destructuring@npm:^7.21.3":
   version: 7.21.3
   resolution: "@babel/plugin-transform-destructuring@npm:7.21.3"
   dependencies:
@@ -1543,7 +1543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-react-constant-elements@npm:^7.21.3":
+"@babel/plugin-transform-react-constant-elements@npm:^7.20.2, @babel/plugin-transform-react-constant-elements@npm:^7.21.3":
   version: 7.21.3
   resolution: "@babel/plugin-transform-react-constant-elements@npm:7.21.3"
   dependencies:
@@ -1626,7 +1626,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-runtime@npm:^7.21.4":
+"@babel/plugin-transform-runtime@npm:^7.19.6, @babel/plugin-transform-runtime@npm:^7.21.4":
   version: 7.21.4
   resolution: "@babel/plugin-transform-runtime@npm:7.21.4"
   dependencies:
@@ -1833,7 +1833,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.21.4":
+"@babel/preset-env@npm:^7.20.2, @babel/preset-env@npm:^7.21.4":
   version: 7.21.4
   resolution: "@babel/preset-env@npm:7.21.4"
   dependencies:
@@ -1975,7 +1975,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.21.4":
+"@babel/preset-typescript@npm:^7.18.6, @babel/preset-typescript@npm:^7.21.4":
   version: 7.21.4
   resolution: "@babel/preset-typescript@npm:7.21.4"
   dependencies:
@@ -2014,7 +2014,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.21.0":
+"@babel/runtime@npm:^7.20.13, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.21.0":
   version: 7.21.0
   resolution: "@babel/runtime@npm:7.21.0"
   dependencies:
@@ -2974,11 +2974,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@instructure/babel-plugin-transform-imports@npm:8.36.0":
+  version: 8.36.0
+  resolution: "@instructure/babel-plugin-transform-imports@npm:8.36.0"
+  dependencies:
+    globby: ^11.1.0
+  checksum: 2cc2c480d84a8393eae9fcc5b31be9d364836185197117c11bd889705193bbc1cb869fde2cda33dc4672fd0c192d12017485cae5b47e728b6ec30487c7e29afc
+  languageName: node
+  linkType: hard
+
 "@instructure/browserslist-config-instui@8.37.0, @instructure/browserslist-config-instui@workspace:packages/browserslist-config-instui":
   version: 0.0.0-use.local
   resolution: "@instructure/browserslist-config-instui@workspace:packages/browserslist-config-instui"
   languageName: unknown
   linkType: soft
+
+"@instructure/browserslist-config-instui@npm:8.36.0":
+  version: 8.36.0
+  resolution: "@instructure/browserslist-config-instui@npm:8.36.0"
+  checksum: e6f7f4812331263f323168401eae899b607e56157f40df94c08b282140b3a7ee8b4c3a256e84a6899f32866da50817f2b8d03c45e619369cfa3edb001e4610ee
+  languageName: node
+  linkType: hard
 
 "@instructure/canvas-high-contrast-theme@8.37.0, @instructure/canvas-high-contrast-theme@workspace:packages/canvas-high-contrast-theme":
   version: 0.0.0-use.local
@@ -3041,13 +3057,15 @@ __metadata:
   resolution: "@instructure/cz-lerna-changelog@workspace:packages/cz-lerna-changelog"
   dependencies:
     "@instructure/pkg-utils": 8.37.0
-    "@semantic-release/commit-analyzer": ^8.0.1
+    "@instructure/ui-babel-preset": 8.36.0
+    "@semantic-release/commit-analyzer": ^9.0.2
+    "@types/inquirer-autocomplete-prompt": ^2.0.0
     chalk: ^4.1.2
     cz-customizable: ^6.9.2
     inquirer: ^8.2.5
-    inquirer-autocomplete-prompt: ^1.4.0
+    inquirer-autocomplete-prompt: ^2.0.0
   peerDependencies:
-    lerna: ^4
+    lerna: ^6
   languageName: unknown
   linkType: soft
 
@@ -3349,6 +3367,39 @@ __metadata:
     core-js: 3.30.0
   languageName: unknown
   linkType: soft
+
+"@instructure/ui-babel-preset@npm:8.36.0":
+  version: 8.36.0
+  resolution: "@instructure/ui-babel-preset@npm:8.36.0"
+  dependencies:
+    "@babel/core": ^7.20.12
+    "@babel/plugin-proposal-class-properties": ^7.18.6
+    "@babel/plugin-proposal-decorators": ^7.20.13
+    "@babel/plugin-proposal-export-default-from": ^7.18.10
+    "@babel/plugin-proposal-optional-chaining": ^7.20.7
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-transform-classes": ^7.20.7
+    "@babel/plugin-transform-destructuring": ^7.20.7
+    "@babel/plugin-transform-react-constant-elements": ^7.20.2
+    "@babel/plugin-transform-react-display-name": ^7.18.6
+    "@babel/plugin-transform-runtime": ^7.19.6
+    "@babel/preset-env": ^7.20.2
+    "@babel/preset-react": ^7.18.6
+    "@babel/preset-typescript": ^7.18.6
+    "@babel/runtime": ^7.20.13
+    "@instructure/babel-plugin-transform-imports": 8.36.0
+    "@instructure/browserslist-config-instui": 8.36.0
+    babel-loader: ^8.3.0
+    babel-plugin-dynamic-import-node: ^2.3.3
+    babel-plugin-istanbul: ^6.1.1
+    babel-plugin-macros: ^3.1.0
+    babel-plugin-transform-ensure-ignore: ^0.1.0
+    babel-plugin-transform-remove-console: ^6.9.4
+    babel-plugin-transform-undefined-to-void: ^6.9.4
+    core-js: 3.28.0
+  checksum: 5ac2f6fa322656fc56e3a383d3ce0dcdaf21cac2cfb373b0c3e758d4bda8eab3dce0815ca632af7fea3c7d670a2d3d703b58d5b04c26b8d63f95eebd2028c3f2
+  languageName: node
+  linkType: hard
 
 "@instructure/ui-badge@8.37.0, @instructure/ui-badge@workspace:packages/ui-badge":
   version: 0.0.0-use.local
@@ -5218,7 +5269,6 @@ __metadata:
     "@babel/runtime": ^7.21.0
     "@instructure/command-utils": 8.37.0
     "@instructure/config-loader": 8.37.0
-    "@instructure/console": 8.37.0
     "@instructure/ui-test-utils": 8.37.0
     fs-extra: ^9.1.0
     lodash.isplainobject: ^4.0.6
@@ -7682,20 +7732,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/commit-analyzer@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "@semantic-release/commit-analyzer@npm:8.0.1"
+"@semantic-release/commit-analyzer@npm:^9.0.2":
+  version: 9.0.2
+  resolution: "@semantic-release/commit-analyzer@npm:9.0.2"
   dependencies:
-    conventional-changelog-angular: "npm:^5.0.0"
-    conventional-commits-filter: "npm:^2.0.0"
-    conventional-commits-parser: "npm:^3.0.7"
-    debug: "npm:^4.0.0"
-    import-from: "npm:^3.0.0"
-    lodash: "npm:^4.17.4"
-    micromatch: "npm:^4.0.2"
+    conventional-changelog-angular: ^5.0.0
+    conventional-commits-filter: ^2.0.0
+    conventional-commits-parser: ^3.2.3
+    debug: ^4.0.0
+    import-from: ^4.0.0
+    lodash: ^4.17.4
+    micromatch: ^4.0.2
   peerDependencies:
-    semantic-release: ">=16.0.0 <18.0.0"
-  checksum: 94ac8035538a55a3ca1b19f2c5f0eaea5bc97986ef251149d9db0b3382be5d4271f0080ba077b070e50330844e364dd48a83e453a415dad0a1364e05ffb70f8d
+    semantic-release: ">=18.0.0-beta.1"
+  checksum: f7f759e608c0c044ba8ec1b3aabad4305ac057cc45156b60a2f8dc355f5193b84ff7c661aefd4522659172f4d6ecf80219b8b28714bd76e4eb32e734b2e6ead9
   languageName: node
   linkType: hard
 
@@ -9118,6 +9168,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/inquirer-autocomplete-prompt@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@types/inquirer-autocomplete-prompt@npm:2.0.0"
+  dependencies:
+    "@types/inquirer": ^8
+  checksum: 9581720cb838da9f42501ec009328566451c4876dd8867b7d7a600c9c433dcef7e9e8dbbf74452f9334ada06e7bd695c500e0005f1572f21cab95522ca224012
+  languageName: node
+  linkType: hard
+
+"@types/inquirer@npm:^8":
+  version: 8.2.6
+  resolution: "@types/inquirer@npm:8.2.6"
+  dependencies:
+    "@types/through": "*"
+    rxjs: ^7.2.0
+  checksum: d09c3b6bbfb1aff8bdb8fc938d43536be55dfb51af0c91d0105e3f7c5e3950c12618ac00e2e91f10b5abeba38f4b903289be1df5aa31f213b58c3cc675a19f81
+  languageName: node
+  linkType: hard
+
 "@types/is-function@npm:^1.0.0":
   version: 1.0.1
   resolution: "@types/is-function@npm:1.0.1"
@@ -9538,6 +9607,15 @@ __metadata:
   dependencies:
     "@types/estree": "npm:*"
   checksum: d8fd304f147ed08f1d075f09cb8d440b7f785f69c9ec5c30eadf98132fe3f58f3b1bbbd11283858bb261afac5a2039c1c255f290b0f6e4a47cd6a746f30a6aa8
+  languageName: node
+  linkType: hard
+
+"@types/through@npm:*":
+  version: 0.0.30
+  resolution: "@types/through@npm:0.0.30"
+  dependencies:
+    "@types/node": "*"
+  checksum: 9578470db0b527c26e246a1220ae9bffc6bf47f20f89c54aac467c083ab1f7e16c00d9a7b4bb6cb4e2dfae465027270827e5908a6236063f6214625e50585d78
   languageName: node
   linkType: hard
 
@@ -10853,7 +10931,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-escapes@npm:^4.2.1, ansi-escapes@npm:^4.3.0, ansi-escapes@npm:^4.3.1":
+"ansi-escapes@npm:^4.2.1, ansi-escapes@npm:^4.3.0, ansi-escapes@npm:^4.3.1, ansi-escapes@npm:^4.3.2":
   version: 4.3.2
   resolution: "ansi-escapes@npm:4.3.2"
   dependencies:
@@ -11838,7 +11916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:^8.0.0":
+"babel-loader@npm:^8.0.0, babel-loader@npm:^8.3.0":
   version: 8.3.0
   resolution: "babel-loader@npm:8.3.0"
   dependencies:
@@ -14562,7 +14640,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-commits-parser@npm:^3.0.7, conventional-commits-parser@npm:^3.2.0":
+"conventional-commits-parser@npm:^3.2.0, conventional-commits-parser@npm:^3.2.3":
   version: 3.2.4
   resolution: "conventional-commits-parser@npm:3.2.4"
   dependencies:
@@ -14685,6 +14763,13 @@ __metadata:
   version: 3.27.1
   resolution: "core-js-pure@npm:3.27.1"
   checksum: 571ff8ffc00cba7c1937e70b502a382317d450ef3a38835b0dc4a6a9645ce9853c10a90f71a2027901fb52690a7ba702396f29e125d1b9d6ae3e277db1bcdf57
+  languageName: node
+  linkType: hard
+
+"core-js@npm:3.28.0":
+  version: 3.28.0
+  resolution: "core-js@npm:3.28.0"
+  checksum: 3155fd0ec16d0089106b145e9595280a4ea4bde0d7ff26aa14364cd4f1c203baf6620c3025acd284f363d08b9f21104101692766ca9a36ffeee7307bdf3e1881
   languageName: node
   linkType: hard
 
@@ -21402,12 +21487,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"import-from@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "import-from@npm:3.0.0"
-  dependencies:
-    resolve-from: "npm:^5.0.0"
-  checksum: 5040a7400e77e41e2c3bb6b1b123b52a15a284de1ffc03d605879942c00e3a87428499d8d031d554646108a0f77652549411167f6a7788e4fc7027eefccf3356
+"import-from@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "import-from@npm:4.0.0"
+  checksum: 1fa29c05b048da18914e91d9a529e5d9b91774bebbfab10e53f59bcc1667917672b971cf102fee857f142e5e433ce69fa1f0a596e1c7d82f9947a5ec352694b9
   languageName: node
   linkType: hard
 
@@ -21560,7 +21643,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer-autocomplete-prompt@npm:^1.0.1, inquirer-autocomplete-prompt@npm:^1.4.0":
+"inquirer-autocomplete-prompt@npm:^1.0.1":
   version: 1.4.0
   resolution: "inquirer-autocomplete-prompt@npm:1.4.0"
   dependencies:
@@ -21572,6 +21655,21 @@ __metadata:
   peerDependencies:
     inquirer: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
   checksum: 863d60d6beee2424d3fd9fbdbc027dcc36b20106509f56edd0aab49dea8b033451edec5936ca929b24b685a7137097c98c21757889df8a87cd3919a732483586
+  languageName: node
+  linkType: hard
+
+"inquirer-autocomplete-prompt@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "inquirer-autocomplete-prompt@npm:2.0.0"
+  dependencies:
+    ansi-escapes: ^4.3.2
+    figures: ^3.2.0
+    picocolors: ^1.0.0
+    run-async: ^2.4.1
+    rxjs: ^7.5.4
+  peerDependencies:
+    inquirer: ^8.0.0
+  checksum: c145692367f937c5b2461e6ec684f839b72d513adee15a4b2b3ea69f911971244a0acc61d0426b8c6eb177d2090169ad83a6e3ded8633fb0a27b650d6a7ba910
   languageName: node
   linkType: hard
 
@@ -31590,7 +31688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"run-async@npm:^2.2.0, run-async@npm:^2.4.0":
+"run-async@npm:^2.2.0, run-async@npm:^2.4.0, run-async@npm:^2.4.1":
   version: 2.4.1
   resolution: "run-async@npm:2.4.1"
   checksum: a2c88aa15df176f091a2878eb840e68d0bdee319d8d97bbb89112223259cebecb94bc0defd735662b83c2f7a30bed8cddb7d1674eb48ae7322dc602b22d03797
@@ -31631,7 +31729,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.5.1, rxjs@npm:^7.5.5, rxjs@npm:^7.8.0":
+"rxjs@npm:^7.2.0, rxjs@npm:^7.5.1, rxjs@npm:^7.5.4, rxjs@npm:^7.5.5, rxjs@npm:^7.8.0":
   version: 7.8.0
   resolution: "rxjs@npm:7.8.0"
   dependencies:

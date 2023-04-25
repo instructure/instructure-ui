@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-const isPlainObject = require('lodash.isplainobject')
+import isPlainObject from 'lodash.isplainobject'
 
 /**
  * Transforms an InstUI theme object into the data structure expected by Style
  * Dictionary. See: https://amzn.github.io/style-dictionary/#/properties
  */
-module.exports = (tokens) => {
+export function handleMapJSTokensToSource(tokens) {
   const mapTokenValue = (tokenValue) => ({ value: tokenValue })
   const mapTokenGroup = (tokenGroup) => {
     return Object.entries(tokenGroup).reduce((mapped, [key, value]) => {

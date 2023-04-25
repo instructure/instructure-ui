@@ -22,17 +22,16 @@
  * SOFTWARE.
  */
 
-const fse = require('fs-extra')
-const path = require('path')
-const styleDictionary = require('style-dictionary')
-const { error } = require('@instructure/command-utils')
+import fse from 'fs-extra'
+import path from 'path'
+import styleDictionary from 'style-dictionary'
 
-module.exports = async ({
+export async function handleGenerateTokens({
   themeKey,
   sourcePath,
   styleDictionarySource,
   outputPath
-}) => {
+}) {
   return fse
     .outputFile(sourcePath, JSON.stringify(styleDictionarySource))
     .then(() => {
@@ -67,8 +66,6 @@ module.exports = async ({
           // }
         }
       })
-
       dictionary.buildAllPlatforms()
     })
-    .catch((e) => error(e))
 }

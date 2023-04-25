@@ -22,27 +22,16 @@
  * SOFTWARE.
  */
 
-module.exports = function autoCompleteQuestions(questions) {
-  return questions.map((question) =>
-    Object.assign(
-      question,
-      question.type === 'autocomplete'
-        ? {
-            source: autoCompleteSource(question.choices)
-          }
-        : {}
-    )
-  )
-}
-
-function autoCompleteSource(options) {
-  return (answersSoFar, input) => {
-    return new Promise((resolve) => {
-      const matches = options.filter(
-        ({ name }) =>
-          !input || name.toLowerCase().indexOf(input.toLowerCase()) === 0
-      )
-      resolve(matches)
-    })
-  }
+module.exports = {
+  presets: [
+    [
+      require('@instructure/ui-babel-preset'),
+      {
+        coverage: Boolean(process.env.COVERAGE),
+        esModules: Boolean(process.env.ES_MODULES),
+        removeConsole: process.env.NODE_ENV === 'production',
+        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+      }
+    ]
+  ]
 }

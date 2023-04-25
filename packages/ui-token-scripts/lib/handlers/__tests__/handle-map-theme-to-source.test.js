@@ -23,7 +23,7 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import handleMapJsTokensToSource from '../handle-map-js-tokens-to-source'
+import { handleMapJSTokensToSource } from '../handle-map-js-tokens-to-source.js'
 
 const values = {
   brand: '#333333'
@@ -56,7 +56,7 @@ const tokens = {
 }
 
 describe('handleMapThemeToSource', () => {
-  const mappedSource = handleMapJsTokensToSource(tokens)
+  const mappedSource = handleMapJSTokensToSource(tokens)
 
   it('does not transform root level values', () => {
     expect(mappedSource).to.not.have.property('ic-brand-primary')
