@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.37.0](https://github.com/instructure/instructure-ui/compare/v8.36.0...v8.37.0) (2023-04-25)
+
+### Bug Fixes
+
+- **ui-date-time-input:** dateTimeInput does not trigger invalidDateTimeMessage on blur ([307a3f4](https://github.com/instructure/instructure-ui/commit/307a3f4e288aefcc8ae01ef4c39e30015d2c021f))
+- **ui-grid:** fix Grid.Col offset style calculation ([91e532c](https://github.com/instructure/instructure-ui/commit/91e532cfbe9bc9da874faaf7b2c6063e2b52fafc))
+- **ui-motion:** transition's behavior conflict ([57bbc92](https://github.com/instructure/instructure-ui/commit/57bbc92c64883382c9633d5eb63c265dd0d8a09d))
+- **ui-progress:** fix ProgressBar `info` and `success` color in inverse mode ([920fa49](https://github.com/instructure/instructure-ui/commit/920fa49e89f7796faf8a527781a44c6f63f26bac))
+- **ui-text-input:** fix TextInput padding calculation vol.2. ([757c04a](https://github.com/instructure/instructure-ui/commit/757c04a15cc17d890aea1c219195c7b4e3f3fc74)), closes [PR#1178](https://github.com/PR/issues/1178)
+
+### Features
+
+- **ui-date-time-input:** allow the user to enter non-step divisible time values ([2cf6c9d](https://github.com/instructure/instructure-ui/commit/2cf6c9d60b09f8279ab618c895be5515f3c5b965))
+- **ui-progress:** add `shouldAnimate` prop to ProgressBar ([c528956](https://github.com/instructure/instructure-ui/commit/c528956f81c96df52b07b9dc59ae1e137307c780))
+- **ui-source-code-editor:** add `height` and `width` props to SourceCodeEditor ([4e9b1e7](https://github.com/instructure/instructure-ui/commit/4e9b1e73ae10fe51b68e6c5c849f51194bebac85))
+
+### Performance Improvements
+
+- **ui-select:** improve perf for large amount of items ([396a13b](https://github.com/instructure/instructure-ui/commit/396a13b81b0471cfd19329817c563bcddc158828))
+
 # [8.36.0](https://github.com/instructure/instructure-ui/compare/v8.35.1...v8.36.0) (2023-03-23)
 
 ### Bug Fixes
