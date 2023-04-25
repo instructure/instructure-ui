@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.37.0](https://github.com/instructure/instructure-ui/compare/v8.36.0...v8.37.0) (2023-04-25)
+
+### Bug Fixes
+
+- **ui-date-time-input:** dateTimeInput does not trigger invalidDateTimeMessage on blur ([307a3f4](https://github.com/instructure/instructure-ui/commit/307a3f4e288aefcc8ae01ef4c39e30015d2c021f))
+
+### Features
+
+- **ui-date-time-input:** allow the user to enter non-step divisible time values ([2cf6c9d](https://github.com/instructure/instructure-ui/commit/2cf6c9d60b09f8279ab618c895be5515f3c5b965))
+
 # [8.36.0](https://github.com/instructure/instructure-ui/compare/v8.35.1...v8.36.0) (2023-03-23)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input

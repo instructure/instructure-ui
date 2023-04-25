@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.37.0](https://github.com/instructure/instructure-ui/compare/v8.36.0...v8.37.0) (2023-04-25)
+
+### Bug Fixes
+
+- **ui-grid:** fix Grid.Col offset style calculation ([91e532c](https://github.com/instructure/instructure-ui/commit/91e532cfbe9bc9da874faaf7b2c6063e2b52fafc))
+
 # [8.36.0](https://github.com/instructure/instructure-ui/compare/v8.35.1...v8.36.0) (2023-03-23)
 
 **Note:** Version bump only for package @instructure/ui-grid
