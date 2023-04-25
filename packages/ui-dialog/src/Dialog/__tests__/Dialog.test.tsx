@@ -119,7 +119,7 @@ describe('<Dialog />', async () => {
       expect(dialog.containsFocus()).to.be.true()
     })
 
-    await within(dialog.getOwnerDocument().documentElement).click()
+    await within(dialog.getOwnerDocument().documentElement).mouseDown()
 
     await wait(() => {
       expect(onDismiss).to.have.been.called()

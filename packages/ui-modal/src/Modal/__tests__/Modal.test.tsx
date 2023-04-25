@@ -240,7 +240,7 @@ describe('<Modal />', async () => {
       expect(modal.containsFocus()).to.be.true()
     })
 
-    await (within(modal.getOwnerDocument().documentElement) as any).click()
+    await (within(modal.getOwnerDocument().documentElement) as any).mouseDown()
 
     await wait(() => {
       expect(onDismiss).to.have.been.called()
@@ -486,13 +486,15 @@ describe('<Modal />', async () => {
 
     await mount(<Example handleDissmiss={handleDissmiss} />)
 
+    const modal = await ModalLocator.find()
+
     const incrementBtn: HTMLElement = document.querySelector('#increment-btn')!
     const btn = within(incrementBtn)
 
     await btn.click()
 
     // to trigger the modal to close
-    document.body.click()
+    await (within(modal.getOwnerDocument().documentElement) as any).mouseDown()
 
     expect(handleDissmiss).to.have.been.calledWith(1)
   })
