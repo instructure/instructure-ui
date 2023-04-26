@@ -21,43 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import pkgUtils from '@instructure/pkg-utils'
 import { error, info, runCommandAsync } from '@instructure/command-utils'
 
-import { getConfig } from './utils/config.js'
 import {
   checkWorkingDirectory,
   isReleaseCommit,
   runGitCommand,
   setupGit
-} from './utils/git.js'
-import { bumpPackages, createNPMRCFile } from './utils/npm.js'
+} from '../utils/git.js'
+import { bumpPackages, createNPMRCFile } from '../utils/npm.js'
 import semver from 'semver'
 
-export async function doPublish() {
-  try {
-    const pkgJSON = pkgUtils.getPackageJSON()
-    // ui-scripts --publish               - to publish from the master branch
-    // ui-scripts --publish maintenance   - to publish from any legacy branch
-    const isMaintenance = process.argv[3] === 'maintenance'
-
-    await publish({
-      packageName: pkgJSON.name,
-      version: pkgJSON.version,
-      isMaintenance,
-      config: getConfig(pkgJSON)
+export default {
+  command: 'publish',
+  desc: 'publishes ALL packages to npm with the "npm publish" command',
+  builder: (yargs) => {
+    yargs.option('isMaintenance', {
+      type: 'boolean',
+      describe: 'If true npm publish will use vXYZ_maintenance as tag',
+      default: false
     })
-  } catch (err) {
-    error(err)
-    process.exit(1)
+  },
+  handler: async (argv) => {
+    const isMaintenance = argv.isMaintenance
+    try {
+      const pkgJSON = pkgUtils.getPackageJSON()
+      await publish({
+        packageName: pkgJSON.name,
+        version: pkgJSON.version,
+        isMaintenance
+      })
+    } catch (err) {
+      error(err)
+      process.exit(1)
+    }
   }
 }
 
-async function publish({ packageName, version, isMaintenance, config = {} }) {
+async function publish({ packageName, version, isMaintenance }) {
   const isRegularRelease = isReleaseCommit(version)
 
   setupGit()
-  createNPMRCFile(config)
+  createNPMRCFile()
 
   checkWorkingDirectory()
   const packages = pkgUtils.getPackages().filter((pkg) => !pkg.private)
@@ -67,9 +74,7 @@ async function publish({ packageName, version, isMaintenance, config = {} }) {
     const tag = isMaintenance
       ? `v${version.split('.')[0]}_maintenance`
       : 'latest'
-
     info(`📦  Version: ${version}, Tag: ${tag}`)
-
     return publishRegularVersion({
       version,
       tag,
@@ -162,8 +167,8 @@ async function* publishPackages(packages, version, tag) {
       packageVersions = JSON.parse(stdout).versions
     } catch (npmErr) {
       // if we run into this error that probably means that the
-      // pkg we try to release is not in the registry yet (ie. it is a new package).
-      // lets just swallow the error and continue with the publish
+      // pkg we try to release is not in the registry yet (i.e. it is a new package).
+      // let's just swallow the error and continue with the publish.
       info(
         `It looks like package (${pkg.name}) is currently not in the npm registry. Continuing publishing...`
       )
@@ -177,7 +182,6 @@ async function* publishPackages(packages, version, tag) {
       throw new Error(`📦  v${version} of ${pkg.name} is already published!`)
     } else {
       await publishPackage(pkg, tag)
-
       yield pkg
     }
   }

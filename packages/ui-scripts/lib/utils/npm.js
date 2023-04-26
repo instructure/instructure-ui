@@ -34,6 +34,7 @@ import {
 
 import { Project } from '@lerna/project'
 
+const NPM_SCOPE = '@instructure:registry=https://registry.npmjs.org/'
 const syncRootPackageVersion = async (useProjectVersion) => {
   const project = new Project(process.cwd())
   const rootPkg = pkgUtils.getPackage()
@@ -105,71 +106,22 @@ export async function bumpPackages(packageName, requestedVersion) {
   return releaseVersion
 }
 
-export function createNPMRCFile(config = {}) {
+export function createNPMRCFile() {
   const { NPM_TOKEN, NPM_EMAIL, NPM_USERNAME } = process.env
 
   // Only write an npmrc file if these are defined, otherwise assume the system is properly configured
   if (NPM_TOKEN) {
     fs.writeFileSync(
       path.resolve(process.cwd(), '.npmrc'),
-      `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${config.npm_scope}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}`
+      `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${NPM_SCOPE}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}`
     )
   }
 
   try {
+    info('running npm whoami:')
     runCommandSync('npm', ['whoami'])
   } catch (e) {
     error(`Could not determine if NPM auth was successful: ${e}`)
+    process.exit(1)
   }
-}
-
-export async function updateCrossPackageDependencies(
-  packageName,
-  releaseVersion,
-  dependencyVersion
-) {
-  const changedPackages = pkgUtils.getChangedPackages(undefined, undefined)
-  const changedPackageNames = changedPackages.map((pkg) => pkg.name)
-
-  info(
-    `📦  Updating cross-package dependencies for ${packageName} to ${dependencyVersion}...`
-  )
-  await Promise.all(
-    changedPackages.map((changedPackage) => {
-      const pkg = changedPackage.toJSON()
-      let packageChanged = false
-
-      const depCollections = [
-        'dependencies',
-        'devDependencies',
-        'optionalDependencies',
-        'peerDependencies'
-      ]
-
-      depCollections.forEach((depCollection) => {
-        if (!pkg[depCollection]) return
-
-        const newDependencies = Object.keys(pkg[depCollection])
-          .filter((dep) => {
-            return (
-              changedPackageNames.includes(dep) &&
-              pkg[depCollection][dep] === `^${releaseVersion}`
-            )
-          })
-          .reduce((obj, dep) => ({ ...obj, [dep]: dependencyVersion }), {})
-
-        if (Object.entries(newDependencies).length > 0) {
-          changedPackage.set(
-            depCollection,
-            Object.assign(pkg[depCollection], newDependencies)
-          )
-          packageChanged = true
-        }
-      })
-
-      if (packageChanged) {
-        return changedPackage.serialize()
-      }
-    })
-  )
 }

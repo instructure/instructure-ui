@@ -46,8 +46,7 @@
     "clean": "yarn node scripts/clean.js",
     "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
     "bump": "ui-scripts bump",
-    "link:packages": "ui-scripts --link-packages",
-    "release": "ui-scripts --publish",
+    "release": "ui-scripts publish",
     "dev:examples": "lerna run start:watch --stream --scope docs-examples",
     "prestart:examples": "yarn bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
@@ -88,10 +87,6 @@
     "yarn": ">=3"
   },
   "config": {
-    "ui-scripts": {
-      "npm_scope": "@instructure:registry=https://registry.npmjs.org/",
-      "changelog_url": "https://instructure.design/#CHANGELOG"
-    },
     "commitizen": {
       "path": "./node_modules/@instructure/cz-lerna-changelog"
     }
