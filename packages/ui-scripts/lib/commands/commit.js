@@ -26,8 +26,8 @@ import { commit } from '../utils/git.js'
 
 export default {
   command: 'commit',
-  desc: 'commit staged changes in git',
-  handler: (argv) => {
+  desc: 'commit staged changes in git running Husky pre-commit hooks and git-cz',
+  handler: (_argv) => {
     // eslint-disable-next-line no-unused-expressions
     commit().status
   }

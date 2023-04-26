@@ -25,10 +25,12 @@ import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
 export default {
   command: 'server',
+  desc: 'Starts a HTTP server serving the __build__ folder',
   builder: {
     port: {
       alias: 'p',
       type: 'number',
+      describe: 'port to use.',
       default: 8080
     }
   },

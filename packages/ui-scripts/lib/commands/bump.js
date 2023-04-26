@@ -31,7 +31,7 @@ import { bumpPackages } from '../utils/npm.js'
 
 export default {
   command: 'bump',
-  desc: 'bump version in all packages',
+  desc: 'bump version in all package.json-s, generate changelogs and commit this change',
   builder: (yargs) => {
     yargs.option('releaseType', {
       type: 'string',
@@ -42,7 +42,7 @@ export default {
   handler: async (argv) => {
     const pkgJSON = pkgUtils.getPackageJSON(undefined)
     // optional release type/version argument: major, minor, patch, [version]
-    // e.g. ui-scripts --bump major
+    // e.g. ui-scripts bump major
     await bump(pkgJSON.name, argv.releaseType)
   }
 }
@@ -53,7 +53,7 @@ async function bump(packageName, requestedVersion) {
   let releaseVersion
   try {
     releaseVersion = await bumpPackages(packageName, requestedVersion)
-    info('📦  Running yarn install to update yarn.lock file!')
+    info('📦 Running yarn install to update yarn.lock file!')
     execSync('yarn install', { stdio: 'inherit' })
   } catch (err) {
     error(err)
