@@ -53,6 +53,10 @@ type RadioInputOwnProps = {
   context?: 'success' | 'warning' | 'danger' | 'off'
   inline?: boolean
   onClick?: (event: React.MouseEvent<HTMLInputElement>) => void
+  /**
+   * Callback fired when the input fires a change event.
+   * event.target.value will contain the new value. It will always be a string.
+   */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -65,7 +69,8 @@ type RadioInputProps = RadioInputOwnProps &
   OtherHTMLAttributes<
     RadioInputOwnProps,
     InputHTMLAttributes<RadioInputOwnProps>
-  > & WithDeterministicIdProps
+  > &
+  WithDeterministicIdProps
 
 type RadioInputStyle = ComponentStyle<
   'radioInput' | 'input' | 'control' | 'facade' | 'label'
