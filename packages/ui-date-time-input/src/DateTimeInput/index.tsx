@@ -321,10 +321,10 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       // eslint-disable-next-line no-param-reassign
       newState.message = { text: text, type: 'error' }
     }
-    this.setState(newState)
     if (this.areDifferentDates(this.state.iso, newState.iso)) {
       this.props.onChange?.(e, newState.iso?.toISOString())
     }
+    this.setState(newState)
   }
 
   areDifferentDates = (d1?: Moment, d2?: Moment) => {
