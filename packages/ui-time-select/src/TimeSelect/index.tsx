@@ -152,15 +152,35 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       this.setState(this.getInitialState())
     }
     if (this.props.value !== prevProps.value) {
-      const normalizedValue = this.normalizeISOTime(this.props.value)
+      let momentValue: Moment | undefined
+      if (this.props.value) {
+        momentValue = DateTime.parse(
+          this.props.value,
+          this.locale(),
+          this.timezone()
+        )
+      }
       // value changed
       const initState = this.getInitialState()
       this.setState(initState)
       // options need to be passed because state is not set immediately
-      let option = this.getOption('value', normalizedValue, initState.options)
-      if (typeof normalizedValue === 'undefined') {
+      let option
+      if (typeof momentValue === 'undefined') {
         // preserve current value when changing from controlled to uncontrolled
-        option = this.getOption('value', this.normalizeISOTime(prevProps.value))
+        if (prevProps.value) {
+          option = this.getOption(
+            'id',
+            this.getFormattedId(
+              DateTime.parse(prevProps.value, this.locale(), this.timezone())
+            )
+          )
+        }
+      } else {
+        option = this.getOption(
+          'id',
+          this.getFormattedId(momentValue),
+          initState.options
+        )
       }
       const outsideVal = this.props.value ? this.props.value : ''
       // value does not match an existing option
@@ -178,13 +198,10 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     }
   }
 
-  // value needs to be normalized because e.g. 2022-03-29T19:00Z and
-  // 2022-03-29T19:00:00.000Z refer to the same time in the same timezone.
-  normalizeISOTime(value?: string) {
-    if (!value) {
-      return value
-    }
-    return DateTime.parse(value, this.locale(), this.timezone()).toISOString()
+  getFormattedId(date: Moment) {
+    // ISO8601 strings may contain a space. Remove any spaces before using the
+    // date as the id.
+    return date.toISOString().replace(/\s/g, '')
   }
 
   getInitialState(): TimeSelectState {
@@ -193,7 +210,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     return {
       inputValue: initialSelection ? initialSelection.label : '',
       options: initialOptions,
-      filteredOptions: initialOptions,
+      filteredOptions:
+        initialOptions.length > 30 ? this.filterOptions('') : initialOptions,
       isShowingOptions: false,
       highlightedOptionId: initialSelection ? initialSelection.id : undefined,
       selectedOptionId: initialSelection ? initialSelection.id : undefined
@@ -205,21 +223,19 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   ): TimeSelectOptions | undefined {
     const { value, defaultValue, defaultToFirstOption, format } = this.props
     const initialValue = value || defaultValue
-
     if (typeof initialValue === 'string') {
+      const date = DateTime.parse(initialValue, this.locale(), this.timezone())
       // get option based on value or defaultValue, if provided
-      const option = this.getOption(
-        'value',
-        this.normalizeISOTime(initialValue),
-        options
-      )
+      const option = this.getOption('value', date, options)
       if (option) {
         // value matches an existing option
         return option
       }
       // value does not match an existing option
-      const date = DateTime.parse(initialValue, this.locale(), this.timezone())
-      return { label: format ? date.format(format) : date.toISOString() }
+      return {
+        label: format ? date.format(format) : date.toISOString(),
+        value: date
+      }
     }
     // otherwise, return first option, if desired
     if (defaultToFirstOption) {
@@ -230,12 +246,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
 
   getOption: GetOption = (field, value, options = this.state.options) => {
     return options.find((option) => option[field] === value)
-  }
-
-  getFormattedId(date: Moment) {
-    // ISO8601 strings may contain a space. Remove any spaces before using the
-    // date as the id.
-    return date.toISOString().replace(/\s/g, '')
   }
 
   getBaseDate() {
@@ -249,18 +259,19 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     return baseDate.set({ second: 0, millisecond: 0 }).clone()
   }
 
-  generateOptions() {
+  generateOptions(): TimeSelectOptions[] {
     const date = this.getBaseDate()
     const options = []
-
+    const maxMinute = this.props.allowNonStepInput ? 60 : 60 / this.props.step!
+    const minuteStep = this.props.allowNonStepInput ? 1 : this.props.step!
     for (let hour = 0; hour < 24; hour++) {
-      for (let minute = 0; minute < 60 / this.props.step!; minute++) {
-        const minutes = minute * this.props.step!
+      for (let minute = 0; minute < maxMinute; minute++) {
+        const minutes = minute * minuteStep
         const newDate = date.set({ hour: hour, minute: minutes })
         // store time options
         options.push({
-          id: this.getFormattedId(newDate), // iso no spaces
-          value: newDate.toISOString(),
+          id: this.getFormattedId(newDate),
+          value: newDate.clone(),
           label: this.props.format
             ? newDate.format(this.props.format)
             : newDate.toISOString()
@@ -271,51 +282,18 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   filterOptions(inputValue: string) {
+    if (this.props.allowNonStepInput && inputValue.length < 3) {
+      // could show too many results, show only step values
+      return this.state?.options.filter((option: TimeSelectOptions) => {
+        return (
+          option.label.toLowerCase().startsWith(inputValue.toLowerCase()) &&
+          option.value.minute() % this.props.step! == 0
+        )
+      })
+    }
     return this.state?.options.filter((option: TimeSelectOptions) =>
       option.label.toLowerCase().startsWith(inputValue.toLowerCase())
     )
-  }
-
-  matchValue() {
-    const {
-      inputValue,
-      filteredOptions,
-      highlightedOptionId,
-      selectedOptionId
-    } = this.state
-
-    // an option matching user input exists
-    if (filteredOptions.length === 1) {
-      const onlyOption = filteredOptions[0]
-      // automatically select the matching option
-      if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
-        return {
-          inputValue: onlyOption.label,
-          selectedOptionId: onlyOption.id,
-          filteredOptions: this.filterOptions('')
-        }
-      }
-    }
-    // no match found, return selected option label to input
-    const selectedOption = this.getOption('id', selectedOptionId)
-    if (selectedOption) {
-      return { inputValue: selectedOption.label }
-    }
-    // input value is from highlighted option, not user input
-    if (highlightedOptionId) {
-      if (inputValue === this.getOption('id', highlightedOptionId)!.label) {
-        return {
-          inputValue: '',
-          filteredOptions: this.filterOptions('')
-        }
-      }
-    }
-    // if input was completely cleared, ensure it stays clear
-    // e.g. defaultValue defined, but no selection yet made
-    if (inputValue === '') {
-      return { inputValue: '' }
-    }
-    return undefined
   }
 
   handleRef = (node: Select) => {
@@ -356,7 +334,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   handleHideOptions: SelectProps['onRequestHideOptions'] = (event) => {
-    const input = this.parseInputText(this.state.inputValue)
+    const { selectedOptionId, filteredOptions, inputValue } = this.state
     let defaultValue = ''
     if (this.props.defaultValue) {
       const date = DateTime.parse(
@@ -368,29 +346,36 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         ? date.format(this.props.format)
         : date.toISOString()
     }
-    if (
-      !this.props.allowNonStepInput ||
-      (this.props.allowNonStepInput &&
-        input.isValid() &&
-        input.minute() % this.props.step! === 0)
-    ) {
-      const { selectedOptionId } = this.state
-      const option = this.getOption('id', selectedOptionId)
-      this.setState(() => ({
-        isShowingOptions: false,
-        highlightedOptionId: undefined,
-        inputValue: selectedOptionId ? option!.label : defaultValue,
-        filteredOptions: this.filterOptions(''),
-        ...this.matchValue()
-      }))
-    } else {
-      this.setState(() => ({
-        isShowingOptions: false,
-        highlightedOptionId: undefined,
-        inputValue: this.state.lastValidInput || defaultValue || '',
-        filteredOptions: this.filterOptions('')
-      }))
+    const option = this.getOption('id', selectedOptionId)
+    let newInputValue = defaultValue
+    let newSelectedOptionId: string | undefined
+    // an option matching user input exists
+    if (filteredOptions.length === 1) {
+      const onlyOption = filteredOptions[0]
+      // automatically select the matching option
+      if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
+        newInputValue = onlyOption.label
+        newSelectedOptionId = onlyOption.id
+      }
     }
+    // no match found, return selected option label to input
+    else if (option) {
+      newInputValue = option.label
+    }
+    // if input was completely cleared, ensure it stays clear
+    // e.g. defaultValue defined, but no selection yet made
+    else if (inputValue === '') {
+      newInputValue = ''
+    }
+    this.setState(() => ({
+      isShowingOptions: false,
+      highlightedOptionId: undefined,
+      inputValue: newInputValue,
+      filteredOptions: this.filterOptions(''),
+      selectedOptionId: newSelectedOptionId
+        ? newSelectedOptionId
+        : this.state.selectedOptionId
+    }))
     this.props.onHideOptions?.(event)
   }
 
@@ -399,12 +384,10 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     { id }
   ) => {
     if (id === this._emptyOptionId) return
-    const { type } = event
     const option = this.getOption('id', id)!.label
-
     this.setState((state) => ({
       highlightedOptionId: id,
-      inputValue: type === 'keydown' ? option : state.inputValue
+      inputValue: event.type === 'keydown' ? option : state.inputValue
     }))
   }
 
@@ -442,7 +425,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         lastValidInput: newInputValue
       })
       this.props.onChange?.(event, {
-        value: option.value,
+        value: option.value.toISOString(),
         inputText: newInputValue
       })
     }
@@ -491,7 +474,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       event.key === 'Enter' &&
       this.props.allowNonStepInput &&
       input.isValid() &&
-      input.minute() % this.props.step! !== 0 &&
       this.state.lastValidInput != this.state.inputValue
     ) {
       this.setState(() => ({
@@ -500,10 +482,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         filteredOptions: this.filterOptions(''),
         lastValidInput: this.state.inputValue
       }))
-      this.props.onChange?.(event, {
-        value: input.toISOString(),
-        inputText: this.state.inputValue
-      })
       // others are set in OnHideOptions
     }
     this.props.onKeyDown?.(event)

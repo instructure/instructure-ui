@@ -42,6 +42,7 @@ import type {
 } from '@instructure/ui-position'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import { Renderable } from '@instructure/shared-types'
+import type { Moment } from 'moment-timezone'
 
 type PropKeys = keyof TimeSelectOwnProps
 
@@ -310,8 +311,11 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 type TimeSelectOptions = {
+  // the ID of this option, ISO date without spaces
   id?: string
-  value?: string
+  // the actual date value
+  value: Moment
+  // the label shown to the user
   label: string
 }
 
@@ -326,6 +330,10 @@ type TimeSelectState = {
    * Whether to show the options list.
    */
   isShowingOptions: boolean
+  /**
+   * The highlighted option in the dropdown e.g. by hovering,
+   * not necessarily selected
+   */
   highlightedOptionId?: string
   selectedOptionId?: string
   /**
