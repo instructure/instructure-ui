@@ -547,6 +547,14 @@ export type FileDropTheme = {
 
 export type FlexTheme = {
   fontFamily: Typography['fontFamily']
+  gapXxxSmall: string
+  gapXxSmall: string
+  gapXSmall: string
+  gapSmall: string
+  gapMedium: string
+  gapLarge: string
+  gapXLarge: string
+  gapXxLarge: string
 }
 
 export type FormFieldGroupTheme = {

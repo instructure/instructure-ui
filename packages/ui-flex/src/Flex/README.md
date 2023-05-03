@@ -46,6 +46,76 @@ example: true
 </div>
 ```
 
+### Gap between Flex.Items
+
+Flex will have the gap is None by default. You can set the gap between Flex.Items by using the `gap` property.
+
+```js
+---
+example: true
+---
+<div>
+  <Flex withVisualDebug margin="none none large" gap="small">
+    <Flex.Item>One</Flex.Item>
+    <Flex.Item>Two</Flex.Item>
+    <Flex.Item>Three</Flex.Item>
+    <Flex.Item>Four</Flex.Item>
+  </Flex>
+  <Flex withVisualDebug direction="column" margin="none none large" gap="medium">
+    <Flex.Item>One</Flex.Item>
+    <Flex.Item>Two</Flex.Item>
+    <Flex.Item>Three</Flex.Item>
+    <Flex.Item>Four</Flex.Item>
+  </Flex>
+  <Flex withVisualDebug direction="row-reverse" margin="none none large" gap="medium">
+    <Flex.Item>One</Flex.Item>
+    <Flex.Item>Two</Flex.Item>
+    <Flex.Item>Three</Flex.Item>
+    <Flex.Item>Four</Flex.Item>
+  </Flex>
+  <Flex withVisualDebug direction="column-reverse" gap="small">
+    <Flex.Item>One</Flex.Item>
+    <Flex.Item>Two</Flex.Item>
+    <Flex.Item>Three</Flex.Item>
+    <Flex.Item>Four</Flex.Item>
+  </Flex>
+</div>
+```
+
+You can also set the gap between rows and columns by using the `gap` property. Make sure that the `wrap` property is set to `wrap` or `wrap-reverse`.
+
+```js
+---
+example: true
+---
+<div>
+  <Flex withVisualDebug margin="none none large" gap="small" wrap="wrap">
+    <Flex.Item size='25rem'>One</Flex.Item>
+    <Flex.Item size='25rem'>Two</Flex.Item>
+    <Flex.Item size='25rem'>Three</Flex.Item>
+    <Flex.Item size='25rem'>Four</Flex.Item>
+  </Flex>
+  <Flex withVisualDebug margin="none none large" gap="small large" wrap="wrap">
+    <Flex.Item size='25rem'>One</Flex.Item>
+    <Flex.Item size='25rem'>Two</Flex.Item>
+    <Flex.Item size='25rem'>Three</Flex.Item>
+    <Flex.Item size='25rem'>Four</Flex.Item>
+  </Flex>
+  <Flex withVisualDebug margin="none none large" gap="small" wrap="wrap-reverse">
+    <Flex.Item size='25rem'>One</Flex.Item>
+    <Flex.Item size='25rem'>Two</Flex.Item>
+    <Flex.Item size='25rem'>Three</Flex.Item>
+    <Flex.Item size='25rem'>Four</Flex.Item>
+  </Flex>
+  <Flex withVisualDebug margin="none none large" gap="small large" wrap="wrap-reverse">
+    <Flex.Item size='25rem'>One</Flex.Item>
+    <Flex.Item size='25rem'>Two</Flex.Item>
+    <Flex.Item size='25rem'>Three</Flex.Item>
+    <Flex.Item size='25rem'>Four</Flex.Item>
+  </Flex>
+</div>
+```
+
 ### Sizing Flex.Items
 
 By default, Flex.Items **expand to fit their contents**, even if that means overflowing

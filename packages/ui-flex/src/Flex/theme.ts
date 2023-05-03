@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { makeThemeVars } from '@instructure/emotion'
 import type { Theme } from '@instructure/ui-themes'
 import { FlexTheme } from '@instructure/shared-types'
 
@@ -31,10 +32,11 @@ import { FlexTheme } from '@instructure/shared-types'
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme: Theme): FlexTheme => {
-  const { typography } = theme
+  const { typography, spacing } = theme
 
   const componentVariables: FlexTheme = {
-    fontFamily: typography?.fontFamily
+    fontFamily: typography?.fontFamily,
+    ...makeThemeVars('gap', spacing)
   }
 
   return {

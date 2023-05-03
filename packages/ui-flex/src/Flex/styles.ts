@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { getShorthandPropValue } from '@instructure/emotion'
 import type { FlexTheme } from '@instructure/shared-types'
 import type { FlexProps, FlexStyle } from './props'
 
@@ -44,7 +45,7 @@ const generateStyle = (
   componentTheme: FlexTheme,
   props: FlexProps
 ): FlexStyle => {
-  const { justifyItems, wrap, direction } = props
+  const { justifyItems, wrap, direction, gap } = props
 
   // align-items css prop
   // When flex direction is row, 'center' is the most useful default because it
@@ -85,6 +86,11 @@ const generateStyle = (
     'row-reverse': 'row-reverse'
   }
 
+  // gap css prop
+  const getGapValue = (gap: FlexProps['gap'], theme: FlexTheme) => {
+    return getShorthandPropValue('Flex', theme, gap, 'gap')
+  }
+
   return {
     flex: {
       label: 'flex',
@@ -93,7 +99,8 @@ const generateStyle = (
       alignItems: alignItemsValues[alignItems],
       justifyContent: justifyItemsValues[justifyItems!],
       flexWrap: wrapValues[wrap!],
-      flexDirection: flexDirectionValues[direction!]
+      flexDirection: flexDirectionValues[direction!],
+      gap: getGapValue(gap!, componentTheme)
     }
   }
 }
