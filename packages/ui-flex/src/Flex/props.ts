@@ -77,6 +77,13 @@ type FlexOwnProps = {
   margin?: Spacing
 
   /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small large"`.
+   */
+  gap?: Spacing
+
+  /**
    * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
@@ -138,6 +145,7 @@ const propTypes: PropValidators<PropKeys> = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   margin: ThemeablePropTypes.spacing,
   padding: ThemeablePropTypes.spacing,
+  gap: ThemeablePropTypes.spacing,
   display: PropTypes.oneOf(['flex', 'inline-flex']),
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
   direction: PropTypes.oneOf([

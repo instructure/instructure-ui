@@ -72,7 +72,8 @@ class Flex extends Component<FlexProps> {
     justifyItems: 'start',
     display: 'flex',
     withVisualDebug: false,
-    wrap: 'no-wrap'
+    wrap: 'no-wrap',
+    gap: 'none'
   }
 
   ref: Element | null = null
