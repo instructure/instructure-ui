@@ -218,9 +218,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     }
   }
 
-  getInitialOption(
-    options: TimeSelectOptions[]
-  ): TimeSelectOptions | undefined {
+  getInitialOption(options: TimeSelectOptions[]) {
     const { value, defaultValue, defaultToFirstOption, format } = this.props
     const initialValue = value || defaultValue
     if (typeof initialValue === 'string') {
@@ -233,9 +231,10 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       }
       // value does not match an existing option
       return {
+        id: this.getFormattedId(date),
         label: format ? date.format(format) : date.toISOString(),
         value: date
-      }
+      } as TimeSelectOptions
     }
     // otherwise, return first option, if desired
     if (defaultToFirstOption) {
@@ -262,8 +261,9 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   generateOptions(): TimeSelectOptions[] {
     const date = this.getBaseDate()
     const options = []
-    const maxMinute = this.props.allowNonStepInput ? 60 : 60 / this.props.step!
-    const minuteStep = this.props.allowNonStepInput ? 1 : this.props.step!
+    const step = this.props.step ? this.props.step : 30
+    const maxMinute = this.props.allowNonStepInput ? 60 : 60 / step
+    const minuteStep = this.props.allowNonStepInput ? 1 : step
     for (let hour = 0; hour < 24; hour++) {
       for (let minute = 0; minute < maxMinute; minute++) {
         const minutes = minute * minuteStep
@@ -301,7 +301,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    this.setState({ highlightedOptionId: undefined })
     this.props.onBlur?.(event)
   }
 
@@ -346,9 +345,9 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         ? date.format(this.props.format)
         : date.toISOString()
     }
-    const option = this.getOption('id', selectedOptionId)
+    const selectedOption = this.getOption('id', selectedOptionId)
     let newInputValue = defaultValue
-    let newSelectedOptionId: string | undefined
+    let newSelectedOptionId = this.state.selectedOptionId
     // an option matching user input exists
     if (filteredOptions.length === 1) {
       const onlyOption = filteredOptions[0]
@@ -357,10 +356,14 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         newInputValue = onlyOption.label
         newSelectedOptionId = onlyOption.id
       }
+      this.props.onChange?.(event, {
+        value: onlyOption.value.toISOString(),
+        inputText: newInputValue
+      })
     }
-    // no match found, return selected option label to input
-    else if (option) {
-      newInputValue = option.label
+    // else return selected option label to input
+    else if (selectedOption) {
+      newInputValue = selectedOption.label
     }
     // if input was completely cleared, ensure it stays clear
     // e.g. defaultValue defined, but no selection yet made
@@ -373,33 +376,28 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       inputValue: newInputValue,
       filteredOptions: this.filterOptions(''),
       selectedOptionId: newSelectedOptionId
-        ? newSelectedOptionId
-        : this.state.selectedOptionId
     }))
     this.props.onHideOptions?.(event)
   }
 
   handleHighlightOption: SelectProps['onRequestHighlightOption'] = (
-    event: React.SyntheticEvent,
-    { id }
+    event,
+    data
   ) => {
-    if (id === this._emptyOptionId) return
-    const option = this.getOption('id', id)!.label
+    if (data.id === this._emptyOptionId) return
+    const option = this.getOption('id', data.id)!.label
     this.setState((state) => ({
-      highlightedOptionId: id,
+      highlightedOptionId: data.id,
       inputValue: event.type === 'keydown' ? option : state.inputValue
     }))
   }
 
-  handleSelectOption: SelectProps['onRequestSelectOption'] = (
-    event: React.SyntheticEvent,
-    { id }
-  ) => {
-    if (id === this._emptyOptionId) {
+  handleSelectOption: SelectProps['onRequestSelectOption'] = (event, data) => {
+    if (data.id === this._emptyOptionId) {
       this.setState({ isShowingOptions: false })
       return
     }
-    const option = this.getOption('id', id)!
+    const option = this.getOption('id', data.id)!
 
     let newInputValue: string
     if (this.isControlled) {
@@ -414,15 +412,14 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       newInputValue = option.label
       this.setState({
         isShowingOptions: false,
-        selectedOptionId: id,
+        selectedOptionId: data.id,
         inputValue: newInputValue,
         filteredOptions: this.filterOptions('')
       })
     }
-
-    if (id !== this.state.selectedOptionId) {
+    if (data.id !== this.state.selectedOptionId) {
       this.setState({
-        lastValidInput: newInputValue
+        lastValidInput: newInputValue // TODO needs to be set when clicking out!
       })
       this.props.onChange?.(event, {
         value: option.value.toISOString(),
@@ -444,7 +441,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       const { id, label } = option
       return (
         <Select.Option
-          id={id!}
+          id={id}
           key={id}
           isHighlighted={id === highlightedOptionId}
           isSelected={id === selectedOptionId}

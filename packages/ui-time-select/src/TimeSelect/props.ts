@@ -142,13 +142,17 @@ type TimeSelectOwnProps = {
    */
   mountNode?: PositionMountNode
   /**
-   * Callback fired when a new option is selected.
+   * Callback fired when a new option is selected. This can happen in the
+   * following ways:
+   * 1. User clicks/presses enter on an option in the dropdown
+   * 2. User enters a valid time manually and presses enter/tabs away/clicks
+   *    outside
    * @param event - the event object
-   * @param data - additional data
+   * @param data - additional data containing the value and the input string
    */
   onChange?: (
     event: React.SyntheticEvent,
-    data: { value?: string; inputText: string }
+    data: { value: string; inputText: string }
   ) => void
   /**
    * Callback fired when text input receives focus.
@@ -312,7 +316,7 @@ const allowedProps: AllowedPropKeys = [
 
 type TimeSelectOptions = {
   // the ID of this option, ISO date without spaces
-  id?: string
+  id: string
   // the actual date value
   value: Moment
   // the label shown to the user
@@ -324,7 +328,14 @@ type TimeSelectState = {
    * The current value in the input field, not necessarily a valid time
    */
   inputValue: string
+  /**
+   * All possible options. Filtered down because if `allowNonStepInput` is true
+   * it'd be 24*60 options and filtered by user input.
+   */
   options: TimeSelectOptions[]
+  /**
+   * The options shown in the options list.
+   */
   filteredOptions: TimeSelectOptions[]
   /**
    * Whether to show the options list.
@@ -335,9 +346,13 @@ type TimeSelectState = {
    * not necessarily selected
    */
   highlightedOptionId?: string
+  /**
+   * The ID of the selected option in the options list dropdown
+   */
   selectedOptionId?: string
   /**
-   * Last valid input when nonStepInput is true
+   * Holds the previous value committed value of inputValue.
+   * Used when nonStepInput is true
    */
   lastValidInput?: string
 }
