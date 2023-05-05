@@ -135,6 +135,34 @@ describe('<TimeSelect />', async () => {
     expect(input.getAttribute('value')).to.equal(options[3].getTextContent())
   })
 
+  it('should not change value in controlled mode', async () => {
+    const onChange = stub()
+    const onKeyDown = stub()
+    const handleInputChange = stub()
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
+    const subject = await mount(
+      <TimeSelect
+        renderLabel="Choose a time"
+        allowNonStepInput={true}
+        value={dateTime.toISOString()}
+        locale="en_AU"
+        timezone="US/Eastern"
+        onChange={onChange}
+        onInputChange={handleInputChange}
+        onKeyDown={onKeyDown}
+      />
+    )
+    const select = await TimeSelectLocator.find()
+    const input = await select.findInput()
+    await subject.setProps({ value: '' })
+    await input.typeIn('7:45 PM')
+    await input.keyUp('Esc') // should reset the value
+    expect(onChange).to.have.been.not.called()
+    expect(onKeyDown).to.have.been.called()
+    expect(handleInputChange).to.have.been.called()
+    expect(input.getAttribute('value')).to.equal('')
+  })
+
   it('should keep selection when value changes', async () => {
     const onChange = stub()
     const locale = 'en-US'
@@ -378,12 +406,10 @@ describe('<TimeSelect />', async () => {
 
   it('should allow non-step value when allowNonStepInput=true', async () => {
     const onChange = stub()
-    const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
-    const subject = await mount(
+    await mount(
       <TimeSelect
         renderLabel="Choose a time"
         allowNonStepInput={true}
-        value={dateTime.toISOString()}
         locale="en_AU"
         timezone="US/Eastern"
         onChange={onChange}
@@ -391,10 +417,8 @@ describe('<TimeSelect />', async () => {
     )
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
-    await subject.setProps({ value: '' })
     await input.typeIn('7:34 PM')
-    await input.keyDown('Enter') // sends onChange event
-    await input.keyUp('esc') // should do nothing
+    await input.focusOut() // sends onChange event
     expect(onChange).to.have.been.called()
     expect(lastCall(onChange)[1].value).to.exist()
     expect(input.getAttribute('value')).to.equal('7:34 PM')
@@ -404,12 +428,10 @@ describe('<TimeSelect />', async () => {
     const onChange = stub()
     const onKeyDown = stub()
     const handleInputChange = stub()
-    const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
-    const subject = await mount(
+    await mount(
       <TimeSelect
         renderLabel="Choose a time"
         allowNonStepInput={true}
-        value={dateTime.toISOString()}
         locale="en_AU"
         timezone="US/Eastern"
         onChange={onChange}
@@ -419,10 +441,8 @@ describe('<TimeSelect />', async () => {
     )
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
-    await subject.setProps({ value: '' })
     await input.typeIn('7:45 PM')
-    await input.keyDown('Enter') // sends onChange event
-    await input.keyUp('esc') // should do nothing
+    await input.focusOut() // sends onChange event
     expect(onChange).to.have.been.called()
     expect(onKeyDown).to.have.been.called()
     expect(handleInputChange).to.have.been.called()

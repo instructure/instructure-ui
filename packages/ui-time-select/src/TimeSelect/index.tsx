@@ -80,6 +80,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   static contextType = ApplyLocaleContext
 
   ref: Select | null = null
+
   private readonly _emptyOptionId =
     this.props.deterministicId!('Select-EmptyOption')
 
@@ -152,9 +153,9 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       this.setState(this.getInitialState())
     }
     if (this.props.value !== prevProps.value) {
-      let momentValue: Moment | undefined
+      let newValue: Moment | undefined
       if (this.props.value) {
-        momentValue = DateTime.parse(
+        newValue = DateTime.parse(
           this.props.value,
           this.locale(),
           this.timezone()
@@ -165,7 +166,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       this.setState(initState)
       // options need to be passed because state is not set immediately
       let option
-      if (typeof momentValue === 'undefined') {
+      if (!this.isControlled) {
         // preserve current value when changing from controlled to uncontrolled
         if (prevProps.value) {
           option = this.getOption(
@@ -175,10 +176,10 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
             )
           )
         }
-      } else {
+      } else if (newValue) {
         option = this.getOption(
           'id',
-          this.getFormattedId(momentValue),
+          this.getFormattedId(newValue),
           initState.options
         )
       }
@@ -307,6 +308,19 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     const newOptions = this.filterOptions(value)
+    if (newOptions?.length == 1) {
+      // if there is only 1 option, it will be automatically selected.
+      // This will cause an onChange event to fire when handleBlurOrEsc is called
+      if (!this.isControlled) {
+        this.setState({ selectedOptionId: newOptions[0].id })
+      }
+      this.setState({ fireChangeOnBlur: newOptions[0] })
+    } else {
+      this.setState({
+        selectedOptionId: undefined,
+        fireChangeOnBlur: undefined
+      })
+    }
     this.setState({
       inputValue: value,
       filteredOptions: newOptions,
@@ -324,6 +338,22 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     )
   }
 
+  onKeyDown = (event: React.KeyboardEvent<any>) => {
+    const input = this.parseInputText(this.state.inputValue)
+    if (
+      event.key === 'Enter' &&
+      this.props.allowNonStepInput &&
+      input.isValid()
+    ) {
+      this.setState(() => ({
+        isShowingOptions: false,
+        highlightedOptionId: undefined
+      }))
+      // others are set in OnHideOptions
+    }
+    this.props.onKeyDown?.(event)
+  }
+
   handleShowOptions = (event: React.SyntheticEvent) => {
     this.setState({
       isShowingOptions: true,
@@ -332,8 +362,11 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     this.props.onShowOptions?.(event)
   }
 
-  handleHideOptions: SelectProps['onRequestHideOptions'] = (event) => {
-    const { selectedOptionId, filteredOptions, inputValue } = this.state
+  // Called when the input is blurred (=when clicking outside, tabbing away),
+  // when pressing ESC. NOT called when an item is selected via Enter/click,
+  // (but in this case it will be called later when the input is blurred.)
+  handleBlurOrEsc: SelectProps['onRequestHideOptions'] = (event) => {
+    const { selectedOptionId, inputValue } = this.state
     let defaultValue = ''
     if (this.props.defaultValue) {
       const date = DateTime.parse(
@@ -347,22 +380,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     }
     const selectedOption = this.getOption('id', selectedOptionId)
     let newInputValue = defaultValue
-    let newSelectedOptionId = this.state.selectedOptionId
-    // an option matching user input exists
-    if (filteredOptions.length === 1) {
-      const onlyOption = filteredOptions[0]
-      // automatically select the matching option
-      if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
-        newInputValue = onlyOption.label
-        newSelectedOptionId = onlyOption.id
-      }
-      this.props.onChange?.(event, {
-        value: onlyOption.value.toISOString(),
-        inputText: newInputValue
-      })
-    }
-    // else return selected option label to input
-    else if (selectedOption) {
+    if (selectedOption) {
+      // If there is a selected option use its value in the input field.
       newInputValue = selectedOption.label
     }
     // if input was completely cleared, ensure it stays clear
@@ -374,9 +393,51 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       isShowingOptions: false,
       highlightedOptionId: undefined,
       inputValue: newInputValue,
-      filteredOptions: this.filterOptions(''),
-      selectedOptionId: newSelectedOptionId
+      filteredOptions: this.filterOptions('')
     }))
+    if (this.state.fireChangeOnBlur && (event as any).key !== 'Escape') {
+      this.setState(() => ({ fireChangeOnBlur: undefined }))
+      this.props.onChange?.(event, {
+        value: this.state.fireChangeOnBlur.value.toISOString(),
+        inputText: this.state.fireChangeOnBlur.label
+      })
+    }
+    // TODO only fire this if handleSelectOption was not called before.
+    this.props.onHideOptions?.(event)
+  }
+
+  // Called when an option is selected via mouse click or Enter.
+  handleSelectOption: SelectProps['onRequestSelectOption'] = (event, data) => {
+    if (data.id === this._emptyOptionId) {
+      this.setState({ isShowingOptions: false })
+      return
+    }
+    const selectedOption = this.getOption('id', data.id)
+    let newInputValue: string
+    const currentSelectedOptionId = this.state.selectedOptionId
+    if (this.isControlled) {
+      // in controlled mode we leave to the user to set the value of the
+      // component e.g. in the onChange event handler.
+      // This is accomplished by not setting a selectedOptionId
+      const prev = this.getOption('id', this.state.selectedOptionId)
+      newInputValue = prev ? prev.label : ''
+      this.setState({
+        isShowingOptions: false
+      })
+    } else {
+      newInputValue = selectedOption!.label
+      this.setState({
+        isShowingOptions: false,
+        selectedOptionId: data.id,
+        inputValue: newInputValue
+      })
+    }
+    if (data.id !== currentSelectedOptionId) {
+      this.props.onChange?.(event, {
+        value: selectedOption!.value.toISOString(),
+        inputText: newInputValue
+      })
+    }
     this.props.onHideOptions?.(event)
   }
 
@@ -390,43 +451,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       highlightedOptionId: data.id,
       inputValue: event.type === 'keydown' ? option : state.inputValue
     }))
-  }
-
-  handleSelectOption: SelectProps['onRequestSelectOption'] = (event, data) => {
-    if (data.id === this._emptyOptionId) {
-      this.setState({ isShowingOptions: false })
-      return
-    }
-    const option = this.getOption('id', data.id)!
-
-    let newInputValue: string
-    if (this.isControlled) {
-      const prev = this.getOption('id', this.state.selectedOptionId)
-      newInputValue = prev ? prev.label : ''
-      this.setState({
-        isShowingOptions: false,
-        inputValue: newInputValue,
-        filteredOptions: this.filterOptions('')
-      })
-    } else {
-      newInputValue = option.label
-      this.setState({
-        isShowingOptions: false,
-        selectedOptionId: data.id,
-        inputValue: newInputValue,
-        filteredOptions: this.filterOptions('')
-      })
-    }
-    if (data.id !== this.state.selectedOptionId) {
-      this.setState({
-        lastValidInput: newInputValue // TODO needs to be set when clicking out!
-      })
-      this.props.onChange?.(event, {
-        value: option.value.toISOString(),
-        inputText: newInputValue
-      })
-    }
-    this.props.onHideOptions?.(event)
   }
 
   renderOptions() {
@@ -462,26 +486,6 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         {callRenderProp(this.props.renderEmptyOption)}
       </Select.Option>
     )
-  }
-
-  onKeyDown = (event: React.KeyboardEvent<any>) => {
-    const input = this.parseInputText(this.state.inputValue)
-    // validate input and if OK close dropdown
-    if (
-      event.key === 'Enter' &&
-      this.props.allowNonStepInput &&
-      input.isValid() &&
-      this.state.lastValidInput != this.state.inputValue
-    ) {
-      this.setState(() => ({
-        isShowingOptions: false,
-        highlightedOptionId: undefined,
-        filteredOptions: this.filterOptions(''),
-        lastValidInput: this.state.inputValue
-      }))
-      // others are set in OnHideOptions
-    }
-    this.props.onKeyDown?.(event)
   }
 
   parseInputText = (inputValue: string) => {
@@ -555,7 +559,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         renderAfterInput={renderAfterInput}
         isShowingOptions={isShowingOptions}
         onRequestShowOptions={this.handleShowOptions}
-        onRequestHideOptions={this.handleHideOptions}
+        onRequestHideOptions={this.handleBlurOrEsc}
         onRequestHighlightOption={this.handleHighlightOption}
         onRequestSelectOption={this.handleSelectOption}
         onInputChange={this.handleInputChange}

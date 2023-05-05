@@ -2,7 +2,7 @@
 describes: TimeSelect
 ---
 
-`TimeSelect` component is a higher level abstraction of [Select](#Select) specifically for selecting time values. The list of possible values can be configured via the component's props. If you need to select times and dates, be sure to check out the documentation around [Time and Date patterns](#TimeDate).
+`TimeSelect` component is a higher level abstraction of [Select](#Select) specifically for selecting time values. The list of possible values can be configured via the component's props.
 
 ### Uncontrolled
 
