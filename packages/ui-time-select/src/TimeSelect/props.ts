@@ -144,9 +144,8 @@ type TimeSelectOwnProps = {
   /**
    * Callback fired when a new option is selected. This can happen in the
    * following ways:
-   * 1. User clicks/presses enter on an option in the dropdown
-   * 2. User enters a valid time manually and presses enter/tabs away/clicks
-   *    outside
+   * 1. User clicks/presses enter on an option in the dropdown and focuses away
+   * 2. User enters a valid time manually and focuses away
    * @param event - the event object
    * @param data - additional data containing the value and the input string
    */
@@ -351,10 +350,9 @@ type TimeSelectState = {
    */
   selectedOptionId?: string
   /**
-   * Holds the previous value committed value of inputValue.
-   * Used when nonStepInput is true
+   * fire onChange event when the popup closes?
    */
-  lastValidInput?: string
+  fireChangeOnBlur?: TimeSelectOptions
 }
 
 export type { TimeSelectProps, TimeSelectState, TimeSelectOptions }
