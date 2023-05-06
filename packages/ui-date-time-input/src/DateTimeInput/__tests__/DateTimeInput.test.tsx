@@ -185,7 +185,7 @@ describe('<DateTimeInput />', async () => {
     const timeInput = await timeLocator.findInput()
 
     await timeInput.change({ target: { value: '1:00 PM' } })
-    await timeInput.keyDown('enter')
+    await timeInput.focusOut()
 
     await wait(() => {
       expect(messageSpy).to.have.been.called()
@@ -873,8 +873,7 @@ describe('<DateTimeInput />', async () => {
     const timeLocator = await dateTimeInput.findTimeInput()
     const timeInput = await timeLocator.findInput()
     await timeInput.typeIn('7:34 PM')
-    await timeInput.keyDown('Enter') // should send onChange event
-    await timeInput.keyUp('esc') // should do nothing
+    await timeInput.focusOut()
 
     const dateLocator = await dateTimeInput.findDateInput()
     const dateInput = await dateLocator.findInput()
