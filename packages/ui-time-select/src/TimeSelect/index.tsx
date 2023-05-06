@@ -211,8 +211,13 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     return {
       inputValue: initialSelection ? initialSelection.label : '',
       options: initialOptions,
+      // 288 = 5 min step
       filteredOptions:
-        initialOptions.length > 30 ? this.filterOptions('') : initialOptions,
+        initialOptions.length > 288
+          ? initialOptions.filter(
+              (opt) => opt.value.minute() % this.props.step! === 0
+            )
+          : initialOptions,
       isShowingOptions: false,
       highlightedOptionId: initialSelection ? initialSelection.id : undefined,
       selectedOptionId: initialSelection ? initialSelection.id : undefined
