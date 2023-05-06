@@ -135,7 +135,7 @@ describe('<TimeSelect />', async () => {
     expect(input.getAttribute('value')).to.equal(options[3].getTextContent())
   })
 
-  it('should not change value in controlled mode', async () => {
+  it('Pressing ESC should reset the value in controlled mode', async () => {
     const onChange = stub()
     const onKeyDown = stub()
     const handleInputChange = stub()
@@ -161,6 +161,26 @@ describe('<TimeSelect />', async () => {
     expect(onKeyDown).to.have.been.called()
     expect(handleInputChange).to.have.been.called()
     expect(input.getAttribute('value')).to.equal('')
+  })
+
+  it('value should not be changeable via user input in controlled mode', async () => {
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')
+    await mount(
+      <TimeSelect
+        renderLabel="Choose a time"
+        allowNonStepInput={true}
+        value={dateTime.toISOString()}
+        locale="en_AU"
+        timezone="US/Eastern"
+      />
+    )
+    const select = await TimeSelectLocator.find()
+    const input = await select.findInput()
+    await input.change({ target: { value: '' } })
+    await input.typeIn('1:45 PM')
+    await input.keyDown('Enter')
+    await input.focusOut()
+    expect(input.getAttribute('value')).to.equal('1:30 PM')
   })
 
   it('should keep selection when value changes', async () => {

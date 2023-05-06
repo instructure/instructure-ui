@@ -309,15 +309,19 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
     const value = event.target.value
     const newOptions = this.filterOptions(value)
     if (newOptions?.length == 1) {
-      // if there is only 1 option, it will be automatically selected.
-      // This will cause an onChange event to fire when handleBlurOrEsc is called
+      // if there is only 1 option, it will be automatically selected except
+      // if in controlled mode (it would commit this change)
       if (!this.isControlled) {
         this.setState({ selectedOptionId: newOptions[0].id })
       }
       this.setState({ fireChangeOnBlur: newOptions[0] })
     } else {
       this.setState({
-        selectedOptionId: undefined,
+        // needs not to lose selectedOptionId in controlled mode otherwise it'd
+        // revert to the default or '' instead of the set value
+        selectedOptionId: this.isControlled
+          ? this.state.selectedOptionId
+          : undefined,
         fireChangeOnBlur: undefined
       })
     }
@@ -349,7 +353,7 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
         isShowingOptions: false,
         highlightedOptionId: undefined
       }))
-      // others are set in OnHideOptions
+      // others are set in handleBlurOrEsc
     }
     this.props.onKeyDown?.(event)
   }
