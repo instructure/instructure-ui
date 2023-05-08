@@ -145,7 +145,8 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
       this.props.step !== prevProps.step ||
       this.props.format !== prevProps.format ||
       this.props.locale !== prevProps.locale ||
-      this.props.timezone !== prevProps.timezone
+      this.props.timezone !== prevProps.timezone ||
+      this.props.allowNonStepInput !== prevProps.allowNonStepInput
     ) {
       // options change, reset everything
       // when controlled, selection will be preserved
