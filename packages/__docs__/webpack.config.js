@@ -72,6 +72,9 @@ const config = merge(baseConfig, {
           const fullPath = path.join(projectRoot, evt)
           processSingleFile(fullPath)
         })
+    },
+    client: {
+      overlay: false
     }
   },
   plugins: [
