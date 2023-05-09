@@ -722,6 +722,7 @@ export type MenuTheme = {
   minWidth: Breakpoints['xxSmall']
   maxWidth: Breakpoints['xSmall']
   background: Colors['backgroundLightest']
+  borderRadius: Border['radiusMedium']
   focusBorderStyle: Border['style']
   focusBorderWidth: Border['widthMedium']
   focusBorderColor: Colors['borderBrand']

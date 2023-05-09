@@ -37,6 +37,7 @@ const generateComponentTheme = (theme: Theme): MenuTheme => {
     minWidth: breakpoints?.xxSmall,
     maxWidth: breakpoints?.xSmall,
     background: colors?.backgroundLightest,
+    borderRadius: borders?.radiusMedium,
     focusBorderStyle: borders?.style,
     focusBorderWidth: borders?.widthMedium,
     focusBorderColor: colors?.borderBrand,
