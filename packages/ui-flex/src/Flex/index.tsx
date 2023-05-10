@@ -122,11 +122,16 @@ class Flex extends Component<FlexProps> {
       padding,
       textAlign,
       width,
-      styles
+      styles,
+      gap,
+      wrap
     } = this.props
 
     const children = callRenderProp(this.props.children)
 
+    const gapValuesArray = gap?.split(' ')
+    if (gapValuesArray!.length > 1 && wrap === 'no-wrap')
+      console.warn('The `gap` prop is supplied with an improper `wrap` prop.')
     if (children && Children.count(children) > 0) {
       return (
         <View

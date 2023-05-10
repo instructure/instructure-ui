@@ -87,9 +87,8 @@ const generateStyle = (
   }
 
   // gap css prop
-  const getGapValue = (gap: FlexProps['gap'], theme: FlexTheme) => {
-    return getShorthandPropValue('Flex', theme, gap, 'gap')
-  }
+  const getGapValue = (gap: FlexProps['gap'], theme: FlexTheme) =>
+    getShorthandPropValue('Flex', theme, gap, 'gap')
 
   return {
     flex: {

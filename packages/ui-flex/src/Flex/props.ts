@@ -79,7 +79,7 @@ type FlexOwnProps = {
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small large"`.
+   * familiar CSS-like shorthand. For example: `gap="small large"`.
    */
   gap?: Spacing
 
