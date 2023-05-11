@@ -289,17 +289,28 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   }
 
   filterOptions(inputValue: string) {
-    if (this.props.allowNonStepInput && inputValue.length < 3) {
+    let inputNoSeconds = inputValue
+    // if the input contains seconds disregard them (e.g. if format = LTS)
+    if (inputValue.length > 5) {
+      // e.g. "5:34:"
+      const input = this.parseInputText(inputValue)
+      if (input.isValid()) {
+        input.set({ second: 0 })
+        inputNoSeconds = input.format(this.props.format)
+      }
+    }
+
+    if (this.props.allowNonStepInput && inputNoSeconds.length < 3) {
       // could show too many results, show only step values
       return this.state?.options.filter((option: TimeSelectOptions) => {
         return (
-          option.label.toLowerCase().startsWith(inputValue.toLowerCase()) &&
+          option.label.toLowerCase().startsWith(inputNoSeconds.toLowerCase()) &&
           option.value.minute() % this.props.step! == 0
         )
       })
     }
     return this.state?.options.filter((option: TimeSelectOptions) =>
-      option.label.toLowerCase().startsWith(inputValue.toLowerCase())
+      option.label.toLowerCase().startsWith(inputNoSeconds.toLowerCase())
     )
   }
 

@@ -444,6 +444,26 @@ describe('<TimeSelect />', async () => {
     expect(input.getAttribute('value')).to.equal('7:34 PM')
   })
 
+  it('should round down seconds when applicable', async () => {
+    const onChange = stub()
+    await mount(
+      <TimeSelect
+        renderLabel="Choose a time"
+        allowNonStepInput={true}
+        locale="en_AU"
+        format="LTS" // shows seconds
+        timezone="US/Eastern"
+        onChange={onChange}
+      />
+    )
+    const select = await TimeSelectLocator.find()
+    const input = await select.findInput()
+    await input.change({ target: { value: '' } })
+    await input.typeIn('04:45:55 AM')
+    await input.focusOut() // sends onChange event
+    expect(input.getAttribute('value')).to.equal('4:45:00 AM')
+  })
+
   it('adding event listeners does not break functionality', async () => {
     const onChange = stub()
     const onKeyDown = stub()
