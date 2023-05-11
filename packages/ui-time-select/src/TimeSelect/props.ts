@@ -79,6 +79,9 @@ type TimeSelectOwnProps = {
   id?: string
   /**
    * The format to use when displaying the possible and currently selected options.
+   * This component currently rounds seconds down to the minute.
+   * Defaults to `LT`, which is localized time without seconds, e.g. "16:45" or
+   * "4:45 PM"
    *
    * See [moment](https://momentjs.com/docs/#/displaying/format/) for the list
    * of available formats.
