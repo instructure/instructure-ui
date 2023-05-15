@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.38.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.38.0) (2023-05-15)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** dialog closes when release mouse outside ([4989b56](https://github.com/instructure/instructure-ui/commit/4989b568c7c6e7514cd412b5870b5c17af7eae25))
+
+
+
+
+
 # [8.37.0](https://github.com/instructure/instructure-ui/compare/v8.36.0...v8.37.0) (2023-04-25)
 
 **Note:** Version bump only for package @instructure/ui-a11y-utils

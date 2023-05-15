@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.38.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.38.0) (2023-05-15)
+
+
+### Bug Fixes
+
+* **ui-date-time-input:** fix onChange event not firing sometimes ([4eaf63c](https://github.com/instructure/instructure-ui/commit/4eaf63c2f9babe167c18c4dacfdaa2230942b1d6))
+
+
+
+
+
 # [8.37.0](https://github.com/instructure/instructure-ui/compare/v8.36.0...v8.37.0) (2023-04-25)
 
 ### Bug Fixes

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.38.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.38.0) (2023-05-15)
+
+
+### Features
+
+* **shared-types,ui-flex:** add `gap` prop to Flex ([e1a3396](https://github.com/instructure/instructure-ui/commit/e1a3396415ade0eeb3eb7c99088506213faefe23))
+
+
+
+
+
 # [8.37.0](https://github.com/instructure/instructure-ui/compare/v8.36.0...v8.37.0) (2023-04-25)
 
 **Note:** Version bump only for package @instructure/ui-flex
