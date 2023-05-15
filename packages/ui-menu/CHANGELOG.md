@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.38.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.38.0) (2023-05-15)
+
+
+### Bug Fixes
+
+* **shared-types,ui-menu:** menu background overlapping borders ([a8262de](https://github.com/instructure/instructure-ui/commit/a8262de6e96a8a8a564d68df99e405f9f1c9299d))
+
+
+
+
+
 # [8.37.0](https://github.com/instructure/instructure-ui/compare/v8.36.0...v8.37.0) (2023-04-25)
 
 **Note:** Version bump only for package @instructure/ui-menu
