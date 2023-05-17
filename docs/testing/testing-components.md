@@ -1,7 +1,7 @@
 ---
 title: Testing
-category: Getting Started
-order: 7
+category: Testing
+order: 1
 ---
 
 ## Testing

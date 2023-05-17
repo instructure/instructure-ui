@@ -1,7 +1,7 @@
 ---
 title: Testing library
-category: Guides
-order: 7
+category: Testing
+order: 2
 ---
 
 ## About the `ui-test-utils`

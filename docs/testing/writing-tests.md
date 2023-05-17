@@ -1,7 +1,7 @@
 ---
 title: Writing tests
-category: Guides
-order: 8
+category: Testing
+order: 3
 ---
 
 > This section uses `@instructure/ui-test-utils` testing library, plsease see the installation and configuration [here](/#ui-test-utils)
