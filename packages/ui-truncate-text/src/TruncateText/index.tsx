@@ -291,7 +291,10 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
               {ensureSingleChild(children)}
             </span>
           ))}
-        {truncatedElement}
+        {truncatedElement &&
+          React.cloneElement(truncatedElement as any, {
+            style: { pointerEvents: 'none' }
+          })}
       </span>
     )
   }
