@@ -98,7 +98,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
 
   constructor(props: PopoverProps) {
     super(props)
-
+    this._renderTrigger = callRenderProp(this.props.renderTrigger)
     this.state = {
       placement: props.placement,
       offsetX: props.offsetX,
@@ -140,7 +140,11 @@ class Popover extends Component<PopoverProps, PopoverState> {
   private _dialog: Dialog | null = null
   private _contentElement: Element | null = null
   private _focusRegion?: FocusRegion
-
+  // renderTrigger needs to be a variable because if it's a function it will
+  // recreate the trigger on each render which will trigger MouseOver events
+  // that will make the tooltip reappear and the trigger cannot accept
+  // onClick events (since the state change caused by MouseDown recreates it)
+  private _renderTrigger?: React.ReactElement
   private mouseOutTimeout?: ReturnType<typeof setTimeout>
 
   ref: Element | null = null
@@ -199,6 +203,9 @@ class Popover extends Component<PopoverProps, PopoverState> {
   }
 
   componentDidUpdate(prevProps: PopoverProps, prevState: PopoverState) {
+    if (prevProps.renderTrigger != this.props.renderTrigger) {
+      this._renderTrigger = callRenderProp(this.props.renderTrigger)
+    }
     if (this._focusRegion && this.isTooltip) {
       // if focus region exists, popover is acting as a tooltip
       // so we manually activate and deactivate the region when showing/hiding
@@ -418,7 +425,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
   }
 
   renderTrigger() {
-    let trigger: React.ReactElement = callRenderProp(this.props.renderTrigger)
+    let trigger = this._renderTrigger
 
     if (trigger) {
       const { on, shouldContainFocus } = this.props
