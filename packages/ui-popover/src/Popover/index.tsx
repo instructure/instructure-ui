@@ -57,6 +57,7 @@ import type { DialogProps } from '@instructure/ui-dialog'
 
 import type { PopoverProps, PopoverState } from './props'
 import { allowedProps, propTypes } from './props'
+import type { Renderable } from '@instructure/shared-types'
 
 /**
 ---
@@ -98,6 +99,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
 
   constructor(props: PopoverProps) {
     super(props)
+    this._renderTriggerProp = this.props.renderTrigger
     this._renderTrigger = callRenderProp(this.props.renderTrigger)
     this.state = {
       placement: props.placement,
@@ -145,6 +147,7 @@ class Popover extends Component<PopoverProps, PopoverState> {
   // that will make the tooltip reappear and the trigger cannot accept
   // onClick events (since the state change caused by MouseDown recreates it)
   private _renderTrigger?: React.ReactElement
+  private _renderTriggerProp?: Renderable
   private mouseOutTimeout?: ReturnType<typeof setTimeout>
 
   ref: Element | null = null
@@ -203,9 +206,6 @@ class Popover extends Component<PopoverProps, PopoverState> {
   }
 
   componentDidUpdate(prevProps: PopoverProps, prevState: PopoverState) {
-    if (prevProps.renderTrigger != this.props.renderTrigger) {
-      this._renderTrigger = callRenderProp(this.props.renderTrigger)
-    }
     if (this._focusRegion && this.isTooltip) {
       // if focus region exists, popover is acting as a tooltip
       // so we manually activate and deactivate the region when showing/hiding
@@ -425,6 +425,10 @@ class Popover extends Component<PopoverProps, PopoverState> {
   }
 
   renderTrigger() {
+    if (this._renderTriggerProp != this.props.renderTrigger) {
+      this._renderTriggerProp = this.props.renderTrigger
+      this._renderTrigger = callRenderProp(this.props.renderTrigger)
+    }
     let trigger = this._renderTrigger
 
     if (trigger) {
