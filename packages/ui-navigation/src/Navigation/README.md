@@ -2,11 +2,9 @@
 describes: Navigation
 ---
 
-**DEPRECATED:** This utility is deprecated since version **8.0** and will be permanently deleted in version 9.0.
+A top-level `Navigation` component.
 
----
-
-A top-level `Navigation` component
+> Note that this component is experimental and its API might change significantly in the future.
 
 ```js
 ---

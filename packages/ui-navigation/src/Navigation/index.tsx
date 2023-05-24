@@ -26,11 +26,7 @@ import React, { Component, Children, ReactElement } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 
-import {
-  deprecated,
-  omitProps,
-  safeCloneElement
-} from '@instructure/ui-react-utils'
+import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { IconMoveStartLine } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -48,14 +44,13 @@ const navMinimized = ({ minimized }: { minimized: boolean }) => ({
 
 /**
 ---
-category: components/deprecated
+category: components
 ---
 @tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-@deprecated('9.0.0', null, 'No one uses <Navigation>, so we will deprecate it.')
 class Navigation extends Component<NavigationProps, NavigationState> {
   static readonly componentId = 'Navigation'
 
