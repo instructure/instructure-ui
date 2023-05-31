@@ -143,7 +143,14 @@ class KeyboardFocusRegion {
 
   focusDefaultElement() {
     if (this.defaultFocusElement) {
-      ;(this.defaultFocusElement as HTMLElement).focus()
+      const focusElement = this.defaultFocusElement as HTMLElement
+      const positionContainer = focusElement.closest('[data-position-content]')
+
+      if (!positionContainer) {
+        focusElement.focus()
+      } else {
+        this.tryFocusOnPositionedElement(positionContainer, focusElement)
+      }
     } else {
       if (this.shouldContainFocus) {
         // Blur the active element to place focus on the document body
@@ -157,6 +164,45 @@ class KeyboardFocusRegion {
           been moved to the document body instead.`
         )
       }
+    }
+  }
+
+  tryFocusOnPositionedElement(
+    positionContainer: Element,
+    focusElement: HTMLElement,
+    tries = 3
+  ) {
+    // If element is positioned by `ui-position`
+    // we may need to wait for it to appear in
+    // correct place before triggering focus.
+    // Otherwise it will cause a scroll to the top of the page.
+
+    if (tries <= 0) {
+      return
+    }
+
+    const positionRect = positionContainer.getBoundingClientRect()
+    const docRect = document.documentElement.getBoundingClientRect()
+
+    // Check if element is outside of visible part of page (including parts hidden by scroll).
+    const isHiddenOutside =
+      positionRect.top > docRect.bottom ||
+      positionRect.right < docRect.left ||
+      positionRect.bottom < docRect.top ||
+      positionRect.left > docRect.right
+
+    if (!isHiddenOutside) {
+      focusElement.focus()
+    } else {
+      this._raf.push(
+        requestAnimationFrame(() => {
+          this.tryFocusOnPositionedElement(
+            positionContainer,
+            focusElement,
+            tries - 1
+          )
+        })
+      )
     }
   }
 
