@@ -54,7 +54,6 @@ class Dialog extends Component<DialogProps> {
     shouldCloseOnEscape: true
   } as const
 
-  _timeouts: ReturnType<typeof setTimeout>[] = []
   _raf: RequestAnimationFrameType[] = []
   private _focusRegion: FocusRegion | null = null
   ref: Element | null = null
@@ -88,8 +87,6 @@ class Dialog extends Component<DialogProps> {
     if (this.props.open) {
       this.close()
     }
-    this._timeouts.forEach((timeout) => clearTimeout(timeout))
-    this._timeouts = []
     this._raf.forEach((request) => request.cancel())
     this._raf = []
   }
@@ -99,20 +96,11 @@ class Dialog extends Component<DialogProps> {
 
     this._raf.push(
       requestAnimationFrame(() => {
-        // It needs to wait a heartbeat until the content is fully loaded
-        // inside the dialog. If it contains a focusable element, it will
-        // get focused on open, and browsers scroll to the focused element.
-        // If the css is not fully applied, the element may not be in their
-        // final position, making the page jump.
-        this._timeouts.push(
-          setTimeout(() => {
-            this._focusRegion = FocusRegionManager.activateRegion(
-              this.contentElement as Element,
-              {
-                ...options
-              }
-            )
-          }, 0)
+        this._focusRegion = FocusRegionManager.activateRegion(
+          this.contentElement as Element,
+          {
+            ...options
+          }
         )
       })
     )
