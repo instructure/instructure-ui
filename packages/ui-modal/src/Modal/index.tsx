@@ -38,6 +38,12 @@ import { Portal } from '@instructure/ui-portal'
 import type { PortalNode } from '@instructure/ui-portal'
 import { Dialog } from '@instructure/ui-dialog'
 import { Mask } from '@instructure/ui-overlays'
+import {
+  findDOMNode,
+  contains,
+  ownerDocument,
+  addEventListener
+} from '@instructure/ui-dom-utils'
 
 import { ModalHeader } from './ModalHeader'
 import type { ModalHeaderProps } from './ModalHeader/props'
@@ -103,11 +109,21 @@ class Modal extends Component<ModalProps, ModalState> {
 
   _DOMNode: PortalNode = null
   _content: Dialog | null = null
-
+  _captureDialog = false
+  _preventCloseOnDocumentClick = false
+  _ownerDocument: Node | null = null
   ref?: Element | null = null
 
   handleRef = (el?: Element | null) => {
     this.ref = el
+    this._ownerDocument = ownerDocument(this.ref)
+    addEventListener(
+      this._ownerDocument,
+      'mousedown',
+      this.captureDocumentClick,
+      true
+    )
+    addEventListener(this._ownerDocument, 'click', this.onClick, true)
   }
 
   componentDidMount() {
@@ -182,6 +198,20 @@ class Modal extends Component<ModalProps, ModalState> {
     )
   }
 
+  captureDocumentClick: React.MouseEventHandler<any> = (event) => {
+    const { target } = event
+    const _dialogElement = findDOMNode(this._content) as Element
+    this._preventCloseOnDocumentClick =
+      event.button !== 0 || contains(_dialogElement, target as Node)
+  }
+
+  onClick: React.MouseEventHandler<any> = (event) => {
+    const { shouldCloseOnDocumentClick } = this.props
+    if (shouldCloseOnDocumentClick && !this._preventCloseOnDocumentClick) {
+      this.props.onDismiss?.(event, true)
+    }
+  }
+
   renderDialog(
     props: Omit<
       ModalProps,
@@ -194,7 +224,6 @@ class Modal extends Component<ModalProps, ModalState> {
     const {
       onDismiss,
       label,
-      shouldCloseOnDocumentClick,
       shouldReturnFocus,
       liveRegion,
       size,
@@ -211,7 +240,7 @@ class Modal extends Component<ModalProps, ModalState> {
         open
         label={label}
         defaultFocusElement={this.defaultFocusElement}
-        shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
+        shouldCloseOnDocumentClick={false}
         shouldCloseOnEscape
         shouldContainFocus
         shouldReturnFocus={shouldReturnFocus}

@@ -240,7 +240,7 @@ describe('<Modal />', async () => {
       expect(modal.containsFocus()).to.be.true()
     })
 
-    await (within(modal.getOwnerDocument().documentElement) as any).mouseDown()
+    await (within(modal.getOwnerDocument().documentElement) as any).click()
 
     await wait(() => {
       expect(onDismiss).to.have.been.called()
@@ -494,7 +494,7 @@ describe('<Modal />', async () => {
     await btn.click()
 
     // to trigger the modal to close
-    await (within(modal.getOwnerDocument().documentElement) as any).mouseDown()
+    await (within(modal.getOwnerDocument().documentElement) as any).click()
 
     expect(handleDissmiss).to.have.been.calledWith(1)
   })
