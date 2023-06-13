@@ -3,21 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.38.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.38.0) (2023-05-15)
+## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
 
+**Note:** Version bump only for package @instructure/shared-types
+
+# [8.38.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.38.0) (2023-05-15)
 
 ### Bug Fixes
 
-* **shared-types,ui-menu:** menu background overlapping borders ([a8262de](https://github.com/instructure/instructure-ui/commit/a8262de6e96a8a8a564d68df99e405f9f1c9299d))
-
+- **shared-types,ui-menu:** menu background overlapping borders ([a8262de](https://github.com/instructure/instructure-ui/commit/a8262de6e96a8a8a564d68df99e405f9f1c9299d))
 
 ### Features
 
-* **shared-types,ui-flex:** add `gap` prop to Flex ([e1a3396](https://github.com/instructure/instructure-ui/commit/e1a3396415ade0eeb3eb7c99088506213faefe23))
-
-
-
-
+- **shared-types,ui-flex:** add `gap` prop to Flex ([e1a3396](https://github.com/instructure/instructure-ui/commit/e1a3396415ade0eeb3eb7c99088506213faefe23))
 
 # [8.37.0](https://github.com/instructure/instructure-ui/compare/v8.36.0...v8.37.0) (2023-04-25)
 
