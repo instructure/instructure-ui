@@ -142,6 +142,7 @@ class Avatar extends Component<AvatarProps, AvatarState> {
         css={styles?.avatar}
         display={this.props.display}
       >
+        <p>hello bello</p>
         <img // This is visually hidden and is here for loading purposes only
           src={this.props.src}
           css={this.props.styles?.loadImage}
