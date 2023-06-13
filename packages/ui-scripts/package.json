@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-scripts",
-  "version": "8.38.0",
+  "version": "8.38.1",
   "description": "A UI build scripts library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -24,9 +24,9 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.21.0",
-    "@instructure/command-utils": "8.38.0",
-    "@instructure/cz-lerna-changelog": "8.38.0",
-    "@instructure/pkg-utils": "8.38.0",
+    "@instructure/command-utils": "8.38.1",
+    "@instructure/cz-lerna-changelog": "8.38.1",
+    "@instructure/pkg-utils": "8.38.1",
     "@lerna/project": "^6.4.1",
     "commitizen": "^4.3.0",
     "dotenv": "^16.0.3",

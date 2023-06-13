@@ -3,24 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.38.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.38.0) (2023-05-15)
-
+## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
 
 ### Bug Fixes
 
-* **shared-types,ui-menu:** menu background overlapping borders ([a8262de](https://github.com/instructure/instructure-ui/commit/a8262de6e96a8a8a564d68df99e405f9f1c9299d))
-* **ui-a11y-utils:** dialog closes when release mouse outside ([4989b56](https://github.com/instructure/instructure-ui/commit/4989b568c7c6e7514cd412b5870b5c17af7eae25))
-* **ui-date-time-input:** fix onChange event not firing sometimes ([4eaf63c](https://github.com/instructure/instructure-ui/commit/4eaf63c2f9babe167c18c4dacfdaa2230942b1d6))
-* **ui-date-time-input, ui-time-select:** Fix committing value issues when allowNonStepInput is true. ([30c9a98](https://github.com/instructure/instructure-ui/commit/30c9a9802a1d5d127ab280934338d32a61fbd5e9))
+- **ui-dialog,ui-a11y-utils:** fix focusing not yet positioned elements ([f85b825](https://github.com/instructure/instructure-ui/commit/f85b8251e517c4180ccc403d18502e71833ed940))
+- **ui-popover:** fix TruncateText in Popover not accepting click events ([27de84b](https://github.com/instructure/instructure-ui/commit/27de84bcab644c71e12e470500b928b8be256e29))
 
+# [8.38.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.38.0) (2023-05-15)
+
+### Bug Fixes
+
+- **shared-types,ui-menu:** menu background overlapping borders ([a8262de](https://github.com/instructure/instructure-ui/commit/a8262de6e96a8a8a564d68df99e405f9f1c9299d))
+- **ui-a11y-utils:** dialog closes when release mouse outside ([4989b56](https://github.com/instructure/instructure-ui/commit/4989b568c7c6e7514cd412b5870b5c17af7eae25))
+- **ui-date-time-input:** fix onChange event not firing sometimes ([4eaf63c](https://github.com/instructure/instructure-ui/commit/4eaf63c2f9babe167c18c4dacfdaa2230942b1d6))
+- **ui-date-time-input, ui-time-select:** Fix committing value issues when allowNonStepInput is true. ([30c9a98](https://github.com/instructure/instructure-ui/commit/30c9a9802a1d5d127ab280934338d32a61fbd5e9))
 
 ### Features
 
-* **shared-types,ui-flex:** add `gap` prop to Flex ([e1a3396](https://github.com/instructure/instructure-ui/commit/e1a3396415ade0eeb3eb7c99088506213faefe23))
-
-
-
-
+- **shared-types,ui-flex:** add `gap` prop to Flex ([e1a3396](https://github.com/instructure/instructure-ui/commit/e1a3396415ade0eeb3eb7c99088506213faefe23))
 
 # [8.37.0](https://github.com/instructure/instructure-ui/compare/v8.36.0...v8.37.0) (2023-04-25)
 

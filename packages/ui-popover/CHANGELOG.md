@@ -3,13 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
+
+### Bug Fixes
+
+- **ui-popover:** fix TruncateText in Popover not accepting click events ([27de84b](https://github.com/instructure/instructure-ui/commit/27de84bcab644c71e12e470500b928b8be256e29))
+
 # [8.38.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.38.0) (2023-05-15)
 
 **Note:** Version bump only for package @instructure/ui-popover
-
-
-
-
 
 # [8.37.0](https://github.com/instructure/instructure-ui/compare/v8.36.0...v8.37.0) (2023-04-25)
 
