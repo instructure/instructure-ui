@@ -105,6 +105,7 @@ class Example extends React.Component {
 
 render(<Example/>)
 ```
+
 ### Guidelines
 
 ```js
@@ -121,5 +122,19 @@ guidelines: true
     <Figure.Item>Allow resizing of the TextArea to break the layout of a page</Figure.Item>
     <Figure.Item>Place labels to the right of the TextArea</Figure.Item>
   </Figure>
+</Guidelines>
+```
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Alert
+    variant="info"
+    margin="small"
+  >
+    Every non-listed prop will be passed down to the underlying 'textarea' element, such as 'onBlur' and any other prop
+  </Alert>
 </Guidelines>
 ```

@@ -84,6 +84,9 @@ class TextArea extends Component<TextAreaProps> {
   private _container: HTMLDivElement | null = null
   private _height?: string
   private _manuallyResized = false
+  private _highlightRef: HTMLSpanElement | null = null
+  private myObserver: ResizeObserver
+  private resizeTimeout?: NodeJS.Timeout
 
   ref: Element | null = null
 
@@ -91,6 +94,21 @@ class TextArea extends Component<TextAreaProps> {
     super(props)
 
     this._defaultId = props.deterministicId!()
+
+    this.myObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (this._highlightRef) {
+          this._highlightRef.style.transition = 'none'
+          this._highlightRef.style.width = `calc(${entry.contentRect.width}px + 2.125rem)`
+          this._highlightRef.style.height = `calc(${entry.contentRect.height}px + 2.125rem)`
+          clearTimeout(this.resizeTimeout)
+
+          this.resizeTimeout = setTimeout(() => {
+            this._highlightRef!.style.transition = 'all 0.2s'
+          }, 500)
+        }
+      }
+    })
   }
 
   componentDidMount() {
@@ -293,6 +311,10 @@ class TextArea extends Component<TextAreaProps> {
         defaultValue={defaultValue}
         placeholder={placeholder}
         ref={(textarea) => {
+          if (textarea) {
+            this.myObserver.observe(textarea)
+          }
+
           this._textarea = textarea
           if (typeof textareaRef === 'function') {
             textareaRef(textarea)
@@ -329,7 +351,11 @@ class TextArea extends Component<TextAreaProps> {
         >
           {textarea}
           {!disabled && !readOnly ? (
-            <span css={this.props.styles?.textAreaOutline} aria-hidden="true" />
+            <span
+              css={this.props.styles?.textAreaOutline}
+              aria-hidden="true"
+              ref={(e) => (this._highlightRef = e)}
+            />
           ) : null}
         </div>
       </FormField>
