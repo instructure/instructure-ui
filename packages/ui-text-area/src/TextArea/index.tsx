@@ -85,7 +85,7 @@ class TextArea extends Component<TextAreaProps> {
   private _height?: string
   private _manuallyResized = false
   private _highlightRef: HTMLSpanElement | null = null
-  private myObserver: ResizeObserver
+  private myObserver: ResizeObserver | null = null
   private resizeTimeout?: NodeJS.Timeout
 
   ref: Element | null = null
@@ -95,6 +95,23 @@ class TextArea extends Component<TextAreaProps> {
 
     this._defaultId = props.deterministicId!()
 
+    //mock ResizeObserver for ssr
+    if (typeof window === 'undefined') {
+      global.ResizeObserver = class ResizeObserver {
+        observe() {
+          // do nothing
+        }
+        unobserve() {
+          // do nothing
+        }
+        disconnect() {
+          // do nothing
+        }
+      }
+    }
+  }
+
+  componentDidMount() {
     this.myObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         if (this._highlightRef) {
@@ -109,9 +126,7 @@ class TextArea extends Component<TextAreaProps> {
         }
       }
     })
-  }
 
-  componentDidMount() {
     this.autoGrow()
     this.props.makeStyles?.()
   }
@@ -136,6 +151,10 @@ class TextArea extends Component<TextAreaProps> {
 
     if (this._debounced) {
       this._debounced.cancel()
+    }
+
+    if (this.myObserver) {
+      this.myObserver.disconnect()
     }
   }
 
@@ -312,7 +331,7 @@ class TextArea extends Component<TextAreaProps> {
         placeholder={placeholder}
         ref={(textarea) => {
           if (textarea) {
-            this.myObserver.observe(textarea)
+            this.myObserver?.observe(textarea)
           }
 
           this._textarea = textarea
