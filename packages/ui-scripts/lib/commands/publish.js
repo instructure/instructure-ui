@@ -28,8 +28,7 @@ import { error, info, runCommandAsync } from '@instructure/command-utils'
 import {
   checkWorkingDirectory,
   isReleaseCommit,
-  runGitCommand,
-  setupGit
+  runGitCommand
 } from '../utils/git.js'
 import { bumpPackages, createNPMRCFile } from '../utils/npm.js'
 import semver from 'semver'
@@ -63,7 +62,6 @@ export default {
 async function publish({ packageName, version, isMaintenance }) {
   const isRegularRelease = isReleaseCommit(version)
 
-  setupGit()
   createNPMRCFile()
 
   checkWorkingDirectory()

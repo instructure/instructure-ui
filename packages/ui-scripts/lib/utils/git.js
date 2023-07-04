@@ -21,18 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { runCommandSync, error, info } from '@instructure/command-utils'
+import { runCommandSync, error, info, warn } from '@instructure/command-utils'
 
 import validateMessage from 'validate-commit-msg'
+
+const USERNAME = 'instructure-ui-ci'
+const EMAIL = 'instui-dev@instructure.com'
 
 export const runGitCommand = (args = []) => {
   const { stdout } = runCommandSync('git', args, [], { stdio: 'pipe' })
   return stdout && stdout.trim()
 }
 
-export const setupGit = () => {
-  runGitCommand(['config', 'user.email', 'instui-dev@instructure.com'])
-  runGitCommand(['config', 'user.name', 'instructure-ui-ci'])
+const setupGit = () => {
+  try {
+    const email = runGitCommand(['config', 'user.email'])
+    const username = runGitCommand(['config', 'user.name'])
+    if (!email || !username) {
+      warn('No git username/email is set, using values for CI.')
+      runGitCommand(['config', 'user.email', 'instui-dev@instructure.com'])
+      runGitCommand(['config', 'user.name', 'instructure-ui-ci'])
+    }
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
 }
 
 export const isReleaseCommit = (version) => {
@@ -54,7 +67,6 @@ export const isReleaseCommit = (version) => {
 
 export function checkWorkingDirectory() {
   let result
-
   try {
     result = runGitCommand(['status', '--porcelain'])
   } catch (e) {
@@ -90,20 +102,19 @@ export function checkIfGitTagExists(version) {
 }
 
 export function commit() {
+  setupGit()
   try {
     runGitCommand(['commit', '--dry-run'])
   } catch (err) {
-    error(err.stdout)
+    error(err)
     process.exit(1)
   }
-
   try {
     runCommandSync('yarn', ['husky:pre-commit'])
   } catch (err) {
-    error(err.stdout)
+    error(err)
     process.exit(1)
   }
-
   return runCommandSync('git-cz')
 }
 
@@ -127,6 +138,7 @@ export function createGitTagForRelease(version) {
 }
 
 export function commitVersionBump(releaseVersion) {
+  setupGit()
   runGitCommand(['commit', '-am', `chore(release): ${releaseVersion}`])
 }
 
@@ -149,66 +161,4 @@ export function getPreviousReleaseTag() {
     '--tags',
     getPreviousReleaseCommit()
   ])
-}
-
-const jiraMatcher = /((?!([A-Z0-9a-z]{1,10})-?$)[A-Z]{1}[A-Z0-9]+-\d+)/g
-
-export function getIssuesInRelease(jiraProjectKey) {
-  info(`Looking up issues for the ${jiraProjectKey} project...`)
-  let currentReleaseTag, previousReleaseTag
-
-  try {
-    currentReleaseTag = getCurrentReleaseTag()
-    previousReleaseTag = getPreviousReleaseTag()
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
-
-  let result
-
-  info(`${previousReleaseTag}..${currentReleaseTag}`)
-
-  try {
-    result = runGitCommand([
-      'log',
-      `${previousReleaseTag}..${currentReleaseTag}`
-    ])
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
-
-  let issueKeys = result.match(jiraMatcher) || []
-
-  issueKeys = issueKeys.filter((key) => key.indexOf(jiraProjectKey) != -1)
-
-  if (issueKeys.length > 0) {
-    issueKeys = Array.from(new Set(issueKeys))
-    info(`Issues in this release: ${issueKeys.join(', ')}`)
-  }
-
-  return issueKeys
-}
-
-export function getIssuesInCommit(jiraProjectKey) {
-  let result
-
-  try {
-    result = runGitCommand(['log', '-1', '--pretty=format:%B'])
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
-
-  let issueKeys = result.match(jiraMatcher) || []
-
-  issueKeys = issueKeys.filter((key) => key.indexOf(jiraProjectKey) != -1)
-
-  if (issueKeys.length > 0) {
-    issueKeys = Array.from(new Set(issueKeys))
-    info(`Issues in this commit: ${issueKeys.join(', ')}`)
-  }
-
-  return issueKeys
 }
