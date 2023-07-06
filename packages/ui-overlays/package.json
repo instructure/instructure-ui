@@ -31,7 +31,7 @@
     "@types/no-scroll": "^2.1.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.21.0",
+    "@babel/runtime": "^7.22.5",
     "@instructure/console": "8.38.1",
     "@instructure/emotion": "8.38.1",
     "@instructure/shared-types": "8.38.1",
