@@ -39,7 +39,13 @@ const commands = [
   'tag',
   'help',
   'publish',
-  'deprecate'
+  'deprecate',
+  'lint',
+  'test',
+  'examples',
+  'bundle',
+  'clean',
+  'build'
 ]
 
 function executeYargs() {

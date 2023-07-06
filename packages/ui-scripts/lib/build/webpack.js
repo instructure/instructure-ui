@@ -24,46 +24,49 @@
 
 import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
-export const webpack = () => {
-  const { NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
+export default {
+  command: 'bundle',
+  desc: '',
+  builder: (yargs) => {
+    yargs.option('port', { alias: 'p', desc: '' })
+    yargs.option('watch', { boolean: true, desc: '' })
+    yargs.strictOptions(true)
+  },
+  handler: async (argv) => {
+    const { NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
 
-  const args = process.argv.slice(2)
+    let port = argv.port || '8080'
 
-  const portIndex = args.findIndex((arg) => arg === '-p')
-  let port = '8080'
-  if (portIndex > 0) {
-    port = args[portIndex + 1]
+    let command, webpackArgs
+
+    let envVars = [
+      OMIT_INSTUI_DEPRECATION_WARNINGS
+        ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
+        : false
+    ]
+
+    if (argv.watch) {
+      command = 'webpack'
+      envVars = envVars
+        .concat(['NODE_ENV=development', 'DEBUG=1'])
+        .filter(Boolean)
+      webpackArgs = ['serve', '--mode=development', `--port=${port}`]
+    } else {
+      command = 'webpack'
+      envVars = envVars
+        .concat([
+          `NODE_ENV=${NODE_ENV || 'production'}`,
+          'NODE_OPTIONS=--max_old_space_size=120000',
+          DEBUG ? `DEBUG=1` : false
+        ])
+        .filter(Boolean)
+      webpackArgs = ['--mode=production']
+    }
+
+    process.exit(
+      runCommandsConcurrently({
+        webpack: getCommand(command, webpackArgs, envVars)
+      }).status
+    )
   }
-
-  let command, webpackArgs
-
-  let envVars = [
-    OMIT_INSTUI_DEPRECATION_WARNINGS
-      ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
-      : false
-  ]
-
-  if (args.includes('--watch')) {
-    command = 'webpack'
-    envVars = envVars
-      .concat(['NODE_ENV=development', 'DEBUG=1'])
-      .filter(Boolean)
-    webpackArgs = ['serve', '--mode=development', `--port=${port}`]
-  } else {
-    command = 'webpack'
-    envVars = envVars
-      .concat([
-        `NODE_ENV=${NODE_ENV || 'production'}`,
-        'NODE_OPTIONS=--max_old_space_size=120000',
-        DEBUG ? `DEBUG=1` : false
-      ])
-      .filter(Boolean)
-    webpackArgs = ['--mode=production']
-  }
-
-  process.exit(
-    runCommandsConcurrently({
-      webpack: getCommand(command, webpackArgs, envVars)
-    }).status
-  )
 }

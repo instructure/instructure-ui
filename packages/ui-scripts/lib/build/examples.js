@@ -24,58 +24,60 @@
 import path from 'path'
 import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
-export const examples = () => {
-  const rootPath = path.resolve(process.cwd(), '../../node_modules')
-  const { DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
+export default {
+  command: 'examples',
+  desc: '',
+  builder: (yargs) => {
+    yargs.option('port', { alias: 'p', desc: '' })
+    yargs.option('watch', { boolean: true, desc: '' })
+    yargs.strictOptions(true)
+  },
+  handler: async (argv) => {
+    const rootPath = path.resolve(process.cwd(), '../../node_modules')
+    const { DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
 
-  const args = process.argv.slice(2)
+    let port = argv.port || '8080'
 
-  // ui-build --examples -p 8080
-  const portIndex = args.findIndex((arg) => arg === '-p')
-  let port = '8080'
-  if (portIndex > 0) {
-    port = args[portIndex + 1]
-  }
+    let command, commandArgs
 
-  let command, commandArgs
-
-  let envVars = [
-    OMIT_INSTUI_DEPRECATION_WARNINGS
-      ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
-      : false
-  ]
-
-  if (args.includes('--watch')) {
-    command = 'start-storybook'
-    // --no-manager-cache is a workaround for
-    // https://github.com/storybookjs/storybook/issues/13200
-    // -c: config directory
-    commandArgs = [
-      '-c',
-      '.storybook',
-      '-p',
-      port,
-      '--no-manager-cache',
-      '--quiet'
+    let envVars = [
+      OMIT_INSTUI_DEPRECATION_WARNINGS
+        ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
+        : false
     ]
-    envVars = envVars
-      .concat(['NODE_ENV=development', 'DEBUG=1'])
-      .filter(Boolean)
-  } else {
-    command = 'build-storybook'
-    commandArgs = ['-c', '.storybook', '-o', '__build__', '--quiet']
-    envVars = envVars
-      .concat([
-        `NODE_ENV=production`,
-        `NODE_PATH=${rootPath}`,
-        DEBUG ? `DEBUG=1` : false
-      ])
-      .filter(Boolean)
-  }
 
-  process.exit(
-    runCommandsConcurrently({
-      storybook: getCommand(command, commandArgs, envVars)
-    }).status
-  )
+    if (argv.watch) {
+      command = 'start-storybook'
+      // --no-manager-cache is a workaround for
+      // https://github.com/storybookjs/storybook/issues/13200
+      // -c: config directory
+      commandArgs = [
+        '-c',
+        '.storybook',
+        '-p',
+        port,
+        '--no-manager-cache',
+        '--quiet'
+      ]
+      envVars = envVars
+        .concat(['NODE_ENV=development', 'DEBUG=1'])
+        .filter(Boolean)
+    } else {
+      command = 'build-storybook'
+      commandArgs = ['-c', '.storybook', '-o', '__build__', '--quiet']
+      envVars = envVars
+        .concat([
+          `NODE_ENV=production`,
+          `NODE_PATH=${rootPath}`,
+          DEBUG ? `DEBUG=1` : false
+        ])
+        .filter(Boolean)
+    }
+
+    process.exit(
+      runCommandsConcurrently({
+        storybook: getCommand(command, commandArgs, envVars)
+      }).status
+    )
+  }
 }

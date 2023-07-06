@@ -29,6 +29,12 @@ import server from './server.js'
 import tag from './tag.js'
 import deprecate from './deprecate.js'
 import publish from './publish.js'
+import lint from '../test/lint.js'
+import test from '../test/karma.js'
+import examples from '../build/examples.js'
+import bundle from '../build/webpack.js'
+import clean from '../build/clean.js'
+import build from '../build/babel.js'
 
 export const yargCommands = [
   bump,
@@ -37,5 +43,11 @@ export const yargCommands = [
   server,
   tag,
   deprecate,
-  publish
+  publish,
+  lint,
+  test,
+  examples,
+  bundle,
+  clean,
+  build
 ]

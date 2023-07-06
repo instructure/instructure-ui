@@ -29,83 +29,80 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const specifyCJSFormat = path.resolve(__dirname, 'specify-commonjs-format.js')
-export const babel = () => {
-  const { BABEL_ENV, NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } =
-    process.env
 
-  const args = process.argv.slice(2)
+export default {
+  command: 'build',
+  desc: '',
+  builder: (yargs) => {
+    yargs.option('copy-files', { boolean: true, desc: '' })
+    yargs.option('watch', { boolean: true, desc: '' })
+    yargs.option('modules', {
+      string: true,
+      desc: '',
+      choices: ['es', 'cjs'],
+      default: 'es',
+      coerce: (value) => value.split(',')
+    })
+    yargs.strictOptions(true)
+  },
+  handler: async (argv) => {
+    const { BABEL_ENV, NODE_ENV, DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } =
+      process.env
 
-  // positional: ui-build src --watch
-  const firstArg = args[0]
-  const src = firstArg && firstArg.indexOf('--') < 0 ? firstArg : 'src'
+    // positional: ui-scripts build src --watch
+    const src = argv._[1] || 'src'
 
-  // uncomment the extensions arg after renaming the files from js -> ts happens
-  let babelArgs = ['--extensions', '.ts,.tsx,.js,.jsx']
+    // uncomment the extensions arg after renaming the files from js -> ts happens
+    let babelArgs = ['--extensions', '.ts,.tsx,.js,.jsx']
 
-  if (args.includes('--copy-files')) {
-    babelArgs.push('--copy-files')
-  }
-
-  babelArgs = babelArgs.concat([
-    src,
-    '--ignore "src/**/*.test.js","src/**/__tests__/**"'
-  ])
-
-  let envVars = [
-    OMIT_INSTUI_DEPRECATION_WARNINGS
-      ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
-      : false
-  ]
-
-  if (args.includes('--watch')) {
-    envVars = envVars.concat(['NODE_ENV=development']).filter(Boolean)
-    babelArgs.push('--watch')
-  } else {
-    envVars = envVars
-      .concat([
-        `NODE_ENV=${BABEL_ENV || NODE_ENV || 'production'}`,
-        DEBUG ? `DEBUG=1` : false
-      ])
-      .filter(Boolean)
-  }
-
-  let modules = ['es']
-
-  if (args.includes('--modules')) {
-    //  eslint-disable-next-line no-unused-vars
-    const [_, arg] = args.splice(args.indexOf('--modules'), 2)
-
-    if (!arg) {
-      throw new Error('Missing --modules argument')
+    if (argv.copyFiles) {
+      babelArgs.push('--copy-files')
     }
 
-    modules = arg.split(',')
+    babelArgs = babelArgs.concat([
+      src,
+      '--ignore "src/**/*.test.js","src/**/__tests__/**"'
+    ])
 
-    if (modules.some((mod) => !['es', 'cjs'].includes(mod))) {
-      throw new Error(`Invalid --modules argument: '${arg}'`)
-    }
-  }
-
-  const commands = {
-    es: getCommand(
-      'babel',
-      [...babelArgs, '--out-dir', 'es'],
-      [...envVars, 'ES_MODULES=1']
-    ),
-    cjs: [
-      getCommand(
-        'babel',
-        [...babelArgs, '--out-dir', 'lib'],
-        [...envVars, 'TRANSFORM_IMPORTS=1']
-      ),
-      getCommand(specifyCJSFormat, [], [])
+    let envVars = [
+      OMIT_INSTUI_DEPRECATION_WARNINGS
+        ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
+        : false
     ]
+
+    if (argv.watch) {
+      envVars = envVars.concat(['NODE_ENV=development']).filter(Boolean)
+      babelArgs.push('--watch')
+    } else {
+      envVars = envVars
+        .concat([
+          `NODE_ENV=${BABEL_ENV || NODE_ENV || 'production'}`,
+          DEBUG ? `DEBUG=1` : false
+        ])
+        .filter(Boolean)
+    }
+
+    const commands = {
+      es: getCommand(
+        'babel',
+        [...babelArgs, '--out-dir', 'es'],
+        [...envVars, 'ES_MODULES=1']
+      ),
+      cjs: [
+        getCommand(
+          'babel',
+          [...babelArgs, '--out-dir', 'lib'],
+          [...envVars, 'TRANSFORM_IMPORTS=1']
+        ),
+        getCommand(specifyCJSFormat, [], [])
+      ]
+    }
+
+    const commandsToRun = argv.modules.reduce(
+      (obj, key) => ({ ...obj, [key]: commands[key] }),
+      {}
+    )
+
+    process.exit(runCommandsConcurrently(commandsToRun).status)
   }
-
-  const commandsToRun = modules.reduce(
-    (obj, key) => ({ ...obj, [key]: commands[key] }),
-    {}
-  )
-
-  process.exit(runCommandsConcurrently(commandsToRun).status)
 }

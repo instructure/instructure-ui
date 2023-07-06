@@ -4,8 +4,8 @@
   "description": "A library to load config files",
   "main": "./lib/index.js",
   "scripts": {
-    "lint": "run -T ui-test --lint",
-    "lint:fix": "run -T ui-test --lint --fix"
+    "lint": "run -T ui-scripts lint",
+    "lint:fix": "run -T ui-scripts lint --fix"
   },
   "repository": {
     "type": "git",

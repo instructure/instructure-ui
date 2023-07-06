@@ -13,12 +13,10 @@
   "scripts": {
     "prestart": "yarn bundle",
     "start": "ui-scripts server -p 9001",
-    "start:watch": "yarn build:examples && run -T ui-build --examples --watch -p 9090",
-    "test:vrt": "run -T ui-test --vrt -p 9001",
-    "accept:vrt": "run -T ui-test --vrt -p 9001 --auto-accept-changes",
-    "bundle": "yarn build:examples && run -T ui-build --examples",
-    "clean": "ui-build --clean",
-    "build:storybook": "run -T ui-build --examples",
+    "start:watch": "yarn build:examples && run -T ui-scripts examples --watch -p 9090",
+    "bundle": "yarn build:examples && run -T ui-scripts examples",
+    "clean": "ui-scripts clean",
+    "build:storybook": "run -T ui-scripts examples",
     "build:examples": "node buildScripts/build-examples-json.js"
   },
   "license": "MIT",

@@ -5593,9 +5593,7 @@ __metadata:
     "@storybook/react":
       optional: true
   bin:
-    ui-build: ./lib/build/index.js
     ui-scripts: ./lib/index.js
-    ui-test: ./lib/test/index.js
   languageName: unknown
   linkType: soft
 

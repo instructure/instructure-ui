@@ -23,32 +23,46 @@
  */
 import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
-export const lint = () => {
-  const paths = process.argv.slice(2).filter((arg) => !arg.includes('--')) || []
-  let jspaths = ['.']
-  let csspaths = ['**/*.css']
+export default {
+  command: 'lint',
+  desc: 'lint files',
+  builder: (yargs) => {
+    yargs.option('fix', { boolean: true, desc: 'Fix lint issues' })
+    yargs.strictOptions(true)
+  },
+  handler: async (argv) => {
+    const paths = argv._.slice(1)
+    let jspaths = ['.']
+    let csspaths = ['**/*.css']
 
-  if (paths.length) {
-    jspaths = paths.filter((path) => path.includes('.js'))
-    csspaths = paths.filter((path) => path.includes('.css'))
+    if (paths.length) {
+      jspaths = paths.filter((path) =>
+        ['js', 'jsx', 'ts', 'tsx'].some(
+          (ext) => path.split('.').slice(-1)[0] === ext
+        )
+      )
+      csspaths = paths.filter((path) =>
+        ['.css'].some((ext) => path.split('.').slice(-1)[0] === ext)
+      )
+    }
+
+    const commands = {}
+
+    if (jspaths.length) {
+      commands['eslint'] = getCommand('eslint', [
+        ...jspaths,
+        '--ext .js,.jsx,.ts,.tsx',
+        '--no-error-on-unmatched-pattern'
+      ])
+    }
+
+    if (csspaths.length) {
+      commands['stylelint'] = getCommand('stylelint', [
+        ...csspaths,
+        '--allow-empty-input'
+      ])
+    }
+
+    process.exit(runCommandsConcurrently(commands).status)
   }
-
-  const commands = {}
-
-  if (jspaths.length) {
-    commands['eslint'] = getCommand('eslint', [
-      ...jspaths,
-      '--ext .js,.jsx,.ts,.tsx',
-      '--no-error-on-unmatched-pattern'
-    ])
-  }
-
-  if (csspaths.length) {
-    commands['stylelint'] = getCommand('stylelint', [
-      ...csspaths,
-      '--allow-empty-input'
-    ])
-  }
-
-  process.exit(runCommandsConcurrently(commands).status)
 }
