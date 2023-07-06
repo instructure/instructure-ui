@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.21.0",
+    "@babel/runtime": "^7.22.5",
     "@instructure/console": "8.38.1",
     "@instructure/ui-a11y-content": "8.38.1",
     "@instructure/ui-dom-utils": "8.38.1",

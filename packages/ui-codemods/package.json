@@ -19,13 +19,13 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.38.1",
     "@types/jscodeshift": "^0.11.6",
-    "@types/prettier": "^2.7.2",
+    "@types/prettier": "^2.7.3",
     "jest": "^24.9.0"
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",
     "jscodeshift": "^0.13.1",
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "publishConfig": {
     "access": "public"

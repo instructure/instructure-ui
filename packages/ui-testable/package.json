@@ -27,7 +27,7 @@
     "prop-types": "^15.8.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.21.0",
+    "@babel/runtime": "^7.22.5",
     "@instructure/ui-decorator": "8.38.1",
     "@instructure/ui-dom-utils": "8.38.1"
   },

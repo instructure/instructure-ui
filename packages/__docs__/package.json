@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/standalone": "^7.21.4",
+    "@babel/standalone": "^7.22.5",
     "@instructure/canvas-high-contrast-theme": "8.38.1",
     "@instructure/canvas-theme": "8.38.1",
     "@instructure/console": "8.38.1",
@@ -121,8 +121,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-github-corner": "^2.5.0",
-    "semver": "^7.4.0",
-    "webpack-merge": "^5.8.0"
+    "semver": "^7.5.3",
+    "webpack-merge": "^5.9.0"
   },
   "devDependencies": {
     "@instructure/config-loader": "8.38.1",
@@ -131,16 +131,16 @@
     "@instructure/ui-scripts": "8.38.1",
     "@instructure/ui-stylelint-config": "8.38.1",
     "@instructure/ui-webpack-config": "8.38.1",
-    "@types/marked": "^4.0.8",
+    "@types/marked": "^4.3.1",
     "chokidar": "^3.5.3",
     "globby": "^11.1.0",
     "gray-matter": "^4.0.3",
-    "html-webpack-plugin": "^5.5.0",
+    "html-webpack-plugin": "^5.5.3",
     "jsdoc-api": "^7.2.0",
     "mkdirp": "^1.0.4",
     "raw-loader": "^4.0.2",
     "react-docgen": "6.0.0-alpha.0",
     "svg-inline-loader": "^0.8.2",
-    "webpack-bundle-analyzer": "^4.8.0"
+    "webpack-bundle-analyzer": "^4.9.0"
   }
 }
