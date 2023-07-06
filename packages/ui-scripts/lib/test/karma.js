@@ -27,92 +27,102 @@ import React from 'react'
 import pkgUtils from '@instructure/pkg-utils'
 import { getCommand, runCommandsConcurrently } from '@instructure/command-utils'
 
-export const karma = () => {
-  const { OMIT_INSTUI_DEPRECATION_WARNINGS, USE_REACT_STRICT_MODE = '1' } =
-    process.env
+export default {
+  command: 'test',
+  desc: 'run tests',
+  builder: (yargs) => {
+    yargs.parserConfiguration({
+      'boolean-negation': false
+    })
+    yargs.option('watch', { boolean: true, desc: '' })
+    yargs.option('no-launch', { boolean: true, desc: '' })
+    yargs.option('no-headless', { boolean: true, desc: '' })
+    yargs.option('no-coverage', { boolean: true, desc: '' })
+    yargs.option('randomize', { boolean: true, desc: '' })
+    yargs.option('browsers', { desc: '' })
+    yargs.option('scope', { string: true, desc: '' })
+    yargs.option('path', { desc: '' })
+    yargs.option('changed', { boolean: true, desc: '' })
+    yargs.option('staged', { boolean: true, desc: '' })
+    yargs.option('cached', { boolean: true, desc: '' })
+    yargs.strictOptions(true)
+  },
+  handler: async (argv) => {
+    const { OMIT_INSTUI_DEPRECATION_WARNINGS, USE_REACT_STRICT_MODE = '1' } =
+      process.env
 
-  const args = process.argv.slice(2)
+    const karmaArgs = ['start']
 
-  const karmaArgs = ['start']
+    let envVars = [
+      'NODE_ENV=test',
+      `REACT_VERSION=${React.version}`,
+      'NODE_OPTIONS=--max_old_space_size=120000',
+      OMIT_INSTUI_DEPRECATION_WARNINGS
+        ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
+        : false,
+      `USE_REACT_STRICT_MODE=${USE_REACT_STRICT_MODE}`
+    ]
 
-  let envVars = [
-    'NODE_ENV=test',
-    `REACT_VERSION=${React.version}`,
-    'NODE_OPTIONS=--max_old_space_size=120000',
-    OMIT_INSTUI_DEPRECATION_WARNINGS
-      ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
-      : false,
-    `USE_REACT_STRICT_MODE=${USE_REACT_STRICT_MODE}`
-  ]
-
-  if (args.includes('--watch')) {
-    envVars = envVars.filter(Boolean)
-  } else {
-    envVars = envVars
-      .concat([
-        `NO_DEBUG=1`,
-        `${React.version}`.startsWith('15') || args.includes('--no-coverage')
-          ? false
-          : 'COVERAGE=1'
-      ])
-      .filter(Boolean)
-  }
-
-  if (args.includes('--no-launch')) {
-    karmaArgs.push('--no-launch')
-  }
-
-  if (args.includes('--no-headless')) {
-    karmaArgs.push('--no-headless')
-  }
-
-  if (args.includes('--randomize')) {
-    karmaArgs.push('--randomize')
-  }
-
-  const browsersArgIndex = args.findIndex((arg) =>
-    arg.startsWith('--browsers=')
-  )
-
-  if (browsersArgIndex >= 0) {
-    karmaArgs.push(args[browsersArgIndex])
-  }
-
-  const scopeArgIndex = args.indexOf('--scope')
-  const pathArgIndex = args.indexOf('--path')
-
-  let paths = []
-
-  if (scopeArgIndex >= 0) {
-    const allPackages = pkgUtils.getPackages()
-    const scopes = args[scopeArgIndex + 1]
-      .split(',')
-      .map((scope) => scope.trim())
-    const pkgs = allPackages.filter((pkg) => scopes.includes(pkg.name))
-    if (pkgs.length >= 0) {
-      paths = pkgs.map((pkg) => path.relative('.', pkg.location) + path.sep)
+    if (argv.watch) {
+      envVars = envVars.filter(Boolean)
+    } else {
+      envVars = envVars
+        .concat([
+          `NO_DEBUG=1`,
+          `${React.version}`.startsWith('15') || argv.noCoverage
+            ? false
+            : 'COVERAGE=1'
+        ])
+        .filter(Boolean)
     }
-  } else if (pathArgIndex >= 0) {
-    paths = args[pathArgIndex + 1].split(',').map((path) => path.trim())
-  } else if (args.includes('--changed')) {
-    const changedPackages = pkgUtils.getChangedPackages('HEAD^1', undefined)
-    paths = changedPackages.map(
-      (pkg) => path.relative('.', pkg.location) + path.sep
-    )
-  } else if (args.includes('--staged')) {
-    const changedPackages = pkgUtils.getChangedPackages('--cached', undefined)
-    paths = changedPackages.map(
-      (pkg) => path.relative('.', pkg.location) + path.sep
+
+    if (argv.noLaunch) {
+      karmaArgs.push('--no-launch')
+    }
+
+    if (argv.noHeadless) {
+      karmaArgs.push('--no-headless')
+    }
+
+    if (argv.randomize) {
+      karmaArgs.push('--randomize')
+    }
+
+    if (argv.browsers) {
+      karmaArgs.push(` --browsers ${argv.browsers}`)
+    }
+
+    let paths = []
+
+    if (argv.scope) {
+      const allPackages = pkgUtils.getPackages()
+      const scopes = argv.scope.split(',').map((scope) => scope.trim())
+      const pkgs = allPackages.filter((pkg) => scopes.includes(pkg.name))
+      if (pkgs.length >= 0) {
+        paths = pkgs.map((pkg) => path.relative('.', pkg.location) + path.sep)
+      }
+    } else if (argv.path) {
+      paths = argv.path.split(',').map((path) => path.trim())
+    } else if (argv.changed) {
+      const changedPackages = pkgUtils.getChangedPackages('HEAD^1', undefined)
+      paths = changedPackages.map(
+        (pkg) => path.relative('.', pkg.location) + path.sep
+      )
+    } else if (argv.staged) {
+      const changedPackages = pkgUtils.getChangedPackages('--cached', undefined)
+      paths = changedPackages.map(
+        (pkg) => path.relative('.', pkg.location) + path.sep
+      )
+    }
+
+    if (paths.length > 0) {
+      envVars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
+    }
+
+    process.exit(
+      runCommandsConcurrently({
+        karma: getCommand('karma', karmaArgs, envVars)
+      }).status
     )
   }
-
-  if (paths.length > 0) {
-    envVars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
-  }
-
-  process.exit(
-    runCommandsConcurrently({
-      karma: getCommand('karma', karmaArgs, envVars)
-    }).status
-  )
 }

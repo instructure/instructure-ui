@@ -22,25 +22,25 @@ yarn add @instructure/ui-scripts
 
 To build (babel transpile) a package to be consumed as a library:
 
-`yarn ui-build`
+`yarn ui-scripts build`
 
 To build (webpack) a package to be consumed as an application:
 
-`yarn ui-build --bundle`
+`yarn ui-scripts bundle`
 
 #### `clean`
 
 To clean out built/generated files from a package:
 
-`yarn ui-build --clean`
+`yarn ui-scripts clean`
 
 #### `modules`
 
-`yarn ui-build --modules cjs` writes commonjs modules to the lib/ directory.
+`yarn ui-scripts build --modules cjs` writes commonjs modules to the lib/ directory.
 
-`yarn ui-build --modules es` writes es modules to the es/ directory.
+`yarn ui-scripts build --modules es` writes es modules to the es/ directory.
 
-`yarn ui-build --modules es,cjs` writes es modules to both directories.
+`yarn ui-scripts build --modules es,cjs` writes es modules to both directories.
 
 If not specified, `modules` defaults to `es`.
 
@@ -48,81 +48,89 @@ If not specified, `modules` defaults to `es`.
 
 To run tests for a package:
 
-`yarn ui-test`
+`yarn ui-scripts test`
 
 #### `lint`
 
-To lint (eslint/stylelint) a package:
+To lint (eslint/stylelint) all files:
 
-`yarn ui-test --lint`
+`yarn ui-scripts lint`
+
+To lint specific files:
+
+`yarn ui-scripts lint ./somefile.ts ./someotherfile.css`
+
+To fix lint issues:
+
+`yarn ui-scripts lint --fix`
 
 To lint a commit message (the `HEAD` commit):
 
-`yarn ui-scripts --lint-commit`
+`yarn ui-scripts lint-commit`
 
 #### `commit`
 
 To write a correctly formatted commit message and commit the staged changes:
 
-`yarn ui-scripts --commit`
+`yarn ui-scripts commit`
 
 #### `install-react`
 
 To install a specific version of React and ReactDOM without updating `package.json`
 (defaults to the versions specified in the resolutions field):
 
-`yarn ui-scripts --install-react [version]`
+`yarn ui-scripts install-react [version]`
 
 #### `bump`
 
 To update all package versions
 (defaults to determining the version automatically using commit messages):
 
-`yarn ui-scripts --bump [version|major|minor|patch]`
+`yarn ui-scripts bump [version|major|minor|patch]`
 
 #### `publish`
 
 To publish all packages (defaults to current version):
 
-`yarn ui-scripts --publish [version]`
+`yarn ui-scripts publish [version]`
 
 #### `deploy-docs`
 
 To run the deploy of the documentation (to Github pages):
 
-`yarn ui-scripts --deploy-docs`
+`yarn ui-scripts deploy-docs`
 
 #### `examples`
 
 To build component examples and start up a dev server with hot reloading:
 
-`yarn ui-build --examples --watch -p 8080`
+`yarn ui-scripts examples --watch -p 8080`
 
 To build component examples for deploying:
 
-`yarn ui-build --examples`
+`yarn ui-scripts examples`
 
 #### `server`
 
 To start up a server to test production builds of examples or docs:
 
-`yarn ui-scripts --server -p 8080`
+`yarn ui-scripts server -p 8080`
 
 #### `tag`
 
 To add an NPM dist-tag for all packages:
 
-`yarn ui-scripts --tag add 5.11.0 latest`
+`yarn ui-scripts tag add 5.11.0 latest`
 
 To remove an NPM dist-tag for all packages:
 
-`yarn ui-scripts --tag rm 5.11.0 latest`
+`yarn ui-scripts tag rm 5.11.0 latest`
 
 #### `deprecate`
 
 To deprecate all packages (optional arguments: version, fix version):
 
-`yarn ui-scripts --deprecate 5.11.0 5.11.1`
+`yarn ui-scripts deprecate 5.11.0 5.11.1`
 
 ### Configuration
 

@@ -14,8 +14,8 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "license": "MIT",
   "scripts": {
-    "build": "run -T ui-build --modules es,cjs",
-    "build:watch": "run -T ui-build --watch"
+    "build": "run -T ui-scripts build --modules es,cjs",
+    "build:watch": "run -T ui-scripts build --watch"
   },
   "publishConfig": {
     "access": "public"

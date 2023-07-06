@@ -13,11 +13,11 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "lint": "run -T ui-test --lint",
-    "lint:fix": "run -T ui-test --lint --fix",
-    "clean": "run -T ui-build --clean",
-    "build": "run -T ui-build --modules es,cjs",
-    "build:watch": "run -T ui-build --watch",
+    "lint": "run -T ui-scripts lint",
+    "lint:fix": "run -T ui-scripts lint --fix",
+    "clean": "run -T ui-scripts clean",
+    "build": "run -T ui-scripts build --modules es,cjs",
+    "build:watch": "run -T ui-scripts build --watch",
     "build:types": "run -T tsc -p tsconfig.build.json",
     "ts:check": "run -T tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },

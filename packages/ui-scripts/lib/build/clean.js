@@ -24,21 +24,25 @@
 
 import fs from 'fs'
 
-export const clean = () => {
-  const dirs = [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    'tokens',
-    '.babel-cache',
-    '.cache',
-    'types',
-    'tsconfig.build.tsbuildinfo'
-  ]
-  for (const dir of dirs) {
-    if (fs.existsSync(dir)) {
-      fs.rmSync(dir, { force: true, recursive: true, maxRetries: 2 })
+export default {
+  command: 'clean',
+  desc: '',
+  handler: async () => {
+    const dirs = [
+      '__build__',
+      'es',
+      'dist',
+      'lib',
+      'tokens',
+      '.babel-cache',
+      '.cache',
+      'types',
+      'tsconfig.build.tsbuildinfo'
+    ]
+    for (const dir of dirs) {
+      if (fs.existsSync(dir)) {
+        fs.rmSync(dir, { force: true, recursive: true, maxRetries: 2 })
+      }
     }
   }
 }

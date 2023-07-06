@@ -12,8 +12,8 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "test:jest": "jest",
-    "lint": "run -T ui-test --lint",
-    "lint:fix": "run -T ui-test --lint --fix"
+    "lint": "run -T ui-scripts lint",
+    "lint:fix": "run -T ui-scripts lint --fix"
   },
   "license": "MIT",
   "devDependencies": {
