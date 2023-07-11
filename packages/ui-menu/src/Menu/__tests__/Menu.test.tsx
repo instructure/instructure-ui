@@ -639,9 +639,7 @@ describe('<Menu />', async () => {
       })
 
       onToggle.resetHistory()
-      await wrapQueryResult(
-        trigger.getOwnerDocument().documentElement
-      ).mouseDown()
+      await wrapQueryResult(trigger.getOwnerDocument().documentElement).click()
 
       expect(onToggle).to.have.been.called()
       expect(onToggle.getCall(0).args[0]).to.equal(false)

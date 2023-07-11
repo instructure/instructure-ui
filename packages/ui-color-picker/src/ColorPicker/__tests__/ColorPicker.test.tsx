@@ -648,6 +648,7 @@ describe('<ColorPicker />', () => {
 
       const colorButtons = await cp.findColorPresetButtons()
 
+      await colorButtons[1].mouseDown()
       await colorButtons[1].click()
 
       const addButton = await popoverContent.findPopoverButtonWithText('add')
@@ -705,6 +706,7 @@ describe('<ColorPicker />', () => {
 
       const colorButtons = await cp.findColorPresetButtons()
 
+      await colorButtons[1].mouseDown()
       await colorButtons[1].click()
 
       const addButton = await popoverContent.findPopoverButtonWithText('add')
@@ -1012,6 +1014,7 @@ describe('<ColorPicker />', () => {
 
       const colorButtons = await cp.findColorPresetButtons()
 
+      await colorButtons[1].mouseDown()
       await colorButtons[1].click()
 
       const addButton = await popoverContent.findPopoverButtonWithText('add')
@@ -1070,6 +1073,7 @@ describe('<ColorPicker />', () => {
 
       const colorButtons = await cp.findColorPresetButtons()
 
+      await colorButtons[1].mouseDown()
       await colorButtons[1].click()
 
       const addButton = await popoverContent.findPopoverButtonWithText('add')
