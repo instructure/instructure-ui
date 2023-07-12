@@ -149,6 +149,10 @@ module.exports = {
       __dirname,
       '../ui-selectable/src/'
     ),
+    '@instructure/ui-side-nav-bar$': path.resolve(
+      __dirname,
+      '../ui-side-nav-bar/src/'
+    ),
     '@instructure/ui-simple-select$': path.resolve(
       __dirname,
       '../ui-simple-select/src/'

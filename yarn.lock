@@ -5814,6 +5814,40 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@instructure/ui-side-nav-bar@8.38.1, @instructure/ui-side-nav-bar@workspace:packages/ui-side-nav-bar":
+  version: 0.0.0-use.local
+  resolution: "@instructure/ui-side-nav-bar@workspace:packages/ui-side-nav-bar"
+  dependencies:
+    "@babel/runtime": ^7.22.5
+    "@instructure/console": 8.38.1
+    "@instructure/debounce": 8.38.1
+    "@instructure/emotion": 8.38.1
+    "@instructure/shared-types": 8.38.1
+    "@instructure/ui-a11y-content": 8.38.1
+    "@instructure/ui-a11y-utils": 8.38.1
+    "@instructure/ui-babel-preset": 8.38.1
+    "@instructure/ui-badge": 8.38.1
+    "@instructure/ui-color-utils": 8.38.1
+    "@instructure/ui-dom-utils": 8.38.1
+    "@instructure/ui-focusable": 8.38.1
+    "@instructure/ui-icons": 8.38.1
+    "@instructure/ui-menu": 8.38.1
+    "@instructure/ui-prop-types": 8.38.1
+    "@instructure/ui-react-utils": 8.38.1
+    "@instructure/ui-test-locator": 8.38.1
+    "@instructure/ui-test-utils": 8.38.1
+    "@instructure/ui-testable": 8.38.1
+    "@instructure/ui-themes": 8.38.1
+    "@instructure/ui-tooltip": 8.38.1
+    "@instructure/ui-truncate-list": 8.38.1
+    "@instructure/ui-utils": 8.38.1
+    "@instructure/ui-view": 8.38.1
+    prop-types: ^15.8.1
+  peerDependencies:
+    react: ">=16.8 <=18"
+  languageName: unknown
+  linkType: soft
+
 "@instructure/ui-simple-select@8.38.1, @instructure/ui-simple-select@workspace:packages/ui-simple-select":
   version: 0.0.0-use.local
   resolution: "@instructure/ui-simple-select@workspace:packages/ui-simple-select"
@@ -6566,6 +6600,7 @@ __metadata:
     "@instructure/ui-responsive": 8.38.1
     "@instructure/ui-select": 8.38.1
     "@instructure/ui-selectable": 8.38.1
+    "@instructure/ui-side-nav-bar": 8.38.1
     "@instructure/ui-simple-select": 8.38.1
     "@instructure/ui-source-code-editor": 8.38.1
     "@instructure/ui-spinner": 8.38.1
@@ -17325,6 +17360,7 @@ __metadata:
     "@instructure/ui-scripts": 8.38.1
     "@instructure/ui-select": 8.38.1
     "@instructure/ui-selectable": 8.38.1
+    "@instructure/ui-side-nav-bar": 8.38.1
     "@instructure/ui-simple-select": 8.38.1
     "@instructure/ui-source-code-editor": 8.38.1
     "@instructure/ui-spinner": 8.38.1
