@@ -851,6 +851,41 @@ export type NavigationTheme = {
   toggleTransition: Transitions['duration']
 }
 
+export type SideNavBarTheme = {
+  fontColor: Colors['textLightest']
+  backgroundColor: Colors['backgroundBrandSecondary']
+  width: string
+  minimizedWidth: string
+  fill: Colors['textLightest']
+  focusOutlineInnerWidth: Border['widthMedium']
+  focusOutlineOuterWidth: Border['widthSmall']
+  focusOutlineInnerColor: Colors['borderBrand']
+  focusOutlineOuterColor: Colors['borderLightest']
+  marginBottom: Spacing['small']
+  toggleTransition: Transitions['duration']
+}
+
+export type SideNavBarItemTheme = {
+  fontSize: Typography['fontSizeSmall']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightLight']
+  fontColor: Colors['textLightest']
+  iconSize: string | 0
+  iconColor: Colors['textLightest']
+  lineHeight: Typography['lineHeight']
+  backgroundColor: string
+  linkTextDecoration: string
+  hoverBackgroundColor: Colors['backgroundDarkest']
+  outerFocusOutline: string
+  innerFocusOutline: string
+  selectedFontColor: Colors['textBrand']
+  selectedIconColor: Colors['textBrand']
+  selectedBackgroundColor: Colors['backgroundLightest']
+  selectedOuterFocusOutline: string
+  selectedInnerFocusOutline: string
+  contentPadding: Spacing['xxSmall']
+}
+
 export type NumberInputTheme = {
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']

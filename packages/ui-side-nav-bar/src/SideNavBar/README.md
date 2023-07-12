@@ -1,35 +1,24 @@
 ---
-describes: Navigation
+describes: SideNavBar
 ---
 
-A top-level `Navigation` component.
+A top-level `SideNavBar` component.
 
-```js
----
-embed: true
----
-<ToggleBlockquote
-  summary="DEPRECATED"
->
-  <ToggleBlockquote.Paragraph>
-    This component is deprecated. Please use <Link href="#SideNavBar">SideNavBar</Link> instead.
-  </ToggleBlockquote.Paragraph>
-</ToggleBlockquote>
-```
+> Note that this component is experimental and its API might change significantly in the future.
 
 ```js
 ---
 example: true
 ---
   <div style={{height: '35rem'}}>
-    <Navigation
+    <SideNavBar
       label="Main navigation"
       toggleLabel={{
-        expandedLabel: 'Minimize Navigation',
-        minimizedLabel: 'Expand Navigation'
+        expandedLabel: 'Minimize SideNavBar',
+        minimizedLabel: 'Expand SideNavBar'
       }}
     >
-      <Navigation.Item
+      <SideNavBar.Item
         icon={<IconUserLine />}
         label={<ScreenReaderContent>Home</ScreenReaderContent>}
         href="#"
@@ -38,32 +27,32 @@ example: true
           hoverBackgroundColor: 'blue'
         }}
       />
-      <Navigation.Item
+      <SideNavBar.Item
         icon={<Avatar name="Ziggy Marley" size="x-small"/>}
         label="Account"
         onClick={() => { this.loadSubNav('account') }}
       />
-      <Navigation.Item
+      <SideNavBar.Item
         icon={<IconAdminLine />}
         label="Admin"
         href="#"
       />
-      <Navigation.Item selected
+      <SideNavBar.Item selected
         icon={<IconDashboardLine />}
         label="Dashboard"
         href="#"
       />
-      <Navigation.Item
+      <SideNavBar.Item
         icon={<Badge count={99}><IconInboxLine /></Badge>}
         label="Inbox"
         href="#"
       />
-      <Navigation.Item
+      <SideNavBar.Item
         icon={<IconUserLine />}
         label="Supercalifragilistic"
         href="#"
       />
-    </Navigation>
+    </SideNavBar>
   </div>
 ```
 
@@ -75,8 +64,8 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <Figure.Item>Use for top-level Navigation</Figure.Item>
-    <Figure.Item>Remember that Navigation can be themed by the institution</Figure.Item>
+    <Figure.Item>Use for top-level SideNavBar</Figure.Item>
+    <Figure.Item>Remember that SideNavBar can be themed by the institution</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
     <Figure.Item>Add LTI links to the main area</Figure.Item>

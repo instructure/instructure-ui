@@ -76,6 +76,7 @@
     { "path": "./packages/ui-scripts/tsconfig.build.json" },
     { "path": "./packages/ui-select/tsconfig.build.json" },
     { "path": "./packages/ui-selectable/tsconfig.build.json" },
+    { "path": "./packages/ui-side-nav-bar/tsconfig.build.json" },
     { "path": "./packages/ui-simple-select/tsconfig.build.json" },
     { "path": "./packages/ui-source-code-editor/tsconfig.build.json" },
     { "path": "./packages/ui-spinner/tsconfig.build.json" },

@@ -26,20 +26,16 @@ import React, { Component, Children, ReactElement } from 'react'
 
 import { testable } from '@instructure/ui-testable'
 
-import {
-  omitProps,
-  safeCloneElement,
-  deprecated
-} from '@instructure/ui-react-utils'
+import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { IconMoveStartLine } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import { NavigationItem } from './NavigationItem'
+import { SideNavBarItem } from './SideNavBarItem'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { NavigationProps, NavigationState } from './props'
+import type { SideNavBarProps, SideNavBarState } from './props'
 import { allowedProps, propTypes } from './props'
 
 const navMinimized = ({ minimized }: { minimized: boolean }) => ({
@@ -48,20 +44,15 @@ const navMinimized = ({ minimized }: { minimized: boolean }) => ({
 
 /**
 ---
-category: components/deprecated
+category: components
 ---
 @tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-@deprecated(
-  '9.0.0',
-  null,
-  'This component is deprecated and will be removed in a later version. Use <SideNavBar /> instead.'
-)
-class Navigation extends Component<NavigationProps, NavigationState> {
-  static readonly componentId = 'Navigation'
+class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
+  static readonly componentId = 'SideNavBar'
 
   static allowedProps = allowedProps
   static propTypes = propTypes
@@ -73,11 +64,11 @@ class Navigation extends Component<NavigationProps, NavigationState> {
     onClick: function (_e: React.MouseEvent) {}
   }
 
-  static Item = NavigationItem
+  static Item = SideNavBarItem
 
   ref: Element | null = null
 
-  constructor(props: NavigationProps) {
+  constructor(props: SideNavBarProps) {
     super(props)
 
     this.state = {
@@ -133,7 +124,7 @@ class Navigation extends Component<NavigationProps, NavigationState> {
   render() {
     const { label } = this.props
 
-    const props = omitProps(this.props, Navigation.allowedProps, ['minimized'])
+    const props = omitProps(this.props, SideNavBar.allowedProps, ['minimized'])
 
     return (
       <nav
@@ -146,7 +137,7 @@ class Navigation extends Component<NavigationProps, NavigationState> {
       >
         <ul css={this.props.styles?.content}>{this.renderChildren()}</ul>
         <div css={this.props.styles?.toggle}>
-          <NavigationItem
+          <SideNavBarItem
             aria-expanded={!this.minimized}
             onClick={this.handleNavToggle}
             icon={
@@ -158,12 +149,12 @@ class Navigation extends Component<NavigationProps, NavigationState> {
             label={
               <ScreenReaderContent>{this.toggleMessage()}</ScreenReaderContent>
             }
-          ></NavigationItem>
+          ></SideNavBarItem>
         </div>
       </nav>
     )
   }
 }
 
-export default Navigation
-export { Navigation, NavigationItem }
+export default SideNavBar
+export { SideNavBar, SideNavBarItem }
