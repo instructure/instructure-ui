@@ -38,8 +38,8 @@
     "@instructure/ui-template-scripts": "8.38.1",
     "@instructure/ui-webpack-config": "8.38.1",
     "depcheck": "^1.4.3",
-    "semver": "^7.5.3",
-    "yargs": "^16.2.0",
+    "semver": "^7.5.4",
+    "yargs": "^17.7.2",
     "yargs-interactive": "^3.0.1"
   },
   "publishConfig": {

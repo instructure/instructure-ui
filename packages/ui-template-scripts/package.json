@@ -21,9 +21,9 @@
     "@instructure/command-utils": "8.38.1",
     "@instructure/ui-babel-preset": "8.38.1",
     "@lerna/project": "^6.4.1",
-    "fs-extra": "^9.1.0",
+    "fs-extra": "^10.1.0",
     "lodash.template": "^4.5.0",
-    "yargs": "^16.2.0",
+    "yargs": "^17.7.2",
     "yargs-interactive": "^3.0.1"
   },
   "publishConfig": {

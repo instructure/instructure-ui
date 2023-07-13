@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+const fs = require('fs')
 const fse = require('fs-extra')
 const path = require('path')
 
@@ -79,7 +80,7 @@ module.exports = (argv = {}) => {
   }
 
   const generateSourceFromTemplate = ({ currentPath, destPath }) => {
-    if (fse.statSync(currentPath).isDirectory()) {
+    if (fs.statSync(currentPath).isDirectory()) {
       // Create the directory at the dest path
       const basename = path.basename(currentPath)
       const newBasename = replaceBasenameTemplateVars(basename)
@@ -87,9 +88,9 @@ module.exports = (argv = {}) => {
         basename !== newBasename
           ? path.join(path.dirname(destPath), newBasename)
           : destPath
-      fse.mkdirSync(outputPath)
+      fs.mkdirSync(outputPath)
 
-      const items = fse.readdirSync(currentPath)
+      const items = fs.readdirSync(currentPath)
 
       items.forEach((item) => {
         generateSourceFromTemplate({
@@ -97,8 +98,8 @@ module.exports = (argv = {}) => {
           destPath: path.join(outputPath, item)
         })
       })
-    } else if (fse.statSync(currentPath).isFile()) {
-      const data = fse.readFileSync(currentPath, 'utf-8')
+    } else if (fs.statSync(currentPath).isFile()) {
+      const data = fs.readFileSync(currentPath, 'utf-8')
       let result
       try {
         // by default lodash tries to interpret ES6 string literals as its own

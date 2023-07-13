@@ -28,7 +28,7 @@
     "@instructure/ui-test-utils": "8.38.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.5",
+    "@babel/runtime": "^7.22.6",
     "@instructure/emotion": "8.38.1",
     "@instructure/ui-calendar": "8.38.1",
     "@instructure/ui-form-field": "8.38.1",

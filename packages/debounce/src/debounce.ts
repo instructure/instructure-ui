@@ -134,10 +134,11 @@ function debounce(
   function timerExpired() {
     const time = Date.now()
     if (shouldInvoke(time)) {
-      return trailingEdge(time)
+      trailingEdge(time)
+    } else {
+      // Restart the timer.
+      timers.push(setTimeout(timerExpired, remainingWait(time)))
     }
-    // Restart the timer.
-    timers.push(setTimeout(timerExpired, remainingWait(time)))
   }
 
   function trailingEdge(time: number) {
