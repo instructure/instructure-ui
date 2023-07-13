@@ -22,10 +22,10 @@
     "file-loader": "^6.2.0",
     "process": "^0.11.10",
     "style-loader": "^3.3.3",
-    "stylelint": "^15.9.0",
+    "stylelint": "^15.10.1",
     "terser-webpack-plugin": "^5.3.9",
-    "thread-loader": "^3.0.4",
-    "webpack": "^5.88.0"
+    "thread-loader": "^4.0.2",
+    "webpack": "^5.88.1"
   },
   "publishConfig": {
     "access": "public"

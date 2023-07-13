@@ -34,7 +34,7 @@ const createFromTemplate = require('../utils/createFromTemplate')
 const promptContentName = require('../utils/promptContentName')
 
 module.exports = async ({
-  template, // path the the /template folder
+  template, // path to the /template folder
   name, // e.g. 'myApp'
   path: sourcePath = process.cwd(), // the path where it will be created
   values: rawValues,
@@ -57,7 +57,7 @@ module.exports = async ({
 
   const destPath = path.join(sourcePath, contentName)
 
-  if (fse.existsSync(destPath)) {
+  if (fs.existsSync(destPath)) {
     info(
       `\`${destPath}\` already exists. If you choose to continue and overwrite it, it's existing contents may be lost.`
     )
@@ -75,9 +75,9 @@ module.exports = async ({
 
     // Remove the destination if it's a dir. If it's a file, it will just be overwritten
     // when the createFromTemplate func executes
-    if (fse.statSync(destPath).isDirectory()) {
+    if (fs.statSync(destPath).isDirectory()) {
       fse.emptyDirSync(destPath)
-      fse.rmdirSync(destPath)
+      fse.removeSync(destPath)
     }
   }
 

@@ -1191,7 +1191,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       !optionProps.renderBeforeLabel?.prototype?.isReactComponent
     ) {
       optionProps.renderBeforeLabel = (
-        optionProps.renderBeforeLabel as () => ReactNode
+        optionProps.renderBeforeLabel as (args: any) => ReactNode
       ).bind(null, renderLabelProps)
     }
     if (
@@ -1199,7 +1199,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       !optionProps.renderAfterLabel?.prototype?.isReactComponent
     ) {
       optionProps.renderAfterLabel = (
-        optionProps.renderAfterLabel as () => ReactNode
+        optionProps.renderAfterLabel as (args: any) => ReactNode
       ).bind(null, renderLabelProps)
     }
 
