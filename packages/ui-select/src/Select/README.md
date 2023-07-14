@@ -1208,3 +1208,5 @@ render(
 #### Providing assistive text for screen readers
 
 It's important to ensure screen reader users receive instruction and feedback while interacting with a `Select`, but screen reader support for the `combobox` role varies. The `assistiveText` prop should always be used to explain how a keyboard user can make a selection. Additionally, a live region should be updated with feedback as the component is interacted with, such as when options are filtered or highlighted. Using an [Alert](#Alert) with the `screenReaderOnly` prop is the easiest way to do this.
+
+> Note: This component uses a native `input` field to render the selected value. When it's included in a native HTML `form`, the text value will be sent to the backend instead of anything specified in the `value` field of the `Select.Option`-s. We do not recommend to use this component this way, rather write your own code that collects information and sends it to the backend.
