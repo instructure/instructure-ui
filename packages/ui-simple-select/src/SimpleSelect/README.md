@@ -162,3 +162,5 @@ render: true
   </SimpleSelect.Option>
 </SimpleSelect>
 ```
+
+> Note: This component uses a native `input` field to render the selected value. When it's included in a native HTML `form`, the text value will be sent to the backend instead of anything specified in the `value` field of the `SimpleSelect.Option`-s. We do not recommend to use this component this way, rather write your own code that collects information and sends it to the backend.
