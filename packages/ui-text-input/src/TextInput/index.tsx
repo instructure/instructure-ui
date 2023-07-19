@@ -240,6 +240,7 @@ class TextInput extends Component<TextInputProps, TextInputState> {
       value,
       defaultValue,
       isRequired,
+      onFocus,
       ...rest
     } = this.props
 
