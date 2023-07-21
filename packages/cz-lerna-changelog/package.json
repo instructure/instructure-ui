@@ -1,6 +1,6 @@
 {
   "name": "@instructure/cz-lerna-changelog",
-  "version": "8.38.0",
+  "version": "8.39.0",
   "description": "Prompts for conventional changelog standard in a lerna environment.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/pkg-utils": "8.38.0",
+    "@instructure/pkg-utils": "8.39.0",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "chalk": "^4.1.2",
     "cz-customizable": "^6.9.2",

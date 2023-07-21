@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.39.0) (2023-07-21)
+
+**Note:** Version bump only for package @instructure/emotion
+
+
+
+
+
 # [8.38.0](https://github.com/instructure/instructure-ui/compare/v8.37.0...v8.38.0) (2023-05-15)
 
 **Note:** Version bump only for package @instructure/emotion
