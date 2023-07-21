@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** fix modal closing when losing focus ([5deda70](https://github.com/instructure/instructure-ui/commit/5deda7064ed9f20f6693f0ad46c19a89e096a66a))
+* **ui-a11y-utils:** fix parent dialog closing when file picker input is closed ([1732297](https://github.com/instructure/instructure-ui/commit/17322976d6474e1ed35521c87fc6f137338edda3))
+* **ui-dom-utils:** findFocusable only treats an element as hidden if display is 'none' ([69b3949](https://github.com/instructure/instructure-ui/commit/69b39490e8038e5ab02ec53ec8bd62fe3e876b08))
+* **ui-text-area:** add ssr fix for resize observer ([412c7a1](https://github.com/instructure/instructure-ui/commit/412c7a159cb3af6a897e9cf1e47c0fa46398e0ce))
+* **ui-text-area:** fix focusring issues in case of horizontal resize ([dcbda2e](https://github.com/instructure/instructure-ui/commit/dcbda2ea0afb1fe19c298dcaf76ab6c8d0b443f5))
+* **ui-text-input:** fix textInput, where onFocus fires twice. ([eefd8ce](https://github.com/instructure/instructure-ui/commit/eefd8cef47ec4e9a3d279cc1658636f78e709dc9))
+
+
+### Features
+
+* **instui-config,shared-types,ui-navigation,ui-side-nav-bar,ui:** add side-nav-bar component and deprecate navigation ([45848bf](https://github.com/instructure/instructure-ui/commit/45848bf5feea16e05c19e559c03e53e4b0637412))
+
+
+
+
+
 ## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
 
 ### Bug Fixes
