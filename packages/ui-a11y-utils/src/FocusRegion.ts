@@ -109,7 +109,19 @@ class FocusRegion {
       event.keyCode === keycode.codes.esc &&
       !event.defaultPrevented
     ) {
-      this.handleDismiss(event)
+      // If a dialog contains an <input type="file"/> element and the user opens the file picker and closes it with the
+      // escape key then Firefox passes through that event which could close the parent dialog. This code prevents that
+      // from happening (listening for a `cancel` event doesn't seem to work in firefox)
+      const activeElement = ownerDocument(this._contextElement).activeElement
+      const fileInputFocused =
+        activeElement?.tagName === 'INPUT' &&
+        (<HTMLInputElement>activeElement).type === 'file'
+
+      if (fileInputFocused) {
+        ;(<HTMLInputElement>activeElement).blur()
+      } else {
+        this.handleDismiss(event)
+      }
     }
   }
 
