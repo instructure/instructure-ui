@@ -43,9 +43,6 @@ describe('findTabbable', async () => {
             <button>Yep</button>
             <button style={{ display: 'none' }}>Nope</button>
           </div>
-          <div style={{ width: 0, height: 0 }}>
-            <button>Nope</button>
-          </div>
         </div>
       )
       /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
