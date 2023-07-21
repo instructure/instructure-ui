@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
+
+
+### Bug Fixes
+
+* **ui-text-input:** fix textInput, where onFocus fires twice. ([eefd8ce](https://github.com/instructure/instructure-ui/commit/eefd8cef47ec4e9a3d279cc1658636f78e709dc9))
+
+
+
+
+
 ## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
 
 **Note:** Version bump only for package @instructure/ui-text-input

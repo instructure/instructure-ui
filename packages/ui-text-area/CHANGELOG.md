@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
+
+
+### Bug Fixes
+
+* **ui-text-area:** add ssr fix for resize observer ([412c7a1](https://github.com/instructure/instructure-ui/commit/412c7a159cb3af6a897e9cf1e47c0fa46398e0ce))
+* **ui-text-area:** fix focusring issues in case of horizontal resize ([dcbda2e](https://github.com/instructure/instructure-ui/commit/dcbda2ea0afb1fe19c298dcaf76ab6c8d0b443f5))
+
+
+
+
+
 ## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
 
 **Note:** Version bump only for package @instructure/ui-text-area
