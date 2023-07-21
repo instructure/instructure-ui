@@ -83,12 +83,7 @@ function findFocusable(
 
 function hidden(element: Element | Node) {
   const cs = getComputedStyle(element)
-  return (
-    (cs.display !== 'inline' &&
-      (element as HTMLElement).offsetWidth <= 0 &&
-      (element as HTMLElement).offsetHeight <= 0) ||
-    cs.display === 'none'
-  )
+  return cs.display === 'none'
 }
 
 function positioned(element: Element | Node) {
