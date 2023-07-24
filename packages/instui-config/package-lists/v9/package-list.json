@@ -4,7 +4,6 @@
   "@instructure/canvas-high-contrast-theme",
   "@instructure/canvas-theme",
   "@instructure/command-utils",
-  "@instructure/config-loader",
   "@instructure/console",
   "@instructure/cz-lerna-changelog",
   "@instructure/debounce",

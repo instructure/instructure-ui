@@ -7,8 +7,5 @@
     "composite": true
   },
   "include": ["lib"],
-  "references": [
-    { "path": "../config-loader/tsconfig.build.json" },
-    { "path": "../ui-webpack-config/tsconfig.build.json" }
-  ]
+  "references": [{ "path": "../ui-webpack-config/tsconfig.build.json" }]
 }

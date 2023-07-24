@@ -22,6 +22,151 @@
  * SOFTWARE.
  */
 
-const loadConfig = require('@instructure/config-loader')
+const libraryName = 'InstructureIcons'
+const packageName = '@instructure/ui-icons'
+const source = 'svg/'
+const destination = './__build__/'
 
-module.exports = loadConfig('icons')
+const svg = {
+  source: `${source}**/*.svg`,
+  destination: source
+}
+
+const fonts = {
+  source: svg.destination, // variant is added to path
+  destination: `${destination}font/`,
+  fontName: libraryName,
+  className: 'icon',
+  formats: ['woff2', 'woff', 'eot', 'ttf', 'svg']
+}
+
+const react = {
+  source: svg.destination,
+  destination,
+  componentBaseName: 'Icon'
+}
+
+const deprecated = {
+  /* [icon name]: [icon name to use instead]
+  /* e.g. 'arrow-up': 'arrow' */
+  'discussion-x': 'x',
+  'copy-course': 'copy',
+  'discussion-reply-dark': 'more',
+  'discussion-reply': 'more',
+  'discussion-search': 'search',
+  'search-address-book': 'search',
+  'rss-add': 'add',
+  'user-add': 'add',
+  'materials-required-light': 'materials-required',
+  'mature-light': 'mature',
+  'note-dark': 'note',
+  'note-light': 'note',
+  'icon-reply-2': 'icon-reply',
+  'icon-replied': 'icon-reply',
+  instructure: 'instructure-logo',
+  'settings-2': 'settings',
+  'twitter-boxed': 'twitter',
+  'arrow-left': 'arrow-start',
+  'arrow-open-left': 'arrow-open-start',
+  'arrow-open-right': 'arrow-open-end',
+  'arrow-right': 'arrow-end',
+  'expand-left': 'expand-start',
+  'mini-arrow-left': 'mini-arrow-start',
+  'mini-arrow-right': 'mini-arrow-end',
+  'move-left': 'move-start',
+  'move-right': 'move-end',
+  'text-left': 'text-start',
+  'text-right': 'text-end',
+  'toggle-left': 'toggle-start',
+  'toggle-right': 'toggle-end',
+  unpublish: 'unpublished'
+}
+
+const bidirectional = [
+  'address-book',
+  'annotate',
+  'announcement',
+  'arrow-left',
+  'arrow-start',
+  'arrow-double-end',
+  'arrow-double-start',
+  'arrow-open-left',
+  'arrow-open-start',
+  'arrow-open-right',
+  'arrow-open-end',
+  'arrow-right',
+  'arrow-end',
+  'audio',
+  'assignment',
+  'bullet-list',
+  'chat',
+  'compose',
+  'courses',
+  'discussion',
+  'discussion-reply-2',
+  'document',
+  'edit',
+  'essay',
+  'expand-left',
+  'expand-start',
+  'export-content',
+  'export',
+  'external-link',
+  'feedback',
+  'folder-locked',
+  'folder',
+  'forward',
+  'gradebook-export',
+  'gradebook-import',
+  'highlighter',
+  'import-content',
+  'import',
+  'indent-2',
+  'indent',
+  'mini-arrow-left',
+  'mini-arrow-start',
+  'mini-arrow-right',
+  'mini-arrow-end',
+  'move-left',
+  'move-start',
+  'move-right',
+  'move-end',
+  'next-unread',
+  'not-graded',
+  'note',
+  'open-folder',
+  'outdent',
+  'outdent2',
+  'quiz-stats-high',
+  'quiz-stats-low',
+  'quiz',
+  'replied',
+  'reply-2',
+  'reply-all-2',
+  'reply',
+  'rubric-dark',
+  'rubric',
+  'sis-imported',
+  'syllabus',
+  'text-left',
+  'text-start',
+  'text-right',
+  'text-end',
+  'textarea',
+  'toggle-left',
+  'toggle-start',
+  'toggle-right',
+  'toggle-end'
+]
+
+module.exports = {
+  source,
+  destination,
+  libraryName,
+  packageName,
+  svg,
+  fonts,
+  react,
+  deprecated,
+  bidirectional
+}

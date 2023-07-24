@@ -16,7 +16,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/config-loader": "8.39.0",
     "@instructure/ui-webpack-config": "8.39.0",
     "@jsdevtools/coverage-istanbul-loader": "3.0.5",
     "buffer": "^6.0.3",

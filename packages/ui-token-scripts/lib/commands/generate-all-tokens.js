@@ -22,16 +22,50 @@
  * SOFTWARE.
  */
 
-import loadConfig from '@instructure/config-loader'
 import { getCommand, runCommandsConcurrently } from '@instructure/command-utils'
+
+const tokenScriptsConfig = [
+  {
+    themeKey: 'canvas',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas',
+    outputPackage: '@instructure/ui-theme-tokens',
+    groupOutput: true
+  },
+  {
+    themeKey: 'canvas',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas',
+    outputPackage: '@instructure/canvas-theme'
+  },
+  {
+    themeKey: 'canvas-high-contrast',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvasHighContrast',
+    outputPackage: '@instructure/ui-theme-tokens',
+    groupOutput: true
+  },
+  {
+    themeKey: 'canvas-high-contrast',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvasHighContrast',
+    outputPackage: '@instructure/canvas-high-contrast-theme'
+  },
+  {
+    themeKey: 'instructure',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/instructure',
+    outputPackage: '@instructure/ui-theme-tokens',
+    groupOutput: true
+  },
+  {
+    themeKey: 'instructure',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/instructure',
+    outputPackage: '@instructure/instructure-theme'
+  }
+]
 
 export default {
   command: 'generate-all-tokens',
   describe:
     'Generate cross-platform design tokens for all themes in configuration.',
   handler: (argv) => {
-    const config = loadConfig('ui-token-scripts')
-    const commandsToRun = config.reduce(
+    const commandsToRun = tokenScriptsConfig.reduce(
       (commands, { themeKey, sourceTokens, outputPackage, groupOutput }) => {
         return {
           ...commands,

@@ -94,7 +94,6 @@
     { "path": "../ui-truncate-text/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" },
     { "path": "../ui-view/tsconfig.build.json" },
-    { "path": "../config-loader/tsconfig.build.json" },
     { "path": "../ui-babel-preset/tsconfig.build.json" },
     { "path": "../ui-eslint-config/tsconfig.build.json" },
     { "path": "../ui-scripts/tsconfig.build.json" },

@@ -6,6 +6,5 @@
     "composite": true,
     "rootDir": "./lib"
   },
-  "include": ["lib"],
-  "references": [{ "path": "../config-loader/tsconfig.build.json" }]
+  "include": ["lib"]
 }

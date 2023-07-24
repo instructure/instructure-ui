@@ -4075,12 +4075,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/config-loader@8.39.0, @instructure/config-loader@workspace:packages/config-loader":
-  version: 0.0.0-use.local
-  resolution: "@instructure/config-loader@workspace:packages/config-loader"
-  languageName: unknown
-  linkType: soft
-
 "@instructure/console@8.39.0, @instructure/console@workspace:packages/console":
   version: 0.0.0-use.local
   resolution: "@instructure/console@workspace:packages/console"
@@ -5058,7 +5052,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@instructure/ui-icons-build@workspace:packages/ui-icons-build"
   dependencies:
-    "@instructure/config-loader": 8.39.0
     del: ^6.1.1
     glob: ^7.2.3
     gulp: ^4.0.2
@@ -5120,7 +5113,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@instructure/ui-karma-config@workspace:packages/ui-karma-config"
   dependencies:
-    "@instructure/config-loader": 8.39.0
     "@instructure/ui-webpack-config": 8.39.0
     "@jsdevtools/coverage-istanbul-loader": 3.0.5
     buffer: ^6.0.3
@@ -6306,7 +6298,6 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.22.6
     "@instructure/command-utils": 8.39.0
-    "@instructure/config-loader": 8.39.0
     "@instructure/ui-test-utils": 8.39.0
     fs-extra: ^10.1.0
     lodash.isplainobject: ^4.0.6
@@ -17294,7 +17285,6 @@ __metadata:
     "@babel/standalone": ^7.22.9
     "@instructure/canvas-high-contrast-theme": 8.39.0
     "@instructure/canvas-theme": 8.39.0
-    "@instructure/config-loader": 8.39.0
     "@instructure/console": 8.39.0
     "@instructure/debounce": 8.39.0
     "@instructure/emotion": 8.39.0
