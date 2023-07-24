@@ -101,3 +101,31 @@ jobs:
           npm run serve &
       - name: Run regression tests
         run: npx testcafe ${{ matrix.browser }}:headless ./src/test.ts
+  server-side-rendering-regression-test:
+    needs: release
+      if: "!startsWith(github.event.head_commit.message, 'chore(release)')"
+      name: Regression testing
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          browser: [chrome, firefox]
+      defaults:
+        run:
+          working-directory: ./regression-test
+      steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: '16'
+            cache: 'yarn'
+        - name: Retrieve latest snapshot version
+          run: node prepare.js
+        - name: Install dependencies for regression testing
+          run: yarn install --no-immutable
+        - name: Build project and start the server
+          run: |
+            yarn build:next
+            yarn start:next &
+        - name: Run regression tests
+          run: npx testcafe ${{ matrix.browser }}:headless ./src/test.ts
+

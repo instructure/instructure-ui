@@ -62,7 +62,7 @@ console.info('Retrieving latest snapshot version...')
     })
 
     // override the package json
-    await writeFile('package.json', JSON.stringify(packageJson), {
+    await writeFile('package.json', JSON.stringify(packageJson, undefined, 2), {
       flag: 'w'
     })
 
