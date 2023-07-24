@@ -31,6 +31,8 @@
     "@instructure/ui-react-utils": "8.39.0",
     "@instructure/ui-testable": "8.39.0",
     "@instructure/ui-view": "8.39.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
