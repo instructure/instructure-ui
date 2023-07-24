@@ -27,7 +27,11 @@ const globby = require('globby')
 
 module.exports = function (uiTestScopePaths) {
   const files = ['packages/**/*.test.{js,ts,tsx}']
-  const ignore = ['packages/ui-codemods/**', '**/node_modules/**']
+  const ignore = [
+    'packages/ui-codemods/**',
+    '**/node_modules/**',
+    '**/__new-tests__/**'
+  ]
 
   return globby
     .sync(files, { ignore })
