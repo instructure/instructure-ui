@@ -4,7 +4,6 @@
     { "path": "./packages/canvas-high-contrast-theme/tsconfig.build.json" },
     { "path": "./packages/canvas-theme/tsconfig.build.json" },
     { "path": "./packages/command-utils/tsconfig.build.json" },
-    { "path": "./packages/config-loader/tsconfig.build.json" },
     { "path": "./packages/console/tsconfig.build.json" },
     { "path": "./packages/cz-lerna-changelog/tsconfig.build.json" },
     { "path": "./packages/debounce/tsconfig.build.json" },

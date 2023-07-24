@@ -37,7 +37,6 @@ const NODE_PACKAGES = [
   'ui-stylelint-config',
   'ui-scripts',
   'command-utils',
-  'config-loader',
   'cz-lerna-changelog',
   'eslint-plugin-instructure-ui',
   'instui-cli',

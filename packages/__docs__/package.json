@@ -126,7 +126,6 @@
     "webpack-merge": "^5.9.0"
   },
   "devDependencies": {
-    "@instructure/config-loader": "8.39.0",
     "@instructure/ui-babel-preset": "8.39.0",
     "@instructure/ui-eslint-config": "8.39.0",
     "@instructure/ui-scripts": "8.39.0",

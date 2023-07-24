@@ -27,17 +27,7 @@ const { series, parallel } = require('gulp')
 
 requireDir('./tasks', { recurse: true })
 
-const config = require('./config')
-
-const tasks = ['generate-svgs-index']
-
-if (config.react) {
-  tasks.push('generate-react')
-}
-
-if (config.fonts) {
-  tasks.push('generate-fonts')
-}
+const tasks = ['generate-svgs-index', 'generate-react', 'generate-fonts']
 
 exports.optimizeSVGs = series('optimize-svgs')
 exports.buildSVGs = series('optimize-svgs', 'generate-svgs-index')
