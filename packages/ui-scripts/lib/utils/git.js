@@ -30,7 +30,7 @@ const EMAIL = 'instui-dev@instructure.com'
 
 export const runGitCommand = (args = []) => {
   const { stdout } = runCommandSync('git', args, [], { stdio: 'pipe' })
-  return stdout && stdout.trim()
+  return stdout && stdout.toString().trim()
 }
 
 const setupGit = () => {
@@ -43,7 +43,7 @@ const setupGit = () => {
       runGitCommand(['config', 'user.name', 'instructure-ui-ci'])
     }
   } catch (e) {
-    error(e)
+    error(e.stack ? e.stack : e)
     process.exit(1)
   }
 }

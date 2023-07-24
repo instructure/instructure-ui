@@ -25,9 +25,9 @@
 const fs = require('fs')
 const path = require('path')
 const which = require('which')
-const execa = require('execa')
 const rl = require('readline')
 const chalk = require('chalk')
+const childProcess = require('child_process')
 
 function info(...args) {
   console.info(chalk.blue(...args)) // eslint-disable-line no-console
@@ -42,30 +42,22 @@ function error(...args) {
 }
 
 class Command {
+  /**
+   * the command binary, e.g. myScript.js or pwd
+   */
+  bin
+  /*
+   * The arguments to the command
+   */
+  args
+  /*
+   * environment variables
+   */
+  vars
   constructor(bin, args = [], vars = []) {
-    Object.defineProperties(this, {
-      vars: {
-        value: vars
-      },
-      bin: {
-        value: resolveBin(bin)
-      },
-      args: {
-        value: args
-      }
-    })
-  }
-  toString() {
-    return `${this.vars.length > 0 ? `${this.vars.join(' ')} ` : ''}${this.bin}`
-  }
-  get bin() {
-    return this.bin
-  }
-  get args() {
-    return this.args
-  }
-  get vars() {
-    return this.vars
+    this.vars = vars
+    this.bin = resolveBin(bin)
+    this.args = args
   }
 }
 
@@ -88,12 +80,11 @@ function runCommandsConcurrently(commands) {
 
   Object.keys(commands).forEach((name) => {
     let commandList = commands[name]
-
     if (commandList) {
       commandList = Array.isArray(commandList) ? commandList : [commandList]
       commandList.forEach((command) => {
         args.push(
-          `${command.toString()}${
+          `${command.bin}${
             command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
           }`
         )
@@ -108,27 +99,25 @@ function runCommandsConcurrently(commands) {
   } catch (err) {
     error(err)
   }
-
   return result
 }
 
-function runCommandSync(bin, args = [], vars = [], opts = {}) {
-  const command = getCommand(bin, args, vars)
-  const result = execa.sync(command.toString(), command.args, {
+function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
+  const result = childProcess.spawnSync(bin, args, {
+    env: { ...process.env, ...envVars },
     stdio: 'inherit',
+    windowsHide: true,
     ...opts
   })
-
-  return { ...result, status: result.exitCode }
+  return result
 }
 
 async function runCommandAsync(bin, args = [], vars = [], opts = {}) {
-  const command = getCommand(bin, args, vars)
-  const result = await execa(command.toString(), command.args, {
+  const result = await childProcess.spawn(bin, args, {
     stdio: 'inherit',
     ...opts
   })
-  return { ...result, status: result.exitCode }
+  return result
 }
 
 function resolveBin(
@@ -143,7 +132,7 @@ function resolveBin(
   }
   try {
     // returns the full path to this package.json
-    // TODO this might bral in Node 18!
+    // TODO this might break in Node 18!
     // https://nodejs.dev/en/api/v18/packages/#main-entry-point-export
     const modPkgPath = require.resolve(`${modName}/package.json`)
     const modPkgDir = path.dirname(modPkgPath)
