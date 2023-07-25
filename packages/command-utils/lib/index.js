@@ -28,6 +28,7 @@ const which = require('which')
 const rl = require('readline')
 const chalk = require('chalk')
 const childProcess = require('child_process')
+const concurrently = require('concurrently')
 
 function info(...args) {
   console.info(chalk.blue(...args)) // eslint-disable-line no-console
@@ -43,28 +44,48 @@ function error(...args) {
 
 class Command {
   /**
-   * the command binary, e.g. myScript.js or pwd
+   * the command binary, e.g. `myScript.js` or `pwd`
+   * @type {string}
    */
   bin
-  /*
-   * The arguments to the command
+  /**
+   * The arguments passed to the command
+   * @type {string[]}
    */
   args
-  /*
-   * environment variables
+  /**
+   * Environment variables in the form of key-value pairs
+   * @type {Object.<string, string>}
    */
-  vars
-  constructor(bin, args = [], vars = []) {
-    this.vars = vars
+  envVars
+
+  /**
+   * @param bin {string}  The binary name, e.g. `pwd`
+   * @param args {string[]} command arguments
+   * @param envVars {Object.<string, string>} Environment variables
+   */
+  constructor(bin, args = [], envVars = {}) {
     this.bin = resolveBin(bin)
     this.args = args
+    this.envVars = envVars
   }
 }
 
-function getCommand(bin, args = [], vars = []) {
-  return new Command(bin, args, vars)
+/**
+ * @param bin {string}  The binary name, e.g. `pwd`
+ * @param args {string[]} command arguments
+ * @param envVars {Object.<string, string>} Environment variables
+ */
+function getCommand(bin, args = [], envVars) {
+  return new Command(bin, args, envVars)
 }
 
+/**
+ *
+ * @param {Object.<string, Command | Command[]>} commands Command objects.
+ *  Their environment variables will be passed to every executable.
+ * @returns The same object as `childProcess.spawnSync`
+ */
 function runCommandsConcurrently(commands) {
   const args = [
     '--kill-others-on-fail',
@@ -77,7 +98,7 @@ function runCommandsConcurrently(commands) {
     '--success',
     'all'
   ]
-
+  let envVars = {}
   Object.keys(commands).forEach((name) => {
     let commandList = commands[name]
     if (commandList) {
@@ -88,14 +109,15 @@ function runCommandsConcurrently(commands) {
             command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
           }`
         )
+        envVars = { ...envVars, ...command.envVars }
       })
     }
   })
 
   let result = { status: 1 }
-
   try {
-    result = runCommandSync(`${resolveBin('concurrently')}`, args)
+    // TODO use it via API so we can pass env vars to the proper command
+    result = runCommandSync(`${resolveBin('concurrently')}`, args, envVars)
   } catch (err) {
     error(err)
   }
@@ -112,9 +134,11 @@ function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
   return result
 }
 
-async function runCommandAsync(bin, args = [], vars = [], opts = {}) {
+async function runCommandAsync(bin, args = [], envVars = {}, opts = {}) {
   const result = await childProcess.spawn(bin, args, {
+    env: { ...process.env, ...envVars },
     stdio: 'inherit',
+    windowsHide: true,
     ...opts
   })
   return result

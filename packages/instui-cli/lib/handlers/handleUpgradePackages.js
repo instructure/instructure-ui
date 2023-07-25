@@ -141,7 +141,7 @@ async function updateResolutions({ pkg, packages, path, version }) {
         const { stdout } = runCommandSync(
           'yarn',
           ['info', `${packageName}`, 'dist-tags', '--json'],
-          [],
+          {},
           { stdio: 'pipe' }
         )
         const { data } = JSON.parse(stdout)

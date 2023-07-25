@@ -29,7 +29,7 @@ const USERNAME = 'instructure-ui-ci'
 const EMAIL = 'instui-dev@instructure.com'
 
 export const runGitCommand = (args = []) => {
-  const { stdout } = runCommandSync('git', args, [], { stdio: 'pipe' })
+  const { stdout } = runCommandSync('git', args, {}, { stdio: 'pipe' })
   return stdout && stdout.toString().trim()
 }
 

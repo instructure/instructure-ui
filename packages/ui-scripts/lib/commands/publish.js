@@ -157,7 +157,7 @@ async function* publishPackages(packages, version, tag) {
       const { stdout } = await runCommandAsync(
         'npm',
         ['info', pkg.name, '--json'],
-        [],
+        {},
         {
           stdio: 'pipe'
         }
@@ -192,7 +192,7 @@ async function publishPackage(pkg, tag) {
     })
 
   const publishArgs = ['publish', pkg.location, '--tag', tag]
-  await runCommandAsync('npm', publishArgs, [])
+  await runCommandAsync('npm', publishArgs)
 
   return wait(500)
 }

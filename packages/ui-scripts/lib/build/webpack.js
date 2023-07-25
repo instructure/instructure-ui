@@ -39,27 +39,29 @@ export default {
 
     let command, webpackArgs
 
-    let envVars = [
-      OMIT_INSTUI_DEPRECATION_WARNINGS
-        ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
-        : false
-    ]
+    let envVars = {}
+    if (OMIT_INSTUI_DEPRECATION_WARNINGS) {
+      envVars = { ...envVars, OMIT_INSTUI_DEPRECATION_WARNINGS: '1' }
+    }
 
     if (argv.watch) {
       command = 'webpack'
-      envVars = envVars
-        .concat(['NODE_ENV=development', 'DEBUG=1'])
-        .filter(Boolean)
+      envVars = {
+        ...envVars,
+        NODE_ENV: 'development',
+        DEBUG: '1'
+      }
       webpackArgs = ['serve', '--mode=development', `--port=${port}`]
     } else {
       command = 'webpack'
-      envVars = envVars
-        .concat([
-          `NODE_ENV=${NODE_ENV || 'production'}`,
-          'NODE_OPTIONS=--max_old_space_size=120000',
-          DEBUG ? `DEBUG=1` : false
-        ])
-        .filter(Boolean)
+      envVars = {
+        ...envVars,
+        NODE_ENV: NODE_ENV || 'production',
+        NODE_OPTIONS: '--max_old_space_size=120000'
+      }
+      if (DEBUG) {
+        envVars = { ...envVars, DEBUG: '1' }
+      }
       webpackArgs = ['--mode=production']
     }
 

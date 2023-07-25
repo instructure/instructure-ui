@@ -36,7 +36,7 @@ export default {
   },
   handler: (argv) => {
     runCommandsConcurrently({
-      server: getCommand('http-server', ['__build__', '-p', argv.port], [])
+      server: getCommand('http-server', ['__build__', '-p', argv.port])
     })
   }
 }

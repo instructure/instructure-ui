@@ -40,11 +40,10 @@ export default {
 
     let command, commandArgs
 
-    let envVars = [
-      OMIT_INSTUI_DEPRECATION_WARNINGS
-        ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
-        : false
-    ]
+    let envVars = {}
+    if (OMIT_INSTUI_DEPRECATION_WARNINGS) {
+      envVars = { ...envVars, OMIT_INSTUI_DEPRECATION_WARNINGS: '1' }
+    }
 
     if (argv.watch) {
       command = 'start-storybook'
@@ -59,19 +58,22 @@ export default {
         '--no-manager-cache',
         '--quiet'
       ]
-      envVars = envVars
-        .concat(['NODE_ENV=development', 'DEBUG=1'])
-        .filter(Boolean)
+      envVars = {
+        ...envVars,
+        NODE_ENV: 'development',
+        DEBUG: '1'
+      }
     } else {
       command = 'build-storybook'
       commandArgs = ['-c', '.storybook', '-o', '__build__', '--quiet']
-      envVars = envVars
-        .concat([
-          `NODE_ENV=production`,
-          `NODE_PATH=${rootPath}`,
-          DEBUG ? `DEBUG=1` : false
-        ])
-        .filter(Boolean)
+      envVars = {
+        ...envVars,
+        NODE_ENV: 'production',
+        NODE_PATH: rootPath
+      }
+      if (DEBUG) {
+        envVars = { ...envVars, DEBUG: '1' }
+      }
     }
 
     process.exit(
