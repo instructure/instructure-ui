@@ -62,7 +62,6 @@ export default {
         '--allow-empty-input'
       ])
     }
-
-    process.exit(runCommandsConcurrently(commands).status)
+    runCommandsConcurrently(commands)
   }
 }

@@ -61,7 +61,8 @@ export default {
 
     babelArgs = babelArgs.concat([
       src,
-      '--ignore "src/**/*.test.js","src/**/__tests__/**"'
+      '--ignore',
+      '"src/**/*.test.js","src/**/__tests__/**"'
     ])
 
     let envVars = {}
@@ -89,7 +90,7 @@ export default {
           ...envVars,
           ...{ TRANSFORM_IMPORTS: '1' }
         }),
-        getCommand(specifyCJSFormat, [], [])
+        getCommand(specifyCJSFormat, [])
       ]
     }
 
@@ -97,6 +98,6 @@ export default {
       (obj, key) => ({ ...obj, [key]: commands[key] }),
       {}
     )
-    process.exit(runCommandsConcurrently(commandsToRun).status)
+    runCommandsConcurrently(commandsToRun)
   }
 }

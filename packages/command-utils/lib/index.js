@@ -28,7 +28,6 @@ const which = require('which')
 const rl = require('readline')
 const chalk = require('chalk')
 const childProcess = require('child_process')
-const concurrently = require('concurrently')
 
 function info(...args) {
   console.info(chalk.blue(...args)) // eslint-disable-line no-console
@@ -76,52 +75,25 @@ class Command {
  * @param args {string[]} command arguments
  * @param envVars {Object.<string, string>} Environment variables
  */
-function getCommand(bin, args = [], envVars) {
+function getCommand(bin, args, envVars) {
   return new Command(bin, args, envVars)
 }
 
 /**
- *
+ * Runs all the given commands concurrently
  * @param {Object.<string, Command | Command[]>} commands Command objects.
  *  Their environment variables will be passed to every executable.
- * @returns The same object as `childProcess.spawnSync`
+ * @returns Promise A Promise that completed if all the commands are completed
  */
-function runCommandsConcurrently(commands) {
-  const args = [
-    '--kill-others-on-fail',
-    '--prefix',
-    '[{name}]',
-    '--names',
-    Object.keys(commands).join(','),
-    '--prefix-colors',
-    'bgBlue.bold,bgMagenta.bold,bgGreen.bold',
-    '--success',
-    'all'
-  ]
-  let envVars = {}
-  Object.keys(commands).forEach((name) => {
-    let commandList = commands[name]
-    if (commandList) {
-      commandList = Array.isArray(commandList) ? commandList : [commandList]
-      commandList.forEach((command) => {
-        args.push(
-          `${command.bin}${
-            command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
-          }`
-        )
-        envVars = { ...envVars, ...command.envVars }
-      })
+async function runCommandsConcurrently(commands) {
+  const promises = []
+  for (const cl of Object.values(commands)) {
+    const commandList = Array.isArray(cl) ? cl : [cl]
+    for (const command of commandList) {
+      promises.push(runCommandAsync(command.bin, command.args, command.envVars))
     }
-  })
-
-  let result = { status: 1 }
-  try {
-    // TODO use it via API so we can pass env vars to the proper command
-    result = runCommandSync(`${resolveBin('concurrently')}`, args, envVars)
-  } catch (err) {
-    error(err)
   }
-  return result
+  return Promise.all(promises)
 }
 
 function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
@@ -135,7 +107,7 @@ function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
 }
 
 async function runCommandAsync(bin, args = [], envVars = {}, opts = {}) {
-  const result = await childProcess.spawn(bin, args, {
+  const result = childProcess.spawn(bin, args, {
     env: { ...process.env, ...envVars },
     stdio: 'inherit',
     windowsHide: true,

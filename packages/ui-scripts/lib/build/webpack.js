@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
+import { runCommandSync, resolveBin } from '@instructure/command-utils'
 
 export default {
   command: 'bundle',
@@ -64,11 +64,8 @@ export default {
       }
       webpackArgs = ['--mode=production']
     }
-
     process.exit(
-      runCommandsConcurrently({
-        webpack: getCommand(command, webpackArgs, envVars)
-      }).status
+      runCommandSync(resolveBin(command), webpackArgs, envVars).status
     )
   }
 }
