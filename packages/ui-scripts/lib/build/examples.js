@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import path from 'path'
-import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
+import { runCommandSync, resolveBin } from '@instructure/command-utils'
 
 export default {
   command: 'examples',
@@ -75,11 +75,8 @@ export default {
         envVars = { ...envVars, DEBUG: '1' }
       }
     }
-
     process.exit(
-      runCommandsConcurrently({
-        storybook: getCommand(command, commandArgs, envVars)
-      }).status
+      runCommandSync(resolveBin(command), commandArgs, envVars).status
     )
   }
 }

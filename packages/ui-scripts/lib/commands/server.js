@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
+import { runCommandSync, resolveBin } from '@instructure/command-utils'
 
 export default {
   command: 'server',
@@ -35,8 +35,9 @@ export default {
     }
   },
   handler: (argv) => {
-    runCommandsConcurrently({
-      server: getCommand('http-server', ['__build__', '-p', argv.port])
-    })
+    process.exit(
+      runCommandSync(resolveBin('http-server'), ['__build__', '-p', argv.port])
+        .status
+    )
   }
 }

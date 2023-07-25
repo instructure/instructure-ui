@@ -1,7 +1,7 @@
 {
   "name": "@instructure/command-utils",
   "version": "8.39.0",
-  "description": "Node CLI utilties made by Instructure Inc.",
+  "description": "Node CLI utilities made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "repository": {
@@ -17,7 +17,6 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
-    "concurrently": "^8.2.0",
     "which": "^2.0.2"
   },
   "publishConfig": {
