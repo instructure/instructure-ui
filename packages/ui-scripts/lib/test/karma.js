@@ -25,7 +25,7 @@
 import path from 'path'
 import React from 'react'
 import pkgUtils from '@instructure/pkg-utils'
-import { getCommand, runCommandsConcurrently } from '@instructure/command-utils'
+import { runCommandSync, resolveBin } from '@instructure/command-utils'
 
 export default {
   command: 'test',
@@ -53,27 +53,25 @@ export default {
 
     const karmaArgs = ['start']
 
-    let envVars = [
-      'NODE_ENV=test',
-      `REACT_VERSION=${React.version}`,
-      'NODE_OPTIONS=--max_old_space_size=120000',
-      OMIT_INSTUI_DEPRECATION_WARNINGS
-        ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
-        : false,
-      `USE_REACT_STRICT_MODE=${USE_REACT_STRICT_MODE}`
-    ]
+    let envVars = {
+      NODE_ENV: 'test',
+      REACT_VERSION: React.version,
+      NODE_OPTIONS: '--max_old_space_size=120000'
+    }
+    if (USE_REACT_STRICT_MODE) {
+      envVars = { ...envVars, USE_REACT_STRICT_MODE: USE_REACT_STRICT_MODE }
+    }
+    if (OMIT_INSTUI_DEPRECATION_WARNINGS) {
+      envVars = { ...envVars, OMIT_INSTUI_DEPRECATION_WARNINGS: '1' }
+    }
 
-    if (argv.watch) {
-      envVars = envVars.filter(Boolean)
-    } else {
-      envVars = envVars
-        .concat([
-          `NO_DEBUG=1`,
-          `${React.version}`.startsWith('15') || argv.noCoverage
-            ? false
-            : 'COVERAGE=1'
-        ])
-        .filter(Boolean)
+    if (!argv.watch) {
+      const coverage = argv.noCoverage ? {} : { COVERAGE: '1' }
+      envVars = {
+        ...envVars,
+        NO_DEBUG: '1',
+        ...coverage
+      }
     }
 
     if (argv.noLaunch) {
@@ -89,7 +87,7 @@ export default {
     }
 
     if (argv.browsers) {
-      karmaArgs.push(` --browsers ${argv.browsers}`)
+      karmaArgs.push(`--browsers ${argv.browsers}`)
     }
 
     let paths = []
@@ -116,13 +114,8 @@ export default {
     }
 
     if (paths.length > 0) {
-      envVars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
+      envVars = { ...envVars, ...{ UI_TEST_SCOPE_PATHS: paths.join(',') } }
     }
-
-    process.exit(
-      runCommandsConcurrently({
-        karma: getCommand('karma', karmaArgs, envVars)
-      }).status
-    )
+    process.exit(runCommandSync(resolveBin('karma'), karmaArgs, envVars).status)
   }
 }

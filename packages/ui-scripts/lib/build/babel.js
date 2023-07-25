@@ -64,36 +64,31 @@ export default {
       '--ignore "src/**/*.test.js","src/**/__tests__/**"'
     ])
 
-    let envVars = [
-      OMIT_INSTUI_DEPRECATION_WARNINGS
-        ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
-        : false
-    ]
+    let envVars = {}
+    if (OMIT_INSTUI_DEPRECATION_WARNINGS) {
+      envVars = { ...envVars, OMIT_INSTUI_DEPRECATION_WARNINGS: '1' }
+    }
 
     if (argv.watch) {
-      envVars = envVars.concat(['NODE_ENV=development']).filter(Boolean)
+      envVars = { ...envVars, NODE_ENV: 'development' }
       babelArgs.push('--watch')
     } else {
-      envVars = envVars
-        .concat([
-          `NODE_ENV=${BABEL_ENV || NODE_ENV || 'production'}`,
-          DEBUG ? `DEBUG=1` : false
-        ])
-        .filter(Boolean)
+      envVars = { ...envVars, NODE_ENV: BABEL_ENV || NODE_ENV || 'production' }
+      if (DEBUG) {
+        envVars = { ...envVars, DEBUG: '1' }
+      }
     }
 
     const commands = {
-      es: getCommand(
-        'babel',
-        [...babelArgs, '--out-dir', 'es'],
-        [...envVars, 'ES_MODULES=1']
-      ),
+      es: getCommand('babel', [...babelArgs, '--out-dir', 'es'], {
+        ...envVars,
+        ...{ ES_MODULES: '1' }
+      }),
       cjs: [
-        getCommand(
-          'babel',
-          [...babelArgs, '--out-dir', 'lib'],
-          [...envVars, 'TRANSFORM_IMPORTS=1']
-        ),
+        getCommand('babel', [...babelArgs, '--out-dir', 'lib'], {
+          ...envVars,
+          ...{ TRANSFORM_IMPORTS: '1' }
+        }),
         getCommand(specifyCJSFormat, [], [])
       ]
     }
@@ -102,7 +97,6 @@ export default {
       (obj, key) => ({ ...obj, [key]: commands[key] }),
       {}
     )
-
     process.exit(runCommandsConcurrently(commandsToRun).status)
   }
 }

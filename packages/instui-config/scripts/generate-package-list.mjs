@@ -28,7 +28,7 @@ import { error, info, runCommandSync } from '@instructure/command-utils'
 
 export default ({ outputDir, name = 'package-list.json' }) => {
   try {
-    const { stdout } = runCommandSync('lerna', ['list', '--json'], [], {
+    const { stdout } = runCommandSync('lerna', ['list', '--json'], {}, {
       stdio: 'pipe'
     })
     const packages = JSON.parse(stdout)
