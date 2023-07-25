@@ -61,7 +61,7 @@ export default {
 
     babelArgs = babelArgs.concat([
       src,
-      '--ignore "src/**/*.test.js","src/**/__tests__/**"'
+      '--ignore "src/**/*.test.js","src/**/__tests__/**","src/**/__new-tests__/**"'
     ])
 
     let envVars = [

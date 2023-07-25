@@ -141,6 +141,7 @@ module.exports = function (
             '**/*.config.js',
             '**/*.conf.js',
             '__tests__/**/*.js',
+            '__new-tests__/**/*.js',
             '__testfixtures__/**/*.js',
             '__examples__/**/*.js',
             '__fixtures__/**/*.js'

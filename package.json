@@ -18,7 +18,7 @@
     "start": "yarn workspace docs-app start",
     "start:watch": "yarn workspace docs-app start:watch ",
     "dev": "yarn start:watch",
-    "test:patchset": "npm-run-all lint:commit lint:changes test:jest test",
+    "test:patchset": "npm-run-all lint:commit lint:changes test:jest test test:new",
     "pretest:merge": "yarn bootstrap && yarn check",
     "test:merge": "npm-run-all lint:commit lint test",
     "test:all": "npm-run-all test:jest test",

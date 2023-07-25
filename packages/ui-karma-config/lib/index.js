@@ -160,7 +160,13 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
             // https://github.com/mattlewis92/karma-coverage-istanbul-reporter
             {
               test: /.*.tsx?$/,
-              exclude: [/node_modules/, /\/lib\//, /\/es\//, /\/__tests__\//],
+              exclude: [
+                /node_modules/,
+                /\/lib\//,
+                /\/es\//,
+                /\/__tests__\//,
+                /\/__new-tests__\//
+              ],
               loader: '@jsdevtools/coverage-istanbul-loader',
               enforce: 'post',
               options: {

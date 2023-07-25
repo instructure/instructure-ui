@@ -79,6 +79,7 @@ const pathsToIgnore = [
   '**/__fixtures__/**',
   '**/__testfixtures__/**',
   '**/__tests__/**',
+  '**/__new-tests__/**',
   '**/locales/**',
   '**/styles.{js,ts}',
   '**/theme.{js,ts}',
