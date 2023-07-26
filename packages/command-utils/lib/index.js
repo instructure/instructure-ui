@@ -27,7 +27,7 @@ const path = require('path')
 const which = require('which')
 const rl = require('readline')
 const chalk = require('chalk')
-const childProcess = require('child_process')
+const crossSpawn = require('cross-spawn')
 
 function info(...args) {
   console.info(chalk.blue(...args)) // eslint-disable-line no-console
@@ -97,7 +97,7 @@ async function runCommandsConcurrently(commands) {
 }
 
 function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
-  const result = childProcess.spawnSync(bin, args, {
+  const result = crossSpawn.sync(bin, args, {
     env: { ...process.env, ...envVars },
     stdio: 'inherit',
     windowsHide: true,
@@ -107,7 +107,7 @@ function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
 }
 
 async function runCommandAsync(bin, args = [], envVars = {}, opts = {}) {
-  const result = childProcess.spawn(bin, args, {
+  const result = crossSpawn.spawn(bin, args, {
     env: { ...process.env, ...envVars },
     stdio: 'inherit',
     windowsHide: true,

@@ -17,7 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
-    "which": "^2.0.2"
+    "cross-spawn": "^7.0.3",
+    "which": "^3.0.1"
   },
   "publishConfig": {
     "access": "public"

@@ -36,7 +36,7 @@
     "generate:component": "yarn workspace @instructure/instui-cli instui create component",
     "generate:package": "yarn workspace @instructure/instui-cli instui create package",
     "commit": "ui-scripts commit",
-    "bootstrap": "time yarn node scripts/bootstrap.js",
+    "bootstrap": "yarn node scripts/bootstrap.js",
     "build": "lerna run build --stream",
     "build:watch": "lerna run build:watch --stream",
     "build:docs": "lerna run bundle --stream --scope docs-app",
@@ -80,7 +80,8 @@
     "netlify-cli": "13.2.2",
     "npm-run-all": "^4.1.5",
     "typescript": "5.1.6",
-    "webpack": "^5.88.1"
+    "webpack": "^5.88.1",
+    "cross-spawn": "^7.0.3"
   },
   "engines": {
     "node": ">=14",

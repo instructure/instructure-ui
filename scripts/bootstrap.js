@@ -23,7 +23,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { execSync, fork, spawn } = require('child_process')
+const { execSync, fork } = require('child_process')
+const { spawn } = require('cross-spawn')
 const path = require('path')
 
 const opts = { stdio: 'inherit' }
