@@ -4059,7 +4059,8 @@ __metadata:
   resolution: "@instructure/command-utils@workspace:packages/command-utils"
   dependencies:
     chalk: ^4.1.2
-    which: ^2.0.2
+    cross-spawn: ^7.0.3
+    which: ^3.0.1
   languageName: unknown
   linkType: soft
 
@@ -37125,6 +37126,17 @@ __metadata:
   bin:
     node-which: bin/which.js
   checksum: fdcf3cadab414e60b86c6836e7ac9de9273561a8926f57cbc28641b602a771527239ee4d47f2689ed255666f035ba0a0d72390986cc0c4e45344491adc7d0eeb
+  languageName: node
+  linkType: hard
+
+"which@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "which@npm:3.0.1"
+  dependencies:
+    isexe: ^2.0.0
+  bin:
+    node-which: bin/which.js
+  checksum: adf720fe9d84be2d9190458194f814b5e9015ae4b88711b150f30d0f4d0b646544794b86f02c7ebeec1db2029bc3e83a7ff156f542d7521447e5496543e26890
   languageName: node
   linkType: hard
 
