@@ -48,7 +48,7 @@ example: true
 
 ### Gap between Flex.Items
 
-Flex will have the gap is None by default. You can set the gap between Flex.Items by using the `gap` property.
+Flex items will have no gap by default. You can set the gap between Flex.Items by using the `gap` property.
 
 ```js
 ---
