@@ -35,7 +35,6 @@
     "commit:package:list": "git add packages/instui-config/package-lists/**/package-list.json",
     "generate:component": "yarn workspace @instructure/instui-cli instui create component",
     "generate:package": "yarn workspace @instructure/instui-cli instui create package",
-    "commit": "ui-scripts commit",
     "bootstrap": "time yarn node scripts/bootstrap.js",
     "build": "lerna run build --stream",
     "build:watch": "lerna run build:watch --stream",
