@@ -57,6 +57,11 @@
     "ts:check": "lerna run ts:check --stream",
     "ts:check:references": "yarn node scripts/checkTSReferences.js"
   },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+    }
+  },
   "license": "MIT",
   "resolutions": {
     "react": "^18",
