@@ -26,5 +26,24 @@ module.exports = {
   parserOpts: {
     headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
     headerCorrespondence: ['type', 'scope', 'subject']
+  },
+  rules: {
+    'type-enum': [
+      2,
+      'always',
+      [
+        'WIP',
+        'feat',
+        'fix',
+        'docs',
+        'chore',
+        'style',
+        'refactor',
+        'test',
+        'perf',
+        'revert'
+      ]
+    ],
+    'type-case': [0]
   }
 }
