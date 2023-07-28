@@ -23,8 +23,6 @@
  */
 
 import bump from './bump.js'
-import commit from './commit.js'
-import lintCommit from './lint-commit.js'
 import server from './server.js'
 import tag from './tag.js'
 import deprecate from './deprecate.js'
@@ -38,8 +36,6 @@ import build from '../build/babel.js'
 
 export const yargCommands = [
   bump,
-  commit,
-  lintCommit,
   server,
   tag,
   deprecate,

@@ -2902,7 +2902,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@instructure/cz-lerna-changelog@8.39.0, @instructure/cz-lerna-changelog@workspace:packages/cz-lerna-changelog":
+"@instructure/cz-lerna-changelog@workspace:packages/cz-lerna-changelog":
   version: 0.0.0-use.local
   resolution: "@instructure/cz-lerna-changelog@workspace:packages/cz-lerna-changelog"
   dependencies:
@@ -4538,11 +4538,9 @@ __metadata:
   dependencies:
     "@babel/cli": ^7.22.9
     "@instructure/command-utils": 8.39.0
-    "@instructure/cz-lerna-changelog": 8.39.0
     "@instructure/pkg-utils": 8.39.0
     "@lerna/project": ^6.4.1
     "@storybook/react": ^6.5.16
-    commitizen: ^4.3.0
     dotenv: ^16.3.1
     find-up: ^6.3.0
     http-server: ^14.1.1
@@ -4553,7 +4551,6 @@ __metadata:
     prettier: ^2.8.8
     semver: ^7.5.4
     stylelint: ^15.10.1
-    validate-commit-msg: ^2.14.0
     webpack-cli: ^5.1.4
     webpack-dev-server: ^4.15.1
     yargs: ^17.7.2
@@ -13970,13 +13967,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colors@npm:~0.6.0-1":
-  version: 0.6.2
-  resolution: "colors@npm:0.6.2"
-  checksum: 3f48cadb26ef1809847f3c0ff1e1dc4b2e2af4ace54dd9cd7491bfcaafef3abaac7cb063cb91f98f305bba8a6fa74720a8856610629f9c889b1eb4cd84a120a3
-  languageName: node
-  linkType: hard
-
 "colorspace@npm:1.1.x":
   version: 1.1.4
   resolution: "colorspace@npm:1.1.4"
@@ -14066,13 +14056,6 @@ __metadata:
   version: 9.5.0
   resolution: "commander@npm:9.5.0"
   checksum: c7a3e27aa59e913b54a1bafd366b88650bc41d6651f0cbe258d4ff09d43d6a7394232a4dadd0bf518b3e696fdf595db1028a0d82c785b88bd61f8a440cecfade
-  languageName: node
-  linkType: hard
-
-"commander@npm:~2.1.0":
-  version: 2.1.0
-  resolution: "commander@npm:2.1.0"
-  checksum: 147dab340ff5fbdb85d749dffebb49c95e2d6998fd01791ea92132b87af1ea09c69dd2edd1916fab6c9f6634653b5af39cb9b006e7c775b6804eead425478bdf
   languageName: node
   linkType: hard
 
@@ -14435,13 +14418,6 @@ __metadata:
   bin:
     conventional-changelog-writer: cli.js
   checksum: d8619ff7446efa71e0a019c07bdf20debff3f32438f783277b80314109429d7075b3d913e59c57cd6e014e9bef611c2a8fb052de2832144f38c0e54485257126
-  languageName: node
-  linkType: hard
-
-"conventional-commit-types@npm:^2.0.0":
-  version: 2.3.0
-  resolution: "conventional-commit-types@npm:2.3.0"
-  checksum: 1324d2537e46898cd0006b8be26a37b94e92e6fc009b595cedc5483c5ee1f2bfba693ccf561ab5fb2185c8899e154c8a43c751eecbe9ba446eecb962972811cc
   languageName: node
   linkType: hard
 
@@ -18581,13 +18557,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-parent-dir@npm:^0.3.0":
-  version: 0.3.1
-  resolution: "find-parent-dir@npm:0.3.1"
-  checksum: 55e722584760cfbc6611901c7ced5081345cf629e2ecd6a4f6704b13b5a1876c8d9d9db5fd4965ba23e1ecbc24a8b62af40379cfef1ffa0231719b9d924eebdd
-  languageName: node
-  linkType: hard
-
 "find-pkg@npm:^0.1.0":
   version: 0.1.2
   resolution: "find-pkg@npm:0.1.2"
@@ -18695,18 +18664,6 @@ __metadata:
     micromatch: ^4.0.2
     resolve-dir: ^1.0.1
   checksum: 94131e1107ad63790ed00c4c39ca131a93ea602607bd97afeffd92b69a9a63cf2c6f57d6db88cb753fe748ac7fde79e1e76768ff784247026b7c5ebf23ede3a0
-  languageName: node
-  linkType: hard
-
-"findup@npm:0.1.5":
-  version: 0.1.5
-  resolution: "findup@npm:0.1.5"
-  dependencies:
-    colors: ~0.6.0-1
-    commander: ~2.1.0
-  bin:
-    findup: bin/findup.js
-  checksum: 9a66429660efbc18a656c7d8ab1d4b613d76433149f7efa5d4fd23bd6a7497ab747fb7368921366c7397ad6355549e3900693f01d0ca9dad1d02215b2db34f19
   languageName: node
   linkType: hard
 
@@ -31091,13 +31048,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver-regex@npm:1.0.0":
-  version: 1.0.0
-  resolution: "semver-regex@npm:1.0.0"
-  checksum: 17411400eebe392f22502f566f4402c62ba427200443db3b2ff19e18a95aa5ff6480d4c8b8d84050e7c5a79ffe54b9f220629f1f7f3de90748532ee5bf040e6b
-  languageName: node
-  linkType: hard
-
 "semver@npm:2 || 3 || 4 || 5, semver@npm:^5.0.3, semver@npm:^5.1.0, semver@npm:^5.3.0, semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.6.0":
   version: 5.7.2
   resolution: "semver@npm:5.7.2"
@@ -34739,20 +34689,6 @@ __metadata:
   dependencies:
     homedir-polyfill: ^1.0.1
   checksum: 193db08aa396d993da04d3d985450784aa0010f51613005d13ef97d7b2b9e1ba5aef04affa585037adece12de5ca532f6f5fc40288495eab55e2eebc201809d2
-  languageName: node
-  linkType: hard
-
-"validate-commit-msg@npm:^2.14.0":
-  version: 2.14.0
-  resolution: "validate-commit-msg@npm:2.14.0"
-  dependencies:
-    conventional-commit-types: ^2.0.0
-    find-parent-dir: ^0.3.0
-    findup: 0.1.5
-    semver-regex: 1.0.0
-  bin:
-    validate-commit-msg: ./lib/cli.js
-  checksum: 1a56962292717aac99debe9acec3c30439c25ec8d97f2ca0333cae8e86c0e5b9642152479ca12aa393fe2da7ce010aa83571fc0fc563f01cda7c4a4ba0d3da92
   languageName: node
   linkType: hard
 

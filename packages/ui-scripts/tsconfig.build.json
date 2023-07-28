@@ -12,9 +12,6 @@
       "path": "../command-utils/tsconfig.build.json"
     },
     {
-      "path": "../cz-lerna-changelog/tsconfig.build.json"
-    },
-    {
       "path": "../pkg-utils/tsconfig.build.json"
     }
   ]
