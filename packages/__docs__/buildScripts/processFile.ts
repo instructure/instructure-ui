@@ -53,8 +53,8 @@ export function processFile(
     // exist if it was in the description at the top
     docId = docData.id
   } else if (
-    lowerPath.includes('/index.js') ||
-    lowerPath.includes('/index.tsx')
+    lowerPath.includes(path.sep + 'index.js') ||
+    lowerPath.includes(path.sep + 'index.tsx')
   ) {
     docId = path.basename(dirName) // return its folder name
   } else if (lowerPath.includes('readme.md')) {

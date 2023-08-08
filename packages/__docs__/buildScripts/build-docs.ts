@@ -41,6 +41,7 @@ import { getFrontMatter } from './utils/getFrontMatter'
 
 const buildDir = './__build__/'
 const projectRoot = path.resolve(__dirname, '../../../')
+const packagesDir = '../..'
 // there need to be required otherwise TSC will mess up the directory structure
 // in the build directory
 const rootPackage = require('../../../package.json') // root package.json
@@ -55,14 +56,15 @@ const library: LibraryOptions = {
 
 const pathsToProcess = [
   // these can be commented out for faster debugging
-  'CHANGELOG.md',
-  '**/packages/**/*.md', // package READMEs
-  '**/docs/**/*.md', // general docs
-  '**/src/*.{js,ts,tsx}', // util src files
-  '**/src/*/*.{js,ts,tsx}', // component src files
-  '**/src/*/*/*.{js,ts,tsx}', // child component src files,
-  'CODE_OF_CONDUCT.md',
-  'LICENSE.md'
+  //'CHANGELOG.md',
+  //'**/packages/**/*.md', // package READMEs
+  //'**/docs/**/*.md', // general docs
+  //'**/src/*.{js,ts,tsx}', // util src files
+  //'**/src/*/*.{js,ts,tsx}', // component src files
+  //'**/src/*/*/*.{js,ts,tsx}', // child component src files,
+  //'CODE_OF_CONDUCT.md',
+  //'LICENSE.md',
+  '**/debounce.ts'
 ]
 
 const pathsToIgnore = [
@@ -111,23 +113,23 @@ const pathsToIgnore = [
 
 function buildDocs() {
   // eslint-disable-next-line no-console
-  console.log('start building application data')
+  console.log('Start building application data')
 
   const { COPY_VERSIONS_JSON = '1' } = process.env
   const shouldDoTheVersionCopy = Boolean(parseInt(COPY_VERSIONS_JSON))
 
-  const files = pathsToProcess.map((file) => path.resolve(projectRoot, file))
-
-  const ignore = pathsToIgnore.map((file) => path.resolve(projectRoot, file))
-
+  const files = pathsToProcess.map((file) => path.posix.join(packagesDir, file))
+  const ignore = pathsToIgnore.map((file) => path.posix.join(packagesDir, file))
   globby(files, { ignore })
     .then((matches) => {
       fs.mkdirSync(buildDir + 'docs/', { recursive: true })
       // eslint-disable-next-line no-console
-      console.log('Parsing markdown and source files...')
-      const docs = matches.map((fullPath) => {
+      console.log(
+        'Parsing markdown and source files... (' + matches.length + ' files)'
+      )
+      const docs = matches.map((relativePath) => {
         // loop trough every source and Readme file
-        return processSingleFile(fullPath)
+        return processSingleFile(path.resolve(relativePath))
       })
       const themes = parseThemes()
       const clientProps = getClientProps(docs, library)
