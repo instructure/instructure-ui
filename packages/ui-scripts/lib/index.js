@@ -33,8 +33,6 @@ readEnv()
 
 const commands = [
   'bump',
-  'commit',
-  'lint-commit',
   'server',
   'tag',
   'help',

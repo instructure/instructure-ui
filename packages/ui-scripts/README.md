@@ -64,16 +64,6 @@ To fix lint issues:
 
 `yarn ui-scripts lint --fix`
 
-To lint a commit message (the `HEAD` commit):
-
-`yarn ui-scripts lint-commit`
-
-#### `commit`
-
-To write a correctly formatted commit message and commit the staged changes:
-
-`yarn ui-scripts commit`
-
 #### `install-react`
 
 To install a specific version of React and ReactDOM without updating `package.json`
