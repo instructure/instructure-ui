@@ -24,7 +24,7 @@
 
 import path from 'path'
 import fs from 'fs'
-import type { LibraryOptions, PackagePathData } from '../DataTypes'
+import type { LibraryOptions, PackagePathData } from '../DataTypes.mjs'
 
 export function getPathInfo(
   resourcePath: string,

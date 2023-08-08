@@ -23,7 +23,7 @@
  */
 
 import grayMatter from 'gray-matter'
-import { YamlMetaInfo } from '../DataTypes'
+import { YamlMetaInfo } from '../DataTypes.mjs'
 
 export function getFrontMatter(description: string | Buffer = '') {
   const matter = grayMatter(description)

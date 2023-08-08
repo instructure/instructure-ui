@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import type { LibraryOptions, ParsedDoc, ProcessedFile } from '../DataTypes'
+import type { LibraryOptions, ParsedDoc, ProcessedFile } from '../DataTypes.mjs'
 
 const CATEGORY_DELIMITER = '/'
 

@@ -58,10 +58,7 @@ type InPlaceEditOwnProps = {
    * Return value:
    * - element: the editor DOM sub-tree.
    */
-  renderEditor: ({
-    onBlur,
-    editorRef
-  }: {
+  renderEditor: (data: {
     onBlur: () => void
     editorRef: (el: HTMLElement | null) => void
   }) => React.ReactNode

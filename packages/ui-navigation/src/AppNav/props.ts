@@ -80,7 +80,7 @@ type AppNavOwnProps = {
    * the navigation changes. Passes in the `visibleItemsCount` as
    * a parameter.
    */
-  onUpdate?: ({ visibleItemsCount }: { visibleItemsCount: number }) => void
+  onUpdate?: (visibleItemsCount: { visibleItemsCount: number }) => void
   /**
    * Sets the number of navigation items that are visible.
    */

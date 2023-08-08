@@ -22,38 +22,39 @@
  * SOFTWARE.
  */
 
-import { getJSDoc } from './getJSDoc'
-import { getReactDoc } from './getReactDoc'
-import { getFrontMatter } from './getFrontMatter'
+import { getJSDoc } from './getJSDoc.mjs'
+import { getReactDoc } from './getReactDoc.mjs'
+import { getFrontMatter } from './getFrontMatter.mjs'
 import path from 'path'
-import { ParsedCodeData, YamlMetaInfo } from '../DataTypes'
+import type { ParsedJSDoc, YamlMetaInfo } from '../DataTypes.mjs'
+import type { Documentation } from 'react-docgen'
 
 export function parseDoc(
   resourcePath: string,
   source: Buffer,
   errorHandler: (err: Error) => void
-): ParsedCodeData & YamlMetaInfo {
+): Documentation & YamlMetaInfo & ParsedJSDoc {
   const extension = path.extname(resourcePath)
   const allowedExtensions = ['.js', '.ts', '.tsx']
-  let doc: ParsedCodeData
+  let doc: Documentation | undefined
 
   if (extension === '.md') {
-    doc = { description: source }
+    doc = { description: source as unknown as string}
   } else if (allowedExtensions.includes(extension)) {
     doc = getReactDoc(source, resourcePath, errorHandler)
-    if (!doc.props) {
+    if (!doc || !doc.props) {
       doc = getJSDoc(source, errorHandler)
     }
   } else {
     errorHandler(new Error('not allowed extension ' + extension))
-    doc = { description: source }
+    doc = { description: source as unknown as string}
   }
   // the YAML description in a JSDoc comment at the top of some files
   let frontMatter: YamlMetaInfo
   try {
-    frontMatter = getFrontMatter(doc.description)
+    frontMatter = getFrontMatter(doc?.description)
   } catch (e) {
-    throw `Failed to parse YAML "${doc.description}" \nexception is \n${e}`
+    throw `Failed to parse YAML "${doc?.description}" \nexception is \n${e}`
   }
   return {
     ...doc,

@@ -24,15 +24,15 @@
 
 import fs from 'fs'
 import path from 'path'
-import { parseDoc } from './utils/parseDoc'
-import { getPathInfo } from './utils/getPathInfo'
-import type { LibraryOptions, ProcessedFile } from './DataTypes'
+import { parseDoc } from './utils/parseDoc.mjs'
+import { getPathInfo } from './utils/getPathInfo.mjs'
+import type { LibraryOptions, ProcessedFile } from './DataTypes.mjs'
 
 export function processFile(
   fullPath: string,
   projectRoot: string,
   library: LibraryOptions
-) {
+): ProcessedFile {
   // eslint-disable-next-line no-console
   console.info(`Processing ${fullPath}`)
   const source = fs.readFileSync(fullPath)
@@ -40,10 +40,10 @@ export function processFile(
   const pathInfo = getPathInfo(fullPath, projectRoot, library)
 
   const doc = parseDoc(fullPath, source, (err: Error) => {
-    console.warn('Error when parsing ', fullPath, err.toString())
+    console.warn('Error when parsing ', fullPath, ":\n", err.stack)
   })
-  const docData = { ...doc, ...pathInfo } as ProcessedFile
-  // TODO dockblock is always undefined. Either show this or delete.
+  const docData: ProcessedFile = { ...doc, ...pathInfo } as ProcessedFile
+  // TODO docblock is always undefined. Either show this or delete.
   docData.methods = docData.methods
     ? docData.methods.filter((method) => method.docblock !== null)
     : undefined

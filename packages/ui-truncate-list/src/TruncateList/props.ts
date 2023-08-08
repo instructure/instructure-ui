@@ -57,7 +57,7 @@ type TruncateListOwnProps = {
    * the navigation changes. Passes in the `visibleItemsCount` as
    * a parameter.
    */
-  onUpdate?: ({ visibleItemsCount }: { visibleItemsCount: number }) => void
+  onUpdate?: (visibleItemsCount: { visibleItemsCount: number }) => void
 
   /**
    * The spacing between list items (in 'rem', 'em' or 'px')
