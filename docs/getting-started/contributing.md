@@ -75,7 +75,7 @@ Please update the documentation and examples with any changes.
 
 ### Commit Guidelines
 
-1. Run `yarn commit` to commit your changes and follow our commit message format.
+1. Run `git commit` to commit your changes and follow our commit message format.
 1. Please do not include the output of `yarn build` in your commits.
 
 ### Adding a package

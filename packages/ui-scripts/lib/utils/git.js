@@ -23,8 +23,6 @@
  */
 import { runCommandSync, error, info, warn } from '@instructure/command-utils'
 
-import validateMessage from 'validate-commit-msg'
-
 const USERNAME = 'instructure-ui-ci'
 const EMAIL = 'instui-dev@instructure.com'
 
@@ -99,28 +97,6 @@ export function checkIfGitTagExists(version) {
     )
     process.exit(1)
   }
-}
-
-export function commit() {
-  setupGit()
-  try {
-    runGitCommand(['commit', '--dry-run'])
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
-  try {
-    runCommandSync('yarn', ['husky:pre-commit'])
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
-  return runCommandSync('git-cz')
-}
-
-export function lintCommitMessage() {
-  const commitMessage = runGitCommand(['log', '-1', '--pretty=%B'])
-  return validateMessage(commitMessage)
 }
 
 export function createGitTagForRelease(version) {

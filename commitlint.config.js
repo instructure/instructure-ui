@@ -21,21 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { error } from '@instructure/command-utils'
-
-import { lintCommitMessage } from '../utils/git.js'
-
-export default {
-  command: 'lint-commit',
-  desc: 'lint commit message',
-  handler: (argv) => {
-    const isValid = lintCommitMessage()
-    if (!isValid) {
-      error(
-        '(See https://www.npmjs.com/package/conventional-changelog-angular)'
-      )
-      process.exit(1)
-    }
+module.exports = {
+  extends: ['@commitlint/config-conventional'],
+  parserOpts: {
+    headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
+    headerCorrespondence: ['type', 'scope', 'subject']
+  },
+  rules: {
+    'type-enum': [
+      2,
+      'always',
+      [
+        'WIP',
+        'feat',
+        'fix',
+        'docs',
+        'chore',
+        'style',
+        'refactor',
+        'test',
+        'perf',
+        'revert'
+      ]
+    ],
+    'type-case': [0]
   }
 }
