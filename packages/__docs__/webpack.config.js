@@ -29,65 +29,71 @@ const baseConfig = require('@instructure/ui-webpack-config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const chokidar = require('chokidar')
 const { merge } = require('webpack-merge')
-const {
-  pathsToProcess,
-  pathsToIgnore,
-  processSingleFile
-} = require('./lib/build-docs')
 
 const outputPath = path.resolve(__dirname, '__build__')
 const resolveAliases = DEBUG ? { resolve: require('./resolve') } : {}
 
-const config = merge(baseConfig, {
-  entry: {
-    // main entry point
-    main: './src/index.js'
-  },
-  module: {
-    // suppress "the request of a dependency is an expression" warnings
-    exprContextCritical: false,
+// This needs to be a promise, so we can import build-docs.mjs
+// build-docs.mjs needs to have ESM imports because React-docgen uses ESM imports
+const configPromise = new Promise(function (resolve, reject) {
+  import('./lib/build-docs.mjs').then((buildDocs) => {
+    resolve(
+      merge(baseConfig, {
+        entry: {
+          // main entry point
+          main: './src/index.js'
+        },
+        module: {
+          // suppress "the request of a dependency is an expression" warnings
+          exprContextCritical: false,
 
-    rules: [
-      {
-        test: /\.svg/,
-        type: 'asset/source'
-      }
-    ]
-  },
-  output: {
-    path: outputPath,
-    filename: '[name].js'
-  },
-  devServer: {
-    static: {
-      directory: outputPath
-    },
-    host: '0.0.0.0',
-    // listen to changes do docs source files and rebuild the JSON if they change
-    onListening: function () {
-      chokidar
-        .watch(pathsToProcess, { ignored: pathsToIgnore, cwd: '../../' })
-        .on('change', (evt) => {
-          const projectRoot = path.resolve(__dirname, '../../')
-          const fullPath = path.join(projectRoot, evt)
-          processSingleFile(fullPath)
-        })
-    },
-    client: {
-      overlay: false
-    }
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      chunks: ['main']
-    })
-  ],
-  optimization: {
-    usedExports: true
-  },
-  ...resolveAliases,
-  mode: 'production'
+          rules: [
+            {
+              test: /\.svg/,
+              type: 'asset/source'
+            }
+          ]
+        },
+        output: {
+          path: outputPath,
+          filename: '[name].js'
+        },
+        devServer: {
+          static: {
+            directory: outputPath
+          },
+          host: '0.0.0.0',
+          // listen to changes do docs source files and rebuild the JSON if they change
+          onListening: function () {
+            chokidar
+              .watch(buildDocs.pathsToProcess, {
+                ignored: buildDocs.pathsToIgnore,
+                cwd: '../../'
+              })
+              .on('change', (evt) => {
+                const projectRoot = path.resolve(__dirname, '../../')
+                const fullPath = path.join(projectRoot, evt)
+                buildDocs.processSingleFile(fullPath)
+              })
+          },
+          client: {
+            overlay: false
+          }
+        },
+        plugins: [
+          new HtmlWebpackPlugin({
+            template: './src/index.html',
+            chunks: ['main']
+          })
+        ],
+        optimization: {
+          usedExports: true
+        },
+        ...resolveAliases,
+        mode: 'production'
+      })
+    )
+  })
 })
 
-module.exports = config
+module.exports = configPromise

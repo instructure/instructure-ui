@@ -24,8 +24,8 @@
 
 import globby from 'globby'
 import path from 'path'
-import { getClientProps } from './utils/getClientProps'
-import { processFile } from './processFile'
+import { getClientProps } from './utils/getClientProps.mjs'
+import { processFile } from './processFile.mjs'
 import fs from 'fs'
 import { theme as canvasTheme } from '@instructure/canvas-theme'
 import { theme as canvasHighContrastTheme } from '@instructure/canvas-high-contrast-theme'
@@ -34,17 +34,23 @@ import type {
   IconFormat,
   LibraryOptions,
   MainDocsData,
-  MainIconsData,
-  ProcessedFile
-} from './DataTypes'
-import { getFrontMatter } from './utils/getFrontMatter'
+  MainIconsData
+} from './DataTypes.mjs'
+import { getFrontMatter } from './utils/getFrontMatter.mjs'
+import { createRequire } from "module"
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const require = createRequire(import.meta.url)
+
+// This needs to be required otherwise TSC will mess up the directory structure
+// in the output directory
+const rootPackage = require('../../../package.json') // root package.json
 
 const buildDir = './__build__/'
 const projectRoot = path.resolve(__dirname, '../../../')
 const packagesDir = '../..'
-// there need to be required otherwise TSC will mess up the directory structure
-// in the build directory
-const rootPackage = require('../../../package.json') // root package.json
 const library: LibraryOptions = {
   name: rootPackage.name,
   version: rootPackage.version,
@@ -56,15 +62,14 @@ const library: LibraryOptions = {
 
 const pathsToProcess = [
   // these can be commented out for faster debugging
-  //'CHANGELOG.md',
-  //'**/packages/**/*.md', // package READMEs
-  //'**/docs/**/*.md', // general docs
-  //'**/src/*.{js,ts,tsx}', // util src files
-  //'**/src/*/*.{js,ts,tsx}', // component src files
-  //'**/src/*/*/*.{js,ts,tsx}', // child component src files,
-  //'CODE_OF_CONDUCT.md',
-  //'LICENSE.md',
-  '**/debounce.ts'
+  'CHANGELOG.md',
+  '**/packages/**/*.md', // package READMEs
+  '**/docs/**/*.md', // general docs
+  '**/src/*.{js,ts,tsx}', // util src files
+  '**/src/*/*.{js,ts,tsx}', // component src files
+  '**/src/*/*/*.{js,ts,tsx}', // child component src files
+  'CODE_OF_CONDUCT.md',
+  'LICENSE.md'
 ]
 
 const pathsToIgnore = [
@@ -118,6 +123,7 @@ function buildDocs() {
   const { COPY_VERSIONS_JSON = '1' } = process.env
   const shouldDoTheVersionCopy = Boolean(parseInt(COPY_VERSIONS_JSON))
 
+  // globby needs the posix format
   const files = pathsToProcess.map((file) => path.posix.join(packagesDir, file))
   const ignore = pathsToIgnore.map((file) => path.posix.join(packagesDir, file))
   globby(files, { ignore })
@@ -174,7 +180,7 @@ function buildDocs() {
 
 // This function is also called by Webpack if a file changes
 function processSingleFile(fullPath: string) {
-  let docObject: ProcessedFile
+  let docObject
   const dirName = path.dirname(fullPath)
   const fileName = path.parse(fullPath).name
   if (fileName === 'index') {

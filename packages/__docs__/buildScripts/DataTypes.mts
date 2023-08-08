@@ -23,9 +23,14 @@
  */
 
 // This is the format of the saved JSON files
-type ProcessedFile = ParsedCodeData &
+import { Documentation } from 'react-docgen'
+
+type ProcessedFile =
+  Documentation &
   YamlMetaInfo &
-  PackagePathData & { id: string; title: string }
+  ParsedJSDoc &
+  PackagePathData &
+  { title: string, id:string }
 
 type PackagePathData = {
   extension: string
@@ -46,6 +51,7 @@ type YamlMetaInfo = {
   describes?: string
   description: string
   id?: string
+  title?: string
   isWIP?: boolean
   order?: string
   parent?: string
@@ -54,30 +60,23 @@ type YamlMetaInfo = {
   tags?: string
 }
 
-// this is parsed by getReactDoc/getJSDoc
-type ParsedCodeData = {
-  // these are from JSDoc
-  // it can have Buffer type only during parsing
-  description?: string | Buffer
-  displayName?: string
-  kind?: string
-  //TODO This seems always be empty, remove it (added via JSDoc)
-  sections?: any[]
-  undocumented?: boolean
+type ParsedJSDoc = {
+  comment?: string,
+  meta?: any,
+  description?: string,
+  kind?: string,
+  name?: string,
   params?: {
     description?: string
     defaultValue?: string | number | boolean
     name: string
     type?: { names: string[] }
     optional?: boolean
-  }[]
-  returns?: JSDocFunctionReturns[]
-  // these are from https://github.com/reactjs/react-docgen/blob/main/src/Documentation.ts
-  props?: Record<string, PropDescriptor>
-  context?: Record<string, PropDescriptor>
-  childContext?: Record<string, PropDescriptor>
-  composes?: string[]
-  methods?: MethodDescriptor[] // TODO seems always empty, processFile filters all out
+  }[],
+  returns?: JSDocFunctionReturns[],
+  longName?: string,
+  sections?: any[],
+  undocumented?: boolean
 }
 
 type JSDocFunctionReturns = {
@@ -86,7 +85,7 @@ type JSDocFunctionReturns = {
     names: string[]
   }
 }
-
+// TODO remove these types, now we can get them directly from react-docgen
 interface MethodParameter {
   name: string
   type?: TypeDescriptor | null
@@ -95,17 +94,6 @@ interface MethodParameter {
 
 interface MethodReturn {
   type: TypeDescriptor | undefined
-}
-
-type MethodModifier = 'static' | 'generator' | 'async' | 'get' | 'set'
-
-interface MethodDescriptor {
-  name: string
-  description?: string | null
-  docblock: string | null
-  modifiers: MethodModifier[]
-  params: MethodParameter[]
-  returns: MethodReturn | null
 }
 
 interface PropDescriptor {
@@ -281,10 +269,8 @@ export type {
   ProcessedFile,
   PackagePathData,
   YamlMetaInfo,
-  ParsedCodeData,
   JSDocFunctionReturns,
   PropDescriptor,
-  MethodDescriptor,
   MethodParameter,
   MethodReturn,
   TypeDescriptor,
@@ -298,5 +284,6 @@ export type {
   IconFormat,
   IconGlyph,
   MainDocsData,
-  MainIconsData
+  MainIconsData,
+  ParsedJSDoc
 }

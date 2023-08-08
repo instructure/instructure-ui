@@ -23,10 +23,7 @@
  */
 
 import path from 'path'
-import { ParsedCodeData } from '../DataTypes'
-
-// for some reason it doesnt work as import..
-const reactDocgen = require('react-docgen')
+import { parse, builtinResolvers, makeFsImporter, Documentation } from 'react-docgen'
 
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found.'
 
@@ -35,31 +32,28 @@ export function getReactDoc(
   fileName: string,
   error: (err: Error) => void
 ) {
-  let doc: ParsedCodeData = {}
+  let doc: Documentation | undefined = undefined
   try {
-    doc = reactDocgen.parse(
+    let parsed = parse(
       source,
-      reactDocgen.resolver.findAllExportedComponentDefinitions,
-      null,
       {
+        resolver: new builtinResolvers.FindExportedDefinitionsResolver(),
         filename: fileName,
-        importer: reactDocgen.importers.makeFsImporter()
+        importer: makeFsImporter()
       }
     )
-    if (Array.isArray(doc)) {
-      if (doc.length > 1) {
-        // If a file has multiple exports this will choose the one that has the
-        // same name in its path.
-        for (const docExport of doc) {
-          const filePathArray = fileName.split(path.sep)
-          if (filePathArray.includes(docExport.displayName)) {
-            doc = docExport
-            break
-          }
+    if (parsed.length > 1) {
+      // If a file has multiple exports this will choose the one that has the
+      // same name in its path.
+      for (const docExport of parsed) {
+        const filePathArray = fileName.split(path.sep)
+        if (docExport.displayName && filePathArray.includes(docExport.displayName)) {
+          doc = docExport
+          break
         }
-      } else {
-        doc = doc.pop()
       }
+    } else {
+      doc = parsed.pop()
     }
   } catch (err: any) {
     if (err.message !== ERROR_MISSING_DEFINITION) {

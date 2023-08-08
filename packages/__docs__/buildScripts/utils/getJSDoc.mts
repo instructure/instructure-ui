@@ -23,12 +23,12 @@
  */
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore This package does not have typings :(
+// @ts-ignore no typing :(
 import jsdoc from 'jsdoc-api'
-import { ParsedCodeData } from '../DataTypes'
+import type { ParsedJSDoc } from '../DataTypes.mjs'
 
 export function getJSDoc(source: Buffer, error: (err: Error) => void) {
-  let doc: ParsedCodeData = {}
+  let doc: ParsedJSDoc = {}
   try {
     const sections = jsdoc
       .explainSync({

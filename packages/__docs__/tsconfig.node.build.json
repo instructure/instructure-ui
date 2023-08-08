@@ -2,7 +2,11 @@
   "extends": "../../tsconfig.node.json",
   "compilerOptions": {
     "declarationDir": "./types",
-    "outDir": "./lib"
+    "module": "ES2022",
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    "outDir": "./lib",
+    "resolveJsonModule": true
   },
   "include": ["buildScripts/**/*"]
 }
