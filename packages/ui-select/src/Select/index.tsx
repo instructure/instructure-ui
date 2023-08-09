@@ -673,13 +673,6 @@ class Select extends Component<SelectProps> {
     const highlightedOptionId = this.highlightedOptionId
     const selectedOptionId = this.selectedOptionId
 
-    // props.width should apply to the whole component, not just the input in it
-    const extendedStyle = {
-      ...(styles?.select as object),
-      width: this.props.width || '100%',
-      display: 'inline-block'
-    }
-
     return (
       <Selectable
         highlightedOptionId={highlightedOptionId}
@@ -697,7 +690,7 @@ class Select extends Component<SelectProps> {
           getDescriptionProps
         }) => (
           <span
-            {...getRootProps({ css: extendedStyle })}
+            {...getRootProps({ css: styles?.select })}
             ref={(el) => (this.ref = el)}
           >
             {this.renderInput({ getInputProps, getTriggerProps })}

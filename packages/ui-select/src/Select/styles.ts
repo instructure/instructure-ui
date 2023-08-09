@@ -36,7 +36,7 @@ const generateStyle = (
   componentTheme: SelectTheme,
   props: SelectProps
 ): SelectStyle => {
-  const { size } = props
+  const { size, width } = props
 
   const iconSizeVariants = {
     small: { fontSize: componentTheme.smallIconSize },
@@ -50,7 +50,9 @@ const generateStyle = (
       fontSize: componentTheme.fontSize,
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
-      color: componentTheme.color
+      color: componentTheme.color,
+      display: 'inline-block',
+      width: width || '100%'
     },
     icon: {
       label: 'select__icon',
