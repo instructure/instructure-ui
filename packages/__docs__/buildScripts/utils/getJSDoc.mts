@@ -50,8 +50,8 @@ export function getJSDoc(source: Buffer, error: (err: Error) => void) {
       sections[0] ||
       {}
     if (process.platform === 'win32' && module.description) {
-      // JSDOC bug https://github.com/jsdoc/jsdoc/issues/2067
-      module.description = module.description.replace("\r", "\r\n")
+      // JSDoc bug https://github.com/jsdoc/jsdoc/issues/2067
+      module.description = module.description.replace(/\r/g, "\r\n")
     }
     doc = {
       ...module,
