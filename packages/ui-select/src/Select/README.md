@@ -835,6 +835,190 @@ render(
 )
 ```
 
+##### Using groups with autocomplete on Safari
+
+Due to a WebKit bug if you are using `Select.Group` with autocomplete, the screenreader won't announce highlight/selection changes. This only seems to be an issue in Safari. Here is an example how you can work around that:
+
+```javascript
+---
+example: true
+render: false
+---
+
+class GroupSelectAutocompleteExample extends React.Component {
+  state = {
+    inputValue: '',
+    isShowingOptions: false,
+    highlightedOptionId: null,
+    selectedOptionId: null,
+    filteredOptions: this.props.options,
+    announcement: null
+  }
+
+  getOptionById (id) {
+    const options = this.props.options
+    return Object.values(options)
+      .flat()
+      .find((o) => o?.id === id);
+  }
+
+  filterOptions (value, options) {
+    const filteredOptions = {};
+    Object.keys(options).forEach((key) => {
+      filteredOptions[key] = options[key]?.filter(
+          (option) =>
+            option.label.toLowerCase().includes(value.toLowerCase())
+          );
+      });
+    const optionsWithoutEmptyKeys = Object.keys(filteredOptions)
+                                      .filter((k) => filteredOptions[k].length > 0)
+                                      .reduce((a, k) => ({ ...a, [k]: filteredOptions[k] }), {});
+    return optionsWithoutEmptyKeys;
+  };
+
+  handleShowOptions = (event) => {
+    this.setState({
+      isShowingOptions: true,
+      highlightedOptionId: null
+    })
+  }
+
+  handleHideOptions = (event) => {
+    const { selectedOptionId } = this.state
+    this.setState({
+      isShowingOptions: false,
+      highlightedOptionId: null
+    })
+  }
+
+  handleBlur = (event) => {
+    this.setState({
+      highlightedOptionId: null
+    })
+  }
+
+  handleHighlightOption = (event, { id }) => {
+    event.persist()
+    const option = this.getOptionById(id)
+    setTimeout(() => {
+      this.setState((state) => ({
+        announcement: option.label
+      }))
+    }, 0)
+    this.setState((state) => ({
+      highlightedOptionId: id,
+    }))
+  }
+
+  handleSelectOption = (event, { id }) => {
+    const option = this.getOptionById(id)
+    if (!option) return // prevent selecting of empty option
+    this.setState({
+      selectedOptionId: id,
+      inputValue: option.label,
+      isShowingOptions: false,
+      filteredOptions: this.props.options,
+      announcement: option.label
+    })
+  }
+
+  handleInputChange = (event) => {
+    const value = event.target.value
+    const newOptions = this.filterOptions(value, this.props.options)
+    this.setState((state) => ({
+      inputValue: value,
+      filteredOptions: newOptions,
+      highlightedOptionId: newOptions.length > 0 ? newOptions[0].id : null,
+      isShowingOptions: true,
+      selectedOptionId: value === '' ? null : state.selectedOptionId,
+    }))
+  }
+
+  renderGroup () {
+    const filteredOptions = this.state.filteredOptions
+    const { highlightedOptionId, selectedOptionId } = this.state
+
+    return Object.keys(filteredOptions).map((key, index) => {
+      return (
+        <Select.Group key={index} renderLabel={key}>
+          {filteredOptions[key].map((option) => (
+            <Select.Option
+              key={option.id}
+              id={option.id}
+              isHighlighted={option.id === highlightedOptionId}
+              isSelected={option.id === selectedOptionId}
+            >
+              { option.label }
+            </Select.Option>
+          ))}
+        </Select.Group>
+      )
+    })
+  }
+
+  renderScreenReaderHelper () {
+    const announcement = this.state.announcement
+    return window.safari && (
+      <ScreenReaderContent>
+        <span role="alert" aria-live="assertive">{announcement}</span>
+      </ScreenReaderContent>
+    )
+  }
+
+  render () {
+    const {
+      inputValue,
+      isShowingOptions,
+      highlightedOptionId,
+      selectedOptionId,
+      filteredOptions
+    } = this.state
+
+    return (
+      <div>
+        <Select
+          placeholder="Start typing to search..."
+          renderLabel="Group Select with autocomplete"
+          assistiveText="Type or use arrow keys to navigate options."
+          inputValue={inputValue}
+          isShowingOptions={isShowingOptions}
+          onBlur={this.handleBlur}
+          onInputChange={this.handleInputChange}
+          onRequestShowOptions={this.handleShowOptions}
+          onRequestHideOptions={this.handleHideOptions}
+          onRequestHighlightOption={this.handleHighlightOption}
+          onRequestSelectOption={this.handleSelectOption}
+        >
+          {this.renderGroup()}
+        </Select>
+        {this.renderScreenReaderHelper()}
+      </div>
+    )
+  }
+}
+
+render(
+  <View>
+    <GroupSelectAutocompleteExample
+      options={{
+        'Western': [
+          { id: 'opt5', label: 'Alaska' },
+          { id: 'opt6', label: 'California' },
+          { id: 'opt7', label: 'Colorado' },
+          { id: 'opt8', label: 'Idaho' }
+        ],
+        'Eastern': [
+          { id: 'opt1', label: 'Alabama' },
+          { id: 'opt2', label: 'Connecticut' },
+          { id: 'opt3', label: 'Delaware' },
+          { id: '4', label: 'Illinois' }
+        ]
+      }}
+    />
+  </View>
+)
+```
+
 #### Asynchronous option loading
 
 If no results match the user's search, it's recommended to leave `isShowingOptions` as `true` and to display an "empty option" as a way of communicating that there are no matches. Similarly, it's helpful to display a [Spinner](#Spinner) in an empty option while options load.
