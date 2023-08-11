@@ -13,23 +13,21 @@ For the most basic implementations, `SimpleSelect` can be uncontrolled. If desir
 example: true
 render: true
 ---
-<span>
-  <SimpleSelect renderLabel="Uncontrolled Select" width="8rem">
-    <SimpleSelect.Option id="foo" value="foo"
-                        renderBeforeLabel={(props) => {
-                          return <IconCheckSolid />
-                        }}>
-      Foo
-    </SimpleSelect.Option>
-    <SimpleSelect.Option id="bar" value="bar">
-      Bar
-    </SimpleSelect.Option>
-    <SimpleSelect.Option id="baz" value="baz">
-      Baz
-    </SimpleSelect.Option>
-  </SimpleSelect>
-  <IconButton color="primary" screenReaderLabel="Add blog post"><IconAddLine /></IconButton>
-</span>
+<SimpleSelect renderLabel="Uncontrolled Select">
+  <SimpleSelect.Option id="foo" value="foo"
+                       renderBeforeLabel={(props) => {
+                         console.log(props)
+                         return <IconCheckSolid />
+                       }}>
+    Foo
+  </SimpleSelect.Option>
+  <SimpleSelect.Option id="bar" value="bar">
+    Bar
+  </SimpleSelect.Option>
+  <SimpleSelect.Option id="baz" value="baz">
+    Baz
+  </SimpleSelect.Option>
+</SimpleSelect>
 ```
 
 ### Controlled
