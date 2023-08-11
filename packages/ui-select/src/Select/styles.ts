@@ -50,9 +50,9 @@ const generateStyle = (
       fontSize: componentTheme.fontSize,
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
-      color: componentTheme.color,
-      display: 'inline-block',
-      width: width || '100%'
+      color: componentTheme.color
+      // display: 'inline-block',
+      // width: width || '100%'
     },
     icon: {
       label: 'select__icon',
