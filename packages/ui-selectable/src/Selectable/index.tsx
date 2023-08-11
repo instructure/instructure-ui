@@ -169,7 +169,6 @@ class Selectable extends Component<SelectableProps> {
       return render({
         getRootProps: ({ onMouseDown, onClick, ...rest } = {}) => {
           return {
-            // onClick: createChainedFunction(this.handleOpenClose, onClick),
             onMouseDown: createChainedFunction((event: React.MouseEvent) => {
               if (event.target !== this._trigger) {
                 event.preventDefault() // prevent trigger from losing focus
@@ -182,15 +181,17 @@ class Selectable extends Component<SelectableProps> {
         getLabelProps: (props) => {
           return {
             htmlFor: this._id,
-            ...props,
-            onClick: () => {
-              // eslint-disable-next-line no-console
-              console.log('label onClick')
-            }
+            ...props
           }
         },
 
-        getTriggerProps: ({ ref, onKeyDown, onKeyUp, ...rest } = {}) => {
+        getTriggerProps: ({
+          ref,
+          onKeyDown,
+          onKeyUp,
+          onClick,
+          ...rest
+        } = {}) => {
           return {
             id: this._id,
             ref: createChainedFunction(
@@ -207,6 +208,7 @@ class Selectable extends Component<SelectableProps> {
               : undefined,
             onKeyDown: createChainedFunction(this.handleKeyDown, onKeyDown),
             onKeyUp: createChainedFunction(this.handleKeyUp, onKeyUp),
+            onClick: createChainedFunction(this.handleOpenClose, onClick),
             ...rest
           }
         },
