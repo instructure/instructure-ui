@@ -55,7 +55,7 @@ function safeCloneElement<
   P extends GetProps<E> = GetProps<E>
 >(
   element: { ref?: any } & E,
-  props: { style?: any } & Attributes & P,
+  props: { style?: any } & Partial<Attributes> & Partial<P>,
   ...children: ReactNode[]
 ) {
   const cloneRef = props.ref

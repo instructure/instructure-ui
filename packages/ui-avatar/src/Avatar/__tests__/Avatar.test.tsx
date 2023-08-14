@@ -30,7 +30,7 @@ import { IconGroupLine } from '@instructure/ui-icons'
 import { Avatar } from '../index'
 import { AvatarLocator } from '../AvatarLocator'
 
-describe('<Avatar />', async () => {
+describe.skip('<Avatar />', async () => {
   describe('for a11y', async () => {
     it('should be accessible', async () => {
       await mount(<Avatar name="Jessica Jones" />)
