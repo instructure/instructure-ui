@@ -61,10 +61,6 @@ const GLOBAL_THEME_REGISTRY = '__GLOBAL_THEME_REGISTRY__'
 
 // initialize the registry:
 if (globalThis[GLOBAL_THEME_REGISTRY]) {
-  error(
-    false,
-    `[theme-registry] A theme registry has already been initialized. Ensure that you are importing only one copy of '@instructure/theme-registry'.`
-  )
   // initialize the registry using whatever has been previously defined:
   setRegistry(validateRegistry(globalThis[GLOBAL_THEME_REGISTRY]))
 } else {
