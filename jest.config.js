@@ -21,31 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-const path = require('path')
-const globby = require('globby')
-
-module.exports = function (uiTestScopePaths) {
-  const files = ['packages/**/*.test.{js,ts,tsx}']
-  const ignore = [
-    'packages/ui-codemods/**',
-    '**/node_modules/**',
-    '**/__new-tests__/**'
-  ]
-
-  return globby
-    .sync(files, { ignore })
-    .map((filePath) => path.normalize(filePath))
-    .filter((testFilePath) => {
-      if (typeof uiTestScopePaths !== 'string') return true
-      const scopePaths = uiTestScopePaths
-        .split(',')
-        .map((p) => path.normalize(p.trim()))
-      return (
-        scopePaths.findIndex(
-          (scopePath) =>
-            testFilePath === scopePath || testFilePath.startsWith(scopePath)
-        ) >= 0
-      )
-    })
+/** @type {import('ts-jest').JestConfigWithTsJest} */
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
+  testMatch: ['**/__new-tests__/**/*.test.tsx'],
+  coverageThreshold: {
+    global: {
+      statements: 87,
+      branches: 70,
+      functions: 80,
+      lines: 87
+    }
+  }
 }

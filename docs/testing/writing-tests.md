@@ -1,10 +1,12 @@
 ---
-title: Writing tests
+title: Writing tests (legacy)
 category: Testing
 order: 3
 ---
 
-> This section uses `@instructure/ui-test-utils` testing library, plsease see the installation and configuration [here](/#ui-test-utils)
+> This section uses [`@instructure/ui-test-utils`](/#ui-test-utils) testing library which will be sunset in our next
+> release in favor of Jest + React Testing Library. See [our guide](/#converting-old-tests) on how to convert legacy tests to use the new
+> frameworks.
 
 ## The anatomy of a test
 
