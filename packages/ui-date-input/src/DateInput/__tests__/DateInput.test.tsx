@@ -28,7 +28,8 @@ import {
   mount,
   stub,
   wait,
-  generateA11yTests
+  generateA11yTests,
+  find
 } from '@instructure/ui-test-utils'
 import { Calendar } from '@instructure/ui-calendar'
 
@@ -338,8 +339,8 @@ describe('<DateInput />', async () => {
           </DateInput>
         )
 
-        const dateInput = await DateInputLocator.find('label')
-        await dateInput.click()
+        const dateInputLabel = await find('label')
+        await dateInputLabel.click()
         expect(onRequestShowCalendar).to.have.been.calledOnce()
       })
 
