@@ -167,7 +167,7 @@ class Selectable extends Component<SelectableProps> {
 
     if (typeof render === 'function') {
       return render({
-        getRootProps: ({ onMouseDown, onClick, ...rest } = {}) => {
+        getRootProps: ({ onMouseDown, ...rest } = {}) => {
           return {
             onMouseDown: createChainedFunction((event: React.MouseEvent) => {
               if (event.target !== this._trigger) {
