@@ -325,7 +325,7 @@ describe('<DateInput />', async () => {
     })
 
     describe('onRequestShowCalendar', async () => {
-      it('should call onRequestShowCalendar when root is clicked', async () => {
+      it('should call onRequestShowCalendar when label is clicked', async () => {
         const onRequestShowCalendar = stub()
 
         await mount(
@@ -338,7 +338,7 @@ describe('<DateInput />', async () => {
           </DateInput>
         )
 
-        const dateInput = await DateInputLocator.find()
+        const dateInput = await DateInputLocator.find('label')
         await dateInput.click()
         expect(onRequestShowCalendar).to.have.been.calledOnce()
       })
