@@ -60,8 +60,8 @@ describe('<Selectable />', async () => {
     </span>
   )
 
-  it('should focus trigger when root is clicked', async () => {
-    const subject = await mount(
+  it('should focus trigger when label is clicked', async () => {
+    await mount(
       <Selectable>
         {(selectable) => (
           <span {...selectable.getRootProps()}>
@@ -82,21 +82,21 @@ describe('<Selectable />', async () => {
         )}
       </Selectable>
     )
-    const root = within(subject.getDOMNode())
+    const label = await find('label')
     const input = await find('input')
 
     expect(input.focused()).to.be.false()
 
-    await root.click()
+    await label.click()
     expect(input.focused()).to.be.true()
   })
 
-  it('should not blur trigger when root is clicked', async () => {
+  it('should not blur trigger when label is clicked', async () => {
     const onFocus = stub()
 
     const onBlur = stub()
 
-    const subject = await mount(
+    await mount(
       <Selectable>
         {(selectable) => (
           <span {...selectable.getRootProps()}>
@@ -119,14 +119,14 @@ describe('<Selectable />', async () => {
         )}
       </Selectable>
     )
-    const root = within(subject.getDOMNode())
+    const label = await find('label')
     const input = await find('input')
 
     expect(input.focused()).to.be.false()
 
-    await root.click()
-    await root.mouseDown()
-    await root.click()
+    await label.click()
+    await label.mouseDown()
+    await label.click()
 
     expect(onFocus).to.have.been.calledOnce()
     expect(onBlur).to.not.have.been.called()
@@ -272,7 +272,7 @@ describe('<Selectable />', async () => {
 
   describe('with callbacks', async () => {
     describe('should fire onRequestShowOptions', async () => {
-      it('when root is clicked', async () => {
+      it('when label is clicked', async () => {
         const onRequestShowOptions = stub()
 
         const subject = await mount(
@@ -283,14 +283,14 @@ describe('<Selectable />', async () => {
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
-        const root = within(subject.getDOMNode())
+        const label = await find('label')
 
-        await root.click()
+        await label.click()
         expect(onRequestShowOptions).to.have.been.calledOnce()
 
         await subject.setProps({ isShowingOptions: true })
 
-        await root.click()
+        await label.click()
         expect(onRequestShowOptions).to.have.been.calledOnce()
       })
 
@@ -355,7 +355,7 @@ describe('<Selectable />', async () => {
     })
 
     describe('should fire onRequestHideOptions', async () => {
-      it('when root is clicked', async () => {
+      it('when label is clicked', async () => {
         const onRequestHideOptions = stub()
 
         const subject = await mount(
@@ -366,14 +366,14 @@ describe('<Selectable />', async () => {
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
-        const root = within(subject.getDOMNode())
+        const label = await find('label')
 
-        await root.click()
+        await label.click()
         expect(onRequestHideOptions).to.have.been.calledOnce()
 
         await subject.setProps({ isShowingOptions: false })
 
-        await root.click()
+        await label.click()
         expect(onRequestHideOptions).to.have.been.calledOnce()
       })
 
@@ -610,10 +610,10 @@ describe('<Selectable />', async () => {
       await mount(
         <Selectable onRequestShowOptions={onRequestShowOptions}>
           {(selectable) => (
-            <span {...selectable.getRootProps({ onClick })}>
+            <span>
               <input
                 type="text"
-                {...selectable.getTriggerProps()}
+                {...selectable.getTriggerProps({ onClick })}
                 {...selectable.getInputProps()}
               />
             </span>
