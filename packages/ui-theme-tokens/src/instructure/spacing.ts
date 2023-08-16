@@ -29,6 +29,7 @@ const spacing: Spacing = Object.freeze({
   xxSmall: '0.375rem',
   xSmall: '0.75rem',
   small: '1rem',
+  mediumSmall: '1.25rem',
   medium: '1.5rem',
   large: '2.25rem',
   xLarge: '3rem',
