@@ -200,6 +200,11 @@ type ColorPickerOwnProps = {
   tooltip?: React.ReactNode
 
   /**
+   * The id of the text input. One is generated if not supplied.
+   */
+  id?: string
+
+  /**
    * If set, the component will behave as controlled
    */
   value?: string
@@ -299,12 +304,14 @@ const propTypes: PropValidators<PropKeys> = {
   renderIsRequiredMessage: PropTypes.func,
   renderMessages: PropTypes.func,
   tooltip: PropTypes.node,
+  id: PropTypes.string,
   value: PropTypes.string,
   width: PropTypes.string,
   withAlpha: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
+  'id',
   'checkContrast',
   'colorMixerSettings',
   'children',
