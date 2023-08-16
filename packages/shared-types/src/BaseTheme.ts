@@ -70,6 +70,7 @@ type Spacing = {
   xxSmall: string | 0
   xSmall: string | 0
   small: string | 0
+  mediumSmall: string | 0
   medium: string | 0
   large: string | 0
   xLarge: string | 0

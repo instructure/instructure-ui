@@ -80,6 +80,7 @@ const ThemeablePropValues = {
     xxSmall: 'xx-small',
     xSmall: 'x-small',
     small: 'small',
+    mediumSmall: 'mediumSmall',
     medium: 'medium',
     large: 'large',
     xLarge: 'x-large',
@@ -89,29 +90,31 @@ const ThemeablePropValues = {
 
 // SPACING
 type SpacingKeys = keyof typeof ThemeablePropValues.SPACING
-type SpacingValues = typeof ThemeablePropValues.SPACING[SpacingKeys]
+type SpacingValues = (typeof ThemeablePropValues.SPACING)[SpacingKeys]
 type Spacing = CSSShorthandValue<SpacingValues>
 
 // SHADOW_TYPES
 type ShadowKeys = keyof typeof ThemeablePropValues.SHADOW_TYPES
-type Shadow = typeof ThemeablePropValues.SHADOW_TYPES[ShadowKeys]
+type Shadow = (typeof ThemeablePropValues.SHADOW_TYPES)[ShadowKeys]
 
 // STACKING_TYPES
 type StackingKeys = keyof typeof ThemeablePropValues.STACKING_TYPES
-type Stacking = typeof ThemeablePropValues.STACKING_TYPES[StackingKeys]
+type Stacking = (typeof ThemeablePropValues.STACKING_TYPES)[StackingKeys]
 
 // BACKGROUNDS
 type BackgroundKeys = keyof typeof ThemeablePropValues.BACKGROUNDS
-type Background = typeof ThemeablePropValues.BACKGROUNDS[BackgroundKeys]
+type Background = (typeof ThemeablePropValues.BACKGROUNDS)[BackgroundKeys]
 
 // BORDER_RADII
 type BorderRadiiKeys = keyof typeof ThemeablePropValues.BORDER_RADII
-type BorderRadiiValues = typeof ThemeablePropValues.BORDER_RADII[BorderRadiiKeys]
+type BorderRadiiValues =
+  (typeof ThemeablePropValues.BORDER_RADII)[BorderRadiiKeys]
 type BorderRadii = CSSShorthandValue<BorderRadiiValues>
 
 // BORDER_WIDTHS
 type BorderWidthKeys = keyof typeof ThemeablePropValues.BORDER_WIDTHS
-type BorderWidthValues = typeof ThemeablePropValues.BORDER_WIDTHS[BorderWidthKeys]
+type BorderWidthValues =
+  (typeof ThemeablePropValues.BORDER_WIDTHS)[BorderWidthKeys]
 type BorderWidth = CSSShorthandValue<BorderWidthValues>
 
 export default ThemeablePropValues
