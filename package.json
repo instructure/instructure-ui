@@ -53,7 +53,7 @@
     "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged ts:check:references",
     "husky:pre-push": "yarn lint:commit",
     "build-storybook": "lerna run bundle --stream --scope docs-examples",
-    "prepare": "husky install",
+    "postinstall": "husky install",
     "ts:check": "lerna run ts:check --stream",
     "ts:check:references": "yarn node scripts/checkTSReferences.js"
   },
