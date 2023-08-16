@@ -572,7 +572,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
   )
 
   render() {
-    const { disabled, isRequired, placeholderText, width } = this.props
+    const { disabled, isRequired, placeholderText, width, id } = this.props
 
     return (
       <div
@@ -581,6 +581,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         ref={this.handleRef}
       >
         <TextInput
+          id={id}
           isRequired={isRequired}
           disabled={disabled}
           renderLabel={() => this.renderLabel()}
