@@ -10,7 +10,7 @@ Instructure UI is a mono-repository which means it has multiple packages (almost
 
 The project uses `yarn` for managing these packages and also for resolving dependencies, running scripts and managing the whole mono-repository itself.
 
-> **Note**: Windows OS is not supported as a build platform due to some libraries that we rely on for building Instructure UI do not support Windows
+> **Note**: Windows is only partially supported. One can build the project and documentation apps, running other commands (like testing) fail.
 >
 > Also we're using environment variables through our build pipeline and they are defined differently in Linux/OSX and Windows.
 
