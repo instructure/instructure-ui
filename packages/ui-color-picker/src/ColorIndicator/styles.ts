@@ -23,9 +23,10 @@
  */
 
 import type { ColorIndicatorProps, ColorIndicatorStyle } from './props'
-import { ColorIndicatorTheme } from '@instructure/shared-types'
+import type { ColorIndicatorTheme } from '@instructure/shared-types'
 import type { RGBAType } from '@instructure/ui-color-utils'
-import { colorToRGB, isValid } from '@instructure/ui-color-utils'
+import { isValid } from '@instructure/ui-color-utils'
+import { colorToRGB } from '@instructure/ui-color-utils'
 
 const calcBlendedColor = (c1: RGBAType, c2: RGBAType) => {
   // 0.4 as decided by design
