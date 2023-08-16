@@ -23,17 +23,7 @@ constructed from the existing ones. For these reasons adding a new component has
 
 ### Building InstUI from the source
 
-Follow these steps to download and compile Instructure UI on your machine:
-
-1. Install [Git](http://git-scm.com/).
-1. Install [Node >= 12.20](https://nodejs.org/en/)) (we recommend [nvm](https://github.com/creationix/nvm) to manage multiple Node versions).
-1. Install [Yarn >=1.6](https://yarnpkg.com/lang/en/docs/install/)
-1. Clone the repository with `git clone` (If you want to make changes clone the forked repo in your account.)
-1. Run `cd instructure-ui`
-1. Run `yarn`
-1. Run `yarn bootstrap`
-
-Run `yarn run` to list the available commands.
+Please follow the steps on the [how to build guide page](#building-instui).
 
 ### Running the documentation app
 
