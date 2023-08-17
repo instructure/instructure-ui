@@ -51,7 +51,8 @@ export default {
     if (jspaths.length) {
       commands['eslint'] = getCommand('eslint', [
         ...jspaths,
-        '--ext .js,.jsx,.ts,.tsx',
+        '--ext',
+        '.js,.jsx,.ts,.tsx',
         '--no-error-on-unmatched-pattern'
       ])
     }
