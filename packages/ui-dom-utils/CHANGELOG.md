@@ -3,16 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
+# [8.40.0](https://github.com/instructure/instructure-ui/compare/v8.39.0...v8.40.0) (2023-08-17)
 
+**Note:** Version bump only for package @instructure/ui-dom-utils
+
+# [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
 
 ### Bug Fixes
 
-* **ui-dom-utils:** findFocusable only treats an element as hidden if display is 'none' ([69b3949](https://github.com/instructure/instructure-ui/commit/69b39490e8038e5ab02ec53ec8bd62fe3e876b08))
-
-
-
-
+- **ui-dom-utils:** findFocusable only treats an element as hidden if display is 'none' ([69b3949](https://github.com/instructure/instructure-ui/commit/69b39490e8038e5ab02ec53ec8bd62fe3e876b08))
 
 ## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
 

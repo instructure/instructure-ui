@@ -3,16 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
+# [8.40.0](https://github.com/instructure/instructure-ui/compare/v8.39.0...v8.40.0) (2023-08-17)
 
+**Note:** Version bump only for package @instructure/ui-popover
+
+# [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
 
 ### Bug Fixes
 
-* **ui-a11y-utils:** fix modal closing when losing focus ([5deda70](https://github.com/instructure/instructure-ui/commit/5deda7064ed9f20f6693f0ad46c19a89e096a66a))
-
-
-
-
+- **ui-a11y-utils:** fix modal closing when losing focus ([5deda70](https://github.com/instructure/instructure-ui/commit/5deda7064ed9f20f6693f0ad46c19a89e096a66a))
 
 ## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
 

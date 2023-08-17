@@ -3,13 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.40.0](https://github.com/instructure/instructure-ui/compare/v8.39.0...v8.40.0) (2023-08-17)
+
+### Bug Fixes
+
+- **ui-selectable:** move Selectable onClick listener one level down ([5c40100](https://github.com/instructure/instructure-ui/commit/5c4010098f31d867dff6167e1fcbac5c87168f5c))
+
 # [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
 
 **Note:** Version bump only for package @instructure/ui-selectable
-
-
-
-
 
 ## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
 

@@ -3,13 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.40.0](https://github.com/instructure/instructure-ui/compare/v8.39.0...v8.40.0) (2023-08-17)
+
+### Bug Fixes
+
+- **ui-flex:** documentation wording ([b4a1374](https://github.com/instructure/instructure-ui/commit/b4a1374f16837e894c8f8508b46596d450318362))
+
 # [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
 
 **Note:** Version bump only for package @instructure/ui-flex
-
-
-
-
 
 ## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
 
