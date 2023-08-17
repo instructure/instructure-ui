@@ -34,11 +34,11 @@ function info(...args) {
 }
 
 function warn(...args) {
-  console.warn(chalk.yellow('⚠️   ', ...args))
+  console.warn(chalk.yellow('⚠️ ', ...args))
 }
 
 function error(...args) {
-  console.error(chalk.red('⚠️   ', ...args))
+  console.error(chalk.red('⚠️ ', ...args))
 }
 
 class Command {
@@ -113,7 +113,7 @@ function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
  * @param args arguments in an array
  * @param envVars environment vars as key-value pairs
  * @param opts Options to `childProcess.spawn`
- * @returns {Promise<{stdout: string, stderr: string}>}
+ * @returns {Promise<{stdout: string, stderr: string, code:number}>}
  */
 async function runCommandAsync(bin, args = [], envVars = {}, opts = {}) {
   const result = crossSpawn.spawn(bin, args, {
@@ -135,14 +135,18 @@ async function runCommandAsync(bin, args = [], envVars = {}, opts = {}) {
     })
   }
   const promise = new Promise((resolve, reject) => {
-    result.on('error', reject)
-
+    result.on('error', (err) => {
+      error(`runCommandAsync ${bin} ${args} error:\n${err}`)
+      reject({ stdout: stdout, stderr: stderr, code: err.errno })
+    })
     result.on('close', (code) => {
       if (code === 0) {
-        resolve({ stdout: stdout, stderr: stderr })
+        resolve({ stdout: stdout, stderr: stderr, code: code })
       } else {
-        error(`child process ${bin} ${args} exited with code ${code}`)
-        reject({ stdout: stdout, stderr: stderr })
+        error(
+          `runCommandAsync: child process ${bin} ${args} exited with code ${code}`
+        )
+        reject({ stdout: stdout, stderr: stderr, code: code })
       }
     })
   })
