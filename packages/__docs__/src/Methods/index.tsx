@@ -33,6 +33,7 @@ import {
   MethodParameter,
   MethodReturn,
   TypeDescriptor
+  // eslint-disable-next-line import/no-unresolved
 } from '../../buildScripts/DataTypes'
 
 class Methods extends Component<MethodsProps> {

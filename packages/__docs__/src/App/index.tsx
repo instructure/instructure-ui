@@ -75,7 +75,10 @@ import { LoadingScreen } from '../LoadingScreen'
 import * as EveryComponent from '../../components'
 import type { AppProps, AppState, DocData, LayoutSize } from './props'
 import { propTypes, allowedProps } from './props'
-import type { LibraryOptions, MainDocsData } from '../../buildScripts/DataTypes'
+import type {
+  LibraryOptions,
+  MainDocsData
+} from '../../buildScripts/DataTypes.mjs'
 import { logError } from '@instructure/console'
 
 type AppContextType = {

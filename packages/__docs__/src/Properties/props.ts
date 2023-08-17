@@ -25,7 +25,8 @@
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import { PropDescriptor } from '../../buildScripts/DataTypes'
+// eslint-disable-next-line import/no-unresolved
+import type { PropDescriptor } from '../../buildScripts/DataTypes'
 
 type PropertiesOwnProps = {
   props: Record<string, PropDescriptor>

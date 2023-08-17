@@ -5,7 +5,12 @@
     "module": "CommonJS",
     "composite": true
   },
-  "include": ["src/**/*", "components.js", "globals.js"],
+  "include": [
+    "src/**/*",
+    "components.js",
+    "globals.js",
+    "buildScripts/DataTypes.mts"
+  ],
   "exclude": ["__build__/**/*"],
   "references": [
     { "path": "../canvas-high-contrast-theme/tsconfig.build.json" },

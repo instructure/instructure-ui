@@ -30,7 +30,8 @@ import type {
 } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import { MainDocsData } from '../../buildScripts/DataTypes'
+// eslint-disable-next-line import/no-unresolved
+import type { MainDocsData } from '../../buildScripts/DataTypes'
 
 type PreviewOwnProps = {
   code: string
