@@ -3,16 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
-
+# [8.40.0](https://github.com/instructure/instructure-ui/compare/v8.39.0...v8.40.0) (2023-08-17)
 
 ### Features
 
-* **instui-config,shared-types,ui-navigation,ui-side-nav-bar,ui:** add side-nav-bar component and deprecate navigation ([45848bf](https://github.com/instructure/instructure-ui/commit/45848bf5feea16e05c19e559c03e53e4b0637412))
+- **emotion,shared-types,ui-theme-tokens:** add mediumSmall spacing to themes ([d909ded](https://github.com/instructure/instructure-ui/commit/d909ded14289e363543ddca76f6ac1a451bcf7cf))
 
+# [8.39.0](https://github.com/instructure/instructure-ui/compare/v8.38.1...v8.39.0) (2023-07-21)
 
+### Features
 
-
+- **instui-config,shared-types,ui-navigation,ui-side-nav-bar,ui:** add side-nav-bar component and deprecate navigation ([45848bf](https://github.com/instructure/instructure-ui/commit/45848bf5feea16e05c19e559c03e53e4b0637412))
 
 ## [8.38.1](https://github.com/instructure/instructure-ui/compare/v8.38.0...v8.38.1) (2023-06-13)
 
