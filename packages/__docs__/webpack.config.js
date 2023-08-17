@@ -36,6 +36,7 @@ const resolveAliases = DEBUG ? { resolve: require('./resolve') } : {}
 // This needs to be a promise, so we can import build-docs.mjs
 // build-docs.mjs needs to have ESM imports because React-docgen uses ESM imports
 const configPromise = new Promise(function (resolve, reject) {
+  // eslint-disable-next-line import/no-unresolved
   import('./lib/build-docs.mjs').then((buildDocs) => {
     resolve(
       merge(baseConfig, {
