@@ -24,8 +24,11 @@
 
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-import type { MainDocsData, ProcessedFile } from '../../buildScripts/DataTypes'
-import { MainIconsData } from '../../buildScripts/DataTypes'
+import type {
+  MainIconsData,
+  MainDocsData,
+  ProcessedFile
+} from '../../buildScripts/DataTypes'
 
 type AppOwnProps = {
   trayWidth: number

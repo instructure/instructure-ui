@@ -29,7 +29,8 @@ import { Table } from '@instructure/ui-table'
 import { compileMarkdown } from '../compileMarkdown'
 
 import type { ReturnsProps } from './props'
-import { JSDocFunctionReturns } from '../../buildScripts/DataTypes'
+// eslint-disable-next-line import/no-unresolved
+import type { JSDocFunctionReturns } from '../../buildScripts/DataTypes'
 
 class Returns extends Component<ReturnsProps> {
   renderRows() {
