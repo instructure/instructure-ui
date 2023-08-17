@@ -106,6 +106,15 @@ function runCommandSync(bin, args = [], envVars = {}, opts = {}) {
   return result
 }
 
+/**
+ * Runs the given command asynchronously, returns a Promise that contains its
+ * stdout and stderr as strings
+ * @param bin path to the binary
+ * @param args arguments in an array
+ * @param envVars environment vars as key-value pairs
+ * @param opts Options to `childProcess.spawn`
+ * @returns {Promise<{stdout: string, stderr: string}>}
+ */
 async function runCommandAsync(bin, args = [], envVars = {}, opts = {}) {
   const result = crossSpawn.spawn(bin, args, {
     env: { ...process.env, ...envVars },
@@ -113,7 +122,32 @@ async function runCommandAsync(bin, args = [], envVars = {}, opts = {}) {
     windowsHide: true,
     ...opts
   })
-  return result
+  let stdout = ''
+  let stderr = ''
+  if (result.stdout) {
+    result.stdout.on('data', (data) => {
+      stdout += data.toString()
+    })
+  }
+  if (result.stderr) {
+    result.stderr.on('data', (data) => {
+      stderr += data.toString()
+    })
+  }
+  const promise = new Promise((resolve, reject) => {
+    result.on('error', reject)
+
+    result.on('close', (code) => {
+      if (code === 0) {
+        resolve({ stdout: stdout, stderr: stderr })
+      } else {
+        error(`child process ${bin} ${args} exited with code ${code}`)
+        reject({ stdout: stdout, stderr: stderr })
+      }
+    })
+  })
+  promise.child = result
+  return promise
 }
 
 function resolveBin(
