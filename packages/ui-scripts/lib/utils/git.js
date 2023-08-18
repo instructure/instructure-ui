@@ -26,8 +26,8 @@ import { runCommandSync, error, info, warn } from '@instructure/command-utils'
 const USERNAME = 'instructure-ui-ci'
 const EMAIL = 'instui-dev@instructure.com'
 
-export const runGitCommand = (args = []) => {
-  const { stdout } = runCommandSync('git', args, {}, { stdio: 'pipe' })
+export const runGitCommand = (args = [], envVars = { HUSKY: 0 }) => {
+  const { stdout } = runCommandSync('git', args, envVars, { stdio: 'pipe' })
   return stdout && stdout.toString().trim()
 }
 
