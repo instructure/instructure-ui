@@ -79,7 +79,7 @@ function getOffsetParents(el?: UIElement) {
       }
     }
 
-    parents.push(ownerDocument(node).body)
+    parents.push(ownerDocument(node)!.body)
   }
 
   return parents

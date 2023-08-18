@@ -54,7 +54,7 @@ function getFontSize(
     return 16
   }
 
-  const container = el || ownerDocument(el).documentElement
+  const container = el || ownerDocument(el)?.documentElement
 
   // return the cached font size if it's there
   const cachedValue = COMPUTED_CACHE.get(container)

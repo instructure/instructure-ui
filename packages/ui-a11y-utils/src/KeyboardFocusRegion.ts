@@ -294,7 +294,7 @@ class KeyboardFocusRegion {
       if (defaultFocusElement || shouldContainFocus) {
         if (shouldContainFocus) {
           this._listeners.push(
-            addEventListener(this.doc, 'keydown', this.handleKeyDown)
+            addEventListener(this.doc!, 'keydown', this.handleKeyDown)
           )
         } else {
           this._listeners.push(
@@ -314,14 +314,14 @@ class KeyboardFocusRegion {
         }
 
         this._listeners.push(
-          addEventListener(this.doc, 'click', this.handleClick, true)
+          addEventListener(this.doc!, 'click', this.handleClick, true)
         )
 
         this._listeners.push(
           addEventListener(this.win!, 'blur', this.handleWindowBlur, false)
         )
         this._listeners.push(
-          addEventListener(this.doc, 'focus', this.handleFocus, true)
+          addEventListener(this.doc!, 'focus', this.handleFocus, true)
         )
 
         this._active = true

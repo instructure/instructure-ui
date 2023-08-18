@@ -54,7 +54,7 @@ const isRefObject = (obj: unknown): obj is RefObject<unknown> => {
 function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
   const node = typeof el === 'function' ? el() : el
 
-  if (node === document) {
+  if (node && node === document) {
     return document.documentElement // HTMLElement
   } else if (
     node instanceof Element ||
