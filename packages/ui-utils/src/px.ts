@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { getFontSize } from '@instructure/ui-dom-utils'
+import { canUseDOM, getFontSize } from '@instructure/ui-dom-utils'
 import { parseUnit } from './parseUnit'
 import React from 'react'
 
@@ -39,26 +39,24 @@ import React from 'react'
  *
  * @module px
  *
- * @param {String} val
- * @param {Document|Window|Node|React.ReactElement |React.Component|null} el - containing element, for context measure is em (defaults to document.body)
+ * @param {String|number} val The value to look up. If it's a number its just returned as is.
+ * @param {Document|Window|Node|React.ReactElement |React.Component|null} el - containing element, for context measure is em (defaults to `document.body`)
  * @returns {Number} Returns numerical representation of pixels
  */
 function px(
   val: string | number,
   el?: Document | Window | Node | React.ReactElement | React.Component | null
 ): number {
-  const container = el || document.body
-
   // TODO !val should not be needed
   if (!val || typeof val === 'number') {
     return val as number
   }
-
   const [num, unit] = parseUnit(val)
-
   if (unit === 'rem') {
     return num * getFontSize()
   } else if (unit === 'em') {
+    const doc = canUseDOM ? document.body : null
+    const container = el || doc
     return num * getFontSize(container)
   } else {
     return num

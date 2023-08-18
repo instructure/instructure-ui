@@ -238,7 +238,7 @@ class PositionedElement {
     // documentElement should be calculated appropriately.
     // Otherwise we need to explictly account for that offset
     let offsetY =
-      parents.length > 1 ? 0 : getBoundingClientRect(doc.documentElement).top
+      parents.length > 1 ? 0 : getBoundingClientRect(doc?.documentElement).top
     let offsetX = 0
     let scrollY = 0
 
@@ -249,7 +249,7 @@ class PositionedElement {
       offsetY = offsetY + (child.top - parent.top)
       offsetX = offsetX + (child.left - parent.left)
 
-      if (parents[i] === doc.body) {
+      if (parents[i] === doc?.body) {
         // accounts for any margin on body
         offsetY = offsetY + parent.top
         offsetX = offsetX + parent.left
@@ -268,7 +268,7 @@ class PositionedElement {
   normalizeScrollTop(element: Node | Window | null) {
     // Account for cross browser differences with scrollTop attribute on the
     // body element https://bugs.chromium.org/p/chromium/issues/detail?id=766938
-    return ownerDocument(this.node).body === element
+    return ownerDocument(this.node)?.body === element
       ? 0
       : (element as Element).scrollTop
   }
@@ -286,7 +286,7 @@ class PositionData {
 
     if (!element || placement === 'offscreen') return
 
-    this.container = container || ownerDocument(element).body
+    this.container = container || ownerDocument(element)?.body
 
     this.element = new PositionedElement(element, placement, {
       top: this.options.offsetY,
@@ -294,7 +294,7 @@ class PositionData {
     })
 
     this.target = new PositionedElement(
-      target || this.container,
+      target || this.container!,
       over ? this.element.placement : this.element.mirroredPlacement
     )
 

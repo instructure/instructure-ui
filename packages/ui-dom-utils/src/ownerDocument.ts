@@ -24,6 +24,7 @@
 
 import { findDOMNode } from './findDOMNode'
 import { UIElement } from '@instructure/shared-types'
+import canUseDOM from './canUseDOM'
 
 /**
  * ---
@@ -33,7 +34,7 @@ import { UIElement } from '@instructure/shared-types'
  * Retrieve the owner document of a specified element
  * @module ownerDocument
  * @param { Node | Window | React.ReactElement | function | null } el
- * @returns { Document } the owner document
+ * @returns { Document | null} the owner document
  */
 function ownerDocument(el?: UIElement) {
   const node = el && findDOMNode(el)
@@ -42,8 +43,8 @@ function ownerDocument(el?: UIElement) {
   if (node && 'ownerDocument' in node) {
     ownerDocument = node.ownerDocument
   }
-
-  return ownerDocument || document
+  const doc = canUseDOM ? window.document : undefined
+  return ownerDocument || doc
 }
 
 export default ownerDocument

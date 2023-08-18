@@ -82,7 +82,10 @@ type QueryMatchListener = (
         ...args: any[]
       ) => Node | Window | React.ReactElement | React.Component),
   cb: UpdateMatches,
-  matchMedia?: (query: string, el: UIElement) => MediaQueryList | null
+  matchMedia?: (
+    query: string,
+    el: UIElement
+  ) => MediaQueryList | null | undefined
 ) => { remove: () => void }
 
 export type {

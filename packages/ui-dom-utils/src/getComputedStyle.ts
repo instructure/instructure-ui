@@ -46,10 +46,7 @@ function getComputedStyle(el?: UIElement, pseudoElt?: string | null) {
     const node = el && findDOMNode(el)
     if (node) {
       const window = ownerWindow(el)
-      style =
-        window !== null
-          ? window.getComputedStyle(node as Element, pseudoElt)
-          : {}
+      style = window ? window.getComputedStyle(node as Element, pseudoElt) : {}
     }
   }
   return style as CSSStyleDeclaration
