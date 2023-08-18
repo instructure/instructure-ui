@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.40.1](https://github.com/instructure/instructure-ui/compare/v8.40.0...v8.40.1) (2023-08-18)
+
+
+### Bug Fixes
+
+* **ui-color-picker:** add id as allowed prop for color-picker ([2ced2b2](https://github.com/instructure/instructure-ui/commit/2ced2b2b16e3996d67a4e957ff6e2ed02e3db669))
+
+
+
+
+
 # [8.40.0](https://github.com/instructure/instructure-ui/compare/v8.39.0...v8.40.0) (2023-08-17)
 
 ### Bug Fixes
