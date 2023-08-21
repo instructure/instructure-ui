@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.41.0](https://github.com/instructure/instructure-ui/compare/v8.40.1...v8.41.0) (2023-08-21)
+
+
+### Features
+
+* **shared-types,ui-theme-tokens:** add new 'desktop' and 'tablet' breakpoints to themes ([bcda3d0](https://github.com/instructure/instructure-ui/commit/bcda3d051e57cd1fc739a07424e08c21f98a1443))
+
+
+
+
+
 ## [8.40.1](https://github.com/instructure/instructure-ui/compare/v8.40.0...v8.40.1) (2023-08-18)
 
 
