@@ -32,7 +32,9 @@ const values = {
   xSmall: 16, // 256px
   small: 30, // 480px
   medium: 48, // 768px
+  tablet: 48, // 768px
   large: 62, // 992px
+  desktop: 64, // 1024px
   xLarge: 75 // 1200px
 }
 
@@ -41,7 +43,9 @@ const breakpoints: Breakpoints = Object.freeze({
   xSmall: `${values.xSmall}em`,
   small: `${values.small}em`,
   medium: `${values.medium}em`,
+  tablet: `${values.tablet}em`,
   large: `${values.large}em`,
+  desktop: `${values.desktop}em`,
   xLarge: `${values.xLarge}em`,
   maxWidth: `${values.large - onePixel}em`
 })
