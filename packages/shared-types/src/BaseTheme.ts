@@ -39,7 +39,9 @@ type Breakpoints = {
   xSmall: string
   small: string
   medium: string
+  tablet: string
   large: string
+  desktop: string
   xLarge: string
   maxWidth: string
 }
