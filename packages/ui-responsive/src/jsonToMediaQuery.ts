@@ -32,17 +32,17 @@ import React from 'react'
  * ---
  *
  * Given a valid json query object, converts it to a standard media query
- * string. Valid queries should be an object consisting of exactly one of
- * the following `minWidth`, `maxWidth`, `minHeight`, or `maxHeight` and
- * a value as a string or number.
+ * string. Valid queries should be an object consisting of condition:breakpoint
+ * pairs with the following condition types `minWidth`, `maxWidth`, `minHeight`,
+ * or `maxHeight` where breakpoint value is either a string or a number.
  *
  * Example input
  * ```js
- * { minWidth: 350 }
+ * { minWidth: 350, maxWidth: 600 }
  * ```
  * Example output
  * ```js
- * '(min-width: 350px)'
+ * '(min-width: 350px) and (max-Width: 600px)'
  * ```
  * @module jsonToMediaQuery
  * @param {Object} query - an object consisting of the query type and value
@@ -55,38 +55,48 @@ function jsonToMediaQuery(
 ) {
   // Ensure the query is of the correct form
   const keys = Object.keys(query) as Array<keyof typeof query>
-  if (keys.length !== 1) {
-    throw new Error('Expected exactly one key in query object.')
+  if (keys.length > 4) {
+    throw new Error('Expected maximum 4 keys in query object.')
   }
 
-  const key = keys[0]
+  let mediaQuery = ''
+  const QUERY_SEPARATOR = 'and'
 
-  const validKeys: ValidQueryKey[] = [
-    'minHeight',
-    'maxHeight',
-    'minWidth',
-    'maxWidth'
-  ]
+  for (const key of keys) {
+    const validKeys: ValidQueryKey[] = [
+      'minHeight',
+      'maxHeight',
+      'minWidth',
+      'maxWidth'
+    ]
 
-  if (validKeys.indexOf(key) === -1) {
-    throw new Error(
-      `Invalid key \`${key}\` in query object. Valid keys should consist of one of the following: ` +
-        `${validKeys.join(', ')} (case sensitive)`
-    )
+    if (validKeys.indexOf(key) === -1) {
+      throw new Error(
+        `Invalid key \`${key}\` in query object. Valid keys should consist of one of the following: ` +
+          `${validKeys.join(', ')} (case sensitive)`
+      )
+    }
+
+    const value = query[key]
+
+    // TS catches this, but we want to throw error in runtime too
+    if (typeof value !== 'string' && typeof value !== 'number') {
+      throw new Error(
+        'The value of the query object must be a string or number.'
+      )
+    }
+
+    if (!value) {
+      throw new Error('No value supplied for query object')
+    }
+
+    mediaQuery += `(${hyphenateQueryKey(key)}: ${px(
+      value,
+      el
+    )}px) ${QUERY_SEPARATOR} `
   }
 
-  const value = query[key]
-
-  // TS catches this, but we want to throw error in runtime too
-  if (typeof value !== 'string' && typeof value !== 'number') {
-    throw new Error('The value of the query object must be a string or number.')
-  }
-
-  if (!value) {
-    throw new Error('No value supplied for query object')
-  }
-
-  return `(${hyphenateQueryKey(key)}: ${px(value, el)}px)`
+  return mediaQuery.slice(0, -QUERY_SEPARATOR.length - 2)
 }
 
 function hyphenateQueryKey(key: ValidQueryKey) {

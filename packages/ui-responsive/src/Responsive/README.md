@@ -81,3 +81,48 @@ example: true
   }}
 </Responsive>
 ```
+
+### Defining multiple breakpoints
+
+Setting up multiple media query breakpoints is supported. You can use 4 breakpoints at the same time: `minWidth`, `maxWidth`, `minHeight`,
+`maxHeight`. In the following example, the use of two breakpoints, the `minWidth` and `maxWidth`, are used to render the component with the `medium` label.
+
+**Note:** Overlapping breakpoints for height are not fully supported.
+
+```js
+---
+example: true
+---
+<Responsive
+  match="media"
+  query={{
+    small: { maxWidth: 400 },
+    medium: { minWidth: 401, maxWidth: 599 },
+    large: { minWidth: 600}
+  }}
+>
+  {(props, matches) => {
+    if (matches.includes('large')) {
+      return (
+        <Billboard
+          message="Large breakpoint"
+          hero={<IconUserLine />}
+          style={{ border: '10px solid #aaa' }}
+        />
+      )
+    } else if (matches.includes('medium') && !matches.includes('large')) {
+      return (
+        <Byline description="Medium breakpoint">
+          <Avatar name="Alexander Hamilton" />
+        </Byline>
+      )
+    } else {
+      return (
+        <Pill color="primary">
+          Small breakpoint
+        </Pill>
+      )
+    }
+  }}
+</Responsive>
+```
