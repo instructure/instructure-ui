@@ -88,13 +88,13 @@ function hidden(element: Element | Node) {
 
 function positioned(element: Element | Node) {
   const POS = ['fixed', 'absolute']
-  if (POS.includes((element as HTMLElement).style.position.toLowerCase()))
+  if (POS.includes((element as HTMLElement).style.position?.toLowerCase()))
     return true
   if (
     POS.includes(
       (getComputedStyle(element) as CSSStyleDeclaration)
         .getPropertyValue('position')
-        .toLowerCase()
+        ?.toLowerCase()
     )
   )
     return true
