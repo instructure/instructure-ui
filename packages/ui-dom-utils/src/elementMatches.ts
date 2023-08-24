@@ -23,7 +23,7 @@
  */
 
 import { findDOMNode } from './findDOMNode'
-import { UIElement } from '@instructure/shared-types'
+import type { UIElement } from '@instructure/shared-types'
 
 /**
  * ---

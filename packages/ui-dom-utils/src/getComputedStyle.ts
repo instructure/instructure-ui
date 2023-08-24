@@ -25,7 +25,7 @@
 import { findDOMNode } from './findDOMNode'
 import { ownerWindow } from './ownerWindow'
 import { canUseDOM } from './canUseDOM'
-import { UIElement } from '@instructure/shared-types'
+import type { UIElement } from '@instructure/shared-types'
 
 /**
  * ---
