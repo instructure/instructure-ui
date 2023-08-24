@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.41.1](https://github.com/instructure/instructure-ui/compare/v8.41.0...v8.41.1) (2023-08-24)
+
+
+### Bug Fixes
+
+* **ui-source-code-editor:** fix broken codemirror syntax highlight ([155b42a](https://github.com/instructure/instructure-ui/commit/155b42a29c12777c3c2a6ba58b9ef9d606078f48))
+
+
+
+
+
 # [8.41.0](https://github.com/instructure/instructure-ui/compare/v8.40.1...v8.41.0) (2023-08-21)
 
 **Note:** Version bump only for package @instructure/ui-source-code-editor
