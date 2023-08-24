@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.41.1](https://github.com/instructure/instructure-ui/compare/v8.41.0...v8.41.1) (2023-08-24)
+
+
+### Bug Fixes
+
+* fix document in undefined SSR errors ([4c6e998](https://github.com/instructure/instructure-ui/commit/4c6e998bd23f1934054c8324262ccab3253fbc5a))
+* **ui-dom-utils:** fix findFocusable throwing nullpointer exceptions ([2169bff](https://github.com/instructure/instructure-ui/commit/2169bff9d36647d424ec571b300ef98a635bfc1e))
+* **ui-source-code-editor:** fix broken codemirror syntax highlight ([155b42a](https://github.com/instructure/instructure-ui/commit/155b42a29c12777c3c2a6ba58b9ef9d606078f48))
+
+
+
+
+
 # [8.41.0](https://github.com/instructure/instructure-ui/compare/v8.40.1...v8.41.0) (2023-08-21)
 
 
