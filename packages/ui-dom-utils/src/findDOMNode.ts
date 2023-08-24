@@ -23,8 +23,8 @@
  */
 
 import ReactDOM from 'react-dom'
-import { ReactInstance, RefObject } from 'react'
-import { UIElement } from '@instructure/shared-types'
+import type { ReactInstance, RefObject } from 'react'
+import type { UIElement } from '@instructure/shared-types'
 type ReactNodeWithRef = ReactInstance & {
   ref: RefObject<Element | ReactInstance> | Element | ReactInstance
 }

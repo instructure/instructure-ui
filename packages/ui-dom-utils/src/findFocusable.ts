@@ -35,7 +35,7 @@
  **/
 
 import { getComputedStyle, findDOMNode, elementMatches } from './'
-import { UIElement } from '@instructure/shared-types'
+import type { UIElement } from '@instructure/shared-types'
 
 const focusableSelector = [
   'a[href]',
@@ -88,16 +88,16 @@ function hidden(element: Element | Node) {
 
 function positioned(element: Element | Node) {
   const POS = ['fixed', 'absolute']
-  if (POS.includes((element as HTMLElement).style.position.toLowerCase()))
+  if (POS.includes((element as HTMLElement).style.position?.toLowerCase())) {
     return true
+  }
   if (
     POS.includes(
-      (getComputedStyle(element) as CSSStyleDeclaration)
-        .getPropertyValue('position')
-        .toLowerCase()
+      getComputedStyle(element).getPropertyValue('position')?.toLowerCase()
     )
-  )
+  ) {
     return true
+  }
   return false
 }
 
