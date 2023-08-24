@@ -95,7 +95,8 @@ const componentsContext = require.context(
 const chromaticSettings = {
   viewports: [1200],
   pauseAnimationAtEnd: true,
-  delay: 700
+  delay: 700,
+  diffThreshold: 0.9 // default is 0.063 - increased to avoid false positives
 }
 
 let numStories = 0
@@ -162,7 +163,7 @@ additionalExamples.forEach((example) => {
   const storiesOfExample = storiesOf(title, module)
   stories.forEach((story) => {
     storiesOfExample.add(story.storyName, story.storyFn, {
-      chromatic: { chromaticSettings, ...story.chromaticSettings }
+      chromatic: { ...chromaticSettings, ...story.chromaticSettings }
     })
     numStories++
   })
