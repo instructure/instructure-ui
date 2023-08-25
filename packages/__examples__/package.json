@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.22.6",
+    "@babel/runtime": "^7.22.11",
     "@instructure/canvas-theme": "8.41.1",
     "@instructure/command-utils": "8.41.1",
     "@instructure/ui-babel-preset": "8.41.1",
@@ -48,7 +48,7 @@
     "globby": "^11.1.0",
     "prop-types": "^15.8.1",
     "react-docgen": "6.0.0-alpha.3",
-    "webpack": "^5.88.1"
+    "webpack": "^5.88.2"
   },
   "resolutions": {
     "@storybook/react/webpack": "^5"

@@ -27,7 +27,7 @@
     "@instructure/ui-axe-check": "8.41.1",
     "@instructure/ui-test-sandbox": "8.41.1",
     "keycode": "^2.2.1",
-    "pretty-format": "^29.6.1",
+    "pretty-format": "^29.6.3",
     "sizzle": "^2.3.10"
   },
   "devDependencies": {
