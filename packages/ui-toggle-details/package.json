@@ -30,7 +30,7 @@
     "@instructure/ui-themes": "8.41.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.6",
+    "@babel/runtime": "^7.22.11",
     "@instructure/emotion": "8.41.1",
     "@instructure/shared-types": "8.41.1",
     "@instructure/ui-buttons": "8.41.1",

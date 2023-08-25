@@ -19,7 +19,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.22.9",
+    "@babel/cli": "^7.22.10",
     "@instructure/command-utils": "8.41.1",
     "@instructure/pkg-utils": "8.41.1",
     "@lerna/project": "^6.4.1",
@@ -32,7 +32,7 @@
     "mocha": "^10.2.0",
     "prettier": "^2.8.8",
     "semver": "^7.5.4",
-    "stylelint": "^15.10.1",
+    "stylelint": "^15.10.3",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
     "yargs": "^17.7.2"
