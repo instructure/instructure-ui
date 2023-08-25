@@ -3652,7 +3652,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:^17.6.7":
+"@commitlint/cli@npm:^17.7.1":
   version: 17.7.1
   resolution: "@commitlint/cli@npm:17.7.1"
   dependencies:
@@ -3672,7 +3672,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:^17.6.7":
+"@commitlint/config-conventional@npm:^17.7.0":
   version: 17.7.0
   resolution: "@commitlint/config-conventional@npm:17.7.0"
   dependencies:
@@ -23451,8 +23451,8 @@ __metadata:
   resolution: "instructure-ui@workspace:."
   dependencies:
     "@babel/cli": ^7.22.10
-    "@commitlint/cli": ^17.6.7
-    "@commitlint/config-conventional": ^17.6.7
+    "@commitlint/cli": ^17.7.1
+    "@commitlint/config-conventional": ^17.7.0
     "@instructure/ui-scripts": "workspace:*"
     "@instructure/ui-token-scripts": "workspace:*"
     "@testing-library/dom": ^9.3.1

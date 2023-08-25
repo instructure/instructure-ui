@@ -66,8 +66,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.22.10",
-    "@commitlint/cli": "^17.6.7",
-    "@commitlint/config-conventional": "^17.6.7",
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "@instructure/ui-scripts": "workspace:*",
     "@instructure/ui-token-scripts": "workspace:*",
     "@testing-library/dom": "^9.3.1",
