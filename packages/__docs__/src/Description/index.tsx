@@ -32,11 +32,18 @@ import type { DescriptionProps } from './props'
 class Description extends Component<DescriptionProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
+  private compiledMarkdown: any[] | null = null
+
+  componentDidMount() {
+    this.compiledMarkdown = compileMarkdown(this.props.content, {
+      title: this.props.title
+    })
+  }
 
   render() {
-    const { id, title, content } = this.props
+    const { id } = this.props
 
-    return <div id={id}>{compileMarkdown(content, { title })}</div>
+    return <div id={id}>{this.compiledMarkdown}</div>
   }
 }
 
