@@ -21,7 +21,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.11",
+    "@babel/runtime": "^7.22.15",
     "@instructure/console": "8.41.1",
     "@instructure/shared-types": "8.41.1",
     "@instructure/ui-utils": "8.41.1"
