@@ -23,9 +23,9 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.41.1",
-    "@types/chai": "^4.3.5",
-    "@types/chai-as-promised": "^7.1.5",
-    "@types/chai-string": "^1.4.2",
+    "@types/chai": "^4.3.6",
+    "@types/chai-as-promised": "^7.1.6",
+    "@types/chai-string": "^1.4.3",
     "@types/dirty-chai": "^2.0.2",
     "@types/sinon-chai": "^3.2.9",
     "prop-types": "^15.8.1"
@@ -40,7 +40,7 @@
     "chai-exclude": "^2.1.0",
     "chai-string": "^1.5.0",
     "dirty-chai": "^2.0.1",
-    "nanoid": "^3.3.6",
+    "nanoid": "^4.0.2",
     "sinon-chai": "^3.7.0",
     "wait-for-expect": "^3.0.2"
   },

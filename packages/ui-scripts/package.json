@@ -19,7 +19,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.22.10",
+    "@babel/cli": "^7.22.15",
     "@instructure/command-utils": "8.41.1",
     "@instructure/pkg-utils": "8.41.1",
     "@lerna/project": "^6.4.1",

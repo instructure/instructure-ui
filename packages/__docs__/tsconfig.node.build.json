@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.node.json",
   "compilerOptions": {
     "declarationDir": "./types",
-    "module": "ES2022",
-    "moduleResolution": "nodenext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "outDir": "./lib",
     "resolveJsonModule": true

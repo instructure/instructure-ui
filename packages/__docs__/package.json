@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/standalone": "^7.22.12",
+    "@babel/standalone": "^7.22.15",
     "@instructure/canvas-high-contrast-theme": "8.41.1",
     "@instructure/canvas-theme": "8.41.1",
     "@instructure/console": "8.41.1",
