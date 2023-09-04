@@ -190,4 +190,35 @@ describe('<Responsive />', async () => {
 
     expect(responsiveDiv.style.display).to.equal('inline-flex')
   })
+
+  it('should provide correct props in case of multiple breakpoints in query', async () => {
+    const renderSpy = spy()
+    const props = {
+      small: { withBorder: true, background: 'transparent' },
+      medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
+      large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
+    }
+    await mount(
+      <div style={{ width: 800, height: 400 }}>
+        <Responsive
+          props={props}
+          query={{
+            small: { maxWidth: 300 },
+            medium: { maxWidth: 800 },
+            large: {
+              minWidth: 800,
+              maxWidth: 1000
+            }
+          }}
+          render={(props, matches) => {
+            renderSpy(props, matches)
+            return <div>hello</div>
+          }}
+        />
+      </div>
+    )
+    expect(
+      deepEqual(renderSpy.lastCall.args[0], { ...props.medium, ...props.large })
+    ).to.be.true()
+  })
 })
