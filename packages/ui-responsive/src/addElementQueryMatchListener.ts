@@ -142,7 +142,12 @@ function updateElementMatches(
   size?: Size
 ): QueriesMatching | null {
   const node = findDOMNode(el)
-  const { width, height } = size || getBoundingClientRect(node)
+  let { width, height } = size || getBoundingClientRect(node)
+
+  // round dimensions to make sure matcher can match queries with integer values
+  width = Math.floor(width)
+  height = Math.floor(height)
+
   const matchingQueries = parseQuery(query, node)({ width, height })
   const newMatches = Object.keys(matchingQueries)
     .filter((key) => matchingQueries[key])
