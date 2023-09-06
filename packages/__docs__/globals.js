@@ -24,7 +24,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import lorem from 'lorem-ipsum'
+import { LoremIpsum } from 'lorem-ipsum'
 import moment from 'moment'
 import 'moment/min/locales'
 
@@ -48,6 +48,17 @@ import avatarSquare from './buildScripts/samplemedia/avatarSquare.jpg'
 import avatarPortrait from './buildScripts/samplemedia/avatarPortrait.jpg'
 import placeholderImage from './buildScripts/samplemedia/placeholder-image'
 
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4
+  },
+  wordsPerSentence: {
+    max: 16,
+    min: 4
+  }
+})
+
 const globals = {
   ...Components,
   debounce,
@@ -57,24 +68,10 @@ const globals = {
   DateTime,
   iconExample,
   lorem: {
-    sentence() {
-      return lorem({
-        count: 1,
-        units: 'sentences'
-      })
-    },
-    paragraph() {
-      return lorem({
-        count: 1,
-        units: 'paragraphs'
-      })
-    },
-    paragraphs(count) {
-      return lorem({
-        count: count || Math.floor(Math.random() * 10),
-        units: 'paragraphs'
-      })
-    }
+    sentence: () => lorem.generateWords(),
+    paragraph: () => lorem.generateSentences(5),
+    paragraphs: (count) =>
+      lorem.generateSentences(count || Math.floor(Math.random() * 10))
   },
   mirrorHorizontalPlacement,
   placeholderImage,

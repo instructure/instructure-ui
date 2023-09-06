@@ -87,15 +87,14 @@ import 'moment/min/locales'
       js_pre_processor: 'babel',
       ...this.props.options
     }
-    const codeSandboxIconSvg =
-      'M115.498 261.088v-106.61L23.814 101.73v60.773L65.81 186.85v45.7l49.688 28.54Zm23.814.627l50.605-29.151V185.78l42.269-24.495v-60.011l-92.874 53.621v106.82Zm80.66-180.887l-48.817-28.289l-42.863 24.872l-43.188-24.897l-49.252 28.667l91.914 52.882l92.206-53.235ZM0 222.212V74.495L127.987 0L256 74.182v147.797l-128.016 73.744L0 222.212Z'
+
     const dependencies = JSON.stringify(
       {
         dependencies: {
           '@instructure/debounce': '^8',
           '@instructure/ui': '^8',
           '@instructure/ui-icons': '^8',
-          'lorem-ipsum': '^1.0.0',
+          'lorem-ipsum': '^2.0.8',
           react: '18.2.0',
           'react-dom': '18.2.0',
           'react-scripts': '5.0.1',
@@ -124,30 +123,28 @@ import 'moment/min/locales'
         },
         'samplemedia.js': {
           content: `
-import loremgen from "lorem-ipsum"
+import { LoremIpsum } from 'lorem-ipsum'
 const IconSVG = \`${IconSVG}\`
 export const avatarSquare = "https://raw.githubusercontent.com/instructure/instructure-ui/master/packages/__docs__/buildScripts/samplemedia/avatarSquare.jpg"
 export const avatarPortrait = "https://raw.githubusercontent.com/instructure/instructure-ui/master/packages/__docs__/buildScripts/samplemedia/avatarPortrait.jpg"
-export const lorem ={
-  sentence() {
-    return loremgen({
-      count: 1,
-      units: 'sentences'
-    })
+
+const loremInstance = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4
   },
-  paragraph() {
-    return loremgen({
-      count: 1,
-      units: 'paragraphs'
-    })
-  },
-  paragraphs(count) {
-    return loremgen({
-      count: count || Math.floor(Math.random() * 10),
-      units: 'paragraphs'
-    })
+  wordsPerSentence: {
+    max: 16,
+    min: 4
   }
+})
+export const lorem ={
+  sentence: () => loremInstance.generateWords(),
+  paragraph: () => loremInstance.generateSentences(5),
+  paragraphs: (count) =>
+  loremInstance.generateSentences(count || Math.floor(Math.random() * 10))
 }
+
 export function placeholderImage(width = 512, height = 512) {
   // We need to base64 encode this because otherwise FF will add extra escape chars
   const dataUri = btoa(
