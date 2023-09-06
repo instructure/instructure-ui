@@ -22,28 +22,25 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import { View } from '@instructure/ui-view'
+import { Button } from '@instructure/ui-buttons'
 
-class Paragraph extends React.Component {
-  static propTypes = {
-    children: PropTypes.node
-  }
-  static defaultProps = {
-    children: null
-  }
+/*
+Component, using only elements from V8.
+It should render V8 components without issue and with styling, theming.
+*/
 
-  static Paragraph = Paragraph
-
+class V8 extends Component {
   render() {
     return (
-      <View as="div" margin="small 0">
-        {this.props.children}
-      </View>
+      <div>
+        v8text
+        <Button>v8 button</Button>
+      </div>
     )
   }
 }
 
-export { Paragraph }
+export default V8
+export { V8 }

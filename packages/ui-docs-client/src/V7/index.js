@@ -22,50 +22,32 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import { View } from '@instructure/ui-view'
-import { ToggleDetails } from '@instructure/ui-toggle-details'
-import { Heading } from '../Heading'
-import { Paragraph } from './Paragraph'
+import { themeable } from '@instructure/ui-themeable'
+import { Button } from '@instructure/ui-buttons'
 
-class ToggleBlockquote extends React.Component {
-  static propTypes = {
-    summary: PropTypes.node.isRequired,
-    children: PropTypes.node
-  }
-  static defaultProps = {
-    children: null
-  }
+import styles from './styles.css'
+import theme from './theme'
 
-  static Paragraph = Paragraph
+/*
+Component, using @themeable from V7.
+It should render V8 components without issue and with styling, theming
+It also should apply theming from the style.css (in this example,
+the text should be red)
+*/
 
+@themeable(theme, styles)
+class V7 extends Component {
   render() {
     return (
-      <View
-        as="div"
-        margin="large 0"
-        padding="medium"
-        borderWidth="none none none large"
-        borderColor="info"
-        shadow="above"
-      >
-        <ToggleDetails
-          summary={
-            <Heading level="h3" as="h4">
-              {this.props.summary}
-            </Heading>
-          }
-          iconPosition="end"
-          defaultExpanded
-          fluidWidth
-        >
-          {this.props.children}
-        </ToggleDetails>
-      </View>
+      <div className={styles.root}>
+        v7text
+        <Button>v8 button</Button>
+      </div>
     )
   }
 }
 
-export { ToggleBlockquote }
+export default V7
+export { V7 }

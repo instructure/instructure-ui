@@ -26,14 +26,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { App } from './App'
-import { Figure } from './Figure'
-import { Guidelines } from './Guidelines'
-import { ToggleBlockquote } from './ToggleBlockquote'
 
 function renderDocsClient(data, element) {
   ReactDOM.render(<App {...data} />, element)
 }
 
-export { renderDocsClient, Figure, Guidelines, ToggleBlockquote }
+export { renderDocsClient }
 
 export default renderDocsClient
