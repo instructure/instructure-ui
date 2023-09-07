@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.43.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.43.0) (2023-09-07)
+
+
+### Bug Fixes
+
+* **ui-text-area:** fix textarea so selenium tests will pass ([2e54ae3](https://github.com/instructure/instructure-ui/commit/2e54ae34bfee0f44e806ebe3ac2b583d19178bc6))
+
+
+
+
+
 # [8.42.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.42.0) (2023-09-07)
 
 **Note:** Version bump only for package @instructure/ui-text-area

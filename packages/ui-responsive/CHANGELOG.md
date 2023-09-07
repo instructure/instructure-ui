@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.43.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.43.0) (2023-09-07)
+
+
+### Bug Fixes
+
+* **ui-responsive:** round dimensions for query matcher ([5cd4e24](https://github.com/instructure/instructure-ui/commit/5cd4e24c4e9649c6baf1031155fbf192e52eee07))
+
+
+### Features
+
+* **ui-responsive:** add support for multiple responsive breakpoints ([255a832](https://github.com/instructure/instructure-ui/commit/255a83206b2e920b2bcc7e6ec7b83ae6ecee6053))
+
+
+
+
+
 # [8.42.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.42.0) (2023-09-07)
 
 
