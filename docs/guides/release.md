@@ -27,12 +27,12 @@ This document outlines the steps required for the release process. Please follow
 
    - Check if the proposed version numbers are correct. If they are, accept them.
 
-4. **Check the README.md**
+4. **Check the CHANGELOG.md**
 
    - If there's something missing, add it manually.
 
 5. **Amend Your Commit**
-   - If you made changes to the README.md, use the commands below to amend your commit.
+   - If you made changes to the CHANGELOG.md, use the commands below to amend your commit.
    ```
    git add .
    git commit --amend
