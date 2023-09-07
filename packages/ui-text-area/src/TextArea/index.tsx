@@ -121,7 +121,9 @@ class TextArea extends Component<TextAreaProps> {
           clearTimeout(this.resizeTimeout)
 
           this.resizeTimeout = setTimeout(() => {
-            this._highlightRef!.style.transition = 'all 0.2s'
+            if (this._highlightRef) {
+              this._highlightRef.style.transition = 'all 0.2s'
+            }
           }, 500)
         }
       }
