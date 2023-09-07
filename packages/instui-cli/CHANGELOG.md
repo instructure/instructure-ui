@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.42.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.42.0) (2023-09-07)
+
+**Note:** Version bump only for package @instructure/instui-cli
+
+
+
+
+
 ## [8.41.1](https://github.com/instructure/instructure-ui/compare/v8.41.0...v8.41.1) (2023-08-24)
 
 **Note:** Version bump only for package @instructure/instui-cli
