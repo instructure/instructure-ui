@@ -468,9 +468,12 @@ class TimeSelect extends Component<TimeSelectProps, TimeSelectState> {
   ) => {
     if (data.id === this._emptyOptionId) return
     const option = this.getOption('id', data.id)!.label
+
+    // this is needed for react 16. When we no longer support it, this can be removed
+    const eventType = event.type
     this.setState((state) => ({
       highlightedOptionId: data.id,
-      inputValue: event.type === 'keydown' ? option : state.inputValue
+      inputValue: eventType === 'keydown' ? option : state.inputValue
     }))
   }
 
