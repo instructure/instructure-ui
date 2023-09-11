@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.43.1](https://github.com/instructure/instructure-ui/compare/v8.43.0...v8.43.1) (2023-09-11)
+
+
+### Bug Fixes
+
+* **ui-time-select:** fix nonpersistent event issue in Timeselect with react 16 ([77bc913](https://github.com/instructure/instructure-ui/commit/77bc9132c0f303eaa9e3ad0d1a7b2f9aab15f5e6))
+
+
+
+
+
 # [8.43.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.43.0) (2023-09-07)
 
 
