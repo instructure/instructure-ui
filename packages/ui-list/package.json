@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-list",
-  "version": "8.43.0",
+  "version": "8.43.1",
   "description": "Components for displaying vertical or horizontal lists.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,21 +24,21 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.22.15",
-    "@instructure/console": "8.43.0",
-    "@instructure/emotion": "8.43.0",
-    "@instructure/shared-types": "8.43.0",
-    "@instructure/ui-prop-types": "8.43.0",
-    "@instructure/ui-react-utils": "8.43.0",
-    "@instructure/ui-testable": "8.43.0",
-    "@instructure/ui-view": "8.43.0",
+    "@instructure/console": "8.43.1",
+    "@instructure/emotion": "8.43.1",
+    "@instructure/shared-types": "8.43.1",
+    "@instructure/ui-prop-types": "8.43.1",
+    "@instructure/ui-react-utils": "8.43.1",
+    "@instructure/ui-testable": "8.43.1",
+    "@instructure/ui-view": "8.43.1",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.43.0",
-    "@instructure/ui-color-utils": "8.43.0",
-    "@instructure/ui-test-locator": "8.43.0",
-    "@instructure/ui-test-utils": "8.43.0",
-    "@instructure/ui-themes": "8.43.0"
+    "@instructure/ui-babel-preset": "8.43.1",
+    "@instructure/ui-color-utils": "8.43.1",
+    "@instructure/ui-test-locator": "8.43.1",
+    "@instructure/ui-test-utils": "8.43.1",
+    "@instructure/ui-themes": "8.43.1"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
