@@ -6,8 +6,8 @@ jobs:
     name: Deploy docs to Netlify.
     steps:
       - uses: actions/checkout@v2
-      - name: Install netlify-cli
-        run: npm install --save-dev netlify-cli
+      - name: Install netlify-cli and @nx/nx-linux-x64-gnu
+        run: npm install --save-dev netlify-cli@13.2.2 @nx/nx-linux-x64-gnu
       - name: Install packages.
         run: npm ci
       - name: Set up project.
