@@ -12,6 +12,8 @@ jobs:
         with:
           node-version: '16'
           cache: 'npm'
+      - name: Install @nx/nx-linux-x64-gnu
+        run: npm install --save-dev @nx/nx-linux-x64-gnu
       - name: Install packages
         run: npm ci
       - name: Set up project
