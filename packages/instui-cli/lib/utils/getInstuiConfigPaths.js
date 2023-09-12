@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const fs = require('fs')
-const semver = require('semver')
+import path from 'path'
+import fs from 'fs'
+import semver from 'semver'
+import { createRequire } from 'module'
 
 const parseMajorVersion = ({ version }) => {
   const semanticVersion = semver.coerce(version)
@@ -40,7 +41,8 @@ const parseMajorVersion = ({ version }) => {
  * @param version optional only return config files up to this version
  * @return {*[]} an array of file paths
  */
-module.exports = ({ name, type, version } = {}) => {
+export default ({ name, type, version } = {}) => {
+  const require = createRequire(import.meta.url)
   const root = path.resolve(
     path.dirname(require.resolve('@instructure/instui-config/package.json')),
     type

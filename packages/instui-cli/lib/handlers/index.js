@@ -22,14 +22,20 @@
  * SOFTWARE.
  */
 
-const handleCreate = require('./handleCreate')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgrade = require('./handleUpgrade')
-const handleUpgradePackages = require('./handleUpgradePackages')
+import handleCreate from './handleCreate.js'
+import handleExecuteCodemods from './handleExecuteCodemods.js'
+import handleUpgrade from './handleUpgrade.js'
+import handleUpgradePackages from './handleUpgradePackages.js'
+import handleCreateComponent from './handleCreateComponent.js'
+import handleCreateFromTemplate from './handleCreateFromTemplate.js'
+import handleCreatePackage from './handleCreatePackage.js'
 
-module.exports = {
+export default {
   handleCreate,
   handleExecuteCodemods,
   handleUpgrade,
-  handleUpgradePackages
+  handleUpgradePackages,
+  handleCreateComponent,
+  handleCreateFromTemplate,
+  handleCreatePackage
 }

@@ -32,7 +32,6 @@ const NODE_PACKAGES = [
   'ui-babel-preset',
   'ui-codemods',
   'ui-karma-config',
-  'ui-template-scripts',
   'ui-stylelint-config',
   'ui-scripts',
   'command-utils',

@@ -22,20 +22,20 @@
  * SOFTWARE.
  */
 
-const path = require('path')
+import path from 'path'
 
-const {
-  handleCreateComponent,
-  handleCreateFromTemplate,
-  handleCreatePackage
-} = require('@instructure/ui-template-scripts/lib/handlers')
+import handleCreateComponent from './handleCreateComponent.js'
+import handleCreatePackage from './handleCreatePackage.js'
+import { createRequire } from 'module'
 
-module.exports = async ({
+export default async ({
   contentType, // e.g. 'package' or 'app'
   path: sourcePath, // the path where it will be created
   name, // e.g. 'myApp',
   formatInstructions
 }) => {
+  const require = createRequire(import.meta.url)
+
   const pkgPath = require.resolve(
     `@instructure/template-${contentType}/package.json`
   )

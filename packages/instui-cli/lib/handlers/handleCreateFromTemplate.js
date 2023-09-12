@@ -22,18 +22,16 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const fs = require('fs')
-const fse = require('fs-extra')
+import path from 'path'
+import fs from 'fs'
+import fse from 'fs-extra'
+import yargsInteractive from 'yargs-interactive'
+import { error, info } from '@instructure/command-utils'
+import createFromTemplate from '../utils/createFromTemplate.js'
+import promptContentName from '../utils/promptContentName.js'
+import { createRequire } from 'module'
 
-const yargsInteractive = require('yargs-interactive')
-
-const { info, error } = require('@instructure/command-utils')
-
-const createFromTemplate = require('../utils/createFromTemplate')
-const promptContentName = require('../utils/promptContentName')
-
-module.exports = async ({
+export default async ({
   template, // path to the /template folder
   name, // e.g. 'myApp'
   path: sourcePath = process.cwd(), // the path where it will be created
@@ -125,6 +123,7 @@ function copyFilesFromDependency(dependencyId, destPath, destFolder) {
   const fullDestPath = path.join(destPath, destFolder)
   fs.mkdirSync(fullDestPath, { recursive: true })
   // path to index.js in the dependency
+  const require = createRequire(import.meta.url)
   const dependencyPath = require.resolve(dependencyId)
   fse.copySync(path.dirname(dependencyPath), fullDestPath)
 }

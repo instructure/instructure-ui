@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const { info, runCommandSync } = require('@instructure/command-utils')
+import path from 'path'
+import { info, runCommandSync } from '@instructure/command-utils'
 
-module.exports = ({
+export default ({
   sourcePath = process.cwd(),
   codemodPath,
   configPath,

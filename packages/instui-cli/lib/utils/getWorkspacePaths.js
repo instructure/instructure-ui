@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-const Project = require('@lerna/project').Project
+import { Project } from '@lerna/project'
 
-module.exports = ({ path }) => {
+export default ({ path }) => {
   try {
     const { packageParentDirs } = new Project(path)
 

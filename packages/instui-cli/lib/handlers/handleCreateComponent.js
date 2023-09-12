@@ -22,17 +22,16 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const yargsInteractive = require('yargs-interactive')
-const { info } = require('@instructure/command-utils')
+import path from 'path'
+import yargsInteractive from 'yargs-interactive'
+import { info } from '@instructure/command-utils'
+import { Project } from '@lerna/project'
 
-const Project = require('@lerna/project').Project
+import handleCreatePackage from './handleCreatePackage.js'
+import handleCreateFromTemplate from './handleCreateFromTemplate.js'
+import promptContentName from '../utils/promptContentName.js'
 
-const handleCreatePackage = require('./handleCreatePackage')
-const handleCreateFromTemplate = require('./handleCreateFromTemplate')
-const promptContentName = require('../utils/promptContentName')
-
-module.exports = async (args) => {
+export default async (args) => {
   const { path: sourcePath, packageSource, name, formatInstructions } = args
 
   const project = new Project(sourcePath)
@@ -167,4 +166,10 @@ const createComponent = (args) => {
 }
 
 const generateValues = ({ values, name, packageName, version }) =>
-  typeof values === 'function' ? values({ name, packageName, version }) : values
+  typeof values === 'function'
+    ? values({
+        name,
+        packageName,
+        version
+      })
+    : values

@@ -120,7 +120,6 @@ ui-karma-config
 ui-polyfill-loader
 ui-scripts
 ui-stylelint-config
-ui-template-scripts
 ui-token-scripts
 ui-upgrade-scripts
 ui-webpack-config

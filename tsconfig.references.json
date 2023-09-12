@@ -84,7 +84,6 @@
     { "path": "./packages/ui-table/tsconfig.build.json" },
     { "path": "./packages/ui-tabs/tsconfig.build.json" },
     { "path": "./packages/ui-tag/tsconfig.build.json" },
-    { "path": "./packages/ui-template-scripts/tsconfig.build.json" },
     { "path": "./packages/ui-test-locator/tsconfig.build.json" },
     { "path": "./packages/ui-test-queries/tsconfig.build.json" },
     { "path": "./packages/ui-test-sandbox/tsconfig.build.json" },

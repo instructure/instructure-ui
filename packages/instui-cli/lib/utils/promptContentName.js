@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-const yargsInteractive = require('yargs-interactive')
-const { error } = require('@instructure/command-utils')
+import yargsInteractive from 'yargs-interactive'
+import { error } from '@instructure/command-utils'
 
-module.exports = async ({
+export default async ({
   name,
   contentType,
   formatInstructions = '',

@@ -25,5 +25,26 @@
  */
 
 /* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
+
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+import codemod from './commands/codemod.js'
+import create from './commands/create.js'
+import createComponent from './commands/create-component.js'
+import createFromTemplate from './commands/create-from-template.js'
+import createPackage from './commands/create-package.js'
+import upgrade from './commands/upgrade.js'
+import upgradePackages from './commands/upgrade-packages.js'
+import version from './commands/version.js'
+
+yargs(hideBin(process.argv)).command([
+  codemod,
+  create,
+  createComponent,
+  createFromTemplate,
+  createPackage,
+  upgrade,
+  upgradePackages,
+  version
+]).argv
 /* eslint-enable no-unused-expressions */
