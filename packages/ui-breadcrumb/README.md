@@ -19,7 +19,7 @@ The `ui-breadcrumb` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-breadcrumb
+npm install @instructure/ui-breadcrumb
 ```
 
 ### Usage

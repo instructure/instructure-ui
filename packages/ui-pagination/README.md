@@ -17,7 +17,7 @@ The `ui-pagination` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-pagination
+npm install @instructure/ui-pagination
 ```
 
 ### Usage

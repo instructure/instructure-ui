@@ -29,7 +29,7 @@ The `ui-i18n` package contains the following utilities:
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-i18n
+npm install --dev @instructure/ui-i18n
 ```
 
 ### Usage

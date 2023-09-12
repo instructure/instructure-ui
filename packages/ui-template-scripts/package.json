@@ -13,8 +13,8 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "bin": "./lib/index.js",
   "scripts": {
-    "lint": "run -T ui-scripts lint",
-    "lint:fix": "run -T ui-scripts lint --fix"
+    "lint": "ui-scripts lint",
+    "lint:fix": "ui-scripts lint --fix"
   },
   "license": "MIT",
   "dependencies": {

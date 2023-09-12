@@ -19,7 +19,7 @@ The `ui-top-nav-bar` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-top-nav-bar
+npm install @instructure/ui-top-nav-bar
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-top-nav-bar.svg

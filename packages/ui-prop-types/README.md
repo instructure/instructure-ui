@@ -25,7 +25,7 @@ The `ui-prop-types` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-prop-types
+npm install @instructure/ui-prop-types
 ```
 
 ### Usage

@@ -11,19 +11,19 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'yarn'
+          cache: 'npm'
       - name: Install packages
-        run: yarn install --immutable
+        run: npm ci
       - name: Set up project
-        run: yarn bootstrap
+        run: npm run bootstrap
       - name: Run tests
-        run: yarn test:patchset
+        run: npm run test:patchset
       - name: Release to NPM
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_EMAIL: ${{secrets.NPM_EMAIL}}
           NPM_USERNAME: ${{secrets.NPM_USERNAME}}
-        run: yarn release maintenance
+        run: npm run release maintenance
       - name: Get commit message
         run: |
           echo "commmit_message=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV

@@ -19,7 +19,7 @@ The `ui-badge` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-badge
+npm install @instructure/ui-badge
 ```
 
 ### Usage

@@ -4,7 +4,6 @@ yarn-error.log
 lerna-debug.log
 ./build-storybook.log
 coverage/
-package-lock.json
 .yarnclean
 .babel-cache
 __build__

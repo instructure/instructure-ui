@@ -13,13 +13,13 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "lint": "run -T ui-scripts lint",
-    "lint:fix": "run -T ui-scripts lint --fix",
-    "clean": "run -T ui-scripts clean",
-    "build": "run -T ui-scripts build --modules es,cjs",
-    "build:watch": "yarn ts:check --watch & run -T ui-scripts build --watch",
-    "build:types": "run -T tsc -p tsconfig.build.json",
-    "ts:check": "run -T tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+    "lint": "ui-scripts lint",
+    "lint:fix": "ui-scripts lint --fix",
+    "clean": "ui-scripts clean",
+    "build": "ui-scripts build --modules es,cjs",
+    "build:watch": "npm run ts:check --watch & ui-scripts build --watch",
+    "build:types": "tsc -p tsconfig.build.json",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "dependencies": {

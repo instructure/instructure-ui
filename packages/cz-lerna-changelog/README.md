@@ -13,7 +13,7 @@ Prompts for conventional changelog standard in a lerna environment.
 ### Installation
 
 ```sh
-yarn add @instructure/cz-lerna-changelog
+npm install @instructure/cz-lerna-changelog
 ```
 
 Add the following to your package.json file:

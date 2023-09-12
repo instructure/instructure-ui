@@ -15,7 +15,7 @@ See https://sinonjs.org/
 ### Installation
 
 ```sh
-yarn add @instructure/ui-test-sandbox
+npm install @instructure/ui-test-sandbox
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-test-sandbox.svg

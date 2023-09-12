@@ -19,7 +19,7 @@ The `ui-drawer-layout` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-drawer-layout
+npm install @instructure/ui-drawer-layout
 ```
 
 ### Usage

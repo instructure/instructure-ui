@@ -13,7 +13,7 @@ A shared eslint config made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-eslint-config
+npm install @instructure/ui-eslint-config
 ```
 
 ### Usage

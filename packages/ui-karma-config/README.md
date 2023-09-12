@@ -13,7 +13,7 @@ A shared karma config made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-karma-config
+npm install @instructure/ui-karma-config
 ```
 
 ### Usage

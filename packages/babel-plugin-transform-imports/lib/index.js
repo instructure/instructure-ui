@@ -94,7 +94,7 @@ function transform(transformOption, importName, matches) {
         // If there are no import paths found it is the same as if globby or the require.resolve failed, we cannot construct a relative import path
         // so throw an error and just fall back to using the import name as the path.
         console.error(
-          `[${transformName}] no modules match '${importName}' in '${packageName}'. Continuing with '${importName}' as the import path. If that is unexpected or incorrect, make sure '${importName}' exists in '${packageName}' and you have run 'yarn install' to download the package source.`
+          `[${transformName}] no modules match '${importName}' in '${packageName}'. Continuing with '${importName}' as the import path. If that is unexpected or incorrect, make sure '${importName}' exists in '${packageName}' and you have run 'npm install' to download the package source.`
         )
         return null
       }

@@ -73,7 +73,7 @@ exports.builder = (yargs) => {
     type: 'string',
     describe: 'The npm client to use',
     choices: ['yarn', 'npm'],
-    default: 'yarn'
+    default: 'npm'
   })
 
   yargs.option('parser', {

@@ -11,7 +11,7 @@ use Jest + React Testing Library.
 
 ### Running Jest
 
-Jest can be run from the project root with the `yarn test:new` command. It's configured in our CI pipeline so pushing a
+Jest can be run from the project root with the `npm run test:new` command. It's configured in our CI pipeline so pushing a
 branch to remote runs these tests together with the legacy tests automatically.
 
 ### Adding new tests to a package

@@ -11,12 +11,12 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "prestart": "yarn bundle",
+    "prestart": "npm run bundle",
     "start": "ui-scripts server -p 9001",
-    "start:watch": "yarn build:examples && run -T ui-scripts examples --watch -p 9090",
-    "bundle": "yarn build:examples && run -T ui-scripts examples",
+    "start:watch": "npm run build:examples && ui-scripts examples --watch -p 9090",
+    "bundle": "npm run build:examples && ui-scripts examples",
     "clean": "ui-scripts clean",
-    "build:storybook": "run -T ui-scripts examples",
+    "build:storybook": "ui-scripts examples",
     "build:examples": "node buildScripts/build-examples-json.js"
   },
   "license": "MIT",

@@ -13,7 +13,7 @@ A color utility library made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-color-utils
+npm install @instructure/ui-color-utils
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-color-utils.svg

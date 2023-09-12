@@ -18,7 +18,7 @@ The `ui-svg-images` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-svg-images
+npm install @instructure/ui-svg-images
 ```
 
 ### Usage

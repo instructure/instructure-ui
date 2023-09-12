@@ -13,7 +13,7 @@ A utility to wrap (decorates) a React component class adding functionality.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-decorator
+npm install @instructure/ui-decorator
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-decorator.svg

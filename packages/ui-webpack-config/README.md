@@ -13,7 +13,7 @@ A shared webpack config made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-webpack-config
+npm install @instructure/ui-webpack-config
 ```
 
 ### Usage

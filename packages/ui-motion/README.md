@@ -17,7 +17,7 @@ The `ui-motion` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-motion
+npm install @instructure/ui-motion
 ```
 
 ### Usage

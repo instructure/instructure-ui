@@ -19,7 +19,7 @@ The `ui-focusable` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-focusable
+npm install @instructure/ui-focusable
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-focusable.svg

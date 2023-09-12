@@ -20,7 +20,7 @@ The `ui-radio-input` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-radio-input
+npm install @instructure/ui-radio-input
 ```
 
 ### Usage

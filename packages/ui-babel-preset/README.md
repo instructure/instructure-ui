@@ -13,7 +13,7 @@ A UI component library made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-babel-preset
+npm install @instructure/ui-babel-preset
 ```
 
 ### Usage

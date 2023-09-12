@@ -13,7 +13,7 @@ A package containing template files to generate an instructure-ui package.
 ### Installation
 
 ```sh
-yarn add @instructure/template-package
+npm install @instructure/template-package
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/template-package.svg

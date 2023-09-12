@@ -15,7 +15,7 @@ This theme has a 3:1 minimum contrast requirement.
 ### Installation
 
 ```sh
-yarn add @instructure/canvas-theme
+npm install @instructure/canvas-theme
 ```
 
 ### Usage

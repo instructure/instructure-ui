@@ -19,7 +19,7 @@ The `ui-tray` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-tray
+npm install @instructure/ui-tray
 ```
 
 ### Usage

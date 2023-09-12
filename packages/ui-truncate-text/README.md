@@ -19,7 +19,7 @@ The `ui-truncate-text` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-truncate-text
+npm install @instructure/ui-truncate-text
 ```
 
 ### Usage

@@ -20,7 +20,7 @@ The `ui-view` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-view
+npm install @instructure/ui-view
 ```
 
 ### Usage

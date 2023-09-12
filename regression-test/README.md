@@ -21,28 +21,28 @@ In order to run the test you have to have it's dependencies installed. (this pro
 
 ```sh
 # cwd: regression-test
-yarn install
+npm install
 ```
 
 Then build the project(with `esbuild`):
 
 ```sh
 # cwd: regression-test
-yarn build:esbuild
+npm run build:esbuild
 ```
 
 The regression testing tool (`testcafe`) will test the app in a real browser, so we have to have a server serving our application:
 
 ```sh
 # cwd: regression-test
-yarn serve
+npm run serve
 ```
 
 Now you can run the test suite:
 
 ```sh
 # cwd: regression-test
-yarn test
+npm run test
 ```
 
 The test suite should be opened in a new `chrome` instance and it's result will be reported in the console in the shell which ran the `test` command.

@@ -15,7 +15,7 @@ This theme meets the WCAG 2 Level AA 4.5:1 minimum contrast requirements.
 ### Installation
 
 ```sh
-yarn add @instructure/canvas-high-contrast-theme
+npm install @instructure/canvas-high-contrast-theme
 ```
 
 ### Usage

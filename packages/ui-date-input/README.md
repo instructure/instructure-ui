@@ -19,7 +19,7 @@ The `ui-date-input` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-date-input
+npm install @instructure/ui-date-input
 ```
 
 ### Usage

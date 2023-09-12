@@ -484,7 +484,7 @@ A UI component library made by Instructure Inc.
 
 ```sh
 
-yarn add @instructure/emotion
+npm install @instructure/emotion
 
 ```
 

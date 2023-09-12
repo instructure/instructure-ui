@@ -93,7 +93,7 @@ export function checkIfGitTagExists(version) {
   if (result) {
     error(`Git tag ${tag} already exists!`)
     error(
-      'Run the bump "yarn bump" script to update the version prior to running a stable release.'
+      'Run the bump "npm run bump" script to update the version prior to running a stable release.'
     )
     process.exit(1)
   }

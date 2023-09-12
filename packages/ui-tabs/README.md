@@ -17,7 +17,7 @@ The `ui-tabs` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-tabs
+npm install @instructure/ui-tabs
 ```
 
 ### Usage

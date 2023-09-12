@@ -19,7 +19,7 @@ The `ui-spinner` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-spinner
+npm install @instructure/ui-spinner
 ```
 
 ### Usage

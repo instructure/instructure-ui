@@ -14,7 +14,7 @@ so that they can be removed from production bundles.
 ### Installation
 
 ```sh
-yarn add @instructure/console
+npm install @instructure/console
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/console.svg

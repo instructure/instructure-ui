@@ -20,7 +20,7 @@ The `ui-side-nav-bar` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-side-nav-bar
+npm install @instructure/ui-side-nav-bar
 ```
 
 ### Usage

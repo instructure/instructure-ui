@@ -17,12 +17,12 @@ This document outlines the steps required for the release process. Please follow
    ```
    git checkout -b release
    ```
-3. **Run Yarn Bump Command**
+3. **Run Npm Bump Command**
 
    - This will propose new version numbers.
 
    ```
-   yarn bump
+   npm run bump
    ```
 
    - Check if the proposed version numbers are correct. If they are, accept them.
@@ -74,12 +74,12 @@ This document describes the steps to follow when releasing updates to legacy ver
    ```bash
    git checkout -b release
    ```
-3. **Run Yarn Bump Command**
+3. **Run Npm Bump Command**
 
    - This will propose new version numbers.
 
    ```bash
-   yarn bump
+   npm run bump
    ```
 
    - Check if the proposed version numbers are correct. If they are, accept them.

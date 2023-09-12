@@ -19,7 +19,7 @@ The `ui-tree-browser` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-tree-browser
+npm install @instructure/ui-tree-browser
 ```
 
 ### Usage

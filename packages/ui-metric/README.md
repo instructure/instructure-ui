@@ -20,7 +20,7 @@ The `ui-metric` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-metric
+npm install @instructure/ui-metric
 ```
 
 ### Usage

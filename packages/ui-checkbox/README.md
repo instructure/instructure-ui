@@ -20,7 +20,7 @@ The `ui-checkbox` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-checkbox
+npm install @instructure/ui-checkbox
 ```
 
 ### Usage

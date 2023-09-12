@@ -39,12 +39,16 @@ function buildProject() {
   )
   // eslint-disable-next-line no-console
   console.info('Starting Babel and TSC...')
-  const tsBuild = spawn('yarn', ['build:types', '--verbose'], spawnStdIoOpts)
-  const babelBuild = spawn('yarn', ['build'], spawnStdIoOpts)
+  const tsBuild = spawn(
+    'npm',
+    ['run', 'build:types', '--verbose'],
+    spawnStdIoOpts
+  )
+  const babelBuild = spawn('npm', ['run', 'build'], spawnStdIoOpts)
   tsBuild.on('exit', (code) => {
     if (code !== 0) {
       babelBuild.kill()
-      console.error("'yarn build:ts' failed :(")
+      console.error("'npm run build:ts' failed :(")
       process.exit(code)
     }
   })
@@ -57,13 +61,13 @@ function buildProject() {
   babelBuild.on('exit', (code) => {
     if (code !== 0) {
       tsBuild.kill()
-      console.error("'yarn build' failed :(")
+      console.error("'npm run build' failed :(")
       process.exit(code)
     }
     if (process.env.CI) {
-      const result = execSync('yarn build:tokens', opts)
+      const result = execSync('npm run build:tokens', opts)
       // eslint-disable-next-line no-console
-      console.info('yarn build:tokens result', result)
+      console.info('npm run build:tokens result', result)
     }
   })
 }

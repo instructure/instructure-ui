@@ -19,7 +19,7 @@ The `ui-modal` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-modal
+npm install @instructure/ui-modal
 ```
 
 ### Usage

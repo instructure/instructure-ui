@@ -19,7 +19,7 @@ The `ui-time-select` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-time-select
+npm install @instructure/ui-time-select
 ```
 
 ### Usage

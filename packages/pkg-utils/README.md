@@ -13,7 +13,7 @@ Utilities for managing node packages in a mono-repo using yarn workspaces.
 ### Installation
 
 ```sh
-yarn add @instructure/pkg-utils
+npm install @instructure/pkg-utils
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/pkg-utils.svg

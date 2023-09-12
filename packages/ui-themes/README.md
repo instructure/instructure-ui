@@ -11,7 +11,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add @instructure/ui-themes
+npm install @instructure/ui-themes
 ```
 
 ### Usage

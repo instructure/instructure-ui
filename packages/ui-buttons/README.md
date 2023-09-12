@@ -23,7 +23,7 @@ The `ui-buttons` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-buttons
+npm install @instructure/ui-buttons
 ```
 
 ### Usage

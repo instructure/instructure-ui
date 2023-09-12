@@ -19,7 +19,7 @@ The `ui-simple-select` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-simple-select
+npm install @instructure/ui-simple-select
 ```
 
 ### Usage

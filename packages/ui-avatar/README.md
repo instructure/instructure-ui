@@ -19,7 +19,7 @@ The `ui-avatar` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-avatar
+npm install @instructure/ui-avatar
 ```
 
 ### Usage

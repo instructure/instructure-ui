@@ -53,8 +53,8 @@ async function bump(packageName, requestedVersion) {
   let releaseVersion
   try {
     releaseVersion = await bumpPackages(packageName, requestedVersion)
-    info('📦 Running yarn install to update yarn.lock file!')
-    execSync('yarn install', { stdio: 'inherit' })
+    info('📦 Running npm install to update package-lock file!')
+    execSync('npm install', { stdio: 'inherit' })
   } catch (err) {
     error(err)
     process.exit(1)

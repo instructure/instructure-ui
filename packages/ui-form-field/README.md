@@ -24,7 +24,7 @@ The `ui-form-field` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-form-field
+npm install @instructure/ui-form-field
 ```
 
 ### Usage

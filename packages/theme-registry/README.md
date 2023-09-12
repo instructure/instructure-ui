@@ -14,7 +14,7 @@ Read more about it [here](/#ThemeRegistry).
 ### Installation
 
 ```sh
-yarn add @instructure/theme-registry
+npm install @instructure/theme-registry
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/theme-registry.svg

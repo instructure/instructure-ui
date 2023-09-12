@@ -20,7 +20,7 @@ The `ui-progress` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-progress
+npm install @instructure/ui-progress
 ```
 
 ### Usage

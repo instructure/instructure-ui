@@ -19,7 +19,7 @@ The `ui-tag` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-tag
+npm install @instructure/ui-tag
 ```
 
 ### Usage

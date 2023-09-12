@@ -13,7 +13,7 @@ Utility scripts for generating cross-platform tokens from InstUI themes.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-token-scripts
+npm install @instructure/ui-token-scripts
 ```
 
 ### Supported Platforms & Languages

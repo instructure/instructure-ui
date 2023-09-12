@@ -17,7 +17,7 @@ A grid component.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-grid
+npm install @instructure/ui-grid
 ```
 
 ### Usage

@@ -19,7 +19,7 @@ The `ui-file-drop` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-file-drop
+npm install @instructure/ui-file-drop
 ```
 
 ### Usage

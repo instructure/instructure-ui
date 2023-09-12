@@ -19,7 +19,7 @@ The `ui-text-area` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-text-area
+npm install @instructure/ui-text-area
 ```
 
 ### Usage

@@ -15,11 +15,11 @@ An eslint configuration for Instructure UI.
 Install eslint
 
 ```sh
-yarn add eslint --dev
+npm install eslint --dev
 ```
 
 ```sh
-yarn add eslint-plugin-instructure-ui --dev
+npm install eslint-plugin-instructure-ui --dev
 ```
 
 ### Configuration

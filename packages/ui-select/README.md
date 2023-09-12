@@ -19,7 +19,7 @@ The `ui-select` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-select
+npm install @instructure/ui-select
 ```
 
 ### Usage

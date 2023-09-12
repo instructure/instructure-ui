@@ -30,7 +30,7 @@ A babel plugin made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/babel-plugin-transform-imports
+npm install @instructure/babel-plugin-transform-imports
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/babel-plugin-transform-imports.svg

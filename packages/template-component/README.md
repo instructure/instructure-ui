@@ -15,7 +15,7 @@ DEPRECATED. This will be deleted in InstUI v9, please just copy and modify and e
 ### Installation
 
 ```sh
-yarn add @instructure/template-component
+npm install @instructure/template-component
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/template-component.svg
