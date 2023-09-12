@@ -15,14 +15,14 @@ The ui-codemods should make it easier to deal with API changes when upgrading In
 The codemod scripts can be installed via the following command:
 
 ```sh
-yarn add @instructure/ui-codemods
+npm install @instructure/ui-codemods
 ```
 
 The configuration files are located in the [instui-config](#instui-config) package.
 This can be installed via the following command:
 
 ```sh
-yarn add @instructure/instui-config
+npm install @instructure/instui-config
 ```
 
 ### Executing Codemods Using instui-cli

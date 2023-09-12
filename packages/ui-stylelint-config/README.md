@@ -13,7 +13,7 @@ A shared stylelint config made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-stylelint-config
+npm install @instructure/ui-stylelint-config
 ```
 
 ### Usage

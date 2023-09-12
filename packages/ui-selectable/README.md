@@ -17,7 +17,7 @@ The `ui-selectable` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-selectable
+npm install @instructure/ui-selectable
 ```
 
 ### Usage

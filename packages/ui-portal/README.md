@@ -17,7 +17,7 @@ The `ui-portal` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-portal
+npm install @instructure/ui-portal
 ```
 
 ### Usage

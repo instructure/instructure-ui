@@ -253,7 +253,7 @@ import { ${importName} } from '${esPath}'
         <View margin="0 0 small 0" display="block">
           <SourceCodeEditor
             label={`How to install ${title}`}
-            defaultValue={`yarn add ${packageName}`}
+            defaultValue={`npm install ${packageName}`}
             language="shell"
             readOnly
           />

@@ -19,7 +19,7 @@ The `ui-options` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-options
+npm install @instructure/ui-options
 ```
 
 ### Usage

@@ -18,7 +18,7 @@ parsing, localization, etc.) should be handled by a wrapper component.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-number-input
+npm install @instructure/ui-number-input
 ```
 
 ### Usage

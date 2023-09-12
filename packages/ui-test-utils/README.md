@@ -13,7 +13,7 @@ A UI testing library made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-test-utils
+npm install @instructure/ui-test-utils
 ```
 
 ### Usage

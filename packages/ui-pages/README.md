@@ -17,7 +17,7 @@ The `ui-pages` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-pages
+npm install @instructure/ui-pages
 ```
 
 ### Usage

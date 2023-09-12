@@ -63,18 +63,13 @@ exports.builder = (yargs) => {
     type: 'string',
     describe: 'The npm client to use',
     choices: ['yarn', 'npm'],
-    default: 'yarn'
+    default: 'npm'
   })
 }
 
 exports.handler = (argv) => {
-  const {
-    path,
-    useResolutions,
-    version,
-    ignoreWorkspaceRootCheck,
-    npmClient
-  } = argv
+  const { path, useResolutions, version, ignoreWorkspaceRootCheck, npmClient } =
+    argv
 
   handleUpgradePackages({
     sourcePath: path,

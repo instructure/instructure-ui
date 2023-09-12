@@ -13,7 +13,7 @@ A React utility library made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-react-utils
+npm install @instructure/ui-react-utils
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-react-utils.svg

@@ -25,7 +25,7 @@ ALWAYS_APPEND_UI_TESTABLE_LOCATORS=1
 ### Installation
 
 ```sh
-yarn add @instructure/ui-testable
+npm install @instructure/ui-testable
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-testable.svg

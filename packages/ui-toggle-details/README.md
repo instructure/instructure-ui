@@ -20,7 +20,7 @@ The `ui-toggle-details` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-toggle-details
+npm install @instructure/ui-toggle-details
 ```
 
 ### Usage

@@ -18,7 +18,7 @@ The `ui-overlays` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-overlays
+npm install @instructure/ui-overlays
 ```
 
 ### Usage

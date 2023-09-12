@@ -19,7 +19,7 @@ The `ui-popover` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-popover
+npm install @instructure/ui-popover
 ```
 
 ### Usage

@@ -19,7 +19,7 @@ The `ui-range-input` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-range-input
+npm install @instructure/ui-range-input
 ```
 
 ### Usage

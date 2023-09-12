@@ -20,7 +20,7 @@ The `ui-navigation` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-navigation
+npm install @instructure/ui-navigation
 ```
 
 ### Usage

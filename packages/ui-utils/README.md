@@ -11,7 +11,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add @instructure/ui-utils
+npm install @instructure/ui-utils
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-utils.svg

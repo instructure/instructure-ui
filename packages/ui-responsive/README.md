@@ -19,7 +19,7 @@ The `ui-responsive` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-responsive
+npm install @instructure/ui-responsive
 ```
 
 ### Usage

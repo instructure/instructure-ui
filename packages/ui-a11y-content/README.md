@@ -21,7 +21,7 @@ The `ui-a11y-content` package contains the following components:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-a11y-content
+npm install @instructure/ui-a11y-content
 ```
 
 ### Usage

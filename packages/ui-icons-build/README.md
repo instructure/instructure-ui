@@ -13,7 +13,7 @@ Build scripts to generate icon sets from source SVG files for multiple platforms
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-icons-build
+npm install --dev @instructure/ui-icons-build
 ```
 
 ### Supported formats:

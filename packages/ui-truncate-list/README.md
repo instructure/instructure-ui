@@ -19,7 +19,7 @@ The `ui-truncate-list` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-truncate-list
+npm install @instructure/ui-truncate-list
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-truncate-list.svg

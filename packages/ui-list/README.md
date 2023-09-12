@@ -20,7 +20,7 @@ The `ui-list` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-list
+npm install @instructure/ui-list
 ```
 
 ### Usage

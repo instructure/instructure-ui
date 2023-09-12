@@ -19,7 +19,7 @@ The `ui-text` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-text
+npm install @instructure/ui-text
 ```
 
 ### Usage

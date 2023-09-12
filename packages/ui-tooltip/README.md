@@ -19,7 +19,7 @@ The `ui-tooltip` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-tooltip
+npm install @instructure/ui-tooltip
 ```
 
 ### Usage

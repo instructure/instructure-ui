@@ -19,7 +19,7 @@ The `ui-calendar` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-calendar
+npm install @instructure/ui-calendar
 ```
 
 ### Usage

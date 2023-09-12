@@ -37,7 +37,7 @@ embed: true
 - install InstUI related dependencies:
 
 ```sh
-yarn add @instructure/emotion @instructure/ui-react-utils
+npm install @instructure/emotion @instructure/ui-react-utils
 ```
 
 - in your Next.js application create - if it does not already exist - a file named `_app.js` inside the `pages` directory. This is a special file in Next.js because it allows you to override/control component initialization. Read more about it in the [Next.js docs](https://nextjs.org/docs/advanced-features/custom-app).

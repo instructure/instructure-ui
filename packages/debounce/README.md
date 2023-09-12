@@ -15,7 +15,7 @@ A debounce utility based on [lodash.debounce](https://www.npmjs.com/package/loda
 ### Installation
 
 ```sh
-yarn add @instructure/debounce
+npm install @instructure/debounce
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/debounce.svg

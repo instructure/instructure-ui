@@ -19,7 +19,7 @@ The `ui-billboard` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-billboard
+npm install @instructure/ui-billboard
 ```
 
 ### Usage

@@ -13,7 +13,7 @@ A DOM utility library made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-dom-utils
+npm install @instructure/ui-dom-utils
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-dom-utils.svg

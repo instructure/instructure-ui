@@ -13,7 +13,7 @@ A wrapper around the [axe-core](https://axe-core.org/) accessibility testing too
 ### Installation
 
 ```sh
-yarn add @instructure/ui-axe-check
+npm install @instructure/ui-axe-check
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-axe-check.svg

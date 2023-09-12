@@ -19,7 +19,7 @@ The `ui-link` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-link
+npm install @instructure/ui-link
 ```
 
 ### Usage

@@ -14,7 +14,7 @@ such as upgrades and codemod scripts.
 ### Installation
 
 ```sh
-yarn add @instructure/instui-config
+npm install @instructure/instui-config
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/instui-config.svg

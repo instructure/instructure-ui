@@ -19,7 +19,7 @@ The `ui-position` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-position
+npm install @instructure/ui-position
 ```
 
 ### Usage

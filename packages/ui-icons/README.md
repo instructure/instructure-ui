@@ -11,7 +11,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add @instructure/ui-icons
+npm install @instructure/ui-icons
 ```
 
 ### Usage
@@ -82,11 +82,11 @@ const MyComponent = () => {
 
 - If the icon has to bidirectional (being mirrored in RTL mode, typically arrow icons), add the icon name to the bidirectional list in `packages/ui-icons/icons.config.js`. Deprecated icons are handled here as well.
 
-- Run `yarn export:icons` from the repository root directory to generate the icons. This script will also take care of further optimizations on the SVG files (e.g. removing the `fill`s). The configs for this are located in `packages/ui-icons-build/lib/tasks/optimize-svgs/index.js` and `packages/ui-icons/svgo.config.js`.
+- Run `npm run export:icons` from the repository root directory to generate the icons. This script will also take care of further optimizations on the SVG files (e.g. removing the `fill`s). The configs for this are located in `packages/ui-icons-build/lib/tasks/optimize-svgs/index.js` and `packages/ui-icons/svgo.config.js`.
 
-- Run `yarn && yarn bootstrap`.
+- Run `npm install && npm run bootstrap`.
 
-- Finally, run `yarn dev` from the repository root directory to start the local server and check the generated output.
+- Finally, run `npm run dev` from the repository root directory to start the local server and check the generated output.
 
 - Verify icons display correctly by checking under [iconography](/#iconography) in the main nav. Check all 3 versions (React, SVG and icon font).
 

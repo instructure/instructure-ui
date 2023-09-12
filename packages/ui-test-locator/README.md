@@ -13,7 +13,7 @@ A locator component for finding components by their defined selector in tests.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-test-locator
+npm install @instructure/ui-test-locator
 ```
 
 ### Usage

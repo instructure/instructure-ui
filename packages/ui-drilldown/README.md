@@ -19,7 +19,7 @@ The `ui-drilldown` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-drilldown
+npm install @instructure/ui-drilldown
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-drilldown.svg

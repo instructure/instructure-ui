@@ -14,8 +14,8 @@
     "instui": "./lib/index.js"
   },
   "scripts": {
-    "lint": "run -T ui-scripts lint",
-    "lint:fix": "run -T ui-scripts lint --fix",
+    "lint": "ui-scripts lint",
+    "lint:fix": "ui-scripts lint --fix",
     "codemod": "instui codemod",
     "create-package": "instui create package",
     "create-component": "instui create component",

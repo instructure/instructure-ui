@@ -13,7 +13,7 @@ A Node CLI utility made by Instructure, Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/command-utils
+npm install @instructure/command-utils
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/command-utils.svg

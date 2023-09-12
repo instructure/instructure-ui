@@ -19,7 +19,7 @@ The `ui-text-input` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-text-input
+npm install @instructure/ui-text-input
 ```
 
 ### Usage

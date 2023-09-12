@@ -19,7 +19,7 @@ The `ui-source-code-editor` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-source-code-editor
+npm install @instructure/ui-source-code-editor
 ```
 
 ### Usage

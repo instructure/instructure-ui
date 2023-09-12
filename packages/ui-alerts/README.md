@@ -19,7 +19,7 @@ The `ui-alerts` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-alerts
+npm install @instructure/ui-alerts
 ```
 
 ### Usage

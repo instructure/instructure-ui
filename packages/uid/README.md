@@ -15,7 +15,7 @@ A unique (CSS-safe) id generator made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/uid
+npm install @instructure/uid
 ```
 
 ### Usage

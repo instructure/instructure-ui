@@ -19,7 +19,7 @@ The `ui-heading` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-heading
+npm install @instructure/ui-heading
 ```
 
 ### Usage

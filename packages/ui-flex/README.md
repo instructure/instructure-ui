@@ -19,7 +19,7 @@ The `ui-flex` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-flex
+npm install @instructure/ui-flex
 ```
 
 ### Usage

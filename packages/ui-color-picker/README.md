@@ -13,7 +13,7 @@ A robust component for picking, mixing, validating colors
 ### Installation
 
 ```sh
-yarn add @instructure/ui-color-picker
+npm install @instructure/ui-color-picker
 ```
 
 ### Components

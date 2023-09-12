@@ -15,7 +15,7 @@ This theme has a 3:1 minimum contrast requirement.
 ### Installation
 
 ```sh
-yarn add @instructure/instructure-theme
+npm install @instructure/instructure-theme
 ```
 
 ### Usage

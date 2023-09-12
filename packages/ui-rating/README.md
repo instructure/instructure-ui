@@ -19,7 +19,7 @@ The `ui-rating` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-rating
+npm install @instructure/ui-rating
 ```
 
 ### Usage

@@ -19,7 +19,7 @@ The `ui-table` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-table
+npm install @instructure/ui-table
 ```
 
 ### Usage

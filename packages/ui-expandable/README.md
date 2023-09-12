@@ -19,7 +19,7 @@ The `ui-expandable` package contains the following utilities:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-expandable
+npm install @instructure/ui-expandable
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-expandable.svg

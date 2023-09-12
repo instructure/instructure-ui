@@ -181,7 +181,7 @@ class Icons extends Component<IconsProps, IconsState> {
         </Heading>
         <SourceCodeEditor
           label={`How to install`}
-          defaultValue={`yarn add ${this.props.packageName}`}
+          defaultValue={`npm install ${this.props.packageName}`}
           language="shell"
           readOnly
         />

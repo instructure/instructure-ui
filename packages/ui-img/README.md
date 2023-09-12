@@ -19,7 +19,7 @@ The `ui-img` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-img
+npm install @instructure/ui-img
 ```
 
 ### Usage

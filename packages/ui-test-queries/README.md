@@ -13,7 +13,7 @@ Helpers and utilities for queries in UI tests.
 ### Installation
 
 ```sh
-yarn add @instructure/ui-test-queries
+npm install @instructure/ui-test-queries
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-test-queries.svg

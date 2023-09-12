@@ -24,7 +24,7 @@ The `ui-a11y-utils` package contains the following utilities:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-a11y-utils
+npm install @instructure/ui-a11y-utils
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-a11y-utils.svg

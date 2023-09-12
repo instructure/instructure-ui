@@ -19,7 +19,7 @@ The `ui-date-time-input` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-date-time-input
+npm install @instructure/ui-date-time-input
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-date-time-input.svg

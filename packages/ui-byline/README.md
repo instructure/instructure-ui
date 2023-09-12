@@ -19,7 +19,7 @@ The `ui-byline` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-byline
+npm install @instructure/ui-byline
 ```
 
 ### Usage

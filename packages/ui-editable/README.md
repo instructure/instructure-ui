@@ -20,7 +20,7 @@ The `ui-editable` packages contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-editable
+npm install @instructure/ui-editable
 ```
 
 ### Usage

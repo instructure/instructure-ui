@@ -13,7 +13,7 @@ A shared browserslist config made to work with the Instructure UI components and
 ### Installation
 
 ```sh
-yarn add @instructure/browserslist-config-instui
+npm install @instructure/browserslist-config-instui
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/browserslist-config-instui.svg

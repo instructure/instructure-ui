@@ -19,7 +19,7 @@ The `ui-dialog` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-dialog
+npm install @instructure/ui-dialog
 ```
 
 ### Usage

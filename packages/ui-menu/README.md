@@ -19,7 +19,7 @@ The `ui-menu` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-menu
+npm install @instructure/ui-menu
 ```
 
 ### Usage

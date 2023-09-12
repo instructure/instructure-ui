@@ -19,7 +19,7 @@ The `ui-pill` package contains the following:
 ### Installation
 
 ```sh
-yarn add @instructure/ui-pill
+npm install @instructure/ui-pill
 ```
 
 ### Usage
