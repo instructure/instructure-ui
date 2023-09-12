@@ -92,7 +92,6 @@
   "@instructure/ui-table",
   "@instructure/ui-tabs",
   "@instructure/ui-tag",
-  "@instructure/ui-template-scripts",
   "@instructure/ui-test-locator",
   "@instructure/ui-test-queries",
   "@instructure/ui-test-sandbox",

@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-const yargsInteractive = require('yargs-interactive')
-const { info, error } = require('@instructure/command-utils')
-const Project = require('@lerna/project').Project
+import yargsInteractive from 'yargs-interactive'
+import { error, info } from '@instructure/command-utils'
+import { Project } from '@lerna/project'
+import handleCreateFromTemplate from './handleCreateFromTemplate.js'
+import promptContentName from '../utils/promptContentName.js'
+import getWorkspacePaths from '../utils/getWorkspacePaths.js'
 
-const handleCreateFromTemplate = require('./handleCreateFromTemplate')
-const promptContentName = require('../utils/promptContentName')
-const getWorkspacePaths = require('../utils/getWorkspacePaths')
-
-module.exports = async ({
+export default async ({
   template,
   path,
   name,

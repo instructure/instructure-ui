@@ -22,86 +22,88 @@
  * SOFTWARE.
  */
 
-const { handleExecuteCodemods } = require('../handlers')
-const fs = require('fs')
-const { info, error } = require('@instructure/command-utils')
-const getParserConfigPath = require('../utils/getParserConfigPath')
+import handleExecuteCodemods from '../handlers/handleExecuteCodemods.js'
+import fs from 'fs'
+import { error, info } from '@instructure/command-utils'
+import getParserConfigPath from '../utils/getParserConfigPath.js'
 
-exports.command = 'codemod'
-exports.desc = 'Apply instructure-ui codemods to source at a specified path.'
-exports.builder = (yargs) => {
-  yargs.option('path', {
-    alias: 'p',
-    type: 'string',
-    describe:
-      'The path to the source where the codemod will be applied (defaults to current working directory).',
-    default: process.cwd()
-  })
+export default {
+  command: 'codemod',
+  desc: 'Apply instructure-ui codemods to source at a specified path.',
+  builder: (yargs) => {
+    yargs.option('path', {
+      alias: 'p',
+      type: 'string',
+      describe:
+        'The path to the source where the codemod will be applied (defaults to current working directory).',
+      default: process.cwd()
+    })
 
-  yargs.option('scopeModifications', {
-    alias: 'scope-modifications',
-    type: 'array',
-    describe:
-      'Specify the scope of the code modifications. Specifying `imports` will only change import statement, `props` will update prop values.',
-    choices: ['imports', 'props'],
-    default: ['imports', 'props']
-  })
+    yargs.option('scopeModifications', {
+      alias: 'scope-modifications',
+      type: 'array',
+      describe:
+        'Specify the scope of the code modifications. Specifying `imports` will only change import statement, `props` will update prop values.',
+      choices: ['imports', 'props'],
+      default: ['imports', 'props']
+    })
 
-  yargs.option('ignore', {
-    alias: 'i',
-    type: 'array',
-    describe:
-      'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).',
-    default: ['**/node_modules/**']
-  })
+    yargs.option('ignore', {
+      alias: 'i',
+      type: 'array',
+      describe:
+        'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).',
+      default: ['**/node_modules/**']
+    })
 
-  yargs.option('version', {
-    alias: 'v',
-    type: 'string',
-    describe:
-      'A semantic instructure-ui version number. When provided, the source will be modified to be compatible with the specified version. When omitted, the source will be modified to be compatible with the latest stable version.',
-    default: null
-  })
+    yargs.option('version', {
+      alias: 'v',
+      type: 'string',
+      describe:
+        'A semantic instructure-ui version number. When provided, the source will be modified to be compatible with the specified version. When omitted, the source will be modified to be compatible with the latest stable version.',
+      default: null
+    })
 
-  yargs.option('parser', {
-    type: 'string',
-    describe: 'jscodeshift `parser` argument for parsing source files.',
-    choices: ['babel', 'babylon', 'flow', 'ts', 'tsx'],
-    default: 'babylon'
-  })
+    yargs.option('parser', {
+      type: 'string',
+      describe: 'jscodeshift `parser` argument for parsing source files.',
+      choices: ['babel', 'babylon', 'flow', 'ts', 'tsx'],
+      default: 'babylon'
+    })
 
-  yargs.option('parser-config', {
-    type: 'string',
-    describe:
-      'jscodeshift `parser-config` argument. A path to your own JSON file containing a custom parser configuration for flow or babylon. To view the default instructure-ui config use `instui codemod view-parser-config`',
-    default: null
-  })
+    yargs.option('parser-config', {
+      type: 'string',
+      describe:
+        'jscodeshift `parser-config` argument. A path to your own JSON file containing a custom parser configuration for flow or babylon. To view the default instructure-ui config use `instui codemod view-parser-config`',
+      default: null
+    })
 
-  yargs.command(
-    'view-parser-config',
-    'View the default instructure-ui parser configuration file that is supplied to jscodeshift when the codemods are executed',
-    () => {
-      fs.readFile(getParserConfigPath(), (err, data) => {
-        if (err) {
-          error(err)
-        } else {
-          info(data)
-        }
-      })
-    }
-  )
-}
+    yargs.command(
+      'view-parser-config',
+      'View the default instructure-ui parser configuration file that is supplied to jscodeshift when the codemods are executed',
+      () => {
+        fs.readFile(getParserConfigPath(), (err, data) => {
+          if (err) {
+            error(err)
+          } else {
+            info(data)
+          }
+        })
+      }
+    )
+  },
 
-exports.handler = (argv) => {
-  const { path, scopeModifications, ignore, version, parser, parserConfig } =
-    argv
+  handler: (argv) => {
+    const { path, scopeModifications, ignore, version, parser, parserConfig } =
+      argv
 
-  handleExecuteCodemods({
-    sourcePath: path,
-    scopeModifications,
-    version,
-    ignore,
-    parser,
-    parserConfig
-  })
+    handleExecuteCodemods({
+      sourcePath: path,
+      scopeModifications,
+      version,
+      ignore,
+      parser,
+      parserConfig
+    })
+  }
 }

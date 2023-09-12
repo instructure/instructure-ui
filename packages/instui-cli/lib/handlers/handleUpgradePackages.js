@@ -22,22 +22,22 @@
  * SOFTWARE.
  */
 
-const { info, error, runCommandSync } = require('@instructure/command-utils')
-const { getPackageList } = require('../utils/getPackageLists')
-const verifyPackageJson = require('../utils/verify-package-json')
-const pkgUtils = require('@instructure/pkg-utils')
+import { error, info, runCommandSync } from '@instructure/command-utils'
+import { getPackageList } from '../utils/getPackageLists.js'
+import verifyPackageJson from '../utils/verify-package-json.js'
+import pkgUtils from '@instructure/pkg-utils'
 
-module.exports = ({
-  path,
+export default ({
+  sourcePath,
   version,
   useResolutions,
   ignoreWorkspaceRootCheck,
   npmClient
 }) => {
   const packageList = getPackageList({ version })
-  verifyPackageJson({ sourcePath: path })
+  verifyPackageJson(sourcePath)
 
-  const pkg = pkgUtils.getPackage({ cwd: path })
+  const pkg = pkgUtils.getPackage({ cwd: sourcePath })
 
   const pkgDependencies = Object.keys(pkg.get('dependencies') || {})
   const pkgDevDependencies = Object.keys(pkg.get('devDependencies') || {})
@@ -54,10 +54,17 @@ module.exports = ({
   if (allDependencies.length === 0) return
 
   if (useResolutions && npmClient == 'yarn') {
-    info(`Updating resolutions in ${path}...`)
-    return updateResolutions({ pkg, packages: allDependencies, path, version })
+    info(`Updating resolutions in ${sourcePath}...`)
+    return updateResolutions({
+      pkg,
+      packages: allDependencies,
+      path: sourcePath,
+      version
+    })
   } else {
-    info(`Upgrading ${allDependencies} in ${path} to ${version || 'latest'}`)
+    info(
+      `Upgrading ${allDependencies} in ${sourcePath} to ${version || 'latest'}`
+    )
 
     const mapVersion = (dependencies) =>
       dependencies.map((dep) => `${dep}@${version || 'latest'}`)
@@ -71,13 +78,18 @@ module.exports = ({
 
         runCommandSync(
           'yarn',
-          composeYarnArgs(['remove', ...allDependencies, '--cwd', path])
+          composeYarnArgs(['remove', ...allDependencies, '--cwd', sourcePath])
         )
 
         if (dependencies.length > 0) {
           runCommandSync(
             'yarn',
-            composeYarnArgs(['add', ...mapVersion(dependencies), '--cwd', path])
+            composeYarnArgs([
+              'add',
+              ...mapVersion(dependencies),
+              '--cwd',
+              sourcePath
+            ])
           )
         }
 
@@ -88,7 +100,7 @@ module.exports = ({
               'add',
               ...mapVersion(devDependencies),
               '--cwd',
-              path,
+              sourcePath,
               '--dev'
             ])
           )
@@ -97,7 +109,7 @@ module.exports = ({
         runCommandSync('npm', [
           'uninstall',
           '--prefix',
-          path,
+          sourcePath,
           ...allDependencies
         ])
 
@@ -105,7 +117,7 @@ module.exports = ({
           runCommandSync('npm', [
             'install',
             '--prefix',
-            path,
+            sourcePath,
             ...mapVersion(dependencies)
           ])
         }
@@ -115,7 +127,7 @@ module.exports = ({
             'install',
             '--save-dev',
             '--prefix',
-            path,
+            sourcePath,
             ...mapVersion(devDependencies)
           ])
         }

@@ -22,76 +22,76 @@
  * SOFTWARE.
  */
 
-const { handleCreate } = require('../handlers')
+import handleCreate from '../handlers/handleCreate.js'
 
-exports.command = 'create'
-exports.desc =
-  'Create content generated from Instructure UI template packages. DEPRECATED, this will be deleted in InstUI 9'
-
-exports.builder = (yargs) => {
-  const generatePathOption = ({ yargs, contentType }) => {
-    yargs.option('path', {
-      alias: 'p',
-      describe: `The path where the ${contentType} source will be generated.`
-    })
-  }
-
-  const generateNameOption = ({
-    yargs,
-    contentType,
-    formatInstructions = ''
-  } = {}) => {
-    yargs.option('name', {
-      alias: 'n',
-      describe: `The name of the ${contentType}${formatInstructions}.`
-    })
-  }
-
-  const packageCommand = 'package'
-  const packageFormatInstructions = ' (in kebab-case, e.g. my-package)'
-  yargs.command(
-    packageCommand,
-    'Create an Instructure UI package. FOR INTERNAL USE ONLY!',
-    (yargs) => {
-      const options = { yargs, contentType: packageCommand }
-      generatePathOption(options)
-      generateNameOption({
-        ...options,
-        formatInstructions: packageFormatInstructions
-      })
-    },
-    async (argv) => {
-      const { name, path } = argv
-      handleCreate({
-        contentType: packageCommand,
-        path,
-        name,
-        formatInstructions: packageFormatInstructions
+export default {
+  command: 'create',
+  desc: 'Create content generated from Instructure UI template packages. DEPRECATED, this will be deleted in InstUI 9',
+  builder: (yargs) => {
+    const generatePathOption = ({ yargs, contentType }) => {
+      yargs.option('path', {
+        alias: 'p',
+        describe: `The path where the ${contentType} source will be generated.`
       })
     }
-  )
 
-  const componentCommand = 'component'
-  const componentFormatInstructions = ' (in PascalCase, e.g. NumberInput)'
-  yargs.command(
-    componentCommand,
-    'Create an Instructure UI component. FOR INTERNAL USE ONLY!',
-    (yargs) => {
-      const options = { yargs, contentType: componentCommand }
-      generatePathOption(options)
-      generateNameOption({
-        ...options,
-        formatInstructions: componentFormatInstructions
-      })
-    },
-    async (argv) => {
-      const { name, path } = argv
-      handleCreate({
-        contentType: componentCommand,
-        path,
-        name,
-        formatInstructions: componentFormatInstructions
+    const generateNameOption = ({
+      yargs,
+      contentType,
+      formatInstructions = ''
+    } = {}) => {
+      yargs.option('name', {
+        alias: 'n',
+        describe: `The name of the ${contentType}${formatInstructions}.`
       })
     }
-  )
+
+    const packageCommand = 'package'
+    const packageFormatInstructions = ' (in kebab-case, e.g. my-package)'
+    yargs.command(
+      packageCommand,
+      'Create an Instructure UI package. FOR INTERNAL USE ONLY!',
+      (yargs) => {
+        const options = { yargs, contentType: packageCommand }
+        generatePathOption(options)
+        generateNameOption({
+          ...options,
+          formatInstructions: packageFormatInstructions
+        })
+      },
+      async (argv) => {
+        const { name, path } = argv
+        handleCreate({
+          contentType: packageCommand,
+          path,
+          name,
+          formatInstructions: packageFormatInstructions
+        })
+      }
+    )
+
+    const componentCommand = 'component'
+    const componentFormatInstructions = ' (in PascalCase, e.g. NumberInput)'
+    yargs.command(
+      componentCommand,
+      'Create an Instructure UI component. FOR INTERNAL USE ONLY!',
+      (yargs) => {
+        const options = { yargs, contentType: componentCommand }
+        generatePathOption(options)
+        generateNameOption({
+          ...options,
+          formatInstructions: componentFormatInstructions
+        })
+      },
+      async (argv) => {
+        const { name, path } = argv
+        handleCreate({
+          contentType: componentCommand,
+          path,
+          name,
+          formatInstructions: componentFormatInstructions
+        })
+      }
+    )
+  }
 }

@@ -4,6 +4,7 @@
   "description": "A cli for working with Instructure UI packages",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -35,9 +36,11 @@
     "@instructure/ui-codemods": "8.43.1",
     "@instructure/ui-eslint-config": "8.43.1",
     "@instructure/ui-stylelint-config": "8.43.1",
-    "@instructure/ui-template-scripts": "8.43.1",
     "@instructure/ui-webpack-config": "8.43.1",
+    "@lerna/project": "^6.4.1",
     "depcheck": "^1.4.5",
+    "fs-extra": "^10.1.0",
+    "lodash.template": "^4.5.0",
     "semver": "^7.5.4",
     "yargs": "^17.7.2",
     "yargs-interactive": "^3.0.1"

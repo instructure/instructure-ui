@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
-const fse = require('fs-extra')
-const path = require('path')
-
-const template = require('lodash.template')
+import fs from 'fs'
+import fse from 'fs-extra'
+import path from 'path'
+import template from 'lodash.template'
 
 /**
  * Given a template file or directory containing a template, replaces template
@@ -63,7 +62,8 @@ const template = require('lodash.template')
  * @param {String} argv.dest - The path where the generated source will be located.
  * @param {Object} argv.values - A mapping of template variable names to replacement values.
  */
-module.exports = (argv = {}) => {
+
+export default (argv = {}) => {
   const { template: templatePath, dest, values = {} } = argv
 
   // Replace any template vars in filenames/dirnames

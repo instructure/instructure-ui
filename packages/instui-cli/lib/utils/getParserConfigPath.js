@@ -22,9 +22,13 @@
  * SOFTWARE.
  */
 
+import { createRequire } from 'module'
+
 const parserConfigImport =
   '@instructure/instui-config/codemod-configs/parser-config.json'
 
-module.exports = () => {
+export default () => {
+  const require = createRequire(import.meta.url)
+
   return require.resolve(parserConfigImport)
 }

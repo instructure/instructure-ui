@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-const { error } = require('@instructure/command-utils')
-const getInstuiConfigPaths = require('./getInstuiConfigPaths')
+import { error } from '@instructure/command-utils'
+import getInstuiConfigPaths from './getInstuiConfigPaths.js'
+import { createRequire } from 'module'
 
 const getPackageListPaths = ({ version } = {}) =>
   getInstuiConfigPaths({
@@ -32,11 +33,12 @@ const getPackageListPaths = ({ version } = {}) =>
     version
   })
 
-exports.getPackageList = ({ version } = {}) => {
+export function getPackageList({ version } = {}) {
   const packageListPaths = getPackageListPaths({ version })
 
   if (packageListPaths && packageListPaths.length > 0) {
     try {
+      const require = createRequire(import.meta.url)
       const packageList = require(packageListPaths[packageListPaths.length - 1])
       return packageList
     } catch (err) {
@@ -47,7 +49,9 @@ exports.getPackageList = ({ version } = {}) => {
   return []
 }
 
-exports.getRemovedPackageList = ({ version } = {}) => {
+export function getRemovedPackageList({ version } = {}) {
+  const require = createRequire(import.meta.url)
+
   const packageListPaths = getPackageListPaths({ version })
 
   if (packageListPaths && packageListPaths.length > 1) {

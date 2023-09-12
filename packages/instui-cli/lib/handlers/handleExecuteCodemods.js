@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-const yargsInteractive = require('yargs-interactive')
-const semver = require('semver')
-
-const { info, error } = require('@instructure/command-utils')
-const executeCodemod = require('../utils/execute-codemod')
-
-const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
-const getParserConfigPath = require('../utils/getParserConfigPath')
+import yargsInteractive from 'yargs-interactive'
+import semver from 'semver'
+import { error, info } from '@instructure/command-utils'
+import executeCodemod from '../utils/execute-codemod.js'
+import getInstuiConfigPaths from '../utils/getInstuiConfigPaths.js'
+import getParserConfigPath from '../utils/getParserConfigPath.js'
+import { createRequire } from 'module'
 
 async function promptImportMigration({ version } = {}) {
   // If no version is specified, they are looking to get on the latest, so prompt them in that case as well
@@ -62,7 +61,7 @@ async function promptImportMigration({ version } = {}) {
   }
 }
 
-module.exports = async ({
+export default async ({
   sourcePath,
   scopeModifications,
   version,
@@ -77,7 +76,7 @@ module.exports = async ({
 
     executeCodemods({
       sourcePath,
-      codemodName: 'updateImports.js',
+      codemodName: 'updateImports.ts',
       configPaths: getInstuiConfigPaths({
         type: 'codemod-configs',
         name: 'imports.config.js',
@@ -93,7 +92,7 @@ module.exports = async ({
   if (scopeModifications.includes('props')) {
     executeCodemods({
       sourcePath,
-      codemodName: 'updatePropNames.js',
+      codemodName: 'updatePropNames.ts',
       // Array of every propNames.config.json
       configPaths: getInstuiConfigPaths({
         type: 'codemod-configs',
@@ -119,6 +118,7 @@ const executeCodemods = ({
 }) => {
   try {
     info(`Applying codemods to ${sourcePath}\n`)
+    const require = createRequire(import.meta.url)
 
     const codemodPath = require.resolve(
       `@instructure/ui-codemods/lib/${codemodName}`

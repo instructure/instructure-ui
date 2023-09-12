@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const fs = require('fs')
+import path from 'path'
+import fs from 'fs'
+import { error } from '@instructure/command-utils'
 
-const { error } = require('@instructure/command-utils')
-
-module.exports = function ({ sourcePath }) {
+export default function (sourcePath) {
   if (!fs.existsSync(path.join(sourcePath, 'package.json'))) {
     error(`No package.json found in ${sourcePath}`)
     process.exit(1)

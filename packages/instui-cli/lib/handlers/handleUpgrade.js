@@ -22,24 +22,23 @@
  * SOFTWARE.
  */
 
-const {
-  info,
-  error,
+import {
   confirm,
+  error,
+  info,
   runCommandSync
-} = require('@instructure/command-utils')
-const verifyPackageJson = require('../utils/verify-package-json')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgradePackages = require('./handleUpgradePackages')
+} from '@instructure/command-utils'
+import verifyPackageJson from '../utils/verify-package-json.js'
+import handleExecuteCodemods from './handleExecuteCodemods.js'
+import handleUpgradePackages from './handleUpgradePackages.js'
+import {
+  getPackageList,
+  getRemovedPackageList
+} from '../utils/getPackageLists.js'
+import depcheck from 'depcheck'
+import path from 'path'
 
-const {
-  getRemovedPackageList,
-  getPackageList
-} = require('../utils/getPackageLists')
-const depcheck = require('depcheck')
-const path = require('path')
-
-module.exports = async ({
+export default async ({
   sourcePath,
   scopeModifications,
   version,
@@ -49,7 +48,7 @@ module.exports = async ({
   parser,
   parserConfig
 }) => {
-  verifyPackageJson({ sourcePath })
+  verifyPackageJson(sourcePath)
 
   await handleExecuteCodemods({
     sourcePath,
