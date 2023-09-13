@@ -23,12 +23,15 @@
  */
 
 import { info } from '@instructure/command-utils'
-import pjson from '../../package.json' assert { type: 'json' }
+import { createRequire } from 'module'
 
 export default {
   command: 'version',
   desc: 'Return the current version of instui-cli and exit.',
   handler: () => {
-    info(pjson.version)
+    const require = createRequire(import.meta.url)
+
+    const packageJson = require('../../package.json')
+    info(packageJson.version)
   }
 }
