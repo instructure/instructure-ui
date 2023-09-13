@@ -47,4 +47,3 @@ yargs(hideBin(process.argv)).command([
   upgradePackages,
   version
 ]).argv
-/* eslint-enable no-unused-expressions */
