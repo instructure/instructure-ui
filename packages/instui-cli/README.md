@@ -38,10 +38,10 @@ instui create component
 
 - **create component** | Create an Instructure UI component. DEPRECATED, will be removed in InstUI v9.
 - **create package** | Create an Instructure UI package. DEPRECATED, will be removed in InstUI v9.
+- **create-from-template** | Copy template source file or directory to a specified destination and replace variables with designated values.
 - **upgrade** | Upgrades instructure-ui in a designated repository to the latest stable version including upgrading packages and applying codemods.
 - **upgrade-packages** | Upgrade instructure-ui packages to the latest stable version.
 - **codemod** | Apply instructure-ui codemods to source at a specified path.
-- **codemod-v8** | Apply instructure-ui v8 codemods to source at a specified path.
 - **version** | Return the current version of instui-cli and exit.
 
 ### Documentation
