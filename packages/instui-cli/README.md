@@ -16,13 +16,7 @@ A cli for working with Instructure UI packages.
 $ npx @instructure/instui-cli create component
 ```
 
-#### Globally installing `instui-cli` with `yarn` or `npm`
-
-```bash
-$ yarn global add @instructure/instui-cli
-```
-
-or
+#### Globally installing `instui-cli`
 
 ```bash
 $ npm install -g @instructure/instui-cli
