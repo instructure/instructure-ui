@@ -34,18 +34,23 @@ import { createNPMRCFile } from '../utils/npm.js'
 
 export default {
   command: 'deprecate',
-  desc: 'deprecate ALL of a certain version of instUI npm packages by running "npm deprecate".',
+  desc:
+    'deprecate ALL of a certain version of instUI npm packages by ' +
+    'running "npm deprecate".',
   builder: (yargs) => {
     yargs.option('versionToDeprecate', {
       type: 'string',
       describe:
-        'The version number to deprecate, e.g. 8.11.0. Defaults to the current version.',
+        'The version number to deprecate, e.g. "8.11.0". Defaults to the ' +
+        'current version.',
       default: pkgUtils.getPackageJSON(undefined).version
     })
     yargs.option('fixVersion', {
       type: 'string',
       describe:
-        'The fix version will shown in the deprecation warning to all who attempt to install'
+        'The fix version will be shown in the deprecation warning to all who ' +
+        'attempt to install the deprecated version.',
+      demandOption: true
     })
   },
   handler: async (argv) => {
@@ -59,10 +64,6 @@ export default {
 }
 
 async function doDeprecate(versionToDeprecate, fixVersion) {
-  if (!fixVersion) {
-    error('deprecate: --fixVersion argument is required!')
-    process.exit(1)
-  }
   const message = `A critical bug was fixed in ${fixVersion}`
   createNPMRCFile()
 

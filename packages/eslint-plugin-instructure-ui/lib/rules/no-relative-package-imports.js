@@ -21,6 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+// note: This cannot be converted to ESM until ESLint v9 is released:
+// https://github.com/eslint/eslint/issues/15453#issuecomment-1002015088
 const path = require('path')
 const { readPackage } = require('@instructure/pkg-utils')
 

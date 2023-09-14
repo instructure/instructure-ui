@@ -32,13 +32,19 @@ const specifyCJSFormat = path.resolve(__dirname, 'specify-commonjs-format.js')
 
 export default {
   command: 'build',
-  desc: '',
+  desc: 'Build the packages with Babel.js',
   builder: (yargs) => {
-    yargs.option('copy-files', { boolean: true, desc: '' })
-    yargs.option('watch', { boolean: true, desc: '' })
+    yargs.option('copy-files', {
+      boolean: true,
+      desc: 'Copy files that will not be compiled'
+    })
+    yargs.option('watch', {
+      boolean: true,
+      desc: 'Run constantly and recompile on changes'
+    })
     yargs.option('modules', {
       string: true,
-      desc: '',
+      desc: 'What kind of modules to build. "es": build into the /es folder using ESM; "cjs": build into the /lib folder using commonJS',
       choices: ['es', 'cjs'],
       default: 'es',
       coerce: (value) => value.split(',')

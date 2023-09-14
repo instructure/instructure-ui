@@ -26,7 +26,7 @@ import { runCommandSync, resolveBin } from '@instructure/command-utils'
 
 export default {
   command: 'bundle',
-  desc: '',
+  desc: 'Build and optionally start an app with Webpack',
   builder: (yargs) => {
     yargs.option('port', { alias: 'p', desc: '' })
     yargs.option('watch', { boolean: true, desc: '' })
@@ -41,7 +41,7 @@ export default {
 
     let envVars = {}
     if (OMIT_INSTUI_DEPRECATION_WARNINGS) {
-      envVars = { ...envVars, OMIT_INSTUI_DEPRECATION_WARNINGS: '1' }
+      envVars = { OMIT_INSTUI_DEPRECATION_WARNINGS: '1' }
     }
 
     if (argv.watch) {

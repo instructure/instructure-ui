@@ -26,17 +26,25 @@ import { runCommandSync, resolveBin } from '@instructure/command-utils'
 
 export default {
   command: 'examples',
-  desc: '',
+  desc: 'Build and start Storybook',
   builder: (yargs) => {
-    yargs.option('port', { alias: 'p', desc: '' })
-    yargs.option('watch', { boolean: true, desc: '' })
+    yargs.option('port', {
+      alias: 'p',
+      type: 'number',
+      describe: 'port to use',
+      default: 8080
+    })
+    yargs.option('watch', {
+      boolean: true,
+      desc: 'When added storybook will launch in DEV mode watching file changes'
+    })
     yargs.strictOptions(true)
   },
   handler: async (argv) => {
     const rootPath = path.resolve(process.cwd(), '../../node_modules')
     const { DEBUG, OMIT_INSTUI_DEPRECATION_WARNINGS } = process.env
 
-    let port = argv.port || '8080'
+    let port = argv.port
 
     let command, commandArgs
 

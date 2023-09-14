@@ -97,7 +97,6 @@
     { "path": "./packages/ui-themes/tsconfig.build.json" },
     { "path": "./packages/ui-time-select/tsconfig.build.json" },
     { "path": "./packages/ui-toggle-details/tsconfig.build.json" },
-    { "path": "./packages/ui-token-scripts/tsconfig.build.json" },
     { "path": "./packages/ui-tooltip/tsconfig.build.json" },
     { "path": "./packages/ui-top-nav-bar/tsconfig.build.json" },
     { "path": "./packages/ui-tray/tsconfig.build.json" },
