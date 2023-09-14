@@ -12,8 +12,8 @@ jobs:
         with:
           node-version: '16'
           cache: 'npm'
-      - name: Install netlify-cli and @nx/nx-linux-x64-gnu
-        run: npm install --save-dev netlify-cli@13.2.2 @nx/nx-linux-x64-gnu
+      - name: Install netlify-cli
+        run: npm install --save-dev netlify-cli@13.2.2
       - name: Install dependencies
         run: npm ci
       - name: Bootstrap project
