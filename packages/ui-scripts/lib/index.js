@@ -31,32 +31,6 @@ import { readEnv } from './utils/readEnv.js'
 
 readEnv()
 
-const commands = [
-  'bump',
-  'server',
-  'tag',
-  'help',
-  'publish',
-  'deprecate',
-  'lint',
-  'test',
-  'examples',
-  'bundle',
-  'clean',
-  'build'
-]
-
-function executeYargs() {
-  // https://github.com/yargs/yargs/blob/main/docs/advanced.md#example-command-hierarchy-using-indexmjs
-  // eslint-disable-next-line no-unused-expressions
-  yargs(hideBin(process.argv)).command(yargCommands).argv
-}
-
-const processArgs = process.argv
-if (commands.some((r) => processArgs.includes(r))) {
-  executeYargs()
-} else {
-  error('[ui-scripts]: Invalid command "' + processArgs + '"')
-  info(`Commands: \n${commands.join(', \n')}`)
-  process.exit(1)
-}
+// https://github.com/yargs/yargs/blob/main/docs/advanced.md#example-command-hierarchy-using-indexmjs
+// eslint-disable-next-line no-unused-expressions
+yargs(hideBin(process.argv)).strictOptions(true).command(yargCommands).argv

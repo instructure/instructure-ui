@@ -8,33 +8,19 @@ category: packages
 [![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A CLI tool for UI component libraries made by Instructure Inc.
-
-### Installation
-
-```sh
-npm install @instructure/ui-scripts
-```
+A CLI tool for InstUI build and publish tools made by Instructure Inc.
 
 ### Scripts
 
-#### `build`
+For more documentation on available options and parameters for individual commands run:
+
+```sh
+ui-scripts <command> --help
+```
+
+#### build
 
 To build (babel transpile) a package to be consumed as a library:
-
-`npm run ui-scripts build`
-
-To build (webpack) a package to be consumed as an application:
-
-`npm run ui-scripts bundle`
-
-#### `clean`
-
-To clean out built/generated files from a package:
-
-`npm run ui-scripts clean`
-
-#### `modules`
 
 `npm run ui-scripts build --modules cjs` writes commonjs modules to the lib/ directory.
 
@@ -44,13 +30,51 @@ To clean out built/generated files from a package:
 
 If not specified, `modules` defaults to `es`.
 
-#### `test`
+To build (webpack) a package to be consumed as an application:
 
-To run tests for a package:
+`npm run ui-scripts bundle`
 
-`npm run ui-scripts test`
+#### bump version
 
-#### `lint`
+To update all package versions
+(defaults to determining the version automatically using commit messages):
+
+`npm run ui-scripts bump [version|major|minor|patch]`
+
+#### clean
+
+To clean out built/generated files from a package:
+
+`npm run ui-scripts clean`
+
+#### deprecate
+
+Deprecates ALL of a certain version of instUI npm packages by running `npm deprecate`.
+`versionToDeprecate` defaults to the current version.
+
+`npm run ui-scripts deprecate --versionToDeprecate 5.11.0 --fixVersion 5.11.1`
+
+#### examples (Storybook)
+
+To build component examples and start up a dev server with hot reloading:
+
+`npm run ui-scripts examples --watch -p 8080`
+
+To build component examples for deploying:
+
+`npm run ui-scripts examples`
+
+#### generating design tokens
+
+`npm run generate-tokens <options>`
+
+Generate cross-platform design tokens for the given theme.
+
+`npm run generate-all-tokens`
+
+Generate cross-platform design tokens for all themes in the repo.
+
+#### lint
 
 To lint (eslint/stylelint) all files:
 
@@ -64,49 +88,19 @@ To fix lint issues:
 
 `npm run ui-scripts lint --fix`
 
-#### `install-react`
-
-To install a specific version of React and ReactDOM without updating `package.json`
-(defaults to the versions specified in the resolutions field):
-
-`npm run ui-scripts install-react [version]`
-
-#### `bump`
-
-To update all package versions
-(defaults to determining the version automatically using commit messages):
-
-`npm run ui-scripts bump [version|major|minor|patch]`
-
-#### `publish`
+#### publish to npm
 
 To publish all packages (defaults to current version):
 
 `npm run ui-scripts publish [version]`
 
-#### `deploy-docs`
-
-To run the deploy of the documentation (to Github pages):
-
-`npm run ui-scripts deploy-docs`
-
-#### `examples`
-
-To build component examples and start up a dev server with hot reloading:
-
-`npm run ui-scripts examples --watch -p 8080`
-
-To build component examples for deploying:
-
-`npm run ui-scripts examples`
-
-#### `server`
+#### server
 
 To start up a server to test production builds of examples or docs:
 
 `npm run ui-scripts server -p 8080`
 
-#### `tag`
+#### npm tag
 
 To add an NPM dist-tag for all packages:
 
@@ -116,55 +110,26 @@ To remove an NPM dist-tag for all packages:
 
 `npm run ui-scripts tag rm 5.11.0 latest`
 
-#### `deprecate`
+#### running tests
 
-To deprecate all packages (optional arguments: version, fix version):
+To run all tests:
 
-`npm run ui-scripts deprecate 5.11.0 5.11.1`
+`npm run ui-scripts test`
+
+To run tests for a package:
+
+`npm run ui-scripts test -- --scope @instructure/ui-avatar`
 
 ### Configuration
 
 If you'd like to use the publish, deploy, and release scripts, you'll need to configure your project as follows:
 
-#### Project level
-
-Add the config to your project level `package.json` file:
-
-```json
-"config": {
-  "ui-scripts": {
-    "slack_emoji": ":instui:",
-    "slack_channel": "#instui",
-    "jira_host": "instructure.atlassian.net",
-    "jira_project_id": "17900",
-    "jira_project_key": "INSTUI",
-    "npm_scope": "@instructure:registry=https://registry.npmjs.org/",
-    "gh_pages_branch": "gh-pages",
-    "gh_pages_dir": "packages/__docs__/__build__",
-    "gh_pages_cname": "instructure.design",
-    "changelog_url": "https://instructure.design/#CHANGELOG"
-  }
-}
-```
-
-#### Environment variables
-
-Add a `.env` file to your project root:
+Add a `.env` file to your project root or define these env vars for your shell:
 
 ```sh
 NPM_TOKEN=
 NPM_USERNAME=
 NPM_EMAIL=
-GIT_EMAIL=""
-GIT_USERNAME=
-GIT_REMOTE_URL=gerrit:instructure-ui
-GIT_REMOTE_NAME=origin
-JIRA_CONSUMER_KEY=
-JIRA_TOKEN=
-JIRA_SECRET=
-JIRA_PEM_PATH=/Users/your_user_name/.ssh/jira.pem
-SLACK_USERNAME=instui
-SLACK_WEBHOOK=
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-scripts.svg

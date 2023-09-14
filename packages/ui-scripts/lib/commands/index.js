@@ -33,6 +33,7 @@ import examples from '../build/examples.js'
 import bundle from '../build/webpack.js'
 import clean from '../build/clean.js'
 import build from '../build/babel.js'
+import generateAllTokens from '../build/generate-all-tokens.js'
 
 export const yargCommands = [
   bump,
@@ -45,5 +46,6 @@ export const yargCommands = [
   examples,
   bundle,
   clean,
-  build
+  build,
+  generateAllTokens
 ]

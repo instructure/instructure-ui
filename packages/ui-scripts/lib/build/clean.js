@@ -26,7 +26,7 @@ import fs from 'fs'
 
 export default {
   command: 'clean',
-  desc: '',
+  desc: 'Delete generated files and build outputs',
   handler: async () => {
     const dirs = [
       '__build__',

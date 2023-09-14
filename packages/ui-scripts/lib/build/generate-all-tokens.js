@@ -22,7 +22,13 @@
  * SOFTWARE.
  */
 
-import { getCommand, runCommandsConcurrently } from '@instructure/command-utils'
+import path from 'path'
+import { error } from '@instructure/command-utils'
+import { handleMapJSTokensToSource } from '../utils/handle-map-js-tokens-to-source.js'
+import { handleGenerateTokens } from '../utils/handle-generate-tokens.js'
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url)
 
 const tokenScriptsConfig = [
   {
@@ -62,28 +68,37 @@ const tokenScriptsConfig = [
 
 export default {
   command: 'generate-all-tokens',
-  describe:
-    'Generate cross-platform design tokens for all themes in configuration.',
-  handler: (argv) => {
-    const commandsToRun = tokenScriptsConfig.reduce(
-      (commands, { themeKey, sourceTokens, outputPackage, groupOutput }) => {
-        return {
-          ...commands,
-          [`${themeKey} - ${outputPackage}`]: getCommand('ui-token-scripts', [
-            'generate-tokens',
-            '-s',
-            sourceTokens,
-            '-t',
-            themeKey,
-            '-p',
-            outputPackage,
-            '-g',
-            groupOutput === true
-          ])
-        }
-      },
-      {}
-    )
-    runCommandsConcurrently(commandsToRun)
+  desc: 'Generate cross-platform design tokens for all themes',
+  handler: async () => {
+    const outputDir = 'tokens'
+    const generators = []
+    for (const conf of tokenScriptsConfig) {
+      const { sourceTokens, themeKey, outputPackage, groupOutput } = conf
+      const tokens = require(sourceTokens).default
+
+      if (Object.keys(tokens).indexOf('colors') < 0) {
+        error('Invalid token source')
+        process.exit(1)
+      }
+
+      const styleDictionarySource = handleMapJSTokensToSource(tokens)
+      const themePath = path.dirname(
+        require.resolve(path.join(outputPackage, 'package.json'))
+      )
+      const outputPath = groupOutput
+        ? path.join(themePath, outputDir, themeKey)
+        : path.join(themePath, outputDir)
+      const sourcePath = path.join(outputPath, 'source.json')
+
+      generators.push(
+        handleGenerateTokens({
+          themeKey,
+          styleDictionarySource,
+          outputPath,
+          sourcePath
+        })
+      )
+    }
+    await Promise.all(generators)
   }
 }
