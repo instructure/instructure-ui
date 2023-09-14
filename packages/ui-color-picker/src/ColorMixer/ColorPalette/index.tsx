@@ -239,6 +239,7 @@ class ColorPalette extends Component<ColorPaletteProps, ColorPaletteState> {
         onMouseDown={(e) => this.handlePaletteMouseDown(e)}
         aria-label={this.props.navigationExplanationScreenReaderLabel}
         id={this._id}
+        role="button"
       >
         <div css={this.props.styles?.indicator} />
         {this.props.disabled && (
