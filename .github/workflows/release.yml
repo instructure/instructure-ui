@@ -94,7 +94,7 @@ jobs:
       - name: Retrieve latest snapshot version
         run: node prepare.js
       - name: Install dependencies for regression testing
-        run: npm ci
+        run: npm install --no-package-lock
       - name: Build project and start the server
         run: |
           npm run build:${{ matrix.bundler }}
