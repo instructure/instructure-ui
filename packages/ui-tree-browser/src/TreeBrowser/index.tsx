@@ -128,26 +128,30 @@ class TreeBrowser extends Component<TreeBrowserProps, TreeBrowserState> {
   }
 
   handleKeyDown = (event: React.KeyboardEvent, node?: CollectionData) => {
-    event.stopPropagation()
     switch (event.keyCode) {
       case keycode.codes.down:
       case keycode.codes.j:
+        event.stopPropagation()
         this.moveFocus(1)
         break
       case keycode.codes.up:
       case keycode.codes.k:
+        event.stopPropagation()
         this.moveFocus(-1)
         break
       case keycode.codes.home:
       case keycode.codes.end:
+        event.stopPropagation()
         this.homeOrEnd(event.keyCode)
         break
       case keycode.codes.left:
       case keycode.codes.right:
+        event.stopPropagation()
         this.handleLeftOrRightArrow(event.keyCode, node)
         break
       case keycode.codes.enter:
       case keycode.codes.space:
+        event.stopPropagation()
         this.handleActivation(event, node)
         break
       default:
