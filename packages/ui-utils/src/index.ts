@@ -21,9 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Browser } from './Browser'
-export { isEdge } from './isEdge'
-export { isIE11 } from './isIE11'
 export { capitalizeFirstLetter } from './capitalizeFirstLetter'
 export { cloneArray } from './cloneArray'
 export { createChainedFunction } from './createChainedFunction'
@@ -40,3 +37,4 @@ export { within } from './within'
 export { camelize } from './camelize'
 export { pascalize } from './pascalize'
 export { isBaseTheme } from './isBaseTheme'
+export { getBrowser, isSafari, isEdge, isIE } from './getBrowser'
