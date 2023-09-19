@@ -75,6 +75,28 @@ const generateStyle = (
       }
     : {}
 
+  const inputStyle = {
+    all: 'initial',
+    textAlign: textAlign,
+    direction: 'inherit',
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale',
+    appearance: 'none',
+    lineHeight: 1,
+    margin: '0',
+    flex: 1,
+    minWidth: '0.0625rem',
+    boxSizing: 'border-box',
+    fontFamily: 'inherit',
+    fontSize: 'inherit',
+    fontWeight: componentTheme.fontWeight,
+    color: componentTheme.color,
+    background: componentTheme.background,
+    padding: componentTheme.padding,
+    textyAlign: textAlign,
+    '&::placeholder': { color: componentTheme.placeholderColor }
+  }
+
   return {
     numberInput: {
       label: 'numberInput'
@@ -152,25 +174,9 @@ const generateStyle = (
     },
     input: {
       label: 'numberInput_input',
-      all: 'initial',
-      textAlign: textAlign,
-      direction: 'inherit',
-      WebkitFontSmoothing: 'antialiased',
-      MozOsxFontSmoothing: 'grayscale',
-      appearance: 'none',
-      lineHeight: 1,
-      margin: '0',
-      flex: 1,
-      minWidth: '0.0625rem',
-      boxSizing: 'border-box',
-      fontFamily: 'inherit',
-      fontSize: 'inherit',
-      fontWeight: componentTheme.fontWeight,
-      color: componentTheme.color,
-      background: componentTheme.background,
-      padding: componentTheme.padding,
-      textyAlign: textAlign,
-      '&::placeholder': { color: componentTheme.placeholderColor }
+      ...inputStyle,
+      '&:is(input)[type]': inputStyle,
+      '&:-webkit-any(input)[type]': inputStyle
     }
   }
 }
