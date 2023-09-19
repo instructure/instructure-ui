@@ -72,6 +72,7 @@ import type { SelectOptionProps, RenderSelectOptionLabel } from './Option/props'
 
 import type { SelectProps } from './props'
 import { allowedProps, propTypes } from './props'
+import { isSafari } from '@instructure/ui-utils/src/getBrowser'
 
 type GroupChild = React.ComponentElement<SelectGroupProps, Group>
 type OptionChild = React.ComponentElement<SelectOptionProps, Option>
@@ -607,9 +608,13 @@ class Select extends Component<SelectProps> {
     // popup buttons rather than comboboxes.
     const overrideProps: Partial<TextInputProps> = !isEditable
       ? {
-          role: 'button',
+          // Given that Safari with Voiceover does not support proper combobox
+          // handling, a button role is set as a workaround.
+          // See https://bugs.webkit.org/show_bug.cgi?id=236881
+          role: isSafari() ? 'button' : 'combobox',
           title: inputValue,
-          'aria-autocomplete': undefined
+          'aria-autocomplete': undefined,
+          'aria-readonly': true
         }
       : {}
 
