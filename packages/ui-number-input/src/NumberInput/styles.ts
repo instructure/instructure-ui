@@ -168,6 +168,10 @@ const generateStyle = (
       fontWeight: componentTheme.fontWeight,
       color: componentTheme.color,
       background: componentTheme.background,
+      '&&': {
+        background: componentTheme.background,
+        height: '100%'
+      },
       padding: componentTheme.padding,
       textyAlign: textAlign,
       '&::placeholder': { color: componentTheme.placeholderColor }
