@@ -22,15 +22,33 @@
  * SOFTWARE.
  */
 
-const userAgent =
-  (typeof navigator !== 'undefined' && navigator.userAgent) || ''
-
+import UAParser from 'ua-parser-js'
 /**
  * ---
  * category: utilities
  * ---
- * A minimal check for IE11, since that's mostly all the browser detecting we do.
- * Use when you don't need all of [bowser](https://www.npmjs.com/package/bowser).
- * @module isIE11
+ * A utility module using the [ua-parser-js](https://www.npmjs.com/package/ua-parser-js) browser
+ * detection library.
+ *
+ * @module getBrowser
  */
-export const isIE11 = /msie|trident/i.test(userAgent)
+
+const getBrowser = (): UAParser.IBrowser => {
+  const parser = new UAParser()
+  const { browser } = parser.getResult()
+  return browser
+}
+
+const isSafari = () => {
+  return getBrowser().name === 'Safari'
+}
+
+const isEdge = () => {
+  return getBrowser().name === 'Edge'
+}
+
+const isIE = () => {
+  return getBrowser().name === 'IE'
+}
+
+export { getBrowser, isSafari, isEdge, isIE }
