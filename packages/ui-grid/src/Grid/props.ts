@@ -44,7 +44,7 @@ type GridOwnProps = {
   colSpacing?: 'none' | 'small' | 'medium' | 'large'
   rowSpacing?: 'none' | 'small' | 'medium' | 'large'
   hAlign?: 'start' | 'center' | 'end' | 'space-around' | 'space-between'
-  vAlign?: 'top' | 'middle' | 'bottom'
+  vAlign?: 'top' | 'middle' | 'bottom' | 'stretch'
   startAt?: GridBreakpoints
   visualDebug?: boolean
 }
@@ -70,7 +70,7 @@ const propTypes: PropValidators<PropKeys> = {
     'space-around',
     'space-between'
   ]),
-  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
+  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom', 'stretch']),
   startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
   visualDebug: PropTypes.bool
 }

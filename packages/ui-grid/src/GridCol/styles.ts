@@ -80,7 +80,8 @@ const generateStyle = (
     const vAlignVariants = {
       top: { alignSelf: 'flex-start' },
       middle: { alignSelf: 'center' },
-      bottom: { alignSelf: 'flex-end' }
+      bottom: { alignSelf: 'flex-end' },
+      stretch: { alignSelf: 'stretch' }
     }
 
     const textAlignVariants = {
