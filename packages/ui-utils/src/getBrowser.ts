@@ -23,6 +23,7 @@
  */
 
 import UAParser from 'ua-parser-js'
+
 /**
  * ---
  * category: utilities
@@ -51,4 +52,12 @@ const isIE = () => {
   return getBrowser().name === 'IE'
 }
 
-export { getBrowser, isSafari, isEdge, isIE }
+const isChrome = () => {
+  return getBrowser().name === 'Chrome'
+}
+
+const isFirefox = () => {
+  return getBrowser().name === 'Firefox'
+}
+
+export { getBrowser, isSafari, isEdge, isIE, isFirefox, isChrome }
