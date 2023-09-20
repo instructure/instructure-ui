@@ -62,7 +62,8 @@ const generateStyle = (
     const vAlignVariants = {
       top: { alignItems: 'flex-start' },
       middle: { alignItems: 'center' },
-      bottom: { alignItems: 'flex-end' }
+      bottom: { alignItems: 'flex-end' },
+      stretch: { alignItems: 'stretch' }
     }
 
     const colSpacingVariants = {
