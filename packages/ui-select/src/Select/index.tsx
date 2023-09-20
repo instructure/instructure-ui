@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import React, { Children, Component, memo } from 'react'
 
-import { createChainedFunction } from '@instructure/ui-utils'
+import * as utils from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import {
   matchComponentTypes,
@@ -72,7 +72,6 @@ import type { SelectOptionProps, RenderSelectOptionLabel } from './Option/props'
 
 import type { SelectProps } from './props'
 import { allowedProps, propTypes } from './props'
-import { isSafari } from '@instructure/ui-utils/src/getBrowser'
 
 type GroupChild = React.ComponentElement<SelectGroupProps, Group>
 type OptionChild = React.ComponentElement<SelectOptionProps, Option>
@@ -611,7 +610,7 @@ class Select extends Component<SelectProps> {
           // Given that Safari with Voiceover does not support proper combobox
           // handling, a button role is set as a workaround.
           // See https://bugs.webkit.org/show_bug.cgi?id=236881
-          role: isSafari() ? 'button' : 'combobox',
+          role: utils.isSafari() ? 'button' : 'combobox',
           title: inputValue,
           'aria-autocomplete': undefined,
           'aria-readonly': true
@@ -632,7 +631,7 @@ class Select extends Component<SelectProps> {
       htmlSize,
       messages,
       value: inputValue,
-      inputRef: createChainedFunction(ref, this.handleInputRef),
+      inputRef: utils.createChainedFunction(ref, this.handleInputRef),
       inputContainerRef: this.handleInputContainerRef,
       interaction:
         interaction === 'enabled' && !isEditable
@@ -656,7 +655,7 @@ class Select extends Component<SelectProps> {
           : undefined,
 
       onFocus,
-      onBlur: createChainedFunction(onBlur, onRequestHideOptions),
+      onBlur: utils.createChainedFunction(onBlur, onRequestHideOptions),
       ...overrideProps
     }
 

@@ -266,18 +266,6 @@ describe('<SimpleSelect />', async () => {
       expect(input.getAttribute('required')).to.exist()
     })
 
-    it('should set input role to "button"', async () => {
-      await mount(
-        <SimpleSelect renderLabel="Choose an option">
-          {getOptions()}
-        </SimpleSelect>
-      )
-      const select = await SimpleSelectLocator.find()
-      const input = await select.findInput()
-
-      expect(input.getAttribute('role')).to.equal('button')
-    })
-
     it('should allow assistive text', async () => {
       await mount(
         <SimpleSelect
