@@ -21,23 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Browser } from './Browser'
-export { isEdge } from './isEdge'
-export { isIE11 } from './isIE11'
-export { capitalizeFirstLetter } from './capitalizeFirstLetter'
-export { cloneArray } from './cloneArray'
-export { createChainedFunction } from './createChainedFunction'
-export { deepEqual } from './deepEqual'
-export { hash } from './hash'
-export { generateId } from './generateId'
-export { isEmpty } from './isEmpty'
-export { mergeDeep } from './mergeDeep'
-export { ms } from './ms'
-export { parseUnit } from './parseUnit'
-export { px } from './px'
-export { shallowEqual } from './shallowEqual'
-export { within } from './within'
-export { camelize } from './camelize'
-export { pascalize } from './pascalize'
-export { isBaseTheme } from './isBaseTheme'
-export * from './getBrowser'
+
+const userAgent =
+  (typeof navigator !== 'undefined' && navigator.userAgent) || ''
+
+/**
+ * ---
+ * category: utilities
+ * ---
+ * A minimal check for IE11, since that's mostly all the browser detecting we do.
+ * Use when you don't need all of [bowser](https://www.npmjs.com/package/bowser).
+ * @module isIE11
+ * @deprecated
+ */
+export const isIE11 = /msie|trident/i.test(userAgent)
