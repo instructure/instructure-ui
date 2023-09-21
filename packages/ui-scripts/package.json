@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-scripts",
-  "version": "8.43.1",
+  "version": "8.44.0",
   "description": "A UI build scripts library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,8 +20,8 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.22.15",
-    "@instructure/command-utils": "8.43.1",
-    "@instructure/pkg-utils": "8.43.1",
+    "@instructure/command-utils": "8.44.0",
+    "@instructure/pkg-utils": "8.44.0",
     "@lerna/project": "^6.4.1",
     "dotenv": "^16.3.1",
     "find-up": "^6.3.0",
@@ -34,8 +34,8 @@
     "mocha": "^10.2.0",
     "prettier": "^2.8.8",
     "semver": "^7.5.4",
-    "stylelint": "^15.10.3",
     "style-dictionary": "2.10.3",
+    "stylelint": "^15.10.3",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
     "yargs": "^17.7.2"

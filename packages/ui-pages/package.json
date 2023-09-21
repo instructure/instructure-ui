@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-pages",
-  "version": "8.43.1",
+  "version": "8.44.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,21 +23,21 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.43.1",
-    "@instructure/ui-color-utils": "8.43.1",
-    "@instructure/ui-test-utils": "8.43.1",
-    "@instructure/ui-themes": "8.43.1"
+    "@instructure/ui-babel-preset": "8.44.0",
+    "@instructure/ui-color-utils": "8.44.0",
+    "@instructure/ui-test-utils": "8.44.0",
+    "@instructure/ui-themes": "8.44.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.15",
-    "@instructure/console": "8.43.1",
-    "@instructure/emotion": "8.43.1",
-    "@instructure/shared-types": "8.43.1",
-    "@instructure/ui-dom-utils": "8.43.1",
-    "@instructure/ui-prop-types": "8.43.1",
-    "@instructure/ui-react-utils": "8.43.1",
-    "@instructure/ui-utils": "8.43.1",
-    "@instructure/ui-view": "8.43.1",
+    "@instructure/console": "8.44.0",
+    "@instructure/emotion": "8.44.0",
+    "@instructure/shared-types": "8.44.0",
+    "@instructure/ui-dom-utils": "8.44.0",
+    "@instructure/ui-prop-types": "8.44.0",
+    "@instructure/ui-react-utils": "8.44.0",
+    "@instructure/ui-utils": "8.44.0",
+    "@instructure/ui-view": "8.44.0",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {

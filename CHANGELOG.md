@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.44.0](https://github.com/instructure/instructure-ui/compare/v8.43.1...v8.44.0) (2023-09-21)
+
+
+### Bug Fixes
+
+* **ui-number-input:** increase specificity for numberinput's input styles ([e761082](https://github.com/instructure/instructure-ui/commit/e7610820aecf58e6965aebcdfe38cc797e8ba1b4))
+* **ui-select,ui-simple-select:** add new tests ([e156baa](https://github.com/instructure/instructure-ui/commit/e156baa29c0d8fe70037057a500f1217bc2d51e5))
+* **ui-select:** add workaround for safari combobox ([09987bb](https://github.com/instructure/instructure-ui/commit/09987bb97b49eb7dbef934eb1f8590ea2106e08b))
+* **ui-tree-browser:** prevent TreeBrowser from breaking keyboard navigation focus order ([0741bc5](https://github.com/instructure/instructure-ui/commit/0741bc548fcfdceaeb2a70b3549f6cc87c70af78))
+
+
+### Features
+
+* **grid:** add stretch option to vAlign ([7b215b6](https://github.com/instructure/instructure-ui/commit/7b215b61c80e1105ca7fa728e655149df8c07844))
+
+
+
+
+
 ## [8.43.1](https://github.com/instructure/instructure-ui/compare/v8.43.0...v8.43.1) (2023-09-11)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.44.0](https://github.com/instructure/instructure-ui/compare/v8.43.1...v8.44.0) (2023-09-21)
+
+
+### Features
+
+* **grid:** add stretch option to vAlign ([7b215b6](https://github.com/instructure/instructure-ui/commit/7b215b61c80e1105ca7fa728e655149df8c07844))
+
+
+
+
+
 ## [8.43.1](https://github.com/instructure/instructure-ui/compare/v8.43.0...v8.43.1) (2023-09-11)
 
 **Note:** Version bump only for package @instructure/ui-grid
