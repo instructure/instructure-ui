@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.44.0](https://github.com/instructure/instructure-ui/compare/v8.43.1...v8.44.0) (2023-09-21)
+
+
+### Bug Fixes
+
+* **ui-number-input:** increase specificity for numberinput's input styles ([e761082](https://github.com/instructure/instructure-ui/commit/e7610820aecf58e6965aebcdfe38cc797e8ba1b4))
+
+
+
+
+
 ## [8.43.1](https://github.com/instructure/instructure-ui/compare/v8.43.0...v8.43.1) (2023-09-11)
 
 **Note:** Version bump only for package @instructure/ui-number-input

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.44.0](https://github.com/instructure/instructure-ui/compare/v8.43.1...v8.44.0) (2023-09-21)
+
+
+### Bug Fixes
+
+* **ui-tree-browser:** prevent TreeBrowser from breaking keyboard navigation focus order ([0741bc5](https://github.com/instructure/instructure-ui/commit/0741bc548fcfdceaeb2a70b3549f6cc87c70af78))
+
+
+
+
+
 ## [8.43.1](https://github.com/instructure/instructure-ui/compare/v8.43.0...v8.43.1) (2023-09-11)
 
 **Note:** Version bump only for package @instructure/ui-tree-browser
