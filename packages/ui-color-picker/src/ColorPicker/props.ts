@@ -225,6 +225,7 @@ type ColorPickerState = {
   showHelperErrorMessages: boolean
   openColorPicker: boolean
   mixedColor: string
+  labelHeight: number
 }
 
 type PropKeys = keyof ColorPickerOwnProps

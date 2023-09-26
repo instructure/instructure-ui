@@ -116,7 +116,8 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
       hexCode: '',
       showHelperErrorMessages: false,
       openColorPicker: false,
-      mixedColor: ''
+      mixedColor: '',
+      labelHeight: 0
     }
   }
 
@@ -129,6 +130,23 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
 
     if (typeof elementRef === 'function') {
       elementRef(el)
+    }
+  }
+
+  inputContainerRef: Element | null = null
+
+  handleInputContainerRef = (el: Element | null) => {
+    this.inputContainerRef = el
+    this.setLabelHeight()
+  }
+
+  setLabelHeight = () => {
+    if (this.inputContainerRef) {
+      this.setState({
+        labelHeight:
+          this.inputContainerRef.getBoundingClientRect().y -
+          (this.inputContainerRef.parentElement?.getBoundingClientRect().y || 0)
+      })
     }
   }
 
@@ -591,6 +609,7 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           themeOverride={{ padding: '' }}
           renderAfterInput={this.renderAfterInput()}
           renderBeforeInput={this.renderBeforeInput()}
+          inputContainerRef={this.handleInputContainerRef}
           value={this.state.hexCode}
           onChange={(event, value) => this.handleOnChange(event, value)}
           onPaste={(event) => this.handleOnPaste(event)}
@@ -598,7 +617,10 @@ class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
           messages={this.renderMessages()}
         />
         {!this.isSimple && (
-          <div css={this.props.styles?.colorMixerButtonContainer}>
+          <div
+            css={this.props.styles?.colorMixerButtonContainer}
+            style={{ paddingTop: this.state.labelHeight }}
+          >
             <div css={this.props.styles?.colorMixerButtonWrapper}>
               {this.renderPopover()}
             </div>
