@@ -52,12 +52,15 @@ const isIE = () => {
   return getBrowser().name === 'IE'
 }
 
-const isChrome = () => {
-  return getBrowser().name === 'Chrome'
+const isChromium = () => {
+  const chromiumBasedBrowsers = ['Chrome', 'Chromium', 'Opera', 'Edge']
+  return chromiumBasedBrowsers.some((browser) => {
+    getBrowser().name?.includes(browser)
+  })
 }
 
 const isFirefox = () => {
   return getBrowser().name === 'Firefox'
 }
 
-export { getBrowser, isSafari, isEdge, isIE, isFirefox, isChrome }
+export { getBrowser, isSafari, isEdge, isIE, isFirefox, isChromium }
