@@ -876,7 +876,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
     if (event.key === 'ArrowLeft') {
       // if it is possible, we go a level up in the history
       if (this._pageHistory.length > 1) {
-        this.goToPreviousPage()
+        this.handleBackButtonClick()
       }
 
       // if on root page and popover is open, we close it
