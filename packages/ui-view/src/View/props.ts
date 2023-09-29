@@ -190,6 +190,11 @@ type ViewOwnProps = {
    * Specify a mouse cursor to use when hovering over the `<View />`
    */
   cursor?: Cursor
+  /**
+   * Sets what a browser does when reaching the boundary of a scrolling area.
+   * Valid values are `auto`, `contain`, `none`.
+   */
+  overscrollBehavior?: 'auto' | 'contain' | 'none'
 }
 
 type PropKeys = keyof ViewOwnProps
@@ -271,7 +276,8 @@ const propTypes: PropValidators<PropKeys> = {
   focusColor: PropTypes.oneOf(['info', 'inverse', 'success', 'danger']),
   shouldAnimateFocus: PropTypes.bool,
   withVisualDebug: PropTypes.bool,
-  dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION))
+  dir: PropTypes.oneOf(Object.values(textDirectionContextConsumer.DIRECTION)),
+  overscrollBehavior: PropTypes.oneOf(['auto', 'contain', 'none'])
 }
 
 // This variable will be attached as static property on the `View` component
@@ -302,6 +308,7 @@ const allowedProps: AllowedPropKeys = [
   'minWidth',
   'overflowX',
   'overflowY',
+  'overscrollBehavior',
   'padding',
   'position',
   'shadow',

@@ -87,6 +87,18 @@ export default {
           props.borderRadius !== '0' ||
           props.position !== 'static' ||
           props.shadow !== 'none' ||
+          props.textAlign !== 'center')) ||
+      (props.overscrollBehavior === 'none' &&
+        (props.background !== 'transparent' ||
+          props.borderRadius !== '0' ||
+          props.position !== 'static' ||
+          props.shadow !== 'none' ||
+          props.textAlign !== 'center')) ||
+      (props.overscrollBehavior === 'auto' &&
+        (props.background !== 'transparent' ||
+          props.borderRadius !== '0' ||
+          props.position !== 'static' ||
+          props.shadow !== 'none' ||
           props.textAlign !== 'center'))
     )
   }

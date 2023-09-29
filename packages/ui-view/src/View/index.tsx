@@ -64,7 +64,8 @@ class View extends Component<ViewProps> {
     position: 'static',
     focusPosition: 'offset',
     focusColor: 'info',
-    shouldAnimateFocus: true
+    shouldAnimateFocus: true,
+    overscrollBehavior: 'auto'
   } as const
 
   // TODO: Remove this code once all components are using passthroughProps in place
@@ -204,6 +205,7 @@ class View extends Component<ViewProps> {
       shouldAnimateFocus,
       borderColor,
       className,
+      overscrollBehavior,
       styles,
       makeStyles,
       ...props
