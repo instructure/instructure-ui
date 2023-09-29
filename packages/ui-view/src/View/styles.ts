@@ -395,6 +395,7 @@ const generateStyle = (
     shadow,
     overflowY,
     overflowX,
+    overscrollBehavior,
     insetBlockEnd,
     insetBlockStart,
     insetInlineEnd,
@@ -586,6 +587,7 @@ const generateStyle = (
       overflowX: overflowX && overflowX !== 'visible' ? overflowX : '',
       overflowY: overflowY && overflowY !== 'visible' ? overflowY : '',
       position: position !== 'static' ? position : '',
+      overscrollBehavior: overscrollBehavior ? overscrollBehavior : 'auto',
       ...(withVisualDebug
         ? {
             outline: `0.0625rem dashed ${componentTheme.debugOutlineColor}`
