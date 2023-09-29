@@ -38,7 +38,6 @@
   "devDependencies": {
     "@instructure/ui-axe-check": "8.44.0",
     "@instructure/ui-babel-preset": "8.44.0",
-    "@instructure/ui-test-locator": "8.44.0",
     "@instructure/ui-test-utils": "8.44.0",
     "@instructure/ui-themes": "8.44.0",
     "@testing-library/jest-dom": "^5.17.0",
