@@ -26,6 +26,7 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   testMatch: ['**/__new-tests__/**/*.test.tsx'],
+  setupFiles: ['./scripts/setup-jest.js'],
   coverageThreshold: {
     global: {
       statements: 87,
