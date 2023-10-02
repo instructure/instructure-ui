@@ -23,21 +23,6 @@
  */
 
 const gulp = require('gulp')
+const { buildFonts } = require('@instructure/ui-icons-build')
 
-const {
-  optimizeSVGs,
-  buildSVGs,
-  buildFonts,
-  buildReact,
-  buildAll,
-  clean
-} = require('@instructure/ui-icons-build')
-
-gulp.task('clean', clean)
-gulp.task('optimize', optimizeSVGs)
-gulp.task('build:svgs', buildSVGs)
-gulp.task('build:fonts', buildFonts)
-gulp.task('build:react', buildReact)
-gulp.task('build', buildAll)
-
-gulp.task('default', buildAll)
+gulp.task('default', buildFonts)

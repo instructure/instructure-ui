@@ -21,33 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import fs from 'fs'
+import path from 'path'
 
-import bump from './bump.js'
-import server from './server.js'
-import tag from './tag.js'
-import deprecate from './deprecate.js'
-import publish from './publish.js'
-import lint from '../test/lint.js'
-import test from '../test/karma.js'
-import examples from '../build/examples.js'
-import bundle from '../build/webpack.js'
-import clean from '../build/clean.js'
-import build from '../build/babel.js'
-import generateAllTokens from '../build/generate-all-tokens.js'
-import buildIcons from '../icons/build-icons.js'
+function toPascalCase(text) {
+  return text.replace(/(^\w|-\w)/g, (text) =>
+    text.replace(/-/, '').toUpperCase()
+  )
+}
 
-export const yargCommands = [
-  bump,
-  server,
-  tag,
-  deprecate,
-  publish,
-  lint,
-  test,
-  examples,
-  bundle,
-  clean,
-  build,
-  generateAllTokens,
-  buildIcons
-]
+export default function getGlyphData(
+  svgSourceDir,
+  deprecatedMap,
+  bidirectionalList,
+  prefix
+) {
+  const glyphs = []
+  // variants are in different sub directories
+  const subdirs = fs.readdirSync(svgSourceDir)
+
+  subdirs.forEach((subdir) => {
+    const fileNames = fs.readdirSync(svgSourceDir + subdir)
+    fileNames.forEach((fileName) => {
+      const { name, ext } = path.parse(fileName)
+      if (ext !== '.svg') return
+
+      const filepath = path.resolve(svgSourceDir + subdir, fileName)
+      const fileContent = fs.readFileSync(filepath, { encoding: 'utf8' })
+      glyphs.push({
+        name: prefix + toPascalCase(name),
+        glyphName: name,
+        variant: subdir,
+        src: fileContent,
+        bidirectional: bidirectionalList.includes(name),
+        deprecated: deprecatedMap[name] ?? false
+      })
+    })
+  })
+  return glyphs
+}
