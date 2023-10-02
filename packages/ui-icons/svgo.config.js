@@ -53,6 +53,12 @@ module.exports = {
       active: false
     },
     {
+      name: 'removeAttrs',
+      params: {
+        attrs: '(fill)'
+      }
+    },
+    {
       // Custom plugin for wrapping multiple path svg-s into a `<g>` tag.
       // This is needed because all svg files are supposed to have
       // a single child element for it to display correctly.
