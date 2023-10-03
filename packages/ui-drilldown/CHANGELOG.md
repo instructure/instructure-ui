@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.45.0](https://github.com/instructure/instructure-ui/compare/v8.44.0...v8.45.0) (2023-10-03)
+
+
+### Bug Fixes
+
+* **ui-drilldown:** call onBackButtonClicked function when ArrowLeft got pressed ([cd5e681](https://github.com/instructure/instructure-ui/commit/cd5e6814746b3fc42530c82c18409c6b7ad34ac3))
+
+
+
+
+
 # [8.44.0](https://github.com/instructure/instructure-ui/compare/v8.43.1...v8.44.0) (2023-09-21)
 
 **Note:** Version bump only for package @instructure/ui-drilldown

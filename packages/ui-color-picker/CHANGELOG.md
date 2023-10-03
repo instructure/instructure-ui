@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.45.0](https://github.com/instructure/instructure-ui/compare/v8.44.0...v8.45.0) (2023-10-03)
+
+
+### Bug Fixes
+
+* **ui-color-picker:** add a padding to colorpicker button ([de420dd](https://github.com/instructure/instructure-ui/commit/de420ddd06328b58789474c47121d15894c958a1))
+
+
+
+
+
 # [8.44.0](https://github.com/instructure/instructure-ui/compare/v8.43.1...v8.44.0) (2023-09-21)
 
 **Note:** Version bump only for package @instructure/ui-color-picker
