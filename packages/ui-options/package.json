@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-options",
-  "version": "8.44.0",
+  "version": "8.45.0",
   "description": "A view-only component for composing interactive lists and menus.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,21 +23,21 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.44.0",
-    "@instructure/ui-color-utils": "8.44.0",
-    "@instructure/ui-test-locator": "8.44.0",
-    "@instructure/ui-test-utils": "8.44.0",
-    "@instructure/ui-themes": "8.44.0"
+    "@instructure/ui-babel-preset": "8.45.0",
+    "@instructure/ui-color-utils": "8.45.0",
+    "@instructure/ui-test-locator": "8.45.0",
+    "@instructure/ui-test-utils": "8.45.0",
+    "@instructure/ui-themes": "8.45.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.15",
-    "@instructure/emotion": "8.44.0",
-    "@instructure/shared-types": "8.44.0",
-    "@instructure/ui-icons": "8.44.0",
-    "@instructure/ui-prop-types": "8.44.0",
-    "@instructure/ui-react-utils": "8.44.0",
-    "@instructure/ui-testable": "8.44.0",
-    "@instructure/ui-view": "8.44.0",
+    "@instructure/emotion": "8.45.0",
+    "@instructure/shared-types": "8.45.0",
+    "@instructure/ui-icons": "8.45.0",
+    "@instructure/ui-prop-types": "8.45.0",
+    "@instructure/ui-react-utils": "8.45.0",
+    "@instructure/ui-testable": "8.45.0",
+    "@instructure/ui-view": "8.45.0",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {

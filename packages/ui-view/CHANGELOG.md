@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.45.0](https://github.com/instructure/instructure-ui/compare/v8.44.0...v8.45.0) (2023-10-03)
+
+
+### Features
+
+* **ui-view:** add overscroll-behavior to view and flex.item component ([6dc990f](https://github.com/instructure/instructure-ui/commit/6dc990f823ed79df013254ca074ab1ceee719ad3))
+
+
+
+
+
 # [8.44.0](https://github.com/instructure/instructure-ui/compare/v8.43.1...v8.44.0) (2023-09-21)
 
 **Note:** Version bump only for package @instructure/ui-view
