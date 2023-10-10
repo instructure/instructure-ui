@@ -24,6 +24,7 @@
 import React from 'react'
 import { generateInstanceCounterMap } from './generateInstanceCounterMap'
 
-const DeterministicIdContext = React.createContext(generateInstanceCounterMap())
+const defaultDeterministicIDMap = generateInstanceCounterMap()
+const DeterministicIdContext = React.createContext(defaultDeterministicIDMap)
 
-export { DeterministicIdContext }
+export { DeterministicIdContext, defaultDeterministicIDMap }

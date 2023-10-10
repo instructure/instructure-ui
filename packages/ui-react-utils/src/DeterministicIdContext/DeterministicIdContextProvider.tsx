@@ -22,14 +22,15 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { generateInstanceCounterMap } from './generateInstanceCounterMap'
-import { DeterministicIdContext } from './DeterministicIdContext'
+import {
+  DeterministicIdContext,
+  defaultDeterministicIDMap
+} from './DeterministicIdContext'
+
 type DeterministicIdProviderValue = Map<string, number>
 type DeterministicIdProviderProps = React.PropsWithChildren<{
   instanceCounterMap?: DeterministicIdProviderValue
 }>
-
-const defaultContextValue = generateInstanceCounterMap()
 
 /**
  * ---
@@ -50,7 +51,7 @@ const DeterministicIdContextProvider = ({
   )
 }
 DeterministicIdContextProvider.defaultProps = {
-  instanceCounterMap: defaultContextValue
+  instanceCounterMap: defaultDeterministicIDMap
 }
 
 export { DeterministicIdContextProvider }
