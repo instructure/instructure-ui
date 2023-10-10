@@ -22,9 +22,27 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
 
-import { Checkbox } from './index'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import { ToggleFacade } from '../index'
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const CheckboxLocator = locator(Checkbox.selector)
+const TEST_TEXT = 'test-text'
+
+describe('<ToggleFacade />', () => {
+  it('should render', () => {
+    render(<ToggleFacade>{TEST_TEXT}</ToggleFacade>)
+    const facade = screen.getByText(TEST_TEXT)
+
+    expect(facade).toBeInTheDocument()
+  })
+
+  it('should meet a11y standards', async () => {
+    const { container } = render(<ToggleFacade>{TEST_TEXT}</ToggleFacade>)
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
+  })
+})

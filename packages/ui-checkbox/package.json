@@ -43,9 +43,12 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.46.1",
     "@instructure/ui-color-utils": "8.46.1",
-    "@instructure/ui-test-locator": "8.46.1",
     "@instructure/ui-test-utils": "8.46.1",
-    "@instructure/ui-themes": "8.46.1"
+    "@instructure/ui-themes": "8.46.1",
+    "@instructure/ui-axe-check": "8.46.1",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
