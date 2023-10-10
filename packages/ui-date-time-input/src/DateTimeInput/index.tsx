@@ -171,12 +171,15 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         }
       }
     }
+    // if there is no date string clear TimeSelect value
+    const clearTimeSelect = dateStr ? {} : { timeSelectValue: '' }
     return {
       iso: undefined,
       calendarSelectedDate: undefined,
       dateInputText: dateStr ? dateStr : '',
       renderedDate: DateTime.now(this.locale(), this.timezone()),
-      dateInputTextChanged: false
+      dateInputTextChanged: false,
+      ...clearTimeSelect
     }
   }
 
@@ -295,7 +298,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     this.changeStateIfNeeded(newState, event)
   }
 
-  handleTimeChange = (
+  updateStateBasedOnTimeSelect = (
     event: SyntheticEvent,
     option: { value?: string; inputText: string }
   ) => {
@@ -566,7 +569,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         </DateInput>
         <TimeSelect
           value={this.state.timeSelectValue}
-          onChange={this.handleTimeChange}
+          onChange={this.updateStateBasedOnTimeSelect}
           onBlur={this.handleBlur}
           renderLabel={timeRenderLabel}
           locale={locale}
