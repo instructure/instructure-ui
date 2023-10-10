@@ -850,6 +850,47 @@ describe('<DateTimeInput />', async () => {
     expect(timeInput).to.have.value(newDateTime.format('LT'))
   })
 
+  it.only('should clear TimeSelect when DateInput is cleared', async () => {
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+
+    const subject = await mount(
+      <DateTimeInput
+        description="date time"
+        dateRenderLabel="date"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        timeRenderLabel="time"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        value={dateTime.toISOString()}
+      />
+    )
+
+    const dateTimeInput = await DateTimeInputLocator.find()
+    const dateLocator = await dateTimeInput.findDateInput()
+    const timeLocator = await dateTimeInput.findTimeInput()
+    const dateInput = await dateLocator.findInput()
+    const timeInput = await timeLocator.findInput()
+    // 1. clear programmatically
+    await subject.setProps({ value: undefined })
+    expect(dateInput).to.have.value('')
+    expect(timeInput).to.have.value('')
+    // 2. clear via keyboard input
+    const newDateStr = '2022-03-29T19:00Z'
+    await subject.setProps({ value: newDateStr })
+    expect(dateInput).to.have.value('March 29, 2022')
+    expect(timeInput).to.have.value('3:00 PM')
+    await dateInput.change({ target: { value: '' } })
+    await dateInput.keyUp('escape')
+    await wait(() => {
+      expect(dateInput).to.have.value('')
+      expect(timeInput).to.have.value('')
+    })
+  })
+
   it('should allow the user to enter any time value if allowNonStepInput is true', async () => {
     const onChange = stub()
 
