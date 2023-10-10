@@ -44,6 +44,7 @@ const generateStyle = (
       display: 'block',
       overflow: 'hidden',
       wordWrap: 'break-word',
+      whiteSpace: 'normal',
       fontFamily: componentTheme.fontFamily
     },
     auto: { label: 'truncateText__auto', height: '100%' },
