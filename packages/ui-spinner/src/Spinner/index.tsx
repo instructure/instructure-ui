@@ -37,7 +37,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import type { SpinnerProps } from './props'
+import type { SpinnerProps, SpinnerState } from './props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -49,7 +49,7 @@ category: components
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Spinner extends Component<SpinnerProps> {
+class Spinner extends Component<SpinnerProps, SpinnerState> {
   static readonly componentId = 'Spinner'
   static allowedProps = allowedProps
   static propTypes = propTypes
@@ -61,6 +61,7 @@ class Spinner extends Component<SpinnerProps> {
 
   ref: Element | null = null
   private readonly titleId?: string
+  private delayTimeout?: NodeJS.Timeout
 
   handleRef = (el: Element | null) => {
     const { elementRef } = this.props
@@ -76,14 +77,29 @@ class Spinner extends Component<SpinnerProps> {
     super(props)
 
     this.titleId = props.deterministicId!()
+
+    this.state = {
+      shouldRender: !props.delay
+    }
   }
 
   componentDidMount() {
     this.props.makeStyles?.()
+    const { delay } = this.props
+
+    if (delay) {
+      this.delayTimeout = setTimeout(() => {
+        this.setState({ shouldRender: true })
+      }, delay)
+    }
   }
 
   componentDidUpdate() {
     this.props.makeStyles?.()
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.delayTimeout)
   }
 
   radius() {
@@ -99,7 +115,7 @@ class Spinner extends Component<SpinnerProps> {
     }
   }
 
-  render() {
+  renderSpinner() {
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Spinner.allowedProps),
       Spinner
@@ -147,6 +163,10 @@ class Spinner extends Component<SpinnerProps> {
         </svg>
       </View>
     )
+  }
+
+  render() {
+    return this.state.shouldRender ? this.renderSpinner() : null
   }
 }
 
