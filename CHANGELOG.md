@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.46.0](https://github.com/instructure/instructure-ui/compare/v8.45.0...v8.46.0) (2023-10-11)
+
+
+### Bug Fixes
+
+* **ui-react-utils:** fix ID counter wrong when not in context ([29f8885](https://github.com/instructure/instructure-ui/commit/29f8885e0e52c58279f16ca7f65e200fe92344f3))
+* **ui-truncate-text:** fix TruncateText not working inside TopNavBar.Item ([5253173](https://github.com/instructure/instructure-ui/commit/52531730991fdc50868fcb6122b6b6b187325863))
+
+
+### Features
+
+* **ui-spinner): feat(ui-spinner:** add delay prop and functionality to the Spinner ([1f44e5d](https://github.com/instructure/instructure-ui/commit/1f44e5dc81cd5a209ac9d05b87a361f63a0ead9f))
+
+
+
+
+
 # [8.45.0](https://github.com/instructure/instructure-ui/compare/v8.44.0...v8.45.0) (2023-10-03)
 
 
