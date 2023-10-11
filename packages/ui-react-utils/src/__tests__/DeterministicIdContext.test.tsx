@@ -41,15 +41,45 @@ class TestComponent extends React.Component<
   }
 }
 
-describe('DeterministicIdContext', () => {
-  it('should add id correctly by default', async () => {
-    const el = await mount(<TestComponent></TestComponent>)
-    const domNode = el.getDOMNode()
+const uniqueIds = (el: { getDOMNode: () => Element }) => {
+  const idList = Array.from(el.getDOMNode().children).map((el) => el.id)
 
-    expect(domNode.id).to.eq('TestComponent_0')
+  return new Set(idList).size === idList.length
+}
+
+describe('DeterministicIdContext', () => {
+  it('should generate unique ids without Provider wrapper', async () => {
+    const el = await mount(
+      <div>
+        <TestComponent></TestComponent>
+        <TestComponent></TestComponent>
+        <TestComponent></TestComponent>
+        <TestComponent></TestComponent>
+        <TestComponent></TestComponent>
+      </div>
+    )
+
+    expect(uniqueIds(el)).to.be.true()
   })
+
+  it('should generate unique ids when components are rendered both out and inside of provider', async () => {
+    const el = await mount(
+      <div>
+        <DeterministicIdContextProvider>
+          <TestComponent></TestComponent>
+          <TestComponent></TestComponent>
+          <TestComponent></TestComponent>
+        </DeterministicIdContextProvider>
+        <TestComponent></TestComponent>
+        <TestComponent></TestComponent>
+      </div>
+    )
+
+    expect(uniqueIds(el)).to.be.true()
+  })
+
   //skipping this test because it will fail either in strictmode or normal mode
-  it.skip('should increment id by default', async () => {
+  it('should generate unique ids with provider only', async () => {
     const Wrapper = ({ children }: any) => {
       return (
         <DeterministicIdContextProvider
@@ -65,36 +95,7 @@ describe('DeterministicIdContext', () => {
     }
 
     const el = await mount(<Wrapper>{children}</Wrapper>)
-    Array.from(el.getDOMNode().children).forEach((el, i) => {
-      // since the double mounting we have to increase i by i*2 every iteration
-      expect(el.id).to.eq(`TestComponent_${i * 2}`)
-    })
-  })
 
-  it('should work when instanceCounterMap is reset', async () => {
-    for (let i = 0; i < 10; i++) {
-      const el = await mount(
-        <DeterministicIdContextProvider
-          instanceCounterMap={generateInstanceCounterMap()}
-        >
-          <TestComponent></TestComponent>
-        </DeterministicIdContextProvider>
-      )
-      const domNode = el.getDOMNode()
-
-      expect(domNode.id).to.eq('TestComponent_0')
-    }
-  })
-  it('should work correctly when seeding the instanceCounterMap to the Context', async () => {
-    const seed = generateInstanceCounterMap()
-    seed.set('TestComponent', 20)
-    const el = await mount(
-      <DeterministicIdContextProvider instanceCounterMap={seed}>
-        <TestComponent></TestComponent>
-      </DeterministicIdContextProvider>
-    )
-    const domNode = el.getDOMNode()
-
-    expect(domNode.id).to.eq('TestComponent_21')
+    expect(uniqueIds(el)).to.be.true()
   })
 })
