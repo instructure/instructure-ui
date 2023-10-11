@@ -41,6 +41,24 @@ import { Renderable } from '@instructure/shared-types'
 
 type SpinnerOwnProps = {
   /**
+   * Render Spinner "as" another HTML element
+   */
+  as?: AsElementType
+  /**
+   * delay spinner rendering for a time (in ms). Used to prevent flickering in case of very fast load times
+   */
+  delay?: number
+  /**
+   * provides a reference to the underlying html root element
+   */
+  elementRef?: (element: Element | null) => void
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin?: Spacing
+  /**
    * Give the spinner a title to be read by screenreaders
    */
   renderTitle?: Renderable
@@ -52,17 +70,6 @@ type SpinnerOwnProps = {
    * Different color schemes for use with light or dark backgrounds
    */
   variant?: 'default' | 'inverse'
-  /**
-   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-   */
-  margin?: Spacing
-  /**
-   * provides a reference to the underlying html root element
-   */
-  elementRef?: (element: Element | null) => void
-  as?: AsElementType
 }
 
 type PropKeys = keyof SpinnerOwnProps
@@ -74,11 +81,16 @@ type SpinnerProps = SpinnerOwnProps &
   OtherHTMLAttributes<SpinnerOwnProps> &
   WithDeterministicIdProps
 
+type SpinnerState = {
+  shouldRender: boolean
+}
+
 type SpinnerStyle = ComponentStyle<
   'spinner' | 'circle' | 'circleTrack' | 'circleSpin'
 >
 
 const propTypes: PropValidators<PropKeys> = {
+  delay: PropTypes.number,
   renderTitle: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
   variant: PropTypes.oneOf(['default', 'inverse']),
@@ -88,6 +100,7 @@ const propTypes: PropValidators<PropKeys> = {
 }
 
 const allowedProps: AllowedPropKeys = [
+  'delay',
   'renderTitle',
   'size',
   'variant',
@@ -96,5 +109,5 @@ const allowedProps: AllowedPropKeys = [
   'as'
 ]
 
-export type { SpinnerProps, SpinnerStyle }
+export type { SpinnerProps, SpinnerState, SpinnerStyle }
 export { propTypes, allowedProps }
