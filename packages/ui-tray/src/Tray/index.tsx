@@ -201,25 +201,21 @@ class Tray extends Component<TrayProps> {
               css={this.props.styles?.tray}
               ref={contentRef}
             >
-              {this.state.transitioning ? (
-                children
-              ) : (
-                <Dialog
-                  as="div"
-                  label={label}
-                  defaultFocusElement={defaultFocusElement}
-                  open
-                  shouldContainFocus={shouldContainFocus}
-                  shouldReturnFocus={shouldReturnFocus}
-                  shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
-                  shouldCloseOnEscape
-                  liveRegion={liveRegion}
-                  onDismiss={onDismiss}
-                  role={role}
-                >
-                  <div css={this.props.styles?.content}>{children}</div>
-                </Dialog>
-              )}
+              <Dialog
+                as="div"
+                label={label}
+                defaultFocusElement={defaultFocusElement}
+                open
+                shouldContainFocus={shouldContainFocus}
+                shouldReturnFocus={shouldReturnFocus}
+                shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
+                shouldCloseOnEscape
+                liveRegion={liveRegion}
+                onDismiss={onDismiss}
+                role={role}
+              >
+                <div css={this.props.styles?.content}>{children}</div>
+              </Dialog>
             </span>
           </Transition>
         )}
