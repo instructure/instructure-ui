@@ -252,30 +252,28 @@ class DrawerTray extends Component<
                 ref={this.handleContentRef}
                 css={trayStyles}
               >
-                {this.state.transitioning ? (
-                  this.renderContent()
-                ) : (
-                  <Dialog
-                    open
-                    role={shouldOverlayTray ? 'dialog' : 'region'}
-                    label={label}
-                    shouldReturnFocus={shouldReturnFocus}
-                    shouldContainFocus={shouldContainFocus && shouldOverlayTray}
-                    shouldCloseOnDocumentClick={
-                      shouldCloseOnDocumentClick && shouldOverlayTray
-                    }
-                    shouldCloseOnEscape={
-                      shouldCloseOnEscape && shouldOverlayTray
-                    }
-                    defaultFocusElement={defaultFocusElement}
-                    liveRegion={liveRegion}
-                    onDismiss={onDismiss}
-                    as="div"
-                    css={this.props.styles?.drawerTrayContent}
-                  >
-                    {this.renderContent()}
-                  </Dialog>
-                )}
+                <Dialog
+                  open
+                  role={shouldOverlayTray ? 'dialog' : 'region'}
+                  label={label}
+                  shouldReturnFocus={shouldReturnFocus}
+                  shouldContainFocus={
+                    !this.state.transitioning &&
+                    shouldContainFocus &&
+                    shouldOverlayTray
+                  }
+                  shouldCloseOnDocumentClick={
+                    shouldCloseOnDocumentClick && shouldOverlayTray
+                  }
+                  shouldCloseOnEscape={shouldCloseOnEscape && shouldOverlayTray}
+                  defaultFocusElement={defaultFocusElement}
+                  liveRegion={liveRegion}
+                  onDismiss={onDismiss}
+                  as="div"
+                  css={this.props.styles?.drawerTrayContent}
+                >
+                  {this.renderContent()}
+                </Dialog>
               </div>
             </Transition>
           )
