@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themes",
-  "version": "8.46.0",
+  "version": "8.46.1",
   "description": "A library of instructure themes",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,15 +22,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.46.0",
-    "@instructure/ui-test-utils": "8.46.0",
-    "@instructure/ui-theme-tokens": "8.46.0"
+    "@instructure/ui-babel-preset": "8.46.1",
+    "@instructure/ui-test-utils": "8.46.1",
+    "@instructure/ui-theme-tokens": "8.46.1"
   },
   "dependencies": {
-    "@instructure/canvas-high-contrast-theme": "8.46.0",
-    "@instructure/canvas-theme": "8.46.0",
-    "@instructure/instructure-theme": "8.46.0",
-    "@instructure/shared-types": "8.46.0"
+    "@instructure/canvas-high-contrast-theme": "8.46.1",
+    "@instructure/canvas-theme": "8.46.1",
+    "@instructure/instructure-theme": "8.46.1",
+    "@instructure/shared-types": "8.46.1"
   },
   "publishConfig": {
     "access": "public"

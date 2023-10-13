@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.46.1](https://github.com/instructure/instructure-ui/compare/v8.46.0...v8.46.1) (2023-10-13)
+
+**Note:** Version bump only for package @instructure/ui-top-nav-bar
+
+
+
+
+
 # [8.46.0](https://github.com/instructure/instructure-ui/compare/v8.45.0...v8.46.0) (2023-10-11)
 
 **Note:** Version bump only for package @instructure/ui-top-nav-bar
