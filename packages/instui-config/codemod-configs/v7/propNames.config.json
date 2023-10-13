@@ -18,6 +18,9 @@
   "Breadcrumb.Link": {
     "8.0.0": [{ "old": "icon", "new": "renderIcon" }]
   },
+  "BreadcrumbLink": {
+    "8.0.0": [{ "old": "icon", "new": "renderIcon" }]
+  },
   "DateInput": {
     "8.0.0": [{ "old": "label", "new": "renderLabel" }]
   },
@@ -51,6 +54,13 @@
     ]
   },
   "Flex.Item": {
+    "8.0.0": [
+      { "old": "grow", "new": "shouldGrow" },
+      { "old": "shrink", "new": "shouldShrink" },
+      { "old": "visualDebug", "new": "withVisualDebug" }
+    ]
+  },
+  "FlexItem": {
     "8.0.0": [
       { "old": "grow", "new": "shouldGrow" },
       { "old": "shrink", "new": "shouldShrink" },
