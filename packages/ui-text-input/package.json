@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-text-input",
-  "version": "8.46.0",
+  "version": "8.46.1",
   "description": "A styled HTML text input component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,23 +23,23 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.46.0",
-    "@instructure/ui-badge": "8.46.0",
-    "@instructure/ui-color-utils": "8.46.0",
-    "@instructure/ui-test-utils": "8.46.0",
-    "@instructure/ui-themes": "8.46.0"
+    "@instructure/ui-babel-preset": "8.46.1",
+    "@instructure/ui-badge": "8.46.1",
+    "@instructure/ui-color-utils": "8.46.1",
+    "@instructure/ui-test-utils": "8.46.1",
+    "@instructure/ui-themes": "8.46.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.15",
-    "@instructure/emotion": "8.46.0",
-    "@instructure/shared-types": "8.46.0",
-    "@instructure/ui-dom-utils": "8.46.0",
-    "@instructure/ui-form-field": "8.46.0",
-    "@instructure/ui-icons": "8.46.0",
-    "@instructure/ui-prop-types": "8.46.0",
-    "@instructure/ui-react-utils": "8.46.0",
-    "@instructure/ui-tag": "8.46.0",
-    "@instructure/ui-testable": "8.46.0",
+    "@instructure/emotion": "8.46.1",
+    "@instructure/shared-types": "8.46.1",
+    "@instructure/ui-dom-utils": "8.46.1",
+    "@instructure/ui-form-field": "8.46.1",
+    "@instructure/ui-icons": "8.46.1",
+    "@instructure/ui-prop-types": "8.46.1",
+    "@instructure/ui-react-utils": "8.46.1",
+    "@instructure/ui-tag": "8.46.1",
+    "@instructure/ui-testable": "8.46.1",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {
