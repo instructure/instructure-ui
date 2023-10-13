@@ -850,7 +850,7 @@ describe('<DateTimeInput />', async () => {
     expect(timeInput).to.have.value(newDateTime.format('LT'))
   })
 
-  it.only('should clear TimeSelect when DateInput is cleared', async () => {
+  it('should clear TimeSelect when DateInput is cleared', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
     const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
@@ -888,6 +888,9 @@ describe('<DateTimeInput />', async () => {
     await wait(() => {
       expect(dateInput).to.have.value('')
       expect(timeInput).to.have.value('')
+      dateTimeInput.find(':contains("whoops")', {
+        expectEmpty: true
+      })
     })
   })
 

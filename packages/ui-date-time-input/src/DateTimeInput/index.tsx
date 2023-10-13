@@ -172,7 +172,15 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       }
     }
     // if there is no date string clear TimeSelect value
-    const clearTimeSelect = dateStr ? {} : { timeSelectValue: '' }
+    const clearTimeSelect: Partial<DateTimeInputState> = dateStr
+      ? {}
+      : {
+          timeSelectValue: '',
+          message: {
+            type: 'success',
+            text: ''
+          }
+        }
     return {
       iso: undefined,
       calendarSelectedDate: undefined,
