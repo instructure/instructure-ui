@@ -68,7 +68,7 @@ class Example extends React.Component {
     let messages = []
     if (!isoDate) {
       // this happens if an invalid date is entered
-      this.setState({ messages })
+      this.setState({ messages:messages, value:undefined })
       return
     }
     const now = new Date()
