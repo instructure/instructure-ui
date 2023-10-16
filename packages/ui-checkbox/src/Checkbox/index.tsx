@@ -156,9 +156,10 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
   }
 
   handleMouseOver = () => {
-    this.setState({
-      hovered: true
-    })
+    !this.props.disabled &&
+      this.setState({
+        hovered: true
+      })
   }
 
   handleMouseOut = () => {

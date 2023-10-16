@@ -30,7 +30,9 @@ import Spinner from '../index'
 describe('<Spinner />', () => {
   describe('with the delay prop', () => {
     it('should delay rendering', async () => {
-      const { container } = render(<Spinner delay={300} />)
+      const { container } = render(
+        <Spinner renderTitle="Loading" delay={300} />
+      )
 
       const spinnerElements = container.querySelectorAll('[data-cid="Spinner"]')
 
