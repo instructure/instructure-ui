@@ -33,6 +33,9 @@
     "karma-webpack": "^5.0.0",
     "process": "^0.11.10"
   },
+  "//dependency-comments": {
+    "globby": "since 12.0.0 globby is pure ESM, it cannot be require()'d"
+  },
   "peerDependencies": {
     "mocha": "^10",
     "webpack": "^5"

@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.22.15",
+    "@babel/runtime": "^7.23.2",
     "@instructure/canvas-theme": "8.46.1",
     "@instructure/command-utils": "8.46.1",
     "@instructure/ui-babel-preset": "8.46.1",
@@ -35,10 +35,10 @@
     "@storybook/addons": "^6.5.16",
     "@storybook/react": "^6.5.16",
     "@storybook/theming": "^6.5.16",
-    "chromatic": "^6.19.9",
+    "chromatic": "^6.24.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "webpack-merge": "^5.9.0"
+    "webpack-merge": "^5.10.0"
   },
   "devDependencies": {
     "@instructure/ui-scripts": "8.46.1",
@@ -48,7 +48,10 @@
     "globby": "^11.1.0",
     "prop-types": "^15.8.1",
     "react-docgen": "6.0.0-alpha.3",
-    "webpack": "^5.88.2"
+    "webpack": "^5.89.0"
+  },
+  "//dependency-comments": {
+    "globby": "since 12.0.0 globby is pure ESM, it cannot be require()'d"
   },
   "resolutions": {
     "@storybook/react/webpack": "^5"

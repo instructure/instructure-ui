@@ -29,12 +29,12 @@
     "@instructure/ui-icons": "8.46.1",
     "@instructure/ui-test-utils": "8.46.1",
     "@instructure/ui-themes": "8.46.1",
-    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^14.4.3"
+    "@testing-library/user-event": "^14.5.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.15",
+    "@babel/runtime": "^7.23.2",
     "@instructure/emotion": "8.46.1",
     "@instructure/shared-types": "8.46.1",
     "@instructure/ui-heading": "8.46.1",

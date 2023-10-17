@@ -18,6 +18,9 @@
   "dependencies": {
     "globby": "^11.1.0"
   },
+  "//dependency-comments": {
+    "globby": "since 12.0.0 globby is pure ESM, it cannot be require()'d"
+  },
   "publishConfig": {
     "access": "public"
   }

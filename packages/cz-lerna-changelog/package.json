@@ -26,8 +26,8 @@
     "@semantic-release/commit-analyzer": "^9.0.2",
     "chalk": "^4.1.2",
     "cz-customizable": "^6.9.2",
-    "inquirer": "^8.2.5",
-    "inquirer-autocomplete-prompt": "^2.0.0"
+    "inquirer": "^8.2.6",
+    "inquirer-autocomplete-prompt": "^2.0.1"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.46.1",

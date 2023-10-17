@@ -14,7 +14,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.15",
+    "@babel/runtime": "^7.23.2",
     "@instructure/console": "8.46.1"
   },
   "devDependencies": {

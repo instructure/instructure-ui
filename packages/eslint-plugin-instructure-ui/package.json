@@ -18,7 +18,7 @@
   "dependencies": {
     "@instructure/pkg-utils": "8.46.1",
     "eslint-module-utils": "^2.8.0",
-    "eslint-plugin-import": "^2.27.5"
+    "eslint-plugin-import": "^2.28.1"
   },
   "peerDependencies": {
     "eslint": "^8"

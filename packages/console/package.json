@@ -24,7 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.46.1",
-    "@types/babel-plugin-macros": "^3.1.0"
+    "@types/babel-plugin-macros": "^3.1.1"
   },
   "dependencies": {
     "@babel/helper-annotate-as-pure": "^7.22.5",
