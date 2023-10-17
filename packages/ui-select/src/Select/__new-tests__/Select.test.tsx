@@ -23,7 +23,7 @@
  */
 import React from 'react'
 import { render } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import Select from '../index'
 import * as utils from '@instructure/ui-utils'
 

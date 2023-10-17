@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import globby from 'globby'
+import { globby } from 'globby'
 import path from 'path'
 import { getClientProps } from './utils/getClientProps.mjs'
 import { processFile } from './processFile.mjs'

@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/standalone": "^7.22.15",
+    "@babel/standalone": "^7.23.2",
     "@instructure/canvas-high-contrast-theme": "8.46.1",
     "@instructure/canvas-theme": "8.46.1",
     "@instructure/console": "8.46.1",
@@ -116,14 +116,14 @@
     "buffer": "^6.0.3",
     "codesandbox": "^2.2.3",
     "lorem-ipsum": "^2.0.8",
-    "marked": "^4.3.0",
+    "marked": "^9.1.2",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-github-corner": "^2.5.0",
     "semver": "^7.5.4",
-    "webpack-merge": "^5.9.0"
+    "webpack-merge": "^5.10.0"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.46.1",
@@ -131,16 +131,16 @@
     "@instructure/ui-scripts": "8.46.1",
     "@instructure/ui-stylelint-config": "8.46.1",
     "@instructure/ui-webpack-config": "8.46.1",
-    "@types/marked": "^4.3.1",
+    "@types/marked": "^5.0.2",
     "chokidar": "^3.5.3",
-    "globby": "^11.1.0",
+    "globby": "^13.2.2",
     "gray-matter": "^4.0.3",
     "html-webpack-plugin": "^5.5.3",
-    "jsdoc-api": "^7.2.0",
-    "mkdirp": "^1.0.4",
+    "jsdoc-api": "^8.0.0",
+    "mkdirp": "^3.0.1",
     "raw-loader": "^4.0.2",
-    "react-docgen": "^6.0.3",
+    "react-docgen": "^6.0.4",
     "svg-inline-loader": "^0.8.2",
-    "webpack-bundle-analyzer": "^4.9.0"
+    "webpack-bundle-analyzer": "^4.9.1"
   }
 }

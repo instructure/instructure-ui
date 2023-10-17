@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 
 // eslint-disable-next-line no-restricted-imports
 import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'

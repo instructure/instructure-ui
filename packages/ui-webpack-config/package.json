@@ -25,7 +25,7 @@
     "stylelint": "^15.10.3",
     "terser-webpack-plugin": "^5.3.9",
     "thread-loader": "^4.0.2",
-    "webpack": "^5.88.2"
+    "webpack": "^5.89.0"
   },
   "publishConfig": {
     "access": "public"

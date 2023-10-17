@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 
 import { runAxeCheck } from '@instructure/ui-axe-check'
 import { BreadcrumbLink } from '../index'

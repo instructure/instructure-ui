@@ -24,10 +24,10 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.46.1",
     "@instructure/ui-test-utils": "8.46.1",
-    "@types/tinycolor2": "^1.4.3"
+    "@types/tinycolor2": "^1.4.4"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.15",
+    "@babel/runtime": "^7.23.2",
     "tinycolor2": "^1.6.0"
   },
   "publishConfig": {

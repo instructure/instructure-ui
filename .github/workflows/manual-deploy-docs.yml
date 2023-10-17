@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
           cache: 'npm'
       - name: Install netlify-cli
         run: npm install --save-dev netlify-cli@13.2.2

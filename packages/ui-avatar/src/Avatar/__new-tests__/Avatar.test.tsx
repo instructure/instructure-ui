@@ -25,7 +25,7 @@ import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { runAxeCheck } from '@instructure/ui-axe-check'
 
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import Avatar from '../index'
 import { IconGroupLine } from '@instructure/ui-icons'
 
