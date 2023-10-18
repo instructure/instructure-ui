@@ -37,7 +37,6 @@ parent: Drilldown
 id: Drilldown.Option
 ---
 @module DrilldownOption
-@tsProps
 **/
 // needed for listing the available theme variables on docs page,
 // we pass the themeOverrides to Options.Item

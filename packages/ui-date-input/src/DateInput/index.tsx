@@ -58,7 +58,6 @@ category: components
 ---
 The `DateInput` component provides a visual interface for inputting date data.
 See <https://instructure.design/#DateInput/>
-@tsProps
 **/
 @withStyle(generateStyle, null)
 @testable()

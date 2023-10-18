@@ -39,7 +39,6 @@ import type { PagesPageProps } from './props'
 parent: Pages
 id: Pages.Page
 ---
-@tsProps
 **/
 class Page extends Component<PagesPageProps> {
   static readonly componentId = 'Pages.Page'

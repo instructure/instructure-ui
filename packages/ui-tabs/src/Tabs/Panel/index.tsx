@@ -41,7 +41,6 @@ import { allowedProps, propTypes } from './props'
 parent: Tabs
 id: Tabs.Panel
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Panel extends Component<TabsPanelProps> {

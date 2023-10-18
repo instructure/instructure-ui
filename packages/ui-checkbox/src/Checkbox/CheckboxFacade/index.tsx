@@ -40,7 +40,6 @@ import type { CheckboxFacadeProps } from './props'
 ---
 parent: Checkbox
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class CheckboxFacade extends Component<CheckboxFacadeProps> {

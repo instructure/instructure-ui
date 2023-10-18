@@ -42,7 +42,6 @@ import { allowedProps, propTypes } from './props'
 parent: Tabs
 id: Tabs.Tab
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Tab extends Component<TabsTabProps> {

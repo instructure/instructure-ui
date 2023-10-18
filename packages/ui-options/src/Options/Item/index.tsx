@@ -45,7 +45,6 @@ import { allowedProps, propTypes } from './props'
 parent: Options
 id: Options.Item
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyles, generateComponentTheme)

@@ -35,7 +35,6 @@ import type { FormFieldProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 class FormField extends Component<FormFieldProps> {
   static readonly componentId = 'FormField'

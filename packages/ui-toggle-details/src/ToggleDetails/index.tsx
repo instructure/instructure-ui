@@ -44,7 +44,6 @@ import type { ExpandableToggleProps } from '@instructure/ui-expandable'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

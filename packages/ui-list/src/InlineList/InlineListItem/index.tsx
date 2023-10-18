@@ -41,7 +41,6 @@ import type { InlineListItemProps } from './props'
 parent: InlineList
 id: InlineList.Item
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

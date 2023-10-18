@@ -39,7 +39,6 @@ import type { ModalFooterProps } from './props'
 parent: Modal
 id: Modal.Footer
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

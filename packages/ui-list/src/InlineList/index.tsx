@@ -36,7 +36,7 @@ import type { InlineListProps } from './props'
 ---
 category: components
 ---
-@tsProps
+
 **/
 @testable()
 class InlineList extends Component<InlineListProps> {

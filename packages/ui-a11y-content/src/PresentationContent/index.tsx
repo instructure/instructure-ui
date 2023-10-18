@@ -34,7 +34,6 @@ import type { PresentationContentProps } from './props'
 category: components/utilities
 ---
 @module PresentationContent
-@tsProps
 **/
 class PresentationContent extends Component<PresentationContentProps> {
   static propTypes = propTypes

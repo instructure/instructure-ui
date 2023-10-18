@@ -45,7 +45,6 @@ import { propTypes, allowedProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @testable()
 class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {

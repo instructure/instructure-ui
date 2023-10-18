@@ -47,7 +47,6 @@ type AriaSelectedType = { 'aria-selected'?: boolean }
 parent: TreeBrowser
 id: TreeBrowser.Collection
 ---
-@tsProps
 **/
 @withStyle(generateStyles, generateComponentTheme)
 @testable()

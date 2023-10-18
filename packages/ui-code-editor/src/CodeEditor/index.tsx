@@ -67,7 +67,6 @@ const CodeMirrorWrapper = lazy(() => {
 ---
 category: components/deprecated
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

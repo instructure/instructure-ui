@@ -41,7 +41,6 @@ import type { GridColProps } from './props'
 parent: Grid
 id: Grid.Col
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class GridCol extends Component<GridColProps> {

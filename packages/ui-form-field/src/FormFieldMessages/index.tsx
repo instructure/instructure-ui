@@ -41,7 +41,6 @@ import type { FormFieldMessagesProps } from './props'
 ---
 parent: FormField
 ---
-@tsProps
 
 A FormFieldMessages component
 

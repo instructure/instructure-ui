@@ -44,7 +44,6 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components/utilities
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('9.0.0', { onDismiss: null })

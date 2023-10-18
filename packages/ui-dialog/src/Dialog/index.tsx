@@ -38,7 +38,6 @@ import type { DialogProps } from './props'
 category: components/utilities
 ---
 @module Dialog
-@tsProps
 **/
 class Dialog extends Component<DialogProps> {
   static readonly componentId = 'Dialog'

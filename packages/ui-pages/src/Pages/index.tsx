@@ -48,7 +48,6 @@ import type { PagesProps, PagesState } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

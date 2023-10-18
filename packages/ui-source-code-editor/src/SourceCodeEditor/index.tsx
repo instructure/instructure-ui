@@ -107,7 +107,6 @@ import type { SourceCodeEditorProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

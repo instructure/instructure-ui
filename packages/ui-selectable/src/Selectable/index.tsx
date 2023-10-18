@@ -39,7 +39,6 @@ import { withDeterministicId } from '@instructure/ui-react-utils'
 category: components
 tags: autocomplete, typeahead, combobox, dropdown, search
 ---
-@tsProps
 **/
 @withDeterministicId()
 class Selectable extends Component<SelectableProps> {

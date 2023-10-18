@@ -76,7 +76,6 @@ type ArrowConfig = {
 ---
 category: components
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, null)

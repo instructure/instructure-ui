@@ -45,7 +45,6 @@ import { allowedProps, propTypes } from './props'
 parent: Table
 id: Table.Body
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Body extends Component<TableBodyProps> {

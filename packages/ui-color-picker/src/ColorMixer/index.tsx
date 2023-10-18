@@ -48,7 +48,6 @@ import generateStyle from './styles'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, null)
 @testable()

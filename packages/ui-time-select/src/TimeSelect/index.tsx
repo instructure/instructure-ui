@@ -53,7 +53,6 @@ type GetOption = <F extends keyof TimeSelectOptions>(
 ---
 category: components
 ---
-@tsProps
 
 A component used to select a time value.
  **/

@@ -67,7 +67,6 @@ type DrawerChildren = (TrayChild | ContentChild)[]
 ---
 category: components
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, null)

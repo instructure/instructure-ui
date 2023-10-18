@@ -52,7 +52,6 @@ import generateComponentTheme from './theme'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

@@ -44,8 +44,7 @@ import type {
 @withStyle(generateStyle, null)
 class Properties extends Component<PropertiesProps> {
   static defaultProps = {
-    layout: 'small',
-    hasTsProps: false
+    layout: 'small'
   }
 
   componentDidMount() {
@@ -54,10 +53,6 @@ class Properties extends Component<PropertiesProps> {
 
   componentDidUpdate() {
     this.props.makeStyles?.()
-  }
-
-  isTsProp(prop: PropDescriptor) {
-    return this.props.hasTsProps && prop.tsType
   }
 
   unquote(string: string) {
@@ -95,13 +90,7 @@ class Properties extends Component<PropertiesProps> {
               <code>{name}</code>
             </Table.Cell>
             <Table.Cell>
-              <code>
-                {this.isTsProp(prop)
-                  ? this.renderTSType(prop.tsType!)
-                  : // the fallback is needed for the components
-                    // that have no @tsProps flag jet (not fully typed yet)
-                    this.renderType(prop.type)}
-              </code>
+              <code>{this.renderTSType(prop.tsType)}</code>
             </Table.Cell>
             <Table.Cell>{this.renderDefault(prop)}</Table.Cell>
             <Table.Cell>{this.renderDescription(prop)}</Table.Cell>
@@ -111,7 +100,9 @@ class Properties extends Component<PropertiesProps> {
   }
 
   renderTSType = (tsType: TypeDescriptor<TSFunctionSignatureType>) => {
-    const elements = (tsType as ElementsType<TSFunctionSignatureType>).elements
+    const elements: TypeDescriptor<TSFunctionSignatureType>[] = (
+      tsType as ElementsType<TSFunctionSignatureType>
+    ).elements
     const type = (
       tsType as
         | ObjectSignatureType<TSFunctionSignatureType>
@@ -161,18 +152,6 @@ class Properties extends Component<PropertiesProps> {
     }
   }
 
-  renderType(type: PropDescriptor['type']) {
-    const { name } = type || {}
-    switch (name) {
-      case 'arrayOf':
-        return `${type?.value?.name}[]`
-      case 'instanceOf':
-        return type!.value
-      default:
-        return name
-    }
-  }
-
   renderDefault(prop: PropDescriptor) {
     const { styles } = this.props
 
@@ -191,69 +170,14 @@ class Properties extends Component<PropertiesProps> {
 
   renderDescription(prop: PropDescriptor) {
     const { description } = prop || {}
-    const isTsProp = this.isTsProp(prop)
 
     return (
       <div>
         {description && compileMarkdown(description)}
-        {/* This would be duplicate information in case we have proper TS types */}
-        {!isTsProp ? this.renderEnum(prop) : null}
-        {isTsProp ? this.renderTsUnion(prop) : this.renderUnion(prop)}
-        {isTsProp && this.renderTsSignature(prop)}
-        {isTsProp && this.renderTsArrayType(prop)}
+        {this.renderTsUnion(prop)}
+        {this.renderTsSignature(prop)}
+        {this.renderTsArrayType(prop)}
       </div>
-    )
-  }
-
-  renderEnum(prop: PropDescriptor) {
-    const { styles } = this.props
-    const { type } = prop
-
-    if (!type || type.name !== 'enum') {
-      return
-    }
-
-    if (!Array.isArray(type.value)) {
-      return <span>{type.value}</span>
-    }
-
-    const values = type.value.map(
-      ({ value }: { value: string }, idx: number) => (
-        <li css={styles?.listItem} key={idx}>
-          <code>{this.unquote(value)}</code>
-        </li>
-      )
-    )
-
-    return (
-      <span>
-        <span css={styles?.oneOf}>One of:</span>{' '}
-        <ul css={styles?.list}>{values}</ul>
-      </span>
-    )
-  }
-
-  renderUnion(prop: PropDescriptor) {
-    const { styles } = this.props
-    const { type } = prop
-
-    if (!type || type.name !== 'union') {
-      return
-    }
-    if (!Array.isArray(type.value)) {
-      return <span>{type.value}</span>
-    }
-
-    const values = type.value.map((value, idx) => (
-      <li css={styles?.listItem} key={idx}>
-        <code>{this.renderType(value)}</code>
-      </li>
-    ))
-    return (
-      <span>
-        <span css={styles?.oneOf}>One of type:</span>{' '}
-        <ul css={styles?.list}>{values}</ul>
-      </span>
     )
   }
 
@@ -339,7 +263,6 @@ class Properties extends Component<PropertiesProps> {
   render() {
     const { styles } = this.props
     const { layout } = this.props
-
     return (
       <div css={styles?.properties}>
         <Table

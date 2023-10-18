@@ -37,7 +37,6 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Text extends Component<TextProps> {

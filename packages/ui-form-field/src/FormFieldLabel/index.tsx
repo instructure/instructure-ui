@@ -38,7 +38,6 @@ import type { FormFieldLabelProps } from './props'
 ---
 parent: FormField
 ---
-@tsProps
 
 This is a helper component that is used by most of the custom form
 components. In most cases it shouldn't be used directly.

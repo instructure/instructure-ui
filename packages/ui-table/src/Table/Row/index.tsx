@@ -49,7 +49,6 @@ import { allowedProps, propTypes } from './props'
 parent: Table
 id: Table.Row
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Row extends Component<TableRowProps> {

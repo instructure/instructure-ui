@@ -31,7 +31,6 @@ import { allowedProps, propTypes } from './props'
 parent: SimpleSelect
 id: SimpleSelect.Option
 ---
-@tsProps
 **/
 class Option extends Component<SimpleSelectOptionProps> {
   static readonly componentId = 'SimpleSelect.Option'

@@ -52,7 +52,6 @@ parent: TopNavBar
 id: TopNavBar.Layout
 ---
 @module TopNavBarLayout
-@tsProps
 **/
 @withStyle(null, generateComponentTheme)
 @testable()

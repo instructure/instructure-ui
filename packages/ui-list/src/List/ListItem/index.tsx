@@ -42,7 +42,6 @@ import type { ListItemProps } from './props'
 parent: List
 id: List.Item
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

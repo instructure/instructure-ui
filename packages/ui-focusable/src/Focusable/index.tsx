@@ -44,7 +44,6 @@ type HTMLElementWithType = HTMLElement & {
 ---
 category: components/utilities
 ---
-@tsProps
 **/
 class Focusable extends Component<FocusableProps, FocusableState> {
   static propTypes = propTypes

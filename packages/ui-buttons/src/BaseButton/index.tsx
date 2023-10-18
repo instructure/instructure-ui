@@ -51,7 +51,6 @@ import type { BaseButtonProps, BaseButtonStyleProps } from './props'
 ---
 category: components/utilities
 ---
-@tsProps
 **/
 
 @withStyle(generateStyles, generateComponentTheme)

@@ -42,7 +42,6 @@ import type { BreadcrumbProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)

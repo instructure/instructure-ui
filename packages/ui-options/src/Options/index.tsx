@@ -58,7 +58,6 @@ type OptionsChildren = (ItemChild | SeparatorChild | OptionsChild)[]
 ---
 category: components
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyles, generateComponentTheme)

@@ -37,7 +37,6 @@ parent: Drilldown
 id: Drilldown.Separator
 ---
 @module DrilldownSeparator
-@tsProps
 **/
 // needed for listing the available theme variables on docs page,
 // we pass the themeOverrides to Options.Separator

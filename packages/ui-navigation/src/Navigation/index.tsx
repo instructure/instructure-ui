@@ -50,7 +50,6 @@ const navMinimized = ({ minimized }: { minimized: boolean }) => ({
 ---
 category: components/deprecated
 ---
-@tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)

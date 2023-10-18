@@ -39,7 +39,6 @@ import type { ToggleFacadeProps } from './props'
 ---
 parent: Checkbox
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ToggleFacade extends Component<ToggleFacadeProps> {

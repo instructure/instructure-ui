@@ -46,7 +46,6 @@ import type {
 parent: DrawerLayout
 id: DrawerLayout.Content
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

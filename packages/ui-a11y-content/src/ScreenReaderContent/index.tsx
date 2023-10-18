@@ -39,7 +39,6 @@ import type { ScreenReaderContentProps } from './props'
 category: components/utilities
 ---
 @module ScreenReaderContent
-@tsProps
 **/
 @withStyle(generateStyle, null)
 class ScreenReaderContent extends Component<ScreenReaderContentProps> {

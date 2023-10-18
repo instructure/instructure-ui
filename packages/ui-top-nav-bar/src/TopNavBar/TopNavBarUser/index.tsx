@@ -45,7 +45,6 @@ parent: TopNavBar
 id: TopNavBar.User
 ---
 @module TopNavBarUser
-@tsProps
 **/
 @withStyle(generateStyle, null)
 @testable()

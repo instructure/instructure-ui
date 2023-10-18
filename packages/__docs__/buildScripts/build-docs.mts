@@ -86,6 +86,7 @@ const pathsToIgnore = [
   '**/__fixtures__/**',
   '**/__testfixtures__/**',
   '**/__tests__/**',
+  '**/__new-tests__/**',
   '**/locales/**',
   '**/styles.{js,ts}',
   '**/theme.{js,ts}',
@@ -179,13 +180,15 @@ function buildDocs() {
 }
 
 // This function is also called by Webpack if a file changes
+// TODO this parses some files twice, its needed for the Webpack watcher but not
+// for the full build.
 function processSingleFile(fullPath: string) {
   let docObject
   const dirName = path.dirname(fullPath)
   const fileName = path.parse(fullPath).name
   if (fileName === 'index') {
     docObject = processFile(fullPath, projectRoot, library)
-    // Components (e.g. Alert) store their descriptions in README.md files.
+    // Some Components (e.g. Alert) store their descriptions in README.md files.
     // Add this to the final JSON if it's edited
     const readmeDesc = tryParseReadme(dirName)
     docObject.description = readmeDesc
@@ -208,6 +211,7 @@ function processSingleFile(fullPath: string) {
       docObject = processFile(fullPath, projectRoot, library)
     }
   } else {
+    // documentation .md files, utils ts and tsx files
     docObject = processFile(fullPath, projectRoot, library)
   }
   const docJSON = JSON.stringify(docObject!)

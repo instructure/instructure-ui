@@ -70,7 +70,6 @@ type PanelChild = ComponentElement<TabsPanelProps, Panel>
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

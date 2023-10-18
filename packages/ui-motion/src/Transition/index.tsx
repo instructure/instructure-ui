@@ -46,7 +46,6 @@ import type { TransitionProps } from './props'
 category: components/utilities
 ---
 @module Transition
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

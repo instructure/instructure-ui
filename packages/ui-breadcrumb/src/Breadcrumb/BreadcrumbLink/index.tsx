@@ -37,7 +37,6 @@ import type { BreadcrumbLinkProps } from './props'
 parent: Breadcrumb
 id: Breadcrumb.Link
 ---
-@tsProps
 **/
 
 @testable()

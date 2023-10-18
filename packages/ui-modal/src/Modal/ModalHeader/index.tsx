@@ -49,7 +49,6 @@ type CloseButtonChild = React.ComponentElement<CloseButtonProps, CloseButton>
 parent: Modal
 id: Modal.Header
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

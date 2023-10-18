@@ -46,7 +46,6 @@ type RadioInputChild = React.ComponentElement<RadioInputProps, RadioInput>
 ---
 category: components
 ---
-@tsProps
 **/
 @withDeterministicId()
 @testable()

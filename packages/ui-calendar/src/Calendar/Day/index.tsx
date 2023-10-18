@@ -49,7 +49,6 @@ import type { CalendarDayProps, CalendarDayStyleProps } from './props'
 parent: Calendar
 id: Calendar.Day
 ---
-@tsProps
  **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

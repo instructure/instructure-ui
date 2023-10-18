@@ -51,7 +51,6 @@ import type { ViewOwnProps } from '@instructure/ui-view'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

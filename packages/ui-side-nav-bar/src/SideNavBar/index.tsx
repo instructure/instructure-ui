@@ -46,7 +46,6 @@ const navMinimized = ({ minimized }: { minimized: boolean }) => ({
 ---
 category: components
 ---
-@tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)

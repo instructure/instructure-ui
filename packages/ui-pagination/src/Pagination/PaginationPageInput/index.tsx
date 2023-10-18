@@ -44,7 +44,6 @@ import type {
 parent: Pagination
 id: Pagination.PageInput
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

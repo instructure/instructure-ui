@@ -40,7 +40,6 @@ import type { InlineSVGProps } from './props'
 ---
 category: components/utilities
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

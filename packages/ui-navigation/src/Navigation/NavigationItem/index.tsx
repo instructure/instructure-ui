@@ -40,7 +40,6 @@ import { allowedProps, propTypes } from './props'
 parent: Navigation
 id: Navigation.Item
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

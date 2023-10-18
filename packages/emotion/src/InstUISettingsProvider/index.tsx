@@ -72,7 +72,6 @@ type InstUIProviderProps = {
  * category: components/utilities
  * ---
  * @module InstUISettingsProvider
- * @tsProps
  */
 function InstUISettingsProvider({
   children,

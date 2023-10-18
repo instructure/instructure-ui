@@ -93,7 +93,6 @@ const acceptedCharactersForHEX = [
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
