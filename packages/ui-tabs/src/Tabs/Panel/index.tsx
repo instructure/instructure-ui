@@ -55,7 +55,8 @@ class Panel extends Component<TabsPanelProps> {
     textAlign: 'start',
     variant: 'default',
     isSelected: false,
-    padding: 'small'
+    padding: 'small',
+    active: false
   }
 
   componentDidMount() {
@@ -92,6 +93,7 @@ class Panel extends Component<TabsPanelProps> {
       isDisabled,
       isSelected,
       styles,
+      active,
       ...props
     } = this.props
     const isHidden = !isSelected || !!isDisabled

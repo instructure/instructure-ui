@@ -58,6 +58,11 @@ type TabsPanelOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: HTMLDivElement | null) => void
+  /**
+   * Only one `<Tabs.Panel />` can be marked as active. The marked panel's content is rendered
+   * for all the `<Tabs.Panel />`s.
+   */
+  active?: boolean
 }
 
 type PropKeys = keyof TabsPanelOwnProps
@@ -82,7 +87,8 @@ const propTypes: PropValidators<PropKeys> = {
   labelledBy: PropTypes.string,
   padding: ThemeablePropTypes.spacing,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  active: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -97,7 +103,8 @@ const allowedProps: AllowedPropKeys = [
   'labelledBy',
   'padding',
   'textAlign',
-  'elementRef'
+  'elementRef',
+  'active'
 ]
 
 export type { TabsPanelProps, TabsPanelStyle }

@@ -27,7 +27,8 @@ import React, {
   Component,
   ComponentClass,
   ComponentElement,
-  createElement
+  createElement,
+  ReactElement
 } from 'react'
 
 import keycode from 'keycode'
@@ -359,24 +360,44 @@ class Tabs extends Component<TabsProps, TabsState> {
     _index: number,
     generatedId: string,
     selected: boolean,
-    panel: PanelChild
+    panel: PanelChild,
+    activePanel?: PanelChild
   ) {
     const id = panel.props.id || generatedId
 
     // fixHeight can be 0, so simply `fixheight` could return falsy value
     const hasFixedHeight = typeof this.props.fixHeight !== 'undefined'
 
-    return safeCloneElement(panel, {
+    const commonProps = {
       id: panel.props.id || `panel-${id}`,
       labelledBy: `tab-${id}`,
       isSelected: selected,
-      key: panel.props.id || `panel-${id}`,
       variant: this.props.variant,
-      padding: panel.props.padding || this.props.padding,
-      textAlign: panel.props.textAlign || this.props.textAlign,
       maxHeight: !hasFixedHeight ? this.props.maxHeight : undefined,
       minHeight: !hasFixedHeight ? this.props.minHeight : '100%'
-    } as TabsPanelProps & { key: string }) as PanelChild
+    }
+
+    let activePanelClone = null
+    if (activePanel !== undefined) {
+      // cloning active panel with a proper custom key as a workaround because
+      // safeCloneElement overwrites it with the key from the original element
+      activePanelClone = React.cloneElement(activePanel as ReactElement, {
+        key: panel.props.id || `panel-${id}`
+      })
+
+      return safeCloneElement(activePanelClone, {
+        padding: activePanelClone.props.padding || this.props.padding,
+        textAlign: activePanelClone.props.textAlign || this.props.textAlign,
+        ...commonProps
+      } as TabsPanelProps & { key: string }) as PanelChild
+    } else {
+      return safeCloneElement(panel, {
+        key: panel.props.id || `panel-${id}`,
+        padding: panel.props.padding || this.props.padding,
+        textAlign: panel.props.textAlign || this.props.textAlign,
+        ...commonProps
+      } as TabsPanelProps & { key: string }) as PanelChild
+    }
   }
 
   handleFocusableRef = (el: Focusable | null) => {
@@ -430,6 +451,14 @@ class Tabs extends Component<TabsProps, TabsState> {
       ...props
     } = this.props
 
+    const activePanels = (React.Children.toArray(children) as PanelChild[])
+      .filter((child) => matchComponentTypes<PanelChild>(child, [Panel]))
+      .filter((child) => child.props.active)
+
+    if (activePanels.length > 1) {
+      error(false, `[Tabs] Only one Panel can be marked as active.`)
+    }
+
     const selectedChildIndex = (
       React.Children.toArray(children) as PanelChild[]
     )
@@ -447,7 +476,13 @@ class Tabs extends Component<TabsProps, TabsState> {
         const id = uid()
 
         tabs.push(this.createTab(index, id, selected, child))
-        panels.push(this.clonePanel(index, id, selected, child))
+        if (activePanels.length === 1) {
+          panels.push(
+            this.clonePanel(index, id, selected, child, activePanels[0])
+          )
+        } else {
+          panels.push(this.clonePanel(index, id, selected, child))
+        }
 
         index++
       } else {
