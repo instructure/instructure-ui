@@ -52,7 +52,6 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyles, generateComponentTheme)
 @testable()

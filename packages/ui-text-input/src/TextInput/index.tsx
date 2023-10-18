@@ -50,7 +50,6 @@ import { allowedProps, propTypes } from './props'
 category: components
 tags: form, field
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

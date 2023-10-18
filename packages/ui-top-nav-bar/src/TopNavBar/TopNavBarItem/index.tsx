@@ -78,7 +78,6 @@ parent: TopNavBar
 id: TopNavBar.Item
 ---
 @module TopNavBarItem
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

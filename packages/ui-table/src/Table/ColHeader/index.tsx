@@ -44,7 +44,6 @@ import { allowedProps, propTypes } from './props'
 parent: Table
 id: Table.ColHeader
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColHeader extends Component<TableColHeaderProps> {

@@ -53,7 +53,6 @@ function keyEventIsClickButton(e: React.KeyboardEvent) {
 ---
 category: components
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

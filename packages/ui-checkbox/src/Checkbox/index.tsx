@@ -54,7 +54,6 @@ import type {
 category: components
 tags: toggle, switch
 ---
-@tsProps
 **/
 
 @withDeterministicId()

@@ -50,7 +50,6 @@ import type { FormFieldLayoutProps } from './props'
 ---
 parent: FormField
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, null)

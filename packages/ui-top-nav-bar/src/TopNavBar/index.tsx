@@ -48,7 +48,6 @@ import type { TopNavBarProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @testable()
 class TopNavBar extends Component<TopNavBarProps> {

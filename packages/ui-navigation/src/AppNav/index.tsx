@@ -46,7 +46,6 @@ import { TruncateList } from '@instructure/ui-truncate-list'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

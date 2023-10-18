@@ -39,7 +39,6 @@ import type { FlexItemProps } from './props'
 parent: Flex
 id: Flex.Item
 ---
-@tsProps
 **/
 @withStyle(generateStyle, null)
 class Item extends Component<FlexItemProps> {

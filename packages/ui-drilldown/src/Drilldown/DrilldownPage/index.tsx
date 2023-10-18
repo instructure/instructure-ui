@@ -34,7 +34,6 @@ parent: Drilldown
 id: Drilldown.Page
 ---
 @module DrilldownPage
-@tsProps
 **/
 class DrilldownPage extends Component<DrilldownPageProps> {
   static readonly componentId = 'Drilldown.Page'

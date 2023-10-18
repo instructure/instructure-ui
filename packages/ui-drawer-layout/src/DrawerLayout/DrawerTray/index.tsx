@@ -53,7 +53,6 @@ import type {
 parent: DrawerLayout
 id: DrawerLayout.Tray
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()

@@ -43,7 +43,6 @@ import { allowedProps, propTypes } from './props'
 parent: TreeBrowser
 id: TreeBrowser.Node
 ---
-@tsProps
 A helper class used to render the :renderBeforeItems and :renderAfterItems
 in the TreeBrowser.
 **/

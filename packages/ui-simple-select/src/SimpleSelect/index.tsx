@@ -61,7 +61,6 @@ type GetOption = <F extends 'id' | 'value'>(
 category: components
 tags: form, field, dropdown
 ---
-@tsProps
 **/
 @withDeterministicId()
 @testable()

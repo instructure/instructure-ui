@@ -50,7 +50,6 @@ import type { ViewOwnProps } from '@instructure/ui-view'
 parent: Menu
 id: Menu.Item
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

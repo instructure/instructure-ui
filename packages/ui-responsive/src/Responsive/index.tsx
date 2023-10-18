@@ -45,7 +45,7 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
-@tsProps
+
 **/
 class Responsive extends Component<ResponsiveProps> {
   static allowedProps = allowedProps

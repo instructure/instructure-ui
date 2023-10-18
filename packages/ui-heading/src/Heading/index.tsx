@@ -40,7 +40,6 @@ import type { HeadingProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

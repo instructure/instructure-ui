@@ -43,7 +43,6 @@ import { allowedProps, propTypes } from './props'
 parent: Pagination
 id: Pagination.Navigation
 ---
-@tsProps
 **/
 @testable()
 class PaginationArrowButton extends Component<PaginationNavigationProps> {

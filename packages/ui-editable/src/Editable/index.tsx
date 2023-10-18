@@ -40,7 +40,6 @@ import type {
 ---
 category: components
 ---
-@tsProps
 **/
 class Editable extends Component<EditableProps> {
   static propTypes = propTypes

@@ -48,7 +48,6 @@ import type { GridProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Grid extends Component<GridProps> {

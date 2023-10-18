@@ -42,7 +42,6 @@ import type { ModalBodyProps, ModalBodyState } from './props'
 parent: Modal
 id: Modal.Body
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

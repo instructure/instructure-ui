@@ -37,7 +37,6 @@ import type { AccessibleContentProps } from './props'
 category: components/utilities
 ---
 @module AccessibleContent
-@tsProps
 **/
 class AccessibleContent extends Component<AccessibleContentProps> {
   static propTypes = propTypes

@@ -47,7 +47,6 @@ import type { ViewProps } from './props'
 category: components
 ---
 @module View
-@tsProps
 **/
 @textDirectionContextConsumer()
 @withStyle(generateStyle, generateComponentTheme)

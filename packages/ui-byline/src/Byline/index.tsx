@@ -40,7 +40,6 @@ import type { BylineProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 
 @withStyle(generateStyle, generateComponentTheme)

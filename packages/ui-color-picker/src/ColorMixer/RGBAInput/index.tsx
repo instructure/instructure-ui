@@ -41,7 +41,6 @@ import generateComponentTheme from './theme'
 ---
 private: true
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class RGBAInput extends Component<RGBAInputProps, RGBAInputState> {

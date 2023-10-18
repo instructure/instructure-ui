@@ -41,7 +41,6 @@ import type { FormFieldGroupProps, FormFieldGroupStyleProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class FormFieldGroup extends Component<FormFieldGroupProps> {

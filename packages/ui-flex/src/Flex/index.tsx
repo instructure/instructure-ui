@@ -48,7 +48,6 @@ import type { FlexProps } from './props'
 category: components
 ---
 @module Flex
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Flex extends Component<FlexProps> {

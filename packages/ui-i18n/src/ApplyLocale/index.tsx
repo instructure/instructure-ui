@@ -32,7 +32,6 @@ import { ApplyLocaleProps } from './props'
 ---
 category: components/utilities
 ---
-@tsProps
 **/
 export const ApplyLocale = ({
   children,

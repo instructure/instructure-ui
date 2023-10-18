@@ -40,7 +40,6 @@ import type { IconButtonProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 
 // needed for listing the available theme variables on docs page

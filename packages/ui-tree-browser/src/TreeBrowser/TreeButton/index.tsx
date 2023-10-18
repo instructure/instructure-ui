@@ -42,7 +42,6 @@ import { allowedProps, propTypes } from './props'
 parent: TreeBrowser
 id: TreeBrowser.Button
 ---
-@tsProps
 **/
 @withStyle(generateStyles, generateComponentTheme)
 @testable()

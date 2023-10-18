@@ -86,19 +86,13 @@ class Document extends Component<DocumentProps, DocumentState> {
   }
 
   renderProps(doc: DocDataType) {
-    const { id, props, description } = doc
-    const hasTsProps =
-      typeof description === 'string' && description.includes('@tsProps')
+    const { id, props } = doc
     return props ? (
       <View margin="x-large 0" display="block">
         <Heading level="h2" as="h3" id={`${id}Properties`} margin="0 0 small 0">
           Properties
         </Heading>
-        <Properties
-          props={props}
-          hasTsProps={hasTsProps}
-          layout={this.props.layout}
-        />
+        <Properties props={props} layout={this.props.layout} />
       </View>
     ) : null
   }
@@ -178,7 +172,6 @@ class Document extends Component<DocumentProps, DocumentState> {
   renderDescription(doc: DocDataType, description: string) {
     const { id, title } = doc
     const filteredDescription = description
-      .replace('@tsProps', '')
       .replace('@isWIP', '')
       .replace(/@module [a-zA-Z]+/g, '')
     return this.props.description ? (

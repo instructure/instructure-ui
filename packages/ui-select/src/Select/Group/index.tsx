@@ -32,7 +32,6 @@ parent: Select
 id: Select.Group
 ---
 @module Group
-@tsProps
 **/
 class Group extends Component<SelectGroupProps> {
   static readonly componentId = 'Select.Group'

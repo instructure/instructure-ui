@@ -45,7 +45,6 @@ import type {
 ---
 private: true
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

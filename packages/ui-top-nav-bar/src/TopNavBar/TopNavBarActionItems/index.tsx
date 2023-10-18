@@ -70,7 +70,6 @@ parent: TopNavBar
 id: TopNavBar.ActionItems
 ---
 @module TopNavBarActionItems
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

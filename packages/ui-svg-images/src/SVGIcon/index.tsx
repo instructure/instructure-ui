@@ -41,7 +41,6 @@ import { SVGIconTheme } from '@instructure/shared-types'
 ---
 category: components/utilities
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

@@ -54,7 +54,6 @@ import type { AlertProps, AlertState } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

@@ -33,7 +33,6 @@ import { ApplyTextDirectionProps } from './props'
 category: components/utilities
 ---
 DEPRECATED. Please use TextDirectionContext instead.
-@tsProps
 **/
 const ApplyTextDirection = (props: ApplyTextDirectionProps) => {
   const context = useContext(TextDirectionContext)

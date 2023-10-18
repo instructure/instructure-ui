@@ -61,7 +61,6 @@ parent: TopNavBar
 id: TopNavBar.MenuItems
 ---
 @module TopNavBarMenuItems
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

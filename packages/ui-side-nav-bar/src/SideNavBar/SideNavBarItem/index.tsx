@@ -40,7 +40,6 @@ import { allowedProps, propTypes } from './props'
 parent: SideNavBar
 id: SideNavBar.Item
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

@@ -46,7 +46,6 @@ import type { TruncateListProps, TruncateListState } from './props'
 ---
 category: components/utilities
 ---
-@tsProps
 **/
 @withStyle(generateStyle, null)
 @testable()

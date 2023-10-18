@@ -47,7 +47,6 @@ import type {
 ---
 category: components
 ---
-@tsProps
 **/
 
 @withDeterministicId()

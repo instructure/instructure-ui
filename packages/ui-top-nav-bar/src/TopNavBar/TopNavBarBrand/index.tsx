@@ -47,7 +47,6 @@ parent: TopNavBar
 id: TopNavBar.Brand
 ---
 @module TopNavBarBrand
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

@@ -57,7 +57,6 @@ import type {
 category: components
 id: NumberInput
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

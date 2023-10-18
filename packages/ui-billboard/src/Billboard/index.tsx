@@ -46,7 +46,6 @@ import type { ViewProps } from '@instructure/ui-view'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Billboard extends Component<BillboardProps> {

@@ -62,7 +62,6 @@ type MenuSeparatorChild = React.ComponentElement<
 ---
 category: components
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

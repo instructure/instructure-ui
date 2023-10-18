@@ -46,7 +46,6 @@ import generateComponentTheme from './theme'
 ---
 private: true
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

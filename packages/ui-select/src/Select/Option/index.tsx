@@ -32,7 +32,6 @@ parent: Select
 id: Select.Option
 ---
 @module Option
-@tsProps
 **/
 class Option extends Component<SelectOptionProps> {
   static readonly componentId = 'Select.Option'

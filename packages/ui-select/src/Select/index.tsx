@@ -127,7 +127,6 @@ MemoedOption.displayName = 'Item'
 category: components
 tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

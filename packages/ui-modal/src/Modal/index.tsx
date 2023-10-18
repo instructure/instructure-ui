@@ -68,7 +68,6 @@ type FooterChild = React.ComponentElement<ModalFooterProps, ModalFooter>
 category: components
 tags: overlay, portal, dialog
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

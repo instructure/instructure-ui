@@ -42,7 +42,6 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @testable()
 @deprecated('9.0.0', { applicationElement: null })

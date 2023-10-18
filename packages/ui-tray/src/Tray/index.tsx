@@ -45,7 +45,6 @@ import type { TrayProps, TrayState } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @textDirectionContextConsumer()

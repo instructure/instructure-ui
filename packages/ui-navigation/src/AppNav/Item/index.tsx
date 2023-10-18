@@ -51,7 +51,6 @@ import { allowedProps, propTypes } from './props'
 parent: AppNav
 id: AppNav.Item
 ---
-@tsProps
 @module Item
 **/
 @withStyle(generateStyle, generateComponentTheme)

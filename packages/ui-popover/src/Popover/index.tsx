@@ -64,7 +64,6 @@ import type { Renderable } from '@instructure/shared-types'
 category: components
 tags: overlay, portal, dialog
 ---
-@tsProps
 **/
 @withDeterministicId()
 @textDirectionContextConsumer()

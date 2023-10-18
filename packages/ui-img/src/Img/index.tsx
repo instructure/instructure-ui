@@ -40,7 +40,6 @@ import type { ImgProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

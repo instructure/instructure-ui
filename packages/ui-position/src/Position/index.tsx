@@ -55,7 +55,6 @@ import { PositionElement } from '../PositionPropTypes'
 ---
 category: components/utilities
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

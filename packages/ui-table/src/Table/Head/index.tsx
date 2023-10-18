@@ -53,7 +53,6 @@ import { allowedProps, propTypes } from './props'
 parent: Table
 id: Table.Head
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Head extends Component<TableHeadProps> {
@@ -71,14 +70,11 @@ class Head extends Component<TableHeadProps> {
     let sortable = false
 
     if (row) {
-      Children.forEach(
-        row.props.children as ColHeaderChild[],
-        (colHeader) => {
-          if (matchComponentTypes<ColHeaderChild>(colHeader, [ColHeader])) {
-            if (colHeader.props.onRequestSort) sortable = true
-          }
+      Children.forEach(row.props.children as ColHeaderChild[], (colHeader) => {
+        if (matchComponentTypes<ColHeaderChild>(colHeader, [ColHeader])) {
+          if (colHeader.props.onRequestSort) sortable = true
         }
-      )
+      })
     }
 
     return sortable
@@ -121,9 +117,8 @@ class Head extends Component<TableHeadProps> {
     Children.forEach(row.props.children, (colHeader) => {
       count += 1
       if (matchComponentTypes<ColHeaderChild>(colHeader, [ColHeader])) {
-        const { id, stackedSortByLabel, sortDirection, onRequestSort } = (
-          colHeader
-        ).props
+        const { id, stackedSortByLabel, sortDirection, onRequestSort } =
+          colHeader.props
 
         const label = stackedSortByLabel || id
 

@@ -41,7 +41,6 @@ import { allowedProps, propTypes } from './props'
 parent: Rating
 id: Rating.Icon
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class RatingIcon extends Component<RatingIconProps, RatingIconState> {

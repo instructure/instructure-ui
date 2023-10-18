@@ -31,7 +31,6 @@ import type { PropDescriptor } from '../../buildScripts/DataTypes'
 type PropertiesOwnProps = {
   props: Record<string, PropDescriptor>
   layout: string
-  hasTsProps: boolean
 }
 
 type PropKeys = keyof PropertiesOwnProps
@@ -53,10 +52,9 @@ export type PropertiesStyle = ComponentStyle<
 
 const propTypes: PropValidators<PropKeys> = {
   props: PropTypes.object.isRequired,
-  layout: PropTypes.string,
-  hasTsProps: PropTypes.bool
+  layout: PropTypes.string
 }
 
-const allowedProps: AllowedPropKeys = ['props', 'layout', 'hasTsProps']
+const allowedProps: AllowedPropKeys = ['props', 'layout']
 export type { PropertiesProps }
 export { propTypes, allowedProps }

@@ -39,7 +39,6 @@ import type { MetricGroupProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()

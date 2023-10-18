@@ -100,7 +100,6 @@ type PageMap = Record<string, MappedPage>
 ---
 category: components
 ---
-@tsProps
 **/
 @withDeterministicId()
 @withStyle(generateStyle, generateComponentTheme)

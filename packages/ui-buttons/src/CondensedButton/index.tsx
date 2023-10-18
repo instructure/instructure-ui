@@ -39,7 +39,6 @@ import type { CondensedButtonProps } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)

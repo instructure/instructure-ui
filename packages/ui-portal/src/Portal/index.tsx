@@ -37,7 +37,6 @@ import type { PortalNode, PortalProps, PortalState } from './props'
 category: components/utilities
 ---
 @module Portal
-@tsProps
 **/
 @textDirectionContextConsumer()
 class Portal extends Component<PortalProps, PortalState> {

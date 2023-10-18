@@ -49,7 +49,6 @@ import { allowedProps, propTypes } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @testable()
 class ToggleGroup extends Component<ToggleGroupProps> {

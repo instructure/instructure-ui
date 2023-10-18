@@ -38,7 +38,6 @@ import type { ToggleButtonProps, ToggleButtonState } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 
 @testable()

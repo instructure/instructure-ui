@@ -41,7 +41,6 @@ import type { AvatarProps, AvatarState } from './props'
 ---
 category: components
 ---
-@tsProps
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
