@@ -256,6 +256,77 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
+### Support for dynamic content with active panel
+
+Marking one of the `<Tabs.Panel>` as `active` will render that panel's content in all the panels. This is useful for dynamic content rendering: the panel area can be used as a container, what routing libraries, such as React Router, can use to render their children elements into.
+
+```js
+---
+example: true
+render: false
+---
+class Outlet extends React.Component {
+    state = {
+      show: false
+    }
+
+    componentDidMount() {
+      setTimeout(() => this.setState({ show: true }), 2000)
+    }
+
+    render() {
+      return (
+        <div>
+          <Heading level='h1' as='h1' margin='0 0 x-small'>
+            {this.state.show ? 'Hello Developer' : 'Simulating network call...'}
+          </Heading>
+          {this.state.show ? lorem.paragraphs() : <Spinner renderTitle='Loading' size='medium' />
+          }
+        </div>
+      )
+    }
+  }
+
+
+class Example extends React.Component {
+  state = {
+    selectedIndex: 0
+  }
+  handleTabChange = (event, { index, id }) => {
+    this.setState({
+      selectedIndex: index
+    })
+  }
+
+  render() {
+    const { selectedIndex } = this.state
+    return (
+      <Tabs
+        margin='large auto'
+        padding='medium'
+        onRequestTabChange={this.handleTabChange}
+      >
+        <Tabs.Panel
+          id='tabA'
+          renderTitle='Tab A'
+          textAlign='center'
+          padding='large'
+          isSelected={selectedIndex === 0}
+          active
+        >
+          <Outlet />
+        </Tabs.Panel>
+        <Tabs.Panel id='tabB' renderTitle='Disabled Tab' isDisabled />
+        <Tabs.Panel id='tabC' renderTitle='Tab C' isSelected={selectedIndex === 2} />
+        <Tabs.Panel id='tabD' renderTitle='Tab D' isSelected={selectedIndex === 3} />
+      </Tabs>
+    )
+  }
+}
+
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js
