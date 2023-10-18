@@ -467,7 +467,7 @@ class Hero extends Component<HeroProps> {
                     <Button
                       withBackground={false}
                       color="primary-inverse"
-                      renderIcon={IconGithubSolid}
+                      renderIcon={IconGithubSolid as any}
                       href="https://github.com/instructure/instructure-ui"
                       size={bigScreen ? 'large' : 'medium'}
                       margin="0 x-small x-small 0"

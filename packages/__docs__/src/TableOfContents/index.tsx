@@ -26,18 +26,11 @@ import React, { Component } from 'react'
 
 import { canUseDOM, ownerDocument } from '@instructure/ui-dom-utils'
 
-// TODO ESList erroneusly reports this figure out why
-// eslint-disable-next-line import/no-unresolved
 import { Link } from '@instructure/ui-link'
-// eslint-disable-next-line import/no-unresolved
 import { List } from '@instructure/ui-list'
-// eslint-disable-next-line import/no-unresolved
 import { View } from '@instructure/ui-view'
-// eslint-disable-next-line import/no-unresolved
 import { ToggleDetails } from '@instructure/ui-toggle-details'
-// eslint-disable-next-line import/no-unresolved
 import { instructure } from '@instructure/ui-themes'
-// eslint-disable-next-line import/no-unresolved
 import { InstUISettingsProvider } from '@instructure/emotion'
 import type { SpacingValues } from '@instructure/emotion'
 

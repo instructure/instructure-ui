@@ -18,6 +18,7 @@
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
     "build:scripts:ts": "tsc -b tsconfig.node.build.json",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false",
     "clean": "ui-scripts clean",
     "createStatsFile": "mkdirp ./__build__ && webpack --profile --json > __build__/bundleStats.json",
     "analyseStatsFile": "webpack-bundle-analyzer __build__/bundleStats.json"

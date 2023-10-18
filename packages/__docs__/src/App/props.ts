@@ -28,7 +28,7 @@ import type {
   MainIconsData,
   MainDocsData,
   ProcessedFile
-} from '../../buildScripts/DataTypes'
+} from '../../buildScripts/DataTypes.mts'
 
 type AppOwnProps = {
   trayWidth: number

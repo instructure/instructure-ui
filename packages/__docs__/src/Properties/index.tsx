@@ -39,7 +39,7 @@ import type {
   SimpleType,
   TSFunctionSignatureType,
   TypeDescriptor
-} from '../../buildScripts/DataTypes'
+} from '../../buildScripts/DataTypes.mts'
 
 @withStyle(generateStyle, null)
 class Properties extends Component<PropertiesProps> {
@@ -90,7 +90,7 @@ class Properties extends Component<PropertiesProps> {
               <code>{name}</code>
             </Table.Cell>
             <Table.Cell>
-              <code>{this.renderTSType(prop.tsType)}</code>
+              <code>{this.renderTSType(prop.tsType!)}</code>
             </Table.Cell>
             <Table.Cell>{this.renderDefault(prop)}</Table.Cell>
             <Table.Cell>{this.renderDescription(prop)}</Table.Cell>

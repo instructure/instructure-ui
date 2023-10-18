@@ -48,7 +48,7 @@ class Header extends Component<HeaderProps> {
   }
 
   handleSelect = (
-    _e: React.MouseEvent<Element, MouseEvent>,
+    _e: React.MouseEvent<any>,
     updated: (string | number | undefined)[]
   ) => {
     const [selectedVersion] = updated

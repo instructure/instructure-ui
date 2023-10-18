@@ -101,7 +101,7 @@ class App extends Component<AppProps, AppState> {
   static defaultProps = {
     trayWidth: 300
   }
-  _content?: HTMLDivElement
+  _content?: HTMLDivElement | null
   _menuTrigger?: HTMLButtonElement
   _mediaQueryListener?: ReturnType<typeof addMediaQueryMatchListener>
   _defaultDocumentTitle?: string
