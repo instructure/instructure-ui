@@ -47,7 +47,8 @@ class Preview extends Component<PreviewProps, PreviewState> {
     background: 'checkerboard'
   }
 
-  static getDerivedStateFromProps(props: PreviewProps, state: PreviewState) {
+  // TODO investigate why any is needed here
+  static getDerivedStateFromProps(props: any, state: PreviewState) {
     if (props.error) {
       return {
         ...state,

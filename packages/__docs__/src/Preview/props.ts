@@ -30,8 +30,8 @@ import type {
 } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
-// eslint-disable-next-line import/no-unresolved
-import type { MainDocsData } from '../../buildScripts/DataTypes'
+
+import type { MainDocsData } from '../../buildScripts/DataTypes.mts'
 
 type PreviewOwnProps = {
   code: string
@@ -93,7 +93,8 @@ const propTypes: PropValidators<PropKeys> = {
     'none'
   ]),
   themes: PropTypes.object,
-  themeKey: PropTypes.string
+  themeKey: PropTypes.string,
+  error: PropTypes.string
 }
 type PreviewState = {
   error: string | null

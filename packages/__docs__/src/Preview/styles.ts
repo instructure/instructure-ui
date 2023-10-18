@@ -83,7 +83,7 @@ const generateStyle = (
     position: 'relative',
     overflow: 'auto',
 
-    ...backgroundVariants[background],
+    ...backgroundVariants[background!],
 
     ...(fullscreen && {
       position: 'fixed',

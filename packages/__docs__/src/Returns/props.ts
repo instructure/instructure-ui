@@ -23,8 +23,8 @@
  */
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
-// eslint-disable-next-line import/no-unresolved
-import type { JSDocFunctionReturns } from '../../buildScripts/DataTypes'
+
+import type { JSDocFunctionReturns } from '../../buildScripts/DataTypes.mts'
 
 type ReturnsOwnProps = {
   types: JSDocFunctionReturns[]

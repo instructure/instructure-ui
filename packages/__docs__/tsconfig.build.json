@@ -3,13 +3,15 @@
   "compilerOptions": {
     "outDir": "./types",
     "module": "CommonJS",
-    "composite": true
+    "composite": true,
+    "allowImportingTsExtensions": true
   },
   "include": [
     "src/**/*",
     "components.js",
     "globals.js",
-    "buildScripts/DataTypes.mts"
+    "buildScripts/DataTypes.mts",
+    "buildScripts/samplemedia/placeholder-image.js"
   ],
   "exclude": ["__build__/**/*"],
   "references": [

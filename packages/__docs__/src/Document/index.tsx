@@ -345,7 +345,7 @@ import { ${importName} } from '${esPath}'
             >
               {this.renderDetails(doc)}
             </Tabs.Panel>
-            {children.map((child, index) => (
+            {children.map((child: any, index: any) => (
               <Tabs.Panel
                 renderTitle={child.title}
                 key={`${child.id}TabPanel`}
