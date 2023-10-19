@@ -14,7 +14,6 @@
     { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../console/tsconfig.build.json" },
     { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-prop-types/tsconfig.build.json" },
-    { "path": "../ui-test-utils/tsconfig.build.json" }
+    { "path": "../ui-prop-types/tsconfig.build.json" }
   ]
 }

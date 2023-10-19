@@ -35,7 +35,9 @@
     "@instructure/console": "8.46.1",
     "@instructure/ui-babel-preset": "8.46.1",
     "@instructure/ui-prop-types": "8.46.1",
-    "@instructure/ui-test-utils": "8.46.1"
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.1"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
