@@ -25,18 +25,21 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore no typing :(
 import jsdoc from 'jsdoc-api'
-import type { ParsedJSDoc } from '../DataTypes.mjs'
+import type { JsDocResult } from '../DataTypes.mts'
 
 export function getJSDoc(source: Buffer, error: (err: Error) => void) {
-  let doc: ParsedJSDoc = {}
+  // note: JSDoc seems to be abandoned, we should use TypeScript:
+  // https://stackoverflow.com/questions/47429792/is-it-possible-to-get-comments-as-nodes-in-the-ast-using-the-typescript-compiler
+  let doc: Partial<JsDocResult> = {}
   try {
-    const sections = jsdoc
+    // JSDoc only creates these sections if the file has a @module or @namespace annotation
+    let sections: JsDocResult[] = jsdoc
       .explainSync({
         // note: Do not use cache:true here, its buggy
         configure: './jsdoc.config.json',
         source
       })
-      .filter((section: Record<string, any>) => {
+      sections = sections.filter((section) => {
         return (
           section.undocumented !== true &&
           section.access !== 'private' &&
@@ -44,9 +47,7 @@ export function getJSDoc(source: Buffer, error: (err: Error) => void) {
         )
       })
     const module =
-      sections.filter(
-        (section: Record<string, any>) => section.kind === 'module'
-      )[0] ||
+      sections.filter((section) => section.kind === 'module')[0] ||
       sections[0] ||
       {}
     if (process.platform === 'win32' && module.description) {
@@ -55,18 +56,6 @@ export function getJSDoc(source: Buffer, error: (err: Error) => void) {
     }
     doc = {
       ...module,
-      sections: sections
-        .filter(
-          (section: Record<string, any>) => section.longname !== module.longname
-        )
-        .map((section: Record<string, any>) => {
-          const name = section.longname.replace(`${module.longname}.`, '')
-          return {
-            ...section,
-            id: name,
-            title: name
-          }
-        }),
       undocumented: sections.length <= 0
     }
   } catch (err: any) {

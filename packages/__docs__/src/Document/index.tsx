@@ -361,31 +361,6 @@ import { ${importName} } from '${esPath}'
         )
     }
 
-    let sections
-
-    if (doc.sections) {
-      sections = doc.sections.map((section) => (
-        <View
-          margin="small 0"
-          display="block"
-          key={`${doc.id}.${section.name}`}
-        >
-          <Heading
-            level="h2"
-            as="h3"
-            color="secondary"
-            id={`${doc.id}.${section.name}`}
-            margin="large 0 small 0"
-          >
-            {section.kind && <code>{section.kind}</code>}
-            {section.title}
-          </Heading>
-          {this.renderDescription(section, section.description)}
-          {this.renderDetails(section)}
-        </View>
-      ))
-    }
-
     return (
       <div
         ref={(e) => {
@@ -396,7 +371,6 @@ import { ${importName} } from '${esPath}'
         {pageRef && <TableOfContents doc={doc} pageElement={pageRef} />}
         {this.renderDescription(doc, this.props.description)}
         {details}
-        {sections}
         {['.js', '.ts', '.tsx'].includes(doc.extension) && this.renderUsage()}
         {this.renderEditOnGithub()}
         {repository && layout !== 'small' && (

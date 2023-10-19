@@ -26,14 +26,14 @@ import { getJSDoc } from './getJSDoc.mjs'
 import { getReactDoc } from './getReactDoc.mjs'
 import { getFrontMatter } from './getFrontMatter.mjs'
 import path from 'path'
-import type { ParsedJSDoc, YamlMetaInfo } from '../DataTypes.mjs'
+import type { JsDocResult, YamlMetaInfo } from '../DataTypes.mjs'
 import type { Documentation } from 'react-docgen'
 
 export function parseDoc(
   resourcePath: string,
   source: Buffer,
   errorHandler: (err: Error) => void
-): Documentation & YamlMetaInfo & ParsedJSDoc {
+): Documentation & YamlMetaInfo & Partial<JsDocResult> {
   const extension = path.extname(resourcePath)
   const allowedExtensions = ['.js', '.ts', '.tsx']
   let doc: Documentation | undefined
