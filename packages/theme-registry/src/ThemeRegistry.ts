@@ -27,7 +27,7 @@
  * category: utilities/themes
  * ---
  * A global theme registry used for registering theme objects, setting globally available themes
- * and recieving the currently used theme.
+ * and receiving the currently used theme.
  * @module ThemeRegistry
  */
 

@@ -28,7 +28,7 @@ import { Documentation } from 'react-docgen'
 type ProcessedFile =
   Documentation &
   YamlMetaInfo &
-  ParsedJSDoc &
+  JsDocResult &
   PackagePathData &
   { title: string, id:string }
 
@@ -60,12 +60,16 @@ type YamlMetaInfo = {
   tags?: string
 }
 
-type ParsedJSDoc = {
+type JsDocResult = {
+  // the comment section above the function
   comment?: string,
+  // metadata about the parsed file like filename
   meta?: any,
+  // the comment without the comment characters ("/*" etc)
   description?: string,
   kind?: string,
   name?: string,
+  // function params. undefined if the comment is e.g. above imports
   params?: {
     description?: string
     defaultValue?: string | number | boolean
@@ -73,10 +77,13 @@ type ParsedJSDoc = {
     type?: { names: string[] }
     optional?: boolean
   }[],
+  // function return value. undefined if the comment is e.g. above imports
   returns?: JSDocFunctionReturns[],
-  longName?: string,
-  sections?: any[],
-  undocumented?: boolean
+  //e.g. "module:debounce", "module:FocusRegion"
+  longname: string,
+  access?: string,
+  undocumented?: boolean,
+  title?: string
 }
 
 type JSDocFunctionReturns = {
@@ -85,77 +92,61 @@ type JSDocFunctionReturns = {
     names: string[]
   }
 }
-// TODO remove these types, now we can get them directly from react-docgen
+// TODO these are from React-docgen Documentation.d.ts,
+// remove when react-docgen exports them
 interface MethodParameter {
-  name: string
-  type?: TypeDescriptor | null
-  optional?: boolean
+  name: string;
+  description?: string;
+  optional: boolean;
+  type?: TypeDescriptor<FunctionSignatureType> | null;
 }
 
 interface MethodReturn {
-  type: TypeDescriptor | undefined
+  description?: string;
+  type: TypeDescriptor<FunctionSignatureType> | undefined;
 }
 
 interface PropDescriptor {
-  type?: PropTypeDescriptor
-  flowType?: TypeDescriptor
-  tsType?: TypeDescriptor<TSFunctionSignatureType>
-  required?: boolean
-  defaultValue?: any
-  description?: string
+  type?: PropTypeDescriptor;
+  flowType?: TypeDescriptor<FunctionSignatureType>;
+  tsType?: TypeDescriptor<TSFunctionSignatureType>;
+  required?: boolean;
+  defaultValue?: DefaultValueDescriptor;
+  description?: string;
 }
 
 interface PropTypeDescriptor {
-  name:
-    | 'arrayOf'
-    | 'custom'
-    | 'enum'
-    | 'array'
-    | 'bool'
-    | 'func'
-    | 'number'
-    | 'object'
-    | 'string'
-    | 'any'
-    | 'element'
-    | 'node'
-    | 'symbol'
-    | 'objectOf'
-    | 'shape'
-    | 'exact'
-    | 'union'
-    | 'elementType'
-    | 'instanceOf'
-  value?: any
-  raw?: string
-  computed?: boolean
-  // These are only needed for shape/exact types.
-  // Consider consolidating PropTypeDescriptor and PropDescriptor
-  description?: string
-  required?: boolean
+  name: 'any' | 'array' | 'arrayOf' | 'bool' | 'custom' | 'element' | 'elementType' | 'enum' | 'exact' | 'func' | 'instanceOf' | 'node' | 'number' | 'object' | 'objectOf' | 'shape' | 'string' | 'symbol' | 'union';
+  value?: unknown;
+  raw?: string;
+  computed?: boolean;
+  description?: string;
+  required?: boolean;
 }
 
-type TypeDescriptor<T = FunctionSignatureType> =
-  | SimpleType
-  | LiteralType
-  | ElementsType<T>
-  | ObjectSignatureType<T>
-  | T
+type TypeDescriptor<T = FunctionSignatureType> = ElementsType<T> | LiteralType | ObjectSignatureType<T> | SimpleType | T;
 
+interface DefaultValueDescriptor {
+  value: unknown;
+  computed: boolean;
+}
+interface BaseType {
+  required?: boolean;
+  nullable?: boolean;
+  alias?: string;
+}
 interface SimpleType extends BaseType {
-  name: string
-  raw?: string
+  name: string;
+  raw?: string;
 }
-
 interface LiteralType extends BaseType {
-  name: 'literal'
-  value: string
+  name: 'literal';
+  value: string;
 }
-
 interface ElementsType<T = FunctionSignatureType> extends BaseType {
-  name: string
-  raw: string
-  elements: Array<TypeDescriptor<T>>
+  name: string;
+  raw: string;
+  elements: Array<TypeDescriptor<T>>;
 }
 
 interface FunctionArgumentType<T> {
@@ -165,40 +156,33 @@ interface FunctionArgumentType<T> {
 }
 
 interface FunctionSignatureType extends BaseType {
-  name: 'signature'
-  type: 'function'
-  raw: string
+  name: 'signature';
+  type: 'function';
+  raw: string;
   signature: {
-    arguments: Array<FunctionArgumentType<FunctionSignatureType>>
-    return: TypeDescriptor
-  }
+    arguments: Array<FunctionArgumentType<FunctionSignatureType>>;
+    return?: TypeDescriptor<FunctionSignatureType>;
+  };
 }
-
 interface TSFunctionSignatureType extends FunctionSignatureType {
   signature: {
-    arguments: Array<FunctionArgumentType<TSFunctionSignatureType>>
-    return: TypeDescriptor<TSFunctionSignatureType>
-    this?: TypeDescriptor<TSFunctionSignatureType>
-  }
+    arguments: Array<FunctionArgumentType<TSFunctionSignatureType>>;
+    return?: TypeDescriptor<TSFunctionSignatureType>;
+    this?: TypeDescriptor<TSFunctionSignatureType>;
+  };
 }
-
 interface ObjectSignatureType<T = FunctionSignatureType> extends BaseType {
-  name: 'signature'
-  type: 'object'
-  raw: string
+  name: 'signature';
+  type: 'object';
+  raw: string;
   signature: {
     properties: Array<{
-      key: string | TypeDescriptor<T>
-      value: TypeDescriptor<T>
-    }>
-    constructor?: TypeDescriptor<T>
-  }
-}
-
-interface BaseType {
-  required?: boolean
-  nullable?: boolean
-  alias?: string
+      key: TypeDescriptor<T> | string;
+      value: TypeDescriptor<T>;
+      description?: string;
+    }>;
+    constructor?: TypeDescriptor<T>;
+  };
 }
 // end react-docgen part
 
@@ -285,5 +269,5 @@ export type {
   IconGlyph,
   MainDocsData,
   MainIconsData,
-  ParsedJSDoc
+  JsDocResult
 }

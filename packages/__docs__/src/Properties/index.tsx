@@ -90,7 +90,7 @@ class Properties extends Component<PropertiesProps> {
               <code>{name}</code>
             </Table.Cell>
             <Table.Cell>
-              <code>{this.renderTSType(prop.tsType!)}</code>
+              {prop.tsType && <code>{this.renderTSType(prop.tsType)}</code>}
             </Table.Cell>
             <Table.Cell>{this.renderDefault(prop)}</Table.Cell>
             <Table.Cell>{this.renderDescription(prop)}</Table.Cell>
@@ -158,7 +158,8 @@ class Properties extends Component<PropertiesProps> {
     if (prop.required) {
       return <span css={styles?.required}>Required</span>
     } else if (prop.defaultValue) {
-      let defaultValue: string | React.ReactNode = prop.defaultValue.value
+      let defaultValue: string | React.ReactNode = prop.defaultValue
+        .value as string
       if (defaultValue === '() => {}') {
         defaultValue = <span css={styles?.noWrap}>{defaultValue}</span>
       }
