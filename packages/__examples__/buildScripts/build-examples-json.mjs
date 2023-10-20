@@ -26,15 +26,16 @@ const outputName = 'prop-data.json'
 // eslint-disable-next-line no-console
 console.log('starting to build example prop combinations to ' + outputName)
 
-const fs = require('fs')
-const path = require('path')
-const globby = require('globby')
-const parsePropValues = require('./parsePropValues')
-const projectRoot = path.resolve(__dirname, '../../')
+import { readFileSync, writeFileSync } from 'fs'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import { globby } from 'globby'
+import parsePropValues from './parsePropValues.mjs'
+const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../')
 
 async function buildExamplesJSON() {
   const filesToParse = '**/src/**/*.examples.ts*'
-  const files = path.resolve(projectRoot, filesToParse)
+  const files = resolve(projectRoot, filesToParse)
   const ignorePaths = [
     '**/node_modules/**',
     '**/lib/**',
@@ -42,13 +43,13 @@ async function buildExamplesJSON() {
     '**/template/**'
   ]
   const ignore = ignorePaths.map(
-    (file) => '!' + path.resolve(projectRoot, file)
+    (file) => '!' + resolve(projectRoot, file)
   )
   const matches = await globby([files, ...ignore])
   const componentProps = matches.reduce((result, absoluteExampleFilePath) => {
     // path to the component that is tested, e.g. /ui-tag/src/Tag/index.js
-    const componentPath = path.resolve(
-      path.dirname(absoluteExampleFilePath),
+    const componentPath = resolve(
+      dirname(absoluteExampleFilePath),
       '../index.tsx'
     )
     const componentFilePathParts = componentPath.split('/')
@@ -57,7 +58,7 @@ async function buildExamplesJSON() {
       path.startsWith('ui-')
     )
 
-    const componentSource = fs.readFileSync(componentPath)
+    const componentSource = readFileSync(componentPath)
     // contains all the prop values and its variants
     const generatedPropValues = parsePropValues(componentSource, componentPath)
     const packageIndex = exampleFilePathParts.findIndex(
@@ -78,7 +79,7 @@ async function buildExamplesJSON() {
 
   const everything = JSON.stringify(componentProps)
 
-  fs.writeFileSync(outputName, everything)
+  writeFileSync(outputName, everything)
 
   // eslint-disable-next-line no-console
   console.log('finished generating example prop combinations.')
