@@ -22,42 +22,36 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import parsePropValues from '../parsePropValues'
+// Deactivated this test until the whole package is converted to ESM and this test can be rewritten with jest
+// Previous comment: This test also seems a bit unnecessary, since it is mainly testing react-docgen itself.
 
-const src = `import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
-export default class TestComponent extends Component {
-  static propTypes = {
-    variant: PropTypes.oneOf(['circle', 'rectangle']),
-    show: PropTypes.bool,
-    message: PropTypes.object,
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    variant: 'circle',
-    show: true,
-    message: null
-  }
-
-  render () {
-    return (
-      <span>{this.props.children}</span>
-    )
-  }
-}
-`
-
-// Deactivated this test for now. The test fails, because parsePropValues
-// uses react-docgen, and the "^6.0.0-alpha.0" seems to break the test
-// with the error "TypeError: importer is not a function".
-// We need this alpha version for react-docgen to parse types outside of
-// the current file.
-// This test also seems a bit unnecessary, since it is mainly
-// testing react-docgen itself.
-// TODO: try to turn this test back when v6 is not in alpha anymore or we switch from react-docgen to something else that can parse TS types better
+// import { expect } from '@instructure/ui-test-utils'
+// import parsePropValues from '../parsePropValues'
+//
+// const src = `import React, { Component } from 'react'
+// import PropTypes from 'prop-types'
+//
+// export default class TestComponent extends Component {
+//   static propTypes = {
+//     variant: PropTypes.oneOf(['circle', 'rectangle']),
+//     show: PropTypes.bool,
+//     message: PropTypes.object,
+//     children: PropTypes.node
+//   }
+//
+//   static defaultProps = {
+//     variant: 'circle',
+//     show: true,
+//     message: null
+//   }
+//
+//   render () {
+//     return (
+//       <span>{this.props.children}</span>
+//     )
+//   }
+// }
+// `
 
 // describe('parsePropValues', () => {
 //   it('should parse a component correctly', () => {

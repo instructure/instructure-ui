@@ -26,7 +26,7 @@
 // we are currently using a fix react-docgen version ("6.0.0-alpha.3"),
 //  because "6.0.0-alpha.4" migrated to ES6 modules, and we couldn't yet
 //  migrate our package to ES6.
-const { resolver, parse, importers } = require('react-docgen')
+import { builtinResolvers, parse, makeFsImporter } from 'react-docgen'
 
 /**
  * Given a relative path and the React component source, returns an object of all
@@ -62,16 +62,15 @@ const { resolver, parse, importers } = require('react-docgen')
  * }
  * ```
  */
-module.exports = function parsePropValues(fileSource, fileName) {
+export default function parsePropValues(fileSource, fileName) {
   let parsedSrc = {}
   try {
     parsedSrc = parse(
       fileSource,
-      resolver.findAllExportedComponentDefinitions,
-      null,
       {
+        resolver: new builtinResolvers.FindExportedDefinitionsResolver(),
         filename: fileName,
-        importer: importers.makeFsImporter()
+        importer: makeFsImporter()
       }
     )
     if (Array.isArray(parsedSrc)) {
@@ -79,7 +78,7 @@ module.exports = function parsePropValues(fileSource, fileName) {
     }
   } catch (error) {
     throw new Error(
-      `[ui-component-examples] Could not parse component source: ${error}`
+      `[__examples__] Could not parse component source: ${error}`
     )
   }
 

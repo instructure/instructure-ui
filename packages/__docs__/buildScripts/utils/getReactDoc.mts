@@ -34,7 +34,7 @@ export function getReactDoc(
 ) {
   let doc: Documentation | undefined = undefined
   try {
-    let parsed = parse(
+    const parsed = parse(
       source,
       {
         resolver: new builtinResolvers.FindExportedDefinitionsResolver(),
