@@ -176,10 +176,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       ? {}
       : {
           timeSelectValue: '',
-          message: {
-            type: 'success',
-            text: ''
-          }
+          message: undefined
         }
     return {
       iso: undefined,
