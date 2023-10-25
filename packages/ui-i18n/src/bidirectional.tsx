@@ -22,6 +22,11 @@
  * SOFTWARE.
  */
 import React, { ForwardedRef, forwardRef, PropsWithChildren } from 'react'
+import type {
+  ForwardRefExoticComponent,
+  PropsWithoutRef,
+  RefAttributes
+} from 'react'
 import { decorator } from '@instructure/ui-decorator'
 import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
 import hoistNonReactStatics from 'hoist-non-react-statics'
@@ -101,9 +106,13 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
     }
   }
 
-  const BidirectionalForwardingRef = forwardRef<any, BidirectionalProps>(
-    (props, ref) => <BidirectionalComponent {...props} forwardedRef={ref} />
-  )
+  const BidirectionalForwardingRef: ForwardRefExoticComponent<
+    PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
+  > & {
+    originalType?: React.ComponentClass
+  } = forwardRef<any, BidirectionalProps>((props, ref) => (
+    <BidirectionalComponent {...props} forwardedRef={ref} />
+  ))
   if (process.env.NODE_ENV !== 'production') {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
     BidirectionalForwardingRef.displayName = `BidirectionalForwardingRef(${displayName})`
@@ -114,6 +123,11 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
   BidirectionalForwardingRef.propTypes = ComposedComponent.propTypes
   // @ts-expect-error These static fields exist on InstUI components
   BidirectionalForwardingRef.allowedProps = ComposedComponent.allowedProps
+
+  // added so it can be tested with ReactTestUtils
+  // more info: https://github.com/facebook/react/issues/13455
+  BidirectionalForwardingRef.originalType = ComposedComponent
+
   return BidirectionalForwardingRef
 }) as BidirectionalType
 

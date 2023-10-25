@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, {
-  forwardRef,
+import React, { forwardRef, useContext } from 'react'
+import type {
+  ForwardRefExoticComponent,
   PropsWithoutRef,
-  RefAttributes,
-  useContext
+  RefAttributes
 } from 'react'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
@@ -49,33 +49,33 @@ type WithDeterministicIdProps = {
  */
 const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
   type Props = PropsWithoutRef<Record<string, unknown>> & RefAttributes<any>
-  const WithDeterministicId = forwardRef(
-    (props: Props, ref: React.ForwardedRef<any>) => {
-      const componentName =
-        ComposedComponent.componentId ||
-        ComposedComponent.displayName ||
-        ComposedComponent.name
-      const instanceCounterMap = useContext(DeterministicIdContext)
-      const deterministicId = (instanceName = componentName) =>
-        generateId(instanceName, instanceCounterMap)
+  const WithDeterministicId: ForwardRefExoticComponent<Props> & {
+    originalType?: React.ComponentClass
+  } = forwardRef((props: Props, ref: React.ForwardedRef<any>) => {
+    const componentName =
+      ComposedComponent.componentId ||
+      ComposedComponent.displayName ||
+      ComposedComponent.name
+    const instanceCounterMap = useContext(DeterministicIdContext)
+    const deterministicId = (instanceName = componentName) =>
+      generateId(instanceName, instanceCounterMap)
 
-      if (props.deterministicId) {
-        warn(
-          false,
-          `Manually passing the "deterministicId" property is not allowed on the ${componentName} component.\n`,
-          props.deterministicId
-        )
-      }
-
-      return (
-        <ComposedComponent
-          ref={ref}
-          deterministicId={deterministicId}
-          {...props}
-        />
+    if (props.deterministicId) {
+      warn(
+        false,
+        `Manually passing the "deterministicId" property is not allowed on the ${componentName} component.\n`,
+        props.deterministicId
       )
     }
-  )
+
+    return (
+      <ComposedComponent
+        ref={ref}
+        deterministicId={deterministicId}
+        {...props}
+      />
+    )
+  })
 
   hoistNonReactStatics(WithDeterministicId, ComposedComponent)
 
@@ -88,6 +88,10 @@ const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
   // These static fields exist on InstUI components
   //@ts-expect-error fix this
   WithDeterministicId.allowedProps = ComposedComponent.allowedProps
+
+  // added so it can be tested with ReactTestUtils
+  // more info: https://github.com/facebook/react/issues/13455
+  WithDeterministicId.originalType = ComposedComponent
 
   if (process.env.NODE_ENV !== 'production') {
     WithDeterministicId.displayName = `WithDeterministicId(${ComposedComponent.displayName})`

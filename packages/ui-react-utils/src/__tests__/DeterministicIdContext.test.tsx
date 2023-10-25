@@ -23,6 +23,8 @@
  */
 
 import React from 'react'
+import ReactDOM from 'react-dom'
+import ReactTestUtils from 'react-dom/test-utils'
 
 import { expect, mount } from '@instructure/ui-test-utils'
 import {
@@ -41,6 +43,16 @@ class TestComponent extends React.Component<
   }
 }
 
+class WrapperComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <TestComponent />
+      </div>
+    )
+  }
+}
+
 const uniqueIds = (el: { getDOMNode: () => Element }) => {
   const idList = Array.from(el.getDOMNode().children).map((el) => el.id)
 
@@ -48,6 +60,18 @@ const uniqueIds = (el: { getDOMNode: () => Element }) => {
 }
 
 describe('DeterministicIdContext', () => {
+  it('can be found and tested with ReactTestUtils', async () => {
+    const rootNode = document.createElement('div')
+    document.body.appendChild(rootNode)
+
+    // eslint-disable-next-line react/no-render-return-value
+    const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
+    ReactTestUtils.findRenderedComponentWithType(
+      rendered as any,
+      (TestComponent as any).originalType
+    )
+  })
+
   it('should generate unique ids without Provider wrapper', async () => {
     const el = await mount(
       <div>
