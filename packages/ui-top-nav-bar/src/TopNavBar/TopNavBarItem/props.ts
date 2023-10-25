@@ -33,7 +33,8 @@ import type {
   TopNavBarItemTheme,
   OtherHTMLAttributes,
   PropValidators,
-  Renderable
+  Renderable,
+  AsElementType
 } from '@instructure/shared-types'
 
 import { Drilldown } from '@instructure/ui-drilldown'
@@ -75,6 +76,11 @@ const topNavBarItemTooltipPropType = PropTypes.oneOfType([
 ])
 
 type TopNavBarItemOwnProps = {
+  /**
+   * the element type to render as (will default to `<a>` if href is provided)
+   */
+  as?: AsElementType
+
   /**
    * Required id, used for internal tracking,
    * and it also appears as an id on the item element.
@@ -268,6 +274,7 @@ type TopNavBarItemStyleProps = {
 
 const propTypes: PropValidators<PropKeys> = {
   id: PropTypes.string.isRequired,
+  as: PropTypes.elementType,
   children: PropTypes.node.isRequired,
   variant: PropTypes.oneOf(['default', 'button', 'icon', 'avatar']),
   status: PropTypes.oneOf(['default', 'active', 'disabled']),
@@ -296,6 +303,7 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = [
   'id',
+  'as',
   'children',
   'variant',
   'status',

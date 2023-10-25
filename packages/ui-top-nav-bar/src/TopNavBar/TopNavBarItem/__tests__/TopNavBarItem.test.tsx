@@ -1436,6 +1436,22 @@ describe('<TopNavBarItem />', async () => {
     })
   })
 
+  describe('as prop', async () => {
+    it('should render item as a', async () => {
+      await mount(
+        <TopNavBarItem id="item" as='a'>
+          Menu Item
+        </TopNavBarItem>
+      )
+      const component = await TopNavBarItemLocator.find()
+      const button = await component.findButton()
+
+      expect(button).to.have.tagName('a')
+      expect(button).to.not.have.attribute('href')
+    })
+  })
+
+
   describe('href prop', async () => {
     it('should render item as link', async () => {
       await mount(

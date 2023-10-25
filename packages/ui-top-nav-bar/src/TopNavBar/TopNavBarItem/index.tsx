@@ -344,6 +344,7 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   get itemProps(): BaseButtonProps | null {
     const {
       id,
+      as,
       variant,
       href: hrefOriginal,
       onClick: onClickOriginal,
@@ -418,6 +419,7 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
 
     return {
       id,
+      as,
       ...this.colorProps,
       ...this.ariaProps,
       size: this.size,
