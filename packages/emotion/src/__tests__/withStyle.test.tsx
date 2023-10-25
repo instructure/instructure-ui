@@ -24,6 +24,8 @@
 
 /** @jsx jsx */
 import React from 'react'
+import ReactDOM from 'react-dom'
+import ReactTestUtils from 'react-dom/test-utils'
 import PropTypes from 'prop-types'
 
 import { expect, match, mount, stub, within } from '@instructure/ui-test-utils'
@@ -135,6 +137,28 @@ describe('@withStyle', async () => {
       )
     }
   }
+
+  class WrapperComponent extends React.Component {
+    render() {
+      return (
+        <div>
+          <ThemeableComponent />
+        </div>
+      )
+    }
+  }
+
+  it('can be found and tested with ReactTestUtils', async () => {
+    const rootNode = document.createElement('div')
+    document.body.appendChild(rootNode)
+
+    // eslint-disable-next-line react/no-render-return-value
+    const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
+    ReactTestUtils.findRenderedComponentWithType(
+      rendered as any,
+      (ThemeableComponent as any).originalType
+    )
+  })
 
   describe('with theme provided by InstUISettingsProvider', async () => {
     it('should add css class suffixed with label', async () => {

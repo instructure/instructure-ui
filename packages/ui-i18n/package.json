@@ -25,7 +25,8 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.46.1",
     "@instructure/ui-test-utils": "8.46.1",
-    "@types/hoist-non-react-statics": "^3.3.3"
+    "@types/hoist-non-react-statics": "^3.3.3",
+    "react-dom": "^18.2.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",

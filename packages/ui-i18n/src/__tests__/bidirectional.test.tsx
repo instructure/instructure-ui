@@ -23,6 +23,8 @@
  */
 
 import React from 'react'
+import ReactDOM from 'react-dom'
+import ReactTestUtils from 'react-dom/test-utils'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import { bidirectional, BidirectionalProps } from '../bidirectional'
@@ -39,10 +41,32 @@ class BidirectionalComponent extends React.Component<BidirectionalProps> {
   }
 }
 
+class WrapperComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <BidirectionalComponent />
+      </div>
+    )
+  }
+}
+
 describe('@bidirectional', async () => {
   it('should take on the direction of the document by default', async () => {
     const subject = await mount(<BidirectionalComponent />)
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('ltr')
+  })
+
+  it('can be found and tested with ReactTestUtils', async () => {
+    const rootNode = document.createElement('div')
+    document.body.appendChild(rootNode)
+
+    // eslint-disable-next-line react/no-render-return-value
+    const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
+    ReactTestUtils.findRenderedComponentWithType(
+      rendered as any,
+      (BidirectionalComponent as any).originalType
+    )
   })
 
   it('should set the text direction via props', async () => {

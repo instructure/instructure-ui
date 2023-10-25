@@ -173,6 +173,7 @@ const withStyle = decorator(
     > & {
       generateComponentTheme?: GenerateComponentTheme
       allowedProps?: string[]
+      originalType?: WithStyleComponent
     } = forwardRef((props, ref) => {
       const theme = useTheme()
 
@@ -242,6 +243,10 @@ const withStyle = decorator(
     })
 
     hoistNonReactStatics(WithStyle, ComposedComponent)
+
+    // added so it can be tested with ReactTestUtils
+    // more info: https://github.com/facebook/react/issues/13455
+    WithStyle.originalType = ComposedComponent
 
     // we have to pass these on, because sometimes users
     // access propTypes of the component in other components
