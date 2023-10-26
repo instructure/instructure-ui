@@ -23,12 +23,25 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
-import { getFontSize } from '../getFontSize'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { getClassList } from '../getClassList'
 
-describe('getFontSize', async () => {
-  it('should return font size as a number', async () => {
-    const subject = await mount(<span style={{ fontSize: '17px' }}>hello</span>)
-    expect(getFontSize(subject.getDOMNode())).to.equal(17)
+describe('getClassList', () => {
+  it('should provide classlist methods', () => {
+    const { container } = render(<span className="foo bar baz">Test</span>)
+    const node = container.firstChild as HTMLElement
+
+    const classes = getClassList(node)
+
+    expect(classes.toArray().length).toBe(3)
+    expect(classes.contains('foo')).toBeTruthy()
+    expect(classes.contains('lorem')).toBeFalsy()
+
+    classes.add('lorem')
+    expect(classes.contains('lorem')).toBeTruthy()
+
+    classes.remove('lorem')
+    expect(classes.contains('lorem')).toBeFalsy()
   })
 })

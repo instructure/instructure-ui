@@ -21,18 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import '@testing-library/jest-dom'
+import { isDefinedCustomElement } from '../isDefinedCustomElement'
 
-import { expect, stub, wait } from '@instructure/ui-test-utils'
-import { requestAnimationFrame } from '../requestAnimationFrame'
+class TestElement extends HTMLElement {}
 
-describe('requestAnimationFrame', async () => {
-  it('should provide a cancel method', async () => {
-    const callback = stub()
-    const raf = requestAnimationFrame(callback)
+describe('isDefinedCustomElement', () => {
+  beforeAll(() => {
+    customElements.define('test-element', TestElement)
+  })
 
-    await wait(() => {
-      expect(callback).to.have.been.calledOnce()
-      expect(typeof raf.cancel).to.equal('function')
-    })
+  it('should return true for defined elements', () => {
+    const el = document.createElement('test-element')
+    expect(isDefinedCustomElement(el)).toBe(true)
+  })
+
+  it('should return false for not defined elements', () => {
+    // it is possible to create a custom element that is not defined
+    const el = document.createElement('my-element')
+    expect(isDefinedCustomElement(el)).toBe(false)
   })
 })

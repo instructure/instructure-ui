@@ -23,7 +23,8 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.46.1",
-    "@instructure/ui-test-utils": "8.46.1"
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",

@@ -23,25 +23,26 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { getScrollParents } from '../getScrollParents'
 
-describe('getScrollParents', async () => {
+describe('getScrollParents', () => {
   const node = (
     <div>
       <div id="item-1">
         <div id="item-2">
-          <span id="item-3">hello</span>
-          <span id="sibling-1">hello</span>
-          <span id="sibling-2">hello</span>
-          <span id="sibling-3">hello</span>
+          <span id="item-3">Test</span>
+          <span id="sibling-1">Test</span>
+          <span id="sibling-2">Test</span>
+          <span id="sibling-3">Test</span>
         </div>
       </div>
       <div id="ht" style={{ height: '50px' }} />
       <div id="scroll-parent" style={{ height: '200px', overflow: 'scroll' }}>
         <div>
           <div id="scroll-child" style={{ height: '500px' }}>
-            hello
+            Test
           </div>
         </div>
       </div>
@@ -55,7 +56,7 @@ describe('getScrollParents', async () => {
             id="scroll-child-rel"
             style={{ height: '500px', position: 'absolute' }}
           >
-            hello
+            Test
           </div>
         </div>
       </div>
@@ -65,36 +66,34 @@ describe('getScrollParents', async () => {
           id="scroll-child-fixed"
           style={{ height: '500px', position: 'fixed' }}
         >
-          hello
+          Test
         </div>
       </div>
     </div>
   )
 
-  it('should find scroll parent for inline elements', async () => {
-    await mount(node)
+  beforeEach(() => {
+    render(node)
+  })
 
+  it('should find scroll parent for inline elements', () => {
     const child = document.getElementById('scroll-child')
     const parent = document.getElementById('scroll-parent')
 
-    expect(getScrollParents(child)[0]).to.be.equal(parent)
+    expect(getScrollParents(child)[0]).toBe(parent)
   })
 
-  it('should ignore static parents when absolute', async () => {
-    await mount(node)
-
+  it('should ignore static parents when absolute', () => {
     const child = document.getElementById('scroll-child-rel')
     const parent = document.getElementById('scroll-parent-rel')
 
-    expect(getScrollParents(child)[0]).to.be.equal(parent)
+    expect(getScrollParents(child)[0]).toBe(parent)
   })
 
-  it('should handle fixed', async () => {
-    await mount(node)
-
+  it('should handle fixed', () => {
     const child = document.getElementById('scroll-child-fixed')
     const scrollParent = getScrollParents(child)[0]
 
-    expect(scrollParent === document).to.be.equal(true)
+    expect(scrollParent).toBe(document)
   })
 })

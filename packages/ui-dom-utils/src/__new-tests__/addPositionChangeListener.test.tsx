@@ -23,41 +23,43 @@
  */
 
 import React from 'react'
-import {
-  expect,
-  mount,
-  stub,
-  wrapQueryResult
-} from '@instructure/ui-test-utils'
-import { addInputModeListener } from '../addInputModeListener'
+import { render, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { addPositionChangeListener } from '../addPositionChangeListener'
 
-describe('addInputModeListener', async () => {
-  it('should handle input mode changes', async () => {
-    const handleInputModeChange = stub()
-    await mount(
-      <div>
-        <button id="button-1">hello</button>
-        <button>world</button>
-      </div>
-    )
-    const inputModeListener = addInputModeListener({
-      onInputModeChange: handleInputModeChange
+const mockRect = {
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  width: 0,
+  height: 0,
+  x: 0,
+  y: 0,
+  toJSON: jest.fn()
+}
+
+describe('addPositionChangeListener', () => {
+  it('should provide a remove method', async () => {
+    const callback = jest.fn()
+    Element.prototype.getBoundingClientRect = jest.fn(() => mockRect as DOMRect)
+
+    const { container } = render(<div />)
+    const node = container.firstChild as HTMLDivElement
+
+    const listener = addPositionChangeListener(node, callback)
+
+    // Manually trigger a position change (since JSDOM won't)
+    Element.prototype.getBoundingClientRect = jest.fn(() => {
+      return { ...mockRect, top: 200 } as DOMRect
     })
 
-    const button = wrapQueryResult(document.getElementById('button-1')!)
+    await waitFor(() => {
+      expect(callback).toHaveBeenCalledTimes(1)
+      expect(typeof listener.remove).toBe('function')
+    })
 
-    await button.mouseUp()
-    expect(inputModeListener.isKeyboardMode()).to.be.false()
-
-    await button.keyDown()
-    expect(inputModeListener.isKeyboardMode()).to.be.true()
-    expect(handleInputModeChange).to.have.been.calledTwice()
-
-    inputModeListener.remove()
-
-    await button.mouseUp()
-    expect(inputModeListener.isKeyboardMode()).to.be.true()
-
-    expect(handleInputModeChange).to.have.been.calledTwice()
+    listener.remove()
+    jest.restoreAllMocks()
   })
 })
