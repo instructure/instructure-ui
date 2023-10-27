@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.47.0](https://github.com/instructure/instructure-ui/compare/v8.46.1...v8.47.0) (2023-10-27)
+
+
+### Bug Fixes
+
+* **emotion,ui-i18n,ui-react-utils:** make decorated components testable with ReactTestUtils ([3568250](https://github.com/instructure/instructure-ui/commit/3568250981506b20e235845ed7ebb576af5c5920))
+
+
+
+
+
 ## [8.46.1](https://github.com/instructure/instructure-ui/compare/v8.46.0...v8.46.1) (2023-10-13)
 
 **Note:** Version bump only for package @instructure/ui-react-utils

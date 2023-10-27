@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.47.0](https://github.com/instructure/instructure-ui/compare/v8.46.1...v8.47.0) (2023-10-27)
+
+
+### Bug Fixes
+
+* **instui-config:** v7 codemods were not run for BreadcrumbLink and FlexItem ([5b8601e](https://github.com/instructure/instructure-ui/commit/5b8601e74e7cc802fbfbf00f3a431418351a5e03))
+
+
+
+
+
 ## [8.46.1](https://github.com/instructure/instructure-ui/compare/v8.46.0...v8.46.1) (2023-10-13)
 
 **Note:** Version bump only for package @instructure/instui-config

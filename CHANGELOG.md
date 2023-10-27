@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.47.0](https://github.com/instructure/instructure-ui/compare/v8.46.1...v8.47.0) (2023-10-27)
+
+
+### Bug Fixes
+
+* **emotion,ui-i18n,ui-react-utils:** make decorated components testable with ReactTestUtils ([3568250](https://github.com/instructure/instructure-ui/commit/3568250981506b20e235845ed7ebb576af5c5920))
+* handleDocumentClick should only capture mouse events ([abcd31f](https://github.com/instructure/instructure-ui/commit/abcd31f66a8d895340a800c130e772b557c3ee8f))
+* **instui-config:** v7 codemods were not run for BreadcrumbLink and FlexItem ([5b8601e](https://github.com/instructure/instructure-ui/commit/5b8601e74e7cc802fbfbf00f3a431418351a5e03))
+* **ui-checkbox,ui-spinner:** remove hover highlight from disabled checkbox ([3fe755f](https://github.com/instructure/instructure-ui/commit/3fe755f65127e3bd18a7ff2a2d974b386ab831b0))
+* **ui-date-time-input:** clear TimeSelect value when DateInput value is cleared ([b1a58e5](https://github.com/instructure/instructure-ui/commit/b1a58e5c04822da491966bc0a79403b30749ff7e))
+
+
+### Features
+
+* **ui-tabs:** add active property to tabs ([5037855](https://github.com/instructure/instructure-ui/commit/5037855e67b322ce07c2ca1c3113ddeb0229f003))
+* **ui-top-nav-bar:** add as property to TopNavBarItem ([d471c16](https://github.com/instructure/instructure-ui/commit/d471c167e2292cdfc7011194ebf855adfd0bc814))
+
+
+
+
+
 ## [8.46.1](https://github.com/instructure/instructure-ui/compare/v8.46.0...v8.46.1) (2023-10-13)
 
 

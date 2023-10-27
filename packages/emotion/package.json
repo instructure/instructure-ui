@@ -1,6 +1,6 @@
 {
   "name": "@instructure/emotion",
-  "version": "8.46.1",
+  "version": "8.47.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -25,20 +25,20 @@
   "dependencies": {
     "@babel/runtime": "^7.23.2",
     "@emotion/react": "^11.11.1",
-    "@instructure/console": "8.46.1",
-    "@instructure/shared-types": "8.46.1",
-    "@instructure/theme-registry": "8.46.1",
-    "@instructure/ui-decorator": "8.46.1",
-    "@instructure/ui-i18n": "8.46.1",
-    "@instructure/ui-react-utils": "8.46.1",
-    "@instructure/ui-themes": "8.46.1",
-    "@instructure/ui-utils": "8.46.1",
+    "@instructure/console": "8.47.0",
+    "@instructure/shared-types": "8.47.0",
+    "@instructure/theme-registry": "8.47.0",
+    "@instructure/ui-decorator": "8.47.0",
+    "@instructure/ui-i18n": "8.47.0",
+    "@instructure/ui-react-utils": "8.47.0",
+    "@instructure/ui-themes": "8.47.0",
+    "@instructure/ui-utils": "8.47.0",
     "hoist-non-react-statics": "^3.3.2",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.46.1",
-    "@instructure/ui-test-utils": "8.46.1",
+    "@instructure/ui-babel-preset": "8.47.0",
+    "@instructure/ui-test-utils": "8.47.0",
     "react-dom": "^18.2.0"
   },
   "peerDependencies": {

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.47.0](https://github.com/instructure/instructure-ui/compare/v8.46.1...v8.47.0) (2023-10-27)
+
+
+### Features
+
+* **ui-tabs:** add active property to tabs ([5037855](https://github.com/instructure/instructure-ui/commit/5037855e67b322ce07c2ca1c3113ddeb0229f003))
+
+
+
+
+
 ## [8.46.1](https://github.com/instructure/instructure-ui/compare/v8.46.0...v8.46.1) (2023-10-13)
 
 **Note:** Version bump only for package @instructure/ui-tabs
