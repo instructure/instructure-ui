@@ -151,7 +151,7 @@ class FocusRegion {
           addEventListener(doc, 'mousedown', this.captureDocumentClick, true)
         )
         this._listeners.push(
-          addEventListener(doc, 'click', this.handleDocumentClick)
+          addEventListener(doc, 'mouseup', this.handleDocumentClick)
         )
 
         Array.from(doc.getElementsByTagName('iframe')).forEach((el) => {
