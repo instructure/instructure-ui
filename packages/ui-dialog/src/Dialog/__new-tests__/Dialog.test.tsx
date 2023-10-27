@@ -176,7 +176,7 @@ describe('<Dialog />', () => {
     renderDialog({ onDismiss, shouldCloseOnDocumentClick: true })
 
     await waitFor(() => {
-      fireEvent.click(document)
+      userEvent.click(document.body)
       expect(onDismiss).toHaveBeenCalled()
     })
   })
