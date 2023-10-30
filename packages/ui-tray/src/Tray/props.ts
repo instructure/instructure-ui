@@ -236,6 +236,6 @@ const allowedProps: AllowedPropKeys = [
   'border',
   'shadow'
 ]
-type TrayState = { transitioning: boolean }
+type TrayState = { transitioning: boolean; open: boolean }
 export type { TrayProps, TrayStyle, TrayState }
 export { propTypes, allowedProps }

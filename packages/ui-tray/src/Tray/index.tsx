@@ -70,18 +70,25 @@ class Tray extends Component<TrayProps> {
     shadow: true,
     border: false
   }
-
-  state: TrayState = {
-    transitioning: false
-  }
   ref: Element | null = null
+
+  state: TrayState
+
+  constructor(props: TrayProps) {
+    super(props)
+    this.state = {
+      transitioning: false,
+      open: props.open ?? false
+    }
+  }
+
   componentDidMount() {
     this.props.makeStyles?.()
   }
 
   componentDidUpdate(prevProps: TrayProps, _prevState: TrayState) {
     if (this.props.open !== prevProps.open) {
-      this.setState({ transitioning: true })
+      this.setState({ transitioning: true, open: this.props.open })
     }
     this.props.makeStyles?.()
   }
@@ -163,7 +170,7 @@ class Tray extends Component<TrayProps> {
       ...props
     } = this.props
 
-    const portalIsOpen = open || this.state.transitioning
+    const portalIsOpen = this.state.open || this.state.transitioning
 
     return (
       <Portal
@@ -172,54 +179,52 @@ class Tray extends Component<TrayProps> {
         insertAt={insertAt}
         mountNode={mountNode}
       >
-        {portalIsOpen && (
-          <Transition
-            in={open}
-            type={this.transition}
-            onTransition={onTransition}
-            onEnter={onEnter}
-            onEntering={onEntering}
-            onEntered={createChainedFunction(
-              this.handleTransitionComplete,
-              onEntered,
-              onOpen
-            )}
-            onExit={onExit}
-            onExiting={onExiting}
-            onExited={createChainedFunction(
-              this.handleTransitionComplete,
-              onExited,
-              onClose
-            )}
-            transitionOnMount={transitionOnMount}
-            transitionEnter={transitionEnter}
-            transitionExit={transitionExit}
+        <Transition
+          in={open}
+          type={this.transition}
+          onTransition={onTransition}
+          onEnter={onEnter}
+          onEntering={onEntering}
+          onEntered={createChainedFunction(
+            this.handleTransitionComplete,
+            onEntered,
+            onOpen
+          )}
+          onExit={onExit}
+          onExiting={onExiting}
+          onExited={createChainedFunction(
+            this.handleTransitionComplete,
+            onExited,
+            onClose
+          )}
+          transitionOnMount={transitionOnMount}
+          transitionEnter={transitionEnter}
+          transitionExit={transitionExit}
+        >
+          <span
+            {...omitProps(props, Tray.allowedProps)}
+            css={this.props.styles?.tray}
+            ref={contentRef}
           >
-            <span
-              {...omitProps(props, Tray.allowedProps)}
-              css={this.props.styles?.tray}
-              ref={contentRef}
+            <Dialog
+              as="div"
+              label={label}
+              defaultFocusElement={defaultFocusElement}
+              open
+              shouldContainFocus={
+                !this.state.transitioning && shouldContainFocus
+              }
+              shouldReturnFocus={shouldReturnFocus}
+              shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
+              shouldCloseOnEscape
+              liveRegion={liveRegion}
+              onDismiss={onDismiss}
+              role={role}
             >
-              <Dialog
-                as="div"
-                label={label}
-                defaultFocusElement={defaultFocusElement}
-                open
-                shouldContainFocus={
-                  !this.state.transitioning && shouldContainFocus
-                }
-                shouldReturnFocus={shouldReturnFocus}
-                shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
-                shouldCloseOnEscape
-                liveRegion={liveRegion}
-                onDismiss={onDismiss}
-                role={role}
-              >
-                <div css={this.props.styles?.content}>{children}</div>
-              </Dialog>
-            </span>
-          </Transition>
-        )}
+              <div css={this.props.styles?.content}>{children}</div>
+            </Dialog>
+          </span>
+        </Transition>
       </Portal>
     )
   }
