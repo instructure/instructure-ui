@@ -813,7 +813,7 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       this.goToPage(subPageId)
     }
 
-    if (href) {
+    if (event.type === 'keydown' && href) {
       const optionEl = this._drilldownRef?.querySelector(
         `#${id}`
       ) as HTMLLinkElement
