@@ -22,26 +22,17 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { expect, mount, spy, wait } from '@instructure/ui-test-utils'
-import { addResizeListener } from '../addResizeListener'
+import { waitFor } from '@testing-library/react'
+import { requestAnimationFrame } from '../requestAnimationFrame'
 
-describe('addResizeListener', async () => {
-  it('should provide a remove method', async () => {
-    const callback = spy()
+describe('requestAnimationFrame', () => {
+  it('should provide a cancel method', async () => {
+    const callback = jest.fn()
+    const raf = requestAnimationFrame(callback)
 
-    const subject = await mount(<div />)
-    const node = subject.getDOMNode() as HTMLDivElement
-
-    const listener = addResizeListener(node, callback)
-
-    node.style.width = '50px'
-
-    await wait(() => {
-      expect(callback).to.have.been.calledOnce()
-      expect(typeof listener.remove).to.equal('function')
+    await waitFor(() => {
+      expect(callback).toHaveBeenCalledTimes(1)
+      expect(typeof raf.cancel).toBe('function')
     })
-
-    listener.remove()
   })
 })

@@ -23,27 +23,43 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, wait } from '@instructure/ui-test-utils'
-import { addPositionChangeListener } from '../addPositionChangeListener'
+import { render, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { addResizeListener } from '../addResizeListener'
 
-describe('addPositionChangeListener', async () => {
+const mockRect = {
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  width: 0,
+  height: 0,
+  x: 0,
+  y: 0,
+  toJSON: jest.fn()
+}
+
+describe('addResizeListener', () => {
   it('should provide a remove method', async () => {
-    const callback = spy()
+    const callback = jest.fn()
+    Element.prototype.getBoundingClientRect = jest.fn(() => mockRect as DOMRect)
 
-    const subject = await mount(<div />)
-    const node = subject.getDOMNode() as HTMLDivElement
+    const { container } = render(<div />)
+    const node = container.firstChild as HTMLDivElement
 
-    node.style.position = 'relative'
+    const listener = addResizeListener(node, callback)
 
-    const listener = addPositionChangeListener(node, callback)
+    // Manually trigger a size change (since JSDOM won't)
+    Element.prototype.getBoundingClientRect = jest.fn(() => {
+      return { ...mockRect, width: 200 } as DOMRect
+    })
 
-    node.style.top = '100px'
-
-    await wait(() => {
-      expect(callback).to.have.been.calledOnce()
-      expect(typeof listener.remove).to.equal('function')
+    await waitFor(() => {
+      expect(callback).toHaveBeenCalledTimes(1)
+      expect(typeof listener.remove).toBe('function')
     })
 
     listener.remove()
+    jest.restoreAllMocks()
   })
 })

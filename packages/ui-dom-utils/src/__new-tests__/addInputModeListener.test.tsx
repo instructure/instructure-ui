@@ -22,24 +22,39 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { isDefinedCustomElement } from '../isDefinedCustomElement'
+import React from 'react'
+import { render, fireEvent, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { addInputModeListener } from '../addInputModeListener'
 
-class TestElement extends HTMLElement {}
+describe('addInputModeListener', () => {
+  it('should handle input mode changes', () => {
+    const handleInputModeChange = jest.fn()
 
-describe('isDefinedCustomElement', () => {
-  before(() => {
-    customElements.define('test-element', TestElement)
-  })
-  it('should return true for defined elements', async () => {
-    const el = document.createElement('test-element')
+    render(
+      <div>
+        <button id="button-1">hello</button>
+        <button>world</button>
+      </div>
+    )
 
-    expect(isDefinedCustomElement(el)).to.be.true()
-  })
-  it('should return false for not defined elements', async () => {
-    // it is possible to create a custom element that is not defined
-    const el = document.createElement('my-element')
+    const inputModeListener = addInputModeListener({
+      onInputModeChange: handleInputModeChange
+    })
 
-    expect(isDefinedCustomElement(el)).to.be.false()
+    const button = screen.getByRole('button', { name: 'hello' })
+
+    fireEvent.mouseUp(button)
+    expect(inputModeListener.isKeyboardMode()).toBe(false)
+
+    fireEvent.keyDown(button)
+    expect(inputModeListener.isKeyboardMode()).toBe(true)
+    expect(handleInputModeChange).toHaveBeenCalledTimes(2)
+
+    inputModeListener.remove()
+
+    fireEvent.mouseUp(button)
+    expect(inputModeListener.isKeyboardMode()).toBe(true)
+    expect(handleInputModeChange).toHaveBeenCalledTimes(2)
   })
 })

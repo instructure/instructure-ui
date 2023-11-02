@@ -22,17 +22,24 @@
  * SOFTWARE.
  */
 
-import { expect, stub, wait } from '@instructure/ui-test-utils'
-import { requestAnimationFrame } from '../requestAnimationFrame'
+import '@testing-library/jest-dom'
+import { isDefinedCustomElement } from '../isDefinedCustomElement'
 
-describe('requestAnimationFrame', async () => {
-  it('should provide a cancel method', async () => {
-    const callback = stub()
-    const raf = requestAnimationFrame(callback)
+class TestElement extends HTMLElement {}
 
-    await wait(() => {
-      expect(callback).to.have.been.calledOnce()
-      expect(typeof raf.cancel).to.equal('function')
-    })
+describe('isDefinedCustomElement', () => {
+  beforeAll(() => {
+    customElements.define('test-element', TestElement)
+  })
+
+  it('should return true for defined elements', () => {
+    const el = document.createElement('test-element')
+    expect(isDefinedCustomElement(el)).toBe(true)
+  })
+
+  it('should return false for not defined elements', () => {
+    // it is possible to create a custom element that is not defined
+    const el = document.createElement('my-element')
+    expect(isDefinedCustomElement(el)).toBe(false)
   })
 })

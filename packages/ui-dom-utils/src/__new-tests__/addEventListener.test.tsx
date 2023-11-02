@@ -23,22 +23,24 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
-import { getClassList } from '../getClassList'
+import { fireEvent, render } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { addEventListener } from '../addEventListener'
 
-describe('getClassList', async () => {
-  it('should provide classlist methods', async () => {
-    const subject = await mount(<span className="foo bar baz">hello</span>)
-    const classes = getClassList(subject.getDOMNode())
+describe('addEventListener', () => {
+  it('should add an event listener and provide a remove method', () => {
+    const callback = jest.fn()
 
-    expect(classes.toArray().length).to.equal(3)
-    expect(classes.contains('foo')).to.be.true()
-    expect(classes.contains('lorem')).to.be.false()
+    const { container } = render(<div />)
+    const node = container.firstChild as HTMLDivElement
 
-    classes.add('lorem')
-    expect(classes.contains('lorem')).to.be.true()
+    const listener = addEventListener(node, 'click', callback)
 
-    classes.remove('lorem')
-    expect(classes.contains('lorem')).to.be.false()
+    fireEvent.click(node)
+
+    expect(callback).toHaveBeenCalledTimes(1)
+    expect(typeof listener.remove).toBe('function')
+
+    listener.remove()
   })
 })

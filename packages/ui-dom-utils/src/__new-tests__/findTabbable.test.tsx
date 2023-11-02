@@ -23,49 +23,49 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { findTabbable } from '../findTabbable'
 
-describe('findTabbable', async () => {
-  describe('tabbable content', async () => {
-    it('should find tabbable descendants', async () => {
-      /* eslint-disable jsx-a11y/anchor-is-valid */
+describe('findTabbable', () => {
+  describe('tabbable content', () => {
+    it('should find tabbable descendants', () => {
       /* eslint-disable jsx-a11y/tabindex-no-positive */
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-
-      const subject = await mount(
+      const { container } = render(
         <div>
-          <a href="#">Yep</a>
-          <div>Nope</div>
-          <div tabIndex={1}>Yep</div>
-          <input type="text" value="Yep" readOnly />
+          <a href="https://instructure-test">Tabbable</a>
+          <div>Not Tabbable</div>
+          <div tabIndex={1}>Tabbable</div>
+          <input type="text" value="Tabbable" readOnly />
           <div>
-            <button>Yep</button>
-            <button style={{ display: 'none' }}>Nope</button>
+            <button>Tabbable</button>
+            <button style={{ display: 'none' }}>Not Tabbable</button>
           </div>
         </div>
       )
-      /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
-      /* eslint-enable jsx-a11y/tabindex-no-positive */
-      /* eslint-enable jsx-a11y/anchor-is-valid */
 
-      expect(findTabbable(subject.getDOMNode()).length).to.equal(4)
+      const node = container.firstChild as HTMLElement
+      expect(findTabbable(node).length).toBe(4)
     })
   })
 
-  describe('tabbable root', async () => {
-    it('should search the root node when shouldSearchRootNode is set', async () => {
-      const subject = await mount(
+  describe('tabbable root', () => {
+    it('should search the root node when shouldSearchRootNode is set', () => {
+      const shouldSearchRootNode = true
+      const { container } = render(
         <button>
           <span>hello</span>
         </button>
       )
-      expect(findTabbable(subject.getDOMNode()).length).to.equal(0)
-      expect(findTabbable(subject.getDOMNode(), true).length).to.equal(1)
+
+      const node = container.firstChild as HTMLElement
+      expect(findTabbable(node).length).toBe(0)
+      expect(findTabbable(node, shouldSearchRootNode).length).toBe(1)
     })
   })
 
-  it('should gracefully handle null', async () => {
-    expect(findTabbable(null).length).to.equal(0)
+  it('should gracefully handle null', () => {
+    expect(findTabbable(null).length).toBe(0)
   })
 })
