@@ -22,66 +22,59 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
 import { transformSelection, transformCursor } from '../transformSelection'
 
 describe('transformSelection', () => {
   it('should work with transformCursor', () => {
-    const selectionStart = 2
-    const selectionEnd = 3
-    const selectionDirection = 'none'
-    const value = '1a2345'
+    const paramObj = {
+      selectionStart: 2,
+      selectionEnd: 3,
+      selectionDirection: 'none',
+      value: '1x2345'
+    }
 
-    expect(
-      transformSelection(
-        {
-          selectionStart,
-          selectionEnd,
-          selectionDirection,
-          value
-        } as HTMLTextAreaElement,
-        '12345'
-      )
-    ).to.eql({
+    const result = transformSelection(paramObj as HTMLTextAreaElement, '12345')
+
+    expect(result).toEqual({
       selectionStart: 1,
       selectionEnd: 2,
-      selectionDirection
+      selectionDirection: 'none'
     })
   })
 })
 
 describe('transformCursor', () => {
   it('should retain cursor at the end', () => {
-    const dirtyValue = '12asdfghjk'
+    const dirtyValue = '12_xxxx_'
     const cleanedValue = '12'
     const cursorIndex = dirtyValue.length
 
-    expect(transformCursor(cursorIndex, dirtyValue, cleanedValue)).to.equal(
+    expect(transformCursor(cursorIndex, dirtyValue, cleanedValue)).toBe(
       cleanedValue.length
     )
   })
 
   it('should retain cursor at the start', () => {
-    const dirtyValue = '12dfghjkl67'
+    const dirtyValue = '12_xxxx_67'
     const cleanedValue = '1267'
     const cursorIndex = 0
 
-    expect(transformCursor(cursorIndex, dirtyValue, cleanedValue)).to.equal(0)
+    expect(transformCursor(cursorIndex, dirtyValue, cleanedValue)).toBe(0)
   })
 
   it('should retain cursor between cleaned values', () => {
-    const dirtyValue = '12dfghjkl67'
+    const dirtyValue = '12_xxxx_67'
     const cleanedValue = '1267'
     const cursorIndex = 6
 
-    expect(transformCursor(cursorIndex, dirtyValue, cleanedValue)).to.equal(2)
+    expect(transformCursor(cursorIndex, dirtyValue, cleanedValue)).toBe(2)
   })
 
   it('should retain cursor after cleaned values', () => {
-    const dirtyValue = '12dfghjkl67'
+    const dirtyValue = '12_xxxx_67'
     const cleanedValue = '1267'
     const cursorIndex = dirtyValue.length - 1
 
-    expect(transformCursor(cursorIndex, dirtyValue, cleanedValue)).to.equal(3)
+    expect(transformCursor(cursorIndex, dirtyValue, cleanedValue)).toBe(3)
   })
 })

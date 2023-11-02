@@ -23,24 +23,15 @@
  */
 
 import React from 'react'
-import { expect, mount, spy } from '@instructure/ui-test-utils'
-import { addEventListener } from '../addEventListener'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { getFontSize } from '../getFontSize'
 
-describe('addEventListener', async () => {
-  it('should add an event listener and provide a remove method', async () => {
-    const callback = spy()
+describe('getFontSize', () => {
+  it('should return font size as a number', () => {
+    const { container } = render(<span style={{ fontSize: '17px' }}>Test</span>)
+    const node = container.firstChild
 
-    const subject = await mount(<div />)
-    const node = subject.getDOMNode()
-
-    const listener = addEventListener(node, 'click', callback)
-
-    // @ts-expect-error TS2339: Property 'click' does not exist on type 'Element'.
-    await node.click()
-
-    expect(callback).to.have.been.calledOnce()
-    expect(typeof listener.remove).to.equal('function')
-
-    listener.remove()
+    expect(getFontSize(node)).toBe(17)
   })
 })
