@@ -39,7 +39,6 @@ import { FocusRegionOptions } from './FocusRegionOptions'
 
 class FocusRegion {
   private _contextElement: Node | Element | null = null
-  private _preventCloseOnDocumentClick = false
   private _options: FocusRegionOptions
   private readonly _screenReaderFocusRegion: ScreenReaderFocusRegion
   private readonly _keyboardFocusRegion: KeyboardFocusRegion
@@ -81,16 +80,12 @@ class FocusRegion {
     this._options.onDismiss?.(event, documentClick)
   }
 
-  captureDocumentClick = (event: React.MouseEvent) => {
-    const { target } = event
-    this._preventCloseOnDocumentClick =
-      event.button !== 0 || contains(this._contextElement, target as Node)
-  }
-
   handleDocumentClick = (event: React.MouseEvent) => {
+    const { target } = event
     if (
       this._options.shouldCloseOnDocumentClick &&
-      !this._preventCloseOnDocumentClick
+      event.button == 0 &&
+      !contains(this._contextElement, target as Node)
     ) {
       this.handleDismiss(event, true)
     }
@@ -148,10 +143,7 @@ class FocusRegion {
 
       if (this._options.shouldCloseOnDocumentClick) {
         this._listeners.push(
-          addEventListener(doc, 'mousedown', this.captureDocumentClick, true)
-        )
-        this._listeners.push(
-          addEventListener(doc, 'mouseup', this.handleDocumentClick)
+          addEventListener(doc, 'click', this.handleDocumentClick)
         )
 
         Array.from(doc.getElementsByTagName('iframe')).forEach((el) => {
