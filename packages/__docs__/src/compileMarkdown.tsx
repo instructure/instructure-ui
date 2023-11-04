@@ -22,479 +22,217 @@
  * SOFTWARE.
  */
 
-import React, { createElement, ReactNode } from 'react'
-import { marked } from 'marked'
+import React, { ReactElement, ReactNode } from 'react'
+import Markdown from 'marked-react'
 import grayMatter from 'gray-matter'
-
-import { logWarn as warn } from '@instructure/console'
+import { v4 as uuid } from 'uuid'
 
 import { InstUISettingsProvider } from '@instructure/emotion'
-import { canvas, canvasHighContrast, instructure } from '@instructure/ui-themes'
+import { canvas } from '@instructure/ui-themes'
 
 import { View } from '@instructure/ui-view'
 import { Table } from '@instructure/ui-table'
 import { Img } from '@instructure/ui-img'
-import { Text } from '@instructure/ui-text'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 
 import { Playground } from './Playground'
-import { Preview, PreviewErrorBoundary } from './Preview'
 import { compileAndRenderExample } from './compileAndRenderExample'
 import { Heading } from './Heading'
 import { Link } from './Link'
 import { trimIndent } from './trimIndent'
 
-type HeadingGenerator = { id: string; children: ReactNode }
-
-type Tracker = {
-  tree: any[]
-  elements: any
-  toc: any[]
-  nextElementId: number
-  context?: Record<string, any>
-  currentId: any[]
-}
-
-const themes = { canvas, canvasHighContrast, instructure }
-
-/* eslint-disable react/prop-types, react/display-name */
-const elements = {
-  h1: ({ id, children }: HeadingGenerator) => (
-    <Heading id={id} level="h1" margin="0 0 large">
+const headingVariants: Record<
+  string,
+  (key: string, children: ReactNode) => ReactElement
+> = {
+  h1: (key, children) => {
+    return (
+      <Heading
+        id={(children as [string])?.[0]}
+        key={key}
+        level="h1"
+        margin="0 0 large"
+      >
+        {children}
+      </Heading>
+    )
+  },
+  h2: (key, children) => (
+    <Heading
+      id={(children as [string])?.[0]}
+      key={key}
+      level="h1"
+      as="h2"
+      margin="x-large 0 large 0"
+    >
       {children}
     </Heading>
   ),
-  h2: ({ id, children }: HeadingGenerator) => (
-    <Heading id={id} level="h1" as="h2" margin="x-large 0 large 0">
+  h3: (key, children) => (
+    <Heading
+      id={(children as [string])?.[0]}
+      key={key}
+      level="h2"
+      as="h3"
+      margin="large 0 medium 0"
+    >
       {children}
     </Heading>
   ),
-  h3: ({ id, children }: HeadingGenerator) => (
-    <Heading id={id} level="h2" as="h3" margin="large 0 medium 0">
+  h4: (key, children) => (
+    <Heading
+      id={(children as [string])?.[0]}
+      key={key}
+      level="h3"
+      as="h4"
+      margin="large 0 medium 0"
+    >
       {children}
     </Heading>
   ),
-  h4: ({ id, children }: HeadingGenerator) => (
-    <Heading id={id} level="h3" as="h4" margin="large 0 medium 0">
+  h5: (key, children) => (
+    <Heading
+      id={(children as [string])?.[0]}
+      key={key}
+      level="h4"
+      as="h5"
+      margin="large 0 small 0"
+    >
       {children}
     </Heading>
-  ),
-  h5: ({ id, children }: HeadingGenerator) => (
-    <Heading id={id} level="h4" as="h5" margin="large 0 small 0">
-      {children}
-    </Heading>
-  ),
-  img: ({ src, alt }: { src: string; alt?: string }) => (
-    <Img src={src} alt={alt} />
-  ),
-  a: ({
-    href,
-    title,
-    target,
-    name,
-    children
-  }: {
-    href?: string
-    title?: string
-    target?: string
-    name: string
-    children: ReactNode
-  }) => {
-    if (href) {
-      return (
-        <Link href={href} title={title} target={target}>
-          {children}
-        </Link>
-      )
-    } else {
-      return <a id={name}>{children}</a> // eslint-disable-line jsx-a11y/anchor-is-valid
-    }
-  }
-}
-/* eslint-enable react/prop-types, react/display-name */
-
-const { renderer, tracker } = createRenderer()
-
-function compileMarkdown(
-  content: string,
-  context?: Record<string, any>,
-  options = {}
-) {
-  tracker.tree = []
-  tracker.elements = {}
-  tracker.toc = []
-  tracker.nextElementId = 0
-  tracker.context = context
-  tracker.currentId = []
-  marked(
-    trimIndent(content),
-    Object.assign({ renderer: renderer, smartypants: true }, options)
   )
-  return tracker.tree
 }
 
-function createRenderer() {
-  const tracker: Tracker = {
-    tree: [],
-    elements: null,
-    toc: [],
-    nextElementId: 0,
-    context: {},
-    currentId: []
+const getComponent = (componentType: string, data: Record<string, any>) => {
+  const { code, title, readOnly, render, background = undefined } = data
+  if (componentType === 'Playground') {
+    return (
+      <Playground
+        background={background}
+        render={render}
+        title={title}
+        code={code}
+        readOnly={readOnly}
+      />
+    )
+  } else if (componentType === 'SourceCodeEditor') {
+    return <SourceCodeEditor label={title} defaultValue={code} readOnly />
   }
-  type RendererType = marked.Renderer & {
-    a?: (name: string, text: string) => string
-  }
-  const renderer = new marked.Renderer() as RendererType
+  return undefined
+}
 
-  function getTocPosition(toc: any, level: number) {
-    let currentLevel = toc.children
-    while (
-      currentLevel.length &&
-      currentLevel[currentLevel.length - 1].level !== level
-    ) {
-      currentLevel = currentLevel[currentLevel.length - 1].children
+const renderer = {
+  table: (table: ReactElement[]) => {
+    const headCells = table?.[0]?.props?.children?.props?.children?.map(
+      (el: ReactElement) => el?.props?.children?.[0]
+    )
+    const body = table?.[1]?.props?.children
+
+    return (
+      <Table key={uuid()} caption="asd">
+        <Table.Head>
+          <Table.Row>
+            {headCells?.map((headCell: string) => (
+              <Table.ColHeader key={uuid()} id={headCell}>
+                {headCell}
+              </Table.ColHeader>
+            ))}
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          {body.map((tr: ReactElement) => (
+            <Table.Row key={uuid()}>
+              {tr?.props?.children?.map((td: ReactElement) => (
+                <Table.Cell key={uuid()}>{td?.props?.children?.[0]}</Table.Cell>
+              ))}
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    )
+  },
+  image: (href: string, title: string) => (
+    <Img key={uuid()} src={href} alt={title} />
+  ),
+  list: (list: ReactElement[], ordered: boolean) => {
+    if (list[0].props.children[0][0].type === 'code') {
+      const code1 = list[0].props.children[0][0].props.children
+      const code2 = list[1].props.children[0][0].props.children
+      const matter = [
+        grayMatter(trimIndent(code1)),
+        grayMatter(trimIndent(code2))
+      ]
+
+      // improve on language support and other parameters like readOnly, background or title if necessary
+      const data = {
+        code: [matter[0].content, matter[1].content],
+        language: 'js',
+        readOnly: false,
+        title: 'Example',
+        render: false
+      }
+      return (
+        <View key={uuid()} display="block" margin="medium none">
+          {getComponent('Playground', data)}
+        </View>
+      )
     }
-    return currentLevel
-  }
-
-  function parseChildren(textContent: string) {
-    const contentArray = textContent.split(/(\{\{.*?\}\})/)
-    return contentArray.map((subStr, index) => {
-      let child: ReactNode = subStr
-
-      if (typeof child === 'string' && child.trim() === '') {
-        return null
+    return ordered ? <ol key={uuid()}>{list}</ol> : <ul key={uuid()}>{list}</ul>
+  },
+  code: (code: string, language: string) => {
+    if (language) {
+      const matter = grayMatter(trimIndent(code))
+      const { type, readonly, title, background } = matter.data
+      const data = {
+        code: matter.content,
+        language,
+        readOnly: readonly,
+        title: title || 'Example',
+        background
       }
 
-      const elementIdMatch = subStr.match(/\{\{(.*)\}\}/)
-      if (elementIdMatch) {
-        tracker.tree.splice(
-          tracker.tree.indexOf(tracker.elements[elementIdMatch[1]]),
-          1
+      if (type === 'code') {
+        return (
+          <View key={uuid()} display="block" margin="medium none">
+            {getComponent('SourceCodeEditor', data)}
+          </View>
         )
-        child = tracker.elements[elementIdMatch[1]]
-      } else {
-        child = createElement('span', {
-          key: `${textContent}${index}`,
-          dangerouslySetInnerHTML: {
-            __html: child
-          }
-        })
       }
-
-      return child
-    })
-  }
-
-  function addElement(
-    tag: string | any,
-    props: Record<string, any> = {},
-    content?: string | string[]
-  ) {
-    const elementId = tracker.nextElementId++
-    let children = null
-
-    if (Array.isArray(content)) {
-      children = content.map((text) => {
-        return parseChildren(text)
-      })
-    } else if (content) {
-      children = parseChildren(content)
-    }
-
-    const elementProps = {
-      ...props,
-      key: elementId,
-      id: (props || {}).id || `${elementId}`
-    }
-
-    tracker.elements[elementId] = createElement(
-      (elements && (elements as any)[tag]) || tag,
-      elementProps,
-      children
-    )
-
-    tracker.tree.push(tracker.elements[elementId])
-
-    return `{{${elementId}}}`
-  }
-
-  function getComponent(type: string, data: Record<string, any>) {
-    const { matter, language, title, readOnly } = data
-
-    const componentType = type.toLowerCase()
-
-    if (componentType === 'playground') {
-      return (
-        <Playground
-          background={matter.data.background}
-          render={matter.data.render}
-          title={title}
-          code={matter.content}
-          language={language.split('_')[0]}
-          readOnly={readOnly}
-        />
-      )
-    } else if (componentType === 'sourcecodeeditor') {
-      return (
-        <SourceCodeEditor
-          label={title}
-          defaultValue={matter.content}
-          language={language}
-          readOnly
-        />
-      )
-    } else if (componentType === 'preview') {
-      return (
-        <PreviewErrorBoundary>
-          <Preview
-            code={matter.content}
-            language={language}
-            background={data.background || 'checkerboard'}
-            frameless={data.frameless}
-          />
-        </PreviewErrorBoundary>
-      )
-    }
-    return undefined
-  }
-
-  function formatId(rawId: string) {
-    let id = rawId
-
-    const modifications = [
-      { regex: /\s/g, replacement: '-' }, // Convert any whitespace to hyphens
-      { regex: /\//g, replacement: '-' } // We use this to parse the url so replace it with a hyphen
-    ]
-
-    modifications.forEach(({ regex, replacement }) => {
-      id = id.replace(regex, replacement)
-    })
-
-    return id.toLowerCase()
-  }
-
-  renderer.code = function (code, language) {
-    const elementId = tracker.nextElementId++
-
-    function CodeComponent() {
-      let el = null
-      if (typeof language === 'string') {
-        const matter = grayMatter(trimIndent(code))
-        const readOnly = matter.data ? matter.data.readOnly : true
-        const title =
-          tracker.context!.title || matter.data.title || 'Code example'
-        const themeKey = (matter.data || {}).theme
-        const data = { matter, readOnly, title, language }
-        let theme: any
-
-        if (themeKey) {
-          theme = (themes as any)[themeKey]
-
-          if (!theme) {
-            warn(
-              false,
-              `[compileMarkdown] Cannot find registered theme by key: "${themeKey}". Using default theme instead.`
-            )
-          }
-        }
-
-        if (language.indexOf('_guidelines') >= 0 || matter.data.guidelines) {
-          el = getComponent('Preview', {
-            ...data,
-            background: 'light',
-            frameless: true
-          })
-        } else if (language.indexOf('_example') >= 0 || matter.data.example) {
-          el = (
-            <View display="block" margin="medium none">
-              {getComponent('Playground', data)}
-            </View>
-          )
-        } else if (language.indexOf('_embed') >= 0 || matter.data.embed) {
-          compileAndRenderExample({
-            code: matter.content,
-            render: (_el: ReactNode) => {
-              el = theme ? (
-                <InstUISettingsProvider theme={theme}>
-                  {_el}
-                </InstUISettingsProvider>
-              ) : (
-                _el
-              )
-            },
-            shouldCallRender: matter.data.render,
-            onError: (err: Error) => {
-              el = <Text color="danger">{err.toString()}</Text>
-            }
-          })
-        } else {
-          el = getComponent('SourceCodeEditor', data)
-        }
-      } else {
-        el = <code>{code}</code>
+      if (type === 'embed') {
+        return (
+          <InstUISettingsProvider key={uuid()} theme={canvas}>
+            {compileAndRenderExample(matter.content)}
+          </InstUISettingsProvider>
+        )
       }
-
-      return { element: el, type: el!.type.displayName }
+      if (type === 'simpleExample') {
+        return (
+          <View key={uuid()} display="block" margin="medium none">
+            {getComponent('Playground', data)}
+          </View>
+        )
+      }
+      if (type === 'standaloneExample') {
+        return (
+          <View key={uuid()} display="block" margin="medium none">
+            {getComponent('Playground', data)}
+          </View>
+        )
+      }
     }
+    return <code key={uuid()}>{code}</code>
+  },
+  heading: (text: string, level: number) =>
+    headingVariants[`h${level}`]?.(uuid(), text),
+  link: (href: string, title: string) => (
+    <Link key={uuid()} href={href}>
+      {title}
+    </Link>
+  )
+}
 
-    const Element = () => CodeComponent().element
-    tracker.elements[elementId] = createElement(Element as any, {
-      key: elementId,
-      elementType: CodeComponent().type
-    })
-
-    tracker.tree.push(tracker.elements[elementId])
-
-    return `{{${elementId}}}`
-  }
-
-  renderer.html = function (html) {
-    const elementId = tracker.nextElementId++
-    tracker.tree.push(
-      createElement('div', {
-        key: elementId,
-        dangerouslySetInnerHTML: {
-          __html: html
-        }
-      })
-    )
-    return ''
-  }
-
-  renderer.paragraph = function (text) {
-    return addElement('p', undefined, text)
-  }
-
-  renderer.blockquote = function (text) {
-    return addElement('blockquote', undefined, text)
-  }
-
-  renderer.link = function (href, title, text) {
-    return addElement('a', { href, title }, text)
-  }
-
-  renderer.a = function (name: string, text: string) {
-    return addElement('a', { name }, text)
-  }
-
-  renderer.br = function () {
-    return addElement('br')
-  }
-
-  renderer.hr = function () {
-    return addElement('hr')
-  }
-
-  renderer.strong = function (text) {
-    return addElement('strong', undefined, text)
-  }
-
-  renderer.del = function (text) {
-    return addElement('del', undefined, text)
-  }
-
-  renderer.em = function (text) {
-    return addElement('em', undefined, text)
-  }
-
-  renderer.heading = function (text, level) {
-    tracker.currentId = tracker.currentId.filter((entry) => entry.level < level)
-    tracker.currentId.push({ text: formatId(text), level })
-
-    const id = tracker.currentId.map((entry) => entry.text).join('-')
-    const lastToc = tracker.toc[tracker.toc.length - 1]
-
-    if (!lastToc || lastToc.level > level) {
-      tracker.toc.push({
-        id: id,
-        title: text,
-        level: level,
-        children: []
-      })
-    } else {
-      const tocPosition = getTocPosition(lastToc, level)
-
-      tocPosition.push({
-        id: id,
-        title: text,
-        level: level,
-        children: []
-      })
-    }
-
-    return addElement(
-      `h${level}`,
-      {
-        id
-      },
-      text
-    )
-  }
-
-  renderer.list = function (body, ordered) {
-    return addElement(ordered ? 'ol' : 'ul', undefined, body)
-  }
-
-  renderer.listitem = function (text) {
-    return addElement('li', undefined, text)
-  }
-
-  renderer.table = function (header, body) {
-    // TODO: Figure out how we can add captions for a11y
-    //
-    // `marked`, the lib we're using to parse the markdown does not allow
-    // specification of a caption for the table. Look into an alternate
-    // lib for parsing or see if it's supported in a later version. In
-    // the meantime, adding an empty string as a caption to avoid throwing
-    // a docs error.
-    return addElement(Table, { caption: '' }, [
-      addElement(Table.Head, undefined, header),
-      addElement(Table.Body, undefined, body)
-    ])
-  }
-  // TODO figure out why this errors
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  renderer.thead = function (content: string | string[]) {
-    return addElement(Table.Head, undefined, content)
-  }
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  renderer.tbody = function (content: string | string[]) {
-    return addElement(Table.Body, undefined, content)
-  }
-
-  renderer.tablerow = function (content) {
-    return addElement(Table.Row, undefined, content)
-  }
-
-  renderer.tablecell = function (content, flag) {
-    const tag = flag.header ? Table.ColHeader : Table.Cell
-    const alignMap = {
-      left: 'start',
-      center: 'center',
-      right: 'end'
-    }
-    const props = flag.align ? { textAlign: alignMap[flag.align] } : undefined
-
-    return addElement(tag, props, content)
-  }
-
-  renderer.codespan = function (text) {
-    return addElement('code', undefined, text)
-  }
-
-  renderer.image = function (href, _title, text) {
-    return addElement('img', { src: href, alt: text })
-  }
-
-  return {
-    renderer,
-    tracker
-  }
+function compileMarkdown(content: string) {
+  return <Markdown renderer={renderer}>{content}</Markdown>
 }
 
 export default compileMarkdown

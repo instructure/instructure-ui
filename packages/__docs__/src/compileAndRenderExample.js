@@ -29,20 +29,13 @@ const compileCode = (code) =>
     presets: ['react']
   }).code
 
-export const compileAndRenderExample = ({
-  code,
-  render,
-  shouldCallRender,
-  onError
-}) => {
+export const compileAndRenderExample = (code) => {
+  // this is needed in order to get the component out of the eval's scope
+  const render = (el) => el
   try {
-    const compiledCode = compileCode(code)
-    const el = eval(compiledCode) // eslint-disable-line no-eval
-
-    if (shouldCallRender !== false) {
-      return render(el)
-    }
+    return eval(compileCode(code))
   } catch (err) {
-    onError(err)
+    console.error(err)
+    return err.toString()
   }
 }

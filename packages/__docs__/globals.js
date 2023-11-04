@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import { LoremIpsum } from 'lorem-ipsum'
@@ -76,7 +76,9 @@ const globals = {
   mirrorHorizontalPlacement,
   placeholderImage,
   React,
-  ReactDOM
+  ReactDOM,
+  useEffect,
+  useState
 }
 
 Object.keys(globals).forEach((key) => {

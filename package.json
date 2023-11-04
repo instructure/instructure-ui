@@ -117,5 +117,9 @@
   },
   "browserslist": [
     "extends @instructure/browserslist-config-instui"
-  ]
+  ],
+  "dependencies": {
+    "marked-react": "^2.0.0",
+    "uuid": "^9.0.1"
+  }
 }
