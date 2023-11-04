@@ -39,7 +39,6 @@ class Preview extends Component<PreviewProps, PreviewState> {
   static allowedProps = allowedProps
 
   static defaultProps = {
-    render: true,
     fullscreen: false,
     frameless: false,
     inverse: false,

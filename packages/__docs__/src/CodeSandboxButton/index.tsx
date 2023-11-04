@@ -60,7 +60,7 @@ import 'moment/min/locales'
     }
 
     const uniqueClasses = [...new Set(neededClasses)]
-    const { render } = this.props
+
     const externalElements = this.props.code
       .match(/class.\w+|function.\w+|const.\w+/gm)
       ?.map((className) =>
@@ -73,7 +73,11 @@ import 'moment/min/locales'
       ', '
     )}} from "@instructure/ui"\n\n`
 
-    const codeBlock = render ? `render(${this.props.code})` : this.props.code
+    const codeLines = this.props.code.split('\n')
+    const shouldRender = !codeLines[codeLines.length - 1].includes('render(')
+    const codeBlock = shouldRender
+      ? `render(${this.props.code})`
+      : this.props.code
     const renderStatement = `const render = (el) => { ReactDOM.render(el, document.getElementById('app')) }\n`
     const codeSandboxData = {
       title: this.props.title,

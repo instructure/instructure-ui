@@ -8,7 +8,7 @@ A component for picking a color from a list of colors. Supports adding new color
 
 ```js
 ---
-type: standaloneExample
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {
@@ -53,7 +53,7 @@ render(<Example />);
 
 ```js
 ---
-type: standaloneExample
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {
