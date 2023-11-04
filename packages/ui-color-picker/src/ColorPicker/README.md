@@ -89,8 +89,7 @@ render(<Example />)
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {

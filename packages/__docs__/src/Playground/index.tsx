@@ -62,7 +62,6 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    render: true,
     background: 'checkerboard',
     readOnly: false,
     language: 'jsx'
@@ -208,7 +207,6 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
       <PreviewErrorBoundary>
         <Preview
           code={code}
-          render={this.props.render}
           language={this.props.language}
           background={
             typeof this.props.background === 'string'
@@ -334,10 +332,13 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                   {
                     <Flex.Item>
                       <CodeSandboxButton
-                        code={this.state.code[this.state.selectedTab]}
+                        code={
+                          this.mutliExample()
+                            ? this.state.code[this.state.selectedTab]
+                            : (this.state.code as string)
+                        }
                         title={`${this.props.title} Example`}
                         language={this.props.language}
-                        render={this.props.render}
                       />
                     </Flex.Item>
                   }

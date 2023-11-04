@@ -29,7 +29,6 @@ type CodeSandboxButtonOwnProps = {
   title: string
   language: string
   options?: Record<string, any>
-  render: boolean
 }
 
 type PropKeys = keyof CodeSandboxButtonOwnProps
@@ -39,15 +38,8 @@ const propTypes: PropValidators<PropKeys> = {
   code: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
-  options: PropTypes.object,
-  render: PropTypes.bool.isRequired
+  options: PropTypes.object
 }
-const allowedProps: AllowedPropKeys = [
-  'code',
-  'title',
-  'language',
-  'options',
-  'render'
-]
+const allowedProps: AllowedPropKeys = ['code', 'title', 'language', 'options']
 export type { CodeSandboxButtonProps }
 export { propTypes, allowedProps }

@@ -35,7 +35,6 @@ import type { MainDocsData } from '../../buildScripts/DataTypes.mts'
 
 type PreviewOwnProps = {
   code: string
-  render?: boolean
   language: string
   fullscreen?: boolean
   frameless?: boolean
@@ -79,7 +78,6 @@ export type PreviewStyle = ComponentStyle<'preview' | 'previewError' | 'error'>
 
 const propTypes: PropValidators<PropKeys> = {
   code: PropTypes.string.isRequired,
-  render: PropTypes.bool,
   language: PropTypes.string.isRequired,
   fullscreen: PropTypes.bool,
   frameless: PropTypes.bool,
@@ -102,7 +100,6 @@ type PreviewState = {
 }
 const allowedProps: AllowedPropKeys = [
   'code',
-  'render',
   'language',
   'fullscreen',
   'frameless',
