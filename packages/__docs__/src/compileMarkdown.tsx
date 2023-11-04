@@ -104,18 +104,19 @@ const headingVariants: Record<
 }
 
 const getComponent = (componentType: string, data: Record<string, any>) => {
-  const { code, title, readOnly, render, background = undefined } = data
+  const { code, title, readOnly, background = undefined } = data
   if (componentType === 'Playground') {
     return (
       <Playground
         background={background}
-        render={render}
         title={title}
         code={code}
         readOnly={readOnly}
       />
     )
-  } else if (componentType === 'SourceCodeEditor') {
+  }
+
+  if (componentType === 'SourceCodeEditor') {
     return <SourceCodeEditor label={title} defaultValue={code} readOnly />
   }
   return undefined
@@ -129,7 +130,7 @@ const renderer = {
     const body = table?.[1]?.props?.children
 
     return (
-      <Table key={uuid()} caption="asd">
+      <Table key={uuid()} caption="Tabs for codePreview">
         <Table.Head>
           <Table.Row>
             {headCells?.map((headCell: string) => (
@@ -168,8 +169,7 @@ const renderer = {
         code: [matter[0].content, matter[1].content],
         language: 'js',
         readOnly: false,
-        title: 'Example',
-        render: false
+        title: 'Example'
       }
       return (
         <View key={uuid()} display="block" margin="medium none">
@@ -205,14 +205,7 @@ const renderer = {
           </InstUISettingsProvider>
         )
       }
-      if (type === 'simpleExample') {
-        return (
-          <View key={uuid()} display="block" margin="medium none">
-            {getComponent('Playground', data)}
-          </View>
-        )
-      }
-      if (type === 'standaloneExample') {
+      if (type === 'example') {
         return (
           <View key={uuid()} display="block" margin="medium none">
             {getComponent('Playground', data)}
