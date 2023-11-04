@@ -32,7 +32,7 @@ import PropTypes from 'prop-types'
 
 type PlaygroundOwnProps = {
   title: string
-  code: string
+  code: string | [string, string]
   language: string
   render: boolean
   background:
@@ -58,15 +58,18 @@ type PlaygroundTheme = {
 }
 const propTypes: PropValidators<PropKeys> = {
   title: PropTypes.string.isRequired,
-  code: PropTypes.string.isRequired,
+  code: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.array]),
   language: PropTypes.string.isRequired,
   render: PropTypes.bool,
-  background: PropTypes.oneOf([
-    'checkerboard',
-    'checkerboard-inverse',
-    'light',
-    'inverse',
-    'none'
+  background: PropTypes.oneOfType([
+    PropTypes.oneOf([
+      'checkerboard',
+      'checkerboard-inverse',
+      'light',
+      'inverse',
+      'none'
+    ]),
+    PropTypes.array
   ]),
   readOnly: PropTypes.bool
 }
@@ -81,11 +84,12 @@ const allowedProps: AllowedPropKeys = [
 ]
 
 export type PlaygroundState = {
-  defaultCode: string
-  code: string
+  defaultCode: string | [string, string]
+  code: string | [string, string]
   fullscreen: boolean
   showCode: boolean
   rtl: boolean
+  selectedTab: number
 }
 export type { PlaygroundProps, PlaygroundStyle, PlaygroundTheme }
 export { propTypes, allowedProps }

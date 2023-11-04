@@ -8,7 +8,7 @@ A component displaying a circle with checkerboard background capable of displayi
 
 ```js
 ---
-example: true
+type: simpleExample
 ---
 <div style={{display:'flex', background:'white'}}>
   <View margin='small'>
@@ -52,7 +52,7 @@ example: true
 
 ```js
 ---
-example: true
+type: simpleExample
 ---
 <div style={{display:'flex', background:'white'}}>
   <View margin='small'>
@@ -68,7 +68,7 @@ example: true
 
 ```js
 ---
-example: true
+type: simpleExample
 ---
 <IconButton screenReaderLabel="ColorIndicator button">
   <ColorIndicator color='#ff0000'/>
