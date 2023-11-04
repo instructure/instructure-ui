@@ -26,6 +26,7 @@
 import { Component } from 'react'
 import ReactDOM from 'react-dom'
 
+import { Tabs } from '@instructure/ui-tabs'
 import { Modal } from '@instructure/ui-modal'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
@@ -42,8 +43,6 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { AppContext } from '../App'
-import type { AppContextType } from '../App'
-
 import { Preview, PreviewErrorBoundary } from '../Preview'
 import { CodeSandboxButton } from '../CodeSandboxButton'
 import type { PlaygroundProps, PlaygroundState } from './props'
@@ -65,7 +64,8 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   static defaultProps = {
     render: true,
     background: 'checkerboard',
-    readOnly: false
+    readOnly: false,
+    language: 'jsx'
   }
 
   _fullScreenButton: IconButton | null = null
@@ -77,7 +77,8 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
       code: props.code,
       fullscreen: false,
       showCode: false,
-      rtl: false
+      rtl: false,
+      selectedTab: 0
     }
   }
 
@@ -110,6 +111,8 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     }
   }
 
+  mutliExample = () => typeof this.props.code !== 'string'
+
   handleCodeToggle = () => {
     this.setState({
       showCode: !this.state.showCode
@@ -129,8 +132,15 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   }
 
   handleChange = (newCode: string) => {
+    let code: string | [string, string] = newCode
+    if (this.mutliExample()) {
+      const codeArr = [...this.state.code] as [string, string]
+      codeArr[this.state.selectedTab] = newCode
+      code = codeArr
+    }
+
     this.setState({
-      code: newCode
+      code
     })
   }
 
@@ -141,9 +151,11 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   }
 
   renderEditor() {
-    const { styles } = this.props
-    const { code } = this.state
-
+    const { styles, title, readOnly } = this.props
+    const { selectedTab } = this.state
+    const code = this.mutliExample()
+      ? this.state.code[selectedTab]
+      : this.state.code
     return (
       <div>
         <div css={styles?.close}>
@@ -157,10 +169,11 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
           />
         </div>
         <SourceCodeEditor
-          label={`${this.props.title} Example Code`}
-          defaultValue={code}
+          label={`${title} Example Code`}
+          defaultValue={code as string}
+          key={selectedTab}
           onChange={this.handleChange}
-          readOnly={this.props.readOnly}
+          readOnly={readOnly}
           attachment="bottom"
           language="jsx"
           lineNumbers
@@ -188,16 +201,20 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     )
   }
 
-  render() {
-    const { styles } = this.props
-    const { code, fullscreen, rtl } = this.state
-    const PreviewComponent = ({ themeKey, themes }: AppContextType) => (
+  renderPreview = (code: any, themeKey: any, themes: any) => {
+    const { fullscreen, rtl } = this.state
+
+    return (
       <PreviewErrorBoundary>
         <Preview
           code={code}
           render={this.props.render}
           language={this.props.language}
-          background={this.props.background}
+          background={
+            typeof this.props.background === 'string'
+              ? this.props.background
+              : 'light'
+          }
           fullscreen={fullscreen}
           rtl={rtl}
           themeKey={themeKey}
@@ -205,7 +222,42 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
         />
       </PreviewErrorBoundary>
     )
+  }
 
+  renderTabPanel = (themeKey: any, themes: any) => {
+    const { selectedTab, code } = this.state
+
+    return (
+      <Tabs
+        margin="large auto"
+        padding="medium"
+        onRequestTabChange={(_event, { index }) => {
+          this.setState({
+            selectedTab: index
+          })
+        }}
+      >
+        <Tabs.Panel
+          id="tabA"
+          renderTitle="Class"
+          isSelected={selectedTab === 0}
+        >
+          {this.renderPreview(code[0], themeKey, themes)}
+        </Tabs.Panel>
+        <Tabs.Panel
+          id="tabB"
+          renderTitle="Function"
+          isSelected={selectedTab === 1}
+        >
+          {this.renderPreview(code[1], themeKey, themes)}
+        </Tabs.Panel>
+      </Tabs>
+    )
+  }
+
+  render() {
+    const { styles } = this.props
+    const { fullscreen } = this.state
     return (
       <AppContext.Consumer>
         {({ themeKey, themes }) => (
@@ -224,11 +276,13 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                     onClick={this.handleMinimize}
                     screenReaderLabel="Close"
                   />
-                  <PreviewComponent themeKey={themeKey} themes={themes} />
+                  {this.renderTabPanel(themeKey, themes)}
                 </Modal.Body>
               </Modal>
+            ) : this.mutliExample() ? (
+              this.renderTabPanel(themeKey, themes)
             ) : (
-              <PreviewComponent themeKey={themeKey} themes={themes} />
+              this.renderPreview(this.state.code, themeKey, themes)
             )}
 
             {this.state.showCode && this.renderEditor()}
@@ -280,7 +334,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                   {
                     <Flex.Item>
                       <CodeSandboxButton
-                        code={code}
+                        code={this.state.code[this.state.selectedTab]}
                         title={`${this.props.title} Example`}
                         language={this.props.language}
                         render={this.props.render}

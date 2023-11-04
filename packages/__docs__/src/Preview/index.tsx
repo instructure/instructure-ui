@@ -44,7 +44,8 @@ class Preview extends Component<PreviewProps, PreviewState> {
     frameless: false,
     inverse: false,
     rtl: false,
-    background: 'checkerboard'
+    background: 'checkerboard',
+    language: 'jsx'
   }
 
   // TODO investigate why any is needed here
@@ -68,47 +69,31 @@ class Preview extends Component<PreviewProps, PreviewState> {
   }
 
   componentDidMount() {
-    if (this.props.code) {
-      this.executeCode(this.props.code)
-    }
     this.props.makeStyles?.()
   }
 
-  componentDidUpdate(prevProps: PreviewProps) {
-    if (
-      this.props.code !== prevProps.code ||
-      this.props.rtl !== prevProps.rtl
-    ) {
-      this.executeCode(this.props.code)
-    }
-
+  componentDidUpdate() {
     this.props.makeStyles?.()
   }
 
   executeCode(code: string) {
-    const render = (el: React.ReactElement) => {
-      const { themeKey, themes } = this.props
-      const theme = themes?.[themeKey!]?.resource || canvas
-      const dir = (this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr) as
-        | 'rtl'
-        | 'ltr'
-      const elToRender: React.ReactElement = (
-        <InstUISettingsProvider theme={theme}>
-          <TextDirectionContext.Provider value={dir}>
-            <div dir={dir}>{el}</div>
-          </TextDirectionContext.Provider>
-        </InstUISettingsProvider>
-      )
+    const { themeKey, themes } = this.props
+    const theme = themes?.[themeKey!]?.resource || canvas
+    const dir = (this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr) as
+      | 'rtl'
+      | 'ltr'
 
-      this.setState({ elToRender })
-    }
+    const compiledCode = compileAndRenderExample(code)
 
-    compileAndRenderExample({
-      code,
-      render,
-      shouldCallRender: this.props.render,
-      onError: this.handleError
-    })
+    return (
+      <InstUISettingsProvider theme={theme}>
+        <TextDirectionContext.Provider value={dir}>
+          {typeof compiledCode === 'string' ? null : (
+            <div dir={dir}>{compiledCode}</div>
+          )}
+        </TextDirectionContext.Provider>
+      </InstUISettingsProvider>
+    )
   }
 
   handleError = (err: Error) => {
@@ -118,28 +103,33 @@ class Preview extends Component<PreviewProps, PreviewState> {
   }
 
   renderContent() {
-    const { elToRender } = this.state
+    const { code, themeKey, themes, styles } = this.props
+    const theme = themes?.[themeKey!]?.resource || canvas
+    const dir = (this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr) as
+      | 'rtl'
+      | 'ltr'
+    const compiledCode = compileAndRenderExample(code)
+    const hasError = typeof compiledCode === 'string'
 
-    // Add div around content so parent's `display: flex` doesn't mess up component styles
-    const content = <div>{elToRender}</div>
-
-    if (this.props.background === 'none') {
-      return <div>{content}</div>
-    } else {
-      return content
-    }
+    return (
+      <div css={hasError ? [styles?.previewError] : [styles?.preview]}>
+        {hasError ? (
+          <pre css={styles?.error}>{compiledCode}</pre>
+        ) : (
+          <InstUISettingsProvider theme={theme}>
+            <TextDirectionContext.Provider value={dir}>
+              {typeof compiledCode === 'string' ? null : (
+                <div dir={dir}>{compiledCode}</div>
+              )}
+            </TextDirectionContext.Provider>
+          </InstUISettingsProvider>
+        )}
+      </div>
+    )
   }
 
   render() {
-    const { styles } = this.props
-    const { error } = this.state
-
-    return (
-      <div css={error ? [styles?.previewError] : [styles?.preview]}>
-        {this.renderContent()}
-        {error && <pre css={styles?.error}>{error}</pre>}
-      </div>
-    )
+    return this.renderContent()
   }
 }
 

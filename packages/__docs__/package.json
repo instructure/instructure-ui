@@ -118,12 +118,14 @@
     "codesandbox": "^2.2.3",
     "lorem-ipsum": "^2.0.8",
     "marked": "^9.1.2",
+    "marked-react": "^2",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-github-corner": "^2.5.0",
     "semver": "^7.5.4",
+    "uuid": "^9",
     "webpack-merge": "^5.10.0"
   },
   "devDependencies": {
