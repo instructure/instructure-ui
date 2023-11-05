@@ -10,7 +10,7 @@ describes: List
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <List margin="0 0 medium">
@@ -37,7 +37,7 @@ The `delimiter` lets you set a separator between items of the list. The predefin
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <List delimiter="none" margin="large 0">
@@ -64,7 +64,7 @@ The `size` prop lets you adjust the font-size of the List. The predefined values
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <div>
   <List size="small" margin="large 0">
@@ -93,7 +93,7 @@ Use the `itemSpacing` prop to add space around your list’s items. To avoid unw
 
 ```js
 ---
-example: true
+type: example
 ---
   <List isUnstyled itemSpacing="small">
     <List.Item>{lorem.sentence()}</List.Item>
@@ -106,7 +106,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
   <List itemSpacing="medium">
     <List.Item>{lorem.sentence()}</List.Item>
@@ -119,7 +119,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
     <List isUnstyled itemSpacing="x-large">
     <List.Item>{lorem.sentence()}</List.Item>
@@ -132,7 +132,7 @@ List.Items also accept the same `margin` prop as List, in the event you need dif
 
 ```js
 ---
-example: true
+type: example
 ---
 <List isUnstyled itemSpacing="small">
   <List.Item margin="x-large 0"><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></List.Item>

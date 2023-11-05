@@ -6,8 +6,7 @@ The Pages component can be used to render Paginated content that does not fit in
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -93,8 +92,7 @@ render(<Example />)
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -182,8 +180,7 @@ render(<Example />)
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 const USERS = [
   {

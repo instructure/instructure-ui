@@ -5,6 +5,7 @@ describes: Calendar
 The `Calendar` component provides a visual interface for date data.
 
 ### Composing a Calendar in your Application
+
 By design, the `Calendar` component does not dictate which date libraries or
 formats you use in your application. The following example demonstrates how a
 basic `Calendar` might be created using utilities from
@@ -12,8 +13,7 @@ basic `Calendar` might be created using utilities from
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 
 class Example extends React.Component {
@@ -128,10 +128,12 @@ render(<Example />)
 ```
 
 #### Some dates to keep track of
-* `todayDate` - the date that represents today
-* `renderedDate` - the date that the user is viewing as they navigate the `Calendar`
+
+- `todayDate` - the date that represents today
+- `renderedDate` - the date that the user is viewing as they navigate the `Calendar`
 
 #### Generating a month
+
 We generate a month based on the `renderedDate` value. The `Calendar` always
 displays 6 weeks or 42 days (42 is defined as a constant `Calendar.DAY_COUNT`),
 so we pad our month values with days from the previous and next month if
@@ -139,6 +141,7 @@ necessary. The complete implementation can be seen in the `generateMonth` functi
 in our example.
 
 #### Rendering days
+
 Using the month data, we can now map it to children of type `Calendar.Day`.
 As we render each day, if it is outside the current month we can set the
 `isOutsideMonth` prop. We can also set the `isToday` prop if it is the current
@@ -148,6 +151,7 @@ have important context as the `Calendar` is navigated. It should include the day
 month, and the year (Ex. instead of `1` we would provide `1 August 2019`).
 
 #### Rendering weekday labels
+
 `Calendar` requires you to provide an array of 7 labels that correspond to each
 day of the week via the `renderWeekdayLabels` prop. The visible portion of the
 label should be abbreviated (no longer than three characters). Note that screen
@@ -157,6 +161,7 @@ containing the full day name for assistive technologies and the children contain
 the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
 
 #### Rendering next and previous month buttons
+
 The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied using the
 [IconButton](#IconButton) component with the `size` prop set to
 `small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to [IconArrowOpenStart](#iconography) or

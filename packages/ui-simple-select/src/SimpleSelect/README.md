@@ -10,8 +10,7 @@ For the most basic implementations, `SimpleSelect` can be uncontrolled. If desir
 
 ```javascript
 ---
-example: true
-render: true
+type: example
 ---
 <SimpleSelect renderLabel="Uncontrolled Select">
   <SimpleSelect.Option id="foo" value="foo"
@@ -36,8 +35,7 @@ To use `SimpleSelect` controlled, simply provide the `value` prop the string tha
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -100,8 +98,7 @@ Like a HTML `<select>` element, `SimpleSelect` supports option groups. `SimpleSe
 
 ```javascript
 ---
-example: true
-render: true
+type: example
 ---
 <SimpleSelect renderLabel="Select with Groups">
   <SimpleSelect.Group renderLabel="Group one" key="grp1">
@@ -129,8 +126,7 @@ To display icons (or other elements) before or after an option, pass it via the 
 
 ```javascript
 ---
-example: true
-render: true
+type: example
 ---
 <SimpleSelect renderLabel="Option Icons">
   <SimpleSelect.Option

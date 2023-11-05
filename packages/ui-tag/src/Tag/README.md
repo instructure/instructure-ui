@@ -6,7 +6,7 @@ Use `<Tag />` to represent a category or group in a form.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Tag text="Static" margin="0 xx-small 0 0" />
 ```
@@ -19,7 +19,7 @@ prop).
 
 ```js
 ---
-example: true
+type: example
 ---
 <Tag
   text={
@@ -41,7 +41,7 @@ A `disabled` Tag.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Tag
   text="Dismissible Disabled"
@@ -60,7 +60,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Tag text="Small" size="small" margin="0 xx-small 0 0" />
@@ -73,7 +73,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <Tag
   text="Long string of text designed to trigger overflow"
@@ -86,7 +86,7 @@ This variant is designed to look similar to the surrounding text.
 
 ```js
 ---
-example: true
+type: example
 ---
 <p>
   This is an
@@ -107,7 +107,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

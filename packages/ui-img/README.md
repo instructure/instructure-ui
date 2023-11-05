@@ -26,7 +26,7 @@ npm install @instructure/ui-img
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Img } from '@instructure/ui-img'

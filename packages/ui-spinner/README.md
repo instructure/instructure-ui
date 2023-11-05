@@ -26,7 +26,7 @@ npm install @instructure/ui-spinner
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Spinner } from '@instructure/ui-spinner'

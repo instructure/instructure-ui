@@ -4,12 +4,11 @@ describes: Tray
 
 The Tray is an actionable container that is triggered by click and does not need to be connected to the element that triggered it. The Tray is on the same hierarchy as the Popover but contains more content. The Tray slides out from the top/bottom/start/end of the viewport.
 
->Note that the `size` property only applies when the Tray is positioned at `start` or `end` and defines the width of the Tray.
+> Note that the `size` property only applies when the Tray is positioned at `start` or `end` and defines the width of the Tray.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 const FPO = lorem.paragraph()
 class Example extends React.Component {
@@ -77,7 +76,7 @@ render(<Example />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -101,7 +100,7 @@ guidelines: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

@@ -12,7 +12,7 @@ This document will demonstrate how to achieve Server Side Rendering (SSR) with [
 
 ```javascript
 ---
-embed: true
+type: embed
 ---
 <ToggleBlockquote
   summary="Warning!"
@@ -47,8 +47,7 @@ npm install @instructure/emotion @instructure/ui-react-utils
 
 ```js
 ---
-render: false
-example: false
+type: code
 ---
 //pages/_app.js
 import React from 'react';

@@ -10,7 +10,7 @@ Adjust the size of the checkbox and label text via the `size` prop. The default 
 
 ```js
 ---
-example: true
+type: example
 ---
 <Checkbox label={lorem.sentence()} value="medium" defaultChecked />
 ```
@@ -19,7 +19,7 @@ The default Checkbox in its disabled state:
 
 ```js
 ---
-example: true
+type: example
 ---
 <CheckboxGroup
   defaultValue={['medium']}
@@ -36,13 +36,12 @@ situations where "child" Checkboxes are neither all checked nor all
 unchecked. Note the use of `aria-labelledby` to make the relationship
 between the parent and child Checkboxes clear to screenreader users.
 
-*Note: the `toggle` variant does not support the `indeterminate`
-property.*
+_Note: the `toggle` variant does not support the `indeterminate`
+property._
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -127,11 +126,11 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-Setting the `variant` prop to `toggle` turns the checkbox into a toggle switch. For __toggle only__ the size prop affects the size of the label and not the actual size of the switch.
+Setting the `variant` prop to `toggle` turns the checkbox into a toggle switch. For **toggle only** the size prop affects the size of the label and not the actual size of the switch.
 
 ```js
 ---
-example: true
+type: example
 ---
 <FormFieldGroup description={<ScreenReaderContent>Checkbox examples</ScreenReaderContent>}>
   <Checkbox label="Small size" value="small" variant="toggle" size="small" defaultChecked />
@@ -140,15 +139,15 @@ example: true
 </FormFieldGroup>
 ```
 
-To change the label placement for the toggle variety, use the labelPlacement prop.  The default
+To change the label placement for the toggle variety, use the labelPlacement prop. The default
 placement is 'end'.
 
-*Note: the `simple` variant does not support the `labelPlacement`
-property.*
+_Note: the `simple` variant does not support the `labelPlacement`
+property._
 
 ```js
 ---
-example: true
+type: example
 ---
 <FormFieldGroup description={<ScreenReaderContent>Toggle label examples</ScreenReaderContent>}>
   <Checkbox label="Top" variant="toggle" labelPlacement="top" defaultChecked />
@@ -162,7 +161,7 @@ the text in the [ScreenReaderContent](#ScreenReaderContent) component.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Checkbox
   label={<ScreenReaderContent>Screenreader-accessible label</ScreenReaderContent>}
@@ -170,11 +169,12 @@ example: true
   variant="toggle"
 />
 ```
+
 ### Guidelines
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

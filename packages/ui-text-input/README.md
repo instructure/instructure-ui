@@ -26,7 +26,7 @@ npm install @instructure/ui-text-input
 
 ```javascript
 ---
-example: false
+type: code
 ---
 class ControlledTextInputExample extends React.Component {
   constructor (props) {

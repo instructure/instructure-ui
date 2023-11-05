@@ -4,15 +4,13 @@ category: Patterns
 id: DestroyAction
 ---
 
-
 ## Destroy Action
-Used to let the user know that the action they are about to take is something that cannot be undone.
 
+Used to let the user know that the action they are about to take is something that cannot be undone.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 const fpo = lorem.paragraphs(1)
 class Example extends React.Component {
@@ -81,7 +79,7 @@ render(<Example />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

@@ -6,7 +6,7 @@ CondensedButton is a button component that renders without padding. It is meant 
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block" background="primary" padding="small">
   <CondensedButton>Click Me</CondensedButton>
@@ -17,7 +17,7 @@ In the following example, CondensedButton is used so that the button content can
 
 ```js
 ---
-example: true
+type: example
 ---
 <Table caption='Tallest Roller Coasters'>
   <Table.Head>

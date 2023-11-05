@@ -26,7 +26,7 @@ npm install @instructure/ui-heading
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Heading } from '@instructure/ui-heading'

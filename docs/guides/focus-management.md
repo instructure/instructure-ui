@@ -36,8 +36,7 @@ Meeting all of these requirements is difficult. To make things more complex, a d
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 
 const Example = () => {
@@ -88,8 +87,7 @@ At first glance the complex inner workings of `Dialog` might seem overkill. To h
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 
 const Example = () => {

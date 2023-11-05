@@ -11,8 +11,7 @@ Adjust the size of the radio button and label text via the `size` prop. The defa
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 function Example () {
   const inputs = [
@@ -37,8 +36,7 @@ and up (see [Grid](#Grid)).
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 function Example () {
   const inputs = [
@@ -64,8 +62,7 @@ and up (see [Grid](#Grid)).
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 function Example () {
   const inputs = [
@@ -98,7 +95,7 @@ Set the `variant` prop to `toggle` to have the RadioInputGroup display as a togg
 
 ```js
 ---
-example: true
+type: example
 ---
 <FormFieldGroup description={<ScreenReaderContent>Toggle examples</ScreenReaderContent>}>
  <RadioInputGroup
@@ -146,7 +143,7 @@ Setting the `disabled` prop to `true` will disable the entire RadioInputGroup.
 
 ```js
 ---
-example: true
+type: example
 ---
 <RadioInputGroup
   name="fruits1"
@@ -162,7 +159,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <RadioInputGroup name="feature1" defaultValue="off" description="Super-awesome feature" variant="toggle" disabled>
   <RadioInput label="Off" value="off" context="off" />
@@ -175,7 +172,7 @@ Or disable an individual RadioInput component via its `disabled` prop.
 
 ```js
 ---
-example: true
+type: example
 ---
 <RadioInputGroup
   name="fruits2"
@@ -191,7 +188,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <RadioInputGroup name="feature2" defaultValue="none" description="Super-awesome feature" variant="toggle">
   <RadioInput label="None" value="none" context="off" />
@@ -205,7 +202,7 @@ If you would like to make the description visible only to screen readers you can
 
 ```js
 ---
-example: true
+type: example
 ---
 <RadioInputGroup
   name="fruit3"
@@ -220,11 +217,12 @@ example: true
   <RadioInput label="Banana" value="banana" />
 </RadioInputGroup>
 ```
+
 ### Guidelines
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

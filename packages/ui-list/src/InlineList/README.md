@@ -6,7 +6,7 @@ An `InlineList` component displays the list horizontally.
 
 ```javascript
 ---
-example: true
+type: example
 ---
   <InlineList>
     <InlineList.Item>{lorem.sentence()}</InlineList.Item>
@@ -23,7 +23,7 @@ The `delimiter` prop lets you display a separator between Items in the List. The
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <div>
   <InlineList delimiter="none" margin="large 0">
@@ -59,7 +59,7 @@ The `size` prop lets you adjust the font-size of the List. The predefined values
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <div>
   <InlineList size="small" margin="large 0">
@@ -85,12 +85,13 @@ example: true
 
 ### Adding predefined space between each InlineList.Item
 
-Use the `itemSpacing` prop to add space around your list’s items. To avoid unwanted excess space at the start/end of a List, the first and last InlineList.Item will not receive margin via the `itemSpacing` prop. 
-> NOTE: itemSpacing has no affect on an InlineList.Item that has the  `delimiter` prop set to anything other than **none**.
+Use the `itemSpacing` prop to add space around your list’s items. To avoid unwanted excess space at the start/end of a List, the first and last InlineList.Item will not receive margin via the `itemSpacing` prop.
+
+> NOTE: itemSpacing has no affect on an InlineList.Item that has the `delimiter` prop set to anything other than **none**.
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <div>
   <InlineList itemSpacing="xxx-small">

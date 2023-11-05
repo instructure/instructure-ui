@@ -8,7 +8,7 @@ The `variant` prop of `Option.Item` provides several visual treatments. Use the 
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block" width="300px">
   <Options>
@@ -37,7 +37,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block" width="300px">
   <Options role="menu" as="ul">
@@ -90,8 +90,7 @@ example: true
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -189,8 +188,7 @@ By default, the icons in the `Option.Item` have the same color as the text. If y
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -322,8 +320,7 @@ For longer, multi-line options the problem of the vertical alignment comes up. T
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {
@@ -390,8 +387,7 @@ Providing a `href` prop will render the option as `<a>` link element.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {

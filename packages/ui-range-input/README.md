@@ -26,7 +26,7 @@ npm install @instructure/ui-range-input
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { RangeInput } from '@instructure/ui-range-input'

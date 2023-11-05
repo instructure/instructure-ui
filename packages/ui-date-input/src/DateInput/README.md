@@ -5,6 +5,7 @@ describes: DateInput
 The `DateInput` component provides a visual interface for inputting date data.
 
 ### Composing a DateInput in your Application
+
 `DateInput` uses `Calendar` internally. See [Calendar](#Calendar) for more detailed
 documentation and guided examples. `DateInput` shares many of the same `Calendar`
 props and it is created the same way with some additional attributes and callback
@@ -13,8 +14,7 @@ examples using [Moment.js](https://momentjs.com/docs/#/parsing/).
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 
 class Example extends React.Component {
@@ -256,37 +256,45 @@ render(<Example />)
 ```
 
 #### Some dates to keep track of
-* `todayDate` - the date that represents today
-* `selectedDate` - the user's selected date
-* `renderedDate` - the date that the user is viewing as they navigate the `Calendar`
-* `disabledDates` - any dates that are disabled
+
+- `todayDate` - the date that represents today
+- `selectedDate` - the user's selected date
+- `renderedDate` - the date that the user is viewing as they navigate the `Calendar`
+- `disabledDates` - any dates that are disabled
 
 #### Rendering `DateInput.Day` children
+
 `DateInput` accepts children of type `DateInput.Day`. Both `DateInput.Day` and
 `Calendar.Day` are exporting the same `Day` component. The documentation for
 `Day` can be found in [Calendar](#Calendar).
 
 #### Handling onChange
+
 When the `DateInput` fires an `onChange` event:
-* The value should be updated and any messages should be cleared
-* Verify if the value can be parsed as a date
-* If it can be parsed, update the `selectedDate` and `renderedDate` with that date
-* If it cannot be parsed, the `selectedDate` is set to null and the `renderedDate`
-stays the same
+
+- The value should be updated and any messages should be cleared
+- Verify if the value can be parsed as a date
+- If it can be parsed, update the `selectedDate` and `renderedDate` with that date
+- If it cannot be parsed, the `selectedDate` is set to null and the `renderedDate`
+  stays the same
 
 #### Handling onRequestHideCalendar
+
 When the `DateInput` fires `onRequestHideCalendar`:
-* The calendar should be hidden
-* The value should be updated with a formatted version of the `selectedDate` if
-it exists. See "Formatting user input" below
+
+- The calendar should be hidden
+- The value should be updated with a formatted version of the `selectedDate` if
+  it exists. See "Formatting user input" below
 
 #### Formatting user input
+
 Date formats can vary widely (ex. '8-9-19' vs '8/9/19'). When the `Calendar` is
 hidden, the input value should be converted to a consistent, standardized format.
 The formatted result of the raw input '8/9/19'
 could be "August 9, 2019".
 
 #### Handling onRequestValidateDate
+
 When the `DateInput` fires `onRequestValidateDate`, the provided user input
 should be validated. If the value cannot be parsed as a valid date, or if the
 `selectedDate` is disabled, the user should be notified via the `messages` prop.

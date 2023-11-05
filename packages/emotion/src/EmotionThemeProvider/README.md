@@ -4,7 +4,7 @@ describes: EmotionThemeProvider
 
 ```js
 ---
-embed: true
+type: embed
 ---
 <ToggleBlockquote
   summary="DEPRECATED"
@@ -61,7 +61,7 @@ ReactDOM.render(
 
 ```js
 ---
-example: true
+type: example
 ---
 <EmotionThemeProvider theme={canvas}>
   <div>
@@ -84,7 +84,7 @@ In case you are using multiple themes in your app, you can target a specific the
 
 ```js
 ---
-  example: true
+ type: example
 ---
 <EmotionThemeProvider theme={canvas}>
   <div>
@@ -133,7 +133,7 @@ The `componentOverrides` can also be nested inside `themeOverrides`.
 
 ```js
 ---
-  example: true
+  type: example
 ---
 <EmotionThemeProvider theme={canvas}>
   <div>

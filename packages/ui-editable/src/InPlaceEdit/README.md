@@ -33,8 +33,7 @@ the case when the text is empty. Use the checkbox to switch between inline and b
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
 
@@ -127,8 +126,7 @@ A readOnly `InPlaceEdit`
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
 
@@ -209,8 +207,7 @@ To edit end-justified text, wrap `<InPlaceEdit />` in a
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
 
@@ -291,8 +288,7 @@ when the user has finished editing and the value has changed.
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
 

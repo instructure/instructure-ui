@@ -26,7 +26,7 @@ npm install @instructure/ui-link
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Link } from '@instructure/ui-link'

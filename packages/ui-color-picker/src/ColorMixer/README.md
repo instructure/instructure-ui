@@ -8,8 +8,7 @@ A component for selecting a color. It lets pick from a palette manually or type 
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {
@@ -69,8 +68,7 @@ render(<Example />);
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   render() {

@@ -6,7 +6,7 @@ A Mask component covers its closest positioned parent (either absolute or relati
 
 ```js
 ---
-example: true
+type: example
 ---
 <View
   padding="large"
@@ -24,8 +24,7 @@ The Mask component can be configured to cover the full screen if it is rendered 
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 
  class Example extends React.Component {
@@ -65,4 +64,4 @@ render: false
  }
 
  render(<Example />)
- ```
+```

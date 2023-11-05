@@ -9,7 +9,7 @@ you can use the `statusLabel` prop to add a label to the left of the main text.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Pill
@@ -61,7 +61,7 @@ be handled via ellipses.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Pill>
   Supercalifragilisticexpialidocious bear
@@ -72,7 +72,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

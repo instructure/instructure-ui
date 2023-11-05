@@ -12,7 +12,7 @@ space above or below the alert.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Alert
@@ -53,7 +53,7 @@ The `timeout` prop can be used to automatically dismiss an alert after a time.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Alert
   variant="info"
@@ -78,8 +78,7 @@ For more information about live regions, see
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -151,8 +150,7 @@ Alerts can be used to emit screenreader only messages too
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -201,7 +199,7 @@ When Alerts are used inline, the shadow can be removed with the `hasShadow` prop
 
 ```js
 ---
-example: true
+type: example
 ---
 <View as="div" background="primary" padding="large">
   <View
@@ -239,7 +237,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -257,7 +255,7 @@ guidelines: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

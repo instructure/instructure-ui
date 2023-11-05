@@ -6,7 +6,7 @@ Heading is a component for creating typographic headings.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Heading>Default Heading</Heading>
 ```
@@ -20,7 +20,7 @@ Generate content headings, from h1 to h5. Use the `margin` prop to add margin.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Heading level="h1" as="h2" margin="0 0 x-small">Heading level One</Heading>
@@ -38,7 +38,7 @@ The default is for the color to inherit, but it can be set to `primary` or `seco
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Heading>I inherit my color via the CSS cascade (default)</Heading>
@@ -49,7 +49,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <View background="primary-inverse" as="div">
   <Heading color="primary-inverse">I am primary-inverse color</Heading>
@@ -64,7 +64,7 @@ add either `top` or `bottom` borders to your heading.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Heading margin="0 0 medium" border="bottom">I have a bottom border</Heading>
@@ -79,7 +79,7 @@ Heading to a single line (or certain number of lines).
 
 ```js
 ---
-example: true
+type: example
 ---
 <Heading level="h2">
   <TruncateText>{lorem.paragraph()}</TruncateText>
@@ -90,7 +90,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

@@ -30,7 +30,7 @@ Just like [**ui-themeable**](https://legacy.instructure.design/#ui-themeable), *
 
 ```javascript
 ---
-embed: true
+type: embed
 ---
 <ToggleBlockquote
   summary="Migrating from ui-themeable"
@@ -196,7 +196,7 @@ To learn more about the available options and defaults simply run:
 
 ```javascript
 ---
-embed: true
+type: embed
 ---
 <ToggleBlockquote
   summary="The theme.use() API is available again from version 8.24.0!"

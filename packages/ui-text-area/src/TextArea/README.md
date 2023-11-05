@@ -8,7 +8,7 @@ component's height.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <TextArea
@@ -27,7 +27,7 @@ To allow the user to manually resize TextArea (in supported browsers), use the
 
 ```js
 ---
-example: true
+type: example
 ---
 <TextArea label="Description" resize="vertical" />
 ```
@@ -36,7 +36,7 @@ A `TextArea` with errors:
 
 ```js
 ---
-example: true
+type: example
 ---
 <TextArea messages={[{ text: 'Invalid description', type: 'error' }]} label="Description" />
 ```
@@ -45,7 +45,7 @@ A disabled `TextArea`:
 
 ```js
 ---
-example: true
+type: example
 ---
 <TextArea label="Description" disabled />
 ```
@@ -54,7 +54,7 @@ A `TextArea` with a screenreader only label:
 
 ```js
 ---
-example: true
+type: example
 ---
 <TextArea
   label={<ScreenReaderContent>Description</ScreenReaderContent>}
@@ -66,7 +66,7 @@ An inline `TextArea` with a fixed width, initial height and maxHeight.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div style={{ display: 'flex', alignItems: 'center' }}>
   <TextArea
@@ -83,8 +83,7 @@ A 'controlled' TextArea:
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 
 class Example extends React.Component {
@@ -110,7 +109,7 @@ render(<Example/>)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -127,7 +126,7 @@ guidelines: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Alert

@@ -13,7 +13,7 @@ We recommend upgrading your application for each major version gradually, e.g. i
 
 ```javascript
 ---
-embed: true
+type: embed
 ---
 <ToggleBlockquote
   summary="Why we switched from Themeable to Emotion"

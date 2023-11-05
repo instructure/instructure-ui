@@ -7,8 +7,7 @@ in and out content rendered in a [Portal](#Portal)
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -55,7 +54,7 @@ render(<Example />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

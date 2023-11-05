@@ -14,8 +14,7 @@ When the list is truncated, it is recommended to pass an element that lists the 
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = { visibleItemsCount: undefined }
@@ -83,8 +82,7 @@ The `itemSpacing` prop adds spacing between the items. The width of the list ite
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = {

@@ -10,7 +10,7 @@ A component for truncating text content.
 
 ```javascript
 ---
-example: true
+type: example
 ---
 
 <div>
@@ -64,7 +64,7 @@ You can set the number of lines to display before truncation begins with the `ma
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <div>
   <View
@@ -132,7 +132,7 @@ You can set the position of the truncation using the `position` prop.
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <div>
   <View
@@ -171,8 +171,7 @@ It's best practice to make the complete text of a truncated element available vi
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -223,7 +222,7 @@ render(<Example message="A tooltip will display only when this text is truncated
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

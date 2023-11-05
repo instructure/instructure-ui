@@ -16,7 +16,7 @@ Flex defaults to a `direction` of `row`, creating a horizontal layout. Change `d
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Flex withVisualDebug margin="none none large">
@@ -52,7 +52,7 @@ Flex items will have no gap by default. You can set the gap between Flex.Items b
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Flex withVisualDebug margin="none none large" gap="small">
@@ -86,7 +86,7 @@ You can also set the gap between rows and columns by using the `gap` property. M
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Flex withVisualDebug margin="none none large" gap="small" wrap="wrap">
@@ -123,7 +123,7 @@ their container.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small">
@@ -146,7 +146,7 @@ container.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small" shouldShrink>
@@ -168,7 +168,7 @@ The `shouldGrow` property forces the Flex.Item to expand to fill in any availabl
 
 ```js
 ---
-example: true
+type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small" shouldShrink shouldGrow>
@@ -187,7 +187,7 @@ shrink to less than their `size`.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Flex withVisualDebug>
   <Flex.Item padding="x-small" size="200px">
@@ -211,7 +211,7 @@ property to change this behavior.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Flex alignItems="end" withVisualDebug>
   <Flex.Item>
@@ -235,7 +235,7 @@ Use the `justifyItems` property to change the justification of Flex.Items.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Flex justifyItems="center" margin="0 0 large" withVisualDebug>
@@ -285,7 +285,7 @@ to `auto` to account for content overflow with a vertical scrollbar.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Flex
   withVisualDebug
@@ -306,7 +306,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <Flex>
   <Flex.Item shouldGrow shouldShrink padding="none medium none none">
@@ -327,7 +327,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <Flex height="32rem" justifyItems="center" padding="large" withVisualDebug>
   <Flex.Item shouldShrink shouldGrow textAlign="center">
@@ -361,7 +361,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 
 <Flex height="400px" width="300px" as="div" direction="column" withVisualDebug>

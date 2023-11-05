@@ -27,7 +27,7 @@ npm install @instructure/ui-metric
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Metric } from '@instructure/ui-metric'
@@ -41,7 +41,7 @@ const MyMetric = () => {
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { MetricGroup } from '@instructure/ui-metric'

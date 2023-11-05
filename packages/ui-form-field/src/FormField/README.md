@@ -7,7 +7,7 @@ components. In most cases it shouldn't be used directly.
 
 ```js
 ---
-example: true
+type: example
 ---
 <FormField id="foo" label="Opacity" width="200px">
   <input style={{display: 'block', width: '100%'}}/>

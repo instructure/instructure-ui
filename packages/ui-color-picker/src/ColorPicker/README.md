@@ -13,8 +13,7 @@ The component can be either `uncontrolled` or `controlled`. If the `onChange` an
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {
@@ -206,8 +205,7 @@ render(<Example />)
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {
@@ -385,7 +383,7 @@ render(<Example />)
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <ColorPicker
