@@ -8,7 +8,7 @@ A top-level `SideNavBar` component.
 
 ```js
 ---
-example: true
+type: example
 ---
   <div style={{height: '35rem'}}>
     <SideNavBar
@@ -60,7 +60,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

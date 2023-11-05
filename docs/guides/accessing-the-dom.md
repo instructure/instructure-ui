@@ -28,8 +28,7 @@ Good Usage Example with `ref`:
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 
 class GoodComponent extends React.Component {
@@ -63,8 +62,7 @@ Bad Usage Example without `ref`, that will result in InstUI calling `ReactDOM.fi
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class BadComponent extends React.Component {
   constructor(props) {

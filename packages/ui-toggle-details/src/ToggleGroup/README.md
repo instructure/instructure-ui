@@ -6,9 +6,10 @@ Performs the same function as [`ToggleDetails`](#ToggleDetails), but with the su
 toggle button, and built in padding and borders around the summary and main content area.
 
 ### Basic example
+
 ```javascript
 ---
-example: true
+type: example
 ---
 <ToggleGroup
   toggleLabel="This is the toggle button label for screenreaders"
@@ -22,9 +23,10 @@ example: true
 ### More detailed examples
 
 #### `defaultExpanded` to make the component `expanded` when it renders
+
 ```javascript
 ---
-example: true
+type: example
 ---
 <ToggleGroup
   toggleLabel="This is the toggle button label for screenreaders"
@@ -36,9 +38,10 @@ example: true
 ```
 
 #### Passing in your own `icon` and `iconExpanded`
+
 ```javascript
 ---
-example: true
+type: example
 ---
 <ToggleGroup
   toggleLabel="This is the toggle button label for screenreaders"
@@ -49,10 +52,12 @@ example: true
   <View display="block" padding="small">Here is the expanded content</View>
 </ToggleGroup>
 ```
+
 #### Disable default transition of details
+
 ```javascript
 ---
-example: true
+type: example
 ---
 <ToggleGroup
   transition={false}
@@ -64,9 +69,10 @@ example: true
 ```
 
 #### Disable default border if you want to nest ToggleGroups
+
 ```javascript
 ---
-example: true
+type: example
 ---
 <ToggleGroup
   defaultExpanded

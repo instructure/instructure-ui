@@ -7,8 +7,7 @@ between one of two states (locked/unlocked, published/unpublished, etc.).
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -46,8 +45,7 @@ render(<Example />)
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class InverseExample extends React.Component {
   state = {
@@ -85,7 +83,7 @@ render(<InverseExample />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

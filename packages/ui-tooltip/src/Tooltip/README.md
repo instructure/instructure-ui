@@ -14,7 +14,7 @@ Tooltips are small text-only contextual overlays that are triggered by hover/foc
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <p>
@@ -61,8 +61,7 @@ example: true
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -112,7 +111,7 @@ Popover and Tooltip attach mouse and focus event listeners to their render trigg
 
 ```js
 ---
-  example: true
+  type: example
 ---
 class MyComponent extends React.Component {
   constructor(props) {
@@ -133,7 +132,7 @@ class MyComponent extends React.Component {
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

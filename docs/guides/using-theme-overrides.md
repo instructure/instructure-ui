@@ -5,6 +5,7 @@ order: 4
 ---
 
 ## Using theme overrides
+
 This document gives an overview on how you can customize Instructure UI components by tweaking their theme variables. While this gives you a level of flexibility on the look and feel of the components you should be aware of 2 things:
 
 - The default theme variables are tested to have high enough contrast ratios for WCAG conformance. If you are making changes, please make sure that your app stays WCAG conformant.
@@ -12,7 +13,7 @@ This document gives an overview on how you can customize Instructure UI componen
 
 ```js
 ---
-embed: true
+type: embed
 ---
 <ToggleBlockquote
   summary="Note"
@@ -90,8 +91,7 @@ In order to globally register and override themes, simply import the theme you w
 
 ```js
 ---
-example: false
-render: false
+type: code
 ---
 import ReactDOM from "react-dom"
 import { canvas } from "@instructure/ui-themes"
@@ -125,7 +125,7 @@ By nesting the `InstUISettingsProvider` you can apply different themes to some s
 
 ```js
 ---
-example: true
+type: example
 ---
 <InstUISettingsProvider theme={canvas}>
   <div>
@@ -148,7 +148,7 @@ When providing a partial theme object, you can override any theme variable insid
 
 ```js
 ---
-example: true
+type: example
 ---
 <InstUISettingsProvider theme={canvas}>
   <div>
@@ -175,8 +175,7 @@ In case you are using multiple themes in your app, you can target a specific the
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {
@@ -261,7 +260,7 @@ The `componentOverrides` can also be nested inside `themeOverrides`.
 
 ```js
 ---
-example: true
+type: example
 ---
 <InstUISettingsProvider theme={canvas}>
   <div>
@@ -355,7 +354,7 @@ The available theme variables are always displayed at the bottom of the componen
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <div>
@@ -384,7 +383,7 @@ The override function's first parameter is the component's own theme object, the
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <div>
@@ -414,7 +413,7 @@ You can access and use any global theme variable via the second parameter (e.g. 
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <div>
@@ -469,7 +468,7 @@ If you have multiple `ReactDOM.render` calls and you would like to use the same 
 
 ```js
 ---
-example: false
+type: code
 ---
 //ui/themeOverride.js
 import { canvas } from "@instructure/ui-themes"
@@ -486,7 +485,7 @@ export { themeWithOverrides }
 
 ```jsx
 ---
-example: false
+type: code
 ---
 //ui/app1/index.js
 ReactDOM.render(
@@ -498,7 +497,7 @@ ReactDOM.render(
 
 ```jsx
 ---
-example: false
+type: code
 ---
 //ui/app2/index.js
 ReactDOM.render(
@@ -514,7 +513,7 @@ This approach quickly becomes too cumbersome if you have more than a couple of `
 
 ```jsx
 ---
-example: false
+type: code
 ---
 //ui/init.js - make sure ui/init.js runs before any other app code!
 import { canvas } from "@instructure/ui-themes"

@@ -14,8 +14,7 @@ Results are updated in real time as the user keys in the search term.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class AutoActivatedSearchExample extends React.Component {
   constructor (props) {
@@ -202,7 +201,7 @@ render(
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -228,8 +227,7 @@ mouse.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class ActivatedSearchExample extends React.Component {
   constructor (props) {
@@ -402,7 +400,7 @@ render(
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -422,8 +420,7 @@ search icon may or may not be used on the left, depending on the context.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 
 class AutocompleteExample extends React.Component {
@@ -672,7 +669,7 @@ render(
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -693,8 +690,7 @@ rendered.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class SearchInputExample extends React.Component {
   constructor (props) {
@@ -807,7 +803,7 @@ render(<SearchInputExample />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

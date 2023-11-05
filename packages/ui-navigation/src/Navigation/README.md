@@ -6,7 +6,7 @@ A top-level `Navigation` component.
 
 ```js
 ---
-embed: true
+type: embed
 ---
 <ToggleBlockquote
   summary="DEPRECATED"
@@ -19,7 +19,7 @@ embed: true
 
 ```js
 ---
-example: true
+type: example
 ---
   <div style={{height: '35rem'}}>
     <Navigation
@@ -71,7 +71,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

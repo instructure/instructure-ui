@@ -8,7 +8,7 @@ A component for styling textual content
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Text size="x-small">I&#39;m extra small</Text><br/>
@@ -24,7 +24,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Text weight="light">I&#39;m light text</Text><br/>
@@ -37,7 +37,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Text fontStyle="italic">I&#39;m italic text</Text><br/>
@@ -49,7 +49,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Text lineHeight="fit">
@@ -71,7 +71,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Text transform="capitalize">I&#39;m capitalized text</Text><br/>
@@ -84,7 +84,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Text letterSpacing="normal">I&#39;m normal text</Text><br/>
@@ -100,7 +100,7 @@ exceed the bounds of their containers.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View as="div" maxWidth="300px" margin="none none small" debug>
@@ -120,7 +120,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Text color="primary">I&#39;m primary text</Text><br/>
@@ -134,7 +134,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <View background="primary-inverse" as="div">
     <Text color="primary-inverse">I&#39;m primary text</Text><br/>
@@ -146,7 +146,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <Text>
   <b>bold </b>

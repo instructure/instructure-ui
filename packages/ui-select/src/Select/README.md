@@ -16,8 +16,7 @@ describes: Select
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 
 class SingleSelectExample extends React.Component {
@@ -159,8 +158,7 @@ It's best practice to always provide autocomplete functionality to help users ma
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 
 class AutocompleteExample extends React.Component {
@@ -391,8 +389,7 @@ To mark an option as "highlighted", use the option's `isHighlighted` prop. Note 
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 
 class MultipleSelectExample extends React.Component {
@@ -649,8 +646,7 @@ In addition to `<Select.Option />` Select also accepts `<Select.Group />` as chi
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 
 class GroupSelectExample extends React.Component {
@@ -841,8 +837,7 @@ Due to a WebKit bug if you are using `Select.Group` with autocomplete, the scree
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 
 class GroupSelectAutocompleteExample extends React.Component {
@@ -1025,8 +1020,7 @@ If no results match the user's search, it's recommended to leave `isShowingOptio
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 
 class AsyncExample extends React.Component {
@@ -1249,8 +1243,7 @@ To display icons (or other elements) before or after an option, pass it via the 
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class SingleSelectExample extends React.Component {
   state = {

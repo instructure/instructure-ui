@@ -6,8 +6,7 @@ describes: Tabs
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -56,8 +55,7 @@ render(<Example />)
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -105,8 +103,7 @@ space to display them all inline. For a more compact tab navigation, set `tabOve
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -166,8 +163,7 @@ Finally, switch the text alignment of the panel content with `textAlign`.
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -262,8 +258,7 @@ Marking one of the `<Tabs.Panel>` as `active` will render that panel's content i
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Outlet extends React.Component {
     state = {
@@ -331,7 +326,7 @@ render(<Example />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

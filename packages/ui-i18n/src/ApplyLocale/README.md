@@ -7,8 +7,7 @@ use it, such as a [TimeSelect](#TimeSelect).
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 
 class Example extends React.Component {

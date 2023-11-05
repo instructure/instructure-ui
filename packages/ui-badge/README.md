@@ -26,7 +26,7 @@ npm install @instructure/ui-badge
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Badge } from '@instructure/ui-badge'

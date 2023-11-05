@@ -68,7 +68,7 @@ exists. Otherwise, it queries for and uses the documentElement `dir` attribute a
 
 ```js
 ---
-example: true
+type: example
 ---
 <InstUISettingsProvider dir="ltr">
   <div>LTR text</div>
@@ -102,7 +102,6 @@ import { generateInstanceCounterMap } from '@instructure/ui-react-utils'
 
 const counter = generateInstanceCounterMap()
 counter.set('Alert', 5)
-
 ;<InstUISettingsProvider instanceCounterMap={counter}>
   // this Alert's rendered DOM Node will have [id="Alert_5"] on it
   <Alert>Test!</Alert>

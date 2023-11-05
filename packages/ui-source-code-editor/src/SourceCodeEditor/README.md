@@ -6,7 +6,7 @@ A wrapper around the popular [CodeMirror](https://codemirror.net/) code editor c
 
 ```javascript
 ---
-embed: true
+type: embed
 ---
 <ToggleBlockquote
   summary="Upgrade from CodeEditor!"
@@ -56,9 +56,7 @@ Setting the correct language adds **syntax highlighting** and other helpful feat
 
 ```js
 ---
-example: true
-render: false
-background: light
+type: example
 ---
 
 const languages = {
@@ -263,9 +261,7 @@ We've implemented the "controlled" usage, but please let us know if you run into
 
 ```js
 ---
-example: true
-render: false
-background: light
+type: example
 ---
 class ControlledExample extends React.Component {
   state = {
@@ -341,9 +337,7 @@ If the `editable` prop is set to `false`, the editor is also not focusable, and 
 
 ```js
 ---
-example: true
-render: false
-background: light
+type: example
 ---
 class EditableExample extends React.Component {
   state = {
@@ -394,9 +388,7 @@ If any of these two props are active, the gutter is displayed, and the `highligh
 
 ```js
 ---
-example: true
-render: false
-background: light
+type: example
 ---
 class GutterExample extends React.Component {
   state = {
@@ -491,9 +483,7 @@ Another useful feature is the `indentAll` public method on the `SourceCodeEditor
 
 ```js
 ---
-example: true
-render: false
-background: light
+type: example
 ---
 class IndentExample extends React.Component {
   state = {
@@ -601,9 +591,7 @@ The `rtlMoveVisually` prop controls the cursor movement in RTL mode, whether it 
 
 ```js
 ---
-example: true
-render: false
-background: light
+type: example
 ---
 class DirectionExample extends React.Component {
   state = {
@@ -689,9 +677,7 @@ You can also manually focus the editor with its public `focus` method (the `hasF
 
 ```js
 ---
-example: true
-render: false
-background: light
+type: example
 ---
 class FocusExample extends React.Component {
   state = {
@@ -743,9 +729,7 @@ The `attachment` prop removes the top/bottom border-radius and margin of the edi
 
 ```js
 ---
-example: true
-render: false
-background: light
+type: example
 ---
 class AttachmentExample extends React.Component {
   state = {

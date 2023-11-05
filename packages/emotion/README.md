@@ -87,7 +87,7 @@ The themeable components accept a `themeOverride` prop which let's you override 
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Button color='primary' themeOverride={{ primaryBackground: "purple" }}>

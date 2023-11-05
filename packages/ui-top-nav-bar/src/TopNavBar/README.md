@@ -12,8 +12,7 @@ Click on the button below to open up an interactive, fullscreen example, where y
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class PlaygroundExample extends React.Component {
   state = {
@@ -1121,7 +1120,7 @@ Use the brand logo over the primary brand color in front of the brand's name. If
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View as="div" margin="medium 0">
@@ -1293,7 +1292,7 @@ The current page is highlighted, if it's id is passed via the `currentPageId` pr
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View as="div" margin="medium 0">
@@ -1420,7 +1419,7 @@ If the last action is shown as text and the user is shown as text, use the separ
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View as="div" margin="medium 0">
@@ -1596,7 +1595,7 @@ If the last action is shown as text and the user is shown as text, use the separ
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View as="div" margin="medium 0">
@@ -1782,8 +1781,7 @@ The main difference between the two is that in "smallViewport" mode:
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class LayoutExample extends React.Component {
   state = {
@@ -2064,7 +2062,7 @@ In small viewport mode, items in `<TopNavBar.User>` and `<TopNavBar.MenuItems>` 
 
 ```js
 ---
-example: true
+type: example
 ---
 
 <View as="div" background="primary-inverse" padding="medium">
@@ -2175,7 +2173,7 @@ It accepts either a string or a config object containing a subset of props from 
 
 ```js
 ---
-example: true
+type: example
 ---
 
 <div>
@@ -2305,8 +2303,7 @@ This feature is settable via the `smallViewportConfig.renderInPlaceDialogConfig`
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 
 class InPlaceDialogExample extends React.Component {

@@ -6,7 +6,7 @@ The Metric component displays 'value' and 'label'. The default alignment is 'cen
 
 ```javascript
 ---
-example: true
+type: example
 ---
   <Metric textAlign="start" renderLabel="Grade" renderValue="80%" />
 ```
@@ -15,7 +15,7 @@ The Metric component can be set to align 'start'.
 
 ```javascript
 ---
-example: true
+type: example
 ---
   <Metric renderLabel="Grade" renderValue="80%" />
 ```
@@ -24,7 +24,7 @@ The Metric component can be set to align 'end'.
 
 ```javascript
 ---
-example: true
+type: example
 ---
   <Metric textAlign="end" renderLabel="Grade" renderValue="80%" />
 ```

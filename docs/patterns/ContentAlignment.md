@@ -5,13 +5,14 @@ id: ContentAlignment
 ---
 
 ## Content Alignment
-* Main content area should center between any sidebar content.
-* Maximum width of `59.25rem` (948px) for main content area to help with readability.
-* Minimum width of `20rem` (320px) for main content. The minimum width corresponds to a desktop browser window set to a width of 1280px and zoomed in at 400%.
-* Padding for content displaying above 480px should be 24px which aligns with the View component setting the padding prop to `medium`.
-* Padding for content displaying below 480px should be 12px which aligns with the View padding prop set to `small`.
-* Main content cannot have two-dimensional scrolling at 320px. If the page reads horizontally, then the content can only scroll vertically and vice versa.
-* Exceptions to the maximum width rule are permitted when the content has a two-dimensional relationship (meaning if the content were to reflow it would lose context). Examples: complex data tables, calendars, and file browsing.
+
+- Main content area should center between any sidebar content.
+- Maximum width of `59.25rem` (948px) for main content area to help with readability.
+- Minimum width of `20rem` (320px) for main content. The minimum width corresponds to a desktop browser window set to a width of 1280px and zoomed in at 400%.
+- Padding for content displaying above 480px should be 24px which aligns with the View component setting the padding prop to `medium`.
+- Padding for content displaying below 480px should be 12px which aligns with the View padding prop set to `small`.
+- Main content cannot have two-dimensional scrolling at 320px. If the page reads horizontally, then the content can only scroll vertically and vice versa.
+- Exceptions to the maximum width rule are permitted when the content has a two-dimensional relationship (meaning if the content were to reflow it would lose context). Examples: complex data tables, calendars, and file browsing.
 
 > Note that the limitations of the content area within our documentation do not allow for the example to render using the actual values noted above. However, the example does illustrate the correct concept of how the content should align within the parent container as the browser width grows and shrinks.
 
@@ -19,8 +20,7 @@ id: ContentAlignment
 
 ```javascript
 ---
-embed: true
-theme: 'canvas'
+type: embed
 ---
 <View as="div" minHeight="31.25rem" minWidth="16.66rem">
   <Flex alignItems="stretch">

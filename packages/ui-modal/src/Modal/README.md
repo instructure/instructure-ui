@@ -10,8 +10,7 @@ by using the `padding` prop on the `<Modal.Body/>` if the use case requires it.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 const fpo = lorem.paragraphs(5)
 
@@ -91,8 +90,7 @@ Setting the `constrain` property to `parent` will constrain the Modal within the
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 const fpo = lorem.paragraphs(1)
 class Example extends React.Component {
@@ -207,8 +205,7 @@ render(<Example />)
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -281,8 +278,7 @@ use the [Img](#Img) component's `constrain` property to fit the image inside Mod
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -417,8 +413,7 @@ On smaller viewports (like mobile devices or scaled-up UI), we don't want to los
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 const fpo = lorem.paragraphs(1)
 class Example extends React.Component {
@@ -518,7 +513,7 @@ render(<Example />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -540,7 +535,7 @@ guidelines: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

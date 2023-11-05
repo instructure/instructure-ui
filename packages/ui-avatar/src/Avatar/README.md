@@ -10,7 +10,7 @@ The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to 
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" />
@@ -29,7 +29,7 @@ of its container.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View display="block" padding="small medium">
@@ -68,7 +68,7 @@ The color of the initials and icons can be set with the `color` prop, and it all
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View display="block" padding="small medium">
@@ -98,7 +98,7 @@ Inverted Avatars have **no border**.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View display="block" padding="small medium" background="primary">
@@ -126,7 +126,7 @@ In case you need more control over the color, feel free to use the `themeOverrid
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Avatar name="Isaac Asimov" renderIcon={<IconGroupLine />} themeOverride={{ color: '#efb410' }} margin="0 small 0 0" />
@@ -154,7 +154,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

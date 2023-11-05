@@ -14,8 +14,7 @@ Provide an `onClick` to `Pagination.Page` to handle navigation.
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -56,8 +55,7 @@ You can handle endpoints that have a lot of pages by using a sparse array of chi
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -109,7 +107,7 @@ If you instead provide an href to `Pagination.Page` it will render as a link.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Pagination variant="full" label="Jump to">
   <Pagination.Page href="/pages/1" current>A-G</Pagination.Page>
@@ -124,8 +122,7 @@ The `variant="input"` prop will render Pagination with a NumberInput and all the
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -170,8 +167,7 @@ The `showDisabledButtons` prop displays the unavailable navigation buttons as di
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -239,7 +235,7 @@ render(<Example />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -251,7 +247,7 @@ guidelines: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

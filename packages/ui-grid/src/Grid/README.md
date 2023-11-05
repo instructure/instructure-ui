@@ -12,7 +12,7 @@ exactly where your Grid columns are.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Grid visualDebug>
@@ -45,7 +45,7 @@ default, stacked columns have bottom margin for visual separation.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Grid startAt="large" visualDebug>
   <Grid.Row>
@@ -83,7 +83,7 @@ breakpoint with the `width` prop. Please note the following:
 
 ```js
 ---
-example: true
+type: example
 ---
 <Grid visualDebug>
   <Grid.Row>
@@ -108,7 +108,7 @@ or remove it with `none`.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Grid colSpacing="large" rowSpacing="small" visualDebug>
   <Grid.Row>
@@ -144,7 +144,7 @@ values: `start`, `center`, `end`, `space-around`, and `space-between`.
 
 ```js
 ---
-example: true
+type: example
 ---
   <Grid hAlign="space-between" visualDebug>
     <Grid.Row>
@@ -165,7 +165,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
   <Grid hAlign="space-around" visualDebug>
     <Grid.Row>
@@ -189,7 +189,7 @@ below the Grid is set to vertically center its columns.
 
 ```js
 ---
-example: true
+type: example
 ---
   <Grid vAlign="middle" visualDebug>
     <Grid.Row>

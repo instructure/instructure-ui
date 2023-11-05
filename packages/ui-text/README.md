@@ -26,7 +26,7 @@ npm install @instructure/ui-text
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Text } from '@instructure/ui-text'

@@ -6,7 +6,7 @@ A `MetricGroup` component displays multiple `Metric` (value + label) in rows.
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <MetricGroup>
   <Metric renderLabel="Grade" renderValue="80%" />

@@ -13,7 +13,7 @@ Breadcrumb become a Link at under 768px.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Responsive
   query={{
@@ -49,7 +49,7 @@ Change the `size` prop to control the font-size of the breadcrumbs (default is `
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Breadcrumb size="small" label="You are here:" margin="none none medium">
@@ -94,11 +94,12 @@ example: true
 ```
 
 ### Icons
+
 You can include icons in `Breadcrumb.Link`:
 
 ```js
 ---
-example: true
+type: example
 ---
 <Breadcrumb label="Breadcrumb with icons">
   <Breadcrumb.Link renderIcon={<IconBankLine size="small" />} href="#Breadcrumb">Item Bank</Breadcrumb.Link>
@@ -111,7 +112,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

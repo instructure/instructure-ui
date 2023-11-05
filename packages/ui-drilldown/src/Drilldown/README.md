@@ -24,7 +24,7 @@ Each page needs an `id` prop that is used in the navigation. Options point to pa
 
 ```js
 ---
-example: true
+type: example
 ---
 <Drilldown rootPageId='root' width="20rem" maxHeight="30rem">
   <Drilldown.Page id="root" renderTitle='Groceries'>
@@ -73,7 +73,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <Drilldown rootPageId='root' width="20rem" maxHeight="30rem">
   <Drilldown.Page id="root">
@@ -99,7 +99,7 @@ Options can be links too. If the `href` prop is set, the option renders as an `<
 
 ```js
 ---
-example: true
+type: example
 ---
 <Drilldown rootPageId='root' width="20rem" maxHeight="30rem">
   <Drilldown.Page id="root">
@@ -126,7 +126,7 @@ Just like `Options.Item`, `Drilldown.Option` can render a description under the 
 
 ```js
 ---
-example: true
+type: example
 ---
 <Drilldown rootPageId='root' width="20rem" maxHeight="30rem">
   <Drilldown.Page id="root">
@@ -168,8 +168,7 @@ Additionally, the `renderLabelInfo` prop can render text or other elements next 
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 
 class VideoSettingsExample extends React.Component {
@@ -341,8 +340,7 @@ Just like [Menu](#Menu), Drilldown accepts a `trigger` property: it will render 
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 
 class SelectContactsExample extends React.Component {
@@ -542,8 +540,7 @@ This option will always display on the page when needed and cannot be disabled.
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class BackNavigationExample extends React.Component {
   state = {
@@ -645,8 +642,7 @@ Wrapping the Options in `<Drilldown.Group>` will separate these options with sep
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class GroupsExample extends React.Component {
   state = {
@@ -732,7 +728,7 @@ It is recommended to set the `value` prop of the options in a group, because the
 
 ```js
 ---
-example: true
+type: example
 ---
 <Drilldown rootPageId='root' width="20rem" maxHeight="30rem">
   <Drilldown.Page id="root">
@@ -765,8 +761,7 @@ example: true
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 
 class SelectMembersExample extends React.Component {
@@ -968,8 +963,7 @@ You can disable the whole Drilldown or its sub-components with the `disabled` pr
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class DisabledExample extends React.Component {
   state = {
@@ -1101,7 +1095,7 @@ You can still manually close the Popover on option click or select, calling the 
 
 ```js
 ---
-example: true
+type: example
 ---
 <Drilldown
   rootPageId='root'
@@ -1152,7 +1146,7 @@ These two navigation methods are also available as public methods on the Drilldo
 
 ```js
 ---
-example: true
+type: example
 ---
 <Drilldown
   rootPageId='Root Page'
@@ -1240,8 +1234,7 @@ The following example showcases an editable drilldown that can add or delete opt
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 
 class EditableStructureExample extends React.Component {
@@ -1491,7 +1484,7 @@ render(<EditableStructureExample />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

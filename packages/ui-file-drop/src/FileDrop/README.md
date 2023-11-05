@@ -10,7 +10,7 @@ and Firefox).
 
 ```js
 ---
-example: true
+type: example
 ---
 <FileDrop
   accept="image/*"
@@ -32,7 +32,7 @@ A disabled FileDrop
 
 ```js
 ---
-example: true
+type: example
 ---
 <FileDrop
   renderLabel={
@@ -53,7 +53,7 @@ The `accept` prop dictates what type of files are allowed. It can be an array or
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <FileDrop
@@ -98,7 +98,7 @@ will turn the theme's `rejectedColor`.
 
 ```js
 ---
-example: true
+type: example
 ---
 <FileDrop
   accept=".jpg"
@@ -123,7 +123,7 @@ If the `shouldAllowMultiple` prop is `true`, FileDrop accepts multiple files.
 
 ```js
 ---
-example: true
+type: example
 ---
 <FileDrop
   shouldAllowMultiple={true}
@@ -150,7 +150,7 @@ If the `height` property is set to `100%`, the FileDrop container will fill the 
 
 ```js
 ---
-example: true
+type: example
 ---
 <div style={{height: '30rem'}}>
   <FileDrop

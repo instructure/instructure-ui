@@ -26,7 +26,7 @@ npm install @instructure/ui-breadcrumb
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Breadcrumb } from '@instructure/ui-breadcrumb'

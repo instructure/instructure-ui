@@ -10,7 +10,7 @@ to the consumer of `Editable` to provide _render properties_ which return the vi
 and the edit component.
 
 Where `Editable` provides the state management and user interactions, it is not its
-responsibility to provide the DOM structure to layout the component on the page.  We provide
+responsibility to provide the DOM structure to layout the component on the page. We provide
 a standard implementation of that in [`InPlaceEdit`](/#InPlaceEdit), which is where you
 will find examples.
 
@@ -19,8 +19,7 @@ should look.
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
 
