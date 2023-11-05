@@ -10,7 +10,7 @@ sets the `layout to inline` and sets the `vAlign to middle` and `small rowSpacin
 
 ```js
 ---
-example: true
+type: example
 ---
   <FormFieldGroup
     description="Breakfast"
@@ -45,7 +45,7 @@ and the `colSpacing to medium`
 
 ```js
 ---
-example: true
+type: example
 ---
   <FormFieldGroup
     description="Lunch"
@@ -73,7 +73,7 @@ This example sets the `layout to stacked` and sets the `rowSpacing to large`
 
 ```js
 ---
-example: true
+type: example
 ---
   <FormFieldGroup
     description="Dinner"
@@ -104,7 +104,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

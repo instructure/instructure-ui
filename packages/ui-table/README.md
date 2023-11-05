@@ -26,7 +26,7 @@ npm install @instructure/ui-table
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Table } from '@instructure/ui-table'

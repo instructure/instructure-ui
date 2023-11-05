@@ -27,7 +27,7 @@ npm install @instructure/ui-view
 
 ```js
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { View } from '@instructure/ui-view'

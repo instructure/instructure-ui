@@ -12,7 +12,7 @@ By default, the icon's `role` is set to `presentation`. However, when the `title
 
 ```js
 ---
-example: true
+type: example
 ---
 <View as="div" margin="small" padding="medium" background="primary">
   <Text as="div" size="large">I <IconHeartLine color="error" title="Love" /> New York</Text>
@@ -25,7 +25,7 @@ The default choice for iconography is the `Line` version. However, when an icon 
 
 ```js
 ---
-example: true
+type: example
 ---
 <View as="div" margin="small">
   <Button margin="small" renderIcon={IconEyeLine}>Preview</Button>
@@ -42,7 +42,7 @@ By default, icons are set to a size of 1em, so they will scale to match the font
 
 ```js
 ---
-example: true
+type: example
 ---
 <View as="div" margin="small" padding="medium" background="primary">
   <Flex wrap="wrap">
@@ -74,7 +74,7 @@ To change the color of the icon, use one of the predefined options for the `colo
 
 ```js
 ---
-example: true
+type: example
 ---
 <View as="div" margin="small" padding="medium" background="primary">
   <Flex wrap="wrap">

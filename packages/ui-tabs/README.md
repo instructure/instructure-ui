@@ -24,7 +24,7 @@ npm install @instructure/ui-tabs
 
 ```jsx
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Tabs } from '@instructure/ui-tabs'

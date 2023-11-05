@@ -6,8 +6,7 @@ An html5 range input/slider component.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   state = {

@@ -16,7 +16,7 @@ if it is not found.
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <ApplyTextDirection dir="rtl">
   <View
@@ -35,7 +35,7 @@ For exceptions, `<ApplyTextDirection />` can be nested and override parent conte
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <ApplyTextDirection dir="rtl">
   <View

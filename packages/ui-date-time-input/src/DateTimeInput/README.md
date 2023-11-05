@@ -21,8 +21,7 @@ The component is localized via its `locale` and `timezone` parameters. Both are 
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   render () {
@@ -51,8 +50,7 @@ This sample code also allows the user to enter an arbitrary time value by settin
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 
 class Example extends React.Component {
@@ -112,8 +110,7 @@ render(<Example />)
 
 ```js
 ---
-example: true
-render: true
+type: example
 ---
 <DateTimeInput
   description="Pick a date and time"
@@ -133,8 +130,7 @@ render: true
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   render() {
@@ -165,8 +161,7 @@ render(<Example />)
 
 ```js
 ---
-example: true
-render: true
+type: example
 ---
 <DateTimeInput
   description="Pick a date and time"
@@ -189,8 +184,7 @@ render: true
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 const locale = 'en-us'
 const timezone = 'America/Denver'

@@ -9,7 +9,7 @@ The `size` prop allows you to select from `x-small`, `small`, `medium` and `larg
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Spinner renderTitle="Loading" size="x-small"/>
@@ -26,7 +26,7 @@ dark backgrounds.
 
 ```js
 ---
-example: true
+type: example
 ---
 <View background="primary-inverse" as="div">
   <Spinner renderTitle="Loading" variant="inverse" />
@@ -39,7 +39,7 @@ The `delay` prop allows you to delay the rendering of the spinner a desired time
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Spinner renderTitle="Loading" size="x-small" delay={1000} />
@@ -55,7 +55,7 @@ The `renderTitle` prop is read to screen readers.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Spinner renderTitle={() => "Hello world"} />
 ```

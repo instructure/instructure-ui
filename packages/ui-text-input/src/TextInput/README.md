@@ -8,7 +8,7 @@ describes: TextInput
 
 ```js
 ---
-example: true
+type: example
 ---
 <TextInput
   renderLabel="Name"
@@ -21,8 +21,7 @@ example: true
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class ControlledTextInputExample extends React.Component {
   constructor (props) {
@@ -111,8 +110,7 @@ Focusable content will be focused separately from the input itself.
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class ExtraContentExample extends React.Component {
   constructor (props) {
@@ -191,7 +189,7 @@ size of the component, use `width`.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <TextInput
@@ -216,7 +214,7 @@ boolean prop to `true`.
 
 ```js
 ---
-example: true
+type: example
 ---
 <View as="div" maxWidth="250px">
   <TextInput
@@ -250,7 +248,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

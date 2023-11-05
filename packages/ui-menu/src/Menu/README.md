@@ -2,7 +2,7 @@
 describes: Menu
 ---
 
-The `Menu` component is a special type of Popover that is meant to be used as a list of actions or functions (`<Menu.Items/>` that are keyboard accessible)  that the user may want to invoke often related to or controlling some other content on the page.
+The `Menu` component is a special type of Popover that is meant to be used as a list of actions or functions (`<Menu.Items/>` that are keyboard accessible) that the user may want to invoke often related to or controlling some other content on the page.
 
 - Menu should not be used for navigation.
 - Menu should not be used as a form input.
@@ -18,8 +18,7 @@ you need to include more complex content, take a look at [Popover](#Popover).
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -100,11 +99,12 @@ class Example extends React.Component {
 
 render(<Example />)
 ```
+
 ### Guidelines
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

@@ -9,7 +9,7 @@ with the aria attributes required to support screen readers.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <ProgressBar
@@ -48,7 +48,7 @@ component. Set it to `primary-inverse` when the component is used on dark backgr
 
 ```js
 ---
-example: true
+type: example
 ---
 <View background="primary-inverse" as="div">
   <ProgressBar
@@ -66,7 +66,7 @@ The color of the progress meter is set separately through the `meterColor` prope
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <ProgressBar
@@ -113,7 +113,7 @@ current value.
 
 ```js
 ---
-example: true
+type: example
 ---
 <ProgressBar
   screenReaderLabel="Loading completion"
@@ -144,7 +144,7 @@ value that `<ProgressBar />` displays.
 
 ```js
 ---
-example: true
+type: example
 ---
 <ProgressBar
   screenReaderLabel="Percent complete"
@@ -169,8 +169,7 @@ The `shouldAnimate` prop makes the progress bar animate the transition between v
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   MIN = 0

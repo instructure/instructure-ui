@@ -6,7 +6,7 @@ An accessible image component
 
 ```js
 ---
-example: true
+type: example
 ---
 <Img src={placeholderImage(250, 250)} />
 ```
@@ -18,7 +18,7 @@ the image a block-level element.
 
 ```js
 ---
-example: true
+type: example
 ---
 <View textAlign="center" as="div">
   <Img margin="small" alt="A placeholder image" src={placeholderImage(300, 200)} />
@@ -33,7 +33,7 @@ The `overlay` prop accepts parameters for `color`, `opacity`, and `blend`.
 
 ```js
 ---
-example: true
+type: example
 ---
   <View textAlign="center" as="div">
     <Img
@@ -64,7 +64,7 @@ containing element, while maintaining the aspect ratio of the source image.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div style={{width: '66%', height: '11rem'}}>
   <Img src={avatarSquare} constrain="cover" />
@@ -78,7 +78,7 @@ containing element, while maintaining the aspect ratio of the source image.
 
 ```js
 ---
-example: true
+type: example
 ---
 <View as="div" background="primary-inverse" width="200px" height="200px" textAlign="center">
   <Img src={avatarPortrait} constrain="contain" />
@@ -91,7 +91,7 @@ Please note: these should only be used for presentational effects.
 
 ```js
 ---
-example: true
+type: example
 ---
   <View textAlign="center" as="div">
     <Img
@@ -113,7 +113,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

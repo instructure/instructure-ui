@@ -10,8 +10,7 @@ For the most basic implementations, `TimeSelect` can be uncontrolled. If desired
 
 ```javascript
 ---
-example: true
-render: true
+type: example
 ---
 <TimeSelect
   renderLabel="Choose a time"
@@ -27,8 +26,7 @@ To use `TimeSelect` controlled, simply provide the `value` prop an ISO string. T
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -64,8 +62,7 @@ Note that the exact value needed to be typed by the user depends on their `local
 
 ```javascript
 ---
-example: true
-render: true
+type: example
 ---
 <TimeSelect
   renderLabel="Choose a time"
@@ -82,7 +79,7 @@ render: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

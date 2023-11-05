@@ -6,7 +6,7 @@ A byline component with a visual and a caption:
 
 ```js
 ---
-example: true
+type: example
 ---
 <Byline description={lorem.sentence()}>
   <Avatar name="Julia Childer" />
@@ -22,7 +22,7 @@ setting the `alignContent` prop.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Byline
   margin="x-large auto"
@@ -37,7 +37,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <Byline
   description={

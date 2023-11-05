@@ -7,8 +7,7 @@ your UI. The component defaults to the `fade` opacity transition.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -53,8 +52,7 @@ render(<Example />)
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -102,8 +100,7 @@ internationalized for right to left (rtl) languages. The following example uses 
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
 

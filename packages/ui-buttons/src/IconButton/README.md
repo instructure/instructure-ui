@@ -6,7 +6,7 @@ An IconButton can be used when the Button only renders an Icon and does not have
 
 ```js
 ---
-example: true
+type: example
 ---
 <IconButton screenReaderLabel="Add User"><IconAddLine /></IconButton>
 ```
@@ -17,7 +17,7 @@ Because the IconButton visually only renders an icon, a description is necessary
 
 ```js
 ---
-example: true
+type: example
 ---
 <IconButton color="primary" screenReaderLabel="Add blog post"><IconAddLine /></IconButton>
 ```
@@ -26,7 +26,7 @@ Using [Tooltip](#Tooltip) in conjunction with IconButton can also provide necess
 
 ```js
 ---
-example: true
+type: example
 ---
 <Tooltip
   renderTip="View user profile"
@@ -43,7 +43,7 @@ The `shape` prop specifies if the IconButton will render as a `rectangle` or `ci
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block">
   <IconButton shape="rectangle" screenReaderLabel="Delete tag" margin="small"><IconXSolid /></IconButton>
@@ -57,7 +57,7 @@ The background and border can be optionally removed as needed by setting the `wi
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block">
   <View display="inline-block" background="primary">

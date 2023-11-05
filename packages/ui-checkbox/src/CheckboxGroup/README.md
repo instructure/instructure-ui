@@ -8,7 +8,7 @@ The Checkbox components can be rendered vertically or horizontally using the `la
 
 ```js
 ---
-example: true
+type: example
 ---
 <FormFieldGroup description={<ScreenReaderContent>CheckboxGroup examples</ScreenReaderContent>}>
   <CheckboxGroup name="sports"
@@ -39,7 +39,7 @@ The `toggle` variant with `layout` prop set to `inline` and an error message:
 
 ```js
 ---
-example: true
+type: example
 ---
 <CheckboxGroup
   name="sports2"
@@ -64,7 +64,7 @@ A `disabled` CheckboxGroup:
 
 ```js
 ---
-example: true
+type: example
 ---
 <CheckboxGroup
   name="sports4"
@@ -79,11 +79,12 @@ example: true
   <Checkbox label="Soccer" value="soccer" variant="toggle" />
 </CheckboxGroup>
 ```
+
 ### Guidelines
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -100,7 +101,7 @@ guidelines: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

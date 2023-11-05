@@ -8,8 +8,7 @@ Popovers hide or show content as a result of user interaction, such as clicking,
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -82,8 +81,7 @@ render(<Example />)
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
 
@@ -146,8 +144,7 @@ The `shouldAlignArrow` prop will offset the popover content to adjust for the of
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   state={
@@ -188,8 +185,7 @@ If the `Popover` contains focusable content and should be rendered in the focus 
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
 
@@ -232,7 +228,7 @@ Popover and Tooltip attach mouse and focus event listeners to their `renderTrigg
 
 ```js
 ---
-  example: true
+ type: example
 ---
 class MyComponent extends React.Component {
   constructor(props) {
@@ -253,8 +249,7 @@ class MyComponent extends React.Component {
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
 
@@ -411,7 +406,7 @@ render(<Example />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -428,7 +423,7 @@ guidelines: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

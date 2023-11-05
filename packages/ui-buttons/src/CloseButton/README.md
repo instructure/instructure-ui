@@ -8,7 +8,7 @@ The `placement` prop designates the `CloseButton` placement within the parent co
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block" position="relative" height="5rem" background="primary" shadow="resting">
   <CloseButton placement="end" offset="small" screenReaderLabel="Close" />
@@ -19,7 +19,7 @@ If you need the `CloseButton` to work in a layout with other elements vs. absolu
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block" position="relative" background="primary" shadow="resting">
   <Flex height="6rem" justifyItems="space-between" alignItems="center" padding="medium">
@@ -37,7 +37,7 @@ If you need even more customization, note that you can always compose this compo
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block" position="relative" height="5rem" background="primary" shadow="resting">
   <Flex justifyItems="end">
@@ -59,7 +59,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

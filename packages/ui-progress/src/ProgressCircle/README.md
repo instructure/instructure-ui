@@ -9,7 +9,7 @@ with the aria attributes required to support screen readers.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <ProgressCircle
@@ -87,7 +87,7 @@ component. Set it to `primary-inverse` when the component is used on dark backgr
 
 ```js
 ---
-example: true
+type: example
 
 ---
 <View background="primary-inverse" as="div">
@@ -106,7 +106,7 @@ The color of the progress meter is set separately through the `meterColor` prope
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <ProgressCircle
@@ -153,7 +153,7 @@ current value.
 
 ```js
 ---
-example: true
+type: example
 ---
 <ProgressCircle
   screenReaderLabel="Loading completion"
@@ -184,7 +184,7 @@ value that `<ProgressCircle />` displays.
 
 ```js
 ---
-example: true
+type: example
 ---
 <ProgressCircle
   screenReaderLabel="Percent complete"

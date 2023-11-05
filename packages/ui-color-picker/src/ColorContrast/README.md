@@ -8,8 +8,7 @@ A component for displaying color contrast between two colors. It will perform ch
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   render() {
@@ -37,8 +36,7 @@ render(<Example />);
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {

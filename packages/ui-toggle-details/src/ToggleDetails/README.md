@@ -8,7 +8,7 @@ By default, ToggleDetails content is hidden. To override, pass in the `defaultEx
 
 ```js
 ---
-example: true
+type: example
 ---
 <ToggleDetails
   summary="Click to hide me!"
@@ -22,8 +22,7 @@ ToggleDetails can be controlled:
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 
 class Example extends React.Component {
@@ -62,7 +61,7 @@ Setting ToggleDetails to `filled` will make the toggle use a full-width [Button]
 
 ```js
 ---
-example: true
+type: example
 ---
 <ToggleDetails
   variant="filled"
@@ -82,7 +81,7 @@ you see fit. In these examples, we are formatting it with the
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <ToggleDetails
@@ -118,7 +117,7 @@ container.
 
 ```js
 ---
-example: true
+type: example
 ---
 <ToggleDetails
   summary="Block display"
@@ -136,7 +135,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

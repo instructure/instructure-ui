@@ -13,8 +13,7 @@ This component is useful when you want to display large amounts of data in a com
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 
 const dataMap = {

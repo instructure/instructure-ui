@@ -7,13 +7,12 @@ uncontrolled** - you must pass event handlers if you want it to respond to
 user input.
 
 This example handles arrow buttons, up/down arrow keys, and typing into
-the input.  It also includes an `onBlur` handler that displays an error message
+the input. It also includes an `onBlur` handler that displays an error message
 if the input is invalid or missing.
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   MIN = 0
@@ -149,7 +148,7 @@ NumberInput comes in 2 sizes. The default size is "medium".
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <NumberInput renderLabel="Default-size input" /><br/>
@@ -161,7 +160,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

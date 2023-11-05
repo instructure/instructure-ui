@@ -12,8 +12,7 @@ less than the designated `minWidth`, the tray overlays the content
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -101,11 +100,9 @@ render(<Example />)
 
 Multiple `<DrawerLayout />` components can be nested in order to place trays on both sides
 
-
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   state = {

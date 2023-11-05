@@ -7,7 +7,7 @@ Use [Button](#Button), [IconButton](#IconButton), or [CondensedButton](#Condense
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block" margin="medium">
   <BaseButton>Click me</BaseButton>

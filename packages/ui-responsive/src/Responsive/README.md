@@ -17,7 +17,7 @@ The following example using `Avatar` renders as a circle when the element is und
 
 ```js
 ---
-example: true
+type: example
 ---
 <Responsive
   query={{ small: { maxWidth: '30rem' }, large: { minWidth: '30rem' }}}
@@ -47,7 +47,7 @@ given breakpoint.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Responsive
   match="media"
@@ -91,7 +91,7 @@ Setting up multiple media query breakpoints is supported. You can use 4 breakpoi
 
 ```js
 ---
-example: true
+type: example
 ---
 <Responsive
   match="media"

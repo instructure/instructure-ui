@@ -10,7 +10,7 @@ The examples below use the `formatOutput` prop to make the badge more screenread
 
 ```js
 ---
-example: true
+type: example
 ---
   <div>
     <Badge
@@ -56,7 +56,7 @@ Use the `countUntil` prop to set a limit for the count. The default for `formatO
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Badge count={105} countUntil={100} margin="0 medium 0 0">
@@ -76,7 +76,7 @@ Setting `type="notification"` will render small circles that should not contain 
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Flex padding='small' display='inline-flex' alignItems="center">
@@ -133,8 +133,7 @@ Default is `top end`. **Note that standalone badges can't be placed.**
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 const EditButton = () => (
   <IconButton
@@ -237,7 +236,7 @@ render(<Example />)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

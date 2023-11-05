@@ -13,8 +13,7 @@ In stacked layout, column header is rendered in each cell, but not in row header
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -111,8 +110,7 @@ can be aligned differently.
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   render() {
@@ -246,8 +244,7 @@ By default, the options in the `Select` for sorting in stacked layout are genera
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class SortableTable extends React.Component {
   constructor (props) {
@@ -543,8 +540,7 @@ that selection does not re-paginate or re-sort the table, and pagination does no
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class SelectableTable extends React.Component {
   constructor(props) {
@@ -881,7 +877,7 @@ render(
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

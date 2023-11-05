@@ -8,14 +8,14 @@ describes: Link
 
 ```js
 ---
-example: true
+type: example
 ---
 <Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
 ```
 
 ```js
 ---
-example: true
+type: example
 ---
 <View background="primary-inverse" as="div">
   <Text color="primary-inverse">The quick brown fox <Link color="link-inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
@@ -30,7 +30,7 @@ to add margin to the top or bottom of Link, wrap it inside a `<View />`.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/" margin="0 small">jumps</Link> over the lazy dog.</Text>
 ```
@@ -42,7 +42,7 @@ to appear without surrounding text, the default underline can be configured to o
 
 ```js
 ---
-example: true
+type: example
 ---
 <Link
   href="http://instructure.design"
@@ -59,7 +59,7 @@ unless an alternate `display` prop is provided.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Link
   onClick={() => console.log('clicked')}
@@ -78,7 +78,7 @@ render a Link with just an icon. Don't forget to add text for screen readers, th
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View as="div" margin="0 0 small">
@@ -106,7 +106,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

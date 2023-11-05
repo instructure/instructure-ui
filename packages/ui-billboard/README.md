@@ -26,7 +26,7 @@ npm install @instructure/ui-billboard
 
 ```js
 ---
-example: false
+type: code
 ---
 import React from 'react'
 import { Billboard } from '@instructure/ui-billboard'

@@ -16,7 +16,7 @@ in Instructure UI.
 
 ```js
 ---
-example: true
+type: example
 ---
 <View
   as="div"
@@ -35,7 +35,7 @@ Change the background color using the `background` prop.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View
@@ -137,7 +137,7 @@ Add a CSS box-shadow to the View using the `shadow` prop.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View
@@ -184,7 +184,7 @@ to apply different border styles to individual edges.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View
@@ -238,7 +238,7 @@ Change the color of View's border for different contexts via the `borderColor` p
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View
@@ -328,7 +328,7 @@ to apply different border radii to individual corners.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View
@@ -403,7 +403,7 @@ example: true
 
 ```js
 ---
-example: true
+type: example
 ---
 <View
   position="relative"
@@ -434,7 +434,7 @@ By default, if a `View` is rendered as a focusable element, a focus outline will
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <View
   position="relative"
@@ -460,8 +460,7 @@ changed for different contexts via the `focusColor` property.
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class FocusedExample extends React.Component {
   constructor (props) {
@@ -629,8 +628,7 @@ props.
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 class OverflowExample extends React.Component {
   constructor (props) {
@@ -713,7 +711,7 @@ Set the `withVisualDebug` prop to see the View's boundaries.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <View
@@ -757,7 +755,7 @@ the header and paragraph are separated by bottom margin from the `<header>` View
 
 ```js
 ---
-example: true
+type: example
 ---
 <View
   as="section"
@@ -783,7 +781,7 @@ the View to display inline-block with other inline elements.
 
 ```js
 ---
-example: true
+type: example
 ---
 <View as="div" textAlign="center" padding="x-small" withVisualDebug>
   <View

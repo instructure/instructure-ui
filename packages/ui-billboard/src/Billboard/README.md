@@ -1,12 +1,14 @@
 ---
 describes: Billboard
 ---
+
 ### Static Billboard
+
 Used for empty states, 404 pages, redirects, etc.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Billboard
   size="medium"
@@ -19,18 +21,18 @@ example: true
 ### Structure
 
 - If Billboard has an `href` prop set, it will render as a link;
-if an `onClick` prop is set, the component will render as a button.
+  if an `onClick` prop is set, the component will render as a button.
 - Use the `message` prop for your link or button text/call to action (Note:
-don't pass interactive content to the `message` prop if you have set the `href`
-or `onClick` props).
+  don't pass interactive content to the `message` prop if you have set the `href`
+  or `onClick` props).
 - Use the `size` prop to adjust the size of the icon and text.
 - Pass [Instructure icons](#icons-react) to the `hero` property via a function
-_(see examples)_, and they will be sized correctly based on the Billboard's
-`size`.
+  _(see examples)_, and they will be sized correctly based on the Billboard's
+  `size`.
 
 ```js
 ---
-example: true
+type: example
 ---
 <View as="div" width="400px" withVisualDebug>
   <Billboard
@@ -45,9 +47,10 @@ example: true
   />
 </View>
 ```
+
 ```js
 ---
-example: true
+type: example
 ---
 <View as="div" width="600px" withVisualDebug>
   <Billboard
@@ -58,9 +61,10 @@ example: true
   />
 </View>
 ```
+
 ```js
 ---
-example: true
+type: example
 ---
 <Billboard
   readOnly
@@ -73,11 +77,11 @@ example: true
 />
 ```
 
-
 ### Disabled Billboard
+
 ```js
 ---
-example: true
+type: example
 ---
 <Billboard
   size="small"

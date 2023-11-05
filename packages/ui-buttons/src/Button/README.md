@@ -6,7 +6,7 @@ Button allows users to perform actions or trigger changes. If selecting the Butt
 
 ```js
 ---
-example: true
+type: example
 ---
 <Button>Hello{null}</Button>
 ```
@@ -17,7 +17,7 @@ The `color` prop will change the Button's color scheme.
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block">
   <Button color="primary" margin="small">Primary</Button>
@@ -34,7 +34,7 @@ To specify the Button `size`, set the size prop to `small`, `medium` (default) o
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block">
   <Button size="small" margin="small">Small</Button>
@@ -49,7 +49,7 @@ An icon can be rendered alongside the Button content using the `renderIcon` prop
 
 ```js
 ---
-example: true
+type: example
 ---
 <Button renderIcon={IconAddLine}>Add Item</Button>
 ```
@@ -60,7 +60,7 @@ Just like native HTML buttons, the Button text will wrap to the next line when i
 
 ```js
 ---
-example: true
+type: example
 ---
 <View
   display="block"
@@ -79,8 +79,7 @@ If you need to prevent text wrapping, you can use the [TruncateText](#TruncateTe
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   state = {
@@ -134,7 +133,7 @@ By default, the Button displays inline with other elements. If you need it to ex
 
 ```js
 ---
-example: true
+type: example
 ---
 <View
   display="block"
@@ -160,7 +159,7 @@ Use backgroundless buttons for interfaces on dark backgrounds or when there is a
 
 ```js
 ---
-example: true
+type: example
 ---
 <View display="block">
   <View display="inline-block" background="primary">
@@ -176,7 +175,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
@@ -199,7 +198,7 @@ guidelines: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

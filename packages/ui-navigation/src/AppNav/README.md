@@ -14,8 +14,7 @@ than two.
 
 ```javascript
 ---
-example: true
-render: false
+type: example
 ---
 
 const totalItemsCount = 5

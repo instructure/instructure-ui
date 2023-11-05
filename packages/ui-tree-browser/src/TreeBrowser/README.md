@@ -9,8 +9,7 @@ to receive a normalized data structure, examples can be seen at https://github.c
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -81,8 +80,7 @@ render(<Example/>)
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -152,7 +150,7 @@ The following example sets custom icons for the expanded and collapsed state of 
 
 ```js
 ---
-example: true
+type: example
 ---
 <TreeBrowser
   collections={{
@@ -183,7 +181,7 @@ One way do this is to use `getItemProps`. This function is called with the props
 
 ```js
 ---
-example: true
+type: example
 ---
 <TreeBrowser
   collections={{
@@ -226,7 +224,7 @@ Another way to do it is to specify the `thumbnail` property in the `items` colle
 
 ```js
 ---
-example: true
+type: example
 ---
 <TreeBrowser
   collections={{
@@ -257,7 +255,7 @@ To meet a11y standards make sure to have the right contrast ratio on hovered and
 
 ```js
 ---
-example: true
+type: example
 ---
 <TreeBrowser
   collections={{
@@ -296,8 +294,7 @@ An example of a `<TreeBrowser />` with a custom item after each collection.
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor(props) {
@@ -454,8 +451,7 @@ This works with all collections and items of the TreeBrowser.
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -518,8 +514,7 @@ There is another way to sort the children of one collection. By adding the `comp
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -581,8 +576,7 @@ The `showRootCollection` prop sets whether the root collection (specified in `ro
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -656,7 +650,7 @@ render(<Example/>)
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

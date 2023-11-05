@@ -8,7 +8,7 @@ the component.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Pill
@@ -54,7 +54,7 @@ be handled via ellipses.
 
 ```js
 ---
-example: true
+type: example
 ---
 <Pill>
   extraordinary superfluousness
@@ -65,7 +65,7 @@ example: true
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

@@ -9,7 +9,7 @@ Adjust the size of the RadioInput and its label text via the `size` prop. The de
 
 ```js
 ---
-example: true
+type: example
 ---
 <RadioInput
   label="See RadioInputGroup for more details"
@@ -18,11 +18,12 @@ example: true
   checked
 />
 ```
+
 ### Guidelines
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">

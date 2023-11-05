@@ -5,6 +5,7 @@ describes: Rating
 Rating takes the `valueNow` and `valueMax` props and
 outputs a 3- or 5-star rating. Decimals are rounded to the nearest
 whole number.
+
 ### 3- or 5-star ratings
 
 Rating defaults to a 3-star rating system. Use `iconCount` to switch
@@ -17,7 +18,7 @@ this feature using the `animateFill` prop.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Rating
@@ -49,7 +50,7 @@ space around the actual rating.
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Rating
