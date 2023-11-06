@@ -32,7 +32,7 @@ import { logWarn as warn } from '@instructure/console'
  * Flag React component props as hack props.
  * Warnings will display in the console when hack props are used.
  *
- * ```js-comment
+ * ```js-code
  *  class Example extends Component {
  *    static propTypes = {
  *      currentProp: PropTypes.func

@@ -42,7 +42,7 @@ type DimensionTypes = 'width' | 'height'
  *
  *
  * Example usage of the `ResizeObserver`:
- * ```js-comment
+ * ```js-code
  *  const observer = new ResizeObserver((entries) => {
  *   for (let entry of entries) {
  *     const size = {

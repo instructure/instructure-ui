@@ -31,7 +31,7 @@ import { Validator } from 'prop-types'
  * Verify that a prop cannot be given if one or more other props are also
  * given.
  *
- * ```js-comment
+ * ```js-code
  *  import { xor } from '@instructure/ui-prop-types'
  *
  *  class Foo extends Component {

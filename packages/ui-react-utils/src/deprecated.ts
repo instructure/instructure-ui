@@ -62,7 +62,7 @@ const deprecated = (() => {
        * Deprecate React component props. Warnings will display in the console when deprecated
        * props are used. Include the version number when the deprecated component will be removed.
        *
-       * ```js-comment
+       * ```js-code
        *  class Example extends Component {
        *    static propTypes = {
        *      currentProp: PropTypes.func

@@ -44,7 +44,7 @@ import { jsonToMediaQuery } from './jsonToMediaQuery'
  * method and, in most cases, [Responsive](#Responsive) should be
  * used instead.
  *
- * ```js-comment
+ * ```js-code
  * class MyComponent extends Component {
  *   state = {
  *     matches: []

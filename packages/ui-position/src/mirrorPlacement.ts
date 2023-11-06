@@ -39,7 +39,7 @@ import executeMirrorFunction from './executeMirrorFunction'
  * vertically or horizontally based on the first value.
  *
  * Examples
- * ```js-comment
+ * ```js-code
  * mirrorPlacement('top start') // input
  * ['bottom', 'start'] // output
  *

@@ -152,7 +152,7 @@ class TableOfContents extends Component<
       6: 'x-large'
     }
 
-    const TOC = TOCData.map((data) => {
+    const TOC = TOCData.filter((data) => !!data.id).map((data) => {
       return (
         <List.Item
           key={data.id}
