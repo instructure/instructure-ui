@@ -31,7 +31,7 @@ import { Validator } from 'prop-types'
  * Given a validator function, extends the validator functionality to also
  * ensure that the prop has been provided if `.isRequired` is specified.
  *
- * ```js
+ * ```js-comment
  * function validator (props, propName, componentName) {
  *   const propValue = props[propName]
  *   if (propValue === 'purple') {

@@ -12,7 +12,10 @@ order: 3
 
 The following code example presents an annotated version of a typical test. The terms in the comments will be explained over the course of this section.
 
-```javascript
+```js
+---
+type: code
+---
 import React from 'react'
 import {
   mount,
@@ -79,7 +82,10 @@ describe('<MyComponent/>', async () => {
 
 Test suites are how the Mocha framework groups tests. Create a suite by using a `describe()` function that returns all the tests included in the suite:
 
-```javascript
+```js
+---
+type: code
+---
 describe('when variant is set to rectangle', async () => {
   // all the tests related to the rectangle variant
 })
@@ -99,7 +105,10 @@ For readers without JavaScript backgrounds, this is a fancy way of saying that w
 
 So when you see the following query, what is going on under the hood?
 
-```javascript
+```js
+---
+type: code
+---
 const input = await container.find('input')
 ```
 
@@ -113,7 +122,10 @@ Because we’re using the Javascript keyword `await` in our test, we need to let
 
 Remember at nursery school when you’d sing that “clean up, clean up” song while you put your toys away? Well, that’s a big part of what hooks do. They’re handy functions built into [Mocha](https://mochajs.org/#hooks) that you can use to set up or clean up after your tests.
 
-```javascript
+```js
+---
+type: code
+---
 beforeEach(async () => {
   // don’t forget your async/await here too!
   await doSomethingAsync()
@@ -136,7 +148,10 @@ A spy is a function that records arguments and returns values, etc. for any call
 
 To assert on a component, you must first get it mounted -- meaning rendered into the document.
 
-```javascript
+```js
+---
+type: code
+---
 import { mount, find } from '@instructure/ui-test-utils'
 import MyComponent from '../index'
 
@@ -172,7 +187,10 @@ If you pass in an HTML element, the query will search within (and including) tha
 
 You can pass any built-in CSS selector to a query:
 
-```javascript
+```js
+---
+type: code
+---
 const allSVGs = await subject.findAll('svg')
 const visibleFrame = await subject.find('iframe:not([title="always-hidden"])')
 ```
@@ -206,7 +224,10 @@ You can pass the following options to your query:
 
 The query option you will most frequently use will be `expectEmpty`. When you need to make a negative assertion, set `expectEmpty` to `true`, so that the query function knows that the desired result of the query is for nothing to be found. Otherwise, your test will time out and fail.
 
-```javascript
+```js
+---
+type: code
+---
 const foo = await FooLocator.find({ expectEmpty: true })
 ```
 
@@ -216,7 +237,10 @@ As a general rule, it’s best to avoid negative assertions (asserting that some
 
 The above query methods are applied to query results, so that it’s easy to run additional queries within them.
 
-```javascript
+```js
+---
+type: code
+---
 const form = await find('form')
 
 // call helper methods on the results of a find query
@@ -279,20 +303,29 @@ Note that React uses [synthetic events](https://reactjs.org/docs/events.html). H
 
 `ui-test-utils` provides access to all native [web events](https://developer.mozilla.org/en-US/docs/Web/Events) as helper methods on query results.
 
-```javascript
+```js
+---
+type: code
+---
 const component = await ComponentLocator.find()
 await component.mouseDown()
 ```
 
 For keyboard events (`keyDown`, `keyPress`, `keyUp`), `ui-test-utils` uses the [keycodes library](https://github.com/timoxley/keycode) to make it easy to specify which key (as the first argument), using a string label.
 
-```javascript
+```js
+---
+type: code
+---
 await component.keyDown('enter')
 ```
 
 The second argument for keyboard events, and the first for all others, is an optional `Event` initialization object that is passed into the native `Event` constructor.
 
-```javascript
+```js
+---
+type: code
+---
 await component.click({ button: 0, bubbles: false })
 ```
 
@@ -334,7 +367,10 @@ If you’ve ever accused Professor Plum of murder in the library with the lead p
 
 Once you've mounted your component in the document you can run tools like [axe-core](https://www.deque.com/axe/) to verify that the rendered markup meets accessibility requirements. `ui-test-utils` provides a wrapper utility for running `axe-core`:
 
-```javascript
+```js
+---
+type: code
+---
 import { accessible, mount, expect } from '@instructure/ui-test-utils'
 
 it('should be accessible', async () => {
@@ -347,7 +383,10 @@ it('should be accessible', async () => {
 
 Testing the behavior of responsive components often requires changing the browser viewport size. `ui-test-utils` provides a utility to do just that:
 
-```javascript
+```js
+---
+type: code
+---
 import { viewport, stub } from '@instructure/ui-test-utils'
 
 it('should do something when the viewport size changes', async () => {
@@ -371,14 +410,20 @@ If you’re familiar with the concept of [Page Object Models](https://martinfowl
 
 The only required argument in a locator is a _semantic_ (don’t use classes, divs, or spans) CSS selector:
 
-```javascript
+```js
+---
+type: code
+---
 import { locator } from '@instructure/ui-test-utils'
 export const fooLocator = locator('[data-foo]')
 ```
 
 Import this basic locator into your tests file, and you can now use it as follows:
 
-```javascript
+```js
+---
+type: code
+---
 const foo = await fooLocator.find()
 ```
 
@@ -390,7 +435,10 @@ const foo = await fooLocator.find()
 
 Locators are more than just selector shortcuts: They can take an object of custom methods (functions you can run on the results) as their second argument. Here’s a shortened example from Instructure UI’s `ToggleDetails` component:
 
-```javascript
+```js
+---
+type: code
+---
 import { locator } from '@instructure/ui-test-utils'
 import ToggleDetails from './index'
 
@@ -406,7 +454,10 @@ export default locator(ToggleDetails.selector, customMethods)
 
 This locator first defines the CSS selector it will use to find the element that does the toggling in `ToggleDetails`. Then it defines a custom method that test writers can use to click this element. The `ToggleDetails.selector` in the export is a `ui-test-utils` feature that will add a data attribute to the root element in the `ToggleDetails` component that the library uses as a hook when the test writer uses the locator:
 
-```javascript
+```js
+---
+type: code
+---
 import ToggleDetailsLocator from '../locator'
 const toggleDetails = await ToggleDetailsLocator.find()
 ```

@@ -38,7 +38,10 @@ To set up your environment to use `@instructure/ui-test-utils`, install the foll
 
 Create a `karma.conf.js` file in your project root
 
-```javascript
+```js
+---
+type: code
+---
 // karma.conf.js
 const path = require('path')
 
@@ -123,13 +126,19 @@ However, if you need to use CSS selectors, we recommend targeting the **semantic
 
 - **Semantic element names**. A `<header>`, for example, describes a specific type of content and is a tag that is unlikely to change over the course of the component’s life.
 
-```javascript
+```js
+---
+type: code
+---
 const header = await myComponent.find('header')
 ```
 
 - **Accessibility attributes**. Attributes like `role`, `type`, or `alt` make great selector targets because they describe what the element does and are also unlikely to change with, say, a design update to the component. ARIA attributes are also great to use in selectors.
 
-```javascript
+```js
+---
+type: code
+---
 const dialog = myComponent.find('[role="dialog"]')
 
 const dialog = myComponent.find('[aria-label="Dialog"]')

@@ -28,7 +28,7 @@ Just like [**ui-themeable**](https://legacy.instructure.design/#ui-themeable), *
 - applying styles using the component variables (instead of `styles.css` file, now we use a `styles.js` file),
 - and applying themes by wrapping the component in a theme provider component.
 
-```javascript
+```js
 ---
 type: embed
 ---
@@ -57,6 +57,9 @@ The new theme provider is called `InstUISettingsProvider`, which is our own wrap
 #### Using the built-in themes
 
 ```js
+---
+type: code
+---
 // before
 ReactDOM.render(
   <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
@@ -81,6 +84,9 @@ ReactDOM.render(
 If you are using global theme overrides for some components, change the structure of the overrides object: wrap them in a "componentOverrides" object, and the keys are simply the names of the components:
 
 ```jsx
+---
+type: code
+---
 // before
 <ApplyTheme theme={{
    [Button.theme]: {
@@ -116,6 +122,9 @@ If you are using global theme overrides for some components, change the structur
 If you need to, and your app is using multiply themes, you can specify overrides for just one specific theme.
 
 ```jsx
+---
+type: code
+---
 <InstUISettingsProvider
   theme={{
     themeOverrides: {
@@ -137,6 +146,9 @@ If you need to, and your app is using multiply themes, you can specify overrides
 The `componentOverrides` can also be nested inside `themeOverrides`. This method is helpful if you want to override e.g. the `Alert` component "**only** in canvas theme".
 
 ```jsx
+---
+type: code
+---
 <InstUISettingsProvider
   theme={{
     themeOverrides: {
@@ -164,6 +176,9 @@ If you need to tweak just one component locally, you can do so with a component 
 **The `theme` prop was renamed to `themeOverride`.**
 
 ```jsx
+---
+type: code
+---
 // before
 <ExampleComponent theme={{ hoverColor: '#eee' }} />
 
@@ -176,12 +191,18 @@ If you need to tweak just one component locally, you can do so with a component 
 In order to use the codemod run:
 
 ```sh
+---
+type: code
+---
 npx @instructure/instui-cli codemod-v8 -t themeOverride
 ```
 
 Example usage:
 
 ```sh
+---
+type: code
+---
 #in the root of the project
 npx @instructure/instui-cli codemod-v8 -t themeOverride -p ./src
 ```
@@ -189,12 +210,15 @@ npx @instructure/instui-cli codemod-v8 -t themeOverride -p ./src
 To learn more about the available options and defaults simply run:
 
 ```sh
+---
+type: code
+---
  npx @instructure/instui-cli codemod-v8 --help
 ```
 
 #### theme.use() is deprecated
 
-```javascript
+```js
 ---
 type: embed
 ---
@@ -211,6 +235,9 @@ type: embed
 Applying themes with the former `.use()` method of themes (added by ui-themeable) is now deprecated. Wrap your app in `InstUISettingsProvider` instead.
 
 ```js
+---
+type: code
+---
 // before
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 if (localStorage.getItem('mode') === 'highContrast') {
@@ -239,6 +266,9 @@ ReactDOM.render(
 Instead of passing the theme overrides to the `.use()` method, just merge the theme with the global overrides when passing it to the theme provider.
 
 ```js
+---
+type: code
+---
 // before
 import { theme } from '@instructure/canvas-theme'
 theme.use({ overrides: { transitions: { duration: '0ms' } } })
@@ -276,6 +306,9 @@ Merge the default variable object and `themeSpecificStyle[theme.key]` in the ret
 **Before:**
 
 ```js
+---
+type: code
+---
 // ui-themeable
 
 export default function generator({ colors, borders, typography }) {
@@ -306,6 +339,9 @@ generator['canvas-high-contrast'] = function () {
 **After:**
 
 ```js
+---
+type: code
+---
 // emotion
 
 /**
@@ -364,6 +400,9 @@ Create a `styles.js` file next to the `theme.js`. Write and export a function na
 Use the content of the `styles.css` and convert it to css-in-js. Use the passed component variables, props and state where needed. (More info in the [emotion](#emotion) docs.) Use [Emotion's Object Styles documentation](https://emotion.sh/docs/object-styles) or other InstUI components as a reference.
 
 ```js
+---
+type: code
+---
 /**
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
@@ -413,6 +452,9 @@ In the `index.js` of the component, replace the imports, the decorator, and refa
 Add the `/** @jsx jsx */` annotation on top.
 
 ```js
+---
+type: code
+---
 /** @jsx jsx */
 import { Children, Component } from 'react'
 ```
@@ -425,6 +467,9 @@ import { Children, Component } from 'react'
 - Don't forget to update the dependencies in `package.json`.
 
 ```js
+---
+type: code
+---
 // before
 import { themeable } from '@instructure/ui-themeable'
 import theme from './theme'
@@ -439,6 +484,9 @@ import generateStyle from './styles'
 **Note:** these utils were moved from `ui-themeable` to the `emotion` package: ThemeablePropValues, ThemeablePropTypes, makeThemeVars, getShorthandPropValue, mirrorShorthandCorners, mirrorShorthandEdges. Update the import where needed. We provided a codemod for these import transformations:
 
 ```bash
+---
+type: code
+---
 npx @instructure/instui-cli codemod --scope-modifications imports -v 8
 ```
 
@@ -447,6 +495,9 @@ npx @instructure/instui-cli codemod --scope-modifications imports -v 8
 Replace `@themeable` decorator with `@withStyle(generateStyle, generateComponentTheme)`, passing the style and theme generators. (If needed, you can pass `null` instead of both, e.g. when there is a stylesheet, but you don't use any theme variables.)
 
 ```js
+---
+type: code
+---
 // before
 @themeable(theme, styles)
 class ExampleComponent extends Component { ... }
@@ -463,6 +514,9 @@ The props `makeStyles` and `styles` are added by the decorator, so you might run
 In the `componentDidMount` and `componentDidUpdate` methods, call the `makeStyles` method (available on this.props) to generate the styles object, passing the state (or any other object needed).
 
 ```js
+---
+type: code
+---
 static propTypes = {
   // eslint-disable-next-line react/require-default-props
   makeStyles: PropTypes.func,
@@ -487,6 +541,9 @@ In the `render` method, use emotion's `css={this.props.styles.componentName}` sy
 **Before:**
 
 ```jsx
+---
+type: code
+---
 // before in index.js
 render() {
   const classes = {
@@ -502,6 +559,10 @@ render() {
 ```
 
 ```css
+---
+type: code
+---
+
 /* before in styles.css */
 .root {
   display: block;
@@ -524,6 +585,9 @@ render() {
 **After:**
 
 ```jsx
+---
+type: code
+---
 // after in index.js
 render() {
   return (
@@ -533,6 +597,9 @@ render() {
 ```
 
 ```js
+---
+type: code
+---
 // after in styles.js
 const sizeVariants = {
   small: { fontSize: '1em' },
@@ -558,6 +625,9 @@ If you access theme variables in the `index.js`, you need to pass them through `
 Before:
 
 ```jsx
+---
+type: code
+---
 render() {
   return (
     <div maxWidth={this.theme.maxWidth}>
@@ -570,6 +640,9 @@ render() {
 After:
 
 ```js
+---
+type: code
+---
 // after in styles.js
 return {
   componentName: {
@@ -581,6 +654,9 @@ return {
 ```
 
 ```jsx
+---
+type: code
+---
 // after in index.js
 render() {
   return (
@@ -598,6 +674,10 @@ Global styles need to be transformed to the "emotion way" too.
 **Before:**
 
 ```css
+---
+type: code
+---
+
 // styles.css
 
 :global {
@@ -614,6 +694,9 @@ Global styles need to be transformed to the "emotion way" too.
 Write your global styles in the `styles.js` file on a "globalStyles" key. You don't have to add labels to global styles.
 
 ```js
+---
+type: code
+---
 // styles.js
 
 return {
@@ -632,6 +715,9 @@ In the `index.js`, import `Global` from `@instructure/emotion`, which is equival
 In the render method, use the `<Global>` component and pass the the "globalStyles" as its `styles={}` property.
 
 ```jsx
+---
+type: code
+---
 // index.js
 
 import { withStyle, jsx, Global } from '@instructure/emotion'
@@ -657,6 +743,10 @@ Animations are handled with Emotion's [keyframes](https://emotion.sh/docs/keyfra
 **Before:**
 
 ```css
+---
+type: code
+---
+
 // styles.css
 
 @keyframes pulse {
@@ -679,6 +769,9 @@ Import `keyframes` from `@instructure/emotion` in the `styles.js` file.
 Define the animation on the top of the page as a `const` and use it in your style object where needed. **Make sure that it is defined outside of the `generateStyle` method, otherwise it is causing problems with style recalculation.**
 
 ```js
+---
+type: code
+---
 // styles.js
 
 import { keyframes } from '@instructure/emotion'
@@ -704,6 +797,9 @@ const generateStyle = (componentTheme, props, state) => {
 #### An example component using emotion theming
 
 ```jsx
+---
+type: code
+---
 /** @jsx jsx */
 import { Component } from 'react'
 import PropTypes from 'prop-types'
@@ -769,6 +865,9 @@ For components with theme tests, you can use `generateComponentTheme` from `them
 Import the themes needed for your test, and pass them to the generator.
 
 ```js
+---
+type: code
+---
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import generateComponentTheme from '../theme'
 describe('YourComponent.theme', () => {

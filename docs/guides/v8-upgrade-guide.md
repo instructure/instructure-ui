@@ -50,6 +50,9 @@ We strongly recommend to use codemods to ease your update process. To run these 
 #### 1. Run the v7 `updatePropNames` codemod:
 
 ```sh
+---
+type: code
+---
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.ts <path> --config=node_modules/@instructure/instui-config/codemod-configs/v7/propNames.config.json
 ```
 
@@ -58,6 +61,9 @@ This will do most of the simple upgrades (renaming props, deleting props).
 #### 2. Run the `updateV7Props` codemod:
 
 ```sh
+---
+type: code
+---
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.ts <path>
 ```
 
@@ -66,6 +72,9 @@ This will update more complex components (e.g. Buttons), and will tell you if it
 #### 3. Update your dependencies latest InstUI 8 and then run
 
 ```sh
+---
+type: code
+---
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Breaking.ts <path>
 ```
 
@@ -78,6 +87,9 @@ This will update the breaking changes from themeable to emotion:
 Then run
 
 ```sh
+---
+type: code
+---
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.ts <path> --config=node_modules/@instructure/instui-config/codemod-configs/v8/imports.config.js
 ```
 
@@ -90,6 +102,9 @@ After this you will need to manually update you custom components according to t
 This codemod is useful is you have lots of ReactDOM.render calls and want to wrap them to add `InstUISettingsProvider` easily.
 
 ```sh
+---
+type: code
+---
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8ReactDOM.ts <path> -fileName updateV8ReactDOM.txt -wrapperPath <import path> -wrapperTag <tagName> -isDefaultImport <true or false>
 ```
 
@@ -106,7 +121,10 @@ Parameters (all optional):
 
 These scripts are used for building and configuring InstUI, thus have frequent internal changes. If you depend on one of these packages we suggest to copy & paste their code to your project at the version you are currently using them:
 
-```
+```txt
+---
+type: code
+---
 cz-lerna-changelog
 eslint-plugin-instructure-ui
 instui-config

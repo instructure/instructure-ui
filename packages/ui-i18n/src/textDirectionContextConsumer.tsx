@@ -34,7 +34,7 @@ import { bidirectional } from './bidirectional'
  *
  * As a HOC:
  *
- * ```js
+ * ```js-comment
  * import { textDirectionContextConsumer } from '@instructure/ui-i18n'
  *
  * class Example extends React.Component {

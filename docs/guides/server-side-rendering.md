@@ -10,7 +10,7 @@ This document will demonstrate how to achieve Server Side Rendering (SSR) with [
 
 > This document assumes that you already have a Next.js application in place.
 
-```javascript
+```js
 ---
 type: embed
 ---
@@ -37,6 +37,9 @@ type: embed
 - install InstUI related dependencies:
 
 ```sh
+---
+type: code
+---
 npm install @instructure/emotion @instructure/ui-react-utils
 ```
 

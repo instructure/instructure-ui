@@ -8,99 +8,146 @@ order: 9
 
 This document outlines the steps required for the release process. Please follow the instructions below:
 
-1. **Checkout to Master**
-   ```
-   git checkout master
-   ```
-2. **Create a New Branch for Release**
-   - The branch should be created from the latest master.
-   ```
-   git checkout -b release
-   ```
-3. **Run Npm Bump Command**
+##### 1. Checkout to Master
 
-   - This will propose new version numbers.
+```text
+---
+type: code
+---
+git checkout master
+```
 
-   ```
-   npm run bump
-   ```
+##### 2. Create a New Branch for Release
 
-   - Check if the proposed version numbers are correct. If they are, accept them.
+- The branch should be created from the latest master.
 
-4. **Check the CHANGELOG.md**
+```text
+---
+type: code
+---
+git checkout -b release
+```
 
-   - If there's something missing, add it manually.
+##### 3. Run Npm Bump Command
 
-5. **Amend Your Commit**
-   - If you made changes to the CHANGELOG.md, use the commands below to amend your commit.
-   ```
-   git add .
-   git commit --amend
-   ```
-6. **Push Your Changes to Remote**
-   ```
-   git push origin release
-   ```
-7. **Ask for Review**
+- This will propose new version numbers.
 
-   - Once your changes are pushed, request for review.
+```text
+---
+type: code
+---
+npm run bump
+```
 
-8. **Merge to Master**
+- Check if the proposed version numbers are correct. If they are, accept them.
 
-   - If the reviews and all automated checks are successful, merge your release branch to master.
+##### 4. Check the CHANGELOG.md
 
-9. **Wait for the Release Process to Succeed**
+- If there's something missing, add it manually.
 
-   - The release process may take some time, be patient.
+##### 5. Amend Your Commit
 
-10. **Announce the Release on Slack**
+- If you made changes to the CHANGELOG.md, use the commands below to amend your commit.
+
+```text
+---
+type: code
+---
+git add .
+git commit --amend
+```
+
+##### 6. Push Your Changes to Remote
+
+```text
+---
+type: code
+---
+git push origin release
+```
+
+##### 7. Ask for Review
+
+- Once your changes are pushed, request for review.
+
+##### 8. Merge to Master
+
+- If the reviews and all automated checks are successful, merge your release branch to master.
+
+##### 9. Wait for the Release Process to Succeed
+
+- The release process may take some time, be patient.
+
+##### 10. Announce the Release on Slack
 
     - Once the release is successful, announce it on the #instui channel on Slack. Be sure to include the changelog and new version in your announcement.
 
-11. **Add a New Release to GitHub**
+##### 11. Add a New Release to GitHub
+
     - Finally, add a new release to GitHub. This will display the newly released version as the latest.
 
-# Release Process for Legacy Versions
+##### 12. Release Process for Legacy Versions
 
 This document describes the steps to follow when releasing updates to legacy versions. The example given is for v7:
 
-1. **Checkout to the Maintenance Branch**
-   - For example, for v7, check out the `v7_maintenance` branch.
-   ```bash
-   git checkout v7_maintenance
-   ```
-2. **Create a New Branch for the Release**
-   - The branch should be created from the maintenance branch.
-   ```bash
-   git checkout -b release
-   ```
-3. **Run Npm Bump Command**
+##### 1. Checkout to the Maintenance Branch
 
-   - This will propose new version numbers.
+- For example, for v7, check out the `v7_maintenance` branch.
 
-   ```bash
-   npm run bump
-   ```
+```bash
+---
+type: code
+---
+git checkout v7_maintenance
+```
 
-   - Check if the proposed version numbers are correct. If they are, accept them.
+##### 2. Create a New Branch for the Release
 
-4. **Check the Changelog**
+- The branch should be created from the maintenance branch.
 
-   - Amend your commit if necessary.
+```bash
+---
+type: code
+---
+git checkout -b release
+```
 
-5. **Push Your Changes to Remote**
-   ```bash
-   git push origin release
-   ```
-6. **Request a Review and Wait for Automated Checks**
+##### 3. Run Npm Bump Command
 
-7. **Merge to the Maintenance Branch**
+- This will propose new version numbers.
 
-   - After successful reviews and checks, merge your release branch to the maintenance branch.
+```bash
+---
+type: code
+---
+npm run bump
+```
 
-8. **Run the Release Job Manually in GitHub Actions**
+- Check if the proposed version numbers are correct. If they are, accept them.
 
-   - The release process may take some time, be patient.
+##### 4. Check the Changelog
 
-9. **Announce the Release**
-   - Once the release is successful, announce it on the #instui channel on Slack. Be sure to include the changelog and new version in your announcement.
+- Amend your commit if necessary.
+
+##### 5. Push Your Changes to Remote
+
+```bash
+---
+type: code
+---
+git push origin release
+```
+
+##### 6. Request a Review and Wait for Automated Checks
+
+##### 7. Merge to the Maintenance Branch
+
+- After successful reviews and checks, merge your release branch to the maintenance branch.
+
+##### 8. Run the Release Job Manually in GitHub Actions
+
+- The release process may take some time, be patient.
+
+##### 9. Announce the Release
+
+- Once the release is successful, announce it on the #instui channel on Slack. Be sure to include the changelog and new version in your announcement.

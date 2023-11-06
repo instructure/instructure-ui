@@ -35,6 +35,9 @@ This basically means you don't necessarily have to wrap each application tree wi
 InstUI leverages the [ThemeRegistry](/#ThemeRegistry) package to achieve global theming.
 
 ```jsx
+---
+type: code
+---
 // app/init sets the global theme
 import { canvas } from '@instructure/ui-themes'
 
@@ -46,6 +49,9 @@ canvas.use()
 On the broader level, there is the main theme object that contains the color, spacing, typography etc. variables available in the theme (e.g.: [canvas theme](/#canvas)). The application level theme can be set via the [InstUISettingsProvider](/#InstUISettingsProvider) component.
 
 ```jsx
+---
+type: code
+---
 // app/component root sets the app theme
 <InstUISettingsProvider theme={canvas}>
   <ExampleComponent />
@@ -61,6 +67,9 @@ See the [emotion](/#emotion), [built-in themes](/#ui-themes) and [InstUISettings
 Either you set up the themes globally, or you use the `InstUISettingsProvider` to set up themes, the component's `theme.js` will map it to theme variables:
 
 ```jsx
+---
+type: code
+---
 // component's `theme.js` maps the
 const generateComponentTheme = (theme) => {
   const { colors } = theme // global theme, e.g.: canvas theme
@@ -328,6 +337,9 @@ type: example
 For child components both the displayName (`'InlineList.Item'`) and the componentId (`List.Item.componentId`) can be used as keys in `componentOverrides`.
 
 ```jsx
+---
+type: code
+---
 <InstUISettingsProvider
   theme={{
     componentOverrides: {
@@ -536,6 +548,9 @@ You can use the global theming and the application level theming together, howev
 If you globally .use() a theme and would like to override that theme in a sub-tree of your application then just wrap that part in an `InstUISettingsProvider`
 
 ```js
+---
+type: code
+---
 //ui/init.js
 import { canvas } from "@instructure/ui-themes"
 
@@ -547,6 +562,9 @@ canvas.use({ overrides: ... })
 Then just specify the overrides, not the full theme:
 
 ```jsx
+---
+type: code
+---
 //then later in a sub-tree you can override the theme for that sub-tree only:
 render() {
   return(
@@ -565,6 +583,9 @@ render() {
 This example won't override the global theme, instead it will override the application level theme provided to `InstUISettingsProvider`
 
 ```js
+---
+type: code
+---
 //ui/init.js
 import { canvas } from "@instructure/ui-themes"
 
@@ -574,6 +595,9 @@ canvas.use({ overrides: ... })
 ```
 
 ```jsx
+---
+type: code
+---
 //your application root code:
 import { instructure } from "@instructure/ui-themes"
 

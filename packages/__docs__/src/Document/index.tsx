@@ -40,7 +40,6 @@ import { Description } from '../Description'
 import { Properties } from '../Properties'
 import { Params } from '../Params'
 import { Returns } from '../Returns'
-import { Methods } from '../Methods'
 import { ComponentTheme } from '../ComponentTheme'
 import { TableOfContents } from '../TableOfContents'
 import { Heading } from '../Heading'
@@ -298,25 +297,11 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderMethods(doc: DocDataType) {
-    const { id, methods } = doc
-
-    return methods && methods.length > 0 ? (
-      <View margin="small 0" display="block">
-        <Heading level="h2" as="h3" id={`${id}Methods`} margin="0 0 small 0">
-          Methods
-        </Heading>
-        <Methods methods={methods} />
-      </View>
-    ) : null
-  }
-
   renderDetails(doc: DocDataType) {
     return this.hasDetails(doc) ? (
       <div>
         {this.renderParams(doc)}
         {this.renderReturns(doc)}
-        {this.renderMethods(doc)}
         {this.renderProps(doc)}
         {this.renderTheme(doc)}
       </div>
