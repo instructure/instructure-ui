@@ -29,7 +29,7 @@
  * Verify that either value is provided as a prop if as="input", and children
  * if provided otherwise
  *
- * ```js-comment
+ * ```js-code
  *  import { childrenOrValue } from '@instructure/ui-prop-types'
  *
  *  class Foo extends Component {

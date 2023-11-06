@@ -37,11 +37,11 @@ import React from 'react'
  * or `maxHeight` where breakpoint value is either a string or a number.
  *
  * Example input
- * ```js-comment
+ * ```js-code
  * { minWidth: 350, maxWidth: 600 }
  * ```
  * Example output
- * ```js-comment
+ * ```js-code
  * '(min-width: 350px) and (max-Width: 600px)'
  * ```
  * @module jsonToMediaQuery

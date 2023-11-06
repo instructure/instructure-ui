@@ -59,7 +59,7 @@ type BidirectionalType = {
  *
  * As a HOC:
  *
- * ```js-comment
+ * ```js-code
  * import { bidirectional } from '@instructure/ui-i18n'
  *
  * class Example extends React.Component {

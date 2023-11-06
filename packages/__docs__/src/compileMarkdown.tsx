@@ -122,6 +122,31 @@ const getComponent = (componentType: string, data: Record<string, any>) => {
   return undefined
 }
 
+/**
+ * this needed here, because the ts-doc parser can't handle frontmatter inside the codeblock, so we can't
+ * figure type out. All comment-based codeblocks need to postfix the language with '-code', '-embed' or '-example'
+ */
+const inferTypeAndLanguage = ({
+  type,
+  language
+}: {
+  type?: string
+  language?: string
+}) => {
+  if (!type && language) {
+    if (language.includes('-code')) {
+      return { language: language.slice(0, -5), type: 'code' }
+    }
+    if (language.includes('-embed')) {
+      return { language: language.slice(0, -6), type: 'embed' }
+    }
+    if (language.includes('-example')) {
+      return { language: language.slice(0, -8), type: 'example' }
+    }
+  }
+  return { language, type }
+}
+
 const renderer = (title?: string) => ({
   table: (table: ReactElement[]) => {
     const headCells = table?.[0]?.props?.children?.props?.children?.map(
@@ -157,8 +182,8 @@ const renderer = (title?: string) => ({
   ),
   list: (list: ReactElement[], ordered: boolean) => {
     if (list[0].props.children[0][0].type === 'code') {
-      const code1 = list[0].props.children[0][0].props.children
-      const code2 = list[1].props.children[0][0].props.children
+      const code1 = list?.[0]?.props?.children?.[0]?.[0]?.props?.children
+      const code2 = list?.[1]?.props?.children?.[0]?.[0]?.props?.children
       const matter = [
         grayMatter(trimIndent(code1)),
         grayMatter(trimIndent(code2))
@@ -182,14 +207,12 @@ const renderer = (title?: string) => ({
   code: (code: string, rawLanguage: string) => {
     if (rawLanguage) {
       const matter = grayMatter(trimIndent(code))
-      const { type, readonly, background } = matter.data
-      /**
-       * this needed here, because the ts-doc parser can't handle graymatter inside the codeblock, so we can't
-       * set the type to 'code'. All comment-based codeblocks need to postfix the language with '-comment'
-       */
-      const language = rawLanguage.includes('-comment')
-        ? rawLanguage.slice(0, -8)
-        : rawLanguage
+      const { readonly, background } = matter.data
+      const { type, language } = inferTypeAndLanguage({
+        type: matter.data.type,
+        language: rawLanguage
+      })
+
       const data = {
         code: matter.content,
         language,
@@ -198,7 +221,7 @@ const renderer = (title?: string) => ({
         background
       }
 
-      if (type === 'code' || language !== rawLanguage) {
+      if (type === 'code') {
         return (
           <View key={uuid()} display="block" margin="medium none">
             {getComponent('SourceCodeEditor', data)}

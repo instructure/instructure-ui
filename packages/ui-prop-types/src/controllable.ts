@@ -40,7 +40,7 @@ type CheckTypeInternal = (
  * Ensure that a corresponding handler function is provided for the given prop if the
  * component does not manage its own state.
  *
- * ```js-comment
+ * ```js-code
  *  import { controllable } from '@instructure/ui-prop-types'
  *
  *  class Foo extends Component {

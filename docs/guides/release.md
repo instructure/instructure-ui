@@ -1,7 +1,7 @@
 ---
 title: Release process
 category: Guides
-order: 9
+order: 8
 ---
 
 # Release Process
