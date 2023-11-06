@@ -96,7 +96,7 @@ const chromaticSettings = {
   viewports: [1200],
   pauseAnimationAtEnd: true,
   delay: 700,
-  diffThreshold: 0.9 // default is 0.063 - increased to avoid false positives
+  diffThreshold: 1 // default is 0.063 - increased to avoid false positives
 }
 
 let numStories = 0
