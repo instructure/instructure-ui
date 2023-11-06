@@ -63,7 +63,9 @@ const generateStyle = (
             fill: componentTheme.selectedIconColor,
             color: componentTheme.selectedFontColor,
             '&:active, &:hover': {
-              backgroundColor: componentTheme.selectedBackgroundColor
+              backgroundColor: componentTheme.selectedBackgroundColor,
+              color: componentTheme.selectedFontColor,
+              textDecoration: componentTheme.linkTextDecoration
             },
             '&:focus': {
               backgroundColor: componentTheme.selectedBackgroundColor,
@@ -78,7 +80,9 @@ const generateStyle = (
               backgroundColor: componentTheme.hoverBackgroundColor
             },
             '&:hover': {
-              backgroundColor: componentTheme.hoverBackgroundColor
+              backgroundColor: componentTheme.hoverBackgroundColor,
+              color: componentTheme.fontColor,
+              textDecoration: componentTheme.linkTextDecoration
             },
             '&:focus': {
               backgroundColor: componentTheme.hoverBackgroundColor,
