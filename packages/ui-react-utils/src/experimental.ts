@@ -111,7 +111,7 @@ export {
    * Warnings will display in the console when experimental components/props
    * props are used.
    *
-   * ```js
+   * ```js-comment
    *  class Example extends Component {
    *    static propTypes = {
    *      currentProp: PropTypes.func

@@ -54,7 +54,7 @@ import { UIElement } from '@instructure/shared-types'
  * utility method and, in most cases, [Responsive](#Responsive)
  * should be used instead.
  *
- * ```js
+ * ```js-comment
  * class MyComponent extends Component {
  *   state = {
  *     matches: []

@@ -122,7 +122,7 @@ const getComponent = (componentType: string, data: Record<string, any>) => {
   return undefined
 }
 
-const renderer = {
+const renderer = (title?: string) => ({
   table: (table: ReactElement[]) => {
     const headCells = table?.[0]?.props?.children?.props?.children?.map(
       (el: ReactElement) => el?.props?.children?.[0]
@@ -169,7 +169,7 @@ const renderer = {
         code: [matter[0].content, matter[1].content],
         language: 'js',
         readOnly: false,
-        title: 'Example'
+        title
       }
       return (
         <View key={uuid()} display="block" margin="medium none">
@@ -179,19 +179,26 @@ const renderer = {
     }
     return ordered ? <ol key={uuid()}>{list}</ol> : <ul key={uuid()}>{list}</ul>
   },
-  code: (code: string, language: string) => {
-    if (language) {
+  code: (code: string, rawLanguage: string) => {
+    if (rawLanguage) {
       const matter = grayMatter(trimIndent(code))
-      const { type, readonly, title, background } = matter.data
+      const { type, readonly, background } = matter.data
+      /**
+       * this needed here, because the ts-doc parser can't handle graymatter inside the codeblock, so we can't
+       * set the type to 'code'. All comment-based codeblocks need to postfix the language with '-comment'
+       */
+      const language = rawLanguage.includes('-comment')
+        ? rawLanguage.slice(0, -8)
+        : rawLanguage
       const data = {
         code: matter.content,
         language,
         readOnly: readonly,
-        title: title || 'Example',
+        title: title,
         background
       }
 
-      if (type === 'code') {
+      if (type === 'code' || language !== rawLanguage) {
         return (
           <View key={uuid()} display="block" margin="medium none">
             {getComponent('SourceCodeEditor', data)}
@@ -217,15 +224,15 @@ const renderer = {
   },
   heading: (text: string, level: number) =>
     headingVariants[`h${level}`]?.(uuid(), text),
-  link: (href: string, title: string) => (
+  link: (href: string, text: string) => (
     <Link key={uuid()} href={href}>
-      {title}
+      {text}
     </Link>
   )
-}
+})
 
-function compileMarkdown(content: string) {
-  return <Markdown renderer={renderer}>{content}</Markdown>
+function compileMarkdown(content: string, title?: string) {
+  return <Markdown renderer={renderer(title)}>{content}</Markdown>
 }
 
 export default compileMarkdown

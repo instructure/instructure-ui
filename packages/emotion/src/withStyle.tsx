@@ -96,7 +96,7 @@ const defaultValues = {
  *
  * As a HOC:
  *
- * ```js
+ * ```js-comment
  * import { withStyle, jsx } from '@instructure/emotion'
  * import generateStyle from './styles'
  * import generateComponentTheme from './theme'
@@ -120,7 +120,7 @@ const defaultValues = {
  *
  * See more about the overrides on the [Using theme overrides](/#using-theme-overrides) docs page.
  *
- * ```js
+ * ```js-comment
  * // ExampleComponent/theme.js
  * const generateComponentTheme = (theme) => {
  *   const { colors } = theme
@@ -138,7 +138,7 @@ const defaultValues = {
  * export default generateComponentTheme
  * ```
  *
- * ```jsx
+ * ```jsx-comment
  * {// global theme override}
  * <InstUISettingsProvider theme={{
  *   colors: { backgroundMedium: '#888' }

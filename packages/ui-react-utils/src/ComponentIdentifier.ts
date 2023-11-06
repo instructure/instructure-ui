@@ -36,7 +36,7 @@ category: utilities/react
 ---
 Abstract component identifier. Helpful for picking out a specific child.
 
-  ```js
+  ```js-comment
   class App extends Component {
     render () {
       const title = pick(Title, this.props.children)

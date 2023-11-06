@@ -557,9 +557,7 @@ class App extends Component<AppProps, AppState> {
 
     return (
       <Section id="CHANGELOG">
-        {this.renderWrappedContent(
-          compileMarkdown(content, { title: 'CHANGELOG' })
-        )}
+        {this.renderWrappedContent(compileMarkdown(content))}
       </Section>
     )
   }

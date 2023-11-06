@@ -42,22 +42,22 @@ type DimensionTypes = 'width' | 'height'
  *
  *
  * Example usage of the `ResizeObserver`:
- *  ```js
- *    const observer = new ResizeObserver((entries) => {
- *    for (let entry of entries) {
- *       const size = {
- *        width: entry.contentRect.width
- *       }
- *
- *       if (size.width !== origSize.width) {
- *         // call your handler function here
- *         this._debounced(size)
- *      }
+ * ```js-comment
+ *  const observer = new ResizeObserver((entries) => {
+ *   for (let entry of entries) {
+ *     const size = {
+ *       width: entry.contentRect.width
  *     }
- *   })
+ *
+ *     if (size.width !== origSize.width) {
+ *       // call your handler function here
+ *        this._debounced(size)
+ *     }
+ *    }
+ *  })
  *
  *   observer.observe(content)
- *   ```
+ * ```
  *
  * Adds a listener to an element and calls a specified handler function whenever the size changes.
  * @deprecated since version 8.0
