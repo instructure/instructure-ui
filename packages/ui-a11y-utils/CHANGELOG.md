@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** fix popover reopen when clicking the trigger ([895cdfc](https://github.com/instructure/instructure-ui/commit/895cdfcf81f2143dbf33d44738626c333ad4a029))
+
+
+
+
+
 # [8.47.0](https://github.com/instructure/instructure-ui/compare/v8.46.1...v8.47.0) (2023-10-27)
 
 

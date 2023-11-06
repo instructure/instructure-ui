@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
+
+
+### Bug Fixes
+
+* **ui-drilldown:** fix cmd+click not working on drilldown items ([10e53ff](https://github.com/instructure/instructure-ui/commit/10e53ff8960885a09e5626d95eabbb6590526f52))
+
+
+
+
+
 # [8.47.0](https://github.com/instructure/instructure-ui/compare/v8.46.1...v8.47.0) (2023-10-27)
 
 **Note:** Version bump only for package @instructure/ui-drilldown

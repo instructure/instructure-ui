@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** fix popover reopen when clicking the trigger ([895cdfc](https://github.com/instructure/instructure-ui/commit/895cdfcf81f2143dbf33d44738626c333ad4a029))
+* **ui-drilldown:** fix cmd+click not working on drilldown items ([10e53ff](https://github.com/instructure/instructure-ui/commit/10e53ff8960885a09e5626d95eabbb6590526f52))
+* **ui-tray:** fix Tray component unmounting twice when closed ([1ec7647](https://github.com/instructure/instructure-ui/commit/1ec76470479e473377979b2fb1d2a0b4e5f43517))
+
+
+
+
+
 # [8.47.0](https://github.com/instructure/instructure-ui/compare/v8.46.1...v8.47.0) (2023-10-27)
 
 
