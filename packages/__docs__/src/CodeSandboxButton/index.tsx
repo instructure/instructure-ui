@@ -74,7 +74,7 @@ import 'moment/min/locales'
     )}} from "@instructure/ui"\n\n`
 
     const codeLines = this.props.code.split('\n')
-    const shouldRender = !codeLines[codeLines.length - 1].includes('render(')
+    const shouldRender = !codeLines[codeLines.length - 1].includes('render(<')
     const codeBlock = shouldRender
       ? `render(${this.props.code})`
       : this.props.code

@@ -104,16 +104,9 @@ const headingVariants: Record<
 }
 
 const getComponent = (componentType: string, data: Record<string, any>) => {
-  const { code, title, readOnly, background = undefined } = data
+  const { code, title, readOnly = undefined } = data
   if (componentType === 'Playground') {
-    return (
-      <Playground
-        background={background}
-        title={title}
-        code={code}
-        readOnly={readOnly}
-      />
-    )
+    return <Playground title={title} code={code} readOnly={readOnly} />
   }
 
   if (componentType === 'SourceCodeEditor') {
@@ -189,11 +182,9 @@ const renderer = (title?: string) => ({
         grayMatter(trimIndent(code2))
       ]
 
-      // improve on language support and other parameters like readOnly, background or title if necessary
       const data = {
         code: [matter[0].content, matter[1].content],
         language: 'js',
-        readOnly: false,
         title
       }
       return (
@@ -207,7 +198,6 @@ const renderer = (title?: string) => ({
   code: (code: string, rawLanguage: string) => {
     if (rawLanguage) {
       const matter = grayMatter(trimIndent(code))
-      const { readonly, background } = matter.data
       const { type, language } = inferTypeAndLanguage({
         type: matter.data.type,
         language: rawLanguage
@@ -216,9 +206,7 @@ const renderer = (title?: string) => ({
       const data = {
         code: matter.content,
         language,
-        readOnly: readonly,
-        title: title,
-        background
+        title
       }
 
       if (type === 'code') {

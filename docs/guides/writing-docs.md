@@ -312,7 +312,7 @@ The above code will display like this:
 
 **_Note:_** beacuse of this feature, code examples can not be displayed by `lists`
 
-##### 5. comment examples
+### 5. comment examples
 
 `JSDoc` can parse `markdown` even in the comments of `js/ts files`. These `comment-based examples` can not contain `front-matter`:
 

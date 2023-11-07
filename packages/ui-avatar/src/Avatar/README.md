@@ -11,6 +11,7 @@ The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to 
 ```js
 ---
 type: example
+readonly: true
 ---
 <div>
   <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" />
