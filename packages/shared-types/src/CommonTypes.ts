@@ -84,4 +84,6 @@ interface InstUIBaseComponent {
 }
 export interface InstUIComponent
   extends ComponentClass<any, any>,
-    InstUIBaseComponent {}
+    InstUIBaseComponent {
+  originalType?: any
+}

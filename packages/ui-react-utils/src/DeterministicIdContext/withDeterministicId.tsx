@@ -91,7 +91,8 @@ const withDeterministicId = decorator((ComposedComponent: InstUIComponent) => {
 
   // added so it can be tested with ReactTestUtils
   // more info: https://github.com/facebook/react/issues/13455
-  WithDeterministicId.originalType = ComposedComponent
+  WithDeterministicId.originalType =
+    ComposedComponent.originalType || ComposedComponent
 
   if (process.env.NODE_ENV !== 'production') {
     WithDeterministicId.displayName = `WithDeterministicId(${ComposedComponent.displayName})`

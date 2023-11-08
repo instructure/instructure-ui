@@ -126,7 +126,8 @@ const bidirectional: BidirectionalType = decorator((ComposedComponent) => {
 
   // added so it can be tested with ReactTestUtils
   // more info: https://github.com/facebook/react/issues/13455
-  BidirectionalForwardingRef.originalType = ComposedComponent
+  BidirectionalForwardingRef.originalType =
+    (ComposedComponent as any).originalType || ComposedComponent
 
   return BidirectionalForwardingRef
 }) as BidirectionalType

@@ -27,7 +27,8 @@
     "@instructure/ui-badge": "8.47.1",
     "@instructure/ui-color-utils": "8.47.1",
     "@instructure/ui-test-utils": "8.47.1",
-    "@instructure/ui-themes": "8.47.1"
+    "@instructure/ui-themes": "8.47.1",
+    "react-dom": "^18.2.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",

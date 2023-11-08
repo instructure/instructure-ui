@@ -246,7 +246,7 @@ const withStyle = decorator(
 
     // added so it can be tested with ReactTestUtils
     // more info: https://github.com/facebook/react/issues/13455
-    WithStyle.originalType = ComposedComponent
+    WithStyle.originalType = ComposedComponent.originalType || ComposedComponent
 
     // we have to pass these on, because sometimes users
     // access propTypes of the component in other components

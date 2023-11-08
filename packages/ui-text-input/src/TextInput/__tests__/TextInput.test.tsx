@@ -23,6 +23,8 @@
  */
 
 import React from 'react'
+import ReactDOM from 'react-dom'
+import ReactTestUtils from 'react-dom/test-utils'
 import { expect, mount, stub, within, find } from '@instructure/ui-test-utils'
 
 import { TextInput } from '../index'
@@ -41,7 +43,29 @@ const contentAfterSVG = (
   </svg>
 )
 
+class WrapperComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <TextInput />
+      </div>
+    )
+  }
+}
+
 describe('<TextInput/>', async () => {
+  it('can be found and tested with ReactTestUtils', async () => {
+    const rootNode = document.createElement('div')
+    document.body.appendChild(rootNode)
+
+    // eslint-disable-next-line react/no-render-return-value
+    const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
+    ReactTestUtils.findRenderedComponentWithType(
+      rendered as any,
+      (TextInput as any).originalType
+    )
+  })
+
   it('should include a label', async () => {
     await mount(<TextInput renderLabel="Name" />)
     const label = await find('label')
