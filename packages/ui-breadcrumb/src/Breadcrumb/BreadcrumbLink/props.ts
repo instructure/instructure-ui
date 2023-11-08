@@ -48,6 +48,10 @@ type BreadcrumbLinkOwnProps = {
    */
   onClick?: (event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void
   /**
+   * Fires when the Link is hovered
+   */
+  onMouseEnter?: (event: React.MouseEvent<ViewOwnProps, MouseEvent>) => void
+  /**
    * Sets the font-size of the breadcrumb text
    */
   size?: 'small' | 'medium' | 'large'
@@ -82,6 +86,7 @@ const propTypes: PropValidators<PropKeys> = {
   children: PropTypes.node.isRequired,
   href: PropTypes.string,
   onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   iconPlacement: PropTypes.oneOf(['start', 'end'])
@@ -92,6 +97,7 @@ const allowedProps: AllowedPropKeys = [
   'href',
   'iconPlacement',
   'onClick',
+  'onMouseEnter',
   'renderIcon',
   'size'
 ]
