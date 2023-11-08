@@ -45,7 +45,6 @@ import type {
   LiveRegion,
   UIElement
 } from '@instructure/shared-types'
-import type { PortalNode } from '@instructure/ui-portal'
 import type { PositionMountNode } from '@instructure/ui-position'
 import type { TransitionType } from '@instructure/ui-motion'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
@@ -70,7 +69,7 @@ type ModalPropsForPortal = {
   /**
    * Callback fired when `<Modal />` content has been mounted in the DOM
    */
-  onOpen?: (DOMNode: PortalNode) => void
+  onOpen?: (type?: TransitionType) => void
 
   /**
    * Callback fired when `<Modal />` has been unmounted from the DOM
@@ -201,6 +200,7 @@ type ModalStyle = ComponentStyle<'modal' | 'constrainContext'>
 
 type ModalState = {
   transitioning: boolean
+  open: boolean
 }
 
 const propTypes: PropValidators<PropKeys> = {
