@@ -96,7 +96,8 @@ class Modal extends Component<ModalProps, ModalState> {
     super(props)
 
     this.state = {
-      transitioning: false
+      transitioning: false,
+      open: props.open ?? false
     }
   }
 
@@ -114,11 +115,8 @@ class Modal extends Component<ModalProps, ModalState> {
   }
 
   componentDidUpdate(prevProps: ModalProps) {
-    if (prevProps.open && !this.props.open) {
-      // closing
-      this.setState({
-        transitioning: prevProps.transition !== null
-      })
+    if (this.props.open !== prevProps.open) {
+      this.setState({ transitioning: true, open: !!this.props.open })
     }
     this.props.makeStyles?.()
   }
@@ -146,7 +144,7 @@ class Modal extends Component<ModalProps, ModalState> {
     this.DOMNode = DOMNode
   }
 
-  handleTransitionExited: ModalProps['onExited'] = () => {
+  handleTransitionComplete: ModalProps['onEntered' | 'onExited'] = () => {
     this.setState({
       transitioning: false
     })
@@ -252,46 +250,46 @@ class Modal extends Component<ModalProps, ModalState> {
       onExiting,
       onExited,
       constrain,
-      overflow,
+      overflow, // TODO this is not used currently
       ...passthroughProps
     } = this.props
 
-    const portalIsOpen = open || this.state.transitioning
+    const portalIsOpen = this.state.open || this.state.transitioning
 
     return (
       <Portal
         mountNode={mountNode}
         insertAt={insertAt}
         open={portalIsOpen}
-        onOpen={createChainedFunction(this.handlePortalOpen, onOpen)}
-        onClose={onClose}
-        elementRef={this.handleRef}
+        onOpen={this.handlePortalOpen}
       >
-        {portalIsOpen && (
-          <Transition
-            in={open}
-            transitionOnMount
-            unmountOnExit
-            type={transition}
-            onEnter={onEnter}
-            onEntering={onEntering}
-            onEntered={onEntered}
-            onExit={onExit}
-            onExiting={onExiting}
-            onExited={createChainedFunction(
-              this.handleTransitionExited,
-              onExited
-            )}
-          >
-            {constrain === 'parent' ? (
-              <span css={this.props.styles?.constrainContext}>
-                {this.renderDialog(passthroughProps)}
-              </span>
-            ) : (
-              this.renderDialog(passthroughProps)
-            )}
-          </Transition>
-        )}
+        <Transition
+          in={open}
+          transitionOnMount
+          type={transition}
+          onEnter={onEnter}
+          onEntering={onEntering}
+          onEntered={createChainedFunction(
+            this.handleTransitionComplete,
+            onEntered,
+            onOpen
+          )}
+          onExit={onExit}
+          onExiting={onExiting}
+          onExited={createChainedFunction(
+            this.handleTransitionComplete,
+            onExited,
+            onClose
+          )}
+        >
+          {constrain === 'parent' ? (
+            <span css={this.props.styles?.constrainContext}>
+              {this.renderDialog(passthroughProps)}
+            </span>
+          ) : (
+            this.renderDialog(passthroughProps)
+          )}
+        </Transition>
       </Portal>
     )
   }
