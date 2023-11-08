@@ -1,4 +1,10 @@
-## **examples**
+---
+title: Storybook example generation
+category: Guides
+order: 7
+---
+
+## Storybook example generation
 
 Tools to work with `.examples` files for React components.
 
