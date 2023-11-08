@@ -213,6 +213,7 @@ class Link extends Component<LinkProps, LinkState> {
     const {
       children,
       onClick,
+      onMouseEnter,
       color,
       href,
       margin,
@@ -241,6 +242,7 @@ class Link extends Component<LinkProps, LinkState> {
         display={this.display}
         margin={margin}
         href={href}
+        onMouseEnter={onMouseEnter}
         onClick={this.handleClick}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}

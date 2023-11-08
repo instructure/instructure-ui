@@ -63,6 +63,20 @@ describe('<BreadcrumbLink />', () => {
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
+  it('should respond to mouseEnter event when provided with onMouseEnter prop', () => {
+    const onMouseEnter = jest.fn()
+
+    render(
+      <BreadcrumbLink onMouseEnter={onMouseEnter} href={TEST_LINK}>
+        {TEST_TEXT_01}
+      </BreadcrumbLink>
+    )
+    const link = screen.getByRole('link')
+    fireEvent.mouseEnter(link)
+
+    expect(onMouseEnter).toHaveBeenCalledTimes(1)
+  })
+
   it('should allow to prop to pass through', () => {
     const { container } = render(
       <BreadcrumbLink to={TEST_TO}>{TEST_TEXT_01}</BreadcrumbLink>

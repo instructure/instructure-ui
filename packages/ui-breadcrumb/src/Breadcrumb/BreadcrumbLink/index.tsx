@@ -54,7 +54,8 @@ class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
   }
 
   render() {
-    const { children, href, renderIcon, iconPlacement, onClick } = this.props
+    const { children, href, renderIcon, iconPlacement, onClick, onMouseEnter } =
+      this.props
 
     const props = omitProps(this.props, BreadcrumbLink.allowedProps)
 
@@ -65,6 +66,7 @@ class BreadcrumbLink extends Component<BreadcrumbLinkProps> {
         renderIcon={renderIcon}
         iconPlacement={iconPlacement}
         onClick={onClick}
+        onMouseEnter={onMouseEnter}
         isWithinText={false}
         elementRef={this.handleRef}
       >

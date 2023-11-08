@@ -113,6 +113,11 @@ type LinkOwnProps = {
   isWithinText?: boolean
 
   /**
+   * Fires when the Link loses focus
+   */
+  onBlur?: (event: React.FocusEvent<ViewOwnProps>) => void
+
+  /**
    * Fires when the Link is clicked
    */
   onClick?: (event: React.MouseEvent<ViewOwnProps>) => void
@@ -123,9 +128,9 @@ type LinkOwnProps = {
   onFocus?: (event: React.FocusEvent<ViewOwnProps>) => void
 
   /**
-   * Fires when the Link loses focus
+   * Fires when the Link is hovered
    */
-  onBlur?: (event: React.FocusEvent<ViewOwnProps>) => void
+  onMouseEnter?: (event: React.MouseEvent<ViewOwnProps>) => void
 }
 
 export type LinkStyleProps = {
@@ -168,9 +173,10 @@ const propTypes: PropValidators<PropKeys> = {
     'inline-flex'
   ]),
   isWithinText: PropTypes.bool,
+  onBlur: PropTypes.func,
   onClick: PropTypes.func,
   onFocus: PropTypes.func,
-  onBlur: PropTypes.func
+  onMouseEnter: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -187,9 +193,10 @@ const allowedProps: AllowedPropKeys = [
   'iconPlacement',
   'display',
   'isWithinText',
+  'onBlur',
   'onClick',
   'onFocus',
-  'onBlur'
+  'onMouseEnter'
 ]
 
 export type { LinkProps, LinkState, LinkStyle }

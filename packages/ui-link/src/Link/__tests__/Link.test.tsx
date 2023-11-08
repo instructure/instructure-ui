@@ -116,6 +116,19 @@ describe('<Link />', async () => {
     })
   })
 
+  it('should call the onMouseEnter prop when mouseEntered', async () => {
+    const onMouseEnter = stub()
+    await mount(<Link onMouseEnter={onMouseEnter}>Hello World</Link>)
+
+    const link = await LinkLocator.find()
+
+    await link.mouseEnter()
+
+    await wait(() => {
+      expect(onMouseEnter).to.have.been.called()
+    })
+  })
+
   it('should pass down an icon via the icon property', async () => {
     const customIcon = (
       <svg height="100" width="100">
