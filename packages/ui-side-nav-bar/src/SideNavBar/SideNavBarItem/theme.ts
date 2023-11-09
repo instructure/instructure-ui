@@ -51,7 +51,7 @@ const generateComponentTheme = (theme: Theme): SideNavBarItemTheme => {
   const componentVariables: SideNavBarItemTheme = {
     fontSize: typography?.fontSizeSmall,
     fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightLight,
+    fontWeight: typography?.fontWeightNormal,
 
     fontColor: colors?.textLightest,
     iconSize: '1.625rem',

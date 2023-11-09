@@ -868,7 +868,7 @@ export type SideNavBarTheme = {
 export type SideNavBarItemTheme = {
   fontSize: Typography['fontSizeSmall']
   fontFamily: Typography['fontFamily']
-  fontWeight: Typography['fontWeightLight']
+  fontWeight: Typography['fontWeightNormal']
   fontColor: Colors['textLightest']
   iconSize: string | 0
   iconColor: Colors['textLightest']
