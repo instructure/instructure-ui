@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 
-import { omitProps } from '@instructure/ui-react-utils'
+import { deprecated, omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -48,6 +48,11 @@ private: true
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
+@deprecated(
+  '9',
+  { hideActionsUserSeparator: true },
+  'Note: this prop is probably used inside the desktopConfig prop on [TopNavBar.Layout]'
+)
 class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
   static readonly componentId = 'TopNavBar.DesktopLayout'
 
@@ -108,15 +113,36 @@ class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
     return !!renderUser && React.Children.count(renderUser.props.children) > 0
   }
 
+  get hasMenuItemsBlock() {
+    const { renderMenuItems } = this.props
+    return (
+      !!renderMenuItems &&
+      React.Children.count(renderMenuItems.props.children) > 0
+    )
+  }
+
+  get hasBreadcrumbBlock() {
+    const { renderBreadcrumb } = this.props
+    return (
+      !!renderBreadcrumb &&
+      React.Children.count(renderBreadcrumb.props.children) > 0
+    )
+  }
+
   render() {
     const {
       renderBrand,
       renderMenuItems,
       renderActionItems,
       renderUser,
+      renderBreadcrumb,
       navLabel,
       styles
     } = this.props
+
+    // only render breadcrumb if there is no brand or menu items
+    const shouldRenderBreadcrumbBlock =
+      !(this.hasBrandBlock || this.hasMenuItemsBlock) && this.hasBreadcrumbBlock
 
     return (
       <nav
@@ -129,7 +155,13 @@ class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
           <div css={styles?.brandContainer}>{renderBrand}</div>
         )}
 
-        <div css={styles?.menuItemsContainer}>{renderMenuItems}</div>
+        {this.hasMenuItemsBlock && (
+          <div css={styles?.menuItemsContainer}>{renderMenuItems}</div>
+        )}
+
+        {shouldRenderBreadcrumbBlock && renderBreadcrumb}
+
+        <span css={styles?.spacer} />
 
         {this.hasActionItemsBlock && (
           <div css={styles?.actionItemsContainer}>{renderActionItems}</div>

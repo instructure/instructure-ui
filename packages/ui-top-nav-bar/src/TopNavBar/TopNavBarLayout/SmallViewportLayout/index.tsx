@@ -221,6 +221,14 @@ class TopNavBarSmallViewportLayout extends Component<
     return (this.dropdownMenuContent || []).length > 0
   }
 
+  get hasBreadcrumbBlock() {
+    const { renderBreadcrumb } = this.props
+    return (
+      !!renderBreadcrumb &&
+      React.Children.count(renderBreadcrumb.props.children) > 0
+    )
+  }
+
   get isInPlaceDialogOpen() {
     return this.props.renderInPlaceDialogConfig?.open
   }
@@ -570,7 +578,13 @@ class TopNavBarSmallViewportLayout extends Component<
   }
 
   render() {
-    const { trayMountNode, navLabel, renderActionItems, styles } = this.props
+    const {
+      trayMountNode,
+      navLabel,
+      renderActionItems,
+      renderBreadcrumb,
+      styles
+    } = this.props
 
     return (
       <nav
@@ -580,20 +594,24 @@ class TopNavBarSmallViewportLayout extends Component<
       >
         <Global styles={styles?.globalStyles} />
 
-        {!this.isInPlaceDialogOpen && (
+        {this.hasBreadcrumbBlock && (
+          <div css={styles?.navbar}>{renderBreadcrumb}</div>
+        )}
+
+        {!this.hasBreadcrumbBlock && !this.isInPlaceDialogOpen && (
           <div css={styles?.navbar}>
             {this.renderMenuTrigger()}
             {this.hasActionItemsBlock(renderActionItems) && renderActionItems}
           </div>
         )}
 
-        {this.renderInPlaceDialog()}
+        {!this.hasBreadcrumbBlock && this.renderInPlaceDialog()}
 
-        {!trayMountNode && (
+        {!this.hasBreadcrumbBlock && !trayMountNode && (
           <div css={styles?.trayContainer} id={this._trayContainerId} />
         )}
 
-        {this.renderDropdownMenuTray()}
+        {!this.hasBreadcrumbBlock && this.renderDropdownMenuTray()}
       </nav>
     )
   }

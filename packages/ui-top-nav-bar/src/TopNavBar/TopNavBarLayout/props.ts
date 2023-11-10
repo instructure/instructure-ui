@@ -46,12 +46,14 @@ import type { ActionItemsChild } from '../TopNavBarActionItems/props'
 import type { BrandChild } from '../TopNavBarBrand/props'
 import type { MenuItemsChild } from '../TopNavBarMenuItems/props'
 import type { UserChild } from '../TopNavBarUser/props'
+import type { BreadcrumbChild } from '../TopNavBarBreadcrumb/props'
 
 import { topNavBarItemTooltipPropType } from '../TopNavBarItem/props'
 
 import { TopNavBarLayout } from './index'
 import type { DesktopLayoutOwnProps } from './DesktopLayout/props'
 import type { SmallViewportLayoutOwnProps } from './SmallViewportLayout/props'
+import { TopNavBarBreadcrumb } from '../TopNavBarBreadcrumb'
 
 type LayoutChild = React.ComponentElement<TopNavBarLayoutProps, TopNavBarLayout>
 
@@ -91,6 +93,15 @@ type CommonTopNavBarLayoutProps = {
    * Accepts a `<TopNavBar.User>` component.
    */
   renderUser?: UserChild
+
+  /**
+   * Displays a hamburger icon with a breadcrumb.
+   *
+   * In __desktop__ mode it renders in the top left corner of the navbar.
+   *
+   * Accepts a `<TopNavBar.Breadcrumb>` component.
+   */
+  renderBreadcrumb?: BreadcrumbChild
 
   /**
    * The 'aria-label' for the underlying `<nav>` element
@@ -134,6 +145,7 @@ const commonPropTypes: PropValidators<CommonPropKeys> = {
   renderMenuItems: ChildrenPropTypes.oneOf([TopNavBarMenuItems]),
   renderActionItems: ChildrenPropTypes.oneOf([TopNavBarActionItems]),
   renderUser: ChildrenPropTypes.oneOf([TopNavBarUser]),
+  renderBreadcrumb: ChildrenPropTypes.oneOf([TopNavBarBreadcrumb]),
   navLabel: PropTypes.string,
   elementRef: PropTypes.func
 }
@@ -173,6 +185,7 @@ const commonAllowedProps: CommonAllowedPropKeys = [
   'renderMenuItems',
   'renderActionItems',
   'renderUser',
+  'renderBreadcrumb',
   'navLabel',
   'elementRef'
 ]
