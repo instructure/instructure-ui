@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.48.0](https://github.com/instructure/instructure-ui/compare/v8.47.1...v8.48.0) (2023-11-10)
+
+
+### Bug Fixes
+
+* **ui-side-nav-bar:** don't allow SideNavBar.Item to inherit global styles ([ded9542](https://github.com/instructure/instructure-ui/commit/ded954273558e2d4193838f4d878d755888c1e25))
+* **ui-side-nav-bar:** increase SideNavBar.Item font weight to 400 ([53399e3](https://github.com/instructure/instructure-ui/commit/53399e3c7eb5eb196f5f7554f2fe93b2bc19bf71))
+
+
+
+
+
 ## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
 
 **Note:** Version bump only for package @instructure/ui-side-nav-bar

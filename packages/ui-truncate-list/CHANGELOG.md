@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.48.0](https://github.com/instructure/instructure-ui/compare/v8.47.1...v8.48.0) (2023-11-10)
+
+**Note:** Version bump only for package @instructure/ui-truncate-list
+
+
+
+
+
 ## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
 
 **Note:** Version bump only for package @instructure/ui-truncate-list

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.48.0](https://github.com/instructure/instructure-ui/compare/v8.47.1...v8.48.0) (2023-11-10)
+
+
+### Bug Fixes
+
+* **ui-modal:** fix second modal closing the first one if two of them are open ([73a3001](https://github.com/instructure/instructure-ui/commit/73a30014becff07438d66ff3b437671b445eef6f))
+
+
+
+
+
 ## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
 
 **Note:** Version bump only for package @instructure/ui-modal
