@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.48.0](https://github.com/instructure/instructure-ui/compare/v8.47.1...v8.48.0) (2023-11-10)
+
+
+### Features
+
+* **ui-breadcrumb,ui-link:** add onMouseEnter prop ([a52f836](https://github.com/instructure/instructure-ui/commit/a52f836b48bfbd99763e9f5381675e8eabaa22c5))
+
+
+
+
+
 ## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
 
 **Note:** Version bump only for package @instructure/ui-breadcrumb

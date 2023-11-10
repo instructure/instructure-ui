@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.48.0](https://github.com/instructure/instructure-ui/compare/v8.47.1...v8.48.0) (2023-11-10)
+
+
+### Bug Fixes
+
+* support multiple decorators with ReactTestUtils ([ef704b4](https://github.com/instructure/instructure-ui/commit/ef704b4c3373d78adac4bb45ec1d6adf84807a9e))
+
+
+
+
+
 ## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
 
 **Note:** Version bump only for package @instructure/ui-i18n
