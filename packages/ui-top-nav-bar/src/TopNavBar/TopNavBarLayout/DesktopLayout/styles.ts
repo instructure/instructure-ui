@@ -102,6 +102,9 @@ const generateStyle = (
       marginBlock: 0,
       marginInline: componentTheme.desktopActionItemsContainerInlineMargin
     },
+    spacer: {
+      flexGrow: '1'
+    },
     userContainer: {
       label: 'topNavBarDesktopLayout__userContainer',
       display: 'flex',
@@ -129,6 +132,14 @@ const generateStyle = (
           display: 'block'
         }
       })
+    },
+    breadcrumbContainer: {
+      label: 'topNavBarDesktopLayout__breadcrumbContainer',
+      display: 'flex',
+      flexGrow: 0,
+      flexShrink: 0,
+      marginBlock: 0,
+      alignItems: 'center'
     }
   }
 }

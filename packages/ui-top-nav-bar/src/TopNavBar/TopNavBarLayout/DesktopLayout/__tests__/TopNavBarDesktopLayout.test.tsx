@@ -124,7 +124,7 @@ describe('<TopNavBarDesktopLayout />', async () => {
   })
 
   describe('renderMenuItems', async () => {
-    it('should render menu item container', async () => {
+    it.only('should render menu item container', async () => {
       await mount(
         <TopNavBarDesktopLayout
           {...defaultBlocks}

@@ -25,7 +25,11 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 
-import { getElementType, omitProps } from '@instructure/ui-react-utils'
+import {
+  deprecated,
+  getElementType,
+  omitProps
+} from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -50,6 +54,7 @@ id: TopNavBar.Brand
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
+@deprecated('9', null, 'Please use the updated TopNavBar design.')
 class TopNavBarBrand extends Component<TopNavBarBrandProps> {
   static readonly componentId = 'TopNavBar.Brand'
   // TODO: add to the docs: making it static on parent and jsdocs parent/module settings, dont export child on its own

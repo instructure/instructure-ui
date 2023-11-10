@@ -1207,6 +1207,47 @@ example: true
 </div>
 ```
 
+##### TopNavBar.Breadcrumb
+
+`<TopNavBar.Breadcrumb>` contains a Breadcrumb component with multiple links/pages.
+
+You can't use `<TopNavBar.Breadcrumb>` along with the brand logo or menu items.
+
+```js
+---
+example: true
+---
+  <div>
+    <View as="div" margin="medium 0">
+      <TopNavBar inverseColor>
+        {() => (
+          <TopNavBar.Layout
+            navLabel="Example navigation bar"
+            desktopConfig={{
+              hideActionsUserSeparator: false
+            }}
+            smallViewportConfig={{
+              dropdownMenuToggleButtonLabel: 'Toggle Menu',
+              dropdownMenuLabel: 'Main Menu',
+            }}
+            renderBreadcrumb={(
+              <TopNavBar.Breadcrumb>
+                <Breadcrumb label="You are here:">
+                  <Breadcrumb.Link>Course page 1</Breadcrumb.Link>
+                  <Breadcrumb.Link>Course page 2</Breadcrumb.Link>
+                  <Breadcrumb.Link>Course page 3</Breadcrumb.Link>
+                  <Breadcrumb.Link>Course page 4</Breadcrumb.Link>
+                  <Breadcrumb.Link>Course page 5</Breadcrumb.Link>
+                </Breadcrumb>
+              </TopNavBar.Breadcrumb>
+            )}
+          />
+        )}
+      </TopNavBar>
+    </View>
+  </div>
+```
+
 ##### TopNavBar.MenuItems
 
 `<TopNavBar.MenuItems>` contains the main menu items, subpage links.

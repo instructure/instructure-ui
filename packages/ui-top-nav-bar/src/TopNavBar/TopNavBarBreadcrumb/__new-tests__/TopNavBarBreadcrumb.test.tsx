@@ -1,0 +1,127 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import React from 'react'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
+// eslint-disable-next-line no-restricted-imports
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import { TopNavBarBreadcrumb } from '../index'
+import { Breadcrumb } from '@instructure/ui-breadcrumb'
+import TopNavBarContext from '../../TopNavBarContext'
+
+let originalResizeObserver: typeof ResizeObserver
+let originalMatchMedia: typeof window.matchMedia
+
+beforeAll(() => {
+  originalResizeObserver = global.ResizeObserver
+  originalMatchMedia = window.matchMedia
+
+  class MockResizeObserver {
+    observe = jest.fn()
+    unobserve = jest.fn()
+    disconnect = jest.fn()
+  }
+  global.ResizeObserver = MockResizeObserver
+
+  window.matchMedia = jest.fn().mockImplementation((query) => {
+    return {
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn()
+    }
+  })
+})
+
+afterAll(() => {
+  global.ResizeObserver = originalResizeObserver
+  window.matchMedia = originalMatchMedia
+})
+
+const TEST_BREADCRUMB_LABEL = 'You are here:'
+
+const BaseExample = (props: {
+  inverseColor: boolean
+  layout: 'desktop' | 'smallViewport'
+}) => {
+  return (
+    <TopNavBarContext.Provider
+      value={{
+        layout: props.layout,
+        inverseColor: props.inverseColor
+      }}
+    >
+      <TopNavBarBreadcrumb>
+        <Breadcrumb label={TEST_BREADCRUMB_LABEL}>
+          <Breadcrumb.Link>Course page 1</Breadcrumb.Link>
+          <Breadcrumb.Link>Course page 2</Breadcrumb.Link>
+          <Breadcrumb.Link>Course page 3</Breadcrumb.Link>
+          <Breadcrumb.Link>Course page 4</Breadcrumb.Link>
+          <Breadcrumb.Link>Course page 5</Breadcrumb.Link>
+        </Breadcrumb>
+      </TopNavBarBreadcrumb>
+    </TopNavBarContext.Provider>
+  )
+}
+
+describe('<TopNavBarBreadcrumb />', () => {
+  it('should render', () => {
+    const { getByLabelText } = render(
+      <BaseExample inverseColor={true} layout="desktop" />
+    )
+
+    const element = getByLabelText(TEST_BREADCRUMB_LABEL)
+
+    expect(element).toBeInTheDocument()
+  })
+
+  it('should warn if inverseColor is false', () => {
+    const consoleMock = jest.spyOn(console, 'error').mockImplementation()
+
+    const { queryByLabelText } = render(
+      <BaseExample inverseColor={false} layout="desktop" />
+    )
+
+    const element = queryByLabelText(TEST_BREADCRUMB_LABEL)
+
+    expect(element).not.toBeInTheDocument()
+    expect(consoleMock.mock.calls[0][0]).toEqual(
+      'Warning: [TopNavBarBreadcrumb] If the inverseColor prop is not set to true, TopNavBarBreadcrumb fails to render.'
+    )
+  })
+
+  describe('should be accessible', () => {
+    it('a11y', async () => {
+      const { container } = render(
+        <BaseExample inverseColor={true} layout="desktop" />
+      )
+      const axeCheck = await runAxeCheck(container)
+
+      expect(axeCheck).toBe(true)
+    })
+  })
+})

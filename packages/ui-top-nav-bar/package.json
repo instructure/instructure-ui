@@ -29,6 +29,7 @@
     "@instructure/shared-types": "8.47.1",
     "@instructure/ui-a11y-content": "8.47.1",
     "@instructure/ui-avatar": "8.47.1",
+    "@instructure/ui-breadcrumb": "8.47.1",
     "@instructure/ui-buttons": "8.47.1",
     "@instructure/ui-dialog": "8.47.1",
     "@instructure/ui-dom-utils": "8.47.1",
@@ -48,11 +49,14 @@
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
+    "@instructure/ui-axe-check": "^8.47.1",
     "@instructure/ui-babel-preset": "8.47.1",
     "@instructure/ui-color-utils": "8.47.1",
     "@instructure/ui-test-locator": "8.47.1",
     "@instructure/ui-test-utils": "8.47.1",
-    "@instructure/ui-themes": "8.47.1"
+    "@instructure/ui-themes": "8.47.1",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.0"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"

@@ -37,6 +37,7 @@ import { TopNavBarItem } from './TopNavBarItem'
 import { TopNavBarLayout } from './TopNavBarLayout'
 import { TopNavBarMenuItems } from './TopNavBarMenuItems'
 import { TopNavBarUser } from './TopNavBarUser'
+import { TopNavBarBreadcrumb } from './TopNavBarBreadcrumb'
 
 import { TopNavBarContext } from './TopNavBarContext'
 import type { TopNavBarLayouts } from './TopNavBarContext'
@@ -60,6 +61,7 @@ class TopNavBar extends Component<TopNavBarProps> {
   static Layout = TopNavBarLayout
   static MenuItems = TopNavBarMenuItems
   static User = TopNavBarUser
+  static Breadcrumb = TopNavBarBreadcrumb
 
   static contextType = TopNavBarContext
 
