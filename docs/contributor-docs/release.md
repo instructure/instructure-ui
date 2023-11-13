@@ -1,7 +1,7 @@
 ---
 title: Release process
-category: Guides
-order: 8
+category: Contributor Guides
+order: 5
 ---
 
 # Release Process

@@ -1,6 +1,6 @@
 ---
 title: Dev Commands Cheat Sheet
-category: Getting Started
+category: Contributor Guides
 order: 3
 ---
 

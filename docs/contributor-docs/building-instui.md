@@ -1,7 +1,7 @@
 ---
 title: How to build Instructure UI
-category: Getting Started
-order: 4
+category: Contributor Guides
+order: 2
 ---
 
 # Building Instructure UI

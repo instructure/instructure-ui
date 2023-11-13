@@ -1,7 +1,7 @@
 ---
 title: API Guidelines
-category: Getting Started
-order: 5
+category: Contributor Guides
+order: 4
 ---
 
 ## API Guidelines

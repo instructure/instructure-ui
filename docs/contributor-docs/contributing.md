@@ -1,7 +1,7 @@
 ---
 title: Contributing
-category: Getting Started
-order: 2
+category: Contributor Guides
+order: 1
 ---
 
 ## Contributing
