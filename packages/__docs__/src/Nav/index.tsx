@@ -315,6 +315,7 @@ class Nav extends Component<NavProps, NavState> {
   sectionHasMatches(sectionId: string) {
     let matches = this.matchingDocsInSection(sectionId).length > 0
     const sections = this.matchingSectionsInSection(sectionId)
+
     if (sections.length > 0) {
       sections.forEach((childSectionId: string) => {
         matches = matches || this.sectionHasMatches(childSectionId)
@@ -324,8 +325,27 @@ class Nav extends Component<NavProps, NavState> {
   }
 
   renderSections() {
-    return Object.keys(this.props.sections)
-      .sort()
+    // TODO figure out a better way for this
+    const mainLevelSectionsInOrder = [
+      'Getting Started',
+      'Guides',
+      'Patterns',
+      'components',
+      'packages',
+      'utilities',
+      'Testing',
+      'Contributor Guides'
+    ]
+    const sectionsInOrder = [
+      ...mainLevelSectionsInOrder.filter((section) =>
+        Object.keys(this.props.sections).includes(section)
+      ),
+      ...Object.keys(this.props.sections).filter(
+        (section) => !mainLevelSectionsInOrder.includes(section)
+      )
+    ]
+
+    return sectionsInOrder
       .filter((sectionId) => {
         return (
           this.props.sections[sectionId].level === 0 &&

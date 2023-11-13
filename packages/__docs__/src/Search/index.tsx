@@ -201,17 +201,16 @@ class Search extends Component<SearchProps, SearchState> {
   renderGroups(options: OptionType[]) {
     const { highlightedOptionId, selectedOptionId } = this.state
 
-    // define group order
     // TODO fix any
     const groups: any = {
       'GETTING STARTED': [],
       GUIDES: [],
+      'CONTRIBUTOR GUIDES': [],
       PATTERNS: [],
       COMPONENTS: [],
       PACKAGES: [],
       UTILITIES: [],
-      THEMES: [],
-      DESIGN: []
+      THEMES: []
     }
 
     // parse items into groups

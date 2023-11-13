@@ -1,7 +1,7 @@
 ---
 title: Upgrade Guide for Version 9.0
-category: Guides
-order: 99
+category: Contributor Guides
+order: 7
 ---
 
 # Upgrade Guide for Version 9

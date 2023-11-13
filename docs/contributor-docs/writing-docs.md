@@ -1,7 +1,7 @@
 ---
 title: Writing Docs
-category: Guides
-order: 9
+category: Contributor Guides
+order: 6
 ---
 
 # How To Write Docs
