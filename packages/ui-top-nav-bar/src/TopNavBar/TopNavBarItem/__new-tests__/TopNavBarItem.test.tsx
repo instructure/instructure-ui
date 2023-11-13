@@ -69,11 +69,12 @@ describe('<TopNavBarItem />', () => {
         const itemPseudoStyle = getComputedStyle(item, '::before')
         const focusRingColor = itemPseudoStyle.getPropertyValue('border-color')
 
-        //expect(focusRingColor).to.equal('rgb(255, 255, 255)')
+        // TODO old: expect(focusRingColor).to.equal('rgb(255, 255, 255)')
         expect(focusRingColor).toBe('buttonface')
       })
     })
 
+    // TODO
     // describe('should have "info" color focus ring in "inverseColor" mode', () => {
     //   variants.forEach((variant) => {
     //     it(`with ${variant} variant`, () => {
@@ -117,6 +118,7 @@ describe('<TopNavBarItem />', () => {
         expect(item).toHaveTextContent(ITEM_TEXT)
       })
 
+      // TODO
       // it('should have no background and border', () => {
       //   render(
       //     <TopNavBarItem id="item" variant="default">
@@ -149,6 +151,7 @@ describe('<TopNavBarItem />', () => {
         expect(item).toHaveTextContent(ITEM_TEXT)
       })
 
+      // TODO
       // it('should have "secondary" color background and border', async () => {
       //   await mount(
       //     <TopNavBarItem id="item" variant="button">
@@ -233,6 +236,7 @@ describe('<TopNavBarItem />', () => {
         expect(screenReaderContent).toHaveTextContent(ITEM_TEXT)
       })
 
+      // TODO
       // it('should have no background and border', async () => {
       //   await mount(
       //     <TopNavBarItem id="item" variant="icon" renderIcon={IconSearchLine}>
@@ -279,6 +283,7 @@ describe('<TopNavBarItem />', () => {
         consoleWarningSpy.mockRestore()
       })
 
+      // TODO
       // it('should have at least 42px size button in small viewport mode', async () => {
       //   await mount(
       //     <SmallViewportModeWrapper>
@@ -357,6 +362,7 @@ describe('<TopNavBarItem />', () => {
         expect(avatar).toBeVisible()
       })
 
+      // TODO
       // it('should have no background and border', async () => {
       //   await mount(
       //     <TopNavBarItem
@@ -406,6 +412,7 @@ describe('<TopNavBarItem />', () => {
 
   describe('status prop', () => {
     describe('with "default" status', () => {
+      // TODO
       // it('should have no underline', () => {
       //   render(
       //     <TopNavBarItem id="item" status="default">
@@ -422,6 +429,7 @@ describe('<TopNavBarItem />', () => {
     })
 
     describe('with "active" status', () => {
+      // TODO
       // it('should be indicated with "inverse" color underline', async () => {
       //   await mount(
       //     <TopNavBarItem id="item" status="active">
@@ -473,8 +481,8 @@ describe('<TopNavBarItem />', () => {
             </TopNavBarItem>
           )
 
+          // TODO
           // class$="-topNavBarItem__container" ::after
-          // const component = await TopNavBarItemLocator.find()
           // const activeIndicatorStyle = await component.getActiveIndicatorStyle()
 
           if (isDefaultVariant) {
@@ -503,7 +511,7 @@ describe('<TopNavBarItem />', () => {
             Menu Item
           </TopNavBarItem>
         )
-        // const component = await TopNavBarItemLocator.find()
+        // TODO
         // const activeIndicatorStyle = await component.getActiveIndicatorStyle()
 
         const expectedErrorMessage = `Warning: <TopNavBar.Item> components with avatar cannot have "active" status, so the "active" status on the item with id "item" will be ignored.`
@@ -1354,6 +1362,7 @@ describe('<TopNavBarItem />', () => {
       expect(customPopoverContent).toBeInTheDocument()
     })
 
+    // TODO
     // it('should have "primary-inverse" color by default', async () => {
     //   render(
     //     <TopNavBarItem id="item" tooltip="Tooltip content">
@@ -1514,6 +1523,7 @@ describe('<TopNavBarItem />', () => {
           expect.any(String)
         )
 
+        // TODO
         // topNavBarItem__container ::after
         // const activeIndicatorStyle = await component.getActiveIndicatorStyle()
         // expect(activeIndicatorStyle?.backgroundColor).to.equal(
@@ -1566,6 +1576,7 @@ describe('<TopNavBarItem />', () => {
 
         expect(icon).toBeVisible()
         expect(icon).toHaveAttribute('name', 'IconSearch')
+        // TODO
         // expect(window.getComputedStyle(icon!).fill).toEqual('rgb(255, 255, 255)')
 
         const button = screen.getByRole('button')
@@ -1583,6 +1594,7 @@ describe('<TopNavBarItem />', () => {
 
         expect(icon).toBeVisible()
         expect(icon).toHaveAttribute('name', 'IconSearch')
+        // TODO
         // expect(window.getComputedStyle(icon!).fill).toEqual('rgb(45, 59, 69)')
 
         const button = screen.getByRole('button')
@@ -1604,6 +1616,7 @@ describe('<TopNavBarItem />', () => {
 
         expect(icon).toBeVisible()
         expect(icon).toHaveAttribute('name', 'IconSearch')
+        // TODO
         // expect(window.getComputedStyle(icon!).fill).toEqual('rgb(45, 59, 69)')
 
         const button = screen.getByRole('button')
@@ -1628,6 +1641,7 @@ describe('<TopNavBarItem />', () => {
 
         expect(icon).toBeVisible()
         expect(icon).toHaveAttribute('name', 'IconSearch')
+        // TODO
         // expect(window.getComputedStyle(icon!).fill).toEqual('rgb(255, 255, 255)')
 
         const button = screen.getByRole('button')
