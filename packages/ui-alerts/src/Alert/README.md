@@ -76,124 +76,204 @@ ensure that element has the correct ARIA attributes.
 For more information about live regions, see
 [this MDN article](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions).
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  constructor (props) {
-    super(props)
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
 
-    this.state = {
-      alerts: []
+      this.state = {
+        alerts: []
+      }
+
+      this.i = 0
+      this.variants = ['info', 'success', 'warning', 'error']
+      this.politeness = ['polite', 'assertive']
     }
 
-    this.i = 0
-    this.variants = ['info', 'success', 'warning', 'error']
-    this.politeness = ['polite', 'assertive']
+    addAlert() {
+      const variant = this.variants[this.i++ % this.variants.length]
+      const politeness = Math.random() < 0.5 ? 'polite' : 'assertive'
+      const alerts = [...this.state.alerts]
+      const key = new Number(this.i)
+      alerts.push({
+        key,
+        variant,
+        politeness,
+        onDismiss: () => this.closeAlert(key)
+      })
+      this.setState({ alerts })
+    }
+
+    closeAlert(key) {
+      const alerts = this.state.alerts.filter((alert) => {
+        return alert.key !== key
+      })
+      this.setState({ alerts })
+    }
+
+    render() {
+      return (
+        <div>
+          <Button onClick={this.addAlert.bind(this)}>Add Alert</Button>
+          {this.state.alerts.map((alert) => {
+            return (
+              <View key={alert.key} display="block" margin="small 0">
+                <Alert
+                  variant={alert.variant}
+                  renderCloseButtonLabel="Close"
+                  onDismiss={alert.onDismiss}
+                  liveRegion={() => document.getElementById('flash-messages')}
+                  liveRegionPoliteness={alert.politeness}
+                  margin="small 0"
+                >
+                  This is {alert.politeness === 'polite' ? 'a' : 'an'}{' '}
+                  {alert.politeness} {alert.variant} alert
+                </Alert>
+              </View>
+            )
+          })}
+        </div>
+      )
+    }
   }
 
-  addAlert () {
-    const variant = this.variants[this.i++ % this.variants.length]
-    const politeness = Math.random() < 0.5 ? 'polite' : 'assertive'
-    const alerts = [...this.state.alerts]
-    const key = new Number(this.i)
-    alerts.push({
-      key,
-      variant,
-      politeness,
-      onDismiss: () => this.closeAlert(key)
-    })
-    this.setState({ alerts })
-  }
+  render(<Example />)
+  ```
 
-  closeAlert (key) {
-    const alerts = this.state.alerts.filter((alert) => {
-      return alert.key !== key
-    })
-    this.setState({ alerts })
-  }
+- ```js
+  const Example = () => {
+    const [alerts, setAlerts] = useState([])
+    const [count, setcount] = useState(0)
 
-  render () {
+    const variants = ['info', 'success', 'warning', 'error']
+
+    const addAlert = () => {
+      const variant = variants[count % variants.length]
+      const politeness = Math.random() < 0.5 ? 'polite' : 'assertive'
+      setAlerts([
+        ...alerts,
+        {
+          key: count,
+          variant,
+          politeness
+        }
+      ])
+      setcount(count + 1)
+    }
+
+    const closeAlert = (key) =>
+      setAlerts(alerts.filter((alert) => alert.key !== key))
+
     return (
       <div>
-        <Button onClick={this.addAlert.bind(this)}>Add Alert</Button>
-        {this.state.alerts.map((alert) => {
+        <Button onClick={addAlert}>Add Alert</Button>
+        {alerts.map((alert) => {
           return (
-            <View
-              key={alert.key}
-              display="block"
-              margin="small 0"
-            >
+            <View key={alert.key} display="block" margin="small 0">
               <Alert
                 variant={alert.variant}
                 renderCloseButtonLabel="Close"
-                onDismiss={alert.onDismiss}
+                onDismiss={() => closeAlert(alert.key)}
                 liveRegion={() => document.getElementById('flash-messages')}
                 liveRegionPoliteness={alert.politeness}
                 margin="small 0"
               >
-                This is {alert.politeness === 'polite' ? 'a' : 'an'} {alert.politeness} {alert.variant} alert
+                This is {alert.politeness === 'polite' ? 'a' : 'an'}{' '}
+                {alert.politeness} {alert.variant} alert
               </Alert>
             </View>
           )
         })}
       </div>
-    );
+    )
   }
-}
 
-render(<Example />)
-```
+  render(<Example />)
+  ```
 
 Alerts can be used to emit screenreader only messages too
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  constructor (props) {
-    super(props)
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
 
-    this.state = {
-      message: null,
-      count: 1
+      this.state = {
+        message: null,
+        count: 1
+      }
+    }
+
+    changeMessage = () => {
+      this.setState({
+        message: `this is message ${this.state.count}`,
+        count: this.state.count + 1
+      })
+    }
+
+    clearMessage = () => {
+      this.setState({
+        message: null,
+        count: this.state.count + 1
+      })
+    }
+
+    render() {
+      return (
+        <div>
+          <Button onClick={this.changeMessage}>Change Message</Button>
+          <Button onClick={this.clearMessage} margin="0 0 0 small">
+            Clear Message
+          </Button>
+          <Alert
+            liveRegion={() => document.getElementById('flash-messages')}
+            isLiveRegionAtomic
+            screenReaderOnly
+          >
+            {this.state.message}
+          </Alert>
+        </div>
+      )
     }
   }
 
-  changeMessage = () => {
-    this.setState({
-      message: `this is message ${this.state.count}`,
-      count: this.state.count + 1
-      })
-  }
+  render(<Example />)
+  ```
 
-  clearMessage  =() => {
-    this.setState({
-      message: null,
-      count: this.state.count + 1})
-  }
+- ```js
+  const Example = () => {
+    const [message, setMessage] = useState(null)
+    const [count, setCount] = useState(1)
 
-  render () {
+    const changeMessage = () => {
+      setMessage(`this is message ${count}`)
+      setCount(count + 1)
+    }
+
+    const clearMessage = () => {
+      setMessage(null)
+      setCount(count + 1)
+    }
+
     return (
       <div>
-        <Button onClick={this.changeMessage}>Change Message</Button>
-        <Button onClick={this.clearMessage} margin="0 0 0 small">Clear Message</Button>
+        <Button onClick={changeMessage}>Change Message</Button>
+        <Button onClick={clearMessage} margin="0 0 0 small">
+          Clear Message
+        </Button>
         <Alert
           liveRegion={() => document.getElementById('flash-messages')}
           isLiveRegionAtomic
           screenReaderOnly
-         >
-            {this.state.message}
+        >
+          {message}
         </Alert>
       </div>
-    );
+    )
   }
-}
 
-render(<Example />)
-```
+  render(<Example />)
+  ```
 
 When Alerts are used inline, the shadow can be removed with the `hasShadow` property.
 

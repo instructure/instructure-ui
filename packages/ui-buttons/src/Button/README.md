@@ -77,32 +77,73 @@ type: example
 
 If you need to prevent text wrapping, you can use the [TruncateText](#TruncateText) util. You can also conditionally render a [Tooltip](#Tooltip) with the full text when truncation occurs.
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  state = {
-    isTruncated: false
-  }
+- ```js
+  class Example extends React.Component {
+    state = {
+      isTruncated: false
+    }
 
-  handleUpdate = (isTruncated) => {
-    if (this.state.isTruncated !== isTruncated) {
-      this.setState({ isTruncated })
+    handleUpdate = (isTruncated) => {
+      if (this.state.isTruncated !== isTruncated) {
+        this.setState({ isTruncated })
+      }
+    }
+
+    renderButton() {
+      return (
+        <Button color="primary">
+          <TruncateText onUpdate={this.handleUpdate}>
+            {this.props.message}
+          </TruncateText>
+        </Button>
+      )
+    }
+
+    render() {
+      return (
+        <View
+          display="block"
+          width="10rem"
+          margin="small"
+          padding="small none"
+          withVisualDebug
+        >
+          {this.state.isTruncated ? (
+            <Tooltip
+              renderTip={this.props.message}
+              mountNode={() => document.getElementById('main')}
+            >
+              {this.renderButton()}
+            </Tooltip>
+          ) : (
+            this.renderButton()
+          )}
+        </View>
+      )
     }
   }
 
-  renderButton () {
-    return (
-      <Button color="primary">
-        <TruncateText onUpdate={this.handleUpdate}>
-          {this.props.message}
-        </TruncateText>
-      </Button>
-    )
-  }
+  render(<Example message="A Button With a Whole Lot of Text" />)
+  ```
 
-  render () {
+- ```js
+  const Example = ({ message }) => {
+    const [isTruncated, setIsTruncated] = useState(false)
+
+    const handleUpdate = (shouldBeTruncated) => {
+      if (isTruncated !== shouldBeTruncated) {
+        setIsTruncated(shouldBeTruncated)
+      }
+    }
+
+    const renderButton = () => {
+      return (
+        <Button color="primary">
+          <TruncateText onUpdate={handleUpdate}>{message}</TruncateText>
+        </Button>
+      )
+    }
+
     return (
       <View
         display="block"
@@ -111,21 +152,22 @@ class Example extends React.Component {
         padding="small none"
         withVisualDebug
       >
-        {this.state.isTruncated ? (
+        {isTruncated ? (
           <Tooltip
-            renderTip={this.props.message}
+            renderTip={message}
             mountNode={() => document.getElementById('main')}
           >
-            { this.renderButton() }
+            {renderButton()}
           </Tooltip>
-        ) : this.renderButton()}
+        ) : (
+          renderButton()
+        )}
       </View>
     )
   }
-}
 
-render(<Example message="A Button With a Whole Lot of Text" />)
-```
+  render(<Example message="A Button With a Whole Lot of Text" />)
+  ```
 
 ### Display
 

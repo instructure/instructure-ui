@@ -10,87 +10,139 @@ A component for displaying color contrast between two colors. It will perform ch
 ---
 type: example
 ---
-class Example extends React.Component {
-  render() {
-    return (
-      <ColorContrast
-        firstColor="#FF0000"
-        secondColor="#FFFF00"
-        label="Color Contrast Ratio"
-        successLabel="PASS"
-        failureLabel="FAIL"
-        normalTextLabel="Normal text"
-        largeTextLabel="Large text"
-        graphicsTextLabel="Graphics text"
-        firstColorLabel="Background"
-        secondColorLabel="Foreground"
-      />
-    );
-  }
-}
-
-render(<Example />);
+<ColorContrast
+  firstColor="#FF0000"
+  secondColor="#FFFF00"
+  label="Color Contrast Ratio"
+  successLabel="PASS"
+  failureLabel="FAIL"
+  normalTextLabel="Normal text"
+  largeTextLabel="Large text"
+  graphicsTextLabel="Graphics text"
+  firstColorLabel="Background"
+  secondColorLabel="Foreground"
+/>
 ```
 
 ### In-line Color setting
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedForeGround: "#0CBF94",
-      selectedBackGround: "#35423A",
-    };
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        selectedForeGround: '#0CBF94',
+        selectedBackGround: '#35423A'
+      }
+    }
+
+    render() {
+      return (
+        <div>
+          <ColorPreset
+            label="Background"
+            colors={[
+              '#ffffff',
+              '#0CBF94',
+              '#0C89BF',
+              '#BF0C6D',
+              '#BF8D0C',
+              '#ff0000',
+              '#576A66',
+              '#35423A',
+              '#35423F'
+            ]}
+            selected={this.state.selectedBackGround}
+            onSelect={(selectedBackGround) =>
+              this.setState({ selectedBackGround })
+            }
+          />
+          <ColorPreset
+            label="Foreground"
+            colors={[
+              '#ffffff',
+              '#0CBF94',
+              '#0C89BF',
+              '#BF0C6D',
+              '#BF8D0C',
+              '#ff0000',
+              '#576A66',
+              '#35423A',
+              '#35423F'
+            ]}
+            selected={this.state.selectedForeGround}
+            onSelect={(selectedForeGround) =>
+              this.setState({ selectedForeGround })
+            }
+          />
+          <hr style={{ width: '272px', marginLeft: 0 }} />
+          <ColorContrast
+            withoutColorPreview
+            firstColor={this.state.selectedBackGround}
+            secondColor={this.state.selectedForeGround}
+            label="Contrast Ratio"
+            successLabel="PASS"
+            failureLabel="FAIL"
+            normalTextLabel="Normal text"
+            largeTextLabel="Large text"
+            graphicsTextLabel="Graphics text"
+          />
+        </div>
+      )
+    }
   }
 
-  render() {
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [selectedForeGround, setSelectedForeGround] = useState('#0CBF94')
+    const [selectedBackGround, setSelectedBackGround] = useState('#35423A')
+
     return (
       <div>
         <ColorPreset
           label="Background"
           colors={[
-            "#ffffff",
-            "#0CBF94",
-            "#0C89BF",
-            "#BF0C6D",
-            "#BF8D0C",
-            "#ff0000",
-            "#576A66",
-            "#35423A",
-            "#35423F",
+            '#ffffff',
+            '#0CBF94',
+            '#0C89BF',
+            '#BF0C6D',
+            '#BF8D0C',
+            '#ff0000',
+            '#576A66',
+            '#35423A',
+            '#35423F'
           ]}
-          selected={this.state.selectedBackGround}
+          selected={selectedBackGround}
           onSelect={(selectedBackGround) =>
-            this.setState({ selectedBackGround })
+            setSelectedBackGround(selectedBackGround)
           }
         />
         <ColorPreset
           label="Foreground"
           colors={[
-            "#ffffff",
-            "#0CBF94",
-            "#0C89BF",
-            "#BF0C6D",
-            "#BF8D0C",
-            "#ff0000",
-            "#576A66",
-            "#35423A",
-            "#35423F",
+            '#ffffff',
+            '#0CBF94',
+            '#0C89BF',
+            '#BF0C6D',
+            '#BF8D0C',
+            '#ff0000',
+            '#576A66',
+            '#35423A',
+            '#35423F'
           ]}
-          selected={this.state.selectedForeGround}
+          selected={selectedForeGround}
           onSelect={(selectedForeGround) =>
-            this.setState({ selectedForeGround })
+            setSelectedForeGround(selectedForeGround)
           }
         />
-        <hr style={{ width: "272px", marginLeft: 0 }} />
+        <hr style={{ width: '272px', marginLeft: 0 }} />
         <ColorContrast
           withoutColorPreview
-          firstColor={this.state.selectedBackGround}
-          secondColor={this.state.selectedForeGround}
+          firstColor={selectedBackGround}
+          secondColor={selectedForeGround}
           label="Contrast Ratio"
           successLabel="PASS"
           failureLabel="FAIL"
@@ -99,11 +151,8 @@ class Example extends React.Component {
           graphicsTextLabel="Graphics text"
         />
       </div>
-    );
+    )
   }
-}
 
-render(<Example />);
-
-
-```
+  render(<Example />)
+  ```
