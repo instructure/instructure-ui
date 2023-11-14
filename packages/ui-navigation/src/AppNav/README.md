@@ -12,39 +12,126 @@ that contains the truncated items. The example below shows how you can use both 
 these props to create a hamburger menu when the number of visible nav items is less
 than two.
 
-```javascript
----
-type: example
----
+- ```js
+  const totalItemsCount = 5
 
-const totalItemsCount = 5
+  class AppNavExample extends React.Component {
+    constructor(props) {
+      super(props)
 
-class AppNavExample extends React.Component {
+      this.state = {
+        visibleItemsCount: totalItemsCount
+      }
+    }
 
-  constructor (props) {
-    super(props)
+    handleUpdate = ({ visibleItemsCount }) => {
+      this.setState({ visibleItemsCount })
+    }
 
-    this.state = {
-      visibleItemsCount: totalItemsCount
+    render() {
+      const visibleItemsCount = this.state.visibleItemsCount
+
+      return (
+        <AppNav
+          screenReaderLabel="App navigation"
+          visibleItemsCount={visibleItemsCount >= 2 ? visibleItemsCount : 0}
+          onUpdate={this.handleUpdate}
+          renderBeforeItems={
+            <AppNav.Item
+              renderLabel={
+                <ScreenReaderContent>Instructure</ScreenReaderContent>
+              }
+              renderIcon={
+                <IconCommonsLine inline={false} size="medium" color="primary" />
+              }
+              href="http://instructure.com"
+            />
+          }
+          renderAfterItems={
+            <IconButton
+              onClick={() => console.log('Add')}
+              renderIcon={IconPlusSolid}
+              margin="0 0 0 x-small"
+              screenReaderLabel="Add something"
+              withBorder={false}
+              withBackground={false}
+            />
+          }
+          renderTruncateLabel={function () {
+            const hiddenItemsCount = totalItemsCount - visibleItemsCount
+            if (visibleItemsCount >= 2) {
+              return `${hiddenItemsCount} More`
+            } else {
+              return (
+                <span>
+                  <IconHamburgerLine size="small" inline={false} />
+                  <ScreenReaderContent>{`${hiddenItemsCount} More`}</ScreenReaderContent>
+                </span>
+              )
+            }
+          }}
+        >
+          <AppNav.Item
+            renderLabel="instructure-ui"
+            href="http://instructure.design"
+            renderAfter={
+              <Badge
+                type="notification"
+                variant="success"
+                standalone
+                formatOutput={function () {
+                  return (
+                    <ScreenReaderContent>
+                      You have notifications from instructure-ui
+                    </ScreenReaderContent>
+                  )
+                }}
+              />
+            }
+          />
+          <AppNav.Item
+            isSelected
+            renderLabel="Canvas"
+            href="https://www.instructure.com/canvas/"
+          />
+          <AppNav.Item renderLabel="Canvas Network" href="https://canvas.net" />
+          <AppNav.Item
+            renderLabel={() => 'Canvas Community'}
+            href="https://community.canvaslms.com/"
+          />
+          <AppNav.Item
+            renderLabel="Bridge"
+            href="https://www.instructure.com/bridge/"
+          />
+        </AppNav>
+      )
     }
   }
 
-  handleUpdate = ({ visibleItemsCount }) => {
-    this.setState({ visibleItemsCount })
-  }
+  render(<AppNavExample />)
+  ```
 
-  render () {
-    const visibleItemsCount = this.state.visibleItemsCount
+- ```js
+  const totalItemsCount = 5
+
+  const AppNavExample = () => {
+    const [visibleItemsCount, setVisibleItemsCount] = useState(totalItemsCount)
+
+    const handleUpdate = ({ visibleItemsCount }) => {
+      setVisibleItemsCount(visibleItemsCount)
+    }
 
     return (
       <AppNav
         screenReaderLabel="App navigation"
         visibleItemsCount={visibleItemsCount >= 2 ? visibleItemsCount : 0}
-        onUpdate={this.handleUpdate}
+        onUpdate={handleUpdate}
         renderBeforeItems={
           <AppNav.Item
             renderLabel={<ScreenReaderContent>Instructure</ScreenReaderContent>}
-            renderIcon={<IconCommonsLine inline={false} size="medium" color="primary" />}
+            renderIcon={
+              <IconCommonsLine inline={false} size="medium" color="primary" />
+            }
             href="http://instructure.com"
           />
         }
@@ -58,7 +145,7 @@ class AppNavExample extends React.Component {
             withBackground={false}
           />
         }
-        renderTruncateLabel={function () {
+        renderTruncateLabel={() => {
           const hiddenItemsCount = totalItemsCount - visibleItemsCount
           if (visibleItemsCount >= 2) {
             return `${hiddenItemsCount} More`
@@ -80,8 +167,12 @@ class AppNavExample extends React.Component {
               type="notification"
               variant="success"
               standalone
-              formatOutput={function () {
-                return <ScreenReaderContent>You have notifications from instructure-ui</ScreenReaderContent>
+              formatOutput={() => {
+                return (
+                  <ScreenReaderContent>
+                    You have notifications from instructure-ui
+                  </ScreenReaderContent>
+                )
               }}
             />
           }
@@ -91,10 +182,7 @@ class AppNavExample extends React.Component {
           renderLabel="Canvas"
           href="https://www.instructure.com/canvas/"
         />
-        <AppNav.Item
-          renderLabel="Canvas Network"
-          href="https://canvas.net"
-        />
+        <AppNav.Item renderLabel="Canvas Network" href="https://canvas.net" />
         <AppNav.Item
           renderLabel={() => 'Canvas Community'}
           href="https://community.canvaslms.com/"
@@ -106,7 +194,6 @@ class AppNavExample extends React.Component {
       </AppNav>
     )
   }
-}
 
-render(<AppNavExample />)
-```
+  render(<AppNavExample />)
+  ```
