@@ -18,6 +18,8 @@ render: false
 class PlaygroundExample extends React.Component {
   state = {
     rtlMode: false,
+    showBreadcrumb: false,
+    inverseColor: false,
     isSecondaryNavigation: false,
     hasBrandSection: true,
     hasMenuItemsSection: true,
@@ -287,15 +289,20 @@ class PlaygroundExample extends React.Component {
         },
         checkboxes: ['rtlMode']
       },
-      inverseColor: {
-        label: 'Inverse color mode',
+      secondaryNav: {
+        label: 'Secondary navigation',
         checkboxes: [
           'isSecondaryNavigation',
         ]
       },
+      breadcrumb: {
+        label: 'Display Breadcrumb',
+        checkboxes: ['showBreadcrumb']
+      },
       global: {
         label: 'Global settings',
         checkboxes: [
+          'inverseColor',
           'hasBrandSection',
           'hasMenuItemsSection',
           'hasActionItemsSection',
@@ -365,7 +372,9 @@ class PlaygroundExample extends React.Component {
     const settingLabels = {
       exampleViewport: 'Toggle example viewport',
       rtlMode: 'RTL mode',
+      showBreadcrumb: 'Show Breadcrumb',
       isSecondaryNavigation: 'Display as secondary navigation',
+      inverseColor: '"inverseColor" prop',
       hasBrandSection: '"renderBrand" prop',
       hasMenuItemsSection: '"renderMenuItems" prop',
       hasActionItemsSection: '"renderActionItems" prop',
@@ -385,7 +394,8 @@ class PlaygroundExample extends React.Component {
     }
 
     const settingDescriptions = {
-      isSecondaryNavigation: 'When the navbar is used as a secondary navigation (e.g.: under Canvas main navbar), using the inverse color mode is recommended',
+      isSecondaryNavigation: 'When the navbar is used as a secondary navigation (e.g.: under Canvas main navbar), using the inverse color mode is recommended. For using Breadcumbs in the navbar, inverse color is necessary.',
+      showBreadcrumb: 'Display a Breadcrumb in the navbar. Requires the `renderBrand` and `renderMenuItems` props to be null and `inverseColor` to be true.',
       hasBrandSection: 'Displays brand section',
       hasMenuItemsSection: 'Displays main navbar items',
       hasActionItemsSection: 'Displays action items',
@@ -426,28 +436,28 @@ class PlaygroundExample extends React.Component {
 
             const checkboxSettings = checkboxes.length ? (
               <CheckboxGroup
-               description={label}
-               name={name}
-               key={name}
-               layout="stacked"
-               defaultValue={checkboxes.filter(setting => this.state[setting])}
+                description={label}
+                name={name}
+                key={name}
+                layout="stacked"
+                defaultValue={checkboxes.filter(setting => this.state[setting])}
               >
-               {checkboxes.map((setting) => (
-                 <Checkbox
-                   key={`${setting}Setting`}
-                   variant="toggle"
-                   value={setting}
-                   label={settingLabels[setting] || `"${setting}" prop`}
-                   checked={this.state[setting]}
-                   messages={settingDescriptions[setting]
-                     ? [{ text: settingDescriptions[setting], type: 'hint' }]
-                     : undefined
-                   }
-                   onChange={() => {
-                     this.setState({ [setting]: !this.state[setting] })
-                   }}
-                 />
-               ))}
+                {checkboxes.map((setting) => (
+                    <Checkbox
+                      key={`${setting}Setting`}
+                      variant="toggle"
+                      value={setting}
+                      label={settingLabels[setting] || `"${setting}" prop`}
+                      checked={false}
+                      messages={settingDescriptions[setting]
+                        ? [{ text: settingDescriptions[setting], type: 'hint' }]
+                        : undefined
+                      }
+                      onChange={() => {
+                        this.setState({ [setting]: !this.state[setting] })
+                      }}
+                    />
+                  ))}
               </CheckboxGroup>
             ) : null
 
@@ -581,7 +591,7 @@ class PlaygroundExample extends React.Component {
 
     return (
       <TopNavBar
-        inverseColor={this.state.isSecondaryNavigation}
+        inverseColor={this.state.inverseColor}
         mediaQueryMatch="element"
       >
         {({ currentLayout, inverseColor }) => {
@@ -832,6 +842,17 @@ class PlaygroundExample extends React.Component {
                   </TopNavBar.Item>
                 </TopNavBar.User>
               ) : undefined }
+              renderBreadcrumb={this.state.showBreadcrumb && (
+                <TopNavBar.Breadcrumb>
+                  <Breadcrumb label="You are here:">
+                    <Breadcrumb.Link href="#">Course page 1</Breadcrumb.Link>
+                    <Breadcrumb.Link href="#">Course page 2</Breadcrumb.Link>
+                    <Breadcrumb.Link href="#">Course page 3</Breadcrumb.Link>
+                    <Breadcrumb.Link href="#">Course page 4</Breadcrumb.Link>
+                    <Breadcrumb.Link href="#">Course page 5</Breadcrumb.Link>
+                  </Breadcrumb>
+                </TopNavBar.Breadcrumb>
+              )}
               themeOverride={{
                 // For example demo
                 smallViewportZIndex: 9999,
