@@ -71,6 +71,7 @@ class Tray extends Component<TrayProps> {
     border: false
   }
   ref: Element | null = null
+  dialogRef: Dialog | null = null
 
   state: TrayState
 
@@ -88,6 +89,12 @@ class Tray extends Component<TrayProps> {
 
   componentDidUpdate(prevProps: TrayProps, _prevState: TrayState) {
     if (this.props.open !== prevProps.open) {
+      if (!this.props.open) {
+        // calling Dialog.close() to remove focusregion immediately when transition starts
+        // so if a new Tray is opened (during transition) the new focusregion won't get treated as a child of this one
+        this.dialogRef?.close()
+      }
+
       this.setState({ transitioning: true, open: this.props.open })
     }
     this.props.makeStyles?.()
@@ -207,6 +214,7 @@ class Tray extends Component<TrayProps> {
             ref={contentRef}
           >
             <Dialog
+              ref={(element) => (this.dialogRef = element)}
               as="div"
               label={label}
               defaultFocusElement={defaultFocusElement}
