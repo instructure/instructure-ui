@@ -98,6 +98,7 @@ type CommonTopNavBarLayoutProps = {
    * Displays a hamburger icon with a breadcrumb.
    *
    * In __desktop__ mode it renders in the top left corner of the navbar.
+   * In __smallViewport__ mode it renders a link of the last but one crumb with a chevron icon.
    *
    * Accepts a `<TopNavBar.Breadcrumb>` component.
    */

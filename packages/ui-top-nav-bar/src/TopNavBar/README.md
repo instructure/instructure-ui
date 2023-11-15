@@ -1209,9 +1209,21 @@ example: true
 
 ##### TopNavBar.Breadcrumb
 
-`<TopNavBar.Breadcrumb>` contains a Breadcrumb component with multiple links/pages.
+`<TopNavBar.Breadcrumb>` contains a `<Breadcrumb>` component with multiple links and a hamburger icon.
 
-You can't use `<TopNavBar.Breadcrumb>` along with the brand logo or menu items.
+In order to use `<TopNavBar.Breadcrumb>` in desktop mode, the following conditions must be met:
+
+1. `inverseColor` should be set to `true` on `<TopNavBar>`.
+2. `renderBrand` property should **not** be set on `<TopNavBar.Layout>`.
+3. `renderMenuItems` property should **not** be set `<TopNavBar.Layout>`.
+4. `renderBreadcrumb` property should be implemented on `<TopNavBar.Layout>`.
+5. (optional) an `onClick` property can be passed to `<TopNavBar.Breadcrumb>` to handle the click event on the hamburger icon.
+
+In small viewport mode, a link is shown for the last but one element of the `<Breadcrumb>` instead of all the crumbs and the hamburger icon. One has to set the following:
+
+1. `inverseColor` should be set to `true` on `<TopNavBar>`.
+2. `renderBreadcrumb` property should be implemented on `<TopNavBar.Layout>`.
+3. rest of the props starting with render should not be added.
 
 ```js
 ---
@@ -1231,13 +1243,13 @@ example: true
               dropdownMenuLabel: 'Main Menu',
             }}
             renderBreadcrumb={(
-              <TopNavBar.Breadcrumb>
+              <TopNavBar.Breadcrumb onClick={console.log("Hamburger icon clicked.")}>
                 <Breadcrumb label="You are here:">
-                  <Breadcrumb.Link>Course page 1</Breadcrumb.Link>
-                  <Breadcrumb.Link>Course page 2</Breadcrumb.Link>
-                  <Breadcrumb.Link>Course page 3</Breadcrumb.Link>
-                  <Breadcrumb.Link>Course page 4</Breadcrumb.Link>
-                  <Breadcrumb.Link>Course page 5</Breadcrumb.Link>
+                  <Breadcrumb.Link href="#">Course page 1</Breadcrumb.Link>
+                  <Breadcrumb.Link href="#">Course page 2</Breadcrumb.Link>
+                  <Breadcrumb.Link href="#">Course page 3</Breadcrumb.Link>
+                  <Breadcrumb.Link href="#">Course page 4</Breadcrumb.Link>
+                  <Breadcrumb.Link href="#">Course page 5</Breadcrumb.Link>
                 </Breadcrumb>
               </TopNavBar.Breadcrumb>
             )}
