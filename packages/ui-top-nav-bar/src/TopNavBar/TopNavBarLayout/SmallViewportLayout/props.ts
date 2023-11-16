@@ -164,13 +164,13 @@ type TopNavBarSmallViewportLayoutStyleProps = {
 }
 
 const propTypes: PropValidators<PropKeys> = {
-  // Edit PropTypes in TopNabBarLayout/props.ts
+  // Edit PropTypes in TopNavBarLayout/props.ts
   ...commonPropTypes,
   ...smallViewportPropTypes
 }
 
 const allowedProps: AllowedPropKeys = [
-  // Edit allowed props in TopNabBarLayout/props.ts
+  // Edit allowed props in TopNavBarLayout/props.ts
   ...commonAllowedProps,
   ...smallViewportAllowedProps
 ]

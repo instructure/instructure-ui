@@ -46,6 +46,7 @@ import type { TopNavBarContextType } from '../TopNavBarContext'
 
 import { TopNavBar } from '../index'
 import { elevateIcon, elevateLogo, elevateLogoInverse } from './exampleSvgFiles'
+import { Breadcrumb } from '@instructure/ui-breadcrumb'
 
 type ChildrenFuncProps = {
   currentLayout: TopNavBarContextType['layout']
@@ -58,6 +59,7 @@ type VariantConfig = Partial<ChildrenFuncProps> & {
   hasRenderInPlaceDialogConfig?: boolean
   brandProps?: Partial<TopNavBarBrandProps>
   hasBrandNameBackground?: boolean
+  hasRenderBreadcrumb?: boolean
   currentPageId?: string
   menuItemsWithSubmenu?: boolean
   menuItemsCustomIdList?: string[]
@@ -303,6 +305,18 @@ const getUser = (config: VariantConfig = {}) => {
   )
 }
 
+const getBreadcrumb = (_config: VariantConfig = {}) => {
+  return (
+    <TopNavBar.Breadcrumb>
+      <Breadcrumb label="You are here">
+        <Breadcrumb.Link>Course page 1</Breadcrumb.Link>
+        <Breadcrumb.Link>Course page 2</Breadcrumb.Link>
+        <Breadcrumb.Link>Course page 3</Breadcrumb.Link>
+      </Breadcrumb>
+    </TopNavBar.Breadcrumb>
+  )
+}
+
 const getLayoutProps = (
   props: ChildrenFuncProps,
   config: VariantConfig = {}
@@ -319,10 +333,17 @@ const getLayoutProps = (
         ? getInPlaceDialogConfig(props.inverseColor)
         : undefined
     },
-    renderBrand: getBrand({ ...props, ...config }),
-    renderMenuItems: getMenuItems({ ...props, ...config }),
+    renderBrand: config.hasRenderBreadcrumb
+      ? undefined
+      : getBrand({ ...props, ...config }),
+    renderMenuItems: config.hasRenderBreadcrumb
+      ? undefined
+      : getMenuItems({ ...props, ...config }),
     renderActionItems: getActionItems({ ...props, ...config }),
-    renderUser: getUser({ ...props, ...config })
+    renderUser: getUser({ ...props, ...config }),
+    renderBreadcrumb: config.hasRenderBreadcrumb
+      ? getBreadcrumb({ ...props, ...config })
+      : undefined
   }
 }
 
@@ -337,6 +358,7 @@ export {
   getMenuItems,
   getActionItems,
   getUser,
-  getLayoutProps
+  getLayoutProps,
+  getBreadcrumb
 }
 export type { VariantConfig, ChildrenFuncProps }

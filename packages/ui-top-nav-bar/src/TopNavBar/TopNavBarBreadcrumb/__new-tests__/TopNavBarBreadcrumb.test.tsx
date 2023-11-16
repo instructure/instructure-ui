@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 // eslint-disable-next-line no-restricted-imports
@@ -67,6 +67,7 @@ const TEST_BREADCRUMB_LABEL = 'You are here:'
 const BaseExample = (props: {
   inverseColor: boolean
   layout: 'desktop' | 'smallViewport'
+  onClick?: () => void
 }) => {
   return (
     <TopNavBarContext.Provider
@@ -75,17 +76,26 @@ const BaseExample = (props: {
         inverseColor: props.inverseColor
       }}
     >
-      <TopNavBarBreadcrumb>
+      <TopNavBarBreadcrumb onClick={props.onClick}>
         <Breadcrumb label={TEST_BREADCRUMB_LABEL}>
           <Breadcrumb.Link>Course page 1</Breadcrumb.Link>
           <Breadcrumb.Link>Course page 2</Breadcrumb.Link>
           <Breadcrumb.Link>Course page 3</Breadcrumb.Link>
-          <Breadcrumb.Link>Course page 4</Breadcrumb.Link>
+          <Breadcrumb.Link href="https://www.instructure.com">
+            Course page 4
+          </Breadcrumb.Link>
           <Breadcrumb.Link>Course page 5</Breadcrumb.Link>
         </Breadcrumb>
       </TopNavBarBreadcrumb>
     </TopNavBarContext.Provider>
   )
+}
+
+BaseExample.defaultProps = {
+  inverseColor: true,
+  layout: 'desktop',
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onClick: () => {}
 }
 
 describe('<TopNavBarBreadcrumb />', () => {
@@ -112,6 +122,39 @@ describe('<TopNavBarBreadcrumb />', () => {
     expect(consoleMock.mock.calls[0][0]).toEqual(
       'Warning: [TopNavBarBreadcrumb] If the inverseColor prop is not set to true, TopNavBarBreadcrumb fails to render.'
     )
+  })
+
+  it('should render last but one crumb in smallViewPort mode', () => {
+    const { queryByText } = render(
+      <BaseExample inverseColor={true} layout="smallViewport" />
+    )
+
+    const page1 = queryByText('Course page 1')
+    const page2 = queryByText('Course page 2')
+    const page3 = queryByText('Course page 3')
+    const page4 = queryByText('Course page 4')
+    const page5 = queryByText('Course page 5')
+
+    expect(page1).not.toBeInTheDocument()
+    expect(page2).not.toBeInTheDocument()
+    expect(page3).not.toBeInTheDocument()
+    expect(page4).toBeInTheDocument()
+    expect(page5).not.toBeInTheDocument()
+  })
+
+  it('should fire onClick', () => {
+    const onClick = jest.fn()
+
+    const { getByRole } = render(
+      <BaseExample inverseColor={true} layout="desktop" onClick={onClick} />
+    )
+
+    const hamburger = getByRole('button')
+    expect(hamburger).toBeInTheDocument()
+
+    fireEvent.click(hamburger)
+
+    expect(onClick).toHaveBeenCalled()
   })
 
   describe('should be accessible', () => {
