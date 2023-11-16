@@ -124,7 +124,7 @@ describe('<TopNavBarDesktopLayout />', async () => {
   })
 
   describe('renderMenuItems', async () => {
-    it.only('should render menu item container', async () => {
+    it('should render menu item container', async () => {
       await mount(
         <TopNavBarDesktopLayout
           {...defaultBlocks}
@@ -139,7 +139,7 @@ describe('<TopNavBarDesktopLayout />', async () => {
       expect(menuItems).to.be.visible()
     })
 
-    it('should still render menu item container, when there is no "renderMenuItems" prop set', async () => {
+    it('should not render menu item container, when there is no "renderMenuItems" prop set', async () => {
       await mount(
         <TopNavBarDesktopLayout
           {...defaultBlocks}
@@ -147,14 +147,16 @@ describe('<TopNavBarDesktopLayout />', async () => {
         />
       )
       const component = await TopNavBarDesktopLayoutLocator.find()
-      const menuItemsContainer = await component.findMenuItemsContainer()
+      const menuItemsContainer = await component.findMenuItemsContainer({
+        expectEmpty: true
+      })
       const menuItems = await component.findMenuItems({ expectEmpty: true })
 
-      expect(menuItemsContainer).to.be.visible()
+      expect(menuItemsContainer).to.not.exist()
       expect(menuItems).to.not.exist()
     })
 
-    it('should still render menu item container, when there are 0 menu items', async () => {
+    it('should not render menu item container, when there are 0 menu items', async () => {
       await mount(
         <TopNavBarDesktopLayout
           {...defaultBlocks}
@@ -162,10 +164,12 @@ describe('<TopNavBarDesktopLayout />', async () => {
         />
       )
       const component = await TopNavBarDesktopLayoutLocator.find()
-      const menuItemsContainer = await component.findMenuItemsContainer()
+      const menuItemsContainer = await component.findMenuItemsContainer({
+        expectEmpty: true
+      })
       const menuItems = await component.findMenuItems({ expectEmpty: true })
 
-      expect(menuItemsContainer).to.be.visible()
+      expect(menuItemsContainer).to.not.exist()
       expect(menuItems).to.not.exist()
     })
   })

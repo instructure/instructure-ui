@@ -111,6 +111,20 @@ const topNavBarExampleChildren: TopNavBarProps['children'][] = [
       )}
       renderUser={undefined}
     />
+  ),
+  ({ currentLayout, inverseColor }) => (
+    <TopNavBar.Layout
+      {...getLayoutProps(
+        { currentLayout, inverseColor },
+        {
+          actionItemsCount: 5,
+          menuItemsWithSubmenu: true,
+          hasRenderInPlaceDialogConfig: true,
+          hasRenderBreadcrumb: true
+        }
+      )}
+      renderUser={undefined}
+    />
   )
 ] as TopNavBarProps['children'][]
 
@@ -128,7 +142,7 @@ export default {
   },
   getExampleProps: (props) => {
     return {
-      width: props.breakpoint === 1024 ? 414 : 950
+      width: props.breakpoint === 1024 ? 950 : 414
     }
   }
 } as StoryConfig<TopNavBarProps>
