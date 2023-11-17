@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.48.1](https://github.com/instructure/instructure-ui/compare/v8.48.0...v8.48.1) (2023-11-17)
+
+
+### Bug Fixes
+
+* **ui-tray:** fix event listeners not working when a second tray is open ([ca62df5](https://github.com/instructure/instructure-ui/commit/ca62df5f1197b354c3b107ac38cca9984078e495))
+
+
+
+
+
 # [8.48.0](https://github.com/instructure/instructure-ui/compare/v8.47.1...v8.48.0) (2023-11-10)
 
 **Note:** Version bump only for package @instructure/ui-tray
