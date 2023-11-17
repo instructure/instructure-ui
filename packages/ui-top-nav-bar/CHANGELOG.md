@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.48.1](https://github.com/instructure/instructure-ui/compare/v8.48.0...v8.48.1) (2023-11-17)
+
+### Features
+
+* **ui-top-nav-bar:** add Breadcrumb to TopNavBar ([e340ae9](https://github.com/instructure/instructure-ui/commit/e340ae91fc0eeb961762453db020b80a44d0b70a))
+
+
+
+
+
 # [8.48.0](https://github.com/instructure/instructure-ui/compare/v8.47.1...v8.48.0) (2023-11-10)
 
 **Note:** Version bump only for package @instructure/ui-top-nav-bar
