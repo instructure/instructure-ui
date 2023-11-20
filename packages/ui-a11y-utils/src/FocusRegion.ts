@@ -45,6 +45,8 @@ class FocusRegion {
   private readonly _id: string
   private _listeners: ReturnType<typeof addEventListener>[] = []
   private _active = false
+  private _documentClickTarget: Node | null = null
+  private _contextContainsTarget = false
 
   constructor(element: Element | Node | null, options: FocusRegionOptions) {
     this._options = options || {
@@ -80,12 +82,19 @@ class FocusRegion {
     this._options.onDismiss?.(event, documentClick)
   }
 
+  captureDocumentMousedown = (event: React.MouseEvent) => {
+    this._documentClickTarget = event.target as Node
+    this._contextContainsTarget = contains(
+      this._contextElement,
+      this._documentClickTarget
+    )
+  }
+
   handleDocumentClick = (event: React.MouseEvent) => {
-    const { target } = event
     if (
       this._options.shouldCloseOnDocumentClick &&
-      event.button == 0 &&
-      !contains(this._contextElement, target as Node)
+      event.button === 0 &&
+      !this._contextContainsTarget
     ) {
       this.handleDismiss(event, true)
     }
@@ -142,6 +151,10 @@ class FocusRegion {
       this._screenReaderFocusRegion.activate()
 
       if (this._options.shouldCloseOnDocumentClick) {
+        this._listeners.push(
+          addEventListener(doc, 'mousedown', this.captureDocumentMousedown)
+        )
+
         this._listeners.push(
           addEventListener(doc, 'click', this.handleDocumentClick)
         )
