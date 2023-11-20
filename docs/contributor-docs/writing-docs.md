@@ -80,7 +80,7 @@ type: embed
 
 The most complex type is the `type: example`. It will render as the `embed` did, but it also provides access to the code, which is editable and the changes reflect on the rendered view immediately.
 
-There are to ways these examples can be written.
+There are two ways these examples can be written.
 
 In the first example, a valid `ReactNode` is enough and the docs system will take care of the rendering.
 In the second example, a whole `component` is needed and it must be `rendered` with the built in `render` method at the very end of the example
@@ -348,7 +348,35 @@ type: code
 
 The compiler will strip the postfix and calculate the language and type from it as well.
 
-### Other Stuff... WIP
+## Named files
+
+Under the docs folder, there are additional folders, which are containing `.md` files, which are for general documentation. These need a `frontmatter`:
+
+```md
+---
+type: code
+---
+
+---
+
+title: Writing Docs
+category: Contributor Guides
+order: 6
+
+---
+```
+
+The `title` will be used as the name of the menuitem in the docs page.
+
+The `order` will determine the order under the `category` it's placed
+
+The `category` is the category under which the doc will be palced in the menu tree. If you want to add another `category`, you have to register it in two places:
+
+`packages/__docs__/src/Search/index.tsx` for the search function to work and
+
+`packages/__docs__/src/Nav/index.tsx` to determine the order of the categories
+
+## Additional information
 
 There are automatically generated parts of the documentation, such as:
 
