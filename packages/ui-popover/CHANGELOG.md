@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.48.2](https://github.com/instructure/instructure-ui/compare/v8.48.1...v8.48.2) (2023-11-21)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils,ui-popover,ui-tooltip:** fix focus manager issues ([9f59f09](https://github.com/instructure/instructure-ui/commit/9f59f098dd1a8572e9c34ec4a07948c02e19cddd))
+
+
+
+
+
 ## [8.48.1](https://github.com/instructure/instructure-ui/compare/v8.48.0...v8.48.1) (2023-11-17)
 
 **Note:** Version bump only for package @instructure/ui-popover
