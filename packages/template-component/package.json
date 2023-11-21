@@ -1,6 +1,6 @@
 {
   "name": "@instructure/template-component",
-  "version": "8.48.1",
+  "version": "8.48.2",
   "description": "A package containing template files to generate an instructure-ui component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
@@ -15,18 +15,18 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",
-    "@instructure/emotion": "8.48.1",
-    "@instructure/shared-types": "8.48.1",
-    "@instructure/ui-react-utils": "8.48.1",
-    "@instructure/ui-testable": "8.48.1",
+    "@instructure/emotion": "8.48.2",
+    "@instructure/shared-types": "8.48.2",
+    "@instructure/ui-react-utils": "8.48.2",
+    "@instructure/ui-testable": "8.48.2",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.48.1",
-    "@instructure/ui-color-utils": "8.48.1",
-    "@instructure/ui-test-locator": "8.48.1",
-    "@instructure/ui-test-utils": "8.48.1",
-    "@instructure/ui-themes": "8.48.1"
+    "@instructure/ui-babel-preset": "8.48.2",
+    "@instructure/ui-color-utils": "8.48.2",
+    "@instructure/ui-test-locator": "8.48.2",
+    "@instructure/ui-test-utils": "8.48.2",
+    "@instructure/ui-themes": "8.48.2"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
