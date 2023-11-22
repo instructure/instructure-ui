@@ -53,7 +53,7 @@ const generateComponentTheme = (theme: Theme): HeadingTheme => {
     lineHeight: typography?.lineHeightFit,
 
     h1FontSize: typography?.fontSizeXXLarge,
-    h1FontWeight: typography?.fontWeightLight,
+    h1FontWeight: typography?.fontWeightNormal,
     h1FontFamily: typography?.fontFamily,
 
     h2FontSize: typography?.fontSizeXLarge,
