@@ -90,10 +90,11 @@ class FocusRegion {
     )
   }
 
-  handleDocumentClick = (event: React.MouseEvent) => {
+  handleDocumentClick = (event: React.PointerEvent) => {
     if (
       this._options.shouldCloseOnDocumentClick &&
       event.button === 0 &&
+      event.pointerType === 'mouse' &&
       !this._contextContainsTarget
     ) {
       this.handleDismiss(event, true)
