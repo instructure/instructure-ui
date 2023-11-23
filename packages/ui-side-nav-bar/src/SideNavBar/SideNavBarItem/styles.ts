@@ -80,7 +80,8 @@ const generateStyle = (
               backgroundColor: componentTheme.hoverBackgroundColor
             },
             '&:hover': {
-              backgroundColor: componentTheme.hoverBackgroundColor,
+              transition: 'background-color .3s',
+              backgroundColor: 'rgba(0, 0, 0, 0.2)',
               color: componentTheme.fontColor,
               textDecoration: componentTheme.linkTextDecoration
             },
