@@ -12,7 +12,7 @@ This page documents how to add and maintain documentation.
 
 The documentation site is generated from the **source code** and the `.md` files. There are two types of `.md` files: `README.md` and `named-md-files.md`, under the `docs folder`.
 
-The **source code** is parsed with [JSDoc](https://jsdoc.app/) and it inprocides `type` information for the docs.
+The **source code** is parsed with [JSDoc](https://jsdoc.app/) with the exeption of react components, which are parsed by [react-docgen](https://react-docgen.dev/) and it provides `type` information for the docs.
 
 The docs can be written in `markdown`, with some added flavor, so the docs can handle special code-display cases.
 
@@ -218,7 +218,7 @@ render(<Example />);
 
 ### 4. Multi example
 
-If an example should be shown in `class` and `function` form as well, it needs to be written as a `list` with two items.
+If an example should be shown in `class` and `function` form as well, it needs to be written as a `list` with two items. The first item will be the `class`, the second the `function`.
 
 ````md
 ---
@@ -247,7 +247,7 @@ type: code
     }
   }
 
-  render(<Exmple />)
+  render(<Example />)
   ```
 
 - ```js
@@ -263,7 +263,7 @@ type: code
     )
   }
 
-  render(<Exmple />)
+  render(<Example />)
   ```
 ````
 
