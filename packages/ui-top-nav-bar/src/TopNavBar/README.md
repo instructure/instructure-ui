@@ -2408,3 +2408,191 @@ class InPlaceDialogExample extends React.Component {
 render(<InPlaceDialogExample />)
 
 ```
+
+#### Color override example for more complex customization
+
+There's no one-size-fits-all solution when it comes to coloring the items in `TopNavBar.Item`, or anywhere else. You have to override the instUI component that is rendered in place. In the following example we override `Text` and `BaseButton`.
+
+```js
+---
+example: true
+render: true
+---
+<InstUISettingsProvider theme={{
+  componentOverrides: {
+    "TopNavBar.Item": {
+      activeIndicatorColorInverse: "red"
+    },
+    BaseButton: {
+      secondaryGhostColor: "green",
+      primaryColor: "yellow",
+      primaryBackground:"brown"
+    },
+    Text:{
+      primaryColor: "blue",
+      brandColor:"purple"
+    },
+  }
+}}>
+  <View as="div" margin="medium 0 0" width={1000}>
+    <TopNavBar
+      breakpoint='650'
+      mediaQueryMatch='element'
+      inverseColor={true}
+      key={1000}
+    >
+      {({ currentLayout, inverseColor }) => {
+        return (
+          <TopNavBar.Layout
+            navLabel={true
+              ? 'Example secondary navigation bar'
+              : 'Example navigation bar'}
+            desktopConfig={{
+              hideActionsUserSeparator: true
+            }}
+            renderBrand={
+              <TopNavBar.Brand
+                screenReaderLabel="Brand name"
+                renderName={(
+                  <View as="div" minWidth="7rem">
+                    <Text
+                      as="div"
+                      color={inverseColor
+                        ? "brand"
+                        : "primary-inverse"
+                      }
+                      transform="uppercase"
+                      size="small"
+                      weight="bold"
+                      lineHeight="condensed"
+                    >
+                      Brand
+                    </Text>
+                    <Text
+                      as="div"
+                      color={inverseColor
+                        ? "primary"
+                        : "primary-inverse"
+                      }
+                      size="large"
+                      weight="normal"
+                      lineHeight="condensed"
+                    >
+                      Sub-brand
+                    </Text>
+                  </View>
+                )}
+                renderIcon={inverseColor ? undefined : (
+                  <IconBoldLine
+                    size="small"
+                    color="primary-inverse"
+                    height="2.5rem"
+                    width="2.5rem"
+                  />
+                )}
+                iconBackground="#0097D3"
+                href="/#TopNavBar"
+              />
+            }
+            renderMenuItems={
+              <TopNavBar.MenuItems
+                listLabel="Page navigation"
+                currentPageId="OverviewPage"
+                renderHiddenItemsMenuTriggerLabel={(
+                  hiddenChildrenCount
+                ) => `${hiddenChildrenCount} More`}
+              >
+                <TopNavBar.Item
+                  id="OverviewPage"
+                  href="/#TopNavBar"
+                >
+                  Overview
+                </TopNavBar.Item>
+                <TopNavBar.Item
+                  id="AdminPage"
+                  href="/#TopNavBar"
+                >
+                  Admin
+                </TopNavBar.Item>
+                <TopNavBar.Item
+                  id="SettingsPage"
+                  href="/#TopNavBar"
+                >
+                  Settings
+                </TopNavBar.Item>
+                <TopNavBar.Item
+                  id="MapsPage"
+                  href="/#TopNavBar"
+                >
+                  Maps
+                </TopNavBar.Item>
+                <TopNavBar.Item
+                  id="AssessmentsPage"
+                  href="/#TopNavBar"
+                >
+                  Assessments
+                </TopNavBar.Item>
+                <TopNavBar.Item
+                  id="CommunityPage"
+                  href="/#TopNavBar"
+                >
+                  Community
+                </TopNavBar.Item>
+              </TopNavBar.MenuItems>
+            }
+            renderActionItems={
+              <TopNavBar.ActionItems
+                listLabel="Actions"
+                renderHiddenItemsMenuTriggerLabel={(
+                  hiddenChildrenCount
+                ) => `${hiddenChildrenCount} more actions`}
+              >
+                <TopNavBar.Item
+                  id="InfoAction3"
+                  variant="icon"
+                  tooltip="Info"
+                  renderIcon={<IconQuestionLine />}
+                  onClick={() => {
+                    console.log('Info')
+                  }}
+                >
+                  Info
+                </TopNavBar.Item>
+                <TopNavBar.Item
+                  id="AlertsAction3"
+                  variant="icon"
+                  tooltip="Alerts"
+                  renderIcon={<IconAlertsLine />}
+                  onClick={() => {
+                    console.log('Alerts')
+                  }}
+                >
+                  Alerts
+                </TopNavBar.Item>
+              </TopNavBar.ActionItems>
+            }
+            renderUser={
+              <TopNavBar.User>
+                <TopNavBar.Item
+                  id="LogInRegisterButton5"
+                  href="/#TopNavBar"
+                  variant="button"
+                >
+                  Log In/Register
+                </TopNavBar.Item>
+              </TopNavBar.User>
+            }
+            themeOverride={{
+              // For example demo
+              smallViewportZIndex: 9999,
+              smallViewportTrayFixTopPosition: true
+                ? `57px`
+                : '56px'
+            }}
+          />
+        )
+      }}
+    </TopNavBar>
+  </View>
+</InstUISettingsProvider>
+```
