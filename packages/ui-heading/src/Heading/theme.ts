@@ -50,7 +50,7 @@ const generateComponentTheme = (theme: Theme): HeadingTheme => {
   }
 
   const componentVariables: HeadingTheme = {
-    lineHeight: typography?.lineHeightFit,
+    lineHeight: typography?.lineHeightCondensed,
 
     h1FontSize: typography?.fontSizeXXLarge,
     h1FontWeight: typography?.fontWeightNormal,
