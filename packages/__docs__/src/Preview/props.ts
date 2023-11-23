@@ -31,7 +31,7 @@ import type {
 import PropTypes from 'prop-types'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 
-import type { MainDocsData } from '../../buildScripts/DataTypes.mts'
+import type { MainDocsData } from '../../buildScripts/DataTypes.mjs'
 
 type PreviewOwnProps = {
   code: string

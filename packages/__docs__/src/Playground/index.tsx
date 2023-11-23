@@ -47,6 +47,7 @@ import { Preview, PreviewErrorBoundary } from '../Preview'
 import { CodeSandboxButton } from '../CodeSandboxButton'
 import type { PlaygroundProps, PlaygroundState } from './props'
 import { propTypes, allowedProps } from './props'
+import type { MainDocsData } from '../../buildScripts/DataTypes.mjs'
 
 /* eslint-disable max-len */
 const codeIconPath = (
@@ -200,7 +201,11 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     )
   }
 
-  renderPreview = (code: any, themeKey: any, themes: any) => {
+  renderPreview = (
+    code: string,
+    themeKey: string,
+    themes: MainDocsData['themes']
+  ) => {
     const { fullscreen, rtl } = this.state
 
     return (
@@ -280,7 +285,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
             ) : this.mutliExample() ? (
               this.renderTabPanel(themeKey, themes)
             ) : (
-              this.renderPreview(this.state.code, themeKey, themes)
+              this.renderPreview(this.state.code as string, themeKey, themes)
             )}
 
             {this.state.showCode && this.renderEditor()}
