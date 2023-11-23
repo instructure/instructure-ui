@@ -37,7 +37,6 @@ const generateComponentTheme = (theme: Theme): SideNavBarItemTheme => {
     canvas: {
       fontColor: theme['ic-brand-global-nav-menu-item__text-color'],
       iconColor: theme['ic-brand-global-nav-ic-icon-svg-fill'],
-      backgroundColor: theme['ic-brand-global-nav-bgd'],
       hoverBackgroundColor: theme['ic-global-nav-link-hover'],
       selectedFontColor:
         theme['ic-brand-global-nav-menu-item__text-color--active'],
