@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-expandable",
-  "version": "8.48.2",
+  "version": "8.48.3",
   "description": "A utility component for show/hide functionality",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,18 +24,18 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.23.2",
-    "@instructure/shared-types": "8.48.2",
-    "@instructure/ui-prop-types": "8.48.2",
-    "@instructure/ui-react-utils": "8.48.2",
-    "@instructure/ui-testable": "8.48.2",
-    "@instructure/ui-utils": "8.48.2",
-    "@instructure/uid": "8.48.2",
+    "@instructure/shared-types": "8.48.3",
+    "@instructure/ui-prop-types": "8.48.3",
+    "@instructure/ui-react-utils": "8.48.3",
+    "@instructure/ui-testable": "8.48.3",
+    "@instructure/ui-utils": "8.48.3",
+    "@instructure/uid": "8.48.3",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.48.2",
-    "@instructure/ui-color-utils": "8.48.2",
-    "@instructure/ui-test-utils": "8.48.2"
+    "@instructure/ui-babel-preset": "8.48.3",
+    "@instructure/ui-color-utils": "8.48.3",
+    "@instructure/ui-test-utils": "8.48.3"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
