@@ -595,7 +595,7 @@ export type GridTheme = {
 } & Media
 
 export type HeadingTheme = {
-  lineHeight: Typography['lineHeightFit']
+  lineHeight: Typography['lineHeightCondensed']
   h1FontSize: Typography['fontSizeXXLarge']
   h1FontWeight: Typography['fontWeightNormal']
   h1FontFamily: Typography['fontFamily']
