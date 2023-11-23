@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.48.3](https://github.com/instructure/instructure-ui/compare/v8.48.2...v8.48.3) (2023-11-23)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** fix regression in focus region ([43dc1d8](https://github.com/instructure/instructure-ui/commit/43dc1d8efb62bffc2f208de5be817af038d405ca))
+
+
+
+
+
 ## [8.48.2](https://github.com/instructure/instructure-ui/compare/v8.48.1...v8.48.2) (2023-11-21)
 
 
