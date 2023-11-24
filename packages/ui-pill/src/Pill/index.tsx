@@ -26,7 +26,6 @@
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
-import { TruncateText } from '@instructure/ui-truncate-text'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { Tooltip } from '@instructure/ui-tooltip'
@@ -59,6 +58,8 @@ class Pill extends Component<PillProps, PillState> {
 
   ref: Element | null = null
 
+  ellipsisRef: HTMLElement | null = null
+
   constructor(props: PillProps) {
     super(props)
 
@@ -68,6 +69,7 @@ class Pill extends Component<PillProps, PillState> {
   }
 
   componentDidMount() {
+    this.setTruncation()
     this.props.makeStyles?.()
   }
 
@@ -75,10 +77,10 @@ class Pill extends Component<PillProps, PillState> {
     this.props.makeStyles?.()
   }
 
-  handleTruncation(truncated: boolean) {
-    if (truncated !== this.state.truncated) {
+  setTruncation() {
+    if (this.ellipsisRef) {
       this.setState({
-        truncated: truncated
+        truncated: this.ellipsisRef.offsetWidth < this.ellipsisRef.scrollWidth
       })
     }
   }
@@ -105,6 +107,8 @@ class Pill extends Component<PillProps, PillState> {
       elementRef,
       styles,
       makeStyles,
+      statusLabel,
+      renderIcon,
       ...props
     } = this.props
 
@@ -132,17 +136,22 @@ class Pill extends Component<PillProps, PillState> {
         withFocusOutline={focused}
         focusColor="info"
       >
-        <span css={styles?.pill}>
-          <span css={styles?.text}>
-            <TruncateText
-              onUpdate={(truncated) => {
-                this.handleTruncation(truncated)
-              }}
-            >
-              {children}
-            </TruncateText>
-          </span>
-        </span>
+        <div css={styles?.pill}>
+          {renderIcon && <div css={styles?.icon}>{renderIcon}</div>}
+          <div
+            css={styles?.text}
+            ref={(el) => {
+              this.ellipsisRef = el
+            }}
+          >
+            {statusLabel && (
+              <span css={styles?.status}>
+                {statusLabel && statusLabel.concat(':')}
+              </span>
+            )}
+            {children}
+          </div>
+        </div>
       </View>
     )
   }
@@ -150,7 +159,17 @@ class Pill extends Component<PillProps, PillState> {
   render() {
     if (this.state.truncated) {
       return (
-        <Tooltip renderTip={this.props.children} elementRef={this.handleRef}>
+        <Tooltip
+          renderTip={
+            this.props.statusLabel
+              ? this.props.statusLabel.concat(
+                  ': ',
+                  this.props.children as string
+                )
+              : this.props.children
+          }
+          elementRef={this.handleRef}
+        >
           {({ focused, getTriggerProps }) => {
             return this.renderPill(focused, getTriggerProps)
           }}

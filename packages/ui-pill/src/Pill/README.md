@@ -4,7 +4,8 @@ describes: Pill
 
 Displays short, contextual information about an item. Change the border
 and text color via the `color` prop. Use the `margin` prop to add space around
-the component.
+the component. Use the `renderIcon` prop to add an icon to the left of the text. Additionally,
+you can use the `statusLabel` prop to add a label to the left of the main text.
 
 ```js
 ---
@@ -17,30 +18,36 @@ example: true
     Excused
   </Pill>
   <Pill
+    statusLabel="Status"
     color="info"
     margin="x-small"
   >
     Draft
   </Pill>
   <Pill
+    statusLabel="Status"
+    renderIcon={<IconCheckLine />}
     color="success"
     margin="x-small"
   >
     Checked In
   </Pill>
   <Pill
+    renderIcon={<IconEndLine />}
     color="danger"
     margin="x-small"
   >
     Missing
   </Pill>
   <Pill
+    renderIcon={<IconClockLine />}
     color="warning"
     margin="x-small"
   >
     Late
   </Pill>
   <Pill
+    renderIcon={<IconMessageLine />}
     color="alert"
     margin="x-small"
   >
@@ -57,7 +64,7 @@ be handled via ellipses.
 example: true
 ---
 <Pill>
-  extraordinary superfluousness
+  Supercalifragilisticexpialidocious bear
 </Pill>
 ```
 

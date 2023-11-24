@@ -978,9 +978,9 @@ export type PillTheme = {
   padding: string | 0
   height: string | 0
   background: Colors['backgroundLightest']
-  textTransformStyle: string
-  textFontSize: Typography['fontSizeXSmall']
-  textFontWeight: Typography['fontWeightBold']
+  textFontSize: Typography['fontSizeSmall']
+  statusLabelFontWeight: Typography['fontWeightBold']
+  textFontWeight: Typography['fontWeightNormal']
   maxWidth: string | 0
   primaryColor: Colors['textDark']
   infoColor: Colors['textInfo']
