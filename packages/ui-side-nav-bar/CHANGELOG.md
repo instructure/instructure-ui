@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
+
+
+### Features
+
+* **ui-side-nav-bar:** change hover bahaviour of SideNavBar ([924f6b3](https://github.com/instructure/instructure-ui/commit/924f6b32ac78cb138545ffcfea151f693fcbe8d0))
+
+
+
+
+
 ## [8.48.3](https://github.com/instructure/instructure-ui/compare/v8.48.2...v8.48.3) (2023-11-23)
 
 **Note:** Version bump only for package @instructure/ui-side-nav-bar
