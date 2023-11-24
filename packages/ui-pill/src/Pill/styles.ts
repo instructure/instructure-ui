@@ -71,7 +71,9 @@ const generateStyle = (
   return {
     pill: {
       label: 'pill',
-      display: 'block',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       fontFamily: componentTheme.fontFamily,
       boxSizing: 'border-box',
       padding: componentTheme.padding,
@@ -83,13 +85,29 @@ const generateStyle = (
       lineHeight: `calc(${componentTheme.height} - (${componentTheme.borderWidth} * 2))`,
       ...pillColorVariants[color!]
     },
+    status: {
+      label: 'pill__status',
+      boxSizing: 'border-box',
+      fontSize: componentTheme.textFontSize,
+      fontWeight: componentTheme.statusLabelFontWeight,
+      marginRight: '0.125rem'
+    },
+    icon: {
+      label: 'pill__icon',
+      display: 'flex',
+      alignItems: 'center',
+      marginRight: '0.375rem',
+      fontSize: '0.75rem'
+    },
     text: {
       label: 'pill__text',
       boxSizing: 'border-box',
-      textTransform: componentTheme.textTransformStyle,
+      maxWidth: componentTheme.maxWidth,
       fontSize: componentTheme.textFontSize,
       fontWeight: componentTheme.textFontWeight,
-      letterSpacing: '0.0625rem'
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden'
     },
     maxWidth: componentTheme.maxWidth
   }

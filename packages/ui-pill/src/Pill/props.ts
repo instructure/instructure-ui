@@ -52,6 +52,16 @@ type PillOwnProps = {
    */
   margin?: Spacing
   children: React.ReactNode
+
+  /**
+   * Adds a status label to the left of the main text.
+   */
+  statusLabel?: string
+
+  /**
+   * An icon displayed to the left of the text.
+   */
+  renderIcon?: React.ReactNode
 }
 type PropKeys = keyof PillOwnProps
 
@@ -61,7 +71,9 @@ type PillProps = PillOwnProps &
   WithStyleProps<PillTheme, PillStyle> &
   OtherHTMLAttributes<PillOwnProps>
 
-type PillStyle = ComponentStyle<'pill' | 'text' | 'maxWidth'>
+type PillStyle = ComponentStyle<
+  'pill' | 'text' | 'maxWidth' | 'status' | 'icon'
+>
 
 const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType, // eslint-disable-line react/require-default-props
@@ -75,7 +87,9 @@ const propTypes: PropValidators<PropKeys> = {
     'alert'
   ]),
   elementRef: PropTypes.func,
-  margin: ThemeablePropTypes.spacing
+  margin: ThemeablePropTypes.spacing,
+  statusLabel: PropTypes.string,
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
 
 const allowedProps: AllowedPropKeys = [

@@ -54,11 +54,9 @@ describe('<Pill />', async () => {
     const pill = await PillLocator.find()
 
     const tooltipTrigger = await pill.find('[data-popover-trigger="true"]')
-    const truncatedText = await pill.find('[data-cid="TruncateText"')
 
     await wait(() => {
       expect(tooltipTrigger).to.exist()
-      expect(truncatedText).to.exist()
     })
   })
 
