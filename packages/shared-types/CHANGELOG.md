@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
+
+
+### Bug Fixes
+
+* **shared-types,ui-heading:** change h1 heading weight ([b160d30](https://github.com/instructure/instructure-ui/commit/b160d30b331aaf25bf251576254ce3e8ae937c0f))
+* **shared-types:** fix unwanted scrollbar ([ac8da80](https://github.com/instructure/instructure-ui/commit/ac8da8066fb86b41a4776189a60edcfccd2fb088))
+
+
+### Features
+
+* **shared-types,ui-pill:** change pill according to new design guidelines ([3bd8ee6](https://github.com/instructure/instructure-ui/commit/3bd8ee6316650dc66068f6e4d1a3fbb2fbb09e42))
+
+
+
+
+
 ## [8.48.3](https://github.com/instructure/instructure-ui/compare/v8.48.2...v8.48.3) (2023-11-23)
 
 **Note:** Version bump only for package @instructure/shared-types
