@@ -169,7 +169,8 @@ class Selectable extends Component<SelectableProps> {
         getRootProps: ({ onMouseDown, ...rest } = {}) => {
           return {
             onMouseDown: createChainedFunction((event: React.MouseEvent) => {
-              if (event.target !== this._trigger) {
+              // if we call preventDefault, label can't be selected and copied, so we only call it when the options are shown
+              if (event.target !== this._trigger && isShowingOptions) {
                 event.preventDefault() // prevent trigger from losing focus
               }
             }, onMouseDown),
