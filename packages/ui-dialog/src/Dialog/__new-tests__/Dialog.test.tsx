@@ -198,8 +198,8 @@ describe('<Dialog />', () => {
       )
       const nonTabbableContent = getByTestId('non-tabbable')
 
+      userEvent.tab()
       await waitFor(() => {
-        userEvent.tab()
         expect(document.activeElement).toBe(nonTabbableContent)
       })
     })
