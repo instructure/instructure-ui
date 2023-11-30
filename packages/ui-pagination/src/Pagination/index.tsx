@@ -198,7 +198,7 @@ class Pagination extends Component<PaginationProps> {
         }
       }
 
-      ;(nextFocusElement as HTMLElement).focus()
+      ;(nextFocusElement as HTMLElement)?.focus()
     }
   }
 
