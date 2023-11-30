@@ -94,7 +94,7 @@ class FocusRegion {
     if (
       this._options.shouldCloseOnDocumentClick &&
       event.button === 0 &&
-      event.pointerType === 'mouse' &&
+      event.pointerType && // if the pointerType is an empty string, the click was initiated via keyboard and we shouldn't call the dismiss fn
       !this._contextContainsTarget
     ) {
       this.handleDismiss(event, true)
