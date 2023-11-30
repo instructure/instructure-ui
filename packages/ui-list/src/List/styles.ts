@@ -55,7 +55,7 @@ const generateStyle = (
         paddingInlineEnd: 0,
         counterReset: 'ol-counter',
 
-        'li::before': {
+        '&>li::before': {
           fontWeight: componentTheme.orderedNumberFontWeight,
           counterIncrement: 'ol-counter',
           content: 'counters(ol-counter, ".") "."',
