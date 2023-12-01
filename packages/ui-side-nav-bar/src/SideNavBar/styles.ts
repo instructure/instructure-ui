@@ -68,14 +68,12 @@ const generateStyle = (
       padding: '0',
       flex: '1 0 auto'
     },
-    toggle: {
+    toggleIcon: {
+      fill: componentTheme.fill,
+      margin: '0 auto',
       transform: 'translate3d(0, 0, 0)',
       transition: `all ${componentTheme.toggleTransition}`,
       ...(minimized ? { transform: 'rotate3d(0, 1, 0, -180deg)' } : {})
-    },
-    toggleIcon: {
-      fill: componentTheme.fill,
-      margin: '0 auto'
     }
   }
 }

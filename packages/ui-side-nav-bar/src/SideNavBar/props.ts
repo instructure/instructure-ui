@@ -86,7 +86,7 @@ type SideNavBarProps = SideNavBarOwnProps &
   OtherHTMLAttributes<SideNavBarOwnProps>
 
 type SideNavBarStyle = ComponentStyle<
-  'navigation' | 'list' | 'content' | 'toggle' | 'toggleIcon'
+  'navigation' | 'list' | 'content' | 'toggleIcon'
 >
 
 const propTypes: PropValidators<PropKeys> = {

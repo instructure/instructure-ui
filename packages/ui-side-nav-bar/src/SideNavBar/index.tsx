@@ -135,21 +135,19 @@ class SideNavBar extends Component<SideNavBarProps, SideNavBarState> {
         }}
       >
         <ul css={this.props.styles?.content}>{this.renderChildren()}</ul>
-        <div css={this.props.styles?.toggle}>
-          <SideNavBarItem
-            aria-expanded={!this.minimized}
-            onClick={this.handleNavToggle}
-            icon={
-              <IconMoveStartLine
-                css={this.props.styles?.toggleIcon}
-                inline={false}
-              />
-            }
-            label={
-              <ScreenReaderContent>{this.toggleMessage()}</ScreenReaderContent>
-            }
-          ></SideNavBarItem>
-        </div>
+        <SideNavBarItem
+          aria-expanded={!this.minimized}
+          onClick={this.handleNavToggle}
+          icon={
+            <IconMoveStartLine
+              css={this.props.styles?.toggleIcon}
+              inline={false}
+            />
+          }
+          label={
+            <ScreenReaderContent>{this.toggleMessage()}</ScreenReaderContent>
+          }
+        ></SideNavBarItem>
       </nav>
     )
   }
