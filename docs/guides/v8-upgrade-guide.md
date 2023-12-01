@@ -164,7 +164,7 @@ InstUI has been converted to TypeScript. This will result in much better autocom
 
 ##### Node version
 
-InstUI now needs `node.js` version >12.20 to build.
+InstUI now needs an [actively supported LTS version of `node.js`](https://nodejs.org/en/about/previous-releases) to build.
 
 ##### Legacy Context
 
