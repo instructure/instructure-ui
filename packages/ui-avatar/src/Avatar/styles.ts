@@ -40,7 +40,7 @@ const generateStyle = (
   props: AvatarProps,
   state: AvatarState
 ): AvatarStyle => {
-  const { size, color, hasInverseColor, shape, src } = props
+  const { size, color, hasInverseColor, shape, src, showBorder } = props
   const { loaded } = state
 
   const sizeStyles = {
@@ -121,24 +121,29 @@ const generateStyle = (
       overflow: 'hidden',
       lineHeight: 0,
       textAlign: 'center',
+      borderStyle: 'solid',
+      borderColor: componentTheme.borderColor,
       ...sizeStyles[size],
       ...variantStyles[shape],
       ...(loaded
         ? {
             backgroundImage: `url('${src}')`,
-            border: 0,
+            ...(showBorder !== 'always' && {
+              border: 0
+            }),
             boxShadow: `inset 0 0 ${componentTheme.boxShadowBlur} 0 ${componentTheme.boxShadowColor}`
           }
         : {
             backgroundImage: undefined,
-            borderStyle: 'solid',
-            borderColor: componentTheme.borderColor,
             ...(hasInverseColor && {
               border: 0,
               padding: sizeStyles[size].borderWidth,
               backgroundClip: 'border-box'
             })
-          })
+          }),
+      ...(showBorder === 'never' && {
+        border: 0
+      })
     },
     initials: {
       label: 'avatar__initials',

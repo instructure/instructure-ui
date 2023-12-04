@@ -74,6 +74,10 @@ type AvatarOwnProps = {
    * In inverse color mode the background and text/icon colors are inverted
    */
   hasInverseColor?: boolean
+  /**
+   * `auto` only shows a border when there is no source image. This prop can force to always or never show that border.
+   */
+  showBorder?: 'auto' | 'always' | 'never'
   shape: 'circle' | 'rectangle'
   display: 'inline-block' | 'block'
   /**
@@ -140,6 +144,7 @@ const propTypes: PropValidators<PropKeys> = {
     'ash'
   ]),
   hasInverseColor: PropTypes.bool,
+  showBorder: PropTypes.oneOf(['auto', 'always', 'never']),
   shape: PropTypes.oneOf(['circle', 'rectangle']),
   margin: ThemeablePropTypes.spacing,
   display: PropTypes.oneOf(['inline-block', 'block']),
@@ -162,7 +167,8 @@ const allowedProps: AllowedPropKeys = [
   'onImageLoaded',
   'as',
   'elementRef',
-  'renderIcon'
+  'renderIcon',
+  'showBorder'
 ]
 
 export type { AvatarProps, AvatarStyle }

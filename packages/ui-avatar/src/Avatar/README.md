@@ -136,6 +136,20 @@ example: true
 </div>
 ```
 
+### Border
+
+By default only avatars without an image have borders but you can force it to `always` or `never` show with the `showBorder` prop however you should only use it rarely in very specific occasions (e.g. displaying an avatar in the [SideNavBar](/#SideNavBar))
+
+```js
+---
+example: true
+---
+<div>
+  <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" showBorder="always"/>
+  <Avatar name="Sarah Robinson" renderIcon={<IconGroupLine />} margin="0 small 0 0" showBorder="never"/>
+</div>
+```
+
 ### Guidelines
 
 ```js
