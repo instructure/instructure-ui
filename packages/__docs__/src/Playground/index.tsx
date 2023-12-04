@@ -227,12 +227,11 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     )
   }
 
-  renderTabPanel = (themeKey: any, themes: any) => {
+  renderTabPanel = (themeKey: string, themes: MainDocsData['themes']) => {
     const { selectedTab, code } = this.state
 
     return (
       <Tabs
-        margin="large auto"
         padding="medium"
         onRequestTabChange={(_event, { index }) => {
           this.setState({
