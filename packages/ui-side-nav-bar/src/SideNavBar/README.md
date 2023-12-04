@@ -28,7 +28,7 @@ example: true
         }}
       />
       <SideNavBar.Item
-        icon={<Avatar name="Ziggy Marley" size="x-small"/>}
+        icon={<Avatar name="Ziggy Marley" size="x-small" src={avatarSquare} showBorder="always"/>}
         label="Account"
         onClick={() => { this.loadSubNav('account') }}
       />
@@ -66,6 +66,7 @@ guidelines: true
   <Figure recommendation="yes" title="Do">
     <Figure.Item>Use for top-level SideNavBar</Figure.Item>
     <Figure.Item>Remember that SideNavBar can be themed by the institution</Figure.Item>
+    <Figure.Item>When using an <Link href="/#Avatar">Avatar</Link> in the SideNavBar it should have the <code>showBorder="always"</code> prop</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
     <Figure.Item>Add LTI links to the main area</Figure.Item>
