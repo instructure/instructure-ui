@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
+
+
+### Bug Fixes
+
+* fix modal not dismissible via touch and add focus region tests ([e373da1](https://github.com/instructure/instructure-ui/commit/e373da144a96b0615ab0594677f6dae67ab5fa6d))
+
+
+
+
+
 # [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
 
 **Note:** Version bump only for package @instructure/ui-popover
