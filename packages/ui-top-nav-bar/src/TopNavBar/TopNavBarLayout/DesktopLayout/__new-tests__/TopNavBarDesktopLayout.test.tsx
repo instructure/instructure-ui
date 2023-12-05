@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import {
@@ -31,11 +31,24 @@ import {
   getBrand,
   getMenuItems,
   getUser,
-  getBreadcrumb
+  getBreadcrumb,
+  SmallViewportModeWrapper
 } from '../../../utils/exampleHelpers'
 
 import { TopNavBarDesktopLayout } from '../index'
+import type { TopNavBarDesktopLayoutProps } from '../props'
 import TopNavBarContext from '../../../TopNavBarContext'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+
+const defaultBlocks: Pick<
+  TopNavBarDesktopLayoutProps,
+  'renderBrand' | 'renderMenuItems' | 'renderActionItems' | 'renderUser'
+> = {
+  renderBrand: getBrand(),
+  renderMenuItems: getMenuItems(),
+  renderActionItems: getActionItems(),
+  renderUser: getUser()
+}
 
 const originalResizeObserver = global.ResizeObserver
 
@@ -161,6 +174,434 @@ describe('<TopNavBarDesktopLayout />', () => {
       expect(crumb1).not.toBeInTheDocument()
       expect(crumb2).not.toBeInTheDocument()
       expect(crumb3).not.toBeInTheDocument()
+    })
+  })
+
+  describe('renderBrand', () => {
+    it('should render brand container', () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout {...defaultBlocks} renderBrand={getBrand()} />
+      )
+      const brandContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__brandContainer']"
+      )
+      const brandNameText = screen.getByText('Brand name')
+
+      expect(brandContainer).toBeInTheDocument()
+      expect(brandNameText).toBeVisible()
+    })
+
+    it('should not render brand container, when there is no "renderBrand" prop set', () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout {...defaultBlocks} renderBrand={undefined} />
+      )
+
+      const brandContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__brandContainer']"
+      )
+      const desktopLayout = container.querySelector(
+        "[class$='-topNavBarDesktopLayout']"
+      )
+
+      expect(brandContainer).not.toBeInTheDocument()
+      expect(desktopLayout).not.toHaveTextContent('Brand name')
+    })
+
+    it('should not render brand container when "renderName" and "renderIcon" props are both missing', () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout
+          {...defaultBlocks}
+          renderBrand={getBrand({
+            brandProps: { renderName: undefined, renderIcon: undefined }
+          })}
+        />
+      )
+
+      const brandContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__brandContainer']"
+      )
+      const desktopLayout = container.querySelector(
+        "[class$='-topNavBarDesktopLayout']"
+      )
+
+      expect(brandContainer).not.toBeInTheDocument()
+      expect(desktopLayout).not.toHaveTextContent('Brand name')
+    })
+
+    describe('start padding', () => {
+      it('should be 0 when brand block is rendered', () => {
+        const { container } = render(
+          <TopNavBarDesktopLayout {...defaultBlocks} renderBrand={getBrand()} />
+        )
+
+        // TODO convert to e2e
+        // const component = await TopNavBarDesktopLayoutLocator.find()
+        // expect(getComputedStyle(component.getDOMNode()).paddingInlineStart).to.equal('0px')
+
+        const brandContainer = container.querySelector(
+          "[class$='topNavBarBrand__container']"
+        )
+        const brandContainerStyle = getComputedStyle(brandContainer!)
+
+        expect(brandContainerStyle.paddingLeft).toBe('0px')
+      })
+
+      it('should be visible when brand block is not rendered', () => {
+        const { container } = render(
+          <TopNavBarDesktopLayout {...defaultBlocks} renderBrand={undefined} />
+        )
+
+        const brandContainer = container.querySelector(
+          "[class$='topNavBarBrand__container']"
+        )
+        const desktopLayout = container.querySelector(
+          "[class$='topNavBarDesktopLayout']"
+        )
+
+        // TODO convert to e2e
+        // expect(getComputedStyle(component.getDOMNode()).paddingInlineStart).to.not.equal('0px')
+        // const brandContainerStyle = getComputedStyle(brandContainer!)
+        // expect(brandContainerStyle.paddingInlineStart).not.toBe('0px')
+
+        expect(brandContainer).not.toBeInTheDocument()
+        expect(desktopLayout).not.toHaveTextContent('Brand name')
+      })
+    })
+  })
+
+  describe('renderMenuItems', () => {
+    it('should render menu item container', () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout
+          {...defaultBlocks}
+          renderMenuItems={getMenuItems()}
+        />
+      )
+      const menuItemsContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__menuItemsContainer']"
+      )
+      const menuItem = container.querySelector(
+        "[class$='topNavBarItem__content']"
+      )
+
+      expect(menuItemsContainer).toBeInTheDocument()
+      expect(container).toHaveTextContent('6 More')
+      expect(menuItem).toBeVisible()
+    })
+
+    it('should still render menu item container, when there is no "renderMenuItems" prop set', () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout
+          {...defaultBlocks}
+          renderMenuItems={undefined}
+        />
+      )
+      const menuItemsContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__menuItemsContainer']"
+      )
+      const actionItemsContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+      )
+
+      expect(actionItemsContainer).toBeInTheDocument()
+      expect(menuItemsContainer).not.toBeInTheDocument()
+      expect(container).not.toHaveTextContent('6 More')
+    })
+
+    it('should still render menu item container, when there are 0 menu items', () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout
+          {...defaultBlocks}
+          renderMenuItems={getMenuItems({ menuItemsCount: 0 })}
+        />
+      )
+      const menuItemsContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__menuItemsContainer']"
+      )
+      const actionItemsContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+      )
+
+      expect(actionItemsContainer).toBeInTheDocument()
+      expect(menuItemsContainer).not.toBeInTheDocument()
+      expect(container).not.toHaveTextContent('6 More')
+    })
+  })
+
+  describe('renderActionItems', () => {
+    it('should render action item container', () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout
+          {...defaultBlocks}
+          renderActionItems={getActionItems()}
+        />
+      )
+      const actionItemsContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+      )
+
+      expect(actionItemsContainer).toBeInTheDocument()
+      expect(container).toHaveTextContent('6 More')
+    })
+
+    it('should not render action item container, when there is no "renderActionItems" prop set', () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout
+          {...defaultBlocks}
+          renderActionItems={undefined}
+        />
+      )
+      const actionItemsContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+      )
+
+      expect(actionItemsContainer).not.toBeInTheDocument()
+    })
+
+    it('should not render action item container, when there are 0 action items', async () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout
+          {...defaultBlocks}
+          renderActionItems={getActionItems({ actionItemsCount: 0 })}
+        />
+      )
+      const actionItemsContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+      )
+
+      expect(actionItemsContainer).not.toBeInTheDocument()
+    })
+  })
+
+  describe('renderUser', () => {
+    it('should render user container', () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout {...defaultBlocks} renderUser={getUser()} />
+      )
+      const userContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__userContainer']"
+      )
+
+      expect(userContainer).toBeInTheDocument()
+      expect(container).toHaveTextContent('User Name')
+    })
+
+    it('should not render user container, when there is no "renderUser" prop set', async () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout {...defaultBlocks} renderUser={undefined} />
+      )
+      const userContainer = container.querySelector(
+        "[class$='topNavBarDesktopLayout__userContainer']"
+      )
+
+      expect(userContainer).not.toBeInTheDocument()
+      expect(container).not.toHaveTextContent('User Name')
+    })
+  })
+
+  describe('navLabel prop', () => {
+    it('should set "aria-label" for the underlying `<nav>` element', () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout
+          {...defaultBlocks}
+          navLabel="Navigation test label"
+        />
+      )
+      const topNavBarDesktopLayout = container.querySelector(
+        "[class$='-topNavBarDesktopLayout']"
+      )
+
+      expect(topNavBarDesktopLayout).toHaveAttribute(
+        'aria-label',
+        'Navigation test label'
+      )
+      expect(topNavBarDesktopLayout!.tagName).toBe('NAV')
+    })
+  })
+
+  describe('elementRef prop', () => {
+    it('should return the root nav element', () => {
+      const elementRef = jest.fn()
+      const { container } = render(
+        <TopNavBarDesktopLayout {...defaultBlocks} elementRef={elementRef} />
+      )
+
+      expect(elementRef).toHaveBeenCalledWith(container.firstChild)
+    })
+  })
+
+  describe('hideActionsUserSeparator prop', () => {
+    describe('in default mode', () => {
+      it('should hide separator between actions and user', () => {
+        const { container } = render(
+          <TopNavBarDesktopLayout
+            {...defaultBlocks}
+            hideActionsUserSeparator={true}
+          />
+        )
+        const userContainer = container.querySelector(
+          "[class$='topNavBarDesktopLayout__userContainer']"
+        )
+
+        // TODO convert to e2e
+        // const actionsUserSeparator = await component.getActionsUserSeparatorBackground()
+        // expect(actionsUserSeparator).to.equal('rgba(0, 0, 0, 0)')
+        // const actionsUserSeparator = getComputedStyle(userContainer!, '::before')
+        // const actionsUserSeparatorBackground = actionsUserSeparator.getPropertyValue('background-color')
+
+        // expect(actionsUserSeparatorBackground).toBe('rgba(0, 0, 0, 0)')
+
+        expect(userContainer).toBeInTheDocument()
+      })
+
+      it('should show separator between actions and user, when false', () => {
+        const { container } = render(
+          <TopNavBarDesktopLayout
+            {...defaultBlocks}
+            hideActionsUserSeparator={false}
+          />
+        )
+        const userContainer = container.querySelector(
+          "[class$='topNavBarDesktopLayout__userContainer']"
+        )
+
+        // TODO convert to e2e
+        // const component = await TopNavBarDesktopLayoutLocator.find()
+        // const actionsUserSeparator = await component.getActionsUserSeparatorBackground()
+        // expect(actionsUserSeparator).to.equal('rgb(199, 205, 209)')
+
+        expect(userContainer).toBeInTheDocument()
+      })
+    })
+
+    describe('in inverse mode', () => {
+      it('should hide separator between actions and user', () => {
+        const { container } = render(
+          <SmallViewportModeWrapper layout="desktop" inverseColor>
+            <TopNavBarDesktopLayout
+              {...defaultBlocks}
+              hideActionsUserSeparator={true}
+            />
+          </SmallViewportModeWrapper>
+        )
+        const userContainer = container.querySelector(
+          "[class$='topNavBarDesktopLayout__userContainer']"
+        )
+
+        // TODO convert to e2e
+        // const component = await TopNavBarDesktopLayoutLocator.find()
+        // const actionsUserSeparator = await component.getActionsUserSeparatorBackground()
+        // expect(actionsUserSeparator).to.equal('rgba(0, 0, 0, 0)')
+
+        expect(userContainer).toBeInTheDocument()
+      })
+
+      it('should show separator between actions and user, when false', () => {
+        const { container } = render(
+          <SmallViewportModeWrapper layout="desktop" inverseColor>
+            <TopNavBarDesktopLayout
+              {...defaultBlocks}
+              hideActionsUserSeparator={false}
+            />
+          </SmallViewportModeWrapper>
+        )
+        const userContainer = container.querySelector(
+          "[class$='topNavBarDesktopLayout__userContainer']"
+        )
+
+        // TODO convert to e2e
+        // const component = await TopNavBarDesktopLayoutLocator.find()
+        // const actionsUserSeparator = await component.getActionsUserSeparatorBackground()
+        // expect(actionsUserSeparator).to.equal('rgb(199, 205, 209)')
+
+        expect(userContainer).toBeInTheDocument()
+      })
+    })
+
+    describe('should not display when:', () => {
+      it('renderActionItems is missing', () => {
+        const { container } = render(
+          <TopNavBarDesktopLayout
+            {...defaultBlocks}
+            hideActionsUserSeparator={undefined}
+            renderActionItems={undefined}
+          />
+        )
+        const userContainer = container.querySelector(
+          "[class$='topNavBarDesktopLayout__userContainer']"
+        )
+        const actionItemsContainer = container.querySelector(
+          "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+        )
+
+        // TODO convert to e2e
+        // const component = await TopNavBarDesktopLayoutLocator.find()
+        // const actionsUserSeparator = await component.getActionsUserSeparatorBackground()
+        // expect(actionsUserSeparator).to.equal('rgba(0, 0, 0, 0)')
+
+        expect(actionItemsContainer).not.toBeInTheDocument()
+        expect(userContainer).toBeInTheDocument()
+      })
+
+      it('renderUser is missing', () => {
+        const { container } = render(
+          <TopNavBarDesktopLayout
+            {...defaultBlocks}
+            hideActionsUserSeparator={undefined}
+            renderUser={undefined}
+          />
+        )
+        const userContainer = container.querySelector(
+          "[class$='topNavBarDesktopLayout__userContainer']"
+        )
+        const actionItemsContainer = container.querySelector(
+          "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+        )
+
+        // TODO convert to e2e
+        // const component = await TopNavBarDesktopLayoutLocator.find()
+        // const actionsUserSeparator = await component.getActionsUserSeparatorBackground()
+        // expect(actionsUserSeparator).to.equal('rgba(0, 0, 0, 0)')
+
+        expect(actionItemsContainer).toBeInTheDocument()
+        expect(userContainer).not.toBeInTheDocument()
+      })
+
+      it('renderActionItems and renderUser is missing', () => {
+        const { container } = render(
+          <TopNavBarDesktopLayout
+            {...defaultBlocks}
+            hideActionsUserSeparator={undefined}
+            renderActionItems={undefined}
+            renderUser={undefined}
+          />
+        )
+        const userContainer = container.querySelector(
+          "[class$='topNavBarDesktopLayout__userContainer']"
+        )
+        const actionItemsContainer = container.querySelector(
+          "[class$='topNavBarDesktopLayout__actionItemsContainer']"
+        )
+
+        // TODO convert to e2e
+        // const component = await TopNavBarDesktopLayoutLocator.find()
+        // const actionsUserSeparator =  await component.getActionsUserSeparatorBackground()
+        // expect(actionsUserSeparator).to.equal('rgba(0, 0, 0, 0)')
+
+        expect(actionItemsContainer).not.toBeInTheDocument()
+        expect(userContainer).not.toBeInTheDocument()
+      })
+    })
+  })
+
+  describe('should be accessible', () => {
+    it('a11y', async () => {
+      const { container } = render(
+        <TopNavBarDesktopLayout {...defaultBlocks} />
+      )
+      const axeCheck = await runAxeCheck(container)
+
+      expect(axeCheck).toBe(true)
     })
   })
 
