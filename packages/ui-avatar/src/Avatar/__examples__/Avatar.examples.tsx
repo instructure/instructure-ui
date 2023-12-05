@@ -44,6 +44,13 @@ export default {
       return true
     }
 
+    if (
+      (props.src && props.showBorder === 'never') ||
+      (!props.src && props.showBorder === 'always')
+    ) {
+      return true
+    }
+
     if (props.renderIcon && props.src) {
       return true
     }
