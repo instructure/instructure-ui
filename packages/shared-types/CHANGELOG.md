@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
+
+
+### Bug Fixes
+
+* **shared-types,ui-heading:** set h1 weight to 700 ([34aa934](https://github.com/instructure/instructure-ui/commit/34aa9341639a2cd5d3f7e9bd22c5b3c682ff6ffc))
+
+
+
+
+
 # [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
 
 

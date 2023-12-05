@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
+
+
+### Bug Fixes
+
+* **ui-selectable:** fix label can't be selected issue ([3892896](https://github.com/instructure/instructure-ui/commit/389289665f9e4b0a2664d97e24c005b565df546d))
+
+
+
+
+
 # [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
 
 **Note:** Version bump only for package @instructure/ui-selectable

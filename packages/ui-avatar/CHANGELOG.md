@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
+
+
+### Features
+
+* **ui-avatar:** add showBorder prop to Avatar ([693ea76](https://github.com/instructure/instructure-ui/commit/693ea767282824272360fbdbcea57ad5152fbd0a))
+
+
+
+
+
 # [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
 
 **Note:** Version bump only for package @instructure/ui-avatar

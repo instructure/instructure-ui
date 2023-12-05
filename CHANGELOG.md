@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
+
+
+### Bug Fixes
+
+* fix modal not dismissible via touch and add focus region tests ([e373da1](https://github.com/instructure/instructure-ui/commit/e373da144a96b0615ab0594677f6dae67ab5fa6d))
+* **shared-types,ui-heading:** set h1 weight to 700 ([34aa934](https://github.com/instructure/instructure-ui/commit/34aa9341639a2cd5d3f7e9bd22c5b3c682ff6ffc))
+* **ui-list:** add fix for nested list items ([614ac7a](https://github.com/instructure/instructure-ui/commit/614ac7a4eaef0fef26e1cadd9e18f349cac5e5d2))
+* **ui-pagination:** fix chrome unable to focus undefined element ([503535b](https://github.com/instructure/instructure-ui/commit/503535be262deb6c16547b1c49f72435bd9f2bb1))
+* **ui-selectable:** fix label can't be selected issue ([3892896](https://github.com/instructure/instructure-ui/commit/389289665f9e4b0a2664d97e24c005b565df546d))
+* **ui-side-nav-bar:** fix scrollbar appearing in closed state ([e84775f](https://github.com/instructure/instructure-ui/commit/e84775f68d99aa301517b1158f43279eef38866e))
+
+
+### Features
+
+* **ui-avatar:** add showBorder prop to Avatar ([693ea76](https://github.com/instructure/instructure-ui/commit/693ea767282824272360fbdbcea57ad5152fbd0a))
+
+
+
+
+
 # [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
 
 

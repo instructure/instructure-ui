@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
+
+
+### Bug Fixes
+
+* **ui-side-nav-bar:** fix scrollbar appearing in closed state ([e84775f](https://github.com/instructure/instructure-ui/commit/e84775f68d99aa301517b1158f43279eef38866e))
+
+
+### Features
+
+* **ui-avatar:** add showBorder prop to Avatar ([693ea76](https://github.com/instructure/instructure-ui/commit/693ea767282824272360fbdbcea57ad5152fbd0a))
+
+
+
+
+
 # [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
 
 
