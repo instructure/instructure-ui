@@ -23,11 +23,46 @@
  */
 
 import React from 'react'
-import { expect, mount, generateA11yTests } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
-import { TopNavBar } from '../index'
-import { TopNavBarLocator } from '../TopNavBarLocator'
+// eslint-disable-next-line no-restricted-imports
+import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import TopNavBar from '../index'
 import TopNavBarExamples from '../__examples__/TopNavBar.examples'
+
+const TEST_MENU_ITEM_TEXT = 'Test menu item text'
+
+let originalResizeObserver: typeof ResizeObserver
+let originalMatchMedia: typeof window.matchMedia
+
+beforeAll(() => {
+  originalResizeObserver = global.ResizeObserver
+  originalMatchMedia = window.matchMedia
+
+  class MockResizeObserver {
+    observe = jest.fn()
+    unobserve = jest.fn()
+    disconnect = jest.fn()
+  }
+  global.ResizeObserver = MockResizeObserver
+
+  window.matchMedia = jest.fn().mockImplementation((query) => {
+    return {
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn()
+    }
+  })
+})
+
+afterAll(() => {
+  global.ResizeObserver = originalResizeObserver
+  window.matchMedia = originalMatchMedia
+})
 
 const BaseExample = () => {
   return (
@@ -48,7 +83,7 @@ const BaseExample = () => {
               }
             >
               <TopNavBar.Item id="Overview" href="/#TopNavBar">
-                Overview
+                {TEST_MENU_ITEM_TEXT}
               </TopNavBar.Item>
             </TopNavBar.MenuItems>
           }
@@ -58,21 +93,36 @@ const BaseExample = () => {
   )
 }
 
-describe('<TopNavBar />', async () => {
-  it('should render', async () => {
-    await mount(<BaseExample />)
-    const component = await TopNavBarLocator.find()
+describe('<TopNavBar />', () => {
+  it('should render', () => {
+    const { getByText } = render(<BaseExample />)
 
-    expect(component).to.exist()
+    expect(getByText(TEST_MENU_ITEM_TEXT)).toBeInTheDocument()
   })
 
-  describe('should be accessible', async () => {
-    generateA11yTests(TopNavBar, TopNavBarExamples)
-
+  describe('should be accessible', () => {
     it('a11y', async () => {
-      await mount(<BaseExample />)
-      const topNavBar = await TopNavBarLocator.find()
-      expect(await topNavBar.accessible()).to.be.true()
+      const { container } = render(<BaseExample />)
+      const axeCheck = await runAxeCheck(container)
+
+      expect(axeCheck).toBe(true)
+    })
+
+    describe('with generated examples', () => {
+      const generatedComponents = generateA11yTests(
+        TopNavBar,
+        TopNavBarExamples
+      )
+
+      it.each(generatedComponents)(
+        'should be accessible with example: $description',
+        async ({ content }) => {
+          const { container } = render(content)
+          const axeCheck = await runAxeCheck(container)
+
+          expect(axeCheck).toBe(true)
+        }
+      )
     })
   })
 })
