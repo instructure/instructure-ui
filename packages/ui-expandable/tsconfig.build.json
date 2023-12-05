@@ -13,7 +13,6 @@
     { "path": "../uid/tsconfig.build.json" },
     { "path": "../ui-babel-preset/tsconfig.build.json" },
     { "path": "../ui-color-utils/tsconfig.build.json" },
-    { "path": "../ui-test-utils/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" }
   ]
