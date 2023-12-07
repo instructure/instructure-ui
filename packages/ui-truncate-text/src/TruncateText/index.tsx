@@ -72,6 +72,7 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
   private _stage: HTMLSpanElement | null = null
   private _wasTruncated?: boolean
   private _resizeListener?: ResizeObserver
+  private _prevWidth: number | null = null
 
   constructor(props: TruncateTextProps) {
     super(props)
@@ -111,7 +112,7 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
         trailing: true
       })
 
-      const { width: origWidth } = getBoundingClientRect(this.ref)
+      this._prevWidth = getBoundingClientRect(this.ref)?.width
       this._resizeListener = new ResizeObserver((entries) => {
         // requestAnimationFrame call is needed becuase some truncatetext test cases
         // failed due to ResizeObserver was not able to deliver all observations within a single animation frame
@@ -120,7 +121,8 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
           for (const entry of entries) {
             const { width } = entry.contentRect
 
-            if (origWidth !== width) {
+            if (this._prevWidth !== width) {
+              this._prevWidth = width
               this.props.debounce === 0 ? this.update() : this._debounced!()
             }
           }
