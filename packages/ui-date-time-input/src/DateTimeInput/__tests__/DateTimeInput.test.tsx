@@ -654,6 +654,37 @@ describe('<DateTimeInput />', async () => {
     expect(await dateTimeInput.find(':contains(hello world)')).to.exist()
   })
 
+  it('should not show built in message when `showMessages` is false', async () => {
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+    const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+    const subject = await mount(
+      <DateTimeInput
+        description="date time"
+        dateRenderLabel="date"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        timeRenderLabel="time"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        value={dateTime.toISOString()}
+        showMessages={false}
+      />
+    )
+    const dateTimeInput = await DateTimeInputLocator.find()
+    expect(
+      await dateTimeInput.find(':contains(2017)', { expectEmpty: true })
+    ).to.not.exist()
+    await subject.setProps({
+      messages: [{ text: 'hello world', type: 'success' }]
+    })
+    expect(await dateTimeInput.find(':contains(hello world)')).to.exist()
+    await subject.setProps({ showMessages: true })
+    expect(await dateTimeInput.find(':contains(hello world)')).to.exist()
+    expect(await dateTimeInput.find(':contains(2017)')).to.exist()
+  })
+
   it('should read locale and timezone from context', async () => {
     const onChange = stub()
     const dateTime = DateTime.parse('2017-05-01T17:30Z', 'en-US', 'GMT')

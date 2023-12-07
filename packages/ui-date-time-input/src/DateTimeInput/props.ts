@@ -122,7 +122,14 @@ type DateTimeInputProps = {
    **/
   invalidDateTimeMessage: string | ((rawDateValue: string) => string)
   /**
-   * Messages to be displayed
+   * Toggles whether to show built-in messages (the date/time, or the
+   * `invalidDateTimeMessage`). Even when set to `false` the component will
+   * show user supplied messages by the `messages` prop.
+   * @default true
+   */
+  showMessages?: boolean
+  /**
+   * Extra message(s) to be displayed.
    */
   messages?: FormMessage[]
   /**
@@ -275,6 +282,7 @@ const propTypes: PropValidators<PropKeys> = {
     PropTypes.string,
     PropTypes.func
   ]).isRequired,
+  showMessages: PropTypes.bool,
   messages: PropTypes.arrayOf(FormPropTypes.message),
   messageFormat: PropTypes.string,
   layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
@@ -315,6 +323,7 @@ const allowedProps: AllowedPropKeys = [
   'locale',
   'timezone',
   'invalidDateTimeMessage',
+  'showMessages',
   'messages',
   'messageFormat',
   'layout',
