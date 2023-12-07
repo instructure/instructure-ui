@@ -57,6 +57,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     colSpacing: 'medium',
     rowSpacing: 'small',
     timeStep: 30,
+    showMessages: true,
     messageFormat: DateTimeInput.DEFAULT_MESSAGE_FORMAT,
     isRequired: false,
     dateFormat: 'LL', // Localized date with full month, e.g. "August 6, 2014"
@@ -517,6 +518,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       timeInputRef,
       locale,
       timezone,
+      showMessages,
       messages,
       layout,
       rowSpacing,
@@ -536,7 +538,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         vAlign="top"
         elementRef={this.handleRef}
         messages={[
-          ...(this.state.message ? [this.state.message] : []),
+          ...(showMessages && this.state.message ? [this.state.message] : []),
           ...(messages || [])
         ]}
       >
