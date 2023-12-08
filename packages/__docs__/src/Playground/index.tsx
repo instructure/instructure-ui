@@ -43,7 +43,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { AppContext } from '../App'
-import { Preview, PreviewErrorBoundary } from '../Preview'
+import Preview from '../Preview'
 import { CodeSandboxButton } from '../CodeSandboxButton'
 import type { PlaygroundProps, PlaygroundState } from './props'
 import { propTypes, allowedProps } from './props'
@@ -209,21 +209,19 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     const { fullscreen, rtl } = this.state
 
     return (
-      <PreviewErrorBoundary>
-        <Preview
-          code={code}
-          language={this.props.language}
-          background={
-            typeof this.props.background === 'string'
-              ? this.props.background
-              : 'light'
-          }
-          fullscreen={fullscreen}
-          rtl={rtl}
-          themeKey={themeKey}
-          themes={themes}
-        />
-      </PreviewErrorBoundary>
+      <Preview
+        code={code}
+        language={this.props.language}
+        background={
+          typeof this.props.background === 'string'
+            ? this.props.background
+            : 'light'
+        }
+        fullscreen={fullscreen}
+        rtl={rtl}
+        themeKey={themeKey}
+        themes={themes}
+      />
     )
   }
 
