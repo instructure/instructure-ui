@@ -146,7 +146,7 @@ type DrilldownOwnProps = {
   defaultShow?: boolean
 
   /**
-   * Is the `<Drilldown />` open (should be accompanied by `onToggle`)
+   * Is the `<Drilldown />` open (should be accompanied by `onToggle` and `trigger`)
    */
   show?: boolean // TODO: type controllable(PropTypes.bool, 'onToggle', 'defaultShow')
 

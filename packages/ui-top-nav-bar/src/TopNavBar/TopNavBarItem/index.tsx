@@ -90,7 +90,8 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   static defaultProps = {
     status: 'default',
     variant: 'default',
-    showSubmenuChevron: true
+    showSubmenuChevron: true,
+    shouldCloseOnClick: 'auto'
   } as const
 
   declare context: React.ContextType<typeof TopNavBarContext>

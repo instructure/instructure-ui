@@ -75,7 +75,8 @@ const mapItemsForDrilldown = (
       status,
       variant,
       href,
-      onClick
+      onClick,
+      shouldCloseOnClick
     } = item.props
 
     let submenu: TopNavBarItemProps['renderSubmenu'] = renderSubmenu
@@ -182,7 +183,8 @@ const mapItemsForDrilldown = (
               })
             : children,
         subPageId: optionSubPageId,
-        'aria-current': ariaCurrent
+        'aria-current': ariaCurrent,
+        shouldCloseOnClick: shouldCloseOnClick
       }
     })
   })

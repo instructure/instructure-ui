@@ -848,7 +848,7 @@ class PlaygroundExample extends React.Component {
                     <Breadcrumb.Link href="#">Course page 2</Breadcrumb.Link>
                     <Breadcrumb.Link href="#">Course page 3</Breadcrumb.Link>
                     <Breadcrumb.Link href="#">Course page 4</Breadcrumb.Link>
-                    <Breadcrumb.Link href="#">Course page 5</Breadcrumb.Link>
+                    <Breadcrumb.Link>Course page 5</Breadcrumb.Link>
                   </Breadcrumb>
                 </TopNavBar.Breadcrumb>
               )}
@@ -1271,7 +1271,7 @@ type: example
                   <Breadcrumb.Link href="#">Course page 2</Breadcrumb.Link>
                   <Breadcrumb.Link href="#">Course page 3</Breadcrumb.Link>
                   <Breadcrumb.Link href="#">Course page 4</Breadcrumb.Link>
-                  <Breadcrumb.Link href="#">Course page 5</Breadcrumb.Link>
+                  <Breadcrumb.Link>Course page 5</Breadcrumb.Link>
                 </Breadcrumb>
               </TopNavBar.Breadcrumb>
             )}
