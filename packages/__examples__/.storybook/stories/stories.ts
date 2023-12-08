@@ -22,33 +22,39 @@
  * SOFTWARE.
  */
 
-import { ComponentType } from 'react'
-
+import { ComponentType, JSXElementConstructor, ReactElement } from 'react'
 import { storiesOf } from '@storybook/react'
-import type { LegacyStoryFn, StoryKind, StoryName } from '@storybook/addons'
-import type { StoryFnReactReturnType } from '@storybook/react/dist/ts3.9/client/preview/types'
+import type { Addon_StoryFn, StoryName } from '@storybook/types'
 import {
   generateComponentExamples,
   StoryConfig
 } from '@instructure/ui-test-utils'
-
 import { renderExample } from './renderExample'
 import { renderPage } from './renderPage'
-
 // must be imported with Webpack because this file cannot contain async calls
 // @ts-ignore TODO figure out why this is an error
 import propJSONData from '../../prop-data.json'
-
 import TooltipPositioning from './TooltipPositioning'
 import SourceCodeEditorExamples from './SourceCodeEditorExamples'
 
 type AdditionalExample = {
-  title: StoryKind
+  title: string
   stories: {
     storyName: StoryName
-    storyFn: LegacyStoryFn<StoryFnReactReturnType>
-    chromaticSettings?: Record<string, any>
+    storyFn: Addon_StoryFn<
+      ReactElement<unknown, string | JSXElementConstructor<any>>
+    >
+    chromaticSettings?: Partial<typeof chromaticSettings>
   }[]
+}
+
+const chromaticSettings = {
+  viewports: [1200],
+  // https://www.chromatic.com/docs/animations/
+  pauseAnimationAtEnd: true,
+  // https://www.chromatic.com/docs/delay
+  delay: 700,
+  diffThreshold: 1 // default is 0.063 - increased to avoid false positives
 }
 
 // Stories not tied to one component and custom component examples
@@ -91,13 +97,6 @@ const componentsContext = require.context(
   /ui-.*\/src\/.*\/index\.tsx$/,
   'sync'
 )
-
-const chromaticSettings = {
-  viewports: [1200],
-  pauseAnimationAtEnd: true,
-  delay: 700,
-  diffThreshold: 1 // default is 0.063 - increased to avoid false positives
-}
 
 let numStories = 0
 console.time('storybook-build-examples')

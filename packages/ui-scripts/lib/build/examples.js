@@ -54,26 +54,17 @@ export default {
     }
 
     if (argv.watch) {
-      command = 'start-storybook'
-      // --no-manager-cache is a workaround for
-      // https://github.com/storybookjs/storybook/issues/13200
+      command = 'storybook'
       // -c: config directory
-      commandArgs = [
-        '-c',
-        '.storybook',
-        '-p',
-        port,
-        '--no-manager-cache',
-        '--quiet'
-      ]
+      commandArgs = ['dev', '-c', '.storybook', '-p', port]
       envVars = {
         ...envVars,
         NODE_ENV: 'development',
         DEBUG: '1'
       }
     } else {
-      command = 'build-storybook'
-      commandArgs = ['-c', '.storybook', '-o', '__build__', '--quiet']
+      command = 'storybook'
+      commandArgs = ['build', '-c', '.storybook', '-o', '__build__', '--quiet']
       envVars = {
         ...envVars,
         NODE_ENV: 'production',
