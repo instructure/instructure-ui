@@ -458,7 +458,11 @@ class TopNavBarSmallViewportLayout extends Component<
             onDropdownMenuSelect(e, args)
           }
 
-          if (args.selectedOption.props.href) {
+          if (
+            (args.selectedOption.props.shouldCloseOnClick === 'auto' &&
+              !!args.selectedOption.props.href) ||
+            args.selectedOption.props.shouldCloseOnClick === 'always'
+          ) {
             this.toggleDropdownMenu()
           }
         }}

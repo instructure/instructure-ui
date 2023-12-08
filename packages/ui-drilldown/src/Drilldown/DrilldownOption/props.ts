@@ -44,6 +44,8 @@ type DrilldownOptionValue = string | number | undefined
 
 type RenderContentVAlign = 'start' | 'center' | 'end'
 
+type ShouldCloseOnClick = 'auto' | 'always' | 'never'
+
 type DrilldownOptionVariant = Exclude<OptionsItemProps['variant'], 'selected'>
 
 type RenderContentProps = {
@@ -171,6 +173,11 @@ type DrilldownOptionOwnProps = {
    * Provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
+
+  /**
+   * Should close the container menu component, if clicked on the option marked with this prop
+   */
+  shouldCloseOnClick?: ShouldCloseOnClick
 }
 
 type PropKeys = keyof DrilldownOptionOwnProps
@@ -200,7 +207,8 @@ const propTypes: PropValidators<PropKeys> = {
   descriptionRole: PropTypes.string,
   onOptionClick: PropTypes.func,
   defaultSelected: PropTypes.bool,
-  elementRef: PropTypes.func
+  elementRef: PropTypes.func,
+  shouldCloseOnClick: PropTypes.oneOf(['auto', 'always', 'never'])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -222,7 +230,8 @@ const allowedProps: AllowedPropKeys = [
   'descriptionRole',
   'onOptionClick',
   'defaultSelected',
-  'elementRef'
+  'elementRef',
+  'shouldCloseOnClick'
 ]
 
 export type { DrilldownOptionProps, DrilldownOptionValue }

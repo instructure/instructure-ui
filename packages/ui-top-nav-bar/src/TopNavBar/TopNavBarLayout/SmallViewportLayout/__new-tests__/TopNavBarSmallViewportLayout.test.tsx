@@ -44,6 +44,7 @@ import {
   SmallViewportModeWrapper
 } from '../../../utils/exampleHelpers'
 import { TopNavBarItem } from '../../../TopNavBarItem'
+import { TopNavBarMenuItems } from '../../../TopNavBarMenuItems'
 import { TopNavBarUser } from '../../../TopNavBarUser'
 
 import { TopNavBarSmallViewportLayout } from '../index'
@@ -1498,6 +1499,98 @@ describe('<TopNavBarSmallViewportLayout />', () => {
           drilldown: expect.any(Object)
         })
       )
+    })
+  })
+
+  describe('shouldCloseOnClick prop', () => {
+    it('should be closed an item with shouldCloseOnClick prop is selected', async () => {
+      const onDropdownMenuSelect = jest.fn()
+      const onDropdownMenuToggle = jest.fn()
+
+      render(
+        <SmallViewportModeWrapper>
+          <TopNavBarSmallViewportLayout
+            {...defaultProps}
+            onDropdownMenuSelect={onDropdownMenuSelect}
+            onDropdownMenuToggle={onDropdownMenuToggle}
+            renderMenuItems={
+              <TopNavBarMenuItems
+                listLabel="Page navigation"
+                currentPageId="OverviewPage"
+                renderHiddenItemsMenuTriggerLabel={(hiddenChildrenCount) =>
+                  `${hiddenChildrenCount} More`
+                }
+              >
+                <TopNavBarItem id="AlwaysClose" shouldCloseOnClick="always">
+                  Always close
+                </TopNavBarItem>
+                <TopNavBarItem id="NeverClose" shouldCloseOnClick="never">
+                  Never close
+                </TopNavBarItem>
+                <TopNavBarItem id="AutoHref" href="/#TopNavBar">
+                  Auto behavior with href
+                </TopNavBarItem>
+                <TopNavBarItem id="AutoNoHref">
+                  Auto behavior without href
+                </TopNavBarItem>
+              </TopNavBarMenuItems>
+            }
+          />
+        </SmallViewportModeWrapper>
+      )
+
+      const menuTriggerButton = screen.getByRole('button')
+
+      fireEvent.click(menuTriggerButton)
+
+      // Opening menu
+      expect(onDropdownMenuToggle).toHaveBeenCalledTimes(1)
+
+      const alwaysCloseOption = await screen.findByText('Always close')
+
+      fireEvent.click(alwaysCloseOption)
+
+      // Selecting Always close option, menu is closing
+      expect(onDropdownMenuSelect).toHaveBeenCalledTimes(1)
+      expect(onDropdownMenuToggle).toHaveBeenCalledTimes(2)
+
+      // Opening menu again
+      fireEvent.click(menuTriggerButton)
+
+      expect(onDropdownMenuToggle).toHaveBeenCalledTimes(3)
+
+      const neverCloseOption = await screen.findByText('Never close')
+
+      fireEvent.click(neverCloseOption)
+
+      // Selecting Never close option, menu is not closing
+      expect(onDropdownMenuSelect).toHaveBeenCalledTimes(2)
+      expect(onDropdownMenuToggle).toHaveBeenCalledTimes(3)
+
+      const autoCloseOptionWithHref = await screen.findByText(
+        'Auto behavior with href'
+      )
+
+      fireEvent.click(autoCloseOptionWithHref)
+
+      // Selecting Auto behavior with href option, menu is closing
+      expect(onDropdownMenuSelect).toHaveBeenCalledTimes(3)
+      expect(onDropdownMenuToggle).toHaveBeenCalledTimes(4)
+
+      // Opening menu again
+      fireEvent.click(menuTriggerButton)
+
+      expect(onDropdownMenuToggle).toHaveBeenCalledTimes(5)
+
+      const autoCloseOptionWithoutHref = await screen.findByText(
+        'Auto behavior without href'
+      )
+
+      fireEvent.click(autoCloseOptionWithoutHref)
+
+      // Selecting Auto behavior without href option, menu is not closing
+      expect(onDropdownMenuSelect).toHaveBeenCalledTimes(4)
+      expect(onDropdownMenuToggle).toHaveBeenCalledTimes(5)
     })
   })
 

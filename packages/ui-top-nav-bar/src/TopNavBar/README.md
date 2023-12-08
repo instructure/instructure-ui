@@ -848,7 +848,7 @@ class PlaygroundExample extends React.Component {
                     <Breadcrumb.Link href="#">Course page 2</Breadcrumb.Link>
                     <Breadcrumb.Link href="#">Course page 3</Breadcrumb.Link>
                     <Breadcrumb.Link href="#">Course page 4</Breadcrumb.Link>
-                    <Breadcrumb.Link href="#">Course page 5</Breadcrumb.Link>
+                    <Breadcrumb.Link>Course page 5</Breadcrumb.Link>
                   </Breadcrumb>
                 </TopNavBar.Breadcrumb>
               )}
@@ -1247,7 +1247,7 @@ In small viewport mode, a link is shown for the last but one element of the `<Br
 
 ```js
 ---
-example: true
+type: example
 ---
   <div>
     <View as="div" margin="medium 0">
@@ -1269,7 +1269,7 @@ example: true
                   <Breadcrumb.Link href="#">Course page 2</Breadcrumb.Link>
                   <Breadcrumb.Link href="#">Course page 3</Breadcrumb.Link>
                   <Breadcrumb.Link href="#">Course page 4</Breadcrumb.Link>
-                  <Breadcrumb.Link href="#">Course page 5</Breadcrumb.Link>
+                  <Breadcrumb.Link>Course page 5</Breadcrumb.Link>
                 </Breadcrumb>
               </TopNavBar.Breadcrumb>
             )}

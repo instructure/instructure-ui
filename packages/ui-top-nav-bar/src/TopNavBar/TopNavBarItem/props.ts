@@ -49,6 +49,7 @@ import { TopNavBarItem } from './index'
 
 type ItemChild = React.ComponentElement<TopNavBarItemProps, TopNavBarItem>
 type DrilldownSubmenu = React.ComponentElement<DrilldownProps, Drilldown>
+type ShouldCloseOnClick = 'auto' | 'always' | 'never'
 
 type TopNavBarItemTooltipType =
   | string
@@ -241,6 +242,11 @@ type TopNavBarItemOwnProps = {
    * A function that returns a reference to the button/link HTML element
    */
   itemRef?: (el: HTMLButtonElement | HTMLLinkElement | null) => void
+
+  /**
+   * Should close the container menu component, if clicked on the option marked with this prop
+   */
+  shouldCloseOnClick?: ShouldCloseOnClick
 }
 
 type PropKeys = keyof TopNavBarItemOwnProps
@@ -300,7 +306,8 @@ const propTypes: PropValidators<PropKeys> = {
   onKeyDown: PropTypes.func,
   onKeyUp: PropTypes.func,
   elementRef: PropTypes.func,
-  itemRef: PropTypes.func
+  itemRef: PropTypes.func,
+  shouldCloseOnClick: PropTypes.oneOf(['auto', 'always', 'never'])
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -325,7 +332,8 @@ const allowedProps: AllowedPropKeys = [
   'onKeyDown',
   'onKeyUp',
   'elementRef',
-  'itemRef'
+  'itemRef',
+  'shouldCloseOnClick'
 ]
 
 export type {
