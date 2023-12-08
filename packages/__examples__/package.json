@@ -13,11 +13,12 @@
   "scripts": {
     "prestart": "npm run bundle",
     "start": "ui-scripts server -p 9001",
-    "start:watch": "npm run build:examples && ui-scripts examples --watch -p 9090",
-    "bundle": "npm run build:examples && ui-scripts examples",
+    "start:watch": "npm run build:examples && npm run watch:examples",
+    "bundle": "npm run build:examples && npm run build:storybook",
     "clean": "ui-scripts clean",
+    "build:examples": "node buildScripts/build-examples-json.mjs",
     "build:storybook": "ui-scripts examples",
-    "build:examples": "node buildScripts/build-examples-json.mjs"
+    "watch:examples": "ui-scripts examples --watch -p 9090"
   },
   "license": "MIT",
   "dependencies": {
@@ -32,10 +33,10 @@
     "@instructure/ui-view": "8.50.0",
     "@instructure/ui-webpack-config": "8.50.0",
     "@instructure/uid": "8.50.0",
-    "@storybook/addons": "^6.5.16",
-    "@storybook/react": "^6.5.16",
-    "@storybook/theming": "^6.5.16",
-    "chromatic": "^6.24.1",
+    "@storybook/addons": "^7.6.3",
+    "@storybook/react": "^7.6.3",
+    "@storybook/theming": "^7.6.3",
+    "chromatic": "^10.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "webpack-merge": "^5.10.0"
@@ -43,12 +44,15 @@
   "devDependencies": {
     "@instructure/ui-scripts": "8.50.0",
     "@instructure/ui-test-utils": "8.50.0",
-    "@storybook/builder-webpack5": "^6.5.16",
-    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/react-webpack5": "^7.6.3",
+    "@storybook/source-loader": "^7.6.3",
     "globby": "^13.2.2",
     "prop-types": "^15.8.1",
     "react-docgen": "6.0.4",
-    "webpack": "^5.89.0"
+    "storybook": "^7.6.3",
+    "@storybook/types": "^7.6.3",
+    "webpack": "^5.89.0",
+    "@types/webpack-env": "^1.18.4"
   },
   "//dependency-comments": {
     "globby": "since 12.0.0 globby is pure ESM, it cannot be require()'d"

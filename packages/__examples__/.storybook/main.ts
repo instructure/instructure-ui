@@ -22,11 +22,25 @@
  * SOFTWARE.
  */
 
-import { addParameters } from '@storybook/react'
+import { dirname, join } from 'path'
 
-addParameters({
-  options: {
-    showPanel: false,
-    isFullscreen: false
+module.exports = {
+  stories: ['./stories/stories.ts'],
+  typescript: {
+    check: false,
+    reactDocgen: false
+  },
+  framework: getAbsolutePath('@storybook/react-webpack5'),
+  docs: {
+    autodocs: false
+  },
+  features: {
+    // can't use the legacy storiesOf API if this is enabled
+    // https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#storystorev7-enabled-by-default
+    storyStoreV7: false
   }
-})
+}
+
+function getAbsolutePath(value: string) {
+  return dirname(require.resolve(join(value, 'package.json')))
+}

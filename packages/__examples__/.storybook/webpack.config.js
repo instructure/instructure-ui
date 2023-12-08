@@ -41,7 +41,16 @@ module.exports = ({ config }) => {
       }
     }
   }
-
+  rules.push({
+    test: /\.stories\.[tj]sx?$/,
+    use: [
+      {
+        loader: require.resolve('@storybook/source-loader'),
+        options: {} /* your sourceLoaderOptions here */
+      }
+    ],
+    enforce: 'pre'
+  })
   config = merge(config, baseConfig)
 
   // need to override this instead of merge for these...
@@ -50,6 +59,6 @@ module.exports = ({ config }) => {
   if (process.env.NODE_ENV === 'production') {
     config.devtool = false
   }
-  console.log(`Building Storybook...`)
+  console.log(`Building Storybook...`, config.module)
   return config
 }
