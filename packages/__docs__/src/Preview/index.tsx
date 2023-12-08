@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { DIRECTION, TextDirectionContext } from '@instructure/ui-i18n'
 import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
 import generateStyle from './styles'
@@ -47,23 +47,11 @@ class Preview extends Component<PreviewProps, PreviewState> {
     language: 'jsx'
   }
 
-  // TODO investigate why any is needed here
-  static getDerivedStateFromProps(props: any, state: PreviewState) {
-    if (props.error) {
-      return {
-        ...state,
-        error: props.error
-      }
-    }
-    return null
-  }
-
   constructor(props: PreviewProps) {
     super(props)
 
     this.state = {
-      error: null,
-      elToRender: null
+      error: null
     }
   }
 
@@ -71,74 +59,11 @@ class Preview extends Component<PreviewProps, PreviewState> {
     this.props.makeStyles?.()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: PreviewProps) {
     this.props.makeStyles?.()
-  }
-
-  executeCode(code: string) {
-    const { themeKey, themes } = this.props
-    const theme = themes?.[themeKey!]?.resource || canvas
-    const dir = (this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr) as
-      | 'rtl'
-      | 'ltr'
-
-    const compiledCode = compileAndRenderExample(code)
-
-    return (
-      <InstUISettingsProvider theme={theme}>
-        <TextDirectionContext.Provider value={dir}>
-          {typeof compiledCode === 'string' ? null : (
-            <div dir={dir}>{compiledCode}</div>
-          )}
-        </TextDirectionContext.Provider>
-      </InstUISettingsProvider>
-    )
-  }
-
-  handleError = (err: Error) => {
-    this.setState({
-      error: err.toString()
-    })
-  }
-
-  renderContent() {
-    const { code, themeKey, themes, styles } = this.props
-    const theme = themes?.[themeKey!]?.resource || canvas
-    const dir = (this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr) as
-      | 'rtl'
-      | 'ltr'
-    const compiledCode = compileAndRenderExample(code)
-    const hasError = typeof compiledCode === 'string'
-
-    return (
-      <div css={hasError ? [styles?.previewError] : [styles?.preview]}>
-        {hasError ? (
-          <pre css={styles?.error}>{compiledCode}</pre>
-        ) : (
-          <InstUISettingsProvider theme={theme}>
-            <TextDirectionContext.Provider value={dir}>
-              {typeof compiledCode === 'string' ? null : (
-                <div dir={dir}>{compiledCode}</div>
-              )}
-            </TextDirectionContext.Provider>
-          </InstUISettingsProvider>
-        )}
-      </div>
-    )
-  }
-
-  render() {
-    return this.renderContent()
-  }
-}
-
-class PreviewErrorBoundary extends Component<
-  React.PropsWithChildren,
-  { error: string | null }
-> {
-  constructor(props: any) {
-    super(props)
-    this.state = { error: null }
+    if (this.props.code !== prevProps.code) {
+      this.setState({ error: null })
+    }
   }
 
   static getDerivedStateFromError(error: Error) {
@@ -146,21 +71,32 @@ class PreviewErrorBoundary extends Component<
   }
 
   render() {
-    const children = React.Children.map(this.props.children, (child) => {
-      if (React.isValidElement(child) && this.state.error) {
-        return React.cloneElement(child, {
-          ...child.props,
-          // have to set this to empty string to prevent infinte render cycle
-          code: '',
-          error: this.state.error
-        })
-      }
-      return child
-    })
+    const { code, themeKey, themes, styles } = this.props
+    const theme = themes?.[themeKey!]?.resource || canvas
+    const dir = (this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr) as
+      | 'rtl'
+      | 'ltr'
 
-    return children
+    const compiledCode = compileAndRenderExample(code)
+
+    if (this.state.error || typeof compiledCode === 'string') {
+      return (
+        <div css={styles?.previewError}>
+          <pre css={styles?.error}>{this.state.error || compiledCode}</pre>
+        </div>
+      )
+    }
+
+    return (
+      <div css={styles?.preview}>
+        <InstUISettingsProvider theme={theme}>
+          <TextDirectionContext.Provider value={dir}>
+            <div dir={dir}>{compiledCode}</div>
+          </TextDirectionContext.Provider>
+        </InstUISettingsProvider>
+      </div>
+    )
   }
 }
 
 export default Preview
-export { Preview, PreviewErrorBoundary }
