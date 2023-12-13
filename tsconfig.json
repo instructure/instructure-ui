@@ -2,6 +2,7 @@
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
     "baseUrl": "./packages",
+    "types": ["cypress"],
     "paths": {
       "@instructure/*": ["*/src"],
       "@instructure/babel-plugin-transform-imports": [
