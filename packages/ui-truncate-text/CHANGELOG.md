@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
+
+
+### Bug Fixes
+
+* **ui-truncate-text:** resizing TruncateText to its original width doesn't work ([d04417b](https://github.com/instructure/instructure-ui/commit/d04417b48d7e16d2bb2a2ad50dff64710219a74d))
+
+
+
+
+
 # [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
 
 **Note:** Version bump only for package @instructure/ui-truncate-text
