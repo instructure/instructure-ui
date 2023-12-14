@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
+
+
+### Bug Fixes
+
+* fix review issues ([e2db3dc](https://github.com/instructure/instructure-ui/commit/e2db3dc26324b2a2a83e7c151f757551126d5c77))
+* handle Preview errors in docs page ([bbcb307](https://github.com/instructure/instructure-ui/commit/bbcb30761c4c9e1ce3608e587ba7cb8dab7e0bd0))
+
+
+
+
+
 # [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
 
 **Note:** Version bump only for package docs-app

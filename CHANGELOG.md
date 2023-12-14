@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
+
+
+### Bug Fixes
+
+* fix review issues ([e2db3dc](https://github.com/instructure/instructure-ui/commit/e2db3dc26324b2a2a83e7c151f757551126d5c77))
+* handle Preview errors in docs page ([bbcb307](https://github.com/instructure/instructure-ui/commit/bbcb30761c4c9e1ce3608e587ba7cb8dab7e0bd0))
+* **ui-a11y-utils:** use event.detail instead of event.pointerType for safari/firefox ([f58c2d2](https://github.com/instructure/instructure-ui/commit/f58c2d27aa674f1221166b597dc596af40218288))
+* **ui-truncate-text:** resizing TruncateText to its original width doesn't work ([d04417b](https://github.com/instructure/instructure-ui/commit/d04417b48d7e16d2bb2a2ad50dff64710219a74d))
+
+
+### Features
+
+* **ui-date-time-input:** add showMessages prop ([5212a19](https://github.com/instructure/instructure-ui/commit/5212a192b56fed621c80a697579fc164f9592391))
+* **ui-top-nav-bar:** add a new variant 'forceIconWithLabel' for TopNavBar.Item ([ad7c8d5](https://github.com/instructure/instructure-ui/commit/ad7c8d513855a9a948aefb22c4e6ec3a25cd53f5))
+
+
+
+
+
 # [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
 
 

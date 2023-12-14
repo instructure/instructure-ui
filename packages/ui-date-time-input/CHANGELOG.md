@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
+
+
+### Features
+
+* **ui-date-time-input:** add showMessages prop ([5212a19](https://github.com/instructure/instructure-ui/commit/5212a192b56fed621c80a697579fc164f9592391))
+
+
+
+
+
 # [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input

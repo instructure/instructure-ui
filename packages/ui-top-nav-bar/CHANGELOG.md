@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
+
+
+### Features
+
+* **ui-top-nav-bar:** add a new variant 'forceIconWithLabel' for TopNavBar.Item ([ad7c8d5](https://github.com/instructure/instructure-ui/commit/ad7c8d513855a9a948aefb22c4e6ec3a25cd53f5))
+
+
+
+
+
 # [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
 
 **Note:** Version bump only for package @instructure/ui-top-nav-bar

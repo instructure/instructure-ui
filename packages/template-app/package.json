@@ -1,6 +1,6 @@
 {
   "name": "@instructure/template-app",
-  "version": "8.50.0",
+  "version": "8.51.0",
   "description": "A package containing template files to generate a react app configured with Instructure UI presets.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
@@ -17,14 +17,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@instructure/canvas-theme": "8.50.0",
-    "@instructure/emotion": "8.50.0",
-    "@instructure/ui-heading": "8.50.0",
-    "@instructure/ui-icons": "8.50.0",
-    "@instructure/ui-svg-images": "8.50.0",
-    "@instructure/ui-text": "8.50.0",
-    "@instructure/ui-themes": "8.50.0",
-    "@instructure/ui-view": "8.50.0",
+    "@instructure/canvas-theme": "8.51.0",
+    "@instructure/emotion": "8.51.0",
+    "@instructure/ui-heading": "8.51.0",
+    "@instructure/ui-icons": "8.51.0",
+    "@instructure/ui-svg-images": "8.51.0",
+    "@instructure/ui-text": "8.51.0",
+    "@instructure/ui-themes": "8.51.0",
+    "@instructure/ui-view": "8.51.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

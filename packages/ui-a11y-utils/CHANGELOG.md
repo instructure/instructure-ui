@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** use event.detail instead of event.pointerType for safari/firefox ([f58c2d2](https://github.com/instructure/instructure-ui/commit/f58c2d27aa674f1221166b597dc596af40218288))
+
+
+
+
+
 # [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
 
 
