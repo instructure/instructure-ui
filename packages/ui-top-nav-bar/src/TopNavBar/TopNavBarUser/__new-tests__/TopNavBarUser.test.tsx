@@ -46,11 +46,12 @@ describe('<TopNavBarUser />', () => {
       'default',
       'button',
       'icon',
-      'avatar'
+      'avatar',
+      'forceIconWithLabel'
     ]
 
     variants.forEach((variant) => {
-      if (variant === 'icon') {
+      if (variant === 'icon' || variant === 'forceIconWithLabel') {
         it(`should not allow "${variant}" variant`, () => {
           const consoleErrorSpy = jest
             .spyOn(console, 'error')

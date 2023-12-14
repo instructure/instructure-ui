@@ -104,8 +104,10 @@ type TopNavBarItemOwnProps = {
    * The __"icon"__ variant is displayed as an icon without label.
    *
    * The __"avatar"__ variant is displayed as an avatar without label.
+   *
+   * The __"forceIconWithLabel"__ variant is displayed as default on desktop and the same way (with label) on mobile.
    */
-  variant?: 'default' | 'button' | 'icon' | 'avatar'
+  variant?: 'default' | 'button' | 'icon' | 'avatar' | 'forceIconWithLabel'
 
   /**
    * The status of the item.

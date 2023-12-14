@@ -171,7 +171,7 @@ class TopNavBarActionItems extends Component<
         }
 
         return safeCloneElement(child, {
-          variant: 'icon'
+          variant: variant === 'forceIconWithLabel' ? 'default' : 'icon'
         })
       }
 
