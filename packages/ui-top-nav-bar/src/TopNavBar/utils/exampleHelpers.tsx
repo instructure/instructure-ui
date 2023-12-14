@@ -73,7 +73,7 @@ type VariantConfig = Partial<ChildrenFuncProps> & {
   actionItemsItemProps?:
     | Partial<TopNavBarItemProps>
     | ((id: string, idx: number) => Partial<TopNavBarItemProps>)
-  userVariant?: 'avatar' | 'default' | 'button'
+  userVariant?: 'avatar' | 'default' | 'button' | 'forceIconWithLabel'
   userWithAvatar?: boolean
   userWithSubmenu?: boolean
   userId?: string

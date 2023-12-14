@@ -2412,8 +2412,7 @@ There's no one-size-fits-all solution when it comes to coloring the items in `To
 
 ```js
 ---
-example: true
-render: true
+type: example
 ---
 <InstUISettingsProvider theme={{
   componentOverrides: {

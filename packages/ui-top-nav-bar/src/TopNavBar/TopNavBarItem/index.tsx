@@ -211,7 +211,10 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
   }
 
   get isDefaultVariant() {
-    return this.props.variant === 'default'
+    return (
+      this.props.variant === 'default' ||
+      this.props.variant === 'forceIconWithLabel'
+    )
   }
 
   get isButtonVariant() {
@@ -289,13 +292,6 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       themeOverride.mediumPaddingBottom = '0'
     }
 
-    if (this.size === 'large') {
-      // we need a custom 42x42 px icon here,
-      // so that the focus ring won't be cut off
-      themeOverride.largeHeight = '2.625rem'
-      themeOverride.iconSizeLarge = '1.5rem'
-    }
-
     return Object.keys(themeOverride).length > 0 ? themeOverride : undefined
   }
 
@@ -313,12 +309,6 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
     }
 
     return { color, focusColor }
-  }
-
-  get size(): BaseButtonProps['size'] {
-    return this.isIconVariant && this.context.layout === 'smallViewport'
-      ? 'large'
-      : 'medium'
   }
 
   get ariaProps(): Pick<
@@ -422,7 +412,7 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
       as,
       ...this.colorProps,
       ...this.ariaProps,
-      size: this.size,
+      size: 'medium',
       withBorder: this.isButtonVariant,
       withBackground: this.isButtonVariant,
       interaction: status === 'disabled' ? 'disabled' : undefined,
