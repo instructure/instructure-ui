@@ -37,13 +37,65 @@ import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import React, { ReactElement } from 'react'
 import type { CalendarDayProps } from './Day/props'
 import { Renderable } from '@instructure/shared-types'
+import type { Moment } from '@instructure/ui-i18n'
 
 type CalendarOwnProps = {
+  /**
+   * The element to render as the `Calendar` root, `span` by default
+   */
+  as?: AsElementType
   /**
    * children of type `<Calendar.Day />` There should be exactly 42 provided (6
    * weeks).
    */
   children?: ReactElement<CalendarDayProps>[]
+  /**
+   * ISO date string for the current date if necessary. Defaults to the current
+   * date in the user's timezone.
+   */
+  currentDate?: string
+  /*
+   * Specify which date(s) will be shown as disabled in the calendar.
+   * You can either supply an array of ISO8601 timeDate strings or
+   * a function that will be called for each date shown in the calendar.
+   */
+  disabledDates?: string[] | ((isoDateToCheck: string) => boolean)
+  /**
+   * A standard language identifier.
+   *
+   * See [Moment.js](https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/) for
+   * more details.
+   *
+   * This property can also be set via a context property and if both are set
+   * then the component property takes precedence over the context property.
+   *
+   * The web browser's locale will be used if no value is set via a component
+   * property or a context property.
+   **/
+  locale?: string
+  /**
+   * Callback fired when a day has been selected.
+   */
+  onDateSelected?: (
+    dateString: string,
+    momentDate: Moment,
+    e: React.MouseEvent
+  ) => void
+  /**
+   * Callback fired when the next month button is clicked in the navigation
+   * header, requesting to render the next month.
+   */
+  onRequestRenderNextMonth?: (e: React.MouseEvent) => void
+  /**
+   * Callback fired when the previous month button is clicked in the navigation
+   * header, requesting to render the previous month.
+   */
+  onRequestRenderPrevMonth?: (e: React.MouseEvent) => void
+  /**
+   * Content to render in the navigation header. The recommendation is to include
+   * the name of the current rendered month along with the year.
+   */
+  renderNavigationLabel?: Renderable
   /**
    * A button to render in the navigation header. The recommendation is to
    * compose it with the [IconButton](#IconButton) component by setting the `size`
@@ -59,11 +111,6 @@ type CalendarOwnProps = {
    */
   renderPrevMonthButton?: Renderable
   /**
-   * Content to render in the navigation header. The recommendation is to include
-   * the name of the current rendered month along with the year.
-   */
-  renderNavigationLabel?: Renderable
-  /**
    * An array of labels containing the name of each day of the week. The visible
    * portion of the label should be abbreviated (no longer than three characters).
    * Note that screen readers will read this content preceding each date as the
@@ -72,26 +119,29 @@ type CalendarOwnProps = {
    * full day name for assistive technologies and the children containing the
    * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
    */
-  renderWeekdayLabels: Renderable[]
-  /**
-   * Callback fired when the next month button is clicked in the navigation
-   * header, requesting to render the next month.
-   */
-  onRequestRenderNextMonth?: (e: React.MouseEvent) => void
-  /**
-   * Callback fired when the previous month button is clicked in the navigation
-   * header, requesting to render the previous month.
-   */
-  onRequestRenderPrevMonth?: (e: React.MouseEvent) => void
-  /**
-   * The element to render as the `Calendar` root, `span` by default
-   */
-  as?: AsElementType
+  renderWeekdayLabels?: Renderable[]
   /**
    * The role of the underlying table. This can be set to 'listbox' when
    * assistive technologies need to read the `<Calendar.Day />` children as a list.
    */
   role?: 'table' | 'listbox'
+  /**
+   * ISO date string for the selected date. It needs onDateSelected to be specified too.
+   */
+  selectedDate?: string
+  /**
+   * A timezone identifier in the format: *Area/Location*
+   *
+   * See [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the list
+   * of possible options.
+   *
+   * This property can also be set via a context property and if both are set
+   * then the component property takes precedence over the context property.
+   *
+   * The web browser's timezone will be used if no value is set via a component
+   * property or a context property.
+   */
+  timezone?: string
 }
 
 type PropKeys = keyof CalendarOwnProps
@@ -107,30 +157,47 @@ type CalendarStyle = ComponentStyle<
 >
 
 const propTypes: PropValidators<PropKeys> = {
+  as: PropTypes.elementType,
   children: ChildrenPropTypes.oneOf([Day]),
-  renderNextMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderPrevMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderNavigationLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  renderWeekdayLabels: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-  ).isRequired,
+  currentDate: PropTypes.string,
+  disabledDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
+  locale: PropTypes.string,
+  onDateSelected: PropTypes.func,
   onRequestRenderNextMonth: PropTypes.func,
   onRequestRenderPrevMonth: PropTypes.func,
-  as: PropTypes.elementType,
-  role: PropTypes.oneOf(['table', 'listbox'])
+  renderNavigationLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderNextMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderPrevMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  renderWeekdayLabels: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  ),
+  role: PropTypes.oneOf(['table', 'listbox']),
+  selectedDate: PropTypes.string,
+  timezone: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
+  'as',
   'children',
-  'renderNextMonthButton',
-  'renderPrevMonthButton',
-  'renderNavigationLabel',
-  'renderWeekdayLabels',
+  'currentDate',
+  'disabledDates',
+  'locale',
+  'onDateSelected',
   'onRequestRenderNextMonth',
   'onRequestRenderPrevMonth',
-  'as',
-  'role'
+  'renderNavigationLabel',
+  'renderNextMonthButton',
+  'renderPrevMonthButton',
+  'renderWeekdayLabels',
+  'role',
+  'selectedDate',
+  'timezone'
 ]
 
-export type { CalendarProps, CalendarStyle }
+type CalendarState = {
+  renderedDate: Moment
+  today: Moment
+}
+
+export type { CalendarProps, CalendarStyle, CalendarState }
 export { propTypes, allowedProps }
