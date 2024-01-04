@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Children, Component, ReactElement } from 'react'
+import React, { Children, Component, ReactElement, MouseEvent } from 'react'
 
 import { View } from '@instructure/ui-view'
 import {
@@ -34,10 +34,14 @@ import {
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
+import { AccessibleContent } from '@instructure/ui-a11y-content'
 
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
+
+import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
+import type { Moment } from '@instructure/ui-i18n'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -45,7 +49,14 @@ import generateComponentTheme from './theme'
 import { Day } from './Day'
 
 import { propTypes, allowedProps } from './props'
-import type { CalendarProps } from './props'
+import type { CalendarProps, CalendarState } from './props'
+import { Renderable } from '@instructure/shared-types'
+
+import { IconButton } from '@instructure/ui-buttons'
+import {
+  IconArrowOpenStartSolid,
+  IconArrowOpenEndSolid
+} from '@instructure/ui-icons'
 
 /**
 ---
@@ -54,9 +65,11 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Calendar extends Component<CalendarProps> {
+class Calendar extends Component<CalendarProps, CalendarState> {
   static readonly componentId = 'Calendar'
 
+  declare context: React.ContextType<typeof ApplyLocaleContext>
+  static contextType = ApplyLocaleContext
   static Day = Day
   static DAY_COUNT = 42 // 6 weeks visible
 
@@ -68,12 +81,20 @@ class Calendar extends Component<CalendarProps> {
   }
 
   ref: Element | null = null
-  private _weekdayHeaderIds = this.props.renderWeekdayLabels.reduce(
-    (ids: Record<number, string>, _label, i) => {
-      return { ...ids, [i]: uid(`weekday-header-${i}`) }
-    },
-    {}
-  )
+  private _weekdayHeaderIds = (
+    this.props.renderWeekdayLabels || this.defaultWeekdays
+  ).reduce((ids: Record<number, string>, _label, i) => {
+    return { ...ids, [i]: uid(`weekday-header-${i}`) }
+  }, {})
+  constructor(props: CalendarProps) {
+    super(props)
+
+    this.state = this.calculateState(
+      this.locale(),
+      this.timezone(),
+      props.currentDate
+    )
+  }
 
   handleRef = (el: Element | null) => {
     this.ref = el
@@ -83,26 +104,97 @@ class Calendar extends Component<CalendarProps> {
     this.props.makeStyles?.()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: CalendarProps) {
     this.props.makeStyles?.()
+
+    const isUpdated =
+      prevProps.locale !== this.props.locale ||
+      prevProps.timezone !== this.props.timezone
+
+    if (isUpdated) {
+      this.setState(() => {
+        return {
+          ...this.calculateState(
+            this.locale(),
+            this.timezone(),
+            this.props.currentDate
+          )
+        }
+      })
+    }
   }
+
+  calculateState = (
+    locale: string,
+    timezone: string,
+    currentDate?: string
+  ) => ({
+    renderedDate: currentDate
+      ? DateTime.parse(currentDate, locale, timezone)
+      : DateTime.now(locale, timezone),
+    today: currentDate
+      ? DateTime.parse(currentDate, locale, timezone)
+      : DateTime.now(locale, timezone)
+  })
 
   get role() {
     return this.props.role === 'listbox' ? this.props.role : undefined
   }
 
-  renderHeader() {
-    const {
-      renderNextMonthButton,
-      renderPrevMonthButton,
-      renderNavigationLabel,
-      onRequestRenderNextMonth,
-      onRequestRenderPrevMonth,
-      styles
-    } = this.props
+  renderMonthNavigationButtons = () => {
+    const { renderNextMonthButton, renderPrevMonthButton } = this.props
 
-    const nextButton: ReactElement = callRenderProp(renderNextMonthButton)
-    const prevButton: ReactElement = callRenderProp(renderPrevMonthButton)
+    return {
+      prevButton: renderPrevMonthButton ? (
+        callRenderProp(renderPrevMonthButton)
+      ) : (
+        <IconButton
+          size="small"
+          withBackground={false}
+          withBorder={false}
+          renderIcon={<IconArrowOpenStartSolid color="primary" />}
+          screenReaderLabel="Previous month"
+        />
+      ),
+      nextButton: renderNextMonthButton ? (
+        callRenderProp(renderNextMonthButton)
+      ) : (
+        <IconButton
+          size="small"
+          withBackground={false}
+          withBorder={false}
+          renderIcon={<IconArrowOpenEndSolid color="primary" />}
+          screenReaderLabel="Next month"
+        />
+      )
+    }
+  }
+
+  handleMonthChange = (direction: 'prev' | 'next') => (e: React.MouseEvent) => {
+    const { onRequestRenderNextMonth, onRequestRenderPrevMonth } = this.props
+    const { renderedDate } = this.state
+    const newDate = renderedDate.clone()
+    if (direction === 'prev') {
+      if (onRequestRenderPrevMonth) {
+        onRequestRenderPrevMonth(e)
+        return
+      }
+      newDate.subtract({ months: 1 })
+    } else {
+      if (onRequestRenderNextMonth) {
+        onRequestRenderNextMonth(e)
+        return
+      }
+      newDate.add({ months: 1 })
+    }
+    this.setState({ renderedDate: newDate })
+  }
+
+  renderHeader() {
+    const { renderNavigationLabel, styles } = this.props
+    const { renderedDate } = this.state
+    const { prevButton, nextButton } = this.renderMonthNavigationButtons()
+
     const cloneButton = (
       button: ReactElement,
       onClick?: (e: React.MouseEvent) => void
@@ -121,9 +213,16 @@ class Calendar extends Component<CalendarProps> {
 
     return (
       <div css={style}>
-        {prevButton && cloneButton(prevButton, onRequestRenderPrevMonth)}
-        {callRenderProp(renderNavigationLabel)}
-        {nextButton && cloneButton(nextButton, onRequestRenderNextMonth)}
+        {prevButton && cloneButton(prevButton, this.handleMonthChange('prev'))}
+        {renderNavigationLabel ? (
+          callRenderProp(renderNavigationLabel)
+        ) : (
+          <span>
+            <div>{renderedDate.format('MMMM')}</div>
+            <div>{renderedDate.format('YYYY')}</div>
+          </span>
+        )}
+        {nextButton && cloneButton(nextButton, this.handleMonthChange('next'))}
       </div>
     )
   }
@@ -138,9 +237,10 @@ class Calendar extends Component<CalendarProps> {
   }
 
   renderWeekdayHeaders() {
-    const { renderWeekdayLabels, styles } = this.props
+    const { styles } = this.props
+    const renderWeekdayLabels =
+      this.props.renderWeekdayLabels || this.defaultWeekdays
     const { length } = renderWeekdayLabels
-
     error(
       length === 7,
       `[Calendar] \`renderWeekdayLabels\` should be an array with 7 labels (one for each weekday). ${length} provided.`
@@ -163,9 +263,46 @@ class Calendar extends Component<CalendarProps> {
     )
   }
 
+  get defaultWeekdays() {
+    const shortDayNames = DateTime.getLocalDayNamesOfTheWeek(
+      this.locale(),
+      'short'
+    )
+    const longDayNames = DateTime.getLocalDayNamesOfTheWeek(
+      this.locale(),
+      'long'
+    )
+    return [
+      <AccessibleContent key={1} alt={longDayNames[0]}>
+        {shortDayNames[0]}
+      </AccessibleContent>,
+      <AccessibleContent key={2} alt={longDayNames[1]}>
+        {shortDayNames[1]}
+      </AccessibleContent>,
+      <AccessibleContent key={3} alt={longDayNames[2]}>
+        {shortDayNames[2]}
+      </AccessibleContent>,
+      <AccessibleContent key={4} alt={longDayNames[3]}>
+        {shortDayNames[3]}
+      </AccessibleContent>,
+      <AccessibleContent key={5} alt={longDayNames[4]}>
+        {shortDayNames[4]}
+      </AccessibleContent>,
+      <AccessibleContent key={6} alt={longDayNames[5]}>
+        {shortDayNames[5]}
+      </AccessibleContent>,
+      <AccessibleContent key={7} alt={longDayNames[6]}>
+        {shortDayNames[6]}
+      </AccessibleContent>
+    ] as Renderable<never>[]
+  }
+
   renderDays() {
-    const children = Children.toArray(this.props.children) as ReactElement[]
-    const { length } = children
+    const { children } = this.props
+    const childrenArr = Children.toArray(
+      children ? children : this.renderDefaultdays()
+    ) as ReactElement[]
+    const { length } = childrenArr
     const role = this.role === 'listbox' ? 'presentation' : undefined
 
     error(
@@ -173,7 +310,7 @@ class Calendar extends Component<CalendarProps> {
       `[Calendar] should have exactly ${Calendar.DAY_COUNT} children. ${length} provided.`
     )
 
-    return children
+    return childrenArr
       .reduce((days: ReactElement[][], day, i) => {
         const index = Math.floor(i / 7)
         if (!days[index]) days.push([])
@@ -193,6 +330,81 @@ class Calendar extends Component<CalendarProps> {
           ))}
         </tr>
       ))
+  }
+
+  locale(): string {
+    if (this.props.locale) {
+      return this.props.locale
+    } else if (this.context && this.context.locale) {
+      return this.context.locale
+    }
+    return Locale.browserLocale()
+  }
+
+  timezone() {
+    if (this.props.timezone) {
+      return this.props.timezone
+    } else if (this.context && this.context.timezone) {
+      return this.context.timezone
+    }
+    return DateTime.browserTimeZone()
+  }
+
+  // date is returned es a ISO string, like 2021-09-14T22:00:00.000Z
+  handleDayClick = (event: MouseEvent<any>, { date }: { date: string }) => {
+    if (this.props.onDateSelected) {
+      const parsedDate = DateTime.parse(date, this.locale(), this.timezone())
+      this.props.onDateSelected(parsedDate.toISOString(), parsedDate, event)
+    }
+  }
+
+  isDisabledDate(date: Moment) {
+    const disabledDates = this.props.disabledDates
+    if (!disabledDates) {
+      return false
+    }
+    if (Array.isArray(disabledDates)) {
+      for (const aDisabledDate of disabledDates) {
+        if (date.isSame(aDisabledDate, 'day')) {
+          return true
+        }
+      }
+      return false
+    }
+    return disabledDates(date.toISOString())
+  }
+
+  renderDefaultdays() {
+    const { selectedDate } = this.props
+    const { renderedDate, today } = this.state
+    // Sets it to the first local day of the week counting back from the start of the month.
+    // Note that first day depends on the locale, e.g. it's Sunday in the US and
+    // Monday in most of the EU.
+    const currDate = DateTime.getFirstDayOfWeek(
+      renderedDate.clone().startOf('month')
+    )
+    const arr: Moment[] = []
+    for (let i = 0; i < Calendar.DAY_COUNT; i++) {
+      arr.push(currDate.clone())
+      currDate.add({ days: 1 })
+    }
+    return arr.map((date) => {
+      const dateStr = date.toISOString()
+      return (
+        <Calendar.Day
+          key={dateStr}
+          date={dateStr}
+          isSelected={selectedDate ? date.isSame(selectedDate, 'day') : false}
+          isToday={date.isSame(today, 'day')}
+          isOutsideMonth={!date.isSame(renderedDate, 'month')}
+          label={date.format('D MMMM YYYY')} // used by screen readers
+          onClick={this.handleDayClick}
+          interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}
+        >
+          {date.format('DD')}
+        </Calendar.Day>
+      )
+    })
   }
 
   render() {

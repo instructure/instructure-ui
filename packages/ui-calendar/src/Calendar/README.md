@@ -4,6 +4,43 @@ describes: Calendar
 
 The `Calendar` component provides a visual interface for date data.
 
+### Default config
+
+For ease of use in most situations, the `Calendar` component provides a default
+configuration. The default configuration can be overridden by providing props
+to the `Calendar` component.
+
+```js
+---
+type: example
+---
+<Calendar  locale="hu"/>
+```
+
+### Default config with additional props
+
+```js
+---
+type: example
+---
+class Example extends React.Component {
+  state = {
+      selectedDate: ""
+    }
+  render = () =>
+<Calendar
+  currentDate="2023-12-15"
+  disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
+  selectedDate={this.state.selectedDate}
+  onDateSelected={(date)=>{
+    this.setState({selectedDate: date})
+  }}
+/>
+
+}
+render(<Example />)
+```
+
 ### Composing a Calendar in your Application
 
 By design, the `Calendar` component does not dictate which date libraries or
