@@ -29,18 +29,20 @@ import chalk from 'chalk'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore not typed
 import buildCommit from 'cz-customizable/lib/build-commit'
-import autocomplete from 'inquirer-autocomplete-prompt'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore not typed
 import { getChangedPackages, getPackages } from '@instructure/pkg-utils'
 import { makeDefaultQuestions } from './make-default-questions'
-import { autoCompleteQuestions } from './autocomplete-questions'
+import type { Answers } from 'inquirer'
+import inquirerModule from 'inquirer'
+import { MaxLengthInputPrompt } from './MaxLengthInputPrompt'
 
 type CommitType = 'patch' | 'minor' | 'major'
 
-interface CommitizenType {
-  registerPrompt: (type: string, plugin: unknown) => void
-  prompt: (qs: any) => Promise<any>
+function scopeText(scopes: string[]) {
+  if (scopes.length > 3) {
+    return 'many'
+  } else return scopes.join(',')
 }
 
 // note: Most of the code is from https://github.com/atlassian/cz-lerna-changelog/
@@ -55,50 +57,37 @@ function getCommitTypeMessage(type: CommitType) {
   }[type]
 }
 
-const prompter = (cz: CommitizenType, commit: (message: string) => void) => {
+const prompter = (
+  inquirer: typeof inquirerModule,
+  commit: (message: string) => void
+) => {
   const scope = '@instructure'
   const allPackages = getPackages()
-  const changedPackages = getChangedPackages('--cached', allPackages).map(
-    (pkg: any) => pkg.name.replace(`${scope}/`, '')
-  )
-  const packageNames = allPackages.map((pkg: any) =>
+  const changedPackages: string[] = getChangedPackages(
+    '--cached',
+    allPackages
+  ).map((pkg: any) => pkg.name.replace(`${scope}/`, ''))
+  const packageNames: string[] = allPackages.map((pkg: any) =>
     pkg.name.replace(`${scope}/`, '')
   )
   const questions = makeDefaultQuestions(packageNames, changedPackages)
 
-  // eslint-disable-next-line no-console
-  console.info(
-    '\n\nLine 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.\n'
-  )
-
-  cz.registerPrompt('autocomplete', autocomplete)
-
-  cz.prompt(autoCompleteQuestions(questions))
+  inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
+  inquirer
+    .prompt<Answers>(questions)
     .then((answers) => {
-      const { body, testplan, visualChange, footer, breaking, scope, ...rest } =
-        answers
+      const { body, testplan, footer, breaking, scope, ...rest } = answers
 
       const testplanTxt = testplan ? `\nTEST PLAN:\n${testplan}\n\n` : ''
-
       const issues = footer ? `\n\nCloses: ${footer}\n\n` : ''
-
-      const visualChangeTxt = visualChange
-        ? `\n\nVISUAL CHANGE: ${visualChange}\n\n`
-        : ''
-
-      let scopeStr = '*'
-
-      if (Array.isArray(scope)) {
-        scopeStr = scope.join(',')
-      }
       // To have part of a commit body appear in the changelog it needs to be after the "BREAKING CHANGE:" text.
       // see https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular
       const message = buildCommit(
         {
           ...rest,
           body: issues + body + testplanTxt,
-          breaking: breaking + visualChangeTxt,
-          scope: scopeStr
+          breaking: breaking,
+          scope: scopeText(scope)
         },
         { breaklineChar: '|' }
       )
@@ -129,3 +118,4 @@ const prompter = (cz: CommitizenType, commit: (message: string) => void) => {
 }
 
 export default { prompter }
+export { scopeText }

@@ -22,24 +22,16 @@
  * SOFTWARE.
  */
 
-export type QuestionChoices = { value: string; name: string }[]
-
-export type QuestionType = {
-  type: string
-  name: string
-  message: string
-  default?: any
-  choices?: QuestionChoices
-  filter?: (val: string) => string
-  validate?: (val: string) => boolean
-}
+import type { MaxLengthQuestion } from './MaxLengthInputPrompt'
+import type { DistinctQuestion } from 'inquirer'
+import { scopeText } from './index'
 
 export const makeDefaultQuestions = (
-  allPackages: any,
-  changedPackages: any
-): QuestionType[] => [
+  allPackages: string[],
+  changedPackages: string[]
+): (DistinctQuestion | MaxLengthQuestion)[] => [
   {
-    type: 'autocomplete',
+    type: 'list',
     name: 'type',
     message: "Select the type of change that you're committing:",
     choices: [
@@ -81,15 +73,24 @@ export const makeDefaultQuestions = (
     message: `The packages that this commit has affected (${changedPackages.length} detected)\n`
   },
   {
-    type: 'input',
+    type: 'maxlength-input',
     name: 'subject',
     message: 'Write a short, imperative tense description of the change:\n',
-    filter: function (value: string) {
-      return value.charAt(0).toLowerCase() + value.slice(1)
+    validate: function (input, _answers) {
+      return input && input.length > 0
     },
-    validate: function (value: string) {
-      return !!value
-    }
+    filter: function (input, _answers) {
+      // used as return value and as length measurement
+      return input.charAt(0).toLowerCase() + input.slice(1)
+    },
+    transformer: function (input, answers) {
+      // Return prefix + input. Shown only while entering the prompt
+      if (answers.scope.length === 0) {
+        return `${answers.type}: ${input}`
+      }
+      return `${answers.type}(${scopeText(answers.scope)}): ${input}`
+    },
+    maxLength: 150
   },
   {
     type: 'input',
@@ -106,12 +107,6 @@ export const makeDefaultQuestions = (
     type: 'input',
     name: 'breaking',
     message: 'List any BREAKING CHANGES (if none, leave blank):\n'
-  },
-  {
-    type: 'input',
-    name: 'visualChange',
-    message:
-      'List any visual change(s) (If none, leave blank). This will mark this commit as a breaking change:\n'
   },
   {
     type: 'input',

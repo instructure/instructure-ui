@@ -27,6 +27,7 @@ module.exports = {
     headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
     headerCorrespondence: ['type', 'scope', 'subject']
   },
+  // see https://commitlint.js.org/#/reference-rules
   rules: {
     'type-enum': [
       2,
@@ -44,6 +45,7 @@ module.exports = {
         'revert'
       ]
     ],
-    'type-case': [0]
+    'type-case': [0],
+    'header-max-length': [0, 'always', 150] // commit message first field (subject) length
   }
 }

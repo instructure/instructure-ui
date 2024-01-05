@@ -26,15 +26,20 @@
     "@semantic-release/commit-analyzer": "^9.0.2",
     "chalk": "^4.1.2",
     "cz-customizable": "^6.9.2",
-    "inquirer": "^8.2.6",
-    "inquirer-autocomplete-prompt": "^2.0.1"
+    "inquirer": "^8.2.6"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.51.0",
-    "@types/inquirer-autocomplete-prompt": "^2.0.0"
+    "@types/inquirer": "^8.2.10"
   },
   "peerDependencies": {
     "lerna": "^7"
+  },
+  "//dependency-comments": {
+    "cz-cli": "This module cannot be ESM because cz-cli can only import CommonJS, see https://github.com/commitizen/cz-cli/issues/916",
+    "@semantic-release/commit-analyzer": "commit-analyzer 10 is ESM.",
+    "chalk": "Chalk 5 is ESM. To use it this repo needs to be converted to ESM",
+    "inquirer": "inquirer 9 is ESM. To use it this repo needs to be converted to ESM"
   },
   "publishConfig": {
     "access": "public"
