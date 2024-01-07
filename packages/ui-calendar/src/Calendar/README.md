@@ -19,27 +19,41 @@ type: example
 
 ### Default config with additional props
 
-```js
----
-type: example
----
-class Example extends React.Component {
-  state = {
-      selectedDate: ""
+- ```js
+  class Example extends React.Component {
+    state = {
+      selectedDate: ''
     }
-  render = () =>
-<Calendar
-  currentDate="2023-12-15"
-  disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
-  selectedDate={this.state.selectedDate}
-  onDateSelected={(date)=>{
-    this.setState({selectedDate: date})
-  }}
-/>
+    render = () => (
+      <Calendar
+        currentDate="2023-12-15"
+        disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
+        selectedDate={this.state.selectedDate}
+        onDateSelected={(date) => {
+          this.setState({ selectedDate: date })
+        }}
+      />
+    )
+  }
+  render(<Example />)
+  ```
 
-}
-render(<Example />)
-```
+- ```js
+  const Example = () => {
+    const [selectedDate, setSelectedDate] = useState('')
+    return (
+      <Calendar
+        currentDate="2023-12-15"
+        disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
+        selectedDate={selectedDate}
+        onDateSelected={(date) => {
+          setSelectedDate(date)
+        }}
+      />
+    )
+  }
+  render(<Example />)
+  ```
 
 ### Composing a Calendar in your Application
 
