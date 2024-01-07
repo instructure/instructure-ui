@@ -62,7 +62,9 @@ const childrenArray = (props: PaginationProps) => {
 }
 
 function propsHaveCompactView(props: PaginationProps) {
-  return props.variant === 'compact' && childrenArray(props).length > 5
+  if (props.children)
+    return props.variant === 'compact' && childrenArray(props).length > 5
+  return props.variant === 'compact' && props.totalPageNumber! > 5
 }
 
 type ArrowConfig = {
@@ -96,7 +98,13 @@ class Pagination extends Component<PaginationProps> {
       currentPage: number,
       numberOfPages: number
     ) => `Select page (${currentPage} of ${numberOfPages})`,
-    shouldHandleFocus: true
+    shouldHandleFocus: true,
+    totalPageNumber: 0,
+    currentPage: 1,
+    siblingCount: 1,
+    boundaryCount: 1,
+    ellipsis: '...',
+    renderPageIndicator: (page: number) => page
   }
 
   static Page = PaginationButton
@@ -110,6 +118,7 @@ class Pagination extends Component<PaginationProps> {
   private _lastButton: HTMLButtonElement | null = null
 
   ref: Element | null = null
+  currentPageRef: PaginationButton | null = null
 
   constructor(props: PaginationProps) {
     super(props)
@@ -166,6 +175,18 @@ class Pagination extends Component<PaginationProps> {
     snapshot: PaginationSnapshot
   ) {
     this.props.makeStyles?.()
+
+    // set focus on the currently active page
+    if (
+      this.props.currentPage !== prevProps.currentPage &&
+      document.activeElement !== this._firstButton &&
+      document.activeElement !== this._prevButton &&
+      document.activeElement !== this._nextButton &&
+      document.activeElement !== this._lastButton
+    ) {
+      // @ts-expect-error fix typing
+      this.currentPageRef?.ref?.focus?.()
+    }
 
     if (
       !this.props.shouldHandleFocus ||
@@ -243,7 +264,25 @@ class Pagination extends Component<PaginationProps> {
     )
   }
 
+  renderDefaultPageInput = () => {
+    const { currentPage, totalPageNumber } = this.props
+    return (
+      <PaginationPageInput
+        numberOfPages={totalPageNumber!}
+        currentPageIndex={currentPage! - 1}
+        onChange={(_e, nextPageIndex) =>
+          this.props.onPageChange?.(nextPageIndex + 1, currentPage!)
+        }
+        screenReaderLabel={this.props.screenReaderLabelNumberInput!}
+        label={this.props.labelNumberInput}
+        disabled={this.props.disabled}
+        inputRef={this.handleInputRef}
+      />
+    )
+  }
+
   renderPageInput(currentPageIndex: number) {
+    if (!this.props.children) return this.renderDefaultPageInput()
     return (
       <PaginationPageInput
         numberOfPages={this.childPages.length}
@@ -267,7 +306,95 @@ class Pagination extends Component<PaginationProps> {
     this.childPages[pageIndex].props.onClick?.(event)
   }
 
+  handleNavigation = (nextIndex: number, previousIndex: number) => {
+    const { onPageChange } = this.props
+    if (typeof onPageChange === 'function') {
+      onPageChange(nextIndex, previousIndex)
+    }
+  }
+
+  renderPagesInInterval = (from: number, to: number, currentPage: number) => {
+    if (to - from > 1000)
+      throw new Error('Pagination: too many pages (more than 1000)')
+    const pages = []
+    for (let i = from; i <= to; i++) {
+      pages.push(
+        <Pagination.Page
+          ref={(e) => (i === currentPage ? (this.currentPageRef = e) : null)}
+          key={i}
+          onClick={() => this.handleNavigation(i, currentPage)}
+          current={i === currentPage}
+        >
+          {this.props.renderPageIndicator?.(i, currentPage)}
+        </Pagination.Page>
+      )
+    }
+    return pages
+  }
+
+  renderDefaultPages = () => {
+    const {
+      ellipsis,
+      currentPage,
+      totalPageNumber,
+      siblingCount,
+      boundaryCount,
+      variant
+    } = this.props
+    const pages: any = []
+    if (
+      totalPageNumber! < 2 * boundaryCount! ||
+      totalPageNumber! < 2 * siblingCount! + 1 ||
+      variant === 'full'
+    ) {
+      return this.renderPagesInInterval(1, totalPageNumber!, currentPage!)
+    }
+    if (currentPage! > boundaryCount! + siblingCount! + 1) {
+      pages.push(this.renderPagesInInterval(1, boundaryCount!, currentPage!))
+      pages.push(ellipsis)
+      pages.push(
+        this.renderPagesInInterval(
+          currentPage! - siblingCount!,
+          currentPage!,
+          currentPage!
+        )
+      )
+    } else {
+      pages.push(this.renderPagesInInterval(1, currentPage!, currentPage!))
+    }
+    if (
+      currentPage! <
+      totalPageNumber! - (1 + siblingCount! + boundaryCount!)
+    ) {
+      pages.push(
+        this.renderPagesInInterval(
+          currentPage! + 1,
+          currentPage! + siblingCount!,
+          currentPage!
+        )
+      )
+      pages.push(ellipsis)
+      pages.push(
+        this.renderPagesInInterval(
+          totalPageNumber! - boundaryCount! + 1,
+          totalPageNumber!,
+          currentPage!
+        )
+      )
+    } else {
+      pages.push(
+        this.renderPagesInInterval(
+          currentPage! + 1,
+          totalPageNumber!,
+          currentPage!
+        )
+      )
+    }
+    return pages
+  }
+
   renderPages(currentPageIndex: number) {
+    if (!this.props.children) return this.renderDefaultPages()
     const allPages = this.childPages
     let visiblePages = allPages
 
@@ -354,12 +481,61 @@ class Pagination extends Component<PaginationProps> {
     }
   }
 
+  renderDefaultArrowButton = (direction: PaginationArrowDirections) => {
+    if (
+      !this.withFirstAndLastButton &&
+      (direction === 'first' || direction === 'last')
+    ) {
+      return null
+    }
+    // We don't display the arrows in "compact" variant under 6 items
+    if (!(propsHaveCompactView(this.props) || this.inputMode)) {
+      return null
+    }
+    const { totalPageNumber, currentPage } = this.props
+    const { label, shouldEnableIcon, handleButtonRef } = this.getArrowVariant(
+      direction,
+      currentPage! - 1,
+      totalPageNumber!
+    )
+
+    const disabled = this.props.disabled || !shouldEnableIcon
+    const onClick = () => {
+      if (direction === 'first') {
+        this.handleNavigation(1, currentPage!)
+      }
+      if (direction === 'prev') {
+        this.handleNavigation(Math.max(currentPage! - 1, 1), currentPage!)
+      }
+      if (direction === 'next') {
+        this.handleNavigation(
+          Math.min(currentPage! + 1, totalPageNumber!),
+          currentPage!
+        )
+      }
+      if (direction === 'last') {
+        this.handleNavigation(totalPageNumber!, currentPage!)
+      }
+    }
+
+    return shouldEnableIcon || this.showDisabledButtons ? (
+      <PaginationArrowButton
+        direction={direction}
+        data-direction={direction}
+        label={label}
+        onClick={onClick}
+        disabled={disabled}
+        buttonRef={handleButtonRef}
+      />
+    ) : null
+  }
+
   renderArrowButton(
     direction: PaginationArrowDirections,
     currentPageIndex: number
   ) {
+    if (!this.props.children) return this.renderDefaultArrowButton(direction)
     const { childPages } = this
-
     // We don't display the arrows in "compact" variant under 6 items
     if (!(propsHaveCompactView(this.props) || this.inputMode)) {
       return null
@@ -394,8 +570,6 @@ class Pagination extends Component<PaginationProps> {
   }
 
   render() {
-    if (!this.props.children) return null
-
     const currentPageIndex = fastFindIndex(
       this.childPages,
       (p) => p && p.props && p.props.current

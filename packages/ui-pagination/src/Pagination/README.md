@@ -2,6 +2,285 @@
 describes: Pagination
 ---
 
+### NOTE
+
+Pagination is in a state of transition. Its API has been expanded to allow
+as close to zero config usage as possible, without introducing breaking changes to the previous methods.
+
+The component is under review by the design team and it's possible we'll deprecate te "old" API in a
+following version. If you're able to, please use the "new" API. Its documentation is on the top of this page.
+
+One of the biggest improvement is that pagination now can handle large page numbers as well.
+
+### Pagination
+
+The pagination component provides props to handle most of the pagination use-cases. These following examples are the same as the "old" examples in behaviour, but with the "new" API
+
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = { currentPage: 1 }
+    }
+
+    render() {
+      return (
+        <Pagination
+          as="nav"
+          margin="small"
+          variant="compact"
+          labelNext="Next Page"
+          labelPrev="Previous Page"
+          currentPage={this.state.currentPage}
+          totalPageNumber={9}
+          onPageChange={(nextPage) => this.setState({ currentPage: nextPage })}
+        />
+      )
+    }
+  }
+
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [currentPage, setCurrentPage] = useState(1)
+
+    return (
+      <Pagination
+        as="nav"
+        margin="small"
+        variant="compact"
+        labelNext="Next Page"
+        labelPrev="Previous Page"
+        currentPage={currentPage}
+        totalPageNumber={9}
+        onPageChange={(nextPage) => setCurrentPage(nextPage)}
+      />
+    )
+  }
+
+  render(<Example />)
+  ```
+
+You can set any `totalPageNumber`, the component can handle it easily. Furthermore, you can set
+`siblingCount`, which indicates how many pages are visible on either side of the `currentPage` and the
+`boundaryCount`, which indicates how many pages are visible in the beginning and end.
+
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = { currentPage: 1 }
+    }
+
+    render() {
+      return (
+        <Pagination
+          as="nav"
+          margin="small"
+          variant="compact"
+          labelNext="Next Page"
+          labelPrev="Previous Page"
+          currentPage={this.state.currentPage}
+          totalPageNumber={100000}
+          onPageChange={(nextPage) => this.setState({ currentPage: nextPage })}
+          siblingCount={3}
+          boundaryCount={2}
+        />
+      )
+    }
+  }
+
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [currentPage, setCurrentPage] = useState(1)
+    return (
+      <Pagination
+        as="nav"
+        margin="small"
+        variant="compact"
+        labelNext="Next Page"
+        labelPrev="Previous Page"
+        currentPage={currentPage}
+        totalPageNumber={100000}
+        onPageChange={(nextPage) => setCurrentPage(nextPage)}
+        siblingCount={3}
+        boundaryCount={2}
+      />
+    )
+  }
+
+  render(<Example />)
+  ```
+
+You can only display 1000 pages at once.
+
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = { currentPage: 1 }
+    }
+
+    render() {
+      return (
+        <Pagination
+          as="nav"
+          margin="small"
+          variant="full"
+          labelNext="Next Page"
+          labelPrev="Previous Page"
+          currentPage={this.state.currentPage}
+          totalPageNumber={100000}
+          onPageChange={(nextPage) => this.setState({ currentPage: nextPage })}
+          siblingCount={3}
+          boundaryCount={2}
+        />
+      )
+    }
+  }
+
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [currentPage, setCurrentPage] = useState(1)
+    return (
+      <Pagination
+        as="nav"
+        margin="small"
+        variant="full"
+        labelNext="Next Page"
+        labelPrev="Previous Page"
+        currentPage={currentPage}
+        totalPageNumber={100000}
+        onPageChange={(nextPage) => setCurrentPage(nextPage)}
+        siblingCount={3}
+        boundaryCount={2}
+      />
+    )
+  }
+
+  render(<Example />)
+  ```
+
+You can override the default page rendering with `renderPageIndicator`.
+
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = { currentPage: 1 }
+    }
+
+    pageMap = ['A-G', 'H-J', 'K-M', 'N-Q', 'R-Z']
+
+    render() {
+      return (
+        <Pagination
+          as="nav"
+          margin="small"
+          variant="full"
+          labelNext="Next Page"
+          labelPrev="Previous Page"
+          currentPage={this.state.currentPage}
+          totalPageNumber={5}
+          onPageChange={(nextPage) => this.setState({ currentPage: nextPage })}
+          siblingCount={5}
+          boundaryCount={0}
+          renderPageIndicator={(page) => this.pageMap[page - 1]}
+        />
+      )
+    }
+  }
+
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const pageMap = ['A-G', 'H-J', 'K-M', 'N-Q', 'R-Z']
+
+    return (
+      <Pagination
+        as="nav"
+        margin="small"
+        variant="full"
+        labelNext="Next Page"
+        labelPrev="Previous Page"
+        currentPage={currentPage}
+        totalPageNumber={5}
+        onPageChange={(nextPage) => setCurrentPage(nextPage)}
+        siblingCount={5}
+        boundaryCount={0}
+        renderPageIndicator={(page) => pageMap[page - 1]}
+      />
+    )
+  }
+
+  render(<Example />)
+  ```
+
+  The `variant="input"` prop will render Pagination with a NumberInput and all the arrow buttons.
+
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = { currentPage: 1 }
+    }
+
+    render() {
+      return (
+        <Pagination
+          as="nav"
+          margin="small"
+          variant="input"
+          labelNext="Next Page"
+          labelPrev="Previous Page"
+          currentPage={this.state.currentPage}
+          totalPageNumber={9}
+          onPageChange={(nextPage) => this.setState({ currentPage: nextPage })}
+        />
+      )
+    }
+  }
+
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [currentPage, setCurrentPage] = useState(1)
+
+    return (
+      <Pagination
+        as="nav"
+        margin="small"
+        variant="input"
+        labelNext="Next Page"
+        labelPrev="Previous Page"
+        currentPage={currentPage}
+        totalPageNumber={9}
+        onPageChange={(nextPage) => setCurrentPage(nextPage)}
+      />
+    )
+  }
+
+  render(<Example />)
+  ```
+
+### Legacy examples
+
+These provide possibly finer, but much more complicated control over the pagination component. They are still supported, but we recommend using the new API.
+
 Renders available pages of content, and reacts to selection of another page.
 Expects array of `Pagination.Page` children. Focus and announcement of page change is
 the responsibility of your app.

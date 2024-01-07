@@ -146,6 +146,46 @@ type PaginationOwnProps = {
    * Set this property to `false` to prevent this behavior.
    */
   shouldHandleFocus?: boolean
+
+  /**
+   * The total number of pages
+   */
+  totalPageNumber?: number
+
+  /**
+   * The current page number
+   */
+  currentPage?: number
+
+  /**
+   * The number of pages to display before and after the current page
+   */
+  siblingCount?: number
+
+  /**
+   * The number of always visible pages at the beginning and end
+   * of the pagination component
+   * */
+  boundaryCount?: number
+
+  /**
+   * Called when page number is changed
+   */
+  onPageChange?: (next: number, prev: number) => void
+
+  /**
+   * Renders the visible pages
+   */
+  renderPageIndicator?: (
+    pageIndex: number,
+    currentPage: number
+  ) => React.ReactNode
+
+  /**
+   * The ellipsis
+   * (e.g. "...")
+   */
+  ellipsis?: React.ReactNode
 }
 
 type PropKeys = keyof PaginationOwnProps
@@ -154,7 +194,8 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type PaginationProps = PaginationOwnProps &
   WithStyleProps<null, PaginationStyle> &
-  OtherHTMLAttributes<PaginationOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<PaginationOwnProps> &
+  WithDeterministicIdProps
 
 type PaginationStyle = ComponentStyle<'pagination' | 'pages'>
 
@@ -175,7 +216,14 @@ const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
   elementRef: PropTypes.func,
   inputRef: PropTypes.func,
-  shouldHandleFocus: PropTypes.bool
+  shouldHandleFocus: PropTypes.bool,
+  totalPageNumber: PropTypes.number,
+  currentPage: PropTypes.number,
+  siblingCount: PropTypes.number,
+  boundaryCount: PropTypes.number,
+  onPageChange: PropTypes.func,
+  renderPageIndicator: PropTypes.func,
+  ellipsis: PropTypes.node
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -195,7 +243,14 @@ const allowedProps: AllowedPropKeys = [
   'as',
   'elementRef',
   'inputRef',
-  'shouldHandleFocus'
+  'shouldHandleFocus',
+  'totalPageNumber',
+  'currentPage',
+  'onPageChange',
+  'siblingCount',
+  'boundaryCount',
+  'renderPageIndicator',
+  'ellipsis'
 ]
 
 type PaginationSnapshot = {
