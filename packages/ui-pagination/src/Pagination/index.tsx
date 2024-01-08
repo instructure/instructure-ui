@@ -343,8 +343,8 @@ class Pagination extends Component<PaginationProps> {
     } = this.props
     const pages: any = []
     if (
-      totalPageNumber! < 2 * boundaryCount! ||
-      totalPageNumber! < 2 * siblingCount! + 1 ||
+      totalPageNumber! <= 2 * boundaryCount! ||
+      totalPageNumber! <= 1 + siblingCount! + boundaryCount! ||
       variant === 'full'
     ) {
       return this.renderPagesInInterval(1, totalPageNumber!, currentPage!)

@@ -228,7 +228,7 @@ You can override the default page rendering with `renderPageIndicator`.
   render(<Example />)
   ```
 
-  The `variant="input"` prop will render Pagination with a NumberInput and all the arrow buttons.
+The `variant="input"` prop will render Pagination with a NumberInput and all the arrow buttons.
 
 - ```js
   class Example extends React.Component {
