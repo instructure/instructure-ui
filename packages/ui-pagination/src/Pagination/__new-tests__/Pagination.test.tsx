@@ -192,5 +192,19 @@ describe('<Pagination />', () => {
         'First PagePrevious Page1...456...100Next PageLast Page'
       )
     })
+    it('should render every page if boundary and sibling counts are big enough', () => {
+      const { container } = render(
+        <Pagination
+          variant="compact"
+          labelNext="Next Page"
+          labelPrev="Previous Page"
+          totalPageNumber={10}
+          currentPage={1}
+          siblingCount={5}
+          boundaryCount={4}
+        />
+      )
+      expect(container.firstChild).toHaveTextContent('12345678910Next Page')
+    })
   })
 })
