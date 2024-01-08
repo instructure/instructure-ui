@@ -349,9 +349,23 @@ class Pagination extends Component<PaginationProps> {
     ) {
       return this.renderPagesInInterval(1, totalPageNumber!, currentPage!)
     }
+
     if (currentPage! > boundaryCount! + siblingCount! + 1) {
       pages.push(this.renderPagesInInterval(1, boundaryCount!, currentPage!))
       pages.push(ellipsis)
+      if (
+        currentPage! - siblingCount! >
+        totalPageNumber! - boundaryCount! + 1
+      ) {
+        pages.push(
+          this.renderPagesInInterval(
+            totalPageNumber! - boundaryCount! + 1,
+            totalPageNumber!,
+            currentPage!
+          )
+        )
+        return pages
+      }
       pages.push(
         this.renderPagesInInterval(
           currentPage! - siblingCount!,
@@ -360,15 +374,19 @@ class Pagination extends Component<PaginationProps> {
         )
       )
     } else {
-      pages.push(this.renderPagesInInterval(1, currentPage!, currentPage!))
-    }
-    if (
-      currentPage! <
-      totalPageNumber! - (1 + siblingCount! + boundaryCount!)
-    ) {
       pages.push(
         this.renderPagesInInterval(
-          currentPage! + 1,
+          1,
+          Math.max(currentPage!, boundaryCount!),
+          currentPage!
+        )
+      )
+    }
+
+    if (currentPage! < totalPageNumber! - (siblingCount! + boundaryCount!)) {
+      pages.push(
+        this.renderPagesInInterval(
+          Math.max(currentPage!, boundaryCount!) + 1,
           currentPage! + siblingCount!,
           currentPage!
         )
