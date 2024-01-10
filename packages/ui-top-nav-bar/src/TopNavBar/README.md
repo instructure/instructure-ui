@@ -1118,6 +1118,8 @@ The `<TopNavBar.Layout>` component has a `desktopConfig` and a `smallViewportCon
 
 Use the brand logo over the primary brand color in front of the brand's name. If there is no brand logo then use the name with darker background.
 
+**Note**: A console warning is thrown if `<TopNavBar.Brand>` is used because it will be removed soon in Instructure UI v9. Please adjust the TopNavBar design in places, where you use it with `<TopNavBar.Brand>`.
+
 ```js
 ---
 type: example
@@ -1247,7 +1249,7 @@ In small viewport mode, a link is shown for the last but one element of the `<Br
 
 ```js
 ---
-example: true
+type: example
 ---
   <div>
     <View as="div" margin="medium 0">
