@@ -31,7 +31,9 @@ function getRenderStack() {
   let renderStack = ''
   try {
     // this is so bad to use, that its not even typed :)
-    renderStack = (React as any).__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
+    renderStack = (
+      React as any
+    ).__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
   } catch (error) {
     // log happened outside a react render or couldn't figure out where in the render stack we are.
   }
@@ -69,7 +71,19 @@ function logDeprecated(
   message: string,
   ...args: unknown[]
 ) {
-  if (!process.env.OMIT_INSTUI_DEPRECATION_WARNINGS) {
+  let shouldLogMessage = false
+
+  try {
+    shouldLogMessage = !process?.env?.OMIT_INSTUI_DEPRECATION_WARNINGS
+  } catch (e) {
+    if (e instanceof ReferenceError) {
+      // if process is not available a ReferenceError is thrown
+      shouldLogMessage = true
+    } else {
+      throw e
+    }
+  }
+  if (shouldLogMessage) {
     logMessage('warn', true, condition, message, ...args)
   } else if (!condition && !loggedInitialDeprecationWarning) {
     loggedInitialDeprecationWarning = true
