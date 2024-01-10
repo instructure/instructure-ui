@@ -94,7 +94,19 @@ class View extends Component<ViewProps> {
       'themeOverride'
     ]
 
-    if (process.env.NODE_ENV !== 'production') {
+    let shouldLogError = true
+    try {
+      shouldLogError = process.env.NODE_ENV !== 'production'
+    } catch (e) {
+      if (e instanceof ReferenceError) {
+        // if process is not available a ReferenceError is thrown
+        shouldLogError = false
+      } else {
+        throw e
+      }
+    }
+
+    if (shouldLogError) {
       Object.keys(pickProps(props, propsToOmit)).forEach((prop) => {
         error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
       })

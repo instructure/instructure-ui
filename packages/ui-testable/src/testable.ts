@@ -33,6 +33,19 @@ interface ComponentWithDOMNode {
   DOMNode?: HTMLSpanElement | null
 }
 
+let shouldAppendLocators = true
+
+try {
+  shouldAppendLocators = !process?.env?.ALWAYS_APPEND_UI_TESTABLE_LOCATORS
+} catch (e) {
+  if (e instanceof ReferenceError) {
+    // if process is not available a ReferenceError is thrown
+    shouldAppendLocators = false
+  } else {
+    throw e
+  }
+}
+
 const testable =
   process.env.NODE_ENV === 'production' &&
   // If you would like to the `data-cid` attributes on elements even in your
@@ -40,7 +53,7 @@ const testable =
   // something), you need to set the environment variable
   // ALWAYS_APPEND_UI_TESTABLE_LOCATORS=1
   // We do this because adding those `data-cid` locators slows things down.
-  !process.env.ALWAYS_APPEND_UI_TESTABLE_LOCATORS
+  shouldAppendLocators
     ? () => (Component: ComponentClass<any>) => Component
     : decorator((ComposedComponent) => {
         const displayName =
