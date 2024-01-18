@@ -1247,7 +1247,7 @@ In small viewport mode, a link is shown for the last but one element of the `<Br
 
 ```js
 ---
-example: true
+type: example
 ---
   <div>
     <View as="div" margin="medium 0">
