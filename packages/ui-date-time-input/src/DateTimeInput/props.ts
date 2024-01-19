@@ -28,7 +28,7 @@ import type { FormMessage } from '@instructure/ui-form-field'
 import type { InteractionType } from '@instructure/ui-react-utils'
 import { I18nPropTypes } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'
-import PropTypes from 'prop-types'
+import PropTypes, { Validator } from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import type { PropValidators, Renderable } from '@instructure/shared-types'
 
@@ -242,6 +242,11 @@ type DateTimeInputProps = {
    * Default is `undefined` which equals to `false`
    */
   allowNonStepInput?: boolean
+  /**
+   * The default time to be prefilled if a day is selected. The time input has to be empty for this to be applied.
+   * An error is thrown if the time format is not HH:MM.
+   */
+  initialTimeForNewDate?: string
 }
 
 type DateTimeInputState = {
@@ -268,6 +273,26 @@ type DateTimeInputState = {
 
 type PropKeys = keyof DateTimeInputProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
+
+const hourMinuteValidator: Validator<string> = function (
+  props,
+  propName,
+  componentName,
+  location
+) {
+  const propValue = props[propName]
+  if (typeof propValue === 'undefined' || propValue === '') return null
+
+  const hourMinuteRegex = /^\d{2}:\d{2}$/
+
+  if (typeof propValue === 'string' && !propValue.match(hourMinuteRegex)) {
+    return new Error(
+      `Invalid ${location} \`${propName}\` \`${propValue}\` supplied to \`${componentName}\`, expected ` +
+        `a HH:MM formatted string.`
+    )
+  }
+  return null
+}
 
 const propTypes: PropValidators<PropKeys> = {
   description: PropTypes.node.isRequired,
@@ -313,7 +338,8 @@ const propTypes: PropValidators<PropKeys> = {
     PropTypes.string,
     PropTypes.func
   ]),
-  allowNonStepInput: PropTypes.bool
+  allowNonStepInput: PropTypes.bool,
+  initialTimeForNewDate: hourMinuteValidator
 }
 
 const allowedProps: AllowedPropKeys = [
