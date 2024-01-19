@@ -40,6 +40,7 @@ import {
 } from '@instructure/ui-icons'
 import type { DateTimeInputProps, DateTimeInputState } from './props'
 import { propTypes, allowedProps } from './props'
+import { error } from '@instructure/console'
 
 /**
 ---
@@ -133,6 +134,23 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
             .date(this.state.iso.date())
             .month(this.state.iso.month())
             .year(this.state.iso.year())
+        }
+        if (this.props.initialTimeForNewDate && !this.state?.timeSelectValue) {
+          const hour = Number(this.props.initialTimeForNewDate.slice(0, 2))
+          const minute = Number(this.props.initialTimeForNewDate.slice(3, 5))
+          if (isNaN(hour) || isNaN(minute)) {
+            error(
+              false,
+              `[DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
+            )
+          } else if (hour < 0 || hour > 23 || minute > 59 || minute < 0) {
+            error(
+              false,
+              `[DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.`
+            )
+          } else {
+            parsed.hour(hour).minute(minute)
+          }
         }
         const newTimeSelectValue = parsed.toISOString()
         if (this.isDisabledDate(parsed)) {
