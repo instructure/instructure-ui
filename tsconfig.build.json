@@ -31,5 +31,5 @@
     // ES2019 is needed so TS recognizes new features like Array.flat
     "lib": ["ES2019", "DOM", "DOM.Iterable"]
   },
-  "exclude": ["node_modules"]
+  "exclude": ["cypress.config.ts", "cypress", "node_modules"]
 }
