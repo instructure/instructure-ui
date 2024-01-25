@@ -61,7 +61,7 @@ type TagOwnProps = {
   /**
    * If you add an onClick prop, Tag renders as a clickable button
    */
-  onClick?: (event: React.MouseEvent<ViewProps>) => void
+  onClick?: (event: React.MouseEvent<ViewProps & Element>) => void
   /**
    * Provides a reference to the underlying html root element
    */

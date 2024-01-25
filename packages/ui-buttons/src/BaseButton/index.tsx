@@ -178,7 +178,7 @@ class BaseButton extends Component<BaseButtonProps> {
     }
   }
 
-  handleClick = (event: React.MouseEvent<ViewProps>) => {
+  handleClick = (event: React.MouseEvent<ViewProps & Element>) => {
     const { onClick } = this.props
     const { interaction } = this
 
@@ -193,7 +193,7 @@ class BaseButton extends Component<BaseButtonProps> {
     }
   }
 
-  handleKeyDown = (event: React.KeyboardEvent<ViewProps>) => {
+  handleKeyDown = (event: React.KeyboardEvent<ViewProps & Element>) => {
     const { onClick, onKeyDown, href } = this.props
     const { interaction } = this
 

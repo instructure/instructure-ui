@@ -76,7 +76,7 @@ class Tag extends Component<TagProps> {
     this.ref && (this.ref as HTMLElement).focus()
   }
 
-  handleClick = (e: React.MouseEvent<ViewProps>) => {
+  handleClick = (e: React.MouseEvent<ViewProps & Element>) => {
     const { disabled, readOnly, onClick } = this.props
 
     if (disabled || readOnly) {

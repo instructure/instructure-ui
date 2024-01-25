@@ -238,7 +238,7 @@ type SimpleSelectProps = PickPropsWithExceptions<
   SimpleSelectOwnProps &
   OtherHTMLAttributes<
     SimpleSelectOwnProps,
-    InputHTMLAttributes<SimpleSelectOwnProps>
+    InputHTMLAttributes<SimpleSelectOwnProps & Element>
   > &
   WithDeterministicIdProps
 

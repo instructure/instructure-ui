@@ -114,7 +114,7 @@ type RangeInputProps =
     WithStyleProps<RangeInputTheme, RangeInputStyle> &
     OtherHTMLAttributes<
       RangeInputOwnProps,
-      InputHTMLAttributes<RangeInputOwnProps>
+      InputHTMLAttributes<RangeInputOwnProps & Element>
     > &
     WithDeterministicIdProps
 

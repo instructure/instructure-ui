@@ -93,14 +93,14 @@ class Day extends Component<CalendarDayProps> {
     return !!role && ['option', 'gridcell'].indexOf(role) > -1
   }
 
-  handleClick = (event: MouseEvent<ViewProps>) => {
+  handleClick = (event: MouseEvent<ViewProps & Element>) => {
     const { onClick, date } = this.props
     if (typeof onClick === 'function') {
       onClick(event, { date })
     }
   }
 
-  handleKeyDown = (event: KeyboardEvent<ViewProps>) => {
+  handleKeyDown = (event: KeyboardEvent<ViewProps & Element>) => {
     const { onKeyDown, date } = this.props
     if (typeof onKeyDown === 'function') {
       onKeyDown(event, { date })

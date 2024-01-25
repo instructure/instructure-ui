@@ -130,7 +130,7 @@ class Billboard extends Component<BillboardProps> {
     )
   }
 
-  handleClick = (e: MouseEvent<ViewProps>): void => {
+  handleClick = (e: MouseEvent<ViewProps & Element>): void => {
     const { readOnly, onClick } = this.props
 
     if (readOnly) {

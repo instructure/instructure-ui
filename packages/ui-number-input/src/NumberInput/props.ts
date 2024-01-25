@@ -186,7 +186,7 @@ type NumberInputProps =
     WithStyleProps<NumberInputTheme, NumberInputStyle> &
     OtherHTMLAttributes<
       NumberInputOwnProps,
-      InputHTMLAttributes<NumberInputOwnProps>
+      InputHTMLAttributes<NumberInputOwnProps & Element>
     > &
     WithDeterministicIdProps
 
