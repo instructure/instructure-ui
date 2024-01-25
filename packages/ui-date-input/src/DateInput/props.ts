@@ -203,7 +203,10 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DateInputProps = DateInputOwnProps &
   WithStyleProps<null, DateInputStyle> &
-  OtherHTMLAttributes<DateInputOwnProps, InputHTMLAttributes<DateInputOwnProps>>
+  OtherHTMLAttributes<
+    DateInputOwnProps,
+    InputHTMLAttributes<DateInputOwnProps & Element>
+  >
 
 type DateInputStyle = ComponentStyle<'dateInput' | 'assistiveText'>
 

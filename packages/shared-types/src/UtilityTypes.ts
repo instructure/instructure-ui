@@ -59,7 +59,9 @@ type CSSShorthandValue<Value extends string> =
  */
 type OtherHTMLAttributes<
   Props,
-  Attributes extends React.HTMLAttributes<Props> = React.AllHTMLAttributes<Props>
+  Attributes extends React.HTMLAttributes<
+    Props & Element
+  > = React.AllHTMLAttributes<Props & Element>
 > = Omit<Attributes, keyof Props | 'dir'> & { dir?: 'ltr' | 'rtl' }
 
 /**

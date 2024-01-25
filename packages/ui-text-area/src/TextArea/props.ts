@@ -122,12 +122,13 @@ type TextAreaProps =
     FormFieldOwnProps,
     'label' | 'inline' | 'id' | 'elementRef'
   > &
-  TextAreaOwnProps &
-  WithStyleProps<TextAreaTheme, TextAreaStyle> &
-  OtherHTMLAttributes<
-    TextAreaOwnProps,
-    TextareaHTMLAttributes<TextAreaOwnProps>
-  > & WithDeterministicIdProps
+    TextAreaOwnProps &
+    WithStyleProps<TextAreaTheme, TextAreaStyle> &
+    OtherHTMLAttributes<
+      TextAreaOwnProps,
+      TextareaHTMLAttributes<TextAreaOwnProps & Element>
+    > &
+    WithDeterministicIdProps
 
 type TextAreaStyle = ComponentStyle<
   'textArea' | 'textAreaLayout' | 'textAreaOutline'

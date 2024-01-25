@@ -262,7 +262,10 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type SelectProps = SelectOwnProps &
   WithStyleProps<SelectTheme, SelectStyle> &
-  OtherHTMLAttributes<SelectOwnProps, InputHTMLAttributes<SelectOwnProps>> &
+  OtherHTMLAttributes<
+    SelectOwnProps,
+    InputHTMLAttributes<SelectOwnProps & Element>
+  > &
   WithDeterministicIdProps
 
 type SelectStyle = ComponentStyle<'select' | 'icon' | 'assistiveText'>

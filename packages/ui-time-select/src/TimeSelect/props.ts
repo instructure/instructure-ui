@@ -51,7 +51,7 @@ type AllowedPropKeys = Readonly<Array<PropKeys>>
 type TimeSelectProps = TimeSelectOwnProps &
   OtherHTMLAttributes<
     TimeSelectOwnProps,
-    InputHTMLAttributes<TimeSelectOwnProps>
+    InputHTMLAttributes<TimeSelectOwnProps & Element>
   > &
   WithDeterministicIdProps
 

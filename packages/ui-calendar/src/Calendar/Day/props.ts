@@ -75,14 +75,20 @@ type CalendarDayOwnProps = {
    * @param {Object} data - additional data
    * @param data.date - the date of the corresponding `<Calendar.Day />`
    */
-  onClick?: (event: MouseEvent<ViewProps>, date: { date: string }) => void
+  onClick?: (
+    event: MouseEvent<ViewProps & Element>,
+    date: { date: string }
+  ) => void
   /**
    * Callback fired on key down.
    * @param {Object} event - the key down event
    * @param {Object} data - additional data
    * @param data.date - the date of the corresponding `<Calendar.Day />`
    */
-  onKeyDown?: (event: KeyboardEvent<ViewProps>, data: { date: string }) => void
+  onKeyDown?: (
+    event: KeyboardEvent<ViewProps & Element>,
+    data: { date: string }
+  ) => void
   /**
    * A ref function for the underlying DOM element.
    */

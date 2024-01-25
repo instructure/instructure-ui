@@ -68,7 +68,7 @@ type RadioInputProps = RadioInputOwnProps &
   WithStyleProps<RadioInputTheme, RadioInputStyle> &
   OtherHTMLAttributes<
     RadioInputOwnProps,
-    InputHTMLAttributes<RadioInputOwnProps>
+    InputHTMLAttributes<RadioInputOwnProps & Element>
   > &
   WithDeterministicIdProps
 
