@@ -1118,7 +1118,7 @@ The `<TopNavBar.Layout>` component has a `desktopConfig` and a `smallViewportCon
 
 Use the brand logo over the primary brand color in front of the brand's name. If there is no brand logo then use the name with darker background.
 
-**Note**: A console warning is thrown if `<TopNavBar.Brand>` is used because it will be removed soon in Instructure UI v9. Please adjust the TopNavBar design in places, where you use it with `<TopNavBar.Brand>`.
+**Note**: A console warning is thrown if the `renderName` prop of `<TopNavBar.Brand>` is used because it will be removed soon in Instructure UI v9. Please adjust the TopNavBar design in places, where you use `renderName` with `<TopNavBar.Brand>`.
 
 ```js
 ---

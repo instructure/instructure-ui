@@ -54,7 +54,11 @@ id: TopNavBar.Brand
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-@deprecated('9', null, 'Please use the updated TopNavBar design.')
+@deprecated(
+  '9',
+  { renderName: true },
+  'Please use the updated TopNavBar design.'
+)
 class TopNavBarBrand extends Component<TopNavBarBrandProps> {
   static readonly componentId = 'TopNavBar.Brand'
   // TODO: add to the docs: making it static on parent and jsdocs parent/module settings, dont export child on its own
