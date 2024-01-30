@@ -43,6 +43,11 @@ import './commands'
 // require('./commands')
 
 import { mount } from 'cypress/react18'
+import React from 'react';
+
+import {CacheProvider} from '@emotion/react'
+import createCache from '@emotion/cache'
+import { ROOT_SELECTOR } from 'cypress/mount-utils'
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
@@ -57,7 +62,17 @@ declare global {
   }
 }
 
-Cypress.Commands.add('mount', mount)
+Cypress.Commands.add('mount', (component, options) => {
+  // Wrap any parent components needed
+  // ie: return mount(<MyProvider>{component}</MyProvider>, options)
+
+  const myCache = createCache({
+    key: 'plugin-cache',
+    container: document.querySelector<HTMLElement>(ROOT_SELECTOR)!
+  })
+
+  return mount(<CacheProvider value={myCache}>{component}</CacheProvider>, options)
+})
 
 // Example use:
 // cy.mount(<MyComponent />)
