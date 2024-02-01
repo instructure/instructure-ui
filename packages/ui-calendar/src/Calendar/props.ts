@@ -85,12 +85,18 @@ type CalendarOwnProps = {
    * Callback fired when the next month button is clicked in the navigation
    * header, requesting to render the next month.
    */
-  onRequestRenderNextMonth?: (e: React.MouseEvent) => void
+  onRequestRenderNextMonth?: (
+    e: React.MouseEvent,
+    requestedMonth: string
+  ) => void
   /**
    * Callback fired when the previous month button is clicked in the navigation
    * header, requesting to render the previous month.
    */
-  onRequestRenderPrevMonth?: (e: React.MouseEvent) => void
+  onRequestRenderPrevMonth?: (
+    e: React.MouseEvent,
+    requestedMonth: string
+  ) => void
   /**
    * Content to render in the navigation header. The recommendation is to include
    * the name of the current rendered month along with the year.
@@ -142,6 +148,10 @@ type CalendarOwnProps = {
    * property or a context property.
    */
   timezone?: string
+  /**
+   * Visible month for the rendered calendar. Formatted as an ISO date string.
+   */
+  visibleMonth?: string
 }
 
 type PropKeys = keyof CalendarOwnProps
@@ -173,7 +183,8 @@ const propTypes: PropValidators<PropKeys> = {
   ),
   role: PropTypes.oneOf(['table', 'listbox']),
   selectedDate: PropTypes.string,
-  timezone: PropTypes.string
+  timezone: PropTypes.string,
+  visibleMonth: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -191,11 +202,12 @@ const allowedProps: AllowedPropKeys = [
   'renderWeekdayLabels',
   'role',
   'selectedDate',
-  'timezone'
+  'timezone',
+  'visibleMonth'
 ]
 
 type CalendarState = {
-  renderedDate: Moment
+  visibleMonth: Moment
   today: Moment
 }
 

@@ -4,6 +4,37 @@ describes: DateInput
 
 The `DateInput` component provides a visual interface for inputting date data.
 
+### Default config
+
+For ease of use in most situations, the `DateInput` component provides a default
+configuration. The default configuration can be overridden by providing props
+to the `DateInput` component.
+
+```javascript
+---
+type: example
+---
+class Example extends React.Component {
+  state = { value: '' }
+
+  render () {
+    return (
+      <DateInput
+        renderLabel="Choose a date"
+        assistiveText="Type a date or use arrow keys to navigate date picker."
+        width="20rem"
+        isInline
+        value={this.state.value}
+        onChange={(e, value)=> this.setState({value:value.value})}
+        invalidDateErrorMessage="Invalid date"
+      />
+    )
+  }
+}
+
+render(<Example />)
+```
+
 ### Composing a DateInput in your Application
 
 `DateInput` uses `Calendar` internally. See [Calendar](#Calendar) for more detailed
@@ -61,6 +92,7 @@ class Example extends React.Component {
   }
 
   handleShowCalendar = (event) => {
+    console.log
     this.setState({ isShowingCalendar: true })
   }
 
@@ -221,7 +253,7 @@ class Example extends React.Component {
         width="20rem"
         isInline
         messages={messages}
-        isShowingCalendar={isShowingCalendar}
+        isShowingCalendar = {this.state.isShowingCalendar}
         onRequestValidateDate={this.handleValidateDate}
         onRequestShowCalendar={this.handleShowCalendar}
         onRequestHideCalendar={this.handleHideCalendar}

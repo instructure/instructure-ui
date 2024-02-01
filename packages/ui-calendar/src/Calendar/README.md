@@ -14,46 +14,39 @@ to the `Calendar` component.
 ---
 type: example
 ---
-<Calendar  locale="hu"/>
+<Calendar/>
 ```
 
 ### Default config with additional props
 
-- ```js
-  class Example extends React.Component {
-    state = {
-      selectedDate: ''
+```js
+---
+type: example
+---
+class Example extends React.Component {
+  state = {
+      selectedDate: "",
+      visibleMonth:"2025-05"
     }
-    render = () => (
-      <Calendar
-        currentDate="2023-12-15"
-        disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
-        selectedDate={this.state.selectedDate}
-        onDateSelected={(date) => {
-          this.setState({ selectedDate: date })
-        }}
-      />
-    )
-  }
-  render(<Example />)
-  ```
 
-- ```js
-  const Example = () => {
-    const [selectedDate, setSelectedDate] = useState('')
-    return (
-      <Calendar
-        currentDate="2023-12-15"
-        disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
-        selectedDate={selectedDate}
-        onDateSelected={(date) => {
-          setSelectedDate(date)
-        }}
-      />
-    )
+  setVisibleMonth = () => {
+    this.setState({visibleMonth: "2028-09"})
   }
-  render(<Example />)
-  ```
+  render = () =>
+<Calendar
+  visibleMonth={this.state.visibleMonth}
+  currentDate="2023-12-15"
+  disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
+  selectedDate={this.state.selectedDate}
+  onRequestRenderNextMonth={(_e, requestedMonth) => this.setState({visibleMonth: requestedMonth})}
+  onRequestRenderPrevMonth={(_e, requestedMonth) => this.setState({visibleMonth: requestedMonth})}
+  onDateSelected={(date)=>{
+    this.setState({selectedDate: date})
+  }}
+/>
+}
+render(<Example />)
+```
 
 ### Composing a Calendar in your Application
 

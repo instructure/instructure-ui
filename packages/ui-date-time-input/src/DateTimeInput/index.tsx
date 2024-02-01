@@ -402,10 +402,6 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   }
 
   renderDays() {
-    if (!this.state.isShowingCalendar) {
-      // this is an expensive function, only execute if the calendar is open
-      return
-    }
     const renderedDate = this.state.renderedDate
     // Sets it to the first local day of the week counting back from the start of the month.
     // Note that first day depends on the locale, e.g. it's Sunday in the US and

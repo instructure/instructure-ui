@@ -154,7 +154,8 @@ const DateTime = {
   isValid,
   toLocaleString,
   getFirstDayOfWeek,
-  getLocalDayNamesOfTheWeek
+  getLocalDayNamesOfTheWeek,
+  momentISOFormat: moment.ISO_8601
 }
 
 export default DateTime
