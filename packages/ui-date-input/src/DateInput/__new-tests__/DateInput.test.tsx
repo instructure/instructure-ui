@@ -27,7 +27,7 @@ import { render, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import DateInput from '../index'
 
-describe('<Calendar />', () => {
+describe('<DateInput />', () => {
   describe('with minimal config', () => {
     it('should render 44 buttons (a calendar) when clicked', async () => {
       const onChange = jest.fn()
@@ -41,8 +41,8 @@ describe('<Calendar />', () => {
           onChange={onChange}
           currentDate="2023-12-23"
           disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
-          disabledDateErrorMessage="disabled cucc"
-          invalidDateErrorMessage="invalid cucc"
+          disabledDateErrorMessage="disabled date"
+          invalidDateErrorMessage="invalid date"
         ></DateInput>
       )
 
@@ -64,10 +64,10 @@ describe('<Calendar />', () => {
           isInline
           value={'2023-11-23'}
           onChange={onChange}
-          currentDate="2023-12-23"
+          currentDate="2023-11-25"
           disabledDates={['2023-12-22', '2023-12-12', '2023-12-11']}
-          disabledDateErrorMessage="disabled cucc"
-          invalidDateErrorMessage="invalid cucc"
+          disabledDateErrorMessage="disabled date"
+          invalidDateErrorMessage="invalid date"
         ></DateInput>
       )
 

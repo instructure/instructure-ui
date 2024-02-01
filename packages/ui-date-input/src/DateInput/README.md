@@ -92,7 +92,6 @@ class Example extends React.Component {
   }
 
   handleShowCalendar = (event) => {
-    console.log
     this.setState({ isShowingCalendar: true })
   }
 
