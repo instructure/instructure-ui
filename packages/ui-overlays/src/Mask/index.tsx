@@ -39,6 +39,7 @@ import generateComponentTheme from './theme'
 
 import type { MaskProps } from './props'
 import { allowedProps, propTypes } from './props'
+import MaskCounter from './MaskCounter'
 
 /**
 ---
@@ -63,6 +64,7 @@ class Mask extends Component<MaskProps> {
 
     if (this.props.fullscreen) {
       noScroll.on()
+      MaskCounter.incrementCounter()
     }
   }
 
@@ -72,7 +74,10 @@ class Mask extends Component<MaskProps> {
 
   componentWillUnmount() {
     if (this.props.fullscreen) {
-      noScroll.off()
+      MaskCounter.decrementCounter()
+      if (MaskCounter.getCounter() <= 0) {
+        noScroll.off()
+      }
     }
   }
 
