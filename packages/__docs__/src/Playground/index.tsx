@@ -88,9 +88,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
 
   componentDidUpdate(_prevProps: PlaygroundProps, prevState: PlaygroundState) {
     if (prevState.fullscreen === true && this.state.fullscreen === false) {
-      ;(
-        ReactDOM.findDOMNode(this._fullScreenButton) as HTMLButtonElement
-      ).focus() // eslint-disable-line react/no-find-dom-node
+      this._fullScreenButton?.focus()
     }
 
     this.props.makeStyles?.()
@@ -276,7 +274,13 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                     onClick={this.handleMinimize}
                     screenReaderLabel="Close"
                   />
-                  {this.renderTabPanel(themeKey, themes)}
+                  {this.mutliExample()
+                    ? this.renderTabPanel(themeKey, themes)
+                    : this.renderPreview(
+                        this.state.code as string,
+                        themeKey,
+                        themes
+                      )}
                 </Modal.Body>
               </Modal>
             ) : this.mutliExample() ? (
