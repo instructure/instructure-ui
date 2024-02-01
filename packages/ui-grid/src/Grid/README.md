@@ -222,7 +222,7 @@ to the right.
 
 ```js
 ---
-example: true
+type: example
 ---
   <Grid startAt="medium" vAlign="middle" colSpacing="none">
     <Grid.Row>

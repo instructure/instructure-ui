@@ -45,7 +45,7 @@ components. In most cases it shouldn't be used directly.
 
 ```js
 ---
-example: true
+type: example
 ---
 <FormFieldMessage variant="error">Invalid value</FormFieldMessage>
 ```

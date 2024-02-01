@@ -2,7 +2,7 @@
 describes: PresentationContent
 ---
 
-A component that *tries* to hide itself from screen readers, absolutely
+A component that _tries_ to hide itself from screen readers, absolutely
 expecting that you're providing a more accessible version of the resource
 using something like a ScreenReaderContent component.
 
@@ -16,7 +16,7 @@ Use of this component is discouraged unless there's no alternative
 
 ```js
 ---
-example: true
+type: example
 ---
 <PresentationContent>
   <Text>

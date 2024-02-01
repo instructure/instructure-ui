@@ -6,8 +6,7 @@ The `<Portal/>` component allows you to render a subtree into a DOM element.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
