@@ -8,7 +8,7 @@ The content should be descriptive enough that a screen reader user gets the gist
 
 ```js
 ---
-example: true
+type: example
 ---
 <AccessibleContent alt="Alternative text for a screen reader only">
   <Text>

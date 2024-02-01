@@ -100,7 +100,7 @@ img { opacity: 0.5; filter: alpha(opacity=50); }`,
 *Everything* is going according to **plan**.
 
 ---
-example: true
+type: example
 ---`,
   shell: `#!/bin/bash
 

@@ -8,7 +8,7 @@ a `render` or `children` method that returns content which must have exactly one
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <Focusable>
   {(options) => {
@@ -39,7 +39,7 @@ Easily implement a "skip to content" link for keyboard-only or screenreader user
 
 ```javascript
 ---
-example: true
+type: example
 ---
 <Focusable>
 {({ focused }) => {

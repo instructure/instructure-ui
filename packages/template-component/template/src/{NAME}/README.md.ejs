@@ -1,21 +1,22 @@
 ---
 describes: <%= NAME %>
----
+  ---
 
-A `<%= NAME %>` component [WIP]
+  A `<%= NAME %>` component [WIP]
 
-```js
----
-example: true
-render: false
----
-class Example extends React.Component {
-  render() {
+    ```js
+    ---
+    type: example
+    ---
+    class Example extends React.Component {
+    render() {
     return (
-      <<%= NAME %>>Hello from <%= NAME %></<%= NAME %>>
+    <<%= NAME %>>Hello from <%= NAME %>
+    </<%= NAME %>>
     )
-  }
-}
+    }
+    }
 
-render(<Example />)
-```
+    render(
+    <Example />)
+    ```

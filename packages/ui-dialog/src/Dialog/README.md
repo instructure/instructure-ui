@@ -7,36 +7,84 @@ The `Dialog` component is a utility that is used by
 
 Elements outside of the `Dialog` are hidden from screen readers automatically when `shouldContainFocus` is set to `true` or `screenreader`. The `liveRegion` prop can be used to specify any elements that should not be hidden.
 
-```js
----
-example: true
-render: false
----
-class Example extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = { open: false }
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = { open: false }
+    }
+
+    render() {
+      return (
+        <View as="div" padding="large">
+          <Button onClick={() => this.setState({ open: true })}>
+            Open the Dialog
+          </Button>
+          <Portal open={this.state.open}>
+            <Mask>
+              <Dialog
+                open={this.state.open}
+                shouldContainFocus
+                defaultFocusElement={() => this._firstName}
+                shouldReturnFocus
+                onDismiss={() => this.setState({ open: false })}
+              >
+                <View
+                  as="div"
+                  maxWidth="40rem"
+                  maxHeight="30rem"
+                  background="primary"
+                  shadow="above"
+                  style={{ position: 'relative' }}
+                  padding="medium"
+                >
+                  <CloseButton
+                    placement="end"
+                    onClick={() => this.setState({ open: false })}
+                    screenReaderLabel="Close"
+                  />
+                  <FormFieldGroup
+                    description={
+                      <Heading level="h4" as="span">
+                        Full name
+                      </Heading>
+                    }
+                    layout="columns"
+                  >
+                    <TextInput
+                      width="12rem"
+                      renderLabel="First"
+                      inputRef={(c) => (this._firstName = c)}
+                    />
+                    <TextInput width="12rem" renderLabel="Last" />
+                  </FormFieldGroup>
+                </View>
+              </Dialog>
+            </Mask>
+          </Portal>
+        </View>
+      )
+    }
   }
 
-  render () {
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [open, setOpen] = useState(false)
+
     return (
-      <View
-        as="div"
-        padding="large"
-      >
-        <Button
-          onClick={() => this.setState({ open: true })}
-        >
-          Open the Dialog
-        </Button>
-        <Portal open={this.state.open}>
+      <View as="div" padding="large">
+        <Button onClick={() => setOpen(true)}>Open the Dialog</Button>
+        <Portal open={open}>
           <Mask>
             <Dialog
-              open={this.state.open}
+              open={open}
               shouldContainFocus
               defaultFocusElement={() => this._firstName}
               shouldReturnFocus
-              onDismiss={() => this.setState({ open: false })}
+              onDismiss={() => setOpen(false)}
             >
               <View
                 as="div"
@@ -44,19 +92,27 @@ class Example extends React.Component {
                 maxHeight="30rem"
                 background="primary"
                 shadow="above"
-                style={{position: 'relative'}}
+                style={{ position: 'relative' }}
                 padding="medium"
               >
                 <CloseButton
                   placement="end"
-                  onClick={() => this.setState({ open: false })}
+                  onClick={() => setOpen(false)}
                   screenReaderLabel="Close"
                 />
                 <FormFieldGroup
-                  description={<Heading level="h4" as="span">Full name</Heading>}
+                  description={
+                    <Heading level="h4" as="span">
+                      Full name
+                    </Heading>
+                  }
                   layout="columns"
                 >
-                  <TextInput width="12rem" renderLabel="First" inputRef={(c) => this._firstName = c} />
+                  <TextInput
+                    width="12rem"
+                    renderLabel="First"
+                    inputRef={(c) => (this._firstName = c)}
+                  />
                   <TextInput width="12rem" renderLabel="Last" />
                 </FormFieldGroup>
               </View>
@@ -66,16 +122,15 @@ class Example extends React.Component {
       </View>
     )
   }
-}
 
-render(<Example />)
-```
+  render(<Example />)
+  ```
 
 ### Guidelines
 
 ```js
 ---
-guidelines: true
+type: embed
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">

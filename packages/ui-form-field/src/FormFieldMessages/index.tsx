@@ -46,7 +46,7 @@ A FormFieldMessages component
 
 ```js
 ---
-example: true
+type: example
 ---
 <FormFieldMessages messages={[
   { text: 'Invalid name', type: 'error' },

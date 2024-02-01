@@ -19,8 +19,7 @@ utility function.
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 const fpo = lorem.sentence()
 class Example extends React.Component {
@@ -114,8 +113,7 @@ The `mountNode` prop renders the positioned content inside the configured elemen
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 
 const fpo = lorem.sentence()
@@ -229,8 +227,7 @@ render(<Example />)
 
 ```js
 ---
-render: false
-example: true
+type: example
 ---
 const fpo = lorem.paragraphs(7)
 

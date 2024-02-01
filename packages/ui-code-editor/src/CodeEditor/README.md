@@ -6,7 +6,7 @@ A wrapper around the popular [CodeMirror](https://codemirror.net/5/index.html) t
 
 ```javascript
 ---
-embed: true
+type: embed
 ---
 <ToggleBlockquote
   summary="Upgrade to SourceCodeEditor!"
@@ -29,8 +29,7 @@ The CodeEditor component can be used to display code via the `defaultValue` prop
 
 ```js
 ---
-example: true
-render: false
+type: example
 ---
 class Example extends React.Component {
   constructor (props) {
@@ -76,6 +75,9 @@ If you are testing a component that utilizes `CodeEditor` as a sub component wit
 `CodeMirror` depends on specific browser API - `document.createRange` -, and since `document.createRange` is not defined in `jsdom`, we have to mock it in order to fix the failing test(s):
 
 ```js
+---
+type: code
+---
 ...
 // yourFailingComponent.test.js
 beforeAll(() => {

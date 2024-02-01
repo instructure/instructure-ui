@@ -7,7 +7,7 @@ screen readers, but is not visible.
 
 ```js
 ---
-example: true
+type: example
 ---
 <ScreenReaderContent>
   This content is not visible.

@@ -143,7 +143,7 @@ By default only avatars without an image have borders but you can force it to `a
 
 ```js
 ---
-example: true
+type: example
 ---
 <div>
   <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" showBorder="always"/>
