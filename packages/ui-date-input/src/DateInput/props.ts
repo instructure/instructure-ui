@@ -132,9 +132,14 @@ type DateInputOwnProps = {
   /**
    * Callback fired when the input is blurred. Feedback should be provided
    * to the user when this function is called if the selected date or input
-   * value is not valid.
+   * value is not valid. The component calculates date validity and if it's
+   * disabled or nor and passes that information to this callback.
    */
-  onRequestValidateDate?: (event: SyntheticEvent) => void
+  onRequestValidateDate?: (
+    event: SyntheticEvent,
+    dateString?: string,
+    validation?: FormMessage[]
+  ) => void | FormMessage[]
   /**
    * Callback fired requesting the calendar be shown.
    */
@@ -175,7 +180,7 @@ type DateInputOwnProps = {
    * full day name for assistive technologies and the children containing the
    * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
    */
-  renderWeekdayLabels: (React.ReactNode | (() => React.ReactNode))[]
+  renderWeekdayLabels?: (React.ReactNode | (() => React.ReactNode))[]
   /**
    * A button to render in the calendar navigation header. The recommendation is
    * to compose it with the [Button](#Button) component, setting the `variant`
@@ -195,6 +200,56 @@ type DateInputOwnProps = {
    * weeks).
    */
   children?: ReactElement<CalendarDayProps>[] // TODO: oneOf([Calendar.Day])
+  /*
+   * Specify which date(s) will be shown as disabled in the calendar.
+   * You can either supply an array of ISO8601 timeDate strings or
+   * a function that will be called for each date shown in the calendar.
+   */
+  disabledDates?: string[] | ((isoDateToCheck: string) => boolean)
+  /**
+   * ISO date string for the current date if necessary. Defaults to the current
+   * date in the user's timezone.
+   */
+  currentDate?: string
+  /**
+   * The message shown to the user when the data is invalid.
+   * If a string, shown to the user anytime the input is invalid.
+   *
+   * If a function, receives a single parameter:
+   * - *rawDateValue*: the string entered as a date by the user.
+   **/
+  invalidDateErrorMessage?: string | ((rawDateValue: string) => FormMessage)
+  /**
+   * Error message shown to the user if they enter a date that is disabled.
+   * If not specified the component will show the `invalidDateTimeMessage`.
+   */
+  disabledDateErrorMessage?: string | ((rawDateValue: string) => FormMessage)
+  /**
+   * A standard language identifier.
+   *
+   * See [Moment.js](https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/) for
+   * more details.
+   *
+   * This property can also be set via a context property and if both are set
+   * then the component property takes precedence over the context property.
+   *
+   * The web browser's locale will be used if no value is set via a component
+   * property or a context property.
+   **/
+  locale?: string
+  /**
+   * A timezone identifier in the format: *Area/Location*
+   *
+   * See [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the list
+   * of possible options.
+   *
+   * This property can also be set via a context property and if both are set
+   * then the component property takes precedence over the context property.
+   *
+   * The web browser's timezone will be used if no value is set via a component
+   * property or a context property.
+   **/
+  timezone?: string
 }
 
 type PropKeys = keyof DateInputOwnProps
@@ -238,10 +293,22 @@ const propTypes: PropValidators<PropKeys> = {
   renderNavigationLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   renderWeekdayLabels: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.func, PropTypes.node])
-  ).isRequired,
+  ),
   renderNextMonthButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   renderPrevMonthButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  children: ChildrenPropTypes.oneOf([Calendar.Day])
+  children: ChildrenPropTypes.oneOf([Calendar.Day]),
+  disabledDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
+  currentDate: PropTypes.string,
+  disabledDateErrorMessage: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string
+  ]),
+  invalidDateErrorMessage: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string
+  ]),
+  locale: PropTypes.string,
+  timezone: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -273,8 +340,21 @@ const allowedProps: AllowedPropKeys = [
   'renderWeekdayLabels',
   'renderNextMonthButton',
   'renderPrevMonthButton',
-  'children'
+  'children',
+  'disabledDates',
+  'currentDate',
+  'disabledDateErrorMessage',
+  'invalidDateErrorMessage',
+  'locale',
+  'timezone'
 ]
 
-export type { DateInputProps, DateInputStyle }
+type DateInputState = {
+  hasInputRef: boolean
+  isShowingCalendar: boolean
+  validatedDate?: string
+  messages: FormMessage[]
+}
+
+export type { DateInputProps, DateInputStyle, DateInputState }
 export { propTypes, allowedProps }

@@ -109,7 +109,8 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
     const isUpdated =
       prevProps.locale !== this.props.locale ||
-      prevProps.timezone !== this.props.timezone
+      prevProps.timezone !== this.props.timezone ||
+      prevProps.visibleMonth !== this.props.visibleMonth
 
     if (isUpdated) {
       this.setState(() => {
@@ -124,18 +125,18 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
   }
 
-  calculateState = (
-    locale: string,
-    timezone: string,
-    currentDate?: string
-  ) => ({
-    renderedDate: currentDate
-      ? DateTime.parse(currentDate, locale, timezone)
-      : DateTime.now(locale, timezone),
-    today: currentDate
-      ? DateTime.parse(currentDate, locale, timezone)
-      : DateTime.now(locale, timezone)
-  })
+  calculateState = (locale: string, timezone: string, currentDate?: string) => {
+    const visibleMonth = this.props.visibleMonth || currentDate
+
+    return {
+      visibleMonth: visibleMonth
+        ? DateTime.parse(visibleMonth, locale, timezone)
+        : DateTime.now(locale, timezone),
+      today: currentDate
+        ? DateTime.parse(currentDate, locale, timezone)
+        : DateTime.now(locale, timezone)
+    }
+  }
 
   get role() {
     return this.props.role === 'listbox' ? this.props.role : undefined
@@ -172,27 +173,33 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
   handleMonthChange = (direction: 'prev' | 'next') => (e: React.MouseEvent) => {
     const { onRequestRenderNextMonth, onRequestRenderPrevMonth } = this.props
-    const { renderedDate } = this.state
-    const newDate = renderedDate.clone()
+    const { visibleMonth } = this.state
+    const newDate = visibleMonth.clone()
     if (direction === 'prev') {
       if (onRequestRenderPrevMonth) {
-        onRequestRenderPrevMonth(e)
+        onRequestRenderPrevMonth(
+          e,
+          newDate.subtract({ months: 1 }).format('YYYY-MM')
+        )
         return
       }
       newDate.subtract({ months: 1 })
     } else {
       if (onRequestRenderNextMonth) {
-        onRequestRenderNextMonth(e)
+        onRequestRenderNextMonth(
+          e,
+          newDate.add({ months: 1 }).format('YYYY-MM')
+        )
         return
       }
       newDate.add({ months: 1 })
     }
-    this.setState({ renderedDate: newDate })
+    this.setState({ visibleMonth: newDate })
   }
 
   renderHeader() {
     const { renderNavigationLabel, styles } = this.props
-    const { renderedDate } = this.state
+    const { visibleMonth } = this.state
     const { prevButton, nextButton } = this.renderMonthNavigationButtons()
 
     const cloneButton = (
@@ -218,8 +225,8 @@ class Calendar extends Component<CalendarProps, CalendarState> {
           callRenderProp(renderNavigationLabel)
         ) : (
           <span>
-            <div>{renderedDate.format('MMMM')}</div>
-            <div>{renderedDate.format('YYYY')}</div>
+            <div>{visibleMonth.format('MMMM')}</div>
+            <div>{visibleMonth.format('YYYY')}</div>
           </span>
         )}
         {nextButton && cloneButton(nextButton, this.handleMonthChange('next'))}
@@ -376,12 +383,12 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
   renderDefaultdays() {
     const { selectedDate } = this.props
-    const { renderedDate, today } = this.state
+    const { visibleMonth, today } = this.state
     // Sets it to the first local day of the week counting back from the start of the month.
     // Note that first day depends on the locale, e.g. it's Sunday in the US and
     // Monday in most of the EU.
     const currDate = DateTime.getFirstDayOfWeek(
-      renderedDate.clone().startOf('month')
+      visibleMonth.clone().startOf('month')
     )
     const arr: Moment[] = []
     for (let i = 0; i < Calendar.DAY_COUNT; i++) {
@@ -396,7 +403,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
           date={dateStr}
           isSelected={selectedDate ? date.isSame(selectedDate, 'day') : false}
           isToday={date.isSame(today, 'day')}
-          isOutsideMonth={!date.isSame(renderedDate, 'month')}
+          isOutsideMonth={!date.isSame(visibleMonth, 'month')}
           label={date.format('D MMMM YYYY')} // used by screen readers
           onClick={this.handleDayClick}
           interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}

@@ -45,12 +45,15 @@ import {
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
+import { DateTime, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
+
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
 import { propTypes, allowedProps } from './props'
-import type { DateInputProps } from './props'
+import type { DateInputProps, DateInputState } from './props'
+import type { FormMessage } from '@instructure/ui-form-field'
 
 /**
 ---
@@ -61,9 +64,10 @@ See <https://instructure.design/#DateInput/>
 **/
 @withStyle(generateStyle, null)
 @testable()
-class DateInput extends Component<DateInputProps> {
+class DateInput extends Component<DateInputProps, DateInputState> {
   static readonly componentId = 'DateInput'
   static Day = Calendar.Day
+  declare context: React.ContextType<typeof ApplyLocaleContext>
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
@@ -78,9 +82,32 @@ class DateInput extends Component<DateInputProps> {
     isShowingCalendar: false
   }
 
-  state = { hasInputRef: false }
+  state = {
+    hasInputRef: false,
+    isShowingCalendar: false,
+    validatedDate: undefined,
+    messages: []
+  }
   _input?: HTMLInputElement | null = undefined
   ref: Element | null = null
+
+  locale(): string {
+    if (this.props.locale) {
+      return this.props.locale
+    } else if (this.context && this.context.locale) {
+      return this.context.locale
+    }
+    return Locale.browserLocale()
+  }
+
+  timezone() {
+    if (this.props.timezone) {
+      return this.props.timezone
+    } else if (this.context && this.context.timezone) {
+      return this.context.timezone
+    }
+    return DateTime.browserTimeZone()
+  }
 
   componentDidMount() {
     this.props.makeStyles?.()
@@ -127,23 +154,139 @@ class DateInput extends Component<DateInputProps> {
   }
 
   handleShowCalendar = (event: React.SyntheticEvent) => {
-    if (this.interaction === 'enabled') {
+    if (!this.props.children) {
+      this.setState({ isShowingCalendar: true })
+    } else if (this.interaction === 'enabled' && this.props.children) {
       this.props.onRequestShowCalendar?.(event)
     }
   }
 
-  handleHideCalendar = (event: React.SyntheticEvent) => {
-    this.props.onRequestValidateDate?.(event)
-    this.props.onRequestHideCalendar?.(event)
+  validateDate = (date: string) => {
+    const { invalidDateErrorMessage } = this.props
+    const disabledDateErrorMessage =
+      this.props.disabledDateErrorMessage || invalidDateErrorMessage
+    const messages: FormMessage[] = []
+    // check if date is enabled
+    const { disabledDates } = this.props
+    if (
+      (typeof disabledDates === 'function' && disabledDates(date)) ||
+      (Array.isArray(disabledDates) &&
+        disabledDates.find((dateString) =>
+          DateTime.parse(dateString, this.locale(), this.timezone()).isSame(
+            DateTime.parse(date, this.locale(), this.timezone()),
+            'day'
+          )
+        ))
+    ) {
+      messages.push(
+        typeof disabledDateErrorMessage === 'function'
+          ? disabledDateErrorMessage(date)
+          : { type: 'error', text: disabledDateErrorMessage }
+      )
+    }
+
+    // check if date is valid
+    if (
+      !DateTime.parse(
+        date,
+        this.locale(),
+        this.timezone(),
+        [
+          DateTime.momentISOFormat,
+          'llll',
+          'LLLL',
+          'lll',
+          'LLL',
+          'll',
+          'LL',
+          'l',
+          'L'
+        ],
+        true
+      ).isValid()
+    ) {
+      messages.push(
+        typeof invalidDateErrorMessage === 'function'
+          ? invalidDateErrorMessage(date)
+          : { type: 'error', text: invalidDateErrorMessage }
+      )
+    }
+
+    return messages
+  }
+
+  handleHideCalendar = (event: React.SyntheticEvent, setectedDate?: string) => {
+    if (!this.props.children) {
+      const dateString = setectedDate || this.props.value
+      const messages: FormMessage[] = []
+      if (this.props.onRequestValidateDate) {
+        const userValidatedDate = this.props.onRequestValidateDate?.(
+          event,
+          dateString || '',
+          this.validateDate(dateString || '')
+        )
+        messages.push(...(userValidatedDate || []))
+      } else {
+        if (dateString) {
+          messages.push(...this.validateDate(dateString))
+        }
+      }
+      this.setState({ messages, isShowingCalendar: false })
+    } else {
+      this.props.onRequestValidateDate?.(event)
+      this.props.onRequestHideCalendar?.(event)
+    }
   }
 
   handleHighlightOption: SelectableProps['onRequestHighlightOption'] = (
     event,
     { direction }
   ) => {
-    const { onRequestSelectNextDay, onRequestSelectPrevDay } = this.props
-    if (direction === -1) onRequestSelectPrevDay?.(event)
-    if (direction === 1) onRequestSelectNextDay?.(event)
+    const {
+      onRequestSelectNextDay,
+      onRequestSelectPrevDay,
+      onChange,
+      value,
+      currentDate
+    } = this.props
+
+    const isValueValid =
+      value && DateTime.parse(value, this.locale(), this.timezone()).isValid()
+
+    if (direction === -1) {
+      if (onRequestSelectPrevDay) {
+        onRequestSelectPrevDay?.(event)
+      } else {
+        // @ts-expect-error TODO
+        onChange(event, {
+          value: DateTime.parse(
+            isValueValid ? value : currentDate!,
+            this.locale(),
+            this.timezone()
+          )
+            .subtract(1, 'day')
+            .format('MMMM D, YYYY')
+        })
+        this.setState({ messages: [] })
+      }
+    }
+    if (direction === 1) {
+      if (onRequestSelectNextDay) {
+        onRequestSelectNextDay?.(event)
+      } else {
+        // @ts-expect-error TODO
+        onChange(event, {
+          value: DateTime.parse(
+            isValueValid ? value : currentDate!,
+            this.locale(),
+            this.timezone()
+          )
+            .add(1, 'day')
+            .format('MMMM D, YYYY')
+        })
+        this.setState({ messages: [] })
+      }
+    }
   }
 
   renderMonthNavigationButton(type = 'prev') {
@@ -155,7 +298,7 @@ class DateInput extends Component<DateInputProps> {
 
   renderDays(getOptionProps: SelectableRender['getOptionProps']) {
     const children = this.props.children as ReactElement<CalendarDayProps>[]
-
+    if (!children) return
     return Children.map(children, (day) => {
       const { date, isOutsideMonth } = day.props
       const props = { tabIndex: -1, id: this.formatDateId(date) }
@@ -184,8 +327,39 @@ class DateInput extends Component<DateInputProps> {
       onRequestRenderNextMonth,
       onRequestRenderPrevMonth,
       renderNavigationLabel,
-      renderWeekdayLabels
+      renderWeekdayLabels,
+      value,
+      onChange,
+      disabledDates,
+      currentDate
     } = this.props
+
+    const isValidDate = value
+      ? DateTime.parse(value, this.locale(), this.timezone()).isValid()
+      : false
+
+    const noChildrenProps = this.props.children
+      ? {}
+      : {
+          disabledDates,
+          currentDate,
+          selectedDate: isValidDate ? value : undefined,
+          visibleMonth: isValidDate ? value : undefined,
+          onDateSelected: (
+            dateString: string,
+            momentDate: any,
+            e: React.MouseEvent
+          ) => {
+            // @ts-expect-error TODO
+            onChange?.(e, {
+              value: `${momentDate.format('MMMM')} ${momentDate.format(
+                'D'
+              )}, ${momentDate.format('YYYY')}`
+            })
+            this.handleHideCalendar(e, dateString)
+          }
+        }
+
     return (
       <Calendar
         {...(getListProps({
@@ -196,6 +370,7 @@ class DateInput extends Component<DateInputProps> {
           renderNextMonthButton: this.renderMonthNavigationButton('next'),
           renderPrevMonthButton: this.renderMonthNavigationButton('prev')
         }) as CalendarProps)}
+        {...noChildrenProps}
       >
         {this.renderDays(getOptionProps)}
       </Calendar>
@@ -219,7 +394,6 @@ class DateInput extends Component<DateInputProps> {
       isInline,
       layout,
       width,
-      messages,
       onRequestValidateDate,
       onRequestShowCalendar,
       onRequestHideCalendar,
@@ -236,7 +410,7 @@ class DateInput extends Component<DateInputProps> {
       ref, // Apply this to the actual inputRef
       ...triggerProps
     } = getTriggerProps()
-
+    const messages = this.props.messages || this.state.messages
     return (
       <TextInput
         {...triggerProps}
@@ -257,20 +431,34 @@ class DateInput extends Component<DateInputProps> {
           display: isInline ? 'inline-block' : 'block',
           renderAfterInput: <IconCalendarMonthLine inline={false} />
         })}
+        onKeyDown={(e) => {
+          if (!this.props.children) {
+            if (e.key === 'Enter') {
+              // @ts-expect-error TODO
+              this.handleHideCalendar(e)
+            }
+          }
+          triggerProps.onKeyDown?.(e)
+        }}
       />
     )
   }
 
-  render() {
-    const { placement, isShowingCalendar, assistiveText, styles } = this.props
+  shouldShowCalendar = () =>
+    this.props.children
+      ? this.props.isShowingCalendar
+      : this.state.isShowingCalendar
 
+  render() {
+    const { placement, assistiveText, styles } = this.props
+    const isShowingCalendar = this.shouldShowCalendar()
     return (
       <Selectable
         isShowingOptions={isShowingCalendar}
         onRequestShowOptions={this.handleShowCalendar}
         onRequestHideOptions={this.handleHideCalendar}
         onRequestHighlightOption={this.handleHighlightOption}
-        onRequestSelectOption={this.handleHideCalendar}
+        onRequestSelectOption={(e) => this.handleHideCalendar(e)}
         selectedOptionId={this.selectedDateId}
         highlightedOptionId={this.selectedDateId}
       >
