@@ -75,14 +75,12 @@ type: example
 type: embed
 ---
 <Guidelines>
-  <Figure recommendation="yes" title="Do">
-    <Figure.Item>Use all capital letters</Figure.Item>
-  </Figure>
   <Figure recommendation="no" title="Don't">
-    <Figure.Item>Use more than 2 words</Figure.Item>
+    <Figure.Item>Use more than 2 words for the main text</Figure.Item>
+    <Figure.Item>Use more than 2 words for the statusLabel</Figure.Item>
     <Figure.Item>Use for dismissible items (use a <Link href="/#Tag">Tag</Link> instead)</Figure.Item>
     <Figure.Item>Use for counts (use a <Link href="/#Badge">Badge</Link> instead)</Figure.Item>
-    <Figure.Item>Put icons or actions next to the text</Figure.Item>
+    <Figure.Item>Put actions next to the text</Figure.Item>
   </Figure>
 </Guidelines>
 ```
