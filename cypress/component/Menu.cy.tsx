@@ -87,8 +87,8 @@ describe('<Menu/>', () => {
         const offsetTransform = getComputedStyle($menu[0]).transform
         const { transformX: offsetTransformX, transformY: offsetTransformY } = getTransforms(offsetTransform)
 
-        expect(offsetTransformX).to.equal(18)
-        expect(offsetTransformY).to.equal(59)
+        cy.wrap(offsetTransformX).should('equal', 18)
+        cy.wrap(offsetTransformY).should('equal', 59)
       })
   })
 
@@ -138,7 +138,7 @@ describe('<Menu/>', () => {
                     transformX: newTransformX,
                     transformY: newTransformY
                   } = getTransforms(newTransform)
-
+                  // use wrap instead
                   expect(newTransformX).to.equal(defaultTransformX + 10)
                   expect(newTransformY).to.equal(defaultTransformY + 30)
                 })
