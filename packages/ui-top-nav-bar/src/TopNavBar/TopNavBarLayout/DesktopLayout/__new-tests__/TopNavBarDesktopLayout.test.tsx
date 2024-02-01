@@ -147,7 +147,7 @@ describe('<TopNavBarDesktopLayout />', () => {
       expect(crumb2).not.toBeInTheDocument()
       expect(crumb3).not.toBeInTheDocument()
       expect(consoleMock.mock.calls[0][0]).toEqual(
-        'Warning: [TopNavBarBrand] is deprecated and will be removed in version 9. Please use the updated TopNavBar design.'
+        'Warning: [TopNavBarBrand] `renderName` is deprecated and will be removed in version 9. Please use the updated TopNavBar design.'
       )
     })
 
