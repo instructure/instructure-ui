@@ -118,6 +118,7 @@ class Editable extends Component<EditableProps> {
 
   handleEditESC = (event: React.KeyboardEvent) => {
     if (event.key === 'Escape') {
+      event.stopPropagation()
       this.enterView()
     }
   }
