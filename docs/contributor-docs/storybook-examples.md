@@ -1,7 +1,7 @@
 ---
 title: Storybook example generation
-category: Guides
-order: 7
+category: Contributor Guides
+order: 8
 ---
 
 ## Storybook example generation
@@ -18,22 +18,6 @@ From the root of the `instructure-ui` repo:
 1. Run `npm install`
 1. Run `npm run dev:examples`
 1. [http://localhost:9090](http://localhost:9090) should open automatically in your browser
-
-### Sketch Asset Generation
-
-[Sketch](https://www.sketchapp.com/) assets for each component can be generated from the component examples that are
-displayed in the examples app.
-
-In order to import the components into Sketch, you'll need to first install the `asketch2sketch.sketchplugin` by
-downloading [html-sketchapp](https://github.com/brainly/html-sketchapp/archive/master.zip) and copying the
-`asketch2sketch.sketchplugin` file into your Sketch `Plugins` directory.
-
-Then to generate the Sketch assets:
-
-1. Run `npm run start:examples` to spin up the examples app on [localhost:9001](http://localhost:9001)
-1. Run `npm run generate:sketch` to generate a `stories.asketch.json` file.
-1. Once in Sketch, open the "Plugins" menu, select "From _Almost_ Sketch to Sketch", and select the
-   `packages/__examples__/stories.asketch.json` file.
 
 ### Configuring examples
 
@@ -54,6 +38,9 @@ Given a configuration object, `generateComponentExamples` returns an array of ge
 ##### Example config
 
 ```js
+---
+type: code
+---
 export default {
   sectionProp: 'variant',
   maxExamplesPerPage: 50,
@@ -97,6 +84,9 @@ Specifies the max number of examples that can exist in a single page within a se
 example:
 
 ```js
+---
+type: code
+---
 // providing a number
 maxExamplesPerPage: 50
 
@@ -136,6 +126,9 @@ value array. This array contains possible values for that prop.
 example:
 
 ```js
+---
+type: code
+---
 propValues: {
  variant: ['circular', 'rectangular'],
  placement: ['top', 'bottom', 'start', 'end'],
@@ -154,6 +147,9 @@ Prop keys to exclude from `propValues`. Useful when generating `propValues` with
 example:
 
 ```js
+---
+type: code
+---
 excludeProps: ['readOnly', 'disabled']
 ```
 
@@ -169,6 +165,9 @@ of props that will be passed into the `renderExample` function as `componentProp
 example:
 
 ```js
+---
+type: code
+---
 getComponentProps: (props) => ({
   // Change the size prop passed to the component based on the value of
   // `variant` in the current prop combination
@@ -200,6 +199,9 @@ of props that will be passed into the `renderExample` function as `exampleProps`
 example:
 
 ```js
+---
+type: code
+---
 getExampleProps: (props) => ({
   // Change the height prop passed to the example based on the value of
   // `placement` in the current prop combination
@@ -231,6 +233,9 @@ of parameters/meta data for that page of examples (e.g. to be passed in to a vis
 example:
 
 ```js
+---
+type: code
+---
 getParameters: ({ examples, index }) => ({
   // add a delay for the first page of examples only:
   return index === 1 ? { delay: 200 } : {}
@@ -261,6 +266,9 @@ is not generated.
 example:
 
 ```js
+---
+type: code
+---
 filter: (props) => {
   return (
     props.type !== 'button' ||
