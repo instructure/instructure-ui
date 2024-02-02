@@ -109,7 +109,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
     }
   }
 
-  mutliExample = () => typeof this.props.code !== 'string'
+  multiExample = () => typeof this.props.code !== 'string'
 
   handleCodeToggle = () => {
     this.setState({
@@ -131,7 +131,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
 
   handleChange = (newCode: string) => {
     let code: string | [string, string] = newCode
-    if (this.mutliExample()) {
+    if (this.multiExample()) {
       const codeArr = [...this.state.code] as [string, string]
       codeArr[this.state.selectedTab] = newCode
       code = codeArr
@@ -151,7 +151,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
   renderEditor() {
     const { styles, title, readOnly } = this.props
     const { selectedTab } = this.state
-    const code = this.mutliExample()
+    const code = this.multiExample()
       ? this.state.code[selectedTab]
       : this.state.code
     return (
@@ -274,7 +274,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                     onClick={this.handleMinimize}
                     screenReaderLabel="Close"
                   />
-                  {this.mutliExample()
+                  {this.multiExample()
                     ? this.renderTabPanel(themeKey, themes)
                     : this.renderPreview(
                         this.state.code as string,
@@ -283,7 +283,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                       )}
                 </Modal.Body>
               </Modal>
-            ) : this.mutliExample() ? (
+            ) : this.multiExample() ? (
               this.renderTabPanel(themeKey, themes)
             ) : (
               this.renderPreview(this.state.code as string, themeKey, themes)
@@ -339,7 +339,7 @@ class Playground extends Component<PlaygroundProps, PlaygroundState> {
                     <Flex.Item>
                       <CodeSandboxButton
                         code={
-                          this.mutliExample()
+                          this.multiExample()
                             ? this.state.code[this.state.selectedTab]
                             : (this.state.code as string)
                         }
