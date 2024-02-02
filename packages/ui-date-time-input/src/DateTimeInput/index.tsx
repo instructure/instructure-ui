@@ -88,6 +88,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       this.props.value || this.props.defaultValue
     )
     this.setState(initState)
+    this.props.reset?.(this.reset)
   }
 
   componentDidUpdate(prevProps: Readonly<DateTimeInputProps>): void {
@@ -205,6 +206,8 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       ...clearTimeSelect
     }
   }
+
+  reset = () => this.setState(this.recalculateState())
 
   locale(): string {
     if (this.props.locale) {
