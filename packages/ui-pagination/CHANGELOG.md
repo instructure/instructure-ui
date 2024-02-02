@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.52.0](https://github.com/instructure/instructure-ui/compare/v8.51.0...v8.52.0) (2024-02-02)
+
+
+### Features
+
+* **ui-pagination:** refactor Pagination and expand its API for easy config-based usage ([19b928b](https://github.com/instructure/instructure-ui/commit/19b928bd58212dfd2c9cc8b2a550d504bb3df0bc))
+
+
+
+
+
 # [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
 
 **Note:** Version bump only for package @instructure/ui-pagination

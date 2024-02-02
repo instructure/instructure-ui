@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.52.0](https://github.com/instructure/instructure-ui/compare/v8.51.0...v8.52.0) (2024-02-02)
+
+
+### Bug Fixes
+
+* **console,ui-view:** fix process is not defined issue ([25271d8](https://github.com/instructure/instructure-ui/commit/25271d8cf3d30035316d18e15f0e7fa59050fcff))
+
+
+
+
+
 # [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
 
 **Note:** Version bump only for package @instructure/ui-view
