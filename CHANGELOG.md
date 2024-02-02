@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.52.0](https://github.com/instructure/instructure-ui/compare/v8.51.0...v8.52.0) (2024-02-02)
+
+
+### Bug Fixes
+
+* **console,ui-view:** fix process is not defined issue ([25271d8](https://github.com/instructure/instructure-ui/commit/25271d8cf3d30035316d18e15f0e7fa59050fcff))
+* **shared-types:** extend OtherHTMLAttributes with Element ([474fa4d](https://github.com/instructure/instructure-ui/commit/474fa4da4781acc347b993a7c64c52d101b00feb))
+
+
+### Features
+
+* **ui-calendar:** make easy and minimal configuration possible ([911ac1b](https://github.com/instructure/instructure-ui/commit/911ac1b3c4523455a1e49f0581575952dcfc8605))
+* **ui-drilldown,ui-top-nav-bar:** add shouldCloseOnClick ([c3df722](https://github.com/instructure/instructure-ui/commit/c3df7221b185996713a05d06ef585020bfa67c6b))
+* **ui-pagination:** refactor Pagination and expand its API for easy config-based usage ([19b928b](https://github.com/instructure/instructure-ui/commit/19b928bd58212dfd2c9cc8b2a550d504bb3df0bc))
+
+
+
+
+
 # [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
 
 

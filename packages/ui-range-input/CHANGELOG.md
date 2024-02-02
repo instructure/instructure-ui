@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.52.0](https://github.com/instructure/instructure-ui/compare/v8.51.0...v8.52.0) (2024-02-02)
+
+
+### Bug Fixes
+
+* **shared-types:** extend OtherHTMLAttributes with Element ([474fa4d](https://github.com/instructure/instructure-ui/commit/474fa4da4781acc347b993a7c64c52d101b00feb))
+
+
+
+
+
 # [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
 
 **Note:** Version bump only for package @instructure/ui-range-input
