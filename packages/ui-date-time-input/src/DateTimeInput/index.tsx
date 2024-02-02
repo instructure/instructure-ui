@@ -510,6 +510,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     const {
       description,
       datePlaceholder,
+      timePlaceholder,
       dateRenderLabel,
       dateInputRef,
       timeRenderLabel,
@@ -576,6 +577,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         <TimeSelect
           value={this.state.timeSelectValue}
           onChange={this.updateStateBasedOnTimeSelect}
+          placeholder={timePlaceholder}
           onBlur={this.handleBlur}
           renderLabel={timeRenderLabel}
           locale={locale}

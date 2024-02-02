@@ -56,6 +56,12 @@ type DateTimeInputProps = {
    * This should be hint text, not a label replacement.
    **/
   datePlaceholder?: string
+
+  /**
+   * HTML placeholder text to display when the time input has no value.
+   * This should be hint text, not a label replacement.
+   **/
+  timePlaceholder?: string
   /**
    * The format of the date shown in the `DateInput` when a date is selected.
    * Valid formats are compatible with
@@ -270,6 +276,7 @@ const propTypes: PropValidators<PropKeys> = {
   prevMonthLabel: PropTypes.string.isRequired,
   nextMonthLabel: PropTypes.string.isRequired,
   datePlaceholder: PropTypes.string,
+  timePlaceholder: PropTypes.string,
   dateFormat: PropTypes.string,
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
   timeRenderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node])
@@ -315,6 +322,7 @@ const allowedProps: AllowedPropKeys = [
   'prevMonthLabel',
   'nextMonthLabel',
   'datePlaceholder',
+  'timePlaceholder',
   'dateFormat',
   'interaction',
   'timeRenderLabel',
