@@ -114,7 +114,8 @@ const pathsToIgnore = [
   // deprecated packages and modules:
   '**/InputModeListener.{js,ts}',
   // regression testing app:
-  '**/regression-test/**'
+  '**/regression-test/**',
+  '**/packages/cz-lerna-changelog/**'
 ]
 
 function buildDocs() {
