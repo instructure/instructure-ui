@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
 import { hash } from '../hash'
 
 describe('hash', () => {
@@ -30,18 +30,18 @@ describe('hash', () => {
     let error = false
 
     try {
-      expect(hash(undefined)).to.equal('')
+      expect(hash(undefined)).toEqual('')
     } catch (err: any) {
       error = true
     }
 
-    expect(error).to.be.true()
+    expect(error).toBe(true)
   })
 
   it('should allow specifying a max length', () => {
     const result = hash('some value', 4)
-    expect(result).to.exist()
-    expect(result.length).to.equal(4)
+    expect(result).toBeDefined()
+    expect(result).toHaveLength(4)
   })
 
   describe('strings', () => {
@@ -49,20 +49,20 @@ describe('hash', () => {
       const result1 = hash('Some string with3_ distinct$() !_)(* va1ues')
       const result2 = hash('Some string with3_ distinct$() !_)(* va1ues')
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes different strings to different values', () => {
       const result1 = hash('Some string with3_ distinct$() !_)(* va1ues')
       const result2 = hash('Some string with3_ distinct$() !_)(* va1ues ')
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
   })
 
@@ -71,20 +71,20 @@ describe('hash', () => {
       const result1 = hash(532)
       const result2 = hash(532)
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes two different numbers to different values', () => {
       const result1 = hash(532)
       const result2 = hash(5321)
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
   })
 
@@ -93,30 +93,30 @@ describe('hash', () => {
       const result1 = hash(true)
       const result2 = hash(true)
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes false to the same value', () => {
       const result1 = hash(false)
       const result2 = hash(false)
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes true and false to different values', () => {
       const result1 = hash(true)
       const result2 = hash(false)
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
   })
 
@@ -125,20 +125,20 @@ describe('hash', () => {
       const result1 = hash(() => 'foo')
       const result2 = hash(() => 'foo')
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes two different arrow function expressions to different values', () => {
       const result1 = hash(() => 'foo')
       const result2 = hash(() => 'bar')
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
 
     it('hashes two identical functions to the same value', () => {
@@ -154,10 +154,10 @@ describe('hash', () => {
         return foo + bar
       })
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes two identical functions with different names to different values', () => {
@@ -173,10 +173,10 @@ describe('hash', () => {
         return foo + bar
       })
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
 
     it('hashes two identical functions with different bodies to different values', () => {
@@ -192,10 +192,10 @@ describe('hash', () => {
         return foo + baz
       })
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
   })
 
@@ -213,10 +213,10 @@ describe('hash', () => {
         baz: 'baz'
       })
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes two identical simple objects with rearranged keys to the same value', () => {
@@ -232,10 +232,10 @@ describe('hash', () => {
         bar: 'bar'
       })
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes two different simple objects to different values', () => {
@@ -251,10 +251,10 @@ describe('hash', () => {
         baz: 'baz'
       })
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
 
     it('hashes two identical complex objects to the same value', () => {
@@ -296,10 +296,10 @@ describe('hash', () => {
         }
       })
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes two identical complex objects with rearranged keys to the same value', () => {
@@ -341,10 +341,10 @@ describe('hash', () => {
         }
       })
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes two different simple objects to different values', () => {
@@ -359,10 +359,10 @@ describe('hash', () => {
         baz: 'baz'
       })
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
 
     it('hashes two different complex objects to the same value', () => {
@@ -404,10 +404,10 @@ describe('hash', () => {
         }
       })
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
   })
 
@@ -447,10 +447,10 @@ describe('hash', () => {
         }
       )
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
 
     it('hashes two classes with different content to different values', () => {
@@ -487,10 +487,10 @@ describe('hash', () => {
         }
       )
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
 
     it('hashes two classes with different names to different values', () => {
@@ -528,20 +528,20 @@ describe('hash', () => {
         }
       )
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.not.equal(result2)
+      expect(result1).not.toEqual(result2)
     })
 
     it('hashes null to the same value', () => {
       const result1 = hash(null)
       const result2 = hash(null)
 
-      expect(result1).to.exist()
-      expect(result2).to.exist()
+      expect(result1).toBeDefined()
+      expect(result2).toBeDefined()
 
-      expect(result1).to.equal(result2)
+      expect(result1).toEqual(result2)
     })
   })
 })

@@ -21,24 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import '@testing-library/jest-dom'
+import { camelize } from '../camelize'
 
-import { expect } from '@instructure/ui-test-utils'
-import { ms } from '../ms'
+describe('convertCase', () => {
+  describe('camelize', () => {
+    it('handles hyphenated strings', () => {
+      expect(camelize('foo-bar')).toEqual('fooBar')
+      expect(camelize('baz-qux-foo')).toEqual('bazQuxFoo')
+      expect(camelize('xx-small')).toEqual('xxSmall')
+      expect(camelize('border-radius-x-large')).toEqual('borderRadiusXLarge')
+      expect(camelize('margin-xxLarge')).toEqual('marginXxLarge')
+    })
 
-describe('ms', () => {
-  it('handles ms unit', () => {
-    expect(ms('4ms')).to.equal(4)
-  })
-
-  it('converts s to ms', () => {
-    expect(ms('0.3s')).to.equal(0.3 * 1000)
-  })
-
-  it('handles unitless input', () => {
-    expect(ms('15')).to.equal(15)
-  })
-
-  it('handles numeric input', () => {
-    expect(ms(15)).to.equal(15)
+    it('does not modify already camel cased strings', () => {
+      expect(camelize('fooBar')).toEqual('fooBar')
+      expect(camelize('bazQuxFoo')).toEqual('bazQuxFoo')
+    })
   })
 })

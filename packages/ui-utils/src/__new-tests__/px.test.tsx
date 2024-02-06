@@ -22,23 +22,38 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
+import { getFontSize } from '@instructure/ui-dom-utils'
 
-import { within } from '../within'
+import { px } from '../px'
 
-describe('within', () => {
-  it('returns true when values are within range', () => {
-    expect(within(10, 8, 2)).to.be.true()
-    expect(within(10, 11, 1)).to.be.true()
-    expect(within(10, 10, 0)).to.be.true()
-    expect(within(10, 9.999, 0.001)).to.be.true()
-    expect(within(-10, -15, 5)).to.be.true()
+describe('px', () => {
+  let node: HTMLDivElement | null
+
+  beforeEach(() => {
+    node = document.createElement('div')
+    document.body.appendChild(node)
   })
 
-  it('returns false when values are out of range', () => {
-    expect(within(10, 8, 1)).to.be.false()
-    expect(within(12, 10, 1.9999)).to.be.false()
-    expect(within(8.705, 8.7, 0.004)).to.be.false()
-    expect(within(-2, -1.5, 0.4)).to.be.false()
+  afterEach(() => {
+    node && node.parentNode && node.parentNode.removeChild(node)
+    node = null
+  })
+
+  it('handles px units', () => {
+    expect(px('30px')).toEqual(30)
+  })
+
+  it('converts rem to px', () => {
+    expect(px('50rem')).toEqual(50 * getFontSize())
+  })
+
+  it('converts em to px', () => {
+    node!.style.fontSize = '24px'
+    expect(px('10em', node)).toEqual(10 * getFontSize(node))
+  })
+
+  it('handles unitless input', () => {
+    expect(px('4')).toEqual(4)
   })
 })

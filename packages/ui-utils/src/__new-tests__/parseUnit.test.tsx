@@ -22,59 +22,59 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
 import { parseUnit } from '../parseUnit'
 
 describe('parseUnit', () => {
   it('unitless', () => {
-    expect(parseUnit('50')[0]).to.equal(50)
+    expect(parseUnit('50')[0]).toEqual(50)
   })
 
   it('integer', () => {
-    expect(parseUnit(50)[0]).to.equal(50)
+    expect(parseUnit(50)[0]).toEqual(50)
   })
 
   it('decimal', () => {
-    expect(parseUnit(47.89101)[0]).to.equal(47.89101)
+    expect(parseUnit(47.89101)[0]).toEqual(47.89101)
   })
 
   it('negative', () => {
-    expect(parseUnit('-20px')[0]).to.equal(-20)
-    expect(parseUnit('-20px')[1]).to.equal('px')
+    expect(parseUnit('-20px')[0]).toEqual(-20)
+    expect(parseUnit('-20px')[1]).toEqual('px')
   })
 
   it('px', () => {
-    expect(parseUnit('100.0792px')[0]).to.equal(100.0792)
-    expect(parseUnit('100.0792px')[1]).to.equal('px')
+    expect(parseUnit('100.0792px')[0]).toEqual(100.0792)
+    expect(parseUnit('100.0792px')[1]).toEqual('px')
   })
 
   it('rem', () => {
-    expect(parseUnit('4000rem')[0]).to.equal(4000)
-    expect(parseUnit('4000rem')[1]).to.equal('rem')
+    expect(parseUnit('4000rem')[0]).toEqual(4000)
+    expect(parseUnit('4000rem')[1]).toEqual('rem')
   })
 
   it('em', () => {
-    expect(parseUnit('300em')[0]).to.equal(300)
-    expect(parseUnit('300em')[1]).to.equal('em')
+    expect(parseUnit('300em')[0]).toEqual(300)
+    expect(parseUnit('300em')[1]).toEqual('em')
   })
 
   it('s', () => {
-    expect(parseUnit('5s')[0]).to.equal(5)
-    expect(parseUnit('5s')[1]).to.equal('s')
+    expect(parseUnit('5s')[0]).toEqual(5)
+    expect(parseUnit('5s')[1]).toEqual('s')
   })
 
   it('ms', () => {
-    expect(parseUnit('20ms')[0]).to.equal(20)
-    expect(parseUnit('20ms')[1]).to.equal('ms')
+    expect(parseUnit('20ms')[0]).toEqual(20)
+    expect(parseUnit('20ms')[1]).toEqual('ms')
   })
 
   it('vh', () => {
-    expect(parseUnit('327vh')[0]).to.equal(327)
-    expect(parseUnit('327vh')[1]).to.equal('vh')
+    expect(parseUnit('327vh')[0]).toEqual(327)
+    expect(parseUnit('327vh')[1]).toEqual('vh')
   })
 
   it('vmin', () => {
-    expect(parseUnit('70vmin')[0]).to.equal(70)
-    expect(parseUnit('70vmin')[1]).to.equal('vmin')
+    expect(parseUnit('70vmin')[0]).toEqual(70)
+    expect(parseUnit('70vmin')[1]).toEqual('vmin')
   })
 })
