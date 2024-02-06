@@ -22,22 +22,30 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { camelize } from '../camelize'
+import '@testing-library/jest-dom'
+import { pascalize } from '../pascalize'
 
 describe('convertCase', () => {
-  describe('camelize', () => {
+  describe('pascalize', () => {
     it('handles hyphenated strings', () => {
-      expect(camelize('foo-bar')).to.equal('fooBar')
-      expect(camelize('baz-qux-foo')).to.equal('bazQuxFoo')
-      expect(camelize('xx-small')).to.equal('xxSmall')
-      expect(camelize('border-radius-x-large')).to.equal('borderRadiusXLarge')
-      expect(camelize('margin-xxLarge')).to.equal('marginXxLarge')
+      expect(pascalize('foo-bar')).toEqual('FooBar')
+      expect(pascalize('baz-qux-foo')).toEqual('BazQuxFoo')
+      expect(pascalize('x-large')).toEqual('XLarge')
+      expect(pascalize('x-x-small')).toEqual('XXSmall')
     })
 
-    it('does not modify already camel cased strings', () => {
-      expect(camelize('fooBar')).to.equal('fooBar')
-      expect(camelize('bazQuxFoo')).to.equal('bazQuxFoo')
+    it('handles camel cased strings', () => {
+      expect(pascalize('fooBar')).toEqual('FooBar')
+      expect(pascalize('bazQuxFoo')).toEqual('BazQuxFoo')
+      expect(pascalize('xLarge')).toEqual('XLarge')
+      expect(pascalize('borderRadiusLarge')).toEqual('BorderRadiusLarge')
+    })
+
+    it('does not modify already pascal cased strings', () => {
+      expect(pascalize('FooBar')).toEqual('FooBar')
+      expect(pascalize('BazQuxFoo')).toEqual('BazQuxFoo')
+      expect(pascalize('XLarge')).toEqual('XLarge')
+      expect(pascalize('BorderRadiusLarge')).toEqual('BorderRadiusLarge')
     })
   })
 })

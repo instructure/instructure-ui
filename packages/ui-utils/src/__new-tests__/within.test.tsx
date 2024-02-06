@@ -22,42 +22,23 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
 
-import { cloneArray } from '../cloneArray'
-import { deepEqual } from '../deepEqual'
+import { within } from '../within'
 
-describe('cloneArray', () => {
-  it('should return an array', () => {
-    const arr = [['one', 'two'], ['three']]
-
-    const newArr = cloneArray(arr)
-
-    expect(Array.isArray(newArr)).to.equal(true)
+describe('within', () => {
+  it('returns true when values are within range', () => {
+    expect(within(10, 8, 2)).toBe(true)
+    expect(within(10, 11, 1)).toBe(true)
+    expect(within(10, 10, 0)).toBe(true)
+    expect(within(10, 9.999, 0.001)).toBe(true)
+    expect(within(-10, -15, 5)).toBe(true)
   })
 
-  it('should preserve sub arrays', () => {
-    const arr = [['one', 'two'], ['three'], [4, 5, 6], [7, [8, 9, 10], 11, 12]]
-
-    const newArr = cloneArray(arr)
-
-    expect(newArr.length).to.equal(4)
-    expect(newArr[0].length).to.equal(2)
-    expect(newArr[2][1]).to.equal(5)
-    expect(Array.isArray(newArr[3][1])).to.equal(true)
-    expect((newArr[3][1] as number[])[2]).to.equal(10)
-  })
-
-  it('should return a new array', () => {
-    const arr = [['one', 'two'], ['three']]
-    const newArr = cloneArray(arr)
-
-    expect(deepEqual(arr, newArr)).to.equal(true)
-    newArr[0][1] = '2'
-    expect(deepEqual(arr, newArr)).to.equal(false)
-
-    const newArr2 = cloneArray(arr)
-    arr[0][0] = '1'
-    expect(deepEqual(arr, newArr2)).to.equal(false)
+  it('returns false when values are out of range', () => {
+    expect(within(10, 8, 1)).toBe(false)
+    expect(within(12, 10, 1.9999)).toBe(false)
+    expect(within(8.705, 8.7, 0.004)).toBe(false)
+    expect(within(-2, -1.5, 0.4)).toBe(false)
   })
 })

@@ -22,38 +22,33 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { getFontSize } from '@instructure/ui-dom-utils'
+import '@testing-library/jest-dom'
+import { createChainedFunction } from '../createChainedFunction'
 
-import { px } from '../px'
-
-describe('px', () => {
-  let node: HTMLDivElement | null
-
-  beforeEach(() => {
-    node = document.createElement('div')
-    document.body.appendChild(node)
+describe('createChainedFunction', () => {
+  it('should return null if no function provided', () => {
+    expect(createChainedFunction(null, undefined)).toEqual(null)
   })
 
-  afterEach(() => {
-    node && node.parentNode && node.parentNode.removeChild(node)
-    node = null
+  it('should return a function', () => {
+    expect(typeof createChainedFunction(() => {})).toEqual('function')
   })
 
-  it('handles px units', () => {
-    expect(px('30px')).to.equal(30)
+  it('should throw an error if something other than function, null, undefined provided', () => {
+    expect(() => {
+      // @ts-expect-error intentionally bad code
+      createChainedFunction(12345)
+    }).toThrow(Error)
   })
 
-  it('converts rem to px', () => {
-    expect(px('50rem')).to.equal(50 * getFontSize())
-  })
+  it('should execute all the functions', () => {
+    const spies = Array.from({ length: 5 }, () => jest.fn())
+    const chain = createChainedFunction(...spies)
 
-  it('converts em to px', () => {
-    node!.style.fontSize = '24px'
-    expect(px('10em', node)).to.equal(10 * getFontSize(node))
-  })
+    chain!()
 
-  it('handles unitless input', () => {
-    expect(px('4')).to.equal(4)
+    spies.forEach((spy) => {
+      expect(spy).toHaveBeenCalledTimes(1)
+    })
   })
 })

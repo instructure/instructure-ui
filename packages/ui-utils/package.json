@@ -23,8 +23,9 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.52.0",
-    "@instructure/ui-test-utils": "8.52.0",
-    "@types/json-stable-stringify": "^1.0.34"
+    "@types/json-stable-stringify": "^1.0.34",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",

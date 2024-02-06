@@ -22,30 +22,23 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { pascalize } from '../pascalize'
+import '@testing-library/jest-dom'
+import { ms } from '../ms'
 
-describe('convertCase', () => {
-  describe('pascalize', () => {
-    it('handles hyphenated strings', () => {
-      expect(pascalize('foo-bar')).to.equal('FooBar')
-      expect(pascalize('baz-qux-foo')).to.equal('BazQuxFoo')
-      expect(pascalize('x-large')).to.equal('XLarge')
-      expect(pascalize('x-x-small')).to.equal('XXSmall')
-    })
+describe('ms', () => {
+  it('handles ms unit', () => {
+    expect(ms('4ms')).toEqual(4)
+  })
 
-    it('handles camel cased strings', () => {
-      expect(pascalize('fooBar')).to.equal('FooBar')
-      expect(pascalize('bazQuxFoo')).to.equal('BazQuxFoo')
-      expect(pascalize('xLarge')).to.equal('XLarge')
-      expect(pascalize('borderRadiusLarge')).to.equal('BorderRadiusLarge')
-    })
+  it('converts s to ms', () => {
+    expect(ms('0.3s')).toEqual(0.3 * 1000)
+  })
 
-    it('does not modify already pascal cased strings', () => {
-      expect(pascalize('FooBar')).to.equal('FooBar')
-      expect(pascalize('BazQuxFoo')).to.equal('BazQuxFoo')
-      expect(pascalize('XLarge')).to.equal('XLarge')
-      expect(pascalize('BorderRadiusLarge')).to.equal('BorderRadiusLarge')
-    })
+  it('handles unitless input', () => {
+    expect(ms('15')).toEqual(15)
+  })
+
+  it('handles numeric input', () => {
+    expect(ms(15)).toEqual(15)
   })
 })

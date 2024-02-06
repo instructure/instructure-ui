@@ -21,36 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import '@testing-library/jest-dom'
 
-import { expect, spy } from '@instructure/ui-test-utils'
-import { createChainedFunction } from '../createChainedFunction'
+import { cloneArray } from '../cloneArray'
+import { deepEqual } from '../deepEqual'
 
-describe('createChainedFunction', () => {
-  it('should return null if no function provided', () => {
-    expect(createChainedFunction(null, undefined)).to.equal(null)
+describe('cloneArray', () => {
+  it('should return an array', () => {
+    const arr = [['one', 'two'], ['three']]
+
+    const newArr = cloneArray(arr)
+
+    expect(Array.isArray(newArr)).toBeTruthy()
   })
 
-  it('should return a function', () => {
-    expect(typeof createChainedFunction(() => {})).to.equal('function')
+  it('should preserve sub arrays', () => {
+    const arr = [['one', 'two'], ['three'], [4, 5, 6], [7, [8, 9, 10], 11, 12]]
+
+    const newArr = cloneArray(arr)
+
+    expect(newArr.length).toEqual(4)
+    expect(newArr[0].length).toEqual(2)
+    expect(newArr[2][1]).toEqual(5)
+    expect(Array.isArray(newArr[3][1])).toEqual(true)
+    expect((newArr[3][1] as number[])[2]).toEqual(10)
   })
 
-  it('should throw an error if something other than function, null, undefined provided', () => {
-    expect(() => {
-      // @ts-expect-error intentionally bad code
-      createChainedFunction(12345)
-    }).to.throw(Error)
-  })
+  it('should return a new array', () => {
+    const arr = [['one', 'two'], ['three']]
+    const newArr = cloneArray(arr)
 
-  it('should execute all the functions', () => {
-    const spies = Array(5)
-      .fill(null)
-      .map(() => spy())
-    const chain = createChainedFunction(...spies)
+    expect(deepEqual(arr, newArr)).toEqual(true)
+    newArr[0][1] = '2'
+    expect(deepEqual(arr, newArr)).toEqual(false)
 
-    chain!()
-
-    spies.forEach((spy) => {
-      expect(spy).to.have.been.calledOnce()
-    })
+    const newArr2 = cloneArray(arr)
+    arr[0][0] = '1'
+    expect(deepEqual(arr, newArr2)).toEqual(false)
   })
 })

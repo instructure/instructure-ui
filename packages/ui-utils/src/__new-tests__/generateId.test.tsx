@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
 import { generateId } from '../generateId'
 
 describe('generateId', () => {
@@ -33,22 +32,24 @@ describe('generateId', () => {
     const inst1 = generateId(component, seed)
     const inst2 = generateId(component, seed)
 
-    expect(inst1).to.not.equal(inst2)
+    expect(inst1).not.toEqual(inst2)
   })
+
   it('should create ids deterministicly', () => {
     const seed1 = new Map<string, number>()
     const component = 'TestComponent'
 
-    //simulate rendering component: TestComponent
+    // Simulate rendering component: TestComponent
     const render1 = generateId(component, seed1)
 
-    //suppose we have a refresh, meaning the instanceCounter will be reseted:
+    // Suppose we have a refresh, meaning the instanceCounter will be reseted:
     const seed2 = new Map<string, number>()
     const render2 = generateId(component, seed2)
 
-    expect(render1).to.equal(render2)
+    expect(render1).toEqual(render2)
   })
-  it('should not create the same id for the same instance', () => {
+
+  it('should not create the same id for the same instance.', () => {
     const counter = new Map<string, boolean>()
     const seed = new Map<string, number>()
     const component = 'TestComponent'
@@ -62,7 +63,7 @@ describe('generateId', () => {
         counter.set(id, true)
       }
 
-      expect(counter.get(id)).to.be.eq(false)
+      expect(counter.get(id)).toBe(false)
     }
   })
 })
