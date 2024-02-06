@@ -114,9 +114,10 @@ class TextArea extends Component<TextAreaProps> {
     this.myObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         if (this._highlightRef) {
+          const entryStyle = window.getComputedStyle(entry.target)
           this._highlightRef.style.transition = 'none'
-          this._highlightRef.style.width = `calc(${entry.contentRect.width}px + 2.125rem)`
-          this._highlightRef.style.height = `calc(${entry.contentRect.height}px + 2.125rem)`
+          this._highlightRef.style.width = `calc(${entryStyle.width}px + 2.125rem)`
+          this._highlightRef.style.height = `calc(${entryStyle.height}px + 2.125rem)`
           clearTimeout(this.resizeTimeout)
 
           this.resizeTimeout = setTimeout(() => {
