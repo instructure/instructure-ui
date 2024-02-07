@@ -50,9 +50,6 @@
       "path": "../ui-text-input/tsconfig.build.json"
     },
     {
-      "path": "../ui-i18n/tsconfig.build.json"
-    },
-    {
       "path": "../ui-utils/tsconfig.build.json"
     }
   ]
