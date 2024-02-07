@@ -47,11 +47,7 @@ import {
   closeBrackets,
   closeBracketsKeymap
 } from '@codemirror/autocomplete'
-import {
-  highlightSelectionMatches
-  // Search feature is turned off for now, see note at keymaps
-  // searchKeymap
-} from '@codemirror/search'
+import { highlightSelectionMatches, searchKeymap } from '@codemirror/search'
 import {
   indentSelection,
   defaultKeymap,
@@ -94,6 +90,8 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import { withStyle, jsx } from '@instructure/emotion'
+
+import customSearch from './SearchPanel'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -435,7 +433,7 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
       crosshairCursor(),
       highlightSelectionMatches(),
       indentOnInput(),
-
+      customSearch(this.props.searchConfig),
       keymap.of(this.keymaps)
     ]
   }
@@ -448,13 +446,8 @@ class SourceCodeEditor extends Component<SourceCodeEditorProps> {
       ...historyKeymap,
       ...foldKeymap,
       ...completionKeymap,
-      ...lintKeymap
-
-      // TODO: style and include search & replace toolbar feature
-      // Note: the search & replace toolbar is not styled.
-      // If this feature is needed in the future, we need a decision about the styling.
-      // For now we turned the feature off, since RCE doesn't need it.
-      // ...searchKeymap
+      ...lintKeymap,
+      ...(this.props.searchConfig ? searchKeymap : [])
     ]
 
     if (this.props.indentWithTab) {

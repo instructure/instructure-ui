@@ -40,6 +40,7 @@ import type {
 } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { SearchConfig } from './SearchPanel'
 
 type SourceCodeEditorOwnProps = {
   /**
@@ -204,6 +205,11 @@ type SourceCodeEditorOwnProps = {
    * provides a reference to the html element of the editor's container
    */
   containerRef?: (element: HTMLDivElement | null) => void
+
+  /**
+   * enable search panel in editor when pressing ctrl/cmd+f
+   */
+  searchConfig?: SearchConfig
 }
 
 type PropKeys = keyof SourceCodeEditorOwnProps
@@ -268,7 +274,8 @@ const propTypes: PropValidators<PropKeys> = {
   width: PropTypes.string,
   // darkTheme: PropTypes.bool,
   elementRef: PropTypes.func,
-  containerRef: PropTypes.func
+  containerRef: PropTypes.func,
+  searchConfig: PropTypes.object
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -298,7 +305,8 @@ const allowedProps: AllowedPropKeys = [
   'width',
   // 'darkTheme',
   'elementRef',
-  'containerRef'
+  'containerRef',
+  'searchConfig'
 ]
 
 export type { SourceCodeEditorProps, SourceCodeEditorStyle }
