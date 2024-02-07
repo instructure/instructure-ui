@@ -132,7 +132,7 @@ class Item extends Component<OptionsItemProps> {
 
     return (
       <ElementType
-        role="none"
+        role={href ? undefined : role}
         css={styles?.item}
         ref={(element: Element | null) => {
           this.ref = element
