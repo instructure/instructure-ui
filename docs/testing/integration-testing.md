@@ -1,12 +1,13 @@
 ---
-title: Integration testing
+title: Real-world component testing
 category: Testing
 order: 5
 ---
 
-# Integration testing
+# Real-world component testing
 
-InstUI uses [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/overview) for integration tests. These are located at `instructure-ui/cypress/component/`.
+Sometimes unit test behaviour doesn't match how our components work in the browser (e.g. no ResizeObserver)
+InstUI uses [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/overview) for these cases. These are located at `instructure-ui/cypress/component/`.
 
 ### Running tests
 
