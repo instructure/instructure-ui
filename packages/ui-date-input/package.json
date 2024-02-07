@@ -43,6 +43,7 @@
     "@instructure/ui-testable": "8.52.0",
     "@instructure/ui-text-input": "8.52.0",
     "@instructure/ui-utils": "8.52.0",
+    "@instructure/ui-i18n": "8.52.0",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {
