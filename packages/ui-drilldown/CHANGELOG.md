@@ -3,174 +3,95 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.52.0](https://github.com/instructure/instructure-ui/compare/v8.51.0...v8.52.0) (2024-02-02)
+# [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 
+**Note:** Version bump only for package @instructure/ui-drilldown
+
+# [8.52.0](https://github.com/instructure/instructure-ui/compare/v8.51.0...v8.52.0) (2024-02-02)
 
 ### Features
 
-* **ui-drilldown,ui-top-nav-bar:** add shouldCloseOnClick ([c3df722](https://github.com/instructure/instructure-ui/commit/c3df7221b185996713a05d06ef585020bfa67c6b))
-
-
-
-
+- **ui-drilldown,ui-top-nav-bar:** add shouldCloseOnClick ([c3df722](https://github.com/instructure/instructure-ui/commit/c3df7221b185996713a05d06ef585020bfa67c6b))
 
 # [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
 
-
-
-
-
 # [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
-
-
-
-
 
 # [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
 
-
-
-
-
 ## [8.48.3](https://github.com/instructure/instructure-ui/compare/v8.48.2...v8.48.3) (2023-11-23)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
-
-
-
-
 
 ## [8.48.2](https://github.com/instructure/instructure-ui/compare/v8.48.1...v8.48.2) (2023-11-21)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
 
-
-
-
-
 ## [8.48.1](https://github.com/instructure/instructure-ui/compare/v8.48.0...v8.48.1) (2023-11-17)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
-
-
-
-
 
 # [8.48.0](https://github.com/instructure/instructure-ui/compare/v8.47.1...v8.48.0) (2023-11-10)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
 
-
-
-
-
 ## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
-
 
 ### Bug Fixes
 
-* **ui-drilldown:** fix cmd+click not working on drilldown items ([10e53ff](https://github.com/instructure/instructure-ui/commit/10e53ff8960885a09e5626d95eabbb6590526f52))
-
-
-
-
+- **ui-drilldown:** fix cmd+click not working on drilldown items ([10e53ff](https://github.com/instructure/instructure-ui/commit/10e53ff8960885a09e5626d95eabbb6590526f52))
 
 # [8.47.0](https://github.com/instructure/instructure-ui/compare/v8.46.1...v8.47.0) (2023-10-27)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
 
-
-
-
-
 ## [8.46.1](https://github.com/instructure/instructure-ui/compare/v8.46.0...v8.46.1) (2023-10-13)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
-
-
-
-
 
 # [8.46.0](https://github.com/instructure/instructure-ui/compare/v8.45.0...v8.46.0) (2023-10-11)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
 
-
-
-
-
 # [8.45.0](https://github.com/instructure/instructure-ui/compare/v8.44.0...v8.45.0) (2023-10-03)
-
 
 ### Bug Fixes
 
-* **ui-drilldown:** call onBackButtonClicked function when ArrowLeft got pressed ([cd5e681](https://github.com/instructure/instructure-ui/commit/cd5e6814746b3fc42530c82c18409c6b7ad34ac3))
-
-
-
-
+- **ui-drilldown:** call onBackButtonClicked function when ArrowLeft got pressed ([cd5e681](https://github.com/instructure/instructure-ui/commit/cd5e6814746b3fc42530c82c18409c6b7ad34ac3))
 
 # [8.44.0](https://github.com/instructure/instructure-ui/compare/v8.43.1...v8.44.0) (2023-09-21)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
 
-
-
-
-
 ## [8.43.1](https://github.com/instructure/instructure-ui/compare/v8.43.0...v8.43.1) (2023-09-11)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
-
-
-
-
 
 # [8.43.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.43.0) (2023-09-07)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
 
-
-
-
-
 # [8.42.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.42.0) (2023-09-07)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
-
-
-
-
 
 ## [8.41.1](https://github.com/instructure/instructure-ui/compare/v8.41.0...v8.41.1) (2023-08-24)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
 
-
-
-
-
 # [8.41.0](https://github.com/instructure/instructure-ui/compare/v8.40.1...v8.41.0) (2023-08-21)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
 
-
-
-
-
 ## [8.40.1](https://github.com/instructure/instructure-ui/compare/v8.40.0...v8.40.1) (2023-08-18)
 
 **Note:** Version bump only for package @instructure/ui-drilldown
-
-
-
-
 
 # [8.40.0](https://github.com/instructure/instructure-ui/compare/v8.39.0...v8.40.0) (2023-08-17)
 
