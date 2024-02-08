@@ -24,14 +24,10 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.53.0",
-    "@instructure/ui-buttons": "8.53.0",
-    "@instructure/ui-icons": "8.53.0",
     "@instructure/ui-test-queries": "8.53.0",
     "@instructure/ui-test-utils": "8.53.0",
-    "@instructure/ui-text-input": "8.53.0",
     "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.0.0",
-    "react-dom": "^18.2.0"
+    "@testing-library/react": "^14.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",
@@ -59,7 +55,11 @@
     "@instructure/ui-testable": "8.53.0",
     "@instructure/ui-themes": "8.53.0",
     "@instructure/ui-utils": "8.53.0",
+    "@instructure/ui-buttons": "8.53.0",
+    "@instructure/ui-icons": "8.53.0",
+    "@instructure/ui-text-input": "8.53.0",
     "@lezer/highlight": "1.1.6",
+    "react-dom": "^18.2.0",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {
