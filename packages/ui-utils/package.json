@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-utils",
-  "version": "8.52.0",
+  "version": "8.53.0",
   "description": "A collection of utilities for UI components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,15 +22,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.52.0",
-    "@types/json-stable-stringify": "^1.0.34",
+    "@instructure/ui-babel-preset": "8.53.0",
     "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.0.0"
+    "@testing-library/react": "^14.0.0",
+    "@types/json-stable-stringify": "^1.0.34"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",
-    "@instructure/console": "8.52.0",
-    "@instructure/ui-dom-utils": "8.52.0",
+    "@instructure/console": "8.53.0",
+    "@instructure/ui-dom-utils": "8.53.0",
     "@types/ua-parser-js": "^0.7.37",
     "bowser": "^2.11.0",
     "fast-deep-equal": "^3.1.3",

@@ -3,171 +3,97 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
+
+### Features
+
+- **many:** provide defaults to dateInput for easier setup and use ([dcefc4e](https://github.com/instructure/instructure-ui/commit/dcefc4e259118264d76dfd248b01682a7c2ef661))
+- **ui-date-time-input:** add initialTimeForNewDate prop to datetimeinput ([33711a3](https://github.com/instructure/instructure-ui/commit/33711a3d899c34913aafd40c7dec90faabc88cd0))
+- **ui-date-time-input:** add placeholder to datetimeinput's timeselect ([3ec8cc3](https://github.com/instructure/instructure-ui/commit/3ec8cc31f06ee570b704f88b09739a0868da9ff7))
+
 # [8.52.0](https://github.com/instructure/instructure-ui/compare/v8.51.0...v8.52.0) (2024-02-02)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 # [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
-
 
 ### Features
 
-* **ui-date-time-input:** add showMessages prop ([5212a19](https://github.com/instructure/instructure-ui/commit/5212a192b56fed621c80a697579fc164f9592391))
-
-
-
-
+- **ui-date-time-input:** add showMessages prop ([5212a19](https://github.com/instructure/instructure-ui/commit/5212a192b56fed621c80a697579fc164f9592391))
 
 # [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 # [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
-
-
-
-
 
 ## [8.48.3](https://github.com/instructure/instructure-ui/compare/v8.48.2...v8.48.3) (2023-11-23)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 ## [8.48.2](https://github.com/instructure/instructure-ui/compare/v8.48.1...v8.48.2) (2023-11-21)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
-
-
-
-
 
 ## [8.48.1](https://github.com/instructure/instructure-ui/compare/v8.48.0...v8.48.1) (2023-11-17)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 # [8.48.0](https://github.com/instructure/instructure-ui/compare/v8.47.1...v8.48.0) (2023-11-10)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
-
-
-
-
 
 ## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 # [8.47.0](https://github.com/instructure/instructure-ui/compare/v8.46.1...v8.47.0) (2023-10-27)
-
 
 ### Bug Fixes
 
-* **ui-date-time-input:** clear TimeSelect value when DateInput value is cleared ([b1a58e5](https://github.com/instructure/instructure-ui/commit/b1a58e5c04822da491966bc0a79403b30749ff7e))
-
-
-
-
+- **ui-date-time-input:** clear TimeSelect value when DateInput value is cleared ([b1a58e5](https://github.com/instructure/instructure-ui/commit/b1a58e5c04822da491966bc0a79403b30749ff7e))
 
 ## [8.46.1](https://github.com/instructure/instructure-ui/compare/v8.46.0...v8.46.1) (2023-10-13)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 # [8.46.0](https://github.com/instructure/instructure-ui/compare/v8.45.0...v8.46.0) (2023-10-11)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
-
-
-
-
 
 # [8.45.0](https://github.com/instructure/instructure-ui/compare/v8.44.0...v8.45.0) (2023-10-03)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 # [8.44.0](https://github.com/instructure/instructure-ui/compare/v8.43.1...v8.44.0) (2023-09-21)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
-
-
-
-
 
 ## [8.43.1](https://github.com/instructure/instructure-ui/compare/v8.43.0...v8.43.1) (2023-09-11)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 # [8.43.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.43.0) (2023-09-07)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
-
-
-
-
 
 # [8.42.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.42.0) (2023-09-07)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 ## [8.41.1](https://github.com/instructure/instructure-ui/compare/v8.41.0...v8.41.1) (2023-08-24)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
-
-
-
-
 
 # [8.41.0](https://github.com/instructure/instructure-ui/compare/v8.40.1...v8.41.0) (2023-08-21)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 ## [8.40.1](https://github.com/instructure/instructure-ui/compare/v8.40.0...v8.40.1) (2023-08-18)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
-
-
-
-
 
 # [8.40.0](https://github.com/instructure/instructure-ui/compare/v8.39.0...v8.40.0) (2023-08-17)
 

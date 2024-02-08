@@ -3,171 +3,93 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.52.0](https://github.com/instructure/instructure-ui/compare/v8.51.0...v8.52.0) (2024-02-02)
+# [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 
+**Note:** Version bump only for package @instructure/ui-time-select
+
+# [8.52.0](https://github.com/instructure/instructure-ui/compare/v8.51.0...v8.52.0) (2024-02-02)
 
 ### Bug Fixes
 
-* **shared-types:** extend OtherHTMLAttributes with Element ([474fa4d](https://github.com/instructure/instructure-ui/commit/474fa4da4781acc347b993a7c64c52d101b00feb))
-
-
-
-
+- **shared-types:** extend OtherHTMLAttributes with Element ([474fa4d](https://github.com/instructure/instructure-ui/commit/474fa4da4781acc347b993a7c64c52d101b00feb))
 
 # [8.51.0](https://github.com/instructure/instructure-ui/compare/v8.50.0...v8.51.0) (2023-12-14)
 
 **Note:** Version bump only for package @instructure/ui-time-select
 
-
-
-
-
 # [8.50.0](https://github.com/instructure/instructure-ui/compare/v8.49.0...v8.50.0) (2023-12-05)
 
 **Note:** Version bump only for package @instructure/ui-time-select
-
-
-
-
 
 # [8.49.0](https://github.com/instructure/instructure-ui/compare/v8.48.3...v8.49.0) (2023-11-24)
 
 **Note:** Version bump only for package @instructure/ui-time-select
 
-
-
-
-
 ## [8.48.3](https://github.com/instructure/instructure-ui/compare/v8.48.2...v8.48.3) (2023-11-23)
 
 **Note:** Version bump only for package @instructure/ui-time-select
-
-
-
-
 
 ## [8.48.2](https://github.com/instructure/instructure-ui/compare/v8.48.1...v8.48.2) (2023-11-21)
 
 **Note:** Version bump only for package @instructure/ui-time-select
 
-
-
-
-
 ## [8.48.1](https://github.com/instructure/instructure-ui/compare/v8.48.0...v8.48.1) (2023-11-17)
 
 **Note:** Version bump only for package @instructure/ui-time-select
-
-
-
-
 
 # [8.48.0](https://github.com/instructure/instructure-ui/compare/v8.47.1...v8.48.0) (2023-11-10)
 
 **Note:** Version bump only for package @instructure/ui-time-select
 
-
-
-
-
 ## [8.47.1](https://github.com/instructure/instructure-ui/compare/v8.47.0...v8.47.1) (2023-11-06)
 
 **Note:** Version bump only for package @instructure/ui-time-select
-
-
-
-
 
 # [8.47.0](https://github.com/instructure/instructure-ui/compare/v8.46.1...v8.47.0) (2023-10-27)
 
 **Note:** Version bump only for package @instructure/ui-time-select
 
-
-
-
-
 ## [8.46.1](https://github.com/instructure/instructure-ui/compare/v8.46.0...v8.46.1) (2023-10-13)
 
 **Note:** Version bump only for package @instructure/ui-time-select
-
-
-
-
 
 # [8.46.0](https://github.com/instructure/instructure-ui/compare/v8.45.0...v8.46.0) (2023-10-11)
 
 **Note:** Version bump only for package @instructure/ui-time-select
 
-
-
-
-
 # [8.45.0](https://github.com/instructure/instructure-ui/compare/v8.44.0...v8.45.0) (2023-10-03)
 
 **Note:** Version bump only for package @instructure/ui-time-select
-
-
-
-
 
 # [8.44.0](https://github.com/instructure/instructure-ui/compare/v8.43.1...v8.44.0) (2023-09-21)
 
 **Note:** Version bump only for package @instructure/ui-time-select
 
-
-
-
-
 ## [8.43.1](https://github.com/instructure/instructure-ui/compare/v8.43.0...v8.43.1) (2023-09-11)
-
 
 ### Bug Fixes
 
-* **ui-time-select:** fix nonpersistent event issue in Timeselect with react 16 ([77bc913](https://github.com/instructure/instructure-ui/commit/77bc9132c0f303eaa9e3ad0d1a7b2f9aab15f5e6))
-
-
-
-
+- **ui-time-select:** fix nonpersistent event issue in Timeselect with react 16 ([77bc913](https://github.com/instructure/instructure-ui/commit/77bc9132c0f303eaa9e3ad0d1a7b2f9aab15f5e6))
 
 # [8.43.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.43.0) (2023-09-07)
 
 **Note:** Version bump only for package @instructure/ui-time-select
 
-
-
-
-
 # [8.42.0](https://github.com/instructure/instructure-ui/compare/v8.41.1...v8.42.0) (2023-09-07)
 
 **Note:** Version bump only for package @instructure/ui-time-select
-
-
-
-
 
 ## [8.41.1](https://github.com/instructure/instructure-ui/compare/v8.41.0...v8.41.1) (2023-08-24)
 
 **Note:** Version bump only for package @instructure/ui-time-select
 
-
-
-
-
 # [8.41.0](https://github.com/instructure/instructure-ui/compare/v8.40.1...v8.41.0) (2023-08-21)
 
 **Note:** Version bump only for package @instructure/ui-time-select
 
-
-
-
-
 ## [8.40.1](https://github.com/instructure/instructure-ui/compare/v8.40.0...v8.40.1) (2023-08-18)
 
 **Note:** Version bump only for package @instructure/ui-time-select
-
-
-
-
 
 # [8.40.0](https://github.com/instructure/instructure-ui/compare/v8.39.0...v8.40.0) (2023-08-17)
 
