@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.53.1](https://github.com/instructure/instructure-ui/compare/v8.53.0...v8.53.1) (2024-02-09)
+
+
+### Bug Fixes
+
+* **ui-source-code-editor:** use dependencies instead of devDependencies ([2cfbb4f](https://github.com/instructure/instructure-ui/commit/2cfbb4f5e4ab6f9aeffadd5657cb94965050d618))
+
+
+
+
+
 # [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 
 ### Bug Fixes
