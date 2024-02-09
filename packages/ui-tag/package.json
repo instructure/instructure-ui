@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-tag",
-  "version": "8.53.0",
+  "version": "8.53.1",
   "description": "A tag component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,22 +24,22 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.23.2",
-    "@instructure/console": "8.53.0",
-    "@instructure/emotion": "8.53.0",
-    "@instructure/shared-types": "8.53.0",
-    "@instructure/ui-color-utils": "8.53.0",
-    "@instructure/ui-dom-utils": "8.53.0",
-    "@instructure/ui-icons": "8.53.0",
-    "@instructure/ui-react-utils": "8.53.0",
-    "@instructure/ui-testable": "8.53.0",
-    "@instructure/ui-view": "8.53.0",
+    "@instructure/console": "8.53.1",
+    "@instructure/emotion": "8.53.1",
+    "@instructure/shared-types": "8.53.1",
+    "@instructure/ui-color-utils": "8.53.1",
+    "@instructure/ui-dom-utils": "8.53.1",
+    "@instructure/ui-icons": "8.53.1",
+    "@instructure/ui-react-utils": "8.53.1",
+    "@instructure/ui-testable": "8.53.1",
+    "@instructure/ui-view": "8.53.1",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.53.0",
-    "@instructure/ui-test-locator": "8.53.0",
-    "@instructure/ui-test-utils": "8.53.0",
-    "@instructure/ui-themes": "8.53.0"
+    "@instructure/ui-babel-preset": "8.53.1",
+    "@instructure/ui-test-locator": "8.53.1",
+    "@instructure/ui-test-utils": "8.53.1",
+    "@instructure/ui-themes": "8.53.1"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
