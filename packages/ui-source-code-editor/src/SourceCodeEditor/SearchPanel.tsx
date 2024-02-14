@@ -23,7 +23,6 @@
  */
 
 import React, { useState } from 'react'
-import { createRoot } from 'react-dom/client'
 import {
   setSearchQuery,
   search,
@@ -40,6 +39,13 @@ import {
   IconArrowOpenUpLine,
   IconSearchLine
 } from '@instructure/ui-icons'
+
+let reactdom: any
+try {
+  reactdom = require('react-dom/client')
+} catch {
+  reactdom = require('react-dom')
+}
 
 export type SearchConfig = {
   placeholder: string
@@ -138,8 +144,15 @@ export default function customSearch(searchConfig: SearchConfig | undefined) {
         createPanel: (view) => {
           const dom = document.createElement('div')
           dom.style.padding = '8px'
-          const root = createRoot(dom)
-          root.render(<SearchPanel view={view} searchConfig={searchConfig} />)
+          if ('createRoot' in reactdom) {
+            const root = reactdom.createRoot(dom)
+            root.render(<SearchPanel view={view} searchConfig={searchConfig} />)
+          } else {
+            reactdom.render(
+              <SearchPanel view={view} searchConfig={searchConfig} />,
+              dom
+            )
+          }
           return { dom }
         }
       })
