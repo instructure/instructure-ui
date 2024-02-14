@@ -13,6 +13,9 @@ For custom React components this method first tries to access a `ref` property. 
 To get rid of this warning, please add a `ref` property to the component that returns the underlying DOM node:
 
 ```javascript
+---
+type: code
+---
 class MyComponent extends React.Component {
   constructor(props) {
     super(props)

@@ -10,7 +10,10 @@ The following steps will create a React app that uses Instructure UI. Recommende
 
 1. Create a new React app, e.g. with [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html):
 
-```shell
+```md
+---
+type: code
+---
 npx create-react-app my-cool-app
 ```
 
@@ -18,13 +21,16 @@ This will generate a vanilla React app with tests, sample code and scripts. You 
 
 2. Add InstUI dependencies to your `package.json`. We recommend that you add the `@instructure/ui` meta-package, this contains all of our UI components (substitute the version number with the latest one):
 
-```json
+```md
+---
+type: code
+---
 {
-  ...
-  "dependencies": {
     ...
-    "@instructure/ui": "^8"
-  }
+    "dependencies": {
+        ...
+        "@instructure/ui": "^8"
+    }
 }
 ```
 
@@ -32,7 +38,10 @@ Run `npm install`, so InstUI is downloaded to your `node_modules` folder and can
 
 3. Now you are ready to use InstUI, let's try it out. Replace the code in `App.js` with the following:
 
-```javascript
+```js
+---
+type: code
+---
 import { Button, InstUISettingsProvider, canvas } from '@instructure/ui'
 
 function App() {
