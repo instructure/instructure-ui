@@ -2,7 +2,7 @@
 describes: View
 ---
 
-### View &#151; the visual basis of Instructure UI
+### View: the visual basis of Instructure UI
 
 View provides the base appearance for most of the components
 in Instructure UI.

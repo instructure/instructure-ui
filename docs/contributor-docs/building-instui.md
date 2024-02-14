@@ -19,19 +19,35 @@ The project uses `npm` for managing these packages and also for resolving depend
 In order to build the project one should have [`git`](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [`node`](https://nodejs.org/en/download/) (supported version is defined in the root [package.json](https://github.com/instructure/instructure-ui/blob/master/package.json#L90)) installed.
 
 1. Download the source code and go into the root directory of instructure-ui:
+
    ```sh
+   ---
+   type: code
+   ---
    git clone https://github.com/instructure/instructure-ui.git
    cd instructure-ui
    ```
+
 2. Install dependencies for packages:
+
    ```sh
+   ---
+   type: code
+   ---
    npm install
    ```
+
 3. Run the bootstrap script:
+
    ```sh
+   ---
+   type: code
+   ---
    npm run bootstrap
    ```
+
    This script will invoke:
+
    - the `TypeScript` compiler (tsc) to generate the type definitions for the packages
    - `babel` to transpile the source code of every package to a version that browsers can understand (supported browsers are defined in [`@instructure/browserslist-config-instui`](https://github.com/instructure/instructure-ui/blob/master/packages/browserslist-config-instui/index.js) package)
    - a `clean` script which removes any previous build output
@@ -53,6 +69,9 @@ The documentation application is a simple client side only single page applicati
 In order to build the static files for the documentation, from the project root run:
 
 ```sh
+---
+type: code
+---
 npm run build:docs
 ```
 
