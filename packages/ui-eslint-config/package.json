@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-eslint-config",
-  "version": "8.53.1",
+  "version": "8.53.2",
   "description": "A UI shared eslint config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -16,13 +16,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/browserslist-config-instui": "8.53.1",
+    "@instructure/browserslist-config-instui": "8.53.2",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "eslint-config-prettier": "^8.10.0",
     "eslint-plugin-compat": "^4.2.0",
     "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-instructure-ui": "8.53.1",
+    "eslint-plugin-instructure-ui": "8.53.2",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-mocha": "^10.2.0",
     "eslint-plugin-no-explicit-type-exports": "^0.12.1",
