@@ -1,6 +1,6 @@
 {
   "name": "@instructure/shared-types",
-  "version": "8.53.1",
+  "version": "8.53.2",
   "description": "Shared TypeScript typings for Instructure UI packages.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "homepage": "https://instructure.design/#shared-types",
