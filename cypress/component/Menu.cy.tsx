@@ -150,6 +150,24 @@ describe('<Menu/>', () => {
 
   describe('Menu with a sub-menu', () => {
     describe('...and keyboard and mouse interaction', () => {
+      it(`should show and focus flyout menu on click Copy of the MenuSingle test`, () => {
+        cy.mount(
+          <Menu label="Parent">
+            <Menu label="Flyout">
+              <MenuItem>Flyout Menu Item</MenuItem>
+              <MenuItem>Bar</MenuItem>
+              <MenuItem>Baz</MenuItem>
+            </Menu>
+          </Menu>
+        )
+        cy.contains('Flyout')
+          .click()
+          .then(() => {
+            cy.contains('Flyout Menu Item').should('exist')
+            cy.get('[role="menu"]').should('be.focused')
+          })
+      })
+
       it(`should show and focus flyout menu on click`, () => {
         cy.mount(
           <Menu label="Parent">
