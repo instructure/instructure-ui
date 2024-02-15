@@ -82,32 +82,15 @@ describe('<Menu />', () => {
           <MenuItem value="Account">Account</MenuItem>
         </Menu>
       )
+      // At line 329 - A11 Check find this rendered element
+      screen.debug(document.body) 
+
       const item = getByText('Account')
 
       userEvent.click(item)
 
       expect(onSelect).not.toHaveBeenCalled()
     })
-
-    // TODO test it with cypress
-    // it('should move focus properly', async () => {
-    //   await mount(
-    //     <Menu label="Settings">
-    //       <MenuItem value="Account">Account</MenuItem>
-    //     </Menu>
-    //   )
-
-    //   const menu = await MenuLocator.find(':label(Settings)')
-    //   const items = await menu.findAllItems()
-
-    //   await menu.keyDown('up')
-
-    //   expect(items[items.length - 1].containsFocus()).to.be.true()
-
-    //   await menu.keyDown('down')
-
-    //   expect(items[0].containsFocus()).to.be.true()
-    // })
 
     it('should provide a menu ref', () => {
       const menuRef = jest.fn()
@@ -280,81 +263,6 @@ describe('<Menu />', () => {
       expect(popoverRef).toHaveBeenCalled()
     })
 
-    // TODO test it with Cypress
-    // it('should focus the menu first', async () => {
-    //   await mount(
-    //     <Menu trigger={<button>More</button>} defaultShow>
-    //       <MenuItem>Learning Mastery</MenuItem>
-    //       <MenuItem disabled>Gradebook</MenuItem>
-    //     </Menu>
-    //   )
-
-    //   const subject = await MenuLocator.find(':label(More)')
-    //   const popover = await subject.findPopoverContent()
-    //   const menu = await popover.find(`[role="menu"]`)
-
-    //   await wait(() => {
-    //     expect(menu.focused()).to.be.true()
-    //     expect(menu.getAttribute('tabIndex')).to.equal('0')
-    //   })
-
-    //   await menu.keyDown('down')
-
-    //   await wait(() => {
-    //     expect(menu.focused()).to.be.false()
-    //     expect(menu.getAttribute('tabIndex')).to.equal('0')
-    //   })
-    // })
-
-  // TODO TEST IT WITH CYPRESS
-  //   it('should apply offset values to Popover', async () => {
-  //     const getTransforms = (transform: string) => {
-  //       const transformValues = new DOMMatrixReadOnly(transform)
-  //       return {
-  //         transformX: Math.floor(transformValues.m41),
-  //         transformY: Math.floor(transformValues.m42)
-  //       }
-  //     }
-  //     await mount(
-  //       <Menu trigger={<button>More</button>} defaultShow>
-  //         <MenuItem>Learning Mastery</MenuItem>
-  //         <MenuItem disabled>Gradebook</MenuItem>
-  //       </Menu>
-  //     )
-
-  //     const subject = await MenuLocator.find(':label(More)')
-  //     const popover = await subject.findPopoverContent()
-
-  //     // offset props influence the transform CSS prop of the Popover
-  //     const defaultTransform = getComputedStyle(popover.getDOMNode()).transform
-  //     const { transformX: defaultTransformX, transformY: defaultTransformY } =
-  //       getTransforms(defaultTransform)
-
-  //     await unmount()
-
-  //     await mount(
-  //       <Menu
-  //         trigger={<button>More</button>}
-  //         defaultShow
-  //         offsetX={-10}
-  //         offsetY="30px"
-  //       >
-  //         <MenuItem>Learning Mastery</MenuItem>
-  //         <MenuItem disabled>Gradebook</MenuItem>
-  //       </Menu>
-  //     )
-
-  //     const subject2 = await MenuLocator.find(':label(More)')
-  //     const popover2 = await subject2.findPopoverContent()
-
-  //     const newTransform = getComputedStyle(popover2.getDOMNode()).transform
-  //     const { transformX: newTransformX, transformY: newTransformY } =
-  //       getTransforms(newTransform)
-
-  //     expect(newTransformX).to.equal(defaultTransformX + 10)
-  //     expect(newTransformY).to.equal(defaultTransformY + 30)
-  //   })
-
     it('should call onToggle on click', () => {
       const onToggle = jest.fn()
 
@@ -404,8 +312,10 @@ describe('<Menu />', () => {
     })
 
     describe('for a11y', () => {
-      // TODO find solution
+      // TODO find solution (solution: moving this test to the top)
       // Unable to perform pointer interaction as the element inherits `pointer-events: none`
+      // Error on: (rendered at line 77)  --> SPAN #MenuItem__label_3
+      // Current rendered element:        --> SPAN #MenuItem__label_23
       it('should meet standards when menu is closed', async () => {
         const { container } = render(
           <div data-testid="menu">
@@ -415,13 +325,10 @@ describe('<Menu />', () => {
             </Menu>
           </div>
         )
-      //   const axeCheck = await runAxeCheck(container)
-      //   expect(axeCheck).toBe(true)
+      // const axeCheck = await runAxeCheck(container)
+      // expect(axeCheck).toBe(true)
+      // const menu = screen.getByTestId('menu')
 
-
-
-        // const menu = screen.getByTestId('menu')
-        
         await act(async () => {
           await screen.getByRole('button').click()
         })
@@ -433,306 +340,6 @@ describe('<Menu />', () => {
           expect(axeCheck).toBe(true)
         })
       })
-
-      // it('should meet standards when menu is open', async () => {
-      //   const { container } = render(
-      //     <Menu trigger={<button>More</button>} defaultShow>
-      //       <MenuItem>Learning Mastery</MenuItem>
-      //       <MenuItem disabled>Gradebook</MenuItem>
-      //     </Menu>
-      //   )
-      //   const axeCheck = await runAxeCheck(container)
-
-      //   expect(axeCheck).toBe(true)
-      // })
     })
-  })
-
-  describe('with a sub-menu', () => {
-  // TODO try it with Cypress
-    // const testShowFlyoutOnEvent = (event: { type: string; which?: string }) => {
-    //   it(`should show flyout menu on ${event.type} ${event.which || ''}`, async () => {
-    //     render(
-    //       <Menu label="Parent">
-    //         <Menu label="Flyout">
-    //           <MenuItem>Flyout Menu Item</MenuItem>
-    //           <MenuItem>Bar</MenuItem>
-    //           <MenuItem>Baz</MenuItem>
-    //         </Menu>
-    //       </Menu>
-    //     )
-    //     const flyoutTrigger = screen.getByText('Flyout')
-    
-    //     act(() => {
-    //       if (event.which) {
-    //         (fireEvent as any)[event.type](flyoutTrigger, { key: event.which })
-    //       } else {
-    //         (fireEvent as any)[event.type](flyoutTrigger)
-    //       }
-    //     })
-
-    //     const flyoutItem = screen.getByText('Bar')
-    //     await waitFor(() => {
-    //       expect(flyoutItem).toBeInTheDocument()
-    //     })
-
-    //   })
-    // }
-
-    describe('...and keyboard and mouse interaction', () => {
-      // testShowFlyoutOnEvent({ type: 'click' })
-      // testShowFlyoutOnEvent({ type: 'mouseOver' })
-      // testShowFlyoutOnEvent({ type: 'keyDown', which: 'right' })
-      // testShowFlyoutOnEvent({ type: 'keyUp', which: 'space' })
-      // testShowFlyoutOnEvent({ type: 'keyDown', which: 'enter' })
-
-      // testFocusFlyoutOnEvent({ type: 'click' })
-      // testFocusFlyoutOnEvent({ type: 'keyDown', which: 'right' })
-      // testFocusFlyoutOnEvent({ type: 'keyUp', which: 'space' })
-      // testFocusFlyoutOnEvent({ type: 'keyDown', which: 'enter' })
-    })
-
-  //   it('it should not open the sub-menu popover when disabled', async () => {
-  //     await mount(
-  //       <Menu label="Parent" disabled>
-  //         <Menu label="Flyout">
-  //           <MenuItem>Foo</MenuItem>
-  //           <MenuItem>Bar</MenuItem>
-  //           <MenuItem>Baz</MenuItem>
-  //         </Menu>
-  //       </Menu>
-  //     )
-
-  //     const menu = await MenuLocator.find(':label(Parent)')
-  //     const trigger = await menu.findItem(':label(Flyout)')
-
-  //     await trigger.click(undefined, { clickable: false })
-
-  //     const subMenu = await MenuLocator.find(':label(Flyout)')
-  //     const popover = await subMenu.findPopoverContent({ expectEmpty: true })
-
-  //     expect(popover).to.not.exist()
-  //   })
-
-  //   it('it should close the sub-menu popover on escape press', async () => {
-  //     await mount(
-  //       <Menu label="Parent">
-  //         <Menu label="Flyout">
-  //           <MenuItem>Foo</MenuItem>
-  //           <MenuItem>Bar</MenuItem>
-  //           <MenuItem>Baz</MenuItem>
-  //         </Menu>
-  //       </Menu>
-  //     )
-
-  //     const menu = await MenuLocator.find(':label(Parent)')
-  //     const trigger = await menu.findItem(':label(Flyout)')
-
-  //     await trigger.click()
-
-  //     const subMenu = await MenuLocator.find(':label(Flyout)')
-  //     const popover = await subMenu.findPopoverContent()
-
-  //     await wait(() => {
-  //       expect(popover.containsFocus()).to.be.true()
-  //     })
-
-  //     await popover.keyUp('escape', {
-  //       defaultPrevented: false,
-  //       bubbles: true,
-  //       button: 0
-  //     })
-
-  //     expect(
-  //       await (
-  //         await MenuLocator.find(':label(Flyout)')
-  //       ).findPopoverContent({
-  //         expectEmpty: true
-  //       })
-  //     ).to.not.exist()
-  //   })
-
-  //   it('it should close the sub-menu popover on left press', async () => {
-  //     await mount(
-  //       <Menu label="Parent">
-  //         <Menu label="Flyout">
-  //           <MenuItem>Foo</MenuItem>
-  //           <MenuItem>Bar</MenuItem>
-  //           <MenuItem>Baz</MenuItem>
-  //         </Menu>
-  //       </Menu>
-  //     )
-
-  //     const menu = await MenuLocator.find(':label(Parent)')
-  //     const trigger = await menu.findItem(':label(Flyout)')
-
-  //     await trigger.click()
-
-  //     const subMenu = await MenuLocator.find(':label(Flyout)')
-  //     const popover = await subMenu.findPopoverContent()
-
-  //     await wait(() => {
-  //       expect(popover.containsFocus()).to.be.true()
-  //     })
-
-  //     await popover.keyDown('left')
-
-  //     expect(
-  //       await subMenu.findPopoverContent({ expectEmpty: true })
-  //     ).to.not.exist()
-  //   })
-
-  //   it('it should call onDismiss on tab press', async () => {
-  //     const onDismiss = stub()
-
-  //     await mount(
-  //       <Menu label="Parent">
-  //         <Menu label="Flyout" onDismiss={onDismiss}>
-  //           <MenuItem>Foo</MenuItem>
-  //           <MenuItem>Bar</MenuItem>
-  //           <MenuItem>Baz</MenuItem>
-  //         </Menu>
-  //       </Menu>
-  //     )
-
-  //     const menu = await MenuLocator.find(':label(Parent)')
-  //     const trigger = await menu.findItem(':label(Flyout)')
-
-  //     await trigger.click()
-
-  //     const subMenu = await MenuLocator.find(':label(Flyout)')
-  //     const popover = await subMenu.findPopoverContent()
-
-  //     await wait(() => {
-  //       expect(popover.containsFocus()).to.be.true()
-  //     })
-
-  //     await popover.keyDown('tab')
-
-  //     expect(onDismiss).to.have.been.called()
-  //   })
-
-  //   it('it should call onSelect when sub-menu popover option is selected', async () => {
-  //     const onSelect = stub()
-
-  //     await mount(
-  //       <Menu label="Parent">
-  //         <Menu label="Flyout" onSelect={onSelect}>
-  //           <MenuItem>Foo</MenuItem>
-  //           <MenuItem>Bar</MenuItem>
-  //           <MenuItem>Baz</MenuItem>
-  //         </Menu>
-  //       </Menu>
-  //     )
-
-  //     const menu = await MenuLocator.find(':label(Parent)')
-  //     const trigger = await menu.findItem(':label(Flyout)')
-
-  //     await trigger.click()
-
-  //     const subMenu = await MenuLocator.find(':label(Flyout)')
-  //     const popover = await subMenu.findPopoverContent()
-
-  //     await wait(() => {
-  //       expect(popover.containsFocus()).to.be.true()
-  //     })
-
-  //     const menuItem = await popover.findItem(':label(Foo)')
-
-  //     await menuItem.click()
-
-  //     expect(onSelect).to.have.been.called()
-  //   })
-
-  //   // TODO: this test works locally but fails in CI so it's skipped for now
-  //   // should be turned back on when these tests are moved to the new format (jest + testing library)
-  //   it.skip('it should call onToggle on document click and on dismiss', async () => {
-  //     const onToggle = stub()
-
-  //     await mount(
-  //       <Menu label="Parent">
-  //         <Menu label="Flyout" onToggle={onToggle}>
-  //           <MenuItem>Foo</MenuItem>
-  //           <MenuItem>Bar</MenuItem>
-  //           <MenuItem>Baz</MenuItem>
-  //         </Menu>
-  //       </Menu>
-  //     )
-
-  //     const menu = await MenuLocator.find(':label(Parent)')
-  //     const trigger = await menu.findItem(':label(Flyout)')
-
-  //     await trigger.click()
-
-  //     expect(onToggle).to.have.been.called()
-  //     expect(onToggle.getCall(0).args[0]).to.equal(true)
-
-  //     const subMenu = await MenuLocator.find(':label(Flyout)')
-  //     const popover = await subMenu.findPopoverContent()
-
-  //     await wait(() => {
-  //       expect(popover.containsFocus()).to.be.true()
-  //     })
-
-  //     onToggle.resetHistory()
-  //     await wrapQueryResult(trigger.getOwnerDocument().documentElement).click()
-
-  //     expect(onToggle).to.have.been.called()
-  //     expect(onToggle.getCall(0).args[0]).to.equal(false)
-  //   })
-
-  //   it('it should call onMouseOver on hover', async () => {
-  //     const onMouseOver = stub()
-
-  //     /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-
-  //     await mount(
-  //       <Menu label="Parent">
-  //         <Menu label="Flyout" onMouseOver={onMouseOver}>
-  //           <MenuItem>Foo</MenuItem>
-  //           <MenuItem>Bar</MenuItem>
-  //           <MenuItem>Baz</MenuItem>
-  //         </Menu>
-  //       </Menu>
-  //     )
-  //     /* eslint-enable jsx-a11y/mouse-events-have-key-events */
-
-  //     const menu = await MenuLocator.find(':label(Parent)')
-  //     const trigger = await menu.findItem(':label(Flyout)')
-
-  //     await trigger.mouseOver()
-
-  //     expect(onMouseOver).to.have.been.called()
-  //   })
   })
 })
-
-
-
-// function testFocusFlyoutOnEvent(event: { type: string; which?: string }) {
-//   it(`expect flyout menu to be focused on ${event.type} ${
-//     event.which || ''
-//   }`, async () => {
-//     await mount(
-//       <Menu label="Parent">
-//         <Menu label="Flyout">
-//           <MenuItem>Foo</MenuItem>
-//           <MenuItem>Bar</MenuItem>
-//           <MenuItem>Baz</MenuItem>
-//         </Menu>
-//       </Menu>
-//     )
-
-//     const menu = await MenuLocator.find(':label(Parent)')
-//     const trigger = (await menu.findItem(':label(Flyout)')) as any
-
-//     await trigger[event.type](event.which)
-
-//     const subMenu = await MenuLocator.find(':label(Flyout)')
-//     const popover = await subMenu.findPopoverContent()
-
-//     await wait(() => {
-//       expect(popover.containsFocus()).to.be.true()
-//     })
-//   })
-// }

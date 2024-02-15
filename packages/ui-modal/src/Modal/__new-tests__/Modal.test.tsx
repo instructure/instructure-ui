@@ -19,7 +19,7 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SOFTWARE. 
  */
 
 import React from 'react'
@@ -55,7 +55,7 @@ describe('<Modal />', () => {
     await userEvent.click(document.body)
 
     await waitFor(() => {
-      // V1 copy
+      // V1 copy at the top of the file
       expect(onDismiss).toHaveBeenCalled()
     })
   })
