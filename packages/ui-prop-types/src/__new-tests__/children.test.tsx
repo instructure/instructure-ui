@@ -23,8 +23,7 @@
  */
 
 import React, { ReactNode } from 'react'
-import { expect } from '@instructure/ui-test-utils'
-
+import '@testing-library/jest-dom'
 import { Children } from '../Children'
 
 const Foo = () => <div>foo</div>
@@ -43,23 +42,17 @@ describe('children', () => {
         children: <Foo />
       }
 
-      expect(
-        oneOf(validProps)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      expect(oneOf(validProps)(props, 'children', 'TestComponent')).toBeNull()
 
       props.children = <Bar />
-      expect(
-        oneOf(validProps)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      expect(oneOf(validProps)(props, 'children', 'TestComponent')).toBeNull()
 
       props.children = [
         <Bar key="bar1" />,
         <Foo key="foo" />,
         <Bar key="bar2" />
       ]
-      expect(
-        oneOf(validProps)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      expect(oneOf(validProps)(props, 'children', 'TestComponent')).toBeNull()
     })
 
     it('should reject props of the incorrect type', () => {
@@ -71,17 +64,17 @@ describe('children', () => {
 
       expect(
         oneOf(validProps)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       props.children = <div>hello</div>
       expect(
         oneOf(validProps)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       props.children = 'hello world'
       expect(
         oneOf(validProps)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       props.children = [
         <Bar key="bar1" />,
@@ -91,7 +84,7 @@ describe('children', () => {
       ]
       expect(
         oneOf(validProps)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       props.children = [
         <Bar key="bar1" />,
@@ -101,7 +94,7 @@ describe('children', () => {
       ]
       expect(
         oneOf(validProps)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
     })
 
     it('can be required', () => {
@@ -113,23 +106,21 @@ describe('children', () => {
       // Still validates correctly
       expect(
         oneOf(validProps).isRequired(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      ).toBeNull()
 
       props.children = <Baz />
       expect(
         oneOf(validProps).isRequired(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       // Accepts a null child when not required
       props.children = null
-      expect(
-        oneOf(validProps)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      expect(oneOf(validProps)(props, 'children', 'TestComponent')).toBeNull()
 
       // Requires the prop to be supplied when required
       expect(
         oneOf(validProps).isRequired(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
     })
   })
 
@@ -143,17 +134,17 @@ describe('children', () => {
 
       expect(
         oneOfEach(validProps)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      ).toBeNull()
 
       props.children = [<Baz key="baz" />, <Foo key="foo" />, <Bar key="bar" />]
       expect(
         oneOfEach(validProps)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      ).toBeNull()
 
       props.children = [<Baz key="baz" />, <Bar key="bar" />, <Foo key="foo" />]
       expect(
         oneOfEach(validProps)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      ).toBeNull()
     })
 
     it('should reject when exactly one of each prop type is not present', () => {
@@ -165,7 +156,7 @@ describe('children', () => {
 
       expect(
         oneOfEach(validProps)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       props.children = [
         <Foo key="foo" />,
@@ -175,12 +166,12 @@ describe('children', () => {
       ]
       expect(
         oneOfEach(validProps)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       props.children = [<Foo key="foo" />, 'Hello world', <Baz key="baz" />]
       expect(
         oneOfEach(validProps)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
     })
   })
 
@@ -197,27 +188,27 @@ describe('children', () => {
 
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      ).toBeNull()
 
       props.children = [<Foo key="foo" />, <Bar key="bar" />]
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      ).toBeNull()
 
       props.children = [<Foo key="foo" />, <Bar key="bar" />, <Baz key="baz" />]
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      ).toBeNull()
 
       props.children = [<Bar key="bar" />]
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      ).toBeNull()
 
       props.children = [<Bar key="bar" />, <Qux key="bar" />]
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      ).toBeNull()
     })
 
     it('should reject props that do not match the designated ordering', () => {
@@ -232,27 +223,27 @@ describe('children', () => {
 
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       props.children = <Qux />
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       props.children = [<Foo key="foo" />, <Baz key="baz" />, <Bar key="bar" />]
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       props.children = [<Bar key="bar" />, <Qux key="qux" />, <Baz key="baz" />]
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       props.children = [<Bar key="bar" />, <div key="qux">qux</div>]
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
     })
 
     it('can be required', () => {
@@ -271,7 +262,7 @@ describe('children', () => {
           'children',
           'TestComponent'
         )
-      ).to.not.exist()
+      ).toBeNull()
 
       props.children = <Qux />
       expect(
@@ -280,13 +271,13 @@ describe('children', () => {
           'children',
           'TestComponent'
         )
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
 
       // Accepts a null child when not required
       props.children = null
       expect(
         enforceOrder(...validTypeGroups)(props, 'children', 'TestComponent')
-      ).to.not.exist()
+      ).toBeNull()
       // Requires the prop to be supplied when required
       expect(
         enforceOrder(...validTypeGroups).isRequired(
@@ -294,7 +285,7 @@ describe('children', () => {
           'children',
           'TestComponent'
         )
-      ).to.be.an.instanceOf(Error)
+      ).toBeInstanceOf(Error)
     })
   })
 })
