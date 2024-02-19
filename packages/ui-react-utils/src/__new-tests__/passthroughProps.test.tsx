@@ -22,24 +22,23 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
 import { passthroughProps } from '../passthroughProps'
 
-describe('passthroughProps', async () => {
-  /* eslint-disable mocha/no-synchronous-tests */
+describe('passthroughProps', () => {
   it('should passthrough standard dom attributes', () => {
     const props = {
       id: 'myId',
       title: 'My title'
     }
-    expect(Object.keys(passthroughProps(props)).length).to.equal(2)
+    expect(Object.keys(passthroughProps(props)).length).toEqual(2)
   })
 
   it('should passthrough data attributes', () => {
     const props = {
       'data-test': true
     }
-    expect(Object.keys(passthroughProps(props)).length).to.equal(1)
+    expect(Object.keys(passthroughProps(props)).length).toEqual(1)
   })
 
   it('should passthrough valid react props', () => {
@@ -47,7 +46,7 @@ describe('passthroughProps', async () => {
       ref: () => {},
       innerHTML: '<span>hello world</span>'
     }
-    expect(Object.keys(passthroughProps(props)).length).to.equal(2)
+    expect(Object.keys(passthroughProps(props)).length).toEqual(2)
   })
 
   it('should passthrough props prefixed with "on"', () => {
@@ -56,14 +55,14 @@ describe('passthroughProps', async () => {
       onCustomCallback: () => {},
       onChange: () => {}
     }
-    expect(Object.keys(passthroughProps(props)).length).to.equal(3)
+    expect(Object.keys(passthroughProps(props)).length).toEqual(3)
   })
 
   it('should omit invalid props', () => {
     const props = {
       myCustomProp: 'hello'
     }
-    expect(Object.keys(passthroughProps(props)).length).to.equal(0)
+    expect(Object.keys(passthroughProps(props)).length).toEqual(0)
   })
 
   it('should omit certain react props', () => {
@@ -73,7 +72,7 @@ describe('passthroughProps', async () => {
       children: 'hello world',
       theme: { themeVar: 'myColor' }
     }
-    expect(Object.keys(passthroughProps(props)).length).to.equal(0)
+    expect(Object.keys(passthroughProps(props)).length).toEqual(0)
   })
 
   it('should passthrough and omit correct props', () => {
@@ -90,7 +89,7 @@ describe('passthroughProps', async () => {
       onChange: null
     }
 
-    expect(passthroughProps(props)).to.deep.equal({
+    expect(passthroughProps(props)).toEqual({
       id: 'myId',
       title: 'My title',
       'data-test': true,
@@ -98,5 +97,4 @@ describe('passthroughProps', async () => {
       onChange: null
     })
   })
-  /* eslint-enable mocha/no-synchronous-tests */
 })

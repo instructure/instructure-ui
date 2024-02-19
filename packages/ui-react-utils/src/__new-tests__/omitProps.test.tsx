@@ -23,12 +23,11 @@
  */
 
 import PropTypes from 'prop-types'
-import { expect } from '@instructure/ui-test-utils'
-import { pickProps } from '../pickProps'
+import '@testing-library/jest-dom'
+import { omitProps } from '../omitProps'
 
-describe('pickProps', () => {
-  it('should work with propTypes', () => {
-    //arrange
+describe('omitProps', () => {
+  it('should work with PropTypes', () => {
     const propTypes = {
       prop1: PropTypes.string.isRequired,
       prop2: PropTypes.number
@@ -41,73 +40,74 @@ describe('pickProps', () => {
     }
 
     const expectedResult = {
-      prop1: 'hello',
-      prop2: 42
+      excessiveProp: 'excessiveValue'
     }
-    //act
-    const actualResult = pickProps(inputProps, propTypes)
 
-    //assert
-    expect(actualResult).to.be.eql(expectedResult)
+    const actualResult = omitProps(inputProps, propTypes)
+
+    expect(actualResult).toEqual(expectedResult)
   })
 
-  it('should add the `include` keys to the result with PropTypes', () => {
+  it('should work with PropTypes and exclude the given keys', () => {
     const propTypes = {
       prop1: PropTypes.string.isRequired,
       prop2: PropTypes.number
     }
+
     const inputProps = {
       prop1: 'hello',
       prop2: 42,
       excessiveProp1: 'excessiveValue1',
       excessiveProp2: 'excessiveValue2'
     }
+
     const expectedResult = {
-      prop1: 'hello',
-      prop2: 42,
       excessiveProp2: 'excessiveValue2'
     }
 
-    const actualResult = pickProps(inputProps, propTypes, ['excessiveProp2'])
+    const actualResult = omitProps(inputProps, propTypes, ['excessiveProp1'])
 
-    expect(actualResult).to.be.eql(expectedResult)
+    expect(actualResult).toEqual(expectedResult)
   })
 
   it('should work with an input of a list allowed prop names', () => {
     const allowedPropKeys = ['prop1', 'prop2']
-    const inputProps = {
-      prop1: 'hello',
-      prop2: 42,
-      excessiveProp1: 'excessiveValue1'
-    }
-    const expectedResult = {
-      prop1: 'hello',
-      prop2: 42
-    }
 
-    const actualResult = pickProps(inputProps, allowedPropKeys)
-
-    expect(actualResult).to.be.eql(expectedResult)
-  })
-
-  it('should add the `include` keys to the result with a list allowed prop names', () => {
-    const allowedPropKeys = ['prop1', 'prop2']
     const inputProps = {
       prop1: 'hello',
       prop2: 42,
       excessiveProp1: 'excessiveValue1',
       excessiveProp2: 'excessiveValue2'
     }
+
     const expectedResult = {
-      prop1: 'hello',
-      prop2: 42,
+      excessiveProp1: 'excessiveValue1',
       excessiveProp2: 'excessiveValue2'
     }
 
-    const actualResult = pickProps(inputProps, allowedPropKeys, [
-      'excessiveProp2'
+    const actualResult = omitProps(inputProps, allowedPropKeys)
+
+    expect(actualResult).toEqual(expectedResult)
+  })
+
+  it('should work with an input of a list allowed prop names and exclude the given keys', () => {
+    const allowedPropKeys = ['prop1', 'prop2']
+
+    const inputProps = {
+      prop1: 'hello',
+      prop2: 42,
+      excessiveProp1: 'excessiveValue1',
+      excessiveProp2: 'excessiveValue2'
+    }
+
+    const expectedResult = {
+      excessiveProp2: 'excessiveValue2'
+    }
+
+    const actualResult = omitProps(inputProps, allowedPropKeys, [
+      'excessiveProp1'
     ])
 
-    expect(actualResult).to.be.eql(expectedResult)
+    expect(actualResult).toEqual(expectedResult)
   })
 })

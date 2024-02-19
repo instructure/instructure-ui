@@ -25,7 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { expect, mount, spy } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { hack } from '../hack'
 
@@ -53,27 +54,37 @@ class TestComponent extends Component<TestComponentProps> {
   }
 }
 
-describe('@hack', async () => {
-  describe('hack props', async () => {
+describe('@hack', () => {
+  describe('hack props', () => {
     const HackComponent = hack(['bar'])(TestComponent)
 
-    it('should warn when using an hack prop', async () => {
-      const consoleWarn = spy(console, 'warn')
-      await mount(<HackComponent bar="Jane" />)
-      await expect(consoleWarn).to.have.been.calledWithMatch(
-        [
-          'Warning: [TestComponent] ',
-          'The `bar` prop is a temporary hack and will be removed in a future release.'
-        ].join('')
+    it('should warn when using an hack prop', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
+      render(<HackComponent bar="Jane" />)
+
+      const expectedWarningMessage =
+        'Warning: [TestComponent] The `bar` prop is a temporary hack and will be removed in a future release.'
+
+      expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect.stringContaining(expectedWarningMessage),
+        expect.any(String)
       )
+
+      consoleWarningSpy.mockRestore()
     })
 
-    it('should not output a warning using a non-hack prop', async () => {
-      const consoleWarn = spy(console, 'warn')
+    it('should not output a warning using a non-hack prop', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
 
-      await mount(<HackComponent qux="Jane" />)
+      render(<HackComponent qux="Jane" />)
 
-      await expect(consoleWarn).to.not.have.been.called()
+      expect(consoleWarningSpy).not.toHaveBeenCalled()
+
+      consoleWarningSpy.mockRestore()
     })
   })
 })

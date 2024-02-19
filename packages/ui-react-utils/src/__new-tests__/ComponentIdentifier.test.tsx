@@ -24,10 +24,21 @@
 
 import React, { Component, ReactNode } from 'react'
 import PropTypes from 'prop-types'
-import { mount, expect, stub } from '@instructure/ui-test-utils'
+
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
 import { ComponentIdentifier } from '../ComponentIdentifier'
 
-describe('ComponentIdentifier', async () => {
+describe('ComponentIdentifier', () => {
+  beforeAll(() => {
+    // Mocking console warnings to prevent test output pollution
+    jest.spyOn(console, 'warn').mockImplementation(() => {})
+  })
+  afterAll(() => {
+    jest.restoreAllMocks()
+  })
+
   class Trigger extends ComponentIdentifier<any> {
     static displayName = 'Trigger'
   }
@@ -53,9 +64,9 @@ describe('ComponentIdentifier', async () => {
     }
   }
 
-  it('should render only child', async () => {
+  it('should render only child', () => {
     let buttonRef: HTMLButtonElement
-    await mount(
+    render(
       <App>
         <Trigger>
           <button ref={(el) => (buttonRef = el!)}>Click Me</button>
@@ -63,28 +74,24 @@ describe('ComponentIdentifier', async () => {
       </App>
     )
 
-    expect(buttonRef!.textContent).to.equal('Click Me')
+    expect(buttonRef!.textContent).toEqual('Click Me')
   })
 
-  it('should not error when no children provided', async () => {
-    let error = false
-    try {
-      await mount(
+  it('should not error when no children provided', () => {
+    const renderApp = () =>
+      render(
         <App>
           <Trigger />
         </App>
       )
-    } catch (e) {
-      error = true
-    }
 
-    expect(error).to.be.false()
+    expect(renderApp).not.toThrow()
   })
 
-  it('should pass props', async () => {
+  it('should pass props', () => {
     let buttonRef: HTMLButtonElement | null
-    const onClick = stub()
-    await mount(
+    const onClick = jest.fn()
+    render(
       <App>
         <Trigger onClick={onClick}>
           <button ref={(el) => (buttonRef = el)}>Click Me</button>
@@ -92,7 +99,7 @@ describe('ComponentIdentifier', async () => {
       </App>
     )
 
-    await buttonRef!.click()
-    expect(onClick).to.have.been.called()
+    buttonRef!.click()
+    expect(onClick).toHaveBeenCalled()
   })
 })

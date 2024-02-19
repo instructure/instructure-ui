@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-
+import '@testing-library/jest-dom'
 import { getInteraction, InteractionType } from '../getInteraction'
 
 describe('getInteraction', () => {
@@ -33,7 +32,7 @@ describe('getInteraction', () => {
       bar: 'bar'
     }
 
-    expect(getInteraction({ props })).to.equal('enabled')
+    expect(getInteraction({ props })).toEqual('enabled')
   })
 
   it('should return `interaction` value when `interaction` is specified', () => {
@@ -41,15 +40,15 @@ describe('getInteraction', () => {
       interaction: 'enabled'
     }
 
-    expect(getInteraction({ props })).to.equal('enabled')
+    expect(getInteraction({ props })).toEqual('enabled')
 
     props.interaction = 'disabled'
 
-    expect(getInteraction({ props })).to.equal('disabled')
+    expect(getInteraction({ props })).toEqual('disabled')
 
     props.interaction = 'readonly'
 
-    expect(getInteraction({ props })).to.equal('readonly')
+    expect(getInteraction({ props })).toEqual('readonly')
   })
 
   it('should give preference to interaction even when disabled and readonly are also specified', () => {
@@ -59,17 +58,17 @@ describe('getInteraction', () => {
       readOnly: true
     }
 
-    expect(getInteraction({ props })).to.equal('enabled')
+    expect(getInteraction({ props })).toEqual('enabled')
 
     props.disabled = false
     props.interaction = 'disabled'
 
-    expect(getInteraction({ props })).to.equal('disabled')
+    expect(getInteraction({ props })).toEqual('disabled')
 
     props.readOnly = false
     props.interaction = 'readonly'
 
-    expect(getInteraction({ props })).to.equal('readonly')
+    expect(getInteraction({ props })).toEqual('readonly')
   })
 
   it("should return 'disabled' when `disabled` prop is set and `interaction` is not specified", () => {
@@ -77,7 +76,7 @@ describe('getInteraction', () => {
       disabled: true
     }
 
-    expect(getInteraction({ props })).to.equal('disabled')
+    expect(getInteraction({ props })).toEqual('disabled')
   })
 
   it("should return 'disabled' when both `disabled` and `readonly` props are set and `interaction` is not specified", () => {
@@ -86,7 +85,7 @@ describe('getInteraction', () => {
       readOnly: true
     }
 
-    expect(getInteraction({ props })).to.equal('disabled')
+    expect(getInteraction({ props })).toEqual('disabled')
   })
 
   it("should return 'readonly' when `readonly` prop is set and `interaction` and `disabled` are not specified", () => {
@@ -94,7 +93,7 @@ describe('getInteraction', () => {
       disabled: true
     }
 
-    expect(getInteraction({ props })).to.equal('disabled')
+    expect(getInteraction({ props })).toEqual('disabled')
   })
 
   it('should not include `disabled` if it is not listed in the interactionTypes', () => {
@@ -103,7 +102,7 @@ describe('getInteraction', () => {
       readOnly: true
     }
 
-    expect(getInteraction({ props, interactionTypes: ['readonly'] })).to.equal(
+    expect(getInteraction({ props, interactionTypes: ['readonly'] })).toEqual(
       'readonly'
     )
   })
@@ -113,7 +112,7 @@ describe('getInteraction', () => {
       readOnly: true
     }
 
-    expect(getInteraction({ props, interactionTypes: ['disabled'] })).to.equal(
+    expect(getInteraction({ props, interactionTypes: ['disabled'] })).toEqual(
       'enabled'
     )
   })
