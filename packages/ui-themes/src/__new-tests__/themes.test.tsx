@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { canvas, canvasHighContrast, instructure } from '..'
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
 
 const themes = [canvas, canvasHighContrast, instructure]
 
@@ -32,16 +32,19 @@ describe('themes are backwards compatible', () => {
       it(`${theme.key}`, () => {
         const brandColor = theme.variables.colors.brand
 
-        expect(brandColor).to.not.be.empty()
+        expect(brandColor).toBeDefined()
+        expect(brandColor).not.toBe('')
       })
     }
   })
+
   describe("should be able to access theme variables with 'theme.x'", () => {
     for (const theme of themes) {
       it(`${theme.key}`, () => {
         const brandColor = theme.colors.brand
 
-        expect(brandColor).to.not.be.empty()
+        expect(brandColor).toBeDefined()
+        expect(brandColor).not.toBe('')
       })
     }
   })
