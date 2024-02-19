@@ -69,6 +69,8 @@
     "@babel/cli": "^7.23.0",
     "@commitlint/cli": "^17.8.0",
     "@commitlint/config-conventional": "^17.8.0",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.3",
     "@instructure/ui-scripts": "8",
     "@testing-library/dom": "^9.3.3",
     "@testing-library/jest-dom": "^6.1.4",

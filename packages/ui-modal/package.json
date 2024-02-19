@@ -47,9 +47,10 @@
     "@instructure/ui-babel-preset": "8.53.2",
     "@instructure/ui-color-utils": "8.53.2",
     "@instructure/ui-position": "8.53.2",
-    "@instructure/ui-test-locator": "8.53.2",
-    "@instructure/ui-test-utils": "8.53.2",
-    "@instructure/ui-themes": "8.53.2"
+    "@instructure/ui-themes": "8.53.2",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.1"
   },
   "publishConfig": {
     "access": "public"
