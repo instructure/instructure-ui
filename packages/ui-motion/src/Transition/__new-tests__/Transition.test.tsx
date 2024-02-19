@@ -24,18 +24,18 @@
 
 import React, { Component } from 'react'
 import {
-  expect,
-  mount,
-  stub,
-  wait,
-  within,
-  find
-} from '@instructure/ui-test-utils'
+  render,
+  waitFor,
+  waitForElementToBeRemoved
+} from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { Transition } from '../index'
 import { getClassNames } from '../styles'
 
 import type { TransitionStyle, TransitionType } from '../props'
+
+const COMPONENT_TEXT = 'Component Text'
 
 const getClass = (
   type: TransitionType,
@@ -47,11 +47,11 @@ const getClass = (
 
 class ExampleComponent extends Component {
   render() {
-    return <div>Example</div>
+    return <div>{COMPONENT_TEXT}</div>
   }
 }
 
-describe('<Transition />', async () => {
+describe('<Transition />', () => {
   const types: TransitionType[] = [
     'fade',
     'scale',
@@ -62,28 +62,26 @@ describe('<Transition />', async () => {
   ]
 
   const expectTypeClass = function (type: TransitionType) {
-    it(`should correctly apply classes for '${type}' with html element`, async () => {
-      const subject = await mount(
+    it(`should correctly apply classes for '${type}' with html element`, () => {
+      const { getByText } = render(
         <Transition type={type} in={true}>
           <div>hello</div>
         </Transition>
       )
+      const element = getByText('hello')
 
-      const transition = within(subject.getDOMNode())
-
-      expect(transition.hasClass(getClass(type, 'entered'))).to.be.true()
+      expect(element).toHaveClass(getClass(type, 'entered'))
     })
 
-    it(`should correctly apply classes for '${type}' with Component`, async () => {
-      const subject = await mount(
+    it(`should correctly apply classes for '${type}' with Component`, () => {
+      const { getByText } = render(
         <Transition type={type} in={true}>
           <ExampleComponent />
         </Transition>
       )
+      const element = getByText(COMPONENT_TEXT)
 
-      const transition = within(subject.getDOMNode())
-
-      expect(transition.hasClass(getClass(type, 'entered'))).to.be.true()
+      expect(element).toHaveClass(getClass(type, 'entered'))
     })
   }
 
@@ -94,39 +92,48 @@ describe('<Transition />', async () => {
   it('should correctly apply enter and exit classes', async () => {
     const type = 'fade'
 
-    const subject = await mount(
+    const { getByText, rerender } = render(
       <Transition type={type} in={true}>
         <div>hello</div>
       </Transition>
     )
+    const element = getByText('hello')
 
-    const transition = within(subject.getDOMNode())
-    expect(transition.hasClass(getClass(type, 'entered'))).to.be.true()
+    expect(element).toHaveClass(getClass(type, 'entered'))
 
-    await subject.setProps({ in: false })
-    await wait(() => {
-      expect(transition.hasClass(getClass(type, 'exited'))).to.be.true()
+    rerender(
+      <Transition type={type} in={false}>
+        <div>hello</div>
+      </Transition>
+    )
+
+    await waitFor(() => {
+      expect(element).toHaveClass(getClass(type, 'exited'))
     })
   })
 
   it('should remove component from DOM when `unmountOnExit` is set', async () => {
-    const subject = await mount(
+    const { getByText, rerender } = render(
       <Transition type="fade" in={true} unmountOnExit={true}>
         <div>hello</div>
       </Transition>
     )
 
-    expect(subject.getDOMNode()).to.exist()
+    expect(getByText('hello')).toBeInTheDocument()
 
-    await subject.setProps({ in: false })
+    rerender(
+      <Transition type="fade" in={false} unmountOnExit={true}>
+        <div>hello</div>
+      </Transition>
+    )
 
-    expect(await find(':contains(hello)', { expectEmpty: true })).to.not.exist()
+    await waitForElementToBeRemoved(() => getByText('hello'))
   })
 
   it('should not execute enter transition with `transitionEnter` set to false', async () => {
-    const onEntering = stub()
+    const onEntering = jest.fn()
 
-    const subject = await mount(
+    const { rerender } = render(
       <Transition
         type="fade"
         in={false}
@@ -137,14 +144,26 @@ describe('<Transition />', async () => {
       </Transition>
     )
 
-    await subject.setProps({ in: true })
-    expect(onEntering).to.not.have.been.called()
+    rerender(
+      <Transition
+        type="fade"
+        in={true}
+        transitionEnter={false}
+        onEntering={onEntering}
+      >
+        <div>hello</div>
+      </Transition>
+    )
+
+    await waitFor(() => {
+      expect(onEntering).not.toHaveBeenCalled()
+    })
   })
 
   it('should not execute exit transition with `transitionExit` set to false', async () => {
-    const onExiting = stub()
+    const onExiting = jest.fn()
 
-    const subject = await mount(
+    const { rerender } = render(
       <Transition
         type="fade"
         in={true}
@@ -155,18 +174,28 @@ describe('<Transition />', async () => {
       </Transition>
     )
 
-    await subject.setProps({ in: false })
-    expect(onExiting).to.not.have.been.called()
+    rerender(
+      <Transition
+        type="fade"
+        in={false}
+        transitionExit={false}
+        onExiting={onExiting}
+      >
+        <div>hello</div>
+      </Transition>
+    )
+
+    await waitFor(() => {
+      expect(onExiting).not.toHaveBeenCalled()
+    })
   })
 
   it('should correctly call enter methods', async () => {
-    const onEnter = stub()
+    const onEnter = jest.fn()
+    const onEntering = jest.fn()
+    const onEntered = jest.fn()
 
-    const onEntering = stub()
-
-    const onEntered = stub()
-
-    await mount(
+    render(
       <Transition
         type="fade"
         in={true}
@@ -178,21 +207,19 @@ describe('<Transition />', async () => {
       </Transition>
     )
 
-    await wait(() => {
-      expect(onEnter).to.have.been.called()
-      expect(onEntering).to.have.been.called()
-      expect(onEntered).to.have.been.called()
+    await waitFor(() => {
+      expect(onEnter).toHaveBeenCalled()
+      expect(onEntering).toHaveBeenCalled()
+      expect(onEntered).toHaveBeenCalled()
     })
   })
 
   it('should correctly call exit methods', async () => {
-    const onExit = stub()
+    const onExit = jest.fn()
+    const onExiting = jest.fn()
+    const onExited = jest.fn()
 
-    const onExiting = stub()
-
-    const onExited = stub()
-
-    const subject = await mount(
+    const { rerender } = render(
       <Transition
         type="fade"
         in={true}
@@ -204,12 +231,22 @@ describe('<Transition />', async () => {
       </Transition>
     )
 
-    await subject.setProps({ in: false })
+    rerender(
+      <Transition
+        type="fade"
+        in={false}
+        onExit={onExit}
+        onExiting={onExiting}
+        onExited={onExited}
+      >
+        <div>hello</div>
+      </Transition>
+    )
 
-    await wait(() => {
-      expect(onExit).to.have.been.called()
-      expect(onExiting).to.have.been.called()
-      expect(onExited).to.have.been.called()
+    await waitFor(() => {
+      expect(onExit).toHaveBeenCalled()
+      expect(onExiting).toHaveBeenCalled()
+      expect(onExited).toHaveBeenCalled()
     })
   })
 })
