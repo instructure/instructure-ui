@@ -95,7 +95,7 @@ describe('<Popover />', () => {
       </div>
     )
 
-    act(async () => {
+    await act(async () => {
       await userEvent.click(document.body)
     })
     await waitFor(() => {

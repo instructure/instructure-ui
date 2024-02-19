@@ -23,32 +23,43 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
-import { ModalFooter } from '../index'
-import generateComponentTheme from '../theme'
+
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
 import { canvas } from '@instructure/ui-themes'
 import { color2hex } from '@instructure/ui-color-utils'
 
-describe('<ModalFooter />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<ModalFooter />)
+import { ModalFooter } from '../index'
+import generateComponentTheme from '../theme'
 
-    const footer = within(subject.getDOMNode())
-    expect(footer).to.exist()
+const FOOTER_TEXT = 'Modal-footer-text'
+
+describe('<ModalFooter />', () => {
+  it('should render', async () => {
+    const { findByText } = render(<ModalFooter>{FOOTER_TEXT}</ModalFooter>)
+    const modalFooter = await findByText(FOOTER_TEXT)
+
+    expect(modalFooter).toBeInTheDocument()
   })
 
   it('should set inverse styles', async () => {
-    const variables = generateComponentTheme(canvas)
-
-    const subject = await mount(<ModalFooter variant="inverse" />)
-    const footer = within(subject.getDOMNode())
-
-    const cssStyleDeclaration = footer.getComputedStyle() // CSSStyleDeclaration type
-    expect(variables.inverseBackground).to.equal(
-      color2hex(cssStyleDeclaration.getPropertyValue('background-color'))
+    const themeVariables = generateComponentTheme(canvas)
+    const { findByText } = render(
+      <ModalFooter variant="inverse">{FOOTER_TEXT}</ModalFooter>
     )
-    expect(variables.inverseBorderColor).to.equal(
-      color2hex(cssStyleDeclaration.getPropertyValue('border-top-color'))
+    const modalFooter = await findByText(FOOTER_TEXT)
+
+    const modalFooterStyle = window.getComputedStyle(modalFooter)
+    const footerBackground = color2hex(
+      modalFooterStyle.getPropertyValue('background-color')
     )
+    const footerBorderColor = color2hex(
+      modalFooterStyle.getPropertyValue('border-top-color')
+    )
+
+    expect(modalFooter).toBeInTheDocument()
+    expect(footerBackground).toBe(themeVariables.inverseBackground)
+    expect(footerBorderColor).toBe(themeVariables.inverseBorderColor)
   })
 })
