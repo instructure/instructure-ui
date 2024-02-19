@@ -25,7 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { deprecated } from '../deprecated'
 
@@ -53,83 +54,115 @@ class TestComponent extends Component<TestComponentProps> {
   }
 }
 
-describe('@deprecated', async () => {
-  describe('deprecated props', async () => {
+describe('@deprecated', () => {
+  describe('deprecated props', () => {
     const DeprecatedComponent = deprecated('2.1.0', {
       foo: 'bar',
       baz: true
     })(TestComponent)
 
-    it('should warn when suggesting new prop when using old prop', async () => {
-      const consoleWarn = spy(console, 'warn')
+    it('should warn when suggesting new prop when using old prop', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
 
-      const warning =
+      render(<DeprecatedComponent foo="Jane" />)
+
+      const expectedWarningMessage =
         'Warning: [TestComponent] `foo` is deprecated and will be removed in version 2.1.0. Use `bar` instead. '
 
-      await mount(<DeprecatedComponent foo="Jane" />)
+      expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect.stringContaining(expectedWarningMessage),
+        expect.any(String)
+      )
 
-      expect(consoleWarn.firstCall.args[0]).to.be.equal(warning)
+      consoleWarningSpy.mockRestore()
     })
 
-    it('should warn when using old prop with no new prop', async () => {
-      const consoleWarn = stub(console, 'warn')
+    it('should warn when using old prop with no new prop', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
 
-      const warning =
+      render(<DeprecatedComponent baz="Goodbye" />)
+
+      const expectedWarningMessage =
         'Warning: [TestComponent] `baz` is deprecated and will be removed in version 2.1.0.'
 
-      await mount(<DeprecatedComponent baz="Goodbye" />)
+      expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect.stringContaining(expectedWarningMessage),
+        expect.any(String)
+      )
 
-      expect(consoleWarn).to.have.been.calledWithMatch(warning)
+      consoleWarningSpy.mockRestore()
     })
 
-    it('should not output a warning using new prop', async () => {
-      const consoleWarn = stub(console, 'warn')
+    it('should not output a warning using new prop', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
 
-      await mount(<DeprecatedComponent bar="Jane" />)
+      render(<DeprecatedComponent bar="Jane" />)
 
-      expect(consoleWarn).to.not.have.been.called()
+      expect(consoleWarningSpy).not.toHaveBeenCalled()
+
+      consoleWarningSpy.mockRestore()
     })
   })
 
-  describe('deprecated component', async () => {
+  describe('deprecated component', () => {
     const DeprecatedComponent = deprecated('3.4.0')(TestComponent)
 
-    it('should warn that the entire component is deprecated if no old props are supplied', async () => {
-      const consoleWarn = stub(console, 'warn')
+    it('should warn that the entire component is deprecated if no old props are supplied', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
 
-      const warning =
+      render(<DeprecatedComponent />)
+
+      const expectedWarningMessage =
         'Warning: [TestComponent] is deprecated and will be removed in version 3.4.0.'
 
-      await mount(<DeprecatedComponent />)
+      expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect.stringContaining(expectedWarningMessage),
+        expect.any(String)
+      )
 
-      expect(consoleWarn).to.have.been.calledWithMatch(warning)
+      consoleWarningSpy.mockRestore()
     })
   })
 
-  describe('deprecated component with a changed package message', async () => {
+  describe('deprecated component with a changed package message', () => {
     const DeprecatedComponent = deprecated(
       '5.0.0',
       null,
       deprecated.changedPackageWarning('ui-forms', 'ui-number-input')
     )(TestComponent)
 
-    it('should warn that the component is deprecated and output a warning that the package changed', async () => {
-      const consoleWarn = stub(console, 'warn')
+    it('should warn that the component is deprecated and output a warning that the package changed', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
 
-      const warning = [
-        'Warning: [TestComponent] is deprecated and will be removed in version 5.0.0.',
-        `It has been moved from @instructure/ui-forms to @instructure/ui-number-input.`
-      ].join(' ')
+      const expectedWarningMessage =
+        'Warning: [TestComponent] is deprecated and will be removed in version 5.0.0. It has been moved from @instructure/ui-forms to @instructure/ui-number-input.'
 
-      await mount(<DeprecatedComponent />)
+      render(<DeprecatedComponent />)
 
-      expect(consoleWarn).to.have.been.calledWithMatch(warning)
+      expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect.stringContaining(expectedWarningMessage),
+        expect.any(String)
+      )
+
+      consoleWarningSpy.mockRestore()
     })
   })
 
-  describe('component with deprecated prop values', async () => {
-    it('should not warn when an allowed prop value is supplied', async () => {
-      const consoleWarn = stub(console, 'warn')
+  describe('component with deprecated prop values', () => {
+    it('should not warn when an allowed prop value is supplied', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
       type DeprecatedPropValueComponentProps = {
         color: string
       }
@@ -150,13 +183,17 @@ describe('@deprecated', async () => {
         }
       }
 
-      await mount(<DeprecatedPropValueComponent color="yellow" />)
+      render(<DeprecatedPropValueComponent color="yellow" />)
 
-      expect(consoleWarn).to.not.have.been.called()
+      expect(consoleWarningSpy).not.toHaveBeenCalled()
+
+      consoleWarningSpy.mockRestore()
     })
 
-    it('should warn when a forbidden prop value is supplied', async () => {
-      const consoleWarn = stub(console, 'warn')
+    it('should warn when a forbidden prop value is supplied', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
 
       const color = 'orange'
       type DeprecatedPropValueComponentProps = {
@@ -179,15 +216,22 @@ describe('@deprecated', async () => {
         }
       }
 
-      await mount(<DeprecatedPropValueComponent color={color} />)
+      render(<DeprecatedPropValueComponent color={color} />)
 
-      const warning = `The '${color}' value for the \`color\` prop is deprecated.`
+      const expectedWarningMessage = `The '${color}' value for the \`color\` prop is deprecated.`
 
-      expect(consoleWarn).to.have.been.calledWithMatch(warning)
+      expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect.stringContaining(expectedWarningMessage),
+        expect.any(String)
+      )
+
+      consoleWarningSpy.mockRestore()
     })
 
-    it('should warn with additional message text when a forbidden prop value is supplied and has message text', async () => {
-      const consoleWarn = stub(console, 'warn')
+    it('should warn with additional message text when a forbidden prop value is supplied and has message text', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
 
       const color = 'gold'
       const message = 'It will be removed in v8.0.0.'
@@ -212,16 +256,23 @@ describe('@deprecated', async () => {
         }
       }
 
-      await mount(<DeprecatedPropValueComponent color={color} />)
+      render(<DeprecatedPropValueComponent color={color} />)
 
-      const warning = `The '${color}' value for the \`color\` prop is deprecated. ${message}`
+      const expectedWarningMessage = `The '${color}' value for the \`color\` prop is deprecated. ${message}`
 
-      expect(consoleWarn).to.have.been.calledWithMatch(warning)
+      expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect.stringContaining(expectedWarningMessage),
+        expect.any(String)
+      )
+
+      consoleWarningSpy.mockRestore()
     })
 
-    it('should call functional message with the correct props', async () => {
-      stub(console, 'warn')
-      const messageStub = stub()
+    it('should call functional message with the correct props', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
+      const messageMock = jest.fn()
 
       const color = 'gold'
       type DeprecatedPropValueComponentProps = {
@@ -232,7 +283,7 @@ describe('@deprecated', async () => {
           color: deprecated.deprecatePropValues(
             PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
             ['blue', 'orange', 'gold'],
-            messageStub
+            messageMock
           )
         }
 
@@ -245,17 +296,22 @@ describe('@deprecated', async () => {
         }
       }
 
-      await mount(<DeprecatedPropValueComponent color={color} />)
+      render(<DeprecatedPropValueComponent color={color} />)
 
-      const { props, propName, propValue } = messageStub.lastCall.args[0]
+      const { props, propName, propValue } = messageMock.mock.calls[0][0]
 
-      expect(props).to.deep.equal({ color })
-      expect(propName).to.equal('color')
-      expect(propValue).to.equal(color)
+      expect(props).toEqual({ color })
+      expect(propName).toBe('color')
+      expect(propValue).toBe(color)
+      expect(consoleWarningSpy).toHaveBeenCalled()
+
+      consoleWarningSpy.mockRestore()
     })
 
-    it('should warn with a completely custom message when provided message is functional and prop value is forbidden', async () => {
-      const consoleWarn = stub(console, 'warn')
+    it('should warn with a completely custom message when provided message is functional and prop value is forbidden', () => {
+      const consoleWarningSpy = jest
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {})
 
       const color = 'gold'
       type DeprecatedPropValueComponentProps = {
@@ -286,11 +342,16 @@ describe('@deprecated', async () => {
         }
       }
 
-      await mount(<DeprecatedPropValueComponent color={color} />)
+      render(<DeprecatedPropValueComponent color={color} />)
 
-      const warning = `The ${color} value for color has been deprecated. Use the FooBar component with the 'baz' prop set instead.`
+      const expectedWarningMessage = `The ${color} value for color has been deprecated. Use the FooBar component with the 'baz' prop set instead.`
 
-      expect(consoleWarn).to.have.been.calledWithMatch(warning)
+      expect(consoleWarningSpy).toHaveBeenCalledWith(
+        expect.stringContaining(expectedWarningMessage),
+        expect.any(String)
+      )
+
+      consoleWarningSpy.mockRestore()
     })
   })
 })

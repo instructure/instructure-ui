@@ -25,11 +25,12 @@
 import React, { ReactElement, ReactNode } from 'react'
 
 import { createChainedFunction } from '@instructure/ui-utils'
-import { expect, mount, stub, spy, within } from '@instructure/ui-test-utils'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { safeCloneElement } from '../safeCloneElement'
 
-describe('safeCloneElement', async () => {
+describe('safeCloneElement', () => {
   const SafeClone = function <P extends { style?: unknown }>({
     element,
     props,
@@ -42,53 +43,53 @@ describe('safeCloneElement', async () => {
     return safeCloneElement(element, props, children)
   }
 
-  it('should preserve refs', async () => {
-    const origRef = stub()
-    const cloneRef = stub()
+  it('should preserve refs', () => {
+    const origRef = jest.fn()
+    const cloneRef = jest.fn()
 
-    await mount(
+    render(
       <SafeClone element={<div ref={origRef} />} props={{ ref: cloneRef }} />
     )
 
-    expect(origRef).to.have.been.called()
-    expect(cloneRef).to.have.been.called()
+    expect(origRef).toHaveBeenCalled()
+    expect(cloneRef).toHaveBeenCalled()
   })
 
-  it('should preserve event handlers', async () => {
-    const onClickA = spy()
-    const onClickB = spy()
+  it('should preserve event handlers', () => {
+    const onClickA = jest.fn()
+    const onClickB = jest.fn()
 
-    const subject = await mount(
+    render(
       <SafeClone
         element={<button onClick={onClickA} />}
         props={{ onClick: onClickB }}
       />
     )
 
-    const button = within(subject.getDOMNode())
-    await button.click()
+    const button = screen.getByRole('button')
+    button.click()
 
-    expect(onClickA).to.have.been.called()
-    expect(onClickB).to.have.been.called()
+    expect(onClickA).toHaveBeenCalled()
+    expect(onClickB).toHaveBeenCalled()
   })
 
-  it('should preserve already chained functions', async () => {
-    const onClickA = spy()
-    const onClickB = spy()
-    const onClickC = spy()
+  it('should preserve already chained functions', () => {
+    const onClickA = jest.fn()
+    const onClickB = jest.fn()
+    const onClickC = jest.fn()
 
-    const subject = await mount(
+    render(
       <SafeClone
         element={<button onClick={onClickA} />}
         props={{ onClick: createChainedFunction(onClickB, onClickC) }}
       />
     )
 
-    const button = within(subject.getDOMNode())
-    await button.click()
+    const button = screen.getByRole('button')
+    button.click()
 
-    expect(onClickA).to.have.been.called()
-    expect(onClickB).to.have.been.called()
-    expect(onClickC).to.have.been.called()
+    expect(onClickA).toHaveBeenCalled()
+    expect(onClickB).toHaveBeenCalled()
+    expect(onClickC).toHaveBeenCalled()
   })
 })

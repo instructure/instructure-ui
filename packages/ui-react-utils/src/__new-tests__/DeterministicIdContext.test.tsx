@@ -23,10 +23,10 @@
  */
 
 import React from 'react'
-import ReactDOM from 'react-dom'
-import ReactTestUtils from 'react-dom/test-utils'
 
-import { expect, mount } from '@instructure/ui-test-utils'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
 import {
   withDeterministicId,
   DeterministicIdContextProvider,
@@ -39,7 +39,11 @@ class TestComponent extends React.Component<
   React.PropsWithChildren<WithDeterministicIdProps>
 > {
   render() {
-    return <div id={this.props.deterministicId!()}>{this.props.children}</div>
+    return (
+      <div data-testid="test-component" id={this.props.deterministicId!()}>
+        {this.props.children}
+      </div>
+    )
   }
 }
 
@@ -53,73 +57,70 @@ class WrapperComponent extends React.Component {
   }
 }
 
-const uniqueIds = (el: { getDOMNode: () => Element }) => {
-  const idList = Array.from(el.getDOMNode().children).map((el) => el.id)
-
+const uniqueIds = (el: Element) => {
+  const idList = Array.from(el.children).map((child) => child.id)
   return new Set(idList).size === idList.length
 }
 
 describe('DeterministicIdContext', () => {
-  it('can be found and tested with ReactTestUtils', async () => {
-    const rootNode = document.createElement('div')
-    document.body.appendChild(rootNode)
+  it('can be found and tested with ReactTestUtils', () => {
+    render(<WrapperComponent />)
+    const testComponent = screen.getByTestId('test-component')
 
-    // eslint-disable-next-line react/no-render-return-value
-    const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
-    ReactTestUtils.findRenderedComponentWithType(
-      rendered as any,
-      (TestComponent as any).originalType
-    )
+    expect(testComponent).toBeInTheDocument()
+    expect(testComponent.id).toBeDefined()
   })
 
-  it('should generate unique ids without Provider wrapper', async () => {
-    const el = await mount(
-      <div>
-        <TestComponent></TestComponent>
-        <TestComponent></TestComponent>
-        <TestComponent></TestComponent>
-        <TestComponent></TestComponent>
-        <TestComponent></TestComponent>
+  it('should generate unique ids without Provider wrapper', () => {
+    render(
+      <div data-testid="test-components">
+        <TestComponent />
+        <TestComponent />
+        <TestComponent />
+        <TestComponent />
+        <TestComponent />
       </div>
     )
+    const el = screen.getByTestId('test-components')
 
-    expect(uniqueIds(el)).to.be.true()
+    expect(uniqueIds(el)).toBe(true)
   })
 
-  it('should generate unique ids when components are rendered both out and inside of provider', async () => {
-    const el = await mount(
-      <div>
+  it('should generate unique ids when components are rendered both out and inside of provider', () => {
+    render(
+      <div data-testid="test-components">
         <DeterministicIdContextProvider>
-          <TestComponent></TestComponent>
-          <TestComponent></TestComponent>
-          <TestComponent></TestComponent>
+          <TestComponent />
+          <TestComponent />
+          <TestComponent />
         </DeterministicIdContextProvider>
-        <TestComponent></TestComponent>
-        <TestComponent></TestComponent>
+        <TestComponent />
+        <TestComponent />
       </div>
     )
+    const el = screen.getByTestId('test-components')
 
-    expect(uniqueIds(el)).to.be.true()
+    expect(uniqueIds(el)).toBe(true)
   })
 
-  //skipping this test because it will fail either in strictmode or normal mode
-  it('should generate unique ids with provider only', async () => {
+  it('should generate unique ids with provider only', () => {
     const Wrapper = ({ children }: any) => {
       return (
         <DeterministicIdContextProvider
           instanceCounterMap={generateInstanceCounterMap()}
         >
-          <div id="wrapper">{children}</div>
+          <div data-testid="wrapper">{children}</div>
         </DeterministicIdContextProvider>
       )
     }
     const children = []
     for (let i = 0; i < 10; i++) {
-      children.push(<TestComponent></TestComponent>)
+      children.push(<TestComponent key={i} />)
     }
 
-    const el = await mount(<Wrapper>{children}</Wrapper>)
+    render(<Wrapper>{children}</Wrapper>)
+    const el = screen.getByTestId('wrapper')
 
-    expect(uniqueIds(el)).to.be.true()
+    expect(uniqueIds(el)).toBe(true)
   })
 })
