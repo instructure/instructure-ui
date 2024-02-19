@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
 import { childrenOrValue } from '../index'
 
 describe('childrenOrValue', () => {
@@ -33,7 +33,7 @@ describe('childrenOrValue', () => {
       children: null
     }
 
-    expect(childrenOrValue(props, 'children', 'TestComponent')).to.not.exist()
+    expect(childrenOrValue(props, 'children', 'TestComponent')).toBeNull()
   })
 
   it('should accept when as is not input, value is null, and children are provided', () => {
@@ -43,7 +43,7 @@ describe('childrenOrValue', () => {
       children: 'hello world'
     }
 
-    expect(childrenOrValue(props, 'value', 'TestComponent')).to.not.exist()
+    expect(childrenOrValue(props, 'value', 'TestComponent')).toBeNull()
   })
 
   it('should reject when as="input" and children is not null or value is undefined', () => {
@@ -52,14 +52,14 @@ describe('childrenOrValue', () => {
       children: 'hello world'
     }
 
-    expect(
-      childrenOrValue(props, 'children', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    expect(childrenOrValue(props, 'children', 'TestComponent')).toBeInstanceOf(
+      Error
+    )
 
     props.children = null
-    expect(
-      childrenOrValue(props, 'children', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    expect(childrenOrValue(props, 'children', 'TestComponent')).toBeInstanceOf(
+      Error
+    )
   })
 
   it('should reject when as is not input, value is not null or children are undefined', () => {
@@ -68,13 +68,13 @@ describe('childrenOrValue', () => {
       value: 'hello world'
     }
 
-    expect(
-      childrenOrValue(props, 'value', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    expect(childrenOrValue(props, 'value', 'TestComponent')).toBeInstanceOf(
+      Error
+    )
 
     props.value = null
-    expect(
-      childrenOrValue(props, 'value', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    expect(childrenOrValue(props, 'value', 'TestComponent')).toBeInstanceOf(
+      Error
+    )
   })
 })

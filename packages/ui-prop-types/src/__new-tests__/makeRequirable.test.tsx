@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
 import { makeRequirable } from '../index'
 
 function mockValidator(
@@ -45,12 +45,10 @@ describe('makeRequirable', () => {
       value: 'green'
     }
 
-    expect(mockValidator(props, 'value', 'TestComponent')).to.not.exist()
+    expect(mockValidator(props, 'value', 'TestComponent')).toBeNull()
 
     props.value = 'purple'
-    expect(mockValidator(props, 'value', 'TestComponent')).to.be.an.instanceOf(
-      Error
-    )
+    expect(mockValidator(props, 'value', 'TestComponent')).toBeInstanceOf(Error)
   })
 
   it('should validate when required', () => {
@@ -58,14 +56,12 @@ describe('makeRequirable', () => {
       value: 'green'
     }
 
-    expect(
-      mockValidator.isRequired(props, 'value', 'TestComponent')
-    ).to.not.exist()
+    expect(mockValidator.isRequired(props, 'value', 'TestComponent')).toBeNull()
 
     props.value = 'purple'
     expect(
       mockValidator.isRequired(props, 'value', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    ).toBeInstanceOf(Error)
   })
 
   it('should error if required prop is null or undefined', () => {
@@ -74,21 +70,19 @@ describe('makeRequirable', () => {
     }
 
     // null values are accepted when not required
-    expect(mockValidator(props, 'value', 'TestComponent')).to.not.exist()
+    expect(mockValidator(props, 'value', 'TestComponent')).toBeNull()
 
     // null values are rejected when required
     expect(
       mockValidator.isRequired(props, 'value', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    ).toBeInstanceOf(Error)
 
     // undefined values are accepted when not required
-    expect(
-      mockValidator(props, 'undefinedProp', 'TestComponent')
-    ).to.not.exist()
+    expect(mockValidator(props, 'undefinedProp', 'TestComponent')).toBeNull()
 
     // undefined values are rejected when not required
     expect(
       mockValidator.isRequired(props, 'value', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    ).toBeInstanceOf(Error)
   })
 })

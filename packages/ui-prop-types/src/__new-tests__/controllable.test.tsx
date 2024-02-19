@@ -23,18 +23,16 @@
  */
 
 import PropTypes, { checkPropTypes } from 'prop-types'
-import { expect, stub } from '@instructure/ui-test-utils'
-
+import '@testing-library/jest-dom'
 import { controllable } from '../index'
 
 describe('controllable', () => {
   afterEach(() => {
-    // actually SinonStub type
-    ;(console as any).error.restore && (console.error as any).restore()
+    jest.restoreAllMocks()
   })
 
   it('should accept when prop type is correct and handler is provided', () => {
-    const errorSpy = stub(console, 'error')
+    const errorSpy = jest.spyOn(console, 'error')
 
     const props = {
       selected: true,
@@ -61,12 +59,12 @@ describe('controllable', () => {
         'onSelect',
         'defaultSelected'
       )(props, 'selected', 'TestComponent')
-    ).to.not.exist()
-    expect(errorSpy).to.not.have.been.called()
+    ).toBeNull()
+    expect(errorSpy).not.toHaveBeenCalled()
   })
 
   it('should reject when the prop type is incorrect', () => {
-    const errorSpy = stub(console, 'error')
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
 
     const props = {
       selected: 'wrong type supplied',
@@ -92,8 +90,8 @@ describe('controllable', () => {
         'onSelect',
         'defaultSelected'
       )(props, 'selected', 'TestComponent')
-    ).to.not.exist()
-    expect(errorSpy).to.have.been.calledOnce()
+    ).toBeNull()
+    expect(errorSpy).toHaveBeenCalledTimes(1)
   })
 
   it('should reject when corresponding handler is not provided', () => {
@@ -120,6 +118,6 @@ describe('controllable', () => {
         'onSelect',
         'defaultSelected'
       )(props, 'selected', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    ).toBeInstanceOf(Error)
   })
 })

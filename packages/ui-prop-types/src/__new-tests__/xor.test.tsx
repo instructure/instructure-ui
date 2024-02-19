@@ -23,8 +23,7 @@
  */
 
 import PropTypes, { checkPropTypes } from 'prop-types'
-import { expect, stub } from '@instructure/ui-test-utils'
-
+import '@testing-library/jest-dom'
 import { xor } from '../index'
 
 type XorTestProps = {
@@ -35,12 +34,11 @@ type XorTestProps = {
 
 describe('xor', () => {
   afterEach(() => {
-    // actually SinonStub type
-    ;(console as any).error.restore && (console.error as any).restore()
+    jest.restoreAllMocks()
   })
 
   it('should accept when only one of the specified props is set', () => {
-    const errorSpy = stub(console, 'error')
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
 
     const props: XorTestProps = {
       foo: 'foo',
@@ -66,7 +64,7 @@ describe('xor', () => {
         'bar',
         'baz'
       )(props, 'foo', 'TestComponent')
-    ).to.not.exist()
+    ).toBeNull()
 
     props.foo = null
     props.bar = 27
@@ -88,7 +86,7 @@ describe('xor', () => {
         'foo',
         'baz'
       )(props, 'bar', 'TestComponent')
-    ).to.not.exist()
+    ).toBeNull()
 
     props.bar = null
     props.baz = () => {}
@@ -111,7 +109,7 @@ describe('xor', () => {
         'foo',
         'bar'
       )(props, 'baz', 'TestComponent')
-    ).to.not.exist()
+    ).toBeNull()
 
     props.foo = null
     props.bar = null
@@ -135,9 +133,9 @@ describe('xor', () => {
         'bar',
         'baz'
       )(props, 'foo', 'TestComponent')
-    ).to.not.exist()
+    ).toBeNull()
 
-    expect(errorSpy).to.not.have.been.called()
+    expect(errorSpy).not.toHaveBeenCalled()
   })
 
   it('should reject when more than one of the specified props is set', () => {
@@ -165,7 +163,7 @@ describe('xor', () => {
         'bar',
         'baz'
       )(props, 'foo', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    ).toBeInstanceOf(Error)
 
     props.baz = () => {}
 
@@ -187,7 +185,7 @@ describe('xor', () => {
         'foo',
         'baz'
       )(props, 'bar', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    ).toBeInstanceOf(Error)
 
     props.foo = null
     expect(
@@ -208,11 +206,11 @@ describe('xor', () => {
         'foo',
         'bar'
       )(props, 'baz', 'TestComponent')
-    ).to.be.an.instanceOf(Error)
+    ).toBeInstanceOf(Error)
   })
 
   it('should still validate the prop', () => {
-    const errorSpy = stub(console, 'error')
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
 
     const props = {
       foo: 27,
@@ -238,6 +236,6 @@ describe('xor', () => {
       'baz'
     )(props, 'foo', 'TestComponent')
 
-    expect(errorSpy).to.have.been.calledOnce()
+    expect(errorSpy).toHaveBeenCalledTimes(1)
   })
 })
