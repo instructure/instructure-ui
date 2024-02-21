@@ -132,7 +132,7 @@ class Item extends Component<OptionsItemProps> {
 
     return (
       <ElementType
-        role={href ? undefined : role}
+        role={role}
         css={styles?.item}
         ref={(element: Element | null) => {
           this.ref = element
@@ -145,7 +145,6 @@ class Item extends Component<OptionsItemProps> {
         <InnerElementType
           {...passthroughProps}
           css={styles?.container}
-          role={href ? undefined : role}
           href={href}
           aria-describedby={
             this.props['aria-describedby'] ||
