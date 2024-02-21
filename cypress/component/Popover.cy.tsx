@@ -89,4 +89,85 @@ describe('<Popover/>', () => {
         cy.get('#main').should('not.contain', 'Log In')
       })
   })
+
+  it('should hide content when clicked outside content by default', () => {
+    const onHideContent = cy.spy()
+    cy.mount(
+      <div id="main">
+        <div>
+          <button>Outer</button>
+        </div>
+        <div>
+          <Popover
+            on="click"
+            onHideContent={onHideContent}
+            renderTrigger={<button>Trigger</button>}
+          >
+            <h2>Popover content</h2>
+            <button>focus me</button>
+          </Popover>
+        </div>
+      </div>
+    )
+    cy.contains('button', 'Trigger')
+      .realClick()
+      .then(() => {
+        cy.contains('Popover content').should('be.visible')
+      })
+      .then(() => {
+        cy.contains('button', 'Outer').click(0, 0)
+      })
+      .then(() => {
+        cy.contains('Popover content').should('not.exist')
+        cy.wrap(onHideContent)
+          .should('have.been.calledOnce')
+          .then((spy) => {
+            cy.wrap(spy)
+              .its('lastCall.args')
+              .should('deep.include', { documentClick: true })
+          })
+      })
+  })
+
+  it('should move focus into the content when the trigger is blurred', () => {
+    const onHideContent = cy.spy()
+
+    cy.mount(
+      <span>
+        <button>outer btn</button>
+        <Popover
+          isShowingContent={true}
+          onHideContent={onHideContent}
+          renderTrigger={<button>trigger btn initial focus me</button>}
+          on={['hover', 'focus', 'click']}
+          mountNode={() => document.getElementById('container')!}
+          shouldContainFocus={false}
+          shouldReturnFocus={false}
+          shouldFocusContentOnTriggerBlur
+        >
+          <button>focus me after trigger</button>
+        </Popover>
+        <span id="container" />
+        <button id="next">focus me last</button>
+      </span>
+    )
+
+    cy.contains('button', 'trigger btn initial focus me')
+      .focus()
+      .then(() => {
+        cy.contains('focus me after trigger').should('not.be.focused')
+      })
+      .then(() => {
+        cy.realPress('Tab')
+      })
+      .then(() => {
+        cy.contains('focus me after trigger').should('be.focused')
+      })
+      .then(() => {
+        cy.realPress('Tab')
+      })
+      .then(() => {
+        cy.wrap(onHideContent).should('have.been.calledOnce')
+      })
+  })
 })
