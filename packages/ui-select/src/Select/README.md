@@ -534,7 +534,8 @@ class MultipleSelectExample extends React.Component {
     const newSelection = this.state.selectedOptionId.filter((id) => id !== tag)
     this.setState({
       selectedOptionId: newSelection,
-      highlightedOptionId: null
+      highlightedOptionId: null,
+      announcement: `${this.getOptionById(tag).label} removed`,
     }, () => {
       this.inputRef.focus()
     })
