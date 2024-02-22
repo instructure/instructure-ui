@@ -1,4 +1,4 @@
-name: Legacy npm release
+name: npm release from PR
 on: workflow_dispatch
 jobs:
   release:
@@ -23,7 +23,7 @@ jobs:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_EMAIL: ${{secrets.NPM_EMAIL}}
           NPM_USERNAME: ${{secrets.NPM_USERNAME}}
-        run: npm run release maintenance
+        run: npm run release -- prRelease
       - name: Get commit message
         run: |
           echo "commmit_message=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV

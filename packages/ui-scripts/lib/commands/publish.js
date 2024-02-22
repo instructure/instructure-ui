@@ -42,15 +42,22 @@ export default {
       describe: 'If true npm publish will use vXYZ_maintenance as tag',
       default: false
     })
+
+    yargs.option('prRelease', {
+      type: 'boolean',
+      describe: 'If true npm publish will use vXYZ-pr-snapshot as version',
+      default: false
+    })
   },
   handler: async (argv) => {
-    const isMaintenance = argv.isMaintenance
+    const { isMaintenance, prRelease } = argv
     try {
       const pkgJSON = pkgUtils.getPackageJSON()
       await publish({
         packageName: pkgJSON.name,
         version: pkgJSON.version,
-        isMaintenance
+        isMaintenance,
+        prRelease
       })
     } catch (err) {
       error(err)
@@ -59,7 +66,7 @@ export default {
   }
 }
 
-async function publish({ packageName, version, isMaintenance }) {
+async function publish({ packageName, version, isMaintenance, prRelease }) {
   const isRegularRelease = isReleaseCommit(version)
 
   createNPMRCFile()
@@ -79,7 +86,7 @@ async function publish({ packageName, version, isMaintenance }) {
       packages
     })
   } else {
-    const tag = 'snapshot'
+    const tag = prRelease ? 'pr-snapshot' : 'snapshot'
     info(`📦  Version: ${version}, Tag: ${tag}`)
     return publishSnapshotVersion({
       version,
