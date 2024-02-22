@@ -28,7 +28,7 @@
     "@instructure/ui-scripts": "8.53.2",
     "@instructure/ui-themes": "8.53.2",
     "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.1.2"
+    "@testing-library/react": "^14.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",
