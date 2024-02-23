@@ -92,7 +92,8 @@ async function publish({ packageName, version, isMaintenance, prRelease }) {
       version,
       packageName,
       packages,
-      tag
+      tag,
+      prRelease
     })
   }
 }
@@ -113,8 +114,8 @@ async function publishRegularVersion(arg) {
  * with the new snapshot version.
  */
 async function publishSnapshotVersion(arg) {
-  const { version, packageName, packages, tag } = arg
-  const snapshotVersion = calculateNextSnapshotVersion(version)
+  const { version, packageName, packages, tag, prRelease } = arg
+  const snapshotVersion = calculateNextSnapshotVersion(version, prRelease)
 
   info(`applying new snapshot version (${snapshotVersion}) to each package`)
 
@@ -131,7 +132,7 @@ async function publishSnapshotVersion(arg) {
  * Calculates the new snapshot version.
  * @returns the new snapshot version
  */
-function calculateNextSnapshotVersion(version) {
+function calculateNextSnapshotVersion(version, prRelease) {
   const ver = `v${version}`
   // get the commit count between the current released version
   // and the commit that we are on currently
@@ -144,9 +145,9 @@ function calculateNextSnapshotVersion(version) {
 
   // we have to decrease the commitCount by 1 because the snapshots are
   // zero based
-  const snapshotVersion = `${semver.inc(version, 'patch')}-snapshot-${
-    Number(commitCount) - 1
-  }`
+  const snapshotVersion = `${semver.inc(version, 'patch')}-${
+    prRelease ? 'pr-' : ''
+  }snapshot-${Number(commitCount) - 1}`
 
   info(`next snapshot version is: ${snapshotVersion}`)
 
