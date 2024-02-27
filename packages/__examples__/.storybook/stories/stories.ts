@@ -54,7 +54,7 @@ const chromaticSettings = {
   pauseAnimationAtEnd: true,
   // https://www.chromatic.com/docs/delay
   delay: 700,
-  diffThreshold: 0.5 // default is 0.063 - increased to avoid false positives
+  diffThreshold: 0.1 // default is 0.063 - increased to avoid false positives
 }
 
 // Stories not tied to one component and custom component examples
