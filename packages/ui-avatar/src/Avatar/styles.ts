@@ -82,7 +82,7 @@ const generateStyle = (
     circle: {
       width: '2.5em',
       position: 'relative',
-      borderRadius: '50%',
+      borderRadius: '25%',
       overflow: 'hidden'
     },
     rectangle: {
