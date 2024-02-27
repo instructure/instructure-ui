@@ -103,11 +103,15 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       prevProps.invalidDateTimeMessage !== this.props.invalidDateTimeMessage
 
     if (isUpdated) {
-      this.setState((_prevState: DateTimeInputState) => {
-        return {
-          ...this.recalculateState(this.props.value || this.props.defaultValue)
-        }
-      })
+      window.setTimeout(() => {
+        this.setState((_prevState: DateTimeInputState) => {
+          return {
+            ...this.recalculateState(
+              this.props.value || this.props.defaultValue
+            )
+          }
+        })
+      }, 0)
     }
   }
 
