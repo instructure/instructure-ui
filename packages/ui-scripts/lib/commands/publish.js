@@ -145,12 +145,20 @@ function calculateNextSnapshotVersion(version, prRelease) {
 
   // we have to decrease the commitCount by 1 because the snapshots are
   // zero based
-  const snapshotVersion = `${semver.inc(version, 'patch')}-${
-    prRelease ? 'pr-' : ''
-  }snapshot-${Number(commitCount) - 1}`
+  const snapshotVersion = `${semver.inc(version, 'patch')}-snapshot-${
+    Number(commitCount) - 1
+  }`
+
+  if (prRelease) {
+    const prSnapshotVersion = `${semver.inc(
+      version,
+      'patch'
+    )}-pr-snapshot-${Date.now()}`
+    info(`PR snapshot version is: ${prSnapshotVersion}`)
+    return prSnapshotVersion
+  }
 
   info(`next snapshot version is: ${snapshotVersion}`)
-
   return snapshotVersion
 }
 
