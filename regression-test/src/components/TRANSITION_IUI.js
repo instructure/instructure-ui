@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Transition } from '@instructure/ui'
-import React from 'react'
 
 const TRANSITION_IUI = () => {
   return (

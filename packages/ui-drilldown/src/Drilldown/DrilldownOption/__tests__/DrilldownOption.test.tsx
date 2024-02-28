@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, match, mount, stub } from '@instructure/ui-test-utils'
 
 import { IconCheckSolid } from '@instructure/ui-icons'

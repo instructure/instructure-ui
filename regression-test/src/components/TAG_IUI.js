@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Tag } from '@instructure/ui'
-import React from 'react'
 
 const TAG_IUI = () => {
   return <Tag text="Static" />

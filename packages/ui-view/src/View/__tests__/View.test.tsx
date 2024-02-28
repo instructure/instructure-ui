@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { CSSProperties } from 'react'
+import { CSSProperties } from 'react'
 
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import { View } from '../../index'

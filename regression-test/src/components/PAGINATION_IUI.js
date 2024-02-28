@@ -23,7 +23,6 @@
  */
 import { Pagination } from '@instructure/ui'
 
-import React from 'react'
 const PAGINATION_IUI = () => {
   const pages = Array.from(Array(9)).map((v, i) => (
     <Pagination.Page key={i} onClick={() => {}} current={i === 0}>

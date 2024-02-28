@@ -31,7 +31,7 @@ npm install @instructure/ui-prop-types
 ### Usage
 
 ```js
-import React from 'react'
+
 import PropTypes from 'prop-types'
 
 import { Children, controllable } from '@instructure/ui-prop-types'

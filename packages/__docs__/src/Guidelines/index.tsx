@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { Flex } from '@instructure/ui-flex'
 import type { GuidelinesProps } from './props'
 import { propTypes, allowedProps } from './props'

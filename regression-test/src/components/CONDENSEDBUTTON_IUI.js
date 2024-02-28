@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { CondensedButton } from '@instructure/ui'
-import React from 'react'
 
 const CONDENSEDBUTTON_IUI = () => {
   return <CondensedButton>Click Me</CondensedButton>

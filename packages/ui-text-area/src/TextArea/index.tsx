@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 import { FormField } from '@instructure/ui-form-field'
 import {
@@ -34,7 +33,7 @@ import {
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { px } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import {

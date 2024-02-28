@@ -23,7 +23,6 @@
  */
 import { Spinner } from '@instructure/ui'
 
-import React from 'react'
 const SPINNER_IUI = () => {
   return <Spinner renderTitle="Loading" />
 }

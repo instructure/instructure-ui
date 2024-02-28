@@ -23,7 +23,6 @@
  */
 import { Button } from '@instructure/ui'
 
-import React from 'react'
 const BUTTON_IUI = () => {
   return <Button>asd</Button>
 }

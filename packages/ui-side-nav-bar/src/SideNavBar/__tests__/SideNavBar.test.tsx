@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { mount, expect } from '@instructure/ui-test-utils'
 
 import { Badge } from '@instructure/ui-badge'

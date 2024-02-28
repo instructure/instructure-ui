@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { CodeEditor } from '@instructure/ui'
-import React from 'react'
 
 const CODEEDITOR_IUI = () => {
   const code = `function findSequence(goal) {

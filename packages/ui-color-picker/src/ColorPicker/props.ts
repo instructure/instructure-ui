@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import type { FormMessage } from '@instructure/ui-form-field'

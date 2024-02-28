@@ -25,7 +25,6 @@ npm install @instructure/ui-select
 ### Usage
 
 ```js
-import React from 'react'
 import { Select } from '@instructure/ui-select'
 
 const MySelect = () => {

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { GridCol } from '../index'

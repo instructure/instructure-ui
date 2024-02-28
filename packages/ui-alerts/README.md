@@ -25,7 +25,6 @@ npm install @instructure/ui-alerts
 ### Usage
 
 ```js
-import React from 'react'
 import { Alert } from '@instructure/ui-alerts'
 
 const MyAlert = function () {

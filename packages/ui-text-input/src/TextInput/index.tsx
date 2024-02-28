@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import {
   callRenderProp,
@@ -34,7 +33,7 @@ import {
 import { isActiveElement, addEventListener } from '@instructure/ui-dom-utils'
 import { FormField } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

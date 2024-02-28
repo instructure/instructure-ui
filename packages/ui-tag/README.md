@@ -28,7 +28,7 @@ npm install @instructure/ui-tag
 ---
 type: code
 ---
-import React from 'react'
+
 import { Tag } from '@instructure/ui-tag'
 
 const MyTag = () => {

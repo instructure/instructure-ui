@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { EditableProps } from '../Editable/props'
-import React from 'react'
 
 type ExtendedRenderEditButton = {
   elementRef?: (el: HTMLButtonElement) => void

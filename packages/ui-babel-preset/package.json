@@ -31,6 +31,7 @@
     "@babel/preset-react": "^7.22.15",
     "@babel/preset-typescript": "^7.23.2",
     "@babel/runtime": "^7.23.2",
+    "@emotion/babel-preset-css-prop": "^11.11.0",
     "@instructure/babel-plugin-transform-imports": "8.53.2",
     "@instructure/browserslist-config-instui": "8.53.2",
     "babel-loader": "^9.1.3",

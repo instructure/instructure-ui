@@ -30,7 +30,6 @@ npm install @instructure/ui-form-field
 ### Usage
 
 ```js
-import React from 'react'
 import { FormField } from '@instructure/ui-form-field'
 
 const MyFormField = () => {

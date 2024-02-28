@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { ColorIndicator, View } from '@instructure/ui'
-import React from 'react'
 
 const COLOR_INDICATOR_IUI = () => {
   return (

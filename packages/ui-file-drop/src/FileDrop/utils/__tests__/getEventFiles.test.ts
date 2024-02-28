@@ -24,7 +24,6 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import { getEventFiles } from '../getEventFiles'
-import React from 'react'
 
 describe('getEventFiles', () => {
   const chromeDragEnter = {

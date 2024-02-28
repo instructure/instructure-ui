@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { View } from '@instructure/ui'
-import React from 'react'
 
 const VIEW_IUI = () => {
   return <View>content</View>

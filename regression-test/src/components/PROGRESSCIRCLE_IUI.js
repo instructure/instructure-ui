@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { ProgressCircle } from '@instructure/ui'
-import React from 'react'
 
 const PROGRESSCIRCLE_IUI = () => {
   return (

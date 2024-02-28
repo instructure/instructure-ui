@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
+import { Children } from 'react'
 import type { StoryConfig } from '@instructure/ui-test-utils'
 
 import { TopNavBarItem } from '../../TopNavBarItem'
@@ -97,7 +96,7 @@ export default {
   },
   filter: (props) => {
     if (
-      React.Children.count(props.children) < 5 &&
+      Children.count(props.children) < 5 &&
       props.currentPageId?.includes('Item')
     ) {
       return true

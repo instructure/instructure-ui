@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, wait, stub, match } from '@instructure/ui-test-utils'
 
 import { RadioInput } from '../../RadioInput'

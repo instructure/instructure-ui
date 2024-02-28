@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { logError as error } from '@instructure/console'
 import {
@@ -39,7 +38,7 @@ import type { ViewOwnProps } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import type { ScreenReaderContentProps } from '@instructure/ui-a11y-content'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

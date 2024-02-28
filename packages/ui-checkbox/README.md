@@ -26,7 +26,6 @@ npm install @instructure/ui-checkbox
 ### Usage
 
 ```js
-import React from 'react'
 import { Checkbox } from '@instructure/ui-checkbox'
 
 const MyCheckbox = () => {

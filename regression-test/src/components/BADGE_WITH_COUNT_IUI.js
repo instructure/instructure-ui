@@ -23,7 +23,6 @@
  */
 import { Badge } from '@instructure/ui'
 
-import React from 'react'
 const BADGE_WITH_COUNT_IUI = () => {
   return (
     <Badge count={105} countUntil={100}>

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, { Children, Component } from 'react'
 
 import {
@@ -46,7 +45,7 @@ import type { ModalBodyProps } from './ModalBody/props'
 import { ModalFooter } from './ModalFooter'
 import type { ModalFooterProps } from './ModalFooter/props'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

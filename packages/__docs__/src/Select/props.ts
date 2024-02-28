@@ -23,7 +23,7 @@
  */
 import type { PropValidators } from '@instructure/shared-types'
 import PropTypes from 'prop-types'
-import React from 'react'
+
 import { Renderable } from '@instructure/shared-types'
 
 type SelectOwnProps = {

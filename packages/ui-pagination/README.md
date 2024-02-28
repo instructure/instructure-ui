@@ -23,7 +23,6 @@ npm install @instructure/ui-pagination
 ### Usage
 
 ```js
-import React from 'react'
 import { Pagination } from '@instructure/ui-pagination'
 
 const MyPagination = () => {

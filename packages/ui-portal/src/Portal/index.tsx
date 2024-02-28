@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component, Children } from 'react'
 import ReactDOM from 'react-dom'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
@@ -85,7 +85,7 @@ class Portal extends Component<PortalProps, PortalState> {
     }
 
     // If Portal is mounting in an open condition fire onOpen handler
-    if (this.props.open && React.Children.count(this.props.children) > 0) {
+    if (this.props.open && Children.count(this.props.children) > 0) {
       this.forceUpdate(() => {
         if (this.props.open && typeof this.props.onOpen === 'function') {
           this.props.onOpen(this.DOMNode)
@@ -217,7 +217,7 @@ class Portal extends Component<PortalProps, PortalState> {
       return children
     }
 
-    return open && React.Children.count(children) > 0
+    return open && Children.count(children) > 0
       ? ReactDOM.createPortal(children, this.insertNode())
       : null
   }

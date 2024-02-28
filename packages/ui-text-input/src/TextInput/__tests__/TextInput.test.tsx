@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import ReactDOM from 'react-dom'
 import ReactTestUtils from 'react-dom/test-utils'
 import { expect, mount, stub, within, find } from '@instructure/ui-test-utils'
@@ -43,7 +43,7 @@ const contentAfterSVG = (
   </svg>
 )
 
-class WrapperComponent extends React.Component {
+class WrapperComponent extends Component {
   render() {
     return (
       <div>

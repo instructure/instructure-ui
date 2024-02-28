@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, { Children, Component, createContext } from 'react'
 
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
@@ -47,7 +46,7 @@ import type {
 import { DrawerTray } from './DrawerTray'
 import type { DrawerLayoutTrayProps } from './DrawerTray/props'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 
 import { propTypes, allowedProps } from './props'

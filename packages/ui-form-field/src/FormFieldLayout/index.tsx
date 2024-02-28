@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -36,7 +35,7 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { FormFieldLabel } from '../FormFieldLabel'
 import { FormFieldMessages } from '../FormFieldMessages'

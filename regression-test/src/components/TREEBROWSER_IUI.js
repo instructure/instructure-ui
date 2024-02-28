@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { TreeBrowser } from '@instructure/ui'
-import React from 'react'
 
 const TREEBROWSER_IUI = () => {
   return (

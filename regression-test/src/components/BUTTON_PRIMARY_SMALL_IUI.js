@@ -23,7 +23,6 @@
  */
 import { Button } from '@instructure/ui'
 
-import React from 'react'
 const BUTTON_PRIMARY_SMALL_IUI = () => {
   return (
     <Button color="primary" size="small">

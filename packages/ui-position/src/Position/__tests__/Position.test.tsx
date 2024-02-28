@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, wait, stub } from '@instructure/ui-test-utils'
 import { within } from '@instructure/ui-utils'
 

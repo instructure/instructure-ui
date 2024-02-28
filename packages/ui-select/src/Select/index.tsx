@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, { Children, Component, memo } from 'react'
 
 import * as utils from '@instructure/ui-utils'
@@ -60,7 +59,7 @@ import type {
   SelectableRender
 } from '@instructure/ui-selectable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

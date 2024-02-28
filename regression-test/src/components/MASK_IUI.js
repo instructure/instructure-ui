@@ -23,7 +23,6 @@
  */
 import { Mask } from '@instructure/ui'
 
-import React from 'react'
 const MASK_IUI = () => {
   return <Mask />
 }

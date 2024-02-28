@@ -28,7 +28,7 @@ npm install @instructure/ui-avatar
 ---
 type: example
 ---
-import React from 'react'
+
 import { Avatar } from '@instructure/ui-avatar'
 
 const MyAvatar = () => {

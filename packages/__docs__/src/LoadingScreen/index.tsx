@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 import generateStyle from './styles'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import type { LoadingScreenProps } from './props'
 @withStyle(generateStyle, null)
 class LoadingScreen extends Component<LoadingScreenProps> {

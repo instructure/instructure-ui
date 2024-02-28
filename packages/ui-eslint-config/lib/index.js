@@ -51,6 +51,8 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser',
   rules: {
+    'react/no-children-prop': 'off',
+    'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-var-requires': 1,
     '@typescript-eslint/no-empty-function': 1,
     '@typescript-eslint/explicit-module-boundary-types': 0,

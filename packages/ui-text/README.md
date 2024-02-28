@@ -28,7 +28,7 @@ npm install @instructure/ui-text
 ---
 type: code
 ---
-import React from 'react'
+
 import { Text } from '@instructure/ui-text'
 
 const MyText = () => {

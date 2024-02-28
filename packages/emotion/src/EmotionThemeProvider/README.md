@@ -27,7 +27,6 @@ theme properties will fall back to the parent theme, or the default `canvas` the
 To apply a theme to whole app, you need to import `<EmotionThemeProvider/>` and the theme you want to use from `@instructure/ui-themes` (or use your own compatible theme), and wrap your app in the theme provider.
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { instructure } from '@instructure/ui-themes'

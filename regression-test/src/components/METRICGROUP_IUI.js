@@ -23,7 +23,6 @@
  */
 import { MetricGroup, Metric } from '@instructure/ui'
 
-import React from 'react'
 const METRICGROUP_IUI = () => {
   return (
     <MetricGroup>

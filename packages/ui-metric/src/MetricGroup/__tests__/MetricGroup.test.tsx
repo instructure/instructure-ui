@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import { MetricGroup } from '../index'

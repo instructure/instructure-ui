@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { mount, expect, stub, wait } from '@instructure/ui-test-utils'
 
 import { CondensedButton } from '../index'

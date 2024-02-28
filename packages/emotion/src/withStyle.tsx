@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { forwardRef, useState } from 'react'
+import { forwardRef, useState } from 'react'
 import type {
   ForwardRefExoticComponent,
   PropsWithoutRef,
@@ -97,7 +97,7 @@ const defaultValues = {
  * As a HOC:
  *
  * ```js-code
- * import { withStyle, jsx } from '@instructure/emotion'
+ * import { withStyle } from '@instructure/emotion'
  * import generateStyle from './styles'
  * import generateComponentTheme from './theme'
  *

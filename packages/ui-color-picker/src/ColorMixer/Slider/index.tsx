@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { addEventListener } from '@instructure/ui-dom-utils'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { View } from '@instructure/ui-view'
 import type { ViewOwnProps } from '@instructure/ui-view'

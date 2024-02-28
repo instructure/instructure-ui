@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 import { DIRECTION, TextDirectionContext } from '@instructure/ui-i18n'
 import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'

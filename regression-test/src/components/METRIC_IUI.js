@@ -23,7 +23,6 @@
  */
 import { Metric } from '@instructure/ui'
 
-import React from 'react'
 const METRIC_IUI = () => {
   return <Metric renderLabel="Grade" renderValue="80%" />
 }

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, { Children, Component, ReactElement, MouseEvent } from 'react'
 
 import { View } from '@instructure/ui-view'
@@ -38,7 +37,7 @@ import { AccessibleContent } from '@instructure/ui-a11y-content'
 
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Locale, DateTime, ApplyLocaleContext } from '@instructure/ui-i18n'
 import type { Moment } from '@instructure/ui-i18n'

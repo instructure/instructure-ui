@@ -23,7 +23,6 @@
  */
 import { AppNav } from '@instructure/ui'
 
-import React from 'react'
 const APPNAV_IUI = () => {
   return (
     <AppNav

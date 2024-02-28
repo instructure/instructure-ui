@@ -23,7 +23,6 @@
  */
 import { Pill } from '@instructure/ui'
 
-import React from 'react'
 const PILL_IUI = () => {
   return <Pill>Pill</Pill>
 }

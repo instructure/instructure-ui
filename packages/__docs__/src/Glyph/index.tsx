@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 import * as reactIcons from '@instructure/ui-icons'
 import { Heading } from '../Heading'

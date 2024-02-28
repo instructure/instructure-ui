@@ -23,7 +23,6 @@
  */
 import { InlineSVG } from '@instructure/ui'
 
-import React from 'react'
 const INLINESVG_IUI = () => {
   return (
     <InlineSVG viewBox="0 0 50 50">

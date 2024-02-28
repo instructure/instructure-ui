@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'

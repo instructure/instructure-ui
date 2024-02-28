@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { ToggleButton } from '../index'

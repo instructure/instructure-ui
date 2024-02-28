@@ -23,7 +23,6 @@
  */
 import { SVGIcon } from '@instructure/ui'
 
-import React from 'react'
 const SVGICON_IUI = () => {
   return (
     <SVGIcon

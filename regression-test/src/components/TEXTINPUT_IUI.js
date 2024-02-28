@@ -23,7 +23,6 @@
  */
 import { TextInput } from '@instructure/ui'
 
-import React from 'react'
 const TEXTINPUT_IUI = () => {
   return <TextInput renderLabel="Name" placeholder="Doe, John Doe" />
 }

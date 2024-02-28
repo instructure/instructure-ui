@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component, Children } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
@@ -73,11 +72,11 @@ class Breadcrumb extends Component<BreadcrumbProps> {
 
   renderChildren() {
     const { styles, children } = this.props
-    const numChildren = React.Children.count(children)
+    const numChildren = Children.count(children)
     const inlineStyle = {
       maxWidth: `${Math.floor(100 / numChildren)}%`
     }
-    return React.Children.map(children, (child, index) => {
+    return Children.map(children, (child, index) => {
       return (
         <li css={styles?.crumb} style={inlineStyle}>
           {child}

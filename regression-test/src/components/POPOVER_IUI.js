@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Popover } from '@instructure/ui'
-import React from 'react'
 
 const POPOVER_IUI = () => {
   return (

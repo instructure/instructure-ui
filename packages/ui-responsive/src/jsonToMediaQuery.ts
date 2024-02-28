@@ -24,7 +24,6 @@
 import { px } from '@instructure/ui-utils'
 
 import { Query, ValidQueryKey } from './QueryType'
-import React from 'react'
 
 /**
  * ---

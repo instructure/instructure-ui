@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { expect, mount, within } from '@instructure/ui-test-utils'
 import { ContextView } from '../index'
 

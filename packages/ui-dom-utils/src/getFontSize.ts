@@ -24,7 +24,6 @@
 import { canUseDOM } from './canUseDOM'
 import { ownerDocument } from './ownerDocument'
 import { getComputedStyle } from './getComputedStyle'
-import React from 'react'
 
 const COMPUTED_CACHE: WeakMap<any, number> = new WeakMap()
 

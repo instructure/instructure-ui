@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { View } from '@instructure/ui-view'
@@ -30,7 +29,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { RatingIcon } from '../RatingIcon'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import type { RatingProps } from './props'
 import { allowedProps, propTypes } from './props'

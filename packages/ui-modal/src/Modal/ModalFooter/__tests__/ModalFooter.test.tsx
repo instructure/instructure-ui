@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 import { ModalFooter } from '../index'
 import generateComponentTheme from '../theme'

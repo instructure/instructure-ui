@@ -25,7 +25,6 @@ npm install @instructure/ui-modal
 ### Usage
 
 ```js
-import React from 'react'
 import { Modal } from '@instructure/ui-modal'
 
 const MyModal = () => {

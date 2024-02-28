@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { ApplyLocale } from '@instructure/ui'
-import React from 'react'
+
 const APPLYLOCALE_IUI = () => {
   return (
     <ApplyLocale locale="fr" timezone="Europe/Paris">

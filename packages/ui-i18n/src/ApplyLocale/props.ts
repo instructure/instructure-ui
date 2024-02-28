@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 export type ApplyLocaleProps = {
   locale?: string
   timezone?: string

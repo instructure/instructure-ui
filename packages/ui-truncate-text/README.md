@@ -28,7 +28,7 @@ npm install @instructure/ui-truncate-text
 ---
 example: false
 ---
-import React from 'react'
+
 import { TruncateText } from '@instructure/ui-truncate-text'
 
 const MyTruncateText = () => {

@@ -25,7 +25,6 @@ npm install @instructure/ui-options
 ### Usage
 
 ```js
-import React from 'react'
 import { Options } from '@instructure/ui-options'
 
 const MyOptions = () => {

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { Heading } from '@instructure/ui-heading'
 import {
   SourceCodeEditor,

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { IconUserLine } from '@instructure/ui-icons'
 import { Select } from '../../Select'
 

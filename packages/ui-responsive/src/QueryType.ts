@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { UIElement } from '@instructure/shared-types'
 
 /**

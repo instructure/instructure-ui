@@ -23,7 +23,6 @@
  */
 import { NumberInput } from '@instructure/ui'
 
-import React from 'react'
 const NUMBERINPUT_IUI = () => {
   return <NumberInput renderLabel="Default-size input" />
 }

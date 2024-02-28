@@ -23,7 +23,6 @@
  */
 import { InlineList } from '@instructure/ui'
 
-import React from 'react'
 const INLINELIST_IUI = () => {
   return (
     <InlineList delimiter="pipe">

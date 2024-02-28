@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { ApplyLocale } from '@instructure/ui-i18n'
 import { ExamplesPage } from '@instructure/ui-test-utils'
 

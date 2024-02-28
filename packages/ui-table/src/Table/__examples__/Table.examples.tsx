@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { Table } from '../index'
 
 import type { StoryConfig } from '@instructure/ui-test-utils'

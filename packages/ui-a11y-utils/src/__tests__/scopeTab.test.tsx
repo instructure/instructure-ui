@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, within, stub, wait } from '@instructure/ui-test-utils'
 import { scopeTab } from '../scopeTab'
 

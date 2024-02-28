@@ -24,7 +24,7 @@ npm install @instructure/ui-number-input
 ### Usage
 
 ```js
-import React from 'react'
+
 import { NumberInput } from '@instructure/ui-number-input'
 
 const MyNumber = () => {

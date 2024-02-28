@@ -22,8 +22,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { version } from 'react'
 import path from 'path'
-import React from 'react'
+
 import pkgUtils from '@instructure/pkg-utils'
 import { runCommandSync, resolveBin } from '@instructure/command-utils'
 
@@ -55,7 +56,7 @@ export default {
 
     let envVars = {
       NODE_ENV: 'test',
-      REACT_VERSION: React.version,
+      REACT_VERSION: version,
       NODE_OPTIONS: '--max_old_space_size=120000'
     }
     if (USE_REACT_STRICT_MODE) {

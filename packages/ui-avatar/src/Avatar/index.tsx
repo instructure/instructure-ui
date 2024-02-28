@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component, SyntheticEvent } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

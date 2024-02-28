@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { IconAddLine } from '@instructure/ui'
-import React from 'react'
 
 const ICON_IUI = () => {
   return <IconAddLine />

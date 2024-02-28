@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Overlay } from '@instructure/ui'
-import React from 'react'
 
 const OVERLAY_IUI = () => {
   return (

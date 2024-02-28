@@ -24,7 +24,6 @@
  */
 import { Breadcrumb } from '@instructure/ui'
 
-import React from 'react'
 const BREADCRUMB_IUI = () => {
   return (
     <Breadcrumb label="You are here:">

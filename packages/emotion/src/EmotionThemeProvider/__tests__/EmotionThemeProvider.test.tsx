@@ -22,17 +22,11 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 
-import {
-  withStyle,
-  jsx,
-  EmotionThemeProvider,
-  WithStyleProps
-} from '../../index'
+import { withStyle, EmotionThemeProvider, WithStyleProps } from '../../index'
 
 type Props = {
   inverse?: boolean

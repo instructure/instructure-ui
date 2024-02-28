@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component, SyntheticEvent } from 'react'
 
 import { Flex } from '@instructure/ui-flex'
@@ -37,7 +36,7 @@ import {
 } from '@instructure/ui-a11y-content'
 import { Modal } from '@instructure/ui-modal'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { IconXSolid } from '@instructure/ui-icons'
 import { IconButton } from '@instructure/ui-buttons'
 

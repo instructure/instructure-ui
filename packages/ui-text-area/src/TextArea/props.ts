@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import type { TextareaHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 

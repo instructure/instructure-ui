@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
-import React, { Component } from 'react'
+
+import { Component, Children } from 'react'
 
 import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
@@ -34,7 +34,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -176,9 +176,9 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
       !(() => {
         let isTooDeep = false
         const text = ensureSingleChild(this.props.children)!
-        React.Children.forEach(text.props.children, (child) => {
+        Children.forEach(text.props.children, (child) => {
           if (child.props) {
-            React.Children.forEach(child.props.children, (grandChild) => {
+            Children.forEach(child.props.children, (grandChild) => {
               // currently we don't support node trees deeper than 2 levels
               // truncation will still occur on their text content, but their actual node structure will be lost
               if (grandChild.props) {
@@ -266,7 +266,7 @@ class TruncateText extends Component<TruncateTextProps, TruncateTextState> {
       />
     )
 
-    const children = React.Children.map(childElements, (child) => child)
+    const children = Children.map(childElements, (child) => child)
     return this._text!.props
       ? safeCloneElement(this._text!, this._text!.props, children)
       : children

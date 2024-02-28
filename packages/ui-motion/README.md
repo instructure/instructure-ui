@@ -23,7 +23,6 @@ npm install @instructure/ui-motion
 ### Usage
 
 ```js
-import React from 'react'
 import { Heading } from '@instructure/ui-elements'
 import { Transition } from '@instructure/ui-motion'
 

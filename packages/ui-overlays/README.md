@@ -24,7 +24,6 @@ npm install @instructure/ui-overlays
 ### Usage
 
 ```js
-import React from 'react'
 import { Mask } from '@instructure/ui-overlays'
 
 const MyMask = () => {

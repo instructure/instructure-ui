@@ -23,7 +23,6 @@
  */
 import { Menu } from '@instructure/ui'
 
-import React from 'react'
 const MENU_IUI = () => {
   const state = {
     singleSelection: ['itemOne'],

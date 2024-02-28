@@ -23,7 +23,6 @@
  */
 import { Byline } from '@instructure/ui'
 
-import React from 'react'
 const BYLINE_IUI = () => {
   return <Byline description="description">Item</Byline>
 }

@@ -28,7 +28,7 @@ npm install @instructure/ui-breadcrumb
 ---
 type: code
 ---
-import React from 'react'
+
 import { Breadcrumb } from '@instructure/ui-breadcrumb'
 
 const MyBreadcrumb = () => {

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { FormFieldGroup } from '@instructure/ui'
-import React from 'react'
 
 const FORMFIELDGROUP_IUI = () => {
   return (

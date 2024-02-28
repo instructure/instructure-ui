@@ -23,7 +23,6 @@
  */
 import { Checkbox } from '@instructure/ui'
 
-import React from 'react'
 const CHECKBOX_TOGGLE_IUI = () => {
   return <Checkbox variant="toggle" label="Asd" defaultChecked />
 }

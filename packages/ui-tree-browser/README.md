@@ -25,7 +25,6 @@ npm install @instructure/ui-tree-browser
 ### Usage
 
 ```js
-import React from 'react'
 import { TreeBrowser } from '@instructure/ui-tree-browser'
 
 const MyTreeBrowser = () => {

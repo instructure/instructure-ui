@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { TextArea } from '@instructure/ui'
-import React from 'react'
 
 const TEXTAREA_IUI = () => {
   return <TextArea label="Textarea" />

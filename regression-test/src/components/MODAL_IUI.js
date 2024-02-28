@@ -23,7 +23,6 @@
  */
 import { Modal } from '@instructure/ui'
 
-import React from 'react'
 const MODAL_IUI = () => {
   return (
     <Modal

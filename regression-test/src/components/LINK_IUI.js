@@ -23,7 +23,6 @@
  */
 import { Link } from '@instructure/ui'
 
-import React from 'react'
 const LINK_IUI = () => {
   return <Link href="http://instructure.design">Link</Link>
 }

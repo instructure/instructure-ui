@@ -25,7 +25,6 @@ npm install @instructure/ui-drawer-layout
 ### Usage
 
 ```js
-import React from 'react'
 import { DrawerLayout } from '@instructure/ui-drawer-layout'
 
 const MyLayout = () => {

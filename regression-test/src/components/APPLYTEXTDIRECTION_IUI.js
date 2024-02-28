@@ -23,7 +23,6 @@
  */
 import { ApplyTextDirection } from '@instructure/ui'
 
-import React from 'react'
 const APPLYTEXTDIRECTION_IUI = () => {
   return (
     <ApplyTextDirection dir="rtl">

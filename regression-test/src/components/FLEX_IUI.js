@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Flex } from '@instructure/ui'
-import React from 'react'
 
 const FLEX_IUI = () => {
   return (

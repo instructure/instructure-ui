@@ -25,7 +25,6 @@ npm install @instructure/ui-dialog
 ### Usage
 
 ```js
-import React from 'react'
 import { Dialog } from '@instructure/ui-dialog'
 
 const MyDialog = () => {

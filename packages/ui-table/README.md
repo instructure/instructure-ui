@@ -28,7 +28,7 @@ npm install @instructure/ui-table
 ---
 type: code
 ---
-import React from 'react'
+
 import { Table } from '@instructure/ui-table'
 
 const MyTable = () => {

@@ -23,7 +23,6 @@
  */
 import { Tag } from '@instructure/ui'
 
-import React from 'react'
 const TAG_DISMISSIBLE_IUI = () => {
   return <Tag text="Static" dismissible onClick={() => {}} />
 }

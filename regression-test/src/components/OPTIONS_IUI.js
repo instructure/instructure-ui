@@ -24,7 +24,6 @@
  */
 import { Options } from '@instructure/ui'
 
-import React from 'react'
 const OPTIONS_IUI = () => {
   return (
     <Options>

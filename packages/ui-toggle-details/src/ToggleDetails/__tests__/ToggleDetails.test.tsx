@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 
 import { ToggleDetails } from '../index'

@@ -23,7 +23,6 @@
  */
 import { Badge } from '@instructure/ui'
 
-import React from 'react'
 const BADGE_IUI = () => {
   return <Badge type="notification" standalone />
 }

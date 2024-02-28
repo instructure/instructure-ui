@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
+
 import React, { Children, Component, ReactElement } from 'react'
 import keycode from 'keycode'
 
@@ -42,7 +42,7 @@ import { MenuItemGroup } from './MenuItemGroup'
 import type { MenuGroupProps } from './MenuItemGroup/props'
 import { MenuItemSeparator } from './MenuItemSeparator'
 import type { MenuSeparatorProps } from './MenuItemSeparator/props'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

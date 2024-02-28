@@ -23,7 +23,6 @@
  */
 import { Pages } from '@instructure/ui'
 
-import React from 'react'
 const PAGES_IUI = () => {
   const renderBackButton = (navigateToPreviousPage) => {
     return <button onClick={navigateToPreviousPage}>Back</button>

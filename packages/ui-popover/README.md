@@ -27,7 +27,6 @@ npm install @instructure/ui-popover
 For detailed usage and documentation, see [Popover](#Popover).
 
 ```js
-import React from 'react'
 import { Popover } from '@instructure/ui-popover'
 
 const MyPopover = () => {

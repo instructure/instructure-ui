@@ -26,7 +26,6 @@ npm install @instructure/ui-side-nav-bar
 ### Usage
 
 ```js
-import React from 'react'
 import { SideNavBar } from '@instructure/ui-side-nav-bar'
 import { Avatar } from '@instructure/ui-avatar'
 

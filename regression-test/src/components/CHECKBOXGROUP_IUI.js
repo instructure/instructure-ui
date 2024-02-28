@@ -24,7 +24,6 @@
  */
 import { CheckboxGroup, Checkbox } from '@instructure/ui'
 
-import React from 'react'
 const CHECKBOXGROUP_IUI = () => {
   return (
     <CheckboxGroup

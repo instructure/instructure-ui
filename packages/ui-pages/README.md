@@ -23,7 +23,6 @@ npm install @instructure/ui-pages
 ### Usage
 
 ```js
-import React from 'react'
 import { Pages } from '@instructure/ui-pages'
 
 const MyPages = () => {

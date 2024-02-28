@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, within, find } from '@instructure/ui-test-utils'
 
 import { FormFieldGroup } from '../index'

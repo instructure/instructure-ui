@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -87,7 +86,8 @@ type PropKeys = keyof RadioInputGroupOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type RadioInputGroupProps = RadioInputGroupOwnProps &
-  OtherHTMLAttributes<RadioInputGroupOwnProps> & WithDeterministicIdProps
+  OtherHTMLAttributes<RadioInputGroupOwnProps> &
+  WithDeterministicIdProps
 
 type RadioInputGroupState = {
   value?: string | number

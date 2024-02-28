@@ -25,7 +25,6 @@ npm install @instructure/ui-code-editor
 ### Usage
 
 ```js
-import React from 'react'
 import { CodeEditor } from '@instructure/ui-code-editor'
 
 const MyCodeEditor = () => {

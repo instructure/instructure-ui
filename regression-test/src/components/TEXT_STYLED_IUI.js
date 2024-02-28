@@ -23,7 +23,6 @@
  */
 import { Text } from '@instructure/ui'
 
-import React from 'react'
 const TEXT_STYLED_IUI = () => {
   return (
     <Text

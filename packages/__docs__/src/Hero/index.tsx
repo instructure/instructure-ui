@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { Button, IconButton } from '@instructure/ui-buttons'
@@ -40,7 +39,7 @@ import {
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

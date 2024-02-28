@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, { Component, ReactElement } from 'react'
 import {
   TopNavBarBreadcrumbProps,
@@ -31,7 +30,7 @@ import {
   propTypes
 } from './props'
 import TopNavBar from '../index'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from '../TopNavBarBreadcrumb/styles'
 import { testable } from '@instructure/ui-testable'
 import {

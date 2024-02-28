@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, within, wait } from '@instructure/ui-test-utils'
 import { ScreenReaderFocusRegion } from '../ScreenReaderFocusRegion'
 

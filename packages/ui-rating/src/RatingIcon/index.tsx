@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 
 import { IconStarSolid, IconStarLightSolid } from '@instructure/ui-icons'
@@ -30,7 +29,7 @@ import { requestAnimationFrame } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { RatingIconProps, RatingIconState } from './props'

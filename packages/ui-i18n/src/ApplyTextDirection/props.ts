@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { AsElementType } from '@instructure/shared-types'
 
 type DirValues = 'ltr' | 'rtl' | 'auto'

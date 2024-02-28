@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, find, mount, stub } from '@instructure/ui-test-utils'
 
 import { Tab } from '../index'

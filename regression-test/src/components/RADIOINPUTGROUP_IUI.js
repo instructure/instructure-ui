@@ -23,7 +23,6 @@
  */
 import { RadioInputGroup, RadioInput } from '@instructure/ui'
 
-import React from 'react'
 const RADIOINPUTGROUP_IUI = () => {
   const inputs = [
     { value: 'foo', label: 'Radio option one' },

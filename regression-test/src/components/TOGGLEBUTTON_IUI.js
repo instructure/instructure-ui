@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { ToggleButton } from '@instructure/ui'
-import React from 'react'
 
 const TOGGLEBUTTON_IUI = () => {
   return (

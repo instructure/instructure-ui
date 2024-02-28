@@ -29,7 +29,7 @@ npm install @instructure/ui-metric
 ---
 type: code
 ---
-import React from 'react'
+
 import { Metric } from '@instructure/ui-metric'
 
 const MyMetric = () => {
@@ -43,7 +43,7 @@ const MyMetric = () => {
 ---
 type: code
 ---
-import React from 'react'
+
 import { MetricGroup } from '@instructure/ui-metric'
 
 const MyGroup = () => {

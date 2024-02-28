@@ -25,7 +25,6 @@ npm install @instructure/ui-menu
 ### Usage
 
 ```js
-import React from 'react'
 import { Menu } from '@instructure/ui-menu'
 
 const MyMenu = () => {

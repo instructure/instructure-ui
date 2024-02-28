@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type {
   TopNavBarLayoutDesktopTheme,

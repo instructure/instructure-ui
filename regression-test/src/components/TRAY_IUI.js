@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Tray } from '@instructure/ui'
-import React from 'react'
 
 const TRAY_IUI = () => {
   return (

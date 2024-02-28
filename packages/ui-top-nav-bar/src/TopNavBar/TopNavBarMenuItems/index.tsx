@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component, Children } from 'react'
 
 import {
   omitProps,
@@ -33,7 +32,7 @@ import {
 import { warn, error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Drilldown } from '@instructure/ui-drilldown'
 import { TruncateList } from '@instructure/ui-truncate-list'
@@ -116,15 +115,13 @@ class TopNavBarMenuItems extends Component<
   componentDidUpdate(prevProps: TopNavBarMenuItemsProps) {
     this.props.makeStyles?.()
 
-    if (
-      React.Children.count(prevProps.children) !== this.childrenArray.length
-    ) {
+    if (Children.count(prevProps.children) !== this.childrenArray.length) {
       this.setState({ key: this.state.key + 1 })
     }
   }
 
   get childrenArray() {
-    return React.Children.toArray(this.props.children) as ItemChild[]
+    return Children.toArray(this.props.children) as ItemChild[]
   }
 
   renderOptionContent: RenderOptionContent = (children, itemProps) => {

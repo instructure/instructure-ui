@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
+import { useState } from 'react'
 import { Tabs } from '../index'
 import { fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 const TabExample = (props: { onIndexChange: (arg: number) => void }) => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(0)
   return (
     <Tabs
       onRequestTabChange={(_event, { index }) => {
@@ -39,11 +38,24 @@ const TabExample = (props: { onIndexChange: (arg: number) => void }) => {
       variant="default"
       margin="medium"
     >
-      <Tabs.Panel renderTitle="First Tab" id="first" isSelected={selectedIndex === 0} active>
+      <Tabs.Panel
+        renderTitle="First Tab"
+        id="first"
+        isSelected={selectedIndex === 0}
+        active
+      >
         <p>CONTENT</p>
       </Tabs.Panel>
-      <Tabs.Panel renderTitle="Second Tab" id="second" isSelected={selectedIndex === 1} />
-      <Tabs.Panel renderTitle="Third Tab" id="third" isSelected={selectedIndex === 2} />
+      <Tabs.Panel
+        renderTitle="Second Tab"
+        id="second"
+        isSelected={selectedIndex === 1}
+      />
+      <Tabs.Panel
+        renderTitle="Third Tab"
+        id="third"
+        isSelected={selectedIndex === 2}
+      />
     </Tabs>
   )
 }

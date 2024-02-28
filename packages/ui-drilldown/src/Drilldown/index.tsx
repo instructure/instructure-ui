@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 /** @jsxFrag React.Fragment */
 import React, { Component, ReactElement, ReactNode } from 'react'
 
@@ -53,7 +52,7 @@ import {
   IconCheckSolid
 } from '@instructure/ui-icons'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { DrilldownSeparator } from './DrilldownSeparator'
 import { DrilldownOption } from './DrilldownOption'

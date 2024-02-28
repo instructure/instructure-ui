@@ -9,7 +9,6 @@
     "experimentalDecorators": true,
     "allowJs": true,
     "isolatedModules": true,
-    "jsx": "react",
     "target": "ES6",
     // interop between ESM and CJS. Recommended by TS
     "esModuleInterop": true,
@@ -17,7 +16,6 @@
     "skipLibCheck": true,
     // error out if import and file system have a casing mismatch. Recommended by TS
     "forceConsistentCasingInFileNames": true,
-
     // turn these settings on when we start to migrate the codebase
     "checkJs": false,
     "noImplicitAny": true,
@@ -29,7 +27,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     // ES2019 is needed so TS recognizes new features like Array.flat
-    "lib": ["ES2019", "DOM", "DOM.Iterable"]
+    "lib": ["ES2019", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react"
   },
   "exclude": ["cypress.config.ts", "cypress", "node_modules"]
 }

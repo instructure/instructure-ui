@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import {
   callRenderProp,
@@ -37,7 +36,7 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import { warn, error } from '@instructure/console'
 
-import { withStyle, jsx, InstUISettingsProvider } from '@instructure/emotion'
+import { withStyle, InstUISettingsProvider } from '@instructure/emotion'
 
 import {
   IconArrowOpenDownSolid,

@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import ReactServer from 'react-dom/server'
 import { expect, jest, test, beforeAll } from '@jest/globals'
 

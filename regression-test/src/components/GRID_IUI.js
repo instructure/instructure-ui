@@ -23,7 +23,6 @@
  */
 import { Grid } from '@instructure/ui'
 
-import React from 'react'
 const GRID_IUI = () => {
   return (
     <Grid>

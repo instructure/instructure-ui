@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { DrawerLayout } from '@instructure/ui'
-import React from 'react'
 
 const DRAWERLAYOUT_IUI = () => {
   return (

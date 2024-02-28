@@ -25,7 +25,6 @@ npm install @instructure/ui-byline
 ### Usage
 
 ```js
-import React from 'react'
 import { Byline } from '@instructure/ui-byline'
 
 const MyByline = () => {

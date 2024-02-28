@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, { Component, PropsWithChildren } from 'react'
 import PropTypes from 'prop-types'
 
@@ -36,7 +35,7 @@ import { List } from '@instructure/ui-list'
 import { Responsive } from '@instructure/ui-responsive'
 import { View } from '@instructure/ui-view'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

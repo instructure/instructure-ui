@@ -23,7 +23,6 @@
  */
 import { Options, IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui'
 
-import React from 'react'
 const OPTIONS_FORM_MENU_IUI = () => {
   return (
     <div style={{ width: '200px' }}>

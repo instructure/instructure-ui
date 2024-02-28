@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import { PositionPropTypes } from '@instructure/ui-position'

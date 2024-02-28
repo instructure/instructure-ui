@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import {
   render,
   screen,
@@ -1332,7 +1332,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       })
 
       it('returnFocusElement prop should help returning the focus', async () => {
-        class ReturnFocusExample extends React.Component {
+        class ReturnFocusExample extends Component {
           state = {
             isDialogOpen: true
           }
@@ -1347,6 +1347,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
                     content: 'example dialog',
                     open: this.state.isDialogOpen,
                     onClose: () => {
+                      // ts-expect-error TODO
                       this.setState({ isDialogOpen: false })
                     },
                     returnFocusElement: () => document.getElementById('Search')
@@ -1356,7 +1357,7 @@ describe('<TopNavBarSmallViewportLayout />', () => {
             )
           }
         }
-
+        // ts-expect-error TODO
         const { container } = render(<ReturnFocusExample />)
         const inPlaceDialogContainer = container.querySelector(
           "[class$='inPlaceDialogContainer']"

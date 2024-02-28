@@ -25,7 +25,6 @@ npm install @instructure/ui-rating
 ### Usage
 
 ```js
-import React from 'react'
 import { Rating } from '@instructure/ui-rating'
 
 const MyRating = () => {

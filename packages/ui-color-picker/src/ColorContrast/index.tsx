@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 /** @jsxFrag React.Fragment */
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
@@ -35,7 +34,7 @@ import {
   colorToHex8
 } from '@instructure/ui-color-utils'
 import type { RGBAType } from '@instructure/ui-color-utils'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { Text } from '@instructure/ui-text'
 import { Pill } from '@instructure/ui-pill'

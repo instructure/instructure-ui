@@ -28,7 +28,7 @@ npm install @instructure/ui-link
 ---
 type: code
 ---
-import React from 'react'
+
 import { Link } from '@instructure/ui-link'
 
 const MyLink = () => {

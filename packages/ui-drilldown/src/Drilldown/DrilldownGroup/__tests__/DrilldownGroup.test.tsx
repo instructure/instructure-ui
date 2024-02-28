@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, find, stub, match } from '@instructure/ui-test-utils'
 
 import type { QueriesHelpersEventsType } from '@instructure/ui-test-queries'

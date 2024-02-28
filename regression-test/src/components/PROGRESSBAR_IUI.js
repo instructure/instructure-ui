@@ -23,7 +23,6 @@
  */
 import { ProgressBar } from '@instructure/ui'
 
-import React from 'react'
 const PROGRESSBAR_IUI = () => {
   return (
     <ProgressBar

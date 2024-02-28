@@ -23,7 +23,6 @@
  */
 import { BaseButton } from '@instructure/ui'
 
-import React from 'react'
 const BASEBUTTON_IUI = () => {
   return <BaseButton>Click me</BaseButton>
 }

@@ -23,7 +23,6 @@
  */
 import { Position } from '@instructure/ui'
 
-import React from 'react'
 const POSITION_IUI = () => {
   return (
     <Position

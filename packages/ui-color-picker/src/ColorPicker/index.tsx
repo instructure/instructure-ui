@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 /** @jsxFrag React.Fragment */
-import React, { Component } from 'react'
+import { Component } from 'react'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { warn, error } from '@instructure/console'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'

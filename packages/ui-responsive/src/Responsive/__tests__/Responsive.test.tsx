@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { expect, mount, spy, stub } from '@instructure/ui-test-utils'
 import { deepEqual } from '@instructure/ui-utils'
 

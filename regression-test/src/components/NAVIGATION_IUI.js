@@ -23,7 +23,6 @@
  */
 import { Navigation, IconAdminLine } from '@instructure/ui'
 
-import React from 'react'
 const NAVIGATION_IUI = () => {
   return (
     <Navigation

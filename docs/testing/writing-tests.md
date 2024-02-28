@@ -16,7 +16,7 @@ The following code example presents an annotated version of a typical test. The 
 ---
 type: code
 ---
-import React from 'react'
+
 import {
   mount,
   stub,

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { ColorPicker } from '@instructure/ui'
-import React from 'react'
 
 const COLOR_MIXER_IUI = () => {
   return (

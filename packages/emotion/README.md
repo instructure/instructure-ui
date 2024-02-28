@@ -37,8 +37,7 @@ In the `render` method, use emotion's `css={this.props.styles.componentName}` sy
 ```jsx
 // Button/index.js
 
-/** @jsx jsx */
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 

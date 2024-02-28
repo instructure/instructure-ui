@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
 
 import { DateTimeInput } from '../index'

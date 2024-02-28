@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
@@ -60,7 +59,8 @@ type PropKeys = keyof DrawerLayoutOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrawerLayoutProps = DrawerLayoutOwnProps &
-  WithStyleProps<null, DrawerLayoutStyle> & WithDeterministicIdProps
+  WithStyleProps<null, DrawerLayoutStyle> &
+  WithDeterministicIdProps
 
 type DrawerLayoutStyle = ComponentStyle<'drawerLayout'>
 

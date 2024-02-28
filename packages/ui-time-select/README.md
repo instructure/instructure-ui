@@ -25,7 +25,6 @@ npm install @instructure/ui-time-select
 ### Usage
 
 ```js
-import React from 'react'
 import { TimeSelect } from '@instructure/ui-time-select'
 
 const MyTimeSelect = () => {

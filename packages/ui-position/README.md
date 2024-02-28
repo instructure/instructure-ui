@@ -27,7 +27,6 @@ npm install @instructure/ui-position
 For detailed usage and documentation, see [Position](#Position).
 
 ```js
-import React from 'react'
 import { Position } from '@instructure/ui-position'
 
 const MyPosition = () => {

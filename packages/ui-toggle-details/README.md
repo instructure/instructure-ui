@@ -26,7 +26,6 @@ npm install @instructure/ui-toggle-details
 ### Usage
 
 ```js
-import React from 'react'
 import { ToggleDetails } from '@instructure/ui-toggle-details'
 
 const MyToggleDetails = () => {

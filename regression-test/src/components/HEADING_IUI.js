@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Heading } from '@instructure/ui'
-import React from 'react'
 
 const HEADING_IUI = () => {
   return <Heading>Default Heading</Heading>

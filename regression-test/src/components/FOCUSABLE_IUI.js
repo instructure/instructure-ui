@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Focusable } from '@instructure/ui'
-import React from 'react'
 
 const FOCUSABLE_IUI = () => {
   return (

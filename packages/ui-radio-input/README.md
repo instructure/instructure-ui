@@ -26,7 +26,6 @@ npm install @instructure/ui-radio-input
 ### Usage
 
 ```js
-import React from 'react'
 import { RadioInput } from '@instrucutre/ui-radio-input'
 
 const MyRadioInput = () => {

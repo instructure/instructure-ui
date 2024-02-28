@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { expect, mount, stub, locator, wait } from '@instructure/ui-test-utils'
 
 import { PaginationButton } from '../index'

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { ColorContrast } from '@instructure/ui'
-import React from 'react'
 
 const COLOR_CONTRAST_IUI = () => {
   return (

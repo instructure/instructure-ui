@@ -26,7 +26,6 @@ npm install @instructure/ui-list
 ### Usage
 
 ```js
-import React from 'react'
 import { List } from '@instructure/ui-list'
 
 const MyList = () => {
@@ -41,7 +40,6 @@ const MyList = () => {
 ```
 
 ```js
-import React from 'react'
 import { InlineList } from '@instructure/ui-list'
 
 const MyList = () => {

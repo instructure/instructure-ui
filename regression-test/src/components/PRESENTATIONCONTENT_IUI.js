@@ -23,7 +23,6 @@
  */
 import { PresentationContent } from '@instructure/ui'
 
-import React from 'react'
 const PRESENTATIONCONTENT_IUI = () => {
   return <PresentationContent>Presentational content here</PresentationContent>
 }

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { ToggleDetails } from '@instructure/ui'
-import React from 'react'
 
 const TOGGLEDETAILS_IUI = () => {
   return (

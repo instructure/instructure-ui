@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, wait } from '@instructure/ui-test-utils'
 
 import { Pill } from '../index'

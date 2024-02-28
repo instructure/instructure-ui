@@ -28,7 +28,7 @@ npm install @instructure/ui-pill
 ---
 type: code
 ---
-import React from 'react'
+
 import { Pill } from '@instructure/ui-pill'
 
 const MyPill = () => {

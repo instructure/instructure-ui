@@ -38,7 +38,8 @@ module.exports = function (
   const presets = [
     [require('@babel/preset-env').default, envPresetConfig],
     [require('@babel/preset-typescript').default, { allowDeclareFields: true }],
-    [require('@babel/preset-react').default, { useBuiltIns: true }]
+    [require('@babel/preset-react').default, { useBuiltIns: true }],
+    [require('@emotion/babel-preset-css-prop').default]
   ]
 
   let plugins = []

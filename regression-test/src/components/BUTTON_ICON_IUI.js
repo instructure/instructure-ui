@@ -23,7 +23,6 @@
  */
 import { Button, IconAddLine } from '@instructure/ui'
 
-import React from 'react'
 const BUTTON_ICON_IUI = () => {
   return <Button renderIcon={IconAddLine}>asd</Button>
 }

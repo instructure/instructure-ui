@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import keycode from 'keycode'
 
 import { FormField } from '@instructure/ui-form-field'
@@ -40,7 +39,7 @@ import {
   withDeterministicId
 } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

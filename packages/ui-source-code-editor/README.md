@@ -25,7 +25,6 @@ npm install @instructure/ui-source-code-editor
 ### Usage
 
 ```js
-import React from 'react'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 
 const MyCodeEditor = () => {

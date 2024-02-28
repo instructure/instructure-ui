@@ -23,7 +23,6 @@
  */
 import { Alert } from '@instructure/ui'
 
-import React from 'react'
 const ALERT_IUI = () => {
   return <Alert transition="none">Sample info text.</Alert>
 }

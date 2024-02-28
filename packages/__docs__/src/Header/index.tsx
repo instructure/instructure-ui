@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { Link } from '@instructure/ui-link'
 import { InlineSVG } from '@instructure/ui-svg-images'

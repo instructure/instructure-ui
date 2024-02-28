@@ -449,13 +449,13 @@ In the `index.js` of the component, replace the imports, the decorator, and refa
 
 ##### 1. jsx
 
-Add the `/** @jsx jsx */` annotation on top.
+Add the `` annotation on top.
 
 ```js
 ---
 type: code
 ---
-/** @jsx jsx */
+
 import { Children, Component } from 'react'
 ```
 
@@ -476,7 +476,7 @@ import theme from './theme'
 import styles from './styles.css'
 
 // after
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateComponentTheme from './theme'
 import generateStyle from './styles'
 ```
@@ -800,13 +800,13 @@ const generateStyle = (componentTheme, props, state) => {
 ---
 type: code
 ---
-/** @jsx jsx */
+
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

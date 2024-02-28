@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { getElementType } from '@instructure/ui-react-utils'
 
 import { DIRECTION, TextDirectionContext } from '../TextDirectionContext'

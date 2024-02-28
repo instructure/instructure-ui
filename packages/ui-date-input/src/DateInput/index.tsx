@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, { Children, Component, ReactElement } from 'react'
 
 import { Calendar } from '@instructure/ui-calendar'
@@ -47,7 +46,7 @@ import { testable } from '@instructure/ui-testable'
 
 import { DateTime, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 

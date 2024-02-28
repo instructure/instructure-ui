@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Dialog } from '@instructure/ui'
-import React from 'react'
 
 const DIALOG_IUI = () => {
   return (

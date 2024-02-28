@@ -24,7 +24,6 @@
 
 import sinon from 'sinon'
 import { ReactComponentWrapper } from './reactComponentWrapper'
-import React from 'react'
 
 type KarmaArgs = {
   config: {

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, {
   Component,
   ComponentClass,
@@ -50,7 +49,7 @@ import { debounce } from '@instructure/debounce'
 import type { Debounced } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

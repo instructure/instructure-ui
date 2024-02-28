@@ -26,7 +26,6 @@ npm install @instructure/ui-navigation
 ### Usage
 
 ```js
-import React from 'react'
 import { Navigation } from '@instructure/ui-navigation'
 import { Avatar } from '@instructure/ui-avatar'
 

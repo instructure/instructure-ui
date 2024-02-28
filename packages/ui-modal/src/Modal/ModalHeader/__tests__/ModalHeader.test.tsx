@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { expect, mount, within } from '@instructure/ui-test-utils'
 import { canvas } from '@instructure/ui-themes'
 import { color2hex } from '@instructure/ui-color-utils'

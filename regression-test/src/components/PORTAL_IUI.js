@@ -23,7 +23,6 @@
  */
 import { Portal } from '@instructure/ui'
 
-import React from 'react'
 const PORTAL_IUI = () => {
   return (
     <Portal open>

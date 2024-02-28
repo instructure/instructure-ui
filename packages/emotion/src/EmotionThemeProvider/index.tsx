@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { ThemeProvider } from '@emotion/react'
 
 import type { ThemeOrOverride } from '../EmotionTypes'

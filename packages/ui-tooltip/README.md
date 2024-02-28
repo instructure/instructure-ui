@@ -25,7 +25,7 @@ npm install @instructure/ui-tooltip
 ### Usage
 
 ```js
-import React from 'react'
+
 import { Tooltip } from '@instructure/ui-tooltip'
 
 const MyTooltip = () => {

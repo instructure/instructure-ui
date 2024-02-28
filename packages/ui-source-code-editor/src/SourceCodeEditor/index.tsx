@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 import { deepEqual as isEqual } from '@instructure/ui-utils'
 
@@ -89,7 +88,7 @@ import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import customSearch from './SearchPanel'
 

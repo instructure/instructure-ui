@@ -28,7 +28,7 @@ npm install @instructure/ui-spinner
 ---
 type: code
 ---
-import React from 'react'
+
 import { Spinner } from '@instructure/ui-spinner'
 
 const MySpinner = () => {

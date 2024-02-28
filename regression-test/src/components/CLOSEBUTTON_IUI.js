@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { CloseButton } from '@instructure/ui'
-import React from 'react'
 
 const CLOSEBUTTON_IUI = () => {
   return <CloseButton screenReaderLabel="Close" />

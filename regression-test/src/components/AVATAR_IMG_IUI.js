@@ -23,7 +23,6 @@
  */
 import { Avatar } from '@instructure/ui'
 
-import React from 'react'
 const AVATAR_IMG_IUI = () => {
   return (
     <Avatar

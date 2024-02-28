@@ -23,7 +23,6 @@
  */
 import { Rating } from '@instructure/ui'
 
-import React from 'react'
 const RATING_IUI = () => {
   return <Rating label="Label" iconCount={5} valueNow={30} valueMax={100} />
 }

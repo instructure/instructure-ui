@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { SourceCodeEditor } from '@instructure/ui'
-import React from 'react'
 
 const SOURCECODEEDITOR_IUI = () => {
   const code = `function findSequence(goal) {

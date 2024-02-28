@@ -29,7 +29,7 @@ npm install @instructure/ui-progress
 ---
 example: false
 ---
-import React from 'react'
+
 import { ProgressBar } from '@instructure/ui-progress'
 
 const MyProgress = () => {

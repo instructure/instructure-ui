@@ -23,7 +23,6 @@
  */
 import { Billboard } from '@instructure/ui'
 
-import React from 'react'
 const BILLBOARD_IUI = () => {
   return (
     <Billboard

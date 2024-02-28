@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { Component } from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
@@ -1030,7 +1030,7 @@ describe('<TopNavBarItem />', () => {
     })
 
     it('should work controlled too', async () => {
-      class ControlledExample extends React.Component {
+      class ControlledExample extends Component {
         state = {
           isPopoverOpen: false
         }

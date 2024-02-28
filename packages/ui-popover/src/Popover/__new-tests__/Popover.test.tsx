@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { act, render, waitFor } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 

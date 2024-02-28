@@ -28,7 +28,7 @@ npm install @instructure/ui-heading
 ---
 type: code
 ---
-import React from 'react'
+
 import { Heading } from '@instructure/ui-heading'
 
 const MyHeading = () => {

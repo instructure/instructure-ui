@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Tooltip } from '@instructure/ui'
-import React from 'react'
 
 const TOOLTIP_IUI = () => {
   return (

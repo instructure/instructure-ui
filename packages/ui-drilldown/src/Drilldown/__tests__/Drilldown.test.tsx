@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
+import { createRef } from 'react'
 import {
   expect,
   generateA11yTests,
@@ -329,7 +328,7 @@ describe('<Drilldown />', async () => {
 
   describe('elementRef prop (and ref static prop)', async () => {
     it('should give back the drilldown element when there is no trigger', async () => {
-      const ref = React.createRef<Drilldown>()
+      const ref = createRef<Drilldown>()
       const elementRef = stub()
       await mount(
         <Drilldown rootPageId="page0" elementRef={elementRef}>
@@ -352,7 +351,7 @@ describe('<Drilldown />', async () => {
     })
 
     it('should give back the Popover root when drilldown has trigger and is closed', async () => {
-      const ref = React.createRef<Drilldown>()
+      const ref = createRef<Drilldown>()
       const elementRef = stub()
       await mount(
         <Drilldown
@@ -379,7 +378,7 @@ describe('<Drilldown />', async () => {
     })
 
     it('should give back the the Popover root when drilldown has trigger and is open', async () => {
-      const ref = React.createRef<Drilldown>()
+      const ref = createRef<Drilldown>()
       const elementRef = stub()
       await mount(
         <Drilldown

@@ -23,7 +23,6 @@
  */
 import { Table } from '@instructure/ui'
 
-import React from 'react'
 const TABLE_IUI = () => {
   return (
     <Table caption="Top rated movies">

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { ContextView } from '@instructure/ui'
-import React from 'react'
 
 const CONTEXTVIEW_IUI = () => {
   return <ContextView padding="small">Hello World</ContextView>

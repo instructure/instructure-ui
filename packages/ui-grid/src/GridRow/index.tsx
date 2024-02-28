@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, { Component, Children } from 'react'
 
 import {
@@ -35,7 +34,7 @@ import {
 import { GridCol } from '../GridCol'
 import type { GridColProps } from '../GridCol/props'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

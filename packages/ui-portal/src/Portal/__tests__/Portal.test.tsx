@@ -23,7 +23,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { find, expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { Portal } from '../index'

@@ -23,7 +23,6 @@
  */
 import { SimpleSelect } from '@instructure/ui'
 
-import React from 'react'
 const SIMPLESELECT_IUI = () => {
   return (
     <SimpleSelect renderLabel="Uncontrolled Select">

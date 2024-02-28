@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { TruncateText } from '@instructure/ui'
-import React from 'react'
 
 const TRUNCATETEXT_IUI = () => {
   return (

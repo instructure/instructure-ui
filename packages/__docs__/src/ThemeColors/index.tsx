@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component, ComponentElement } from 'react'
 
 import { MetricGroup, Metric } from '@instructure/ui-metric'
 import { Text } from '@instructure/ui-text'
@@ -68,7 +68,7 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
           large: { colWidth: `${100 / 5}%`, minimal: false }
         }}
         render={(props) => {
-          const cards: React.ComponentElement<ColorCardProps, ColorCard>[] = []
+          const cards: ComponentElement<ColorCardProps, ColorCard>[] = []
           Object.keys(colors).forEach((color) => {
             cards.push(
               <ColorCard

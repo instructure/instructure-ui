@@ -23,7 +23,6 @@
  */
 import { ScreenReaderContent } from '@instructure/ui'
 
-import React from 'react'
 const SCREENREADERCONTENT_IUI = () => {
   return <ScreenReaderContent>This content is not visible.</ScreenReaderContent>
 }

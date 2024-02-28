@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, find, mount } from '@instructure/ui-test-utils'
 
 import { Panel } from '../index'

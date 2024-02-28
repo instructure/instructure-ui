@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { mount, expect, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { SVGIcon } from '../index'

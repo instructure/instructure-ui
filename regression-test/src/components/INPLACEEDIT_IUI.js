@@ -23,7 +23,6 @@
  */
 import { InPlaceEdit } from '@instructure/ui'
 
-import React from 'react'
 const INPLACEEDIT_IUI = () => {
   const state = {
     mode: 'view',

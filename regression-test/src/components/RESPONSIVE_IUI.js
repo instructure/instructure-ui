@@ -23,7 +23,6 @@
  */
 import { Responsive } from '@instructure/ui'
 
-import React from 'react'
 const RESPONSIVE_IUI = () => {
   return (
     <Responsive

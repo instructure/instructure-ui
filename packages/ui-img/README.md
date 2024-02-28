@@ -28,7 +28,7 @@ npm install @instructure/ui-img
 ---
 type: code
 ---
-import React from 'react'
+
 import { Img } from '@instructure/ui-img'
 
 const MyImg = () => {

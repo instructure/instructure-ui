@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 function getEventFiles(
   event: React.DragEvent | React.ChangeEvent,
   inputEl?: HTMLInputElement

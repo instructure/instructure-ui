@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { AccessibleContent } from '@instructure/ui'
-import React from 'react'
+
 const ACCESSIBLECONTENT_IUI = () => {
   return (
     <AccessibleContent alt="Alternative text for a screen reader only">

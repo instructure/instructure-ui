@@ -25,7 +25,6 @@ npm install @instructure/ui-text-area
 ### Usage
 
 ```js
-import React from 'react'
 import { TextArea } from '@instructure/ui-text-area'
 
 const MyTextArea = () => {

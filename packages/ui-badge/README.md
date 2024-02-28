@@ -28,7 +28,7 @@ npm install @instructure/ui-badge
 ---
 type: code
 ---
-import React from 'react'
+
 import { Badge } from '@instructure/ui-badge'
 
 const MyBadge = () => {

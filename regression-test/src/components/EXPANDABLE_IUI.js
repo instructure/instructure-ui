@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { Expandable } from '@instructure/ui'
-import React from 'react'
 
 const EXPANDABLE_IUI = () => {
   return <Expandable render={() => <div>Content</div>} />

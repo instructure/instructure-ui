@@ -23,7 +23,6 @@
  */
 import { RangeInput } from '@instructure/ui'
 
-import React from 'react'
 const RANGEINPUT_IUI = () => {
   return (
     <RangeInput label="Grading range" defaultValue={30} max={100} min={0} />

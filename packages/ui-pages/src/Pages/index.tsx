@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, { Component, ReactElement } from 'react'
 
 import { View } from '@instructure/ui-view'
@@ -35,7 +34,7 @@ import { logError as error } from '@instructure/console'
 
 import { Page } from './Page'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 

@@ -23,7 +23,6 @@
  */
 import { List } from '@instructure/ui'
 
-import React from 'react'
 const LIST_IUI = () => {
   return (
     <List>

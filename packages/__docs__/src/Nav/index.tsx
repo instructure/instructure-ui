@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import { IconSearchLine } from '@instructure/ui-icons'
 import { Link } from '@instructure/ui-link'

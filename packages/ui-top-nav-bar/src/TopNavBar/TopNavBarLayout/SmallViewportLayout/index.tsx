@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component, Children, Fragment } from 'react'
 
 import {
   omitProps,
@@ -39,7 +38,7 @@ import {
 } from '@instructure/ui-dom-utils'
 import type { RequestAnimationFrameType } from '@instructure/ui-dom-utils'
 
-import { withStyle, jsx, Global } from '@instructure/emotion'
+import { withStyle, Global } from '@instructure/emotion'
 
 import { Tray } from '@instructure/ui-tray'
 import {
@@ -193,8 +192,7 @@ class TopNavBarSmallViewportLayout extends Component<
     TopNavBarSmallViewportLayoutProps['renderMenuItems']
   > {
     return (
-      !!renderMenuItems &&
-      React.Children.count(renderMenuItems.props.children) > 0
+      !!renderMenuItems && Children.count(renderMenuItems.props.children) > 0
     )
   }
 
@@ -205,7 +203,7 @@ class TopNavBarSmallViewportLayout extends Component<
   > {
     return (
       !!renderActionItems &&
-      React.Children.count(renderActionItems.props.children) > 0
+      Children.count(renderActionItems.props.children) > 0
     )
   }
 
@@ -214,7 +212,7 @@ class TopNavBarSmallViewportLayout extends Component<
   ): renderUser is NonNullable<
     TopNavBarSmallViewportLayoutProps['renderUser']
   > {
-    return !!renderUser && React.Children.count(renderUser.props.children) > 0
+    return !!renderUser && Children.count(renderUser.props.children) > 0
   }
 
   get hasSubmenu() {
@@ -224,8 +222,7 @@ class TopNavBarSmallViewportLayout extends Component<
   get hasBreadcrumbBlock() {
     const { renderBreadcrumb } = this.props
     return (
-      !!renderBreadcrumb &&
-      React.Children.count(renderBreadcrumb.props.children) > 0
+      !!renderBreadcrumb && Children.count(renderBreadcrumb.props.children) > 0
     )
   }
 
@@ -240,7 +237,7 @@ class TopNavBarSmallViewportLayout extends Component<
       return []
     }
 
-    const userChildren = React.Children.toArray(
+    const userChildren = Children.toArray(
       renderUser.props.children
     ) as ItemChild[]
 
@@ -256,7 +253,7 @@ class TopNavBarSmallViewportLayout extends Component<
       return []
     }
 
-    const menuItemsChildren = React.Children.toArray(
+    const menuItemsChildren = Children.toArray(
       renderMenuItems.props.children
     ) as ItemChild[]
 
@@ -315,7 +312,7 @@ class TopNavBarSmallViewportLayout extends Component<
       optionStyle = styles?.dropdownMenuOptionWithAvatar
 
       content = (
-        <React.Fragment>
+        <Fragment>
           <Avatar
             name={avatarName}
             src={avatarSrc}
@@ -326,7 +323,7 @@ class TopNavBarSmallViewportLayout extends Component<
             aria-hidden="true"
           />
           {children}
-        </React.Fragment>
+        </Fragment>
       )
     }
 

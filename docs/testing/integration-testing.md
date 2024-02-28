@@ -27,7 +27,7 @@ Cypress tests usually have a structure like this:
 ---
 type: code
 ---
-import React from 'react'
+
 import { ComponentToTest } from '../../packages/ui'
 import '../support/component'
 
@@ -65,7 +65,7 @@ This packages is added to the project so you can import it and use it like this:
 ---
 type: code
 ---
-import React from 'react'
+
 import { Button } from '../../packages/ui'
 import '../support/component'
 import 'cypress-real-events'

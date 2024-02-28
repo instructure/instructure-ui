@@ -23,7 +23,6 @@
  */
 import { Tabs } from '@instructure/ui'
 
-import React from 'react'
 const TABS_IUI = () => {
   return (
     <Tabs>

@@ -23,7 +23,6 @@ npm install @instructure/ui-portal
 ### Usage
 
 ```js
-import React from 'react'
 import { Portal } from '@instructure/ui-portal'
 
 const MyPortal = () => {

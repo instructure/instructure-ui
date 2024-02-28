@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, find, mount, within } from '@instructure/ui-test-utils'
 
 import { Text } from '../index'

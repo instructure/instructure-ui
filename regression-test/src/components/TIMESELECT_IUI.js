@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { TimeSelect } from '@instructure/ui'
-import React from 'react'
 
 const TIMESELECT_IUI = () => {
   return <TimeSelect renderLabel="Choose a time" />

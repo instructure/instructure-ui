@@ -21,15 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
-import React, { Component } from 'react'
+
+import { Component, Children, cloneElement } from 'react'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
@@ -229,8 +229,8 @@ class Pagination extends Component<PaginationProps> {
 
   transferDisabledPropToChildren(children: PaginationProps['children']) {
     return children && this.props.disabled
-      ? React.Children.map(children, (page) =>
-          React.cloneElement(page, { disabled: this.props.disabled })
+      ? Children.map(children, (page) =>
+          cloneElement(page, { disabled: this.props.disabled })
         )
       : children
   }

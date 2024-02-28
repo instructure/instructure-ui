@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { FormField } from '@instructure/ui'
-import React from 'react'
 
 const FORMFIELD_IUI = () => {
   return (

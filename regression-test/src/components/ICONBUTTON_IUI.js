@@ -23,7 +23,6 @@
  */
 import { IconButton, IconAddLine } from '@instructure/ui'
 
-import React from 'react'
 const ICONBUTTON_IUI = () => {
   return (
     <IconButton screenReaderLabel="Add User">

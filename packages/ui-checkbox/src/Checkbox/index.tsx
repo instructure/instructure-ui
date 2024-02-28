@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import keycode from 'keycode'
 
 import { FormFieldMessages } from '@instructure/ui-form-field'
@@ -34,7 +33,7 @@ import { omitProps, withDeterministicId } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { CheckboxFacade } from './CheckboxFacade'
 import { ToggleFacade } from './ToggleFacade'

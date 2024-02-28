@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component } from 'react'
 import GithubCorner from 'react-github-corner'
 
@@ -31,7 +30,7 @@ import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import type { TabsProps } from '@instructure/ui-tabs'
 import { SourceCodeEditor } from '@instructure/ui-source-code-editor'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

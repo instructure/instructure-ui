@@ -22,19 +22,13 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactTestUtils from 'react-dom/test-utils'
 import PropTypes from 'prop-types'
 
 import { expect, match, mount, stub, within } from '@instructure/ui-test-utils'
-import {
-  withStyle,
-  jsx,
-  InstUISettingsProvider,
-  WithStyleProps
-} from '../index'
+import { withStyle, InstUISettingsProvider, WithStyleProps } from '../index'
 
 type Props = {
   inverse?: boolean
@@ -102,6 +96,7 @@ describe('@withStyle', async () => {
   @withStyle(generateStyle, generateComponentTheme)
   class ThemeableComponent extends React.Component<Props, State> {
     static propTypes = {
+      // eslint-disable-next-line react/require-default-props
       inverse: PropTypes.bool
     }
 

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
 import { canvas, canvasHighContrast, instructure } from '@instructure/ui-themes'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 import { ThemeRegistry } from '@instructure/theme-registry'

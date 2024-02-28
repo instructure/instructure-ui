@@ -21,11 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
 
 import { Component } from 'react'
 
-import { jsx, withStyle } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { View } from '../View'

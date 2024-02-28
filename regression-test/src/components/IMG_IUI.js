@@ -23,7 +23,6 @@
  */
 import { Img } from '@instructure/ui'
 
-import React from 'react'
 const IMG_IUI = () => {
   return (
     <Img src="https://instructure.design/28b1b00c4cc6321cd85d7bea7ce86e5b.jpg" />

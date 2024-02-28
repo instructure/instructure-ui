@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import type { LiveRegion, UIElement } from '@instructure/shared-types'
 
 export type FocusRegionOptions = {

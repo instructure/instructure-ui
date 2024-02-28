@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { expect, mount, find } from '@instructure/ui-test-utils'
 
 import { Drilldown } from '../../index'

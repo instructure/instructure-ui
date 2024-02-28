@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { mount } from '@instructure/ui-test-sandbox'
 import { expect } from './expect'
 import { Example, StoryConfig, within } from '../index'

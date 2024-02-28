@@ -29,7 +29,6 @@ npm install @instructure/ui-buttons
 ### Usage
 
 ```js
-import React from 'react'
 import { Button } from '@instructure/ui-buttons'
 
 const MyButton = function () {

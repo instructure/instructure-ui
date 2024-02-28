@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
-import React, { Component } from 'react'
+
+import { Component } from 'react'
 import keycode from 'keycode'
 import { FormFieldMessages } from '@instructure/ui-form-field'
 import type { FormMessage } from '@instructure/ui-form-field'
@@ -38,7 +38,7 @@ import {
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
 import type {

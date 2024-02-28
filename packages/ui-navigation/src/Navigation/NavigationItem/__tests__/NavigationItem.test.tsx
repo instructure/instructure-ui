@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import { mount, expect, stub } from '@instructure/ui-test-utils'
 import { IconAdminLine } from '@instructure/ui-icons'
 

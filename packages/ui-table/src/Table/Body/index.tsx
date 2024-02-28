@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import { Component, Children } from 'react'
 
 import {
@@ -31,7 +30,7 @@ import {
   omitProps
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

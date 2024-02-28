@@ -28,7 +28,7 @@ npm install @instructure/ui-range-input
 ---
 type: code
 ---
-import React from 'react'
+
 import { RangeInput } from '@instructure/ui-range-input'
 
 const MyRange = () => {

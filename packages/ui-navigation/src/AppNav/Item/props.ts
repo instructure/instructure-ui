@@ -31,7 +31,7 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { Cursor } from '@instructure/ui-prop-types'
-import React from 'react'
+
 import type { ViewOwnProps } from '@instructure/ui-view'
 import { Renderable } from '@instructure/shared-types'
 

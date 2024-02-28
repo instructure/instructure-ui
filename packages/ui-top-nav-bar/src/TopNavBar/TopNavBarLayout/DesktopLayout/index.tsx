@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import React, { Component } from 'react'
+import { Component, Children } from 'react'
 
 import { deprecated, omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 
 import { TopNavBarContext } from '../../TopNavBarContext'
 
@@ -104,28 +103,26 @@ class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
     const { renderActionItems } = this.props
     return (
       !!renderActionItems &&
-      React.Children.count(renderActionItems.props.children) > 0
+      Children.count(renderActionItems.props.children) > 0
     )
   }
 
   get hasUserBlock() {
     const { renderUser } = this.props
-    return !!renderUser && React.Children.count(renderUser.props.children) > 0
+    return !!renderUser && Children.count(renderUser.props.children) > 0
   }
 
   get hasMenuItemsBlock() {
     const { renderMenuItems } = this.props
     return (
-      !!renderMenuItems &&
-      React.Children.count(renderMenuItems.props.children) > 0
+      !!renderMenuItems && Children.count(renderMenuItems.props.children) > 0
     )
   }
 
   get hasBreadcrumbBlock() {
     const { renderBreadcrumb } = this.props
     return (
-      !!renderBreadcrumb &&
-      React.Children.count(renderBreadcrumb.props.children) > 0
+      !!renderBreadcrumb && Children.count(renderBreadcrumb.props.children) > 0
     )
   }
 

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { ensureSingleChild } from '@instructure/ui-react-utils'
 import { ApplyLocaleContext } from './ApplyLocaleContext'
 import { ApplyLocaleProps } from './props'

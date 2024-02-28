@@ -26,7 +26,7 @@ npm install @instructure/ui-tabs
 ---
 type: code
 ---
-import React from 'react'
+
 import { Tabs } from '@instructure/ui-tabs'
 
 export default MyTabs = function () {

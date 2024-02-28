@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/** @jsx jsx */
-import React, { Component } from 'react'
+
+import { Component } from 'react'
 import { Button } from '@instructure/ui-buttons'
 import {
   IconArrowOpenEndSolid,
@@ -33,7 +33,7 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import type { ToggleDetailsProps, ToggleDetailsStyleProps } from './props'

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
 import { findDOMNode } from './findDOMNode'
 
 type ReactEvent = <T extends Event>(event: T) => void

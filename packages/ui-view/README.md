@@ -29,7 +29,7 @@ npm install @instructure/ui-view
 ---
 type: code
 ---
-import React from 'react'
+
 import { View } from '@instructure/ui-view'
 
 const MyView = () => {

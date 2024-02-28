@@ -23,7 +23,6 @@
  */
 import { ToggleDetails } from '@instructure/ui'
 
-import React from 'react'
 const TOGGLEDETAILS_FILLED_IUI = () => {
   return (
     <ToggleDetails variant="filled" summary="Click to hide me!" defaultExpanded>
