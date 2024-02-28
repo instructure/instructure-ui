@@ -147,7 +147,6 @@ class Item extends Component<OptionsItemProps> {
         }
       >
         <InnerElementType
-          role="none"
           {...passthroughProps}
           css={styles?.container}
           href={href}
