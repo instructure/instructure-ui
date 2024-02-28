@@ -73,7 +73,7 @@ describe('<Item />', async () => {
     const item = await ItemLocator.find()
     const child = await item.find('[role="option"]')
 
-    expect(item.getAttribute('role')).to.equal('none')
+    expect(item.getAttribute('role')).to.equal('option')
     expect(child).to.exist()
   })
 
@@ -113,8 +113,6 @@ describe('<Item />', async () => {
     const item = await ItemLocator.find()
     const label = await item.findWithText('Hello World')
 
-    expect(item.getAttribute('role')).to.equal('none')
-    expect(label.getAttribute('role')).to.equal('option')
     expect(label.getAttribute('tabindex')).to.equal('-1')
     expect(label.getAttribute('data-custom-attr')).to.equal('true')
   })
