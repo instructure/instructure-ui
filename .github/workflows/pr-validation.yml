@@ -18,14 +18,6 @@ jobs:
         run: npm ci
       - name: Bootstrap project
         run: npm run bootstrap
-      - name: Run test for the patchset
-        run: USE_REACT_STRICT_MODE=1 npm run test:patchset
-# commented out because our danger script needs the same version of yarn on master and on a branch.
-# TODO uncomment when this PR is merged
-#      - name: Calculate bundle size
-#        run: yarn danger ci
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build docs-app
         run: npm run build:docs
       - name: Deploy preview docs

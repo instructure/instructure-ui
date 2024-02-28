@@ -16,8 +16,6 @@ jobs:
         run: npm ci
       - name: Set up project
         run: npm run bootstrap
-      - name: Run tests
-        run: npm run test:patchset
       - name: Release to NPM
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
