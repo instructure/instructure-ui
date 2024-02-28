@@ -148,7 +148,8 @@ class Select extends Component<SelectProps> {
     visibleOptionsCount: 8,
     placement: 'bottom stretch',
     constrain: 'window',
-    shouldNotWrap: false
+    shouldNotWrap: false,
+    scrollToHighlightedOption: false
   }
 
   static Option = Option
@@ -161,8 +162,10 @@ class Select extends Component<SelectProps> {
   componentDidUpdate() {
     this.props.makeStyles?.()
 
-    // scroll option into view if needed
-    requestAnimationFrame(() => this.scrollToOption(this.highlightedOptionId))
+    if (this.props.scrollToHighlightedOption) {
+      // scroll option into view if needed
+      requestAnimationFrame(() => this.scrollToOption(this.highlightedOptionId))
+    }
   }
 
   state = {

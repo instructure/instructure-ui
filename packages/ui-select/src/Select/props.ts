@@ -111,6 +111,11 @@ type SelectOwnProps = {
   listRef?: (listElement: HTMLUListElement | null) => void
 
   /**
+   * Enable/disable auto scroll to the highlighted option on every re-render
+   */
+  scrollToHighlightedOption?: boolean
+
+  /**
    * Children of type `<Select.Option />` or `<Select.Group />`.
    */
   children?: React.ReactNode // TODO: ChildrenPropTypes.oneOf([Group, Option])
@@ -302,7 +307,8 @@ const propTypes: PropValidators<PropKeys> = {
   renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   children: ChildrenPropTypes.oneOf([Group, Option]),
-  shouldNotWrap: PropTypes.bool
+  shouldNotWrap: PropTypes.bool,
+  scrollToHighlightedOption: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -337,7 +343,8 @@ const allowedProps: AllowedPropKeys = [
   'renderBeforeInput',
   'renderAfterInput',
   'children',
-  'shouldNotWrap'
+  'shouldNotWrap',
+  'scrollToHighlightedOption'
 ]
 
 export type { SelectProps, SelectOwnProps, SelectStyle }
