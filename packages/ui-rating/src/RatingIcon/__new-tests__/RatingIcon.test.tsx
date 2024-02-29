@@ -23,23 +23,22 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { render, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { InstUISettingsProvider } from '@instructure/emotion'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
-// eslint-disable-next-line no-restricted-imports
-import { TransitionLocator } from '@instructure/ui-motion/es/Transition/TransitionLocator'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
 import { RatingIcon } from '../index'
 
-describe('<RatingIcon />', async () => {
+describe('<RatingIcon />', () => {
   it('transitions when filled on render and animateFill is true', async () => {
-    await mount(
+    const { container } = render(
       <InstUISettingsProvider
         theme={{
           componentOverrides: {
             Transition: {
-              duration: '2s'
+              duration: '100ms'
             }
           }
         }}
@@ -47,16 +46,26 @@ describe('<RatingIcon />', async () => {
         <RatingIcon filled animateFill />
       </InstUISettingsProvider>
     )
-    expect(await TransitionLocator.find()).to.exist()
+
+    await waitFor(
+      () => {
+        const icon = container.querySelector('svg')
+
+        expect(icon).toBeInTheDocument()
+        expect(icon!.getAttribute('name')).toBe('IconStar')
+        expect(icon).toHaveClass('transition--scale-entered')
+      },
+      { timeout: 500 }
+    )
   })
 
   it('transitions when filled after render and animateFill is true', async () => {
-    const subject = await mount(
+    const { container, rerender } = render(
       <InstUISettingsProvider
         theme={{
           componentOverrides: {
             Transition: {
-              duration: '2s'
+              duration: '100ms'
             }
           }
         }}
@@ -64,17 +73,47 @@ describe('<RatingIcon />', async () => {
         <RatingIcon filled={false} animateFill={true} />
       </InstUISettingsProvider>
     )
+    await waitFor(
+      () => {
+        const icon = container.querySelector('svg')
 
-    expect(await TransitionLocator.find({ expectEmpty: true })).to.not.exist()
+        expect(icon).toBeInTheDocument()
+        expect(icon!.getAttribute('name')).toBe('IconStarLight')
+        expect(icon).not.toHaveClass('transition--scale-entered')
+      },
+      { timeout: 500 }
+    )
 
-    await subject.setProps({ filled: true })
-    expect(await TransitionLocator.find()).to.exist()
+    rerender(
+      <InstUISettingsProvider
+        theme={{
+          componentOverrides: {
+            Transition: {
+              duration: '100ms'
+            }
+          }
+        }}
+      >
+        <RatingIcon filled={true} animateFill={true} />
+      </InstUISettingsProvider>
+    )
+
+    await waitFor(
+      () => {
+        const icon = container.querySelector('svg')
+
+        expect(icon).toBeInTheDocument()
+        expect(icon!.getAttribute('name')).toBe('IconStar')
+        expect(icon).toHaveClass('transition--scale-entered')
+      },
+      { timeout: 500 }
+    )
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(<RatingIcon filled animateFill />)
+    const { container } = render(<RatingIcon filled animateFill />)
 
-    const ratingIcon = within(subject.getDOMNode())
-    expect(await ratingIcon.accessible()).to.be.true()
+    const axeCheck = await runAxeCheck(container)
+    expect(axeCheck).toBe(true)
   })
 })
