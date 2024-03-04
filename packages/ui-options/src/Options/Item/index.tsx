@@ -145,12 +145,9 @@ class Item extends Component<OptionsItemProps> {
           this.props['aria-describedby'] ||
           (descriptionContent ? this._descriptionId : undefined)
         }
+        {...passthroughProps}
       >
-        <InnerElementType
-          {...passthroughProps}
-          css={styles?.container}
-          href={href}
-        >
+        <InnerElementType css={styles?.container} href={href}>
           {childrenContent}
           {descriptionContent && (
             <span
