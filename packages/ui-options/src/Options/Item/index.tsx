@@ -132,7 +132,7 @@ class Item extends Component<OptionsItemProps> {
 
     return (
       <ElementType
-        role={href ? undefined : role}
+        role={role === 'button' ? 'button' : undefined}
         css={styles?.item}
         ref={(element: Element | null) => {
           this.ref = element
@@ -141,13 +141,17 @@ class Item extends Component<OptionsItemProps> {
             elementRef(element)
           }
         }}
-        aria-describedby={
-          this.props['aria-describedby'] ||
-          (descriptionContent ? this._descriptionId : undefined)
-        }
-        {...passthroughProps}
       >
-        <InnerElementType css={styles?.container} href={href}>
+        <InnerElementType
+          role={href || role === 'button' ? undefined : role}
+          css={styles?.container}
+          href={href}
+          {...passthroughProps}
+          aria-describedby={
+            this.props['aria-describedby'] ||
+            (descriptionContent ? this._descriptionId : undefined)
+          }
+        >
           {childrenContent}
           {descriptionContent && (
             <span
