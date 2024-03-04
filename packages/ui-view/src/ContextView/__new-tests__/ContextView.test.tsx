@@ -23,21 +23,25 @@
  */
 
 import React from 'react'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
-import { expect, mount, within } from '@instructure/ui-test-utils'
 import { ContextView } from '../index'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 
-describe('<ContextView />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<ContextView />)
+describe('<ContextView />', () => {
+  it('should render', () => {
+    const { container } = render(<ContextView />)
 
-    expect(subject.getDOMNode()).to.exist()
+    const contextView = container.querySelector("span[class$='-contextView']")
+    expect(contextView).toBeInTheDocument()
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(<ContextView />)
+    const { container } = render(<ContextView />)
 
-    const contextView = within(subject.getDOMNode())
-    expect(await contextView.accessible()).to.be.true()
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 })
