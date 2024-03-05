@@ -87,6 +87,10 @@ type OptionsItemOwnProps = OptionsItemRenderProps & {
    */
   href?: string
   /**
+   * Force the `role` prop to be on the outer tag. Should only be used when screen readers don't recognize the role.
+   */
+  useOuterRole?: boolean
+  /**
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
@@ -127,6 +131,7 @@ const propTypes: PropValidators<PropKeys> = {
   description: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   descriptionRole: PropTypes.string,
   href: PropTypes.string,
+  useOuterRole: PropTypes.bool,
   elementRef: PropTypes.func,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
@@ -141,6 +146,7 @@ const allowedProps: AllowedPropKeys = [
   'afterLabelContentVAlign',
   'description',
   'descriptionRole',
+  'useOuterRole',
   'href',
   'elementRef',
   'children'
