@@ -24,7 +24,6 @@ class PlaygroundExample extends React.Component {
     hasMenuItemsSection: true,
     hasActionItemsSection: true,
     hasUserSection: true,
-    hideActionsUserSeparator: true,
     useAlternativeTitle: false,
     renderName: true,
     renderIcon: true,
@@ -308,12 +307,6 @@ class PlaygroundExample extends React.Component {
           'hasUserSection',
         ]
       },
-      desktopLayout: {
-        label: 'Desktop layout settings',
-        checkboxes: [
-          'hideActionsUserSeparator'
-        ]
-      },
       smallViewportLayout: {
         label: 'Small viewport layout settings',
         checkboxes: [
@@ -399,7 +392,6 @@ class PlaygroundExample extends React.Component {
       hasMenuItemsSection: 'Displays main navbar items',
       hasActionItemsSection: 'Displays action items',
       hasUserSection: 'Displays user menu',
-      hideActionsUserSeparator: 'Hides the separator between the action items and the user menu',
       useAlternativeTitle: 'Displays other data (e.g.: page title) instead of the Brand logo and link',
       renderName: 'The app/product/brand/company/etc. name',
       renderIcon: 'Visible only in "desktop" mode',
@@ -604,9 +596,6 @@ class PlaygroundExample extends React.Component {
               navLabel={this.state.isSecondaryNavigation
                 ? 'Secondary navigation bar'
                 : 'Main navigation bar'}
-              desktopConfig={{
-                hideActionsUserSeparator: this.state.hideActionsUserSeparator
-              }}
               smallViewportConfig={{
                 dropdownMenuToggleButtonLabel: 'Toggle Menu',
                 dropdownMenuLabel: 'Main Menu',
@@ -1520,9 +1509,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -1547,9 +1533,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -1575,9 +1558,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -1616,9 +1596,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -1658,9 +1635,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -1759,9 +1733,6 @@ class LayoutExample extends React.Component {
                     navLabel={this.state.isSecondaryNavigation
                       ? 'Example secondary navigation bar'
                       : 'Example navigation bar'}
-                    desktopConfig={{
-                      hideActionsUserSeparator: true
-                    }}
                     smallViewportConfig={{
                       trayMountNode: () => document.getElementById('menuMountNode'),
                       dropdownMenuToggleButtonLabel: 'Toggle Menu',
@@ -2099,9 +2070,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -2240,9 +2208,6 @@ class InPlaceDialogExample extends React.Component {
           {({ currentLayout }) => (
             <TopNavBar.Layout
               navLabel="Example navigation bar"
-              desktopConfig={{
-                hideActionsUserSeparator: false
-              }}
               smallViewportConfig={{
                 dropdownMenuToggleButtonLabel: 'Toggle Menu',
                 dropdownMenuLabel: 'Main Menu',
@@ -2360,9 +2325,6 @@ type: example
             navLabel={true
               ? 'Example secondary navigation bar'
               : 'Example navigation bar'}
-            desktopConfig={{
-              hideActionsUserSeparator: true
-            }}
             renderBrand={
               <TopNavBar.Brand
                 screenReaderLabel="Brand name"
