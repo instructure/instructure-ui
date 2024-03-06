@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 
-import { deprecated, omitProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -48,7 +48,6 @@ private: true
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-@deprecated('9', { desktopConfig: true }, 'From v9, ')
 class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
   static readonly componentId = 'TopNavBar.DesktopLayout'
 
