@@ -31,8 +31,7 @@ import {
   getBrand,
   getMenuItems,
   getUser,
-  getBreadcrumb,
-  SmallViewportModeWrapper
+  getBreadcrumb
 } from '../../../utils/exampleHelpers'
 
 import { TopNavBarDesktopLayout } from '../index'

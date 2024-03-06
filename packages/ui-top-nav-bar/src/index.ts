@@ -44,8 +44,7 @@ export type {
 } from './TopNavBar/TopNavBarLayout/props'
 export type {
   TopNavBarDesktopLayoutProps,
-  TopNavBarDesktopLayoutOwnProps,
-  DesktopLayoutOwnProps
+  TopNavBarDesktopLayoutOwnProps
 } from './TopNavBar/TopNavBarLayout/DesktopLayout/props'
 export type {
   TopNavBarSmallViewportLayoutProps,
