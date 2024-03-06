@@ -54,7 +54,6 @@ type ChildrenFuncProps = {
 }
 
 type VariantConfig = Partial<ChildrenFuncProps> & {
-  hideActionsUserSeparator?: boolean
   hasAlternativeTitle?: boolean
   hasRenderInPlaceDialogConfig?: boolean
   brandProps?: Partial<TopNavBarBrandProps>
@@ -322,9 +321,6 @@ const getLayoutProps = (
   config: VariantConfig = {}
 ): TopNavBarLayoutProps => {
   return {
-    desktopConfig: {
-      hideActionsUserSeparator: config.hideActionsUserSeparator
-    },
     smallViewportConfig: {
       dropdownMenuToggleButtonLabel: 'Toggle Menu',
       dropdownMenuLabel: 'Main Menu',

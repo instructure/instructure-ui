@@ -33,12 +33,7 @@ import type {
 
 import type { TopNavBarContextType } from '../../TopNavBarContext'
 
-import {
-  commonPropTypes,
-  commonAllowedProps,
-  desktopPropTypes,
-  desktopAllowedProps
-} from '../props'
+import { commonPropTypes, commonAllowedProps } from '../props'
 import type { CommonTopNavBarLayoutProps } from '../props'
 
 import { TopNavBarDesktopLayout } from './index'
@@ -48,15 +43,7 @@ type DesktopLayoutChild = React.ComponentElement<
   TopNavBarDesktopLayout
 >
 
-type DesktopLayoutOwnProps = {
-  /**
-   * Hides the separator between the action items and the user block.
-   */
-  hideActionsUserSeparator?: boolean
-}
-
-type TopNavBarDesktopLayoutOwnProps = CommonTopNavBarLayoutProps &
-  DesktopLayoutOwnProps
+type TopNavBarDesktopLayoutOwnProps = CommonTopNavBarLayoutProps
 
 type PropKeys = keyof TopNavBarDesktopLayoutOwnProps
 
@@ -85,19 +72,16 @@ type TopNavBarDesktopLayoutStyleProps = {
 
 const propTypes: PropValidators<PropKeys> = {
   // Edit PropTypes in TopNabBarLayout/props.ts
-  ...commonPropTypes,
-  ...desktopPropTypes
+  ...commonPropTypes
 }
 
 const allowedProps: AllowedPropKeys = [
   // Edit allowed props in TopNabBarLayout/props.ts
-  ...commonAllowedProps,
-  ...desktopAllowedProps
+  ...commonAllowedProps
 ]
 
 export type {
   DesktopLayoutChild,
-  DesktopLayoutOwnProps,
   TopNavBarDesktopLayoutProps,
   TopNavBarDesktopLayoutOwnProps,
   TopNavBarDesktopLayoutStyle,

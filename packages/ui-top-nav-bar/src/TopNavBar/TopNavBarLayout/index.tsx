@@ -61,7 +61,6 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    desktopConfig: {},
     smallViewportConfig: {}
   }
 
@@ -113,7 +112,6 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
 
   render() {
     const {
-      desktopConfig,
       smallViewportConfig,
       // @ts-expect-error prevents it to be passed
       styles,
@@ -135,7 +133,6 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
 
     return (
       <TopNavBarDesktopLayout
-        {...desktopConfig}
         {...(restProps as TopNavBarDesktopLayoutProps)}
         themeOverride={this.sortedThemeOverride.desktopThemeOverride}
         elementRef={this.handleRef}

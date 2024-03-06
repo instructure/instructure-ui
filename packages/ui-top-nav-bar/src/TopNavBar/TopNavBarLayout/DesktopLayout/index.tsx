@@ -48,11 +48,7 @@ private: true
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-@deprecated(
-  '9',
-  { hideActionsUserSeparator: true },
-  'From v9, actionUserSeparator has to be visible at all times. Please do not use designs which hide it. Note: this prop is probably used inside the desktopConfig prop on [TopNavBar.Layout]'
-)
+@deprecated('9', { desktopConfig: true }, 'From v9, ')
 class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
   static readonly componentId = 'TopNavBar.DesktopLayout'
 

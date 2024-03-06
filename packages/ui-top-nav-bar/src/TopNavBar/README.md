@@ -1108,7 +1108,7 @@ render(<PlaygroundExample />)
 
 TopNavBar is a responsive component, and it has 4 "sections" or "blocks".
 
-The `<TopNavBar.Layout>` component has a `desktopConfig` and a `smallViewportConfig` prop that handles how the different views are set up.
+The `<TopNavBar.Layout>` component has a `smallViewportConfig` prop that handles how the mobile viewport is set up.
 
 #### Main blocks
 
@@ -1130,9 +1130,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -1185,9 +1182,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -1257,9 +1251,6 @@ type: example
         {() => (
           <TopNavBar.Layout
             navLabel="Example navigation bar"
-            desktopConfig={{
-              hideActionsUserSeparator: false
-            }}
             smallViewportConfig={{
               dropdownMenuToggleButtonLabel: 'Toggle Menu',
               dropdownMenuLabel: 'Main Menu',
@@ -1302,9 +1293,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -1353,9 +1341,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -1417,8 +1402,6 @@ Action items can have submenus and popovers too. It is also recommended to add h
 
 **Special case:** The "Search" action should open in a flyout on desktop. On the mobile/tablet view it should fill the header (see the [Playground](/#TopNavBar/#playground) example).
 
-If the last action is shown as text and the user is shown as text, use the separator between the 2 blocks, otherwise it is optional (`desktopConfig.hideActionsUserSeparator` prop on the `<TopNavBar.Layout>`).
-
 ```js
 ---
 type: example
@@ -1429,9 +1412,6 @@ type: example
       {() => (
         <TopNavBar.Layout
           navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: true
-          }}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu',
@@ -1523,77 +1503,12 @@ type: example
       )}
     </TopNavBar>
   </View>
-
-  <View as="div" margin="medium 0">
-    <TopNavBar>
-      {() => (
-        <TopNavBar.Layout
-          navLabel="Example navigation bar"
-          desktopConfig={{
-            hideActionsUserSeparator: false
-          }}
-          smallViewportConfig={{
-            dropdownMenuToggleButtonLabel: 'Toggle Menu',
-            dropdownMenuLabel: 'Main Menu',
-          }}
-          renderActionItems={(
-            <TopNavBar.ActionItems
-              listLabel="Actions"
-              renderHiddenItemsMenuTriggerLabel={(
-                hiddenChildrenCount
-              ) => `${hiddenChildrenCount} more actions`}
-            >
-              <TopNavBar.Item
-                id="AlertsAction2"
-                renderIcon={<IconAlertsLine />}
-                onClick={() => {
-                  console.log('Alerts')
-                }}
-              >
-                Alerts
-              </TopNavBar.Item>
-              <TopNavBar.Item
-                id="ForumAction2"
-                renderIcon={<IconDiscussionLine />}
-                onClick={() => {
-                  console.log('Forum')
-                }}
-              >
-                Forum
-              </TopNavBar.Item>
-              <TopNavBar.Item
-                id="InfoAction2"
-                renderIcon={<IconQuestionLine />}
-                onClick={() => {
-                  console.log('Info')
-                }}
-              >
-                Info
-              </TopNavBar.Item>
-            </TopNavBar.ActionItems>
-          )}
-          renderUser={(
-            <TopNavBar.User>
-              <TopNavBar.Item
-                id="LogInRegisterButton2"
-                href="/#TopNavBar"
-              >
-                Log In/Register
-              </TopNavBar.Item>
-            </TopNavBar.User>
-          )}
-        />
-      )}
-    </TopNavBar>
-  </View>
 </div>
 ```
 
 ##### TopNavBar.User
 
 `<TopNavBar.User>` contains the login/register button and user menu.
-
-If the last action is shown as text and the user is shown as text, use the separator between the 2 blocks, otherwise it is optional (`desktopConfig.hideActionsUserSeparator` prop on the `<TopNavBar.Layout>`).
 
 ```js
 ---
