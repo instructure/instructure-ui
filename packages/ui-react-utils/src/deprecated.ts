@@ -37,7 +37,7 @@ export interface DeprecatedDecorator {
 }
 
 const deprecated = (() => {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'pproduction') {
     const deprecated: DeprecatedDecorator = function () {
       return (ComposedComponent: ComponentClass) => ComposedComponent
     }

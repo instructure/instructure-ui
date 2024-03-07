@@ -51,6 +51,7 @@ import type { BreadcrumbChild } from '../TopNavBarBreadcrumb/props'
 import { topNavBarItemTooltipPropType } from '../TopNavBarItem/props'
 
 import { TopNavBarLayout } from './index'
+import type { DesktopLayoutOwnProps } from './DesktopLayout/props'
 import type { SmallViewportLayoutOwnProps } from './SmallViewportLayout/props'
 import { TopNavBarBreadcrumb } from '../TopNavBarBreadcrumb'
 
@@ -116,6 +117,11 @@ type CommonTopNavBarLayoutProps = {
 
 type TopNavBarLayoutOwnProps = CommonTopNavBarLayoutProps & {
   /**
+   * Config object for the "desktop" mode:
+   */
+  desktopConfig?: DesktopLayoutOwnProps
+
+  /**
    * Config object for the "small viewport" mode:
    */
   smallViewportConfig: SmallViewportLayoutOwnProps
@@ -123,9 +129,11 @@ type TopNavBarLayoutOwnProps = CommonTopNavBarLayoutProps & {
 
 type CommonPropKeys = keyof CommonTopNavBarLayoutProps
 type PropKeys = keyof TopNavBarLayoutOwnProps
+type DesktopPropKeys = keyof DesktopLayoutOwnProps
 type SmallViewportPropKeys = keyof SmallViewportLayoutOwnProps
 
 type CommonAllowedPropKeys = Readonly<Array<CommonPropKeys>>
+type DesktopAllowedPropKeys = Readonly<Array<DesktopPropKeys>>
 type SmallViewportAllowedPropKeys = Readonly<Array<SmallViewportPropKeys>>
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
@@ -141,6 +149,10 @@ const commonPropTypes: PropValidators<CommonPropKeys> = {
   renderBreadcrumb: ChildrenPropTypes.oneOf([TopNavBarBreadcrumb]),
   navLabel: PropTypes.string,
   elementRef: PropTypes.func
+}
+
+const desktopPropTypes: PropValidators<DesktopPropKeys> = {
+  hideActionsUserSeparator: PropTypes.bool
 }
 
 const smallViewportPropTypes: PropValidators<SmallViewportPropKeys> = {
@@ -165,6 +177,7 @@ const smallViewportPropTypes: PropValidators<SmallViewportPropKeys> = {
 
 const propTypes: PropValidators<PropKeys> = {
   ...commonPropTypes,
+  desktopConfig: PropTypes.shape(desktopPropTypes),
   smallViewportConfig: PropTypes.shape(smallViewportPropTypes).isRequired
 }
 
@@ -177,6 +190,8 @@ const commonAllowedProps: CommonAllowedPropKeys = [
   'navLabel',
   'elementRef'
 ]
+
+const desktopAllowedProps: DesktopAllowedPropKeys = ['hideActionsUserSeparator']
 
 const smallViewportAllowedProps: SmallViewportAllowedPropKeys = [
   'dropdownMenuToggleButtonLabel',
@@ -191,6 +206,7 @@ const smallViewportAllowedProps: SmallViewportAllowedPropKeys = [
 
 const allowedProps: AllowedPropKeys = [
   ...commonAllowedProps,
+  'desktopConfig',
   'smallViewportConfig'
 ]
 
@@ -200,6 +216,8 @@ export {
   allowedProps,
   commonPropTypes,
   commonAllowedProps,
+  desktopPropTypes,
   smallViewportPropTypes,
+  desktopAllowedProps,
   smallViewportAllowedProps
 }
