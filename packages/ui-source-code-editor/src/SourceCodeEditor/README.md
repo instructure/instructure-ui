@@ -790,9 +790,11 @@ render(<AttachmentExample />)
 
 To enable the search panel use the `searchConfig` prop.
 
-You can open the search panel in the code editor by pressing `cmd/ctrl+f` when it is in focus (otherwise the browser's search will open). The reason you would use this instead of the browser native search is because it will miss results that are far out of view in the text rendered by the editor. This is the limitation of the underlying CodeMirror component.
+You can open the search panel in the code editor by pressing `cmd/ctrl+f` when the editor is in focus (otherwise the browser's search will open). The reason you would use this instead of the browser native search is because it will miss results that are far out of view in the text rendered by the editor. This is the limitation of the underlying CodeMirror component.
 
 Hitting `Enter` jumps to the next result and `Shift+Enter` to the previous. Alternatively you can use the up and down buttons to the right of the input field.
+
+Placement: the search panel will open at the bottom of the editor. This cannot be changed unfortunately due to a limitation in CodeMirror.
 
 ```js
 ---

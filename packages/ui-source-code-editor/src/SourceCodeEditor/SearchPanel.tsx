@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {
   setSearchQuery,
   search,
@@ -98,7 +98,10 @@ function SearchPanel({
 
   return (
     <TextInput
-      inputRef={(r) => r?.focus()}
+      renderLabel=""
+      inputRef={(r) => {
+        setTimeout(() => r?.focus(), 0)
+      }}
       size="small"
       display="inline-block"
       width="20rem"
