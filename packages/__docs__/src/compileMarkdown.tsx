@@ -162,7 +162,9 @@ const renderer = (title?: string) => ({
           {body.map((tr: ReactElement) => (
             <Table.Row key={uuid()}>
               {tr?.props?.children?.map((td: ReactElement) => (
-                <Table.Cell key={uuid()}>{td?.props?.children?.[0]}</Table.Cell>
+                <Table.Cell key={uuid()}>
+                  {td?.props?.children?.map((child: ReactElement) => child)}
+                </Table.Cell>
               ))}
             </Table.Row>
           ))}
