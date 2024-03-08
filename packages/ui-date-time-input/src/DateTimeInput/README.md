@@ -247,7 +247,7 @@ Due to `onChange` not being called on every typing event, and `value` isn't repr
             prevMonthLabel="Previous month"
             nextMonthLabel="Next month"
             value={this.state.date}
-            onChange={(e, newDate) => setState({ date: newDate })}
+            onChange={(e, newDate) => this.setState({ date: newDate })}
             reset={(reset) => (this.resetFn = reset)}
           />
           <Button onClick={() => this.resetFn()}>Clear</Button>
@@ -262,7 +262,8 @@ Due to `onChange` not being called on every typing event, and `value` isn't repr
 - ```js
   const Example = () => {
     const [date, setDate] = useState('')
-    let resetFn
+    const resetFn = useRef()
+
     return (
       <div>
         <DateTimeInput
@@ -275,9 +276,9 @@ Due to `onChange` not being called on every typing event, and `value` isn't repr
           nextMonthLabel="Next month"
           value={date}
           onChange={(e, newDate) => setDate(newDate)}
-          reset={(reset) => (resetFn = reset)}
+          reset={(reset) => (resetFn.current = reset)}
         />
-        <Button onClick={() => resetFn()}>Clear</Button>
+        <Button onClick={() => resetFn.current()}>Clear</Button>
         <p>{date}</p>
       </div>
     )

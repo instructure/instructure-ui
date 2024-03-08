@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import ReactDOM from 'react-dom'
 
 import { LoremIpsum } from 'lorem-ipsum'
@@ -78,7 +78,8 @@ const globals = {
   React,
   ReactDOM,
   useEffect,
-  useState
+  useState,
+  useRef
 }
 
 Object.keys(globals).forEach((key) => {
