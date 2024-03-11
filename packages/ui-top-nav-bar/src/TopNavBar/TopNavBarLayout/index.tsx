@@ -24,7 +24,6 @@
 
 /** @jsx jsx */
 import React, { Component } from 'react'
-import { deprecated } from '@instructure/ui-react-utils'
 
 import { testable } from '@instructure/ui-testable'
 
@@ -62,7 +61,6 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
   static propTypes = propTypes
   static allowedProps = allowedProps
   static defaultProps = {
-    desktopConfig: {},
     smallViewportConfig: {}
   }
 
@@ -72,9 +70,10 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
   ref: HTMLElement | null = null
 
   componentDidMount() {
+    // TODO: Remove this in v10!
     if (this.props.desktopConfig) {
-      console.warn(
-        'Warning: [TopNavBar.Layout] `desktopConfig` is deprecated, please remove it from your code. Further info: https://instructure.design/#v9-upgrade-guide/#deprecated-properties'
+      console.error(
+        'Warning: `desktopConfig` prop on [TopNavBar.Layout] is deprecated, please remove it from your code. Further info: https://instructure.design/#v9-upgrade-guide/#deprecated-properties'
       )
     }
   }
@@ -122,12 +121,13 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
 
   render() {
     const {
-      desktopConfig,
       smallViewportConfig,
       // @ts-expect-error prevents it to be passed
       styles,
       // @ts-expect-error prevents it to be passed
       makeStyles,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      desktopConfig, // TODO: Only here for warning, not functional anymore. Remove this in v10!
       ...restProps
     } = this.props
 
@@ -144,7 +144,6 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
 
     return (
       <TopNavBarDesktopLayout
-        {...desktopConfig}
         {...(restProps as TopNavBarDesktopLayoutProps)}
         themeOverride={this.sortedThemeOverride.desktopThemeOverride}
         elementRef={this.handleRef}
