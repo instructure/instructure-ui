@@ -8,8 +8,6 @@
   "include": ["src"],
   "references": [
     { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-test-locator/tsconfig.build.json" },
-    { "path": "../ui-test-utils/tsconfig.build.json" },
     { "path": "../debounce/tsconfig.build.json" },
     { "path": "../emotion/tsconfig.build.json" },
     { "path": "../ui-buttons/tsconfig.build.json" },
