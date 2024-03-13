@@ -34,7 +34,6 @@ export function processFile(
   library: LibraryOptions
 ): ProcessedFile {
   // eslint-disable-next-line no-console
-  console.info(`Processing ${fullPath}`)
   const source = fs.readFileSync(fullPath)
   const dirName = path.dirname(fullPath) || process.cwd()
   const pathInfo = getPathInfo(fullPath, projectRoot, library)
@@ -62,6 +61,7 @@ export function processFile(
     docId = docData.describes ? folder + '__README' : folder
   } else {
     docId = path.parse(fullPath).name // filename without extension
+    // TODO generate separate id for REAMDEs in src and top level
   }
   docData.id = docId
   if (!docData.title) {

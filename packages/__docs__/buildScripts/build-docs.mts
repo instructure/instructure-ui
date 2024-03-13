@@ -65,6 +65,7 @@ const pathsToProcess = [
   'CHANGELOG.md',
   '**/packages/**/*.md', // package READMEs
   '**/docs/**/*.md', // general docs
+  '**/src/*/README.md', // component documentation
   '**/src/*.{js,ts,tsx}', // util src files
   '**/src/*/*.{js,ts,tsx}', // component src files
   '**/src/*/*/*.{js,ts,tsx}', // child component src files
@@ -151,6 +152,13 @@ function buildDocs() {
         buildDir + 'markdown-and-sources-data.json',
         markdownsAndSources
       )
+      // TODO create file with search conent
+      // const searchContent = JSON.stringify(docs.searchContentData)
+      // fs.writeFileSync(
+      //   buildDir + 'search-content.json',
+      //   searchContent
+      // )
+
       // eslint-disable-next-line no-console
       console.log('Parsing icons...')
       const icons: MainIconsData = parseIcons()
@@ -195,7 +203,7 @@ function processSingleFile(fullPath: string) {
     docObject.description = readmeDesc
       ? docObject.description + readmeDesc
       : docObject.description
-  } else if (fileName === 'README') {
+  } else if (fileName === 'README' && !dirName.includes('src')) {
     // if we edit a README, we'll need to add the changes to the components JSON
     let componentIndexFile: string | undefined
     if (fs.existsSync(path.join(dirName, 'index.tsx'))) {
@@ -215,6 +223,7 @@ function processSingleFile(fullPath: string) {
     // documentation .md files, utils ts and tsx files
     docObject = processFile(fullPath, projectRoot, library)
   }
+  console.log(docObject)
   const docJSON = JSON.stringify(docObject!)
   fs.writeFileSync(buildDir + 'docs/' + docObject!.id + '.json', docJSON)
   return docObject!
