@@ -56,6 +56,16 @@ class Search extends Component<SearchProps, SearchState> {
       announcement: null
     }
 
+    const indexedData = []
+
+    // index the descriptions so lunr can accept it
+    for (const [key, value] of Object.entries(props.options || {})) {
+      indexedData.push({ name: key, text: value })
+    }
+
+    // console.log(props.options)
+    //
+
     Object.keys(props.options).forEach((option, i) => {
       const doc = props.options[option]
       if (!doc.category) return

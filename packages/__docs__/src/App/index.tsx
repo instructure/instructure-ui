@@ -502,27 +502,7 @@ class App extends Component<AppProps, AppState> {
   }
 
   renderHero() {
-    const { library, docs, themes } = this.state.docsData!
-    //console.log(this.state.docsData?.descriptions)
-    const indexedData = []
-
-    // index the descriptions so lunr can accept it
-    for (const [key, value] of Object.entries(
-      this.state.docsData?.descriptions || {}
-    )) {
-      indexedData.push({ name: key, text: value })
-    }
-
-    // const idx = lunr(function () {
-    //   this.ref('name')
-    //   this.field('text')
-    //
-    //   indexedData.forEach(function (doc) {
-    //     this.add(doc)
-    //   }, this)
-    // })
-
-    //console.log(idx.search('helper'))
+    const { library, docs, themes, descriptions } = this.state.docsData!
 
     const { layout } = this.state
 
@@ -533,11 +513,18 @@ class App extends Component<AppProps, AppState> {
         category: 'themes'
       }
     })
+
+    const mergedDocs: any = { ...docs }
+
+    Object.keys(descriptions).forEach((key) => {
+      mergedDocs[key] = { ...mergedDocs[key], description: descriptions[key] }
+    })
+
     return (
       <InstUISettingsProvider theme={instructure}>
         <Hero
           name={library.name}
-          docs={{ ...docs, ...themeDocs }}
+          docs={{ ...mergedDocs, ...themeDocs }}
           repository={library.repository}
           version={library.version}
           layout={layout}
