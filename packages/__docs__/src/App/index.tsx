@@ -31,6 +31,8 @@ import {
   SyntheticEvent
 } from 'react'
 
+import lunr from 'lunr'
+
 import { Alert } from '@instructure/ui-alerts'
 import {
   InstUISettingsProvider,
@@ -501,6 +503,27 @@ class App extends Component<AppProps, AppState> {
 
   renderHero() {
     const { library, docs, themes } = this.state.docsData!
+    //console.log(this.state.docsData?.descriptions)
+    const indexedData = []
+
+    // index the descriptions so lunr can accept it
+    for (const [key, value] of Object.entries(
+      this.state.docsData?.descriptions || {}
+    )) {
+      indexedData.push({ name: key, text: value })
+    }
+
+    // const idx = lunr(function () {
+    //   this.ref('name')
+    //   this.field('text')
+    //
+    //   indexedData.forEach(function (doc) {
+    //     this.add(doc)
+    //   }, this)
+    // })
+
+    //console.log(idx.search('helper'))
+
     const { layout } = this.state
 
     const themeDocs: Record<string, any> = {}
