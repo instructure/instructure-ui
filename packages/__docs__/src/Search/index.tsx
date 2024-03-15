@@ -23,6 +23,7 @@
  */
 
 import React, { Component } from 'react'
+import lunr from 'lunr'
 
 import { Alert } from '@instructure/ui-alerts'
 import { IconButton } from '@instructure/ui-buttons'
@@ -45,6 +46,30 @@ class Search extends Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {
     super(props)
 
+    const indexedData: any[] = []
+
+    // index the descriptions so lunr can accept it
+    for (const [key, value] of Object.entries(props.options || {})) {
+      if (value.description) {
+        indexedData.push({
+          id: key,
+          description: value.description,
+          title: value.title
+        })
+      }
+    }
+
+    const idx = lunr(function () {
+      this.ref('id')
+      this.field('title')
+      this.field('description')
+      this.metadataWhitelist = ['position']
+
+      indexedData.forEach(function (doc) {
+        this.add(doc)
+      }, this)
+    })
+
     this.state = {
       inputValue: '',
       isShowingOptions: false,
@@ -53,18 +78,10 @@ class Search extends Component<SearchProps, SearchState> {
       selectedOptionId: null,
       selectedOptionLabel: '',
       filteredOptions: [],
-      announcement: null
+      announcement: null,
+      idx,
+      searchMatches: []
     }
-
-    const indexedData = []
-
-    // index the descriptions so lunr can accept it
-    for (const [key, value] of Object.entries(props.options || {})) {
-      indexedData.push({ name: key, text: value })
-    }
-
-    // console.log(props.options)
-    //
 
     Object.keys(props.options).forEach((option, i) => {
       const doc = props.options[option]
@@ -107,6 +124,7 @@ class Search extends Component<SearchProps, SearchState> {
       selectedOptionId: null,
       selectedOptionLabel: '',
       filteredOptions: [],
+      searchMatches: [],
       announcement: 'List collapsed.',
       inputValue: ''
     })
@@ -164,6 +182,76 @@ class Search extends Component<SearchProps, SearchState> {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId)
     }
+
+    const searchContextPadding = 5
+    const getContextForMatch = (
+      ref: any,
+      field: 'title' | 'description',
+      positions: any
+    ) => {
+      return positions?.map((p: number[]) => {
+        const matchStartIndex = p[0]
+        const matchLength = p[1]
+        const context = this.props.options?.[ref]?.[field]?.substring(
+          matchStartIndex - searchContextPadding,
+          matchStartIndex + matchLength + searchContextPadding
+        )
+        return {
+          context
+        }
+      })
+    }
+
+    const searchTerm = value
+    const searchResults: any[] = this.state.idx.search(`*${searchTerm}*`)
+    const searchMatchesWithContext = searchResults.map((result) => {
+      const {
+        ref,
+        score,
+        matchData: { metadata }
+      } = result
+      const matches = Object.values(metadata).map((value: any) => {
+        return Object.entries(value).map(
+          ([field, { position }]: [any, any]) => {
+            return {
+              [field]: getContextForMatch(ref, field, position)
+            }
+          }
+        )
+      })
+      return {
+        matches,
+        ref,
+        score
+      }
+    })
+    searchMatchesWithContext.map((m) => {
+      return {
+        label: m.ref
+      }
+    })
+    this.setState({
+      searchMatches: searchMatchesWithContext.map((m) => {
+        return {
+          label: `${m.ref} (${m.score})`,
+          matches: m.matches.map((match: any, index) => {
+            const context = match[0]?.description?.[0].context
+            return {
+              id: m.ref + index,
+              label: (
+                <span>
+                  {context?.substring(0, 5)}
+                  <span style={{ background: 'yellow' }}>
+                    {context?.substring(5, context.length - 5)}
+                  </span>
+                  {context?.substring(context.length - 5, context.length)}
+                </span>
+              )
+            }
+          })
+        }
+      })
+    })
 
     if (!value || value === '') {
       this.setState({
@@ -245,21 +333,12 @@ class Search extends Component<SearchProps, SearchState> {
       <Select.Group renderLabel={group} key={group}>
         {groups[group].map(
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          ({
-            id,
-            label,
-            disabled
-          }: {
-            id: string
-            label: string
-            disabled: boolean
-          }) => (
+          ({ id, label }: { id: string; label: string; disabled: boolean }) => (
             <Select.Option
               id={id}
               key={id}
               isHighlighted={id === highlightedOptionId}
               isSelected={id === selectedOptionId}
-              isDisabled={disabled}
             >
               {label}
             </Select.Option>
@@ -317,8 +396,27 @@ class Search extends Component<SearchProps, SearchState> {
             )
           }
         >
-          {filteredOptions.length > 0
-            ? this.renderGroups(filteredOptions)
+          {this.state.searchMatches.length > 0
+            ? this.state.searchMatches.map((group) => (
+                <Select.Group renderLabel={group.label} key={group.label}>
+                  {group.matches.map(
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    ({
+                      id,
+                      label,
+                      disabled
+                    }: {
+                      id: string
+                      label: string
+                      disabled: boolean
+                    }) => (
+                      <Select.Option id={id} key={id} isDisabled={disabled}>
+                        {label}
+                      </Select.Option>
+                    )
+                  )}
+                </Select.Group>
+              ))
             : this.renderEmptyOption()}
         </Select>
         <Alert
