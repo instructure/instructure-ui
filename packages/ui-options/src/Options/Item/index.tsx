@@ -59,7 +59,7 @@ class Item extends Component<OptionsItemProps> {
     as: 'span',
     variant: 'default',
     role: 'listitem',
-    useOuterRole: false,
+    voiceoverRoleBugWorkaround: false,
     beforeLabelContentVAlign: 'center',
     afterLabelContentVAlign: 'center'
   } as const
@@ -120,7 +120,7 @@ class Item extends Component<OptionsItemProps> {
       renderAfterLabel,
       elementRef,
       children,
-      useOuterRole
+      voiceoverRoleBugWorkaround
     } = this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
@@ -137,7 +137,7 @@ class Item extends Component<OptionsItemProps> {
 
     return (
       <ElementType
-        role={useOuterRole ? role : 'none'}
+        role={voiceoverRoleBugWorkaround ? role : 'none'}
         css={styles?.item}
         ref={(element: Element | null) => {
           this.ref = element
@@ -146,14 +146,18 @@ class Item extends Component<OptionsItemProps> {
             elementRef(element)
           }
         }}
-        aria-describedby={useOuterRole ? ariaDescribedBy : undefined}
+        aria-describedby={
+          voiceoverRoleBugWorkaround ? ariaDescribedBy : undefined
+        }
       >
         <InnerElementType
           {...passthroughProps}
           css={styles?.container}
-          role={href || useOuterRole ? undefined : role}
+          role={href || voiceoverRoleBugWorkaround ? undefined : role}
           href={href}
-          aria-describedby={useOuterRole ? undefined : ariaDescribedBy}
+          aria-describedby={
+            voiceoverRoleBugWorkaround ? undefined : ariaDescribedBy
+          }
         >
           {childrenContent}
           {descriptionContent && (
