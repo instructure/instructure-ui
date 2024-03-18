@@ -87,9 +87,9 @@ type OptionsItemOwnProps = OptionsItemRenderProps & {
    */
   href?: string
   /**
-   * Force the `role` prop to be on the outer tag. Should only be used when screen readers don't recognize the role.
+   * Sometimes VoiceOver doesn't announce the role of the highlighted item. This prop forces the role to be on the outer element and should only be used when such an issue arises.
    */
-  useOuterRole?: boolean
+  voiceoverRoleBugWorkaround?: boolean
   /**
    * provides a reference to the underlying html root element
    */
@@ -131,7 +131,7 @@ const propTypes: PropValidators<PropKeys> = {
   description: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   descriptionRole: PropTypes.string,
   href: PropTypes.string,
-  useOuterRole: PropTypes.bool,
+  voiceoverRoleBugWorkaround: PropTypes.bool,
   elementRef: PropTypes.func,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 }
@@ -146,7 +146,7 @@ const allowedProps: AllowedPropKeys = [
   'afterLabelContentVAlign',
   'description',
   'descriptionRole',
-  'useOuterRole',
+  'voiceoverRoleBugWorkaround',
   'href',
   'elementRef',
   'children'
