@@ -250,7 +250,7 @@ type DateTimeInputProps = {
   /**
    * Used for getting the internal reset function of DateTimeInput. If that
    * function is called, the component will reset to its default inner state.
-   * Te callback function will be called in componentDidMount
+   * The callback function will be called in componentDidMount
    * NOTE: this won't call onChange, so you have to reset the value manually when calling reset
    */
   reset?: (reset: () => void) => void
