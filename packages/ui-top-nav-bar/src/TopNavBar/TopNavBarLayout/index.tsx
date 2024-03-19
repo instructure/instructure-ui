@@ -71,7 +71,7 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
 
   componentDidMount() {
     // TODO: Remove this in v10!
-    if (this.props.desktopConfig) {
+    if ('desktopConfig' in this.props) {
       console.error(
         'Warning: `desktopConfig` prop on [TopNavBar.Layout] is deprecated, please remove it from your code. Further info: https://instructure.design/#v9-upgrade-guide/#deprecated-properties'
       )
@@ -127,7 +127,6 @@ class TopNavBarLayout extends Component<TopNavBarLayoutProps> {
       // @ts-expect-error prevents it to be passed
       makeStyles,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      desktopConfig, // TODO: Only here for warning, not functional anymore. Remove this in v10!
       ...restProps
     } = this.props
 
