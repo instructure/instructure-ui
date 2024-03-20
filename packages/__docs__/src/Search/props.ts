@@ -32,6 +32,8 @@ type OptionType = {
   tags: string
   isWIP: string | boolean
   category?: string
+  description?: string
+  title?: string
 }
 
 type SearchOwnProps = {
@@ -65,6 +67,8 @@ type SearchState = {
     category?: string
   }[]
   announcement: string | null
+  searchMatches: any[]
+  idx: any
 }
 
 const allowedProps: AllowedPropKeys = ['options']

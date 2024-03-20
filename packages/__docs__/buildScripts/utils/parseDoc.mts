@@ -33,13 +33,17 @@ export function parseDoc(
   resourcePath: string,
   source: Buffer,
   errorHandler: (err: Error) => void
-): Documentation & YamlMetaInfo & Partial<JsDocResult> {
+): Documentation & YamlMetaInfo & Partial<JsDocResult>  & {src: any} {
   const extension = path.extname(resourcePath)
   const allowedExtensions = ['.js', '.ts', '.tsx']
   let doc: Documentation | undefined
 
   if (extension === '.md') {
-    doc = { description: source as unknown as string}
+    // if (!resourcePath.includes('src')) {
+      doc = { description: source as unknown as string}
+    // } else {
+    //   console.log('yo')
+    // }
   } else if (allowedExtensions.includes(extension)) {
     doc = getReactDoc(source, resourcePath, errorHandler)
     if (!doc || !doc.props) {
@@ -58,6 +62,7 @@ export function parseDoc(
   }
   return {
     ...doc,
-    ...frontMatter
+    ...frontMatter,
+    src: source.toString(),
   }
 }

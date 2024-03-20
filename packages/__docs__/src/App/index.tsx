@@ -31,6 +31,8 @@ import {
   SyntheticEvent
 } from 'react'
 
+import lunr from 'lunr'
+
 import { Alert } from '@instructure/ui-alerts'
 import {
   InstUISettingsProvider,
@@ -500,7 +502,8 @@ class App extends Component<AppProps, AppState> {
   }
 
   renderHero() {
-    const { library, docs, themes } = this.state.docsData!
+    const { library, docs, themes, descriptions } = this.state.docsData!
+
     const { layout } = this.state
 
     const themeDocs: Record<string, any> = {}
@@ -510,11 +513,18 @@ class App extends Component<AppProps, AppState> {
         category: 'themes'
       }
     })
+
+    const mergedDocs: any = { ...docs }
+
+    Object.keys(descriptions).forEach((key) => {
+      mergedDocs[key] = { ...mergedDocs[key], description: descriptions[key] }
+    })
+
     return (
       <InstUISettingsProvider theme={instructure}>
         <Hero
           name={library.name}
-          docs={{ ...docs, ...themeDocs }}
+          docs={{ ...mergedDocs, ...themeDocs }}
           repository={library.repository}
           version={library.version}
           layout={layout}
