@@ -47,11 +47,6 @@ type TopNavBarBrandOwnProps = {
   screenReaderLabel: string
 
   /**
-   * The app/product/brand/company/etc. name.
-   */
-  renderName?: React.ReactNode
-
-  /**
    * The app/product/brand/company/etc. logo or icon.
    * The icon is not displayed in "smallViewport" mode.
    */
@@ -114,7 +109,6 @@ type TopNavBarBrandStyleProps = {
 
 const propTypes: PropValidators<PropKeys> = {
   screenReaderLabel: PropTypes.string.isRequired,
-  renderName: PropTypes.node,
   renderIcon: PropTypes.node,
   nameBackground: PropTypes.string,
   iconBackground: PropTypes.string,
@@ -126,7 +120,6 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = [
   'screenReaderLabel',
-  'renderName',
   'renderIcon',
   'nameBackground',
   'iconBackground',
