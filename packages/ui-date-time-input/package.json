@@ -45,6 +45,7 @@
     "@instructure/ui-testable": "8.53.2",
     "@instructure/ui-time-select": "8.53.2",
     "@instructure/ui-utils": "8.53.2",
+    "@instructure/ui-tabs": "8.53.2",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {

@@ -22,6 +22,7 @@
     { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-time-select/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" },
+    { "path": "../ui-tabs/tsconfig.build.json" },
     { "path": "../console/tsconfig.build.json" }
   ]
 }
