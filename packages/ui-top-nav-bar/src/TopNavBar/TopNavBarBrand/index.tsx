@@ -25,11 +25,7 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 
-import {
-  deprecated,
-  getElementType,
-  omitProps
-} from '@instructure/ui-react-utils'
+import { getElementType, omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'

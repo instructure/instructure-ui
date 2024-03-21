@@ -45,7 +45,7 @@ import { TopNavBarContext } from '../TopNavBarContext'
 import type { TopNavBarContextType } from '../TopNavBarContext'
 
 import { TopNavBar } from '../index'
-import { elevateIcon, elevateLogo, elevateLogoInverse } from './exampleSvgFiles'
+import { elevateIcon } from './exampleSvgFiles'
 import { Breadcrumb } from '@instructure/ui-breadcrumb'
 
 type ChildrenFuncProps = {
@@ -167,7 +167,6 @@ SmallViewportModeWrapper.defaultProps = {
 }
 
 const getBrand = (config: VariantConfig = {}) => {
-  const logo = config.inverseColor ? elevateLogoInverse : elevateLogo
   const nameBackground = !config.hasBrandNameBackground
     ? undefined
     : config.inverseColor
@@ -177,7 +176,6 @@ const getBrand = (config: VariantConfig = {}) => {
   return (
     <TopNavBar.Brand
       screenReaderLabel="Brand name"
-      renderName={logo}
       renderIcon={elevateIcon}
       iconBackground="#0097D3"
       nameBackground={nameBackground}
