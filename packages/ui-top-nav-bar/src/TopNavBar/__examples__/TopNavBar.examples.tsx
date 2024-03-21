@@ -62,7 +62,6 @@ const topNavBarExampleChildren: TopNavBarProps['children'][] = [
         {
           hideActionsUserSeparator: true,
           brandProps: { renderIcon: undefined },
-          hasBrandNameBackground: true,
           currentPageId: 'Maps',
           actionItemsCount: 6,
           userWithAvatar: true

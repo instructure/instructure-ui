@@ -102,32 +102,6 @@ describe('<TopNavBarBrand />', async () => {
     })
   })
 
-  describe('nameBackground prop', async () => {
-    it('should be visible in desktop mode', async () => {
-      await mount(getBrand({ brandProps: { nameBackground: '#f5f5f5' } }))
-      const component = await TopNavBarBrandLocator.find()
-      const nameContainer = await component.findBrandNameContainer()
-
-      expect(
-        getComputedStyle(nameContainer.getDOMNode()).backgroundColor
-      ).to.equal('rgb(245, 245, 245)')
-    })
-
-    it('should not be visible in smallViewport mode', async () => {
-      await mount(
-        <SmallViewportModeWrapper>
-          {getBrand({ brandProps: { nameBackground: '#f5f5f5' } })}
-        </SmallViewportModeWrapper>
-      )
-      const component = await TopNavBarBrandLocator.find()
-      const nameContainer = await component.findBrandNameContainer()
-
-      expect(
-        getComputedStyle(nameContainer.getDOMNode()).backgroundColor
-      ).to.equal('rgba(0, 0, 0, 0)')
-    })
-  })
-
   describe('iconBackground prop', async () => {
     it('should be visible in desktop mode', async () => {
       await mount(getBrand({ brandProps: { iconBackground: 'blue' } }))

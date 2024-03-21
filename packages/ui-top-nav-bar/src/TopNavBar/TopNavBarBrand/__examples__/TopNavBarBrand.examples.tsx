@@ -30,7 +30,6 @@ import type { TopNavBarBrandProps } from '../props'
 export default {
   propValues: {
     renderIcon: [undefined, 'Logo', elevateIconInverse],
-    nameBackground: [undefined, '#eee'],
     iconBackground: [undefined, '#ddd'],
     href: [undefined, '/#home'],
     onClick: [undefined, () => {}]
@@ -41,19 +40,12 @@ export default {
     }
   },
   filter: (props) => {
-    if (props.nameBackground) {
-      return true
-    }
     if (props.iconBackground && !props.renderIcon) {
       return true
     }
     if (
       (props.href || props.onClick) &&
-      !(
-        typeof props.renderIcon === 'object' &&
-        props.nameBackground &&
-        props.iconBackground
-      )
+      !(typeof props.renderIcon === 'object' && props.iconBackground)
     ) {
       return true
     }

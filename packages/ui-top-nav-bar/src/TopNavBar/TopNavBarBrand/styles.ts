@@ -44,7 +44,7 @@ const generateStyle = (
   props: TopNavBarBrandProps,
   state: TopNavBarBrandStyleProps
 ): TopNavBarBrandStyle => {
-  const { nameBackground, iconBackground } = props
+  const { iconBackground } = props
   const isDesktop = state.layout === 'desktop'
 
   return {
@@ -64,15 +64,6 @@ const generateStyle = (
       margin: 0,
       appearance: 'none',
       textDecoration: 'none'
-    },
-    nameContainer: {
-      label: 'topNavBarBrand__nameContainer',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      pointerEvents: 'none',
-      padding: componentTheme.logoPadding,
-      background: isDesktop ? nameBackground : undefined
     },
     name: {
       label: 'topNavBarBrand__name',

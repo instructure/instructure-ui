@@ -81,6 +81,13 @@ class TopNavBarBrand extends Component<TopNavBarBrandProps> {
       )
     }
 
+    // TODO: Remove this in v10!
+    if ('nameBackground' in this.props) {
+      console.error(
+        'Warning: `nameBackground` prop on [TopNavBar.Brand] is deprecated, please remove it from your code. Further info: https://instructure.design/#v9-upgrade-guide/#deprecated-properties'
+      )
+    }
+
     this.props.makeStyles?.(this.makeStylesVariables)
   }
 

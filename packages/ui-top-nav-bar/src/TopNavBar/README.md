@@ -27,7 +27,6 @@ class PlaygroundExample extends React.Component {
     hideActionsUserSeparator: true,
     useAlternativeTitle: false,
     renderIcon: true,
-    nameBackground: false,
     iconBackground: true,
     extraMenuItems: false,
     extraActionItems: false,
@@ -323,7 +322,6 @@ class PlaygroundExample extends React.Component {
         label: 'TopNavBar.Brand settings',
         checkboxes: [
           'renderIcon',
-          'nameBackground',
           'iconBackground',
         ]
       },
@@ -400,7 +398,6 @@ class PlaygroundExample extends React.Component {
       hideActionsUserSeparator: 'Hides the separator between the action items and the user menu',
       useAlternativeTitle: 'Displays other data (e.g.: page title) instead of the Brand logo and link',
       renderIcon: 'Visible only in "desktop" mode',
-      nameBackground: 'Visible only in "desktop" mode',
       iconBackground: 'Visible only in "desktop" mode',
       extraMenuItems: 'In "desktop" mode, when there is not enough room to list all the menu items, they will be accessible via a dropdown menu at the end of the list',
       actionItemShowChevronForSubmenu: 'Displays the open/close chevron next to the item, when it has a submenu or custom popover',
@@ -636,11 +633,6 @@ class PlaygroundExample extends React.Component {
                     }),
                     ...(this.state.iconBackground && {
                       iconBackground: '#0097D3'
-                    }),
-                    ...(this.state.nameBackground && {
-                      nameBackground: inverseColor
-                        ? '#F5F5F5'
-                        : '#2D3B45'
                     }),
                   }}
                 />
@@ -1162,7 +1154,6 @@ type: example
           renderBrand={(
             <TopNavBar.Brand
               screenReaderLabel="Brand name"
-              nameBackground="#2D3B45"
               href="/#TopNavBar"
             />
           )}

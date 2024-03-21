@@ -32,9 +32,6 @@ export const TopNavBarBrandLocator = locator(TopNavBarBrand.selector, {
   findContainer: (...args: any[]) => {
     return find('[class$="-topNavBarBrand__container"]', ...args)
   },
-  findBrandNameContainer: (...args: any[]) => {
-    return find('[class$="-topNavBarBrand__nameContainer"]', ...args)
-  },
   findBrandIconContainer: (...args: any[]) => {
     return find('[class$="-topNavBarBrand__iconContainer"]', ...args)
   },
