@@ -260,6 +260,31 @@ describe('<DateInput/>', () => {
       })
   })
 
+  it("should change value of TimeSelect to initialTimeForNewDate prop's value", async () => {
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+
+    cy.mount(
+      <DateTimeInput
+        description="date_time"
+        dateRenderLabel="date-input"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        timeRenderLabel="time-input"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        initialTimeForNewDate="05:05"
+      />
+    )
+    cy.get('input[id^="Selectable_"]').as('dateInput')
+    cy.get('input[id^="Select_"]').as('timeInput')
+
+    cy.get('@dateInput').clear().type(`May 1, 2017{enter}`)
+
+    cy.get('@timeInput').should('have.value', '5:05 AM')
+  })
+
   // it("should throw warning if initialTimeForNewDate prop's value is not HH:MM", () => {
   //   cy.window().then((win) => {
   //     cy.spy(win.console, 'error').as('consoleError')
@@ -277,9 +302,9 @@ describe('<DateInput/>', () => {
   //       nextMonthLabel="Next month"
   //       timeRenderLabel="time-input"
   //       invalidDateTimeMessage="whoops"
-  //       locale={'en-US'}
-  //       timezone={'US/Eastern'}
-  //       initialTimeForNewDate={'WRONG_FORMAT'}
+  //       locale={locale}
+  //       timezone={timezone}
+  //       initialTimeForNewDate={initialTimeForNewDate}
   //     />
   //   )
   //   cy.get('input[id^="Selectable_"]').as('dateInput')
@@ -288,4 +313,46 @@ describe('<DateInput/>', () => {
   //   cy.get('@dateInput').type('May 1, 2017{enter}')
   //   cy.get('@consoleError').should('have.been.calledWithMatch', `Warning: [DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`)
   // })
+
+  xit('should throw warning if initialTimeForNewDate prop hour and minute values are not in interval', () => {
+    cy.window().then((win) => {
+      cy.spy(win.console, 'error').as('consoleError')
+    })
+
+    // const locale = 'en-US'
+    // const timezone = 'US/Eastern'
+    // const initialTimeForNewDate = '99:99'
+
+    cy.mount(
+      <DateTimeInput
+        description="date_time"
+        dateRenderLabel="date-input"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        timeRenderLabel="time-input"
+        invalidDateTimeMessage="whoops"
+        locale={'en-US'}
+        timezone={'US/Eastern'}
+        initialTimeForNewDate={'99:99'}
+      />
+    )
+    cy.get('input[id^="Selectable_"]').as('dateInput')
+    // const dateInput = screen.getByLabelText('date-input')
+
+    cy.get('@dateInput').type('May 1, 2017{enter}')
+    // await userEvent.type(dateInput, 'May 1, 2017')
+    // await userEvent.type(dateInput, '{enter}')
+
+    cy.get('@consoleError').should(
+      'have.been.calledWithMatch',
+      `Warning: [DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.`
+    )
+    // await waitFor(() => {
+    //   expect(consoleErrorMock.mock.calls[0][0]).toEqual(
+    //     expect.stringContaining(
+    //       `Warning: [DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.`
+    //     )
+    //   )
+    // })
+  })
 })

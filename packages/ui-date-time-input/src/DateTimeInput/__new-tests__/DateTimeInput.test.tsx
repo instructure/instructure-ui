@@ -35,7 +35,7 @@ describe('<DateTimeInput />', () => {
 
   beforeEach(() => {
     // Mocking console to prevent test output pollution and expect for messages
-    consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {})
+    consoleErrorMock = jest.spyOn(console, 'error').mockImplementation()
   })
 
   afterEach(() => {
@@ -675,10 +675,11 @@ describe('<DateTimeInput />', () => {
     })
   })
 
+  // Working local but not on PR checks and not in cypress
   it("should throw warning if initialTimeForNewDate prop's value is not HH:MM", async () => {
-    const locale = 'en-US'
-    const timezone = 'US/Eastern'
-    const initialTimeForNewDate = 'WRONG_FORMAT'
+    // const locale = 'en-US'
+    // const timezone = 'US/Eastern'
+    // const initialTimeForNewDate = 'WRONG_FORMAT'
 
     render(
       <DateTimeInput
@@ -688,16 +689,16 @@ describe('<DateTimeInput />', () => {
         nextMonthLabel="Next month"
         timeRenderLabel="time-input"
         invalidDateTimeMessage="whoops"
-        locale={locale}
-        timezone={timezone}
-        initialTimeForNewDate={initialTimeForNewDate}
+        locale={'en-US'}
+        timezone={'US/Eastern'}
+        initialTimeForNewDate={'WRONG_FORMAT'}
       />
     )
-    // expect(consoleErrorMock.mock.calls[0][2]).toEqual(
-    //   expect.stringContaining(
-    //     `Invalid prop \`initialTimeForNewDate\` \`${initialTimeForNewDate}\` supplied to \`DateTimeInput\`, expected a HH:MM formatted string.`
-    //   )
-    // )
+    expect(consoleErrorMock.mock.calls[0][2]).toEqual(
+      expect.stringContaining(
+        `Invalid prop \`initialTimeForNewDate\` \`${'WRONG_FORMAT'}\` supplied to \`DateTimeInput\`, expected a HH:MM formatted string.`
+      )
+    )
 
     const dateInput = screen.getByLabelText('date-input')
 
@@ -740,34 +741,6 @@ describe('<DateTimeInput />', () => {
   //         `Warning: [DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.`
   //       )
   //     )
-  //   })
-  // })
-
-  // it("should change value of TimeSelect to initialTimeForNewDate prop's value", async () => {
-  //   const locale = 'en-US'
-  //   const timezone = 'US/Eastern'
-
-  //   render(
-  //     <DateTimeInput
-  //       description="date_time"
-  //       dateRenderLabel="date-input"
-  //       prevMonthLabel="Previous month"
-  //       nextMonthLabel="Next month"
-  //       timeRenderLabel="time-input"
-  //       invalidDateTimeMessage="whoops"
-  //       locale={locale}
-  //       timezone={timezone}
-  //       initialTimeForNewDate="05:05"
-  //     />
-  //   )
-  //   const dateInput = screen.getByLabelText('date-input')
-  //   const timeInput = screen.getByLabelText('time-input')
-
-  //   await userEvent.type(dateInput, 'May 1, 2017')
-  //   await userEvent.type(dateInput, '{enter}')
-
-  //   await waitFor(() => {
-  //     expect(timeInput).toHaveValue('5:05 AM')
   //   })
   // })
 
