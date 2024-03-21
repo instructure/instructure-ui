@@ -44,12 +44,12 @@ Since CommonJS style imports `require(..)` have been superseded by ES6 style imp
 
 For more information, click the name of the component to see its full documentation.
 
-| Component                                         | Old Property             | New Property | Notes                                                                                                                               |
-| ------------------------------------------------- | ------------------------ | ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [Mask](#Mask)                                     | onDismiss                | -            | This prop hasn't been used by the component for a long time, will be permanently removed in V9.                                     |
-| [Overlay](#Overlay)                               | applicationElement       | -            | This prop is passed to Dialog, but it has been removed from Dialog in V6, so it will be permanently removed from Overlay too in V9. |
-| [TopNavBarBrand](#TopNavBarBrand)                 | renderName               | -            | Please use the updated [TopNavBar](#TopNavBar) design.                                                                              |
-| [TopNavBarDesktopLayout](#TopNavBarDesktopLayout) | hideActionsUserSeparator | -            | From v9, actionUserSeparator has to be visible at all times. Please do not use designs which hide it.                               |
+| Component                     | Old Property       | New Property | Notes                                                                                                                               |
+| ----------------------------- | ------------------ | ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| [Mask](#Mask)                 | onDismiss          | -            | This prop hasn't been used by the component for a long time, will be permanently removed in V9.                                     |
+| [Overlay](#Overlay)           | applicationElement | -            | This prop is passed to Dialog, but it has been removed from Dialog in V6, so it will be permanently removed from Overlay too in V9. |
+| [TopNavBar.Brand](#TopNavBar) | renderName         | -            | From v9 `TopNavBar.Brand` should only contain the brand logo, not the name.                                                         |
+| [TopNavBar.Brand](#TopNavBar) | nameBackground     | -            | This prop set the background color of the brand name which is no longer supported in v9.                                            |
 
 ### Deprecated Property Values
 

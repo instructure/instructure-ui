@@ -181,10 +181,7 @@ class TopNavBarSmallViewportLayout extends Component<
   ): renderBrand is NonNullable<
     TopNavBarSmallViewportLayoutProps['renderBrand']
   > {
-    return (
-      !!renderBrand &&
-      (!!renderBrand.props.renderName || !!renderBrand.props.renderIcon)
-    )
+    return !!renderBrand && !!renderBrand.props.renderIcon
   }
 
   hasMenuItemsBlock(

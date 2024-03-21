@@ -25,11 +25,7 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 
-import {
-  deprecated,
-  getElementType,
-  omitProps
-} from '@instructure/ui-react-utils'
+import { getElementType, omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -54,11 +50,6 @@ id: TopNavBar.Brand
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-@deprecated(
-  '9',
-  { renderName: true },
-  'Please use the updated TopNavBar design.'
-)
 class TopNavBarBrand extends Component<TopNavBarBrandProps> {
   static readonly componentId = 'TopNavBar.Brand'
   // TODO: add to the docs: making it static on parent and jsdocs parent/module settings, dont export child on its own
@@ -83,6 +74,20 @@ class TopNavBarBrand extends Component<TopNavBarBrandProps> {
   }
 
   componentDidMount() {
+    // TODO: Remove this in v10!
+    if ('renderName' in this.props) {
+      console.error(
+        'Warning: `renderName` prop on [TopNavBar.Brand] is deprecated, please remove it from your code. Further info: https://instructure.design/#v9-upgrade-guide/#deprecated-properties'
+      )
+    }
+
+    // TODO: Remove this in v10!
+    if ('nameBackground' in this.props) {
+      console.error(
+        'Warning: `nameBackground` prop on [TopNavBar.Brand] is deprecated, please remove it from your code. Further info: https://instructure.design/#v9-upgrade-guide/#deprecated-properties'
+      )
+    }
+
     this.props.makeStyles?.(this.makeStylesVariables)
   }
 
@@ -97,14 +102,13 @@ class TopNavBarBrand extends Component<TopNavBarBrandProps> {
   }
 
   render() {
-    const { screenReaderLabel, renderName, renderIcon, href, onClick, styles } =
-      this.props
+    const { screenReaderLabel, renderIcon, href, onClick, styles } = this.props
 
     const ElementType = getElementType(TopNavBarBrand, this.props)
 
     return (
       <div ref={this.handleRef} css={styles?.topNavBarBrand}>
-        {(renderIcon || renderName) && (
+        {renderIcon && (
           <View
             {...omitProps(this.props, allowedProps)}
             css={styles?.container}
@@ -125,15 +129,6 @@ class TopNavBarBrand extends Component<TopNavBarBrandProps> {
                 aria-hidden="true"
               >
                 {renderIcon}
-              </div>
-            )}
-            {renderName && (
-              <div
-                css={styles?.nameContainer}
-                role="presentation"
-                aria-hidden="true"
-              >
-                {renderName}
               </div>
             )}
           </View>

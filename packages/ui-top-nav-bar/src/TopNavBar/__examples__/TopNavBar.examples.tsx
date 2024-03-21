@@ -62,7 +62,6 @@ const topNavBarExampleChildren: TopNavBarProps['children'][] = [
         {
           hideActionsUserSeparator: true,
           brandProps: { renderIcon: undefined },
-          hasBrandNameBackground: true,
           currentPageId: 'Maps',
           actionItemsCount: 6,
           userWithAvatar: true
@@ -75,7 +74,6 @@ const topNavBarExampleChildren: TopNavBarProps['children'][] = [
       {...getLayoutProps(
         { currentLayout, inverseColor },
         {
-          brandProps: { renderName: undefined },
           actionItemsItemProps: { variant: 'button' },
           actionItemsCount: 4,
           menuItemsCount: 0,
@@ -90,7 +88,7 @@ const topNavBarExampleChildren: TopNavBarProps['children'][] = [
       {...getLayoutProps(
         { currentLayout, inverseColor },
         {
-          brandProps: { renderName: undefined, renderIcon: undefined },
+          brandProps: { renderIcon: undefined },
           actionItemsCount: 0,
           userWithAvatar: true,
           userVariant: 'avatar',

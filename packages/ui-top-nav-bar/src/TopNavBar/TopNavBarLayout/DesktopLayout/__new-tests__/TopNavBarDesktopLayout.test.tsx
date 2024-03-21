@@ -122,8 +122,6 @@ describe('<TopNavBarDesktopLayout />', () => {
     })
 
     it('should not render breadcrumb if brand exists', () => {
-      const consoleMock = jest.spyOn(console, 'warn').mockImplementation()
-
       const { queryByLabelText, queryByText } = render(
         <TopNavBarContext.Provider
           value={{
@@ -146,9 +144,6 @@ describe('<TopNavBarDesktopLayout />', () => {
       expect(crumb1).not.toBeInTheDocument()
       expect(crumb2).not.toBeInTheDocument()
       expect(crumb3).not.toBeInTheDocument()
-      expect(consoleMock.mock.calls[0][0]).toEqual(
-        'Warning: [TopNavBarBrand] `renderName` is deprecated and will be removed in version 9. Please use the updated TopNavBar design.'
-      )
     })
 
     it('should not render breadcrumb if menuitems exist', () => {
@@ -207,12 +202,12 @@ describe('<TopNavBarDesktopLayout />', () => {
       expect(desktopLayout).not.toHaveTextContent('Brand name')
     })
 
-    it('should not render brand container when "renderName" and "renderIcon" props are both missing', () => {
+    it('should not render brand container when "renderIcon" props is missing', () => {
       const { container } = render(
         <TopNavBarDesktopLayout
           {...defaultBlocks}
           renderBrand={getBrand({
-            brandProps: { renderName: undefined, renderIcon: undefined }
+            brandProps: { renderIcon: undefined }
           })}
         />
       )

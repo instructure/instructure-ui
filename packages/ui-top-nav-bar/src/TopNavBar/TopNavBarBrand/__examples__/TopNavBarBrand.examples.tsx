@@ -24,17 +24,12 @@
 
 import type { StoryConfig } from '@instructure/ui-test-utils'
 
-import {
-  elevateLogoInverse,
-  elevateIconInverse
-} from '../../utils/exampleSvgFiles'
+import { elevateIconInverse } from '../../utils/exampleSvgFiles'
 import type { TopNavBarBrandProps } from '../props'
 
 export default {
   propValues: {
-    renderName: [undefined, 'Brand name', elevateLogoInverse],
     renderIcon: [undefined, 'Logo', elevateIconInverse],
-    nameBackground: [undefined, '#eee'],
     iconBackground: [undefined, '#ddd'],
     href: [undefined, '/#home'],
     onClick: [undefined, () => {}]
@@ -45,20 +40,12 @@ export default {
     }
   },
   filter: (props) => {
-    if (props.nameBackground && !props.renderName) {
-      return true
-    }
     if (props.iconBackground && !props.renderIcon) {
       return true
     }
     if (
       (props.href || props.onClick) &&
-      !(
-        typeof props.renderName === 'object' &&
-        typeof props.renderIcon === 'object' &&
-        props.nameBackground &&
-        props.iconBackground
-      )
+      !(typeof props.renderIcon === 'object' && props.iconBackground)
     ) {
       return true
     }
