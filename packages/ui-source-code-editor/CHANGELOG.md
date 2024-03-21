@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
+
+
+### Bug Fixes
+
+* **ui-source-code-editor:** make search panel work with older react versions ([76cdaac](https://github.com/instructure/instructure-ui/commit/76cdaac296d8bdcbcf337ef1d95eb8d2e538b993))
+* **ui-source-code-editor:** remove warning and fix focus for search panel ([def33a3](https://github.com/instructure/instructure-ui/commit/def33a34e28373b2d6b2455afbae638a3c98685a))
+
+
+
+
+
 ## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
 

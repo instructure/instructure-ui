@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-truncate-list",
-  "version": "8.53.2",
+  "version": "8.54.0",
   "description": "A TruncateList component made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -24,23 +24,23 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.23.2",
-    "@instructure/console": "8.53.2",
-    "@instructure/debounce": "8.53.2",
-    "@instructure/emotion": "8.53.2",
-    "@instructure/shared-types": "8.53.2",
-    "@instructure/ui-dom-utils": "8.53.2",
-    "@instructure/ui-react-utils": "8.53.2",
-    "@instructure/ui-testable": "8.53.2",
-    "@instructure/ui-utils": "8.53.2",
+    "@instructure/console": "8.54.0",
+    "@instructure/debounce": "8.54.0",
+    "@instructure/emotion": "8.54.0",
+    "@instructure/shared-types": "8.54.0",
+    "@instructure/ui-dom-utils": "8.54.0",
+    "@instructure/ui-react-utils": "8.54.0",
+    "@instructure/ui-testable": "8.54.0",
+    "@instructure/ui-utils": "8.54.0",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.53.2",
-    "@instructure/ui-color-utils": "8.53.2",
-    "@instructure/ui-test-locator": "8.53.2",
-    "@instructure/ui-test-queries": "8.53.2",
-    "@instructure/ui-test-utils": "8.53.2",
-    "@instructure/ui-themes": "8.53.2"
+    "@instructure/ui-babel-preset": "8.54.0",
+    "@instructure/ui-color-utils": "8.54.0",
+    "@instructure/ui-test-locator": "8.54.0",
+    "@instructure/ui-test-queries": "8.54.0",
+    "@instructure/ui-test-utils": "8.54.0",
+    "@instructure/ui-themes": "8.54.0"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
