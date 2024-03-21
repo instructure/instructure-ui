@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
+
+
+### Bug Fixes
+
+* **ui-scripts:** add pr identifier to version as well, not just tag ([8c19dbe](https://github.com/instructure/instructure-ui/commit/8c19dbeeff7217951342bb853715a42947972893))
+
+
+
+
+
 ## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
 **Note:** Version bump only for package @instructure/ui-scripts

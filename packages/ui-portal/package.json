@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-portal",
-  "version": "8.53.2",
+  "version": "8.54.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -23,16 +23,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.53.2",
-    "@instructure/ui-test-utils": "8.53.2"
+    "@instructure/ui-babel-preset": "8.54.0",
+    "@instructure/ui-test-utils": "8.54.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",
-    "@instructure/shared-types": "8.53.2",
-    "@instructure/ui-dom-utils": "8.53.2",
-    "@instructure/ui-i18n": "8.53.2",
-    "@instructure/ui-prop-types": "8.53.2",
-    "@instructure/ui-react-utils": "8.53.2",
+    "@instructure/shared-types": "8.54.0",
+    "@instructure/ui-dom-utils": "8.54.0",
+    "@instructure/ui-i18n": "8.54.0",
+    "@instructure/ui-prop-types": "8.54.0",
+    "@instructure/ui-react-utils": "8.54.0",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {

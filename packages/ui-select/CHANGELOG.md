@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
+
+
+### Features
+
+* **ui-select:** expose prop to control auto-scrolling in select component ([7cd4c22](https://github.com/instructure/instructure-ui/commit/7cd4c22c83bff1a55481e359199865b176dd26df))
+
+
+
+
+
 ## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
 **Note:** Version bump only for package @instructure/ui-select
