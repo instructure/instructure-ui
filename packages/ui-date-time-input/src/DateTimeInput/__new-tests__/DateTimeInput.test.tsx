@@ -203,61 +203,6 @@ describe('<DateTimeInput />', () => {
     })
   })
 
-  // it('should fire the onChange event when DateInput value changes', async () => {
-  //   const onChange = jest.fn()
-
-  //   render(
-  //     <DateTimeInput
-  //       description="date_time"
-  //       dateRenderLabel="date-input"
-  //       prevMonthLabel="Previous month"
-  //       nextMonthLabel="Next month"
-  //       timeRenderLabel="time-input"
-  //       invalidDateTimeMessage="whoops"
-  //       locale="en-US"
-  //       timezone="US/Eastern"
-  //       onChange={onChange}
-  //     />
-  //   )
-  //   const dateInput = screen.getByLabelText('date-input')
-
-  //   await userEvent.type(dateInput, 'May 1, 2017{enter}')
-  //   fireEvent.blur(dateInput)
-
-  //   await waitFor(() => {
-  //     expect(onChange).toHaveBeenCalled()
-  //     expect(onChange.mock.calls[0][1]).toEqual(
-  //       expect.stringContaining('2017-05-01')
-  //     )
-  //   })
-  // })
-
-  // it('should not fire the onDateChange event when DateInput value change is not a date change', async () => {
-  //   const onChange = jest.fn()
-
-  //   render(
-  //     <DateTimeInput
-  //       description="date_time"
-  //       dateRenderLabel="date-input"
-  //       prevMonthLabel="Previous month"
-  //       nextMonthLabel="Next month"
-  //       timeRenderLabel="time-input"
-  //       invalidDateTimeMessage="whoops"
-  //       locale="en-US"
-  //       timezone="US/Eastern"
-  //       onChange={onChange}
-  //     />
-  //   )
-  //   const dateInput = screen.getByLabelText('date-input')
-
-  //   await userEvent.type(dateInput, 'Not a date{enter}')
-  //   fireEvent.blur(dateInput)
-
-  //   await waitFor(() => {
-  //     expect(onChange).not.toHaveBeenCalled()
-  //   })
-  // })
-
   it('should fire the onChange event when TimeInput value changes', async () => {
     const onChange = jest.fn()
 
@@ -697,81 +642,6 @@ describe('<DateTimeInput />', () => {
     })
   })
 
-  // it('should show an error message when setting a disabled date array', async () => {
-  //   const locale = 'en-US'
-  //   const timezone = 'US/Eastern'
-  //   const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
-  //   const errorMsg = 'Disabled date selected!'
-
-  //   const { container } = render(
-  //     <DateTimeInput
-  //       description="date_time"
-  //       prevMonthLabel="Previous month"
-  //       nextMonthLabel="Next month"
-  //       dateRenderLabel="date-input"
-  //       timeRenderLabel="time-input"
-  //       invalidDateTimeMessage="whoops"
-  //       locale={locale}
-  //       timezone={timezone}
-  //       defaultValue={dateTime.toISOString()}
-  //       disabledDates={[dateTime.toISOString()]}
-  //       disabledDateTimeMessage={errorMsg}
-  //     />
-  //   )
-  //   const dateInput = screen.getByLabelText('date-input')
-
-  //   expect(dateInput).toHaveValue(dateTime.format('LL'))
-  //   expect(container).toHaveTextContent(errorMsg)
-
-  //   await userEvent.clear(dateInput)
-  //   await userEvent.type(dateInput, '05/18/2017')
-  //   await userEvent.type(dateInput, '{enter}')
-
-  //   await waitFor(() => {
-  //     expect(container).not.toHaveTextContent(errorMsg)
-  //   })
-  // })
-
-  // it('should show an error message when setting a disabled date function', async () => {
-  //   const locale = 'en-US'
-  //   const timezone = 'US/Eastern'
-  //   const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
-  //   const errorMsgText = 'Disabled date selected!'
-  //   const errorMsg = (_rawDate?: string) => errorMsgText
-  //   const checker = (toCheck: string) => {
-  //     return toCheck.includes('2017')
-  //   }
-
-  //   const { container } = render(
-  //     <DateTimeInput
-  //       description="date_time"
-  //       prevMonthLabel="Previous month"
-  //       nextMonthLabel="Next month"
-  //       dateRenderLabel="date-input"
-  //       timeRenderLabel="time-input"
-  //       invalidDateTimeMessage="whoops"
-  //       locale={locale}
-  //       timezone={timezone}
-  //       defaultValue={dateTime.toISOString()}
-  //       disabledDates={checker}
-  //       disabledDateTimeMessage={errorMsg}
-  //     />
-  //   )
-
-  //   const dateInput = screen.getByLabelText('date-input')
-
-  //   expect(dateInput).toHaveValue(dateTime.format('LL'))
-  //   expect(container).toHaveTextContent(errorMsgText)
-
-  //   await userEvent.clear(dateInput)
-  //   await userEvent.type(dateInput, 'May 18, 2022')
-  //   await userEvent.type(dateInput, '{enter}')
-
-  //   await waitFor(() => {
-  //     expect(container).not.toHaveTextContent(errorMsgText)
-  //   })
-  // })
-
   it('should update Date and Time inputs when value prop changes', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'
@@ -805,130 +675,41 @@ describe('<DateTimeInput />', () => {
     })
   })
 
-  // it('should clear TimeSelect when DateInput is cleared', async () => {
-  //   const locale = 'en-US'
-  //   const timezone = 'US/Eastern'
-  //   const dateTime = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
-  //   const props = {
-  //     description: 'date_time',
-  //     dateRenderLabel: 'date-input',
-  //     prevMonthLabel: 'Previous month',
-  //     nextMonthLabel: 'Next month',
-  //     timeRenderLabel: 'time-input',
-  //     invalidDateTimeMessage: 'whoops',
-  //     locale,
-  //     timezone
-  //   }
-  //   const { container, rerender } = render(
-  //     <DateTimeInput {...props} value={dateTime.toISOString()} />
-  //   )
-  //   expect(container).toHaveTextContent('May 1, 2017 1:30 PM')
+  it("should throw warning if initialTimeForNewDate prop's value is not HH:MM", async () => {
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+    const initialTimeForNewDate = 'WRONG_FORMAT'
 
-  //   // 1. clear programmatically
-  //   rerender(<DateTimeInput {...props} value={undefined} />)
-  //   const dateInputAfterClear = screen.getByLabelText('date-input')
-  //   const timeInputAfterClear = screen.getByLabelText('time-input')
+    render(
+      <DateTimeInput
+        description="date_time"
+        dateRenderLabel="date-input"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        timeRenderLabel="time-input"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        initialTimeForNewDate={initialTimeForNewDate}
+      />
+    )
+    expect(consoleErrorMock.mock.calls[0][2]).toEqual(
+      expect.stringContaining(
+        `Invalid prop \`initialTimeForNewDate\` \`${initialTimeForNewDate}\` supplied to \`DateTimeInput\`, expected a HH:MM formatted string.`
+      )
+    )
 
-  //   fireEvent.blur(dateInputAfterClear)
+    const dateInput = screen.getByLabelText('date-input')
 
-  //   await waitFor(() => {
-  //     expect(container).not.toHaveTextContent('May 1, 2017 1:30 PM')
-  //     expect(dateInputAfterClear).toHaveValue('')
-  //     expect(timeInputAfterClear).toHaveValue('')
-  //   })
+    await userEvent.type(dateInput, 'May 1, 2017')
+    await userEvent.type(dateInput, '{enter}')
 
-  //   // 2. clear via keyboard input
-  //   const newDateStr = '2022-03-29T19:00Z'
-  //   rerender(<DateTimeInput {...props} value={newDateStr} />)
-  //   const dateInputAfterUpdate = screen.getByLabelText('date-input')
-  //   const timeInputAfterUpdate = screen.getByLabelText('time-input')
-
-  //   fireEvent.blur(dateInputAfterUpdate)
-
-  //   await waitFor(() => {
-  //     expect(container).toHaveTextContent('March 29, 2022 3:00 PM')
-  //     expect(dateInputAfterUpdate).toHaveValue('March 29, 2022')
-  //     expect(timeInputAfterUpdate).toHaveValue('3:00 PM')
-  //   })
-
-  //   await userEvent.clear(dateInputAfterUpdate)
-  //   await userEvent.type(dateInputAfterUpdate, '{esc}')
-
-  //   await waitFor(() => {
-  //     expect(container).not.toHaveTextContent('March 29, 2022 3:00 PM')
-  //     expect(container).not.toHaveTextContent('whoops')
-  //     expect(dateInputAfterUpdate).toHaveValue('')
-  //     expect(timeInputAfterUpdate).toHaveValue('')
-  //   })
-  // })
-
-  // it('should allow the user to enter any time value if allowNonStepInput is true', async () => {
-  //   const onChange = jest.fn()
-
-  //   render(
-  //     <DateTimeInput
-  //       description="date_time"
-  //       dateRenderLabel="date-input"
-  //       prevMonthLabel="Previous month"
-  //       nextMonthLabel="Next month"
-  //       timeRenderLabel="time-input"
-  //       invalidDateTimeMessage="whoops"
-  //       locale="en-US"
-  //       timezone="US/Eastern"
-  //       onChange={onChange}
-  //       allowNonStepInput={true}
-  //     />
-  //   )
-  //   const dateInput = screen.getByLabelText('date-input')
-  //   const timeInput = screen.getByLabelText('time-input')
-
-  //   await userEvent.type(timeInput, '7:34 PM')
-  //   await userEvent.type(dateInput, 'May 1, 2017')
-  //   await userEvent.type(dateInput, '{enter}')
-
-  //   await waitFor(() => {
-  //     expect(onChange).toHaveBeenCalled()
-  //     expect(onChange.mock.calls[0][1]).toEqual(
-  //       expect.stringContaining('2017-05-01T23:34:00.000Z')
-  //     )
-  //   })
-  // })
-
-  // it("should throw warning if initialTimeForNewDate prop's value is not HH:MM", async () => {
-  //   const locale = 'en-US'
-  //   const timezone = 'US/Eastern'
-  //   const initialTimeForNewDate = 'WRONG_FORMAT'
-
-  //   render(
-  //     <DateTimeInput
-  //       description="date_time"
-  //       dateRenderLabel="date-input"
-  //       prevMonthLabel="Previous month"
-  //       nextMonthLabel="Next month"
-  //       timeRenderLabel="time-input"
-  //       invalidDateTimeMessage="whoops"
-  //       locale={locale}
-  //       timezone={timezone}
-  //       initialTimeForNewDate={initialTimeForNewDate}
-  //     />
-  //   )
-  //   expect(consoleErrorMock.mock.calls[0][2]).toEqual(
-  //     expect.stringContaining(
-  //       `Invalid prop \`initialTimeForNewDate\` \`${initialTimeForNewDate}\` supplied to \`DateTimeInput\`, expected a HH:MM formatted string.`
-  //     )
-  //   )
-
-  //   const dateInput = screen.getByLabelText('date-input')
-
-  //   await userEvent.type(dateInput, 'May 1, 2017')
-  //   await userEvent.type(dateInput, '{enter}')
-
-  //   await waitFor(() => {
-  //     expect(consoleErrorMock.mock.calls[1][0]).toBe(
-  //       `Warning: [DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
-  //     )
-  //   })
-  // })
+    await waitFor(() => {
+      expect(consoleErrorMock.mock.calls[1][0]).toBe(
+        `Warning: [DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
+      )
+    })
+  })
 
   // it('should throw warning if initialTimeForNewDate prop hour and minute values are not in interval', async () => {
   //   const locale = 'en-US'
