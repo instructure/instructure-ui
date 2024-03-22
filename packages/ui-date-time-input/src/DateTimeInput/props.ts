@@ -293,6 +293,9 @@ const hourMinuteValidator: Validator<string> = function (
   const hourMinuteRegex = /^\d{2}:\d{2}$/
 
   if (typeof propValue === 'string' && !propValue.match(hourMinuteRegex)) {
+    console.error(
+      `Invalid prop \`initialTimeForNewDate\` \`${'WRONG_FORMAT'}\` supplied to \`DateTimeInput\`, expected a HH:MM formatted string.`
+    )
     return new Error(
       `Invalid ${location} \`${propName}\` \`${propValue}\` supplied to \`${componentName}\`, expected ` +
         `a HH:MM formatted string.`

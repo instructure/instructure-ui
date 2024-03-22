@@ -90,7 +90,7 @@ describe('<DateTimeInput />', () => {
     await userEvent.type(dateInput, '{enter}')
 
     await waitFor(() => {
-      expect(consoleErrorMock.mock.calls[1][0]).toBe(
+      expect(consoleErrorMock.mock.calls[2][0]).toBe(
         `Warning: [DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
       )
     })
