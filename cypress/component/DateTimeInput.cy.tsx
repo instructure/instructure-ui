@@ -285,36 +285,39 @@ describe('<DateInput/>', () => {
     cy.get('@timeInput').should('have.value', '5:05 AM')
   })
 
-  // it("should throw warning if initialTimeForNewDate prop's value is not HH:MM", () => {
-  //   cy.window().then((win) => {
-  //     cy.spy(win.console, 'error').as('consoleError')
-  //   })
+  it("should throw warning if initialTimeForNewDate prop's value is not HH:MM", () => {
+    cy.window().then((win) => {
+      cy.spy(win.console, 'error').as('consoleError')
+    })
 
-  //   const locale = 'en-US'
-  //   const timezone = 'US/Eastern'
-  //   const initialTimeForNewDate = 'WRONG_FORMAT'
+    const locale = 'en-US'
+    const timezone = 'US/Eastern'
+    const initialTimeForNewDate = 'WRONG_FORMAT'
 
-  //   cy.mount(
-  //     <DateTimeInput
-  //       description="date_time"
-  //       dateRenderLabel="date-input"
-  //       prevMonthLabel="Previous month"
-  //       nextMonthLabel="Next month"
-  //       timeRenderLabel="time-input"
-  //       invalidDateTimeMessage="whoops"
-  //       locale={locale}
-  //       timezone={timezone}
-  //       initialTimeForNewDate={initialTimeForNewDate}
-  //     />
-  //   )
-  //   cy.get('input[id^="Selectable_"]').as('dateInput')
-  //   cy.get('@consoleError').should('have.been.calledWithMatch', `Invalid prop \`initialTimeForNewDate\` \`${initialTimeForNewDate}\` supplied to \`DateTimeInput\`, expected a HH:MM formatted string.`)
+    cy.mount(
+      <DateTimeInput
+        description="date_time"
+        dateRenderLabel="date-input"
+        prevMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        timeRenderLabel="time-input"
+        invalidDateTimeMessage="whoops"
+        locale={locale}
+        timezone={timezone}
+        initialTimeForNewDate={initialTimeForNewDate}
+      />
+    )
+    cy.get('input[id^="Selectable_"]').as('dateInput')
+    //cy.get('@consoleError').should('have.been.calledWithMatch', `Invalid prop \`initialTimeForNewDate\` \`${initialTimeForNewDate}\` supplied to \`DateTimeInput\`, expected a HH:MM formatted string.`)
 
-  //   cy.get('@dateInput').type('May 1, 2017{enter}')
-  //   cy.get('@consoleError').should('have.been.calledWithMatch', `Warning: [DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`)
-  // })
+    cy.get('@dateInput').type('May 1, 2017{enter}')
+    cy.get('@consoleError').should(
+      'have.been.calledWithMatch',
+      `Warning: [DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
+    )
+  })
 
-  xit('should throw warning if initialTimeForNewDate prop hour and minute values are not in interval', () => {
+  it('should throw warning if initialTimeForNewDate prop hour and minute values are not in interval', () => {
     cy.window().then((win) => {
       cy.spy(win.console, 'error').as('consoleError')
     })
