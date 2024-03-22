@@ -59,6 +59,7 @@ class Item extends Component<OptionsItemProps> {
     as: 'span',
     variant: 'default',
     role: 'listitem',
+    voiceoverRoleBugWorkaround: false,
     beforeLabelContentVAlign: 'center',
     afterLabelContentVAlign: 'center'
   } as const
@@ -118,7 +119,8 @@ class Item extends Component<OptionsItemProps> {
       renderBeforeLabel,
       renderAfterLabel,
       elementRef,
-      children
+      children,
+      voiceoverRoleBugWorkaround
     } = this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
@@ -129,10 +131,13 @@ class Item extends Component<OptionsItemProps> {
 
     const childrenContent = callRenderProp(children)
     const descriptionContent = callRenderProp(description)
+    const ariaDescribedBy =
+      this.props['aria-describedby'] ||
+      (descriptionContent ? this._descriptionId : undefined)
 
     return (
       <ElementType
-        role="none"
+        role={voiceoverRoleBugWorkaround ? role : 'none'}
         css={styles?.item}
         ref={(element: Element | null) => {
           this.ref = element
@@ -141,15 +146,17 @@ class Item extends Component<OptionsItemProps> {
             elementRef(element)
           }
         }}
+        aria-describedby={
+          voiceoverRoleBugWorkaround ? ariaDescribedBy : undefined
+        }
       >
         <InnerElementType
           {...passthroughProps}
           css={styles?.container}
-          role={href ? undefined : role}
+          role={href || voiceoverRoleBugWorkaround ? undefined : role}
           href={href}
           aria-describedby={
-            this.props['aria-describedby'] ||
-            (descriptionContent ? this._descriptionId : undefined)
+            voiceoverRoleBugWorkaround ? undefined : ariaDescribedBy
           }
         >
           {childrenContent}

@@ -40,12 +40,7 @@ import {
   IconSearchLine
 } from '@instructure/ui-icons'
 
-let reactdom: any
-try {
-  reactdom = require('react-dom/client')
-} catch {
-  reactdom = require('react-dom')
-}
+import ReactDOM from 'react-dom'
 
 export type SearchConfig = {
   placeholder: string
@@ -103,7 +98,10 @@ function SearchPanel({
 
   return (
     <TextInput
-      inputRef={(r) => r?.focus()}
+      renderLabel=""
+      inputRef={(r) => {
+        setTimeout(() => r?.focus(), 0)
+      }}
       size="small"
       display="inline-block"
       width="20rem"
@@ -144,11 +142,21 @@ export default function customSearch(searchConfig: SearchConfig | undefined) {
         createPanel: (view) => {
           const dom = document.createElement('div')
           dom.style.padding = '8px'
-          if ('createRoot' in reactdom) {
-            const root = reactdom.createRoot(dom)
-            root.render(<SearchPanel view={view} searchConfig={searchConfig} />)
+          const reactVersionMajor = Number(React.version.split('.')[0])
+          if (reactVersionMajor >= 18) {
+            // webpack tries to evaluate imports compile time which would lead to an error on older react versions
+            import(/* webpackIgnore: true */ 'react-dom/client')
+              .then((r) => {
+                const root = r.createRoot(dom)
+                root.render(
+                  <SearchPanel view={view} searchConfig={searchConfig} />
+                )
+              })
+              .catch((e) => {
+                console.error(e)
+              })
           } else {
-            reactdom.render(
+            ReactDOM.render(
               <SearchPanel view={view} searchConfig={searchConfig} />,
               dom
             )

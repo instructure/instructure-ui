@@ -3,21 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
+
+### Features
+
+- **ui-date-time-input:** make resetting programatically possible ([a474dab](https://github.com/instructure/instructure-ui/commit/a474daba920a16b6704f89e3c825902902ed1c0b))
+
 ## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
 
-
-
-
-
 ## [8.53.1](https://github.com/instructure/instructure-ui/compare/v8.53.0...v8.53.1) (2024-02-09)
 
 **Note:** Version bump only for package @instructure/ui-date-time-input
-
-
-
-
 
 # [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 

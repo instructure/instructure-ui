@@ -247,6 +247,13 @@ type DateTimeInputProps = {
    * An error is thrown if the time format is not HH:MM.
    */
   initialTimeForNewDate?: string
+  /**
+   * Used for getting the internal reset function of DateTimeInput. If that
+   * function is called, the component will reset to its default inner state.
+   * The callback function will be called in componentDidMount
+   * NOTE: this won't call onChange, so you have to reset the value manually when calling reset
+   */
+  reset?: (reset: () => void) => void
 }
 
 type DateTimeInputState = {
@@ -339,6 +346,7 @@ const propTypes: PropValidators<PropKeys> = {
     PropTypes.func
   ]),
   allowNonStepInput: PropTypes.bool,
+  reset: PropTypes.func,
   initialTimeForNewDate: hourMinuteValidator
 }
 
@@ -373,7 +381,8 @@ const allowedProps: AllowedPropKeys = [
   'onBlur',
   'disabledDates',
   'disabledDateTimeMessage',
-  'allowNonStepInput'
+  'allowNonStepInput',
+  'reset'
 ]
 
 export type { DateTimeInputProps, DateTimeInputState }

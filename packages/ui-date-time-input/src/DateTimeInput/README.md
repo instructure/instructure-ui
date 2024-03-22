@@ -219,3 +219,69 @@ class Example extends React.Component {
 
 render(<Example />)
 ```
+
+#### Programatically reset `DateTimeInput`
+
+Due to `onChange` not being called on every typing event, and `value` isn't representing the inner value-state of the component, it's not possible to reset the `DateTimeInput` by setting the `value` to `undefined`. Instead, you can use the `reset` function that is passed to the `DateTimeInput` as a prop.
+
+- ```js
+  class Example extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        date: ''
+      }
+    }
+
+    resetFn = null
+
+    render() {
+      return (
+        <div>
+          <DateTimeInput
+            description="Pick a date and time"
+            datePlaceholder="Choose a date"
+            dateRenderLabel="Date"
+            timeRenderLabel="Time"
+            invalidDateTimeMessage="Invalid date!"
+            prevMonthLabel="Previous month"
+            nextMonthLabel="Next month"
+            value={this.state.date}
+            onChange={(e, newDate) => this.setState({ date: newDate })}
+            reset={(reset) => (this.resetFn = reset)}
+          />
+          <Button onClick={() => this.resetFn()}>Clear</Button>
+          <p>{this.state.date}</p>
+        </div>
+      )
+    }
+  }
+  render(<Example />)
+  ```
+
+- ```js
+  const Example = () => {
+    const [date, setDate] = useState('')
+    const resetFn = useRef()
+
+    return (
+      <div>
+        <DateTimeInput
+          description="Pick a date and time"
+          datePlaceholder="Choose a date"
+          dateRenderLabel="Date"
+          timeRenderLabel="Time"
+          invalidDateTimeMessage="Invalid date!"
+          prevMonthLabel="Previous month"
+          nextMonthLabel="Next month"
+          value={date}
+          onChange={(e, newDate) => setDate(newDate)}
+          reset={(reset) => (resetFn.current = reset)}
+        />
+        <Button onClick={() => resetFn.current()}>Clear</Button>
+        <p>{date}</p>
+      </div>
+    )
+  }
+  render(<Example />)
+  ```

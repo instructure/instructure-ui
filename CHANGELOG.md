@@ -3,27 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
-
+# [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
 ### Bug Fixes
 
-* **ui-source-code-editor:** make search panel react version agnostic ([f917e20](https://github.com/instructure/instructure-ui/commit/f917e20c588d93a30e0681a5c0b1a42e262f7d3e))
+- **ui-options:** add prop for workaround when VoiceOver doesn't announce the role of the highlighted item ([35ba0b3](https://github.com/instructure/instructure-ui/commit/35ba0b30d4e5589a36ca47bab1c3009251e3cb51))
+- **ui-source-code-editor:** make search panel work with older react versions ([76cdaac](https://github.com/instructure/instructure-ui/commit/76cdaac296d8bdcbcf337ef1d95eb8d2e538b993))
 
+### Features
 
+- **ui-date-time-input:** make resetting programatically possible ([a474dab](https://github.com/instructure/instructure-ui/commit/a474daba920a16b6704f89e3c825902902ed1c0b))
+- **ui-select:** expose prop to control auto-scrolling in select component ([7cd4c22](https://github.com/instructure/instructure-ui/commit/7cd4c22c83bff1a55481e359199865b176dd26df))
 
+## [8.53.2](https://github.com/instructure/instructure-ui/compare/v8.53.1...v8.53.2) (2024-02-15)
 
+### Bug Fixes
+
+- **ui-source-code-editor:** make search panel react version agnostic ([f917e20](https://github.com/instructure/instructure-ui/commit/f917e20c588d93a30e0681a5c0b1a42e262f7d3e))
 
 ## [8.53.1](https://github.com/instructure/instructure-ui/compare/v8.53.0...v8.53.1) (2024-02-09)
 
-
 ### Bug Fixes
 
-* **ui-source-code-editor:** use dependencies instead of devDependencies ([2cfbb4f](https://github.com/instructure/instructure-ui/commit/2cfbb4f5e4ab6f9aeffadd5657cb94965050d618))
-
-
-
-
+- **ui-source-code-editor:** use dependencies instead of devDependencies ([2cfbb4f](https://github.com/instructure/instructure-ui/commit/2cfbb4f5e4ab6f9aeffadd5657cb94965050d618))
 
 # [8.53.0](https://github.com/instructure/instructure-ui/compare/v8.52.0...v8.53.0) (2024-02-08)
 
