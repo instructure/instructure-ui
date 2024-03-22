@@ -139,11 +139,17 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
           const hour = Number(this.props.initialTimeForNewDate.slice(0, 2))
           const minute = Number(this.props.initialTimeForNewDate.slice(3, 5))
           if (isNaN(hour) || isNaN(minute)) {
+            console.error(
+              `[DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
+            )
             error(
               false,
               `[DateTimeInput] initialTimeForNewDate prop is not in the correct format. Please use HH:MM format.`
             )
           } else if (hour < 0 || hour > 23 || minute > 59 || minute < 0) {
+            console.error(
+              `[DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.`
+            )
             error(
               false,
               `[DateTimeInput] 0 <= hour < 24 and 0 <= minute < 60 for initialTimeForNewDate prop.`
