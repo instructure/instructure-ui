@@ -24,7 +24,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { View, InstUISettingsProvider, canvas } from '@instructure/ui'
-//@ts-expect-error any
 import * as Components from './components'
 
 const App = () => {

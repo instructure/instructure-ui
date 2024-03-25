@@ -6,6 +6,8 @@
   "scripts": {
     "build:webpack4": "webpack",
     "build:esbuild": "node esbuild.cjs",
+    "build:next": "next build ./src",
+    "start:next": "next dev ./src ",
     "serve": "serve public -n",
     "test": "testcafe chrome ./src/test.ts",
     "test:headless": "testcafe chrome:headless ./src/test.ts"
@@ -33,6 +35,8 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
+    "@instructure/ui": "8.53.2",
+    "next": "^13.2.4",
     "react": "^18",
     "react-dom": "^18"
   }
