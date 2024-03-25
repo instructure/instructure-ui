@@ -117,11 +117,6 @@ type CommonTopNavBarLayoutProps = {
 
 type TopNavBarLayoutOwnProps = CommonTopNavBarLayoutProps & {
   /**
-   * Config object for the "desktop" mode:
-   */
-  desktopConfig?: DesktopLayoutOwnProps
-
-  /**
    * Config object for the "small viewport" mode:
    */
   smallViewportConfig: SmallViewportLayoutOwnProps
@@ -175,9 +170,9 @@ const smallViewportPropTypes: PropValidators<SmallViewportPropKeys> = {
   onDropdownMenuSelect: PropTypes.func
 }
 
-const propTypes: PropValidators<PropKeys> = {
+const propTypes: PropValidators<PropKeys & { desktopConfig: any }> = {
   ...commonPropTypes,
-  desktopConfig: PropTypes.shape(desktopPropTypes),
+  desktopConfig: PropTypes.any, // TODO: Only here for warning. Remove in v10!
   smallViewportConfig: PropTypes.shape(smallViewportPropTypes).isRequired
 }
 
@@ -206,7 +201,6 @@ const smallViewportAllowedProps: SmallViewportAllowedPropKeys = [
 
 const allowedProps: AllowedPropKeys = [
   ...commonAllowedProps,
-  'desktopConfig',
   'smallViewportConfig'
 ]
 

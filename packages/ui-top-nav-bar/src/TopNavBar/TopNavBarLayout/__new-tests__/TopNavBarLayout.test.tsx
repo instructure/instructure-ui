@@ -89,31 +89,6 @@ describe('<TopNavBarLayout />', () => {
       expect(smallViewportLayout).toBeUndefined()
     })
 
-    it('should pass the "desktopConfig" props to DesktopLayout', () => {
-      render(
-        <SmallViewportModeWrapper layout="desktop">
-          <TopNavBarLayout
-            {...getLayoutProps({
-              currentLayout: 'desktop',
-              inverseColor: false
-            })}
-            desktopConfig={{ hideActionsUserSeparator: false }}
-          />
-        </SmallViewportModeWrapper>
-      )
-
-      const navElement = screen.getByRole('navigation')
-      const userContainer = Array.from(navElement.children).find((child) =>
-        child.className.includes('topNavBarDesktopLayout__userContainer')
-      )
-      const userContainerStyle = userContainer
-        ? window.getComputedStyle(userContainer)
-        : null
-
-      // userContainer get position relative and a pseudo ::before as a separator
-      expect(userContainerStyle?.position).toBe('relative')
-    })
-
     it('should pass the proper "themeOverride"-s to DesktopLayout', () => {
       render(
         <SmallViewportModeWrapper layout="desktop">
