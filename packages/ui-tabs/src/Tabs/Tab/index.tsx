@@ -37,12 +37,6 @@ import generateComponentTheme from './theme'
 import type { TabsTabProps } from './props'
 import { allowedProps, propTypes } from './props'
 
-/**
----
-parent: Tabs
-id: Tabs.Tab
----
-**/
 @withStyle(generateStyle, generateComponentTheme)
 class Tab extends Component<TabsTabProps> {
   static readonly componentId = 'Tabs.Tab'

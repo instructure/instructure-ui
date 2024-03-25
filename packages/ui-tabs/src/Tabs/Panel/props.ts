@@ -50,7 +50,11 @@ type TabsPanelOwnProps = {
   isDisabled?: boolean
   maxHeight?: string | number
   minHeight?: string | number
-  id?: string
+  /**
+   * If not supplied, it will make the tab panels
+   * re-render on any prop change
+   */
+  id: string
   labelledBy?: string
   padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
@@ -83,7 +87,7 @@ const propTypes: PropValidators<PropKeys> = {
   isDisabled: PropTypes.bool,
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   labelledBy: PropTypes.string,
   padding: ThemeablePropTypes.spacing,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
