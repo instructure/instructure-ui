@@ -39,11 +39,24 @@ const TabExample = (props: { onIndexChange: (arg: number) => void }) => {
       variant="default"
       margin="medium"
     >
-      <Tabs.Panel renderTitle="First Tab" id="first" isSelected={selectedIndex === 0} active>
+      <Tabs.Panel
+        renderTitle="First Tab"
+        id="first"
+        isSelected={selectedIndex === 0}
+        active
+      >
         <p>CONTENT</p>
       </Tabs.Panel>
-      <Tabs.Panel renderTitle="Second Tab" id="second" isSelected={selectedIndex === 1} />
-      <Tabs.Panel renderTitle="Third Tab" id="third" isSelected={selectedIndex === 2} />
+      <Tabs.Panel
+        renderTitle="Second Tab"
+        id="second"
+        isSelected={selectedIndex === 1}
+      />
+      <Tabs.Panel
+        renderTitle="Third Tab"
+        id="third"
+        isSelected={selectedIndex === 2}
+      />
     </Tabs>
   )
 }
@@ -52,9 +65,13 @@ describe('<Tabs />', () => {
   it('should render the correct number of panels', () => {
     const { container } = render(
       <Tabs>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -66,13 +83,15 @@ describe('<Tabs />', () => {
   it('should render same content for other tabs as for the active one', () => {
     const { container } = render(
       <Tabs>
-        <Tabs.Panel renderTitle="First Tab" active>
+        <Tabs.Panel id="Tab1" renderTitle="First Tab" active>
           CONTENT
         </Tabs.Panel>
         <Tabs.Panel id="secondTab" renderTitle="Second Tab" isSelected>
           Child
         </Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab">Child</Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Third Tab">
+          Child
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -107,13 +126,13 @@ describe('<Tabs />', () => {
     const consoleMock = jest.spyOn(console, 'error').mockImplementation()
     const { container } = render(
       <Tabs>
-        <Tabs.Panel renderTitle="First Tab" active>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab" active>
           Tab 1 content
         </Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab" active>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab" active>
           Tab 2 content
         </Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>

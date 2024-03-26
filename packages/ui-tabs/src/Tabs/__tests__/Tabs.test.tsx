@@ -35,9 +35,13 @@ describe('<Tabs />', async () => {
   it('should render the correct number of panels', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -52,9 +56,13 @@ describe('<Tabs />', async () => {
   it('should render with null children', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
         {null}
@@ -70,9 +78,13 @@ describe('<Tabs />', async () => {
   it('should render correct number of tabs', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -106,7 +118,7 @@ describe('<Tabs />', async () => {
           tabs = el
         }}
       >
-        <Tabs.Panel renderTitle="foo" key="foo" />
+        <Tabs.Panel id="Tab-1" renderTitle="foo" key="foo" />
       </Tabs>
     )
 
@@ -123,8 +135,8 @@ describe('<Tabs />', async () => {
 
     await subject.setProps({
       children: [
-        <Tabs.Panel renderTitle="foo" key="foo" />,
-        <Tabs.Panel renderTitle="bar" key="bar" />
+        <Tabs.Panel id="Tab-1" renderTitle="foo" key="foo" />,
+        <Tabs.Panel id="Tab-2" renderTitle="bar" key="bar" />
       ]
     })
 
@@ -134,9 +146,13 @@ describe('<Tabs />', async () => {
   it('should default to selecting the first tab', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -154,11 +170,13 @@ describe('<Tabs />', async () => {
   it('should honor the isSelected prop', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab" isSelected>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab" isSelected>
           Tab 2 content
         </Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -174,9 +192,13 @@ describe('<Tabs />', async () => {
   it('should not allow selecting a disabled tab', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled isSelected>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled isSelected>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -228,11 +250,13 @@ describe('<Tabs />', async () => {
   it('should focus the selected tab when shouldFocusOnRender is set', async () => {
     await mount(
       <Tabs shouldFocusOnRender>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab" isSelected>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab" isSelected>
           Tab 2 content
         </Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -251,9 +275,13 @@ describe('<Tabs />', async () => {
 
     await mount(
       <Tabs onRequestTabChange={onChange}>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -301,9 +329,13 @@ describe('<Tabs />', async () => {
     const onChange = stub()
     await mount(
       <Tabs onRequestTabChange={onChange}>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -324,9 +356,13 @@ describe('<Tabs />', async () => {
     const onChange = stub()
     await mount(
       <Tabs onRequestTabChange={onChange}>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -343,9 +379,13 @@ describe('<Tabs />', async () => {
   it('should meet a11y standards when set to the secondary variant', async () => {
     await mount(
       <Tabs variant="secondary">
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -358,9 +398,13 @@ describe('<Tabs />', async () => {
   it('should meet a11y standards when set to the default variant', async () => {
     await mount(
       <Tabs variant="default">
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -373,9 +417,13 @@ describe('<Tabs />', async () => {
   it('should link tabs with the corresponding panels via ids', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+        <Tabs.Panel id="Tab-1" renderTitle="First Tab">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-2" renderTitle="Second Tab">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel id="Tab-3" renderTitle="Third Tab" isDisabled>
           Tab 3 content
         </Tabs.Panel>
       </Tabs>
@@ -399,9 +447,13 @@ describe('<Tabs />', async () => {
     it('should still render the correct number of panels', async () => {
       await mount(
         <Tabs>
-          <Tabs.Panel renderTitle="A Tab">Contents of first tab.</Tabs.Panel>
-          <Tabs.Panel renderTitle="A Tab">Contents of second tab.</Tabs.Panel>
-          <Tabs.Panel renderTitle="A Tab" isDisabled>
+          <Tabs.Panel id="Tab-1" renderTitle="A Tab">
+            Contents of first tab.
+          </Tabs.Panel>
+          <Tabs.Panel id="Tab-2" renderTitle="A Tab">
+            Contents of second tab.
+          </Tabs.Panel>
+          <Tabs.Panel id="Tab-3" renderTitle="A Tab" isDisabled>
             Contents of third tab.
           </Tabs.Panel>
         </Tabs>
@@ -416,11 +468,13 @@ describe('<Tabs />', async () => {
     it('should still render the correct number of panels', async () => {
       await mount(
         <Tabs>
-          <Tabs.Panel renderTitle={<div />}>Contents of first tab.</Tabs.Panel>
-          <Tabs.Panel renderTitle={<span />}>
+          <Tabs.Panel id="Tab-1" renderTitle={<div />}>
+            Contents of first tab.
+          </Tabs.Panel>
+          <Tabs.Panel id="Tab-2" renderTitle={<span />}>
             Contents of second tab.
           </Tabs.Panel>
-          <Tabs.Panel renderTitle={<img alt="example" />} isDisabled>
+          <Tabs.Panel id="Tab-3" renderTitle={<img alt="example" />} isDisabled>
             Contents of third tab.
           </Tabs.Panel>
         </Tabs>
@@ -436,11 +490,21 @@ describe('<Tabs />', async () => {
       const Example = ({ width }: { width: string }) => (
         <div style={{ width }}>
           <Tabs tabOverflow="scroll">
-            <Tabs.Panel renderTitle="Tab1">Contents of panel</Tabs.Panel>
-            <Tabs.Panel renderTitle="Tab2">Contents of panel</Tabs.Panel>
-            <Tabs.Panel renderTitle="Tab3">Contents of panel</Tabs.Panel>
-            <Tabs.Panel renderTitle="Tab4">Contents of panel</Tabs.Panel>
-            <Tabs.Panel renderTitle="Tab5">Contents of panel</Tabs.Panel>
+            <Tabs.Panel id="Tab-1" renderTitle="Tab1">
+              Contents of panel
+            </Tabs.Panel>
+            <Tabs.Panel id="Tab-2" renderTitle="Tab2">
+              Contents of panel
+            </Tabs.Panel>
+            <Tabs.Panel id="Tab-3" renderTitle="Tab3">
+              Contents of panel
+            </Tabs.Panel>
+            <Tabs.Panel id="Tab-4" renderTitle="Tab4">
+              Contents of panel
+            </Tabs.Panel>
+            <Tabs.Panel id="Tab-5" renderTitle="Tab5">
+              Contents of panel
+            </Tabs.Panel>
           </Tabs>
         </div>
       )
