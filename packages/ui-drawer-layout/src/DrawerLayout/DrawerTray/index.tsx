@@ -126,12 +126,8 @@ class DrawerTray extends Component<
     ) as DrawerTrayPlacement
   }
 
-  get direction() {
-    return this.placement === 'end' ? 'right' : 'left'
-  }
-
   get transition(): TransitionType {
-    return `slide-${this.direction}`
+    return this.placement === 'end' ? 'fade' : 'slide-left'
   }
 
   handleContentRef = (node: HTMLDivElement | null) => {
