@@ -30,7 +30,7 @@ import { Panel } from '../index'
 describe('<Tabs.Panel />', async () => {
   it('should render children', async () => {
     await mount(
-      <Panel isSelected renderTitle="Panel Title">
+      <Panel id="Tab" isSelected renderTitle="Panel Title">
         Panel contents
       </Panel>
     )
@@ -41,7 +41,7 @@ describe('<Tabs.Panel />', async () => {
 
   it('should have appropriate role attribute', async () => {
     await mount(
-      <Panel isSelected renderTitle="Panel Title">
+      <Panel id="Tab" isSelected renderTitle="Panel Title">
         Panel contents
       </Panel>
     )

@@ -66,16 +66,16 @@ export default {
       margin: 'large',
       padding: 'small',
       children: [
-        <Tabs.Panel key="1" renderTitle="Tab A" isSelected>
+        <Tabs.Panel id="Tab-1" key="1" renderTitle="Tab A" isSelected>
           {contentLong}
         </Tabs.Panel>,
-        <Tabs.Panel key="2" renderTitle="Tab B" isDisabled>
+        <Tabs.Panel id="Tab-2" key="2" renderTitle="Tab B" isDisabled>
           {contentShort}
         </Tabs.Panel>,
-        <Tabs.Panel key="3" renderTitle="Tab C">
+        <Tabs.Panel id="Tab-3" key="3" renderTitle="Tab C">
           {contentShort}
         </Tabs.Panel>,
-        <Tabs.Panel key="4" renderTitle="Tab D">
+        <Tabs.Panel id="Tab-4" key="4" renderTitle="Tab D">
           {contentLong}
         </Tabs.Panel>
       ]
