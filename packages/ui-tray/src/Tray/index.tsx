@@ -219,9 +219,7 @@ class Tray extends Component<TrayProps> {
               label={label}
               defaultFocusElement={defaultFocusElement}
               open
-              shouldContainFocus={
-                !this.state.transitioning && shouldContainFocus
-              }
+              shouldContainFocus={shouldContainFocus}
               shouldReturnFocus={shouldReturnFocus}
               shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
               shouldCloseOnEscape
