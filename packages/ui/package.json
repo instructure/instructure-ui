@@ -102,7 +102,9 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.54.0",
     "@instructure/ui-test-utils": "8.54.0",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.2"
   },
   "publishConfig": {
     "access": "public"
