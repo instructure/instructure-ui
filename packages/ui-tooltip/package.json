@@ -32,7 +32,8 @@
     "@instructure/ui-react-utils": "10.0.0",
     "@instructure/ui-testable": "10.0.0",
     "@instructure/ui-utils": "10.0.0",
-    "prop-types": "^15.8.1"
+    "prop-types": "^15.8.1",
+    "react-children-utilities": "^2.10.0"
   },
   "devDependencies": {
     "@instructure/ui-axe-check": "10.0.0",
