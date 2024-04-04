@@ -32,7 +32,8 @@
     "@instructure/ui-react-utils": "8.54.0",
     "@instructure/ui-testable": "8.54.0",
     "@instructure/ui-utils": "8.54.0",
-    "prop-types": "^15.8.1"
+    "prop-types": "^15.8.1",
+    "react-children-utilities": "^2.10.0"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.54.0",

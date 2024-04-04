@@ -25,6 +25,8 @@
 /** @jsx jsx */
 import { Component, ReactNode } from 'react'
 
+import { onlyText } from 'react-children-utilities'
+
 import {
   getElementType,
   omitProps,
@@ -105,9 +107,10 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
   renderTrigger() {
     const { children, as } = this.props as TooltipProps
     const { hasFocus } = this.state
-
+    const toolTipRawText = onlyText(this.props.renderTip as any)
     const triggerProps = {
-      'aria-describedby': this._id
+      'aria-describedby': this._id,
+      'aria-label': toolTipRawText
     }
 
     if (as) {
