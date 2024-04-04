@@ -343,7 +343,7 @@ class Tabs extends Component<TabsProps, TabsState> {
 
     return createElement(Tab as ComponentClass<TabsTabProps>, {
       variant: this.props.variant,
-      key: `tab-${id}`,
+      key: `tab-${index}`,
       id: `tab-${id}`,
       controls: panel.props.id || `panel-${id}`,
       index,
@@ -356,7 +356,7 @@ class Tabs extends Component<TabsProps, TabsState> {
   }
 
   clonePanel(
-    _index: number,
+    index: number,
     generatedId: string,
     selected: boolean,
     panel: PanelChild,
@@ -381,7 +381,7 @@ class Tabs extends Component<TabsProps, TabsState> {
       // cloning active panel with a proper custom key as a workaround because
       // safeCloneElement overwrites it with the key from the original element
       activePanelClone = React.cloneElement(activePanel as ReactElement, {
-        key: panel.props.id || `panel-${id}`
+        key: `panel-${index}`
       })
 
       return safeCloneElement(activePanelClone, {
@@ -391,7 +391,7 @@ class Tabs extends Component<TabsProps, TabsState> {
       } as TabsPanelProps & { key: string }) as PanelChild
     } else {
       return safeCloneElement(panel, {
-        key: panel.props.id || `panel-${id}`,
+        key: `panel-${index}`,
         padding: panel.props.padding || this.props.padding,
         textAlign: panel.props.textAlign || this.props.textAlign,
         ...commonProps
@@ -464,10 +464,9 @@ class Tabs extends Component<TabsProps, TabsState> {
       .filter((child) => matchComponentTypes<PanelChild>(child, [Panel]))
       .findIndex((child) => child.props.isSelected && !child.props.isDisabled)
 
-    let index = 0
     const selectedIndex = selectedChildIndex >= 0 ? selectedChildIndex : 0
 
-    React.Children.forEach(children as PanelChild[], (child) => {
+    React.Children.forEach(children as PanelChild[], (child, index) => {
       if (matchComponentTypes<PanelChild>(child, [Panel])) {
         const selected =
           !child.props.isDisabled &&
@@ -482,8 +481,6 @@ class Tabs extends Component<TabsProps, TabsState> {
         } else {
           panels.push(this.clonePanel(index, id, selected, child))
         }
-
-        index++
       } else {
         panels.push(child)
       }
