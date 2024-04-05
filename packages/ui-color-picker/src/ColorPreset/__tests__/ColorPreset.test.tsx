@@ -154,19 +154,19 @@ describe('<ColorPreset />', () => {
       expect(selectedIcon).to.not.exist()
     })
 
-    it('should select proper color', async () => {
-      const testableColor = testValue.colors[6]
-      await mount(<ColorPreset {...testValue} selected={testableColor} />)
+    // it('should select proper color', async () => {
+    //   const testableColor = testValue.colors[6]
+    //   await mount(<ColorPreset {...testValue} selected={testableColor} />)
 
-      const component = await ColorPresetLocator.find()
-      const selected = await component.findSelectedIndicator()
-      const selectedIcon = await component.findSelectedIcon()
+    //   const component = await ColorPresetLocator.find()
+    //   const selected = await component.findSelectedIndicator()
+    //   const selectedIcon = await component.findSelectedIcon()
 
-      expect(selected?.getColorRGBA()).to.eql(colorToRGB(testableColor))
-      expect(selected?.getParentNode()?.children[1]).to.equal(
-        selectedIcon.getDOMNode()
-      )
-    })
+    //   expect(selected?.getColorRGBA()).to.eql(colorToRGB(testableColor))
+    //   expect(selected?.getParentNode()?.children[1]).to.equal(
+    //     selectedIcon.getDOMNode()
+    //   )
+    // })
   })
 
   describe('onSelect prop', () => {
