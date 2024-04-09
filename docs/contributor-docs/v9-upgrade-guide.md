@@ -14,16 +14,16 @@ We recommend upgrading your application for each major version gradually, e.g. i
 
 The tables below show what will be removed and what are they replaced with. We also marked if there are [codemods](#ui-codemods) available.
 
-#### CommonJS build has been removed in v9
+### CommonJS build has been removed in v9
 
 Since CommonJS style imports `require(..)` have been superseded by ES6 style imports `import … from …` and are well supported both in browsers and in node.js we decided to no longer include packages with CommonJS style imports in our releases.
 
 ### Deprecated Components
 
-| Component                 | Substitute / Notes                                                                                                                                             |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [CodeEditor](#CodeEditor) | CodeEditor will be deleted in v9. Use [SourceCodeEditor](#SourceCodeEditor) instead, which is the wrapper for the newer version of the CodeMirror code editor. |
-| [Navigation](#Navigation) | Navigation will be deleted in v9. It has been renamed to [SideNavBar](#SideNavBar).                                                                            |
+| Component                 | Substitute / Notes                                                                                                                                              |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [CodeEditor](#CodeEditor) | CodeEditor stays deprecated in v9. Use [SourceCodeEditor](#SourceCodeEditor) instead, which is the wrapper for the newer version of the CodeMirror code editor. |
+| [Navigation](#Navigation) | Navigation will be deleted in v9. It has been renamed to [SideNavBar](#SideNavBar).                                                                             |
 
 ### Deprecated Utilities
 
