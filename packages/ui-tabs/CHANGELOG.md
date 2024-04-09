@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
+
+
+### Bug Fixes
+
+* **ui-tabs:** fix automatic id generation ([4645981](https://github.com/instructure/instructure-ui/commit/464598168ff9a2fd76fe2e02a8bc7b89f9c1f68f))
+
+
+
+
+
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
 **Note:** Version bump only for package @instructure/ui-tabs

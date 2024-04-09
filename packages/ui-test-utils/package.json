@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-test-utils",
-  "version": "8.54.0",
+  "version": "8.55.0",
   "description": "A UI testing library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.54.0",
+    "@instructure/ui-babel-preset": "8.55.0",
     "@types/chai": "^4.3.8",
     "@types/chai-as-promised": "^7.1.6",
     "@types/chai-string": "^1.4.3",
@@ -31,9 +31,9 @@
     "prop-types": "^15.8.1"
   },
   "dependencies": {
-    "@instructure/ui-test-locator": "8.54.0",
-    "@instructure/ui-test-queries": "8.54.0",
-    "@instructure/ui-test-sandbox": "8.54.0",
+    "@instructure/ui-test-locator": "8.55.0",
+    "@instructure/ui-test-queries": "8.55.0",
+    "@instructure/ui-test-sandbox": "8.55.0",
     "@sheerun/mutationobserver-shim": "^0.3.3",
     "chai": "^4.3.10",
     "chai-as-promised": "^7.1.1",
