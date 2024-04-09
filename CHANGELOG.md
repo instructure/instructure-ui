@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
+
+
+### Bug Fixes
+
+* **ui-dialog:** menu closes when clicking on submenu ([7e7d1aa](https://github.com/instructure/instructure-ui/commit/7e7d1aae54f5649f0dd2b8c5974bb27f23a9956b))
+* **ui-drawer-layout:** fix drawerlayout transition bug ([27ae4f1](https://github.com/instructure/instructure-ui/commit/27ae4f1acda8dd127ff55f2acd44790d7558ebe2))
+* **ui-tabs:** fix automatic id generation ([4645981](https://github.com/instructure/instructure-ui/commit/464598168ff9a2fd76fe2e02a8bc7b89f9c1f68f))
+* **ui-tray:** make focus trapping work ([048b9b4](https://github.com/instructure/instructure-ui/commit/048b9b436f6c4d9f4a82b47496a7beea774e82a9))
+
+
+### Features
+
+* **ui-buttons:** add stronger css rules for focused links ([84f2306](https://github.com/instructure/instructure-ui/commit/84f23068c5c03bb4ac64e539ec15abee35c33467))
+
+
+
+
+
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
 ### Bug Fixes

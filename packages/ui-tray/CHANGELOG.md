@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
+
+
+### Bug Fixes
+
+* **ui-tray:** make focus trapping work ([048b9b4](https://github.com/instructure/instructure-ui/commit/048b9b436f6c4d9f4a82b47496a7beea774e82a9))
+
+
+
+
+
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
 **Note:** Version bump only for package @instructure/ui-tray
