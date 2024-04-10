@@ -5,7 +5,6 @@
   "author": "Instructure, Inc. Engineering and Product Design",
   "types": "./types",
   "module": "./es/index.js",
-  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
