@@ -4,7 +4,6 @@
   "description": "Styled HTML <progress /> elements for showing completion of a task",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
-  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",

@@ -4,7 +4,6 @@
   "description": "A utility component for show/hide functionality",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
-  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",

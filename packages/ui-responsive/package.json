@@ -4,7 +4,6 @@
   "description": "A component that allows for rendering a component differently based on either the element or the viewport size",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
-  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
