@@ -3,6 +3,7 @@
   "version": "8.54.0",
   "description": "A UI shared eslint config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"

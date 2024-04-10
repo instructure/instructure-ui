@@ -13,7 +13,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "license": "MIT",
   "scripts": {
-    "build": "ui-scripts build --modules es,cjs",
+    "build": "ui-scripts build --modules es",
     "build:watch": "ui-scripts build --watch"
   },
   "publishConfig": {

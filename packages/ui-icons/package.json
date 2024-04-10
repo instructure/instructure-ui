@@ -15,7 +15,7 @@
     "clean": "gulp clean && ui-scripts clean",
     "prepare-build": "npm run build-icons",
     "build-icons": "ui-scripts build-icons --svgoConfig svgo.config.js --config icons.config.js && gulp",
-    "build": "ui-scripts build __build__ --copy-files --modules es,cjs",
+    "build": "ui-scripts build __build__ --copy-files --modules es",
     "export": "npm run build-icons && npm run build:types",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"

@@ -26,7 +26,7 @@ To build (babel transpile) a package to be consumed as a library:
 
 `npm run ui-scripts build --modules es` writes es modules to the es/ directory.
 
-`npm run ui-scripts build --modules es,cjs` writes es modules to both directories.
+`npm run ui-scripts build --modules es` writes es modules to both directories.
 
 If not specified, `modules` defaults to `es`.
 
