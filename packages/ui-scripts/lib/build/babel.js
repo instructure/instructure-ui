@@ -28,8 +28,6 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const specifyCJSFormat = path.resolve(__dirname, 'specify-commonjs-format.js')
-
 export default {
   command: 'build',
   desc: 'Build the packages with Babel.js',
@@ -44,8 +42,8 @@ export default {
     })
     yargs.option('modules', {
       string: true,
-      desc: 'What kind of modules to build. "es": build into the /es folder using ESM; "cjs": build into the /lib folder using commonJS',
-      choices: ['es', 'cjs'],
+      desc: 'What kind of modules to build. "es": build into the /es folder using ESM',
+      choices: ['es'],
       default: 'es',
       coerce: (value) => value.split(',')
     })
@@ -90,20 +88,14 @@ export default {
       es: getCommand('babel', [...babelArgs, '--out-dir', 'es'], {
         ...envVars,
         ...{ ES_MODULES: '1' }
-      }),
-      cjs: [
-        getCommand('babel', [...babelArgs, '--out-dir', 'lib'], {
-          ...envVars,
-          ...{ TRANSFORM_IMPORTS: '1' }
-        }),
-        getCommand(specifyCJSFormat, [])
-      ]
+      })
     }
 
     const commandsToRun = argv.modules.reduce(
       (obj, key) => ({ ...obj, [key]: commands[key] }),
       {}
     )
+
     runCommandsConcurrently(commandsToRun)
   }
 }

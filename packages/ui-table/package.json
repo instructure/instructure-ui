@@ -15,7 +15,7 @@
     "lint": "ui-scripts lint",
     "lint:fix": "ui-scripts lint --fix",
     "clean": "ui-scripts clean",
-    "build": "ui-scripts build --modules es,cjs",
+    "build": "ui-scripts build --modules es",
     "build:watch": "npm run ts:check -- --watch & ui-scripts build --watch",
     "build:types": "tsc -p tsconfig.build.json",
     "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
