@@ -6,7 +6,6 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "license": "MIT",
   "module": "./es/index.js",
-  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
