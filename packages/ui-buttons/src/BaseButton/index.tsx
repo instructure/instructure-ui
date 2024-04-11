@@ -26,7 +26,6 @@
 import React, { Component } from 'react'
 import keycode from 'keycode'
 
-import { warn } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 import {
   getElementType,
@@ -87,14 +86,6 @@ class BaseButton extends Component<BaseButtonProps> {
     this.props.makeStyles?.(this.makeStylesVariables)
   }
 
-  get _rootElement() {
-    console.warn(
-      '_rootElement property is deprecated and will be removed in v9, please use ref instead'
-    )
-
-    return this.ref
-  }
-
   get makeStylesVariables(): BaseButtonStyleProps {
     return {
       isDisabled: this.isDisabled,
@@ -125,20 +116,6 @@ class BaseButton extends Component<BaseButtonProps> {
 
   get isEnabled() {
     return this.interaction === 'enabled'
-  }
-
-  // TODO: delete once the type of tabIndex is changed to number only
-  get tabIndex() {
-    const { tabIndex } = this.props
-
-    if (typeof tabIndex === 'string') {
-      warn(
-        false,
-        'The `string` value for `tabIndex` is deprecated. Only `number` type will be accepted from V9.0.0.'
-      )
-      return parseInt(tabIndex)
-    }
-    return tabIndex
   }
 
   get focusColor() {
@@ -280,8 +257,6 @@ class BaseButton extends Component<BaseButtonProps> {
 
     const { isDisabled, isEnabled, isReadOnly } = this
 
-    const tabIndexNumber = this.tabIndex
-
     return (
       <View
         {...passthroughProps(props)}
@@ -302,7 +277,7 @@ class BaseButton extends Component<BaseButtonProps> {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         role={onClick && as !== 'button' ? 'button' : undefined}
-        tabIndex={onClick && as ? tabIndexNumber || 0 : tabIndexNumber}
+        tabIndex={onClick && as ? tabIndex || 0 : tabIndex}
         disabled={isDisabled || isReadOnly}
         css={isEnabled ? styles?.baseButton : null}
       >

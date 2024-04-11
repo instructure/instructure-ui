@@ -58,10 +58,7 @@ const generateStyle = (
     success: { color: componentTheme.successColor },
     brand: { color: componentTheme.brandColor },
     danger: { color: componentTheme.dangerColor },
-    alert: { color: componentTheme.alertColor },
-
-    // deprecated, remove in v9
-    warning: { color: componentTheme.warningColor }
+    alert: { color: componentTheme.alertColor }
   }
 
   const wrapStyle = {
