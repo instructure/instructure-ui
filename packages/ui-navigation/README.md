@@ -4,8 +4,8 @@ category: packages
 
 ## ui-navigation
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 Main and application level navigational components.
@@ -14,33 +14,12 @@ Main and application level navigational components.
 
 The `ui-navigation` package contains the following:
 
-- [Navigation](#Navigation)
 - [AppNav](#AppNav)
 
 ### Installation
 
 ```sh
 npm install @instructure/ui-navigation
-```
-
-### Usage
-
-```js
-import React from 'react'
-import { Navigation } from '@instructure/ui-navigation'
-import { Avatar } from '@instructure/ui-avatar'
-
-const MyNavigation = () => {
-  return (
-    <Navigation label="My Navigation">
-      <Navigation.Item
-        icon={<Avatar name="Joel Andrews" size="x-small" />}
-        label="My Account"
-        href="http://example.com"
-      />
-    </Navigation>
-  )
-}
 ```
 
 For detailed usage and documentation, see individual component examples.
