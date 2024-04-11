@@ -62,7 +62,6 @@ The `ui` package contains the following:
 - Metric
 - MetricGroup
 - Modal
-- Navigation
 - NumberInput
 - Options
 - Overlay
