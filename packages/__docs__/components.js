@@ -91,7 +91,7 @@ export {
   CheckboxFacade,
   ToggleFacade
 } from '@instructure/ui-checkbox'
-export { Navigation, AppNav } from '@instructure/ui-navigation'
+export { AppNav } from '@instructure/ui-navigation'
 export { List, InlineList } from '@instructure/ui-list'
 export { Menu } from '@instructure/ui-menu'
 export { Options } from '@instructure/ui-options'

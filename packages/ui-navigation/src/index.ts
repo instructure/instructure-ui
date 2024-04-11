@@ -23,9 +23,6 @@
  */
 
 export { AppNav } from './AppNav'
-export { Navigation, NavigationItem } from './Navigation'
 
 export type { AppNavProps } from './AppNav/props'
 export type { AppNavItemProps } from './AppNav/Item/props'
-export type { NavigationProps } from './Navigation/props'
-export type { NavigationItemProps } from './Navigation/NavigationItem/props'
