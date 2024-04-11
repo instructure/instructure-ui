@@ -100,7 +100,7 @@ export {
 export { MetricGroup, Metric } from '@instructure/ui-metric'
 export { Modal } from '@instructure/ui-modal'
 export { Transition } from '@instructure/ui-motion'
-export { Navigation, AppNav } from '@instructure/ui-navigation'
+export { AppNav } from '@instructure/ui-navigation'
 export { NumberInput } from '@instructure/ui-number-input'
 export { Options } from '@instructure/ui-options'
 export { Mask, Overlay } from '@instructure/ui-overlays'
