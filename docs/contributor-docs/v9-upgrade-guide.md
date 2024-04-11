@@ -23,7 +23,7 @@ Since CommonJS style imports `require(..)` have been superseded by ES6 style imp
 | Component                 | Substitute / Notes                                                                                                                                              |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [CodeEditor](#CodeEditor) | CodeEditor stays deprecated in v9. Use [SourceCodeEditor](#SourceCodeEditor) instead, which is the wrapper for the newer version of the CodeMirror code editor. |
-| [Navigation](#Navigation) | Navigation will be deleted in v9. It has been renamed to [SideNavBar](#SideNavBar).                                                                             |
+| [Navigation](#Navigation) | Navigation has been removed in v9. Use the new [SideNavBar](#SideNavBar) instead.                                                                               |
 
 ### Deprecated Utilities
 

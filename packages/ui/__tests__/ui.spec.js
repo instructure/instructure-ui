@@ -83,7 +83,7 @@ import {
 import { MetricGroup, Metric } from '@instructure/ui-metric'
 import { Modal } from '@instructure/ui-modal'
 import { Transition } from '@instructure/ui-motion'
-import { Navigation, AppNav } from '@instructure/ui-navigation'
+import { AppNav } from '@instructure/ui-navigation'
 import { NumberInput } from '@instructure/ui-number-input'
 import { Options } from '@instructure/ui-options'
 import { Mask, Overlay } from '@instructure/ui-overlays'
@@ -172,7 +172,6 @@ const EveryComponent = {
   Metric,
   Modal,
   Transition,
-  Navigation,
   AppNav,
   NumberInput,
   Options,
@@ -233,13 +232,6 @@ const extraProps = {
   },
   InPlaceEdit: {
     renderEditButton: jest.fn()
-  },
-  Navigation: {
-    label: 'Main navigation',
-    toggleLabel: {
-      expandedLabel: 'Minimize Navigation',
-      minimizedLabel: 'Expand Navigation'
-    }
   },
   Transition: {
     children: undefined
