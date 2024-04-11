@@ -152,13 +152,11 @@ type BaseButtonOwnProps = {
    */
   renderIcon?: Renderable
 
-  // Deprecated `string` tabIndex type
   /**
    * Specifies the tabindex of the `Button`.
    *
-   * (`string` type is __deprecated__, use `number`)
    */
-  tabIndex?: number | string // TODO: remove string type in v9
+  tabIndex?: number
 }
 
 type BaseButtonStyleProps = {
@@ -213,9 +211,7 @@ const propTypes: PropValidators<PropKeys> = {
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  // Deprecated `string` tabIndex type
-  // TODO: remove string type in v9
-  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  tabIndex: PropTypes.number
 }
 
 const allowedProps: AllowedPropKeys = [
