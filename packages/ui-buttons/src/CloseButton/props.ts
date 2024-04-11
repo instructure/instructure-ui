@@ -115,13 +115,11 @@ type CloseButtonOwnProps = {
    */
   cursor?: Cursor
 
-  // Deprecated `string` tabIndex type
   /**
    * Specifies the tabindex of the `CloseButton`.
    *
-   * (`string` type is __deprecated__, use `number`)
    */
-  tabIndex?: number | string // TODO: remove string type in v9
+  tabIndex?: number
 }
 
 type PropKeys = keyof CloseButtonOwnProps
@@ -150,9 +148,7 @@ const propTypes: PropValidators<PropKeys> = {
   as: PropTypes.elementType,
   href: PropTypes.string,
   cursor: PropTypes.string,
-  // Deprecated `string` tabIndex type
-  // TODO: remove string type in v9
-  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  tabIndex: PropTypes.number
 }
 
 const allowedProps: AllowedPropKeys = [
