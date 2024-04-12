@@ -28,11 +28,7 @@ import noScroll from 'no-scroll'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import type { ComponentStyle } from '@instructure/emotion'
-import {
-  ensureSingleChild,
-  omitProps,
-  deprecated
-} from '@instructure/ui-react-utils'
+import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -47,7 +43,6 @@ category: components/utilities
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('9.0.0', { onDismiss: null })
 class Mask extends Component<MaskProps> {
   static readonly componentId = 'Mask'
 
