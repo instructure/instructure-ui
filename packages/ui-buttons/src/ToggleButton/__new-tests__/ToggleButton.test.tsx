@@ -23,20 +23,22 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
 
 import { ToggleButton } from '../index'
-import { ToggleButtonLocator } from '../ToggleButtonLocator'
 
-describe('<ToggleButton />', async () => {
+describe('<ToggleButton />', () => {
   const icon = (
     <svg data-title="myIcon" height="1em" width="1em">
       <circle cx="0.5em" cy="0.5em" r="0.5em" />
     </svg>
   )
+  const iconSelector = 'svg[data-title="myIcon"]'
 
-  it('should render', async () => {
-    await mount(
+  it('should render', () => {
+    render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -44,13 +46,19 @@ describe('<ToggleButton />', async () => {
         status="pressed"
       />
     )
-    const component = ToggleButtonLocator.find()
+    const button = screen.getByRole('button')
+    const svgIcon = document.querySelector(iconSelector)
+    const tooltip = screen.getByRole('tooltip')
 
-    expect(component).to.exist()
+    expect(button).toBeInTheDocument()
+    expect(button).toHaveTextContent('This is a screen reader label')
+    expect(svgIcon).toBeInTheDocument()
+    expect(tooltip).toBeInTheDocument()
+    expect(tooltip).toHaveTextContent('This is tooltip content')
   })
 
-  it('should set `aria-pressed` to `true` if `status` is `pressed`', async () => {
-    await mount(
+  it('should set `aria-pressed` to `true` if `status` is `pressed`', () => {
+    render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -58,15 +66,13 @@ describe('<ToggleButton />', async () => {
         status="pressed"
       />
     )
+    const button = screen.getByRole('button')
 
-    const button = await ToggleButtonLocator.find()
-
-    // Due to tooltip, button is not outermost element in the locator
-    expect(await button.find('button[aria-pressed="true"]')).to.exist()
+    expect(button).toHaveAttribute('aria-pressed', 'true')
   })
 
-  it('should set `aria-pressed` to `false` if `status` is `unpressed`', async () => {
-    await mount(
+  it('should set `aria-pressed` to `false` if `status` is `unpressed`', () => {
+    render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -74,15 +80,13 @@ describe('<ToggleButton />', async () => {
         status="unpressed"
       />
     )
+    const button = screen.getByRole('button')
 
-    const button = await ToggleButtonLocator.find()
-
-    // Due to tooltip, button is not outermost element in the locator
-    expect(await button.find('button[aria-pressed="false"]')).to.exist()
+    expect(button).toHaveAttribute('aria-pressed', 'false')
   })
 
-  it('should display a tooltip', async () => {
-    await mount(
+  it('should render an icon', () => {
+    render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -90,52 +94,15 @@ describe('<ToggleButton />', async () => {
         status="pressed"
       />
     )
+    const button = screen.getByRole('button')
+    const svgIcon = document.querySelector(iconSelector)
 
-    const button = await ToggleButtonLocator.find()
-
-    await button.focus()
-    const tooltip = await button.findTooltipContent()
-
-    await wait(() => {
-      expect(tooltip).to.have.text('This is tooltip content')
-    })
+    expect(button).toBeInTheDocument()
+    expect(svgIcon).toBeInTheDocument()
   })
 
-  it('should display a tooltip without hover/focus when isShowingTooltip is true', async () => {
-    await mount(
-      <ToggleButton
-        screenReaderLabel="This is a screen reader label"
-        renderIcon={icon}
-        renderTooltipContent="This is tooltip content"
-        isShowingTooltip
-        status="pressed"
-      />
-    )
-
-    const button = await ToggleButtonLocator.find()
-
-    const tooltip = await button.findTooltipContent()
-
-    await wait(() => {
-      expect(tooltip).to.have.text('This is tooltip content')
-    })
-  })
-
-  it('should render an icon', async () => {
-    await mount(
-      <ToggleButton
-        screenReaderLabel="This is a screen reader label"
-        renderIcon={icon}
-        renderTooltipContent="This is tooltip content"
-        status="pressed"
-      />
-    )
-    const button = await ToggleButtonLocator.find()
-    expect(await button.find('svg[data-title="myIcon"]')).to.exist()
-  })
-
-  it('should pass the `as` prop', async () => {
-    await mount(
+  it('should pass the `as` prop', () => {
+    const { container } = render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -144,12 +111,14 @@ describe('<ToggleButton />', async () => {
         status="pressed"
       />
     )
-    const button = await ToggleButtonLocator.find()
-    expect(await button.find('li')).to.exist()
+    const button = container.querySelector('[type="button"]')
+
+    expect(button).toBeInTheDocument()
+    expect(button!.tagName).toBe('LI')
   })
 
-  it('should set the disabled attribute when `interaction` prop is set to disabled', async () => {
-    await mount(
+  it('should set the disabled attribute when `interaction` prop is set to disabled', () => {
+    render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -158,12 +127,13 @@ describe('<ToggleButton />', async () => {
         status="pressed"
       />
     )
-    const button = await ToggleButtonLocator.find()
-    expect(await button.find('button[disabled]')).to.exist()
+    const button = screen.getByRole('button')
+
+    expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `disabled` prop is set', async () => {
-    await mount(
+  it('should set the disabled attribute when `disabled` prop is set', () => {
+    render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -172,12 +142,13 @@ describe('<ToggleButton />', async () => {
         status="pressed"
       />
     )
-    const button = await ToggleButtonLocator.find()
-    expect(await button.find('button[disabled]')).to.exist()
+    const button = screen.getByRole('button')
+
+    expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `interaction` prop is set to readonly', async () => {
-    await mount(
+  it('should set the disabled attribute when `interaction` prop is set to readonly', () => {
+    render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -186,12 +157,13 @@ describe('<ToggleButton />', async () => {
         status="pressed"
       />
     )
-    const button = await ToggleButtonLocator.find()
-    expect(await button.find('button[disabled]')).to.exist()
+    const button = screen.getByRole('button')
+
+    expect(button).toHaveAttribute('disabled')
   })
 
-  it('should set the disabled attribute when `readOnly` prop is set', async () => {
-    await mount(
+  it('should set the disabled attribute when `readOnly` prop is set', () => {
+    render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -200,14 +172,15 @@ describe('<ToggleButton />', async () => {
         status="pressed"
       />
     )
-    const button = await ToggleButtonLocator.find()
-    expect(await button.find('button[disabled]')).to.exist()
+    const button = screen.getByRole('button')
+
+    expect(button).toHaveAttribute('disabled')
   })
 
   it('should pass the `onClick` prop', async () => {
-    const onClick = stub()
+    const onClick = jest.fn()
 
-    await mount(
+    render(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
@@ -216,10 +189,12 @@ describe('<ToggleButton />', async () => {
         status="pressed"
       />
     )
-    const button = await ToggleButtonLocator.find()
+    const button = screen.getByRole('button')
 
-    await button.click()
+    await userEvent.click(button)
 
-    expect(onClick).to.have.been.calledOnce()
+    await waitFor(() => {
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
   })
 })
