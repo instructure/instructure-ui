@@ -23,29 +23,38 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import '@testing-library/jest-dom'
 
 import { FormFieldLabel } from '../index'
 
-describe('<FormFieldLabel />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<FormFieldLabel>Foo</FormFieldLabel>)
+describe('<FormFieldLabel />', () => {
+  it('should render', () => {
+    const { container } = render(<FormFieldLabel>Foo</FormFieldLabel>)
 
-    const formFieldLabel = within(subject.getDOMNode())
-    expect(formFieldLabel).to.exist()
+    const formFieldLabel = container.querySelector(
+      "span[class$='-formFieldLabel']"
+    )
+
+    expect(formFieldLabel).toBeInTheDocument()
+    expect(formFieldLabel).toHaveTextContent('Foo')
   })
 
-  it('should render as specified via the `as` prop', async () => {
-    const subject = await mount(<FormFieldLabel as="li">Foo</FormFieldLabel>)
+  it('should render as specified via the `as` prop', () => {
+    const { container } = render(<FormFieldLabel as="li">Foo</FormFieldLabel>)
 
-    const formFieldLabel = within(subject.getDOMNode())
-    expect(await formFieldLabel.find('li:contains(Foo)')).to.exist()
+    const formFieldLabel = container.querySelector('li')
+
+    expect(formFieldLabel).toBeInTheDocument()
+    expect(formFieldLabel).toHaveTextContent('Foo')
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(<FormFieldLabel>Foo</FormFieldLabel>)
+    const { container } = render(<FormFieldLabel>Foo</FormFieldLabel>)
 
-    const formFieldLabel = within(subject.getDOMNode())
-    expect(await formFieldLabel.accessible()).to.be.true()
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 })

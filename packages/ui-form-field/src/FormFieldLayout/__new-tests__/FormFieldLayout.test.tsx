@@ -23,39 +23,47 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
-import { IconWarningLine } from '@instructure/ui-icons'
+import { render, screen } from '@testing-library/react'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import '@testing-library/jest-dom'
 
-import { FormFieldMessage } from '../index'
+import { FormFieldLayout } from '../index'
 
-describe('<FormFieldMessage />', async () => {
-  it('should render message', async () => {
-    const subject = await mount(
-      <FormFieldMessage>hello world</FormFieldMessage>
+describe('<FormFieldLayout />', () => {
+  it('should render', () => {
+    const { container } = render(<FormFieldLayout label="Username" />)
+
+    const formFieldLayout = container.querySelector(
+      "label[class$='-formFieldLayout']"
+    )
+    const formFieldLabel = container.querySelector(
+      "span[class$='-formFieldLabel']"
     )
 
-    const formFieldMessage = within(subject.getDOMNode())
-    expect(await formFieldMessage.findWithText('hello world')).to.exist()
-  })
-
-  it('should render message if Node is passed', async () => {
-    const subject = await mount(
-      <FormFieldMessage>
-        <span>
-          <IconWarningLine /> Invalid name
-        </span>
-      </FormFieldMessage>
-    )
-
-    const formFieldMessage = within(subject.getDOMNode())
-    expect(await formFieldMessage.findWithText('Invalid name')).to.exist()
-    expect(await formFieldMessage.find('svg')).to.exist()
+    expect(formFieldLayout).toBeInTheDocument()
+    expect(formFieldLabel).toBeInTheDocument()
+    expect(formFieldLabel).toHaveTextContent('Username')
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(<FormFieldMessage />)
+    const { container } = render(<FormFieldLayout label="Username" />)
 
-    const formFieldMessage = within(subject.getDOMNode())
-    expect(await formFieldMessage.accessible()).to.be.true()
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
+  })
+
+  it('should provide a ref to the input container', () => {
+    const inputContainerRef = jest.fn()
+
+    render(
+      <FormFieldLayout label="Username" inputContainerRef={inputContainerRef}>
+        <input type="text" />
+      </FormFieldLayout>
+    )
+
+    const input = screen.getByLabelText('Username')
+
+    expect(inputContainerRef).toHaveBeenCalledWith(input.parentElement)
   })
 })
