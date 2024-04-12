@@ -21,31 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { expect } from '@instructure/ui-test-utils'
-
+import '@testing-library/jest-dom'
 import { uid } from '../uid'
 
 describe('uid', () => {
   it('generates a specified length', () => {
-    expect(uid('', 5).length).to.equal(5)
-    expect(uid('', 8).length).to.equal(8)
-    expect(uid('', 12).length).to.equal(12)
-    expect(uid('', 16).length).to.equal(16)
+    expect(uid('', 5).length).toEqual(5)
+    expect(uid('', 8).length).toEqual(8)
+    expect(uid('', 12).length).toEqual(12)
+    expect(uid('', 16).length).toEqual(16)
   })
 
   it('should run a bunch and never get duplicates', () => {
     const results = new Set()
     for (let x = 0; x < 5000; x++) {
-      results.add(expect(uid('', 7)))
+      const id = uid('', 7)
+      results.add(id)
     }
-    expect(results.size).to.be.eql(5000)
+    expect(results.size).toBe(5000)
   })
 
   it('adds a prefix', () => {
-    expect(uid('foo', 5)).to.startWith('foo__')
+    expect(uid('foo', 5)).toMatch(/^foo__/)
   })
 
   it('works with no parameters', () => {
-    expect(uid()).to.exist()
+    expect(uid()).toBeDefined()
   })
 })
