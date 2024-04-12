@@ -41,11 +41,6 @@ type MaskOwnProps = {
    * provides a reference to the underlying html root element
    */
   elementRef?: (element: Element | null) => void
-
-  /**
-   * __Deprecated__: The component doesn't use onDismiss internally, will be removed in V9.
-   */
-  onDismiss?: () => void
 }
 
 type PropKeys = keyof MaskOwnProps
@@ -63,8 +58,7 @@ const propTypes: PropValidators<PropKeys> = {
   fullscreen: PropTypes.bool,
   children: PropTypes.node,
   onClick: PropTypes.func,
-  elementRef: PropTypes.func,
-  onDismiss: PropTypes.func // TODO: deprecated, remove in V9
+  elementRef: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -72,10 +66,7 @@ const allowedProps: AllowedPropKeys = [
   'fullscreen',
   'children',
   'onClick',
-  'elementRef',
-
-  // TODO: deprecated, remove in V9
-  'onDismiss'
+  'elementRef'
 ]
 
 export type { MaskProps, MaskStyle }
