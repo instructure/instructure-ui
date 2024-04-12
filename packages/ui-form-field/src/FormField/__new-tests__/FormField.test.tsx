@@ -22,25 +22,33 @@
  * SOFTWARE.
  */
 
-import type { FormMessageType } from '../FormPropTypes'
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import '@testing-library/jest-dom'
 
-const generateText = (type: FormMessageType) => `${type} message`
+import { FormField } from '../index'
 
-export default function generateMessages(
-  types: FormMessageType[] = ['hint', 'success', 'error'],
-  withEmptyMessage = true,
-  text = generateText
-) {
-  const messages = [
-    ...types.map((type) => {
-      return [
-        {
-          text: typeof text === 'function' ? text(type) : text,
-          type
-        }
-      ]
-    })
-  ]
+describe('<FormField />', () => {
+  it('should render', () => {
+    render(<FormField label="foo" id="bar" />)
+    const formField = screen.getByText('foo').closest('label')
 
-  return withEmptyMessage ? [[], ...messages] : messages
-}
+    expect(formField).toBeInTheDocument()
+  })
+
+  it('passes props through to FormField', () => {
+    render(<FormField label="foo" id="bar" data-automation="baz" />)
+    const formField = screen.getByText('foo').closest('label')
+
+    expect(formField).toHaveAttribute('data-automation', 'baz')
+  })
+
+  it('should meet a11y standards', async () => {
+    const { container } = render(<FormField label="foo" id="bar" />)
+
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
+  })
+})

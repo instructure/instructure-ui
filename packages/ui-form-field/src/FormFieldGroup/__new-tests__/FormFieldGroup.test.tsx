@@ -23,14 +23,16 @@
  */
 
 import React from 'react'
-import { expect, mount, within, find } from '@instructure/ui-test-utils'
+import { render, screen } from '@testing-library/react'
+import { runAxeCheck } from '@instructure/ui-axe-check'
+import '@testing-library/jest-dom'
 
 import { FormFieldGroup } from '../index'
 import { FormMessage } from '../../FormPropTypes'
 
-describe('<FormFieldGroup />', async () => {
-  it('should render', async () => {
-    await mount(
+describe('<FormFieldGroup />', () => {
+  it('should render', () => {
+    const { container } = render(
       <FormFieldGroup description="Please enter your full name">
         <label>
           First: <input />
@@ -44,11 +46,22 @@ describe('<FormFieldGroup />', async () => {
       </FormFieldGroup>
     )
 
-    const formFieldGroup = find('fieldset:label("Please enter your full name")')
-    expect(formFieldGroup).to.exist()
+    const formFieldGroup = container.querySelector(
+      "fieldset[class$='-formFieldLayout']"
+    )
+    const firstNameInput = screen.getByLabelText('First:')
+    const middleNameInput = screen.getByLabelText('Middle:')
+    const lastNameInput = screen.getByLabelText('Last:')
+
+    expect(formFieldGroup).toBeInTheDocument()
+    expect(formFieldGroup).toHaveTextContent('Please enter your full name')
+
+    expect(firstNameInput).toBeInTheDocument()
+    expect(middleNameInput).toBeInTheDocument()
+    expect(lastNameInput).toBeInTheDocument()
   })
 
-  it('can handle null children', async () => {
+  it('can handle null children', () => {
     const children = [
       <label key="first">
         First: <input />
@@ -56,20 +69,23 @@ describe('<FormFieldGroup />', async () => {
       null
     ]
 
-    const subject = await mount(
+    const { container } = render(
       <FormFieldGroup description="Please enter your full name">
         {children}
       </FormFieldGroup>
     )
 
-    const formFieldGroup = within(subject.getDOMNode())
-    expect(formFieldGroup).to.exist()
+    const formFieldGroup = container.querySelector(
+      "fieldset[class$='-formFieldLayout']"
+    )
+
+    expect(formFieldGroup).toBeInTheDocument()
   })
 
-  it('links the messages to the fieldset via aria-describedby', async () => {
+  it('links the messages to the fieldset via aria-describedby', () => {
     const messages: FormMessage[] = [{ text: 'Invalid name', type: 'error' }]
 
-    const subject = await mount(
+    const { container } = render(
       <FormFieldGroup
         description="Please enter your full name"
         messages={messages}
@@ -86,19 +102,25 @@ describe('<FormFieldGroup />', async () => {
       </FormFieldGroup>
     )
 
-    const formFieldGroup = within(subject.getDOMNode())
-    const fieldset = await formFieldGroup.find('fieldset')
+    const formFieldGroup = container.querySelector(
+      "fieldset[class$='-formFieldLayout']"
+    )
+    const message = container.querySelector("span[id^='FormFieldLayout_']")
 
-    const messagesId = fieldset.getAttribute('aria-describedby')
-    const message = await formFieldGroup.find(`#${messagesId}`)
+    expect(message).toBeInTheDocument()
+    expect(formFieldGroup).toBeInTheDocument()
+    expect(formFieldGroup).toHaveAttribute('aria-describedby')
 
-    expect(message.getTextContent()).to.equal('Invalid name')
+    const messagesId = formFieldGroup!.getAttribute('aria-describedby')
+
+    expect(message).toHaveTextContent('Invalid name')
+    expect(message).toHaveAttribute('id', messagesId)
   })
 
-  it('displays description message inside the legend', async () => {
+  it('displays description message inside the legend', () => {
     const description = 'Please enter your full name'
 
-    const subject = await mount(
+    const { container } = render(
       <FormFieldGroup description={description}>
         <label>
           First: <input />
@@ -112,13 +134,16 @@ describe('<FormFieldGroup />', async () => {
       </FormFieldGroup>
     )
 
-    const formFieldGroup = within(subject.getDOMNode())
-    const legend = await formFieldGroup.find(`legend:contains(${description})`)
-    expect(legend).to.exist()
+    const legend = container.querySelector(
+      "legend[class$='-screenReaderContent']"
+    )
+
+    expect(legend).toBeInTheDocument()
+    expect(legend).toHaveTextContent(description)
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(
+    const { container } = render(
       <FormFieldGroup description="Please enter your full name">
         <label>
           First: <input />
@@ -132,7 +157,8 @@ describe('<FormFieldGroup />', async () => {
       </FormFieldGroup>
     )
 
-    const formFieldGroup = within(subject.getDOMNode())
-    expect(await formFieldGroup.accessible()).to.exist()
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 })

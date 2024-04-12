@@ -23,30 +23,35 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { IconWarningLine } from '@instructure/ui-icons'
+import '@testing-library/jest-dom'
 
 import { FormFieldMessages } from '../index'
 import { FormMessage } from '../../FormPropTypes'
 
 describe('<FormFieldMessages />', () => {
-  it('should render', async () => {
+  it('should render', () => {
     const messages: FormMessage[] = [
       { text: 'Invalid name', type: 'error' },
       { text: 'Good job!', type: 'success' },
       { text: 'Full name, first and last', type: 'hint' }
     ]
 
-    const subject = await mount(<FormFieldMessages messages={messages} />)
+    const { container } = render(<FormFieldMessages messages={messages} />)
 
-    const formFieldMessages = within(subject.getDOMNode())
-    expect(formFieldMessages).to.exist()
-    expect(formFieldMessages.getTextContent()).to.equal(
+    const formFieldMessages = container.querySelector(
+      "span[class$='-formFieldMessages']"
+    )
+
+    expect(formFieldMessages).toBeInTheDocument()
+    expect(formFieldMessages).toHaveTextContent(
       'Invalid nameGood job!Full name, first and last'
     )
   })
 
-  it('should render if Node is passed as message text', async () => {
+  it('should render if Node is passed as message text', () => {
     const messages: FormMessage[] = [
       {
         text: (
@@ -58,12 +63,16 @@ describe('<FormFieldMessages />', () => {
       }
     ]
 
-    const subject = await mount(<FormFieldMessages messages={messages} />)
+    const { container } = render(<FormFieldMessages messages={messages} />)
 
-    const formFieldMessages = within(subject.getDOMNode())
-    expect(formFieldMessages).to.exist()
-    expect(formFieldMessages.getTextContent()).to.equal(' Invalid name')
-    expect(await formFieldMessages.find('svg')).to.exist()
+    const formFieldMessages = container.querySelector(
+      "span[class$='-formFieldMessages']"
+    )
+    const iconSvg = container.querySelector('svg[name="IconWarning"]')
+
+    expect(iconSvg).toBeInTheDocument()
+    expect(formFieldMessages).toBeInTheDocument()
+    expect(formFieldMessages).toHaveTextContent('Invalid name')
   })
 
   it('should meet a11y standards', async () => {
@@ -73,9 +82,10 @@ describe('<FormFieldMessages />', () => {
       { text: 'Full name, first and last', type: 'hint' }
     ]
 
-    const subject = await mount(<FormFieldMessages messages={messages} />)
+    const { container } = render(<FormFieldMessages messages={messages} />)
 
-    const formFieldMessages = within(subject.getDOMNode())
-    expect(await formFieldMessages.accessible()).to.be.true()
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 })

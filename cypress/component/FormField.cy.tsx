@@ -21,32 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { FormFieldLayout } from '../../packages/ui'
 
-import { FormField } from '../index'
+import '../support/component'
 
-describe('<FormField />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
+describe('<FormField/>', () => {
+  it('should align FormFieldLayout label to right by default', () => {
+    cy.viewport(800, 600)
 
-    const formField = within(subject.getDOMNode())
-    expect(formField).to.exist()
-  })
-
-  it('passes props through to FormField', async () => {
-    const subject = await mount(
-      <FormField label="foo" id="bar" data-automation="baz" />
+    cy.mount(
+      <FormFieldLayout label="Username" layout="inline">
+        <input type="text" />
+      </FormFieldLayout>
     )
 
-    expect(subject.getDOMNode()).to.have.attribute('data-automation', 'baz')
+    cy.get('span[class$="-formFieldLabel"]')
+      .contains('Username')
+      .should('have.css', 'text-align', 'end')
   })
 
-  it('should meet a11y standards', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
+  it('should align FormFieldLayout label to left', () => {
+    cy.viewport(800, 600)
 
-    const formField = within(subject.getDOMNode())
-    expect(await formField.accessible()).to.be.true()
+    cy.mount(
+      <FormFieldLayout label="Username" layout="inline" labelAlign="start">
+        <input type="text" />
+      </FormFieldLayout>
+    )
+
+    cy.get('span[class$="-formFieldLabel"]')
+      .contains('Username')
+      .should('have.css', 'text-align', 'start')
   })
 })
