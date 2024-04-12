@@ -23,36 +23,36 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { render, screen, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { Overlay } from '../index'
 
-import { OverlayLocator } from '../OverlayLocator'
+describe('<Overlay />', () => {
+  it('should render nothing when closed', () => {
+    render(<Overlay label="Overlay Example" />)
+    const overlay = screen.queryByText('Overlay Example')
 
-describe('<Overlay />', async () => {
-  it('should render nothing when closed', async () => {
-    await mount(<Overlay label="Overlay Example" />)
-    const overlay = await OverlayLocator.find({ expectEmpty: true })
-    expect(overlay).to.not.exist()
+    expect(overlay).not.toBeInTheDocument()
   })
 
-  it('should render children when open', async () => {
-    await mount(
+  it('should render children when open', () => {
+    render(
       <Overlay open label="Overlay Example">
         Hello World
       </Overlay>
     )
-    const overlay = await OverlayLocator.find(':label(Overlay Example)')
-    expect(overlay.getTextContent()).to.equal('Hello World')
+    const overlay = screen.getByRole('dialog')
+
+    expect(overlay).toHaveTextContent('Hello World')
   })
 
   it('should fire transition callback props', async () => {
-    const onEnter = stub()
+    const onEnter = jest.fn()
+    const onEntering = jest.fn()
+    const onEntered = jest.fn()
 
-    const onEntering = stub()
-
-    const onEntered = stub()
-    await mount(
+    render(
       <Overlay
         open
         transition="fade"
@@ -63,33 +63,34 @@ describe('<Overlay />', async () => {
       />
     )
 
-    await wait(() => {
-      expect(onEnter).to.have.been.called()
-      expect(onEntering).to.have.been.called()
-      expect(onEntered).to.have.been.called()
+    await waitFor(() => {
+      expect(onEnter).toHaveBeenCalled()
+      expect(onEntering).toHaveBeenCalled()
+      expect(onEntered).toHaveBeenCalled()
     })
   })
 
   it('should support onOpen prop', async () => {
-    const onOpen = stub()
-    await mount(<Overlay open label="Overlay Example" onOpen={onOpen} />)
+    const onOpen = jest.fn()
 
-    await wait(() => {
-      expect(onOpen).to.have.been.called()
+    render(<Overlay open label="Overlay Example" onOpen={onOpen} />)
+
+    await waitFor(() => {
+      expect(onOpen).toHaveBeenCalled()
     })
   })
 
   it('should support onClose prop', async () => {
-    const onClose = stub()
+    const onClose = jest.fn()
 
-    const subject = await mount(
+    const { rerender } = render(
       <Overlay open label="Overlay Example" onClose={onClose} />
     )
 
-    await subject.setProps({ open: false })
+    rerender(<Overlay label="Overlay Example" onClose={onClose} open={false} />)
 
-    await wait(() => {
-      expect(onClose).to.have.been.called()
+    await waitFor(() => {
+      expect(onClose).toHaveBeenCalled()
     })
   })
 })

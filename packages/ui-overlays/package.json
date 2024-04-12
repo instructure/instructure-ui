@@ -24,11 +24,11 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.55.0",
-    "@instructure/ui-test-locator": "8.55.0",
-    "@instructure/ui-test-queries": "8.55.0",
-    "@instructure/ui-test-utils": "8.55.0",
     "@instructure/ui-themes": "8.55.0",
-    "@types/no-scroll": "^2.1.0"
+    "@types/no-scroll": "^2.1.0",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",

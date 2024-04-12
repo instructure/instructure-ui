@@ -23,47 +23,57 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, stub, within } from '@instructure/ui-test-utils'
+import { render, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
+
 import { Mask } from '../index'
 
-describe('<Mask />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<Mask />)
-    expect(subject.getDOMNode()).to.exist()
+describe('<Mask />', () => {
+  it('should render', () => {
+    render(<Mask />)
+
+    const mask = document.querySelector("span[class$='-mask']")
+
+    expect(mask).toBeInTheDocument()
   })
 
-  it('should have tabIndex -1 when onClick is provided', async () => {
-    const onClick = stub()
+  it('should have tabIndex -1 when onClick is provided', () => {
+    const onClick = jest.fn()
 
-    const subject = await mount(<Mask onClick={onClick} />)
-    expect(subject.getDOMNode().getAttribute('tabindex')).to.equal('-1')
+    render(<Mask onClick={onClick} />)
+    const mask = document.querySelector("span[class$='-mask']")
+
+    expect(mask).toHaveAttribute('tabindex', '-1')
   })
 
   it('should call onClick prop when clicked', async () => {
-    const onClick = stub()
+    const onClick = jest.fn()
 
-    const subject = await mount(<Mask onClick={onClick} />)
+    render(<Mask onClick={onClick} />)
 
-    const mask = within(subject.getDOMNode())
-    const clickable = await mask.find(':clickable')
+    const mask = document.querySelector("span[class$='-mask']")
 
-    await clickable.click()
+    await userEvent.click(mask!)
 
-    expect(onClick).to.have.been.called()
+    await waitFor(() => {
+      expect(onClick).toHaveBeenCalled()
+    })
   })
 
-  it('should apply fullscreen CSS when prop is true', async () => {
-    const subject = await mount(<Mask fullscreen />)
-    const mask = within(subject.getDOMNode())
-    const cssStyleDeclaration = mask.getComputedStyle() // CSSStyleDeclaration type
-    const fullscreen = cssStyleDeclaration.getPropertyValue('position')
-    expect(fullscreen).to.equal('fixed')
+  it('should apply fullscreen CSS when prop is true', () => {
+    render(<Mask fullscreen />)
+    const mask = document.querySelector("span[class$='-mask']")
+
+    expect(mask).toHaveStyle('position: fixed')
   })
 
   it('should provide an elementRef', async () => {
-    const elementRef = spy()
+    const elementRef = jest.fn()
 
-    const subject = await mount(<Mask elementRef={elementRef} />)
-    expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+    render(<Mask elementRef={elementRef} />)
+    const mask = document.querySelector("span[class$='-mask']")
+
+    expect(elementRef).toHaveBeenCalledWith(mask)
   })
 })
