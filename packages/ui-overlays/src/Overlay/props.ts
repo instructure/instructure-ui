@@ -49,15 +49,6 @@ type OverlayOwnProps = {
    * The type of `<Transition />` to use for animating in/out
    */
   transition?: TransitionType // passed as to Transition as `type`
-
-  // TODO: remove applicationElement in V9, it was removed from Dialog in v6
-  /**
-   * __Deprecated__: An element or a function returning an element to apply `aria-hidden` to
-   */
-  applicationElement?:
-    | React.ReactElement[]
-    | React.ReactElement
-    | (() => React.ReactElement[] | React.ReactElement)
 } & PropsForPortal &
   PropsForDialog &
   PropsForTransition
@@ -232,14 +223,7 @@ const propTypes: PropValidators<PropKeys> = {
   onEntered: PropTypes.func,
   onExit: PropTypes.func,
   onExiting: PropTypes.func,
-  onExited: PropTypes.func,
-
-  // TODO: deprecated, remove in V9
-  applicationElement: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-    PropTypes.func
-  ])
+  onExited: PropTypes.func
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -267,10 +251,7 @@ const allowedProps: AllowedPropKeys = [
   'onEntered',
   'onExit',
   'onExiting',
-  'onExited',
-
-  // TODO: deprecated, remove in V9
-  'applicationElement'
+  'onExited'
 ]
 
 export type { OverlayProps, OverlayState }
