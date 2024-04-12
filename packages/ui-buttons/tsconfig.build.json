@@ -8,8 +8,6 @@
   "include": ["src"],
   "references": [
     { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-test-locator/tsconfig.build.json" },
-    { "path": "../ui-test-queries/tsconfig.build.json" },
     { "path": "../ui-test-utils/tsconfig.build.json" },
     { "path": "../ui-themes/tsconfig.build.json" },
     { "path": "../console/tsconfig.build.json" },
@@ -25,6 +23,7 @@
     { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-tooltip/tsconfig.build.json" },
     { "path": "../ui-utils/tsconfig.build.json" },
-    { "path": "../ui-view/tsconfig.build.json" }
+    { "path": "../ui-view/tsconfig.build.json" },
+    { "path": "../ui-axe-check/tsconfig.build.json" }
   ]
 }

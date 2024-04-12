@@ -23,32 +23,48 @@
  */
 
 import React from 'react'
-import { mount, expect, stub } from '@instructure/ui-test-utils'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
 
 import { CloseButton } from '../index'
-import { CloseButtonLocator } from '../CloseButtonLocator'
 
-describe('<CloseButton />', async () => {
+describe('<CloseButton />', () => {
+  let consoleWarningMock: jest.SpyInstance
+
   beforeEach(() => {
-    stub(console, 'warn')
+    // Mocking console to prevent test output pollution
+    consoleWarningMock = jest.spyOn(console, 'warn').mockImplementation()
+  })
+
+  afterEach(() => {
+    consoleWarningMock.mockRestore()
   })
 
   it('should render with x icon', async () => {
-    await mount(<CloseButton screenReaderLabel="Close" />)
-    const button = await CloseButtonLocator.find()
-    const icon = await button.find('svg[name]')
-    expect(icon.getAttribute('name')).to.equal('IconX')
+    render(<CloseButton screenReaderLabel="Close" />)
+
+    const button = screen.getByRole('button')
+
+    const icon = document.querySelector('svg')
+
+    expect(icon).toBeInTheDocument()
+    expect(icon).toHaveAttribute('name', 'IconX')
+    expect(button).toBeInTheDocument()
+    expect(button).toHaveTextContent('Close')
   })
 
   it('should pass the `onClick` prop', async () => {
-    const onClick = stub()
+    const onClick = jest.fn()
 
-    await mount(<CloseButton onClick={onClick} screenReaderLabel="Hello" />)
-    const closeButtonRoot = await CloseButtonLocator.find()
-    const button = await closeButtonRoot.find(':focusable')
+    render(<CloseButton onClick={onClick} screenReaderLabel="Hello" />)
 
-    await button.click()
+    const button = screen.getByRole('button')
 
-    expect(onClick).to.have.been.calledOnce()
+    await userEvent.click(button)
+
+    await waitFor(() => {
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
   })
 })
