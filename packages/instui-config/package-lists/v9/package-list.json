@@ -8,7 +8,6 @@
   "@instructure/debounce",
   "@instructure/emotion",
   "@instructure/instructure-theme",
-  "@instructure/instui-cli",
   "@instructure/instui-config",
   "@instructure/shared-types",
   "@instructure/template-app",
