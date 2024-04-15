@@ -25,10 +25,6 @@ This can be installed via the following command:
 npm install @instructure/instui-config
 ```
 
-### Executing Codemods Using instui-cli
-
-All available codemods can also be executed using the [instui-cli](#instui-cli) `instui codemod` command. See [instui-cli](#instui-cli) for more detailed documentation.
-
 ### Updating Deprecated Props
 
 This codemod helps you update your project by renaming `props` that have had names changed (e.g., `onReady` => `onOpen`).
