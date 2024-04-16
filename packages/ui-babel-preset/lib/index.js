@@ -71,7 +71,6 @@ module.exports = function (
         useESModules: opts.esModules
       }
     ],
-    require('@babel/plugin-syntax-dynamic-import').default,
     require('babel-plugin-transform-undefined-to-void')
   ])
 
