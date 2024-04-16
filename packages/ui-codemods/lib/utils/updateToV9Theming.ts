@@ -21,31 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/// <reference types="@emotion/react/types/css-prop" />
 
-export * from '@emotion/react'
+import { Collection, JSCodeshift } from 'jscodeshift'
+import {
+  findElements,
+  findImport,
+  renameElements,
+  replaceImport
+} from '../helpers/codemodHelpers'
 
-export { InstUISettingsProvider } from './InstUISettingsProvider'
-export { withStyle } from './withStyle'
-export {
-  ThemeablePropValues,
-  ThemeablePropTypes,
-  makeThemeVars,
-  getShorthandPropValue,
-  mirrorShorthandCorners,
-  mirrorShorthandEdges
-} from './styleUtils'
-
-export type { ComponentStyle, StyleObject, Overrides } from './EmotionTypes'
-export type { WithStyleProps } from './withStyle'
-export type {
-  SpacingValues,
-  Spacing,
-  Shadow,
-  Stacking,
-  Background,
-  BorderRadiiValues,
-  BorderRadii,
-  BorderWidthValues,
-  BorderWidth
-} from './styleUtils'
+/**
+ * Does the following changes:
+ * 1. `<EmotionThemeProvider>` -> `<InstUISettingsProvider>`
+ */
+export function updateToV9Theming(
+  j: JSCodeshift,
+  root: Collection,
+  filePath: string
+) {
+  let hasModifications = false
+  const importedName = findImport(j, root, 'EmotionThemeProvider', [
+    '@instructure/emotion'
+  ])
+  // <EmotionThemeProvider> -> <InstUISettingsProvider>
+  if (importedName) {
+    const emotionThemeProviderElements = findElements(
+      filePath,
+      j,
+      root,
+      importedName
+    )
+    const instUISettingsProvider = replaceImport(
+      j,
+      root,
+      'EmotionThemeProvider',
+      'InstUISettingsProvider',
+      '@instructure/emotion'
+    )
+    renameElements(
+      filePath,
+      emotionThemeProviderElements,
+      importedName,
+      instUISettingsProvider
+    )
+    hasModifications = true
+  }
+  return hasModifications
+}
