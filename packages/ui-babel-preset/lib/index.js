@@ -56,8 +56,6 @@ module.exports = function (
   }
   plugins = plugins.concat([
     require('babel-plugin-macros'),
-    require('@babel/plugin-proposal-optional-chaining').default,
-    require('@babel/plugin-transform-destructuring').default,
     [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before plugins that set displayName!
     require('./babel-plugin-add-displayname-for-react'),
     require('@babel/plugin-proposal-export-default-from').default,

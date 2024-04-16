@@ -15,7 +15,6 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "7",
-    "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/preset-env": "7",
     "@babel/preset-react": "^7.22.15",
     "@types/prop-types": "^15.7.8",
