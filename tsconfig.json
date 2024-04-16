@@ -4,9 +4,6 @@
     "baseUrl": "./packages",
     "paths": {
       "@instructure/*": ["*/src"],
-      "@instructure/babel-plugin-transform-imports": [
-        "babel-plugin-transform-imports/lib"
-      ],
       "@instructure/browserslist-config-instui/*": [
         "browserslist-config-instui/*"
       ],
