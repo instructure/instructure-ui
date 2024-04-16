@@ -454,6 +454,33 @@ function addImportIfNeeded(
   return name
 }
 
+function replaceImport(
+  j: JSCodeshift,
+  root: Collection,
+  oldName: string,
+  name: string,
+  pathToAdd: string | string[],
+  isDefaultImport = false
+) {
+  const paths: Collection<ImportDeclaration> = findImportPath(
+    j,
+    root,
+    pathToAdd
+  )
+  const importSpecifier = isDefaultImport
+    ? j.importDefaultSpecifier(j.identifier(name))
+    : j.importSpecifier(j.identifier(name))
+  if (paths.length > 0) {
+    // going through all specifiers and replacing the old import name with the new one
+    paths.nodes()[0].specifiers = paths
+      .nodes()[0]
+      .specifiers!.map((specifier) => {
+        return specifier.local?.name !== oldName ? specifier : importSpecifier
+      })
+  }
+  return name
+}
+
 /**
  * Finds all lines that import from `importPath`. For example with the
  * following root:
@@ -615,6 +642,7 @@ export {
   findAttribute,
   findImport,
   findEveryImport,
+  replaceImport,
   addImportIfNeeded,
   renameElements,
   getVisibleChildren,
