@@ -39,7 +39,7 @@ const generateComponentTheme = (theme: Theme): TopNavBarLayoutDesktopTheme => {
     desktopFontWeight: typography?.fontWeightNormal,
 
     desktopBackground: colors?.backgroundBrandSecondary,
-    desktopBackgroundInverse: colors?.backgroundLightest,
+    desktopBackgroundInverse: colors?.backgroundLight,
     desktopBottomBorder: 'none',
     desktopBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.borderMedium}`,
     desktopHeight: '4rem',
