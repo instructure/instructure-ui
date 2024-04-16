@@ -129,10 +129,7 @@ export { Guidelines } from './src/Guidelines'
 export { Figure } from './src/Figure'
 // eslint-disable-next-line no-restricted-imports
 export { ToggleBlockquote } from './src/ToggleBlockquote'
-export {
-  EmotionThemeProvider,
-  InstUISettingsProvider
-} from '@instructure/emotion'
+export { InstUISettingsProvider } from '@instructure/emotion'
 export { Drilldown } from '@instructure/ui-drilldown'
 export { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 export { TopNavBar } from '@instructure/ui-top-nav-bar'
