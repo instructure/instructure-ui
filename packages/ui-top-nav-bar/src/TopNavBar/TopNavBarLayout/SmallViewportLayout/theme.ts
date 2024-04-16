@@ -41,7 +41,7 @@ const generateComponentTheme = (
     smallViewportFontWeight: typography?.fontWeightNormal,
 
     smallViewportBackground: colors?.backgroundBrandSecondary,
-    smallViewportBackgroundInverse: colors?.backgroundLightest,
+    smallViewportBackgroundInverse: colors?.backgroundLight,
     smallViewportBottomBorder: 'none',
     smallViewportBottomBorderInverse: `${borders?.widthSmall} ${borders?.style} ${colors?.borderMedium}`,
     smallViewportHeight: '3.5rem',
