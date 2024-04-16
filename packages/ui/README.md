@@ -37,7 +37,6 @@ The `ui` package contains the following:
 - Dialog
 - DrawerLayout
 - Editable
-- EmotionThemeProvider
 - FileDrop
 - Flex
 - Focusable

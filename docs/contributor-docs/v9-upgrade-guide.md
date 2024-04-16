@@ -27,18 +27,18 @@ Since CommonJS style imports `require(..)` have been superseded by ES6 style imp
 
 ### Deprecated Utilities
 
-| Utility                                       | Substitute / Notes                                                                                                                                  |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [addResizeListener](#addResizeListener)       | Use the native [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) utility. Example usage: [here](#addResizeListener) |
-| [ApplyTextDirection](#ApplyTextDirection)     | Use [InstUISettingsProvider](#InstUISettingsProvider) instead to configure text direction.                                                          |
-| [bidirectional](#bidirectional)               | It has been renamed to [textDirectionContextConsumer](#textDirectionContextConsumer), functionality remains the same.                               |
-| [Browser](#Browser)                           | It has been removed in v9.                                                                                                                          |
-| [ComponentIdentifier](#ComponentIdentifier)   | This util has been removed because it is not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.           |
-| [DateTime](#DateTime)                         | This util has been removed because it is not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.           |
-| [elementMatches](#elementMatches)             | This polyfill is only needed for old, unsupported browsers.                                                                                         |
-| [EmotionThemeProvider](#EmotionThemeProvider) | It has been renamed to [InstUISettingsProvider](#InstUISettingsProvider) and can now also configure text direction.                                 |
-| [isEdge](#isEdge)                             | It has been removed in v9.                                                                                                                          |
-| [isIE11](#isIE11)                             | It has been removed in v9.                                                                                                                          |
+| Utility                                       | Substitute / Notes                                                                                                                                                        |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [addResizeListener](#addResizeListener)       | Use the native [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) utility. Example usage: [here](#addResizeListener)                       |
+| [ApplyTextDirection](#ApplyTextDirection)     | Use [InstUISettingsProvider](#InstUISettingsProvider) instead to configure text direction.                                                                                |
+| [bidirectional](#bidirectional)               | It has been renamed to [textDirectionContextConsumer](#textDirectionContextConsumer), functionality remains the same.                                                     |
+| [Browser](#Browser)                           | It has been removed in v9.                                                                                                                                                |
+| [ComponentIdentifier](#ComponentIdentifier)   | This util has been removed because it is not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.                                 |
+| [DateTime](#DateTime)                         | This util has been removed because it is not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.                                 |
+| [elementMatches](#elementMatches)             | This polyfill is only needed for old, unsupported browsers.                                                                                                               |
+| [EmotionThemeProvider](#EmotionThemeProvider) | It has been renamed to [InstUISettingsProvider](#InstUISettingsProvider) and can now also configure text direction. [Codemod](#ui-codemods) is available for this change. |
+| [isEdge](#isEdge)                             | It has been removed in v9.                                                                                                                                                |
+| [isIE11](#isIE11)                             | It has been removed in v9.                                                                                                                                                |
 
 ### Deprecated Properties
 
