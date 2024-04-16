@@ -16,7 +16,7 @@ The tables below show what will be removed and what are they replaced with. We a
 
 #### CommonJS build has been removed in v9
 
-Since CommonJS style imports `require(..)` have been superseded by ES6 style imports `import … from …` and are well supported both in browsers and in node.js we decided to no longer include packages with CommonJS style imports in our releases.
+Since CommonJS style imports `require(..)` have been superseded by ES6 style imports `import … from …` and are well supported both in browsers and in node.js we decided to no longer include packages with CommonJS style imports in our releases. This means, that the `lib` folder is removed from the packages and the `main` field from the `package.json`s. The `module` path in `package.json` is pointing to the `es` folder.
 
 ### Deprecated Components
 
