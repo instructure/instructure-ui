@@ -34,7 +34,7 @@
  * http://api.jqueryui.com/category/ui-core/
  **/
 
-import { getComputedStyle, findDOMNode, elementMatches } from './'
+import { getComputedStyle, findDOMNode } from './'
 import type { UIElement } from '@instructure/shared-types'
 
 const focusableSelector = [
@@ -68,7 +68,7 @@ function findFocusable(
     (element as Element | Document).querySelectorAll(focusableSelector)
   )
 
-  if (shouldSearchRootNode && elementMatches(element, focusableSelector)) {
+  if (shouldSearchRootNode && (element as Element).matches(focusableSelector)) {
     matches = [...matches, element as Element]
   }
 
