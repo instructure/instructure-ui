@@ -24,7 +24,6 @@
 
 /* list utils in alphabetical order */
 export { callRenderProp } from './callRenderProp'
-export { ComponentIdentifier } from './ComponentIdentifier'
 export { deprecated } from './deprecated'
 export { ensureSingleChild } from './ensureSingleChild'
 export { experimental } from './experimental'
