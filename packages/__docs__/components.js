@@ -71,7 +71,6 @@ export { Table } from '@instructure/ui-table'
 export { TruncateText } from '@instructure/ui-truncate-text'
 export {
   ApplyLocale,
-  ApplyTextDirection,
   TextDirectionContext
 } from '@instructure/ui-i18n'
 export { MetricGroup, Metric } from '@instructure/ui-metric'

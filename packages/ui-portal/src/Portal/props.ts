@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { element } from '@instructure/ui-prop-types'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
-import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type {
   OtherHTMLAttributes,
   PropValidators
@@ -75,7 +75,7 @@ type PortalOwnProps = {
    * Provides a reference to the underlying html element. Has the Portal DOMNode as parameter.
    */
   elementRef?: (el?: PortalNode) => void
-} & BidirectionalProps
+} & TextDirectionContextConsumerProps
 
 type PropKeys = keyof PortalOwnProps
 
