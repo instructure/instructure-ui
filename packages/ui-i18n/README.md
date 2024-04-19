@@ -15,7 +15,6 @@ Helper components and utilities for internationalization.
 The `ui-i18n` package contains the following:
 
 - [ApplyLocale](#ApplyLocale)
-- [ApplyTextDirection](#ApplyTextDirection)
 
 ### Utilities
 
