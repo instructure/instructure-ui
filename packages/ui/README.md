@@ -18,7 +18,6 @@ The `ui` package contains the following:
 - Alert
 - All ui-icons
 - ApplyLocale
-- ApplyTextDirection
 - AppNav
 - Avatar
 - Badge
