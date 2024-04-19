@@ -22,27 +22,27 @@
  * SOFTWARE.
  */
 
-import { mirrorPlacement } from '../mirrorPlacement'
+import { mirrorHorizontalPlacement } from '../mirrorHorizontalPlacement'
 import {
   PlacementPropValues,
   placementPropValues,
   PlacementValueArray
 } from '../PositionPropTypes'
-import { expect } from '@instructure/ui-test-utils'
+import '@testing-library/jest-dom'
 
-const mirrorVertiallyAsArrayMap = [
-  ['bottom'],
+const mirrorHorizontallyAsArrayMap = [
   ['top'],
+  ['bottom'],
   ['end'],
   ['start'],
-  ['bottom', 'start'],
-  ['bottom', 'center'],
-  ['bottom', 'end'],
-  ['bottom', 'stretch'],
-  ['top', 'start'],
-  ['top', 'center'],
   ['top', 'end'],
+  ['top', 'center'],
+  ['top', 'start'],
   ['top', 'stretch'],
+  ['bottom', 'end'],
+  ['bottom', 'center'],
+  ['bottom', 'start'],
+  ['bottom', 'stretch'],
   ['end', 'top'],
   ['end', 'center'],
   ['end', 'bottom'],
@@ -51,61 +51,63 @@ const mirrorVertiallyAsArrayMap = [
   ['start', 'center'],
   ['start', 'bottom'],
   ['start', 'stretch'],
-  ['center', 'start'],
   ['center', 'end'],
+  ['center', 'start'],
   ['offscreen']
 ]
 
-describe('mirrorPlacement', async () => {
-  describe('when string is passed', async () => {
-    describe('without delimiter should return mirrored values as array', async () => {
+describe('mirrorHorizontalPlacement', () => {
+  describe('when string is passed', () => {
+    describe('without delimiter should return mirrored values as array', () => {
       placementPropValues.forEach((placement, idx) => {
-        it(placement, async () => {
-          const mirrored = mirrorPlacement(placement as PlacementPropValues)
+        it(placement, () => {
+          const mirrored = mirrorHorizontalPlacement(
+            placement as PlacementPropValues
+          )
 
-          expect(mirrored[0]).to.equal(mirrorVertiallyAsArrayMap[idx][0])
-          expect(mirrored[1]).to.equal(mirrorVertiallyAsArrayMap[idx][1])
+          expect(mirrored[0]).toEqual(mirrorHorizontallyAsArrayMap[idx][0])
+          expect(mirrored[1]).toEqual(mirrorHorizontallyAsArrayMap[idx][1])
         })
       })
     })
 
-    describe('with delimiter should return mirrored values as string', async () => {
+    describe('with delimiter should return mirrored values as string', () => {
       placementPropValues.forEach((placement, idx) => {
-        it(placement, async () => {
-          const mirrored = mirrorPlacement(
+        it(placement, () => {
+          const mirrored = mirrorHorizontalPlacement(
             placement as PlacementPropValues,
             ' '
           )
 
-          expect(mirrored).to.equal(mirrorVertiallyAsArrayMap[idx].join(' '))
+          expect(mirrored).toEqual(mirrorHorizontallyAsArrayMap[idx].join(' '))
         })
       })
     })
   })
 
-  describe('when array is passed', async () => {
-    describe('without delimiter should return mirrored values as array', async () => {
+  describe('when array is passed', () => {
+    describe('without delimiter should return mirrored values as array', () => {
       placementPropValues.forEach((placement, idx) => {
-        it(placement, async () => {
-          const mirrored = mirrorPlacement(
+        it(placement, () => {
+          const mirrored = mirrorHorizontalPlacement(
             placement.split(' ') as PlacementValueArray
           )
 
-          expect(mirrored[0]).to.equal(mirrorVertiallyAsArrayMap[idx][0])
-          expect(mirrored[1]).to.equal(mirrorVertiallyAsArrayMap[idx][1])
+          expect(mirrored[0]).toEqual(mirrorHorizontallyAsArrayMap[idx][0])
+          expect(mirrored[1]).toEqual(mirrorHorizontallyAsArrayMap[idx][1])
         })
       })
     })
 
-    describe('with delimiter should return mirrored values as string', async () => {
+    describe('with delimiter should return mirrored values as string', () => {
       placementPropValues.forEach((placement, idx) => {
-        it(placement, async () => {
-          const mirrored = mirrorPlacement(
+        it(placement, () => {
+          const mirrored = mirrorHorizontalPlacement(
             placement.split(' ') as PlacementValueArray,
             ' '
           )
 
-          expect(mirrored).to.equal(mirrorVertiallyAsArrayMap[idx].join(' '))
+          expect(mirrored).toEqual(mirrorHorizontallyAsArrayMap[idx].join(' '))
         })
       })
     })

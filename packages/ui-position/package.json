@@ -41,7 +41,9 @@
     "@instructure/ui-color-utils": "9.0.1",
     "@instructure/ui-test-locator": "9.0.1",
     "@instructure/ui-test-utils": "9.0.1",
-    "@instructure/ui-themes": "9.0.1"
+    "@instructure/ui-themes": "9.0.1",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.2"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"
