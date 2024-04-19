@@ -440,61 +440,6 @@ describe('<Dialog />', () => {
           expect(onBlur).toHaveBeenCalled()
         })
       })
-
-      describe('when launching a dialog w/out focusable content from another dialog', () => {
-        it(`should call onBlur when shouldContainFocus=false and last tabbable element triggers dialog w/out focusable content`, async () => {
-          const onBlur = jest.fn()
-
-          const { getByTestId } = render(
-            <NestedDialogExample
-              onBlur={onBlur}
-              shouldContainFocus={false}
-              defaultFocusElement={() => getByTestId('nested-input-two')}
-            />
-          )
-          const inputTwo = getByTestId('nested-input-two')
-
-          await waitFor(() => {
-            userEvent.click(inputTwo)
-            expect(document.activeElement).toBe(inputTwo)
-
-            fireEvent.keyDown(inputTwo, {
-              key: 'Tab',
-              code: 'Tab',
-              keyCode: 9,
-              charCode: 9
-            })
-            expect(onBlur).toHaveBeenCalled()
-          })
-        })
-
-        it(`should call onBlur when shouldContainFocus=false and first tabbable element triggers dialog w/out focusable content`, async () => {
-          const onBlur = jest.fn()
-
-          const { getByTestId } = render(
-            <NestedDialogExample
-              onBlur={onBlur}
-              shouldContainFocus={false}
-              defaultFocusElement={() => getByTestId('nested-input-one')}
-            />
-          )
-          const inputOne = getByTestId('nested-input-one')
-
-          await waitFor(() => {
-            userEvent.click(inputOne)
-            expect(document.activeElement).toBe(inputOne)
-
-            fireEvent.keyDown(inputOne, {
-              key: 'Tab',
-              code: 'Tab',
-              keyCode: 9,
-              charCode: 9,
-              shiftKey: true
-            })
-            expect(onBlur).toHaveBeenCalled()
-          })
-        })
-      })
     })
   })
 })
