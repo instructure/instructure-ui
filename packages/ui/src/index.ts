@@ -78,11 +78,7 @@ export {
 } from '@instructure/ui-form-field'
 export { Grid, GridRow, GridCol } from '@instructure/ui-grid'
 export { Heading } from '@instructure/ui-heading'
-export {
-  ApplyLocale,
-  ApplyTextDirection,
-  TextDirectionContext
-} from '@instructure/ui-i18n'
+export { ApplyLocale, TextDirectionContext } from '@instructure/ui-i18n'
 export * from '@instructure/ui-icons'
 export { Img } from '@instructure/ui-img'
 export { Link } from '@instructure/ui-link'
