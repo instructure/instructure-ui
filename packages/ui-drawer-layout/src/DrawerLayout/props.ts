@@ -31,7 +31,7 @@ import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 import { DrawerContent } from './DrawerContent'
 import { DrawerTray } from './DrawerTray'
 
-import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { PropValidators } from '@instructure/shared-types'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
@@ -53,14 +53,15 @@ type DrawerLayoutOwnProps = {
    * it is side by side
    */
   onOverlayTrayChange?: (shouldOverlayTray: boolean) => void
-} & BidirectionalProps
+} & TextDirectionContextConsumerProps
 
 type PropKeys = keyof DrawerLayoutOwnProps
 
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type DrawerLayoutProps = DrawerLayoutOwnProps &
-  WithStyleProps<null, DrawerLayoutStyle> & WithDeterministicIdProps
+  WithStyleProps<null, DrawerLayoutStyle> &
+  WithDeterministicIdProps
 
 type DrawerLayoutStyle = ComponentStyle<'drawerLayout'>
 

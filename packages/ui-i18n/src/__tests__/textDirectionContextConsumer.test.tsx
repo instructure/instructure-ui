@@ -27,11 +27,14 @@ import ReactDOM from 'react-dom'
 import ReactTestUtils from 'react-dom/test-utils'
 import { expect, mount } from '@instructure/ui-test-utils'
 
-import { bidirectional, BidirectionalProps } from '../bidirectional'
+import {
+  textDirectionContextConsumer,
+  TextDirectionContextConsumerProps
+} from '../textDirectionContextConsumer'
 import { TextDirectionContext } from '../TextDirectionContext'
 
-@bidirectional()
-class BidirectionalComponent extends React.Component<BidirectionalProps> {
+@textDirectionContextConsumer()
+class TextDirectionContextConsumerComponent extends React.Component<TextDirectionContextConsumerProps> {
   render() {
     return (
       <div data-dir={this.props.dir} dir={this.props.dir}>
@@ -45,15 +48,15 @@ class WrapperComponent extends React.Component {
   render() {
     return (
       <div>
-        <BidirectionalComponent />
+        <TextDirectionContextConsumerComponent />
       </div>
     )
   }
 }
 
-describe('@bidirectional', async () => {
+describe('@textDirectionContextConsumer', async () => {
   it('should take on the direction of the document by default', async () => {
-    const subject = await mount(<BidirectionalComponent />)
+    const subject = await mount(<TextDirectionContextConsumerComponent />)
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('ltr')
   })
 
@@ -65,22 +68,24 @@ describe('@bidirectional', async () => {
     const rendered = ReactDOM.render(<WrapperComponent />, rootNode)
     ReactTestUtils.findRenderedComponentWithType(
       rendered as any,
-      (BidirectionalComponent as any).originalType
+      (TextDirectionContextConsumerComponent as any).originalType
     )
   })
 
   it('should set the text direction via props', async () => {
-    const subject = await mount(<BidirectionalComponent dir="rtl" />)
+    const subject = await mount(
+      <TextDirectionContextConsumerComponent dir="rtl" />
+    )
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })
   /* TODO re-enable this test when we allow 'auto' text direction
   it('setting "auto" from context figures out text direction from the text', async () => {
     const subject = await mount(
-      <BidirectionalComponent dir="auto">
+      <TextDirectionContextConsumerComponent dir="auto">
         <span>
           هذه الفقرة باللغة العربية ، لذا يجب الانتقال من اليمين إلى اليسار.
         </span>
-      </BidirectionalComponent>
+      </TextDirectionContextConsumerComponent>
     )
     expect(
       getComputedStyle(subject.getDOMNode().childNodes[0] as Element).direction
@@ -90,7 +95,7 @@ describe('@bidirectional', async () => {
   it('should give props preference when context and context are present', async () => {
     const subject = await mount(
       <TextDirectionContext.Provider value="ltr">
-        <BidirectionalComponent dir="rtl" />
+        <TextDirectionContextConsumerComponent dir="rtl" />
       </TextDirectionContext.Provider>
     )
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')

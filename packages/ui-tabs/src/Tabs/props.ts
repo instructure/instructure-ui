@@ -39,7 +39,7 @@ import type {
   PropValidators,
   TabsTheme
 } from '@instructure/shared-types'
-import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type { ViewOwnProps } from '@instructure/ui-view'
 
 type TabsOwnProps = {
@@ -93,7 +93,7 @@ type PropKeys = keyof TabsOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TabsProps = TabsOwnProps &
-  BidirectionalProps &
+  TextDirectionContextConsumerProps &
   WithStyleProps<TabsTheme, TabsStyle> &
   OtherHTMLAttributes<TabsOwnProps>
 

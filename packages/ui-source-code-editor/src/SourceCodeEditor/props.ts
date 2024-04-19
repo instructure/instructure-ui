@@ -39,7 +39,7 @@ import type {
   ComponentStyle
 } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
-import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type { SearchConfig } from './SearchPanel'
 
 type SourceCodeEditorOwnProps = {
@@ -223,7 +223,7 @@ type SourceCodeEditorProps = SourceCodeEditorOwnProps &
     // but isn't used for the css prop anyway
     Record<keyof SourceCodeEditorStyle, any>
   > &
-  BidirectionalProps &
+  TextDirectionContextConsumerProps &
   OtherHTMLAttributes<SourceCodeEditorOwnProps> &
   WithDeterministicIdProps
 
