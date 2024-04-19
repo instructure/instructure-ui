@@ -25,7 +25,6 @@
 export { ApplyLocale } from './ApplyLocale'
 export { ApplyLocaleContext } from './ApplyLocale/ApplyLocaleContext'
 
-export { bidirectional } from './bidirectional'
 export { textDirectionContextConsumer } from './textDirectionContextConsumer'
 export { DateTime } from './DateTime'
 export { getTextDirection } from './getTextDirection'
@@ -34,5 +33,5 @@ export { Locale } from './Locale'
 export { DIRECTION, TextDirectionContext } from './TextDirectionContext'
 
 export type { Moment } from './DateTime'
-export type { BidirectionalProps } from './bidirectional'
+export type { TextDirectionContextConsumerProps } from './textDirectionContextConsumer'
 export type { ApplyLocaleProps } from './ApplyLocale/props'

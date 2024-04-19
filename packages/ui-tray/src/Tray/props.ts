@@ -35,7 +35,7 @@ import type {
   LiveRegion,
   UIElement
 } from '@instructure/shared-types'
-import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type {
   TransitionType,
   BaseTransitionStatesType
@@ -165,7 +165,7 @@ type PropKeys = keyof TrayOwnProps
 type AllowedPropKeys = Readonly<Array<PropKeys>>
 
 type TrayProps = TrayOwnProps &
-  BidirectionalProps &
+  TextDirectionContextConsumerProps &
   WithStyleProps<TrayTheme, TrayStyle> &
   OtherHTMLAttributes<TrayOwnProps>
 

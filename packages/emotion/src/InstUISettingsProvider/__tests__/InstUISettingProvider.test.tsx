@@ -29,10 +29,10 @@ import { canvas } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '../index'
 import { jsx } from '../../index'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
-import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 
 @textDirectionContextConsumer()
-class TextDirAwareComponent extends React.Component<BidirectionalProps> {
+class TextDirAwareComponent extends React.Component<TextDirectionContextConsumerProps> {
   render() {
     return <div data-dir={this.props.dir}>hello world</div>
   }
