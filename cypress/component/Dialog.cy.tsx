@@ -27,7 +27,11 @@ import 'cypress-real-events'
 
 import '../support/component'
 
-const NestedDialogExample = ({ defaultInput = 'one', onBlur }) => {
+const NestedDialogExample = ({
+  defaultInput = 'one',
+  onBlur,
+  shouldContainFocus = true
+}) => {
   const [nestedOpen, setNestedOpen] = useState(false)
   const handleTriggerClick = () => setNestedOpen(true)
   const inputOneRef = useRef(null)
@@ -39,7 +43,7 @@ const NestedDialogExample = ({ defaultInput = 'one', onBlur }) => {
         open
         label={'label'}
         shouldReturnFocus
-        shouldContainFocus
+        shouldContainFocus={shouldContainFocus}
         onBlur={onBlur}
         defaultFocusElement={() =>
           defaultInput === 'one' ? inputOneRef.current : inputTwoRef.current
@@ -70,32 +74,66 @@ const NestedDialogExample = ({ defaultInput = 'one', onBlur }) => {
 }
 
 describe('<Dialog/>', () => {
-  // when launching a dialog w/out focusable content from another dialog
-  it('should contain focus when last tabbable element triggers dialog w/out focusable content', () => {
-    const onBlur = cy.spy()
+  context(
+    'when launching a dialog w/out focusable content from another dialog',
+    () => {
+      it('should contain focus when last tabbable element triggers dialog w/out focusable content', () => {
+        const onBlur = cy.spy()
 
-    cy.mount(<NestedDialogExample defaultInput={'one'} onBlur={onBlur} />)
+        cy.mount(<NestedDialogExample defaultInput={'one'} onBlur={onBlur} />)
 
-    cy.get('[data-testid="nested-input-two"]').click().should('have.focus')
+        cy.get('[data-testid="nested-input-two"]').click().should('have.focus')
 
-    cy.realPress('Tab')
+        cy.realPress('Tab')
+        cy.get('[data-testid="nested-input-one"]').should('have.focus')
+        cy.wrap(onBlur).should('not.have.been.called')
+      })
 
-    cy.get('[data-testid="nested-input-one"]').should('have.focus')
+      it('should contain focus when first tabbable element triggers dialog w/out focusable content', () => {
+        const onBlur = cy.spy()
 
-    cy.wrap(onBlur).should('not.have.been.called')
-  })
+        cy.mount(<NestedDialogExample defaultInput={'two'} onBlur={onBlur} />)
 
-  it('should contain focus when first tabbable element triggers dialog w/out focusable content', () => {
-    const onBlur = cy.spy()
+        cy.get('[data-testid="nested-input-one"]').click().should('have.focus')
 
-    cy.mount(<NestedDialogExample defaultInput={'two'} onBlur={onBlur} />)
+        cy.realPress(['Shift', 'Tab'])
+        cy.get('[data-testid="nested-input-two"]').should('have.focus')
+        cy.wrap(onBlur).should('not.have.been.called')
+      })
 
-    cy.get('[data-testid="nested-input-one"]').click().should('have.focus')
+      it(`should call onBlur when shouldContainFocus=false and last tabbable element triggers dialog w/out focusable content`, () => {
+        const onBlur = cy.spy()
 
-    cy.realPress(['Shift', 'Tab'])
+        cy.mount(
+          <NestedDialogExample
+            defaultInput={'two'}
+            onBlur={onBlur}
+            shouldContainFocus={false}
+          />
+        )
 
-    cy.get('[data-testid="nested-input-two"]').should('have.focus')
+        cy.get('[data-testid="nested-input-two"]').click().should('have.focus')
 
-    cy.wrap(onBlur).should('not.have.been.called')
-  })
+        cy.realPress(['Tab'])
+        cy.wrap(onBlur).should('have.been.called')
+      })
+
+      it(`should call onBlur when shouldContainFocus=false and first tabbable element triggers dialog w/out focusable content`, () => {
+        const onBlur = cy.spy()
+
+        cy.mount(
+          <NestedDialogExample
+            defaultInput={'one'}
+            onBlur={onBlur}
+            shouldContainFocus={false}
+          />
+        )
+
+        cy.get('[data-testid="nested-input-one"]').click().should('have.focus')
+
+        cy.realPress(['Shift', 'Tab'])
+        cy.wrap(onBlur).should('have.been.called')
+      })
+    }
+  )
 })
