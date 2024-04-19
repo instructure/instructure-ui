@@ -36,7 +36,7 @@ import type {
   PositionMountNode,
   PositionObject
 } from '@instructure/ui-position'
-import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type {
   PropValidators,
   LiveRegion,
@@ -277,7 +277,7 @@ type PopoverOwnProps = {
 }
 
 type PopoverProps = PopoverOwnProps &
-  BidirectionalProps &
+  TextDirectionContextConsumerProps &
   WithDeterministicIdProps
 
 type PopoverState = {
