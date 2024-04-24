@@ -1,5 +1,6 @@
 {
   "name": "@instructure/ui-babel-preset",
+  "private": true,
   "version": "8.55.0",
   "description": "A UI babel preset made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
