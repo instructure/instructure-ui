@@ -1,5 +1,6 @@
 {
   "name": "@instructure/ui-eslint-config",
+  "private": true,
   "version": "8.55.1",
   "description": "A UI shared eslint config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",

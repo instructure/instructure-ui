@@ -1,5 +1,6 @@
 {
   "name": "eslint-plugin-instructure-ui",
+  "private": true,
   "version": "8.55.1",
   "description": "An eslint configuration for Instructure UI",
   "author": "Instructure, Inc. Engineering and Product Design",

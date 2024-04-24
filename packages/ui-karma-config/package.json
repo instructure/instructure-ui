@@ -1,5 +1,6 @@
 {
   "name": "@instructure/ui-karma-config",
+  "private": true,
   "version": "8.55.1",
   "description": "A shared karma config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
