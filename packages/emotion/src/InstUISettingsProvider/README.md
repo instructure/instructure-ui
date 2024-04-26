@@ -27,6 +27,9 @@ The `theme` prop applies the given theme. It handles either a full theme, or an 
 To apply a theme to whole app, you need to import `<InstUISettingsProvider/>` and the theme you want to use from `@instructure/ui-themes` (or use your own compatible theme), and wrap your app in the theme provider.
 
 ```js
+---
+  type: code
+---
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -46,6 +49,9 @@ ReactDOM.render(
 #### Nesting theme providers
 
 ```js
+---
+  type: code
+---
 <InstUISettingsProvider theme={canvas}>
   <Heading>I should have "canvas" font family.</Heading>
 
@@ -70,6 +76,7 @@ exists. Otherwise, it queries for and uses the documentElement `dir` attribute a
 ---
 type: example
 ---
+
 <InstUISettingsProvider dir="ltr">
   <div>LTR text</div>
   <Badge count={105} countUntil={100} margin="small medium 0 0">
@@ -97,6 +104,9 @@ The `instanceCounterMap` prop is used for deterministic id generation. The prop 
 See more info on the [Server Side Rendering (SSR)](/#server-side-rendering) docs page.
 
 ```jsx
+---
+  type: code
+---
 import { InstUISettingsProvider } from '@instructure/emotion'
 import { generateInstanceCounterMap } from '@instructure/ui-react-utils'
 
