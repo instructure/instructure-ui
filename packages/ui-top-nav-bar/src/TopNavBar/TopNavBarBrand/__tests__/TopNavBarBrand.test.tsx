@@ -33,7 +33,7 @@ import {
 } from '@instructure/ui-test-utils'
 
 import { getBrand, SmallViewportModeWrapper } from '../../utils/exampleHelpers'
-import { elevateLogo, elevateIcon } from '../../utils/exampleSvgFiles'
+import { elevateIcon } from '../../utils/exampleSvgFiles'
 
 import { TopNavBarBrand } from '../index'
 import { TopNavBarBrandLocator } from '../TopNavBarBrandLocator'
@@ -75,34 +75,6 @@ describe('<TopNavBarBrand />', async () => {
     })
   })
 
-  describe('renderName prop', async () => {
-    it('should render name in desktop mode', async () => {
-      await mount(getBrand({ brandProps: { renderName: elevateLogo } }))
-      const component = await TopNavBarBrandLocator.find()
-      const nameContainer = await component.findBrandNameContainer()
-      const logo = await nameContainer.find('svg')
-
-      expect(nameContainer).to.be.visible()
-      expect(logo).to.be.visible()
-      expect(logo).to.have.id('elevateLogo')
-    })
-
-    it('should render name in smallViewport mode', async () => {
-      await mount(
-        <SmallViewportModeWrapper>
-          {getBrand({ brandProps: { renderName: elevateLogo } })}
-        </SmallViewportModeWrapper>
-      )
-      const component = await TopNavBarBrandLocator.find()
-      const nameContainer = await component.findBrandNameContainer()
-      const logo = await nameContainer.find('svg')
-
-      expect(nameContainer).to.be.visible()
-      expect(logo).to.be.visible()
-      expect(logo).to.have.id('elevateLogo')
-    })
-  })
-
   describe('renderIcon prop', async () => {
     it('should render name in desktop mode', async () => {
       await mount(getBrand({ brandProps: { renderIcon: elevateIcon } }))
@@ -127,32 +99,6 @@ describe('<TopNavBarBrand />', async () => {
       })
 
       expect(iconContainer).to.not.exist()
-    })
-  })
-
-  describe('nameBackground prop', async () => {
-    it('should be visible in desktop mode', async () => {
-      await mount(getBrand({ brandProps: { nameBackground: '#f5f5f5' } }))
-      const component = await TopNavBarBrandLocator.find()
-      const nameContainer = await component.findBrandNameContainer()
-
-      expect(
-        getComputedStyle(nameContainer.getDOMNode()).backgroundColor
-      ).to.equal('rgb(245, 245, 245)')
-    })
-
-    it('should not be visible in smallViewport mode', async () => {
-      await mount(
-        <SmallViewportModeWrapper>
-          {getBrand({ brandProps: { nameBackground: '#f5f5f5' } })}
-        </SmallViewportModeWrapper>
-      )
-      const component = await TopNavBarBrandLocator.find()
-      const nameContainer = await component.findBrandNameContainer()
-
-      expect(
-        getComputedStyle(nameContainer.getDOMNode()).backgroundColor
-      ).to.equal('rgba(0, 0, 0, 0)')
     })
   })
 

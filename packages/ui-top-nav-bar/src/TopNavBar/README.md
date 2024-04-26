@@ -25,9 +25,7 @@ class PlaygroundExample extends React.Component {
     hasActionItemsSection: true,
     hasUserSection: true,
     useAlternativeTitle: false,
-    renderName: true,
     renderIcon: true,
-    nameBackground: false,
     iconBackground: true,
     extraMenuItems: false,
     extraActionItems: false,
@@ -316,9 +314,7 @@ class PlaygroundExample extends React.Component {
       brand: {
         label: 'TopNavBar.Brand settings',
         checkboxes: [
-          'renderName',
           'renderIcon',
-          'nameBackground',
           'iconBackground',
         ]
       },
@@ -393,9 +389,7 @@ class PlaygroundExample extends React.Component {
       hasActionItemsSection: 'Displays action items',
       hasUserSection: 'Displays user menu',
       useAlternativeTitle: 'Displays other data (e.g.: page title) instead of the Brand logo and link',
-      renderName: 'The app/product/brand/company/etc. name',
       renderIcon: 'Visible only in "desktop" mode',
-      nameBackground: 'Visible only in "desktop" mode',
       iconBackground: 'Visible only in "desktop" mode',
       extraMenuItems: 'In "desktop" mode, when there is not enough room to list all the menu items, they will be accessible via a dropdown menu at the end of the list',
       actionItemShowChevronForSubmenu: 'Displays the open/close chevron next to the item, when it has a submenu or custom popover',
@@ -621,11 +615,6 @@ class PlaygroundExample extends React.Component {
                   screenReaderLabel="Elevate Data Sync"
                   href="/#TopNavBar"
                   {...{
-                    ...(this.state.renderName && {
-                      renderName: inverseColor
-                        ? elevateLogoInverse
-                        : elevateLogo
-                    }),
                     ...(this.state.renderIcon && {
                       renderIcon: inverseColor
                         ? undefined
@@ -633,11 +622,6 @@ class PlaygroundExample extends React.Component {
                     }),
                     ...(this.state.iconBackground && {
                       iconBackground: '#0097D3'
-                    }),
-                    ...(this.state.nameBackground && {
-                      nameBackground: inverseColor
-                        ? '#F5F5F5'
-                        : '#2D3B45'
                     }),
                   }}
                 />
@@ -1105,9 +1089,7 @@ The `<TopNavBar.Layout>` component has a `smallViewportConfig` prop that handles
 
 `<TopNavBar.Brand>` contains the brand logo and icon.
 
-Use the brand logo over the primary brand color in front of the brand's name. If there is no brand logo then use the name with darker background.
-
-**Note**: A console warning is thrown if the `renderName` prop of `<TopNavBar.Brand>` is used because it will be removed soon in Instructure UI v9. Please adjust the TopNavBar design in places, where you use `renderName` with `<TopNavBar.Brand>`.
+Use the brand logo over the primary brand color.
 
 ```js
 ---
@@ -1126,29 +1108,6 @@ type: example
           renderBrand={(
             <TopNavBar.Brand
               screenReaderLabel="Brand name"
-              renderName={(
-                <View as="div" minWidth="7rem">
-                  <Text
-                    as="div"
-                    color="primary-inverse"
-                    transform="uppercase"
-                    size="small"
-                    weight="bold"
-                    lineHeight="condensed"
-                  >
-                    Brand
-                  </Text>
-                  <Text
-                    as="div"
-                    color="primary-inverse"
-                    size="large"
-                    weight="normal"
-                    lineHeight="condensed"
-                  >
-                    Sub-brand
-                  </Text>
-                </View>
-              )}
               renderIcon={(
                 <IconBoldLine
                   size="small"
@@ -1178,30 +1137,6 @@ type: example
           renderBrand={(
             <TopNavBar.Brand
               screenReaderLabel="Brand name"
-              renderName={(
-                <View as="div" minWidth="7rem">
-                  <Text
-                    as="div"
-                    color="primary-inverse"
-                    transform="uppercase"
-                    size="small"
-                    weight="bold"
-                    lineHeight="condensed"
-                  >
-                    Brand
-                  </Text>
-                  <Text
-                    as="div"
-                    color="primary-inverse"
-                    size="large"
-                    weight="normal"
-                    lineHeight="condensed"
-                  >
-                    Sub-brand
-                  </Text>
-                </View>
-              )}
-              nameBackground="#2D3B45"
               href="/#TopNavBar"
             />
           )}
@@ -1745,35 +1680,6 @@ class LayoutExample extends React.Component {
                     renderBrand={
                       <TopNavBar.Brand
                         screenReaderLabel="Brand name"
-                        renderName={(
-                          <View as="div" minWidth="7rem">
-                            <Text
-                              as="div"
-                              color={inverseColor
-                                ? "brand"
-                                : "primary-inverse"
-                              }
-                              transform="uppercase"
-                              size="small"
-                              weight="bold"
-                              lineHeight="condensed"
-                            >
-                              Brand
-                            </Text>
-                            <Text
-                              as="div"
-                              color={inverseColor
-                                ? "primary"
-                                : "primary-inverse"
-                              }
-                              size="large"
-                              weight="normal"
-                              lineHeight="condensed"
-                            >
-                              Sub-brand
-                            </Text>
-                          </View>
-                        )}
                         renderIcon={inverseColor ? undefined : (
                           <IconBoldLine
                             size="small"
@@ -2328,35 +2234,6 @@ type: example
             renderBrand={
               <TopNavBar.Brand
                 screenReaderLabel="Brand name"
-                renderName={(
-                  <View as="div" minWidth="7rem">
-                    <Text
-                      as="div"
-                      color={inverseColor
-                        ? "brand"
-                        : "primary-inverse"
-                      }
-                      transform="uppercase"
-                      size="small"
-                      weight="bold"
-                      lineHeight="condensed"
-                    >
-                      Brand
-                    </Text>
-                    <Text
-                      as="div"
-                      color={inverseColor
-                        ? "primary"
-                        : "primary-inverse"
-                      }
-                      size="large"
-                      weight="normal"
-                      lineHeight="condensed"
-                    >
-                      Sub-brand
-                    </Text>
-                  </View>
-                )}
                 renderIcon={inverseColor ? undefined : (
                   <IconBoldLine
                     size="small"

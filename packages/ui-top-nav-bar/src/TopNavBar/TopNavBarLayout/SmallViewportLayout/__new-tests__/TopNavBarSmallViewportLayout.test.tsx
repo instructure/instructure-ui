@@ -203,13 +203,13 @@ describe('<TopNavBarSmallViewportLayout />', () => {
       expect(brandNameText).not.toBeInTheDocument()
     })
 
-    it('should not render brand container when "renderName" and "renderIcon" props are both missing', () => {
+    it('should not render brand container when "renderIcon" prop is missing', () => {
       const { container } = render(
         <SmallViewportModeWrapper>
           <TopNavBarSmallViewportLayout
             {...defaultProps}
             renderBrand={getBrand({
-              brandProps: { renderName: undefined, renderIcon: undefined }
+              brandProps: { renderIcon: undefined }
             })}
           />
         </SmallViewportModeWrapper>
