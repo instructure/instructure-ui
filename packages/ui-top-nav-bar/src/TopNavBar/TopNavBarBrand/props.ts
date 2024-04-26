@@ -47,21 +47,10 @@ type TopNavBarBrandOwnProps = {
   screenReaderLabel: string
 
   /**
-   * The app/product/brand/company/etc. name.
-   */
-  renderName?: React.ReactNode
-
-  /**
    * The app/product/brand/company/etc. logo or icon.
    * The icon is not displayed in "smallViewport" mode.
    */
   renderIcon?: React.ReactNode
-
-  /**
-   * Background color of the brand name.
-   * The background is not displayed in "smallViewport" mode.
-   */
-  nameBackground?: string
 
   /**
    * Background color of the icon, usually the brand color (when an icon is provided).
@@ -99,12 +88,7 @@ type TopNavBarBrandProps = TopNavBarBrandOwnProps &
   OtherHTMLAttributes<TopNavBarBrandOwnProps>
 
 type TopNavBarBrandStyle = ComponentStyle<
-  | 'topNavBarBrand'
-  | 'container'
-  | 'nameContainer'
-  | 'name'
-  | 'iconContainer'
-  | 'icon'
+  'topNavBarBrand' | 'container' | 'name' | 'iconContainer' | 'icon'
 > &
   Pick<TopNavBarBrandTheme, 'focusOutlineInset'>
 
@@ -114,9 +98,7 @@ type TopNavBarBrandStyleProps = {
 
 const propTypes: PropValidators<PropKeys> = {
   screenReaderLabel: PropTypes.string.isRequired,
-  renderName: PropTypes.node,
   renderIcon: PropTypes.node,
-  nameBackground: PropTypes.string,
   iconBackground: PropTypes.string,
   href: PropTypes.string,
   onClick: PropTypes.func,
@@ -126,9 +108,7 @@ const propTypes: PropValidators<PropKeys> = {
 
 const allowedProps: AllowedPropKeys = [
   'screenReaderLabel',
-  'renderName',
   'renderIcon',
-  'nameBackground',
   'iconBackground',
   'href',
   'onClick',
