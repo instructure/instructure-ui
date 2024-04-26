@@ -89,10 +89,7 @@ class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
 
   get hasBrandBlock() {
     const { renderBrand } = this.props
-    return (
-      !!renderBrand &&
-      (!!renderBrand.props.renderName || !!renderBrand.props.renderIcon)
-    )
+    return !!renderBrand && !!renderBrand.props.renderIcon
   }
 
   get hasActionItemsBlock() {
