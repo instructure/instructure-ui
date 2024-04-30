@@ -69,7 +69,6 @@ const BaseExample = () => {
     <TopNavBar breakpoint={700}>
       {() => (
         <TopNavBar.Layout
-          desktopConfig={{}}
           smallViewportConfig={{
             dropdownMenuToggleButtonLabel: 'Toggle Menu',
             dropdownMenuLabel: 'Main Menu'
