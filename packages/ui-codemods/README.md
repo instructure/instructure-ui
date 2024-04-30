@@ -4,7 +4,7 @@ category: packages
 
 ## ui-codemods
 
-The ui-codemods should make it easier to deal with API changes when upgrading Instructure UI libraries.
+The ui-codemods package should make it easier to deal with API changes when upgrading Instructure UI libraries.
 
 [![npm][npm]][npm-url]
 [![MIT License][license-badge]][license]

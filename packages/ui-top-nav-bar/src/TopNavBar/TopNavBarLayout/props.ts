@@ -117,11 +117,6 @@ type CommonTopNavBarLayoutProps = {
 
 type TopNavBarLayoutOwnProps = CommonTopNavBarLayoutProps & {
   /**
-   * Config object for the "desktop" mode:
-   */
-  desktopConfig?: DesktopLayoutOwnProps
-
-  /**
    * Config object for the "small viewport" mode:
    */
   smallViewportConfig: SmallViewportLayoutOwnProps
@@ -177,7 +172,6 @@ const smallViewportPropTypes: PropValidators<SmallViewportPropKeys> = {
 
 const propTypes: PropValidators<PropKeys> = {
   ...commonPropTypes,
-  desktopConfig: PropTypes.shape(desktopPropTypes),
   smallViewportConfig: PropTypes.shape(smallViewportPropTypes).isRequired
 }
 
@@ -206,7 +200,6 @@ const smallViewportAllowedProps: SmallViewportAllowedPropKeys = [
 
 const allowedProps: AllowedPropKeys = [
   ...commonAllowedProps,
-  'desktopConfig',
   'smallViewportConfig'
 ]
 
