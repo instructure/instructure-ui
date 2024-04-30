@@ -44,12 +44,11 @@ Since CommonJS style imports `require(..)` have been superseded by ES6 style imp
 
 For more information, click the name of the component to see its full documentation.
 
-| Component                                         | Old Property             | New Property | Notes                                                                                                                               |
-| ------------------------------------------------- | ------------------------ | ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [Mask](#Mask)                                     | onDismiss                | -            | This prop hasn't been used by the component for a long time, will be permanently removed in V9.                                     |
-| [Overlay](#Overlay)                               | applicationElement       | -            | This prop is passed to Dialog, but it has been removed from Dialog in V6, so it will be permanently removed from Overlay too in V9. |
-| [TopNavBarBrand](#TopNavBarBrand)                 | renderName               | -            | Please use the updated [TopNavBar](#TopNavBar) design.                                                                              |
-| [TopNavBarDesktopLayout](#TopNavBarDesktopLayout) | hideActionsUserSeparator | -            | From v9, actionUserSeparator has to be visible at all times. Please do not use designs which hide it.                               |
+| Component                      | Old Property       | New Property | Notes                                                                                                                                         |
+| ------------------------------ | ------------------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Mask](#Mask)                  | onDismiss          | -            | This prop hasn't been used by the component for a long time, will be permanently removed in V9.                                               |
+| [Overlay](#Overlay)            | applicationElement | -            | This prop is passed to Dialog, but it has been removed from Dialog in V6, so it will be permanently removed from Overlay too in V9.           |
+| [TopNavBar.Layout](#TopNavBar) | desktopConfig      | -            | From v9, actionUserSeparator has to be visible at all times. This made the `desktopConfig` prop obsolete since it only had this single field. |
 
 ### Deprecated Property Values
 
