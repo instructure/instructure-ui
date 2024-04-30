@@ -13,18 +13,27 @@ A cli for working with Instructure UI packages.
 #### Using npx
 
 ```bash
-$ npx @instructure/instui-cli create component
+---
+type: code
+---
+npx @instructure/instui-cli create component
 ```
 
 #### Globally installing `instui-cli`
 
 ```bash
-$ npm install -g @instructure/instui-cli
+---
+type: code
+---
+npm install -g @instructure/instui-cli
 ```
 
 You now have access to `instui` commands
 
 ```bash
+---
+type: code
+---
 instui create component
 ```
 
@@ -43,6 +52,9 @@ instui create component
 For more documentation on available options and parameters for individual commands do:
 
 ```sh
+---
+type: code
+---
 instui <command> --help
 ```
 
