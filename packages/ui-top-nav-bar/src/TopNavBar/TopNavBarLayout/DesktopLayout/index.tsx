@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 
-import { deprecated, omitProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -48,11 +48,6 @@ private: true
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-@deprecated(
-  '9',
-  { hideActionsUserSeparator: true },
-  'From v9, actionUserSeparator has to be visible at all times. Please do not use designs which hide it. Note: this prop is probably used inside the desktopConfig prop on [TopNavBar.Layout]'
-)
 class TopNavBarDesktopLayout extends Component<TopNavBarDesktopLayoutProps> {
   static readonly componentId = 'TopNavBar.DesktopLayout'
 

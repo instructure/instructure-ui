@@ -37,7 +37,7 @@ const topNavBarExampleChildren: TopNavBarProps['children'][] = [
       key="default"
       {...getLayoutProps(
         { currentLayout, inverseColor },
-        { hideActionsUserSeparator: true, userVariant: 'button' }
+        { userVariant: 'button' }
       )}
     />
   ),
@@ -60,7 +60,6 @@ const topNavBarExampleChildren: TopNavBarProps['children'][] = [
       {...getLayoutProps(
         { currentLayout, inverseColor },
         {
-          hideActionsUserSeparator: true,
           brandProps: { renderIcon: undefined },
           hasBrandNameBackground: true,
           currentPageId: 'Maps',
