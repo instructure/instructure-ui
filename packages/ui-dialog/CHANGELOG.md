@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.55.1](https://github.com/instructure/instructure-ui/compare/v8.55.0...v8.55.1) (2024-04-30)
+
+
+### Bug Fixes
+
+* **ui-dialog:** revert ecc0ee8 ([deb44dd](https://github.com/instructure/instructure-ui/commit/deb44ddbe05c472af0ba13d00cc2fa410f15a212))
+
+
+
+
+
 # [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
 
 
