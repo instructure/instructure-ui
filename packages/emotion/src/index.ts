@@ -25,7 +25,6 @@
 
 export * from '@emotion/react'
 
-export { EmotionThemeProvider } from './EmotionThemeProvider'
 export { InstUISettingsProvider } from './InstUISettingsProvider'
 export { withStyle } from './withStyle'
 export {

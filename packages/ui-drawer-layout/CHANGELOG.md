@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
+
+
+### Bug Fixes
+
+* **ui-drawer-layout:** fix drawerlayout transition bug ([27ae4f1](https://github.com/instructure/instructure-ui/commit/27ae4f1acda8dd127ff55f2acd44790d7558ebe2))
+
+
+
+
+
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
 **Note:** Version bump only for package @instructure/ui-drawer-layout

@@ -29,7 +29,7 @@ import { element } from '@instructure/ui-prop-types'
 import { textDirectionContextConsumer } from '@instructure/ui-i18n'
 
 import type { PositionMountNode } from '@instructure/ui-position'
-import type { BidirectionalProps } from '@instructure/ui-i18n'
+import type { TextDirectionContextConsumerProps } from '@instructure/ui-i18n'
 import type { ComponentStyle, WithStyleProps } from '@instructure/emotion'
 import type {
   DrawerLayoutTrayTheme,
@@ -94,7 +94,7 @@ type DrawerLayoutTrayOwnProps = {
   mountNode?: PositionMountNode
 } & PropsPassedToDialog &
   PropsPassedToTransition &
-  BidirectionalProps
+  TextDirectionContextConsumerProps
 
 type PropsPassedToDialog = {
   /**

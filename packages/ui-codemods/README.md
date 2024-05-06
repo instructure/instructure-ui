@@ -4,10 +4,10 @@ category: packages
 
 ## ui-codemods
 
-The ui-codemods should make it easier to deal with API changes when upgrading Instructure UI libraries.
+The ui-codemods package should make it easier to deal with API changes when upgrading Instructure UI libraries.
 
-[![npm][npm]][npm-url]&nbsp;
-[![MIT License][license-badge]][license]&nbsp;
+[![npm][npm]][npm-url]
+[![MIT License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 
 ### Installation
@@ -15,6 +15,9 @@ The ui-codemods should make it easier to deal with API changes when upgrading In
 The codemod scripts can be installed via the following command:
 
 ```sh
+---
+type: code
+---
 npm install @instructure/ui-codemods
 ```
 
@@ -22,6 +25,9 @@ The configuration files are located in the [instui-config](#instui-config) packa
 This can be installed via the following command:
 
 ```sh
+---
+type: code
+---
 npm install @instructure/instui-config
 ```
 
@@ -34,6 +40,9 @@ All available codemods can also be executed using the [instui-cli](#instui-cli) 
 This codemod helps you update your project by renaming `props` that have had names changed (e.g., `onReady` => `onOpen`).
 
 ```sh
+---
+type: code
+---
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.ts <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/propNames.config.json
 ```
 
@@ -42,6 +51,9 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.ts <pat
 This codemod helps you update your project by renaming `imports` that have changed (e.g., `instructure-ui` => `@instructure/<package name>`).
 
 ```sh
+---
+type: code
+---
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.ts <path> --config=node_modules/@instructure/instui-config/codemod-configs/v<version number ex. 5 or 6>/imports.config.js
 ```
 
@@ -50,20 +62,40 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.ts <path>
 This codemod upgrades more complex changes like Button, also outputs any manual changes needed to the console. Run this in a InstUI v7 codebase only. This command has an optional fileName parameter, supplying this will append to the given file the warnings.
 
 ```sh
+---
+type: code
+---
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV7Props.ts <path> -fileName updateV7PropsWarnings.txt
 ```
 
 ### Codemod for breaking changes after updating the dependencies to V8
 
 ```sh
+---
+type: code
+---
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8Breaking.ts <path>
 ```
 
 This codemod updates breaking changes after a v8 upgrade. Run this in a project after you have upgraded your dependencies to InstUI v8.
 
+### Codemod for breaking changes after updating the dependencies to V9
+
+```sh
+---
+type: code
+---
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV9Breaking.ts <path> --parser=tsx --usePrettier=false
+```
+
+This codemod addresses breaking changes following a v9 upgrade. Notably, it updates `EmotionThemeProvider` to `InstUISettingsProvider`. Execute this in your project post-upgrade to InstUI v9. Prettier is turned on by default for output formatting, and you can also use the `usePrettier` flag. Additionally, the parser flag can specify the parser for jsx and tsx files.
+
 ### Codemod for adding a wrapper to ReactDOM.render()
 
 ```sh
+---
+type: code
+---
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateV8ReactDOM.ts <path> -fileName updateV8ReactDOM.txt
 ```
 

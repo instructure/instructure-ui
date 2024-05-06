@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.55.0](https://github.com/instructure/instructure-ui/compare/v8.54.0...v8.55.0) (2024-04-09)
+
+
+### Bug Fixes
+
+* **ui-dialog:** menu closes when clicking on submenu ([7e7d1aa](https://github.com/instructure/instructure-ui/commit/7e7d1aae54f5649f0dd2b8c5974bb27f23a9956b))
+
+
+
+
+
 # [8.54.0](https://github.com/instructure/instructure-ui/compare/v8.53.2...v8.54.0) (2024-03-21)
 
 **Note:** Version bump only for package @instructure/ui-dialog

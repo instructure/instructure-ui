@@ -106,8 +106,10 @@ class Dialog extends Component<DialogProps> {
   }
 
   close() {
-    if (this._focusRegion) {
-      FocusRegionManager.blurRegion(this.contentElement, this._focusRegion.id)
+    const { _focusRegion, contentElement } = this
+    // setTimeout is used here to delay the blur after the mousedown event in FocusRegion for correct execution order
+    if (_focusRegion) {
+      FocusRegionManager.blurRegion(contentElement, _focusRegion.id)
     }
   }
 

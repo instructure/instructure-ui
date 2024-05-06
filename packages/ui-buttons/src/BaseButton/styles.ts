@@ -296,7 +296,9 @@ const generateStyle = (
         pointerEvents:
           'none' /* Ensures that button or link is always the event target */
       },
-
+      '&:focus': {
+        textDecoration: 'none'
+      },
       '&:active > [class$=-baseButton__content]': colorVariants[color!].active,
       '&:hover > [class$=-baseButton__content]': colorVariants[color!].hover
     },

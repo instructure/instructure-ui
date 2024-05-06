@@ -22,11 +22,7 @@
  * SOFTWARE.
  */
 
-export {
-  EmotionThemeProvider,
-  InstUISettingsProvider,
-  withStyle
-} from '@instructure/emotion'
+export { InstUISettingsProvider, withStyle } from '@instructure/emotion'
 export {
   AccessibleContent,
   PresentationContent,
@@ -82,11 +78,7 @@ export {
 } from '@instructure/ui-form-field'
 export { Grid, GridRow, GridCol } from '@instructure/ui-grid'
 export { Heading } from '@instructure/ui-heading'
-export {
-  ApplyLocale,
-  ApplyTextDirection,
-  TextDirectionContext
-} from '@instructure/ui-i18n'
+export { ApplyLocale, TextDirectionContext } from '@instructure/ui-i18n'
 export * from '@instructure/ui-icons'
 export { Img } from '@instructure/ui-img'
 export { Link } from '@instructure/ui-link'
@@ -100,7 +92,7 @@ export {
 export { MetricGroup, Metric } from '@instructure/ui-metric'
 export { Modal } from '@instructure/ui-modal'
 export { Transition } from '@instructure/ui-motion'
-export { Navigation, AppNav } from '@instructure/ui-navigation'
+export { AppNav } from '@instructure/ui-navigation'
 export { NumberInput } from '@instructure/ui-number-input'
 export { Options } from '@instructure/ui-options'
 export { Mask, Overlay } from '@instructure/ui-overlays'

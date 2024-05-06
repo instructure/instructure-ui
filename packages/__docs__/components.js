@@ -71,7 +71,6 @@ export { Table } from '@instructure/ui-table'
 export { TruncateText } from '@instructure/ui-truncate-text'
 export {
   ApplyLocale,
-  ApplyTextDirection,
   TextDirectionContext
 } from '@instructure/ui-i18n'
 export { MetricGroup, Metric } from '@instructure/ui-metric'
@@ -91,7 +90,7 @@ export {
   CheckboxFacade,
   ToggleFacade
 } from '@instructure/ui-checkbox'
-export { Navigation, AppNav } from '@instructure/ui-navigation'
+export { AppNav } from '@instructure/ui-navigation'
 export { List, InlineList } from '@instructure/ui-list'
 export { Menu } from '@instructure/ui-menu'
 export { Options } from '@instructure/ui-options'
@@ -129,10 +128,7 @@ export { Guidelines } from './src/Guidelines'
 export { Figure } from './src/Figure'
 // eslint-disable-next-line no-restricted-imports
 export { ToggleBlockquote } from './src/ToggleBlockquote'
-export {
-  EmotionThemeProvider,
-  InstUISettingsProvider
-} from '@instructure/emotion'
+export { InstUISettingsProvider } from '@instructure/emotion'
 export { Drilldown } from '@instructure/ui-drilldown'
 export { SourceCodeEditor } from '@instructure/ui-source-code-editor'
 export { TopNavBar } from '@instructure/ui-top-nav-bar'

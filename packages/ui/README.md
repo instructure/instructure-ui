@@ -18,7 +18,6 @@ The `ui` package contains the following:
 - Alert
 - All ui-icons
 - ApplyLocale
-- ApplyTextDirection
 - AppNav
 - Avatar
 - Badge
@@ -37,7 +36,6 @@ The `ui` package contains the following:
 - Dialog
 - DrawerLayout
 - Editable
-- EmotionThemeProvider
 - FileDrop
 - Flex
 - Focusable
@@ -62,7 +60,6 @@ The `ui` package contains the following:
 - Metric
 - MetricGroup
 - Modal
-- Navigation
 - NumberInput
 - Options
 - Overlay

@@ -14,7 +14,7 @@ We recommend upgrading your application for each major version gradually, e.g. i
 
 The tables below show what will be removed and what are they replaced with. We also marked if there are [codemods](#ui-codemods) available.
 
-#### CommonJS build has been deprecated in v9
+### CommonJS build has been deprecated in v9
 
 Since CommonJS style imports `require(..)` have been superseded by ES6 style imports `import … from …` and are well supported both in browsers and in node.js we decided to no longer support packages with CommonJS style imports in our releases.
 
@@ -25,36 +25,35 @@ Some of our internal toolings require commonjs still and the refactor takes a lo
 
 ### Deprecated Components
 
-| Component                 | Substitute / Notes                                                                                                                                             |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [CodeEditor](#CodeEditor) | CodeEditor will be deleted in v9. Use [SourceCodeEditor](#SourceCodeEditor) instead, which is the wrapper for the newer version of the CodeMirror code editor. |
-| [Navigation](#Navigation) | Navigation will be deleted in v9. It has been renamed to [SideNavBar](#SideNavBar).                                                                            |
+| Component                 | Substitute / Notes                                                                                                                                              |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [CodeEditor](#CodeEditor) | CodeEditor stays deprecated in v9. Use [SourceCodeEditor](#SourceCodeEditor) instead, which is the wrapper for the newer version of the CodeMirror code editor. |
+| [Navigation](#Navigation) | Navigation has been removed in v9. Use the new [SideNavBar](#SideNavBar) instead.                                                                               |
 
 ### Deprecated Utilities
 
-| Utility                                       | Substitute / Notes                                                                                                                                  |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [addResizeListener](#addResizeListener)       | Use the native [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) utility. Example usage: [here](#addResizeListener) |
-| [ApplyTextDirection](#ApplyTextDirection)     | Use [InstUISettingsProvider](#InstUISettingsProvider) instead to configure text direction.                                                          |
-| [bidirectional](#bidirectional)               | It has been renamed to [textDirectionContextConsumer](#textDirectionContextConsumer), functionality remains the same.                               |
-| [Browser](#Browser)                           | It has been removed in v9.                                                                                                                          |
-| [ComponentIdentifier](#ComponentIdentifier)   | This util has been removed because it is not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.           |
-| [DateTime](#DateTime)                         | This util has been removed because it is not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.           |
-| [elementMatches](#elementMatches)             | This polyfill is only needed for old, unsupported browsers.                                                                                         |
-| [EmotionThemeProvider](#EmotionThemeProvider) | It has been renamed to [InstUISettingsProvider](#InstUISettingsProvider) and can now also configure text direction.                                 |
-| [isEdge](#isEdge)                             | It has been removed in v9.                                                                                                                          |
-| [isIE11](#isIE11)                             | It has been removed in v9.                                                                                                                          |
+| Utility                                       | Substitute / Notes                                                                                                                                                        |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [addResizeListener](#addResizeListener)       | Use the native [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) utility. Example usage: [here](#addResizeListener)                       |
+| [ApplyTextDirection](#ApplyTextDirection)     | Use [InstUISettingsProvider](#InstUISettingsProvider) instead to configure text direction.                                                                                |
+| [bidirectional](#bidirectional)               | It has been renamed to [textDirectionContextConsumer](#textDirectionContextConsumer), functionality remains the same.                                                     |
+| [Browser](#Browser)                           | It has been removed in v9.                                                                                                                                                |
+| [ComponentIdentifier](#ComponentIdentifier)   | This util has been removed because it is not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.                                 |
+| [DateTime](#DateTime)                         | This util has been removed because it is not used by InstUI and other Instructure projects. If you need it, just copy & paste their code.                                 |
+| [elementMatches](#elementMatches)             | This polyfill is only needed for old, unsupported browsers.                                                                                                               |
+| [EmotionThemeProvider](#EmotionThemeProvider) | It has been renamed to [InstUISettingsProvider](#InstUISettingsProvider) and can now also configure text direction. [Codemod](#ui-codemods) is available for this change. |
+| [isEdge](#isEdge)                             | It has been removed in v9.                                                                                                                                                |
+| [isIE11](#isIE11)                             | It has been removed in v9.                                                                                                                                                |
 
 ### Deprecated Properties
 
 For more information, click the name of the component to see its full documentation.
 
-| Component                                         | Old Property             | New Property | Notes                                                                                                                               |
-| ------------------------------------------------- | ------------------------ | ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [Mask](#Mask)                                     | onDismiss                | -            | This prop hasn't been used by the component for a long time, will be permanently removed in V9.                                     |
-| [Overlay](#Overlay)                               | applicationElement       | -            | This prop is passed to Dialog, but it has been removed from Dialog in V6, so it will be permanently removed from Overlay too in V9. |
-| [TopNavBarBrand](#TopNavBarBrand)                 | renderName               | -            | Please use the updated [TopNavBar](#TopNavBar) design.                                                                              |
-| [TopNavBarDesktopLayout](#TopNavBarDesktopLayout) | hideActionsUserSeparator | -            | From v9, actionUserSeparator has to be visible at all times. Please do not use designs which hide it.                               |
+| Component                      | Old Property       | New Property | Notes                                                                                                                                         |
+| ------------------------------ | ------------------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Mask](#Mask)                  | onDismiss          | -            | This prop hasn't been used by the component for a long time, will be permanently removed in V9.                                               |
+| [Overlay](#Overlay)            | applicationElement | -            | This prop is passed to Dialog, but it has been removed from Dialog in V6, so it will be permanently removed from Overlay too in V9.           |
+| [TopNavBar.Layout](#TopNavBar) | desktopConfig      | -            | From v9, actionUserSeparator has to be visible at all times. This made the `desktopConfig` prop obsolete since it only had this single field. |
 
 ### Deprecated Property Values
 
