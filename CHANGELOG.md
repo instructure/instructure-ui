@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-06)
+
+
+### Features
+
+* **instui-cli,ui-codemods,ui-top-nav-bar:** remove desktopConfig prop from TopNavBar.Layout ([d5efe5f](https://github.com/instructure/instructure-ui/commit/d5efe5f76b5af15db6ff9224a501121f35bf1ed9))
+* **instui-config,ui-codemods:** remove instui-cli and template packages ([17a4442](https://github.com/instructure/instructure-ui/commit/17a4442b917d0516d6977ab8bc845dd609a84e49))
+* set tooling packages to private ([17ab811](https://github.com/instructure/instructure-ui/commit/17ab81187c0ad7778bf3afd1426ece7ee3ca1136))
+* **shared-types,ui,ui-navigation:** remove deprecated component Navigation ([0173c76](https://github.com/instructure/instructure-ui/commit/0173c761f050d801f4191b823d423e6e29abedd5))
+* **ui-buttons,ui-text:** remove deprecated prop values ([f6b27d8](https://github.com/instructure/instructure-ui/commit/f6b27d84fe9dfbd2987dc5af7edefb093bcb4e1b))
+* **ui-dom-utils,ui-react-utils,ui-utils:** remove deprecated utils ([0a8c8e3](https://github.com/instructure/instructure-ui/commit/0a8c8e3230db7a7ec107bb726d1f98375c9446c4))
+* **ui-overlays:** remove deprecated props from Mask and Overlay ([e079b81](https://github.com/instructure/instructure-ui/commit/e079b81859dc9dfe69e16ba65a1e1f5c24740640))
+* **ui-top-nav-bar:** add onclick prop for hidden menu item ([7228ae1](https://github.com/instructure/instructure-ui/commit/7228ae160a449939f0427222b009b747b0daf926))
+* **ui-top-nav-bar:** remove renderName and nameBackground prop from TopNavBar.Brand ([8e48ab5](https://github.com/instructure/instructure-ui/commit/8e48ab5d0302d6205f372a6ddd833cae860aee5b))
+
+
+### BREAKING CHANGES
+
+* **instui-config,ui-codemods:** instui-cli and template packages has been removed
+* **ui-top-nav-bar:** renderName and nameBackground props have been removed
+* following packages have been set to private:
+- cz-lerna-changelog
+- slint-plugin-instructure-ui
+- pkg-utils
+- ui-babel-preset
+- ui-eslint-config
+- ui-karma-config
+- ui-scripts
+- ui-stylelint-config
+- ui-webpack-config
+* **instui-cli,ui-codemods,ui-top-nav-bar:** desktopConfig prop from TopNavBar.Layout has been removed
+* **ui-dom-utils,ui-react-utils,ui-utils:** deprecated utils has been removed
+* **ui-overlays:** removed onDismiss prop from Mask and applicationElement from Overlay
+* **ui-buttons,ui-text:** deprecated property values has been removed
+
+
+
+
+
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 

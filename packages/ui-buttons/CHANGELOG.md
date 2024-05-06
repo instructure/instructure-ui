@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v9.0.0) (2024-05-06)
+
+
+### Features
+
+* **ui-buttons,ui-text:** remove deprecated prop values ([f6b27d8](https://github.com/instructure/instructure-ui/commit/f6b27d84fe9dfbd2987dc5af7edefb093bcb4e1b))
+
+
+### BREAKING CHANGES
+
+* **ui-buttons,ui-text:** deprecated property values has been removed
+
+
+
+
+
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-buttons

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v9.0.0) (2024-05-06)
+
+
+### Features
+
+* **ui-overlays:** remove deprecated props from Mask and Overlay ([e079b81](https://github.com/instructure/instructure-ui/commit/e079b81859dc9dfe69e16ba65a1e1f5c24740640))
+
+
+### BREAKING CHANGES
+
+* **ui-overlays:** removed onDismiss prop from Mask and applicationElement from Overlay
+
+
+
+
+
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-overlays
