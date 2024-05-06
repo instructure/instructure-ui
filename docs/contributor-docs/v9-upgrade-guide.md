@@ -14,9 +14,14 @@ We recommend upgrading your application for each major version gradually, e.g. i
 
 The tables below show what will be removed and what are they replaced with. We also marked if there are [codemods](#ui-codemods) available.
 
-#### CommonJS build has been removed in v9
+#### CommonJS build has been deprecated in v9
 
-Since CommonJS style imports `require(..)` have been superseded by ES6 style imports `import … from …` and are well supported both in browsers and in node.js we decided to no longer include packages with CommonJS style imports in our releases.
+Since CommonJS style imports `require(..)` have been superseded by ES6 style imports `import … from …` and are well supported both in browsers and in node.js we decided to no longer support packages with CommonJS style imports in our releases.
+
+Some of our internal toolings require commonjs still and the refactor takes a long time. We decided to deprecate but leave in the CommonJS build for the time being, but - since it's deprecated - we will remove it without a breaking change notice or major release in the future.
+
+**IMPORTANT!**\
+**tl;dr: Even so the CommonJS build is still available, please do not use it, it will be removed anytime**
 
 ### Deprecated Components
 
