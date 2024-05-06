@@ -5,6 +5,7 @@
   "@instructure/canvas-theme",
   "@instructure/command-utils",
   "@instructure/console",
+  "@instructure/cz-lerna-changelog",
   "@instructure/debounce",
   "@instructure/emotion",
   "@instructure/instructure-theme",
