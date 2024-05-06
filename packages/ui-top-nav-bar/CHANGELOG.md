@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
+
+
+### Features
+
+* **ui-top-nav-bar:** add onclick prop for hidden menu item ([7228ae1](https://github.com/instructure/instructure-ui/commit/7228ae160a449939f0427222b009b747b0daf926))
+
+
+
+
+
 ## [8.55.1](https://github.com/instructure/instructure-ui/compare/v8.55.0...v8.55.1) (2024-04-30)
 
 
