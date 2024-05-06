@@ -304,7 +304,7 @@ class Hero extends Component<HeroProps> {
           </Flex>
           <List isUnstyled margin="small none none">
             <List.Item>
-              <Link href="#v8-upgrade-guide">Version 8.0 Upgrade Guide</Link>
+              <Link href="#v9-upgrade-guide">Version 9 Upgrade Guide</Link>
             </List.Item>
             <List.Item>
               <Link href="#CHANGELOG">Change Log ({version})</Link>
@@ -477,11 +477,11 @@ class Hero extends Component<HeroProps> {
                     <Button
                       focusColor="inverse"
                       color="success"
-                      href="#v8-upgrade-guide"
+                      href="#v9-upgrade-guide"
                       size={bigScreen ? 'large' : 'medium'}
                       margin="0 x-small x-small 0"
                     >
-                      8.0 Upgrade Guide
+                      9.0 Upgrade Guide
                     </Button>
                   </View>
                 </View>
