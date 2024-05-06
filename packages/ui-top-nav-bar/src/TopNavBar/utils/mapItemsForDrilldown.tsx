@@ -206,7 +206,13 @@ const renderMappedItemsAsDrilldownOptions = (
   mappedItems: ItemMappedForDrilldownOption[]
 ) => {
   return mappedItems.map<DrilldownOptionChild>((mappedItem) => {
-    const { optionData } = mappedItem
+    const { optionData, item: originalItem } = mappedItem
+    const onHiddenClick = originalItem.props.onHiddenClick
+
+    if (onHiddenClick) {
+      // if the `onHiddenClick` prop is provided for the MenuItem it should overwrite the `onClick` prop if there is any
+      optionData.onOptionClick = onHiddenClick as any
+    }
 
     return (
       <Drilldown.Option
