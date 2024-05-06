@@ -68,7 +68,7 @@ For more information, click the name of the component to see its full documentat
 ### Removed packages and scripts
 
 - InstUI-CLI's `create-app`, `create-component` and `create-package` commands: Just follow the instructions in the [usage](#usage) docs.
-- The `template-component`, `template-app` and `template-app` packages have been removed.
+- The `template-component`, `template-package` and `template-app` packages have been removed.
 
 ### Removal of deprecated legacy reference attributes from components
 
