@@ -1,7 +1,8 @@
 {
-  "latestVersion": "v8",
-  "previousVersions": ["v7", "v6"],
+  "latestVersion": "v9",
+  "previousVersions": ["v8", "v7", "v6"],
   "olderVersionsGitBranchMap": {
+    "v8": "v8_maintenance",
     "v7": "v7_maintenance",
     "v6": "v6_maintenance"
   }
