@@ -199,6 +199,13 @@ type TopNavBarItemOwnProps = {
   ) => void
 
   /**
+   * Only fires when the item is hidden because of truncation or mobile view. Intended to be used for navigation when the item would otherwise be a link.
+   */
+  onHiddenClick?: (
+    event: React.MouseEvent<ViewOwnProps> | React.KeyboardEvent<ViewOwnProps>
+  ) => void
+
+  /**
    * __In desktop mode__, the callback fired when the item's submenu ([Drilldown](#Drilldown)) is toggled open/closed.
    */
   onSubmenuToggle?: DrilldownProps['onToggle']
@@ -298,6 +305,7 @@ const propTypes: PropValidators<PropKeys> = {
   renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   href: PropTypes.string,
   onClick: PropTypes.func,
+  onHiddenClick: PropTypes.func,
   onSubmenuToggle: PropTypes.func,
   onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func,
@@ -324,6 +332,7 @@ const allowedProps: AllowedPropKeys = [
   'renderIcon',
   'href',
   'onClick',
+  'onHiddenClick',
   'onSubmenuToggle',
   'onMouseOver',
   'onMouseOut',
