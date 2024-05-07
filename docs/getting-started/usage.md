@@ -14,6 +14,7 @@ The following steps will create a React app that uses Instructure UI. Recommende
 ---
 type: code
 ---
+
 npx create-react-app my-cool-app
 ```
 
@@ -25,12 +26,13 @@ This will generate a vanilla React app with tests, sample code and scripts. You 
 ---
 type: code
 ---
+
 {
-    ...
-    "dependencies": {
-        ...
-        "@instructure/ui": "^8"
-    }
+...
+"dependencies": {
+...
+"@instructure/ui": "^9"
+}
 }
 ```
 
