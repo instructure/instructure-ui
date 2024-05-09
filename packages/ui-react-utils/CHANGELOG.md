@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
+
+
+### Features
+
+* **ui-dom-utils,ui-react-utils,ui-utils:** remove deprecated utils ([0a8c8e3](https://github.com/instructure/instructure-ui/commit/0a8c8e3230db7a7ec107bb726d1f98375c9446c4))
+
+
+### BREAKING CHANGES
+
+* **ui-dom-utils,ui-react-utils,ui-utils:** deprecated utils has been removed
+
+
+
+
+
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-react-utils

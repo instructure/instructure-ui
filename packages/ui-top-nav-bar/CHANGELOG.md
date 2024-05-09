@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
+
+
+### Features
+
+* **instui-cli,ui-codemods,ui-top-nav-bar:** remove desktopConfig prop from TopNavBar.Layout ([d5efe5f](https://github.com/instructure/instructure-ui/commit/d5efe5f76b5af15db6ff9224a501121f35bf1ed9))
+* **ui-top-nav-bar:** remove renderName and nameBackground prop from TopNavBar.Brand ([8e48ab5](https://github.com/instructure/instructure-ui/commit/8e48ab5d0302d6205f372a6ddd833cae860aee5b))
+
+
+### BREAKING CHANGES
+
+* **ui-top-nav-bar:** renderName and nameBackground props have been removed
+* **instui-cli,ui-codemods,ui-top-nav-bar:** desktopConfig prop from TopNavBar.Layout has been removed
+
+
+
+
+
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 

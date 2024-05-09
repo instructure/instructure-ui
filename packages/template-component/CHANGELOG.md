@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
+
+
+### Features
+
+* **instui-config,ui-codemods:** remove instui-cli and template packages ([17a4442](https://github.com/instructure/instructure-ui/commit/17a4442b917d0516d6977ab8bc845dd609a84e49))
+
+
+### BREAKING CHANGES
+
+* **instui-config,ui-codemods:** instui-cli and template packages has been removed
+
+
+
+
+
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/template-component
