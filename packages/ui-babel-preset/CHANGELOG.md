@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/instructure/instructure-ui/compare/v8.56.0...v9.0.0) (2024-05-09)
+
+
+### Features
+
+* set tooling packages to private ([17ab811](https://github.com/instructure/instructure-ui/commit/17ab81187c0ad7778bf3afd1426ece7ee3ca1136))
+
+
+### BREAKING CHANGES
+
+* following packages have been set to private:
+- cz-lerna-changelog
+- slint-plugin-instructure-ui
+- pkg-utils
+- ui-babel-preset
+- ui-eslint-config
+- ui-karma-config
+- ui-scripts
+- ui-stylelint-config
+- ui-webpack-config
+
+
+
+
+
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-babel-preset
