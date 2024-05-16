@@ -322,9 +322,12 @@ class Tabs extends Component<TabsProps, TabsState> {
     if (typeof this.props.onRequestTabChange === 'function') {
       this.props.onRequestTabChange(event, { index, id })
     }
-
-    this.state.withTabListOverflow &&
-      this.showActiveTabIfOverlayed(this._tabList!.querySelector(`#tab-${id}`))
+    setTimeout(() => {
+      this.state.withTabListOverflow &&
+        this.showActiveTabIfOverlayed(
+          this._tabList!.querySelector(`#tab-${id}`)
+        )
+    }, 0)
   }
 
   createTab(
