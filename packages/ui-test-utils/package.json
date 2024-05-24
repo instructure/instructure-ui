@@ -23,11 +23,11 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "9.0.1",
-    "@types/chai": "^4.3.8",
-    "@types/chai-as-promised": "^7.1.6",
-    "@types/chai-string": "^1.4.3",
-    "@types/dirty-chai": "^2.0.2",
-    "@types/sinon-chai": "^3.2.10",
+    "@types/chai": "^4.3.16",
+    "@types/chai-as-promised": "^7.1.8",
+    "@types/chai-string": "^1.4.5",
+    "@types/dirty-chai": "^2.0.4",
+    "@types/sinon-chai": "^3.2.12",
     "prop-types": "^15.8.1"
   },
   "dependencies": {
@@ -35,8 +35,8 @@
     "@instructure/ui-test-queries": "9.0.1",
     "@instructure/ui-test-sandbox": "9.0.1",
     "@sheerun/mutationobserver-shim": "^0.3.3",
-    "chai": "^4.3.10",
-    "chai-as-promised": "^7.1.1",
+    "chai": "^4.4.1",
+    "chai-as-promised": "^7.1.2",
     "chai-exclude": "^2.1.0",
     "chai-string": "^1.5.0",
     "dirty-chai": "^2.0.1",

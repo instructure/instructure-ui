@@ -25,11 +25,11 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "9.0.1",
     "@instructure/ui-test-utils": "9.0.1",
-    "@types/hoist-non-react-statics": "^3.3.3",
-    "react-dom": "^18.2.0"
+    "@types/hoist-non-react-statics": "^3.3.5",
+    "react-dom": "^18.3.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
+    "@babel/runtime": "^7.24.5",
     "@instructure/shared-types": "9.0.1",
     "@instructure/ui-decorator": "9.0.1",
     "@instructure/ui-dom-utils": "9.0.1",

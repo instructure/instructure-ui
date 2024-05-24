@@ -23,10 +23,10 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "9.0.1",
-    "@testing-library/jest-dom": "^6.1.4"
+    "@testing-library/jest-dom": "^6.4.5"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.2"
+    "@babel/runtime": "^7.24.5"
   },
   "publishConfig": {
     "access": "public"

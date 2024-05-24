@@ -23,13 +23,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
+    "@babel/runtime": "^7.24.5",
     "sinon": "^15.2.0"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "9.0.1",
-    "@types/mocha": "^10.0.2",
-    "@types/sinon": "^10.0.19",
+    "@types/mocha": "^10.0.6",
+    "@types/sinon": "^10.0.20",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {

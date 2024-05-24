@@ -433,6 +433,7 @@ describe('<Focusable />', async () => {
                     ref={(el) => {
                       labelRef = el
                     }}
+                    aria-label={'test-label'}
                   >
                     <input
                       checked={checked}

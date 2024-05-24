@@ -27,7 +27,7 @@
     "@instructure/ui-test-utils": "9.0.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
+    "@babel/runtime": "^7.24.5",
     "@instructure/shared-types": "9.0.1"
   },
   "publishConfig": {

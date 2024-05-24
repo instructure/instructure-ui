@@ -30,7 +30,7 @@
     "@instructure/ui-themes": "9.0.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
+    "@babel/runtime": "^7.24.5",
     "@instructure/console": "9.0.1",
     "@instructure/debounce": "9.0.1",
     "@instructure/emotion": "9.0.1",

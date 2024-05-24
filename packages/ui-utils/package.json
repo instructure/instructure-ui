@@ -23,20 +23,20 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "9.0.1",
-    "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.1.2",
-    "@types/json-stable-stringify": "^1.0.34"
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^15.0.7",
+    "@types/json-stable-stringify": "^1.0.36"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
+    "@babel/runtime": "^7.24.5",
     "@instructure/console": "9.0.1",
     "@instructure/ui-dom-utils": "9.0.1",
-    "@types/ua-parser-js": "^0.7.37",
+    "@types/ua-parser-js": "^0.7.39",
     "bowser": "^2.11.0",
     "fast-deep-equal": "^3.1.3",
-    "json-stable-stringify": "^1.0.2",
+    "json-stable-stringify": "^1.1.1",
     "keycode": "^2.2.1",
-    "ua-parser-js": "^1.0.36"
+    "ua-parser-js": "^1.0.37"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18",

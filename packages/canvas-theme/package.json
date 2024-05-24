@@ -25,7 +25,7 @@
     "@instructure/ui-babel-preset": "9.0.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
+    "@babel/runtime": "^7.24.5",
     "@instructure/shared-types": "9.0.1",
     "@instructure/theme-registry": "9.0.1",
     "@instructure/ui-theme-tokens": "9.0.1"
