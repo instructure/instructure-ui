@@ -23,52 +23,54 @@
  */
 
 import React from 'react'
+import { render, screen, waitFor } from '@testing-library/react'
 
-import { expect, mount, stub, locator, wait } from '@instructure/ui-test-utils'
-
+import '@testing-library/jest-dom'
 import { PaginationButton } from '../index'
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-const PaginationButtonLocator = locator(PaginationButton.selector)
-
-describe('<PaginationButton />', async () => {
+describe('<PaginationButton />', () => {
   it('should designate current page', async () => {
-    await mount(<PaginationButton current>1</PaginationButton>)
-    const button = await PaginationButtonLocator.find(':label(1)')
-    expect(button.getAttribute('aria-current')).to.equal('page')
+    render(<PaginationButton current>1</PaginationButton>)
+    const button = screen.getByRole('button', { name: '1' })
+
+    expect(button).toHaveAttribute('aria-current', 'page')
   })
 
   it('should navigate using button when onClick provided', async () => {
-    const onClick = stub()
-    await mount(<PaginationButton onClick={onClick}>1</PaginationButton>)
-    const button = await PaginationButtonLocator.find(':label(1)')
-    await button.click()
-    expect(onClick).to.have.been.called()
+    const onClick = jest.fn()
+    render(<PaginationButton onClick={onClick}>1</PaginationButton>)
+
+    const button = screen.getByRole('button', { name: '1' })
+
+    button.click()
+
+    await waitFor(() => {
+      expect(onClick).toHaveBeenCalled()
+    })
   })
 
   it('should disable navigation to current page', async () => {
-    const onClick = stub()
-    await mount(
+    const onClick = jest.fn()
+    render(
       <PaginationButton onClick={onClick} current>
         1
       </PaginationButton>
     )
-    const button = await PaginationButtonLocator.find(':label(1)')
-    await button.click()
+    const button = screen.getByRole('button', { name: '1' })
 
-    await wait(() => {
-      expect(onClick).to.not.have.been.called()
+    button.click()
+
+    await waitFor(() => {
+      expect(onClick).not.toHaveBeenCalled()
     })
   })
 
   it('should navigate using link when href provided', async () => {
-    await mount(
+    render(
       <PaginationButton href="https://instructure.design/">1</PaginationButton>
     )
-    const button = await PaginationButtonLocator.find(':label(1)')
+    const button = screen.getByRole('link')
 
-    await wait(() => {
-      expect(button).to.have.attribute('href', 'https://instructure.design/')
-    })
+    expect(button).toHaveAttribute('href', 'https://instructure.design/')
   })
 })

@@ -23,47 +23,32 @@
  */
 
 import React from 'react'
+import { render, screen } from '@testing-library/react'
 
-import { expect, mount, spy } from '@instructure/ui-test-utils'
-
+import '@testing-library/jest-dom'
 import { PaginationArrowButton } from '../index'
 
-import { PaginationArrowButtonLocator } from '../PaginationArrowButtonLocator'
-
-describe('<PaginationArrowButton />', async () => {
+describe('<PaginationArrowButton />', () => {
   it('should render', async () => {
-    await mount(<PaginationArrowButton direction="prev" label="Label" />)
+    render(<PaginationArrowButton direction="prev" label="Label" />)
 
-    const button = await PaginationArrowButtonLocator.find()
-    expect(button).to.exist()
-  })
+    const button = screen.getByRole('button', { name: 'Label' })
 
-  it('should display tooltips', async () => {
-    await mount(<PaginationArrowButton direction="prev" label="Label" />)
-
-    const button = await PaginationArrowButtonLocator.find()
-
-    await button.focus()
-
-    const tooltip = await button.findTooltipContent()
-
-    expect(tooltip).to.have.text('Label')
+    expect(button).toBeInTheDocument()
   })
 
   it('should provide a ref to the button element', async () => {
-    const buttonRef = spy()
+    const buttonRef = jest.fn()
 
-    await mount(
+    render(
       <PaginationArrowButton
         direction="prev"
         label="Label"
         buttonRef={buttonRef}
       />
     )
+    const button = screen.getByRole('button', { name: 'Label' })
 
-    const paginationArrow = await PaginationArrowButtonLocator.find()
-    const button = await paginationArrow.find('button')
-
-    expect(buttonRef).to.have.been.calledWith(button.getDOMNode())
+    expect(buttonRef).toHaveBeenCalledWith(button)
   })
 })

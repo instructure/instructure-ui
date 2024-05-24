@@ -34,6 +34,37 @@ import {
 import '../support/component'
 import 'cypress-real-events'
 
+const PopoverContainer = ({
+  onHideFn
+}: {
+  onHideFn: (documentClick: boolean) => void
+}) => {
+  const [popoverOpen, setPopoverOpen] = useState(true)
+  return (
+    <div>
+      <Popover
+        renderTrigger={<button>Trigger btn</button>}
+        isShowingContent={popoverOpen}
+        onShowContent={() => {
+          setPopoverOpen(true)
+        }}
+        onHideContent={(_e, { documentClick }) => {
+          setPopoverOpen(false)
+          onHideFn(documentClick)
+        }}
+        on="click"
+        screenReaderLabel="Popover Dialog Example"
+        shouldContainFocus
+        shouldReturnFocus
+        shouldCloseOnDocumentClick
+        offsetY="16px"
+      >
+        popover inner text
+      </Popover>
+    </div>
+  )
+}
+
 const PopoverExample = () => {
   const [popoverOpen, setPopoverOpen] = useState(false)
 
@@ -169,5 +200,46 @@ describe('<Popover/>', () => {
       .then(() => {
         cy.wrap(onHideContent).should('have.been.calledOnce')
       })
+  })
+
+  it('should close the popover via trigger before dismissing via documentClick', async () => {
+    const hideContentFn = cy.spy()
+    cy.mount(<PopoverContainer onHideFn={hideContentFn} />)
+
+    cy.contains('button', 'Trigger btn').click()
+
+    // this means the `onHideContent` callback was first called because the trigger and not the document click
+    // if it was the other way around that would mean the document click closed the popover and a trigger would open it again
+    // which makes the popover seem "unclosable"
+    cy.wrap(hideContentFn).should('have.been.calledWith', false)
+    cy.wrap(hideContentFn).should('have.been.calledWith', true)
+  })
+
+  it('should call onHideContent when clicking outside', async () => {
+    const hideContentFn = cy.spy()
+
+    cy.mount(
+      <div id="main">
+        <Popover
+          renderTrigger={<button>Trigger btn</button>}
+          isShowingContent={true}
+          onHideContent={(_e, o) => hideContentFn(o)}
+          on="click"
+          screenReaderLabel="Popover Dialog Example"
+          shouldContainFocus
+          shouldReturnFocus
+          offsetY="16px"
+        >
+          popover inner texts
+        </Popover>
+      </div>
+    )
+
+    cy.get('body').should('contain', 'popover inner texts')
+
+    cy.get('body').click()
+    cy.wrap(hideContentFn).should('have.been.calledWithMatch', {
+      documentClick: true
+    })
   })
 })

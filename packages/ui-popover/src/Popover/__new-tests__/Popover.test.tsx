@@ -22,51 +22,12 @@
  * SOFTWARE.
  */
 
-import React, { useState } from 'react'
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  cleanup
-} from '@testing-library/react'
+import React from 'react'
+import { fireEvent, render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { userEvent } from '@testing-library/user-event'
 
 import Popover from '../index'
 import type { PopoverProps } from '../props'
-
-const PopoverContainer = ({
-  onHideFn
-}: {
-  onHideFn: (documentClick: boolean) => void
-}) => {
-  const [popoverOpen, setPopoverOpen] = useState(true)
-  return (
-    <div>
-      <Popover
-        renderTrigger={<button>Trigger btn</button>}
-        isShowingContent={popoverOpen}
-        onShowContent={() => {
-          setPopoverOpen(true)
-        }}
-        onHideContent={(_e, { documentClick }) => {
-          setPopoverOpen(false)
-          onHideFn(documentClick)
-        }}
-        on="click"
-        screenReaderLabel="Popover Dialog Example"
-        shouldContainFocus
-        shouldReturnFocus
-        shouldCloseOnDocumentClick
-        offsetY="16px"
-      >
-        popover inner text
-      </Popover>
-    </div>
-  )
-}
 
 describe('<Popover />', () => {
   afterEach(() => {
@@ -345,47 +306,5 @@ describe('<Popover />', () => {
     const popover = document.querySelector('[data-position^="Popover_"]')
 
     expect(popover).toHaveStyle('display: block')
-  })
-
-  it('should close the popover via trigger before dismissing via documentClick', async () => {
-    const hideContentFn = jest.fn()
-    const { findByText } = render(<PopoverContainer onHideFn={hideContentFn} />)
-
-    userEvent.click(await findByText('Trigger btn'))
-    await waitFor(async () => {
-      // this means the `onHideContent` callback was first called because the trigger and not the document click
-      // if it was the other way around that would mean the document click closed the popover and a trigger would open it again
-      // which makes the popover seem "unclosable"
-      expect(hideContentFn).toHaveBeenNthCalledWith(1, false)
-      expect(hideContentFn).toHaveBeenNthCalledWith(2, true)
-    })
-  })
-
-  it('should call onHideContent when clicking outside', async () => {
-    const hideContentFn = jest.fn()
-
-    render(
-      <div>
-        <Popover
-          renderTrigger={<button>Trigger btn</button>}
-          isShowingContent={true}
-          onHideContent={(_e, o) => hideContentFn(o)}
-          on="click"
-          screenReaderLabel="Popover Dialog Example"
-          shouldContainFocus
-          shouldReturnFocus
-          offsetY="16px"
-        >
-          popover inner texts
-        </Popover>
-      </div>
-    )
-
-    await act(async () => {
-      await userEvent.click(document.body)
-    })
-    await waitFor(() => {
-      expect(hideContentFn).toHaveBeenCalledWith({ documentClick: true })
-    })
   })
 })
