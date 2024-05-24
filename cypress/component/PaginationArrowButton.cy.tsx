@@ -21,22 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import { Pagination } from '../../packages/ui'
 
-import { locator } from '@instructure/ui-test-locator'
+import '../support/component'
+import 'cypress-real-events'
 
-// @ts-ignore: Cannot find module
-import { NumberInputLocator } from '@instructure/ui-number-input/es/NumberInput/NumberInputLocator' // eslint-disable-line no-restricted-imports
+describe('<PaginationArrowButton />', () => {
+  it('should display tooltips', async () => {
+    cy.mount(
+      <Pagination
+        as="nav"
+        margin="small"
+        variant="compact"
+        labelNext="Next"
+        labelPrev="Prev"
+        currentPage={3}
+        totalPageNumber={10}
+        onPageChange={cy.spy()}
+      />
+    )
+    cy.get('[role="tooltip"]').should('exist')
+    cy.get('[role="tooltip"]').should('not.be.visible')
 
-import { PaginationPageInput } from './index'
+    cy.get('svg[name="IconArrowOpenEnd"]').should('be.visible')
+    cy.get('svg[name="IconArrowOpenEnd"]').realHover()
 
-export const PaginationPageInputLocator = locator(
-  // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-  PaginationPageInput.selector,
-
-  {
-    findInput: (...args: any[]) => NumberInputLocator.findInput(...args),
-
-    findNumberInputArrows: (...args: any[]) =>
-      NumberInputLocator.findArrowButtons(...args)
-  }
-)
+    cy.get('[role="tooltip"]')
+      .should('be.visible')
+      .then(($tooltip) => {
+        expect($tooltip).to.have.text('Next')
+      })
+  })
+})
