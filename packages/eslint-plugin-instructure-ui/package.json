@@ -18,8 +18,8 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/pkg-utils": "9.0.1",
-    "eslint-module-utils": "^2.8.0",
-    "eslint-plugin-import": "^2.28.1"
+    "eslint-module-utils": "^2.8.1",
+    "eslint-plugin-import": "^2.29.1"
   },
   "peerDependencies": {
     "eslint": "^8"

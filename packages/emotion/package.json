@@ -23,8 +23,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
-    "@emotion/react": "^11.11.1",
+    "@babel/runtime": "^7.24.5",
+    "@emotion/react": "^11.11.4",
     "@instructure/console": "9.0.1",
     "@instructure/shared-types": "9.0.1",
     "@instructure/theme-registry": "9.0.1",
@@ -39,7 +39,7 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "9.0.1",
     "@instructure/ui-test-utils": "9.0.1",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=16.8 <=18"

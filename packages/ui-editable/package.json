@@ -25,12 +25,12 @@
   "devDependencies": {
     "@instructure/ui-axe-check": "9.0.1",
     "@instructure/ui-babel-preset": "9.0.1",
-    "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.1.2",
-    "@testing-library/user-event": "^14.5.1"
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^15.0.7",
+    "@testing-library/user-event": "^14.5.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
+    "@babel/runtime": "^7.24.5",
     "@instructure/console": "9.0.1",
     "@instructure/emotion": "9.0.1",
     "@instructure/ui-a11y-content": "9.0.1",

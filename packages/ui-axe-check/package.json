@@ -25,8 +25,8 @@
     "@instructure/ui-babel-preset": "9.0.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
-    "axe-core": "^4.8.2"
+    "@babel/runtime": "^7.24.5",
+    "axe-core": "^4.9.1"
   },
   "publishConfig": {
     "access": "public"

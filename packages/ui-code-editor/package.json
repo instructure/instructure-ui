@@ -29,7 +29,7 @@
     "@types/codemirror": "5.x"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.2",
+    "@babel/runtime": "^7.24.5",
     "@instructure/emotion": "9.0.1",
     "@instructure/shared-types": "9.0.1",
     "@instructure/ui-a11y-content": "9.0.1",
@@ -39,7 +39,7 @@
     "@instructure/ui-test-locator": "9.0.1",
     "@instructure/ui-testable": "9.0.1",
     "@instructure/ui-utils": "9.0.1",
-    "codemirror": "5.65.13",
+    "codemirror": "5.65.16",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {
