@@ -37,9 +37,11 @@ import type { TabsPanelProps, TabsPanelStyle } from './props'
  */
 const generateStyle = (
   componentTheme: TabsPanelTheme,
-  props: TabsPanelProps
+  props: TabsPanelProps,
+  state: { isHidden: boolean }
 ): TabsPanelStyle => {
   const { maxHeight, isSelected } = props
+  const { isHidden } = state
 
   return {
     panel: {
@@ -54,6 +56,9 @@ const generateStyle = (
       ...(isSelected && {
         flexGrow: 1,
         height: '100%'
+      }),
+      ...(isHidden && {
+        display: 'none'
       })
     },
     content: {
