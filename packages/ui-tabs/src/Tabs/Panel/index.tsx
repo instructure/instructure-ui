@@ -55,18 +55,24 @@ class Panel extends Component<TabsPanelProps> {
     variant: 'default',
     isSelected: false,
     padding: 'small',
-    active: false
+    active: false,
+    unmountOnExit: true
   }
 
   componentDidMount() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.({ isHidden: this.isHidden })
   }
 
   componentDidUpdate() {
-    this.props.makeStyles?.()
+    this.props.makeStyles?.({ isHidden: this.isHidden })
   }
 
   ref: HTMLDivElement | null = null
+
+  get isHidden() {
+    const { isDisabled, isSelected } = this.props
+    return !isSelected || !!isDisabled
+  }
 
   handleRef = (el: HTMLDivElement | null) => {
     const { elementRef } = this.props
@@ -93,9 +99,9 @@ class Panel extends Component<TabsPanelProps> {
       isSelected,
       styles,
       active,
+      unmountOnExit,
       ...props
     } = this.props
-    const isHidden = !isSelected || !!isDisabled
 
     return (
       <div
@@ -104,13 +110,13 @@ class Panel extends Component<TabsPanelProps> {
         role="tabpanel"
         id={id}
         aria-labelledby={labelledBy}
-        aria-hidden={isHidden ? 'true' : undefined}
+        aria-hidden={this.isHidden ? 'true' : undefined}
         ref={this.handleRef}
       >
         <Transition
           type="fade"
-          in={!isHidden}
-          unmountOnExit
+          in={!this.isHidden}
+          unmountOnExit={unmountOnExit}
           transitionExit={false}
         >
           <View

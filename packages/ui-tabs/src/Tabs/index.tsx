@@ -23,13 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, {
-  Component,
-  ComponentClass,
-  ComponentElement,
-  createElement,
-  ReactElement
-} from 'react'
+import React, { Component, ComponentElement, ReactElement } from 'react'
 
 import keycode from 'keycode'
 
@@ -341,18 +335,21 @@ class Tabs extends Component<TabsProps, TabsState> {
   ): TabChild {
     const id = panel.props.id || generatedId
 
-    return createElement(Tab as ComponentClass<TabsTabProps>, {
-      variant: this.props.variant,
-      key: `tab-${index}`,
-      id: `tab-${id}`,
-      controls: panel.props.id || `panel-${id}`,
-      index,
-      isSelected: selected,
-      isDisabled: panel.props.isDisabled,
-      children: panel.props.renderTitle,
-      onClick: this.handleTabClick,
-      onKeyDown: this.handleTabKeyDown
-    })
+    return (
+      <Tab
+        variant={this.props.variant}
+        key={`tab-${index}`}
+        id={`tab-${id}`}
+        controls={panel.props.id || `panel-${id}`}
+        index={index}
+        isSelected={selected}
+        isDisabled={panel.props.isDisabled}
+        onClick={this.handleTabClick}
+        onKeyDown={this.handleTabKeyDown}
+      >
+        {panel.props.renderTitle}
+      </Tab>
+    )
   }
 
   clonePanel(

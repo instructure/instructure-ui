@@ -322,6 +322,79 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
+### Persisting the selected tab
+
+If you need to persist the rendered content of the tabpanels between tabbing, you can set the `unmountOnExit` prop to `false` on the `<Tabs.Panel>` component. It works case by case, so you can set it to `false` only on the tabpanels you want to persist.
+
+```js
+---
+type: example
+---
+class Counter extends React.Component{
+  state = {
+    counter: 0
+  }
+  handleIncrement = () => {
+    this.setState({
+      counter: this.state.counter + 1
+    })
+  }
+
+  render () {
+    return (
+      <div>
+        <Button onClick={this.handleIncrement}>Increment</Button>
+        <hr/>
+        <Text>{this.state.counter}</Text>
+      </div>
+    )
+  }
+}
+class Example extends React.Component {
+  state = {
+    selectedIndex: 0
+  }
+  handleTabChange = (event, { index, id }) => {
+    this.setState({
+      selectedIndex: index
+    })
+  }
+  render () {
+    const { selectedIndex } = this.state
+    return (
+      <Tabs
+        margin="large auto"
+        padding="medium"
+        onRequestTabChange={this.handleTabChange}
+      >
+        <Tabs.Panel
+          id="tabA"
+          renderTitle="I will persist"
+          textAlign="center"
+          padding="large"
+          isSelected={selectedIndex === 0}
+          unmountOnExit={false}
+        >
+          <Counter/>
+        </Tabs.Panel>
+        <Tabs.Panel id="tabB" renderTitle="I will unmount" isSelected={selectedIndex === 1}  textAlign="center"
+          padding="large">
+          <Counter/>
+        </Tabs.Panel>
+        <Tabs.Panel id="tabC" renderTitle="Tab C" isSelected={selectedIndex === 2}>
+         Tab C
+        </Tabs.Panel>
+        <Tabs.Panel id="tabD" renderTitle="Tab D" isSelected={selectedIndex === 3}>
+         Tab D
+        </Tabs.Panel>
+      </Tabs>
+    )
+  }
+}
+
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js

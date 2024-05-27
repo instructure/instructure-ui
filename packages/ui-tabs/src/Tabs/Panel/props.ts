@@ -63,6 +63,10 @@ type TabsPanelOwnProps = {
    * for all the `<Tabs.Panel />`s.
    */
   active?: boolean
+  /**
+   * When set to false, the tabPanel only will be hidden, but not dismounted when not active
+   */
+  unmountOnExit?: boolean
 }
 
 type PropKeys = keyof TabsPanelOwnProps
@@ -88,7 +92,8 @@ const propTypes: PropValidators<PropKeys> = {
   padding: ThemeablePropTypes.spacing,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
   elementRef: PropTypes.func,
-  active: PropTypes.bool
+  active: PropTypes.bool,
+  unmountOnExit: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -104,7 +109,8 @@ const allowedProps: AllowedPropKeys = [
   'padding',
   'textAlign',
   'elementRef',
-  'active'
+  'active',
+  'unmountOnExit'
 ]
 
 export type { TabsPanelProps, TabsPanelStyle }
