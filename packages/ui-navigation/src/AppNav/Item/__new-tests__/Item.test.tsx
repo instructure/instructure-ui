@@ -23,11 +23,14 @@
  */
 
 import React from 'react'
-import { mount, expect, stub } from '@instructure/ui-test-utils'
+
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
+
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Item } from '../index'
-
-import { AppNavItemLocator as ItemLocator } from '../AppNavItemLocator'
 
 const icon = (
   <svg height="24" width="24">
@@ -36,73 +39,97 @@ const icon = (
   </svg>
 )
 
-describe('<AppNav.Item />', async () => {
+describe('<AppNav.Item />', () => {
   it('should render label text', async () => {
-    await mount(<Item renderLabel="Some label" href="#" />)
-    const item = await ItemLocator.find()
-    expect(await item.find(':contains(Some label)')).to.exist()
+    render(<Item renderLabel="Some label" href="#" />)
+    const item = screen.getByRole('link')
+
+    expect(item).toHaveTextContent('Some label')
   })
 
   it('should render an icon/image/etc.', async () => {
-    await mount(
+    const { container } = render(
       <Item
         renderIcon={icon}
         renderLabel={<ScreenReaderContent>Some label</ScreenReaderContent>}
         href="#"
       />
     )
-    const item = await ItemLocator.find()
-    const renderedIcon = await item.find('svg:title(Some icon)')
 
-    expect(renderedIcon).to.exist()
+    const iconTitle = screen.getByTitle('Some icon')
+    const iconSvg = container.querySelector('svg')
+    const item = screen.getByRole('link')
+
+    expect(iconTitle).toBeInTheDocument()
+    expect(iconSvg).toBeInTheDocument()
+
+    expect(iconSvg).toHaveTextContent('Some icon')
+    expect(item).toHaveTextContent('Some label')
   })
 
   it('should render content after the label text to accommodate badges, etc.', async () => {
-    await mount(
+    render(
       <Item
         renderLabel="Some label"
         href="#"
         renderAfter={<strong>I am rendered after!</strong>}
       />
     )
-    const item = await ItemLocator.find()
-    expect(await item.find('strong:contains(I am rendered after!)')).to.exist()
+    const item = screen.getByRole('link')
+    const after = screen.getByText('I am rendered after!')
+
+    expect(item).toBeInTheDocument()
+    expect(item).toHaveTextContent('Some label')
+
+    expect(after).toBeInTheDocument()
+    expect(after.tagName).toBe('STRONG')
   })
 
   it('should respond to an onClick event', async () => {
-    const onClick = stub()
-    await mount(<Item renderLabel="Some label" onClick={onClick} />)
-    const item = await ItemLocator.find()
+    const onClick = jest.fn()
+    render(<Item renderLabel="Some label" onClick={onClick} />)
 
-    const button = await item.find('button')
-    await button.click()
+    const button = screen.getByRole('button')
 
-    expect(onClick).to.have.been.calledOnce()
+    await userEvent.click(button)
+
+    await waitFor(() => {
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
   })
 
   it('should output a console error if icon is used with non-screenreader label text', async () => {
-    const consoleError = stub(console, 'error')
-    const warning =
-      'Warning: [AppNav] If an icon is used, the label text should be wrapped in <ScreenReaderContent />.'
-    await mount(
+    const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation()
+    render(
       <Item
         renderIcon={icon}
         renderLabel="Some label"
         onClick={() => 'clicked'}
       />
     )
-    expect(consoleError).to.be.calledWith(warning)
+
+    const expectedErrorMessage =
+      'Warning: [AppNav] If an icon is used, the label text should be wrapped in <ScreenReaderContent />.'
+
+    expect(consoleErrorMock).toHaveBeenCalledWith(
+      expect.stringContaining(expectedErrorMessage),
+      expect.any(String)
+    )
+
+    consoleErrorMock.mockRestore()
   })
 
   it('should meet a11y standards', async () => {
-    await mount(
+    const { container } = render(
       <Item
         renderIcon={icon}
         renderLabel={<ScreenReaderContent>Some label</ScreenReaderContent>}
         onClick={() => 'clicked'}
       />
     )
-    const item = await ItemLocator.find()
-    expect(await item.accessible()).to.be.true()
+
+    const axeCheck = await runAxeCheck(container)
+
+    expect(axeCheck).toBe(true)
   })
 })
