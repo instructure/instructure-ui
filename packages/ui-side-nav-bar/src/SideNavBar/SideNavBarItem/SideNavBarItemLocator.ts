@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-locator'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 // eslint-disable-next-line no-restricted-imports
 import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
 

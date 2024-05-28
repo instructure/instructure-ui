@@ -24,7 +24,6 @@
 
 import { locator } from '@instructure/ui-test-locator'
 
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 import { NumberInputLocator } from '@instructure/ui-number-input/es/NumberInput/NumberInputLocator' // eslint-disable-line no-restricted-imports
 
 import { PaginationPageInput } from './index'

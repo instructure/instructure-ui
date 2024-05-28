@@ -24,10 +24,8 @@
 import { locator } from '@instructure/ui-test-locator'
 
 /* eslint-disable no-restricted-imports */
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
-import { OptionsLocator } from '@instructure/ui-options/es/Options/OptionsLocator'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
+import { OptionsLocator } from '@instructure/ui-options/es/Options/OptionsLocator'
 /* eslint-enable no-restricted-imports */
 
 import { Select } from './index'

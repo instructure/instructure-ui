@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-imports */
 /*
  * The MIT License (MIT)
  *
@@ -24,7 +25,6 @@
 
 import { locator } from '@instructure/ui-test-locator'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
-// eslint-disable-next-line no-restricted-imports
 import { PositionLocator } from '@instructure/ui-position/es/Position/PositionLocator'
 
 import { Popover } from './index'
