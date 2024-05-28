@@ -41,6 +41,9 @@
       "path": "../ui-selectable/tsconfig.build.json"
     },
     {
+      "path": "../shared-types/tsconfig.build.json"
+    },
+    {
       "path": "../ui-testable/tsconfig.build.json"
     },
     {

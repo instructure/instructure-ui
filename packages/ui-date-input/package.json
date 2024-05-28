@@ -43,6 +43,7 @@
     "@instructure/ui-prop-types": "9.0.1",
     "@instructure/ui-react-utils": "9.0.1",
     "@instructure/ui-selectable": "9.0.1",
+    "@instructure/shared-types": "9.0.1",
     "@instructure/ui-testable": "9.0.1",
     "@instructure/ui-text-input": "9.0.1",
     "@instructure/ui-utils": "9.0.1",

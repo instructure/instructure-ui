@@ -40,6 +40,7 @@
     "@instructure/ui-focusable": "9.0.1",
     "@instructure/ui-icons": "9.0.1",
     "@instructure/ui-utils": "9.0.1",
+    "@instructure/shared-types": "9.0.1",
     "@instructure/ui-view": "9.0.1",
     "prop-types": "^15.8.1"
   },

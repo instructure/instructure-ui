@@ -23,16 +23,12 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.24.5",
-    "@instructure/canvas-theme": "9.0.1",
-    "@instructure/command-utils": "9.0.1",
     "@instructure/ui-babel-preset": "9.0.1",
     "@instructure/ui-buttons": "9.0.1",
     "@instructure/ui-i18n": "9.0.1",
     "@instructure/ui-icons": "9.0.1",
-    "@instructure/ui-tooltip": "9.0.1",
     "@instructure/ui-view": "9.0.1",
     "@instructure/ui-webpack-config": "9.0.1",
-    "@instructure/uid": "9.0.1",
     "@storybook/addons": "^7.6.19",
     "@storybook/react": "^7.6.19",
     "@storybook/theming": "^7.6.19",
@@ -53,9 +49,6 @@
     "react-docgen": "6.0.4",
     "storybook": "^7.6.19",
     "webpack": "^5.91.0"
-  },
-  "//dependency-comments": {
-    "globby": "since 12.0.0 globby is pure ESM, it cannot be require()'d"
   },
   "resolutions": {
     "@storybook/react/webpack": "^5"

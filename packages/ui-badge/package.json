@@ -24,14 +24,12 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.24.5",
-    "@instructure/console": "9.0.1",
     "@instructure/emotion": "9.0.1",
     "@instructure/shared-types": "9.0.1",
     "@instructure/ui-color-utils": "9.0.1",
     "@instructure/ui-position": "9.0.1",
     "@instructure/ui-react-utils": "9.0.1",
     "@instructure/ui-testable": "9.0.1",
-    "@instructure/ui-utils": "9.0.1",
     "@instructure/ui-view": "9.0.1",
     "prop-types": "^15.8.1"
   },

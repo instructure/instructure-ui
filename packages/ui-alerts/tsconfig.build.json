@@ -19,8 +19,6 @@
     { "path": "../ui-motion/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
     { "path": "../ui-themes/tsconfig.build.json" },
-    { "path": "../ui-utils/tsconfig.build.json" },
-    { "path": "../ui-view/tsconfig.build.json" },
-    { "path": "../uid/tsconfig.build.json" }
+    { "path": "../ui-view/tsconfig.build.json" }
   ]
 }
