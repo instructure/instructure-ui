@@ -16,6 +16,9 @@
     },
     {
       "path": "../console/tsconfig.build.json"
+    },
+    {
+      "path": "../shared-types/tsconfig.build.json"
     }
   ]
 }
