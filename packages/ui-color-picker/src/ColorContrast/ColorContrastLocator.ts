@@ -24,10 +24,7 @@
 import { locator } from '@instructure/ui-test-locator'
 import { find } from '@instructure/ui-test-queries'
 
-/* eslint-disable no-restricted-imports */
-// @ts-expect-error bypass no type definition found error
-import { PillLocator } from '@instructure/ui-pill/es/Pill/PillLocator'
-/* eslint-enable no-restricted-imports */
+import { PillLocator } from '@instructure/ui-pill'
 
 import { ColorContrast } from './index'
 

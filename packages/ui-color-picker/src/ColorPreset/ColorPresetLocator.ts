@@ -24,14 +24,9 @@
 import { locator } from '@instructure/ui-test-locator'
 import { find } from '@instructure/ui-test-queries'
 
-/* eslint-disable no-restricted-imports */
-// @ts-expect-error bypass no type definition found error
-import { DrilldownLocator } from '@instructure/ui-drilldown/es/Drilldown/DrilldownLocator'
-// @ts-expect-error bypass no type definition found error
-import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
-// @ts-expect-error bypass no type definition found error
-import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
-/* eslint-enable no-restricted-imports */
+import { DrilldownLocator } from '@instructure/ui-drilldown'
+import { TooltipLocator } from '@instructure/ui-tooltip'
+import { PopoverLocator } from '@instructure/ui-popover'
 
 import { ColorIndicatorLocator } from '../ColorIndicator/ColorIndicatorLocator'
 

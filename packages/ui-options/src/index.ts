@@ -23,6 +23,8 @@
  */
 
 export { Options } from './Options'
+export { OptionsLocator } from './Options/locator'
+export { OptionsItemLocator } from './Options/Item'
 
 export { optionsThemeGenerator } from './Options/theme'
 export { optionsItemThemeGenerator } from './Options/Item/theme'

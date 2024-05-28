@@ -23,6 +23,7 @@
  */
 
 export { Drilldown } from './Drilldown'
+export { DrilldownLocator } from './Drilldown/locator'
 
 export type {
   DrilldownProps,

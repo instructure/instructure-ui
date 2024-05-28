@@ -23,6 +23,7 @@
  */
 
 export { SimpleSelect } from './SimpleSelect'
+export { SimpleSelectLocator } from './SimpleSelect/locator'
 
 export type { SimpleSelectProps } from './SimpleSelect/props'
 export type { SimpleSelectGroupProps } from './SimpleSelect/Group/props'

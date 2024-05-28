@@ -254,7 +254,7 @@ describe('<ColorPreset />', () => {
       )
 
       const component = await ColorPresetLocator.find()
-      const openMenu = await component.getMenuForIndex(testableIdx)
+      const openMenu: any = await component.getMenuForIndex(testableIdx)
       const title = await openMenu.findHeaderTitle()
       const options = await openMenu.findAllOptions()
 
@@ -282,11 +282,10 @@ describe('<ColorPreset />', () => {
 
       await addColorButton.click()
 
-      const popover: QueriesHelpersEventsType =
-        await component.findAddColorPopoverContent()
+      const popover: any = await component.findAddColorPopoverContent()
       const popoverButtons = await popover.findAll('button[type="button"]')
       const confirmButton = popoverButtons.find(
-        (button) =>
+        (button: any) =>
           button.getTextContent() ===
           testColorMixerSettings.popoverAddButtonLabel
       )
@@ -310,7 +309,7 @@ describe('<ColorPreset />', () => {
       )
 
       const component = await ColorPresetLocator.find()
-      const openMenu = await component.getMenuForIndex(testableIdx)
+      const openMenu: any = await component.getMenuForIndex(testableIdx)
       const options: QueriesHelpersEventsType[] =
         await openMenu.findAllOptions()
       const removeOption = options.find(
@@ -339,7 +338,7 @@ describe('<ColorPreset />', () => {
       )
 
       const component = await ColorPresetLocator.find()
-      const openMenu = await component.getMenuForIndex(testableIdx)
+      const openMenu: any = await component.getMenuForIndex(testableIdx)
       const options: QueriesHelpersEventsType[] =
         await openMenu.findAllOptions()
       const selectOption = options.find(

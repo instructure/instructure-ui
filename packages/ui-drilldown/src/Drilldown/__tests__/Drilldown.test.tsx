@@ -457,7 +457,7 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const popoverContent = await drilldown.findPopoverContent()
+      const popoverContent: any = await drilldown.findPopoverContent()
       const drilldownMenu = await popoverContent.find('[role="menu"]')
 
       expect(drilldownRef).to.have.been.calledWith(drilldownMenu.getDOMNode())
@@ -556,7 +556,7 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const popoverContent = await drilldown.findPopoverContent()
+      const popoverContent: any = await drilldown.findPopoverContent()
       const container = await popoverContent.findSizableContainer()
       const containerStyle = getComputedStyle(container.getDOMNode())
 
@@ -621,7 +621,7 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const popoverContent = await drilldown.findPopoverContent()
+      const popoverContent: any = await drilldown.findPopoverContent()
       const container = await popoverContent.findSizableContainer()
       const containerStyle = getComputedStyle(container.getDOMNode())
 
@@ -661,7 +661,7 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const popoverContent = await drilldown.findPopoverContent()
+      const popoverContent: any = await drilldown.findPopoverContent()
       const container = await popoverContent.findSizableContainer()
       const containerStyle = getComputedStyle(container.getDOMNode())
 
@@ -744,7 +744,7 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const popoverContent = await drilldown.findPopoverContent()
+      const popoverContent: any = await drilldown.findPopoverContent()
       const container = await popoverContent.findSizableContainer()
       const containerStyle = getComputedStyle(container.getDOMNode())
 
@@ -824,7 +824,7 @@ describe('<Drilldown />', async () => {
         </Drilldown>
       )
       const drilldown = await DrilldownLocator.find()
-      const trigger = await drilldown.findPopoverTrigger()
+      const trigger: any = await drilldown.findPopoverTrigger()
       const content = await drilldown.findPopoverContent({
         expectEmpty: true
       })
@@ -849,7 +849,7 @@ describe('<Drilldown />', async () => {
         </Drilldown>
       )
       const drilldown = await DrilldownLocator.find()
-      const trigger = await drilldown.findPopoverTrigger()
+      const trigger: any = await drilldown.findPopoverTrigger()
 
       await trigger.click()
 
@@ -865,7 +865,7 @@ describe('<Drilldown />', async () => {
         </Drilldown>
       )
       const drilldown = await DrilldownLocator.find()
-      const trigger = await drilldown.findPopoverTrigger()
+      const trigger: any = await drilldown.findPopoverTrigger()
 
       expect(trigger.getAttribute('aria-haspopup')).to.exist()
     })
@@ -885,7 +885,7 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const trigger = await drilldown.findPopoverTrigger()
+      const trigger: any = await drilldown.findPopoverTrigger()
 
       await trigger.click()
 
@@ -1248,7 +1248,7 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const popoverContent = await drilldown.findPopoverContent()
+      const popoverContent: any = await drilldown.findPopoverContent()
       const option = await popoverContent.find('#option01')
 
       await option.click()
@@ -1276,7 +1276,7 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const popoverContent = await drilldown.findPopoverContent()
+      const popoverContent: any = await drilldown.findPopoverContent()
       const option = await popoverContent.find('#option01')
 
       await option.click()
@@ -1305,7 +1305,7 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const popoverContent = await drilldown.findPopoverContent()
+      const popoverContent: any = await drilldown.findPopoverContent()
       const option = await popoverContent.find('#option01')
 
       await option.click()
@@ -1333,7 +1333,7 @@ describe('<Drilldown />', async () => {
       )
 
       const drilldown = await DrilldownLocator.find()
-      const popoverContent = await drilldown.findPopoverContent()
+      const popoverContent: any = await drilldown.findPopoverContent()
       const option = await popoverContent.find('#option01')
 
       await option.click()
@@ -1407,7 +1407,7 @@ describe('<Drilldown />', async () => {
       expect(options[1].containsFocus()).to.be.true()
 
       // options[1] is the active element
-      let activeOption = wrapQueryResult(document.activeElement!)
+      let activeOption: any = wrapQueryResult(document.activeElement!)
       await activeOption.keyDown('ArrowRight')
 
       // the 1st option is the `Back` button, navigate to the second option
@@ -1415,9 +1415,7 @@ describe('<Drilldown />', async () => {
       let header = await drilldown.findHeaderTitle()
       expect(header.text()).to.be.eq('Page 1')
       options = await drilldown.findAllOptionWrappers()
-      activeOption = options.find((opt: typeof drilldown) =>
-        opt.containsFocus()
-      )
+      activeOption = options.find((opt: any) => opt.containsFocus())
       expect(activeOption.text()).to.be.eq('To Page 2')
       await activeOption.keyDown('ArrowRight')
       header = await drilldown.findHeaderTitle()
@@ -1490,7 +1488,7 @@ describe('<Drilldown />', async () => {
 
       const drilldown = await DrilldownLocator.find()
 
-      const content = await drilldown.findPopoverContent()
+      const content: any = await drilldown.findPopoverContent()
       const innerDrilldown = await content.find('[role=menu]')
 
       expect(innerDrilldown.getDOMNode()).to.be.eq(document.activeElement)
@@ -1607,7 +1605,7 @@ describe('<Drilldown />', async () => {
         </Drilldown>
       )
       const drilldown = await DrilldownLocator.find()
-      const trigger = await drilldown.findPopoverTrigger()
+      const trigger: any = await drilldown.findPopoverTrigger()
 
       await trigger.focus()
 

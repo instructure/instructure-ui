@@ -31,10 +31,7 @@ import {
   findAll,
   within
 } from '@instructure/ui-test-utils'
-//TODO
-/* eslint-disable no-restricted-imports */
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
-import { SimpleSelectLocator } from '@instructure/ui-simple-select/es/SimpleSelect/SimpleSelectLocator'
+import { SimpleSelectLocator } from '@instructure/ui-simple-select'
 import { Table } from '../index'
 import type { TableProps } from '../props'
 import type { TableColHeaderProps } from '../ColHeader/props'
@@ -248,12 +245,12 @@ describe('<Table />', async () => {
         'stacked'
       )
       const select = await SimpleSelectLocator.find()
-      const input = await select.findInput()
+      const input: any = await select.findInput()
 
       await input.click()
 
-      const list = await select.findOptionsList()
-      const options = await list.findAll('[role="option"]')
+      const list: any = await select.findOptionsList()
+      const options = await list!.findAll('[role="option"]')
 
       await options[1].click()
       expect(sortFoo).to.have.been.calledOnce()
@@ -271,11 +268,11 @@ describe('<Table />', async () => {
         'stacked'
       )
       const select = await SimpleSelectLocator.find()
-      const input = await select.findInput()
+      const input: any = await select.findInput()
 
       await input.click()
 
-      const list = await select.findOptionsList()
+      const list: any = await select.findOptionsList()
       const options = await list.findAll('[role="option"]')
 
       // with stackedSortByLabel provided

@@ -22,4 +22,5 @@
  * SOFTWARE.
  */
 export { Popover } from './Popover'
+export { PopoverLocator } from './Popover/locator'
 export type { PopoverOwnProps, PopoverProps } from './Popover/props'

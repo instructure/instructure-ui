@@ -23,6 +23,7 @@
  */
 
 export { Select } from './Select'
+export { SelectLocator } from './Select/locator'
 
 export type { SelectProps, SelectOwnProps } from './Select/props'
 export type { SelectGroupProps } from './Select/Group/props'

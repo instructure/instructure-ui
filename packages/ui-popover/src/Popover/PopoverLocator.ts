@@ -24,8 +24,7 @@
  */
 
 import { locator } from '@instructure/ui-test-locator'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
-import { PositionLocator } from '@instructure/ui-position/es/Position/PositionLocator'
+import { PositionLocator } from '@instructure/ui-position'
 
 import { Popover } from './index'
 import { PopoverTriggerLocator } from './PopoverTriggerLocator'

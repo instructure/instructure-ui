@@ -23,10 +23,8 @@
  */
 import { locator } from '@instructure/ui-test-locator'
 
-/* eslint-disable no-restricted-imports */
-import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
-import { OptionsLocator } from '@instructure/ui-options/es/Options/OptionsLocator'
-/* eslint-enable no-restricted-imports */
+import { PopoverLocator } from '@instructure/ui-popover'
+import { OptionsLocator } from '@instructure/ui-options'
 
 import { Select } from './index'
 
@@ -35,7 +33,7 @@ export const SelectLocator = locator(Select.selector, {
   findInput: (...args: any[]) => locator('input').find(...args),
 
   findOptionsList: async (element: any, ...args: any[]) => {
-    const content = await PopoverLocator.findContent(element, ...args)
+    const content: any = await PopoverLocator.findContent(element, ...args)
     return content ? OptionsLocator.find(content.getDOMNode()) : null
   }
 })

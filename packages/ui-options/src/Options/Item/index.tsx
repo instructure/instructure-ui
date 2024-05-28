@@ -181,3 +181,4 @@ class Item extends Component<OptionsItemProps> {
 
 export default Item
 export { Item }
+export { OptionsItemLocator } from './locator'

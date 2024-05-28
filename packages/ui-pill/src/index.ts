@@ -23,4 +23,5 @@
  */
 
 export { Pill } from './Pill'
+export { PillLocator } from './Pill/locator'
 export type { PillProps } from './Pill/props'
