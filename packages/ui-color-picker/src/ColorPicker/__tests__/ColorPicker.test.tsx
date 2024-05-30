@@ -399,7 +399,7 @@ describe('<ColorPicker />', () => {
         />
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await trigger.click()
 
@@ -428,11 +428,11 @@ describe('<ColorPicker />', () => {
         />
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
       const colormixer = await popoverContent.findColorMixer()
 
       expect(colormixer).to.be.not.undefined()
@@ -460,13 +460,13 @@ describe('<ColorPicker />', () => {
       )
       const cp = await ColorPickerLocator.find()
       const input = await cp.findTextInput()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await input.typeIn(color)
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
       const convertedColor = colorToRGB(`#${color}`)
       const [r, g, b] = await popoverContent.findRGBAInputs()
       const actualColor = {
@@ -502,11 +502,11 @@ describe('<ColorPicker />', () => {
         />
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
 
       const [r, g, b] = await popoverContent.findRGBAInputs()
 
@@ -589,7 +589,7 @@ describe('<ColorPicker />', () => {
         />
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await trigger.click()
 
@@ -640,11 +640,11 @@ describe('<ColorPicker />', () => {
         />
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
 
       const colorButtons = await cp.findColorPresetButtons()
 
@@ -698,11 +698,11 @@ describe('<ColorPicker />', () => {
         />
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
 
       const colorButtons = await cp.findColorPresetButtons()
 
@@ -747,11 +747,11 @@ describe('<ColorPicker />', () => {
         />
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
       const t1 = await popoverContent.findWithText('Normal text')
       const t2 = await popoverContent.findWithText('Large text')
       const t3 = await popoverContent.findWithText('Graphics text')
@@ -816,13 +816,13 @@ describe('<ColorPicker />', () => {
       )
       const cp = await ColorPickerLocator.find()
       const input = await cp.findTextInput()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await input.typeIn(color)
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
       const convertedColor = colorToRGB(`#${color}`)
       const [r, g, b] = await popoverContent.findRGBAInputs()
       const actualColor = {
@@ -867,13 +867,13 @@ describe('<ColorPicker />', () => {
         </SimpleExample>
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       expect(passedValue).to.equal('#')
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
 
       const [r, g, b] = await popoverContent.findRGBAInputs()
 
@@ -959,7 +959,7 @@ describe('<ColorPicker />', () => {
         </SimpleExample>
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await trigger.click()
 
@@ -1006,11 +1006,11 @@ describe('<ColorPicker />', () => {
         </SimpleExample>
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
 
       const colorButtons = await cp.findColorPresetButtons()
 
@@ -1063,13 +1063,13 @@ describe('<ColorPicker />', () => {
         </SimpleExample>
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       expect(passedValue).to.equal('#')
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
 
       const colorButtons = await cp.findColorPresetButtons()
 
@@ -1127,11 +1127,11 @@ describe('<ColorPicker />', () => {
         </SimpleExample>
       )
       const cp = await ColorPickerLocator.find()
-      const trigger = await cp.findPopoverTrigger()
+      const trigger: any = await cp.findPopoverTrigger()
 
       await trigger.click()
 
-      const popoverContent = await cp.findPopoverContent()
+      const popoverContent: any = await cp.findPopoverContent()
       const t1 = await popoverContent.findWithText('Normal text')
       const t2 = await popoverContent.findWithText('Large text')
       const t3 = await popoverContent.findWithText('Graphics text')

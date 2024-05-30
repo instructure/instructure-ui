@@ -122,7 +122,7 @@ describe('<ColorPreset />', () => {
       const tooltips = await component.findAllColorTooltips()
 
       for (const idx in indicators) {
-        const tooltipContent = await tooltips[idx].findContent()
+        const tooltipContent: any = await tooltips[idx].findContent()
         expect(indicators[idx].getColorRGBA()).to.eql(
           colorToRGB(tooltipContent.getTextContent())
         )

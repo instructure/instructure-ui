@@ -32,17 +32,14 @@ import {
 
 import { ColorPicker } from '.'
 
-/* eslint-disable no-restricted-imports */
-// @ts-expect-error bypass no type definition found error
-import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
-/* eslint-enable no-restricted-imports */
+import { PopoverLocator } from '@instructure/ui-popover'
 
 import { ColorIndicatorLocator } from '../ColorIndicator/ColorIndicatorLocator'
 import { ColorMixerLocator } from '../ColorMixer/ColorMixerLocator'
 import { ColorPresetLocator } from '../ColorPreset/ColorPresetLocator'
 
 async function _findColorPreset(...args: any[]) {
-  const popoverContent = await PopoverLocator.findContent(...args)
+  const popoverContent: any = await PopoverLocator.findContent(...args)
   const colorPreset = await ColorPresetLocator.find(popoverContent.getDOMNode())
 
   return ColorIndicatorLocator.findAll(colorPreset.getDOMNode())

@@ -71,7 +71,7 @@ describe('<Tooltip />', async () => {
     )
 
     const tip = await TooltipLocator.find()
-    let content = await tip.findContent()
+    let content: any = await tip.findContent()
 
     expect(content.getComputedStyle().display).to.equal('block')
     expect(content).to.have.text('Hello')
@@ -90,7 +90,7 @@ describe('<Tooltip />', async () => {
       </Tooltip>
     )
     const tip = await TooltipLocator.find()
-    const trigger = await tip.findTrigger()
+    const trigger: any = await tip.findTrigger()
 
     await trigger.focus()
 
@@ -163,7 +163,7 @@ describe('<Tooltip />', async () => {
         </Tooltip>
       )
       const tip = await TooltipLocator.find()
-      const trigger = await tip.findTrigger()
+      const trigger: any = await tip.findTrigger()
 
       await trigger.focus()
 
@@ -222,7 +222,7 @@ describe('<Tooltip />', async () => {
         </Tooltip>
       )
       const tip = await TooltipLocator.find()
-      const trigger = await tip.findTrigger()
+      const trigger: any = await tip.findTrigger()
 
       await trigger.focus()
       await wait(() => {
