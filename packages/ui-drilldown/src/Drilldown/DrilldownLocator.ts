@@ -26,9 +26,9 @@ import { locator } from '@instructure/ui-test-locator'
 import { find, findAll, parseQueryArguments } from '@instructure/ui-test-utils'
 
 /* eslint-disable no-restricted-imports */
-// @ts-expect-error bypass no type definition found error
+// @ts-ignore: Cannot find module
 import { OptionsItemLocator } from '@instructure/ui-options/es/Options/Item/OptionsItemLocator'
-// @ts-expect-error bypass no type definition found error
+// @ts-ignore: Cannot find module
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 /* eslint-enable no-restricted-imports */
 

@@ -33,7 +33,7 @@ import {
 } from '@instructure/ui-test-utils'
 //TODO
 /* eslint-disable no-restricted-imports */
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
+// @ts-ignore: Cannot find module
 import { SimpleSelectLocator } from '@instructure/ui-simple-select/es/SimpleSelect/SimpleSelectLocator'
 import { Table } from '../index'
 import type { TableProps } from '../props'

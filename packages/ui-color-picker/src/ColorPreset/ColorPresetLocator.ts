@@ -25,11 +25,11 @@ import { locator } from '@instructure/ui-test-locator'
 import { find } from '@instructure/ui-test-queries'
 
 /* eslint-disable no-restricted-imports */
-// @ts-expect-error bypass no type definition found error
+// @ts-ignore: Cannot find module
 import { DrilldownLocator } from '@instructure/ui-drilldown/es/Drilldown/DrilldownLocator'
-// @ts-expect-error bypass no type definition found error
+// @ts-ignore: Cannot find module
 import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
-// @ts-expect-error bypass no type definition found error
+// @ts-ignore: Cannot find module
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 /* eslint-enable no-restricted-imports */
 
@@ -37,8 +37,8 @@ import { ColorIndicatorLocator } from '../ColorIndicator/ColorIndicatorLocator'
 
 import { ColorPreset } from './index'
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
-export const ColorPresetLocator = locator(ColorPreset.selector, {
+// @ts-ignore: The inferred type exceeds the maximum the compiler will serialize
+export const ColorPresetLocator: any = locator(ColorPreset.selector, {
   findAllColorIndicators: (...args: any[]) => {
     return ColorIndicatorLocator.findAll(...args)
   },

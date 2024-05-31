@@ -51,6 +51,10 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser',
   rules: {
+    '@typescript-eslint/ban-ts-comment': [
+      'error',
+      { 'ts-ignore': 'allow-with-description' }
+    ],
     '@typescript-eslint/no-var-requires': 1,
     '@typescript-eslint/no-empty-function': 1,
     '@typescript-eslint/explicit-module-boundary-types': 0,

@@ -1407,7 +1407,7 @@ describe('<Drilldown />', async () => {
       expect(options[1].containsFocus()).to.be.true()
 
       // options[1] is the active element
-      let activeOption = wrapQueryResult(document.activeElement!)
+      let activeOption: any = wrapQueryResult(document.activeElement!)
       await activeOption.keyDown('ArrowRight')
 
       // the 1st option is the `Back` button, navigate to the second option
@@ -1415,9 +1415,7 @@ describe('<Drilldown />', async () => {
       let header = await drilldown.findHeaderTitle()
       expect(header.text()).to.be.eq('Page 1')
       options = await drilldown.findAllOptionWrappers()
-      activeOption = options.find((opt: typeof drilldown) =>
-        opt.containsFocus()
-      )
+      activeOption = options.find((opt: any) => opt.containsFocus())
       expect(activeOption.text()).to.be.eq('To Page 2')
       await activeOption.keyDown('ArrowRight')
       header = await drilldown.findHeaderTitle()
