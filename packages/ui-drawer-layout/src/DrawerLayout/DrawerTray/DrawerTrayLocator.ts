@@ -26,5 +26,5 @@ import { locator } from '@instructure/ui-test-locator'
 
 import { DrawerTray } from './index'
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+// @ts-ignore: property 'selector' does not exist on typeof DrawerTray
 export const DrawerTrayLocator = locator(DrawerTray.selector)

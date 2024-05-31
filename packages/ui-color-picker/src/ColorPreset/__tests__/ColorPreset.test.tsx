@@ -107,7 +107,7 @@ describe('<ColorPreset />', () => {
 
       expect(indicators.length).to.equal(9)
 
-      indicators.forEach((indicator, idx) => {
+      indicators.forEach((indicator: any, idx: any) => {
         expect(indicator.getColorRGBA()).to.eql(
           colorToRGB(testValue.colors[idx])
         )

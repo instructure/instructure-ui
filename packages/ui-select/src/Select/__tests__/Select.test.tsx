@@ -86,7 +86,7 @@ describe('<Select />', async () => {
     )
     const select = await SelectLocator.find()
     const list = await select.findOptionsList()
-    const listbox = await list.find('ul[role="listbox"]')
+    const listbox = await list!.find('ul[role="listbox"]')
     const groups = await listbox.findAll('ul[role="group"]')
     const label = await listbox.find(':textContent("Group one")')
 
@@ -107,7 +107,7 @@ describe('<Select />', async () => {
     )
     const select = await SelectLocator.find()
     const list = await select.findOptionsList()
-    const div = await list.find(':textContent("invalid")', {
+    const div = await list!.find(':textContent("invalid")', {
       expectEmpty: true
     })
 
@@ -349,7 +349,7 @@ describe('<Select />', async () => {
       )
       const select = await SelectLocator.find()
       const list = await select.findOptionsList()
-      const options = await list.findAll('[role="option"]')
+      const options = await list!.findAll('[role="option"]')
 
       expect(options[1].getAttribute('aria-selected')).to.equal('true')
     })
@@ -362,7 +362,7 @@ describe('<Select />', async () => {
       )
       const select = await SelectLocator.find()
       const list = await select.findOptionsList()
-      const options = await list.findAll('[role="option"]')
+      const options = await list!.findAll('[role="option"]')
 
       expect(options[0].getAttribute('aria-disabled')).to.not.exist()
       expect(options[2].getAttribute('aria-disabled')).to.equal('true')
@@ -376,7 +376,7 @@ describe('<Select />', async () => {
       )
       const select = await SelectLocator.find()
       const list = await select.findOptionsList()
-      const listbox = await list.find('ul[role="listbox"]')
+      const listbox = await list!.find('ul[role="listbox"]')
 
       expect(listbox).to.exist()
     })
@@ -395,7 +395,7 @@ describe('<Select />', async () => {
       )
       const select = await SelectLocator.find()
       const list = await select.findOptionsList()
-      const listbox = await list.find('ul[role="listbox"]')
+      const listbox = await list!.find('ul[role="listbox"]')
 
       expect(listRef).to.have.been.calledWith(listbox.getDOMNode())
     })
@@ -427,7 +427,7 @@ describe('<Select />', async () => {
       await input.click()
 
       const list = await select.findOptionsList()
-      const listbox = await list.find('ul[role="listbox"]')
+      const listbox = await list!.find('ul[role="listbox"]')
       const itemIcons = await listbox.findAll('li [role="presentation"] svg')
 
       expect(getComputedStyle(itemIcons[0].getDOMNode()).fill).to.equal(
@@ -450,9 +450,9 @@ describe('<Select />', async () => {
       )
       const select = await SelectLocator.find()
       const list = await select.findOptionsList()
-      const listView = await list.getDOMNode().parentNode
+      const listView = await list!.getDOMNode().parentNode
 
-      expect(getComputedStyle(listView).height).to.equal('72px')
+      expect(getComputedStyle(listView as any).height).to.equal('72px')
     })
 
     it('should override maxHeight with optionsMaxHeight, even if visibleOptionsCount is set', async () => {
@@ -468,9 +468,9 @@ describe('<Select />', async () => {
       )
       const select = await SelectLocator.find()
       const list = await select.findOptionsList()
-      const listView = await list.getDOMNode().parentNode
+      const listView = await list!.getDOMNode().parentNode
 
-      expect(getComputedStyle(listView).height).to.equal('50px')
+      expect(getComputedStyle(listView as any).height).to.equal('50px')
     })
   })
 
@@ -657,7 +657,7 @@ describe('<Select />', async () => {
         )
         const select = await SelectLocator.find()
         const list = await select.findOptionsList()
-        const options = await list.findAll('[role="option"]')
+        const options = await list!.findAll('[role="option"]')
 
         await options[0].mouseOver()
         expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
@@ -829,7 +829,7 @@ describe('<Select />', async () => {
         )
         const select = await SelectLocator.find()
         const list = await select.findOptionsList()
-        const options = await list.findAll('[role="option"]')
+        const options = await list!.findAll('[role="option"]')
 
         await options[1].click()
         expect(lastCall(onRequestSelectOption)[1].id).to.equal(

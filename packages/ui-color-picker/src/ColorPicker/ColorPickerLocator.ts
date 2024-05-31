@@ -33,7 +33,7 @@ import {
 import { ColorPicker } from '.'
 
 /* eslint-disable no-restricted-imports */
-// @ts-expect-error bypass no type definition found error
+// @ts-ignore: Cannot find module
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 /* eslint-enable no-restricted-imports */
 

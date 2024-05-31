@@ -24,7 +24,7 @@
 import { locator } from '@instructure/ui-test-locator'
 
 /* eslint-disable no-restricted-imports */
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
+// @ts-ignore: Cannot find module
 import { SelectLocator } from '@instructure/ui-select/es/Select/SelectLocator'
 /* eslint-enable no-restricted-imports */
 

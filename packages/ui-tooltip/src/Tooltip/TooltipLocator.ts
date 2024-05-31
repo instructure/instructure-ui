@@ -24,7 +24,7 @@
 
 import { locator } from '@instructure/ui-test-locator'
 import { parseQueryArguments } from '@instructure/ui-test-queries'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
+// @ts-ignore: Cannot find module
 // eslint-disable-next-line no-restricted-imports
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 import { Tooltip } from './index'
@@ -39,6 +39,5 @@ export const customMethods = {
     return PopoverLocator.findContent(element, '[role="tooltip"]', options)
   }
 }
-
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+// @ts-ignore: Property 'selector' does not exist type Tooltip
 export const TooltipLocator = locator(Tooltip.selector, customMethods)

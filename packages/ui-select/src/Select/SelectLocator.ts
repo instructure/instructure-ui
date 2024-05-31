@@ -24,15 +24,15 @@
 import { locator } from '@instructure/ui-test-locator'
 
 /* eslint-disable no-restricted-imports */
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
+// @ts-ignore: Cannot find module
 import { OptionsLocator } from '@instructure/ui-options/es/Options/OptionsLocator'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
+// @ts-ignore: Cannot find module
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 /* eslint-enable no-restricted-imports */
 
 import { Select } from './index'
 
-// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+// @ts-ignore: property 'selector' does not exist on typeof Select
 export const SelectLocator = locator(Select.selector, {
   findInput: (...args: any[]) => locator('input').find(...args),
 
