@@ -72,7 +72,7 @@ type CondensedButtonOwnProps = {
   /**
    * Specifies the color for the `CondensedButton`.
    */
-  color?: 'primary' | 'primary-inverse'
+  color?: 'primary' | 'primary-inverse' | 'secondary'
 
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
