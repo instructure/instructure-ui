@@ -126,13 +126,15 @@ class TopNavBarBreadcrumb extends Component<
       ) : (
         <div ref={this.handleRef} css={styles?.topNavBarBreadcrumb}>
           <div css={styles?.linkContainer}>
-            <Link
-              href={lastButOneLink.props.href}
-              isWithinText={false}
-              renderIcon={IconArrowOpenStartLine}
-            >
-              {lastButOneLink.props.children}
-            </Link>
+            {lastButOneLink && (
+              <Link
+                href={lastButOneLink.props.href}
+                isWithinText={false}
+                renderIcon={IconArrowOpenStartLine}
+              >
+                {lastButOneLink.props.children}
+              </Link>
+            )}
           </div>
         </div>
       ))
