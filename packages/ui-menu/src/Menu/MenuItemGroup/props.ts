@@ -41,7 +41,6 @@ import type {
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { MenuItemProps } from '../MenuItem/props'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
-import type { ViewOwnProps } from '@instructure/ui-view'
 
 type MenuGroupOwnProps = {
   label: React.ReactNode
@@ -62,7 +61,7 @@ type MenuGroupOwnProps = {
    * call this function when a menu item is selected
    */
   onSelect?: (
-    e: React.MouseEvent<ViewOwnProps>,
+    e: React.MouseEvent,
     updated: MenuItemProps['value'][],
     selected: MenuItemProps['selected'],
     item: MenuItem

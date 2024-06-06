@@ -45,7 +45,6 @@ import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
 import type { MenuGroupProps, MenuGroupState } from './props'
-import type { ViewOwnProps } from '@instructure/ui-view'
 
 type MenuItemChild = React.ComponentElement<MenuItemProps, MenuItem>
 type MenuSeparatorChild = React.ComponentElement<
@@ -126,7 +125,7 @@ class MenuItemGroup extends Component<MenuGroupProps, MenuGroupState> {
   }
 
   updateSelected = (
-    e: React.MouseEvent<ViewOwnProps>,
+    e: React.MouseEvent,
     value: MenuItemProps['value'],
     items: MenuGroupState['selected'],
     selected: MenuItemProps['selected'],
