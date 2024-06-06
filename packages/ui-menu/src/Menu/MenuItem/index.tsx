@@ -43,7 +43,6 @@ import generateComponentTheme from './theme'
 
 import { propTypes, allowedProps } from './props'
 import type { MenuItemProps, MenuItemState } from './props'
-import type { ViewOwnProps } from '@instructure/ui-view'
 
 /**
 ---
@@ -115,7 +114,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
     }
   }
 
-  handleClick = (e: React.MouseEvent<ViewOwnProps>) => {
+  handleClick = (e: React.MouseEvent) => {
     const { onSelect, onClick, disabled, value } = this.props
     const selected = !this.selected
 

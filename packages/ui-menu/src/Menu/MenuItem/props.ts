@@ -35,10 +35,9 @@ import type {
 } from '@instructure/shared-types'
 import type { WithStyleProps, ComponentStyle } from '@instructure/emotion'
 import type { WithDeterministicIdProps } from '@instructure/ui-react-utils'
-import type { ViewOwnProps } from '@instructure/ui-view'
 
 type OnMenuItemSelect = (
-  e: React.MouseEvent<ViewOwnProps>,
+  e: React.MouseEvent,
   value: MenuItemOwnProps['value'],
   selected: MenuItemOwnProps['selected'],
   args: MenuItem
@@ -61,7 +60,7 @@ type MenuItemOwnProps = {
    * when used with the `selected` prop, the component will not control its own state
    */
   onSelect?: OnMenuItemSelect
-  onClick?: (e: React.MouseEvent<ViewOwnProps>) => void
+  onClick?: (e: React.MouseEvent) => void
   onKeyDown?: (e: React.KeyboardEvent) => void
   onKeyUp?: (e: React.KeyboardEvent) => void
   onMouseOver?: (e: React.MouseEvent, args: MenuItem) => void
