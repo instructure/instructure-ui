@@ -75,7 +75,7 @@ type MenuItemOwnProps = {
    */
   as?: AsElementType
   type?: 'button' | 'checkbox' | 'radio' | 'flyout'
-  value?: string | number
+  value?: string | number | object
   href?: string
 }
 
@@ -103,7 +103,11 @@ const propTypes: PropValidators<PropKeys> = {
   disabled: PropTypes.bool,
   as: PropTypes.elementType, // eslint-disable-line react/require-default-props
   type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object
+  ]),
   href: PropTypes.string
 }
 
