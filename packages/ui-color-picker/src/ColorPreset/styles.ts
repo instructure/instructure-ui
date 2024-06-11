@@ -38,13 +38,16 @@ const generateStyle = (
   componentTheme: ColorPresetTheme,
   props: ColorPresetProps
 ) => {
-  const { colorMixerSettings } = props
+  const { colorMixerSettings, disabled } = props
   return {
     colorPreset: {
       label: 'colorPreset',
       display: 'flex',
       flexWrap: 'wrap',
-      width: '17rem'
+      width: '17rem',
+      ...(disabled && {
+        opacity: 0.5
+      })
     },
     addNewPresetButton: {
       label: 'colorPreset__addNewPresetButton',
