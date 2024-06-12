@@ -166,6 +166,11 @@ type MenuOwnProps = {
    * Works only if `trigger` is provided.
    */
   offsetY?: string | number
+  /**
+   * The maximum height the menu can be. If not set, the menu won't
+   * scroll and will be as tall as the content requires
+   */
+  maxHeight?: string | number
 }
 
 type PropKeys = keyof MenuOwnProps
@@ -212,7 +217,8 @@ const propTypes: PropValidators<PropKeys> = {
   id: PropTypes.string,
   withArrow: PropTypes.bool,
   offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  maxHeight: PropTypes.string
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -241,7 +247,8 @@ const allowedProps: AllowedPropKeys = [
   'id',
   'withArrow',
   'offsetX',
-  'offsetY'
+  'offsetY',
+  'maxHeight'
 ]
 
 export type { MenuProps, MenuStyle }

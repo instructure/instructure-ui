@@ -23,7 +23,7 @@
  */
 
 import type { MenuTheme } from '@instructure/shared-types'
-import type { MenuStyle } from './props'
+import type { MenuStyle, MenuProps } from './props'
 
 /**
  * ---
@@ -35,10 +35,18 @@ import type { MenuStyle } from './props'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: MenuTheme): MenuStyle => {
+const generateStyle = (
+  componentTheme: MenuTheme,
+  props: MenuProps
+): MenuStyle => {
+  const maxHeight = props.maxHeight
+    ? { maxHeight: props.maxHeight, overflow: 'auto' }
+    : {}
+
   return {
     menu: {
       label: 'menu',
+      ...maxHeight,
       minWidth: componentTheme.minWidth,
       maxWidth: componentTheme.maxWidth,
       listStyleType: 'none',
