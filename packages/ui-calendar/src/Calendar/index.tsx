@@ -58,6 +58,8 @@ import {
   IconArrowOpenEndSolid
 } from '@instructure/ui-icons'
 
+import { SimpleSelect } from '@instructure/ui-simple-select'
+
 /**
 ---
 category: components
@@ -197,9 +199,21 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     this.setState({ visibleMonth: newDate })
   }
 
-  renderHeader() {
-    const { renderNavigationLabel, styles } = this.props
+  handleYearChange = (e: React.MouseEvent, year: number) => {
+    const { withYearPicker } = this.props
     const { visibleMonth } = this.state
+    const newDate = visibleMonth.clone()
+    if (withYearPicker?.onRequestYearChange) {
+      withYearPicker.onRequestYearChange(e, year)
+      return
+    }
+    newDate.year(year)
+    this.setState({ visibleMonth: newDate })
+  }
+
+  renderHeader() {
+    const { renderNavigationLabel, styles, withYearPicker } = this.props
+    const { visibleMonth, today } = this.state
     const { prevButton, nextButton } = this.renderMonthNavigationButtons()
 
     const cloneButton = (
@@ -218,18 +232,64 @@ class Calendar extends Component<CalendarProps, CalendarState> {
       ...(prevButton || nextButton ? [styles?.navigationWithButtons] : [])
     ]
 
+    let yearList: number[] = []
+
+    if (withYearPicker) {
+      const { startYear, endYear, years } = withYearPicker
+      if (years) {
+        yearList = years
+      } else {
+        if (!startYear) {
+          console.warn(
+            'You need to provide at least `startYear` or `years` in `withYearPicker`'
+          )
+        }
+
+        const years = endYear || today.year()
+        for (let year = years; year >= startYear!; year--) {
+          yearList.push(year)
+        }
+      }
+    }
+
     return (
-      <div css={style}>
-        {prevButton && cloneButton(prevButton, this.handleMonthChange('prev'))}
-        {renderNavigationLabel ? (
-          callRenderProp(renderNavigationLabel)
-        ) : (
-          <span>
-            <div>{visibleMonth.format('MMMM')}</div>
-            <div>{visibleMonth.format('YYYY')}</div>
-          </span>
-        )}
-        {nextButton && cloneButton(nextButton, this.handleMonthChange('next'))}
+      <div>
+        <div css={style}>
+          {prevButton &&
+            cloneButton(prevButton, this.handleMonthChange('prev'))}
+          {renderNavigationLabel ? (
+            callRenderProp(renderNavigationLabel)
+          ) : (
+            <span>
+              <div>{visibleMonth.format('MMMM')}</div>
+              {!withYearPicker ? (
+                <div>{visibleMonth.format('YYYY')}</div>
+              ) : null}
+            </span>
+          )}
+          {nextButton &&
+            cloneButton(nextButton, this.handleMonthChange('next'))}
+        </div>
+
+        {withYearPicker ? (
+          <div css={styles?.yearPicker}>
+            <SimpleSelect
+              width="90px"
+              renderLabel=""
+              assistiveText={withYearPicker.screenReaderLabel}
+              value={Number(visibleMonth.format('YYYY'))}
+              onChange={(e: any, { value }: any) =>
+                this.handleYearChange(e, Number(value))
+              }
+            >
+              {yearList.map((year) => (
+                <SimpleSelect.Option key={year} id={`opt-${year}`} value={year}>
+                  {`${year}`}
+                </SimpleSelect.Option>
+              ))}
+            </SimpleSelect>
+          </div>
+        ) : null}
       </div>
     )
   }

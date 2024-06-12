@@ -48,6 +48,8 @@ const generateComponentTheme = (theme: Theme): CalendarTheme => {
     background: colors?.backgroundLightest,
 
     navMargin: spacing?.small,
+    navWithYearMargin: spacing?.xSmall,
+    yearPickerMargin: spacing?.mediumSmall,
 
     maxHeaderWidth: spacing?.medium
   }
