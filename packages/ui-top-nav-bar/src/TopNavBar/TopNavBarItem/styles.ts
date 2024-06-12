@@ -108,7 +108,8 @@ const generateStyle = (
       color: inverseColor ? componentTheme.colorInverse : componentTheme.color,
 
       ...(isActive && {
-        fontWeight: componentTheme.activeItemFontWeight
+        fontWeight: componentTheme.activeItemFontWeight,
+        letterSpacing: -0.1818
       }),
 
       '*': {
