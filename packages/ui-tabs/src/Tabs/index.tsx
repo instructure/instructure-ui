@@ -466,7 +466,7 @@ class Tabs extends Component<TabsProps, TabsState> {
 
     const selectedIndex = selectedChildIndex >= 0 ? selectedChildIndex : 0
 
-    React.Children.forEach(children as PanelChild[], (child, index) => {
+    React.Children.toArray(children).map((child, index) => {
       if (matchComponentTypes<PanelChild>(child, [Panel])) {
         const selected =
           !child.props.isDisabled &&
@@ -482,7 +482,7 @@ class Tabs extends Component<TabsProps, TabsState> {
           panels.push(this.clonePanel(index, id, selected, child))
         }
       } else {
-        panels.push(child)
+        panels.push(child as PanelChild)
       }
     })
 
