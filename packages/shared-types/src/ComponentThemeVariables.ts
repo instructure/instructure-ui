@@ -283,6 +283,8 @@ export type CalendarTheme = {
   color: Colors['textDarkest']
   background: Colors['backgroundLightest']
   navMargin: Spacing['small']
+  navWithYearMargin: Spacing['xSmall']
+  yearPickerMargin: Spacing['mediumSmall']
   maxHeaderWidth: Spacing['medium']
 }
 

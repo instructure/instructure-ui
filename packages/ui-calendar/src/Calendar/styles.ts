@@ -23,7 +23,7 @@
  */
 
 import type { CalendarTheme } from '@instructure/shared-types'
-import type { CalendarStyle } from './props'
+import type { CalendarStyle, CalendarProps } from './props'
 
 /**
  * ---
@@ -33,7 +33,11 @@ import type { CalendarStyle } from './props'
  * @param  {Object} componentTheme The theme variable object.
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme: CalendarTheme): CalendarStyle => {
+const generateStyle = (
+  componentTheme: CalendarTheme,
+  props: CalendarProps
+): CalendarStyle => {
+  const { withYearPicker } = props
   return {
     navigation: {
       label: 'calendar__navigation',
@@ -43,7 +47,9 @@ const generateStyle = (componentTheme: CalendarTheme): CalendarStyle => {
       fontFamily: componentTheme.fontFamily,
       fontSize: componentTheme.fontSize,
       fontWeight: componentTheme.fontWeight,
-      marginBottom: componentTheme.navMargin
+      marginBottom: withYearPicker
+        ? componentTheme.navWithYearMargin
+        : componentTheme.navMargin
     },
     navigationWithButtons: {
       label: 'calendar__navigation--withButtons',
@@ -55,6 +61,12 @@ const generateStyle = (componentTheme: CalendarTheme): CalendarStyle => {
       label: 'calendar__weekdayHeader',
       textAlign: 'center',
       maxWidth: componentTheme.maxHeaderWidth
+    },
+    yearPicker: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: componentTheme.yearPickerMargin
     }
   }
 }

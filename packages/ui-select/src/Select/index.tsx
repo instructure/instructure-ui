@@ -149,7 +149,7 @@ class Select extends Component<SelectProps> {
     placement: 'bottom stretch',
     constrain: 'window',
     shouldNotWrap: false,
-    scrollToHighlightedOption: false
+    scrollToHighlightedOption: true
   }
 
   static Option = Option

@@ -152,6 +152,30 @@ type CalendarOwnProps = {
    * Visible month for the rendered calendar. Formatted as an ISO date string.
    */
   visibleMonth?: string
+
+  /**
+   * If set, years can be picked from a dropdown.
+   * It accepts an object.
+   * screenReaderLabel: string // e.g.: i18n("pick a year")
+   *
+   * maxHeight?: string // e.g.: 200px, Defaults to 300px. Sets the dropdown max height
+   *
+   * onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place
+   *
+   * startYear?: number // e.g.: 2001, sets the start year of the selectable list
+   *
+   * endYear?: number // e.g.: 2030, sets the end year of the selectable list. If not provided with startYear, it'll default to the currentDate's year
+   *
+   * years?: number[] // e.g.: [2001,2002,2003,2010], if set, startYear and endYear will be ignored and this list will be used as selectable list
+   */
+  withYearPicker?: {
+    screenReaderLabel: string
+    maxHeight?: string
+    onRequestYearChange?: (e: any, requestedYear: number) => void
+    startYear?: number
+    endYear?: number
+    years?: never
+  }
 }
 
 type PropKeys = keyof CalendarOwnProps
@@ -163,7 +187,7 @@ type CalendarProps = CalendarOwnProps &
   OtherHTMLAttributes<CalendarOwnProps>
 
 type CalendarStyle = ComponentStyle<
-  'navigation' | 'navigationWithButtons' | 'weekdayHeader'
+  'navigation' | 'navigationWithButtons' | 'weekdayHeader' | 'yearPicker'
 >
 
 const propTypes: PropValidators<PropKeys> = {
@@ -184,7 +208,8 @@ const propTypes: PropValidators<PropKeys> = {
   role: PropTypes.oneOf(['table', 'listbox']),
   selectedDate: PropTypes.string,
   timezone: PropTypes.string,
-  visibleMonth: PropTypes.string
+  visibleMonth: PropTypes.string,
+  withYearPicker: PropTypes.object
 }
 
 const allowedProps: AllowedPropKeys = [
