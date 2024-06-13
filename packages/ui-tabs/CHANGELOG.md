@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.56.1](https://github.com/instructure/instructure-ui/compare/v8.56.0...v8.56.1) (2024-06-13)
+
+
+### Bug Fixes
+
+* **ui-tabs:** fix horizontal scrolling with keyboard navigation ([4fddcad](https://github.com/instructure/instructure-ui/commit/4fddcad3f1bdea4215db623343d3236449d525e7))
+* **ui-tabs:** fix id generation when null is present as children ([c13fd7f](https://github.com/instructure/instructure-ui/commit/c13fd7f818e07748bebdbab177ca9ba189ec3f27))
+
+
+
+
+
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-tabs
