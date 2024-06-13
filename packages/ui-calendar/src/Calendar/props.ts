@@ -158,8 +158,6 @@ type CalendarOwnProps = {
    * It accepts an object.
    * screenReaderLabel: string // e.g.: i18n("pick a year")
    *
-   * maxHeight?: string // e.g.: 200px, Defaults to 300px. Sets the dropdown max height
-   *
    * onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place
    *
    * startYear: number // e.g.: 2001, sets the start year of the selectable list
@@ -168,7 +166,6 @@ type CalendarOwnProps = {
    */
   withYearPicker?: {
     screenReaderLabel: string
-    maxHeight?: string
     onRequestYearChange?: (e: any, requestedYear: number) => void
     startYear: number
     endYear: number
