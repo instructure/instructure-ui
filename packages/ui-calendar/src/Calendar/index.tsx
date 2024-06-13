@@ -225,7 +225,10 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     this.setState({ visibleMonth: newDate })
   }
 
-  handleYearChange = (e: React.MouseEvent, year: number) => {
+  handleYearChange = (
+    e: React.SyntheticEvent<Element, Event>,
+    year: number
+  ) => {
     const { withYearPicker } = this.props
     const { visibleMonth } = this.state
     const newDate = visibleMonth.clone()
@@ -293,9 +296,15 @@ class Calendar extends Component<CalendarProps, CalendarState> {
               renderLabel=""
               assistiveText={withYearPicker.screenReaderLabel}
               value={Number(visibleMonth.format('YYYY'))}
-              onChange={(e: any, { value }: any) =>
-                this.handleYearChange(e, Number(value))
-              }
+              onChange={(
+                e: React.SyntheticEvent<Element, Event>,
+                {
+                  value
+                }: {
+                  value?: string | number | undefined
+                  id?: string | undefined
+                }
+              ) => this.handleYearChange(e, Number(value))}
             >
               {yearList.map((year) => (
                 <SimpleSelect.Option key={year} id={`opt-${year}`} value={year}>
