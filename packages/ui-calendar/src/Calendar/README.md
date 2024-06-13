@@ -77,7 +77,7 @@ class Example extends React.Component {
   withYearPicker={{
     screenReaderLabel: "Year picker",
     startYear:1999,
-
+    endYear:2024,
     maxHeight: "200px"
   }}
 />

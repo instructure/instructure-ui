@@ -162,19 +162,16 @@ type CalendarOwnProps = {
    *
    * onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place
    *
-   * startYear?: number // e.g.: 2001, sets the start year of the selectable list
+   * startYear: number // e.g.: 2001, sets the start year of the selectable list
    *
-   * endYear?: number // e.g.: 2030, sets the end year of the selectable list. If not provided with startYear, it'll default to the currentDate's year
-   *
-   * years?: number[] // e.g.: [2001,2002,2003,2010], if set, startYear and endYear will be ignored and this list will be used as selectable list
+   * endYear: number // e.g.: 2030, sets the end year of the selectable list
    */
   withYearPicker?: {
     screenReaderLabel: string
     maxHeight?: string
     onRequestYearChange?: (e: any, requestedYear: number) => void
-    startYear?: number
-    endYear?: number
-    years?: never
+    startYear: number
+    endYear: number
   }
 }
 

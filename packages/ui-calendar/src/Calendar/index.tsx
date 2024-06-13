@@ -144,6 +144,26 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     return this.props.role === 'listbox' ? this.props.role : undefined
   }
 
+  get hasPrevMonth() {
+    return (
+      !this.props.withYearPicker ||
+      (this.props.withYearPicker &&
+        Number(
+          this.state.visibleMonth.clone().subtract({ months: 1 }).format('YYYY')
+        ) >= this.props.withYearPicker.startYear)
+    )
+  }
+
+  get hasNextMonth() {
+    return (
+      !this.props.withYearPicker ||
+      (this.props.withYearPicker &&
+        Number(
+          this.state.visibleMonth.clone().add({ months: 1 }).format('YYYY')
+        ) <= this.props.withYearPicker.endYear)
+    )
+  }
+
   renderMonthNavigationButtons = () => {
     const { renderNextMonthButton, renderPrevMonthButton } = this.props
 
@@ -178,6 +198,9 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     const { visibleMonth } = this.state
     const newDate = visibleMonth.clone()
     if (direction === 'prev') {
+      if (!this.hasPrevMonth) {
+        return
+      }
       if (onRequestRenderPrevMonth) {
         onRequestRenderPrevMonth(
           e,
@@ -187,6 +210,9 @@ class Calendar extends Component<CalendarProps, CalendarState> {
       }
       newDate.subtract({ months: 1 })
     } else {
+      if (!this.hasNextMonth) {
+        return
+      }
       if (onRequestRenderNextMonth) {
         onRequestRenderNextMonth(
           e,
@@ -213,7 +239,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
   renderHeader() {
     const { renderNavigationLabel, styles, withYearPicker } = this.props
-    const { visibleMonth, today } = this.state
+    const { visibleMonth } = this.state
     const { prevButton, nextButton } = this.renderMonthNavigationButtons()
 
     const cloneButton = (
@@ -232,23 +258,12 @@ class Calendar extends Component<CalendarProps, CalendarState> {
       ...(prevButton || nextButton ? [styles?.navigationWithButtons] : [])
     ]
 
-    let yearList: number[] = []
+    const yearList: number[] = []
 
     if (withYearPicker) {
-      const { startYear, endYear, years } = withYearPicker
-      if (years) {
-        yearList = years
-      } else {
-        if (!startYear) {
-          console.warn(
-            'You need to provide at least `startYear` or `years` in `withYearPicker`'
-          )
-        }
-
-        const years = endYear || today.year()
-        for (let year = years; year >= startYear!; year--) {
-          yearList.push(year)
-        }
+      const { startYear, endYear } = withYearPicker
+      for (let year = endYear; year >= startYear!; year--) {
+        yearList.push(year)
       }
     }
 
