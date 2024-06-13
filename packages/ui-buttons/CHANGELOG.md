@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.56.1](https://github.com/instructure/instructure-ui/compare/v8.56.0...v8.56.1) (2024-06-13)
+
+
+### Bug Fixes
+
+* **ui-buttons:** allow secondary option for CondensedButton color ([c42d87c](https://github.com/instructure/instructure-ui/commit/c42d87c398c5823edaa6d684d0dedbafc9cb2e0b))
+
+
+
+
+
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 **Note:** Version bump only for package @instructure/ui-buttons

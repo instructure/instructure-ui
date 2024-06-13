@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.56.1](https://github.com/instructure/instructure-ui/compare/v8.56.0...v8.56.1) (2024-06-13)
+
+
+### Bug Fixes
+
+* **ui-buttons:** allow secondary option for CondensedButton color ([c42d87c](https://github.com/instructure/instructure-ui/commit/c42d87c398c5823edaa6d684d0dedbafc9cb2e0b))
+* **ui-color-picker:** add disabled styling for ColorPreset ([5fda291](https://github.com/instructure/instructure-ui/commit/5fda2914d9b0162e88f44073e1353176a16d05ed))
+* **ui-tabs:** fix horizontal scrolling with keyboard navigation ([4fddcad](https://github.com/instructure/instructure-ui/commit/4fddcad3f1bdea4215db623343d3236449d525e7))
+* **ui-tabs:** fix id generation when null is present as children ([c13fd7f](https://github.com/instructure/instructure-ui/commit/c13fd7f818e07748bebdbab177ca9ba189ec3f27))
+* **ui-top-nav-bar:** keep width unchanged when active status is set to topnavbar.item ([f00503e](https://github.com/instructure/instructure-ui/commit/f00503e157a95ac8d365977a939366e543e5b4d2))
+* **ui-top-nav-bar:** show nothing in smallviewportlayout when there is one crumb link ([ccce4c8](https://github.com/instructure/instructure-ui/commit/ccce4c8831dac2ee10f739c1a49e0cc08b4462f4))
+
+
+
+
+
 # [8.56.0](https://github.com/instructure/instructure-ui/compare/v8.55.1...v8.56.0) (2024-05-06)
 
 
