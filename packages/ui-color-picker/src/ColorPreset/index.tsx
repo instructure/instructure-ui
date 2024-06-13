@@ -241,38 +241,46 @@ class ColorPreset extends Component<ColorPresetProps, ColorPresetState> {
     </Popover>
   )
 
-  renderColorIndicator = (color: string, selectOnClick?: boolean) => (
-    <Tooltip renderTip={<div>{color}</div>}>
-      <View
-        disabled={this.props.disabled}
-        position="relative"
-        width="2.375rem"
-        height="2.375rem"
-        background="transparent"
-        margin="xx-small"
-        display="inline-block"
-        borderRadius="medium"
-        borderWidth="0"
-        padding="0"
-        as="button"
-        {...(selectOnClick
-          ? { onClick: () => this.props.onSelect(color) }
-          : {})}
-        {...(this.isSelectedColor(color) ? { 'aria-label': 'selected' } : {})}
-      >
-        <div>
-          <ColorIndicator color={color} shape="rectangle" role="presentation" />
-          {this.isSelectedColor(color) && (
-            <div css={this.props?.styles?.selectedIndicator}>
-              <IconCheckDarkSolid
-                themeOverride={{ sizeXSmall: '0.8rem' }}
-                size="x-small"
-              />
-            </div>
-          )}
-        </div>
-      </View>
-    </Tooltip>
+  renderColorIndicator = (color: string, selectOnClick?: boolean) => {
+    const indicatorBase = this.renderIndicatorBase(color, selectOnClick)
+    return this.props.disabled
+      ? indicatorBase
+      : this.renderIndicatorTooltip(indicatorBase, color)
+  }
+
+  renderIndicatorBase = (color: string, selectOnClick?: boolean) => (
+    <View
+      disabled={this.props.disabled}
+      position="relative"
+      width="2.375rem"
+      height="2.375rem"
+      background="transparent"
+      margin="xx-small"
+      display="inline-block"
+      borderRadius="medium"
+      borderWidth="0"
+      padding="0"
+      cursor={this.props.disabled ? 'not-allowed' : 'auto'}
+      as="button"
+      {...(selectOnClick ? { onClick: () => this.props.onSelect(color) } : {})}
+      {...(this.isSelectedColor(color) ? { 'aria-label': 'selected' } : {})}
+    >
+      <div>
+        <ColorIndicator color={color} shape="rectangle" role="presentation" />
+        {this.isSelectedColor(color) && (
+          <div css={this.props?.styles?.selectedIndicator}>
+            <IconCheckDarkSolid
+              themeOverride={{ sizeXSmall: '0.8rem' }}
+              size="x-small"
+            />
+          </div>
+        )}
+      </div>
+    </View>
+  )
+
+  renderIndicatorTooltip = (child: React.ReactElement, color: string) => (
+    <Tooltip renderTip={<div>{color}</div>}>{child}</Tooltip>
   )
 
   renderSettingsMenu = (color: string, index: number) => (

@@ -29,6 +29,7 @@ import {
 
 type DeterministicIdProviderValue = Map<string, number>
 type DeterministicIdProviderProps = React.PropsWithChildren<{
+  // eslint-disable-next-line react/require-default-props
   instanceCounterMap?: DeterministicIdProviderValue
 }>
 
@@ -47,16 +48,13 @@ type DeterministicIdProviderProps = React.PropsWithChildren<{
 
 const DeterministicIdContextProvider = ({
   children,
-  instanceCounterMap
+  instanceCounterMap = defaultDeterministicIDMap
 }: DeterministicIdProviderProps) => {
   return (
     <DeterministicIdContext.Provider value={instanceCounterMap!}>
       {children}
     </DeterministicIdContext.Provider>
   )
-}
-DeterministicIdContextProvider.defaultProps = {
-  instanceCounterMap: defaultDeterministicIDMap
 }
 
 export { DeterministicIdContextProvider }
