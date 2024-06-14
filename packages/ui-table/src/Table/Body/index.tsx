@@ -25,17 +25,12 @@
 /** @jsx jsx */
 import { Component, Children } from 'react'
 
-import {
-  matchComponentTypes,
-  safeCloneElement,
-  omitProps
-} from '@instructure/ui-react-utils'
+import { safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { Row } from '../Row'
 import type { TableBodyProps } from './props'
 import type { RowChild } from '../props'
 import { allowedProps, propTypes } from './props'
@@ -76,14 +71,12 @@ class Body extends Component<TableBodyProps> {
         role={isStacked ? 'rowgroup' : undefined}
       >
         {Children.map(children as RowChild[], (child) =>
-          matchComponentTypes(child, [Row])
-            ? safeCloneElement(child, {
-                key: child.props.name,
-                hover,
-                isStacked,
-                headers
-              })
-            : null
+          safeCloneElement(child, {
+            key: child.props.name,
+            hover,
+            isStacked,
+            headers
+          })
         )}
       </View>
     )

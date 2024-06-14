@@ -873,6 +873,118 @@ render(
 )
 ```
 
+### Using Custom Components as Children
+
+In some cases you might want to use custom components in a `Table`, e.g. a HOC for `Table.Row` or `Table.Cell`. This is generally not recommended but sometimes it could be beneficial for codesplitting or writing cleaner code for larger and more complex Tables. In those cases you have to pay attention to always pass down the appropriate props manually.
+
+```javascript
+---
+type: example
+---
+class CustomTableCell extends React.Component {
+  render () {
+    return (
+        <Table.Cell {...this.props}>{this.props.children}</Table.Cell>
+    )
+  }
+}
+
+class CustomTableRow extends React.Component {
+  render () {
+    return (
+        <Table.Row {...this.props}>
+          <Table.RowHeader>1</Table.RowHeader>
+          <Table.Cell>The Shawshank Redemption</Table.Cell>
+          <Table.Cell>1994</Table.Cell>
+          <CustomTableCell>9.3</CustomTableCell>
+        </Table.Row>
+    )
+  }
+}
+
+class Example extends React.Component {
+  state = {
+    layout: 'auto',
+    hover: false,
+  }
+
+  handleChange = (field, value) => {
+    this.setState({
+      [field]: value,
+    })
+  }
+
+  renderOptions () {
+    const { layout, hover } = this.state
+
+    return (
+      <Flex alignItems="start">
+        <Flex.Item margin="small">
+          <RadioInputGroup
+            name="layout2"
+            description="layout2"
+            value={layout}
+            onChange={(e, value) => this.handleChange('layout', value)}
+          >
+            <RadioInput label="auto" value="auto" />
+            <RadioInput label="fixed" value="fixed" />
+            <RadioInput label="stacked" value="stacked" />
+          </RadioInputGroup>
+        </Flex.Item>
+        <Flex.Item margin="small">
+          <Checkbox
+            label="hover"
+            checked={hover}
+            onChange={(e, value) => this.handleChange('hover', !hover)}
+          />
+        </Flex.Item>
+      </Flex>
+    )
+  }
+
+  render() {
+    const { layout, hover } = this.state
+
+    return (
+      <div>
+        {this.renderOptions()}
+        <Table
+          caption='Top rated movies'
+          layout={layout}
+          hover={hover}
+        >
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="Rank">Rank</Table.ColHeader>
+              <Table.ColHeader id="Title">Title</Table.ColHeader>
+              <Table.ColHeader id="Year">Year</Table.ColHeader>
+              <Table.ColHeader id="Rating">Rating</Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <CustomTableRow/>
+            <Table.Row>
+              <Table.RowHeader>2</Table.RowHeader>
+              <Table.Cell>The Godfather</Table.Cell>
+              <Table.Cell>1972</Table.Cell>
+              <Table.Cell>9.2</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.RowHeader>3</Table.RowHeader>
+              <Table.Cell>The Godfather: Part II</Table.Cell>
+              <Table.Cell>1974</Table.Cell>
+              <Table.Cell>9.0</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
+      </div>
+    )
+  }
+}
+
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js

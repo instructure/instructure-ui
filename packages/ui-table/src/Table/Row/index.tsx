@@ -25,11 +25,7 @@
 /** @jsx jsx */
 import { Component, Children } from 'react'
 
-import {
-  omitProps,
-  matchComponentTypes,
-  safeCloneElement
-} from '@instructure/ui-react-utils'
+import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -37,11 +33,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { ColHeader } from '../ColHeader'
-import { RowHeader } from '../RowHeader'
-import { Cell } from '../Cell'
 import type { TableRowProps } from './props'
-import type { ColHeaderChild, RowHeaderChild, CellChild } from '../props'
 import { allowedProps, propTypes } from './props'
 
 /**
@@ -79,32 +71,14 @@ class Row extends Component<TableRowProps> {
         css={styles?.row}
         role={isStacked ? 'row' : undefined}
       >
-        {(
-          Children.toArray(children) as (
-            | ColHeaderChild
-            | RowHeaderChild
-            | CellChild
-          )[]
-        )
+        {Children.toArray(children)
           .filter(Boolean)
-          .map((child, index) => {
-            if (matchComponentTypes<ColHeaderChild>(child, [ColHeader])) {
-              return child
-            }
-            if (matchComponentTypes<RowHeaderChild>(child, [RowHeader])) {
-              return safeCloneElement(child, {
-                key: child.props.name,
-                isStacked
-              })
-            }
-            if (matchComponentTypes<CellChild>(child, [Cell])) {
-              return safeCloneElement(child, {
-                key: child.props.name,
-                isStacked,
-                header: headers && headers[index]
-              })
-            }
-            return null
+          .map((child: any, index) => {
+            return safeCloneElement(child, {
+              key: child.props.name,
+              isStacked,
+              header: headers && headers[index]
+            })
           })}
       </View>
     )
