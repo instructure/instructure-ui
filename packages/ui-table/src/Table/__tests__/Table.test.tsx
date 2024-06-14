@@ -23,14 +23,7 @@
  */
 
 import React from 'react'
-import {
-  expect,
-  mount,
-  stub,
-  find,
-  findAll,
-  within
-} from '@instructure/ui-test-utils'
+import { expect, mount, stub, find, within } from '@instructure/ui-test-utils'
 //TODO
 /* eslint-disable no-restricted-imports */
 // @ts-ignore: Cannot find module
@@ -113,30 +106,6 @@ describe('<Table />', async () => {
     })
 
     expect(stackedTable).to.exist()
-  })
-
-  it('can ignore invalid children', async () => {
-    await mount(
-      <Table caption="Test table">
-        <Table.Head>
-          {null}
-          <Table.Row>
-            <Table.ColHeader id="foo">Foo</Table.ColHeader>
-            {null}
-          </Table.Row>
-        </Table.Head>
-        {null}
-        <Table.Body>
-          {null}
-          <Table.Row></Table.Row>
-        </Table.Body>
-      </Table>
-    )
-    const th = await findAll('th')
-    const tr = await findAll('tr')
-
-    expect(th).to.have.length(1)
-    expect(tr).to.have.length(2)
   })
 
   it('can handle non-existent head in stacked layout', async () => {

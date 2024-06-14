@@ -24,7 +24,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ThemeablePropTypes } from '@instructure/emotion'
 
 import type {
@@ -102,7 +101,7 @@ type TableStyle = ComponentStyle<'table'>
 
 const propTypes: PropValidators<PropKeys> = {
   caption: PropTypes.node.isRequired,
-  children: ChildrenPropTypes.oneOf([Head, Body]),
+  children: PropTypes.node,
   margin: ThemeablePropTypes.spacing,
   elementRef: PropTypes.func,
   hover: PropTypes.bool,
