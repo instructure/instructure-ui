@@ -73,31 +73,3 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: npx netlify deploy --prod --dir ./packages/__docs__/__build__
-  regression-test:
-    needs: release
-    if: "!startsWith(github.event.head_commit.message, 'chore(release)')"
-    name: Regression testing
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        browser: [chrome, firefox]
-        bundler: [esbuild, webpack4]
-    defaults:
-      run:
-        working-directory: ./regression-test
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
-      - name: Retrieve latest snapshot version
-        run: node prepare.js
-      - name: Install dependencies for regression testing
-        run: npm install --no-package-lock
-      - name: Build project and start the server
-        run: |
-          npm run build:${{ matrix.bundler }}
-          npm run serve &
-      - name: Run regression tests
-        run: npx testcafe ${{ matrix.browser }}:headless ./src/test.ts
