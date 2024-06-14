@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
+
+
+### Bug Fixes
+
+* **ui-top-nav-bar:** keep width unchanged when active status is set to topnavbar.item ([9770827](https://github.com/instructure/instructure-ui/commit/9770827de8968745d9b1c71cea19b3dd94315d0f))
+* **ui-top-nav-bar:** show nothing in smallviewportlayout when there is one crumb link ([1c380a9](https://github.com/instructure/instructure-ui/commit/1c380a9943ffc1213d19961dc840181fb26a0308))
+
+
+
+
+
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-top-nav-bar

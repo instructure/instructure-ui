@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
+
+
+### Bug Fixes
+
+* **ui-react-utils:** remove defaultProps from DeterministicContextProvider ([5c89612](https://github.com/instructure/instructure-ui/commit/5c89612ceb4227f26462929068045bc06f3c080b))
+
+
+
+
+
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-react-utils

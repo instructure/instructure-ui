@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
+
+
+### Features
+
+* **shared-types,ui-calendar,ui-select:** add yearpicker functionality to calendar ([2c0c6e0](https://github.com/instructure/instructure-ui/commit/2c0c6e081d96fc821c1296df5c4f1fba9a8c162c))
+
+
+
+
+
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/shared-types
