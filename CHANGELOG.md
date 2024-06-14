@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
+
+
+### Bug Fixes
+
+* **ui-buttons:** allow `secondary` option for CondensedButton color ([eca60d3](https://github.com/instructure/instructure-ui/commit/eca60d31b5a083ad60a77d1635c8bc24ef8e3a5f))
+* **ui-color-picker:** add styling for disabled state ([7d6d3ad](https://github.com/instructure/instructure-ui/commit/7d6d3ad80a20fe325b397f83a01ac3ae62d0b6ec))
+* **ui-react-utils:** remove defaultProps from DeterministicContextProvider ([5c89612](https://github.com/instructure/instructure-ui/commit/5c89612ceb4227f26462929068045bc06f3c080b))
+* **ui-tabs:** fix horizontal scrolling with keyboard navigation ([a25c7db](https://github.com/instructure/instructure-ui/commit/a25c7db1ebede622f489dd65872ed8fc5a1b9651))
+* **ui-tabs:** fix id generation when null is present as children ([85765ae](https://github.com/instructure/instructure-ui/commit/85765ae3183ac121714cd814a322dcc012ed2f72))
+* **ui-top-nav-bar:** keep width unchanged when active status is set to topnavbar.item ([9770827](https://github.com/instructure/instructure-ui/commit/9770827de8968745d9b1c71cea19b3dd94315d0f))
+* **ui-top-nav-bar:** show nothing in smallviewportlayout when there is one crumb link ([1c380a9](https://github.com/instructure/instructure-ui/commit/1c380a9943ffc1213d19961dc840181fb26a0308))
+
+
+### Features
+
+* **shared-types,ui-calendar,ui-select:** add yearpicker functionality to calendar ([2c0c6e0](https://github.com/instructure/instructure-ui/commit/2c0c6e081d96fc821c1296df5c4f1fba9a8c162c))
+* **ui-menu:** add maxHeight functionality to Menu ([6494c4a](https://github.com/instructure/instructure-ui/commit/6494c4a78522e5c2a16d55ed5f000b8b7647c47d))
+* **ui-tabs:** add option for persisting tabpanels ([6fe73a3](https://github.com/instructure/instructure-ui/commit/6fe73a3ec76c88fcc7baf2f587276de595316dbc))
+
+
+
+
+
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package instructure-ui

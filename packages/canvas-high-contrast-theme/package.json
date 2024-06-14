@@ -1,6 +1,6 @@
 {
   "name": "@instructure/canvas-high-contrast-theme",
-  "version": "9.0.1",
+  "version": "9.1.0",
   "description": "A high contrast theme for Canvas LMS made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "module": "./es/index.js",
@@ -22,13 +22,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "9.0.1"
+    "@instructure/ui-babel-preset": "9.1.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.5",
-    "@instructure/shared-types": "9.0.1",
-    "@instructure/theme-registry": "9.0.1",
-    "@instructure/ui-theme-tokens": "9.0.1"
+    "@instructure/shared-types": "9.1.0",
+    "@instructure/theme-registry": "9.1.0",
+    "@instructure/ui-theme-tokens": "9.1.0"
   },
   "publishConfig": {
     "access": "public"

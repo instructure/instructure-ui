@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/instructure/instructure-ui/compare/v9.0.1...v9.1.0) (2024-06-14)
+
+
+### Features
+
+* **ui-menu:** add maxHeight functionality to Menu ([6494c4a](https://github.com/instructure/instructure-ui/commit/6494c4a78522e5c2a16d55ed5f000b8b7647c47d))
+
+
+
+
+
 ## [9.0.1](https://github.com/instructure/instructure-ui/compare/v9.0.0...v9.0.1) (2024-05-09)
 
 **Note:** Version bump only for package @instructure/ui-menu
