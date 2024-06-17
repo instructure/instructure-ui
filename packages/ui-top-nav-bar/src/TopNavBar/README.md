@@ -342,7 +342,7 @@ class PlaygroundExample extends React.Component {
           'userShowChevronForSubmenu',
         ],
         radios: {
-          userVariant: ['avatar', 'avatar with user name', 'user name', 'login text', 'login button']
+          userVariant: ['avatar', 'avatar with user name', 'user name', 'login button']
         }
       },
       disabledSection: {
@@ -765,7 +765,7 @@ class PlaygroundExample extends React.Component {
                 <TopNavBar.User>
                   <TopNavBar.Item
                     id="User"
-                    tooltip="User settings"
+                    tooltip={this.state.userVariant === 'login button' ? '' : 'User settings'}
                     aria-label="User settings"
                     variant={this.state.userVariant === 'avatar'
                       ? 'avatar'
@@ -807,10 +807,7 @@ class PlaygroundExample extends React.Component {
                       status: 'disabled'
                     }}
                   >
-                    {this.state.userVariant.includes('login')
-                      ? 'Log in/Register'
-                      : 'User Name'
-                    }
+                      Login
                   </TopNavBar.Item>
                 </TopNavBar.User>
               ) : undefined }
