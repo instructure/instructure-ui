@@ -21,37 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const webpack = require('webpack')
-const path = require('node:path')
+'use client'
+import React from 'react'
+import { InstUISettingsProvider, View } from '@instructure/ui'
 
-module.exports = {
-  entry: './src/app.tsx',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public')
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.m?jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-proposal-class-properties']
-          }
-        }
-      }
-    ]
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx']
-  },
-  mode: 'development'
+export default function Component({ params }: any) {
+  const Component = require(`../../components/${params.componentName}`)
+    .default as React.ElementType
+  return (
+    <InstUISettingsProvider>
+      <View as='div' margin='small' padding='large' background='primary'>
+        <h1>
+          Component{' '}
+          {params.componentName
+            .substring(0, params.componentName.length - 4)
+            .replace('_', ' ')}
+        </h1>
+        <Component></Component>
+      </View>
+    </InstUISettingsProvider>
+  )
 }
