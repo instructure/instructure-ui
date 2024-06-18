@@ -1,0 +1,19 @@
+name: SSR Regression Tests
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
+  push:
+    branches:
+      - master
+jobs:
+  ssr-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: ./regression-test
+          build: npm run build
+          start: npm start

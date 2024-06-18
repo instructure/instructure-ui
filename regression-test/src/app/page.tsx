@@ -21,15 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { Dialog } from '@instructure/ui'
+'use client'
+import { Link, View } from '@instructure/ui'
 import React from 'react'
+import * as Components from './/components'
 
-const DIALOG_IUI = () => {
+export default function Home() {
   return (
-    <Dialog open shouldContainFocus shouldReturnFocus>
-      <div>Dialog</div>
-    </Dialog>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <View as="div">
+        <ul>
+          {Object.entries(Components as Record<string, React.ElementType>).map(
+            ([ComponentName, _Component]) => (
+              <li key={ComponentName}>
+                <Link href={'components/' + ComponentName}>
+                  {ComponentName.substring(0, ComponentName.length - 4)
+                    .toLowerCase()
+                    .replace('_', ' ')}
+                </Link>
+              </li>
+            )
+          )}
+        </ul>
+      </View>
+    </main>
   )
 }
-
-export default DIALOG_IUI

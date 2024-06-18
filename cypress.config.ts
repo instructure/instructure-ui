@@ -36,6 +36,7 @@ export default defineConfig({
   },
   screenshotOnRunFailure: false,
   component: {
+    excludeSpecPattern: 'regression-test/**',
     devServer: {
       framework: 'react',
       bundler: 'webpack',

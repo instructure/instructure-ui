@@ -120,7 +120,11 @@ class SingleSelectExample extends React.Component {
           })}
         </Select>
         <Alert
-          liveRegion={() => document.getElementById('flash-messages')}
+          liveRegion={() => {
+            if (typeof window === 'object')
+              return document.getElementById('flash-messages')
+            else return null
+          }}
           liveRegionPoliteness="assertive"
         >
           {announcement}
