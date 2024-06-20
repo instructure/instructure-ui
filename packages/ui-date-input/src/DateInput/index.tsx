@@ -331,7 +331,8 @@ class DateInput extends Component<DateInputProps, DateInputState> {
       value,
       onChange,
       disabledDates,
-      currentDate
+      currentDate,
+      withYearPicker
     } = this.props
 
     const isValidDate = value
@@ -368,7 +369,8 @@ class DateInput extends Component<DateInputProps, DateInputState> {
           renderNavigationLabel,
           renderWeekdayLabels,
           renderNextMonthButton: this.renderMonthNavigationButton('next'),
-          renderPrevMonthButton: this.renderMonthNavigationButton('prev')
+          renderPrevMonthButton: this.renderMonthNavigationButton('prev'),
+          withYearPicker
         }) as CalendarProps)}
         {...noChildrenProps}
       >
@@ -424,7 +426,7 @@ class DateInput extends Component<DateInputProps, DateInputState> {
           width,
           messages,
           onChange: this.handleInputChange,
-          onBlur: createChainedFunction(onBlur, this.handleHideCalendar),
+          onBlur,
           inputRef: createChainedFunction(ref, this.handleInputRef),
           interaction,
           isRequired,
@@ -482,8 +484,11 @@ class DateInput extends Component<DateInputProps, DateInputState> {
               placement={placement}
               isShowingContent={isShowingCalendar}
               positionTarget={this._input}
-              shouldReturnFocus={false}
-              shouldFocusContentOnTriggerBlur
+              shouldContainFocus
+              shouldReturnFocus
+              onHideContent={(e) =>
+                setTimeout(() => this.handleHideCalendar(e), 0)
+              } // has to be wrapped in setTimeout otherwise the popover would open instantly after closing
             >
               {this.renderCalendar({ getListProps, getOptionProps })}
             </Popover>

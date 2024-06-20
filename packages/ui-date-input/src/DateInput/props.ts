@@ -250,6 +250,24 @@ type DateInputOwnProps = {
    * property or a context property.
    **/
   timezone?: string
+
+  /**
+   * If set, years can be picked from a dropdown.
+   * It accepts an object.
+   * screenReaderLabel: string // e.g.: i18n("pick a year")
+   *
+   * onRequestYearChange?:(e: React.MouseEvent,requestedYear: number): void // if set, on year change, only this will be called and no internal change will take place
+   *
+   * startYear: number // e.g.: 2001, sets the start year of the selectable list
+   *
+   * endYear: number // e.g.: 2030, sets the end year of the selectable list
+   */
+  withYearPicker?: {
+    screenReaderLabel: string
+    onRequestYearChange?: (e: any, requestedYear: number) => void
+    startYear: number
+    endYear: number
+  }
 }
 
 type PropKeys = keyof DateInputOwnProps
@@ -308,7 +326,8 @@ const propTypes: PropValidators<PropKeys> = {
     PropTypes.string
   ]),
   locale: PropTypes.string,
-  timezone: PropTypes.string
+  timezone: PropTypes.string,
+  withYearPicker: PropTypes.object
 }
 
 const allowedProps: AllowedPropKeys = [
