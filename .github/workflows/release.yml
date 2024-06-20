@@ -1,4 +1,4 @@
-name: AUTO npm release and docs deploy - on master
+name: AUTO npm release, docs deploy and ssr regression - on master
 on:
   # Trigger the workflow on push or pull request,
   # but only for the master branch
@@ -73,3 +73,15 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: npx netlify deploy --prod --dir ./packages/__docs__/__build__
+  ssr-regression:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: ./regression-test
+          build: npm run build
+          start: npm start
