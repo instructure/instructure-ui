@@ -85,7 +85,7 @@ type OptionData = {
 
 // Contains the Option ComponentElement and the extra data we need track on it,
 // but don't want to expose as props
-type MappedOption = OptionChild & OptionData
+type MappedOption = OptionChild & OptionData & { index: number }
 
 // Contains the props object of the Page
 // with the `children` transformed into an array
@@ -248,7 +248,10 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
   }
 
   get activeOptionIds() {
-    return Object.keys(this._activeOptionsMap)
+    const orderedKeys = Object.keys(this._activeOptionsMap).sort((a, b) => {
+      return this._activeOptionsMap[a].index - this._activeOptionsMap[b].index
+    })
+    return orderedKeys
   }
 
   get activeOptions() {
@@ -1076,9 +1079,14 @@ class Drilldown extends Component<DrilldownProps, DrilldownState> {
       optionProps = { ...optionProps, ...getDisabledOptionProps() }
     }
 
-    // track as valid active option if not the title
-    if (id !== this._headerTitleId) {
-      this._activeOptionsMap[id] = { ...option, ...optionData }
+    // track as valid active option if not the title and the map doesn't already contain the id
+    if (id !== this._headerTitleId && !this._activeOptionsMap[id]) {
+      // store index to know the order of ids later; js objects doesn't preserve order
+      this._activeOptionsMap[id] = {
+        ...option,
+        ...optionData,
+        index: Object.keys(this._activeOptionsMap).length + 1
+      }
     }
 
     const customRole =
