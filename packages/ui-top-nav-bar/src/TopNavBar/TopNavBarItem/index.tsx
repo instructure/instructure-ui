@@ -493,7 +493,7 @@ class TopNavBarItem extends Component<TopNavBarItemProps, TopNavBarItemState> {
                 {this.renderAvatar()}
               </span>
             )}
-            {content}
+            <span css={styles?.contentText}>{content}</span>
             {this.submenuIcon}
           </div>
         )}
