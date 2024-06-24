@@ -274,7 +274,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
   handleHideCalendar = (event: SyntheticEvent) => {
     // prevent event pooling https://reactjs.org/docs/legacy-event-pooling.html
     // Remove if React 16 is no longer supported
-    event.persist()
+    event.persist?.()
     // timeout is needed here because handleDayClick could be called in the same
     // frame, and it updates calendarSelectedDate which is read in here.
     window.setTimeout(() => {

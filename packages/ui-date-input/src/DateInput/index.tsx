@@ -487,7 +487,8 @@ class DateInput extends Component<DateInputProps, DateInputState> {
               shouldContainFocus
               shouldReturnFocus
               onHideContent={(e) =>
-                setTimeout(() => this.handleHideCalendar(e), 0)
+                // setTimeout(() => this.handleHideCalendar(e), 0)
+                this.props.onRequestHideCalendar?.(e)
               } // has to be wrapped in setTimeout otherwise the popover would open instantly after closing
             >
               {this.renderCalendar({ getListProps, getOptionProps })}
