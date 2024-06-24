@@ -33,13 +33,12 @@ To apply a theme to whole app, you need to import `<InstUISettingsProvider/>` an
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { instructure } from '@instructure/ui-themes'
 import { InstUISettingsProvider } from '@instructure/emotion'
 
 import { App } from './App'
 
 ReactDOM.render(
-  <InstUISettingsProvider theme={instructure}>
+  <InstUISettingsProvider>
     <App />
   </InstUISettingsProvider>,
   document.getElementById('app')
@@ -55,7 +54,7 @@ ReactDOM.render(
 <InstUISettingsProvider theme={canvas}>
   <Heading>I should have "canvas" font family.</Heading>
 
-  <InstUISettingsProvider theme={instructure}>
+  <InstUISettingsProvider>
     <Heading>I should have "instructure" font family.</Heading>
   </InstUISettingsProvider>
 </InstUISettingsProvider>

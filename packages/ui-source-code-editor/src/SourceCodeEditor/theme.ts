@@ -36,13 +36,13 @@ const generateComponentTheme = (theme: Theme): SourceCodeEditorTheme => {
   const componentVariables: SourceCodeEditorTheme = {
     fontFamily: typography?.fontFamilyMonospace,
     fontSize: typography?.fontSizeSmall,
-    background: colors?.backgroundLightest,
-    color: colors?.textDarkest,
-    gutterBackground: colors?.backgroundLight,
+    background: colors?.contrasts?.white,
+    color: colors?.contrasts?.grey125,
+    gutterBackground: colors?.contrasts?.grey11,
     borderWidth: borders?.widthSmall,
-    borderColor: colors?.borderMedium,
+    borderColor: colors?.contrasts?.grey1214,
     borderRadius: borders?.radiusMedium,
-    focusBorderColor: colors?.borderBrand,
+    focusBorderColor: colors?.contrasts?.blue4570,
     horizontalPadding: spacing?.xSmall,
     verticalPadding: spacing?.xxSmall
   }

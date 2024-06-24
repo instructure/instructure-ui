@@ -48,8 +48,8 @@ const generateComponentTheme = (theme: Theme): TopNavBarItemTheme => {
     activeItemFontWeight: typography?.fontWeightBold,
     activeItemIndicatorSpacing: '0.25rem',
     activeIndicatorWidth: borders?.widthMedium,
-    activeIndicatorColor: colors?.textLightest,
-    activeIndicatorColorInverse: colors.textDarkest
+    activeIndicatorColor: colors?.contrasts?.white,
+    activeIndicatorColorInverse: colors?.contrasts?.grey125
   }
 
   return {

@@ -41,21 +41,21 @@ const generateComponentTheme = (theme: Theme): CalendarDayTheme => {
   }
 
   const componentVariables: CalendarDayTheme = {
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest,
+    color: colors?.contrasts?.grey125,
+    background: colors?.contrasts?.white,
     fontSize: typography?.fontSizeMedium,
     padding: spacing?.xxSmall,
     height: forms?.inputHeightSmall,
     minWidth: forms?.inputHeightSmall,
 
-    outsideMonthColor: colors?.textDark,
+    outsideMonthColor: colors?.contrasts?.grey4570,
 
-    selectedBackground: colors?.backgroundSuccess,
-    selectedColor: colors?.textLightest,
+    selectedBackground: colors?.contrasts?.grey4570,
+    selectedColor: colors?.contrasts?.white,
     selectedBorderRadius: borders?.radiusMedium,
 
-    todayBackground: colors?.backgroundBrand,
-    todayColor: colors?.textLightest,
+    todayBackground: colors?.contrasts?.blue4570,
+    todayColor: colors?.contrasts?.white,
     todayBorderRadius: forms?.inputHeightSmall
   }
 

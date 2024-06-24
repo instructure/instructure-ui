@@ -22,21 +22,46 @@
  * SOFTWARE.
  */
 
-import type { ThemeTheme } from './props'
-import type { Theme } from '@instructure/ui-themes'
+import { Primitives } from '@instructure/shared-types'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): ThemeTheme => {
-  const { colors, typography } = theme
+const primitives: Primitives = {
+  white: '#FFFFFF',
 
-  return {
-    convertedValueTextColor: colors?.contrasts?.grey100,
-    convertedValueFontSize: typography?.fontSizeSmall
-  }
+  grey11: '#F2F4F4',
+  grey12: '#E8EAEC',
+  grey14: '#D7DADE',
+  grey24: '#9EA6AD',
+  grey45: '#6A7883',
+  grey57: '#586874',
+  grey70: '#4A5B68',
+  grey82: '#3F515E',
+  grey100: '#334451',
+  grey125: '#273540',
+
+  blue12: '#DDECF5',
+  blue45: '#117CBA',
+  blue57: '#046BA6',
+  blue70: '#035D91',
+  blue82: '#035381',
+
+  green12: '#DDEEE6',
+  green45: '#108751',
+  green57: '#017640',
+  green70: '#016738',
+  green82: '#015B32',
+
+  orange12: '#FFE5D7',
+  orange30: '#F06E26',
+  orange45: '#CB4E15',
+  orange57: '#AE4515',
+  orange70: '#973D14',
+  orange82: '#853714',
+
+  red12: '#FCE4E7',
+  red45: '#E4263B',
+  red57: '#CE061C',
+  red70: '#B40519',
+  red82: '#A10416'
 }
 
-export default generateComponentTheme
+export default primitives

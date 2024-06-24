@@ -37,7 +37,6 @@ import { ColorCard } from '../ColorCard'
 import { Heading } from '../Heading'
 
 import type { ThemeColorsProps, ThemeColorsState } from './props'
-import type { ColorCardProps } from '../ColorCard/props'
 
 class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
   constructor(props: ThemeColorsProps) {
@@ -50,9 +49,25 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
     }
   }
 
-  renderColorCards() {
+  groupColors() {
     const { colors } = this.props
 
+    return Object.keys(colors).reduce((res: any, color) => {
+      const category = color
+        .split('')
+        .filter((char) => isNaN(Number(char)))
+        .join('')
+
+      return {
+        ...res,
+        [category]: [...(res[category] ? res[category] : []), color]
+      }
+    }, {})
+  }
+
+  renderColorCards() {
+    const { colors } = this.props
+    const colorGroups = this.groupColors()
     return (
       <Responsive
         query={{
@@ -68,31 +83,28 @@ class ThemeColors extends Component<ThemeColorsProps, ThemeColorsState> {
           large: { colWidth: `${100 / 5}%`, minimal: false }
         }}
         render={(props) => {
-          const cards: React.ComponentElement<ColorCardProps, ColorCard>[] = []
-          Object.keys(colors).forEach((color) => {
-            cards.push(
-              <ColorCard
-                hex={colors[color]}
-                name={color}
-                minimal={props && props.minimal}
-              />
-            )
-          })
           return (
             <View as="div" padding="small">
               <Heading level="h3" as="h4">
-                theme palette
+                Color palette
               </Heading>
-              <Flex wrap="wrap">
-                {React.Children.map(cards, (child) => (
-                  <Flex.Item
-                    size={props && props.colWidth}
-                    padding="small xx-small"
-                  >
-                    {child}
-                  </Flex.Item>
-                ))}
-              </Flex>
+              {Object.keys(colorGroups).map((colorGroup) => (
+                <Flex key={colorGroup} wrap="wrap" margin="0 0 large 0">
+                  {colorGroups[colorGroup].map((color: string) => (
+                    <Flex.Item
+                      key={`${color}-flex`}
+                      size={props && props.colWidth}
+                      padding="small xx-small"
+                    >
+                      <ColorCard
+                        hex={colors[color]}
+                        name={color}
+                        minimal={props && props.minimal}
+                      />
+                    </Flex.Item>
+                  ))}
+                </Flex>
+              ))}
             </View>
           )
         }}

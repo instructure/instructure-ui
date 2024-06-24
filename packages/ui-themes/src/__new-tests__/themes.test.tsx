@@ -30,7 +30,7 @@ describe('themes are backwards compatible', () => {
   describe("should be able to access theme variables with 'theme.variables.x'", () => {
     for (const theme of themes) {
       it(`${theme.key}`, () => {
-        const brandColor = theme.variables.colors.brand
+        const brandColor = theme.colors.contrasts.white
 
         expect(brandColor).toBeDefined()
         expect(brandColor).not.toBe('')
@@ -41,7 +41,7 @@ describe('themes are backwards compatible', () => {
   describe("should be able to access theme variables with 'theme.x'", () => {
     for (const theme of themes) {
       it(`${theme.key}`, () => {
-        const brandColor = theme.colors.brand
+        const brandColor = theme.colors.contrasts.white
 
         expect(brandColor).toBeDefined()
         expect(brandColor).not.toBe('')

@@ -44,8 +44,8 @@ const generateComponentTheme = (theme: Theme): CalendarTheme => {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
 
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest,
+    color: colors?.contrasts?.grey125,
+    background: colors?.contrasts?.white,
 
     navMargin: spacing?.small,
     navWithYearMargin: spacing?.xSmall,

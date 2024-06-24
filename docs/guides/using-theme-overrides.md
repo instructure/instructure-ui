@@ -603,7 +603,7 @@ import { instructure } from "@instructure/ui-themes"
 
 render() {
   return (
-    <InstUISettingsProvider theme={instructure}>
+    <InstUISettingsProvider>
       <SubTree1 />
       <InstUISettingsProvider theme={{
         colors: {

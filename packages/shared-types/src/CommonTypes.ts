@@ -87,3 +87,5 @@ export interface InstUIComponent
     InstUIBaseComponent {
   originalType?: any
 }
+
+export type Themes = 'contrast45' | 'contrast70'

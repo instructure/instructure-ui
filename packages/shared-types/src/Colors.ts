@@ -22,121 +22,106 @@
  * SOFTWARE.
  */
 
-type BaseColors = {
-  brand: string
-  link: string
-  electric: string
-  shamrock: string
-  barney: string
-  crimson: string
-  fire: string
-  licorice: string
-  oxford: string
-  ash: string
-  slate: string
-  tiara: string
-  porcelain: string
+type Primitives = {
   white: string
+  grey11: string
+  grey12: string
+  grey14: string
+  grey24: string
+  grey45: string
+  grey57: string
+  grey70: string
+  grey82: string
+  grey100: string
+  grey125: string
+
+  blue12: string
+  blue45: string
+  blue57: string
+  blue70: string
+  blue82: string
+
+  green12: string
+  green45: string
+  green57: string
+  green70: string
+  green82: string
+
+  orange12: string
+  orange30: string
+  orange45: string
+  orange57: string
+  orange70: string
+  orange82: string
+
+  red12: string
+  red45: string
+  red57: string
+  red70: string
+  red82: string
 }
 
-type TextColors = {
-  textDarkest: BaseColors['licorice']
-  textDark: BaseColors['ash']
-  textLight: BaseColors['porcelain']
-  textLightest: BaseColors['white']
-  textBrand: BaseColors['brand']
-  textLink: BaseColors['link']
-  textAlert: BaseColors['barney']
-  textInfo: BaseColors['brand']
-  textSuccess: BaseColors['shamrock']
-  textDanger: BaseColors['crimson']
-  textWarning: BaseColors['fire']
+type Contrasts = {
+  white: Primitives[keyof Primitives]
+  grey11: Primitives[keyof Primitives]
+  grey1214: Primitives[keyof Primitives]
+  grey1424: Primitives[keyof Primitives]
+  grey24: Primitives[keyof Primitives]
+  grey4570: Primitives[keyof Primitives]
+  grey5782: Primitives[keyof Primitives]
+  grey100: Primitives[keyof Primitives]
+  grey125: Primitives[keyof Primitives]
+
+  blue12: Primitives[keyof Primitives]
+  blue4570: Primitives[keyof Primitives]
+  blue5782: Primitives[keyof Primitives]
+
+  green12: Primitives[keyof Primitives]
+  green4570: Primitives[keyof Primitives]
+  green5782: Primitives[keyof Primitives]
+
+  orange12: Primitives[keyof Primitives]
+  orange3045: Primitives[keyof Primitives]
+  orange4570: Primitives[keyof Primitives]
+  orange5782: Primitives[keyof Primitives]
+
+  red12: Primitives[keyof Primitives]
+  red4570: Primitives[keyof Primitives]
+  red5782: Primitives[keyof Primitives]
 }
 
-type BackgroundColors = {
-  backgroundDarkest: BaseColors['licorice']
-  backgroundDark: BaseColors['ash']
-  backgroundMedium: BaseColors['tiara']
-  backgroundLight: BaseColors['porcelain']
-  backgroundLightest: BaseColors['white']
-  backgroundBrand: BaseColors['brand']
-  backgroundBrandSecondary: BaseColors['oxford']
-  backgroundAlert: BaseColors['barney']
-  backgroundInfo: BaseColors['brand']
-  backgroundSuccess: BaseColors['shamrock']
-  backgroundDanger: BaseColors['crimson']
-  backgroundWarning: BaseColors['fire']
-}
+type ThemedContrasts = {
+  white: Primitives[keyof Primitives]
+  grey11: Primitives[keyof Primitives]
+  grey1214: Primitives[keyof Primitives]
+  grey1424: Primitives[keyof Primitives]
+  grey24: Primitives[keyof Primitives]
+  grey4570: Primitives[keyof Primitives]
+  grey5782: Primitives[keyof Primitives]
+  grey100: Primitives[keyof Primitives]
+  grey125: Primitives[keyof Primitives]
 
-type BorderColors = {
-  borderLightest: BaseColors['white']
-  borderLight: BaseColors['porcelain']
-  borderMedium: BaseColors['tiara']
-  borderDark: BaseColors['ash']
-  borderDarkest: BaseColors['licorice']
-  borderBrand: BaseColors['brand']
-  borderAlert: BaseColors['barney']
-  borderInfo: BaseColors['brand']
-  borderSuccess: BaseColors['shamrock']
-  borderDanger: BaseColors['crimson']
-  borderWarning: BaseColors['fire']
-  borderDebug: BaseColors['crimson']
+  blue12: Primitives[keyof Primitives]
+  blue4570: Primitives[keyof Primitives]
+  blue5782: Primitives[keyof Primitives]
+
+  green12: Primitives[keyof Primitives]
+  green4570: Primitives[keyof Primitives]
+  green5782: Primitives[keyof Primitives]
+
+  orange12: Primitives[keyof Primitives]
+  orange3045: Primitives[keyof Primitives]
+  orange4570: Primitives[keyof Primitives]
+  orange5782: Primitives[keyof Primitives]
+
+  red12: Primitives[keyof Primitives]
+  red4570: Primitives[keyof Primitives]
+  red5782: Primitives[keyof Primitives]
 }
 
 type Colors = {
-  values: BaseColors
-  text: TextColors
-  background: BackgroundColors
-  border: BorderColors
-  brand: string
-  link: string
-  electric: string
-  shamrock: string
-  barney: string
-  crimson: string
-  fire: string
-  licorice: string
-  oxford: string
-  ash: string
-  slate: string
-  tiara: string
-  porcelain: string
-  white: string
-  borderLightest: BaseColors['white']
-  borderLight: BaseColors['porcelain']
-  borderMedium: BaseColors['tiara']
-  borderDark: BaseColors['ash']
-  borderDarkest: BaseColors['licorice']
-  borderBrand: BaseColors['brand']
-  borderAlert: BaseColors['barney']
-  borderInfo: BaseColors['brand']
-  borderSuccess: BaseColors['shamrock']
-  borderDanger: BaseColors['crimson']
-  borderWarning: BaseColors['fire']
-  borderDebug: BaseColors['crimson']
-  backgroundDarkest: BaseColors['licorice']
-  backgroundDark: BaseColors['ash']
-  backgroundMedium: BaseColors['tiara']
-  backgroundLight: BaseColors['porcelain']
-  backgroundLightest: BaseColors['white']
-  backgroundBrand: BaseColors['brand']
-  backgroundBrandSecondary: BaseColors['oxford']
-  backgroundAlert: BaseColors['barney']
-  backgroundInfo: BaseColors['brand']
-  backgroundSuccess: BaseColors['shamrock']
-  backgroundDanger: BaseColors['crimson']
-  backgroundWarning: BaseColors['fire']
-  textDarkest: BaseColors['licorice']
-  textDark: BaseColors['ash']
-  textLight: BaseColors['porcelain']
-  textLightest: BaseColors['white']
-  textBrand: BaseColors['brand']
-  textLink: BaseColors['link']
-  textAlert: BaseColors['barney']
-  textInfo: BaseColors['brand']
-  textSuccess: BaseColors['shamrock']
-  textDanger: BaseColors['crimson']
-  textWarning: BaseColors['fire']
+  primitives: Primitives
+  contrasts: ThemedContrasts
 }
 
-export type { BaseColors, TextColors, BorderColors, BackgroundColors, Colors }
+export type { Colors, Primitives, Contrasts, ThemedContrasts }

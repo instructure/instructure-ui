@@ -52,7 +52,7 @@ const generateComponentTheme = (theme: Theme): LinkTheme => {
   const componentVariables: LinkTheme = {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
-    color: colors?.textLink,
+    color: colors?.contrasts?.blue4570,
 
     textDecorationWithinText: 'underline',
     hoverTextDecorationWithinText: 'none',
@@ -60,15 +60,15 @@ const generateComponentTheme = (theme: Theme): LinkTheme => {
     hoverTextDecorationOutsideText: 'underline',
 
     focusOutlineWidth: borders?.widthMedium,
-    focusOutlineColor: colors?.borderBrand,
+    focusOutlineColor: colors?.contrasts?.blue4570,
     focusOutlineStyle: borders?.style,
     focusOutlineBorderRadius: borders?.radiusSmall,
 
-    hoverColor: darken(colors?.textLink, 10),
+    hoverColor: darken(colors?.contrasts?.blue5782, 10),
 
-    colorInverse: colors?.textLight,
-    focusInverseOutlineColor: colors?.borderLightest,
-    focusInverseIconOutlineColor: colors?.borderLightest,
+    colorInverse: colors?.contrasts?.grey11,
+    focusInverseOutlineColor: colors?.contrasts?.white,
+    focusInverseIconOutlineColor: colors?.contrasts?.white,
 
     iconSize: '1.125em', // make icon slightly larger than inherited font-size,
     iconPlusTextMargin: spacing?.xxSmall

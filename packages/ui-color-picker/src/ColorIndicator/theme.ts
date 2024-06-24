@@ -37,10 +37,10 @@ const generateComponentTheme = (theme: Theme): ColorIndicatorTheme => {
 
   const componentVariables = {
     borderWidth: borders?.widthSmall,
-    backgroundImage: `linear-gradient(45deg, ${colors.tiara} 25%, transparent 25%),
-    linear-gradient(-45deg, ${colors.tiara} 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, ${colors.tiara} 75%),
-    linear-gradient(-45deg, transparent 75%, ${colors.tiara} 75%)`,
+    backgroundImage: `linear-gradient(45deg, ${colors?.contrasts?.grey1214} 25%, transparent 25%),
+    linear-gradient(-45deg, ${colors?.contrasts?.grey1214} 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, ${colors?.contrasts?.grey1214} 75%),
+    linear-gradient(-45deg, transparent 75%, ${colors?.contrasts?.grey1214} 75%)`,
     backgroundSize: '.5rem .5rem',
     backgroundPosition: '0 0, 0 .25rem, .25rem -0.25rem, -0.25rem 0px',
     circleIndicatorSize: '1.5rem',

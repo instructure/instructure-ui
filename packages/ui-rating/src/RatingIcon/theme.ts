@@ -42,8 +42,8 @@ const generateComponentTheme = (theme: Theme): RatingIconTheme => {
 
   const componentVariables: RatingIconTheme = {
     iconMargin: spacing?.xxxSmall,
-    iconEmptyColor: colors?.textBrand,
-    iconFilledColor: colors?.textBrand,
+    iconEmptyColor: colors?.contrasts?.blue4570,
+    iconFilledColor: colors?.contrasts?.blue4570,
 
     smallIconFontSize: typography?.fontSizeMedium,
     mediumIconFontSize: typography?.fontSizeLarge,

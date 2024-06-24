@@ -35,13 +35,13 @@ const generateComponentTheme = (theme: Theme): ModalTheme => {
 
   const componentVariables: ModalTheme = {
     fontFamily: typography?.fontFamily,
-    textColor: colors?.textDarkest,
-    background: colors?.backgroundLightest,
-    borderColor: colors?.borderMedium,
+    textColor: colors?.contrasts?.grey125,
+    background: colors?.contrasts?.white,
+    borderColor: colors?.contrasts?.grey125,
     borderRadius: borders?.radiusMedium,
 
-    inverseBackground: colors?.backgroundBrandSecondary,
-    inverseTextColor: colors?.textLightest,
+    inverseBackground: colors?.contrasts?.grey100,
+    inverseTextColor: colors?.contrasts?.white,
 
     autoMinWidth: breakpoints?.xSmall,
     smallMaxWidth: breakpoints?.small,
