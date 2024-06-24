@@ -269,6 +269,7 @@ type TopNavBarItemStyle = ComponentStyle<
   | 'topNavBarItem'
   | 'container'
   | 'content'
+  | 'contentText'
   | 'avatarContainer'
   | 'submenuTriggerContainer'
   | 'submenuIcon'

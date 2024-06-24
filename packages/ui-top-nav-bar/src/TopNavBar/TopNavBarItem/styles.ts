@@ -108,12 +108,23 @@ const generateStyle = (
       color: inverseColor ? componentTheme.colorInverse : componentTheme.color,
 
       ...(isActive && {
-        fontWeight: componentTheme.activeItemFontWeight,
-        letterSpacing: -0.1818
+        fontWeight: componentTheme.activeItemFontWeight
       }),
 
       '*': {
         pointerEvents: 'none'
+      }
+    },
+    contentText: {
+      textAlign: 'center',
+      '&::before': {
+        display: 'block',
+        content: `"${props.children?.toString()}"`,
+        fontWeight: componentTheme.activeItemFontWeight,
+        height: '0px',
+        color: 'transparent',
+        overflow: 'hidden',
+        visibility: 'hidden'
       }
     },
     avatarContainer: {
