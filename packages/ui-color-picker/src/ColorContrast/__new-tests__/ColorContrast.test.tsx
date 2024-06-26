@@ -23,16 +23,16 @@
  */
 
 import React from 'react'
-import {
-  expect,
-  generateA11yTests,
-  mount,
-  stub
-} from '@instructure/ui-test-utils'
+import { render } from '@testing-library/react'
+import { vi } from 'vitest'
+import '@testing-library/jest-dom'
+
+// eslint-disable-next-line no-restricted-imports
+import { generateA11yTests } from '@instructure/ui-scripts/lib/test/generateA11yTests'
+import { runAxeCheck } from '@instructure/ui-axe-check'
 import { contrast } from '@instructure/ui-color-utils'
 
 import { ColorContrast } from '../'
-import { ColorContrastLocator } from '../ColorContrastLocator'
 import ColorContrastExamples from '../__examples__/ColorContrast.examples'
 
 const testColors = {
@@ -56,8 +56,8 @@ type ContrastStatus = 'FAIL' | 'PASS'
 describe('<ColorContrast />', () => {
   describe('elementRef prop', () => {
     it('should provide ref', async () => {
-      const elementRef = stub()
-      await mount(
+      const elementRef = vi.fn()
+      const { container } = render(
         <ColorContrast
           {...testColors}
           {...testLabels}
@@ -65,20 +65,18 @@ describe('<ColorContrast />', () => {
         />
       )
 
-      const component = await ColorContrastLocator.find()
-
-      expect(elementRef).to.have.been.calledWith(component.getDOMNode())
+      expect(elementRef).toHaveBeenCalledWith(container.firstChild)
     })
   })
 
   describe('labels are displayed:', () => {
     Object.entries(testLabels).forEach(([label, text]) => {
       it(label, async () => {
-        await mount(<ColorContrast {...testColors} {...testLabels} />)
-        const component = await ColorContrastLocator.find()
-        const labelElement = await component.findWithText(text)
+        const { container } = render(
+          <ColorContrast {...testColors} {...testLabels} />
+        )
 
-        expect(labelElement.getDOMNode()).to.be.visible()
+        expect(container).toHaveTextContent(text)
       })
     })
   })
@@ -88,60 +86,57 @@ describe('<ColorContrast />', () => {
       const color1 = '#fff'
       const color2 = '#088'
 
-      await mount(
+      const { container } = render(
         <ColorContrast
           {...testLabels}
           firstColor={color1}
           secondColor={color2}
         />
       )
-      const component = await ColorContrastLocator.find()
       const contrastResult = contrast(color1, color2, 2)
-      const labelElement = await component.findWithText(contrastResult + ':1')
 
-      expect(labelElement.getDOMNode()).to.be.visible()
+      expect(container).toHaveTextContent(contrastResult + ':1')
     })
 
     it('on transparent colors', async () => {
       const color1 = '#fff'
       const color2 = '#00888880'
 
-      await mount(
+      const { container } = render(
         <ColorContrast
           {...testLabels}
           firstColor={color1}
           secondColor={color2}
         />
       )
-      const component = await ColorContrastLocator.find()
 
       // this is the result of a complicated "blended color" calculation
       // in the component, not simple `contrast()` check
-      const labelElement = await component.findWithText('2:1')
-
-      expect(labelElement.getDOMNode()).to.be.visible()
+      expect(container).toHaveTextContent('2:1')
     })
   })
 
   describe('withoutColorPreview prop', () => {
     it('should be false by default, should display preview', async () => {
-      await mount(<ColorContrast {...testColors} {...testLabels} />)
+      const { container } = render(
+        <ColorContrast {...testColors} {...testLabels} />
+      )
 
-      const component = await ColorContrastLocator.find()
-      const preview = await component.findPreview()
-
-      expect(preview.getDOMNode()).to.be.visible()
+      const preview = container.querySelector(
+        "[class$='-colorContrast__colorPreview']"
+      )
+      expect(preview).toBeInTheDocument()
     })
 
     it('should hide preview', async () => {
-      await mount(
+      const { container } = render(
         <ColorContrast {...testColors} {...testLabels} withoutColorPreview />
       )
 
-      const component = await ColorContrastLocator.find()
-      const preview = await component.findPreview({ expectEmpty: true })
-
-      expect(preview).to.not.exist()
+      const preview = container.querySelector(
+        "[class$='-colorContrast__colorPreview']"
+      )
+      expect(preview).not.toBeInTheDocument()
     })
   })
 
@@ -158,48 +153,38 @@ describe('<ColorContrast />', () => {
     ) => {
       describe(title, () => {
         it(`normal text should ${expectedResult.normal.toLowerCase()}`, async () => {
-          await mount(
+          const { container } = render(
             <ColorContrast
               {...testLabels}
               firstColor={firstColor}
               secondColor={secondColor}
             />
           )
-          const component = await ColorContrastLocator.find()
-          const normalTextCheckPill = await component.findNormalTextCheckPill()
-          expect(normalTextCheckPill.getTextContent()).to.equal(
-            expectedResult.normal
-          )
+
+          expect(container).toHaveTextContent(expectedResult.normal)
         })
 
         it(`large text should ${expectedResult.large.toLowerCase()}`, async () => {
-          await mount(
+          const { container } = render(
             <ColorContrast
               {...testLabels}
               firstColor={firstColor}
               secondColor={secondColor}
             />
           )
-          const component = await ColorContrastLocator.find()
-          const largeTextCheckPill = await component.findLargeTextCheckPill()
-          expect(largeTextCheckPill.getTextContent()).to.equal(
-            expectedResult.large
-          )
+
+          expect(container).toHaveTextContent(expectedResult.large)
         })
 
         it(`graphics should ${expectedResult.graphics.toLowerCase()}`, async () => {
-          await mount(
+          const { container } = render(
             <ColorContrast
               {...testLabels}
               firstColor={firstColor}
               secondColor={secondColor}
             />
           )
-          const component = await ColorContrastLocator.find()
-          const graphicsCheckPill = await component.findGraphicsCheckPill()
-          expect(graphicsCheckPill.getTextContent()).to.equal(
-            expectedResult.graphics
-          )
+          expect(container).toHaveTextContent(expectedResult.graphics)
         })
       })
     }
@@ -224,12 +209,29 @@ describe('<ColorContrast />', () => {
   })
 
   describe('should be accessible', () => {
-    generateA11yTests(ColorContrast, ColorContrastExamples)
     it('a11y', async () => {
-      await mount(<ColorContrast {...testColors} {...testLabels} />)
-      const subject = await ColorContrastLocator.find()
+      const { container } = render(
+        <ColorContrast {...testColors} {...testLabels} />
+      )
+      const axeCheck = await runAxeCheck(container)
 
-      expect(await subject.accessible()).to.be.true()
+      expect(axeCheck).toBe(true)
+    })
+
+    describe('with generated examples', () => {
+      const generatedComponents = generateA11yTests(
+        ColorContrast,
+        ColorContrastExamples
+      )
+
+      it.each(generatedComponents)(
+        'should be accessible with example: $description',
+        async ({ content }) => {
+          const { container } = render(content)
+          const axeCheck = await runAxeCheck(container)
+          expect(axeCheck).toBe(true)
+        }
+      )
     })
   })
 })
