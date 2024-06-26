@@ -14,6 +14,7 @@
     { "path": "../emotion/tsconfig.build.json" },
     { "path": "../shared-types/tsconfig.build.json" },
     { "path": "../ui-a11y-content/tsconfig.build.json" },
+    { "path": "../ui-axe-check/tsconfig.build.json" },
     { "path": "../ui-buttons/tsconfig.build.json" },
     { "path": "../ui-color-utils/tsconfig.build.json" },
     { "path": "../ui-form-field/tsconfig.build.json" },
@@ -21,6 +22,7 @@
     { "path": "../ui-pill/tsconfig.build.json" },
     { "path": "../ui-popover/tsconfig.build.json" },
     { "path": "../ui-react-utils/tsconfig.build.json" },
+    { "path": "../ui-scripts/tsconfig.build.json" },
     { "path": "../ui-testable/tsconfig.build.json" },
     { "path": "../ui-text/tsconfig.build.json" },
     { "path": "../ui-text-input/tsconfig.build.json" },
@@ -28,9 +30,7 @@
     { "path": "../ui-utils/tsconfig.build.json" },
     { "path": "../ui-view/tsconfig.build.json" },
     { "path": "../ui-babel-preset/tsconfig.build.json" },
-    { "path": "../ui-test-locator/tsconfig.build.json" },
     { "path": "../ui-test-utils/tsconfig.build.json" },
-    { "path": "../ui-test-queries/tsconfig.build.json" },
     { "path": "../ui-themes/tsconfig.build.json" }
   ]
 }
