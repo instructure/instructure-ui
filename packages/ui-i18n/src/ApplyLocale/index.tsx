@@ -44,11 +44,4 @@ export const ApplyLocale = ({
     </ApplyLocaleContext.Provider>
   )
 }
-
-ApplyLocale.defaultProps = {
-  locale: undefined,
-  timezone: undefined,
-  children: undefined
-}
-
 export default ApplyLocale
