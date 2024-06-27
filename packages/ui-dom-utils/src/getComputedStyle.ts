@@ -40,16 +40,21 @@ import type { UIElement } from '@instructure/shared-types'
  * @param { string | null | undefined } pseudoElt - A string specifying the pseudo-element to match. Omitted (or null ) for real elements.
  * @returns { Object } object containing css properties and values for the element
  */
-function getComputedStyle(el?: UIElement, pseudoElt?: string | null) {
-  let style = {}
+function getComputedStyle(
+  el?: UIElement,
+  pseudoElt?: string | null
+): CSSStyleDeclaration {
+  let style = {} // TODO(breaking) return undefined instead!
   if (canUseDOM) {
     const node = el && findDOMNode(el)
     if (node) {
       const window = ownerWindow(el)
-      style = window ? window.getComputedStyle(node as Element, pseudoElt) : {}
+      if (window && node instanceof Element) {
+        style = window.getComputedStyle(node, pseudoElt)
+      }
     }
   }
-  return style as CSSStyleDeclaration
+  return style as CSSStyleDeclaration // TODO this is broken. It can return {}
 }
 
 export default getComputedStyle

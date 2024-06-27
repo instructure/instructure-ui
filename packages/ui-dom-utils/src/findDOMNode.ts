@@ -51,7 +51,9 @@ const isRefObject = (obj: unknown): obj is RefObject<unknown> => {
  * @param { Node | Window | React.ReactElement | React.Component | function } el - component, DOM node, or function returning a DOM node
  * @returns { Node | Window | null | undefined } The root node of this element
  */
-function findDOMNode(el?: UIElement): Element | Node | Window | undefined {
+function findDOMNode(
+  el?: UIElement
+): Element | Node | Window | Document | undefined {
   const node = typeof el === 'function' ? el() : el
 
   if (node && node === document) {

@@ -37,6 +37,13 @@ import { isDefinedCustomElement } from './isDefinedCustomElement'
 function getActiveElement(doc?: Document) {
   const activeElement = (doc || document).activeElement
 
+  // TODO make it detect embedded iframes:
+  // https://stackoverflow.com/questions/25420219/find-focused-element-in-document-with-many-iframes
+  const contentDocument =
+    activeElement && (activeElement as HTMLIFrameElement).contentDocument
+  if (contentDocument && contentDocument.activeElement) {
+    return contentDocument.activeElement
+  }
   //check if activeElement is a custom element or not
   if (activeElement && isDefinedCustomElement(activeElement)) {
     return activeElement.shadowRoot!.activeElement

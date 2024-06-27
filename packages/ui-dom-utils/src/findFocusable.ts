@@ -91,10 +91,10 @@ function positioned(element: Element | Node) {
   if (POS.includes((element as HTMLElement).style.position?.toLowerCase())) {
     return true
   }
+  const style = getComputedStyle(element)
   if (
-    POS.includes(
-      getComputedStyle(element).getPropertyValue('position')?.toLowerCase()
-    )
+    'getPropertyValue' in style &&
+    POS.includes(style.getPropertyValue('position')?.toLowerCase())
   ) {
     return true
   }
@@ -107,6 +107,7 @@ function visible(element: Element) {
   while (el) {
     if (el === document.body) break
     if (el instanceof ShadowRoot) break
+    if (el.nodeType == Node.DOCUMENT_NODE) break // if it's an iframe
     if (hidden(el)) return false
     if (positioned(el)) break
     el = el.parentNode
