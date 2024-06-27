@@ -31,6 +31,13 @@ import {
 } from '@instructure/ui-dom-utils'
 import type { UIElement } from '@instructure/shared-types'
 
+/**
+ * return focus to the beginning of the region when trying to tab out or to
+ * the end of the region when pressing shift+tab on the first element
+ * @param element the element whose DOM subtree to check
+ * @param event
+ * @param onLeavingFinalTabbable
+ */
 function scopeTab(
   element: UIElement | undefined,
   event: React.KeyboardEvent,
