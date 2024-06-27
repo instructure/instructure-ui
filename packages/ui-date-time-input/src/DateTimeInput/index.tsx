@@ -30,7 +30,6 @@ import type { FormMessage } from '@instructure/ui-form-field'
 
 import { DateInput } from '@instructure/ui-date-input'
 import { TimeSelect } from '@instructure/ui-time-select'
-import { Calendar } from '@instructure/ui-calendar'
 import { testable } from '@instructure/ui-testable'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { IconButton } from '@instructure/ui-buttons'
@@ -363,17 +362,6 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     return !d1 || !d2 || !d1.isSame(d2)
   }
 
-  handleBlur = (e: SyntheticEvent) => {
-    // when TABbing from the DateInput to TimeInput or visa-versa, the blur
-    // happens on the target before the relatedTarget gets focus.
-    // The timeout gives it a moment for that to happen
-    if (typeof this.props.onBlur === 'function') {
-      window.setTimeout(() => {
-        this.props.onBlur?.(e)
-      }, 0)
-    }
-  }
-
   handleShowCalendar = (_event: SyntheticEvent) => {
     this.setState({ isShowingCalendar: true })
   }
@@ -422,49 +410,12 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
     })
   }
 
-  renderDays() {
-    const renderedDate = this.state.renderedDate
-    // Sets it to the first local day of the week counting back from the start of the month.
-    // Note that first day depends on the locale, e.g. it's Sunday in the US and
-    // Monday in most of the EU.
-    const currDate = DateTime.getFirstDayOfWeek(renderedDate.startOf('month'))
-    const arr: Moment[] = []
-    for (let i = 0; i < Calendar.DAY_COUNT; i++) {
-      arr.push(currDate.clone())
-      currDate.add({ days: 1 })
-    }
-    return arr.map((date) => {
-      const dateStr = date.toISOString()
-      return (
-        <DateInput.Day
-          key={dateStr}
-          date={dateStr}
-          isSelected={
-            this.state.calendarSelectedDate
-              ? date.isSame(this.state.calendarSelectedDate, 'day')
-              : false
-          }
-          isToday={date.isSame(
-            DateTime.now(this.locale(), this.timezone()),
-            'day'
-          )}
-          isOutsideMonth={!date.isSame(renderedDate, 'month')}
-          label={date.format('D MMMM YYYY')} // used by screen readers
-          onClick={this.handleDayClick}
-          interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}
-        >
-          {date.format('DD')}
-        </DateInput.Day>
-      )
-    })
-  }
-
   // The default weekdays rendered in the calendar
   get defaultWeekdays() {
-    if (!this.state.isShowingCalendar) {
-      // this is an expensive function, only execute if the calendar is open
-      return []
-    }
+    // if (!this.state.isShowingCalendar) {
+    //   // this is an expensive function, only execute if the calendar is open
+    //   return []
+    // }
     const shortDayNames = DateTime.getLocalDayNamesOfTheWeek(
       this.locale(),
       'short'
@@ -543,7 +494,7 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
       colSpacing,
       isRequired,
       interaction,
-      renderWeekdayLabels,
+      // renderWeekdayLabels, TODO
       allowNonStepInput
     } = this.props
 
@@ -561,41 +512,18 @@ class DateTimeInput extends Component<DateTimeInputProps, DateTimeInputState> {
         ]}
       >
         <DateInput
-          display="block"
           value={this.state.dateInputText}
           onChange={this.handleDateTextChange}
-          onBlur={this.handleBlur}
           inputRef={dateInputRef}
           placeholder={datePlaceholder}
           renderLabel={dateRenderLabel}
-          renderWeekdayLabels={
-            renderWeekdayLabels ? renderWeekdayLabels : this.defaultWeekdays
-          }
-          onRequestShowCalendar={this.handleShowCalendar}
-          onRequestHideCalendar={this.handleHideCalendar}
-          isShowingCalendar={this.state.isShowingCalendar}
-          renderNextMonthButton={this.renderNextPrevMonthButton('next')}
-          renderPrevMonthButton={this.renderNextPrevMonthButton('prev')}
-          onRequestSelectNextDay={this.handleSelectNextDay}
-          onRequestSelectPrevDay={this.handleSelectPrevDay}
-          onRequestRenderNextMonth={this.handleRenderNextMonth}
-          onRequestRenderPrevMonth={this.handleRenderPrevMonth}
           isRequired={isRequired}
           interaction={interaction}
-          renderNavigationLabel={
-            <span>
-              <div>{this.state.renderedDate.format('MMMM')}</div>
-              <div>{this.state.renderedDate.format('y')}</div>
-            </span>
-          }
-        >
-          {this.renderDays()}
-        </DateInput>
+        />
         <TimeSelect
           value={this.state.timeSelectValue}
           onChange={this.updateStateBasedOnTimeSelect}
           placeholder={timePlaceholder}
-          onBlur={this.handleBlur}
           renderLabel={timeRenderLabel}
           locale={locale}
           format={timeFormat}

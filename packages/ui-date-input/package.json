@@ -24,6 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-axe-check": "9.1.0",
+    "@instructure/ui-buttons": "9.1.0",
     "@instructure/ui-babel-preset": "9.1.0",
     "@instructure/ui-scripts": "9.1.0",
     "@instructure/ui-test-utils": "9.1.0",

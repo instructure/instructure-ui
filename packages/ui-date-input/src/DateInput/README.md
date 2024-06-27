@@ -70,8 +70,6 @@ render(<Example />)
 
 ### Composing a DateInput in your Application
 
-> **Important note**: this is the legacy API for the DateInput. It is much easier to use the way described above and more importantly: less buggy and has better accesibility. Please don't use this version and if you are having an issue with the DateInput, check if you are using the new version already and consider updating if not.
-
 `DateInput` uses `Calendar` internally. See [Calendar](#Calendar) for more detailed
 documentation and guided examples. `DateInput` shares many of the same `Calendar`
 props and it is created the same way with some additional attributes and callback

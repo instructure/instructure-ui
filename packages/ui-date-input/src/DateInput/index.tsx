@@ -26,6 +26,7 @@
 import React, { Children, Component, ReactElement } from 'react'
 
 import { Calendar } from '@instructure/ui-calendar'
+import { IconButton } from '@instructure/ui-buttons'
 import type { CalendarProps, CalendarDayProps } from '@instructure/ui-calendar'
 import { IconCalendarMonthLine } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover'
@@ -150,7 +151,7 @@ class DateInput extends Component<DateInputProps, DateInputState> {
 
   handleInputChange: TextInputProps['onChange'] = (event, value) => {
     this.props.onChange?.(event, { value })
-    this.handleShowCalendar(event)
+    // this.handleShowCalendar(event)
   }
 
   handleShowCalendar = (event: React.SyntheticEvent) => {
@@ -431,7 +432,17 @@ class DateInput extends Component<DateInputProps, DateInputState> {
           interaction,
           isRequired,
           display: isInline ? 'inline-block' : 'block',
-          renderAfterInput: <IconCalendarMonthLine inline={false} />
+          renderAfterInput: (
+            <IconButton
+              withBackground={false}
+              withBorder={false}
+              screenReaderLabel="Calendar"
+              onClick={(e) => this.handleShowCalendar(e as any)}
+              shape="circle"
+            >
+              <IconCalendarMonthLine inline={false} />
+            </IconButton>
+          )
         })}
         onKeyDown={(e) => {
           if (!this.props.children) {
@@ -457,7 +468,6 @@ class DateInput extends Component<DateInputProps, DateInputState> {
     return (
       <Selectable
         isShowingOptions={isShowingCalendar}
-        onRequestShowOptions={this.handleShowCalendar}
         onRequestHideOptions={this.handleHideCalendar}
         onRequestHighlightOption={this.handleHighlightOption}
         onRequestSelectOption={(e) => this.handleHideCalendar(e)}
@@ -486,10 +496,11 @@ class DateInput extends Component<DateInputProps, DateInputState> {
               positionTarget={this._input}
               shouldContainFocus
               shouldReturnFocus
-              onHideContent={(e) =>
-                // setTimeout(() => this.handleHideCalendar(e), 0)
+              onHideContent={(e) => {
+                // has to be wrapped in setTimeout otherwise the popover would open instantly after closing
+                setTimeout(() => this.handleHideCalendar(e), 0)
                 this.props.onRequestHideCalendar?.(e)
-              } // has to be wrapped in setTimeout otherwise the popover would open instantly after closing
+              }}
             >
               {this.renderCalendar({ getListProps, getOptionProps })}
             </Popover>
