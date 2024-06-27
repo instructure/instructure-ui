@@ -8,7 +8,7 @@ Button allows users to perform actions or trigger changes. If selecting the Butt
 ---
 type: example
 ---
-<Button>Hello{null}</Button>
+<Button>Hello Instructure</Button>
 ```
 
 ### Color
