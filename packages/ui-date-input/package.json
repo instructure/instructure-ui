@@ -24,8 +24,8 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-axe-check": "9.1.0",
-    "@instructure/ui-buttons": "9.1.0",
     "@instructure/ui-babel-preset": "9.1.0",
+    "@instructure/ui-buttons": "9.1.0",
     "@instructure/ui-scripts": "9.1.0",
     "@instructure/ui-test-utils": "9.1.0",
     "@testing-library/jest-dom": "^6.4.5",
@@ -48,6 +48,7 @@
     "@instructure/ui-testable": "9.1.0",
     "@instructure/ui-text-input": "9.1.0",
     "@instructure/ui-utils": "9.1.0",
+    "moment-timezone": "^0.5.45",
     "prop-types": "^15.8.1"
   },
   "peerDependencies": {
