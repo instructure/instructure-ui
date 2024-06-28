@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import moment from 'moment-timezone'
 import { Calendar } from '@instructure/ui-calendar'
 import { IconButton } from '@instructure/ui-buttons'
@@ -31,11 +31,7 @@ import { IconCalendarMonthLine } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover'
 import { TextInput } from '@instructure/ui-text-input'
 
-import {
-  DateTime,
-  // ApplyLocaleContext, TODO
-  Locale
-} from '@instructure/ui-i18n'
+import { DateTime, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
 import { jsx } from '@instructure/emotion'
 
 import type { DateInputProps } from './props'
@@ -54,11 +50,13 @@ const DateInput2 = ({
   timezone,
   size,
   placeholder,
-  isInline
+  isInline,
+  interaction
 }: DateInputProps) => {
   const [selectedDate, setSelectedDate] = useState<string>('')
   const [inputMessages, setInputMessages] = useState<FormMessage[]>([])
   const [showPopover, setShowPopover] = useState<boolean>(false)
+  const localeContext = useContext(ApplyLocaleContext)
 
   useEffect(() => {
     validateInput(true)
@@ -121,22 +119,18 @@ const DateInput2 = ({
   const getLocale = () => {
     if (locale) {
       return locale
+    } else if (localeContext.locale) {
+      return localeContext.locale
     }
-    // TODO make it work with context
-    // } else if (this.context && this.context.locale) {
-    //   return this.context.locale
-    // }
     return Locale.browserLocale()
   }
 
   const getTimezone = () => {
     if (timezone) {
       return timezone
+    } else if (localeContext.timezone) {
+      return localeContext.timezone
     }
-    // TODO make it work with context
-    // } else if (this.context && this.context.timezone) {
-    //   return this.context.timezone
-    // }
     return DateTime.browserTimeZone()
   }
 
@@ -157,6 +151,7 @@ const DateInput2 = ({
       size={size}
       display={isInline ? 'inline-block' : 'block'}
       messages={inputMessages}
+      interaction={interaction}
       renderAfterInput={
         <Popover
           renderTrigger={
@@ -165,6 +160,7 @@ const DateInput2 = ({
               withBorder={false}
               screenReaderLabel="Calendar"
               shape="circle"
+              interaction={interaction}
             >
               <IconCalendarMonthLine inline={false} />
             </IconButton>
