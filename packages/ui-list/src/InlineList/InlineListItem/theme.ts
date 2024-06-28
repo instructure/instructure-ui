@@ -45,7 +45,7 @@ const generateComponentTheme = (theme: Theme): InlineListItemTheme => {
     fontSizeSmall: typography?.fontSizeSmall,
     fontSizeMedium: typography?.fontSizeMedium,
     fontSizeLarge: typography?.fontSizeLarge,
-    color: colors?.textDark,
+    color: colors?.contrasts?.grey4570,
     lineHeight: typography?.lineHeightCondensed,
     noneSpacing: spacing?.xSmall,
     pipeSpacing: spacing?.xSmall,

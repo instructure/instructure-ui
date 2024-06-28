@@ -38,8 +38,8 @@ const generateComponentTheme = (theme: Theme): TableHeadTheme => {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
 
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest
+    color: colors?.contrasts?.grey125,
+    background: colors?.contrasts?.white
   }
 
   return {

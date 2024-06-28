@@ -23,9 +23,9 @@
  */
 
 import { functionalColors } from '../utils/functionalColors'
-import { BaseColors, Colors } from '@instructure/shared-types'
+import { Colors } from '@instructure/shared-types'
 
-const values: BaseColors = {
+const values: any = {
   brand: '#287A9F',
   link: '#287A9F',
   electric: '#287A9F',

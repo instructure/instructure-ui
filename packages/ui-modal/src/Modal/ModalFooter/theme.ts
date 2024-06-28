@@ -34,14 +34,14 @@ const generateComponentTheme = (theme: Theme): ModalFooterTheme => {
   const { colors, spacing, borders } = theme
 
   const componentVariables: ModalFooterTheme = {
-    background: colors?.backgroundLight,
-    borderColor: colors?.borderMedium,
+    background: colors?.contrasts?.grey11,
+    borderColor: colors?.contrasts?.grey1214,
     borderWidth: borders?.widthSmall,
     borderRadius: borders?.radiusMedium,
     padding: spacing?.small,
 
-    inverseBackground: colors?.backgroundDarkest,
-    inverseBorderColor: colors?.borderDarkest
+    inverseBackground: colors?.contrasts?.grey100,
+    inverseBorderColor: colors?.contrasts?.grey100
   }
 
   return {

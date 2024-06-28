@@ -34,8 +34,8 @@ const generateComponentTheme = (theme: Theme): TabsTheme => {
   const { borders, colors, stacking } = theme
 
   const componentVariables: TabsTheme = {
-    defaultBackground: colors?.backgroundLightest,
-    scrollFadeColor: colors?.backgroundLightest,
+    defaultBackground: colors?.contrasts?.white,
+    scrollFadeColor: colors?.contrasts?.white,
     tabVerticalOffset: borders?.widthSmall, // gives effect of selected tab "bar" overlaying bottom border
     zIndex: stacking?.above,
     scrollOverlayWidthDefault: '5rem', // has to be 4 times the horizontal padding of the default style tab

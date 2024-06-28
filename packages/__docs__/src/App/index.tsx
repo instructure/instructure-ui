@@ -41,7 +41,6 @@ import {
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
-import { instructure } from '@instructure/ui-themes'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { IconButton } from '@instructure/ui-buttons'
@@ -511,7 +510,7 @@ class App extends Component<AppProps, AppState> {
       }
     })
     return (
-      <InstUISettingsProvider theme={instructure}>
+      <InstUISettingsProvider>
         <Hero
           name={library.name}
           docs={{ ...docs, ...themeDocs }}
@@ -641,7 +640,7 @@ class App extends Component<AppProps, AppState> {
         width="18.75rem"
       >
         <View display="block" textAlign="end" margin="xx-small x-small none">
-          <InstUISettingsProvider theme={instructure}>
+          <InstUISettingsProvider>
             <IconButton
               renderIcon={IconXSolid}
               screenReaderLabel="Close Navigation"
@@ -754,7 +753,7 @@ class App extends Component<AppProps, AppState> {
           >
             {!showMenu && (
               <div css={this.props.styles?.hamburger}>
-                <InstUISettingsProvider theme={instructure}>
+                <InstUISettingsProvider>
                   <IconButton
                     onClick={this.handleMenuOpen}
                     elementRef={this.handleMenuTriggerRef}

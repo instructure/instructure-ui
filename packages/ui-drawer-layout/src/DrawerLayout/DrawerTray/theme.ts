@@ -34,8 +34,8 @@ const generateComponentTheme = (theme: Theme): DrawerLayoutTrayTheme => {
   const { colors, borders, stacking, shadows } = theme
 
   const componentVariables: DrawerLayoutTrayTheme = {
-    background: colors?.backgroundLightest,
-    borderColor: colors?.borderMedium,
+    background: colors?.contrasts?.white,
+    borderColor: colors?.contrasts?.grey1214,
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
     zIndex: stacking?.topmost,

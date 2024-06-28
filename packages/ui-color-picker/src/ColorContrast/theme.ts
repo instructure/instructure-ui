@@ -49,9 +49,9 @@ const generateComponentTheme = (theme: Theme): ColorContrastTheme => {
 
     smallBorder: borders.widthSmall,
 
-    successColor: colors.shamrock,
-    failureColor: colors.crimson,
-    pickedHexColor: colors.ash
+    successColor: colors?.contrasts?.green4570,
+    failureColor: colors?.contrasts?.red4570,
+    pickedHexColor: colors?.contrasts?.grey4570
   }
 
   return {

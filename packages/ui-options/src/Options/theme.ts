@@ -36,8 +36,8 @@ const generateComponentTheme = (theme: Theme): OptionsTheme => {
   const componentVariables: OptionsTheme = {
     labelFontWeight: typography?.fontWeightBold,
 
-    background: colors?.backgroundLightest,
-    labelColor: colors?.textDarkest,
+    background: colors?.contrasts?.white,
+    labelColor: colors?.contrasts?.grey125,
 
     labelPadding: `${spacing?.xSmall} 0`,
     nestedLabelPadding: `${spacing?.xSmall} ${spacing?.small}`

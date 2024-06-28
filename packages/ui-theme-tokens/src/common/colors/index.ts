@@ -22,21 +22,10 @@
  * SOFTWARE.
  */
 
-import type { ThemeTheme } from './props'
-import type { Theme } from '@instructure/ui-themes'
+import primitives from './pirimitves'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme: Theme): ThemeTheme => {
-  const { colors, typography } = theme
-
-  return {
-    convertedValueTextColor: colors?.contrasts?.grey100,
-    convertedValueFontSize: typography?.fontSizeSmall
-  }
+const colors = {
+  primitives
 }
 
-export default generateComponentTheme
+export default colors

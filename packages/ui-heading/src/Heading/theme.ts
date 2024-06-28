@@ -72,14 +72,14 @@ const generateComponentTheme = (theme: Theme): HeadingTheme => {
     h5FontWeight: typography?.fontWeightNormal,
     h5FontFamily: typography?.fontFamily,
 
-    primaryInverseColor: colors?.textLightest,
-    primaryColor: colors?.textDarkest,
+    primaryInverseColor: colors?.contrasts?.white,
+    primaryColor: colors?.contrasts?.grey125,
 
-    secondaryColor: colors?.textDark,
-    secondaryInverseColor: colors?.textLight,
+    secondaryColor: colors?.contrasts?.grey4570,
+    secondaryInverseColor: colors?.contrasts?.grey11,
 
     borderPadding: spacing?.xxxSmall,
-    borderColor: colors?.borderMedium,
+    borderColor: colors?.contrasts?.grey1214,
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style
   }

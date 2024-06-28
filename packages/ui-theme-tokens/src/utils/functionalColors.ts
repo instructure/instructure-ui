@@ -21,16 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {
-  BackgroundColors,
-  BaseColors,
-  BorderColors,
-  Colors,
-  TextColors
-} from '@instructure/shared-types'
+// import {
+//   BackgroundColors,
+//   BaseColors,
+//   BorderColors,
+//   Colors,
+//   TextColors
+// } from '@instructure/shared-types'
 
-function functionalColors(colors: BaseColors): Colors {
-  const text: TextColors = {
+function functionalColors(colors: any): any {
+  const text: any = {
     textDarkest: colors.licorice,
     textDark: colors.ash,
     textLight: colors.porcelain,
@@ -44,7 +44,7 @@ function functionalColors(colors: BaseColors): Colors {
     textWarning: colors.fire
   }
 
-  const background: BackgroundColors = {
+  const background: any = {
     backgroundDarkest: colors.licorice,
     backgroundDark: colors.ash,
     backgroundMedium: colors.tiara,
@@ -59,7 +59,7 @@ function functionalColors(colors: BaseColors): Colors {
     backgroundWarning: colors.fire
   }
 
-  const border: BorderColors = {
+  const border: any = {
     borderLightest: colors.white,
     borderLight: colors.porcelain,
     borderMedium: colors.tiara,

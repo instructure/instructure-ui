@@ -86,7 +86,7 @@ describe('@getComponentThemeOverride', async () => {
         {
           themeOverride: (componentTheme, currentTheme) => ({
             backgroundBlue: componentTheme.backgroundGreen,
-            backgroundDark: currentTheme.colors.backgroundDark
+            backgroundDark: currentTheme.colors.contrasts.white
           })
         },
         theme

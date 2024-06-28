@@ -43,15 +43,15 @@ const generateComponentTheme = (theme: Theme): InlineSVGTheme => {
   }
 
   const componentVariables: InlineSVGTheme = {
-    primaryInverseColor: colors?.textLightest,
-    primaryColor: colors?.textDarkest,
-    secondaryColor: colors?.textDark,
-    secondaryInverseColor: colors?.textLight,
-    warningColor: colors?.textWarning,
-    brandColor: colors?.textBrand,
-    errorColor: colors?.textDanger,
-    alertColor: colors?.textAlert,
-    successColor: colors?.textSuccess
+    primaryInverseColor: colors?.contrasts?.white,
+    primaryColor: colors?.contrasts?.grey125,
+    secondaryColor: colors?.contrasts?.grey4570,
+    secondaryInverseColor: colors?.contrasts?.grey11,
+    warningColor: colors?.contrasts?.orange4570,
+    brandColor: colors?.contrasts?.blue4570,
+    errorColor: colors?.contrasts?.red4570,
+    alertColor: colors?.contrasts?.blue4570,
+    successColor: colors?.contrasts?.green4570
   }
 
   return {

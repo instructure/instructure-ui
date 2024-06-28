@@ -50,15 +50,15 @@ const generateComponentTheme = (theme: Theme): MenuItemTheme => {
     fontSize: typography?.fontSizeMedium,
     labelPadding: spacing?.large,
 
-    labelColor: colors?.textDarkest,
-    background: colors?.backgroundLightest,
+    labelColor: colors?.contrasts?.grey125,
+    background: colors?.contrasts?.white,
 
-    iconColor: colors?.textDarkest,
+    iconColor: colors?.contrasts?.grey125,
     iconPadding: spacing?.small,
 
-    activeBackground: colors?.backgroundBrand,
-    activeLabelColor: colors?.textLightest,
-    activeIconColor: colors?.textLightest
+    activeBackground: colors?.contrasts?.blue4570,
+    activeLabelColor: colors?.contrasts?.white,
+    activeIconColor: colors?.contrasts?.white
   }
 
   return {

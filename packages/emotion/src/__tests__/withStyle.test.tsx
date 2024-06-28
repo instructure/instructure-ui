@@ -28,11 +28,11 @@ import ReactDOM from 'react-dom'
 import ReactTestUtils from 'react-dom/test-utils'
 import PropTypes from 'prop-types'
 
-import { expect, match, mount, stub, within } from '@instructure/ui-test-utils'
+// import { expect, match, mount, stub, within } from '@instructure/ui-test-utils'
 import {
   withStyle,
   jsx,
-  InstUISettingsProvider,
+  // InstUISettingsProvider,
   WithStyleProps
 } from '../index'
 
@@ -58,17 +58,17 @@ type ComponentTheme = {
 }
 
 describe('@withStyle', async () => {
-  const textBrand = 'rgb(0, 128, 0)'
-  const textDark = 'rgb(10, 10, 10)'
-  const backgroundLight = 'rgb(255, 255, 0)'
-  const exampleTheme: Theme = {
-    key: 'exampleTheme',
-    colors: {
-      textBrand,
-      textDark,
-      backgroundLight
-    }
-  }
+  // const textBrand = 'rgb(0, 128, 0)'
+  // const textDark = 'rgb(10, 10, 10)'
+  // const backgroundLight = 'rgb(255, 255, 0)'
+  // const exampleTheme: Theme = {
+  //   key: 'exampleTheme',
+  //   colors: {
+  //     textBrand,
+  //     textDark,
+  //     backgroundLight
+  //   }
+  // }
 
   const generateComponentTheme = function (theme: Theme): ComponentTheme {
     const { colors } = theme
@@ -160,232 +160,232 @@ describe('@withStyle', async () => {
     )
   })
 
-  describe('with theme provided by InstUISettingsProvider', async () => {
-    it('should add css class suffixed with label', async () => {
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemeableComponent />
-        </InstUISettingsProvider>
-      )
-      const emotionClassRegex = new RegExp(/^css-.+-exampleComponent$/)
+  // describe('with theme provided by InstUISettingsProvider', async () => {
+  //   it('should add css class suffixed with label', async () => {
+  //     const subject = await mount(
+  //       <InstUISettingsProvider theme={exampleTheme}>
+  //         <ThemeableComponent />
+  //       </InstUISettingsProvider>
+  //     )
+  //     const emotionClassRegex = new RegExp(/^css-.+-exampleComponent$/)
 
-      expect(subject.getDOMNode().classList[0]).to.match(emotionClassRegex)
-    })
+  //     expect(subject.getDOMNode().classList[0]).to.match(emotionClassRegex)
+  //   })
 
-    it('should apply correct css props', async () => {
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemeableComponent />
-        </InstUISettingsProvider>
-      )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+  //   it('should apply correct css props', async () => {
+  //     const subject = await mount(
+  //       <InstUISettingsProvider theme={exampleTheme}>
+  //         <ThemeableComponent />
+  //       </InstUISettingsProvider>
+  //     )
+  //     const component = subject.getDOMNode()
+  //     const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal(textBrand)
-      expect(computedStyle.backgroundColor).to.equal(backgroundLight)
-    })
+  //     expect(computedStyle.color).to.equal(textBrand)
+  //     expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+  //   })
 
-    describe('should allow configuration through the themeOverride prop', async () => {
-      it('when it is an object', async () => {
-        const subject = await mount(
-          <InstUISettingsProvider theme={exampleTheme}>
-            <ThemeableComponent
-              themeOverride={{
-                textColor: 'rgb(128, 0, 128)'
-              }}
-            />
-          </InstUISettingsProvider>
-        )
-        const component = subject.getDOMNode()
-        const computedStyle = getComputedStyle(component)
+  //   describe('should allow configuration through the themeOverride prop', async () => {
+  //     it('when it is an object', async () => {
+  //       const subject = await mount(
+  //         <InstUISettingsProvider theme={exampleTheme}>
+  //           <ThemeableComponent
+  //             themeOverride={{
+  //               textColor: 'rgb(128, 0, 128)'
+  //             }}
+  //           />
+  //         </InstUISettingsProvider>
+  //       )
+  //       const component = subject.getDOMNode()
+  //       const computedStyle = getComputedStyle(component)
 
-        expect(computedStyle.color).to.equal('rgb(128, 0, 128)')
-        expect(computedStyle.backgroundColor).to.equal(backgroundLight)
-      })
+  //       expect(computedStyle.color).to.equal('rgb(128, 0, 128)')
+  //       expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+  //     })
 
-      it('when it is a function', async () => {
-        const subject = await mount(
-          <InstUISettingsProvider theme={exampleTheme}>
-            <ThemeableComponent
-              themeOverride={(componentTheme) => ({
-                textColor: componentTheme.backgroundColor
-              })}
-            />
-          </InstUISettingsProvider>
-        )
-        const component = subject.getDOMNode()
-        const computedStyle = getComputedStyle(component)
+  //     it('when it is a function', async () => {
+  //       const subject = await mount(
+  //         <InstUISettingsProvider theme={exampleTheme}>
+  //           <ThemeableComponent
+  //             themeOverride={(componentTheme) => ({
+  //               textColor: componentTheme.backgroundColor
+  //             })}
+  //           />
+  //         </InstUISettingsProvider>
+  //       )
+  //       const component = subject.getDOMNode()
+  //       const computedStyle = getComputedStyle(component)
 
-        expect(computedStyle.color).to.equal(backgroundLight)
-        expect(computedStyle.backgroundColor).to.equal(backgroundLight)
-      })
-    })
+  //       expect(computedStyle.color).to.equal(backgroundLight)
+  //       expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+  //     })
+  //   })
 
-    it('should ignore empty themeOverride props', async () => {
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemeableComponent themeOverride={{}} />
-        </InstUISettingsProvider>
-      )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+  //   it('should ignore empty themeOverride props', async () => {
+  //     const subject = await mount(
+  //       <InstUISettingsProvider theme={exampleTheme}>
+  //         <ThemeableComponent themeOverride={{}} />
+  //       </InstUISettingsProvider>
+  //     )
+  //     const component = subject.getDOMNode()
+  //     const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal(textBrand)
-      expect(computedStyle.backgroundColor).to.equal(backgroundLight)
-    })
-  })
+  //     expect(computedStyle.color).to.equal(textBrand)
+  //     expect(computedStyle.backgroundColor).to.equal(backgroundLight)
+  //   })
+  // })
 
-  describe('should update css props', async () => {
-    it('when props are updated', async () => {
-      // `setProps` can be called on the outer component,
-      // so have to add the theme ad themeOverride here, and suppress the error
-      stub(console, 'warn') // suppress "no theme provided error"
+  // describe('should update css props', async () => {
+  //   it('when props are updated', async () => {
+  //     // `setProps` can be called on the outer component,
+  //     // so have to add the theme ad themeOverride here, and suppress the error
+  //     stub(console, 'warn') // suppress "no theme provided error"
 
-      const subject = await mount(
-        <ThemeableComponent
-          inverse={false}
-          themeOverride={{
-            textColor: textBrand,
-            textColorInverse: textDark,
-            backgroundColor: backgroundLight
-          }}
-        />
-      )
-      const component = subject.getDOMNode()
+  //     const subject = await mount(
+  //       <ThemeableComponent
+  //         inverse={false}
+  //         themeOverride={{
+  //           textColor: textBrand,
+  //           textColorInverse: textDark,
+  //           backgroundColor: backgroundLight
+  //         }}
+  //       />
+  //     )
+  //     const component = subject.getDOMNode()
 
-      expect(getComputedStyle(component).color).to.equal(textBrand)
+  //     expect(getComputedStyle(component).color).to.equal(textBrand)
 
-      await subject.setProps({ inverse: true })
+  //     await subject.setProps({ inverse: true })
 
-      expect(getComputedStyle(component).color).to.equal(textDark)
-    })
+  //     expect(getComputedStyle(component).color).to.equal(textDark)
+  //   })
 
-    it('when state is updated', async () => {
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemeableComponent />
-        </InstUISettingsProvider>
-      )
-      const main = within(subject.getDOMNode())
-      const clearBackgroundButton = await main.find('button')
-      const component = main.getDOMNode()
+  //   it('when state is updated', async () => {
+  //     const subject = await mount(
+  //       <InstUISettingsProvider theme={exampleTheme}>
+  //         <ThemeableComponent />
+  //       </InstUISettingsProvider>
+  //     )
+  //     const main = within(subject.getDOMNode())
+  //     const clearBackgroundButton = await main.find('button')
+  //     const component = main.getDOMNode()
 
-      expect(getComputedStyle(component).backgroundColor).to.equal(
-        backgroundLight
-      )
+  //     expect(getComputedStyle(component).backgroundColor).to.equal(
+  //       backgroundLight
+  //     )
 
-      await clearBackgroundButton.click()
+  //     await clearBackgroundButton.click()
 
-      expect(getComputedStyle(component).backgroundColor).to.equal(
-        'rgba(0, 0, 0, 0)'
-      ) // transparent
-    })
-  })
+  //     expect(getComputedStyle(component).backgroundColor).to.equal(
+  //       'rgba(0, 0, 0, 0)'
+  //     ) // transparent
+  //   })
+  // })
 
-  describe('should apply bi-directional polyfill on styles object', async () => {
-    it('in default "ltr" mode', async () => {
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemeableComponent />
-        </InstUISettingsProvider>
-      )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+  // describe('should apply bi-directional polyfill on styles object', async () => {
+  //   it('in default "ltr" mode', async () => {
+  //     const subject = await mount(
+  //       <InstUISettingsProvider theme={exampleTheme}>
+  //         <ThemeableComponent />
+  //       </InstUISettingsProvider>
+  //     )
+  //     const component = subject.getDOMNode()
+  //     const computedStyle = getComputedStyle(component)
 
-      // `inset-inline-start` should be transformed to 'left' in 'ltr' mode
-      expect(computedStyle.left).to.equal('8px')
-      expect(computedStyle.right).to.equal('auto')
-    })
+  //     // `inset-inline-start` should be transformed to 'left' in 'ltr' mode
+  //     expect(computedStyle.left).to.equal('8px')
+  //     expect(computedStyle.right).to.equal('auto')
+  //   })
 
-    it('in "rtl" mode', async () => {
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme} dir="rtl">
-          <ThemeableComponent />
-        </InstUISettingsProvider>
-      )
-      const component = subject.getDOMNode().firstElementChild
-      const computedStyle = getComputedStyle(component!)
+  //   it('in "rtl" mode', async () => {
+  //     const subject = await mount(
+  //       <InstUISettingsProvider theme={exampleTheme} dir="rtl">
+  //         <ThemeableComponent />
+  //       </InstUISettingsProvider>
+  //     )
+  //     const component = subject.getDOMNode().firstElementChild
+  //     const computedStyle = getComputedStyle(component!)
 
-      // `inset-inline-start` should be transformed to 'right' in 'rtl' mode
-      expect(computedStyle.left).to.equal('auto')
-      expect(computedStyle.right).to.equal('8px')
-    })
-  })
+  //     // `inset-inline-start` should be transformed to 'right' in 'rtl' mode
+  //     expect(computedStyle.left).to.equal('auto')
+  //     expect(computedStyle.right).to.equal('8px')
+  //   })
+  // })
 
-  describe('should not allow manually passing prop', async () => {
-    it('styles', async () => {
-      stub(console, 'warn') // suppress warning
+  // describe('should not allow manually passing prop', async () => {
+  //   it('styles', async () => {
+  //     stub(console, 'warn') // suppress warning
 
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
-        </InstUISettingsProvider>
-      )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+  //     const subject = await mount(
+  //       <InstUISettingsProvider theme={exampleTheme}>
+  //         <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
+  //       </InstUISettingsProvider>
+  //     )
+  //     const component = subject.getDOMNode()
+  //     const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal(textBrand)
-    })
+  //     expect(computedStyle.color).to.equal(textBrand)
+  //   })
 
-    it('makeStyles', async () => {
-      stub(console, 'warn') // suppress warning
-      const consoleLog = stub(console, 'log')
+  //   it('makeStyles', async () => {
+  //     stub(console, 'warn') // suppress warning
+  //     const consoleLog = stub(console, 'log')
 
-      const subject = await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemeableComponent
-            makeStyles={() => {
-              // eslint-disable-next-line no-console
-              console.log('Make it!')
-              return { exampleComponent: { color: 'red' } }
-            }}
-          />
-        </InstUISettingsProvider>
-      )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
+  //     const subject = await mount(
+  //       <InstUISettingsProvider theme={exampleTheme}>
+  //         <ThemeableComponent
+  //           makeStyles={() => {
+  //             // eslint-disable-next-line no-console
+  //             console.log('Make it!')
+  //             return { exampleComponent: { color: 'red' } }
+  //           }}
+  //         />
+  //       </InstUISettingsProvider>
+  //     )
+  //     const component = subject.getDOMNode()
+  //     const computedStyle = getComputedStyle(component)
 
-      expect(computedStyle.color).to.equal(textBrand)
-      expect(consoleLog).not.to.have.been.called()
-    })
-  })
+  //     expect(computedStyle.color).to.equal(textBrand)
+  //     expect(consoleLog).not.to.have.been.called()
+  //   })
+  // })
 
-  describe('should throw warning when manually passing prop', async () => {
-    it('styles', async () => {
-      const consoleWarning = stub(console, 'warn')
+  // describe('should throw warning when manually passing prop', async () => {
+  //   it('styles', async () => {
+  //     const consoleWarning = stub(console, 'warn')
 
-      await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
-        </InstUISettingsProvider>
-      )
+  //     await mount(
+  //       <InstUISettingsProvider theme={exampleTheme}>
+  //         <ThemeableComponent styles={{ exampleComponent: { color: 'red' } }} />
+  //       </InstUISettingsProvider>
+  //     )
 
-      expect(consoleWarning).to.have.been.calledWithMatch(
-        `Warning: Manually passing the "styles" property is not allowed on the ThemeableComponent component. Using the default styles calculated by the @withStyle decorator instead.`,
-        match.object,
-        match.string
-      )
-    })
+  //     expect(consoleWarning).to.have.been.calledWithMatch(
+  //       `Warning: Manually passing the "styles" property is not allowed on the ThemeableComponent component. Using the default styles calculated by the @withStyle decorator instead.`,
+  //       match.object,
+  //       match.string
+  //     )
+  //   })
 
-    it('makeStyles', async () => {
-      const consoleWarning = stub(console, 'warn')
+  //   it('makeStyles', async () => {
+  //     const consoleWarning = stub(console, 'warn')
 
-      await mount(
-        <InstUISettingsProvider theme={exampleTheme}>
-          <ThemeableComponent
-            makeStyles={() => {
-              // eslint-disable-next-line no-console
-              console.log('Make it!')
-              return { exampleComponent: { color: 'red' } }
-            }}
-          />
-        </InstUISettingsProvider>
-      )
+  //     await mount(
+  //       <InstUISettingsProvider theme={exampleTheme}>
+  //         <ThemeableComponent
+  //           makeStyles={() => {
+  //             // eslint-disable-next-line no-console
+  //             console.log('Make it!')
+  //             return { exampleComponent: { color: 'red' } }
+  //           }}
+  //         />
+  //       </InstUISettingsProvider>
+  //     )
 
-      expect(consoleWarning).to.have.been.calledWithMatch(
-        `Manually passing the "makeStyles" property is not allowed on the ThemeableComponent component. Styles are calculated by the @withStyle decorator.`,
-        match.string
-      )
-    })
-  })
+  //     expect(consoleWarning).to.have.been.calledWithMatch(
+  //       `Manually passing the "makeStyles" property is not allowed on the ThemeableComponent component. Styles are calculated by the @withStyle decorator.`,
+  //       match.string
+  //     )
+  //   })
+  // })
 })

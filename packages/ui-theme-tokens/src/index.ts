@@ -26,5 +26,6 @@ import { canvas } from './canvas'
 import { canvasHighContrast } from './canvasHighContrast'
 import { instructure } from './instructure'
 import { functionalColors } from './utils/functionalColors'
+import primitives from './common/colors/pirimitves'
 
-export { canvas, canvasHighContrast, instructure, functionalColors }
+export { canvas, canvasHighContrast, instructure, functionalColors, primitives }
