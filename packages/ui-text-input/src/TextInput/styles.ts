@@ -56,7 +56,7 @@ const generateStyle = (
   const sizeVariants = {
     small: {
       fontSize: componentTheme.smallFontSize,
-      height: `calc(${componentTheme.smallHeight} - (2 * ${componentTheme.borderWidth}))`,
+      height: `calc(${componentTheme.smallHeight} - (${componentTheme.borderWidth}))`,
       lineHeight: `calc(${componentTheme.smallHeight} - (2 * ${componentTheme.borderWidth}))`
     },
     medium: {
@@ -66,7 +66,7 @@ const generateStyle = (
     },
     large: {
       fontSize: componentTheme.largeFontSize,
-      height: `calc(${componentTheme.largeHeight} - (2 * ${componentTheme.borderWidth}))`,
+      height: `calc(${componentTheme.largeHeight} - (${componentTheme.borderWidth}))`,
       lineHeight: `calc(${componentTheme.largeHeight} - (2 * ${componentTheme.borderWidth}))`
     }
   }
