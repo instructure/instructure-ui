@@ -23,17 +23,9 @@
  */
 
 /** @jsx jsx */
-import React, {
-  Children,
-  Component,
-  ReactElement,
-  useState,
-  useEffect
-} from 'react'
+import React, { Children, Component, ReactElement } from 'react'
 
-import moment from 'moment-timezone'
 import { Calendar } from '@instructure/ui-calendar'
-import { IconButton } from '@instructure/ui-buttons'
 import type { CalendarProps, CalendarDayProps } from '@instructure/ui-calendar'
 import { IconCalendarMonthLine } from '@instructure/ui-icons'
 import { Popover } from '@instructure/ui-popover'
@@ -72,7 +64,7 @@ See <https://instructure.design/#DateInput/>
 **/
 @withStyle(generateStyle, null)
 @testable()
-class _DateInput extends Component<DateInputProps, DateInputState> {
+class DateInput extends Component<DateInputProps, DateInputState> {
   static readonly componentId = 'DateInput'
   static Day = Calendar.Day
   declare context: React.ContextType<typeof ApplyLocaleContext>
@@ -158,7 +150,7 @@ class _DateInput extends Component<DateInputProps, DateInputState> {
 
   handleInputChange: TextInputProps['onChange'] = (event, value) => {
     this.props.onChange?.(event, { value })
-    // this.handleShowCalendar(event)
+    this.handleShowCalendar(event)
   }
 
   handleShowCalendar = (event: React.SyntheticEvent) => {
@@ -339,8 +331,7 @@ class _DateInput extends Component<DateInputProps, DateInputState> {
       value,
       onChange,
       disabledDates,
-      currentDate,
-      withYearPicker
+      currentDate
     } = this.props
 
     const isValidDate = value
@@ -377,8 +368,7 @@ class _DateInput extends Component<DateInputProps, DateInputState> {
           renderNavigationLabel,
           renderWeekdayLabels,
           renderNextMonthButton: this.renderMonthNavigationButton('next'),
-          renderPrevMonthButton: this.renderMonthNavigationButton('prev'),
-          withYearPicker
+          renderPrevMonthButton: this.renderMonthNavigationButton('prev')
         }) as CalendarProps)}
         {...noChildrenProps}
       >
@@ -434,22 +424,12 @@ class _DateInput extends Component<DateInputProps, DateInputState> {
           width,
           messages,
           onChange: this.handleInputChange,
-          onBlur,
+          onBlur: createChainedFunction(onBlur, this.handleHideCalendar),
           inputRef: createChainedFunction(ref, this.handleInputRef),
           interaction,
           isRequired,
           display: isInline ? 'inline-block' : 'block',
-          renderAfterInput: (
-            <IconButton
-              withBackground={false}
-              withBorder={false}
-              screenReaderLabel="Calendar"
-              onClick={(e) => this.handleShowCalendar(e as any)}
-              shape="circle"
-            >
-              <IconCalendarMonthLine inline={false} />
-            </IconButton>
-          )
+          renderAfterInput: <IconCalendarMonthLine inline={false} />
         })}
         onKeyDown={(e) => {
           if (!this.props.children) {
@@ -475,6 +455,7 @@ class _DateInput extends Component<DateInputProps, DateInputState> {
     return (
       <Selectable
         isShowingOptions={isShowingCalendar}
+        onRequestShowOptions={this.handleShowCalendar}
         onRequestHideOptions={this.handleHideCalendar}
         onRequestHighlightOption={this.handleHighlightOption}
         onRequestSelectOption={(e) => this.handleHideCalendar(e)}
@@ -501,13 +482,8 @@ class _DateInput extends Component<DateInputProps, DateInputState> {
               placement={placement}
               isShowingContent={isShowingCalendar}
               positionTarget={this._input}
-              shouldContainFocus
-              shouldReturnFocus
-              onHideContent={(e) => {
-                // has to be wrapped in setTimeout otherwise the popover would open instantly after closing
-                setTimeout(() => this.handleHideCalendar(e), 0)
-                this.props.onRequestHideCalendar?.(e)
-              }}
+              shouldReturnFocus={false}
+              shouldFocusContentOnTriggerBlur
             >
               {this.renderCalendar({ getListProps, getOptionProps })}
             </Popover>
@@ -516,154 +492,6 @@ class _DateInput extends Component<DateInputProps, DateInputState> {
       </Selectable>
     )
   }
-}
-
-const DateInput = ({
-  renderLabel,
-  isRequired,
-  value,
-  width,
-  onChange,
-  onBlur,
-  withYearPicker,
-  invalidDateErrorMessage,
-  locale,
-  timezone,
-  size,
-  placeholder,
-  isInline
-}: DateInputProps) => {
-  const [selectedDate, setSelectedDate] = useState<string>('')
-  const [inputMessages, setInputMessages] = useState<FormMessage[]>([])
-  const [showPopover, setShowPopover] = useState<boolean>(false)
-
-  useEffect(() => {
-    validateInput(true)
-  }, [value])
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    value: string
-  ) => {
-    onChange?.(e, { value })
-  }
-
-  const handleDateSelected = (dateString: string, momentDate: any, e: any) => {
-    setSelectedDate(dateString)
-    handleInputChange(
-      e,
-      `${momentDate.format('MMMM')} ${momentDate.format(
-        'D'
-      )}, ${momentDate.format('YYYY')}`
-    )
-    setShowPopover(false)
-  }
-
-  const validateInput = (onlyRemoveError = false) => {
-    if (
-      moment
-        .tz(
-          value ? value : '',
-          [
-            DateTime.momentISOFormat,
-            'llll',
-            'LLLL',
-            'lll',
-            'LLL',
-            'll',
-            'LL',
-            'l',
-            'L'
-          ],
-          getLocale(),
-          true,
-          getTimezone()
-        )
-        .isValid() ||
-      value === ''
-    ) {
-      setInputMessages([])
-      return
-    }
-    if (typeof invalidDateErrorMessage !== 'function' && !onlyRemoveError) {
-      setInputMessages([
-        {
-          type: 'error',
-          text: invalidDateErrorMessage
-        }
-      ])
-    }
-  }
-
-  const getLocale = () => {
-    if (locale) {
-      return locale
-    }
-    // TODO make it work with context
-    // } else if (this.context && this.context.locale) {
-    //   return this.context.locale
-    // }
-    return Locale.browserLocale()
-  }
-
-  const getTimezone = () => {
-    if (timezone) {
-      return timezone
-    }
-    // TODO make it work with context
-    // } else if (this.context && this.context.timezone) {
-    //   return this.context.timezone
-    // }
-    return DateTime.browserTimeZone()
-  }
-
-  const handleBlur = (e: React.SyntheticEvent) => {
-    onBlur?.(e)
-    validateInput(false)
-  }
-
-  return (
-    <TextInput
-      renderLabel={renderLabel}
-      onChange={handleInputChange}
-      onBlur={handleBlur}
-      isRequired={isRequired}
-      value={value}
-      placeholder={placeholder}
-      width={width}
-      size={size}
-      display={isInline ? 'inline-block' : 'block'}
-      messages={inputMessages}
-      renderAfterInput={
-        <Popover
-          renderTrigger={
-            <IconButton
-              withBackground={false}
-              withBorder={false}
-              screenReaderLabel="Calendar"
-              shape="circle"
-            >
-              <IconCalendarMonthLine inline={false} />
-            </IconButton>
-          }
-          isShowingContent={showPopover}
-          onShowContent={() => setShowPopover(true)}
-          onHideContent={() => setShowPopover(false)}
-          on="click"
-          // screenReaderLabel={this.props.popoverScreenReaderLabel} TODO
-          shouldContainFocus
-          shouldReturnFocus
-          shouldCloseOnDocumentClick
-        >
-          <Calendar
-            withYearPicker={withYearPicker}
-            onDateSelected={handleDateSelected}
-            selectedDate={selectedDate}
-          />
-        </Popover>
-      }
-    />
-  )
 }
 
 export default DateInput
