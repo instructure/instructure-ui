@@ -40,6 +40,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { propTypes, allowedProps } from './props'
 import type { TrayProps, TrayState } from './props'
+import { Mask } from '@instructure/ui-overlays'
 
 /**
 ---
@@ -68,7 +69,8 @@ class Tray extends Component<TrayProps> {
     transitionEnter: true,
     transitionExit: true,
     shadow: true,
-    border: false
+    border: false,
+    enableMask: false
   }
   ref: Element | null = null
   dialogRef: Dialog | null = null
@@ -174,10 +176,59 @@ class Tray extends Component<TrayProps> {
       border,
       shadow,
       role,
+      enableMask,
       ...props
     } = this.props
 
     const portalIsOpen = this.state.open || this.state.transitioning
+
+    const content = (
+      <Transition
+        in={open}
+        type={this.transition}
+        onTransition={onTransition}
+        onEnter={onEnter}
+        onEntering={onEntering}
+        onEntered={createChainedFunction(
+          this.handleTransitionComplete,
+          onEntered,
+          onOpen
+        )}
+        onExit={onExit}
+        onExiting={onExiting}
+        onExited={createChainedFunction(
+          this.handleTransitionComplete,
+          onExited,
+          onClose
+        )}
+        transitionOnMount={transitionOnMount}
+        transitionEnter={transitionEnter}
+        transitionExit={transitionExit}
+      >
+        <span
+          {...omitProps(props, Tray.allowedProps)}
+          css={this.props.styles?.tray}
+          ref={contentRef}
+        >
+          <Dialog
+            ref={(element) => (this.dialogRef = element)}
+            as="div"
+            label={label}
+            defaultFocusElement={defaultFocusElement}
+            open
+            shouldContainFocus={shouldContainFocus}
+            shouldReturnFocus={shouldReturnFocus}
+            shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
+            shouldCloseOnEscape
+            liveRegion={liveRegion}
+            onDismiss={onDismiss}
+            role={role}
+          >
+            <div css={this.props.styles?.content}>{children}</div>
+          </Dialog>
+        </span>
+      </Transition>
+    )
 
     return (
       <Portal
@@ -186,51 +237,13 @@ class Tray extends Component<TrayProps> {
         insertAt={insertAt}
         mountNode={mountNode}
       >
-        <Transition
-          in={open}
-          type={this.transition}
-          onTransition={onTransition}
-          onEnter={onEnter}
-          onEntering={onEntering}
-          onEntered={createChainedFunction(
-            this.handleTransitionComplete,
-            onEntered,
-            onOpen
-          )}
-          onExit={onExit}
-          onExiting={onExiting}
-          onExited={createChainedFunction(
-            this.handleTransitionComplete,
-            onExited,
-            onClose
-          )}
-          transitionOnMount={transitionOnMount}
-          transitionEnter={transitionEnter}
-          transitionExit={transitionExit}
-        >
-          <span
-            {...omitProps(props, Tray.allowedProps)}
-            css={this.props.styles?.tray}
-            ref={contentRef}
-          >
-            <Dialog
-              ref={(element) => (this.dialogRef = element)}
-              as="div"
-              label={label}
-              defaultFocusElement={defaultFocusElement}
-              open
-              shouldContainFocus={shouldContainFocus}
-              shouldReturnFocus={shouldReturnFocus}
-              shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
-              shouldCloseOnEscape
-              liveRegion={liveRegion}
-              onDismiss={onDismiss}
-              role={role}
-            >
-              <div css={this.props.styles?.content}>{children}</div>
-            </Dialog>
-          </span>
-        </Transition>
+        {enableMask ? (
+          <Mask placement={'center'} fullscreen={true}>
+            {content}
+          </Mask>
+        ) : (
+          content
+        )}
       </Portal>
     )
   }
