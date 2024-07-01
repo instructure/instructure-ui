@@ -158,6 +158,11 @@ type TrayOwnProps = {
    */
   shadow?: boolean
   children?: React.ReactNode
+
+  /**
+   * Add Mask overlay to the `<Tray />`
+   */
+  enableMask?: boolean
 }
 
 type PropKeys = keyof TrayOwnProps
@@ -203,7 +208,8 @@ const propTypes: PropValidators<PropKeys> = {
   transitionEnter: PropTypes.bool,
   transitionExit: PropTypes.bool,
   border: PropTypes.bool,
-  shadow: PropTypes.bool
+  shadow: PropTypes.bool,
+  enableMask: PropTypes.bool
 }
 
 const allowedProps: AllowedPropKeys = [
@@ -234,7 +240,8 @@ const allowedProps: AllowedPropKeys = [
   'transitionEnter',
   'transitionExit',
   'border',
-  'shadow'
+  'shadow',
+  'enableMask'
 ]
 type TrayState = { transitioning: boolean; open: boolean }
 export type { TrayProps, TrayStyle, TrayState }
