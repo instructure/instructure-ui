@@ -53,7 +53,6 @@ This component is an updated version of [`DateInput`](/#DateInput) that's easier
       return (
         <DateInput2
           renderLabel="Choose a date"
-          assistiveText="Type a date or use arrow keys to navigate date picker."
           width="20rem"
           value={this.state.value}
           onChange={(e, value) => this.setState({ value })}
@@ -78,7 +77,6 @@ This component is an updated version of [`DateInput`](/#DateInput) that's easier
     return (
       <DateInput2
         renderLabel="Choose a date"
-        assistiveText="Type a date or use arrow keys to navigate date picker."
         width="20rem"
         value={value}
         onChange={(e, value) => setValue(value)}
