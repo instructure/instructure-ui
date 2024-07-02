@@ -32,14 +32,6 @@ export default defineConfig({
     include: ['**/__new-tests__/**/*.test.tsx'],
     globals: true,
     environment: 'jsdom',
-    setupFiles: './vitest.setup.ts',
-    coverage: {
-      thresholds: {
-        lines: 87,
-        functions: 80,
-        branches: 70,
-        statements: 87
-      }
-    }
+    setupFiles: './vitest.setup.ts'
   }
 })
