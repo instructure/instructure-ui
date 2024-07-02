@@ -35,6 +35,38 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
+### New DateInput with year picker
+
+```javascript
+---
+type: example
+---
+class Example extends React.Component {
+  state = { value: '' }
+
+  render () {
+    return (
+      <DateInput2
+        renderLabel="Choose a date"
+        assistiveText="Type a date or use arrow keys to navigate date picker."
+        width="20rem"
+        isInline
+        value={this.state.value}
+        onChange={(e, value)=> this.setState({value:value.value})}
+        invalidDateErrorMessage="Invalid date"
+        withYearPicker={{
+          screenReaderLabel: "Year picker",
+          startYear:1999,
+          endYear:2024,
+        }}
+      />
+    )
+  }
+}
+
+render(<Example />)
+```
+
 ### Composing a DateInput in your Application
 
 `DateInput` uses `Calendar` internally. See [Calendar](#Calendar) for more detailed

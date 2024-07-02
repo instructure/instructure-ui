@@ -55,7 +55,7 @@ export { Expandable } from '@instructure/ui-expandable'
 export { Focusable } from '@instructure/ui-focusable'
 export { Img } from '@instructure/ui-img'
 export { NumberInput } from '@instructure/ui-number-input'
-export { DateInput } from '@instructure/ui-date-input'
+export { DateInput, DateInput2 } from '@instructure/ui-date-input'
 export { DateTimeInput } from '@instructure/ui-date-time-input'
 export { Pill } from '@instructure/ui-pill'
 export { TextInput } from '@instructure/ui-text-input'
@@ -69,10 +69,7 @@ export {
 } from '@instructure/ui-form-field'
 export { Table } from '@instructure/ui-table'
 export { TruncateText } from '@instructure/ui-truncate-text'
-export {
-  ApplyLocale,
-  TextDirectionContext
-} from '@instructure/ui-i18n'
+export { ApplyLocale, TextDirectionContext } from '@instructure/ui-i18n'
 export { MetricGroup, Metric } from '@instructure/ui-metric'
 export { Modal } from '@instructure/ui-modal'
 export { Transition } from '@instructure/ui-motion'
