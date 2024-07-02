@@ -22,6 +22,31 @@
  * SOFTWARE.
  */
 
-export { DateInput } from './DateInput'
-export { DateInput2 } from './DateInput2'
-export type { DateInputProps } from './DateInput/props'
+import type { DateInputProps, DateInputStyle } from './props'
+
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  _componentTheme The theme variable object.
+ * @param  props the props of the component, the style is applied to
+ * @return The final style object, which will be used in the component
+ */
+const generateStyle = (
+  _componentTheme: null,
+  props: DateInputProps
+): DateInputStyle => {
+  return {
+    dateInput: {
+      label: 'dateInput',
+      display: props.display
+    },
+    assistiveText: {
+      label: 'dateInput__assistiveText',
+      display: 'none'
+    }
+  }
+}
+
+export default generateStyle

@@ -23,8 +23,10 @@
  */
 
 /** @jsx jsx */
-import React, { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import type { ChangeEvent, SyntheticEvent } from 'react'
 import moment from 'moment-timezone'
+import type { Moment } from '@instructure/ui-i18n'
 import { Calendar } from '@instructure/ui-calendar'
 import { IconButton } from '@instructure/ui-buttons'
 import { IconCalendarMonthLine } from '@instructure/ui-icons'
@@ -37,6 +39,12 @@ import { jsx } from '@instructure/emotion'
 import type { DateInputProps } from './props'
 import type { FormMessage } from '@instructure/ui-form-field'
 
+/**
+---
+category: components
+---
+The `DateInput2` component is an updated version of [`DateInput`](/DateInput) that's easier to configure for developers and use for end users. It has better accessibility and a year picker option. We recommend using this one and in our next major release (v10) this will replace `DateInput`.
+**/
 const DateInput2 = ({
   renderLabel,
   isRequired,
@@ -63,13 +71,17 @@ const DateInput2 = ({
   }, [value])
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: ChangeEvent<HTMLInputElement>,
     value: string
   ) => {
     onChange?.(e, { value })
   }
 
-  const handleDateSelected = (dateString: string, momentDate: any, e: any) => {
+  const handleDateSelected = (
+    dateString: string,
+    momentDate: Moment,
+    e: any
+  ) => {
     setSelectedDate(dateString)
     handleInputChange(
       e,
@@ -135,7 +147,7 @@ const DateInput2 = ({
     return DateTime.browserTimeZone()
   }
 
-  const handleBlur = (e: React.SyntheticEvent) => {
+  const handleBlur = (e: SyntheticEvent) => {
     onBlur?.(e)
     validateInput(false)
   }
