@@ -59,10 +59,7 @@ type DateInputOwnProps = {
    * @param {Object} data - additional data
    * @param data.value - the new value
    */
-  onChange?: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    value: { value: string }
-  ) => void
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void
   /**
    * Callback executed when the input fires a blur event.
    */
@@ -84,11 +81,6 @@ type DateInputOwnProps = {
    */
   isInline?: boolean
   /**
-   * Additional helpful text to provide to screen readers about the operation
-   * of the component.
-   */
-  assistiveText?: string
-  /**
    * Controls the layout. When set to `stacked`, the label rests on top of the
    * input. When set to `inline` the label is next to the input.
    */
@@ -101,10 +93,6 @@ type DateInputOwnProps = {
    * Specifies the display property of the container.
    */
   display?: 'inline-block' | 'block'
-  /**
-   * Provides a ref to the underlying input element.
-   */
-  inputRef?: (element: HTMLInputElement | null) => void
   /**
    * Displays messages and validation for the input. It should be an object
    * with the following shape:
@@ -204,11 +192,9 @@ const propTypes: PropValidators<PropKeys> = {
   interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
   isRequired: PropTypes.bool,
   isInline: PropTypes.bool,
-  assistiveText: PropTypes.string,
   layout: PropTypes.oneOf(['stacked', 'inline']),
   width: PropTypes.string,
   display: PropTypes.oneOf(['inline-block', 'block']),
-  inputRef: PropTypes.func,
   messages: PropTypes.arrayOf(FormPropTypes.message),
   onRequestShowCalendar: PropTypes.func,
   onRequestHideCalendar: PropTypes.func,
@@ -232,11 +218,9 @@ const allowedProps: AllowedPropKeys = [
   'interaction',
   'isRequired',
   'isInline',
-  'assistiveText',
   'layout',
   'width',
   'display',
-  'inputRef',
   'messages',
   'onRequestShowCalendar',
   'onRequestHideCalendar',

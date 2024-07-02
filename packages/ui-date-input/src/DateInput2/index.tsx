@@ -43,12 +43,11 @@ import type { FormMessage } from '@instructure/ui-form-field'
 ---
 category: components
 ---
-The `DateInput2` component is an updated version of [`DateInput`](/DateInput) that's easier to configure for developers and use for end users. It has better accessibility and a year picker option. We recommend using this one and in our next major release (v10) this will replace `DateInput`.
 **/
 const DateInput2 = ({
   renderLabel,
   isRequired,
-  value,
+  value = '',
   width,
   onChange,
   onBlur,
@@ -74,7 +73,7 @@ const DateInput2 = ({
     e: ChangeEvent<HTMLInputElement>,
     value: string
   ) => {
-    onChange?.(e, { value })
+    onChange?.(e, value)
   }
 
   const handleDateSelected = (
